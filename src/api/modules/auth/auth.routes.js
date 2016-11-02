@@ -4,7 +4,7 @@ import isAuthenticated from '../../core/authentication/isAuthenticated';
 import User from '../user/user.model';
 import configureLocalPassport from './providers/local';
 import configureJwt from './providers/jwt';
-import configureGithub from './providers/github';
+// import configureGithub from './providers/github';
 // import configureFacebook from './providers/facebook';
 import * as ctrl from './auth.controller';
 
@@ -24,7 +24,7 @@ passport.deserializeUser((sessionUser, done) => {
 
 configureLocalPassport(User);
 configureJwt(User);
-configureGithub(User);
+// configureGithub(User);
 // configureFacebook(User);
 
 const router = express.Router();
@@ -93,7 +93,7 @@ router.get('/verification/:verifToken', ctrl.verify);
  * @apiSuccess 301 redirect back to the app
  * @apiError 404 Missing or cannot find the verification token
  */
-router.get('/github', passport.authenticate('github'));
+// router.get('/github', passport.authenticate('github'));
 /**
  * @api {get} /auth/github/callback GitHub Callback
  * @apiName githubCallback
@@ -101,9 +101,9 @@ router.get('/github', passport.authenticate('github'));
  * @apiSuccess  301 redirect back to the app
  * @apiError 404 Missing or cannot find the verification token
  */
-router.get('/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), (req, res) => {
-  res.redirect(req.session.returnTo || '/');
-});
+// router.get('/github/callback', passport.authenticate('github', { failureRedirect: '/login' }), (req, res) => {
+//   res.redirect(req.session.returnTo || '/');
+// });
 
 /**
  * @api {get} /auth/facebook Initiate Facebook OAuth
@@ -112,7 +112,7 @@ router.get('/github/callback', passport.authenticate('github', { failureRedirect
  * @apiSuccess 301 redirect back to the app
  * @apiError 404 Missing or cannot find the verification token
  */
-router.get('/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'] }));
+// router.get('/facebook', passport.authenticate('facebook', { scope: ['email', 'user_location'] }));
 
 /**
  * @api {get} /auth/facebook/callback Facebook Callback
@@ -121,8 +121,8 @@ router.get('/facebook', passport.authenticate('facebook', { scope: ['email', 'us
  * @apiSuccess 301 redirect back to the app
  * @apiError 404 Missing or cannot find the verification token
  */
-router.get('/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), (req, res) => {
-  res.redirect(req.session.returnTo || '/');
-});
+// router.get('/facebook/callback', passport.authenticate('facebook', { failureRedirect: '/login' }), (req, res) => {
+//   res.redirect(req.session.returnTo || '/');
+// });
 
 export default router;

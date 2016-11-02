@@ -1,12 +1,12 @@
 ![boldr logo](https://boldr.io/logo.png)
 
-[![Build Status][circle-img]][circle-link] [![Code Climate][cc-img]][cc-link] [![Test Coverage][coverage-img]][coverage-link] [![Gitter][gitter-img]][gitter-link]
+[![Build Status][circle-img]][circle-link] [![Code Climate][cc-img]][cc-link]  [![codecov](https://codecov.io/gh/boldr/boldr/branch/master/graph/badge.svg)](https://codecov.io/gh/boldr/boldr) [![Gitter][gitter-img]][gitter-link] [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 # Boldr
 
 Boldr is an up and coming, modern content management framework / system. Boldr is a solid starting point for building your next great web application. In the future, the goal is to shape Boldr into a full content management system. However, here in the present, a framework, or strong base, is the most accurate way to describe the project. Boldr is built upon React, Node.js, and Postgres. It offers server-side rendering and a standalone REST api.
 
-_If you made it this far, I know what you're probably thinking..._ The world doesn't need another _never-to-be finished_ CMS project, nor does it need the "next WordPress". Boldr is none of that. Over the course of the past five or so months, my spare time has been invested into this passion project. 
+_If you made it this far, I know what you're probably thinking..._ The world doesn't need another _never-to-be finished_ CMS project, nor does it need the "next WordPress". Boldr is none of that. Over the course of the past five or so months, my spare time has been invested into this passion project.
 
 **Table of Contents**
 - [Boldr](#boldr)

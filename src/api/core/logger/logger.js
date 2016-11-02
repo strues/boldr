@@ -1,5 +1,5 @@
 /**
- * src/core/logger/logger.js
+ * src/api/core/logger/logger.js
  * Starts a winston logging session
  *
  * @exports {EventHandler} - Winston event handler
@@ -12,9 +12,12 @@ import conf from '../../config/config';
 const logDir = path.resolve(`${process.cwd()}/logs`);
 const tsFormat = () => (new Date()).toLocaleTimeString();
 
-// Create the log directory if it doesnt already exist.
-if (!fs.existsSync(logDir)) {
-  fs.mkdirSync(logDir);
+// Only create the folder in production.
+if (process.env.NODE_ENV === 'production') {
+  // Create the log directory if it doesnt already exist.
+  if (!fs.existsSync(logDir)) {
+    fs.mkdirSync(logDir);
+  }
 }
 
 const transports = [];
