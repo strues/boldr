@@ -1,0 +1,12 @@
+**/*{.,-}min.js
+tools/**
+docs/**
+bin/**
+node_modules/**
+flow-typed/**
+coverage/**
+.nyc_output/**
+.happypack/**
+.idea/**
+.git/**
+build/**

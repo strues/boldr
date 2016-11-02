@@ -1,0 +1,17 @@
+engines:
+  eslint:
+    enabled: true
+ratings:
+   paths:
+   - src/cms/**
+   - src/api/**
+   - "**.js"
+exclude_paths:
+- node_modules/**/*
+- volumes/**
+- build/**
+- docs/**
+- bin/**
+- flow-typed/**
+- tools/**
+- src/**/*.test.js

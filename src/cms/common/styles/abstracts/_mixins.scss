@@ -1,0 +1,56 @@
+@mixin list-reset() {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+@mixin hide() {
+  display: none;
+  visibility: hidden;
+}
+@mixin show($display: block) {
+  display: $display;
+  visibility: visible;
+}
+
+@mixin mq($point) {
+  @if $point == lg {
+    @media (min-width: 60em) { @content ; }
+ }
+   @else if $point == md {
+    @media (min-width: 48em) { @content ; }
+ }
+ @else if $point == sm {
+    @media (min-width: 30em)  { @content ; }
+ }
+}
+@mixin clearfix() {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+
+@mixin md-box-shadow($elevation) {
+  @if $elevation < 0 or $elevation > 5 {
+    @warn 'The elevation must be a number from 0 - 5. elevation given was `#{$elevation}`';
+  } @else {
+    $top-shadow-color: rgba($black, .14);
+    $middle-shadow-color: rgba($black, .12);
+    $bottom-shadow-color: rgba($black, if($elevation == 1, .2, .4));
+
+    @if $elevation == 0 {
+      box-shadow: none;
+    } @else if $elevation == 1 {
+      box-shadow: 0 2px 2px 0 $top-shadow-color, 0 1px 5px 0 $middle-shadow-color, 0 3px 1px -2px $bottom-shadow-color;
+    } @else if $elevation == 2 {
+      box-shadow: 0 4px 5px 0 $top-shadow-color, 0 1px 10px 0 $middle-shadow-color, 0 2px 4px -1px $bottom-shadow-color;
+    } @else if $elevation == 3 {
+      box-shadow: 0 6px 10px 0 $top-shadow-color, 0 1px 18px 0 $middle-shadow-color, 0 3px 5px -1px $bottom-shadow-color;
+    } @else if $elevation == 4 {
+      box-shadow: 0 8px 10px 1px $top-shadow-color, 0 3px 14px 2px $middle-shadow-color, 0 5px 5px -3px $bottom-shadow-color;
+    } @else if $elevation == 5 {
+      box-shadow: 0 16px 24px 2px $top-shadow-color, 0 6px 30px 5px $middle-shadow-color, 0 8px 10px -5px $bottom-shadow-color;
+    }
+  }
+}

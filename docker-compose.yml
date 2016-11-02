@@ -1,0 +1,64 @@
+version: '2'
+services:
+  # volumes_source:
+  #   image: tianon/true
+  #   volumes:
+  #     - ${HOST_APP_DIRECTORY}:/var/www/
+  # volumes_data:
+  #   image: tianon/true
+  #   container_name: boldr_data
+  #   volumes:
+  #     ## Redis DB
+  #     - "./.volumes/redis:/data"
+  #     ## Postgres databases
+  #     - "./.volumes/pgdata:/var/lib/postgresql/data"
+
+  postgres:
+    container_name: boldr_pg
+    image: strues/postgres:9.6
+    restart: always
+    environment:
+      - PGDATA=/var/lib/postgresql/data
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=boldr
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_volume:/var/lib/postgresql/data
+    networks:
+      - boldr
+
+  redis:
+    image: redis:3.2.3-alpine
+    container_name: boldr_redis
+    restart: always
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_volume:/data
+    networks:
+      - boldr
+
+  # boldr:
+  #   image: strues/boldr:0.5.1
+  #   container_name: boldr_cms
+  #   ports:
+  #     - "3000:3000"
+  #   volumes_from:
+  #     - datastore
+  #   links:
+  #     - redis
+  #     - postgres
+  #   networks:
+  #     - boldr
+  #   environment:
+  #     - REDIS_CONN_URI=redis://boldr_redis
+
+networks:
+  boldr:
+    driver: bridge
+
+volumes:
+  pg_volume:
+  redis_volume:

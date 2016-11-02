@@ -1,0 +1,36 @@
+#### Environment Configuration
+.env
+
+#### Logs
+*.log
+docs/logs
+npm-debug.log
+
+## Test Coverage
+coverage
+.nyc_output
+lib-cov
+
+## Webpack
+.happypack/**
+.wp_cache/**
+
+#### Editor Stuff
+boldr.sublime-project
+boldr.sublime-workspace
+.idea
+.vscode
+boldr-api.paw
+
+
+#### Dist Directories
+build
+node_modules
+logs
+public/apidoc
+
+#### Runtime data
+pids
+*.pid
+.storybook
+stories/

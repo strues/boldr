@@ -1,0 +1,33 @@
+exports[`<PostContent /> renders snapshot 1`] = `
+<article
+  style={
+    Object {
+      "overflow": "hidden",
+    }
+  }>
+  <div
+    style={
+      Object {
+        "padding": "2em 1.5em",
+      }
+    }>
+    <Header
+      size="large">
+       
+    </Header>
+    <Divider />
+    <div
+      className="content"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": undefined,
+        }
+      }
+      style={
+        Object {
+          "lineHeight": "1.8em",
+        }
+      } />
+  </div>
+</article>
+`;

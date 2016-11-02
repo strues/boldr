@@ -1,0 +1,25 @@
+/*.postimage__wrap {
+  width: 100%;
+}*/
+
+.postimage {
+  object-fit: cover;
+  transform: translate3d(0, -5px, 0);
+  transition: opacity .35s, transform .35s;
+  height: 400px;
+  width: 100%;
+
+  &:hover {
+    opacity: .7;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.post__sidebar-author {
+  width: 100%;
+  margin-bottom: 50px;
+}
+// :( important here in order to override semantic ui
+.post__sidebar-card {
+  padding: 1rem !important;
+}
