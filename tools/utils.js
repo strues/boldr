@@ -17,7 +17,7 @@ function happyPackPlugin({ name, loaders }) {
   return new HappyPack({
     id: name,
     verbose: false,
-    threadPool: happyPackThreadPool,
+    threads: 4,
     loaders
   });
 }
