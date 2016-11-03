@@ -1,0 +1,11 @@
+// .ph-menu__item {
+//
+// }
+
+.ph-menu__item-link {
+  color: $white;
+
+  &:hover {
+    color: $pinkish;
+  }
+}

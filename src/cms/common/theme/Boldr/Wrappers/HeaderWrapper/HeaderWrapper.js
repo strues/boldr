@@ -6,8 +6,6 @@ import { asyncConnect } from 'redux-connect';
 import { bindActionCreators } from 'redux';
 import { logout, loadMainNav, getByLabel, getSettings, isNavLoaded } from 'state/index';
 import { PrimaryHeader } from 'components/index';
-// $FlowIssue
-import './style.scss';
 
 type Props = {
   header: ReactElement,

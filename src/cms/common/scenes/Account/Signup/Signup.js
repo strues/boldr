@@ -37,13 +37,8 @@ class Signup extends Component {
 
   render() {
     const renderHeader = (
-        <Card.Header>
-        <Header as="h1" textAlign="center">
-          <Icon name="sign in" />
-          <Header.Content>
-            Signup
-          </Header.Content>
-        </Header>
+        <Card.Header style={ { padding: '1em' } }>
+          <Header as="h1" textAlign="center">Signup</Header>
         </Card.Header>
     );
 
@@ -54,8 +49,8 @@ class Signup extends Component {
             <Row>
               <Col xs={ 12 }>
                 <Row xsCenter>
-                  <Col xs={ 6 }>
-                    <Card style={ { width: '450px', marginTop: '150px' } }>
+                  <Col xs={ 8 }>
+                    <Card style={ { width: '650px', marginTop: '250px', marginBottom: '400px' } }>
                       { renderHeader }
                       <Card.Content>
                       <SignupForm onSubmit={ this.handleOnSubmit } />

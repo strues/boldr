@@ -1,4 +1,4 @@
-/* eslint-disable react/prefer-es6-class */
+
 import React, { Component, PropTypes } from 'react';
 import S3Upload from '../../core/services/s3Upload';
 import FileUpload from '../FileInput/FileUpload';
@@ -28,12 +28,13 @@ class S3Uploader extends Component {
     console.log(`Upload progress: ${percent} % ${message}`);
   }
   onFinish(signResult) {
-    console.log(signResult);
     this.props.onFinish(signResult);
+
     this.setState({
       file: signResult.publicUrl
     });
   }
+
   onError(message) {
     console.log(`Upload error: ${message}`);
   }
@@ -63,18 +64,10 @@ class S3Uploader extends Component {
   }
   // http://stackoverflow.com/a/24608023/194065
   clearInputFile(f) {
-    if (f.value) {
-      try {
-        f.value = ''; // for IE11, latest Chrome/Firefox/Opera...
-      } catch (err) { console.log(err);}
-      if (f.value) { // for IE5 ~ IE10
-        const form = document.createElement('form');
-        const parentNode = f.parentNode;
-        const ref = f.nextSibling;
-        form.appendChild(f);
-        form.reset();
-        parentNode.insertBefore(f, ref);
-      }
+    try {
+      f.value = '';
+    } catch (err) {
+      console.log(err);
     }
   }
   clear(event) {

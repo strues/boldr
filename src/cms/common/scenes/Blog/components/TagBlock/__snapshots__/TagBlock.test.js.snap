@@ -1,0 +1,5 @@
+exports[`<TagBlock /> renders snapshot 1`] = `
+<div>
+  No tags
+</div>
+`;

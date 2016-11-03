@@ -10,14 +10,12 @@ const PostSidebar = (props: { tags: Array<Object>, author: Object }) => {
   return (
     <div className="sidebar">
       <Segment raised>
-      <Header as="h2">About the author</Header>
-      <Author { ...props.author } />
+        <Header as="h2">About the author</Header>
+        <Author { ...props.author } />
       </Segment>
       <Segment raised>
-      <Header as="h2">Tags</Header>
-
-      <TagBlock tags={ props.tags } />
-
+        <Header as="h2">Tags</Header>
+        <TagBlock tags={ props.tags } />
       </Segment>
     </div>
   );

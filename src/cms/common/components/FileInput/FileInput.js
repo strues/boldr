@@ -59,16 +59,6 @@ class FileInput extends PureComponent {
     label: PropTypes.string.isRequired,
 
     /**
-     * The icon children to use for the upload icon.
-     */
-    iconChildren: PropTypes.node,
-
-    /**
-     * The icon className to use for the upload icon.
-     */
-    iconClassName: PropTypes.string,
-
-    /**
      * A function to call when the value of the input changes. This will
      * be triggered when the user selects a new file or cancels the new file selection.
      *
@@ -115,13 +105,7 @@ class FileInput extends PureComponent {
   render() {
     const {
       style,
-      className,
       label,
-      iconChildren,
-      iconClassName,
-      primary,
-      secondary,
-      flat,
       id,
       ...props
     } = this.props;
@@ -130,10 +114,7 @@ class FileInput extends PureComponent {
     return (
       <label
         style={ style }
-        className={ cn(`md-btn md-${flat ? 'flat' : 'raised'}-btn md-file-input-btn`, className, {
-          'md-primary': primary,
-          'md-secondary': secondary
-        }) }
+        className="ui.button"
         disabled={ props.disabled }
         htmlFor={ id }
       >

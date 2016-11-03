@@ -1,5 +1,7 @@
 import fetch from 'isomorphic-fetch';
 import request from 'superagent';
+
+// Import API endpoints
 import {
   API_POSTS,
   API_AUTH,
@@ -14,6 +16,13 @@ import {
   TOKEN_KEY
 } from '../config';
 
+
+/**
+ * Converts the response from a fetch into useable JSON data.
+ * @method processResponse
+ * @param  {Buffer}        response the response buffer to be processed.
+ * @return {Object}                 JSON response from the request.
+ */
 export function processResponse(response) {
   return response.json().then(json => {
     if (response.status >= 400) {
@@ -30,6 +39,15 @@ export const jsonHeaders = {
   'Content-Type': 'application/json'
 };
 
+/**
+  * POST API ROUTES
+  * -------------------------
+  * @exports doFetchPosts
+  * @exports doGetPosts
+  * @exports doCreatePost
+  * @exports doSelectPost
+  * @exports doDeletePost
+  *****************************************************************/
 export function doFetchPosts() {
   return request.get(`${API_POSTS}?include=[author,tags]`);
 }
@@ -64,6 +82,16 @@ export function doDeletePost(postId) {
     .set('Authorization', `${localStorage.getItem(TOKEN_KEY)}`);
 }
 
+
+/**
+  * AUTH API ROUTES
+  * -------------------------
+  * @exports doSignup
+  * @exports doLogin
+  * @exports doForgotPassword
+  * @exports doResetPassword
+  * @exports doAuthCheck
+  *****************************************************************/
 export const doSignup = (data) => request.post(`${API_AUTH}/signup`).send(data);
 
 export const doLogin = (loginData) => request.post(`${API_AUTH}/login`).send(loginData);
@@ -92,6 +120,13 @@ export const doAuthCheck = (token) => {
   return request.get(`${API_AUTH}/check`).set('Authorization', `${token}`);
 };
 
+/**
+  * SETTINGS API ROUTES
+  * -------------------------
+  * @exports doUpdateSettings
+  * @exports doLoadSettings
+  *****************************************************************/
+
 export function doUpdateSettings(payload) {
   const settingId = payload.id;
   const data = {
@@ -106,25 +141,15 @@ export const doLoadSettings = () => {
   return request.get(`${API_SETTINGS}`);
 };
 
+/**
+  * NAVIGATION API ROUTES
+  * -------------------------
+  * @exports doLoadNav
+  *****************************************************************/
+
 export const doLoadNav = () => {
   return request.get(`${API_NAVIGATION}`);
 };
-export function doGetActivities(data, id) {
-  return request
-    .get(`${API_ACTIVITY}`)
-    .set('Authorization', `${localStorage.getItem(TOKEN_KEY)}`);
-}
-
-export function doFetchMedia() {
-  return request
-    .get(`${API_ATTACHMENTS}`);
-}
-
-export function doUpload(payload) {
-  return request
-    .post(`${API_ATTACHMENTS}/dashboard`, payload)
-    .set('Authorization', `${localStorage.getItem(TOKEN_KEY)}`);
-}
 
 export function doUpdateNavigationLinks(data) {
   return request.put(`${API_LINKS}/${data.id}`)
@@ -144,6 +169,49 @@ export function doAddNavigationLinks(data) {
     .send(payload);
 }
 
+/**
+  * ACTIVITIES API ROUTES
+  * -------------------------
+  * @exports doLoadNav
+  *****************************************************************/
+
+export function doGetActivities(data, id) {
+  return request
+    .get(`${API_ACTIVITY}`)
+    .set('Authorization', `${localStorage.getItem(TOKEN_KEY)}`);
+}
+
+/**
+  * ATTATCHMENT API ROUTES
+  * -------------------------
+  * @exports doLoadNav
+  *****************************************************************/
+
+export function doFetchMedia() {
+  return request
+    .get(`${API_ATTACHMENTS}`);
+}
+
+export function doUpload(payload) {
+  return request
+    .post(`${API_ATTACHMENTS}/dashboard`, payload)
+    .set('Authorization', `${localStorage.getItem(TOKEN_KEY)}`);
+}
+
+export function doRemoveMedia(id) {
+  return request
+    .delete(`${API_ATTACHMENTS}/${id}`)
+    .set('Authorization', `${localStorage.getItem(TOKEN_KEY)}`);
+}
+
+/**
+  * PAGES API ROUTES
+  * -------------------------
+  * @exports doFetchPages
+  * @exports doFetchPageUrl
+  * @exports doCreatePage
+  *****************************************************************/
+
 export function doFetchPages() {
   return request
     .get(`${API_PAGES}`);
@@ -158,17 +226,23 @@ export function doCreatePage(payload) {
     .set('Authorization', `${localStorage.getItem(TOKEN_KEY)}`);
 }
 
-export function doRemoveMedia(id) {
-  return request
-    .delete(`${API_ATTACHMENTS}/${id}`)
-    .set('Authorization', `${localStorage.getItem(TOKEN_KEY)}`);
-}
+/**
+  * TAGS API ROUTES
+  * -------------------------
+  * @exports doFetchTags
+  *****************************************************************/
 
 export function doFetchTags(name) {
   return fetch(`${API_TAGS}/posts/${name}`)
     .then(response => processResponse(response));
 }
 
+/**
+  * MEMBERS API ROUTES
+  * -------------------------
+  * @exports doFetchMembers
+  * @exports doUpdateMember
+  *****************************************************************/
 export function doFetchMembers() {
   return request
     .get(`${API_USERS}`);

@@ -27,14 +27,16 @@ const PostCard = (props: Post) => {
         <Card.Content extra>
         <Row>
         <Link to={ `/blog/${props.slug}` }>
-          <Button>Read More</Button>
+          <Button primary>Read More</Button>
         </Link>
+        </Row>
+        <Row xsEnd>
         <TagBlock tags={ props.tags } />
         </Row>
         </Card.Content>
       </Card>
       </div>
-    );
+  );
 };
 
 export default PostCard;

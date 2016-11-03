@@ -317,7 +317,9 @@ export default class FileUpload extends PureComponent {
       this.props.onChange(fileList, e);
     }
 
-    if (!fileList) { return; }
+    if (!fileList) {
+      return;
+    }
     const { maxSize, onSizeError } = this.props;
     let files = Array.isArray(fileList) ? fileList : [fileList];
 

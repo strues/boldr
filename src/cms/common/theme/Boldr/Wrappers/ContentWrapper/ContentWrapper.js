@@ -1,9 +1,10 @@
 /* @flow */
 import React from 'react';
+import boldrStyle from '../../boldrStyle';
 
 const ContentWrapper = (props: { children: ReactChildren }) => {
   return (
-    <article className="boldr__theme-content">
+    <article style={ boldrStyle.content } className="boldr__theme-content">
       { props.children }
     </article>
   );
