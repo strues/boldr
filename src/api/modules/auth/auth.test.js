@@ -1,5 +1,4 @@
-import { expect } from 'chai';
-import supertest from 'supertest';
+import supertest from 'supertest-as-promised';
 import faker from 'faker';
 import server from '../../engine';
 

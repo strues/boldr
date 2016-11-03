@@ -1,23 +1,16 @@
-import { expect } from 'chai';
 import { generateHash, SALT, randomString } from './hashing';
 
-describe('Hashing -- generateVerifyCode()', () => {
-  it('should generate a random token', () => {
-    const token = generateHash();
-    expect(token).to.be.a('string');
-  });
+test('generateVerifyCode() - should generate a random token', () => {
+  const token = generateHash();
+  expect(typeof token).toBe('string');
 });
 
-describe('Hashing -- SALT', () => {
-  it('should generate a salt string', () => {
-    const slt = SALT;
-    expect(slt).to.be.a('string');
-  });
+test('SALT -- should generate a salt string', () => {
+  const slt = SALT;
+  expect(typeof slt).toBe('string');
 });
 
-describe('Hashing -- randomString', () => {
-  it('should generate a random string', () => {
-    const rstring = randomString();
-    expect(rstring).to.be.a('string');
-  });
+test('randomString -- should generate a random string', () => {
+  const rstring = randomString();
+  expect(typeof rstring).toBe('string');
 });

@@ -50,6 +50,9 @@ function getJsFilesFromSrcDir(srcPath) {
   return globSync(`${pathResolve(appRootPath, 'src/cms', srcPath)}/**/*.js`);
 }
 
+const ignoreModules = [
+  'enzyme-to-json',
+];
 function buildVendorDLL() {
   return new Promise((resolve, reject) => {
     Promise.all([
@@ -63,7 +66,9 @@ function buildVendorDLL() {
         const fileContents = fs.readFileSync(cur, 'utf8');
         let match = importRegex.exec(fileContents);
         while (match != null) {
-          acc.add(match[2]);
+          if (!ignoreModules.includes(match[2])) {
+            acc.add(match[2]);
+          }
           match = importRegex.exec(fileContents);
         }
         return acc;
