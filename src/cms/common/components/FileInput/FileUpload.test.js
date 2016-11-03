@@ -17,18 +17,6 @@ const File = jest.fn((size, type) => ({
 }));
 
 describe('FileUpload', () => {
-  it('merges className and style', () => {
-    const style = { display: 'block' };
-    const className = 'test';
-    const fileUpload = renderIntoDocument(
-      <FileUpload id="test" style={ style } className={ className } onChange={ jest.fn() } />
-    );
-
-    const fileUploadNode = findDOMNode(fileUpload);
-    expect(fileUploadNode.style.display).toBe(style.display);
-    expect(fileUploadNode.className).toContain(className);
-  });
-
   it('calls the onChange function still', () => {
     const onChange = jest.fn();
     const fileUpload = renderIntoDocument(<FileUpload id="test" onChange={ onChange } />);

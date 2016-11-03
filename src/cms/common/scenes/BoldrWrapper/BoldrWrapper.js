@@ -6,14 +6,25 @@ import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-connect';
 import type { ReactElement } from '../../types/react';
 import { Notifications } from '../../components/index';
-import { areSettingsLoaded, arePagesLoaded, getSettings } from '../../state/selectors';
-import { fetchSettingsIfNeeded, fetchPagesIfNeeded } from '../../state/dux/boldr/actions';
+import {
+  areSettingsLoaded,
+  arePagesLoaded,
+  getSettings,
+  isNavLoaded,
+  fetchSettingsIfNeeded,
+  fetchPagesIfNeeded,
+  loadMainNav,
+  getByLabel
+} from '../../state/index';
+
 import meta from '../../core/config/base';
 import '../../styles/main.scss';
 
 type Props = {
   children: ReactElement,
   fetchSettingsIfNeeded: Function,
+  isNavLoaded: () => void,
+  loadMainNav: () => void,
   fetchPagesIfNeeded: Function,
   settings: Object
 };
@@ -27,12 +38,16 @@ type Props = {
     if (!arePagesLoaded(getState())) {
       promises.push(dispatch(fetchPagesIfNeeded()));
     }
+    if (!isNavLoaded(getState())) {
+      promises.push(dispatch(loadMainNav()));
+    }
     return Promise.all(promises);
   }
 }])
 class BoldrWrapper extends Component {
   componentDidMount() {
     this.props.fetchSettingsIfNeeded();
+    this.props.loadMainNav();
     this.props.fetchPagesIfNeeded();
   }
   props: Props;
@@ -52,8 +67,9 @@ function mapStateToProps(state) {
     boldr: state.boldr,
     settings: getSettings(state),
     auth: state.auth,
-    notifications: state.notifications
+    notifications: state.notifications,
+    navigation: getByLabel(state, 'main')
   };
 }
 
-export default connect(mapStateToProps, { fetchSettingsIfNeeded, fetchPagesIfNeeded })(BoldrWrapper);
+export default connect(mapStateToProps, { fetchSettingsIfNeeded, fetchPagesIfNeeded, loadMainNav })(BoldrWrapper);

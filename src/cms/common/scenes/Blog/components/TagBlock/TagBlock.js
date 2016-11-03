@@ -1,15 +1,13 @@
 import React from 'react';
-import { Divider, Card, Comment, Header } from 'semantic-ui-react';
 import Tag from '../Tag';
 
-const styles = {
-  wrapper: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  }
-};
-
 const TagBlock = (props) => {
+  const styles = {
+    wrapper: {
+      display: 'flex',
+      flexWrap: 'wrap'
+    }
+  };
   if (!props.tags) {
     return <div>No tags</div>;
   }

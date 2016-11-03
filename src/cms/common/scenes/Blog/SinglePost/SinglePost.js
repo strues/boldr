@@ -19,11 +19,11 @@ const SinglePost = (props: Props) => {
       paddingTop: '175px'
     },
     offSet: {
-      marginBottom: '-150px'
+      height: '100%'
     }
   };
   return (
-    <div style={ IS.bg }>
+    <div style={ { paddingTop: '50px' } }>
       <Grid fluid>
         <Row>
           <Col xs={ 12 } md={ 8 } lg={ 9 }>

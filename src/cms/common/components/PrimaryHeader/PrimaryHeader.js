@@ -1,7 +1,8 @@
 // @flow
 
 import React, { PureComponent } from 'react';
-import { Menu, Dropdown, Button, Container } from 'semantic-ui-react';
+import Link from 'react-router/lib/Link';
+import { Menu, Dropdown, Button, Container, Loader } from 'semantic-ui-react';
 
 type Props = {
   navigate: () => void,
@@ -49,9 +50,9 @@ class PrimaryHeader extends PureComponent {
       <Menu.Menu position="right">
         <Menu.Item as={ Dropdown } text="Account">
            <Dropdown.Menu>
-           <Dropdown.Item onClick={ this.props.handleProfileClick }>Profile</Dropdown.Item>
-           <Dropdown.Item onClick={ this.props.handlePreferencesClick }>Preferences</Dropdown.Item>
-           <Dropdown.Item onClick={ this.props.handleLogoutClick }>Logout</Dropdown.Item>
+             <Dropdown.Item onClick={ this.props.handleProfileClick }>Profile</Dropdown.Item>
+             <Dropdown.Item onClick={ this.props.handlePreferencesClick }>Preferences</Dropdown.Item>
+             <Dropdown.Item onClick={ this.props.handleLogoutClick }>Logout</Dropdown.Item>
            </Dropdown.Menu>
          </Menu.Item>
        <Menu.Item onClick={ this.props.handleDashClick }>
@@ -64,18 +65,16 @@ class PrimaryHeader extends PureComponent {
   render() {
     if (!this.props.navigation) {
       return (
-        <h1>loading</h1>
+        <Loader content="loading" />
       );
     }
     const renderedMenuItems = this.props.navigation.links.map((item, i) =>
       <Menu.Item
         key={ item.id }
         name={ item.name }
-        href={ item.href }
-        onClick={ this.props.handleItemClick }
-        link
+        className="ph-menu__item"
       >
-        { item.name }
+        <Link className="ph-menu__item-link" to={ item.href }>{ item.name }</Link>
       </Menu.Item>
     );
 
@@ -84,6 +83,7 @@ class PrimaryHeader extends PureComponent {
       <Container>
         <Menu.Item>
           <img src={ this.props.settings[2].value }
+            className="ph-logo"
             alt="logo" onClick={ this.props.handleLogoClick } role="button" tabIndex="0"
           />
         </Menu.Item>

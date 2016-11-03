@@ -30,7 +30,7 @@ if (token) {
   store.dispatch(checkAuth(token));
 }
 // Get the DOM Element that will host our React application.
-const MOUNT_POINT = document.querySelector('#app');
+const MOUNT_POINT = document.getElementById('app');
 const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState: (state) => state.routing
 });

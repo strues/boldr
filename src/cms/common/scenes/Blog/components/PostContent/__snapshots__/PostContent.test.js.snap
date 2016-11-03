@@ -1,10 +1,5 @@
 exports[`<PostContent /> renders snapshot 1`] = `
-<article
-  style={
-    Object {
-      "overflow": "hidden",
-    }
-  }>
+<article>
   <div
     style={
       Object {

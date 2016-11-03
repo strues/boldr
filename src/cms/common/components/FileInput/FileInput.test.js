@@ -17,17 +17,6 @@ const File = jest.fn(name => ({
 }));
 
 describe('FileInput', () => {
-  it('merges className and style', () => {
-    const style = { display: 'block' };
-    const className = 'test';
-    const fileInput = renderIntoDocument(
-      <FileInput id="test" style={ style } className={ className } onChange={ jest.fn() } />
-    );
-
-    const fileInputNode = findDOMNode(fileInput);
-    expect(fileInputNode.style.display).toBe(style.display);
-    expect(fileInputNode.className).toContain(className);
-  });
 
   it('returns a single file when multiple is false onChange', () => {
     const onChange = jest.fn();

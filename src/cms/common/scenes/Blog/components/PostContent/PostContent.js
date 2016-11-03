@@ -14,7 +14,7 @@ const PostContent = (props: Props) => {
     };
   }
   return (
-    <article style={ { overflow: 'hidden' } }>
+    <article>
       { props.feature_image ?
         <PostImage imageSrc={ props.feature_image } /> :
         null

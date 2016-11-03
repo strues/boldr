@@ -14,8 +14,4 @@ post.define({
   author: user
 });
 
-// navigation.define({
-//   links: arrayOf(link)
-// });
-
 export { post, tag, user, attachment, page, navigation, link, setting };

@@ -55,7 +55,7 @@ class Login extends Component {
               <Col xs={ 12 }>
                 <Row xsCenter>
                   <Col xs={ 6 }>
-                    <Card style={ { width: '450px', marginTop: '150px' } }>
+                    <Card style={ { width: '450px', marginTop: '250px', marginBottom: '500px' } }>
                       <Card.Content>
                       { renderHeader }
                       <LoginForm onSubmit={ this.handleOnSubmit } />
