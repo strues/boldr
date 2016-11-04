@@ -10,7 +10,7 @@ import TagBlock from '../TagBlock';
 const PostCard = (props: Post) => {
   const formattedDate = dateFns.format(props.created_at, 'MM/DD/YYYY');
   return (
-    <div>
+    <div className="post__card-wrapper">
       <Card fluid>
         <Image className="post__card-image" src={ props.feature_image } />
         <Card.Content>

@@ -13,7 +13,7 @@ function formatUrl(path) {
   }
   console.log('----CLIENT REQUEST----');
   // Prepend `/api` to relative URL, to proxy to API server.
-  return `/api/v1${adjustedPath}`;
+  return `${adjustedPath}`;
 }
 
 export default class ApiClient {

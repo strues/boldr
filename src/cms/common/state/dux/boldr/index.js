@@ -5,7 +5,6 @@
  */
 import { combineReducers } from 'redux';
 import { push } from 'react-router-redux';
-import * as api from '../../../core/services/api';
 import navReducer from './nav';
 import pagesReducer from './pages';
 import settingsReducer from './settings';

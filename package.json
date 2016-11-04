@@ -169,6 +169,7 @@
     "redux": "^3.6.0",
     "redux-connect": "^4.0.2",
     "redux-form": "^6.1.1",
+    "redux-logger": "^2.7.4",
     "redux-thunk": "^2.1.0",
     "reselect": "^2.5.4",
     "semantic-ui-react": "^0.58.2",
@@ -246,7 +247,8 @@
     "webpack-dev-middleware": "^1.8.4",
     "webpack-hot-middleware": "^2.13.1",
     "webpack-md5-hash": "^0.0.5",
-    "webpack-node-externals": "^1.5.4"
+    "webpack-node-externals": "^1.5.4",
+    "why-did-you-update": "^0.0.8"
   },
   "config": {
     "commitizen": {

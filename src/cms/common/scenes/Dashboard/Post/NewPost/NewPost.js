@@ -27,8 +27,10 @@ class NewPost extends Component {
     const postData: Post = {
       title: values.title,
       tags: values.tags,
+      excerpt: values.excerpt,
       status: values.status,
       content: values.content,
+      seo: values.seo,
     };
     this.props.dispatch(createPost(postData));
   }

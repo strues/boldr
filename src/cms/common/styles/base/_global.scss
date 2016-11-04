@@ -3,7 +3,10 @@
 *::after {
   box-sizing: inherit;
 }
-
+html,
+body {
+  height: 100%;
+}
 @if $import-google-fonts {
   @import url($font-url);
 }
@@ -11,26 +14,8 @@
   min-height: 100%;
   height: 100%;
 }
-html,
-body {
+html {
   height: 100%;
-}
-html {
-  font-size: 16px;
-}
-body {
-  margin: 0px;
-  padding: 0px;
-  overflow-x: hidden;
-  min-width: 320px;
-  font-family: $font-family;
-  line-height: 1.4285em;
-  font-smoothing: antialiased;
-}
-
-
-
-html {
   font-size: $font-size-base;
   box-sizing: border-box;
   color: $text-color;
@@ -38,20 +23,24 @@ html {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-html,
 body {
-  height: 100%;
-}
-
-body {
+  padding: 0;
+  position: relative;
+  margin: 0;
+  padding-bottom: 6rem;
+  min-height: 100%;
+  overflow-x: hidden;
+  min-width: 320px;
   font-family: $font-family;
   font-size: $font-size-base;
   line-height: $line-height-base;
   background: $body-background;
-  -webkit-font-smoothing: antialiased;
+  font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
-  margin: 0;
 }
+
+
+
 
 /*******************************
           Highlighting

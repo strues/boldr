@@ -1,7 +1,9 @@
 /*.postimage__wrap {
   width: 100%;
 }*/
-
+.post__card-wrapper {
+  margin-bottom: 10px;
+}
 .postimage {
   object-fit: cover;
   transform: translate3d(0, -5px, 0);

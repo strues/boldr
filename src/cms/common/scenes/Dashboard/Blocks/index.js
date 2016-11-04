@@ -1,3 +1,3 @@
-import Blocks from './Blocks';
+import BlocksContainer from './BlocksContainer';
 
-export default Blocks;
+export default BlocksContainer;

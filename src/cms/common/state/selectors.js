@@ -54,3 +54,11 @@ export function isNavLoaded(globalState) {
 export function arePagesLoaded(globalState) {
   return globalState.boldr.pages && globalState.boldr.pages.loaded;
 }
+
+/**
+  * AUTH SELECTORS
+  *
+  *****************************************************************/
+export function isAuthLoaded(globalState) {
+  return globalState.auth && globalState.auth.loaded;
+}

@@ -19,7 +19,6 @@ export const getNavs = createSelector(
 );
 
 const byLabel = (state = { loaded: false }, action) => {
-  let nextState;
   switch (action.type) {
     case t.LOAD_NAVIGATION_SUCCESS:
       Object.keys(action.payload.entities.navigations).forEach(label => {

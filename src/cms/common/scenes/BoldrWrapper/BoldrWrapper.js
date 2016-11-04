@@ -18,6 +18,7 @@ import {
 } from '../../state/index';
 
 import meta from '../../core/config/base';
+// $FlowIssue
 import '../../styles/main.scss';
 
 type Props = {
