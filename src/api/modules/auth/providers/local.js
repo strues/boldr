@@ -4,7 +4,7 @@ import { Strategy as LocalStrategy } from 'passport-local';
 export default function configurePassport(User) {
   passport.use(new LocalStrategy({
     usernameField: 'email',
-    passwordField: 'password'
+    passwordField: 'password',
   }, async (email, password, done) => {
     const user = await User.query().where({ email }).eager('role').first();
     if (!user) {

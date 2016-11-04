@@ -25,7 +25,7 @@ class Search extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     posts: state.posts,
-    isLoading: state.posts.isLoading
+    loading: state.posts.loading,
   };
 };
 

@@ -13,7 +13,7 @@ import {
   API_ATTACHMENTS,
   API_ACTIVITY,
   API_USERS,
-  TOKEN_KEY
+  TOKEN_KEY,
 } from '../config';
 
 
@@ -36,7 +36,7 @@ export const credentials = 'same-origin';
 
 export const jsonHeaders = {
   Accept: 'application/json',
-  'Content-Type': 'application/json'
+  'Content-Type': 'application/json',
 };
 
 /**
@@ -67,7 +67,7 @@ export function doCreatePost(data) {
       feature_image: data.feature_image,
       tags: data.tags,
       status: data.status,
-      excerpt: data.excerpt
+      excerpt: data.excerpt,
     });
 }
 
@@ -101,8 +101,8 @@ export function doForgotPassword(email) {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      email
-    })
+      email,
+    }),
   });
 }
 
@@ -111,8 +111,8 @@ export function doResetPassword(password, token) {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      password
-    })
+      password,
+    }),
   });
 }
 
@@ -130,7 +130,7 @@ export const doAuthCheck = (token) => {
 export function doUpdateSettings(payload) {
   const settingId = payload.id;
   const data = {
-    value: payload.value
+    value: payload.value,
   };
   return request.put(`${API_SETTINGS}/${settingId}`)
     .set('Authorization', `${localStorage.getItem(TOKEN_KEY)}`)
@@ -162,7 +162,7 @@ export function doAddNavigationLinks(data) {
     name: data.name,
     href: data.href,
     icon: data.icon,
-    position: data.position
+    position: data.position,
   };
   return request.post(`${API_LINKS}`)
     .set('Authorization', `${localStorage.getItem(TOKEN_KEY)}`)
@@ -254,7 +254,7 @@ export function doUpdateMember(userData) {
     first_name: userData.first_name,
     last_name: userData.last_name,
     avatar_url: userData.avatar_url,
-    role: userData.role
+    role: userData.role,
   };
   return request
     .put(`${API_USERS}/admin/${userData.id}`)

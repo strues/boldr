@@ -19,7 +19,7 @@ class NewPostContainer extends Component {
 }
 
 NewPostContainer.contextTypes = {
-  router: PropTypes.object
+  router: PropTypes.object,
 };
 
 export default connect()(NewPostContainer);

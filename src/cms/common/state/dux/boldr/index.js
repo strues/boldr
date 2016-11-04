@@ -21,14 +21,14 @@ export function goTo(pathname, options = {}) {
   return push({
     pathname,
     search: options.search,
-    state: options.state
+    state: options.state,
   });
 }
 
 const boldrReducer = combineReducers({
   nav: navReducer,
   settings: settingsReducer,
-  pages: pagesReducer
+  pages: pagesReducer,
 });
 
 export default boldrReducer;

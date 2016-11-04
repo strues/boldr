@@ -3,5 +3,5 @@ import ImgBlockPlugin from './ImgBlockPlugin';
 
 export {
   VidBlockPlugin,
-  ImgBlockPlugin
+  ImgBlockPlugin,
 };

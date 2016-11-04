@@ -15,7 +15,7 @@ function checkTrailingSlash(path) {
 const s3 = new aws.S3({
   accessKeyId: conf.get('aws.keyId'),
   secretAccessKey: conf.get('aws.keySecret'),
-  region: conf.get('aws.region')
+  region: conf.get('aws.region'),
 });
 
 export default function S3Router(options) {
@@ -45,7 +45,7 @@ export default function S3Router(options) {
   function tempRedirect(req, res, next) {
     s3.getSignedUrl('getObject', {
       Bucket: S3_BUCKET,
-      Key: checkTrailingSlash(getFileKeyDir(req)) + req.params[0]
+      Key: checkTrailingSlash(getFileKeyDir(req)) + req.params[0],
     }, (err, url) => {
       if (err) {
         debug(err);
@@ -89,7 +89,7 @@ export default function S3Router(options) {
       Key: fileKey,
       Expires: 60,
       ContentType: mimeType,
-      ACL: 'public-read'
+      ACL: 'public-read',
     }, (err, data) => {
       if (err) {
         debug(err);
@@ -102,7 +102,7 @@ export default function S3Router(options) {
         s3_key: fileKey,
         signedUrl: data,
         publicUrl: `/s3/uploads/${filename}`,
-        filename
+        filename,
       };
       res.json(signedFile);
     });

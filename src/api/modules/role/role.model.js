@@ -16,11 +16,11 @@ class Role extends BaseModel {
           from: 'role.id',
           through: {
             from: 'user_role.role_id',
-            to: 'user_role.user_id'
+            to: 'user_role.user_id',
           },
-          to: 'user.id'
-        }
-      }
+          to: 'user.id',
+        },
+      },
     };
   }
 }

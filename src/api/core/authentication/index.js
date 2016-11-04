@@ -3,5 +3,5 @@ import signToken from './signToken';
 
 export {
   isAuthenticated,
-  signToken
+  signToken,
 };

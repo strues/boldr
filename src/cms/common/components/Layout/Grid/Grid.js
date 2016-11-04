@@ -21,7 +21,7 @@ Grid.propTypes = {
   fluid: React.PropTypes.bool,
   className: React.PropTypes.string,
   style: React.PropTypes.object,
-  children: React.PropTypes.node
+  children: React.PropTypes.node,
 };
 
 Grid.defaultProps = {

@@ -7,15 +7,15 @@ class Col extends PureComponent {
     const ComponentClass = this.props.componentClass;
 
     const classes = classNames({
-      ['grid__col--xs' + (isNumber(this.props.xs) ? '-' + this.props.xs : '')]: this.props.xs >= 0,
-      ['grid__col--sm' + (isNumber(this.props.sm) ? '-' + this.props.sm : '')]: this.props.sm >= 0,
-      ['grid__col--md' + (isNumber(this.props.md) ? '-' + this.props.md : '')]: this.props.md >= 0,
-      ['grid__col--lg' + (isNumber(this.props.lg) ? '-' + this.props.lg : '')]: this.props.lg >= 0,
+      [`grid__col--xs${isNumber(this.props.xs) ? `-${this.props.xs}` : ''}`]: this.props.xs >= 0,
+      [`grid__col--sm${isNumber(this.props.sm) ? `-${this.props.sm}` : ''}`]: this.props.sm >= 0,
+      [`grid__col--md${isNumber(this.props.md) ? `-${this.props.md}` : ''}`]: this.props.md >= 0,
+      [`grid__col--lg${isNumber(this.props.lg) ? `-${this.props.lg}` : ''}`]: this.props.lg >= 0,
 
-      ['grid__col--xs-offset-' + this.props.xsOffset]: this.props.xsOffset >= 0,
-      ['grid__col--sm-offset-' + this.props.smOffset]: this.props.smOffset >= 0,
-      ['grid__col--md-offset-' + this.props.mdOffset]: this.props.mdOffset >= 0,
-      ['grid__col--lg-offset-' + this.props.lgOffset]: this.props.lgOffset >= 0,
+      [`grid__col--xs-offset-${this.props.xsOffset}`]: this.props.xsOffset >= 0,
+      [`grid__col--sm-offset-${this.props.smOffset}`]: this.props.smOffset >= 0,
+      [`grid__col--md-offset-${this.props.mdOffset}`]: this.props.mdOffset >= 0,
+      [`grid__col--lg-offset-${this.props.lgOffset}`]: this.props.lgOffset >= 0,
 
       'grid__col--reverse': this.props.reverse,
 
@@ -34,7 +34,7 @@ class Col extends PureComponent {
       <ComponentClass className={ classes } style={ this.props.style }>
         { this.props.children }
       </ComponentClass>
-      );
+    );
   }
 }
 

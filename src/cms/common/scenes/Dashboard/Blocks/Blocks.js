@@ -9,7 +9,7 @@ import { areBlocksLoaded, fetchBlocks } from './reducer';
       promises.push(dispatch(fetchBlocks()));
     }
     return Promise.all(promises);
-  }
+  },
 }])
 class Blocks extends Component {
   componentDidMount() {
@@ -25,7 +25,7 @@ class Blocks extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    blocks: state.blocks
+    blocks: state.blocks,
   };
 };
 export default connect(mapStateToProps, { fetchBlocks })(Blocks);

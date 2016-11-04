@@ -16,7 +16,7 @@ export default (store, connect) => ({
       System.import('./ForgotPassword')
         .then(loadModule(cb))
         .catch(errorLoading);
-    }
+    },
   },
   {
     path: 'login',
@@ -24,7 +24,7 @@ export default (store, connect) => ({
       System.import('./Login')
         .then(loadModule(cb))
         .catch(errorLoading);
-    }
+    },
   },
   {
     path: 'preferences',
@@ -32,19 +32,19 @@ export default (store, connect) => ({
       System.import('./Preferences')
         .then(loadModule(cb))
         .catch(errorLoading);
-    }
+    },
   },
   {
     path: 'reset-password/:token',
     getComponent(nextState, cb) {
       require.ensure([
-        './ResetPassword'
+        './ResetPassword',
       ], (require) => {
         const ResetPage = require('./ResetPassword').default;
         
         cb(null, ResetPage);
       });
-    }
+    },
   },
   {
     path: 'signup',
@@ -52,6 +52,6 @@ export default (store, connect) => ({
       System.import('./Signup')
         .then(loadModule(cb))
         .catch(errorLoading);
-    }
-  }]
+    },
+  }],
 });

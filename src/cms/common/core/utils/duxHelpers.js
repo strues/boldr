@@ -17,7 +17,7 @@ const removeFromArray = (value, array) => {
   if (valueIndex === -1) return array;
   return [
     ...array.slice(0, valueIndex),
-    ...array.slice(valueIndex + 1)
+    ...array.slice(valueIndex + 1),
   ];
 };
 
@@ -33,5 +33,5 @@ export {
   capitalize,
   serializeOrderedQuery,
   removeFromArray,
-  addToArray
+  addToArray,
 };

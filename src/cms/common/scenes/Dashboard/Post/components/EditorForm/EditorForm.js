@@ -66,7 +66,7 @@ class EditorForm extends Component {
   }
 }
 export default reduxForm({
-  form: 'EditorForm'
+  form: 'EditorForm',
 })(EditorForm);
 
 EditorForm.propTypes = {
@@ -77,5 +77,5 @@ EditorForm.propTypes = {
   fields: PropTypes.object,
   pristine: PropTypes.bool,
   input: PropTypes.object,
-  label: PropTypes.string
+  label: PropTypes.string,
 };

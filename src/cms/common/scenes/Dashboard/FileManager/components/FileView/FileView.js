@@ -21,9 +21,9 @@ FileView.propTypes = {
   files: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     filename: PropTypes.string,
-    url: PropTypes.string.isRequired
+    url: PropTypes.string.isRequired,
   }).isRequired).isRequired,
-  removeMedia: PropTypes.func
+  removeMedia: PropTypes.func,
 };
 
 export default FileView;

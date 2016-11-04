@@ -20,6 +20,6 @@ export default function createReducer(asyncReducers) {
     boldr: boldrReducer,
     tags: tagReducer,
     form: formReducer,
-    ...asyncReducers
+    ...asyncReducers,
   });
 }

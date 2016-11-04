@@ -11,7 +11,7 @@ describe('<FooterWrapper />', () => {
     const wrapper = shallow(
       <FooterWrapper>
         <div className="unique" />
-      </FooterWrapper>
+      </FooterWrapper>,
     );
     expect(wrapper.contains(<div className="unique" />)).toBe(true);
   });

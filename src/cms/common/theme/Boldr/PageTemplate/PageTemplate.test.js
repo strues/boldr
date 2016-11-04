@@ -7,7 +7,7 @@ describe('<PageTemplate />', () => {
     const wrapper = shallow(
       <PageTemplate>
         <div className="unique" />
-      </PageTemplate>
+      </PageTemplate>,
     );
     expect(wrapper.contains(<div className="unique" />)).toBe(true);
   });

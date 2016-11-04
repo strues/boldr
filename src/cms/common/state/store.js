@@ -25,7 +25,7 @@ export default function configureStore(history, client, preloadedState) {
   // Creating the store
   const store = createStore(createReducer(), preloadedState, compose(
     applyMiddleware(...middleware),
-    ...enhancers
+    ...enhancers,
   ));
   // async reducers we can inject based on the route.
   store.asyncReducers = {};

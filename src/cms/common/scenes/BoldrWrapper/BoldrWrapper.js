@@ -14,7 +14,7 @@ import {
   fetchSettingsIfNeeded,
   fetchPagesIfNeeded,
   loadMainNav,
-  getByLabel
+  getByLabel,
 } from '../../state/index';
 
 import meta from '../../core/config/base';
@@ -42,7 +42,7 @@ type Props = {
       promises.push(dispatch(loadMainNav()));
     }
     return Promise.all(promises);
-  }
+  },
 }])
 class BoldrWrapper extends Component {
   componentDidMount() {
@@ -68,7 +68,7 @@ function mapStateToProps(state) {
     settings: getSettings(state),
     auth: state.auth,
     notifications: state.notifications,
-    navigation: getByLabel(state, 'main')
+    navigation: getByLabel(state, 'main'),
   };
 }
 

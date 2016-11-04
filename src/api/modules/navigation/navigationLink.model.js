@@ -28,8 +28,8 @@ class NavigationLink extends Model {
         join: {
           from: 'navigation_link.navigation_id',
           to: 'navigation.id',
-        }
-      }
+        },
+      },
     };
   }
 }

@@ -39,9 +39,9 @@ const LoginForm = (props: Props) => {
            <Button onClick={ props.reset }>Clear</Button>
 
       </Form>
-    );
+  );
 };
 
 export default reduxForm({
-  form: 'LoginForm'
+  form: 'LoginForm',
 })(LoginForm);

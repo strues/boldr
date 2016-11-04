@@ -42,7 +42,7 @@ const Home = (props: Props) => {
 const mapStateToProps = (state) => {
   return {
     pages: state.boldr.pages,
-    loaded: state.boldr.pages.loaded
+    loaded: state.boldr.pages.loaded,
   };
 };
 

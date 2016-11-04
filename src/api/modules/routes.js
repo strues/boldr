@@ -39,7 +39,7 @@ const router = express.Router();
   * You must pass an authorization header with a token to access this endpoint.
   */
 router.get('/health-check', (req, res) =>
-  res.status(200).json('OK, it works')
+  res.status(200).json('OK, it works'),
 );
 
 router.use('/activities', activityRoutes);
@@ -55,7 +55,7 @@ router.use('/posts', postRoutes);
 router.use('/roles', roleRoutes);
 router.use('/s3', s3Router({
   headers: { 'Access-Control-Allow-Origin': '*' }, // optional
-  ACL: 'public-read' // this is default
+  ACL: 'public-read', // this is default
 }));
 router.use('/settings', settingRoutes);
 router.use('/tags', tagRoutes);

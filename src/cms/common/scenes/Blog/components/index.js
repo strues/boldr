@@ -13,5 +13,5 @@ export {
   PostImage,
   PostSidebar,
   Tag,
-  TagBlock
+  TagBlock,
 };

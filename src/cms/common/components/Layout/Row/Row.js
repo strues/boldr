@@ -6,7 +6,7 @@ class Row extends PureComponent {
     const ComponentClass = this.props.componentClass;
 
     const classes = classNames({
-      'grid__row': true,
+      grid__row: true,
       'grid__row--reverse': this.props.reverse,
 
       'grid__row--xs-start': this.props.xsStart,

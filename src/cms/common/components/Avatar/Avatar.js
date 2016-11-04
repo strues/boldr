@@ -52,11 +52,11 @@ export default class Avatar extends PureComponent {
      * The suffix to use for a color. This can be any value but
      * *should* be one of the available `suffixes`.
      */
-    suffix: PropTypes.string
+    suffix: PropTypes.string,
   };
 
   static defaultProps = {
-    suffixes: ['color-1', 'color-2', 'color-3']
+    suffixes: ['color-1', 'color-2', 'color-3'],
   };
 
   _getColor(suffix, suffixes, random) {

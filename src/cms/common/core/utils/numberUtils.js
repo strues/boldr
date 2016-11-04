@@ -29,7 +29,7 @@ export function isBetween(num, min, max) {
 function calculateDistance(x, width, left, normalize) {
   const distance = Math.min(
     width,
-    Math.max(0, x - left)
+    Math.max(0, x - left),
   );
 
   return normalize ? distance : distance / width * 100;
@@ -81,7 +81,7 @@ export function calculateValueDistance(x, width, left, scale, step, min, max, no
 
   return {
     distance: Math.max(0, Math.min(100, distance)),
-    value: Math.max(min, Math.min(max, value))
+    value: Math.max(min, Math.min(max, value)),
   };
 }
 

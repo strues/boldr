@@ -5,12 +5,12 @@ import FontIcon from './FontIcon';
 const Collapser = ({ className, flipped, suffix, suffixFlipped, ...props }) => (
   <FontIcon
     key="collapser"
-    {...props}
-    className={cn('md-collapser', {
+    { ...props }
+    className={ cn('md-collapser', {
       'md-collapser--flipped': flipped && (!suffixFlipped || !suffix),
       [`md-collapser--${suffix}`]: suffix,
       [`md-collapser--${suffix}-flipped`]: suffix && flipped && suffixFlipped,
-    }, className)}
+    }, className) }
   />
 );
 

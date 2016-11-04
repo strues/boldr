@@ -40,20 +40,20 @@ export function loadMainNav() {
 }
 function startLoadNav() {
   return {
-    type: t.LOAD_NAVIGATION_REQUEST
+    type: t.LOAD_NAVIGATION_REQUEST,
   };
 }
 function errorLoadNav(err) {
   return {
     type: t.LOAD_NAVIGATION_FAILURE,
-    error: err
+    error: err,
   };
 }
 
 function successLoadNav(normalized) {
   return {
     type: t.LOAD_NAVIGATION_SUCCESS,
-    payload: normalized
+    payload: normalized,
   };
 }
 
@@ -81,21 +81,21 @@ export function updateNavLinks(data) {
 
 function beginUpdateNav() {
   return {
-    type: t.UPDATE_NAVIGATION_REQUEST
+    type: t.UPDATE_NAVIGATION_REQUEST,
   };
 }
 
 function doneUpdateNav(response) {
   return {
     type: t.UPDATE_NAVIGATION_SUCCESS,
-    payload: response
+    payload: response,
   };
 }
 
 function failUpdateNav(err) {
   return {
     type: t.UPDATE_NAVIGATION_FAILURE,
-    error: err
+    error: err,
   };
 }
 const beginAddNavLink = () => {
@@ -105,14 +105,14 @@ const beginAddNavLink = () => {
 const doneAddNavLink = (response) => {
   return {
     type: t.ADD_NAVIGATION_LINK_SUCCESS,
-    payload: response.body
+    payload: response.body,
   };
 };
 
 const failAddNavLink = (err) => {
   return {
     type: t.ADD_NAVIGATION_LINK_FAILURE,
-    error: err
+    error: err,
   };
 };
 
@@ -189,18 +189,18 @@ function shouldFetchSettings(state) {
 }
 
 const loadSettings = () => ({
-  type: t.LOAD_SETTINGS_REQUEST
+  type: t.LOAD_SETTINGS_REQUEST,
 });
 
 function doneLoadSettings(normalized) {
   return {
     type: t.LOAD_SETTINGS_SUCCESS,
-    payload: normalized
+    payload: normalized,
   };
 }
 
 const failLoadSettings = () => ({
-  type: t.LOAD_SETTINGS_FAILURE
+  type: t.LOAD_SETTINGS_FAILURE,
 });
 
 /**
@@ -219,7 +219,7 @@ export function updateBoldrSettings(payload) {
         dispatch(notificationSend({
           message: 'Updated your settings.',
           kind: 'info',
-          dismissAfter: 3000
+          dismissAfter: 3000,
         }));
         dispatch(push('/dashboard'));
       })
@@ -228,23 +228,23 @@ export function updateBoldrSettings(payload) {
         dispatch(notificationSend({
           message: `We ran into a problem with your set up ${err}`,
           kind: 'error',
-          dismissAfter: 3000
+          dismissAfter: 3000,
         }));
       });
   };
 }
 const beginUpdateSettings = () => ({
-  type: t.UPDATE_SETTINGS_REQUEST
+  type: t.UPDATE_SETTINGS_REQUEST,
 });
 
 const doneUpdateSettings = (response) => ({
   type: t.UPDATE_SETTINGS_SUCCESS,
-  payload: response.body
+  payload: response.body,
 });
 
 const failUpdateSettings = (err) => ({
   type: t.UPDATE_SETTINGS_FAILURE,
-  error: err
+  error: err,
 });
 
 
@@ -298,10 +298,10 @@ const requestPages = () => {
 };
 const receivePages = (normalized) => ({
   type: t.LOAD_PAGES_SUCCESS,
-  payload: normalized
+  payload: normalized,
 });
 const receivePagesFailed = (err) => ({
-  type: t.LOAD_PAGES_FAILURE, error: err
+  type: t.LOAD_PAGES_FAILURE, error: err,
 });
 
 /**
@@ -334,17 +334,17 @@ const requestPage = () => {
 
 const receivePage = (response) => ({
   type: t.LOAD_PAGE_SUCCESS,
-  payload: response.body
+  payload: response.body,
 });
 
 const receivePageFailed = (err) => ({
-  type: t.LOAD_PAGE_FAILURE, error: err
+  type: t.LOAD_PAGE_FAILURE, error: err,
 });
 
 export function loadPages() {
   return {
     types: [t.LOAD_PAGES_REQUEST, t.LOAD_PAGES_SUCCESS, t.LOAD_PAGES_FAILURE],
     schema: arrayOf(pageSchema),
-    promise: (client) => client.get('/pages')
+    promise: (client) => client.get('/pages'),
   };
 }

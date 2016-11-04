@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Button, Icon, Table, Segment } from 'semantic-ui-react';
+import type { Setting } from 'types/models';
 import SettingRow from './SettingRow';
 
 type Props = {
   boldr?: Object,
-  allSettings: Array<Object>,
+  allSettings: Array<Setting>,
   updateBoldrSettings?: Function,
 };
 
@@ -14,7 +15,7 @@ class Settings extends Component {
     super();
 
     this.state = {
-      editing: false
+      editing: false,
     };
   }
   props: Props;
@@ -34,7 +35,7 @@ class Settings extends Component {
         <Table.Body>
            {
              this.props.allSettings.map(setting =>
-               <SettingRow key={ setting.id } setting={ setting } />
+               <SettingRow key={ setting.id } setting={ setting } />,
              )
            }
         </Table.Body>

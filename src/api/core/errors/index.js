@@ -12,5 +12,5 @@ export {
   InternalServer,
   NotImplemented,
   AccountNotVerifiedError,
-  GeneralError
+  GeneralError,
 };

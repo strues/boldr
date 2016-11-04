@@ -15,11 +15,11 @@ class Tag extends BaseModel {
           from: 'tag.id',
           through: {
             from: 'post_tag.tag_id',
-            to: 'post_tag.post_id'
+            to: 'post_tag.post_id',
           },
-          to: 'post.id'
-        }
-      }
+          to: 'post.id',
+        },
+      },
     };
   }
 }

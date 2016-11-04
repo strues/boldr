@@ -7,9 +7,9 @@ import { createSelector } from 'reselect';
 export const getSettings = createSelector(
   [
     (state) => state.boldr.settings.keys,
-    (state) => state.boldr.settings.byKey
+    (state) => state.boldr.settings.byKey,
   ],
-  (keys, byKey) => keys.map(key => byKey[key])
+  (keys, byKey) => keys.map(key => byKey[key]),
 );
 
 export function areSettingsLoaded(globalState) {
@@ -39,7 +39,7 @@ export const getNavs = createSelector(
   [listNavLabels, getNavEntities],
   //  (state) => state.boldr.nav.labels,
   //  (state) => state.boldr.nav.byLabel
-  (labels, byLabel) => labels.map(label => byLabel[label])
+  (labels, byLabel) => labels.map(label => byLabel[label]),
 );
 
 export function isNavLoaded(globalState) {

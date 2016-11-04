@@ -18,7 +18,7 @@ type Props = {
     const promises = [];
     promises.push(dispatch(requestPostTags(name)));
     return Promise.all(promises);
-  }
+  },
 }])
 class TagList extends Component {
   componentDidMount() {
@@ -53,8 +53,8 @@ class TagList extends Component {
 const mapStateToProps = (state) => {
   return {
     tags: state.tags,
-    isLoading: state.tags.isLoading,
-    posts: state.tags.posts
+    loading: state.tags.loading,
+    posts: state.tags.posts,
   };
 };
 

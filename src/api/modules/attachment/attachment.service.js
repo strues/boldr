@@ -10,7 +10,7 @@ const debug = require('debug')('boldr:attachment-service');
 const s3 = new AWS.S3({
   accessKeyId: conf.get('aws.keyId'),
   secretAccessKey: conf.get('aws.keySecret'),
-  region: conf.get('aws.region')
+  region: conf.get('aws.region'),
 });
 
 const multerOptions = {
@@ -23,8 +23,8 @@ const multerOptions = {
     },
     key(req, file, cb) {
       cb(null, `uploads/files/${file.fieldname}-${Date.now().toString()}${path.extname(file.originalname)}`);
-    }
-  })
+    },
+  }),
 };
 
 const multerAvatar = {
@@ -37,8 +37,8 @@ const multerAvatar = {
     },
     key(req, file, cb) {
       cb(null, `uploads/avatars/${file.fieldname}-${Date.now().toString()}${path.extname(file.originalname)}`);
-    }
-  })
+    },
+  }),
 };
 
 const multerArticle = {
@@ -51,8 +51,8 @@ const multerArticle = {
     },
     key(req, file, cb) {
       cb(null, `uploads/articles/${file.fieldname}-${Date.now().toString()}${path.extname(file.originalname)}`);
-    }
-  })
+    },
+  }),
 };
 function checkTrailingSlash(path) {
   if (path && path[path.length - 1] !== '/') {
@@ -62,7 +62,7 @@ function checkTrailingSlash(path) {
 }
 
 function s3SignService(req, res, next) {
-  const filename = uuid.v4() + '_' + req.query.objectName;
+  const filename = `${uuid.v4()}_${req.query.objectName}`;
   const mimeType = req.query.contentType;
   const fileKey = checkTrailingSlash(getFileKeyDir(req)) + filename;
 
@@ -71,7 +71,7 @@ function s3SignService(req, res, next) {
     Key: fileKey,
     Expires: 60,
     ContentType: mimeType,
-    ACL: 'public-read'
+    ACL: 'public-read',
   };
 
   s3.getSignedUrl('putObject', params, (err, data) => {
@@ -82,7 +82,7 @@ function s3SignService(req, res, next) {
     res.json({
       signedUrl: data,
       publicUrl: `/s3/uploads/${filename}`,
-      filename
+      filename,
     });
   });
 }
@@ -90,7 +90,7 @@ function s3SignService(req, res, next) {
 function tempRedirect(req, res) {
   const params = {
     Bucket: conf.get('aws.bucket'),
-    Key: checkTrailingSlash(getFileKeyDir(req)) + req.params[0]
+    Key: checkTrailingSlash(getFileKeyDir(req)) + req.params[0],
   };
   const s3 = new AWS.S3();
   s3.getSignedUrl('getObject', params, (err, url) => {

@@ -3,7 +3,7 @@ import { findDOMNode } from 'react-dom';
 import {
   Simulate,
   renderIntoDocument,
-  findRenderedDOMComponentWithTag
+  findRenderedDOMComponentWithTag,
 } from 'react-addons-test-utils';
 
 import FileInput from './FileInput';
@@ -13,11 +13,10 @@ const File = jest.fn(name => ({
   lastModifiedDate: new Date(),
   isClosed: true,
   size: 39202,
-  type: 'image/jpg'
+  type: 'image/jpg',
 }));
 
 describe('FileInput', () => {
-
   it('returns a single file when multiple is false onChange', () => {
     const onChange = jest.fn();
     const fileInput = renderIntoDocument(<FileInput id="test" onChange={ onChange } />);

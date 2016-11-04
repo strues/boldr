@@ -78,7 +78,7 @@ export const DateTimeFormat = (() => {
 
   // (locales, options)
   return {
-    format: () => date => date
+    format: () => date => date,
   };
 })();
 
@@ -135,7 +135,7 @@ export function extractTimeParts(DateTimeFormat, locales, time) {
   return {
     hours,
     minutes: separator + minutes,
-    timePeriod
+    timePeriod,
   };
 }
 

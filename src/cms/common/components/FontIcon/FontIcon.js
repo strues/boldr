@@ -19,11 +19,11 @@ export default class FontIcon extends PureComponent {
     /**
      * An optional className to apply to the `FontIcon`.
      */
-    className: PropTypes.string
+    className: PropTypes.string,
   };
 
   static defaultProps = {
-    iconClassName: 'material-icons'
+    iconClassName: 'material-icons',
   };
 
   render() {

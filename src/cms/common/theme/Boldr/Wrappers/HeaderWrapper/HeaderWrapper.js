@@ -24,7 +24,7 @@ const mapStateToProps = (state: Object) => {
     boldr: state.boldr,
     settings: getSettings(state),
     auth: state.auth,
-    navigation: getByLabel(state, 'main')
+    navigation: getByLabel(state, 'main'),
   };
 };
 
@@ -32,7 +32,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     actions: bindActionCreators({ logout, pushState: push, loadMainNav }, dispatch),
     navigate: (url) => dispatch(push(url)),
-    dispatch
+    dispatch,
   };
 };
 
@@ -43,7 +43,7 @@ const mapDispatchToProps = (dispatch) => {
       promises.push(dispatch(loadMainNav()));
     }
     return Promise.all(promises);
-  }
+  },
 }])
 @connect(mapStateToProps, mapDispatchToProps)
 class HeaderWrapper extends Component {

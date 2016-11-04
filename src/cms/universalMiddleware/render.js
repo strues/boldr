@@ -13,7 +13,7 @@ function polyfillIoScript() {
 function styleTags(styles: Array<string>) {
   return styles
     .map(style =>
-      `<link href="${style}" media="screen, projection" rel="stylesheet" type="text/css" />`
+      `<link href="${style}" media="screen, projection" rel="stylesheet" type="text/css" />`,
     )
     .join('\n');
 }
@@ -21,7 +21,7 @@ function styleTags(styles: Array<string>) {
 function scriptTags(scripts: Array<string>) {
   return scripts
     .map(script =>
-      `<script type="text/javascript" src="${script}"></script>`
+      `<script type="text/javascript" src="${script}"></script>`,
     )
     .join('\n');
 }

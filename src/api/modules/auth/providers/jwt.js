@@ -6,7 +6,7 @@ const ExtractJwt = require('passport-jwt').ExtractJwt;
 
 const jwtOptions = {
   jwtFromRequest: ExtractJwt.fromHeader('authorization'),
-  secretOrKey: conf.get('session.secret')
+  secretOrKey: conf.get('session.secret'),
 };
 
 export default function configureJwt(User) {

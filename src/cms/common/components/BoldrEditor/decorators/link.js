@@ -15,7 +15,7 @@ const linkStrategy = (contentBlock, callback) => {
         Entity.get(entityKey).getType() === 'LINK'
       );
     },
-    callback
+    callback,
   );
 };
 

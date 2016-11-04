@@ -460,7 +460,7 @@ babel-core@^6.18.2:
     slash "^1.0.0"
     source-map "^0.5.0"
 
-babel-eslint@^7.0.0, babel-eslint@^7.1.0:
+babel-eslint@^7.1.0:
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/babel-eslint/-/babel-eslint-7.1.0.tgz#d506a5174ba224e25a2d17e128e2ba8987139ddc"
   dependencies:
@@ -2225,13 +2225,6 @@ doctrine@^1.2.2, doctrine@1.5.0:
     esutils "^2.0.2"
     isarray "^1.0.0"
 
-doctrine@1.3.x:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/doctrine/-/doctrine-1.3.0.tgz#13e75682b55518424276f7c173783456ef913d26"
-  dependencies:
-    esutils "^2.0.2"
-    isarray "^1.0.0"
-
 dom-serializer@~0.1.0, dom-serializer@0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/dom-serializer/-/dom-serializer-0.1.0.tgz#073c697546ce0780ce23be4a28e293e40bc30c82"
@@ -2559,18 +2552,18 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-boldr@^1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-boldr/-/eslint-config-boldr-1.2.1.tgz#d4868a1a40e8c673a1b15244727c0a156c4e9cb4"
+eslint-config-boldr@1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/eslint-config-boldr/-/eslint-config-boldr-1.2.3.tgz#1f18b9f02d1769111923a0e76b30f8b37c82ca44"
   dependencies:
-    babel-eslint "^7.0.0"
+    babel-eslint "^7.1.0"
     eslint-import-resolver-babel-module "^2.0.1"
-    eslint-import-resolver-webpack "^0.6.0"
+    eslint-import-resolver-webpack "^0.7.0"
     eslint-plugin-babel "^3.3.0"
-    eslint-plugin-flowtype "^2.20.0"
-    eslint-plugin-import "^2.0.1"
+    eslint-plugin-flowtype "^2.25.0"
+    eslint-plugin-import "^2.1.0"
     eslint-plugin-jsx-a11y "^2.2.3"
-    eslint-plugin-react "^6.1.0"
+    eslint-plugin-react "^6.5.0"
 
 eslint-import-resolver-babel-module, eslint-import-resolver-babel-module@^2.0.1:
   version "2.0.1"
@@ -2587,9 +2580,9 @@ eslint-import-resolver-node@^0.2.0:
     object-assign "^4.0.1"
     resolve "^1.1.6"
 
-eslint-import-resolver-webpack@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/eslint-import-resolver-webpack/-/eslint-import-resolver-webpack-0.6.0.tgz#cfa48c727b633eb523e29ef019750b2106d0f609"
+eslint-import-resolver-webpack@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/eslint-import-resolver-webpack/-/eslint-import-resolver-webpack-0.7.0.tgz#25c755b593f2533be69235bd6c65aa7c5285fb68"
   dependencies:
     array-find "^1.0.0"
     debug "^2.2.0"
@@ -2599,7 +2592,6 @@ eslint-import-resolver-webpack@^0.6.0:
     is-absolute "^0.2.3"
     lodash.get "^3.7.0"
     node-libs-browser "^1.0.0"
-    object-assign "^4.1.0"
     resolve "^1.1.7"
     semver "^5.3.0"
 
@@ -2614,26 +2606,11 @@ eslint-plugin-babel@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-babel/-/eslint-plugin-babel-3.3.0.tgz#2f494aedcf6f4aa4e75b9155980837bc1fbde193"
 
-eslint-plugin-flowtype@^2.20.0, eslint-plugin-flowtype@^2.25.0:
+eslint-plugin-flowtype@^2.25.0:
   version "2.25.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.25.0.tgz#c462521ab20ce3d8db819f10ad3c9f1bc7f3f819"
   dependencies:
     lodash "^4.15.0"
-
-eslint-plugin-import@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.0.1.tgz#dcfe96357d476b3f822570d42c29bec66f5d9c5c"
-  dependencies:
-    builtin-modules "^1.1.1"
-    contains-path "^0.1.0"
-    debug "^2.2.0"
-    doctrine "1.3.x"
-    eslint-import-resolver-node "^0.2.0"
-    eslint-module-utils "^1.0.0"
-    has "^1.0.1"
-    lodash.cond "^4.3.0"
-    minimatch "^3.0.3"
-    pkg-up "^1.0.0"
 
 eslint-plugin-import@^2.1.0:
   version "2.1.0"
@@ -2658,12 +2635,12 @@ eslint-plugin-jsx-a11y@^2.2.3:
     jsx-ast-utils "^1.0.0"
     object-assign "^4.0.1"
 
-eslint-plugin-react@^6.1.0:
-  version "6.4.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-6.4.1.tgz#7d1aade747db15892f71eee1fea4addf97bcfa2b"
+eslint-plugin-react@^6.5.0:
+  version "6.5.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-6.5.0.tgz#93f894b6469974304609e59c8983a6a3dc81738c"
   dependencies:
     doctrine "^1.2.2"
-    jsx-ast-utils "^1.3.1"
+    jsx-ast-utils "^1.3.3"
 
 eslint@^3.9.1:
   version "3.9.1"
@@ -4387,9 +4364,16 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.3.6"
 
-jsx-ast-utils@^1.0.0, jsx-ast-utils@^1.3.1:
+jsx-ast-utils@^1.0.0:
   version "1.3.2"
   resolved "https://registry.yarnpkg.com/jsx-ast-utils/-/jsx-ast-utils-1.3.2.tgz#dff658782705352111f9865d40471bc4a955961e"
+  dependencies:
+    acorn-jsx "^3.0.1"
+    object-assign "^4.1.0"
+
+jsx-ast-utils@^1.3.3:
+  version "1.3.3"
+  resolved "https://registry.yarnpkg.com/jsx-ast-utils/-/jsx-ast-utils-1.3.3.tgz#ccfdbe0320ba03f7a1fc4e67ceaf7e2cc0169721"
   dependencies:
     acorn-jsx "^3.0.1"
     object-assign "^4.1.0"
@@ -5151,9 +5135,9 @@ ms@0.7.1:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/ms/-/ms-0.7.1.tgz#9cd13c03adbff25b65effde7ce864ee952017098"
 
-multer-s3@^2.3.2:
-  version "2.3.2"
-  resolved "https://registry.yarnpkg.com/multer-s3/-/multer-s3-2.3.2.tgz#05ea64f1280066ef8bb64fc11d63391db1eb277f"
+multer-s3@^2.4.0:
+  version "2.4.0"
+  resolved "https://registry.yarnpkg.com/multer-s3/-/multer-s3-2.4.0.tgz#b96ef7f986ff23f3ab49ed954b64d90943e05a97"
   dependencies:
     file-type "^3.3.0"
     run-parallel "^1.1.6"

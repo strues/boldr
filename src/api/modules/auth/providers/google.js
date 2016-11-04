@@ -11,7 +11,7 @@ const strategyOpts = {
   clientID: conf.get('social.facebook.id'),
   clientSecret: conf.get('social.facebook.secret'),
   callbackURL: '/api/v1/auth/facebook/callback',
-  passReqToCallback: true
+  passReqToCallback: true,
 };
 
 export default function configureGoogle(Account) {
@@ -27,7 +27,7 @@ export default function configureGoogle(Account) {
 
         await account.$relatedQuery('profile').insert({
           first_name: profile.displayName,
-          avatar_url: account.avatar_url || `https://graph.facebook.com/${profile.id}/picture?type=large`
+          avatar_url: account.avatar_url || `https://graph.facebook.com/${profile.id}/picture?type=large`,
         });
         account.save((err) => {
           res.send('Facebook account has been linked.');
@@ -49,7 +49,7 @@ export default function configureGoogle(Account) {
             .query()
             .insert({
               id: uuid.v4(),
-              email: profile.emails[0].value
+              email: profile.emails[0].value,
             });
         await account.$relatedQuery('role').relate({ id: 1 });
 
@@ -62,7 +62,7 @@ export default function configureGoogle(Account) {
         const profile = await account.$relatedQuery('profile').insert({
           id: uuid.v4(),
           first_name: profile.displayName,
-          avatar_url: account.avatar_url || `https://graph.facebook.com/${profile.id}/picture?type=large`
+          avatar_url: account.avatar_url || `https://graph.facebook.com/${profile.id}/picture?type=large`,
         });
         if (!profile) {
           res.status(500).json('Oooops');

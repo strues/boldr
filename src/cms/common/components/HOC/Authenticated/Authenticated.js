@@ -6,7 +6,7 @@ export default function(ComposedComponent) {
   class Authenticated extends Component {
     static propTypes = {
       isAuthenticated: PropTypes.bool,
-      replace: PropTypes.func
+      replace: PropTypes.func,
     }
     componentWillMount() {
       this.checkAuth(this.props.isAuthenticated);

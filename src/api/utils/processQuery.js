@@ -3,7 +3,7 @@ function processQuery(req, res, next) {
     const page = pageVal || {};
     return {
       number: page.number || 0,
-      size: page.size || 10
+      size: page.size || 10,
     };
   }
   function getOrder(sort) {

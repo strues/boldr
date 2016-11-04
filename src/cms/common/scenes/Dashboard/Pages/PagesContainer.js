@@ -16,7 +16,7 @@ export type Props = {
     const promises = [];
     promises.push(dispatch(fetchPagesIfNeeded()));
     return Promise.all(promises);
-  }
+  },
 }])
 class PagesContainer extends Component {
   componentDidMount() {
@@ -31,7 +31,7 @@ class PagesContainer extends Component {
 }
 const mapStateToProps = (state, ownProps) => {
   return {
-    pages: state.pages
+    pages: state.pages,
   };
 };
 export default connect(mapStateToProps, { fetchPagesIfNeeded })(PagesContainer);

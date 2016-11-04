@@ -9,18 +9,18 @@ export const FETCH_TAGS_FAILURE = 'FETCH_TAGS_FAILURE';
 
 const requestTag = () => {
   return {
-    type: LOAD_TAG_REQUEST
+    type: LOAD_TAG_REQUEST,
   };
 };
 
 const receiveTag = (json) => ({
   type: LOAD_TAG_SUCCESS,
-  result: json
+  result: json,
 });
 
 const failedToReceiveTag = (err) => ({
   type: LOAD_TAG_FAILURE,
-  error: err
+  error: err,
 });
 
 export function requestPostTags(tagName) {
@@ -37,12 +37,12 @@ export function requestPostTags(tagName) {
 
 
 const INITIAL_STATE = {
-  isLoading: false,
+  loading: false,
   error: false,
   id: '',
   name: '',
   description: '',
-  posts: []
+  posts: [],
 };
 
 /**
@@ -92,22 +92,22 @@ export default function tagsReducer(state = INITIAL_STATE, action = {}) {
     case LOAD_TAG_REQUEST:
       return {
         ...state,
-        isLoading: true
+        loading: true,
       };
     case LOAD_TAG_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        loading: false,
         id: action.result.id,
         name: action.result.name,
         posts: action.result.posts,
-        description: action.result.description
+        description: action.result.description,
       };
     case LOAD_TAG_FAILURE:
       return {
         ...state,
-        isLoading: false,
-        error: action.error
+        loading: false,
+        error: action.error,
       };
     default:
       return state;

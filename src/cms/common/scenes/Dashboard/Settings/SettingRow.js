@@ -2,12 +2,15 @@ import React, { Component } from 'react';
 import { Button, Icon, Table, Form } from 'semantic-ui-react';
 import { connect } from 'react-redux';
 import { updateBoldrSettings } from 'state/index';
+import type { Setting } from 'types/models';
 
 type Props = {
   value: ?String,
   handleSubmit: ?Function,
   description: String,
-  key: String
+  key: String,
+  updateBoldrSettings: () => void,
+  setting: Setting
 }
 
 class SettingRow extends Component {
@@ -15,7 +18,7 @@ class SettingRow extends Component {
     super();
     this.state = {
       editing: false,
-      serializedForm: {}
+      serializedForm: {},
     };
     this.handleChange = this.handleChange.bind(this);
     this.toggleEdit = this.toggleEdit.bind(this);
@@ -25,7 +28,7 @@ class SettingRow extends Component {
 
   toggleEdit() {
     this.setState({
-      editing: true
+      editing: true,
     });
   }
 
@@ -39,7 +42,7 @@ class SettingRow extends Component {
     const settingId = this.props.setting.id;
     const payload = {
       value: sf,
-      id: settingId
+      id: settingId,
     };
     this.props.updateBoldrSettings(payload);
   }

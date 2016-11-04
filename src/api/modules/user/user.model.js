@@ -29,35 +29,35 @@ class User extends BaseModel {
           from: 'user.id',
           through: {
             from: 'user_role.user_id',
-            to: 'user_role.role_id'
+            to: 'user_role.role_id',
           },
-          to: 'role.id'
-        }
+          to: 'role.id',
+        },
       },
       posts: {
         relation: Model.HasManyRelation,
         modelClass: Post,
         join: {
           from: 'user.id',
-          to: 'post.user_id'
-        }
+          to: 'post.user_id',
+        },
       },
       uploads: {
         relation: Model.HasManyRelation,
         modelClass: Attachment,
         join: {
           from: 'user.id',
-          to: 'attachment.user_id'
-        }
+          to: 'attachment.user_id',
+        },
       },
       tokens: {
         relation: Model.HasOneRelation,
         modelClass: Token,
         join: {
           from: 'user.id',
-          to: 'token.user_id'
-        }
-      }
+          to: 'token.user_id',
+        },
+      },
     };
   }
 
@@ -108,7 +108,7 @@ class User extends BaseModel {
     if (!this.role) {
       return false;
     }
-    console.log(this.role)
+    console.log(this.role);
     const validRoles = this.role[0].filter(({ name }) => (name === r));
 
     return validRoles.length;

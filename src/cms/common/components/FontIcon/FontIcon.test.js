@@ -40,7 +40,7 @@ describe('FontIcon', () => {
         onTouchStart={ onTouchStart }
         onTouchEnd={ onTouchEnd }
         onTouchCancel={ onTouchCancel }
-      />
+      />,
     );
 
     const dividerNode = findDOMNode(divider);

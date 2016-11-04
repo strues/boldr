@@ -5,7 +5,7 @@ import {
   NotFound,
   MethodNotAllowed,
   Conflict,
-  AccountNotVerifiedError
+  AccountNotVerifiedError,
 } from './clientError';
 
 describe('Client Errors', () => {

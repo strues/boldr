@@ -21,15 +21,15 @@ class Preferences extends Component {
                 <Menu.Header>Profile</Menu.Header>
 
                 <Menu.Menu>
-                  <Menu.Item name="Edit Profile" active={ activeItem === 'Edit Profile' } onClick={this.handleItemClick} />
-                  <Menu.Item name="View Profile" active={ activeItem === 'View Profile' } onClick={this.handleItemClick} />
+                  <Menu.Item name="Edit Profile" active={ activeItem === 'Edit Profile' } onClick={ this.handleItemClick } />
+                  <Menu.Item name="View Profile" active={ activeItem === 'View Profile' } onClick={ this.handleItemClick } />
                 </Menu.Menu>
               </Menu.Item>
               <Menu.Item>
                 <Menu.Header>Settings</Menu.Header>
 
                 <Menu.Menu>
-                  <Menu.Item name="Change..." active={ activeItem === 'Change...' } onClick={this.handleItemClick} />
+                  <Menu.Item name="Change..." active={ activeItem === 'Change...' } onClick={ this.handleItemClick } />
                 </Menu.Menu>
               </Menu.Item>
             </Menu>
@@ -40,13 +40,13 @@ class Preferences extends Component {
         </Row>
 
       </div>
-    )
+    );
   }
 }
 function mapStateToProps(state) {
   return {
     boldr: state.boldr,
-    auth: state.auth
+    auth: state.auth,
   };
 }
 

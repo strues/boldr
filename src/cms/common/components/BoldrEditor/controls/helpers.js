@@ -34,7 +34,7 @@ export const BLOCK_TYPES = [
   { label: 'UL', style: 'unordered-list-item', icon: <UnorderedList /> },
   { label: 'OL', style: 'ordered-list-item', icon: <OrderedList /> },
   { label: 'Blockquote', style: 'blockquote', icon: <Blockquote /> },
-  { label: 'Code Block', style: 'code-block', icon: <Codeblock /> }
+  { label: 'Code Block', style: 'code-block', icon: <Codeblock /> },
 ];
 
 export const INLINE_STYLES = [
@@ -42,7 +42,7 @@ export const INLINE_STYLES = [
   { label: 'Italic', style: 'ITALIC', icon: <Italic /> },
   { label: 'Underline', style: 'UNDERLINE', icon: <Underline /> },
   { label: 'Monospace', style: 'CODE', icon: <Monospace /> },
-  { label: 'Link', style: 'LINK', icon: <Link /> }
+  { label: 'Link', style: 'LINK', icon: <Link /> },
 ];
 
 export const BLOCK_CONTROLS = BLOCK_TYPES.map(type => type.label);

@@ -8,7 +8,7 @@ import PostListing from './PostListing';
 
 export type Props = {
   posts: Array<Post>,
-  isLoading: ?Boolean,
+  loading: ?Boolean,
   fetchPosts: Function
 };
 
@@ -17,7 +17,7 @@ export type Props = {
     const promises = [];
     promises.push(dispatch(fetchPosts()));
     return Promise.all(promises);
-  }
+  },
 }])
 class PostListingContainer extends Component {
   componentDidMount() {
@@ -33,7 +33,7 @@ class PostListingContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    posts: getPosts(state)
+    posts: getPosts(state),
   };
 };
 

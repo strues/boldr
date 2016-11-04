@@ -20,7 +20,7 @@ export type Props = {
     const promises = [];
     promises.push(dispatch(loadSiteMembers()));
     return Promise.all(promises);
-  }
+  },
 }])
 class Members extends Component {
   constructor(props: Props) {
@@ -46,7 +46,7 @@ class Members extends Component {
       first_name: values.first_name,
       last_name: values.last_name,
       role: values.role,
-      id: this.state.userId
+      id: this.state.userId,
     };
 
     this.props.updateMember(userData);
@@ -74,7 +74,7 @@ class Members extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     members: state.members,
-    selected: state.members.selected
+    selected: state.members.selected,
   };
 };
 

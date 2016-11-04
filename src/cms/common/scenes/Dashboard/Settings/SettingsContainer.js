@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-connect';
 import { fetchSettingsIfNeeded, getSettings } from 'state/index';
+import type { Setting } from 'types/models';
 import Settings from './Settings';
 
 export type Props = {
   boldr?: Object,
-  allSettings: Array<Object>,
+  allSettings: Array<Setting>,
   fetchSettingsIfNeeded: () => void
 };
 
@@ -15,7 +16,7 @@ export type Props = {
     const promises = [];
     promises.push(dispatch(fetchSettingsIfNeeded()));
     return Promise.all(promises);
-  }
+  },
 }])
 class SettingsContainer extends Component {
   componentDidMount() {
@@ -30,7 +31,7 @@ class SettingsContainer extends Component {
 }
 const mapStateToProps = (state, ownProps) => {
   return {
-    allSettings: getSettings(state)
+    allSettings: getSettings(state),
   };
 };
 

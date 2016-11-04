@@ -72,9 +72,9 @@ EditMemberForm.propTypes = {
   reset: PropTypes.func,
   submitting: PropTypes.bool,
   fields: PropTypes.object,
-  pristine: PropTypes.bool
+  pristine: PropTypes.bool,
 };
 
 export default reduxForm({
-  form: 'editMemberForm'
+  form: 'editMemberForm',
 })(EditMemberForm);

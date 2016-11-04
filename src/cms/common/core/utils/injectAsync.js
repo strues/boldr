@@ -8,6 +8,6 @@ export function injectAsyncReducer(store) {
 }
 export function getAsyncInjectors(store) {
   return {
-    injectReducer: injectAsyncReducer(store)
+    injectReducer: injectAsyncReducer(store),
   };
 }

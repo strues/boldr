@@ -7,7 +7,7 @@ const strategyOpts = {
   clientID: conf.get('social.github.id'),
   clientSecret: conf.get('social.github.secret'),
   callbackURL: '/api/v1/auth/github/callback',
-  passReqToCallback: true
+  passReqToCallback: true,
 };
 
 export default function configureGithub(User) {
@@ -22,7 +22,7 @@ export default function configureGithub(User) {
         await user.$relatedQuery('token').insert({
           id: uuid.v4(),
           user_verification_token: accessToken,
-          user_id: user.id
+          user_id: user.id,
         });
 
         await User.query().update({
@@ -30,7 +30,7 @@ export default function configureGithub(User) {
           first_name: profile.displayName,
           avatar_url: user.avatar_url || profile._json.avatar_url,
           location: profile._json.location,
-          website: profile._json.blog
+          website: profile._json.blog,
         }).where('id', req.user.id);
         return done(user);
       }
@@ -52,13 +52,13 @@ export default function configureGithub(User) {
         avatar_url: profile._json.avatar_url,
         location: profile._json.location,
         website: profile._json.blog,
-        verified: true
+        verified: true,
       });
       await newUser.$relatedQuery('role').relate({ id: 1 });
       await newUser.$relatedQuery('token').insert({
         id: uuid.v4(),
         oauth_token: accessToken,
-        user_id: newUser.id
+        user_id: newUser.id,
       });
       return done(newUser);
     }

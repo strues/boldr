@@ -20,7 +20,7 @@ export type Props = {
     const promises = [];
     promises.push(dispatch(fetchPostsIfNeeded()));
     return Promise.all(promises);
-  }
+  },
 }])
 class PostList extends Component {
   constructor(props: Props) {
@@ -76,7 +76,7 @@ class PostList extends Component {
 const mapStateToProps = (state) => {
   return {
     posts: getPosts(state),
-    isLoading: state.posts.isLoading
+    loading: state.posts.loading,
   };
 };
 export default connect(mapStateToProps, { fetchPostsIfNeeded, deletePost })(PostList);

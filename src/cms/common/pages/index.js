@@ -5,5 +5,5 @@ import Home from './Home';
 export {
   About,
   Error404,
-  Home
+  Home,
 };

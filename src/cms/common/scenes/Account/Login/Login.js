@@ -75,7 +75,7 @@ class Login extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     auth: state.auth,
-    redirect: ownProps.location.query.redirect
+    redirect: ownProps.location.query.redirect,
   };
 };
 

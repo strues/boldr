@@ -28,7 +28,7 @@ class NewPost extends Component {
       title: values.title,
       tags: values.tags,
       status: values.status,
-      content: values.content
+      content: values.content,
     };
     this.props.dispatch(createPost(postData));
   }
@@ -48,7 +48,7 @@ class NewPost extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.posts
+    posts: state.posts,
   };
 };
 export default connect(mapStateToProps, { createPost })(NewPost);

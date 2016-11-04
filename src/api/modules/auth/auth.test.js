@@ -8,12 +8,12 @@ function request() {
 
 const loginData = {
   email: 'admin@boldr.io',
-  password: 'password'
+  password: 'password',
 };
 
 const badLoginData = {
   email: 'admin@boldr.io',
-  password: 'fa'
+  password: 'fa',
 };
 
 describe('API -- Auth', () => {
@@ -79,7 +79,7 @@ describe('API -- Auth', () => {
         .set('Accept', 'application/json')
         .send({
           email: 'admin@boldr.io',
-          password: 'test'
+          password: 'test',
         })
         .expect('Content-Type', /json/)
         .expect(500, done);
@@ -101,7 +101,7 @@ describe('API -- Auth', () => {
         linkedin_profile: faker.internet.url(),
         github_profile: faker.internet.url(),
         google_profile: faker.internet.url(),
-        twitter_profile: faker.internet.url()
+        twitter_profile: faker.internet.url(),
       };
       request()
         .post('/api/v1/auth/signup')
@@ -125,7 +125,7 @@ describe('API -- Auth', () => {
        .post('/api/v1/auth/login')
        .send({
          email: 'admin@boldr.io',
-         password: 'password'
+         password: 'password',
        })
        .expect(200)
        .expect('Content-Type', /json/)

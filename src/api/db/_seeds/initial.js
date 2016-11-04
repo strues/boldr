@@ -14,7 +14,7 @@ const tables = [
   'link',
   'page',
   'navigation_link',
-  'setting'
+  'setting',
 ];
 
 exports.seed = function(knex, Promise) {
@@ -22,16 +22,16 @@ exports.seed = function(knex, Promise) {
     .then(() => Promise.all([
       knex('role').insert({
         name: 'Member',
-        description: 'A verified user without special privileges'
+        description: 'A verified user without special privileges',
       }),
       knex('role').insert({
         name: 'Staff',
-        description: 'Allows access to the CMS dashboard.'
+        description: 'Allows access to the CMS dashboard.',
       }),
       knex('role').insert({
         name: 'Admin',
-        description: 'Complete control over the CMS'
-      })
+        description: 'Complete control over the CMS',
+      }),
     ]))
     .then(() => Promise.all([
       knex('user').insert({
@@ -52,7 +52,7 @@ exports.seed = function(knex, Promise) {
         github_profile: 'https://www.github.com',
         google_profile: 'https://www.google.com',
         twitter_profile: 'https://www.twitter.com',
-        verified: true
+        verified: true,
       }),
       knex('user').insert({
         id: 'f4d869a6-1a75-469b-a9cc-965c552929e4',
@@ -72,7 +72,7 @@ exports.seed = function(knex, Promise) {
         github_profile: 'https://www.github.com',
         google_profile: 'https://www.google.com',
         twitter_profile: 'https://www.twitter.com',
-        verified: true
+        verified: true,
       }),
       knex('user').insert({
         id: 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f',
@@ -92,34 +92,34 @@ exports.seed = function(knex, Promise) {
         github_profile: 'https://www.github.com',
         google_profile: 'https://www.google.com',
         twitter_profile: 'https://www.twitter.com',
-        verified: true
-      })
+        verified: true,
+      }),
     ]))
     .then(() => Promise.all([
       knex('user_role').insert({
         user_id: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
-        role_id: 3
+        role_id: 3,
       }),
       knex('user_role').insert({
         user_id: 'f4d869a6-1a75-469b-a9cc-965c552929e4',
-        role_id: 1
+        role_id: 1,
       }),
       knex('user_role').insert({
         user_id: 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f',
-        role_id: 2
-      })
+        role_id: 2,
+      }),
     ]))
     .then(() => Promise.all([
       knex('tag').insert({
         name: 'javascript',
         uuid: 'e00b70ec-2032-4e3f-8374-4ad544b318df',
-        description: 'Something something JS'
+        description: 'Something something JS',
       }),
       knex('tag').insert({
         name: 'apple',
         uuid: '4fa3b033-11c5-4500-af00-f094ef63d546',
-        description: 'Stuff about stuff.'
-      })
+        description: 'Stuff about stuff.',
+      }),
     ]))
     .then(() => Promise.all([
       knex('post').insert({
@@ -139,7 +139,7 @@ exports.seed = function(knex, Promise) {
         'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when' +
         'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when',
         status: 'published',
-        user_id: '1b062e26-df71-48ce-b363-4ae9b966e7a0'
+        user_id: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
       }),
       knex('post').insert({
         id: 'cb61bbae-c91e-4014-b665-3485734b88fb',
@@ -158,7 +158,7 @@ exports.seed = function(knex, Promise) {
         'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when' +
         'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when',
         status: 'published',
-        user_id: 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f'
+        user_id: 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f',
       }),
       knex('post').insert({
         id: 'ab33a0ca-b349-4cf8-947f-94f415149492',
@@ -177,22 +177,22 @@ exports.seed = function(knex, Promise) {
         'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when' +
         'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when',
         status: 'published',
-        user_id: '1b062e26-df71-48ce-b363-4ae9b966e7a0'
-      })
+        user_id: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
+      }),
     ]))
     .then(() => Promise.all([
       knex('post_tag').insert({
         post_id: '5c9ed236-79f0-4ff7-93bd-2815f06c74b4',
-        tag_id: 2
+        tag_id: 2,
       }),
       knex('post_tag').insert({
         post_id: 'cb61bbae-c91e-4014-b665-3485734b88fb',
-        tag_id: 1
+        tag_id: 1,
       }),
       knex('post_tag').insert({
         post_id: 'ab33a0ca-b349-4cf8-947f-94f415149492',
-        tag_id: 2
-      })
+        tag_id: 2,
+      }),
     ]))
     .then(() => Promise.all([
       knex('navigation').insert({
@@ -201,8 +201,8 @@ exports.seed = function(knex, Promise) {
         label: 'main',
         restricted: false,
         location: 'header',
-        dropdown: {}
-      })
+        dropdown: {},
+      }),
     ]))
     .then(() => Promise.all([
       knex('link').insert({
@@ -211,7 +211,7 @@ exports.seed = function(knex, Promise) {
         label: 'about',
         position: 1,
         href: '/about',
-        icon: 'info'
+        icon: 'info',
       }),
       knex('link').insert({
         name: 'Blog',
@@ -219,18 +219,18 @@ exports.seed = function(knex, Promise) {
         label: 'blog',
         position: 2,
         href: '/blog',
-        icon: 'info'
-      })
+        icon: 'info',
+      }),
     ]))
     .then(() => Promise.all([
       knex('navigation_link').insert({
         navigation_id: 1,
-        link_id: 1
+        link_id: 1,
       }),
       knex('navigation_link').insert({
         navigation_id: 1,
-        link_id: 2
-      })
+        link_id: 2,
+      }),
     ]))
     .then(() => Promise.all([
       knex('page').insert({
@@ -239,47 +239,47 @@ exports.seed = function(knex, Promise) {
         url: 'home',
         layout: {
           showHero: true,
-          showPosts: true
+          showPosts: true,
         },
         data: {},
         status: 'published',
         restricted: false,
         meta: {
           title: 'Home',
-          description: 'The home page'
-        }
-      })
+          description: 'The home page',
+        },
+      }),
     ]))
     .then(() => Promise.all([
       knex('setting').insert({
         key: 'site_name',
         value: 'Boldr',
-        description: 'The website name.'
+        description: 'The website name.',
       }),
       knex('setting').insert({
         key: 'site_url',
         value: 'http://localhost:3000',
-        description: 'The address used to access your website.'
+        description: 'The address used to access your website.',
       }),
       knex('setting').insert({
         key: 'site_logo',
         value: 'https://boldr.io/logo.png',
-        description: 'The logo is displayed in the header area.'
+        description: 'The logo is displayed in the header area.',
       }),
       knex('setting').insert({
         key: 'site_description',
         value: 'A modern CMS',
-        description: 'Meta header for search results.'
+        description: 'Meta header for search results.',
       }),
       knex('setting').insert({
         key: 'favicon',
         value: 'https://boldr.io/favicon.ico',
-        description: 'Favicon to use for your website.'
+        description: 'Favicon to use for your website.',
       }),
       knex('setting').insert({
         key: 'google_analytics',
         value: 'UA-323432',
-        description: 'Google Analytics tracking code'
-      })
+        description: 'Google Analytics tracking code',
+      }),
     ]));
 };

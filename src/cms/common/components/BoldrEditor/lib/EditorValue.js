@@ -38,7 +38,7 @@ export default class EditorValue {
     const editorState = EditorState.push(
       this._editorState,
       fromString(markup, format),
-      'secondary-paste'
+      'secondary-paste',
     );
     return new EditorValue(editorState, { [format]: markup });
   }
@@ -69,7 +69,7 @@ function toString(editorState: EditorState, format: string): string {
     //   return stateToMarkdown(contentState);
     // }
     default: {
-      throw new Error('Format not supported: ' + format);
+      throw new Error(`Format not supported: ${format}`);
     }
   }
 }
@@ -83,7 +83,7 @@ function fromString(markup: string, format: string): ContentState {
     //   return stateFromMarkdown(markup);
     // }
     default: {
-      throw new Error('Format not supported: ' + format);
+      throw new Error(`Format not supported: ${format}`);
     }
   }
 }

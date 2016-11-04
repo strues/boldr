@@ -27,5 +27,5 @@ export {
   Row,
   S3Uploader,
   TextField,
-  Widget
+  Widget,
 };

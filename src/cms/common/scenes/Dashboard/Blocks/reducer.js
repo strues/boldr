@@ -11,7 +11,7 @@ const FETCH_BLOCKS_FAILURE = '@boldr/dashboard/FETCH_BLOCKS_FAILURE';
 const INITIAL_STATE = {
   loaded: false,
   error: null,
-  blocks: []
+  blocks: [],
 };
 /**
  * Blocks Reducer
@@ -23,7 +23,7 @@ export default function blocksReducer(state = INITIAL_STATE, action = {}) {
     case FETCH_BLOCKS_SUCCESS:
       return {
         ...state,
-        blocks: action.result
+        blocks: action.result,
       };
 
     default:
@@ -38,6 +38,6 @@ export function areBlocksLoaded(globalState) {
 export function fetchBlocks() {
   return {
     types: [FETCH_BLOCKS_REQUEST, FETCH_BLOCKS_SUCCESS, FETCH_BLOCKS_FAILURE],
-    promise: (client) => client.get(`${API_BLOCKS}`)
+    promise: (client) => client.get(`${API_BLOCKS}`),
   };
 }

@@ -18,7 +18,7 @@ const BlogContainer = (props: { children: ReactChildren }) => {
 const mapStateToProps = (state) => {
   return {
     posts: state.posts,
-    loading: state.posts.isLoading
+    loading: state.posts.loading,
   };
 };
 

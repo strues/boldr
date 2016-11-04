@@ -25,7 +25,7 @@ export async function addSetting(req, res) {
   const settingPayload = {
     key: req.body.key,
     value: req.body.value,
-    description: req.body.description
+    description: req.body.description,
   };
 
   const setting = await Setting.query().insert(settingPayload);

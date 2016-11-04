@@ -75,7 +75,7 @@ class PrimaryHeader extends PureComponent {
         className="ph-menu__item"
       >
         <Link className="ph-menu__item-link" to={ item.href }>{ item.name }</Link>
-      </Menu.Item>
+      </Menu.Item>,
     );
 
     return (

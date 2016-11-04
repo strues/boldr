@@ -11,12 +11,12 @@ exports.up = function(knex, Promise) {
       table.timestamp('updated_at').defaultTo(knex.fn.now());
 
       table.index('label');
-    })
+    }),
   ]);
 };
 
 exports.down = function(knex, Promise) {
   return Promise.all([
-    knex.schema.dropTableIfExists('block')
+    knex.schema.dropTableIfExists('block'),
   ]);
 };

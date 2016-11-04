@@ -6,7 +6,7 @@ beforeEach(() => {
   res = {
     status: jest.fn(() => res),
     json: jest.fn(() => res),
-    end: jest.fn(() => res)
+    end: jest.fn(() => res),
   };
 });
 
