@@ -51,6 +51,14 @@ function getJsFilesFromSrcDir(srcPath) {
 }
 
 const ignoreModules = [
+  'enzyme',
+  'scenes',
+  'core',
+  'components',
+  'theme',
+  'state',
+  'react-addons-test-utils',
+  'chai',
   'enzyme-to-json',
 ];
 function buildVendorDLL() {

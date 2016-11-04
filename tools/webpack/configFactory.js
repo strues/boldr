@@ -1,4 +1,5 @@
 const path = require('path');
+const os = require('os');
 const globSync = require('glob').sync;
 const webpack = require('webpack');
 const AssetsPlugin = require('assets-webpack-plugin');
@@ -104,6 +105,10 @@ function webpackConfigFactory({ target, mode }, { json }) {
       libraryTarget: ifNodeTarget('commonjs2', 'var'),
     },
     resolve: {
+      mainFields: ifNodeTarget(
+        [ "module", "jsnext:main", "webpack", "main" ],
+        [ "module", "jsnext:main", "webpack", "browser", "web", "browserify", "main" ]
+      ),
       // These extensions are tried when resolving a file.
       extensions: [
         '.js',
@@ -200,7 +205,7 @@ function webpackConfigFactory({ target, mode }, { json }) {
           path: 'babel',
           query: {
             babelrc: false,
-            cacheDirectory: './.wp_cache',
+            cacheDirectory: path.resolve(os.tmpdir(), 'boldr', 'babelc'),
             presets: [['latest', { 'es2015': { 'modules': false }}], 'react'],
             plugins: removeEmpty([
               'transform-class-properties',
