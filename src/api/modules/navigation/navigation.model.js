@@ -13,11 +13,11 @@ class Navigation extends BaseModel {
           from: 'navigation.id',
           through: {
             from: 'navigation_link.navigation_id',
-            to: 'navigation_link.link_id'
+            to: 'navigation_link.link_id',
           },
-          to: 'link.id'
-        }
-      }
+          to: 'link.id',
+        },
+      },
     };
   }
 }

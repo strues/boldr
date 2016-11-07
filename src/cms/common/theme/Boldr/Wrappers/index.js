@@ -5,5 +5,5 @@ import FooterWrapper from './FooterWrapper';
 export {
   HeaderWrapper,
   ContentWrapper,
-  FooterWrapper
+  FooterWrapper,
 };

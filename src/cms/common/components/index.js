@@ -9,7 +9,7 @@ import { Grid, Col, Row } from './Layout';
 import Notifications from './Notification';
 import PrimaryHeader from './PrimaryHeader';
 import S3Uploader from './s3Uploader';
-import TextField from './FormComponents/TextField';
+import { TextField, SelectField } from './FormComponents';
 import Widget from './Widget';
 
 export {
@@ -27,5 +27,6 @@ export {
   Row,
   S3Uploader,
   TextField,
-  Widget
+  SelectField,
+  Widget,
 };

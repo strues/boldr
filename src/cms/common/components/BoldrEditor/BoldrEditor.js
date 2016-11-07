@@ -2,14 +2,14 @@
 /* @flow weak */
 import React, { Component } from 'react';
 import {
-  AtomicBlockUtils, convertFromRaw, convertToRaw, CompositeDecorator, Editor,
-  EditorState, Entity, RichUtils
+  AtomicBlockUtils, convertFromRaw, CompositeDecorator, Editor,
+  EditorState, Entity, RichUtils,
+  // $FlowIssue
 } from 'draft-js';
-import type { ContentBlock } from 'draft-js';
 import { stateToHTML } from 'draft-js-export-html';
 import { stateFromHTML } from 'draft-js-import-html';
 import {
-  CustomBlockControls, InlineStyleControls, BlockStyleControls, BLOCK_CONTROLS, INLINE_CONTROLS
+  CustomBlockControls, InlineStyleControls, BlockStyleControls, BLOCK_CONTROLS, INLINE_CONTROLS,
 } from './controls';
 import linkDecorator from './decorators/link';
 import EditorValue from './lib/EditorValue';
@@ -45,13 +45,11 @@ type State = {
 };
 
 class BoldrEditor extends Component {
-  props: Props;
-  state: State;
   constructor(props: Props) {
     super(props);
 
     const decorator = new CompositeDecorator([
-      linkDecorator
+      linkDecorator,
     ]);
 
     let editorState = EditorState.createEmpty(decorator);
@@ -66,7 +64,7 @@ class BoldrEditor extends Component {
       urlValue: '',
       showCustomBlockInput: false,
       customBlockType: null,
-      customBlockData: {}
+      customBlockData: {},
     };
 
     (this: any).onChange = this.onChange.bind(this);
@@ -89,7 +87,7 @@ class BoldrEditor extends Component {
     (this: any).renderBlock = this.renderBlock.bind(this);
   }
 
-
+  state: State;
   componentWillReceiveProps(newProps: Object) {
     const contentState = this.state.editorState.getCurrentContent();
 
@@ -99,6 +97,7 @@ class BoldrEditor extends Component {
     }
   }
 
+  props: Props;
   onFocus = (e: Object) => {
     this.refs.editor.focus();
     this.props.onFocus(e);
@@ -125,8 +124,8 @@ class BoldrEditor extends Component {
     (this: any).onChange(
       RichUtils.toggleBlockType(
         this.state.editorState,
-        blockType
-      )
+        blockType,
+      ),
     );
   }
 
@@ -142,8 +141,8 @@ class BoldrEditor extends Component {
       this.onChange(
         RichUtils.toggleInlineStyle(
           this.state.editorState,
-          inlineStyle
-        )
+          inlineStyle,
+        ),
       );
     }
   }
@@ -155,7 +154,7 @@ class BoldrEditor extends Component {
       editorState: this._insertCustomBlock(
           this.state.editorState,
           this.state.customBlockType,
-          data || this.state.customBlockData
+          data || this.state.customBlockData,
         ),
       showCustomBlockInput: false,
     }, () => { // $FlowIssue
@@ -195,27 +194,13 @@ class BoldrEditor extends Component {
       });
     }
   }
-
-  renderBlock(block) {
-    if (block.getType() === 'atomic') {
-      const entityType = Entity.get(block.getEntityAt(0)).getType();
-      // $FlowIssue
-      return this.props.customBlocks[entityType] ? this.props.customBlocks[entityType].getBlockRenderer() : null;
-    }
-
-      // fall back to default renderer
-    return null;
-  }
-
-  // Link setup
-
   /**
    * @private
    * @name _closeLinkPrompt
    * closes the link alert
    */
   closeLinkPrompt() {
-    this.setState({ showUrlInput: false, urlValue: '', }, () => {
+    this.setState({ showUrlInput: false, urlValue: '' }, () => {
       setTimeout(() => {
         (this: any).focus();
       }, 0);
@@ -233,8 +218,8 @@ class BoldrEditor extends Component {
       RichUtils.toggleLink(
         editorState,
         editorState.getSelection(),
-        entityKey
-      )
+        entityKey,
+      ),
     );
 
     this.closeLinkPrompt();
@@ -286,6 +271,16 @@ class BoldrEditor extends Component {
     (this: any).onChange(RichUtils.toggleLink(editorState, selection, null));
   }
 
+  renderBlock(block) {
+    if (block.getType() === 'atomic') {
+      const entityType = Entity.get(block.getEntityAt(0)).getType();
+      // $FlowIssue
+      return this.props.customBlocks[entityType] ? this.props.customBlocks[entityType].getBlockRenderer() : null;
+    }
+
+      // fall back to default renderer
+    return null;
+  }
   /**
    * @method renderControls
    */
@@ -300,7 +295,7 @@ class BoldrEditor extends Component {
           display={ this.props.controlDisplay }
           key="block-controls"
           onToggle={ (this: any).toggleBlockType }
-        />
+        />,
       );
     }
     if (this.props.inlineControls) {
@@ -311,7 +306,7 @@ class BoldrEditor extends Component {
           controls={ this.props.inlineControls }
           display={ this.props.controlDisplay }
           key="inline-controls"
-        />
+        />,
       );
     }
 
@@ -324,7 +319,7 @@ class BoldrEditor extends Component {
           display={ this.props.controlDisplay }
           key="custom-block-controls"
           onClick={ (this: any).toggleCustomBlockInput }
-        />
+        />,
       );
     }
 
@@ -345,7 +340,8 @@ class BoldrEditor extends Component {
       }
     }
 
-    let urlInput;
+    let urlInput,
+      blockInput;
     if (this.state.showUrlInput) {
       urlInput = (
         <div className="DraftJSEditor-urlInput">
@@ -366,7 +362,7 @@ class BoldrEditor extends Component {
         </div>
       );
     }
-    let blockInput;
+
     if (this.state.showCustomBlockInput) { // $FlowIssue
       blockInput = this.props.customBlocks[this.state.customBlockType].renderInputForm.apply(
         this,
@@ -375,7 +371,7 @@ class BoldrEditor extends Component {
           (this: any).onBlockDataChange,
           (this: any).onBlockInputKeyDown,
           (this: any).confirmBlock,
-        ]
+        ],
       );
     }
     return (
@@ -383,7 +379,7 @@ class BoldrEditor extends Component {
         { !this.props.readOnly ? this.renderControls() : null }
         { !this.props.readOnly ? urlInput : null }
         { !this.props.readOnly ? blockInput : null }
-        <div className={ className } onClick={ (this: any).focus }>
+        <div className={ className } onClick={ (this: any).focus } role="form" tabIndex="0">
           <Editor ref="editor"
             { ...this.props }
             editorState={ editorState }
@@ -415,4 +411,6 @@ BoldrEditor.defaultProps = {
   spellCheck: true,
   stripPastedStyles: false,
 };
+
+
 export default BoldrEditor;

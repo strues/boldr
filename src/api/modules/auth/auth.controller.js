@@ -12,7 +12,7 @@ import {
   BadRequest,
   Conflict,
   UserNotVerifiedError,
-  signToken
+  signToken,
 } from '../../core';
 
 const debug = require('debug')('boldr:auth:controller');
@@ -54,7 +54,7 @@ async function register(req, res, next) {
     linkedin_profile: req.body.linkedin_profile,
     github_profile: req.body.github_profile,
     google_profile: req.body.google_profile,
-    twitter_profile: req.body.twitter_profile
+    twitter_profile: req.body.twitter_profile,
   };
   const checkExisting = await User.query().where('email', req.body.email);
   debug(checkExisting);
@@ -82,7 +82,7 @@ async function register(req, res, next) {
     const verificationEmail = await user.$relatedQuery('tokens')
       .insert({
         user_verification_token: verificationToken,
-        user_id: user.id
+        user_id: user.id,
       });
 
     if (!verificationEmail) {

@@ -27,7 +27,7 @@ let NavigationForm = (props: Props) => { // eslint-disable-line
   );
 };
 NavigationForm = reduxForm({
-  form: 'navigationForm'
+  form: 'navigationForm',
 })(NavigationForm);
 
 export default NavigationForm;

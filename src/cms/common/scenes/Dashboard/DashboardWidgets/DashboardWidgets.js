@@ -12,7 +12,7 @@ import ActivityWidget from './components/ActivityWidget';
     const promises = [];
     promises.push(dispatch(loadSiteActivity()));
     return Promise.all(promises);
-  }
+  },
 }])
 class DashboardWidgets extends Component {
   componentDidMount() {
@@ -44,7 +44,7 @@ class DashboardWidgets extends Component {
 
 function mapStateToProps(state) {
   return {
-    activities: state.dashboard.activities
+    activities: state.dashboard.activities,
   };
 }
 export default connect(mapStateToProps, { loadSiteActivity })(DashboardWidgets);

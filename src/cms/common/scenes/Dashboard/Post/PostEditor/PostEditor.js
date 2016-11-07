@@ -19,7 +19,7 @@ class PostEditor extends Component {
     (this: any).handleSubmit = this.handleSubmit.bind(this);
   }
   state: Object = {
-    editing: true
+    editing: true,
   };
 
   props: Props;
@@ -30,7 +30,7 @@ class PostEditor extends Component {
       status: values.status,
       content: values.content,
       id: this.props.currentPost.id || '',
-      origSlug: this.props.params.slug || ''
+      origSlug: this.props.params.slug || '',
     };
     this.props.updatePost(postData);
   }
@@ -51,7 +51,7 @@ class PostEditor extends Component {
 const mapStateToProps = (state, ownProps) => {
   return {
     posts: state.posts,
-    currentPost: state.posts.bySlug[ownProps.params.slug]
+    currentPost: state.posts.bySlug[ownProps.params.slug],
   };
 };
 export default connect(mapStateToProps, { updatePost })(PostEditor);

@@ -12,8 +12,8 @@ class Attachment extends BaseModel {
         modelClass: User,
         join: {
           from: 'attachment.user_id',
-          to: 'user.id'
-        }
+          to: 'user.id',
+        },
       },
       posts: {
         relation: Model.ManyToManyRelation,
@@ -22,11 +22,11 @@ class Attachment extends BaseModel {
           from: 'attachment.id',
           through: {
             from: 'post_attachment.attachment_id',
-            to: 'post_attachment.post_id'
+            to: 'post_attachment.post_id',
           },
-          to: 'post.id'
-        }
-      }
+          to: 'post.id',
+        },
+      },
     };
   }
 }

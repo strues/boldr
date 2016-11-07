@@ -6,9 +6,9 @@ import * as t from './constants';
 export const getSettings = createSelector(
   [
     (state) => state.boldr.settings.keys,
-    (state) => state.boldr.settings.byKey
+    (state) => state.boldr.settings.byKey,
   ],
-  (keys, byKey) => keys.map(key => byKey[key])
+  (keys, byKey) => keys.map(key => byKey[key]),
 );
 
 const byKey = (state = {}, action) => {
@@ -20,7 +20,7 @@ const byKey = (state = {}, action) => {
       });
       return {
         ...state,
-        ...action.payload.entities.settings
+        ...action.payload.entities.settings,
       };
 
     case t.EDIT_SETTING:
@@ -59,7 +59,7 @@ const keys = (state = [], action) => {
 
 const settingsReducer = combineReducers({
   byKey,
-  keys
+  keys,
 });
 
 export function isLoaded(globalState) {

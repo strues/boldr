@@ -4,13 +4,13 @@ import {
   logout,
   checkAuth,
   forgotPassword,
-  resetPassword
+  resetPassword,
 } from './dux/auth';
 
 import {
   notificationSend,
   notificationDismiss,
-  notificationClear
+  notificationClear,
 } from './dux/notifications';
 
 import {
@@ -18,7 +18,7 @@ import {
   fetchPosts,
   createPost,
   deletePost,
-  updatePost
+  updatePost,
 } from './dux/post';
 
 import { requestPostTags } from './dux/tag';
@@ -31,7 +31,7 @@ import {
   updateBoldrSettings,
   fetchPagesIfNeeded,
   fetchPages,
-  fetchPageByUrl
+  fetchPageByUrl,
 } from './dux/boldr/actions';
 
 import {
@@ -43,7 +43,8 @@ import {
   getByLabel,
   getNavs,
   isNavLoaded,
-  arePagesLoaded
+  arePagesLoaded,
+  createSelector,
 } from './selectors';
 
 export {
@@ -78,5 +79,6 @@ export {
   getByLabel,
   getNavs,
   arePagesLoaded,
-  isNavLoaded
+  isNavLoaded,
+  createSelector,
 };

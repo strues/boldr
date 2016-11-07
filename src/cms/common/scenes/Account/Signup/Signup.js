@@ -12,7 +12,7 @@ import SignupForm from './SignupForm';
 type Props = {
   signup: () => void,
   handleOnSubmit: () => void,
-  isLoading: Boolean,
+  loading: Boolean,
   auth: Object
 };
 
@@ -31,7 +31,7 @@ class Signup extends Component {
       password: values.password,
       first_name: values.first_name,
       last_name: values.last_name,
-      display_name: values.display_name
+      display_name: values.display_name,
     });
   }
 
@@ -70,7 +70,7 @@ class Signup extends Component {
 
 function mapStateToProps({ auth }) {
   return {
-    auth
+    auth,
   };
 }
 

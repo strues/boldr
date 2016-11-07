@@ -5,7 +5,6 @@
  */
 import { combineReducers } from 'redux';
 import { push } from 'react-router-redux';
-import * as api from '../../../core/services/api';
 import navReducer from './nav';
 import pagesReducer from './pages';
 import settingsReducer from './settings';
@@ -21,14 +20,14 @@ export function goTo(pathname, options = {}) {
   return push({
     pathname,
     search: options.search,
-    state: options.state
+    state: options.state,
   });
 }
 
 const boldrReducer = combineReducers({
   nav: navReducer,
   settings: settingsReducer,
-  pages: pagesReducer
+  pages: pagesReducer,
 });
 
 export default boldrReducer;

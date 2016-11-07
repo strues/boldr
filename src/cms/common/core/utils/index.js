@@ -41,7 +41,7 @@ export function getOffset(el) {
   const rect = el.getBoundingClientRect();
   return {
     left: rect.left + getScrollProp('scrollLeft'),
-    top: rect.top + getScrollProp('scrollTop')
+    top: rect.top + getScrollProp('scrollTop'),
   };
 }
 
@@ -58,7 +58,7 @@ export function getTouchOffset(event) {
   const { clientX, clientY } = event.changedTouches ? event.changedTouches[0] : event;
   return {
     offsetX: clientX - rect.left,
-    offsetY: clientY - rect.top
+    offsetY: clientY - rect.top,
   };
 }
 
@@ -106,7 +106,7 @@ export function animate(
   startValue,
   currentValue,
   finalValue,
-  next
+  next,
 ) {
   elapsedTime += increment;
   el.style[styleName] = `${easeInOut(elapsedTime, startValue, finalValue, transitionTime)}px`;

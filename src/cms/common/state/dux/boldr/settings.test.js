@@ -3,10 +3,10 @@ import settingsReducer from './settings';
 describe('Settings Duck', () => {
   it('Should return the initial state', () => {
     expect(
-        settingsReducer(undefined, {})
+        settingsReducer(undefined, {}),
       ).toEqual({
         byKey: {},
-        keys: []
+        keys: [],
       });
   });
 });

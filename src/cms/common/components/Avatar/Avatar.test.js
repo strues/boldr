@@ -7,7 +7,7 @@ import Avatar from './Avatar';
 describe('Avatar', () => {
   it('merges additional class names with md-avatar', () => {
     const avatar = TestUtils.renderIntoDocument(
-      <Avatar className="something-else">M</Avatar>
+      <Avatar className="something-else">M</Avatar>,
     );
 
     const avatarNode = ReactDOM.findDOMNode(avatar);
@@ -18,10 +18,10 @@ describe('Avatar', () => {
 
   it('renders an letter or an icon in the avatar content', () => {
     const iconAvatar = TestUtils.renderIntoDocument(
-      <Avatar icon={ <FontIcon>wat</FontIcon> } />
+      <Avatar icon={ <FontIcon>wat</FontIcon> } />,
     );
     const letterAvatar = TestUtils.renderIntoDocument(
-      <Avatar>M</Avatar>
+      <Avatar>M</Avatar>,
     );
 
     const iconAvatarNode = ReactDOM.findDOMNode(iconAvatar).querySelector('.md-avatar-content');
@@ -35,7 +35,7 @@ describe('Avatar', () => {
 
   it('renders an image tag if the src attribute is given', () => {
     const avatar = TestUtils.renderIntoDocument(
-      <Avatar src="../image.jpg" alt="Nothing" />
+      <Avatar src="../image.jpg" alt="Nothing" />,
     );
 
     const avatarNode = ReactDOM.findDOMNode(avatar);
@@ -49,7 +49,7 @@ describe('Avatar', () => {
 
   it('can apply a specific color suffix', () => {
     const avatar = TestUtils.renderIntoDocument(
-      <Avatar suffix="color-1">M</Avatar>
+      <Avatar suffix="color-1">M</Avatar>,
     );
 
     const avatarNode = ReactDOM.findDOMNode(avatar);
@@ -59,7 +59,7 @@ describe('Avatar', () => {
 
   it('can apply a random color with the random prop', () => {
     const avatar = TestUtils.renderIntoDocument(
-      <Avatar random>M</Avatar>
+      <Avatar random>M</Avatar>,
     );
 
     const avatarNode = ReactDOM.findDOMNode(avatar);
@@ -69,7 +69,7 @@ describe('Avatar', () => {
 
   it('can apply a random color with custom suffixes', () => {
     const avatar = TestUtils.renderIntoDocument(
-      <Avatar random suffixes={ ['wat-wat', 'oh-no'] }>M</Avatar>
+      <Avatar random suffixes={ ['wat-wat', 'oh-no'] }>M</Avatar>,
     );
 
     const avatarNode = ReactDOM.findDOMNode(avatar);
@@ -81,11 +81,11 @@ describe('Avatar', () => {
     const style = {
       // #fff
       color: 'rgb(255, 255, 255)',
-      display: 'block'
+      display: 'block',
     };
 
     const avatar = TestUtils.renderIntoDocument(
-      <Avatar style={ style }>M</Avatar>
+      <Avatar style={ style }>M</Avatar>,
     );
 
     const avatarNode = ReactDOM.findDOMNode(avatar);
@@ -100,7 +100,7 @@ describe('Avatar', () => {
     const onClick = jest.genMockFunction();
 
     const avatar = TestUtils.renderIntoDocument(
-      <Avatar onClick={ onClick } onMouseOver={ onMouseOver } onMouseLeave={ onMouseLeave } />
+      <Avatar onClick={ onClick } onMouseOver={ onMouseOver } onMouseLeave={ onMouseLeave } />,
     );
 
     const avatarNode = ReactDOM.findDOMNode(avatar);

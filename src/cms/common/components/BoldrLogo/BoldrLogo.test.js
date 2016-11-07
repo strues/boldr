@@ -3,6 +3,6 @@ import { shallow } from 'enzyme';
 import BoldrLogo from './BoldrLogo';
 
 it('<BoldrLogo /> renders the logo svg component', () => {
-    const wrapper = shallow(<BoldrLogo />);
-    expect(wrapper.find('#boldrlogo').length).toBe(1);
+  const wrapper = shallow(<BoldrLogo />);
+  expect(wrapper.find('#boldrlogo').length).toBe(1);
 });

@@ -16,7 +16,7 @@ import getRoutes from '../common/scenes';
 import ReactHotLoader from './components/ReactHotLoader';
 
 WebFontLoader.load({
-  google: { families: ['Work Sans:300,400,600'] }
+  google: { families: ['Work Sans:300,400,600'] },
 });
 
 const preloadedState = window.PRELOADED_STATE || {};
@@ -32,7 +32,7 @@ if (token) {
 // Get the DOM Element that will host our React application.
 const MOUNT_POINT = document.getElementById('app');
 const history = syncHistoryWithStore(browserHistory, store, {
-  selectLocationState: (state) => state.routing
+  selectLocationState: (state) => state.routing,
 });
 const routes = getRoutes(store, history);
 function renderApp() {
@@ -45,9 +45,13 @@ function renderApp() {
         <Router routes={ routes } history={ history } render={ renderRouter } key={ Math.random() } />
       </Provider>
     </ReactHotLoader>,
-    MOUNT_POINT
+    MOUNT_POINT,
   );
 }
+// if (process.env.NODE_ENV !== 'production') {
+//   const {whyDidYouUpdate} = require('why-did-you-update')
+//   whyDidYouUpdate(React)
+// }
 // The following is needed so that we can support hot reloading our application.
 if (process.env.NODE_ENV === 'development' && module.hot) {
   // Accept changes to this file for hot reloading.
@@ -58,7 +62,7 @@ if (process.env.NODE_ENV === 'development' && module.hot) {
     () => {
       unmountComponentAtNode(MOUNT_POINT);
       renderApp(require('../common/scenes').default);
-    }
+    },
   );
 }
 

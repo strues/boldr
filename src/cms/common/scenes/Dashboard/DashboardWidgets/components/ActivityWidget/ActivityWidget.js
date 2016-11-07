@@ -20,7 +20,7 @@ const ActivityWidget = (props) => {
                 <Feed.User>{ a.owner.display_name }</Feed.User> added { a.name }
               </Feed.Summary>
             </Feed.Content>
-          </Feed.Event>
+          </Feed.Event>,
         )
       }
       </Feed>

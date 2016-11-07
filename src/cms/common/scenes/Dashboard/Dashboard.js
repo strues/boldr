@@ -26,7 +26,7 @@ class Dashboard extends PureComponent {
       shadow: true,
       pullRight: false,
       touchHandleWidth: 20,
-      dragToggleDistance: 30
+      dragToggleDistance: 30,
     };
     (this: any).menuButtonClick = this.menuButtonClick.bind(this);
     (this: any).onSetOpen = this.onSetOpen.bind(this);
@@ -59,14 +59,14 @@ class Dashboard extends PureComponent {
       touchHandleWidth: this.state.touchHandleWidth,
       dragToggleDistance: this.state.dragToggleDistance,
       transitions: this.state.transitions,
-      onSetOpen: this.onSetOpen
+      onSetOpen: this.onSetOpen,
     };
 
     return (
       <Grid fluid>
         <Sidebar { ...sidebarProps }>
           <Titlebar title="Boldr" icon={
-            <Icon name="menu" onClick={ this.menuButtonClick } />
+            <Icon name="ellipsis vertical" onClick={ this.menuButtonClick } />
          }>
             <Col xs>
               <div>
@@ -84,7 +84,7 @@ function mapStateToProps(state) {
   return {
     router: state.router,
     dashboard: state.dashboard,
-    boldr: state.boldr
+    boldr: state.boldr,
   };
 }
 

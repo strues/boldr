@@ -27,12 +27,12 @@ StorageComponent.propTypes = {
   value: PropTypes.oneOfType([
     PropTypes.string,
     PropTypes.object,
-    PropTypes.array
+    PropTypes.array,
   ]),
   useRaw: PropTypes.bool,
   autoSave: PropTypes.bool,
   cache: PropTypes.object,
-  storage: PropTypes.object
+  storage: PropTypes.object,
 },
 
 Storage.defaultProps = DataStore.defaults;

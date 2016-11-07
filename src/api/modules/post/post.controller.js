@@ -47,7 +47,7 @@ export async function createPost(req, res, next) {
     excerpt: req.body.excerpt,
     content: req.body.content,
     feature_image: req.body.feature_image,
-    meta: req.body.meta
+    meta: req.body.meta,
   });
 
   await newPost.$relatedQuery('author').relate({ id: req.user.id });
@@ -63,7 +63,7 @@ export async function createPost(req, res, next) {
       debug(existingTag, 'existing tag found');
       const taggedPost = await PostTag.query().insert({
         tag_id: existingTag.id,
-        post_id: newPost.id
+        post_id: newPost.id,
       });
       debug(taggedPost);
     } else {
@@ -79,7 +79,7 @@ export async function createPost(req, res, next) {
     type: 1,
     data: { newPost },
     entry_id: newPost.id,
-    entry_table: 'post'
+    entry_table: 'post',
   });
   return res.status(201).json(newPost);
 }

@@ -29,8 +29,8 @@ if (conf.get('logger.console')) {
       json: false,
       colorize: true,
       level: 'debug',
-      timestamp: () => new Date().toLocaleString()
-    })
+      timestamp: () => new Date().toLocaleString(),
+    }),
   );
 }
 if (conf.get('logger.files')) {
@@ -40,8 +40,8 @@ if (conf.get('logger.files')) {
       timestamp: tsFormat,
       datePattern: conf.get('dateFormat'),
       prepend: true,
-      level: 'error'
-    })
+      level: 'error',
+    }),
   );
 }
 
@@ -50,7 +50,7 @@ logger.exitOnError = false;
 logger.stream = {
   write(message) {
     logger.info(message);
-  }
+  },
 };
 process.on('unhandledRejection', (reason, promise) => {
   logger.warn(`Unhandled rejection at ${promise}\n`, reason);

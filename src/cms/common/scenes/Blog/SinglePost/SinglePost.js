@@ -7,7 +7,7 @@ import PostSidebar from '../components/PostSidebar';
 import PostContent from '../components/PostContent';
 
 export type Props = {
-  isLoading: boolean,
+  loading: boolean,
   currentPost: Object,
 };
 
@@ -16,11 +16,11 @@ const SinglePost = (props: Props) => {
     bg: {
       backgroundImage: `url(${props.currentPost.feature_image})`,
       width: '100%',
-      paddingTop: '175px'
+      paddingTop: '175px',
     },
     offSet: {
-      height: '100%'
-    }
+      height: '100%',
+    },
   };
   return (
     <div style={ { paddingTop: '50px' } }>
@@ -43,7 +43,7 @@ const SinglePost = (props: Props) => {
 const mapStateToProps = (state, ownProps) => {
   return {
     posts: state.posts,
-    currentPost: state.posts.bySlug[ownProps.params.slug]
+    currentPost: state.posts.bySlug[ownProps.params.slug],
   };
 };
 

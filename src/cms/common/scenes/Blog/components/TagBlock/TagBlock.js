@@ -5,8 +5,8 @@ const TagBlock = (props) => {
   const styles = {
     wrapper: {
       display: 'flex',
-      flexWrap: 'wrap'
-    }
+      flexWrap: 'wrap',
+    },
   };
   if (!props.tags) {
     return <div>No tags</div>;
@@ -25,8 +25,8 @@ const TagBlock = (props) => {
 TagBlock.propTypes = {
   tags: React.PropTypes.arrayOf(React.PropTypes.shape({
     id: React.PropTypes.number,
-    name: React.PropTypes.name
-  }))
+    name: React.PropTypes.name,
+  })),
 };
 
 export default TagBlock;

@@ -12,7 +12,7 @@ describe('<HeaderWrapper />', () => {
       <HeaderWrapper>
         <div className="unique" />
       </HeaderWrapper>
-      </Provider>
+      </Provider>,
     );
     expect(wrapper.contains(<div className="unique" />)).toBe(true);
   });

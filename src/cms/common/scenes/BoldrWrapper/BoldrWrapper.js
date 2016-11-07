@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-connect';
 import type { ReactElement } from '../../types/react';
 import { Notifications } from '../../components/index';
@@ -14,10 +13,11 @@ import {
   fetchSettingsIfNeeded,
   fetchPagesIfNeeded,
   loadMainNav,
-  getByLabel
+  getByLabel,
 } from '../../state/index';
 
 import meta from '../../core/config/base';
+// $FlowIssue
 import '../../styles/main.scss';
 
 type Props = {
@@ -29,21 +29,6 @@ type Props = {
   settings: Object
 };
 
-@asyncConnect([{
-  promise: ({ store: { dispatch, getState } }) => {
-    const promises = [];
-    if (!areSettingsLoaded(getState())) {
-      promises.push(dispatch(fetchSettingsIfNeeded()));
-    }
-    if (!arePagesLoaded(getState())) {
-      promises.push(dispatch(fetchPagesIfNeeded()));
-    }
-    if (!isNavLoaded(getState())) {
-      promises.push(dispatch(loadMainNav()));
-    }
-    return Promise.all(promises);
-  }
-}])
 class BoldrWrapper extends Component {
   componentDidMount() {
     this.props.fetchSettingsIfNeeded();
@@ -62,14 +47,30 @@ class BoldrWrapper extends Component {
   }
 }
 
+const asyncProps = [{
+  promise: ({ store: { dispatch, getState } }) => {
+    const promises = [];
+    if (!areSettingsLoaded(getState())) {
+      promises.push(dispatch(fetchSettingsIfNeeded()));
+    }
+    if (!arePagesLoaded(getState())) {
+      promises.push(dispatch(fetchPagesIfNeeded()));
+    }
+    if (!isNavLoaded(getState())) {
+      promises.push(dispatch(loadMainNav()));
+    }
+    return Promise.all(promises);
+  },
+}];
 function mapStateToProps(state) {
   return {
     boldr: state.boldr,
     settings: getSettings(state),
     auth: state.auth,
     notifications: state.notifications,
-    navigation: getByLabel(state, 'main')
+    navigation: getByLabel(state, 'main'),
   };
 }
 
-export default connect(mapStateToProps, { fetchSettingsIfNeeded, fetchPagesIfNeeded, loadMainNav })(BoldrWrapper);
+export default asyncConnect(asyncProps, mapStateToProps, {
+  fetchSettingsIfNeeded, fetchPagesIfNeeded, loadMainNav })(BoldrWrapper);

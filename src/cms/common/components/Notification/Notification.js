@@ -27,7 +27,7 @@ const inline = {
   MozTransform: 'translatez(0)',
   msTransform: 'translatez(0)',
   OTransform: 'translatez(0)',
-  transform: 'translatez(0)'
+  transform: 'translatez(0)',
 };
 class Notification extends Component {
   constructor() {
@@ -74,7 +74,7 @@ class Notification extends Component {
 }
 
 Notification.defaultProps = {
-  kind: 'info'
+  kind: 'info',
 };
 
 Notification.propTypes = {
@@ -82,7 +82,7 @@ Notification.propTypes = {
   message: React.PropTypes.string.isRequired,
   kind: React.PropTypes.oneOf(['success', 'info', 'error', 'danger']).isRequired,
   onActionClick: React.PropTypes.func,
-  actionLabel: React.PropTypes.string
+  actionLabel: React.PropTypes.string,
 };
 
 export default Notification;

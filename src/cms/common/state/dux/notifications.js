@@ -18,7 +18,7 @@ export const notificationSend = (notification) => {
       setTimeout(() => {
         dispatch({
           type: NOTIFICATION_DISMISS,
-          payload: payload.id
+          payload: payload.id,
         });
       }, payload.dismissAfter);
     }
@@ -56,7 +56,7 @@ export default function notificationReducer(state = [], action) {
       return [action.payload, ...state];
     case NOTIFICATION_DISMISS:
       return state.filter(notification =>
-          notification.id !== action.payload
+          notification.id !== action.payload,
       );
     case NOTIFICATION_CLEAR:
       return [];

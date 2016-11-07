@@ -7,8 +7,8 @@ const debug = require('debug')('boldr:auth:controller');
 const auth = {
   auth: {
     api_key: conf.get('mail.key'),
-    domain: conf.get('mail.domain')
-  }
+    domain: conf.get('mail.domain'),
+  },
 };
 // Transport is what does the lifting behind the scenes.
 const nodemailerMailgun = nodemailer.createTransport(mg(auth));
@@ -26,7 +26,7 @@ export default function handleMail(user, mailBody, mailSubject) {
     to: user.email,
     from: conf.get('mail.from'),
     subject: mailSubject,
-    html: mailBody
+    html: mailBody,
   };
   if (!user.email || !mailSubject) {
     throw new Error('Incorrect mailing parameters');

@@ -26,7 +26,7 @@ const Widget = (props) => {
 
 Widget.propTypes = {
   name: PropTypes.string,
-  subtitle: PropTypes.string
+  subtitle: PropTypes.string,
 };
 
 export default Widget;

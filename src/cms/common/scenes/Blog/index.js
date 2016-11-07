@@ -15,7 +15,7 @@ export default (store, connect) => ({
   path: '/blog',
   component: BlogContainer,
   indexRoute: {
-    component: require('./PostListing').default
+    component: require('./PostListing').default,
   },
   childRoutes: [{
     path: ':slug',
@@ -23,20 +23,20 @@ export default (store, connect) => ({
       System.import('./SinglePost')
         .then(loadModule(cb))
         .catch(errorLoading);
-    }
+    },
   }, {
     path: 'search/:query',
     getComponent(nextState, cb) {
       System.import('./Search')
         .then(loadModule(cb))
         .catch(errorLoading);
-    }
+    },
   }, {
     path: 'tags/:name',
     getComponent(nextState, cb) {
       System.import('./TagList')
         .then(loadModule(cb))
         .catch(errorLoading);
-    }
-  }]
+    },
+  }],
 });

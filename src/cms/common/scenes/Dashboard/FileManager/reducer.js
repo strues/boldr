@@ -18,14 +18,14 @@ const fetchMediaStart = () => {
 export function fetchMediaSuccess(response) {
   return {
     type: GET_ATTACHMENT_SUCCESS,
-    payload: response.body
+    payload: response.body,
   };
 }
 
 export function fetchMediaFail(err) {
   return {
     type: GET_ATTACHMENT_FAILURE,
-    error: err
+    error: err,
   };
 }
 
@@ -52,14 +52,14 @@ const beginUpload = () => {
 function uploadSuccess(response) {
   return {
     type: UPLOAD_ATTACHMENT_SUCCESS,
-    payload: response.body
+    payload: response.body,
   };
 }
 
 function uploadFail(err) {
   return {
     type: UPLOAD_ATTACHMENT_FAILURE,
-    error: err
+    error: err,
   };
 }
 
@@ -80,19 +80,19 @@ export function uploadFiles(payload) {
 
 const deleteMediaFail = (err) => ({
   type: DELETE_ATTACHMENT_FAILURE,
-  error: err
+  error: err,
 });
 
 export function deleteMedia(id) {
   return (dispatch) => {
     dispatch({
-      type: DELETE_ATTACHMENT_REQUEST
+      type: DELETE_ATTACHMENT_REQUEST,
     });
     return api.doRemoveMedia(id)
       .then(response => {
         dispatch({
           type: DELETE_ATTACHMENT_SUCCESS,
-          id
+          id,
         });
       })
       .catch(err => {
@@ -102,9 +102,9 @@ export function deleteMedia(id) {
 }
 
 const INITIAL_STATE = {
-  isLoading: false,
+  loading: false,
   error: null,
-  files: []
+  files: [],
 };
 /**
  * Attaachment Reducer
@@ -121,32 +121,32 @@ export default function attachmentReducer(state = INITIAL_STATE, action = {}) {
     case DELETE_ATTACHMENT_REQUEST:
       return {
         ...state,
-        isLoading: true
+        loading: true,
       };
     case GET_ATTACHMENT_SUCCESS:
       return {
         ...state,
-        isLoading: false,
-        files: action.payload
+        loading: false,
+        files: action.payload,
       };
     case UPLOAD_ATTACHMENT_SUCCESS:
       return {
         ...state,
-        isLoading: false,
-        files: [...state.files, ...action.payload]
+        loading: false,
+        files: [...state.files, ...action.payload],
       };
     case DELETE_ATTACHMENT_SUCCESS:
       return {
         ...state,
-        files: [...state.files].filter((file) => file.id !== action.id)
+        files: [...state.files].filter((file) => file.id !== action.id),
       };
     case GET_ATTACHMENT_FAILURE:
     case UPLOAD_ATTACHMENT_FAILURE:
     case DELETE_ATTACHMENT_FAILURE:
       return {
         ...state,
-        isLoading: false,
-        error: action.payload
+        loading: false,
+        error: action.payload,
       };
     default:
       return state;

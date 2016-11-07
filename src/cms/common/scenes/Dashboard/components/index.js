@@ -5,5 +5,5 @@ import Titlebar from './Sidebar/Titlebar';
 export {
   Sidebar,
   Titlebar,
-  SidebarContent
+  SidebarContent,
 };

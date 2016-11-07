@@ -7,5 +7,5 @@ export {
   expressMiddleware,
   authMiddleware,
   middleware,
-  errorCatcher
+  errorCatcher,
 };

@@ -10,7 +10,7 @@ const assetsBundleFilePath = path.resolve(
   appRootPath,
   notEmpty(process.env.BUNDLE_OUTPUT_PATH),
   './client',
-  `./${notEmpty(process.env.BUNDLE_ASSETS_FILENAME)}`
+  `./${notEmpty(process.env.BUNDLE_ASSETS_FILENAME)}`,
 );
 
 if (!fs.existsSync(assetsBundleFilePath)) {
@@ -19,12 +19,12 @@ if (!fs.existsSync(assetsBundleFilePath)) {
     'list of the assets of the client bundle.  Please ensure that the client ' +
     'bundle has been built before the server bundle and that the required ' +
     'environment variables are configured (BUNDLE_OUTPUT_PATH & ' +
-    'BUNDLE_ASSETS_FILENAME)'
+    'BUNDLE_ASSETS_FILENAME)',
   );
 }
 
 const assetsBundleFileContents = JSON.parse(
-  fs.readFileSync(assetsBundleFilePath, 'utf8')
+  fs.readFileSync(assetsBundleFilePath, 'utf8'),
 );
 
 // Convert the assets json it into an object that contains all the paths to our

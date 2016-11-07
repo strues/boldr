@@ -11,10 +11,10 @@ const requestPosts = () => {
 const receivePosts = (json) => ({
   type: types.FETCH_POSTS_SUCCESS,
   data: json.data,
-  pagination: json.pagination
+  pagination: json.pagination,
 });
 const receivePostsFailed = (err) => ({
-  type: types.FETCH_POSTS_FAILURE, error: err
+  type: types.FETCH_POSTS_FAILURE, error: err,
 });
 
 /**
@@ -43,7 +43,7 @@ function shouldFetchPosts(state) {
   if (!posts.data) {
     return true;
   }
-  if (posts.isLoading) {
+  if (posts.loading) {
     return false;
   }
   return posts;
@@ -69,11 +69,11 @@ const requestPost = () => {
 };
 const receivedPost = (json) => ({
   type: types.LOAD_POST_SUCCESS,
-  payload: json
+  payload: json,
 });
 const receivePostFailed = (err) => ({
   type: types.LOAD_POST_FAILURE,
-  error: err
+  error: err,
 });
 
 /**
@@ -102,13 +102,13 @@ const beginCreatePost = () => {
 const createPostSuccess = (response) => {
   return {
     type: types.CREATE_POST_SUCCESS,
-    payload: response.body
+    payload: response.body,
   };
 };
 const errorCreatingPost = (err) => {
   return {
     type: types.CREATE_POST_FAIL,
-    error: err
+    error: err,
   };
 };
 
@@ -129,7 +129,7 @@ export function createPost(postData) {
         content: postData.content,
         tags: postData.tags,
         status: postData.status,
-        excerpt: postData.excerpt
+        excerpt: postData.excerpt,
       })
       .then(response => {
         if (response.status === 201) {
@@ -137,7 +137,7 @@ export function createPost(postData) {
           dispatch(notificationSend({
             message: 'Post created successfully.',
             kind: 'info',
-            dismissAfter: 3000
+            dismissAfter: 3000,
           }));
         }
       })
@@ -154,18 +154,18 @@ export function createPost(postData) {
 const postSelected = (articleId) => {
   return {
     type: types.SELECT_POST,
-    id: articleId
+    id: articleId,
   };
 };
 
 const receiveSelectedPost = (response) => ({
   type: types.SELECT_POST_SUCCESS,
-  current: response.body
+  current: response.body,
 });
 
 const receiveSelectedPostFailed = (err) => ({
   type: types.SELECT_POST_FAIL,
-  error: err
+  error: err,
 });
 
 /**
@@ -199,7 +199,7 @@ const updatePostSuccess = () => {
 const errorUpdatingPost = (err) => {
   return {
     type: types.UPDATE_POST_FAIL,
-    error: err
+    error: err,
   };
 };
 
@@ -210,7 +210,7 @@ export function updatePost(postData) {
     content: postData.content,
     excerpt: postData.excerpt,
     feature_image: postData.feature_image,
-    status: postData.status
+    status: postData.status,
   };
   return dispatch => {
     dispatch(updatePostDetails(postData));
@@ -223,14 +223,14 @@ export function updatePost(postData) {
         excerpt: postData.excerpt,
         feature_image: postData.feature_image,
         tags: postData.tags,
-        status: postData.status
+        status: postData.status,
       })
       .then(response => {
         dispatch(updatePostSuccess(response));
         dispatch(notificationSend({
           message: 'Updated article.',
           kind: 'info',
-          dismissAfter: 3000
+          dismissAfter: 3000,
         }));
       })
       .catch(
@@ -239,20 +239,20 @@ export function updatePost(postData) {
           dispatch(notificationSend({
             message: 'There was a problem updating the article.',
             kind: 'error',
-            dismissAfter: 3000
+            dismissAfter: 3000,
           }));
         });
   };
 }
 
 export const INITIAL_STATE = {
-  isLoading: false,
+  loading: false,
   error: null,
   data: [],
   pagination: {},
   selectedPost: {},
   current: {},
-  isEditing: false
+  isEditing: false,
 };
 
 /**
@@ -267,54 +267,54 @@ export default function searchReducer(state = INITIAL_STATE, action = {}) {
     case types.CREATE_POST_REQUEST:
       return {
         ...state,
-        isLoading: true
+        loading: true,
       };
     case types.FETCH_POSTS_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        loading: false,
         pagination: action.pagination,
-        data: action.data
+        data: action.data,
       };
     case types.LOAD_POST_SUCCESS:
       return {
         ...state,
-        isLoading: false,
-        selectedPost: action.payload
+        loading: false,
+        selectedPost: action.payload,
       };
     case types.CREATE_POST_SUCCESS:
       return {
         ...state,
-        isLoading: false
+        loading: false,
       };
     case types.FETCH_POSTS_FAILURE:
     case types.LOAD_POST_FAILURE:
     case types.CREATE_POST_FAIL:
       return {
         ...state,
-        isLoading: false,
-        error: action.error
+        loading: false,
+        error: action.error,
       };
     case types.SELECT_POST:
       return {
         ...state,
-        isLoading: false,
+        loading: false,
         id: action.id,
-        isEditing: true
+        isEditing: true,
       };
     case types.SELECT_POST_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        loading: false,
         current: action.current,
-        isEditing: true
+        isEditing: true,
       };
     case types.SELECT_POST_FAIL:
       return {
         ...state,
-        isLoading: false,
+        loading: false,
         error: action.error,
-        isEditing: true
+        isEditing: true,
       };
     default:
       return state;

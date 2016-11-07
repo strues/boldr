@@ -3,5 +3,5 @@ import monkeyPatchRouteMethods from './monkeyPatchRoutes';
 
 export {
   processQuery,
-  monkeyPatchRouteMethods
+  monkeyPatchRouteMethods,
 };

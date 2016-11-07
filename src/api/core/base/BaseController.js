@@ -1,7 +1,7 @@
 import findQuery from 'objection-find';
 import responseHandler from '../response/responseHandler';
 import { textSearch, throwNotFound } from '../../utils';
-
+/* istanbul ignore */
 class BaseController {
   constructor(model, id = 'id', eager) {
     this.model = model;

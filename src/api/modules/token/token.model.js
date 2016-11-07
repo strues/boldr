@@ -12,9 +12,9 @@ class Token extends BaseModel {
         modelClass: User,
         join: {
           from: 'token.user_id',
-          to: 'user.id'
-        }
-      }
+          to: 'user.id',
+        },
+      },
     };
   }
 

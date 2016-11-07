@@ -82,7 +82,7 @@ function shouldFetchPosts(state) {
   if (!posts) {
     return true;
   }
-  if (posts.isLoading) {
+  if (posts.loading) {
     return false;
   }
   return posts;
@@ -95,12 +95,12 @@ const requestPosts = () => {
 const receivePosts = (response) => {
   return {
     type: FETCH_POSTS_SUCCESS,
-    payload: response.body
+    payload: response.body,
   };
 };
 
 const receivePostsFailed = (err) => ({
-  type: FETCH_POSTS_FAILURE, error: err
+  type: FETCH_POSTS_FAILURE, error: err,
 });
 
 /**
@@ -140,14 +140,14 @@ const beginCreatePost = () => {
 const createPostSuccess = (response: Object) => {
   return {
     type: CREATE_POST_SUCCESS,
-    payload: response.body
+    payload: response.body,
   };
 };
 
 const errorCreatingPost = (err) => {
   return {
     type: CREATE_POST_FAIL,
-    error: err
+    error: err,
   };
 };
 
@@ -160,7 +160,7 @@ const errorCreatingPost = (err) => {
 export function deletePost(id: String) {
   return (dispatch) => {
     dispatch({
-      type: DELETE_POST_REQUEST
+      type: DELETE_POST_REQUEST,
     });
     return api.doDeletePost(id)
       .then(response => {
@@ -169,7 +169,7 @@ export function deletePost(id: String) {
         }
         dispatch({
           type: DELETE_POST_SUCCESS,
-          id
+          id,
         });
       })
       .catch(err => {
@@ -180,7 +180,7 @@ export function deletePost(id: String) {
 
 const deletePostFail = (err) => ({
   type: DELETE_POST_FAILURE,
-  error: err
+  error: err,
 });
 
 
@@ -196,14 +196,14 @@ export function updatePost(postData: Post) {
         excerpt: postData.excerpt,
         feature_image: postData.feature_image,
         tag: postData.tag,
-        status: postData.status
+        status: postData.status,
       })
       .then(response => {
         dispatch(updatePostSuccess(response));
         dispatch(notificationSend({
           message: 'Updated article.',
           kind: 'info',
-          dismissAfter: 3000
+          dismissAfter: 3000,
         }));
       })
       .catch(
@@ -212,7 +212,7 @@ export function updatePost(postData: Post) {
           dispatch(notificationSend({
             message: 'There was a problem updating the article.',
             kind: 'error',
-            dismissAfter: 3000
+            dismissAfter: 3000,
           }));
         });
   };
@@ -226,7 +226,7 @@ const updatePostSuccess = (response) => {
 const errorUpdatingPost = (err) => {
   return {
     type: UPDATE_POST_FAILURE,
-    error: err
+    error: err,
   };
 };
 
@@ -238,7 +238,7 @@ const errorUpdatingPost = (err) => {
 export const postsToState = (list) => (
   list.reduce((list, a) => ({
     ...list,
-    [a.slug]: a
+    [a.slug]: a,
   }), {})
 );
 
@@ -247,8 +247,8 @@ export const getPosts = state => state.posts.list;
 // Reducer
 // -----------------
 const INITIAL_STATE = {
-  isLoading: false,
-  error: null
+  loading: false,
+  error: null,
 };
 
 /**
@@ -265,33 +265,33 @@ export default function postsReducer(state = INITIAL_STATE, action = {}) {
     case DELETE_POST_REQUEST:
       return {
         ...state,
-        isLoading: true
+        loading: true,
       };
     case FETCH_POSTS_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        loading: false,
         list: action.payload,
         bySlug: action.payload.reduce((list, a) => ({
           ...list,
-          [a.slug]: a
-        }), {})
+          [a.slug]: a,
+        }), {}),
       };
     case LOAD_POST_SUCCESS:
       return {
         ...state,
-        isLoading: false,
-        current: action.payload
+        loading: false,
+        current: action.payload,
       };
     case CREATE_POST_SUCCESS:
       return {
         ...state,
-        isLoading: false
+        loading: false,
       };
     case DELETE_POST_SUCCESS:
       return {
         ...state,
-        entities: [...state.entities].filter((entity) => entity.id !== action.id)
+        entities: [...state.entities].filter((entity) => entity.id !== action.id),
       };
     case FETCH_POSTS_FAILURE:
     case LOAD_POST_FAILURE:
@@ -299,29 +299,29 @@ export default function postsReducer(state = INITIAL_STATE, action = {}) {
     case DELETE_POST_FAILURE:
       return {
         ...state,
-        isLoading: false,
-        error: action.error
+        loading: false,
+        error: action.error,
       };
     case SELECT_POST:
       return {
         ...state,
-        isLoading: false,
+        loading: false,
         id: action.id,
-        isEditing: true
+        isEditing: true,
       };
     case SELECT_POST_SUCCESS:
       return {
         ...state,
-        isLoading: false,
+        loading: false,
         current: action.current,
-        isEditing: true
+        isEditing: true,
       };
     case SELECT_POST_FAIL:
       return {
         ...state,
-        isLoading: false,
+        loading: false,
         error: action.error,
-        isEditing: true
+        isEditing: true,
       };
     default:
       return state;

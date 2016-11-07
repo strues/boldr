@@ -16,8 +16,8 @@ class Post extends BaseModel {
         modelClass: User,
         join: {
           from: 'post.user_id',
-          to: 'user.id'
-        }
+          to: 'user.id',
+        },
       },
       tags: {
         relation: Model.ManyToManyRelation,
@@ -26,10 +26,10 @@ class Post extends BaseModel {
           from: 'post.id',
           through: {
             from: 'post_tag.post_id',
-            to: 'post_tag.tag_id'
+            to: 'post_tag.tag_id',
           },
-          to: 'tag.id'
-        }
+          to: 'tag.id',
+        },
       },
       attachments: {
         relation: Model.ManyToManyRelation,
@@ -38,11 +38,11 @@ class Post extends BaseModel {
           from: 'post.id',
           through: {
             from: 'post_attachment.post_id',
-            to: 'post_attachment.attachment_id'
+            to: 'post_attachment.attachment_id',
           },
-          to: 'attachment.id'
-        }
-      }
+          to: 'attachment.id',
+        },
+      },
     };
   }
 }

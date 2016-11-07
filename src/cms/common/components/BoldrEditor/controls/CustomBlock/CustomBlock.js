@@ -31,7 +31,7 @@ function CustomBlockControls({ controls, display, onClick, customBlocks, customB
           icon={ typeof customBlocks[key].getIcon === 'function' ? customBlocks[key].getIcon() : null }
           onToggle={ getClickHandlerForType(key) }
           style={ '' }
-        />
+        />,
       );
     }
   });

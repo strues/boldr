@@ -56,5 +56,5 @@ const SignupForm = (props) => {
 
 export default reduxForm({
   form: 'userSignupForm',
-  validate
+  validate,
 })(SignupForm);

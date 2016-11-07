@@ -16,7 +16,7 @@ const MembersList = (props: { users: Array<Object>, toggleUser: Function }) => {
             user={ user }
             key={ user.id }
             handleToggle={ handleToggle }
-          />
+          />,
           )
         }
       </Card.Group>

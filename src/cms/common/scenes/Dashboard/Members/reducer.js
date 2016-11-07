@@ -11,21 +11,21 @@ const UPDATE_MEMBER_FAILURE = '@boldr/dashboard/members/UPDATE_MEMBER_FAILURE';
 const MEMBER_SELECTED = '@boldr/dashboard/members/MEMBER_SELECTED';
 
 const loadMembers = () => ({
-  type: LOAD_MEMBERS_REQUEST
+  type: LOAD_MEMBERS_REQUEST,
 });
 
 const loadMembersSuccess = (response) => {
   return {
     type: LOAD_MEMBERS_SUCCESS,
-    payload: response.body
+    payload: response.body,
   };
 };
 
 // Fail receivers
 const failedToLoadMembers = (err) => ({
   type: LOAD_MEMBERS_FAILURE,
-  isLoading: false,
-  error: err
+  loading: false,
+  error: err,
 });
 
 // Public action creators
@@ -56,7 +56,7 @@ const doneUpdateMember = (response) => {
 const failUpdateMember = (err) => {
   return {
     type: UPDATE_MEMBER_FAILURE,
-    error: err
+    error: err,
   };
 };
 
@@ -79,15 +79,15 @@ export function updateMember(userData) {
 export function memberSelected(userId) {
   return {
     type: MEMBER_SELECTED,
-    id: userId
+    id: userId,
   };
 }
 
 const INITIAL_STATE = {
-  isLoading: false,
+  loading: false,
   members: [],
   error: null,
-  selected: {}
+  selected: {},
 };
 
 function membersReducer(state = INITIAL_STATE, action) {
@@ -96,28 +96,28 @@ function membersReducer(state = INITIAL_STATE, action) {
     case UPDATE_MEMBER_REQUEST:
       return {
         ...state,
-        isLoading: true
+        loading: true,
       };
     case LOAD_MEMBERS_SUCCESS:
       return {
         ...state,
-        members: action.payload
+        members: action.payload,
       };
     case LOAD_MEMBERS_FAILURE:
     case UPDATE_MEMBER_FAILURE:
       return {
         ...state,
         error: action.error,
-        isLoading: false
+        loading: false,
       };
     case UPDATE_MEMBER_SUCCESS:
       return {
-        ...state
+        ...state,
       };
     case MEMBER_SELECTED:
       return {
         ...state,
-        selected: state.members.filter((member) => member.id === action.id)
+        selected: state.members.filter((member) => member.id === action.id),
       };
     default:
       return state;

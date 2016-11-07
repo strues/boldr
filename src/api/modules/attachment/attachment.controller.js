@@ -14,7 +14,7 @@ const debug = Debug('boldr:attachment:controller');
 const s3 = new AWS.S3({
   accessKeyId: conf.get('aws.keyId'),
   secretAccessKey: conf.get('aws.keySecret'),
-  region: conf.get('aws.region')
+  region: conf.get('aws.region'),
 });
 
 export const uploadFiles = multer(multerOptions);
@@ -40,7 +40,7 @@ export async function fromDashboard(req, res, next) {
     original_name: req.body.original_name,
     file_description: req.body.file_description,
     file_type: req.body.file_type,
-    s3_key: req.body.s3_key
+    s3_key: req.body.s3_key,
   };
   const newAttachment = await Attachment.query().insertAndFetch(fileFields);
   await Activity.query().insert({
@@ -51,7 +51,7 @@ export async function fromDashboard(req, res, next) {
     type: 'create',
     data: { newAttachment },
     entry_uuid: newAttachment.id,
-    entry_table: 'attachment'
+    entry_table: 'attachment',
   });
   return res.status(201).json(newAttachment);
 }
@@ -67,7 +67,7 @@ export const getAttachment = async (req, res, next) => {
 
 export function getAllAWS(req, res, next) {
   const params = {
-    Bucket: conf.get('aws.bucket')
+    Bucket: conf.get('aws.bucket'),
   };
   s3.listObjectsV2(params, (err, data) => {
     if (err) {

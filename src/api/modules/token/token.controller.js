@@ -23,7 +23,7 @@ export async function forgottenPassword(req, res, next) {
 
   await user.$relatedQuery('tokens').insert({
     reset_password_token: verificationToken,
-    user_id: user.id
+    user_id: user.id,
   });
   const mailBody = forgotPasswordEmail(verificationToken);
 
@@ -46,7 +46,7 @@ export async function resetPassword(req, res, next) {
 
   const user = await User.query().findById(findToken.user_id);
   await User.query().patchAndFetchById(user.id, {
-    password: req.body.password
+    password: req.body.password,
   });
   const mailBody = await passwordModifiedEmail(user);
   handleMail(user, mailBody, mailSubject);

@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Menu } from 'semantic-ui-react';
+import { BoldrLogo } from 'components/index';
 import {
   postListClicked, postEditorClicked, dashboardClicked,
   fileManagerClicked, membersClicked, settingsClicked, homeClicked,
-  navigationClicked, contentClicked, pagesClicked, blocksClicked
+  navigationClicked, contentClicked, pagesClicked, blocksClicked,
 } from '../../reducer';
 import Titlebar from './Titlebar';
 
@@ -13,8 +14,8 @@ const styles = {
   sidebar: {
     width: 200,
     height: '100vh',
-    overflow: 'hidden'
-  }
+    overflow: 'hidden',
+  },
 };
 
 type Props = {
@@ -39,8 +40,10 @@ class SidebarContent extends Component {
 
     return (
       <Titlebar style={ style }>
+        <BoldrLogo height="100px" width="120px" />
         <div className="sidebar__inner">
           <Menu vertical>
+
           <Menu.Item>
             <Menu.Header>Menu</Menu.Header>
              <Menu.Menu>

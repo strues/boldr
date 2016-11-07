@@ -4,15 +4,15 @@ const styles = {
   root: {
     fontFamily: '"Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif',
     fontWeight: 300,
-    alignItems: 'center'
+    alignItems: 'center',
   },
   header: {
     backgroundColor: '#1f2225',
     color: '#fff',
     marginBottom: '15px',
     fontSize: '1.5em',
-    display: 'flex'
-  }
+    display: 'flex',
+  },
 };
 
 const Titlebar = (props) => {
@@ -30,13 +30,13 @@ Titlebar.propTypes = {
   style: React.PropTypes.object,
   title: React.PropTypes.oneOfType([
     React.PropTypes.string,
-    React.PropTypes.object
+    React.PropTypes.object,
   ]),
   icon: React.PropTypes.oneOfType([
     React.PropTypes.string,
-    React.PropTypes.object
+    React.PropTypes.object,
   ]),
-  children: React.PropTypes.object
+  children: React.PropTypes.object,
 };
 
 export default Titlebar;

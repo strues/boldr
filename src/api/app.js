@@ -32,12 +32,12 @@ if (env !== 'production') {
     winstonInstance,
     meta: true,   // optional: log meta data about request (defaults to true)
     msg: 'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
-    colorStatus: true   // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
+    colorStatus: true,   // Color the status code (default green, 3XX cyan, 4XX yellow, 5XX red).
   }));
 }
 if (env !== 'test') {
   app.use(expressWinston.errorLogger({
-    winstonInstance
+    winstonInstance,
   }));
   app.use(lusca({
     xframe: 'SAMEORIGIN',
@@ -45,9 +45,9 @@ if (env !== 'test') {
       // 1 year, in seconds
       maxAge: 31536000,
       includeSubDomains: true,
-      preload: true
+      preload: true,
     },
-    xssProtection: true
+    xssProtection: true,
   }));
 }
 

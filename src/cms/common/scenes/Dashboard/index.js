@@ -17,7 +17,7 @@ export default (store, connect) => {
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           System.import('./reducer'),
-          System.import('./DashboardWidgets')
+          System.import('./DashboardWidgets'),
         ]);
         const renderRoute = loadModule(cb);
         importModules.then(([reducer, component]) => {
@@ -26,7 +26,7 @@ export default (store, connect) => {
         });
 
         importModules.catch(errorLoading);
-      }
+      },
     },
     childRoutes: [
       {
@@ -34,7 +34,7 @@ export default (store, connect) => {
         getComponent(nextState, cb) {
           const importModules = Promise.all([
             System.import('./Blocks/reducer'),
-            System.import('./Blocks')
+            System.import('./Blocks'),
           ]);
           const renderRoute = loadModule(cb);
           importModules.then(([reducer, component]) => {
@@ -43,7 +43,15 @@ export default (store, connect) => {
           });
 
           importModules.catch(errorLoading);
-        }
+        },
+      },
+      {
+        path: 'blocks/build/:id',
+        getComponent(nextState, cb) {
+          System.import('./Blocks/BuildBlock')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+        },
       },
       {
         path: 'posts',
@@ -51,7 +59,7 @@ export default (store, connect) => {
           System.import('./Post/PostList')
           .then(loadModule(cb))
           .catch(errorLoading);
-        }
+        },
       },
       {
         path: 'posts/editor/:slug',
@@ -59,7 +67,7 @@ export default (store, connect) => {
           System.import('./Post/PostEditor')
           .then(loadModule(cb))
           .catch(errorLoading);
-        }
+        },
       },
       {
         path: 'posts/new',
@@ -67,14 +75,14 @@ export default (store, connect) => {
           System.import('./Post/NewPost/NewPostContainer')
           .then(loadModule(cb))
           .catch(errorLoading);
-        }
+        },
       },
       {
         path: 'filemanager',
         getComponent(nextState, cb) {
           const importModules = Promise.all([
             System.import('./FileManager/reducer'),
-            System.import('./FileManager')
+            System.import('./FileManager'),
           ]);
           const renderRoute = loadModule(cb);
           importModules.then(([reducer, component]) => {
@@ -83,23 +91,16 @@ export default (store, connect) => {
           });
 
           importModules.catch(errorLoading);
-        }
+        },
       },
-      {
-        path: 'content',
-        getComponent(nextState, cb) {
-          System.import('./Collections')
-        .then(loadModule(cb))
-        .catch(errorLoading);
-        }
-      },
+      
       {
         path: 'navigation',
         getComponent(nextState, cb) {
           System.import('./Navigation')
         .then(loadModule(cb))
         .catch(errorLoading);
-        }
+        },
       },
       {
         path: 'pages',
@@ -107,7 +108,7 @@ export default (store, connect) => {
           System.import('./Pages')
         .then(loadModule(cb))
         .catch(errorLoading);
-        }
+        },
       },
       {
         path: 'settings',
@@ -115,14 +116,14 @@ export default (store, connect) => {
           require.ensure([], (require) => {
             cb(null, require('./Settings').default);
           });
-        }
+        },
       },
       {
         path: 'members',
         getComponent(nextState, cb) {
           const importModules = Promise.all([
             System.import('./Members/reducer'),
-            System.import('./Members')
+            System.import('./Members'),
           ]);
           const renderRoute = loadModule(cb);
           importModules.then(([reducer, component]) => {
@@ -131,7 +132,7 @@ export default (store, connect) => {
           });
 
           importModules.catch(errorLoading);
-        }
-      }]
+        },
+      }],
   };
 };

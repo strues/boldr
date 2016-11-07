@@ -4,7 +4,7 @@ import logger from './logger';
 import responseHandler from './response';
 import {
   isAuthenticated,
-  signToken
+  signToken,
 }
 from './authentication';
 import { checkRole, checkScope, checkPermissions } from './middleware/middleware';
@@ -18,7 +18,7 @@ import {
   Conflict,
   InternalServer,
   NotImplemented,
-  AccountNotVerifiedError
+  AccountNotVerifiedError,
 }
 from './errors';
 
@@ -43,5 +43,5 @@ export {
   signToken,
   checkRole,
   checkScope,
-  checkPermissions
+  checkPermissions,
 };

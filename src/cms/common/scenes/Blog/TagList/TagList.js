@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-connect';
 import { Grid, Col, Row } from 'components/Layout';
 import { requestPostTags } from 'state/dux/tag';
-import TagListCard from './TagListCard';
+import PostCard from '../components/PostCard';
 
 type Props = {
   tags: Object,
@@ -18,7 +18,7 @@ type Props = {
     const promises = [];
     promises.push(dispatch(requestPostTags(name)));
     return Promise.all(promises);
-  }
+  },
 }])
 class TagList extends Component {
   componentDidMount() {
@@ -40,7 +40,7 @@ class TagList extends Component {
         {
           this.props.tags.posts.map(post =>
             <Col key={ post.id } xs={ 12 } md={ 4 }>
-              <TagListCard { ...post } />
+              <PostCard { ...post } />
             </Col>)
         }
         </Row>
@@ -53,8 +53,8 @@ class TagList extends Component {
 const mapStateToProps = (state) => {
   return {
     tags: state.tags,
-    isLoading: state.tags.isLoading,
-    posts: state.tags.posts
+    loading: state.tags.loading,
+    posts: state.tags.posts,
   };
 };
 

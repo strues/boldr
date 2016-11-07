@@ -22,7 +22,7 @@ class Notifications extends Component {
       className,
       componentClassName,
       CustomComponent,
-      transitionEnterTimeout, transitionLeaveTimeout, onActionClick, actionLabel, dismissAfter
+      transitionEnterTimeout, transitionLeaveTimeout, onActionClick, actionLabel, dismissAfter,
     } = this.props;
 
     const renderedNotifications = notifications.map((notification) => (
@@ -40,7 +40,7 @@ class Notifications extends Component {
   ));
     const classes = [
       'notification__container',
-      className || null
+      className || null,
     ].join(' ').split();
 
     return (
@@ -60,7 +60,7 @@ class Notifications extends Component {
 Notifications.defaultProps = {
   className: null,
   transitionEnterTimeout: 600,
-  transitionLeaveTimeout: 600
+  transitionLeaveTimeout: 600,
 };
 
 Notifications.propTypes = {
@@ -69,9 +69,9 @@ Notifications.propTypes = {
   transitionEnterTimeout: React.PropTypes.number,
   transitionLeaveTimeout: React.PropTypes.number,
   onActionClick: React.PropTypes.func,
-  actionLabel: React.PropTypes.string
+  actionLabel: React.PropTypes.string,
 };
 
 export default connect((state) => ({
-  notifications: state.get ? state.get('notifications') : state.notifications
+  notifications: state.get ? state.get('notifications') : state.notifications,
 }), { notificationDismiss })(Notifications);

@@ -15,7 +15,7 @@ class S3Uploader extends Component {
     signingUrlQueryParams: PropTypes.object,
     uploadRequestHeaders: PropTypes.object,
     contentDisposition: PropTypes.string,
-    server: PropTypes.string
+    server: PropTypes.string,
   };
   constructor(props) {
     super(props);
@@ -31,7 +31,7 @@ class S3Uploader extends Component {
     this.props.onFinish(signResult);
 
     this.setState({
-      file: signResult.publicUrl
+      file: signResult.publicUrl,
     });
   }
 
@@ -59,7 +59,7 @@ class S3Uploader extends Component {
       signingUrlQueryParams: this.props.signingUrlQueryParams,
       uploadRequestHeaders: this.props.uploadRequestHeaders,
       contentDisposition: this.props.contentDisposition,
-      server: this.props.server
+      server: this.props.server,
     });
   }
   // http://stackoverflow.com/a/24608023/194065

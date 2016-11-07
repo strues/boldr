@@ -36,8 +36,8 @@ File.propTypes = {
   file: PropTypes.shape({
     id: PropTypes.string.isRequired,
     filename: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired
-  })
+    url: PropTypes.string.isRequired,
+  }),
 };
 
 export default File;

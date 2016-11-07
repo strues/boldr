@@ -17,7 +17,7 @@ const Account = (props: Props) => {
 
 function mapStateToProps(state) {
   return {
-    auth: state.auth
+    auth: state.auth,
   };
 }
 

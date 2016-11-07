@@ -17,5 +17,5 @@ export {
   defaultBlocks,
   convertFromRaw,
   convertToRaw,
-  Entity
+  Entity,
 };

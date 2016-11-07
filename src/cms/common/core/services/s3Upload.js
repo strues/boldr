@@ -64,12 +64,12 @@ S3Upload.prototype.executeOnSignedUrl = function(file, callback) {
     .normalize('NFC');
 
   const fileName = latinize(normalizedFileName);
-  let queryString = '?objectName=' + fileName + '&contentType=' + encodeURIComponent(file.type);
+  let queryString = `?objectName=${fileName}&contentType=${encodeURIComponent(file.type)}`;
   if (this.signingUrlQueryParams) {
     const signingUrlQueryParams = this.signingUrlQueryParams;
     Object.keys(signingUrlQueryParams).forEach((key) => {
       const val = signingUrlQueryParams[key];
-      queryString += '&' + key + '=' + val;
+      queryString += `&${key}=${val}`;
     });
   }
   const xhr = this.createCORSRequest('GET', this.server + this.signingUrl + queryString);

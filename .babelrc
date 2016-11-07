@@ -18,7 +18,11 @@
     "test": {
       "presets": [["latest", { "es2015": { "modules": "commonjs" }}], "react"],
       "plugins": [
-        "istanbul",
+        ["istanbul", {
+          "exclude": [
+            "**/*.test.js"
+          ]
+        }],
         "transform-async-to-generator",
         "transform-class-properties",
         "transform-flow-strip-types",

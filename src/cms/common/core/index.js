@@ -13,7 +13,7 @@ import {
   API_ACTIVITY,
   API_SETTINGS,
   API_BLOCKS,
-  TOKEN_KEY
+  TOKEN_KEY,
 } from './config';
 
 import ApiClient from './services/ApiClient';
@@ -36,5 +36,5 @@ export {
   API_SETTINGS,
   TOKEN_KEY,
   ApiClient,
-  getAsyncInjectors
+  getAsyncInjectors,
 };

@@ -29,7 +29,7 @@ class StyleButton extends Component {
         <span className={ className } onMouseDown={ this.onToggle }>
          { this.props.icon ? this.props.icon : this.props.label }
         </span>
-      );
+    );
   }
 }
 

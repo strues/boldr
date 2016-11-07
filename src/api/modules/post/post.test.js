@@ -14,11 +14,11 @@ const postData = {
   content: faker.lorem.paragraphs(),
   excerpt: faker.lorem.paragraph(),
   status: 'published',
-  tags: 'foo,bar'
+  tags: 'foo,bar',
 };
 const userCredentials = {
   email: 'admin@boldr.io',
-  password: 'password'
+  password: 'password',
 };
 describe('GET /api/v1/posts', () => {
   afterEach(() => {
@@ -110,7 +110,7 @@ describe('POST /api/v1/posts', () => {
      .post('/api/v1/auth/login')
      .send({
        email: 'user@boldr.io',
-       password: 'password'
+       password: 'password',
      })
      .expect(200)
      .expect('Content-Type', /json/)

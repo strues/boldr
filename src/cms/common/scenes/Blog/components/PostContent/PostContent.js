@@ -10,7 +10,7 @@ type Props = {
 }
 const PostContent = (props: Props) => {
   function createMarkup() {
-    return { __html: props.content
+    return { __html: props.content,
     };
   }
   return (

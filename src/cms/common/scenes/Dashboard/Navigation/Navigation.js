@@ -32,8 +32,8 @@ class Navigation extends Component {
       position: null,
       href: null,
       id: null,
-      icon: null
-    }
+      icon: null,
+    },
   };
   onUpdateFormSubmit = (data) => {
     this.props.updateNavLinks(data);
@@ -53,8 +53,8 @@ class Navigation extends Component {
         position: item.position,
         href: item.href,
         id: item.id,
-        icon: item.icon
-      }
+        icon: item.icon,
+      },
     });
   }
 

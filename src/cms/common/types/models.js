@@ -14,7 +14,7 @@ export type Post = {
   status?: String,
   author?: User,
   seo: ?Object,
-  tags: Array<Tag>,
+  tags: ?Array<Tag>,
   tag: ?Number
 };
 
@@ -24,6 +24,24 @@ export type Tag = {
   name: String,
   description: String
 };
+
+export type Page = {
+  id: String,
+  name: String,
+  url: String,
+  layout: ?Object,
+  status: String,
+  meta: ?Object,
+  restricted: Boolean,
+  data: ?Object
+}
+
+export type Block = {
+  id: String,
+  name: String,
+  label: String,
+  content: ?Object
+}
 
 export type Setting = {
   id: Number,

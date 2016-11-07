@@ -34,20 +34,19 @@ async function createLink(req, res, next) {
     icon: req.body.icon,
     label: slugify(req.body.name),
     position: req.body.position,
-    uuid: uuid.v4()
+    uuid: uuid.v4(),
   };
   const newLink = await Link.query().insert(payload);
   debug('----------newLink ', newLink);
   const navId = req.body.nav_id || 1;
   const existingNav = await Navigation.query().where('id', navId).first();
   if (!existingNav) {
-
     throw new InternalServer();
   }
   debug(existingNav, 'existing navigation found');
   const associateLinkNav = await NavigationLink.query().insert({
     navigation_id: existingNav.id,
-    link_id: newLink.id
+    link_id: newLink.id,
   });
   debug(associateLinkNav);
   await Activity.query().insert({
@@ -59,7 +58,7 @@ async function createLink(req, res, next) {
     type: 'create',
     data: { payload },
     entry_uuid: newLink.uuid,
-    entry_table: 'link'
+    entry_table: 'link',
   });
 
   return res.status(201).json(newLink);

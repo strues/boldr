@@ -18,17 +18,17 @@ class PostTag extends Model {
         modelClass: Tag,
         join: {
           from: 'post_tag.tag_id',
-          to: 'tag.id'
-        }
+          to: 'tag.id',
+        },
       },
       post: {
         relation: Model.BelongsToOneRelation,
         modelClass: Post,
         join: {
           from: 'post_tag.post_id',
-          to: 'post.id'
-        }
-      }
+          to: 'post.id',
+        },
+      },
     };
   }
 }

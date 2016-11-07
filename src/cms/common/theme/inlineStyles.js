@@ -8,10 +8,10 @@ export default {
   headerOverflow: {
     backgroundColor: midnightBlue,
     paddingTop: '50px',
-    marginBottom: '50px'
+    marginBottom: '50px',
   },
   underlineFocusStyle: {
-    borderColor: cyanLike
+    borderColor: cyanLike,
   },
   headerColumn: {
     color: '#B3B3B3',
@@ -42,12 +42,12 @@ export default {
     margin: '-1px',
     overflow: 'hidden',
     clip: 'rect(0,0,0,0)',
-    border: 0
+    border: 0,
   },
   radio: {
     display: 'inline',
     marginTop: '20px',
     marginRight: '10px',
-    float: 'right'
-  }
+    float: 'right',
+  },
 };

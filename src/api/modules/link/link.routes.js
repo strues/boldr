@@ -36,7 +36,7 @@ router.get('/:id', ctrl.showLink);
  * @apiPermission admin
  * @apiParam {Number} id The id of the link
  */
-router.put('/:id', ctrl.updateLink);
+router.put('/:id', ensureAuthenticated, ctrl.updateLink);
 /**
  * @api {patch} /links/:id Update a link
  * @apiName updateLink
@@ -44,7 +44,7 @@ router.put('/:id', ctrl.updateLink);
  * @apiPermission admin
  * @apiParam {Number} id The id of the link
  */
-router.patch('/:id', ctrl.updateLink);
+router.patch('/:id', ensureAuthenticated, ctrl.updateLink);
 /**
  * @api {delete} /links/:id Delete a link
  * @apiName destroy
@@ -52,6 +52,6 @@ router.patch('/:id', ctrl.updateLink);
  * @apiPermission admin
  * @apiParam {Number} id The id of the link
  */
-router.delete('/:id', controller.destroy.bind(controller));
+router.delete('/:id', ensureAuthenticated, controller.destroy.bind(controller));
 
 export default router;

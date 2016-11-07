@@ -5,5 +5,5 @@ import Grid from './Grid';
 export {
   Row,
   Col,
-  Grid
+  Grid,
 };

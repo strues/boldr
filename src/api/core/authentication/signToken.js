@@ -7,7 +7,7 @@ function signToken(user) {
   const payload = {
     sub: user.id,
     iat: timestamp,
-    email: user.email
+    email: user.email,
   };
   return jwt.sign(payload, conf.get('session.secret'), { expiresIn: 60 * 60 * 5 });
 }

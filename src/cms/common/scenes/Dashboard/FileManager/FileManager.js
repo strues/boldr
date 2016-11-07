@@ -18,7 +18,7 @@ type Props = {
     const promises = [];
     promises.push(dispatch(fetchMedia()));
     return Promise.all(promises);
-  }
+  },
 }])
 class FileManager extends Component {
   constructor(props) {
@@ -42,7 +42,7 @@ class FileManager extends Component {
       original_name: signResult.original_name,
       file_type: signResult.file_type,
       s3_key: signResult.s3_key,
-      url: fileUrl
+      url: fileUrl,
     };
     this.props.uploadFiles(payload);
   }
@@ -77,7 +77,7 @@ class FileManager extends Component {
 
 const mapStateToProps = state => {
   return {
-    attachments: state.attachments
+    attachments: state.attachments,
   };
 };
 

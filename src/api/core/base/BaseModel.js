@@ -1,7 +1,7 @@
 /* eslint-disable id-match */
 import { Model } from 'objection';
 import { format as dateFormat } from 'date-fns';
-
+/* istanbul ignore */
 class BaseModel extends Model {
     /**
      * If we should update the created_at attribute when inserted and the updated_at attribute when updated.

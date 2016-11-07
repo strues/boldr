@@ -7,9 +7,9 @@ import { createSelector } from 'reselect';
 export const getSettings = createSelector(
   [
     (state) => state.boldr.settings.keys,
-    (state) => state.boldr.settings.byKey
+    (state) => state.boldr.settings.byKey,
   ],
-  (keys, byKey) => keys.map(key => byKey[key])
+  (keys, byKey) => keys.map(key => byKey[key]),
 );
 
 export function areSettingsLoaded(globalState) {
@@ -39,7 +39,7 @@ export const getNavs = createSelector(
   [listNavLabels, getNavEntities],
   //  (state) => state.boldr.nav.labels,
   //  (state) => state.boldr.nav.byLabel
-  (labels, byLabel) => labels.map(label => byLabel[label])
+  (labels, byLabel) => labels.map(label => byLabel[label]),
 );
 
 export function isNavLoaded(globalState) {
@@ -53,4 +53,19 @@ export function isNavLoaded(globalState) {
 
 export function arePagesLoaded(globalState) {
   return globalState.boldr.pages && globalState.boldr.pages.loaded;
+}
+export const getPages = createSelector(
+  [
+    (state) => state.boldr.pages.ids,
+    (state) => state.boldr.pages.all,
+  ],
+  (ids, all) => ids.map(id => all[id]),
+);
+
+/**
+  * AUTH SELECTORS
+  *
+  *****************************************************************/
+export function isAuthLoaded(globalState) {
+  return globalState.auth && globalState.auth.loaded;
 }

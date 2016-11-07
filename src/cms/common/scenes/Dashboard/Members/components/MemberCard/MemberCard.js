@@ -3,7 +3,7 @@ import { Button, Card, Image } from 'semantic-ui-react';
 
 const propTypes = {
   user: PropTypes.object,
-  handleToggle: PropTypes.func
+  handleToggle: PropTypes.func,
 };
 
 const MemberCard = (props) => {

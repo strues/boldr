@@ -18,17 +18,17 @@ class UserRole extends Model {
         modelClass: Role,
         join: {
           from: 'user_role.role_id',
-          to: 'role.id'
-        }
+          to: 'role.id',
+        },
       },
       user: {
         relation: Model.BelongsToOneRelation,
         modelClass: User,
         join: {
           from: 'user_role.user_id',
-          to: 'user.id'
-        }
-      }
+          to: 'user.id',
+        },
+      },
     };
   }
 }

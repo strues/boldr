@@ -3,7 +3,7 @@ import entitiesReducer from './entities';
 describe('Entities Duck', () => {
   it('Should return the initial state', () => {
     expect(
-        entitiesReducer(undefined, {})
+        entitiesReducer(undefined, {}),
       ).toEqual({
         posts: {},
         tags: {},
@@ -12,7 +12,7 @@ describe('Entities Duck', () => {
         pages: {},
         navigations: {},
         links: {},
-        settings: {}
+        settings: {},
       });
   });
 });

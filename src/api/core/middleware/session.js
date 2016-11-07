@@ -21,9 +21,9 @@ const sessionMiddleware = session({
   cookie: {
     secure: env !== 'development'
     && env !== 'test',
-    maxAge: 2419200000
+    maxAge: 2419200000,
   },
-  unset: 'destroy'
+  unset: 'destroy',
 });
 
 export default sessionMiddleware;

@@ -11,7 +11,7 @@ const link = new Schema('links', { idAttribute: 'label' });
 
 post.define({
   tags: arrayOf(tag),
-  author: user
+  author: user,
 });
 
 export { post, tag, user, attachment, page, navigation, link, setting };

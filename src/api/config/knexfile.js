@@ -7,20 +7,20 @@ module.exports = {
       host: process.env.POSTGRES_HOST || 'localhost',
       user: process.env.POSTGRES_USER || 'postgres',
       password: process.env.POSTGRES_PASSWORD || 'password',
-      database: process.env.POSTGRES_DB || 'boldr'
+      database: process.env.POSTGRES_DB || 'boldr',
     },
     migrations: {
       directory: path.resolve(__dirname, '../db/_migrations'),
-      tableName: 'knex_migrations'
+      tableName: 'knex_migrations',
     },
     seeds: {
-      directory: path.resolve(__dirname, '../db/_seeds')
+      directory: path.resolve(__dirname, '../db/_seeds'),
     },
     debug: false,
     pool: {
       min: 0,
-      max: 1
-    }
+      max: 1,
+    },
   },
   test: {
     client: 'pg',
@@ -28,20 +28,20 @@ module.exports = {
       host: process.env.POSTGRES_HOST || 'localhost',
       user: process.env.POSTGRES_USER || 'postgres',
       password: process.env.POSTGRES_PASSWORD || 'password',
-      database: process.env.POSTGRES_DB || 'boldr_test'
+      database: process.env.POSTGRES_DB || 'boldr_test',
     },
     migrations: {
       directory: path.resolve(__dirname, '../db/_migrations'),
-      tableName: 'knex_migrations'
+      tableName: 'knex_migrations',
     },
     seeds: {
-      directory: path.resolve(__dirname, '../db/_seeds')
+      directory: path.resolve(__dirname, '../db/_seeds'),
     },
     debug: false,
     pool: {
       min: 0,
-      max: 1
-    }
+      max: 1,
+    },
   },
   production: {
     client: 'pg',
@@ -49,14 +49,14 @@ module.exports = {
     searchPath: 'knex,public',
     migrations: {
       directory: path.resolve(__dirname, '../db/_migrations'),
-      tableName: 'knex_migrations'
+      tableName: 'knex_migrations',
     },
     seeds: {
-      directory: path.resolve(__dirname, '../db/_seeds')
+      directory: path.resolve(__dirname, '../db/_seeds'),
     },
     pool: {
       min: 2,
-      max: 10
-    }
-  }
+      max: 10,
+    },
+  },
 };

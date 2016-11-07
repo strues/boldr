@@ -1,14 +1,14 @@
 /* @flow */
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-
+import type { Post } from 'types/models';
 import { createPost } from 'state/dux/post';
 import NewPost from './NewPost';
 
 export type Props = {dispatch: Function};
 
 class NewPostContainer extends Component {
-  onFormSubmit = (data) => {
+  onFormSubmit = (data: Post) => {
     this.props.dispatch(createPost(data));
     this.context.router.push('/dashboard');
   }
@@ -19,7 +19,7 @@ class NewPostContainer extends Component {
 }
 
 NewPostContainer.contextTypes = {
-  router: PropTypes.object
+  router: PropTypes.object,
 };
 
 export default connect()(NewPostContainer);

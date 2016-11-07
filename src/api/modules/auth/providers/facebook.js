@@ -11,7 +11,7 @@ const strategyOpts = {
   clientSecret: conf.get('social.facebook.secret'),
   callbackURL: '/api/v1/auth/facebook/callback',
   profileFields: ['name', 'email', 'link', 'locale', 'timezone'],
-  passReqToCallback: true
+  passReqToCallback: true,
 };
 
 export default function configureFacebook(Account) {
@@ -26,13 +26,13 @@ export default function configureFacebook(Account) {
         await account.$relatedQuery('token').insert({
           id: uuid.v4(),
           account_verification_token: accessToken,
-          account_id: account.id
+          account_id: account.id,
         });
 
         await account.$relatedQuery('profile').insert({
           first_name: profile.name.givenName,
           last_name: profile.name.familyName,
-          avatar_url: account.avatar_url || `https://graph.facebook.com/${profile.id}/picture?type=large`
+          avatar_url: account.avatar_url || `https://graph.facebook.com/${profile.id}/picture?type=large`,
         });
         account.save((err) => {
           res.send('Facebook account has been linked.');

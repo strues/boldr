@@ -35,7 +35,7 @@ app.use((req: $Request, res: $Response, next: NextFunction) => {
 });
 
 const proxy = httpProxy.createProxyServer({
-  target: proxyTo
+  target: proxyTo,
 });
 
 // Don't expose any software information to hackers.
@@ -88,8 +88,8 @@ app.use(
   notEmpty(process.env.CLIENT_BUNDLE_HTTP_PATH),
   express.static(
     path.resolve(appRootPath, notEmpty(process.env.BUNDLE_OUTPUT_PATH), './client'),
-    { maxAge: notEmpty(process.env.CLIENT_BUNDLE_CACHE_MAXAGE) }
-  )
+    { maxAge: notEmpty(process.env.CLIENT_BUNDLE_CACHE_MAXAGE) },
+  ),
 );
 
 // Configure static serving of our "public" root http path static files.
@@ -118,7 +118,7 @@ app.use((err: ?Error, req: $Request, res: $Response, next: NextFunction) => { //
 // Create an http listener for our express app.
 const port = parseInt(notEmpty(process.env.SSR_PORT), 10);
 const listener = app.listen(port, () =>
-  console.log(`Server listening on port ${port}`)
+  console.log(`Server listening on port ${port}`),
 );
 
 // We export the listener as it will be handy for our development hot reloader.

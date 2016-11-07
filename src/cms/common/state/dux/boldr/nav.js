@@ -11,15 +11,14 @@ export function getByLabel(state, label) {
 
 export const getNavs = createSelector(
   [
-    listNavLabels, getNavEntities
+    listNavLabels, getNavEntities,
   //  (state) => state.boldr.nav.labels,
   //  (state) => state.boldr.nav.byLabel
   ],
-  (labels, byLabel) => labels.map(label => byLabel[label])
+  (labels, byLabel) => labels.map(label => byLabel[label]),
 );
 
 const byLabel = (state = { loaded: false }, action) => {
-  let nextState;
   switch (action.type) {
     case t.LOAD_NAVIGATION_SUCCESS:
       Object.keys(action.payload.entities.navigations).forEach(label => {
@@ -28,7 +27,7 @@ const byLabel = (state = { loaded: false }, action) => {
       return {
         ...state,
         ...action.payload.entities.navigations,
-        loaded: true
+        loaded: true,
 
       };
     default:
@@ -47,7 +46,7 @@ const labels = (state = [], action) => {
 
 const navReducer = combineReducers({
   byLabel,
-  labels
+  labels,
 });
 
 export default navReducer;

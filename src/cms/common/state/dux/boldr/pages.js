@@ -10,7 +10,7 @@ const initialState = {
   all: {},
   ids: [],
   meta: {},
-  filter: {}
+  filter: {},
 };
 
 export default function pagesReducer(state = initialState, action = {}) {
@@ -19,28 +19,28 @@ export default function pagesReducer(state = initialState, action = {}) {
     case t.LOAD_PAGE_REQUEST:
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case t.LOAD_PAGES_SUCCESS:
       return {
         loading: false,
         loaded: true,
         all: action.payload.entities.pages,
-        ids: action.payload.result
+        ids: action.payload.result,
       };
     case t.LOAD_PAGE_SUCCESS:
       return {
         ...state,
         loading: false,
         loaded: true,
-        data: action.payload
+        data: action.payload,
       };
     case t.LOAD_PAGES_FAILURE:
     case t.LOAD_PAGE_FAILURE:
       return {
         ...state,
         loading: false,
-        loaded: false
+        loaded: true,
       };
     default:
       return state;

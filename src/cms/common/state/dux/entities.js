@@ -8,7 +8,7 @@ const initialState = {
   pages: {},
   navigations: {},
   links: {},
-  settings: {}
+  settings: {},
 };
 
 export default function entitiesReducer(state = initialState, action) {

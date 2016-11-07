@@ -3,5 +3,5 @@ import PostListItem from './PostListItem';
 
 export {
   EditorForm,
-  PostListItem
+  PostListItem,
 };

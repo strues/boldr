@@ -11,9 +11,9 @@ class Activity extends BaseModel {
         modelClass: User,
         join: {
           from: 'activity.user_id',
-          to: 'user.id'
-        }
-      }
+          to: 'user.id',
+        },
+      },
     };
   }
 }

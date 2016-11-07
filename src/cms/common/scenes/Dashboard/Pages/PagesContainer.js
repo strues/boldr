@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-connect';
+import { createSelector } from 'reselect';
 import { fetchPagesIfNeeded } from 'state/index';
 import Pages from './Pages';
 
@@ -11,13 +12,6 @@ export type Props = {
   fetchPagesIfNeeded: Function
 };
 
-@asyncConnect([{
-  promise: ({ store: { dispatch, getState } }) => {
-    const promises = [];
-    promises.push(dispatch(fetchPagesIfNeeded()));
-    return Promise.all(promises);
-  }
-}])
 class PagesContainer extends Component {
   componentDidMount() {
     this.props.fetchPagesIfNeeded();
@@ -29,9 +23,22 @@ class PagesContainer extends Component {
     );
   }
 }
+const asyncProps = [{
+  promise: ({ store: { dispatch, getState } }) => {
+    dispatch(fetchPagesIfNeeded());
+  },
+}];
+
 const mapStateToProps = (state, ownProps) => {
+  const getPages = createSelector(
+    [
+      (state) => state.boldr.pages.ids,
+      (state) => state.boldr.pages.all,
+    ],
+    (ids, all) => ids.map(id => all[id]),
+  );
   return {
-    pages: state.pages
+    pages: getPages(state),
   };
 };
-export default connect(mapStateToProps, { fetchPagesIfNeeded })(PagesContainer);
+export default asyncConnect(asyncProps, mapStateToProps, { fetchPagesIfNeeded })(PagesContainer);
