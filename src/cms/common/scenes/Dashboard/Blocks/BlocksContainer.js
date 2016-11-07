@@ -1,15 +1,37 @@
 /* @flow */
 import React, { Component } from 'react';
 import { asyncConnect } from 'redux-connect';
-import { connect } from 'react-redux';
-import { areBlocksLoaded, fetchBlocks } from './reducer';
+import type { Block as BlockType } from 'types/models';
+import { areBlocksLoaded, fetchBlocks, createBlock } from './reducer';
 import Blocks from './components/Blocks';
 
 type Props = {
-  fetchBlocks: () => void
+  fetchBlocks: () => void,
+  handleCreateBlock: () => void,
+  createBlock: () => void,
+  blocks: Object,
+  all: Array<BlockType>,
 }
 
-@asyncConnect([{
+class BlocksContainer extends Component {
+  constructor() {
+    super();
+
+    (this: any).handleCreateBlock = this.handleCreateBlock.bind(this);
+  }
+  props: Props;
+  handleCreateBlock(values) {
+    this.props.createBlock(values);
+  }
+  render() {
+    return (
+      <div>
+        <Blocks blocks={ this.props.blocks.all } handleSubmit={ this.handleCreateBlock } />
+      </div>
+    );
+  }
+}
+const asyncProps = [{
   promise: ({ store: { dispatch, getState } }) => {
     const promises = [];
     if (!areBlocksLoaded(getState())) {
@@ -17,23 +39,10 @@ type Props = {
     }
     return Promise.all(promises);
   },
-}])
-class BlocksContainer extends Component {
-  componentDidMount() {
-    this.props.fetchBlocks();
-  }
-  props: Props;
-  render() {
-    return (
-      <div>
-        <Blocks { ...this.props } />
-      </div>
-    );
-  }
-}
+}];
 const mapStateToProps = (state) => {
   return {
     blocks: state.blocks,
   };
 };
-export default connect(mapStateToProps, { fetchBlocks })(BlocksContainer);
+export default asyncConnect(asyncProps, mapStateToProps, { fetchBlocks, createBlock })(BlocksContainer);

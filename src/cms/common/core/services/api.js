@@ -7,6 +7,7 @@ import {
   API_AUTH,
   API_SETTINGS,
   API_PAGES,
+  API_BLOCKS,
   API_NAVIGATION,
   API_TAGS,
   API_LINKS,
@@ -260,4 +261,17 @@ export function doUpdateMember(userData) {
     .put(`${API_USERS}/admin/${userData.id}`)
     .set('Authorization', `Bearer ${localStorage.getItem(TOKEN_KEY)}`)
     .send(payload);
+}
+
+
+export function doCreateBlock(data) {
+  return request
+    .post(`${API_BLOCKS}`)
+    .set('Authorization', `${localStorage.getItem(TOKEN_KEY)}`)
+    .send({
+      name: data.name,
+      label: data.label,
+      element: data.element,
+      content: data.content,
+    });
 }

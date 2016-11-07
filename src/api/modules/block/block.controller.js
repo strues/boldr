@@ -1,5 +1,6 @@
 import uuid from 'node-uuid';
-import { responseHandler, NotFound, InternalServer } from '../../core';
+import slugify from 'slugify';
+import { NotFound, InternalServer } from '../../core';
 import Activity from '../activity/activity.model';
 import Block from './block.model';
 
@@ -20,27 +21,27 @@ export async function listBlocks(req, res, next) {
 }
 
 export async function createBlock(req, res, next) {
-  try {
-    const newBlock = await newBlock.query().insert({
-      id: uuid.v4(),
-      name: req.body.name,
-      label: req.body.label,
-      element: req.body.element,
-      content: req.body.content,
-    });
-    await Activity.query().insert({
-      id: uuid.v4(),
-      name: newBlock.name,
-      user_id: req.user.id,
-      action: 'New block',
-      type: 'create',
-      data: { newBlock },
-      entry_uuid: newBlock.id,
-      entry_table: 'block',
-    });
-
-    return res.status(202).json(newBlock);
-  } catch (error) {
-    return next(new InternalServer());
+  const elem = req.body.element;
+  const newBlock = await Block.query().insert({
+    id: uuid.v4(),
+    name: req.body.name,
+    label: slugify(req.body.label),
+    element: elem.toLowerCase(),
+    content: req.body.content,
+  });
+  if (!newBlock) {
+    return res.status(500).json('error')
   }
+  await Activity.query().insert({
+    id: uuid.v4(),
+    name: newBlock.name,
+    user_id: req.user.id,
+    action: 'New block',
+    type: 'create',
+    data: { newBlock },
+    entry_uuid: newBlock.id,
+    entry_table: 'block',
+  });
+
+  return res.status(201).json(newBlock);
 }

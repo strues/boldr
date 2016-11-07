@@ -11,7 +11,6 @@
 .*/node_modules/editions/.*
 .*/node_modules/flow-remove-types/.*
 .*/node_modules/flow-coverage-report/.*
-.*/node_modules/draft-js/*
 .*node_modules/cjson.*
 .*node_modules/fbjs.*
 .*node_modules/npm.*
@@ -25,7 +24,7 @@ tools/flow/definitions/
 [options]
 module.system=haste
 
-esproposal.class_static_fields=ignore
+esproposal.class_static_fields=enable
 esproposal.class_instance_fields=ignore
 esproposal.decorators=ignore
 esproposal.export_star_as=ignore
@@ -36,6 +35,7 @@ module.name_mapper='^\(.*\)\.\(css\|scss\)$' -> '<PROJECT_ROOT>/tools/flow/stubs
 module.name_mapper='^\(state\|components\|scenes\|core\|types\|theme\)\/\(.*\)$' -> '<PROJECT_ROOT>/src/cms/common/\1/\2'
 module.name_mapper='^\(apicore\)\/\(.*\)$' -> '<PROJECT_ROOT>/src/api/core/\1/\2'
 
+suppress_type=$FlowIssues
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe
 suppress_comment=\\(.\\|\n\\)*\\$FlowIssue
 [version]

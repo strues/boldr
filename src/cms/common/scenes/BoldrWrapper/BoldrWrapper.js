@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-connect';
 import type { ReactElement } from '../../types/react';
 import { Notifications } from '../../components/index';
@@ -30,21 +29,6 @@ type Props = {
   settings: Object
 };
 
-@asyncConnect([{
-  promise: ({ store: { dispatch, getState } }) => {
-    const promises = [];
-    if (!areSettingsLoaded(getState())) {
-      promises.push(dispatch(fetchSettingsIfNeeded()));
-    }
-    if (!arePagesLoaded(getState())) {
-      promises.push(dispatch(fetchPagesIfNeeded()));
-    }
-    if (!isNavLoaded(getState())) {
-      promises.push(dispatch(loadMainNav()));
-    }
-    return Promise.all(promises);
-  },
-}])
 class BoldrWrapper extends Component {
   componentDidMount() {
     this.props.fetchSettingsIfNeeded();
@@ -63,6 +47,21 @@ class BoldrWrapper extends Component {
   }
 }
 
+const asyncProps = [{
+  promise: ({ store: { dispatch, getState } }) => {
+    const promises = [];
+    if (!areSettingsLoaded(getState())) {
+      promises.push(dispatch(fetchSettingsIfNeeded()));
+    }
+    if (!arePagesLoaded(getState())) {
+      promises.push(dispatch(fetchPagesIfNeeded()));
+    }
+    if (!isNavLoaded(getState())) {
+      promises.push(dispatch(loadMainNav()));
+    }
+    return Promise.all(promises);
+  },
+}];
 function mapStateToProps(state) {
   return {
     boldr: state.boldr,
@@ -73,4 +72,5 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { fetchSettingsIfNeeded, fetchPagesIfNeeded, loadMainNav })(BoldrWrapper);
+export default asyncConnect(asyncProps, mapStateToProps, {
+  fetchSettingsIfNeeded, fetchPagesIfNeeded, loadMainNav })(BoldrWrapper);

@@ -1,5 +1,7 @@
-import renderTextField from './TextField';
+import TextField from './TextField';
+import SelectField from './SelectField';
 
 export {
-  renderTextField,
+  TextField,
+  SelectField,
 };

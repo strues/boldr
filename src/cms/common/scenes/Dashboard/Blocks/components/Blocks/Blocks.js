@@ -1,20 +1,35 @@
 /* @flow */
 import React from 'react';
-import { Grid, Menu, Segment } from 'semantic-ui-react';
-import BlockForm from '../BlockForm';
+import { Grid, Col, Row } from 'components/index';
+import { Menu, Segment, Icon, Button } from 'semantic-ui-react';
+import type { Block as BlockType } from 'types/models';
+import { Block, CreateBlockForm } from '../';
 
-const Blocks = (props) => {
+type Props = {
+  handleSubmit: () => void,
+  blocks: Array<BlockType>
+}
+const Blocks = (props: Props) => {
   return (
-    <Grid>
-      <Grid.Column stretched width={ 12 }>
+    <Row>
+      <Col xs={ 12 } md={ 8 }>
          <Segment>
-           Blocks
+         <Segment inverted>
+           <Button icon>
+             <Icon name="list layout" />
+           </Button>
          </Segment>
-      </Grid.Column>
-      <Grid.Column>
-        <BlockForm />
-      </Grid.Column>
-    </Grid>
+           Blocks
+           { !(props.blocks: Array<BlockType>) ?
+             <div>Loading</div> :
+             props.blocks.map(block => <Block key={ block.id } block={ block } />)
+           }
+         </Segment>
+      </Col>
+      <Col xs={ 12 } md={ 4 }>
+        <CreateBlockForm onSubmit={ props.handleSubmit } />
+      </Col>
+      </Row>
   );
 };
 

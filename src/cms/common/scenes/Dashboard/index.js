@@ -46,6 +46,14 @@ export default (store, connect) => {
         },
       },
       {
+        path: 'blocks/build/:id',
+        getComponent(nextState, cb) {
+          System.import('./Blocks/BuildBlock')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+        },
+      },
+      {
         path: 'posts',
         getComponent(nextState, cb) {
           System.import('./Post/PostList')
