@@ -66,7 +66,7 @@ class Dashboard extends PureComponent {
       <Grid fluid>
         <Sidebar { ...sidebarProps }>
           <Titlebar title="Boldr" icon={
-            <Icon name="menu" onClick={ this.menuButtonClick } />
+            <Icon name="ellipsis vertical" onClick={ this.menuButtonClick } />
          }>
             <Col xs>
               <div>

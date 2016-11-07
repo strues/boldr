@@ -25,6 +25,17 @@ export type Tag = {
   description: String
 };
 
+export type Page = {
+  id: String,
+  name: String,
+  url: String,
+  layout: ?Object,
+  status: String,
+  meta: ?Object,
+  restricted: Boolean,
+  data: ?Object
+}
+
 export type Block = {
   id: String,
   name: String,

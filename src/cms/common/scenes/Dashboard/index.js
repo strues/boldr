@@ -93,14 +93,7 @@ export default (store, connect) => {
           importModules.catch(errorLoading);
         },
       },
-      {
-        path: 'content',
-        getComponent(nextState, cb) {
-          System.import('./Collections')
-        .then(loadModule(cb))
-        .catch(errorLoading);
-        },
-      },
+      
       {
         path: 'navigation',
         getComponent(nextState, cb) {
