@@ -73,7 +73,9 @@
     "lint": "./node_modules/.bin/eslint src",
     "lint:fix": "npm run lint -- --fix",
     "migrate": "./node_modules/.bin/knex --knexfile src/api/config/knexfile.js migrate:latest",
+    "migrate:prod": "./node_modules/.bin/knex --knexfile boldrAPI/config/knexfile.js migrate:latest",
     "seed": "./node_modules/.bin/knex --knexfile src/api/config/knexfile.js seed:run",
+    "seed:prod": "./node_modules/.bin/knex --knexfile boldrAPI/config/knexfile.js seed:run",
     "start:cms": "node build/boldrCMS/server",
     "test:ci": "NODE_ENV=test CI=true jest -w 2",
     "test": "NODE_ENV=test jest"

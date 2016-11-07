@@ -70,15 +70,29 @@ After Boldr has started visit <http://localhost:3000>. The admin account is alre
 
 ### Production
 
-> I wouldnt recommend it. Not yet. However if you feel like building the application as if it were production execute the following.
+> I wouldn't recommend it for a serious website. Not yet. However if you feel like building the application as if it were production execute the following.
 
-```bash
-$ npm run build
-```
+Running Boldr in production is fairly simple. We'll go over the steps right now in order to get you up and running as soon as possible. Please bear with us, as the process for automation continues to evolve.
 
-The build process outputs the frontend and server-side rendering app in `build/boldrCMS`. It then runs the API code through babel and outputs to `build/boldrAPI`.  
-**Finally:**  
-`npm run start:prod`
+**Steps**
+- Build BoldrCMS and BoldrAPI by running `make build`.
+- Upload the contents of the build folder to one directory above your web root.
+- Upload the contents of `public` to your web root.
+- Upload `.env`, and `package.json` to the directory containing `boldrAPI`, `public_html` and `boldrCMS`.
+- Install the production dependencies on your server with `npm install`.
+- Upload `docker-compose.yml` and run `docker-compose up -d`.
+- Run `npm run migrate:prod` and `npm run seed:prod`.
+- Start the API with `NODE_ENV=production POSTGRES_CONN_URI=postgres://postgres:password@localhost:5432/boldr node boldrAPI/index.js`.
+- Start the CMS with `node boldrCMS/server/index.js`.
+
+**Directory Structure**
+An example of how your directory containing Boldr should look is as follows:
+
+![prod_dir](docs/assets/prod_dir.png)
+
+
+[`See the documentation`](docs/production.md)  
+
 
 ## Contributing
 
@@ -97,8 +111,9 @@ Looking for an open source project to contribute to? All types of contributions 
 
 - [`Roadmap`](ROADMAP.md)
 - [`API`](docs/apidoc.md)
-- [`Theming`](docs/theming.md)  
+- [`Theming`](docs/theming.md)
 - [`Docker`](docs/docker.md)
+- [`Production`](docs/production.md)
 - [`Nginx`](docs/nginx.md)
 - [`Troubleshooting`](docs/troubleshooting.md)
 

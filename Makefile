@@ -18,3 +18,23 @@ test:
 	NODE_ENV=test jest
 test-ci:
 	NODE_ENV=test CI=true jest -w 2
+
+copy-sw:
+	cp build/boldrCMS/serviceWorker/sw.js public/sw.js
+
+migrate-prod:
+	npm run migrate:prod
+
+seed-prod:
+	npm run seed:prod
+
+start-api:
+	NODE_ENV=production POSTGRES_CONN_URI=postgres://postgres:password@localhost:5432/boldr node boldrAPI/index.js
+
+build-cms:
+	npm run build
+
+build-api:
+	npm run build:api
+
+build: build-cms copy-sw build-api

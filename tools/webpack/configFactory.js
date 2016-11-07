@@ -152,9 +152,6 @@ function webpackConfigFactory({ target, mode }, { json }) {
           context: __dirname
         })
       ),
-      ifProd(
-        new LodashModuleReplacementPlugin()
-      ),
       // Service Worker.
       // @see https://github.com/goldhand/sw-precache-webpack-plugin
       // This plugin generates a service worker script which as configured below
@@ -286,7 +283,6 @@ function webpackConfigFactory({ target, mode }, { json }) {
             babelrc: false,
             presets: [['latest', { 'es2015': { 'modules': false }}], 'react'],
             plugins: removeEmpty([
-              'lodash',
               'transform-class-properties',
               'transform-decorators-legacy',
               'transform-object-rest-spread',
