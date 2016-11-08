@@ -88,7 +88,7 @@ Running Boldr in production is fairly simple. We'll go over the steps right now 
 **Directory Structure**
 An example of how your directory containing Boldr should look is as follows:
 
-![prod_dir](docs/assets/prod_dir.png)
+<img src="docs/assets/prod_dir.png" width="300" />
 
 
 [`See the documentation`](docs/production.md)  

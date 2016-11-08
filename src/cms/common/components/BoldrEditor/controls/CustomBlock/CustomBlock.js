@@ -1,16 +1,18 @@
-export type Props = {
-  controls?: boolean | Array<string>,
-  display?: 'block' | 'inline',
-  onClick?: Function,
-  customBlocks?: Object,
-  customBlockType?: string,
-};
-
-import React, { PropTypes } from 'react';
+/* @flow */
+import React from 'react';
 
 import StyleButton from '../StyleButton/StyleButton';
 
-function CustomBlockControls({ controls, display, onClick, customBlocks, customBlockType }) {
+type Props = {
+  controls: Array<string>,
+  display?: 'block' | 'inline',
+  onClick: Function,
+  customBlocks: Object,
+  customBlockType: string,
+};
+
+function CustomBlockControls(props: Props) {
+  const { controls, display, onClick, customBlocks, customBlockType } = props;
   const buttons = [];
 
   const getClickHandlerForType = type => () => {

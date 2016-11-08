@@ -1,19 +1,21 @@
 import React from 'react';
-import Blockquote from '../icons/Blockquote';
-import Bold from '../icons/Bold';
-import Codeblock from '../icons/Codeblock';
-import H1 from '../icons/H1';
-import H2 from '../icons/H2';
-import H3 from '../icons/H3';
-import H4 from '../icons/H4';
-import H5 from '../icons/H5';
-import H6 from '../icons/H6';
-import Italic from '../icons/Italic';
-import Link from '../icons/Link';
-import Monospace from '../icons/Monospace';
-import OrderedList from '../icons/OrderedList';
-import Underline from '../icons/Underline';
-import UnorderedList from '../icons/UnorderedList';
+import {
+  Bold,
+  Codeblock,
+  Blockquote,
+  H1,
+  H2,
+  H3,
+  H4,
+  H5,
+  H6,
+  Italic,
+  Link,
+  Monospace,
+  OrderedList,
+  Underline,
+  UnorderedList,
+} from '../icons';
 
 export function validator(controls) {
   return (propValue, key, componentName, location, propFullName) => {

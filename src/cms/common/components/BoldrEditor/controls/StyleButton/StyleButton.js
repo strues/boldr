@@ -1,17 +1,19 @@
-import React, { Component, PropTypes } from 'react';
+/* @flow */
+import React, { PureComponent } from 'react';
 
-export type Props = {
-  onToggle?: Function,
+type Props = {
+  onToggle: Function,
   style?: string,
   active?: boolean,
-  icon?: number | string | React.Element | Array<any>,
+  icon?: number | string | ReactElement | Array<any>,
   label?: string,
+  onToggle: () => void,
 };
 
-class StyleButton extends Component {
+class StyleButton extends PureComponent {
   constructor() {
     super();
-    this.onToggle = (e) => {
+    (this: any).onToggle = (e) => {
       e.preventDefault();
       this.props.onToggle(this.props.style);
     };
@@ -26,7 +28,7 @@ class StyleButton extends Component {
     }
 
     return (
-        <span className={ className } onMouseDown={ this.onToggle }>
+        <span className={ className } onMouseDown={ (this: any).onToggle }>
          { this.props.icon ? this.props.icon : this.props.label }
         </span>
     );

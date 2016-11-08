@@ -1,15 +1,16 @@
-export type Props = {
-  editorState?: Object,
-  onToggle?: Function,
-  controls?: boolean | Array<INLINE_CONTROLS>,
-  display?: 'block' | 'inline',
-};
-
-import React, { PropTypes } from 'react';
+/* @flow */
+import React from 'react';
 import StyleButton from '../StyleButton/StyleButton';
 import { INLINE_STYLES, INLINE_CONTROLS } from '../helpers';
 
-const InlineStyleControls = ({ controls, display, editorState, onToggle }) => {
+type Props = {
+  editorState: Object,
+  onToggle?: Function,
+  controls: Array<INLINE_CONTROLS>,
+  display?: 'block' | 'inline',
+};
+const InlineStyleControls = (props: Props) => {
+  const { editorState, onToggle, controls, display } = props;
   const currentStyle = editorState.getCurrentInlineStyle();
 
   return (
@@ -18,7 +19,7 @@ const InlineStyleControls = ({ controls, display, editorState, onToggle }) => {
         INLINE_STYLES.map(type => {
           if (controls.indexOf(type.label) !== -1) {
             return (
-              <StyleButton key={ type.label }
+              <StyleButton
                 key={ type.label }
                 active={ currentStyle.has(type.style) }
                 icon={ type.icon }
