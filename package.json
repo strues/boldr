@@ -221,7 +221,7 @@
     "flow-bin": "^0.34.0",
     "glob": "7.1.1",
     "happypack": "^2.2.1",
-    "jest-cli": "^16.0.2",
+    "jest-cli": "^17.0.0",
     "json-loader": "^0.5.4",
     "lodash-webpack-plugin": "^0.10.4",
     "md5": "^2.2.1",
