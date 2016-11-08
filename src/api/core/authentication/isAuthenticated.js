@@ -1,6 +1,5 @@
 import passport from 'passport';
 
-const debug = require('debug')('boldr:auth-ensureAuth');
 /**
  * Attaches the user object to the request if authenticated
  * Otherwise returns 403

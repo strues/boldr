@@ -1,8 +1,8 @@
 import express from 'express';
-import ensureAuthenticated from '../auth/ensureAuthenticated';
+import { BaseController, isAuthenticated } from '../../core';
 import * as ctrl from './attachment.controller';
-import { BaseController } from '../../core';
 import Attachment from './attachment.model';
+
 const controller = new BaseController(Attachment);
 
 const router = express.Router();
@@ -37,7 +37,7 @@ router.get('/:id', ctrl.getAttachment);
  * @apiGroup Attachment
  * @apiPermission user
  */
-router.post('/dashboard', ensureAuthenticated, ctrl.fromDashboard);
+router.post('/dashboard', isAuthenticated, ctrl.fromDashboard);
 router.delete('/:id', controller.destroy.bind(controller));
 router.get('/aws/bucket', ctrl.getAllAWS);
 

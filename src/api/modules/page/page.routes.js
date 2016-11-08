@@ -1,5 +1,5 @@
 import express from 'express';
-import { BaseController } from '../../core';
+import { BaseController, isAuthenticated } from '../../core';
 import { processQuery } from '../../utils';
 import Page from './page.model';
 import * as ctrl from './page.controller';

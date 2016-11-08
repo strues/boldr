@@ -1,6 +1,5 @@
 import express from 'express';
-import { BaseController } from '../../core';
-import ensureAuthenticated from '../auth/ensureAuthenticated';
+import { BaseController, isAuthenticated } from '../../core';
 import Link from './link.model';
 import * as ctrl from './link.controller';
 
@@ -20,7 +19,7 @@ router.get('/', ctrl.getLinks);
  * @apiGroup Links
  * @apiPermission admin
  */
-router.post('/', ensureAuthenticated, ctrl.createLink);
+router.post('/', isAuthenticated, ctrl.createLink);
 /**
  * @api {get} /links/:id Return a specific link by its id.
  * @apiName showLink
@@ -36,7 +35,7 @@ router.get('/:id', ctrl.showLink);
  * @apiPermission admin
  * @apiParam {Number} id The id of the link
  */
-router.put('/:id', ensureAuthenticated, ctrl.updateLink);
+router.put('/:id', isAuthenticated, ctrl.updateLink);
 /**
  * @api {patch} /links/:id Update a link
  * @apiName updateLink
@@ -44,7 +43,7 @@ router.put('/:id', ensureAuthenticated, ctrl.updateLink);
  * @apiPermission admin
  * @apiParam {Number} id The id of the link
  */
-router.patch('/:id', ensureAuthenticated, ctrl.updateLink);
+router.patch('/:id', isAuthenticated, ctrl.updateLink);
 /**
  * @api {delete} /links/:id Delete a link
  * @apiName destroy
@@ -52,6 +51,6 @@ router.patch('/:id', ensureAuthenticated, ctrl.updateLink);
  * @apiPermission admin
  * @apiParam {Number} id The id of the link
  */
-router.delete('/:id', ensureAuthenticated, controller.destroy.bind(controller));
+router.delete('/:id', isAuthenticated, controller.destroy.bind(controller));
 
 export default router;

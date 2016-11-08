@@ -1,5 +1,6 @@
 import express from 'express';
-import { BaseController } from '../../core';
+import { BaseController, isAuthenticated } from '../../core';
+
 import { processQuery } from '../../utils';
 import Role from './role.model';
 

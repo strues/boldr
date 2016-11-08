@@ -1,7 +1,8 @@
 import passport from 'passport';
 import uuid from 'node-uuid';
 import { Strategy as GitHubStrategy } from 'passport-github';
-import conf from '../../../config/config';
+const config = require('../../../core/config/config');
+
 
 const strategyOpts = {
   clientID: conf.get('social.github.id'),

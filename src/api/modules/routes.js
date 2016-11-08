@@ -4,7 +4,7 @@ import activityRoutes from './activity/activity.routes';
 import attachmentRoutes from './attachment/attachment.routes';
 import authRoutes from './auth/auth.routes';
 import blockRoutes from './block/block.routes';
-import collectionRoutes from './collection/collection.routes';
+
 import galleryRoutes from './gallery/gallery.routes';
 import linkRoutes from './link/link.routes';
 import navigationRoutes from './navigation/navigation.routes';
@@ -14,7 +14,6 @@ import roleRoutes from './role/role.routes';
 import s3Router from './s3/s3.routes';
 import settingRoutes from './setting/setting.routes';
 import tagRoutes from './tag/tag.routes';
-import typeRoutes from './type/type.routes';
 import tokenRoutes from './token/token.routes';
 import userRoutes from './user/user.routes';
 
@@ -46,7 +45,7 @@ router.use('/activities', activityRoutes);
 router.use('/attachments', attachmentRoutes);
 router.use('/auth', authRoutes);
 router.use('/blocks', blockRoutes);
-router.use('/collections', collectionRoutes);
+
 router.use('/galleries', galleryRoutes);
 router.use('/links', linkRoutes);
 router.use('/navigations', navigationRoutes);
@@ -59,7 +58,6 @@ router.use('/s3', s3Router({
 }));
 router.use('/settings', settingRoutes);
 router.use('/tags', tagRoutes);
-router.use('/types', typeRoutes);
 router.use('/tokens', tokenRoutes);
 router.use('/users', userRoutes);
 

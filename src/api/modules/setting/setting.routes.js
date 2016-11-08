@@ -1,6 +1,7 @@
 import express from 'express';
 import cache from '../../core/cache';
 import * as ctrl from './setting.controller';
+import { BaseController, isAuthenticated } from '../../core';
 
 const router = express.Router();
 /**

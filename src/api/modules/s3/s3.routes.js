@@ -1,9 +1,11 @@
 import uuid from 'node-uuid';
 import aws from 'aws-sdk';
 import express from 'express';
-import conf from '../../config/config';
 
 const debug = require('debug')('boldr:s3');
+const config = require('../../config/config');
+
+const awsConfig = config.get('aws');
 
 function checkTrailingSlash(path) {
   if (path && path[path.length - 1] !== '/') {
@@ -13,13 +15,13 @@ function checkTrailingSlash(path) {
 }
 
 const s3 = new aws.S3({
-  accessKeyId: conf.get('aws.keyId'),
-  secretAccessKey: conf.get('aws.keySecret'),
-  region: conf.get('aws.region'),
+  accessKeyId: awsConfig.keyId,
+  secretAccessKey: awsConfig.keySecret,
+  region: awsConfig.region,
 });
 
 export default function S3Router(options) {
-  const S3_BUCKET = conf.get('aws.bucket');
+  const S3_BUCKET = awsConfig.bucket;
   const getFileKeyDir = options.getFileKeyDir || function() {
     return '';
   };

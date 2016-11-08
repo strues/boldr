@@ -7,7 +7,8 @@
 import path from 'path';
 import fs from 'fs';
 import winston from 'winston';
-import conf from '../../config/config';
+
+const config = require('../../config/config');
 
 const logDir = path.resolve(`${process.cwd()}/logs`);
 const tsFormat = () => (new Date()).toLocaleTimeString();
@@ -21,7 +22,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const transports = [];
-if (conf.get('logger.console')) {
+if (config.get('logger:console')) {
   transports.push(
     new winston.transports.Console({
       handleExceptions: false,
@@ -33,12 +34,12 @@ if (conf.get('logger.console')) {
     }),
   );
 }
-if (conf.get('logger.files')) {
+if (config.get('logger:file')) {
   transports.push(
     new (require('winston-daily-rotate-file'))({
       filename: `${logDir}/apiError.log`,
       timestamp: tsFormat,
-      datePattern: conf.get('dateFormat'),
+      datePattern: config.get('date_format'),
       prepend: true,
       level: 'error',
     }),

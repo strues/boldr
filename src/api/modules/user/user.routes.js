@@ -1,6 +1,5 @@
 import express from 'express';
-import { BaseController, checkRole } from '../../core';
-import ensureAuthenticated from '../auth/ensureAuthenticated';
+import { BaseController, checkRole, isAuthenticated } from '../../core';
 import User from './user.model';
 import * as ctrl from './user.controller';
 
@@ -41,7 +40,7 @@ router.get('/:id', ctrl.getUser);
  * @apiError 401 Admin access only.
  * @apiError 409 Email already registered.
  */
-router.post('/', ensureAuthenticated, checkRole('Admin'), controller.create.bind(controller));
+router.post('/', isAuthenticated, checkRole('Admin'), controller.create.bind(controller));
 
 /**
  * @api {put} /users/:id Update user

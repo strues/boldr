@@ -3,20 +3,21 @@ import AWS from 'aws-sdk';
 import multer from 'multer';
 import uuid from 'node-uuid';
 import multerS3 from 'multer-s3';
-import conf from '../../config/config';
 
 const debug = require('debug')('boldr:attachment-service');
+const config = require('../../config/config');
 
+const awsConfig = config.get('aws');
 const s3 = new AWS.S3({
-  accessKeyId: conf.get('aws.keyId'),
-  secretAccessKey: conf.get('aws.keySecret'),
-  region: conf.get('aws.region'),
+  accessKeyId: awsConfig.keyId,
+  secretAccessKey: awsConfig.keySecret,
+  region: awsConfig.region,
 });
 
 const multerOptions = {
   storage: multerS3({
     s3,
-    bucket: conf.get('aws.bucket'),
+    bucket: awsConfig.bucket,
     acl: 'public-read',
     metadata(req, file, cb) {
       cb(null, { fieldName: file.fieldname });
@@ -30,7 +31,7 @@ const multerOptions = {
 const multerAvatar = {
   storage: multerS3({
     s3,
-    bucket: conf.get('aws.bucket'),
+    bucket: awsConfig.bucket,
     acl: 'public-read',
     metadata(req, file, cb) {
       cb(null, { fieldName: file.fieldname });
@@ -44,7 +45,7 @@ const multerAvatar = {
 const multerArticle = {
   storage: multerS3({
     s3,
-    bucket: conf.get('aws.bucket'),
+    bucket: awsConfig.bucket,
     acl: 'public-read',
     metadata(req, file, cb) {
       cb(null, { fieldName: file.fieldname });
@@ -67,7 +68,7 @@ function s3SignService(req, res, next) {
   const fileKey = checkTrailingSlash(getFileKeyDir(req)) + filename;
 
   const params = {
-    Bucket: conf.get('aws.bucket'),
+    Bucket: awsConfig.bucket,
     Key: fileKey,
     Expires: 60,
     ContentType: mimeType,
@@ -89,7 +90,7 @@ function s3SignService(req, res, next) {
 
 function tempRedirect(req, res) {
   const params = {
-    Bucket: conf.get('aws.bucket'),
+    Bucket: awsConfig.bucket,
     Key: checkTrailingSlash(getFileKeyDir(req)) + req.params[0],
   };
   const s3 = new AWS.S3();

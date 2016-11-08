@@ -2,19 +2,18 @@ import Debug from 'debug';
 import AWS from 'aws-sdk';
 import uuid from 'node-uuid';
 import multer from 'multer';
-
-import conf from '../../config/config';
 import Activity from '../activity/activity.model';
 import Attachment from './attachment.model';
 import { multerOptions, multerAvatar, multerArticle } from './attachment.service';
 
 const debug = Debug('boldr:attachment:controller');
-
+const config = require('../../config/config');
 // create a new S3 object
+const awsConfig = config.get('aws');
 const s3 = new AWS.S3({
-  accessKeyId: conf.get('aws.keyId'),
-  secretAccessKey: conf.get('aws.keySecret'),
-  region: conf.get('aws.region'),
+  accessKeyId: awsConfig.keyId,
+  secretAccessKey: awsConfig.keySecret,
+  region: awsConfig.region,
 });
 
 export const uploadFiles = multer(multerOptions);
@@ -67,7 +66,7 @@ export const getAttachment = async (req, res, next) => {
 
 export function getAllAWS(req, res, next) {
   const params = {
-    Bucket: conf.get('aws.bucket'),
+    Bucket: awsConfig.bucket,
   };
   s3.listObjectsV2(params, (err, data) => {
     if (err) {
