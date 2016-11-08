@@ -25,6 +25,7 @@ nconf
       'aws__keySecret',
       'aws__bucket',
       'aws__region',
+      'mail__mg_api_key',
       'host',
       'port',
       'ssr_port',

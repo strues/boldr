@@ -24,7 +24,7 @@ class NewPost extends Component {
   props: Props;
 
   handleSubmit(values) {
-    const postData: Post = {
+    const postData = {
       title: values.title,
       tags: values.tags,
       excerpt: values.excerpt,
@@ -39,7 +39,7 @@ class NewPost extends Component {
     return (
       <div>
         <EditorForm
-          editing={ false }
+          isEditing={ false }
           onSubmit={ this.props.onFormSubmit }
         />
       </div>

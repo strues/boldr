@@ -4,10 +4,13 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router, browserHistory } from 'react-router';
+import Router from 'react-router/lib/Router';
+import browserHistory from 'react-router/lib/browserHistory';
+import applyRouterMiddleware from 'react-router/lib/applyRouterMiddleware';
 import { syncHistoryWithStore } from 'react-router-redux';
 import WebFontLoader from 'webfontloader';
 import { ReduxAsyncConnect } from 'redux-connect';
+import useScroll from 'react-router-scroll/lib/useScroll';
 import ApiClient from '../common/core/services/ApiClient';
 import configureStore from '../common/state/store';
 import { checkAuth } from '../common/state/dux/auth';
@@ -36,13 +39,21 @@ const history = syncHistoryWithStore(browserHistory, store, {
 });
 const routes = getRoutes(store, history);
 function renderApp() {
-  const renderRouter = props =>
-  <ReduxAsyncConnect { ...props } helpers={ { client } } filter={ item => !item.deferred } />;
+  // wrapper to make redux-connect applyRouterMiddleware compatible see
+  // https://github.com/taion/react-router-scroll/issues/3
+  const useReduxAsyncConnect = () => ({
+    renderRouterContext: (child, props) => (
+      <ReduxAsyncConnect { ...props } helpers={ { client } } filter={ item => !item.deferred }>
+        { child }
+      </ReduxAsyncConnect>
+    ),
+  });
 
+  const middleware = applyRouterMiddleware(useScroll(), useReduxAsyncConnect());
   render(
     <ReactHotLoader>
       <Provider store={ store } key="provider">
-        <Router routes={ routes } history={ history } render={ renderRouter } key={ Math.random() } />
+        <Router routes={ routes } history={ history } render={ middleware } key={ Math.random() } />
       </Provider>
     </ReactHotLoader>,
     MOUNT_POINT,

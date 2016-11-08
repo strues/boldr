@@ -2,13 +2,27 @@ import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Form, Button, Segment } from 'semantic-ui-react';
 import { Col, Row, BoldrEditor } from 'components/index';
-import inlineStyles from 'theme/inlineStyles';
 import renderTextField from 'components/FormComponents/TextField';
 
 class EditorForm extends Component {
-
+  constructor(props) {
+    super();
+    this.checkEditStatus = this.checkEditStatus.bind(this);
+    this.state = {
+      edit: false,
+    };
+  }
+  componentDidMount() {
+    this.checkEditStatus();
+  }
+  checkEditStatus() {
+    const EDITING = this.props.isEditing === true;
+    if (EDITING) this.setState({ edit: true });
+  }
   render() {
     const { handleSubmit } = this.props;
+
+
     /**
      * wraps the editor component for embedding into redux-form as an input component
      * @param  {object} input
@@ -28,11 +42,15 @@ class EditorForm extends Component {
             <Segment style={ { padding: '1em' } }>
               <Field name="title" type="text" component={ renderTextField } label="Post Title" />
               <Form.Group widths="equal">
-                <Field name="tags" type="text"
-                  helpText="Separate using commas"
-                  component={ renderTextField }
-                  label="Tags"
-                />
+                {
+                  !this.state.edit ?
+                    <Field name="tags" type="text"
+                      helpText="Separate using commas"
+                      component={ renderTextField }
+                      label="Tags"
+                    /> :
+                  null
+                }
                 <Field name="feature_image" type="text"
                   helpText="URL for your image"
                   component={ renderTextField }
@@ -52,9 +70,9 @@ class EditorForm extends Component {
                   <Button type="submit" primary style={ { marginTop: '20px' } }>Save Post</Button>
                 </Col>
                 <Col xs={ 12 } md={ 6 }>
-                <div>
-                   <label><Field name="status" component="input" type="radio" value="draft" />Draft</label>
-                   <label><Field name="status" component="input" type="radio" value="published" />Published</label>
+                  <div>
+                    <label><Field name="status" component="input" type="radio" value="draft" />Draft</label>
+                    <label><Field name="status" component="input" type="radio" value="published" />Published</label>
                  </div>
                 </Col>
               </Row>
@@ -73,6 +91,7 @@ EditorForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   editing: PropTypes.bool,
   reset: PropTypes.func,
+  isEditing: PropTypes.bool,
   submitting: PropTypes.bool,
   fields: PropTypes.object,
   pristine: PropTypes.bool,

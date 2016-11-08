@@ -7,7 +7,7 @@ const globSync = require('glob').sync;
 const appRootPath = require('app-root-path').toString();
 const vendorDLLPaths = require('../config/vendorDLLPaths');
 const { createNotification } = require('../utils');
-
+const envVars = require('../config/envVars');
 // -----------------------------------------------------------------------------
 // PRIVATES
 
@@ -57,6 +57,7 @@ const ignoreModules = [
   'components',
   'theme',
   'state',
+  'types',
   'react-addons-test-utils',
   'chai',
   'enzyme-to-json',
@@ -112,6 +113,10 @@ function buildVendorDLL() {
 
 function ensureVendorDLLExists() {
   return new Promise((resolve, reject) => {
+    if (envVars.USE_DEV_DLL !== 'true') {
+      resolve();
+    }
+
     if (!fs.existsSync(dependenciesHashFilePath)) {
       // builddll
       createNotification({

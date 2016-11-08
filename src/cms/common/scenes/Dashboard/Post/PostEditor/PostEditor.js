@@ -41,6 +41,7 @@ class PostEditor extends Component {
         <EditorForm
           initialValues={ this.props.currentPost }
           onSubmit={ this.handleSubmit }
+          isEditing
         />
       </div>
     );

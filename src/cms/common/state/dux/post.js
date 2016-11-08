@@ -25,6 +25,12 @@ const DELETE_POST_FAILURE = '@boldr/dashboard/DELETE_POST_FAILURE';
 const DELETE_POST_REQUEST = '@boldr/dashboard/DELETE_POST_REQUEST';
 const DELETE_POST_SUCCESS = '@boldr/dashboard/DELETE_POST_SUCCESS';
 
+const TOGGLE_POST_LAYOUT = '@boldr/TOGGLE_POST_LAYOUT';
+
+
+export function togglePostLayoutView() {
+  return { type: TOGGLE_POST_LAYOUT };
+}
 
 /**
   * FETCH POST ACTIONS
@@ -249,6 +255,7 @@ export const getPosts = state => state.posts.list;
 const INITIAL_STATE = {
   loading: false,
   error: null,
+  layout: 4,
 };
 
 /**
@@ -322,6 +329,10 @@ export default function postsReducer(state = INITIAL_STATE, action = {}) {
         loading: false,
         error: action.error,
         isEditing: true,
+      };
+    case TOGGLE_POST_LAYOUT:
+      return {
+        ...state
       };
     default:
       return state;
