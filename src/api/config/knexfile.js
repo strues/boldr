@@ -5,11 +5,11 @@ const pgConfig = config.get('postgres');
 module.exports = {
   development: {
     client: 'pg',
-    connection: pgConfig.get('uri') || {
-      host: pgConfig.get('host') || 'localhost',
-      user: pgConfig.get('user') || 'postgres',
-      password: pgConfig.get('password') || 'password',
-      database: pgConfig.get('database') || 'boldr',
+    connection: pgConfig.uri || {
+      host: pgConfig.host|| 'localhost',
+      user: pgConfig.user || 'postgres',
+      password: pgConfig.password|| 'password',
+      database: pgConfig.db || 'boldr',
     },
     migrations: {
       directory: path.resolve(__dirname, '../db/_migrations'),
@@ -26,11 +26,11 @@ module.exports = {
   },
   test: {
     client: 'pg',
-    connection: pgConfig.get('uri') || {
-      host: pgConfig.get('host') || 'localhost',
-      user: pgConfig.get('user') || 'postgres',
-      password: pgConfig.get('password') || 'password',
-      database: pgConfig.get('database') || 'boldr',
+    connection: pgConfig.uri || {
+      host: pgConfig.host|| 'localhost',
+      user: pgConfig.user || 'postgres',
+      password: pgConfig.password|| 'password',
+      database: pgConfig.db || 'boldr',
     },
     migrations: {
       directory: path.resolve(__dirname, '../db/_migrations'),
@@ -47,7 +47,7 @@ module.exports = {
   },
   production: {
     client: 'pg',
-    connection: pgConfig.get('uri'),
+    connection: pgConfig.uri,
     searchPath: 'knex,public',
     migrations: {
       directory: path.resolve(__dirname, '../db/_migrations'),

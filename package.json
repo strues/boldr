@@ -51,7 +51,8 @@
         "DEBUG": "boldr:*",
         "NODE_ENV": "development",
         "BABEL_ENV": "api",
-        "REDIS_CONN_URI": "redis://127.0.0.1:6379/1",
+        "redis__uri": "redis://127.0.0.1:6379/1",
+        "postgres__uri": "postgres://postgres:password@localhost:5432/boldr",
         "API_PORT": 2121
       }
     }
