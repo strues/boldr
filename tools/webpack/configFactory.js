@@ -9,11 +9,14 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const appRootPath = require('app-root-path').toString();
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
-const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
-const { removeEmpty, ifElse, merge, happyPackPlugin } = require('../utils');
+const { removeEmpty, ifElse, merge, happyPackPlugin, chalkError, chalkInfo } = require('../utils');
 const envVars = require('../config/envVars');
+const defs = require('../config/defs');
 const appName = require('../../package.json').name;
 
+const babel = require('./plugins/babel');
+const sw = require('./plugins/sw');
+const happy = require('./plugins/happy');
 
 function webpackConfigFactory({ target, mode }, { json }) {
   if (!target || ['client', 'server', 'universalMiddleware'].findIndex(valid => target === valid) === -1) {
@@ -48,6 +51,7 @@ function webpackConfigFactory({ target, mode }, { json }) {
   const ifDevServer = ifElse(isDev && isServer);
   const ifDevClient = ifElse(isDev && isClient);
   const ifProdClient = ifElse(isProd && isClient);
+  const babelPlugin = babel.babelDevClient;
 
   return {
     target: ifNodeTarget('node', 'web'),
@@ -74,16 +78,14 @@ function webpackConfigFactory({ target, mode }, { json }) {
       'hidden-source-map'
     ),
     // Define our entry chunks for our bundle.
-    entry: merge(
-      {
-        index: removeEmpty([
-          ifDevClient('react-hot-loader/patch'),
-          ifDevClient(`webpack-hot-middleware/client?reload=true&path=http://localhost:${envVars.WPDS_PORT}/__webpack_hmr`), // eslint-disable-line
-          ifClient('regenerator-runtime/runtime'),
-          path.resolve(appRootPath, `./src/cms/${target}/index.js`),
-        ]),
-      }
-    ),
+    entry: merge({
+      index: removeEmpty([
+        ifDevClient('react-hot-loader/patch'),
+        ifDevClient(`webpack-hot-middleware/client?reload=true&path=http://localhost:${envVars.WPDS_PORT}/__webpack_hmr`), // eslint-disable-line
+        ifClient('regenerator-runtime/runtime'),
+        `${defs.paths.cms}/${target}/index.js`,
+      ]),
+    }),
     output: {
       // The dir in which our bundle should be output.
       path: path.resolve(appRootPath, envVars.BUNDLE_OUTPUT_PATH, `./${target}`),
@@ -152,17 +154,7 @@ function webpackConfigFactory({ target, mode }, { json }) {
           context: __dirname
         })
       ),
-      // Service Worker.
-      // @see https://github.com/goldhand/sw-precache-webpack-plugin
-      // This plugin generates a service worker script which as configured below
-      // will precache all our generated client bundle assets as well as the
-      // index page for our application.
-      // This gives us aggressive caching as well as offline support.
-      // Don't worry about cache invalidation. As we are using the Md5HashPlugin
-      // for our assets, any time their contents change they will be given
-      // unique file names, which will cause the service worker to fetch them.
-      ifProdClient(
-        new SWPrecacheWebpackPlugin(merge({
+      ifProdClient(new SWPrecacheWebpackPlugin(merge({
           // Note: The default cache size is 2mb. This can be reconfigured:
           // maximumFileSizeToCacheInBytes: 2097152,
           cacheId: `${appName}-sw`,
@@ -194,54 +186,9 @@ function webpackConfigFactory({ target, mode }, { json }) {
             logger: () => undefined,
           })
         )
-      )
-      ),
-      happyPackPlugin({
-        name: 'happypack-javascript',
-        loaders: [{
-          path: 'babel',
-          query: {
-            babelrc: false,
-            cacheDirectory: path.resolve(os.tmpdir(), 'boldr', 'babelc'),
-            presets: [['latest', { 'es2015': { 'modules': false }}], 'react'],
-            plugins: removeEmpty([
-              'transform-class-properties',
-              'transform-decorators-legacy',
-              'transform-object-rest-spread',
-              ifDevClient('react-hot-loader/babel'),
-                ['module-resolver', {
-                  root: ['./src/cms/common']
-                }]
-              ])
-            }
-          }
-        ]
-      }),
-      ifDevClient(
-        happyPackPlugin({
-          name: 'happypack-devclient-css',
-          loaders: [
-            { path: 'style-loader' },
-            {
-              path: 'css-loader',
-              options: {
-                importLoaders: 1,
-                localIdentName: '[local]__[hash:base64:5]',
-                modules: true,
-                sourceMap: true
-              }
-            },
-            { path: 'postcss-loader' },
-            {
-              path: 'sass-loader',
-              options: {
-                outputStyle: 'expanded',
-                sourceMap: true
-              }
-            }
-          ]
-        })
-      ),
+      )),
+      happy.happyJSPlugin(babelPlugin),
+      ifDevClient(happy.happyCSSPlugin),
       ifProdClient(
         new webpack.optimize.UglifyJsPlugin({
           // sourceMap: true,
@@ -271,28 +218,15 @@ function webpackConfigFactory({ target, mode }, { json }) {
         ifDev({
           test: /\.jsx?$/,
           loader: 'happypack/loader?id=happypack-javascript',
-          exclude: [/node_modules/, './src/api'],
-          include: [path.resolve(appRootPath, './src/cms')],
+          exclude: [/node_modules/, defs.paths.api],
+          include: [defs.paths.cms],
         }),
         ifProd({
           test: /\.jsx?$/,
           loader: 'babel',
-          exclude: [/node_modules/, './src/api'],
-          include: [path.resolve(appRootPath, './src/cms')],
-          query: {
-            babelrc: false,
-            presets: [['latest', { 'es2015': { 'modules': false }}], 'react'],
-            plugins: removeEmpty([
-              'transform-class-properties',
-              'transform-decorators-legacy',
-              'transform-object-rest-spread',
-              'transform-flow-strip-types',
-              'transform-react-constant-elements',
-              ['module-resolver', {
-                root: ['./src/cms/common']
-              }]
-            ]),
-          },
+          exclude: [/node_modules/, defs.paths.api],
+          include: [defs.paths.cms],
+          query: babel.babelProd,
         }),
         // JSON
         {

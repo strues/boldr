@@ -26,6 +26,9 @@ const DELETE_POST_REQUEST = '@boldr/dashboard/DELETE_POST_REQUEST';
 const DELETE_POST_SUCCESS = '@boldr/dashboard/DELETE_POST_SUCCESS';
 
 const TOGGLE_POST_LAYOUT = '@boldr/TOGGLE_POST_LAYOUT';
+const SHOW_POST_ALL = 'SHOW_POST_ALL';
+const SHOW_POST_CURRENT_TAG = 'SHOW_POST_CURRENT_TAG';
+const SHOW_POST_TAG = 'SHOW_POST_TAG';
 
 
 export function togglePostLayoutView() {
@@ -48,7 +51,7 @@ export function togglePostLayoutView() {
  * or they arent required to be refreshed.
  */
 export function fetchPostsIfNeeded() {
-  return (dispatch, getState) => {
+  return (dispatch: Function, getState: Function) => {
     if (shouldFetchPosts(getState())) {
       return dispatch(fetchPosts());
     }
@@ -62,7 +65,7 @@ export function fetchPostsIfNeeded() {
  * @return {Array} Posts returned as an array of post objects.
  */
 export function fetchPosts() {
-  return dispatch => {
+  return (dispatch: Function) => {
     dispatch(requestPosts());
     return api.doFetchPosts()
       .then(response => {
@@ -122,7 +125,7 @@ const receivePostsFailed = (err) => ({
  * @return {Object}             Response object.
  */
 export function createPost(data: Post) {
-  return (dispatch) => {
+  return (dispatch: Function) => {
     dispatch(beginCreatePost());
     return api.doCreatePost(data)
       .then(response => {
@@ -164,7 +167,7 @@ const errorCreatingPost = (err) => {
   *****************************************************************/
 
 export function deletePost(id: String) {
-  return (dispatch) => {
+  return (dispatch: Function) => {
     dispatch({
       type: DELETE_POST_REQUEST,
     });
@@ -191,19 +194,9 @@ const deletePostFail = (err) => ({
 
 
 export function updatePost(postData: Post) {
-  return dispatch => {
+  return (dispatch: Function) => {
     dispatch(updatePostDetails(postData));
-    return request
-      .put(`${API_POSTS}/pid/${postData.id}`)
-      .set('Authorization', `${localStorage.getItem('token')}`)
-      .send({
-        // title: articleData.title,
-        content: postData.content,
-        excerpt: postData.excerpt,
-        feature_image: postData.feature_image,
-        tag: postData.tag,
-        status: postData.status,
-      })
+    return api.doUpdatePost(postData)
       .then(response => {
         dispatch(updatePostSuccess(response));
         dispatch(notificationSend({
@@ -255,7 +248,6 @@ export const getPosts = state => state.posts.list;
 const INITIAL_STATE = {
   loading: false,
   error: null,
-  layout: 4,
 };
 
 /**
@@ -264,7 +256,7 @@ const INITIAL_STATE = {
  * @param  {Object} action      The action object
  */
 
-export default function postsReducer(state = INITIAL_STATE, action = {}) {
+export default function postsReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
     case FETCH_POSTS_REQUEST:
     case LOAD_POST_REQUEST:

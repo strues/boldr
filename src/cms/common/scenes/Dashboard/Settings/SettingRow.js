@@ -11,7 +11,7 @@ type Props = {
   key: String,
   updateBoldrSettings: () => void,
   setting: Setting
-}
+};
 
 class SettingRow extends Component {
   constructor() {
@@ -48,12 +48,10 @@ class SettingRow extends Component {
   }
   renderEditing() {
     return (
-      <Table.Cell>
         <Form onSubmit={ this.handleSubmit }>
           <Form.Input name="value" placeholder={ this.props.setting.value } />
           <Button type="submit">Save</Button>
         </Form>
-      </Table.Cell>
     );
   }
   render() {

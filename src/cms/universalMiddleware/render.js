@@ -45,8 +45,6 @@ function serviceWorkerScript() {
   return '';
 }
 const styled = styleSheet.rules().map(rule => rule.cssText).join('\n');
-clientAssets.styles.push(styled);
-
 const styles = styleTags(clientAssets.styles);
 
 const scripts = scriptTags(clientAssets.scripts);
@@ -94,8 +92,11 @@ function render(reactAppElement: ?ReactElement, preloadedState: ?Object) {
         ${helmet ? helmet.title.toString() : ''}
         ${helmet ? helmet.meta.toString() : ''}
         ${helmet ? helmet.link.toString() : ''}
-
+        <style type="text/css">
+        ${styled}
+        </style>
         ${styles}
+
         ${helmet ? helmet.style.toString() : ''}
         ${polyfillIoScript()}
         ${serviceWorkerScript()}

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Segment, Button, Modal, List, Icon } from 'semantic-ui-react';
 import { Row, Col } from 'components/index';
-import { getByLabel } from 'state/dux/boldr/nav';
+import { getByLabel } from 'state/selectors';
 import { updateNavLinks, addNavLinks } from 'state/index';
 import NavigationEditor from './components/NavigationEditor';
 import NavigationForm from './components/NavigationForm';

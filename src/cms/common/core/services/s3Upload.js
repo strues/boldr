@@ -1,5 +1,3 @@
-import latinize from '../utils/latinize';
-
 S3Upload.prototype.server = '';
 S3Upload.prototype.signingUrl = '/sign-s3';
 S3Upload.prototype.fileElement = null;
@@ -63,8 +61,7 @@ S3Upload.prototype.executeOnSignedUrl = function(file, callback) {
     file.name.replace(/[!\^`><{}\[\]()*#%'"~|&@:;$=+?\s\\\/\x00-\x1F\x7f’]+/ig, '_')
     .normalize('NFC');
 
-  const fileName = latinize(normalizedFileName);
-  let queryString = `?objectName=${fileName}&contentType=${encodeURIComponent(file.type)}`;
+  let queryString = `?objectName=${normalizedFileName}&contentType=${encodeURIComponent(file.type)}`;
   if (this.signingUrlQueryParams) {
     const signingUrlQueryParams = this.signingUrlQueryParams;
     Object.keys(signingUrlQueryParams).forEach((key) => {
@@ -139,8 +136,7 @@ S3Upload.prototype.uploadToS3 = function(file, signResult) {
       file.name.replace(/[!\^`><{}\[\]()*#%'"~|&@:;$=+?\s\\\/\x00-\x1F\x7f]+/ig, '_')
       .normalize('NFC');
 
-    const fileName = latinize(normalizedFileName);
-    xhr.setRequestHeader('Content-Disposition', `${disposition}; filename=${fileName}`);
+    xhr.setRequestHeader('Content-Disposition', `${disposition}; filename=${normalizedFileName}`);
   }
 
   if (this.uploadRequestHeaders) {

@@ -19,7 +19,7 @@ const Wrapper = styled.div`
   min-height: 100vh;
   box-sizing: border-box;
 `;
-const Content = styled.section`
+const ContentWrapper = styled.section`
   width: 100%;
   box-sizing: border-box;
   margin: 1rem auto;
@@ -37,9 +37,9 @@ const PageTemplate = (props: Props) => {
 
         { props.hero }
 
-        <Content>
+        <ContentWrapper>
           { props.children }
-        </Content>
+        </ContentWrapper>
 
         <FooterWrapper>
           { props.footer || <Footer /> }

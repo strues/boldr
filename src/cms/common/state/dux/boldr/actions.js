@@ -46,7 +46,7 @@ function startLoadNav() {
 function errorLoadNav(err) {
   return {
     type: t.LOAD_NAVIGATION_FAILURE,
-    error: err,
+    error: 'Error loading nav',
   };
 }
 

@@ -1,5 +1,6 @@
 import { push } from 'react-router-redux';
 import * as api from 'core/services/api';
+import { setToken, getToken } from 'core/services/token';
 import { TOKEN_KEY } from 'core/config';
 import * as notif from 'core/config/notifications';
 import { notificationSend } from './notifications';
@@ -80,7 +81,7 @@ export function login(loginData, redir) {
           dispatch(loginError());
           dispatch(notificationSend(notif.MSG_LOGIN_ERROR('Unable to login')));
         }
-        localStorage.setItem(TOKEN_KEY, response.body.token);
+        setToken(response.body.token)
         dispatch(loginSuccess(response));
         dispatch(notificationSend(notif.MSG_LOGIN_SUCCESS));
         dispatch(push('/'));
