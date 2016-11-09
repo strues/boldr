@@ -1,5 +1,4 @@
-import React, { Component, PropTypes } from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
 import { asyncConnect } from 'redux-connect';
 import Widget from 'components/Widget';
 
@@ -7,17 +6,7 @@ import { Col, Row } from 'components/index';
 import { loadSiteActivity } from '../reducer';
 import ActivityWidget from './components/ActivityWidget';
 
-@asyncConnect([{
-  promise: ({ store: { dispatch, getState } }) => {
-    const promises = [];
-    promises.push(dispatch(loadSiteActivity()));
-    return Promise.all(promises);
-  },
-}])
 class DashboardWidgets extends Component {
-  componentDidMount() {
-    this.props.loadSiteActivity();
-  }
   render() {
     return (
       <div>
@@ -41,10 +30,13 @@ class DashboardWidgets extends Component {
     );
   }
 }
+const asyncProps = [{
+  promise: ({ store: { dispatch, getState } }) => dispatch(loadSiteActivity()),
+}];
 
 function mapStateToProps(state) {
   return {
     activities: state.dashboard.activities,
   };
 }
-export default connect(mapStateToProps, { loadSiteActivity })(DashboardWidgets);
+export default asyncConnect(asyncProps, mapStateToProps, { loadSiteActivity })(DashboardWidgets);

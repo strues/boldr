@@ -84,6 +84,7 @@ export function memberSelected(userId) {
 }
 
 const INITIAL_STATE = {
+  loaded: false,
   loading: false,
   members: [],
   error: null,

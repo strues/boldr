@@ -1,6 +1,5 @@
 /* @flow */
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-connect';
 import { Item, Segment, Icon, Menu } from 'semantic-ui-react';
 import { fetchPostsIfNeeded, getPosts, deletePost } from '../../../../state/dux/post';
@@ -15,13 +14,7 @@ export type Props = {
   fetchPostsIfNeeded: () => void,
   current?: Object
 };
-@asyncConnect([{
-  promise: ({ store: { dispatch, getState } }) => {
-    const promises = [];
-    promises.push(dispatch(fetchPostsIfNeeded()));
-    return Promise.all(promises);
-  },
-}])
+
 class PostList extends Component {
   constructor(props: Props) {
     super(props);
@@ -79,4 +72,8 @@ const mapStateToProps = (state) => {
     loading: state.posts.loading,
   };
 };
-export default connect(mapStateToProps, { fetchPostsIfNeeded, deletePost })(PostList);
+const asyncProps = [{
+  promise: ({ store: { dispatch, getState } }) => dispatch(fetchPostsIfNeeded()),
+}];
+
+export default asyncConnect(asyncProps, mapStateToProps, { fetchPostsIfNeeded, deletePost })(PostList);

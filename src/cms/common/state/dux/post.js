@@ -1,21 +1,19 @@
 /* @flow */
-import request from 'superagent';
 import * as api from 'core/services/api';
 import * as notif from 'core/config/notifications';
-import { API_POSTS } from 'core/config';
 import type { Post } from '../../types/models';
 import { notificationSend } from './notifications';
 
-const FETCH_POSTS_REQUEST = '@boldr/FETCH_POSTS_REQUEST';
-const FETCH_POSTS_SUCCESS = '@boldr/FETCH_POSTS_SUCCESS';
-const FETCH_POSTS_FAILURE = '@boldr/FETCH_POSTS_FAILURE';
-const LOAD_POST_REQUEST = '@boldr/LOAD_POST_REQUEST';
-const LOAD_POST_SUCCESS = '@boldr/LOAD_POST_SUCCESS';
-const LOAD_POST_FAILURE = '@boldr/LOAD_POST_FAILURE';
-const UPDATE_POST_REQUEST = '@boldr/dashboard/UPDATE_POST_REQUEST';
-const UPDATE_POST_SUCCESS = '@boldr/dashboard/UPDATE_POST_SUCCESS';
-const UPDATE_POST_FAILURE = '@boldr/dashboard/UPDATE_POST_FAILURE';
-const SELECT_POST = 'SELECT_POST';
+export const FETCH_POSTS_REQUEST = '@boldr/FETCH_POSTS_REQUEST';
+export const FETCH_POSTS_SUCCESS = '@boldr/FETCH_POSTS_SUCCESS';
+export const FETCH_POSTS_FAILURE = '@boldr/FETCH_POSTS_FAILURE';
+export const LOAD_POST_REQUEST = '@boldr/LOAD_POST_REQUEST';
+export const LOAD_POST_SUCCESS = '@boldr/LOAD_POST_SUCCESS';
+export const LOAD_POST_FAILURE = '@boldr/LOAD_POST_FAILURE';
+export const UPDATE_POST_REQUEST = '@boldr/dashboard/UPDATE_POST_REQUEST';
+export const UPDATE_POST_SUCCESS = '@boldr/dashboard/UPDATE_POST_SUCCESS';
+export const UPDATE_POST_FAILURE = '@boldr/dashboard/UPDATE_POST_FAILURE';
+export const SELECT_POST = 'SELECT_POST';
 const SELECT_POST_SUCCESS = 'SELECT_POST_SUCCESS';
 const SELECT_POST_FAIL = 'SELECT_POST_FAIL';
 const CREATE_POST_REQUEST = '@boldr/dashboardCREATE_POST_REQUEST';
@@ -241,13 +239,16 @@ export const postsToState = (list) => (
   }), {})
 );
 
-export const getPosts = state => state.posts.list;
+export const getPosts = (state: Object) => state.posts.list;
+export type State = { loading: boolean, error: null, list: Array<String>, bySlug: Post }
 //
 // Reducer
 // -----------------
 const INITIAL_STATE = {
-  loading: false,
+  loaded: false,
   error: null,
+  list: [],
+  bySlug: {},
 };
 
 /**
@@ -256,7 +257,7 @@ const INITIAL_STATE = {
  * @param  {Object} action      The action object
  */
 
-export default function postsReducer(state = INITIAL_STATE, action) {
+export default function postsReducer(state: State = INITIAL_STATE, action: Object) {
   switch (action.type) {
     case FETCH_POSTS_REQUEST:
     case LOAD_POST_REQUEST:
@@ -265,11 +266,13 @@ export default function postsReducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         loading: true,
+        loaded: false,
       };
     case FETCH_POSTS_SUCCESS:
       return {
         ...state,
         loading: false,
+        loaded: true,
         list: action.payload,
         bySlug: action.payload.reduce((list, a) => ({
           ...list,
@@ -280,11 +283,13 @@ export default function postsReducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         loading: false,
+        loaded: true,
         current: action.payload,
       };
     case CREATE_POST_SUCCESS:
       return {
         ...state,
+        loaded: true,
         loading: false,
       };
     case DELETE_POST_SUCCESS:
@@ -299,6 +304,7 @@ export default function postsReducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         loading: false,
+        loaded: true,
         error: action.error,
       };
     case SELECT_POST:
@@ -324,7 +330,7 @@ export default function postsReducer(state = INITIAL_STATE, action) {
       };
     case TOGGLE_POST_LAYOUT:
       return {
-        ...state
+        ...state,
       };
     default:
       return state;

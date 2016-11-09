@@ -67,7 +67,8 @@ class Dashboard extends PureComponent {
         <Sidebar { ...sidebarProps }>
           <Titlebar title="Boldr" icon={
             <Icon name="ellipsis vertical" onClick={ this.menuButtonClick } />
-          }>
+          }
+          >
             <Col xs>
               <div>
               { this.props.children }

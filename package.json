@@ -78,7 +78,8 @@
     "seed:prod": "./node_modules/.bin/knex --knexfile boldrAPI/config/knexfile.js seed:run",
     "start:cms": "node build/boldrCMS/server",
     "test:ci": "NODE_ENV=test CI=true jest -w 2",
-    "test": "NODE_ENV=test jest"
+    "test": "NODE_ENV=test jest",
+    "test:watch": "NODE_ENV=test jest --watch=all"
   },
   "jest": {
     "moduleNameMapper": {
@@ -239,6 +240,7 @@
     "react-addons-perf": "^15.3.2",
     "react-addons-test-utils": "^15.3.2",
     "react-hot-loader": "3.0.0-beta.6",
+    "redux-mock-store": "^1.2.1",
     "rimraf": "^2.5.4",
     "sass-loader": "^4.0.2",
     "sinon": "^1.17.6",
