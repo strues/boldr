@@ -54,7 +54,7 @@ nconf.defaults({
   prefix: '/api/v1',
   date_format: 'yyyy-MM-dd',
   time_zone: '-07:00',
-  db: {
+  postgres: {
     uri: 'postgres://postgres:password@127.0.0.1:5432/boldr',
     host: '127.0.0.1',
     port: 5432,

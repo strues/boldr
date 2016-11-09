@@ -1,14 +1,14 @@
 const path = require('path');
 const config = require('./config');
-
+const pgConfig = config.get('postgres');
 module.exports = {
   development: {
     client: 'pg',
-    connection: config.get('postgres__uri') || {
-      host: config.get('postgres__host') || 'localhost',
-      user: config.get('postgres__user') || 'postgres',
-      password: config.get('postgres__password') || 'password',
-      database: config.get('postgres__database') || 'boldr',
+    connection: pgConfig.get('uri') || {
+      host: pgConfig.get('host') || 'localhost',
+      user: pgConfig.get('user') || 'postgres',
+      password: pgConfig.get('password') || 'password',
+      database: pgConfig.get('database') || 'boldr',
     },
     migrations: {
       directory: path.resolve(__dirname, '../db/_migrations'),
@@ -25,11 +25,11 @@ module.exports = {
   },
   test: {
     client: 'pg',
-    connection: config.get('postgres__uri') || {
-      host: config.get('postgres__host') || 'localhost',
-      user: config.get('postgres__user') || 'postgres',
-      password: config.get('postgres__password') || 'password',
-      database: config.get('postgres__database') || 'boldr',
+    connection: pgConfig.get('uri') || {
+      host: pgConfig.get('host') || 'localhost',
+      user: pgConfig.get('user') || 'postgres',
+      password: pgConfig.get('password') || 'password',
+      database: pgConfig.get('database') || 'boldr',
     },
     migrations: {
       directory: path.resolve(__dirname, '../db/_migrations'),
@@ -46,7 +46,7 @@ module.exports = {
   },
   production: {
     client: 'pg',
-    connection: config.get('postgres__uri'),
+    connection: pgConfig.get('uri'),
     searchPath: 'knex,public',
     migrations: {
       directory: path.resolve(__dirname, '../db/_migrations'),
