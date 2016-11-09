@@ -1,5 +1,6 @@
 const path = require('path');
 const config = require('./config');
+
 const pgConfig = config.get('postgres');
 module.exports = {
   development: {
