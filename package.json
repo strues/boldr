@@ -1,6 +1,6 @@
 {
   "name": "boldr",
-  "version": "0.6.0-alpha.2",
+  "version": "0.6.0-alpha.3",
   "description": "Your dreams are bold. Your thoughts are bold. So why shouldn't your CMS be a little Boldr?",
   "main": "bin/ssr.js",
   "directories": {
