@@ -1,8 +1,9 @@
 /* @flow */
 import React from 'react';
+import styled from 'styled-components';
 import { Footer } from '../../../components/index';
 import Boldr from '../Boldr';
-import { HeaderWrapper, ContentWrapper, FooterWrapper } from '../Wrappers';
+import HeaderWrapper from './HeaderWrapper';
 
 type Props = {
   header: ReactElement,
@@ -12,8 +13,24 @@ type Props = {
   footer?: ReactElement
 };
 
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  box-sizing: border-box;
+`;
+const ContentWrapper = styled.section`
+  width: 100%;
+  box-sizing: border-box;
+  margin: 1rem auto;
+  max-width: 1260px;
+`;
+const FooterWrapper = styled.footer`
+  margin-top: auto;
+`;
 const PageTemplate = (props: Props) => {
   return (
+    <Wrapper { ...props }>
       <div className="boldr__theme-page">
         { props.helmetMeta }
         <HeaderWrapper { ...props.header } />
@@ -28,6 +45,7 @@ const PageTemplate = (props: Props) => {
           { props.footer || <Footer /> }
         </FooterWrapper>
       </div>
+    </Wrapper>
   );
 };
 

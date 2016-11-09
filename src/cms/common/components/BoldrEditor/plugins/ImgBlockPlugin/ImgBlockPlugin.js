@@ -1,6 +1,7 @@
 import { Entity } from 'draft-js';
 import React from 'react';
 import Photo from '../../icons/Photo';
+
 export default {
   getBlockRenderer() {
     return {

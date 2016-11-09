@@ -8,14 +8,13 @@ export type Post = {
   slug?: String,
   content?: String,
   background_image?: String,
-  excerpt: String,
+  excerpt?: String,
   created_at?: String,
   updated_at?: String,
   status?: String,
   author?: User,
-  seo: ?Object,
-  tags: ?Array<Tag>,
-  tag: ?Number
+  seo?: Object,
+  tags?: Array<Tag>
 };
 
 export type Tag = {

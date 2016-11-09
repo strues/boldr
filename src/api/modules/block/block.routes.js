@@ -1,7 +1,6 @@
 import express from 'express';
-import { BaseController } from '../../core';
+import { BaseController, isAuthenticated } from '../../core';
 import { processQuery } from '../../utils';
-import ensureAuthenticated from '../auth/ensureAuthenticated';
 import * as ctrl from './block.controller';
 import Block from './block.model';
 
@@ -18,7 +17,7 @@ const router = new express.Router();
  */
 router.get('/', ctrl.listBlocks);
 router.get('/:id', controller.show.bind(controller));
-router.post('/', ensureAuthenticated, ctrl.createBlock);
+router.post('/', isAuthenticated, ctrl.createBlock);
 router.put('/:id', controller.update.bind(controller));
 router.patch('/:id', controller.update.bind(controller));
 router.delete('/:id', controller.destroy.bind(controller));

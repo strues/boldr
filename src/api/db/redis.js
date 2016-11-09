@@ -2,9 +2,13 @@ import Redis from 'ioredis';
 import bluebird from 'bluebird';
 import logger from '../core/logger';
 
+const config = require('../config/config');
+
+const redisConfig = config.get('redis');
+
 bluebird.promisifyAll(Redis);
 
-const redisClient = new Redis(process.env.REDIS_CONN_URI);
+const redisClient = new Redis(redisConfig.uri || process.env.REDIS_CONN_URI);
 
 redisClient.on('connect', () => {
   logger.info('Redis connection has been established!');

@@ -6,14 +6,14 @@ import expressWinston from 'express-winston';
 import morgan from 'morgan';
 
 import { authMiddleware, expressMiddleware, errorCatcher, middleware } from './core/middleware';
-import conf from './config/config';
 import { default as winstonInstance } from './core/logger';
 import routes from './modules/routes';
 
 const debug = require('debug')('boldr:ssr-server');
+const config = require('./config/config');
 
 const app = Express();
-const env = conf.get('env') || 'development';
+const env = config.get('node_env') || 'development';
 
 app.disable('x-powered-by');
 app.set('trust proxy', 'loopback');
@@ -51,7 +51,7 @@ if (env !== 'test') {
   }));
 }
 
-app.use(conf.get('prefix'), routes);
+app.use(config.get('prefix'), routes);
 
 app.use(errorCatcher);
 

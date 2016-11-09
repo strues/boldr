@@ -36,7 +36,6 @@ class ForgotPassword extends Component {
     this.props.dispatch(forgotPassword(email));
   }
   render() {
-    const { serializedForm, value } = this.state;
     const renderHeader = (
       <Card.Header>
       <Heading size={ 1 } bottom="10px">Forgot your password?</Heading>

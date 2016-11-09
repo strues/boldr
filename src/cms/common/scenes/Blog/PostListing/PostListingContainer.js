@@ -8,7 +8,7 @@ import PostListing from './PostListing';
 export type Props = {
   posts: Array<Post>,
   loading: ?Boolean,
-  fetchPosts: Function
+  fetchPosts: Function,
 };
 
 

@@ -4,7 +4,9 @@ import { Segment, Feed, Icon, Header } from 'semantic-ui-react';
 const ActivityWidget = (props) => {
   return (
     <Segment className="activity-feed__wrap">
-    <Header size="large"><Icon name="feed" /> <Header.Content>Recent Activity</Header.Content></Header>
+      <Header size="large">
+        <Icon name="feed" /> <Header.Content>Recent Activity</Header.Content>
+      </Header>
       <Feed>
       {
         props.activities.map(a =>

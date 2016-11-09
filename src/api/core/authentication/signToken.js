@@ -1,5 +1,8 @@
 import jwt from 'jsonwebtoken';
-import conf from '../../config/config';
+
+const config = require('../../config/config');
+
+const sessionConfig = config.get('session');
 
 function signToken(user) {
   // const roleinfo = account.role[0];
@@ -7,9 +10,10 @@ function signToken(user) {
   const payload = {
     sub: user.id,
     iat: timestamp,
+    expiresIn: sessionConfig.expiration,
     email: user.email,
   };
-  return jwt.sign(payload, conf.get('session.secret'), { expiresIn: 60 * 60 * 5 });
+  return jwt.sign(payload, sessionConfig.secret);
 }
 
 export default signToken;

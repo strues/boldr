@@ -32,7 +32,7 @@ const PostListItem = (props: Props) => {
   const publishedIcon = <Icon onClick={ handlePublishClick } name="unhide" size="large" />;
   const draftIcon = <Icon onClick={ handleDraftClick } name="hide" size="large" />;
   return (
-    <div>
+    <div className="post-list__item">
     <Segment>
       <Item>
        <img src={ props.article.feature_image }

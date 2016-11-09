@@ -39,8 +39,8 @@ export function loadSiteActivity() {
       });
   };
 }
-const SHOW_SIDEBAR = '@boldr/dashboard/SHOW_SIDEBAR';
-const HIDE_SIDEBAR = '@boldr/dashboard/HIDE_SIDEBAR';
+export const SHOW_SIDEBAR = '@boldr/dashboard/SHOW_SIDEBAR';
+export const HIDE_SIDEBAR = '@boldr/dashboard/HIDE_SIDEBAR';
 
 export const showSidebar = () => ({ type: SHOW_SIDEBAR });
 export const hideSidebar = () => ({ type: HIDE_SIDEBAR });
@@ -92,7 +92,6 @@ export function contentClicked() {
     dispatch(push('/dashboard/content'));
   };
 }
-
 
 export function pagesClicked() {
   return (dispatch) => {

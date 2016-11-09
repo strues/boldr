@@ -6,11 +6,10 @@
  */
 import { Model } from 'objection';
 import knex from '../db/postgres';
-import conf from '../config/config';
 import Setting from '../modules/setting/setting.model';
 import logger from './logger';
 
-const startupMessage = `${conf.toString()} \n
+const startupMessage = `\n
   ------------------------------------------------------------ \n
                     🔧 Loaded BoldrAPI Configuration.
   ------------------------------------------------------------- \n

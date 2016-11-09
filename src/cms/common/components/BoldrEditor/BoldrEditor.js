@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import {
   AtomicBlockUtils, convertFromRaw, CompositeDecorator, Editor,
   EditorState, Entity, RichUtils,
-  // $FlowIssue
 } from 'draft-js';
 import { stateToHTML } from 'draft-js-export-html';
 import { stateFromHTML } from 'draft-js-import-html';
@@ -48,9 +47,7 @@ class BoldrEditor extends Component {
   constructor(props: Props) {
     super(props);
 
-    const decorator = new CompositeDecorator([
-      linkDecorator,
-    ]);
+    const decorator = new CompositeDecorator([linkDecorator]);
 
     let editorState = EditorState.createEmpty(decorator);
 
@@ -98,12 +95,12 @@ class BoldrEditor extends Component {
   }
 
   props: Props;
-  onFocus = (e: Object) => {
+  onFocus: Function = (e: Object): void => {
     this.refs.editor.focus();
     this.props.onFocus(e);
   }
 
-  onChange(editorState) {
+  onChange: Function = (editorState): void => {
     this.setState({ editorState }, () => {
       // const contentState = editorState.getCurrentContent();
       const html = stateToHTML(editorState.getCurrentContent());
@@ -111,7 +108,7 @@ class BoldrEditor extends Component {
     });
   }
 
-  _handleKeyCommand(command: string): boolean {
+  _handleKeyCommand: Function = (command: string): void => {
     const { editorState } = this.state;
     const newState = RichUtils.handleKeyCommand(editorState, command);
     if (newState) {
@@ -129,12 +126,11 @@ class BoldrEditor extends Component {
     );
   }
 
-  _toggleInlineStyle(inlineStyle) {
+  _toggleInlineStyle: Function = (inlineStyle): void => {
     if (inlineStyle === 'LINK') {
       if (! (this: any).state.showUrlInput) {
         this.promptForLink();
       } else {
-        // $FlowIssue
         this.removeLink();
       }
     } else {
@@ -199,7 +195,7 @@ class BoldrEditor extends Component {
    * @name _closeLinkPrompt
    * closes the link alert
    */
-  closeLinkPrompt() {
+  closeLinkPrompt: Function = (): void => {
     this.setState({ showUrlInput: false, urlValue: '' }, () => {
       setTimeout(() => {
         (this: any).focus();
@@ -210,7 +206,7 @@ class BoldrEditor extends Component {
    * @private
    * @name _confirmLink
    */
-  _confirmLink() {
+  _confirmLink: Function = (): void => {
     const { editorState, urlValue } = this.state;
     const entityKey = Entity.create('LINK', 'MUTABLE', { target: this.props.linkTarget, url: urlValue });
 
@@ -224,7 +220,8 @@ class BoldrEditor extends Component {
 
     this.closeLinkPrompt();
   }
-  _focus() {
+
+  _focus: Function = (): void => {
     this.refs.editor.focus();
   }
   /**
@@ -232,7 +229,7 @@ class BoldrEditor extends Component {
    * @name _onLinkInputKeyDown
    * @param {Object} e  the event
    */
-  _onLinkInputKeyDown(e) {
+  _onLinkInputKeyDown: Function = (e): void => {
     if (e.which === 13) {
       this._confirmLink(e);
     }
@@ -242,7 +239,7 @@ class BoldrEditor extends Component {
    * @private
    * @name _promptForLink
    */
-  promptForLink() {
+  promptForLink: Function = (): void => {
     const { editorState } = this.state;
     const selection = editorState.getSelection();
 
@@ -264,17 +261,16 @@ class BoldrEditor extends Component {
    * @private
    * @name _removeLink
    */
-  _removeLink() {
+  _removeLink: Function = (): void => {
     const { editorState } = this.state;
     const selection = editorState.getSelection();
 
     (this: any).onChange(RichUtils.toggleLink(editorState, selection, null));
   }
 
-  renderBlock(block) {
+  renderBlock: Function = (block): void => {
     if (block.getType() === 'atomic') {
       const entityType = Entity.get(block.getEntityAt(0)).getType();
-      // $FlowIssue
       return this.props.customBlocks[entityType] ? this.props.customBlocks[entityType].getBlockRenderer() : null;
     }
 
@@ -284,7 +280,7 @@ class BoldrEditor extends Component {
   /**
    * @method renderControls
    */
-  renderControls() {
+  renderControls: Function = (): void => {
     const controls = [];
 
     if (this.props.blockControls) {

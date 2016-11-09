@@ -5,11 +5,14 @@
 import { normalize, arrayOf } from 'normalizr';
 import { camelizeKeys } from 'humps';
 import { push } from 'react-router-redux';
-import { uniq } from 'lodash';
-import * as api from '../../../core/services/api';
-import * as notif from '../../../core/config/notifications';
-import { notificationSend } from '../../../state/dux/notifications';
-import { navigation as navigationSchema, setting as settingSchema, page as pageSchema } from '../../../core/services/schemas';
+import * as api from 'core/services/api';
+import * as notif from 'core/config/notifications';
+import { notificationSend } from 'state/dux/notifications';
+import {
+  navigation as navigationSchema,
+  setting as settingSchema,
+  page as pageSchema,
+} from 'core/services/schemas';
 import * as t from './constants';
 
 /**
@@ -46,7 +49,7 @@ function startLoadNav() {
 function errorLoadNav(err) {
   return {
     type: t.LOAD_NAVIGATION_FAILURE,
-    error: err,
+    error: 'Error loading nav',
   };
 }
 
@@ -340,11 +343,3 @@ const receivePage = (response) => ({
 const receivePageFailed = (err) => ({
   type: t.LOAD_PAGE_FAILURE, error: err,
 });
-
-export function loadPages() {
-  return {
-    types: [t.LOAD_PAGES_REQUEST, t.LOAD_PAGES_SUCCESS, t.LOAD_PAGES_FAILURE],
-    schema: arrayOf(pageSchema),
-    promise: (client) => client.get('/pages'),
-  };
-}

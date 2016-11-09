@@ -2,7 +2,9 @@
 import * as CryptoJS from 'crypto-js';
 import * as bcrypt from 'bcryptjs';
 
-export const SALT = bcrypt.genSaltSync(10);
+const config = require('../../config/config');
+
+export const SALT = bcrypt.genSaltSync(config.get('salt_rounds'));
 export const randomString = () => Math.random().toString().substr(2, 8);
 
 function generateHash() {

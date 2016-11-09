@@ -1,6 +1,6 @@
 import fetch from 'isomorphic-fetch';
 import request from 'superagent';
-
+import { getToken } from './token';
 // Import API endpoints
 import {
   API_POSTS,
@@ -17,7 +17,7 @@ import {
   TOKEN_KEY,
 } from '../config';
 
-
+const AUTH_TOKEN = getToken();
 /**
  * Converts the response from a fetch into useable JSON data.
  * @method processResponse
@@ -61,7 +61,7 @@ export function doGetPosts() {
 export function doCreatePost(data) {
   return request
     .post(`${API_POSTS}`)
-    .set('Authorization', `${localStorage.getItem(TOKEN_KEY)}`)
+    .set('Authorization', `${AUTH_TOKEN}`)
     .send({
       title: data.title,
       content: data.content,
@@ -80,10 +80,22 @@ export function doSelectPost(postId) {
 export function doDeletePost(postId) {
   return request
     .delete(`${API_POSTS}/pid/${postId}`)
-    .set('Authorization', `${localStorage.getItem(TOKEN_KEY)}`);
+    .set('Authorization', `${getToken}`);
 }
 
-
+export function doUpdatePost(postData) {
+  return request
+      .put(`${API_POSTS}/pid/${postData.id}`)
+      .set('Authorization', `${AUTH_TOKEN}`)
+      .send({
+        // title: articleData.title,
+        content: postData.content,
+        excerpt: postData.excerpt,
+        feature_image: postData.feature_image,
+        // tag: postData.tag,
+        status: postData.status,
+      })
+}
 /**
   * AUTH API ROUTES
   * -------------------------
@@ -118,7 +130,7 @@ export function doResetPassword(password, token) {
 }
 
 export const doAuthCheck = (token) => {
-  return request.get(`${API_AUTH}/check`).set('Authorization', `${token}`);
+  return request.get(`${API_AUTH}/check`).set('Authorization', `${AUTH_TOKEN}`);
 };
 
 /**
@@ -134,7 +146,7 @@ export function doUpdateSettings(payload) {
     value: payload.value,
   };
   return request.put(`${API_SETTINGS}/${settingId}`)
-    .set('Authorization', `${localStorage.getItem(TOKEN_KEY)}`)
+    .set('Authorization', `${AUTH_TOKEN}`)
     .send(data);
 }
 
@@ -154,7 +166,7 @@ export const doLoadNav = () => {
 
 export function doUpdateNavigationLinks(data) {
   return request.put(`${API_LINKS}/${data.id}`)
-    .set('Authorization', `${localStorage.getItem(TOKEN_KEY)}`)
+    .set('Authorization', `${AUTH_TOKEN}`)
     .send(data);
 }
 
@@ -166,7 +178,7 @@ export function doAddNavigationLinks(data) {
     position: data.position,
   };
   return request.post(`${API_LINKS}`)
-    .set('Authorization', `${localStorage.getItem(TOKEN_KEY)}`)
+    .set('Authorization', `${AUTH_TOKEN}`)
     .send(payload);
 }
 
@@ -179,7 +191,7 @@ export function doAddNavigationLinks(data) {
 export function doGetActivities(data, id) {
   return request
     .get(`${API_ACTIVITY}`)
-    .set('Authorization', `${localStorage.getItem(TOKEN_KEY)}`);
+    .set('Authorization', `${AUTH_TOKEN}`);
 }
 
 /**
@@ -196,13 +208,13 @@ export function doFetchMedia() {
 export function doUpload(payload) {
   return request
     .post(`${API_ATTACHMENTS}/dashboard`, payload)
-    .set('Authorization', `${localStorage.getItem(TOKEN_KEY)}`);
+    .set('Authorization', `${AUTH_TOKEN}`);
 }
 
 export function doRemoveMedia(id) {
   return request
     .delete(`${API_ATTACHMENTS}/${id}`)
-    .set('Authorization', `${localStorage.getItem(TOKEN_KEY)}`);
+    .set('Authorization', `${AUTH_TOKEN}`);
 }
 
 /**
@@ -224,7 +236,7 @@ export function doFetchPageUrl(url) {
 export function doCreatePage(payload) {
   return request
     .post(`${API_PAGES}/dashboard`, payload)
-    .set('Authorization', `${localStorage.getItem(TOKEN_KEY)}`);
+    .set('Authorization', `${AUTH_TOKEN}`);
 }
 
 /**
@@ -259,7 +271,7 @@ export function doUpdateMember(userData) {
   };
   return request
     .put(`${API_USERS}/admin/${userData.id}`)
-    .set('Authorization', `Bearer ${localStorage.getItem(TOKEN_KEY)}`)
+    .set('Authorization', `${AUTH_TOKEN}`)
     .send(payload);
 }
 
@@ -267,7 +279,7 @@ export function doUpdateMember(userData) {
 export function doCreateBlock(data) {
   return request
     .post(`${API_BLOCKS}`)
-    .set('Authorization', `${localStorage.getItem(TOKEN_KEY)}`)
+    .set('Authorization', `${AUTH_TOKEN}`)
     .send({
       name: data.name,
       label: data.label,

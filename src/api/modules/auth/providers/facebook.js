@@ -4,7 +4,8 @@ import { Strategy as FacebookStrategy } from 'passport-facebook';
 import Token from '../../token/token.model';
 import Profile from '../../profile/profile.model';
 import { responseHandler, generateHash } from '../../../core';
-import conf from '../../../config/config';
+const config = require('../../../core/config/config');
+
 
 const strategyOpts = {
   clientID: conf.get('social.facebook.id'),

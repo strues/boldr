@@ -18,6 +18,7 @@ import {
   fetchPosts,
   createPost,
   deletePost,
+  togglePostLayoutView,
   updatePost,
 } from './dux/post';
 
@@ -65,6 +66,7 @@ export {
   createPost,
   deletePost,
   updatePost,
+  togglePostLayoutView,
   requestPostTags,
   loadMainNav,
   updateNavLinks,

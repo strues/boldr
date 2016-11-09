@@ -1,15 +1,19 @@
-import os from 'os';
 import http from 'http';
 import https from 'https';
 import Bootstrap from './core/bootstrap';
-import conf from './config/config';
+
 import logger from './core/logger';
 import app from './app';
 
+const Promise = require('bluebird');
 const debug = require('debug')('boldr:engine');
+const config = require('./config/config');
 
-const env = process.env.NODE_ENV || 'development';
-const port = normalizePort(conf.get('port'));
+const env = config.get('node_env');
+const port = normalizePort(config.get('port'));
+const appName = `${config.get('app')} @ ${env} v${config.get('version')}`;
+
+Promise.longStackTraces();
 
 app.set('port', port);
 
@@ -18,8 +22,7 @@ const server = http.createServer(app);
 async function startServer() {
   await Bootstrap.init();
   server.listen(port);
-  logger.info(`🌎  ==> API is running @: ${os.hostname()} on ${port}`);
-  logger.info(`Environment: ${env}`);
+  logger.info(`🌎  ==> Starting ${appName} on ${port}`);
 }
 
 process.on('SIGTERM', () => close(server));

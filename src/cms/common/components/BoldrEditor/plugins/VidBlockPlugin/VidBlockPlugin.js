@@ -8,10 +8,11 @@ const vimeoParser = /^.*(vimeo\.com\/)((channels\/[A-z]+\/)|(groups\/[A-z]+\/vid
 export type Props = {block?: Object};
 
 class EditorVideoBlock extends Component {
-  props: Props;
+
   shouldComponentUpdate(nextProps) {
     return (nextProps.block !== this.props.block);
   }
+  props: Props;
   render() {
     const entity = Entity.get(this.props.block.getEntityAt(0));
     const { src } = entity.getData();

@@ -1,12 +1,13 @@
-export type Props = {
-  entityKey?: any,
-  children?: any,
-};
-
+/* @flow */
 import React from 'react';
 import { Entity } from 'draft-js';
 
-const linkStrategy = (contentBlock, callback) => {
+type Props = {
+ entityKey?: any,
+ children?: any,
+};
+
+const linkStrategy = (contentBlock: Object, callback: Function): void => {
   contentBlock.findEntityRanges(
     (character) => {
       const entityKey = character.getEntity();
@@ -19,11 +20,11 @@ const linkStrategy = (contentBlock, callback) => {
   );
 };
 
-const Link = (props) => {
+const Link = (props: Props) => {
   const { target, url } = Entity.get(props.entityKey).getData();
   return (
     <a href={ url } target={ target }>
-      {props.children}
+      { props.children }
     </a>
   );
 };

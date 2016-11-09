@@ -1,15 +1,12 @@
-const CPU_COUNT = require('os').cpus().length;
 const HappyPack = require('happypack');
 const notifier = require('node-notifier');
-const colors = require('colors');
 const execSync = require('child_process').execSync;
 const appRootPath = require('app-root-path').toString();
+const chalk = require('chalk');
 
 // This determines how many threads a HappyPack instance can spin up.
 // See the plugins section of the webpack configuration for more.
-const happyPackThreadPool = HappyPack.ThreadPool({ // eslint-disable-line new-cap
-  size: 4
-});
+
 
 // Generates a HappyPack plugin.
 // @see https://github.com/amireh/happypack/
@@ -54,19 +51,25 @@ function createNotification(options = {}) {
   });
 
   const level = options.level || 'info';
-  const msg = `==> ${title} -> ${options.message}`;
+  const msg = ` 📢   ${title} -> ${options.message}`;
 
   switch (level) {
-    case 'warn': console.log(colors.red(msg)); break;
-    case 'error': console.log(colors.bgRed.white(msg)); break;
+    case 'warn': console.log(chalkWarning(msg)); break;
+    case 'error': console.log(chalkError(msg)); break;
     case 'info':
-    default: console.log(colors.cyan(msg));
+    default: console.log(chalkInfo(msg));
   }
 }
 
 function exec(command) {
   execSync(command, { stdio: 'inherit', cwd: appRootPath });
 }
+
+const chalkError = chalk.bgRed.white;
+const chalkSuccess = chalk.green;
+const chalkWarning = chalk.yellow;
+const chalkProcessing = chalk.blue;
+const chalkInfo = chalk.cyan;
 
 module.exports = {
   removeEmpty,
@@ -75,4 +78,9 @@ module.exports = {
   exec,
   happyPackPlugin,
   createNotification,
+  chalkError,
+  chalkSuccess,
+  chalkWarning,
+  chalkProcessing,
+  chalkInfo,
 };

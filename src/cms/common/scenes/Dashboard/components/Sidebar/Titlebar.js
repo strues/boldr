@@ -28,15 +28,12 @@ const Titlebar = (props) => {
 
 Titlebar.propTypes = {
   style: React.PropTypes.object,
-  title: React.PropTypes.oneOfType([
-    React.PropTypes.string,
-    React.PropTypes.object,
-  ]),
+  title: React.PropTypes.any,
   icon: React.PropTypes.oneOfType([
     React.PropTypes.string,
     React.PropTypes.object,
   ]),
-  children: React.PropTypes.object,
+  children: React.PropTypes.any,
 };
 
 export default Titlebar;

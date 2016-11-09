@@ -13,16 +13,17 @@ const PostListing = (props: Props) => {
       <Loader content="loading" />
     );
   }
+
   return (
     <div style={ { paddingTop: '50px' } }>
       <Grid fluid>
         <Row>
-            {
-              props.posts.map((post, i) =>
-                <Col key={ i } xs={ 12 } md={ 4 }>
-                  <PostCard { ...post } />
-                </Col>)
-            }
+          {
+            props.posts.map((post, i) =>
+              <Col key={ i } xs={ 12 } md={ 4 }>
+                <PostCard { ...post } />
+              </Col>)
+          }
         </Row>
       </Grid>
     </div>

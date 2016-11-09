@@ -1,7 +1,6 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-connect';
 import { Grid, Col, Row } from 'components/Layout';
 import { requestPostTags } from 'state/dux/tag';
@@ -13,17 +12,8 @@ type Props = {
   requestPostTags: () => void
 };
 
-@asyncConnect([{
-  promise: ({ store: { dispatch, getState }, params: { name } }) => {
-    const promises = [];
-    promises.push(dispatch(requestPostTags(name)));
-    return Promise.all(promises);
-  },
-}])
 class TagList extends Component {
-  componentDidMount() {
-    this.props.requestPostTags(this.props.params.name);
-  }
+
   props: Props;
   render() {
     if (!this.props.tags.posts) {
@@ -58,4 +48,8 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { requestPostTags })(TagList);
+const asyncProps = [{
+  promise: ({ store: { dispatch, getState }, params: { name } }) => dispatch(requestPostTags(name)),
+}];
+
+export default asyncConnect(asyncProps, mapStateToProps, { requestPostTags })(TagList);

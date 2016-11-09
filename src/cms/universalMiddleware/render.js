@@ -3,6 +3,7 @@
 import { renderToString } from 'react-dom/server';
 import serialize from 'serialize-javascript';
 import Helmet from 'react-helmet';
+import styleSheet from 'styled-components/lib/models/StyleSheet';
 import type { ReactElement } from '../common/types/react';
 import clientAssets from './clientAssets';
 
@@ -43,7 +44,7 @@ function serviceWorkerScript() {
 
   return '';
 }
-
+const styled = styleSheet.rules().map(rule => rule.cssText).join('\n');
 const styles = styleTags(clientAssets.styles);
 
 const scripts = scriptTags(clientAssets.scripts);
@@ -91,8 +92,11 @@ function render(reactAppElement: ?ReactElement, preloadedState: ?Object) {
         ${helmet ? helmet.title.toString() : ''}
         ${helmet ? helmet.meta.toString() : ''}
         ${helmet ? helmet.link.toString() : ''}
-
+        <style type="text/css">
+        ${styled}
+        </style>
         ${styles}
+
         ${helmet ? helmet.style.toString() : ''}
         ${polyfillIoScript()}
         ${serviceWorkerScript()}

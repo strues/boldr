@@ -1,13 +1,15 @@
 import nodemailer from 'nodemailer';
 import mg from 'nodemailer-mailgun-transport';
-import conf from '../config/config';
 
 const debug = require('debug')('boldr:auth:controller');
+const config = require('../config/config');
+
+const mailConfig = config.get('mail');
 
 const auth = {
   auth: {
-    api_key: conf.get('mail.key'),
-    domain: conf.get('mail.domain'),
+    api_key: mailConfig.mg_api_key,
+    domain: mailConfig.domain,
   },
 };
 // Transport is what does the lifting behind the scenes.
@@ -24,7 +26,7 @@ const nodemailerMailgun = nodemailer.createTransport(mg(auth));
 export default function handleMail(user, mailBody, mailSubject) {
   const mailOptions = {
     to: user.email,
-    from: conf.get('mail.from'),
+    from: mailConfig.from,
     subject: mailSubject,
     html: mailBody,
   };
