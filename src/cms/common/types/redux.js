@@ -5,6 +5,9 @@ export type ApiAction<T> = {
   payload: T,
 };
 
+export type Store = {
+  dispatch(action: ActionType): ActionType
+}
 export type ActionType =
   | 'LOGIN_REQUEST'
   | 'LOGIN_SUCCESS'
