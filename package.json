@@ -236,7 +236,7 @@
     "nodemon": "^1.11.0",
     "npm-run-all": "^3.1.1",
     "postcss-cssnext": "^2.8.0",
-    "postcss-loader": "1.1.0",
+    "postcss-loader": "1.1.1",
     "postcss-smart-import": "^0.5.1",
     "react-addons-perf": "^15.3.2",
     "react-addons-test-utils": "^15.3.2",
