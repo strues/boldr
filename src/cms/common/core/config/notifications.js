@@ -60,6 +60,6 @@ export const MSG_CREATE_POST_SUCCESS = {
   message: 'Your post was created.', kind: 'success', dismissAfter: 3000,
 };
 
-export const MSG_CREATE_POST_FAILURE = {
+export const MSG_CREATE_POST_FAILUREURE = {
   message: 'There was a problem creating your post', kind: 'error', dismissAfter: 3000,
 };

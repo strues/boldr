@@ -35,7 +35,7 @@ export function createBlock(data) {
       })
       .catch(err => {
         dispatch(errorCreatingBlock(err));
-        dispatch(notificationSend(notif.MSG_CREATE_POST_FAILURE));
+        dispatch(notificationSend(notif.MSG_CREATE_POST_FAILUREURE));
       });
   };
 }
