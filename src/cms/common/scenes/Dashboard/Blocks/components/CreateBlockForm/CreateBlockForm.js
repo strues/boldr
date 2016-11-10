@@ -10,7 +10,7 @@ type Props = {
 }
 
 const CreateBlockForm = (props: Props) => {
-  const elements = ['Header', 'Footer', 'Navigation', 'Content'];
+  const elements = ['Header', 'Footer', 'Text', 'Navigation', 'Hero'];
 
   const { handleSubmit, reset } = props;
   return (
@@ -19,12 +19,6 @@ const CreateBlockForm = (props: Props) => {
               name="name"
               type="text"
               label="Name"
-              component={ TextField }
-            />
-            <Field
-              name="label"
-              type="text"
-              label="Label"
               component={ TextField }
             />
             <Field

@@ -20,7 +20,7 @@ import getRoutes from '../common/scenes';
 import ReactHotLoader from './components/ReactHotLoader';
 
 WebFontLoader.load({
-  google: { families: ['Work Sans:300,400,600'] },
+  google: { families: ['Work Sans:300,400,600', 'Ubuntu:400,600'] },
 });
 
 const preloadedState = window.PRELOADED_STATE || {};

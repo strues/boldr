@@ -28,7 +28,11 @@ $pinkish: rgb(229, 0, 80);
 /// @type Color
 $ocean: #1c3050;
 /// @type Color
+$water: #0376a3;
+/// @type Color
 $lapiz: #266a9c;
+/// @type Color
+$navy: #044c66;
 /// @type Color
 $turtle: #11c2bb;
 
@@ -38,12 +42,9 @@ $box-shadow: 0 0 5px $shadow-color;
 $body-background: #f7f7f7;
 $primary-color: $lapiz;
 $accent-color: $pinkish;
-$primary-button-bg: $turtle;
-$primary-button-bg-hover: darken($turtle, 5%);
-$topbar-link-color: $snow;
-$topbar-link-hover-color: $accent-color;
-$topbar-background: $near-black;
-$topbar-border: 1px solid rgba(34, 36, 38, 0.15);
+$primary-button-bg: $water;
+$primary-button-bg-hover: darken($water, 5%);
+
 $selection-color: darken($snow, 3%);
 $link-color: $accent-color;
 $error-color: rgb(244, 67, 54);
@@ -55,7 +56,10 @@ $import-google-fonts: false;
 $font-name: 'Work Sans' !default;
 $font-family: $font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif !default;
 
-
+$header-font-name: 'Ubuntu';
+$menu-font-family: $header-font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif !default;
+$header-font-color: $navy;
+$header-font-family: $header-font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif !default;
 
 $font-size-base: 1em;
 $line-height-base: 1.5em;
@@ -82,5 +86,8 @@ $large: 1200px;
 $grid-width: 1170px;
 $grid-columns: 12;
 $grid-gutter-width: 1.875rem;
-
+$primary-header-link-color: $near-black;
+$primary-header-link-hover-color: $accent-color;
+$primary-header-border: 1px solid rgba(34, 36, 38, 0.15);
+$primary-header-bg: $snow;
 $primary-header-link: $ocean;

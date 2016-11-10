@@ -282,7 +282,6 @@ export function doCreateBlock(data) {
     .set('Authorization', `${AUTH_TOKEN}`)
     .send({
       name: data.name,
-      label: data.label,
       element: data.element,
       content: data.content,
     });

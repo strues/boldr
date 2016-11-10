@@ -10,6 +10,7 @@ const FETCH_BLOCKS_FAILURE = '@boldr/dashboard/FETCH_BLOCKS_FAILURE';
 const CREATE_BLOCK_REQUEST = '@boldr/dashboard/CREATE_BLOCK_REQUEST';
 const CREATE_BLOCK_SUCCESS = '@boldr/dashboard/CREATE_BLOCK_SUCCESS';
 const CREATE_BLOCK_FAILURE = '@boldr/dashboard/CREATE_BLOCK_FAILURE';
+
 /**
   * CREATE POST ACTIONS
   * -------------------------
@@ -61,6 +62,7 @@ const errorCreatingBlock = (err) => {
 
 const INITIAL_STATE = {
   loaded: false,
+  loading: false,
   error: null,
   blocks: [],
 };

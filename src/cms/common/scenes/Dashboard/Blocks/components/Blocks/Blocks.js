@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import { Grid, Col, Row } from 'components/index';
-import { Menu, Segment, Icon, Button } from 'semantic-ui-react';
+import { Menu, Message, Segment, Icon, Button } from 'semantic-ui-react';
 import type { Block as BlockType } from 'types/models';
 import { Block, CreateBlockForm } from '../';
 
@@ -11,6 +11,12 @@ type Props = {
 }
 const Blocks = (props: Props) => {
   return (
+    <div>
+      <Message
+        icon="lab"
+        header="Build something bold."
+        content="Blocks are content elements, the foundation of your website."
+      />
     <Row>
       <Col xs={ 12 } md={ 8 }>
          <Segment>
@@ -27,9 +33,12 @@ const Blocks = (props: Props) => {
          </Segment>
       </Col>
       <Col xs={ 12 } md={ 4 }>
+        <Segment>
         <CreateBlockForm onSubmit={ props.handleSubmit } />
+      </Segment>
       </Col>
       </Row>
+    </div>
   );
 };
 

@@ -2,12 +2,12 @@ import React from 'react';
 
 const styles = {
   root: {
-    fontFamily: '"Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif',
-    fontWeight: 300,
+    fontFamily: '"Ubuntu", "Helvetica Neue", Helvetica, Arial, sans-serif',
+    fontWeight: 400,
     alignItems: 'center',
   },
   header: {
-    backgroundColor: '#1f2225',
+    backgroundColor: '#0376a3',
     color: '#fff',
     marginBottom: '15px',
     fontSize: '1.5em',
