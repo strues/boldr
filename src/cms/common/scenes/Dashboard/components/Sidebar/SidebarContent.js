@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Menu } from 'semantic-ui-react';
+import { Menu, Dropdown } from 'semantic-ui-react';
 import { BoldrLogo } from 'components/index';
 import {
   postListClicked, postEditorClicked, dashboardClicked,
@@ -33,7 +33,7 @@ type Props = {
   style: Object
 }
 
-class SidebarContent extends Component {
+class SidebarContent extends PureComponent {
   props: Props;
   render() {
     const style = this.props.style ? { ...styles.sidebar, ...this.props.style } : styles.sidebar;
@@ -43,19 +43,19 @@ class SidebarContent extends Component {
         <BoldrLogo height="100px" width="120px" />
         <div className="sidebar__inner">
           <Menu vertical>
-
-          <Menu.Item>
-            <Menu.Header>Menu</Menu.Header>
+            <Menu.Item>
+              <Menu.Header>Menu</Menu.Header>
              <Menu.Menu>
-               <Menu.Item name="Home" onClick={ this.props.homeClicked } />
-               <Menu.Item name="Dashboard" onClick={ this.props.dashboardClicked } />
+               <Menu.Item onClick={ this.props.homeClicked }>Home </Menu.Item>
+               <Menu.Item onClick={ this.props.dashboardClicked }>Dashboard </Menu.Item>
+               <Menu.Item onClick={ this.props.membersClicked }>Members</Menu.Item>
              </Menu.Menu>
            </Menu.Item>
             <Menu.Item>
               <Menu.Header>Posts</Menu.Header>
                <Menu.Menu>
-                 <Menu.Item name="Post Listing" onClick={ this.props.postListClicked } />
-                 <Menu.Item name="New Post" onClick={ this.props.postEditorClicked } />
+                 <Menu.Item onClick={ this.props.postListClicked }>Post Listing</Menu.Item>
+                 <Menu.Item onClick={ this.props.postEditorClicked }>New Post</Menu.Item>
                </Menu.Menu>
              </Menu.Item>
 
@@ -63,24 +63,24 @@ class SidebarContent extends Component {
                <Menu.Header>Media</Menu.Header>
 
                <Menu.Menu>
-                 <Menu.Item name="File Manager" onClick={ this.props.fileManagerClicked } />
-                 <Menu.Item name="Galleries" onClick={ this.props.fileManagerClicked } />
+                 <Menu.Item onClick={ this.props.fileManagerClicked }>File Manager</Menu.Item>
+                 <Menu.Item onClick={ this.props.fileManagerClicked }>Galleries</Menu.Item>
                </Menu.Menu>
              </Menu.Item>
              <Menu.Item>
                <Menu.Header>Build</Menu.Header>
 
                <Menu.Menu>
-               <Menu.Item name="Blocks" onClick={ this.props.blocksClicked }>
+               <Menu.Item onClick={ this.props.blocksClicked }>
                  Blocks
                </Menu.Item>
-                 <Menu.Item name="Navigation" onClick={ this.props.navigationClicked }>
+                 <Menu.Item onClick={ this.props.navigationClicked }>
                    Navigation
                  </Menu.Item>
-                 <Menu.Item name="Links" onClick={ this.props.navigationClicked }>
+                 <Menu.Item onClick={ this.props.navigationClicked }>
                    Links
                  </Menu.Item>
-                 <Menu.Item name="Pages" onClick={ this.props.pagesClicked }>
+                 <Menu.Item onClick={ this.props.pagesClicked }>
                    Pages
                  </Menu.Item>
                </Menu.Menu>
@@ -89,8 +89,7 @@ class SidebarContent extends Component {
                <Menu.Header>Configuration</Menu.Header>
 
                <Menu.Menu>
-                 <Menu.Item name="Settings" onClick={ this.props.settingsClicked } />
-                 <Menu.Item name="Members" onClick={ this.props.membersClicked } />
+                 <Menu.Item onClick={ this.props.settingsClicked }>Settings</Menu.Item>
                </Menu.Menu>
              </Menu.Item>
            </Menu>

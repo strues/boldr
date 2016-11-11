@@ -25,6 +25,7 @@ boldr-api.paw
 
 #### Dist Directories
 build
+dist
 node_modules
 logs
 public/apidoc

@@ -3,9 +3,14 @@
 // }
 
 .ph-menu__item-link {
-  color: $white;
+  color: $navy;
 
   &:hover {
     color: $pinkish;
   }
+}
+.ph-logo {
+  height: 55px;
+  align-self: center;
+  margin-right: 20px;
 }

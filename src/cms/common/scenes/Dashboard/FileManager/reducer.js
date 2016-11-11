@@ -133,7 +133,7 @@ export default function attachmentReducer(state = INITIAL_STATE, action = {}) {
       return {
         ...state,
         loading: false,
-        files: [...state.files, ...action.payload],
+        files: [...state.files, action.payload],
       };
     case DELETE_ATTACHMENT_SUCCESS:
       return {

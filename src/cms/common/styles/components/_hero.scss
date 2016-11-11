@@ -1,15 +1,15 @@
-.hero {
+.primary-hero {
   height: 625px;
   width: 100%;
-  background-color: $near-black;
+  background-color: $water;
   position: relative;
   overflow: hidden;
   /*padding-top: 150px;*/
-  margin-top: -10px;
   color: #f1f1f1;
   position: relative;
   text-align: right;
   border-bottom: 1px solid #444;
+  padding-top: 50px;
 }
 .hero__tag {
   font-size: 4em;

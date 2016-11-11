@@ -50,9 +50,9 @@ class PrimaryHeader extends PureComponent {
       <Menu.Menu position="right">
         <Menu.Item as={ Dropdown } text="Account">
            <Dropdown.Menu>
-             <Dropdown.Item onClick={ this.props.handleProfileClick }>Profile</Dropdown.Item>
-             <Dropdown.Item onClick={ this.props.handlePreferencesClick }>Preferences</Dropdown.Item>
-             <Dropdown.Item onClick={ this.props.handleLogoutClick }>Logout</Dropdown.Item>
+             <Dropdown.Item text="Profile" onClick={ this.props.handleProfileClick } />
+             <Dropdown.Item text="Preferences" onClick={ this.props.handlePreferencesClick } />
+             <Dropdown.Item text="Logout" onClick={ this.props.handleLogoutClick } />
            </Dropdown.Menu>
          </Menu.Item>
        <Menu.Item onClick={ this.props.handleDashClick }>
@@ -79,14 +79,12 @@ class PrimaryHeader extends PureComponent {
     );
 
     return (
-      <Menu size="large">
+      <Menu size="small" stackable>
       <Container>
-        <Menu.Item>
-          <img src={ this.props.settings[2].value }
-            className="ph-logo"
-            alt="logo" onClick={ this.props.handleLogoClick } role="button" tabIndex="0"
-          />
-        </Menu.Item>
+        <img src={ this.props.settings[2].value }
+          className="ph-logo"
+          alt="logo" onClick={ this.props.handleLogoClick } role="button" tabIndex="0"
+        />
         { renderedMenuItems }
         { this.props.auth.isAuthenticated ? this.renderAuthenticated() : this.renderUnauthenticated() }
         </Container>

@@ -6,15 +6,15 @@ import { processResponse } from 'core/services/api';
 import * as types from './constants';
 
 const requestPosts = () => {
-  return { type: types.FETCH_POSTS_REQUEST };
+  return { type: types.LOAD_POSTS_REQUEST };
 };
 const receivePosts = (json) => ({
-  type: types.FETCH_POSTS_SUCCESS,
+  type: types.LOAD_POSTS_SUCCESS,
   data: json.data,
   pagination: json.pagination,
 });
 const receivePostsFailed = (err) => ({
-  type: types.FETCH_POSTS_FAILURE, error: err,
+  type: types.LOAD_POSTS_FAILURE, error: err,
 });
 
 /**
@@ -65,14 +65,14 @@ export function fetchPosts() {
 }
 
 const requestPost = () => {
-  return { type: types.LOAD_POST_REQUEST };
+  return { type: types.GET_POST_REQUEST };
 };
 const receivedPost = (json) => ({
-  type: types.LOAD_POST_SUCCESS,
+  type: types.GET_POST_SUCCESS,
   payload: json,
 });
 const receivePostFailed = (err) => ({
-  type: types.LOAD_POST_FAILURE,
+  type: types.GET_POST_FAILURE,
   error: err,
 });
 
@@ -107,7 +107,7 @@ const createPostSuccess = (response) => {
 };
 const errorCreatingPost = (err) => {
   return {
-    type: types.CREATE_POST_FAIL,
+    type: types.CREATE_POST_FAILURE,
     error: err,
   };
 };
@@ -164,7 +164,7 @@ const receiveSelectedPost = (response) => ({
 });
 
 const receiveSelectedPostFailed = (err) => ({
-  type: types.SELECT_POST_FAIL,
+  type: types.SELECT_POST_FAILURE,
   error: err,
 });
 
@@ -262,21 +262,21 @@ export const INITIAL_STATE = {
  */
 export default function searchReducer(state = INITIAL_STATE, action = {}) {
   switch (action.type) {
-    case types.FETCH_POSTS_REQUEST:
-    case types.LOAD_POST_REQUEST:
+    case types.LOAD_POSTS_REQUEST:
+    case types.GET_POST_REQUEST:
     case types.CREATE_POST_REQUEST:
       return {
         ...state,
         loading: true,
       };
-    case types.FETCH_POSTS_SUCCESS:
+    case types.LOAD_POSTS_SUCCESS:
       return {
         ...state,
         loading: false,
         pagination: action.pagination,
         data: action.data,
       };
-    case types.LOAD_POST_SUCCESS:
+    case types.GET_POST_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -287,9 +287,9 @@ export default function searchReducer(state = INITIAL_STATE, action = {}) {
         ...state,
         loading: false,
       };
-    case types.FETCH_POSTS_FAILURE:
-    case types.LOAD_POST_FAILURE:
-    case types.CREATE_POST_FAIL:
+    case types.LOAD_POSTS_FAILURE:
+    case types.GET_POST_FAILURE:
+    case types.CREATE_POST_FAILURE:
       return {
         ...state,
         loading: false,
@@ -309,7 +309,7 @@ export default function searchReducer(state = INITIAL_STATE, action = {}) {
         current: action.current,
         isEditing: true,
       };
-    case types.SELECT_POST_FAIL:
+    case types.SELECT_POST_FAILURE:
       return {
         ...state,
         loading: false,

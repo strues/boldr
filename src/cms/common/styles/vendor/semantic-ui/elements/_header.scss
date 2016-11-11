@@ -19,11 +19,11 @@
   border: none;
   margin: calc(2rem -  0.14285em ) 0em 1rem;
   padding: 0em 0em;
-  font-family: $font-family;
-  font-weight: bold;
+  font-family: $header-font-family;
+  font-weight: 600;
   line-height: 1.2857em;
   text-transform: none;
-  color: #5f656f;
+  color: $header-font-color;
 }
 .ui.header:first-child {
   margin-top: -0.14285em;

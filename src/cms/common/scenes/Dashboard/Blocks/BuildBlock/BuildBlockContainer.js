@@ -2,13 +2,19 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 class BuildBlockContainer extends Component {
+
   render() {
     return (
       <div>
-        blcoks
+        Blocks
       </div>
     );
   }
 }
 
-export default BuildBlockContainer;
+const mapStateToProps = (state) => {
+  return {
+    build: state.build
+  }
+}
+export default connect(mapStateToProps)(BuildBlockContainer);

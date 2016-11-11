@@ -24,17 +24,16 @@ export async function createBlock(req, res, next) {
   const elem = req.body.element;
   const newBlock = await Block.query().insert({
     id: uuid.v4(),
-    name: req.body.name,
-    label: slugify(req.body.label),
+    name: slugify(req.body.name),
     element: elem.toLowerCase(),
     content: req.body.content,
   });
   if (!newBlock) {
-    return res.status(500).json('error')
+    return res.status(500).json('error');
   }
   await Activity.query().insert({
     id: uuid.v4(),
-    name: newBlock.name,
+    name: slugify(newBlock.name),
     user_id: req.user.id,
     action: 'New block',
     type: 'create',

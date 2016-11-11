@@ -13,9 +13,9 @@ export const LOGOUT_USER_FAIL = 'AUTH/LOGOUT_USER_FAIL';
 export const CHECK_AUTH_REQUEST = 'AUTH/CHECK_AUTH_REQUEST';
 export const CHECK_AUTH_SUCCESS = 'AUTH/CHECK_AUTH_SUCCESS';
 export const CHECK_AUTH_FAILURE = 'AUTH/CHECK_AUTH_FAILURE';
-export const CREATE_ACCOUNT_REQUEST = 'AUTH/CREATE_ACCOUNT_REQUEST';
-export const CREATE_ACCOUNT_SUCCESS = 'AUTH/CREATE_ACCOUNT_SUCCESS';
-export const CREATE_ACCOUNT_FAILURE = 'AUTH/CREATE_ACCOUNT_FAILURE';
+export const SIGNUP_USER_REQUEST = 'AUTH/SIGNUP_USER_REQUEST';
+export const SIGNUP_USER_SUCCESS = 'AUTH/SIGNUP_USER_SUCCESS';
+export const SIGNUP_USER_FAILURE = 'AUTH/SIGNUP_USER_FAILURE';
 export const FORGOT_PASSWORD_REQUEST = 'AUTH/FORGOT_PASSWORD_REQUEST';
 export const FORGOT_PASSWORD_SUCCESS = 'AUTH/FORGOT_PASSWORD_SUCCESS';
 export const FORGOT_PASSWORD_FAILURE = 'AUTH/FORGOT_PASSWORD_FAILURE';
@@ -47,13 +47,13 @@ export function signup(data) {
 }
 
 const beginSignUp = () => {
-  return { type: CREATE_ACCOUNT_REQUEST };
+  return { type: SIGNUP_USER_REQUEST };
 };
 
 // Signup Success
 const signUpSuccess = (response) => {
   return {
-    type: CREATE_ACCOUNT_SUCCESS,
+    type: SIGNUP_USER_SUCCESS,
     payload: response,
   };
 };
@@ -61,7 +61,7 @@ const signUpSuccess = (response) => {
 // Signup Error
 const signUpError = (err) => {
   return {
-    type: CREATE_ACCOUNT_FAILURE,
+    type: SIGNUP_USER_FAILURE,
     error: err,
   };
 };
@@ -246,7 +246,7 @@ export default function authReducer(state = INITIAL_STATE, action = {}) {
   switch (action.type) {
     case LOGIN_FAILURE:
     case FORGOT_PASSWORD_FAILURE:
-    case CREATE_ACCOUNT_FAILURE:
+    case SIGNUP_USER_FAILURE:
     case RESET_PASSWORD_FAILURE:
       return {
         ...state,
@@ -256,7 +256,7 @@ export default function authReducer(state = INITIAL_STATE, action = {}) {
       };
     case LOGIN_REQUEST:
     case CHECK_AUTH_REQUEST:
-    case CREATE_ACCOUNT_REQUEST:
+    case SIGNUP_USER_REQUEST:
     case FORGOT_PASSWORD_REQUEST:
     case RESET_PASSWORD_REQUEST:
       return {
@@ -281,7 +281,7 @@ export default function authReducer(state = INITIAL_STATE, action = {}) {
         token: '',
         user: '',
       };
-    case CREATE_ACCOUNT_SUCCESS:
+    case SIGNUP_USER_SUCCESS:
       return {
         ...state,
         loading: false,

@@ -58,7 +58,7 @@ S3Upload.prototype.createCORSRequest = function(method, url) {
 
 S3Upload.prototype.executeOnSignedUrl = function(file, callback) {
   const normalizedFileName =
-    file.name.replace(/[!\^`><{}\[\]()*#%'"~|&@:;$=+?\s\\\/\x00-\x1F\x7f’]+/ig, '_')
+    file.name.replace(/[!^`><{}[\]()*#%'"~|&@:;$=+?\s\\/\x00-\x1F\x7f’]+/ig, '_')
     .normalize('NFC');
 
   let queryString = `?objectName=${normalizedFileName}&contentType=${encodeURIComponent(file.type)}`;
@@ -133,7 +133,7 @@ S3Upload.prototype.uploadToS3 = function(file, signResult) {
     }
 
     const normalizedFileName =
-      file.name.replace(/[!\^`><{}\[\]()*#%'"~|&@:;$=+?\s\\\/\x00-\x1F\x7f]+/ig, '_')
+      file.name.replace(/[!^`><{}[\]()*#%'"~|&@:;$=+?\s\\/\x00-\x1F\x7f]+/ig, '_')
       .normalize('NFC');
 
     xhr.setRequestHeader('Content-Disposition', `${disposition}; filename=${normalizedFileName}`);

@@ -25,12 +25,13 @@
   display: -ms-flexbox;
   display: flex;
   margin: 1rem 0em;
-  font-family: $font-family;
-  background: $topbar-background;
-  font-weight: normal;
-  border: $topbar-border;
+  font-family: $menu-font-family;
+  background: $primary-header-bg;
+  font-weight: 400;
+  border: $primary-header-border;
   box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);
   border-radius: 0;
+  height: 80px;
   min-height: 2.85714286em;
 }
 .ui.menu:after {
@@ -80,20 +81,17 @@
   vertical-align: middle;
   line-height: 1;
   text-decoration: none;
+  text-transform: uppercase;
   -webkit-tap-highlight-color: transparent;
   -webkit-box-flex: 0;
   -webkit-flex: 0 0 auto;
       -ms-flex: 0 0 auto;
           flex: 0 0 auto;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  user-select: none;
   background: none;
   padding: 0.92857143em 1.14285714em;
-  text-transform: none;
-  color: $topbar-link-color;
-  font-weight: normal;
+  color: $primary-header-link-color;
+  font-weight: 600;
   -webkit-transition: background 0.1s ease, box-shadow 0.1s ease, color 0.1s ease;
   transition: background 0.1s ease, box-shadow 0.1s ease, color 0.1s ease;
 }
@@ -416,7 +414,7 @@
 .ui.menu a.item:hover {
   cursor: pointer;
   background: rgba(0, 0, 0, 0.03);
-  color: $topbar-link-hover-color;
+  color: $primary-header-link-hover-color;
 }
 
 /*--------------
@@ -427,7 +425,7 @@
 .ui.menu .link.item:active,
 .ui.menu a.item:active {
   background: rgba(0, 0, 0, 0.03);
-  color: $topbar-link-hover-color;
+  color: $primary-header-link-hover-color;
 }
 
 /*--------------
@@ -436,7 +434,7 @@
 
 .ui.menu .active.item {
   background: rgba(0, 0, 0, 0.05);
-  color: $topbar-link-hover-color;
+  color: $primary-header-link-hover-color;
   font-weight: normal;
   box-shadow: none;
 }
@@ -451,7 +449,7 @@
 .ui.menu .active.item:hover,
 .ui.vertical.menu .active.item:hover {
   background-color: rgba(0, 0, 0, 0.05);
-  color: $topbar-link-hover-color;
+  color: $primary-header-link-hover-color;
 }
 
 /*--------------
@@ -514,7 +512,8 @@ Floated Menu / Item
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
-  background: #FFFFFF;
+  background: transparent;
+  height: 100%;
   box-shadow: 0px 1px 2px 0 rgba(34, 36, 38, 0.15);
 }
 

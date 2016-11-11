@@ -55,7 +55,7 @@ const INITIAL_STATE = {
 //  const byId = (state = {}, action) => {
 //    let nextState;
 //    switch (action.type) {
-//      case FETCH_POSTS_SUCCESS:
+//      case LOAD_POSTS_SUCCESS:
 //
 //        for (const prop in action.payload.entities.tags) {
 //          if (action.payload.entities.tags.hasOwnProperty(prop)) {
@@ -74,7 +74,7 @@ const INITIAL_STATE = {
 //
 //  const ids = (state = [], action) => {
 //    switch (action.type) {
-//      case FETCH_POSTS_SUCCESS:
+//      case LOAD_POSTS_SUCCESS:
 //        return [...state, ...action.payload.result];
 //
 //      case FETCH_POST_SUCCESS:

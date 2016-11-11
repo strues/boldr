@@ -38,7 +38,7 @@ router.get('/:id', ctrl.getAttachment);
  * @apiPermission user
  */
 router.post('/dashboard', isAuthenticated, ctrl.fromDashboard);
-router.delete('/:id', controller.destroy.bind(controller));
+router.delete('/:id', ctrl.deleteAttachment);
 router.get('/aws/bucket', ctrl.getAllAWS);
 
 export default router;

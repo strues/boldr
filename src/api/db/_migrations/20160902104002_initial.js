@@ -185,27 +185,6 @@ exports.up = function(knex, Promise) {
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
     }),
-    knex.schema.createTableIfNotExists('content_type', function(table) {
-      table.increments('id');
-      table.uuid('uuid');
-      table.string('name');
-      table.enu('type', ['string', 'int', 'boolean', 'array']);
-      table.enu('kind', ['text', 'image', 'video']);
-      table.string('description');
-      table.string('icon');
-      table.string('slug');
-      table.timestamp('created_at').defaultTo(knex.fn.now());
-      table.timestamp('updated_at').defaultTo(knex.fn.now());
-    }),
-    knex.schema.createTableIfNotExists('collection', function(table) {
-      table.uuid('id').primary();
-      table.string('name', 100).notNullable().unique();
-      table.string('description');
-      table.enu('status', ['published', 'draft', 'archived']).defaultTo('draft');
-      table.json('content');
-      table.timestamp('created_at').defaultTo(knex.fn.now());
-      table.timestamp('updated_at').defaultTo(knex.fn.now());
-    }),
     knex.schema.createTableIfNotExists('page', function(table) {
       table.uuid('id').primary();
       table.string('name').unique().notNullable();
@@ -264,8 +243,6 @@ exports.down = function(knex, Promise) {
     knex.schema.dropTableIfExists('link'),
     knex.schema.dropTableIfExists('navigation_link'),
     knex.schema.dropTableIfExists('gallery'),
-    knex.schema.dropTableIfExists('content_type'),
-    knex.schema.dropTableIfExists('collection'),
     knex.schema.dropTableIfExists('category'),
     knex.schema.dropTableIfExists('page'),
     knex.schema.dropTableIfExists('activity'),

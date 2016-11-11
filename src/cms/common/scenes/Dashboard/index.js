@@ -48,9 +48,17 @@ export default (store, connect) => {
       {
         path: 'blocks/build/:id',
         getComponent(nextState, cb) {
-          System.import('./Blocks/BuildBlock')
-          .then(loadModule(cb))
-          .catch(errorLoading);
+          const importModules = Promise.all([
+            System.import('./Blocks/BuildBlock/reducer'),
+            System.import('./Blocks/BuildBlock'),
+          ]);
+          const renderRoute = loadModule(cb);
+          importModules.then(([reducer, component]) => {
+            injectReducer('build', reducer.default);
+            renderRoute(component);
+          });
+
+          importModules.catch(errorLoading);
         },
       },
       {
@@ -93,7 +101,7 @@ export default (store, connect) => {
           importModules.catch(errorLoading);
         },
       },
-      
+
       {
         path: 'navigation',
         getComponent(nextState, cb) {

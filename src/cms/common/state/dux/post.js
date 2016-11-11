@@ -2,31 +2,32 @@
 import * as api from 'core/services/api';
 import * as notif from 'core/config/notifications';
 import type { Post } from '../../types/models';
+import type { ActionType } from '../../types/redux';
 import { notificationSend } from './notifications';
 
-export const FETCH_POSTS_REQUEST = '@boldr/FETCH_POSTS_REQUEST';
-export const FETCH_POSTS_SUCCESS = '@boldr/FETCH_POSTS_SUCCESS';
-export const FETCH_POSTS_FAILURE = '@boldr/FETCH_POSTS_FAILURE';
-export const LOAD_POST_REQUEST = '@boldr/LOAD_POST_REQUEST';
-export const LOAD_POST_SUCCESS = '@boldr/LOAD_POST_SUCCESS';
-export const LOAD_POST_FAILURE = '@boldr/LOAD_POST_FAILURE';
+export const LOAD_POSTS_REQUEST = '@boldr/LOAD_POSTS_REQUEST';
+export const LOAD_POSTS_SUCCESS = '@boldr/LOAD_POSTS_SUCCESS';
+export const LOAD_POSTS_FAILURE = '@boldr/LOAD_POSTS_FAILURE';
+export const GET_POST_REQUEST = '@boldr/GET_POST_REQUEST';
+export const GET_POST_SUCCESS = '@boldr/GET_POST_SUCCESS';
+export const GET_POST_FAILURE = '@boldr/GET_POST_FAILURE';
 export const UPDATE_POST_REQUEST = '@boldr/dashboard/UPDATE_POST_REQUEST';
 export const UPDATE_POST_SUCCESS = '@boldr/dashboard/UPDATE_POST_SUCCESS';
 export const UPDATE_POST_FAILURE = '@boldr/dashboard/UPDATE_POST_FAILURE';
 export const SELECT_POST = 'SELECT_POST';
-const SELECT_POST_SUCCESS = 'SELECT_POST_SUCCESS';
-const SELECT_POST_FAIL = 'SELECT_POST_FAIL';
-const CREATE_POST_REQUEST = '@boldr/dashboardCREATE_POST_REQUEST';
-const CREATE_POST_SUCCESS = '@boldr/dashboardCREATE_POST_SUCCESS';
-const CREATE_POST_FAIL = '@boldr/dashboard/CREATE_POST_FAIL';
-const DELETE_POST_FAILURE = '@boldr/dashboard/DELETE_POST_FAILURE';
-const DELETE_POST_REQUEST = '@boldr/dashboard/DELETE_POST_REQUEST';
-const DELETE_POST_SUCCESS = '@boldr/dashboard/DELETE_POST_SUCCESS';
+export const SELECT_POST_SUCCESS = 'SELECT_POST_SUCCESS';
+export const SELECT_POST_FAILURE = 'SELECT_POST_FAILURE';
+export const CREATE_POST_REQUEST = '@boldr/dashboardCREATE_POST_REQUEST';
+export const CREATE_POST_SUCCESS = '@boldr/dashboardCREATE_POST_SUCCESS';
+export const CREATE_POST_FAILURE = '@boldr/dashboard/CREATE_POST_FAILURE';
+export const DELETE_POST_FAILURE = '@boldr/dashboard/DELETE_POST_FAILURE';
+export const DELETE_POST_REQUEST = '@boldr/dashboard/DELETE_POST_REQUEST';
+export const DELETE_POST_SUCCESS = '@boldr/dashboard/DELETE_POST_SUCCESS';
 
-const TOGGLE_POST_LAYOUT = '@boldr/TOGGLE_POST_LAYOUT';
-const SHOW_POST_ALL = 'SHOW_POST_ALL';
-const SHOW_POST_CURRENT_TAG = 'SHOW_POST_CURRENT_TAG';
-const SHOW_POST_TAG = 'SHOW_POST_TAG';
+export const TOGGLE_POST_LAYOUT = '@boldr/TOGGLE_POST_LAYOUT';
+export const SHOW_POST_ALL = 'SHOW_POST_ALL';
+export const SHOW_POST_CURRENT_TAG = 'SHOW_POST_CURRENT_TAG';
+export const SHOW_POST_TAG = 'SHOW_POST_TAG';
 
 
 export function togglePostLayoutView() {
@@ -96,18 +97,18 @@ function shouldFetchPosts(state) {
 }
 
 const requestPosts = () => {
-  return { type: FETCH_POSTS_REQUEST };
+  return { type: LOAD_POSTS_REQUEST };
 };
 
 const receivePosts = (response) => {
   return {
-    type: FETCH_POSTS_SUCCESS,
+    type: LOAD_POSTS_SUCCESS,
     payload: response.body,
   };
 };
 
 const receivePostsFailed = (err) => ({
-  type: FETCH_POSTS_FAILURE, error: err,
+  type: LOAD_POSTS_FAILURE, error: err,
 });
 
 /**
@@ -135,7 +136,7 @@ export function createPost(data: Post) {
       })
       .catch(err => {
         dispatch(errorCreatingPost(err));
-        dispatch(notificationSend(notif.MSG_CREATE_POST_FAILURE));
+        dispatch(notificationSend(notif.MSG_CREATE_POST_FAILUREURE));
       });
   };
 }
@@ -153,7 +154,7 @@ const createPostSuccess = (response: Object) => {
 
 const errorCreatingPost = (err) => {
   return {
-    type: CREATE_POST_FAIL,
+    type: CREATE_POST_FAILURE,
     error: err,
   };
 };
@@ -259,8 +260,8 @@ const INITIAL_STATE = {
 
 export default function postsReducer(state: State = INITIAL_STATE, action: Object) {
   switch (action.type) {
-    case FETCH_POSTS_REQUEST:
-    case LOAD_POST_REQUEST:
+    case LOAD_POSTS_REQUEST:
+    case GET_POST_REQUEST:
     case CREATE_POST_REQUEST:
     case DELETE_POST_REQUEST:
       return {
@@ -268,7 +269,7 @@ export default function postsReducer(state: State = INITIAL_STATE, action: Objec
         loading: true,
         loaded: false,
       };
-    case FETCH_POSTS_SUCCESS:
+    case LOAD_POSTS_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -279,7 +280,7 @@ export default function postsReducer(state: State = INITIAL_STATE, action: Objec
           [a.slug]: a,
         }), {}),
       };
-    case LOAD_POST_SUCCESS:
+    case GET_POST_SUCCESS:
       return {
         ...state,
         loading: false,
@@ -297,9 +298,9 @@ export default function postsReducer(state: State = INITIAL_STATE, action: Objec
         ...state,
         entities: [...state.entities].filter((entity) => entity.id !== action.id),
       };
-    case FETCH_POSTS_FAILURE:
-    case LOAD_POST_FAILURE:
-    case CREATE_POST_FAIL:
+    case LOAD_POSTS_FAILURE:
+    case GET_POST_FAILURE:
+    case CREATE_POST_FAILURE:
     case DELETE_POST_FAILURE:
       return {
         ...state,
@@ -321,7 +322,7 @@ export default function postsReducer(state: State = INITIAL_STATE, action: Objec
         current: action.current,
         isEditing: true,
       };
-    case SELECT_POST_FAIL:
+    case SELECT_POST_FAILURE:
       return {
         ...state,
         loading: false,

@@ -4,7 +4,8 @@ exports[`<Tag /> renders snapshot 1`] = `
   style={Object {}}
   to="/blog/tags/undefined">
   <Label
-    image={true}>
+    image={true}
+    removeIcon="delete">
     <Icon
       as="i"
       name="tag" />

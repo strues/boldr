@@ -1,4 +1,4 @@
-import postsReducer, { FETCH_POSTS_REQUEST, LOAD_POST_FAILURE } from './post';
+import postsReducer, { LOAD_POSTS_REQUEST, GET_POST_FAILURE } from './post';
 
 describe('Post Duck', () => {
   it('Should return the initial state', () => {
@@ -28,7 +28,7 @@ describe('Post Duck', () => {
     };
     expect(
       postsReducer(initialState, {
-        type: FETCH_POSTS_REQUEST,
+        type: LOAD_POSTS_REQUEST,
       }),
     ).toEqual(stateAfter);
   });
@@ -49,7 +49,7 @@ describe('Post Duck', () => {
     };
     expect(
       postsReducer(initialState, {
-        type: LOAD_POST_FAILURE,
+        type: GET_POST_FAILURE,
       }),
     ).toEqual(stateAfter);
   });

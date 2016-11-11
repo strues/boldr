@@ -31,7 +31,6 @@ const FooterWrapper = styled.footer`
 const PageTemplate = (props: Props) => {
   return (
     <Wrapper { ...props }>
-      <div className="boldr__theme-page">
         { props.helmetMeta }
         <HeaderWrapper { ...props.header } />
 
@@ -44,7 +43,6 @@ const PageTemplate = (props: Props) => {
         <FooterWrapper>
           { props.footer || <Footer /> }
         </FooterWrapper>
-      </div>
     </Wrapper>
   );
 };
