@@ -1,15 +1,8 @@
 {
   "name": "boldr",
-  "version": "0.6.0-alpha.3",
+  "version": "0.6.0-alpha.4",
   "description": "Your dreams are bold. Your thoughts are bold. So why shouldn't your CMS be a little Boldr?",
-  "main": "bin/ssr.js",
-  "directories": {
-    "docs": "docs",
-    "tools": "tools",
-    "cms": "build/boldrCMS",
-    "api": "build/boldrAPI",
-    "bin": "bin"
-  },
+  "main": "build/boldrCMS/server/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/boldr/boldr.git"
@@ -77,7 +70,8 @@
     "migrate:prod": "./node_modules/.bin/knex --knexfile boldrAPI/config/knexfile.js migrate:latest",
     "seed": "./node_modules/.bin/knex --knexfile src/api/config/knexfile.js seed:run",
     "seed:prod": "./node_modules/.bin/knex --knexfile boldrAPI/config/knexfile.js seed:run",
-    "start:cms": "node build/boldrCMS/server",
+    "start:cms": "NODE_ENV=production pm2 start build/boldrCMS/server/index.js --name boldrSSR -e logs/boldrSSR-error.log",
+    "start:api": "NODE_ENV=production postgres__uri=postgres://postgres:password@localhost:5432/boldr pm2 start boldrAPI/index.js --name boldrAPI -e logs/boldrAPI-error.log",
     "test:ci": "NODE_ENV=test CI=true jest -w 2",
     "test": "NODE_ENV=test jest",
     "test:watch": "NODE_ENV=test jest --watch=all"

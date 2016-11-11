@@ -11,7 +11,8 @@ type Props = {
   handleFinish: () => void,
   attachments: Object,
   deleteMedia: () => void,
-  uploadFiles: () => void
+  uploadFiles: () => void,
+  fetchMedia: () => void
 };
 @asyncConnect([{
   promise: ({ store: { dispatch, getState } }) => {

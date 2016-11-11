@@ -38,6 +38,6 @@ build-api:
 	npm run build:api
 
 create-dist:
-	mkdir ./dist && mv build/boldrAPI dist/ && mv build/boldrCMS dist/ && cp package.json dist/package.json && cp .env dist/.env
+	rm -rf ./dist && mkdir ./dist && mv build/boldrAPI dist/ && mv build/boldrCMS dist/build/ && cp package.json dist/package.json && cp .env dist/.env
 
 build: build-cms copy-sw build-api create-dist

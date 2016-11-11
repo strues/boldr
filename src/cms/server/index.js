@@ -2,9 +2,6 @@
 /* eslint-disable no-console */
 /* eslint-disable no-duplicate-imports */
 
-// This grants us source map support, which combined with our webpack source
-// maps will give us nice stack traces.
-import 'source-map-support/register';
 import path from 'path';
 import uuid from 'node-uuid';
 import appRoot from 'app-root-path';
