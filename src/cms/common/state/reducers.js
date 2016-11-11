@@ -8,6 +8,7 @@ import authReducer from './dux/auth';
 import boldrReducer from './dux/boldr';
 import postReducer from './dux/post';
 import tagReducer from './dux/tag';
+import uiReducer from './dux/ui';
 
 export default function createReducer(asyncReducers) {
   return combineReducers({
@@ -19,6 +20,7 @@ export default function createReducer(asyncReducers) {
     posts: postReducer,
     boldr: boldrReducer,
     tags: tagReducer,
+    ui: uiReducer,
     form: formReducer,
     ...asyncReducers,
   });
