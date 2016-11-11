@@ -6,11 +6,11 @@ DIST_API   := build/boldrAPI
 .PHONY: clean
 
 clean-api:
-	rm -rf $(DIST_API)
+	npm run clean $(DIST_API)
 clean-cms:
-	rm -rf $(DIST_CMS)
+	npm run clean $(DIST_CMS)
 clean-cache:
-	rm -rf .wp_cache && rm -rf .happypack
+	npm run clean .happypack
 
 clean: clean-cache clean-cms clean-api
 
@@ -37,4 +37,7 @@ build-cms:
 build-api:
 	npm run build:api
 
-build: build-cms copy-sw build-api
+create-dist:
+	mkdir ./dist && mv build/boldrAPI dist/ && mv build/boldrCMS dist/ && cp package.json dist/package.json && cp .env dist/.env
+
+build: build-cms copy-sw build-api create-dist

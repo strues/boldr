@@ -76,3 +76,25 @@ export function getAllAWS(req, res, next) {
     }
   });
 }
+
+export async function deleteAttachment(req, res, next) {
+  try {
+    const attachment = await Attachment.query().findById(req.params.id);
+    const params = {
+      Bucket: awsConfig.bucket,
+      Key: attachment.s3_key,
+    };
+    s3.deleteObject(params, (err, data) => {
+      if (err) {
+        console.log(err, err.stack);
+        return res.status(500).json(err);
+      } else {
+        console.log(data);
+      }
+    });
+    await Attachment.query().deleteById(req.params.id);
+    return res.status(204).json('Deleted file');
+  } catch (error) {
+    return res.status(500).json(error);
+  }
+}
