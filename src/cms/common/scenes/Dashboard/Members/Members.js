@@ -15,13 +15,6 @@ export type Props = {
   updateMember: Function,
 };
 
-@asyncConnect([{
-  promise: ({ store: { dispatch, getState } }) => {
-    const promises = [];
-    promises.push(dispatch(loadSiteMembers()));
-    return Promise.all(promises);
-  },
-}])
 class Members extends Component {
   constructor(props: Props) {
     super(props);
@@ -34,12 +27,15 @@ class Members extends Component {
     this.props.loadSiteMembers();
   }
   props: Props;
-  open = () => this.setState({ open: true })
-  close = () => this.setState({ open: false })
+
+  open = () => this.setState({ open: true });
+  close = () => this.setState({ open: false });
+
   toggleUser(userId) {
     this.props.memberSelected(userId);
     this.setState({ open: true, userId });
   }
+
   handleSubmit(values) {
     const userData = {
       display_name: values.display_name,
@@ -70,6 +66,9 @@ class Members extends Component {
     );
   }
 }
+const asyncProps = [{
+  promise: ({ store: { dispatch, getState } }) => dispatch(loadSiteMembers())
+}];
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -78,4 +77,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, { memberSelected, updateMember, loadSiteMembers })(Members);
+export default asyncConnect(asyncProps, mapStateToProps, { memberSelected, updateMember, loadSiteMembers })(Members);

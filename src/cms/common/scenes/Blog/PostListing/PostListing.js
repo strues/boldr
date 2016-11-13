@@ -20,12 +20,12 @@ const PostListing = (props: Props) => {
 
   const gridView = (
     <Row>
-        {
-          props.posts.map((post, i) =>
-            <Col key={ i } xs={ 12 } md={ 4 }>
-              <PostCard { ...post } />
-            </Col>)
-        }
+      {
+        props.posts.map((post, i) =>
+          <Col key={ i } xs={ 12 } md={ 4 }>
+            <PostCard { ...post } />
+          </Col>)
+      }
     </Row>
   );
 
@@ -50,12 +50,8 @@ const PostListing = (props: Props) => {
             <Icon name="grid layout" />
           }
         </Button>
-    </Segment>
-      {
-        props.layout === 'grid' ?
-        gridView :
-        listView
-      }
+      </Segment>
+      { props.layout === 'grid' ? gridView : listView }
     </div>
   );
 };
