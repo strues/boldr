@@ -6,7 +6,7 @@ import Sections from './components/Sections';
 import SectionsStore from './components/Sections/SectionsStore';
 import Board from './components/Board';
 import BoardStore from './components/Board/BoardStore'
-import MainMenu from './components/MainMenu';
+import Catalog from './components/Catalog';
 import './style.css';
 
 @DragDropContext(HTML5Backend)
@@ -68,7 +68,7 @@ class BuildBlockContainer extends Component {
     )
     return (
       <div>
-        <MainMenu />
+        <Catalog />
         <div className="Container">
           <Board onDrop={this.onDropSectionOnBoard}>{sections}</Board>
           <pre className="BoardJSON">{JSON.stringify(this.state, null, 2)}</pre>

@@ -47,7 +47,6 @@ class Settings extends Component {
                <Button floated="right" icon labelPosition="left" primary size="small">
                  <Icon name="setting" /> Add Setting
                </Button>
-               <Button size="small">Approve</Button>
              </Table.HeaderCell>
            </Table.Row>
          </Table.Footer>

@@ -164,7 +164,6 @@
     "react-dnd-html5-backend": "^2.1.2",
     "react-dom": "^15.3.2",
     "react-dropzone": "^3.7.3",
-    "react-formulate": "^0.2.6",
     "react-helmet": "^3.2.2",
     "react-redux": "^5.0.0-beta.3",
     "react-router": "3",

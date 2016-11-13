@@ -96,7 +96,7 @@ class Sections extends React.Component {
     return connectDragSource(connectDropTarget(
       <div className="Section">
         {section}
-      </div>,
+      </div>
     ));
   }
 }

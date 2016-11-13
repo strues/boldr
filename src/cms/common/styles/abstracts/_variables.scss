@@ -52,6 +52,11 @@ $footer-bg: $mirage;
 $text-color: $bunker;
 $basic-button-bg: $mercury;
 $menu-header-color: $bunker;
+$contrast-light: #2b343a;
+$contrast-dark: #1d252b;
+
+// Borders
+$border-color: rgba(255, 255, 255, .06);
 $import-google-fonts: false;
 $font-name: 'Work Sans' !default;
 $font-family: $font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif !default;
