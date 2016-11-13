@@ -16,7 +16,7 @@ const defaultStyles = {
     WebkitTransition: '-webkit-transform .3s ease-out',
     willChange: 'transform',
     overflowY: 'auto',
-    // backgroundColor: 'rgba(64, 64, 78, 1)',
+    // backgroundColor: '#1d252b',
   },
   content: {
     position: 'absolute',

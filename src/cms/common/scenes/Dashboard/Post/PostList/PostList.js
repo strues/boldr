@@ -45,15 +45,17 @@ class PostList extends Component {
        <Segment>
        <Item.Group>
         {
-          this.props.posts.map((post, index) => (
+          this.props.posts.map(post => (
            <PostListItem
-             article={ post }
-             created_at={ post.created_at }
              key={ post.slug }
-             sortRank={ index }
-             content={ post.content }
-             title={ post.title }
+             id={ post.id }
              slug={ post.slug }
+             excerpt={ post.excerpt }
+             content={ post.content }
+             feature_image={ post.feature_image }
+             title={ post.title }
+             status={ post.status }
+             created_at={ post.created_at }
              handleDeleteClick={ this.handleDeleteClick }
              handleArticleClick={ this.handleArticleClick }
            />

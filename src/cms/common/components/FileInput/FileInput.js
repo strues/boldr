@@ -9,9 +9,6 @@ class FileInput extends PureComponent {
   static propTypes = {
     style: PropTypes.object,
     className: PropTypes.string,
-    primary: PropTypes.bool,
-    secondary: PropTypes.bool,
-    flat: PropTypes.bool,
     accept: PropTypes.string,
     multiple: PropTypes.bool,
     label: PropTypes.string.isRequired,

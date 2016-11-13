@@ -5,27 +5,31 @@ import { format } from 'date-fns';
 import { Item, Icon, Segment, Divider } from 'semantic-ui-react';
 
 type Props = {
-  article: Object,
+  id: String,
+  feature_image: String,
+  title: String,
   handleArticlePublishClick: Function,
   handleDeleteClick: Function,
   handleArticleDraftClick: Function,
-  created_at: string,
-  slug: string
+  created_at: String,
+  status: String,
+  excerpt: String,
+  slug: String,
 };
 
 const PostListItem = (props: Props) => {
   function handlePublishClick() {
-    const postId:String = props.article.id;
+    const postId:String = props.id;
     const postStatus = 'draft';
     props.handleArticlePublishClick(postId, postStatus);
   }
   function handleDraftClick() {
-    const postId = props.article.id;
+    const postId = props.id;
     const postStatus = 'published';
     props.handleArticleDraftClick(postId, postStatus);
   }
   function handleClickDelete() {
-    const postId: String = props.article.id;
+    const postId: String = props.id;
     props.handleDeleteClick(postId);
   }
   const formattedDate = format(props.created_at, 'MM/DD/YYYY');
@@ -35,31 +39,32 @@ const PostListItem = (props: Props) => {
     <div className="post-list__item">
     <Segment>
       <Item>
-       <img src={ props.article.feature_image }
+       <img src={ props.feature_image }
          alt="post preview"
          style={ { width: '100px', height: '100px', float: 'left', marginRight: '15px' } }
        />
        <Item.Content>
-        <Item.Header>
+        <Item.Header>{/* $FlowIssue */}
           <Link to={ `/dashboard/posts/editor/${props.slug}` }>
-          {props.article.title}
+          { props.title }
           </Link>
         </Item.Header>
         <Item.Meta>
             <Icon name="calendar" /> { formattedDate }
         </Item.Meta>
         <Item.Description>
-        { props.article.excerpt }
+        { props.excerpt }
         </Item.Description>
         <Item.Extra>
-        { props.article.status === 'published' ?
-          publishedIcon :
-          draftIcon
-        }
+          {
+            props.status === 'published' ?
+            publishedIcon :
+            draftIcon
+          }{/* $FlowIssue */}
           <Link to={ `/dashboard/posts/editor/${props.slug}` }>
             <Icon name="edit" size="large" />
           </Link>
-          <Icon name="recycle" size="large" onClick={ handleClickDelete } />
+          <Icon name="erase" size="large" onClick={ handleClickDelete } />
         </Item.Extra>
       </Item.Content>
     </Item>

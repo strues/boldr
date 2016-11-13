@@ -80,7 +80,7 @@ export function doSelectPost(postId) {
 export function doDeletePost(postId) {
   return request
     .delete(`${API_POSTS}/pid/${postId}`)
-    .set('Authorization', `${getToken}`);
+    .set('Authorization', `${AUTH_TOKEN}`);
 }
 
 export function doUpdatePost(postData) {
