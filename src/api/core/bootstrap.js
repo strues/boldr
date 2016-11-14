@@ -6,7 +6,7 @@
  */
 import { Model } from 'objection';
 import knex from '../db/postgres';
-import Setting from '../modules/setting/setting.model';
+import Setting from '../routes/setting/setting.model';
 import logger from './logger';
 
 const startupMessage = `\n

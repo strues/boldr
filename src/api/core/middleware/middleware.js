@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import User from '../../modules/user/user.model';
+import User from '../../routes/user/user.model';
 import { GeneralError } from '../errors';
 
 // Middleware usage ... in a route file

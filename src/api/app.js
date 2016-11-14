@@ -7,7 +7,7 @@ import morgan from 'morgan';
 
 import { authMiddleware, expressMiddleware, errorCatcher, middleware } from './core/middleware';
 import { default as winstonInstance } from './core/logger';
-import routes from './modules/routes';
+import routes from './routes/index';
 
 const debug = require('debug')('boldr:ssr-server');
 const config = require('./config/config');

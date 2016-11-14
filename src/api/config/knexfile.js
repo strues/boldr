@@ -6,9 +6,9 @@ module.exports = {
   development: {
     client: 'pg',
     connection: pgConfig.uri || {
-      host: pgConfig.host|| 'localhost',
+      host: pgConfig.host || 'localhost',
       user: pgConfig.user || 'postgres',
-      password: pgConfig.password|| 'password',
+      password: pgConfig.password || 'password',
       database: pgConfig.db || 'boldr',
     },
     migrations: {
@@ -27,9 +27,9 @@ module.exports = {
   test: {
     client: 'pg',
     connection: pgConfig.uri || {
-      host: pgConfig.host|| 'localhost',
+      host: pgConfig.host || 'localhost',
       user: pgConfig.user || 'postgres',
-      password: pgConfig.password|| 'password',
+      password: pgConfig.password || 'password',
       database: pgConfig.db || 'boldr',
     },
     migrations: {
