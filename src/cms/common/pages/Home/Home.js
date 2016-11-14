@@ -6,7 +6,6 @@ import Helmet from 'react-helmet';
 import { Header, Icon, Segment, Container } from 'semantic-ui-react';
 import { Row, Hero, PrimaryHeader, Footer } from 'components/index';
 import { fetchPagesIfNeeded } from 'state/index';
-import PostListing from 'scenes/Blog/PostListing';
 import PageTemplate from '../../theme/Boldr/PageTemplate';
 
 type Props = {
@@ -26,16 +25,8 @@ const Home = (props: Props) => {
       >
       <Container fluid>
         <Row style={ { padding: '25px' } }>
-        <Segment>
-          <Header as="h1">
-            <Icon name="newspaper" />
-            <Header.Content>
-              Recent posts
-            </Header.Content>
-          </Header>
-          </Segment>
+
         </Row>
-        <PostListing />
       </Container>
       </PageTemplate>
   );
@@ -48,4 +39,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchPagesIfNeeded })(Home);
+export default connect(mapStateToProps)(Home);

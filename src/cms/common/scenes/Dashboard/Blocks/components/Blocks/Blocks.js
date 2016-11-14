@@ -8,7 +8,7 @@ import { Block, CreateBlockForm } from '../';
 type Props = {
   handleSubmit: () => void,
   blocks: Array<BlockType>
-}
+};
 const Blocks = (props: Props) => {
   return (
     <div>
@@ -20,11 +20,6 @@ const Blocks = (props: Props) => {
     <Row>
       <Col xs={ 12 } md={ 8 }>
          <Segment>
-         <Segment inverted>
-           <Button icon>
-             <Icon name="list layout" />
-           </Button>
-         </Segment>
            Blocks
            { !(props.blocks: Array<BlockType>) ?
              <div>Loading</div> :

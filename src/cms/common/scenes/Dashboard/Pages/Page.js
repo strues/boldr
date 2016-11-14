@@ -1,8 +1,6 @@
 import React from 'react';
-
-const Page = (props) => {
-  return (
-    <div>
+import Link from 'react-router/lib/Link';
+/*
       Fields
       Name<br />
       URL<br />
@@ -11,6 +9,11 @@ const Page = (props) => {
       data<br />
       status<br />
       restricted
+ */
+const Page = (props) => {
+  return (
+    <div>
+    <Link to={ `/dashboard/pages/builder/${props.name}` }>{ props.name }</Link>
     </div>
   );
 };

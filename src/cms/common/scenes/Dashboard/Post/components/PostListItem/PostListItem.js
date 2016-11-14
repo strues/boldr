@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'react-router/lib/Link';
 import { format } from 'date-fns';
-import { Item, Icon, Segment, Divider } from 'semantic-ui-react';
+import { Item, Button, Icon, Segment, Divider, Popup } from 'semantic-ui-react';
 
 type Props = {
   id: String,
@@ -33,8 +33,16 @@ const PostListItem = (props: Props) => {
     props.handleDeleteClick(postId);
   }
   const formattedDate = format(props.created_at, 'MM/DD/YYYY');
-  const publishedIcon = <Icon onClick={ handlePublishClick } name="unhide" size="large" />;
-  const draftIcon = <Icon onClick={ handleDraftClick } name="hide" size="large" />;
+  const publishedIcon = <Popup
+                          trigger={ <Button onClick={ handlePublishClick } icon="unhide" /> }
+                          content="Set post status to published."
+                          basic
+                        />
+  const draftIcon = <Popup
+                      trigger={ <Button onClick={ handleDraftClick }icon="hide" /> }
+                      content="Set post status to draft."
+                      basic
+                    />
   return (
     <div className="post-list__item">
     <Segment>
@@ -58,13 +66,17 @@ const PostListItem = (props: Props) => {
         <Item.Extra>
           {
             props.status === 'published' ?
-            publishedIcon :
-            draftIcon
+            draftIcon :
+            publishedIcon
           }{/* $FlowIssue */}
           <Link to={ `/dashboard/posts/editor/${props.slug}` }>
             <Icon name="edit" size="large" />
           </Link>
-          <Icon name="erase" size="large" onClick={ handleClickDelete } />
+          <Popup
+            trigger={ <Button icon="erase" onClick={ handleClickDelete } /> }
+            content="Remove post from database."
+            basic
+          />
         </Item.Extra>
       </Item.Content>
     </Item>

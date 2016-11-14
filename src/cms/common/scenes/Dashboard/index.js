@@ -119,6 +119,22 @@ export default (store, connect) => {
         },
       },
       {
+        path: 'pages/builder',
+        getComponent(nextState, cb) {
+          System.import('./Pages/PageBuilder')
+        .then(loadModule(cb))
+        .catch(errorLoading);
+        },
+      },
+      {
+        path: 'pages/builder/:name',
+        getComponent(nextState, cb) {
+          System.import('./Pages/PageBuilder')
+        .then(loadModule(cb))
+        .catch(errorLoading);
+        },
+      },
+      {
         path: 'settings',
         getComponent(nextState, cb) {
           require.ensure([], (require) => {

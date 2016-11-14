@@ -45,6 +45,7 @@ import {
   getNavs,
   isNavLoaded,
   arePagesLoaded,
+  getPostTags,
   createSelector,
 } from './selectors';
 
@@ -82,5 +83,6 @@ export {
   getNavs,
   arePagesLoaded,
   isNavLoaded,
+  getPostTags,
   createSelector,
 };

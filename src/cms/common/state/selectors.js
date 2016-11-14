@@ -54,6 +54,7 @@ export function isNavLoaded(globalState) {
 export function arePagesLoaded(globalState) {
   return globalState.boldr.pages && globalState.boldr.pages.loaded;
 }
+
 export const getPages = createSelector(
   [
     (state) => state.boldr.pages.ids,
@@ -61,7 +62,9 @@ export const getPages = createSelector(
   ],
   (ids, all) => ids.map(id => all[id]),
 );
-
+export function getPageById(state, pageName) {
+  return state.boldr.pages.all[pageName];
+}
 /**
   * AUTH SELECTORS
   *
