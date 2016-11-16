@@ -188,6 +188,7 @@ exports.up = function(knex, Promise) {
     knex.schema.createTableIfNotExists('page', function(table) {
       table.uuid('id').primary();
       table.string('name').unique().notNullable();
+      table.string('label');
       table.string('url').unique().notNullable();
       table.json('layout');
       table.json('data');

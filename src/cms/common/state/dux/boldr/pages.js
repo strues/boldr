@@ -7,8 +7,8 @@ import * as t from './constants';
   *****************************************************************/
 const initialState = {
   loaded: false,
-  all: {},
-  ids: [],
+  byLabel: {},
+  labels: [],
   meta: {},
   filter: {},
 };
@@ -25,8 +25,8 @@ export default function pagesReducer(state = initialState, action = {}) {
       return {
         loading: false,
         loaded: true,
-        all: action.payload.entities.pages,
-        ids: action.payload.result,
+        byLabel: action.payload.entities.pages,
+        labels: action.payload.result,
       };
     case t.LOAD_PAGE_SUCCESS:
       return {

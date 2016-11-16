@@ -7,8 +7,8 @@ describe('Pages Duck', () => {
         pagesReducer(undefined, {}),
       ).toEqual({
         loaded: false,
-        all: {},
-        ids: [],
+        byLabel: {},
+        labels: [],
         meta: {},
         filter: {},
       });
@@ -16,16 +16,16 @@ describe('Pages Duck', () => {
   it('should initiate loading', () => {
     const initialState = {
       loaded: false,
-      all: {},
-      ids: [],
+      byLabel: {},
+      labels: [],
       meta: {},
       filter: {},
     };
     const stateAfter = {
       loading: true,
       loaded: false,
-      all: {},
-      ids: [],
+      byLabel: {},
+      labels: [],
       meta: {},
       filter: {},
     };
@@ -38,16 +38,16 @@ describe('Pages Duck', () => {
   it('should initiate loading', () => {
     const initialState = {
       loaded: false,
-      all: {},
-      ids: [],
+      byLabel: {},
+      labels: [],
       meta: {},
       filter: {},
     };
     const stateAfter = {
       loading: true,
       loaded: false,
-      all: {},
-      ids: [],
+      byLabel: {},
+      labels: [],
       meta: {},
       filter: {},
     };
@@ -60,16 +60,16 @@ describe('Pages Duck', () => {
   it('should handle failure', () => {
     const initialState = {
       loaded: false,
-      all: {},
-      ids: [],
+      byLabel: {},
+      labels: [],
       meta: {},
       filter: {},
     };
     const stateAfter = {
       loading: false,
       loaded: true,
-      all: {},
-      ids: [],
+      byLabel: {},
+      labels: [],
       meta: {},
       filter: {},
     };
@@ -82,16 +82,16 @@ describe('Pages Duck', () => {
   it('should handle failure', () => {
     const initialState = {
       loaded: false,
-      all: {},
-      ids: [],
+      byLabel: {},
+      labels: [],
       meta: {},
       filter: {},
     };
     const stateAfter = {
       loading: false,
       loaded: true,
-      all: {},
-      ids: [],
+      byLabel: {},
+      labels: [],
       meta: {},
       filter: {},
     };

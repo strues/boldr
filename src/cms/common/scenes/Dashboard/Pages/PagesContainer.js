@@ -3,8 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-connect';
-import { createSelector } from 'reselect';
-import { fetchPagesIfNeeded } from 'state/index';
+import { fetchPagesIfNeeded, getPages } from 'state/index';
 import Pages from './Pages';
 
 export type Props = {
@@ -30,13 +29,6 @@ const asyncProps = [{
 }];
 
 const mapStateToProps = (state, ownProps) => {
-  const getPages = createSelector(
-    [
-      (state) => state.boldr.pages.ids,
-      (state) => state.boldr.pages.all,
-    ],
-    (ids, all) => ids.map(id => all[id]),
-  );
   return {
     pages: getPages(state),
   };

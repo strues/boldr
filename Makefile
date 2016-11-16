@@ -7,15 +7,21 @@ DIST_API   := build/boldrAPI
 
 clean-api:
 	npm run clean $(DIST_API)
+
 clean-cms:
 	npm run clean $(DIST_CMS)
+
 clean-cache:
 	npm run clean .happypack
 
 clean: clean-cache clean-cms clean-api
 
+flow:
+	./node_modules/.bin/flow check
+
 test:
 	NODE_ENV=test jest
+
 test-ci:
 	NODE_ENV=test CI=true jest -w 2
 

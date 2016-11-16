@@ -1182,6 +1182,14 @@ body-parser@^1.15.2:
     raw-body "~2.1.7"
     type-is "~1.6.13"
 
+boldr-editor:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/boldr-editor/-/boldr-editor-0.6.2.tgz#24d5945f95d117074d411c089e1a7bd598f61ab8"
+  dependencies:
+    draft-js "^0.9.1"
+    draft-js-export-html "^0.5.1"
+    draft-js-import-html "^0.3.2"
+
 boolbase@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
@@ -3656,7 +3664,7 @@ ignore@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.2.0.tgz#8d88f03c3002a0ac52114db25d2c673b0bf1e435"
 
-immutable@^3.7.6:
+immutable, immutable@^3.7.6:
   version "3.8.1"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
 
@@ -4550,7 +4558,7 @@ lodash-es@^4.16.6:
   version "4.16.6"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.16.6.tgz#c8552faedaa4d1d591de8da9b3980ef1c52efa08"
 
-lodash-es@^4.2.0, lodash-es@^4.2.1:
+lodash-es@^4.2.1:
   version "4.16.4"
   resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.16.4.tgz#4dc3e2cf33a8c343028aa7f7e06d1c9697042599"
 
@@ -6701,14 +6709,13 @@ react-proxy@^3.0.0-alpha.0:
   dependencies:
     lodash "^4.6.1"
 
-react-redux@^5.0.0-beta.3:
-  version "5.0.0-beta.3"
-  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.0-beta.3.tgz#d50bfb00799cf7d2a9fd55fe34d6b3ecc24d3072"
+react-redux@~4:
+  version "4.4.6"
+  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-4.4.6.tgz#4b9d32985307a11096a2dd61561980044fcc6209"
   dependencies:
     hoist-non-react-statics "^1.0.3"
     invariant "^2.0.0"
     lodash "^4.2.0"
-    lodash-es "^4.2.0"
     loose-envify "^1.1.0"
 
 react-router-redux@^4.0.7:

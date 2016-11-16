@@ -239,6 +239,7 @@ exports.seed = function(knex, Promise) {
       knex('page').insert({
         id: 'c23891fb-88c2-4e91-b95d-c652f15eab0c',
         name: 'Home',
+        label: 'home',
         url: 'home',
         layout: {
           showHero: true,

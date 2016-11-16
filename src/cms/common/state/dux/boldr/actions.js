@@ -286,7 +286,7 @@ export function fetchPages() {
 }
 
 function shouldFetchPages(state) {
-  const pages = state.boldr.pages;
+  const pages = state.boldr.pages.labels;
   if (!pages.length) {
     return true;
   }

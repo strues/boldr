@@ -2,7 +2,7 @@ import React from 'react';
 import { Header, Segment } from 'semantic-ui-react';
 import Page from './Page';
 
-const Pages = (props) => {
+const Pages = (props: { pages: Array<Object> }) => {
   return (
      <div>
       <Header as="h2">Pages</Header>

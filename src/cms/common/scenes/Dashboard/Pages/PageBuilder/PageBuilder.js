@@ -1,26 +1,34 @@
+/* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getPageById } from 'state/selectors';
+import { getPageByLabel } from 'state/selectors';
+
+type Props = {
+  params: Object,
+  label: String
+};
 
 class PageBuilder extends Component {
+  props: Props;
   render() {
     return (
       <div>
       PageBuilder
-      { this.props.params.name ? <h1>Editing { this.props.page.name } </h1> : <h2>New</h2> }
+      {
+        this.props.params.label ? <h1>Editing { this.props.params.label } </h1> : <h2>New</h2>
+      }
       </div>
-    )
+    );
   }
 }
 
 const mapStateToProps = (state, ownProps) => {
-  const pageName = ownProps.params.name;
+  const pageLabel = ownProps.params.label;
   return {
     pages: state.boldr.pages,
-    page: getPageById(state, pageName),
+    page: getPageByLabel(state, pageLabel),
     loaded: state.boldr.pages.loaded,
   };
 };
 
 export default connect(mapStateToProps)(PageBuilder);
-

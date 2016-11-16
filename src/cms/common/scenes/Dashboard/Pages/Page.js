@@ -1,3 +1,4 @@
+/* @flow */
 import React from 'react';
 import Link from 'react-router/lib/Link';
 /*
@@ -10,10 +11,11 @@ import Link from 'react-router/lib/Link';
       status<br />
       restricted
  */
-const Page = (props) => {
+const Page = (props: { label: any, name: String }) => {
+  const pageLabel = props.label;
   return (
     <div>
-    <Link to={ `/dashboard/pages/builder/${props.name}` }>{ props.name }</Link>
+    <Link to={ `/dashboard/pages/builder/${pageLabel}` }>{ props.name }</Link>
     </div>
   );
 };

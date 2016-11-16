@@ -57,13 +57,13 @@ export function arePagesLoaded(globalState) {
 
 export const getPages = createSelector(
   [
-    (state) => state.boldr.pages.ids,
-    (state) => state.boldr.pages.all,
+    (state) => state.boldr.pages.labels,
+    (state) => state.boldr.pages.byLabel,
   ],
-  (ids, all) => ids.map(id => all[id]),
+  (labels, byLabel) => labels.map(label => byLabel[label]),
 );
-export function getPageById(state, pageName) {
-  return state.boldr.pages.all[pageName];
+export function getPageByLabel(state, pageLabel) {
+  return state.boldr.pages.labels[pageLabel];
 }
 /**
   * AUTH SELECTORS

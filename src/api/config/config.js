@@ -10,6 +10,7 @@ nconf
   .env({
     whitelist: [
       'node_env',
+      'prefix',
       'redis__uri',
       'redis__host',
       'redis__port',

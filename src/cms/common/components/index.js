@@ -1,5 +1,4 @@
 import Avatar from './Avatar';
-import BoldrEditor from './BoldrEditor';
 import BoldrLogo from './BoldrLogo';
 import Footer from './Footer';
 import Hero from './Hero';
@@ -15,7 +14,6 @@ import Widget from './Widget';
 export {
   Avatar,
   Authenticated,
-  BoldrEditor,
   BoldrLogo,
   Col,
   Footer,

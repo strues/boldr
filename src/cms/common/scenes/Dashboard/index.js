@@ -127,7 +127,7 @@ export default (store, connect) => {
         },
       },
       {
-        path: 'pages/builder/:name',
+        path: 'pages/builder/:label',
         getComponent(nextState, cb) {
           System.import('./Pages/PageBuilder')
         .then(loadModule(cb))

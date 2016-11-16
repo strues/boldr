@@ -46,6 +46,8 @@ import {
   isNavLoaded,
   arePagesLoaded,
   getPostTags,
+  getPages,
+  getPageByLabel,
   createSelector,
 } from './selectors';
 
@@ -73,6 +75,7 @@ export {
   updateNavLinks,
   fetchSettingsIfNeeded,
   addNavLinks,
+  getPages,
   updateBoldrSettings,
   getSettings,
   areSettingsLoaded,
@@ -83,6 +86,7 @@ export {
   getNavs,
   arePagesLoaded,
   isNavLoaded,
+  getPageByLabel,
   getPostTags,
   createSelector,
 };

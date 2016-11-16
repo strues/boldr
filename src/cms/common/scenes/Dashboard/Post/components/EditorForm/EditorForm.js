@@ -1,8 +1,10 @@
 import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Form, Button, Segment } from 'semantic-ui-react';
-import { Col, Row, BoldrEditor } from 'components/index';
+import { Col, Row } from 'components/index';
+import { BoldrEditor } from 'boldr-editor';
 import renderTextField from 'components/FormComponents/TextField';
+import '../../../../../../../../node_modules/boldr-editor/dist/boldreditor.css';
 
 class EditorForm extends Component {
   constructor(props) {
@@ -19,6 +21,7 @@ class EditorForm extends Component {
     const EDITING = this.props.isEditing === true;
     if (EDITING) this.setState({ edit: true });
   }
+
   render() {
     const { handleSubmit } = this.props;
 
