@@ -244,7 +244,7 @@
     "style-loader": "^0.13.1",
     "supertest": "^2.0.1",
     "supertest-as-promised": "^4.0.2",
-    "sw-precache-webpack-plugin": "^0.5.1",
+    "sw-precache-webpack-plugin": "^0.6.0",
     "url-loader": "^0.5.7",
     "webpack": "2.1.0-beta.25",
     "webpack-bundle-analyzer": "^1.5.3",
