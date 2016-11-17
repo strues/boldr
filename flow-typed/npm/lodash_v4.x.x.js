@@ -1,5 +1,5 @@
-// flow-typed signature: 38056efee9266c57a84bc6c39cdd3af6
-// flow-typed version: b2be19cefd/lodash_v4.x.x/flow_>=v0.28.x
+// flow-typed signature: 30b961321e07b9c4220a08ccb1df90a6
+// flow-typed version: b8b7c5fef5/lodash_v4.x.x/flow_>=v0.28.x
 
 declare module 'lodash' {
   declare type TemplateSettings = {
@@ -112,7 +112,7 @@ declare module 'lodash' {
     takeRight<T>(array: ?Array<T>, n?: number): Array<T>;
     takeRightWhile<T>(array: ?Array<T>, predicate?: Predicate<T>): Array<T>;
     takeWhile<T>(array: ?Array<T>, predicate?: Predicate<T>): Array<T>;
-    union<T>(...arrays?: Array<T>): Array<T>;
+    union<T>(...arrays?: Array<Array<T>>): Array<T>;
     //Workaround until (...parameter: T, parameter2: U) works
     unionBy<T>(a1: Array<T>, iteratee?: Iteratee<T>): Array<T>;
     unionBy<T>(a1: Array<T>, a2: Array<T>, iteratee?: Iteratee<T>): Array<T>;

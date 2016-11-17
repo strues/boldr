@@ -61,13 +61,6 @@ function renderApp() {
     MOUNT_POINT,
   );
 }
-if (process.env.NODE_ENV === 'development') {
-  // const { whyDidYouUpdate } = require("why-did-you-update");
-  // whyDidYouUpdate(React);
-
-  window.Perf = require('react-addons-perf');
-}
-
 // The following is needed so that we can support hot reloading our application.
 if (process.env.NODE_ENV === 'development' && module.hot) {
   // Accept changes to this file for hot reloading.

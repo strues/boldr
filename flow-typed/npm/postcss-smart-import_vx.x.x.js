@@ -1,4 +1,4 @@
-// flow-typed signature: 421dcdcaa127c0458142d547e63fe399
+// flow-typed signature: ce483045508fad88d764481b2fd26e88
 // flow-typed version: <<STUB>>/postcss-smart-import_v^0.5.1/flow_v0.35.0
 
 /**
@@ -22,6 +22,10 @@ declare module 'postcss-smart-import' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
+declare module 'postcss-smart-import/gulpfile' {
+  declare module.exports: any;
+}
+
 declare module 'postcss-smart-import/lib/index.es' {
   declare module.exports: any;
 }
@@ -31,6 +35,9 @@ declare module 'postcss-smart-import/lib/index' {
 }
 
 // Filename aliases
+declare module 'postcss-smart-import/gulpfile.js' {
+  declare module.exports: $Exports<'postcss-smart-import/gulpfile'>;
+}
 declare module 'postcss-smart-import/lib/index.es.js' {
   declare module.exports: $Exports<'postcss-smart-import/lib/index.es'>;
 }

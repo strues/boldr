@@ -29,7 +29,7 @@ dist
 node_modules
 logs
 public/apidoc
-
+public/sw.js
 #### Runtime data
 pids
 *.pid
