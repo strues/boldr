@@ -1,5 +1,4 @@
 import http from 'http';
-import https from 'https';
 import Bootstrap from './core/bootstrap';
 
 import logger from './core/logger';
@@ -19,7 +18,7 @@ app.set('port', port);
 
 const server = http.createServer(app);
 
-async function startServer() {
+async function startEngine() {
   await Bootstrap.init();
   server.listen(port);
   logger.info(`🌎  ==> Starting ${appName} on ${port}`);
@@ -30,7 +29,7 @@ process.on('SIGINT', () => close(server));
 server.on('listening', onListening);
 server.on('error', onError);
 
-setImmediate(startServer);
+setImmediate(startEngine);
 
 export default server;
 

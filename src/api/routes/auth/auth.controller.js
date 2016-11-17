@@ -90,7 +90,7 @@ async function register(req, res, next) {
     }
   });
   // Massive transaction is finished, send the data to the user.
-  return res.status(201).json(newUser);
+  return responseHandler(res, 201, newUser);
 }
 
 /**
@@ -148,9 +148,9 @@ async function verify(req, res, next) {
     const user = await User.query().where({ user_token: req.params.verifToken }).first();
     await User.query().patchAndFetchById(user.id, { verified: true });
 
-    return responseHandler(null, res, 201, user);
+    return responseHandler(res, 201, user);
   } catch (e) {
-    return responseHandler(e, res, 500);
+    return next(new InternalServer());
   }
 }
 
@@ -161,7 +161,7 @@ async function checkAuthentication(req, res, next) {
       return next(new NotFound());
     }
     validUser.stripPassword();
-    return responseHandler(null, res, 200, validUser);
+    return responseHandler(res, 200, validUser);
   } catch (error) {
     return next(new InternalServer());
   }

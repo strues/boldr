@@ -1,11 +1,11 @@
 import expressMiddleware from './express';
 import authMiddleware from './auth';
-import middleware from './middleware';
+import rbac from './rbac';
 import errorCatcher from './errorCatcher';
 
 export {
   expressMiddleware,
   authMiddleware,
-  middleware,
+  rbac,
   errorCatcher,
 };

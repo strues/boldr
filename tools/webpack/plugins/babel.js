@@ -11,22 +11,17 @@ const babelModuleResolve =
   }];
 
 const babelDevClient = removeEmpty([
-  'transform-class-properties',
-  'transform-decorators-legacy',
-  'transform-object-rest-spread',
+  // 'transform-class-properties',
+  // 'transform-decorators-legacy',
+  // 'transform-object-rest-spread',
   ifDevClient('react-hot-loader/babel'),
   babelModuleResolve
 ]);
 
 const babelProd = {
   babelrc: false,
-  presets: [['latest', { 'es2015': { 'modules': false }}], 'react'],
+  presets: [['boldr', { 'es2015': { 'modules': false }}]],
   plugins: removeEmpty([
-    'transform-class-properties',
-    'transform-decorators-legacy',
-    'transform-object-rest-spread',
-    'transform-flow-strip-types',
-    'transform-react-constant-elements',
     babelModuleResolve
   ])
 }

@@ -28,7 +28,7 @@ export async function forgottenPassword(req, res, next) {
   const mailBody = forgotPasswordEmail(verificationToken);
 
   await handleMail(user, mailBody, mailSubject);
-  return responseHandler(null, res, 202, { message: 'Sending email with reset link' });
+  return responseHandler(res, 202, { message: 'Sending email with reset link' });
 }
 
 /**
@@ -50,5 +50,5 @@ export async function resetPassword(req, res, next) {
   });
   const mailBody = await passwordModifiedEmail(user);
   handleMail(user, mailBody, mailSubject);
-  return res.status(200).json('Sent');
+  return responseHandler(res, 204, 'Sent');
 }

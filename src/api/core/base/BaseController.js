@@ -12,15 +12,15 @@ class BaseController {
   create(req, res) {
     return this.model.query()
       .insert(req.body)
-      .then(item => responseHandler(null, res, 201, item))
-      .catch(err => responseHandler(err, res));
+      .then(item => responseHandler(res, 201, item))
+      .catch(err => res.status(500).json(err));
   }
 
   update(req, res) {
     return this.model.query()
       .patchAndFetchById(req.params[this.id], req.body)
-      .then(item => responseHandler(null, res, 200, item))
-      .catch(err => responseHandler(err, res));
+      .then(item => responseHandler(res, 200, item))
+      .catch(err => res.status(500).json(err));
   }
 
   index(req, res) {
@@ -33,8 +33,8 @@ class BaseController {
 
       .orderBy(req.query.sort.by, req.query.sort.order)
       .page(req.query.page.number, req.query.page.size)
-      .then(items => responseHandler(null, res, 200, items))
-      .catch(err => responseHandler(err, res));
+      .then(items => responseHandler(res, 200, items))
+      .catch(err => res.status(500).json(err));
   }
 
   show(req, res, next) {
@@ -45,16 +45,16 @@ class BaseController {
       .eager(req.query.eager)
       .then(item => {
         if (!item) return next(new throwNotFound(res));
-        return responseHandler(null, res, 200, item);
+        return responseHandler(res, 200, item);
       })
-    .catch(err => responseHandler(err, res));
+    .catch(err => res.status(500).json(err));
   }
 
   destroy(req, res) {
     return this.model.query()
       .deleteById(req.params[this.id])
-      .then(() => responseHandler(null, res, 204))
-      .catch(err => responseHandler(err, res));
+      .then(() => responseHandler(res, 204))
+      .catch(err => res.status(500).json(err));
   }
 }
 

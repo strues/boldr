@@ -1,6 +1,6 @@
 import uuid from 'node-uuid';
 import slugify from 'slugify';
-import { NotFound, InternalServer } from '../../core';
+import { NotFound, InternalServer, responseHandler } from '../../core';
 import Activity from '../activity/activity.model';
 import Block from './block.model';
 
@@ -14,7 +14,7 @@ export async function listBlocks(req, res, next) {
       return next(new NotFound());
     }
 
-    return res.status(200).json(blocks);
+    return responseHandler(res, 200, blocks);
   } catch (error) {
     return next(new InternalServer());
   }
@@ -42,5 +42,5 @@ export async function createBlock(req, res, next) {
     entry_table: 'block',
   });
 
-  return res.status(201).json(newBlock);
+  return responseHandler(res, 201, newBlock);
 }

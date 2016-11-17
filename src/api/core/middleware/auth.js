@@ -1,9 +1,7 @@
-import cookieParser from 'cookie-parser';
 import passport from 'passport';
 import sessionMiddleware from './session';
 
 export default (app) => {
-  app.use(cookieParser());
   app.use(passport.initialize());
 
   app.use(sessionMiddleware);

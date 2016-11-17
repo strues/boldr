@@ -10,21 +10,21 @@ import Link from './link.model';
 
 const debug = require('debug')('boldr:link-controller');
 
-async function getLinks(req, res) {
+async function getLinks(req, res, next) {
   const navigations = await Link.query();
 
   if (!navigations) {
-    responseHandler(null, res, 500);
+    return next(new InternalServer());
   }
 
-  return res.status(200).json(navigations);
+  return responseHandler(res, 200, navigations);
 }
 
 async function showLink(req, res) {
   const navigation = await Link
     .query()
     .findById(req.params.id);
-  return responseHandler(null, res, 200, navigation);
+  return responseHandler(res, 200, navigation);
 }
 
 async function createLink(req, res, next) {
@@ -61,13 +61,13 @@ async function createLink(req, res, next) {
     entry_table: 'link',
   });
 
-  return res.status(201).json(newLink);
+  return responseHandler(res, 201, newLink);
 }
 
 function updateLink(req, res) {
   return Link.query()
     .patchAndFetchById(req.params.id, req.body)
-    .then(navigation => res.status(202).json(navigation));
+    .then(navigation => responseHandler(res, 202, navigation));
 }
 
 export { getLinks, updateLink, showLink, createLink };

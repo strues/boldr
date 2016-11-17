@@ -7,7 +7,7 @@ import {
   signToken,
 }
 from './authentication';
-import { checkRole, checkScope, checkPermissions } from './middleware/middleware';
+import { checkRole, checkScope, checkPermissions } from './middleware/rbac';
 
 import {
   BadRequest,

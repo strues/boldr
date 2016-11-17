@@ -38,7 +38,7 @@ const happyJSPlugin = (babelPlugin) => happyPackPlugin({
     query: {
       babelrc: false,
       cacheDirectory: path.resolve(defs.paths.node_modules, 'boldr', 'babelc'),
-      presets: [['latest', { 'es2015': { 'modules': false }}], 'react'],
+      presets: [['boldr', { 'es2015': { 'modules': false }}]],
       plugins: babelPlugin
     },
   }],

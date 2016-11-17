@@ -11,7 +11,7 @@ export async function listUsers(req: $Request, res: $Response, next: NextFunctio
   if (!users) {
     return next(new BadRequest());
   }
-  return res.status(200).json(users);
+  return responseHandler(res, 200, users);
 }
 
 export async function getUser(req: $Request, res: $Response, next: NextFunction) {
@@ -21,7 +21,7 @@ export async function getUser(req: $Request, res: $Response, next: NextFunction)
   .omit(['password']);
   if (!user) return next(new NotFound());
   debug(user);
-  return responseHandler(null, res, 200, user);
+  return responseHandler(res, 200, user);
 }
 
 export function updateUser(req: $Request, res: $Response, next: NextFunction) {
@@ -82,6 +82,6 @@ export function unlinkUser(req: $Request, res: $Response) {
     .findById(req.user)
     .update({ [provider]: null })
     .then((user) => {
-      res.status(200).send(user);
+      responseHandler(res, 200, user);
     });
 }

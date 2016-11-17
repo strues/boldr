@@ -91,7 +91,7 @@ function hasScope(token = null, scope = null) {
 }
 
 export default () => {
-  const middleware = Router();
+  const rbac = Router();
 
-  return middleware;
+  return rbac;
 };

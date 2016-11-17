@@ -5,7 +5,7 @@ import multer from 'multer';
 import Activity from '../activity/activity.model';
 import Attachment from './attachment.model';
 import { multerOptions, multerAvatar, multerArticle } from './attachment.service';
-
+import { responseHandler, InternalServer } from '../../core';
 const debug = Debug('boldr:attachment:controller');
 const config = require('../../config/config');
 // create a new S3 object
@@ -24,7 +24,7 @@ export const listAttachments = async (req, res, next) => {
   try {
     const medias = await Attachment.query();
 
-    return res.status(200).json(medias);
+    return responseHandler(res, 200, medias);
   } catch (error) {
     return res.status(500).json(error);
   }
@@ -52,13 +52,13 @@ export async function fromDashboard(req, res, next) {
     entry_uuid: newAttachment.id,
     entry_table: 'attachment',
   });
-  return res.status(201).json(newAttachment);
+  return responseHandler(res, 201, newAttachment);
 }
 
 export const getAttachment = async (req, res, next) => {
   try {
     const media = await Attachment.query().findById(req.params.id);
-    return res.status(200).json(media);
+    return responseHandler(res, 200, media);
   } catch (err) {
     return res.status(500).json(err);
   }
@@ -93,7 +93,7 @@ export async function deleteAttachment(req, res, next) {
       }
     });
     await Attachment.query().deleteById(req.params.id);
-    return res.status(204).json('Deleted file');
+    return responseHandler(res, 204, 'Deleted file');
   } catch (error) {
     return res.status(500).json(error);
   }

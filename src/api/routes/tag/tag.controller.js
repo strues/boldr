@@ -10,7 +10,7 @@ async function getTaggedPosts(req, res) {
     .findById(req.params.id)
     .eager('[posts]')
     .first();
-  return responseHandler(null, res, 200, tags);
+  return responseHandler(res, 200, tags);
 }
 
 async function getTaggedPostsByName(req, res) {
@@ -20,6 +20,6 @@ async function getTaggedPostsByName(req, res) {
     .eager('[posts]')
     .first();
   debug(tags);
-  return responseHandler(null, res, 200, tags);
+  return responseHandler(res, 200, tags);
 }
 export { getTaggedPosts, getTaggedPostsByName };

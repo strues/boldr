@@ -17,8 +17,8 @@ export function listPosts(req, res) {
     .skipUndefined()
     .orderBy(req.query.sort.by, req.query.sort.order)
     // .page(req.query.page.number, req.query.page.size)
-    .then(posts => responseHandler(null, res, 200, posts))
-    .catch(err => responseHandler(err, res));
+    .then(posts => responseHandler(res, 200, posts))
+    .catch(err => res.status(500).json(err));
 }
 
 export async function createPost(req, res, next) {
@@ -81,7 +81,7 @@ export async function createPost(req, res, next) {
     entry_id: newPost.id,
     entry_table: 'post',
   });
-  return res.status(201).json(newPost);
+  return responseHandler(res, 201, newPost);
 }
 
 async function getSlug(req, res) {
@@ -95,7 +95,7 @@ async function getSlug(req, res) {
   if (!post) {
     return res.status(404).json('Unable to find the requested post.');
   }
-  return responseHandler(null, res, 200, post);
+  return responseHandler(res, 200, post);
 }
 
 async function getId(req, res, next) {
@@ -106,7 +106,7 @@ async function getId(req, res, next) {
       .eager('[tags, author]')
       .omit('password')
       .first();
-    return responseHandler(null, res, 200, post);
+    return responseHandler(res, 200, post);
   } catch (error) {
     return next(new InternalServer());
   }
@@ -125,7 +125,7 @@ async function destroy(req, res, next) {
 function update(req, res) {
   return Post.query()
     .patchAndFetchById(req.params.id, req.body)
-    .then(post => res.status(202).json(post));
+    .then(post => responseHandler(res, 202, post));
 }
 
 async function addTag(req, res, next) {
@@ -141,7 +141,7 @@ async function addTag(req, res, next) {
      .$relatedQuery('tags')
      .insert(req.body);
 
-  return res.status(202).json(tag);
+  return responseHandler(res, 202, tag);
 }
 
 export { getSlug, destroy, update, getId, addTag };

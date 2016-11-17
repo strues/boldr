@@ -45,7 +45,6 @@ router.use('/activities', activityRoutes);
 router.use('/attachments', attachmentRoutes);
 router.use('/auth', authRoutes);
 router.use('/blocks', blockRoutes);
-
 router.use('/galleries', galleryRoutes);
 router.use('/links', linkRoutes);
 router.use('/navigations', navigationRoutes);
