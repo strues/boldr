@@ -1,6 +1,6 @@
 ![boldr logo](https://boldr.io/logo.png)
 
-[![Build Status][circle-img]][circle-link] [![Code Climate][cc-img]][cc-link]  [![codecov](https://codecov.io/gh/boldr/boldr/branch/master/graph/badge.svg)](https://codecov.io/gh/boldr/boldr) [![Gitter][gitter-img]][gitter-link] [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![Build Status][circle-img]][circle-link] [![Code Climate][cc-img]][cc-link]  [![codecov](https://codecov.io/gh/strues/boldr/branch/master/graph/badge.svg)](https://codecov.io/gh/strues/boldr) [![Gitter][gitter-img]][gitter-link] [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 # Boldr
 
@@ -133,11 +133,11 @@ View a **very early** demo at <https://staging.boldr.io>
 > Password - password
 
 
-[cc-img]: https://codeclimate.com/github/boldr/boldr/badges/gpa.svg
-[cc-link]: https://codeclimate.com/github/boldr/boldr
-[circle-img]: https://circleci.com/gh/boldr/boldr.svg?style=svg
-[circle-link]: https://circleci.com/gh/boldr/boldr
+[cc-img]: https://codeclimate.com/github/strues/boldr/badges/gpa.svg
+[cc-link]: https://codeclimate.com/github/strues/boldr
+[circle-img]: https://circleci.com/gh/strues/boldr.svg?style=svg
+[circle-link]: https://circleci.com/gh/strues/boldr
 [gitter-img]: https://badges.gitter.im/Join%20Chat.svg
 [gitter-link]: https://gitter.im/boldr/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
-[coverage-link]: https://codeclimate.com/github/boldr/boldr/coverage
-[coverage-img]: https://codeclimate.com/github/boldr/boldr/badges/coverage.svg
+[coverage-link]: https://codeclimate.com/github/strues/boldr/coverage
+[coverage-img]: https://codeclimate.com/github/strues/boldr/badges/coverage.svg
