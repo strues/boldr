@@ -1,7 +1,7 @@
 import findQuery from 'objection-find';
-import slugify from 'slugify';
 import uuid from 'node-uuid';
 import { responseHandler, InternalServer, Conflict, NotFound } from '../../core';
+import slugIt from '../../utils/slugIt';
 import Tag from '../tag/tag.model';
 import Activity from '../activity/activity.model';
 import Post from './post.model';
@@ -30,7 +30,7 @@ export async function createPost(req, res, next) {
     return res.status(400).send(errors);
   }
 
-  const postSlug = slugify(req.body.title);
+  const postSlug = slugIt(req.body.title);
 
   // look for a matching slug in the database
   const checkExisting = await Post.query().where('slug', postSlug).first();

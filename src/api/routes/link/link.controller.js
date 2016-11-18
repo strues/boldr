@@ -1,5 +1,5 @@
 import findQuery from 'objection-find';
-import slugify from 'slugify';
+import slugIt from '../../utils/slugIt';
 import uuid from 'node-uuid';
 
 import { InternalServer, responseHandler } from '../../core';
@@ -32,7 +32,7 @@ async function createLink(req, res, next) {
     name: req.body.name,
     href: req.body.href,
     icon: req.body.icon,
-    label: slugify(req.body.name),
+    label: slugIt(req.body.name),
     position: req.body.position,
     uuid: uuid.v4(),
   };

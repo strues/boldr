@@ -1,5 +1,5 @@
 import uuid from 'node-uuid';
-import slugify from 'slugify';
+import slugIt from '../../utils/slugIt';
 import { NotFound, InternalServer, responseHandler } from '../../core';
 import Activity from '../activity/activity.model';
 import Block from './block.model';
@@ -24,7 +24,7 @@ export async function createBlock(req, res, next) {
   const elem = req.body.element;
   const newBlock = await Block.query().insert({
     id: uuid.v4(),
-    name: slugify(req.body.name),
+    name: slugIt(req.body.name),
     element: elem.toLowerCase(),
     content: req.body.content,
   });
@@ -33,7 +33,7 @@ export async function createBlock(req, res, next) {
   }
   await Activity.query().insert({
     id: uuid.v4(),
-    name: slugify(newBlock.name),
+    name: slugIt(newBlock.name),
     user_id: req.user.id,
     action: 'New block',
     type: 'create',
