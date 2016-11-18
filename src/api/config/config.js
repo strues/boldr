@@ -27,6 +27,9 @@ nconf
       'aws__bucket',
       'aws__region',
       'mail__mg_api_key',
+      'mail__host',
+      'mail__user',
+      'mail__password',
       'host',
       'port',
       'ssr_port',
@@ -78,8 +81,11 @@ nconf.defaults({
     expiration: 60 * 60 * 24, // 1 day
   },
   mail: {
-    endpoint: null,
-    mg_api_key: null,
+    host: '',
+    user: '',
+    password: '',
+    endpoint: '',
+    mg_api_key: '',
     domain: 'boldr.io',
     from: 'mail@boldr.io',
     transport: 'mailgun',

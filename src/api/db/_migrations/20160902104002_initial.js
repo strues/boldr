@@ -35,7 +35,7 @@ exports.up = function(knex, Promise) {
     // belongsTo user
     knex.schema.createTableIfNotExists('token', function(table) {
       // pk | uuid
-      // table.uuid('id').primary();
+      table.increments('id').primary();
       table.string('user_verification_token');
       table.string('reset_password_token');
       table.dateTime('reset_password_expiration');
@@ -43,8 +43,6 @@ exports.up = function(knex, Promise) {
       table.uuid('user_id').unsigned();
       table.timestamp('created_at').defaultTo(knex.fn.now());
       table.timestamp('updated_at').defaultTo(knex.fn.now());
-      table.primary('user_id');
-
 
       table.foreign('user_id').references('id').inTable('user').onDelete('cascade').onUpdate('cascade');
       // indexes

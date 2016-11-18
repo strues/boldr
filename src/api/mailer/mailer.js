@@ -1,20 +1,21 @@
-import nodemailer from 'nodemailer';
-import mg from 'nodemailer-mailgun-transport';
+import { createTransport } from 'nodemailer';
 
-const debug = require('debug')('boldr:auth:controller');
+const debug = require('debug')('boldr:mailer');
 const config = require('../config/config');
 
 const mailConfig = config.get('mail');
 
-const auth = {
-  auth: {
-    api_key: mailConfig.mg_api_key,
-    domain: mailConfig.domain,
-  },
-};
-// Transport is what does the lifting behind the scenes.
-const nodemailerMailgun = nodemailer.createTransport(mg(auth));
+const TRANSPORT_OPTS = {
+  host: mailConfig.host,
+    port: 465,
+    secure: true, // use SSL
+    auth: {
+        user: mailConfig.user,
+        pass: mailConfig.password,
+    }
+}
 
+const transporter = createTransport(TRANSPORT_OPTS);
 /**
  * enables sending emails
  * @method handleMail
@@ -33,5 +34,10 @@ export default function handleMail(user, mailBody, mailSubject) {
   if (!user.email || !mailSubject) {
     throw new Error('Incorrect mailing parameters');
   }
-  return nodemailerMailgun.sendMail(mailOptions);
+  return transporter.sendMail(mailOptions, (error, info) => {
+    if (error) {
+      return debug(error);
+    }
+   debug('Message sent: ' + info.response);
+  });
 }
