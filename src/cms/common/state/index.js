@@ -33,6 +33,8 @@ import {
   fetchPagesIfNeeded,
   fetchPages,
   fetchPageByUrl,
+  loadMainNavIfNeeded,
+  loadBoldrSettings,
 } from './dux/boldr/actions';
 
 import {
@@ -73,6 +75,7 @@ export {
   requestPostTags,
   loadMainNav,
   updateNavLinks,
+  loadBoldrSettings,
   fetchSettingsIfNeeded,
   addNavLinks,
   getPages,
@@ -81,6 +84,7 @@ export {
   areSettingsLoaded,
   getPosts,
   listNavLabels,
+  loadMainNavIfNeeded,
   getNavEntities,
   getByLabel,
   getNavs,

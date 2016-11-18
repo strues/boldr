@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Helmet from 'react-helmet';
-import PageTemplate from '../../theme/Boldr/PageTemplate';
+import PageTemplate from 'theme/Boldr/PageTemplate';
 
 function Error404() {
   return (

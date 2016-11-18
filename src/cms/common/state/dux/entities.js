@@ -12,8 +12,8 @@ const initialState = {
 };
 
 export default function entitiesReducer(state = initialState, action) {
-  if (action.payload && action.payload.entities) {
-    return merge({}, state, action.payload.entities);
+  if (action.result && action.result.entities) {
+    return merge({}, state, action.result.entities);
   }
   return state;
 }

@@ -3,9 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router';
-import { Card, Header, Icon } from 'semantic-ui-react';
+import { Card, Header } from 'semantic-ui-react';
 import { Grid, Col, Row } from 'components/Layout';
-import inlineStyles from 'theme/inlineStyles';
 import { signup } from 'state/dux/auth';
 import SignupForm from './SignupForm';
 
@@ -19,7 +18,7 @@ type Props = {
 class Signup extends Component {
   constructor(props) {
     super(props);
-    this.handleOnSubmit = this.handleOnSubmit.bind(this);
+    (this: any).handleOnSubmit = this.handleOnSubmit.bind(this);
   }
 
   props: Props;
@@ -43,7 +42,7 @@ class Signup extends Component {
     );
 
     return (
-        <div style={ inlineStyles.headerOverflow }>
+        <div>
           <Helmet title="Signup" />
           <Grid>
             <Row>

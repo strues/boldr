@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 
 import { Heading, Grid, Col, Row } from 'components/index';
 import { Card, Button, Form } from 'semantic-ui-react';
-import inlineStyles from 'theme/inlineStyles';
 import { resetPassword } from 'state/dux/auth';
 
 export type Props = {
@@ -48,7 +47,7 @@ class ResetPassword extends Component {
       </div>
     );
     return (
-      <div style={ inlineStyles.headerOverflow }>
+      <div>
         <Grid fluid>
         <Row>
           <Col xs={ 12 }>

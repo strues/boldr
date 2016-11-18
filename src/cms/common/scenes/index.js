@@ -20,7 +20,7 @@ export default (store) => {
     path: '/',
     component: BoldrWrapper,
     indexRoute: {
-      component: require('../pages/Home').default,
+      component: require('./Home').default,
     },
     childRoutes: [
       Account(store, connect),
@@ -29,7 +29,7 @@ export default (store) => {
       {
         path: 'about',
         getComponent(nextState, cb) {
-          System.import('../pages/About')
+          System.import('./About')
             .then(loadModule(cb))
             .catch(errorLoading);
         },
@@ -37,7 +37,7 @@ export default (store) => {
       {
         path: '*',
         getComponent(location, cb) {
-          System.import('../pages/Error404')
+          System.import('./Error404')
             .then(loadModule(cb))
             .catch(errorLoading);
         },

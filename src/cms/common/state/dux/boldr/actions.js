@@ -26,30 +26,46 @@ export function loadMainNav() {
     dispatch(startLoadNav());
     return api.doLoadNav()
       .then(response => {
-        if (response.status !== 200) {
-          dispatch(errorLoadNav());
-        }
         const camelizeThis = response.body;
         const camelizedJson = camelizeKeys(camelizeThis);
-
         const normalized = normalize(camelizedJson, arrayOf(navigationSchema));
-
-        dispatch(successLoadNav(normalized));
+        return dispatch(successLoadNav(normalized));
       })
-      .catch(err => {
-        dispatch(errorLoadNav(err));
+      .catch(error => {
+        dispatch(errorLoadNav(error));
       });
   };
 }
+export function loadMainNavIfNeeded() {
+  return (dispatch, getState) => {
+    if (shouldLoadMainNav(getState())) {
+      return dispatch(loadMainNav());
+    }
+
+    return Promise.resolve();
+  };
+}
+
+function shouldLoadMainNav(state) {
+  const nav = state.boldr.nav.labels;
+  if (!nav.length) {
+    return true;
+  }
+  if (nav.length) {
+    return false;
+  }
+  return nav;
+}
+
 function startLoadNav() {
   return {
     type: t.LOAD_NAVIGATION_REQUEST,
   };
 }
-function errorLoadNav(err) {
+function errorLoadNav(error) {
   return {
     type: t.LOAD_NAVIGATION_FAILURE,
-    error: 'Error loading nav',
+    error,
   };
 }
 
@@ -157,20 +173,17 @@ export function fetchSettingsIfNeeded() {
   };
 }
 
-function loadBoldrSettings() {
+export function loadBoldrSettings() {
   return dispatch => {
     dispatch(loadSettings());
     return api.doLoadSettings()
       .then(response => {
-        if (response.status !== 200) {
-          dispatch(failLoadSettings());
-        }
         const camelizedJson = camelizeKeys(response.body);
         const normalized = normalize(camelizedJson, arrayOf(settingSchema));
-        dispatch(doneLoadSettings(normalized));
+        return dispatch(doneLoadSettings(normalized));
       })
-      .catch(err => {
-        dispatch(failLoadSettings(err));
+      .catch(error => {
+        dispatch(failLoadSettings(error));
       });
   };
 }
@@ -202,8 +215,9 @@ function doneLoadSettings(normalized) {
   };
 }
 
-const failLoadSettings = () => ({
+const failLoadSettings = (error) => ({
   type: t.LOAD_SETTINGS_FAILURE,
+  error,
 });
 
 /**
@@ -272,12 +286,9 @@ export function fetchPages() {
     dispatch(requestPages());
     return api.doFetchPages()
       .then(response => {
-        if (response.status !== 200) {
-          dispatch(receivePagesFailed());
-        }
         const camelizedJson = camelizeKeys(response.body);
         const normalized = normalize(camelizedJson, arrayOf(pageSchema));
-        dispatch(receivePages(normalized));
+        return dispatch(receivePages(normalized));
       })
       .catch(err => {
         dispatch(receivePagesFailed(err));
@@ -320,7 +331,7 @@ export function fetchPageByUrl(url) {
     }
     return api.doFetchPageUrl(url)
       .then(response => {
-        if (response.status !== 200) {
+        if (response.status !== 200 || response.status !== 304) {
           dispatch(receivePageFailed());
         }
         dispatch(receivePage(response));

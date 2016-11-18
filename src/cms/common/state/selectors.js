@@ -21,7 +21,21 @@ export function areSettingsLoaded(globalState) {
   *
   *****************************************************************/
 export const getPosts = state => state.posts.list;
-
+// export const getPosts = createSelector(
+//   [
+//     (state) => state.posts.list,
+//     (state) => state.posts.bySlug,
+//   ],
+//   (list, bySlug) => list.map(l => bySlug[l]),
+// );
+export const getTagEntities = state => state.entities.tags;
+//
+// export const getTags = createSelector(
+//   [
+//     getPosts, getTagEntities,
+//   ],
+//   (tags, posts) =>
+// )
 
 /**
   * NAVIGATION SELECTORS

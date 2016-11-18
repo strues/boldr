@@ -2,9 +2,8 @@
 import React, { Component } from 'react';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
-import { asyncConnect } from 'redux-connect';
 import { bindActionCreators } from 'redux';
-import { logout, loadMainNav, getByLabel, getSettings, isNavLoaded } from 'state/index';
+import { logout, getByLabel, getSettings } from 'state/index';
 import { PrimaryHeader } from 'components/index';
 
 type Props = {
@@ -30,21 +29,12 @@ const mapStateToProps = (state: Object) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    actions: bindActionCreators({ logout, pushState: push, loadMainNav }, dispatch),
+    actions: bindActionCreators({ logout, pushState: push }, dispatch),
     navigate: (url) => dispatch(push(url)),
     dispatch,
   };
 };
 
-@asyncConnect([{
-  promise: ({ store: { dispatch, getState } }) => {
-    const promises = [];
-    if (!isNavLoaded(getState())) {
-      promises.push(dispatch(loadMainNav()));
-    }
-    return Promise.all(promises);
-  },
-}])
 @connect(mapStateToProps, mapDispatchToProps)
 class HeaderWrapper extends Component {
   constructor() {
@@ -57,9 +47,6 @@ class HeaderWrapper extends Component {
     this.handleLogoClick = this.handleLogoClick.bind(this);
     this.handleLogoutClick = this.handleLogoutClick.bind(this);
     this.handleDashClick = this.handleDashClick.bind(this);
-  }
-  componentDidMount() {
-    this.props.actions.loadMainNav();
   }
   handleItemClick = (e, { name, href }) => {
     this.props.navigate(`${href}`);
@@ -93,20 +80,19 @@ class HeaderWrapper extends Component {
   props: Props;
   render() {
     const renderDefaultHeader = (
-
-<PrimaryHeader
-  auth={ this.props.auth }
-  settings={ this.props.settings }
-  navigation={ this.props.navigation }
-  handleItemClick={ this.handleItemClick }
-  handleLoginClick={ this.handleLoginClick }
-  handleSignupClick={ this.handleSignupClick }
-  handleProfileClick={ this.handleProfileClick }
-  handlePreferencesClick={ this.handlePreferencesClick }
-  handleLogoClick= { this.handleLogoClick }
-  handleLogoutClick={ this.handleLogoutClick }
-  handleDashClick={ this.handleDashClick }
-/>);
+    <PrimaryHeader
+      auth={ this.props.auth }
+      settings={ this.props.settings }
+      navigation={ this.props.navigation }
+      handleItemClick={ this.handleItemClick }
+      handleLoginClick={ this.handleLoginClick }
+      handleSignupClick={ this.handleSignupClick }
+      handleProfileClick={ this.handleProfileClick }
+      handlePreferencesClick={ this.handlePreferencesClick }
+      handleLogoClick= { this.handleLogoClick }
+      handleLogoutClick={ this.handleLogoutClick }
+      handleDashClick={ this.handleDashClick }
+    />);
 
     return (
     <header className="boldr__theme-header">

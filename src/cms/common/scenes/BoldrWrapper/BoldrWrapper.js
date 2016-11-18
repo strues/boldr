@@ -12,13 +12,13 @@ import {
   isNavLoaded,
   fetchSettingsIfNeeded,
   fetchPagesIfNeeded,
-  loadMainNav,
+  loadMainNavIfNeeded,
   getByLabel,
 } from '../../state/index';
 
 import meta from '../../core/config/base';
 // $FlowIssue
-import '../../styles/main.scss';
+import '../../theme/styles/main.scss';
 
 type Props = {
   children: ReactElement,
@@ -26,14 +26,14 @@ type Props = {
   isNavLoaded: () => void,
   loadMainNav: () => void,
   fetchPagesIfNeeded: Function,
+  loadMainNavIfNeeded: Function,
   settings: Object
 };
 
 class BoldrWrapper extends Component {
   componentDidMount() {
     this.props.fetchSettingsIfNeeded();
-    this.props.loadMainNav();
-    this.props.fetchPagesIfNeeded();
+    this.props.loadMainNavIfNeeded();
   }
   props: Props;
   render() {
@@ -50,14 +50,14 @@ class BoldrWrapper extends Component {
 const asyncProps = [{
   promise: ({ store: { dispatch, getState } }) => {
     const promises = [];
-    if (!areSettingsLoaded(getState())) {
-      promises.push(dispatch(fetchSettingsIfNeeded()));
-    }
     if (!arePagesLoaded(getState())) {
       promises.push(dispatch(fetchPagesIfNeeded()));
     }
     if (!isNavLoaded(getState())) {
-      promises.push(dispatch(loadMainNav()));
+      promises.push(dispatch(loadMainNavIfNeeded()));
+    }
+    if (!areSettingsLoaded(getState())) {
+      promises.push(dispatch(fetchSettingsIfNeeded()));
     }
     return Promise.all(promises);
   },
@@ -73,4 +73,4 @@ function mapStateToProps(state) {
 }
 
 export default asyncConnect(asyncProps, mapStateToProps, {
-  fetchSettingsIfNeeded, fetchPagesIfNeeded, loadMainNav })(BoldrWrapper);
+  fetchSettingsIfNeeded, fetchPagesIfNeeded, loadMainNavIfNeeded })(BoldrWrapper);
