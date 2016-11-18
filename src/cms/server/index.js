@@ -4,7 +4,7 @@
 
 import path from 'path';
 import uuid from 'node-uuid';
-import appRoot from 'app-root-path';
+import appRoot from 'app-root-dir';
 import express from 'express';
 import type { $Request, $Response, NextFunction } from 'express';
 import hpp from 'hpp';
@@ -18,7 +18,7 @@ import universalMiddleware from './middleware/universalMiddleware';
 const API_PORT = 2121;
 const API_HOST = process.env.API_HOST || 'localhost';
 
-const appRootPath = appRoot.toString();
+const appRootPath = appRoot.get();
 const proxyTo = `http://${API_HOST}:${API_PORT}`;
 // Create Express server.
 const app = express();

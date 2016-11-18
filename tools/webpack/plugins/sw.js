@@ -1,5 +1,5 @@
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
-const appRootPath = require('app-root-path').toString();
+const appRoot = require('app-root-dir');
 const path = require('path');
 const os = require('os');
 const globSync = require('glob').sync;
@@ -7,6 +7,8 @@ const { removeEmpty, ifElse, merge, happyPackPlugin, chalkError, chalkInfo } = r
 const envVars = require('../../config/envVars');
 const defs = require('../../config/defs');
 const appName = require('../../../package.json').name;
+
+const appRootPath = appRoot.get();
 
 // Service Worker.
 // @see https://github.com/goldhand/sw-precache-webpack-plugin

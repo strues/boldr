@@ -1,6 +1,6 @@
 import { normalize } from 'normalizr';
 import { camelizeKeys } from 'humps';
-
+/* istanbul ignore next */
 export default function clientMiddleware(client) {
   return ({ dispatch, getState }) => {
     return next => action => {

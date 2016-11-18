@@ -1,9 +1,10 @@
 const HappyPack = require('happypack');
 const notifier = require('node-notifier');
 const execSync = require('child_process').execSync;
-const appRootPath = require('app-root-path').toString();
+const appRoot = require('app-root-dir');
 const chalk = require('chalk');
 
+const appRootPath = appRoot.get();
 // This determines how many threads a HappyPack instance can spin up.
 // See the plugins section of the webpack configuration for more.
 

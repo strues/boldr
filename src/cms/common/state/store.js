@@ -16,6 +16,7 @@ export default function configureStore(history, client, preloadedState) {
   /**
    * Redux DevTools Extension
    */
+     /* istanbul ignore next */
   if (process.env.NODE_ENV === 'development' && typeof window === 'object') {
     const devToolsExtension = window.devToolsExtension;
     if (typeof devToolsExtension === 'function') {
@@ -31,7 +32,9 @@ export default function configureStore(history, client, preloadedState) {
   // async reducers we can inject based on the route.
   store.asyncReducers = {};
   // Hot reload
+    /* istanbul ignore next */
   if (process.env.NODE_ENV === 'development') {
+      /* istanbul ignore next */
     if (module.hot) {
       module.hot.accept('./reducers', () => {
         System.import('./reducers').then((reducerModule) => {

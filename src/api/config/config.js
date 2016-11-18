@@ -1,6 +1,7 @@
-const appRootPath = require('app-root-path');
+const appRoot = require('app-root-dir');
 const nconf = require('nconf');
 
+const appRootPath = appRoot.get();
 const pjson = require(`${appRootPath}/package.json`);
 
 nconf.use('memory');

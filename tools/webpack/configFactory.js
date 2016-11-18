@@ -6,7 +6,7 @@ const AssetsPlugin = require('assets-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
 const colors = require('colors');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const appRootPath = require('app-root-path').toString();
+const appRoot = require('app-root-dir');
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
 const { removeEmpty, ifElse, merge, happyPackPlugin, chalkError, chalkInfo } = require('../utils');
@@ -18,6 +18,7 @@ const babel = require('./plugins/babel');
 const sw = require('./plugins/sw');
 const happy = require('./plugins/happy');
 
+const appRootPath = appRoot.get();
 function webpackConfigFactory({ target, mode }, { json }) {
   if (!target || ['client', 'server', 'universalMiddleware'].findIndex(valid => target === valid) === -1) {
     throw new Error(

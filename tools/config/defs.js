@@ -1,6 +1,7 @@
 const path = require('path');
-const appRootPath = require('app-root-path').toString();
+const appRoot = require('app-root-dir');
 
+const appRootPath = appRoot.get();
 const apiDir = 'api';
 const cmsDir = 'cms';
 const srcDir = 'src';
