@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import { Loader, Icon, Button, Segment, Header } from 'semantic-ui-react';
+import { Loader, Icon, Button, Segment } from 'semantic-ui-react';
 import { Row, Col } from 'components/index';
 import PostCard from '../components/PostCard';
 import type { Post } from '../../../types/models';
@@ -51,7 +51,9 @@ const PostListing = (props: Props) => {
           }
         </Button>
       </Segment>
-      { props.layout === 'grid' ? gridView : listView }
+      {
+        props.layout === 'grid' ? gridView : listView
+      }
     </div>
   );
 };

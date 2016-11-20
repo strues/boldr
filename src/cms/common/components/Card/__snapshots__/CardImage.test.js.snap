@@ -1,0 +1,8 @@
+exports[`test renders snapshot 1`] = `
+<div
+  className="boldr-card__image">
+  <img
+    alt="card feature"
+    className="boldr-card__img" />
+</div>
+`;

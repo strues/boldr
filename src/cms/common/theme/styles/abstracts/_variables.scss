@@ -8,7 +8,9 @@ $black: #000;
 /// @type Color
 $white: #fff;
 /// @type Color
-$snow: #fdfdfe;
+$snow: #f2f2f2;
+/// @type Color
+$cloud: #dfdfdf;
 /// @type Color
 $mercury: #e3e6e9;
 /// @type Color
@@ -39,7 +41,7 @@ $turtle: #11c2bb;
 $shadow-color: rgba(0, 0, 0, .2);
 $box-shadow: 0 0 5px $shadow-color;
 
-$body-background: #f7f7f7;
+$body-background: $snow;
 $primary-color: $lapiz;
 $accent-color: $pinkish;
 $primary-button-bg: $water;
@@ -56,7 +58,7 @@ $contrast-light: #2b343a;
 $contrast-dark: #1d252b;
 
 // Borders
-$border-color: rgba(255, 255, 255, .06);
+$border-color: $cloud;
 $import-google-fonts: false;
 $font-name: 'Work Sans' !default;
 $font-family: $font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif !default;
@@ -65,6 +67,8 @@ $header-font-name: 'Ubuntu';
 $menu-font-family: $header-font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif !default;
 $header-font-color: $navy;
 $header-font-family: $header-font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif !default;
+$button-font-family: $header-font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif !default;
+
 
 $font-size-base: 1em;
 $line-height-base: 1.5em;

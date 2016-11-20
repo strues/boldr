@@ -3,10 +3,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { Header, Icon, Segment, Container } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 import { Row, Hero, PrimaryHeader, Footer } from 'components/index';
 import { getPageByLabel } from 'state/selectors';
 import PageTemplate from 'theme/Boldr/PageTemplate';
+
 
 type Props = {
   loaded: Boolean,

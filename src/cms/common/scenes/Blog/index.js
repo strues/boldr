@@ -1,7 +1,4 @@
-import { fetchPosts } from 'state/dux/post';
 import BlogContainer from './BlogContainer';
-
-if (typeof require.ensure !== 'function') require.ensure = (deps, cb) => cb(require);
 
 const errorLoading = (err) => {
   console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
@@ -12,7 +9,7 @@ const loadModule = (cb) => (componentModule) => {
 };
 
 export default (store, connect) => ({
-  path: '/blog',
+  path: 'blog',
   component: BlogContainer,
   indexRoute: {
     component: require('./PostListing').default,

@@ -1,5 +1,5 @@
 import express from 'express';
-import { cache, checkRole, BaseController, isAuthenticated } from '../../core';
+import { checkRole, BaseController, isAuthenticated } from '../../core';
 import { processQuery } from '../../utils';
 import * as ctrl from './post.controller';
 

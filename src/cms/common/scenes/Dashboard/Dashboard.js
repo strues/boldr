@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-expressions */
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { Icon } from 'semantic-ui-react';
+import Icon from 'components/Icon';
 import { Grid, Col, Authenticated } from '../../components';
 import { Sidebar, Titlebar, SidebarContent } from './components/Sidebar';
 import { showSidebar, hideSidebar } from './reducer';
@@ -66,7 +66,7 @@ class Dashboard extends PureComponent {
       <Grid fluid>
         <Sidebar { ...sidebarProps }>
           <Titlebar title="Boldr" icon={
-            <Icon name="ellipsis vertical" onClick={ this.menuButtonClick } />
+            <Icon kind="menu" onClick={ this.menuButtonClick } />
           }
           >
             <Col xs>

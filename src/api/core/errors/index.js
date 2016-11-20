@@ -1,4 +1,12 @@
-import { BadRequest, Unauthorized, Forbidden, NotFound, MethodNotAllowed, Conflict, AccountNotVerifiedError } from './clientError';
+import {
+  BadRequest,
+  Unauthorized,
+  Forbidden,
+  NotFound,
+  MethodNotAllowed,
+  Conflict,
+  AccountNotVerifiedError,
+} from './clientError';
 import { InternalServer, NotImplemented } from './serverError';
 import GeneralError from './generalError';
 

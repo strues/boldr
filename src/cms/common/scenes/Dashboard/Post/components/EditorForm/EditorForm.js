@@ -74,8 +74,24 @@ class EditorForm extends Component {
                 </Col>
                 <Col xs={ 12 } md={ 6 }>
                   <div>
-                    <label><Field name="status" component="input" type="radio" value="draft" />Draft</label>
-                    <label><Field name="status" component="input" type="radio" value="published" />Published</label>
+                    <label className="radio-inline__label">
+                      <Field className="radio-inline__input"
+                        name="status"
+                        component="input"
+                        type="radio"
+                        value="draft"
+                      />
+                      Draft
+                    </label>
+                    <label className="radio-inline__label">
+                      <Field className="radio-inline__input"
+                        name="status"
+                        component="input"
+                        type="radio"
+                        value="published"
+                      />
+                      Published
+                    </label>
                  </div>
                 </Col>
               </Row>

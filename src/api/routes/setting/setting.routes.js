@@ -1,5 +1,4 @@
 import express from 'express';
-import cache from '../../core/cache';
 import * as ctrl from './setting.controller';
 import { BaseController, isAuthenticated } from '../../core';
 
@@ -10,7 +9,7 @@ const router = express.Router();
  * @apiGroup Settings
  * @apiSuccess (Success 200) {Object[]} settings All settings blocks.
  */
-router.get('/', cache.route('settings'), ctrl.listSettings);
+router.get('/', ctrl.listSettings);
 router.post('/', ctrl.addSetting);
 router.get('/:id', ctrl.getSetting);
 router.put('/:id', ctrl.updateSetting);

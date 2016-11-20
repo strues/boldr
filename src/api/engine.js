@@ -1,6 +1,6 @@
 import http from 'http';
-import Bootstrap from './core/bootstrap';
 
+import Bootstrap from './core/bootstrap';
 import logger from './core/logger';
 import app from './app';
 

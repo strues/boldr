@@ -4,7 +4,7 @@ import { asyncConnect } from 'redux-connect';
 import { Grid } from 'components/index';
 import { GRID, LIST } from 'core/config/layouts';
 import { changeLayout } from 'state/dux/ui';
-import { getPosts, fetchPosts } from '../../../state';
+import { getPosts, fetchPostsIfNeeded } from '../../../state';
 import type { Post } from '../../../types/models'; // eslint-disable-line
 import PostListing from './PostListing';
 
@@ -16,7 +16,6 @@ export type Props = {
   changeLayout: () => void,
   handleChangeLayout: () => void,
 };
-
 
 class PostListingContainer extends Component {
   constructor() {
@@ -45,7 +44,7 @@ class PostListingContainer extends Component {
 }
 
 const asyncProps = [{
-  promise: ({ store: { dispatch, getState } }) => dispatch(fetchPosts()),
+  promise: ({ store: { dispatch, getState } }) => dispatch(fetchPostsIfNeeded()),
 }];
 
 const mapStateToProps = (state) => {
@@ -55,4 +54,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default asyncConnect(asyncProps, mapStateToProps, { fetchPosts, changeLayout })(PostListingContainer);
+export default asyncConnect(asyncProps, mapStateToProps, { fetchPostsIfNeeded, changeLayout })(PostListingContainer);

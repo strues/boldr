@@ -81,7 +81,7 @@ export function login(loginData, redir) {
           dispatch(loginError());
           dispatch(notificationSend(notif.MSG_LOGIN_ERROR('Unable to login')));
         }
-        setToken(response.body.token)
+        setToken(response.body.token);
         dispatch(loginSuccess(response));
         dispatch(notificationSend(notif.MSG_LOGIN_SUCCESS));
         dispatch(push('/'));

@@ -1,5 +1,6 @@
 import Avatar from './Avatar';
 import BoldrLogo from './BoldrLogo';
+import { Button, ButtonGroup } from './Button';
 import Footer from './Footer';
 import Hero from './Hero';
 import Heading from './Heading';
@@ -27,4 +28,6 @@ export {
   TextField,
   SelectField,
   Widget,
+  Button,
+  ButtonGroup,
 };

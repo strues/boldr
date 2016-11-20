@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
-import { connect } from 'react-redux';
-import { PrimaryHeader, Footer } from 'components/index';
+import Helmet from 'react-helmet';
+import { Footer } from 'components/index';
 import PageTemplate from 'theme/Boldr/PageTemplate';
 import type { ReactChildren } from '../../types/react';
 
@@ -9,9 +9,8 @@ const BlogContainer = (props: { children: ReactChildren }) => {
   return (
     <div>
       <PageTemplate
-        header={
-          <PrimaryHeader />
-        } footer={
+        helmetMeta={ <Helmet title="Blog" /> }
+        footer={
           <Footer />
         }
       >
@@ -21,11 +20,4 @@ const BlogContainer = (props: { children: ReactChildren }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    posts: state.posts,
-    loading: state.posts.loading,
-  };
-};
-
-export default connect(mapStateToProps)(BlogContainer);
+export default BlogContainer;

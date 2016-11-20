@@ -26,7 +26,11 @@ const byKey = (state = {}, action) => {
     case t.EDIT_SETTING:
       nextState = { ...state };
       nextState[action.key] = {
-        ...state[action.key], key: action.key, value: action.value, description: action.description };
+        ...state[action.key],
+        key: action.key,
+        value: action.value,
+        description: action.description,
+      };
 
       return nextState;
     case t.DELETE_SETTING:

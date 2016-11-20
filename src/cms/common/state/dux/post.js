@@ -233,13 +233,6 @@ const errorUpdatingPost = (err) => {
 // Selectors
 // -----------------
 
-export const postsToState = (list) => (
-  list.reduce((list, a) => ({
-    ...list,
-    [a.slug]: a,
-  }), {})
-);
-
 export const getPosts = (state: Object) => state.posts.list;
 export type State = { loading: boolean, error: null, list: Array<String>, bySlug: Post }
 //

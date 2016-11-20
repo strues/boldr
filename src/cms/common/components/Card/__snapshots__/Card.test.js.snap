@@ -1,0 +1,4 @@
+exports[`test renders snapshot 1`] = `
+<section
+  className="boldr-card" />
+`;
