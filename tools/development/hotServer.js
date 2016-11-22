@@ -77,7 +77,7 @@ class HotServer {
       }
     };
 
-    this.watcher = chokidar.watch([path.resolve(__dirname, '../../src/cms/server')]);
+    this.watcher = chokidar.watch([path.resolve(__dirname, '../../src/server')]);
     this.watcher.on('ready', () => {
       this.watcher
         .on('add', compileHotServer)

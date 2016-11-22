@@ -6,7 +6,7 @@
 
 Boldr is an up and coming, modern content management framework / system. Boldr is a solid starting point for building your next great web application. In the future, the goal is to shape Boldr into a full content management system. However, here in the present, a framework, or strong base, is the most accurate way to describe the project. Boldr is built upon React, Node.js, and Postgres. It offers server-side rendering and a standalone REST api.
 
-_If you made it this far, I know what you're probably thinking..._ The world doesn't need another _never-to-be finished_ CMS project, nor does it need the "next WordPress". Boldr is none of that. Over the course of the past five or so months, my spare time has been invested into this passion project.
+[BoldrAPI](https://github.com/strues/boldrAPI) -- required for backend.
 
 **Table of Contents**
 - [Boldr](#boldr)
@@ -34,16 +34,16 @@ _If you made it this far, I know what you're probably thinking..._ The world doe
 
 ## Getting Started / Installation
 
+**IMPORTANT**: Please make sure you have boldrAPI downloaded before running Boldr. You can get it by running `git clone https://github.com/strues/boldrAPI.git`
+
 **A word of caution:** At the moment, Boldr is in active development. Meaning there can and most likely will, be the occasional breaking changes, and architectural adjustments.
 
 That being said, I'm fairly confident the majority of large breaking changes is behind us.
 
-1. `git clone https://github.com/boldr/boldr.git`
+1. `git clone https://github.com/strues/boldr.git`
 2. `cd boldr && yarn install / npm install`
 3. `cp env.example .env` and open it up in your preferred editor.
-4. The .env file contains nearly every configuration option available for you. The actual configuration is located in `src/api/config/config`. I recommend using the `config.js` file and only using the .env for secrets because **.env overrides the default config values.**
-5. `docker-compose up -d` unless you're running Postgres and Redis already.
-6. `npm run migrate` followed by `npm run seed` in order to populate the database tables.
+4. The .env file contains important paths for the bundling process.
 
 ## Usage
 
@@ -58,8 +58,6 @@ Quick notes:
 - Hot reloading doesn't work everywhere due to async/dynamic routes.
 
 ### Development
-
-**Setup the Database** -- Modify the config settings with your database information. Then simply run `npm run migrate` and `npm run seed`.  
 
 **Starting it up** -- Run `npm run dev`  
 
@@ -80,9 +78,6 @@ Running Boldr in production is fairly simple. We'll go over the steps right now 
 - Upload the contents of `public` to your web root.
 - Upload `public` folder and ensure it is set to be served as your web root.
 - Install the production dependencies on your server with `npm install --production`.
-- Upload `docker-compose.yml` and run `docker-compose up -d`.
-- Run `npm run migrate:prod` and `npm run seed:prod`.
-- Start the API with `npm run start:api`.
 - Start the CMS with `npm run start:cms`.
 
 The start commands expect [PM2](http://pm2.keymetrics.io/) to be installed globally on your server. The API start command expects your `postgres__uri` env variable to be modified so that it matches your actual postgres connection.

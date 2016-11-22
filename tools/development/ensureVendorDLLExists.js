@@ -49,7 +49,7 @@ function webpackConfigFactory(modules) {
 }
 
 function getJsFilesFromSrcDir(srcPath) {
-  return globSync(`${pathResolve(appRootPath, 'src/cms', srcPath)}/**/*.js`);
+  return globSync(`${pathResolve(appRootPath, 'src', srcPath)}/**/*.js`);
 }
 
 const ignoreModules = [

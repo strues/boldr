@@ -34,7 +34,7 @@ const happyCSSPlugin = happyPackPlugin({
 const happyJSPlugin = (babelPlugin) => happyPackPlugin({
   name: 'happypack-javascript',
   loaders: [{
-    path: 'babel',
+    path: 'babel-loader',
     query: {
       babelrc: false,
       cacheDirectory: path.resolve(defs.paths.node_modules, 'boldr', 'babelc'),

@@ -84,7 +84,7 @@ function webpackConfigFactory({ target, mode }, { json }) {
         ifDevClient('react-hot-loader/patch'),
         ifDevClient(`webpack-hot-middleware/client?reload=true&path=http://localhost:${envVars.WPDS_PORT}/__webpack_hmr`), // eslint-disable-line
         ifClient('regenerator-runtime/runtime'),
-        `${defs.paths.cms}/${target}/index.js`,
+        `${defs.paths.src}/${target}/index.js`,
       ]),
     }),
     output: {
@@ -155,6 +155,24 @@ function webpackConfigFactory({ target, mode }, { json }) {
           context: __dirname
         })
       ),
+      // happyPackPlugin({
+      //   name: 'happypack-javascript',
+      //   loaders: [{
+      //     path: 'babel-loader',
+      //     query: {
+      //       babelrc: false,
+      //       // cacheDirectory: path.resolve(os.tmpdir(), 'boldr', 'babelc'),
+      //       presets: [['boldr', { 'es2015': { 'modules': false }}]],
+      //       plugins: removeEmpty([
+      //         ifDevClient('react-hot-loader/babel'),
+      //           ['module-resolver', {
+      //             root: ['./src/cms/common']
+      //           }]
+      //         ])
+      //       }
+      //     }
+      //   ]
+      // }),
       ifProdClient(new SWPrecacheWebpackPlugin(merge({
           // Note: The default cache size is 2mb. This can be reconfigured:
           // maximumFileSizeToCacheInBytes: 2097152,
@@ -219,14 +237,14 @@ function webpackConfigFactory({ target, mode }, { json }) {
         ifDev({
           test: /\.jsx?$/,
           loader: 'happypack/loader?id=happypack-javascript',
-          exclude: [/node_modules/, defs.paths.api],
-          include: [defs.paths.cms],
+          exclude: [/node_modules/],
+          include: [defs.paths.src],
         }),
         ifProd({
           test: /\.jsx?$/,
-          loader: 'babel',
-          exclude: [/node_modules/, defs.paths.api],
-          include: [defs.paths.cms],
+          loader: 'babel-loader',
+          exclude: [/node_modules/],
+          include: [defs.paths.src],
           query: babel.babelProd,
         }),
         // JSON
@@ -249,8 +267,8 @@ function webpackConfigFactory({ target, mode }, { json }) {
           ifNodeTarget({
             loaders: [
               'css-loader/locals',
-              'postcss',
-              'sass'
+              'postcss-loader',
+              'sass-loader'
             ],
           }),
           // For a production client build we use the ExtractTextPlugin which
@@ -259,7 +277,7 @@ function webpackConfigFactory({ target, mode }, { json }) {
           ifProdClient({
             loader: ExtractTextPlugin.extract({
               fallbackLoader: 'style-loader',
-              loader: 'css?sourceMap&importLoaders=2!postcss!sass?outputStyle=expanded&sourceMap&sourceMapContents',
+              loader: 'css-loader?sourceMap&importLoaders=2!postcss-loader!sass-loader?outputStyle=expanded&sourceMap&sourceMapContents',
             })
           })
         ),

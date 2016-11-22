@@ -35,7 +35,8 @@
     "React": true,
     "__DLLS__": 1,
     "expect": true,
-    "jest": true
+    "jest": true,
+    "jasmine": true,
   },
   "rules": {
     "id-match": 0,

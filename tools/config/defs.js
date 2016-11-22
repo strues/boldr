@@ -17,8 +17,7 @@ module.exports = {
     dllExcludes: []
   },
   dirs: {
-    api: apiDir,
-    cms: cmsDir,
+    src: 'src',
     client: 'client',
     server: 'server',
     shared: 'common',
@@ -28,12 +27,10 @@ module.exports = {
   },
   paths: {
     node_modules: path.resolve(appRootPath, './node_modules'),
-    build: path.resolve(appRootPath, './build'),
+    build: path.resolve(appRootPath, './boldrCMS'),
     tools: path.resolve(appRootPath, './tools'),
     public: path.resolve(appRootPath, './public'),
     src: path.resolve(appRootPath, './src'),
-    api: path.resolve(appRootPath, `./src/${apiDir}`),
-    cms: path.resolve(appRootPath, `./src/${cmsDir}`),
   },
   modes: {
     default: 'development',
