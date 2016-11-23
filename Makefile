@@ -28,6 +28,6 @@ build-cms:
 	npm run build
 
 create-dist:
-	rm -rf ./dist && mkdir ./dist && mv boldrCMS dist/boldrCMS && cp package.json dist/package.json && cp .env dist/.env
+	rm -rf ./dist && mkdir -p ./dist/bin && mv boldrCMS dist/boldrCMS && cp bin/boldr.js dist/bin/ && cp package.json dist/package.json && cp .env dist/.env
 
 build: build-cms copy-sw create-dist

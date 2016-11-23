@@ -5,26 +5,23 @@ exports[`<PostCard /> renders snapshot 1`] = `
     fluid={true}>
     <Component />
     <Component>
-      NaN/NaN/0NaN
+      <Divider />
       <Component>
-        <Row
-          componentClass="div">
-          <Link
-            onlyActiveOnIndex={false}
-            style={Object {}}
-            to="/blog/undefined">
-            <Component
-              submit={false}
-              type="default">
-              Read More
-            </Component>
-          </Link>
-        </Row>
-        <Row
-          componentClass="div"
-          xsEnd={true}>
-          <Component />
-        </Row>
+        <Link
+          onlyActiveOnIndex={false}
+          style={
+            Object {
+              "marginRight": "15px",
+            }
+          }
+          to="/blog/undefined">
+          <Component
+            submit={false}
+            type="default">
+            Read More
+          </Component>
+        </Link>
+        <Component />
       </Component>
     </Component>
   </Component>

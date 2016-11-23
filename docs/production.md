@@ -13,7 +13,7 @@ Running Boldr in production is fairly simple. We'll go over the steps right now 
 - Configure the connections for Postgres and Redis.
 - Migrate and seed the database.
 - Start the API.
-- Start the CMS with `npm run start:cms`.
+- Start the CMS with `npm run start`.
 
 The start commands expect [PM2](http://pm2.keymetrics.io/) to be installed globally on your server. The API start command expects your `postgres__uri` env variable to be modified so that it matches your actual postgres connection.
 

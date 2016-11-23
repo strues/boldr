@@ -1926,9 +1926,9 @@ dashify@^0.2.0:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/dashify/-/dashify-0.2.2.tgz#6a07415a01c91faf4a32e38d9dfba71f61cb20fe"
 
-date-fns@^1.10.0:
-  version "1.10.0"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.10.0.tgz#fdb0d980ae744b7538f430d7fc4a1ec4e1c2234b"
+date-fns@^1.11.0:
+  version "1.11.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.11.0.tgz#38b6ae170f587898f88fd145470964e691dc7ae6"
 
 date-now@^0.1.4:
   version "0.1.4"
@@ -2328,7 +2328,7 @@ es6-map@^0.1.3:
     es6-symbol "~3.1.0"
     event-emitter "~0.3.4"
 
-es6-promise@^3.0.2, es6-promise@^3.2.1:
+es6-promise@^3.0.2:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/es6-promise/-/es6-promise-3.3.1.tgz#a08cdde84ccdbf34d027a1451bc91d4bcd28a613"
 
@@ -2631,13 +2631,6 @@ expand-range@^1.8.1:
   resolved "https://registry.yarnpkg.com/expand-range/-/expand-range-1.8.2.tgz#a299effd335fe2721ebae8e257ec79644fc85337"
   dependencies:
     fill-range "^2.1.0"
-
-express-http-proxy@^0.10.1:
-  version "0.10.1"
-  resolved "https://registry.yarnpkg.com/express-http-proxy/-/express-http-proxy-0.10.1.tgz#dff83794a8ec11db0e7d9448e6ce1ca6278b3dd7"
-  dependencies:
-    es6-promise "^3.2.1"
-    raw-body "^2.1.7"
 
 express@^4.14.0:
   version "4.14.0"
@@ -5588,13 +5581,14 @@ postcss-selector-parser@^2.0.0, postcss-selector-parser@^2.2.0:
     indexes-of "^1.0.1"
     uniq "^1.0.1"
 
-postcss-smart-import@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/postcss-smart-import/-/postcss-smart-import-0.5.1.tgz#f8b6b056330f567deeb9c393b39bfec269890011"
+postcss-smart-import@^0.6.0:
+  version "0.6.0"
+  resolved "https://registry.yarnpkg.com/postcss-smart-import/-/postcss-smart-import-0.6.0.tgz#92ca8257c3d15972d565e5104433e3a9a88643c2"
   dependencies:
     babel-runtime "^6.18.0"
+    lodash "^4.17.2"
     object-assign "^4.1.0"
-    postcss "^5.2.5"
+    postcss "^5.2.6"
     postcss-scss "^0.4.0"
     postcss-value-parser "^3.3.0"
     promise-each "^2.2.0"
@@ -5630,7 +5624,7 @@ postcss-zindex@^2.0.1:
     postcss "^5.0.4"
     uniqs "^2.0.0"
 
-postcss@^5.0.0, postcss@^5.0.10, postcss@^5.0.11, postcss@^5.0.12, postcss@^5.0.13, postcss@^5.0.14, postcss@^5.0.16, postcss@^5.0.19, postcss@^5.0.2, postcss@^5.0.21, postcss@^5.0.3, postcss@^5.0.4, postcss@^5.0.5, postcss@^5.0.6, postcss@^5.0.8, postcss@^5.1.1, postcss@^5.2.4, postcss@^5.2.5:
+postcss@^5.0.0, postcss@^5.0.10, postcss@^5.0.11, postcss@^5.0.12, postcss@^5.0.13, postcss@^5.0.14, postcss@^5.0.16, postcss@^5.0.19, postcss@^5.0.2, postcss@^5.0.21, postcss@^5.0.3, postcss@^5.0.4, postcss@^5.0.5, postcss@^5.0.6, postcss@^5.0.8, postcss@^5.1.1, postcss@^5.2.4, postcss@^5.2.5, postcss@^5.2.6:
   version "5.2.6"
   resolved "https://registry.yarnpkg.com/postcss/-/postcss-5.2.6.tgz#a252cd67cd52585035f17e9ad12b35137a7bdd9e"
   dependencies:
@@ -5789,7 +5783,7 @@ range-parser@^1.0.3, range-parser@~1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.0.tgz#f49be6b487894ddc40dcc94a322f611092e00d5e"
 
-raw-body@^2.1.7, raw-body@~2.1.7:
+raw-body@~2.1.7:
   version "2.1.7"
   resolved "https://registry.yarnpkg.com/raw-body/-/raw-body-2.1.7.tgz#adfeace2e4fb3098058014d08c072dcc59758774"
   dependencies:
@@ -5806,21 +5800,21 @@ rc@^1.0.1, rc@~1.1.6:
     minimist "^1.2.0"
     strip-json-comments "~1.0.4"
 
-react-addons-css-transition-group@^15.4.0:
-  version "15.4.0"
-  resolved "https://registry.yarnpkg.com/react-addons-css-transition-group/-/react-addons-css-transition-group-15.4.0.tgz#410aa74533629974de33cfeaa85945066ff181cd"
+react-addons-css-transition-group@^15.4.1:
+  version "15.4.1"
+  resolved "https://registry.yarnpkg.com/react-addons-css-transition-group/-/react-addons-css-transition-group-15.4.1.tgz#60b133fac5116e4009e56ab0674dc2ddcc1a18f6"
 
-react-addons-perf@^15.4.0:
-  version "15.4.0"
-  resolved "https://registry.yarnpkg.com/react-addons-perf/-/react-addons-perf-15.4.0.tgz#1e8b694677b31eb759289f7ddeb72e9f9215c745"
+react-addons-perf@^15.4.1:
+  version "15.4.1"
+  resolved "https://registry.yarnpkg.com/react-addons-perf/-/react-addons-perf-15.4.1.tgz#c6dd5a7011f43cd3222f47b7cb1aebe9d4174cb0"
 
-react-addons-test-utils@^15.4.0:
-  version "15.4.0"
-  resolved "https://registry.yarnpkg.com/react-addons-test-utils/-/react-addons-test-utils-15.4.0.tgz#bd326904916b80de6a466248ef52cdfc1799e963"
+react-addons-test-utils@^15.4.1:
+  version "15.4.1"
+  resolved "https://registry.yarnpkg.com/react-addons-test-utils/-/react-addons-test-utils-15.4.1.tgz#1e4caab151bf27cce26df5f9cb714f4fd8359ae1"
 
-react-addons-transition-group@^15.4.0:
-  version "15.4.0"
-  resolved "https://registry.yarnpkg.com/react-addons-transition-group/-/react-addons-transition-group-15.4.0.tgz#dbcb8a6a466c6d54f347710345e0004b699a68e0"
+react-addons-transition-group@^15.4.1:
+  version "15.4.1"
+  resolved "https://registry.yarnpkg.com/react-addons-transition-group/-/react-addons-transition-group-15.4.1.tgz#27d92717089c5e2db202e654a85b76a41b703acc"
 
 react-deep-force-update@^2.0.1:
   version "2.0.1"
@@ -5841,9 +5835,9 @@ react-dnd@^2.1.4:
     invariant "^2.1.0"
     lodash "^4.2.0"
 
-react-dom@^15.4.0:
-  version "15.4.0"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.4.0.tgz#6a97a69000966570db48c746bc4b7b0ca50d1534"
+react-dom@^15.4.1:
+  version "15.4.1"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.4.1.tgz#d54c913261aaedb17adc20410d029dcc18a1344a"
   dependencies:
     fbjs "^0.8.1"
     loose-envify "^1.1.0"
@@ -5912,9 +5906,9 @@ react-side-effect@1.0.2:
   dependencies:
     fbjs "0.1.0-alpha.10"
 
-react@^15.4.0:
-  version "15.4.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-15.4.0.tgz#736c1c7c542e8088127106e1f450b010f86d172b"
+react@^15.4.1:
+  version "15.4.1"
+  resolved "https://registry.yarnpkg.com/react/-/react-15.4.1.tgz#498e918602677a3983cd0fd206dfe700389a0dd6"
   dependencies:
     fbjs "^0.8.4"
     loose-envify "^1.1.0"
@@ -6317,9 +6311,9 @@ scroll-behavior@^0.9.1:
     dom-helpers "^3.0.0"
     invariant "^2.2.1"
 
-semantic-ui-react@^0.61.2:
-  version "0.61.2"
-  resolved "https://registry.yarnpkg.com/semantic-ui-react/-/semantic-ui-react-0.61.2.tgz#19b1121c36abbd47c4cc4f74939d4e064c97bcb7"
+semantic-ui-react@^0.61.3:
+  version "0.61.3"
+  resolved "https://registry.yarnpkg.com/semantic-ui-react/-/semantic-ui-react-0.61.3.tgz#5e5c602f24953442cbf126cce8f5445ffb8af6db"
   dependencies:
     classnames "^2.1.5"
     debug "^2.3.2"
@@ -6703,9 +6697,9 @@ svgo@^0.7.0:
     sax "~1.2.1"
     whet.extend "~0.9.9"
 
-sw-precache-webpack-plugin@^0.6.2:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/sw-precache-webpack-plugin/-/sw-precache-webpack-plugin-0.6.2.tgz#89c204618a3022d886e9529af2ab429a21f57e83"
+sw-precache-webpack-plugin@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/sw-precache-webpack-plugin/-/sw-precache-webpack-plugin-0.6.3.tgz#5e77a636e63bbf9aa50042d9f0a00994ec7ea831"
   dependencies:
     del "^2.2.2"
     sw-precache "^4.1.0"

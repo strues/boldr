@@ -1,21 +1,16 @@
 exports[`<Author /> renders snapshot 1`] = `
 <div
   className="post__sidebar-author">
-  <Card
-    className="post__sidebar-card">
-    <CardContent>
-      <Feed>
-        <FeedEvent>
-          <FeedLabel
-            image="abcd" />
-          <FeedContent>
-            <FeedSummary>
-              hey
-            </FeedSummary>
-          </FeedContent>
-        </FeedEvent>
-      </Feed>
-    </CardContent>
-  </Card>
+  <Feed>
+    <FeedEvent>
+      <FeedLabel
+        image="abcd" />
+      <FeedContent>
+        <FeedSummary>
+           
+        </FeedSummary>
+      </FeedContent>
+    </FeedEvent>
+  </Feed>
 </div>
 `;

@@ -30,18 +30,20 @@ function scriptTags(scripts: Array<string>) {
 // providing us with caching and offline application support.
 // @see https://github.com/goldhand/sw-precache-webpack-plugin
 // Please refer the webpack configuration for more information.
-function serviceWorkerScript() {
+// We use a service worker configured created by the sw-precache webpack plugin,
+// providing us with prefetched caching and offline application support.
+// @see https://github.com/goldhand/sw-precache-webpack-plugin
+function serviceWorkerScript(nonce) {
   if (process.env.NODE_ENV === 'production') {
     return `
-      <script type="text/javascript">
-        (function() {
-          if('serviceWorker' in navigator) {
+      <script nonce="${nonce}" type="text/javascript">
+        (function swRegister() {
+          if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js');
           }
-        })();
+        }());
       </script>`;
   }
-
   return '';
 }
 const styled = styleSheet.rules().map(rule => rule.cssText).join('\n');

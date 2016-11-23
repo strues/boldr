@@ -20,4 +20,16 @@
 
 .boldr-card__content {
   padding: 1rem;
+  margin-bottom: 15px;
+}
+
+.boldr-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  vertical-align: middle;
+
+  .tagblock {
+    align-items: center!important;
+  }
 }

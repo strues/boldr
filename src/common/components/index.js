@@ -13,6 +13,7 @@ import { TextField, SelectField } from './FormComponents';
 import Widget from './Widget';
 import { Card, CardContent, CardFooter, CardImage } from './Card';
 import Icon from './Icon';
+import Divider from './Divider';
 
 export {
   Avatar,
@@ -37,4 +38,5 @@ export {
   CardContent,
   CardFooter,
   CardImage,
+  Divider,
 };
