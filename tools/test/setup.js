@@ -1,7 +1,8 @@
 require('babel-register')();
-require('events').EventEmitter.defaultMaxListeners = Infinity;
+const { EventEmitter } = require('events').EventEmitter;
 
-// jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
+EventEmitter.defaultMaxListeners = Infinity
+jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
 
 global.Array = Array
 global.Date = Date

@@ -1,0 +1,16 @@
+
+.boldr__theme-header{
+  margin-bottom: 57px;
+}
+.ph-menu__item-link {
+  color: $navy;
+
+  &:hover {
+    color: $pinkish;
+  }
+}
+.ph-logo {
+  height: 55px;
+  align-self: center;
+  margin-right: 20px;
+}

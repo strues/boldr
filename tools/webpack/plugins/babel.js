@@ -7,7 +7,7 @@ const ifDevClient = ifElse(isDev && isClient);
 
 const babelModuleResolve =
   ['module-resolver', {
-    root: [`${defs.paths.cms}/common`]
+    root: [`${defs.paths.src}/common`]
   }];
 
 const babelDevClient = removeEmpty([

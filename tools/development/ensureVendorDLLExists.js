@@ -4,10 +4,12 @@ const pathResolve = require('path').resolve;
 const md5 = require('md5');
 const fs = require('fs');
 const globSync = require('glob').sync;
-const appRootPath = require('app-root-path').toString();
+const appRoot = require('app-root-dir');
 const vendorDLLPaths = require('../config/vendorDLLPaths');
 const { createNotification } = require('../utils');
 const envVars = require('../config/envVars');
+
+const appRootPath = appRoot.get();
 // -----------------------------------------------------------------------------
 // PRIVATES
 
@@ -47,7 +49,7 @@ function webpackConfigFactory(modules) {
 }
 
 function getJsFilesFromSrcDir(srcPath) {
-  return globSync(`${pathResolve(appRootPath, 'src/cms', srcPath)}/**/*.js`);
+  return globSync(`${pathResolve(appRootPath, 'src', srcPath)}/**/*.js`);
 }
 
 const ignoreModules = [

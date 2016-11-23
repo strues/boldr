@@ -1,7 +1,4 @@
 machine:
-  services:
-    - redis
-    - postgresql
   timezone:
     America/Denver
   node:
@@ -12,13 +9,6 @@ machine:
   environment:
     NODE_ENV: test
     CIRCLE_ENV: test
-    postgres__uri: postgres://ubuntu:@127.0.0.1:5432/circle_test
-    postgres__host: 127.0.0.1
-    postgres__user: ubuntu
-    postgres__db: circle_test
-    redis__uri: redis://127.0.0.1:6379/1
-    redis__host: 127.0.0.1
-    redis__port: 6379
 dependencies:
   pre:
         # Install Yarn
@@ -34,9 +24,6 @@ dependencies:
     - yarn install
 
 test:
-  pre:
-    - NODE_ENV=test npm run migrate
-    - NODE_ENV=test npm run seed
   override:
     - npm run test:ci
   post:

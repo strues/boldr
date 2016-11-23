@@ -24,7 +24,7 @@ boldr-api.paw
 
 
 #### Dist Directories
-build
+boldrCMS/
 dist
 node_modules
 logs

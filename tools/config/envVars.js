@@ -14,7 +14,8 @@
 const fs = require('fs');
 const pathResolve = require('path').resolve;
 const dotenv = require('dotenv');
-const appRootPath = require('app-root-path').toString();
+const appRoot = require('app-root-dir');
+const appRootPath = appRoot.get();
 const envFile = pathResolve(appRootPath, './.env');
 const envWhitelistFile = pathResolve(appRootPath, '.env_whitelist');
 

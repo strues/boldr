@@ -7,7 +7,7 @@
       "presets": [["boldr", { "es2015": { "modules": "commonjs" }}], "react"],
       "plugins": [
         ["module-resolver", {
-          "root": ["./src/cms/common"]
+          "root": ["./src/common"]
         }]
       ]
     }

@@ -1,8 +1,10 @@
 // This script builds a production output of all of our bundles.
 
 const pathResolve = require('path').resolve;
-const appRootPath = require('app-root-path').toString();
+const appRoot = require('app-root-dir');
 const { exec } = require('../utils.js');
+
+const appRootPath = appRoot.get();
 
 const webpackConfigs = pathResolve(appRootPath, './tools/webpack');
 const clientConfig = pathResolve(webpackConfigs, 'client.config.js');

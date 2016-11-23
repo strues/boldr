@@ -1,0 +1,6 @@
+exports[`test renders snapshot 1`] = `
+<div
+  className="boldr-btn__group">
+  hi
+</div>
+`;

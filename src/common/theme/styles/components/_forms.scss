@@ -1,0 +1,39 @@
+.md-text-field {
+  width: 100%;
+}
+
+.form__navigation {
+  padding: 1em;
+  overflow: hidden;
+}
+
+.form__footer {
+  margin-top: 35px;
+  padding-top: 25px;
+}
+
+.radio-inline__input {
+  margin-right: 5px;
+  vertical-align: middle;
+}
+
+.radio-inline__label {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin-right: 18px;
+    border-radius: 3px;
+    transition: all .2s;
+}
+
+.radio-inline__input:checked + .radio-inline__label {
+    background: #B54A4A;
+    color: #fff;
+    text-shadow: 0 0 1px rgba(0,0,0,.7);
+}
+
+.radio-inline__input:focus + .radio-inline__label {
+    outline-color: #4D90FE;
+    outline-offset: -2px;
+    outline-style: auto;
+    outline-width: 5px;
+}
