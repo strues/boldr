@@ -10,7 +10,7 @@ import hpp from 'hpp';
 import helmet from 'helmet';
 import httpProxy from 'http-proxy';
 import { notEmpty } from '../common/core/utils/guards';
-import universalMiddleware from './middleware/universalMiddleware';
+import boldrSSR from './middleware/boldrSSR';
 
 // these values are to inform the proxy, which is running here, where our backend
 // api is located.
@@ -100,7 +100,20 @@ app.use(
 
 // Configure static serving of our "public" root http path static files.
 app.use(express.static(path.resolve(appRootPath, './public')));
-app.get('*', universalMiddleware);
+
+// When in production mode, bind our service worker folder so that it can
+// be served.
+// Note: the service worker needs to be available at the http root of your
+// application for the offline support to work.
+if (process.env.NODE_ENV === 'production') {
+  app.use(
+    express.static(
+      path.resolve(appRootPath, notEmpty(process.env.BUNDLE_OUTPUT_PATH), './serviceWorker'),
+    ),
+  );
+}
+
+app.get('*', boldrSSR);
 
 // Handle 404 errors.
 // Note: the react application middleware hands 404 paths, but it is good to

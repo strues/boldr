@@ -7,9 +7,9 @@ const dropTarget = {
     props.onDrop(section);
     return {
       name: 'Board',
-    }
+    };
   },
-}
+};
 
 @DropTarget('Section', dropTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
@@ -28,7 +28,7 @@ class Board extends React.Component {
     const { connectDropTarget } = this.props;
     return (connectDropTarget(
       <div className="Board">{this.props.children}</div>,
-    ))
+    ));
   }
 }
 

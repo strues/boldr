@@ -18,8 +18,12 @@ import {
   API_BLOCKS,
 } from './endpoints';
 
+const origin = () =>
+  typeof window !== 'undefined' ? window.location.origin : base.host;
+
 export {
   base,
+  origin,
   TOKEN_KEY,
   API_PREFIX,
   S3_SIGNING_URL,

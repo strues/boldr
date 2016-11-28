@@ -15,14 +15,13 @@ const defs = require('../config/defs');
 const appName = require('../../package.json').name;
 
 const babel = require('./plugins/babel');
-const sw = require('./plugins/sw');
 const happy = require('./plugins/happy');
 
 const appRootPath = appRoot.get();
 function webpackConfigFactory({ target, mode }, { json }) {
-  if (!target || ['client', 'server', 'universalMiddleware'].findIndex(valid => target === valid) === -1) {
+  if (!target || ['client', 'server'].findIndex(valid => target === valid) === -1) {
     throw new Error(
-      'You must provide a "target" (client|server|universalMiddleware) to the webpackConfigFactory.'
+      'You must provide a "target" (client|server) to the webpackConfigFactory.'
     );
   }
 
@@ -83,7 +82,6 @@ function webpackConfigFactory({ target, mode }, { json }) {
       index: removeEmpty([
         ifDevClient('react-hot-loader/patch'),
         ifDevClient(`webpack-hot-middleware/client?reload=true&path=http://localhost:${envVars.WPDS_PORT}/__webpack_hmr`), // eslint-disable-line
-        ifClient('regenerator-runtime/runtime'),
         `${defs.paths.src}/${target}/index.js`,
       ]),
     }),
@@ -155,24 +153,7 @@ function webpackConfigFactory({ target, mode }, { json }) {
           context: __dirname
         })
       ),
-      // happyPackPlugin({
-      //   name: 'happypack-javascript',
-      //   loaders: [{
-      //     path: 'babel-loader',
-      //     query: {
-      //       babelrc: false,
-      //       // cacheDirectory: path.resolve(os.tmpdir(), 'boldr', 'babelc'),
-      //       presets: [['boldr', { 'es2015': { 'modules': false }}]],
-      //       plugins: removeEmpty([
-      //         ifDevClient('react-hot-loader/babel'),
-      //           ['module-resolver', {
-      //             root: ['./src/cms/common']
-      //           }]
-      //         ])
-      //       }
-      //     }
-      //   ]
-      // }),
+
       ifProdClient(new SWPrecacheWebpackPlugin(merge({
           // Note: The default cache size is 2mb. This can be reconfigured:
           // maximumFileSizeToCacheInBytes: 2097152,

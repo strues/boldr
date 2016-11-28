@@ -1,20 +1,20 @@
-import React, { Component } from 'react'
-import { DragSource } from 'react-dnd'
+import React, { Component } from 'react';
+import { DragSource } from 'react-dnd';
 
 const elementSource = {
   beginDrag(props) {
     return {
       name: props.name.toLowerCase().replace(/\s/g, ''),
-    }
+    };
   },
   endDrag(props, monitor) {
-    const item = monitor.getItem()
-    const dropResult = monitor.getDropResult()
+    const item = monitor.getItem();
+    const dropResult = monitor.getDropResult();
     if (dropResult) {
-      console.log(`You dropped ${item.name} into ${dropResult.name}!`)
+      console.log(`You dropped ${item.name} into ${dropResult.name}!`);
     }
   },
-}
+};
 
 @DragSource('Section', elementSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
@@ -28,12 +28,12 @@ class Element extends Component {
   }
 
   render() {
-    const { isDragging, connectDragSource, name } = this.props
+    const { isDragging, connectDragSource, name } = this.props;
     return connectDragSource(
-      <li className="Element" style={{ opacity: isDragging ? 0.5 : 1 }}>
+      <li className="Element" style={ { opacity: isDragging ? 0.5 : 1 } }>
         <span className="ElementText">{name}</span>
       </li>,
-    )
+    );
   }
 }
 

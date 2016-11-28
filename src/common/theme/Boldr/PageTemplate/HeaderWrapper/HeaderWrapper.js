@@ -39,7 +39,6 @@ const mapDispatchToProps = (dispatch) => {
 class HeaderWrapper extends Component {
   constructor() {
     super();
-    this.handleItemClick = this.handleItemClick.bind(this);
     this.handleLoginClick = this.handleLoginClick.bind(this);
     this.handleSignupClick = this.handleSignupClick.bind(this);
     this.handleProfileClick = this.handleProfileClick.bind(this);
@@ -47,9 +46,6 @@ class HeaderWrapper extends Component {
     this.handleLogoClick = this.handleLogoClick.bind(this);
     this.handleLogoutClick = this.handleLogoutClick.bind(this);
     this.handleDashClick = this.handleDashClick.bind(this);
-  }
-  handleItemClick = (e, { name, href }) => {
-    this.props.navigate(`${href}`);
   }
 
   handleLoginClick = (e) => {
@@ -84,7 +80,6 @@ class HeaderWrapper extends Component {
       auth={ this.props.auth }
       settings={ this.props.settings }
       navigation={ this.props.navigation }
-      handleItemClick={ this.handleItemClick }
       handleLoginClick={ this.handleLoginClick }
       handleSignupClick={ this.handleSignupClick }
       handleProfileClick={ this.handleProfileClick }

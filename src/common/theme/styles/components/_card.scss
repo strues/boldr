@@ -30,6 +30,10 @@
   vertical-align: middle;
 
   .tagblock {
-    align-items: center!important;
+    align-items: center !important;
+
+    a {
+      margin-left: 5px;
+    }
   }
 }

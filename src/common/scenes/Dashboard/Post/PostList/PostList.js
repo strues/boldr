@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
 import { asyncConnect } from 'redux-connect';
-import { Item, Segment, Menu } from 'semantic-ui-react';
+import { Item, Segment } from 'semantic-ui-react';
 import { Icon } from 'components/index';
 import { fetchPostsIfNeeded, getPosts, deletePost } from '../../../../state/dux/post';
 import { PostListItem } from '../components';
@@ -36,13 +36,6 @@ class PostList extends Component {
   render() {
     return (
       <div>
-      <Menu attached="top">
-          <Menu.Menu position="right">
-            <div className="ui right aligned category search item">
-              <Icon kind="list-view" />
-            </div>
-          </Menu.Menu>
-        </Menu>
        <Segment>
        <Item.Group>
         {

@@ -3,7 +3,6 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
-import { PrimaryHeader, Hero } from '../../components';
 import { Home } from './Home';
 
 describe('<Home />', () => {

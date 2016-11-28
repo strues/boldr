@@ -1,39 +1,50 @@
 /* @flow */
+
 import type { $Request, $Response, Middleware } from 'express';
 import React from 'react';
+import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 // react router
 import match from 'react-router/lib/match';
 import createMemoryHistory from 'react-router/lib/createMemoryHistory';
 import { syncHistoryWithStore } from 'react-router-redux';
+import Helmet from 'react-helmet';
 // async data fetching
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect';
-import ApiClient from '../common/core/services/ApiClient';
-import createRoutes from '../common/scenes';
-import configureStore from '../common/state/store';
-import render from './render';
+import createRoutes from '../../../common/scenes';
+import configureStore from '../../../common/state/store';
+import generateHTML from './generateHTML';
 
 /**
  * An express middleware that is capabable of doing React server side rendering.
  */
 function universalReactAppMiddleware(request: $Request, response: $Response) {
-  global.navigator = { userAgent: request.headers['user-agent'] };
+  // We should have had a nonce provided to us.  See the server/index.js for
+  // more information on what this is.
+  if (typeof response.locals.nonce !== 'string') {
+    throw new Error('A "nonce" value has not been attached to the response');
+  }
+  const nonce = response.locals.nonce;
+
+  // It's possible to disable SSR, which can be useful in development mode.
+  // In this case traditional client side only rendering will occur.
   if (process.env.DISABLE_SSR === 'true') {
     if (process.env.NODE_ENV === 'development') {
       console.log('==> Handling react route without SSR');  // eslint-disable-line no-console
     }
     // SSR is disabled so we will just return an empty html page and will
     // rely on the client to initialize and render the react application.
-    const html = render();
+    const html = generateHTML({
+      // Nonce which allows us to safely declare inline scripts.
+      nonce,
+    });
     response.status(200).send(html);
     return;
   }
-  // API request helper
-  const client = new ApiClient(request);
   // create memory history since we're technically an SPA
   const memHistory = createMemoryHistory(request.url);
   // redux store is initialized with the history as well as the client middleware
-  const store = configureStore({}, memHistory, client);
+  const store = configureStore({}, memHistory);
   // history is now kept in sync with the redux store
   syncHistoryWithStore(memHistory, store);
 
@@ -46,16 +57,29 @@ function universalReactAppMiddleware(request: $Request, response: $Response) {
     } else if (renderProps) {
       // execute rendering and data hydration on the server, then send
       // it to the client to render.
-      loadOnServer({ ...renderProps, store, helpers: { client } })
+      loadOnServer({ ...renderProps, store })
       .then(() => {
         const preloadedState = store.getState();
-        const component = (
-            <Provider store={ store } key="provider">
-              <ReduxAsyncConnect { ...renderProps } />
-            </Provider>
-          );
 
-        const html = render(component, preloadedState);
+          // Create our application and render it into a string.
+        const component = renderToString(
+          <Provider store={ store } key="provider">
+            <ReduxAsyncConnect { ...renderProps } />
+          </Provider>,
+        );
+
+        // Generate the html response.
+        const html = generateHTML({
+          // Provide the full app react element.
+          component,
+          // Nonce which allows us to safely declare inline scripts.
+          nonce,
+          preloadedState,
+          // Running this gets all the helmet properties (e.g. headers/scripts/title etc)
+          // that need to be included within our html.  It's based on the rendered app.
+          // @see https://github.com/nfl/react-helmet
+          helmet: Helmet.rewind(),
+        });
 
         return response.status(200).send(html);
       }).catch((mountError) => {

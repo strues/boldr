@@ -1,6 +1,7 @@
 import { GRID } from 'core/config/layouts';
 
 export const CHANGE_LAYOUT = '@boldr/CHANGE_LAYOUT';
+export const SET_MOBILE_DEVICE = '@boldr/SET_MOBILE_DEVICE';
 
 export function changeLayout(layout) {
   return {
@@ -9,9 +10,13 @@ export function changeLayout(layout) {
   };
 }
 
+export function setMobileDevice(enabled = true) {
+  return { type: SET_MOBILE_DEVICE, payload: enabled };
+}
 const INITIAL_STATE = {
   loaded: false,
   layout: GRID,
+  isMobile: false,
 };
 
 function uiReducer(state = INITIAL_STATE, action) {
@@ -20,6 +25,11 @@ function uiReducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         layout: action.payload,
+      };
+    case SET_MOBILE_DEVICE:
+      return {
+        ...state,
+        isMobile: action.payload,
       };
     default:
       return state;

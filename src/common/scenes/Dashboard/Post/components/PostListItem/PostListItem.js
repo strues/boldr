@@ -59,7 +59,7 @@ const PostListItem = (props: Props) => {
           </Link>
         </Item.Header>
         <Item.Meta>
-            <Icon name="calendar" /> { formattedDate }
+            <Icon color="#222" kind="calendar" /> { formattedDate }
         </Item.Meta>
         <Item.Description>
         { props.excerpt }

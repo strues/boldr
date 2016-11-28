@@ -1,6 +1,5 @@
 import fetch from 'isomorphic-fetch';
 import request from 'superagent';
-import { getToken } from './token';
 // Import API endpoints
 import {
   API_POSTS,
@@ -14,8 +13,8 @@ import {
   API_ATTACHMENTS,
   API_ACTIVITY,
   API_USERS,
-  TOKEN_KEY,
 } from '../config';
+import { getToken } from './token';
 
 const AUTH_TOKEN = getToken();
 /**
@@ -94,7 +93,7 @@ export function doUpdatePost(postData) {
         feature_image: postData.feature_image,
         // tag: postData.tag,
         status: postData.status,
-      })
+      });
 }
 /**
   * AUTH API ROUTES
@@ -275,7 +274,12 @@ export function doUpdateMember(userData) {
     .send(payload);
 }
 
-
+export function doFetchBlocks() {
+  return fetch(`${API_BLOCKS}`, {
+    method: 'get',
+    headers: { 'Content-Type': 'application/json' },
+  }).then(response => processResponse(response));
+}
 export function doCreateBlock(data) {
   return request
     .post(`${API_BLOCKS}`)

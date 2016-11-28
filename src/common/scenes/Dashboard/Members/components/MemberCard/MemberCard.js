@@ -26,9 +26,7 @@ const MemberCard = (props) => {
        </Card.Description>
      </Card.Content>
      <Card.Content extra>
-       <div className="ui two buttons">
          <Button onClick={ handleToggle }>Edit User</Button>
-       </div>
      </Card.Content>
    </Card>
   );

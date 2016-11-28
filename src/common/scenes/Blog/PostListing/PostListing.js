@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import { Loader, Button, Segment } from 'semantic-ui-react';
+import { Loader, Segment } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { Grid, Row, Col, Icon } from 'components/index';
 import PostCard from '../components/PostCard';

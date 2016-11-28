@@ -10,9 +10,7 @@ const BlogContainer = (props: { children: ReactChildren }) => {
     <div>
       <PageTemplate
         helmetMeta={ <Helmet title="Blog" /> }
-        footer={
-          <Footer />
-        }
+        footer={ <Footer /> }
       >
         { props.children }
       </PageTemplate>

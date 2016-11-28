@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { asyncConnect } from 'redux-connect';
 import type { Block as BlockType } from 'types/models';
+import getDndContext from 'core/utils/dndContext';
 import { areBlocksLoaded, fetchBlocks, createBlock } from './reducer';
 import Blocks from './components/Blocks';
 

@@ -33,10 +33,9 @@ munge_underscores=false
 module.name_mapper='^\(.*\)\.\(eot\|gif\|ico\|jpg\|jpeg\|otf\|mp3\|mp4\|ogg\|png\|sss\|svg\|swf\|ttf\|webp\|woff\|woff2\|dll\)$' -> '<PROJECT_ROOT>/tools/flow/stubs/WebpackAsset.js.flow'
 module.name_mapper='^\(.*\)\.\(css\|scss\)$' -> '<PROJECT_ROOT>/tools/flow/stubs/WebpackAsset.scss.flow'
 module.name_mapper='^\(state\|components\|scenes\|core\|types\|theme\)\/\(.*\)$' -> '<PROJECT_ROOT>/src/common/\1/\2'
-module.name_mapper='^\(apicore\)\/\(.*\)$' -> '<PROJECT_ROOT>/src/api/core/\1/\2'
 
 suppress_type=$FlowIssues
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe
 suppress_comment=\\(.\\|\n\\)*\\$FlowIssue
 [version]
-0.35.0
+0.36.0

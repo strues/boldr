@@ -22,13 +22,6 @@ export default (store, connect) => ({
         .catch(errorLoading);
     },
   }, {
-    path: 'search/:query',
-    getComponent(nextState, cb) {
-      System.import('./Search')
-        .then(loadModule(cb))
-        .catch(errorLoading);
-    },
-  }, {
     path: 'tags/:name',
     getComponent(nextState, cb) {
       System.import('./TagList')

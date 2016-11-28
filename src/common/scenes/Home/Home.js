@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Container } from 'semantic-ui-react';
-import { Row, Hero, PrimaryHeader, Footer } from 'components/index';
+import { Row, Hero, Footer } from 'components/index';
 import { getPageByLabel } from 'state/selectors';
 import PageTemplate from 'theme/Boldr/PageTemplate';
 
@@ -25,7 +25,7 @@ const Home = (props: Props) => {
       >
       <Container fluid>
         <Row style={ { padding: '25px' } }>
-
+          Placeholder
         </Row>
       </Container>
       </PageTemplate>

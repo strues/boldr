@@ -1,9 +1,7 @@
-import BoldrWrapper from './BoldrWrapper';
+import App from 'components/App';
 import Account from './Account';
 import Blog from './Blog';
 import Dashboard from './Dashboard';
-
-if (typeof require.ensure !== 'function') require.ensure = (deps, cb) => cb(require);
 
 const errorLoading = (err) => {
   console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
@@ -13,19 +11,14 @@ const loadModule = (cb) => (componentModule) => {
   cb(null, componentModule.default);
 };
 
-export default (store) => {
-  const connect = (fn) => (nextState, replaceState) => fn(store, nextState, replaceState);
-
-  return {
+export default function createRoutes(store) {
+  const root = {
     path: '/',
-    component: BoldrWrapper,
-    indexRoute: {
-      component: require('./Home').default,
-    },
+    component: App,
     childRoutes: [
-      Account(store, connect),
-      Blog(store, connect),
-      Dashboard(store, connect),
+      Account(store),
+      Blog(store),
+      Dashboard(store),
       {
         path: 'about',
         getComponent(nextState, cb) {
@@ -43,5 +36,9 @@ export default (store) => {
         },
       },
     ],
+    indexRoute: {
+      component: require('./Home').default,
+    },
   };
-};
+  return root;
+}
