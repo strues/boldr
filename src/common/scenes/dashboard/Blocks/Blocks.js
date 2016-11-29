@@ -3,7 +3,7 @@ import React from 'react';
 import { Grid, Col, Row } from 'components/index';
 import { Menu, Message, Segment, Icon, Button } from 'semantic-ui-react';
 import type { Block as BlockType } from 'types/models';
-import { Block, CreateBlockForm } from '../';
+import { Block, CreateBlockForm } from './components';
 
 type Props = {
   handleSubmit: () => void,

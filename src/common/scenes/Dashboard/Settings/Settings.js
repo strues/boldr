@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Button, Icon, Table, Segment } from 'semantic-ui-react';
 import type { Setting } from 'types/models';
-import SettingRow from './SettingRow';
+import { SettingsItem } from './components';
 
 type Props = {
   boldr?: Object,
@@ -35,7 +35,7 @@ class Settings extends Component {
         <Table.Body>
            {
              this.props.allSettings.map(setting =>
-               <SettingRow key={ setting.id } setting={ setting } />,
+               <SettingsItem key={ setting.id } setting={ setting } />,
              )
            }
         </Table.Body>

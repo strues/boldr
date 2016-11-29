@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header, Segment } from 'semantic-ui-react';
-import Page from './Page';
+import Page from './components/Page';
 
 const Pages = (props: { pages: Array<Object> }) => {
   return (

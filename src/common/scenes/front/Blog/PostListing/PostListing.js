@@ -4,7 +4,7 @@ import { Loader, Segment } from 'semantic-ui-react';
 import styled from 'styled-components';
 import { Grid, Row, Col, Icon } from 'components/index';
 import PostCard from '../components/PostCard';
-import type { Post } from '../../../types/models';
+import type { Post } from 'types/models';
 
 export type Props = {
   posts: Array<Post>,

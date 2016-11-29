@@ -4,7 +4,7 @@ import Widget from 'components/Widget';
 
 import { Col, Row } from 'components/index';
 import { loadSiteActivity } from '../reducer';
-import ActivityWidget from './components/ActivityWidget';
+import ActivityWidget from '../components/ActivityWidget';
 
 class DashboardWidgets extends Component {
   render() {

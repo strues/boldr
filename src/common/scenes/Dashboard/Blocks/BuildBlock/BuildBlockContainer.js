@@ -2,11 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import getDndContext from 'core/utils/dndContext';
 import update from 'immutability-helper';
-import Sections from './components/Sections';
-import SectionsStore from './components/Sections/SectionsStore';
-import Board from './components/Board';
-import BoardStore from './components/Board/BoardStore';
-import Catalog from './components/Catalog';
+import { Board, Sections, BoardStore, Catalog, SectionsStore } from '../components';
+
 import './style.css';
 
 class BuildBlockContainer extends Component {

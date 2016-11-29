@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { getPageByLabel } from 'state/selectors';
+import PageForm from '../components/PageForm';
 
 type Props = {
   params: Object,
@@ -15,8 +16,10 @@ class PageBuilder extends Component {
       <div>
       PageBuilder
       {
-        this.props.params.label ? <h1>Editing { this.props.params.label } </h1> : <h2>New</h2>
+        this.props.params.label ? <h1>Editing { this.props.params.label }</h1> : <h2>New</h2>
       }
+
+      <PageForm />
       </div>
     );
   }

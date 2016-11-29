@@ -6,7 +6,7 @@ import { BoldrEditor } from 'boldr-editor';
 import renderTextField from 'components/FormComponents/TextField';
 import '../../../../../../../node_modules/boldr-editor/dist/boldreditor.css';
 
-class EditorForm extends Component {
+class PostEditorForm extends Component {
   constructor(props) {
     super();
     this.checkEditStatus = this.checkEditStatus.bind(this);
@@ -103,10 +103,10 @@ class EditorForm extends Component {
   }
 }
 export default reduxForm({
-  form: 'EditorForm',
-})(EditorForm);
+  form: 'postEditorForm',
+})(PostEditorForm);
 
-EditorForm.propTypes = {
+PostEditorForm.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
   editing: PropTypes.bool,
   reset: PropTypes.func,

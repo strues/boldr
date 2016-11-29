@@ -13,7 +13,7 @@ type Props = {
   setting: Setting
 };
 
-class SettingRow extends Component {
+class SettingsItem extends Component {
   constructor() {
     super();
     this.state = {
@@ -74,4 +74,4 @@ class SettingRow extends Component {
   }
 }
 
-export default connect(null, { updateBoldrSettings })(SettingRow);
+export default connect(null, { updateBoldrSettings })(SettingsItem);

@@ -5,8 +5,8 @@ import { asyncConnect } from 'redux-connect';
 import { Grid } from 'components/index';
 import { GRID, LIST } from 'core/config/layouts';
 import { changeLayout } from 'state/dux/ui';
-import { getPosts, fetchPostsIfNeeded } from '../../../state';
-import type { Post } from '../../../types/models'; // eslint-disable-line
+import { getPosts, fetchPostsIfNeeded } from 'state/index';
+import type { Post } from 'types/models'; // eslint-disable-line
 import PostListing from './PostListing';
 
 export type Props = {

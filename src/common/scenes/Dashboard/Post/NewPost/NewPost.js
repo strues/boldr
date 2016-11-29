@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { createPost } from 'state/dux/post';
-import { EditorForm } from '../components';
-import type { Post } from '../../../../types/models';
+import { PostEditorForm } from '../components';
+import type { Post } from 'types/models';
 
 export type Props = {
   dispatch: () => void,
@@ -38,7 +38,7 @@ class NewPost extends Component {
   render() {
     return (
       <div>
-        <EditorForm
+        <PostEditorForm
           isEditing={ false }
           onSubmit={ this.props.onFormSubmit }
         />

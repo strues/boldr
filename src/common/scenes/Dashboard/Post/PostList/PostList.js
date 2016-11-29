@@ -5,7 +5,7 @@ import { Item, Segment } from 'semantic-ui-react';
 import { Icon } from 'components/index';
 import { fetchPostsIfNeeded, getPosts, deletePost } from '../../../../state/dux/post';
 import { PostListItem } from '../components';
-import type { Post } from '../../../../types/models';
+import type { Post } from 'types/models';
 
 export type Props = {
   children?: ReactElement,

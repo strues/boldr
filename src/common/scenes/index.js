@@ -1,7 +1,7 @@
 import App from 'components/App';
-import Account from './Account';
-import Blog from './Blog';
-import Dashboard from './Dashboard';
+import Account from './front/Account';
+import Blog from './front/Blog';
+import Dashboard from './dashboard';
 
 const errorLoading = (err) => {
   console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
@@ -22,7 +22,7 @@ export default function createRoutes(store) {
       {
         path: 'about',
         getComponent(nextState, cb) {
-          System.import('./About')
+          System.import('./front/About')
             .then(loadModule(cb))
             .catch(errorLoading);
         },
@@ -30,14 +30,14 @@ export default function createRoutes(store) {
       {
         path: '*',
         getComponent(location, cb) {
-          System.import('./Error404')
+          System.import('./front/Error404')
             .then(loadModule(cb))
             .catch(errorLoading);
         },
       },
     ],
     indexRoute: {
-      component: require('./Home').default,
+      component: require('./front/Home').default,
     },
   };
   return root;
