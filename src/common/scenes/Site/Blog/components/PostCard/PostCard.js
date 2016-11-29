@@ -3,7 +3,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import dateFns from 'date-fns';
 // import { Card, Image } from 'semantic-ui-react';
-import { Row, Button, Card, CardImage, CardFooter, CardContent, Divider } from 'components/index';
+import { Row, Button, Card, CardImage, CardFooter, CardContent, Divider } from '../../../../../components/index';
 import type { Post } from 'types/models';
 import TagBlock from '../TagBlock';
 

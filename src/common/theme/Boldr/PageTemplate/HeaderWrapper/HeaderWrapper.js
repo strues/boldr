@@ -71,7 +71,7 @@ class HeaderWrapper extends Component {
   }
 
   handleDashClick = (e) => {
-    this.props.navigate('/cp');
+    this.props.navigate('/dashboard');
   }
   props: Props;
   render() {

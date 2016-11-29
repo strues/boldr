@@ -2,12 +2,12 @@ import * as api from 'core/services/api';
 import { notificationSend } from 'state/dux/notifications';
 import * as notif from 'core/config/notifications';
 
-const FETCH_BLOCKS_REQUEST = '@boldr/dashboard/FETCH_BLOCKS_REQUEST';
-const FETCH_BLOCKS_SUCCESS = '@boldr/dashboard/FETCH_BLOCKS_SUCCESS';
-const FETCH_BLOCKS_FAILURE = '@boldr/dashboard/FETCH_BLOCKS_FAILURE';
-const CREATE_BLOCK_REQUEST = '@boldr/dashboard/CREATE_BLOCK_REQUEST';
-const CREATE_BLOCK_SUCCESS = '@boldr/dashboard/CREATE_BLOCK_SUCCESS';
-const CREATE_BLOCK_FAILURE = '@boldr/dashboard/CREATE_BLOCK_FAILURE';
+const FETCH_BLOCKS_REQUEST = '@boldr/cp/FETCH_BLOCKS_REQUEST';
+const FETCH_BLOCKS_SUCCESS = '@boldr/cp/FETCH_BLOCKS_SUCCESS';
+const FETCH_BLOCKS_FAILURE = '@boldr/cp/FETCH_BLOCKS_FAILURE';
+const CREATE_BLOCK_REQUEST = '@boldr/cp/CREATE_BLOCK_REQUEST';
+const CREATE_BLOCK_SUCCESS = '@boldr/cp/CREATE_BLOCK_SUCCESS';
+const CREATE_BLOCK_FAILURE = '@boldr/cp/CREATE_BLOCK_FAILURE';
 
 export function fetchBlocks() {
   return (dispatch: Function) => {
