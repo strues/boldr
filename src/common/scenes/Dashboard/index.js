@@ -11,7 +11,7 @@ const loadModule = (cb) => (componentModule) => {
 export default (store, connect) => {
   const { injectReducer } = getAsyncInjectors(store);
   return {
-    path: 'cp',
+    path: 'dashboard',
     component: require('./Dashboard').default,
     indexRoute: {
       getComponent(nextState, cb) {
