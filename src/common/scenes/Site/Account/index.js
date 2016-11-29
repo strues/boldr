@@ -41,8 +41,20 @@ export default (store, connect) => ({
         './ResetPassword',
       ], (require) => {
         const ResetPage = require('./ResetPassword').default;
-        
+
         cb(null, ResetPage);
+      });
+    },
+  },
+  {
+    path: 'verify/:token',
+    getComponent(nextState, cb) {
+      require.ensure([
+        './Verify',
+      ], (require) => {
+        const VerifyPage = require('./Verify').default;
+
+        cb(null, VerifyPage);
       });
     },
   },

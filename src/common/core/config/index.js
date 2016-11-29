@@ -14,6 +14,7 @@ import {
   API_ATTACHMENTS,
   API_TAGS,
   API_SETTINGS,
+  API_TOKEN,
   API_NAVIGATION,
   API_BLOCKS,
 } from './endpoints';
@@ -39,4 +40,5 @@ export {
   API_SETTINGS,
   API_NAVIGATION,
   API_BLOCKS,
+  API_TOKEN,
 };

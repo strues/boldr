@@ -12,6 +12,7 @@ import {
   API_LINKS,
   API_ATTACHMENTS,
   API_ACTIVITY,
+  API_TOKEN,
   API_USERS,
 } from '../config';
 import { getToken } from './token';
@@ -109,7 +110,7 @@ export const doSignup = (data) => request.post(`${API_AUTH}/signup`).send(data);
 export const doLogin = (loginData) => request.post(`${API_AUTH}/login`).send(loginData);
 
 export function doForgotPassword(email) {
-  return fetch(`${API_AUTH}/forgot-password`, {
+  return fetch(`${API_TOKEN}/forgot-password`, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -119,12 +120,18 @@ export function doForgotPassword(email) {
 }
 
 export function doResetPassword(password, token) {
-  return fetch(`${API_AUTH}/reset-password/${token}`, {
+  return fetch(`${API_TOKEN}/reset-password/${token}`, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       password,
     }),
+  });
+}
+
+export function doVerifyAccount(token) {
+  return fetch(`${API_AUTH}/verification/${token}`, {
+    headers: { 'Content-Type': 'application/json' },
   });
 }
 
@@ -145,7 +152,7 @@ export function doUpdateSettings(payload) {
     value: payload.value,
   };
   return request.put(`${API_SETTINGS}/${settingId}`)
-    .set('Authorization', `Bearer ${AUTH_TOKEN}`)
+    .set('Authorization', `Bearer ${getToken()}`)
     .send(data);
 }
 

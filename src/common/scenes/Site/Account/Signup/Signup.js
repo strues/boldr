@@ -49,7 +49,7 @@ class Signup extends Component {
               <Col xs={ 12 }>
                 <Row xsCenter>
                   <Col xs={ 8 }>
-                    <Card style={ { width: '650px', marginTop: '250px', marginBottom: '400px' } }>
+                    <Card style={ { width: '650px', marginBottom: '400px' } }>
                       { renderHeader }
                       <Card.Content>
                       <SignupForm onSubmit={ this.handleOnSubmit } />
@@ -67,9 +67,10 @@ class Signup extends Component {
   }
 }
 
-function mapStateToProps({ auth }) {
+function mapStateToProps(state) {
   return {
-    auth,
+    auth: state.auth,
+    
   };
 }
 

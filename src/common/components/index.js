@@ -14,6 +14,7 @@ import Widget from './Widget';
 import { Card, CardContent, CardFooter, CardImage } from './Card';
 import Icon from './Icon';
 import Divider from './Divider';
+import Dialog from './Dialog';
 
 export {
   Avatar,
@@ -26,6 +27,7 @@ export {
   Hero,
   Icon,
   Notifications,
+  Dialog,
   PrimaryHeader,
   Row,
   S3Uploader,

@@ -1,6 +1,6 @@
 import { push } from 'react-router-redux';
 import * as api from 'core/services/api';
-import { setToken, getToken } from 'core/services/token';
+import { setToken } from 'core/services/token';
 import { TOKEN_KEY } from 'core/config';
 import * as notif from 'core/config/notifications';
 import { notificationSend } from './notifications';
@@ -22,6 +22,10 @@ export const FORGOT_PASSWORD_FAILURE = 'AUTH/FORGOT_PASSWORD_FAILURE';
 export const RESET_PASSWORD_REQUEST = 'AUTH/RESET_PASSWORD_REQUEST';
 export const RESET_PASSWORD_SUCCESS = 'AUTH/RESET_PASSWORD_SUCCESS';
 export const RESET_PASSWORD_FAILURE = 'AUTH/RESET_PASSWORD_FAILURE';
+export const VERIFY_ACCOUNT_REQUEST = '@boldr/AUTH/VERIFY_ACCOUNT_REQUEST';
+export const VERIFY_ACCOUNT_SUCCESS = '@boldr/AUTH/VERIFY_ACCOUNT_SUCCESS';
+export const VERIFY_ACCOUNT_FAILURE = '@boldr/AUTH/VERIFY_ACCOUNT_FAILURE';
+
 
 /**
   * SIGNUP ACTIONS
@@ -85,6 +89,12 @@ export function login(loginData, redir) {
         dispatch(loginSuccess(response));
         dispatch(notificationSend(notif.MSG_LOGIN_SUCCESS));
         dispatch(push('/'));
+      })
+      .catch(err => {
+        dispatch(loginError(err));
+        dispatch(notificationSend({
+          message: err.response.body.message, kind: 'error', dismissAfter: 3000,
+        }));
       });
   };
 }
@@ -103,7 +113,7 @@ function loginSuccess(response) {
 function loginError(err) {
   return {
     type: LOGIN_FAILURE,
-    error: err,
+    error: err.response.body.message,
   };
 }
 
@@ -221,7 +231,33 @@ export function resetPassword(password, token) {
       });
   };
 }
-
+export function verifyAccount(token) {
+  return (dispatch) => {
+    dispatch({
+      type: VERIFY_ACCOUNT_REQUEST,
+    });
+    return api.doVerifyAccount(token)
+      .then((response) => {
+        if (response.ok) {
+          return response.json().then((json) => {
+            push('/login');
+            dispatch({
+              type: VERIFY_ACCOUNT_SUCCESS,
+            });
+            dispatch(push('/'));
+            dispatch(notificationSend(notif.MSG_RESET_PW_SUCCESS));
+          });
+        } else {
+          return response.json().then((json) => {
+            dispatch({
+              type: VERIFY_ACCOUNT_FAILURE,
+              error: Array.isArray(json) ? json : [json],
+            });
+          });
+        }
+      });
+  };
+}
 /**
  * INITIAL STATE
  */

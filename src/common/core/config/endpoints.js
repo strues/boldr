@@ -17,3 +17,4 @@ export const API_ATTACHMENTS = `${API_PREFIX}/attachments`;
 export const API_TAGS = `${API_PREFIX}/tags`;
 export const API_SETTINGS = `${API_PREFIX}/settings`;
 export const API_NAVIGATION = `${API_PREFIX}/navigations`;
+export const API_TOKEN = `${API_PREFIX}/tokens`;
