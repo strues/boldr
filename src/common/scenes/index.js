@@ -1,7 +1,7 @@
 import App from 'components/App';
 import Account from './Site/Account';
 import Blog from './Site/Blog';
-import Dashboard from './Dashboard';
+import Dashboard from './ControlPanel';
 
 const errorLoading = (err) => {
   console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
