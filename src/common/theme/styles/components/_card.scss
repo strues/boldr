@@ -30,6 +30,14 @@
   vertical-align: middle;
 
   .tagblock {
+<<<<<<< HEAD
     align-items: center!important;
+=======
+    align-items: center !important;
+
+    a {
+      margin-left: 5px;
+    }
+>>>>>>> develop
   }
 }

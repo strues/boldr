@@ -1,9 +1,7 @@
-import BoldrWrapper from './BoldrWrapper';
-import Account from './Account';
-import Blog from './Blog';
+import App from 'components/App';
+import Account from './Site/Account';
+import Blog from './Site/Blog';
 import Dashboard from './Dashboard';
-
-if (typeof require.ensure !== 'function') require.ensure = (deps, cb) => cb(require);
 
 const errorLoading = (err) => {
   console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
@@ -13,23 +11,29 @@ const loadModule = (cb) => (componentModule) => {
   cb(null, componentModule.default);
 };
 
-export default (store) => {
-  const connect = (fn) => (nextState, replaceState) => fn(store, nextState, replaceState);
-
-  return {
+export default function createRoutes(store) {
+  const root = {
     path: '/',
+<<<<<<< HEAD:src/common/scenes/index.js
     component: BoldrWrapper,
     indexRoute: {
       component: require('./Home').default,
     },
+=======
+    component: App,
+>>>>>>> develop:src/common/scenes/index.js
     childRoutes: [
-      Account(store, connect),
-      Blog(store, connect),
-      Dashboard(store, connect),
+      Account(store),
+      Blog(store),
+      Dashboard(store),
       {
         path: 'about',
         getComponent(nextState, cb) {
+<<<<<<< HEAD:src/common/scenes/index.js
           System.import('./About')
+=======
+          System.import('./Site/About')
+>>>>>>> develop:src/common/scenes/index.js
             .then(loadModule(cb))
             .catch(errorLoading);
         },
@@ -37,11 +41,19 @@ export default (store) => {
       {
         path: '*',
         getComponent(location, cb) {
+<<<<<<< HEAD:src/common/scenes/index.js
           System.import('./Error404')
+=======
+          System.import('./Site/Error404')
+>>>>>>> develop:src/common/scenes/index.js
             .then(loadModule(cb))
             .catch(errorLoading);
         },
       },
     ],
+    indexRoute: {
+      component: require('./Site/Home').default,
+    },
   };
-};
+  return root;
+}

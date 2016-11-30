@@ -1,8 +1,13 @@
 /* eslint-disable no-unused-expressions */
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+<<<<<<< HEAD:src/common/scenes/Dashboard/Dashboard.js
 import Icon from 'components/Icon';
 import { Grid, Col, Authenticated } from '../../components';
+=======
+import type { ReactElement } from 'types/react';
+import { Grid, Col, Authenticated, Icon } from 'components/index';
+>>>>>>> develop:src/common/scenes/Dashboard/Dashboard.js
 import { Sidebar, Titlebar, SidebarContent } from './components/Sidebar';
 import { showSidebar, hideSidebar } from './reducer';
 

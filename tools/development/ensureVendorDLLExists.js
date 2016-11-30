@@ -4,12 +4,19 @@ const pathResolve = require('path').resolve;
 const md5 = require('md5');
 const fs = require('fs');
 const globSync = require('glob').sync;
+<<<<<<< HEAD
 const appRoot = require('app-root-dir');
+=======
+const appRootPath = require('app-root-dir').get();
+>>>>>>> develop
 const vendorDLLPaths = require('../config/vendorDLLPaths');
 const { createNotification } = require('../utils');
 const envVars = require('../config/envVars');
 
+<<<<<<< HEAD
 const appRootPath = appRoot.get();
+=======
+>>>>>>> develop
 // -----------------------------------------------------------------------------
 // PRIVATES
 

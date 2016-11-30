@@ -121,9 +121,17 @@ export default (store, connect) => {
       {
         path: 'pages/builder',
         getComponent(nextState, cb) {
-          System.import('./Pages/PageBuilder')
-        .then(loadModule(cb))
-        .catch(errorLoading);
+          const importModules = Promise.all([
+            System.import('./Pages/PageBuilder/reducer'),
+            System.import('./Pages/PageBuilder'),
+          ]);
+          const renderRoute = loadModule(cb);
+          importModules.then(([reducer, component]) => {
+            injectReducer('pageBuilder', reducer.default);
+            renderRoute(component);
+          });
+
+          importModules.catch(errorLoading);
         },
       },
       {

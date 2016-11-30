@@ -16,7 +16,6 @@ import {
   TOKEN_KEY,
 } from './config';
 
-import ApiClient from './services/ApiClient';
 import { getAsyncInjectors } from './utils/injectAsync';
 
 export {
@@ -35,6 +34,5 @@ export {
   API_PAGE,
   API_SETTINGS,
   TOKEN_KEY,
-  ApiClient,
   getAsyncInjectors,
 };

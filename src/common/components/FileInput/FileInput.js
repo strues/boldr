@@ -18,7 +18,6 @@ class FileInput extends PureComponent {
 
   static defaultProps = {
     label: 'Select a file from your computer',
-    iconChildren: 'file_upload',
   };
 
   constructor(props) {

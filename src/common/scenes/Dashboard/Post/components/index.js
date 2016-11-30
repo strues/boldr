@@ -1,7 +1,7 @@
-import EditorForm from './EditorForm';
 import PostListItem from './PostListItem';
+import PostEditorForm from './PostEditorForm';
 
 export {
-  EditorForm,
   PostListItem,
+  PostEditorForm,
 };

@@ -1,6 +1,5 @@
 import fetch from 'isomorphic-fetch';
 import request from 'superagent';
-import { getToken } from './token';
 // Import API endpoints
 import {
   API_POSTS,
@@ -13,9 +12,10 @@ import {
   API_LINKS,
   API_ATTACHMENTS,
   API_ACTIVITY,
+  API_TOKEN,
   API_USERS,
-  TOKEN_KEY,
 } from '../config';
+import { getToken } from './token';
 
 const AUTH_TOKEN = getToken();
 /**
@@ -94,7 +94,7 @@ export function doUpdatePost(postData) {
         feature_image: postData.feature_image,
         // tag: postData.tag,
         status: postData.status,
-      })
+      });
 }
 /**
   * AUTH API ROUTES
@@ -110,7 +110,7 @@ export const doSignup = (data) => request.post(`${API_AUTH}/signup`).send(data);
 export const doLogin = (loginData) => request.post(`${API_AUTH}/login`).send(loginData);
 
 export function doForgotPassword(email) {
-  return fetch(`${API_AUTH}/forgot-password`, {
+  return fetch(`${API_TOKEN}/forgot-password`, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
@@ -120,12 +120,18 @@ export function doForgotPassword(email) {
 }
 
 export function doResetPassword(password, token) {
-  return fetch(`${API_AUTH}/reset-password/${token}`, {
+  return fetch(`${API_TOKEN}/reset-password/${token}`, {
     method: 'post',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
       password,
     }),
+  });
+}
+
+export function doVerifyAccount(token) {
+  return fetch(`${API_AUTH}/verification/${token}`, {
+    headers: { 'Content-Type': 'application/json' },
   });
 }
 
@@ -146,7 +152,7 @@ export function doUpdateSettings(payload) {
     value: payload.value,
   };
   return request.put(`${API_SETTINGS}/${settingId}`)
-    .set('Authorization', `Bearer ${AUTH_TOKEN}`)
+    .set('Authorization', `Bearer ${getToken()}`)
     .send(data);
 }
 
@@ -233,9 +239,10 @@ export function doFetchPageUrl(url) {
   return request
     .get(`${API_PAGES}/${url}`);
 }
+
 export function doCreatePage(payload) {
   return request
-    .post(`${API_PAGES}/dashboard`, payload)
+    .post(API_PAGES, payload)
     .set('Authorization', `Bearer ${AUTH_TOKEN}`);
 }
 
@@ -275,6 +282,12 @@ export function doUpdateMember(userData) {
     .send(payload);
 }
 
+export function doFetchBlocks() {
+  return fetch(`${API_BLOCKS}`, {
+    method: 'get',
+    headers: { 'Content-Type': 'application/json' },
+  }).then(response => processResponse(response));
+}
 
 export function doCreateBlock(data) {
   return request

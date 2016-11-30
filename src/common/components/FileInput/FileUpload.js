@@ -40,22 +40,6 @@ export default class FileUpload extends PureComponent {
     className: PropTypes.string,
 
     /**
-     * Boolean if the `FileInput` should be styled with the primary color.
-     */
-    primary: PropTypes.bool,
-
-    /**
-     * Boolean if the `FileInput` should be styled with the secondary color.
-     */
-    secondary: PropTypes.bool,
-
-    /**
-     * Boolean if the `FileInput` should be styled as a flat button instead of a
-     * raised button.
-     */
-    flat: PropTypes.bool,
-
-    /**
      * This should be a comma separated list of Media Types that the `FileInput` can
      * accept. If this prop is left blank, any file will be accepted.
      *
@@ -78,15 +62,6 @@ export default class FileUpload extends PureComponent {
      */
     label: PropTypes.string,
 
-    /**
-     * The icon children to use for the upload icon.
-     */
-    iconChildren: PropTypes.node,
-
-    /**
-     * The icon className to use for the upload icon.
-     */
-    iconClassName: PropTypes.string,
 
     /**
      * An optional max size for the file. If the file is greater than

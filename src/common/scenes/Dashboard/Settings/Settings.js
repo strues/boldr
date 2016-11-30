@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Button, Icon, Table, Segment } from 'semantic-ui-react';
 import type { Setting } from 'types/models';
-import SettingRow from './SettingRow';
+import { showModal, hideModal } from 'state/dux/ui';
+import { Dialog } from 'components/index';
+import { SettingsItem, AddSettingForm } from './components';
 
 type Props = {
   boldr?: Object,
   allSettings: Array<Setting>,
+  dispatch: Function,
   updateBoldrSettings?: Function,
+  ui: Object,
 };
 
 
@@ -19,6 +24,10 @@ class Settings extends Component {
     };
   }
   props: Props;
+
+  open = () => this.props.dispatch(showModal());
+  close = () => this.props.dispatch(hideModal());
+
   render() {
     return (
       <Segment>
@@ -35,7 +44,7 @@ class Settings extends Component {
         <Table.Body>
            {
              this.props.allSettings.map(setting =>
-               <SettingRow key={ setting.id } setting={ setting } />,
+               <SettingsItem key={ setting.id } setting={ setting } />,
              )
            }
         </Table.Body>
@@ -44,16 +53,26 @@ class Settings extends Component {
            <Table.Row>
              <Table.HeaderCell />
              <Table.HeaderCell colSpan="4">
-               <Button floated="right" icon labelPosition="left" primary size="small">
+               <Button floated="right" icon labelPosition="left" primary size="small" onClick={ this.open }>
                  <Icon name="setting" /> Add Setting
                </Button>
              </Table.HeaderCell>
            </Table.Row>
          </Table.Footer>
        </Table>
+       <Dialog open={ this.props.ui.modal } onOpen={ this.open } onClose={ this.close } title="Add a setting">
+         <AddSettingForm />
+       </Dialog>
+
       </Segment>
     );
   }
 }
 
-export default Settings;
+const mapStateToProps = (state) => {
+  return {
+    ui: state.ui,
+  };
+};
+
+export default connect(mapStateToProps)(Settings);

@@ -4,8 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-connect';
 import { Modal } from 'semantic-ui-react';
-import MembersList from './components/MembersList';
-import EditMemberForm from './components/EditMemberForm';
+import { MembersList, EditMemberForm } from './components';
 import { loadSiteMembers, memberSelected, updateMember } from './reducer';
 
 export type Props = {

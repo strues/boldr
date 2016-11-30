@@ -37,6 +37,8 @@ import {
   loadBoldrSettings,
 } from './dux/boldr/actions';
 
+import { setMobileDevice } from './dux/ui';
+
 import {
   getSettings,
   areSettingsLoaded,
@@ -58,6 +60,7 @@ export {
   login,
   logout,
   checkAuth,
+  setMobileDevice,
   forgotPassword,
   resetPassword,
   notificationSend,

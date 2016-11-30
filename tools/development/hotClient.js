@@ -12,6 +12,7 @@ class HotClient {
     this.webpackDevMiddleware = createWebpackMiddleware(compiler, {
       quiet: true,
       noInfo: true,
+      stats: 'errors-only',
       headers: {
         'Access-Control-Allow-Origin': '*',
       },

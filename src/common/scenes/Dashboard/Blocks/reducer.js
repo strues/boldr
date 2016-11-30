@@ -1,24 +1,49 @@
-import { combineReducers } from 'redux';
 import * as api from 'core/services/api';
-import { API_BLOCKS } from 'core/config/endpoints';
 import { notificationSend } from 'state/dux/notifications';
 import * as notif from 'core/config/notifications';
 
-const FETCH_BLOCKS_REQUEST = '@boldr/dashboard/FETCH_BLOCKS_REQUEST';
-const FETCH_BLOCKS_SUCCESS = '@boldr/dashboard/FETCH_BLOCKS_SUCCESS';
-const FETCH_BLOCKS_FAILURE = '@boldr/dashboard/FETCH_BLOCKS_FAILURE';
-const CREATE_BLOCK_REQUEST = '@boldr/dashboard/CREATE_BLOCK_REQUEST';
-const CREATE_BLOCK_SUCCESS = '@boldr/dashboard/CREATE_BLOCK_SUCCESS';
-const CREATE_BLOCK_FAILURE = '@boldr/dashboard/CREATE_BLOCK_FAILURE';
+const FETCH_BLOCKS_REQUEST = '@boldr/cp/FETCH_BLOCKS_REQUEST';
+const FETCH_BLOCKS_SUCCESS = '@boldr/cp/FETCH_BLOCKS_SUCCESS';
+const FETCH_BLOCKS_FAILURE = '@boldr/cp/FETCH_BLOCKS_FAILURE';
+const CREATE_BLOCK_REQUEST = '@boldr/cp/CREATE_BLOCK_REQUEST';
+const CREATE_BLOCK_SUCCESS = '@boldr/cp/CREATE_BLOCK_SUCCESS';
+const CREATE_BLOCK_FAILURE = '@boldr/cp/CREATE_BLOCK_FAILURE';
+
+export function fetchBlocks() {
+  return (dispatch: Function) => {
+    dispatch(requestBlocks());
+    return api.doFetchBlocks()
+      .then(json => {
+        dispatch(receiveBlocks(json));
+      })
+      .catch(err => {
+        dispatch(receiveBlocksFailed(err));
+      });
+  };
+}
+const requestBlocks = () => {
+  return { type: FETCH_BLOCKS_REQUEST };
+};
+
+const receiveBlocks = (json) => {
+  return {
+    type: FETCH_BLOCKS_SUCCESS,
+    payload: json,
+  };
+};
+
+const receiveBlocksFailed = (err) => ({
+  type: FETCH_BLOCKS_FAILURE, error: err,
+});
 
 /**
-  * CREATE POST ACTIONS
+  * CREATE BLOCK ACTIONS
   * -------------------------
-  * @exports createPost
+  * @exports createBlock
   *****************************************************************/
 
 /**
- * Create a new post takes the submitted form-data as data and
+ * Create a new block takes the submitted form-data as data and
  * sends the information to the api.
  * @param  {Object} data        The data from the form / post editor
  * @return {Object}             Response object.
@@ -76,7 +101,7 @@ export default function blocksReducer(state = INITIAL_STATE, action = {}) {
     case FETCH_BLOCKS_SUCCESS:
       return {
         ...state,
-        all: action.result,
+        all: action.payload,
       };
 
     default:
@@ -86,11 +111,4 @@ export default function blocksReducer(state = INITIAL_STATE, action = {}) {
 
 export function areBlocksLoaded(globalState) {
   return globalState.blocks && globalState.blocks.loaded;
-}
-
-export function fetchBlocks() {
-  return {
-    types: [FETCH_BLOCKS_REQUEST, FETCH_BLOCKS_SUCCESS, FETCH_BLOCKS_FAILURE],
-    promise: (client) => client.get(`${API_BLOCKS}`),
-  };
 }

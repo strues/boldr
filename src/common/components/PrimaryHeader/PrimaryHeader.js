@@ -11,7 +11,6 @@ type Props = {
   settings: Object,
   boldr: Object,
   auth: Object,
-  handleItemClick: () => void,
   handleDashClick: () => void,
   handleLoginClick: () => void,
   handleSignupClick: () => void,

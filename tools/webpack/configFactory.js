@@ -15,14 +15,13 @@ const defs = require('../config/defs');
 const appName = require('../../package.json').name;
 
 const babel = require('./plugins/babel');
-const sw = require('./plugins/sw');
 const happy = require('./plugins/happy');
 
 const appRootPath = appRoot.get();
 function webpackConfigFactory({ target, mode }, { json }) {
-  if (!target || ['client', 'server', 'universalMiddleware'].findIndex(valid => target === valid) === -1) {
+  if (!target || ['client', 'server'].findIndex(valid => target === valid) === -1) {
     throw new Error(
-      'You must provide a "target" (client|server|universalMiddleware) to the webpackConfigFactory.'
+      'You must provide a "target" (client|server) to the webpackConfigFactory.'
     );
   }
 
@@ -83,7 +82,10 @@ function webpackConfigFactory({ target, mode }, { json }) {
       index: removeEmpty([
         ifDevClient('react-hot-loader/patch'),
         ifDevClient(`webpack-hot-middleware/client?reload=true&path=http://localhost:${envVars.WPDS_PORT}/__webpack_hmr`), // eslint-disable-line
+<<<<<<< HEAD
         ifClient('regenerator-runtime/runtime'),
+=======
+>>>>>>> develop
         `${defs.paths.src}/${target}/index.js`,
       ]),
     }),
@@ -155,6 +157,7 @@ function webpackConfigFactory({ target, mode }, { json }) {
           context: __dirname
         })
       ),
+<<<<<<< HEAD
       // happyPackPlugin({
       //   name: 'happypack-javascript',
       //   loaders: [{
@@ -173,6 +176,9 @@ function webpackConfigFactory({ target, mode }, { json }) {
       //     }
       //   ]
       // }),
+=======
+
+>>>>>>> develop
       ifProdClient(new SWPrecacheWebpackPlugin(merge({
           // Note: The default cache size is 2mb. This can be reconfigured:
           // maximumFileSizeToCacheInBytes: 2097152,

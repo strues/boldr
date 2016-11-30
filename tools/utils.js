@@ -52,7 +52,7 @@ function createNotification(options = {}) {
   });
 
   const level = options.level || 'info';
-  const msg = ` 📢   ${title} -> ${options.message}`;
+  const msg = ` 🌟  ${title} -> ${options.message}`;
 
   switch (level) {
     case 'warn': console.log(chalkWarning(msg)); break;

@@ -26,9 +26,13 @@ const MemberCard = (props) => {
        </Card.Description>
      </Card.Content>
      <Card.Content extra>
+<<<<<<< HEAD:src/common/scenes/Dashboard/Members/components/MemberCard/MemberCard.js
        <div className="ui two buttons">
          <Button onClick={ handleToggle }>Edit User</Button>
        </div>
+=======
+         <Button onClick={ handleToggle }>Edit User</Button>
+>>>>>>> develop:src/common/scenes/Dashboard/Members/components/MemberCard/MemberCard.js
      </Card.Content>
    </Card>
   );

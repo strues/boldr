@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { updatePost } from 'state/dux/post';
-import { EditorForm } from '../components';
+import { PostEditorForm } from '../components';
 
 export type Props = {
   dispatch: Function,
@@ -38,7 +38,7 @@ class PostEditor extends Component {
   render() {
     return (
       <div>
-        <EditorForm
+        <PostEditorForm
           initialValues={ this.props.currentPost }
           onSubmit={ this.handleSubmit }
           isEditing

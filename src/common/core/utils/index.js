@@ -153,3 +153,8 @@ export function isTouchDevice() {
   return typeof window !== 'undefined'
     && ('ontouchstart' in window || !!navigator.maxTouchPoints);
 }
+
+export const isMobile = () => {
+  if (typeof window === 'undefined') return false;
+  return document.documentElement.clientWidth < 768;
+};
