@@ -1,4 +1,5 @@
 
+
 const path = require('path');
 const envVars = require('../config/envVars');
 const ListenerManager = require('./listenerManager');
@@ -70,19 +71,6 @@ class HotServer {
       } else {
         startServer();
       }
-<<<<<<< HEAD
-    };
-
-    this.watcher = chokidar.watch([path.resolve(__dirname, '../../src/server')]);
-    this.watcher.on('ready', () => {
-      this.watcher
-        .on('add', compileHotServer)
-        .on('addDir', compileHotServer)
-        .on('change', compileHotServer)
-        .on('unlink', compileHotServer)
-        .on('unlinkDir', compileHotServer);
-=======
->>>>>>> develop
     });
 
     // Lets start the compiler.

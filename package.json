@@ -95,6 +95,7 @@
   },
   "dependencies": {
     "app-root-dir": "^1.0.2",
+    "axios": "^0.15.3",
     "bluebird": "^3.4.6",
     "body-parser": "^1.15.2",
     "boldr-editor": "^0.6.6",

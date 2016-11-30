@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-fetch';
+import axios from 'axios';
 import request from 'superagent';
 // Import API endpoints
 import {
@@ -14,10 +15,15 @@ import {
   API_ACTIVITY,
   API_TOKEN,
   API_USERS,
+  API_PREFIX,
 } from '../config';
 import { getToken } from './token';
 
 const AUTH_TOKEN = getToken();
+
+const apiClient = axios.create({
+  baseURL: API_PREFIX
+});
 /**
  * Converts the response from a fetch into useable JSON data.
  * @method processResponse
@@ -49,9 +55,11 @@ export const jsonHeaders = {
   * @exports doSelectPost
   * @exports doDeletePost
   *****************************************************************/
-export function doFetchPosts() {
-  return request.get(`${API_POSTS}?include=[author,tags]`);
-}
+// export function doFetchPosts() {
+//   return request.get(`${API_POSTS}?include=[author,tags]`);
+// }
+export const doFetchPosts = () =>
+  apiClient.get('/posts?include=[author,tags]');
 
 export function doGetPosts() {
   return fetch(`${API_POSTS}?include=[author,tags]`)

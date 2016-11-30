@@ -14,14 +14,7 @@ const loadModule = (cb) => (componentModule) => {
 export default function createRoutes(store) {
   const root = {
     path: '/',
-<<<<<<< HEAD:src/common/scenes/index.js
-    component: BoldrWrapper,
-    indexRoute: {
-      component: require('./Home').default,
-    },
-=======
     component: App,
->>>>>>> develop:src/common/scenes/index.js
     childRoutes: [
       Account(store),
       Blog(store),
@@ -29,11 +22,7 @@ export default function createRoutes(store) {
       {
         path: 'about',
         getComponent(nextState, cb) {
-<<<<<<< HEAD:src/common/scenes/index.js
-          System.import('./About')
-=======
           System.import('./Site/About')
->>>>>>> develop:src/common/scenes/index.js
             .then(loadModule(cb))
             .catch(errorLoading);
         },
@@ -41,11 +30,7 @@ export default function createRoutes(store) {
       {
         path: '*',
         getComponent(location, cb) {
-<<<<<<< HEAD:src/common/scenes/index.js
-          System.import('./Error404')
-=======
           System.import('./Site/Error404')
->>>>>>> develop:src/common/scenes/index.js
             .then(loadModule(cb))
             .catch(errorLoading);
         },
