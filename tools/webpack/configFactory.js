@@ -82,10 +82,6 @@ function webpackConfigFactory({ target, mode }, { json }) {
       index: removeEmpty([
         ifDevClient('react-hot-loader/patch'),
         ifDevClient(`webpack-hot-middleware/client?reload=true&path=http://localhost:${envVars.WPDS_PORT}/__webpack_hmr`), // eslint-disable-line
-<<<<<<< HEAD
-        ifClient('regenerator-runtime/runtime'),
-=======
->>>>>>> develop
         `${defs.paths.src}/${target}/index.js`,
       ]),
     }),
@@ -157,28 +153,6 @@ function webpackConfigFactory({ target, mode }, { json }) {
           context: __dirname
         })
       ),
-<<<<<<< HEAD
-      // happyPackPlugin({
-      //   name: 'happypack-javascript',
-      //   loaders: [{
-      //     path: 'babel-loader',
-      //     query: {
-      //       babelrc: false,
-      //       // cacheDirectory: path.resolve(os.tmpdir(), 'boldr', 'babelc'),
-      //       presets: [['boldr', { 'es2015': { 'modules': false }}]],
-      //       plugins: removeEmpty([
-      //         ifDevClient('react-hot-loader/babel'),
-      //           ['module-resolver', {
-      //             root: ['./src/cms/common']
-      //           }]
-      //         ])
-      //       }
-      //     }
-      //   ]
-      // }),
-=======
-
->>>>>>> develop
       ifProdClient(new SWPrecacheWebpackPlugin(merge({
           // Note: The default cache size is 2mb. This can be reconfigured:
           // maximumFileSizeToCacheInBytes: 2097152,
