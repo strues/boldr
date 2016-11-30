@@ -5,6 +5,7 @@ import deepRemove from 'core/utils/deepRemove';
 const SAVE_BLOCK_REQUEST = '@boldr/dashboard/SAVE_BLOCK_REQUEST';
 const SAVE_BLOCK_SUCCESS = '@boldr/dashboard/SAVE_BLOCK_SUCCESS';
 const SAVE_BLOCK_FAILURE = '@boldr/dashboard/SAVE_BLOCK_FAILURE';
+
 export const CHANGE = 'CHANGE';
 export const UPDATE_PROPS = 'UPDATE_PROPS';
 export const UPDATE_LAYOUT = 'UPDATE_LAYOUT';
