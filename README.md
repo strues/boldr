@@ -1,10 +1,10 @@
-![boldr logo](https://boldr.io/logo.png)
+![boldr logo](https://boldr.io/boldr.png)
 
 [![Build Status][circle-img]][circle-link] [![Code Climate][cc-img]][cc-link]  [![codecov](https://codecov.io/gh/strues/boldr/branch/master/graph/badge.svg)](https://codecov.io/gh/strues/boldr) [![Gitter][gitter-img]][gitter-link] [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
-# Boldr
+# What's Boldr?
 
-Boldr is an up and coming, modern content management framework / system. Boldr is a solid starting point for building your next great web application. In the future, the goal is to shape Boldr into a full content management system. However, here in the present, a framework, or strong base, is the most accurate way to describe the project. Boldr is built upon React, Node.js, and Postgres. It offers server-side rendering and a standalone REST api.
+Boldr is a modern content management framework. Think of Boldr as the solid foundation for building your next great web application. Unlike many CMS platforms, Boldr is entirely JavaScript. It features Universal / Isomorphic rendering for improved performance and Search Engine Optimization. Boldr uses Postgres as its database. Express serves the standalone API and the server-side rendering application. Redis provides the store for user sessions and query caching.
 
 **Table of Contents**
 - [Boldr](#boldr)
@@ -19,7 +19,6 @@ Boldr is an up and coming, modern content management framework / system. Boldr i
 - [Documentation](#documentation)
 - [Demo](#demo)
 
- > Your dreams are bold. Your thoughts are bold. So why shouldn't your CMS be a little, **Boldr**?
 
 ## Core Technologies
 
@@ -33,7 +32,8 @@ Boldr is an up and coming, modern content management framework / system. Boldr i
 
 ## Getting Started / Installation
 
-**IMPORTANT**: Please make sure you have boldrAPI downloaded before running Boldr. You can get it by running `git clone https://github.com/strues/boldrAPI.git`
+**IMPORTANT**:  
+Please make sure you have boldrAPI downloaded before running Boldr. You can get it by running `git clone https://github.com/strues/boldrAPI.git` or with the command `make api`.
 
 **A word of caution:** At the moment, Boldr is in active development. Meaning there can and most likely will, be the occasional breaking changes, and architectural adjustments.
 

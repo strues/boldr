@@ -239,9 +239,10 @@ export function doFetchPageUrl(url) {
   return request
     .get(`${API_PAGES}/${url}`);
 }
+
 export function doCreatePage(payload) {
   return request
-    .post(`${API_PAGES}/dashboard`, payload)
+    .post(API_PAGES, payload)
     .set('Authorization', `Bearer ${AUTH_TOKEN}`);
 }
 
@@ -287,6 +288,7 @@ export function doFetchBlocks() {
     headers: { 'Content-Type': 'application/json' },
   }).then(response => processResponse(response));
 }
+
 export function doCreateBlock(data) {
   return request
     .post(`${API_BLOCKS}`)
