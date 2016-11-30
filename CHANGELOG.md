@@ -4,13 +4,25 @@
 
 [Full Changelog](https://github.com/strues/boldr/compare/v0.6.0-alpha.4...HEAD)
 
+**Implemented enhancements:**
+
+- Test Coverage [\#161](https://github.com/strues/boldr/issues/161)
+- Type checking with Flow [\#160](https://github.com/strues/boldr/issues/160)
+- Normalize data in redux stores [\#159](https://github.com/strues/boldr/issues/159)
+
+**Fixed bugs:**
+
+- API requests fired on initial load against 127.0.0.1:80 [\#226](https://github.com/strues/boldr/issues/226)
+
 **Closed issues:**
 
 - Could not get a front to work [\#201](https://github.com/strues/boldr/issues/201)
 - Settings and configuration [\#158](https://github.com/strues/boldr/issues/158)
+- Icons / SVGs / Graphics [\#100](https://github.com/strues/boldr/issues/100)
 
 **Merged pull requests:**
 
+- Separation of API [\#225](https://github.com/strues/boldr/pull/225) ([strues](https://github.com/strues))
 - v0.6.5 [\#224](https://github.com/strues/boldr/pull/224) ([strues](https://github.com/strues))
 - Update semantic-ui-react to version 0.61.0 🚀 [\#223](https://github.com/strues/boldr/pull/223) ([greenkeeperio-bot](https://github.com/greenkeeperio-bot))
 - Update sw-precache-webpack-plugin to version 0.6.0 🚀 [\#222](https://github.com/strues/boldr/pull/222) ([greenkeeperio-bot](https://github.com/greenkeeperio-bot))
