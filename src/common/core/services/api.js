@@ -55,11 +55,11 @@ export const jsonHeaders = {
   * @exports doSelectPost
   * @exports doDeletePost
   *****************************************************************/
-// export function doFetchPosts() {
-//   return request.get(`${API_POSTS}?include=[author,tags]`);
-// }
-export const doFetchPosts = () =>
-  apiClient.get('/posts?include=[author,tags]');
+export function doFetchPosts() {
+  return request.get(`${API_POSTS}?include=[author,tags]`);
+}
+// export const doFetchPosts = () =>
+//   apiClient.get('/posts?include=[author,tags]');
 
 export function doGetPosts() {
   return fetch(`${API_POSTS}?include=[author,tags]`)
