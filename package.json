@@ -61,7 +61,7 @@
       "^.+\\.(css|scss)$": "<rootDir>/tools/test/styleMock.js"
     },
     "collectCoverage": true,
-    "coveragePathIgnorePatterns":[
+    "coveragePathIgnorePatterns": [
       "<rootDir>/tools/",
       "<rootDir>/docs/",
       "<rootDir>/flow-typed/",
@@ -116,6 +116,7 @@
     "lodash": "^4.17.2",
     "normalizr": "^2.2.1",
     "react": "^15.4.1",
+    "react-addons-css-transition-group": "^15.4.1",
     "react-addons-shallow-compare": "^15.4.1",
     "react-addons-transition-group": "^15.4.1",
     "react-dnd": "^2.1.4",
