@@ -1,8 +1,8 @@
 /* @flow */
-import * as api from 'core/services/api';
+import * as api from 'core/api';
 import * as notif from 'core/config/notifications';
 import type { Post } from '../../types/models';
-import type { ActionType } from '../../types/redux';
+// import type { ActionType } from '../../types/redux';
 import { notificationSend } from './notifications';
 
 export const LOAD_POSTS_REQUEST = '@boldr/LOAD_POSTS_REQUEST';
@@ -66,7 +66,7 @@ export function fetchPostsIfNeeded() {
 export function fetchPosts() {
   return (dispatch: Function) => {
     dispatch(requestPosts());
-    return api.doFetchPosts()
+    return api.getAllPosts()
       .then(response => {
         if (response.status !== 200) {
           dispatch(receivePostsFailed());
@@ -126,7 +126,7 @@ const receivePostsFailed = (err) => ({
 export function createPost(data: Post) {
   return (dispatch: Function) => {
     dispatch(beginCreatePost());
-    return api.doCreatePost(data)
+    return api.createPost(data)
       .then(response => {
         if (response.status !== 201) {
           dispatch(errorCreatingPost(response));
@@ -170,7 +170,7 @@ export function deletePost(id: String) {
     dispatch({
       type: DELETE_POST_REQUEST,
     });
-    return api.doDeletePost(id)
+    return api.delPostById(id)
       .then(response => {
         if (response.status !== 204) {
           dispatch(deletePostFail(response));
@@ -195,7 +195,7 @@ const deletePostFail = (err) => ({
 export function updatePost(postData: Post) {
   return (dispatch: Function) => {
     dispatch(updatePostDetails(postData));
-    return api.doUpdatePost(postData)
+    return api.putPostId(postData)
       .then(response => {
         dispatch(updatePostSuccess(response));
         dispatch(notificationSend({

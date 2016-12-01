@@ -1,22 +1,21 @@
 const HappyPack = require('happypack');
 const notifier = require('node-notifier');
-const execSync = require('child_process').execSync;
-const appRoot = require('app-root-dir');
 const chalk = require('chalk');
-
-const appRootPath = appRoot.get();
-// This determines how many threads a HappyPack instance can spin up.
-// See the plugins section of the webpack configuration for more.
-
+const execSync = require('child_process').execSync;
+const appRootPath = require('app-root-dir').get();
+const path = require('path');
+const fs = require('fs');
+const dotenv = require('dotenv');
 
 // Generates a HappyPack plugin.
 // @see https://github.com/amireh/happypack/
 function happyPackPlugin({ name, loaders }) {
+  // TODO: Try out the thread pool again since we upgraded to v3
   return new HappyPack({
     id: name,
     verbose: false,
     threads: 4,
-    loaders
+    loaders,
   });
 }
 
@@ -52,13 +51,13 @@ function createNotification(options = {}) {
   });
 
   const level = options.level || 'info';
-  const msg = ` 🌟  ${title} -> ${options.message}`;
+  const msg = `==> ${title} -> ${options.message}`;
 
   switch (level) {
     case 'warn': console.log(chalkWarning(msg)); break;
     case 'error': console.log(chalkError(msg)); break;
     case 'info':
-    default: console.log(chalkInfo(msg));
+    default: console.log(chalkSuccess(msg));
   }
 }
 
@@ -66,6 +65,51 @@ function exec(command) {
   execSync(command, { stdio: 'inherit', cwd: appRootPath });
 }
 
+// :: string -> string
+function getFilename(filePath) {
+  return path.relative(path.dirname(filePath), filePath);
+}
+
+function ensureNotInClientBundle() {
+  if (process.env.IS_CLIENT) {
+    throw new Error(
+      'You are importing the application configuration into the client bundle! This is super dangerous as you will essentially be exposing all your internals/logins/etc to the world.  If you need some configuration that will be consumed by the client bundle then add it to the clientSafe configuration file.'
+    );
+  }
+}
+
+// This exists so that we can support the recieving of environment variables
+// from multiple sources. i.e.
+//  - standard environment variables
+//  - a '.env' file, supported by  https://github.com/motdotla/dotenv
+//
+//  If a .env file exists, the contents of it will read and then it will be
+//  merged over the standard environment variables object, otherwise the
+//  standard environment variables object (process.env) will be used.
+//
+//  This gives us a nice degree of flexibility in deciding where we would
+//  like our environment variables to be loaded from, which can be especially
+//  useful for environment variables that we consider sensitive.
+function getEnvVars() {
+  const envFile = path.resolve(appRootPath, './.env');
+
+  return fs.existsSync(envFile)
+    // We have a .env file, which we need to merge with the standard vars.
+    ? Object.assign(
+      {},
+      // Merge the standard "process.env" environment variables object.
+      process.env,
+      // With the items from our ".env" file
+      dotenv.parse(fs.readFileSync(envFile, 'utf8'))
+    )
+    // No .env file, so we will just use standard vars.
+    : process.env;
+}
+
+// Helpers wrapping Chalk colors to spare some typing.
+// Simply wrap the output you want colored in one of the
+// defined helpers.
+// console.log(chalkSuccess('Successful message'))
 const chalkError = chalk.bgRed.white;
 const chalkSuccess = chalk.green;
 const chalkWarning = chalk.yellow;
@@ -76,9 +120,12 @@ module.exports = {
   removeEmpty,
   ifElse,
   merge,
-  exec,
   happyPackPlugin,
   createNotification,
+  exec,
+  getFilename,
+  ensureNotInClientBundle,
+  getEnvVars,
   chalkError,
   chalkSuccess,
   chalkWarning,

@@ -70,7 +70,7 @@ class EditorForm extends Component {
               </div>
               <Row>
                 <Col xs={ 12 } md={ 6 }>
-                  <Button type="submit" style={ { marginTop: '20px' } }>Save Post</Button>
+                  <Button type="submit" style={ { marginTop: '20px' } } submit>Save Post</Button>
                 </Col>
                 <Col xs={ 12 } md={ 6 }>
                   <div>

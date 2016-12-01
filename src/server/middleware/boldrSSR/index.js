@@ -12,9 +12,9 @@ import Helmet from 'react-helmet';
 // async data fetching
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect';
 import createRoutes from '../../../common/scenes';
+import ApiClient from '../../../common/core/api/apiClient';
 import configureStore from '../../../common/state/store';
 import generateHTML from './generateHTML';
-
 /**
  * An express middleware that is capabable of doing React server side rendering.
  */
@@ -41,10 +41,12 @@ function universalReactAppMiddleware(request: $Request, response: $Response) {
     response.status(200).send(html);
     return;
   }
+  // Superagent helper
+  const client = new ApiClient(request);
   // create memory history since we're technically an SPA
   const memHistory = createMemoryHistory(request.url);
   // redux store is initialized with the history as well as the client middleware
-  const store = configureStore({}, memHistory);
+  const store = configureStore(memHistory, client);
   // history is now kept in sync with the redux store
   syncHistoryWithStore(memHistory, store);
 
@@ -57,7 +59,7 @@ function universalReactAppMiddleware(request: $Request, response: $Response) {
     } else if (renderProps) {
       // execute rendering and data hydration on the server, then send
       // it to the client to render.
-      loadOnServer({ ...renderProps, store })
+      loadOnServer({ ...renderProps, store, helpers: { client } })
       .then(() => {
         const preloadedState = store.getState();
 

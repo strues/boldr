@@ -1,5 +1,5 @@
 import { push } from 'react-router-redux';
-import * as api from 'core/services/api';
+import * as api from 'core/api';
 import { setToken } from 'core/services/token';
 import { TOKEN_KEY } from 'core/config';
 import * as notif from 'core/config/notifications';
@@ -76,10 +76,10 @@ const signUpError = (err) => {
   * @exports login
   *****************************************************************/
 
-export function login(loginData, redir) {
+export function login(data) {
   return (dispatch) => {
     dispatch(beginLogin());
-    return api.doLogin(loginData)
+    return api.doLogin(data)
       .then(response => {
         if (response.status !== 200) {
           dispatch(loginError());
@@ -181,24 +181,16 @@ export function forgotPassword(email) {
       type: FORGOT_PASSWORD_REQUEST,
     });
     return api.doForgotPassword(email)
-      .then((response) => {
-        if (response.ok) {
-          return response.json().then((json) => {
-            dispatch({
-              type: FORGOT_PASSWORD_SUCCESS,
-            });
-            dispatch(push('/'));
-            dispatch(notificationSend(notif.MSG_FORGOT_PW_ERROR));
-          });
-        } else {
-          return response.json().then((json) => {
-            dispatch({
-              type: FORGOT_PASSWORD_FAILURE,
-              error: Array.isArray(json) ? json : [json],
-            });
-          });
-        }
-      });
+      .then(response => {
+        dispatch({
+          type: FORGOT_PASSWORD_SUCCESS,
+        });
+        dispatch(push('/'));
+        dispatch(notificationSend(notif.MSG_FORGOT_PW_ERROR));
+      }).catch(err => dispatch({
+        type: FORGOT_PASSWORD_FAILURE,
+        error: err,
+      }));
   };
 }
 
@@ -210,52 +202,36 @@ export function resetPassword(password, token) {
       type: RESET_PASSWORD_REQUEST,
     });
     return api.doResetPassword(password, token)
-      .then((response) => {
-        if (response.ok) {
-          return response.json().then((json) => {
-            push('/login');
-            dispatch({
-              type: RESET_PASSWORD_SUCCESS,
-            });
-            dispatch(push('/'));
-            dispatch(notificationSend(notif.MSG_RESET_PW_SUCCESS));
-          });
-        } else {
-          return response.json().then((json) => {
-            dispatch({
-              type: RESET_PASSWORD_FAILURE,
-              error: Array.isArray(json) ? json : [json],
-            });
-          });
-        }
-      });
+      .then(response => {
+        dispatch({
+          type: RESET_PASSWORD_SUCCESS,
+        });
+        push('/login');
+        dispatch(notificationSend(notif.MSG_RESET_PW_SUCCESS));
+      }).catch(err => dispatch({
+        type: RESET_PASSWORD_FAILURE,
+        error: err,
+      }));
   };
 }
+
 export function verifyAccount(token) {
   return (dispatch) => {
     dispatch({
       type: VERIFY_ACCOUNT_REQUEST,
     });
     return api.doVerifyAccount(token)
-      .then((response) => {
-        if (response.ok) {
-          return response.json().then((json) => {
-            push('/login');
-            dispatch({
-              type: VERIFY_ACCOUNT_SUCCESS,
-            });
-            dispatch(push('/'));
-            dispatch(notificationSend(notif.MSG_RESET_PW_SUCCESS));
-          });
-        } else {
-          return response.json().then((json) => {
-            dispatch({
-              type: VERIFY_ACCOUNT_FAILURE,
-              error: Array.isArray(json) ? json : [json],
-            });
-          });
-        }
-      });
+      .then(response => {
+        push('/login');
+        dispatch({
+          type: VERIFY_ACCOUNT_SUCCESS,
+        });
+        dispatch(push('/'));
+        dispatch(notificationSend(notif.MSG_RESET_PW_SUCCESS));
+      }).catch(err => dispatch({
+        type: VERIFY_ACCOUNT_FAILURE,
+        error: err,
+      }));
   };
 }
 /**

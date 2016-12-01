@@ -5,7 +5,7 @@
 import { normalize, arrayOf } from 'normalizr';
 import { camelizeKeys } from 'humps';
 import { push } from 'react-router-redux';
-import * as api from 'core/services/api';
+import * as api from 'core/api';
 import * as notif from 'core/config/notifications';
 import { notificationSend } from 'state/dux/notifications';
 import {
@@ -24,7 +24,7 @@ import * as t from './constants';
 export function loadMainNav() {
   return dispatch => {
     dispatch(startLoadNav());
-    return api.doLoadNav()
+    return api.getAllNavs()
       .then(response => {
         const camelizeThis = response.body;
         const camelizedJson = camelizeKeys(camelizeThis);
@@ -176,7 +176,7 @@ export function fetchSettingsIfNeeded() {
 export function loadBoldrSettings() {
   return dispatch => {
     dispatch(loadSettings());
-    return api.doLoadSettings()
+    return api.getAllSettings()
       .then(response => {
         const camelizedJson = camelizeKeys(response.body);
         const normalized = normalize(camelizedJson, arrayOf(settingSchema));
@@ -284,7 +284,7 @@ export function fetchPagesIfNeeded() {
 export function fetchPages() {
   return dispatch => {
     dispatch(requestPages());
-    return api.doFetchPages()
+    return api.getAllPages()
       .then(response => {
         const camelizedJson = camelizeKeys(response.body);
         const normalized = normalize(camelizedJson, arrayOf(pageSchema));
@@ -329,7 +329,7 @@ export function fetchPageByUrl(url) {
     if (url === undefined) {
       url = 'home';
     }
-    return api.doFetchPageUrl(url)
+    return api.getPageByUrl(url)
       .then(response => {
         if (response.status !== 200 || response.status !== 304) {
           dispatch(receivePageFailed());

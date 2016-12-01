@@ -1,5 +1,5 @@
 import { push } from 'react-router-redux';
-import * as api from '../../core/services/api';
+import * as api from '../../core/api';
 import { API_ACTIVITY } from '../../core/config/endpoints';
 
 const LOAD_ACTIVITIES_REQUEST = '@boldr/dashboard/activity/LOAD_ACTIVITIES_REQUEST';
@@ -27,7 +27,7 @@ const failedToLoadActivities = (err) => ({
 export function loadSiteActivity() {
   return dispatch => {
     dispatch(loadActivities());
-    return api.doGetActivities()
+    return api.getAllActivities()
       .then(response => {
         if (response.status !== 200) {
           dispatch(failedToLoadActivities(response));
