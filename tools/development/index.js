@@ -5,8 +5,7 @@ const { createNotification } = require('../utils');
 const HotServer = require('./hotServer');
 const HotClient = require('./hotClient');
 const ensureVendorDLLExists = require('./ensureVendorDLLExists');
-const vendorDLLPaths = require('../config/vendorDLLPaths');
-const envVars = require('../config/envVars');
+const config = require('../config');
 
 class HotDevelopment {
   constructor() {
@@ -14,11 +13,11 @@ class HotDevelopment {
       try {
         const clientConfigFactory = require('../webpack/client.config');
         const clientConfig = clientConfigFactory({ mode: 'development' });
-        if (envVars.USE_DEV_DLL === 'true') {
+        if (config.development.vendorDLL.enabled) {
           // Install the vendor DLL plugin.
           clientConfig.plugins.push(
             new webpack.DllReferencePlugin({
-              manifest: require(vendorDLLPaths.dllJsonPath),
+              manifest: require(config.paths.vendorDLLJSON),
             })
           );
         }
@@ -76,8 +75,7 @@ class HotDevelopment {
 
 let hotDevelopment = new HotDevelopment();
 
-// Any changes to our webpack configs should be notified as requiring a restart
-// of the development tool.
+// Any changes to our webpack configs should restart the development server.
 const watcher = chokidar.watch(
   pathResolve(__dirname, '../webpack')
 );
@@ -86,7 +84,7 @@ watcher.on('ready', () => {
     createNotification({
       title: 'webpack',
       level: 'warn',
-      message: 'Webpack config changed. Please restart your development server to use the latest version of the configs.',
+      message: 'Webpack configs have changed. The development server is restarting...',
     });
     hotDevelopment.dispose().then(() => {
       // Make sure our new webpack configs aren't in the module cache.
@@ -96,6 +94,7 @@ watcher.on('ready', () => {
         }
       });
 
+      // Create a new development server.
       hotDevelopment = new HotDevelopment();
     });
   });

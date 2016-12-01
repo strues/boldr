@@ -90,3 +90,4 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { showSidebar, hideSidebar })(Dashboard);
+``

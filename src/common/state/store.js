@@ -1,13 +1,13 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
-import axios from 'axios';
 import thunkMiddleware from 'redux-thunk';
 import createReducer from './reducers';
+import createMiddleware from './clientMiddleware';
 
-export default function configureStore(history, preloadedState) {
+export default function configureStore(history, preloadedState, client) {
   // Redux middleware
   const reduxRouterMiddleware = routerMiddleware(history);
-  const middleware = [thunkMiddleware.withExtraArgument({ axios }), reduxRouterMiddleware];
+  const middleware = [thunkMiddleware, createMiddleware(client), reduxRouterMiddleware];
 
   // Development enhancers
   const enhancers = [];

@@ -13,7 +13,7 @@ import WebFontLoader from 'webfontloader';
 import { ReduxAsyncConnect } from 'redux-connect';
 import useScroll from 'react-router-scroll/lib/useScroll';
 import { getToken } from '../common/core/services/token';
-
+import ApiClient from '../common/core/api/apiClient';
 import configureStore from '../common/state/store';
 import { checkAuth } from '../common/state/dux/auth';
 import createRoutes from '../common/scenes';
@@ -22,9 +22,10 @@ import ReactHotLoader from './components/ReactHotLoader';
 WebFontLoader.load({
   google: { families: ['Work Sans:300,400,600', 'Ubuntu:400,600', 'Material Icons'] },
 });
-
+// Superagent helper
+const client = new ApiClient();
 const preloadedState = window.PRELOADED_STATE || {};
-const store = configureStore(browserHistory, preloadedState);
+const store = configureStore(browserHistory, preloadedState, client);
 
 const token = getToken();
 if (token) {
@@ -45,7 +46,7 @@ function renderApp() {
   // https://github.com/taion/react-router-scroll/issues/3
   const useReduxAsyncConnect = () => ({
     renderRouterContext: (child, props) => (
-      <ReduxAsyncConnect { ...props } filter={ item => !item.deferred }>
+      <ReduxAsyncConnect { ...props } helpers={ { client } } filter={ item => !item.deferred }>
         { child }
       </ReduxAsyncConnect>
     ),
@@ -79,3 +80,7 @@ if (process.env.NODE_ENV === 'development' && module.hot) {
 }
 
 renderApp();
+
+if (process.env.NODE_ENV === 'production') {
+  require('./registerServiceWorker'); // eslint-disable-line global-require
+}
