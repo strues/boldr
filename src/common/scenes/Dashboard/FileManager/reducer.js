@@ -1,4 +1,4 @@
-import * as api from 'core/services/api';
+import * as api from 'core/api';
 import { notificationSend } from 'state/dux/notifications';
 
 const DELETE_ATTACHMENT_REQUEST = 'DELETE_ATTACHMENT_REQUEST';
@@ -32,7 +32,7 @@ export function fetchMediaFail(err) {
 export function fetchMedia() {
   return (dispatch) => {
     dispatch(fetchMediaStart());
-    return api.doFetchMedia()
+    return api.getAllAttachments()
       .then(response => {
         if (response.status !== 200) {
           dispatch(fetchMediaFail());
@@ -88,7 +88,7 @@ export function deleteMedia(id) {
     dispatch({
       type: DELETE_ATTACHMENT_REQUEST,
     });
-    return api.doRemoveMedia(id)
+    return api.delAttachment(id)
       .then(response => {
         dispatch({
           type: DELETE_ATTACHMENT_SUCCESS,

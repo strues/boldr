@@ -1,5 +1,5 @@
 import { notificationSend } from 'state/dux/notifications';
-import * as api from 'core/services/api';
+import * as api from 'core/api';
 import * as notif from 'core/config/notifications';
 
 const LOAD_MEMBERS_REQUEST = '@boldr/dashboard/members/LOAD_MEMBERS_REQUEST';
@@ -32,7 +32,7 @@ const failedToLoadMembers = (err) => ({
 export function loadSiteMembers() {
   return dispatch => {
     dispatch(loadMembers());
-    return api.doFetchMembers()
+    return api.getAllMembers()
       .then(response => {
         if (response.status !== 200) {
           dispatch(failedToLoadMembers());

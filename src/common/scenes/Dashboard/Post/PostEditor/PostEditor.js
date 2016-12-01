@@ -32,6 +32,7 @@ class PostEditor extends Component {
       id: this.props.currentPost.id || '',
       origSlug: this.props.params.slug || '',
     };
+    console.log('submit', postData);
     this.props.updatePost(postData);
   }
 

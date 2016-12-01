@@ -7,6 +7,7 @@ import express from 'express';
 import type { $Request, $Response, NextFunction } from 'express';
 import compression from 'compression';
 import hpp from 'hpp';
+import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import httpProxy from 'http-proxy';
 import { notEmpty } from '../common/core/utils/guards';
@@ -31,7 +32,7 @@ app.use((req: $Request, res: $Response, next: NextFunction) => {
   res.locals.nonce = uuid(); // eslint-disable-line no-param-reassign
   next();
 });
-
+app.use(cookieParser());
 const proxy = httpProxy.createProxyServer({
   target: proxyTo,
 });

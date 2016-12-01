@@ -7,13 +7,13 @@ const nodeExternals = require('webpack-node-externals');
 const colors = require('colors');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const appRoot = require('app-root-dir');
-const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin');
+const OfflinePlugin = require('offline-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
-const { removeEmpty, ifElse, merge, happyPackPlugin, chalkError, chalkInfo } = require('../utils');
+const { removeEmpty, ifElse, merge, happyPackPlugin, getFilename, chalkError, chalkInfo } = require('../utils');
 const envVars = require('../config/envVars');
 const defs = require('../config/defs');
 const appName = require('../../package.json').name;
-
+const config = require('../config');
 const babel = require('./plugins/babel');
 const happy = require('./plugins/happy');
 
@@ -56,6 +56,7 @@ function webpackConfigFactory({ target, mode }, { json }) {
   return {
     target: ifNodeTarget('node', 'web'),
     node: {
+      globals: true,
       __dirname: true,
       __filename: true,
     },
@@ -87,9 +88,20 @@ function webpackConfigFactory({ target, mode }, { json }) {
     }),
     output: {
       // The dir in which our bundle should be output.
-      path: path.resolve(appRootPath, envVars.BUNDLE_OUTPUT_PATH, `./${target}`),
+      path: isServer
+        ? config.paths.serverBundle
+        : config.paths.clientBundle,
+      // The filename format for our bundle's entries.
       filename: ifProdClient(
+        // We include a hash for client caching purposes.  Including a unique
+        // has for every build will ensure browsers always fetch our newest
+        // bundle.
         '[name]-[chunkhash].js',
+        // We want a determinable file name when running our server bundles,
+        // as we need to be able to target our server start file from our
+        // npm scripts.  We don't care about caching on the server anyway.
+        // We also want our client development builds to have a determinable
+        // name for our hot reloading client bundle server.
         '[name].js'
       ),
       chunkFilename: '[name]-[chunkhash].js',
@@ -98,12 +110,12 @@ function webpackConfigFactory({ target, mode }, { json }) {
       publicPath: ifDev(
         // As we run a seperate server for our client and server bundles we
         // need to use an absolute http path for our assets public path.
-        `http://localhost:${envVars.WPDS_PORT}${envVars.CLIENT_BUNDLE_HTTP_PATH}`,
+        `${config.server.protocol}://${config.server.host}:${config.development.clientDevServerPort}${config.client.webRoot}`,
         // Otherwise we expect our bundled output to be served from this path.
-        envVars.CLIENT_BUNDLE_HTTP_PATH
+        config.client.webRoot
       ),
       // When in server mode we will output our bundle as a commonjs2 module.
-      libraryTarget: ifNodeTarget('commonjs2', 'var'),
+      libraryTarget: ifServer('commonjs2', 'var'),
     },
     resolve: {
       mainFields: ifNodeTarget(
@@ -153,39 +165,48 @@ function webpackConfigFactory({ target, mode }, { json }) {
           context: __dirname
         })
       ),
-      ifProdClient(new SWPrecacheWebpackPlugin(merge({
-          // Note: The default cache size is 2mb. This can be reconfigured:
-          // maximumFileSizeToCacheInBytes: 2097152,
-          cacheId: `${appName}-sw`,
-          filepath: path.resolve(envVars.BUNDLE_OUTPUT_PATH, './serviceWorker/sw.js'),
-          dynamicUrlToDependencies: (() => {
-            const clientBundleAssets = globSync(
-              path.resolve(appRootPath, envVars.BUNDLE_OUTPUT_PATH, './client/*.js')
-            );
-            return globSync(path.resolve(appRootPath, './public/*'))
-              .reduce((acc, cur) => {
-                // We will precache our public asset, with it being invalidated
-                // any time our client bundle assets change.
-                acc[`/${path.basename(cur)}`] = clientBundleAssets; // eslint-disable-line no-param-reassign,max-len
-                return acc;
-              },
-              {
-                // Our index.html page will be precatched and it will be
-                // invalidated and refetched any time our client bundle
-                // assets change.
-                '/': clientBundleAssets,
-                // Lets cache the call to the polyfill.io service too.
-                'https://cdn.polyfill.io/v2/polyfill.min.js': clientBundleAssets,
-              });
-            })(),
+      ifProdClient(new OfflinePlugin({
+          // Setting this value lets the plugin know where our generated client
+          // assets will be served from.
+          // e.g. /client/
+          publicPath: config.client.webRoot,
+          // When using the publicPath we need to disable the "relativePaths"
+          // feature of this plugin.
+          relativePaths: false,
+          // Our offline support will be done via a service worker.
+          // Read more on them here:
+          // http://bit.ly/2f8q7Td
+          ServiceWorker: {
+            output: `${config.serviceWorker.name}.js`,
+            events: true,
+            // By default the service worker will be ouput and served from the
+            // publicPath setting above in the root config of the OfflinePlugin.
+            // This means that it would be served from /client/sw.js
+            // We do not want this! Service workers have to be served from the
+            // root of our application in order for them to work correctly.
+            // Therefore we override the publicPath here. The sw.js will still
+            // live in at the /build/client/sw.js output location therefore in
+            // our server configuration we need to make sure that any requests
+            // to /sw.js will serve the /build/client/sw.js file.
+            publicPath: `/${config.serviceWorker.name}.js`,
+            // When a user has no internet connectivity and a path is not available
+            // in our service worker cache then the following file will be
+            // served to them.  Go and make it pretty. :)
+            navigateFallbackURL: config.serviceWorker.navigateFallbackURL,
           },
-          ifElse(!!json)({
-            // When outputing a json stat file we want to silence the output.
-            verbose: false,
-            logger: () => undefined,
-          })
-        )
-      )),
+          // We aren't going to use AppCache and will instead only rely on
+          // a Service Worker.
+          AppCache: false,
+          // NOTE: This will include ALL of our public folder assets.  We do
+          // a glob pull of them and then map them to /foo paths as all the
+          // public folder assets get served off the root of our application.
+          // You may or may not want to be including these assets.  Feel free
+          // to remove this or instead include only a very specific set of
+          // assets.
+          externals: globSync(`${config.paths.publicAssets}/**/*`)
+            .map(publicFile => `/${getFilename(publicFile)}`),
+        })
+      ),
       happy.happyJSPlugin(babelPlugin),
       ifDevClient(happy.happyCSSPlugin),
       ifProdClient(

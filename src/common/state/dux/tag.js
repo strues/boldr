@@ -1,4 +1,4 @@
-import * as api from 'core/services/api';
+import * as api from 'core/api';
 
 export const LOAD_TAG_REQUEST = 'LOAD_TAG_REQUEST';
 export const LOAD_TAG_SUCCESS = 'LOAD_TAG_SUCCESS';
@@ -13,9 +13,9 @@ const requestTag = () => {
   };
 };
 
-const receiveTag = (json) => ({
+const receiveTag = (response) => ({
   type: LOAD_TAG_SUCCESS,
-  result: json,
+  result: response.body,
 });
 
 const failedToReceiveTag = (err) => ({
@@ -28,7 +28,7 @@ export function requestPostTags(tagName) {
     console.log(tagName);
     dispatch(requestTag());
     return api.doFetchTags(tagName)
-      .then(json => dispatch(receiveTag(json)))
+      .then(response => dispatch(receiveTag(response)))
       .catch(err => {
         dispatch(failedToReceiveTag(err));
       });

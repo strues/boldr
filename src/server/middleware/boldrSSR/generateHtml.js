@@ -4,6 +4,7 @@ import type { Head } from 'react-helmet';
 import serialize from 'serialize-javascript';
 import styleSheet from 'styled-components/lib/models/StyleSheet';
 import getAssetsForClientChunks from './getAssetsForClientChunks';
+import config from '../../../../tools/config';
 
 // We use the polyfill.io service which provides the polyfills that a
 // client needs, rather than everything if we used babel-polyfill.
@@ -12,23 +13,6 @@ import getAssetsForClientChunks from './getAssetsForClientChunks';
 // as we may need the polyfills to load our app in the first place! :)
 function polyfillIoScript() {
   return '<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>';
-}
-
-// We use a service worker configured created by the sw-precache webpack plugin,
-// providing us with prefetched caching and offline application support.
-// @see https://github.com/goldhand/sw-precache-webpack-plugin
-function serviceWorkerScript(nonce) {
-  if (process.env.NODE_ENV === 'production') {
-    return `
-      <script nonce="${nonce}" type="text/javascript">
-        (function swRegister() {
-          if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/sw.js');
-          }
-        }());
-      </script>`;
-  }
-  return '';
 }
 
 function styleTags(styles: Array<string>) {
@@ -53,12 +37,11 @@ function scriptTags(jsFilePaths: Array<string>) {
 // @see /tools/development/ensureVendorDLLExists.js
 function developmentVendorDLL() {
   if (process.env.NODE_ENV === 'development') {
-    const vendorPaths = require('../../../../tools/config/vendorDLLPaths'); // eslint-disable-line global-require
-
-    return scriptTag(vendorPaths.dllWebPath);
+    return scriptTag(config.development.vendorDLL.webPath);
   }
   return '';
 }
+
 
 type Args = {
   app?: string,
@@ -118,7 +101,6 @@ function generateHTML(args: Args) {
          }
 
         ${polyfillIoScript()}
-        ${serviceWorkerScript(nonce)}
         ${developmentVendorDLL()}
         ${scriptTags(assetsForRender.js)}
         ${helmet ? helmet.script.toString() : ''}

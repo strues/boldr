@@ -1,4 +1,4 @@
-import * as api from 'core/services/api';
+import * as api from 'core/api';
 import { notificationSend } from 'state/dux/notifications';
 import * as notif from 'core/config/notifications';
 
@@ -12,9 +12,9 @@ const CREATE_BLOCK_FAILURE = '@boldr/cp/CREATE_BLOCK_FAILURE';
 export function fetchBlocks() {
   return (dispatch: Function) => {
     dispatch(requestBlocks());
-    return api.doFetchBlocks()
-      .then(json => {
-        dispatch(receiveBlocks(json));
+    return api.getAllBlocks()
+      .then(response => {
+        dispatch(receiveBlocks(response));
       })
       .catch(err => {
         dispatch(receiveBlocksFailed(err));
@@ -25,10 +25,10 @@ const requestBlocks = () => {
   return { type: FETCH_BLOCKS_REQUEST };
 };
 
-const receiveBlocks = (json) => {
+const receiveBlocks = (response) => {
   return {
     type: FETCH_BLOCKS_SUCCESS,
-    payload: json,
+    payload: response,
   };
 };
 
