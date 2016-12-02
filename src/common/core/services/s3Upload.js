@@ -8,7 +8,8 @@ S3Upload.prototype.onFinishS3Put = function(signResult, file) {
 };
 
 S3Upload.prototype.preprocess = function(file, next) {
-  return console.log('base.preprocess()', file);
+  console.log('base.preprocess()', file);
+  return next(file);
 };
 
 S3Upload.prototype.onProgress = function(percent, status, file) {
@@ -33,8 +34,8 @@ function S3Upload(options) {
 }
 
 S3Upload.prototype.handleFileSelect = function(file) {
-  console.log('handle file select', this.file);
   const result = [];
+  console.log('handleFileSelect', file);
   this.preprocess(file, (processedFile) => {
     this.onProgress(0, 'Waiting', processedFile);
     result.push(this.uploadFile(processedFile));
@@ -79,7 +80,7 @@ S3Upload.prototype.executeOnSignedUrl = function(file, callback) {
   }
   xhr.overrideMimeType && xhr.overrideMimeType('text/plain; charset=x-user-defined');
   xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4 && xhr.status === 200) {
+    if (xhr.readyState === 4) {
       let result;
       try {
         result = JSON.parse(xhr.responseText);
@@ -88,8 +89,6 @@ S3Upload.prototype.executeOnSignedUrl = function(file, callback) {
         return false;
       }
       return callback(result);
-    } else if (xhr.readyState === 4 && xhr.status !== 200) {
-      return this.onError(`Could not contact request signing server. Status = ${xhr.status}`, file);
     }
   }.bind(this);
   return xhr.send();
@@ -101,12 +100,12 @@ S3Upload.prototype.uploadToS3 = function(file, signResult) {
     this.onError('CORS not supported', file);
   } else {
     xhr.onload = function() {
-      if (xhr.status === 200) {
-        this.onProgress(100, 'Upload completed', file);
-        return this.onFinishS3Put(signResult, file);
-      } else {
-        return this.onError(`Upload error: ${xhr.status}`, file);
-      }
+        if (xhr.status === 200) {
+            this.onProgress(100, 'Upload completed', file);
+            return this.onFinishS3Put(signResult, file);
+        } else {
+            return this.onError('Upload error: ' + xhr.status, file);
+        }
     }.bind(this);
     xhr.onerror = function() {
       return this.onError('XHR error', file);
@@ -118,6 +117,9 @@ S3Upload.prototype.uploadToS3 = function(file, signResult) {
         return this.onProgress(percentLoaded, percentLoaded === 100 ? 'Finalizing' : 'Uploading', file);
       }
     }.bind(this);
+    xhr.onFinish = function(e) {
+      console.log('FINSI');
+    };
   }
 
   xhr.setRequestHeader('Content-Type', file.type);
