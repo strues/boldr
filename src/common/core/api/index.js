@@ -146,7 +146,7 @@ export const doUpload = (payload) => {
   return apiClient.post('/attachments/dashboard', { data });
 };
 export const delAttachment = (id) =>
-  apiClient.delete(`/attachments/${id}`);
+  apiClient.del(`/attachments/${id}`);
 
   /**
     * PAGES API ROUTES
