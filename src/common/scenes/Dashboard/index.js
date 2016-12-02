@@ -1,4 +1,5 @@
 import { getAsyncInjectors } from '../../core';
+import DashboardContainer from './DashboardContainer';
 
 const errorLoading = (err) => {
   console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
@@ -12,12 +13,12 @@ export default (store, connect) => {
   const { injectReducer } = getAsyncInjectors(store);
   return {
     path: 'dashboard',
-    component: require('./Dashboard').default,
+    component: DashboardContainer,
     indexRoute: {
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           System.import('./reducer'),
-          System.import('./DashboardWidgets'),
+          System.import('./Dashboard'),
         ]);
         const renderRoute = loadModule(cb);
         importModules.then(([reducer, component]) => {
@@ -64,7 +65,7 @@ export default (store, connect) => {
       {
         path: 'posts',
         getComponent(nextState, cb) {
-          System.import('./Post/PostList')
+          System.import('./Post/PostList/PostListContainer')
           .then(loadModule(cb))
           .catch(errorLoading);
         },

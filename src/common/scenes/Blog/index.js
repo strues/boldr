@@ -1,5 +1,5 @@
-import BlogContainer from './BlogContainer';
 import { getAsyncInjectors } from 'core/index';
+import BlogContainer from './BlogContainer';
 
 const errorLoading = (err) => {
   console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
@@ -16,9 +16,17 @@ export default (store, connect) => {
     component: BlogContainer,
     indexRoute: {
       getComponent(nextState, cb) {
-        System.import('./PostListing')
-        .then(loadModule(cb))
-        .catch(errorLoading);
+        const importModules = Promise.all([
+          System.import('./reducer'),
+          System.import('./PostListing'),
+        ]);
+        const renderRoute = loadModule(cb);
+        importModules.then(([reducer, component]) => {
+          injectReducer('blog', reducer.default);
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
       },
     },
     childRoutes: [{

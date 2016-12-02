@@ -2,9 +2,9 @@
 import React from 'react';
 import { Loader, Segment } from 'semantic-ui-react';
 import styled from 'styled-components';
+import type { Post } from 'types/models';
 import { Grid, Row, Col, Icon } from 'components/index';
 import PostCard from '../components/PostCard';
-import type { Post } from 'types/models';
 
 export type Props = {
   posts: Array<Post>,
