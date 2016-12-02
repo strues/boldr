@@ -23,6 +23,7 @@ class S3Uploader extends Component {
     this.uploadFile = this.uploadFile.bind(this);
     this.preprocess = this.preprocess.bind(this);
     this.onFinish = this.onFinish.bind(this);
+    this.onError = this.onError.bind(this);
   }
   onProgress(percent, message) {
     console.log(`Upload progress: ${percent} % ${message}`);
@@ -53,7 +54,7 @@ class S3Uploader extends Component {
       getSignedUrl: this.props.getSignedUrl,
       preprocess: this.preprocess,
       onProgress: this.onProgress,
-      onFinishS3Put: this.onFinish,
+      onFinishS3Put: this.props.onFinish,
       onError: this.props.onError,
       signingUrlHeaders: this.props.signingUrlHeaders,
       signingUrlQueryParams: this.props.signingUrlQueryParams,
@@ -80,7 +81,6 @@ class S3Uploader extends Component {
         label="Select a file"
         onChange={ this.uploadFile }
         accept="image/*"
-        primary
       />
     );
   }

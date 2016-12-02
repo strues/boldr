@@ -135,11 +135,18 @@ export const getAllActivities = () =>
 export const getAllAttachments = () =>
   apiClient.get('/attachments');
 
-export const doUpload = (payload) =>
-  apiClient.post('/attachments/dashboard', { payload });
+export const doUpload = (payload) => {
+  const data = {
+    file_name: payload.file_name,
+    original_name: payload.original_name,
+    url: payload.url,
+    s3_key: payload.s3_key,
+  };
 
+  return apiClient.post('/attachments/dashboard', { data });
+};
 export const delAttachment = (id) =>
-  apiClient.delete(`/attachments/${id}`);
+  apiClient.del(`/attachments/${id}`);
 
   /**
     * PAGES API ROUTES

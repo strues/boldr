@@ -48,7 +48,7 @@ class FileInput extends PureComponent {
     return (
       <label
         style={ style }
-        className="ui.button"
+        className="boldr-btn boldr-btn__button"
         disabled={ props.disabled }
         htmlFor={ id }
       >
@@ -57,7 +57,7 @@ class FileInput extends PureComponent {
           id={ id }
           aria-hidden="true"
           type="file"
-          className="md-file-input"
+          className="ui.input"
           onChange={ this._handleChange }
         />
 

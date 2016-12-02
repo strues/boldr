@@ -2,7 +2,7 @@ const path = require('path');
 const os = require('os');
 const defs = require('../../config/defs');
 const { removeEmpty, ifElse, merge, happyPackPlugin, chalkError, chalkInfo } = require('../../utils');
-
+const config = require('../../config.js');
 const isDev = process.env.NODE_ENV === 'development';
 const isClient = true;
 const ifDevClient = ifElse(isDev && isClient);

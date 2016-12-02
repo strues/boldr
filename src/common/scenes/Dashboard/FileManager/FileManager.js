@@ -25,7 +25,7 @@ class FileManager extends Component {
   constructor(props) {
     super(props);
     (this: any).handleRemoveMedia = this.handleRemoveMedia.bind(this);
-    (this: any).handleFinish = this.handleFinish.bind(this);
+    (this: any).onUploadFinish = this.onUploadFinish.bind(this);
   }
   componentDidMount() {
     this.props.fetchMedia();
@@ -34,10 +34,12 @@ class FileManager extends Component {
 
   handleChange = (event, index, value) => this.setState({ value });
 
-  handleFinish(signResult) {
+  onUploadFinish(signResult) {
     const signUrl = signResult.signedUrl;
     const splitUrl = signUrl.split('?');
+    console.log(splitUrl);
     const fileUrl = splitUrl[0];
+
     const payload = {
       file_name: signResult.file_name,
       original_name: signResult.original_name,
@@ -62,7 +64,7 @@ class FileManager extends Component {
               accept="image/*"
               onProgress={ S3Uploader.onUploadProgress }
               onError={ S3Uploader.onUploadError }
-              onFinish={ this.handleFinish }
+              onFinish={ this.onUploadFinish }
 
               uploadRequestHeaders={ { 'x-amz-acl': 'public-read' } }
               contentDisposition="auto"

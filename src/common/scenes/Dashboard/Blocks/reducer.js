@@ -28,7 +28,7 @@ const requestBlocks = () => {
 const receiveBlocks = (response) => {
   return {
     type: FETCH_BLOCKS_SUCCESS,
-    payload: response,
+    payload: response.body,
   };
 };
 
