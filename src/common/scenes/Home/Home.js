@@ -4,10 +4,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Container } from 'semantic-ui-react';
-import { Row, Hero, Footer } from '../../../components/index';
 import { getPageByLabel } from 'state/selectors';
 import PageTemplate from 'theme/Boldr/PageTemplate';
-
+import { Row, Hero, Footer } from '../../components/index';
 
 type Props = {
   loaded: Boolean,

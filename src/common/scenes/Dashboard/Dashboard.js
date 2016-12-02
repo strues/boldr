@@ -65,16 +65,16 @@ class Dashboard extends PureComponent {
     return (
       <Grid fluid>
         <Sidebar { ...sidebarProps }>
-          <Titlebar title="Boldr" icon={
-            <Icon kind="menu" onClick={ this.menuButtonClick } />
-          }
-          >
+          <Titlebar
+            title="Boldr"
+            icon={ <Icon kind="menu" onClick={ this.menuButtonClick } /> }
+          />
             <Col xs>
               <div>
               { this.props.children }
               </div>
             </Col>
-          </Titlebar>
+
         </Sidebar>
       </Grid>
     );
@@ -90,4 +90,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps, { showSidebar, hideSidebar })(Dashboard);
-``

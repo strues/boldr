@@ -1,6 +1,6 @@
 import App from 'components/App';
-import Account from './Site/Account';
-import Blog from './Site/Blog';
+import Account from './Account';
+import Blog from './Blog';
 import Dashboard from './Dashboard';
 
 const errorLoading = (err) => {
@@ -22,7 +22,7 @@ export default function createRoutes(store) {
       {
         path: 'about',
         getComponent(nextState, cb) {
-          System.import('./Site/About')
+          System.import('./About')
             .then(loadModule(cb))
             .catch(errorLoading);
         },
@@ -30,14 +30,14 @@ export default function createRoutes(store) {
       {
         path: '*',
         getComponent(location, cb) {
-          System.import('./Site/Error404')
+          System.import('./Error404')
             .then(loadModule(cb))
             .catch(errorLoading);
         },
       },
     ],
     indexRoute: {
-      component: require('./Site/Home').default,
+      component: require('./Home').default,
     },
   };
   return root;

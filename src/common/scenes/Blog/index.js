@@ -1,5 +1,5 @@
 import BlogContainer from './BlogContainer';
-import { getAsyncInjectors } from '../../../core';
+import { getAsyncInjectors } from 'core/index';
 
 const errorLoading = (err) => {
   console.error('Dynamic page loading failed', err); // eslint-disable-line no-console

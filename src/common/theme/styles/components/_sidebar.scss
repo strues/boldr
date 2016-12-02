@@ -38,3 +38,10 @@
 .sidebar__toggle__icon--closed{
   color: $text-color;
 }
+
+.sidebar__inner {
+  background-color: $mercury;
+  .ui.vertical.menu {
+    width: 175px;
+  }
+}
