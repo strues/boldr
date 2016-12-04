@@ -6,7 +6,6 @@ import { Grid } from 'components/index';
 import { GRID, LIST } from 'core/config/layouts';
 import { changeLayout } from 'state/dux/ui';
 import { getPosts, fetchPostsIfNeeded } from 'state/index';
-import { loadArticlesIfNeeded } from 'state/dux/article';
 import type { Post } from 'types/models'; // eslint-disable-line
 import PostListing from './PostListing';
 
@@ -43,8 +42,7 @@ class PostListingContainer extends Component {
 
 const asyncProps = [{
   promise: ({ store: { dispatch, getState } }) => {
-    dispatch(fetchPostsIfNeeded()),
-    dispatch(loadArticlesIfNeeded());
+    dispatch(fetchPostsIfNeeded());
   },
 }];
 
@@ -56,5 +54,5 @@ const mapStateToProps = (state) => {
 };
 
 export default asyncConnect(asyncProps, mapStateToProps, {
-  loadArticlesIfNeeded, fetchPostsIfNeeded, changeLayout,
+  fetchPostsIfNeeded, changeLayout,
 })(PostListingContainer);
