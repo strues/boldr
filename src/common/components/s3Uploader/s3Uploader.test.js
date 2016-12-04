@@ -1,7 +1,6 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-
-import S3Uploader from './S3Uploader';
+import S3Uploader from './s3Uploader';
 
 describe('<S3Uploader />', () => {
   function setup() {

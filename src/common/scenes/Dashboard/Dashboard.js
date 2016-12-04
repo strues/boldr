@@ -1,93 +1,42 @@
-/* eslint-disable no-unused-expressions */
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
-import type { ReactElement } from 'types/react';
-import { Grid, Col, Authenticated, Icon } from 'components/index';
-import { Sidebar, Titlebar, SidebarContent } from './components/Sidebar';
-import { showSidebar, hideSidebar } from './reducer';
+import React, { Component } from 'react';
+import { asyncConnect } from 'redux-connect';
+import Widget from 'components/Widget';
 
-export type Props = {
-  children: ReactElement,
-  toggleOpen?: Function,
-  showSidebar?: Function,
-  hideSidebar?: Function,
-  dashboard: ?Object
-};
+import { Col, Row } from 'components/index';
+import { loadSiteActivity } from './reducer';
+import ActivityWidget from './components/ActivityWidget';
 
-@Authenticated
-class Dashboard extends PureComponent {
-  constructor() {
-    super();
-    this.state = {
-      docked: false,
-      open: true,
-      transitions: true,
-      touch: true,
-      shadow: true,
-      pullRight: false,
-      touchHandleWidth: 20,
-      dragToggleDistance: 30,
-    };
-    (this: any).menuButtonClick = this.menuButtonClick.bind(this);
-    (this: any).onSetOpen = this.onSetOpen.bind(this);
-    (this: any).onSetClose = this.onSetClose.bind(this);
-  }
-  props: Props;
-  onSetOpen(open) {
-    this.props.showSidebar();
-  }
-  onSetClose(open) {
-    this.props.hideSidebar();
-  }
-
-  menuButtonClick(ev) {
-    ev.preventDefault();
-    const isOpen = this.props.dashboard.open;
-    isOpen ? this.onSetClose(this.state.open) : this.onSetOpen(this.state.open);
-  }
+class Dashboard extends Component {
   render() {
-    const sidebar = <SidebarContent handleLogoClick={ this.onLogoClick } />;
-
-    const sidebarProps = {
-      sidebar,
-      docked: this.props.dashboard.docked,
-      sidebarClassName: 'dashboard__sidebar',
-      open: this.props.dashboard.open,
-      touch: this.state.touch,
-      shadow: this.state.shadow,
-      pullRight: this.state.pullRight,
-      touchHandleWidth: this.state.touchHandleWidth,
-      dragToggleDistance: this.state.dragToggleDistance,
-      transitions: this.state.transitions,
-      onSetOpen: this.onSetOpen,
-    };
-
     return (
-      <Grid fluid>
-        <Sidebar { ...sidebarProps }>
-          <Titlebar title="Boldr" icon={
-            <Icon kind="menu" onClick={ this.menuButtonClick } />
-          }
-          >
-            <Col xs>
-              <div>
-              { this.props.children }
-              </div>
-            </Col>
-          </Titlebar>
-        </Sidebar>
-      </Grid>
+      <div>
+        <Row>
+          <Col xs={ 6 } md={ 3 }>
+            <Widget name="Widget A" />
+          </Col>
+          <Col xs={ 6 } md={ 3 }>
+            <Widget name="Widget C" />
+          </Col>
+          <Col xs={ 12 } md={ 6 }>
+            <Widget name="Widget D" />
+          </Col>
+        </Row>
+        <Row style={ { marginTop: '1.5em' } }>
+        {
+          this.props.activities ? <ActivityWidget activities={ this.props.activities } /> : null
+        }
+        </Row>
+      </div>
     );
   }
 }
+const asyncProps = [{
+  promise: ({ store: { dispatch, getState } }) => dispatch(loadSiteActivity()),
+}];
 
 function mapStateToProps(state) {
   return {
-    router: state.router,
-    dashboard: state.dashboard,
-    boldr: state.boldr,
+    activities: state.dashboard.activities,
   };
 }
-
-export default connect(mapStateToProps, { showSidebar, hideSidebar })(Dashboard);
-``
+export default asyncConnect(asyncProps, mapStateToProps, { loadSiteActivity })(Dashboard);

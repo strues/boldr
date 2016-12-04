@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import { Segment } from 'semantic-ui-react';
-import { Heading } from '../../../../../components/index';
+import { Heading } from 'components/index';
 import Author from '../Author';
 import TagBlock from '../TagBlock';
 

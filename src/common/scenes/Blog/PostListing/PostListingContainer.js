@@ -41,7 +41,9 @@ class PostListingContainer extends Component {
 }
 
 const asyncProps = [{
-  promise: ({ store: { dispatch, getState } }) => dispatch(fetchPostsIfNeeded()),
+  promise: ({ store: { dispatch, getState } }) => {
+    dispatch(fetchPostsIfNeeded());
+  },
 }];
 
 const mapStateToProps = (state) => {
@@ -51,4 +53,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default asyncConnect(asyncProps, mapStateToProps, { fetchPostsIfNeeded, changeLayout })(PostListingContainer);
+export default asyncConnect(asyncProps, mapStateToProps, {
+  fetchPostsIfNeeded, changeLayout,
+})(PostListingContainer);

@@ -3,7 +3,6 @@
   position: relative;
   width: 200px;
   transition: all .2s cubic-bezier(.55, .055, .675, .19) 0s;
-  background: $nero;
 
   flex-shrink: 0;
 }
@@ -37,4 +36,11 @@
 
 .sidebar__toggle__icon--closed{
   color: $text-color;
+}
+
+.sidebar__inner {
+  background-color: $mercury;
+  .ui.vertical.menu {
+    width: 175px;
+  }
 }

@@ -28,9 +28,9 @@ build-cms:
 	npm run build
 
 create-dist:
-	rm -rf ./dist && mkdir -p ./dist/bin && mv boldrCMS dist/boldrCMS && cp bin/boldr.js dist/bin/ && cp package.json dist/package.json && cp .env dist/.env
+	mkdir -p ./dist/bin && mv boldrCMS dist/boldrCMS && cp bin/boldr.js dist/bin/ && cp package.json dist/package.json && cp .env dist/.env
 
-build: build-cms copy-sw create-dist
+build: build-cms create-dist
 
 get-api:
 	git clone https://github.com/strues/boldrAPI

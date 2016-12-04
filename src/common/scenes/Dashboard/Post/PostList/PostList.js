@@ -1,45 +1,23 @@
 /* @flow */
-import React, { Component } from 'react';
-import { asyncConnect } from 'redux-connect';
+import React from 'react';
 import { Item, Segment } from 'semantic-ui-react';
 import { Icon } from 'components/index';
-import { fetchPostsIfNeeded, getPosts, deletePost } from '../../../../state/dux/post';
-import { PostListItem } from '../components';
 import type { Post } from 'types/models';
+import { PostListItem } from '../components';
 
 export type Props = {
-  children?: ReactElement,
   posts: Array<Post>,
-  dispatch?: () => void,
-  deletePost: () => void,
-  fetchPostsIfNeeded: () => void,
-  current?: Object
+  handleArticleClick: () => void,
+  handleDeleteClick: () => void,
 };
 
-class PostList extends Component {
-  constructor(props: Props) {
-    super(props);
-    (this: any).handleArticleClick = this.handleArticleClick.bind(this);
-    (this: any).handleDeleteClick = this.handleDeleteClick.bind(this);
-  }
-  componentDidMount() {
-    this.props.fetchPostsIfNeeded();
-  }
-  props: Props;
-  // postId is a uuid, not an integer
-  handleArticleClick(postId: string): void {
-
-  }
-  handleDeleteClick(postId: string): void {
-    this.props.deletePost(postId);
-  }
-  render() {
-    return (
+const PostList = (props: Props) => {
+  return (
       <div>
        <Segment>
        <Item.Group>
         {
-          this.props.posts.map(post => (
+          props.posts.map(post => (
            <PostListItem
              key={ post.slug }
              id={ post.id }
@@ -50,26 +28,15 @@ class PostList extends Component {
              title={ post.title }
              status={ post.status }
              created_at={ post.created_at }
-             handleDeleteClick={ this.handleDeleteClick }
-             handleArticleClick={ this.handleArticleClick }
+             handleDeleteClick={ props.handleDeleteClick }
+             handleArticleClick={ props.handleArticleClick }
            />
          ))
         }
         </Item.Group>
       </Segment>
       </div>
-    );
-  }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    posts: getPosts(state),
-    loading: state.posts.loading,
-  };
+  );
 };
-const asyncProps = [{
-  promise: ({ store: { dispatch, getState } }) => dispatch(fetchPostsIfNeeded()),
-}];
 
-export default asyncConnect(asyncProps, mapStateToProps, { fetchPostsIfNeeded, deletePost })(PostList);
+export default PostList;

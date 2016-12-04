@@ -1,6 +1,5 @@
-import { push } from 'react-router-redux';
-import * as api from '../../core/api';
-import { API_ACTIVITY } from '../../core/config/endpoints';
+import * as api from 'core/api';
+import { API_ACTIVITY } from 'core/config/endpoints';
 
 const LOAD_ACTIVITIES_REQUEST = '@boldr/dashboard/activity/LOAD_ACTIVITIES_REQUEST';
 const LOAD_ACTIVITIES_SUCCESS = '@boldr/dashboard/activity/LOAD_ACTIVITIES_SUCCESS';
