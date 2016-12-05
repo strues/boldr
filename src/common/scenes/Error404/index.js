@@ -1,5 +1,18 @@
 /* @flow */
 
-import Error404 from './Error404';
+const errorLoading = (err) => {
+  console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
+};
 
-export default Error404;
+const loadModule = (cb) => (componentModule) => {
+  cb(null, componentModule.default);
+};
+
+export default {
+  path: '*',
+  getComponent(location: Object, cb: Function) {
+    System.import('./Error404')
+      .then(loadModule(cb))
+      .catch(errorLoading);
+  },
+};

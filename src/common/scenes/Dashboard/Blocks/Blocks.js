@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
-import { Grid, Col, Row } from 'components/index';
-import { Menu, Message, Segment, Icon, Button } from 'semantic-ui-react';
+import { Col, Row } from 'components/index';
+import { Message, Segment } from 'semantic-ui-react';
 import type { Block as BlockType } from 'types/models';
 import { Block, CreateBlockForm } from './components';
 

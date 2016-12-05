@@ -18,7 +18,7 @@ export type Props = {
     return Promise.all(promises);
   },
 }])
-class SettingsContainer extends Component {
+export class SettingsContainer extends Component {
   componentDidMount() {
     this.props.fetchSettingsIfNeeded();
   }

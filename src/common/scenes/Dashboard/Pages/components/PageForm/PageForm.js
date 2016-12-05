@@ -15,7 +15,7 @@ const PageForm = (props) => {
 
   const { handleSubmit, pristine, reset, submitting } = props;
   return (
-      <Form onSubmit={ handleSubmit } className="modal__form">
+      <Form onSubmit={ handleSubmit } className="page__form">
         <Field
           name="name"
           type="text"

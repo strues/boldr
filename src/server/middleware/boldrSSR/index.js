@@ -9,6 +9,9 @@ import match from 'react-router/lib/match';
 import createMemoryHistory from 'react-router/lib/createMemoryHistory';
 import { syncHistoryWithStore } from 'react-router-redux';
 import Helmet from 'react-helmet';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import { lightBlue100, lightBlue500, lightBlue700 } from 'material-ui/styles/colors';
 // async data fetching
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect';
 import createRoutes from '../../../common/scenes';
@@ -62,11 +65,24 @@ function universalReactAppMiddleware(request: $Request, response: $Response) {
       loadOnServer({ ...renderProps, store, helpers: { client } })
       .then(() => {
         const preloadedState = store.getState();
-
+        const muiTheme = getMuiTheme({
+          palette: {
+            primary1Color: '#0376a3',
+            primary2Color: lightBlue700,
+            primary3Color: lightBlue100,
+          },
+        }, {
+          avatar: {
+            borderColor: null,
+          },
+          userAgent: request.headers['user-agent'],
+        });
           // Create our application and render it into a string.
         const component = renderToString(
           <Provider store={ store } key="provider">
+            <MuiThemeProvider muiTheme={ muiTheme }>
             <ReduxAsyncConnect { ...renderProps } />
+          </MuiThemeProvider>
           </Provider>,
         );
 

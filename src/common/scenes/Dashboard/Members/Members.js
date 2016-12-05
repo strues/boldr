@@ -1,9 +1,9 @@
 /* @flow */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-connect';
-import { Modal } from 'semantic-ui-react';
+import { Modal } from 'components/index';
+import { showModal, hideModal } from 'state/dux/ui';
 import { MembersList, EditMemberForm } from './components';
 import { loadSiteMembers, memberSelected, updateMember } from './reducer';
 
@@ -12,6 +12,9 @@ export type Props = {
   memberSelected: Function,
   loadSiteMembers: Function,
   updateMember: Function,
+  hideModal: () => void,
+  showModal: () => void,
+  ui: Object,
 };
 
 class Members extends Component {
@@ -19,6 +22,8 @@ class Members extends Component {
     super(props);
     (this: any).toggleUser = this.toggleUser.bind(this);
     (this: any).handleSubmit = this.handleSubmit.bind(this);
+    (this: any).closeModal = this.closeModal.bind(this);
+    (this: any).openModal = this.openModal.bind(this);
   }
   state: Object = { open: false };
 
@@ -27,12 +32,16 @@ class Members extends Component {
   }
   props: Props;
 
-  open = () => this.setState({ open: true });
-  close = () => this.setState({ open: false });
+  closeModal() {
+    this.props.hideModal();
+  }
+  openModal() {
+    this.props.showModal();
+  }
 
   toggleUser(userId) {
     this.props.memberSelected(userId);
-    this.setState({ open: true, userId });
+    this.props.showModal();
   }
 
   handleSubmit(values) {
@@ -47,33 +56,32 @@ class Members extends Component {
     this.props.updateMember(userData);
   }
   render() {
-    const { open } = this.state;
     return (
        <div>
          <MembersList toggleUser={ this.toggleUser } users={ this.props.members.members } />
          <Modal
-           open={ open }
-           onOpen={ this.open }
-           onClose={ this.close }
+           open={ this.props.ui.modal }
+           title="Edit User"
+           onClose={ this.closeModal }
          >
-            <Modal.Header>Edit User</Modal.Header>
-            <Modal.Content>
-            <EditMemberForm onSubmit={ this.handleSubmit } initialValues={ this.props.members.selected[0] } />
-            </Modal.Content>
+          <EditMemberForm onSubmit={ this.handleSubmit } initialValues={ this.props.members.selected[0] } />
           </Modal>
        </div>
     );
   }
 }
 const asyncProps = [{
-  promise: ({ store: { dispatch, getState } }) => dispatch(loadSiteMembers())
+  promise: ({ store: { dispatch, getState } }) => dispatch(loadSiteMembers()),
 }];
 
 const mapStateToProps = (state, ownProps) => {
   return {
     members: state.members,
     selected: state.members.selected,
+    ui: state.ui,
   };
 };
 
-export default asyncConnect(asyncProps, mapStateToProps, { memberSelected, updateMember, loadSiteMembers })(Members);
+export default asyncConnect(asyncProps, mapStateToProps, {
+  memberSelected, updateMember, loadSiteMembers, showModal, hideModal,
+})(Members);

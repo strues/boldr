@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Button, Icon, Table, Segment } from 'semantic-ui-react';
 import type { Setting } from 'types/models';
 import { showModal, hideModal } from 'state/dux/ui';
-import { Dialog } from 'components/index';
+import { Modal } from 'components/index';
 import { SettingsItem, AddSettingForm } from './components';
 
 type Props = {
@@ -14,8 +14,7 @@ type Props = {
   ui: Object,
 };
 
-
-class Settings extends Component {
+export class Settings extends Component {
   constructor() {
     super();
 
@@ -60,9 +59,9 @@ class Settings extends Component {
            </Table.Row>
          </Table.Footer>
        </Table>
-       <Dialog open={ this.props.ui.modal } onOpen={ this.open } onClose={ this.close } title="Add a setting">
+       <Modal open={ this.props.ui.modal } onOpen={ this.open } onClose={ this.close } title="Add a setting">
          <AddSettingForm />
-       </Dialog>
+       </Modal>
 
       </Segment>
     );

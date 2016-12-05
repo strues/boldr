@@ -6,7 +6,7 @@ import { Col, Row } from 'components/index';
 import { loadSiteActivity } from './reducer';
 import ActivityWidget from './components/ActivityWidget';
 
-class Dashboard extends Component {
+export class Dashboard extends Component {
   render() {
     return (
       <div>

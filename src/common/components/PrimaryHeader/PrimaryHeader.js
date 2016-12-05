@@ -80,7 +80,7 @@ class PrimaryHeader extends PureComponent {
     return (
       <Menu size="small" stackable>
       <Container>
-        <img src={ this.props.settings[2].value }
+        <img src={ this.props.settings[6].value }
           className="ph-logo"
           alt="logo" onClick={ this.props.handleLogoClick } role="button" tabIndex="0"
         />

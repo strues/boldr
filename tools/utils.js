@@ -111,6 +111,8 @@ function getEnvVars() {
 // defined helpers.
 // console.log(chalkSuccess('Successful message'))
 const chalkError = chalk.bgRed.white;
+const logError = (msg) => chalk.bgRed.white(console.log(msg));
+
 const chalkSuccess = chalk.green;
 const chalkWarning = chalk.yellow;
 const chalkProcessing = chalk.blue;
@@ -124,6 +126,7 @@ module.exports = {
   createNotification,
   exec,
   getFilename,
+  logError,
   ensureNotInClientBundle,
   getEnvVars,
   chalkError,

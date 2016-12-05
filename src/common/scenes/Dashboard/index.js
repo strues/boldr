@@ -30,6 +30,7 @@ export default (store, connect) => {
       },
     },
     childRoutes: [
+      // Post(store),
       {
         path: 'blocks',
         getComponent(nextState, cb) {
@@ -115,6 +116,14 @@ export default (store, connect) => {
         path: 'pages',
         getComponent(nextState, cb) {
           System.import('./Pages')
+        .then(loadModule(cb))
+        .catch(errorLoading);
+        },
+      },
+      {
+        path: 'pages/new',
+        getComponent(nextState, cb) {
+          System.import('./Pages/components/NewPage')
         .then(loadModule(cb))
         .catch(errorLoading);
         },

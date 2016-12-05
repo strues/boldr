@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 
 const Heading = (props) => {
   const tagName = `h${props.size}`;
-  let className = `heading heading--${props.size}`;
+  let className = `heading heading__${props.size}`;
   if (props.classname) {
     className = `${props.classname} heading heading--${props.size}`;
   }

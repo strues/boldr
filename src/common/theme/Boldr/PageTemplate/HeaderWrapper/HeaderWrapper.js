@@ -59,9 +59,11 @@ class HeaderWrapper extends Component {
   handleProfileClick = (e) => {
     this.props.navigate('/profile');
   }
+
   handlePreferencesClick = (e) => {
     this.props.navigate('/account/preferences');
   }
+
   handleLogoClick = (e) => {
     this.props.navigate('/');
   }
@@ -73,6 +75,7 @@ class HeaderWrapper extends Component {
   handleDashClick = (e) => {
     this.props.navigate('/dashboard');
   }
+  
   props: Props;
   render() {
     const renderDefaultHeader = (

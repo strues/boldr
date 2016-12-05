@@ -38,7 +38,7 @@ const proxy = httpProxy.createProxyServer({
 });
 
 app.use((req: $Request, res: $Response, next: NextFunction) => {
-  res.setHeader('Service-Worker-Allowed', '*');
+  res.setHeader('Service-Worker-Allowed', '/');
   res.setHeader('X-Forwarded-For', req.ip);
   return next();
 });
@@ -107,10 +107,13 @@ app.use(express.static(path.resolve(appRootPath, './public')));
 // Note: the service worker needs to be available at the http root of your
 // application for the offline support to work.
 if (process.env.NODE_ENV === 'production') {
-  app.use(
-    express.static(
-      path.resolve(appRootPath, notEmpty(process.env.BUNDLE_OUTPUT_PATH), './serviceWorker'),
-    ),
+  app.get(
+    '/sw.js',
+    (req: $Request, res: $Response, next: NextFunction) => { // eslint-disable-line no-unused-vars
+      res.sendFile(
+        path.resolve(appRootPath, notEmpty(process.env.BUNDLE_OUTPUT_PATH), './client/sw.js'),
+      );
+    },
   );
 }
 

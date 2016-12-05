@@ -1,11 +1,11 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import Dialog from './Dialog';
+import Modal from './Modal';
 
-describe('<Dialog />', () => {
+describe('<Modal />', () => {
   function setup() {
-    const wrapper = shallow(<Dialog />);
+    const wrapper = shallow(<Modal />);
     const instance = wrapper.instance();
 
     return { wrapper, instance };

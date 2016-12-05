@@ -169,7 +169,7 @@ function webpackConfigFactory({ target, mode }, { json }) {
           // Setting this value lets the plugin know where our generated client
           // assets will be served from.
           // e.g. /client/
-          publicPath: config.client.webRoot,
+          publicPath: envVars.CLIENT_BUNDLE_HTTP_PATH,
           // When using the publicPath we need to disable the "relativePaths"
           // feature of this plugin.
           relativePaths: false,
@@ -177,7 +177,7 @@ function webpackConfigFactory({ target, mode }, { json }) {
           // Read more on them here:
           // http://bit.ly/2f8q7Td
           ServiceWorker: {
-            output: `${config.serviceWorker.name}.js`,
+            output: 'sw.js',
             events: true,
             // By default the service worker will be ouput and served from the
             // publicPath setting above in the root config of the OfflinePlugin.
@@ -188,23 +188,34 @@ function webpackConfigFactory({ target, mode }, { json }) {
             // live in at the /build/client/sw.js output location therefore in
             // our server configuration we need to make sure that any requests
             // to /sw.js will serve the /build/client/sw.js file.
-            publicPath: `/${config.serviceWorker.name}.js`,
+            publicPath: '/sw.js',
             // When a user has no internet connectivity and a path is not available
             // in our service worker cache then the following file will be
             // served to them.  Go and make it pretty. :)
-            navigateFallbackURL: config.serviceWorker.navigateFallbackURL,
+            navigateFallbackURL: '/offline.html',
           },
           // We aren't going to use AppCache and will instead only rely on
           // a Service Worker.
           AppCache: false,
-          // NOTE: This will include ALL of our public folder assets.  We do
-          // a glob pull of them and then map them to /foo paths as all the
-          // public folder assets get served off the root of our application.
+
+          // Which external files should be included with the service worker?
+          // NOTE: The below config will include ALL of our public folder assets.
           // You may or may not want to be including these assets.  Feel free
           // to remove this or instead include only a very specific set of
           // assets.
-          externals: globSync(`${config.paths.publicAssets}/**/*`)
-            .map(publicFile => `/${getFilename(publicFile)}`),
+          externals:
+            // First do a glob match on ALL files in the public folder.
+            globSync(path.resolve(appRootPath, './public', './**/*'))
+            // Then map them to relative paths against the public folder.
+            // We need to do this as we need to convert the file paths into
+            // their respective "web" paths.
+            .map(publicFile => path.relative(
+              path.resolve(appRootPath, 'public'),
+              publicFile
+            ))
+            // Add the leading "/" indicating the file is being hosted
+            // off the HTTP root of the application.
+            .map(relativePath => `/${relativePath}`),
         })
       ),
       happy.happyJSPlugin(babelPlugin),
