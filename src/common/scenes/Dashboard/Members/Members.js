@@ -25,7 +25,7 @@ class Members extends Component {
     (this: any).closeModal = this.closeModal.bind(this);
     (this: any).openModal = this.openModal.bind(this);
   }
-  state: Object = { open: false };
+  state: Object = { userId: '' };
 
   componentDidMount() {
     this.props.loadSiteMembers();
@@ -40,6 +40,7 @@ class Members extends Component {
   }
 
   toggleUser(userId) {
+    this.setState({ userId });
     this.props.memberSelected(userId);
     this.props.showModal();
   }

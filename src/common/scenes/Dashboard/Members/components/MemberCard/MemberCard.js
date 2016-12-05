@@ -22,7 +22,7 @@ const MemberCard = (props) => {
          { props.user.id }
        </Card.Meta>
        <Card.Description>
-        { props.user.email } { ' ' }{ props.user.role[0].name }
+        { props.user.email } { ' ' }{ props.user.role.name }
        </Card.Description>
      </Card.Content>
      <Card.Content extra>

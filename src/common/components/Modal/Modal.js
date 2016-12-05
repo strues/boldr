@@ -2,7 +2,6 @@
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
-import RaisedButton from 'material-ui/RaisedButton';
 
 type Props = {
   onClose: () => void,
@@ -12,25 +11,10 @@ type Props = {
 };
 
 const Modal = (props: Props) => {
-  const actions = [
-    <FlatButton
-      label="Cancel"
-      primary
-      onTouchTap={ props.onClose }
-      key={ 1 }
-    />,
-    <RaisedButton
-      label="Submit"
-      primary
-      keyboardFocused
-      onTouchTap={ props.onClose }
-      key={ 2 }
-    />,
-  ];
   return (
     <Dialog
       title={ props.title }
-      actions={ actions }
+      actions={ <FlatButton label="Close" primary onTouchTap={ props.onClose } /> }
       modal={ false }
       open={ props.open }
       onRequestClose={ props.onClose }
