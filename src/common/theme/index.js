@@ -1,3 +1,3 @@
 import PageTemplate from './Boldr/PageTemplate';
 
-export { PageTemplate };
+export default PageTemplate;

@@ -2,8 +2,8 @@ const pathResolve = require('path').resolve;
 const chokidar = require('chokidar');
 const webpack = require('webpack');
 const { createNotification } = require('../utils');
-const HotServer = require('./hotServer');
-const HotClient = require('./hotClient');
+const HotNodeServer = require('./hotNodeServer');
+const HotClientServer = require('./hotClientServer');
 const ensureVendorDLLExists = require('./ensureVendorDLLExists');
 const config = require('../config');
 
@@ -55,11 +55,11 @@ class HotDevelopment {
     this.clientCompiler.plugin('done', (stats) => {
       if (!stats.hasErrors() && !serverStarted) {
         serverStarted = true;
-        this.serverBundle = new HotServer(this.serverCompiler);
+        this.serverBundle = new HotNodeServer(this.serverCompiler);
       }
     });
 
-    this.clientBundle = new HotClient(this.clientCompiler);
+    this.clientBundle = new HotClientServer(this.clientCompiler);
   }
 
   dispose() {

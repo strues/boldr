@@ -5,7 +5,7 @@ const envVars = require('../config/envVars');
 const ListenerManager = require('./listenerManager');
 const { createNotification } = require('../utils');
 
-class HotServer {
+class HotNodeServer {
   constructor(compiler) {
     this.listenerManager = null;
     this.watcher = null;
@@ -87,4 +87,4 @@ class HotServer {
   }
 }
 
-module.exports = HotServer;
+module.exports = HotNodeServer;

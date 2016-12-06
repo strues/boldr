@@ -14,13 +14,13 @@ import { ReduxAsyncConnect } from 'redux-connect';
 import useScroll from 'react-router-scroll/lib/useScroll';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import { lightBlue100, lightBlue700 } from 'material-ui/styles/colors';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { getToken } from '../common/core/services/token';
 import ApiClient from '../common/core/api/apiClient';
 import configureStore from '../common/state/store';
 import { checkAuth } from '../common/state/dux/auth';
 import createRoutes from '../common/scenes';
+import materialStyle from '../common/theme/material';
 import ReactHotLoader from './components/ReactHotLoader';
 
 injectTapEventPlugin();
@@ -32,17 +32,7 @@ WebFontLoader.load({
 const client = new ApiClient();
 const preloadedState = window.PRELOADED_STATE || {};
 const store = configureStore(browserHistory, preloadedState, client);
-const muiTheme = getMuiTheme({
-  palette: {
-    primary1Color: '#0376a3',
-    primary2Color: lightBlue700,
-    primary3Color: lightBlue100,
-  },
-}, {
-  avatar: {
-    borderColor: null,
-  },
-});
+const muiTheme = getMuiTheme(materialStyle);
 const token = getToken();
 if (token) {
   // Update application state. User has token and is probably authenticated

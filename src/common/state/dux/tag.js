@@ -1,5 +1,10 @@
 import * as api from 'core/api';
-
+import { normalize } from 'normalizr';
+import { combineReducers } from 'redux';
+import { createSelector } from 'reselect';
+import { camelizeKeys } from 'humps';
+import { Schemas } from 'core/services/schemas';
+import { getArticles } from './article';
 export const LOAD_TAG_REQUEST = 'LOAD_TAG_REQUEST';
 export const LOAD_TAG_SUCCESS = 'LOAD_TAG_SUCCESS';
 export const LOAD_TAG_FAILURE = 'LOAD_TAG_FAILURE';
@@ -35,7 +40,78 @@ export function requestPostTags(tagName) {
   };
 }
 
+// export function loadTags() {
+//   return dispatch => {
+//     dispatch(startLoadTags());
+//     return api.getAllTags()
+//       .then(response => {
+//         const camelizeThis = response.body.results;
+//
+//         const camelizedJson = camelizeKeys(camelizeThis);
+//         const normalizedResponse = normalize(camelizedJson, Schemas.TAG_ARRAY);
+//         return dispatch(successLoadTags(normalizedResponse));
+//       })
+//       .catch(error => {
+//         dispatch(errorLoadTags(error));
+//       });
+//   };
+// }
 
+// export function loadTagsIfNeeded() {
+//   return (dispatch, getState) => {
+//     if (shouldLoadTags(getState())) {
+//       return dispatch(loadTags());
+//     }
+//
+//     return Promise.resolve();
+//   };
+// }
+//
+// function shouldLoadTags(state) {
+//   const tags = state.blog.tags;
+//   if (!tags.length) {
+//     return true;
+//   }
+//   if (tags.length) {
+//     return false;
+//   }
+//   return tags;
+// }
+//
+// function startLoadTags() {
+//   return {
+//     type: FETCH_TAGS_REQUEST,
+//   };
+// }
+//
+// function errorLoadTags(error) {
+//   return {
+//     type: FETCH_TAGS_FAILURE,
+//     error,
+//   };
+// }
+//
+// function successLoadTags(normalizedResponse) {
+//   return {
+//     type: FETCH_TAGS_SUCCESS,
+//     payload: normalizedResponse,
+//   };
+// }
+//
+// export const getTags = createSelector(
+//   [
+//     (state) => state.blog.tags.ids,
+//     (state) => state.blog.tags.byId,
+//   ],
+//   (ids, byId) => ids.map(s => byId[s]),
+// );
+// export const getTagsForPost = createSelector(
+//   [
+//     getTags,
+//     getArticles,
+//   ],
+//   (tags, posts) => posts.map(p => p)
+// );
 const INITIAL_STATE = {
   loading: false,
   error: false,
@@ -113,3 +189,35 @@ export default function tagsReducer(state = INITIAL_STATE, action = {}) {
       return state;
   }
 }
+//
+// const byId = (state = { loaded: false }, action) => {
+//   switch (action.type) {
+//     case FETCH_TAGS_SUCCESS:
+//       Object.keys(action.payload.entities.tags).forEach(id => {
+//         Object.assign(action.payload.entities.tags[id]);
+//       });
+//       return {
+//         ...state,
+//         ...action.payload.entities.tags,
+//         loaded: true,
+//
+//       };
+//     default:
+//       return state;
+//   }
+// };
+//
+// const ids = (state = [], action) => {
+//   switch (action.type) {
+//     case FETCH_TAGS_SUCCESS:
+//       return [...state, ...action.payload.result];
+//     default:
+//       return state;
+//   }
+// };
+//
+// const tagsReducer = combineReducers({
+//   byId,
+//   ids,
+// });
+// export default tagsReducer;

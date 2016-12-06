@@ -1,7 +1,8 @@
+/* @flow */
 import React from 'react';
 import Drawer from 'material-ui/Drawer';
 import MenuItem from 'material-ui/MenuItem';
-import AppBar from 'material-ui/AppBar';
+
 import Link from 'react-router/lib/Link';
 import SettingsIcon from 'material-ui/svg-icons/action/settings-applications';
 import LinkIcon from 'material-ui/svg-icons/editor/insert-link';
@@ -13,11 +14,27 @@ import DashboardIcon from 'material-ui/svg-icons/action/dashboard';
 import PeopleIcon from 'material-ui/svg-icons/social/people';
 import ContentIcon from 'material-ui/svg-icons/content/content-copy';
 import ListIcon from 'material-ui/svg-icons/action/list';
+import { Card, CardHeader } from 'material-ui/Card';
+import Avatar from 'material-ui/Avatar';
 
-const Sidebar = (props) => {
+type Props = {
+  open: Boolean,
+};
+
+const Sidebar = (props: Props) => {
   return (
     <Drawer open={ props.open } width={ 200 }>
-      <AppBar title="Boldr" iconStyleLeft={ { display: 'none' } } />
+
+      <Card style={ { backgroundColor: '#0376a3' } }>
+        <CardHeader
+          avatar={ <Avatar
+            size={ 50 }
+            src="https://boldr.io/images/unknown-avatar.png"
+            style={ { border: '1px solid grey', margin: '-5px' } }
+          /> }
+        />
+        <span>Someone Important</span>
+      </Card>
       <Link to="/">
         <MenuItem leftIcon={ <HomeIcon /> }>Home</MenuItem>
       </Link>

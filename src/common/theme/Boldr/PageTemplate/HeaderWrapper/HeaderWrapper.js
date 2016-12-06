@@ -4,6 +4,7 @@ import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { logout, getByLabel, getSettings } from 'state/index';
+import { selectSetting } from 'state/selectors';
 import { PrimaryHeader } from 'components/index';
 
 type Props = {
@@ -22,6 +23,7 @@ const mapStateToProps = (state: Object) => {
   return {
     boldr: state.boldr,
     settings: getSettings(state),
+    logo: selectSetting(state, 'site_logo'),
     auth: state.auth,
     navigation: getByLabel(state, 'main'),
   };
@@ -75,12 +77,13 @@ class HeaderWrapper extends Component {
   handleDashClick = (e) => {
     this.props.navigate('/dashboard');
   }
-  
+
   props: Props;
   render() {
     const renderDefaultHeader = (
     <PrimaryHeader
       auth={ this.props.auth }
+      logo={ this.props.logo }
       settings={ this.props.settings }
       navigation={ this.props.navigation }
       handleLoginClick={ this.handleLoginClick }

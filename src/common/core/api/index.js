@@ -175,6 +175,8 @@ export const doCreatePage = (payload) =>
 export const doFetchTags = (name) =>
   apiClient.get(`/tags/posts/${name}`);
 
+export const getAllTags = () =>
+  apiClient.get('/tags');
 /**
   * MEMBERS API ROUTES
   * -------------------------

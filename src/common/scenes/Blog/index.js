@@ -17,12 +17,12 @@ export default (store, connect) => {
     indexRoute: {
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          System.import('./reducer'),
+          // System.import('./reducer'),
           System.import('./PostListing'),
         ]);
         const renderRoute = loadModule(cb);
-        importModules.then(([reducer, component]) => {
-          injectReducer('blog', reducer.default);
+        importModules.then(([component]) => {
+          // injectReducer('blog', reducer.default);
           renderRoute(component);
         });
 

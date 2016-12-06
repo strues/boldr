@@ -15,7 +15,6 @@ const Modal = (props: Props) => {
     <Dialog
       title={ props.title }
       actions={ <FlatButton label="Close" primary onTouchTap={ props.onClose } /> }
-      modal={ false }
       open={ props.open }
       onRequestClose={ props.onClose }
     >

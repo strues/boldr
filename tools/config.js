@@ -4,9 +4,7 @@
 
 const pathResolve = require('path').resolve;
 const appRootPath = require('app-root-dir').get();
-const { ensureNotInClientBundle, getEnvVars } = require('./utils');
-
-ensureNotInClientBundle();
+const { getEnvVars } = require('./utils');
 
 // Get possible environment configuration variables.
 const envVars = getEnvVars();

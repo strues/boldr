@@ -6,7 +6,7 @@ const appRootPath = require('app-root-dir').get();
 const path = require('path');
 const fs = require('fs');
 const dotenv = require('dotenv');
-
+const happyThreadPool = HappyPack.ThreadPool({ size: 6 });
 // Generates a HappyPack plugin.
 // @see https://github.com/amireh/happypack/
 function happyPackPlugin({ name, loaders }) {
@@ -14,7 +14,7 @@ function happyPackPlugin({ name, loaders }) {
   return new HappyPack({
     id: name,
     verbose: false,
-    threads: 4,
+    threadPool: happyThreadPool,
     loaders,
   });
 }

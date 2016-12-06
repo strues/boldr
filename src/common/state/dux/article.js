@@ -1,5 +1,6 @@
 import { normalize } from 'normalizr';
 import { combineReducers } from 'redux';
+import { createSelector } from 'reselect';
 import { camelizeKeys } from 'humps';
 import * as api from 'core/api';
 import { Schemas } from 'core/services/schemas';
@@ -16,8 +17,8 @@ export function loadArticles() {
         const camelizeThis = response.body.results;
 
         const camelizedJson = camelizeKeys(camelizeThis);
-        const normalized = normalize(camelizedJson, Schemas.POST_ARRAY);
-        return dispatch(successLoadArticles(normalized));
+        const normalizedResponse = normalize(camelizedJson, Schemas.POST_ARRAY);
+        return dispatch(successLoadArticles(normalizedResponse));
       })
       .catch(error => {
         dispatch(errorLoadArticles(error));
@@ -36,7 +37,7 @@ export function loadArticlesIfNeeded() {
 }
 
 function shouldLoadArticles(state) {
-  const articles = state.articles;
+  const articles = state.blog.articles;
   if (!articles.length) {
     return true;
   }
@@ -59,12 +60,20 @@ function errorLoadArticles(error) {
   };
 }
 
-function successLoadArticles(normalized) {
+function successLoadArticles(normalizedResponse) {
   return {
     type: LOAD_ARTICLES_SUCCESS,
-    payload: normalized,
+    payload: normalizedResponse,
   };
 }
+
+export const getArticles = createSelector(
+  [
+    (state) => state.blog.articles.slugs,
+    (state) => state.blog.articles.bySlug,
+  ],
+  (slugs, bySlug) => slugs.map(s => bySlug[s]),
+);
 
 const bySlug = (state = { loaded: false }, action) => {
   switch (action.type) {
@@ -91,18 +100,7 @@ const slugs = (state = [], action) => {
       return state;
   }
 };
-// const postsByTag = (state = {}, action) => {
-//   switch (action.type) {
-//     case LOAD_ARTICLES_SUCCESS:
-//     case LOAD_ARTICLES_REQUEST:
-//       return {
-//         ...state,
-//         [action.tag || 'all']: bySlug(state[action.tag], action),
-//       };
-//     default:
-//       return state;
-//   }
-// };
+
 const articlesReducer = combineReducers({
   bySlug,
   slugs,
