@@ -1,10 +1,9 @@
 /* @flow */
-
 import type { Head } from 'react-helmet';
 import serialize from 'serialize-javascript';
 import styleSheet from 'styled-components/lib/models/StyleSheet';
+import config from '../../../../config/boldr';
 import getAssetsForClientChunks from './getAssetsForClientChunks';
-import config from '../../../../tools/config';
 
 // We use the polyfill.io service which provides the polyfills that a
 // client needs, rather than everything if we used babel-polyfill.
@@ -37,7 +36,7 @@ function scriptTags(jsFilePaths: Array<string>) {
 // @see /tools/development/ensureVendorDLLExists.js
 function developmentVendorDLL() {
   if (process.env.NODE_ENV === 'development') {
-    return scriptTag(config.development.vendorDLL.webPath);
+    return scriptTag(`/client/${config.bundles.client.devVendorDLL.name}.js`);
   }
   return '';
 }

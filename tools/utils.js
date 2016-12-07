@@ -10,7 +10,6 @@ const happyThreadPool = HappyPack.ThreadPool({ size: 6 });
 // Generates a HappyPack plugin.
 // @see https://github.com/amireh/happypack/
 function happyPackPlugin({ name, loaders }) {
-  // TODO: Try out the thread pool again since we upgraded to v3
   return new HappyPack({
     id: name,
     verbose: false,

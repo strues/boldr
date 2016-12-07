@@ -1,41 +1,44 @@
-
-
-const path = require('path');
-const envVars = require('../config/envVars');
-const ListenerManager = require('./listenerManager');
-const { createNotification } = require('../utils');
+import path from 'path';
+import appRootDir from 'app-root-dir';
+import ListenerManager from './listenerManager';
+import { createNotification } from '../utils';
 
 class HotNodeServer {
-  constructor(compiler) {
+  constructor(name, compiler) {
     this.listenerManager = null;
     this.watcher = null;
 
-    const compiledOutputPath = path.resolve(
-      compiler.options.output.path, `${Object.keys(compiler.options.entry)[0]}.js`
+    const compiledEntryFile = path.resolve(
+      appRootDir.get(),
+      compiler.options.output.path,
+      `${Object.keys(compiler.options.entry)[0]}.js`,
     );
 
     compiler.plugin('compile', () =>
       createNotification({
-        title: 'server',
+        title: name,
         level: 'info',
-        message: 'Building new server bundle...',
-      })
+        message: 'Building new bundle...',
+      }),
     );
 
     const startServer = () => {
       try {
         // The server bundle  will automatically start the web server just by
         // requiring it. It returns the http listener too.
-        const listener = require(compiledOutputPath).default;
-        this.listenerManager = new ListenerManager(listener, 'server');
+        // $FlowFixMe
+        const listener = require(compiledEntryFile).default;
+        this.listenerManager = new ListenerManager(listener, name);
 
-        const url = `http://localhost:${envVars.SSR_PORT}`;
-
-        createNotification({
-          title: 'server',
-          level: 'info',
-          message: `Running on ${url} with latest changes.`,
-          open: url,
+        listener.on('listening', () => {
+          const { address, port } = listener.address();
+          const url = `http://${address}:${port}`;
+          createNotification({
+            title: 'server',
+            level: 'info',
+            message: `Running on ${url} with latest changes.`,
+            open: url,
+          });
         });
       } catch (err) {
         createNotification({
@@ -87,4 +90,4 @@ class HotNodeServer {
   }
 }
 
-module.exports = HotNodeServer;
+export default HotNodeServer;

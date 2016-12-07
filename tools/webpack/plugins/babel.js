@@ -1,13 +1,15 @@
-const defs = require('../../config/defs');
+const path = require('path');
+const appRootDir = require('app-root-dir');
 const { removeEmpty, ifElse, merge, happyPackPlugin, chalkError, chalkInfo } = require('../../utils');
 
 const isDev = process.env.NODE_ENV === 'development';
 const isClient = true;
 const ifDevClient = ifElse(isDev && isClient);
-
+const rootDir = appRootDir.get();
+const src = path.resolve(rootDir, './src');
 const babelModuleResolve =
   ['module-resolver', {
-    root: [`${defs.paths.src}/common`]
+    root: [`${src}/common`]
   }];
 
 const babelDevClient = removeEmpty([

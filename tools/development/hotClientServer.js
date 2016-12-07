@@ -1,31 +1,39 @@
-const express = require('express');
-const createWebpackMiddleware = require('webpack-dev-middleware');
-const createWebpackHotMiddleware = require('webpack-hot-middleware');
-const envVars = require('../config/envVars');
-const ListenerManager = require('./listenerManager');
-const { createNotification } = require('../utils');
+import express from 'express';
+import createWebpackMiddleware from 'webpack-dev-middleware';
+import createWebpackHotMiddleware from 'webpack-hot-middleware';
+import ListenerManager from './listenerManager';
+import { createNotification } from '../utils';
 
 class HotClientServer {
   constructor(compiler) {
     const app = express();
 
+    const httpPathRegex = /^https?:\/\/(.*):([\d]{1,5})/i;
+    const httpPath = compiler.options.output.publicPath;
+    if (!httpPath.startsWith('http') && !httpPathRegex.test(httpPath)) {
+      throw new Error(
+        'You must supply an absolute public path to a development build of a web target bundle as it will be hosted on a seperate development server to any node target bundles.',
+      );
+    }
+
+    const [_, host, port] = httpPathRegex.exec(httpPath); // eslint-disable-line no-unused-vars
+
     this.webpackDevMiddleware = createWebpackMiddleware(compiler, {
       quiet: true,
       noInfo: true,
-      stats: 'errors-only',
       headers: {
         'Access-Control-Allow-Origin': '*',
       },
-      // The path at which the client bundles are served from.  Note: in this
-      // case as we are running a seperate dev server the public path should
-      // be absolute, i.e. including the "http://..."
+      // Ensure that the public path is taken from the compiler webpack config
+      // as it will have been created as an absolute path to avoid conflicts
+      // with an node servers.
       publicPath: compiler.options.output.publicPath,
     });
 
     app.use(this.webpackDevMiddleware);
     app.use(createWebpackHotMiddleware(compiler));
 
-    const listener = app.listen(envVars.WPDS_PORT);
+    const listener = app.listen(port, host);
 
     this.listenerManager = new ListenerManager(listener, 'client');
 
@@ -60,8 +68,8 @@ class HotClientServer {
 
     return this.listenerManager
       ? this.listenerManager.dispose()
-      : Promise.resolve();
+      : Promise.resolve([]);
   }
 }
 
-module.exports = HotClientServer;
+export default HotClientServer;
