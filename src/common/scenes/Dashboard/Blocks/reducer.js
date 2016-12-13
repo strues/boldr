@@ -53,9 +53,6 @@ export function createBlock(data) {
     dispatch(beginCreateBlock());
     return api.doCreateBlock(data)
       .then(response => {
-        if (response.status !== 201) {
-          dispatch(errorCreatingBlock(response));
-        }
         dispatch(createBlockSuccess(response));
         dispatch(notificationSend(notif.MSG_CREATE_POST_SUCCESS));
       })

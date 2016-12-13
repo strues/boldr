@@ -21,6 +21,7 @@ class BlocksContainer extends Component {
   }
   props: Props;
   handleCreateBlock(values) {
+    console.log(values)
     this.props.createBlock(values);
   }
   render() {

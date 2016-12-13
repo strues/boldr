@@ -2,10 +2,9 @@
   "restartable": "rs",
   "ignore": [
     ".git",
-    "node_modules/**",
+    "node_modules/**/node_modules",
     "coverage/**",
     "src/**/*.test.js",
-    "src/cms/**",
     "tools/**",
     "build/**"
   ],

@@ -209,7 +209,6 @@ export default {
       srcPaths: [
         './src/server',
         './src/common',
-        './config/private',
         './config/public',
       ],
 

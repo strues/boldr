@@ -208,9 +208,5 @@ export const getAllBlocks = () =>
 
 export const doCreateBlock = (data) => {
   apiClient
-      .post('/blocks', {
-        name: data.name,
-        element: data.element,
-        content: data.content,
-      });
+      .post('/blocks', { data });
 };

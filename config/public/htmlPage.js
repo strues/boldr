@@ -9,19 +9,21 @@ export default {
   defaultTitle: 'Boldr',
 
   meta: [
-    {
-      name: 'description',
-      content: 'Your dreams are bold. Your thoughts are bold. So why shouldnt your CMS be a little Boldr?',
-    },
-    // Default content encoding.
     { name: 'charset', content: 'utf-8' },
-    // @see http://bit.ly/2f8IaqJ
-    { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
     // This is important to signify your application is mobile responsive!
     { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-    // Providing a theme color is good if you are doing a progressive
-    // web application.
+    { name: 'description', content: 'Why shouldnt your CMS be a little Boldr?' },
     { name: 'theme-color', content: '#2b2b2b' },
+    { property: 'og:site_name', content: 'Boldr' },
+    { property: 'og:image', content: 'https://boldr.io/logo.png' },
+    { property: 'og:locale', content: 'en_US' },
+    { property: 'og:title', content: 'Boldr' },
+    { property: 'og:description', content: 'Why shouldnt your CMS be a little Boldr?' },
+    { property: 'og:card', content: 'summary' },
+    { property: 'og:site', content: '@struesco' },
+    { property: 'og:creator', content: '@struesco' },
+    { property: 'og:image:width', content: '200' },
+    { property: 'og:image:height', content: '200' },
   ],
 
   links: [
