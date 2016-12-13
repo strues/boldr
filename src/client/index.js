@@ -23,6 +23,7 @@ import { checkAuth } from '../common/state/dux/auth';
 import createRoutes from '../common/scenes';
 import materialStyle from '../common/theme/material';
 import ReactHotLoader from './components/ReactHotLoader';
+import WrappedRedBox from './components/WrappedRedbox';
 
 injectTapEventPlugin();
 WebFontLoader.load({
@@ -63,7 +64,7 @@ function renderApp() {
   // Match routes based on location object:
   match({ routes, location }, () => {
     render(
-      <ReactHotLoader>
+      <ReactHotLoader errorReporter={ WrappedRedBox }>
         <Provider store={ store } key="provider">
           <MuiThemeProvider muiTheme={ muiTheme }>
           <Router routes={ routes } history={ history } render={ middleware } key={ Math.random() } />
