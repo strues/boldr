@@ -11,16 +11,16 @@ h5 {
 }
 h1 {
   min-height: 1rem;
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 h2 {
-  font-size: 1.714rem;
+  font-size: 2.2rem;
 }
 h3 {
-  font-size: 1.28rem;
+  font-size: 1.8rem;
 }
 h4 {
-  font-size: 1.071rem;
+  font-size: 1.4rem;
 }
 h5 {
   font-size: 1rem;
@@ -70,4 +70,9 @@ a {
 a:hover {
   color: #1e70bf;
   text-decoration: none;
+}
+
+.heading__3 {
+  padding-top: .5rem;
+  padding-bottom: .5rem;
 }

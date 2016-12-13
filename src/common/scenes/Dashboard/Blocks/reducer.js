@@ -1,6 +1,6 @@
 import * as api from 'core/api';
 import { notificationSend } from 'state/dux/notifications';
-import * as notif from 'core/config/notifications';
+import * as notif from 'core/constants';
 
 const FETCH_BLOCKS_REQUEST = '@boldr/cp/FETCH_BLOCKS_REQUEST';
 const FETCH_BLOCKS_SUCCESS = '@boldr/cp/FETCH_BLOCKS_SUCCESS';
@@ -53,9 +53,6 @@ export function createBlock(data) {
     dispatch(beginCreateBlock());
     return api.doCreateBlock(data)
       .then(response => {
-        if (response.status !== 201) {
-          dispatch(errorCreatingBlock(response));
-        }
         dispatch(createBlockSuccess(response));
         dispatch(notificationSend(notif.MSG_CREATE_POST_SUCCESS));
       })

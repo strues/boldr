@@ -16,7 +16,7 @@ export type Props = {
   handleDeleteClick: () => void,
 };
 
-class PostListContainer extends PureComponent {
+export class PostListContainer extends PureComponent {
   constructor(props: Props) {
     super(props);
     (this: any).handleArticleClick = this.handleArticleClick.bind(this);

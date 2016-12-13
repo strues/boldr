@@ -16,6 +16,9 @@ export function areSettingsLoaded(globalState) {
   return globalState.boldr.settings && globalState.boldr.settings.loaded;
 }
 
+export function selectSetting(state, key) {
+  return state.boldr.settings.byKey[key];
+}
 /**
   * POSTS SELECTORS
   *

@@ -175,6 +175,8 @@ export const doCreatePage = (payload) =>
 export const doFetchTags = (name) =>
   apiClient.get(`/tags/posts/${name}`);
 
+export const getAllTags = () =>
+  apiClient.get('/tags');
 /**
   * MEMBERS API ROUTES
   * -------------------------
@@ -206,9 +208,5 @@ export const getAllBlocks = () =>
 
 export const doCreateBlock = (data) => {
   apiClient
-      .post('/blocks', {
-        name: data.name,
-        element: data.element,
-        content: data.content,
-      });
+      .post('/blocks', { data });
 };

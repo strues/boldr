@@ -1,9 +1,14 @@
 import React, { Component, PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import {
+  RadioButtonGroup,
+  TextField,
+} from 'redux-form-material-ui';
+import { RadioButton } from 'material-ui/RadioButton';
 import { Form, Segment } from 'semantic-ui-react';
 import { Col, Row, Button } from 'components/index';
 import { BoldrEditor } from 'boldr-editor';
-import renderTextField from 'components/FormComponents/TextField';
+
 import '../../../../../../../node_modules/boldr-editor/dist/boldreditor.css';
 
 class PostEditorForm extends Component {
@@ -41,62 +46,51 @@ class PostEditorForm extends Component {
     return (
       <Row>
         <Col xs>
-          <Form onSubmit={ handleSubmit }>
-            <Segment style={ { padding: '1em' } }>
-              <Field name="title" type="text" component={ renderTextField } label="Post Title" />
-              <Form.Group widths="equal">
+          <form onSubmit={ handleSubmit }>
+            <Row>
+              <Field name="title" type="text" component={ TextField } floatingLabelText="Post Title" />
+            </Row>
                 {
                   !this.state.edit ?
-                    <Field name="tags" type="text"
-                      helpText="Separate using commas"
-                      component={ renderTextField }
-                      label="Tags"
-                    /> :
+                    <Row><Field name="tags" type="text"
+                      hintText="Separate using commas"
+                      component={ TextField }
+                      floatingLabelText="Tags"
+                    /></Row> :
                   null
                 }
+                <Row>
                 <Field name="feature_image" type="text"
-                  helpText="URL for your image"
-                  component={ renderTextField }
-                  label="Feature Image"
+                  hintText="URL for your image"
+                  component={ TextField }
+                  floatingLabelText="Feature Image"
                 />
-              </Form.Group>
+              </Row>
+              <Row>
               <Field name="excerpt"
                 type="text"
-                component={ renderTextField }
-                label="Excerpt"
+                component={ TextField }
+                floatingLabelText="Excerpt"
+                hintText="A brief overview or area from your post to highlight"
+                multiLine
+                fullWidth
+                rows={ 3 }
               />
-              <div style={ { marginTop: '50px' } }>
+            </Row>
                 <Field name="content" component={ renderEditor } />
-              </div>
               <Row>
                 <Col xs={ 12 } md={ 6 }>
-                  <Button type="submit" style={ { marginTop: '20px' } } submit>Save Post</Button>
+                  <Button type="submit" submit>Save Post</Button>
                 </Col>
                 <Col xs={ 12 } md={ 6 }>
-                  <div>
-                    <label className="radio-inline__label">
-                      <Field className="radio-inline__input"
-                        name="status"
-                        component="input"
-                        type="radio"
-                        value="draft"
-                      />
-                      Draft
-                    </label>
-                    <label className="radio-inline__label">
-                      <Field className="radio-inline__input"
-                        name="status"
-                        component="input"
-                        type="radio"
-                        value="published"
-                      />
-                      Published
-                    </label>
-                 </div>
+                  <Field name="status" component={ RadioButtonGroup }>
+                   <RadioButton value="draft" label="Draft" />
+                   <RadioButton value="published" label="Published" />
+                   <RadioButton value="archived" label="Archived" />
+                 </Field>
                 </Col>
               </Row>
-            </Segment>
-          </Form>
+          </form>
         </Col>
       </Row>
     );

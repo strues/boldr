@@ -18,7 +18,8 @@ import {
   setMobileDevice,
 } from 'state/index';
 import { isMobile as testIfMobile } from 'core/utils';
-import meta from 'core/config/base';
+import htmlPageConfig from '../../../../config/public/htmlPage';
+
 // $FlowIssue
 import 'theme/styles/main.scss';
 
@@ -58,7 +59,14 @@ class App extends Component {
   render() {
     return (
       <div>
-        <Helmet { ...meta.boldr } script={ [] } />
+        <Helmet
+          htmlAttributes={ htmlPageConfig.htmlAttributes }
+          titleTemplate={ htmlPageConfig.titleTemplate }
+          defaultTitle={ htmlPageConfig.defaultTitle }
+          meta={ htmlPageConfig.meta }
+          link={ htmlPageConfig.links }
+          script={ htmlPageConfig.scripts }
+        />
         { this.props.children }
         <Notifications />
       </div>

@@ -1,10 +1,11 @@
 /* @flow */
 import React from 'react';
 import { Loader, Segment } from 'semantic-ui-react';
-import styled from 'styled-components';
 import type { Post } from 'types/models';
 import { Grid, Row, Col, Icon } from 'components/index';
 import PostCard from '../components/PostCard';
+
+const styled = require('styled-components').default;
 
 export type Props = {
   posts: Array<Post>,

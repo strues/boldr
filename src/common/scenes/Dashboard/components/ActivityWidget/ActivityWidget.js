@@ -1,31 +1,31 @@
-import React, { PropTypes } from 'react';
-import { Segment, Feed, Icon, Header } from 'semantic-ui-react';
+/* @flow */
+import React from 'react';
+import { Segment, Icon } from 'semantic-ui-react';
+import { List, ListItem } from 'material-ui/List';
+import { Heading } from 'components/index';
+import Avatar from 'material-ui/Avatar';
+import NewIcon from 'material-ui/svg-icons/av/new-releases';
 
-const ActivityWidget = (props) => {
+type Props = {
+  activities: Array<Object>
+}
+const ActivityWidget = (props: Props) => {
   return (
     <Segment className="activity-feed__wrap">
-      <Header size="large">
-        <Icon name="feed" /> <Header.Content>Recent Activity</Header.Content>
-      </Header>
-      <Feed>
+      <Heading size={ 2 }>
+        <NewIcon /> Recent Activity
+      </Heading>
+      <List>
       {
         props.activities.map(a =>
-          <Feed.Event key={ a.id }>
-            <Feed.Label>
-              { a.action }
-            </Feed.Label>
-            <Feed.Content>
-              <Feed.Date>
-                { a.created_at }
-              </Feed.Date>
-              <Feed.Summary>
-                <Feed.User>{ a.owner.display_name }</Feed.User> added { a.name }
-              </Feed.Summary>
-            </Feed.Content>
-          </Feed.Event>,
+          <ListItem key={ a.id }
+            leftAvatar={ <Avatar src={ a.owner.avatar_url } /> }
+            primaryText={ a.action }
+            secondaryText={ a.created_at }
+          />,
         )
       }
-      </Feed>
+      </List>
     </Segment>
   );
 };

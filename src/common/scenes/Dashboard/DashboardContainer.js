@@ -2,11 +2,21 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import type { ReactElement } from 'types/react';
-import { Grid, Col, Authenticated, Icon } from 'components/index';
-import { Sidebar, Titlebar, SidebarContent } from './components/Sidebar';
+import AppBar from 'material-ui/AppBar';
+import Paper from 'material-ui/Paper';
+import { Grid, Col, Authenticated } from 'components/index';
+import Sidebar from './components/Sidebar';
 import { showSidebar, hideSidebar } from './reducer';
-import Dashboard from './Dashboard';
 
+const styled = require('styled-components').default;
+
+const BgOffsetBlock = styled.div`
+  display: flex;
+  width: 100%;
+  height: 225px;
+  background-color: #01BCD4;
+  z-index: 5;
+`;
 export type Props = {
   children: ReactElement,
   toggleOpen?: Function,
@@ -19,16 +29,7 @@ export type Props = {
 class DashboardContainer extends PureComponent {
   constructor() {
     super();
-    this.state = {
-      docked: false,
-      open: true,
-      transitions: true,
-      touch: true,
-      shadow: true,
-      pullRight: false,
-      touchHandleWidth: 20,
-      dragToggleDistance: 30,
-    };
+    this.state = { open: false };
     (this: any).menuButtonClick = this.menuButtonClick.bind(this);
     (this: any).onSetOpen = this.onSetOpen.bind(this);
     (this: any).onSetClose = this.onSetClose.bind(this);
@@ -40,42 +41,30 @@ class DashboardContainer extends PureComponent {
   onSetClose(open) {
     this.props.hideSidebar();
   }
-
+  handleToggle = () => this.setState({ open: !this.state.open });
   menuButtonClick(ev) {
     ev.preventDefault();
     const isOpen = this.props.dashboard.open;
     isOpen ? this.onSetClose(this.state.open) : this.onSetOpen(this.state.open);
   }
   render() {
-    const sidebar = <SidebarContent handleLogoClick={ this.onLogoClick } />;
-
-    const sidebarProps = {
-      sidebar,
-      docked: this.props.dashboard.docked,
-      sidebarClassName: 'dashboard__sidebar',
-      open: this.props.dashboard.open,
-      touch: this.state.touch,
-      shadow: this.state.shadow,
-      pullRight: this.state.pullRight,
-      touchHandleWidth: this.state.touchHandleWidth,
-      dragToggleDistance: this.state.dragToggleDistance,
-      transitions: this.state.transitions,
-      onSetOpen: this.onSetOpen,
-    };
-
     return (
-      <Grid fluid>
-        <Sidebar { ...sidebarProps }>
-          <Titlebar
-            title="Boldr"
-            icon={ <Icon kind="menu" onClick={ this.menuButtonClick } /> }
-          />
-            <Col xs>
-              { this.props.children }
-            </Col>
+      <div>
+        <Sidebar open={ this.props.dashboard.open } />
+        <AppBar
+          onLeftIconButtonTouchTap={ this.menuButtonClick }
+          style={ { left: this.props.dashboard.open ? '200px' : '0px' } }
+        />
+        <BgOffsetBlock />
 
-        </Sidebar>
+        <Grid fluid style={ { paddingLeft: this.props.dashboard.open ? '200px' : '0px' } }>
+          <Col xs>
+            <Paper zDepth={ 1 } style={ { marginTop: '-135px', padding: '1.5em' } }>
+              { this.props.children }
+            </Paper>
+          </Col>
       </Grid>
+    </div>
     );
   }
 }

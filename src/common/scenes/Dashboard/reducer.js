@@ -1,9 +1,8 @@
 import * as api from 'core/api';
-import { API_ACTIVITY } from 'core/config/endpoints';
 
-const LOAD_ACTIVITIES_REQUEST = '@boldr/dashboard/activity/LOAD_ACTIVITIES_REQUEST';
-const LOAD_ACTIVITIES_SUCCESS = '@boldr/dashboard/activity/LOAD_ACTIVITIES_SUCCESS';
-const LOAD_ACTIVITIES_FAILURE = '@boldr/dashboard/activity/LOAD_ACTIVITIES_FAILURE';
+export const LOAD_ACTIVITIES_REQUEST = '@boldr/dashboard/activity/LOAD_ACTIVITIES_REQUEST';
+export const LOAD_ACTIVITIES_SUCCESS = '@boldr/dashboard/activity/LOAD_ACTIVITIES_SUCCESS';
+export const LOAD_ACTIVITIES_FAILURE = '@boldr/dashboard/activity/LOAD_ACTIVITIES_FAILURE';
 
 const loadActivities = () => ({
   type: LOAD_ACTIVITIES_REQUEST,
@@ -38,6 +37,7 @@ export function loadSiteActivity() {
       });
   };
 }
+
 export const SHOW_SIDEBAR = '@boldr/dashboard/SHOW_SIDEBAR';
 export const HIDE_SIDEBAR = '@boldr/dashboard/HIDE_SIDEBAR';
 
@@ -95,11 +95,4 @@ export default function dashboardReducer(state = INITIAL_STATE, action) {
 
 export function isLoaded(globalState) {
   return globalState.dashboard.activity && globalState.dashboard.activity.loaded;
-}
-
-export function fetchActivities() {
-  return {
-    types: [LOAD_ACTIVITIES_REQUEST, LOAD_ACTIVITIES_SUCCESS, LOAD_ACTIVITIES_FAILURE],
-    promise: (client) => client.get(`${API_ACTIVITY}`),
-  };
 }

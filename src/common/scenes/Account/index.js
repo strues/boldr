@@ -1,10 +1,4 @@
-const errorLoading = (err) => {
-  console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
-};
-
-const loadModule = (cb) => (componentModule) => {
-  cb(null, componentModule.default);
-};
+import { getAsyncInjectors, loadRoute, errorLoading } from 'core/index';
 
 export default (store, connect) => ({
 
@@ -14,7 +8,7 @@ export default (store, connect) => ({
     path: 'forgot-password',
     getComponent(nextState, cb) {
       System.import('./ForgotPassword')
-        .then(loadModule(cb))
+        .then(loadRoute(cb))
         .catch(errorLoading);
     },
   },
@@ -22,7 +16,7 @@ export default (store, connect) => ({
     path: 'login',
     getComponent(nextState, cb) {
       System.import('./Login')
-        .then(loadModule(cb))
+        .then(loadRoute(cb))
         .catch(errorLoading);
     },
   },
@@ -30,7 +24,7 @@ export default (store, connect) => ({
     path: 'preferences',
     getComponent(nextState, cb) {
       System.import('./Preferences')
-        .then(loadModule(cb))
+        .then(loadRoute(cb))
         .catch(errorLoading);
     },
   },
@@ -62,7 +56,7 @@ export default (store, connect) => ({
     path: 'signup',
     getComponent(nextState, cb) {
       System.import('./Signup')
-        .then(loadModule(cb))
+        .then(loadRoute(cb))
         .catch(errorLoading);
     },
   }],

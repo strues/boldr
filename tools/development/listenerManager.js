@@ -55,4 +55,4 @@ class ListenerManager {
   }
 }
 
-module.exports = ListenerManager;
+export default ListenerManager;

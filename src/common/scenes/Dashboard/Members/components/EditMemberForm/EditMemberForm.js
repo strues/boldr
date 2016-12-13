@@ -2,6 +2,12 @@ import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Form } from 'semantic-ui-react';
 import { Row, Button } from 'components/index';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+
+const style = {
+  margin: 12,
+};
 
 const EditMemberForm = (props) => {
   const renderField = ({ input, label, type, meta: { touched, error } }) => ( // eslint-disable-line
@@ -60,8 +66,8 @@ const EditMemberForm = (props) => {
                 Admin
               </label>
             </Row>
-             <Button submit>Save changes</Button>
-             <Button disabled={ pristine || submitting } onClick={ reset }>Clear</Button>
+            <RaisedButton type="submit" label="Save" style={ style } primary />
+            <FlatButton label="Reset" onClick={ reset } secondary />
 
         </Form>
   );

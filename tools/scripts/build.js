@@ -1,15 +1,21 @@
-// This script builds a production output of all of our bundles.
+import webpack from 'webpack';
+import appRootDir from 'app-root-dir';
+import { resolve as pathResolve } from 'path';
+import webpackConfigFactory from '../webpack/configFactory';
+import projConfig from '../../config/boldr';
+import { exec } from '../utils';
 
-const pathResolve = require('path').resolve;
-const appRoot = require('app-root-dir');
-const { exec } = require('../utils.js');
+// First clear the build output dir.
+exec(`rimraf ${pathResolve(appRootDir.get(), projConfig.buildOutputPath)}`);
 
-const appRootPath = appRoot.get();
-
-const webpackConfigs = pathResolve(appRootPath, './tools/webpack');
-const clientConfig = pathResolve(webpackConfigs, 'client.config.js');
-const serverConfig = pathResolve(webpackConfigs, 'server.config.js');
-
-const cmd = `npm run clean && webpack --config ${clientConfig} && webpack --config ${serverConfig}`;
-
-exec(cmd);
+// Get our "fixed" bundle names
+Object.keys(projConfig.bundles)
+// And the "additional" bundle names
+.concat(Object.keys(projConfig.additionalNodeBundles))
+// And then build them all.
+.forEach((bundleName) => {
+  const compiler = webpack(
+    webpackConfigFactory({ target: bundleName, mode: 'production' }),
+  );
+  compiler.run(() => console.log(`"${bundleName}" bundle built.`));
+});

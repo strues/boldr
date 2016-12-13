@@ -1,9 +1,10 @@
 /* @flow */
 import React from 'react';
-import styled from 'styled-components';
-import { Footer } from '../../../components/index';
+import { Footer } from 'components/index';
 import Boldr from '../Boldr';
 import HeaderWrapper from './HeaderWrapper';
+
+const styled = require('styled-components').default;
 
 type Props = {
   header: ReactElement,
@@ -19,14 +20,17 @@ const Wrapper = styled.div`
   min-height: 100vh;
   box-sizing: border-box;
 `;
+
 const ContentWrapper = styled.section`
   width: 100%;
   box-sizing: border-box;
   margin: 1rem auto;
 `;
+
 const FooterWrapper = styled.footer`
   margin-top: auto;
 `;
+
 const PageTemplate = (props: Props) => {
   return (
     <Wrapper { ...props }>

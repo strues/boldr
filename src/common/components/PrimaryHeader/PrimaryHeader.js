@@ -9,6 +9,7 @@ type Props = {
   actions: Object,
   navigation: Object,
   settings: Object,
+  logo: Object,
   boldr: Object,
   auth: Object,
   handleDashClick: () => void,
@@ -80,7 +81,7 @@ class PrimaryHeader extends PureComponent {
     return (
       <Menu size="small" stackable>
       <Container>
-        <img src={ this.props.settings[2].value }
+        <img src={ this.props.logo.value }
           className="ph-logo"
           alt="logo" onClick={ this.props.handleLogoClick } role="button" tabIndex="0"
         />

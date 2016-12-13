@@ -1,8 +1,17 @@
 {
+  "presets": [
+    ["env", { "targets": { "node": true } }]
+  ],
+  "plugins": [
+    "transform-object-rest-spread",
+    "transform-es2015-destructuring",
+    "transform-class-properties",
+    "transform-flow-strip-types",
+    ["module-resolver", {
+      "root": ["./src/common"]
+    }]
+  ],
   "env": {
-    "api": {
-      "presets": ["boldr"]
-    },
     "test": {
       "presets": [["boldr", { "es2015": { "modules": "commonjs" }}], "react"],
       "plugins": [

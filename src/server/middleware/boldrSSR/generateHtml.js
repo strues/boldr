@@ -1,10 +1,8 @@
 /* @flow */
-
 import type { Head } from 'react-helmet';
 import serialize from 'serialize-javascript';
-import styleSheet from 'styled-components/lib/models/StyleSheet';
+import config from '../../../../config/boldr';
 import getAssetsForClientChunks from './getAssetsForClientChunks';
-import config from '../../../../tools/config';
 
 // We use the polyfill.io service which provides the polyfills that a
 // client needs, rather than everything if we used babel-polyfill.
@@ -37,7 +35,7 @@ function scriptTags(jsFilePaths: Array<string>) {
 // @see /tools/development/ensureVendorDLLExists.js
 function developmentVendorDLL() {
   if (process.env.NODE_ENV === 'development') {
-    return scriptTag(config.development.vendorDLL.webPath);
+    return scriptTag(`/client/${config.bundles.client.devVendorDLL.name}.js`);
   }
   return '';
 }
@@ -75,7 +73,7 @@ function generateHTML(args: Args) {
 
   // Now we get the assets (js/css) for the chunks.
   const assetsForRender = getAssetsForClientChunks(chunksForRender);
-  const styled = styleSheet.rules().map(rule => rule.cssText).join('\n');
+  // const styled = styleSheet.rules().map(rule => rule.cssText).join('\n');
   const inlineScript = body =>
     `<script nonce="${nonce}" type='text/javascript'>
        ${body}
@@ -87,9 +85,7 @@ function generateHTML(args: Args) {
         ${helmet ? helmet.title.toString() : ''}
         ${helmet ? helmet.meta.toString() : ''}
         ${helmet ? helmet.link.toString() : ''}
-        <style type="text/css">
-        ${styled}
-        </style>
+
         ${styleTags(assetsForRender.css)}
         ${helmet ? helmet.style.toString() : ''}
       </head>
@@ -99,7 +95,6 @@ function generateHTML(args: Args) {
            ? inlineScript(`window.PRELOADED_STATE=${serialize(preloadedState)};`)
            : ''
          }
-
         ${polyfillIoScript()}
         ${developmentVendorDLL()}
         ${scriptTags(assetsForRender.js)}

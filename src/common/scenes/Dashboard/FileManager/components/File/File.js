@@ -1,7 +1,8 @@
 import React, { PropTypes } from 'react';
-import { Image, Grid, Card, Button, Icon } from 'semantic-ui-react';
-
-const { Column, Row } = Grid;
+import { Card, CardActions, CardMedia, CardTitle } from 'material-ui/Card';
+import IconButton from 'material-ui/IconButton';
+import RemoveIcon from 'material-ui/svg-icons/action/delete-forever';
+import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 
 const File = (props) => {
   function handleclick() {
@@ -10,24 +11,19 @@ const File = (props) => {
   }
 
   return (
-    <Column key={ props.file.id }>
       <Card>
-      <Card.Header>
-      { props.file.filename }
-      </Card.Header>
-
-          <Image src={ props.file.url } alt={ props.file.filename } />
-
-        <Card.Meta>
-        <Button icon>
-          <Icon name="edit" />
-        </Button>
-        <Button onClick={ handleclick } icon>
-          <Icon name="trash" />
-        </Button>
-        </Card.Meta>
+      <CardMedia overlay={ <CardTitle title={ props.file.filename } /> }>
+        <img src={ props.file.url } alt={ props.file.filename } />
+      </CardMedia>
+        <CardActions>
+          <IconButton tooltip="Edit image">
+            <EditIcon />
+          </IconButton>
+          <IconButton onClick={ handleclick } tooltip="Permanently delete">
+            <RemoveIcon />
+          </IconButton>
+        </CardActions>
       </Card>
-    </Column>
   );
 };
 

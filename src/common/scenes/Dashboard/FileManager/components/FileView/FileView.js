@@ -1,19 +1,17 @@
 import React, { PropTypes } from 'react';
-import { Grid } from 'semantic-ui-react';
+import { Row } from 'components/index';
 import File from '../File';
-
-const { Column, Row } = Grid;
 
 const FileView = props => {
   return (
-      <Grid>
-      <Row columns={ 4 }>
+    <div style={ { paddingTop: '15px' } }>
+      <Row>
         {
           props.files.map((file, i) =>
           <File key={ i } file={ file } removeMedia={ props.removeMedia } />)
          }
          </Row>
-      </Grid>
+      </div>
   );
 };
 

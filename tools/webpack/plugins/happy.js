@@ -1,11 +1,14 @@
 const path = require('path');
 const os = require('os');
-const defs = require('../../config/defs');
+const appRootDir = require('app-root-dir');
+
 const { removeEmpty, ifElse, merge, happyPackPlugin, chalkError, chalkInfo } = require('../../utils');
-const config = require('../../config.js');
 const isDev = process.env.NODE_ENV === 'development';
 const isClient = true;
 const ifDevClient = ifElse(isDev && isClient);
+
+const rootdir = appRootDir.get();
+const nodem = path.resolve(rootdir, './node_modules');
 
 const happyCSSPlugin = happyPackPlugin({
   name: 'happypack-devclient-css',
@@ -37,7 +40,7 @@ const happyJSPlugin = (babelPlugin) => happyPackPlugin({
     path: 'babel-loader',
     query: {
       babelrc: false,
-      cacheDirectory: path.resolve(defs.paths.node_modules, 'boldr', 'babelc'),
+      cacheDirectory: path.resolve(nodem, 'boldr', 'babelc'),
       presets: [['boldr', { 'es2015': { 'modules': false }}]],
       plugins: babelPlugin
     },

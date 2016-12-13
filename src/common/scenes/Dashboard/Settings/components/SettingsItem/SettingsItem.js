@@ -13,7 +13,7 @@ type Props = {
   setting: Setting
 };
 
-class SettingsItem extends Component {
+export class SettingsItem extends Component {
   constructor() {
     super();
     this.state = {

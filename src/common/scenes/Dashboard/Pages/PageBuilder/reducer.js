@@ -1,6 +1,6 @@
 import { notificationSend } from 'state/dux/notifications';
 import * as api from 'core/api';
-import * as notif from 'core/config/notifications';
+import * as notif from 'core/constants';
 
 export const CREATE_PAGE_REQUEST = '@boldr/dashboard/pages/CREATE_PAGE_REQUEST';
 export const CREATE_PAGE_SUCCESS = '@boldr/dashboard/pages/CREATE_PAGE_SUCCESS';

@@ -1,7 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 /* @flow */
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { asyncConnect } from 'redux-connect';
 import { fetchPagesIfNeeded, getPages } from 'state/index';
 import Pages from './Pages';
@@ -11,7 +10,7 @@ export type Props = {
   fetchPagesIfNeeded: Function
 };
 
-class PagesContainer extends Component {
+export class PagesContainer extends Component {
   componentDidMount() {
     this.props.fetchPagesIfNeeded();
   }

@@ -6,7 +6,7 @@ import { normalize, arrayOf } from 'normalizr';
 import { camelizeKeys } from 'humps';
 import { push } from 'react-router-redux';
 import * as api from 'core/api';
-import * as notif from 'core/config/notifications';
+import * as notif from 'core/constants';
 import { notificationSend } from 'state/dux/notifications';
 import {
   navigation as navigationSchema,
