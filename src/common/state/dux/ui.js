@@ -1,4 +1,4 @@
-import { GRID } from 'core/config/layouts';
+import { LAYOUTS } from 'core/constants';
 
 export const CHANGE_LAYOUT = '@boldr/CHANGE_LAYOUT';
 export const SET_MOBILE_DEVICE = '@boldr/SET_MOBILE_DEVICE';
@@ -19,7 +19,7 @@ export function setMobileDevice(enabled = true) {
 }
 const INITIAL_STATE = {
   loaded: false,
-  layout: GRID,
+  layout: LAYOUTS.GRID,
   isMobile: false,
   modal: false,
 };

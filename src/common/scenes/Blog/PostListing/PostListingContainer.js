@@ -2,7 +2,7 @@
 /* @flow */
 import React, { Component } from 'react';
 import { asyncConnect } from 'redux-connect';
-import { GRID, LIST } from 'core/config/layouts';
+import { LAYOUTS } from 'core/constants';
 import { changeLayout } from 'state/dux/ui';
 import { getPosts, fetchPostsIfNeeded } from 'state/index';
 
@@ -26,8 +26,8 @@ class PostListingContainer extends Component {
   props: Props;
   handleChangeLayout() {
     this.props.ui.layout === 'grid' ?
-    this.props.changeLayout(LIST) :
-    this.props.changeLayout(GRID);
+    this.props.changeLayout(LAYOUTS.LIST) :
+    this.props.changeLayout(LAYOUTS.GRID);
   }
   render() {
     return (

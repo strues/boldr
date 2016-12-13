@@ -1,8 +1,7 @@
 /* @flow */
 import * as api from 'core/api';
-import * as notif from 'core/config/notifications';
+import * as notif from 'core/constants';
 import type { Post } from '../../types/models';
-// import type { ActionType } from '../../types/redux';
 import { notificationSend } from './notifications';
 
 export const LOAD_POSTS_REQUEST = '@boldr/LOAD_POSTS_REQUEST';

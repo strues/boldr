@@ -216,7 +216,6 @@ export default {
       outputPath: './boldrCMS/server',
     },
   },
-
   additionalNodeBundles: {
     // NOTE: The webpack configuration and build scripts have been built so
     // that you can add arbitrary additional node bundle configurations here.

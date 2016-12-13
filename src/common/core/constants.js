@@ -1,3 +1,11 @@
+export const TOKEN_KEY = 'token';
+
+export const LAYOUTS = {
+  GALLERY: 'gallery',
+  GRID: 'grid',
+  LIST: 'list',
+};
+
 export const MSG_SIGNUP_ERROR = {
   message: 'There was a problem creating your account.', kind: 'error', dismissAfter: 3000,
 };

@@ -10,7 +10,6 @@ import { showModal, hideModal } from 'state/dux/ui';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
 import { S3Uploader, Row, Col, Modal } from 'components/index';
-import { API_PREFIX, S3_SIGNING_URL } from 'core/config';
 import { uploadFiles, fetchMedia, deleteMedia } from './reducer';
 import FileView from './components/FileView';
 
@@ -92,7 +91,8 @@ class FileManager extends Component {
        </Row>
        <Modal open={ this.props.ui.modal } onClose={ this.closeModal } title="Upload an image">
          <S3Uploader
-           signingUrl={ `${S3_SIGNING_URL}` }
+           signingUrl="/s3/sign"
+           server="/api/v1"
            accept="image/*"
            onProgress={ S3Uploader.onUploadProgress }
            onError={ S3Uploader.onUploadError }
@@ -100,7 +100,6 @@ class FileManager extends Component {
 
            uploadRequestHeaders={ { 'x-amz-acl': 'public-read' } }
            contentDisposition="auto"
-           server={ `${API_PREFIX}` }
          />
        </Modal>
       </div>

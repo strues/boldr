@@ -1,6 +1,6 @@
 import * as api from 'core/api';
 import { notificationSend } from 'state/dux/notifications';
-import * as notif from 'core/config/notifications';
+import * as notif from 'core/constants';
 
 const FETCH_BLOCKS_REQUEST = '@boldr/cp/FETCH_BLOCKS_REQUEST';
 const FETCH_BLOCKS_SUCCESS = '@boldr/cp/FETCH_BLOCKS_SUCCESS';

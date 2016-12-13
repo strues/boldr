@@ -1,5 +1,4 @@
 import superagent from 'superagent';
-import base from '../config/base';
 import { getToken } from '../services/token';
 
 const methods = ['get', 'post', 'put', 'patch', 'del'];
@@ -11,7 +10,7 @@ function formatUrl(path) {
     if (__SERVER__) {
       console.log('----SERVER REQUEST----');
     // Prepend host and port of the API server to the path.
-      return `http://${base.host}:${base.port + adjustedPath}`;
+      return `http://${process.env.API_HOST}:${process.env.API_PORT + adjustedPath}`;
     }
   }
   console.log('----CLIENT REQUEST----');

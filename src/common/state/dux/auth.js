@@ -1,8 +1,7 @@
 import { push } from 'react-router-redux';
 import * as api from 'core/api';
-import { setToken } from 'core/services/token';
-import { TOKEN_KEY } from 'core/config';
-import * as notif from 'core/config/notifications';
+import { setToken, removeToken } from 'core/services/token';
+import * as notif from 'core/constants';
 import { notificationSend } from './notifications';
 
 export const LOGIN_REQUEST = 'AUTH/LOGIN_REQUEST';
@@ -128,7 +127,7 @@ function logoutSuccess() {
 
 export function logout() {
   return (dispatch) => {
-    localStorage.removeItem(TOKEN_KEY);
+    removeToken();
     dispatch(logoutSuccess());
     dispatch(notificationSend(notif.MSG_LOGOUT));
   };
