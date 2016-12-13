@@ -11,7 +11,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import Helmet from 'react-helmet';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { lightBlue100, lightBlue500, lightBlue700 } from 'material-ui/styles/colors';
+import { lightBlue100, lightBlue700 } from 'material-ui/styles/colors';
 // async data fetching
 import { ReduxAsyncConnect, loadOnServer } from 'redux-connect';
 import createRoutes from '../../../common/scenes';

@@ -2,8 +2,6 @@ import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
 import appRootDir from 'app-root-dir';
-import userHome from 'user-home';
-import pkg from '../package.json';
 import staticConfig from './boldr';
 
 function registerEnvFile() {
@@ -18,11 +16,6 @@ function registerEnvFile() {
     path.resolve(appRootDir.get(), `${envFile}.${envName}`),
     // Is there an environment config file at the app root?
     path.resolve(appRootDir.get(), envFile),
-    // Is there an environment config file in the executing user's home dir
-    // that is targetting the specific environment?
-    path.resolve(userHome, '.config', pkg.name, `${envFile}.${envName}`),
-    // Is there an environment config file in the executing user's home dir?
-    path.resolve(userHome, '.config', pkg.name, envFile),
   ];
 
   // Find the first env file path match.
@@ -62,6 +55,8 @@ export default {
   host: getStringEnvVar('HOST', 'localhost'),
   // The port on which the server should run.
   port: getIntEnvVar('SSR_PORT', 3000),
+  apiHost: getStringEnvVar('API_HOST', 'localhost'),
+  apiPort: getIntEnvVar('API_PORT', 2121),
   // Enable SSR rendering of the React application?
   // It can be useful to disable this in development in order to debug complex
   // issues with your React components.

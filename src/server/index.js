@@ -10,20 +10,18 @@ import hpp from 'hpp';
 import cookieParser from 'cookie-parser';
 import helmet from 'helmet';
 import httpProxy from 'http-proxy';
-import { notEmpty } from '../common/core/utils/guards';
+import config from '../../config/boldr';
+import envConfig from '../../config/environment';
 import boldrSSR from './middleware/boldrSSR';
 
+const appRootPath = appRoot.get();
 // these values are to inform the proxy, which is running here, where our backend
 // api is located.
-const API_PORT = 2121;
-const API_HOST = process.env.API_HOST || 'localhost';
-
-const appRootPath = appRoot.get();
-const proxyTo = `http://${API_HOST}:${API_PORT}/api/v1`;
+const proxyTo = `http://${envConfig.apiHost}:${envConfig.apiPort}/api/v1`;
 // Create Express server.
 const app = express();
 app.use(compression());
-
+app.use(cookieParser());
 // Attach a unique "nonce" to every response.  This allows use to declare
 // inline scripts as being safe for execution against our content security policy.
 // @see https://helmetjs.github.io/docs/csp/
@@ -32,7 +30,6 @@ app.use((req: $Request, res: $Response, next: NextFunction) => {
   res.locals.nonce = uuid(); // eslint-disable-line no-param-reassign
   next();
 });
-app.use(cookieParser());
 const proxy = httpProxy.createProxyServer({
   target: proxyTo,
 });
@@ -91,11 +88,10 @@ proxy.on('error', (err: Object, req: $Request, res: $Response) => {
 });
 
 // Configure static serving of our webpack bundled client files.
-app.use(
-  notEmpty(process.env.CLIENT_BUNDLE_HTTP_PATH),
+app.use(config.bundles.client.webPath,
   express.static(
-    path.resolve(appRootPath, notEmpty(process.env.BUNDLE_OUTPUT_PATH), './client'),
-    { maxAge: notEmpty(process.env.CLIENT_BUNDLE_CACHE_MAXAGE) },
+    path.resolve(appRootPath, config.buildOutputPath, './client'),
+    { maxAge: config.browserCacheMaxAge },
   ),
 );
 
@@ -111,7 +107,7 @@ if (process.env.NODE_ENV === 'production') {
     '/sw.js',
     (req: $Request, res: $Response, next: NextFunction) => { // eslint-disable-line no-unused-vars
       res.sendFile(
-        path.resolve(appRootPath, notEmpty(process.env.BUNDLE_OUTPUT_PATH), './client/sw.js'),
+        path.resolve(appRootPath, config.buildOutputPath, './client/sw.js'),
       );
     },
   );
@@ -139,7 +135,7 @@ app.use((err: ?Error, req: $Request, res: $Response, next: NextFunction) => { //
 });
 
 // Create an http listener for our express app.
-const port = parseInt(notEmpty(process.env.SSR_PORT), 10);
+const port = parseInt(envConfig.port, 10);
 const listener = app.listen(port, () =>
   console.log(`Server listening on port ${port}`),
 );

@@ -5,15 +5,13 @@
 import fs from 'fs';
 import path from 'path';
 import appRoot from 'app-root-dir';
-import { notEmpty } from '../../../common/core/utils/guards';
-
-const appRootPath = appRoot.get();
+import config from '../../../../config/boldr';
 
 const assetsBundleFilePath = path.resolve(
-  appRootPath,
-  notEmpty(process.env.BUNDLE_OUTPUT_PATH),
+  appRoot.get(),
+  config.buildOutputPath,
   './client',
-  `./${notEmpty(process.env.BUNDLE_ASSETS_FILENAME)}`,
+  `./${config.bundleAssetsFileName}`,
 );
 
 if (!fs.existsSync(assetsBundleFilePath)) {

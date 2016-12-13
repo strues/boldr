@@ -1,13 +1,5 @@
-import { getAsyncInjectors } from '../../core';
+import { getAsyncInjectors, loadRoute, errorLoading } from 'core/index';
 import DashboardContainer from './DashboardContainer';
-
-const errorLoading = (err) => {
-  console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
-};
-
-const loadModule = (cb) => (componentModule) => {
-  cb(null, componentModule.default);
-};
 
 export default (store, connect) => {
   const { injectReducer } = getAsyncInjectors(store);
@@ -20,7 +12,7 @@ export default (store, connect) => {
           System.import('./reducer'),
           System.import('./Dashboard'),
         ]);
-        const renderRoute = loadModule(cb);
+        const renderRoute = loadRoute(cb);
         importModules.then(([reducer, component]) => {
           injectReducer('dashboard', reducer.default);
           renderRoute(component);
@@ -38,7 +30,7 @@ export default (store, connect) => {
             System.import('./Blocks/reducer'),
             System.import('./Blocks'),
           ]);
-          const renderRoute = loadModule(cb);
+          const renderRoute = loadRoute(cb);
           importModules.then(([reducer, component]) => {
             injectReducer('blocks', reducer.default);
             renderRoute(component);
@@ -54,7 +46,7 @@ export default (store, connect) => {
             System.import('./Blocks/BuildBlock/reducer'),
             System.import('./Blocks/BuildBlock'),
           ]);
-          const renderRoute = loadModule(cb);
+          const renderRoute = loadRoute(cb);
           importModules.then(([reducer, component]) => {
             injectReducer('build', reducer.default);
             renderRoute(component);
@@ -67,7 +59,7 @@ export default (store, connect) => {
         path: 'posts',
         getComponent(nextState, cb) {
           System.import('./Post/PostList/PostListContainer')
-          .then(loadModule(cb))
+          .then(loadRoute(cb))
           .catch(errorLoading);
         },
       },
@@ -75,7 +67,7 @@ export default (store, connect) => {
         path: 'posts/editor/:slug',
         getComponent(nextState, cb) {
           System.import('./Post/PostEditor')
-          .then(loadModule(cb))
+          .then(loadRoute(cb))
           .catch(errorLoading);
         },
       },
@@ -83,7 +75,7 @@ export default (store, connect) => {
         path: 'posts/new',
         getComponent(nextState, cb) {
           System.import('./Post/NewPost/NewPostContainer')
-          .then(loadModule(cb))
+          .then(loadRoute(cb))
           .catch(errorLoading);
         },
       },
@@ -94,7 +86,7 @@ export default (store, connect) => {
             System.import('./FileManager/reducer'),
             System.import('./FileManager'),
           ]);
-          const renderRoute = loadModule(cb);
+          const renderRoute = loadRoute(cb);
           importModules.then(([reducer, component]) => {
             injectReducer('attachments', reducer.default);
             renderRoute(component);
@@ -108,7 +100,7 @@ export default (store, connect) => {
         path: 'navigation',
         getComponent(nextState, cb) {
           System.import('./Navigation')
-        .then(loadModule(cb))
+        .then(loadRoute(cb))
         .catch(errorLoading);
         },
       },
@@ -116,7 +108,7 @@ export default (store, connect) => {
         path: 'pages',
         getComponent(nextState, cb) {
           System.import('./Pages')
-        .then(loadModule(cb))
+        .then(loadRoute(cb))
         .catch(errorLoading);
         },
       },
@@ -124,7 +116,7 @@ export default (store, connect) => {
         path: 'pages/new',
         getComponent(nextState, cb) {
           System.import('./Pages/components/NewPage')
-        .then(loadModule(cb))
+        .then(loadRoute(cb))
         .catch(errorLoading);
         },
       },
@@ -135,7 +127,7 @@ export default (store, connect) => {
             System.import('./Pages/PageBuilder/reducer'),
             System.import('./Pages/PageBuilder'),
           ]);
-          const renderRoute = loadModule(cb);
+          const renderRoute = loadRoute(cb);
           importModules.then(([reducer, component]) => {
             injectReducer('pageBuilder', reducer.default);
             renderRoute(component);
@@ -148,7 +140,7 @@ export default (store, connect) => {
         path: 'pages/builder/:label',
         getComponent(nextState, cb) {
           System.import('./Pages/PageBuilder')
-        .then(loadModule(cb))
+        .then(loadRoute(cb))
         .catch(errorLoading);
         },
       },
@@ -167,7 +159,7 @@ export default (store, connect) => {
             System.import('./Members/reducer'),
             System.import('./Members'),
           ]);
-          const renderRoute = loadModule(cb);
+          const renderRoute = loadRoute(cb);
           importModules.then(([reducer, component]) => {
             injectReducer('members', reducer.default);
             renderRoute(component);

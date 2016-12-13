@@ -28,7 +28,6 @@ test:
     - npm run test:ci
   post:
       - bash <(curl -s https://codecov.io/bash)
-    # - CODECLIMATE_REPO_TOKEN=$CODECLIMATE_REPO_TOKEN codeclimate-test-reporter < coverage/lcov.info
 general:
   branches:
     only:

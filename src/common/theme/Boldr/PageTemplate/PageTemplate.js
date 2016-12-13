@@ -1,9 +1,10 @@
 /* @flow */
 import React from 'react';
-import styled from 'styled-components';
 import { Footer } from 'components/index';
 import Boldr from '../Boldr';
 import HeaderWrapper from './HeaderWrapper';
+
+const styled = require('styled-components').default;
 
 type Props = {
   header: ReactElement,

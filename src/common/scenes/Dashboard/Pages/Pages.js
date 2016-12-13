@@ -1,9 +1,10 @@
 import React from 'react';
 import { Header, Segment } from 'semantic-ui-react';
-import styled from 'styled-components';
 import Link from 'react-router/lib/Link';
 import { Row, Button } from 'components/index';
 import Page from './components/Page';
+
+const styled = require('styled-components').default;
 
 const TitleWrapper = styled.section`
   width: 100%;

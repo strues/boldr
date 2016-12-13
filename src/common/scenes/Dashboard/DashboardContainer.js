@@ -2,13 +2,13 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import type { ReactElement } from 'types/react';
-import styled from 'styled-components';
 import AppBar from 'material-ui/AppBar';
 import Paper from 'material-ui/Paper';
 import { Grid, Col, Authenticated } from 'components/index';
 import Sidebar from './components/Sidebar';
 import { showSidebar, hideSidebar } from './reducer';
 
+const styled = require('styled-components').default;
 
 const BgOffsetBlock = styled.div`
   display: flex;

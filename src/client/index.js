@@ -15,6 +15,7 @@ import useScroll from 'react-router-scroll/lib/useScroll';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 import { getToken } from '../common/core/services/token';
 import ApiClient from '../common/core/api/apiClient';
 import configureStore from '../common/state/store';

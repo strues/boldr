@@ -15,7 +15,7 @@ import {
   API_BLOCKS,
   TOKEN_KEY,
 } from './config';
-
+import { loadRoute, errorLoading } from './utils/routeHelpers';
 import { getAsyncInjectors } from './utils/injectAsync';
 
 export {
@@ -35,4 +35,6 @@ export {
   API_SETTINGS,
   TOKEN_KEY,
   getAsyncInjectors,
+  loadRoute,
+  errorLoading,
 };
