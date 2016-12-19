@@ -1,4 +1,18 @@
+general:
+  artifacts:
+    - "coverage/"
+  branches:
+    only:
+      - /greenkeeper-.*
+      - /feature\/.*
+      - /release\/.*
+      - /hotfix\/.*
+      - master
+      - develop
 machine:
+  services:
+    - redis
+    - postgresql
   timezone:
     America/Denver
   node:
@@ -7,8 +21,12 @@ machine:
   pre:
     - mkdir ~/.yarn-cache
   environment:
+    CIRCLE_ARTIFACTS: coverage
     NODE_ENV: test
     CIRCLE_ENV: test
+    POSTGRES_CONN_URI: postgres://ubuntu:@127.0.0.1:5432/circle_test
+    REDIS_CONN_URI: redis://127.0.0.1:6379/1
+    TOKEN_SECRET: bbbbaaaasss
 dependencies:
   pre:
         # Install Yarn
@@ -24,16 +42,9 @@ dependencies:
     - yarn install
 
 test:
+  pre:
+    - make setup-db
   override:
-    - npm run test:ci
+    - make test-ci
   post:
       - bash <(curl -s https://codecov.io/bash)
-general:
-  branches:
-    only:
-      - /greenkeeper-.*
-      - /feature\/.*
-      - /release\/.*
-      - /hotfix\/.*
-      - master
-      - develop
