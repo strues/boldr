@@ -2,7 +2,7 @@ import express from 'express';
 import createWebpackMiddleware from 'webpack-dev-middleware';
 import createWebpackHotMiddleware from 'webpack-hot-middleware';
 import ListenerManager from './listenerManager';
-import { createNotification } from '../utils';
+import { log } from '../utils';
 
 class HotClientServer {
   constructor(compiler) {
@@ -38,7 +38,7 @@ class HotClientServer {
     this.listenerManager = new ListenerManager(listener, 'client');
 
     compiler.plugin('compile', () => {
-      createNotification({
+      log({
         title: 'client',
         level: 'info',
         message: 'Building new bundle...',
@@ -47,14 +47,14 @@ class HotClientServer {
 
     compiler.plugin('done', (stats) => {
       if (stats.hasErrors()) {
-        createNotification({
+        log({
           title: 'client',
           level: 'error',
           message: 'Build failed, please check the console for more information.',
         });
         console.log(stats.toString());
       } else {
-        createNotification({
+        log({
           title: 'client',
           level: 'info',
           message: 'Running with latest changes.',

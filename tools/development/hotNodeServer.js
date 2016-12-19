@@ -1,7 +1,7 @@
 import path from 'path';
 import appRootDir from 'app-root-dir';
 import ListenerManager from './listenerManager';
-import { createNotification } from '../utils';
+import { log } from '../utils';
 
 class HotNodeServer {
   constructor(name, compiler) {
@@ -15,7 +15,7 @@ class HotNodeServer {
     );
 
     compiler.plugin('compile', () =>
-      createNotification({
+      log({
         title: name,
         level: 'info',
         message: 'Building new bundle...',
@@ -33,7 +33,7 @@ class HotNodeServer {
         listener.on('listening', () => {
           const { address, port } = listener.address();
           const url = `http://${address}:${port}`;
-          createNotification({
+          log({
             title: 'server',
             level: 'info',
             message: `Running on ${url} with latest changes.`,
@@ -41,7 +41,7 @@ class HotNodeServer {
           });
         });
       } catch (err) {
-        createNotification({
+        log({
           title: 'server',
           level: 'error',
           message: 'Failed to start, please check the console for more information.',
@@ -52,7 +52,7 @@ class HotNodeServer {
 
     compiler.plugin('done', (stats) => {
       if (stats.hasErrors()) {
-        createNotification({
+        log({
           title: 'server',
           level: 'error',
           message: 'Build failed, check the console for more information.',

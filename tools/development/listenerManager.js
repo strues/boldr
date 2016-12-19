@@ -1,4 +1,4 @@
-const { createNotification } = require('../utils');
+import { log } from '../utils';
 
 class ListenerManager {
   constructor(listener, name) {
@@ -33,14 +33,14 @@ class ListenerManager {
       if (this.listener) {
         this.killAllConnections();
 
-        createNotification({
+        log({
           title: this.name,
           level: 'info',
           message: 'Destroyed all existing connections.',
         });
 
         this.listener.close(() => {
-          createNotification({
+          log({
             title: this.name,
             level: 'info',
             message: 'Closed listener.',

@@ -1,7 +1,5 @@
 /* @flow */
 
-import 'source-map-support/register';
-
 import { resolve as pathResolve } from 'path';
 import express from 'express';
 import type { $Request, $Response, NextFunction } from 'express';
@@ -19,7 +17,6 @@ import clientBundle from './middleware/clientBundle';
 import errorHandlers from './middleware/errorHandlers';
 import boldrSSR from './middleware/boldrSSR';
 
-const appRootPath = appRoot.get();
 // these values are to inform the proxy, which is running here, where our backend
 // api is located.
 const proxyTo = `http://${envConfig.apiHost}:${envConfig.apiPort}/api/v1`;

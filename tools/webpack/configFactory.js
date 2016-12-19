@@ -1,25 +1,24 @@
+import path from 'path';
+import os from 'os';
+import appRootDir from 'app-root-dir';
+import HardSourceWebpackPlugin from 'hard-source-webpack-plugin';
 import { host, wpdsPort, protocol, port } from '../../config/private/environment';
 import config from '../../config/private/boldr';
 
-const path = require('path');
-const os = require('os');
 const globSync = require('glob').sync;
 const webpack = require('webpack');
 const AssetsPlugin = require('assets-webpack-plugin');
 const nodeExternals = require('webpack-node-externals');
-const colors = require('colors');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const appRoot = require('app-root-dir');
 const OfflinePlugin = require('offline-plugin');
 const WebpackMd5Hash = require('webpack-md5-hash');
-const { removeEmpty, ifElse, merge, happyPackPlugin, getFilename, chalkError, chalkInfo } = require('../utils');
+const { removeEmpty, ifElse, merge, happyPackPlugin } = require('../utils');
 
 const appName = require('../../package.json').name;
 
 const babel = require('./plugins/babel');
 const happy = require('./plugins/happy');
 
-const appRootPath = appRoot.get();
 function webpackConfigFactory(buildOptions) {
   const { target, mode } = buildOptions;
   if (!target || ['client', 'server'].findIndex(valid => target === valid) === -1) {
@@ -77,57 +76,35 @@ function webpackConfigFactory(buildOptions) {
       'source-map',
       'hidden-source-map'
     ),
-    // Define our entry chunks for our bundle.
     entry: merge({
       index: removeEmpty([
         ifDevClient('react-hot-loader/patch'),
         ifDevClient('webpack-hot-middleware/client?reload=true&path=http://localhost:3001/__webpack_hmr'), // eslint-disable-line
-        path.resolve(appRoot.get(), bundleConfig.srcEntryFile),
+        path.resolve(appRootDir.get(), bundleConfig.srcEntryFile),
       ]),
     }),
     output: merge(
          {
-           // The dir in which our bundle should be output.
-           path: path.resolve(appRoot.get(), bundleConfig.outputPath),
-           // The filename format for our bundle's entries.
+           path: path.resolve(appRootDir.get(), bundleConfig.outputPath),
            filename: ifProdClient(
-             // For our production client bundles we include a hash in the filename.
-             // That way we won't hit any browser caching issues when our bundle
-             // output changes.
-             // Note: as we are using the WebpackMd5Hash plugin, the hashes will
-             // only change when the file contents change. This means we can
-             // set very aggressive caching strategies on our bundle output.
              '[name]-[chunkhash].js',
-             // For any other bundle (typically a server/node) bundle we want a
-             // determinable output name to allow for easier importing/execution
-             // of the bundle by our scripts.
              '[name].js',
            ),
-           // The name format for any additional chunks produced for the bundle.
            chunkFilename: '[name]-[chunkhash].js',
-           // When in node mode we will output our bundle as a commonjs2 module.
            libraryTarget: ifNode('commonjs2', 'var'),
          },
-         // This is the web path under which our webpack bundled client should
-         // be considered as being served from.
-         // We only need to set this for our server/client bundles as the server
-         // bundle is the application that serves the client bundle.
          ifElse(isServer || isClient)({
            publicPath: ifDev(
-             // As we run a seperate development server for our client and server
-             // bundles we need to use an absolute http path for the public path.
              'http://localhost:3001/client/',
-             // Otherwise we expect our bundled client to be served from this path.
              bundleConfig.webPath,
            ),
          }),
        ),
     resolve: {
       mainFields: ifNodeTarget(
-        [ "module", "jsnext:main", "webpack", "main" ],
-        [ "module", "jsnext:main", "webpack", "browser", "web", "browserify", "main" ]
+        [ 'module', 'jsnext:main', 'webpack', 'main' ],
+        [ 'module', 'jsnext:main', 'webpack', 'browser', 'web', 'browserify', 'main' ]
       ),
-      // These extensions are tried when resolving a file.
       extensions: [
         '.js',
         '.jsx',
@@ -138,14 +115,9 @@ function webpackConfigFactory(buildOptions) {
       new webpack.DefinePlugin(
         {
           'process.env.NODE_ENV': JSON.stringify(mode),
-          // Is this the "client" bundle?
           'process.env.IS_CLIENT': JSON.stringify(isClient),
-          // Is this the "server" bundle?
           'process.env.IS_SERVER': JSON.stringify(isServer),
-          // Is this a node bundle?
           'process.env.IS_NODE': JSON.stringify(isNode),
-          __DEV__: process.env.NODE_ENV !== 'production',
-          __CLIENT__: JSON.stringify(isClient),
           __SERVER__: JSON.stringify(isServer),
         }
       ),
@@ -153,11 +125,10 @@ function webpackConfigFactory(buildOptions) {
       ifClient(
         new WebpackMd5Hash()
       ),
-      // ifProdClient(new LodashModuleReplacementPlugin()),
       ifClient(
         new AssetsPlugin({
           filename: config.bundleAssetsFileName,
-          path: path.resolve(appRootPath, config.buildOutputPath, `./${target}`),
+          path: path.resolve(appRootDir.get(), config.buildOutputPath, `./${target}`),
         })
       ),
       ifDev(new webpack.NoErrorsPlugin()),
@@ -170,55 +141,21 @@ function webpackConfigFactory(buildOptions) {
         })
       ),
       ifProdClient(new OfflinePlugin({
-          // Setting this value lets the plugin know where our generated client
-          // assets will be served from.
-          // e.g. /client/
           publicPath: config.bundles.client.webPath,
-          // When using the publicPath we need to disable the "relativePaths"
-          // feature of this plugin.
           relativePaths: false,
-          // Our offline support will be done via a service worker.
-          // Read more on them here:
-          // http://bit.ly/2f8q7Td
           ServiceWorker: {
             output: 'sw.js',
             events: true,
-            // By default the service worker will be ouput and served from the
-            // publicPath setting above in the root config of the OfflinePlugin.
-            // This means that it would be served from /client/sw.js
-            // We do not want this! Service workers have to be served from the
-            // root of our application in order for them to work correctly.
-            // Therefore we override the publicPath here. The sw.js will still
-            // live in at the /build/client/sw.js output location therefore in
-            // our server configuration we need to make sure that any requests
-            // to /sw.js will serve the /build/client/sw.js file.
             publicPath: '/sw.js',
-            // When a user has no internet connectivity and a path is not available
-            // in our service worker cache then the following file will be
-            // served to them.  Go and make it pretty. :)
             navigateFallbackURL: '/offline.html',
           },
-          // We aren't going to use AppCache and will instead only rely on
-          // a Service Worker.
           AppCache: false,
-
-          // Which external files should be included with the service worker?
-          // NOTE: The below config will include ALL of our public folder assets.
-          // You may or may not want to be including these assets.  Feel free
-          // to remove this or instead include only a very specific set of
-          // assets.
           externals:
-            // First do a glob match on ALL files in the public folder.
-            globSync(path.resolve(appRootPath, './public', './**/*'))
-            // Then map them to relative paths against the public folder.
-            // We need to do this as we need to convert the file paths into
-            // their respective "web" paths.
+            globSync(path.resolve(appRootDir.get(), './public', './**/*'))
             .map(publicFile => path.relative(
-              path.resolve(appRootPath, 'public'),
+              path.resolve(appRootDir.get(), 'public'),
               publicFile
             ))
-            // Add the leading "/" indicating the file is being hosted
-            // off the HTTP root of the application.
             .map(relativePath => `/${relativePath}`),
         })
       ),
@@ -240,6 +177,29 @@ function webpackConfigFactory(buildOptions) {
           },
         })
       ),
+      ifServer(new webpack.BannerPlugin({
+        banner: 'require("source-map-support").install();',
+        raw: true,
+        entryOnly: false
+      })),
+      // Improve source caching in Webpack v2. Conflicts with offline plugin right now.
+      // Therefor we disable it in production and only use it to speed up development rebuilds.
+      ifDev(new HardSourceWebpackPlugin({
+        // Either an absolute path or relative to output.path.
+        cacheDirectory: path.resolve(appRootDir.get(), ".hardsource", `${target}-${mode}`),
+
+        // Either an absolute path or relative to output.path. Sets webpack's
+        // recordsPath if not already set.
+        recordsPath: path.resolve(appRootDir.get(), ".hardsource", `${target}-${mode}`, "records.json"),
+
+        // Optional field. This field determines when to throw away the whole
+        // cache if for example npm modules were updated.
+        environmentHash: {
+          root: appRootDir.get(),
+          directories: [ "node_modules" ],
+          files: [ "package.json", "yarn.lock" ]
+        }
+      })),
       ifProdClient(
         new ExtractTextPlugin({ filename: '[name]-[chunkhash].css', allChunks: true })
       ),
@@ -249,20 +209,17 @@ function webpackConfigFactory(buildOptions) {
     ]),
     module: {
       rules: removeEmpty([
-        // Javascript
         {
           test: /\.jsx?$/,
           loader: 'happypack/loader?id=happypack-javascript',
           exclude: [/node_modules/],
           include: removeEmpty([
             ...bundleConfig.srcPaths.map(srcPath =>
-              path.resolve(appRoot.get(), srcPath),
+              path.resolve(appRootDir.get(), srcPath),
             ),
-            ifProdClient(path.resolve(appRoot.get(), 'src/html')),
+            ifProdClient(path.resolve(appRootDir.get(), 'src/html')),
           ]),
         },
-
-        // JSON
         {
           test: /\.json$/,
           enforce: 'pre',
@@ -270,15 +227,13 @@ function webpackConfigFactory(buildOptions) {
         },
         {
           test: /\.(eot|woff|woff2|ttf|otf|svg|png|jpg|jpeg|jp2|jpx|jxr|gif|webp|mp4|mp3|ogg|pdf)$/,
-          loader: "file-loader",
+          loader: 'file-loader',
           query: {
-            name: ifProdClient("file-[hash:base62:8].[ext]", "[name].[ext]")
+            name: ifProdClient('file-[hash:base62:8].[ext]', '[name].[ext]')
           }
         },
         merge(
           { test: /(\.scss|\.css)$/ },
-          // When targetting the server we use the "/locals" version of the
-          // css loader.
           ifNodeTarget({
             loaders: [
               'css-loader/locals',
@@ -286,9 +241,6 @@ function webpackConfigFactory(buildOptions) {
               'sass-loader'
             ],
           }),
-          // For a production client build we use the ExtractTextPlugin which
-          // will extract our CSS into CSS files.  The plugin needs to be
-          // registered within the plugins section too.
           ifProdClient({
             loader: ExtractTextPlugin.extract({
               fallbackLoader: 'style-loader',
@@ -296,9 +248,6 @@ function webpackConfigFactory(buildOptions) {
             })
           })
         ),
-        // For a development client we will use a straight style & css loader
-        // along with source maps.  This combo gives us a better development
-        // experience.
         ifDevClient({
           test: /(\.scss|\.css)$/,
           loaders: ['happypack/loader?id=happypack-devclient-css']

@@ -11,7 +11,8 @@ const config = {
   all: {
     env: process.env.NODE_ENV || 'development',
     root: appRootDir,
-    port: process.env.PORT || 2121,
+    port: process.env.API_PORT || 2121,
+    host: process.env.API_HOST || 'localhost',
     ip: process.env.IP || '0.0.0.0',
     app: pjson.name,
     version: pjson.version,

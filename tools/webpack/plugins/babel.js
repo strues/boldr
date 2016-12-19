@@ -1,6 +1,6 @@
 const path = require('path');
 const appRootDir = require('app-root-dir');
-const { removeEmpty, ifElse, merge, happyPackPlugin, chalkError, chalkInfo } = require('../../utils');
+const { removeEmpty, ifElse, merge, happyPackPlugin } = require('../../utils');
 
 const isDev = process.env.NODE_ENV === 'development';
 const isClient = true;

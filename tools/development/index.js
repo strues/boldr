@@ -3,20 +3,18 @@ import chokidar from 'chokidar';
 import webpack from 'webpack';
 import appRootDir from 'app-root-dir';
 import config from '../../config/private/boldr';
-import { createNotification } from '../utils';
+import { log } from '../utils';
 import HotNodeServer from './hotNodeServer';
 import HotClientServer from './hotClientServer';
 import createVendorDLL from './createVendorDLL';
 import webpackConfigFactory from '../webpack/configFactory';
-// const ensureVendorDLLExists = require('./ensureVendorDLLExists');
-
 
 const dllName = config.bundles.client.devVendorDLL.name;
 const usesDevVendorDLL = bundleConfig =>
   bundleConfig.devVendorDLL != null && bundleConfig.devVendorDLL.enabled;
 
 const vendorDLLsFailed = (err) => {
-  createNotification({
+  log({
     title: 'vendorDLL',
     level: 'error',
     message: 'Unfortunately an error occured whilst trying to build the vendor dll(s) used by the development server. Please check the console for more information.',
@@ -53,7 +51,7 @@ const initializeBundle = (name, bundleConfig) => {
     };
     return { name, bundleConfig, createCompiler };
   } catch (err) {
-    createNotification({
+    log({
       title: 'development',
       level: 'error',
       message: 'Webpack bundleConfigs are invalid, please check the console for more information.',
@@ -120,7 +118,7 @@ const watcher = chokidar.watch(
 );
 watcher.on('ready', () => {
   watcher.on('change', () => {
-    createNotification({
+    log({
       title: 'webpack',
       level: 'warn',
       message: 'Webpack bundleConfigs have changed. The development server is restarting...',

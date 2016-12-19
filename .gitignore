@@ -7,13 +7,14 @@ docs/logs
 npm-debug.log
 
 ## Test Coverage
-coverage
 .nyc_output
 lib-cov
+coverage/**
 
 ## Webpack
 .happypack/**
 .wp_cache/**
+.hardsource/**
 
 #### Editor Stuff
 boldr.sublime-project
