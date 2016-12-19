@@ -4,10 +4,12 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { Provider } from 'react-redux';
+
 import Router from 'react-router/lib/Router';
 import match from 'react-router/lib/match';
 import browserHistory from 'react-router/lib/browserHistory';
 import applyRouterMiddleware from 'react-router/lib/applyRouterMiddleware';
+
 import { syncHistoryWithStore } from 'react-router-redux';
 import WebFontLoader from 'webfontloader';
 import { ReduxAsyncConnect } from 'redux-connect';
@@ -25,23 +27,28 @@ import materialStyle from '../common/theme/material';
 import ReactHotLoader from './components/ReactHotLoader';
 import WrappedRedBox from './components/WrappedRedbox';
 
+// Required for Material-UI
 injectTapEventPlugin();
+// Load fonts
 WebFontLoader.load({
-  google: { families: ['Poppins:300,400,600'] },
+  google: { families: ['Roboto Mono:400', 'Roboto Slab:100,300,400,700', 'Roboto:300,400,700'] },
 });
 
+// Get the DOM Element where we mount React
+const MOUNT_POINT = document.getElementById('app');
 // Superagent helper
 const client = new ApiClient();
-const preloadedState = window.PRELOADED_STATE || {};
-const store = configureStore(browserHistory, preloadedState, client);
+// inject browserHistory, our state, and the superagent helper
+const store = configureStore(browserHistory, window.PRELOADED_STATE, client);
+// bootstrap materialui theme
 const muiTheme = getMuiTheme(materialStyle);
+
 const token = getToken();
 if (token) {
   // Update application state. User has token and is probably authenticated
   store.dispatch(checkAuth(token));
 }
-// Get the DOM Element that will host our React application.
-const MOUNT_POINT = document.getElementById('app');
+
 const history = syncHistoryWithStore(browserHistory, store, {
   selectLocationState: (state) => state.routing,
 });

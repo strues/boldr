@@ -8,6 +8,7 @@
 // a centralised configuration folder to do most of your application
 // configuration adjustments.  Additionally it helps to make merging
 // from the origin starter kit a bit easier.
+import type { BuildOptions } from '../../tools/types';
 
 export default {
   // Plugins for the bundles/bundling process.
@@ -18,10 +19,15 @@ export default {
     //
     // Please use the provided values and then ensure that you return the
     // appropriate values for the given target and mode.
-    babelConfig: (buildOptions) => {
+    babelConfig: (buildOptions : BuildOptions) => {
       const { target, mode } = buildOptions;
 
       return {
+        // We need to ensure that we do this otherwise the babelrc will
+        // get interpretted and for the current configuration this will mean
+        // that it will kill our webpack treeshaking feature as the modules
+        // transpilation has not been disabled within in.
+        babelrc: false,
         presets: [
           // JSX
           'react',
@@ -72,6 +78,21 @@ export default {
           ['module-resolver', {
             root: ['./src/common'],
           }],
+          [
+            'code-split-component/babel',
+            {
+              // The code-split-component doesn't work nicely with hot
+              // module reloading, which we use in our development builds,
+              // so we will disable it (which ensures synchronously
+              // behaviour on the CodeSplit instances).
+              disabled: mode === 'development',
+              // For our server bundle we will set the mode as being 'server'
+              // which will ensure that our code split components can be
+              // resolved synchronously, being much more helpful for
+              // pre-rendering.
+              mode: target,
+            },
+          ],
         ].filter(x => x != null),
       };
     },

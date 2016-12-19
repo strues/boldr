@@ -2,7 +2,13 @@
 
 import React, { PureComponent } from 'react';
 import Link from 'react-router/lib/Link';
-import { Menu, Dropdown, Button, Container, Loader } from 'semantic-ui-react';
+import AppBar from 'material-ui/AppBar';
+import FlatButton from 'material-ui/FlatButton';
+import RaisedButton from 'material-ui/RaisedButton';
+import IconButton from 'material-ui/IconButton';
+import IconMenu from 'material-ui/IconMenu';
+import MenuItem from 'material-ui/MenuItem';
+import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
 
 type Props = {
   navigate: () => void,
@@ -12,11 +18,6 @@ type Props = {
   logo: Object,
   boldr: Object,
   auth: Object,
-  handleDashClick: () => void,
-  handleLoginClick: () => void,
-  handleSignupClick: () => void,
-  handleProfileClick: () => void,
-  handlePreferencesClick: () => void,
   handleLogoClick: () => void,
   handleLogoutClick: () => void,
 };
@@ -30,14 +31,14 @@ class PrimaryHeader extends PureComponent {
    */
   renderUnauthenticated() {
     return (
-      <Menu.Menu position="right">
-       <Menu.Item onClick={ this.props.handleLoginClick }>
-         <Button secondary>Login</Button>
-       </Menu.Item>
-       <Menu.Item onClick={ this.props.handleSignupClick }>
-         <Button primary>Sign Up</Button>
-       </Menu.Item>
-      </Menu.Menu>
+      <div>
+        <Link className="ph-menu__item-link" to="/account/login">
+          <RaisedButton primary label="Login" />
+       </Link>
+       <Link className="ph-menu__item-link" to="/account/signup">
+         <RaisedButton secondary label="Sign Up" />
+      </Link>
+     </div>
     );
   }
 
@@ -47,48 +48,53 @@ class PrimaryHeader extends PureComponent {
    */
   renderAuthenticated() {
     return (
-      <Menu.Menu position="right">
-        <Menu.Item as={ Dropdown } text="Account">
-           <Dropdown.Menu>
-             <Dropdown.Item text="Profile" onClick={ this.props.handleProfileClick } />
-             <Dropdown.Item text="Preferences" onClick={ this.props.handlePreferencesClick } />
-             <Dropdown.Item text="Logout" onClick={ this.props.handleLogoutClick } />
-           </Dropdown.Menu>
-         </Menu.Item>
-       <Menu.Item onClick={ this.props.handleDashClick }>
-         <Button primary>Dashboard</Button>
-       </Menu.Item>
-      </Menu.Menu>
+      <IconMenu
+        iconButtonElement={
+          <IconButton><MoreVertIcon /></IconButton>
+        }
+        targetOrigin={ { horizontal: 'right', vertical: 'top' } }
+        anchorOrigin={ { horizontal: 'right', vertical: 'top' } }
+      >
+        <Link to="/dashboard"><MenuItem primaryText="Dashboard" /></Link>
+        <Link to="/profile"><MenuItem primaryText="Profile" /></Link>
+        <Link to="/account/preferences"><MenuItem primaryText="Preferences" /></Link>
+        <MenuItem primaryText="Logout" onTouchTap={ this.props.handleLogoutClick } />
+      </IconMenu>
     );
   }
 
   render() {
     if (!this.props.navigation) {
       return (
-        <Loader content="loading" />
+        <span>Loading...</span>
       );
     }
     const renderedMenuItems = this.props.navigation.links.map((item, i) =>
-      <Menu.Item
-        key={ item.id }
-        name={ item.name }
-        className="ph-menu__item"
-      >
-        <Link className="ph-menu__item-link" to={ item.href }>{ item.name }</Link>
-      </Menu.Item>,
+    <Link key={ item.id } className="ph-menu__item-link" to={ item.href }>
+      <FlatButton label={ item.name } />
+    </Link>,
     );
 
     return (
-      <Menu size="small" stackable>
-      <Container>
-        <img src={ this.props.logo.value }
-          className="ph-logo"
-          alt="logo" onClick={ this.props.handleLogoClick } role="button" tabIndex="0"
-        />
-        { renderedMenuItems }
-        { this.props.auth.isAuthenticated ? this.renderAuthenticated() : this.renderUnauthenticated() }
-        </Container>
-      </Menu>
+
+      <AppBar
+        title={
+          <img src={ this.props.logo.value }
+            className="ph-logo"
+            alt="logo" onClick={ this.props.handleLogoClick }
+          />
+        }
+        iconElementRight={
+          <div>
+            { renderedMenuItems }
+            {
+              this.props.auth.isAuthenticated
+              ? this.renderAuthenticated()
+              : this.renderUnauthenticated()
+            }
+          </div>
+        }
+      />
     );
   }
 }

@@ -8,6 +8,7 @@ import { Provider } from 'react-redux';
 import match from 'react-router/lib/match';
 import createMemoryHistory from 'react-router/lib/createMemoryHistory';
 import { syncHistoryWithStore } from 'react-router-redux';
+
 import Helmet from 'react-helmet';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -18,10 +19,8 @@ import createRoutes from '../../../common/scenes';
 import ApiClient from '../../../common/core/api/apiClient';
 import configureStore from '../../../common/state/store';
 import generateHTML from './generateHTML';
-/**
- * An express middleware that is capabable of doing React server side rendering.
- */
-function universalReactAppMiddleware(request: $Request, response: $Response) {
+
+function boldrSSRMiddleware(request: $Request, response: $Response) {
   // We should have had a nonce provided to us.  See the server/index.js for
   // more information on what this is.
   if (typeof response.locals.nonce !== 'string') {
@@ -110,4 +109,4 @@ function universalReactAppMiddleware(request: $Request, response: $Response) {
   });
 }
 
-export default (universalReactAppMiddleware: Middleware);
+export default (boldrSSRMiddleware: Middleware);

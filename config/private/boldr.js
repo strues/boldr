@@ -143,6 +143,11 @@ export default {
       devVendorDLL: {
         // Enabled?
         enabled: true,
+        srcFileIgnores: [
+          /.*\.test\.js$/ig,
+          /.*-test\.js$/i,
+        ],
+
 
         // It is also possible that some modules require specific
         // webpack loaders in order to be processed (e.g. CSS/SASS etc).
@@ -209,6 +214,7 @@ export default {
       srcPaths: [
         './src/server',
         './src/common',
+        './config/private',
         './config/public',
       ],
 
