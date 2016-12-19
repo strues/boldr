@@ -2,11 +2,12 @@
   "restartable": "rs",
   "ignore": [
     ".git",
-    "node_modules/**/node_modules",
+    "node_modules/**",
     "coverage/**",
     "src/**/*.test.js",
+    "flow-typed/**",
     "tools/**",
-    "build/**"
+    "db/**"
   ],
   "verbose": false,
   "watch": [
@@ -14,8 +15,7 @@
   ],
   "env": {
     "NODE_ENV": "development",
-    "BABEL_ENV": "api",
-    "DEBUG": "boldr:*"
+    "DEBUG": "boldrAPI:*"
   },
   "ext": "js json"
 }

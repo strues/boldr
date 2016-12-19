@@ -5,7 +5,7 @@
 import fs from 'fs';
 import path from 'path';
 import appRoot from 'app-root-dir';
-import config from '../../../../config/boldr';
+import config from '../../../../config/private/boldr';
 
 const assetsBundleFilePath = path.resolve(
   appRoot.get(),

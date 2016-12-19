@@ -1,7 +1,7 @@
 /* @flow */
 import type { Head } from 'react-helmet';
 import serialize from 'serialize-javascript';
-import config from '../../../../config/boldr';
+import config from '../../../../config/private/boldr';
 import getAssetsForClientChunks from './getAssetsForClientChunks';
 
 // We use the polyfill.io service which provides the polyfills that a
