@@ -1,4 +1,4 @@
-# boldr v0.6.0-alpha.1
+# boldr-api v0.6.5
 
 Your dreams are bold. Your thoughts are bold. So why shouldn&#39;t your CMS be a little Boldr?
 
@@ -8,23 +8,21 @@ Your dreams are bold. Your thoughts are bold. So why shouldn&#39;t your CMS be a
 	- [Retrieve activity](#retrieve-activity)
 	
 - [Attachment](#attachment)
+	- [Remove attachment from database and S3](#remove-attachment-from-database-and-s3)
+	- [Returns all items in S3 bucket.](#returns-all-items-in-s3-bucket.)
 	- [Get all attachment files](#get-all-attachment-files)
 	- [Get a specific file by its id](#get-a-specific-file-by-its-id)
-	- [Upload an attachment](#upload-an-attachment)
 	- [Upload an attachment associating with a dashboard upload](#upload-an-attachment-associating-with-a-dashboard-upload)
 	
 - [Auth](#auth)
 	- [Login](#login)
 	- [Signup](#signup)
 	- [Check](#check)
-	- [Initiate Facebook OAuth](#initiate-facebook-oauth)
-	- [Facebook Callback](#facebook-callback)
-	- [Initiate GitHub OAuth](#initiate-github-oauth)
-	- [GitHub Callback](#github-callback)
 	- [Verify](#verify)
 	
 - [Blocks](#blocks)
 	- [Get all blocks](#get-all-blocks)
+	- [Get a specific by its id.](#get-a-specific-by-its-id.)
 	
 - [Links](#links)
 	- [Create a new navigation link](#create-a-new-navigation-link)
@@ -49,8 +47,15 @@ Your dreams are bold. Your thoughts are bold. So why shouldn&#39;t your CMS be a
 	- [Retrieve a post by its slug.](#retrieve-a-post-by-its-slug.)
 	- [Retrieve all posts](#retrieve-all-posts)
 	
+- [Role](#role)
+	- [Get information for the specific role](#get-information-for-the-specific-role)
+	- [Get a list of all roles](#get-a-list-of-all-roles)
+	
 - [Settings](#settings)
+	- [Add an additional setting](#add-an-additional-setting)
+	- [Get a specific setting](#get-a-specific-setting)
 	- [Get all settings objects](#get-all-settings-objects)
+	- [Update a specific setting](#update-a-specific-setting)
 	
 - [Tag](#tag)
 	- [Retrieve all tags](#retrieve-all-tags)
@@ -85,7 +90,7 @@ Your dreams are bold. Your thoughts are bold. So why shouldn&#39;t your CMS be a
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>{token}</p>							|
+| Authorization			| String			|  <p>The user's token</p>							|
 
 ### Parameters
 
@@ -94,7 +99,7 @@ Your dreams are bold. Your thoughts are bold. So why shouldn&#39;t your CMS be a
 | uuid			| String			|  <p>a v4 spec UUID</p>							|
 | account_id			| String			|  <p>The account id of the creator</p>							|
 | action			| String			|  <p>What the action was</p>							|
-| create			| Enum[String]			|  <p>,update,delete,register</p>							|
+| type			| Enum[String]			|  <p>create,update,delete,register</p>							|
 | data			| Object			|  <p>The data of the action</p>							|
 | entry_table			| String			|  <p>The table name of the action</p>							|
 | entry_uuid			| String			|  <p>The UUID of the action</p>							|
@@ -114,6 +119,30 @@ Your dreams are bold. Your thoughts are bold. So why shouldn&#39;t your CMS be a
 
 
 # Attachment
+
+## Remove attachment from database and S3
+
+
+
+	DELETE /attachments/:id
+
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| Authorization			| String			|  <p>The user's token</p>							|
+
+## Returns all items in S3 bucket.
+
+
+
+	GET /attachments/aws/bucket
+
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| Authorization			| String			|  <p>The user's token</p>							|
 
 ## Get all attachment files
 
@@ -151,13 +180,6 @@ Example usage:
 curl -i http://localhost:3000/api/v1/attachments/1
 ```
 
-## Upload an attachment
-
-
-
-	POST /attachments
-
-
 ## Upload an attachment associating with a dashboard upload
 
 
@@ -177,7 +199,7 @@ curl -i http://localhost:3000/api/v1/attachments/1
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>{token}</p>							|
+| Authorization			| String			|  <p>Bearer {token}</p>							|
 
 ### Parameters
 
@@ -186,6 +208,36 @@ curl -i http://localhost:3000/api/v1/attachments/1
 | email			| String			|  <p>User email address</p>							|
 | password			| String			|  <p>User password</p>							|
 
+### Success Response
+
+Success-Response:
+
+```
+
+HTTP/1.1 200 OK
+Vary: Origin
+Access-Control-Allow-Credentials: true
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxYjA",
+  "user": {
+  "id": "1b062e26-df71-48ce-b363-4ae9b966e7a0",
+  "email": "admin@boldr.io",
+  "first_name": "Joe",
+  "last_name": "Gray",
+  "display_name": "Joey",
+  "avatar_url": "https://boldr.io/images/unknown-avatar.png",
+  "verified": true,
+  "role": [{
+        "id": 3,
+        "name": "Admin",
+        "image": null,
+        "description": "Complete control over the CMS",
+        "created_at": "2016-11-21T19:49:59.653Z",
+        "updated_at": "2016-11-21T19:49:59.653Z"
+        }]
+   }
+ }
+```
 ## Signup
 
 
@@ -202,14 +254,7 @@ curl -i http://localhost:3000/api/v1/attachments/1
 | first_name			| String			|  <p>First name of the user</p>							|
 | last_name			| String			|  <p>Last name of the user</p>							|
 | display_name			| String			|  <p>The user's display name</p>							|
-| location			| String			|  <p>City/State where the user is located</p>							|
-| website			| String			|  <p>Personal website belonging to the user</p>							|
 | avatar_url			| String			|  <p>Url for the user's avatar</p>							|
-| bio			| String			|  <p>Information about the user</p>							|
-| facebook_profile			| String			|  <p>Url to the user's facebook profile</p>							|
-| github_profile			| String			|  <p>Url to the user's github profile</p>							|
-| twitter_profile			| String			|  <p>Url to the user's twitter profile</p>							|
-| google_profile			| String			|  <p>Url to the user's google profile</p>							|
 
 ## Check
 
@@ -221,35 +266,7 @@ curl -i http://localhost:3000/api/v1/attachments/1
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>Token</p>							|
-
-## Initiate Facebook OAuth
-
-
-
-	GET /auth/facebook
-
-
-## Facebook Callback
-
-
-
-	GET /auth/facebook/callback
-
-
-## Initiate GitHub OAuth
-
-
-
-	GET /auth/github
-
-
-## GitHub Callback
-
-
-
-	GET /auth/github/callback
-
+| Authorization			| String			|  <p>The user's token</p>							|
 
 ## Verify
 
@@ -262,7 +279,7 @@ curl -i http://localhost:3000/api/v1/attachments/1
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| verification			| String			|  <p>{token}</p>							|
+| verification			| String			|  <VerificationToken>							|
 
 # Blocks
 
@@ -273,6 +290,13 @@ curl -i http://localhost:3000/api/v1/attachments/1
 	GET /blocks
 
 
+## Get a specific by its id.
+
+
+
+	GET /blocks/:id
+
+
 # Links
 
 ## Create a new navigation link
@@ -281,6 +305,11 @@ curl -i http://localhost:3000/api/v1/attachments/1
 
 	POST /links
 
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| Authorization			| String			|  <p>The user's token</p>							|
 
 ## Delete a link
 
@@ -288,6 +317,11 @@ curl -i http://localhost:3000/api/v1/attachments/1
 
 	DELETE /links/:id
 
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| Authorization			| String			|  <p>The user's token</p>							|
 
 ### Parameters
 
@@ -319,8 +353,13 @@ curl -i http://localhost:3000/api/v1/attachments/1
 
 
 
-	PUT /links/:id
+	PATCH /links/:id
 
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| Authorization			| String			|  <p>The user's token</p>							|
 
 ### Parameters
 
@@ -336,6 +375,11 @@ curl -i http://localhost:3000/api/v1/attachments/1
 
 	POST /navigations
 
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| Authorization			| String			|  <p>The user's token</p>							|
 
 ## Delete a navigation
 
@@ -343,6 +387,11 @@ curl -i http://localhost:3000/api/v1/attachments/1
 
 	DELETE /navigations/:id
 
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| Authorization			| String			|  <p>The user's token</p>							|
 
 ### Parameters
 
@@ -374,8 +423,13 @@ curl -i http://localhost:3000/api/v1/attachments/1
 
 
 
-	PATCH /navigations/:id
+	PUT /navigations/:id
 
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| Authorization			| String			|  <p>The user's token</p>							|
 
 ### Parameters
 
@@ -404,7 +458,18 @@ curl -i http://localhost:3000/api/v1/attachments/1
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>{token}</p>							|
+| Authorization			| String			|  <p>The user's token</p>							|
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| title			| String			|  <p>The title of the post</p>							|
+| excerpt			| String			|  <p>A short description or snippet of the post</p>							|
+| content			| String			|  <p>The content of the post</p>							|
+| feature_image			| String			|  <p>The URL for an image to use with the post</p>							|
+| tags			| String			|  <p>Comma separated tags for the post</p>							|
+| status			| String			|  <p>One of: draft / published / archived</p>							|
 
 ## Retrieve a post by its id.
 
@@ -420,6 +485,12 @@ curl -i http://localhost:3000/api/v1/attachments/1
 	GET /posts/slug/:slug
 
 
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| slug			| String			|  <p>The slug of the post</p>							|
+
 ## Retrieve all posts
 
 
@@ -431,12 +502,67 @@ curl -i http://localhost:3000/api/v1/attachments/1
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| include			| String[]			|  <p>Eager load relationships such as /posts?include=[author]</p>							|
+| include			| String[]			|  <p>Return associated models with the request</p>							|
 | page			| Number			| **optional** <p>Page number.</p>							|
 | limit			| Number			| **optional** <p>Amount of returned items.</p>							|
 | sort			| String[]			| **optional** <p>Order of returned items.</p>							|
 
+# Role
+
+## Get information for the specific role
+
+
+
+	GET /roles/:id
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| id			| Number			|  <p>the role id</p>							|
+
+## Get a list of all roles
+
+
+
+	GET /roles
+
+
 # Settings
+
+## Add an additional setting
+
+
+
+	POST /settings
+
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| Authorization			| String			|  <p>The user's token</p>							|
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| key			| String			|  <p>The setting's key</p>							|
+| value			| String			|  <p>The data related to the setting</p>							|
+| description			| String			|  <p>What the setting is for</p>							|
+
+## Get a specific setting
+
+
+
+	GET /settings/:id
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| id			| Number			|  <p>The id of the setting requested.</p>							|
 
 ## Get all settings objects
 
@@ -445,14 +571,25 @@ curl -i http://localhost:3000/api/v1/attachments/1
 	GET /settings
 
 
+## Update a specific setting
+
+
+
+	PUT /settings/:id
+
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| Authorization			| String			|  <p>The user's token</p>							|
+
 ### Parameters
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| include			| String[]			|  <p>Eager load relationships such as /posts?include=[author]</p>							|
-| page			| Number			| **optional** <p>Page number.</p>							|
-| limit			| Number			| **optional** <p>Amount of returned items.</p>							|
-| sort			| String[]			| **optional** <p>Order of returned items.</p>							|
+| key			| String			|  <p>The setting's key</p>							|
+| value			| String			|  <p>The data related to the setting</p>							|
+| description			| String			|  <p>What the setting is for</p>							|
 
 # Tag
 
@@ -467,7 +604,7 @@ curl -i http://localhost:3000/api/v1/attachments/1
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| include			| String[]			|  <p>Eager load relationships such as /posts?include=[author]</p>							|
+| include			| String[]			|  <p>Return associated models with the request</p>							|
 | page			| Number			| **optional** <p>Page number.</p>							|
 | limit			| Number			| **optional** <p>Amount of returned items.</p>							|
 | sort			| String[]			| **optional** <p>Order of returned items.</p>							|
@@ -527,7 +664,7 @@ curl -i http://localhost:3000/api/v1/attachments/1
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>{token}</p>							|
+| Authorization			| String			|  <p>The user's token</p>							|
 
 ### Parameters
 
@@ -576,7 +713,7 @@ curl -i http://localhost:3000/api/v1/attachments/1
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>{token}</p>							|
+| Authorization			| String			|  <p>The user's token</p>							|
 
 ### Parameters
 
@@ -595,7 +732,7 @@ curl -i http://localhost:3000/api/v1/attachments/1
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>{token}</p>							|
+| Authorization			| String			|  <p>The user's token</p>							|
 
 ## Retrieve user
 
@@ -621,7 +758,7 @@ curl -i http://localhost:3000/api/v1/attachments/1
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>{token}</p>							|
+| Authorization			| String			|  <p>The user's token</p>							|
 
 ### Parameters
 

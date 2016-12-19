@@ -2,7 +2,17 @@
 
 ## [Unreleased](https://github.com/strues/boldr/tree/HEAD)
 
-[Full Changelog](https://github.com/strues/boldr/compare/v0.6.0-alpha.4...HEAD)
+[Full Changelog](https://github.com/strues/boldr/compare/v0.6.6...HEAD)
+
+**Merged pull requests:**
+
+- Code quality improvements [\#231](https://github.com/strues/boldr/pull/231) ([strues](https://github.com/strues))
+- Fixes error with s3 uploading and adds a test [\#230](https://github.com/strues/boldr/pull/230) ([strues](https://github.com/strues))
+- API client refactor and bug fixes [\#229](https://github.com/strues/boldr/pull/229) ([strues](https://github.com/strues))
+- refactor\(global\): cleanup and standardize api requests. [\#228](https://github.com/strues/boldr/pull/228) ([strues](https://github.com/strues))
+
+## [v0.6.6](https://github.com/strues/boldr/tree/v0.6.6) (2016-11-30)
+[Full Changelog](https://github.com/strues/boldr/compare/v0.6.0-alpha.4...v0.6.6)
 
 **Implemented enhancements:**
 
@@ -22,6 +32,7 @@
 
 **Merged pull requests:**
 
+- v0.6.6 release [\#227](https://github.com/strues/boldr/pull/227) ([strues](https://github.com/strues))
 - Separation of API [\#225](https://github.com/strues/boldr/pull/225) ([strues](https://github.com/strues))
 - v0.6.5 [\#224](https://github.com/strues/boldr/pull/224) ([strues](https://github.com/strues))
 - Update semantic-ui-react to version 0.61.0 🚀 [\#223](https://github.com/strues/boldr/pull/223) ([greenkeeperio-bot](https://github.com/greenkeeperio-bot))

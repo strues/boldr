@@ -1,6 +1,6 @@
 {
   "name": "boldr",
-  "version": "0.6.6",
+  "version": "0.6.8",
   "description": "Your dreams are bold. Your thoughts are bold. So why shouldn't your CMS be a little Boldr?",
   "main": "boldrCMS/server/index.js",
   "repository": {
