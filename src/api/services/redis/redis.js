@@ -1,8 +1,7 @@
 import redis from 'redis';
 import bluebird from 'bluebird';
+import config from '../../../../config/private/api';
 import logger from '../../core/logger';
-
-const config = require('../../config/index');
 
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);

@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { token } from 'config/index';
+import config from '../../../../config/private/api';
 
 function signToken(user) {
   // const roleinfo = account.role[0];
@@ -11,7 +11,7 @@ function signToken(user) {
     email: user.email,
     role: user.role.id,
   };
-  return jwt.sign(payload, token.secret);
+  return jwt.sign(payload, config.token.secret);
 }
 
 export default signToken;

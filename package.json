@@ -30,10 +30,18 @@
     "yarn": "^0.17.0"
   },
   "betterScripts": {
-    "dev": {
+    "client": {
       "command": "babel-node ./tools/development",
       "env": {
         "DEBUG": "boldr:*",
+        "NODE_ENV": "development",
+        "BABEL_ENV": "development"
+      }
+    },
+    "api": {
+      "command": "nodemon ./src/api/index.js",
+      "env": {
+        "DEBUG": "boldrAPI:*",
         "NODE_ENV": "development",
         "BABEL_ENV": "development"
       }
@@ -41,14 +49,22 @@
   },
   "scripts": {
     "analyze": "babel-node tools/scripts/analyze",
+    "api": "better-npm-run api",
+    "apidoc": "apidoc -i src -o lib/apidoc && apidoc-markdown -p lib/apidoc -o docs/apidoc.md",
+    "babel": "NODE_ENV=production babel --ignore node_modules",
     "build": "babel-node tools/scripts/build",
+    "build:api": "NODE_ENV=production npm run clean && npm run babel -- ./src/api -d ./boldrAPI/lib",
     "clean": "babel-node tools/scripts/clean",
     "cleanup": "rimraf .happypack && rimraf boldrCMS/",
-    "dev": "better-npm-run dev",
+    "client": "better-npm-run client",
+    "dev": "npm-run-all -p api client",
     "flow": "babel-node ./tools/scripts/flow",
-    "flow:defs": "flow-typed install -f 0.36 --overwrite",
+    "flow:defs": "flow-typed install -f 0.37 --overwrite",
+    "knex": "knex --knexfile config/private/knexfile.js",
     "lint": "./node_modules/.bin/eslint src",
     "lint:fix": "npm run lint -- --fix",
+    "migrate": "POSTGRES_CONN_URI=postgres://postgres:password@localhost:5432/boldr knex --knexfile src/config/knexfile.js migrate:latest",
+    "seed": "POSTGRES_CONN_URI=postgres://postgres:password@localhost:5432/boldr knex --knexfile src/config/knexfile.js seed:run",
     "start": "NODE_ENV=production node bin/boldr",
     "start:cms": "NODE_ENV=production pm2 start boldrCMS/server/index.js --name boldrSSR -e logs/boldrSSR-error.log",
     "test:ci": "NODE_ENV=test CI=true jest -w 2",
@@ -187,6 +203,7 @@
     "eslint": "^3.12.2",
     "eslint-config-boldr": "1.2.5",
     "extract-text-webpack-plugin": "2.0.0-beta.4",
+    "faker": "^3.1.0",
     "file-loader": "^0.9.0",
     "flow-bin": "^0.37.0",
     "glob": "7.1.1",
@@ -200,6 +217,7 @@
     "node-notifier": "^4.6.1",
     "node-sass": "^4.0.0",
     "nodemon": "^1.11.0",
+    "npm-run-all": "^3.1.2",
     "postcss-cssnext": "^2.9.0",
     "postcss-loader": "1.2.1",
     "postcss-smart-import": "^0.6.3",

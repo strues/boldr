@@ -4,13 +4,12 @@
 
 # What's Boldr?
 
-Boldr is a modern content management framework. Think of Boldr as the solid foundation for building your next great web application. Unlike many CMS platforms, Boldr is entirely JavaScript. It features Universal / Isomorphic rendering for improved performance and Search Engine Optimization. Boldr uses Postgres as its database. Express serves the standalone API and the server-side rendering application. Redis provides the store for user sessions and query caching.
+Boldr is a modern content management framework. Think of Boldr as the solid foundation for building your next great web application. Unlike other CMS platforms, Boldr is entirely JavaScript. It features Universal / Isomorphic rendering for improved performance and Search Engine Optimization. Boldr uses Postgres as its database. Express serves the standalone API and the server-side rendering application. Redis provides the store for user sessions and query caching.
 
 
 **Table of Contents**
 - [Boldr](#boldr)
 - [Core Technologies](#core-technologies)
-- [API](https://github.com/strues/boldrAPI)
 - [Getting Started / Installation](#getting-started-installation)
 - [Editor](#editor)
 - [Usage](#usage)
@@ -32,10 +31,6 @@ Boldr is a modern content management framework. Think of Boldr as the solid foun
 - [Webpack v2](https://github.com/webpack/webpack)
 
 ## Getting Started / Installation
-
-**IMPORTANT**:  
-Please make sure you have boldrAPI downloaded before running Boldr. You can get it by running `git clone https://github.com/strues/boldrAPI.git` or with the command `make api`.
-
 
 **A word of caution:** At the moment, Boldr is in active development. Meaning there can and most likely will, be the occasional breaking changes, and architectural adjustments.
 

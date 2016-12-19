@@ -1,5 +1,5 @@
 import findQuery from 'objection-find';
-import { filterEagerData, throwNotFound } from 'utils/index';
+import { filterEagerData, throwNotFound } from '../../utils/index';
 import responseHandler from '../response/responseHandler';
 
 function getParameterFilters(req, filterProperties) {

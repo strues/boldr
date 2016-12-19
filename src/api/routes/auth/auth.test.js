@@ -1,4 +1,3 @@
-import test from 'ava';
 import supertest from 'supertest-as-promised';
 
 import faker from 'faker';
@@ -18,42 +17,42 @@ const badLoginData = {
   password: 'fa',
 };
 
-test('POST /login - Incorrect password fails', async (t) => {
+it('POST /login - Incorrect password fails', async () => {
   const { status } = await request()
     .post('/api/v1/auth/login')
     .send(badLoginData);
 
-  t.is(status, 401);
+  expect(status).toBe(401);
 });
-test('POST /login - Fail without a password', async (t) => {
+it('POST /login - Fail without a password', async () => {
   const { status } = await request()
     .post('/api/v1/auth/login')
     .send({ email: 'admin@boldr.io', password: '' });
 
-  t.is(status, 400);
+  expect(status).toBe(400);
 });
-test('POST /login', async (t) => {
+it('POST /login', async () => {
   const { status, body } = await request()
     .post('/api/v1/auth/login')
     .set('Accept', 'application/json')
     .send(loginData);
 
-  t.is(status, 200);
-  t.is(typeof body.token, 'string');
-  t.is(typeof body.user, 'object');
-  t.is(typeof body.user.role, 'object');
+  expect(status).toBe(200);
+  expect(typeof body.token).toBe('string');
+  expect(typeof body.user).toBe('object');
+  expect(typeof body.user.role).toBe('object');
 });
 
-test('POST /signup -- Fail missing fields', async (t) => {
+it('POST /signup -- Fail missing fields', async () => {
   const { status } = await request()
       .post('/api/v1/auth/signup')
       .set('Accept', 'application/json')
       .send({ email: 'abc@test.com' });
 
-  t.is(status, 400);
+  expect(status).toBe(400);
 });
 
-test('POST /signup -- Fail email exists', async (t) => {
+it('POST /signup -- Fail email exists', async () => {
   const { status } = await request()
     .post('/api/v1/auth/signup')
     .set('Accept', 'application/json')
@@ -61,10 +60,10 @@ test('POST /signup -- Fail email exists', async (t) => {
       email: 'admin@boldr.io',
       password: 'test',
     });
-  t.is(status, 400);
+  expect(status).toBe(400);
 });
 
-test('POST /signup -- Signup user', async (t) => {
+it('POST /signup -- Signup user', async () => {
   const userData = {
     email: faker.internet.email(),
     password: 'password',
@@ -77,19 +76,19 @@ test('POST /signup -- Signup user', async (t) => {
     .post('/api/v1/auth/signup')
     .send(userData);
 
-  t.is(status, 201);
+  expect(status).toBe(201);
 });
 
-test('GET /check -- Fails w/o auth header', async (t) => {
+it('GET /check -- Fails w/o auth header', async () => {
   const { status } = await request()
     .get('/api/v1/auth/check')
     .set('Accept', 'application/json');
 
-  t.is(status, 401);
+  expect(status).toBe(401);
 });
 
 let token;
-test.before(async t => {
+beforeEach(async () => {
   const loginData = {
     email: 'admin@boldr.io',
     password: 'password',
@@ -98,21 +97,21 @@ test.before(async t => {
   token = body.token;
 });
 
-test('GET /check -- Return user info', async (t) => {
+it('GET /check -- Return user info', async () => {
   const { status, body } = await request()
   .get('/api/v1/auth/check')
   .set('Accept', 'application/json')
   .set('Authorization', `Bearer ${token}`);
 
-  t.is(status, 200);
-  t.is(typeof body, 'object');
+  expect(status).toBe(200);
+  expect(typeof body).toBe('object');
 });
 
-test('GET /check -- Fail wrong header.', async (t) => {
+it('GET /check -- Fail wrong header.', async () => {
   const { status } = await request()
   .get('/api/v1/auth/check')
   .set('Accept', 'application/json')
   .set('Authorization', `${token}`);
 
-  t.is(status, 401);
+  expect(status).toBe(401);
 });

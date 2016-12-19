@@ -1,6 +1,6 @@
 import uuid from 'uuid';
-import slugIt from 'utils/slugIt';
-import { responseHandler } from 'core/index';
+import slugIt from '../../utils/slugIt';
+import { responseHandler } from '../../core/index';
 import Activity from '../activity/activity.model';
 import Block from './block.model';
 

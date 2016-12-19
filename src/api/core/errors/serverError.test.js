@@ -1,13 +1,12 @@
-import test from 'ava';
 import { InternalServer, NotImplemented } from './serverError';
 
-test('InternalServer', (t) => {
+it('InternalServer', () => {
   const intServ = new InternalServer();
-  t.is(typeof intServ, 'object');
-  t.is(intServ.status, 500);
+  expect(typeof intServ).toBe('object');
+  expect(intServ.status).toBe(500);
 });
-test('NotImplemented', (t) => {
+it('NotImplemented', () => {
   const notImp = new NotImplemented();
-  t.is(typeof notImp, 'object');
-  t.is(notImp.status, 500);
+  expect(typeof notImp).toBe('object');
+  expect(notImp.status).toBe(500);
 });

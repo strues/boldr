@@ -1,4 +1,3 @@
-import test from 'ava';
 import supertest from 'supertest-as-promised';
 import faker from 'faker';
 import server from '../../engine';
@@ -7,62 +6,62 @@ function request() {
   return supertest(server);
 }
 
-test('GET /posts -- List', async (t) => {
+it('GET /posts -- List', async () => {
   const { status, body } = await request()
       .get('/api/v1/posts')
       .set('Accept', 'application/json');
 
-  t.is(status, 200);
-  t.true(Array.isArray(body.results));
+  expect(status).toBe(200);
+  expect(Array.isArray(body.results)).toBe(true);
 });
 
-test('GET /posts -- It should return the total number of posts', async (t) => {
+it('GET /posts -- It should return the total number of posts', async () => {
   const { status, body } = await request()
       .get('/api/v1/posts')
       .set('Accept', 'application/json');
 
-  t.is(status, 200);
-  t.true(body.total !== null);
+  expect(status).toBe(200);
+  expect(body.total !== null).toBe(true);
 });
 
-test('GET /posts?include=[tags] -- List w/ tags', async (t) => {
+it('GET /posts?include=[tags] -- List w/ tags', async () => {
   const { status, body } = await request()
       .get('/api/v1/posts?include=[tags]')
       .set('Accept', 'application/json');
 
-  t.is(status, 200);
-  t.true(Array.isArray(body.results[0].tags));
+  expect(status).toBe(200);
+  expect(Array.isArray(body.results[0].tags)).toBe(true);
 });
 
-test('GET /posts?include=[tags,author] -- List w/ tags/author', async (t) => {
+it('GET /posts?include=[tags,author] -- List w/ tags/author', async () => {
   const { status, body } = await request()
       .get('/api/v1/posts?include=[tags,author]')
       .set('Accept', 'application/json');
 
-  t.is(status, 200);
-  t.true(Array.isArray(body.results[0].tags));
-  t.is(typeof body.results[0].author, 'object');
-  t.is(typeof body.results[0].slug, 'string');
+  expect(status).toBe(200);
+  expect(Array.isArray(body.results[0].tags)).toBe(true);
+  expect(typeof body.results[0].author).toBe('object');
+  expect(typeof body.results[0].slug).toBe('string');
 });
 
-test('GET /posts/pid/:id -- By id', async (t) => {
+it('GET /posts/pid/:id -- By id', async () => {
   const { status, body } = await request()
       .get('/api/v1/posts/pid/5c9ed236-79f0-4ff7-93bd-2815f06c74b4')
       .set('Accept', 'application/json');
-  t.is(status, 200);
-  t.is(typeof body, 'object');
+  expect(status).toBe(200);
+  expect(typeof body).toBe('object');
 });
 
-test('GET /posts/slug/:slug -- By slug', async (t) => {
+it('GET /posts/slug/:slug -- By slug', async () => {
   const { status, body } = await request()
       .get('/api/v1/posts/slug/just-another-post')
       .set('Accept', 'application/json');
-  t.is(status, 200);
-  t.is(typeof body, 'object');
+  expect(status).toBe(200);
+  expect(typeof body).toBe('object');
 });
 
 let token;
-test.before(async (t) => {
+beforeEach(async () => {
   const loginData = {
     email: 'admin@boldr.io',
     password: 'password',
@@ -71,7 +70,7 @@ test.before(async (t) => {
   token = body.token;
 });
 
-test('POST /posts -- Fails without a title', async (t) => {
+it('POST /posts -- Fails without a title', async () => {
   const { status } = await request()
         .post('/api/v1/posts')
         .set('Accept', 'application/json')
@@ -85,10 +84,10 @@ test('POST /posts -- Fails without a title', async (t) => {
           tags: 'foo,bar',
         });
 
-  t.is(status, 400);
+  expect(status).toBe(400);
 });
 
-test('POST /posts -- Creates new post', async (t) => {
+it('POST /posts -- Creates new post', async () => {
   const { status, body } = await request()
         .post('/api/v1/posts')
         .set('Accept', 'application/json')
@@ -102,6 +101,6 @@ test('POST /posts -- Creates new post', async (t) => {
           tags: 'foo,bar',
         });
 
-  t.is(status, 201);
-  t.is(typeof body, 'object');
+  expect(status).toBe(201);
+  expect(typeof body).toBe('object');
 });

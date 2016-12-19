@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import User from 'routes/user/user.model';
+import User from '../../routes/user/user.model';
 
 /**
  * This middleware checks to see if the given user/token combination has the provided role.

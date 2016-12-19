@@ -1,5 +1,5 @@
 import express from 'express';
-import { isAuthenticated } from 'services/authentication';
+import { isAuthenticated } from '../../services/authentication';
 import * as ctrl from './auth.controller';
 
 const router = express.Router();

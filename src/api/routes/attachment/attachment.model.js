@@ -1,5 +1,5 @@
 import { Model } from 'objection';
-import BaseModel from 'core/base/BaseModel';
+import BaseModel from '../../core/base/BaseModel';
 // Related Models
 import User from '../user/user.model';
 import Post from '../post/post.model';

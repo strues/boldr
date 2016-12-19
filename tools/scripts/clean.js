@@ -1,14 +1,13 @@
+
+/* @flow */
+
 // This script removes any exisitng build output.
 
-const pathResolve = require('path').resolve;
-const appRoot = require('app-root-dir');
+import { resolve as pathResolve } from 'path';
+import appRootDir from 'app-root-dir';
+import { exec } from '../utils';
+import boldrConfig from '../../config/private/boldr';
 
-const envVars = require('../config/envVars');
-const { exec } = require('../utils.js');
-
-const appRootPath = appRoot.get();
-const buildOutput = pathResolve(appRootPath, envVars.BUNDLE_OUTPUT_PATH);
-
-const cmd = `$(npm bin)/rimraf ${buildOutput}`;
+const cmd = `$(npm bin)/rimraf ${pathResolve(appRootDir.get(), boldrConfig.buildOutputPath)}`;
 
 exec(cmd);

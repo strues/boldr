@@ -1,4 +1,4 @@
-import { responseHandler } from 'core/index';
+import { responseHandler } from '../../core/index';
 import User from '../user/user.model';
 import Role from './role.model';
 

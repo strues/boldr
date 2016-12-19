@@ -1,6 +1,6 @@
 import express from 'express';
-import { checkRole } from 'core/index';
-import { isAuthenticated } from 'services/authentication';
+import { checkRole } from '../../core/index';
+import { isAuthenticated } from '../../services/authentication';
 import * as ctrl from './setting.controller';
 
 const router = express.Router();

@@ -1,7 +1,7 @@
 import express from 'express';
-import { isAuthenticated } from 'services/authentication';
-import { checkRole, BaseController } from 'core/index';
-import { processQuery } from 'utils/index';
+import { isAuthenticated } from '../../services/authentication';
+import { checkRole, BaseController } from '../../core/index';
+import { processQuery } from '../../utils/index';
 import * as ctrl from './post.controller';
 import Post from './post.model';
 

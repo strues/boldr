@@ -1,4 +1,3 @@
-import test from 'ava';
 import signToken from './signToken';
 
 const user = {
@@ -11,7 +10,7 @@ const user = {
   }
 };
 
-test('creates a signed jsonwebtoken', async (t) => {
+it('creates a signed jsonwebtoken', async () => {
   const token = await signToken(user);
-  t.is(typeof token, 'string');
+  expect(typeof token).toBe('string');
 });

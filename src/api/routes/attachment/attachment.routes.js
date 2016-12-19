@@ -1,6 +1,6 @@
 import express from 'express';
-import { isAuthenticated } from 'services/authentication';
-import { checkRole, BaseController } from 'core/index';
+import { isAuthenticated } from '../../services/authentication';
+import { checkRole, BaseController } from '../../core/index';
 import * as ctrl from './attachment.controller';
 import Attachment from './attachment.model';
 

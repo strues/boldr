@@ -1,7 +1,6 @@
-import test from 'ava';
 import { generateHash } from './hashing';
 
-test('generateVerifyCode() - should generate a random token', (t) => {
+it('generateVerifyCode() - should generate a random token', () => {
   const token = generateHash();
-  t.is(typeof token, 'object');
+  expect(typeof token).toBe('object');
 });

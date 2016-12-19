@@ -40,21 +40,6 @@ services:
     networks:
       - boldr
 
-  # boldr:
-  #   image: strues/boldr:0.5.1
-  #   container_name: boldr_cms
-  #   ports:
-  #     - "3000:3000"
-  #   volumes_from:
-  #     - datastore
-  #   links:
-  #     - redis
-  #     - postgres
-  #   networks:
-  #     - boldr
-  #   environment:
-  #     - REDIS_CONN_URI=redis://boldr_redis
-
 networks:
   boldr:
     driver: bridge

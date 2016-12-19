@@ -1,7 +1,8 @@
 import { createTransport } from 'nodemailer';
+import config from '../../../../config/private/api';
 
 const debug = require('debug')('boldrAPI:mailer');
-const config = require('config/index');
+
 
 const TRANSPORT_OPTS = {
   host: config.mail.host,

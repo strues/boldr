@@ -1,4 +1,4 @@
-import { responseHandler, InternalServer } from 'core/index';
+import { responseHandler, InternalServer } from '../../core/index';
 // Model
 import Navigation from './navigation.model';
 

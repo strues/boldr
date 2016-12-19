@@ -7,9 +7,9 @@
 import path from 'path';
 import fs from 'fs';
 import winston from 'winston';
+import config from '../../../../config/private/api';
 
 const appRoot = require('app-root-dir');
-const config = require('config/index');
 
 const appRootDir = appRoot.get();
 const logDir = path.resolve(`${appRootDir}/logs`);

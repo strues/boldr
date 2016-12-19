@@ -5,7 +5,7 @@
  * Verifies application-wide configuration.
  */
 import { Model } from 'objection';
-import knex from 'services/postgres';
+import knex from '../services/postgres';
 import Setting from '../routes/setting/setting.model';
 import logger from './logger';
 

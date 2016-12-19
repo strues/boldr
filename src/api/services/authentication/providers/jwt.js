@@ -1,8 +1,9 @@
 import passport from 'passport';
+import config from '../../../../../config/private/api';
 
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;
-const config = require('config/index');
+
 
 const jwtOptions = {
   secretOrKey: config.token.secret,

@@ -1,7 +1,7 @@
 /* eslint-disable id-match */ /* eslint-disable no-unused-vars */
 import bcrypt from 'bcryptjs';
 import { Model } from 'objection';
-import BaseModel from 'core/base/BaseModel';
+import BaseModel from '../../core/base/BaseModel';
 // Related Models
 import Role from '../role/role.model';
 import Attachment from '../attachment/attachment.model';

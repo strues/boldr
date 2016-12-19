@@ -1,10 +1,12 @@
 /* @flow */
 import express from 'express';
 import type { $Request, $Response, NextFunction } from 'express';
+import config from '../../config/private/api';
+
 import { NotFound } from './core/errors';
 import { authMiddleware, expressMiddleware, rbac } from './core/middleware';
 import routes from './routes/index';
-import config from './config/index';
+
 
 const app = express();
 

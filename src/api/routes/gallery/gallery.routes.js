@@ -1,7 +1,7 @@
 import express from 'express';
-import { isAuthenticated } from 'services/authentication';
-import { BaseController } from 'core/base';
-import { processQuery } from 'utils/index';
+import { isAuthenticated } from '../../services/authentication';
+import { BaseController } from '../../core/base';
+import { processQuery } from '../../utils/index';
 
 // Model
 import Gallery from './gallery.model';

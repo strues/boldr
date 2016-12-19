@@ -1,18 +1,16 @@
-import test from 'ava';
-
 import slugIt from './slugIt';
 
-test('replace whitespace', async (t) => {
-  t.is(slugIt('hey hi hello'), 'hey-hi-hello');
-  t.is(slugIt('hey hi hello', '_'), 'hey_hi_hello');
+it('replace whitespace', async () => {
+  expect(slugIt('hey hi hello')).toBe('hey-hi-hello');
+  expect(slugIt('hey hi hello', '_')).toBe('hey_hi_hello');
 });
 
-test('removes disallowed characters', async (t) => {
-  t.is(slugIt('hey, hi hello'), 'hey-hi-hello');
-  t.is(slugIt('hey- hi hello'), 'hey-hi-hello');
-  t.is(slugIt('hey] hi hello'), 'hey-hi-hello');
+it('removes disallowed characters', async () => {
+  expect(slugIt('hey, hi hello')).toBe('hey-hi-hello');
+  expect(slugIt('hey- hi hello')).toBe('hey-hi-hello');
+  expect(slugIt('hey] hi hello')).toBe('hey-hi-hello');
 });
 
-test('removes whitespaces', async (t) => {
-  t.is(slugIt(' hey hi hello '), 'hey-hi-hello');
+it('removes whitespaces', async () => {
+  expect(slugIt(' hey hi hello ')).toBe('hey-hi-hello');
 });

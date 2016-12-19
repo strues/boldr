@@ -1,6 +1,6 @@
 import express from 'express';
-import { isAuthenticated } from 'services/authentication';
-import { BaseController } from 'core/index';
+import { isAuthenticated } from '../../services/authentication';
+import { BaseController } from '../../core/index';
 import { processQuery } from '../../utils';
 import Page from './page.model';
 import * as ctrl from './page.controller';

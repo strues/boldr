@@ -1,24 +1,22 @@
-import test from 'ava';
-
 import * as tpl from './templates';
 
-test('welcomeEmail -- should generate an email message', async (t) => {
+it('welcomeEmail -- should generate an email message', async () => {
   const verificationToken = 'test';
   const welcome = await tpl.welcomeEmail(verificationToken);
 
-  t.is(typeof welcome, 'string');
+  expect(typeof welcome).toBe('string');
 });
 
-test('forgotPasswordEmail -- should generate an email message', async (t) => {
+it('forgotPasswordEmail -- should generate an email message', async () => {
   const verificationToken = 'test';
   const msg = await tpl.forgotPasswordEmail(verificationToken);
 
-  t.is(typeof msg, 'string');
+  expect(typeof msg).toBe('string');
 });
 
-test('passwordModifiedEmail -- should generate an email message', async (t) => {
+it('passwordModifiedEmail -- should generate an email message', async () => {
   const user = 'test';
   const mod = await tpl.passwordModifiedEmail(user);
 
-  t.is(typeof mod, 'string');
+  expect(typeof mod).toBe('string');
 });

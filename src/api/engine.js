@@ -1,4 +1,9 @@
 import http from 'http';
+import https from 'https';
+import fs from 'fs';
+import { resolve as pathResolve } from 'path';
+import appRootDir from 'app-root-dir';
+import config from '../../config/private/api';
 
 import bootstrap from './core/bootstrap';
 import logger from './core/logger';
@@ -6,7 +11,7 @@ import app from './app';
 
 const Promise = require('bluebird');
 const debug = require('debug')('boldrAPI:engine');
-const config = require('./config/index');
+
 
 const port = normalizePort(config.port);
 const appName = `${config.app} @ v${config.version}`;
@@ -15,6 +20,11 @@ require('dotenv').load({ silent: true });
 
 global.Promise = Promise;
 Promise.longStackTraces();
+
+const ssl = {
+  key: fs.readFileSync(pathResolve(appRootDir.get(), './config/private/ssl.key')),
+  cert: fs.readFileSync(pathResolve(appRootDir.get(), './config/private/ssl.crt')),
+};
 
 app.set('port', port);
 app.set('json spaces', 2);

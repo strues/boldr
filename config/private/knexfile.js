@@ -1,6 +1,6 @@
 const path = require('path');
 const appRoot = require('app-root-dir');
-const config = require('./index');
+const config = require('./api');
 
 const appRootDir = appRoot.get();
 

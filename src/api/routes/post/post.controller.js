@@ -1,6 +1,6 @@
 import uuid from 'uuid';
-import { responseHandler, Conflict } from 'core/index';
-import slugIt from 'utils/slugIt';
+import { responseHandler, Conflict } from '../../core/index';
+import slugIt from '../../utils/slugIt';
 
 // Models
 import Tag from '../tag/tag.model';

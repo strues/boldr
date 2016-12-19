@@ -4,10 +4,10 @@
  */
 
 import session from 'express-session';
-import redisClient from 'services/redis';
+import redisClient from '../../services/redis';
+import config from '../../../../config/private/api';
 
 const RedisStore = require('connect-redis')(session);
-const config = require('config/index');
 
 const env = config.env || 'development';
 

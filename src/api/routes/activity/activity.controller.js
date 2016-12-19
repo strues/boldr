@@ -1,4 +1,4 @@
-import responseHandler from 'core/response';
+import responseHandler from '../../core/response';
 
 import Activity from './activity.model';
 

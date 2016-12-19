@@ -1,6 +1,6 @@
 import uuid from 'uuid';
-import slugIt from 'utils/slugIt';
-import { InternalServer, responseHandler } from 'core/index';
+import slugIt from '../../utils/slugIt';
+import { InternalServer, responseHandler } from '../../core/index';
 import Activity from '../activity/activity.model';
 import Navigation from '../navigation/navigation.model';
 import NavigationLink from '../navigation/navigationLink.model';

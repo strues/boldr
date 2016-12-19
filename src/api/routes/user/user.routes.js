@@ -1,5 +1,5 @@
 import express from 'express';
-import { isAuthenticated } from 'services/authentication';
+import { isAuthenticated } from '../../services/authentication';
 import { BaseController, checkRole } from '../../core';
 import User from './user.model';
 import * as ctrl from './user.controller';

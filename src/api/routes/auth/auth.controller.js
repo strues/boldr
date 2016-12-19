@@ -1,8 +1,8 @@
 import passport from 'passport';
 import uuid from 'uuid';
 import * as objection from 'objection';
-import { mailer, signToken } from 'services/index';
-import { welcomeEmail } from 'services/mailer/templates';
+import { mailer, signToken } from '../../services/index';
+import { welcomeEmail } from '../../services/mailer/templates';
 import User from '../user/user.model';
 import {
   responseHandler,

@@ -4,9 +4,7 @@ import methodOverride from 'method-override';
 import expressValidator from 'express-validator';
 import expressWinston from 'express-winston';
 import hpp from 'hpp';
-import lusca from 'lusca';
-import morgan from 'morgan';
-import config from 'config/index';
+import config from '../../../../config/private/api';
 import winstonInstance from '../logger';
 
 export default (app) => {
@@ -49,18 +47,6 @@ export default (app) => {
   if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
     app.use(expressWinston.errorLogger({
       winstonInstance,
-    }));
-  }
-  if (process.env.NODE_ENV === 'production') {
-    app.use(lusca({
-      xframe: 'SAMEORIGIN',
-      hsts: {
-        // 1 year, in seconds
-        maxAge: 31536000,
-        includeSubDomains: true,
-        preload: true,
-      },
-      xssProtection: true,
     }));
   }
 };

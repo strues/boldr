@@ -6,7 +6,7 @@
  */
 
 import passport from 'passport';
-import { configureJwt, configureLocal } from 'services/authentication';
+import { configureJwt, configureLocal } from '../../services/authentication';
 import User from '../../routes/user/user.model';
 import sessionMiddleware from './session';
 

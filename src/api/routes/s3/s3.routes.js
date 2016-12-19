@@ -1,9 +1,9 @@
 import uuid from 'uuid';
 import express from 'express';
-import s3 from 'services/aws/s3';
+import s3 from '../../services/aws/s3';
+import config from '../../../../config/private/api';
 
 const debug = require('debug')('boldrAPI:s3');
-const config = require('../../config/index');
 
 function checkTrailingSlash(path) {
   if (path && path[path.length - 1] !== '/') {
