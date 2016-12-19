@@ -1,17 +1,22 @@
 /* @flow */
+
 import 'source-map-support/register';
-import path from 'path';
-import uuid from 'uuid';
-import appRoot from 'app-root-dir';
+
+import { resolve as pathResolve } from 'path';
 import express from 'express';
 import type { $Request, $Response, NextFunction } from 'express';
+import appRootDir from 'app-root-dir';
 import compression from 'compression';
-import hpp from 'hpp';
 import cookieParser from 'cookie-parser';
-import helmet from 'helmet';
 import httpProxy from 'http-proxy';
-import config from '../../config/boldr';
-import envConfig from '../../config/environment';
+// configuration
+import boldrConfig from '../../config/private/boldr';
+import envConfig from '../../config/private/environment';
+// middleware
+import security from './middleware/security';
+import serviceWorker from './middleware/serviceWorker';
+import clientBundle from './middleware/clientBundle';
+import errorHandlers from './middleware/errorHandlers';
 import boldrSSR from './middleware/boldrSSR';
 
 const appRootPath = appRoot.get();
@@ -22,14 +27,7 @@ const proxyTo = `http://${envConfig.apiHost}:${envConfig.apiPort}/api/v1`;
 const app = express();
 app.use(compression());
 app.use(cookieParser());
-// Attach a unique "nonce" to every response.  This allows use to declare
-// inline scripts as being safe for execution against our content security policy.
-// @see https://helmetjs.github.io/docs/csp/
 
-app.use((req: $Request, res: $Response, next: NextFunction) => {
-  res.locals.nonce = uuid(); // eslint-disable-line no-param-reassign
-  next();
-});
 const proxy = httpProxy.createProxyServer({
   target: proxyTo,
 });
@@ -41,31 +39,8 @@ app.use((req: $Request, res: $Response, next: NextFunction) => {
 });
 // Don't expose any software information to hackers.
 app.disable('x-powered-by');
-
-// Prevent HTTP Parameter pollution.
-app.use(hpp());
-
-// app.use(helmet.contentSecurityPolicy(cspConfig));
-
-// The xssFilter middleware sets the X-XSS-Protection header to prevent
-// reflected XSS attacks.
-// @see https://helmetjs.github.io/docs/xss-filter/
-app.use(helmet.xssFilter());
-
-// Frameguard mitigates clickjacking attacks by setting the X-Frame-Options header.
-// @see https://helmetjs.github.io/docs/frameguard/
-app.use(helmet.frameguard('deny'));
-
-// Sets the X-Download-Options to prevent Internet Explorer from executing
-// downloads in your site’s context.
-// @see https://helmetjs.github.io/docs/ienoopen/
-app.use(helmet.ieNoOpen());
-
-// Don’t Sniff Mimetype middleware, noSniff, helps prevent browsers from trying
-// to guess (“sniff”) the MIME type, which can have security implications. It
-// does this by setting the X-Content-Type-Options header to nosniff.
-// @see https://helmetjs.github.io/docs/dont-sniff-mimetype/
-app.use(helmet.noSniff());
+// Security middlewares.
+app.use(...security);
 
 // Proxying all requests matching this endpoint
 app.use('/api/v1', (req: $Request, res: $Response) => {
@@ -74,66 +49,30 @@ app.use('/api/v1', (req: $Request, res: $Response) => {
 });
 
 proxy.on('error', (err: Object, req: $Request, res: $Response) => {
-  if (err.code !== 'ECONNRESET') {
-    console.log('proxy error', err);
-  }
-
-  if (!res.headersSent) {
-    res.writeHead(500, { 'Content-Type': 'application/json' });
-  }
-
+  if (err.code !== 'ECONNRESET') console.log('proxy error', err);
+  if (!res.headersSent) res.writeHead(500, { 'Content-Type': 'application/json' });
   const json = { error: 'proxy_error', reason: err.message };
-
   res.end(JSON.stringify(json));
 });
 
 // Configure static serving of our webpack bundled client files.
-app.use(config.bundles.client.webPath,
-  express.static(
-    path.resolve(appRootPath, config.buildOutputPath, './client'),
-    { maxAge: config.browserCacheMaxAge },
-  ),
-);
+// Configure serving of our client bundle.
+app.use(boldrConfig.bundles.client.webPath, clientBundle);
+// Configure sstatic serving of our "public" root http path static files.
+app.use(express.static(pathResolve(appRootDir.get(), boldrConfig.publicAssetsPath)));
 
-// Configure static serving of our "public" root http path static files.
-app.use(express.static(path.resolve(appRootPath, './public')));
-
-// When in production mode, bind our service worker folder so that it can
-// be served.
-// Note: the service worker needs to be available at the http root of your
-// application for the offline support to work.
+// When in production mode, we will serve our service worker which was generated
+// by the offline-plugin webpack plugin. See the webpack plugins section for
+// more information.
+// Note: the service worker needs to be served from the http root of your
+// application for it to work correctly.
 if (process.env.NODE_ENV === 'production') {
-  app.get(
-    '/sw.js',
-    (req: $Request, res: $Response, next: NextFunction) => { // eslint-disable-line no-unused-vars
-      res.sendFile(
-        path.resolve(appRootPath, config.buildOutputPath, './client/sw.js'),
-      );
-    },
-  );
+  app.get(`/${boldrConfig.serviceWorker.fileName}`, serviceWorker);
 }
 
 app.get('*', boldrSSR);
 
-// Handle 404 errors.
-// Note: the react application middleware hands 404 paths, but it is good to
-// have this backup for paths not handled by the universal middleware. For
-// example you may bind a /api path to express.
-app.use((req: $Request, res: $Response, next: NextFunction) => { // eslint-disable-line no-unused-vars,max-len
-  res.status(404).send('Sorry, that resource was not found.');
-});
-
-// Handle all other errors (i.e. 500).
-// Note: You must provide specify all 4 parameters on this callback function
-// even if they aren't used, otherwise it won't be used.
-app.use((err: ?Error, req: $Request, res: $Response, next: NextFunction) => { // eslint-disable-line no-unused-vars,max-len
-  if (err) {
-    console.log(err);
-    console.log(err.stack);
-  }
-  res.status(500).send('Sorry, an unexpected error occurred.');
-});
-
+app.use(...errorHandlers);
 // Create an http listener for our express app.
 const port = parseInt(envConfig.port, 10);
 const listener = app.listen(port, () =>

@@ -41,29 +41,8 @@ const mapDispatchToProps = (dispatch) => {
 class HeaderWrapper extends Component {
   constructor() {
     super();
-    this.handleLoginClick = this.handleLoginClick.bind(this);
-    this.handleSignupClick = this.handleSignupClick.bind(this);
-    this.handleProfileClick = this.handleProfileClick.bind(this);
-    this.handlePreferencesClick = this.handlePreferencesClick.bind(this);
     this.handleLogoClick = this.handleLogoClick.bind(this);
     this.handleLogoutClick = this.handleLogoutClick.bind(this);
-    this.handleDashClick = this.handleDashClick.bind(this);
-  }
-
-  handleLoginClick = (e) => {
-    this.props.navigate('/account/login');
-  }
-
-  handleSignupClick = (e) => {
-    this.props.navigate('/account/signup');
-  }
-
-  handleProfileClick = (e) => {
-    this.props.navigate('/profile');
-  }
-
-  handlePreferencesClick = (e) => {
-    this.props.navigate('/account/preferences');
   }
 
   handleLogoClick = (e) => {
@@ -74,10 +53,6 @@ class HeaderWrapper extends Component {
     this.props.actions.logout();
   }
 
-  handleDashClick = (e) => {
-    this.props.navigate('/dashboard');
-  }
-
   props: Props;
   render() {
     const renderDefaultHeader = (
@@ -86,13 +61,8 @@ class HeaderWrapper extends Component {
       logo={ this.props.logo }
       settings={ this.props.settings }
       navigation={ this.props.navigation }
-      handleLoginClick={ this.handleLoginClick }
-      handleSignupClick={ this.handleSignupClick }
-      handleProfileClick={ this.handleProfileClick }
-      handlePreferencesClick={ this.handlePreferencesClick }
       handleLogoClick= { this.handleLogoClick }
       handleLogoutClick={ this.handleLogoutClick }
-      handleDashClick={ this.handleDashClick }
     />);
 
     return (

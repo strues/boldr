@@ -1,5 +1,5 @@
-import { host, wpdsPort, protocol, port } from '../../config/environment';
-import config from '../../config/boldr';
+import { host, wpdsPort, protocol, port } from '../../config/private/environment';
+import config from '../../config/private/boldr';
 
 const path = require('path');
 const os = require('os');
