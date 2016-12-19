@@ -1,6 +1,8 @@
 /* flow */
 import React from 'react';
-import { Divider, Header } from 'semantic-ui-react';
+import Divider from 'material-ui/Divider';
+import Paper from 'material-ui/Paper';
+import { Col, Heading } from 'components/index';
 import PostImage from '../PostImage';
 
 type Props = {
@@ -14,18 +16,22 @@ const PostContent = (props: Props) => {
     };
   }
   return (
+    <Col xs={ 12 } md={ 8 } lg={ 9 }>
+      <Paper zDepth={ 1 }>
     <article>
       { props.feature_image ?
         <PostImage imageSrc={ props.feature_image } /> :
         null
       }
       <div style={ { padding: '2em 1.5em' } }>
-       <Header size="large">{ props.title } </Header>
+       <Heading size={ 1 }>{ props.title }</Heading>
 
         <Divider />
         <div className="content" style={ { lineHeight: '1.8em' } } dangerouslySetInnerHTML={ createMarkup() } />
       </div>
     </article>
+  </Paper>
+  </Col>
   );
 };
 

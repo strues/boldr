@@ -2,8 +2,9 @@
 import React from 'react';
 import { Link } from 'react-router';
 import dateFns from 'date-fns';
+import RaisedButton from 'material-ui/RaisedButton';
 // import { Card, Image } from 'semantic-ui-react';
-import { Row, Button, Card, CardImage, CardFooter, CardContent, Divider } from 'components/index';
+import { Row, Card, CardImage, CardFooter, CardContent, Divider } from 'components/index';
 import type { Post } from 'types/models';
 import TagBlock from '../TagBlock';
 
@@ -19,7 +20,7 @@ const PostCard = (props: Post) => {
         <CardFooter>
 
         <Link to={ `/blog/${props.slug}` } style={ { marginRight: '15px' } }>
-          <Button>Read More</Button>
+          <RaisedButton primary label="Read More" />
         </Link>
 
         <TagBlock tags={ props.tags } />

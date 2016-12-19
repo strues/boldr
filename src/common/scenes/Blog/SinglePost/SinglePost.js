@@ -1,8 +1,7 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { Grid, Col, Row } from 'components/index';
-import { Segment } from 'semantic-ui-react';
+import { Grid, Row } from 'components/index';
 import PostSidebar from '../components/PostSidebar';
 import PostContent from '../components/PostContent';
 
@@ -15,16 +14,10 @@ const SinglePost = (props: Props) => {
   return (
       <Grid>
         <Row>
-          <Col xs={ 12 } md={ 8 } lg={ 9 }>
-              <Segment>
-              <PostContent { ...props.currentPost } />
-              </Segment>
-            </Col>
-            <Col xs={ 12 } md={ 4 } lg={ 3 }>
-              <PostSidebar { ...props.currentPost } />
-            </Col>
-          </Row>
-        </Grid>
+          <PostContent { ...props.currentPost } />
+          <PostSidebar { ...props.currentPost } />
+        </Row>
+      </Grid>
   );
 };
 

@@ -1,23 +1,25 @@
 /* @flow */
 import React from 'react';
-import { Segment } from 'semantic-ui-react';
-import { Heading } from 'components/index';
+import Paper from 'material-ui/Paper';
+
+import { Heading, Col } from 'components/index';
 import Author from '../Author';
 import TagBlock from '../TagBlock';
 
-
 const PostSidebar = (props: { tags: Array<Object>, author: Object }) => {
   return (
-    <div className="sidebar">
-      <Segment raised>
+    <div className="blog__sidebar">
+    <Col xs={ 12 } md={ 4 } lg={ 3 }>
+      <Paper zDepth={ 1 } style={ { padding: '1em' } }>
         <Heading size={ 2 } color="#1F2439">Author</Heading>
         <Author { ...props.author } />
-      </Segment>
-      <Segment raised>
+      </Paper>
+      <Paper zDepth={ 1 } style={ { padding: '1em', marginTop: '25px' } }>
         <Heading size={ 2 } color="#1F2439">Tags</Heading>
         <TagBlock tags={ props.tags } />
-      </Segment>
-    </div>
+      </Paper>
+    </Col>
+  </div>
   );
 };
 

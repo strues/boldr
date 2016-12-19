@@ -15,11 +15,13 @@ exports[`<PostCard /> renders snapshot 1`] = `
             }
           }
           to="/blog/undefined">
-          <Component
-            submit={false}
-            type="default">
-            Read More
-          </Component>
+          <RaisedButton
+            disabled={false}
+            fullWidth={false}
+            label="Read More"
+            labelPosition="after"
+            primary={true}
+            secondary={false} />
         </Link>
         <Component />
       </Component>

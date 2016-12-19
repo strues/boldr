@@ -1,28 +1,39 @@
 exports[`<PostContent /> renders snapshot 1`] = `
-<article>
-  <div
-    style={
-      Object {
-        "padding": "2em 1.5em",
-      }
-    }>
-    <Header
-      size="large">
-       
-    </Header>
-    <Divider />
-    <div
-      className="content"
-      dangerouslySetInnerHTML={
-        Object {
-          "__html": undefined,
-        }
-      }
-      style={
-        Object {
-          "lineHeight": "1.8em",
-        }
-      } />
-  </div>
-</article>
+<Col
+  componentClass="div"
+  lg={9}
+  md={8}
+  xs={12}>
+  <Paper
+    circle={false}
+    rounded={true}
+    transitionEnabled={true}
+    zDepth={1}>
+    <article>
+      <div
+        style={
+          Object {
+            "padding": "2em 1.5em",
+          }
+        }>
+        <Component
+          size={1} />
+        <Divider
+          inset={false} />
+        <div
+          className="content"
+          dangerouslySetInnerHTML={
+            Object {
+              "__html": undefined,
+            }
+          }
+          style={
+            Object {
+              "lineHeight": "1.8em",
+            }
+          } />
+      </div>
+    </article>
+  </Paper>
+</Col>
 `;
