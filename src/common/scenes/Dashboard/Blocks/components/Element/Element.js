@@ -16,17 +16,18 @@ const elementSource = {
   },
 };
 
+export type Props = {
+  name?: string,
+  connectDragSource?: Function,
+  isDragging?: boolean,
+};
+
 @DragSource('Section', elementSource, (connect, monitor) => ({
   connectDragSource: connect.dragSource(),
   isDragging: monitor.isDragging(),
 }))
 class Element extends Component {
-  static propTypes = {
-    name: React.PropTypes.string.isRequired,
-    connectDragSource: React.PropTypes.func.isRequired,
-    isDragging: React.PropTypes.bool.isRequired,
-  }
-
+  props: Props;
   render() {
     const { isDragging, connectDragSource, name } = this.props;
     return connectDragSource(

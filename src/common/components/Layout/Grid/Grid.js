@@ -1,7 +1,15 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 
+export type Props = {
+  fluid?: boolean,
+  className?: string,
+  style?: Object,
+  children?: number | string | React.Element | Array<any>,
+};
+
 class Grid extends PureComponent {
+  props: Props;
   render() {
     const ComponentClass = this.props.componentClass;
 
@@ -16,13 +24,6 @@ class Grid extends PureComponent {
     );
   }
 }
-
-Grid.propTypes = {
-  fluid: React.PropTypes.bool,
-  className: React.PropTypes.string,
-  style: React.PropTypes.object,
-  children: React.PropTypes.node,
-};
 
 Grid.defaultProps = {
   componentClass: 'div',

@@ -1,7 +1,6 @@
 // @flow
 
-import React, { PureComponent } from 'react';
-import Link from 'react-router/lib/Link';
+import React, { Component } from 'react';
 import AppBar from 'material-ui/AppBar';
 import FlatButton from 'material-ui/FlatButton';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -9,6 +8,10 @@ import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import Drawer from 'material-ui/Drawer';
+import materialStyle from 'theme/material';
+import Anchor from '../Anchor';
 
 type Props = {
   navigate: () => void,
@@ -20,9 +23,13 @@ type Props = {
   auth: Object,
   handleLogoClick: () => void,
   handleLogoutClick: () => void,
+  handleDashClick: () => void,
+  handleProfClick: () => void,
+  handlePrefClick: () => void,
 };
 
-class PrimaryHeader extends PureComponent {
+class PrimaryHeader extends Component {
+
   props: Props;
 
   /**
@@ -31,14 +38,10 @@ class PrimaryHeader extends PureComponent {
    */
   renderUnauthenticated() {
     return (
-      <div>
-        <Link className="ph-menu__item-link" to="/account/login">
-          <RaisedButton primary label="Login" />
-       </Link>
-       <Link className="ph-menu__item-link" to="/account/signup">
-         <RaisedButton secondary label="Sign Up" />
-      </Link>
-     </div>
+      <span>
+        <RaisedButton primary label="Login" href="/account/login" />
+        <RaisedButton secondary label="Sign Up" href="/account/signup" />
+    </span>
     );
   }
 
@@ -55,9 +58,9 @@ class PrimaryHeader extends PureComponent {
         targetOrigin={ { horizontal: 'right', vertical: 'top' } }
         anchorOrigin={ { horizontal: 'right', vertical: 'top' } }
       >
-        <Link to="/dashboard"><MenuItem primaryText="Dashboard" /></Link>
-        <Link to="/profile"><MenuItem primaryText="Profile" /></Link>
-        <Link to="/account/preferences"><MenuItem primaryText="Preferences" /></Link>
+        <MenuItem onTouchTap={ this.props.handleDashClick } primaryText="Dashboard" />
+        <MenuItem onTouchTap={ this.props.handleProfClick } primaryText="Profile" />
+        <MenuItem primaryText="Preferences" onTouchTap={ this.props.handlePrefClick } />
         <MenuItem primaryText="Logout" onTouchTap={ this.props.handleLogoutClick } />
       </IconMenu>
     );
@@ -70,14 +73,14 @@ class PrimaryHeader extends PureComponent {
       );
     }
     const renderedMenuItems = this.props.navigation.links.map((item, i) =>
-    <Link key={ item.id } className="ph-menu__item-link" to={ item.href }>
-      <FlatButton label={ item.name } />
-    </Link>,
+      <FlatButton labelStyle={ { color: '#fff' } } key={ item.id } label={ item.name } href={ item.href } />,
     );
 
     return (
-
+      <div>
       <AppBar
+        zDepth={ 2 }
+        onLeftIconButtonTouchTap={ this.handleMenuTap }
         title={
           <img src={ this.props.logo.value }
             className="ph-logo"
@@ -85,18 +88,43 @@ class PrimaryHeader extends PureComponent {
           />
         }
         iconElementRight={
-          <div>
+          <span>
             { renderedMenuItems }
             {
               this.props.auth.isAuthenticated
               ? this.renderAuthenticated()
               : this.renderUnauthenticated()
             }
-          </div>
+          </span>
         }
       />
+
+</div>
     );
   }
 }
 
 export default PrimaryHeader;
+
+/**
+ *       <Drawer
+         docked={ false }
+         open={ this.state.menu_open }
+         onRequestChange={ (open) => this.setState({ menu_open: open }) }
+       >
+   <MenuItem
+     linkButton
+     containerElement={ <Anchor to="/" onlyActiveOnIndex /> }
+     primaryText="Dashboard"
+     onTouchTap={ this.handleMenuClose }
+   />
+   <MenuItem
+     linkButton
+     containerElement={ <Anchor to="/todo" /> }
+     primaryText="To-Do List"
+     onTouchTap={ this.handleMenuClose }
+   />
+ </Drawer>
+
+ //{this.props.children}
+ */

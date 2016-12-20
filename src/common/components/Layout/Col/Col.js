@@ -2,7 +2,31 @@ import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 import { isNumber } from 'lodash';
 
+export type Props = {
+  className?: string,
+  style?: Object,
+  children?: number | string | React.Element | Array<any>,
+  xs?: number | boolean,
+  sm?: number | boolean,
+  md?: number | boolean,
+  lg?: number | boolean,
+  xsOffset?: number,
+  smOffset?: number,
+  mdOffset?: number,
+  lgOffset?: number,
+  reverse?: boolean,
+  xsFirst?: boolean,
+  smFirst?: boolean,
+  mdFirst?: boolean,
+  lgFirst?: boolean,
+  xsLast?: boolean,
+  smLast?: boolean,
+  mdLast?: boolean,
+  lgLast?: boolean,
+};
+
 class Col extends PureComponent {
+  props: Props;
   render() {
     const ComponentClass = this.props.componentClass;
 
@@ -37,46 +61,6 @@ class Col extends PureComponent {
     );
   }
 }
-
-Col.propTypes = {
-  className: React.PropTypes.string,
-  style: React.PropTypes.object,
-  children: React.PropTypes.node,
-
-  xs: React.PropTypes.oneOfType([
-    React.PropTypes.number,
-    React.PropTypes.bool,
-  ]),
-  sm: React.PropTypes.oneOfType([
-    React.PropTypes.number,
-    React.PropTypes.bool,
-  ]),
-  md: React.PropTypes.oneOfType([
-    React.PropTypes.number,
-    React.PropTypes.bool,
-  ]),
-  lg: React.PropTypes.oneOfType([
-    React.PropTypes.number,
-    React.PropTypes.bool,
-  ]),
-
-  xsOffset: React.PropTypes.number,
-  smOffset: React.PropTypes.number,
-  mdOffset: React.PropTypes.number,
-  lgOffset: React.PropTypes.number,
-
-  reverse: React.PropTypes.bool,
-
-  xsFirst: React.PropTypes.bool,
-  smFirst: React.PropTypes.bool,
-  mdFirst: React.PropTypes.bool,
-  lgFirst: React.PropTypes.bool,
-
-  xsLast: React.PropTypes.bool,
-  smLast: React.PropTypes.bool,
-  mdLast: React.PropTypes.bool,
-  lgLast: React.PropTypes.bool,
-};
 
 Col.defaultProps = {
   componentClass: 'div',

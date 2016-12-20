@@ -11,14 +11,27 @@ import { BoldrEditor } from 'boldr-editor';
 
 import '../../../../../../../node_modules/boldr-editor/dist/boldreditor.css';
 
+export type Props = {
+  handleSubmit?: Function,
+  editing?: boolean,
+  reset?: Function,
+  isEditing?: boolean,
+  submitting?: boolean,
+  fields?: Object,
+  pristine?: boolean,
+  input?: Object,
+  label?: string,
+};
+
 class PostEditorForm extends Component {
-  constructor(props) {
+  constructor(props: Props) {
     super();
     this.checkEditStatus = this.checkEditStatus.bind(this);
     this.state = {
       edit: false,
     };
   }
+  props: Props;
   componentDidMount() {
     this.checkEditStatus();
   }
@@ -99,15 +112,3 @@ class PostEditorForm extends Component {
 export default reduxForm({
   form: 'postEditorForm',
 })(PostEditorForm);
-
-PostEditorForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  editing: PropTypes.bool,
-  reset: PropTypes.func,
-  isEditing: PropTypes.bool,
-  submitting: PropTypes.bool,
-  fields: PropTypes.object,
-  pristine: PropTypes.bool,
-  input: PropTypes.object,
-  label: PropTypes.string,
-};

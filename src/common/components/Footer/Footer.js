@@ -1,12 +1,12 @@
 import React from 'react';
-import { Container, Header } from 'semantic-ui-react';
+import { Grid, Heading } from '../index';
 
 const Footer = (props) => {
   return (
     <footer className="footer__wrap">
-      <Container>
-        <Header>Footer</Header>
-      </Container>
+      <Grid>
+        <Heading size={ 2 }>Footer</Heading>
+      </Grid>
     </footer>
   );
 };

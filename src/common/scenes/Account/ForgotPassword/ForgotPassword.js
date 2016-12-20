@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card, Form } from 'semantic-ui-react';
-import { Heading, Grid, Col, Row, Button } from 'components/index';
+import TextField from 'material-ui/TextField';
+import { Card, CardTitle, CardActions, CardText } from 'material-ui/Card';
+import RaisedButton from 'material-ui/RaisedButton';
+import { Grid, Col, Row } from 'components/index';
 import { forgotPassword } from 'state/dux/auth';
 
 export type Props = {
@@ -35,11 +37,6 @@ class ForgotPassword extends Component {
     this.props.dispatch(forgotPassword(email));
   }
   render() {
-    const renderHeader = (
-      <Card.Header>
-      <Heading size={ 1 } bottom="10px">Forgot your password?</Heading>
-      </Card.Header>
-    );
     return (
       <div>
         <Grid>
@@ -47,23 +44,21 @@ class ForgotPassword extends Component {
             <Col xs={ 12 }>
               <Row xsCenter>
                 <Col xs={ 6 }>
-                  <Card style={ { width: '450px', marginTop: '150px' } }>
-                    <Form onSubmit={ this.handleSubmit } className="card__form">
-                    <Card.Content>
-                      { renderHeader }
-                      <Card.Meta>
+                  <Card style={ { width: '450px', marginTop: '50px' } }>
+                    <form onSubmit={ this.handleSubmit } className="card__form">
+                      <CardTitle title="Forgot your password?" />
+                      <CardText>
                         Enter your email address below to reset it.
-                      </Card.Meta>
-
-                      <Form.Input
-                        label="Email address"
+                      <TextField
+                        floatingLabelText="Email address"
                         name="email"
-                        placeholder="Enter your email"
+                        hintText="Enter your email"
                       />
-
-                      <Button submit>Reset Password</Button>
-                      </Card.Content>
-                    </Form>
+                    </CardText>
+                    <CardActions>
+                      <RaisedButton primary type="submit" label="Reset Password" />
+                    </CardActions>
+                  </form>
                   </Card>
                 </Col>
               </Row>

@@ -1,3 +1,12 @@
+export type Props = {
+  removeMedia?: Function,
+  file?: {
+    id?: string,
+    filename?: string,
+    url?: string,
+  },
+};
+
 import React, { PropTypes } from 'react';
 import { Card, CardActions, CardMedia, CardTitle } from 'material-ui/Card';
 import IconButton from 'material-ui/IconButton';
@@ -25,15 +34,6 @@ const File = (props) => {
         </CardActions>
       </Card>
   );
-};
-
-File.propTypes = {
-  removeMedia: PropTypes.func.isRequired,
-  file: PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    filename: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired,
-  }),
 };
 
 export default File;

@@ -1,32 +1,26 @@
-import React, { PropTypes } from 'react';
-import { Card } from 'semantic-ui-react';
+/* @flow */
+import React from 'react';
+import { Card, CardTitle, CardText } from 'material-ui/Card';
 
-const Widget = (props) => {
+type Props = {
+  name?: string,
+  subtitle?: string,
+};
+
+const Widget = (props: Props) => {
   return (
     <div className="widget__wrap">
       <Card>
-      <Card.Content>
-      <Card.Header>
-      { props.name }
-      </Card.Header>
-      <Card.Meta>
-        { props.subtitle }
-      </Card.Meta>
-       <Card.Description>
+        <CardTitle title={ props.name } />
+        <CardText>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
           Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque.
           Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
-        </Card.Description>
-        </Card.Content>
-        </Card>
+        </CardText>
+      </Card>
     </div>
   );
-};
-
-Widget.propTypes = {
-  name: PropTypes.string,
-  subtitle: PropTypes.string,
 };
 
 export default Widget;

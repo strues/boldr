@@ -1,3 +1,12 @@
+export type Props = {
+  arrIndex?: number,
+  data?: {},
+  edit?: boolean,
+  onChange?: Function,
+  onClickSave?: Function,
+  onClickDelete?: Function,
+};
+
 import React from 'react';
 
 const Section1 = (props/* , context*/) => {
@@ -39,15 +48,6 @@ const Section1 = (props/* , context*/) => {
       </div>
     </div>
   );
-};
-
-Section1.propTypes = {
-  arrIndex: React.PropTypes.number,
-  data: React.PropTypes.shape({}),
-  edit: React.PropTypes.bool,
-  onChange: React.PropTypes.func,
-  onClickSave: React.PropTypes.func,
-  onClickDelete: React.PropTypes.func,
 };
 
 export default Section1;

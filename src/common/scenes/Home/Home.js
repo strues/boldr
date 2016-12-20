@@ -3,10 +3,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { Container } from 'semantic-ui-react';
 import { getPageByLabel } from 'state/selectors';
 import PageTemplate from 'theme/Boldr/PageTemplate';
-import { Row, Hero, Footer } from '../../components/index';
+import { Grid, Row, Hero, Footer } from '../../components/index';
 
 type Props = {
   loaded: Boolean,
@@ -22,11 +21,11 @@ const Home = (props: Props) => {
         hero={ <Hero /> }
         footer={ <Footer /> }
       >
-      <Container fluid>
+      <Grid fluid>
         <Row style={ { padding: '25px' } }>
           Placeholder
         </Row>
-      </Container>
+      </Grid>
       </PageTemplate>
   );
 };

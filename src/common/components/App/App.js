@@ -67,7 +67,7 @@ class App extends Component {
           link={ htmlPageConfig.links }
           script={ htmlPageConfig.scripts }
         />
-        { this.props.children }
+        { React.Children.toArray(this.props.children) }
         <Notifications />
       </div>
     );

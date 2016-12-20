@@ -61,6 +61,12 @@ const sectionTarget = {
   },
 };
 
+export type Props = {
+  connectDragSource?: Function,
+  connectDropTarget?: Function,
+  type?: string,
+};
+
 @DropTarget('SectionsOnBoard', sectionTarget, (connect) => ({
   connectDropTarget: connect.dropTarget(),
 }))
@@ -69,12 +75,7 @@ const sectionTarget = {
   isDragging: monitor.isDragging(),
 }))
 class Sections extends React.Component {
-  static propTypes = {
-    connectDragSource: React.PropTypes.func.isRequired,
-    connectDropTarget: React.PropTypes.func.isRequired,
-    type: React.PropTypes.string.isRequired,
-  }
-
+  props: Props;
   render() {
     const {
       type,

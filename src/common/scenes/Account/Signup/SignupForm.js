@@ -1,57 +1,66 @@
 /* @flow */
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Form } from 'semantic-ui-react';
-import Button from 'components/Button';
+import RaisedButton from 'material-ui/RaisedButton';
+import { TextField } from 'redux-form-material-ui';
+import { Row, Col } from 'components/Layout';
 import validate from './validate';
 
-export type Props = {
+type Props = {
   handleSubmit?: Function
 };
-const renderField = ({ input, label, type, meta: { touched, error } }) => ( // eslint-disable-line
-  <Form.Input
-    label={ label }
-    className="form__auth"
-    type={ type }
-    { ...input }
-  />
-);
 
-const SignupForm = (props) => {
+const SignupForm = (props: Props) => {
   const { handleSubmit } = props;
   return (
-    <Form onSubmit={ handleSubmit } className="card__form">
-      <Form.Group widths="equal">
-        <Field name="display_name"
-          type="text"
-          component={ renderField }
-          label="Display name"
-        />
+    <form onSubmit={ handleSubmit } className="card__form">
+      <Row>
+        <Col xs={ 6 }>
+          <Field name="email"
+            type="email"
+            component={ TextField }
+            floatingLabelText="Email address"
+          />
+      </Col>
+      <Col xs={ 6 }>
         <Field name="password"
           type="password"
-          component={ renderField }
-          label="Password"
+          component={ TextField }
+          floatingLabelText="Password"
         />
-      </Form.Group>
-      <Form.Group widths="equal">
+      </Col>
+      </Row>
+      <Row>
+        <Col xs={ 6 }>
         <Field name="first_name"
           type="text"
-          component={ renderField }
-          label="First name"
+          component={ TextField }
+          floatingLabelText="First name"
         />
+      </Col>
+      <Col xs={ 6 }>
         <Field name="last_name"
           type="text"
-          component={ renderField }
-          label="Last name"
+          component={ TextField }
+          floatingLabelText="Last name"
         />
-      </Form.Group>
-      <Field name="email"
-        type="email"
-        component={ renderField }
-        label="Email address"
-      />
-      <Button submit>Create Account</Button>
-    </Form>
+      </Col>
+      </Row>
+      <Row>
+        <Col xs={ 12 }>
+          <Row xsCenter>
+            <Col xs={ 6 }>
+              <Field name="display_name"
+                type="text"
+                component={ TextField }
+                floatingLabelText="Display name"
+              />
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+      <RaisedButton style={ { marginTop: '25px' } } primary label="Create Account" type="submit" />
+    </form>
   );
 };
 

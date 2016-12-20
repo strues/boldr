@@ -6,11 +6,22 @@ import Notification from './Notification';
 
 const getter = (obj, propName) => (obj.get ? obj.get(propName) : obj[propName]);
 
+export type Props = {
+  notifications?: Array<any>,
+  className?: string,
+  transitionEnterTimeout?: number,
+  transitionLeaveTimeout?: number,
+  onActionClick?: Function,
+  actionLabel?: string,
+};
+
 class Notifications extends Component {
   constructor() {
     super();
     this._onDismiss = this._onDismiss.bind(this);
   }
+
+  props: Props;
 
   _onDismiss(id) {
     this.props.notificationDismiss(id);
@@ -61,15 +72,6 @@ Notifications.defaultProps = {
   className: null,
   transitionEnterTimeout: 600,
   transitionLeaveTimeout: 600,
-};
-
-Notifications.propTypes = {
-  notifications: React.PropTypes.array,
-  className: React.PropTypes.string,
-  transitionEnterTimeout: React.PropTypes.number,
-  transitionLeaveTimeout: React.PropTypes.number,
-  onActionClick: React.PropTypes.func,
-  actionLabel: React.PropTypes.string,
 };
 
 export default connect((state) => ({

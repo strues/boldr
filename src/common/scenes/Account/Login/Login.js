@@ -3,22 +3,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router';
-import { Card, Header, Icon } from 'semantic-ui-react';
-
+import { Card, CardTitle, CardText } from 'material-ui/Card';
 import { Grid, Col, Row } from 'components/Layout';
 import { login } from 'state/dux/auth';
 import LoginForm from './LoginForm';
-
-const renderHeader = (
-  <Card.Header>
-  <Header as="h1" textAlign="center">
-    <Icon name="sign in" />
-    <Header.Content>
-      Login
-    </Header.Content>
-  </Header>
-  </Card.Header>
-);
 
 const cardMeta = (
   <span>
@@ -56,11 +44,11 @@ class Login extends Component {
                 <Row xsCenter>
                   <Col xs={ 6 }>
                     <Card style={ { width: '450px' } }>
-                      <Card.Content>
-                      { renderHeader }
+                      <CardTitle title="Log In" />
+                      <CardText>
                       <LoginForm onSubmit={ this.handleOnSubmit } />
                       { cardMeta }
-                      </Card.Content>
+                      </CardText>
                     </Card>
                   </Col>
                 </Row>

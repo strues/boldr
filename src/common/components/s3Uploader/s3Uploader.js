@@ -3,21 +3,22 @@ import React, { Component, PropTypes } from 'react';
 import S3Upload from '../../core/services/s3Upload';
 import FileUpload from '../FileInput/FileUpload';
 
+export type Props = {
+  signingUrl?: string,
+  preprocess?: Function,
+  getSignedUrl?: Function,
+  onProgress?: Function,
+  onFinish?: Function,
+  onError?: Function,
+  signingUrlHeaders?: Object,
+  signingUrlQueryParams?: Object,
+  uploadRequestHeaders?: Object,
+  contentDisposition?: string,
+  server?: string,
+};
+
 class S3Uploader extends Component {
-  static propTypes = {
-    signingUrl: PropTypes.string,
-    preprocess: PropTypes.func,
-    getSignedUrl: PropTypes.func,
-    onProgress: PropTypes.func,
-    onFinish: PropTypes.func,
-    onError: PropTypes.func,
-    signingUrlHeaders: PropTypes.object,
-    signingUrlQueryParams: PropTypes.object,
-    uploadRequestHeaders: PropTypes.object,
-    contentDisposition: PropTypes.string,
-    server: PropTypes.string,
-  };
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     this.uploadFile = this.uploadFile.bind(this);
@@ -25,6 +26,7 @@ class S3Uploader extends Component {
     this.onFinish = this.onFinish.bind(this);
     this.onError = this.onError.bind(this);
   }
+  props: Props;
   onProgress(percent, message) {
     console.log(`Upload progress: ${percent} % ${message}`);
   }

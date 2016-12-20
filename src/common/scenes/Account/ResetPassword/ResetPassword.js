@@ -1,9 +1,10 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import { Heading, Grid, Button, Col, Row } from 'components/index';
-import { Card, Form } from 'semantic-ui-react';
+import TextField from 'material-ui/TextField';
+import { Card, CardTitle, CardActions, CardText } from 'material-ui/Card';
+import RaisedButton from 'material-ui/RaisedButton';
+import { Grid, Col, Row } from 'components/index';
 import { resetPassword } from 'state/dux/auth';
 
 export type Props = {
@@ -40,12 +41,6 @@ class ResetPassword extends Component {
   }
 
   render() {
-    const renderHeader = (
-      <div>
-        <Heading size={ 1 } bottom="10px">Forgot your password?</Heading>
-          Enter your email address below to reset it.
-      </div>
-    );
     return (
       <div>
         <Grid fluid>
@@ -53,28 +48,28 @@ class ResetPassword extends Component {
           <Col xs={ 12 }>
             <Row xsCenter>
               <Col xs={ 6 }>
-              <Card style={ { width: '450px', marginTop: '150px' } }>
-                <Form onSubmit={ this.handleReset } className="card__form">
-                <Card.Content>
-                  { renderHeader }
-                  <Card.Meta>
-                    Enter a new password.
-                  </Card.Meta>
-
-                  <Form.Input
-                    label="Password"
-                    name="password"
-                    placeholder="Enter your new password"
-                  />
-                  <Form.Input
-                    label="Confirm password"
-                    name="confirm"
-                    placeholder="Confirm your new password."
-                  />
-                  <Button submit>Save Password</Button>
-                  </Card.Content>
-                </Form>
-              </Card>
+                <Card style={ { width: '450px', marginTop: '50px' } }>
+                  <form onSubmit={ this.handleReset } className="card__form">
+                    <CardTitle title="Reset Password" />
+                    <CardText>
+                    <TextField
+                      floatingLabelText="Password"
+                      name="password"
+                      type="password"
+                      hintText="Enter your new password"
+                    />
+                    <TextField
+                      floatingLabelText="Confirm Password"
+                      name="confirm"
+                      type="password"
+                      hintText="Confirm your new password."
+                    />
+                  </CardText>
+                  <CardActions>
+                    <RaisedButton primary type="submit" label="Save Password" />
+                  </CardActions>
+                </form>
+                </Card>
                 </Col>
               </Row>
             </Col>

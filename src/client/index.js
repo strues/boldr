@@ -31,7 +31,7 @@ import WrappedRedBox from './components/WrappedRedbox';
 injectTapEventPlugin();
 // Load fonts
 WebFontLoader.load({
-  google: { families: ['Roboto Mono:400', 'Roboto Slab:100,300,400,700', 'Roboto:300,400,700'] },
+  google: { families: ['Roboto Slab:100,400,700', 'Roboto:300,400,700'] },
 });
 
 // Get the DOM Element where we mount React

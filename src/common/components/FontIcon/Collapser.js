@@ -1,3 +1,12 @@
+export type Props = {
+  className?: string,
+  iconClassName?: string,
+  children?: number | string | React.Element | Array<any>,
+  flipped?: boolean,
+  suffix?: string,
+  suffixFlipped?: boolean,
+};
+
 import React, { PropTypes } from 'react';
 import cn from 'classnames';
 import FontIcon from './FontIcon';
@@ -13,15 +22,6 @@ const Collapser = ({ className, flipped, suffix, suffixFlipped, ...props }) => (
     }, className) }
   />
 );
-
-Collapser.propTypes = {
-  className: PropTypes.string,
-  iconClassName: PropTypes.string,
-  children: PropTypes.node,
-  flipped: PropTypes.bool,
-  suffix: PropTypes.string,
-  suffixFlipped: PropTypes.bool,
-};
 
 Collapser.defaultProps = {
   children: 'keyboard_arrow_down',

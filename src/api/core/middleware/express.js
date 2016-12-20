@@ -16,7 +16,7 @@ export default (app) => {
   // parse application/x-www-form-urlencoded
   app.use(bodyParser.urlencoded({ extended: true, limit: config.body.limit }));
   // parse application/anything+json
-  app.use(bodyParser.json({ type: 'application/*+json', limit: config.body.limit }));
+  app.use(bodyParser.json({ type: 'application/vnd.api+json', limit: config.body.limit }));
   // parse application/json
   app.use(bodyParser.json({ type: 'application/json', limit: config.body.limit }));
   // parse text/plain

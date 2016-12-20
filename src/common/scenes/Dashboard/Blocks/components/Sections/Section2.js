@@ -1,3 +1,12 @@
+export type Props = {
+  arrIndex?: number,
+  data?: Object,
+  edit?: boolean,
+  onChange?: Function,
+  onClickSave?: Function,
+  onClickDelete?: Function,
+};
+
 import React from 'react'
 
 const Section2 = (props, context) => {
@@ -62,13 +71,6 @@ const Section2 = (props, context) => {
   )
 }
 
-Section2.propTypes = {
-  arrIndex: React.PropTypes.number,
-  data: React.PropTypes.object,
-  edit: React.PropTypes.bool,
-  onChange: React.PropTypes.func,
-  onClickSave: React.PropTypes.func,
-  onClickDelete: React.PropTypes.func,
-}
+;
 
 export default Section2

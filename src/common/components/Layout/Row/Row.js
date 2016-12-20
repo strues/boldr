@@ -1,7 +1,47 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
 
+export type Props = {
+  reverse?: boolean,
+  className?: string,
+  style?: Object,
+  children?: number | string | React.Element | Array<any>,
+  xsStart?: boolean,
+  smStart?: boolean,
+  mdStart?: boolean,
+  lgStart?: boolean,
+  xsCenter?: boolean,
+  smCenter?: boolean,
+  mdCenter?: boolean,
+  lgCenter?: boolean,
+  xsEnd?: boolean,
+  smEnd?: boolean,
+  mdEnd?: boolean,
+  lgEnd?: boolean,
+  xsTop?: boolean,
+  smTop?: boolean,
+  mdTop?: boolean,
+  lgTop?: boolean,
+  xsMiddle?: boolean,
+  smMiddle?: boolean,
+  mdMiddle?: boolean,
+  lgMiddle?: boolean,
+  xsBottom?: boolean,
+  smBottom?: boolean,
+  mdBottom?: boolean,
+  lgBottom?: boolean,
+  xsAround?: boolean,
+  smAround?: boolean,
+  mdAround?: boolean,
+  lgAround?: boolean,
+  xsBetween?: boolean,
+  smBetween?: boolean,
+  mdBetween?: boolean,
+  lgBetween?: boolean,
+};
+
 class Row extends PureComponent {
+  props: Props;
   render() {
     const ComponentClass = this.props.componentClass;
 
@@ -57,53 +97,6 @@ class Row extends PureComponent {
     );
   }
 }
-
-Row.propTypes = {
-  reverse: React.PropTypes.bool,
-  className: React.PropTypes.string,
-  style: React.PropTypes.object,
-  children: React.PropTypes.node,
-
-  xsStart: React.PropTypes.bool,
-  smStart: React.PropTypes.bool,
-  mdStart: React.PropTypes.bool,
-  lgStart: React.PropTypes.bool,
-
-  xsCenter: React.PropTypes.bool,
-  smCenter: React.PropTypes.bool,
-  mdCenter: React.PropTypes.bool,
-  lgCenter: React.PropTypes.bool,
-
-  xsEnd: React.PropTypes.bool,
-  smEnd: React.PropTypes.bool,
-  mdEnd: React.PropTypes.bool,
-  lgEnd: React.PropTypes.bool,
-
-  xsTop: React.PropTypes.bool,
-  smTop: React.PropTypes.bool,
-  mdTop: React.PropTypes.bool,
-  lgTop: React.PropTypes.bool,
-
-  xsMiddle: React.PropTypes.bool,
-  smMiddle: React.PropTypes.bool,
-  mdMiddle: React.PropTypes.bool,
-  lgMiddle: React.PropTypes.bool,
-
-  xsBottom: React.PropTypes.bool,
-  smBottom: React.PropTypes.bool,
-  mdBottom: React.PropTypes.bool,
-  lgBottom: React.PropTypes.bool,
-
-  xsAround: React.PropTypes.bool,
-  smAround: React.PropTypes.bool,
-  mdAround: React.PropTypes.bool,
-  lgAround: React.PropTypes.bool,
-
-  xsBetween: React.PropTypes.bool,
-  smBetween: React.PropTypes.bool,
-  mdBetween: React.PropTypes.bool,
-  lgBetween: React.PropTypes.bool,
-};
 
 Row.defaultProps = {
   componentClass: 'div',

@@ -1,9 +1,10 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Card, CardTitle, CardText } from 'material-ui/Card';
+import RaisedButton from 'material-ui/RaisedButton';
 
-import { Heading, Grid, Button, Col, Row } from 'components/index';
-import { Card } from 'semantic-ui-react';
+import { Grid, Col, Row } from 'components/index';
 import { verifyAccount } from 'state/dux/auth';
 
 export type Props = {
@@ -27,17 +28,16 @@ class Verify extends Component {
     return (
       <div>
         <Grid fluid>
-        <Row>
-          <Col xs={ 12 }>
-            <Row xsCenter>
-              <Col xs={ 6 }>
-              <Card style={ { width: '450px', marginTop: '150px' } }>
-                <Card.Content>
-                  <Heading size={ 1 } bottom="10px">Account verification</Heading>
-
-                  <Button onClick={ this.handleVerify }>Verify Account</Button>
-                  </Card.Content>
-              </Card>
+          <Row>
+            <Col xs={ 12 }>
+              <Row xsCenter>
+                <Col xs={ 6 }>
+                  <Card style={ { width: '450px', marginTop: '150px' } }>
+                    <CardTitle title="Account verification" />
+                    <CardText>
+                      <RaisedButton primary label="Verify" onTouchTap={ this.handleVerify } />
+                    </CardText>
+                  </Card>
                 </Col>
               </Row>
             </Col>

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Link } from 'react-router';
-import { Card, Header } from 'semantic-ui-react';
+import { Card, CardTitle, CardText } from 'material-ui/Card';
 import { Grid, Col, Row } from 'components/Layout';
 import { signup } from 'state/dux/auth';
 import SignupForm from './SignupForm';
@@ -35,12 +35,6 @@ class Signup extends Component {
   }
 
   render() {
-    const renderHeader = (
-        <Card.Header style={ { padding: '1em' } }>
-          <Header as="h1" textAlign="center">Signup</Header>
-        </Card.Header>
-    );
-
     return (
         <div>
           <Helmet title="Signup" />
@@ -50,12 +44,12 @@ class Signup extends Component {
                 <Row xsCenter>
                   <Col xs={ 8 }>
                     <Card style={ { width: '650px', marginBottom: '400px' } }>
-                      { renderHeader }
-                      <Card.Content>
-                      <SignupForm onSubmit={ this.handleOnSubmit } />
-                      Already have an account?
-                      <Link to="/account/login"> Login</Link>
-                      </Card.Content>
+                      <CardTitle title="Signup" />
+                      <CardText>
+                        <SignupForm onSubmit={ this.handleOnSubmit } />
+                        Already have an account?
+                        <Link to="/account/login"> Login</Link>
+                      </CardText>
                     </Card>
                   </Col>
                 </Row>
@@ -70,7 +64,7 @@ class Signup extends Component {
 function mapStateToProps(state) {
   return {
     auth: state.auth,
-    
+
   };
 }
 

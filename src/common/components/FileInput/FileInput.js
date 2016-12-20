@@ -1,30 +1,32 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { Icon } from 'semantic-ui-react';
 
+export type Props = {
+  style?: Object,
+  className?: string,
+  accept?: string,
+  multiple?: boolean,
+  label?: string,
+  onChange?: Function,
+  id?: string,
+};
+
 /**
  * The `FileInput` component is used as simple styling for the `<input type="file" />`.
  * It will style the input as a raised button by default.
  */
 class FileInput extends PureComponent {
-  static propTypes = {
-    style: PropTypes.object,
-    className: PropTypes.string,
-    accept: PropTypes.string,
-    multiple: PropTypes.bool,
-    label: PropTypes.string.isRequired,
-    onChange: PropTypes.func.isRequired,
-    id: PropTypes.string,
-  };
-
   static defaultProps = {
     label: 'Select a file from your computer',
   };
 
-  constructor(props) {
+  constructor(props: Props) {
     super(props);
 
     this._handleChange = this._handleChange.bind(this);
   }
+
+  props: Props;
 
   _handleChange(e) {
     const { multiple, onChange } = this.props;

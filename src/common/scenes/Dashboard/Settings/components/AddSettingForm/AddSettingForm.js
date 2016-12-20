@@ -1,3 +1,11 @@
+export type Props = {
+  handleSubmit?: Function,
+  reset?: Function,
+  submitting?: boolean,
+  fields?: Object,
+  pristine?: boolean,
+};
+
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { Form } from 'semantic-ui-react';
@@ -65,14 +73,6 @@ const AddSettingForm = (props) => {
 
         </Form>
   );
-};
-
-AddSettingForm.propTypes = {
-  handleSubmit: PropTypes.func.isRequired,
-  reset: PropTypes.func,
-  submitting: PropTypes.bool,
-  fields: PropTypes.object,
-  pristine: PropTypes.bool,
 };
 
 export default reduxForm({

@@ -59,8 +59,6 @@ function boldrSSRMiddleware(request: $Request, response: $Response) {
     } else if (redirect) {
       response.redirect(302, redirect.pathname + redirect.search);
     } else if (renderProps) {
-      // execute rendering and data hydration on the server, then send
-      // it to the client to render.
       loadOnServer({ ...renderProps, store, helpers: { client } })
       .then(() => {
         const preloadedState = store.getState();
@@ -76,6 +74,7 @@ function boldrSSRMiddleware(request: $Request, response: $Response) {
           },
           userAgent: request.headers['user-agent'],
         });
+
           // Create our application and render it into a string.
         const component = renderToString(
           <Provider store={ store } key="provider">

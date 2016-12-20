@@ -11,19 +11,20 @@ const dropTarget = {
   },
 };
 
+export type Props = {
+  connectDropTarget?: Function,
+  // isOver: React.PropTypes.bool.isRequired,
+  // canDrop: React.PropTypes.bool.isRequired,
+  children?: Array<React.Element>,
+};
+
 @DropTarget('Section', dropTarget, (connect, monitor) => ({
   connectDropTarget: connect.dropTarget(),
   isOver: monitor.isOver(),
   canDrop: monitor.canDrop(),
 }))
 class Board extends React.Component {
-  static propTypes = {
-    connectDropTarget: React.PropTypes.func.isRequired,
-    // isOver: React.PropTypes.bool.isRequired,
-    // canDrop: React.PropTypes.bool.isRequired,
-    children: React.PropTypes.arrayOf(React.PropTypes.element).isRequired,
-  }
-
+  props: Props;
   render() {
     const { connectDropTarget } = this.props;
     return (connectDropTarget(

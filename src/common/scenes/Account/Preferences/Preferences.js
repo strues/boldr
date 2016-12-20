@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-import { Menu } from 'semantic-ui-react';
 import { Row, Col } from 'components/Layout';
 
 class Preferences extends Component {
@@ -16,23 +15,7 @@ class Preferences extends Component {
         />
         <Row>
           <Col xs={ 12 } md={ 2 }>
-            <Menu vertical>
-              <Menu.Item>
-                <Menu.Header>Profile</Menu.Header>
-
-                <Menu.Menu>
-                  <Menu.Item name="Edit Profile" active={ activeItem === 'Edit Profile' } onClick={ this.handleItemClick } />
-                  <Menu.Item name="View Profile" active={ activeItem === 'View Profile' } onClick={ this.handleItemClick } />
-                </Menu.Menu>
-              </Menu.Item>
-              <Menu.Item>
-                <Menu.Header>Settings</Menu.Header>
-
-                <Menu.Menu>
-                  <Menu.Item name="Change..." active={ activeItem === 'Change...' } onClick={ this.handleItemClick } />
-                </Menu.Menu>
-              </Menu.Item>
-            </Menu>
+          prefs
             </Col>
           <Col xs={ 12 } md={ 10 }>
             Swag

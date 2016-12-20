@@ -29,12 +29,22 @@ const inline = {
   OTransform: 'translatez(0)',
   transform: 'translatez(0)',
 };
+
+export type Props = {
+  id?: string | number,
+  message?: string,
+  kind?: 'success' | 'info' | 'error' | 'danger',
+  onActionClick?: Function,
+  actionLabel?: string,
+};
+
 class Notification extends Component {
   constructor() {
     super();
     this._id = new Date().getTime();
     this._onActionClick = this._onActionClick.bind(this);
   }
+  props: Props;
   componentDidMount() {
     if (this.props.dismissAfter) {
       setTimeout(() => this.props.onDismiss(this.props.id), this.props.dismissAfter);
@@ -75,14 +85,6 @@ class Notification extends Component {
 
 Notification.defaultProps = {
   kind: 'info',
-};
-
-Notification.propTypes = {
-  id: PropTypes.oneOfType([React.PropTypes.string, React.PropTypes.number]).isRequired,
-  message: React.PropTypes.string.isRequired,
-  kind: React.PropTypes.oneOf(['success', 'info', 'error', 'danger']).isRequired,
-  onActionClick: React.PropTypes.func,
-  actionLabel: React.PropTypes.string,
 };
 
 export default Notification;
