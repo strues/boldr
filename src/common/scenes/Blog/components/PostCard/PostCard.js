@@ -3,7 +3,8 @@ import React from 'react';
 import { Link } from 'react-router';
 import dateFns from 'date-fns';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Row, Card, CardImage, CardFooter, CardContent, Divider } from 'components/index';
+import { Card, CardActions, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import { Row, Divider } from 'components/index';
 import type { Post } from 'types/models';
 import TagBlock from '../TagBlock';
 
@@ -11,12 +12,16 @@ const PostCard = (props: Post) => {
   const formattedDate = dateFns.format(props.created_at, 'MM/DD/YYYY');
   return (
     <div className="post__card-wrapper">
-      <Card fluid>
-        <CardImage imgSrc={ props.feature_image } />
-        <CardContent title={ props.title }>
+      <Card>
+        <CardMedia
+          overlay={ <CardTitle title={ props.title } subtitle={ formattedDate } /> }
+        >
+          <img src={ props.feature_image } />
+        </CardMedia>
+        <CardText>
             { props.excerpt }
         <Divider />
-        <CardFooter>
+        <CardActions>
 
         <Link to={ `/blog/${props.slug}` } style={ { marginRight: '15px' } }>
           <RaisedButton primary label="Read More" />
@@ -24,8 +29,8 @@ const PostCard = (props: Post) => {
 
         <TagBlock tags={ props.tags } />
 
-      </CardFooter>
-        </CardContent>
+      </CardActions>
+        </CardText>
       </Card>
       </div>
   );

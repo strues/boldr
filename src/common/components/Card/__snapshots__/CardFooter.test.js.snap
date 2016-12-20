@@ -1,6 +1,0 @@
-exports[`test renders snapshot 1`] = `
-<div
-  className="boldr-card__footer">
-  Hey
-</div>
-`;

@@ -1,9 +1,0 @@
-exports[`test renders snapshot 1`] = `
-<div
-  className="boldr-card__content">
-  <Component
-    classname="boldr-card__title"
-    size={3} />
-  Hey
-</div>
-`;
