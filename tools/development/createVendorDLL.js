@@ -6,18 +6,16 @@ import md5 from 'md5';
 import fs from 'fs';
 import { sync as globSync } from 'glob';
 import matchRequire from 'match-require';
-import { log } from '../utils';
+import defaults from 'lodash/defaultsDeep';
 
-function getJsFilesFromDir(targetPath) {
-  return ['js', 'jsx'].reduce((acc, ext) =>
-    acc.concat(globSync(`${targetPath}/**/*.${ext}`)),
-    [],
-  );
-}
+import boldrConfig from '../../config/private/boldr';
+import plugConfig from '../../config/private/plugins';
+import { log } from '../utils';
 
 function createVendorDLL(bundleName, bundleConfig) {
   // $FlowFixMe
   const packageJSON = require(pathResolve(appRootDir.get(), './package.json'));
+  const dllConfig = defaults(packageJSON.dll, boldrConfig.bundles.client.devVendorDLL);
 
   // We calculate a hash of the package.json's dependencies, which we can use
   // to determine if dependencies have changed since the last time we built
@@ -30,11 +28,11 @@ function createVendorDLL(bundleName, bundleConfig) {
     `${bundleConfig.devVendorDLL.name}_hash`,
   );
 
-  function webpackConfigFactory(modules) {
+  function webpackConfigFactory() {
     return {
       // We only use this for development, so lets always include source maps.
       devtool: 'inline-source-map',
-      entry: { [bundleConfig.devVendorDLL.name]: modules },
+      entry: dllConfig.dlls ? dllConfig.dlls : plugConfig.bundles.devVendorDLL.entry(packageJSON),
       output: {
         path: pathResolve(appRootDir.get(), bundleConfig.outputPath),
         filename: `${bundleConfig.devVendorDLL.name}.js`,
@@ -53,55 +51,25 @@ function createVendorDLL(bundleName, bundleConfig) {
     };
   }
 
-  function extractModulesFromSrcFiles(fileCollections) {
-    const ignoreModules = bundleConfig.devVendorDLL.ignores || [];
-
-    const modules = fileCollections.reduce((acc, fileCollection) => {
-      fileCollection.forEach((srcFile) => {
-        const fileContents = fs.readFileSync(srcFile, 'utf8');
-        matchRequire.findAll(fileContents).forEach(match => acc.add(match));
-      });
-      return acc;
-    }, new Set());
-
-    return [...modules]
-      // Remove any modules that have been configured to be ignored.
-      .filter(module => ignoreModules.findIndex(x => x === module) === -1)
-      // We only want to include absolute imports, no relative required modules.
-      .filter(module => !matchRequire.isRelativeModule(module));
-  }
-
   function buildVendorDLL() {
     return new Promise((resolve, reject) => {
-      // Get all the src files.
-      Promise.all(
-        bundleConfig.srcPaths.map(srcPath =>
-          Promise.resolve(getJsFilesFromDir(pathResolve(appRootDir.get(), srcPath))),
-        ),
-      )
-      // then extract the modules
-      .then(extractModulesFromSrcFiles)
-      // then create the vendor dll.
-      .then((modules) => {
-        log({
-          title: 'vendorDLL',
-          level: 'info',
-          message: 'Vendor DLL build complete. Check console for module list.',
-        });
-        console.log(modules);
+      log({
+        title: 'vendorDLL',
+        level: 'info',
+        message: 'Vendor DLL build complete. Modules list:',
+      });
 
-        const webpackConfig = webpackConfigFactory(modules);
-        const vendorDLLCompiler = webpack(webpackConfig);
-        vendorDLLCompiler.run((err) => {
-          if (err) {
-            reject(err);
-            return;
-          }
+      const webpackConfig = webpackConfigFactory();
+      const vendorDLLCompiler = webpack(webpackConfig);
+      vendorDLLCompiler.run((err) => {
+        if (err) {
+          reject(err);
+          return;
+        }
           // Update the dependency hash
-          fs.writeFileSync(vendorDLLHashFilePath, currentDependenciesHash);
+        fs.writeFileSync(vendorDLLHashFilePath, currentDependenciesHash);
 
-          resolve();
-        });
+        resolve();
       });
     });
   }

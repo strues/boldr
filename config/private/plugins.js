@@ -7,6 +7,9 @@
 // a centralised configuration folder to do most of your application
 // configuration adjustments.  Additionally it helps to make merging
 // from the origin starter kit a bit easier.
+import uniq from 'lodash/uniq';
+import pullAll from 'lodash/pullAll';
+import boldrConfig from './boldr';
 import type { BuildOptions } from '../../tools/types';
 
 export default {
@@ -51,7 +54,18 @@ export default {
         ].filter(x => x != null), // eslint-disable-line
       };
     },
+    devVendorDLL: {
+      entry(pkg) {
+        const dependencyNames = Object.keys(pkg.dependencies);
+        const exclude = pkg.dll.exclude || boldrConfig.bundles.client.devVendorDLL.exclude;
+        const include = pkg.dll.include || boldrConfig.bundles.client.devVendorDLL.include;
+        const includeDependencies = uniq(dependencyNames.concat(include));
 
+        return {
+          boldrDLLs: pullAll(includeDependencies, exclude),
+        };
+      },
+    },
     webpackConfig: (config: Object, buildOptions) => {
       const { target, mode } = buildOptions; // eslint-disable-line no-unused-vars
 

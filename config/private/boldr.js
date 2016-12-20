@@ -1,14 +1,16 @@
-// Project configuration.
+// Boldr configuration.
 //
 // General project configuration as well as values that are used in multiple
 // places across the project. It is useful not to have duplicated strings/values
 // scattered across our project. A centralised configuration allows for easier
 // changes/refactoring.
 //
-// Note: all file/folder paths should be relative to the project root. The
+// Note: all file/folder paths should be relative to the root. The
 // absolute paths should be resolved during runtime by our build tools/server.
 
 export default {
+  // Disable server side rendering?
+  disableSSR: false,
   // Base name of the optional environment configuration file.
   envFileName: '.env',
 
@@ -143,64 +145,20 @@ export default {
       devVendorDLL: {
         // Enabled?
         enabled: true,
-        srcFileIgnores: [
-          /.*\.test\.js$/ig,
-          /.*-test\.js$/i,
-        ],
-
-
         // It is also possible that some modules require specific
         // webpack loaders in order to be processed (e.g. CSS/SASS etc).
         // For these cases you don't want to include them in the vendor dll,
         // which has a very simple loader configuration.
         // Add the respective modules to the ignores list below to ensure
         // that they don't get bundled into the vendor DLL.
-        ignores: [
-          'react-hot-loader',
-          'offline-plugin/runtime',
-          'types/react',
-          'components/index',
-          'state/index',
-          'core/utils',
-          'core/config/base',
-          'theme/styles/main.scss',
-          'enzyme',
-          'react-addons-test-utils',
-          'enzyme-to-json',
-
-          'state/dux/notifications',
-          'nock',
-          'components/App',
-          'core/services/schemas',
-          'core/services/token',
-          'chai',
-          'state/reducers',
-          'theme/Boldr/PageTemplate',
-          'state/dux/auth',
-          'components/Layout',
-          'components/Button',
-          'types/models',
-          'core/index',
-          'core/config/layouts',
-          'state/dux/ui',
-          'state/dux/article',
-          'state/dux/tag',
-          'components/Avatar',
-          'core/utils/dndContext',
-          'react/lib/update',
-          'core/utils/deepRemove',
-
-          'core/api',
-          'core/config/notifications',
-
-          'components/Widget',
-
-          'core/config',
-          'state/selectors',
-          'redux-mock-store',
-          'state/dux/post',
+        exclude: [
+          'colors',
+          'compression',
+          'express',
         ],
-
+        // include additional dependencies in the vendor DLL such as core-js,
+        // which might not be explicitly included in your application's dependencies
+        include: ['core-js', 'lodash'],
         // The name of the vendor DLL.
         name: '__dev_vendor_dll__',
       },
