@@ -1,7 +1,8 @@
 /* @flow */
 import React from 'react';
-import { Item, Segment } from 'semantic-ui-react';
 import { Icon } from 'components/index';
+import Paper from 'material-ui/Paper';
+import List from 'material-ui/List';
 import type { Post } from 'types/models';
 import { PostListItem } from '../components';
 
@@ -14,8 +15,8 @@ export type Props = {
 const PostList = (props: Props) => {
   return (
       <div>
-       <Segment>
-       <Item.Group>
+       <Paper zDepth={ 1 }>
+       <List>
         {
           props.posts.map(post => (
            <PostListItem
@@ -33,8 +34,8 @@ const PostList = (props: Props) => {
            />
          ))
         }
-        </Item.Group>
-      </Segment>
+        </List>
+      </Paper>
       </div>
   );
 };

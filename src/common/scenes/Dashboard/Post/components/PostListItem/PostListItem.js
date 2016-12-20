@@ -2,7 +2,9 @@
 import React from 'react';
 import Link from 'react-router/lib/Link';
 import { format } from 'date-fns';
-import { Item, Segment, Divider, Popup } from 'semantic-ui-react';
+import { ListItem } from 'material-ui/List';
+import Avatar from 'material-ui/Avatar';
+import Divider from 'material-ui/Divider';
 import { Icon } from 'components/index';
 
 type Props = {
@@ -34,54 +36,17 @@ const PostListItem = (props: Props) => {
     props.handleDeleteClick(postId);
   }
   const formattedDate = format(props.created_at, 'MM/DD/YYYY');
-  const publishedIcon = (<Popup
-    trigger={ <Icon onClick={ handlePublishClick } color="#222" kind="visible" /> }
-    content="Set post status to published."
-    basic
-  />);
-  const draftIcon = (<Popup
-    trigger={ <Icon onClick={ handleDraftClick } color="#222" kind="hidden" /> }
-    content="Set post status to draft."
-    basic
-  />);
+
   return (
     <div className="post-list__item">
-    <Segment>
-      <Item>
-       <img src={ props.feature_image }
-         alt="post preview"
-         style={ { width: '100px', height: '100px', float: 'left', marginRight: '15px' } }
-       />
-       <Item.Content>
-        <Item.Header>{/* $FlowIssue */}
+      <ListItem
+        leftAvatar={ <Avatar src={ props.feature_image } /> }
+        primaryText={
           <Link to={ `/dashboard/posts/editor/${props.slug}` }>
           { props.title }
           </Link>
-        </Item.Header>
-        <Item.Meta>
-            <Icon color="#222" kind="calendar" /> { formattedDate }
-        </Item.Meta>
-        <Item.Description>
-        { props.excerpt }
-        </Item.Description>
-        <Item.Extra>
-          {
-            props.status === 'published' ?
-            draftIcon :
-            publishedIcon
-          }{/* $FlowIssue */}
-          <Link to={ `/dashboard/posts/editor/${props.slug}` }>
-            <Icon color="#222" kind="edit" />
-          </Link>
-          <Popup
-            trigger={ <Icon kind="delete" onClick={ handleClickDelete } color="#222" /> }
-            content="Remove post from database."
-            basic
-          />
-        </Item.Extra>
-      </Item.Content>
-    </Item>
-    </Segment>
+        }
+      />
     <Divider />
     </div>
   );

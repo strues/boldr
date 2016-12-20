@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import { Col, Row } from 'components/index';
-import { Message, Segment } from 'semantic-ui-react';
+import Paper from 'material-ui/Paper';
 import type { Block as BlockType } from 'types/models';
 import { Block, CreateBlockForm } from '../';
 
@@ -12,25 +12,20 @@ type Props = {
 const Blocks = (props: Props) => {
   return (
     <div>
-      <Message
-        icon="lab"
-        header="Build something bold."
-        content="Blocks are content elements, the foundation of your website."
-      />
     <Row>
       <Col xs={ 12 } md={ 8 }>
-         <Segment>
+         <Paper zDepth={ 1 }>
            Blocks
            { !(props.blocks: Array<BlockType>) ?
              <div>Loading</div> :
              props.blocks.map(block => <Block key={ block.id } block={ block } />)
            }
-         </Segment>
+         </Paper>
       </Col>
       <Col xs={ 12 } md={ 4 }>
-        <Segment>
+        <Paper zDepth={ 1 }>
         <CreateBlockForm onSubmit={ props.handleSubmit } />
-      </Segment>
+      </Paper>
       </Col>
       </Row>
     </div>

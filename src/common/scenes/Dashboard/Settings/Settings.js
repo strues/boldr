@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Icon, Table, Segment } from 'semantic-ui-react';
+import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow } from 'material-ui/Table';
+import SettingIcon from 'material-ui/svg-icons/action/settings';
+import RaisedButton from 'material-ui/RaisedButton';
+import Paper from 'material-ui/Paper';
 import type { Setting } from 'types/models';
 import { showModal, hideModal } from 'state/dux/ui';
 import { Modal } from 'components/index';
@@ -29,41 +32,41 @@ export class Settings extends Component {
 
   render() {
     return (
-      <Segment>
+      <Paper zDepth={ 1 }>
         <Table compact celled definition>
-         <Table.Header>
-           <Table.Row>
-             <Table.HeaderCell>Key</Table.HeaderCell>
-             <Table.HeaderCell>Value</Table.HeaderCell>
-             <Table.HeaderCell>Description</Table.HeaderCell>
-             <Table.HeaderCell>Action</Table.HeaderCell>
-           </Table.Row>
-         </Table.Header>
+         <TableHeader>
+               <TableRow>
+                 <TableHeaderColumn>Key</TableHeaderColumn>
+                 <TableHeaderColumn>Value</TableHeaderColumn>
+                 <TableHeaderColumn>Description</TableHeaderColumn>
+                 <TableHeaderColumn>Action</TableHeaderColumn>
 
-        <Table.Body>
+               </TableRow>
+             </TableHeader>
+        <TableBody>
            {
              this.props.allSettings.map(setting =>
                <SettingsItem key={ setting.id } setting={ setting } />,
              )
            }
-        </Table.Body>
+        </TableBody>
 
-         <Table.Footer fullWidth>
-           <Table.Row>
-             <Table.HeaderCell />
-             <Table.HeaderCell colSpan="4">
-               <Button floated="right" icon labelPosition="left" primary size="small" onClick={ this.open }>
-                 <Icon name="setting" /> Add Setting
-               </Button>
-             </Table.HeaderCell>
-           </Table.Row>
-         </Table.Footer>
+         <TableFooter>
+           <TableRow>
+             <TableHeaderColumn />
+             <TableHeaderColumn>
+               <RaisedButton primary label="Add Setting" onClick={ this.open }>
+                 <SettingIcon />
+               </RaisedButton>
+             </TableHeaderColumn>
+           </TableRow>
+         </TableFooter>
        </Table>
        <Modal open={ this.props.ui.modal } onOpen={ this.open } onClose={ this.close } title="Add a setting">
          <AddSettingForm />
        </Modal>
 
-      </Segment>
+     </Paper>
     );
   }
 }

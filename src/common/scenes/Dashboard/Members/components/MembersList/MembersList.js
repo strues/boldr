@@ -1,6 +1,5 @@
 /* @flow */
 import React from 'react';
-import { Card } from 'semantic-ui-react';
 
 import MemberCard from '../MemberCard';
 
@@ -9,7 +8,7 @@ const MembersList = (props: { users: Array<Object>, toggleUser: Function }) => {
     props.toggleUser(userId);
   }
   return (
-      <Card.Group>
+      <div>
         {
           props.users.map((user) =>
           <MemberCard
@@ -19,7 +18,7 @@ const MembersList = (props: { users: Array<Object>, toggleUser: Function }) => {
           />,
           )
         }
-      </Card.Group>
+      </div>
 
   );
 };

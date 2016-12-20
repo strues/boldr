@@ -3,7 +3,6 @@ import React from 'react';
 import { Link } from 'react-router';
 import dateFns from 'date-fns';
 import RaisedButton from 'material-ui/RaisedButton';
-// import { Card, Image } from 'semantic-ui-react';
 import { Row, Card, CardImage, CardFooter, CardContent, Divider } from 'components/index';
 import type { Post } from 'types/models';
 import TagBlock from '../TagBlock';

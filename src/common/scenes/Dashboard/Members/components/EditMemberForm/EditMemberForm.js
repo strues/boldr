@@ -1,12 +1,6 @@
-export type Props = {
-  handleSubmit?: Function,
-  reset?: Function,
-  submitting?: boolean,
-  fields?: Object,
-  pristine?: boolean,
-};
+/* @flow */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
@@ -16,8 +10,14 @@ import { RadioButtonGroup, TextField } from 'redux-form-material-ui';
 const style = {
   margin: 12,
 };
-
-const EditMemberForm = (props) => {
+type Props = {
+  handleSubmit?: Function,
+  reset?: Function,
+  submitting?: boolean,
+  fields?: Object,
+  pristine?: boolean,
+};
+const EditMemberForm = (props: Props) => {
   const { handleSubmit, reset } = props;
   return (
       <form onSubmit={ handleSubmit } className="modal__form">

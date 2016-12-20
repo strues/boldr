@@ -1,7 +1,6 @@
 import React from 'react';
-import { Header, Segment } from 'semantic-ui-react';
 import Link from 'react-router/lib/Link';
-import { Row, Button } from 'components/index';
+import { Row, Button, Heading } from 'components/index';
 import Page from './components/Page';
 
 const styled = require('styled-components').default;
@@ -17,15 +16,15 @@ const Pages = (props: { pages: Array<Object> }) => {
      <div>
        <Row>
          <TitleWrapper>
-         <Header as="h2">Pages</Header><Link to="/dashboard/pages/new"><Button>New Page</Button></Link>
+         <Heading size={ 2 }>Pages</Heading><Link to="/dashboard/pages/new"><Button>New Page</Button></Link>
        </TitleWrapper>
       </Row>
-      <Segment>
+      <div>
 
         {
           props.pages.map(p => <Page key={ p.id } { ...p } />)
         }
-      </Segment>
+      </div>
      </div>
   );
 };

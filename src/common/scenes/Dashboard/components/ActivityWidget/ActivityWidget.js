@@ -1,6 +1,5 @@
 /* @flow */
 import React from 'react';
-import { Segment, Icon } from 'semantic-ui-react';
 import { List, ListItem } from 'material-ui/List';
 import { Heading } from 'components/index';
 import Avatar from 'material-ui/Avatar';
@@ -11,7 +10,7 @@ type Props = {
 }
 const ActivityWidget = (props: Props) => {
   return (
-    <Segment className="activity-feed__wrap">
+    <div className="activity-feed__wrap">
       <Heading size={ 2 }>
         <NewIcon /> Recent Activity
       </Heading>
@@ -26,7 +25,7 @@ const ActivityWidget = (props: Props) => {
         )
       }
       </List>
-    </Segment>
+    </div>
   );
 };
 

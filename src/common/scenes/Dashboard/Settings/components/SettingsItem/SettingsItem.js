@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
-import { Button, Icon, Table, Form } from 'semantic-ui-react';
+import { TableBody, TableRowColumn, TableRow } from 'material-ui/Table';
 import { connect } from 'react-redux';
 import { updateBoldrSettings } from 'state/index';
+import IconButton from 'material-ui/IconButton';
+import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 import type { Setting } from 'types/models';
 
 type Props = {
@@ -48,28 +52,31 @@ export class SettingsItem extends Component {
   }
   renderEditing() {
     return (
-        <Form onSubmit={ this.handleSubmit }>
-          <Form.Input name="value" placeholder={ this.props.setting.value } />
-          <Button type="submit">Save</Button>
-        </Form>
+        <form onSubmit={ this.handleSubmit }>
+          <TextField name="value" floatingLabelText={ this.props.setting.value } />
+          <RaisedButton type="submit" label="Save" />
+        </form>
     );
   }
   render() {
     return (
-      <Table.Row>
-       <Table.Cell>{ this.props.setting.key }</Table.Cell>
-       <Table.Cell>
+      <TableRow>
+       <TableRowColumn>{ this.props.setting.key }</TableRowColumn>
+       <TableRowColumn>
        {
          this.state.editing ?
          this.renderEditing() :
          this.props.setting.value
        }
-       </Table.Cell>
-       <Table.Cell>{ this.props.setting.description }</Table.Cell>
-       <Table.Cell>
-         <Icon name="edit" onClick={ this.toggleEdit } />
-       </Table.Cell>
-      </Table.Row>
+       </TableRowColumn>
+       <TableRowColumn>{ this.props.setting.description }</TableRowColumn>
+       <TableRowColumn>
+         <IconButton onClick={ this.toggleEdit }>
+           <EditIcon />
+         </IconButton>
+
+       </TableRowColumn>
+      </TableRow>
     );
   }
 }

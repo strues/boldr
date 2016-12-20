@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Card, Image } from 'semantic-ui-react';
+import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
 import Button from 'components/Button';
 
 const propTypes = {
@@ -13,21 +13,20 @@ const MemberCard = (props) => {
   }
   return (
     <Card>
-     <Card.Content>
-       <Image floated="right" size="mini" src={ props.user.avatar_url } />
-       <Card.Header>
-           { props.user.display_name }
-       </Card.Header>
-       <Card.Meta>
+       <CardHeader
+         title={ props.user.display_name }
+         subtitle={ props.user.role.name }
+         avatar={ props.user.avatar_url }
+       />
+
+       <CardText>
          { props.user.id }
-       </Card.Meta>
-       <Card.Description>
-        { props.user.email } { ' ' }{ props.user.role.name }
-       </Card.Description>
-     </Card.Content>
-     <Card.Content extra>
+
+        { props.user.email }
+      </CardText>
+     <CardActions>
          <Button onClick={ handleToggle }>Edit User</Button>
-     </Card.Content>
+     </CardActions>
    </Card>
   );
 };

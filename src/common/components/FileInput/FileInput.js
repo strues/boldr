@@ -1,5 +1,4 @@
 import React, { PureComponent, PropTypes } from 'react';
-import { Icon } from 'semantic-ui-react';
 
 export type Props = {
   style?: Object,

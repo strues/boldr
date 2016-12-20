@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import { Loader, Segment } from 'semantic-ui-react';
+import Paper from 'material-ui/Paper';
 import type { Post } from 'types/models';
 import { Grid, Row, Col, Icon } from 'components/index';
 import PostCard from '../components/PostCard';
@@ -19,7 +19,7 @@ const RightSeg = styled.div`
 const PostListing = (props: Props) => {
   if (!props.posts) {
     return (
-      <Loader content="loading" />
+      <span>Loading...</span>
     );
   }
 
@@ -47,7 +47,7 @@ const PostListing = (props: Props) => {
 
   return (
     <Grid>
-      <Segment padded>
+      <Paper zDepth={ 2 }>
         Recent Posts
         <RightSeg>
           {
@@ -56,7 +56,7 @@ const PostListing = (props: Props) => {
             <Icon kind="grid-view" color="#222" onClick={ props.handleChangeLayout } />
           }
         </RightSeg>
-      </Segment>
+      </Paper>
       {
         props.layout === 'grid' ? gridView : listView
       }

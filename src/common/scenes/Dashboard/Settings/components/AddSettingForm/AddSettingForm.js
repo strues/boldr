@@ -8,51 +8,44 @@ export type Props = {
 
 import React, { PropTypes } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Form } from 'semantic-ui-react';
 import { Row, Button } from 'components/index';
+import RaisedButton from 'material-ui/RaisedButton';
+import FlatButton from 'material-ui/FlatButton';
+import { TextField } from 'redux-form-material-ui';
 
 const AddSettingForm = (props) => {
-  const renderField = ({ input, label, type, meta: { touched, error } }) => ( // eslint-disable-line
-    <Form.Input
-      label={ label }
-      className="form__auth"
-      type={ type }
-      { ...input }
-    />
-  );
-
   const { handleSubmit, pristine, reset, submitting } = props;
   return (
-      <Form onSubmit={ handleSubmit } className="modal__form">
+      <form onSubmit={ handleSubmit } className="modal__form">
             <Field
               name="email"
               type="email"
               label="Email"
-              component={ renderField }
+              component={ TextField }
             />
             <Field
               name="first_name"
               type="text"
               label="First name"
-              component={ renderField }
+              component={ TextField }
             />
             <Field
               name="last_name"
               type="text"
               label="Last name"
-              component={ renderField }
+              component={ TextField }
             />
             <Field
               name="last_name"
               type="text"
               label="Last name"
-              component={ renderField }
+              component={ TextField }
             />
             <Field
               name="avatar_url"
               type="text"
               label="Avatar URL"
-              component={ renderField }
+              component={ TextField }
             />
             <Row>
               <label htmlFor="member">
@@ -71,7 +64,7 @@ const AddSettingForm = (props) => {
              <Button submit>Save changes</Button>
              <Button disabled={ pristine || submitting } onClick={ reset }>Clear</Button>
 
-        </Form>
+        </form>
   );
 };
 

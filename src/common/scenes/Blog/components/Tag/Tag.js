@@ -1,15 +1,17 @@
 /* @flow */
 import React from 'react';
 import Link from 'react-router/lib/Link';
-import { Icon, Label } from 'semantic-ui-react';
+import Avatar from 'material-ui/Avatar';
+import TagIcon from 'material-ui/svg-icons/notification/more';
+import Chip from 'material-ui/Chip';
 
 const Tag = (props: { name: string }) => {
   return (
   <Link to={ `/blog/tags/${props.name}` }>
-    <Label image>
-        <Icon name="tag" />
+    <Chip>
+        <Avatar icon={ <TagIcon /> } />
           { props.name }
-      </Label>
+      </Chip>
   </Link>);
 };
 

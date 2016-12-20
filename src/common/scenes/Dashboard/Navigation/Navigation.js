@@ -1,16 +1,19 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Segment, Button, Modal, List, Icon } from 'semantic-ui-react';
-import { Row, Col } from 'components/index';
+import { List, ListItem } from 'material-ui/List';
+import IconButton from 'material-ui/IconButton';
+import PlusIcon from 'material-ui/svg-icons/content/add';
+import Paper from 'material-ui/Paper';
+import { Row, Col, Modal } from 'components/index';
 import { getByLabel } from 'state/selectors';
 import { updateNavLinks, addNavLinks } from 'state/index';
 import NavigationEditor from './components/NavigationEditor';
 import NavigationForm from './components/NavigationForm';
-
+import { showModal, hideModal } from 'state/dux/ui';
 
 function mapStateToProps(state) {
-  return { navigation: getByLabel(state, 'main') };
+  return { navigation: getByLabel(state, 'main'), ui: state.ui };
 }
 
 export type Props = {
@@ -19,11 +22,13 @@ export type Props = {
   handleItemClick?: Function,
 };
 
-@connect(mapStateToProps, { updateNavLinks, addNavLinks })
+@connect(mapStateToProps, { updateNavLinks, addNavLinks, showModal, hideModal })
 class Navigation extends Component {
   constructor() {
     super();
     (this: any).handleItemClick = this.handleItemClick.bind(this);
+    (this: any).closeModal = this.closeModal.bind(this);
+    (this: any).openModal = this.openModal.bind(this);
   }
   state: Object = {
     open: false,
@@ -42,8 +47,13 @@ class Navigation extends Component {
   onFormSubmit = (data) => {
     this.props.addNavLinks(data);
   }
-  open = () => this.setState({ open: true })
-  close = () => this.setState({ open: false })
+  closeModal() {
+    this.props.hideModal();
+  }
+  openModal() {
+    this.props.showModal();
+  }
+
   props: Props;
 
   handleItemClick(item: Object) {
@@ -60,44 +70,39 @@ class Navigation extends Component {
 
   render() {
     const { navigation } = this.props;
-    const { open } = this.state;
     const listItems = navigation.links.map((item, i) => {
-      return <List.Item key={ i } onClick={ () => this.handleItemClick(item) }>{ item.name }</List.Item>;
+      return <ListItem key={ i } primaryText={ item.name } onClick={ () => this.handleItemClick(item) } />;
     });
 
     return (
       <div>
         <Row>
           <Col xs>
-          <Segment>
-            <List divided verticalAlign="middle" className="navigation__list">
+          <Paper zDepth={ 1 }>
+            <List className="navigation__list">
               { listItems }
             </List>
-          </Segment>
-          <Button onClick={ this.open } icon>
-            <Icon name="plus" />
-          </Button>
+          </Paper>
+          <IconButton onClick={ this.openModal }>
+            <PlusIcon />
+          </IconButton>
           </Col>
           <Col xs={ 12 } md={ 4 }>
-            <Segment>
+            <Paper zDepth={ 2 }>
               <NavigationEditor
                 initialValues={ this.state.link }
                 onFormSubmit={ this.onUpdateFormSubmit }
               />
-            </Segment>
+            </Paper>
           </Col>
         </Row>
-        <Modal
-          open={ open }
-          onOpen={ this.open }
-          onClose={ this.close }
-        >
-           <Modal.Header>Add a link</Modal.Header>
-           <Modal.Content>
-          <NavigationForm onSubmit={ this.onFormSubmit } />
-           </Modal.Content>
-         </Modal>
-
+         <Modal
+           open={ this.props.ui.modal }
+           title="Add a link"
+           onClose={ this.closeModal }
+         >
+           <NavigationForm onSubmit={ this.onFormSubmit } />
+          </Modal>
       </div>
     );
   }

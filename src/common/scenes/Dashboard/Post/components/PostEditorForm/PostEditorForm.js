@@ -5,7 +5,6 @@ import {
   TextField,
 } from 'redux-form-material-ui';
 import { RadioButton } from 'material-ui/RadioButton';
-import { Form, Segment } from 'semantic-ui-react';
 import { Col, Row, Button } from 'components/index';
 import { BoldrEditor } from 'boldr-editor';
 
