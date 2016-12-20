@@ -8,31 +8,7 @@ import PrimaryHeader from 'components/PrimaryHeader';
 import { logout, getByLabel, getSettings } from 'state/index';
 import { selectSetting } from 'state/selectors';
 
-import Topbar from 'components/Topbar';
-
 const styled = require('styled-components').default;
-
-const Header = styled.header`
-  border-radius: 0px;
-  transition: all 450ms cubic-bezier(0.23, 1, 0.32, 1) 0ms;
-  box-sizing: border-box;
-  font-family: Roboto, sans-serif;
-  color: rgba(0, 0, 0, 0.870588);
-  box-shadow: rgba(0, 0, 0, 0.156863) 0px 3px 10px, rgba(0, 0, 0, 0.227451) 0px 3px 10px;
-  background-color: #1F2439;
-  position: relative;
-  z-index: 1100;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  padding-left: 24px;
-  padding-right: 24px;
-  height: 96px;
-
-  @media all and (min-width: 768px) {
-    flex-direction: row;
-  }
-`;
 
 type Props = {
   header: ReactElement,
@@ -107,19 +83,6 @@ class HeaderWrapper extends Component {
         handleProfileClick={ this.handleProfileClick }
         handleDashClick={ this.handleDashClick }
       />
-    // <Header className="boldr__theme-header">
-    //   <Topbar
-    //     auth={ this.props.auth }
-    //     logo={ this.props.logo }
-    //     settings={ this.props.settings }
-    //     navigation={ this.props.navigation }
-    //     handleLogoClick= { this.handleLogoClick }
-    //     handleLogoutClick={ this.handleLogoutClick }
-    //     handlePrefClick={ this.handlePrefClick }
-    //     handleProfileClick={ this.handleProfileClick }
-    //     handleDashClick={ this.handleDashClick }
-    //   />
-    // </Header>
     );
   }
 }

@@ -8,10 +8,6 @@ import IconButton from 'material-ui/IconButton';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MoreVertIcon from 'material-ui/svg-icons/navigation/more-vert';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import Drawer from 'material-ui/Drawer';
-import materialStyle from 'theme/material';
-import Anchor from '../Anchor';
 
 type Props = {
   navigate: () => void,
@@ -80,7 +76,7 @@ class PrimaryHeader extends Component {
       <div>
       <AppBar
         zDepth={ 2 }
-        onLeftIconButtonTouchTap={ this.handleMenuTap }
+        showMenuIconButton={ false }
         title={
           <img src={ this.props.logo.value }
             className="ph-logo"
@@ -98,33 +94,9 @@ class PrimaryHeader extends Component {
           </span>
         }
       />
-
-</div>
+    </div>
     );
   }
 }
 
 export default PrimaryHeader;
-
-/**
- *       <Drawer
-         docked={ false }
-         open={ this.state.menu_open }
-         onRequestChange={ (open) => this.setState({ menu_open: open }) }
-       >
-   <MenuItem
-     linkButton
-     containerElement={ <Anchor to="/" onlyActiveOnIndex /> }
-     primaryText="Dashboard"
-     onTouchTap={ this.handleMenuClose }
-   />
-   <MenuItem
-     linkButton
-     containerElement={ <Anchor to="/todo" /> }
-     primaryText="To-Do List"
-     onTouchTap={ this.handleMenuClose }
-   />
- </Drawer>
-
- //{this.props.children}
- */
