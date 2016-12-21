@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 import dateFns from 'date-fns';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Card, CardActions, CardMedia, CardTitle, CardText } from 'material-ui/Card';
-import { Row, Divider } from 'components/index';
+import { Col, Row, Divider } from 'components/index';
 import type { Post } from 'types/models';
 import TagBlock from '../TagBlock';
 
@@ -20,17 +20,24 @@ const PostCard = (props: Post) => {
         </CardMedia>
         <CardText>
             { props.excerpt }
+          <Row>
+            <Col xs={ 12 }>
+          <Link to={ `/blog/${props.slug}` } style={ { float: 'right', marginTop: '15px', marginRight: '15px' } }>
+            <RaisedButton primary label="Read More" />
+          </Link>
+        </Col>
+      </Row>
+        </CardText>
         <Divider />
         <CardActions>
+        <Row>
 
-        <Link to={ `/blog/${props.slug}` } style={ { marginRight: '15px' } }>
-          <RaisedButton primary label="Read More" />
-        </Link>
-
+        <Col xs={ 12 }>
         <TagBlock tags={ props.tags } />
-
+        </Col>
+      </Row>
       </CardActions>
-        </CardText>
+
       </Card>
       </div>
   );

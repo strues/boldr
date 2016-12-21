@@ -1,6 +1,7 @@
 /* @flow */
 import React, { PureComponent } from 'react';
-import { asyncConnect } from 'redux-connect';
+import { provideHooks } from 'redial';
+import { connect } from 'react-redux';
 import type { Post } from 'types/models';
 import { fetchPostsIfNeeded, getPosts, deletePost } from 'state/dux/post';
 
@@ -16,6 +17,11 @@ export type Props = {
   handleDeleteClick: () => void,
 };
 
+@provideHooks({
+  fetch: ({ dispatch }) => {
+    return dispatch(fetchPostsIfNeeded());
+  },
+})
 export class PostListContainer extends PureComponent {
   constructor(props: Props) {
     super(props);
@@ -46,8 +52,5 @@ const mapStateToProps = (state) => {
     loading: state.posts.loading,
   };
 };
-const asyncProps = [{
-  promise: ({ store: { dispatch, getState } }) => dispatch(fetchPostsIfNeeded()),
-}];
 
-export default asyncConnect(asyncProps, mapStateToProps, { fetchPostsIfNeeded, deletePost })(PostListContainer);
+export default connect(mapStateToProps, { fetchPostsIfNeeded, deletePost })(PostListContainer);

@@ -9,8 +9,8 @@
 // from the origin starter kit a bit easier.
 import uniq from 'lodash/uniq';
 import pullAll from 'lodash/pullAll';
-import boldrConfig from './boldr';
 import type { BuildOptions } from '../../tools/types';
+import boldrConfig from './boldr';
 
 export default {
   // Plugins for the bundles/bundling process.
@@ -34,7 +34,6 @@ export default {
             : null,
         ].filter(x => x != null), // eslint-disable-line
         plugins: [
-          // Required to support react hot loader.
           mode === 'development'
             ? 'react-hot-loader/babel'
             : null,
@@ -68,20 +67,6 @@ export default {
     },
     webpackConfig: (config: Object, buildOptions) => {
       const { target, mode } = buildOptions; // eslint-disable-line no-unused-vars
-
-      // Example:
-      /*
-      if (target === 'server' && mode === 'development') {
-        config.plugins.push(new MyCoolWebpackPlugin());
-      }
-      */
-
-      // Debugging/Logging Example:
-      /*
-      if (target === 'server') {
-        console.log(JSON.stringify(config, null, 4));
-      }
-      */
 
       return config;
     },

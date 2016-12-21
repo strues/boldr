@@ -1,7 +1,8 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { asyncConnect } from 'redux-connect';
+import { provideHooks } from 'redial';
+import { connect } from 'react-redux';
 import { Grid, Col, Row } from 'components/Layout';
 import { requestPostTags } from 'state/dux/tag';
 import PostCard from '../components/PostCard';
@@ -9,11 +10,17 @@ import PostCard from '../components/PostCard';
 type Props = {
   tags: Object,
   params: Object,
-  requestPostTags: () => void
+  dispatch: () => void,
 };
 
+@provideHooks({
+  fetch: ({ dispatch, params: { name } }) => dispatch(requestPostTags(name)),
+})
 class TagList extends Component {
 
+  componentDidMount(name) {
+    this.props.dispatch(requestPostTags(name));
+  }
   props: Props;
   render() {
     if (!this.props.tags.posts) {
@@ -48,8 +55,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-const asyncProps = [{
-  promise: ({ store: { dispatch, getState }, params: { name } }) => dispatch(requestPostTags(name)),
-}];
-
-export default asyncConnect(asyncProps, mapStateToProps, { requestPostTags })(TagList);
+export default connect(mapStateToProps)(TagList);

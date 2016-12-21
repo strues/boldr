@@ -12,10 +12,12 @@ const styled = require('styled-components').default;
 
 const BgOffsetBlock = styled.div`
   display: flex;
+  position: static;
   width: 100%;
   height: 225px;
-  background-color: #01BCD4;
+  background-color: #01579b;
   z-index: 5;
+  background-attachment: fixed;
 `;
 export type Props = {
   children: ReactElement,
@@ -53,15 +55,15 @@ class DashboardContainer extends PureComponent {
         <Sidebar open={ this.props.dashboard.open } />
         <AppBar
           onLeftIconButtonTouchTap={ this.menuButtonClick }
-          style={ { left: this.props.dashboard.open ? '200px' : '0px' } }
+          style={ { position: 'fixed', left: this.props.dashboard.open ? '200px' : '0px' } }
         />
         <BgOffsetBlock />
 
         <Grid fluid style={ { paddingLeft: this.props.dashboard.open ? '200px' : '0px' } }>
           <Col xs>
-            <Paper zDepth={ 1 } style={ { marginTop: '-135px', padding: '1.5em' } }>
+            <div style={ { marginTop: '-135px', padding: '1.5em' } }>
               { this.props.children }
-            </Paper>
+            </div>
           </Col>
       </Grid>
     </div>

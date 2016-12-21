@@ -95,7 +95,6 @@ function generateHTML(args: Args) {
            ? inlineScript(`window.PRELOADED_STATE=${serialize(preloadedState)};`)
            : ''
          }
-        ${polyfillIoScript()}
         ${developmentVendorDLL()}
         ${scriptTags(assetsForRender.js)}
         ${helmet ? helmet.script.toString() : ''}

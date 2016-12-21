@@ -1,7 +1,8 @@
 
 /* @flow */
 import React, { Component } from 'react';
-import { asyncConnect } from 'redux-connect';
+import { provideHooks } from 'redial';
+import { connect } from 'react-redux';
 import { LAYOUTS } from 'core/constants';
 import { changeLayout } from 'state/dux/ui';
 import { getPosts, fetchPostsIfNeeded } from 'state/index';
@@ -9,20 +10,29 @@ import { getPosts, fetchPostsIfNeeded } from 'state/index';
 import type { Post } from 'types/models'; // eslint-disable-line
 import PostListing from './PostListing';
 
-export type Props = {
+type Props = {
   posts: Array<Post>,
   loading: ?Boolean,
-  fetchPosts: Function,
   ui: Object,
   changeLayout: () => void,
   handleChangeLayout: () => void,
+  fetchPostsIfNeeded: () => void,
 };
 
-class PostListingContainer extends Component {
+@provideHooks({
+  fetch: ({ dispatch }) => {
+    return dispatch(fetchPostsIfNeeded());
+  },
+})
+export class PostListingContainer extends Component {
   constructor() {
     super();
     (this: any).handleChangeLayout = this.handleChangeLayout.bind(this);
   }
+  componentDidMount() {
+    this.props.fetchPostsIfNeeded();
+  }
+
   props: Props;
   handleChangeLayout() {
     this.props.ui.layout === 'grid' ?
@@ -40,12 +50,6 @@ class PostListingContainer extends Component {
   }
 }
 
-const asyncProps = [{
-  promise: ({ store: { dispatch, getState } }) => {
-    dispatch(fetchPostsIfNeeded());
-  },
-}];
-
 const mapStateToProps = (state) => {
   return {
     posts: getPosts(state),
@@ -53,6 +57,6 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default asyncConnect(asyncProps, mapStateToProps, {
+export default connect(mapStateToProps, {
   fetchPostsIfNeeded, changeLayout,
 })(PostListingContainer);

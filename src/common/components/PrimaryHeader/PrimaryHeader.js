@@ -49,7 +49,7 @@ class PrimaryHeader extends Component {
     return (
       <IconMenu
         iconButtonElement={
-          <IconButton><MoreVertIcon /></IconButton>
+          <IconButton><MoreVertIcon color="#fff" /></IconButton>
         }
         targetOrigin={ { horizontal: 'right', vertical: 'top' } }
         anchorOrigin={ { horizontal: 'right', vertical: 'top' } }
@@ -69,13 +69,19 @@ class PrimaryHeader extends Component {
       );
     }
     const renderedMenuItems = this.props.navigation.links.map((item, i) =>
-      <FlatButton labelStyle={ { color: '#fff' } } key={ item.id } label={ item.name } href={ item.href } />,
+      <FlatButton
+        style={ { marginTop: '-12px' } }
+        labelStyle={ { color: '#fff' } }
+        key={ item.id }
+        label={ item.name }
+        href={ item.href }
+      />,
     );
 
     return (
       <div>
       <AppBar
-        zDepth={ 2 }
+        zDepth={ 1 }
         showMenuIconButton={ false }
         title={
           <img src={ this.props.logo.value }

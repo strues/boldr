@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { asyncConnect } from 'redux-connect';
+import { provideHooks } from 'redial';
 import { fetchSettingsIfNeeded, getSettings } from 'state/index';
 import type { Setting } from 'types/models';
 import Settings from './Settings';
@@ -11,13 +11,11 @@ export type Props = {
   fetchSettingsIfNeeded: () => void
 };
 
-@asyncConnect([{
-  promise: ({ store: { dispatch, getState } }) => {
-    const promises = [];
-    promises.push(dispatch(fetchSettingsIfNeeded()));
-    return Promise.all(promises);
+@provideHooks({
+  fetch: ({ dispatch }) => {
+    return dispatch(fetchSettingsIfNeeded());
   },
-}])
+})
 export class SettingsContainer extends Component {
   componentDidMount() {
     this.props.fetchSettingsIfNeeded();

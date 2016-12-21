@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'react-router/lib/Link';
 import Avatar from 'material-ui/Avatar';
-import TagIcon from 'material-ui/svg-icons/notification/more';
+import TagIcon from 'material-ui/svg-icons/maps/local-offer';
 import Chip from 'material-ui/Chip';
 
 const Tag = (props: { name: string }) => {

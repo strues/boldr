@@ -2,15 +2,14 @@
 
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
+import shallowCompare from 'react-addons-shallow-compare';
 import { debounce } from 'lodash';
-import { asyncConnect } from 'redux-connect';
+import { provideHooks } from 'redial';
+import { connect } from 'react-redux';
 import type { ReactElement } from 'types/react';
 import { Notifications } from 'components/index';
 import {
-  areSettingsLoaded,
-  arePagesLoaded,
   getSettings,
-  isNavLoaded,
   fetchSettingsIfNeeded,
   fetchPagesIfNeeded,
   loadMainNavIfNeeded,
@@ -37,23 +36,36 @@ type Props = {
   settings: Object
 };
 
+@provideHooks({
+  fetch: ({ dispatch }) => {
+    return Promise.all([
+      dispatch(fetchSettingsIfNeeded()),
+      dispatch(loadMainNavIfNeeded()),
+      dispatch(fetchPagesIfNeeded()),
+    ]);
+  },
+})
 class App extends Component {
   static childContextTypes = {
     dispatch: React.PropTypes.func,
     location: React.PropTypes.object,
     isMobile: React.PropTypes.bool,
   };
+
   getChildContext() {
     const { dispatch, location, isMobile } = this.props;
     return { dispatch, location, isMobile };
   }
   componentDidMount() {
-    this.props.fetchSettingsIfNeeded();
-    this.props.loadMainNavIfNeeded();
-
+    this.props.dispatch(fetchPagesIfNeeded());
+    this.props.dispatch(loadMainNavIfNeeded());
+    this.props.dispatch(fetchSettingsIfNeeded());
     window.addEventListener('resize', debounce(event => {
-      this.props.setMobileDevice(testIfMobile());
+      this.props.dispatch(setMobileDevice(testIfMobile()));
     }, 1000));
+  }
+  shouldComponentUpdate(nextProps, nextState) {
+    return shallowCompare(this, nextProps, nextState);
   }
   props: Props;
   render() {
@@ -74,21 +86,6 @@ class App extends Component {
   }
 }
 
-const asyncProps = [{
-  promise: ({ store: { dispatch, getState } }) => {
-    const promises = [];
-    if (!arePagesLoaded(getState())) {
-      promises.push(dispatch(fetchPagesIfNeeded()));
-    }
-    if (!isNavLoaded(getState())) {
-      promises.push(dispatch(loadMainNavIfNeeded()));
-    }
-    if (!areSettingsLoaded(getState())) {
-      promises.push(dispatch(fetchSettingsIfNeeded()));
-    }
-    return Promise.all(promises);
-  },
-}];
 function mapStateToProps(state) {
   return {
     boldr: state.boldr,
@@ -101,5 +98,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default asyncConnect(asyncProps, mapStateToProps, {
-  fetchSettingsIfNeeded, fetchPagesIfNeeded, setMobileDevice, loadMainNavIfNeeded })(App);
+export default connect(mapStateToProps)(App);

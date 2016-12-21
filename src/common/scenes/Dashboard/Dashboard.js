@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
-import { asyncConnect } from 'redux-connect';
+import { connect } from 'react-redux';
+import { provideHooks } from 'redial';
 import Widget from 'components/Widget';
 
 import { Col, Row } from 'components/index';
 import { loadSiteActivity } from './reducer';
 import ActivityWidget from './components/ActivityWidget';
 
+@provideHooks({
+  fetch: ({ dispatch }) => {
+    return dispatch(loadSiteActivity());
+  },
+})
 export class Dashboard extends Component {
+  componentDidMount() {
+    this.props.loadSiteActivity();
+  }
   render() {
     return (
       <div>
@@ -30,13 +39,10 @@ export class Dashboard extends Component {
     );
   }
 }
-const asyncProps = [{
-  promise: ({ store: { dispatch, getState } }) => dispatch(loadSiteActivity()),
-}];
 
 function mapStateToProps(state) {
   return {
     activities: state.dashboard.activities,
   };
 }
-export default asyncConnect(asyncProps, mapStateToProps, { loadSiteActivity })(Dashboard);
+export default connect(mapStateToProps, { loadSiteActivity })(Dashboard);

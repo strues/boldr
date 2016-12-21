@@ -4,10 +4,10 @@ import thunkMiddleware from 'redux-thunk';
 import createReducer from './reducers';
 import createMiddleware from './clientMiddleware';
 
-export default function configureStore(history, preloadedState, client) {
+export default function configureStore(preloadedState, history, apiClient) {
   // Redux middleware
   const reduxRouterMiddleware = routerMiddleware(history);
-  const middleware = [thunkMiddleware, createMiddleware(client), reduxRouterMiddleware];
+  const middleware = [thunkMiddleware, createMiddleware(apiClient), reduxRouterMiddleware];
 
   // Development enhancers
   const enhancers = [];

@@ -12,7 +12,8 @@ import applyRouterMiddleware from 'react-router/lib/applyRouterMiddleware';
 
 import { syncHistoryWithStore } from 'react-router-redux';
 import WebFontLoader from 'webfontloader';
-import { ReduxAsyncConnect } from 'redux-connect';
+import { trigger } from 'redial';
+
 import useScroll from 'react-router-scroll/lib/useScroll';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
@@ -37,49 +38,57 @@ WebFontLoader.load({
 // Get the DOM Element where we mount React
 const MOUNT_POINT = document.getElementById('app');
 // Superagent helper
-const client = new ApiClient();
+const apiClient = new ApiClient();
 // inject browserHistory, our state, and the superagent helper
-const store = configureStore(browserHistory, window.PRELOADED_STATE, client);
+const store = configureStore(window.PRELOADED_STATE, browserHistory, apiClient);
 // bootstrap materialui theme
 const muiTheme = getMuiTheme(materialStyle);
-
+const { dispatch } = store;
 const token = getToken();
 if (token) {
   // Update application state. User has token and is probably authenticated
-  store.dispatch(checkAuth(token));
+  dispatch(checkAuth(token));
 }
 
-const history = syncHistoryWithStore(browserHistory, store, {
-  selectLocationState: (state) => state.routing,
-});
+const history = syncHistoryWithStore(browserHistory, store);
 const routes = createRoutes(store, history);
 
 function renderApp() {
-  const { pathname, search, hash } = window.location;
-  const location = `${pathname}${search}${hash}`;
-  // wrapper to make redux-connect applyRouterMiddleware compatible see
-  // https://github.com/taion/react-router-scroll/issues/3
-  const useReduxAsyncConnect = () => ({
-    renderRouterContext: (child, props) => (
-      <ReduxAsyncConnect { ...props } helpers={ { client } } filter={ item => !item.deferred }>
-        { child }
-      </ReduxAsyncConnect>
-    ),
-  });
-
-  const middleware = applyRouterMiddleware(useScroll(), useReduxAsyncConnect());
-  // Match routes based on location object:
-  match({ routes, location }, () => {
-    render(
+  render(
       <ReactHotLoader errorReporter={ WrappedRedBox }>
         <Provider store={ store } key="provider">
           <MuiThemeProvider muiTheme={ muiTheme }>
-          <Router routes={ routes } history={ history } render={ middleware } key={ Math.random() } />
+         <Router
+           history={ history }
+           routes={ routes }
+           helpers={ apiClient }
+           render={ applyRouterMiddleware(useScroll()) }
+         />
         </MuiThemeProvider>
         </Provider>
       </ReactHotLoader>,
       MOUNT_POINT,
     );
+
+  return history.listen(location => {
+    // Match routes based on location object:
+    match({ routes, location }, (error, redirectLocation, renderProps) => {
+      if (error) console.log(error);
+      const { components } = renderProps;
+      const locals = {
+        path: renderProps.location.pathname,
+        query: renderProps.location.query,
+        params: renderProps.params,
+
+        dispatch,
+      };
+      if (window.PRELOADED_STATE) {
+        delete window.PRELOADED_STATE;
+      } else {
+        trigger('fetch', components, locals);
+      }
+      trigger('defer', components, locals);
+    });
   });
 }
 // The following is needed so that we can support hot reloading our application.

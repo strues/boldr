@@ -181,27 +181,6 @@ export default {
     },
   },
   additionalNodeBundles: {
-    // NOTE: The webpack configuration and build scripts have been built so
-    // that you can add arbitrary additional node bundle configurations here.
-    //
-    // A common requirement for larger projects is to add additional "node"
-    // target bundles (e.g an APi server endpoint). Therefore flexibility has been
-    // baked into our webpack config factory to allow for this.
-    //
-    // Simply define additional configurations similar to below.  The development
-    // server will manage starting them up for you.  The only requirement is that
-    // within the entry for each bundle you create and return the "express"
-    // listener.
-    /*
-    apiServer: {
-      srcEntryFile: './src/api/index.js',
-      srcPaths: [
-        './src/api',
-        './src/shared',
-        './config',
-      ],
-      outputPath: './build/api',
-    }
-    */
+
   },
 };

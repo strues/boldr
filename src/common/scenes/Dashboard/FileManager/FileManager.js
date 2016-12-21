@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { asyncConnect } from 'redux-connect';
+import { provideHooks } from 'redial';
 import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
 import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
@@ -24,13 +24,12 @@ type Props = {
   ui: Object,
 };
 
-@asyncConnect([{
-  promise: ({ store: { dispatch, getState } }) => {
-    const promises = [];
-    promises.push(dispatch(fetchMedia()));
-    return Promise.all(promises);
+
+@provideHooks({
+  fetch: ({ dispatch }) => {
+    return dispatch(fetchMedia());
   },
-}])
+})
 class FileManager extends Component {
   constructor(props) {
     super(props);

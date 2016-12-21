@@ -1,13 +1,14 @@
 /* @flow */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
-import { asyncConnect } from 'redux-connect';
+import { provideHooks } from 'redial';
+import { connect } from 'react-redux';
 import { Modal } from 'components/index';
 import { showModal, hideModal } from 'state/dux/ui';
 import { MembersList, EditMemberForm } from './components';
 import { loadSiteMembers, memberSelected, updateMember } from './reducer';
 
-export type Props = {
+type Props = {
   members: Object,
   memberSelected: Function,
   loadSiteMembers: Function,
@@ -16,8 +17,12 @@ export type Props = {
   showModal: () => void,
   ui: Object,
 };
-
-class Members extends Component {
+@provideHooks({
+  fetch: ({ dispatch }) => {
+    return dispatch(loadSiteMembers());
+  },
+})
+export class Members extends Component {
   constructor(props: Props) {
     super(props);
     (this: any).toggleUser = this.toggleUser.bind(this);
@@ -71,9 +76,6 @@ class Members extends Component {
     );
   }
 }
-const asyncProps = [{
-  promise: ({ store: { dispatch, getState } }) => dispatch(loadSiteMembers()),
-}];
 
 const mapStateToProps = (state, ownProps) => {
   return {
@@ -83,6 +85,6 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default asyncConnect(asyncProps, mapStateToProps, {
+export default connect(mapStateToProps, {
   memberSelected, updateMember, loadSiteMembers, showModal, hideModal,
 })(Members);

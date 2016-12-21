@@ -1,9 +1,9 @@
 import { fade } from 'material-ui/utils/colorManipulator';
 import spacing from 'material-ui/styles/spacing';
-import { pinkA200, grey100, grey500, lightBlue100, lightBlue700,
+import { pinkA200, grey100, grey500, lightBlue100, lightBlue500, lightBlue700,
   darkBlack, white, grey300, fullBlack } from 'material-ui/styles/colors';
 
-export const primary1Color = '#0376a3';
+export const primary1Color = lightBlue500;
 export const primary2Color = lightBlue700;
 export const primary3Color = lightBlue100;
 export const accent1Color = pinkA200;

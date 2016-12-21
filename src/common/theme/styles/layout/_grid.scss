@@ -9,16 +9,16 @@ $grid-gutter: 2rem !default;
 
 $grid-breakpoints: (
   xs: false,
-  sm: 48em,
-  md: 62em,
-  lg: 75em
+  sm: 768px,
+  md: 992px,
+  lg: 1200px
 ) !default;
 
 $grid-containers: (
   xs: false,
-  sm: 46rem,
-  md: 61rem,
-  lg: 71rem,
+  sm: 720px,
+  md: 960px,
+  lg: 1140px,
 ) !default;
 
 // Mixins

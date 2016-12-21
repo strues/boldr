@@ -1,26 +1,26 @@
 /* @flow */
 
-import type { $Request, $Response, Middleware } from 'express';
+import type { $Request, $Response, Middleware, NextFunction } from 'express';
 import React from 'react';
 import { renderToString } from 'react-dom/server';
 import { Provider } from 'react-redux';
 // react router
 import match from 'react-router/lib/match';
+import RouterContext from 'react-router/lib/RouterContext';
 import createMemoryHistory from 'react-router/lib/createMemoryHistory';
 import { syncHistoryWithStore } from 'react-router-redux';
-
 import Helmet from 'react-helmet';
+import { trigger } from 'redial';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import { lightBlue100, lightBlue700 } from 'material-ui/styles/colors';
-// async data fetching
-import { ReduxAsyncConnect, loadOnServer } from 'redux-connect';
+import { lightBlue100, lightBlue500, lightBlue700 } from 'material-ui/styles/colors';
+
 import createRoutes from '../../../common/scenes';
 import ApiClient from '../../../common/core/api/apiClient';
 import configureStore from '../../../common/state/store';
 import generateHTML from './generateHTML';
 
-function boldrSSRMiddleware(request: $Request, response: $Response) {
+function boldrSSRMiddleware(request: $Request, response: $Response, next: NextFunction) {
   // We should have had a nonce provided to us.  See the server/index.js for
   // more information on what this is.
   if (typeof response.locals.nonce !== 'string') {
@@ -44,68 +44,73 @@ function boldrSSRMiddleware(request: $Request, response: $Response) {
     return;
   }
   // Superagent helper
-  const client = new ApiClient(request);
+  const apiClient = new ApiClient(request);
   // create memory history since we're technically an SPA
-  const memHistory = createMemoryHistory(request.url);
+  const memoryHistory = createMemoryHistory(request.url);
   // redux store is initialized with the history as well as the client middleware
-  const store = configureStore(memHistory, client);
+  const store = configureStore({}, memoryHistory, apiClient);
   // history is now kept in sync with the redux store
-  syncHistoryWithStore(memHistory, store);
-
+  const history = syncHistoryWithStore(memoryHistory, store);
+  const routes = createRoutes(store);
+  const { dispatch } = store;
   // match the url with the route, and data we might need.
-  match({ routes: createRoutes(store), location: request.url }, (err, redirect, renderProps) => {
-    if (err) {
-      response.status(500).json(err);
-    } else if (redirect) {
-      response.redirect(302, redirect.pathname + redirect.search);
-    } else if (renderProps) {
-      loadOnServer({ ...renderProps, store, helpers: { client } })
-      .then(() => {
-        const preloadedState = store.getState();
-        const muiTheme = getMuiTheme({
-          palette: {
-            primary1Color: '#0376a3',
-            primary2Color: lightBlue700,
-            primary3Color: lightBlue100,
-          },
-        }, {
-          avatar: {
-            borderColor: null,
-          },
-          userAgent: request.headers['user-agent'],
-        });
+  match({ history, routes, location: request.url }, (error, redirectLocation, renderProps) => {
+    if (redirectLocation) {
+      response.redirect(redirectLocation.pathname + redirectLocation.search);
+    }
 
-          // Create our application and render it into a string.
-        const component = renderToString(
-          <Provider store={ store } key="provider">
+    if (error || !renderProps) {
+      return next(error);
+    }
+    const { components } = renderProps;
+
+         // Define locals to be provided to all lifecycle hooks:
+    const locals = {
+      path: renderProps.location.pathname,
+      query: renderProps.location.query,
+      params: renderProps.params,
+
+           // Allow lifecycle hooks to dispatch Redux actions:
+      dispatch,
+    };
+
+    trigger('fetch', components, locals)
+     .then(() => {
+       global.navigator = { userAgent: request.headers['user-agent'] };
+       const preloadedState = store.getState();
+       const muiTheme = getMuiTheme({
+         palette: {
+           primary1Color: lightBlue500,
+           primary2Color: lightBlue700,
+           primary3Color: lightBlue100,
+         },
+       }, {
+         avatar: {
+           borderColor: null,
+         },
+       });
+
+
+       const componentRoot = renderToString(
+          <Provider store={ store }>
             <MuiThemeProvider muiTheme={ muiTheme }>
-            <ReduxAsyncConnect { ...renderProps } />
+            <RouterContext { ...renderProps } helpers={ apiClient } />
           </MuiThemeProvider>
           </Provider>,
         );
 
-        // Generate the html response.
-        const html = generateHTML({
-          // Provide the full app react element.
-          component,
-          // Nonce which allows us to safely declare inline scripts.
-          nonce,
-          preloadedState,
-          // Running this gets all the helmet properties (e.g. headers/scripts/title etc)
-          // that need to be included within our html.  It's based on the rendered app.
-          // @see https://github.com/nfl/react-helmet
-          helmet: Helmet.rewind(),
-        });
+       const html = generateHTML({
+         componentRoot,
+         nonce,
+         preloadedState,
+         helmet: Helmet.rewind(),
+       });
 
-        return response.status(200).send(html);
-      }).catch((mountError) => {
-        console.error('MOUNT ERROR:', mountError.stack);
-        return response.status(500);
-      });
-    } else {
-      response.status(404).send('Not found');
-    }
+       response.status(200).send(html);
+     }).catch((err) => {
+       console.log(err);
+       response.status(500).end();
+     });
   });
 }
-
 export default (boldrSSRMiddleware: Middleware);

@@ -1,8 +1,9 @@
 /* @flow */
 import React, { Component } from 'react';
-import { asyncConnect } from 'redux-connect';
+import { provideHooks } from 'redial';
+import { connect } from 'react-redux';
 import type { Block as BlockType } from 'types/models';
-import { areBlocksLoaded, fetchBlocks, createBlock } from './reducer';
+import { fetchBlocks, createBlock } from './reducer';
 import Blocks from './Blocks';
 
 type Props = {
@@ -13,11 +14,19 @@ type Props = {
   all: Array<BlockType>,
 }
 
-class BlocksContainer extends Component {
+@provideHooks({
+  fetch: ({ dispatch }) => {
+    return dispatch(fetchBlocks());
+  },
+})
+export class BlocksContainer extends Component {
   constructor() {
     super();
 
     (this: any).handleCreateBlock = this.handleCreateBlock.bind(this);
+  }
+  componentDidMount() {
+    this.props.fetchBlocks();
   }
   props: Props;
   handleCreateBlock(values) {
@@ -32,18 +41,10 @@ class BlocksContainer extends Component {
     );
   }
 }
-const asyncProps = [{
-  promise: ({ store: { dispatch, getState } }) => {
-    const promises = [];
-    if (!areBlocksLoaded(getState())) {
-      promises.push(dispatch(fetchBlocks()));
-    }
-    return Promise.all(promises);
-  },
-}];
+
 const mapStateToProps = (state) => {
   return {
     blocks: state.blocks,
   };
 };
-export default asyncConnect(asyncProps, mapStateToProps, { fetchBlocks, createBlock })(BlocksContainer);
+export default connect(mapStateToProps, { fetchBlocks, createBlock })(BlocksContainer);

@@ -1,7 +1,8 @@
 /* eslint-disable react/prefer-stateless-function */
 /* @flow */
 import React, { Component } from 'react';
-import { asyncConnect } from 'redux-connect';
+import { provideHooks } from 'redial';
+import { connect } from 'react-redux';
 import { fetchPagesIfNeeded, getPages } from 'state/index';
 import Pages from './Pages';
 
@@ -10,6 +11,11 @@ export type Props = {
   fetchPagesIfNeeded: Function
 };
 
+@provideHooks({
+  fetch: ({ dispatch }) => {
+    return dispatch(fetchPagesIfNeeded());
+  },
+})
 export class PagesContainer extends Component {
   componentDidMount() {
     this.props.fetchPagesIfNeeded();
@@ -21,15 +27,11 @@ export class PagesContainer extends Component {
     );
   }
 }
-const asyncProps = [{
-  promise: ({ store: { dispatch, getState } }) => {
-    dispatch(fetchPagesIfNeeded());
-  },
-}];
+
 
 const mapStateToProps = (state, ownProps) => {
   return {
     pages: getPages(state),
   };
 };
-export default asyncConnect(asyncProps, mapStateToProps, { fetchPagesIfNeeded })(PagesContainer);
+export default connect(mapStateToProps, { fetchPagesIfNeeded })(PagesContainer);

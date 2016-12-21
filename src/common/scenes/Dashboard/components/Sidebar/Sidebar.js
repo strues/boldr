@@ -25,7 +25,7 @@ const Sidebar = (props: Props) => {
   return (
     <Drawer open={ props.open } width={ 200 }>
 
-      <Card style={ { backgroundColor: '#0376a3' } }>
+      <Card style={ { backgroundColor: '#01579b' } }>
         <CardHeader
           avatar={ <Avatar
             size={ 50 }
@@ -33,7 +33,7 @@ const Sidebar = (props: Props) => {
             style={ { border: '1px solid grey', margin: '-5px' } }
           /> }
         />
-        <span>Someone Important</span>
+        <span style={ { color: '#fff' } }>Someone Important</span>
       </Card>
       <Link to="/">
         <MenuItem leftIcon={ <HomeIcon /> }>Home</MenuItem>

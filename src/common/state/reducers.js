@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
-import { routerReducer } from 'react-router-redux';
-import { reducer as reduxAsyncConnect } from 'redux-connect';
+import { routerReducer as routing } from 'react-router-redux';
 import { reducer as formReducer } from 'redux-form';
 import notificationReducer from './dux/notifications';
 import entitiesReducer from './dux/entities';
@@ -11,15 +10,13 @@ import uiReducer from './dux/ui';
 
 export default function createReducer(asyncReducers) {
   return combineReducers({
-    routing: routerReducer,
-    reduxAsyncConnect,
     notifications: notificationReducer,
-    entities: entitiesReducer,
     auth: authReducer,
     posts: postReducer,
     boldr: boldrReducer,
     ui: uiReducer,
     form: formReducer,
+    routing,
     ...asyncReducers,
   });
 }
