@@ -3,6 +3,7 @@ exports.up = function(knex) {
     table.increments('id').unsigned().primary();
     table.uuid('uuid').notNullable().unique();
     table.string('key', 100).notNullable();
+    table.string('label', 100).notNullable();
     table.string('value', 255).notNullable();
     table.string('description', 255).notNullable();
 

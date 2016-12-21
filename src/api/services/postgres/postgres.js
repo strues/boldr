@@ -1,5 +1,5 @@
 import Knex from 'knex';
-import knexConfig from '../../../../config/private/knexfile';
+import knexConfig from '../../../../config/knexfile';
 
 const knex = Knex(knexConfig[process.env.NODE_ENV]);
 

@@ -5,6 +5,7 @@ exports.up = function(knex) {
     table.string('name').notNullable().unique();
     table.string('description').nullable();
 
+    // indexes
     table.index('uuid');
     table.index('name');
   });

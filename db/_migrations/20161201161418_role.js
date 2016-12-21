@@ -1,5 +1,6 @@
 exports.up = function(knex) {
   return knex.schema.createTable('role', (table) => {
+    // pk
     table.increments('id').unsigned().primary();
     table.uuid('uuid').notNullable().unique();
     table.string('name', 64).notNullable().unique();
@@ -7,7 +8,7 @@ exports.up = function(knex) {
     table.text('description').nullable();
     table.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
     table.timestamp('updated_at').nullable().defaultTo(null);
-
+    // indexes
     table.index('uuid');
     table.index('name');
   });

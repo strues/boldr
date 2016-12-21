@@ -1,16 +1,16 @@
 import uuid from 'uuid';
-import slugIt from '../../utils/slugIt';
-import { InternalServer, responseHandler } from '../../core/index';
-import Activity from '../activity/activity.model';
-import Navigation from '../navigation/navigation.model';
-import NavigationLink from '../navigation/navigationLink.model';
-import Link from './link.model';
+import slugIt from '../../../utils/slugIt';
+import { InternalServer, responseHandler } from '../../../core/index';
+import Activity from '../../activity/activity.model';
+import Menu from '../menu.model';
+import MenuMenuDetail from '../joinMenuDetail.model';
+import MenuDetail from './menuDetail.model';
 
-const debug = require('debug')('boldrAPI:link-controller');
+const debug = require('debug')('boldrAPI:menuDetail-controller');
 
 async function getLinks(req, res, next) {
   try {
-    const links = await Link.query();
+    const links = await MenuDetail.query();
 
     if (!links) {
       return res.status(404).json({ message: 'Unable to find any links. Try creating one.' });
@@ -23,7 +23,7 @@ async function getLinks(req, res, next) {
 }
 
 async function showLink(req, res) {
-  const navigation = await Link
+  const navigation = await MenuDetail
     .query()
     .findById(req.params.id);
   return responseHandler(res, 200, navigation);
@@ -33,25 +33,26 @@ async function createLink(req, res, next) {
   try {
     const payload = {
       name: req.body.name,
-      href: req.body.href,
+      link: req.body.link,
       icon: req.body.icon,
       label: slugIt(req.body.name),
+      attribute: req.body.attribute,
       position: req.body.position,
       uuid: uuid(),
     };
-    const newLink = await Link.query().insert(payload);
+    const newLink = await MenuDetail.query().insert(payload);
 
-    const navId = req.body.nav_id || 1;
-    const existingNav = await Navigation.query().where('id', navId).first();
-    if (!existingNav) {
+    const menuId = req.body.menu_id || 1;
+    const existingMenu = await Menu.query().where('id', menuId).first();
+    if (!existingMenu) {
       throw new InternalServer();
     }
-    debug(existingNav, 'existing navigation found');
-    const associateLinkNav = await NavigationLink.query().insert({
-      navigation_id: existingNav.id,
-      link_id: newLink.id,
+    debug(existingMenu, 'existing menu found');
+    const associateMenuDetail = await MenuMenuDetail.query().insert({
+      menu_id: existingMenu.id,
+      menu_detail_id: newLink.id,
     });
-    debug(associateLinkNav);
+    debug(associateMenuDetail);
     await Activity.query().insert({
       id: uuid(),
       name: payload.name,
@@ -71,7 +72,7 @@ async function createLink(req, res, next) {
 }
 
 function updateLink(req, res) {
-  return Link.query()
+  return MenuDetail.query()
     .patchAndFetchById(req.params.id, req.body)
     .then(navigation => responseHandler(res, 202, navigation));
 }

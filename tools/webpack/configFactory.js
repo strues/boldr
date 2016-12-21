@@ -1,9 +1,9 @@
 import path from 'path';
 import os from 'os';
 import appRootDir from 'app-root-dir';
-import { host, wpdsPort, protocol, port } from '../../config/private/environment';
-import config from '../../config/private/boldr';
-import plugins from '../../config/private/plugins';
+import { host, wpdsPort, protocol, port } from '../../config/environment';
+import config from '../../config/boldr';
+import plugins from '../../config/plugins';
 
 const globSync = require('glob').sync;
 const webpack = require('webpack');

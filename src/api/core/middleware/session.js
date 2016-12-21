@@ -5,7 +5,7 @@
 
 import session from 'express-session';
 import redisClient from '../../services/redis';
-import config from '../../../../config/private/api';
+import config from '../../../../config/api';
 
 const RedisStore = require('connect-redis')(session);
 

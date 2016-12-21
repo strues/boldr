@@ -7,7 +7,7 @@
 import path from 'path';
 import fs from 'fs';
 import winston from 'winston';
-import config from '../../../../config/private/api';
+import config from '../../../../config/api';
 
 const appRoot = require('app-root-dir');
 

@@ -2,7 +2,7 @@
 import { resolve as pathResolve } from 'path';
 import express from 'express';
 import appRootDir from 'app-root-dir';
-import boldrConfig from '../../../config/private/boldr';
+import boldrConfig from '../../../config/boldr';
 
 // Middleware to server our client bundle.
 export default express.static(

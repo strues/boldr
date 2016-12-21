@@ -8,8 +8,8 @@ import { sync as globSync } from 'glob';
 import matchRequire from 'match-require';
 import defaults from 'lodash/defaultsDeep';
 
-import boldrConfig from '../../config/private/boldr';
-import plugConfig from '../../config/private/plugins';
+import boldrConfig from '../../config/boldr';
+import plugConfig from '../../config/plugins';
 import { log } from '../utils';
 
 function createVendorDLL(bundleName, bundleConfig) {

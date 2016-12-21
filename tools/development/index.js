@@ -2,7 +2,7 @@ import { resolve as pathResolve } from 'path';
 import chokidar from 'chokidar';
 import webpack from 'webpack';
 import appRootDir from 'app-root-dir';
-import config from '../../config/private/boldr';
+import config from '../../config/boldr';
 import { log } from '../utils';
 import HotNodeServer from './hotNodeServer';
 import HotClientServer from './hotClientServer';

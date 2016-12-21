@@ -1,17 +1,8 @@
 /* @flow */
 import type { Head } from 'react-helmet';
 import serialize from 'serialize-javascript';
-import config from '../../../../config/private/boldr';
+import config from '../../../../config/boldr';
 import getAssetsForClientChunks from './getAssetsForClientChunks';
-
-// We use the polyfill.io service which provides the polyfills that a
-// client needs, rather than everything if we used babel-polyfill.
-// This keeps our bundle size down.
-// Note: this has to be included here, rather than imported via react-helmet
-// as we may need the polyfills to load our app in the first place! :)
-function polyfillIoScript() {
-  return '<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>';
-}
 
 function styleTags(styles: Array<string>) {
   return styles

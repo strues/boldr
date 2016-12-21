@@ -3,7 +3,7 @@ import https from 'https';
 import fs from 'fs';
 import { resolve as pathResolve } from 'path';
 import appRootDir from 'app-root-dir';
-import config from '../../config/private/api';
+import config from '../../config/api';
 
 import bootstrap from './core/bootstrap';
 import logger from './core/logger';
@@ -22,8 +22,8 @@ global.Promise = Promise;
 Promise.longStackTraces();
 
 const ssl = {
-  key: fs.readFileSync(pathResolve(appRootDir.get(), './config/private/ssl.key')),
-  cert: fs.readFileSync(pathResolve(appRootDir.get(), './config/private/ssl.crt')),
+  key: fs.readFileSync(pathResolve(appRootDir.get(), './config/ssl.key')),
+  cert: fs.readFileSync(pathResolve(appRootDir.get(), './config/ssl.crt')),
 };
 
 app.set('port', port);

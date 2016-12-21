@@ -2,7 +2,7 @@ import Debug from 'debug';
 import uuid from 'uuid';
 import s3 from '../../services/aws/s3';
 import { responseHandler } from '../../core/index';
-import config from '../../../../config/private/api';
+import config from '../../../../config/api';
 import Activity from '../activity/activity.model';
 import Attachment from './attachment.model';
 

@@ -102,10 +102,10 @@ export const getAllSettings = () =>
     *****************************************************************/
 
 export const getAllNavs = () =>
-  apiClient.get('/navigations');
+  apiClient.get('/menus');
 
 export const doUpdateNavigationLinks = (data) =>
-  apiClient.put(`/links/${data.id}`, { data });
+  apiClient.put(`/menu-details/${data.id}`, { data });
 
 export const doAddNavigationLinks = (data) => {
   const payload = {
@@ -114,7 +114,7 @@ export const doAddNavigationLinks = (data) => {
     icon: data.icon,
     position: data.position,
   };
-  return apiClient.post('/links', { payload });
+  return apiClient.post('/menu-details', { payload });
 };
 
   /**

@@ -1,7 +1,7 @@
 import uuid from 'uuid';
 import express from 'express';
 import s3 from '../../services/aws/s3';
-import config from '../../../../config/private/api';
+import config from '../../../../config/api';
 
 const debug = require('debug')('boldrAPI:s3');
 

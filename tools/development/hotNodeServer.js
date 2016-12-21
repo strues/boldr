@@ -32,7 +32,7 @@ class HotNodeServer {
 
         listener.on('listening', () => {
           const { address, port } = listener.address();
-          const url = `http://${address}:${port}`;
+          const url = `http://localhost:${port}`;
           log({
             title: 'server',
             level: 'info',

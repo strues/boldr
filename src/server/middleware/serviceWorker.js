@@ -4,7 +4,7 @@
 import { resolve as pathResolve } from 'path';
 import appRootDir from 'app-root-dir';
 import type { $Request, $Response, NextFunction } from 'express';
-import boldrConfig from '../../../config/private/boldr';
+import boldrConfig from '../../../config/boldr';
 
 // Middleware to server our service worker.
 function serviceWorkerMiddleware(

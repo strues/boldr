@@ -22,7 +22,7 @@ let NavigationForm = (props: Props) => { // eslint-disable-line
     <form className="form__navigation" onSubmit={ handleSubmit }>
       <Field name="name" component={ TextField } type="text" floatingLabelText="Name" />
       <Field name="position" component={ TextField } type="text" floatingLabelText="Position" />
-      <Field name="href" component={ TextField } type="text" floatingLabelText="Link" />
+      <Field name="link" component={ TextField } type="text" floatingLabelText="Link" />
       <Field name="icon" component={ TextField } type="text" floatingLabelText="Icon" />
       <div className="form__footer">
         <RaisedButton type="submit" label="Save" style={ style } primary />

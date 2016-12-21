@@ -68,13 +68,13 @@ class PrimaryHeader extends Component {
         <span>Loading...</span>
       );
     }
-    const renderedMenuItems = this.props.navigation.links.map((item, i) =>
+    const renderedMenuItems = this.props.navigation.details.map((item, i) =>
       <FlatButton
         style={ { marginTop: '-12px' } }
         labelStyle={ { color: '#fff' } }
         key={ item.id }
         label={ item.name }
-        href={ item.href }
+        href={ item.link }
       />,
     );
 

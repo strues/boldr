@@ -9,7 +9,7 @@
 // from the origin starter kit a bit easier.
 import uniq from 'lodash/uniq';
 import pullAll from 'lodash/pullAll';
-import type { BuildOptions } from '../../tools/types';
+import type { BuildOptions } from '../tools/types';
 import boldrConfig from './boldr';
 
 export default {
@@ -24,6 +24,7 @@ export default {
         sourceMaps: true,
         comments: false,
         presets: [
+          'stage-0',
           // JSX
           'react',
           target === 'client'

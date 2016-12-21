@@ -1,5 +1,5 @@
 import passport from 'passport';
-import config from '../../../../../config/private/api';
+import config from '../../../../../config/api';
 
 const JwtStrategy = require('passport-jwt').Strategy;
 const ExtractJwt = require('passport-jwt').ExtractJwt;

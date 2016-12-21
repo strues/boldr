@@ -8,8 +8,8 @@ import compression from 'compression';
 import cookieParser from 'cookie-parser';
 import httpProxy from 'http-proxy';
 // configuration
-import boldrConfig from '../../config/private/boldr';
-import envConfig from '../../config/private/environment';
+import boldrConfig from '../../config/boldr';
+import envConfig from '../../config/environment';
 // middleware
 import security from './middleware/security';
 import serviceWorker from './middleware/serviceWorker';

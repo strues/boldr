@@ -5,7 +5,7 @@ export type Props = {
   onFormSubmit?: Function,
   initialValues?: {
     position?: number,
-    href?: string,
+    link?: string,
     name?: string,
   },
 };

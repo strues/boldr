@@ -9,10 +9,10 @@ const tables = [
   'role',
   'tag',
   'post_tag',
-  'navigation',
-  'link',
+  'menu',
+  'menu_detail',
   'page',
-  'navigation_link',
+  'menu_menu_detail',
   'setting',
 ];
 
@@ -171,41 +171,41 @@ function seed(knex, Promise) {
       }),
     ]))
     .then(() => Promise.all([
-      knex('navigation').insert({
+      knex('menu').insert({
         name: 'Main',
         uuid: '908db7f1-05b8-451f-b756-2fbe28c15976',
         label: 'main',
         restricted: false,
-        location: 'header',
-        dropdown: {},
+        order: 0,
+        attributes: {},
       }),
     ]))
     .then(() => Promise.all([
-      knex('link').insert({
+      knex('menu_detail').insert({
         name: 'About',
         uuid: '39daff4d-fbc4-438b-9d85-cdb7bb9770b8',
         label: 'about',
         position: 1,
-        href: '/about',
+        link: '/about',
         icon: 'info',
       }),
-      knex('link').insert({
+      knex('menu_detail').insert({
         name: 'Blog',
         uuid: '45f9dcb6-5843-412f-8079-43e55c651e38',
         label: 'blog',
         position: 2,
-        href: '/blog',
+        link: '/blog',
         icon: 'info',
       }),
     ]))
     .then(() => Promise.all([
-      knex('navigation_link').insert({
-        navigation_id: 1,
-        link_id: 1,
+      knex('menu_menu_detail').insert({
+        menu_id: 1,
+        menu_detail_id: 1,
       }),
-      knex('navigation_link').insert({
-        navigation_id: 1,
-        link_id: 2,
+      knex('menu_menu_detail').insert({
+        menu_id: 1,
+        menu_detail_id: 2,
       }),
     ]))
     .then(() => Promise.all([
@@ -230,42 +230,49 @@ function seed(knex, Promise) {
     .then(() => Promise.all([
       knex('setting').insert({
         key: 'site_name',
+        label: 'Site Name',
         value: 'Boldr',
         description: 'The website name.',
         uuid: '96cbccae-bb62-4895-961a-7966839146aa',
       }),
       knex('setting').insert({
         key: 'site_url',
+        label: 'Site URL',
         value: 'http://localhost:3000',
         description: 'The address used to access your website.',
         uuid: '0c60d1e4-cc19-459c-a31c-2e7cf91fc4f4',
       }),
       knex('setting').insert({
         key: 'site_logo',
-        value: 'https://boldr.io/logo.png',
+        label: 'Site Logo',
+        value: 'https://boldr.io/boldr.png',
         description: 'The logo is displayed in the header area.',
         uuid: 'd54d7c6f-5869-414f-a2e1-b0458a2fb828',
       }),
       knex('setting').insert({
         key: 'site_description',
+        label: 'Site Description',
         value: 'A modern CMS',
         description: 'Meta header for search results.',
         uuid: 'e8ed37d2-2b72-4777-8839-4ff12b15c1b4',
       }),
       knex('setting').insert({
         key: 'favicon',
+        label: 'Favicon',
         value: 'https://boldr.io/favicon.ico',
         description: 'Favicon to use for your website.',
         uuid: 'a746b40a-3939-45d7-a3e0-35b26a4c3707',
       }),
       knex('setting').insert({
         key: 'google_analytics',
+        label: 'Google Analytics ID',
         value: 'UA-323432',
         description: 'Google Analytics tracking code',
         uuid: 'e5cf6945-3ba1-4cf6-a7e6-eb836b652d54',
       }),
       knex('setting').insert({
         key: 'allow_registration',
+        label: 'Allow Registration',
         value: true,
         description: 'Toggle allowing user\'s to register for accounts.',
         uuid: 'b86c5e47-71f6-4946-b0b7-546abedf74ae',

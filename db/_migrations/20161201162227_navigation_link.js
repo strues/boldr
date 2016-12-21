@@ -1,11 +1,11 @@
 exports.up = function(knex) {
-  return knex.schema.createTable('navigation_link', (table) => {
-    table.integer('navigation_id').notNullable().references('id').inTable('navigation');
-    table.integer('link_id').notNullable().references('id').inTable('link');
-    table.primary(['navigation_id', 'link_id']);
+  return knex.schema.createTable('menu_menu_detail', (table) => {
+    table.integer('menu_id').notNullable().references('id').inTable('menu');
+    table.integer('menu_detail_id').notNullable().references('id').inTable('menu_detail');
+    table.primary(['menu_id', 'menu_detail_id']);
   });
 };
 
 exports.down = function(knex) {
-  return knex.schema.dropTableIfExists('navigation_link');
+  return knex.schema.dropTableIfExists('menu_menu_detail');
 };

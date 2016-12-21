@@ -32,10 +32,10 @@ class Navigation extends Component {
   }
   state: Object = {
     open: false,
-    link: {
+    detail: {
       name: null,
       position: null,
-      href: null,
+      link: null,
       id: null,
       icon: null,
     },
@@ -58,10 +58,10 @@ class Navigation extends Component {
 
   handleItemClick(item: Object) {
     this.setState({
-      link: {
+      detail: {
         name: item.name,
         position: item.position,
-        href: item.href,
+        link: item.link,
         id: item.id,
         icon: item.icon,
       },
@@ -70,7 +70,7 @@ class Navigation extends Component {
 
   render() {
     const { navigation } = this.props;
-    const listItems = navigation.links.map((item, i) => {
+    const listItems = navigation.details.map((item, i) => {
       return <ListItem key={ i } primaryText={ item.name } onClick={ () => this.handleItemClick(item) } />;
     });
 
@@ -90,7 +90,7 @@ class Navigation extends Component {
           <Col xs={ 12 } md={ 4 }>
             <Paper zDepth={ 2 }>
               <NavigationEditor
-                initialValues={ this.state.link }
+                initialValues={ this.state.detail }
                 onFormSubmit={ this.onUpdateFormSubmit }
               />
             </Paper>

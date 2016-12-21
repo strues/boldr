@@ -1,10 +1,10 @@
 import express from 'express';
-import { isAuthenticated } from '../../services/authentication';
-import { BaseController } from '../../core';
-import Link from './link.model';
-import * as ctrl from './link.controller';
+import { isAuthenticated } from '../../../services/authentication';
+import { BaseController } from '../../../core';
+import MenuDetail from './menuDetail.model';
+import * as ctrl from './menuDetail.controller';
 
-const controller = new BaseController(Link);
+const controller = new BaseController(MenuDetail);
 
 const router = express.Router();
 /**

@@ -3,8 +3,8 @@ import uuid from 'uuid';
 import hpp from 'hpp';
 import helmet from 'helmet';
 import type { Middleware, $Request, $Response, NextFunction } from 'express';
-import boldrConfig from '../../../config/private/boldr';
-import envConfig from '../../../config/private/environment';
+import boldrConfig from '../../../config/boldr';
+import envConfig from '../../../config/environment';
 
 const cspConfig = {
   directives: {

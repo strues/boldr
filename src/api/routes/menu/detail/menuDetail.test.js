@@ -8,7 +8,7 @@ function request() {
 
 it('GET /links -- It should return links', async () => {
   const { status, body } = await request()
-      .get('/api/v1/links')
+      .get('/api/v1/menu-details')
       .set('Accept', 'application/json');
 
   expect(status).toBe(200);
@@ -17,7 +17,7 @@ it('GET /links -- It should return links', async () => {
 
 it('POST /links -- Should require authorization', async () => {
   const { status } = await request()
-      .post('/api/v1/links')
+      .post('/api/v1/menu-details')
       .set('Accept', 'application/json')
       .send({ name: 'test' });
 
@@ -26,7 +26,7 @@ it('POST /links -- Should require authorization', async () => {
 
 it('GET /links/1 -- By its id', async () => {
   const { status, body } = await request()
-      .get('/api/v1/links/1')
+      .get('/api/v1/menu-details/1')
       .set('Accept', 'application/json');
 
   expect(status).toBe(200);
@@ -35,7 +35,7 @@ it('GET /links/1 -- By its id', async () => {
 
 it('PUT /links/1 -- Should require authorization', async () => {
   const { status } = await request()
-      .put('/api/v1/links/1')
+      .put('/api/v1/menu-details/1')
       .set('Accept', 'application/json')
       .send({ name: 'test' });
 
@@ -44,7 +44,7 @@ it('PUT /links/1 -- Should require authorization', async () => {
 
 it('PATCH /links/1 -- Should require authorization', async () => {
   const { status } = await request()
-      .patch('/api/v1/links/1')
+      .patch('/api/v1/menu-details/1')
       .set('Accept', 'application/json')
       .send({ name: 'test' });
 
@@ -53,7 +53,7 @@ it('PATCH /links/1 -- Should require authorization', async () => {
 
 it('DELETE /links/1 -- Should require authorization', async () => {
   const { status } = await request()
-      .delete('/api/v1/links/1')
+      .delete('/api/v1/menu-details/1')
       .set('Accept', 'application/json');
 
   expect(status).toBe(401);
