@@ -1,0 +1,49 @@
+{
+  "name": "eslint-config-boldr",
+  "version": "0.7.0",
+  "description": "ESLint rules for Boldr.",
+  "main": "index.js",
+  "files": [
+    "index.js"
+  ],
+  "scripts": {
+    "find-new-rules": "eslint-find-rules --unused ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strues/boldr.git"
+  },
+  "keywords": [
+    "eslint",
+    "eslintconfig",
+    "config",
+    "react",
+    "javascript",
+    "styleguide"
+  ],
+  "author": "Steven Truesdell <steven@strues.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/strues/boldr/issues"
+  },
+  "homepage": "https://github.com/strues/boldr#readme",
+  "engines": {
+    "node": ">= 6"
+  },
+  "peerDependencies": {
+    "eslint": "^3.12.2",
+    "babel-eslint": "^7.1.1",
+    "eslint-import-resolver-babel-module": "^2.2.1"
+  },
+  "devDependencies": {
+    "eslint": "^3.12.2",
+    "eslint-find-rules": "^1.14.3"
+  },
+  "dependencies": {
+    "eslint-plugin-babel": "^4.0.0",
+    "eslint-plugin-flowtype": "^2.29.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-react": "^6.8.0"
+  }
+}

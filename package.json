@@ -1,7 +1,8 @@
 {
-  "name": "boldr",
-  "version": "0.6.8",
-  "description": "Your dreams are bold. Your thoughts are bold. So why shouldn't your CMS be a little Boldr?",
+  "name": "boldr-monorepo",
+  "private": "true",
+  "version": "0.7.0-alpha.0",
+  "description": "universal react content management framework",
   "main": "boldrCMS/server/index.js",
   "repository": {
     "type": "git",
@@ -29,231 +30,25 @@
     "npm": ">=3.0.0",
     "yarn": "^0.17.0"
   },
-  "betterScripts": {
-    "client": {
-      "command": "babel-node ./tools/development",
-      "env": {
-        "DEBUG": "boldr:*",
-        "NODE_ENV": "development",
-        "BABEL_ENV": "development"
-      }
-    },
-    "api": {
-      "command": "nodemon ./src/api/index.js",
-      "env": {
-        "DEBUG": "boldrAPI:*",
-        "NODE_ENV": "development",
-        "BABEL_ENV": "development"
-      }
-    }
-  },
   "scripts": {
-    "analyze": "babel-node tools/scripts/analyze",
-    "api": "better-npm-run api",
-    "apidoc": "apidoc -i src -o lib/apidoc && apidoc-markdown -p lib/apidoc -o docs/apidoc.md",
-    "babel": "NODE_ENV=production babel --ignore node_modules",
-    "build": "babel-node tools/scripts/build",
-    "build:api": "NODE_ENV=production npm run clean && npm run babel -- ./src/api -d ./boldrAPI/lib",
-    "clean": "babel-node tools/scripts/clean",
-    "cleanup": "rimraf .happypack && rimraf boldrCMS/",
-    "client": "better-npm-run client",
-    "dev": "npm-run-all -p api client",
-    "flow": "babel-node ./tools/scripts/flow",
-    "flow:defs": "flow-typed install -f 0.37 --overwrite",
-    "knex": "knex --knexfile config/knexfile.js",
-    "lint": "./node_modules/.bin/eslint src",
-    "lint:fix": "npm run lint -- --fix",
-    "migrate": "POSTGRES_CONN_URI=postgres://postgres:password@localhost:5432/boldr knex --knexfile config/knexfile.js migrate:latest",
-    "seed": "POSTGRES_CONN_URI=postgres://postgres:password@localhost:5432/boldr knex --knexfile config/knexfile.js seed:run",
-    "start": "NODE_ENV=production node bin/boldr",
-    "start:cms": "NODE_ENV=production pm2 start boldrCMS/server/index.js --name boldrSSR -e logs/boldrSSR-error.log",
-    "test:ci": "NODE_ENV=test CI=true jest -w 2",
-    "test": "NODE_ENV=test jest",
-    "test:watch": "NODE_ENV=test jest --watch=all"
-  },
-  "dll": {
-    "exclude": [
-      "colors",
-      "compression",
-      "express"
-    ],
-    "include": [
-      "core-js",
-      "lodash"
-    ]
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "^.+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/tools/test/styleMock.js",
-      "^.+\\.(css|scss)$": "<rootDir>/tools/test/styleMock.js"
-    },
-    "collectCoverage": true,
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/tools/",
-      "<rootDir>/config/",
-      "<rootDir>/docs/",
-      "<rootDir>/flow-typed/",
-      "<rootDir>/bin/",
-      "<rootDir>/boldrCMS/",
-      "<rootDir>/.happypack/",
-      "<rootDir>/public/",
-      "<rootDir>/src/client/",
-      "<rootDir>/src/common/types/",
-      "<rootDir>/src/common/theme/",
-      "<rootDir>/src/server/",
-      "<rootDir>/.hardsource"
-    ],
-    "transform": {
-      ".*": "<rootDir>/node_modules/babel-jest"
-    },
-    "testPathDirs": [
-      "<rootDir>/src"
-    ],
-    "setupTestFrameworkScriptFile": "<rootDir>/tools/test/setup.js",
-    "testPathIgnorePatterns": [
-      "<rootDir>/(tools|docs|node_modules|bin|flow-typed|public)/"
-    ],
-    "transformIgnorePatterns": [
-      "/node_modules/"
-    ],
-    "coverageReporters": [
-      "lcov",
-      "text",
-      "text-summary"
-    ]
-  },
-  "dependencies": {
-    "app-root-dir": "^1.0.2",
-    "aws-sdk": "^2.7.17",
-    "bcryptjs": "^2.4.0",
-    "bluebird": "^3.4.6",
-    "body-parser": "^1.15.2",
-    "boldr-editor": "^0.6.7",
-    "classnames": "^2.2.5",
-    "compression": "^1.6.2",
-    "connect-redis": "^3.1.0",
-    "cookie-parser": "^1.4.3",
-    "cors": "^2.8.1",
-    "date-fns": "^1.21.1",
-    "debug": "^2.5.1",
-    "dotenv": "^2.0.0",
-    "express": "^4.14.0",
-    "express-session": "^1.14.2",
-    "express-validator": "^3.1.1",
-    "express-winston": "^2.1.1",
-    "helmet": "^3.1.0",
-    "hpp": "^0.2.1",
-    "http-proxy": "^1.16.2",
-    "humps": "^2.0.0",
-    "immutability-helper": "^2.0.0",
-    "invariant": "^2.2.2",
-    "jsonwebtoken": "^7.2.1",
-    "knex": "^0.12.6",
-    "lodash": "^4.17.2",
-    "material-ui": "0.16.5",
-    "method-override": "^2.3.7",
-    "morgan": "^1.7.0",
-    "multer": "^1.2.1",
-    "multer-s3": "^2.5.0",
-    "nodemailer": "^2.7.0",
-    "normalizr": "^2.3.0",
-    "objection": "^0.6.2",
-    "objection-find": "^0.3.0",
-    "offline-plugin": "^4.5.3",
-    "passport": "^0.3.2",
-    "passport-jwt": "^2.2.1",
-    "passport-local": "^1.0.0",
-    "pg": "^6.1.2",
-    "react": "^15.4.1",
-    "react-addons-css-transition-group": "^15.4.1",
-    "react-addons-transition-group": "^15.4.1",
-    "react-dnd": "^2.1.4",
-    "react-dnd-html5-backend": "^2.1.2",
-    "react-dom": "^15.4.1",
-    "react-helmet": "^3.2.3",
-    "react-redux": "^5.0.1",
-    "react-router": "^3.0.0",
-    "react-router-redux": "^4.0.7",
-    "react-router-scroll": "^0.4.1",
-    "react-tap-event-plugin": "^2.0.1",
-    "redial": "^0.5.0",
-    "redis": "^2.6.3",
-    "redux": "^3.6.0",
-    "redux-form": "^6.3.2",
-    "redux-form-material-ui": "^4.1.2",
-    "redux-thunk": "^2.1.0",
-    "reselect": "^2.5.4",
-    "serialize-javascript": "^1.3.0",
-    "source-map-support": "^0.4.6",
-    "styled-components": "^1.2.1",
-    "superagent": "^3.3.1",
-    "uuid": "^3.0.1",
-    "webfontloader": "^1.6.27",
-    "winston": "^2.3.0"
+    "preinstall": "lerna bootstrap",
+    "build": "lerna exec npm run build",
+    "buildp": "lerna exec npm run buildp",
+    "test": "cd packages && cd boldr-cms && npm run test:ci",
+    "test-lerna": "lerna exec npm run test --single-run"
   },
   "devDependencies": {
-    "assets-webpack-plugin": "^3.5.0",
-    "babel-cli": "^6.18.0",
     "babel-core": "^6.21.0",
-    "babel-eslint": "^7.1.1",
+    "babel-eslint": "7.1.1",
     "babel-jest": "^18.0.0",
-    "babel-loader": "^6.2.10",
-    "babel-plugin-module-resolver": "2.x",
-    "babel-preset-boldr": "0.1.4",
-    "babel-preset-env": "^1.1.4",
+    "babel-preset-boldr": "^0.7.2",
+    "babel-preset-env": "1.1.4",
     "babel-preset-latest": "^6.16.0",
-    "babel-preset-stage-0": "^6.16.0",
-    "babel-register": "^6.18.0",
-    "better-npm-run": "^0.0.13",
-    "chai": "^3.5.0",
-    "chokidar": "^1.6.1",
-    "css-loader": "^0.26.1",
-    "cz-conventional-changelog": "^1.2.0",
-    "enzyme": "2",
-    "enzyme-to-json": "^1.4.5",
+    "babel-preset-react": "^6.16.0",
     "eslint": "^3.12.2",
-    "eslint-config-boldr": "1.2.5",
-    "extract-text-webpack-plugin": "2.0.0-beta.4",
-    "faker": "^3.1.0",
-    "file-loader": "^0.9.0",
-    "flow-bin": "^0.37.4",
-    "glob": "7.1.1",
-    "happypack": "^3.0.1",
-    "html-webpack-plugin": "^2.24.1",
-    "jest-cli": "^18.0.0",
-    "json-loader": "^0.5.4",
-    "match-require": "^2.0.0",
-    "md5": "^2.2.1",
-    "nock": "^9.0.2",
-    "node-notifier": "^4.6.1",
-    "node-sass": "^4.1.1",
-    "nodemon": "^1.11.0",
-    "npm-run-all": "^3.1.2",
-    "postcss-cssnext": "^2.9.0",
-    "postcss-loader": "1.2.1",
-    "postcss-smart-import": "^0.6.3",
-    "react-addons-perf": "^15.4.1",
-    "react-addons-test-utils": "^15.4.1",
-    "react-hot-loader": "3.0.0-beta.6",
-    "redbox-react": "^1.3.3",
-    "redux-mock-store": "^1.2.1",
-    "rimraf": "^2.5.4",
-    "sass-loader": "^4.1.1",
-    "sinon": "^1.17.6",
-    "style-loader": "^0.13.1",
-    "supertest": "^2.0.1",
-    "supertest-as-promised": "^4.0.2",
-    "url-loader": "^0.5.7",
-    "webpack": "2.2.0-rc.1",
-    "webpack-bundle-analyzer": "^2.2.0",
-    "webpack-dev-middleware": "^1.9.0",
-    "webpack-hot-middleware": "^2.13.2",
-    "webpack-md5-hash": "^0.0.5",
-    "webpack-node-externals": "^1.5.4"
-  },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog"
-    }
+    "eslint-config-boldr": "0.7.0",
+    "eslint-import-resolver-babel-module": "^2.2.1",
+    "lerna": "2.0.0-beta.31",
+    "semver": "5.3.0"
   }
 }

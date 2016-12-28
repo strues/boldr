@@ -1,0 +1,21 @@
+{
+  "presets": [
+    ["env", { "targets": { "node": true } }],
+    "boldr"
+  ],
+  "plugins":[
+    ["module-resolver", {
+      "root": ["./src/shared"]
+    }]
+  ],
+  "env": {
+    "test": {
+      "presets": [["boldr", { "es2015": { "modules": "commonjs" }}], "react"],
+      "plugins": [
+        ["module-resolver", {
+          "root": ["./src/shared"]
+        }]
+      ]
+    }
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "restartable": "rs",
+  "ignore": [
+    ".git",
+    "node_modules/**/node_modules",
+    "coverage/**",
+    "src/**/*.test.js",
+    "flow-typed/**",
+    "tools/**",
+    "db/**"
+  ],
+  "verbose": false,
+  "watch": [
+    "./src/api"
+  ],
+  "env": {
+    "NODE_ENV": "development",
+    "DEBUG": "boldrAPI:*"
+  },
+  "ext": "js json",
+  "exec": "babel-node src/api/index.js"
+}

@@ -1,0 +1,14 @@
+exports[`<Error404 /> renders snapshot 1`] = `
+<div
+  className="error_wrapper">
+  <Connect(Boldr)
+    helmetMeta={
+      <HelmetWrapper
+        title="404! You might be lost..." />
+    }>
+    <p>
+      Sorry, that page was not found.
+    </p>
+  </Connect(Boldr)>
+</div>
+`;

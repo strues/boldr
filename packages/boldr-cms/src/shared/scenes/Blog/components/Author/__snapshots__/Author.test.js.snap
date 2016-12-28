@@ -1,0 +1,31 @@
+exports[`<Author /> renders snapshot 1`] = `
+<div
+  className="post__sidebar-author">
+  <List>
+    <ListItem
+      autoGenerateNestedIndicator={true}
+      disableKeyboardFocus={false}
+      disabled={true}
+      initiallyOpen={false}
+      insetChildren={false}
+      leftAvatar={
+        <Avatar
+          size={40}
+          src="abcd" />
+      }
+      nestedItems={Array []}
+      nestedLevel={0}
+      onKeyboardFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+      onNestedListToggle={[Function]}
+      onTouchEnd={[Function]}
+      onTouchStart={[Function]}
+      open={null}
+      primaryTogglesNestedList={false}
+      secondaryTextLines={1}>
+       
+    </ListItem>
+  </List>
+</div>
+`;

@@ -1,0 +1,56 @@
+exports[`<PostCard /> renders snapshot 1`] = `
+<div
+  className="post__card-wrapper">
+  <Card
+    expandable={false}
+    expanded={null}
+    initiallyExpanded={false}>
+    <CardMedia
+      overlay={
+        <CardTitle
+          subtitle="Invalid Date" />
+      }>
+      <img />
+    </CardMedia>
+    <CardText>
+      <Row
+        componentClass="div">
+        <Col
+          componentClass="div"
+          xs={12}>
+          <Link
+            onlyActiveOnIndex={false}
+            style={
+              Object {
+                "float": "right",
+                "marginRight": "15px",
+                "marginTop": "15px",
+              }
+            }
+            to="/blog/undefined">
+            <RaisedButton
+              disabled={false}
+              fullWidth={false}
+              label="Read More"
+              labelPosition="after"
+              primary={true}
+              secondary={false} />
+          </Link>
+        </Col>
+      </Row>
+    </CardText>
+    <Divider
+      inset={false} />
+    <CardActions>
+      <Row
+        componentClass="div">
+        <Col
+          componentClass="div"
+          xs={12}>
+          <TagBlock />
+        </Col>
+      </Row>
+    </CardActions>
+  </Card>
+</div>
+`;

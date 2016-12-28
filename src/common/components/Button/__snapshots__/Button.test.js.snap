@@ -1,6 +1,0 @@
-exports[`test renders snapshot 1`] = `
-<button
-  className="boldr-btn boldr-btn__default"
-  disabled={false}
-  type="button" />
-`;

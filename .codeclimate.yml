@@ -3,15 +3,17 @@ engines:
     enabled: true
 ratings:
    paths:
-   - src/cms/**
-   - src/api/**
+   - packages/boldr-cms/src/**
    - "**.js"
 exclude_paths:
-- node_modules/**/*
-- volumes/**
+- **/node_modules/**/*
+- packages/boldr-editor
+- packages/babel-preset-boldr
+- packages/eslint-config-boldr
+- packages/boldr-cms/boldr/**
 - build/**
 - docs/**
 - bin/**
 - flow-typed/**
 - tools/**
-- src/**/*.test.js
+- packages/**/*.test.js

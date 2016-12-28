@@ -1,0 +1,39 @@
+{
+  "extends": ["boldr"],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": false,
+    "mocha": true,
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 2017,
+    "impliedStrict": true,
+    "sourceType": "module",
+    "jsx": true,
+  },
+  "ecmaFeatures": {
+    "defaultParams": true,
+  },
+  "plugins": ["flowtype", "import"],
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": true,
+    },
+    "import/resolver": {
+      "babel-module": {}
+    }
+  },
+  "globals": {
+    "React": true
+  },
+  "rules": {
+    "id-match": 0,
+    "no-duplicate-imports": 0,
+    "react/prefer-stateless-function": 0,
+    "import/no-unresolved": 0,
+    "babel/func-params-comma-dangle": 0,
+    "no-unused-expressions": 0,
+    }
+}

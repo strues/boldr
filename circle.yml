@@ -34,17 +34,16 @@ dependencies:
     - echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
     - sudo apt-get update -qq
     - sudo apt-get install -y -qq yarn
-    - npm prune
   cache_directories:
     - "~/.yarn-cache"
     - "node_modules"
   override:
-    - yarn install
+    - yarn run preinstall
 
 test:
   pre:
-    - make setup-db
+    - cd packages/boldr-cms; make setup-db
   override:
-    - make test-ci
+    - npm run test
   post:
       - bash <(curl -s https://codecov.io/bash)

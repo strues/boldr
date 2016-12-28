@@ -1,41 +1,25 @@
-#### Environment Configuration
-.env
 
-#### Logs
-*.log
-docs/logs
-npm-debug.log
+.DS_Store
+**/*.DS_Store
 
-## Test Coverage
-.nyc_output
-lib-cov
-coverage/**
-
-## Webpack
-.happypack/**
-.wp_cache/**
-.hardsource/**
-
-#### Editor Stuff
-boldr.sublime-project
-boldr.sublime-workspace
 .idea
 .vscode
-boldr-api.paw
+**/*.idea
+**/*.vscode
 
-yarn.lock
-
-#### Dist Directories
-boldrCMS/
-dist
 node_modules
-logs
-public/apidoc
-public/sw.js
-#### Runtime data
-pids
-*.pid
-.storybook
-stories/
+**/node_modules
 
-flow-typed
+**/flow-typed
+**/*.happypack
+
+.env
+**/*.env
+
+**/*.log
+
+**/dist
+**/build
+packages/boldr-cms/boldr/boldrCMS/
+packages/boldr-cms/boldr/boldrAPI/
+packages/boldr-editor/lib

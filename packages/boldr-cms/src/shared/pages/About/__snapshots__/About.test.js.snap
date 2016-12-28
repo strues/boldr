@@ -1,0 +1,17 @@
+exports[`<About /> renders snapshot 1`] = `
+<div>
+  <Connect(Boldr)
+    helmetMeta={
+      <HelmetWrapper
+        title="About" />
+    }>
+    Produced with ❤️ by  
+    <a
+      href="https://twitter.com/struesco"
+      rel="noopener noreferrer"
+      target="_blank">
+      Steven Truesdell
+    </a>
+  </Connect(Boldr)>
+</div>
+`;
