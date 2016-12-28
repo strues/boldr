@@ -2,10 +2,11 @@
 import React from 'react';
 import Dialog from 'material-ui/Dialog';
 import FlatButton from 'material-ui/FlatButton';
+import type { ReactChildren } from '../../types/react';
 
 type Props = {
   onClose: () => void,
-  children: ReactElement,
+  children: ReactChildren,
   title: String,
   open: Boolean,
 };

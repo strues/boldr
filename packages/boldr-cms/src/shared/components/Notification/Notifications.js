@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TransitionGroup from 'react-addons-css-transition-group';
-import { notificationDismiss } from 'state/modules/notifications/notifications';
+import { notificationDismiss } from '../../state/modules/notifications/notifications';
 import Notification from './Notification';
 
 const getter = (obj, propName) => (obj.get ? obj.get(propName) : obj[propName]);

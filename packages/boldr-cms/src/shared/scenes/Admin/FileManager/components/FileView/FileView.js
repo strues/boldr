@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Row } from 'components/index';
+import { Row } from '../../../../../components/Layout';
 import File from '../File';
 
 const FileView = props => {

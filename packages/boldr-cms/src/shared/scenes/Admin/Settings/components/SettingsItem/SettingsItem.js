@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { TableBody, TableRowColumn, TableRow } from 'material-ui/Table';
 import { connect } from 'react-redux';
-import { updateBoldrSettings } from 'state/modules/boldr/settings';
 import IconButton from 'material-ui/IconButton';
 import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
-import type { Setting } from 'types/models';
+
+import { updateBoldrSettings } from '../../../../../state/modules/boldr/settings';
+import type { Setting } from '../../../../../types/models';
 import ModifySettingForm from './ModifySettingForm';
 
 type Props = {

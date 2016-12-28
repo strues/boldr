@@ -275,10 +275,6 @@ const config = {
           mode === 'development'
             ? 'react-hot-loader/babel'
             : null,
-
-          ['module-resolver', {
-            root: ['./src/shared'],
-          }],
         ].filter(x => x != null),
       };
     },

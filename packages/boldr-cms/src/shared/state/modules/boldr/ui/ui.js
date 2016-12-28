@@ -1,4 +1,4 @@
-import { LAYOUTS } from 'core/constants';
+import { LAYOUTS } from '../../../../core/constants';
 import * as t from './constants';
 
 const INITIAL_STATE = {

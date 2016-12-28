@@ -3,11 +3,12 @@ import React, { Component } from 'react';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import type { ReactElement, ReactChildren } from 'types/react';
-import PrimaryHeader from 'components/PrimaryHeader';
-import { logout } from 'state/modules/auth';
-import { getByLabel } from 'state/modules/boldr/menu';
-import { selectSetting, getSettings } from 'state/modules/boldr/settings';
+
+import type { ReactElement, ReactChildren } from '../../types/react';
+import PrimaryHeader from '../../components/PrimaryHeader';
+import { logout } from '../../state/modules/auth';
+import { getByLabel } from '../../state/modules/boldr/menu';
+import { selectSetting, getSettings } from '../../state/modules/boldr/settings';
 
 const styled = require('styled-components').default;
 

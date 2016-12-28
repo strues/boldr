@@ -1,4 +1,10 @@
-export type Props = {
+import React, { PropTypes } from 'react';
+import { Card, CardActions, CardMedia, CardTitle } from 'material-ui/Card';
+import IconButton from 'material-ui/IconButton';
+import RemoveIcon from 'material-ui/svg-icons/action/delete-forever';
+import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
+
+type Props = {
   removeMedia?: Function,
   file?: {
     id?: string,
@@ -7,13 +13,7 @@ export type Props = {
   },
 };
 
-import React, { PropTypes } from 'react';
-import { Card, CardActions, CardMedia, CardTitle } from 'material-ui/Card';
-import IconButton from 'material-ui/IconButton';
-import RemoveIcon from 'material-ui/svg-icons/action/delete-forever';
-import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
-
-const File = (props) => {
+const File = (props: Props) => {
   function handleclick() {
     const mediaId = props.file.id;
     props.removeMedia(mediaId);

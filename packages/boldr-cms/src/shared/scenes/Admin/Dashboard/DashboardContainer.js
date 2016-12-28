@@ -3,7 +3,8 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import type { ReactElement } from 'types/react';
 import AppBar from 'material-ui/AppBar';
-import { Grid, Col, Authenticated } from 'components/index';
+
+import { Grid, Col, Authenticated } from '../../../components/index';
 import Sidebar from '../components/Sidebar';
 import { showSidebar, hideSidebar } from './reducer';
 

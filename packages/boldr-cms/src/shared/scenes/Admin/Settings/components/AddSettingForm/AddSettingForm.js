@@ -1,9 +1,10 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Row } from 'components/index';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import { TextField } from 'redux-form-material-ui';
+
+import { Row } from '../../../../../components/Layout';
 
 type Props = {
   handleSubmit?: Function,

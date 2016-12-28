@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getPageByLabel } from 'state/modules/boldr/pages';
+import { getPageByLabel } from '../../../../state/modules/boldr/pages';
 
 type Props = {
   params: Object,

@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import { connect } from 'react-redux';
-import { Grid, Row } from 'components/index';
+import { Grid, Row } from '../../../components/index';
 import PostSidebar from '../components/PostSidebar';
 import PostContent from '../components/PostContent';
 

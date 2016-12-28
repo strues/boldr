@@ -2,7 +2,7 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
 
-import { Heading, Col } from 'components/index';
+import { Heading, Col } from '../../../../components/index';
 import Author from '../Author';
 import TagBlock from '../TagBlock';
 

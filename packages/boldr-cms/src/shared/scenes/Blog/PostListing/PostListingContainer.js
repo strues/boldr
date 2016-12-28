@@ -3,11 +3,11 @@
 import React, { Component } from 'react';
 import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
-import { LAYOUTS } from 'core/constants';
-import { changeLayout } from 'state/modules/boldr/ui';
-import { getPosts, fetchPostsIfNeeded } from 'state/modules/blog/posts';
+import { LAYOUTS } from '../../../core/constants';
+import { changeLayout } from '../../../state/modules/boldr/ui';
+import { getPosts, fetchPostsIfNeeded } from '../../../state/modules/blog/posts';
 
-import type { Post } from 'types/models'; // eslint-disable-line
+import type { Post } from '../../../types/models'; // eslint-disable-line
 import PostListing from './PostListing';
 
 type Props = {

@@ -1,5 +1,5 @@
-import * as api from 'core/api';
-import { notificationSend } from 'state/modules/notifications/notifications';
+import * as api from '../../../core/api';
+import { notificationSend } from '../../../state/modules/notifications/notifications';
 
 const DELETE_ATTACHMENT_REQUEST = 'DELETE_ATTACHMENT_REQUEST';
 const DELETE_ATTACHMENT_SUCCESS = 'DELETE_ATTACHMENT_SUCCESS';

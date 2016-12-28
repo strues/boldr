@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Helmet from 'react-helmet';
-import PageTemplate from 'theme/Boldr';
+import PageTemplate from '../../theme/Boldr';
 
 function About() {
   return (

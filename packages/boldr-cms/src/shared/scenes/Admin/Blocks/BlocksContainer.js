@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
-import type { Block as BlockType } from 'types/models';
+import type { Block as BlockType } from '../../../types/models';
 import { fetchBlocks, createBlock } from './reducer';
 import Blocks from './Blocks';
 

@@ -4,9 +4,9 @@ import { Table, TableBody, TableFooter, TableHeader, TableHeaderColumn, TableRow
 import SettingIcon from 'material-ui/svg-icons/action/settings';
 import RaisedButton from 'material-ui/RaisedButton';
 import Paper from 'material-ui/Paper';
-import type { Setting } from 'types/models';
-import { showModal, hideModal } from 'state/modules/boldr/ui';
-import { Modal } from 'components/index';
+import type { Setting } from '../../../types/models';
+import { showModal, hideModal } from '../../../state/modules/boldr/ui';
+import { Modal } from '../../../components/index';
 import { SettingsItem, AddSettingForm } from './components';
 
 type Props = {

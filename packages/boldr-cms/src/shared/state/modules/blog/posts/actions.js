@@ -1,11 +1,11 @@
 /* @flow */
 import { normalize, arrayOf } from 'normalizr';
 import { camelizeKeys } from 'humps';
-import { post as postSchema } from 'core/schemas';
-import * as api from 'core/api';
-import * as notif from 'core/constants';
-import type { Post } from 'types/models';
-import { notificationSend } from 'state/modules/notifications/notifications';
+import { post as postSchema } from '../../../../core/schemas';
+import * as api from '../../../../core/api';
+import * as notif from '../../../../core/constants';
+import type { Post } from '../../../../types/models';
+import { notificationSend } from '../../../../state/modules/notifications/notifications';
 import * as t from './constants';
 
 export function togglePostLayoutView() {

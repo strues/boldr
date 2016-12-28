@@ -5,8 +5,8 @@ import dateFns from 'date-fns';
 import RaisedButton from 'material-ui/RaisedButton';
 import Divider from 'material-ui/Divider';
 import { Card, CardActions, CardMedia, CardTitle, CardText } from 'material-ui/Card';
-import { Col, Row } from 'components/index';
-import type { Post } from 'types/models';
+import { Col, Row } from '../../../../components/Layout';
+import type { Post } from '../../../../types/models';
 import TagBlock from '../TagBlock';
 
 const PostCard = (props: Post) => {

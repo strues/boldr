@@ -1,9 +1,10 @@
 /* @flow */
 import React from 'react';
 import { List, ListItem } from 'material-ui/List';
-import { Heading } from 'components/index';
 import Avatar from 'material-ui/Avatar';
 import NewIcon from 'material-ui/svg-icons/av/new-releases';
+
+import { Heading } from '../../../../components/index';
 
 type Props = {
   activities: Array<Object>

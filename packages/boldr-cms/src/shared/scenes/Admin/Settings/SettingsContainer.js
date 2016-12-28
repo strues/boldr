@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { provideHooks } from 'redial';
-import { fetchSettingsIfNeeded, getSettings } from 'state/modules/boldr/settings';
-import type { Setting } from 'types/models';
+import { fetchSettingsIfNeeded, getSettings } from '../../../state/modules/boldr/settings';
+import type { Setting } from '../../../types/models';
 import Settings from './Settings';
 
 export type Props = {

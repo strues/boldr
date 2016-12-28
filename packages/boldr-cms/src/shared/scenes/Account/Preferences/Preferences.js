@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-import { Row, Col } from 'components/Layout';
+
+import { Row, Col } from '../../../components/Layout';
 
 class Preferences extends Component {
   handleItemClick = (name) => this.setState({ activeItem: name })

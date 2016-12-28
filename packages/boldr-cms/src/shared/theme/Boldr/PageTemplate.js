@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import { Footer } from 'components/index';
+import { Footer } from '../../components/index';
 import type { ReactElement, ReactChildren } from '../../types/react';
 import HeaderWrapper from './HeaderWrapper';
 import Boldr from './Boldr';

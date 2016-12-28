@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import { isNumber } from 'lodash';
+import isNumber from 'lodash/isNumber';
 
 export type Props = {
   className?: string,

@@ -1,6 +1,6 @@
-import * as api from 'core/api';
-import { notificationSend } from 'state/modules/notifications/notifications';
-import * as notif from 'core/constants';
+import * as api from '../../../core/api';
+import { notificationSend } from '../../../state/modules/notifications/notifications';
+import * as notif from '../../../core/constants';
 
 const FETCH_BLOCKS_REQUEST = '@boldr/DASHBOARD/FETCH_BLOCKS_REQUEST';
 const FETCH_BLOCKS_SUCCESS = '@boldr/DASHBOARD/FETCH_BLOCKS_SUCCESS';

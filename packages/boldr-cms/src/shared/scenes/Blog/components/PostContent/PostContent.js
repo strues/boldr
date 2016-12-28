@@ -2,7 +2,8 @@
 import React from 'react';
 import Divider from 'material-ui/Divider';
 import Paper from 'material-ui/Paper';
-import { Col, Heading } from 'components/index';
+
+import { Col, Heading } from '../../../../components/index';
 import PostImage from '../PostImage';
 
 type Props = {

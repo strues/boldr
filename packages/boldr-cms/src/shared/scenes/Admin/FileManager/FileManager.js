@@ -6,10 +6,11 @@ import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
 import NavigationExpandMoreIcon from 'material-ui/svg-icons/navigation/expand-more';
 import MenuItem from 'material-ui/MenuItem';
-import { showModal, hideModal } from 'state/modules/boldr/ui';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Toolbar, ToolbarGroup } from 'material-ui/Toolbar';
-import { S3Uploader, Row, Col, Modal } from 'components/index';
+
+import { showModal, hideModal } from '../../../state/modules/boldr/ui';
+import { S3Uploader, Row, Col, Modal } from '../../../components/index';
 import { uploadFiles, fetchMedia, deleteMedia } from './reducer';
 import FileView from './components/FileView';
 

@@ -3,7 +3,8 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import RaisedButton from 'material-ui/RaisedButton';
 import { TextField } from 'redux-form-material-ui';
-import { Row, Col } from 'components/Layout';
+
+import { Row, Col } from '../../../components/Layout';
 import validate from './validate';
 
 type Props = {

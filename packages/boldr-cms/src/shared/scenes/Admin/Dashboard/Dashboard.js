@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { provideHooks } from 'redial';
-import Widget from 'components/Widget';
-
-import { Col, Row } from 'components/index';
-import { loadSiteActivity } from './reducer';
+import { Col, Row, Widget } from '../../../components/index';
 import ActivityWidget from '../components/ActivityWidget';
+import { loadSiteActivity } from './reducer';
 
 @provideHooks({
   fetch: ({ dispatch }) => {

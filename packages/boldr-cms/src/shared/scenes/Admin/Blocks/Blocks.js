@@ -1,8 +1,8 @@
 /* @flow */
 import React from 'react';
-import { Col, Row } from 'components/index';
 import Paper from 'material-ui/Paper';
-import type { Block as BlockType } from 'types/models';
+import type { Block as BlockType } from '../../../types/models';
+import { Col, Row } from '../../../components/index';
 import { Block, CreateBlockForm } from './components';
 
 type Props = {

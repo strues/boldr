@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { updatePost } from 'state/modules/blog/posts';
+import { updatePost } from '../../../../state/modules/blog/posts';
 import { PostEditorForm } from '../components';
 
 export type Props = {

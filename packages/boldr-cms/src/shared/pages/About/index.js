@@ -1,4 +1,4 @@
-import { getAsyncInjectors, loadRoute, errorLoading } from 'core/utils';
+import { getAsyncInjectors, loadRoute, errorLoading } from '../../core/utils';
 
 export default {
   path: 'about',

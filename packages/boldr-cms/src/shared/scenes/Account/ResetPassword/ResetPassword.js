@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import TextField from 'material-ui/TextField';
 import { Card, CardTitle, CardActions, CardText } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Grid, Col, Row } from 'components/index';
-import { resetPassword } from 'state/modules/auth/actions';
+import { Grid, Col, Row } from '../../../components/index';
+import { resetPassword } from '../../../state/modules/auth/actions';
 import ResetPasswordForm from './ResetPasswordForm';
 
 type Props = {

@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'react-router/lib/Link';
 import RaisedButton from 'material-ui/RaisedButton';
-import { Row, Heading } from 'components/index';
+import { Row, Heading } from '../../../components/index';
 import Page from './components/Page';
 
 const styled = require('styled-components').default;

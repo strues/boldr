@@ -2,9 +2,9 @@
 import React, { PureComponent } from 'react';
 import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
-import type { ReactElement } from 'types/react';
-import type { Post } from 'types/models';
-import { fetchPostsIfNeeded, getPosts, deletePost } from 'state/modules/blog/posts';
+import type { ReactElement } from '../../../../types/react';
+import type { Post } from '../../../../types/models';
+import { fetchPostsIfNeeded, getPosts, deletePost } from '../../../../state/modules/blog/posts';
 
 import PostList from './PostList';
 

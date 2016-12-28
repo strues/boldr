@@ -5,9 +5,9 @@ import { List, ListItem } from 'material-ui/List';
 import IconButton from 'material-ui/IconButton';
 import PlusIcon from 'material-ui/svg-icons/content/add';
 import Paper from 'material-ui/Paper';
-import { Row, Col, Modal } from 'components/index';
-import { showModal, hideModal } from 'state/modules/boldr/ui/actions';
-import { updateMenuDetails, addMenuDetail, getByLabel } from 'state/modules/boldr/menu';
+import { Row, Col, Modal } from '../../../components/index';
+import { showModal, hideModal } from '../../../state/modules/boldr/ui/actions';
+import { updateMenuDetails, addMenuDetail, getByLabel } from '../../../state/modules/boldr/menu';
 import NavigationEditor from './components/NavigationEditor';
 import NavigationForm from './components/NavigationForm';
 

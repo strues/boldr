@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { Card, CardTitle, CardText } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 
-import { Grid, Col, Row } from 'components/index';
-import { verifyAccount } from 'state/modules/auth/actions';
+import { Grid, Col, Row } from '../../../components/index';
+import { verifyAccount } from '../../../state/modules/auth/actions';
 
 export type Props = {
   dispatch: () => void,

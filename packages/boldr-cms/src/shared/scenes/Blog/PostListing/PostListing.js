@@ -3,8 +3,8 @@ import React from 'react';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import GridIcon from 'material-ui/svg-icons/action/view-module';
 import ListIcon from 'material-ui/svg-icons/action/view-list';
-import type { Post } from 'types/models';
-import { Grid, Row, Col } from 'components/index';
+import type { Post } from '../../../types/models';
+import { Grid, Row, Col } from '../../../components/index';
 import PostCard from '../components/PostCard';
 
 type Props = {

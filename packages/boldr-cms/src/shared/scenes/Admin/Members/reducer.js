@@ -1,6 +1,6 @@
-import { notificationSend } from 'state/modules/notifications/notifications';
-import * as api from 'core/api';
-import * as notif from 'core/constants';
+import { notificationSend } from '../../../state/modules/notifications/notifications';
+import * as api from '../../../core/api';
+import * as notif from '../../../core/constants';
 
 const LOAD_MEMBERS_REQUEST = '@boldr/dashboard/members/LOAD_MEMBERS_REQUEST';
 const LOAD_MEMBERS_SUCCESS = '@boldr/dashboard/members/LOAD_MEMBERS_SUCCESS';

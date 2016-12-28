@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
-import { fetchPagesIfNeeded, getPages } from 'state/modules/boldr/pages';
+import { fetchPagesIfNeeded, getPages } from '../../../state/modules/boldr/pages';
 import Pages from './Pages';
 
 export type Props = {

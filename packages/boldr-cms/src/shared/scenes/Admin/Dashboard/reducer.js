@@ -1,4 +1,4 @@
-import * as api from 'core/api';
+import * as api from '../../../core/api';
 
 export const LOAD_ACTIVITIES_REQUEST = '@boldr/dashboard/activity/LOAD_ACTIVITIES_REQUEST';
 export const LOAD_ACTIVITIES_SUCCESS = '@boldr/dashboard/activity/LOAD_ACTIVITIES_SUCCESS';

@@ -1,4 +1,4 @@
-import { getAsyncInjectors, loadRoute, errorLoading } from 'core/utils';
+import { getAsyncInjectors, loadRoute, errorLoading } from '../../core/utils';
 import BlogContainer from './BlogContainer';
 
 export default (store, connect) => {

@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
-import { Grid, Col, Row } from 'components/Layout';
-import { requestPostTags } from 'state/dux/tag';
+import { Grid, Col, Row } from '../../../components/Layout';
+// import { requestPostTags } from '../../../state/modules/blog/tag';
 import PostCard from '../components/PostCard';
 
 type Props = {

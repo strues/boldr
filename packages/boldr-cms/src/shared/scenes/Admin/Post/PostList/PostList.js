@@ -2,7 +2,7 @@
 import React from 'react';
 import Paper from 'material-ui/Paper';
 import List from 'material-ui/List';
-import type { Post } from 'types/models';
+import type { Post } from '../../../../types/models';
 import { PostListItem } from '../components';
 
 export type Props = {

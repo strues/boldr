@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 import { combineReducers } from 'redux';
-import { uniq } from 'lodash';
+import uniq from 'lodash/uniq';
 import * as t from './constants';
 
 export const getSettings = createSelector(

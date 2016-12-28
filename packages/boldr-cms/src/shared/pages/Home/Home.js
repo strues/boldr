@@ -3,9 +3,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import PageTemplate from 'theme/Boldr';
-import { getPageByLabel } from 'state/modules/boldr/pages';
-import { Grid, Row, Hero, Footer } from 'components/index';
+
+import PageTemplate from '../../theme/Boldr';
+import { getPageByLabel } from '../../state/modules/boldr/pages';
+import { Grid, Row, Hero, Footer } from '../../components/index';
 import { safeConfigGet } from '../../core/utils/config';
 
 type Props = {

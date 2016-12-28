@@ -1,8 +1,8 @@
 /* @flow */
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import type { Post } from 'types/models';
-import { createPost } from 'state/modules/blog/posts';
+import type { Post } from '../../../../types/models';
+import { createPost } from '../../../../state/modules/blog/posts';
 import NewPost from './NewPost';
 
 export type Props = {dispatch: Function};

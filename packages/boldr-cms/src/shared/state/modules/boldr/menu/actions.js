@@ -1,8 +1,8 @@
 import { normalize, arrayOf } from 'normalizr';
 import { camelizeKeys } from 'humps';
-import * as api from 'core/api';
-import { menu as menuSchema } from 'core/schemas';
-import * as notif from 'core/constants';
+import * as api from '../../../../core/api';
+import { menu as menuSchema } from '../../../../core/schemas';
+import * as notif from '../../../../core/constants';
 import { notificationSend } from '../../notifications/notifications';
 import * as t from './constants';
 

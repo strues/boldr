@@ -1,4 +1,4 @@
-import createReducer from 'state/reducers';
+import createReducer from '../../state/reducers';
 
 export function injectAsyncReducer(store) {
   return function injectReducer(name, asyncReducer) {

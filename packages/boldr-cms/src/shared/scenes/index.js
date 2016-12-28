@@ -1,4 +1,4 @@
-import App from 'components/App';
+import App from '../components/App';
 import About from '../pages/About';
 import Error404 from '../pages/Error404';
 import Account from './Account';

@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import {
-  RadioButtonGroup,
-  TextField,
-} from 'redux-form-material-ui';
+import { RadioButtonGroup, TextField } from 'redux-form-material-ui';
 import Drawer from 'material-ui/Drawer';
 import RaisedButton from 'material-ui/RaisedButton';
 import { RadioButton } from 'material-ui/RadioButton';
-import { Col, Row, Heading } from 'components/index';
 import { BoldrEditor } from 'boldr-editor';
+import { Col, Row, Heading } from '../../../../../components/index';
 
-import 'boldr-editor/dist/boldreditor.css';
+import 'boldr-editor/lib/boldreditor.css';
 
 const styled = require('styled-components').default;
 

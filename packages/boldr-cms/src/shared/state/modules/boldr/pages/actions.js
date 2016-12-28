@@ -1,9 +1,9 @@
 import { normalize, arrayOf } from 'normalizr';
 import { push } from 'react-router-redux';
 import { camelizeKeys } from 'humps';
-import * as api from 'core/api';
-import { page as pagesSchema } from 'core/schemas';
-import * as notif from 'core/constants';
+import * as api from '../../../../core/api';
+import { page as pagesSchema } from '../../../../core/schemas';
+import * as notif from '../../../../core/constants';
 import { notificationSend } from '../../notifications/notifications';
 import * as t from './constants';
 

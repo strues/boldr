@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
-import { Modal } from 'components/index';
-import { showModal, hideModal } from 'state/modules/boldr/ui/actions';
+import { Modal } from '../../../components/index';
+import { showModal, hideModal } from '../../../state/modules/boldr/ui/actions';
 import { MembersList, EditMemberForm } from './components';
 import { loadSiteMembers, memberSelected, updateMember } from './reducer';
 

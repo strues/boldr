@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import { createPost } from 'state/modules/blog/posts';
+import { createPost } from '../../../../state/modules/blog/posts';
 import { PostEditorForm } from '../components';
-import type { Post } from 'types/models';
+import type { Post } from '../../../../types/models';
 
 export type Props = {
   dispatch: () => void,
