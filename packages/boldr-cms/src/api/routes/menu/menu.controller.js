@@ -23,7 +23,7 @@ export async function showMenu(req, res, next) {
       .eager('[details]')
       .findById(req.params.id);
 
-    return responseHandler(null, res, 200, menu);
+    return responseHandler(res, 200, menu);
   } catch (error) {
     return next(new InternalServer(error));
   }

@@ -1,20 +1,20 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import type { ReactChildren } from 'types/react';
 import shallowCompare from 'react-addons-shallow-compare';
 import Helmet from 'react-helmet';
 import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
 import debounce from 'lodash/debounce';
-import { setMobileDevice } from 'state/modules/boldr/ui';
-import { fetchPagesIfNeeded } from 'state/modules/boldr/pages';
-import { fetchMenusIfNeeded, getByLabel } from 'state/modules/boldr/menu';
-import { fetchSettingsIfNeeded, getSettings } from 'state/modules/boldr/settings';
 
-import { Notifications } from 'components/index';
-import { isMobile as testIfMobile } from 'core/utils/helpers';
+import type { ReactChildren } from '../../types/react';
+import { setMobileDevice } from '../../state/modules/boldr/ui';
+import { fetchPagesIfNeeded } from '../../state/modules/boldr/pages';
+import { fetchMenusIfNeeded, getByLabel } from '../../state/modules/boldr/menu';
+import { fetchSettingsIfNeeded, getSettings } from '../../state/modules/boldr/settings';
+import { isMobile as testIfMobile } from '../../core/utils/helpers';
 import { safeConfigGet } from '../../core/utils/config';
+import Notifications from '../Notification';
 
 import '../../theme/styles/main.scss';
 

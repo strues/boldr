@@ -37,11 +37,10 @@ dependencies:
   cache_directories:
     - "~/.yarn-cache"
     - "node_modules"
-  override:
-    - yarn run preinstall
 
 test:
   pre:
+    - yarn run bootstrap
     - cd packages/boldr-cms; make setup-db
   override:
     - npm run test

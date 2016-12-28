@@ -31,7 +31,7 @@
     "yarn": "^0.17.0"
   },
   "scripts": {
-    "preinstall": "lerna bootstrap",
+    "bootstrap": "./node_modules/.bin/lerna bootstrap",
     "build": "lerna exec npm run build",
     "buildp": "lerna exec npm run buildp",
     "test": "cd packages && cd boldr-cms && npm run test:ci",

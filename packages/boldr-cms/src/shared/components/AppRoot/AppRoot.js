@@ -3,8 +3,10 @@ import React, { PropTypes } from 'react';
 import { Provider } from 'react-redux';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import type { ReactChildren } from 'types/react';
-import materialStyle from 'theme/Boldr/material';
+
+import type { ReactChildren } from '../../types/react';
+import materialStyle from '../../theme/Boldr/material';
+
 const muiTheme = getMuiTheme(materialStyle);
 
 type Props = {
