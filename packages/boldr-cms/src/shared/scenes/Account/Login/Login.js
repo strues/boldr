@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 import { Card, CardTitle, CardText } from 'material-ui/Card';
 
 import { Grid, Col, Row } from '../../../components/Layout';
-import { login } from '../../../state/modules/auth/actions';
+import { doLogin } from '../actions';
 import LoginForm from './LoginForm';
 
 const cardMeta = (
@@ -17,10 +17,11 @@ const cardMeta = (
 );
 type Props = {
   auth: Object,
-  login: () => void,
+  doLogin: () => void,
   redirect: String,
-  handleOnSubmit: () => void
-}
+  dispatch: () => void,
+  handleOnSubmit: () => void,
+};
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -29,10 +30,10 @@ class Login extends Component {
   props: Props;
 
   handleOnSubmit(values) {
-    const { login } = this.props;
+    const { dispatch } = this.props;
     const loginData = { email: values.email, password: values.password };
     const redir = this.props.redirect;
-    login(loginData, redir);
+    dispatch(doLogin(loginData));
   }
 
   render() {
@@ -61,11 +62,4 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    auth: state.auth,
-    redirect: ownProps.location.query.redirect,
-  };
-};
-
-export default connect(mapStateToProps, { login })(Login);
+export default connect()(Login);

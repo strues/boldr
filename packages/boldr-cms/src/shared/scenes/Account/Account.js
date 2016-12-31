@@ -5,7 +5,8 @@ import { connect } from 'react-redux';
 import PageTemplate from '../../theme/Boldr';
 import type { ReactElement } from '../../types/react';
 
-type Props = { children: ReactElement, auth: Object };
+type Props = { children: ReactElement, auth: Object }; // eslint-disable-line
+
 const Account = (props: Props) => {
   return (
     <div>

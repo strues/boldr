@@ -1,7 +1,5 @@
 /* @flow */
 
-// This file resolves the assets available from our client bundle.
-
 import fs from 'fs';
 import { resolve as pathResolve } from 'path';
 import appRootDir from 'app-root-dir';
@@ -15,7 +13,7 @@ const assetsFilePath = pathResolve(
 
 if (!fs.existsSync(assetsFilePath)) {
   throw new Error(
-    `We could not find the "${assetsFilePath}" file, which contains a list of the assets of the client bundle.  Please ensure that the client bundle has been built.`,
+    `We could not find the "${assetsFilePath}" file, which contains a list of the assets of the client bundle`,
   );
 }
 
@@ -23,10 +21,7 @@ const readAssetsJSONFile = () => JSON.parse(fs.readFileSync(assetsFilePath, 'utf
 const assetsJSON = readAssetsJSONFile();
 const assetsJSONResolver = () => (
   process.env.NODE_ENV === 'development'
-    // In development mode we always read the assets json file from disk to avoid
-    // any cases where an older version gets cached.
     ? readAssetsJSONFile()
-    // Otherwise we return the initially parsed JSON file.
     : assetsJSON
 );
 

@@ -28,7 +28,6 @@ export default class Icon extends PureComponent {
     size: 24,
     color: '#fff',
   }
-
   renderPreview() {
     return (
       <div>

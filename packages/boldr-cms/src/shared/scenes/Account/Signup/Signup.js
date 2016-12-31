@@ -6,14 +6,15 @@ import { Link } from 'react-router';
 import { Card, CardTitle, CardText } from 'material-ui/Card';
 
 import { Grid, Col, Row } from '../../../components/Layout';
-import { signup } from '../../../state/modules/auth/actions';
+import { doSignup } from '../actions';
 import SignupForm from './SignupForm';
 
 type Props = {
-  signup: () => void,
+  doSignup: () => void,
   handleOnSubmit: () => void,
   loading: Boolean,
-  auth: Object
+  auth: Object,
+  dispatch: () => void,
 };
 
 class Signup extends Component {
@@ -25,14 +26,13 @@ class Signup extends Component {
   props: Props;
 
   handleOnSubmit(values: Object) {
-    const { signup } = this.props;
-    signup({
+    this.props.dispatch(doSignup({
       email: values.email,
       password: values.password,
       first_name: values.first_name,
       last_name: values.last_name,
       display_name: values.display_name,
-    });
+    }));
   }
 
   render() {
@@ -62,11 +62,4 @@ class Signup extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    auth: state.auth,
-
-  };
-}
-
-export default connect(mapStateToProps, { signup })(Signup);
+export default connect()(Signup);

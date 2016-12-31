@@ -1,19 +1,11 @@
 SHELL  := /bin/bash
 PATH   := node_modules/.bin:$(PATH)
-DIST_CMS   := boldrCMS
+DIST_CMS   := boldr
 KNEX_FILE ?= ./config/knexfile.js
 TEST_DB ?= POSTGRES_CONN_URI=postgres://postgres:password@localhost:5432/boldr_test
 CI_DB ?= POSTGRES_CONN_URI=postgres://ubuntu@127.0.0.1:5432/circle_test
 
 .PHONY: clean
-
-clean-cms:
-	npm run clean $(DIST_CMS)
-
-clean-cache:
-	npm run clean .happypack
-
-clean: clean-cache clean-cms
 
 flow:
 	./node_modules/.bin/flow check
@@ -25,7 +17,7 @@ build-cms:
 	npm run build
 
 create-dist:
-	mkdir -p ./dist/bin && mv boldrCMS dist/boldrCMS && cp bin/boldr.js dist/bin/ && cp package.json dist/package.json && cp .env dist/.env
+	mkdir ./boldr/bin && cp bin/boldr.js boldr/bin/ && cp package.json boldr/package.json && cp .env boldr/.env
 
 build: build-cms create-dist
 

@@ -18,7 +18,7 @@ class HotNodeServer {
       `${Object.keys(compiler.options.entry)[0]}.js`,
     );
 
-    const startServer = () => {
+    const startServer = async () => {
       if (this.server) {
         this.server.kill();
         this.server = null;
@@ -29,7 +29,7 @@ class HotNodeServer {
         });
       }
 
-      const newServer = spawn('node', [compiledEntryFile]);
+      const newServer = await spawn('node', [compiledEntryFile]);
 
       log({
         title: name,

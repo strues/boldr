@@ -116,7 +116,7 @@ class HotDevelopment {
     // First the hot client server.
     return safeDisposer(this.hotClientServer)
       // Then dispose the hot node server(s).
-      .then(() => Promise.all(this.hotNodeServers.map(safeDisposer)));
+      .then(async () => await this.hotNodeServers.map(safeDisposer));
   }
 }
 

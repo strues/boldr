@@ -7,6 +7,7 @@ import 'source-map-support/register';
 
 import { resolve as pathResolve } from 'path';
 import express from 'express';
+import type { $Request, $Response, Middleware, NextFunction } from 'express';
 import compression from 'compression';
 import appRootDir from 'app-root-dir';
 import httpProxy from 'http-proxy';
@@ -16,7 +17,6 @@ import security from './middleware/security';
 import clientBundle from './middleware/clientBundle';
 import serviceWorker from './middleware/serviceWorker';
 import errorHandlers from './middleware/errorHandlers';
-
 
 // these values are to inform the proxy, which is running here, where our backend
 // api is located.
@@ -56,11 +56,6 @@ proxy.on('error', (err: Object, req: $Request, res: $Response) => {
   res.end(JSON.stringify(json));
 });
 
-// When in production mode, we will serve our service worker which was generated
-// by the offline-plugin webpack plugin. See the webpack plugins section for
-// more information.
-// Note: the service worker needs to be served from the http root of your
-// application for it to work correctly.
 if (process.env.NODE_ENV === 'production') {
   app.get(`/${config.serviceWorker.fileName}`, serviceWorker);
 }
@@ -83,6 +78,4 @@ const listener = app.listen(config.port, config.host, () =>
   console.log(`Server listening on port ${config.port}`),
 );
 
-// We export the listener as it will be handy for our development hot reloader,
-// or for exposing a general extension layer for application customisations.
 export default listener;
