@@ -19,7 +19,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import AppRoot from '../shared/components/AppRoot';
 import App from '../shared/components/App';
 import configureStore from '../shared/state/store';
-import { checkAuth } from '../shared/state/modules/auth';
+import { checkAuth } from '../shared/scenes/Account/actions';
 import { getToken } from '../shared/core/services/token';
 import ApiClient from '../shared/core/api/apiClient';
 import createRoutes from '../shared/scenes';
@@ -36,7 +36,7 @@ const container = document.querySelector('#app');
 // Superagent helper
 const apiClient = new ApiClient();
 
-const preloadedState = window.PRELOADED_STATE;
+const preloadedState = window.__PRELOADED_STATE__;
 const store = configureStore(preloadedState, browserHistory, apiClient);
 const history = syncHistoryWithStore(browserHistory, store);
 const routes = createRoutes(store, history);

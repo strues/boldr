@@ -38,9 +38,7 @@ const cspConfig = {
       'https://boldr.io',
       'https://boldrcms.s3-us-west-1.amazonaws.com',
     ],
-    // Note: Setting this to stricter than * breaks the service worker. :(
-    // I can't figure out how to get around this, so if you know of a safer
-    // implementation that is kinder to service workers please let me know.
+    manifestSrc: ["'self'"],
     connectSrc: ['*'], // ["'self'", 'ws:'],
     fontSrc: ["'self'", 'data:', 'fonts.gstatic.com'],
     objectSrc: ["'self'"],
@@ -104,28 +102,7 @@ const securityMiddleware = [
   // does this by setting the X-Content-Type-Options header to nosniff.
   // @see https://helmetjs.github.io/docs/dont-sniff-mimetype/
   helmet.noSniff(),
-
-  // Content Security Policy
-  //
-  // If you are unfamiliar with CSPs then I highly recommend that you do some
-  // reading on the subject:
-  //  - https://content-security-policy.com/
-  //  - https://developers.google.com/web/fundamentals/security/csp/
-  //  - https://developer.mozilla.org/en/docs/Web/Security/CSP
-  //  - https://helmetjs.github.io/docs/csp/
-  //
-  // If you are relying on scripts/styles/assets from other servers (internal
-  // or external to your company) then you will need to explicitly configure
-  // the CSP below to allow for this.  For example you can see I have had to
-  // add the polyfill.io CDN in order to allow us to use the polyfill script.
-  // It can be a pain to manage these, but it's a really great habit to get
-  // in to.
-  //
-  // You may find CSPs annoying at first, but it is a great habit to build.
-  // The CSP configuration is an optional item for helmet, however you should
-  // not remove it without making a serious consideration that you do not
-  // require the added security.
-  helmet.contentSecurityPolicy(cspConfig),
+  config.useCSP ? helmet.contentSecurityPolicy(cspConfig) : null,
 ];
 
 export default (securityMiddleware: Array<Middleware>);

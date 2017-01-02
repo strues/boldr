@@ -19,7 +19,7 @@ const BgOffsetBlock = styled.div`
   z-index: 5;
   background-attachment: fixed;
 `;
-export type Props = {
+type Props = {
   children: ReactElement,
   toggleOpen?: Function,
   showSidebar?: Function,
@@ -52,7 +52,7 @@ class DashboardContainer extends PureComponent {
   render() {
     return (
       <div>
-        <Sidebar open={ this.props.dashboard.open } />
+        <Sidebar open={ this.props.dashboard.open } user={ this.props.account.user } />
         <AppBar
           onLeftIconButtonTouchTap={ this.menuButtonClick }
           style={ { position: 'fixed', left: this.props.dashboard.open ? '200px' : '0px' } }
@@ -76,6 +76,7 @@ function mapStateToProps(state) {
     router: state.router,
     dashboard: state.dashboard,
     boldr: state.boldr,
+    account: state.account,
   };
 }
 

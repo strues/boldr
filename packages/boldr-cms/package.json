@@ -64,7 +64,6 @@
     "flow:report": "flow-coverage-report -i 'src/**/*.js' -t html -t json -t text",
     "flow:remove": "babel-node tools/scripts/removeFlow && rimraf tools/scripts/removeFlow.js",
     "migrate": "POSTGRES_CONN_URI=postgres://postgres:password@localhost:5432/boldr knex --knexfile config/knexfile.js migrate:latest",
-    "preinstall": "node tools/scripts/preinstall",
     "seed": "POSTGRES_CONN_URI=postgres://postgres:password@localhost:5432/boldr knex --knexfile config/knexfile.js seed:run",
     "start": "NODE_ENV=production node bin/boldr",
     "start:cms": "NODE_ENV=production pm2 start boldrCMS/server/index.js --name boldrSSR -e logs/boldrSSR-error.log",

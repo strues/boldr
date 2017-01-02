@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 import { RadioButtonGroup, TextField } from 'redux-form-material-ui';
 import Drawer from 'material-ui/Drawer';
 import RaisedButton from 'material-ui/RaisedButton';
 import { RadioButton } from 'material-ui/RadioButton';
 import { BoldrEditor } from 'boldr-editor';
 import { Col, Row, Heading } from '../../../../../components/index';
-
+import { openDrawer, closeDrawer } from '../../../../../state/modules/boldr/ui/actions';
 import 'boldr-editor/lib/boldreditor.css';
 
 const styled = require('styled-components').default;
@@ -23,6 +24,7 @@ type Props = {
   label?: string,
 };
 
+@connect()
 class PostEditorForm extends Component {
   constructor(props: Props) {
     super();
@@ -31,6 +33,7 @@ class PostEditorForm extends Component {
       edit: false,
       open: false,
     };
+    (this: any).menuButtonClick = this.menuButtonClick.bind(this);
   }
 
   componentDidMount() {
@@ -40,6 +43,17 @@ class PostEditorForm extends Component {
   checkEditStatus() {
     const EDITING = this.props.isEditing === true;
     if (EDITING) this.setState({ edit: true });
+  }
+  onSetOpen(open) {
+    this.props.dispatch(openDrawer());
+  }
+  onSetClose(open) {
+    this.props.dispatch(closeDrawer());
+  }
+  menuButtonClick(ev) {
+    ev.preventDefault();
+    const isOpen = this.props.ui.drawer;
+    isOpen ? this.onSetClose(this.state.open) : this.onSetOpen(this.state.open);
   }
   handleToggle = () => this.setState({ open: !this.state.open });
   render() {
@@ -71,7 +85,7 @@ class PostEditorForm extends Component {
       <Row>
         <Col xs>
           <form onSubmit={ handleSubmit }>
-            <Drawer width={ 350 } openSecondary open={ this.state.open } >
+            <Drawer width={ 350 } openSecondary open={ this.props.ui.drawer } >
               <Wrapper>
                 <Field
                   name="title"
@@ -129,7 +143,7 @@ class PostEditorForm extends Component {
             <RaisedButton
               secondary
               label="Continue"
-              onTouchTap={ this.handleToggle }
+              onTouchTap={ this.menuButtonClick }
             />
           </Row>
         </form>
@@ -138,6 +152,7 @@ class PostEditorForm extends Component {
     );
   }
 }
+
 export default reduxForm({
   form: 'postEditorForm',
 })(PostEditorForm);

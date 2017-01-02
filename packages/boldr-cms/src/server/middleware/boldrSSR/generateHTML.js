@@ -63,10 +63,9 @@ export default function generateHTML(args: Args) {
         }
         ${
           preloadedState
-            ? inlineScript(`window.PRELOADED_STATE=${serialize(preloadedState)};`)
+            ? inlineScript(`window.__PRELOADED_STATE__=${serialize(preloadedState)};`)
             : ''
         }
-
         ${
           config.polyfillIO.enabled
             ? scriptTag(config.polyfillIO.url)
@@ -77,7 +76,6 @@ export default function generateHTML(args: Args) {
             && config.bundles.client.devVendorDLL.enabled
             ? scriptTag(`${config.bundles.client.webPath}${config.bundles.client.devVendorDLL.name}.js?t=${Date.now()}`)
             : ''
-
         }
         ${scriptTags(assetsForRender.js)}
         ${helmet ? helmet.script.toString() : ''}

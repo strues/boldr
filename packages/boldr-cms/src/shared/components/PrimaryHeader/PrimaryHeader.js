@@ -86,7 +86,7 @@ class PrimaryHeader extends Component {
         title={
           <img src={ this.props.logo.value }
             className="ph-logo"
-            alt="logo" onClick={ this.props.handleLogoClick }
+            alt="logo" onTouchTap={ this.props.handleLogoClick }
           />
         }
         iconElementRight={

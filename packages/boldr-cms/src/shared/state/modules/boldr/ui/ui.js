@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   layout: LAYOUTS.GRID,
   isMobile: false,
   modal: false,
+  drawer: false,
 };
 
 function uiReducer(state = INITIAL_STATE, action) {
@@ -29,6 +30,16 @@ function uiReducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         modal: false,
+      };
+    case t.OPEN_DRAWER:
+      return {
+        ...state,
+        drawer: true,
+      };
+    case t.CLOSE_DRAWER:
+      return {
+        ...state,
+        drawer: false,
       };
     default:
       return state;

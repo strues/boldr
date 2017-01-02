@@ -138,7 +138,7 @@ function checkAuthSuccess(response, token) {
   return {
     type: t.CHECK_AUTH_SUCCESS,
     token: token, // eslint-disable-line
-    user: response.body.user,
+    user: response.body,
   };
 }
 

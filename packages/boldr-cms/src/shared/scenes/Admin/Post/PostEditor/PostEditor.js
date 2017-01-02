@@ -10,6 +10,7 @@ export type Props = {
   posts: Object,
   params: Object,
   currentPost: Object,
+  ui: Object,
   updatePost: Function
 };
 
@@ -42,6 +43,7 @@ class PostEditor extends Component {
         <PostEditorForm
           initialValues={ this.props.currentPost }
           onSubmit={ this.handleSubmit }
+          ui={ this.props.ui }
           isEditing
         />
       </div>
@@ -52,8 +54,9 @@ class PostEditor extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    posts: state.posts,
-    currentPost: state.posts.bySlug[ownProps.params.slug],
+    posts: state.blog.posts,
+    currentPost: state.blog.posts.bySlug[ownProps.params.slug],
+    ui: state.boldr.ui,
   };
 };
 export default connect(mapStateToProps, { updatePost })(PostEditor);

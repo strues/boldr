@@ -9,12 +9,6 @@ import { Grid, Col, Row } from '../../../components/Layout';
 import { doLogin } from '../actions';
 import LoginForm from './LoginForm';
 
-const cardMeta = (
-  <span>
-    <Link to="/account/forgot-password">Forgot your password?</Link>
-    <Link to="/account/signup">Create an account</Link>
-  </span>
-);
 type Props = {
   auth: Object,
   doLogin: () => void,
@@ -22,6 +16,12 @@ type Props = {
   dispatch: () => void,
   handleOnSubmit: () => void,
 };
+const cardMeta = (
+  <span>
+    <Link to="/account/forgot-password">Forgot your password?</Link><br />
+    <Link to="/account/signup">Create an account</Link>
+  </span>
+);
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -45,7 +45,7 @@ class Login extends Component {
               <Col xs={ 12 }>
                 <Row xsCenter>
                   <Col xs={ 6 }>
-                    <Card style={ { width: '450px' } }>
+                    <Card>
                       <CardTitle title="Log In" />
                       <CardText>
                       <LoginForm onSubmit={ this.handleOnSubmit } />

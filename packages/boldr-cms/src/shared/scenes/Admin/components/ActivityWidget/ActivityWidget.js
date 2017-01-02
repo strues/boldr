@@ -3,15 +3,16 @@ import React from 'react';
 import { List, ListItem } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import NewIcon from 'material-ui/svg-icons/av/new-releases';
-
+import Paper from 'material-ui/Paper';
 import { Heading } from '../../../../components/index';
 
 type Props = {
   activities: Array<Object>
-}
+};
 const ActivityWidget = (props: Props) => {
   return (
     <div className="activity-feed__wrap">
+    <Paper zDepth={ 1 }>
       <Heading size={ 2 }>
         <NewIcon /> Recent Activity
       </Heading>
@@ -26,6 +27,7 @@ const ActivityWidget = (props: Props) => {
         )
       }
       </List>
+      </Paper>
     </div>
   );
 };

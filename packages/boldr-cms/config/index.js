@@ -64,7 +64,7 @@ const config = {
 
   // These extensions are tried when resolving src files for our bundles..
   bundleSrcTypes: ['js', 'jsx', 'json'],
-
+  useCSP: true,
   // Additional asset types to be supported for our bundles.
   // i.e. you can import the following file types within your source and the
   // webpack bundling process will bundle them with your source and create
