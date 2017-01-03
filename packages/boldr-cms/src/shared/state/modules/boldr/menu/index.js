@@ -1,10 +1,9 @@
 import menuReducer from './menu';
-import { listMenuLabels, getMenuEntities, getByLabel, getMenus } from './selectors';
 import { fetchMenus, fetchMenusIfNeeded, updateMenuDetails, addMenuDetail } from './actions';
+import { getMenus, listMenuLabels, getMenuEntities, getByLabel } from './selectors';
 
 export default menuReducer;
 export {
-  listMenuLabels,
   getMenuEntities,
   getByLabel,
   getMenus,

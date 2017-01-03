@@ -4,12 +4,11 @@ import TextField from 'material-ui/TextField';
 import { Card, CardTitle, CardActions, CardText } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Grid, Col, Row } from '../../../components/Layout';
-import { forgotPassword } from '../../../state/modules/auth/actions';
+import { forgotPassword } from '../actions';
 import ForgotPasswordForm from './ForgotPasswordForm';
 
 export type Props = {
   dispatch?: Function,
-  account?: Object,
 };
 
 class ForgotPassword extends PureComponent {
@@ -41,10 +40,4 @@ class ForgotPassword extends PureComponent {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    auth: state.auth,
-  };
-};
-
-export default connect(mapStateToProps)(ForgotPassword);
+export default connect()(ForgotPassword);

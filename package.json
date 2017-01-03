@@ -37,6 +37,46 @@
     "test": "cd packages && cd boldr-cms && npm run test:ci",
     "test-lerna": "lerna exec npm run test --single-run"
   },
+  "jest": {
+    "moduleNameMapper": {
+      "^.*\\.scss$": "<rootDir>/tools/jest/styleMock.js"
+    },
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/packages/boldr-cms/tools/",
+      "<rootDir>/packages/boldr-cms/config/",
+      "<rootDir>/packages/boldr-cms/docs/",
+      "/flow-typed/",
+      "<rootDir>/bin/",
+      "<rootDir>/boldr/boldrCMS",
+      "<rootDir>/boldr/boldrAPI",
+      "/node_modules/",
+      "<rootDir>/packages/boldr-cms/.happypack/",
+      "<rootDir>/public/",
+      "<rootDir>/src/client/",
+      "<rootDir>/packages/boldr-cms/src/shared/theme/",
+      "<rootDir>/src/server/"
+    ],
+    "transform": {
+      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+    },
+    "testRegex": ".*.test\\.js",
+    "setupTestFrameworkScriptFile": "<rootDir>/tools/jest/testSetup.js",
+    "testPathIgnorePatterns": [
+      "<rootDir>/packages/boldr-cms/(tools|docs|node_modules|bin|flow-typed|public)/"
+    ],
+    "transformIgnorePatterns": [
+      "/node_modules/",
+      "/boldr/boldrCMS/",
+      "/boldr/boldrAPI/",
+      "/db/"
+    ],
+    "coverageReporters": [
+      "lcov",
+      "text",
+      "text-summary"
+    ]
+  },
   "devDependencies": {
     "babel-core": "^6.21.0",
     "babel-eslint": "7.1.1",
@@ -45,8 +85,12 @@
     "babel-preset-env": "1.1.4",
     "babel-preset-latest": "^6.16.0",
     "babel-preset-react": "^6.16.0",
+    "enzyme": "^2.7.0",
+    "enzyme-to-json": "^1.4.5",
     "eslint": "^3.12.2",
     "eslint-config-boldr": "0.7.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jasmine-reporters": "^2.2.0",
     "lerna": "2.0.0-beta.31",
     "semver": "5.3.0"
   }

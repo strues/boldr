@@ -11,15 +11,19 @@ import { updateMenuDetails, addMenuDetail, getByLabel } from '../../../state/mod
 import NavigationEditor from './components/NavigationEditor';
 import NavigationForm from './components/NavigationForm';
 
-
 function mapStateToProps(state) {
-  return { navigation: getByLabel(state, 'main'), ui: state.boldr.ui };
+  return { mainMenu: state.boldr.menu.main, ui: state.boldr.ui };
 }
 
 export type Props = {
-  navigation: Object,
+  mainMenu: Object,
+  ui: Object,
   dispatch?: Function,
   handleItemClick?: Function,
+  updateMenuDetails: Function,
+  addMenuDetail: Function,
+  hideModal: Function,
+  showModal: Function,
 };
 
 @connect(mapStateToProps, { updateMenuDetails, addMenuDetail, showModal, hideModal })
@@ -69,8 +73,8 @@ class Navigation extends Component {
   }
 
   render() {
-    const { navigation } = this.props;
-    const listItems = navigation.details.map((item, i) => {
+    const { mainMenu } = this.props;
+    const listItems = mainMenu.details.map((item, i) => {
       return <ListItem key={ i } primaryText={ item.name } onClick={ () => this.handleItemClick(item) } />;
     });
 

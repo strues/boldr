@@ -5,9 +5,26 @@ describe('Menu Duck', () => {
     expect(
         menuReducer(undefined, {}),
       ).toEqual({
-        byLabel: {
+        main: {
+          id: -1,
+          uuid: '',
+          name: '',
+          label: '',
+          attributes: {},
+          restricted: false,
+          order: -1,
+          details: [{
+            id: -1,
+            uuid: '',
+            label: '',
+            name: '',
+            attribute: '',
+            position: '',
+            parent_id: '',
+            link: '',
+            icon: '',
+          }],
         },
-        labels: [],
       });
   });
 });

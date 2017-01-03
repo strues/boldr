@@ -5,10 +5,10 @@ import { RadioButtonGroup, TextField } from 'redux-form-material-ui';
 import Drawer from 'material-ui/Drawer';
 import RaisedButton from 'material-ui/RaisedButton';
 import { RadioButton } from 'material-ui/RadioButton';
-import { BoldrEditor } from 'boldr-editor';
+import { BoldrEditor } from '../../../../../components/BoldrEditor';
 import { Col, Row, Heading } from '../../../../../components/index';
 import { openDrawer, closeDrawer } from '../../../../../state/modules/boldr/ui/actions';
-import 'boldr-editor/lib/boldreditor.css';
+// import 'boldr-editor/lib/boldreditor.css';
 
 const styled = require('styled-components').default;
 
@@ -19,12 +19,13 @@ type Props = {
   isEditing?: boolean,
   submitting?: boolean,
   fields?: Object,
+  dispatch: Function,
   pristine?: boolean,
   input?: Object,
+  drawer: boolean,
   label?: string,
 };
 
-@connect()
 class PostEditorForm extends Component {
   constructor(props: Props) {
     super();
@@ -52,7 +53,7 @@ class PostEditorForm extends Component {
   }
   menuButtonClick(ev) {
     ev.preventDefault();
-    const isOpen = this.props.ui.drawer;
+    const isOpen = this.props.drawer;
     isOpen ? this.onSetClose(this.state.open) : this.onSetOpen(this.state.open);
   }
   handleToggle = () => this.setState({ open: !this.state.open });
@@ -85,7 +86,7 @@ class PostEditorForm extends Component {
       <Row>
         <Col xs>
           <form onSubmit={ handleSubmit }>
-            <Drawer width={ 350 } openSecondary open={ this.props.ui.drawer } >
+            <Drawer width={ 350 } openSecondary open={ this.props.drawer } >
               <Wrapper>
                 <Field
                   name="title"

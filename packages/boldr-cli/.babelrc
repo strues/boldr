@@ -1,3 +1,0 @@
-{
-  "presets": [["boldr", { "es2015": { "modules": false }}]]
-}

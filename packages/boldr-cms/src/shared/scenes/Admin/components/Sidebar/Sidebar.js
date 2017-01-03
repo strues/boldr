@@ -60,10 +60,6 @@ const Sidebar = (props: Props) => {
       <Link to="/admin/navigation">
         <MenuItem leftIcon={ <LinkIcon /> }>Navigation</MenuItem>
       </Link>
-
-      <Link to="/admin/settings">
-        <MenuItem leftIcon={ <SettingsIcon /> }>Settings</MenuItem>
-      </Link>
     </Drawer>
   );
 };

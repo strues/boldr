@@ -35,6 +35,7 @@ const cspConfig = {
       // If you use Base64 encoded images (i.e. inlined images), then you will
       // need the following:
       'data:',
+      'http://lorempixel.com',
       'https://boldr.io',
       'https://boldrcms.s3-us-west-1.amazonaws.com',
     ],

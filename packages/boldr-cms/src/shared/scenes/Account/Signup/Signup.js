@@ -12,8 +12,6 @@ import SignupForm from './SignupForm';
 type Props = {
   doSignup: () => void,
   handleOnSubmit: () => void,
-  loading: Boolean,
-  auth: Object,
   dispatch: () => void,
 };
 

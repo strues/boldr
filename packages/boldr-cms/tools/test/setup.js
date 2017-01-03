@@ -1,5 +1,4 @@
-require('babel-register')();
-const { EventEmitter } = require('events').EventEmitter;
+import { EventEmitter } from 'events';
 import { shallow, render, mount } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
 global.shallow = shallow;
@@ -8,12 +7,13 @@ global.render = mount;
 global.shallowToJson = shallowToJson;
 // Skip createElement warnings but fail tests on any other warning
 console.error = message => {
-    if (!/(React.createElement: type should not be null)/.test(message)) {
-        throw new Error(message);
-    }
+  if (!/(React.createElement: type should not be null)/.test(message)) {
+    throw new Error(message);
+  }
 };
+
 EventEmitter.defaultMaxListeners = Infinity
-jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000
+
 
 global.Array = Array
 global.Date = Date

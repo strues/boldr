@@ -1,8 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import classNames from 'classnames/bind';
-import styles from './style.css';
-
-const cx = classNames.bind(styles);
 
 const inline = {
   zIndex: '99999',
@@ -67,17 +63,17 @@ class Notification extends Component {
   render() {
     const { kind, actionLabel } = this.props;
     return (
-        <div style={ inline } className={ cx(`notification notification--${kind}`) }>
-          <div className={ cx('notification__icon') } />
-          <div className={ cx('notification__content') }>
-            <span className={ cx('notification__message') }>{ this.props.message }</span>
+        <div style={ inline } className="notification">
+          <div className="notification__icon" />
+          <div className="notification__content">
+            <span className="notification__message">{ this.props.message }</span>
           </div>
           { actionLabel &&
-            <span className={ cx('notification__action') }>
+            <span className="notification__action">
               <button onClick={ this._onActionClick }>{ this.props.actionLabel }</button>
             </span>
           }
-          <div className={ cx('notification__close') } />
+          <div className="notification__close" />
       </div>
     );
   }

@@ -5,7 +5,7 @@ import { Card, CardTitle, CardText } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import { Grid, Col, Row } from '../../../components/index';
-import { verifyAccount } from '../../../state/modules/auth/actions';
+import { verifyAccount } from '../actions';
 
 export type Props = {
   dispatch: () => void,
@@ -47,8 +47,5 @@ class Verify extends Component {
     );
   }
 }
-const mapStateToProps = (state) => {
-  return state;
-};
 
-export default connect(mapStateToProps)(Verify);
+export default connect()(Verify);

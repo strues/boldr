@@ -1,35 +1,50 @@
 import { combineReducers } from 'redux';
 import * as t from './constants';
 
-const byLabel = (state = {}, action) => {
+const INITIAL_STATE = {
+  id: -1,
+  uuid: '',
+  name: '',
+  label: '',
+  attributes: {},
+  restricted: false,
+  order: -1,
+  details: [{
+    id: -1,
+    uuid: '',
+    label: '',
+    name: '',
+    attribute: '',
+    position: '',
+    parent_id: '',
+    link: '',
+    icon: '',
+  }],
+};
+
+const main = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case t.FETCH_MENUS_SUCCESS:
-      Object.keys(action.payload.entities.menus).forEach(label => {
-        Object.assign(action.payload.entities.menus[label]);
-      });
+    case t.GET_MAIN_MENU_SUCCESS:
       return {
         ...state,
-        ...action.payload.entities.menus,
+        loading: false,
         loaded: true,
-
+        id: action.payload.id,
+        uuid: action.payload.uuid,
+        name: action.payload.name,
+        label: action.payload.label,
+        attributes: action.payload.attributes,
+        restricted: action.payload.restricted,
+        order: action.payload.order,
+        details: action.payload.details,
       };
     default:
       return state;
   }
 };
 
-const labels = (state = [], action) => {
-  switch (action.type) {
-    case t.FETCH_MENUS_SUCCESS:
-      return [...state, ...action.payload.result];
-    default:
-      return state;
-  }
-};
-
 const menuReducer = combineReducers({
-  byLabel,
-  labels,
+  main,
 });
 
 export default menuReducer;

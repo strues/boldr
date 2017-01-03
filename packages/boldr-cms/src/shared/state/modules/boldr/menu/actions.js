@@ -1,4 +1,3 @@
-import { normalize, arrayOf } from 'normalizr';
 import { camelizeKeys } from 'humps';
 import * as api from '../../../../core/api';
 import { menu as menuSchema } from '../../../../core/schemas';
@@ -9,12 +8,10 @@ import * as t from './constants';
 export function fetchMenus() {
   return dispatch => {
     dispatch(beginFetchMenus());
-    return api.getAllNavs()
+    return api.getMainNav()
       .then(response => {
-        const camelizeThis = response.body;
-        const camelizedJson = camelizeKeys(camelizeThis);
-        const normalized = normalize(camelizedJson, arrayOf(menuSchema));
-        return dispatch(fetchMenusSuccess(normalized));
+        const menuData = response.body;
+        return dispatch(fetchMenusSuccess(menuData));
       })
       .catch(error => {
         dispatch(fetchMenusError(error));
@@ -32,7 +29,7 @@ export function fetchMenusIfNeeded() {
 }
 
 function shouldFetchMenus(state) {
-  const menu = state.boldr.menu.labels;
+  const menu = state.boldr.menu.main;
   if (!menu.length) {
     return true;
   }
@@ -44,20 +41,20 @@ function shouldFetchMenus(state) {
 
 function beginFetchMenus() {
   return {
-    type: t.FETCH_MENUS_REQUEST,
+    type: t.GET_MAIN_MENU_REQUEST,
   };
 }
 function fetchMenusError(error) {
   return {
-    type: t.FETCH_MENUS_FAILURE,
+    type: t.GET_MAIN_MENU_FAILURE,
     error,
   };
 }
 
-function fetchMenusSuccess(normalized) {
+function fetchMenusSuccess(menuData) {
   return {
-    type: t.FETCH_MENUS_SUCCESS,
-    payload: normalized,
+    type: t.GET_MAIN_MENU_SUCCESS,
+    payload: menuData,
   };
 }
 

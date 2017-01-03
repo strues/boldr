@@ -7,7 +7,6 @@ import { bindActionCreators } from 'redux';
 import type { ReactElement, ReactChildren } from '../../types/react';
 import PrimaryHeader from '../../components/PrimaryHeader';
 import { logout } from '../../scenes/Account/actions';
-import { getByLabel } from '../../state/modules/boldr/menu';
 import { selectSetting, getSettings } from '../../state/modules/boldr/settings';
 
 const styled = require('styled-components').default;
@@ -29,10 +28,10 @@ type Props = {
 const mapStateToProps = (state: Object) => {
   return {
     boldr: state.boldr,
-    settings: getSettings(state),
+    settings: state.boldr.settings,
     logo: selectSetting(state, 'site_logo'),
     auth: state.account.auth,
-    menu: getByLabel(state, 'main'),
+    menu: state.boldr.menu.main,
   };
 };
 

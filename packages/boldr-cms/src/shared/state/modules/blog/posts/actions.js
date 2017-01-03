@@ -1,7 +1,7 @@
 /* @flow */
 import { normalize, arrayOf } from 'normalizr';
 import { camelizeKeys } from 'humps';
-import { post as postSchema } from '../../../../core/schemas';
+
 import * as api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import type { Post } from '../../../../types/models';
@@ -83,7 +83,7 @@ const requestPosts = () => {
 const receivePosts = (response) => {
   return {
     type: t.FETCH_POSTS_SUCCESS,
-    payload: response.body.results
+    payload: response.body.results,
   };
 };
 

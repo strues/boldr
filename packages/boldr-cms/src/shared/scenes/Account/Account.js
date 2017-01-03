@@ -19,8 +19,8 @@ const Account = (props: Props) => {
 
 function mapStateToProps(state) {
   return {
-    auth: state.auth,
+    auth: state.account.auth,
   };
 }
 
-export default connect(mapStateToProps, null)(Account);
+export default connect(mapStateToProps)(Account);

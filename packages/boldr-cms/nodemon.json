@@ -17,6 +17,5 @@
     "NODE_ENV": "development",
     "DEBUG": "boldrAPI:*"
   },
-  "ext": "js json",
-  "exec": "babel-node src/api/index.js"
+  "ext": "js json"
 }

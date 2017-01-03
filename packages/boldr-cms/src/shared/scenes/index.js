@@ -22,3 +22,24 @@ export default function createRoutes(store) {
   };
   return root;
 }
+
+/*
+function createChildRoutes(store) {
+  return [
+    Account(store),
+    Blog(store),
+    Admin(store),
+    Home,
+    About,
+    Error404,
+  ];
+}
+
+export default function createRootRoute(store) {
+  return {
+    component: App,
+    childRoutes: createChildRoutes(store),
+  };
+}
+
+*/

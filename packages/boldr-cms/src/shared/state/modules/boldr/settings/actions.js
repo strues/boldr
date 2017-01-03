@@ -2,7 +2,7 @@ import { normalize, arrayOf } from 'normalizr';
 import { push } from 'react-router-redux';
 import { camelizeKeys } from 'humps';
 import * as api from '../../../../core/api';
-import { setting as settingSchema } from '../../../../core/schemas';
+
 import * as notif from '../../../../core/constants';
 import { notificationSend } from '../../notifications/notifications';
 import * as t from './constants';
@@ -30,9 +30,8 @@ export function loadBoldrSettings() {
     dispatch(loadSettings());
     return api.getAllSettings()
       .then(response => {
-        const camelizedJson = camelizeKeys(response.body);
-        const normalized = normalize(camelizedJson, arrayOf(settingSchema));
-        return dispatch(doneLoadSettings(normalized));
+        const settingData = response.body;
+        return dispatch(doneLoadSettings(settingData));
       })
       .catch(error => {
         dispatch(failLoadSettings(error));
@@ -60,10 +59,10 @@ const loadSettings = () => ({
   type: t.FETCH_SETTINGS_REQUEST,
 });
 
-function doneLoadSettings(normalized) {
+function doneLoadSettings(settingData) {
   return {
     type: t.FETCH_SETTINGS_SUCCESS,
-    payload: normalized,
+    payload: settingData,
   };
 }
 

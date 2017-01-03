@@ -101,8 +101,8 @@ export const getAllSettings = () =>
     * @exports doUpdateNavigationLinks
     *****************************************************************/
 
-export const getAllNavs = () =>
-  apiClient.get('/menus');
+export const getMainNav = () =>
+  apiClient.get('/menus/1');
 
 export const doUpdateMenuDetails = (data) =>
   apiClient.put(`/menu-details/${data.id}`, { data });

@@ -52,7 +52,7 @@ export class PostListingContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    posts: getPosts(state),
+    posts: state.blog.posts.list,
     ui: state.boldr.ui,
   };
 };

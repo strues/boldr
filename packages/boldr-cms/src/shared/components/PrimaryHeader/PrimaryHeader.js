@@ -84,7 +84,7 @@ class PrimaryHeader extends Component {
         zDepth={ 1 }
         showMenuIconButton={ false }
         title={
-          <img src={ this.props.logo.value }
+          <img src="https://boldr.io/boldr.png"
             className="ph-logo"
             alt="logo" onTouchTap={ this.props.handleLogoClick }
           />

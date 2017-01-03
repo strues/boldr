@@ -12,9 +12,4 @@ export function getByLabel(state, label) {
   return state.boldr.menu.byLabel[label];
 }
 
-export const getMenus = createSelector(
-  [listMenuLabels, getMenuEntities],
-  //  (state) => state.boldr.nav.labels,
-  //  (state) => state.boldr.nav.byLabel
-  (labels, byLabel) => labels.map(label => byLabel[label]),
-);
+export const getMenus = state => state.boldr.menu;

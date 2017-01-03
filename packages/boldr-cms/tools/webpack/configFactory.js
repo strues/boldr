@@ -51,11 +51,7 @@ export default function webpackConfigFactory(buildOptions: BuildOptions) {
       __filename: true,
     },
     externals: removeEmpty([
-      ifNode(
-        () => nodeExternals(
-          { whitelist: config.nodeBundlesIncludeNodeModuleFileTypes },
-        ),
-      ),
+      ifNode([nodeExternals()]),
     ]),
     devtool: ifElse(
         isNode

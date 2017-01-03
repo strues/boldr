@@ -13,6 +13,7 @@ describe('UI Duck', () => {
         layout: 'grid',
         isMobile: false,
         modal: false,
+        drawer: false,
       });
   });
   it('should open the modal', () => {
@@ -21,12 +22,14 @@ describe('UI Duck', () => {
       layout: 'grid',
       isMobile: false,
       modal: false,
+      drawer: false,
     };
     const stateAfter = {
       loaded: false,
       layout: 'grid',
       isMobile: false,
       modal: true,
+      drawer: false,
     };
     expect(
       uiReducer(initialState, {
@@ -40,12 +43,14 @@ describe('UI Duck', () => {
       layout: 'grid',
       isMobile: false,
       modal: true,
+      drawer: false,
     };
     const stateAfter = {
       loaded: false,
       layout: 'grid',
       isMobile: false,
       modal: false,
+      drawer: false,
     };
     expect(
       uiReducer(initialState, {
@@ -63,6 +68,7 @@ describe('UI Duck', () => {
       layout: 'grid',
       isMobile: false,
       modal: false,
+      drawer: false,
     };
 
     expect(
@@ -72,6 +78,7 @@ describe('UI Duck', () => {
       layout: 'list',
       isMobile: false,
       modal: false,
+      drawer: false,
     });
   });
 });
@@ -86,12 +93,13 @@ test('changeLayout', () => {
       layout: 'grid',
       isMobile: false,
       modal: false,
+      drawer: false,
     },
   });
   store.dispatch(changeLayout('list'));
   const action = store.getActions()[0];
   expect(action).toEqual({
-    type: '@boldr/CHANGE_LAYOUT',
+    type: '@boldr/ui/CHANGE_LAYOUT',
     payload: 'list',
   });
 });
@@ -106,12 +114,13 @@ test('openModal', () => {
       layout: 'grid',
       isMobile: false,
       modal: false,
+      drawer: false,
     },
   });
   store.dispatch(showModal());
   const action = store.getActions()[0];
   expect(action).toEqual({
-    type: '@boldr/MODAL_OPEN',
+    type: '@boldr/ui/MODAL_OPEN',
   });
 });
 
@@ -124,13 +133,14 @@ test('closeModal', () => {
       loaded: false,
       layout: 'grid',
       isMobile: false,
-      modal: false,
+      modal: true,
+      drawer: false,
     },
   });
   store.dispatch(hideModal());
   const action = store.getActions()[0];
   expect(action).toEqual({
-    type: '@boldr/MODAL_CLOSED',
+    type: '@boldr/ui/MODAL_CLOSED',
   });
 });
 
@@ -144,12 +154,13 @@ test('Set mobile device', () => {
       layout: 'grid',
       isMobile: false,
       modal: false,
+      drawer: false,
     },
   });
   store.dispatch(setMobileDevice());
   const action = store.getActions()[0];
   expect(action).toEqual({
-    type: '@boldr/SET_MOBILE_DEVICE',
+    type: '@boldr/ui/SET_MOBILE_DEVICE',
     payload: true,
   });
 });

@@ -9,6 +9,7 @@ import type { Post } from '../../../../types/models';
 export type Props = {
   dispatch: () => void,
   params?: Object,
+  drawer: boolean,
   currentPost?: Object,
   onFormSubmit?: () => void,
   handleSubmit: () => void,
@@ -39,6 +40,7 @@ class NewPost extends Component {
     return (
       <div>
         <PostEditorForm
+          drawer={ this.props.drawer }
           isEditing={ false }
           onSubmit={ this.props.onFormSubmit }
         />
@@ -50,7 +52,8 @@ class NewPost extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.posts,
+    posts: state.blog.posts,
+    drawer: state.boldr.ui.drawer,
   };
 };
 export default connect(mapStateToProps, { createPost })(NewPost);

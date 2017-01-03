@@ -32,7 +32,7 @@ WebFontLoader.load({
   google: { families: ['Roboto Slab:100,400,700', 'Roboto:300,400,700'] },
 });
 // Get the DOM Element that will host our React application.
-const container = document.querySelector('#app');
+const domNode = document.querySelector('#app');
 // Superagent helper
 const apiClient = new ApiClient();
 
@@ -59,32 +59,30 @@ const onRouteUpdate = compose(
   after(2, triggerLocals('defer')),
   after(3, triggerLocals('fetch'))
 );
-function renderApp(TheApp) {
-  render(
-      <ReactHotLoader>
-        <AppRoot store={ store }>
-            <Router
-              history={ history }
-              routes={ routes }
-              helpers={ apiClient }
-              render={ applyRouterMiddleware(useScroll()) }
-            />
-        </AppRoot>
-      </ReactHotLoader>,
-      container,
-    );
-}
+
+const renderApp = () => (
+  <ReactHotLoader>
+    <AppRoot store={ store }>
+        <Router
+          history={ history }
+          routes={ routes }
+          helpers={ apiClient }
+          render={ applyRouterMiddleware(useScroll()) }
+        />
+    </AppRoot>
+  </ReactHotLoader>
+);
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
-  module.hot.accept('./index.js');
   module.hot.accept(
     '../shared/scenes',
-    () => renderApp(require('../shared/scenes').default),
+    () => {
+      require('../shared/scenes'),
+      render(renderApp(), domNode);
+    }
   );
 }
-
-// Execute the first render of our app.
-renderApp(App);
+render(renderApp(), domNode);
 
 // This registers our service worker for asset caching and offline support.
 // Keep this as the last item, just in case the code execution failed (thanks

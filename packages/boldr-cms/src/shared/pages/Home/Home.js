@@ -5,18 +5,10 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 
 import PageTemplate from '../../theme/Boldr';
-import { getPageByLabel } from '../../state/modules/boldr/pages';
 import { Grid, Row, Hero, Footer } from '../../components/index';
 import { safeConfigGet } from '../../core/utils/config';
 
-type Props = {
-  loaded: Boolean,
-  pages: Object,
-  entities: Object,
-  dispatch: Function
-};
-
-const Home = (props: Props) => {
+const Home = () => {
   return (
       <PageTemplate
         helmetMeta={ <Helmet title="Home" /> }
@@ -32,11 +24,5 @@ const Home = (props: Props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  const pageLabel = 'home';
-  return {
-    page: getPageByLabel(state, pageLabel),
-  };
-};
 
-export default connect(mapStateToProps)(Home);
+export default Home;
