@@ -79,7 +79,7 @@ After Boldr has started visit <http://localhost:3000>. The admin account is alre
 > Email - admin@boldr.io<br>
 > Password - password
 
-Settings for the build process as well as misc configurations are located within the config directory in the `index.js` file.
+Settings for the build process as well as misc configurations located within the config directory in the `index.js` file.
 
 ### Production
 
