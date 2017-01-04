@@ -30,7 +30,7 @@
     "yarn": "^0.17.0"
   },
   "betterScripts": {
-    "client": {
+    "dev": {
       "command": "babel-node ./tools/development",
       "env": {
         "DEBUG": "boldr:*",
@@ -44,8 +44,7 @@
     "babel": "NODE_ENV=production babel --ignore node_modules",
     "build": "babel-node tools/scripts/build",
     "clean": "babel-node tools/scripts/clean",
-    "client": "better-npm-run client",
-    "dev": "npm-run-all -p api client",
+    "dev": "better-npm-run dev",
     "development": "babel-node tools/development",
     "lint": "eslint src",
     "flow": "babel-node tools/scripts/flow",
@@ -79,7 +78,7 @@
     "invariant": "^2.2.2",
     "lodash": "^4.17.4",
     "material-ui": "0.16.6",
-    "normalizr": "3.0.0",
+    "normalizr": "3.0.2",
     "offline-plugin": "4.5.3",
     "ramda": "^0.23.0",
     "react": "15.4.1",
@@ -130,13 +129,12 @@
     "flow-typed": "2.0.0",
     "glob": "7.1.1",
     "happypack": "3.0.2",
-    "html-webpack-plugin": "2.25.0",
+    "html-webpack-plugin": "2.26.0",
     "jest-cli": "^18.1.0",
     "md5": "2.2.1",
     "nock": "^9.0.2",
     "node-notifier": "4.6.1",
     "node-sass": "^4.1.1",
-    "npm-run-all": "^4.0.0",
     "postcss-cssnext": "^2.9.0",
     "postcss-loader": "^1.2.1",
     "react-addons-test-utils": "^15.4.1",
@@ -150,7 +148,7 @@
     "webpack": "2.2.0-rc.3",
     "webpack-bundle-analyzer": "2.2.1",
     "webpack-dev-middleware": "1.9.0",
-    "webpack-hot-middleware": "2.14.0",
+    "webpack-hot-middleware": "2.15.0",
     "webpack-md5-hash": "0.0.5",
     "webpack-node-externals": "1.5.4"
   }

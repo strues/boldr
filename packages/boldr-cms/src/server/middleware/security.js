@@ -29,6 +29,7 @@ const cspConfig = {
       "'unsafe-inline'",
       'blob:',
       'fonts.googleapis.com',
+      'maxcdn.bootstrapcdn.com',
     ],
     imgSrc: [
       "'self'",

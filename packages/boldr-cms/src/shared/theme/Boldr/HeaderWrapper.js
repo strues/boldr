@@ -4,10 +4,12 @@ import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
+
 import type { ReactElement, ReactChildren } from '../../types/react';
 import PrimaryHeader from '../../components/PrimaryHeader';
 import { logout } from '../../scenes/Account/actions';
 import { selectSetting, getSettings } from '../../state/modules/boldr/settings';
+import { expandNavbar, collapseNavbar } from '../../state/modules/boldr/ui/actions';
 
 const styled = require('styled-components').default;
 
@@ -18,11 +20,16 @@ type Props = {
   children: ReactChildren,
   footer?: ReactElement,
   navigate: Function,
-  actions: ?Object,
+  actions: Object,
+  ui: Object,
   menu: Object,
   settings: Object,
   logo: Object,
   auth: Object,
+};
+
+type State = {
+  collapsed: boolean,
 };
 
 const mapStateToProps = (state: Object) => {
@@ -32,12 +39,13 @@ const mapStateToProps = (state: Object) => {
     logo: selectSetting(state, 'site_logo'),
     auth: state.account.auth,
     menu: state.boldr.menu.main,
+    ui: state.boldr.ui,
   };
 };
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    actions: bindActionCreators({ logout, pushState: push }, dispatch),
+    actions: bindActionCreators({ logout, expandNavbar, collapseNavbar, pushState: push }, dispatch),
     navigate: (url) => dispatch(push(url)),
     dispatch,
   };
@@ -52,7 +60,11 @@ class HeaderWrapper extends Component {
     this.handleDashClick = this.handleDashClick.bind(this);
     this.handleProfileClick = this.handleProfileClick.bind(this);
     this.handlePrefClick = this.handlePrefClick.bind(this);
+    (this: any).onCollapse = this.onCollapse.bind(this);
+    (this: any).onExpand = this.onExpand.bind(this);
+    (this: any).toggleNavbar = this.toggleNavbar.bind(this);
   }
+  state: State;
 
   handleLogoClick = (e) => {
     this.props.navigate('/');
@@ -71,6 +83,17 @@ class HeaderWrapper extends Component {
   }
 
   props: Props;
+
+  onExpand() {
+    this.props.actions.expandNavbar();
+  }
+  onCollapse() {
+    this.props.actions.collapseNavbar();
+  }
+  toggleNavbar() {
+    const isOpen = this.props.ui.navbar;
+    isOpen ? this.onCollapse() : this.onExpand();
+  }
   render() {
     return (
       <PrimaryHeader
@@ -78,6 +101,8 @@ class HeaderWrapper extends Component {
         logo={ this.props.logo }
         settings={ this.props.settings }
         menu={ this.props.menu }
+        navbar={ this.props.ui.navbar }
+        toggleNavbar={ this.toggleNavbar }
         handleLogoClick= { this.handleLogoClick }
         handleLogoutClick={ this.handleLogoutClick }
         handlePrefClick={ this.handlePrefClick }

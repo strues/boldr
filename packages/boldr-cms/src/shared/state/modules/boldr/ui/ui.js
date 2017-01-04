@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   isMobile: false,
   modal: false,
   drawer: false,
+  navbar: false,
 };
 
 function uiReducer(state = INITIAL_STATE, action) {
@@ -40,6 +41,16 @@ function uiReducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         drawer: false,
+      };
+    case t.EXPAND_NAVBAR:
+      return {
+        ...state,
+        navbar: true,
+      };
+    case t.COLLAPSE_NAVBAR:
+      return {
+        ...state,
+        navbar: false,
       };
     default:
       return state;

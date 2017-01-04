@@ -2,7 +2,7 @@
   "name": "boldr-api",
   "version": "0.7.0-alpha.0",
   "description": "universal react content management framework",
-  "main": "boldr/boldrAPI/server/index.js",
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/strues/boldr.git"
@@ -42,7 +42,7 @@
   "scripts": {
     "apidoc": "apidoc -i src -o lib/apidoc && apidoc-markdown -p lib/apidoc -o docs/apidoc.md",
     "babel": "NODE_ENV=production babel --ignore node_modules",
-    "build": "NODE_ENV=production rimraf boldr/boldrAPI && npm run babel -- ./src/api -d ./boldr/boldrAPI/lib",
+    "build": "NODE_ENV=production rimraf boldrAPI && npm run babel -- ./src -d ./boldr/boldrAPI/lib",
     "clean": "babel-node tools/scripts/clean",
     "dev": "better-npm-run dev",
     "lint": "eslint src",

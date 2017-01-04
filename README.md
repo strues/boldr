@@ -32,14 +32,15 @@ Boldr is a modern content management framework. Think of Boldr as the solid foun
 
 ## Getting Started / Installation
 
-**A word of caution:** At the moment, Boldr is in active development. Meaning there can and most likely will, be the occasional breaking changes, and architectural adjustments.
+**Development Disclaimer:** At the moment, Boldr is in active development. Meaning there might be the occasional breaking changes, and architectural adjustments.
 
-That being said, I'm fairly confident the majority of large breaking changes is behind us.
+That said, I'm confident the majority of large breaking changes is behind us.
 
 1. `git clone https://github.com/strues/boldr.git`
-2. `cd boldr && yarn install / npm install`
-3. `cp env.example .env` and open it up in your preferred editor.
-4. The .env file contains important paths for the bundling process.
+2. `yarn install`
+3. `yarn bootstrap`
+4. Modify environment variables within **both** packages/boldr-cms and packages/boldr-api: `cp .env_example .env`
+
 
 ## Usage
 
@@ -47,33 +48,59 @@ Quick notes:
 
 - Ports
 
-  - **Frontend**: 3000 - _this is also the ssr server_  
+  - **Frontend**: 3000 - _React SSR server_  
   - **Webpack**: 3001 - _dev only_  
   - **API**: 2121  
 
-- Hot reloading doesn't work everywhere due to async/dynamic routes.
+- The `boldr-api` package can operate independently from boldr-cms. However, `boldr-cms` requires the api to be running. BCMS depends on data retrieved from the api.
 
 ### Development
 
-**Starting it up** -- Run `npm run dev`  
+#### API
+
+Context: `packages/boldr-api`
+
+Create a Postgres database and modify the migrate and seed scripts within the `package.json` to match your newly created database.
+
+Run the migrate command with `npm run migrate` followed by `npm run seed`. This bootstrap's your database.
+
+Tweak any of the `.env` variables to match your preferences / environment
+
+Start the api with the command, `npm run dev`
+
+#### CMS
+
+Context: `packages/boldr-cms`
+
+Run the CMS using `npm run dev`
 
 After Boldr has started visit <http://localhost:3000>. The admin account is already created and you may login using these credentials:
 
 > Email - admin@boldr.io<br>
 > Password - password
 
-### Production
+Settings for the build process as well as misc configurations are located within the config directory in the `index.js` file.
 
-> I wouldn't recommend it for a serious website. Not yet. However if you feel like building the application as if it were production execute the following.
+### Production
 
 Running Boldr in production is fairly simple. We'll go over the steps right now in order to get you up and running as soon as possible. Please bear with us, as the process for automation continues to evolve.
 
-Please [`See the documentation`](docs/production.md) for a detailed explaination.
+From the root directory use the command, `make build`.
+
+The `make build` command creates a folder named boldr in the root of the repository. Then compiles all files and copies them to the boldr folder.
+
+Upload the contents of the boldr directory to your preferred host.
+
+Install the production dependencies for both the `boldrAPI` and `boldrCMS` packages using `npm install --production`.
+
+Finally using pm2 or your preferred script, start the API and CMS.
+
+Please [`See the documentation`](docs/production.md) for a detailed explanation.
 
 
 ## Contributing
 
-Looking for an open source project to contribute to? All types of contributions are welcome here. In fact, I'd love some assistance. Take a look at some of the [current issues](https://github.com/strues/boldr/issues) and see if you find something you'd like to help out with. Feel free to submit pull requests to the develop branch.
+Looking for an open source project to contribute to? All types of contributions are welcome here. Take a look at some of the [current issues](https://github.com/strues/boldr/issues) and see if you find something you'd like to help out with. Feel free to submit pull requests to the develop branch.
 
 **Contribution Area Ideas**
 

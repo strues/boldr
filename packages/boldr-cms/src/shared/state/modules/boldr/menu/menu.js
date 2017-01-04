@@ -38,6 +38,13 @@ const main = (state = INITIAL_STATE, action) => {
         order: action.payload.order,
         details: action.payload.details,
       };
+    // case t.UPDATE_MENU_SUCCESS:
+    //   return {
+    //     ...state,
+    //     details: [
+    //       ...state.details.slice(0, action.payload)
+    //     ]
+    //   };
     default:
       return state;
   }

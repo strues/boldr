@@ -13,13 +13,29 @@ flow:
 test-ci:
 	NODE_ENV=test CI=true jest -w 2
 
-build-cms:
-	npm run build
+cms-compile:
+	cd packages/boldr-cms; npm run build
 
-create-dist:
-	mkdir ./boldr/bin && cp bin/boldr.js boldr/bin/ && cp package.json boldr/package.json && cp .env boldr/.env
+cms-folders:
+	mkdir boldr; mv packages/boldr-cms/boldr/* boldr; cp packages/boldr-cms/.env boldr/boldrCMS/.env
 
-build: build-cms create-dist
+cms-files:
+	cd packages/boldr-cms; mkdir boldr/boldrCMS/bin && cp bin/boldr.js boldr/boldrCMS/bin/ && cp package.json boldr/boldrCMS/package.json
+
+build-cms: cms-compile cms-files cms-folders
+
+api-compile:
+	cd packages/boldr-api; npm run build
+
+api-folders:
+	mv packages/boldr-api/boldr/* boldr; cp packages/boldr-api/.env boldr/boldrAPI/.env
+
+api-files:
+	cd packages/boldr-api; mkdir boldr/boldrAPI/bin && cp bin/boldr.js boldr/boldrAPI/bin/ && cp package.json boldr/boldrAPI/package.json
+
+build-api: api-compile api-files api-folders
+
+build: build-cms build-api
 
 migrate-ci:
 	NODE_ENV=test $(CI_DB) ./node_modules/.bin/knex --knexfile $(KNEX_FILE) migrate:latest
@@ -36,9 +52,3 @@ seed-test:
 setup-db:
 	make migrate-ci
 	make seed-ci
-
-test-ci:
-	NODE_ENV=test BABEL_ENV=test $(CI_DB) TOKEN_SECRET=bbbbaaaasss jest -w 2
-
-test:
-	NODE_ENV=test $(TEST_DB) npm run test

@@ -4,7 +4,11 @@ import { connect } from 'react-redux';
 import { RadioButtonGroup, TextField } from 'redux-form-material-ui';
 import Drawer from 'material-ui/Drawer';
 import RaisedButton from 'material-ui/RaisedButton';
+import IconButton from 'material-ui/IconButton';
 import { RadioButton } from 'material-ui/RadioButton';
+import FloatingActionButton from 'material-ui/FloatingActionButton';
+import CloseIcon from 'material-ui/svg-icons/navigation/close';
+import ContentForward from 'material-ui/svg-icons/content/forward';
 import { BoldrEditor } from '../../../../../components/BoldrEditor';
 import { Col, Row, Heading } from '../../../../../components/index';
 import { openDrawer, closeDrawer } from '../../../../../state/modules/boldr/ui/actions';
@@ -25,7 +29,11 @@ type Props = {
   drawer: boolean,
   label?: string,
 };
-
+const fab = {
+  float: 'right',
+  marginTop: '10px',
+  zIndex: '1000',
+};
 class PostEditorForm extends Component {
   constructor(props: Props) {
     super();
@@ -56,7 +64,6 @@ class PostEditorForm extends Component {
     const isOpen = this.props.drawer;
     isOpen ? this.onSetClose(this.state.open) : this.onSetOpen(this.state.open);
   }
-  handleToggle = () => this.setState({ open: !this.state.open });
   render() {
     const { handleSubmit } = this.props;
     /**
@@ -73,7 +80,7 @@ class PostEditorForm extends Component {
     const Wrapper = styled.div`
       margin: 0 auto;
       display: inherit;
-      padding-top: 5em;
+      padding-top: 3em;
       width: 90%;
     `;
     const Footer = styled.div`
@@ -85,8 +92,12 @@ class PostEditorForm extends Component {
     return (
       <Row>
         <Col xs>
+
           <form onSubmit={ handleSubmit }>
             <Drawer width={ 350 } openSecondary open={ this.props.drawer } >
+              <IconButton onTouchTap={ this.menuButtonClick }>
+                <CloseIcon />
+              </IconButton>
               <Wrapper>
                 <Field
                   name="title"
@@ -140,14 +151,10 @@ class PostEditorForm extends Component {
             </Wrapper>
           </Drawer>
           <Field name="content" component={ renderEditor } />
-          <Row>
-            <RaisedButton
-              secondary
-              label="Continue"
-              onTouchTap={ this.menuButtonClick }
-            />
-          </Row>
         </form>
+        <FloatingActionButton onTouchTap={ this.menuButtonClick } style={ fab } secondary>
+          <ContentForward />
+        </FloatingActionButton>
         </Col>
       </Row>
     );

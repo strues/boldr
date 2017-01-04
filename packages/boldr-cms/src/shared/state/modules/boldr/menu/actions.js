@@ -83,7 +83,7 @@ function beginUpdateMenuDetails() {
 function updateMenuDetailsSuccess(response) {
   return {
     type: t.UPDATE_MENU_SUCCESS,
-    payload: response,
+    payload: response.body,
   };
 }
 

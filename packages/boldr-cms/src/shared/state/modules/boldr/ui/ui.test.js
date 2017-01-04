@@ -14,6 +14,7 @@ describe('UI Duck', () => {
         isMobile: false,
         modal: false,
         drawer: false,
+        navbar: false,
       });
   });
   it('should open the modal', () => {
@@ -23,6 +24,7 @@ describe('UI Duck', () => {
       isMobile: false,
       modal: false,
       drawer: false,
+      navbar: false,
     };
     const stateAfter = {
       loaded: false,
@@ -30,6 +32,7 @@ describe('UI Duck', () => {
       isMobile: false,
       modal: true,
       drawer: false,
+      navbar: false,
     };
     expect(
       uiReducer(initialState, {
@@ -44,6 +47,7 @@ describe('UI Duck', () => {
       isMobile: false,
       modal: true,
       drawer: false,
+      navbar: false,
     };
     const stateAfter = {
       loaded: false,
@@ -51,6 +55,7 @@ describe('UI Duck', () => {
       isMobile: false,
       modal: false,
       drawer: false,
+      navbar: false,
     };
     expect(
       uiReducer(initialState, {
@@ -69,6 +74,7 @@ describe('UI Duck', () => {
       isMobile: false,
       modal: false,
       drawer: false,
+      navbar: false,
     };
 
     expect(
@@ -79,6 +85,7 @@ describe('UI Duck', () => {
       isMobile: false,
       modal: false,
       drawer: false,
+      navbar: false,
     });
   });
 });
@@ -94,6 +101,7 @@ test('changeLayout', () => {
       isMobile: false,
       modal: false,
       drawer: false,
+      navbar: false,
     },
   });
   store.dispatch(changeLayout('list'));
@@ -115,6 +123,7 @@ test('openModal', () => {
       isMobile: false,
       modal: false,
       drawer: false,
+      navbar: false,
     },
   });
   store.dispatch(showModal());
@@ -135,6 +144,7 @@ test('closeModal', () => {
       isMobile: false,
       modal: true,
       drawer: false,
+      navbar: false,
     },
   });
   store.dispatch(hideModal());
@@ -155,6 +165,7 @@ test('Set mobile device', () => {
       isMobile: false,
       modal: false,
       drawer: false,
+      navbar: false,
     },
   });
   store.dispatch(setMobileDevice());
