@@ -40,7 +40,7 @@ dependencies:
 test:
   pre:
     - yarn run bootstrap
-    - cd packages/boldr-cms; make setup-db
+    - make setup-db
   override:
     - npm run test-cms
     - npm run test-api
