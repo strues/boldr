@@ -20,7 +20,6 @@ import {
 } from './controls';
 import decorator from './decorators/defaultDecorator';
 import EditorValue from './lib/EditorValue';
-// import './styles/main.scss';
 
 type ChangeHandler = (value: EditorValue) => any;
 type Props = {

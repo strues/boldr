@@ -52,9 +52,9 @@ const EditMemberForm = (props: Props) => {
           component={ TextField }
         />
         <Field name="role" component={ RadioButtonGroup }>
-          <RadioButton value="1" label="Member" />
-          <RadioButton value="2" label="Staff" />
-          <RadioButton value="3" label="Admin" />
+          <RadioButton value={ 1 } label="Member" />
+          <RadioButton value={ 2 } label="Staff" />
+          <RadioButton value={ 3 } label="Admin" />
         </Field>
         <RaisedButton type="submit" label="Save" style={ style } primary />
         <FlatButton label="Reset" onClick={ reset } secondary />

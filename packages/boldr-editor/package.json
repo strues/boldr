@@ -1,6 +1,6 @@
 {
   "name": "boldr-editor",
-  "version": "0.7.0",
+  "version": "0.7.1",
   "main": "lib/index.js",
   "author": "Steven Truesdell <steven@strues.io>",
   "description": "Draft-JS editor for Boldr",
@@ -13,6 +13,9 @@
     "url": "https://github.com/strues/boldr/issues"
   },
   "homepage": "https://github.com/strues/boldr#readme",
+  "main": "lib/index",
+  "module": "lib/index.js",
+  "jsxnext:main": "lib/index.js",
   "files": [
     "lib/index.js",
     "lib/Renderer.js",
@@ -28,6 +31,7 @@
   "scripts": {
     "test": "jest",
     "babel": "babel src --out-dir lib",
+    "test:ci": "NODE_ENV=test CI=true jest -w 2",
     "build:sass": "./node_modules/.bin/node-sass --output-style compressed src/styles/main.scss > lib/boldreditor.css",
     "webpack": "./node_modules/.bin/webpack-dev-server"
   },

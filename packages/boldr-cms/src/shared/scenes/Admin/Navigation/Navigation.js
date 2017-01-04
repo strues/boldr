@@ -15,7 +15,7 @@ function mapStateToProps(state) {
   return { mainMenu: state.boldr.menu.main, ui: state.boldr.ui };
 }
 
-export type Props = {
+type Props = {
   mainMenu: Object,
   ui: Object,
   dispatch?: Function,
@@ -48,8 +48,9 @@ class Navigation extends Component {
     this.props.updateMenuDetails(data);
   }
 
-  onFormSubmit = (data) => {
-    this.props.addMenuDetail(data);
+  onFormSubmit = (values) => {
+    console.log(values)
+    this.props.addMenuDetail(values);
   }
   closeModal() {
     this.props.hideModal();

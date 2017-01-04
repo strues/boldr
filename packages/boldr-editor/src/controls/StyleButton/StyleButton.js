@@ -1,32 +1,40 @@
 /* @flow */
-import React from 'react';
+import React, { Component } from 'react';
+import type { ReactElement } from '../../types/react';
 
 type Props = {
   onToggle: Function,
   style?: string,
-  active?: boolean,
-  icon?: number | string | ReactElement | Array<any>,
+  active: boolean,
+  icon: ReactElement,
   label?: string,
-  onToggle: () => void,
+  onToggle: Function,
 };
 
-const StyleButton = (props: Props) => {
-  const onToggle = (e) => {
-    e.preventDefault();
-    props.onToggle(props.style);
-  };
-  let className = 'be-btn';
-  if (props.active) {
-    className += ' be-btn__active';
-  }
+class StyleButton extends Component {
+  constructor() {
+    super();
 
-  return (
-    <span className={ className } onMouseDown={ onToggle }>
+    (this: any).onToggle = (e) => {
+      e.preventDefault();
+      this.props.onToggle(this.props.style);
+    };
+  }
+  props: Props;
+  render() {
+    let className = 'be-btn';
+    if (this.props.active) {
+      className += ' be-btn__active';
+    }
+
+    return (
+    <span className={ className } onMouseDown={ this.onToggle }>
       {
-        props.icon || props.label
+        this.props.icon || this.props.label
       }
     </span>
-  );
+    );
+  }
 }
 
 export default StyleButton;

@@ -1,0 +1,122 @@
+{
+  "name": "boldr-api",
+  "version": "0.7.0-alpha.0",
+  "description": "universal react content management framework",
+  "main": "boldr/boldrAPI/server/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strues/boldr.git"
+  },
+  "keywords": [
+    "react",
+    "universal",
+    "javascript",
+    "express",
+    "webpack",
+    "postgres",
+    "node",
+    "cms",
+    "redux"
+  ],
+  "author": "Steven Truesdell <steven@strues.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/strues/boldr/issues"
+  },
+  "homepage": "https://github.com/strues/boldr#readme",
+  "engines": {
+    "node": ">=7.0.0",
+    "npm": ">=3.0.0",
+    "yarn": "^0.17.0"
+  },
+  "betterScripts": {
+    "dev": {
+      "command": "nodemon ./src/index.js",
+      "env": {
+        "DEBUG": "boldrAPI:*",
+        "NODE_ENV": "development",
+        "BABEL_ENV": "development"
+      }
+    }
+  },
+  "scripts": {
+    "apidoc": "apidoc -i src -o lib/apidoc && apidoc-markdown -p lib/apidoc -o docs/apidoc.md",
+    "babel": "NODE_ENV=production babel --ignore node_modules",
+    "build": "NODE_ENV=production rimraf boldr/boldrAPI && npm run babel -- ./src/api -d ./boldr/boldrAPI/lib",
+    "clean": "babel-node tools/scripts/clean",
+    "dev": "better-npm-run dev",
+    "lint": "eslint src",
+    "flow": "babel-node tools/scripts/flow",
+    "flow:defs": "flow-typed install --overwrite",
+    "flow:report": "flow-coverage-report -i 'src/**/*.js' -t html -t json -t text",
+    "flow:remove": "babel-node tools/scripts/removeFlow && rimraf tools/scripts/removeFlow.js",
+    "migrate": "POSTGRES_CONN_URI=postgres://postgres:password@localhost:5432/boldr knex --knexfile config/knexfile.js migrate:latest",
+    "seed": "POSTGRES_CONN_URI=postgres://postgres:password@localhost:5432/boldr knex --knexfile config/knexfile.js seed:run",
+    "start": "NODE_ENV=production node bin/boldr",
+    "test:ci": "NODE_ENV=test CI=true jest -w 2 --coverage",
+    "test": "NODE_ENV=test BABEL_ENV=test jest",
+    "test:watch": "NODE_ENV=test jest --watch=all"
+  },
+  "dependencies": {
+    "app-root-dir": "1.0.2",
+    "aws-sdk": "^2.7.20",
+    "bcryptjs": "^2.4.0",
+    "bluebird": "^3.4.7",
+    "body-parser": "^1.15.2",
+    "colors": "1.1.2",
+    "compression": "1.6.2",
+    "connect-redis": "^3.2.0",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.1",
+    "date-fns": "^1.22.0",
+    "dotenv": "2.0.0",
+    "express": "4.14.0",
+    "express-session": "^1.14.2",
+    "express-validator": "^3.1.2",
+    "express-winston": "^2.1.2",
+    "helmet": "3.3.0",
+    "hpp": "0.2.1",
+    "jsonwebtoken": "^7.2.1",
+    "knex": "^0.12.6",
+    "lodash": "^4.17.4",
+    "method-override": "^2.3.7",
+    "morgan": "^1.7.0",
+    "multer": "^1.2.1",
+    "multer-s3": "^2.5.0",
+    "nodemailer": "^2.7.0",
+    "objection": "^0.6.2",
+    "objection-find": "^0.3.0",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1",
+    "passport-local": "^1.0.0",
+    "pg": "^6.1.2",
+    "superagent": "^3.3.1",
+    "uuid": "^3.0.1",
+    "winston": "^2.3.0"
+  },
+  "devDependencies": {
+    "babel-cli": "6.18.0",
+    "babel-core": "^6.21.0",
+    "babel-jest": "^18.0.0",
+    "babel-loader": "6.2.10",
+    "babel-preset-boldr": "0.7.2",
+    "babel-preset-env": "1.1.4",
+    "better-npm-run": "^0.0.13",
+    "cz-conventional-changelog": "^1.2.0",
+    "eslint": "3.12.2",
+    "eslint-config-boldr": "0.7.1",
+    "faker": "^3.1.0",
+    "file-loader": "0.9.0",
+    "flow-bin": "0.37.4",
+    "flow-coverage-report": "0.2.0",
+    "flow-remove-types": "1.1.2",
+    "flow-typed": "2.0.0",
+    "glob": "7.1.1",
+    "jest-cli": "^18.1.0",
+    "nock": "^9.0.2",
+    "nodemon": "^1.11.0",
+    "rimraf": "2.5.4",
+    "sinon": "^1.17.7",
+    "supertest": "^2.0.1"
+  }
+}

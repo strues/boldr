@@ -2,9 +2,10 @@
 import React from 'react';
 import { Entity, CompositeDecorator } from 'draft-js';
 import type { ContentBlock } from 'draft-js';
+import type { ReactChildren } from '../types/react';
 
 type Props = {
-  children: ReactNode,
+  children: ReactChildren,
   entityKey: string,
 };
 

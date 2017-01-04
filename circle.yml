@@ -35,14 +35,14 @@ dependencies:
     - sudo apt-get update -qq
     - sudo apt-get install -y -qq yarn
   cache_directories:
-    - "~/.yarn-cache"
     - "node_modules"
-
+    - "$HOME/.yarn-cache"
 test:
   pre:
     - yarn run bootstrap
     - cd packages/boldr-cms; make setup-db
   override:
-    - npm run test
+    - npm run test-cms
+    - npm run test-api
   post:
       - bash <(curl -s https://codecov.io/bash)

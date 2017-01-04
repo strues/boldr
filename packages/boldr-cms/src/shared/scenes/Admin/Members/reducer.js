@@ -65,6 +65,9 @@ export function updateMember(userData) {
     dispatch(beginUpdateMember());
     return api.doUpdateMember(userData)
       .then(response => {
+        if (response.status !== 202) {
+          dispatch(failUpdateMember());
+        }
         dispatch(doneUpdateMember(response));
         dispatch(notificationSend(notif.MSG_UPDATE_MEMBER_SUCCESS));
       })

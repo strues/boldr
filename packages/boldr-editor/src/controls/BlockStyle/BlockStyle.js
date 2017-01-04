@@ -10,7 +10,7 @@ type Props = {
   display?: 'block' | 'inline',
 };
 
-const BlockStyleControls = (props: Props) => {
+function BlockStyleControls(props: Props) {
   const { controls, display, editorState, onToggle } = props;
   const selection = editorState.getSelection();
 
@@ -40,6 +40,6 @@ const BlockStyleControls = (props: Props) => {
     }
     </div>
   );
-};
+}
 
 export default BlockStyleControls;

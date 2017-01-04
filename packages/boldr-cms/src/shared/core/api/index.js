@@ -107,14 +107,16 @@ export const getMainNav = () =>
 export const doUpdateMenuDetails = (data) =>
   apiClient.put(`/menu-details/${data.id}`, { data });
 
-export const doAddNavigationLinks = (data) => {
+export const doAddNavigationLinks = (values) => {
+  console.log(values)
   const payload = {
-    name: data.name,
-    href: data.href,
-    icon: data.icon,
-    position: data.position,
+    name: values.name,
+    link: values.link,
+    icon: values.icon,
+    menu_id: 1,
+    position: values.position,
   };
-  return apiClient.post('/menu-details', { payload });
+  return apiClient.post('/menu-details', { data: payload });
 };
 
   /**
@@ -194,7 +196,7 @@ export const doUpdateMember = (userData) => {
     avatar_url: userData.avatar_url,
     role: userData.role,
   };
-  apiClient.put(`/users/admin/${userData.id}`, { payload });
+  apiClient.put(`/users/admin/${userData.id}`, { data: payload });
 };
 
 /**

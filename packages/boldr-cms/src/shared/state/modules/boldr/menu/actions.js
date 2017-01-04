@@ -95,10 +95,10 @@ function updateMenuDetailsFailure(err) {
 }
 
 
-export function addMenuDetail(data) {
+export function addMenuDetail(values) {
   return dispatch => {
     dispatch(beginAddMenuDetail());
-    return api.doAddNavigationLinks(data)
+    return api.doAddNavigationLinks(values)
       .then(response => {
         if (!response.status === 201) {
           dispatch(addMenuDetailFailure('Error'));

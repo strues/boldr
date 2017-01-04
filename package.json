@@ -34,28 +34,28 @@
     "bootstrap": "./node_modules/.bin/lerna bootstrap",
     "build": "lerna exec npm run build",
     "buildp": "lerna exec npm run buildp",
-    "test": "cd packages && cd boldr-cms && npm run test:ci",
-    "test-lerna": "lerna exec npm run test --single-run"
+    "jest-coverage": "yarn run test -- --coverage",
+    "test-cms": "cd packages && cd boldr-cms && npm run test:ci",
+    "test-api": "cd packages && cd boldr-api && npm run test:ci",
+    "test-lerna": "lerna exec -- npm run test:ci"
   },
   "jest": {
     "moduleNameMapper": {
       "^.*\\.scss$": "<rootDir>/tools/jest/styleMock.js"
     },
     "collectCoverage": true,
+    "collectCoverageFrom": [
+      "<rootDir>/packages/boldr-cms/src/**/*.js",
+      "<rootDir>/packages/boldr-api/src/**/*.js"
+    ],
     "coveragePathIgnorePatterns": [
       "<rootDir>/packages/boldr-cms/tools/",
       "<rootDir>/packages/boldr-cms/config/",
       "<rootDir>/packages/boldr-cms/docs/",
       "/flow-typed/",
-      "<rootDir>/bin/",
-      "<rootDir>/boldr/boldrCMS",
-      "<rootDir>/boldr/boldrAPI",
       "/node_modules/",
       "<rootDir>/packages/boldr-cms/.happypack/",
-      "<rootDir>/public/",
-      "<rootDir>/src/client/",
-      "<rootDir>/packages/boldr-cms/src/shared/theme/",
-      "<rootDir>/src/server/"
+      "<rootDir>/packages/boldr-cms/src/shared/theme/"
     ],
     "transform": {
       "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
@@ -63,12 +63,10 @@
     "testRegex": ".*.test\\.js",
     "setupTestFrameworkScriptFile": "<rootDir>/tools/jest/testSetup.js",
     "testPathIgnorePatterns": [
-      "<rootDir>/packages/boldr-cms/(tools|docs|node_modules|bin|flow-typed|public)/"
+      "<rootDir>/packages/**/(tools|docs|node_modules|bin|flow-typed|public)/"
     ],
     "transformIgnorePatterns": [
       "/node_modules/",
-      "/boldr/boldrCMS/",
-      "/boldr/boldrAPI/",
       "/db/"
     ],
     "coverageReporters": [

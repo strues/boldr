@@ -9,7 +9,7 @@ type Props = {
   controls: Array<INLINE_CONTROLS>,
   display?: 'block' | 'inline',
 };
-const InlineStyleControls = (props: Props) => {
+function InlineStyleControls(props: Props) {
   const { editorState, onToggle, controls, display } = props;
   const currentStyle = editorState.getCurrentInlineStyle();
 
@@ -33,6 +33,6 @@ const InlineStyleControls = (props: Props) => {
       }
     </div>
   );
-};
+}
 
 export default InlineStyleControls;

@@ -11,7 +11,7 @@ type Props = {
   customBlockType: string,
 };
 
-const CustomBlockControls = (props: Props) => {
+function CustomBlockControls(props: Props) {
   const { controls, display, onClick, customBlocks, customBlockType } = props;
   const buttons = [];
 
@@ -43,6 +43,6 @@ const CustomBlockControls = (props: Props) => {
       { buttons }
     </div>
   );
-};
+}
 
 export default CustomBlockControls;

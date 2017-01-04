@@ -1,0 +1,32 @@
+{
+  "extends": ["boldr"],
+  "env": {
+    "browser": true,
+    "es6": true,
+    "node": true,
+    "mocha": true,
+  },
+  "parser": "babel-eslint",
+  "plugins": ["flowtype", "import", "react"],
+  "settings": {
+    "flowtype": {
+      "onlyFilesWithFlowAnnotation": true,
+    }
+  },
+  "globals": {
+    "__SERVER__": true,
+    "React": true,
+    "expect": true,
+    "jest": true,
+    "jasmine": true,
+  },
+  "rules": {
+    "id-match": 0,
+    "no-duplicate-imports": 0,
+    "react/prefer-stateless-function": 0,
+    "import/no-unresolved": 0,
+    "babel/func-params-comma-dangle": 0,
+    "no-unused-expressions": 0,
+    "no-undef": 0,
+    }
+}
