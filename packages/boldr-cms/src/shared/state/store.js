@@ -1,12 +1,17 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import thunkMiddleware from 'redux-thunk';
+import createLogger from 'redux-logger';
 import createReducer from './reducers';
 import createMiddleware from './clientMiddleware';
 
 export default function configureStore(preloadedState, history, apiClient) {
+  const logger = createLogger({
+    // Ignore `CHANGE_FORM` actions in the logger, since they fire after every keystroke
+    predicate: (getState, action) => action.type !== 'CHANGE_FORM',
+  });
   const reduxRouterMiddleware = routerMiddleware(history);
-  const middleware = [thunkMiddleware, createMiddleware(apiClient), reduxRouterMiddleware];
+  const middleware = [logger, thunkMiddleware, createMiddleware(apiClient), reduxRouterMiddleware];
 
   // Development enhancers
   const enhancers = [];
