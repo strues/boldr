@@ -27,6 +27,7 @@ type Props = {
 const mapStateToProps = (state) => {
   return {
     auth: state.account.auth,
+    pathname: state.routing.locationBeforeTransitions.pathname,
   };
 };
 
@@ -40,7 +41,7 @@ const mapStateToProps = (state) => {
 })
 @connect(mapStateToProps)
 export default (ComposedComponent: any) => {
-  class Boldr extends Component {
+  class TemplateProvider extends Component {
     static childContextTypes = {
       dispatch: React.PropTypes.func,
       location: React.PropTypes.object,
@@ -58,6 +59,7 @@ export default (ComposedComponent: any) => {
         this.props.dispatch(setMobileDevice(testIfMobile()));
       }, 1000));
     }
+    // $FlowIssue
     shouldComponentUpdate(nextProps, nextState) {
       return shallowCompare(this, nextProps, nextState);
     }
@@ -73,5 +75,5 @@ export default (ComposedComponent: any) => {
     }
   }
 
-  return Boldr;
+  return TemplateProvider;
 };

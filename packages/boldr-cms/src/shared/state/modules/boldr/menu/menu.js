@@ -9,17 +9,18 @@ const INITIAL_STATE = {
   attributes: {},
   restricted: false,
   order: -1,
-  details: [{
-    id: -1,
-    uuid: '',
-    label: '',
-    name: '',
-    attribute: '',
-    position: '',
-    parent_id: '',
-    link: '',
-    icon: '',
-  }],
+  details: [],
+};
+const menuState = {
+  id: -1,
+  uuid: '',
+  label: '',
+  name: '',
+  attribute: '',
+  position: '',
+  parent_id: '',
+  link: '',
+  icon: '',
 };
 
 const main = (state = INITIAL_STATE, action) => {
@@ -37,6 +38,7 @@ const main = (state = INITIAL_STATE, action) => {
         restricted: action.payload.restricted,
         order: action.payload.order,
         details: action.payload.details,
+        // details(undefined, action)
       };
     // case t.UPDATE_MENU_SUCCESS:
     //   return {

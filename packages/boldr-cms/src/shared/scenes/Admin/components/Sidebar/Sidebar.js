@@ -14,30 +14,14 @@ import DashboardIcon from 'material-ui/svg-icons/action/dashboard';
 import PeopleIcon from 'material-ui/svg-icons/social/people';
 import ContentIcon from 'material-ui/svg-icons/content/content-copy';
 import ListIcon from 'material-ui/svg-icons/action/list';
-import { Card, CardHeader } from 'material-ui/Card';
-import Avatar from 'material-ui/Avatar';
 
 type Props = {
   open: Boolean,
-  user: Object,
 };
 
 const Sidebar = (props: Props) => {
   return (
     <Drawer open={ props.open } width={ 200 }>
-
-      <Card style={ { backgroundColor: '#01579b' } }>
-        <CardHeader
-          avatar={
-            <Avatar
-              size={ 50 }
-              src={ props.user.avatarUrl }
-              style={ { border: '1px solid grey', margin: '-5px' } }
-            />
-          }
-        />
-        <span style={ { color: '#fff' } }>{ props.user.displayName }</span>
-      </Card>
       <Link to="/">
         <MenuItem leftIcon={ <HomeIcon /> }>Home</MenuItem>
       </Link>

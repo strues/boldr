@@ -1,3 +1,4 @@
+import { normalize, schema } from 'normalizr';
 import { camelizeKeys } from 'humps';
 import * as api from '../../../../core/api';
 import { menu as menuSchema } from '../../../../core/schemas';
@@ -5,6 +6,10 @@ import * as notif from '../../../../core/constants';
 import { notificationSend } from '../../notifications/notifications';
 import * as t from './constants';
 
+const detail = new schema.Entity('details');
+const menu = new schema.Entity('menus', {
+  details: [detail],
+});
 export function fetchMenus() {
   return dispatch => {
     dispatch(beginFetchMenus());
@@ -50,7 +55,12 @@ function fetchMenusError(error) {
     error,
   };
 }
-
+function fetchMenuSuccess(normalizedData) {
+  return {
+    type: t.GET_MAIN_MENU_SUCCESS,
+    payload: normalizedData,
+  };
+}
 function fetchMenusSuccess(menuData) {
   return {
     type: t.GET_MAIN_MENU_SUCCESS,

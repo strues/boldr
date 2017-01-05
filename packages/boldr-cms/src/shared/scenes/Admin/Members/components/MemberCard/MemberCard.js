@@ -15,7 +15,7 @@ const MemberCard = (props) => {
     <Card>
        <CardHeader
          title={ props.user.display_name }
-         subtitle={ props.user.role.name }
+         subtitle={ props.user.roles[0].name }
          avatar={ props.user.avatar_url }
        />
 

@@ -6,7 +6,7 @@ export default function configureLocal(User) {
     usernameField: 'email',
     passwordField: 'password',
   }, async (email, password, done) => {
-    const user = await User.query().where({ email }).eager('role').first();
+    const user = await User.query().where({ email }).eager('[roles]').first();
     if (!user) {
       return done(null, false, { message: 'This email is not registered.' });
     }

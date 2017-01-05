@@ -4,13 +4,13 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 
-import PageTemplate from '../../theme/Boldr';
+import BaseTemplate from '../templates/Base';
 import { Grid, Row, Hero, Footer } from '../../components/index';
 import { safeConfigGet } from '../../core/utils/config';
 
 const Home = () => {
   return (
-      <PageTemplate
+      <BaseTemplate
         helmetMeta={ <Helmet title="Home" /> }
         hero={ <Hero /> }
         footer={ <Footer /> }
@@ -20,7 +20,7 @@ const Home = () => {
           Placeholder
         </Row>
       </Grid>
-      </PageTemplate>
+      </BaseTemplate>
   );
 };
 

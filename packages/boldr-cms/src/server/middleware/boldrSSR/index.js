@@ -10,9 +10,7 @@ import createMemoryHistory from 'react-router/lib/createMemoryHistory';
 import { syncHistoryWithStore } from 'react-router-redux';
 import Helmet from 'react-helmet';
 import { trigger } from 'redial';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import material from '../../../shared/theme/Boldr/material';
+import AppRoot from '../../../shared/components/AppRoot';
 import createRoutes from '../../../shared/scenes';
 import ApiClient from '../../../shared/core/api/apiClient';
 import configureStore from '../../../shared/state/store';
@@ -68,13 +66,10 @@ function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
 
     trigger('fetch', components, locals)
        .then(() => {
-         const muiTheme = getMuiTheme(material);
          const AppRender = (store, renderProps) => renderToString(
-            <Provider store={ store }>
-              <MuiThemeProvider muiTheme={ muiTheme }>
+            <AppRoot store={ store }>
               <RouterContext { ...renderProps } helpers={ apiClient } />
-            </MuiThemeProvider>
-            </Provider>,
+            </AppRoot>,
           );
          const preloadedState = store.getState();
          const reactAppString = AppRender(store, renderProps);

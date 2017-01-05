@@ -14,11 +14,11 @@ exports.up = function(knex) {
     table.date('birthday', 8).nullable();
     table.string('website', 100).nullable();
     table.boolean('verified').defaultTo(false);
-    table.integer('role').unsigned().notNullable().defaultTo(1);
+
     table.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
     table.timestamp('updated_at').nullable().defaultTo(null);
     // fk
-    table.foreign('role').references('id').inTable('role').onDelete('cascade').onUpdate('cascade');
+
     // indexes
     table.index('verified');
     table.index('email');

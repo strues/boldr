@@ -6,6 +6,7 @@ import AppBar from 'material-ui/AppBar';
 
 import { Grid, Col, Authenticated } from '../../../components/index';
 import Sidebar from '../components/Sidebar';
+import Topbar from '../components/Topbar';
 import { showSidebar, hideSidebar } from './reducer';
 
 const styled = require('styled-components').default;
@@ -53,10 +54,13 @@ class DashboardContainer extends PureComponent {
     return (
       <div>
         <Sidebar open={ this.props.dashboard.open } user={ this.props.account.user } />
-        <AppBar
-          onLeftIconButtonTouchTap={ this.menuButtonClick }
-          style={ { position: 'fixed', left: this.props.dashboard.open ? '200px' : '0px' } }
+        <Topbar
+          title="Boldr"
+          menuButtonClick={ this.menuButtonClick }
+          open={ this.props.dashboard.open }
+          user={ this.props.account.user }
         />
+
         <BgOffsetBlock />
 
         <Grid fluid style={ { paddingLeft: this.props.dashboard.open ? '200px' : '0px' } }>

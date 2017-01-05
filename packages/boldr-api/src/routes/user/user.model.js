@@ -7,6 +7,9 @@ import Role from '../role/role.model';
 import Attachment from '../attachment/attachment.model';
 import Token from '../token/token.model';
 import Post from '../post/post.model';
+import UserRole from './userRole.model';
+
+const debug = require('debug')('boldrAPI:user-model');
 
 class User extends BaseModel {
   static get tableName() {
@@ -23,11 +26,16 @@ class User extends BaseModel {
 
   static get relationMappings() {
     return {
-      role: {
-        relation: Model.BelongsToOneRelation,
+      roles: {
+        relation: Model.ManyToManyRelation,
         modelClass: Role,
         join: {
-          from: 'user.role',
+          from: 'user.id',
+          through: {
+            from: 'user_role.user_id',
+            to: 'user_role.role_id',
+            // modelClass: UserRole,
+          },
           to: 'role.id',
         },
       },
@@ -105,12 +113,12 @@ class User extends BaseModel {
    * @param {string} role
    * @returns {boolean}
    */
-  hasRole(r) {
-    if (!this.role) {
+  hasRole(role) {
+    if (!this.roles) {
       return false;
     }
-    console.log(this.role);
-    const validRoles = this.role.filter(({ name }) => (name === r));
+
+    const validRoles = this.roles.filter(({ name }) => (name === role));
 
     return validRoles.length;
   }

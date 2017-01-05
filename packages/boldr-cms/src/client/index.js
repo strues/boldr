@@ -32,7 +32,7 @@ WebFontLoader.load({
   google: { families: ['Roboto Slab:100,400,700', 'Roboto:300,400,700'] },
 });
 // Get the DOM Element that will host our React application.
-const domNode = document.querySelector('#app');
+const domNode = document.getElementById('app');
 // Superagent helper
 const apiClient = new ApiClient();
 
@@ -61,7 +61,7 @@ const onRouteUpdate = compose(
 );
 
 const renderApp = () => (
-  <ReactHotLoader>
+  <ReactHotLoader errorReporter={ require('redbox-react') }>
     <AppRoot store={ store }>
         <Router
           history={ history }

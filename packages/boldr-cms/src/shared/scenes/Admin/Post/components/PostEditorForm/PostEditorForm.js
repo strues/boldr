@@ -10,8 +10,9 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import CloseIcon from 'material-ui/svg-icons/navigation/close';
 import ContentForward from 'material-ui/svg-icons/content/forward';
 import { BoldrEditor } from '../../../../../components/BoldrEditor';
-import { Col, Row, Heading } from '../../../../../components/index';
+import { Col, Row, Heading, S3Uploader } from '../../../../../components/index';
 import { openDrawer, closeDrawer } from '../../../../../state/modules/boldr/ui/actions';
+import { uploadFiles } from '../../../FileManager/reducer';
 // import 'boldr-editor/lib/boldreditor.css';
 
 const styled = require('styled-components').default;
@@ -34,6 +35,8 @@ const fab = {
   marginTop: '10px',
   zIndex: '1000',
 };
+
+@connect()
 class PostEditorForm extends Component {
   constructor(props: Props) {
     super();
@@ -48,7 +51,25 @@ class PostEditorForm extends Component {
   componentDidMount() {
     this.checkEditStatus();
   }
+
   props: Props;
+  // @TODO: Setup action and reducer
+
+  onUploadFinish = (signResult) => {
+    const signUrl = signResult.signedUrl;
+    const splitUrl = signUrl.split('?');
+    const fileUrl = splitUrl[0];
+
+    const payload = {
+      file_name: signResult.file_name,
+      original_name: signResult.original_name,
+      file_type: signResult.file_type,
+      s3_key: signResult.s3_key,
+      url: fileUrl,
+    };
+    this.props.dispatch(uploadFiles(payload));
+  }
+
   checkEditStatus() {
     const EDITING = this.props.isEditing === true;
     if (EDITING) this.setState({ edit: true });
@@ -116,7 +137,17 @@ class PostEditorForm extends Component {
                   /> :
                 null
               }
+              <S3Uploader
+                signingUrl="/s3/sign"
+                server="/api/v1"
+                accept="image/*"
+                onProgress={ S3Uploader.onUploadProgress }
+                onError={ S3Uploader.onUploadError }
+                onFinish={ this.onUploadFinish }
 
+                uploadRequestHeaders={ { 'x-amz-acl': 'public-read' } }
+                contentDisposition="auto"
+              />
               <Field name="feature_image" type="text"
                 hintText="URL for your image"
                 component={ TextField }

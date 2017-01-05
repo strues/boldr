@@ -1,5 +1,6 @@
 import App from '../components/App';
 import About from '../pages/About';
+import Home from '../pages/Home';
 import Error404 from '../pages/Error404';
 import Account from './Account';
 import Blog from './Blog';
@@ -10,7 +11,7 @@ export default function createRoutes(store) {
     path: '/',
     component: App,
     indexRoute: {
-      component: require('../pages/Home').default,
+      component: Home,
     },
     childRoutes: [
       Account(store),

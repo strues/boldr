@@ -37,6 +37,8 @@ const materialStyle = {
     clockCircleColor,
     shadowColor,
   },
+  // eslint-disable-next-line
+  userAgent: (typeof req !== 'undefined') ? req.headers['user-agent'] : false
 };
 
 export default materialStyle;

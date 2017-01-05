@@ -43,7 +43,7 @@ async function register(req, res, next) {
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     display_name: req.body.display_name,
-    avatar_url: req.body.avatar_url
+    avatar_url: req.body.avatar_url,
   };
   const checkExisting = await User.query().where('email', req.body.email);
 
@@ -52,7 +52,7 @@ async function register(req, res, next) {
   }
   const newUser = await objection.transaction(User, async (User) => {
     const user = await User.query().insert(payload);
-      // await user.$relatedQuery('role').relate({ id: 1 });
+    await user.$relatedQuery('roles').relate({ id: 1 });
 
     if (!user) {
       throwNotFound();
@@ -97,7 +97,7 @@ async function login(req, res, next) {
     return res.status(400).json(errors);
   }
 
-  await User.query().where({ email: req.body.email }).eager('role').first();
+  await User.query().where({ email: req.body.email }).eager('[roles]').first();
   passport.authenticate('local', (err, user, info) => {
     const error = err || info;
     if (!user) {
@@ -145,7 +145,7 @@ async function verify(req, res, next) {
 
 async function checkAuthentication(req, res, next) {
   try {
-    const validUser = await User.query().findById(req.user.id).eager('role');
+    const validUser = await User.query().findById(req.user.id).eager('[roles]');
     if (!validUser) {
       return res.status(404).json({ message: 'Unable to find an account with the given information.' });
     }

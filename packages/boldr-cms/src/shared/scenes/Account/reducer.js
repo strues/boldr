@@ -92,8 +92,8 @@ function userReducer(state = INITIAL_USER_STATE, action = {}) {
         lastName: action.user.last_name,
         displayName: action.user.display_name,
         avatarUrl: action.user.avatar_url,
-        role: action.user.role.name,
-        roleId: action.user.role.id,
+        role: action.user.roles[0].name,
+        roleId: action.user.roles[0].id,
       };
     case t.LOGOUT_USER:
       return {

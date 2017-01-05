@@ -50,7 +50,7 @@ const beginUpdateMember = () => {
 };
 
 const doneUpdateMember = (response) => {
-  return { type: UPDATE_MEMBER_SUCCESS };
+  return { type: UPDATE_MEMBER_SUCCESS, payload: response };
 };
 
 const failUpdateMember = (err) => {
@@ -65,9 +65,6 @@ export function updateMember(userData) {
     dispatch(beginUpdateMember());
     return api.doUpdateMember(userData)
       .then(response => {
-        if (response.status !== 202) {
-          dispatch(failUpdateMember());
-        }
         dispatch(doneUpdateMember(response));
         dispatch(notificationSend(notif.MSG_UPDATE_MEMBER_SUCCESS));
       })

@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 
-import type { ReactElement, ReactChildren } from '../../types/react';
-import PrimaryHeader from '../../components/PrimaryHeader';
-import { logout } from '../../scenes/Account/actions';
-import { selectSetting, getSettings } from '../../state/modules/boldr/settings';
-import { expandNavbar, collapseNavbar } from '../../state/modules/boldr/ui/actions';
+import type { ReactElement, ReactChildren } from '../../../types/react';
+import PrimaryHeader from '../../../components/PrimaryHeader';
+import { logout } from '../../../scenes/Account/actions';
+import { selectSetting, getSettings } from '../../../state/modules/boldr/settings';
+import { expandNavbar, collapseNavbar } from '../../../state/modules/boldr/ui/actions';
 
 const styled = require('styled-components').default;
 
@@ -55,11 +55,11 @@ const mapDispatchToProps = (dispatch) => {
 class HeaderWrapper extends Component {
   constructor() {
     super();
-    this.handleLogoClick = this.handleLogoClick.bind(this);
-    this.handleLogoutClick = this.handleLogoutClick.bind(this);
-    this.handleDashClick = this.handleDashClick.bind(this);
-    this.handleProfileClick = this.handleProfileClick.bind(this);
-    this.handlePrefClick = this.handlePrefClick.bind(this);
+    (this: any).handleLogoClick = this.handleLogoClick.bind(this);
+    (this: any).handleLogoutClick = this.handleLogoutClick.bind(this);
+    (this: any).handleDashClick = this.handleDashClick.bind(this);
+    (this: any).handleProfileClick = this.handleProfileClick.bind(this);
+    (this: any).handlePrefClick = this.handlePrefClick.bind(this);
     (this: any).onCollapse = this.onCollapse.bind(this);
     (this: any).onExpand = this.onExpand.bind(this);
     (this: any).toggleNavbar = this.toggleNavbar.bind(this);

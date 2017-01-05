@@ -1,9 +1,9 @@
 /* @flow */
 import React from 'react';
-import { Footer } from '../../components/index';
-import type { ReactElement, ReactChildren } from '../../types/react';
+import { Footer } from '../../../components/index';
+import type { ReactElement, ReactChildren } from '../../../types/react';
+import TemplateProvider from '../TemplateProvider';
 import HeaderWrapper from './HeaderWrapper';
-import Boldr from './Boldr';
 
 const styled = require('styled-components').default;
 
@@ -32,13 +32,14 @@ const FooterWrapper = styled.footer`
   margin-top: auto;
 `;
 
-const PageTemplate = (props: Props) => {
+const BaseTemplate = (props: Props) => {
   return (
     <Wrapper { ...props }>
         { props.helmetMeta }
+        { /* $FlowIssue */}
         <HeaderWrapper { ...props.header } />
 
-        { props.hero }
+        { props.hero ? props.hero : null }
 
         <ContentWrapper>
           { props.children }
@@ -51,4 +52,4 @@ const PageTemplate = (props: Props) => {
   );
 };
 
-export default Boldr(PageTemplate);
+export default TemplateProvider(BaseTemplate);
