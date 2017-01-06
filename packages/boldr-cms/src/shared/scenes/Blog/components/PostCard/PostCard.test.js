@@ -2,7 +2,7 @@ import React from 'react';
 import { createStore } from 'redux';
 import { shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
-import PostCard from './PostCard';
+import { PostCard } from './PostCard';
 
 describe('<PostCard />', () => {
   it('renders <PostCard /> without breaking', () => {
@@ -11,6 +11,7 @@ describe('<PostCard />', () => {
   });
 
   it('accepts props and renders them.', () => {
+
     const wrapper = shallow(
       <PostCard
         feature_image="http://boldr.io/images/logo.png"
@@ -22,6 +23,7 @@ describe('<PostCard />', () => {
     expect(wrapper.instance().props.title).toBe('Test Post');
     expect(wrapper.instance().props.excerpt).toBe('An excerpt');
     expect(wrapper.instance().props.slug).toBe('test-post');
+
   });
   it('renders snapshot', () => {
     const wrapper = shallow(<PostCard />);

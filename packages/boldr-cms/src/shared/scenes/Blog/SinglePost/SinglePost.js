@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Grid, Row } from '../../../components/index';
 import PostSidebar from '../components/PostSidebar';
 import PostContent from '../components/PostContent';
+import { getPosts } from '../../../state/modules/blog/posts';
 
 export type Props = {
   loading: boolean,
@@ -23,8 +24,7 @@ const SinglePost = (props: Props) => {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    posts: state.blog.posts,
-    currentPost: state.blog.posts.bySlug[ownProps.params.slug],
+    currentPost: state.blog.posts.currentPost,
   };
 };
 

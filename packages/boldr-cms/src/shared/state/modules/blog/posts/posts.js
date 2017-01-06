@@ -1,9 +1,60 @@
 /* @flow */
+import { combineReducers } from 'redux';
 import * as api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import type { Post } from '../../../../types/models';
 import { notificationSend } from '../../../../state/modules/notifications';
 import * as t from './constants';
+
+export const STATE_KEY = 'posts';
+
+const all = (state = {}, action) => {
+  switch (action.type) {
+    case t.FETCH_POSTS_SUCCESS:
+      return {
+        ...state,
+        ...action.payload.entities.posts,
+      };
+    default:
+      return state;
+  }
+};
+
+const ids = (state = [], action) => {
+  switch (action.type) {
+    case t.FETCH_POSTS_SUCCESS:
+      return action.payload.result;
+    default:
+      return state;
+  }
+};
+
+
+const isFetching = (state = false, action) => {
+  switch (action.type) {
+    case t.FETCH_POSTS_REQUEST:
+      return true;
+    case t.FETCH_POSTS_SUCCESS:
+      return false;
+    default:
+      return state;
+  }
+};
+
+const currentPost = (state = {}, action) => {
+  switch (action.type) {
+    case t.SELECT_POST:
+      return {
+        ...state,
+        ...action.post,
+      };
+
+    default:
+      return state;
+
+  }
+};
+
 
 export type State = { loading: boolean, error: null, list: Array<String>, bySlug: Post }
 //
@@ -23,7 +74,7 @@ const INITIAL_STATE = {
  * @param  {Object} action      The action object
  */
 
-export default function postsReducer(state: State = INITIAL_STATE, action: Object) {
+function posts(state: State = INITIAL_STATE, action: Object) {
   switch (action.type) {
     case t.FETCH_POSTS_REQUEST:
     case t.GET_POST_REQUEST:
@@ -39,11 +90,8 @@ export default function postsReducer(state: State = INITIAL_STATE, action: Objec
         ...state,
         loading: false,
         loaded: true,
-        list: action.payload,
-        bySlug: action.payload.reduce((list, a) => ({
-          ...list,
-          [a.slug]: a,
-        }), {}),
+        items: action.payload.entities.posts,
+        list: action.payload.result,
       };
     case t.GET_POST_SUCCESS:
       return {
@@ -76,9 +124,7 @@ export default function postsReducer(state: State = INITIAL_STATE, action: Objec
     case t.SELECT_POST:
       return {
         ...state,
-        loading: false,
-        id: action.id,
-        isEditing: true,
+        post: action.post,
       };
     case t.SELECT_POST_SUCCESS:
       return {
@@ -102,3 +148,10 @@ export default function postsReducer(state: State = INITIAL_STATE, action: Objec
       return state;
   }
 }
+export default combineReducers({
+  all,
+  ids,
+  isFetching,
+  currentPost,
+  posts,
+});

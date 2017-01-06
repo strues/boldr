@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { provideHooks } from 'redial';
 import { Col, Row, Widget } from '../../../components/index';
 import ActivityWidget from '../components/ActivityWidget';
-import { loadSiteActivity } from './reducer';
+import { loadSiteActivity } from '../../../state/modules/admin/dashboard/actions';
 
 @provideHooks({
   fetch: ({ dispatch }) => {

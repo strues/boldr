@@ -7,7 +7,7 @@ import AppBar from 'material-ui/AppBar';
 import { Grid, Col, Authenticated } from '../../../components/index';
 import Sidebar from '../components/Sidebar';
 import Topbar from '../components/Topbar';
-import { showSidebar, hideSidebar } from './reducer';
+import { showSidebar, hideSidebar } from '../../../state/modules/admin/dashboard/actions';
 
 const styled = require('styled-components').default;
 

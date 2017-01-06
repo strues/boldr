@@ -1,9 +1,7 @@
 import { combineReducers } from 'redux';
-import * as t from './constants';
+import * as t from '../constants';
 
-export const STATE_KEY = 'account';
-export const AUTH_STATE_KEY = 'auth';
-export const USER_STATE_KEY = 'user';
+export const STATE_KEY = 'auth';
 
 /**
  * INITIAL STATE
@@ -71,49 +69,4 @@ function authReducer(state = INITIAL_STATE, action = {}) {
   }
 }
 
-const INITIAL_USER_STATE = {
-  email: '',
-  firstName: '',
-  lastName: '',
-  displayName: '',
-  avatarUrl: '',
-  role: '',
-  roleId: '',
-};
-
-function userReducer(state = INITIAL_USER_STATE, action = {}) {
-  switch (action.type) {
-    case t.LOGIN_SUCCESS:
-    case t.CHECK_AUTH_SUCCESS:
-      return {
-        ...state,
-        email: action.user.email,
-        firstName: action.user.first_name,
-        lastName: action.user.last_name,
-        displayName: action.user.display_name,
-        avatarUrl: action.user.avatar_url,
-        role: action.user.roles[0].name,
-        roleId: action.user.roles[0].id,
-      };
-    case t.LOGOUT_USER:
-      return {
-        ...state,
-        email: '',
-        firstName: '',
-        lastName: '',
-        displayName: '',
-        avatarUrl: '',
-        role: '',
-        roleId: '',
-      };
-    default:
-      return state;
-  }
-}
-
-const accountReducer = combineReducers({
-  [AUTH_STATE_KEY]: authReducer,
-  [USER_STATE_KEY]: userReducer,
-});
-
-export default accountReducer;
+export default authReducer;

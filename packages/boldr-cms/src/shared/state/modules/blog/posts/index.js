@@ -1,4 +1,4 @@
-import postsReducer from './posts';
+import postsReducer, { STATE_KEY } from './posts';
 import {
   togglePostLayoutView,
   fetchPostsIfNeeded,
@@ -7,6 +7,7 @@ import {
   deletePost,
   updatePost,
 } from './actions';
+
 import { getPosts, getTagEntities } from './selectors';
 
 export default postsReducer;
@@ -20,4 +21,5 @@ export {
   updatePost,
   getPosts,
   getTagEntities,
+  STATE_KEY,
 };

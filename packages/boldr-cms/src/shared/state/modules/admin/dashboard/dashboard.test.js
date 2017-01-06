@@ -1,4 +1,5 @@
-import dashboardReducer, { HIDE_SIDEBAR, SHOW_SIDEBAR } from './reducer';
+import dashboardReducer from './dashboard';
+import * as t from './constants';
 
 describe('Dashboard Duck', () => {
   it('Should return the initial state', () => {
@@ -32,7 +33,7 @@ describe('Dashboard Duck', () => {
     };
     expect(
       dashboardReducer(initialState, {
-        type: HIDE_SIDEBAR,
+        type: t.HIDE_SIDEBAR,
       }),
     ).toEqual(stateAfter);
   });
@@ -55,7 +56,7 @@ describe('Dashboard Duck', () => {
     };
     expect(
       dashboardReducer(initialState, {
-        type: SHOW_SIDEBAR,
+        type: t.SHOW_SIDEBAR,
       }),
     ).toEqual(stateAfter);
   });

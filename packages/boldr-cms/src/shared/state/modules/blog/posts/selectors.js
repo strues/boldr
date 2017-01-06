@@ -5,14 +5,10 @@ import { createSelector } from 'reselect';
   * POSTS SELECTORS
   *
   *****************************************************************/
-export const getPosts = state => state.blog.posts.list;
-// export const getPosts = createSelector(
-//   [
-//     (state) => state.posts.list,
-//     (state) => state.posts.bySlug,
-//   ],
-//   (list, bySlug) => list.map(l => bySlug[l]),
-// );
-export const getTagEntities = state => state.entities.tags;
+export const getPostIds = state => state.blog.posts.ids;
+export const getPostsList = state => state.blog.posts.all;
 
-// export const getPosts = (state: Object) => state.posts.list;
+export const getPosts = createSelector(
+  [getPostIds, getPostsList],
+  (ids, all) => ids.map(id => all[id])
+);

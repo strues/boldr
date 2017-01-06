@@ -6,7 +6,9 @@ import { connect } from 'react-redux';
 import { LAYOUTS } from '../../../core/constants';
 import { changeLayout } from '../../../state/modules/boldr/ui';
 import { getPosts, fetchPostsIfNeeded } from '../../../state/modules/blog/posts';
-
+import { getTagsList } from '../../../state/modules/blog/selectors';
+import { fetchTagsIfNeeded } from '../../../state/modules/blog/tags/actions';
+import { getTags } from '../../../state/modules/blog/tags/selectors';
 import type { Post } from '../../../types/models'; // eslint-disable-line
 import PostListing from './PostListing';
 
@@ -14,6 +16,7 @@ type Props = {
   posts: Array<Post>,
   loading: ?Boolean,
   ui: Object,
+  fetchTagsIfNeeded: () => void,
   changeLayout: () => void,
   handleChangeLayout: () => void,
   fetchPostsIfNeeded: () => void,
@@ -21,7 +24,10 @@ type Props = {
 
 @provideHooks({
   fetch: ({ dispatch }) => {
-    return dispatch(fetchPostsIfNeeded());
+    return Promise.all([
+      dispatch(fetchPostsIfNeeded()),
+      dispatch(fetchTagsIfNeeded()),
+    ]);
   },
 })
 export class PostListingContainer extends Component {
@@ -30,6 +36,7 @@ export class PostListingContainer extends Component {
     (this: any).handleChangeLayout = this.handleChangeLayout.bind(this);
   }
   componentDidMount() {
+    this.props.fetchTagsIfNeeded();
     this.props.fetchPostsIfNeeded();
   }
 
@@ -43,6 +50,7 @@ export class PostListingContainer extends Component {
     return (
       <PostListing
         posts={ this.props.posts }
+        listTags={ this.props.listTags }
         layout={ this.props.ui.layout }
         handleChangeLayout={ this.handleChangeLayout }
       />
@@ -52,11 +60,12 @@ export class PostListingContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    posts: state.blog.posts.list,
+    listTags: state.blog.tags.all,
+    posts: getPosts(state),
     ui: state.boldr.ui,
   };
 };
 
 export default connect(mapStateToProps, {
-  fetchPostsIfNeeded, changeLayout,
+  fetchPostsIfNeeded, changeLayout, fetchTagsIfNeeded,
 })(PostListingContainer);

@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 import { Card, CardTitle, CardText } from 'material-ui/Card';
 
 import { Grid, Col, Row } from '../../../components/Layout';
-import { doSignup } from '../actions';
+import { doSignup } from '../../../state/modules/account/actions';
 import SignupForm from './SignupForm';
 
 type Props = {

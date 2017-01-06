@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
-import createReducer from './reducers';
+import rootReducer from './reducers';
 import createMiddleware from './clientMiddleware';
 
 export default function configureStore(preloadedState, history, apiClient) {
@@ -28,23 +28,18 @@ export default function configureStore(preloadedState, history, apiClient) {
   }
 
   // Creating the store
-  const store = createStore(createReducer(), preloadedState, compose(
+  const store = createStore(rootReducer, preloadedState, compose(
     applyMiddleware(...middleware),
     ...enhancers,
   ));
-  // async reducers we can inject based on the route.
-  store.asyncReducers = {};
   // Hot reload
     /* istanbul ignore next */
   if (process.env.NODE_ENV === 'development') {
       /* istanbul ignore next */
     if (module.hot) {
       module.hot.accept('./reducers', () => {
-        System.import('./reducers').then((reducerModule) => {
-          const createReducers = reducerModule.default;
-          const nextReducers = createReducers(store.asyncReducers);
-          store.replaceReducer(nextReducers);
-        });
+        const nextReducer = require('./reducers').default
+        store.replaceReducer(nextReducer)
       });
     }
   }

@@ -6,7 +6,7 @@ import { Link } from 'react-router';
 import { Card, CardTitle, CardText } from 'material-ui/Card';
 
 import { Grid, Col, Row } from '../../../components/Layout';
-import { doLogin } from '../actions';
+import { doLogin } from '../../../state/modules/account/actions';
 import LoginForm from './LoginForm';
 
 type Props = {

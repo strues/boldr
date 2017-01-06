@@ -5,7 +5,7 @@ import TextField from 'material-ui/TextField';
 import { Card, CardTitle, CardActions, CardText } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Grid, Col, Row } from '../../../components/index';
-import { resetPassword } from '../actions';
+import { resetPassword } from '../../../state/modules/account/actions';
 import ResetPasswordForm from './ResetPasswordForm';
 
 type Props = {

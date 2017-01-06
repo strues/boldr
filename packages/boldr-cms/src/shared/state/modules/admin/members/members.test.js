@@ -1,4 +1,4 @@
-import membersReducer from './reducer';
+import membersReducer from './members';
 
 describe('Members Duck', () => {
   it('Should return the initial state', () => {
@@ -6,7 +6,7 @@ describe('Members Duck', () => {
         membersReducer(undefined, {}),
       ).toEqual({
         loaded: false,
-        loading: false,
+        loading: true,
         members: [],
         error: null,
         selected: {},

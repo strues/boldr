@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
 import { showModal, hideModal } from '../../../state/modules/boldr/ui/actions';
+import { loadSiteMembers, memberSelected, updateMember } from '../../../state/modules/admin/members/actions';
 import Members from './Members';
-import { loadSiteMembers, memberSelected, updateMember } from './reducer';
 
 type Props = {
   members: Object,

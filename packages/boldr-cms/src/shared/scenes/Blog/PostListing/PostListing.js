@@ -25,7 +25,7 @@ const PostListing = (props: Props) => {
       {
         props.posts.map((post, i) =>
           <Col key={ i } xs={ 12 } md={ 4 }>
-            <PostCard { ...post } />
+            <PostCard { ...post } listTags={ props.listTags } />
           </Col>)
       }
     </Row>

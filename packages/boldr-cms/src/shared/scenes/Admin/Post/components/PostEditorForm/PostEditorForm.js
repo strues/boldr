@@ -12,7 +12,7 @@ import ContentForward from 'material-ui/svg-icons/content/forward';
 import { BoldrEditor } from '../../../../../components/BoldrEditor';
 import { Col, Row, Heading, S3Uploader } from '../../../../../components/index';
 import { openDrawer, closeDrawer } from '../../../../../state/modules/boldr/ui/actions';
-import { uploadFiles } from '../../../FileManager/reducer';
+import { uploadFiles } from '../../../../../state/modules/admin/attachments/actions';
 // import 'boldr-editor/lib/boldreditor.css';
 
 const styled = require('styled-components').default;

@@ -16,17 +16,9 @@ export default (store, connect) => {
     component: DashboardContainer,
     indexRoute: {
       getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          System.import('./Dashboard/reducer'),
-          System.import('./Dashboard/Dashboard'),
-        ]);
-        const renderRoute = loadModule(cb);
-        importModules.then(([reducer, component]) => {
-          injectReducer('dashboard', reducer.default);
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
+        System.import('./Dashboard/Dashboard')
+        .then(loadModule(cb))
+        .catch(errorLoading);
       },
     },
     childRoutes: [
@@ -57,17 +49,9 @@ export default (store, connect) => {
       {
         path: 'filemanager',
         getComponent(nextState, cb) {
-          const importModules = Promise.all([
-            System.import('./FileManager/reducer'),
-            System.import('./FileManager'),
-          ]);
-          const renderRoute = loadModule(cb);
-          importModules.then(([reducer, component]) => {
-            injectReducer('attachments', reducer.default);
-            renderRoute(component);
-          });
-
-          importModules.catch(errorLoading);
+          System.import('./FileManager')
+          .then(loadModule(cb))
+          .catch(errorLoading);
         },
       },
 
@@ -75,24 +59,16 @@ export default (store, connect) => {
         path: 'navigation',
         getComponent(nextState, cb) {
           System.import('./Navigation')
-        .then(loadModule(cb))
-        .catch(errorLoading);
+          .then(loadModule(cb))
+          .catch(errorLoading);
         },
       },
       {
         path: 'members',
         getComponent(nextState, cb) {
-          const importModules = Promise.all([
-            System.import('./Members/reducer'),
-            System.import('./Members'),
-          ]);
-          const renderRoute = loadModule(cb);
-          importModules.then(([reducer, component]) => {
-            injectReducer('members', reducer.default);
-            renderRoute(component);
-          });
-
-          importModules.catch(errorLoading);
+          System.import('./Members')
+          .then(loadModule(cb))
+          .catch(errorLoading);
         },
       }],
   };

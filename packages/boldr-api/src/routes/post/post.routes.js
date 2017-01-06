@@ -79,8 +79,32 @@ router.route('/pid/:id')
        * @apiError {Object} 404 Unable to find a post matching the id.
        */
       .get(ctrl.getId)
+      /**
+       * @api {post} /posts/pid/:id Add a tag to the post
+       * @apiName addTag
+       * @apiGroup Post
+       * @apiPermission admin
+
+       * @apiError {Object} 404 Unable to find a post matching the id.
+       */
       .post(isAuthenticated, checkRole('Admin'), ctrl.addTag)
+      /**
+       * @api {put} /posts/pid/:id Update a post by its id
+       * @apiName update
+       * @apiGroup Post
+       * @apiPermission admin
+
+       * @apiError {Object} 404 Unable to find a post matching the id.
+       */
       .put(isAuthenticated, checkRole('Admin'), ctrl.update)
+      /**
+       * @api {delete} /posts/pid/:id Remove a post by its id
+       * @apiName destroy
+       * @apiGroup Post
+       * @apiPermission admin
+
+       * @apiError {Object} 404 Unable to find a post matching the id.
+       */
       .delete(isAuthenticated, checkRole('Admin'), ctrl.destroy);
 
 export default router;

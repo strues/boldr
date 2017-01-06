@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { provideHooks } from 'redial';
 
 import { showModal, hideModal } from '../../../state/modules/boldr/ui';
-import { uploadFiles, fetchMedia, deleteMedia } from './reducer';
+import { uploadFiles, fetchMedia, deleteMedia } from '../../../state/modules/admin/attachments/actions';
 import FileManager from './FileManager';
 
 type Props = {

@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 
 import type { ReactElement, ReactChildren } from '../../../types/react';
 import PrimaryHeader from '../../../components/PrimaryHeader';
-import { logout } from '../../../scenes/Account/actions';
+import { logout } from '../../../state/modules/account/actions';
 import { selectSetting, getSettings } from '../../../state/modules/boldr/settings';
 import { expandNavbar, collapseNavbar } from '../../../state/modules/boldr/ui/actions';
 
