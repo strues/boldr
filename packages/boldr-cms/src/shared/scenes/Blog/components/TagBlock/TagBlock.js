@@ -11,10 +11,12 @@ const TagBlock = (props) => {
   if (!props.tags) {
     return <div>No tags</div>;
   }
+
   return (
     <div style={ styles.wrapper } className="tagblock">
 
     {
+      
       props.tags.map(tag => <Tag key={ tag.id } name={ tag.name } id={ tag.id } />)
     }
 

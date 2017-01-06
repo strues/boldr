@@ -183,6 +183,7 @@ const deletePostFail = (err) => ({
 
 export function updatePost(postData: Post) {
   return (dispatch: Function) => {
+    console.log('action', postData);
     dispatch(updatePostDetails(postData));
     return api.putPostId(postData)
       .then(response => {

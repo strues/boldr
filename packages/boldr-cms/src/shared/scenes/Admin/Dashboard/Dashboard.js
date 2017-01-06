@@ -40,7 +40,7 @@ export class Dashboard extends Component {
 
 function mapStateToProps(state) {
   return {
-    activities: state.dashboard.activities,
+    activities: state.admin.dashboard.activities,
   };
 }
 export default connect(mapStateToProps, { loadSiteActivity })(Dashboard);

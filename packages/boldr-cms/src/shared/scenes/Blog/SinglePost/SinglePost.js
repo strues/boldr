@@ -8,6 +8,7 @@ import { getPosts } from '../../../state/modules/blog/posts';
 
 export type Props = {
   loading: boolean,
+  entities: Object,
   currentPost: Object,
 };
 
@@ -16,7 +17,7 @@ const SinglePost = (props: Props) => {
       <Grid>
         <Row>
           <PostContent { ...props.currentPost } />
-          <PostSidebar { ...props.currentPost } />
+          <PostSidebar { ...props.currentPost } entities={ props.entities } />
         </Row>
       </Grid>
   );
@@ -24,6 +25,7 @@ const SinglePost = (props: Props) => {
 
 const mapStateToProps = (state, ownProps) => {
   return {
+    entities: state.entities,
     currentPost: state.blog.posts.currentPost,
   };
 };

@@ -78,7 +78,7 @@ class DashboardContainer extends PureComponent {
 function mapStateToProps(state) {
   return {
     router: state.router,
-    dashboard: state.dashboard,
+    dashboard: state.admin.dashboard,
     boldr: state.boldr,
     account: state.account,
   };

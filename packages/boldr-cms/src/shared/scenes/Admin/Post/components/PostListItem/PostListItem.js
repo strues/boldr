@@ -1,10 +1,13 @@
 /* @flow */
 import React from 'react';
 import Link from 'react-router/lib/Link';
+import { connect } from 'react-redux';
 import { format } from 'date-fns';
 import { ListItem } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
 import Divider from 'material-ui/Divider';
+
+import { selectPost } from '../../../../../state/modules/blog/posts/actions';
 
 type Props = {
   id: String,
@@ -30,6 +33,10 @@ const PostListItem = (props: Props) => {
     const postStatus = 'published';
     props.handleArticleDraftClick(postId, postStatus);
   }
+  const post = props;
+  function transitionPost() {
+    props.dispatch(selectPost(post))
+  }
   function handleClickDelete() {
     const postId: String = props.id;
     props.handleDeleteClick(postId);
@@ -41,7 +48,7 @@ const PostListItem = (props: Props) => {
       <ListItem
         leftAvatar={ <Avatar src={ props.feature_image } /> }
         primaryText={
-          <Link to={ `/admin/posts/editor/${props.slug}` }>
+          <Link to={ `/admin/posts/editor/${props.slug}` } onClick={ transitionPost }>
           { props.title }
           </Link>
         }
@@ -51,4 +58,4 @@ const PostListItem = (props: Props) => {
   );
 };
 
-export default PostListItem;
+export default connect()(PostListItem);

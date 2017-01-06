@@ -50,7 +50,6 @@ export class PostListContainer extends PureComponent {
 const mapStateToProps = (state) => {
   return {
     posts: getPosts(state),
-    loading: state.blog.posts.loading,
   };
 };
 

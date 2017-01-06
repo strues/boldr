@@ -67,14 +67,7 @@ export const createPost = (data) =>
   });
 
 export const putPostId = (postData) =>
-  apiClient.put(`/posts/pid/${postData.id}`, {
-    // title: articleData.title,
-    content: postData.content,
-    excerpt: postData.excerpt,
-    feature_image: postData.feature_image,
-    // tag: postData.tag,
-    status: postData.status,
-  });
+  apiClient.put(`/posts/pid/${postData.id}`, { data: postData });
 
   /**
     * SETTINGS API ROUTES
