@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import { RadioButtonGroup, TextField } from 'redux-form-material-ui';
 import Drawer from 'material-ui/Drawer';
@@ -12,7 +12,7 @@ import ContentForward from 'material-ui/svg-icons/content/forward';
 import { BoldrEditor } from '../../../../../components/BoldrEditor';
 import { Col, Row, Heading, S3Uploader } from '../../../../../components/index';
 import { openDrawer, closeDrawer } from '../../../../../state/modules/boldr/ui/actions';
-import { uploadFiles } from '../../../../../state/modules/admin/attachments/actions';
+import { uploadPostImage } from '../../../../../state/modules/admin/attachments/actions';
 // import 'boldr-editor/lib/boldreditor.css';
 
 const styled = require('styled-components').default;
@@ -67,7 +67,7 @@ class PostEditorForm extends Component {
       s3_key: signResult.s3_key,
       url: fileUrl,
     };
-    this.props.dispatch(uploadFiles(payload));
+    this.props.dispatch(uploadPostImage(payload));
   }
 
   checkEditStatus() {

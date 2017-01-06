@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   loading: false,
   error: null,
   files: [],
+  postImage: {},
 };
 /**
  * Attaachment Reducer
@@ -20,6 +21,7 @@ export default function attachmentReducer(state = INITIAL_STATE, action = {}) {
     case t.GET_ATTACHMENT_REQUEST:
     case t.UPLOAD_ATTACHMENT_REQUEST:
     case t.DELETE_ATTACHMENT_REQUEST:
+    case t.UPLOAD_POST_IMG_REQUEST:
       return {
         ...state,
         loading: true,
@@ -36,6 +38,12 @@ export default function attachmentReducer(state = INITIAL_STATE, action = {}) {
         loading: false,
         files: [...state.files, action.payload],
       };
+    case t.UPLOAD_POST_IMG_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        postImage: action.payload,
+      };
     case t.DELETE_ATTACHMENT_SUCCESS:
       return {
         ...state,
@@ -44,6 +52,7 @@ export default function attachmentReducer(state = INITIAL_STATE, action = {}) {
     case t.GET_ATTACHMENT_FAILURE:
     case t.UPLOAD_ATTACHMENT_FAILURE:
     case t.DELETE_ATTACHMENT_FAILURE:
+    case t.UPLOAD_POST_IMG_FAILURE:
       return {
         ...state,
         loading: false,

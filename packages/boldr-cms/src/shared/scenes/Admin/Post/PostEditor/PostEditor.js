@@ -54,6 +54,7 @@ class PostEditor extends Component {
       <div>
         <PostEditorForm
           initialValues={ this.props.currentPost }
+          postImage={ this.props.postImage }
           onSubmit={ this.handleSubmit }
           drawer={ this.props.drawer }
           isEditing
@@ -69,6 +70,7 @@ const mapStateToProps = (state, ownProps) => {
     // posts: state.blog.posts,
     currentPost: state.blog.posts.currentPost,
     drawer: state.boldr.ui.drawer,
+    postImage: state.admin.attachments.postImage,
   };
 };
 export default connect(mapStateToProps, { updatePost })(PostEditor);

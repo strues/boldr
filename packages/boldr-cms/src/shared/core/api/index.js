@@ -57,14 +57,7 @@ export const delPostById = (postId) =>
   apiClient.del(`/posts/pid/${postId}`);
 
 export const createPost = (data) =>
-  apiClient.put('/posts', {
-    title: data.title,
-    content: data.content,
-    feature_image: data.feature_image,
-    tags: data.tags,
-    status: data.status,
-    excerpt: data.excerpt,
-  });
+  apiClient.post('/posts', { data });
 
 export const putPostId = (postData) =>
   apiClient.put(`/posts/pid/${postData.id}`, { data: postData });

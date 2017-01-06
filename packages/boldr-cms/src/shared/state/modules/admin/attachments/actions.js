@@ -68,7 +68,38 @@ export function uploadFiles(payload) {
       });
   };
 }
+const beginUploadPostImage = () => {
+  return { type: t.UPLOAD_POST_IMG_REQUEST };
+};
 
+function uploadPostImageSuccess(response) {
+  return {
+    type: t.UPLOAD_POST_IMG_SUCCESS,
+    payload: response.body,
+  };
+}
+
+function uploadPostImageFail(err) {
+  return {
+    type: t.UPLOAD_POST_IMG_FAILURE,
+    error: err,
+  };
+}
+
+export function uploadPostImage(payload) {
+  return (dispatch) => {
+    dispatch(beginUploadPostImage());
+    return api.doUpload(payload)
+      .then(response => {
+        if (response.status === 201) {
+          dispatch(uploadPostImageSuccess(response));
+        }
+      })
+      .catch(err => {
+        dispatch(uploadPostImageFail(err));
+      });
+  };
+}
 const deleteMediaFail = (err) => ({
   type: t.DELETE_ATTACHMENT_FAILURE,
   error: err,
