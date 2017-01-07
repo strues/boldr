@@ -1,6 +1,6 @@
 exports[`<Widget /> renders snapshot 1`] = `
 <div
-  className="widget__wrap">
+  className="boldr-widget">
   <Card
     expandable={false}
     expanded={null}

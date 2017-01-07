@@ -13,3 +13,5 @@ export const UPLOAD_ATTACHMENT_FAILURE = 'UPLOAD_ATTACHMENT_FAILURE';
 export const UPLOAD_POST_IMG_REQUEST = '@boldr/admin/UPLOAD_POST_IMG_REQUEST';
 export const UPLOAD_POST_IMG_SUCCESS = '@boldr/admin/UPLOAD_POST_IMG_SUCCESS';
 export const UPLOAD_POST_IMG_FAILURE = '@boldr/admin/UPLOAD_POST_IMG_FAILURE';
+
+export const SELECT_FILE = '@boldr/admin/attachments/SELECT_FILE';

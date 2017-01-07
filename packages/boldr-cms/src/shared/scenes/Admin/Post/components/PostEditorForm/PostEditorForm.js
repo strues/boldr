@@ -13,9 +13,22 @@ import { BoldrEditor } from '../../../../../components/BoldrEditor';
 import { Col, Row, Heading, S3Uploader } from '../../../../../components/index';
 import { openDrawer, closeDrawer } from '../../../../../state/modules/boldr/ui/actions';
 import { uploadPostImage } from '../../../../../state/modules/admin/attachments/actions';
-// import 'boldr-editor/lib/boldreditor.css';
+
 
 const styled = require('styled-components').default;
+
+const Wrapper = styled.div`
+  margin: 0 auto;
+  display: inherit;
+  padding-top: 3em;
+  width: 90%;
+`;
+const Footer = styled.div`
+  margin: 0 auto;
+  display: inherit;
+  width: 90%;
+  padding-top: 5em;
+`;
 
 type Props = {
   handleSubmit?: Function,
@@ -53,7 +66,6 @@ class PostEditorForm extends Component {
   }
 
   props: Props;
-  // @TODO: Setup action and reducer
 
   onUploadFinish = (signResult) => {
     const signUrl = signResult.signedUrl;
@@ -93,23 +105,8 @@ class PostEditorForm extends Component {
      * @param  {string} label
      * @return {element} BoldrEditor
      */
-    const renderEditor = ({ input, label }) => (
-      <div>
-        <BoldrEditor { ...input } label={ label } />
-      </div>
-    );
-    const Wrapper = styled.div`
-      margin: 0 auto;
-      display: inherit;
-      padding-top: 3em;
-      width: 90%;
-    `;
-    const Footer = styled.div`
-      margin: 0 auto;
-      display: inherit;
-      width: 90%;
-      padding-top: 5em;
-    `;
+    const renderEditor = ({ input, label }) => (<BoldrEditor { ...input } label={ label } />);
+
     return (
       <Row>
         <Col xs>

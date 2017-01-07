@@ -8,6 +8,7 @@ import { Authenticated } from './HOC';
 import Hero from './Hero';
 import PrimaryHeader from './PrimaryHeader';
 import Widget from './Widget';
+import Image from './Image';
 
 export {
   PrimaryHeader,
@@ -21,5 +22,6 @@ export {
   Authenticated,
   S3Uploader,
   Hero,
+  Image,
   Widget,
 };

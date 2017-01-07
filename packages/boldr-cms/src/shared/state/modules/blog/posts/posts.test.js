@@ -10,13 +10,6 @@ describe('Post Duck', () => {
         ids: [],
         currentPost: {},
         isFetching: false,
-        posts: {
-          bySlug: {},
-          list: [],
-          loading: false,
-          loaded: false,
-          error: null,
-        },
       });
   });
   it('should initiate loading', () => {
@@ -25,26 +18,12 @@ describe('Post Duck', () => {
       ids: [],
       currentPost: {},
       isFetching: false,
-      posts: {
-        bySlug: {},
-        list: [],
-        loading: false,
-        loaded: false,
-        error: null,
-      },
     };
     const stateAfter = {
       all: {},
       ids: [],
       currentPost: {},
       isFetching: true,
-      posts: {
-        bySlug: {},
-        list: [],
-        loading: true,
-        loaded: false,
-        error: null,
-      },
     };
     expect(
       postsReducer(initialState, {
@@ -58,26 +37,12 @@ describe('Post Duck', () => {
       ids: [],
       currentPost: {},
       isFetching: false,
-      posts: {
-        bySlug: {},
-        list: [],
-        loading: false,
-        loaded: false,
-        error: null,
-      },
     };
     const stateAfter = {
       all: {},
       ids: [],
       currentPost: {},
       isFetching: false,
-      posts: {
-        bySlug: {},
-        list: [],
-        loading: false,
-        loaded: true,
-        error: undefined,
-      },
     };
     expect(
       postsReducer(initialState, {

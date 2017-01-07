@@ -9,13 +9,14 @@ import { getPosts, fetchPostsIfNeeded } from '../../../state/modules/blog/posts'
 import { getTagsList } from '../../../state/modules/blog/selectors';
 import { fetchTagsIfNeeded } from '../../../state/modules/blog/tags/actions';
 import { getTags } from '../../../state/modules/blog/tags/selectors';
-import type { Post } from '../../../types/models'; // eslint-disable-line
+import type { Post, UI } from '../../../types/models'; // eslint-disable-line
 import PostListing from './PostListing';
 
 type Props = {
   posts: Array<Post>,
   loading: ?Boolean,
-  ui: Object,
+  listTags: Object,
+  ui: UI,
   fetchTagsIfNeeded: () => void,
   changeLayout: () => void,
   handleChangeLayout: () => void,

@@ -1,8 +1,11 @@
 /* eslint-disable id-match */
-import { Model } from 'objection';
+import { Model, ValidationError } from 'objection';
 import uuid from 'uuid';
 
-/* istanbul ignore */
+/**
+ * @class BaseModel
+ * @extends Model
+ */
 class BaseModel extends Model {
     /**
      * If we should update the created_at attribute when inserted and the updated_at attribute when updated.
@@ -10,6 +13,7 @@ class BaseModel extends Model {
      * @type {boolean}
      */
   static addTimestamps = true;
+  // Adds a uuid field to the model for cases where the primary key is NOT a uuid type
   static addUUID = true;
     /**
      * An object of attribute names with function values to transform attributes on the model if they exist.

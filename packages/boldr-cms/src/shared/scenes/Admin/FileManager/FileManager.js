@@ -16,6 +16,7 @@ type Props = {
   closeModal: () => void,
   openModal: () => void,
   ui: Object,
+  selectFile: () => void,
 };
 
 const FileManager = (props: Props) => {
@@ -35,7 +36,7 @@ const FileManager = (props: Props) => {
       </Toolbar>
      <Row>
        <Col xs={ 12 }>
-          <FileView files={ attachments.files } removeMedia={ handleRemoveMedia } />
+          <FileView files={ attachments.files } removeMedia={ handleRemoveMedia } selectFile={ props.selectFile } />
        </Col>
      </Row>
      <Modal open={ ui.modal } onClose={ closeModal } title="Upload an image">

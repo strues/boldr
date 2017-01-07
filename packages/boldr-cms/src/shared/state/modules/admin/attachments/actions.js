@@ -1,3 +1,4 @@
+import { push } from 'react-router-redux';
 import * as api from '../../../../core/api';
 import { notificationSend } from '../../notifications/notifications';
 import * as t from './constants';
@@ -120,5 +121,18 @@ export function deleteMedia(id) {
       .catch(err => {
         dispatch(deleteMediaFail(err));
       });
+  };
+}
+
+export function selectedFile(file: Object) {
+  return {
+    type: t.SELECT_FILE,
+    file,
+  };
+}
+export function selectFile(file) {
+  return (dispatch) => {
+    dispatch(selectedFile(file));
+    return dispatch(push(`/admin/filemanager/${file.id}/editor`));
   };
 }

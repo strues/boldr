@@ -29,11 +29,6 @@
     "React": true
   },
   "rules": {
-    "id-match": 0,
-    "no-duplicate-imports": 0,
-    "react/prefer-stateless-function": 0,
-    "import/no-unresolved": 0,
-    "babel/func-params-comma-dangle": 0,
-    "no-unused-expressions": 0,
+
     }
 }

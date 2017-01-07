@@ -21,7 +21,7 @@ type Props = {
 
 const Sidebar = (props: Props) => {
   return (
-    <Drawer open={ props.open } width={ 200 }>
+    <Drawer open={ props.open } width={ 200 } className="boldr-sidebar">
       <Link to="/">
         <MenuItem leftIcon={ <HomeIcon /> }>Home</MenuItem>
       </Link>

@@ -1,4 +1,4 @@
-/* @flow weak */
+/* @flow */
 import React, { Component } from 'react';
 import { Map } from 'immutable';
 import { stateToHTML } from 'draft-js-export-html';
@@ -20,6 +20,9 @@ import {
 } from './controls';
 import decorator from './decorators/defaultDecorator';
 import EditorValue from './lib/EditorValue';
+
+// $FlowIssue
+import './styles/main.scss';
 
 type ChangeHandler = (value: EditorValue) => any;
 type Props = {
@@ -53,6 +56,7 @@ type State = {
   customBlockType: any
 };
 
+// Glorified wrapper for Draft-js
 // Glorified wrapper for Draft-js
 class BoldrEditor extends Component {
   constructor(props: Props) {
@@ -336,6 +340,7 @@ class BoldrEditor extends Component {
 
   render() {
     const { editorState } = this.state;
+    const { ...otherProps } = this.props;
     // If the user changes block type before entering any text, we can
     // either style the placeholder or hide it. Let's just hide it now.
     let className = 'be';
@@ -390,9 +395,9 @@ class BoldrEditor extends Component {
             !this.props.readOnly ? blockInput : null
           }
         </div>
-        <div className={ className } role="form" tabIndex="0" id="editor">
+        <div className={ className }>
           <Editor ref="editor"
-            { ...this.props }
+            { ...otherProps }
             editorState={ editorState }
             blockRendererFn={ this.renderBlock }
             placeholder={ this.props.placeholder }

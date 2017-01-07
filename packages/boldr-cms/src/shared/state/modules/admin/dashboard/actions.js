@@ -37,3 +37,36 @@ export function loadSiteActivity() {
       });
   };
 }
+
+const beginFetchStats = () => ({
+  type: t.FETCH_STATS_REQUEST,
+});
+
+const fetchStatsSuccess = (response) => {
+  return {
+    type: t.FETCH_STATS_SUCCESS,
+    payload: response.body,
+  };
+};
+
+// Fail receivers
+const failedToFetchStats = (err) => ({
+  type: t.FETCH_STATS_FAILURE,
+  error: err,
+});
+
+export function fetchStats() {
+  return dispatch => {
+    dispatch(beginFetchStats());
+    return api.getAllStats()
+      .then(response => {
+        if (response.status !== 200) {
+          dispatch(failedToFetchStats(response));
+        }
+        dispatch(fetchStatsSuccess(response));
+      })
+      .catch(err => {
+        dispatch(failedToFetchStats(err));
+      });
+  };
+}

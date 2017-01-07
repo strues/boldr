@@ -57,7 +57,7 @@ export class MembersContainer extends Component {
       role: values.role,
       id: this.state.userId,
     };
-    console.log(userData)
+
     this.props.updateMember(userData);
   }
   render() {
@@ -76,8 +76,8 @@ export class MembersContainer extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    members: state.members,
-    selected: state.members.selected,
+    members: state.admin.members,
+    selected: state.admin.members.selected,
     ui: state.boldr.ui,
   };
 };

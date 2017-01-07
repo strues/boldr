@@ -1,13 +1,13 @@
 /* @flow */
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import type { Post } from '../../../../types/models';
+import type { Post, PostImage } from '../../../../types/models';
 import { createPost } from '../../../../state/modules/blog/posts';
 import NewPost from './NewPost';
 
 type Props = {
   dispatch: Function,
-  postImage: Object,
+  postImage: PostImage,
   drawer: boolean,
 };
 
@@ -29,7 +29,6 @@ class NewPostContainer extends Component {
       seo: data.seo,
     };
     this.props.dispatch(createPost(postData));
-    this.context.router.push('/dashboard');
   }
   props: Props;
 

@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   error: null,
   files: [],
   postImage: {},
+  currentFile: {},
 };
 /**
  * Attaachment Reducer
@@ -57,6 +58,11 @@ export default function attachmentReducer(state = INITIAL_STATE, action = {}) {
         ...state,
         loading: false,
         error: action.payload,
+      };
+    case t.SELECT_FILE:
+      return {
+        ...state,
+        currentFile: action.file,
       };
     default:
       return state;

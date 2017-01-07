@@ -25,7 +25,8 @@ type Props = {
   toggleOpen?: Function,
   showSidebar?: Function,
   hideSidebar?: Function,
-  dashboard: ?Object
+  dashboard: ?Object,
+  account: Object,
 };
 
 @Authenticated

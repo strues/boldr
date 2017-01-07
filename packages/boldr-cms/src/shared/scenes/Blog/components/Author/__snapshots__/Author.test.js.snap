@@ -1,6 +1,6 @@
 exports[`<Author /> renders snapshot 1`] = `
 <div
-  className="post__sidebar-author">
+  className="boldr-post__sidebar-author">
   <List>
     <ListItem
       autoGenerateNestedIndicator={true}

@@ -54,7 +54,14 @@ export default (store, connect) => {
           .catch(errorLoading);
         },
       },
-
+      {
+        path: 'filemanager/:id/editor',
+        getComponent(nextState, cb) {
+          System.import('./FileManager/FileEditor')
+          .then(loadModule(cb))
+          .catch(errorLoading);
+        },
+      },
       {
         path: 'navigation',
         getComponent(nextState, cb) {

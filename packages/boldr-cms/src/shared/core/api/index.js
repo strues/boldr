@@ -198,3 +198,13 @@ export const doCreateBlock = (data) => {
   apiClient
       .post('/blocks', { data });
 };
+
+
+/**
+  * ADMIN API ROUTES
+  * -------------------------
+  * @exports getAllStats
+  *****************************************************************/
+export const getAllStats = () =>
+  apiClient.get('/admin/stats');
+  

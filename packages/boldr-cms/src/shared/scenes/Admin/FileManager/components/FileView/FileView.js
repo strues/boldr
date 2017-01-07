@@ -1,5 +1,5 @@
 import React, { PropTypes } from 'react';
-import { Row } from '../../../../../components/Layout';
+import { Row, Col } from '../../../../../components/Layout';
 import File from '../File';
 
 const FileView = props => {
@@ -7,11 +7,13 @@ const FileView = props => {
     <div style={ { paddingTop: '15px' } }>
       <Row>
         {
-          props.files.map((file, i) =>
-          <File key={ i } file={ file } removeMedia={ props.removeMedia } />)
+          props.files.map((file) =>
+          <Col key={ file.id } xs={ 12 } md={ 3 } lg={ 2 }>
+            <File file={ file } removeMedia={ props.removeMedia } selectFile={ props.selectFile } />
+          </Col>)
          }
-         </Row>
-      </div>
+      </Row>
+    </div>
   );
 };
 

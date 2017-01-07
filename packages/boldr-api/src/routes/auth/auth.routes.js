@@ -42,7 +42,7 @@ const router = express.Router();
  *       }
  *     }
  */
-router.post('/login', ctrl.login);
+router.post('/login', ctrl.loginUser);
 
 /**
  * @api {post} /auth/signup Signup
@@ -58,7 +58,7 @@ router.post('/login', ctrl.login);
  * @apiError 409 Email already exists
  * @apiError 400 Bad request.
  */
-router.post('/signup', ctrl.register);
+router.post('/signup', ctrl.registerUser);
 
 /**
  * @api {get} /auth/check Check
@@ -79,6 +79,6 @@ router.get('/check', isAuthenticated, ctrl.checkAuthentication);
  * @apiError 401 Invalid token.
  * @apiError 404 Missing or cannot find the verification token
  */
-router.get('/verification/:verifToken', ctrl.verify);
+router.get('/verification/:verifToken', ctrl.verifyUser);
 
 export default router;

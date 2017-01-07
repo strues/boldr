@@ -10,6 +10,7 @@ const INITIAL_STATE = {
   loading: false,
   error: null,
   activities: [],
+  stats: {},
 };
 
 export default function dashboardReducer(state = INITIAL_STATE, action) {
@@ -28,6 +29,7 @@ export default function dashboardReducer(state = INITIAL_STATE, action) {
         docked: false,
       };
     case t.LOAD_ACTIVITIES_REQUEST:
+    case t.FETCH_STATS_REQUEST:
       return {
         ...state,
         loaded: false,
@@ -40,7 +42,15 @@ export default function dashboardReducer(state = INITIAL_STATE, action) {
         loaded: true,
         loading: false,
       };
+    case t.FETCH_STATS_SUCCESS:
+      return {
+        ...state,
+        stats: action.payload,
+        loaded: true,
+        loading: false,
+      };
     case t.LOAD_ACTIVITIES_FAILURE:
+    case t.FETCH_STATS_FAILURE:
       return {
         ...state,
         error: action.error,

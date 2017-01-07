@@ -12,6 +12,7 @@ describe('Dashboard Duck', () => {
         loading: false,
         error: null,
         activities: [],
+        stats: {},
       });
   });
   it('should hide the sidebar', () => {
@@ -22,6 +23,7 @@ describe('Dashboard Duck', () => {
       loading: false,
       error: null,
       activities: [],
+      stats: {},
     };
     const stateAfter = {
       open: false,
@@ -30,6 +32,7 @@ describe('Dashboard Duck', () => {
       loading: false,
       error: null,
       activities: [],
+      stats: {},
     };
     expect(
       dashboardReducer(initialState, {
@@ -45,6 +48,7 @@ describe('Dashboard Duck', () => {
       loading: false,
       error: null,
       activities: [],
+      stats: {},
     };
     const stateAfter = {
       loaded: true,
@@ -53,6 +57,7 @@ describe('Dashboard Duck', () => {
       loading: false,
       error: null,
       activities: [],
+      stats: {},
     };
     expect(
       dashboardReducer(initialState, {

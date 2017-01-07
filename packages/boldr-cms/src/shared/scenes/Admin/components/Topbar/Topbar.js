@@ -32,15 +32,15 @@ const Topbar = (props: Props) => {
     backgroundColor: lightBlue500,
   };
   return (
-      <Toolbar className="bldr__topbar" style={ inline }>
-        <ToolbarGroup className="bldr__topbar-left" firstChild>
+      <Toolbar className="boldr-topbar" style={ inline }>
+        <ToolbarGroup className="boldr-topbar__left" firstChild>
           <IconButton iconStyle={ { color: 'white' } }
             onClick={ props.menuButtonClick }
-            className="bldr__topbar-icon"
+            className="boldr-topbar__icon"
           >
             <NavigationMenu />
           </IconButton>
-           <h3 className="header-title">{ props.title }</h3>
+           <h3 className="boldr-topbar__title">{ props.title }</h3>
         </ToolbarGroup>
         <ToolbarGroup firstChild style={ { justifyContent: 'space-between', width: '150px' } }>
           <TiBell size={ 30 } />

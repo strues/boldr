@@ -69,14 +69,11 @@ export function fetchPosts() {
  * @param  {Object} state   The blog state which contains posts
  */
 function shouldFetchPosts(state) {
-  const posts = state.blog.posts;
-  if (!posts) {
+  const posts = state.blog.posts.ids;
+  if (!posts.length) {
     return true;
   }
-  if (posts.loading) {
-    return false;
-  }
-  return posts;
+  return false;
 }
 
 const requestPosts = () => {
@@ -94,7 +91,7 @@ const receivePostsFailed = (err) => ({
   type: t.FETCH_POSTS_FAILURE, error: err,
 });
 
-export function selectPost(post) {
+export function selectPost(post: Object) {
   return {
     type: t.SELECT_POST,
     post,

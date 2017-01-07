@@ -11,7 +11,7 @@ type Props = {
 };
 const ActivityWidget = (props: Props) => {
   return (
-    <div className="activity-feed__wrap">
+    <div className="boldr-widget__activity">
     <Paper zDepth={ 1 }>
       <Heading size={ 2 }>
         <NewIcon /> Recent Activity

@@ -73,6 +73,10 @@ const renderApp = () => (
   </ReactHotLoader>
 );
 
+if (process.env.NODE_ENV === 'development') {
+  window.Perf = require('react-addons-perf');
+}
+
 if (process.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept(
     '../shared/scenes',

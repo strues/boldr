@@ -1,37 +1,33 @@
 /* @flow */
 import React from 'react';
 import { Entity, CompositeDecorator } from 'draft-js';
+import { ENTITY_TYPE } from 'draft-js-utils';
 import type { ContentBlock } from 'draft-js';
-import type { ReactChildren } from '../types/react';
+import type { ReactNode } from '../types/react';
 
 type Props = {
-  children: ReactChildren,
+  children: ReactNode,
   entityKey: string,
 };
 
 type EntityRangeCallback = (start: number, end: number) => void;
 
-const findLinkEntities = (contentBlock: ContentBlock, callback: EntityRangeCallback): void => {
-  contentBlock.findEntityRanges(
-    (character) => {
-      const entityKey = character.getEntity();
-      return (
-        entityKey !== null &&
-        Entity.get(entityKey).getType() === 'LINK'
-      );
-    },
-    callback,
-  );
-};
+function findLinkEntities(contentBlock: ContentBlock, callback: EntityRangeCallback) {
+  contentBlock.findEntityRanges((character) => {
+    const entityKey = character.getEntity();
+    return (
+      entityKey != null && Entity.get(entityKey).getType() === ENTITY_TYPE.LINK
+    );
+  }, callback);
+}
 
-const Link = (props: Props) => {
-  const { target, url } = Entity.get(props.entityKey).getData();
+
+function Link(props: Props) {
+  const { url } = Entity.get(props.entityKey).getData();
   return (
-    <a href={ url } target={ target } className="be-link">
-      { props.children }
-    </a>
+    <a href={ url }>{ props.children }</a>
   );
-};
+}
 
 const decorator = new CompositeDecorator([
   {

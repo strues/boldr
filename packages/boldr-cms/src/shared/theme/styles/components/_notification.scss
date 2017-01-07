@@ -1,0 +1,47 @@
+.boldr-notification__transition-enter {
+  opacity: .01;
+  transition: opacity .5s ease-in;
+}
+.boldr-notification__transition-enter-active {
+  opacity: 1;
+}
+.boldr-notification__transition-leave {
+  opacity: 1;
+  transition: opacity .5s ease-in;
+}
+.boldr-notification__transition-leave-active {
+  opacity: .01;
+}
+.boldr-notification {
+  position: relative;
+  font: 1rem normal Helvetica, sans-serif;
+  overflow: hidden;
+  border-radius: 4px;
+  margin-bottom: 2px;
+  max-height: 400px;
+  box-sizing: border-box;
+  box-shadow: 0 0 1px 1px rgba(10, 10, 11, .125);
+  padding: .5rem;
+  color: #fff;
+}
+.boldr-notification__success {
+  background-color: #64ce83;
+}
+.boldr-notification__info {
+  background-color: #3ea2ff;
+}
+.boldr-notification__warning {
+  background-color: #ff7f48;
+}
+.boldr-notification__danger {
+  background-color: #e74c3c;
+}
+.boldr-notification__container {
+  bottom: 24px;
+  left: 24px;
+  position: fixed;
+  z-index: 9999;
+  align-items: flex-start;
+  flex-direction: column;
+  display: flex
+}

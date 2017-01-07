@@ -10,9 +10,15 @@ import PostCard from '../components/PostCard';
 type Props = {
   posts: Array<Post>,
   layout: Object,
+  listTags: Object,
   handleChangeLayout: () => void
 };
-
+const style = {
+  position: 'fixed',
+  right: '50px',
+  bottom: '15vh',
+  zIndex: '90',
+};
 const PostListing = (props: Props) => {
   if (!props.posts) {
     return (
@@ -36,17 +42,12 @@ const PostListing = (props: Props) => {
       {
         props.posts.map((post, i) =>
           <Col key={ i } xs={ 12 }>
-            <PostCard { ...post } />
+            <PostCard { ...post } listTags={ props.listTags } />
           </Col>)
       }
     </div>
   );
-  const style = {
-    position: 'fixed',
-    right: '50px',
-    bottom: '15vh',
-    zIndex: '90',
-  };
+
   return (
     <Grid>
       {

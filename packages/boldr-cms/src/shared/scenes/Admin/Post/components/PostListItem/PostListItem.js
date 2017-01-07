@@ -16,6 +16,7 @@ type Props = {
   handleArticlePublishClick: Function,
   handleDeleteClick: Function,
   handleArticleDraftClick: Function,
+  dispatch: Function,
   created_at: String,
   status: String,
   excerpt: String,
@@ -35,7 +36,7 @@ const PostListItem = (props: Props) => {
   }
   const post = props;
   function transitionPost() {
-    props.dispatch(selectPost(post))
+    props.dispatch(selectPost(post));
   }
   function handleClickDelete() {
     const postId: String = props.id;
@@ -44,10 +45,11 @@ const PostListItem = (props: Props) => {
   const formattedDate = format(props.created_at, 'MM/DD/YYYY');
 
   return (
-    <div className="post-list__item">
+    <div className="bldr__postlist-item">
       <ListItem
         leftAvatar={ <Avatar src={ props.feature_image } /> }
         primaryText={
+          // $FlowIssue
           <Link to={ `/admin/posts/editor/${props.slug}` } onClick={ transitionPost }>
           { props.title }
           </Link>

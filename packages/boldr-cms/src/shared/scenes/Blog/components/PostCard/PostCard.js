@@ -8,20 +8,55 @@ import Divider from 'material-ui/Divider';
 import { Card, CardActions, CardMedia, CardTitle, CardText } from 'material-ui/Card';
 import { selectPost } from '../../../../state/modules/blog/posts/actions';
 import { Col, Row } from '../../../../components/Layout';
-import type { Post } from '../../../../types/models';
+import type { Tag } from '../../../../types/models';
 import TagBlock from '../TagBlock';
 
-export const PostCard = (props: Post) => {
+type Props = {
+  id?: String,
+  feature_image?: String,
+  title?: String,
+  slug: String,
+  content?: String,
+  background_image?: String,
+  excerpt?: String,
+  created_at: String,
+  updated_at?: String,
+  status: ?String,
+  author: String,
+  seo?: Object,
+  tags?: Array<Tag>,
+  attachments: ?Object,
+  meta: ?Object,
+  user_id: ?String,
+  dispatch: Function,
+  listTags: Object,
+}
+
+export const PostCard = (props: Props) => {
   const formattedDate = dateFns.format(props.created_at, 'MM/DD/YYYY');
 
   const postTags = props.tags ? props.tags.map(id => props.listTags[id]) : null;
-  const post = props;
-
+  const post = {
+    id: props.id,
+    author: props.author,
+    attachments: props.attachments,
+    content: props.content,
+    created_at: props.created_at,
+    excerpt: props.excerpt,
+    feature_image: props.feature_image,
+    meta: props.meta,
+    slug: props.slug,
+    status: props.status,
+    tags: props.tags,
+    title: props.title,
+    user_id: props.user_id,
+  };
   function transitionPost() {
-    props.dispatch(selectPost(post))
+    props.dispatch(selectPost(post));
   }
+
   return (
-    <div className="post__card-wrapper">
+    <div className="boldr-post__card-wrapper">
       <Card>
         <CardMedia
           overlay={ <CardTitle title={ props.title } subtitle={ formattedDate } /> }
@@ -32,6 +67,7 @@ export const PostCard = (props: Post) => {
             { props.excerpt }
           <Row>
             <Col xs={ 12 }>
+              { /* $FlowIssue */}
           <Link to={ `/blog/${props.slug}` } style={ { float: 'right', marginTop: '15px', marginRight: '15px' } }>
             <RaisedButton primary label="Read More" onClick={ transitionPost } />
           </Link>

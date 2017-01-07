@@ -7,8 +7,8 @@ import HttpError from './httpError';
  * @param {number} code the error code.
  */
 class BadRequest extends HttpError {
-  constructor() {
-    super('The request could not be understood by the server due to malformed syntax.', 'BadRequest', 400);
+  constructor(message) {
+    super(message || 'The request could not be understood by the server due to malformed syntax.', 'BadRequest', 400);
   }
 }
 
@@ -19,9 +19,9 @@ class BadRequest extends HttpError {
  * @param {number} code the error code.
  */
 class Unauthorized extends HttpError {
-  constructor() {
-    super(`The request requires user authentication. Please try again with the
-    correct authorization header`, 401, 'Unauthorized');
+  constructor(message) {
+    super(message || `The request requires user authentication. Please try again with the
+    correct authorization header`, 'Unauthorized', 401);
   }
 }
 

@@ -9,7 +9,7 @@ type Props = {
 
 const Widget = (props: Props) => {
   return (
-    <div className="widget__wrap">
+    <div className="boldr-widget">
       <Card>
         <CardTitle title={ props.name } />
         <CardText>

@@ -60,13 +60,10 @@ export function fetchTags() {
  */
 function shouldFetchTags(state) {
   const tags = state.blog.tags.ids;
-  if (!tags) {
+  if (!tags.length) {
     return true;
   }
-  if (tags.length) {
-    return false;
-  }
-  return tags;
+  return false;
 }
 
 const requestTags = () => {

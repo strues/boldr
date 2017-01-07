@@ -1,6 +1,6 @@
 exports[`<PostCard /> renders snapshot 1`] = `
 <div
-  className="post__card-wrapper">
+  className="boldr-post__card-wrapper">
   <Card
     expandable={false}
     expanded={null}
