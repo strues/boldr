@@ -25,11 +25,11 @@ type Props = {
 const Topbar = (props: Props) => {
   const inline = {
     position: 'fixed',
-    left: props.open ? '200px' : '0px',
+    left: '0px',
     right: '0',
     top: '0',
     zIndex: '1100',
-    backgroundColor: lightBlue500,
+    backgroundColor: '#1A415B',
   };
   return (
       <Toolbar className="boldr-topbar" style={ inline }>
@@ -42,8 +42,8 @@ const Topbar = (props: Props) => {
           </IconButton>
            <h3 className="boldr-topbar__title">{ props.title }</h3>
         </ToolbarGroup>
-        <ToolbarGroup firstChild style={ { justifyContent: 'space-between', width: '150px' } }>
-          <TiBell size={ 30 } />
+        <ToolbarGroup firstChild style={ { justifyContent: 'space-between', width: '250px', paddingRight: '50px' } }>
+          <TiBell size={ 30 } fill="#fff" />
           <Avatar
             size={ 50 }
             src={ props.user.avatarUrl }

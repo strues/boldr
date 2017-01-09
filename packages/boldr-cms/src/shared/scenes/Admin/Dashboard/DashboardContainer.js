@@ -2,6 +2,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import type { ReactElement } from 'types/react';
+import { push } from 'react-router-redux';
 import AppBar from 'material-ui/AppBar';
 
 import { Grid, Col, Authenticated } from '../../../components/index';
@@ -22,7 +23,7 @@ const BgOffsetBlock = styled.div`
 `;
 type Props = {
   children: ReactElement,
-  toggleOpen?: Function,
+  dispatch?: Function,
   showSidebar?: Function,
   hideSidebar?: Function,
   dashboard: ?Object,
@@ -31,6 +32,7 @@ type Props = {
 
 @Authenticated
 class DashboardContainer extends PureComponent {
+
   constructor() {
     super();
     this.state = { open: false };
@@ -40,10 +42,10 @@ class DashboardContainer extends PureComponent {
   }
   props: Props;
   onSetOpen(open) {
-    this.props.showSidebar();
+    this.props.dispatch(showSidebar());
   }
   onSetClose(open) {
-    this.props.hideSidebar();
+    this.props.dispatch(hideSidebar());
   }
   handleToggle = () => this.setState({ open: !this.state.open });
   menuButtonClick(ev) {
@@ -51,22 +53,28 @@ class DashboardContainer extends PureComponent {
     const isOpen = this.props.dashboard.open;
     isOpen ? this.onSetClose(this.state.open) : this.onSetOpen(this.state.open);
   }
+
+  handleChangeList = (event, value) => {
+    this.props.dispatch(push(value));
+  };
   render() {
     return (
       <div>
-        <Sidebar open={ this.props.dashboard.open } user={ this.props.account.user } />
         <Topbar
           title="Boldr"
           menuButtonClick={ this.menuButtonClick }
           open={ this.props.dashboard.open }
           user={ this.props.account.user }
         />
-
-        <BgOffsetBlock />
+        <Sidebar
+          open={ this.props.dashboard.open }
+          user={ this.props.account.user }
+          onChangeList={ this.handleChangeList }
+        />
 
         <Grid fluid style={ { paddingLeft: this.props.dashboard.open ? '200px' : '0px' } }>
           <Col xs>
-            <div style={ { marginTop: '-135px', padding: '1.5em' } }>
+            <div style={ { marginTop: '75px', padding: '1.5em' } }>
               { this.props.children }
             </div>
           </Col>
@@ -85,4 +93,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { showSidebar, hideSidebar })(DashboardContainer);
+export default connect(mapStateToProps)(DashboardContainer);

@@ -1,0 +1,4 @@
+exports[`test renders snapshot 1`] = `
+<img
+  className="boldr-image" />
+`;

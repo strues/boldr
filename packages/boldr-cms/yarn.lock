@@ -1100,6 +1100,20 @@ bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.6"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.6.tgz#53344adb14617a13f6e8dd2ce28905d1c0ba3215"
 
+boldr-editor@^0.7.2:
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/boldr-editor/-/boldr-editor-0.7.2.tgz#fe454c196792e2c686740acfe911196bbf83533b"
+  dependencies:
+    common-tags "^1.4.0"
+    draft-convert "^1.3.1"
+    draft-js "^0.9.1"
+    draft-js-export-html "^0.5.2"
+    immutable "~3.7.4"
+    linkify-it "^2.0.2"
+    setimmediate "^1.0.4"
+    styled-components "^1.2.1"
+    tlds "^1.182.0"
+
 boolbase@~1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
@@ -1535,6 +1549,12 @@ commander@2.9.x, commander@^2.8.1, commander@^2.9.0:
   resolved "https://registry.yarnpkg.com/commander/-/commander-2.9.0.tgz#9c99094176e12240cb22d6c5146098400fe0f7d4"
   dependencies:
     graceful-readlink ">= 1.0.0"
+
+common-tags@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/common-tags/-/common-tags-1.4.0.tgz#1187be4f3d4cf0c0427d43f74eef1f73501614c0"
+  dependencies:
+    babel-runtime "^6.18.0"
 
 commondir@^1.0.1:
   version "1.0.1"
@@ -2086,6 +2106,13 @@ dotenv@4.0.0:
 dotenv@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-2.0.0.tgz#bd759c357aaa70365e01c96b7b0bec08a6e0d949"
+
+draft-convert@^1.3.1:
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/draft-convert/-/draft-convert-1.3.1.tgz#b1bc3428df6e66db27197a5b60a080c8eb276c85"
+  dependencies:
+    immutable "^3.8.1"
+    invariant "^2.2.1"
 
 draft-js-export-html@^0.5.2:
   version "0.5.2"
@@ -3250,6 +3277,10 @@ immutability-helper@^2.1.1:
   dependencies:
     invariant "^2.2.0"
 
+immutable@^3.8.1:
+  version "3.8.1"
+  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
+
 immutable@~3.7.4:
   version "3.7.6"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.7.6.tgz#13b4d3cb12befa15482a26fe1b2ebae640071e4b"
@@ -3922,6 +3953,12 @@ levn@^0.3.0, levn@~0.3.0:
   dependencies:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
+
+linkify-it@^2.0.2:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/linkify-it/-/linkify-it-2.0.3.tgz#d94a4648f9b1c179d64fa97291268bdb6ce9434f"
+  dependencies:
+    uc.micro "^1.0.1"
 
 load-json-file@^1.0.0:
   version "1.1.0"
@@ -6569,6 +6606,10 @@ timers-browserify@^2.0.2:
   dependencies:
     setimmediate "^1.0.4"
 
+tlds@^1.182.0:
+  version "1.182.0"
+  resolved "https://registry.yarnpkg.com/tlds/-/tlds-1.182.0.tgz#6f506e4a795e70f22c606652ce6a8cd0de88f8f8"
+
 tmpl@1.0.x:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/tmpl/-/tmpl-1.0.4.tgz#23640dd7b42d00433911140820e5cf440e521dd1"
@@ -6647,6 +6688,10 @@ typedarray@^0.0.6:
 ua-parser-js@^0.7.9:
   version "0.7.12"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.12.tgz#04c81a99bdd5dc52263ea29d24c6bf8d4818a4bb"
+
+uc.micro@^1.0.1:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/uc.micro/-/uc.micro-1.0.3.tgz#7ed50d5e0f9a9fb0a573379259f2a77458d50192"
 
 uglify-js@2.7.x, uglify-js@^2.6, uglify-js@^2.7.5:
   version "2.7.5"

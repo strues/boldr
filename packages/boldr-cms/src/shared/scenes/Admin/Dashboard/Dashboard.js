@@ -39,22 +39,23 @@ export class Dashboard extends Component {
     return (
       <div>
         <Row>
-          <Col xs={ 6 } md={ 3 }>
-            <StatsWidget stats={ this.props.stats } />
+          <Col xs={ 6 } md={ 9 }>
+            <Row>
+              <Col xs={ 6 } md={ 6 }>
+                <StatsWidget stats={ this.props.stats } />
+              </Col>
+              <Col xs={ 6 } md={ 6 }>
+                <Widget name="Widget C" />
+              </Col>
+            </Row>
           </Col>
-          <Col xs={ 6 } md={ 3 }>
-            <Widget name="Widget C" />
+          <Col xs={ 12 } md={ 3 }>
+            {
+              this.props.activities
+              ? <ActivityWidget activities={ this.props.activities } />
+              : null
+            }
           </Col>
-          <Col xs={ 12 } md={ 6 }>
-            <Widget name="Widget D" />
-          </Col>
-        </Row>
-        <Row style={ { marginTop: '1.5em' } }>
-          {
-            this.props.activities
-            ? <ActivityWidget activities={ this.props.activities } />
-            : null
-          }
         </Row>
       </div>
     );

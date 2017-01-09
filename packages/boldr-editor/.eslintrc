@@ -16,19 +16,16 @@
   "ecmaFeatures": {
     "defaultParams": true,
   },
-  "plugins": ["flowtype", "import"],
+  "plugins": ["flowtype", "import", "react"],
   "settings": {
     "flowtype": {
       "onlyFilesWithFlowAnnotation": true,
-    },
-    "import/resolver": {
-      "babel-module": {}
     }
   },
   "globals": {
     "React": true
   },
   "rules": {
-
+    "no-undef": 0
     }
 }

@@ -1,21 +1,16 @@
-import { convertFromRaw, convertToRaw, Entity } from 'draft-js';
+import insertDataBlock from './utils/insertDataBlock';
+import Editor from './components/Editor';
+import Icons from './components/Buttons/';
+import * as convert from './utils/convert';
 
-import BoldrEditor from './BoldrEditor';
-import Renderer from './Renderer';
-import { ImgBlockPlugin, VidBlockPlugin } from './plugins';
-
-const defaultBlocks = {
-  IMG: ImgBlockPlugin,
-  VIDEO: VidBlockPlugin,
+const BE = {
+  editorStateFromRaw: convert.editorStateFromRaw,
+  editorStateFromHtml: convert.editorStateFromHtml,
+  editorStateToJSON: convert.editorStateToJSON,
+  editorStateToHtml: convert.editorStateToHtml,
+  insertDataBlock,
+  Editor,
+  Icons,
 };
 
-export default BoldrEditor;
-
-export {
-  BoldrEditor,
-  Renderer,
-  defaultBlocks,
-  convertFromRaw,
-  convertToRaw,
-  Entity,
-};
+module.exports = BE;

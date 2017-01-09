@@ -9,7 +9,7 @@ import { RadioButton } from 'material-ui/RadioButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import CloseIcon from 'material-ui/svg-icons/navigation/close';
 import ContentForward from 'material-ui/svg-icons/content/forward';
-import { BoldrEditor } from '../../../../../components/BoldrEditor';
+import { TextEditor } from '../../../../../components/TextEditor';
 import { Col, Row, Heading, S3Uploader } from '../../../../../components/index';
 import { openDrawer, closeDrawer } from '../../../../../state/modules/boldr/ui/actions';
 import { uploadPostImage } from '../../../../../state/modules/admin/attachments/actions';
@@ -105,7 +105,7 @@ class PostEditorForm extends Component {
      * @param  {string} label
      * @return {element} BoldrEditor
      */
-    const renderEditor = ({ input, label }) => (<BoldrEditor { ...input } label={ label } />);
+    const renderEditor = ({ input, label }) => (<TextEditor { ...input } label={ label } />);
 
     return (
       <Row>

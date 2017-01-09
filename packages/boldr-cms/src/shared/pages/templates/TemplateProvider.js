@@ -9,7 +9,7 @@ import { isMobile as testIfMobile } from '../../core/utils/helpers';
 import { setMobileDevice } from '../../state/modules/boldr/ui';
 // import { fetchPagesIfNeeded } from '../../state/modules/boldr/pages';
 import { fetchMenusIfNeeded, getByLabel } from '../../state/modules/boldr/menu';
-import { fetchSettingsIfNeeded, getSettings } from '../../state/modules/boldr/settings';
+// import { fetchSettingsIfNeeded, getSettings } from '../../state/modules/boldr/settings';
 
 type Props = {
   pathname: string,
@@ -32,12 +32,7 @@ const mapStateToProps = (state) => {
 };
 
 @provideHooks({
-  fetch: ({ dispatch }) => {
-    return Promise.all([
-      dispatch(fetchSettingsIfNeeded()),
-      dispatch(fetchMenusIfNeeded()),
-    ]);
-  },
+  fetch: ({ dispatch }) => dispatch(fetchMenusIfNeeded()),
 })
 @connect(mapStateToProps)
 export default (ComposedComponent: any) => {
@@ -54,7 +49,7 @@ export default (ComposedComponent: any) => {
 
     componentDidMount() {
       this.props.dispatch(fetchMenusIfNeeded());
-      this.props.dispatch(fetchSettingsIfNeeded());
+      // this.props.dispatch(fetchSettingsIfNeeded());
       window.addEventListener('resize', debounce(event => {
         this.props.dispatch(setMobileDevice(testIfMobile()));
       }, 1000));
