@@ -2,20 +2,6 @@
 # yarn lockfile v1
 
 
-"@microsoft/load-themed-styles@^1.2.2":
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/@microsoft/load-themed-styles/-/load-themed-styles-1.2.2.tgz#fa2fa1ca9c4f0c49623e2e48ad3ba30524495867"
-
-"@types/react-dom@^0.14.18":
-  version "0.14.20"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-0.14.20.tgz#6e30d66148e78b29ef593fa91ba30d0175190604"
-  dependencies:
-    "@types/react" "*"
-
-"@types/react@*", "@types/react@^0.14.41":
-  version "0.14.57"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-0.14.57.tgz#1878a8654fafdd1d381b8457292b6433498c5b62"
-
 abab@^1.0.0:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/abab/-/abab-1.0.3.tgz#b81de5f7274ec4e756d797cd834f303642724e5d"
@@ -899,9 +885,9 @@ babel-preset-env@1.1.4:
     babel-plugin-transform-regenerator "^6.6.0"
     browserslist "^1.4.0"
 
-babel-preset-env@1.1.6:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/babel-preset-env/-/babel-preset-env-1.1.6.tgz#83ce1402088e661cb5799e680d20c5a432b2873b"
+babel-preset-env@1.1.7:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/babel-preset-env/-/babel-preset-env-1.1.7.tgz#4ca8dd905056039c6788a0174bfac7b7bad89fbf"
   dependencies:
     babel-plugin-check-es2015-constants "^6.3.13"
     babel-plugin-syntax-trailing-function-commas "^6.13.0"
@@ -1085,9 +1071,9 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-better-npm-run@^0.0.13:
-  version "0.0.13"
-  resolved "https://registry.yarnpkg.com/better-npm-run/-/better-npm-run-0.0.13.tgz#38a340d0546c831ce80bae66d4def19c5c7ee963"
+better-npm-run@^0.0.14:
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/better-npm-run/-/better-npm-run-0.0.14.tgz#6a03b1a19db63205142d7803995f23c779070389"
   dependencies:
     dotenv "^2.0.0"
     object-assign "^4.0.1"
@@ -1486,10 +1472,6 @@ color-convert@^1.3.0:
   resolved "https://registry.yarnpkg.com/color-convert/-/color-convert-1.8.2.tgz#be868184d7c8631766d54e7078e2672d7c7e3339"
   dependencies:
     color-name "^1.1.1"
-
-color-functions@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/color-functions/-/color-functions-1.1.0.tgz#4cb805479065a3658c3269f48fac73eff00f95de"
 
 color-name@^1.0.0, color-name@^1.1.1:
   version "1.1.1"
@@ -2097,7 +2079,11 @@ dont-sniff-mimetype@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/dont-sniff-mimetype/-/dont-sniff-mimetype-1.0.0.tgz#5932890dc9f4e2f19e5eb02a20026e5e5efc8f58"
 
-dotenv@2.0.0, dotenv@^2.0.0:
+dotenv@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
+
+dotenv@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-2.0.0.tgz#bd759c357aaa70365e01c96b7b0bec08a6e0d949"
 
@@ -2333,9 +2319,9 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-boldr@0.7.1:
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-boldr/-/eslint-config-boldr-0.7.1.tgz#6c59cdc4385d8da25744f9231d233e2f8b0dba08"
+eslint-config-boldr@0.7.2:
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/eslint-config-boldr/-/eslint-config-boldr-0.7.2.tgz#1a4ce031d7a6aa7a55ef2f0e0f0014b1c555416b"
   dependencies:
     babel-eslint "^7.1.1"
     eslint-plugin-babel "^4.0.0"
@@ -3258,9 +3244,9 @@ ignore@^3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.2.0.tgz#8d88f03c3002a0ac52114db25d2c673b0bf1e435"
 
-immutability-helper@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/immutability-helper/-/immutability-helper-2.1.0.tgz#35a4bc77e4deb120b8c37079a980f9bad834ba2d"
+immutability-helper@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/immutability-helper/-/immutability-helper-2.1.1.tgz#d80e7577fae14cddde99d8946666d79973e7ba13"
   dependencies:
     invariant "^2.2.0"
 
@@ -3909,10 +3895,6 @@ jsx-ast-utils@^1.3.4:
   dependencies:
     acorn-jsx "^3.0.1"
     object-assign "^4.1.0"
-
-jwt-decode@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-2.1.0.tgz#d3079cef1689d82d56bbb7aedcfea28b12f0e36a"
 
 keycode@^2.1.1:
   version "2.1.8"
@@ -4579,9 +4561,9 @@ node-pre-gyp@^0.6.29:
     tar "~2.2.1"
     tar-pack "~3.3.0"
 
-node-sass@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/node-sass/-/node-sass-4.1.1.tgz#dc3e27d25bd827b6276ea243be357c7c7cd07111"
+node-sass@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/node-sass/-/node-sass-4.2.0.tgz#ef3e686c119118e01b0a3c7345821a0d7400acf2"
   dependencies:
     async-foreach "^0.1.3"
     chalk "^1.1.1"
@@ -4734,18 +4716,9 @@ object.values@^1.0.3:
     function-bind "^1.1.0"
     has "^1.0.1"
 
-office-ui-fabric-react@^0.84.0:
-  version "0.84.0"
-  resolved "https://registry.yarnpkg.com/office-ui-fabric-react/-/office-ui-fabric-react-0.84.0.tgz#7645bb326223a3c3accb2f4dca62a850321759c1"
-  dependencies:
-    "@microsoft/load-themed-styles" "^1.2.2"
-    "@types/react" "^0.14.41"
-    "@types/react-dom" "^0.14.18"
-    color-functions "^1.1.0"
-
-offline-plugin@4.5.3:
-  version "4.5.3"
-  resolved "https://registry.yarnpkg.com/offline-plugin/-/offline-plugin-4.5.3.tgz#39c2bd7a3fc74fadaa601d0aa20dc4f74ae24add"
+offline-plugin@4.5.4:
+  version "4.5.4"
+  resolved "https://registry.yarnpkg.com/offline-plugin/-/offline-plugin-4.5.4.tgz#820f5e2465c160c8b2fad2835747df9c3b4dc0cc"
   dependencies:
     deep-extend "^0.4.0"
     ejs "^2.3.4"

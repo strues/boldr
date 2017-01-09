@@ -811,7 +811,7 @@ babel-plugin-transform-strict-mode@^6.18.0:
     babel-runtime "^6.0.0"
     babel-types "^6.18.0"
 
-babel-polyfill@^6.16.0, babel-polyfill@^6.6.1:
+babel-polyfill@^6.16.0, babel-polyfill@^6.20.0, babel-polyfill@^6.6.1:
   version "6.20.0"
   resolved "https://registry.yarnpkg.com/babel-polyfill/-/babel-polyfill-6.20.0.tgz#de4a371006139e20990aac0be367d398331204e7"
   dependencies:
@@ -875,9 +875,9 @@ babel-preset-env@1.1.4:
     babel-plugin-transform-regenerator "^6.6.0"
     browserslist "^1.4.0"
 
-babel-preset-env@1.1.6:
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/babel-preset-env/-/babel-preset-env-1.1.6.tgz#83ce1402088e661cb5799e680d20c5a432b2873b"
+babel-preset-env@1.1.7:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/babel-preset-env/-/babel-preset-env-1.1.7.tgz#4ca8dd905056039c6788a0174bfac7b7bad89fbf"
   dependencies:
     babel-plugin-check-es2015-constants "^6.3.13"
     babel-plugin-syntax-trailing-function-commas "^6.13.0"
@@ -1069,9 +1069,9 @@ bcryptjs@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/bcryptjs/-/bcryptjs-2.4.0.tgz#fb7f4a0b133854503fe1b2da3f25db834cf0e678"
 
-better-npm-run@^0.0.13:
-  version "0.0.13"
-  resolved "https://registry.yarnpkg.com/better-npm-run/-/better-npm-run-0.0.13.tgz#38a340d0546c831ce80bae66d4def19c5c7ee963"
+better-npm-run@^0.0.14:
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/better-npm-run/-/better-npm-run-0.0.14.tgz#6a03b1a19db63205142d7803995f23c779070389"
   dependencies:
     dotenv "^2.0.0"
     object-assign "^4.0.1"
@@ -1682,7 +1682,11 @@ dont-sniff-mimetype@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/dont-sniff-mimetype/-/dont-sniff-mimetype-1.0.0.tgz#5932890dc9f4e2f19e5eb02a20026e5e5efc8f58"
 
-dotenv@2.0.0, dotenv@^2.0.0:
+dotenv@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
+
+dotenv@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-2.0.0.tgz#bd759c357aaa70365e01c96b7b0bec08a6e0d949"
 
@@ -1857,9 +1861,9 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-boldr@0.7.1:
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-boldr/-/eslint-config-boldr-0.7.1.tgz#6c59cdc4385d8da25744f9231d233e2f8b0dba08"
+eslint-config-boldr@0.7.2:
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/eslint-config-boldr/-/eslint-config-boldr-0.7.2.tgz#1a4ce031d7a6aa7a55ef2f0e0f0014b1c555416b"
   dependencies:
     babel-eslint "^7.1.1"
     eslint-plugin-babel "^4.0.0"
