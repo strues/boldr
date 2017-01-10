@@ -20,28 +20,24 @@ type Props = {
 const TagListCard = (props: Props) => {
   const formattedDate = format(props.created_at, 'MM/DD/YYYY');
   return (
-    <div>
       <Card>
-            <CardMedia
-              overlay={<CardTitle title={ props.title } subtitle={ formattedDate } />}
-            >
-              <img className="post__card-image" src={ props.feature_image }
-                alt={ props.title } height="350px" width="100%"
-              />
-            </CardMedia>
-          <img className="post__card-image" src={ props.feature_image }
+        <CardMedia
+          overlay={ <CardTitle title={ props.title } subtitle={ formattedDate } /> }
+        >
+          <img className="post__card-image"
+            src={ props.feature_image }
             alt={ props.title } height="350px" width="100%"
           />
+        </CardMedia>
         <CardText>
-        { props.excerpt }
-      </CardText>
-      <CardActions>
-      <Link to={ `/blog/${props.slug}` }>
-        <FlatButton label="Read More" />
-      </Link>
-    </CardActions>
+          { props.excerpt }
+        </CardText>
+        <CardActions>
+          <Link to={ `/blog/${props.slug}` }>
+            <FlatButton label="Read More" />
+          </Link>
+        </CardActions>
       </Card>
-      </div>
   );
 };
 

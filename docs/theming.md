@@ -2,23 +2,73 @@
 
 Boldr allows developers to theme their website's presentation using a Higher Order Component and child wrapper components.  
 
-Theming takes place in `packages/boldr-cms/src/shared/theme`. Inside the directory you will find a folder named Boldr. This is the default theme. The Boldr file, inside the directory, is the HOC wrapper for the theme.
+Theming takes place in `packages/boldr-cms/src/shared/pages/templates`. Inside the directory is `TemplateProvider.js` and folders containing the various page templates. 
+
+The TemplateProvider is a [Higher Order Component](https://facebook.github.io/react/docs/higher-order-components.html), which wraps the page templates. It provides necessary data fetching and passes the results down as props to the components it wraps.
+
+This section of Boldr is a work-in-progress. I know where I'm going, but not everything is implemented; nor is it documented.
+
+Props for the TemplateProvider:  
+
+```
+type Props = {
+  pathname: string,
+  auth: Object,
+  fetchSettingsIfNeeded: Function,
+  dispatch: Function,
+  location: Object,
+  fetchPagesIfNeeded: Function,
+  fetchMenusIfNeeded: Function,
+  setMobileDevice: Function,
+  isMobile: Boolean,
+  settings: Object
+};
+```  
+
+The TemplateProvider
 
 ```javascript
-// src/cms/common/theme/Boldr/Boldr.js
-export default (ComposedComponent) => {
-  class Boldr extends Component {
+// packages/boldr-cms/src/shared/pages/templates/TemplateProvider.js
+@provideHooks({
+  fetch: ({ dispatch }) => dispatch(fetchMenusIfNeeded()),
+})
+@connect(mapStateToProps)
+export default (ComposedComponent: any) => {
+  class TemplateProvider extends Component {
+    static childContextTypes = {
+      dispatch: React.PropTypes.func,
+      location: React.PropTypes.object,
+      isMobile: React.PropTypes.bool,
+    };
+    getChildContext() {
+      const { dispatch, location, isMobile } = this.props;
+      return { dispatch, location, isMobile };
+    }
 
+    componentDidMount() {
+      this.props.dispatch(fetchMenusIfNeeded());
+      // this.props.dispatch(fetchSettingsIfNeeded());
+      window.addEventListener('resize', debounce(event => {
+        this.props.dispatch(setMobileDevice(testIfMobile()));
+      }, 1000));
+    }
+    // $FlowIssue
+    shouldComponentUpdate(nextProps, nextState) {
+      return shallowCompare(this, nextProps, nextState);
+    }
+    props: Props;
+
+    getPageURL() {
+      return (typeof(window) !== 'undefined')
+      ? window.location.href
+      : `http://localhost:3000/${this.props.pathname}`;
+    }
     render() {
-      return (
-        <section className="boldr__theme">
-          <ComposedComponent { ...this.props } />
-        </section>
-      );
+      return (<ComposedComponent { ...this.props } url={ this.getPageURL() } />);
     }
   }
 
-  return Boldr;
+  return TemplateProvider;
 };
 ```
 
