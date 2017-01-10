@@ -5,10 +5,8 @@ const initialState = {
   tags: {},
   attachments: {},
   users: {},
-  pages: {},
   menus: {},
   menuDetails: {},
-  settings: {},
 };
 
 export default function entitiesReducer(state = initialState, action) {
