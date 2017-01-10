@@ -6,7 +6,7 @@ describe('Members Duck', () => {
         membersReducer(undefined, {}),
       ).toEqual({
         loaded: false,
-        loading: true,
+        loading: false,
         members: [],
         error: null,
         selected: {},

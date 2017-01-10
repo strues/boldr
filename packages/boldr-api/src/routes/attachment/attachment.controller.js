@@ -66,6 +66,13 @@ export function getAllAWS(req, res, next) {
   });
 }
 
+export function updateAttachment(req, res) {
+  debug(req.body);
+  return Attachment.query()
+    .patchAndFetchById(req.params.id, req.body)
+    .then(attachment => responseHandler(res, 202, attachment));
+}
+
 export async function deleteAttachment(req, res, next) {
   try {
     const attachment = await Attachment.query().findById(req.params.id);

@@ -81,12 +81,3 @@ const Sidebar = (props: Props) => {
 };
 
 export default Sidebar;
-
-/*
-<Link to="/admin/blocks">
-  <MenuItem leftIcon={ <BlockIcon /> }>Blocks</MenuItem>
-</Link>
-<Link to="/admin/pages">
-  <MenuItem leftIcon={ <PageIcon /> }>Pages</MenuItem>
-</Link>
- */

@@ -2,7 +2,7 @@
 import React from 'react';
 import { List, ListItem } from 'material-ui/List';
 import Avatar from 'material-ui/Avatar';
-import NewIcon from 'material-ui/svg-icons/av/new-releases';
+import StatsIcon from 'material-ui/svg-icons/action/assessment';
 import Paper from 'material-ui/Paper';
 import { Heading } from '../../../../components/index';
 import type { Stats } from '../../../../types/models';
@@ -13,9 +13,9 @@ type Props = {
 const StatsWidget = (props: Props) => {
   return (
     <div className="boldr-widget__stats">
-    <Paper zDepth={ 1 }>
-      <Heading size={ 2 }>
-        <NewIcon />{ ' ' } Stats
+    <Paper zDepth={ 2 }>
+      <Heading top="5px" align="left" size={ 4 } color="#555">
+        <StatsIcon style={ { paddingTop: '5px' } } />{ ' ' } Stats
       </Heading>
       Posts: { props.stats.posts || '' } <br />
       Tags: { props.stats.tags || '' }<br />

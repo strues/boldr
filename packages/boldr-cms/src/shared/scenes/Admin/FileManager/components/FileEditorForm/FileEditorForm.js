@@ -6,6 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import { RadioButton } from 'material-ui/RadioButton';
 import { RadioButtonGroup, TextField } from 'redux-form-material-ui';
+import { Row, Col } from '../../../../../components/Layout';
 
 const style = {
   margin: 12,
@@ -33,9 +34,10 @@ const FileEditorForm = (props: Props) => {
           floatingLabelText="Description"
           component={ TextField }
         />
-
-        <RaisedButton type="submit" label="Save" style={ style } primary />
-        <FlatButton label="Reset" onClick={ reset } secondary />
+        <Row>
+          <RaisedButton type="submit" label="Save" style={ style } primary />
+          <FlatButton label="Reset" onClick={ reset } secondary />
+        </Row>
       </form>
   );
 };

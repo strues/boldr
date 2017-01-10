@@ -11,13 +11,13 @@ import entities from './modules/entities';
 
 
 const rootReducer = combineReducers({
-  form: formReducer,
-  entities,
   boldr: boldrReducer,
   [ACCOUNT_STATE_KEY]: accountReducer,
   [BLOG_STATE_KEY]: blogReducer,
   [ADMIN_STATE_KEY]: adminReducer,
   notifications: notificationReducer,
+  entities,
+  form: formReducer,
   routing,
 });
 
