@@ -22,11 +22,11 @@ Boldr is a modern content management framework. Think of Boldr as the solid foun
 
 ## Screenshots
 
-![](docs/assets/dashboard.png | width=300)  
+<img src="docs/assets/dashboard.png" width="300" />  
 
-![](docs/assets/posteditor.png | width=300)  
+<img src="docs/assets/posteditor.png" width="300" />  
 
-![](docs/assets/filemanager.png | width=300)  
+<img src="docs/assets/filemanager.png" width="300" />  
 
 
 ## Core Technologies
