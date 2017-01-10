@@ -1,11 +1,26 @@
 # Change Log
 
-## [Unreleased](https://github.com/strues/boldr/tree/HEAD)
+## [v0.7.0-alpha.1](https://github.com/strues/boldr/tree/v0.7.0-alpha.1) (2017-01-10)
+[Full Changelog](https://github.com/strues/boldr/compare/v0.7.0-alpha.0...v0.7.0-alpha.1)
 
-[Full Changelog](https://github.com/strues/boldr/compare/v0.6.6...HEAD)
+**Fixed bugs:**
+
+- SinglePost view the post image is massive [\#235](https://github.com/strues/boldr/issues/235)
+- Admin/Members minified action error [\#234](https://github.com/strues/boldr/issues/234)
 
 **Merged pull requests:**
 
+- 0.7.0-alpha.1 [\#233](https://github.com/strues/boldr/pull/233) ([strues](https://github.com/strues))
+
+## [v0.7.0-alpha.0](https://github.com/strues/boldr/tree/v0.7.0-alpha.0) (2017-01-04)
+[Full Changelog](https://github.com/strues/boldr/compare/v0.6.8...v0.7.0-alpha.0)
+
+## [v0.6.8](https://github.com/strues/boldr/tree/v0.6.8) (2016-12-19)
+[Full Changelog](https://github.com/strues/boldr/compare/v0.6.6...v0.6.8)
+
+**Merged pull requests:**
+
+- Cleanup and transition API here. [\#232](https://github.com/strues/boldr/pull/232) ([strues](https://github.com/strues))
 - Code quality improvements [\#231](https://github.com/strues/boldr/pull/231) ([strues](https://github.com/strues))
 - Fixes error with s3 uploading and adds a test [\#230](https://github.com/strues/boldr/pull/230) ([strues](https://github.com/strues))
 - API client refactor and bug fixes [\#229](https://github.com/strues/boldr/pull/229) ([strues](https://github.com/strues))
