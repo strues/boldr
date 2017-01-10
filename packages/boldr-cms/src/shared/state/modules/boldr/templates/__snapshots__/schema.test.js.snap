@@ -1,0 +1,45 @@
+exports[`arrayOfTemplate should match the normalizr-arrayOfTemplate-schema 1`] = `
+ArraySchema {
+  "schema": EntitySchema {
+    "_getId": [Function],
+    "_key": "templates",
+    "_mergeStrategy": [Function],
+    "_processStrategy": [Function],
+    "schema": Object {
+      "pages": Array [
+        EntitySchema {
+          "_getId": [Function],
+          "_key": "pages",
+          "_mergeStrategy": [Function],
+          "_processStrategy": [Function],
+          "schema": Object {
+            "processStrategy": [Function],
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`template schema should match the normalizr-template-schema 1`] = `
+EntitySchema {
+  "_getId": [Function],
+  "_key": "templates",
+  "_mergeStrategy": [Function],
+  "_processStrategy": [Function],
+  "schema": Object {
+    "pages": Array [
+      EntitySchema {
+        "_getId": [Function],
+        "_key": "pages",
+        "_mergeStrategy": [Function],
+        "_processStrategy": [Function],
+        "schema": Object {
+          "processStrategy": [Function],
+        },
+      },
+    ],
+  },
+}
+`;

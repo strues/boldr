@@ -1,0 +1,25 @@
+exports[`arrayOfPage should match the normalizr-arrayOfPage-schema 1`] = `
+ArraySchema {
+  "schema": EntitySchema {
+    "_getId": [Function],
+    "_key": "pages",
+    "_mergeStrategy": [Function],
+    "_processStrategy": [Function],
+    "schema": Object {
+      "processStrategy": [Function],
+    },
+  },
+}
+`;
+
+exports[`page schema should match the normalizr-page-schema 1`] = `
+EntitySchema {
+  "_getId": [Function],
+  "_key": "pages",
+  "_mergeStrategy": [Function],
+  "_processStrategy": [Function],
+  "schema": Object {
+    "processStrategy": [Function],
+  },
+}
+`;

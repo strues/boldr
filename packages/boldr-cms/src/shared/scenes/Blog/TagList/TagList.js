@@ -11,6 +11,7 @@ import PostCard from '../components/PostCard';
 type Props = {
   posts: Array<Post>,
   name: string,
+  listTags: Object,
 };
 
 const TagList = (props: Props) => {
@@ -27,7 +28,7 @@ const TagList = (props: Props) => {
           {
             props.posts.map((post, i) => (
               <Col key={ i } xs={ 12 } md={ 4 }>
-                <PostCard key={ i } { ...post } />
+                <PostCard key={ i } listTags={ props.listTags } { ...post } />
               </Col>
               )
             )

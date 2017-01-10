@@ -6,39 +6,39 @@ import { page as pagesSchema } from '../../../../core/schemas';
 import * as notif from '../../../../core/constants';
 import { notificationSend } from '../../notifications/notifications';
 import * as t from './constants';
-import { page as pageSchema, arrayOfPage } from './schema';
+import { template as templateSchema, arrayOfTemplate } from './schema';
 /**
   * FETCH PAGES
   * -------------------------
   * @exports fetchPagesIfNeeded
   * @exports fetchPages
   *****************************************************************/
-export function fetchPagesIfNeeded() {
+export function fetchTemplatesIfNeeded() {
   return (dispatch, getState) => {
-    if (shouldFetchPages(getState())) {
-      return dispatch(fetchPages());
+    if (shouldFetchTemplates(getState())) {
+      return dispatch(fetchTemplates());
     }
 
     return Promise.resolve();
   };
 }
 
-export function fetchPages() {
+export function fetchTemplates() {
   return dispatch => {
-    dispatch(requestPages());
-    return api.getAllPages()
+    dispatch(requestTemplates());
+    return api.getAllTemplates()
       .then(response => {
         const camelizedJson = camelizeKeys(response.body);
-        const normalizedData = normalize(camelizedJson, arrayOfPage);
-        return dispatch(receivePages(normalizedData));
+        const normalizedData = normalize(camelizedJson, arrayOfTemplate);
+        return dispatch(receiveTemplates(normalizedData));
       })
       .catch(err => {
-        dispatch(receivePagesFailed(err));
+        dispatch(receiveTemplatesFailed(err));
       });
   };
 }
 
-function shouldFetchPages(state) {
+function shouldFetchTemplates(state) {
   const templates = state.boldr.templates.labels;
   if (!pages.length) {
     return true;
@@ -49,15 +49,15 @@ function shouldFetchPages(state) {
   return pages;
 }
 
-const requestPages = () => {
-  return { type: t.FETCH_PAGES_REQUEST };
+const requestTemplates = () => {
+  return { type: t.FETCH_TEMPLATES_REQUEST };
 };
-const receivePages = (normalizedData) => ({
-  type: t.FETCH_PAGES_SUCCESS,
+const receiveTemplates = (normalizedData) => ({
+  type: t.FETCH_TEMPLATES_SUCCESS,
   payload: normalizedData,
 });
-const receivePagesFailed = (err) => ({
-  type: t.FETCH_PAGES_FAILURE, error: err,
+const receiveTemplatesFailed = (err) => ({
+  type: t.FETCH_TEMPLATES_FAILURE, error: err,
 });
 
 /**
@@ -65,31 +65,31 @@ const receivePagesFailed = (err) => ({
   * -------------------------
   * @exports fetchPageByUrl
   *****************************************************************/
-export function fetchPageByUrl(resource) {
+export function fetchTemplateResource(resource) {
   return dispatch => {
-    dispatch(requestPage());
+    dispatch(requestTemplate());
     if (resource === undefined) {
       resource = 'home';
     }
-    return api.getPageByUrl(resource)
+    return api.getTemplateResource(resource)
       .then(response => {
-        dispatch(receivePage(response));
+        dispatch(receiveTemplate(response));
       })
       .catch(err => {
-        dispatch(receivePageFailed(err));
+        dispatch(receiveTemplateFailed(err));
       });
   };
 }
 
-const requestPage = () => {
-  return { type: t.FETCH_PAGE_REQUEST };
+const requestTemplate = () => {
+  return { type: t.FETCH_TEMPLATE_REQUEST };
 };
 
-const receivePage = (response) => ({
-  type: t.FETCH_PAGE_SUCCESS,
+const receiveTemplate = (response) => ({
+  type: t.FETCH_TEMPLATE_SUCCESS,
   payload: response.body,
 });
 
-const receivePageFailed = (err) => ({
-  type: t.FETCH_PAGE_FAILURE, error: err,
+const receiveTemplateFailed = (err) => ({
+  type: t.FETCH_TEMPLATE_FAILURE, error: err,
 });

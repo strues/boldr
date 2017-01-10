@@ -14,6 +14,7 @@ import CloudIcon from 'material-ui/svg-icons/file/cloud-upload';
 import HomeIcon from 'material-ui/svg-icons/action/home';
 import DashboardIcon from 'material-ui/svg-icons/action/dashboard';
 import PeopleIcon from 'material-ui/svg-icons/social/people';
+import TemplateIcon from 'material-ui/svg-icons/av/web';
 import ContentIcon from 'material-ui/svg-icons/content/content-copy';
 import ListIcon from 'material-ui/svg-icons/action/list';
 import { inlineStyles } from '../../../../theme/material';
@@ -74,6 +75,12 @@ const Sidebar = (props: Props) => {
           style={ styles }
           primaryText="Members"
           value="/admin/members"
+        />
+        <ListItem
+          leftIcon={ <TemplateIcon color="D5DADD" /> }
+          style={ styles }
+          primaryText="Templates"
+          value="/admin/templates"
         />
         </SelectableList>
     </Drawer>

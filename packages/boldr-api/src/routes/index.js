@@ -15,6 +15,7 @@ import roleRoutes from './role/role.routes';
 import s3Router from './s3/s3.routes';
 import settingRoutes from './setting/setting.routes';
 import tagRoutes from './tag/tag.routes';
+import templateRoutes from './template/template.routes';
 import tokenRoutes from './token/token.routes';
 import userRoutes from './user/user.routes';
 
@@ -68,6 +69,7 @@ router.use('/s3', s3Router({
 }));
 router.use('/settings', settingRoutes);
 router.use('/tags', tagRoutes);
+router.use('/templates', templateRoutes);
 router.use('/tokens', tokenRoutes);
 router.use('/users', userRoutes);
 

@@ -1,13 +1,14 @@
 import { createSelector } from 'reselect';
 
-export const getPages = createSelector(
-  [
-    (state) => state.boldr.pages.labels,
-    (state) => state.boldr.pages.byLabel,
-  ],
-  (labels, byLabel) => labels.map(label => byLabel[label]),
-);
+/**
+  * TAG SELECTORS
+  *
+  *****************************************************************/
 
-export function getPageByLabel(state, pageLabel) {
-  return state.boldr.pages.labels[pageLabel];
-}
+export const getPageIds = state => state.blog.pages.ids;
+export const getPageList = state => state.blog.pages.all;
+
+export const getPages = createSelector(
+  [getPageIds, getPageList],
+  (ids, all) => ids.map(id => all[id])
+);

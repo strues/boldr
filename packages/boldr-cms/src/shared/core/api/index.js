@@ -143,7 +143,6 @@ export const delAttachment = (id) =>
     * @exports getPageByUrl
     * @exports doCreatePage
     *****************************************************************/
-
 export const getAllPages = () =>
   apiClient.get('/pages');
 
@@ -151,7 +150,17 @@ export const getPageByUrl = (url) =>
   apiClient.get(`/pages/${url}`);
 
 export const doCreatePage = (payload) =>
-  apiClient.post('/pages', { payload });
+  apiClient.post('/pages', { data: payload });
+
+
+export const getAllTemplates = () =>
+  apiClient.get('/templates');
+
+export const getTemplateResource = (resource) =>
+  apiClient.get(`/templates/${resource}`);
+
+export const doCreateTemplate = (payload) =>
+  apiClient.post('/templates', { data: payload });
 
 
   /**
@@ -207,4 +216,3 @@ export const doCreateBlock = (data) => {
   *****************************************************************/
 export const getAllStats = () =>
   apiClient.get('/admin/stats');
-  

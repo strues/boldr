@@ -8,12 +8,15 @@ const tables = [
   'post',
   'role',
   'tag',
+  'user_role',
   'post_tag',
   'menu',
   'menu_detail',
+  'template',
   'page',
   'menu_menu_detail',
   'setting',
+  'template_page',
 ];
 
 function seed(knex, Promise) {
@@ -220,8 +223,28 @@ function seed(knex, Promise) {
       }),
     ]))
     .then(() => Promise.all([
+      knex('template').insert({
+        id: 1,
+        uuid: 'c23891fb-88c2-4e91-b95d-c652f15eab0c',
+        name: 'base',
+        label: 'Base',
+        resource: '/',
+        meta: {},
+        content: {},
+      }),
+      knex('template').insert({
+        id: 2,
+        uuid: 'd42f91fb-88c2-4e91-b95d-c652f15eab0c',
+        name: 'content',
+        label: 'Content',
+        resource: 'content',
+        meta: {},
+        content: {},
+      }),
+    ]))
+    .then(() => Promise.all([
       knex('page').insert({
-        id: 'c23891fb-88c2-4e91-b95d-c652f15eab0c',
+        id: '87d1e9b3-b32e-474e-9246-6dce1b21a72d',
         name: 'Home',
         label: 'home',
         url: 'home',
@@ -236,6 +259,33 @@ function seed(knex, Promise) {
           title: 'Home',
           description: 'The home page',
         },
+      }),
+      knex('page').insert({
+        id: '0a277a50-b482-4b86-b0e7-83fdd3a372af',
+        name: 'About',
+        label: 'about',
+        url: 'about',
+        layout: {
+          showHero: true,
+          showPosts: true,
+        },
+        data: {},
+        status: 'published',
+        restricted: false,
+        meta: {
+          title: 'About',
+          description: 'The about page',
+        },
+      }),
+    ]))
+    .then(() => Promise.all([
+      knex('template_page').insert({
+        template_id: 1,
+        page_id: '87d1e9b3-b32e-474e-9246-6dce1b21a72d',
+      }),
+      knex('template_page').insert({
+        template_id: 2,
+        page_id: '0a277a50-b482-4b86-b0e7-83fdd3a372af',
       }),
     ]))
     .then(() => Promise.all([

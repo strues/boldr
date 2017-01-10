@@ -2,17 +2,19 @@
 exports.up = function(knex, Promise) {
   return Promise.all([
     knex.schema.createTableIfNotExists('template', (table) => {
-      table.uuid('id').unsigned().primary();
-      table.integer('internal_id');
+      table.increments('id').unsigned().primary();
+      table.uuid('uuid');
       table.string('name', 100).unique().notNullable();
       table.string('label', 100).notNullable();
-      table.string('resource');
+      table.string('resource').notNullable();
+      table.json('meta');
       table.json('content');
       table.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
       table.timestamp('updated_at').nullable().defaultTo(null);
 
       table.index('name');
-      table.index('internal_id');
+      table.index('resource');
+      table.index('uuid');
     }),
   ]);
 };

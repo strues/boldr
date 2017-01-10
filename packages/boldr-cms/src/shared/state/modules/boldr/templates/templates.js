@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import * as t from './constants';
 
-export const STATE_KEY = 'pages';
+export const STATE_KEY = 'templates';
 
 /**
   * PAGE REDUCER
@@ -11,7 +11,7 @@ export const STATE_KEY = 'pages';
 
 const all = (state = {}, action) => {
   switch (action.type) {
-    case t.FETCH_PAGES_SUCCESS:
+    case t.FETCH_TEMPLATES_SUCCESS:
       return {
         ...state,
         ...action.payload.entities.templates,
@@ -24,7 +24,7 @@ const all = (state = {}, action) => {
 
 const ids = (state = [], action) => {
   switch (action.type) {
-    case t.FETCH_PAGES_SUCCESS:
+    case t.FETCH_TEMPLATES_SUCCESS:
       return action.payload.result;
     default:
       return state;
@@ -34,11 +34,11 @@ const ids = (state = [], action) => {
 
 const isFetching = (state = false, action) => {
   switch (action.type) {
-    case t.FETCH_PAGES_REQUEST:
-    case t.FETCH_PAGE_REQUEST:
+    case t.FETCH_TEMPLATES_REQUEST:
+    case t.FETCH_TEMPLATE_REQUEST:
       return true;
-    case t.FETCH_PAGES_SUCCESS:
-    case t.FETCH_PAGE_SUCCESS:
+    case t.FETCH_TEMPLATES_SUCCESS:
+    case t.FETCH_TEMPLATE_SUCCESS:
       return false;
     default:
       return state;

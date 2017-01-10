@@ -13,7 +13,16 @@ export type Props = {
 };
 
 const SinglePost = (props: Props) => {
-  const postAuthor = props.entities.users[props.currentPost.author];
+  const postAuthor = props.entities.users[props.currentPost.user_id];
+  if (!props.currentPost.tags) {
+    return (
+      <Grid>
+        <Row>
+          <PostContent { ...props.currentPost } />
+        </Row>
+      </Grid>
+    );
+  }
   const postTags = props.currentPost.tags.map(id => props.entities.tags[id]);
   return (
       <Grid>

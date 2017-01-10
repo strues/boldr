@@ -3,14 +3,16 @@ import uiReducer from './ui';
 import meta from './meta';
 import menuReducer from './menu';
 import settingReducer from './settings';
-// import pageReducer from './pages';
+import pagesReducer, { STATE_KEY as PAGES_STATE_KEY } from './pages';
+import templatesReducer, { STATE_KEY as TEMPLATES_STATE_KEY } from './templates';
 
 const boldrReducer = combineReducers({
   ui: uiReducer,
   meta,
   menu: menuReducer,
   settings: settingReducer,
-  // pages: pageReducer,
+  [PAGES_STATE_KEY]: pagesReducer,
+  [TEMPLATES_STATE_KEY]: templatesReducer,
 });
 
 export default boldrReducer;

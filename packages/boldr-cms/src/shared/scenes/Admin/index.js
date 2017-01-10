@@ -68,6 +68,15 @@ export default (store, connect) => {
           .then(loadRoute(cb))
           .catch(errorLoading);
         },
-      }],
+      },
+      {
+        path: 'templates',
+        getComponent(nextState, cb) {
+          System.import('./Templates')
+          .then(loadRoute(cb))
+          .catch(errorLoading);
+        },
+      },
+    ],
   };
 };

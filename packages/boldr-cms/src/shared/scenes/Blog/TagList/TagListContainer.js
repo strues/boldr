@@ -11,6 +11,7 @@ type Props = {
   currentTag: Object,
   isFetching: boolean,
   params: Object,
+  listTags: Object,
   dispatch: () => void,
 };
 
@@ -33,13 +34,14 @@ class TagListContainer extends Component {
       );
     }
     return (
-      <TagList { ...this.props.currentTag } />
+      <TagList listTags={ this.props.listTags } { ...this.props.currentTag } />
     );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
+    listTags: state.blog.tags.all,
     isFetching: state.blog.tags.isFetching,
     currentTag: state.blog.tags.currentTag,
   };
