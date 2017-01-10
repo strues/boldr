@@ -1,6 +1,6 @@
 {
   "name": "eslint-config-boldr",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "ESLint rules for Boldr.",
   "main": "index.js",
   "files": [
@@ -33,16 +33,16 @@
     "node": ">= 6"
   },
   "peerDependencies": {
-    "eslint": "^3.12.2"
+    "eslint": "^3.13.0"
   },
   "devDependencies": {
-    "eslint": "^3.12.2",
+    "eslint": "^3.13.0",
     "eslint-find-rules": "^1.14.3"
   },
   "dependencies": {
     "babel-eslint": "^7.1.1",
     "eslint-plugin-babel": "^4.0.0",
-    "eslint-plugin-flowtype": "^2.29.1",
+    "eslint-plugin-flowtype": "^2.29.2",
     "eslint-plugin-import": "^2.2.0",
     "eslint-plugin-react": "^6.8.0"
   }

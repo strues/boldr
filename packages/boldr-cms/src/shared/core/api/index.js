@@ -57,24 +57,10 @@ export const delPostById = (postId) =>
   apiClient.del(`/posts/pid/${postId}`);
 
 export const createPost = (data) =>
-  apiClient.put('/posts', {
-    title: data.title,
-    content: data.content,
-    feature_image: data.feature_image,
-    tags: data.tags,
-    status: data.status,
-    excerpt: data.excerpt,
-  });
+  apiClient.post('/posts', { data });
 
 export const putPostId = (postData) =>
-  apiClient.put(`/posts/pid/${postData.id}`, {
-    // title: articleData.title,
-    content: postData.content,
-    excerpt: postData.excerpt,
-    feature_image: postData.feature_image,
-    // tag: postData.tag,
-    status: postData.status,
-  });
+  apiClient.put(`/posts/pid/${postData.id}`, { data: postData });
 
   /**
     * SETTINGS API ROUTES
@@ -212,3 +198,13 @@ export const doCreateBlock = (data) => {
   apiClient
       .post('/blocks', { data });
 };
+
+
+/**
+  * ADMIN API ROUTES
+  * -------------------------
+  * @exports getAllStats
+  *****************************************************************/
+export const getAllStats = () =>
+  apiClient.get('/admin/stats');
+  

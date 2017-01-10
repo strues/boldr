@@ -1,6 +1,12 @@
 /* @flow */
 /* eslint-disable import/prefer-default-export */
 
+export type Stats = {
+  posts: Number,
+  users: Number,
+  tags: Number,
+};
+
 export type Post = {
   id?: String,
   feature_image?: String,
@@ -9,19 +15,35 @@ export type Post = {
   content?: String,
   background_image?: String,
   excerpt?: String,
-  created_at?: String,
+  created_at: String,
   updated_at?: String,
-  status?: String,
-  author?: User,
+  status: ?String,
+  author: ?User,
   seo?: Object,
-  tags?: Array<Tag>
+  tags?: Array<Tag>,
+  attachments: ?Object,
+  meta: ?Object,
+  user_id: ?String,
+};
+
+export type PostImage = {
+  created_at: String,
+  file_description: ?String,
+  file_name: ?String,
+  file_type: String,
+  id: String,
+  original_name: String,
+  s3_key: String,
+  updated_at: String,
+  url: String,
+  user_id: String
 };
 
 export type Tag = {
   id: Number,
   uuid: String,
   name: String,
-  description: String
+  description: ?String,
 };
 
 export type Page = {
@@ -67,4 +89,13 @@ export type User = {
   google_profile: ?String,
   twitter_profile: ?String,
   verified: Boolean
+};
+
+export type UI = {
+  drawer: boolean,
+  isMobile: boolean,
+  layout: String,
+  loaded: boolean,
+  modal: boolean,
+  navbar: boolean,
 };

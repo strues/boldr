@@ -2,19 +2,19 @@
 
 import React from 'react';
 import Helmet from 'react-helmet';
-import PageTemplate from '../../theme/Boldr';
+import BaseTemplate from '../templates/Base';
 
 function About() {
   return (
     <div>
-    <PageTemplate helmetMeta={ <Helmet title="About" /> }>
+    <BaseTemplate helmetMeta={ <Helmet title="About" /> }>
       Produced with ❤️
       by
       &nbsp;
       <a href="https://twitter.com/struesco" target="_blank" rel="noopener noreferrer">
         Steven Truesdell
       </a>
-    </PageTemplate>
+    </BaseTemplate>
     </div>
   );
 }

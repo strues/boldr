@@ -26,14 +26,25 @@ class PostEditor extends Component {
 
   props: Props;
   handleSubmit(values) {
-    const postData = {
+    const newPostData = {
       title: values.title,
       tags: values.tags,
       status: values.status,
       content: values.content,
+      excerpt: values.excerpt,
       id: this.props.currentPost.id || '',
-      origSlug: this.props.params.slug || '',
     };
+
+    const editPostData = {
+      title: values.title,
+      status: values.status,
+      content: values.content,
+      excerpt: values.excerpt,
+      id: this.props.currentPost.id || '',
+    };
+
+    const postData = this.state.editing ? editPostData : newPostData;
+
     console.log('submit', postData);
     this.props.updatePost(postData);
   }
@@ -43,6 +54,7 @@ class PostEditor extends Component {
       <div>
         <PostEditorForm
           initialValues={ this.props.currentPost }
+          postImage={ this.props.postImage }
           onSubmit={ this.handleSubmit }
           drawer={ this.props.drawer }
           isEditing
@@ -55,9 +67,10 @@ class PostEditor extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    posts: state.blog.posts,
-    currentPost: state.blog.posts.bySlug[ownProps.params.slug],
+    // posts: state.blog.posts,
+    currentPost: state.blog.posts.currentPost,
     drawer: state.boldr.ui.drawer,
+    postImage: state.admin.attachments.postImage,
   };
 };
 export default connect(mapStateToProps, { updatePost })(PostEditor);

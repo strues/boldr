@@ -5,7 +5,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import type { ReactChildren } from '../../types/react';
-import materialStyle from '../../theme/Boldr/material';
+import materialStyle from '../../theme/material';
 
 const muiTheme = getMuiTheme(materialStyle);
 

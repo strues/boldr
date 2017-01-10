@@ -1,7 +1,10 @@
-import VidBlockPlugin from './VidBlockPlugin';
-import ImgBlockPlugin from './ImgBlockPlugin';
+import { image, placeholder } from './image/plugin';
+import emoji from './emoji/plugin';
+import video from './video/plugin';
 
-export {
-  VidBlockPlugin,
-  ImgBlockPlugin,
-};
+export default [
+  image,
+  placeholder,
+  emoji,
+  video,
+];

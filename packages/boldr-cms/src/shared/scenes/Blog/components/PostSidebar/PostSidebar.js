@@ -3,12 +3,17 @@ import React from 'react';
 import Paper from 'material-ui/Paper';
 
 import { Heading, Col } from '../../../../components/index';
+import type { User, Tag } from '../../../../types/models';
 import Author from '../Author';
 import TagBlock from '../TagBlock';
 
-const PostSidebar = (props: { tags: Array<Object>, author: Object }) => {
+type Props = {
+  tags: Array<Tag>,
+  author: User,
+};
+const PostSidebar = (props: Props) => {
   return (
-    <div className="blog__sidebar">
+    <div className="boldr-post__sidebar">
     <Col xs={ 12 } md={ 4 } lg={ 3 }>
       <Paper zDepth={ 1 } style={ { padding: '1em', width: '250px' } }>
         <Heading size={ 2 } color="#1F2439">Author</Heading>

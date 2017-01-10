@@ -5,6 +5,6 @@ import PostImage from './PostImage';
 
 it('<PostImage />, renders the post image without blowing up', () => {
   const wrapper = mount(<PostImage />);
-  const innerWrapper = wrapper.find('.postimage');
-  expect(innerWrapper.is('.postimage')).toBe(true);
+  const innerWrapper = wrapper.find('.boldr-post__image-wrap');
+  expect(innerWrapper.is('.boldr-post__image-wrap')).toBe(true);
 });

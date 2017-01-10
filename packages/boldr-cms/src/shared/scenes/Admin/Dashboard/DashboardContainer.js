@@ -2,11 +2,13 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import type { ReactElement } from 'types/react';
+import { push } from 'react-router-redux';
 import AppBar from 'material-ui/AppBar';
 
 import { Grid, Col, Authenticated } from '../../../components/index';
 import Sidebar from '../components/Sidebar';
-import { showSidebar, hideSidebar } from './reducer';
+import Topbar from '../components/Topbar';
+import { showSidebar, hideSidebar } from '../../../state/modules/admin/dashboard/actions';
 
 const styled = require('styled-components').default;
 
@@ -21,10 +23,11 @@ const BgOffsetBlock = styled.div`
 `;
 type Props = {
   children: ReactElement,
-  toggleOpen?: Function,
+  dispatch?: Function,
   showSidebar?: Function,
   hideSidebar?: Function,
-  dashboard: ?Object
+  dashboard: ?Object,
+  account: Object,
 };
 
 @Authenticated
@@ -36,32 +39,46 @@ class DashboardContainer extends PureComponent {
     (this: any).onSetOpen = this.onSetOpen.bind(this);
     (this: any).onSetClose = this.onSetClose.bind(this);
   }
+
   props: Props;
+
   onSetOpen(open) {
-    this.props.showSidebar();
+    this.props.dispatch(showSidebar());
   }
+
   onSetClose(open) {
-    this.props.hideSidebar();
+    this.props.dispatch(hideSidebar());
   }
+
   handleToggle = () => this.setState({ open: !this.state.open });
+
   menuButtonClick(ev) {
     ev.preventDefault();
     const isOpen = this.props.dashboard.open;
     isOpen ? this.onSetClose(this.state.open) : this.onSetOpen(this.state.open);
   }
+
+  handleChangeList = (event, value) => {
+    this.props.dispatch(push(value));
+  };
   render() {
     return (
       <div>
-        <Sidebar open={ this.props.dashboard.open } user={ this.props.account.user } />
-        <AppBar
-          onLeftIconButtonTouchTap={ this.menuButtonClick }
-          style={ { position: 'fixed', left: this.props.dashboard.open ? '200px' : '0px' } }
+        <Topbar
+          title="Boldr"
+          menuButtonClick={ this.menuButtonClick }
+          open={ this.props.dashboard.open }
+          user={ this.props.account.user }
         />
-        <BgOffsetBlock />
+        <Sidebar
+          open={ this.props.dashboard.open }
+          user={ this.props.account.user }
+          onChangeList={ this.handleChangeList }
+        />
 
         <Grid fluid style={ { paddingLeft: this.props.dashboard.open ? '200px' : '0px' } }>
           <Col xs>
-            <div style={ { marginTop: '-135px', padding: '1.5em' } }>
+            <div style={ { marginTop: '75px', padding: '1.5em' } }>
               { this.props.children }
             </div>
           </Col>
@@ -74,10 +91,10 @@ class DashboardContainer extends PureComponent {
 function mapStateToProps(state) {
   return {
     router: state.router,
-    dashboard: state.dashboard,
+    dashboard: state.admin.dashboard,
     boldr: state.boldr,
     account: state.account,
   };
 }
 
-export default connect(mapStateToProps, { showSidebar, hideSidebar })(DashboardContainer);
+export default connect(mapStateToProps)(DashboardContainer);

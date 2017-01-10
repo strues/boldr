@@ -5,7 +5,7 @@ import { Card, CardTitle, CardText } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 
 import { Grid, Col, Row } from '../../../components/index';
-import { verifyAccount } from '../actions';
+import { verifyAccount } from '../../../state/modules/account/actions';
 
 export type Props = {
   dispatch: () => void,

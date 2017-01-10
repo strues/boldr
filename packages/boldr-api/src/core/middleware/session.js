@@ -16,13 +16,8 @@ const sessionMiddleware = session({
   secret: config.token.secret,
   name: 'boldr:sid',
   proxy: true,
-  resave: true,
-  saveUninitialized: true,
-  cookie: {
-    secure: env !== 'development'
-    && env !== 'test',
-    maxAge: 3600000, //60 min
-  },
+  resave: false,
+  saveUninitialized: false,
   unset: 'destroy',
 });
 

@@ -6,13 +6,17 @@ import Notification from './Notification';
 
 const getter = (obj, propName) => (obj.get ? obj.get(propName) : obj[propName]);
 
-export type Props = {
+type Props = {
   notifications?: Array<any>,
   className?: string,
   transitionEnterTimeout?: number,
   transitionLeaveTimeout?: number,
+  dismissAfter: number,
   onActionClick?: Function,
+  notificationDismiss: Function,
   actionLabel?: string,
+  componentClassName: string,
+  CustomComponent: ReactElement,
 };
 
 class Notifications extends Component {
@@ -38,7 +42,7 @@ class Notifications extends Component {
 
     const renderedNotifications = notifications.map((notification) => (
     <Notification
-      componentClassName="notification"
+      componentClassName="boldr-notification"
       dismissAfter={ notification.dismissAfter || dismissAfter }
       onDismiss={ this._onDismiss }
       onActionClick={ onActionClick }
@@ -50,14 +54,14 @@ class Notifications extends Component {
     />
   ));
     const classes = [
-      'notification__container',
+      'boldr-notification__container',
       className || null,
     ].join(' ').split();
 
     return (
     <div className={ classes } >
       <TransitionGroup
-        transitionName={ 'notification-transition' }
+        transitionName={ 'boldr-notification__transition' }
         transitionEnterTimeout={ transitionEnterTimeout }
         transitionLeaveTimeout={ transitionLeaveTimeout }
       >
@@ -75,5 +79,5 @@ Notifications.defaultProps = {
 };
 
 export default connect((state) => ({
-  notifications: state.get ? state.get('notifications') : state.notifications,
+  notifications: state.notifications,
 }), { notificationDismiss })(Notifications);

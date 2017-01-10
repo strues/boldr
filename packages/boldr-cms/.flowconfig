@@ -3,13 +3,21 @@
 [ignore]
 
 # Including these files causes issues.
-.*/node_modules/fbjs/.*
-.*/node_modules/flow-remove-types/.*
-.*/node_modules/flow-coverage-report/.*
+<PROJECT_ROOT>/.*/node_modules/fbjs/.*
+<PROJECT_ROOT>/.*/node_modules/flow-remove-types/.*
+<PROJECT_ROOT>/.*/node_modules/flow-coverage-report/.*
+<PROJECT_ROOT>/.*/node_modules/**/.*
 <PROJECT_ROOT>/.*/tools/.*
 <PROJECT_ROOT>/.*/public/.*
 <PROJECT_ROOT>/.*/docs/.*
-<PROJECT_ROOT>/.*/happypack/.*
+<PROJECT_ROOT>/**/happypack/.*
+.*/node_modules/fbemitter/.*
+.*/node_modules/fbjs/.*
+.*/node_modules/draft-js/.*
+.*/node_modules/glamour/.*
+.*/node_modules/flow-remove-types/.*
+.*/node_modules/flow-coverage-report/.*
+.*/node_modules/styled-components/.*
 [libs]
 
 # Official "flow-typed" repository definitions.
@@ -44,7 +52,6 @@ module.name_mapper='^\(.*\)\.\(css\|eot\|gif\|ico\|jpg\|jpeg\|less\|otf\|mp3\|mp
 module.name_mapper='^\(state\|components\|scenes\|core\|types\|theme\)\/\(.*\)$' -> '<PROJECT_ROOT>/src/shared/\1/\2'
 
 suppress_type=$FlowIssues
-suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe
 suppress_comment=\\(.\\|\n\\)*\\$FlowIssue
 
 [version]

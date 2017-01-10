@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import { RadioButtonGroup, TextField } from 'redux-form-material-ui';
 import Drawer from 'material-ui/Drawer';
@@ -9,12 +9,26 @@ import { RadioButton } from 'material-ui/RadioButton';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import CloseIcon from 'material-ui/svg-icons/navigation/close';
 import ContentForward from 'material-ui/svg-icons/content/forward';
-import { BoldrEditor } from '../../../../../components/BoldrEditor';
-import { Col, Row, Heading } from '../../../../../components/index';
+import { TextEditor } from '../../../../../components/TextEditor';
+import { Col, Row, Heading, S3Uploader } from '../../../../../components/index';
 import { openDrawer, closeDrawer } from '../../../../../state/modules/boldr/ui/actions';
-// import 'boldr-editor/lib/boldreditor.css';
+import { uploadPostImage } from '../../../../../state/modules/admin/attachments/actions';
+
 
 const styled = require('styled-components').default;
+
+const Wrapper = styled.div`
+  margin: 0 auto;
+  display: inherit;
+  padding-top: 3em;
+  width: 90%;
+`;
+const Footer = styled.div`
+  margin: 0 auto;
+  display: inherit;
+  width: 90%;
+  padding-top: 5em;
+`;
 
 type Props = {
   handleSubmit?: Function,
@@ -34,6 +48,8 @@ const fab = {
   marginTop: '10px',
   zIndex: '1000',
 };
+
+@connect()
 class PostEditorForm extends Component {
   constructor(props: Props) {
     super();
@@ -48,7 +64,24 @@ class PostEditorForm extends Component {
   componentDidMount() {
     this.checkEditStatus();
   }
+
   props: Props;
+
+  onUploadFinish = (signResult) => {
+    const signUrl = signResult.signedUrl;
+    const splitUrl = signUrl.split('?');
+    const fileUrl = splitUrl[0];
+
+    const payload = {
+      file_name: signResult.file_name,
+      original_name: signResult.original_name,
+      file_type: signResult.file_type,
+      s3_key: signResult.s3_key,
+      url: fileUrl,
+    };
+    this.props.dispatch(uploadPostImage(payload));
+  }
+
   checkEditStatus() {
     const EDITING = this.props.isEditing === true;
     if (EDITING) this.setState({ edit: true });
@@ -72,23 +105,8 @@ class PostEditorForm extends Component {
      * @param  {string} label
      * @return {element} BoldrEditor
      */
-    const renderEditor = ({ input, label }) => (
-      <div>
-        <BoldrEditor { ...input } label={ label } />
-      </div>
-    );
-    const Wrapper = styled.div`
-      margin: 0 auto;
-      display: inherit;
-      padding-top: 3em;
-      width: 90%;
-    `;
-    const Footer = styled.div`
-      margin: 0 auto;
-      display: inherit;
-      width: 90%;
-      padding-top: 5em;
-    `;
+    const renderEditor = ({ input, label }) => (<TextEditor { ...input } label={ label } />);
+
     return (
       <Row>
         <Col xs>
@@ -116,7 +134,17 @@ class PostEditorForm extends Component {
                   /> :
                 null
               }
+              <S3Uploader
+                signingUrl="/s3/sign"
+                server="/api/v1"
+                accept="image/*"
+                onProgress={ S3Uploader.onUploadProgress }
+                onError={ S3Uploader.onUploadError }
+                onFinish={ this.onUploadFinish }
 
+                uploadRequestHeaders={ { 'x-amz-acl': 'public-read' } }
+                contentDisposition="auto"
+              />
               <Field name="feature_image" type="text"
                 hintText="URL for your image"
                 component={ TextField }

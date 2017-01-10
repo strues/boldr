@@ -19,7 +19,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import AppRoot from '../shared/components/AppRoot';
 import App from '../shared/components/App';
 import configureStore from '../shared/state/store';
-import { checkAuth } from '../shared/scenes/Account/actions';
+import { checkAuth } from '../shared/state/modules/account/actions';
 import { getToken } from '../shared/core/services/token';
 import ApiClient from '../shared/core/api/apiClient';
 import createRoutes from '../shared/scenes';
@@ -32,7 +32,7 @@ WebFontLoader.load({
   google: { families: ['Roboto Slab:100,400,700', 'Roboto:300,400,700'] },
 });
 // Get the DOM Element that will host our React application.
-const domNode = document.querySelector('#app');
+const domNode = document.getElementById('app');
 // Superagent helper
 const apiClient = new ApiClient();
 
@@ -61,7 +61,7 @@ const onRouteUpdate = compose(
 );
 
 const renderApp = () => (
-  <ReactHotLoader>
+  <ReactHotLoader errorReporter={ require('redbox-react') }>
     <AppRoot store={ store }>
         <Router
           history={ history }
@@ -72,6 +72,10 @@ const renderApp = () => (
     </AppRoot>
   </ReactHotLoader>
 );
+
+if (process.env.NODE_ENV === 'development') {
+  window.Perf = require('react-addons-perf');
+}
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept(

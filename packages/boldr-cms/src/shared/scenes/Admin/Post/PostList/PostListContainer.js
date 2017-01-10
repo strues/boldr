@@ -12,10 +12,9 @@ type Props = {
   children?: ReactElement,
   posts: Array<Post>,
   dispatch?: () => void,
-  deletePost: () => void,
-  fetchPostsIfNeeded: () => void,
-  handleArticleClick: () => void,
-  handleDeleteClick: () => void,
+  deletePost: Function,
+  fetchPostsIfNeeded: Function,
+  handleDeleteClick: Function,
 };
 
 @provideHooks({
@@ -26,23 +25,19 @@ type Props = {
 export class PostListContainer extends PureComponent {
   constructor(props: Props) {
     super(props);
-    (this: any).handleArticleClick = this.handleArticleClick.bind(this);
     (this: any).handleDeleteClick = this.handleDeleteClick.bind(this);
   }
   componentDidMount() {
     this.props.fetchPostsIfNeeded();
   }
   props: Props;
-  // postId is a uuid, not an integer
-  handleArticleClick(postId: string): void {
 
-  }
   handleDeleteClick(postId: string): void {
     this.props.deletePost(postId);
   }
   render() {
     return (
-      <PostList { ...this.props } />
+      <PostList posts={ this.props.posts } handleDeleteClick={ this.handleDeleteClick } />
     );
   }
 }
@@ -50,7 +45,6 @@ export class PostListContainer extends PureComponent {
 const mapStateToProps = (state) => {
   return {
     posts: getPosts(state),
-    loading: state.blog.posts.loading,
   };
 };
 

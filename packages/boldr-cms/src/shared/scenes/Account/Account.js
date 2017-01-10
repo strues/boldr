@@ -2,7 +2,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import PageTemplate from '../../theme/Boldr';
+import BaseTemplate from '../../pages/templates/Base';
 import type { ReactElement } from '../../types/react';
 
 type Props = { children: ReactElement, auth: Object }; // eslint-disable-line
@@ -10,9 +10,9 @@ type Props = { children: ReactElement, auth: Object }; // eslint-disable-line
 const Account = (props: Props) => {
   return (
     <div>
-      <PageTemplate>
+      <BaseTemplate>
         { props.children }
-      </PageTemplate>
+      </BaseTemplate>
     </div>
   );
 };

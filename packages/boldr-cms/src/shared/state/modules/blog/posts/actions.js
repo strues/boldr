@@ -1,12 +1,14 @@
 /* @flow */
-import { normalize, arrayOf } from 'normalizr';
+import { normalize, arrayOf, schema } from 'normalizr';
 import { camelizeKeys } from 'humps';
-
+import merge from 'lodash/merge';
 import * as api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import type { Post } from '../../../../types/models';
 import { notificationSend } from '../../../../state/modules/notifications/notifications';
 import * as t from './constants';
+
+import { arrayOfPost } from './schema';
 
 export function togglePostLayoutView() {
   return { type: t.TOGGLE_POST_LAYOUT };
@@ -49,11 +51,12 @@ export function fetchPosts() {
         if (response.status !== 200) {
           dispatch(receivePostsFailed());
         }
-        // const camelizedJson = camelizeKeys(response.body.results);
-        // const normalized = normalize(camelizedJson, arrayOf(postSchema, { idAttribute: 'slug' }));
 
+        const camelizedJson = camelizeKeys(response.body.results);
+        // const normalized = normalize(camelizedJson, arrayOf(postSchema, { idAttribute: 'slug' }));
+        const normalizedData = normalize(response.body.results, arrayOfPost);
         // console.log(normalized)
-        dispatch(receivePosts(response));
+        dispatch(receivePosts(normalizedData));
       })
       .catch(err => {
         dispatch(receivePostsFailed(err));
@@ -66,24 +69,21 @@ export function fetchPosts() {
  * @param  {Object} state   The blog state which contains posts
  */
 function shouldFetchPosts(state) {
-  const posts = state.blog.posts;
-  if (!posts) {
+  const posts = state.blog.posts.ids;
+  if (!posts.length) {
     return true;
   }
-  if (posts.loading) {
-    return false;
-  }
-  return posts;
+  return false;
 }
 
 const requestPosts = () => {
   return { type: t.FETCH_POSTS_REQUEST };
 };
 
-const receivePosts = (response) => {
+const receivePosts = (normalizedData) => {
   return {
     type: t.FETCH_POSTS_SUCCESS,
-    payload: response.body.results,
+    payload: normalizedData,
   };
 };
 
@@ -91,6 +91,12 @@ const receivePostsFailed = (err) => ({
   type: t.FETCH_POSTS_FAILURE, error: err,
 });
 
+export function selectPost(post: Object) {
+  return {
+    type: t.SELECT_POST,
+    post,
+  };
+}
 /**
   * CREATE POST ACTIONS
   * -------------------------
@@ -174,6 +180,7 @@ const deletePostFail = (err) => ({
 
 export function updatePost(postData: Post) {
   return (dispatch: Function) => {
+    console.log('action', postData);
     dispatch(updatePostDetails(postData));
     return api.putPostId(postData)
       .then(response => {

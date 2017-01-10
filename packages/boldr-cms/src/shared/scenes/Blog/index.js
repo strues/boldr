@@ -1,8 +1,7 @@
-import { getAsyncInjectors, loadRoute, errorLoading } from '../../core/utils';
+import { loadRoute, errorLoading } from '../../core/utils';
 import BlogContainer from './BlogContainer';
 
 export default (store, connect) => {
-  const { injectReducer } = getAsyncInjectors(store);
   return {
     path: 'blog',
     component: BlogContainer,

@@ -7,7 +7,7 @@ const debug = require('debug')('boldrAPI:user-controller');
 
 export async function listUsers(req: $Request, res: $Response, next: NextFunction) {
   try {
-    const users = await User.query().eager('role').omit(['password']);
+    const users = await User.query().eager('[roles]').omit(['password']);
     debug(users);
     if (!users) {
       const err = new NotFound();
@@ -24,7 +24,7 @@ export async function getUser(req: $Request, res: $Response, next: NextFunction)
   try {
     const user = await User.query()
     .findById(req.params.id)
-    .eager('role')
+    .eager('[roles]')
     .omit(['password']);
 
     return responseHandler(res, 200, user);
@@ -54,12 +54,24 @@ export function updateUser(req: $Request, res: $Response, next: NextFunction) {
 
 export async function adminUpdateUser(req: $Request, res: $Response, next: NextFunction) {
   try {
+    if (req.body.role) {
+      const u = await User.query().findById(req.params.id).eager('roles');
+      await u
+         .$relatedQuery('roles')
+         .unrelate();
+
+      const newRole = await u.$relatedQuery('roles').relate({ id: req.body.role });
+
+      debug(newRole);
+    }
     const payload = {
       display_name: req.body.display_name,
-      role: req.body.role,
+      bio: req.body.bio,
+      // role: req.body.role,
       first_name: req.body.first_name,
       last_name: req.body.last_name,
       avatar_url: req.body.avatar_url,
+
     };
     User.query()
       .patchAndFetchById(req.params.id, payload)

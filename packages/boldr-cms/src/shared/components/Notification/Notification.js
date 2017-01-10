@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 
 const inline = {
   zIndex: '99999',
@@ -26,12 +26,14 @@ const inline = {
   transform: 'translatez(0)',
 };
 
-export type Props = {
+type Props = {
   id?: string | number,
   message?: string,
   kind?: 'success' | 'info' | 'error' | 'danger',
   onActionClick?: Function,
   actionLabel?: string,
+  dismissAfter: number,
+  onDismiss: Function,
 };
 
 class Notification extends Component {
@@ -40,7 +42,7 @@ class Notification extends Component {
     this._id = new Date().getTime();
     this._onActionClick = this._onActionClick.bind(this);
   }
-  props: Props;
+
   componentDidMount() {
     if (this.props.dismissAfter) {
       setTimeout(() => this.props.onDismiss(this.props.id), this.props.dismissAfter);
@@ -59,21 +61,21 @@ class Notification extends Component {
       return;
     }
   }
-
+  props: Props;
   render() {
     const { kind, actionLabel } = this.props;
     return (
-        <div style={ inline } className="notification">
-          <div className="notification__icon" />
-          <div className="notification__content">
-            <span className="notification__message">{ this.props.message }</span>
+        <div style={ inline } className="boldr-notification">
+          <div className="boldr-notification__icon" />
+          <div className="boldr-notification__content">
+            <span className="boldr-notification__message">{ this.props.message }</span>
           </div>
           { actionLabel &&
-            <span className="notification__action">
+            <span className="boldr-notification__action">
               <button onClick={ this._onActionClick }>{ this.props.actionLabel }</button>
             </span>
           }
-          <div className="notification__close" />
+          <div className="boldr-notification__close" />
       </div>
     );
   }

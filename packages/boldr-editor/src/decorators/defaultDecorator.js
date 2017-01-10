@@ -1,41 +1,19 @@
-/* @flow */
-import React from 'react';
-import { Entity, CompositeDecorator } from 'draft-js';
-import type { ContentBlock } from 'draft-js';
-import type { ReactChildren } from '../types/react';
-
-type Props = {
-  children: ReactChildren,
-  entityKey: string,
-};
-
-type EntityRangeCallback = (start: number, end: number) => void;
-
-const findLinkEntities = (contentBlock: ContentBlock, callback: EntityRangeCallback): void => {
-  contentBlock.findEntityRanges(
-    (character) => {
-      const entityKey = character.getEntity();
-      return (
-        entityKey !== null &&
-        Entity.get(entityKey).getType() === 'LINK'
-      );
-    },
-    callback,
-  );
-};
-
-const Link = (props: Props) => {
-  const { target, url } = Entity.get(props.entityKey).getData();
-  return (
-    <a href={ url } target={ target } className="be-link">
-      { props.children }
-    </a>
-  );
-};
+import { CompositeDecorator } from 'draft-js';
+import { createTypeStrategy, hashtagStrategy, linkifyStrategy } from '../utils/strategy';
+import Link from '../components/Entities/Link';
+import Hashtag from '../components/Entities/Hashtag';
 
 const decorator = new CompositeDecorator([
   {
-    strategy: findLinkEntities,
+    strategy: createTypeStrategy('LINK'),
+    component: Link,
+  },
+  {
+    strategy: hashtagStrategy,
+    component: Hashtag,
+  },
+  {
+    strategy: linkifyStrategy,
     component: Link,
   },
 ]);

@@ -2,18 +2,18 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { Footer } from '../../components/index';
-import PageTemplate from '../../theme/Boldr';
+import BaseTemplate from '../../pages/templates/Base';
 import type { ReactChildren } from '../../types/react';
 
 const BlogContainer = (props: { children: ReactChildren }) => {
   return (
     <div>
-      <PageTemplate
+      <BaseTemplate
         helmetMeta={ <Helmet title="Blog" /> }
         footer={ <Footer /> }
       >
         { props.children }
-      </PageTemplate>
+      </BaseTemplate>
     </div>
   );
 };

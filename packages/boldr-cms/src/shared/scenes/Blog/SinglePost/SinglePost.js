@@ -4,18 +4,22 @@ import { connect } from 'react-redux';
 import { Grid, Row } from '../../../components/index';
 import PostSidebar from '../components/PostSidebar';
 import PostContent from '../components/PostContent';
+import { getPosts } from '../../../state/modules/blog/posts';
 
 export type Props = {
   loading: boolean,
+  entities: Object,
   currentPost: Object,
 };
 
 const SinglePost = (props: Props) => {
+  const postAuthor = props.entities.users[props.currentPost.author];
+  const postTags = props.currentPost.tags.map(id => props.entities.tags[id]);
   return (
       <Grid>
         <Row>
           <PostContent { ...props.currentPost } />
-          <PostSidebar { ...props.currentPost } />
+          <PostSidebar { ...props.currentPost } author={ postAuthor } tags={ postTags } />
         </Row>
       </Grid>
   );
@@ -23,8 +27,8 @@ const SinglePost = (props: Props) => {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    posts: state.blog.posts,
-    currentPost: state.blog.posts.bySlug[ownProps.params.slug],
+    entities: state.entities,
+    currentPost: state.blog.posts.currentPost,
   };
 };
 

@@ -1,7 +1,7 @@
 exports[`<Error404 /> renders snapshot 1`] = `
 <div
   className="error_wrapper">
-  <Connect(Boldr)
+  <Connect(TemplateProvider)
     helmetMeta={
       <HelmetWrapper
         title="404! You might be lost..." />
@@ -9,6 +9,6 @@ exports[`<Error404 /> renders snapshot 1`] = `
     <p>
       Sorry, that page was not found.
     </p>
-  </Connect(Boldr)>
+  </Connect(TemplateProvider)>
 </div>
 `;

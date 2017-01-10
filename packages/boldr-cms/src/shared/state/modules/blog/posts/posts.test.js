@@ -6,27 +6,24 @@ describe('Post Duck', () => {
     expect(
         postsReducer(undefined, {}),
       ).toEqual({
-        loading: false,
-        loaded: false,
-        error: null,
-        bySlug: {},
-        list: [],
+        all: {},
+        ids: [],
+        currentPost: {},
+        isFetching: false,
       });
   });
   it('should initiate loading', () => {
     const initialState = {
-      loading: false,
-      loaded: false,
-      error: null,
-      bySlug: {},
-      list: [],
+      all: {},
+      ids: [],
+      currentPost: {},
+      isFetching: false,
     };
     const stateAfter = {
-      loading: true,
-      loaded: false,
-      error: null,
-      bySlug: {},
-      list: [],
+      all: {},
+      ids: [],
+      currentPost: {},
+      isFetching: true,
     };
     expect(
       postsReducer(initialState, {
@@ -36,18 +33,16 @@ describe('Post Duck', () => {
   });
   it('should handle loading failure', () => {
     const initialState = {
-      loading: false,
-      loaded: false,
-      error: null,
-      bySlug: {},
-      list: [],
+      all: {},
+      ids: [],
+      currentPost: {},
+      isFetching: false,
     };
     const stateAfter = {
-      loading: false,
-      loaded: true,
-      error: undefined,
-      bySlug: {},
-      list: [],
+      all: {},
+      ids: [],
+      currentPost: {},
+      isFetching: false,
     };
     expect(
       postsReducer(initialState, {

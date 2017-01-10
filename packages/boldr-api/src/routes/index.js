@@ -1,6 +1,7 @@
 import express from 'express';
 
 import activityRoutes from './activity/activity.routes';
+import adminRoutes from './admin/admin.routes';
 import attachmentRoutes from './attachment/attachment.routes';
 import authRoutes from './auth/auth.routes';
 import blockRoutes from './block/block.routes';
@@ -51,6 +52,7 @@ router.get('/health-check', (req, res) =>
 );
 
 router.use('/activities', activityRoutes);
+router.use('/admin', adminRoutes);
 router.use('/attachments', attachmentRoutes);
 router.use('/auth', authRoutes);
 router.use('/blocks', blockRoutes);

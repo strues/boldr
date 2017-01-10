@@ -4,7 +4,7 @@ import TextField from 'material-ui/TextField';
 import { Card, CardTitle, CardActions, CardText } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import { Grid, Col, Row } from '../../../components/Layout';
-import { forgotPassword } from '../actions';
+import { forgotPassword } from '../../../state/modules/account/actions';
 import ForgotPasswordForm from './ForgotPasswordForm';
 
 export type Props = {

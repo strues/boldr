@@ -19,7 +19,7 @@ it('BadRequest', () => {
 it('Unauthorized', () => {
   const unAuth = new Unauthorized();
   expect(typeof unAuth).toBe('object');
-  expect(unAuth.status).toBe('Unauthorized');
+  expect(unAuth.status).toBe(401);
 });
 it('Forbidden', () => {
   const forb = new Forbidden();

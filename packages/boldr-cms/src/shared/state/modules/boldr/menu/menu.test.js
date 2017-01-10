@@ -13,17 +13,7 @@ describe('Menu Duck', () => {
           attributes: {},
           restricted: false,
           order: -1,
-          details: [{
-            id: -1,
-            uuid: '',
-            label: '',
-            name: '',
-            attribute: '',
-            position: '',
-            parent_id: '',
-            link: '',
-            icon: '',
-          }],
+          details: [],
         },
       });
   });

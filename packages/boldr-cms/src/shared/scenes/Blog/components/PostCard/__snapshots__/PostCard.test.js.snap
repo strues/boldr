@@ -1,6 +1,6 @@
 exports[`<PostCard /> renders snapshot 1`] = `
 <div
-  className="post__card-wrapper">
+  className="boldr-post__card-wrapper">
   <Card
     expandable={false}
     expanded={null}
@@ -33,6 +33,7 @@ exports[`<PostCard /> renders snapshot 1`] = `
               fullWidth={false}
               label="Read More"
               labelPosition="after"
+              onClick={[Function]}
               primary={true}
               secondary={false} />
           </Link>
@@ -47,7 +48,8 @@ exports[`<PostCard /> renders snapshot 1`] = `
         <Col
           componentClass="div"
           xs={12}>
-          <TagBlock />
+          <TagBlock
+            tags={null} />
         </Col>
       </Row>
     </CardActions>

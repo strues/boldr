@@ -117,6 +117,7 @@ export async function destroy(req, res, next) {
 }
 
 export function update(req, res) {
+  debug(req.body);
   return Post.query()
     .patchAndFetchById(req.params.id, req.body)
     .then(post => responseHandler(res, 202, post));

@@ -19,13 +19,18 @@ const File = (props: Props) => {
     props.removeMedia(mediaId);
   }
 
+  function handleSelect() {
+    const file = props.file;
+    props.selectFile(file);
+  }
+
   return (
-      <Card>
+      <Card className="boldr-filecard">
       <CardMedia overlay={ <CardTitle title={ props.file.filename } /> }>
         <img src={ props.file.url } alt={ props.file.filename } />
       </CardMedia>
         <CardActions>
-          <IconButton tooltip="Edit image">
+          <IconButton onClick={ handleSelect } tooltip="Edit image">
             <EditIcon />
           </IconButton>
           <IconButton onClick={ handleclick } tooltip="Permanently delete">

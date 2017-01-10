@@ -4,9 +4,9 @@ import Avatar from 'material-ui/Avatar';
 import List from 'material-ui/List/List';
 import ListItem from 'material-ui/List/ListItem';
 
-const Author = (props: { display_name: String, avatar_url: String }) => {
+const Author = (props: { display_name: String, avatar_url: String, last_name: String, first_name: String }) => {
   return (
-    <div className="post__sidebar-author">
+    <div className="boldr-post__sidebar-author">
         <List>
           <ListItem
             disabled

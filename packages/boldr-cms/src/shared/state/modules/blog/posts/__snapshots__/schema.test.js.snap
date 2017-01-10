@@ -1,0 +1,59 @@
+exports[`arrayOfMedia should match the normalizr-arrayOfPost-schema 1`] = `
+ArraySchema {
+  "schema": EntitySchema {
+    "_getId": [Function],
+    "_key": "posts",
+    "_mergeStrategy": [Function],
+    "_processStrategy": [Function],
+    "schema": Object {
+      "author": EntitySchema {
+        "_getId": [Function],
+        "_key": "users",
+        "_mergeStrategy": [Function],
+        "_processStrategy": [Function],
+        "schema": Object {},
+      },
+      "tags": Array [
+        EntitySchema {
+          "_getId": [Function],
+          "_key": "tags",
+          "_mergeStrategy": [Function],
+          "_processStrategy": [Function],
+          "schema": Object {
+            "processStrategy": [Function],
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`post schema should match the normalizr-post-schema 1`] = `
+EntitySchema {
+  "_getId": [Function],
+  "_key": "posts",
+  "_mergeStrategy": [Function],
+  "_processStrategy": [Function],
+  "schema": Object {
+    "author": EntitySchema {
+      "_getId": [Function],
+      "_key": "users",
+      "_mergeStrategy": [Function],
+      "_processStrategy": [Function],
+      "schema": Object {},
+    },
+    "tags": Array [
+      EntitySchema {
+        "_getId": [Function],
+        "_key": "tags",
+        "_mergeStrategy": [Function],
+        "_processStrategy": [Function],
+        "schema": Object {
+          "processStrategy": [Function],
+        },
+      },
+    ],
+  },
+}
+`;

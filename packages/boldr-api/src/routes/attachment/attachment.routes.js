@@ -51,6 +51,17 @@ router.post('/dashboard', isAuthenticated, checkRole('Admin'), ctrl.fromDashboar
  */
 router.delete('/:id', isAuthenticated, checkRole('Admin'), ctrl.deleteAttachment);
 /**
+ * @api {put} /attachments/:id  Updates an attachment in the database
+ * @apiName updateAttachment
+ * @apiGroup Attachment
+ * @apiUse authHeader
+ * @apiPermission admin
+ * @apiSuccess (Success 202) 202
+ * @apiError 401 Invalid credentials.
+ * @apiError 403 Forbidden
+ */
+router.put('/:id', isAuthenticated, checkRole('Admin'), ctrl.updateAttachment);
+/**
  * @api {get} /attachments/aws/bucket  Returns all items in S3 bucket.
  * @apiName getAllAWS
  * @apiGroup Attachment
@@ -61,5 +72,6 @@ router.delete('/:id', isAuthenticated, checkRole('Admin'), ctrl.deleteAttachment
  * @apiError 403 Forbidden
  */
 router.get('/aws/bucket', ctrl.getAllAWS);
+
 
 export default router;

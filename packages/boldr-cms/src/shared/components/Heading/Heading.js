@@ -2,9 +2,9 @@ import React, { PropTypes } from 'react';
 
 const Heading = (props) => {
   const tagName = `h${props.size}`;
-  let className = `heading heading__${props.size}`;
+  let className = `boldr-heading boldr-heading__${props.size}`;
   if (props.classname) {
-    className = `${props.classname} heading heading--${props.size}`;
+    className = `${props.classname} boldr-heading boldr-heading__${props.size}`;
   }
   const style = {
     color: props.color,

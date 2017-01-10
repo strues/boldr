@@ -77,11 +77,7 @@ addressparser@1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/addressparser/-/addressparser-1.0.1.tgz#47afbe1a2a9262191db6838e4fd1d39b40821746"
 
-ajv-keywords@^1.0.0:
-  version "1.5.0"
-  resolved "https://registry.yarnpkg.com/ajv-keywords/-/ajv-keywords-1.5.0.tgz#c11e6859eafff83e0dafc416929472eca946aa2c"
-
-ajv@^4.1.5, ajv@^4.7.0:
+ajv@^4.1.5:
   version "4.10.3"
   resolved "https://registry.yarnpkg.com/ajv/-/ajv-4.10.3.tgz#3e4fea9675b157de7888b80dd0ed735b83f28e11"
   dependencies:
@@ -249,9 +245,9 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
-aws-sdk@^2.7.20:
-  version "2.7.20"
-  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.7.20.tgz#ab41e74661a49cbf1b4211e8de7a86b94369d313"
+aws-sdk@^2.7.21:
+  version "2.7.21"
+  resolved "https://registry.yarnpkg.com/aws-sdk/-/aws-sdk-2.7.21.tgz#9abc790b3d2498482437172e5948988d4870f94f"
   dependencies:
     buffer "4.9.1"
     crypto-browserify "1.0.9"
@@ -815,7 +811,7 @@ babel-plugin-transform-strict-mode@^6.18.0:
     babel-runtime "^6.0.0"
     babel-types "^6.18.0"
 
-babel-polyfill@^6.16.0, babel-polyfill@^6.6.1:
+babel-polyfill@^6.16.0, babel-polyfill@^6.20.0, babel-polyfill@^6.6.1:
   version "6.20.0"
   resolved "https://registry.yarnpkg.com/babel-polyfill/-/babel-polyfill-6.20.0.tgz#de4a371006139e20990aac0be367d398331204e7"
   dependencies:
@@ -849,6 +845,39 @@ babel-preset-boldr@0.7.2:
 babel-preset-env@1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/babel-preset-env/-/babel-preset-env-1.1.4.tgz#d876f9fcff5fe0612db3dcbc0c87503b41d4873f"
+  dependencies:
+    babel-plugin-check-es2015-constants "^6.3.13"
+    babel-plugin-syntax-trailing-function-commas "^6.13.0"
+    babel-plugin-transform-async-to-generator "^6.8.0"
+    babel-plugin-transform-es2015-arrow-functions "^6.3.13"
+    babel-plugin-transform-es2015-block-scoped-functions "^6.3.13"
+    babel-plugin-transform-es2015-block-scoping "^6.6.0"
+    babel-plugin-transform-es2015-classes "^6.6.0"
+    babel-plugin-transform-es2015-computed-properties "^6.3.13"
+    babel-plugin-transform-es2015-destructuring "^6.6.0"
+    babel-plugin-transform-es2015-duplicate-keys "^6.6.0"
+    babel-plugin-transform-es2015-for-of "^6.6.0"
+    babel-plugin-transform-es2015-function-name "^6.3.13"
+    babel-plugin-transform-es2015-literals "^6.3.13"
+    babel-plugin-transform-es2015-modules-amd "^6.8.0"
+    babel-plugin-transform-es2015-modules-commonjs "^6.6.0"
+    babel-plugin-transform-es2015-modules-systemjs "^6.12.0"
+    babel-plugin-transform-es2015-modules-umd "^6.12.0"
+    babel-plugin-transform-es2015-object-super "^6.3.13"
+    babel-plugin-transform-es2015-parameters "^6.6.0"
+    babel-plugin-transform-es2015-shorthand-properties "^6.3.13"
+    babel-plugin-transform-es2015-spread "^6.3.13"
+    babel-plugin-transform-es2015-sticky-regex "^6.3.13"
+    babel-plugin-transform-es2015-template-literals "^6.6.0"
+    babel-plugin-transform-es2015-typeof-symbol "^6.6.0"
+    babel-plugin-transform-es2015-unicode-regex "^6.3.13"
+    babel-plugin-transform-exponentiation-operator "^6.8.0"
+    babel-plugin-transform-regenerator "^6.6.0"
+    browserslist "^1.4.0"
+
+babel-preset-env@1.1.7:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/babel-preset-env/-/babel-preset-env-1.1.7.tgz#4ca8dd905056039c6788a0174bfac7b7bad89fbf"
   dependencies:
     babel-plugin-check-es2015-constants "^6.3.13"
     babel-plugin-syntax-trailing-function-commas "^6.13.0"
@@ -1040,9 +1069,9 @@ bcryptjs@^2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/bcryptjs/-/bcryptjs-2.4.0.tgz#fb7f4a0b133854503fe1b2da3f25db834cf0e678"
 
-better-npm-run@^0.0.13:
-  version "0.0.13"
-  resolved "https://registry.yarnpkg.com/better-npm-run/-/better-npm-run-0.0.13.tgz#38a340d0546c831ce80bae66d4def19c5c7ee963"
+better-npm-run@^0.0.14:
+  version "0.0.14"
+  resolved "https://registry.yarnpkg.com/better-npm-run/-/better-npm-run-0.0.14.tgz#6a03b1a19db63205142d7803995f23c779070389"
   dependencies:
     dotenv "^2.0.0"
     object-assign "^4.0.1"
@@ -1065,7 +1094,7 @@ bluebird@^2.9.24:
   version "2.11.0"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-2.11.0.tgz#534b9033c022c9579c56ba3b3e5a5caafbb650e1"
 
-bluebird@^3.1.1, bluebird@^3.3.1, bluebird@^3.4.0, bluebird@^3.4.6, bluebird@^3.4.7:
+bluebird@^3.1.1, bluebird@^3.4.0, bluebird@^3.4.6, bluebird@^3.4.7:
   version "3.4.7"
   resolved "https://registry.yarnpkg.com/bluebird/-/bluebird-3.4.7.tgz#f72d760be09b7f76d08ed8fae98b289a8d05fab3"
 
@@ -1542,9 +1571,9 @@ dashify@^0.2.0:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/dashify/-/dashify-0.2.2.tgz#6a07415a01c91faf4a32e38d9dfba71f61cb20fe"
 
-date-fns@^1.22.0:
-  version "1.22.0"
-  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.22.0.tgz#3199427130e10e3333af9350a8701e7e1c634bc8"
+date-fns@^1.24.0:
+  version "1.24.0"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.24.0.tgz#e5d5945797cc2cbc46284dcb6699d3e5a23279f9"
 
 debug@2.2.0, debug@^2.1.3, debug@^2.2.0, debug@~2.2.0:
   version "2.2.0"
@@ -1653,7 +1682,11 @@ dont-sniff-mimetype@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/dont-sniff-mimetype/-/dont-sniff-mimetype-1.0.0.tgz#5932890dc9f4e2f19e5eb02a20026e5e5efc8f58"
 
-dotenv@2.0.0, dotenv@^2.0.0:
+dotenv@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-4.0.0.tgz#864ef1379aced55ce6f95debecdce179f7a0cd1d"
+
+dotenv@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-2.0.0.tgz#bd759c357aaa70365e01c96b7b0bec08a6e0d949"
 
@@ -1828,9 +1861,9 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-boldr@0.7.1:
-  version "0.7.1"
-  resolved "https://registry.yarnpkg.com/eslint-config-boldr/-/eslint-config-boldr-0.7.1.tgz#6c59cdc4385d8da25744f9231d233e2f8b0dba08"
+eslint-config-boldr@0.7.2:
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/eslint-config-boldr/-/eslint-config-boldr-0.7.2.tgz#1a4ce031d7a6aa7a55ef2f0e0f0014b1c555416b"
   dependencies:
     babel-eslint "^7.1.1"
     eslint-plugin-babel "^4.0.0"
@@ -1885,9 +1918,9 @@ eslint-plugin-react@^6.8.0:
     doctrine "^1.2.2"
     jsx-ast-utils "^1.3.4"
 
-eslint@3.12.2:
-  version "3.12.2"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-3.12.2.tgz#6be5a9aa29658252abd7f91e9132bab1f26f3c34"
+eslint@3.13.0:
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-3.13.0.tgz#636925fd163c9babe2e8be7ae43caf518d469577"
   dependencies:
     babel-code-frame "^6.16.0"
     chalk "^1.1.3"
@@ -1919,7 +1952,7 @@ eslint@3.12.2:
     require-uncached "^1.0.2"
     shelljs "^0.7.5"
     strip-bom "^3.0.0"
-    strip-json-comments "~1.0.1"
+    strip-json-comments "~2.0.1"
     table "^3.7.8"
     text-table "~0.2.0"
     user-home "^2.0.0"
@@ -2819,10 +2852,6 @@ is-fullwidth-code-point@^1.0.0:
   resolved "https://registry.yarnpkg.com/is-fullwidth-code-point/-/is-fullwidth-code-point-1.0.0.tgz#ef9e31386f031a7f0d643af82fde50c457ef00cb"
   dependencies:
     number-is-nan "^1.0.0"
-
-is-fullwidth-code-point@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/is-fullwidth-code-point/-/is-fullwidth-code-point-2.0.0.tgz#a3b30a5c4f199183167aaab93beefae3ddfb654f"
 
 is-glob@^2.0.0, is-glob@^2.0.1:
   version "2.0.1"
@@ -4886,13 +4915,6 @@ string-width@^1.0.1, string-width@^1.0.2:
     is-fullwidth-code-point "^1.0.0"
     strip-ansi "^3.0.0"
 
-string-width@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/string-width/-/string-width-2.0.0.tgz#635c5436cc72a6e0c387ceca278d4e2eec52687e"
-  dependencies:
-    is-fullwidth-code-point "^2.0.0"
-    strip-ansi "^3.0.0"
-
 string.prototype.codepointat@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/string.prototype.codepointat/-/string.prototype.codepointat-0.2.0.tgz#6b26e9bd3afcaa7be3b4269b526de1b82000ac78"
@@ -4925,9 +4947,13 @@ strip-bom@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/strip-bom/-/strip-bom-3.0.0.tgz#2334c18e9c759f7bdd56fdef7e9ae3d588e68ed3"
 
-strip-json-comments@~1.0.1, strip-json-comments@~1.0.4:
+strip-json-comments@~1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-1.0.4.tgz#1e15fbcac97d3ee99bf2d73b4c656b082bbafb91"
+
+strip-json-comments@~2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
 
 superagent@^2.0.0:
   version "2.3.0"
@@ -4959,13 +4985,6 @@ superagent@^3.3.1:
     qs "^6.1.0"
     readable-stream "^2.0.5"
 
-supertest-as-promised@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/supertest-as-promised/-/supertest-as-promised-4.0.2.tgz#0464f2bd256568d4a59bce84269c0548f6879f1a"
-  dependencies:
-    bluebird "^3.3.1"
-    methods "^1.1.1"
-
 supertest@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/supertest/-/supertest-2.0.1.tgz#a058081d788f1515d4700d7502881e6b759e44cd"
@@ -4991,7 +5010,7 @@ supports-color@^3.1.2:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.1.tgz#8549dd1d01fa9f893c18cc9ab0b106b4d9b168cb"
 
-table@3.7.8:
+table@3.7.8, table@^3.7.8:
   version "3.7.8"
   resolved "https://registry.yarnpkg.com/table/-/table-3.7.8.tgz#b424433ef596851922b2fd77224a69a1951618eb"
   dependencies:
@@ -5003,17 +5022,6 @@ table@3.7.8:
     strip-ansi "^3.0.0"
     tv4 "^1.2.7"
     xregexp "^3.0.0"
-
-table@^3.7.8:
-  version "3.8.3"
-  resolved "https://registry.yarnpkg.com/table/-/table-3.8.3.tgz#2bbc542f0fda9861a755d3947fefd8b3f513855f"
-  dependencies:
-    ajv "^4.7.0"
-    ajv-keywords "^1.0.0"
-    chalk "^1.1.1"
-    lodash "^4.0.0"
-    slice-ansi "0.0.4"
-    string-width "^2.0.0"
 
 tar-pack@~3.3.0:
   version "3.3.0"

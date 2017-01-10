@@ -1,6 +1,6 @@
 import { schema } from 'normalizr';
 
-const user = new schema.Entity('users');
+
 const attachment = new schema.Entity('attachments');
 
 const menuDetail = new schema.Entity('details', { idAttribute: 'label' }, {
@@ -16,4 +16,4 @@ const menu = new schema.Entity('menus', {
   details: [menuDetail],
 });
 
-export { user, attachment, page, menu, menuDetail, setting };
+export { attachment, page, menu, menuDetail, setting };

@@ -36,11 +36,6 @@ export default class ApiClient {
         if (params) {
           request.query(params);
         }
-        if (process.env.NODE_ENV !== 'test') {
-          if (__SERVER__ && req.get('cookie')) {
-            request.set('cookie', req.get('cookie'));
-          }
-        }
 
         if (headers) {
           request.set(headers);

@@ -2,6 +2,7 @@ import { Model } from 'objection';
 import BaseModel from '../../core/base/BaseModel';
 // Related Model
 import User from '../user/user.model';
+import UserRole from '../user/userRole.model';
 
 class Role extends BaseModel {
   static get tableName() {
@@ -13,11 +14,16 @@ class Role extends BaseModel {
   static get relationMappings() {
     return {
       users: {
-        relation: Model.BelongsToOneRelation,
+        relation: Model.ManyToManyRelation,
         modelClass: User,
         join: {
           from: 'role.id',
-          to: 'user.role',
+          through: {
+            from: 'user_role.role_id',
+            to: 'user_role.user_id',
+            // modelClass: UserRole,
+          },
+          to: 'user.id',
         },
       },
     };

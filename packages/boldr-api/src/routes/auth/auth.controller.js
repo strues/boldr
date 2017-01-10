@@ -7,7 +7,10 @@ import User from '../user/user.model';
 import {
   responseHandler,
   generateHash,
+  UserNotVerifiedError,
+  BadRequest,
   InternalServer,
+  Unauthorized,
   Conflict,
 } from '../../core';
 
@@ -19,7 +22,7 @@ const debug = require('debug')('boldrAPI:auth-controller');
  * @param res
  * @returns {*}
  */
-async function register(req, res, next) {
+export async function registerUser(req, res, next) {
    // Param validation
   req.assert('email', 'Email is not valid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
@@ -31,7 +34,7 @@ async function register(req, res, next) {
   req.sanitize('last_name').trim();
   const errors = req.validationErrors();
   if (errors) {
-    return res.status(400).json(errors);
+    return next(new BadRequest(errors));
   }
 
    // the data for the user being created.
@@ -43,7 +46,7 @@ async function register(req, res, next) {
     first_name: req.body.first_name,
     last_name: req.body.last_name,
     display_name: req.body.display_name,
-    avatar_url: req.body.avatar_url
+    avatar_url: req.body.avatar_url,
   };
   const checkExisting = await User.query().where('email', req.body.email);
 
@@ -52,7 +55,7 @@ async function register(req, res, next) {
   }
   const newUser = await objection.transaction(User, async (User) => {
     const user = await User.query().insert(payload);
-      // await user.$relatedQuery('role').relate({ id: 1 });
+    await user.$relatedQuery('roles').relate({ id: 1 });
 
     if (!user) {
       throwNotFound();
@@ -86,7 +89,7 @@ async function register(req, res, next) {
  * @param res
  * @param next
  */
-async function login(req, res, next) {
+export async function loginUser(req, res, next) {
   req.assert('email', 'Email is invalid').isEmail();
   req.assert('email', 'Email cannot be blank').notEmpty();
   req.assert('password', 'Password cannot be blank').notEmpty();
@@ -94,24 +97,23 @@ async function login(req, res, next) {
 
   const errors = req.validationErrors();
   if (errors) {
-    return res.status(400).json(errors);
+    return next(new BadRequest(errors));
   }
 
-  await User.query().where({ email: req.body.email }).eager('role').first();
+  await User.query().where({ email: req.body.email }).eager('[roles]').first();
   passport.authenticate('local', (err, user, info) => {
     const error = err || info;
     if (!user) {
-      return res.status(401).json({ message: 'Unable to find a matching account.' });
+      return next(new Unauthorized('Unable to find a user matching the provided credentials.'));
     }
     if (error) {
       return next(new InternalServer());
     }
     if (!user.verified) {
-      return res.status(401).json({
-        message: 'This account has not been confirmed. Please check your email for a verification link.' });
+      return next(new UserNotVerifiedError());
     }
-    return req.logIn(user, (loginErr) => {
-      if (loginErr) return res.status(401).json({ message: loginErr });
+    return req.logIn(user, err => {
+      if (err) return next(new Unauthorized(err));
       // remove the password from the response.
       user.stripPassword();
       // sign the token
@@ -119,40 +121,39 @@ async function login(req, res, next) {
       req.user = user;
       res.set('Authorization', `Bearer ${token}`);
       // req.role = user.role[0].id;
-      debug(req.session);
       return res.json({ token, user });
     });
   })(req, res, next);
 }
 
 
-async function verify(req, res, next) {
+export async function verifyUser(req, res, next) {
   try {
     const verifToken = req.params.verifToken;
 
     if (!verifToken) {
-      return res.status(400).json({ message: 'Invalid account verification code' });
+      return next(new BadRequest('Invalid account verification code'));
     }
 
     const user = await User.query().where({ user_token: req.params.verifToken }).first();
     await User.query().patchAndFetchById(user.id, { verified: true });
 
     return responseHandler(res, 201, user);
-  } catch (e) {
-    return res.status(400).json({ message: e });
+  } catch (err) {
+    return next(new BadRequest(err));
   }
 }
 
-async function checkAuthentication(req, res, next) {
+export async function checkAuthentication(req, res, next) {
   try {
-    const validUser = await User.query().findById(req.user.id).eager('role');
+    const validUser = await User.query().findById(req.user.id).eager('[roles]');
     if (!validUser) {
-      return res.status(404).json({ message: 'Unable to find an account with the given information.' });
+      return next(new Unauthorized('Unable to find an account with the given information.'));
     }
     validUser.stripPassword();
     return responseHandler(res, 200, validUser);
   } catch (error) {
-    return res.status(400).json({ message: error });
+    return next(new BadRequest(error));
   }
 }
 
@@ -161,5 +162,3 @@ function throwNotFound() {
   error.statusCode = 404;
   throw error;
 }
-
-export { register, login, verify, checkAuthentication };

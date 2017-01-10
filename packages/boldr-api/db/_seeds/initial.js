@@ -49,7 +49,6 @@ function seed(knex, Promise) {
         website: 'https://boldr.io',
         profile_image: 'https://boldr.io/images/unknown-avatar.png',
         birthday: '01/01/1988',
-        role: 3,
         verified: true,
       }),
       knex('user').insert({
@@ -65,7 +64,6 @@ function seed(knex, Promise) {
         website: 'https://boldr.io',
         profile_image: 'https://boldr.io/images/unknown-avatar.png',
         birthday: '01/01/1988',
-        role: 1,
         verified: true,
       }),
       knex('user').insert({
@@ -81,7 +79,6 @@ function seed(knex, Promise) {
         website: 'https://boldr.io',
         profile_image: 'https://boldr.io/images/unknown-avatar.png',
         birthday: '01/01/1988',
-        role: 2,
         verified: true,
       }),
     ]))
@@ -206,6 +203,20 @@ function seed(knex, Promise) {
       knex('menu_menu_detail').insert({
         menu_id: 1,
         menu_detail_id: 2,
+      }),
+    ]))
+    .then(() => Promise.all([
+      knex('user_role').insert({
+        user_id: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
+        role_id: 3,
+      }),
+      knex('user_role').insert({
+        user_id: 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f',
+        role_id: 2,
+      }),
+      knex('user_role').insert({
+        user_id: 'f4d869a6-1a75-469b-a9cc-965c552929e4',
+        role_id: 1,
       }),
     ]))
     .then(() => Promise.all([

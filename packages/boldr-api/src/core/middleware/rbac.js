@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import User from '../../routes/user/user.model';
 
+const debug = require('debug')('boldrAPI:rbac');
 /**
  * This middleware checks to see if the given user/token combination has the provided role.
  *
@@ -9,6 +10,7 @@ import User from '../../routes/user/user.model';
  */
 export function checkPermissions({ role = null }) {
   return (req, res, next) => {
+    debug(req);
     const user = req.user;
 
     if (role && !hasRole(user, role)) {
@@ -28,8 +30,9 @@ export function checkPermissions({ role = null }) {
 export function checkRole(role = null) {
   return async (req, res, next) => {
     // const user = req.user;
-    const userInfo = await User.query().findById(req.user.id).eager('role');
-    const userRole = userInfo.role.name;
+    const userInfo = await User.query().findById(req.user.id).eager('roles').first();
+    const userRole = userInfo.roles[0].id;
+    debug(userRole);
     if (!userRole === role) {
       return res.status(403).json('Forbidden. Your role does not have sufficient privileges.');
     }
