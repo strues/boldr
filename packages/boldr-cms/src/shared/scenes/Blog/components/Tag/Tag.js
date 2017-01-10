@@ -4,16 +4,31 @@ import Link from 'react-router/lib/Link';
 import Avatar from 'material-ui/Avatar';
 import TagIcon from 'material-ui/svg-icons/maps/local-offer';
 import Chip from 'material-ui/Chip';
+import { connect } from 'react-redux';
+import { selectTag } from '../../../../state/modules/blog/tags/actions';
+import type { Tag as TagType } from '../../../../types/models';
 
-const Tag = (props: { name: string }) => {
-  return (
-  // <Link to={ `/blog/tags/${props.name}` }>
-    <Chip>
-        <Avatar icon={ <TagIcon /> } />
-          { props.name }
-      </Chip>
-  // </Link>
-);
+type Props = {
+  tag: TagType,
+  dispatch: Function,
 };
 
-export default Tag;
+const Tag = (props: Props) => {
+  const { tag } = props;
+  function transitionTag() {
+    props.dispatch(selectTag(tag));
+  }
+  return (
+    <div className="boldr-tag">
+    { /* $FlowIssue */ }
+  <Link to={ `/blog/tags/${tag.name}` }>
+    <Chip onClick={ transitionTag }>
+        <Avatar icon={ <TagIcon /> } />
+          { tag.name }
+      </Chip>
+   </Link>
+ </div>
+  );
+};
+
+export default connect()(Tag);

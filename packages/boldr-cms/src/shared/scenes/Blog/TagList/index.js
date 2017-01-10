@@ -1,3 +1,3 @@
-import TagList from './TagList';
+import TagListContainer from './TagListContainer';
 
-export default TagList;
+export default TagListContainer;

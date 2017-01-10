@@ -30,17 +30,33 @@ const ids = (state = [], action) => {
 const isFetching = (state = false, action) => {
   switch (action.type) {
     case t.FETCH_TAGS_REQUEST:
+    case t.FETCH_TAGGED_POST_REQUEST:
       return true;
     case t.FETCH_TAGS_SUCCESS:
     case t.FETCH_TAGS_FAILURE:
+    case t.FETCH_TAGGED_POST_SUCCESS:
+    case t.FETCH_TAGGED_POST_FAILURE:
       return false;
     default:
       return state;
   }
 };
 
+const currentTag = (state = {}, action) => {
+  switch (action.type) {
+    case t.FETCH_TAGGED_POST_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+      };
+
+    default:
+      return state;
+  }
+};
 export default combineReducers({
   all,
   ids,
   isFetching,
+  currentTag,
 });

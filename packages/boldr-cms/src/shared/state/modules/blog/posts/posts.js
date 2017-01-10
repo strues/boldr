@@ -5,6 +5,7 @@ import * as notif from '../../../../core/constants';
 import type { Post } from '../../../../types/models';
 import { removeByKey, removeIdFromArray } from '../../../../core/utils/immutableUtils';
 import { notificationSend } from '../../../../state/modules/notifications';
+
 import * as t from './constants';
 
 export const STATE_KEY = 'posts';
@@ -55,7 +56,6 @@ const currentPost = (state = {}, action) => {
         ...state,
         ...action.post,
       };
-
     default:
       return state;
   }

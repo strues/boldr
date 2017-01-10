@@ -29,10 +29,11 @@ type Args = {
   preloadedState?: Object,
   nonce: string,
   helmet?: Head,
+  styles: string
 };
 
 export default function generateHTML(args: Args) {
-  const { reactAppString, preloadedState, nonce, helmet } = args;
+  const { reactAppString, preloadedState, nonce, helmet, styles } = args;
   const chunksForRender = [
     // We always manually add the main entry chunk for our client bundle. It
     // must always be the first item in the collection.
@@ -54,6 +55,7 @@ export default function generateHTML(args: Args) {
         ${helmet ? helmet.meta.toString() : ''}
         ${helmet ? helmet.link.toString() : ''}
         ${styleTags(assetsForRender.css)}
+        <style>${styles || ''}</style>
         ${helmet ? helmet.style.toString() : ''}
       </head>
       <body>

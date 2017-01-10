@@ -80,3 +80,42 @@ const receiveTags = (normalizedData) => {
 const receiveTagsFailed = (err) => ({
   type: t.FETCH_TAGS_FAILURE, error: err,
 });
+
+
+export function selectTag(tag: Object) {
+  return {
+    type: t.SELECT_TAG,
+    tag,
+  };
+}
+
+export function fetchTaggedPost(name) {
+  return (dispatch: Function) => {
+    dispatch(requestTaggedPost());
+    return api.doFetchTags(name)
+      .then(response => {
+        if (response.status !== 200) {
+          dispatch(receiveTaggedPostFailed());
+        }
+        const data = response.body;
+        dispatch(receiveTaggedPost(data));
+      })
+      .catch(err => {
+        dispatch(receiveTaggedPostFailed(err));
+      });
+  };
+}
+const requestTaggedPost = () => {
+  return { type: t.FETCH_TAGGED_POST_REQUEST };
+};
+
+const receiveTaggedPost = (data) => {
+  return {
+    type: t.FETCH_TAGGED_POST_SUCCESS,
+    payload: data,
+  };
+};
+
+const receiveTaggedPostFailed = (err) => ({
+  type: t.FETCH_TAGGED_POST_FAILURE, error: err,
+});

@@ -7,7 +7,7 @@ import TagBlock from './TagBlock';
 describe('<TagBlock />', () => {
   it('renders <TagBlock /> without breaking', () => {
     const wrapper = shallow(<TagBlock />);
-    expect(wrapper.find('div').length).toBe(1);
+    expect(wrapper.find('div').length).toBe(0);
   });
 
   it('renders snapshot', () => {

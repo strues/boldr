@@ -1,6 +1,6 @@
 {
   "name": "boldr-cms",
-  "version": "0.7.0-alpha.1",
+  "version": "0.7.0",
   "description": "universal react content management framework",
   "main": "boldr/boldrAPI/server/index.js",
   "repository": {

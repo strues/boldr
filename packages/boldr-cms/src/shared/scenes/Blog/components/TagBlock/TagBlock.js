@@ -9,7 +9,7 @@ const TagBlock = (props) => {
     },
   };
   if (!props.tags) {
-    return <div>No tags</div>;
+    return null;
   }
 
   return (
@@ -17,7 +17,7 @@ const TagBlock = (props) => {
 
     {
 
-      props.tags.map(tag => <Tag key={ tag.id } name={ tag.name } id={ tag.id } />)
+      props.tags.map(tag => <Tag key={ tag.id } tag={ tag } />)
     }
 
     </div>

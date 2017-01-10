@@ -36,6 +36,8 @@ export const PostCard = (props: Props) => {
   const formattedDate = dateFns.format(props.created_at, 'MM/DD/YYYY');
 
   const postTags = props.tags ? props.tags.map(id => props.listTags[id]) : null;
+  // Explicitly define post rather than passing additional
+  // unnecessary props like listTags
   const post = {
     id: props.id,
     author: props.author,
@@ -64,28 +66,26 @@ export const PostCard = (props: Props) => {
           <img src={ props.feature_image } />
         </CardMedia>
         <CardText>
-            { props.excerpt }
+          { props.excerpt }
           <Row>
             <Col xs={ 12 }>
               { /* $FlowIssue */}
-          <Link to={ `/blog/${props.slug}` } style={ { float: 'right', marginTop: '15px', marginRight: '15px' } }>
-            <RaisedButton primary label="Read More" onClick={ transitionPost } />
-          </Link>
-        </Col>
-      </Row>
+              <Link to={ `/blog/${props.slug}` } style={ { float: 'right', marginTop: '15px', marginRight: '15px' } }>
+                <RaisedButton primary label="Read More" onClick={ transitionPost } />
+              </Link>
+            </Col>
+          </Row>
         </CardText>
         <Divider />
         <CardActions>
-        <Row>
-
-        <Col xs={ 12 }>
-        <TagBlock tags={ postTags } />
-        </Col>
-      </Row>
-      </CardActions>
-
+          <Row>
+            <Col xs={ 12 }>
+              <TagBlock tags={ postTags } />
+            </Col>
+          </Row>
+        </CardActions>
       </Card>
-      </div>
+    </div>
   );
 };
 
