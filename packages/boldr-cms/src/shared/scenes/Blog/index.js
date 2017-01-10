@@ -27,13 +27,13 @@ export default (store, connect) => {
         .then(loadRoute(cb))
         .catch(errorLoading);
       },
-    // }, {
-    //   path: 'tags/:name',
-    //   getComponent(nextState, cb) {
-    //     System.import('./TagList')
-    //     .then(loadRoute(cb))
-    //     .catch(errorLoading);
-    //   },
+    }, {
+      path: 'tags/:name',
+      getComponent(nextState, cb) {
+        System.import('./TagList')
+        .then(loadRoute(cb))
+        .catch(errorLoading);
+      },
     }],
   };
 };

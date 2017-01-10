@@ -1,17 +1,1 @@
-exports[`<Tag /> renders snapshot 1`] = `
-<Chip
-  onBlur={[Function]}
-  onFocus={[Function]}
-  onKeyDown={[Function]}
-  onKeyboardFocus={[Function]}
-  onMouseDown={[Function]}
-  onMouseEnter={[Function]}
-  onMouseLeave={[Function]}
-  onMouseUp={[Function]}
-  onTouchEnd={[Function]}
-  onTouchStart={[Function]}>
-  <Avatar
-    icon={<MapsLocalOffer />}
-    size={40} />
-</Chip>
-`;
+exports[`<Tag /> renders snapshot 1`] = `<Connect(Tag) />`;

@@ -4,55 +4,38 @@ import React, { Component } from 'react';
 import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
 import { Grid, Col, Row } from '../../../components/Layout';
-// import { requestPostTags } from '../../../state/modules/blog/tag';
+import { fetchTaggedPost } from '../../../state/modules/blog/tags/actions';
+import type { Post } from '../../../types/models';
 import PostCard from '../components/PostCard';
 
 type Props = {
-  tags: Object,
-  params: Object,
-  dispatch: () => void,
+  posts: Array<Post>,
+  name: string,
 };
 
-@provideHooks({
-  fetch: ({ dispatch, params: { name } }) => dispatch(requestPostTags(name)),
-})
-class TagList extends Component {
-
-  componentDidMount(name) {
-    this.props.dispatch(requestPostTags(name));
-  }
-  props: Props;
-  render() {
-    if (!this.props.tags.posts) {
-      return (
-      <div>
-        Loading
-      </div>
-      );
-    }
+const TagList = (props: Props) => {
+  if (!props.name) {
     return (
-      <div>
-        <Grid fluid>
-        <Row>
-        {
-          this.props.tags.posts.map(post =>
-            <Col key={ post.id } xs={ 12 } md={ 4 }>
-              <PostCard { ...post } />
-            </Col>)
-        }
-        </Row>
-        </Grid>
-      </div>
+      <div>Loading</div>
     );
   }
-}
-
-const mapStateToProps = (state) => {
-  return {
-    tags: state.blog.tags,
-    loading: state.blog.tags.loading,
-    posts: state.blog.tags.posts,
-  };
+  return (
+      <div>
+        <Grid fluid>
+          <Row>
+          { props.name }
+          {
+            props.posts.map((post, i) => (
+              <Col key={ i } xs={ 12 } md={ 4 }>
+                <PostCard key={ i } { ...post } />
+              </Col>
+              )
+            )
+          }
+          </Row>
+        </Grid>
+      </div>
+  );
 };
 
-export default connect(mapStateToProps)(TagList);
+export default TagList;

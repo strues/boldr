@@ -1,5 +1,5 @@
-
 /* @flow */
+
 import React, { Component } from 'react';
 import { provideHooks } from 'redial';
 import { connect } from 'react-redux';

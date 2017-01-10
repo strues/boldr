@@ -8,6 +8,7 @@ import match from 'react-router/lib/match';
 import RouterContext from 'react-router/lib/RouterContext';
 import createMemoryHistory from 'react-router/lib/createMemoryHistory';
 import { syncHistoryWithStore } from 'react-router-redux';
+import styleSheet from 'styled-components/lib/models/StyleSheet';
 import Helmet from 'react-helmet';
 import { trigger } from 'redial';
 import AppRoot from '../../../shared/components/AppRoot';
@@ -74,8 +75,10 @@ function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
          const preloadedState = store.getState();
          const reactAppString = AppRender(store, renderProps);
          const helmet = Helmet.rewind();
+         // render styled-components styleSheets to string.
+         const styles = styleSheet.rules().map(rule => rule.cssText).join('\n');
 
-         const html = generateHTML({ reactAppString, nonce, preloadedState, helmet });
+         const html = generateHTML({ reactAppString, nonce, preloadedState, helmet, styles });
 
          res.status(200).send(html);
        }).catch((err) => {

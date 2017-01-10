@@ -54,10 +54,10 @@ class PrimaryHeader extends Component {
         targetOrigin={ { horizontal: 'right', vertical: 'top' } }
         anchorOrigin={ { horizontal: 'right', vertical: 'top' } }
       >
-        <MenuItem onTouchTap={ this.props.handleDashClick } primaryText="Dashboard" />
-        <MenuItem onTouchTap={ this.props.handleProfClick } primaryText="Profile" />
-        <MenuItem primaryText="Preferences" onTouchTap={ this.props.handlePrefClick } />
-        <MenuItem primaryText="Logout" onTouchTap={ this.props.handleLogoutClick } />
+        <MenuItem onClick={ this.props.handleDashClick } primaryText="Dashboard" />
+        <MenuItem onClick={ this.props.handleProfClick } primaryText="Profile" />
+        <MenuItem onClick={ this.props.handlePrefClick } primaryText="Preferences" />
+        <MenuItem onClick={ this.props.handleLogoutClick } primaryText="Logout" />
       </IconMenu>
     );
   }
@@ -86,7 +86,7 @@ class PrimaryHeader extends Component {
         title={
           <img src="https://boldr.io/boldr.png"
             className="ph-logo"
-            alt="logo" onTouchTap={ this.props.handleLogoClick }
+            alt="logo" onClick={ this.props.handleLogoClick }
           />
         }
         iconElementRight={
