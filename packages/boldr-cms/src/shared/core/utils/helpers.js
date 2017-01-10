@@ -77,49 +77,6 @@ export function isPointInCircle(cx, cy, r, x, y) {
   return distance <= Math.pow(r, 2);
 }
 
-export function easeInOut(currentTime, start, change, duration) {
-  currentTime /= duration / 2;
-  if (currentTime < 1) {
-    return change / 2 * currentTime * currentTime + start;
-  }
-  currentTime -= 1;
-  return -change / 2 * (currentTime * (currentTime - 2) - 1) + start;
-}
-
-/**
- *
- * @param el
- * @param increment
- * @param elapsedTime
- * @param transitionTime
- * @param styleName
- * @param currentValue
- * @param finalValue
- * @param next
- */
-export function animate(
-  el,
-  increment,
-  elapsedTime,
-  transitionTime,
-  styleName,
-  startValue,
-  currentValue,
-  finalValue,
-  next,
-) {
-  elapsedTime += increment;
-  el.style[styleName] = `${easeInOut(elapsedTime, startValue, finalValue, transitionTime)}px`;
-
-  if (elapsedTime < transitionTime) {
-    setTimeout(() => {
-      animate(el, increment, elapsedTime, transitionTime, styleName, startValue, currentValue, finalValue, next);
-    }, increment);
-  } else {
-    next(elapsedTime);
-  }
-}
-
 /**
  * Takes an event, a container node, and a function to call if the clicked
  * element is not inside of the container node.
@@ -158,74 +115,6 @@ export const isMobile = () => {
   if (typeof window === 'undefined') return false;
   return document.documentElement.clientWidth < 768;
 };
-
-
-/**
- * Convert status in a understandable status for the Notification component
- * @param {String|Number} status
- * @returns {String} status an understandable status
- */
-export function convertStatus(status) {
-  const reHttpStatusCode = /^\d{3}$/;
-  // convert HTTP status code
-  if (reHttpStatusCode.test(status)) {
-    switch (true) {
-      case /^1/.test(status):
-        return STATUS.info;
-      case /^2/.test(status):
-        return STATUS.success;
-      case /^(4|5)/.test(status):
-        return STATUS.error;
-    }
-  }
-  return status;
-}
-
-/**
- * Create a Timer
- * @param {Function} callback
- * @param {Number} delay
- * @constructor
- */
-export function Timer(callback, delay) {
-  let timerId;
-  let start;
-  let remaining = delay;
-
-  this.pause = () => {
-    clearTimeout(timerId);
-    remaining -= new Date() - start;
-  };
-  this.resume = () => {
-    start = new Date();
-    clearTimeout(timerId);
-    timerId = setTimeout(callback, remaining);
-  };
-
-  this.getTimeRemaining = () => {
-    return remaining;
-  };
-}
-
-/**
- * Treat data of a notification
- * @param {Object} notification
- * @returns {Object} a notification
- */
-export function treatNotification(notification) {
-  if (notification.dismissAfter) {
-    notification.dismissAfter = parseInt(notification.dismissAfter);
-  }
-  if (notification.image) {
-    notification.status = STATUS.default;
-  } else {
-    notification.status = convertStatus(notification.status);
-  }
-  if (!notification.buttons) {
-    notification.buttons = [];
-  }
-  return notification;
-}
 
 /**
  * Preload an image

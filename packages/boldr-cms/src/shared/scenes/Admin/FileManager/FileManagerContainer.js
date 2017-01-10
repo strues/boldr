@@ -10,6 +10,7 @@ import FileManager from './FileManager';
 type Props = {
   handleFinish: () => void,
   attachments: Object,
+  selectFile: () => void,
   deleteMedia: () => void,
   uploadFiles: () => void,
   fetchMedia: () => void,

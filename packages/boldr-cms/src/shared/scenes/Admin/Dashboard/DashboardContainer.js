@@ -32,7 +32,6 @@ type Props = {
 
 @Authenticated
 class DashboardContainer extends PureComponent {
-
   constructor() {
     super();
     this.state = { open: false };
@@ -40,14 +39,19 @@ class DashboardContainer extends PureComponent {
     (this: any).onSetOpen = this.onSetOpen.bind(this);
     (this: any).onSetClose = this.onSetClose.bind(this);
   }
+
   props: Props;
+
   onSetOpen(open) {
     this.props.dispatch(showSidebar());
   }
+
   onSetClose(open) {
     this.props.dispatch(hideSidebar());
   }
+
   handleToggle = () => this.setState({ open: !this.state.open });
+
   menuButtonClick(ev) {
     ev.preventDefault();
     const isOpen = this.props.dashboard.open;

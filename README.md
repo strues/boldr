@@ -20,6 +20,15 @@ Boldr is a modern content management framework. Think of Boldr as the solid foun
 - [Demo](#demo)
 
 
+## Screenshots
+
+![](docs/assets/dashboard.png | width=300)  
+
+![](docs/assets/posteditor.png | width=300)  
+
+![](docs/assets/filemanager.png | width=300)  
+
+
 ## Core Technologies
 
 - [Node](https://github.com/nodejs/node)
@@ -120,6 +129,7 @@ Looking for an open source project to contribute to? All types of contributions 
 - [`Production`](docs/production.md)
 - [`Nginx`](docs/nginx.md)
 - [`Troubleshooting`](docs/troubleshooting.md)
+- [`State Tree`](docs/statetree.md)
 
 ## Screenshots
 

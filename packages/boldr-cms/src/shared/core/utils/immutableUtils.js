@@ -60,3 +60,75 @@ export function setIn(object, keyPath, value) {
 
   return object;
 }
+
+export const removeByKey = (myObj, deleteKey) => {
+  return Object.keys(myObj)
+    // Filter out the key from the object
+    .filter(key => key !== deleteKey.toString())
+    // Create new object without that key.
+    .reduce((result, current) => {
+      result[current] = myObj[current];
+      return result;
+    }, {});
+};
+export const requiredParam = (name) => {
+  throw new Error(`Missing paramater ${name}`);
+};
+
+export const uniqueArray = (oldValues, newValues) => {
+  const arr = [...oldValues, ...newValues];
+  const uniqueArray = arr.filter((it, i, ar) => ar.indexOf(it) === i);
+  return uniqueArray;
+};
+
+export const validateId = (id, errorMessage) => {
+  if (!id || isNaN(parseInt(id, 10))) {
+    console.error('Invalid or missing id');
+    throw new Error(errorMessage || 'Invalid or missing id');
+  }
+};
+
+export const validateArray = (arr, errorMessage) => {
+  if (!Array.isArray(arr)) {
+    console.error('Invalid array');
+    throw new Error(errorMessage || 'Expected a valid array');
+  }
+};
+export const addIdToArray = (arr, idToAdd) => {
+  validateArray(arr, 'You have to provide an array as first paramter.');
+  validateId(idToAdd, 'You have to provide a valid id as second paramter.');
+
+  // Only add the value if it is not there yet.
+  if (arr.indexOf(idToAdd) === -1) {
+    arr = [...arr, idToAdd];
+  }
+
+  return arr;
+};
+
+// Create shallow copy of an array, but without provided id.
+export const removeIdFromArray = (arr, id) => {
+  validateArray(arr);
+  validateId(id);
+
+  const idIndex = arr.indexOf(id);
+  return [
+    ...arr.slice(0, idIndex),
+    ...arr.slice(idIndex + 1),
+  ];
+};
+
+export const removeKeyFromNestedArray = ({
+  obj = requiredParam('obj'),
+  id = requiredParam('id'),
+  arrayName = requiredParam('arrayName'),
+  deleteKey = requiredParam('deleteKey'),
+}) => {
+  return {
+    ...obj,
+    [id]: {
+      ...obj[id],
+      [arrayName]: removeIdFromArray(obj[id][arrayName], deleteKey),
+    },
+  };
+};

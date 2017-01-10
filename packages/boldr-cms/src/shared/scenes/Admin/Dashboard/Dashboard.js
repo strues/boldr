@@ -14,7 +14,7 @@ type Props = {
   activities: Object,
   loading: boolean,
   stats: Stats,
-}
+};
 
 @provideHooks({
   fetch: ({ dispatch }) => {

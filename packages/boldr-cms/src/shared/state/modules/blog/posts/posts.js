@@ -3,6 +3,7 @@ import { combineReducers } from 'redux';
 import * as api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import type { Post } from '../../../../types/models';
+import { removeByKey, removeIdFromArray } from '../../../../core/utils/immutableUtils';
 import { notificationSend } from '../../../../state/modules/notifications';
 import * as t from './constants';
 
@@ -15,6 +16,8 @@ const all = (state = {}, action) => {
         ...state,
         ...action.payload.entities.posts,
       };
+    case t.DELETE_POST_SUCCESS:
+      return removeByKey(state, action.id);
     default:
       return state;
   }
@@ -24,6 +27,8 @@ const ids = (state = [], action) => {
   switch (action.type) {
     case t.FETCH_POSTS_SUCCESS:
       return action.payload.result;
+    case t.DELETE_POST_SUCCESS:
+      return removeIdFromArray(state, action.id);
     default:
       return state;
   }
