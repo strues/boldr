@@ -13,6 +13,3 @@ export const openDrawer = () => ({ type: t.OPEN_DRAWER });
 export const closeDrawer = () => ({ type: t.CLOSE_DRAWER });
 export const expandNavbar = () => ({ type: t.EXPAND_NAVBAR });
 export const collapseNavbar = () => ({ type: t.COLLAPSE_NAVBAR });
-export function setMobileDevice(enabled = true) {
-  return { type: t.SET_MOBILE_DEVICE, payload: enabled };
-}

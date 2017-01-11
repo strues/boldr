@@ -36,7 +36,7 @@ export default (app) => {
   app.use((req, res, next) => {
     // This makes the user object and the roles associated with the user
     // available at res.locals.user
-    passport.authenticate('jwt', (err, user) => {
+    passport.authenticate('jwt', (user) => {
       res.locals.user = !!user ? user : null;
 
       return next();

@@ -1,6 +1,4 @@
-import 'babel-polyfill';
 import http from 'http';
-import https from 'https';
 import fs from 'fs';
 import { resolve as pathResolve } from 'path';
 import appRootDir from 'app-root-dir';
@@ -21,11 +19,6 @@ require('dotenv').load({ silent: true });
 
 global.Promise = Promise;
 Promise.longStackTraces();
-
-const ssl = {
-  key: fs.readFileSync(pathResolve(appRootDir.get(), './config/ssl.key')),
-  cert: fs.readFileSync(pathResolve(appRootDir.get(), './config/ssl.crt')),
-};
 
 app.set('port', port);
 app.set('json spaces', 2);

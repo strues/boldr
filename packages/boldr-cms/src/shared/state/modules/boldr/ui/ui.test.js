@@ -1,7 +1,7 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { CHANGE_LAYOUT, MODAL_OPEN, MODAL_CLOSED } from './constants';
-import { changeLayout, showModal, hideModal, setMobileDevice } from './actions';
+import { changeLayout, showModal, hideModal, openDrawer } from './actions';
 import uiReducer from './ui';
 
 describe('UI Duck', () => {
@@ -11,7 +11,6 @@ describe('UI Duck', () => {
       ).toEqual({
         loaded: false,
         layout: 'grid',
-        isMobile: false,
         modal: false,
         drawer: false,
         navbar: false,
@@ -21,7 +20,6 @@ describe('UI Duck', () => {
     const initialState = {
       loaded: false,
       layout: 'grid',
-      isMobile: false,
       modal: false,
       drawer: false,
       navbar: false,
@@ -29,7 +27,6 @@ describe('UI Duck', () => {
     const stateAfter = {
       loaded: false,
       layout: 'grid',
-      isMobile: false,
       modal: true,
       drawer: false,
       navbar: false,
@@ -44,7 +41,6 @@ describe('UI Duck', () => {
     const initialState = {
       loaded: false,
       layout: 'grid',
-      isMobile: false,
       modal: true,
       drawer: false,
       navbar: false,
@@ -52,7 +48,6 @@ describe('UI Duck', () => {
     const stateAfter = {
       loaded: false,
       layout: 'grid',
-      isMobile: false,
       modal: false,
       drawer: false,
       navbar: false,
@@ -71,7 +66,6 @@ describe('UI Duck', () => {
     const state = {
       loaded: false,
       layout: 'grid',
-      isMobile: false,
       modal: false,
       drawer: false,
       navbar: false,
@@ -82,7 +76,6 @@ describe('UI Duck', () => {
     ).toEqual({
       loaded: false,
       layout: 'list',
-      isMobile: false,
       modal: false,
       drawer: false,
       navbar: false,
@@ -98,7 +91,6 @@ test('changeLayout', () => {
     ui: {
       loaded: false,
       layout: 'grid',
-      isMobile: false,
       modal: false,
       drawer: false,
       navbar: false,
@@ -120,7 +112,6 @@ test('openModal', () => {
     ui: {
       loaded: false,
       layout: 'grid',
-      isMobile: false,
       modal: false,
       drawer: false,
       navbar: false,
@@ -141,7 +132,6 @@ test('closeModal', () => {
     ui: {
       loaded: false,
       layout: 'grid',
-      isMobile: false,
       modal: true,
       drawer: false,
       navbar: false,
@@ -154,7 +144,7 @@ test('closeModal', () => {
   });
 });
 
-test('Set mobile device', () => {
+test('Open the drawer', () => {
   const mockStore = configureMockStore([
     thunk,
   ]);
@@ -168,10 +158,9 @@ test('Set mobile device', () => {
       navbar: false,
     },
   });
-  store.dispatch(setMobileDevice());
+  store.dispatch(openDrawer());
   const action = store.getActions()[0];
   expect(action).toEqual({
-    type: '@boldr/ui/SET_MOBILE_DEVICE',
-    payload: true,
+    type: '@boldr/ui/OPEN_DRAWER',
   });
 });

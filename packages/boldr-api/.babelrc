@@ -1,12 +1,17 @@
 {
   "presets": [
     ["env", { "targets": { "node": true } }],
-    ["boldr", { "es2015": { "modules": "commonjs" }}]
+    ["latest-minimal"]
   ],
-  "plugins": ["transform-runtime"],
-  "env": {
-    "test": {
-      "presets": [["boldr", { "es2015": { "modules": "commonjs" }}], "react"]
-    }
-  }
+  "plugins": [
+    "syntax-flow",
+    "transform-flow-strip-types",
+    "transform-es2015-modules-commonjs",
+    "transform-es2015-duplicate-keys",
+    "syntax-trailing-function-commas",
+    "transform-es2015-arrow-functions",
+    "transform-class-properties",
+    ["transform-regenerator", { "async": true, "asyncGenerators": false } ],
+    "transform-async-functions"
+  ]
 }

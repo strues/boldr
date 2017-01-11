@@ -15,9 +15,6 @@ const INITIAL_STATE = {
  * @param  {Object} action      The action object
  */
 export default function attachmentReducer(state = INITIAL_STATE, action = {}) {
-  if (!state.hydrated) {
-    state = Object.assign({}, INITIAL_STATE, state, { hydrated: true });
-  }
   switch (action.type) {
     case t.GET_ATTACHMENT_REQUEST:
     case t.UPLOAD_ATTACHMENT_REQUEST:
