@@ -13,5 +13,10 @@
     "transform-class-properties",
     ["transform-regenerator", { "async": true, "asyncGenerators": false } ],
     "transform-async-functions"
-  ]
+  ],
+  "env": {
+    "test": {
+      "presets": [["boldr", { "es2015": { "modules": "commonjs" }}], "react"]
+    }
+  }
 }
