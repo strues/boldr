@@ -225,7 +225,7 @@ export default function webpackConfigFactory(buildOptions: BuildOptions) {
                     appRootDir.get(), config.publicAssetsPath, cur,
                   );
                   const publicFileWebPaths = acc.concat(
-                    globSync(publicAssetPathGlob)
+                    globSync(publicAssetPathGlob, { nodir: true })
                     .map(publicFile => path.relative(
                       path.resolve(appRootDir.get(), config.publicAssetsPath),
                       publicFile,

@@ -77,6 +77,12 @@ export default (store, connect) => {
           System.import('./Templates').then(loadRoute(cb)).catch(errorLoading);
         },
       },
+      {
+        path: 'tags',
+        getComponent(nextState, cb) {
+          System.import('./Tags').then(loadRoute(cb)).catch(errorLoading);
+        },
+      },
     ],
   };
 };

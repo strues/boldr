@@ -73,6 +73,9 @@ export const MSG_FORGOT_PW_ERROR = {
 export const MSG_RESET_PW_SUCCESS = {
   message: 'Your password has been reset. You may now login with it.', kind: 'success', dismissAfter: 3000,
 };
+export const MSG_VERIFY_USER_SUCCESS = {
+  message: 'Your account has been verified. You may now login with it.', kind: 'success', dismissAfter: 3000,
+};
 
 export const MSG_UPDATE_MEMBER_ERROR = {
   message: 'There was a problem updating the user.', kind: 'error', dismissAfter: 3000,

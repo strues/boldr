@@ -1,5 +1,5 @@
 import AWS from 'aws-sdk';
-import config from '../../../config/api';
+import config from '../../config';
 
 const opts = {
   accessKeyId: config.aws.keyId,

@@ -6,70 +6,6 @@ import helmet from 'helmet';
 import type { Middleware, $Request, $Response, NextFunction } from 'express';
 import config from '../../../config';
 
-const cspConfig = {
-  directives: {
-    defaultSrc: ["'self'"],
-    scriptSrc: [
-      // Allow scripts hosted from our application.
-      "'self'",
-      // Allow scripts from cdn.polyfill.io so that we can import the polyfill.
-      'cdn.polyfill.io',
-      "'unsafe-eval'",
-      // Note: We will execution of any inline scripts that have the following
-      // nonce identifier attached to them.
-      // This is useful for guarding your application whilst allowing an inline
-      // script to do data store rehydration (redux/mobx/apollo) for example.
-      // @see https://helmetjs.github.io/docs/csp/
-      // $FlowFixMe
-      (req, res) => `'nonce-${res.locals.nonce}'`,
-    ],
-    styleSrc: [
-      "'self'",
-      // Webpack generates JS that loads our CSS, so this is needed:
-      "'unsafe-inline'",
-      'blob:',
-      'fonts.googleapis.com',
-      'maxcdn.bootstrapcdn.com',
-    ],
-    imgSrc: [
-      "'self'",
-      // If you use Base64 encoded images (i.e. inlined images), then you will
-      // need the following:
-      'data:',
-      'http://lorempixel.com',
-      'https://boldr.io',
-      'https://boldrcms.s3-us-west-1.amazonaws.com',
-    ],
-    manifestSrc: ["'self'"],
-    connectSrc: ['*'], // ["'self'", 'ws:'],
-    fontSrc: ["'self'", 'data:', 'fonts.gstatic.com'],
-    objectSrc: ["'self'"],
-    mediaSrc: ["'self'"],
-    childSrc: ["'self'"],
-  },
-};
-
-
-// Add any additional CSP from the static config.
-Object.keys(config.cspExtensions).forEach((key) => {
-  if (cspConfig.directives[key]) {
-    cspConfig.directives[key] = cspConfig.directives[key]
-      .concat(config.cspExtensions[key]);
-  } else {
-    cspConfig.directives[key] = config.cspExtensions[key];
-  }
-});
-
-if (process.env.NODE_ENV === 'development') {
-  // When in development mode we need to add our secondary express server that
-  // is used to host our client bundle to our csp config.
-  Object.keys(cspConfig.directives).forEach((directive) => {
-    cspConfig.directives[directive].push(
-      `${config.host}:${config.clientDevServerPort}`,
-    );
-  });
-}
-
 // Attach a unique "nonce" to every response.  This allows use to declare
 // inline scripts as being safe for execution against our content security policy.
 // @see https://helmetjs.github.io/docs/csp/
@@ -104,7 +40,6 @@ const securityMiddleware = [
   // does this by setting the X-Content-Type-Options header to nosniff.
   // @see https://helmetjs.github.io/docs/dont-sniff-mimetype/
   helmet.noSniff(),
-  config.useCSP ? helmet.contentSecurityPolicy(cspConfig) : null,
 ];
 
 export default (securityMiddleware: Array<Middleware>);

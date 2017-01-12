@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { updatePost } from '../../../../state/modules/blog/posts';
-import { PostEditorForm } from '../components';
+import { EditPostForm } from '../components';
 
 export type Props = {
   dispatch: Function,
@@ -20,30 +20,16 @@ class PostEditor extends Component {
     super(props);
     (this: any).handleSubmit = this.handleSubmit.bind(this);
   }
-  state: Object = {
-    editing: true,
-  };
 
   props: Props;
   handleSubmit(values) {
-    const newPostData = {
-      title: values.title,
-      tags: values.tags,
-      status: values.status,
-      content: values.content,
-      excerpt: values.excerpt,
-      id: this.props.currentPost.id || '',
-    };
-
-    const editPostData = {
+    const postData = {
       title: values.title,
       status: values.status,
       content: values.content,
       excerpt: values.excerpt,
       id: this.props.currentPost.id || '',
     };
-
-    const postData = this.state.editing ? editPostData : newPostData;
 
     console.log('submit', postData);
     this.props.updatePost(postData);
@@ -52,12 +38,11 @@ class PostEditor extends Component {
   render() {
     return (
       <div>
-        <PostEditorForm
+        <EditPostForm
           initialValues={ this.props.currentPost }
           postImage={ this.props.postImage }
           onSubmit={ this.handleSubmit }
           drawer={ this.props.drawer }
-          isEditing
         />
       </div>
     );

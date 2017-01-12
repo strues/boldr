@@ -1,6 +1,6 @@
 import redis from 'redis';
 import bluebird from 'bluebird';
-import config from '../../../config/api';
+import config from '../../config';
 import logger from '../../core/logger';
 
 bluebird.promisifyAll(redis.RedisClient.prototype);

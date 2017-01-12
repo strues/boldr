@@ -11,14 +11,14 @@ exports.up = function(knex) {
     table.text('content').notNullable();
     table.text('excerpt').notNullable();
     table.uuid('user_id').unsigned().notNullable();
-    table.enu('status', ['published', 'draft', 'archived']).defaultTo('draft');
+    table.boolean('published').defaultTo(true);
     table.timestamp('created_at').notNullable().defaultTo(knex.fn.now());
     table.timestamp('updated_at').nullable().defaultTo(null);
     // fk | uuid
     table.foreign('user_id').references('id').inTable('user').onDelete('cascade').onUpdate('cascade');
 
     table.index('slug');
-    table.index('status');
+    table.index('published');
     table.index('created_at');
   });
 };

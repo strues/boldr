@@ -59,6 +59,12 @@ const Sidebar = (props: Props) => {
           ] }
         />
         <ListItem
+          leftIcon={ <TemplateIcon color="D5DADD" /> }
+          style={ styles }
+          primaryText="Tags"
+          value="/admin/tags"
+        />
+        <ListItem
           leftIcon={ <CloudIcon color="D5DADD" /> }
           style={ styles }
           primaryText="File Manager"

@@ -1,10 +1,15 @@
-import passport from 'passport';
 
 /**
  * Attaches the user object to the request if authenticated
  * Otherwise returns 403
  * @returns {Function} - express middleware
  */
-const isAuthenticated = passport.authenticate('jwt', { session: false });
+const isAuthenticated = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    next();
+  } else {
+    res.status(401).send('Unauthorized');
+  }
+};
 
 export default isAuthenticated;

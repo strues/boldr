@@ -80,7 +80,7 @@ it('POST /posts -- Fails without a title', async () => {
           feature_image: faker.image.imageUrl(),
           content: faker.lorem.paragraphs(),
           excerpt: faker.lorem.paragraph(),
-          status: 'published',
+          published: true,
           tags: 'foo,bar',
         });
 
@@ -97,7 +97,7 @@ it('POST /posts -- Creates new post', async () => {
           feature_image: faker.image.imageUrl(),
           content: faker.lorem.paragraphs(),
           excerpt: faker.lorem.paragraph(),
-          status: 'published',
+          published: true,
           tags: 'foo,bar',
         });
 

@@ -6,6 +6,7 @@ import Drawer from 'material-ui/Drawer';
 import RaisedButton from 'material-ui/RaisedButton';
 import IconButton from 'material-ui/IconButton';
 import { RadioButton } from 'material-ui/RadioButton';
+import Subheader from 'material-ui/Subheader';
 import FloatingActionButton from 'material-ui/FloatingActionButton';
 import CloseIcon from 'material-ui/svg-icons/navigation/close';
 import ContentForward from 'material-ui/svg-icons/content/forward';
@@ -13,7 +14,6 @@ import { TextEditor } from '../../../../../components/TextEditor';
 import { Col, Row, Heading, S3Uploader } from '../../../../../components/index';
 import { openDrawer, closeDrawer } from '../../../../../state/modules/boldr/ui/actions';
 import { uploadPostImage } from '../../../../../state/modules/admin/attachments/actions';
-
 
 const styled = require('styled-components').default;
 
@@ -50,19 +50,13 @@ const fab = {
 };
 
 @connect()
-class PostEditorForm extends Component {
+class NewPostForm extends Component {
   constructor(props: Props) {
     super();
-    this.checkEditStatus = this.checkEditStatus.bind(this);
     this.state = {
-      edit: false,
       open: false,
     };
     (this: any).menuButtonClick = this.menuButtonClick.bind(this);
-  }
-
-  componentDidMount() {
-    this.checkEditStatus();
   }
 
   props: Props;
@@ -82,10 +76,6 @@ class PostEditorForm extends Component {
     this.props.dispatch(uploadPostImage(payload));
   }
 
-  checkEditStatus() {
-    const EDITING = this.props.isEditing === true;
-    if (EDITING) this.setState({ edit: true });
-  }
   onSetOpen(open) {
     this.props.dispatch(openDrawer());
   }
@@ -124,33 +114,27 @@ class PostEditorForm extends Component {
                   fullWidth
                   floatingLabelText="Post Title"
                 />
-              {
-                !this.state.edit ?
-                  <Field name="tags" type="text"
-                    hintText="Separate using commas"
-                    component={ TextField }
-                    fullWidth
-                    floatingLabelText="Tags"
-                  /> :
-                null
-              }
-              <S3Uploader
-                signingUrl="/s3/sign"
-                server="/api/v1"
-                accept="image/*"
-                onProgress={ S3Uploader.onUploadProgress }
-                onError={ S3Uploader.onUploadError }
-                onFinish={ this.onUploadFinish }
 
-                uploadRequestHeaders={ { 'x-amz-acl': 'public-read' } }
-                contentDisposition="auto"
-              />
-              <Field name="feature_image" type="text"
-                hintText="URL for your image"
-                component={ TextField }
-                fullWidth
-                floatingLabelText="Feature Image"
-              />
+                <Field name="tags" type="text"
+                  hintText="Separate using commas"
+                  component={ TextField }
+                  fullWidth
+                  floatingLabelText="Tags"
+                />
+
+                <Subheader>Upload feature image</Subheader>
+                <S3Uploader
+                  signingUrl="/s3/sign"
+                  server="/api/v1"
+                  accept="image/*"
+                  onProgress={ S3Uploader.onUploadProgress }
+                  onError={ S3Uploader.onUploadError }
+                  onFinish={ this.onUploadFinish }
+
+                  uploadRequestHeaders={ { 'x-amz-acl': 'public-read' } }
+                  contentDisposition="auto"
+                />
+
 
               <Field name="excerpt"
                 type="text"
@@ -190,5 +174,14 @@ class PostEditorForm extends Component {
 }
 
 export default reduxForm({
-  form: 'postEditorForm',
-})(PostEditorForm);
+  form: 'newPostForm',
+})(NewPostForm);
+
+/*
+<Field name="feature_image" type="text"
+  hintText="URL for your image"
+  component={ TextField }
+  fullWidth
+  floatingLabelText="Feature Image"
+/>
+ */

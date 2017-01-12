@@ -203,7 +203,7 @@ export function verifyAccount(token) {
           type: t.VERIFY_ACCOUNT_SUCCESS,
         });
         dispatch(push('/'));
-        dispatch(notificationSend(notif.MSG_RESET_PW_SUCCESS));
+        dispatch(notificationSend(notif.MSG_VERIFY_USER_SUCCESS));
       }).catch(err => dispatch({
         type: t.VERIFY_ACCOUNT_FAILURE,
         error: err,

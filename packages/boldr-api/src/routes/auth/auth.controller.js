@@ -1,9 +1,9 @@
-import passport from 'passport';
 import uuid from 'uuid';
 import * as objection from 'objection';
 import { mailer, signToken } from '../../services/index';
 import { welcomeEmail } from '../../services/mailer/templates';
 import User from '../user/user.model';
+import Token from '../token/token.model';
 import {
   responseHandler,
   generateHash,
@@ -100,30 +100,24 @@ export async function loginUser(req, res, next) {
     return next(new BadRequest(errors));
   }
 
-  await User.query().where({ email: req.body.email }).eager('[roles]').first();
-  passport.authenticate('local', (err, user, info) => {
-    const error = err || info;
-    if (!user) {
-      return next(new Unauthorized('Unable to find a user matching the provided credentials.'));
-    }
-    if (error) {
-      return next(new InternalServer());
-    }
-    if (!user.verified) {
-      return next(new UserNotVerifiedError());
-    }
-    return req.logIn(user, err => {
-      if (err) return next(new Unauthorized(err));
-      // remove the password from the response.
-      user.stripPassword();
-      // sign the token
-      const token = signToken(user);
-      req.user = user;
-      res.set('Authorization', `Bearer ${token}`);
-      // req.role = user.role[0].id;
-      return res.json({ token, user });
-    });
-  })(req, res, next);
+  const user = await User.query().where({ email: req.body.email }).eager('[roles]').first();
+  if (!user) {
+    return next(new Unauthorized('Unable to find a user matching the provided credentials.'));
+  }
+
+  if (!user.verified) {
+    return next(new UserNotVerifiedError());
+  }
+  const validAuth = await user.authenticate(req.body.password);
+  if (!validAuth) return next(new Unauthorized(err));
+  // remove the password from the response.
+  user.stripPassword();
+  // sign the token
+  const token = signToken(user);
+  req.user = user;
+  res.set('Authorization', `Bearer ${token}`);
+  // req.role = user.role[0].id;
+  return res.json({ token, user });
 }
 
 
@@ -135,8 +129,8 @@ export async function verifyUser(req, res, next) {
       return next(new BadRequest('Invalid account verification code'));
     }
 
-    const user = await User.query().where({ user_token: req.params.verifToken }).first();
-    await User.query().patchAndFetchById(user.id, { verified: true });
+    const token = await Token.query().where({ user_verification_token: req.params.verifToken }).first();
+    const user = await User.query().patchAndFetchById(token.user_id, { verified: true });
 
     return responseHandler(res, 201, user);
   } catch (err) {

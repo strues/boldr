@@ -1,4 +1,4 @@
-import config from '../../../config/api';
+import config from '../../config';
 
 
 const welcomeEmail = (verificationToken) => `

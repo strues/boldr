@@ -1,5 +1,5 @@
 import { createTransport } from 'nodemailer';
-import config from '../../../config/api';
+import config from '../../config';
 
 const debug = require('debug')('boldrAPI:mailer');
 

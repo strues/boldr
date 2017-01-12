@@ -38,6 +38,7 @@ export async function createPost(req, res, next) {
     content: req.body.content,
     feature_image: req.body.feature_image,
     meta: req.body.meta,
+    published: req.body.published,
     user_id: req.user.id,
   });
 

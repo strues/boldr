@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 
-import { PostEditorForm } from '../components';
+import { NewPostForm } from '../components';
 import type { Post } from '../../../../types/models';
 
 type Props = {
@@ -13,9 +13,8 @@ type Props = {
 const NewPost = (props: Props) => {
   return (
     <div>
-      <PostEditorForm
+      <NewPostForm
         drawer={ props.drawer }
-        isEditing={ false }
         onSubmit={ props.onFormSubmit }
         postImage={ props.postImage }
       />

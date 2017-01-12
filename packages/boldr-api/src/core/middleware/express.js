@@ -4,7 +4,7 @@ import methodOverride from 'method-override';
 import expressValidator from 'express-validator';
 import expressWinston from 'express-winston';
 import hpp from 'hpp';
-import config from '../../../config/api';
+import config from '../../config';
 import winstonInstance from '../logger';
 
 export default (app) => {

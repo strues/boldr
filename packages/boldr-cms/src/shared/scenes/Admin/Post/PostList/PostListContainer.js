@@ -6,7 +6,7 @@ import type { ReactElement } from '../../../../types/react';
 import type { Post } from '../../../../types/models';
 import { fetchPostsIfNeeded, getPosts, deletePost } from '../../../../state/modules/blog/posts';
 
-import PostList from './PostList';
+import VisiblePostList from './VisiblePostList';
 
 type Props = {
   children?: ReactElement,
@@ -37,7 +37,7 @@ export class PostListContainer extends PureComponent {
   }
   render() {
     return (
-      <PostList posts={ this.props.posts } handleDeleteClick={ this.handleDeleteClick } />
+      <VisiblePostList posts={ this.props.posts } handleDeleteClick={ this.handleDeleteClick } />
     );
   }
 }

@@ -5,7 +5,7 @@ import * as notif from '../../../../core/constants';
 import type { Post } from '../../../../types/models';
 import { removeByKey, removeIdFromArray } from '../../../../core/utils/immutableUtils';
 import { notificationSend } from '../../../../state/modules/notifications';
-
+import { getPosts } from './selectors';
 import * as t from './constants';
 
 export const STATE_KEY = 'posts';
@@ -74,3 +74,18 @@ export default combineReducers({
   isFetching,
   currentPost,
 });
+
+
+export const getPublishedPosts = (state, filter) => {
+  const allPosts = getPosts(state);
+  switch (filter) {
+    case 'all':
+      return allPosts;
+    case 'published':
+      return allPosts.filter(p => p.published);
+    case 'draft':
+      return allPosts.filter(p => !p.published);
+    default:
+      throw new Error(`Unknown filter: ${filter}.`);
+  }
+};

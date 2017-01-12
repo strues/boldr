@@ -1,7 +1,7 @@
 /* @flow */
 import express from 'express';
 import type { $Request, $Response, NextFunction } from 'express';
-import config from '../config/api';
+import config from './config';
 
 import { NotFound } from './core/errors';
 import { authMiddleware, expressMiddleware, rbac } from './core/middleware';

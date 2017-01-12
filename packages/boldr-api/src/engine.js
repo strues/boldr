@@ -1,8 +1,7 @@
 import http from 'http';
 import fs from 'fs';
 import { resolve as pathResolve } from 'path';
-import appRootDir from 'app-root-dir';
-import config from '../config/api';
+import config from './config';
 
 import bootstrap from './core/bootstrap';
 import logger from './core/logger';
