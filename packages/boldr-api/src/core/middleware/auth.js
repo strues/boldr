@@ -6,7 +6,7 @@
  */
 import jwt from 'jsonwebtoken';
 import User from '../../routes/user/user.model';
-import config from '../../../config/api';
+import config from '../../config';
 import sessionMiddleware from './session';
 
 const debug = require('debug')('boldrAPI:authMW');
