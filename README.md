@@ -42,9 +42,8 @@ Boldr is a modern content management framework. Think of Boldr as the solid foun
 That said, I'm confident the majority of large breaking changes is behind us.
 
 1. `git clone https://github.com/strues/boldr.git`
-2. `yarn install`
-3. `yarn bootstrap`
-4. Modify environment variables within **both** packages/boldr-cms and packages/boldr-api: `cp .env_example .env`
+2. `yarn bootstrap`
+3. Modify environment variables within **both** packages/boldr-cms and packages/boldr-api: `cp .env_example .env`
 
 
 ## Usage
@@ -65,7 +64,7 @@ Quick notes:
 
 Context: `packages/boldr-api`
 
-Create a Postgres database and modify the migrate and seed scripts within the `package.json` to match your newly created database.
+Create a Postgres database. Modify the migrate and seed scripts within the `package.json` to match your newly created database.
 
 Run the migrate command with `npm run migrate` followed by `npm run seed`. This bootstrap's your database.
 
