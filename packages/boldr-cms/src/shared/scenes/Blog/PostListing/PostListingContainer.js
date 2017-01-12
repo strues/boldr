@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { LAYOUTS } from '../../../core/constants';
 import { changeLayout } from '../../../state/modules/boldr/ui';
 import { getPosts, fetchPostsIfNeeded } from '../../../state/modules/blog/posts';
-import { getTagsList } from '../../../state/modules/blog/selectors';
 import { fetchTagsIfNeeded } from '../../../state/modules/blog/tags/actions';
 import { getTags } from '../../../state/modules/blog/tags/selectors';
 import type { Post, UI } from '../../../types/models'; // eslint-disable-line
