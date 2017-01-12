@@ -151,7 +151,7 @@
     "sinon": "^1.17.7",
     "style-loader": "0.13.1",
     "supertest": "^2.0.1",
-    "webpack": "2.2.0-rc.3",
+    "webpack": "2.2.0-rc.4",
     "webpack-bundle-analyzer": "2.2.1",
     "webpack-dev-middleware": "1.9.0",
     "webpack-hot-middleware": "2.15.0",
