@@ -135,10 +135,9 @@ class EditPostForm extends Component {
                     <Heading size={ 4 }>Post Status:</Heading>
                   </Col>
                   <Col xs={ 12 } md={ 6 }>
-                    <Field name="status" component={ RadioButtonGroup }>
-                     <RadioButton value="draft" label="Draft" />
-                     <RadioButton value="published" label="Published" />
-                     <RadioButton value="archived" label="Archived" />
+                    <Field name="published" component={ RadioButtonGroup }>
+                     <RadioButton value="false" label="Draft" />
+                     <RadioButton value="true" label="Published" />
                    </Field>
                   </Col>
                 </Row>

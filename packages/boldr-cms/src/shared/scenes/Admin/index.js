@@ -83,6 +83,12 @@ export default (store, connect) => {
           System.import('./Tags').then(loadRoute(cb)).catch(errorLoading);
         },
       },
+      {
+        path: 'tags/:name',
+        getComponent(nextState, cb) {
+          System.import('./Tags/components/TaggedPost').then(loadRoute(cb)).catch(errorLoading);
+        },
+      },
     ],
   };
 };

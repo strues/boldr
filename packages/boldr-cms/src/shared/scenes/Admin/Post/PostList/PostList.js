@@ -28,6 +28,7 @@ const PostList = (props: Props) => {
              status={ post.status }
              created_at={ post.created_at }
              handleDeleteClick={ props.handleDeleteClick }
+             tagIds={ post.tags }
            />
          ))
         }

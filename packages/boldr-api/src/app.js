@@ -2,7 +2,7 @@
 import express from 'express';
 import type { $Request, $Response, NextFunction } from 'express';
 import config from './config';
-
+import logger from './core/logger';
 import { NotFound } from './core/errors';
 import { authMiddleware, expressMiddleware, rbac } from './core/middleware';
 import routes from './routes/index';
@@ -26,16 +26,22 @@ app.use((req: $Request, res: $Response, next: NextFunction) => {
 });
 
 // catch everything else in this errorhandler and send a stacktrace in development.
-// $FlowIssue
 app.use((err: Error, req: $Request, res: $Response, next: NextFunction) => {// eslint-disable-line no-unused-vars
-  /* istanbul ignore next */
-  const status = err.status || 500;
-  const type = err.type || 'UnknownError';
-  const message = err.message || 'Something went wrong.';
-  // $FlowIssue
-  res.status(status);
-  /* istanbul ignore next */
-  res.send({ type, message, stack: process.env.NODE_ENV === 'development' ? err.stack : {} });
+  const statusCode = err.status || 500;
+  const stacktrace = app.get('env') === 'development' ? {
+    stack: err.stack,
+  } : {};
+
+  res.status(statusCode);
+  res.json({
+    status: statusCode,
+    error: err.error || err.message,
+    ...stacktrace,
+  });
+});
+
+process.on('unhandledRejection', (reason, p) => {
+  logger.error('Possibly Unhandled Rejection at: Promise ', p, ' reason: ', reason);
 });
 
 export default app;

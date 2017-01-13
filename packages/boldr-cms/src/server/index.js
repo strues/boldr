@@ -15,7 +15,6 @@ import config from '../../config';
 import boldrSSR from './middleware/boldrSSR';
 import security from './middleware/security';
 import clientBundle from './middleware/clientBundle';
-import serviceWorker from './middleware/serviceWorker';
 import errorHandlers from './middleware/errorHandlers';
 
 // these values are to inform the proxy, which is running here, where our backend
@@ -55,10 +54,6 @@ proxy.on('error', (err: Object, req: $Request, res: $Response) => {
   const json = { error: 'proxy_error', reason: err.message };
   res.end(JSON.stringify(json));
 });
-
-if (process.env.NODE_ENV === 'production') {
-  app.get(`/${config.serviceWorker.fileName}`, serviceWorker);
-}
 
 // Configure serving of our client bundle.
 app.use(config.bundles.client.webPath, clientBundle);

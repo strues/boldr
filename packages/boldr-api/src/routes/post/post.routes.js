@@ -6,7 +6,7 @@ import * as ctrl from './post.controller';
 import Post from './post.model';
 
 const controller = new BaseController(Post, 'post_id');
-const router = express.Router();
+const router = express.Router({ mergeParams: true });
 
 router.route('/')
       /**
@@ -17,7 +17,7 @@ router.route('/')
        * @apiUse listParams
        * @apiSuccess {Object[]} posts List of posts.
        * @apiSuccess {String}  posts.uuid             The UUID of the post
-       * @apiSuccess {String}  posts.title            The title of the post
+       * @apiSuccess {String}s  posts.title            The title of the post
        * @apiSuccess {String}  posts.excerpt          A short description or snippet of the post
        * @apiSuccess {String}  posts.content          The content of the post
        * @apiSuccess {String}  posts.feature_image    The URL for an image to use with the post

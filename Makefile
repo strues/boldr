@@ -1,7 +1,7 @@
 SHELL  := /bin/bash
 PATH   := node_modules/.bin:$(PATH)
 DIST_CMS   := boldr
-KNEX_FILE ?= ./packages/boldr-api/config/knexfile.js
+KNEX_FILE ?= ./packages/boldr-api/knexfile.js
 TEST_DB ?= POSTGRES_CONN_URI=postgres://postgres:password@localhost:5432/boldr_test
 CI_DB ?= POSTGRES_CONN_URI=postgres://ubuntu@127.0.0.1:5432/circle_test
 

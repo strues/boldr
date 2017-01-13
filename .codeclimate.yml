@@ -4,6 +4,7 @@ engines:
 ratings:
    paths:
    - packages/boldr-cms/src/**
+   - packages/boldr-api/src/**
    - "**.js"
 exclude_paths:
 - **/node_modules/**/*

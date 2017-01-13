@@ -30,7 +30,7 @@ router.get('/:id', ctrl.getUser);
 
 /**
  * @api {post} /users Create user
- * @apiName createUser
+ * @apiName adminCreateUser
  * @apiGroup User
  * @apiPermission admin
  * @apiUse authHeader
@@ -41,7 +41,7 @@ router.get('/:id', ctrl.getUser);
  * @apiError 401 Admin access only.
  * @apiError 409 Email already registered.
  */
-router.post('/', isAuthenticated, checkRole('Admin'), controller.create.bind(controller));
+router.post('/', isAuthenticated, checkRole('Admin'), ctrl.adminCreateUser);
 
 /**
  * @api {put} /users/:id Update user

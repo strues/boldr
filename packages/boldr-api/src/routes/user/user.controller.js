@@ -1,6 +1,20 @@
 /* @flow */
 import type { $Response, $Request, NextFunction } from 'express';
-import { NotFound, BadRequest, responseHandler } from '../../core';
+import uuid from 'uuid';
+import * as objection from 'objection';
+import { mailer, signToken } from '../../services/index';
+import { welcomeEmail } from '../../services/mailer/templates';
+import Token from '../token/token.model';
+import {
+  responseHandler,
+  generateHash,
+  UserNotVerifiedError,
+  NotFound,
+  BadRequest,
+  InternalServer,
+  Unauthorized,
+  Conflict,
+} from '../../core';
 import User from './user.model';
 
 const debug = require('debug')('boldrAPI:user-controller');
@@ -35,12 +49,9 @@ export async function getUser(req: $Request, res: $Response, next: NextFunction)
 }
 
 export function updateUser(req: $Request, res: $Response, next: NextFunction) {
-  // $FlowIssue
   if ('password' in req.body) {
-    // $FlowIssue
     req.assert('password', 'Password must be at least 4 characters long').len(4);
   }
-  // $FlowIssue
   const errors = req.validationErrors();
 
   if (errors) {
@@ -95,4 +106,51 @@ export async function destroyUser(req: $Request, res: $Response, next: NextFunct
   } catch (error) {
     return res.status(500).json(error);
   }
+}
+
+export async function adminCreateUser(req: $Request, res: $Response, next: NextFunction) {
+   // the data for the user being created.
+  const payload = {
+    id: uuid(),
+       // no need to hash here, its taken care of on the model instance
+    email: req.body.email,
+    password: req.body.password,
+    first_name: req.body.first_name,
+    last_name: req.body.last_name,
+    display_name: req.body.display_name,
+    avatar_url: req.body.avatar_url,
+  };
+  const checkExisting = await User.query().where('email', req.body.email);
+
+  if (checkExisting.length) {
+    return next(new Conflict());
+  }
+  const newUser = await objection.transaction(User, async (User) => {
+    const user = await User.query().insert(payload);
+    await user.$relatedQuery('roles').relate({ id: 1 });
+
+    if (!user) {
+      return next(new NotFound());
+    }
+     // generate user verification token to send in the email.
+    const verificationToken = await generateHash();
+     // get the mail template
+    const mailBody = await welcomeEmail(verificationToken);
+     // subject
+    const mailSubject = 'Boldr User Verification';
+     // send the welcome email
+    mailer(user, mailBody, mailSubject);
+     // create a relationship between the user and the token
+    const verificationEmail = await user.$relatedQuery('tokens')
+       .insert({
+         user_verification_token: verificationToken,
+         user_id: user.id,
+       });
+
+    if (!verificationEmail) {
+      return next(new InternalServer());
+    }
+  });
+   // Massive transaction is finished, send the data to the user.
+  return responseHandler(res, 201, newUser);
 }

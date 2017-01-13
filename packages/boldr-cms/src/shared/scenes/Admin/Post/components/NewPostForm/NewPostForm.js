@@ -32,9 +32,7 @@ const Footer = styled.div`
 
 type Props = {
   handleSubmit?: Function,
-  editing?: boolean,
   reset?: Function,
-  isEditing?: boolean,
   submitting?: boolean,
   fields?: Object,
   dispatch: Function,
@@ -122,7 +120,7 @@ class NewPostForm extends Component {
                   floatingLabelText="Tags"
                 />
 
-                <Subheader>Upload feature image</Subheader>
+                <Subheader>Upload a feature image</Subheader>
                 <S3Uploader
                   signingUrl="/s3/sign"
                   server="/api/v1"
@@ -151,10 +149,9 @@ class NewPostForm extends Component {
                     <Heading size={ 4 }>Post Status:</Heading>
                   </Col>
                   <Col xs={ 12 } md={ 6 }>
-                    <Field name="status" component={ RadioButtonGroup }>
-                     <RadioButton value="draft" label="Draft" />
-                     <RadioButton value="published" label="Published" />
-                     <RadioButton value="archived" label="Archived" />
+                    <Field name="published" component={ RadioButtonGroup }>
+                     <RadioButton value="false" label="Draft" />
+                     <RadioButton value="true" label="Published" />
                    </Field>
                   </Col>
                 </Row>

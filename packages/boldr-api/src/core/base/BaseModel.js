@@ -34,7 +34,8 @@ class BaseModel extends Model {
      */
   $beforeInsert() {
     if (this.constructor.addTimestamps) {
-      this.created_at = new Date().toJSON();
+      this.created_at = new Date().toISOString();
+      this.updated_at = new Date().toISOString();
     }
     if (this.constructor.addUUID) {
       this.uuid = uuid();
@@ -46,7 +47,7 @@ class BaseModel extends Model {
      */
   $beforeUpdate() {
     if (this.constructor.timestamps) {
-      this.updated_at = new Date().toJSON();
+      this.updated_at = new Date().toISOString();
     }
   }
 

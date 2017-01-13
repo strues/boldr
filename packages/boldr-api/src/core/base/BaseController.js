@@ -50,34 +50,6 @@ class BaseController {
       this.filterEager = data.filterEager;
     }
   }
-  async create(req, res) {
-    let data = req.body;
-    if (this.additionalProperties) {
-      if (await isValidData(req, this.additionalProperties)) {
-        data = Object.assign({}, data, getAdditionalProperties(req, this.additionalProperties));
-      } else {
-        return throwNotFound(res);
-      }
-    }
-
-    if (this.userField) {
-      if (req.user) {
-        data[this.userField] = req.user.id;
-      }
-    }
-
-    return this.model.query()
-      .insert(data)
-      .then(item => responseHandler(res, 201, item))
-      .catch(err => res.status(500).json(err));
-  }
-
-  update(req, res) {
-    return this.model.query()
-      .patchAndFetchById(req.params[this.id], req.body)
-      .then(item => responseHandler(res, 200, item))
-    .catch(err => res.status(500).json(err));
-  }
 
   index(req, res, next) {
     const query = findQuery(this.model)
@@ -116,7 +88,34 @@ class BaseController {
       })
     .catch(err => res.status(500).json(err));
   }
+  async create(req, res) {
+    let data = req.body;
+    if (this.additionalProperties) {
+      if (await isValidData(req, this.additionalProperties)) {
+        data = Object.assign({}, data, getAdditionalProperties(req, this.additionalProperties));
+      } else {
+        return throwNotFound(res);
+      }
+    }
 
+    if (this.userField) {
+      if (req.user) {
+        data[this.userField] = req.user.id;
+      }
+    }
+
+    return this.model.query()
+      .insert(data)
+      .then(item => responseHandler(res, 201, item))
+      .catch(err => res.status(500).json(err));
+  }
+
+  update(req, res) {
+    return this.model.query()
+      .patchAndFetchById(req.params[this.id], req.body)
+      .then(item => responseHandler(res, 200, item))
+    .catch(err => res.status(500).json(err));
+  }
   destroy(req, res) {
     return this.model.query()
       .deleteById(req.params[this.id])

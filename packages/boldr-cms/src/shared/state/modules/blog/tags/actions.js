@@ -88,7 +88,11 @@ export function selectTag(tag: Object) {
     tag,
   };
 }
-
+export function clearTag(tag: Object) {
+  return {
+    type: t.CLEAR_TAG,
+  };
+}
 export function fetchTaggedPost(name) {
   return (dispatch: Function) => {
     dispatch(requestTaggedPost());

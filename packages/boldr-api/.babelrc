@@ -8,11 +8,13 @@
     "transform-flow-strip-types",
     "transform-es2015-modules-commonjs",
     "transform-es2015-duplicate-keys",
+    "transform-object-rest-spread",
     "syntax-trailing-function-commas",
     "transform-es2015-arrow-functions",
     "transform-class-properties",
     ["transform-regenerator", { "async": true, "asyncGenerators": false } ],
-    "transform-async-functions"
+    "transform-async-functions",
+    "transform-runtime"
   ],
   "env": {
     "test": {

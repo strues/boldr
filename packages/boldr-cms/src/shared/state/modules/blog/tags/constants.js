@@ -7,3 +7,4 @@ export const FETCH_TAGGED_POST_SUCCESS = '@boldr/blog/FETCH_TAGGED_POST_SUCCESS'
 export const FETCH_TAGGED_POST_FAILURE = '@boldr/blog/FETCH_TAGGED_POST_FAILURE';
 
 export const SELECT_TAG = '@boldr/blog/SELECT_TAG';
+export const CLEAR_TAG = '@boldr/blog/CLEAR_TAG';

@@ -18,10 +18,7 @@ export default {
   // This is here as an example showing that you can expose environment
   // variables too.
   welcomeMessage: true,
-  // We only need to expose the enabled flag of the service worker.
-  serviceWorker: {
-    enabled: true,
-  },
+
   // We need to expose all the polyfill.io settings.
   polyfillIO: true,
   // We need to expose all the htmlPage settings.

@@ -49,6 +49,11 @@ const currentTag = (state = {}, action) => {
         ...state,
         ...action.payload,
       };
+    case t.SELECT_TAG:
+      return {
+        ...state,
+        ...action.tag,
+      };
 
     default:
       return state;
