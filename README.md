@@ -116,7 +116,7 @@ Looking for an open source project to contribute to? All types of contributions 
 - Play a major role in a community driven project, have some fun, and work on improving your skills.
 
 ## Documentation
-
+- [`Gitbook`](https://strues.gitbooks.io/boldr/content/)
 - [`Roadmap`](ROADMAP.md)
 - [`API`](docs/apidoc.md)
 - [`Theming`](docs/theming.md)
