@@ -61,11 +61,6 @@ class bootstrap {
     logger.info('initDb: Binding to Knex instance and making a test query.');
     // bind Objection models to db instance.
     Model.knex(knex);
-    Setting.query()
-    .count('*')
-    .catch((e) => {
-      logger.error('Query failed', { error: e.message, stack: e.stack });
-    });
   }
 }
 
