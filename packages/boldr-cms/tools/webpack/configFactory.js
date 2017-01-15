@@ -108,7 +108,7 @@ export default function webpackConfigFactory(buildOptions: BuildOptions) {
           path: path.resolve(appRootDir.get(), bundleConfig.outputPath),
         }),
       ),
-      ifDev(() => new webpack.NoErrorsPlugin()),
+      ifDev(() => new webpack.NoEmitOnErrorsPlugin()),
       ifDevClient(() => new webpack.HotModuleReplacementPlugin()),
       ifProdClient(
         () => new webpack.LoaderOptionsPlugin({

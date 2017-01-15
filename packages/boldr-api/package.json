@@ -74,7 +74,7 @@
     "express-session": "^1.14.2",
     "express-validator": "^3.1.2",
     "express-winston": "^2.1.2",
-    "helmet": "3.3.0",
+    "helmet": "3.4.0",
     "hpp": "0.2.1",
     "jsonwebtoken": "^7.2.1",
     "knex": "^0.12.6",
