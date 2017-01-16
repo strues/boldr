@@ -41,6 +41,7 @@ test:
   pre:
     - yarn
     - make setup-db
+    - npm run build
   override:
     - npm run test:ci
   post:
