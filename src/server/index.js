@@ -1,21 +1,19 @@
 
 import http from 'http';
 import { resolve as pathResolve } from 'path';
-import { Model } from 'objection';
-
 import config from '../../config';
-import knex from './services/postgres';
+import { connect } from './services/postgres';
 import logger from './services/logger';
 import app from './app';
 
 const debug = require('debug')('boldr:engine');
 
-
 const port = normalizePort(config.port);
 
 require('dotenv').load({ silent: true });
 
-Model.knex(knex);
+// database
+connect();
 
 app.set('port', port);
 app.set('json spaces', 2);

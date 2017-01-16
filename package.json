@@ -67,18 +67,16 @@
       "^.*\\.scss$": "<rootDir>/tools/test/styleMock.js"
     },
     "collectCoverage": true,
-    "collectCoverageFrom": [
-      "<rootDir>/src/shared/**/*.js",
-      "<rootDir>/src/server/**/*.js"
-    ],
     "coveragePathIgnorePatterns": [
       "<rootDir>/tools/",
       "<rootDir>/config/",
       "<rootDir>/docs/",
       "/flow-typed/",
       "/node_modules/",
+      "<rootDir>/boldrCMS/",
       "<rootDir>/.happypack/",
-      "<rootDir>/src/shared/theme/"
+      "<rootDir>/src/shared/theme/",
+      "<rootDir>/src/shared/types/"
     ],
     "transform": {
       "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
