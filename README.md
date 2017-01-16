@@ -4,7 +4,7 @@
 
 # What's Boldr?
 
-Boldr is a modern content management framework. Think of Boldr as the solid foundation for building your next great web application. Unlike other CMS platforms, Boldr is entirely JavaScript. It features Universal / Isomorphic rendering for improved performance and Search Engine Optimization. Boldr uses Postgres as its database. Express serves the standalone API and the server-side rendering application. Redis provides the store for user sessions and query caching.
+Boldr is a modern content management framework. Think of Boldr as the solid foundation for building your next great web application. Unlike other CMS platforms, Boldr is entirely JavaScript. It features Universal / Isomorphic rendering for improved performance and Search Engine Optimization. Boldr uses Postgres as its database. Express serves the API and server rendering application. Redis provides the store for user sessions and query caching.
 
 
 **Table of Contents**
@@ -42,8 +42,8 @@ Boldr is a modern content management framework. Think of Boldr as the solid foun
 That said, I'm confident the majority of large breaking changes is behind us.
 
 1. `git clone https://github.com/strues/boldr.git`
-2. `yarn bootstrap`
-3. Modify environment variables within **both** packages/boldr-cms and packages/boldr-api: `cp .env_example .env`
+2. `yarn`
+3. Modify environment variables `cp .env_example .env`
 
 
 ## Usage
@@ -54,27 +54,14 @@ Quick notes:
 
   - **Frontend**: 3000 - _React SSR server_  
   - **Webpack**: 3001 - _dev only_  
-  - **API**: 2121  
-
-- The `boldr-api` package can operate independently from boldr-cms. However, `boldr-cms` requires the api to be running. BCMS depends on data retrieved from the api.
 
 ### Development
 
-#### API
+#### Database
 
-Context: `packages/boldr-api`
-
-Create a Postgres database. Modify the migrate and seed scripts within the `package.json` to match your newly created database.
-
-Run the migrate command with `npm run migrate` followed by `npm run seed`. This bootstrap's your database.
-
-Tweak any of the `.env` variables to match your preferences / environment
-
-Start the api with the command, `npm run dev`
+To create a new database you may run `npm run createdb`. The configuration for the createdb script is located in `tools/scripts/createDB.js`. Now once you have a fresh database, run the migration command with `npm run migrate` followed by `npm run seed`. Your database is now ready to go!
 
 #### CMS
-
-Context: `packages/boldr-cms`
 
 Run the CMS using `npm run dev`
 
@@ -95,7 +82,7 @@ The `make build` command creates a folder named boldr in the root of the reposit
 
 Upload the contents of the boldr directory to your preferred host.
 
-Install the production dependencies for both the `boldrAPI` and `boldrCMS` packages using `npm install --production`.
+Install the production dependencies for `boldrCMS` packages using `npm install --production`.
 
 Finally using pm2 or your preferred script, start the API and CMS.
 

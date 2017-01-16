@@ -10,16 +10,16 @@
 node_modules
 **/node_modules
 
-**/flow-typed
-**/*.happypack
+flow-typed
+.happypack
 
 .env
-**/*.env
+*.env
 
-**/*.log
+*.log
 
 **/dist
 **/build
-packages/boldr-cms/boldr/boldrCMS/
-packages/boldr-api/boldr/boldrAPI/
-packages/boldr-editor/lib
+boldrCMS/
+public
+coverage/

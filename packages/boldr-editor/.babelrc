@@ -1,4 +1,0 @@
-{
-  "presets": [["latest", { "es2015": { "modules": "commonjs" }}], "react"],
-  "plugins": ["transform-flow-strip-types", "transform-class-properties", "transform-object-rest-spread"]
-}

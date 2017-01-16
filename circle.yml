@@ -39,10 +39,9 @@ dependencies:
     - ~/.yarn-cache
 test:
   pre:
-    - yarn run bootstrap
+    - yarn
     - make setup-db
   override:
-    - npm run test-cms
-    - npm run test-api
+    - npm run test:ci
   post:
       - bash <(curl -s https://codecov.io/bash)
