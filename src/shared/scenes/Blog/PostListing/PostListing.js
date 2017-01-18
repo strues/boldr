@@ -4,12 +4,13 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import GridIcon from 'material-ui/svg-icons/action/view-module';
 import ListIcon from 'material-ui/svg-icons/action/view-list';
 import type { Post } from '../../../types/models';
-import { Grid, Row, Col } from '../../../components/index';
+import { Grid, Row, Col, Loader } from '../../../components/index';
 import PostCard from '../components/PostCard';
 
 type Props = {
   posts: Array<Post>,
   layout: Object,
+  isFetching: Boolean,
   listTags: Object,
   handleChangeLayout: () => void
 };
@@ -20,9 +21,9 @@ const style = {
   zIndex: '90',
 };
 const PostListing = (props: Props) => {
-  if (!props.posts) {
+  if (props.isFetching || !props.posts) {
     return (
-      <span>Loading...</span>
+      <Loader />
     );
   }
 

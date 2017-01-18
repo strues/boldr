@@ -23,9 +23,8 @@ export async function createPost(req, res, next) {
   const postSlug = slugIt(req.body.title);
 
   // look for a matching slug in the database
-  const checkExisting = await Post.query().where('slug', postSlug).first();
-
-  if (checkExisting) {
+  const existingPost = await Post.query().where('slug', postSlug).first();
+  if (existingPost) {
     // return with error
     return next(new Conflict());
   }
@@ -45,20 +44,20 @@ export async function createPost(req, res, next) {
   await newPost.$relatedQuery('author').relate({ id: req.user.id });
 
   if (!req.body.tags) {
-    return next(new BadRequest('You must enter tags'))
+    return next(new BadRequest('You must enter tags'));
   }
   req.body.tags = req.body.tags.split(',', 5).map(tag => tag.substr(0, 15));
+
+  async function createPostTagRelation(existingTag, newPost) {
+    await PostTag.query().insert({ tag_id: existingTag.id, post_id: newPost.id });
+  }
+
   for (let i = 0; i < req.body.tags.length; i++) {
     const existingTag = await Tag.query().where('name', req.body.tags[i]).first();
     if (existingTag) {
-      debug(existingTag, 'existing tag found');
-      const taggedPost = await PostTag.query().insert({
-        tag_id: existingTag.id,
-        post_id: newPost.id,
-      });
-      debug(taggedPost);
+      createPostTagRelation(existingTag, newPost);
     } else {
-      await newPost.$relatedQuery('tags').insert({ name: req.body.tags[i] });
+      newPost.$relatedQuery('tags').insert({ name: req.body.tags[i] });
     }
   }
 

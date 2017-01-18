@@ -10,7 +10,6 @@ const mapStateToProps = (state, { params }) => ({
 
 const VisiblePostListing = withRouter(connect(
   mapStateToProps,
-
 )(PostListing));
 
 export default VisiblePostListing;

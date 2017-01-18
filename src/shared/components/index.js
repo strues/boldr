@@ -9,6 +9,7 @@ import Hero from './Hero';
 import PrimaryHeader from './PrimaryHeader';
 import Widget from './Widget';
 import Image from './Image';
+import Loader from './Loader';
 
 export {
   PrimaryHeader,
@@ -24,4 +25,5 @@ export {
   Hero,
   Image,
   Widget,
+  Loader,
 };

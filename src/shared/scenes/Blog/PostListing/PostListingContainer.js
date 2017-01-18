@@ -13,7 +13,7 @@ import VisiblePostListing from './VisiblePostListing';
 
 type Props = {
   posts: Array<Post>,
-  loading: ?Boolean,
+  isFetching: Boolean,
   listTags: Object,
   ui: UI,
   fetchTagsIfNeeded: () => void,
@@ -53,6 +53,7 @@ export class PostListingContainer extends Component {
         listTags={ this.props.listTags }
         layout={ this.props.ui.layout }
         handleChangeLayout={ this.handleChangeLayout }
+        isFetching={ this.props.isFetching }
       />
     );
   }
@@ -63,6 +64,7 @@ const mapStateToProps = (state) => {
     listTags: state.blog.tags.all,
     posts: getPosts(state),
     ui: state.boldr.ui,
+    isFetching: state.blog.posts.isFetching,
   };
 };
 

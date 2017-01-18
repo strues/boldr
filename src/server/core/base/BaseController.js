@@ -65,15 +65,15 @@ class BaseController {
         return query.filterEager(data.relation,
             filterEagerData(req.query, data.table, data.property));
       }, query);
-    }
-
-    query
+    } else {
+      return query
       .then(items => {
         return responseHandler(res, 200, items);
       })
       .catch(err => {
         return next(err);
       });
+    }
   }
 
   show(req, res, next) {
