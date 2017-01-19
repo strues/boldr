@@ -1,10 +1,7 @@
 import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
-import { BaseController } from '../../core';
 import * as ctrl from './role.controller';
 import Role from './role.model';
-
-const controller = new BaseController(Role);
 
 const router = new express.Router();
 /**
@@ -36,10 +33,10 @@ router.get('/', ctrl.listRoles);
  * @apiSuccess {Object[]} roles.users   array containing the associated user objects.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get('/:id', controller.show.bind(controller));
-router.post('/', isAuthenticated, controller.create.bind(controller));
-router.put('/:id', isAuthenticated, controller.update.bind(controller));
-router.patch('/:id', isAuthenticated, controller.update.bind(controller));
-router.delete('/:id', isAuthenticated, controller.destroy.bind(controller));
+// router.get('/:id', controller.show.bind(controller));
+// router.post('/', isAuthenticated, controller.create.bind(controller));
+// router.put('/:id', isAuthenticated, controller.update.bind(controller));
+// router.patch('/:id', isAuthenticated, controller.update.bind(controller));
+// router.delete('/:id', isAuthenticated, controller.destroy.bind(controller));
 
 export default router;

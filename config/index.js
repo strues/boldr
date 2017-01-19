@@ -189,10 +189,6 @@ const config = {
       { name: 'theme-color', content: '#2b2b2b' },
     ],
     links: [
-      { rel: 'apple-touch-icon', sizes: '180x180', href: '/apple-touch-icon.png' },
-      { rel: 'icon', type: 'image/png', href: '/favicon-32x32.png', sizes: '32x32' },
-      { rel: 'icon', type: 'image/png', href: '/favicon-16x16.png', sizes: '16x16' },
-      { rel: 'mask-icon', href: '/safari-pinned-tab.svg', color: '#00a9d9' },
       // Make sure you update your manifest.json to match your application.
       { rel: 'manifest', href: '/manifest.json' },
     ],

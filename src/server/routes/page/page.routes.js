@@ -1,11 +1,7 @@
 import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
-import { BaseController } from '../../core/index';
-import { processQuery } from '../../utils';
 import Page from './page.model';
 import * as ctrl from './page.controller';
-
-const controller = new BaseController(Page);
 
 const router = new express.Router();
 /**
@@ -19,8 +15,8 @@ const router = new express.Router();
 router.get('/', ctrl.listPages);
 router.get('/:url', ctrl.getPageByUrl);
 router.post('/', isAuthenticated, ctrl.createPage);
-router.put('/:id', isAuthenticated, controller.update.bind(controller));
-router.patch('/:id', isAuthenticated, controller.update.bind(controller));
-router.delete('/:id', isAuthenticated, controller.destroy.bind(controller));
+// router.put('/:id', isAuthenticated, controller.update.bind(controller));
+// router.patch('/:id', isAuthenticated, controller.update.bind(controller));
+// router.delete('/:id', isAuthenticated, controller.destroy.bind(controller));
 
 export default router;

@@ -43,8 +43,8 @@ export function fetchTags() {
           dispatch(receiveTagsFailed());
         }
 
-        const camelizedJson = camelizeKeys(response.body.results);
-        const normalizedData = normalize(response.body.results, arrayOfTag);
+        const camelizedJson = camelizeKeys(response.body);
+        const normalizedData = normalize(response.body, arrayOfTag);
         // console.log(normalized)
         dispatch(receiveTags(normalizedData));
       })

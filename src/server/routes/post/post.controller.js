@@ -10,6 +10,14 @@ import PostTag from './postTag.model';
 
 const debug = require('debug')('boldrAPI:post-controller');
 
+export async function listPosts(req, res, next) {
+  try {
+    const allPosts = await Post.query().eager('[tags,author]').skipUndefined();
+    return responseHandler(res, 200, allPosts);
+  } catch (err) {
+    return next(new BadRequest(err));
+  }
+}
 
 export async function createPost(req, res, next) {
   req.assert('title', 'A title must be provided').notEmpty();

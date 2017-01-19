@@ -1,11 +1,9 @@
 import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
-import { BaseController } from '../../core';
+
 import Menu from './menu.model';
 import * as ctrl from './menu.controller';
 import detailRoutes from './detail/menuDetail.routes';
-
-const controller = new BaseController(Menu);
 
 const router = express.Router();
 /**
@@ -23,7 +21,7 @@ router.get('/', ctrl.listMenu);
  * @apiPermission admin
  * @apiUse authHeader
  */
-router.post('/', isAuthenticated, controller.create.bind(controller));
+router.post('/', isAuthenticated,  ctrl.createMenu);
 
 /**
  * @api {get} /menus/:id Return a specific menu by its id.
@@ -53,14 +51,5 @@ router.put('/:id', isAuthenticated, ctrl.updateMenu);
  */
 router.patch('/:id', isAuthenticated, ctrl.updateMenu);
 
-/**
- * @api {delete} /menus/:id Delete a menu
- * @apiName destroy
- * @apiGroup Menu
- * @apiPermission admin
- * @apiUse authHeader
- * @apiParam {Number} id The id of the menu
- */
-router.delete('/:id', isAuthenticated, controller.destroy.bind(controller));
 router.use('/details', detailRoutes);
 export default router;

@@ -1,13 +1,10 @@
 import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
-import { BaseController } from '../../core/index';
-import { processQuery } from '../../utils';
 import Template from './template.model';
 import * as ctrl from './template.controller';
 
-const controller = new BaseController(Template);
-
 const router = new express.Router();
+
 /**
  * @api {get} /pages       Get all pages
  * @apiName listPages
@@ -19,8 +16,5 @@ const router = new express.Router();
 router.get('/', ctrl.listTemplates);
 router.get('/:name', ctrl.getTemplateByResource);
 router.post('/', isAuthenticated, ctrl.createTemplate);
-router.put('/:id', isAuthenticated, controller.update.bind(controller));
-router.patch('/:id', isAuthenticated, controller.update.bind(controller));
-router.delete('/:id', isAuthenticated, controller.destroy.bind(controller));
 
 export default router;

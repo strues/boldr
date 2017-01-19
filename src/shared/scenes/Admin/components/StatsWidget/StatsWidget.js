@@ -13,10 +13,10 @@ type Props = {
 const StatsWidget = (props: Props) => {
   return (
     <div className="boldr-widget__stats">
-    <Paper zDepth={ 2 } style={ { padding: '1em' } }>
-      <Heading top="5px" align="left" size={ 4 } color="#555">
-        <StatsIcon style={ { paddingTop: '5px' } } />{ ' ' } Stats
-      </Heading>
+      <Paper zDepth={ 2 } style={ { padding: '1em' } }>
+        <Heading top="5px" align="left" size={ 4 } color="#555">
+          <StatsIcon style={ { paddingTop: '5px' } } />{ ' ' } Stats
+        </Heading>
       Posts: { props.stats.posts || '' } <br />
       Tags: { props.stats.tags || '' }<br />
       Users: { props.stats.users || '' }<br />

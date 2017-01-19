@@ -1,11 +1,8 @@
 import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
-import { BaseController } from '../../core';
 import { checkRole } from '../../middleware/rbac';
 import User from './user.model';
 import * as ctrl from './user.controller';
-
-const controller = new BaseController(User);
 
 const router = new express.Router();
 /**

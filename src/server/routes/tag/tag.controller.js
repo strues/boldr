@@ -1,8 +1,16 @@
 import { responseHandler } from '../../core';
-
 import Tag from './tag.model';
 
 const debug = require('debug')('boldr:post-controller');
+
+async function listTags(req, res, next) {
+  try {
+    const allTags = await Tag.query().eager('[posts]').skipUndefined();
+    return responseHandler(res, 200, allTags);
+  } catch (err) {
+    return res.status(404).json(err);
+  }
+}
 
 async function getTaggedPosts(req, res) {
   const tags = await Tag
@@ -22,4 +30,4 @@ async function getTaggedPostsByName(req, res) {
   debug(tags);
   return responseHandler(res, 200, tags);
 }
-export { getTaggedPosts, getTaggedPostsByName };
+export { listTags, getTaggedPosts, getTaggedPostsByName };

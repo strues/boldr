@@ -1,11 +1,8 @@
 import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
-import { BaseController } from '../../core/index';
 import { checkRole } from '../../middleware/rbac';
 import * as ctrl from './attachment.controller';
 import Attachment from './attachment.model';
-
-const controller = new BaseController(Attachment);
 
 const router = express.Router();
 

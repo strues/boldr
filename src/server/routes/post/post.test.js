@@ -13,17 +13,9 @@ it('GET /posts -- List', async () => {
       .set('Accept', 'application/json');
 
   expect(status).toBe(200);
-  expect(Array.isArray(body.results)).toBe(true);
+  expect(Array.isArray(body)).toBe(true);
 });
 
-it('GET /posts -- It should return the total number of posts', async () => {
-  const { status, body } = await request()
-      .get('/api/v1/posts')
-      .set('Accept', 'application/json');
-
-  expect(status).toBe(200);
-  expect(body.total !== null).toBe(true);
-});
 
 it('GET /posts?include=[tags] -- List w/ tags', async () => {
   const { status, body } = await request()
@@ -31,7 +23,7 @@ it('GET /posts?include=[tags] -- List w/ tags', async () => {
       .set('Accept', 'application/json');
 
   expect(status).toBe(200);
-  expect(Array.isArray(body.results[0].tags)).toBe(true);
+  expect(Array.isArray(body[0].tags)).toBe(true);
 });
 
 it('GET /posts?include=[tags,author] -- List w/ tags/author', async () => {
@@ -40,9 +32,9 @@ it('GET /posts?include=[tags,author] -- List w/ tags/author', async () => {
       .set('Accept', 'application/json');
 
   expect(status).toBe(200);
-  expect(Array.isArray(body.results[0].tags)).toBe(true);
-  expect(typeof body.results[0].author).toBe('object');
-  expect(typeof body.results[0].slug).toBe('string');
+  expect(Array.isArray(body[0].tags)).toBe(true);
+  expect(typeof body[0].author).toBe('object');
+  expect(typeof body[0].slug).toBe('string');
 });
 
 it('GET /posts/pid/:id -- By id', async () => {

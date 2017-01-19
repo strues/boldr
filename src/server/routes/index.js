@@ -4,7 +4,7 @@ import activityRoutes from './activity/activity.routes';
 import adminRoutes from './admin/admin.routes';
 import attachmentRoutes from './attachment/attachment.routes';
 import authRoutes from './auth/auth.routes';
-import galleryRoutes from './gallery/gallery.routes';
+
 import menuDetailRoutes from './menu/detail/menuDetail.routes';
 import menuRoutes from './menu/menu.routes';
 import pageRoutes from './page/page.routes';
@@ -54,7 +54,6 @@ router.use('/activities', activityRoutes);
 router.use('/admin', adminRoutes);
 router.use('/attachments', attachmentRoutes);
 router.use('/auth', authRoutes);
-router.use('/galleries', galleryRoutes);
 router.use('/menu-details', menuDetailRoutes);
 router.use('/menus', menuRoutes);
 router.use('/pages', pageRoutes);

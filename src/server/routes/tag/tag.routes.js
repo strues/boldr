@@ -1,12 +1,7 @@
 import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
-import { BaseController } from '../../core';
-
-import { processQuery } from '../../utils';
 import Tag from './tag.model';
 import * as ctrl from './tag.controller';
-
-const controller = new BaseController(Tag);
 
 const router = new express.Router();
 /**
@@ -18,7 +13,7 @@ const router = new express.Router();
  * @apiSuccess (200) {Object[]} tags List of tags.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get('/', processQuery, controller.index.bind(controller));
+router.get('/', ctrl.listTags);
 /**
  * @api {get} /tags/:id Get a specific tag by its id.
  * @apiName Show
@@ -27,7 +22,7 @@ router.get('/', processQuery, controller.index.bind(controller));
  * @apiSuccess (200) {Object} tag The tag requested.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get('/:id', controller.show.bind(controller));
+// router.get('/:id', controller.show.bind(controller));
 /**
  * @api {get} /tags/posts/:name Returns all posts associated with the tag.
  * @apiName getTaggedPostsByName
@@ -59,7 +54,7 @@ router.get('/:id/posts', ctrl.getTaggedPosts);
  * @apiError {Object} 409 There is already a tag with this name
  * @apiError {Object} 401 Unauthorized. You must be logged in to create a tag.
  */
-router.post('/', isAuthenticated, controller.create.bind(controller));
+// router.post('/', isAuthenticated, controller.create.bind(controller));
 /**
  * @api {put} /tags/:id Update a tag
  * @apiName update
@@ -71,7 +66,7 @@ router.post('/', isAuthenticated, controller.create.bind(controller));
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError {Object} 401 Unauthorized. You must be logged in to create a tag.
  */
-router.put('/:id', isAuthenticated, controller.update.bind(controller));
+// router.put('/:id', isAuthenticated, controller.update.bind(controller));
 /**
  * @api {patch} /tags/:id Update a tag
  * @apiName update
@@ -83,8 +78,8 @@ router.put('/:id', isAuthenticated, controller.update.bind(controller));
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError {Object} 401 Unauthorized. You must be logged in to create a tag.
  */
-router.patch('/:id', isAuthenticated, controller.update.bind(controller));
+// router.patch('/:id', isAuthenticated, controller.update.bind(controller));
 
-router.delete('/:id', isAuthenticated, controller.destroy.bind(controller));
+// router.delete('/:id', isAuthenticated, controller.destroy.bind(controller));
 
 export default router;

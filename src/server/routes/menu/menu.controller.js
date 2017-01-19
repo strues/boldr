@@ -29,6 +29,18 @@ export async function showMenu(req, res, next) {
   }
 }
 
+export async function createMenu(req, res, next) {
+  try {
+    const payload = req.body;
+    const newMenu = await Menu
+      .query()
+      .insert(payload);
+    return responseHandler(res, 201, newMenu);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+}
+
 export async function updateMenu(req, res, next) {
   try {
     const updatedNav = await Menu.query()

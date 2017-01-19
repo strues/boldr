@@ -6,7 +6,6 @@ import config from '../../../../config';
 import Activity from '../activity/activity.model';
 import Attachment from './attachment.model';
 
-
 const debug = Debug('boldrAPI:attachment-controller');
 
 export const listAttachments = async (req, res, next) => {

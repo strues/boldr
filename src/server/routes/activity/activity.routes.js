@@ -1,10 +1,8 @@
 import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
-import { BaseController } from '../../core';
+
 import Activity from './activity.model';
 import * as ctrl from './activity.controller';
-
-const controller = new BaseController(Activity);
 
 const router = new express.Router();
 
@@ -25,7 +23,7 @@ router.get('/', ctrl.listActivities);
  * @apiSuccess {Object} activity Activity's data.
  * @apiError 404 Activity not found.
  */
-router.get('/:id', controller.show.bind(controller));
+// router.get('/:id', controller.show.bind(controller));
 
 /**
  * @api {post} /activities Create activity
@@ -44,6 +42,6 @@ router.get('/:id', controller.show.bind(controller));
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 401 Unauthorized access only.
  */
-router.post('/', isAuthenticated, controller.create.bind(controller));
+// router.post('/', isAuthenticated, controller.create.bind(controller));
 
 export default router;

@@ -42,20 +42,3 @@ it('PUT /links/1 -- Should require authorization', async () => {
 
   expect(status).toBe(401);
 });
-
-it('PATCH /links/1 -- Should require authorization', async () => {
-  const { status } = await request()
-      .patch('/api/v1/menu-details/1')
-      .set('Accept', 'application/json')
-      .send({ name: 'test' });
-
-  expect(status).toBe(401);
-});
-
-it('DELETE /links/1 -- Should require authorization', async () => {
-  const { status } = await request()
-      .delete('/api/v1/menu-details/1')
-      .set('Accept', 'application/json');
-
-  expect(status).toBe(401);
-});

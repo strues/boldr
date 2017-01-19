@@ -1,13 +1,10 @@
 import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
-import { BaseController } from '../../core/index';
 import { checkRole } from '../../middleware/rbac';
-import { processQuery } from '../../utils/index';
 import * as ctrl from './post.controller';
 import Post from './post.model';
 
-const controller = new BaseController(Post, 'post_id');
-const router = express.Router({ mergeParams: true });
+const router = express.Router();
 
 router.route('/')
       /**
@@ -28,7 +25,7 @@ router.route('/')
        * @apiSuccess {Object}   posts.author          The post author's user object
        * @apiError {Object} 400 Some parameters may contain invalid values.
        */
-      .get(processQuery, controller.index.bind(controller))
+      .get(ctrl.listPosts)
       /**
        * @api {post} /posts Create a new post
        * @apiName createPost

@@ -29,7 +29,7 @@ import ReactHotLoader from './components/ReactHotLoader';
 injectTapEventPlugin();
 // Load fonts
 WebFontLoader.load({
-  google: { families: ['Roboto Slab:100,400,700', 'Roboto:300,400,700'] },
+  google: { families: ['Roboto Slab:100,400,700', 'Roboto:300,400,700', 'Material Icons'] },
 });
 // Get the DOM Element that will host our React application.
 const domNode = document.getElementById('app');

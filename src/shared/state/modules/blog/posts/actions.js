@@ -52,9 +52,9 @@ export function fetchPosts() {
           dispatch(receivePostsFailed());
         }
 
-        const camelizedJson = camelizeKeys(response.body.results);
+        const camelizedJson = camelizeKeys(response.body);
         // const normalized = normalize(camelizedJson, arrayOf(postSchema, { idAttribute: 'slug' }));
-        const normalizedData = normalize(response.body.results, arrayOfPost);
+        const normalizedData = normalize(response.body, arrayOfPost);
         // console.log(normalized)
         dispatch(receivePosts(normalizedData));
       })

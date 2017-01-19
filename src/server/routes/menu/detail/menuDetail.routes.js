@@ -1,10 +1,7 @@
 import express from 'express';
 import { isAuthenticated } from '../../../services/authentication';
-import { BaseController } from '../../../core';
 import MenuDetail from './menuDetail.model';
 import * as ctrl from './menuDetail.controller';
-
-const controller = new BaseController(MenuDetail);
 
 const router = express.Router();
 /**
@@ -55,6 +52,6 @@ router.patch('/:id', isAuthenticated, ctrl.updateDetail);
  * @apiUse authHeader
  * @apiParam {Number} id The id of the detail
  */
-router.delete('/:id', isAuthenticated, controller.destroy.bind(controller));
+// router.delete('/:id', isAuthenticated, controller.destroy.bind(controller));
 
 export default router;
