@@ -99,7 +99,7 @@
   },
   "dependencies": {
     "app-root-dir": "1.0.2",
-    "aws-sdk": "^2.7.25",
+    "aws-sdk": "^2.7.27",
     "bcryptjs": "^2.4.0",
     "bluebird": "^3.4.7",
     "body-parser": "^1.16.0",
@@ -162,12 +162,12 @@
     "superagent": "^3.3.2",
     "uuid": "^3.0.1",
     "webfontloader": "^1.6.27",
-    "winston": "^2.3.0"
+    "winston": "^2.3.1"
   },
   "devDependencies": {
-    "assets-webpack-plugin": "3.5.0",
-    "babel-cli": "6.18.0",
-    "babel-core": "^6.21.0",
+    "assets-webpack-plugin": "3.5.1",
+    "babel-cli": "6.22.2",
+    "babel-core": "^6.22.1",
     "babel-jest": "^18.0.0",
     "babel-loader": "6.2.10",
     "babel-preset-boldr": "0.7.2",
@@ -209,7 +209,7 @@
     "sinon": "^1.17.7",
     "style-loader": "0.13.1",
     "supertest": "^2.0.1",
-    "webpack": "next",
+    "webpack": "2.2.0",
     "webpack-bundle-analyzer": "2.2.1",
     "webpack-dev-middleware": "1.9.0",
     "webpack-hot-middleware": "2.15.0",
