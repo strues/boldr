@@ -79,14 +79,14 @@ class PrimaryHeader extends Component {
     );
 
     return (
-      <div>
+      <div className="boldr-primary-header">
       <AppBar
         zDepth={ 1 }
         showMenuIconButton={ false }
         title={
           <img src="https://boldr.io/boldr.png"
             className="ph-logo"
-            alt="logo" onClick={ this.props.handleLogoClick }
+            alt="logo" onTouchTap={ this.props.handleLogoClick }
           />
         }
         iconElementRight={

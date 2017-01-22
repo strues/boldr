@@ -1,8 +1,6 @@
 /* @flow */
 import React, { Component } from 'react';
-import shallowCompare from 'react-addons-shallow-compare';
 import { provideHooks } from 'redial';
-import debounce from 'lodash/debounce';
 import { connect } from 'react-redux';
 
 import { fetchTemplateResource } from '../../state/modules/boldr/templates/actions';
@@ -46,13 +44,7 @@ export default (ComposedComponent: any) => {
     }
 
     componentDidMount() {
-      // const resource = this.props.pathname.replace(/[/]/, '');
       this.props.dispatch(fetchMenusIfNeeded());
-      // this.props.dispatch(fetchTemplateResource(resource));
-    }
-    // $FlowIssue
-    shouldComponentUpdate(nextProps, nextState) {
-      return shallowCompare(this, nextProps, nextState);
     }
     props: Props;
 

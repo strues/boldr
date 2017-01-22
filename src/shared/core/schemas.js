@@ -8,7 +8,6 @@ const menuDetail = new schema.Entity('details', { idAttribute: 'label' }, {
     return { ...value, menu: parent.label };
   },
 });
-const setting = new schema.Entity('settings');
 const page = new schema.Entity('pages', { idAttribute: 'label' });
 
 const menu = new schema.Entity('menus', {
@@ -16,4 +15,4 @@ const menu = new schema.Entity('menus', {
   details: [menuDetail],
 });
 
-export { attachment, page, menu, menuDetail, setting };
+export { attachment, page, menu, menuDetail };

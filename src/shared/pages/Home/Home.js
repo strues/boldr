@@ -10,6 +10,7 @@ import { safeConfigGet } from '../../core/utils/config';
 
 const Home = () => {
   return (
+    <div>
       <BaseTemplate
         helmetMeta={ <Helmet title="Home" /> }
         hero={ <Hero /> }
@@ -21,6 +22,7 @@ const Home = () => {
         </Row>
       </Grid>
       </BaseTemplate>
+    </div>
   );
 };
 

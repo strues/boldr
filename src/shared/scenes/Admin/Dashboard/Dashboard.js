@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { provideHooks } from 'redial';
-import { Col, Row, Widget } from '../../../components/index';
+import { Col, Row, Widget, Loader } from '../../../components/index';
 import ActivityWidget from '../components/ActivityWidget';
 import StatsWidget from '../components/StatsWidget';
 import type { Stats } from '../../../types/models';
@@ -33,7 +33,7 @@ export class Dashboard extends Component {
   render() {
     if (this.props.loading) {
       return (
-        <h1>Loading</h1>
+        <Loader />
       );
     }
     return (

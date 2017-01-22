@@ -1,0 +1,56 @@
+exports[`attachment schema should match the normalizr-attachment-schema 1`] = `
+EntitySchema {
+  "_getId": [Function],
+  "_key": "attachments",
+  "_mergeStrategy": [Function],
+  "_processStrategy": [Function],
+  "schema": Object {},
+}
+`;
+
+exports[`menu schema should match the normalizr-menu-schema 1`] = `
+EntitySchema {
+  "_getId": [Function],
+  "_key": "menus",
+  "_mergeStrategy": [Function],
+  "_processStrategy": [Function],
+  "schema": Object {
+    "details": Array [
+      EntitySchema {
+        "_getId": [Function],
+        "_key": "details",
+        "_mergeStrategy": [Function],
+        "_processStrategy": [Function],
+        "schema": Object {
+          "idAttribute": "label",
+        },
+      },
+    ],
+    "idAttribute": "label",
+  },
+}
+`;
+
+exports[`menuDetail schema should match the normalizr-menuDetail-schema 1`] = `
+EntitySchema {
+  "_getId": [Function],
+  "_key": "details",
+  "_mergeStrategy": [Function],
+  "_processStrategy": [Function],
+  "schema": Object {
+    "idAttribute": "label",
+  },
+}
+`;
+
+exports[`page schema should match the normalizr-page-schema 1`] = `
+EntitySchema {
+  "_getId": [Function],
+  "_key": "pages",
+  "_mergeStrategy": [Function],
+  "_processStrategy": [Function],
+  "schema": Object {
+    "idAttribute": "label",
+  },
+}
+`;

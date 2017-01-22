@@ -1,0 +1,11 @@
+exports[`<Loader /> renders snapshot 1`] = `
+<div
+  className="boldr-loader">
+  <div
+    className="boldr-loader__item">
+    <div />
+    <div />
+    <div />
+  </div>
+</div>
+`;

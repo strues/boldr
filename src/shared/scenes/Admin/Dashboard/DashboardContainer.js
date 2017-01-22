@@ -10,17 +10,6 @@ import Sidebar from '../components/Sidebar';
 import Topbar from '../components/Topbar';
 import { showSidebar, hideSidebar } from '../../../state/modules/admin/dashboard/actions';
 
-const styled = require('styled-components').default;
-
-const BgOffsetBlock = styled.div`
-  display: flex;
-  position: static;
-  width: 100%;
-  height: 225px;
-  background-color: #01579b;
-  z-index: 5;
-  background-attachment: fixed;
-`;
 type Props = {
   children: ReactElement,
   dispatch?: Function,
