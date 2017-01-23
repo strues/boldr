@@ -2,7 +2,7 @@
 
 import type { $Request, $Response, Middleware, NextFunction } from 'express';
 import React from 'react';
-import { renderToString } from 'react-dom/server';
+import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import match from 'react-router/lib/match';
 import RouterContext from 'react-router/lib/RouterContext';
@@ -16,7 +16,7 @@ import createRoutes from '../../../shared/scenes';
 import ApiClient from '../../../shared/core/api/apiClient';
 import configureStore from '../../../shared/state/store';
 import config from '../../../../config';
-import generateHTML from './generateHTML';
+import ServerHTML from './ServerHTML';
 
 /**
  * An express middleware that is capabable of service our React application,
@@ -78,8 +78,16 @@ function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
          // render styled-components styleSheets to string.
          const styles = styleSheet.rules().map(rule => rule.cssText).join('\n');
 
-         const html = generateHTML({ reactAppString, nonce, preloadedState, helmet, styles });
-
+         //const html = generateHTML({ reactAppString, nonce, preloadedState, helmet, styles });
+         const html = renderToStaticMarkup(
+           <ServerHTML
+             reactAppString={ reactAppString }
+             nonce={ nonce }
+             helmet={ Helmet.rewind() }
+             styles={ styles }
+             preloadedState={ preloadedState }
+           />,
+         );
          res.status(200).send(html);
        }).catch((err) => {
          console.log(err);

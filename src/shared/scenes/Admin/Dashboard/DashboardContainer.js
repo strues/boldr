@@ -1,14 +1,16 @@
 /* eslint-disable no-unused-expressions */
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import type { ReactElement } from 'types/react';
 import { push } from 'react-router-redux';
 import AppBar from 'material-ui/AppBar';
-
-import { Grid, Col, Authenticated } from '../../../components/index';
+import { provideHooks } from 'redial';
+import { Grid, Col, Loader } from '../../../components/index';
 import Sidebar from '../components/Sidebar';
 import Topbar from '../components/Topbar';
+import { loadSiteActivity, fetchStats } from '../../../state/modules/admin/dashboard/actions';
 import { showSidebar, hideSidebar } from '../../../state/modules/admin/dashboard/actions';
+import Dashboard from './Dashboard';
 
 type Props = {
   children: ReactElement,
@@ -19,71 +21,38 @@ type Props = {
   account: Object,
 };
 
-@Authenticated
-class DashboardContainer extends PureComponent {
-  constructor() {
-    super();
-    this.state = { open: false };
-    (this: any).menuButtonClick = this.menuButtonClick.bind(this);
-    (this: any).onSetOpen = this.onSetOpen.bind(this);
-    (this: any).onSetClose = this.onSetClose.bind(this);
+@provideHooks({
+  fetch: ({ dispatch }) => {
+    return Promise.all([
+      dispatch(loadSiteActivity()),
+      dispatch(fetchStats()),
+    ]);
+  }
+})
+class DashboardContainer extends Component {
+  componentDidMount() {
+    this.props.loadSiteActivity();
+    this.props.fetchStats();
   }
 
-  props: Props;
-
-  onSetOpen(open) {
-    this.props.dispatch(showSidebar());
-  }
-
-  onSetClose(open) {
-    this.props.dispatch(hideSidebar());
-  }
-
-  handleToggle = () => this.setState({ open: !this.state.open });
-
-  menuButtonClick(ev) {
-    ev.preventDefault();
-    const isOpen = this.props.dashboard.open;
-    isOpen ? this.onSetClose(this.state.open) : this.onSetOpen(this.state.open);
-  }
-
-  handleChangeList = (event, value) => {
-    this.props.dispatch(push(value));
-  };
   render() {
+    if (this.props.loading) {
+      return (
+        <Loader />
+      )
+    }
     return (
-      <div>
-        <Topbar
-          title="Boldr"
-          menuButtonClick={ this.menuButtonClick }
-          open={ this.props.dashboard.open }
-          user={ this.props.account.user }
-        />
-        <Sidebar
-          open={ this.props.dashboard.open }
-          user={ this.props.account.user }
-          onChangeList={ this.handleChangeList }
-        />
-
-        <Grid fluid style={ { paddingLeft: this.props.dashboard.open ? '200px' : '0px' } }>
-          <Col xs>
-            <div style={ { marginTop: '75px', padding: '1.5em' } }>
-              { this.props.children }
-            </div>
-          </Col>
-      </Grid>
-    </div>
-    );
+      <Dashboard activities={ this.props.activities } stats={ this.props.stats } loading={ this.props.loading }/>
+    )
   }
 }
 
 function mapStateToProps(state) {
   return {
-    router: state.router,
-    dashboard: state.admin.dashboard,
-    boldr: state.boldr,
-    account: state.account,
+    activities: state.admin.dashboard.activities,
+    stats: state.admin.dashboard.stats,
+    loading: state.admin.dashboard.loading,
   };
 }
 
-export default connect(mapStateToProps)(DashboardContainer);
+export default connect(mapStateToProps, { loadSiteActivity, fetchStats })(DashboardContainer)

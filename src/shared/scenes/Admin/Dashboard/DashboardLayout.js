@@ -5,7 +5,7 @@ import type { ReactElement } from 'types/react';
 import { push } from 'react-router-redux';
 import AppBar from 'material-ui/AppBar';
 
-import { Grid, Col, Authenticated } from '../../../components/index';
+import { Grid, Col } from '../../../components/index';
 import Sidebar from '../components/Sidebar';
 import Topbar from '../components/Topbar';
 import { showSidebar, hideSidebar } from '../../../state/modules/admin/dashboard/actions';
@@ -19,7 +19,6 @@ type Props = {
   account: Object,
 };
 
-@Authenticated
 class DashboardLayout extends Component {
   constructor() {
     super();

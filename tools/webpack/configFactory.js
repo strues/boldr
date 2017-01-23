@@ -48,7 +48,21 @@ export default function webpackConfigFactory(buildOptions: BuildOptions) {
       __filename: true,
     },
     externals: removeEmpty([
-      ifNode([nodeExternals()]),
+      ifNode(
+        () => nodeExternals(
+          // Some of our node_modules may contain files that depend on webpack
+          // loaders, e.g. CSS or SASS.
+          // For these cases please make sure that the file extensions are
+          // registered within the following configuration setting.
+          { whitelist:
+          // We always want the source-map-support excluded.
+            ['source-map-support/register'].concat(
+              // Then exclude any items specified in the config.
+              config.nodeExternalsFileTypeWhitelist || [],
+            ),
+          },
+        ),
+      ),
     ]),
     devtool: ifElse(
         isNode
@@ -90,7 +104,11 @@ export default function webpackConfigFactory(buildOptions: BuildOptions) {
 
     plugins: removeEmpty([
       ifClient(() => new WebpackMd5Hash()),
-
+      ifNode(() => new webpack.BannerPlugin({
+        banner: 'require("source-map-support").install();',
+        raw: true,
+        entryOnly: false,
+      })),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(mode),
         // Is this the "client" bundle?
@@ -139,7 +157,7 @@ export default function webpackConfigFactory(buildOptions: BuildOptions) {
         }),
       ),
       happyPackPlugin({
-        name: 'happypack-javascript',
+        name: 'hp-js',
         loaders: [{
           path: 'babel-loader',
           query: config.plugins.babelConfig(buildOptions),
@@ -147,7 +165,7 @@ export default function webpackConfigFactory(buildOptions: BuildOptions) {
       }),
       ifDevClient(
         () => happyPackPlugin({
-          name: 'happypack-devclient-css',
+          name: 'hp-scss',
           loaders: [
             { path: 'style-loader' },
             {
@@ -175,7 +193,7 @@ export default function webpackConfigFactory(buildOptions: BuildOptions) {
       rules: removeEmpty([
         {
           test: /\.jsx?$/,
-          loader: 'happypack/loader?id=happypack-javascript',
+          loader: 'happypack/loader?id=hp-js',
           include: removeEmpty([
             ...bundleConfig.srcPaths.map(srcPath =>
               path.resolve(appRootDir.get(), srcPath),
@@ -187,7 +205,7 @@ export default function webpackConfigFactory(buildOptions: BuildOptions) {
           merge(
             { test: /(\.scss|\.css)$/ },
             ifDevClient({
-              loaders: ['happypack/loader?id=happypack-devclient-css'],
+              loaders: ['happypack/loader?id=hp-scss'],
             }),
             ifProdClient(() => ({
               loader: ExtractTextPlugin.extract({

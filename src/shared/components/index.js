@@ -4,7 +4,6 @@ import { Grid, Col, Row } from './Layout';
 import Notifications from './Notification';
 import S3Uploader from './s3Uploader';
 import Modal from './Modal';
-import { Authenticated } from './HOC';
 import Hero from './Hero';
 import PrimaryHeader from './PrimaryHeader';
 import Widget from './Widget';
@@ -20,7 +19,6 @@ export {
   Row,
   Modal,
   Notifications,
-  Authenticated,
   S3Uploader,
   Hero,
   Image,

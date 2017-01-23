@@ -1,6 +1,4 @@
-/* @flow */
-
-function filterObjectLoop(obj: Object, filters: Object, basePropPath = ''): Object {
+function filterObjectLoop(obj, filters, basePropPath = '') {
   return Object.keys(filters).reduce((acc, key) => {
     const propPath = basePropPath !== '' ? `${basePropPath}.${key}` : key;
 
@@ -10,8 +8,8 @@ function filterObjectLoop(obj: Object, filters: Object, basePropPath = ''): Obje
       }
       acc[key] = filterObjectLoop(obj[key], filters[key], propPath); // eslint-disable-line no-param-reassign,max-len
     } else if (filters[key]) {
-      if (!obj[key]) {
-        throw new Error(`Object filters set an "allow" on path "${propPath}", however this path was not found on the source object.`);
+      if (typeof obj[key] === 'undefined') {
+        throw new Error(`Filter set an "allow" on path "${propPath}", however, this path was not found on the source object.`);
       }
       acc[key] = obj[key]; // eslint-disable-line no-param-reassign
     }
@@ -46,6 +44,6 @@ function filterObjectLoop(obj: Object, filters: Object, basePropPath = ''): Obje
 //     foo: { bar: 'bar' },
 //     poop: { plop: 'splash' }
 //   },
-export default function filterObject(obj: Object, filters: Object): Object {
+export default function filterObject(obj, filters) {
   return filterObjectLoop(obj, filters);
 }

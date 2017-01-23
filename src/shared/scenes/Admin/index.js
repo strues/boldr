@@ -1,16 +1,15 @@
 import { loadRoute, errorLoading } from '../../core/utils';
+import { requireAuth } from '../../core/services/token';
 import DashboardLayout from './Dashboard/DashboardLayout';
+import DashboardContainer from './Dashboard/DashboardContainer';
 
 export default (store, connect) => {
   return {
     path: 'admin',
     component: DashboardLayout,
+    onEnter: requireAuth,
     indexRoute: {
-      getComponent(nextState, cb) {
-        import('./Dashboard/Dashboard')
-          .then(loadRoute(cb))
-          .catch(errorLoading);
-      },
+      component: DashboardContainer,
     },
     childRoutes: [
       {

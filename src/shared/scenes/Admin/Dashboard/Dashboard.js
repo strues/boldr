@@ -16,22 +16,8 @@ type Props = {
   stats: Stats,
 };
 
-@provideHooks({
-  fetch: ({ dispatch }) => {
-    return Promise.all([
-      dispatch(loadSiteActivity()),
-      dispatch(fetchStats()),
-    ]);
-  },
-})
-export class Dashboard extends Component {
-  componentDidMount() {
-    this.props.loadSiteActivity();
-    this.props.fetchStats();
-  }
-  props: Props;
-  render() {
-    if (this.props.loading) {
+const Dashboard = (props: Props) => {
+    if (props.loading) {
       return (
         <Loader />
       );
@@ -42,7 +28,7 @@ export class Dashboard extends Component {
           <Col xs={ 6 } md={ 9 }>
             <Row>
               <Col xs={ 6 } md={ 6 }>
-                <StatsWidget stats={ this.props.stats } />
+                <StatsWidget stats={ props.stats } />
               </Col>
               <Col xs={ 6 } md={ 6 }>
                 <Widget name="Widget C" />
@@ -51,23 +37,14 @@ export class Dashboard extends Component {
           </Col>
           <Col xs={ 12 } md={ 3 }>
             {
-              this.props.activities
-              ? <ActivityWidget activities={ this.props.activities } />
+              props.activities
+              ? <ActivityWidget activities={ props.activities } />
               : null
             }
           </Col>
         </Row>
       </div>
     );
-  }
 }
 
-function mapStateToProps(state) {
-  return {
-    postCount: state.entities.posts,
-    activities: state.admin.dashboard.activities,
-    stats: state.admin.dashboard.stats,
-    loading: state.admin.dashboard.loading,
-  };
-}
-export default connect(mapStateToProps, { loadSiteActivity, fetchStats })(Dashboard);
+export default Dashboard;

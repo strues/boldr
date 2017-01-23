@@ -6,64 +6,65 @@
 // absolute paths should be resolved during runtime by our build tools/server.
 
 import type { BuildOptions } from '../tools/types';
-import { getStringEnvVar, getIntEnvVar } from './internals/environmentVars';
-import filterObject from './internals/filterObject';
-import clientConfigFilter from './clientConfigFilter';
+import * as envVars from './internals/envVars';
 
-// This protects us from accidentally including this configuration in our
-// client bundle. That would be a big NO NO to do. :)
-if (process.env.IS_CLIENT) {
-  throw new Error("You shouldn't be importing the `./config` directly into your 'client' or 'shared' source as the configuration object will get included in your client bundle. Not a safe move! Instead, use the `safeConfigGet` helper function (located at `./src/shared/utils/config`) within the 'client' or 'shared' source files to reference configuration values in a safe manner."); // eslint-disable-line
-}
-
-const config = {
+export default {
+  clientConfigFilter: {
+    // This is here as an example showing that you can expose variables
+    // that were potentially provivded by the environment
+    welcomeMessage: false,
+    // We need to expose all the polyfill.io settings.
+    polyfillIO: true,
+    // We need to expose all the htmlPage settings.
+    htmlPage: true,
+  },
   // The host on which the server should run.
-  host: getStringEnvVar('SERVER_HOST', 'localhost'),
+  host: envVars.string('SERVER_HOST', 'localhost'),
 
   // The port on which the server should run.
-  port: getIntEnvVar('SERVER_PORT', 3000),
-  apiHost: getStringEnvVar('API_HOST', 'localhost'),
-  apiPort: getIntEnvVar('API_PORT', 2121),
+  port: envVars.int('SERVER_PORT', 3000),
+  apiHost: envVars.string('API_HOST', 'localhost'),
+  apiPort: envVars.int('API_PORT', 2121),
 
   // The port on which the client bundle development server should run.
-  clientDevServerPort: getIntEnvVar('CLIENT_DEVSERVER_PORT', 7331),
+  clientDevServerPort: envVars.int('CLIENT_DEVSERVER_PORT', 7331),
 
   // This is an example environment variable which is consumed within the
   // './client.js' config.  See there for more details.
-  welcomeMessage: getStringEnvVar('WELCOME_MSG', 'Hello world!'),
+  welcomeMessage: envVars.string('WELCOME_MSG', 'Hello world!'),
   postgres: {
     name: 'boldr',
-    host: getStringEnvVar('POSTGRES_HOST', 'localhost'),
-    user: getStringEnvVar('POSTGRES_USER', 'postgres'),
-    password: getStringEnvVar('POSTGRES_PASSWORD', 'password'),
-    uri: getStringEnvVar('POSTGRES_CONN_URI', 'postgres://postgres:password@localhost:5432/boldr'),
+    host: envVars.string('POSTGRES_HOST', 'localhost'),
+    user: envVars.string('POSTGRES_USER', 'postgres'),
+    password: envVars.string('POSTGRES_PASSWORD', 'password'),
+    uri: envVars.string('POSTGRES_CONN_URI', 'postgres://postgres:password@localhost:5432/boldr'),
     pool: {
       min: 2,
       max: 10,
     },
   },
   redis: {
-    uri: getStringEnvVar('REDIS_CONN_URI', 'redis://127.0.0.1:6379/1'),
+    uri: envVars.string('REDIS_CONN_URI', 'redis://127.0.0.1:6379/1'),
   },
   privateKey: null,
   publicKey: null,
   saltRounds: 10,
   token: {
-    secret: getStringEnvVar('TOKEN_SECRET', 'b0ldrs0s3cr3t'),
+    secret: envVars.string('TOKEN_SECRET', 'b0ldrs0s3cr3t'),
     expiration: 60 * 60 * 24, // 1 day
   },
   mail: {
-    host: getStringEnvVar('MAIL_HOST', ''),
-    user: getStringEnvVar('MAIL_USER', 'admin@boldr.io'),
-    password: getStringEnvVar('MAIL_PASSWORD', ''),
+    host: envVars.string('MAIL_HOST', ''),
+    user: envVars.string('MAIL_USER', 'admin@boldr.io'),
+    password: envVars.string('MAIL_PASSWORD', ''),
     port: 465,
     ssl: true,
     domain: 'boldr.io',
     from: 'boldr@boldr.io',
   },
   aws: {
-    keyId: getStringEnvVar('AWS_KEY_ID', ''),
-    keySecret: getStringEnvVar('AWS_KEY_SECRET', ''),
+    keyId: envVars.string('AWS_KEY_ID', ''),
+    keySecret: envVars.string('AWS_KEY_SECRET', ''),
     bucket: 'boldrcms',
     region: 'us-west-1',
   },
@@ -166,7 +167,7 @@ const config = {
     url: 'https://cdn.polyfill.io/v2/polyfill.min.js',
   },
 
-  // Configuration for the HTML pages (headers/titles/scripts/css/etc).
+  // Configuration for the Html pages (headers/titles/scripts/css/etc).
   // We make use of react-helmet to consume the values below.
   // @see https://github.com/nfl/react-helmet
   htmlPage: {
@@ -334,9 +335,3 @@ const config = {
     },
   },
 };
-
-// Create the filtered client configuration object.
-export const clientConfig = filterObject(config, clientConfigFilter);
-
-// Export the main config as the default export.
-export default config;

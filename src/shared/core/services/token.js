@@ -48,6 +48,14 @@ export const getAuthHeader = () => {
   return {};
 };
 
+export function requireAuth(nextState, replace) {
+  if (!isAuthenticated()) {
+    replace({
+      pathname: '/account/login',
+      state: { nextPathname: nextState.location.pathname }
+    })
+  }
+}
 export const isAuthenticated = () => {
   const token = parseJWT(getToken());
   if (!token) return false;

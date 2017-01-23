@@ -7,8 +7,7 @@ import { Provider } from 'react-redux';
 import Router from 'react-router/lib/Router';
 import match from 'react-router/lib/match';
 import browserHistory from 'react-router/lib/browserHistory';
-import { compose } from 'ramda';
-import after from 'lodash/after';
+
 import { syncHistoryWithStore } from 'react-router-redux';
 import WebFontLoader from 'webfontloader';
 import { trigger } from 'redial';
@@ -46,37 +45,63 @@ if (token) {
   dispatch(checkAuth(token));
 }
 
-function triggerLocals(event) {
-  return function() {
-    const { components, location, params } = this.state;
-    trigger(event, components, { dispatch, location, params });
-  };
-}
+const renderApp = () => {
+  const { pathname, search, hash } = window.location;
+  const location = `${pathname}${search}${hash}`;
+  match({ routes, location }, () => {
+    render(
+      <ReactHotLoader>
+        <AppRoot store={ store }>
+          <Router
+            history={ history }
+            routes={ routes }
+            helpers={ apiClient }
+          />
+        </AppRoot>
+      </ReactHotLoader>,
+      domNode
+    );
+  });
 
-const onRouteUpdate = compose(
-  after(2, triggerLocals('defer')),
-  after(3, triggerLocals('fetch'))
-);
+  return browserHistory.listen(location => {
+    match({ routes, location }, (error, redirectLocation, renderProps) => {
+      if (error) console.log(error);
+      // Get array of route handler components:
+      const { components } = renderProps;
 
-const renderApp = () => (
-  <ReactHotLoader>
-    <AppRoot store={ store }>
-        <Router
-          history={ history }
-          routes={ routes }
-          helpers={ apiClient }
-        />
-    </AppRoot>
-  </ReactHotLoader>
-);
+      // Define locals to be provided to all lifecycle hooks:
+      const locals = {
+        path: renderProps.location.pathname,
+        query: renderProps.location.query,
+        params: renderProps.params,
+
+        // Allow lifecycle hooks to dispatch Redux actions:
+        dispatch,
+      };
+
+      // Don't fetch data for initial route, server has already done the work:
+      if (window.__PRELOADED_STATE__) {
+        // Delete initial data so that subsequent data fetches can occur:
+        delete window.__PRELOADED_STATE__;
+      } else {
+        // Fetch mandatory data dependencies for 2nd route change onwards:
+        trigger('fetch', components, locals);
+      }
+
+      // Fetch deferred, client-only data dependencies:
+      trigger('defer', components, locals);
+    });
+  });
+};
+
+const unsubscribeHistory = renderApp();
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept(
     '../shared/scenes',
     () => {
-      require('../shared/scenes'),
-      render(renderApp(), domNode);
+      unsubscribeHistory();
+      setTimeout(renderApp);
     }
   );
 }
-render(renderApp(), domNode);

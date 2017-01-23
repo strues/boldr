@@ -136,7 +136,6 @@
     "normalizr": "3.1.0",
     "objection": "^0.6.2",
     "pg": "^6.1.2",
-    "ramda": "^0.23.0",
     "react": "15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-transition-group": "^15.4.2",
