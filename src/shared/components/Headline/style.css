@@ -1,0 +1,38 @@
+.h {
+	font-weight: 100;
+	margin: 0;
+	text-rendering: optimizeLegibility;
+
+	/*
+	 * Adjust the position of toolbox icons within headings
+	 */
+	[data-react-toolbox="font-icon"] {
+		margin-bottom: 4px;
+		margin-right: .25em;
+		vertical-align: middle;
+	}
+}
+.h1 {
+	font-size: 3rem;
+}
+.h2 {
+	font-size: 2rem;
+}
+.h3 {
+	font-size: 2rem;
+	margin-bottom: .5rem;
+}
+.h4 {
+	font-size: 1.5rem;
+	font-weight: 400;
+	margin-bottom: .5rem;
+}
+.h5 {
+	font-size: 1rem;
+	font-weight: 600;
+	margin-bottom: .5rem;
+}
+.h6 {
+	font-size: 1rem;
+	font-weight: 600;
+}

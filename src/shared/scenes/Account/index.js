@@ -7,7 +7,7 @@ export default (store, connect) => ({
   childRoutes: [{
     path: 'forgot-password',
     getComponent(nextState, cb) {
-      System.import('./ForgotPassword')
+      import('./ForgotPassword')
         .then(loadRoute(cb))
         .catch(errorLoading);
     },
@@ -15,7 +15,7 @@ export default (store, connect) => ({
   {
     path: 'login',
     getComponent(nextState, cb) {
-      System.import('./Login')
+      import('./Login')
         .then(loadRoute(cb))
         .catch(errorLoading);
     },
@@ -23,7 +23,7 @@ export default (store, connect) => ({
   {
     path: 'preferences',
     getComponent(nextState, cb) {
-      System.import('./Preferences')
+      import('./Preferences')
         .then(loadRoute(cb))
         .catch(errorLoading);
     },
@@ -55,7 +55,7 @@ export default (store, connect) => ({
   {
     path: 'signup',
     getComponent(nextState, cb) {
-      System.import('./Signup')
+      import('./Signup')
         .then(loadRoute(cb))
         .catch(errorLoading);
     },

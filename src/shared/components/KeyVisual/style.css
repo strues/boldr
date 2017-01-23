@@ -1,0 +1,57 @@
+.wrapper {
+	position: relative;
+	display: table;
+	background: #000;
+	height: 69vh;
+	width: 100%;
+}
+.isSmall {
+	height: 50vh;
+}
+.isTiny {
+	height: 30vh;
+}
+.mediaWrapper {
+	position: absolute;
+	overflow: hidden;
+	top: 0;
+	left: 0;
+	height: 100%;
+	width: 100%;
+}
+.mediaWrapper--faded {
+	opacity: .5;
+}
+.media,
+.media > img {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateX(-50%) translateY(-50%);
+	z-index: 0;
+	min-height: 100%;
+	min-width: 100%;
+	max-width: none;
+	max-height: none;
+	pointer-events: none;
+	height: auto;
+	width: auto;
+}
+.contents {
+	position: relative;
+	z-index: 1;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+	color: #FFF;
+}
+.contentsInner {
+	position: relative;
+	width: 90%;
+	max-width: 1700px;
+	margin: 0 auto;
+
+	> :last-child {
+		margin-bottom: 0;
+	}
+}

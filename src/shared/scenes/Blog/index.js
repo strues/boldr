@@ -9,7 +9,7 @@ export default (store, connect) => {
       getComponent(nextState, cb) {
         const importModules = Promise.all([
           // System.import('./reducer'),
-          System.import('./PostListing'),
+          import('./PostListing'),
         ]);
         const renderRoute = loadRoute(cb);
         importModules.then(([component]) => {
@@ -23,14 +23,14 @@ export default (store, connect) => {
     childRoutes: [{
       path: ':slug',
       getComponent(nextState, cb) {
-        System.import('./SinglePost')
+        import('./SinglePost')
         .then(loadRoute(cb))
         .catch(errorLoading);
       },
     }, {
       path: 'tags/:name',
       getComponent(nextState, cb) {
-        System.import('./TagList')
+        import('./TagList')
         .then(loadRoute(cb))
         .catch(errorLoading);
       },

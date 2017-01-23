@@ -1,6 +1,7 @@
 import DashboardContainer from './DashboardContainer';
+import DashboardLayout from './DashboardLayout';
 import Dashboard from './Dashboard';
 
-export default DashboardContainer;
+export default DashboardLayout;
 
-export { Dashboard, DashboardContainer };
+export { Dashboard, DashboardContainer, DashboardLayout };

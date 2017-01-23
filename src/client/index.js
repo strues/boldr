@@ -7,11 +7,9 @@ import { Provider } from 'react-redux';
 import Router from 'react-router/lib/Router';
 import match from 'react-router/lib/match';
 import browserHistory from 'react-router/lib/browserHistory';
-import applyRouterMiddleware from 'react-router/lib/applyRouterMiddleware';
 import { compose } from 'ramda';
 import after from 'lodash/after';
 import { syncHistoryWithStore } from 'react-router-redux';
-import useScroll from 'react-router-scroll/lib/useScroll';
 import WebFontLoader from 'webfontloader';
 import { trigger } from 'redial';
 import injectTapEventPlugin from 'react-tap-event-plugin';
@@ -61,21 +59,16 @@ const onRouteUpdate = compose(
 );
 
 const renderApp = () => (
-  <ReactHotLoader errorReporter={ require('redbox-react') }>
+  <ReactHotLoader>
     <AppRoot store={ store }>
         <Router
           history={ history }
           routes={ routes }
           helpers={ apiClient }
-          render={ applyRouterMiddleware(useScroll()) }
         />
     </AppRoot>
   </ReactHotLoader>
 );
-
-if (process.env.NODE_ENV === 'development') {
-  window.Perf = require('react-addons-perf');
-}
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept(
