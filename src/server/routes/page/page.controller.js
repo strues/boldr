@@ -1,6 +1,6 @@
 import uuid from 'uuid';
 import slugIt from '../../utils/slugIt';
-import Page from './page.model';
+import Page from '../../models/page';
 
 export async function listPages(req, res) {
   try {

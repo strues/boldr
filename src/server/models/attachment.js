@@ -1,8 +1,8 @@
 import { Model } from 'objection';
-import BaseModel from '../../core/base/BaseModel';
+import BaseModel from './base';
 // Related Models
-import User from '../user/user.model';
-import Post from '../post/post.model';
+import User from './user';
+import Post from './post';
 
 class Attachment extends BaseModel {
   static addTimestamps = true;

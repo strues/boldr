@@ -1,7 +1,7 @@
 import { Model } from 'objection';
-import Page from '../page/page.model.js';
-import BaseModel from '../../core/base/BaseModel';
-import Template from './template.model.js';
+import Role from '../role';
+import BaseModel from '../base';
+import User from '../user';
 
 /**
  * This is the pivot table connecting users to roles.
@@ -13,29 +13,29 @@ import Template from './template.model.js';
  * @see ../../../db/migrations/20160924191402_user_roles.js
  * @extends ./BaseModel
  */
-class TemplatePage extends BaseModel {
-  static tableName = 'template_page';
+class UserRole extends BaseModel {
+  static tableName = 'user_role';
   static addTimestamps = false;
   static addUUID = false;
 
   static relationMappings = {
     role: {
       relation: Model.BelongsToOneRelation,
-      modelClass: Template,
+      modelClass: Role,
       join: {
-        from: 'template_page.template_id',
-        to: 'template.id',
+        from: 'user_role.role_id',
+        to: 'role.id',
       },
     },
     user: {
       relation: Model.BelongsToOneRelation,
-      modelClass: Page,
+      modelClass: User,
       join: {
-        from: 'template_page.page_id',
-        to: 'page.id',
+        from: 'user_role.user_id',
+        to: 'user.id',
       },
     },
   };
 }
 
-export default TemplatePage;
+export default UserRole;

@@ -23,8 +23,8 @@ const ActivityWidget = (props: Props) => {
         props.activities.map(a =>
           <ListItem key={ a.id }
             leftAvatar={ <Avatar src={ a.owner.avatar_url } /> }
-            primaryText={ a.action }
-            secondaryText={ a.created_at }
+            primaryText={ a.actionType.type }
+
           />,
         )
       }

@@ -1,6 +1,6 @@
 import { Model } from 'objection';
-import BaseModel from '../../core/base/BaseModel';
-import User from '../user/user.model';
+import BaseModel from './base';
+import User from './user';
 
 class Token extends BaseModel {
   static get tableName() { return 'token'; }

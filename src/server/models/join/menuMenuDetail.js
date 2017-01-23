@@ -1,8 +1,9 @@
 import { Model } from 'objection';
-import MenuDetail from './detail/menuDetail.model';
-import Menu from './menu.model';
+import MenuDetail from '../menuDetail';
+import Menu from '../menu';
+import BaseModel from '../base';
 
-class MenuMenuDetail extends Model {
+class MenuMenuDetail extends BaseModel {
   static get tableName() {
     return 'menu_menu_detail';
   }

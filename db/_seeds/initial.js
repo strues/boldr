@@ -17,6 +17,7 @@ const tables = [
   'menu_menu_detail',
   'setting',
   'template_page',
+  'action_type',
 ];
 
 function seed(knex, Promise) {
@@ -338,7 +339,25 @@ function seed(knex, Promise) {
         description: 'Toggle allowing user\'s to register for accounts.',
         uuid: 'b86c5e47-71f6-4946-b0b7-546abedf74ae',
       }),
-    ]));
+    ]))
+    .then(() => Promise.all([
+      knex('action_type').insert({
+        id: 1,
+        type: 'create',
+      }),
+      knex('action_type').insert({
+        id: 2,
+        type: 'update',
+      }),
+      knex('action_type').insert({
+        id: 3,
+        type: 'delete',
+      }),
+      knex('action_type').insert({
+        id: 4,
+        type: 'register',
+      }),
+    ]))
 }
 
 module.exports = { seed };

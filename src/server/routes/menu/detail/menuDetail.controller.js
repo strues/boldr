@@ -1,10 +1,10 @@
 import uuid from 'uuid';
 import slugIt from '../../../utils/slugIt';
 import { InternalServer, responseHandler } from '../../../core/index';
-import Activity from '../../activity/activity.model';
-import Menu from '../menu.model';
-import MenuMenuDetail from '../joinMenuDetail.model';
-import MenuDetail from './menuDetail.model';
+import Activity from '../../../models/activity';
+import Menu from '../../../models/menu';
+import MenuMenuDetail from '../../../models/join/menuMenuDetail';
+import MenuDetail from '../../../models/menuDetail';
 
 const debug = require('debug')('boldrAPI:menuDetail-controller');
 
@@ -53,17 +53,12 @@ async function createDetail(req, res, next) {
       menu_detail_id: newLink.id,
     });
     debug(associateMenuDetail);
-    // await Activity.query().insert({
-    //   id: uuid(),
-    //   name: payload.name,
-    //   label: newLink.label,
-    //   user_id: req.user.id,
-    //   action: 'New link',
-    //   type: 'create',
-    //   data: { payload },
-    //   entry_uuid: newLink.uuid,
-    //   entry_table: 'link',
-    // });
+    await Activity.query().insert({
+      id: uuid(),
+      user_id: req.user.id,
+      action_type_id: 1,
+      activity_menu_detail: newLink.id,
+    });
 
     return responseHandler(res, 201, newLink);
   } catch (error) {

@@ -1,7 +1,6 @@
 import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
 import * as ctrl from './role.controller';
-import Role from './role.model';
 
 const router = new express.Router();
 /**

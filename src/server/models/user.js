@@ -1,13 +1,13 @@
 /* eslint-disable id-match */ /* eslint-disable no-unused-vars */
 import bcrypt from 'bcryptjs';
 import { Model } from 'objection';
-import BaseModel from '../../core/base/BaseModel';
+import BaseModel from './base';
 // Related Models
-import Role from '../role/role.model';
-import Attachment from '../attachment/attachment.model';
-import Token from '../token/token.model';
-import Post from '../post/post.model';
-import UserRole from './userRole.model';
+import Role from './role';
+import Attachment from './attachment';
+import Token from './token';
+import Post from './post';
+import UserRole from './join/userRole';
 
 const debug = require('debug')('boldrAPI:user-model');
 

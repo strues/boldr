@@ -1,5 +1,5 @@
 import { Model } from 'objection';
-import { BaseModel } from '../../core/index';
+import BaseModel from './base';
 
 class Setting extends BaseModel {
   static get tableName() { return 'setting'; }

@@ -1,8 +1,8 @@
 import { Model } from 'objection';
-import BaseModel from '../../core/base/BaseModel';
+import BaseModel from './base';
 // Related Model
-import User from '../user/user.model';
-import UserRole from '../user/userRole.model';
+import User from './user';
+import UserRole from './join/userRole';
 
 class Role extends BaseModel {
   static get tableName() {

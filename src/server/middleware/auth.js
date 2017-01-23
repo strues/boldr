@@ -3,7 +3,7 @@
  * src/server/middleware/auth
  */
 import jwt from 'jsonwebtoken';
-import User from '../routes/user/user.model';
+import User from '../models/user';
 import config from '../../../config';
 import sessionMiddleware from './session';
 

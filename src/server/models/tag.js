@@ -1,7 +1,7 @@
 import { Model } from 'objection';
-import { BaseModel } from '../../core/base';
+import BaseModel from './base';
 // Related Model
-import Post from '../post/post.model';
+import Post from './post';
 
 class Tag extends BaseModel {
   static get tableName() {

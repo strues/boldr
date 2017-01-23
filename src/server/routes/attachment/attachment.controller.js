@@ -3,8 +3,8 @@ import uuid from 'uuid';
 import s3 from '../../services/aws/s3';
 import { responseHandler } from '../../core/index';
 import config from '../../../../config';
-import Activity from '../activity/activity.model';
-import Attachment from './attachment.model';
+import Activity from '../../models/activity';
+import Attachment from '../../models/attachment';
 
 const debug = Debug('boldrAPI:attachment-controller');
 
@@ -30,15 +30,12 @@ export async function fromDashboard(req, res, next) {
     s3_key: req.body.s3_key,
   };
   const newAttachment = await Attachment.query().insertAndFetch(fileFields);
+
   await Activity.query().insert({
     id: uuid(),
-    name: newAttachment.file_name,
     user_id: req.user.id,
-    action: 'New upload',
-    type: 'create',
-    data: { newAttachment },
-    entry_uuid: newAttachment.id,
-    entry_table: 'attachment',
+    action_type_id: 1,
+    activity_attachment: newAttachment.id,
   });
   return responseHandler(res, 201, newAttachment);
 }
@@ -88,6 +85,12 @@ export async function deleteAttachment(req, res, next) {
       }
     });
     await Attachment.query().deleteById(req.params.id);
+    await Activity.query().insert({
+      id: uuid(),
+      user_id: req.user.id,
+      action_type_id: 3,
+      activity_attachment: req.params.id,
+    });
     return responseHandler(res, 204, 'Deleted file');
   } catch (error) {
     return res.status(500).json(error);

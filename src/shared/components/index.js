@@ -9,6 +9,11 @@ import PrimaryHeader from './PrimaryHeader';
 import Widget from './Widget';
 import Image from './Image';
 import Loader from './Loader';
+import Paragraph from './Paragraph';
+import Box from './Box';
+import Flag from './Flag';
+import Hamburger from './Hamburger';
+import KeyVisual from './KeyVisual';
 
 export {
   PrimaryHeader,
@@ -24,4 +29,9 @@ export {
   Image,
   Widget,
   Loader,
+  Paragraph,
+  Box,
+  Flag,
+  Hamburger,
+  KeyVisual,
 };

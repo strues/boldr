@@ -1,8 +1,8 @@
 import { Model } from 'objection';
-import { BaseModel } from '../../core/base';
+import BaseModel from './base';
 
 // Related Model
-import MenuDetail from './detail/menuDetail.model';
+import MenuDetail from './menuDetail';
 
 class Menu extends BaseModel {
   static get tableName() { return 'menu'; }

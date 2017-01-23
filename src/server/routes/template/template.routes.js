@@ -1,6 +1,5 @@
 import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
-import Template from './template.model';
 import * as ctrl from './template.controller';
 
 const router = new express.Router();

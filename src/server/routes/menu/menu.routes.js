@@ -1,7 +1,5 @@
 import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
-
-import Menu from './menu.model';
 import * as ctrl from './menu.controller';
 import detailRoutes from './detail/menuDetail.routes';
 

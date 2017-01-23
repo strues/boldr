@@ -2,9 +2,9 @@
 import uuid from 'uuid';
 import mailer from '../../services/mailer';
 import { passwordModifiedEmail, forgotPasswordEmail } from '../../services/mailer/templates';
-import User from '../user/user.model';
+import User from '../../models/user';
 import { responseHandler, generateHash } from '../../core';
-import Token from './token.model';
+import Token from '../../models/token';
 
 /**
  * forgottenPassword takes an email address, generates a reset token, updates the user in the database, then sends

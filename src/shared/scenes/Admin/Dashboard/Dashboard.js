@@ -25,7 +25,7 @@ const Dashboard = (props: Props) => {
     return (
       <div>
         <Row>
-          <Col xs={ 6 } md={ 9 }>
+          <Col xs={ 12 } md={ 9 }>
             <Row>
               <Col xs={ 6 } md={ 6 }>
                 <StatsWidget stats={ props.stats } />
@@ -45,6 +45,6 @@ const Dashboard = (props: Props) => {
         </Row>
       </div>
     );
-}
+};
 
 export default Dashboard;

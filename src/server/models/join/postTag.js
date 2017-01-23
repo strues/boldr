@@ -1,8 +1,9 @@
 import { Model } from 'objection';
-import Tag from '../tag/tag.model';
-import Post from './post.model';
+import Tag from '../tag';
+import Post from '../post';
+import BaseModel from '../base';
 
-class PostTag extends Model {
+class PostTag extends BaseModel {
   static get tableName() {
     return 'post_tag';
   }

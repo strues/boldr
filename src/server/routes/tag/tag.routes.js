@@ -1,6 +1,5 @@
 import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
-import Tag from './tag.model';
 import * as ctrl from './tag.controller';
 
 const router = new express.Router();

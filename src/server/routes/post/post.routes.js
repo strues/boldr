@@ -2,7 +2,6 @@ import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
 import { checkRole } from '../../middleware/rbac';
 import * as ctrl from './post.controller';
-import Post from './post.model';
 
 const router = express.Router();
 

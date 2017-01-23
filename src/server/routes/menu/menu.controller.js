@@ -1,6 +1,6 @@
 import { responseHandler, InternalServer } from '../../core/index';
 // Model
-import Menu from './menu.model';
+import Menu from '../../models/menu';
 
 export async function listMenu(req, res, next) {
   try {

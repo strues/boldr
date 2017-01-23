@@ -4,7 +4,7 @@ import uuid from 'uuid';
 import * as objection from 'objection';
 import { mailer, signToken } from '../../services/index';
 import { welcomeEmail } from '../../services/mailer/templates';
-import Token from '../token/token.model';
+import Token from '../../models/token';
 import {
   responseHandler,
   generateHash,
@@ -15,7 +15,7 @@ import {
   Unauthorized,
   Conflict,
 } from '../../core';
-import User from './user.model';
+import User from '../../models/user';
 
 const debug = require('debug')('boldrAPI:user-controller');
 

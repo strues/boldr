@@ -1,8 +1,8 @@
 
 import { responseHandler, Conflict, BadRequest } from '../../core/index';
-import Tag from '../tag/tag.model';
-import User from '../user/user.model';
-import Post from '../post/post.model';
+import Tag from '../../models/tag';
+import User from '../../models/user';
+import Post from '../../models/post';
 
 export async function getAllStats(req, res, next) {
   try {

@@ -3,10 +3,11 @@ import { responseHandler, Conflict, BadRequest } from '../../core/index';
 import slugIt from '../../utils/slugIt';
 
 // Models
-import Tag from '../tag/tag.model';
-import Activity from '../activity/activity.model';
-import Post from './post.model';
-import PostTag from './postTag.model';
+import Tag from '../../models/tag';
+import Activity from '../../models/activity';
+import ActionType from '../../models/actionType';
+import Post from '../../models/post';
+import PostTag from '../../models/join/postTag';
 
 const debug = require('debug')('boldrAPI:post-controller');
 
@@ -71,13 +72,9 @@ export async function createPost(req, res, next) {
 
   await Activity.query().insert({
     id: uuid(),
-    name: newPost.title,
     user_id: req.user.id,
-    action: 'New post',
-    type: 'create',
-    data: { newPost },
-    entry_uuid: newPost.id,
-    entry_table: 'post',
+    action_type_id: 1,
+    activity_post: newPost.id,
   });
   return responseHandler(res, 201, newPost);
 }
@@ -120,7 +117,12 @@ export async function destroy(req, res, next) {
       .delete()
       .where('id', req.params.id)
       .first();
-
+  await Activity.query().insert({
+    id: uuid(),
+    user_id: req.user.id,
+    action_type_id: 3,
+    activity_post: req.params.id,
+  });
   return res.status(204).send({});
 }
 
@@ -128,7 +130,15 @@ export function update(req, res) {
   debug(req.body);
   return Post.query()
     .patchAndFetchById(req.params.id, req.body)
-    .then(post => responseHandler(res, 202, post));
+    .then(async (post) => {
+      await Activity.query().insert({
+        id: uuid(),
+        user_id: req.user.id,
+        action_type_id: 2,
+        activity_post: post.id,
+      });
+      responseHandler(res, 202, post);
+    });
 }
 
 export async function addTag(req, res, next) {

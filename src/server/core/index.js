@@ -1,4 +1,3 @@
-import { BaseModel } from './base';
 import { generateHash, randomString, SALT } from './hashing';
 import responseHandler from './response';
 
@@ -17,7 +16,6 @@ from './errors';
 
 export {
   responseHandler,
-  BaseModel,
   BadRequest,
   Unauthorized,
   Forbidden,

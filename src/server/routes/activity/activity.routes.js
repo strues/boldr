@@ -1,7 +1,5 @@
 import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
-
-import Activity from './activity.model';
 import * as ctrl from './activity.controller';
 
 const router = new express.Router();

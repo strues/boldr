@@ -1,10 +1,10 @@
 import { Model } from 'objection';
 
 // Related Models
-import Tag from '../tag/tag.model';
-import User from '../user/user.model';
-import Attachment from '../attachment/attachment.model';
-import BaseModel from '../../core/base/BaseModel';
+import Tag from './tag';
+import User from './user';
+import Attachment from './attachment';
+import BaseModel from './base';
 
 class Post extends BaseModel {
   static get tableName() {

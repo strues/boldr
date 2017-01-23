@@ -1,5 +1,5 @@
 import { responseHandler } from '../../core';
-import Setting from './setting.model';
+import Setting from '../../models/setting';
 
 const debug = require('debug')('boldrAPI:settings-controller');
 

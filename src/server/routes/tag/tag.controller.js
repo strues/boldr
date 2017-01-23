@@ -1,5 +1,5 @@
 import { responseHandler } from '../../core';
-import Tag from './tag.model';
+import Tag from '../../models/tag';
 
 const debug = require('debug')('boldr:post-controller');
 

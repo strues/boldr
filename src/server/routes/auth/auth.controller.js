@@ -2,8 +2,9 @@ import uuid from 'uuid';
 import * as objection from 'objection';
 import { mailer, signToken } from '../../services/index';
 import { welcomeEmail } from '../../services/mailer/templates';
-import User from '../user/user.model';
-import Token from '../token/token.model';
+import User from '../../models/user';
+import Activity from '../../models/activity';
+import Token from '../../models/token';
 import {
   responseHandler,
   generateHash,
@@ -74,7 +75,12 @@ export async function registerUser(req, res, next) {
          user_verification_token: verificationToken,
          user_id: user.id,
        });
-
+    await Activity.query().insert({
+      id: uuid(),
+      user_id: user.id,
+      action_type_id: 4,
+      activity_user: user.id,
+    });
     if (!verificationEmail) {
       return next(new InternalServer());
     }

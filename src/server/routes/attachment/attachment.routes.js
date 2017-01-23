@@ -2,7 +2,6 @@ import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
 import { checkRole } from '../../middleware/rbac';
 import * as ctrl from './attachment.controller';
-import Attachment from './attachment.model';
 
 const router = express.Router();
 

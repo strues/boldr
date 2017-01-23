@@ -1,6 +1,6 @@
 import { Model } from 'objection';
-import { BaseModel } from '../../core';
-import Page from '../page/page.model';
+import BaseModel from './base';
+import Page from './page';
 
 class Template extends BaseModel {
   static get tableName() { return 'template'; }

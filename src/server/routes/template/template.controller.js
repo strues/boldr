@@ -1,6 +1,6 @@
 import uuid from 'uuid';
 import slugIt from '../../utils/slugIt';
-import Template from './template.model';
+import Template from '../../models/template';
 
 export async function listTemplates(req, res) {
   try {
