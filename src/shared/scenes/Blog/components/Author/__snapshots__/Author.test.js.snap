@@ -1,0 +1,41 @@
+exports[`<Author /> renders snapshot 1`] = `
+<div
+  className="boldr-post__sidebar-author">
+  <List>
+    <ListItem
+      activeClassName="md-text--theme-primary"
+      component="div"
+      disabled={true}
+      expanderIconChildren="keyboard_arrow_down"
+      leftAvatar={
+        <Avatar
+          role="presentation"
+          src="abcd"
+          suffixes={
+            Array [
+              "red",
+              "pink",
+              "purple",
+              "deep-purple",
+              "indigo",
+              "blue",
+              "light-blue",
+              "cyan",
+              "teal",
+              "green",
+              "light-green",
+              "lime",
+              "yellow",
+              "amber",
+              "orange",
+              "deep-orange",
+              "brown",
+              "grey",
+              "blue-grey",
+            ]
+          } />
+      }
+      primaryText={NaN} />
+  </List>
+</div>
+`;

@@ -26,7 +26,7 @@ describe('<PostCard />', () => {
 
   });
   it('renders snapshot', () => {
-    const wrapper = shallow(<PostCard />);
+    const wrapper = shallow(<PostCard title="Test Post" />);
     expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
 });
