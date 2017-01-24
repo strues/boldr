@@ -3,7 +3,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { provideHooks } from 'redial';
-import { List, ListItem } from 'material-ui/List';
+import List from 'react-md/lib/Lists/List';
+import ListItem from 'react-md/lib/Lists/ListItem';
 import { fetchTaggedPost } from '../../../../../state/modules/blog/tags/actions';
 
 type Props = {

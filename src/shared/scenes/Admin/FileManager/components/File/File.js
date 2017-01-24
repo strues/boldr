@@ -1,8 +1,12 @@
 import React, { PropTypes } from 'react';
-import { Card, CardActions, CardMedia, CardTitle } from 'material-ui/Card';
-import IconButton from 'material-ui/IconButton';
-import RemoveIcon from 'material-ui/svg-icons/action/delete-forever';
-import EditIcon from 'material-ui/svg-icons/editor/mode-edit';
+import Card from 'react-md/lib/Cards/Card';
+import CardTitle from 'react-md/lib/Cards/CardTitle';
+import CardActions from 'react-md/lib/Cards/CardActions';
+import CardText from 'react-md/lib/Cards/CardText';
+import Media, { MediaOverlay } from 'react-md/lib/Media';
+import Avatar from 'react-md/lib/Avatars';
+import Button from 'react-md/lib/Buttons';
+import FontIcon from 'react-md/lib/FontIcons';
 
 type Props = {
   removeMedia?: Function,
@@ -26,16 +30,21 @@ const File = (props: Props) => {
 
   return (
       <Card className="boldr-filecard">
-      <CardMedia overlay={ <CardTitle title={ props.file.filename } /> }>
-        <img src={ props.file.url } alt={ props.file.filename } />
-      </CardMedia>
+        <Media>
+          <img src={ props.file.url } alt={ props.file.filename } role="presentation" />
+          <MediaOverlay>
+            <CardTitle title={ props.file.filename }>
+              <Button className="md-cell--right" icon>star_outline</Button>
+            </CardTitle>
+          </MediaOverlay>
+        </Media>
         <CardActions>
-          <IconButton onClick={ handleSelect } tooltip="Edit image">
-            <EditIcon />
-          </IconButton>
-          <IconButton onClick={ handleclick } tooltip="Permanently delete">
-            <RemoveIcon />
-          </IconButton>
+          <Button icon onClick={ handleSelect }>
+            <FontIcon>mode_edit</FontIcon>
+          </Button>
+          <Button icon onClick={ handleclick }>
+            <FontIcon>delete_forever</FontIcon>
+          </Button>
         </CardActions>
       </Card>
   );

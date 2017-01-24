@@ -1,23 +1,26 @@
 /* @flow */
 import React from 'react';
-import Dialog from 'material-ui/Dialog';
-import FlatButton from 'material-ui/FlatButton';
+import Dialog from 'react-md/lib/Dialogs';
+import Button from 'react-md/lib/Buttons/Button';
 import type { ReactChildren } from '../../types/react';
 
 type Props = {
   onClose: () => void,
   children: ReactChildren,
   title: String,
-  open: Boolean,
+  visible: Boolean,
 };
 
 const Modal = (props: Props) => {
   return (
     <Dialog
+      id="adminModal"
       title={ props.title }
-      actions={ <FlatButton label="Close" primary onTouchTap={ props.onClose } /> }
-      open={ props.open }
-      onRequestClose={ props.onClose }
+      actions={ <Button label="Close" flat primary onClick={ props.onClose } /> }
+      aria-labelledby="contentModal"
+      visible={ props.visible }
+      onHide={ props.onClose }
+      modal
     >
       { props.children }
     </Dialog>

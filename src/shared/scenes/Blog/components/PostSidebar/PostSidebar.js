@@ -1,7 +1,6 @@
 /* @flow */
 import React from 'react';
-import Paper from 'material-ui/Paper';
-
+import Paper from 'react-md/lib/Papers';
 import { Heading, Col } from '../../../../components/index';
 import type { User, Tag } from '../../../../types/models';
 import Author from '../Author';

@@ -1,10 +1,8 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import TextField from 'material-ui/TextField';
-import { Card, CardTitle, CardActions, CardText } from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
-import { Grid, Col, Row } from '../../../components/index';
+
+import FormCard from '../../../components/Form/FormCard';
 import { resetPassword } from '../../../state/modules/account/actions';
 import ResetPasswordForm from './ResetPasswordForm';
 
@@ -28,22 +26,10 @@ class ResetPassword extends Component {
   render() {
     return (
       <div>
-        <Grid fluid>
-        <Row>
-          <Col xs={ 12 }>
-            <Row xsCenter>
-              <Col xs={ 6 }>
-                <Card style={ { width: '450px', marginTop: '50px' } }>
-                    <CardTitle title="Reset Password" />
-                    <CardText>
-                  <ResetPasswordForm onSubmit={ this.handleReset } />
-                  </CardText>
-                </Card>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Grid>
+        <FormCard
+          title="Reset Password"
+          form={ <ResetPasswordForm onSubmit={ this.handleReset } /> }
+        />
       </div>
     );
   }

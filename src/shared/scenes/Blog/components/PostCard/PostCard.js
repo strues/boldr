@@ -3,9 +3,13 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import dateFns from 'date-fns';
-import RaisedButton from 'material-ui/RaisedButton';
-import Divider from 'material-ui/Divider';
-import { Card, CardActions, CardMedia, CardTitle, CardText } from 'material-ui/Card';
+import Button from 'react-md/lib/Buttons/Button';
+import Divider from 'react-md/lib/Dividers';
+import Card from 'react-md/lib/Cards/Card';
+import CardTitle from 'react-md/lib/Cards/CardTitle';
+import CardActions from 'react-md/lib/Cards/CardActions';
+import CardText from 'react-md/lib/Cards/CardText';
+import Media, { MediaOverlay } from 'react-md/lib/Media';
 import { selectPost } from '../../../../state/modules/blog/posts/actions';
 import { Col, Row } from '../../../../components/Layout';
 import type { Tag } from '../../../../types/models';
@@ -60,18 +64,21 @@ export const PostCard = (props: Props) => {
   return (
     <div className="boldr-post__card-wrapper">
       <Card>
-        <CardMedia
-          overlay={ <CardTitle title={ props.title } subtitle={ formattedDate } /> }
-        >
-          <img src={ props.feature_image } />
-        </CardMedia>
+        <Media>
+          <img src={ props.feature_image } role="presentation" />
+          <MediaOverlay>
+           <CardTitle title={ props.title } subtitle={ formattedDate }>
+             <Button className="md-cell--right" icon>star_outline</Button>
+           </CardTitle>
+         </MediaOverlay>
+        </Media>
         <CardText>
           { props.excerpt }
           <Row>
             <Col xs={ 12 }>
               { /* $FlowIssue */}
               <Link to={ `/blog/${props.slug}` } style={ { float: 'right', marginTop: '15px', marginRight: '15px' } }>
-                <RaisedButton primary label="Read More" onClick={ transitionPost } />
+                <Button raised primary label="Read More" onClick={ transitionPost } />
               </Link>
             </Col>
           </Row>

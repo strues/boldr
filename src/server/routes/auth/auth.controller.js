@@ -75,15 +75,15 @@ export async function registerUser(req, res, next) {
          user_verification_token: verificationToken,
          user_id: user.id,
        });
-    await Activity.query().insert({
-      id: uuid(),
-      user_id: user.id,
-      action_type_id: 4,
-      activity_user: user.id,
-    });
     if (!verificationEmail) {
       return next(new InternalServer());
     }
+  });
+  await Activity.query().insert({
+    id: uuid(),
+    user_id: payload.id,
+    action_type_id: 4,
+    activity_user: payload.id,
   });
    // Massive transaction is finished, send the data to the user.
   return responseHandler(res, 201, newUser);
@@ -115,7 +115,7 @@ export async function loginUser(req, res, next) {
     return next(new UserNotVerifiedError());
   }
   const validAuth = await user.authenticate(req.body.password);
-  if (!validAuth) return next(new Unauthorized(err));
+  if (!validAuth) return next(new Unauthorized());
   // remove the password from the response.
   user.stripPassword();
   // sign the token

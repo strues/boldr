@@ -214,3 +214,34 @@ const errorUpdatingPost = (err) => {
     error: err,
   };
 };
+
+export function fetchPostFromSlug(slug) {
+  return (dispatch: Function) => {
+    dispatch(requestPostFromSlug());
+    return api.getPostBySlug(slug)
+      .then(response => {
+        if (response.status !== 200) {
+          dispatch(receivePostFromSlugFailed());
+        }
+        const data = response.body;
+        dispatch(receivePostFromSlug(data));
+      })
+      .catch(err => {
+        dispatch(receivePostFromSlugFailed(err));
+      });
+  };
+}
+const requestPostFromSlug = () => {
+  return { type: t.GET_POST_REQUEST };
+};
+
+const receivePostFromSlug = (data) => {
+  return {
+    type: t.GET_POST_SUCCESS,
+    payload: data,
+  };
+};
+
+const receivePostFromSlugFailed = (err) => ({
+  type: t.GET_POST_FAILURE, error: err,
+});

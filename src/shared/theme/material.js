@@ -37,6 +37,9 @@ const materialStyle = {
     clockCircleColor,
     shadowColor,
   },
+  listItem: {
+    rightIconColor: '#fff',
+  },
   // eslint-disable-next-line
   userAgent: (typeof req !== 'undefined') ? req.headers['user-agent'] : false
 };

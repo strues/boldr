@@ -6,7 +6,7 @@ import { showModal, hideModal } from '../../../state/modules/boldr/ui/actions';
 import { MembersList, EditMemberForm } from './components';
 
 type Props = {
-  open: boolean,
+  visible: boolean,
   close: Function,
   initialValues: Object,
   users: Array<Object>,
@@ -19,7 +19,7 @@ const Members = (props: Props) => {
      <div>
        <MembersList toggleUser={ props.toggleUser } users={ props.users } />
        <Modal
-         open={ props.open }
+         visible={ props.visible }
          title="Edit User"
          onClose={ props.close }
        >

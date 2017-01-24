@@ -1,0 +1,223 @@
+////
+/// @group navigation-drawers
+////
+@import 'drawers';
+@import 'toolbars';
+
+/// Boolean if the navigation drawer's content should use the `height` attribute instead of
+/// the `max-height`. When this is true, only the content will be scrollable instead of the
+/// entire window.
+/// @type Boolean
+$md-navigation-drawer-enforce-height: false !default;
+
+/// Boolean if the cross-fade transiiton should be included. This is used when the content
+/// changes.
+/// @type Boolean
+$md-navigation-drawer-include-cross-fade: true !default;
+
+/// The transition time for the cross-fade transition.
+/// @type Number
+$md-cross-fade-transition-time: $md-transition-time * 2 !default;
+
+/// The distance that the new content should move during the cross-fade transition.
+/// @type Number
+$md-cross-fade-distance: 16px !default;
+
+/// Includes the styles for navigation drawers. This really depends on the styles for toolbars and drawers.
+///
+/// @example scss - Example Usage SCSS
+///   @include react-md-navigation-drawers;
+///
+/// @see react-md-drawers
+/// @see react-md-toolbars
+/// @param {Boolean} include-media [$md-media-included] - Boolean if the media queries should be included.
+/// @param {Boolean} include-cross-fade [$md-navigation-drawer-include-cross-fade] - Boolean if the cross
+///   fade transiiton should be included.
+@mixin react-md-navigation-drawers($include-media: $md-media-included, $include-cross-fade: $md-navigation-drawer-include-cross-fade, $enforce-height: $md-navigation-drawer-enforce-height) {
+  @if $include-media {
+    @include react-md-navigation-drawers-media($enforce-height);
+  }
+
+  .md-toolbar {
+    &.md-toolbar--over-drawer {
+      z-index: $md-drawer-z-index + 2;
+    }
+  }
+
+  .md-title--drawer-active.md-title--drawer-active {
+    transition-duration: $md-drawer-transition-time;
+    transition-property: margin-left;
+  }
+
+  .md-navigation-drawer-content {
+    &:focus {
+      outline: none;
+    }
+
+    @if $md-navigation-drawer-enforce-height {
+      overflow-y: auto;
+    }
+
+    &--inactive {
+      margin-left: 0;
+    }
+
+    &--active {
+      transition-duration: $md-drawer-transition-time;
+      transition-property: margin-left;
+    }
+
+    &--prominent-offset {
+      $height: calc(100vh - #{$md-toolbar-mobile-prominent-height});
+
+      @if $md-navigation-drawer-enforce-height {
+        height: $height;
+      } @else {
+        min-height: $height;
+      }
+    }
+  }
+
+  .md-title.md-title--permanent-offset {
+    margin-left: $md-drawer-tablet-width + 20px;
+  }
+
+  .md-drawer .md-title--toolbar-offset {
+    margin-left: $md-default-padding;
+  }
+
+  @if $include-cross-fade {
+    .md-cross-fade-enter {
+      opacity: .01;
+      transform: translate3d(0, $md-cross-fade-distance, 0);
+
+      &.md-cross-fade-enter-active {
+        opacity: 1;
+        transform: translate3d(0, 0, 0);
+        transition-duration: $md-cross-fade-transition-time;
+        transition-property: transform, opacity;
+      }
+    }
+  }
+}
+
+/// Includes the styles for the navigation drawer content on mobile devices.
+/// This should be used within a media query.
+///
+/// @example scss - Example Usage SCSS
+///   @media #{$md-mobile-media} {
+///     @include react-md-navigation-drawers-portrait;
+///   }
+///
+/// @param {Boolean} enforce-height [$md-navigation-drawer-enforce-height] - Boolean if the drawer's content
+///     height should be strictly enforced. This will use the `height` attribute instead of the `max-height`.
+/// @group navigation-drawers, media-queries
+@mixin react-md-navigation-drawers-mobile($enforce-height: $md-navigation-drawer-enforce-height) {
+  .md-navigation-drawer-content {
+    $height: calc(100vh - #{$md-toolbar-mobile-portrait-height});
+
+    @if $md-navigation-drawer-enforce-height {
+      height: $height;
+    } @else {
+      min-height: $height;
+    }
+  }
+}
+
+
+/// Includes the styles for the navigation drawer content on mobile landscape devices.
+/// This should be used within a media query.
+///
+/// @example scss - Example Usage SCSS
+///   @media #{$md-mobile-landscape-media} {
+///     @include react-md-navigation-drawers-mobile-landscape;
+///   }
+///
+/// @param {Boolean} enforce-height [$md-navigation-drawer-enforce-height] - Boolean if the drawer's content
+///     height should be strictly enforced. This will use the `height` attribute instead of the `max-height`.
+/// @group navigation-drawers, media-queries
+@mixin react-md-navigation-drawers-mobile-landscape($enforce-height: $md-navigation-drawer-enforce-height) {
+  .md-navigation-drawer-content {
+    $height: calc(100vh - #{$md-toolbar-mobile-landscape-height});
+
+    @if $md-navigation-drawer-enforce-height {
+      height: $height;
+    } @else {
+      min-height: $height;
+    }
+  }
+}
+
+
+/// Includes the styles for the navigation drawer content on tablets.
+/// This should be used within a media query.
+///
+/// @example scss - Example Usage SCSS
+///   @media #{$md-tablet-media} {
+///     @include react-md-navigation-drawers-tablet;
+///   }
+///
+/// @param {Boolean} enforce-height [$md-navigation-drawer-enforce-height] - Boolean if the drawer's content
+///     height should be strictly enforced. This will use the `height` attribute instead of the `max-height`.
+/// @group navigation-drawers, media-queries
+@mixin react-md-navigation-drawers-tablet($enforce-height: $md-navigation-drawer-enforce-height) {
+  .md-navigation-drawer-content {
+    $height: calc(100vh - #{$md-toolbar-tablet-height});
+
+    @if $md-navigation-drawer-enforce-height {
+      height: $height;
+    } @else {
+      min-height: $height;
+    }
+  }
+
+  .md-title.md-title--persistent-offset {
+    margin-left: $md-drawer-tablet-width - $md-btn-icon-size - 12px + 20px;
+  }
+}
+
+
+/// Includes the styles for the navigation drawer content on desktop screens.
+/// This should be used within a media query.
+///
+/// @example scss - Example Usage SCSS
+///   @media #{$md-desktop-media} {
+///     @include react-md-navigation-drawers-desktop;
+///   }
+///
+/// @param {Boolean} enforce-height [$md-navigation-drawer-enforce-height] - Boolean if the drawer's content
+///     height should be strictly enforced. This will use the `height` attribute instead of the `max-height`.
+/// @group navigation-drawers, media-queries
+@mixin react-md-navigation-drawers-desktop {
+  .md-title.md-title--persistent-offset {
+    margin-left: $md-drawer-desktop-width - $md-btn-icon-size - 12px + 20px;
+  }
+}
+
+/// Includes the media queries and styles for navigation drawers.
+///
+/// @example scss - Example Usage SCSS
+///   @include react-md-navigation-drawers-media;
+///
+/// @param {Boolean} enforce-height [$md-navigation-drawer-enforce-height] - Boolean if the drawer's content
+///     height should be strictly enforced. This will use the `height` attribute instead of the `max-height`.
+/// @group navigation-drawers, media-queries
+@mixin react-md-navigation-drawers-media($enforce-height: $md-navigation-drawer-enforce-height) {
+  @media #{$md-mobile-media} {
+    @include react-md-navigation-drawers-mobile($enforce-height);
+  }
+
+  @media #{$md-mobile-landscape-media} {
+    @include react-md-navigation-drawers-mobile-landscape($enforce-height);
+  }
+
+  @media #{$md-tablet-media} {
+    @include react-md-navigation-drawers-tablet($enforce-height);
+  }
+
+  @if $md-drawer-tablet-width != $md-drawer-desktop-width {
+    @media #{$md-desktop-media} {
+      @include react-md-navigation-drawers-desktop;
+    }
+  }
+}

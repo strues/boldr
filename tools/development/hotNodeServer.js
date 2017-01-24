@@ -39,6 +39,14 @@ class HotNodeServer {
       });
 
       newServer.stdout.on('data', data => console.log(data.toString().trim()));
+      newServer.stderr.on('data', (data) => {
+        log({
+          title: name,
+          level: 'error',
+          message: 'Error in server execution, check the console for more info.',
+        });
+        console.error(data.toString().trim());
+      });
 
       this.server = newServer;
     };

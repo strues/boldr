@@ -12,7 +12,7 @@ import getClientBundleEntryAssets from './getClientBundleEntryAssets';
 import getSerializedClientConfig from './getSerializedClientConfig';
 import config from '../../../shared/core/utils/config';
 
-import HTML from '../../../shared/components/HTML';
+import Html from '../../../shared/components/Html';
 
 // PRIVATES
 
@@ -37,7 +37,7 @@ function stylesheetTag(styles: Array<string>) {
     .join('\n');
 }
 function scriptTag(jsFilePath) {
-  return <script type="text/javascript" src={jsFilePath} />;
+  return <script type="text/javascript" src={ jsFilePath } />;
 }
 
 // COMPONENT
@@ -54,9 +54,9 @@ function ServerHTML(props) {
   // Creates an inline script definition that is protected by the nonce.
   const inlineScript = body => (
     <script
-      nonce={nonce}
+      nonce={ nonce }
       type="text/javascript"
-      dangerouslySetInnerHTML={{ __html: body }}
+      dangerouslySetInnerHTML={ { __html: body } }
     />
   );
 
@@ -102,15 +102,15 @@ function ServerHTML(props) {
   ]);
 
   return (
-    <HTML
-      title={config('htmlPage.defaultTitle')}
-      description={config('htmlPage.description')}
-      appBodyString={reactAppString}
+    <Html
+      title={ config('htmlPage.defaultTitle') }
+      description={ config('htmlPage.description') }
+      appBodyString={ reactAppString }
       headerElements={
-        headerElements.map((x, idx) => <KeyedComponent key={idx}>{x}</KeyedComponent>)
+        headerElements.map((x, idx) => <KeyedComponent key={ idx }>{x}</KeyedComponent>)
       }
       bodyElements={
-        bodyElements.map((x, idx) => <KeyedComponent key={idx}>{x}</KeyedComponent>)
+        bodyElements.map((x, idx) => <KeyedComponent key={ idx }>{x}</KeyedComponent>)
       }
     />
   );

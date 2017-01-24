@@ -1,8 +1,7 @@
 /* @flow */
 import React from 'react';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import GridIcon from 'material-ui/svg-icons/action/view-module';
-import ListIcon from 'material-ui/svg-icons/action/view-list';
+import Button from 'react-md/lib/Buttons/Button';
+import FontIcon from 'react-md/lib/FontIcons';
 import type { Post } from '../../../types/models';
 import { Grid, Row, Col, Loader } from '../../../components/index';
 import PostCard from '../components/PostCard';
@@ -56,12 +55,12 @@ const PostListing = (props: Props) => {
       }
       {
         props.layout === 'grid' ?
-        <FloatingActionButton secondary style={ style } onClick={ props.handleChangeLayout } >
-          <ListIcon />
-        </FloatingActionButton> :
-        <FloatingActionButton secondary style={ style } onClick={ props.handleChangeLayout } >
-          <GridIcon />
-        </FloatingActionButton>
+        <Button floating secondary style={ style } onClick={ props.handleChangeLayout } >
+          <FontIcon>view_list</FontIcon>
+        </Button> :
+          <Button floating secondary style={ style } onClick={ props.handleChangeLayout } >
+          <FontIcon>view_module</FontIcon>
+        </Button>
       }
     </Grid>
   );

@@ -37,6 +37,20 @@
         "NODE_ENV": "development",
         "BABEL_ENV": "development"
       }
+    },
+    "migrate": {
+      "command": "knex migrate:latest",
+      "env": {
+        "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr_test",
+        "NODE_ENV": "development"
+      }
+    },
+    "seed": {
+      "command": "knex seed:run",
+      "env": {
+        "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr_test",
+        "NODE_ENV": "development"
+      }
     }
   },
   "scripts": {
@@ -50,14 +64,12 @@
     "development": "babel-node tools/development",
     "flow": "babel-node tools/scripts/flow",
     "flow:defs": "flow-typed install --overwrite",
-    "flow:report": "flow-coverage-report -i 'src/**/*.js' -t html -t json -t text",
     "flow:remove": "babel-node tools/scripts/removeFlow && rimraf tools/scripts/removeFlow.js",
     "lint": "eslint src",
-    "knex": "node_modules/.bin/knex",
-    "migrate": "POSTGRES_CONN_URI=postgres://postgres:password@localhost:5432/boldr knex migrate:latest",
-    "seed": "POSTGRES_CONN_URI=postgres://postgres:password@localhost:5432/boldr knex seed:run",
+    "knex": "./node_modules/.bin/knex",
+    "migrate": "better-npm-run migrate",
+    "seed": "better-npm-run seed",
     "start": "NODE_ENV=production node bin/boldr",
-    "start:cms": "NODE_ENV=production pm2 start boldrCMS/server/index.js --name boldrSSR -e logs/boldrSSR-error.log",
     "test:ci": "NODE_ENV=test CI=true jest -w 2 --coverage",
     "test": "jest",
     "test:watch": "NODE_ENV=test jest"
@@ -69,13 +81,9 @@
     },
     "collectCoverage": true,
     "coveragePathIgnorePatterns": [
-      "<rootDir>/tools/",
-      "<rootDir>/config/",
-      "<rootDir>/docs/",
+      "<rootDir>/(tools|config|docs|boldrCMS|.happypack|bin|.idea|public|db)/",
       "/flow-typed/",
       "/node_modules/",
-      "<rootDir>/boldrCMS/",
-      "<rootDir>/.happypack/",
       "<rootDir>/src/shared/theme/",
       "<rootDir>/src/shared/types/"
     ],
@@ -84,12 +92,16 @@
     },
     "testRegex": ".*.test\\.js",
     "setupTestFrameworkScriptFile": "<rootDir>/tools/test/setup.js",
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/enzyme-to-json/serializer"
+    ],
     "testPathIgnorePatterns": [
-      "<rootDir>/boldrCMS/",
+      "<rootDir>/(tools|config|docs|boldrCMS|.happypack|bin|.idea|public|db)/",
       "__snapshots__"
     ],
     "transformIgnorePatterns": [
       "/node_modules/",
+      "/.happypack/",
       "/db/"
     ],
     "coverageReporters": [
@@ -126,7 +138,6 @@
     "jsonwebtoken": "^7.2.1",
     "knex": "^0.12.6",
     "lodash": "^4.17.4",
-    "material-ui": "0.16.7",
     "method-override": "^2.3.7",
     "moment": "^2.17.1",
     "morgan": "^1.7.0",
@@ -141,15 +152,13 @@
     "react-addons-transition-group": "^15.4.2",
     "react-dom": "15.4.2",
     "react-helmet": "4.0.0",
-    "react-icons": "^2.2.3",
+    "react-md": "^1.0.1",
     "react-redux": "5.0.2",
     "react-router": "^3.0.2",
     "react-router-redux": "^4.0.7",
-    "react-tap-event-plugin": "^2.0.1",
     "redial": "^0.5.0",
     "redux": "^3.6.0",
     "redux-form": "^6.4.3",
-    "redux-form-material-ui": "^4.1.2",
     "redux-logger": "^2.7.4",
     "redux-thunk": "^2.2.0",
     "reselect": "^2.5.4",

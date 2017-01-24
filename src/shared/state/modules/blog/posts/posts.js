@@ -40,9 +40,11 @@ const isFetching = (state = false, action) => {
   switch (action.type) {
     case t.FETCH_POSTS_REQUEST:
     case t.CREATE_POST_REQUEST:
+    case t.GET_POST_REQUEST:
       return true;
     case t.FETCH_POSTS_SUCCESS:
     case t.CREATE_POST_SUCCESS:
+    case t.GET_POST_SUCCESS:
       return false;
     default:
       return state;
@@ -55,6 +57,11 @@ const currentPost = (state = {}, action) => {
       return {
         ...state,
         ...action.post,
+      };
+    case t.GET_POST_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
       };
     default:
       return state;

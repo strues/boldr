@@ -5,21 +5,25 @@ import ActivityWidget from './ActivityWidget';
 const act = [
   {
     id: 'asdfasdfasdf',
-    action: 'create',
+    actionType: {
+      id: 4,
+      type: 'register',
+    },
     created_at: '08/01/1000',
     owner: {
-      display_name: 'Me',
+      avatar_url: 'Me',
     },
-    name: 'new',
   },
   {
     id: 'asdfasdfasdf',
-    action: 'create',
+    actionType: {
+      id: 4,
+      type: 'register',
+    },
     created_at: '08/01/1000',
     owner: {
-      display_name: 'Me',
+      avatar_url: 'Me',
     },
-    name: 'new',
   },
 ];
 

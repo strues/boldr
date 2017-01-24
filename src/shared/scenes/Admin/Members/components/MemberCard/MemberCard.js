@@ -1,6 +1,11 @@
 import React, { PropTypes } from 'react';
-import { Card, CardActions, CardHeader, CardText } from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
+import Card from 'react-md/lib/Cards/Card';
+import CardTitle from 'react-md/lib/Cards/CardTitle';
+import CardActions from 'react-md/lib/Cards/CardActions';
+import CardText from 'react-md/lib/Cards/CardText';
+import Media, { MediaOverlay } from 'react-md/lib/Media';
+import Avatar from 'react-md/lib/Avatars';
+import Button from 'react-md/lib/Buttons';
 
 const propTypes = {
   user: PropTypes.object,
@@ -13,10 +18,10 @@ const MemberCard = (props) => {
   }
   return (
     <Card>
-       <CardHeader
+       <CardTitle
          title={ props.user.display_name }
          subtitle={ props.user.roles[0].name }
-         avatar={ props.user.avatar_url }
+         avatar={ <Avatar src={ props.user.avatar_url } role="presentation" /> }
        />
 
        <CardText>
@@ -25,7 +30,7 @@ const MemberCard = (props) => {
         { props.user.email }
       </CardText>
      <CardActions>
-         <RaisedButton primary label="Edit User" onClick={ handleToggle } />
+         <Button raised primary label="Edit User" onClick={ handleToggle } />
      </CardActions>
    </Card>
   );

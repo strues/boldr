@@ -6,7 +6,7 @@ import { PostCard } from './PostCard';
 
 describe('<PostCard />', () => {
   it('renders <PostCard /> without breaking', () => {
-    const wrapper = shallow(<PostCard />);
+    const wrapper = shallow(<PostCard title="blah" />);
     expect(wrapper.find('div').length).toBe(1);
   });
 

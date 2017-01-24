@@ -1,7 +1,7 @@
-import Sidebar from './Sidebar/Sidebar';
+import StatsWidget from './StatsWidget';
 import ActivityWidget from './ActivityWidget';
 
 export {
-  Sidebar,
+  StatsWidget,
   ActivityWidget,
 };

@@ -14,6 +14,7 @@ import Box from './Box';
 import Flag from './Flag';
 import Hamburger from './Hamburger';
 import KeyVisual from './KeyVisual';
+import KebabMenu from './KebabMenu';
 
 export {
   PrimaryHeader,
@@ -33,5 +34,6 @@ export {
   Box,
   Flag,
   Hamburger,
+  KebabMenu,
   KeyVisual,
 };

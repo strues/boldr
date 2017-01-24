@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
-import { RadioButtonGroup, TextField } from 'redux-form-material-ui';
-import Drawer from 'material-ui/Drawer';
-import RaisedButton from 'material-ui/RaisedButton';
-import IconButton from 'material-ui/IconButton';
-import { RadioButton } from 'material-ui/RadioButton';
-import Subheader from 'material-ui/Subheader';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
-import CloseIcon from 'material-ui/svg-icons/navigation/close';
-import ContentForward from 'material-ui/svg-icons/content/forward';
+
+import Drawer from 'react-md/lib/Drawers';
+import Button from 'react-md/lib/Buttons/Button';
+import Toolbar from 'react-md/lib/Toolbars';
+import FontIcon from 'react-md/lib/FontIcons';
+import Subheader from 'react-md/lib/Subheaders';
+import TextField from '../../../../../components/Form/TextField';
 import { TextEditor } from '../../../../../components/TextEditor';
 import { Col, Row, Heading, S3Uploader } from '../../../../../components/index';
-import { openDrawer, closeDrawer } from '../../../../../state/modules/boldr/ui/actions';
 import { uploadPostImage } from '../../../../../state/modules/admin/attachments/actions';
 
 const styled = require('styled-components').default;
@@ -20,7 +17,7 @@ const styled = require('styled-components').default;
 const Wrapper = styled.div`
   margin: 0 auto;
   display: inherit;
-  padding-top: 3em;
+  padding-top: 1em;
   width: 90%;
 `;
 const Footer = styled.div`
@@ -52,9 +49,12 @@ class NewPostForm extends Component {
   constructor(props: Props) {
     super();
     this.state = {
-      open: false,
+      visible: false,
+      position: 'right',
     };
-    (this: any).menuButtonClick = this.menuButtonClick.bind(this);
+    (this: any)._toggleRight = this._toggleRight.bind(this);
+    (this: any)._closeDrawer = this._closeDrawer.bind(this);
+    (this: any)._handleToggle = this._handleToggle.bind(this);
   }
 
   props: Props;
@@ -74,16 +74,16 @@ class NewPostForm extends Component {
     this.props.dispatch(uploadPostImage(payload));
   }
 
-  onSetOpen(open) {
-    this.props.dispatch(openDrawer());
+  _handleToggle(visible) {
+    this.setState({ visible });
   }
-  onSetClose(open) {
-    this.props.dispatch(closeDrawer());
+
+  _closeDrawer() {
+    this.setState({ visible: false });
   }
-  menuButtonClick(ev) {
-    ev.preventDefault();
-    const isOpen = this.props.drawer;
-    isOpen ? this.onSetClose(this.state.open) : this.onSetOpen(this.state.open);
+
+  _toggleRight() {
+    this.setState({ visible: !this.state.visible, position: 'right' });
   }
   render() {
     const { handleSubmit } = this.props;
@@ -94,33 +94,43 @@ class NewPostForm extends Component {
      * @return {element} BoldrEditor
      */
     const renderEditor = ({ input, label }) => (<TextEditor { ...input } label={ label } />);
-
+    const close = <Button icon onClick={ this._closeDrawer }>close</Button>;
+    const header = (
+      <Toolbar
+        nav={ close }
+        actions={ null }
+        className="md-divider-border md-divider-border--bottom"
+      />
+    );
     return (
       <Row>
         <Col xs>
 
           <form onSubmit={ handleSubmit }>
-            <Drawer width={ 350 } openSecondary open={ this.props.drawer } >
-              <IconButton onTouchTap={ this.menuButtonClick }>
-                <CloseIcon />
-              </IconButton>
+            <Drawer
+              { ...this.state }
+              onVisibilityToggle={ this._handleToggle }
+              type={ Drawer.DrawerTypes.TEMPORARY }
+              header={ header }
+              style={ { zIndex: 1001, width: '350px' } }
+            >
               <Wrapper>
                 <Field
+                  id="post-title"
                   name="title"
                   type="text"
                   component={ TextField }
-                  fullWidth
-                  floatingLabelText="Post Title"
+                  label="Post Title"
                 />
 
                 <Field name="tags" type="text"
-                  hintText="Separate using commas"
+                  id="post-tags"
+                  helpText="Separate using commas"
                   component={ TextField }
-                  fullWidth
-                  floatingLabelText="Tags"
+                  label="Tags"
                 />
 
-                <Subheader>Upload a feature image</Subheader>
+                <Subheader primaryText="Upload a feature image" />
                 <S3Uploader
                   signingUrl="/s3/sign"
                   server="/api/v1"
@@ -135,13 +145,13 @@ class NewPostForm extends Component {
 
 
               <Field name="excerpt"
+                id="post-excerpt"
                 type="text"
                 component={ TextField }
-                floatingLabelText="Excerpt"
-                hintText="A brief overview or area from your post to highlight"
-                multiLine
-                fullWidth
-                rows={ 3 }
+                label="Excerpt"
+                helpText="A brief overview or area from your post to highlight"
+                rows={ 2 }
+                maxRows={ 4 }
               />
               <Footer>
                 <Row>
@@ -149,21 +159,24 @@ class NewPostForm extends Component {
                     <Heading size={ 4 }>Post Status:</Heading>
                   </Col>
                   <Col xs={ 12 } md={ 6 }>
-                    <Field name="published" component={ RadioButtonGroup }>
-                     <RadioButton value="false" label="Draft" />
-                     <RadioButton value="true" label="Published" />
-                   </Field>
+                    <div>
+                      <label>
+                        <Field name="published" component="input" type="radio" value="false" /> Draft</label>{ ' ' }
+                      <label>
+                        <Field name="published" component="input" type="radio" value="true" /> Publish
+                      </label>
+                    </div>
                   </Col>
                 </Row>
-                <RaisedButton primary type="submit" label="Save Post" />
+                <Button raised primary type="submit" label="Save Post" />
               </Footer>
             </Wrapper>
           </Drawer>
           <Field name="content" component={ renderEditor } />
         </form>
-        <FloatingActionButton onTouchTap={ this.menuButtonClick } style={ fab } secondary>
-          <ContentForward />
-        </FloatingActionButton>
+        <Button floating onClick={ this._toggleRight } style={ fab } secondary>
+          <FontIcon>forward</FontIcon>
+        </Button>
         </Col>
       </Row>
     );
@@ -173,12 +186,3 @@ class NewPostForm extends Component {
 export default reduxForm({
   form: 'newPostForm',
 })(NewPostForm);
-
-/*
-<Field name="feature_image" type="text"
-  hintText="URL for your image"
-  component={ TextField }
-  fullWidth
-  floatingLabelText="Feature Image"
-/>
- */

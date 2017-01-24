@@ -4,7 +4,7 @@ import { shallowToJson } from 'enzyme-to-json';
 import Widget from './Widget';
 
 describe('<Widget />', () => {
-  const wrapper = shallow(<Widget />);
+  const wrapper = shallow(<Widget name="widget" />);
   it('renders <Widget /> without breaking', () => {
     expect(wrapper.find('div').length).toBe(1);
   });

@@ -5,9 +5,7 @@ exports[`<PostContent /> renders snapshot 1`] = `
   md={8}
   xs={12}>
   <Paper
-    circle={false}
-    rounded={true}
-    transitionEnabled={true}
+    component="div"
     zDepth={1}>
     <article>
       <div
@@ -18,8 +16,7 @@ exports[`<PostContent /> renders snapshot 1`] = `
         }>
         <Heading
           size={1} />
-        <Divider
-          inset={false} />
+        <Divider />
         <div
           className="content"
           dangerouslySetInnerHTML={

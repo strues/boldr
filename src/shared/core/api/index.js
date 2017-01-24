@@ -53,6 +53,9 @@ export const getAllPosts = () =>
 export const getPostById = (postId) =>
   apiClient.get(`/posts/pid/${postId}`);
 
+export const getPostBySlug = (slug) =>
+  apiClient.get(`/posts/slug/${slug}`);
+
 export const delPostById = (postId) =>
   apiClient.del(`/posts/pid/${postId}`);
 
@@ -190,7 +193,7 @@ export const doUpdateMember = (userData) => {
     avatar_url: userData.avatar_url,
     role: userData.role,
   };
-  apiClient.put(`/users/admin/${userData.id}`, { data: payload });
+  return apiClient.put(`/users/admin/${userData.id}`, { data: userData });
 };
 
 /**

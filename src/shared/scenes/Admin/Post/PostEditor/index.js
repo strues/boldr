@@ -1,3 +1,3 @@
-import PostEditor from './PostEditor';
+import PostEditorContainer from './PostEditorContainer';
 
-export default PostEditor;
+export default PostEditorContainer;

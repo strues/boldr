@@ -78,7 +78,6 @@ function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
          // render styled-components styleSheets to string.
          const styles = styleSheet.rules().map(rule => rule.cssText).join('\n');
 
-         //const html = generateHTML({ reactAppString, nonce, preloadedState, helmet, styles });
          const html = renderToStaticMarkup(
            <ServerHTML
              reactAppString={ reactAppString }

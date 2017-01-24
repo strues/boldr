@@ -1,10 +1,11 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { List, ListItem } from 'material-ui/List';
-import IconButton from 'material-ui/IconButton';
-import PlusIcon from 'material-ui/svg-icons/content/add';
-import Paper from 'material-ui/Paper';
+import List from 'react-md/lib/Lists/List';
+import ListItem from 'react-md/lib/Lists/ListItem';
+import Button from 'react-md/lib/Buttons';
+import FontIcon from 'react-md/lib/FontIcons';
+import Paper from 'react-md/lib/Papers';
 import { Row, Col, Modal } from '../../../components/index';
 import { showModal, hideModal } from '../../../state/modules/boldr/ui/actions';
 import { updateMenuDetails, addMenuDetail, getByLabel } from '../../../state/modules/boldr/menu';
@@ -88,9 +89,9 @@ class Navigation extends Component {
               { listItems }
             </List>
           </Paper>
-          <IconButton onClick={ this.openModal }>
-            <PlusIcon />
-          </IconButton>
+          <Button onClick={ this.openModal } icon>
+            <FontIcon>add</FontIcon>
+          </Button>
           </Col>
           <Col xs={ 12 } md={ 4 }>
             <Paper zDepth={ 2 }>
@@ -102,7 +103,7 @@ class Navigation extends Component {
           </Col>
         </Row>
          <Modal
-           open={ this.props.ui.modal }
+           visible={ this.props.ui.modal }
            title="Add a link"
            onClose={ this.closeModal }
          >

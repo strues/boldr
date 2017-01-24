@@ -5,7 +5,7 @@ import Modal from './Modal';
 
 describe('<Modal />', () => {
   function setup() {
-    const wrapper = shallow(<Modal open />);
+    const wrapper = shallow(<Modal visible />);
     const instance = wrapper.instance();
 
     return { wrapper, instance };

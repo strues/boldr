@@ -1,7 +1,5 @@
 /* @flow */
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { provideHooks } from 'redial';
 import { Col, Row, Widget, Loader } from '../../../components/index';
 import ActivityWidget from '../components/ActivityWidget';
 import StatsWidget from '../components/StatsWidget';
@@ -17,25 +15,25 @@ type Props = {
 };
 
 const Dashboard = (props: Props) => {
-    if (props.loading) {
-      return (
-        <Loader />
-      );
-    }
+  if (props.loading) {
     return (
+        <Loader />
+    );
+  }
+  return (
       <div>
         <Row>
-          <Col xs={ 12 } md={ 9 }>
+          <Col xs={ 12 } md={ 6 }>
             <Row>
-              <Col xs={ 6 } md={ 6 }>
+              <Col xs={ 6 } md={ 3 }>
                 <StatsWidget stats={ props.stats } />
               </Col>
-              <Col xs={ 6 } md={ 6 }>
+              <Col xs={ 6 } md={ 3 }>
                 <Widget name="Widget C" />
               </Col>
             </Row>
           </Col>
-          <Col xs={ 12 } md={ 3 }>
+          <Col xs={ 12 } md={ 6 }>
             {
               props.activities
               ? <ActivityWidget activities={ props.activities } />
@@ -44,7 +42,7 @@ const Dashboard = (props: Props) => {
           </Col>
         </Row>
       </div>
-    );
+  );
 };
 
 export default Dashboard;

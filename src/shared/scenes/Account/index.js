@@ -21,14 +21,6 @@ export default (store, connect) => ({
     },
   },
   {
-    path: 'preferences',
-    getComponent(nextState, cb) {
-      import('./Preferences')
-        .then(loadRoute(cb))
-        .catch(errorLoading);
-    },
-  },
-  {
     path: 'reset-password/:token',
     getComponent(nextState, cb) {
       require.ensure([

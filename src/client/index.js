@@ -11,7 +11,6 @@ import browserHistory from 'react-router/lib/browserHistory';
 import { syncHistoryWithStore } from 'react-router-redux';
 import WebFontLoader from 'webfontloader';
 import { trigger } from 'redial';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import AppRoot from '../shared/components/AppRoot';
 import App from '../shared/components/App';
@@ -22,8 +21,6 @@ import ApiClient from '../shared/core/api/apiClient';
 import createRoutes from '../shared/scenes';
 import ReactHotLoader from './components/ReactHotLoader';
 
-// Required for Material-UI
-injectTapEventPlugin();
 // Load fonts
 WebFontLoader.load({
   google: { families: ['Roboto Slab:100,400,700', 'Roboto:300,400,700', 'Material Icons'] },

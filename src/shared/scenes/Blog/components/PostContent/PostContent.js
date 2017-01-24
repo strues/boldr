@@ -1,7 +1,7 @@
 /* flow */
 import React from 'react';
-import Divider from 'material-ui/Divider';
-import Paper from 'material-ui/Paper';
+import Divider from 'react-md/lib/Dividers';
+import Paper from 'react-md/lib/Papers';
 
 import { Col, Heading } from '../../../../components/index';
 import PostImage from '../PostImage';

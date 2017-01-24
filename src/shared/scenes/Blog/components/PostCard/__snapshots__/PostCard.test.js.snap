@@ -2,17 +2,32 @@ exports[`<PostCard /> renders snapshot 1`] = `
 <div
   className="boldr-post__card-wrapper">
   <Card
-    expandable={false}
-    expanded={null}
-    initiallyExpanded={false}>
-    <CardMedia
-      overlay={
+    expanderIconChildren="keyboard_arrow_down"
+    expanderIconClassName="material-icons"
+    expanderTooltipPosition="left">
+    <Media
+      aspectRatio="16-9"
+      component="section"
+      forceAspect={true}>
+      <img
+        role="presentation" />
+      <MediaOverlay
+        component="div">
         <CardTitle
-          subtitle="Invalid Date" />
-      }>
-      <img />
-    </CardMedia>
-    <CardText>
+          subtitle="Invalid Date">
+          <ButtonTooltipedInked
+            className="md-cell--right"
+            icon={true}
+            inkTransitionEnterTimeout={450}
+            inkTransitionLeaveTimeout={300}
+            inkTransitionOverlap={150}>
+            star_outline
+          </ButtonTooltipedInked>
+        </CardTitle>
+      </MediaOverlay>
+    </Media>
+    <CardText
+      component="section">
       <Row
         componentClass="div">
         <Col
@@ -28,20 +43,19 @@ exports[`<PostCard /> renders snapshot 1`] = `
               }
             }
             to="/blog/undefined">
-            <RaisedButton
-              disabled={false}
-              fullWidth={false}
+            <ButtonTooltipedInked
+              inkTransitionEnterTimeout={450}
+              inkTransitionLeaveTimeout={300}
+              inkTransitionOverlap={150}
               label="Read More"
-              labelPosition="after"
               onClick={[Function]}
               primary={true}
-              secondary={false} />
+              raised={true} />
           </Link>
         </Col>
       </Row>
     </CardText>
-    <Divider
-      inset={false} />
+    <Divider />
     <CardActions>
       <Row
         componentClass="div">

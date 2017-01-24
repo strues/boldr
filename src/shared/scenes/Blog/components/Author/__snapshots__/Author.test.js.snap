@@ -3,29 +3,39 @@ exports[`<Author /> renders snapshot 1`] = `
   className="boldr-post__sidebar-author">
   <List>
     <ListItem
-      autoGenerateNestedIndicator={true}
-      disableKeyboardFocus={false}
+      activeClassName="md-text--theme-primary"
+      component="div"
       disabled={true}
-      initiallyOpen={false}
-      insetChildren={false}
+      expanderIconChildren="keyboard_arrow_down"
       leftAvatar={
         <Avatar
-          size={40}
-          src="abcd" />
+          role="presentation"
+          src="abcd"
+          suffixes={
+            Array [
+              "red",
+              "pink",
+              "purple",
+              "deep-purple",
+              "indigo",
+              "blue",
+              "light-blue",
+              "cyan",
+              "teal",
+              "green",
+              "light-green",
+              "lime",
+              "yellow",
+              "amber",
+              "orange",
+              "deep-orange",
+              "brown",
+              "grey",
+              "blue-grey",
+            ]
+          } />
       }
-      nestedItems={Array []}
-      nestedLevel={0}
-      onKeyboardFocus={[Function]}
-      onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
-      onNestedListToggle={[Function]}
-      onTouchEnd={[Function]}
-      onTouchStart={[Function]}
-      open={null}
-      primaryTogglesNestedList={false}
-      secondaryTextLines={1}>
-       
-    </ListItem>
+      primaryText={NaN} />
   </List>
 </div>
 `;

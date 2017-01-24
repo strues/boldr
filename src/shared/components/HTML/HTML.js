@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-function HTML(props) {
+function Html(props) {
   const {
     title,
     description,
@@ -13,8 +13,8 @@ function HTML(props) {
     <html lang="en">
     <head>
       <title>{title}</title>
-      <meta name="application-name" content={title} />
-      <meta name="description" content={description} />
+      <meta name="application-name" content={ title } />
+      <meta name="description" content={ description } />
       <meta charSet="utf-8" />
       <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
       <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -30,7 +30,6 @@ function HTML(props) {
       <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/favicons/apple-touch-icon-72x72.png" />
       <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/favicons/apple-touch-icon-57x57.png" />
       <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/favicons/apple-touch-icon-60x60.png" />
-      <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon-180x180.png" />
       <link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#00a9d9" />
       <link rel="icon" type="image/png" href="/favicons/favicon-196x196.png" sizes="196x196" />
       <link rel="icon" type="image/png" href="/favicons/favicon-128.png" sizes="128x128" />
@@ -47,27 +46,25 @@ function HTML(props) {
       { headerElements }
     </head>
     <body>
-    <div id="app" dangerouslySetInnerHTML={{ __html: appBodyString }} />
+    <div id="app" dangerouslySetInnerHTML={ { __html: appBodyString } } />
     { bodyElements }
     </body>
     </html>
   );
 }
 
-HTML.propTypes = {
+Html.propTypes = {
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.string,
   appBodyString: PropTypes.string,
   headerElements: PropTypes.node,
   bodyElements: PropTypes.node,
 };
 
-HTML.defaultProps = {
+Html.defaultProps = {
   appBodyString: '',
   headerElements: null,
   bodyElements: null,
 };
 
-// EXPORT
-
-export default HTML;
+export default Html;

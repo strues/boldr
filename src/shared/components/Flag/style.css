@@ -1,3 +1,5 @@
+@custom-media --medium-viewport (min-width: 700px);
+
 .wrapper {
 	width: 100%;
 

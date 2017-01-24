@@ -1,6 +1,9 @@
 /* @flow */
 import React from 'react';
-import { Card, CardTitle, CardText } from 'material-ui/Card';
+import Card from 'react-md/lib/Cards/Card';
+import CardTitle from 'react-md/lib/Cards/CardTitle';
+import CardActions from 'react-md/lib/Cards/CardActions';
+import CardText from 'react-md/lib/Cards/CardText';
 
 type Props = {
   name?: string,

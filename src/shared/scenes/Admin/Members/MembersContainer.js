@@ -65,7 +65,7 @@ export class MembersContainer extends Component {
          <Members
            toggleUser={ this.toggleUser }
            users={ this.props.members.members }
-           open={ this.props.ui.modal }
+           visible={ this.props.ui.modal }
            close={ this.closeModal }
            handleSubmit={ this.handleSubmit }
            initialValues={ this.props.members.selected[0] }

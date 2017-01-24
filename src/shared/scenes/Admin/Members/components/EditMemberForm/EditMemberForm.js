@@ -2,10 +2,9 @@
 
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
-import { RadioButton } from 'material-ui/RadioButton';
-import { RadioButtonGroup, TextField } from 'redux-form-material-ui';
+import Button from 'react-md/lib/Buttons';
+import SelectField from 'react-md/lib/SelectFields';
+import TextField from '../../../../../components/Form/TextField';
 
 const style = {
   margin: 12,
@@ -17,47 +16,64 @@ type Props = {
   fields?: Object,
   pristine?: boolean,
 };
+const roles = [{ value: 1, label: 'Member' }, { value: 2, label: 'Staff' }, { value: 3, label: 'Admin' }];
+
+const renderRoleSelector = ({ input }) => (
+  <div>
+    <SelectField
+      { ...input }
+      id="roles"
+      label="Role"
+      placeholder="Select a role"
+      menuItems={ roles }
+      itemLabel="label"
+      itemValue="value"
+      className="md-cell"
+    />
+  </div>
+);
 const EditMemberForm = (props: Props) => {
   const { handleSubmit, reset } = props;
   return (
-      <form onSubmit={ handleSubmit } className="modal__form">
+      <form onSubmit={ handleSubmit } className="boldr-form__generic">
         <Field
+          id="email"
           name="email"
           type="email"
-          floatingLabelText="Email"
+          label="Email"
           component={ TextField }
         />
         <Field
+          id="first_name"
           name="first_name"
           type="text"
-          floatingLabelText="First name"
+          label="First name"
           component={ TextField }
         />
         <Field
+          id="last_name"
           name="last_name"
           type="text"
-          floatingLabelText="Last name"
+          label="Last name"
           component={ TextField }
         />
         <Field
-          name="last_name"
+          id="display_name"
+          name="display_name"
           type="text"
-          floatingLabelText="Last name"
+          label="Display name"
           component={ TextField }
         />
         <Field
+          id="avatar_url"
           name="avatar_url"
           type="text"
-          floatingLabelText="Avatar URL"
+          label="Avatar URL"
           component={ TextField }
         />
-        <Field name="role" component={ RadioButtonGroup }>
-          <RadioButton value={ 1 } label="Member" />
-          <RadioButton value={ 2 } label="Staff" />
-          <RadioButton value={ 3 } label="Admin" />
-        </Field>
-        <RaisedButton type="submit" label="Save" style={ style } primary />
-        <FlatButton label="Reset" onClick={ reset } secondary />
+        <Field name="role" component={ renderRoleSelector } />
+        <Button type="submit" label="Save" style={ style } raised primary />
+        <Button label="Reset" onClick={ reset } style={ style } flat secondary />
       </form>
   );
 };

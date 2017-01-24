@@ -1,9 +1,8 @@
 /* @flow */
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import RaisedButton from 'material-ui/RaisedButton';
-import { TextField } from 'redux-form-material-ui';
-
+import Button from 'react-md/lib/Buttons';
+import { TextField } from '../../../components/Form';
 import { Row, Col } from '../../../components/Layout';
 
 type Props = {
@@ -13,7 +12,7 @@ type Props = {
 const LoginForm = (props: Props) => {
   const { handleSubmit } = props;
   return (
-    <form onSubmit={ handleSubmit } className="card__form">
+    <form onSubmit={ handleSubmit } className="boldr-form__generic">
       <Row>
         <Col xs={ 12 }>
           <Row xsCenter>
@@ -21,7 +20,7 @@ const LoginForm = (props: Props) => {
               <Field name="email"
                 type="email"
                 component={ TextField }
-                floatingLabelText="Email address"
+                label="Email address"
               />
             </Col>
           </Row>
@@ -34,13 +33,13 @@ const LoginForm = (props: Props) => {
               <Field name="password"
                 type="password"
                 component={ TextField }
-                floatingLabelText="Password"
+                label="Password"
               />
             </Col>
           </Row>
         </Col>
       </Row>
-      <RaisedButton style={ { marginTop: '25px' } } primary label="Login" type="submit" />
+      <Button style={ { marginTop: '25px' } } raised primary label="Login" type="submit" />
     </form>
   );
 };

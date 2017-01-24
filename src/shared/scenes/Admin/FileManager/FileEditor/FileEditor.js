@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Paper from 'material-ui/Paper';
+import Paper from 'react-md/lib/Papers';
 import { Grid, Row, Col, Image } from '../../../../components/index';
 import FileEditorForm from '../components/FileEditorForm';
 

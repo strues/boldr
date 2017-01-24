@@ -1,9 +1,8 @@
 /* @flow */
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import RaisedButton from 'material-ui/RaisedButton';
-import { TextField } from 'redux-form-material-ui';
-
+import Button from 'react-md/lib/Buttons';
+import { TextField } from '../../../components/Form';
 import { Row, Col } from '../../../components/Layout';
 import validate from './validate';
 
@@ -14,20 +13,20 @@ type Props = {
 const SignupForm = (props: Props) => {
   const { handleSubmit } = props;
   return (
-    <form onSubmit={ handleSubmit } className="card__form">
+    <form onSubmit={ handleSubmit } className="boldr-form__generic">
       <Row>
         <Col xs={ 6 }>
           <Field name="email"
             type="email"
             component={ TextField }
-            floatingLabelText="Email address"
+            label="Email address"
           />
       </Col>
       <Col xs={ 6 }>
         <Field name="password"
           type="password"
           component={ TextField }
-          floatingLabelText="Password"
+          label="Password"
         />
       </Col>
       </Row>
@@ -36,14 +35,14 @@ const SignupForm = (props: Props) => {
         <Field name="first_name"
           type="text"
           component={ TextField }
-          floatingLabelText="First name"
+          label="First name"
         />
       </Col>
       <Col xs={ 6 }>
         <Field name="last_name"
           type="text"
           component={ TextField }
-          floatingLabelText="Last name"
+          label="Last name"
         />
       </Col>
       </Row>
@@ -54,13 +53,13 @@ const SignupForm = (props: Props) => {
               <Field name="display_name"
                 type="text"
                 component={ TextField }
-                floatingLabelText="Display name"
+                label="Display name"
               />
             </Col>
           </Row>
         </Col>
       </Row>
-      <RaisedButton style={ { marginTop: '25px' } } primary label="Create Account" type="submit" />
+      <Button style={ { marginTop: '25px' } } raised primary label="Create Account" type="submit" />
     </form>
   );
 };

@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { TextField } from 'redux-form-material-ui';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from 'react-md/lib/Buttons';
+import { TextField } from '../../../components/Form';
 
 const style = {
   margin: 12,
@@ -14,14 +14,14 @@ type Props = {
 const ForgotPasswordForm = (props: Props) => {
   const { handleSubmit } = props;
   return (
-      <form onSubmit={ handleSubmit } className="boldr__generic-form">
+      <form onSubmit={ handleSubmit } className="boldr-form__generic">
         <Field
           name="email"
           type="email"
           floatingLabelText="Email"
           component={ TextField }
         />
-        <RaisedButton type="submit" label="Send reset link" style={ style } primary />
+        <Button type="submit" label="Send reset link" style={ style } raised primary />
       </form>
   );
 };

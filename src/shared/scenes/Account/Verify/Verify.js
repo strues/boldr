@@ -1,10 +1,8 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Card, CardTitle, CardText } from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
-
-import { Grid, Col, Row } from '../../../components/index';
+import Button from 'react-md/lib/Buttons';
+import FormCard from '../../../components/Form/FormCard';
 import { verifyAccount } from '../../../state/modules/account/actions';
 
 export type Props = {
@@ -27,22 +25,10 @@ class Verify extends Component {
   render() {
     return (
       <div>
-        <Grid fluid>
-          <Row>
-            <Col xs={ 12 }>
-              <Row xsCenter>
-                <Col xs={ 6 }>
-                  <Card style={ { width: '450px', marginTop: '150px' } }>
-                    <CardTitle title="Account verification" />
-                    <CardText>
-                      <RaisedButton primary label="Verify" onTouchTap={ this.handleVerify } />
-                    </CardText>
-                  </Card>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Grid>
+        <FormCard
+          title="Account verification"
+          form={ <Button raised primary label="Verify" onTouchTap={ this.handleVerify } /> }
+        />
       </div>
     );
   }

@@ -1,8 +1,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
-import { TextField } from 'redux-form-material-ui';
+import Button from 'react-md/lib/Buttons';
+import TextField from '../../../../../components/Form/TextField';
 
 export type Props = {
   handleSubmit?: Function,
@@ -20,13 +19,13 @@ let NavigationForm = (props: Props) => { // eslint-disable-line
   const { handleSubmit, reset } = props;
   return (
     <form className="form__navigation" onSubmit={ handleSubmit }>
-      <Field name="name" component={ TextField } type="text" floatingLabelText="Name" />
-      <Field name="position" component={ TextField } type="text" floatingLabelText="Position" />
-      <Field name="link" component={ TextField } type="text" floatingLabelText="Link" />
-      <Field name="icon" component={ TextField } type="text" floatingLabelText="Icon" />
+      <Field id="nav-name" name="name" component={ TextField } type="text" label="Name" />
+      <Field id="nav-position" name="position" component={ TextField } type="text" label="Position" />
+      <Field id="nav-link" name="link" component={ TextField } type="text" label="Link" />
+      <Field id="nav-icon" name="icon" component={ TextField } type="text" label="Icon" />
       <div className="form__footer">
-        <RaisedButton type="submit" label="Save" style={ style } primary />
-        <FlatButton label="Reset" onClick={ reset } secondary />
+        <Button type="submit" label="Save" style={ style } raised primary />
+        <Button label="Reset" onClick={ reset } style={ style } raised secondary />
       </div>
     </form>
   );
