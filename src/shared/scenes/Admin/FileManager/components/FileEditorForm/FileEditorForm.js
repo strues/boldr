@@ -23,13 +23,13 @@ const FileEditorForm = (props: Props) => {
         <Field
           name="file_name"
           type="text"
-          floatingLabelText="File name"
+          label="File name"
           component={ TextField }
         />
         <Field
           name="file_description"
           type="text"
-          floatingLabelText="Description"
+          label="Description"
           component={ TextField }
         />
         <Row>

@@ -8,6 +8,7 @@ import Hero from './Hero';
 import PrimaryHeader from './PrimaryHeader';
 import Widget from './Widget';
 import Image from './Image';
+import Icon from './Icon';
 import Loader from './Loader';
 import Paragraph from './Paragraph';
 import Box from './Box';
@@ -23,6 +24,7 @@ export {
   Grid,
   Col,
   Row,
+  Icon,
   Modal,
   Notifications,
   S3Uploader,
