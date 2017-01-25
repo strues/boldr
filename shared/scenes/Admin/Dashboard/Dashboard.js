@@ -1,6 +1,6 @@
 /* @flow */
 import React, { Component } from 'react';
-import { Col, Row, Widget, Loader } from '../../../components/index';
+import { Col, Row, Widget, Loader, KeyVisual } from '../../../components/index';
 import ActivityWidget from '../components/ActivityWidget';
 import StatsWidget from '../components/StatsWidget';
 import type { Stats } from '../../../types/models';
@@ -23,14 +23,19 @@ const Dashboard = (props: Props) => {
   return (
       <div>
         <Row>
-          <Col xs={ 12 } md={ 6 }>
+          <Col xs={ 12 } md={ 8 }>
             <Row>
-              <Col xs={ 6 } md={ 3 }>
+              <Col xs={ 6 } md={ 6 }>
                 <StatsWidget stats={ props.stats } />
               </Col>
-              <Col xs={ 6 } md={ 3 }>
+              <Col xs={ 6 } md={ 6 }>
                 <Widget name="Widget C" />
               </Col>
+            </Row>
+            <Row>
+              <Col xs={ 12 } md={ 12 } style={ { paddingTop: '25px' } }>
+              <Widget name="Widget D" />
+            </Col>
             </Row>
           </Col>
           <Col xs={ 12 } md={ 4 }>

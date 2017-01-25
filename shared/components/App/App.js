@@ -7,7 +7,7 @@ import type { ReactChildren } from '../../types/react';
 import Notifications from '../Notification';
 
 if (process.env.NODE_ENV !== 'test') {
-  require('../../theme/styles/main.scss');
+  require('../../styles/main.scss');
 }
 
 type Props = {

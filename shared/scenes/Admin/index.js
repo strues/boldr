@@ -74,7 +74,7 @@ export default (store, connect) => {
       {
         path: 'tags',
         getComponent(nextState, cb) {
-          import('./Tags').then(loadRoute(cb)).catch(errorLoading);
+          import('./Tags/TagsContainer').then(loadRoute(cb)).catch(errorLoading);
         },
       },
       {

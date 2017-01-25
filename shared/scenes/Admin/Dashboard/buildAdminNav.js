@@ -5,8 +5,8 @@ import FontIcon from 'react-md/lib/FontIcons';
 import Link from 'react-router/lib/Link';
 import IndexLink from 'react-router/lib/IndexLink';
 
-import { toTitle } from '../../../core/utils/StringUtils';
-import flatten from '../../../core/utils/ArrayUtils/flatten';
+import { toTitle } from '../../../core/utils/strings';
+import flatten from '../../../core/utils/arrays/flatten';
 import adminRoutes from './adminRoutes';
 
 function mapToNavItems(route, parents = []) {

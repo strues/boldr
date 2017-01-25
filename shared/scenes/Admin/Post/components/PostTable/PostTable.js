@@ -56,10 +56,11 @@ const PostTable = (props: Props) => {
 
   const rows = props.posts.map(post => (
       <TableRow key={ post.id }>
-        <TableColumn>
+        <TableColumn style={ { width: '5%' } }>
           <Avatar src={ post.feature_image } role="presentation" />
         </TableColumn>
         <TableColumn>
+          { /* $FlowIssue */ }
           <Link to={ `/admin/posts/editor/${post.slug}` }>
             { post.title }
           </Link>
@@ -69,19 +70,19 @@ const PostTable = (props: Props) => {
       </TableRow>
     ));
   return (
-         <DataTable baseId="PostListing" onRowToggle={ transitionPost }>
-           <TableHeader>
-             <TableRow>
-               <TableColumn>Feature Image</TableColumn>
-               <TableColumn>Title</TableColumn>
-               <TableColumn>Status</TableColumn>
-
-             </TableRow>
-           </TableHeader>
-           <TableBody>
-             {rows}
-           </TableBody>
-         </DataTable>
+     <DataTable baseId="PostListing" onRowToggle={ transitionPost }>
+       <TableHeader>
+         <TableRow>
+           <TableColumn>Feature Image</TableColumn>
+           <TableColumn>Title</TableColumn>
+           <TableColumn>Status</TableColumn>
+           <TableColumn>Created</TableColumn>
+         </TableRow>
+       </TableHeader>
+       <TableBody>
+         {rows}
+       </TableBody>
+     </DataTable>
   );
 };
 

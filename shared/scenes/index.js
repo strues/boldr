@@ -7,40 +7,20 @@ import Blog from './Blog';
 import Admin from './Admin';
 
 export default function createRoutes(store) {
-  const root = {
-    path: '/',
-    component: App,
-    indexRoute: {
-      component: Home,
-    },
-    childRoutes: [
-      Account(store),
-      Blog(store),
-      Admin(store),
-      About,
-      Error404,
-    ],
-  };
-  return root;
-}
-
-/*
-function createChildRoutes(store) {
   return [
-    Account(store),
-    Blog(store),
-    Admin(store),
-    Home,
-    About,
-    Error404,
+    {
+      path: '/',
+      component: App,
+      indexRoute: {
+        component: Home,
+      },
+      childRoutes: [
+        Account(store),
+        Blog(store),
+        Admin(store),
+        About,
+        Error404,
+      ],
+    },
   ];
 }
-
-export default function createRootRoute(store) {
-  return {
-    component: App,
-    childRoutes: createChildRoutes(store),
-  };
-}
-
-*/

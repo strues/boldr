@@ -3,7 +3,7 @@ import { combineReducers } from 'redux';
 import * as api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import type { Post } from '../../../../types/models';
-import { removeByKey, removeIdFromArray } from '../../../../core/utils/immutableUtils';
+import { removeByKey, removeIdFromArray } from '../../../../core/utils';
 import { notificationSend } from '../../../../state/modules/notifications';
 import { getPosts } from './selectors';
 import * as t from './constants';

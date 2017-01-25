@@ -5,11 +5,6 @@ import { connect } from 'react-redux';
 import Link from 'react-router/lib/Link';
 import Avatar from 'react-md/lib/Avatars';
 import Paper from 'react-md/lib/Papers';
-import DataTable from 'react-md/lib/DataTables/DataTable';
-import TableHeader from 'react-md/lib/DataTables/TableHeader';
-import TableBody from 'react-md/lib/DataTables/TableBody';
-import TableRow from 'react-md/lib/DataTables/TableRow';
-import TableColumn from 'react-md/lib/DataTables/TableColumn';
 import Button from 'react-md/lib/Buttons/Button';
 import Card from 'react-md/lib/Cards/Card';
 import CardText from 'react-md/lib/Cards/CardText';
@@ -27,23 +22,29 @@ export type Props = {
   handleDeleteClick: Function,
   handleArticlePublishClick: Function,
   handleArticleDraftClick: Function,
+  _handleRowToggle: Function,
   dispatch: Function,
+};
+
+type State = {
+  count: Number,
 };
 
 class PostList extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { count: 0 };
+    (this: any).state = { count: 0 };
 
-    this._handleRowToggle = this._handleRowToggle.bind(this);
+    (this: any)._handleRowToggle = this._handleRowToggle.bind(this);
   }
+  state: State;
 
   _handleRowToggle(row, toggled, count) {
-    console.log(toggled)
+    console.log(toggled);
     this.setState({ count });
   }
-
+  props: Props;
   render() {
     const { count } = this.state;
     const kebab = (

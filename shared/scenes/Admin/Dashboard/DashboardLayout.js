@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import type { ReactElement } from 'types/react';
+import Avatar from 'react-md/lib/Avatars';
 import NavigationDrawer from 'react-md/lib/NavigationDrawers';
 import { Grid, Col } from '../../../components/index';
 import navItems from './buildAdminNav';
@@ -22,7 +23,24 @@ type Props = {
 };
 
 class DashboardLayout extends Component {
+  constructor(props: Props) {
+    super();
+    this.state = {
+      visible: true,
+      position: 'left',
+    };
+    (this: any)._closeDrawer = this._closeDrawer.bind(this);
+    (this: any)._handleToggle = this._handleToggle.bind(this);
+  }
   props: Props;
+
+  _handleToggle(visible) {
+    this.setState({ visible });
+  }
+
+  _closeDrawer() {
+    this.setState({ visible: false });
+  }
   render() {
     const { location: { pathname, search } } = this.props;
     return (
@@ -31,9 +49,11 @@ class DashboardLayout extends Component {
           drawerTitle="Boldr"
           drawerClassName="boldr-drawer__admin"
           desktopMinWidth={ 900 }
+          onVisibilityToggle={ this._handleToggle }
           navItems={ navItems(pathname) }
           mobileType={ NavigationDrawer.DrawerTypes.TEMPORARY }
           desktopType={ NavigationDrawer.DrawerTypes.FULL_HEIGHT }
+          toolbarActions={ <Avatar src={ this.props.account.user.avatarUrl } role="presentation" /> }
         >
           <Grid fluid>
             <Col xs>

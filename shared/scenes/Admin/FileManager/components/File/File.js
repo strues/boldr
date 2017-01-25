@@ -33,7 +33,7 @@ const File = (props: Props) => {
         <Media>
           <img src={ props.file.url } alt={ props.file.filename } role="presentation" />
           <MediaOverlay>
-            <CardTitle title={ props.file.filename }>
+            <CardTitle title={ props.file.filename || 'foo' }>
               <Button className="md-cell--right" icon>star_outline</Button>
             </CardTitle>
           </MediaOverlay>
