@@ -4,6 +4,6 @@ import Footer from './Footer';
 
 it('<Footer />, should have footer__wrap as its class', () => {
   const wrapper = shallow(<Footer />);
-  const wrapperClass = wrapper.find('.footer__wrap');
-  expect(wrapperClass.is('.footer__wrap')).toBe(true);
+  const wrapperClass = wrapper.find('.boldr-footer');
+  expect(wrapperClass.is('.boldr-footer')).toBe(true);
 });
