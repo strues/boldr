@@ -1,14 +1,3 @@
-general:
-  artifacts:
-    - "coverage/"
-  branches:
-    only:
-      - /greenkeeper-.*
-      - /feature\/.*
-      - /release\/.*
-      - /hotfix\/.*
-      - master
-      - develop
 machine:
   services:
     - redis
@@ -21,6 +10,8 @@ machine:
   pre:
     - mkdir ~/.yarn-cache
   environment:
+    YARN_VERSION: 0.19.1
+    PATH: "${PATH}:${HOME}/.yarn/bin:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
     CIRCLE_ARTIFACTS: coverage
     NODE_ENV: test
     CIRCLE_ENV: test
@@ -29,20 +20,31 @@ machine:
     TOKEN_SECRET: bbbbaaaasss
 dependencies:
   pre:
-        # Install Yarn
-    - sudo apt-key adv --keyserver pgp.mit.edu --recv D101F7899D41F3C3
-    - echo "deb http://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-    - sudo apt-get update -qq
-    - sudo apt-get install -y -qq yarn
+      - |
+        if [[ ! -e ~/.yarn/bin/yarn || $(yarn --version) != "${YARN_VERSION}" ]]; then
+          curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN_VERSION
+        fi
   cache_directories:
     - "node_modules"
-    - ~/.yarn-cache
+    - ~/.yarn
+    - ~/.cache/yarn
 test:
   pre:
     - yarn
     - make setup-db
-    - npm run build
+    - yarn run build
   override:
-    - npm run test:ci
+    - yarn run test:ci
   post:
       - bash <(curl -s https://codecov.io/bash)
+general:
+  artifacts:
+    - "coverage"
+  branches:
+    only:
+      - /greenkeeper-.*
+      - /feature\/.*
+      - /release\/.*
+      - /hotfix\/.*
+      - master
+      - develop

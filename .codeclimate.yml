@@ -3,14 +3,17 @@ engines:
     enabled: true
 ratings:
    paths:
-   - src/**
+   - client/**
+   - shared/**
+   - server/**
    - "**.js"
 exclude_paths:
-- ./node_modules/**/*
-- boldrCMS/**
-- db/**
-- docs/**
-- bin/**
-- flow-typed/**
-- tools/**
-- src/**/*.test.js
+  - ./node_modules/**/*
+  - boldrCMS/**
+  - db/**
+  - docs/**
+  - bin/**
+  - flow-typed/**
+  - internal/**
+  - shared/**/*.test.js
+  - server/**/*.test.js

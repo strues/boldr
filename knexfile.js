@@ -28,10 +28,6 @@ module.exports = {
       directory: path.resolve('./db/_seeds'),
     },
     debug: false,
-    pool: {
-      min: 0,
-      max: 10,
-    },
   },
   production: {
     client: 'pg',

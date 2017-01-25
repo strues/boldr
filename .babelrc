@@ -1,11 +1,8 @@
 {
   "presets": [
     ["env", { "targets": { "node": true } }],
-    "boldr"
+    "stage-2",
+    "react"
   ],
-  "env": {
-    "test": {
-      "presets": [["boldr", { "es2015": { "modules": "commonjs" }}], "react"]
-    }
-  }
+  "plugins": ["transform-decorators-legacy", "dynamic-import-webpack"]
 }
