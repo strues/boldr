@@ -36,7 +36,7 @@ const FileEditorForm = (props: Props) => {
         />
         <Row>
           <Button type="submit" label="Save" style={ style } raised primary />
-          <Button label="Reset" onClick={ reset } flat secondary />
+          <Button label="Reset" onClick={ reset } style={ style } flat secondary />
         </Row>
       </form>
   );

@@ -16,6 +16,7 @@ import Flag from './Flag';
 import Hamburger from './Hamburger';
 import KeyVisual from './KeyVisual';
 import KebabMenu from './KebabMenu';
+import FormCard from './Form/FormCard';
 
 export {
   PrimaryHeader,
@@ -24,6 +25,7 @@ export {
   Grid,
   Col,
   Row,
+  FormCard,
   Icon,
   Modal,
   Notifications,

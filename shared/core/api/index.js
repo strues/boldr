@@ -135,6 +135,16 @@ export const doUpload = (payload) => {
 
   return apiClient.post('/attachments/dashboard', { data });
 };
+export const updateFileProperties = (payload) => {
+  const data = {
+    file_name: payload.file_name,
+    id: payload.id,
+    file_description: payload.file_description,
+  };
+
+  return apiClient.put(`/attachments/${payload.id}`, { data });
+};
+
 export const delAttachment = (id) =>
   apiClient.del(`/attachments/${id}`);
 

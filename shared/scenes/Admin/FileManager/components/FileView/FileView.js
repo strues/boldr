@@ -8,7 +8,7 @@ const FileView = props => {
       <Row>
         {
           props.files.map((file) =>
-          <Col key={ file.id } xs={ 12 } md={ 3 } lg={ 2 }>
+          <Col key={ file.id } xs={ 12 } md={ 4 }>
             <File file={ file } removeMedia={ props.removeMedia } selectFile={ props.selectFile } />
           </Col>)
          }

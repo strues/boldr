@@ -124,12 +124,51 @@ export function deleteMedia(id) {
   };
 }
 
+export function updateAttachment(attachmentData) {
+  return (dispatch: Function) => {
+    console.log('action', attachmentData);
+    dispatch(updateAttachmentReq());
+    return api.updateFileProperties(attachmentData)
+      .then(response => {
+        dispatch(updateAttachmentSuccess(response));
+        dispatch(notificationSend({
+          message: 'Updated article.',
+          kind: 'info',
+          dismissAfter: 3000,
+        }));
+      })
+      .catch(
+        err => {
+          dispatch(errorUpdateAttachment(err.message));
+          dispatch(notificationSend({
+            message: 'There was a problem updating the article.',
+            kind: 'error',
+            dismissAfter: 3000,
+          }));
+        });
+  };
+}
+const updateAttachmentReq = () => {
+  return { type: t.UPDATE_ATTACHMENT_REQUEST };
+};
+const updateAttachmentSuccess = (response) => {
+  return { type: t.UPDATE_ATTACHMENT_SUCCESS };
+};
+const errorUpdateAttachment = (err) => {
+  return {
+    type: t.UPDATE_ATTACHMENT_FAILURE,
+    error: err,
+  };
+};
+// updateFileProperties
+
 export function selectedFile(file: Object) {
   return {
     type: t.SELECT_FILE,
     file,
   };
 }
+
 export function selectFile(file) {
   return (dispatch) => {
     dispatch(selectedFile(file));

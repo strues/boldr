@@ -27,13 +27,12 @@ const FileManager = (props: Props) => {
         nav={ null }
         actions={ <Button onClick={ openModal } label="Upload File" raised primary /> }
       />
-      <Paper zDepth={ 2 }>
      <Row>
        <Col xs={ 12 }>
           <FileView files={ attachments.files } removeMedia={ handleRemoveMedia } selectFile={ props.selectFile } />
        </Col>
      </Row>
-    </Paper>
+
      <Modal visible={ ui.modal } onClose={ closeModal } title="Upload an image">
        <S3Uploader
          signingUrl="/s3/sign"

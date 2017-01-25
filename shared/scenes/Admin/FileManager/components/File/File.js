@@ -10,9 +10,10 @@ import FontIcon from 'react-md/lib/FontIcons';
 
 type Props = {
   removeMedia?: Function,
+  selectFile: Function,
   file?: {
     id?: string,
-    filename?: string,
+    file_name?: string,
     url?: string,
   },
 };
@@ -31,13 +32,11 @@ const File = (props: Props) => {
   return (
       <Card className="boldr-filecard">
         <Media>
-          <img src={ props.file.url } alt={ props.file.filename } role="presentation" />
-          <MediaOverlay>
-            <CardTitle title={ props.file.filename || 'foo' }>
-              <Button className="md-cell--right" icon>star_outline</Button>
-            </CardTitle>
-          </MediaOverlay>
+          <img src={ props.file.url } alt={ props.file.file_name } role="presentation" />
         </Media>
+        <CardTitle title={ props.file.file_name || 'foo' }>
+          <Button className="md-cell--right" icon>star_outline</Button>
+        </CardTitle>
         <CardActions>
           <Button icon onClick={ handleSelect }>
             <FontIcon>mode_edit</FontIcon>
