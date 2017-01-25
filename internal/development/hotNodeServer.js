@@ -1,6 +1,6 @@
 import path from 'path';
-import appRootDir from 'app-root-dir';
 import { spawn } from 'child_process';
+import appRootDir from 'app-root-dir';
 import { log } from '../utils';
 
 class HotNodeServer {

@@ -21,12 +21,14 @@ const FileEditorForm = (props: Props) => {
   return (
       <form onSubmit={ handleSubmit } className="boldr-form__fileeditor">
         <Field
+          id="name"
           name="file_name"
           type="text"
           label="File name"
           component={ TextField }
         />
         <Field
+          id="description"
           name="file_description"
           type="text"
           label="Description"
