@@ -1,0 +1,15 @@
+@import 'vendor/reactmd/react-md';
+
+$md-picker-include-forceful-classes: true;
+$md-primary-color: #308AC8;
+$md-secondary-color: $md-pink-a-400;
+
+@include react-md-everything();
+@import 'vendor/normalize';
+@import 'abstracts/all';
+@import 'base/all';
+@import 'components/all';
+
+.md-dialog {
+  width: 525px;
+}

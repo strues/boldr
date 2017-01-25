@@ -1,0 +1,102 @@
+
+////
+/// @group colors
+////
+
+/// @type Color
+$black: #000;
+/// @type Color
+$white: #fff;
+/// @type Color
+$snow: #f0f0f0;
+/// @type Color
+$cloud: #dfdfdf;
+/// @type Color
+$mercury: #e3e6e9;
+/// @type Color
+$smoke: #8e8d8d;
+/// @type Color
+$bunker: #2d2d2d;
+/// @type Color
+$nero: #252525;
+/// @type Color
+$mirage: rgba(27, 27, 37, 1);
+/// @type Color
+$near-black: #202022;
+/// @type Color
+$grape: rgba(64, 64, 78, 1);
+/// @type Color
+$pinkish: rgb(229, 0, 80);
+/// @type Color
+$ocean: #1c3050;
+/// @type Color
+$water: #0376a3;
+/// @type Color
+$lapiz: #14ADC4;
+/// @type Color
+$navy: #044c66;
+/// @type Color
+$turtle: #11c2bb;
+
+$shadow-color: rgba(0, 0, 0, .2);
+$box-shadow: 0 0 5px $shadow-color;
+
+$body-background: $snow;
+$primary-color: $lapiz;
+$accent-color: $pinkish;
+$primary-button-bg: $primary-color;
+$primary-button-bg-hover: darken($primary-color, 5%);
+
+$selection-color: darken($snow, 3%);
+$link-color: $accent-color;
+$error-color: rgb(244, 67, 54);
+$footer-bg: $mirage;
+$text-color: #555;
+$basic-button-bg: $mercury;
+$menu-header-color: $bunker;
+$contrast-light: #2b343a;
+$contrast-dark: #1d252b;
+
+// Borders
+$border-color: $cloud;
+$import-google-fonts: false;
+$font-name: 'Roboto';
+$font-family: $font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+
+$header-font-name: 'Roboto Slab';
+$menu-font-family: $header-font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+$header-font-color: $navy;
+$header-font-family: $header-font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+$button-font-family: $header-font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+
+
+$font-size-base: 1em;
+$line-height-base: 1.5em;
+$font-weight-base: 400;
+
+$heading-weight: 300;
+$heading-case: none;
+$window-medium: 768px;
+$window-large: 992px;
+$window-xlarge: 1200px;
+
+$padding: 4px;
+$transition-function: cubic-bezier(.25, .8, .25, 1);
+$transition-duration: .25s;
+
+
+$toolbar-height: 64px;
+$toolbar-z-index: 6;
+
+$tiny: 480px;
+$small: 768px;
+$medium: 992px;
+$large: 1200px;
+$grid-width: 1170px;
+$grid-columns: 12;
+$grid-gutter-width: 1.875rem;
+$primary-header-link-color: $near-black;
+$primary-header-link-hover-color: $accent-color;
+$primary-header-border: 1px solid $cloud;
+$primary-header-bg: $white;
+$primary-header-link: $ocean;

@@ -1,0 +1,25 @@
+exports[`<Home /> renders snapshot 1`] = `
+<div>
+  <Connect(TemplateProvider)
+    footer={<Footer />}
+    helmetMeta={
+      <HelmetWrapper
+        title="Home" />
+    }
+    hero={<Hero />}>
+    <Grid
+      componentClass="div"
+      fluid={true}>
+      <Row
+        componentClass="div"
+        style={
+          Object {
+            "padding": "25px",
+          }
+        }>
+        Placeholder
+      </Row>
+    </Grid>
+  </Connect(TemplateProvider)>
+</div>
+`;

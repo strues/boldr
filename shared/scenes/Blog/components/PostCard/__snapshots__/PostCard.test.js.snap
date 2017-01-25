@@ -1,0 +1,73 @@
+exports[`<PostCard /> renders snapshot 1`] = `
+<div
+  className="boldr-post__card-wrapper">
+  <Card
+    expanderIconChildren="keyboard_arrow_down"
+    expanderIconClassName="material-icons"
+    expanderTooltipPosition="left">
+    <Media
+      aspectRatio="16-9"
+      component="section"
+      forceAspect={true}>
+      <img
+        role="presentation" />
+      <MediaOverlay
+        component="div">
+        <CardTitle
+          subtitle="Invalid Date"
+          title="Test Post">
+          <ButtonTooltipedInked
+            className="md-cell--right"
+            icon={true}
+            inkTransitionEnterTimeout={450}
+            inkTransitionLeaveTimeout={300}
+            inkTransitionOverlap={150}>
+            star_outline
+          </ButtonTooltipedInked>
+        </CardTitle>
+      </MediaOverlay>
+    </Media>
+    <CardText
+      component="section">
+      <Row
+        componentClass="div">
+        <Col
+          componentClass="div"
+          xs={12}>
+          <Link
+            onlyActiveOnIndex={false}
+            style={
+              Object {
+                "float": "right",
+                "marginRight": "15px",
+                "marginTop": "15px",
+              }
+            }
+            to="/blog/undefined">
+            <ButtonTooltipedInked
+              inkTransitionEnterTimeout={450}
+              inkTransitionLeaveTimeout={300}
+              inkTransitionOverlap={150}
+              label="Read More"
+              onClick={[Function]}
+              primary={true}
+              raised={true} />
+          </Link>
+        </Col>
+      </Row>
+    </CardText>
+    <Divider />
+    <CardActions>
+      <Row
+        componentClass="div">
+        <Col
+          componentClass="div"
+          xs={12}>
+          <TagBlock
+            tags={null} />
+        </Col>
+      </Row>
+    </CardActions>
+  </Card>
+</div>
+`;
