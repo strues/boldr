@@ -18,6 +18,9 @@
 .*/node_modules/flow-remove-types/.*
 .*/node_modules/flow-coverage-report/.*
 .*/node_modules/styled-components/.*
+.*/node_modules/stylelint/.*
+.*/node_modules/bcryptjs/.*
+.*/node_modules/react-swipeable-views/.*
 [libs]
 
 # Official "flow-typed" repository definitions.

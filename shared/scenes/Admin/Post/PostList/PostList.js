@@ -15,7 +15,7 @@ import { KebabMenu } from '../../../../components';
 import { selectPost } from '../../../../state/modules/blog/posts/actions';
 import { PostTable } from '../components';
 
-export type Props = {
+type Props = {
   posts: Array<Post>,
   post: Post,
   id: String,

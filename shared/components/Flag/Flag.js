@@ -50,21 +50,21 @@ const Flag = props => {
 Flag.propTypes = {
   children: PropTypes.node.isRequired,
   /**
-	 * A function which returns the media element to render in the background.
-	 * It recieves an props object which should be propagated to the JSX element.
-	 */
+   * A function which returns the media element to render in the background.
+   * It recieves an props object which should be propagated to the JSX element.
+   */
   asset: PropTypes.func.isRequired,
   /**
-	 * The percentage width of the image which is relative to the parent, defaults to `40`.
-	 */
+   * The percentage width of the image which is relative to the parent, defaults to `40`.
+   */
   imageWidth: PropTypes.oneOf(['40', '60', '80']),
   /**
-	 * The alignment of the image, defaults to `left`.
-	 */
+   * The alignment of the image, defaults to `left`.
+   */
   imageAlignment: PropTypes.oneOf(['left', 'right']),
   /**
-	 * When set to `true`, the image will be animated to draw more attention to the contents, defaults to `false`.
-	 */
+   * When set to `true`, the image will be animated to draw more attention to the contents, defaults to `false`.
+   */
   isAnimated: PropTypes.bool,
   className: PropTypes.string,
 };

@@ -19,8 +19,8 @@ app.set('port', port);
 app.set('json spaces', 2);
 const server = http.createServer(app);
 
-process.on('SIGTERM', () => close(listener));
-process.on('SIGINT', () => close(listener));
+process.on('SIGTERM', () => close(server));
+process.on('SIGINT', () => close(server));
 server.on('listening', onListening);
 server.on('error', onError);
 
@@ -32,14 +32,14 @@ const listener = server.listen(getConfig('port'), getConfig('host'), () =>
 export default listener;
 
   /* istanbul ignore else */
-function close(listener) {
+function close(server) {
   return new Promise((resolve) => {
-    listener.close(() => {
+    server.close(() => {
       const msg = 'BoldrAPI shutting down...';
       logger.info(msg);
       resolve(msg);
       if (listener) {
-        listener.close(process.exit.bind(process));
+        server.close(process.exit.bind(process));
       } else {
         process.exit();
       }

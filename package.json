@@ -33,9 +33,7 @@
     "dev": {
       "command": "babel-node ./internal/development",
       "env": {
-        "DEBUG": "boldr:*",
-        "NODE_ENV": "development",
-        "BABEL_ENV": "development"
+        "NODE_ENV": "development"
       }
     },
     "migrate": {

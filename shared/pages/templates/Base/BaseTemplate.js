@@ -1,11 +1,11 @@
 /* @flow */
 import React from 'react';
+import styled from 'styled-components';
+
 import { Footer } from '../../../components/index';
 import type { ReactElement, ReactChildren } from '../../../types/react';
 import TemplateProvider from '../TemplateProvider';
 import HeaderWrapper from './HeaderWrapper';
-
-const styled = require('styled-components').default;
 
 type Props = {
   header: ReactElement,
