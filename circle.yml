@@ -7,8 +7,6 @@ machine:
   node:
     version:
       7
-  pre:
-    - mkdir ~/.yarn-cache
   environment:
     YARN_VERSION: 0.19.1
     PATH: "${PATH}:${HOME}/.yarn/bin:${HOME}/${CIRCLE_PROJECT_REPONAME}/node_modules/.bin"
