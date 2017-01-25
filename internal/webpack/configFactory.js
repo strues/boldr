@@ -7,6 +7,7 @@ import AssetsPlugin from 'assets-webpack-plugin';
 import nodeExternals from 'webpack-node-externals';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import appRootDir from 'app-root-dir';
+import BabiliPlugin from 'babili-webpack-plugin';
 import WebpackMd5Hash from 'webpack-md5-hash';
 import { happyPackPlugin } from '../utils';
 import type { BuildOptions } from '../types';
@@ -246,7 +247,13 @@ export default function webpackConfigFactory(buildOptions: BuildOptions) {
               // that it will kill our webpack treeshaking feature as the modules
               // transpilation has not been disabled within in.
               babelrc: false,
-
+              // Faster transpiling for minor loose in formatting
+              compact: true,
+              cacheDirectory: true,
+              // Keep origin information alive
+              sourceMaps: true,
+              // Nobody needs the original comments when having source maps
+              comments: false,
               presets: [
                 // JSX
                 'react',
@@ -273,6 +280,7 @@ export default function webpackConfigFactory(buildOptions: BuildOptions) {
               plugins: [
                 // Required to support react hot loader.
                 ifDevClient('react-hot-loader/babel'),
+                'lodash',
                 'transform-decorators-legacy',
                 ['transform-class-properties', { spec: true }],
                 ['transform-object-rest-spread', { useBuiltIns: true }],

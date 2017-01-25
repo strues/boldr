@@ -1,12 +1,10 @@
-@import 'vendor/reactmd/react-md';
-
-$md-picker-include-forceful-classes: true;
-$md-primary-color: #308AC8;
-$md-secondary-color: $md-pink-a-400;
-
-@include react-md-everything();
 @import 'vendor/normalize';
+@import 'vendor/reactmd/react-md';
 @import 'abstracts/all';
+
+@include react-md-everything;
+@include react-md-theme-everything($md-primary-color, $md-pink-a-400);
+
 @import 'base/all';
 @import 'components/all';
 
