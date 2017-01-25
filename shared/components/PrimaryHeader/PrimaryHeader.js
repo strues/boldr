@@ -6,6 +6,7 @@ import ListItem from 'react-md/lib/Lists/ListItem';
 import Button from 'react-md/lib/Buttons/Button';
 import FontIcon from 'react-md/lib/FontIcons';
 import Toolbar from 'react-md/lib/Toolbars';
+import sortBy from 'lodash/sortBy';
 
 type Props = {
   navigate: () => void,
@@ -28,7 +29,8 @@ const noop = () => {};
 class PrimaryHeader extends Component {
   props: Props;
   render() {
-    const renderedMenuItems = this.props.menu.details.map((item, i) =>
+    const menuItems = sortBy(this.props.menu.details, ['position']);
+    const renderedMenuItems = menuItems.map((item, i) =>
       <Button
         flat
         key={ item.id }
@@ -41,7 +43,7 @@ class PrimaryHeader extends Component {
 
     if (!this.props.auth.isAuthenticated) {
       actions.push(
-        <Button raised primary label="Login" href="/account/login" />,
+        <Button raised primary label="Log In" href="/account/login" />,
         <Button raised secondary label="Sign Up" href="/account/signup" />
       );
     }
@@ -52,12 +54,12 @@ class PrimaryHeader extends Component {
       );
     }
     return (
-      <div className="boldr-primary-header">
+      <div className="boldr-ph">
         <Toolbar
           colored
           title={
             <img src="https://boldr.io/boldr.png"
-              className="ph-logo"
+              className="boldr-ph__logo"
               alt="logo" onClick={ this.props.handleLogoClick }
             />
           }

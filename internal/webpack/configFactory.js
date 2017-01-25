@@ -286,13 +286,13 @@ export default function webpackConfigFactory(buildOptions: BuildOptions) {
                 ['transform-object-rest-spread', { useBuiltIns: true }],
                 'transform-flow-strip-types',
                 'transform-es2015-arrow-functions',
-                ['transform-async-to-module-method', {
-                  module: 'bluebird', method: 'coroutine',
+                ['transform-regenerator', {
+                  async: false,
                 }],
                 ['transform-runtime', {
                   helpers: false,
                   polyfill: false,
-                  regenerator: false,
+                  regenerator: true,
                 }],
                 // This decorates our components with  __self prop to JSX elements,
                 // which React will use to generate some runtime warnings.

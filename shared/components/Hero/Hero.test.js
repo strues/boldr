@@ -4,5 +4,5 @@ import Hero from './Hero';
 
 it('<Hero />, renders the hero', () => {
   const wrapper = shallow(<Hero />);
-  expect(wrapper.find('.primary-hero').length).toBe(1);
+  expect(wrapper.find('.boldr-hero').length).toBe(1);
 });

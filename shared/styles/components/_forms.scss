@@ -37,3 +37,12 @@
     outline-style: auto;
     outline-width: 5px;
 }
+
+.boldr-form__title {
+  background-color: $primary-color;
+
+  h2 {
+    font-weight: 700;
+    color: #fff;
+  }
+}

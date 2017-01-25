@@ -14,51 +14,47 @@ const SignupForm = (props: Props) => {
   const { handleSubmit } = props;
   return (
     <form onSubmit={ handleSubmit } className="boldr-form__generic">
-      <Row>
-        <Col xs={ 6 }>
-          <Field name="email"
+
+          <Field
+            id="signup-email"
+            name="email"
             type="email"
             component={ TextField }
             label="Email address"
           />
-      </Col>
-      <Col xs={ 6 }>
-        <Field name="password"
+
+        <Field
+          id="signup-password"
+          name="password"
           type="password"
           component={ TextField }
           label="Password"
         />
-      </Col>
-      </Row>
-      <Row>
-        <Col xs={ 6 }>
-        <Field name="first_name"
+
+        <Field
+          id="signup-first_n"
+          name="first_name"
           type="text"
           component={ TextField }
           label="First name"
         />
-      </Col>
-      <Col xs={ 6 }>
-        <Field name="last_name"
+
+        <Field
+          id="signup-last_n"
+          name="last_name"
           type="text"
           component={ TextField }
           label="Last name"
         />
-      </Col>
-      </Row>
-      <Row>
-        <Col xs={ 12 }>
-          <Row xsCenter>
-            <Col xs={ 6 }>
-              <Field name="display_name"
-                type="text"
-                component={ TextField }
-                label="Display name"
-              />
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+
+        <Field
+          id="signup_display"
+          name="display_name"
+          type="text"
+          component={ TextField }
+          label="Display name"
+        />
+
       <Button style={ { marginTop: '25px' } } raised primary label="Create Account" type="submit" />
     </form>
   );

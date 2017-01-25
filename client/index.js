@@ -25,7 +25,7 @@ import './polyfills';
 
 // Load fonts
 WebFontLoader.load({
-  google: { families: ['Roboto Slab:100,400,700', 'Roboto:400,700', 'Material Icons'] },
+  google: { families: ['Roboto:300,400,700', 'Material Icons'] },
 });
 // Get the DOM Element that will host our React application.
 const domNode = document.getElementById('app');

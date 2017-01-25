@@ -1,15 +1,16 @@
+/* @flow */
 import React from 'react';
 import Avatar from 'react-md/lib/Avatars';
 import Chip from 'react-md/lib/Chips';
 import Button from 'react-md/lib/Buttons';
 import FontIcon from 'react-md/lib/FontIcons';
+import styled from 'styled-components';
 import { format } from 'date-fns';
 import { Icon, Row, Col } from '../../../../components/index';
 import ActivityItemDetail from '../ActivityItemDetail';
-const styled = require('styled-components').default;
 
 const ActivityPanel = styled.div`
-  height: 80px;
+  height: 60px;
   box-sizing: border-box;
   padding-top: .5em;
   padding-bottom: .5em;
@@ -20,29 +21,55 @@ const ActivityPanel = styled.div`
   border-bottom: 1px solid #D7D8DD;
 `;
 
-const Date = styled.div`
+const DateArea = styled.div`
   margin-right: 10px;
 `;
 const User = styled.div`
   margin-right: 10px;
 `;
+const ActivityIcn = styled.div`
+  margin-left: 10px;
+`;
+type Props = {
+  created_at: Date,
+  owner: Object,
+  action_type_id: Number,
+  activity_post: ?String,
+  activity_user: ?String,
+  activity_attachment: ?String,
+};
 
-const ActivityItem = (props) => {
-    return (
+const ActivityItem = (props: Props) => {
+  const isPostType = props.activity_post !== null;
+  const isMemberType = props.activity_user !== null;
+  const isAttachmentType = props.activity_attachment !== null;
+  let ActivityIcon;
+  if (isPostType) {
+    ActivityIcon = <Icon kind="new-post" color="#02BCD6" />;
+  }
+  if (isMemberType) {
+    ActivityIcon = <FontIcon style={ { color: '#02BCD6' } }>person_add</FontIcon>;
+  }
+  if (isAttachmentType) {
+    ActivityIcon = <FontIcon style={ { color: '#02BCD6' } }>insert_drive_file</FontIcon>;
+  }
+  return (
       <ActivityPanel>
-        <Date>
-          <Button icon tooltipLabel={format(props.created_at, 'MM/DD/YYYY')}>access_time</Button>
-        </Date>
+        <DateArea>
+          <Button icon tooltipLabel={ format(props.created_at, 'MM/DD/YYYY') }>access_time</Button>
+        </DateArea>
         <User>
           <Chip
             label={ props.owner.first_name }
-            avatar={ <Avatar src={ props.owner.avatar_url } role="presentation"/> }
+            avatar={ <Avatar src={ props.owner.avatar_url } role="presentation" /> }
           />
         </User>
-        <ActivityItemDetail atype={ props.action_type_id }/>
-        <Icon kind="new-post" color="#308AC8" />
+        <ActivityItemDetail atype={ props.action_type_id } />
+        <ActivityIcn>
+          { ActivityIcon }
+        </ActivityIcn>
       </ActivityPanel>
-    );
+  );
 };
 
 export default ActivityItem;

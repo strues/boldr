@@ -9,8 +9,16 @@
     color: $pinkish;
   }
 }
-.ph-logo {
+.boldr-ph__logo {
   height: 45px;
   vertical-align: middle;
   align-self: center;
+  margin-right: 15px;
+}
+
+.md-toolbar--action-right {
+  .md-btn {
+    text-align: center;
+    font-weight: 700;
+  }
 }

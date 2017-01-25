@@ -21,8 +21,11 @@ $bunker: #2d2d2d;
 $nero: #252525;
 /// @type Color
 $mirage: rgba(27, 27, 37, 1);
+
+$dark-navy: #262B33;
+
 /// @type Color
-$near-black: #202022;
+$near-black: #1E232B;
 /// @type Color
 $grape: rgba(64, 64, 78, 1);
 /// @type Color
@@ -37,17 +40,17 @@ $lapiz: #14ADC4;
 $navy: #044c66;
 /// @type Color
 $turtle: #11c2bb;
-
+$primary-color: #02BCD6;
 $md-picker-include-forceful-classes: true;
-$md-primary-color: #308AC8;
-$md-secondary-color: $md-pink-a-400;
+$md-primary-color: $primary-color;
+$md-secondary-color: $md-pink-500;
 
 $shadow-color: rgba(0, 0, 0, .2);
 $box-shadow: 0 0 5px $shadow-color;
 
 $body-background: $snow;
-$primary-color: $lapiz;
-$accent-color: $pinkish;
+
+$accent-color: $md-secondary-color;
 $primary-button-bg: $primary-color;
 $primary-button-bg-hover: darken($primary-color, 5%);
 
