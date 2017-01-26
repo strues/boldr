@@ -227,18 +227,16 @@ function seed(knex, Promise) {
       knex('template').insert({
         id: 1,
         uuid: 'c23891fb-88c2-4e91-b95d-c652f15eab0c',
-        name: 'base',
-        label: 'Base',
-        resource: '/',
+        slug: 'base',
+        name: 'Base',
         meta: {},
         content: {},
       }),
       knex('template').insert({
         id: 2,
         uuid: 'd42f91fb-88c2-4e91-b95d-c652f15eab0c',
-        name: 'content',
-        label: 'Content',
-        resource: 'content',
+        slug: 'content',
+        name: 'Content',
         meta: {},
         content: {},
       }),
@@ -247,7 +245,7 @@ function seed(knex, Promise) {
       knex('page').insert({
         id: '87d1e9b3-b32e-474e-9246-6dce1b21a72d',
         name: 'Home',
-        label: 'home',
+        slug: 'home',
         url: 'home',
         layout: {
           showHero: true,
@@ -264,7 +262,7 @@ function seed(knex, Promise) {
       knex('page').insert({
         id: '0a277a50-b482-4b86-b0e7-83fdd3a372af',
         name: 'About',
-        label: 'about',
+        slug: 'about',
         url: 'about',
         layout: {
           showHero: true,

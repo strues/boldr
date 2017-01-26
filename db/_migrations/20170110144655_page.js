@@ -2,7 +2,7 @@ exports.up = function(knex) {
   return knex.schema.createTable('page', (table) => {
     table.uuid('id').unsigned().primary();
     table.string('name').unique().notNullable();
-    table.string('label');
+    table.string('slug').unique();
     table.string('url').unique().notNullable();
     table.json('layout');
     table.json('data');

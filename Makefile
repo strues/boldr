@@ -25,6 +25,10 @@ seed-ci:
 seed-test:
 	NODE_ENV=test $(TEST_DB) ./node_modules/.bin/knex --knexfile $(KNEX_FILE) seed:run
 
+compile:
+	NODE_ENV=production yarn run build
+
+
 setup-db:
 	make migrate-ci
 	make seed-ci

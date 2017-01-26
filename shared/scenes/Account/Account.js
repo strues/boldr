@@ -9,11 +9,9 @@ type Props = { children: ReactElement, auth: Object }; // eslint-disable-line
 
 const Account = (props: Props) => {
   return (
-    <div>
-      <BaseTemplate>
-        { props.children }
-      </BaseTemplate>
-    </div>
+    <BaseTemplate>
+      { props.children }
+    </BaseTemplate>
   );
 };
 

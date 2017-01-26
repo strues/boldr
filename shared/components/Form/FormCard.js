@@ -21,7 +21,7 @@ const FormFooterItem = styled.li`
 type Props = {
   width: Number,
   title: String,
-  form: ReactElement,
+  form: any,
   extra1: any,
   extra2: ?any,
 };

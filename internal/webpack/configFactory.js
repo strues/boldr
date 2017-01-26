@@ -280,7 +280,6 @@ export default function webpackConfigFactory(buildOptions: BuildOptions) {
               plugins: [
                 // Required to support react hot loader.
                 ifDevClient('react-hot-loader/babel'),
-                'lodash',
                 'transform-decorators-legacy',
                 ['transform-class-properties', { spec: true }],
                 ['transform-object-rest-spread', { useBuiltIns: true }],
