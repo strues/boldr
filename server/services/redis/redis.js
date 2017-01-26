@@ -6,7 +6,7 @@ import logger from '../logger';
 bluebird.promisifyAll(redis.RedisClient.prototype);
 bluebird.promisifyAll(redis.Multi.prototype);
 
-const redisClient = redis.createClient(getConfig('redis.url'));
+const redisClient = redis.createClient(process.env.REDIS_CONN_URI);
 
 redisClient.on('connect', () => {
   logger.info('Redis connection has been established!');

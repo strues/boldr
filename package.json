@@ -33,7 +33,9 @@
     "dev": {
       "command": "babel-node ./internal/development",
       "env": {
-        "NODE_ENV": "development"
+        "NODE_ENV": "development",
+        "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr",
+        "REDIS_CONN_URI": "redis://127.0.0.1:6379/1"
       }
     },
     "migrate": {
@@ -69,7 +71,7 @@
     "seed": "better-npm-run seed",
     "start": "NODE_ENV=production node bin/boldr",
     "test:ci": "NODE_ENV=test CI=true jest -w 2 --coverage",
-    "test": "jest",
+    "test": "jest -w 2",
     "test:watch": "NODE_ENV=test jest"
   },
   "jest": {
@@ -114,6 +116,7 @@
     "aws-sdk": "^2.7.28",
     "bcryptjs": "^2.4.0",
     "bluebird": "^3.4.7",
+    "better-npm-run": "^0.0.14",
     "body-parser": "^1.16.0",
     "classnames": "^2.2.5",
     "colors": "1.1.2",
@@ -166,6 +169,7 @@
     "source-map-support": "0.4.10",
     "styled-components": "^1.4.0",
     "superagent": "^3.3.2",
+    "user-home": "^2.0.0",
     "uuid": "^3.0.1",
     "webfontloader": "^1.6.27",
     "winston": "^2.3.1"
@@ -195,7 +199,6 @@
     "babel-preset-react": "^6.22.0",
     "babel-preset-stage-2": "^6.22.0",
     "babili-webpack-plugin": "^0.0.8",
-    "better-npm-run": "^0.0.14",
     "chai": "^3.5.0",
     "chokidar": "1.6.1",
     "css-loader": "0.26.1",
@@ -238,7 +241,6 @@
     "style-loader": "0.13.1",
     "stylelint": "^7.7.1",
     "supertest": "^2.0.1",
-    "user-home": "^2.0.0",
     "webpack": "2.2.0",
     "webpack-bundle-analyzer": "2.2.1",
     "webpack-dev-middleware": "1.9.0",

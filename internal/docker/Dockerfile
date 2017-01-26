@@ -33,12 +33,9 @@ RUN tar xzf /tmp/yarn-${VERSION}.tar.gz && \
     ln -sf /opt/yarn/bin/yarn /bin/yarn && \
     rm -rf /root/.gnupg /tmp/yarn-${VERSION}.tar.gz /tmp/yarn-${VERSION}.tar.gz.asc \
     /opt/yarn/end_to_end_tests && \
-    apk del --no-cache curl gnupg && \
+    apk del --no-cache curl gnupg perl linux-headers && \
     npm install -g node-gyp && \
-    adduser -DS -u $uid boldr && \
-    echo $user' ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
-    mkdir /app && \
-    chown -R boldr:boldr /app
+    mkdir /app
 
 # Switch to project directory
 WORKDIR /app

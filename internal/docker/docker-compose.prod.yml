@@ -28,6 +28,23 @@ services:
     networks:
       - boldr
 
+  boldr:
+    build: .
+    container_name: boldr_cms
+    restart: always
+    environment:
+      POSTGRES_CONN_URI: postgres://postgres:password@postgres:5432/boldr
+      REDIS_CONN_URI: redis://redis:6379/1
+    ports:
+      - "3000:3000"
+    depends_on:
+      - redis
+      - postgres
+    networks:
+      - boldr
+    volumes:
+      - "./public:/app/public"
+
 networks:
   boldr:
     driver: bridge

@@ -48,7 +48,7 @@ export const doResetPassword = (password, token) =>
   *****************************************************************/
 
 export const getAllPosts = () =>
-  apiClient.get('/posts?include=[author,tags]');
+  apiClient.get('/posts');
 
 export const getPostById = (postId) =>
   apiClient.get(`/posts/pid/${postId}`);

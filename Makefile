@@ -28,6 +28,16 @@ seed-test:
 compile:
 	NODE_ENV=production yarn run build
 
+directories:
+	rm -rf release && mkdir -p release/bin release/db release/public release/boldrCMS && cp bin/boldr.js release/bin/ && cp package.json release/package.json && cp .env release/.env && cp -r db/ release/db/ && cp -r public/ release/public/
+
+files:
+	cp knexfile.js internal/docker/Dockerfile release/ && cp internal/docker/docker-compose.prod.yml release/docker-compose.yml && cp -r boldrCMS/ release/boldrCMS/
+
+container:
+	cd release; docker build -t strues/boldrcms .
+
+release: compile directories files
 
 setup-db:
 	make migrate-ci
