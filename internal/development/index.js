@@ -1,5 +1,5 @@
-import chokidar from 'chokidar';
 import { resolve as pathResolve } from 'path';
+import chokidar from 'chokidar';
 import appRootDir from 'app-root-dir';
 import { log } from '../utils';
 

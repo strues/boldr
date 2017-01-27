@@ -1,23 +1,21 @@
 /**
  * Session Middleware
- * src/core/middleware/session
+ * server/middleware/session
  */
 
 import session from 'express-session';
+import connectRedis from 'connect-redis';
 import redisClient from '../services/redis';
 import getConfig from '../../config/get';
-
-const RedisStore = require('connect-redis')(session);
 
 const env = getConfig('env') || 'development';
 
 const sessionMiddleware = session({
-  store: new RedisStore({ client: redisClient }),
+  store: new (connectRedis(session))({ client: redisClient }),
   secret: getConfig('token.secret'),
-  name: 'boldr:sid',
-  proxy: true,
-  resave: false,
-  saveUninitialized: false,
+  name: 'sid',
+  resave: true,
+  saveUninitialized: true,
   unset: 'destroy',
 });
 

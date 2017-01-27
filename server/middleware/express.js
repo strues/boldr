@@ -1,9 +1,11 @@
 import cors from 'cors';
 import uuid from 'uuid';
+import shrinkRay from 'shrink-ray';
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 import expressValidator from 'express-validator';
 import morgan from 'morgan';
+import flash from 'express-flash';
 import hpp from 'hpp';
 import getConfig from '../../config/get';
 
@@ -19,6 +21,7 @@ export default (app) => {
   app.disable('x-powered-by');
   app.set('trust proxy', 'loopback');
   app.use(nonceMiddleware);
+  app.use(shrinkRay());
   // enable CORS - Cross Origin Resource Sharing
   // allow for sending credentials (auth token) in the headers.
   app.use(cors({ origin: true, credentials: true }));
@@ -35,6 +38,7 @@ export default (app) => {
   // must be right after bodyParser
   app.use(expressValidator());
   app.use(hpp());
+  app.use(flash());
   app.use(methodOverride((req, res) => {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
       // look in urlencoded POST bodies and delete it

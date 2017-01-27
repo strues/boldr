@@ -39,17 +39,39 @@
       }
     },
     "migrate": {
-      "command": "knex migrate:latest",
+      "command": "node --harmony internal/scripts/db.js migrate",
+      "env": {
+        "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr",
+        "NODE_ENV": "development"
+      }
+    },
+    "migration": {
+      "command": "node --harmony internal/scripts/db.js migration",
+      "env": {
+        "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr",
+        "NODE_ENV": "development"
+      }
+    },
+    "migrate:undo": {
+      "command": "node --harmony internal/scripts/db.js migrate:undo",
       "env": {
         "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr",
         "NODE_ENV": "development"
       }
     },
     "seed": {
-      "command": "knex seed:run",
+      "command": "node --harmony internal/scripts/db.js seed",
       "env": {
         "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr",
         "NODE_ENV": "development"
+      }
+    },
+    "test": {
+      "command": "jest -w 2",
+      "env": {
+        "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr",
+        "NODE_ENV": "test",
+        "KNEX_TEST_TIMEOUT": 30000
       }
     }
   },
@@ -58,21 +80,19 @@
     "babel": "NODE_ENV=production babel --ignore node_modules",
     "build": "NODE_ENV=production babel-node internal/scripts/build",
     "clean": "babel-node internal/scripts/clean",
-    "cleandb": "babel-node internal/scripts/destroyDB",
-    "createdb": "babel-node internal/scripts/createDB",
     "dev": "better-npm-run dev",
-    "development": "babel-node internal/development",
     "flow": "babel-node internal/scripts/flow",
     "flow:defs": "flow-typed install --overwrite",
-    "flow:remove": "babel-node internal/scripts/removeFlow && rimraf tools/scripts/removeFlow.js",
-    "lint": "eslint src",
+    "lint": "eslint client shared server",
     "knex": "./node_modules/.bin/knex",
     "migrate": "better-npm-run migrate",
+    "migrate:undo": "better-npm-run migrate:undo",
+    "migration": "better-npm-run migration",
     "seed": "better-npm-run seed",
     "start": "NODE_ENV=production node bin/boldr",
     "test:ci": "NODE_ENV=test CI=true jest -w 2 --coverage",
-    "test": "jest -w 2",
-    "test:watch": "NODE_ENV=test jest"
+    "test": "better-npm-run test",
+    "test:watch": "NODE_ENV=test jest --watch"
   },
   "jest": {
     "moduleNameMapper": {
@@ -120,7 +140,6 @@
     "body-parser": "^1.16.0",
     "classnames": "^2.2.5",
     "colors": "1.1.2",
-    "compression": "^1.6.2",
     "connect-redis": "^3.2.0",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.1",
@@ -130,6 +149,7 @@
     "draft-js-export-html": "^0.5.2",
     "draft-js-import-html": "^0.3.2",
     "express": "4.14.0",
+    "express-flash": "^0.0.2",
     "express-redis-cache": "^0.5.0",
     "express-session": "^1.15.0",
     "express-validator": "^3.1.2",
@@ -150,13 +170,14 @@
     "nodemailer": "^2.7.2",
     "normalizr": "3.1.0",
     "objection": "^0.6.2",
+    "offline-plugin": "^4.5.5",
     "pg": "^6.1.2",
+    "pretty-error": "^2.0.2",
     "react": "15.4.2",
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-transition-group": "^15.4.2",
     "react-dom": "15.4.2",
     "react-helmet": "4.0.0",
-    "react-images": "^0.5.2",
     "react-md": "^1.0.1",
     "react-redux": "5.0.2",
     "react-router": "^3.0.2",
@@ -167,6 +188,7 @@
     "redux-thunk": "^2.2.0",
     "reselect": "^2.5.4",
     "serialize-javascript": "1.3.0",
+    "shrink-ray": "^0.1.3",
     "source-map-support": "0.4.10",
     "styled-components": "^1.4.0",
     "superagent": "^3.3.2",
@@ -199,7 +221,6 @@
     "babel-preset-latest": "^6.22.0",
     "babel-preset-react": "^6.22.0",
     "babel-preset-stage-2": "^6.22.0",
-    "babili-webpack-plugin": "^0.0.8",
     "chai": "^3.5.0",
     "chokidar": "1.6.1",
     "css-loader": "0.26.1",
@@ -213,10 +234,10 @@
     "faker": "^3.1.0",
     "file-loader": "0.9.0",
     "flow-bin": "0.38.0",
-    "flow-remove-types": "1.1.2",
     "flow-typed": "2.0.0",
     "glob": "7.1.1",
     "happypack": "3.0.2",
+    "html-webpack-plugin": "^2.26.0",
     "jasmine-reporters": "^2.2.0",
     "jest-cli": "^18.1.0",
     "md5": "2.2.1",
@@ -224,7 +245,6 @@
     "nock": "^9.0.2",
     "node-notifier": "4.6.1",
     "node-sass": "^4.3.0",
-    "pgtools": "^0.2.3",
     "postcss-css-variables": "^0.6.0",
     "postcss-cssnext": "^2.9.0",
     "postcss-custom-media": "^5.0.1",

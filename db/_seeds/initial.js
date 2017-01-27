@@ -26,17 +26,14 @@ function seed(knex, Promise) {
       knex('role').insert({
         name: 'Member',
         description: 'A verified user without special privileges',
-        uuid: 'a0664851-cada-44ed-a60c-7234f9bfa74d',
       }),
       knex('role').insert({
         name: 'Staff',
         description: 'Allows access to the CMS dashboard.',
-        uuid: 'bf0cafe5-808f-4a87-932c-da26cb9bae31',
       }),
       knex('role').insert({
         name: 'Admin',
         description: 'Complete control over the CMS',
-        uuid: '9b490322-26aa-4374-8840-1d010f406d8c',
       }),
     ]))
     .then(() => Promise.all([
@@ -46,7 +43,7 @@ function seed(knex, Promise) {
         password: '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka',
         first_name: 'Joe',
         last_name: 'Gray',
-        display_name: 'Joey',
+        username: 'Joey',
         avatar_url: 'https://boldr.io/images/unknown-avatar.png',
         location: 'Colorado',
         bio: 'I am me.',
@@ -61,7 +58,7 @@ function seed(knex, Promise) {
         password: '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka',
         first_name: 'Jessica',
         last_name: 'Smith',
-        display_name: 'Jess',
+        username: 'Jess',
         avatar_url: 'https://boldr.io/images/unknown-avatar.png',
         location: 'Washington',
         bio: 'Just a person',
@@ -76,7 +73,7 @@ function seed(knex, Promise) {
         password: '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka',
         first_name: 'Sam',
         last_name: 'Hunt',
-        display_name: 'Samus',
+        username: 'Samus',
         avatar_url: 'https://boldr.io/images/unknown-avatar.png',
         location: 'California',
         bio: 'Someone doing things.',
@@ -90,12 +87,10 @@ function seed(knex, Promise) {
       knex('tag').insert({
         name: 'javascript',
         description: 'Something something JS',
-        uuid: '53fbcad9-f76b-4267-8c7a-0b5f17c56386',
       }),
       knex('tag').insert({
         name: 'apple',
         description: 'Stuff about stuff.',
-        uuid: 'd4743d4c-ff99-4ab5-962a-82f41cf7696c',
       }),
     ]))
     .then(() => Promise.all([
@@ -174,7 +169,6 @@ function seed(knex, Promise) {
     .then(() => Promise.all([
       knex('menu').insert({
         name: 'Main',
-        uuid: '908db7f1-05b8-451f-b756-2fbe28c15976',
         label: 'main',
         restricted: false,
         order: 0,
@@ -184,7 +178,6 @@ function seed(knex, Promise) {
     .then(() => Promise.all([
       knex('menu_detail').insert({
         name: 'About',
-        uuid: '39daff4d-fbc4-438b-9d85-cdb7bb9770b8',
         label: 'about',
         position: 1,
         link: '/about',
@@ -192,7 +185,6 @@ function seed(knex, Promise) {
       }),
       knex('menu_detail').insert({
         name: 'Blog',
-        uuid: '45f9dcb6-5843-412f-8079-43e55c651e38',
         label: 'blog',
         position: 2,
         link: '/blog',
@@ -293,49 +285,42 @@ function seed(knex, Promise) {
         label: 'Site Name',
         value: 'Boldr',
         description: 'The website name.',
-        uuid: '96cbccae-bb62-4895-961a-7966839146aa',
       }),
       knex('setting').insert({
         key: 'site_url',
         label: 'Site URL',
         value: 'http://localhost:3000',
         description: 'The address used to access your website.',
-        uuid: '0c60d1e4-cc19-459c-a31c-2e7cf91fc4f4',
       }),
       knex('setting').insert({
         key: 'site_logo',
         label: 'Site Logo',
         value: 'https://boldr.io/boldr.png',
         description: 'The logo is displayed in the header area.',
-        uuid: 'd54d7c6f-5869-414f-a2e1-b0458a2fb828',
       }),
       knex('setting').insert({
         key: 'site_description',
         label: 'Site Description',
         value: 'A modern CMS',
         description: 'Meta header for search results.',
-        uuid: 'e8ed37d2-2b72-4777-8839-4ff12b15c1b4',
       }),
       knex('setting').insert({
         key: 'favicon',
         label: 'Favicon',
         value: 'https://boldr.io/favicon.ico',
         description: 'Favicon to use for your website.',
-        uuid: 'a746b40a-3939-45d7-a3e0-35b26a4c3707',
       }),
       knex('setting').insert({
         key: 'google_analytics',
         label: 'Google Analytics ID',
         value: 'UA-323432',
         description: 'Google Analytics tracking code',
-        uuid: 'e5cf6945-3ba1-4cf6-a7e6-eb836b652d54',
       }),
       knex('setting').insert({
         key: 'allow_registration',
         label: 'Allow Registration',
         value: true,
         description: 'Toggle allowing user\'s to register for accounts.',
-        uuid: 'b86c5e47-71f6-4946-b0b7-546abedf74ae',
       }),
     ]))
     .then(() => Promise.all([

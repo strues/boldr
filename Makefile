@@ -14,13 +14,13 @@ test-ci:
 	NODE_ENV=test CI=true jest -w 2
 
 migrate-ci:
-	NODE_ENV=test $(CI_DB) ./node_modules/.bin/knex --knexfile $(KNEX_FILE) migrate:latest
+	NODE_ENV=test $(CI_DB) node --harmony internal/scripts/db.js migrate
 
 migrate-test:
-	NODE_ENV=test $(TEST_DB) ./node_modules/.bin/knex --knexfile $(KNEX_FILE) migrate:latest
+	NODE_ENV=test $(TEST_DB) node --harmony internal/scripts/db.js migrate
 
 seed-ci:
-	NODE_ENV=test $(CI_DB) ./node_modules/.bin/knex --knexfile $(KNEX_FILE) seed:run
+	NODE_ENV=test $(CI_DB) node --harmony internal/scripts/db.js seed
 
 seed-test:
 	NODE_ENV=test $(TEST_DB) ./node_modules/.bin/knex --knexfile $(KNEX_FILE) seed:run

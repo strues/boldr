@@ -23,8 +23,6 @@ Boldr is a modern content management framework. Think of Boldr as the solid foun
 
 ## Screenshots
 
-<img src="docs/assets/dashboard.png" width="300" /> <img src="docs/assets/posteditor.png" width="300" /> <img src="docs/assets/filemanager.png" width="300" />  
-
 
 ## Core Technologies
 
@@ -68,7 +66,7 @@ Run the CMS using `npm run dev`
 
 After Boldr has started visit <http://localhost:3000>. The admin account is already created and you may login using these credentials:
 
-> Email - admin@boldr.io<br>
+> Email - admin@boldr.io
 > Password - password
 
 Settings for the build process as well as misc configurations located within the config directory in the `index.js` file.

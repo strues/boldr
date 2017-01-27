@@ -2,8 +2,15 @@ import Knex from 'knex';
 import { Model } from 'objection';
 import knexConfig from '../../../knexfile';
 
-const knex = Knex(knexConfig[process.env.NODE_ENV]);
+const db = Knex({
+  client: 'pg',
+  connection: process.env.POSTGRES_CONN_URI,
+  migrations: {
+    tableName: 'migrations',
+  },
+  debug: process.env.DATABASE_DEBUG === 'true',
+});
 
-Model.knex(knex);
+Model.knex(db);
 
-export default knex;
+export default db;

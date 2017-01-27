@@ -1,8 +1,8 @@
 import express from 'express';
 import createWebpackMiddleware from 'webpack-dev-middleware';
 import createWebpackHotMiddleware from 'webpack-hot-middleware';
-import ListenerManager from './listenerManager';
 import { log } from '../utils';
+import ListenerManager from './listenerManager';
 
 class HotClientServer {
   constructor(compiler) {
@@ -12,7 +12,8 @@ class HotClientServer {
     const httpPath = compiler.options.output.publicPath;
     if (!httpPath.startsWith('http') && !httpPathRegex.test(httpPath)) {
       throw new Error(
-        'You must supply an absolute public path to a development build of a web target bundle as it will be hosted on a seperate development server to any node target bundles.',
+        `You must supply an absolute public path to a development build of a
+        web target bundle as it will be hosted on a seperate development server to any node target bundles.`,
       );
     }
 
