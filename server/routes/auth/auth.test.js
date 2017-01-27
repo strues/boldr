@@ -70,7 +70,7 @@ it('POST /signup -- Signup user', async () => {
     password: 'password',
     first_name: faker.name.firstName(),
     last_name: faker.name.lastName(),
-    display_name: faker.internet.userName(),
+    username: faker.internet.userName(),
     avatar_url: faker.image.imageUrl(),
   };
   const { status } = await request()

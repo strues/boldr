@@ -51,7 +51,7 @@ export class MembersContainer extends Component {
 
   handleSubmit(values: Object) {
     const userData = {
-      display_name: values.display_name,
+      username: values.username,
       first_name: values.first_name,
       last_name: values.last_name,
       role: values.role,

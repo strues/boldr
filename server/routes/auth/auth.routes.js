@@ -28,7 +28,7 @@ const router = express.Router();
  *      "email": "admin@boldr.io",
  *      "first_name": "Joe",
  *      "last_name": "Gray",
- *      "display_name": "Joey",
+ *      "username": "Joey",
  *      "avatar_url": "https://boldr.io/images/unknown-avatar.png",
  *      "verified": true,
  *      "role": [{
@@ -52,7 +52,7 @@ router.post('/login', ctrl.loginUser);
  * @apiParam {String} password User password
  * @apiParam {String} first_name First name of the user
  * @apiParam {String} last_name Last name of the user
- * @apiParam {String} display_name The user's display name
+ * @apiParam {String} username The user's display name
  * @apiParam {String} avatar_url Url for the user's avatar
  * @apiSuccess (Success 201) {Object} user Current user data
  * @apiError 409 Email already exists

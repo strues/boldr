@@ -11,7 +11,7 @@ const preloadState = {
       email: '',
       firstName: '',
       lastName: '',
-      displayName: '',
+      username: '',
       avatarUrl: '',
       role: '',
       roleId: '',

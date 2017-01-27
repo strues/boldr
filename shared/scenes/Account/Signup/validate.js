@@ -1,10 +1,10 @@
 const validate = values => {
   // IMPORTANT: values is an Immutable.Map here!
   const errors = {};
-  if (!values.display_name) {
-    errors.display_name = 'Required';
-  } else if (values.display_name.length > 30) {
-    errors.display_name = 'Must be 30 characters or less';
+  if (!values.username) {
+    errors.username = 'Required';
+  } else if (values.username.length > 30) {
+    errors.username = 'Must be 30 characters or less';
   }
   if (!values.email) {
     errors.email = 'Required';

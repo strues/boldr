@@ -49,7 +49,7 @@ const SignupForm = (props: Props) => {
 
         <Field
           id="signup_display"
-          name="display_name"
+          name="username"
           type="text"
           component={ TextField }
           label="Display name"

@@ -197,7 +197,7 @@ export const getAllMembers = () =>
 
 export const doUpdateMember = (userData) => {
   const payload = {
-    display_name: userData.display_name,
+    username: userData.username,
     first_name: userData.first_name,
     last_name: userData.last_name,
     avatar_url: userData.avatar_url,

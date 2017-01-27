@@ -19,7 +19,7 @@ const MemberCard = (props) => {
   return (
     <Card>
        <CardTitle
-         title={ props.user.display_name }
+         title={ props.user.username }
          subtitle={ props.user.roles[0].name }
          avatar={ <Avatar src={ props.user.avatar_url } role="presentation" /> }
        />
