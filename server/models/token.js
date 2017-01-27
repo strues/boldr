@@ -5,7 +5,7 @@ import User from './user';
 class Token extends BaseModel {
   static get tableName() { return 'token'; }
   static addTimestamps = true;
-  static addUUID = false;
+
   static get relationMappings() {
     return {
       tokens: {

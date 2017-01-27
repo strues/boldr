@@ -1,8 +1,10 @@
 /* @flow */
 import React, { Component, PropTypes } from 'react';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import type { Post, PostImage } from '../../../../types/models';
 import { createPost } from '../../../../state/modules/blog/posts';
+import { NewPostForm } from '../components';
 import NewPost from './NewPost';
 
 type Props = {
@@ -15,27 +17,28 @@ class NewPostContainer extends Component {
   constructor() {
     super();
 
-    (this: any).onFormSubmit = this.onFormSubmit.bind(this);
+    (this: any).handleOnSubmit = this.handleOnSubmit.bind(this);
   }
 
-  onFormSubmit(data: Post) {
+  handleOnSubmit(values: Post) {
+    console.log(values)
     const postData = {
-      title: data.title,
-      tags: data.tags,
-      excerpt: data.excerpt,
-      feature_image: this.props.postImage.url || data.feature_image,
-      status: data.status,
-      content: data.content,
-      seo: data.seo,
+      title: values.title,
+      tags: values.tags,
+      excerpt: values.excerpt,
+      feature_image: this.props.postImage.url || values.feature_image,
+      published: values.published,
+      content: values.content,
+      seo: values.seo,
     };
-    this.props.dispatch(createPost(postData));
+    this.props.createPost(postData);
   }
   props: Props;
 
   render() {
     return (
-      <NewPost
-        onFormSubmit={ this.onFormSubmit }
+      <NewPostForm
+        onSubmit={ this.handleOnSubmit }
         drawer={ this.props.drawer }
         postImage={ this.props.postImage }
       />
@@ -53,4 +56,4 @@ const mapStateToProps = (state) => {
     drawer: state.boldr.ui.drawer,
   };
 };
-export default connect(mapStateToProps)(NewPostContainer);
+export default connect(mapStateToProps, { createPost })(NewPostContainer);

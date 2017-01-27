@@ -32,7 +32,9 @@ router.get('/', ctrl.listRoles);
  * @apiSuccess {Object[]} roles.users   array containing the associated user objects.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-// router.get('/:id', controller.show.bind(controller));
+router.get('/:id', ctrl.getRole);
+
+router.get('/:id/users', ctrl.getRoleUsers);
 // router.post('/', isAuthenticated, controller.create.bind(controller));
 // router.put('/:id', isAuthenticated, controller.update.bind(controller));
 // router.patch('/:id', isAuthenticated, controller.update.bind(controller));

@@ -11,7 +11,6 @@ import MenuDetail from './menuDetail';
 class Activity extends BaseModel {
   static get tableName() { return 'activity'; }
   static addTimestamps = true;
-  static addUUID = false;
   static get relationMappings() {
     return {
       owner: {

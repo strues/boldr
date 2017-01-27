@@ -8,7 +8,6 @@ class Tag extends BaseModel {
     return 'tag';
   }
   static addTimestamps = false;
-  static addUUID = true;
   static get relationMappings() {
     return {
       posts: {

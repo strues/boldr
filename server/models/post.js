@@ -11,7 +11,6 @@ class Post extends BaseModel {
     return 'post';
   }
   static addTimestamps = true;
-  static addUUID = false;
   static hidden = ['password'];
   static get idColumn() {
     return 'id';

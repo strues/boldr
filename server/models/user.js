@@ -16,7 +16,7 @@ class User extends BaseModel {
     return 'user';
   }
   static addTimestamps = true;
-  static addUUID = false;
+
   /**
    * An array of attribute names that will be excluded from being returned.
    *

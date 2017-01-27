@@ -69,7 +69,7 @@
     "test": {
       "command": "jest -w 2",
       "env": {
-        "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr",
+        "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr_test",
         "NODE_ENV": "test",
         "KNEX_TEST_TIMEOUT": 30000
       }
@@ -169,7 +169,7 @@
     "multer-s3": "^2.5.0",
     "nodemailer": "^2.7.2",
     "normalizr": "3.1.0",
-    "objection": "^0.6.2",
+    "objection": "next",
     "offline-plugin": "^4.5.5",
     "pg": "^6.1.2",
     "pretty-error": "^2.0.2",

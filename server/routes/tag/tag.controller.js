@@ -30,4 +30,45 @@ async function getTaggedPostsByName(req, res) {
   debug(tags);
   return responseHandler(res, 200, tags);
 }
-export { listTags, getTaggedPosts, getTaggedPostsByName };
+
+async function createTag(req, res, next) {
+  try {
+    const newTag = await Tag.query().insert(req.body);
+    return responseHandler(res, 201, newTag);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+}
+
+function updateTag(req, res) {
+  debug(req.body);
+  return Tag.query()
+    .patchAndFetchById(req.params.id, req.body)
+    .then(async (tag) => {
+      // await Activity.query().insert({
+      //   id: uuid(),
+      //   user_id: req.user.id,
+      //   action_type_id: 2,
+      //   activity_post: post.id,
+      // });
+      responseHandler(res, 202, tag);
+    });
+}
+
+function deleteTag(req, res) {
+  return Tag.query()
+    .deleteById(req.params.id)
+    .then(() => responseHandler(res, 204));
+}
+
+async function relateTagToPost(req, res, next) {
+  try {
+    const tag = await Tag.query().findById(req.params.id);
+    const newRelation = await tag.$relatedQuery('posts').relate({ id: req.params.postid });
+    return res.status(200).json(newRelation);
+  } catch (err) {
+    return res.status(500).json(err);
+  }
+}
+
+export { listTags, getTaggedPosts, getTaggedPostsByName, createTag, updateTag, deleteTag, relateTagToPost };

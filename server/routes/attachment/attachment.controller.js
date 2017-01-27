@@ -1,7 +1,8 @@
 import Debug from 'debug';
 import uuid from 'uuid';
+import * as objection from 'objection';
 import s3 from '../../services/aws/s3';
-import { responseHandler } from '../../core/index';
+import { responseHandler, BadRequest } from '../../core/index';
 import getConfig from '../../../config/get';
 import Activity from '../../models/activity';
 import Attachment from '../../models/attachment';
@@ -20,7 +21,6 @@ export const listAttachments = async (req, res, next) => {
 
 export async function fromDashboard(req, res, next) {
   const fileFields = {
-    id: uuid(),
     url: req.body.url,
     user_id: req.user.id,
     file_name: req.body.file_name,
@@ -32,7 +32,6 @@ export async function fromDashboard(req, res, next) {
   const newAttachment = await Attachment.query().insertAndFetch(fileFields);
 
   await Activity.query().insert({
-    id: uuid(),
     user_id: req.user.id,
     action_type_id: 1,
     activity_attachment: newAttachment.id,
@@ -72,27 +71,26 @@ export function updateAttachment(req, res) {
 export async function deleteAttachment(req, res, next) {
   try {
     const attachment = await Attachment.query().findById(req.params.id);
+
+    if (!attachment) {
+      return next(new BadRequest());
+    }
+
+    await Activity.query().where({ activity_attachment: req.params.id }).first().then((activity) => {
+      return activity.$relatedQuery('attachment').unrelate().where('activity_attachment', req.params.id);
+    });
+
+    await Attachment.query().deleteById(req.params.id);
     const params = {
       Bucket: getConfig('aws.bucket'),
       Key: attachment.s3_key,
     };
-    s3.deleteObject(params, (err, data) => {
-      if (err) {
-        console.log(err, err.stack);
-        return res.status(500).json(err);
-      } else {
-        console.log(data);
-      }
+    await s3.deleteObject(params, (err, data) => {
+      if (err) return next(new BadRequest(err));
     });
-    await Attachment.query().deleteById(req.params.id);
-    await Activity.query().insert({
-      id: uuid(),
-      user_id: req.user.id,
-      action_type_id: 3,
-      activity_attachment: req.params.id,
-    });
-    return responseHandler(res, 204, 'Deleted file');
+
+    return res.status(204);
   } catch (error) {
-    return res.status(500).json(error);
+    return next(new BadRequest(error));
   }
 }

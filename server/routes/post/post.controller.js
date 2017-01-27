@@ -39,7 +39,6 @@ export async function createPost(req, res, next) {
   }
 
   const newPost = await Post.query().insert({
-    id: uuid(),
     title: req.body.title,
     slug: postSlug,
     excerpt: req.body.excerpt,

@@ -53,7 +53,7 @@ router.get('/:id/posts', ctrl.getTaggedPosts);
  * @apiError {Object} 409 There is already a tag with this name
  * @apiError {Object} 401 Unauthorized. You must be logged in to create a tag.
  */
-// router.post('/', isAuthenticated, controller.create.bind(controller));
+router.post('/', isAuthenticated, ctrl.createTag);
 /**
  * @api {put} /tags/:id Update a tag
  * @apiName update
@@ -65,7 +65,7 @@ router.get('/:id/posts', ctrl.getTaggedPosts);
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError {Object} 401 Unauthorized. You must be logged in to create a tag.
  */
-// router.put('/:id', isAuthenticated, controller.update.bind(controller));
+router.put('/:id', isAuthenticated, ctrl.updateTag);
 /**
  * @api {patch} /tags/:id Update a tag
  * @apiName update
@@ -77,8 +77,10 @@ router.get('/:id/posts', ctrl.getTaggedPosts);
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError {Object} 401 Unauthorized. You must be logged in to create a tag.
  */
-// router.patch('/:id', isAuthenticated, controller.update.bind(controller));
+router.patch('/:id', isAuthenticated, ctrl.updateTag);
 
-// router.delete('/:id', isAuthenticated, controller.destroy.bind(controller));
+router.delete('/:id', isAuthenticated, ctrl.deleteTag);
+
+router.get('/:id/relate/:postid', ctrl.relateTagToPost);
 
 export default router;

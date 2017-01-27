@@ -19,7 +19,7 @@ router.get('/', ctrl.listMenu);
  * @apiPermission admin
  * @apiUse authHeader
  */
-router.post('/', isAuthenticated,  ctrl.createMenu);
+router.post('/', isAuthenticated, ctrl.createMenu);
 
 /**
  * @api {get} /menus/:id Return a specific menu by its id.

@@ -1,6 +1,5 @@
 import Knex from 'knex';
 import { Model } from 'objection';
-import knexConfig from '../../../knexfile';
 
 const db = Knex({
   client: 'pg',
@@ -13,4 +12,18 @@ const db = Knex({
 
 Model.knex(db);
 
+const disconnect = (db) => {
+  return new Promise((resolve, reject) => {
+    db.destroy((err) => {
+      if (err) {
+        reject(err);
+      } else {
+        resolve();
+      }
+    });
+  });
+};
+
 export default db;
+
+export { db, disconnect };

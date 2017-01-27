@@ -7,7 +7,6 @@ import MenuDetail from './menuDetail';
 class Menu extends BaseModel {
   static get tableName() { return 'menu'; }
   static addTimestamps = false;
-  static addUUID = true;
   static get relationMappings() {
     return {
       details: {
