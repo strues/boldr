@@ -267,7 +267,20 @@ const values = {
           'redux-thunk',
           'react-md',
           'draft-js',
-          'superagent'
+          'bluebird',
+          'superagent',
+          'draft-js-export-html',
+          'draft-js-import-html',
+          'humps',
+          'modernizr',
+          'normalizr',
+          'react-addons-css-transition-group',
+          'react-addons-transition-group',
+          'redux-form',
+          'reselect',
+          'serialize-javascript',
+          'styled-components',
+          'webfontloader',
         ],
 
         // The name of the vendor DLL.

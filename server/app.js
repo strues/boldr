@@ -5,7 +5,7 @@ import type { $Request, $Response, NextFunction } from 'express';
 import appRootDir from 'app-root-dir';
 import getConfig from '../config/get';
 import logger from './services/logger';
-
+import redisClient from './services/redis';
 import { NotFound } from './core/errors';
 import expressMiddleware from './middleware/express';
 import authMiddleware from './middleware/auth';
@@ -13,6 +13,10 @@ import rbac from './middleware/rbac';
 import routes from './routes/index';
 import boldrSSR from './middleware/boldrSSR';
 import clientBundle from './middleware/clientBundle';
+
+const cache = require('express-redis-cache')({
+  client: redisClient,
+});
 
 const app = express();
 
@@ -32,6 +36,7 @@ app.use(getConfig('bundles.client.webPath'), clientBundle);
 app.use(express.static(pathResolve(appRootDir.get(), getConfig('publicAssetsPath'))));
 
 // The React application middleware.
+// cache.route(), we'll add this back later.
 app.get('*', boldrSSR);
 
 // catch 404 and forward response to errorhandler

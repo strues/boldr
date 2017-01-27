@@ -297,7 +297,7 @@ async@1.5.0, async@^1.4.2:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.0.tgz#2796642723573859565633fc6274444bee2f8ce3"
 
-async@^1.4.0, async@^1.5.2:
+async@^1.4.0, async@^1.5.2, async@~1.5.0:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
 
@@ -2941,6 +2941,14 @@ expand-tilde@^1.2.2:
   resolved "https://registry.yarnpkg.com/expand-tilde/-/expand-tilde-1.2.2.tgz#0b81eba897e5a3d31d1c3d102f8f01441e559449"
   dependencies:
     os-homedir "^1.0.1"
+
+express-redis-cache@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/express-redis-cache/-/express-redis-cache-0.5.0.tgz#d0a19a04efd9b0639aedc12e637f1a5bab8b1632"
+  dependencies:
+    async "~1.5.0"
+    colors "^1.1.2"
+    redis "^2.4.2"
 
 express-session@^1.15.0:
   version "1.15.0"
@@ -6756,7 +6764,7 @@ redis-parser@^2.0.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/redis-parser/-/redis-parser-2.3.0.tgz#313a47965e49ee35ab3a86c93388b403d76237f6"
 
-redis@^2.1.0:
+redis@^2.1.0, redis@^2.4.2:
   version "2.6.5"
   resolved "https://registry.yarnpkg.com/redis/-/redis-2.6.5.tgz#87c1eff4a489f94b70871f3d08b6988f23a95687"
   dependencies:

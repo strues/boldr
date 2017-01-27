@@ -58,17 +58,7 @@ class PostList extends Component {
     return (
       <div>
         <Card tableCard>
-          <TableCardHeader
-            title="Post Listing"
-            visible={ count > 0 }
-            contextualTitle={ `${count} item${count > 1 ? 's' : ''} selected` }
-            leftChildren={ null }
-            actions={ contextualActions }
-          >
-            <Button icon>filter_list</Button>
-            {kebab}
-          </TableCardHeader>
-          <PostTable posts={ this.props.posts } onRowToggle={ this._handleRowToggle } />
+          <PostTable posts={ this.props.posts } handleDeleteClick={ this.props.handleDeleteClick } />
         </Card>
       </div>
     );
