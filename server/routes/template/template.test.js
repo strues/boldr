@@ -1,8 +1,8 @@
 import supertest from 'supertest';
-import listener from '../../index';
+import app from '../../app';
 
 function request() {
-  return supertest(listener);
+  return supertest(app);
 }
 
 it('GET /templates -- It should return templates', async () => {
