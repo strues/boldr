@@ -17,6 +17,7 @@ import Hamburger from './Hamburger';
 import KeyVisual from './KeyVisual';
 import KebabMenu from './KebabMenu';
 import FormCard from './Form/FormCard';
+import FormGroup from './Form/FormGroup';
 
 export {
   PrimaryHeader,
@@ -40,4 +41,5 @@ export {
   Hamburger,
   KebabMenu,
   KeyVisual,
+  FormGroup,
 };

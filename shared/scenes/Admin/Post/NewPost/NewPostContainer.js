@@ -37,8 +37,8 @@ class NewPostContainer extends Component {
 
   render() {
     return (
-      <NewPostForm
-        onSubmit={ this.handleOnSubmit }
+      <NewPost
+        onFormSubmit={ this.handleOnSubmit }
         drawer={ this.props.drawer }
         postImage={ this.props.postImage }
       />
