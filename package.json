@@ -125,7 +125,7 @@
     "cors": "^2.8.1",
     "date-fns": "^1.27.1",
     "dotenv": "4.0.0",
-    "draft-js": "^0.9.1",
+    "draft-js": "^0.10.0",
     "draft-js-export-html": "^0.5.2",
     "draft-js-import-html": "^0.3.2",
     "express": "4.14.0",
