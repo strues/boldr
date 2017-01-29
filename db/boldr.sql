@@ -800,6 +800,13 @@ SELECT pg_catalog.setval('action_type_id_seq', 1, false);
 -- Data for Name: activity; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('c1258927-4f1e-48a5-b28d-90f043d13c76', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 1, 'a0207b95-e7ee-4909-b258-1c2e89d1ba2c', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-27 05:08:50.792+00', '2017-01-27 05:08:50.792+00');
+INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('939ceb0f-49bc-4cb1-820f-47d6136cf5ca', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 1, '8a41dcf1-d8db-4376-9b3f-48cc6fa676ad', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-27 05:11:34.041+00', '2017-01-27 05:11:34.041+00');
+INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('5c6a0860-fd04-4ffc-a304-51021bd32df4', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-27 06:58:21.702+00', '2017-01-27 06:58:21.702+00');
+INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('913d6a2f-8b71-4d22-8130-54e8b509d85c', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-27 07:03:16.222+00', '2017-01-27 07:03:16.222+00');
+INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('f3009afd-3d2b-4621-bf6c-c1bde986b666', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-27 07:04:19.001+00', '2017-01-27 07:04:19.001+00');
+INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('50a183e1-eab5-40c2-9e27-056f2c6becd0', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-27 07:04:59.594+00', '2017-01-27 07:04:59.594+00');
+INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('47dc5aa6-82c2-4336-883c-877d7f6a7e61', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-27 22:05:40.378+00', '2017-01-27 22:05:40.378+00');
 
 
 --
@@ -833,7 +840,7 @@ INSERT INTO menu_detail (id, label, name, attribute, "position", parent_id, link
 -- Name: menu_detail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('menu_detail_id_seq', 2, true);
+SELECT pg_catalog.setval('menu_detail_id_seq', 7, true);
 
 
 --
@@ -884,13 +891,6 @@ INSERT INTO page (id, name, slug, url, layout, data, status, restricted, meta, c
 -- Data for Name: post; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO post (id, title, slug, feature_image, attachments, meta, featured, content, excerpt, user_id, published, created_at, updated_at) VALUES ('5c9ed236-79f0-4ff7-93bd-2815f06c74b4', 'Just Another Post', 'just-another-post', 'https://boldr.io/image1.jpg', NULL, '{}', false, '<h1>Lorem ipsum dolor sit amet.</h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien in est aliquam lacinia. Donec fringilla odio nulla, sagittis egestas dolor bibendum ut. Proin eget massa mattis, dictum enim vitae, facilisis eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum imperdiet varius ante. Maecenas sit amet luctus sapien, quis aliquet purus. Cras malesuada quam a dui pretium fermentum. Quisque tempor interdum quam, eu lacinia turpis interdum id. Curabitur non mauris lobortis, mattis nulla id, viverra nisi. Phasellus eget porttitor lorem. Quisque facilisis nec arcu eu fringilla. Vivamus elit ipsum, viverra eu maximus a, venenatis nec nibh.Suspendisse iaculis auctor fermentum. Sed suscipit ante nisl, nec iaculis magna consequat vel. Quisque viverra est a justo egestas, euismod egestas metus hendrerit.</p>
-<p><br></p>
-<blockquote>&nbsp;In ultricies sagittis ex a dapibus. Nunc feugiat lorem non tincidunt euismod. Duis quam nibh, volutpat sit amet enim non, eleifend ullamcorper diam. Etiam iaculis ante ut libero sollicitudin, eget eleifend nulla gravida. Pellentesque ut gravida augue. Donec nibh orci, rutrum nec sapien eu, lacinia pretium nulla. Nunc turpis sem, placerat ac velit sit amet, aliquet ultrices metus.Curabitur mollis venenatis lectus, at elementum felis dapibus non. Sed vel finibus mauris. Aenean semper arcu lectus, porta feugiat urna tincidunt congue. Ut euismod finibus massa quis condimentum. Vivamus interdum velit nec varius consectetur. Vivamus sodales commodo ante, vel fringilla nunc finibus et. Phasellus non sem finibus, congue nibh ut, ornare tortor.Curabitur sapien est, accumsan at justo a, porta malesuada risus. Integer facilisis viverra mauris condimentum finibus.</blockquote>
-<p><br></p>
-<p>&nbsp;Donec eget tortor id ipsum maximus commodo nec eu quam. Aliquam erat volutpat. Nunc tincidunt est sit amet justo placerat egestas. Vestibulum efficitur, neque tempor feugiat lacinia, turpis ex efficitur urna, ullamcorper porta ligula lorem id neque. Quisque interdum risus at nisl finibus varius. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.In euismod gravida tortor in placerat. Aenean blandit blandit efficitur. Cras a accumsan augue, at tincidunt massa. Vivamus eleifend sem sed nibh tempor laoreet. Quisque blandit turpis vitae bibendum mattis. Nulla sagittis quam eget diam feugiat ultricies. Aliquam varius tellus et turpis viverra tempus. Nam sit amet ex suscipit, convallis tortor at, malesuada felis. Vestibulum arcu eros, bibendum sit amet tempus placerat, pharetra nec tortor. Ut scelerisque quam non magna tincidunt, nec varius massa blandit.</p>
-<p><br></p>', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, whenan unknown printer took a galley of type and scrambled it to make a type specimen book.', '1b062e26-df71-48ce-b363-4ae9b966e7a0', true, '2017-01-27 02:52:52.684315+00', NULL);
 INSERT INTO post (id, title, slug, feature_image, attachments, meta, featured, content, excerpt, user_id, published, created_at, updated_at) VALUES ('cb61bbae-c91e-4014-b665-3485734b88fb', 'Nother One', 'nother-one', 'https://boldr.io/image3.jpg', NULL, '{}', false, '<h1>Lorem ipsum dolor sit amet.</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien in est aliquam lacinia. Donec fringilla odio nulla, sagittis egestas dolor bibendum ut. Proin eget massa mattis, dictum enim vitae, facilisis eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum imperdiet varius ante. Maecenas sit amet luctus sapien, quis aliquet purus. Cras malesuada quam a dui pretium fermentum. Quisque tempor interdum quam, eu lacinia turpis interdum id. Curabitur non mauris lobortis, mattis nulla id, viverra nisi. Phasellus eget porttitor lorem. Quisque facilisis nec arcu eu fringilla. Vivamus elit ipsum, viverra eu maximus a, venenatis nec nibh.Suspendisse iaculis auctor fermentum. Sed suscipit ante nisl, nec iaculis magna consequat vel. Quisque viverra est a justo egestas, euismod egestas metus hendrerit.</p>
 <p><br></p>
@@ -905,6 +905,12 @@ INSERT INTO post (id, title, slug, feature_image, attachments, meta, featured, c
 <p><br></p>
 <p>&nbsp;Donec eget tortor id ipsum maximus commodo nec eu quam. Aliquam erat volutpat. Nunc tincidunt est sit amet justo placerat egestas. Vestibulum efficitur, neque tempor feugiat lacinia, turpis ex efficitur urna, ullamcorper porta ligula lorem id neque. Quisque interdum risus at nisl finibus varius. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.In euismod gravida tortor in placerat. Aenean blandit blandit efficitur. Cras a accumsan augue, at tincidunt massa. Vivamus eleifend sem sed nibh tempor laoreet. Quisque blandit turpis vitae bibendum mattis. Nulla sagittis quam eget diam feugiat ultricies. Aliquam varius tellus et turpis viverra tempus. Nam sit amet ex suscipit, convallis tortor at, malesuada felis. Vestibulum arcu eros, bibendum sit amet tempus placerat, pharetra nec tortor. Ut scelerisque quam non magna tincidunt, nec varius massa blandit.</p>
 <p><br></p>', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, whenan unknown printer took a galley of type and scrambled it to make a type specimen book.', '1b062e26-df71-48ce-b363-4ae9b966e7a0', true, '2017-01-27 02:52:52.687899+00', NULL);
+INSERT INTO post (id, title, slug, feature_image, attachments, meta, featured, content, excerpt, user_id, published, created_at, updated_at) VALUES ('a0207b95-e7ee-4909-b258-1c2e89d1ba2c', 'National Operations Manager', 'National-Operations-Manager', 'http://lorempixel.com/640/480', NULL, NULL, false, 'Impedit ut qui perferendis dolor aliquam consequatur tenetur. Ullam dolor ut dolor qui ut voluptas ut. Laborum quasi cumque quisquam qui qui omnis et. Qui a iste similique ut asperiores id esse et. Laboriosam labore consectetur ut et sed. Aliquam ut expedita.
+ Pariatur id sunt. Eius sit nesciunt ea ipsum accusamus necessitatibus et. Possimus mollitia rerum reprehenderit non quia quia et. Omnis occaecati accusamus non dolores quis modi reiciendis. Ab voluptas commodi ullam velit enim et nostrum.
+ Et architecto est vel enim enim. Voluptatem autem eaque esse aliquam. Sit explicabo quia sit animi. Ducimus saepe mollitia ullam dolorem.', 'Assumenda ratione quibusdam distinctio. Est ducimus perspiciatis delectus. Distinctio minima qui autem. Impedit fugit eaque molestias et ad. Quasi sed sint aperiam consequatur exercitationem blanditiis rem.', '1b062e26-df71-48ce-b363-4ae9b966e7a0', true, '2017-01-27 05:08:50.752+00', '2017-01-27 05:08:50.752+00');
+INSERT INTO post (id, title, slug, feature_image, attachments, meta, featured, content, excerpt, user_id, published, created_at, updated_at) VALUES ('8a41dcf1-d8db-4376-9b3f-48cc6fa676ad', 'Chief Optimization Analyst', 'Chief-Optimization-Analyst', 'http://lorempixel.com/640/480', NULL, NULL, false, 'Rerum harum illum ipsum. Ipsam quia qui enim omnis quae. Dolores aliquam quis sapiente sint est. Veniam velit deleniti voluptates qui nostrum. Dolor dolores optio saepe. Et aliquam consequatur qui cum ut quis ea.
+ Dolores qui et libero quas sit commodi. Et vero ipsa explicabo non aut eos sunt quam sint. Hic at nobis eius vel quisquam nisi enim ut.
+ Illum rerum eligendi. Dolores rerum expedita pariatur. Voluptatem ut vel. Aut sunt eum.', 'Veniam omnis quis et sed et. Sit quo non autem illo nesciunt accusamus. Nam officia molestias laborum aut asperiores ipsa hic inventore. Vitae sed et architecto aut vitae.', '1b062e26-df71-48ce-b363-4ae9b966e7a0', true, '2017-01-27 05:11:33.993+00', '2017-01-27 05:11:33.993+00');
 
 
 --
@@ -917,7 +923,6 @@ INSERT INTO post (id, title, slug, feature_image, attachments, meta, featured, c
 -- Data for Name: post_tag; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO post_tag (id, post_id, tag_id) VALUES (1, '5c9ed236-79f0-4ff7-93bd-2815f06c74b4', 2);
 INSERT INTO post_tag (id, post_id, tag_id) VALUES (2, 'cb61bbae-c91e-4014-b665-3485734b88fb', 1);
 INSERT INTO post_tag (id, post_id, tag_id) VALUES (3, 'ab33a0ca-b349-4cf8-947f-94f415149492', 2);
 
@@ -926,7 +931,7 @@ INSERT INTO post_tag (id, post_id, tag_id) VALUES (3, 'ab33a0ca-b349-4cf8-947f-9
 -- Name: post_tag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('post_tag_id_seq', 3, true);
+SELECT pg_catalog.setval('post_tag_id_seq', 8, true);
 
 
 --
@@ -971,13 +976,15 @@ SELECT pg_catalog.setval('setting_id_seq', 7, true);
 
 INSERT INTO tag (id, name, description) VALUES (1, 'javascript', 'Something something JS');
 INSERT INTO tag (id, name, description) VALUES (2, 'apple', 'Stuff about stuff.');
+INSERT INTO tag (id, name, description) VALUES (3, 'Skiing', 'Skiing stuff');
+INSERT INTO tag (id, name, description) VALUES (4, 'Snowboarding', 'skiing stuff');
 
 
 --
 -- Name: tag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('tag_id_seq', 2, true);
+SELECT pg_catalog.setval('tag_id_seq', 4, true);
 
 
 --
@@ -1020,7 +1027,7 @@ SELECT pg_catalog.setval('template_page_id_seq', 2, true);
 -- Name: token_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('token_id_seq', 1, false);
+SELECT pg_catalog.setval('token_id_seq', 3, true);
 
 
 --
@@ -1028,8 +1035,8 @@ SELECT pg_catalog.setval('token_id_seq', 1, false);
 --
 
 INSERT INTO "user" (id, email, password, first_name, last_name, username, avatar_url, profile_image, location, bio, birthday, website, verified, created_at, updated_at) VALUES ('1b062e26-df71-48ce-b363-4ae9b966e7a0', 'admin@boldr.io', '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka', 'Joe', 'Gray', 'Joey', 'https://boldr.io/images/unknown-avatar.png', 'https://boldr.io/images/unknown-avatar.png', 'Colorado', 'I am me.', '1988-01-01', 'https://boldr.io', true, '2017-01-27 02:52:52.60212+00', NULL);
-INSERT INTO "user" (id, email, password, first_name, last_name, username, avatar_url, profile_image, location, bio, birthday, website, verified, created_at, updated_at) VALUES ('f4d869a6-1a75-469b-a9cc-965c552929e4', 'user@boldr.io', '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka', 'Jessica', 'Smith', 'Jess', 'https://boldr.io/images/unknown-avatar.png', 'https://boldr.io/images/unknown-avatar.png', 'Washington', 'Just a person', '1988-01-01', 'https://boldr.io', true, '2017-01-27 02:52:52.603831+00', NULL);
 INSERT INTO "user" (id, email, password, first_name, last_name, username, avatar_url, profile_image, location, bio, birthday, website, verified, created_at, updated_at) VALUES ('f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f', 'demo@boldr.io', '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka', 'Sam', 'Hunt', 'Samus', 'https://boldr.io/images/unknown-avatar.png', 'https://boldr.io/images/unknown-avatar.png', 'California', 'Someone doing things.', '1988-01-01', 'https://boldr.io', true, '2017-01-27 02:52:52.605303+00', NULL);
+INSERT INTO "user" (id, email, password, first_name, last_name, username, avatar_url, profile_image, location, bio, birthday, website, verified, created_at, updated_at) VALUES ('f4d869a6-1a75-469b-a9cc-965c552929e4', 'user@boldr.io', '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka', 'Jessica', 'Smith', 'Jess', 'https://boldr.io/images/unknown-avatar.png', 'https://boldr.io/images/unknown-avatar.png', 'Washington', 'She is a person.', '1988-01-01', 'https://boldr.io', true, '2017-01-27 02:52:52.603831+00', NULL);
 
 
 --
@@ -1038,14 +1045,14 @@ INSERT INTO "user" (id, email, password, first_name, last_name, username, avatar
 
 INSERT INTO user_role (id, user_id, role_id) VALUES (1, '1b062e26-df71-48ce-b363-4ae9b966e7a0', 3);
 INSERT INTO user_role (id, user_id, role_id) VALUES (2, 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f', 2);
-INSERT INTO user_role (id, user_id, role_id) VALUES (3, 'f4d869a6-1a75-469b-a9cc-965c552929e4', 1);
+INSERT INTO user_role (id, user_id, role_id) VALUES (8, 'f4d869a6-1a75-469b-a9cc-965c552929e4', 1);
 
 
 --
 -- Name: user_role_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('user_role_id_seq', 3, true);
+SELECT pg_catalog.setval('user_role_id_seq', 8, true);
 
 
 --

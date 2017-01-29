@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>DATABASE</ID>
+  <OriginalElement>3dc8c754-37ac-443c-a903-69f244a916fd</OriginalElement>
+  <nodes>
+    <node x="1073.284583333333" y="443.0">3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.page</node>
+    <node x="1981.284583333333" y="454.0">3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.attachment</node>
+    <node x="281.29125" y="949.5">3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.menu_menu_detail</node>
+    <node x="282.0" y="1190.0">3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.setting</node>
+    <node x="1402.284583333333" y="542.0">3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.action_type</node>
+    <node x="1340.3066666666668" y="0.0">3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.user</node>
+    <node x="527.2845833333332" y="476.0">3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.menu_detail</node>
+    <node x="738.0" y="1190.0">3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.migrations_lock</node>
+    <node x="1555.284583333333" y="487.0">3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.token</node>
+    <node x="2305.966666666667" y="949.5">3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.post_attachment</node>
+    <node x="2278.284583333333" y="421.0">3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.post</node>
+    <node x="41.25" y="498.0">3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.menu</node>
+    <node x="918.66625" y="938.0">3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.template_page</node>
+    <node x="800.2845833333332" y="476.0">3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.template</node>
+    <node x="520.0" y="1190.0">3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.migrations</node>
+    <node x="0.0" y="1190.0">3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.gallery</node>
+    <node x="1974.7054166666667" y="938.0">3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.post_tag</node>
+    <node x="81.54124999999999" y="938.0">3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.user_role</node>
+    <node x="1217.784583333333" y="828.0">3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.activity</node>
+    <node x="1808.284583333333" y="531.0">3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.tag</node>
+    <node x="294.2845833333332" y="498.0">3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.role</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.activity" target="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.menu_detail">
+      <point x="-117.94999999999982" y="-158.5" />
+      <point x="1268.3345833333333" y="788.0" />
+      <point x="717.0345833333332" y="788.0" />
+      <point x="63.25" y="103.5" />
+    </edge>
+    <edge source="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.post_tag" target="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.post">
+      <point x="38.25" y="-48.5" />
+      <point x="2089.4554166666667" y="798.0" />
+      <point x="2446.784583333333" y="798.0" />
+      <point x="0.0" y="158.5" />
+    </edge>
+    <edge source="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.post" target="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.user">
+      <point x="0.0" y="-158.5" />
+      <point x="2446.784583333333" y="381.0" />
+      <point x="1685.8900000000003" y="381.0" />
+      <point x="157.08333333333348" y="180.5" />
+    </edge>
+    <edge source="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.activity" target="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.user">
+      <point x="-16.84999999999991" y="-158.5" />
+      <point x="1369.4345833333332" y="808.0" />
+      <point x="1380.784583333333" y="808.0" />
+      <point x="1380.784583333333" y="391.0" />
+      <point x="1434.5566666666668" y="391.0" />
+      <point x="-94.25" y="180.5" />
+    </edge>
+    <edge source="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.activity" target="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.post">
+      <point x="151.6500000000001" y="-158.5" />
+      <point x="1537.9345833333332" y="788.0" />
+      <point x="2334.45125" y="788.0" />
+      <point x="-112.33333333333348" y="158.5" />
+    </edge>
+    <edge source="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.template_page" target="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.page">
+      <point x="38.25" y="-48.5" />
+      <point x="1033.41625" y="808.0" />
+      <point x="1147.534583333333" y="808.0" />
+      <point x="-74.25" y="136.5" />
+    </edge>
+    <edge source="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.post_attachment" target="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.post">
+      <point x="37.75" y="-37.0" />
+      <point x="2419.216666666667" y="808.0" />
+      <point x="2559.117916666667" y="808.0" />
+      <point x="112.33333333333348" y="158.5" />
+    </edge>
+    <edge source="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.menu_menu_detail" target="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.menu_detail">
+      <point x="43.75" y="-37.0" />
+      <point x="412.54125" y="808.0" />
+      <point x="590.5345833333332" y="808.0" />
+      <point x="-63.25" y="103.5" />
+    </edge>
+    <edge source="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.user_role" target="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.user">
+      <point x="-38.25" y="-48.5" />
+      <point x="119.79124999999999" y="808.0" />
+      <point x="0.0" y="808.0" />
+      <point x="0.0" y="401.0" />
+      <point x="1371.7233333333336" y="401.0" />
+      <point x="-157.08333333333326" y="180.5" />
+    </edge>
+    <edge source="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.template_page" target="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.template">
+      <point x="-38.25" y="-48.5" />
+      <point x="956.91625" y="808.0" />
+      <point x="863.5345833333332" y="808.0" />
+      <point x="-63.25" y="103.5" />
+    </edge>
+    <edge source="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.user_role" target="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.role">
+      <point x="38.25" y="-48.5" />
+      <point x="196.29125" y="808.0" />
+      <point x="347.5345833333332" y="808.0" />
+      <point x="-53.25" y="81.5" />
+    </edge>
+    <edge source="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.token" target="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.user">
+      <point x="0.0" y="-92.5" />
+      <point x="1671.784583333333" y="401.0" />
+      <point x="1560.2233333333336" y="401.0" />
+      <point x="31.416666666666742" y="180.5" />
+    </edge>
+    <edge source="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.activity" target="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.attachment">
+      <point x="117.95000000000005" y="-158.5" />
+      <point x="1504.2345833333334" y="778.0" />
+      <point x="2050.534583333333" y="778.0" />
+      <point x="-69.25" y="125.5" />
+    </edge>
+    <edge source="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.attachment" target="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.user">
+      <point x="0.0" y="-125.5" />
+      <point x="2119.784583333333" y="391.0" />
+      <point x="1623.0566666666668" y="391.0" />
+      <point x="94.25" y="180.5" />
+    </edge>
+    <edge source="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.post_attachment" target="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.attachment">
+      <point x="-37.75" y="-37.0" />
+      <point x="2343.716666666667" y="778.0" />
+      <point x="2189.034583333333" y="778.0" />
+      <point x="69.25" y="125.5" />
+    </edge>
+    <edge source="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.activity" target="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.action_type">
+      <point x="50.549999999999955" y="-158.5" />
+      <point x="1436.8345833333333" y="758.0" />
+      <point x="1468.784583333333" y="758.0" />
+      <point x="0.0" y="37.5" />
+    </edge>
+    <edge source="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.activity" target="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.page">
+      <point x="-50.549999999999955" y="-158.5" />
+      <point x="1335.7345833333334" y="768.0" />
+      <point x="1296.034583333333" y="768.0" />
+      <point x="74.25" y="136.5" />
+    </edge>
+    <edge source="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.activity" target="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.tag">
+      <point x="84.25" y="-158.5" />
+      <point x="1470.534583333333" y="768.0" />
+      <point x="1846.534583333333" y="768.0" />
+      <point x="-38.25" y="48.5" />
+    </edge>
+    <edge source="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.post_tag" target="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.tag">
+      <point x="-38.25" y="-48.5" />
+      <point x="2012.9554166666667" y="768.0" />
+      <point x="1923.034583333333" y="768.0" />
+      <point x="38.25" y="48.5" />
+    </edge>
+    <edge source="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.activity" target="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.template">
+      <point x="-84.25" y="-158.5" />
+      <point x="1302.034583333333" y="778.0" />
+      <point x="990.0345833333332" y="778.0" />
+      <point x="63.25" y="103.5" />
+    </edge>
+    <edge source="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.menu_menu_detail" target="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.menu">
+      <point x="-43.75" y="-37.0" />
+      <point x="325.04125" y="798.0" />
+      <point x="147.75" y="798.0" />
+      <point x="0.0" y="81.5" />
+    </edge>
+    <edge source="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.activity" target="3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.role">
+      <point x="-151.64999999999986" y="-158.5" />
+      <point x="1234.6345833333335" y="798.0" />
+      <point x="454.0345833333332" y="798.0" />
+      <point x="53.25" y="81.5" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.4609256449165402" x="1308.0" y="758.6650205761317" />
+  <SelectedNodes>
+    <node>3dc8c754-37ac-443c-a903-69f244a916fd.TABLE:boldr.public.role</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Key columns</Category>
+    <Category>Columns</Category>
+  </Categories>
+</Diagram>
+

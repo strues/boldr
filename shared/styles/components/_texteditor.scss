@@ -1,0 +1,147 @@
+
+[tabindex="-1"]:focus {
+  outline: none !important;
+}
+// Work around a Firefox/IE bug where the transparent `button` background
+// results in a loss of the default `button` focus styles.
+//
+// Credit: https://github.com/suitcss/base/
+
+button:focus {
+  outline: 1px dotted;
+  outline: 5px auto -webkit-focus-ring-color;
+}
+
+[role="button"],
+a,
+area,
+button,
+input,
+label,
+select,
+summary,
+textarea {
+  touch-action: manipulation;
+}
+
+[role="button"] {
+  cursor: pointer;
+}
+
+.be-editor-container,
+.boldr-editor__root,
+.public-be-content {
+  height: inherit;
+  text-align: initial;
+}
+
+.boldr-editor__root {
+  position: relative;
+}
+
+.be-editor-container {
+  background-color: rgba(255,255,255,0);
+  border-left: 0.1px solid transparent;
+  position: relative;
+  z-index: 1;
+}
+
+.boldr-editor__root {
+  background: #fff;
+  border: 1px solid #ddd;
+  font-family: inherit;
+  font-size: 1rem;
+}
+
+.be-editor {
+  border-top: 1px solid #ddd;
+  cursor: text;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.be-content,
+.be-editor,
+.be-placeholder-root {
+  margin: 0 -15px -15px;
+  padding: 15px;
+}
+
+.be-editor .public-be-content {
+  min-height: 100px;
+}
+
+.boldr-editor__hide-placeholder .public-be-placeholder-root {
+  display: none;
+}
+
+.boldr-editor__toolbar {
+  border: 1px solid $border-color;
+  background-color: #262B33;
+  padding: 0.5rem;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.be-controls {
+  font-family: inherit, sans-serif;
+  font-size: 1em;
+  margin-bottom: 5px;
+  user-select: none;
+}
+
+.be-btn {
+  color: #EFEFEF;
+  fill: #EFEFEF;
+  cursor: pointer;
+  margin-right: 16px;
+  padding: 2px 0;
+  display: inline-block;
+  @include react-md-inks
+  &:hover {
+    color: #02BBD8;
+    fill: #02BBD8;
+  }
+}
+
+.be-btn__active {
+  color: #02BBD8;
+  fill: #02BBD8;
+}
+
+.be-button {
+  display: inline-block;
+  font-weight: $btn-font-weight;
+  line-height: $btn-line-height;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  background-color: transparent;
+  cursor: pointer;
+  user-select: none;
+  border: $input-btn-border-width solid $gray-light;
+  @include button-size($btn-padding-y, $btn-padding-x, $font-size-base, $btn-border-radius);
+  @include transition(all .2s ease-in-out);
+}
+
+.be-custom {
+  input[type="text"] {
+    padding: 0.3rem;
+    margin-right: 0.3rem;
+  }
+}
+// the text area inside
+
+.DraftEditor-root {
+  border: 1px solid #ddd;
+  padding: 1em;
+  min-height: 300px;
+}
+
+.public-DraftEditorPlaceholder-root {}
+
+.DraftEditor-editorContainer {}
+
+.public-DraftEditor-content {}

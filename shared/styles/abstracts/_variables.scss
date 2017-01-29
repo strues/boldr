@@ -107,3 +107,16 @@ $primary-header-link-hover-color: $accent-color;
 $primary-header-border: 1px solid $cloud;
 $primary-header-bg: $white;
 $primary-header-link: $ocean;
+
+
+$gray-light: #818a91 !default;
+
+$font-weight-normal: normal !default;
+$btn-font-weight: $font-weight-normal;
+$border-radius: 0.25rem !default;
+$btn-border-radius:              $border-radius !default;
+$btn-line-height: 1.25;
+$border-width: 1px !default;
+$input-btn-border-width: $border-width !default; // For form controls and buttons
+$btn-padding-x: 1rem;
+$btn-padding-y: 0.5rem;
