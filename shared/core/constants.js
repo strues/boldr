@@ -39,7 +39,16 @@ export const POSITIONS = {
   bottomLeft: BOTTOM_LEFT_POSITION,
   bottomRight: BOTTOM_RIGHT_POSITION,
 };
+export const MSG_UPLOAD_ERROR = {
+  message: 'There was a problem uploading.', kind: 'error', dismissAfter: 3000,
+};
 
+export const MSG_UPLOAD_SUCCESS = {
+  message: 'Upload success!', kind: 'success', dismissAfter: 3000,
+};
+export const MSG_FILE_REMOVED = {
+  message: 'Removed file', kind: 'success', dismissAfter: 3000,
+};
 export const MSG_SIGNUP_ERROR = {
   message: 'There was a problem creating your account.', kind: 'error', dismissAfter: 3000,
 };

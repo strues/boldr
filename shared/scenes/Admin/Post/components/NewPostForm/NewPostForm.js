@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import Button from 'react-md/lib/Buttons/Button';
+import Dropzone from 'react-dropzone';
+
 import TextField from '../../../../../components/Form/TextField';
 import { TextEditor } from '../../../../../components/TextEditor';
 import { Col, Row, Heading, S3Uploader, FormGroup } from '../../../../../components/index';
@@ -20,22 +22,27 @@ type Props = {
 
 @connect()
 class NewPostForm extends Component {
+  constructor(props) {
+    super();
+
+    this.state = {
+      files: [],
+    };
+
+    this.onDrop = this.onDrop.bind(this);
+    this.onOpenClick = this.onOpenClick.bind(this);
+  }
 
   props: Props;
-
-  onUploadFinish = (signResult) => {
-    const signUrl = signResult.signedUrl;
-    const splitUrl = signUrl.split('?');
-    const fileUrl = splitUrl[0];
-
-    const payload = {
-      file_name: signResult.file_name,
-      original_name: signResult.original_name,
-      file_type: signResult.file_type,
-      s3_key: signResult.s3_key,
-      url: fileUrl,
-    };
+  onDrop(files) {
+    this.setState({
+      file: files[0],
+    });
+    const payload = files[0];
     this.props.dispatch(uploadPostImage(payload));
+  }
+  onOpenClick() {
+    this.dropzone.open();
   }
 
   render() {
@@ -73,17 +80,17 @@ class NewPostForm extends Component {
             <FormGroup>
             <Heading size={ 5 }>Upload a feature image</Heading>
 
-            <S3Uploader
-              signingUrl="/s3/sign"
-              server="/api/v1"
+            <Dropzone
+              className="boldr-dropzone"
+              ref={ (node) => { this.dropzone = node; } }
+              multiple={ false }
+              onDrop={ this.onDrop }
               accept="image/*"
-              onProgress={ S3Uploader.onUploadProgress }
-              onError={ S3Uploader.onUploadError }
-              onFinish={ this.onUploadFinish }
-
-              uploadRequestHeaders={ { 'x-amz-acl': 'public-read' } }
-              contentDisposition="auto"
-            />
+              maxSize={ 5242880 }
+            >
+              <p className="boldr-dropzone__drop-sm">Drop an image here or select one from your computer. <br />
+              It will upload right away.</p>
+            </Dropzone>
             </FormGroup>
 
           <Field name="content" component={ renderEditor } />
@@ -118,3 +125,34 @@ class NewPostForm extends Component {
 export default reduxForm({
   form: 'newPostForm',
 })(NewPostForm);
+
+
+/**
+ *
+ *
+ *   onUploadFinish = (signResult) => {
+     const signUrl = signResult.signedUrl;
+     const splitUrl = signUrl.split('?');
+     const fileUrl = splitUrl[0];
+
+     const payload = {
+       file_name: signResult.file_name,
+       original_name: signResult.original_name,
+       file_type: signResult.file_type,
+       // s3_key: signResult.s3_key,
+       url: fileUrl,
+     };
+     this.props.dispatch(uploadPostImage(payload));
+   }
+             <S3Uploader
+               signingUrl="/s3/sign"
+               server="/api/v1"
+               accept="image/*"
+               onProgress={ S3Uploader.onUploadProgress }
+               onError={ S3Uploader.onUploadError }
+               onFinish={ this.onUploadFinish }
+
+               uploadRequestHeaders={ { 'x-amz-acl': 'public-read' } }
+               contentDisposition="auto"
+             />
+ */

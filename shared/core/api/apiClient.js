@@ -58,7 +58,7 @@ export default class ApiClient {
 
           if (data) {
             clean(data);
-            request.set('Content-Type', 'application/json');
+            // request.set('Content-Type', 'application/json');
             request.send(data);
           }
 

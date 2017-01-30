@@ -6,6 +6,7 @@ import methodOverride from 'method-override';
 import expressValidator from 'express-validator';
 import morgan from 'morgan';
 import flash from 'express-flash';
+import busboy from 'connect-busboy';
 import hpp from 'hpp';
 import getConfig from '../../config/get';
 
@@ -28,7 +29,7 @@ export default (app) => {
   // parse application/x-www-form-urlencoded
   app.use(bodyParser.urlencoded({ extended: true, limit: getConfig('body.limit') }));
   // parse application/anything+json
-  app.use(bodyParser.json({ type: 'application/vnd.api+json', limit: getConfig('body.limit') }));
+  app.use(bodyParser.json({ type: 'application/*+json', limit: getConfig('body.limit') }));
   // parse application/json
   app.use(bodyParser.json({ type: 'application/json', limit: getConfig('body.limit') }));
   // parse text/plain
@@ -37,6 +38,11 @@ export default (app) => {
   app.use(bodyParser.raw({ limit: getConfig('body.limit') }));
   // must be right after bodyParser
   app.use(expressValidator());
+  app.use(busboy({
+    limits: {
+      fileSize: 5242880,
+    },
+  }));
   app.use(hpp());
   app.use(flash());
   app.use(methodOverride((req, res) => {

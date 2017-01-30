@@ -1,10 +1,11 @@
 *,
-*::before,
-*::after {
+*::after,
+*::before {
   box-sizing: inherit;
 }
-html,
-body {
+
+body,
+html {
   height: 100%;
 }
 
@@ -12,6 +13,7 @@ body {
   min-height: 100%;
   height: 100%;
 }
+
 html {
   height: 100%;
   font-size: $font-size-base;
@@ -20,16 +22,17 @@ html {
   -webkit-font-smoothing: antialiased;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
+
 .boldr-icon {
   display: inline-block;
 }
+
 body {
-  padding: 0;
   position: relative;
-  margin: 0;
-  padding-bottom: 6rem;
-  min-height: 100%;
   overflow-x: hidden;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
   min-width: 320px;
   font-family: $font-family;
   font-size: $font-size-base;
@@ -38,42 +41,39 @@ body {
   font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
-
-
-
-
 /*******************************
           Highlighting
 *******************************/
-
-
 /* Site */
 ::-webkit-selection {
   background-color: $selection-color;
   color: rgba(0, 0, 0, 0.87);
 }
+
 ::-moz-selection {
   background-color: $selection-color;
   color: rgba(0, 0, 0, 0.87);
 }
+
 ::selection {
   background-color: $selection-color;
   color: rgba(0, 0, 0, 0.87);
 }
-
 /* Form */
-textarea::-webkit-selection,
-input::-webkit-selection {
+input::-webkit-selection,
+textarea::-webkit-selection {
   background-color: rgba(100, 100, 100, 0.4);
   color: rgba(0, 0, 0, 0.87);
 }
-textarea::-moz-selection,
-input::-moz-selection {
+
+input::-moz-selection,
+textarea::-moz-selection {
   background-color: rgba(100, 100, 100, 0.4);
   color: rgba(0, 0, 0, 0.87);
 }
-textarea::selection,
-input::selection {
+
+input::selection,
+textarea::selection {
   background-color: rgba(100, 100, 100, 0.4);
   color: rgba(0, 0, 0, 0.87);
 }

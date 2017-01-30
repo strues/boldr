@@ -1,19 +1,37 @@
+/* @flow */
 import React, { PropTypes } from 'react';
+import styled from 'styled-components';
 import { Row, Col } from '../../../../../components/Layout';
 import File from '../File';
 
-const FileView = props => {
+const CardGroup = styled.section`
+  display: flex;
+  overflow: hidden;
+`;
+const CardGroupCard = styled.div`
+  flex: 1 1 0;
+  border: none;
+  border-radius: 0;
+  margin-left: 10px;
+  margin-right: 10px;
+`;
+
+type Props = {
+  selectFile: Function,
+  removeMedia: Function,
+  files: Array<Object>,
+};
+
+const FileView = (props: Props) => {
   return (
-    <div style={ { paddingTop: '15px' } }>
-      <Row>
+      <CardGroup>
         {
           props.files.map((file) =>
-          <Col key={ file.id } xs={ 12 } md={ 4 }>
+          <CardGroupCard key={ file.id }>
             <File file={ file } removeMedia={ props.removeMedia } selectFile={ props.selectFile } />
-          </Col>)
+          </CardGroupCard>)
          }
-      </Row>
-    </div>
+       </CardGroup>
   );
 };
 

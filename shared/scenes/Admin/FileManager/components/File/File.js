@@ -37,6 +37,7 @@ const File = (props: Props) => {
         <CardTitle title={ props.file.file_name || 'foo' }>
           <Button className="md-cell--right" icon>star_outline</Button>
         </CardTitle>
+        <CardText>
         <CardActions>
           <Button icon onClick={ handleSelect }>
             <FontIcon>mode_edit</FontIcon>
@@ -45,6 +46,7 @@ const File = (props: Props) => {
             <FontIcon>delete_forever</FontIcon>
           </Button>
         </CardActions>
+      </CardText>
       </Card>
   );
 };

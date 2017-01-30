@@ -92,7 +92,8 @@ module.exports.up = async (db) => {
   await db.schema.createTable('attachment', (table) => {
     // pk | uuid
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
-    table.string('file_name').unique().notNullable();
+    table.string('file_name');
+    table.string('safe_name');
     table.string('original_name');
     table.string('file_description');
     table.string('file_type');

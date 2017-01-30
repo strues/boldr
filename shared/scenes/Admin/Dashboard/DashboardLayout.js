@@ -12,6 +12,7 @@ const styled = require('styled-components').default;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
+  height: 100%;
   padding-top: 25px;
   box-sizing: border-box;
 `;
