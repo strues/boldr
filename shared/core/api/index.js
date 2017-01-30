@@ -48,7 +48,7 @@ export const doResetPassword = (password, token) =>
   *****************************************************************/
 
 export const getAllPosts = () =>
-  apiClient.get('/posts?include=[author,tags]');
+  apiClient.get('/posts');
 
 export const getPostById = (postId) =>
   apiClient.get(`/posts/pid/${postId}`);
@@ -135,6 +135,16 @@ export const doUpload = (payload) => {
 
   return apiClient.post('/attachments/dashboard', { data });
 };
+export const updateFileProperties = (payload) => {
+  const data = {
+    file_name: payload.file_name,
+    id: payload.id,
+    file_description: payload.file_description,
+  };
+
+  return apiClient.put(`/attachments/${payload.id}`, { data });
+};
+
 export const delAttachment = (id) =>
   apiClient.del(`/attachments/${id}`);
 
@@ -187,7 +197,7 @@ export const getAllMembers = () =>
 
 export const doUpdateMember = (userData) => {
   const payload = {
-    display_name: userData.display_name,
+    username: userData.username,
     first_name: userData.first_name,
     last_name: userData.last_name,
     avatar_url: userData.avatar_url,

@@ -13,6 +13,7 @@ const Login = (props: Props) => {
       <div>
         <FormCard
           title="Log In"
+          width={ 450 }
           form={ <LoginForm onSubmit={ props.handleOnSubmit } /> }
           extra1={ <Link to="/account/forgot-password">Forgot your password?</Link> }
           extra2={ <Link to="/account/signup">Create an account</Link> }

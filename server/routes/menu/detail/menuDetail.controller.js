@@ -38,7 +38,6 @@ async function createDetail(req, res, next) {
       label: slugIt(req.body.name),
       attribute: req.body.attribute,
       position: req.body.position,
-      uuid: uuid(),
     };
     const newLink = await MenuDetail.query().insert(payload);
 
@@ -54,7 +53,6 @@ async function createDetail(req, res, next) {
     });
     debug(associateMenuDetail);
     await Activity.query().insert({
-      id: uuid(),
       user_id: req.user.id,
       action_type_id: 1,
       activity_menu_detail: newLink.id,
@@ -72,4 +70,10 @@ function updateDetail(req, res) {
     .then(navigation => responseHandler(res, 202, navigation));
 }
 
-export { getDetails, updateDetail, showDetail, createDetail };
+function deleteDetail(req, res) {
+  return MenuDetail.query()
+    .deleteById(req.params.id)
+    .then(() => responseHandler(res, 204));
+}
+
+export { getDetails, updateDetail, showDetail, createDetail, deleteDetail };

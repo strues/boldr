@@ -15,6 +15,7 @@ const router = express.Router();
  *
  */
 router.get('/', ctrl.listAttachments);
+router.post('/', isAuthenticated, ctrl.uploadImage);
 /**
  * @api {get} /attachments/:id  Get a specific file by its id
  * @apiName getAttachment
@@ -58,17 +59,5 @@ router.delete('/:id', isAuthenticated, checkRole('Admin'), ctrl.deleteAttachment
  * @apiError 403 Forbidden
  */
 router.put('/:id', isAuthenticated, checkRole('Admin'), ctrl.updateAttachment);
-/**
- * @api {get} /attachments/aws/bucket  Returns all items in S3 bucket.
- * @apiName getAllAWS
- * @apiGroup Attachment
- * @apiUse authHeader
- * @apiPermission admin
- * @apiSuccess (Success 200) [Object{}]
- * @apiError 401 Invalid credentials.
- * @apiError 403 Forbidden
- */
-router.get('/aws/bucket', ctrl.getAllAWS);
-
 
 export default router;

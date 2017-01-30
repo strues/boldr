@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.0
+-- Dumped from database version 9.6.1
 -- Dumped by pg_dump version 9.6.1
 
 SET statement_timeout = 0;
@@ -36,17 +36,59 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+--
+-- Name: hstore; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION hstore; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs';
+
+
+--
+-- Name: pgcrypto; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pgcrypto; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
+
+
+--
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
 
 
 SET search_path = public, pg_catalog;
@@ -56,21 +98,57 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
+-- Name: action_type; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE action_type (
+    id integer NOT NULL,
+    type text NOT NULL,
+    CONSTRAINT action_type_type_check CHECK ((type = ANY (ARRAY['create'::text, 'update'::text, 'delete'::text, 'register'::text])))
+);
+
+
+ALTER TABLE action_type OWNER TO postgres;
+
+--
+-- Name: action_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE action_type_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE action_type_id_seq OWNER TO postgres;
+
+--
+-- Name: action_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE action_type_id_seq OWNED BY action_type.id;
+
+
+--
 -- Name: activity; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE activity (
-    id uuid NOT NULL,
-    name character varying(100),
+    id uuid DEFAULT uuid_generate_v1mc() NOT NULL,
     user_id uuid NOT NULL,
-    action character varying(255),
-    type text NOT NULL,
-    data json,
-    entry_uuid uuid NOT NULL,
-    entry_table character varying(255) NOT NULL,
+    action_type_id integer NOT NULL,
+    activity_post uuid,
+    activity_user uuid,
+    activity_attachment uuid,
+    activity_tag integer,
+    activity_menu_detail integer,
+    activity_template integer,
+    activity_page uuid,
+    activity_role integer,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone,
-    CONSTRAINT activity_type_check CHECK ((type = ANY (ARRAY['create'::text, 'update'::text, 'delete'::text, 'register'::text])))
+    updated_at timestamp with time zone
 );
 
 
@@ -81,7 +159,7 @@ ALTER TABLE activity OWNER TO postgres;
 --
 
 CREATE TABLE attachment (
-    id uuid NOT NULL,
+    id uuid DEFAULT uuid_generate_v1mc() NOT NULL,
     file_name character varying(255) NOT NULL,
     original_name character varying(255),
     file_description character varying(255),
@@ -97,40 +175,11 @@ CREATE TABLE attachment (
 ALTER TABLE attachment OWNER TO postgres;
 
 --
--- Name: attachment_category; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE attachment_category (
-    category_id uuid NOT NULL,
-    attachment_id uuid NOT NULL
-);
-
-
-ALTER TABLE attachment_category OWNER TO postgres;
-
---
--- Name: category; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE category (
-    id uuid NOT NULL,
-    name character varying(255) NOT NULL,
-    type text,
-    description character varying(255),
-    icon character varying(255),
-    slug character varying(255),
-    CONSTRAINT category_type_check CHECK ((type = ANY (ARRAY['article'::text, 'project'::text, 'page'::text, 'media'::text, 'file'::text])))
-);
-
-
-ALTER TABLE category OWNER TO postgres;
-
---
 -- Name: gallery; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE gallery (
-    id uuid NOT NULL,
+    id uuid DEFAULT uuid_generate_v1mc() NOT NULL,
     name character varying(255) NOT NULL,
     slug character varying(255),
     description character varying(255),
@@ -145,24 +194,11 @@ CREATE TABLE gallery (
 ALTER TABLE gallery OWNER TO postgres;
 
 --
--- Name: gallery_attachment; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE gallery_attachment (
-    gallery_id uuid NOT NULL,
-    attachment_id uuid NOT NULL
-);
-
-
-ALTER TABLE gallery_attachment OWNER TO postgres;
-
---
 -- Name: menu; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE menu (
     id integer NOT NULL,
-    uuid uuid NOT NULL,
     name character varying(255) NOT NULL,
     label character varying(255) NOT NULL,
     attributes json,
@@ -179,7 +215,6 @@ ALTER TABLE menu OWNER TO postgres;
 
 CREATE TABLE menu_detail (
     id integer NOT NULL,
-    uuid uuid NOT NULL,
     label character varying(50) NOT NULL,
     name character varying(50) NOT NULL,
     attribute character varying(255),
@@ -247,13 +282,59 @@ CREATE TABLE menu_menu_detail (
 ALTER TABLE menu_menu_detail OWNER TO postgres;
 
 --
+-- Name: migrations; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE migrations (
+    id integer NOT NULL,
+    name character varying(255),
+    batch integer,
+    migration_time timestamp with time zone
+);
+
+
+ALTER TABLE migrations OWNER TO postgres;
+
+--
+-- Name: migrations_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE migrations_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE migrations_id_seq OWNER TO postgres;
+
+--
+-- Name: migrations_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE migrations_id_seq OWNED BY migrations.id;
+
+
+--
+-- Name: migrations_lock; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE migrations_lock (
+    is_locked integer
+);
+
+
+ALTER TABLE migrations_lock OWNER TO postgres;
+
+--
 -- Name: page; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE page (
-    id uuid NOT NULL,
+    id uuid DEFAULT uuid_generate_v1mc() NOT NULL,
     name character varying(255) NOT NULL,
-    label character varying(255),
+    slug character varying(255),
     url character varying(255) NOT NULL,
     layout json,
     data json,
@@ -273,7 +354,7 @@ ALTER TABLE page OWNER TO postgres;
 --
 
 CREATE TABLE post (
-    id uuid NOT NULL,
+    id uuid DEFAULT uuid_generate_v1mc() NOT NULL,
     title character varying(140) NOT NULL,
     slug character varying(255) NOT NULL,
     feature_image character varying(255),
@@ -343,7 +424,6 @@ ALTER SEQUENCE post_tag_id_seq OWNED BY post_tag.id;
 
 CREATE TABLE role (
     id integer NOT NULL,
-    uuid uuid NOT NULL,
     name character varying(64) NOT NULL,
     image character varying(200),
     description text,
@@ -381,7 +461,6 @@ ALTER SEQUENCE role_id_seq OWNED BY role.id;
 
 CREATE TABLE setting (
     id integer NOT NULL,
-    uuid uuid NOT NULL,
     key character varying(100) NOT NULL,
     label character varying(100) NOT NULL,
     value character varying(255) NOT NULL,
@@ -418,7 +497,6 @@ ALTER SEQUENCE setting_id_seq OWNED BY setting.id;
 
 CREATE TABLE tag (
     id integer NOT NULL,
-    uuid uuid NOT NULL,
     name character varying(255) NOT NULL,
     description character varying(255)
 );
@@ -455,8 +533,7 @@ CREATE TABLE template (
     id integer NOT NULL,
     uuid uuid,
     name character varying(100) NOT NULL,
-    label character varying(100) NOT NULL,
-    resource character varying(255) NOT NULL,
+    slug character varying(110) NOT NULL,
     meta json,
     content json,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
@@ -530,7 +607,6 @@ CREATE TABLE token (
     user_verification_token character varying(255),
     reset_password_token character varying(255),
     reset_password_expiration timestamp with time zone,
-    oauth_token character varying(255),
     user_id uuid,
     created_at timestamp with time zone DEFAULT now(),
     updated_at timestamp with time zone
@@ -565,12 +641,12 @@ ALTER SEQUENCE token_id_seq OWNED BY token.id;
 --
 
 CREATE TABLE "user" (
-    id uuid NOT NULL,
+    id uuid DEFAULT uuid_generate_v1mc() NOT NULL,
     email character varying(100) NOT NULL,
     password character varying(64) NOT NULL,
     first_name character varying(50) NOT NULL,
     last_name character varying(50) NOT NULL,
-    display_name character varying(115) NOT NULL,
+    username character varying(115) NOT NULL,
     avatar_url character varying(255) DEFAULT 'https://boldr.io/images/unknown-avatar.png'::character varying,
     profile_image character varying(255),
     location character varying(100),
@@ -620,6 +696,13 @@ ALTER SEQUENCE user_role_id_seq OWNED BY user_role.id;
 
 
 --
+-- Name: action_type id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY action_type ALTER COLUMN id SET DEFAULT nextval('action_type_id_seq'::regclass);
+
+
+--
 -- Name: menu id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -631,6 +714,13 @@ ALTER TABLE ONLY menu ALTER COLUMN id SET DEFAULT nextval('menu_id_seq'::regclas
 --
 
 ALTER TABLE ONLY menu_detail ALTER COLUMN id SET DEFAULT nextval('menu_detail_id_seq'::regclass);
+
+
+--
+-- Name: migrations id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY migrations ALTER COLUMN id SET DEFAULT nextval('migrations_id_seq'::regclass);
 
 
 --
@@ -690,25 +780,37 @@ ALTER TABLE ONLY user_role ALTER COLUMN id SET DEFAULT nextval('user_role_id_seq
 
 
 --
+-- Data for Name: action_type; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO action_type (id, type) VALUES (1, 'create');
+INSERT INTO action_type (id, type) VALUES (2, 'update');
+INSERT INTO action_type (id, type) VALUES (3, 'delete');
+INSERT INTO action_type (id, type) VALUES (4, 'register');
+
+
+--
+-- Name: action_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('action_type_id_seq', 1, false);
+
+
+--
 -- Data for Name: activity; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('c1258927-4f1e-48a5-b28d-90f043d13c76', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 1, 'a0207b95-e7ee-4909-b258-1c2e89d1ba2c', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-27 05:08:50.792+00', '2017-01-27 05:08:50.792+00');
+INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('939ceb0f-49bc-4cb1-820f-47d6136cf5ca', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 1, '8a41dcf1-d8db-4376-9b3f-48cc6fa676ad', NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-27 05:11:34.041+00', '2017-01-27 05:11:34.041+00');
+INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('5c6a0860-fd04-4ffc-a304-51021bd32df4', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-27 06:58:21.702+00', '2017-01-27 06:58:21.702+00');
+INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('913d6a2f-8b71-4d22-8130-54e8b509d85c', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-27 07:03:16.222+00', '2017-01-27 07:03:16.222+00');
+INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('f3009afd-3d2b-4621-bf6c-c1bde986b666', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-27 07:04:19.001+00', '2017-01-27 07:04:19.001+00');
+INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('50a183e1-eab5-40c2-9e27-056f2c6becd0', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-27 07:04:59.594+00', '2017-01-27 07:04:59.594+00');
+INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('47dc5aa6-82c2-4336-883c-877d7f6a7e61', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-27 22:05:40.378+00', '2017-01-27 22:05:40.378+00');
 
 
 --
 -- Data for Name: attachment; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-
-
---
--- Data for Name: attachment_category; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-
-
---
--- Data for Name: category; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
 
@@ -720,32 +822,25 @@ ALTER TABLE ONLY user_role ALTER COLUMN id SET DEFAULT nextval('user_role_id_seq
 
 
 --
--- Data for Name: gallery_attachment; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-
-
-
---
 -- Data for Name: menu; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO menu (id, uuid, name, label, attributes, restricted, "order") VALUES (1, '908db7f1-05b8-451f-b756-2fbe28c15976', 'Main', 'main', '{}', false, 0);
+INSERT INTO menu (id, name, label, attributes, restricted, "order") VALUES (1, 'Main', 'main', '{}', false, 0);
 
 
 --
 -- Data for Name: menu_detail; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO menu_detail (id, uuid, label, name, attribute, "position", parent_id, link, icon) VALUES (1, '39daff4d-fbc4-438b-9d85-cdb7bb9770b8', 'about', 'About', NULL, 1, NULL, '/about', 'info');
-INSERT INTO menu_detail (id, uuid, label, name, attribute, "position", parent_id, link, icon) VALUES (2, '45f9dcb6-5843-412f-8079-43e55c651e38', 'blog', 'Blog', NULL, 2, NULL, '/blog', 'info');
+INSERT INTO menu_detail (id, label, name, attribute, "position", parent_id, link, icon) VALUES (1, 'about', 'About', NULL, 1, NULL, '/about', 'info');
+INSERT INTO menu_detail (id, label, name, attribute, "position", parent_id, link, icon) VALUES (2, 'blog', 'Blog', NULL, 2, NULL, '/blog', 'info');
 
 
 --
 -- Name: menu_detail_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('menu_detail_id_seq', 2, true);
+SELECT pg_catalog.setval('menu_detail_id_seq', 7, true);
 
 
 --
@@ -764,38 +859,58 @@ INSERT INTO menu_menu_detail (menu_id, menu_detail_id) VALUES (1, 2);
 
 
 --
+-- Data for Name: migrations; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO migrations (id, name, batch, migration_time) VALUES (1, '201701270219_initial.js', 1, '2017-01-27 02:51:40.674+00');
+
+
+--
+-- Name: migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('migrations_id_seq', 1, true);
+
+
+--
+-- Data for Name: migrations_lock; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO migrations_lock (is_locked) VALUES (0);
+
+
+--
 -- Data for Name: page; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO page (id, name, label, url, layout, data, status, restricted, meta, created_at, updated_at) VALUES ('87d1e9b3-b32e-474e-9246-6dce1b21a72d', 'Home', 'home', 'home', '{"showHero":true,"showPosts":true}', '{}', 'published', false, '{"title":"Home","description":"The home page"}', '2017-01-16 05:10:42.493602+00', NULL);
-INSERT INTO page (id, name, label, url, layout, data, status, restricted, meta, created_at, updated_at) VALUES ('0a277a50-b482-4b86-b0e7-83fdd3a372af', 'About', 'about', 'about', '{"showHero":true,"showPosts":true}', '{}', 'published', false, '{"title":"About","description":"The about page"}', '2017-01-16 05:10:42.507144+00', NULL);
+INSERT INTO page (id, name, slug, url, layout, data, status, restricted, meta, created_at, updated_at) VALUES ('87d1e9b3-b32e-474e-9246-6dce1b21a72d', 'Home', 'home', 'home', '{"showHero":true,"showPosts":true}', '{}', 'published', false, '{"title":"Home","description":"The home page"}', '2017-01-27 02:52:52.946434+00', NULL);
+INSERT INTO page (id, name, slug, url, layout, data, status, restricted, meta, created_at, updated_at) VALUES ('0a277a50-b482-4b86-b0e7-83fdd3a372af', 'About', 'about', 'about', '{"showHero":true,"showPosts":true}', '{}', 'published', false, '{"title":"About","description":"The about page"}', '2017-01-27 02:52:52.949358+00', NULL);
 
 
 --
 -- Data for Name: post; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO post (id, title, slug, feature_image, attachments, meta, featured, content, excerpt, user_id, published, created_at, updated_at) VALUES ('5c9ed236-79f0-4ff7-93bd-2815f06c74b4', 'Just Another Post', 'just-another-post', 'https://boldr.io/image1.jpg', NULL, '{}', false, '<h1>Lorem ipsum dolor sit amet.</h1>
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien in est aliquam lacinia. Donec fringilla odio nulla, sagittis egestas dolor bibendum ut. Proin eget massa mattis, dictum enim vitae, facilisis eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum imperdiet varius ante. Maecenas sit amet luctus sapien, quis aliquet purus. Cras malesuada quam a dui pretium fermentum. Quisque tempor interdum quam, eu lacinia turpis interdum id. Curabitur non mauris lobortis, mattis nulla id, viverra nisi. Phasellus eget porttitor lorem. Quisque facilisis nec arcu eu fringilla. Vivamus elit ipsum, viverra eu maximus a, venenatis nec nibh.Suspendisse iaculis auctor fermentum. Sed suscipit ante nisl, nec iaculis magna consequat vel. Quisque viverra est a justo egestas, euismod egestas metus hendrerit.</p>
-<p><br></p>
-<blockquote>&nbsp;In ultricies sagittis ex a dapibus. Nunc feugiat lorem non tincidunt euismod. Duis quam nibh, volutpat sit amet enim non, eleifend ullamcorper diam. Etiam iaculis ante ut libero sollicitudin, eget eleifend nulla gravida. Pellentesque ut gravida augue. Donec nibh orci, rutrum nec sapien eu, lacinia pretium nulla. Nunc turpis sem, placerat ac velit sit amet, aliquet ultrices metus.Curabitur mollis venenatis lectus, at elementum felis dapibus non. Sed vel finibus mauris. Aenean semper arcu lectus, porta feugiat urna tincidunt congue. Ut euismod finibus massa quis condimentum. Vivamus interdum velit nec varius consectetur. Vivamus sodales commodo ante, vel fringilla nunc finibus et. Phasellus non sem finibus, congue nibh ut, ornare tortor.Curabitur sapien est, accumsan at justo a, porta malesuada risus. Integer facilisis viverra mauris condimentum finibus.</blockquote>
-<p><br></p>
-<p>&nbsp;Donec eget tortor id ipsum maximus commodo nec eu quam. Aliquam erat volutpat. Nunc tincidunt est sit amet justo placerat egestas. Vestibulum efficitur, neque tempor feugiat lacinia, turpis ex efficitur urna, ullamcorper porta ligula lorem id neque. Quisque interdum risus at nisl finibus varius. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.In euismod gravida tortor in placerat. Aenean blandit blandit efficitur. Cras a accumsan augue, at tincidunt massa. Vivamus eleifend sem sed nibh tempor laoreet. Quisque blandit turpis vitae bibendum mattis. Nulla sagittis quam eget diam feugiat ultricies. Aliquam varius tellus et turpis viverra tempus. Nam sit amet ex suscipit, convallis tortor at, malesuada felis. Vestibulum arcu eros, bibendum sit amet tempus placerat, pharetra nec tortor. Ut scelerisque quam non magna tincidunt, nec varius massa blandit.</p>
-<p><br></p>', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, whenan unknown printer took a galley of type and scrambled it to make a type specimen book.', '1b062e26-df71-48ce-b363-4ae9b966e7a0', true, '2017-01-16 05:10:42.261677+00', NULL);
 INSERT INTO post (id, title, slug, feature_image, attachments, meta, featured, content, excerpt, user_id, published, created_at, updated_at) VALUES ('cb61bbae-c91e-4014-b665-3485734b88fb', 'Nother One', 'nother-one', 'https://boldr.io/image3.jpg', NULL, '{}', false, '<h1>Lorem ipsum dolor sit amet.</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien in est aliquam lacinia. Donec fringilla odio nulla, sagittis egestas dolor bibendum ut. Proin eget massa mattis, dictum enim vitae, facilisis eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum imperdiet varius ante. Maecenas sit amet luctus sapien, quis aliquet purus. Cras malesuada quam a dui pretium fermentum. Quisque tempor interdum quam, eu lacinia turpis interdum id. Curabitur non mauris lobortis, mattis nulla id, viverra nisi. Phasellus eget porttitor lorem. Quisque facilisis nec arcu eu fringilla. Vivamus elit ipsum, viverra eu maximus a, venenatis nec nibh.Suspendisse iaculis auctor fermentum. Sed suscipit ante nisl, nec iaculis magna consequat vel. Quisque viverra est a justo egestas, euismod egestas metus hendrerit.</p>
 <p><br></p>
 <blockquote>&nbsp;In ultricies sagittis ex a dapibus. Nunc feugiat lorem non tincidunt euismod. Duis quam nibh, volutpat sit amet enim non, eleifend ullamcorper diam. Etiam iaculis ante ut libero sollicitudin, eget eleifend nulla gravida. Pellentesque ut gravida augue. Donec nibh orci, rutrum nec sapien eu, lacinia pretium nulla. Nunc turpis sem, placerat ac velit sit amet, aliquet ultrices metus.Curabitur mollis venenatis lectus, at elementum felis dapibus non. Sed vel finibus mauris. Aenean semper arcu lectus, porta feugiat urna tincidunt congue. Ut euismod finibus massa quis condimentum. Vivamus interdum velit nec varius consectetur. Vivamus sodales commodo ante, vel fringilla nunc finibus et. Phasellus non sem finibus, congue nibh ut, ornare tortor.Curabitur sapien est, accumsan at justo a, porta malesuada risus. Integer facilisis viverra mauris condimentum finibus.</blockquote>
 <p><br></p>
 <p>&nbsp;Donec eget tortor id ipsum maximus commodo nec eu quam. Aliquam erat volutpat. Nunc tincidunt est sit amet justo placerat egestas. Vestibulum efficitur, neque tempor feugiat lacinia, turpis ex efficitur urna, ullamcorper porta ligula lorem id neque. Quisque interdum risus at nisl finibus varius. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.In euismod gravida tortor in placerat. Aenean blandit blandit efficitur. Cras a accumsan augue, at tincidunt massa. Vivamus eleifend sem sed nibh tempor laoreet. Quisque blandit turpis vitae bibendum mattis. Nulla sagittis quam eget diam feugiat ultricies. Aliquam varius tellus et turpis viverra tempus. Nam sit amet ex suscipit, convallis tortor at, malesuada felis. Vestibulum arcu eros, bibendum sit amet tempus placerat, pharetra nec tortor. Ut scelerisque quam non magna tincidunt, nec varius massa blandit.</p>
-<p><br></p>', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, whenan unknown printer took a galley of type and scrambled it to make a type specimen book.', 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f', false, '2017-01-16 05:10:42.275909+00', NULL);
+<p><br></p>', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, whenan unknown printer took a galley of type and scrambled it to make a type specimen book.', 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f', false, '2017-01-27 02:52:52.686269+00', NULL);
 INSERT INTO post (id, title, slug, feature_image, attachments, meta, featured, content, excerpt, user_id, published, created_at, updated_at) VALUES ('ab33a0ca-b349-4cf8-947f-94f415149492', 'Random Post Title', 'random-post-title', 'https://boldr.io/image2.jpg', NULL, '{}', false, '<h1>Lorem ipsum dolor sit amet.</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien in est aliquam lacinia. Donec fringilla odio nulla, sagittis egestas dolor bibendum ut. Proin eget massa mattis, dictum enim vitae, facilisis eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum imperdiet varius ante. Maecenas sit amet luctus sapien, quis aliquet purus. Cras malesuada quam a dui pretium fermentum. Quisque tempor interdum quam, eu lacinia turpis interdum id. Curabitur non mauris lobortis, mattis nulla id, viverra nisi. Phasellus eget porttitor lorem. Quisque facilisis nec arcu eu fringilla. Vivamus elit ipsum, viverra eu maximus a, venenatis nec nibh.Suspendisse iaculis auctor fermentum. Sed suscipit ante nisl, nec iaculis magna consequat vel. Quisque viverra est a justo egestas, euismod egestas metus hendrerit.</p>
 <p><br></p>
 <blockquote>&nbsp;In ultricies sagittis ex a dapibus. Nunc feugiat lorem non tincidunt euismod. Duis quam nibh, volutpat sit amet enim non, eleifend ullamcorper diam. Etiam iaculis ante ut libero sollicitudin, eget eleifend nulla gravida. Pellentesque ut gravida augue. Donec nibh orci, rutrum nec sapien eu, lacinia pretium nulla. Nunc turpis sem, placerat ac velit sit amet, aliquet ultrices metus.Curabitur mollis venenatis lectus, at elementum felis dapibus non. Sed vel finibus mauris. Aenean semper arcu lectus, porta feugiat urna tincidunt congue. Ut euismod finibus massa quis condimentum. Vivamus interdum velit nec varius consectetur. Vivamus sodales commodo ante, vel fringilla nunc finibus et. Phasellus non sem finibus, congue nibh ut, ornare tortor.Curabitur sapien est, accumsan at justo a, porta malesuada risus. Integer facilisis viverra mauris condimentum finibus.</blockquote>
 <p><br></p>
 <p>&nbsp;Donec eget tortor id ipsum maximus commodo nec eu quam. Aliquam erat volutpat. Nunc tincidunt est sit amet justo placerat egestas. Vestibulum efficitur, neque tempor feugiat lacinia, turpis ex efficitur urna, ullamcorper porta ligula lorem id neque. Quisque interdum risus at nisl finibus varius. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.In euismod gravida tortor in placerat. Aenean blandit blandit efficitur. Cras a accumsan augue, at tincidunt massa. Vivamus eleifend sem sed nibh tempor laoreet. Quisque blandit turpis vitae bibendum mattis. Nulla sagittis quam eget diam feugiat ultricies. Aliquam varius tellus et turpis viverra tempus. Nam sit amet ex suscipit, convallis tortor at, malesuada felis. Vestibulum arcu eros, bibendum sit amet tempus placerat, pharetra nec tortor. Ut scelerisque quam non magna tincidunt, nec varius massa blandit.</p>
-<p><br></p>', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, whenan unknown printer took a galley of type and scrambled it to make a type specimen book.', '1b062e26-df71-48ce-b363-4ae9b966e7a0', true, '2017-01-16 05:10:42.290287+00', NULL);
+<p><br></p>', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, whenan unknown printer took a galley of type and scrambled it to make a type specimen book.', '1b062e26-df71-48ce-b363-4ae9b966e7a0', true, '2017-01-27 02:52:52.687899+00', NULL);
+INSERT INTO post (id, title, slug, feature_image, attachments, meta, featured, content, excerpt, user_id, published, created_at, updated_at) VALUES ('a0207b95-e7ee-4909-b258-1c2e89d1ba2c', 'National Operations Manager', 'National-Operations-Manager', 'http://lorempixel.com/640/480', NULL, NULL, false, 'Impedit ut qui perferendis dolor aliquam consequatur tenetur. Ullam dolor ut dolor qui ut voluptas ut. Laborum quasi cumque quisquam qui qui omnis et. Qui a iste similique ut asperiores id esse et. Laboriosam labore consectetur ut et sed. Aliquam ut expedita.
+ Pariatur id sunt. Eius sit nesciunt ea ipsum accusamus necessitatibus et. Possimus mollitia rerum reprehenderit non quia quia et. Omnis occaecati accusamus non dolores quis modi reiciendis. Ab voluptas commodi ullam velit enim et nostrum.
+ Et architecto est vel enim enim. Voluptatem autem eaque esse aliquam. Sit explicabo quia sit animi. Ducimus saepe mollitia ullam dolorem.', 'Assumenda ratione quibusdam distinctio. Est ducimus perspiciatis delectus. Distinctio minima qui autem. Impedit fugit eaque molestias et ad. Quasi sed sint aperiam consequatur exercitationem blanditiis rem.', '1b062e26-df71-48ce-b363-4ae9b966e7a0', true, '2017-01-27 05:08:50.752+00', '2017-01-27 05:08:50.752+00');
+INSERT INTO post (id, title, slug, feature_image, attachments, meta, featured, content, excerpt, user_id, published, created_at, updated_at) VALUES ('8a41dcf1-d8db-4376-9b3f-48cc6fa676ad', 'Chief Optimization Analyst', 'Chief-Optimization-Analyst', 'http://lorempixel.com/640/480', NULL, NULL, false, 'Rerum harum illum ipsum. Ipsam quia qui enim omnis quae. Dolores aliquam quis sapiente sint est. Veniam velit deleniti voluptates qui nostrum. Dolor dolores optio saepe. Et aliquam consequatur qui cum ut quis ea.
+ Dolores qui et libero quas sit commodi. Et vero ipsa explicabo non aut eos sunt quam sint. Hic at nobis eius vel quisquam nisi enim ut.
+ Illum rerum eligendi. Dolores rerum expedita pariatur. Voluptatem ut vel. Aut sunt eum.', 'Veniam omnis quis et sed et. Sit quo non autem illo nesciunt accusamus. Nam officia molestias laborum aut asperiores ipsa hic inventore. Vitae sed et architecto aut vitae.', '1b062e26-df71-48ce-b363-4ae9b966e7a0', true, '2017-01-27 05:11:33.993+00', '2017-01-27 05:11:33.993+00');
 
 
 --
@@ -808,7 +923,6 @@ INSERT INTO post (id, title, slug, feature_image, attachments, meta, featured, c
 -- Data for Name: post_tag; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO post_tag (id, post_id, tag_id) VALUES (1, '5c9ed236-79f0-4ff7-93bd-2815f06c74b4', 2);
 INSERT INTO post_tag (id, post_id, tag_id) VALUES (2, 'cb61bbae-c91e-4014-b665-3485734b88fb', 1);
 INSERT INTO post_tag (id, post_id, tag_id) VALUES (3, 'ab33a0ca-b349-4cf8-947f-94f415149492', 2);
 
@@ -817,16 +931,16 @@ INSERT INTO post_tag (id, post_id, tag_id) VALUES (3, 'ab33a0ca-b349-4cf8-947f-9
 -- Name: post_tag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('post_tag_id_seq', 3, true);
+SELECT pg_catalog.setval('post_tag_id_seq', 8, true);
 
 
 --
 -- Data for Name: role; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO role (id, uuid, name, image, description, created_at, updated_at) VALUES (1, 'a0664851-cada-44ed-a60c-7234f9bfa74d', 'Member', NULL, 'A verified user without special privileges', '2017-01-16 05:10:42.140809+00', NULL);
-INSERT INTO role (id, uuid, name, image, description, created_at, updated_at) VALUES (2, 'bf0cafe5-808f-4a87-932c-da26cb9bae31', 'Staff', NULL, 'Allows access to the CMS dashboard.', '2017-01-16 05:10:42.160712+00', NULL);
-INSERT INTO role (id, uuid, name, image, description, created_at, updated_at) VALUES (3, '9b490322-26aa-4374-8840-1d010f406d8c', 'Admin', NULL, 'Complete control over the CMS', '2017-01-16 05:10:42.174832+00', NULL);
+INSERT INTO role (id, name, image, description, created_at, updated_at) VALUES (1, 'Member', NULL, 'A verified user without special privileges', '2017-01-27 02:52:52.555939+00', NULL);
+INSERT INTO role (id, name, image, description, created_at, updated_at) VALUES (2, 'Staff', NULL, 'Allows access to the CMS dashboard.', '2017-01-27 02:52:52.557723+00', NULL);
+INSERT INTO role (id, name, image, description, created_at, updated_at) VALUES (3, 'Admin', NULL, 'Complete control over the CMS', '2017-01-27 02:52:52.559689+00', NULL);
 
 
 --
@@ -840,13 +954,13 @@ SELECT pg_catalog.setval('role_id_seq', 3, true);
 -- Data for Name: setting; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO setting (id, uuid, key, label, value, description) VALUES (1, '96cbccae-bb62-4895-961a-7966839146aa', 'site_name', 'Site Name', 'Boldr', 'The website name.');
-INSERT INTO setting (id, uuid, key, label, value, description) VALUES (2, '0c60d1e4-cc19-459c-a31c-2e7cf91fc4f4', 'site_url', 'Site URL', 'http://localhost:3000', 'The address used to access your website.');
-INSERT INTO setting (id, uuid, key, label, value, description) VALUES (3, 'd54d7c6f-5869-414f-a2e1-b0458a2fb828', 'site_logo', 'Site Logo', 'https://boldr.io/boldr.png', 'The logo is displayed in the header area.');
-INSERT INTO setting (id, uuid, key, label, value, description) VALUES (4, 'e8ed37d2-2b72-4777-8839-4ff12b15c1b4', 'site_description', 'Site Description', 'A modern CMS', 'Meta header for search results.');
-INSERT INTO setting (id, uuid, key, label, value, description) VALUES (5, 'a746b40a-3939-45d7-a3e0-35b26a4c3707', 'favicon', 'Favicon', 'https://boldr.io/favicon.ico', 'Favicon to use for your website.');
-INSERT INTO setting (id, uuid, key, label, value, description) VALUES (6, 'e5cf6945-3ba1-4cf6-a7e6-eb836b652d54', 'google_analytics', 'Google Analytics ID', 'UA-323432', 'Google Analytics tracking code');
-INSERT INTO setting (id, uuid, key, label, value, description) VALUES (7, 'b86c5e47-71f6-4946-b0b7-546abedf74ae', 'allow_registration', 'Allow Registration', 'true', 'Toggle allowing user''s to register for accounts.');
+INSERT INTO setting (id, key, label, value, description) VALUES (1, 'site_name', 'Site Name', 'Boldr', 'The website name.');
+INSERT INTO setting (id, key, label, value, description) VALUES (2, 'site_url', 'Site URL', 'http://localhost:3000', 'The address used to access your website.');
+INSERT INTO setting (id, key, label, value, description) VALUES (3, 'site_logo', 'Site Logo', 'https://boldr.io/boldr.png', 'The logo is displayed in the header area.');
+INSERT INTO setting (id, key, label, value, description) VALUES (4, 'site_description', 'Site Description', 'A modern CMS', 'Meta header for search results.');
+INSERT INTO setting (id, key, label, value, description) VALUES (5, 'favicon', 'Favicon', 'https://boldr.io/favicon.ico', 'Favicon to use for your website.');
+INSERT INTO setting (id, key, label, value, description) VALUES (6, 'google_analytics', 'Google Analytics ID', 'UA-323432', 'Google Analytics tracking code');
+INSERT INTO setting (id, key, label, value, description) VALUES (7, 'allow_registration', 'Allow Registration', 'true', 'Toggle allowing user''s to register for accounts.');
 
 
 --
@@ -860,23 +974,25 @@ SELECT pg_catalog.setval('setting_id_seq', 7, true);
 -- Data for Name: tag; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO tag (id, uuid, name, description) VALUES (1, '53fbcad9-f76b-4267-8c7a-0b5f17c56386', 'javascript', 'Something something JS');
-INSERT INTO tag (id, uuid, name, description) VALUES (2, 'd4743d4c-ff99-4ab5-962a-82f41cf7696c', 'apple', 'Stuff about stuff.');
+INSERT INTO tag (id, name, description) VALUES (1, 'javascript', 'Something something JS');
+INSERT INTO tag (id, name, description) VALUES (2, 'apple', 'Stuff about stuff.');
+INSERT INTO tag (id, name, description) VALUES (3, 'Skiing', 'Skiing stuff');
+INSERT INTO tag (id, name, description) VALUES (4, 'Snowboarding', 'skiing stuff');
 
 
 --
 -- Name: tag_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('tag_id_seq', 2, true);
+SELECT pg_catalog.setval('tag_id_seq', 4, true);
 
 
 --
 -- Data for Name: template; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO template (id, uuid, name, label, resource, meta, content, created_at, updated_at) VALUES (1, 'c23891fb-88c2-4e91-b95d-c652f15eab0c', 'base', 'Base', '/', '{}', '{}', '2017-01-16 05:10:42.465796+00', NULL);
-INSERT INTO template (id, uuid, name, label, resource, meta, content, created_at, updated_at) VALUES (2, 'd42f91fb-88c2-4e91-b95d-c652f15eab0c', 'content', 'Content', 'content', '{}', '{}', '2017-01-16 05:10:42.480292+00', NULL);
+INSERT INTO template (id, uuid, name, slug, meta, content, created_at, updated_at) VALUES (1, 'c23891fb-88c2-4e91-b95d-c652f15eab0c', 'Base', 'base', '{}', '{}', '2017-01-27 02:52:52.909895+00', NULL);
+INSERT INTO template (id, uuid, name, slug, meta, content, created_at, updated_at) VALUES (2, 'd42f91fb-88c2-4e91-b95d-c652f15eab0c', 'Content', 'content', '{}', '{}', '2017-01-27 02:52:52.912002+00', NULL);
 
 
 --
@@ -911,16 +1027,16 @@ SELECT pg_catalog.setval('template_page_id_seq', 2, true);
 -- Name: token_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('token_id_seq', 1, false);
+SELECT pg_catalog.setval('token_id_seq', 3, true);
 
 
 --
 -- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "user" (id, email, password, first_name, last_name, display_name, avatar_url, profile_image, location, bio, birthday, website, verified, created_at, updated_at) VALUES ('1b062e26-df71-48ce-b363-4ae9b966e7a0', 'admin@boldr.io', '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka', 'Joe', 'Gray', 'Joey', 'https://boldr.io/images/unknown-avatar.png', 'https://boldr.io/images/unknown-avatar.png', 'Colorado', 'I am me.', '1988-01-01', 'https://boldr.io', true, '2017-01-16 05:10:42.188622+00', NULL);
-INSERT INTO "user" (id, email, password, first_name, last_name, display_name, avatar_url, profile_image, location, bio, birthday, website, verified, created_at, updated_at) VALUES ('f4d869a6-1a75-469b-a9cc-965c552929e4', 'user@boldr.io', '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka', 'Jessica', 'Smith', 'Jess', 'https://boldr.io/images/unknown-avatar.png', 'https://boldr.io/images/unknown-avatar.png', 'Washington', 'Just a person', '1988-01-01', 'https://boldr.io', true, '2017-01-16 05:10:42.202662+00', NULL);
-INSERT INTO "user" (id, email, password, first_name, last_name, display_name, avatar_url, profile_image, location, bio, birthday, website, verified, created_at, updated_at) VALUES ('f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f', 'demo@boldr.io', '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka', 'Sam', 'Hunt', 'Samus', 'https://boldr.io/images/unknown-avatar.png', 'https://boldr.io/images/unknown-avatar.png', 'California', 'Someone doing things.', '1988-01-01', 'https://boldr.io', true, '2017-01-16 05:10:42.216342+00', NULL);
+INSERT INTO "user" (id, email, password, first_name, last_name, username, avatar_url, profile_image, location, bio, birthday, website, verified, created_at, updated_at) VALUES ('1b062e26-df71-48ce-b363-4ae9b966e7a0', 'admin@boldr.io', '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka', 'Joe', 'Gray', 'Joey', 'https://boldr.io/images/unknown-avatar.png', 'https://boldr.io/images/unknown-avatar.png', 'Colorado', 'I am me.', '1988-01-01', 'https://boldr.io', true, '2017-01-27 02:52:52.60212+00', NULL);
+INSERT INTO "user" (id, email, password, first_name, last_name, username, avatar_url, profile_image, location, bio, birthday, website, verified, created_at, updated_at) VALUES ('f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f', 'demo@boldr.io', '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka', 'Sam', 'Hunt', 'Samus', 'https://boldr.io/images/unknown-avatar.png', 'https://boldr.io/images/unknown-avatar.png', 'California', 'Someone doing things.', '1988-01-01', 'https://boldr.io', true, '2017-01-27 02:52:52.605303+00', NULL);
+INSERT INTO "user" (id, email, password, first_name, last_name, username, avatar_url, profile_image, location, bio, birthday, website, verified, created_at, updated_at) VALUES ('f4d869a6-1a75-469b-a9cc-965c552929e4', 'user@boldr.io', '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka', 'Jessica', 'Smith', 'Jess', 'https://boldr.io/images/unknown-avatar.png', 'https://boldr.io/images/unknown-avatar.png', 'Washington', 'She is a person.', '1988-01-01', 'https://boldr.io', true, '2017-01-27 02:52:52.603831+00', NULL);
 
 
 --
@@ -929,14 +1045,22 @@ INSERT INTO "user" (id, email, password, first_name, last_name, display_name, av
 
 INSERT INTO user_role (id, user_id, role_id) VALUES (1, '1b062e26-df71-48ce-b363-4ae9b966e7a0', 3);
 INSERT INTO user_role (id, user_id, role_id) VALUES (2, 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f', 2);
-INSERT INTO user_role (id, user_id, role_id) VALUES (3, 'f4d869a6-1a75-469b-a9cc-965c552929e4', 1);
+INSERT INTO user_role (id, user_id, role_id) VALUES (8, 'f4d869a6-1a75-469b-a9cc-965c552929e4', 1);
 
 
 --
 -- Name: user_role_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('user_role_id_seq', 3, true);
+SELECT pg_catalog.setval('user_role_id_seq', 8, true);
+
+
+--
+-- Name: action_type action_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY action_type
+    ADD CONSTRAINT action_type_pkey PRIMARY KEY (id);
 
 
 --
@@ -945,14 +1069,6 @@ SELECT pg_catalog.setval('user_role_id_seq', 3, true);
 
 ALTER TABLE ONLY activity
     ADD CONSTRAINT activity_pkey PRIMARY KEY (id);
-
-
---
--- Name: attachment_category attachment_category_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY attachment_category
-    ADD CONSTRAINT attachment_category_pkey PRIMARY KEY (category_id, attachment_id);
 
 
 --
@@ -972,30 +1088,6 @@ ALTER TABLE ONLY attachment
 
 
 --
--- Name: category category_name_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY category
-    ADD CONSTRAINT category_name_unique UNIQUE (name);
-
-
---
--- Name: category category_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY category
-    ADD CONSTRAINT category_pkey PRIMARY KEY (id);
-
-
---
--- Name: gallery_attachment gallery_attachment_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY gallery_attachment
-    ADD CONSTRAINT gallery_attachment_pkey PRIMARY KEY (gallery_id, attachment_id);
-
-
---
 -- Name: gallery gallery_name_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1010,20 +1102,13 @@ ALTER TABLE ONLY gallery
 ALTER TABLE ONLY gallery
     ADD CONSTRAINT gallery_pkey PRIMARY KEY (id);
 
+
 --
 -- Name: menu_detail menu_detail_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY menu_detail
     ADD CONSTRAINT menu_detail_pkey PRIMARY KEY (id);
-
-
---
--- Name: menu_detail menu_detail_uuid_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY menu_detail
-    ADD CONSTRAINT menu_detail_uuid_unique UNIQUE (uuid);
 
 
 --
@@ -1043,11 +1128,11 @@ ALTER TABLE ONLY menu
 
 
 --
--- Name: menu menu_uuid_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
+-- Name: migrations migrations_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-ALTER TABLE ONLY menu
-    ADD CONSTRAINT menu_uuid_unique UNIQUE (uuid);
+ALTER TABLE ONLY migrations
+    ADD CONSTRAINT migrations_pkey PRIMARY KEY (id);
 
 
 --
@@ -1064,6 +1149,14 @@ ALTER TABLE ONLY page
 
 ALTER TABLE ONLY page
     ADD CONSTRAINT page_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: page page_slug_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY page
+    ADD CONSTRAINT page_slug_unique UNIQUE (slug);
 
 
 --
@@ -1139,27 +1232,11 @@ ALTER TABLE ONLY role
 
 
 --
--- Name: role role_uuid_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY role
-    ADD CONSTRAINT role_uuid_unique UNIQUE (uuid);
-
-
---
 -- Name: setting setting_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY setting
     ADD CONSTRAINT setting_pkey PRIMARY KEY (id);
-
-
---
--- Name: setting setting_uuid_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY setting
-    ADD CONSTRAINT setting_uuid_unique UNIQUE (uuid);
 
 
 --
@@ -1176,14 +1253,6 @@ ALTER TABLE ONLY tag
 
 ALTER TABLE ONLY tag
     ADD CONSTRAINT tag_pkey PRIMARY KEY (id);
-
-
---
--- Name: tag tag_uuid_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY tag
-    ADD CONSTRAINT tag_uuid_unique UNIQUE (uuid);
 
 
 --
@@ -1259,17 +1328,18 @@ ALTER TABLE ONLY user_role
 
 
 --
--- Name: category_name_index; Type: INDEX; Schema: public; Owner: postgres
+-- Name: user user_username_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
-CREATE INDEX category_name_index ON category USING btree (name);
+ALTER TABLE ONLY "user"
+    ADD CONSTRAINT user_username_unique UNIQUE (username);
 
 
 --
--- Name: category_type_index; Type: INDEX; Schema: public; Owner: postgres
+-- Name: action_type_type_index; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE INDEX category_type_index ON category USING btree (type);
+CREATE INDEX action_type_type_index ON action_type USING btree (type);
 
 
 --
@@ -1287,24 +1357,10 @@ CREATE INDEX menu_detail_link_index ON menu_detail USING btree (link);
 
 
 --
--- Name: menu_detail_uuid_index; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX menu_detail_uuid_index ON menu_detail USING btree (uuid);
-
-
---
 -- Name: menu_label_index; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX menu_label_index ON menu USING btree (label);
-
-
---
--- Name: menu_uuid_index; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX menu_uuid_index ON menu USING btree (uuid);
 
 
 --
@@ -1343,13 +1399,6 @@ CREATE INDEX role_name_index ON role USING btree (name);
 
 
 --
--- Name: role_uuid_index; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX role_uuid_index ON role USING btree (uuid);
-
-
---
 -- Name: setting_key_index; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1357,10 +1406,10 @@ CREATE INDEX setting_key_index ON setting USING btree (key);
 
 
 --
--- Name: setting_uuid_index; Type: INDEX; Schema: public; Owner: postgres
+-- Name: setting_value_index; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE INDEX setting_uuid_index ON setting USING btree (uuid);
+CREATE INDEX setting_value_index ON setting USING btree (value);
 
 
 --
@@ -1371,24 +1420,10 @@ CREATE INDEX tag_name_index ON tag USING btree (name);
 
 
 --
--- Name: tag_uuid_index; Type: INDEX; Schema: public; Owner: postgres
+-- Name: template_slug_index; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE INDEX tag_uuid_index ON tag USING btree (uuid);
-
-
---
--- Name: template_name_index; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX template_name_index ON template USING btree (name);
-
-
---
--- Name: template_resource_index; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX template_resource_index ON template USING btree (resource);
+CREATE INDEX template_slug_index ON template USING btree (slug);
 
 
 --
@@ -1420,10 +1455,89 @@ CREATE INDEX user_email_index ON "user" USING btree (email);
 
 
 --
+-- Name: user_username_index; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX user_username_index ON "user" USING btree (username);
+
+
+--
 -- Name: user_verified_index; Type: INDEX; Schema: public; Owner: postgres
 --
 
 CREATE INDEX user_verified_index ON "user" USING btree (verified);
+
+
+--
+-- Name: activity activity_action_type_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY activity
+    ADD CONSTRAINT activity_action_type_id_foreign FOREIGN KEY (action_type_id) REFERENCES action_type(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: activity activity_activity_attachment_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY activity
+    ADD CONSTRAINT activity_activity_attachment_foreign FOREIGN KEY (activity_attachment) REFERENCES attachment(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: activity activity_activity_menu_detail_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY activity
+    ADD CONSTRAINT activity_activity_menu_detail_foreign FOREIGN KEY (activity_menu_detail) REFERENCES menu_detail(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: activity activity_activity_page_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY activity
+    ADD CONSTRAINT activity_activity_page_foreign FOREIGN KEY (activity_page) REFERENCES page(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: activity activity_activity_post_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY activity
+    ADD CONSTRAINT activity_activity_post_foreign FOREIGN KEY (activity_post) REFERENCES post(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: activity activity_activity_role_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY activity
+    ADD CONSTRAINT activity_activity_role_foreign FOREIGN KEY (activity_role) REFERENCES role(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: activity activity_activity_tag_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY activity
+    ADD CONSTRAINT activity_activity_tag_foreign FOREIGN KEY (activity_tag) REFERENCES tag(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: activity activity_activity_template_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY activity
+    ADD CONSTRAINT activity_activity_template_foreign FOREIGN KEY (activity_template) REFERENCES template(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: activity activity_activity_user_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY activity
+    ADD CONSTRAINT activity_activity_user_foreign FOREIGN KEY (activity_user) REFERENCES "user"(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -1435,43 +1549,11 @@ ALTER TABLE ONLY activity
 
 
 --
--- Name: attachment_category attachment_category_attachment_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY attachment_category
-    ADD CONSTRAINT attachment_category_attachment_id_foreign FOREIGN KEY (attachment_id) REFERENCES attachment(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: attachment_category attachment_category_category_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY attachment_category
-    ADD CONSTRAINT attachment_category_category_id_foreign FOREIGN KEY (category_id) REFERENCES category(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
 -- Name: attachment attachment_user_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
 ALTER TABLE ONLY attachment
     ADD CONSTRAINT attachment_user_id_foreign FOREIGN KEY (user_id) REFERENCES "user"(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: gallery_attachment gallery_attachment_attachment_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY gallery_attachment
-    ADD CONSTRAINT gallery_attachment_attachment_id_foreign FOREIGN KEY (attachment_id) REFERENCES attachment(id) ON UPDATE CASCADE ON DELETE CASCADE;
-
-
---
--- Name: gallery_attachment gallery_attachment_gallery_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY gallery_attachment
-    ADD CONSTRAINT gallery_attachment_gallery_id_foreign FOREIGN KEY (gallery_id) REFERENCES gallery(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -1573,3 +1655,4 @@ ALTER TABLE ONLY user_role
 --
 -- PostgreSQL database dump complete
 --
+

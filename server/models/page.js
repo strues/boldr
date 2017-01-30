@@ -5,7 +5,6 @@ import Template from './template';
 class Page extends BaseModel {
   static get tableName() { return 'page'; }
   static addTimestamps = true;
-  static addUUID = false;
 
   static get relationMappings() {
     return {

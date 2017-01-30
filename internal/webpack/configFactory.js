@@ -6,13 +6,13 @@ import { sync as globSync } from 'glob';
 import AssetsPlugin from 'assets-webpack-plugin';
 import nodeExternals from 'webpack-node-externals';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import OfflinePlugin from 'offline-plugin';
 import appRootDir from 'app-root-dir';
 import WebpackMd5Hash from 'webpack-md5-hash';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 import { happyPackPlugin } from '../utils';
 import type { BuildOptions } from '../types';
-import { removeNil } from '../../shared/core/utils/arrays';
-import { mergeDeep } from '../../shared/core/utils/objects';
-import { ifElse } from '../../shared/core/utils/logic';
+import { removeNil, mergeDeep, ifElse } from '../../shared/core/utils';
 import getConfig from '../../config/get';
 import ClientConfigScript from '../../config/ClientConfigScript';
 
@@ -246,7 +246,13 @@ export default function webpackConfigFactory(buildOptions: BuildOptions) {
               // that it will kill our webpack treeshaking feature as the modules
               // transpilation has not been disabled within in.
               babelrc: false,
-
+              // Faster transpiling for minor loose in formatting
+              compact: true,
+              cacheDirectory: true,
+              // Keep origin information alive
+              sourceMaps: true,
+              // Nobody needs the original comments when having source maps
+              comments: false,
               presets: [
                 // JSX
                 'react',
@@ -278,13 +284,13 @@ export default function webpackConfigFactory(buildOptions: BuildOptions) {
                 ['transform-object-rest-spread', { useBuiltIns: true }],
                 'transform-flow-strip-types',
                 'transform-es2015-arrow-functions',
-                ['transform-async-to-module-method', {
-                  module: 'bluebird', method: 'coroutine',
+                ['transform-regenerator', {
+                  async: false,
                 }],
                 ['transform-runtime', {
                   helpers: false,
                   polyfill: false,
-                  regenerator: false,
+                  regenerator: true,
                 }],
                 // This decorates our components with  __self prop to JSX elements,
                 // which React will use to generate some runtime warnings.
@@ -334,6 +340,141 @@ export default function webpackConfigFactory(buildOptions: BuildOptions) {
           ],
         }),
       ),
+    // Service Worker - Offline Page generation.
+     //
+     // We use the HtmlWebpackPlugin to produce an "offline" html page that
+     // can be used by our service worker (see the OfflinePlugin below) in
+     // order support offline rendering of our application.
+     // We will only create the service worker required page if enabled in
+     // config and if we are building the production version of client.
+      ifElse(isProd && isClient && getConfig('serviceWorker.enabled'))(
+       () => new HtmlWebpackPlugin({
+         filename: getConfig('serviceWorker.offlinePageFileName'),
+         template: `babel-loader!${getConfig('serviceWorker.offlinePageTemplate')}`,
+         production: true,
+         minify: {
+           removeComments: true,
+           collapseWhitespace: true,
+           removeRedundantAttributes: true,
+           useShortDoctype: true,
+           removeNilAttributes: true,
+           removeStyleLinkTypeAttributes: true,
+           keepClosingSlash: true,
+           minifyJS: true,
+           minifyCSS: true,
+           minifyURLs: true,
+         },
+         inject: true,
+         // We pass our getConfig and client config script compoent as it will
+         // be needed by the offline template.
+         custom: {
+           getConfig,
+           ClientConfigScript,
+         },
+       }),
+     ),
+     // Service Worker - generation.
+      //
+      // NOTE: It is HIGHLY recommended to keep this plugin as the last item
+      // within the list as it needs to be aware of all possible manipulations
+      // that may have be done to assets by the previous plugins. This is an
+      // offical request/recommendation by the plugin author.
+      //
+      // This is bound to our server/client bundles as we only expect to be
+      // serving the client bundle as a Single Page Application through the
+      // server.
+      //
+      // We use the offline-plugin to generate the service worker.  It also
+      // provides a runtime installation script which gets executed within
+      // the client.
+      // @see https://github.com/NekR/offline-plugin
+      //
+      // This plugin generates a service worker script which as configured below
+      // will precache all our generated client bundle assets as well as our
+      // static "public" folder assets.
+      //
+      // It has also been configured to make use of a HtmlWebpackPlugin
+      // generated "offline" page so that users can still used the application
+      // offline.
+      //
+      // Any time our static files or generated bundle files change the user's
+      // cache will be updated.
+      //
+      // We will only include the service worker if enabled in config.
+      ifElse(isProd && isClient && getConfig('serviceWorker.enabled'))(
+        () => new OfflinePlugin({
+          // Setting this value lets the plugin know where our generated client
+          // assets will be served from.
+          // e.g. /client/
+          publicPath: bundleConfig.webPath,
+          // When using the publicPath we need to disable the "relativePaths"
+          // feature of this plugin.
+          relativePaths: false,
+          // Our offline support will be done via a service worker.
+          // Read more on them here:
+          // http://bit.ly/2f8q7Td
+          ServiceWorker: {
+            // The name of the service worker script that will get generated.
+            output: getConfig('serviceWorker.fileName'),
+            // Enable events so that we can register updates.
+            events: true,
+            // By default the service worker will be ouput and served from the
+            // publicPath setting above in the root config of the OfflinePlugin.
+            // This means that it would be served from /client/sw.js
+            // We do not want this! Service workers have to be served from the
+            // root of our application in order for them to work correctly.
+            // Therefore we override the publicPath here. The sw.js will still
+            // live in at the /build/client/sw.js output location therefore in
+            // our server configuration we need to make sure that any requests
+            // to /sw.js will serve the /build/client/sw.js file.
+            publicPath: `/${getConfig('serviceWorker.fileName')}`,
+            // When the user is offline then this html page will be used at
+            // the base that loads all our cached client scripts.  This page
+            // is generated by the HtmlWebpackPlugin above, which takes care
+            // of injecting all of our client scripts into the body.
+            // Please see the HtmlWebpackPlugin configuration above for more
+            // information on this page.
+            navigateFallbackURL: `${bundleConfig.webPath}${getConfig('serviceWorker.offlinePageFileName')}`,
+          },
+          // According to the Mozilla docs, AppCache is considered deprecated.
+          // @see https://mzl.la/1pOZ5wF
+          // It does however have much wider support compared to the newer
+          // Service Worker specification, so you could consider enabling it
+          // if you needed.
+          AppCache: false,
+          // Which external files should be included with the service worker?
+          externals:
+            // Add the polyfill io script as an external if it is enabled.
+            (
+              getConfig('polyfillIO.enabled')
+                ? [getConfig('polyfillIO.url')]
+                : []
+            )
+            // Add any included public folder assets.
+            .concat(
+              getConfig('serviceWorker.includePublicAssets').reduce((acc, cur) => {
+                const publicAssetPathGlob = path.resolve(
+                  appRootDir.get(), getConfig('publicAssetsPath'), cur,
+                );
+                const publicFileWebPaths = acc.concat(
+                  // First get all the matching public folder files.
+                  globSync(publicAssetPathGlob, { nodir: true })
+                  // Then map them to relative paths against the public folder.
+                  // We need to do this as we need the "web" paths for each one.
+                  .map(publicFile => path.relative(
+                    path.resolve(appRootDir.get(), getConfig('publicAssetsPath')),
+                    publicFile,
+                  ))
+                  // Add the leading "/" indicating the file is being hosted
+                  // off the root of the application.
+                  .map(relativePath => `/${relativePath}`),
+                );
+                return publicFileWebPaths;
+              }, []),
+            ),
+        }),
+      ),
+      // ),
     ]),
     module: {
       rules: removeNil([

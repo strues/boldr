@@ -16,12 +16,14 @@ const ResetPasswordForm = (props: Props) => {
   return (
       <form onSubmit={ handleSubmit } className="boldr-form__generic">
         <Field
+          id="password"
           name="password"
           type="password"
           label="Enter a new password"
           component={ TextField }
         />
         <Field
+          id="confirm"
           name="confirm"
           type="password"
           label="Confirm new password."

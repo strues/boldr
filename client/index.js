@@ -25,7 +25,7 @@ import './polyfills';
 
 // Load fonts
 WebFontLoader.load({
-  google: { families: ['Roboto Slab:100,400,700', 'Roboto:400,700', 'Material Icons'] },
+  google: { families: ['Roboto:300,400,700', 'Material Icons'] }
 });
 // Get the DOM Element that will host our React application.
 const domNode = document.getElementById('app');
@@ -94,6 +94,11 @@ const renderApp = () => {
 };
 
 const unsubscribeHistory = renderApp();
+
+// This registers our service worker for asset caching and offline support.
+// Keep this as the last item, just in case the code execution failed (thanks
+// to react-boilerplate for that tip.)
+require('./registerServiceWorker');
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept(

@@ -14,7 +14,7 @@ const all = (state = {}, action) => {
     case t.FETCH_PAGES_SUCCESS:
       return {
         ...state,
-        ...action.payload.entities.templates,
+        ...action.payload.entities.pages,
       };
 
     default:

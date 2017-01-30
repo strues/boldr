@@ -9,7 +9,7 @@ describe('Auth Duck', () => {
         email: '',
         firstName: '',
         lastName: '',
-        displayName: '',
+        username: '',
         avatarUrl: '',
         role: '',
         roleId: '',

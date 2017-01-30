@@ -39,7 +39,6 @@ export async function createPost(req, res, next) {
   }
 
   const newPost = await Post.query().insert({
-    id: uuid(),
     title: req.body.title,
     slug: postSlug,
     excerpt: req.body.excerpt,
@@ -121,7 +120,6 @@ export async function destroy(req, res, next) {
     id: uuid(),
     user_id: req.user.id,
     action_type_id: 3,
-    activity_post: req.params.id,
   });
   return res.status(204).send({});
 }

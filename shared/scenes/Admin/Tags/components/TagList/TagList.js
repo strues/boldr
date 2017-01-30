@@ -28,6 +28,6 @@ const TagList = (props: Props) => {
       }
     </div>
   );
-}
+};
 
 export default TagList;

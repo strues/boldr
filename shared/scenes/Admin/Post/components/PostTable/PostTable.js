@@ -48,8 +48,9 @@ const PostTable = (props: Props) => {
   function transitionPost() {
     props.dispatch(selectPost(post));
   }
-  function handleClickDelete() {
-    const postId: String = props.id;
+  function handleClickDelete(post) {
+    const postId: String = post.id;
+    console.log(postId)
     props.handleDeleteClick(postId);
   }
   const formattedDate = format(props.created_at, 'MM/DD/YYYY');
@@ -67,6 +68,7 @@ const PostTable = (props: Props) => {
         </TableColumn>
         <TableColumn>{ post.published === true ? 'published' : 'draft' }</TableColumn>
         <TableColumn>{format(post.created_at, 'MM/DD/YYYY')}</TableColumn>
+         <TableColumn><Link to={ `/admin/posts/editor/${post.slug}` }><Button icon>mode_edit</Button></Link><Button onClick={ () => handleClickDelete(post) } icon>delete_forever</Button></TableColumn>
       </TableRow>
     ));
   return (
@@ -77,10 +79,11 @@ const PostTable = (props: Props) => {
            <TableColumn>Title</TableColumn>
            <TableColumn>Status</TableColumn>
            <TableColumn>Created</TableColumn>
+          <TableColumn>Actions</TableColumn>
          </TableRow>
        </TableHeader>
        <TableBody>
-         {rows}
+         { rows }
        </TableBody>
      </DataTable>
   );

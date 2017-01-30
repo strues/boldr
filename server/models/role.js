@@ -9,7 +9,6 @@ class Role extends BaseModel {
     return 'role';
   }
   static addTimestamps = true;
-  static addUUID = true;
   static hidden = ['password'];
   static get relationMappings() {
     return {

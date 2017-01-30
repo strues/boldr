@@ -76,7 +76,7 @@ export type User = {
   email: String,
   first_name: String,
   last_name: String,
-  display_name: String,
+  username: String,
   avatar_url: ?String,
   location: ?String,
   bio: ?String,

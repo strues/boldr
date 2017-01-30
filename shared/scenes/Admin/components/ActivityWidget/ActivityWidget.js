@@ -1,8 +1,9 @@
 /* @flow */
 import React from 'react';
+import Avatar from 'react-md/lib/Avatars';
+import Toolbar from 'react-md/lib/Toolbars';
 import List from 'react-md/lib/Lists/List';
 import ListItem from 'react-md/lib/Lists/ListItem';
-import Avatar from 'react-md/lib/Avatars';
 import Divider from 'react-md/lib/Dividers';
 import FontIcon from 'react-md/lib/FontIcons';
 import Paper from 'react-md/lib/Papers';
@@ -15,15 +16,18 @@ type Props = {
 const ActivityWidget = (props: Props) => {
   return (
 
-    <Paper zDepth={ 2 } style={ { padding: '1em' } }>
-      <Heading top="5px" align="left" size={ 4 } color="#555">
-        <FontIcon style={ { paddingTop: '5px' } }>new_releases</FontIcon> Recent Activity
-      </Heading>
+    <Paper zDepth={ 2 }>
+      <Toolbar
+        colored
+        title="Recent Activity"
+        nav={ null }
+        actions={ <Avatar icon={ <FontIcon>new_releases</FontIcon> } /> }
+      />
     <Divider />
       <div>
       {
         props.activities.map(a =>
-          <ActivityItem key={ a.id } {...a} />
+          <ActivityItem key={ a.id } { ...a } />
         )
       }
       </div>

@@ -36,7 +36,7 @@ function ClientConfigScript({ nonce }) {
   if (nonce) {
     props.nonce = nonce;
   }
-  return <script {...props} />;
+  return <script { ...props } />;
 }
 
 ClientConfigScript.propTypes = {

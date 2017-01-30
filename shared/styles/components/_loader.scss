@@ -1,4 +1,4 @@
-@keyframes boldr_uil{
+@keyframes boldr_uil {
   0% {
     transform: scale(2);
   }
@@ -41,18 +41,18 @@
   width: 40px;
   height: 120px;
   background: #207cca;
-  opacity: .6;
-  animation: boldr_uil .8s cubic-bezier(.01, .73, .28, .93) infinite;
+  opacity: 0.6;
+  animation: boldr_uil 0.8s cubic-bezier(.01, .73, .28, .93) infinite;
 }
 
 .boldr-loader__item > div:nth-of-type(2) {
   left: 80px;
-  opacity: .8;
-  animation-delay: .08s;
+  opacity: 0.8;
+  animation-delay: 0.08s;
 }
 
 .boldr-loader__item > div:nth-of-type(3) {
   left: 140px;
-  opacity: .9;
-  animation-delay: .16s;
+  opacity: 0.9;
+  animation-delay: 0.16s;
 }

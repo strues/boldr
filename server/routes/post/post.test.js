@@ -1,9 +1,9 @@
 import supertest from 'supertest';
 import faker from 'faker';
-import listener from '../../index';
+import app from '../../app';
 
 function request() {
-  return supertest(listener);
+  return supertest(app);
 }
 
 

@@ -1,3 +1,3 @@
-import { connect, disconnect } from './postgres';
+import knex from './postgres';
 
-export { connect, disconnect };
+export default knex;

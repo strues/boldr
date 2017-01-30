@@ -10,8 +10,7 @@ function formatUrl(path) {
     if (__SERVER__) {
       console.log('----SERVER REQUEST----');
       // Prepend host and port of the API server to the path.
-      return `http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT +
-        adjustedPath}`;
+      return `http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/api/v1${adjustedPath}`;
     }
   }
   console.log('----CLIENT REQUEST----');
@@ -59,7 +58,7 @@ export default class ApiClient {
 
           if (data) {
             clean(data);
-            request.set('Content-Type', 'application/json');
+            // request.set('Content-Type', 'application/json');
             request.send(data);
           }
 

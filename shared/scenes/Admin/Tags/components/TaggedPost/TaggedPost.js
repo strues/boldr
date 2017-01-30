@@ -3,8 +3,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { provideHooks } from 'redial';
+import MenuButton from 'react-md/lib/Menus/MenuButton';
+import Toolbar from 'react-md/lib/Toolbars';
 import List from 'react-md/lib/Lists/List';
 import ListItem from 'react-md/lib/Lists/ListItem';
+import { Loader } from '../../../../../components';
 import { fetchTaggedPost } from '../../../../../state/modules/blog/tags/actions';
 
 type Props = {
@@ -26,9 +29,23 @@ class TaggedPost extends Component {
   }
   props: Props;
   render() {
+    const menuAction = (
+    <MenuButton
+      id="vert-menu"
+      icon
+      buttonChildren="more_vert"
+      className="menu-example"
+      tooltipLabel="Open some menu"
+    >
+      <ListItem primaryText="Item One" />
+      <ListItem primaryText="Item Two" />
+      <ListItem primaryText="Item Three" />
+      <ListItem primaryText="Item Four" />
+    </MenuButton>
+    );
     if (this.props.isFetching) {
       return (
-        <div>Loading posts...</div>
+        <Loader />
       );
     }
     if (!this.props.currentTag) {
@@ -38,13 +55,21 @@ class TaggedPost extends Component {
     }
 
     return (
+      <div>
+       <Toolbar
+         colored
+         title={ `Posts tagged ${this.props.currentTag.name}` }
+         nav={ null }
+         actions={ null }
+       />
       <List>
         {
           this.props.currentTag.posts.map(post =>
-            <ListItem key={ post.id } primaryText={ post.title } />
+            <ListItem key={ post.id } primaryText={ post.title } rightIcon={ menuAction } />
           )
         }
       </List>
+      </div>
     );
   }
 }

@@ -21,7 +21,6 @@ const Paragraph = ({ className, isLead, children, ...rest }) => {
 };
 Paragraph.propTypes = {
   children: PropTypes.node.isRequired,
-	// If set to `true` the paragraph will be displayed in a slightly bigger manner.
   isLead: PropTypes.bool,
   className: PropTypes.string,
 };

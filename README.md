@@ -1,8 +1,9 @@
-![boldr logo](https://boldr.io/boldr.png)
+# What's Boldr?
+
+<img src="https://boldr.io/boldr.png" width="400" />
 
 [![Build Status][circle-img]][circle-link] [![Code Climate][cc-img]][cc-link]  [![codecov](https://codecov.io/gh/strues/boldr/branch/master/graph/badge.svg)](https://codecov.io/gh/strues/boldr) [![Gitter][gitter-img]][gitter-link] [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
-# What's Boldr?
 
 Boldr is a modern content management framework. Think of Boldr as the solid foundation for building your next great web application. Unlike other CMS platforms, Boldr is entirely JavaScript. It features Universal / Isomorphic rendering for improved performance and Search Engine Optimization. Boldr uses Postgres as its database. Express serves the API and server rendering application. Redis provides the store for user sessions and query caching.
 
@@ -21,8 +22,6 @@ Boldr is a modern content management framework. Think of Boldr as the solid foun
 
 
 ## Screenshots
-
-<img src="docs/assets/dashboard.png" width="300" /> <img src="docs/assets/posteditor.png" width="300" /> <img src="docs/assets/filemanager.png" width="300" />  
 
 
 ## Core Technologies
@@ -67,7 +66,7 @@ Run the CMS using `npm run dev`
 
 After Boldr has started visit <http://localhost:3000>. The admin account is already created and you may login using these credentials:
 
-> Email - admin@boldr.io<br>
+> Email - admin@boldr.io
 > Password - password
 
 Settings for the build process as well as misc configurations located within the config directory in the `index.js` file.

@@ -3,6 +3,7 @@ import BaseModel from './base';
 // Related Models
 import User from './user';
 import Post from './post';
+import Activity from './activity';
 
 class Attachment extends BaseModel {
   static addTimestamps = true;
@@ -30,6 +31,14 @@ class Attachment extends BaseModel {
           to: 'post.id',
         },
       },
+      activity: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Activity,
+        join: {
+          from: 'attachment.id',
+          to: 'activity.activity_attachment',
+        }
+      }
     };
   }
 }

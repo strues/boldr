@@ -58,8 +58,8 @@ const EditMemberForm = (props: Props) => {
           component={ TextField }
         />
         <Field
-          id="display_name"
-          name="display_name"
+          id="username"
+          name="username"
           type="text"
           label="Display name"
           component={ TextField }

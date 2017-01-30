@@ -92,7 +92,11 @@ export default function configGet(path) {
       const errorMessage = `Failed to resolve configuration value at "${parts.join('.')}".`;
       // This "if" block gets stripped away by webpack for production builds.
       if (process.env.NODE_ENV === 'development' && process.env.IS_CLIENT) {
-        throw new Error(`${errorMessage} We have noticed that you are trying to access this configuration value from the client bundle (i.e. browser) though.  For configuration values to be exposed to the client bundle you must ensure that the path is added to the client configuration filter file, which is located at "config/clientConfigFilter.js".`);
+        throw new Error(`${errorMessage} We have noticed that you are trying to access
+          this configuration value from the client bundle (i.e. browser) though.
+          For configuration values to be exposed to the client bundle you must
+          ensure that the path is added to the client configuration filter file,
+          which is located at "config/clientConfigFilter.js".`);
       }
       throw new Error(errorMessage);
     }

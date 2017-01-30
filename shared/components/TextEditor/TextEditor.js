@@ -20,7 +20,6 @@ import {
 } from './controls';
 import decorator from './decorators/defaultDecorator';
 import EditorValue from './lib/EditorValue';
-import './styles/main.scss';
 
 type ChangeHandler = (value: EditorValue) => any;
 type Props = {
@@ -343,7 +342,7 @@ class TextEditor extends Component {
     const contentState = editorState.getCurrentContent();
     if (!contentState.hasText()) {
       if (contentState.getBlockMap().first().getType() !== 'unstyled') {
-        className += ' be-hide-placeholder';
+        className += ' boldr-editor__hide-placeholder';
       }
     }
 
@@ -351,16 +350,16 @@ class TextEditor extends Component {
       blockInput;
     if (this.state.showUrlInput) {
       urlInput = (
-        <div className="be-url-input">
+        <div className="boldr-editor__url-input">
           <input
-            className="be-url-input__text"
+            className="boldr-editor__url-input__text"
             onChange={ (this: any).onUrlChange }
             ref="url"
             type="text"
             value={ this.state.urlValue }
             onKeyDown={ (this: any).onLinkInputKeyDown }
           />
-          <button className="be-url-input__button" onMouseDown={ (this: any).confirmLink }>
+          <button className="boldr-editor__url-input__button" onMouseDown={ (this: any).confirmLink }>
             Confirm
           </button>
         </div>
@@ -379,8 +378,8 @@ class TextEditor extends Component {
       );
     }
     return (
-      <div className="be-root" id="editor-root">
-        <div className="be-toolbar">
+      <div className="boldr-editor__root" id="editor-root">
+        <div className="boldr-editor__toolbar">
           {
             !this.props.readOnly ? this.renderControls() : null
           }
@@ -391,7 +390,7 @@ class TextEditor extends Component {
             !this.props.readOnly ? blockInput : null
           }
         </div>
-        <div className={ className } role="form" tabIndex="0" id="editor">
+        <div className={ className } id="editor">
           <Editor ref="editor"
             { ...this.props }
             editorState={ editorState }

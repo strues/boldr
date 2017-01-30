@@ -5,7 +5,6 @@ import Activity from './activity';
 class ActionType extends BaseModel {
   static get tableName() { return 'action_type'; }
   static addTimestamps = false;
-  static addUUID = false;
 
   static get relationMappings() {
     return {

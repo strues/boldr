@@ -6,7 +6,6 @@ import Menu from './menu';
 class MenuDetail extends BaseModel {
   static get tableName() { return 'menu_detail'; }
   static addTimestamps = false;
-  static addUUID = true;
   static get relationMappings() {
     return {
       menu: {

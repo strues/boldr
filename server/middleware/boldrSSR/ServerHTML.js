@@ -23,12 +23,15 @@ function KeyedComponent({ children }) {
 // Resolve the assets (js/css) for the client bundle's entry chunk.
 const clientEntryAssets = getClientBundleEntryAssets();
 
-function stylesheetTag(styles: Array<string>) {
-  return styles
-    .map(style =>
-      `<link href="${style}" media="screen, projection" rel="stylesheet" type="text/css" />`,
-    )
-    .join('\n');
+function stylesheetTag(stylesheetFilePath) {
+  return (
+    <link
+      href={ stylesheetFilePath }
+      media="screen, projection"
+      rel="stylesheet"
+      type="text/css"
+    />
+  );
 }
 function scriptTag(jsFilePath) {
   return <script type="text/javascript" src={ jsFilePath } />;
@@ -68,7 +71,7 @@ function ServerHTML(props) {
     // Binds the client configuration object to the window object so
     // that we can safely expose some configuration values to the
     // client bundle that gets executed in the browser.
-    <ClientConfigScript nonce={nonce} />,
+    <ClientConfigScript key="none" nonce={ nonce } />,
     inlineScript(`window.__PRELOADED_STATE__=${serialize(props.preloadedState)};`),
     onlyIf(
       getConfig('polyfillIO.enabled'),
@@ -93,8 +96,8 @@ function ServerHTML(props) {
 
   return (
     <Html
-      title={getConfig('htmlPage.defaultTitle')}
-      description={getConfig('htmlPage.description')}
+      title={ getConfig('htmlPage.defaultTitle') }
+      description={ getConfig('htmlPage.description') }
       appBodyString={ reactAppString }
       headerElements={
         headerElements.map((x, idx) => <KeyedComponent key={ idx }>{x}</KeyedComponent>)

@@ -46,7 +46,7 @@ export async function registerUser(req, res, next) {
     password: req.body.password,
     first_name: req.body.first_name,
     last_name: req.body.last_name,
-    display_name: req.body.display_name,
+    username: req.body.username,
     avatar_url: req.body.avatar_url,
   };
   const checkExisting = await User.query().where('email', req.body.email);

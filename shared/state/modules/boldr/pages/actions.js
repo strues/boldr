@@ -2,7 +2,6 @@ import { normalize, arrayOf, schema } from 'normalizr';
 import { camelizeKeys } from 'humps';
 import { push } from 'react-router-redux';
 import * as api from '../../../../core/api';
-import { page as pagesSchema } from '../../../../core/schemas';
 import * as notif from '../../../../core/constants';
 import { notificationSend } from '../../notifications/notifications';
 import * as t from './constants';
@@ -39,14 +38,13 @@ export function fetchPages() {
 }
 
 function shouldFetchPages(state) {
-  const templates = state.boldr.templates.labels;
+  const pages = state.boldr.pages.all;
   if (!pages.length) {
     return true;
   }
   if (pages.length) {
     return false;
   }
-  return pages;
 }
 
 const requestPages = () => {

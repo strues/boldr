@@ -1,29 +1,29 @@
-.menu{
+.menu {
   width: 200px;
   margin-top: 90px;
 
-  a{
-    font-size: .95em;
+  a {
+    font-size: 0.95em;
     display: block;
-    margin: 0 0 10px 0;
-    padding: 0 20px 0 20px;
-    transition: all .2s linear 0s;
+    margin: 0 0 10px;
+    padding: 0 20px;
+    transition: all 0.2s linear 0s;
     text-transform: capitalize;
     color: $text-color;
 
-    &:hover{
+    &:hover {
       text-decoration: none;
       color: rgba( 255, 255, 255, .6);
     }
   }
 
-  a.menu__item--active{
+  a.menu__item--active {
     position: relative;
     display: flex;
-    transition: all .2s linear 0s;
+    transition: all 0.2s linear 0s;
     color: #fff;
 
-    &::after{
+    &::after {
       position: absolute;
       z-index: 200;
       top: 0;
@@ -36,16 +36,16 @@
   }
 }
 
-.menu__section{
-  margin: 0 0 20px 0;
+.menu__section {
+  margin: 0 0 20px;
 }
 
-.menu__section__title{
-  font-size: .8em;
+.menu__section__title {
+  font-size: 0.8em;
   font-weight: bold;
   display: block;
-  margin: 0 0 10px 0;
-  padding: 7px 20px 7px 20px;
+  margin: 0 0 10px;
+  padding: 7px 20px;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 1);
   border-bottom: solid $accent-color 1px;

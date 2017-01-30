@@ -9,12 +9,18 @@ type Props = {
 };
 
 const Signup = (props: Props) => {
+  const formBottom = (
+    <div>
+    <span>Already have an account?</span>
+    <Link to="/account/login"> Login</Link>
+  </div>
+);
   return (
     <FormCard
+      width={ 450 }
       title="Signup"
       form={ <SignupForm onSubmit={ props.handleOnSubmit } /> }
-      extra1="Already have an account?"
-      extra2={ <Link to="/account/login"> Login</Link> }
+      extra1={ formBottom }
     />
   );
 };

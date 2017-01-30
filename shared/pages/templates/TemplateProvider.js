@@ -51,10 +51,10 @@ export default (ComposedComponent: any) => {
     getPageURL() {
       return (typeof(window) !== 'undefined')
       ? window.location.href
-      : `http://localhost:3000/${this.props.pathname}`;
+      : `${this.props.pathname}`;
     }
     render() {
-      return (<ComposedComponent { ...this.props } url={ this.getPageURL() } />);
+      return (<ComposedComponent { ...this.props } />);
     }
   }
 

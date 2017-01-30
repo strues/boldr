@@ -41,7 +41,6 @@ const values = {
 
   // The port on which the client bundle development server should run.
   clientDevServerPort: envVars.int('CLIENT_DEV_PORT', 3001),
-
   // This is an example environment variable which is consumed within the
   // './client.js' config.  See there for more details.
   welcomeMessage: envVars.string('WELCOME_MSG', 'Hello world!'),
@@ -268,7 +267,20 @@ const values = {
           'redux-thunk',
           'react-md',
           'draft-js',
-          'superagent'
+          'bluebird',
+          'superagent',
+          'draft-js-export-html',
+          'draft-js-import-html',
+          'humps',
+          'modernizr',
+          'normalizr',
+          'react-addons-css-transition-group',
+          'react-addons-transition-group',
+          'redux-form',
+          'reselect',
+          'serialize-javascript',
+          'styled-components',
+          'webfontloader',
         ],
 
         // The name of the vendor DLL.

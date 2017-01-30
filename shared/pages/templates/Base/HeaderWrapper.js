@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import type { ReactElement, ReactChildren } from '../../../types/react';
 import PrimaryHeader from '../../../components/PrimaryHeader';
 import { logout } from '../../../state/modules/account/actions';
-import { selectSetting, getSettings } from '../../../state/modules/boldr/settings';
+// import { selectSetting, getSettings } from '../../../state/modules/boldr/settings';
 
 type Props = {
   header: ReactElement,
@@ -18,7 +18,7 @@ type Props = {
   actions: Object,
   ui: Object,
   menu: Object,
-  settings: Object,
+  // settings: Object,
   logo: Object,
   auth: Object,
 };
@@ -26,8 +26,8 @@ type Props = {
 const mapStateToProps = (state: Object) => {
   return {
     boldr: state.boldr,
-    settings: state.boldr.settings,
-    logo: selectSetting(state, 'site_logo'),
+    // settings: state.boldr.settings,
+    // logo: selectSetting(state, 'site_logo'),
     auth: state.account.auth,
     menu: state.boldr.menu.main,
     ui: state.boldr.ui,
@@ -49,8 +49,6 @@ class HeaderWrapper extends Component {
     (this: any).handleLogoClick = this.handleLogoClick.bind(this);
     (this: any).handleLogoutClick = this.handleLogoutClick.bind(this);
     (this: any).handleDashClick = this.handleDashClick.bind(this);
-    (this: any).handleProfileClick = this.handleProfileClick.bind(this);
-    (this: any).handlePrefClick = this.handlePrefClick.bind(this);
   }
 
   handleLogoClick = (e) => {
@@ -58,12 +56,6 @@ class HeaderWrapper extends Component {
   }
   handleDashClick = (e) => {
     this.props.navigate('/admin');
-  }
-  handleProfileClick = (e) => {
-    this.props.navigate('/profile');
-  }
-  handlePrefClick = (e) => {
-    this.props.navigate('/account/preferences');
   }
   handleLogoutClick = (e) => {
     this.props.actions.logout();
@@ -76,12 +68,10 @@ class HeaderWrapper extends Component {
       <PrimaryHeader
         auth={ this.props.auth }
         logo={ this.props.logo }
-        settings={ this.props.settings }
+
         menu={ this.props.menu }
         handleLogoClick= { this.handleLogoClick }
         handleLogoutClick={ this.handleLogoutClick }
-        handlePrefClick={ this.handlePrefClick }
-        handleProfileClick={ this.handleProfileClick }
         handleDashClick={ this.handleDashClick }
       />
     );

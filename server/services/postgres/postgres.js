@@ -1,16 +1,20 @@
 import Knex from 'knex';
 import { Model } from 'objection';
-import knexConfig from '../../../knexfile';
 
-export const connect = () => {
-  const knex = Knex(knexConfig[process.env.NODE_ENV]);
-  Model.knex(knex);
-  return knex;
-};
+const db = Knex({
+  client: 'pg',
+  connection: process.env.POSTGRES_CONN_URI,
+  migrations: {
+    tableName: 'migrations',
+  },
+  debug: process.env.DATABASE_DEBUG === 'true',
+});
 
-export const disconnect = (knex) => {
+Model.knex(db);
+
+const disconnect = (db) => {
   return new Promise((resolve, reject) => {
-    knex.destroy((err) => {
+    db.destroy((err) => {
       if (err) {
         reject(err);
       } else {
@@ -19,3 +23,7 @@ export const disconnect = (knex) => {
     });
   });
 };
+
+export default db;
+
+export { db, disconnect };

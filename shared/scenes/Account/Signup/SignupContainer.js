@@ -25,7 +25,7 @@ class SignupContainer extends PureComponent {
       password: values.password,
       first_name: values.first_name,
       last_name: values.last_name,
-      display_name: values.display_name,
+      username: values.username,
     }));
   }
 

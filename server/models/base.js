@@ -13,8 +13,6 @@ class BaseModel extends Model {
    * @type {boolean}
    */
   static addTimestamps = true;
-  // Adds a uuid field to the model for cases where the primary key is NOT a uuid type
-  static addUUID = true;
   /**
    * An object of attribute names with function values to transform attributes on the model if they exist.
    *
@@ -37,9 +35,7 @@ class BaseModel extends Model {
       this.created_at = new Date().toISOString();
       this.updated_at = new Date().toISOString();
     }
-    if (this.constructor.addUUID) {
-      this.uuid = uuid();
-    }
+
   }
 
   /**
