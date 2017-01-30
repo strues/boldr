@@ -237,7 +237,7 @@
     "sinon": "^1.17.7",
     "style-loader": "0.13.1",
     "stylelint": "^7.7.1",
-    "supertest": "^2.0.1",
+    "supertest": "^3.0.0",
     "user-home": "^2.0.0",
     "webpack": "2.2.0",
     "webpack-bundle-analyzer": "2.2.1",
