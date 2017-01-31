@@ -1,3 +1,4 @@
+import path from 'path';
 import Debug from 'debug';
 import uuid from 'uuid';
 import * as objection from 'objection';
@@ -10,7 +11,9 @@ import Activity from '../../models/activity';
 import Attachment from '../../models/attachment';
 
 const debug = Debug('boldrAPI:attachment-controller');
+const gm = require('gm').subClass({ imageMagick: true });
 
+const regex = new RegExp('^.*.((j|J)(p|P)(e|E)?(g|G)|(g|G)(i|I)(f|F)|(p|P)(n|N)(g|G))$');
 /**
  * Returns a list of all attachments
  * @method listAttachments
@@ -42,19 +45,6 @@ export async function getAttachment(req, res) {
   } catch (err) {
     return res.status(500).json(err);
   }
-};
-
-export function getAllAWS(req, res, next) {
-  const params = {
-    Bucket: getConfig('aws.bucket'),
-  };
-  s3.listObjectsV2(params, (err, data) => {
-    if (err) {
-      debug(err, err.stack);
-    } else {
-      debug(data);
-    }
-  });
 }
 
 /**
@@ -88,9 +78,8 @@ export async function deleteAttachment(req, res, next) {
       return next(new BadRequest());
     }
     // unlink the attachment from the activity
-    await Activity.query().where({ activity_attachment: req.params.id }).first().then((activity) => {
-      return activity.$relatedQuery('attachment').unrelate().where('activity_attachment', req.params.id);
-    });
+    await Activity.query().delete().where({ activity_attachment: req.params.id }).first();
+
     // remove the attachment from the database
     await Attachment.query().deleteById(req.params.id);
     // remove from the file system.
