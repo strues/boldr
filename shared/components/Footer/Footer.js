@@ -3,7 +3,7 @@ import { Grid, Heading } from '../index';
 
 const Footer = (props) => {
   return (
-    <footer className="footer__wrap">
+    <footer className="boldr-footer">
       <Grid>
         <Heading size={ 2 }>Footer</Heading>
       </Grid>

@@ -33,7 +33,7 @@ router.get('/', ctrl.listRoles);
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
 router.get('/:id', ctrl.getRole);
-
+//
 router.get('/:id/users', ctrl.getRoleUsers);
 // router.post('/', isAuthenticated, controller.create.bind(controller));
 // router.put('/:id', isAuthenticated, controller.update.bind(controller));
