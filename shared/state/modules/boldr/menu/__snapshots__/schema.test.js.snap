@@ -1,0 +1,29 @@
+exports[`detail should match the normalizr-detail-schema 1`] = `
+EntitySchema {
+  "_getId": [Function],
+  "_key": "details",
+  "_mergeStrategy": [Function],
+  "_processStrategy": [Function],
+  "schema": Object {},
+}
+`;
+
+exports[`menu schema should match the normalizr-menu-schema 1`] = `
+EntitySchema {
+  "_getId": [Function],
+  "_key": "menus",
+  "_mergeStrategy": [Function],
+  "_processStrategy": [Function],
+  "schema": Object {
+    "details": Array [
+      EntitySchema {
+        "_getId": [Function],
+        "_key": "details",
+        "_mergeStrategy": [Function],
+        "_processStrategy": [Function],
+        "schema": Object {},
+      },
+    ],
+  },
+}
+`;

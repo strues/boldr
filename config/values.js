@@ -74,12 +74,6 @@ const values = {
     domain: 'boldr.io',
     from: 'boldr@boldr.io',
   },
-  aws: {
-    keyId: envVars.string('AWS_KEY_ID', ''),
-    keySecret: envVars.string('AWS_KEY_SECRET', ''),
-    bucket: 'boldrcms',
-    region: 'us-west-1',
-  },
   logger: {
     console: true,
     file: false,
@@ -196,7 +190,7 @@ const values = {
   // and it is served by the "server" bundle.
   serviceWorker: {
     // Enabled?
-    enabled: false,
+    enabled: true,
     // Service worker name
     fileName: 'sw.js',
     // Paths to the public assets which should be included within our
@@ -272,7 +266,6 @@ const values = {
           'draft-js-export-html',
           'draft-js-import-html',
           'humps',
-          'modernizr',
           'normalizr',
           'react-addons-css-transition-group',
           'react-addons-transition-group',

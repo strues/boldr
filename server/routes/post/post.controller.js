@@ -3,13 +3,9 @@ import { responseHandler, Conflict, BadRequest } from '../../core/index';
 import slugIt from '../../utils/slugIt';
 
 // Models
-import Tag from '../../models/tag';
-import Activity from '../../models/activity';
-import ActionType from '../../models/actionType';
-import Post from '../../models/post';
-import PostTag from '../../models/join/postTag';
+import { Tag, Activity, ActionType, Post, PostTag } from '../../models';
 
-const debug = require('debug')('boldrAPI:post-controller');
+const debug = require('debug')('boldr:post-controller');
 
 export async function listPosts(req, res, next) {
   try {

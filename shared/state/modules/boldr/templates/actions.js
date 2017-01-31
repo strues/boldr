@@ -8,10 +8,10 @@ import { notificationSend } from '../../notifications/notifications';
 import * as t from './constants';
 import { template as templateSchema, arrayOfTemplate } from './schema';
 /**
-  * FETCH PAGES
+  * FETCH TEMPLATES
   * -------------------------
-  * @exports fetchPagesIfNeeded
-  * @exports fetchPages
+  * @exports fetchTemplatesIfNeeded
+  * @exports fetchTemplates
   *****************************************************************/
 export function fetchTemplatesIfNeeded() {
   return (dispatch, getState) => {
@@ -61,9 +61,9 @@ const receiveTemplatesFailed = (err) => ({
 });
 
 /**
-  * FETCH PAGE
+  * FETCH TEMPLATE
   * -------------------------
-  * @exports fetchPageByUrl
+  * @exports fetchTemplateResource
   *****************************************************************/
 export function fetchTemplateResource(resource) {
   return dispatch => {

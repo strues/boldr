@@ -1,7 +1,7 @@
 import { LOGIN_REQUEST, LOGIN_FAILURE } from '../constants';
 import authReducer from './auth';
 
-describe('Auth Duck', () => {
+describe('Auth Reducer', () => {
   it('Should return the initial state', () => {
     expect(
         authReducer(undefined, {}),

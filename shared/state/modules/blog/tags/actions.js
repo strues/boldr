@@ -81,6 +81,12 @@ const receiveTagsFailed = (err) => ({
   type: t.FETCH_TAGS_FAILURE, error: err,
 });
 
+/**
+  * SELECT TAG ACTIONS
+  * -------------------------
+  * @exports selectTag
+  * @exports clearTag
+  *****************************************************************/
 
 export function selectTag(tag: Object) {
   return {
@@ -93,6 +99,13 @@ export function clearTag(tag: Object) {
     type: t.CLEAR_TAG,
   };
 }
+
+/**
+  * FETCH TAGGED POST ACTIONS
+  * -------------------------
+  * @exports fetchTaggedPost
+  *****************************************************************/
+
 export function fetchTaggedPost(name) {
   return (dispatch: Function) => {
     dispatch(requestTaggedPost());

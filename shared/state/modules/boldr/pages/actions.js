@@ -6,6 +6,7 @@ import * as notif from '../../../../core/constants';
 import { notificationSend } from '../../notifications/notifications';
 import * as t from './constants';
 import { page as pageSchema, arrayOfPage } from './schema';
+
 /**
   * FETCH PAGES
   * -------------------------

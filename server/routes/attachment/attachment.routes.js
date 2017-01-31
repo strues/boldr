@@ -15,6 +15,13 @@ const router = express.Router();
  *
  */
 router.get('/', ctrl.listAttachments);
+
+/**
+ * @api {post} /attachments  Upload an attachment
+ * @apiName uploadImage
+ * @apiGroup Attachment
+ * @apiPermission user
+ */
 router.post('/', isAuthenticated, ctrl.uploadImage);
 /**
  * @api {get} /attachments/:id  Get a specific file by its id
@@ -30,13 +37,6 @@ router.post('/', isAuthenticated, ctrl.uploadImage);
  */
 router.get('/:id', ctrl.getAttachment);
 
-/**
- * @api {post} /attachments/dashboard Upload an attachment associating with a dashboard upload
- * @apiName uploadDashboard
- * @apiGroup Attachment
- * @apiPermission user
- */
-router.post('/dashboard', isAuthenticated, checkRole('Admin'), ctrl.fromDashboard);
 /**
  * @api {delete} /attachments/:id  Remove attachment from database and S3
  * @apiName deleteAttachment

@@ -177,6 +177,11 @@ const deletePostFail = (err) => ({
   error: err,
 });
 
+/**
+  * UPDATE POST ACTIONS
+  * -------------------------
+  * @exports updatePost
+  *****************************************************************/
 
 export function updatePost(postData: Post) {
   return (dispatch: Function) => {
@@ -215,7 +220,13 @@ const errorUpdatingPost = (err) => {
   };
 };
 
-export function fetchPostFromSlug(slug) {
+/**
+  * FETCH POST FROM SLUG ACTIONS
+  * -------------------------
+  * @exports fetchPostFromSlug
+  *****************************************************************/
+
+export function fetchPostFromSlug(slug: String) {
   return (dispatch: Function) => {
     dispatch(requestPostFromSlug());
     return api.getPostBySlug(slug)

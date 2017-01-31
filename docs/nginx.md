@@ -3,7 +3,7 @@
 Setting up your reverse proxy correct is an important part in getting Boldr to work for you. The following are the recommended reverse proxy settings. Understand that this is not a full Nginx configuration.
 
 ### BoldrCMS
-These settings are for the CMS and its server. Nginx will serve the assets and forward the API requests to the API server.
+These settings are for the CMS and its server. Nginx will serve the assets and forward the API requests to Express.
 
 ```nginx
 upstream boldrcms {
@@ -33,26 +33,3 @@ server {
     }
   }
   ```
-
-### BoldrAPI
-  These settings are for the API server.
-
-  ```nginx
-  upstream boldrapi {
-    ## your server's IP or the docker container works as well.
-    server 127.0.0.1:2121;
-  }
-  server {
-      location / {
-        proxy_pass http://boldrapi;
-        proxy_redirect off;
-        proxy_cache_key               sfs$request_uri$scheme;
-        proxy_set_header              X-Real-IP $remote_addr;
-        proxy_set_header              X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header              X-Forwarded-Proto $scheme;
-        proxy_set_header              Host $http_host;
-        proxy_set_header              X-NginX-Proxy true;
-        expires                       10m;
-      }
-    }
-    ```

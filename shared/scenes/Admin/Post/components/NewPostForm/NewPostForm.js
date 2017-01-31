@@ -6,16 +6,12 @@ import Dropzone from 'react-dropzone';
 
 import TextField from '../../../../../components/Form/TextField';
 import { TextEditor } from '../../../../../components/TextEditor';
-import { Col, Row, Heading, S3Uploader, FormGroup } from '../../../../../components/index';
+import { Col, Row, Heading, FormGroup } from '../../../../../components/index';
 import { uploadPostImage } from '../../../../../state/modules/admin/attachments/actions';
 
 type Props = {
   handleSubmit?: Function,
-  reset?: Function,
-  submitting?: boolean,
-  fields?: Object,
   dispatch: Function,
-  pristine?: boolean,
   input?: Object,
   label?: string,
 };
@@ -58,7 +54,6 @@ class NewPostForm extends Component {
     return (
       <Row>
         <Col xs>
-
           <form onSubmit={ handleSubmit }>
             <FormGroup>
             <Field
@@ -77,9 +72,8 @@ class NewPostForm extends Component {
               label="Tags"
             />
           </FormGroup>
-            <FormGroup>
+          <FormGroup>
             <Heading size={ 5 }>Upload a feature image</Heading>
-
             <Dropzone
               className="boldr-dropzone"
               ref={ (node) => { this.dropzone = node; } }
@@ -91,7 +85,7 @@ class NewPostForm extends Component {
               <p className="boldr-dropzone__drop-sm">Drop an image here or select one from your computer. <br />
               It will upload right away.</p>
             </Dropzone>
-            </FormGroup>
+          </FormGroup>
 
           <Field name="content" component={ renderEditor } />
           <FormGroup>
@@ -106,7 +100,7 @@ class NewPostForm extends Component {
           </FormGroup>
           <FormGroup>
             <Heading size={ 6 }>Post Status:</Heading>
-            <label>
+            <label style={ { marginRight: '10px' } }>
               <Field id="draft" name="published" component="input" type="radio" value="false" /> Draft</label>
             <label>
               <Field id="published" name="published" component="input" type="radio" value="true" /> Publish
@@ -125,34 +119,3 @@ class NewPostForm extends Component {
 export default reduxForm({
   form: 'newPostForm',
 })(NewPostForm);
-
-
-/**
- *
- *
- *   onUploadFinish = (signResult) => {
-     const signUrl = signResult.signedUrl;
-     const splitUrl = signUrl.split('?');
-     const fileUrl = splitUrl[0];
-
-     const payload = {
-       file_name: signResult.file_name,
-       original_name: signResult.original_name,
-       file_type: signResult.file_type,
-       // s3_key: signResult.s3_key,
-       url: fileUrl,
-     };
-     this.props.dispatch(uploadPostImage(payload));
-   }
-             <S3Uploader
-               signingUrl="/s3/sign"
-               server="/api/v1"
-               accept="image/*"
-               onProgress={ S3Uploader.onUploadProgress }
-               onError={ S3Uploader.onUploadError }
-               onFinish={ this.onUploadFinish }
-
-               uploadRequestHeaders={ { 'x-amz-acl': 'public-read' } }
-               contentDisposition="auto"
-             />
- */
