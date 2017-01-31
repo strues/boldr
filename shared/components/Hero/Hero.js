@@ -2,7 +2,7 @@ import React from 'react';
 import { Grid, Col } from '../Layout';
 
 const Hero = props => (
-  <div className="primary-hero">
+  <div className="boldr-hero">
     <Grid>
       <Col xs={ 12 } md={ 8 } mdOffset={ 4 }>
        <h1 className="hero__tag">

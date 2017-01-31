@@ -30,7 +30,7 @@ it('POST /login - Fail without a password', async () => {
     .post('/api/v1/auth/login')
     .send({ email: 'admin@boldr.io', password: '' });
 
-  expect(status).toBe(404);
+  expect(status).toBe(400);
 });
 it('POST /login', async () => {
   const { status, body } = await request()
@@ -50,7 +50,7 @@ it('POST /signup -- Fail missing fields', async () => {
       .set('Accept', 'application/json')
       .send({ email: 'abc@test.com' });
 
-  expect(status).toBe(404);
+  expect(status).toBe(400);
 });
 
 it('POST /signup -- Fail email exists', async () => {
@@ -61,7 +61,7 @@ it('POST /signup -- Fail email exists', async () => {
       email: 'admin@boldr.io',
       password: 'test',
     });
-  expect(status).toBe(404);
+  expect(status).toBe(400);
 });
 
 it('POST /signup -- Signup user', async () => {
