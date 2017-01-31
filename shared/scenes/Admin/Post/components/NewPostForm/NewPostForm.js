@@ -106,7 +106,7 @@ class NewPostForm extends Component {
           </FormGroup>
           <FormGroup>
             <Heading size={ 6 }>Post Status:</Heading>
-            <label>
+            <label style={ { marginRight: '10px' } }>
               <Field id="draft" name="published" component="input" type="radio" value="false" /> Draft</label>
             <label>
               <Field id="published" name="published" component="input" type="radio" value="true" /> Publish

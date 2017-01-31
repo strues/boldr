@@ -7,6 +7,12 @@ node_js:
 
 services:
   - docker
+
+branches:
+  only:
+  - master
+  - develop
+
 env:
   DOCKER_COMPOSE_VERSION: 1.10.0
   POSTGRES_CONN_URI: postgres://postgres:password@127.0.0.1:5432/boldr

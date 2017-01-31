@@ -39,7 +39,7 @@
       }
     },
     "migrate": {
-      "command": "node --harmony internal/scripts/db.js migrate",
+      "command": "knex migrate:latest",
       "env": {
         "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr",
         "NODE_ENV": "development"
@@ -60,7 +60,7 @@
       }
     },
     "seed": {
-      "command": "node --harmony internal/scripts/db.js seed",
+      "command": "knex seed:run",
       "env": {
         "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr",
         "NODE_ENV": "development"
@@ -72,20 +72,6 @@
         "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr_test",
         "NODE_ENV": "test",
         "KNEX_TEST_TIMEOUT": 30000
-      }
-    },
-    "migrate": {
-      "command": "knex migrate:latest",
-      "env": {
-        "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr",
-        "NODE_ENV": "development"
-      }
-    },
-    "seed": {
-      "command": "knex seed:run",
-      "env": {
-        "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr",
-        "NODE_ENV": "development"
       }
     }
   },
