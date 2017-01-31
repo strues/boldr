@@ -61,7 +61,7 @@ const EditMemberForm = (props: Props) => {
           id="username"
           name="username"
           type="text"
-          label="Display name"
+          label="Username"
           component={ TextField }
         />
         <Field

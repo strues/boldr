@@ -186,6 +186,15 @@ export const doFetchTags = (name) =>
 
 export const getAllTags = () =>
   apiClient.get('/tags');
+
+export const doAddTag = (values) => {
+  const payload = {
+    name: values.name,
+    description: values.description,
+  };
+  return apiClient.post('/tags', { data: payload });
+};
+
 /**
   * MEMBERS API ROUTES
   * -------------------------

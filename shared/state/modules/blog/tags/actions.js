@@ -1,6 +1,8 @@
 import { normalize, arrayOf, schema } from 'normalizr';
 import { camelizeKeys } from 'humps';
 import merge from 'lodash/merge';
+import * as notif from '../../../../core/constants';
+import { notificationSend } from '../../notifications/notifications';
 import * as api from '../../../../core/api';
 import * as t from './constants';
 import { tag as tagSchema, arrayOfTag } from './schema';
@@ -136,3 +138,45 @@ const receiveTaggedPost = (data) => {
 const receiveTaggedPostFailed = (err) => ({
   type: t.FETCH_TAGGED_POST_FAILURE, error: err,
 });
+
+
+/**
+  * CREATE TAG ACTIONS
+  * -------------------------
+  * @exports createTag
+  *****************************************************************/
+
+export function createTag(values) {
+  return dispatch => {
+    dispatch(beginAddTag());
+    return api.doAddTag(values)
+      .then(response => {
+        if (!response.status === 201) {
+          dispatch(addTagFailure(response));
+          dispatch(notificationSend(notif.MSG_ADD_TAG_FAILURE));
+        }
+        dispatch(addTagSuccess(response));
+        dispatch(notificationSend(notif.MSG_ADD_TAG_SUCCESS));
+      });
+  };
+}
+
+function beginAddTag() {
+  return {
+    type: t.ADD_TAG_REQUEST,
+  };
+}
+
+function addTagSuccess(response) {
+  return {
+    type: t.ADD_TAG_SUCCESS,
+    payload: response.body,
+  };
+}
+
+function addTagFailure(err) {
+  return {
+    type: t.ADD_TAG_FAILURE,
+    error: err,
+  };
+}

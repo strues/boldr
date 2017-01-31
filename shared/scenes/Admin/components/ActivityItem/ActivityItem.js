@@ -37,12 +37,15 @@ type Props = {
   activity_post: ?String,
   activity_user: ?String,
   activity_attachment: ?String,
+  activity_menu_detail: ?String,
 };
 
 const ActivityItem = (props: Props) => {
   const isPostType = props.activity_post !== null;
   const isMemberType = props.activity_user !== null;
   const isAttachmentType = props.activity_attachment !== null;
+  const isMenuDetailType = props.activity_menu_detail !== null;
+
   let ActivityIcon;
   if (isPostType) {
     ActivityIcon = <Icon kind="new-post" color="#02BCD6" />;
@@ -52,6 +55,9 @@ const ActivityItem = (props: Props) => {
   }
   if (isAttachmentType) {
     ActivityIcon = <FontIcon style={ { color: '#02BCD6' } }>insert_drive_file</FontIcon>;
+  }
+  if (isMenuDetailType) {
+    ActivityIcon = <FontIcon style={ { color: '#02BCD6' } }>insert_link</FontIcon>;
   }
   return (
       <ActivityPanel>
