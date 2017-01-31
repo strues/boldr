@@ -340,7 +340,7 @@ function seed(knex, Promise) {
         id: 4,
         type: 'register',
       }),
-    ]))
+    ]));
 }
 
 module.exports = { seed };

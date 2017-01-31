@@ -10,7 +10,6 @@ import NewPost from './NewPost';
 type Props = {
   dispatch: Function,
   postImage: PostImage,
-  drawer: boolean,
 };
 
 class NewPostContainer extends Component {
@@ -39,7 +38,6 @@ class NewPostContainer extends Component {
     return (
       <NewPost
         onFormSubmit={ this.handleOnSubmit }
-        drawer={ this.props.drawer }
         postImage={ this.props.postImage }
       />
     );

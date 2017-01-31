@@ -16,14 +16,18 @@ const SignupForm = (props: Props) => {
     <form onSubmit={ handleSubmit } className="boldr-form__generic">
       <Row>
         <Col xs={ 6 }>
-          <Field name="email"
+          <Field
+            id="email"
+            name="email"
             type="email"
             component={ TextField }
             label="Email address"
           />
       </Col>
       <Col xs={ 6 }>
-        <Field name="password"
+        <Field
+          id="password"
+          name="password"
           type="password"
           component={ TextField }
           label="Password"
@@ -32,14 +36,18 @@ const SignupForm = (props: Props) => {
       </Row>
       <Row>
         <Col xs={ 6 }>
-        <Field name="first_name"
+        <Field
+          id="first-name"
+          name="first_name"
           type="text"
           component={ TextField }
           label="First name"
         />
       </Col>
       <Col xs={ 6 }>
-        <Field name="last_name"
+        <Field
+          id="last-name"
+          name="last_name"
           type="text"
           component={ TextField }
           label="Last name"
@@ -50,10 +58,12 @@ const SignupForm = (props: Props) => {
         <Col xs={ 12 }>
           <Row xsCenter>
             <Col xs={ 6 }>
-              <Field name="display_name"
+              <Field
+                id="username"
+                name="username"
                 type="text"
                 component={ TextField }
-                label="Display name"
+                label="Username"
               />
             </Col>
           </Row>
