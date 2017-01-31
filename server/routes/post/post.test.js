@@ -39,7 +39,7 @@ it('GET /posts?include=[tags,author] -- List w/ tags/author', async () => {
 
 it('GET /posts/pid/:id -- By id', async () => {
   const { status, body } = await request()
-      .get('/api/v1/posts/pid/5c9ed236-79f0-4ff7-93bd-2815f06c74b4')
+      .get('/api/v1/posts/pid/cb61bbae-c91e-4014-b665-3485734b88fb')
       .set('Accept', 'application/json');
   expect(status).toBe(200);
   expect(typeof body).toBe('object');
@@ -47,7 +47,7 @@ it('GET /posts/pid/:id -- By id', async () => {
 
 it('GET /posts/slug/:slug -- By slug', async () => {
   const { status, body } = await request()
-      .get('/api/v1/posts/slug/just-another-post')
+      .get('/api/v1/posts/slug/nother-one')
       .set('Accept', 'application/json');
   expect(status).toBe(200);
   expect(typeof body).toBe('object');
