@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import * as t from './constants';
 
+export const STATE_KEY = 'menu';
+
 const INITIAL_STATE = {
   id: -1,
   uuid: '',

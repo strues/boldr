@@ -1,6 +1,5 @@
 import { responseHandler } from '../../core/index';
-import User from '../../models/user';
-import Role from '../../models/role';
+import { User, Role } from '../../models';
 
 export const listRoles = async (req, res, next) => {
   try {

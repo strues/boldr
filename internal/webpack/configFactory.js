@@ -1,5 +1,3 @@
-/* @flow */
-
 import path from 'path';
 import webpack from 'webpack';
 import { sync as globSync } from 'glob';
@@ -533,18 +531,6 @@ export default function webpackConfigFactory(buildOptions: BuildOptions) {
             emitFile: isClient,
           },
         })),
-        // MODERNIZR
-        // This allows you to do feature detection.
-        // @see https://modernizr.com/docs
-        // @see https://github.com/peerigon/modernizr-loader
-        ifClient({
-          test: /\.modernizrrc.js$/,
-          loader: 'modernizr-loader',
-        }),
-        ifClient({
-          test: /\.modernizrrc(\.json)?$/,
-          loader: 'modernizr-loader!json-loader',
-        }),
       ]),
     },
   };

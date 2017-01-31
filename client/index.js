@@ -7,7 +7,6 @@ import { Provider } from 'react-redux';
 import Router from 'react-router/lib/Router';
 import match from 'react-router/lib/match';
 import browserHistory from 'react-router/lib/browserHistory';
-
 import { syncHistoryWithStore } from 'react-router-redux';
 import WebFontLoader from 'webfontloader';
 import { trigger } from 'redial';
@@ -21,9 +20,6 @@ import ApiClient from '../shared/core/api/apiClient';
 import createRoutes from '../shared/scenes';
 import ReactHotLoader from './components/ReactHotLoader';
 
-import './polyfills';
-
-// Load fonts
 WebFontLoader.load({
   google: { families: ['Roboto:300,400,700', 'Material Icons'] }
 });

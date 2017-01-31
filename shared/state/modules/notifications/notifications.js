@@ -1,7 +1,7 @@
 
-const NOTIFICATION_SEND = 'NOTIFICATION_SEND';
-const NOTIFICATION_DISMISS = 'NOTIFICATION_DISMISS';
-const NOTIFICATION_CLEAR = 'NOTIFICATION_CLEAR';
+export const NOTIFICATION_SEND = 'NOTIFICATION_SEND';
+export const NOTIFICATION_DISMISS = 'NOTIFICATION_DISMISS';
+export const NOTIFICATION_CLEAR = 'NOTIFICATION_CLEAR';
 
 /**
  *  Send a notification out.
@@ -50,7 +50,6 @@ export default function notificationReducer(state = [], action) {
   if (!action || !action.type) {
     return state;
   }
-
   switch (action.type) {
     case NOTIFICATION_SEND:
       return [action.payload, ...state];

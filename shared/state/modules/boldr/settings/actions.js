@@ -8,6 +8,13 @@ import { notificationSend } from '../../notifications/notifications';
 import * as t from './constants';
 
 /**
+  * FETCH SETTINGS ACTIONS
+  * -------------------------
+  * @exports fetchSettingsIfNeeded
+  * @exports loadBoldrSettings
+  *****************************************************************/
+
+/**
  * @function fetchSettingsIfNeeded
  * @description Function that determines whether or not menus need to be
  * fetched from the api. Dispatches either the loadMenus Function

@@ -168,7 +168,8 @@ CREATE TABLE attachment (
     url character varying(255) NOT NULL,
     s3_key character varying(255),
     created_at timestamp with time zone DEFAULT now(),
-    updated_at timestamp with time zone DEFAULT now()
+    updated_at timestamp with time zone DEFAULT now(),
+    safe_name character varying(255)
 );
 
 
@@ -807,12 +808,20 @@ INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user,
 INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('f3009afd-3d2b-4621-bf6c-c1bde986b666', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-27 07:04:19.001+00', '2017-01-27 07:04:19.001+00');
 INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('50a183e1-eab5-40c2-9e27-056f2c6becd0', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-27 07:04:59.594+00', '2017-01-27 07:04:59.594+00');
 INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('47dc5aa6-82c2-4336-883c-877d7f6a7e61', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-27 22:05:40.378+00', '2017-01-27 22:05:40.378+00');
+INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('51e97eaa-e721-11e6-b085-5fa37052be0b', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-30 19:44:24.898+00', '2017-01-30 19:44:24.898+00');
+INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('96232bb6-e721-11e6-9491-3ba4c6f26896', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-30 19:46:19.366+00', '2017-01-30 19:46:19.366+00');
+INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('d2104a32-e721-11e6-a6b5-4b9ef7ef50e5', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-30 19:47:59.899+00', '2017-01-30 19:47:59.899+00');
+INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('e07d75e0-e721-11e6-a6b5-573ed7815ad1', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-30 19:48:24.11+00', '2017-01-30 19:48:24.11+00');
+INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('a47ce18a-e72a-11e6-9b85-8b5a1c03acb9', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 1, NULL, NULL, 'a4770b66-e72a-11e6-bb8d-1f35ddfbff3b', NULL, NULL, NULL, NULL, NULL, '2017-01-30 20:28:22.418+00', '2017-01-30 20:28:22.418+00');
+INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('41abccc0-e72e-11e6-9530-df83ecf603ed', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-30 20:54:13.755+00', '2017-01-30 20:54:13.756+00');
+INSERT INTO activity (id, user_id, action_type_id, activity_post, activity_user, activity_attachment, activity_tag, activity_menu_detail, activity_template, activity_page, activity_role, created_at, updated_at) VALUES ('7d2f473e-e72b-11e6-b2a9-c3a89d04846e', '1b062e26-df71-48ce-b363-4ae9b966e7a0', 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2017-01-30 20:34:25.974+00', '2017-01-30 20:34:25.974+00');
 
 
 --
 -- Data for Name: attachment; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+INSERT INTO attachment (id, file_name, original_name, file_description, file_type, user_id, url, s3_key, created_at, updated_at, safe_name) VALUES ('a4770b66-e72a-11e6-bb8d-1f35ddfbff3b', 'r1A1M76Dl.jpg', 'fullsize.jpg', NULL, 'image/jpeg', '1b062e26-df71-48ce-b363-4ae9b966e7a0', '/files/r1A1M76Dl.jpg', NULL, '2017-01-30 20:28:22.379+00', '2017-01-30 20:28:22.379+00', 'r1A1M76Dl.jpg');
 
 
 --

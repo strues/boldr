@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { provideHooks } from 'redial';
 
-import { showModal, hideModal } from '../../../state/modules/boldr/ui';
 import { uploadFiles, fetchMedia, deleteMedia, selectFile } from '../../../state/modules/admin/attachments/actions';
 import FileManager from './FileManager';
 
@@ -49,13 +48,6 @@ class FileManagerContainer extends Component {
     this.props.deleteMedia(mediaId);
   }
 
-  closeModal = () => {
-    this.props.hideModal();
-  }
-  openModal = () => {
-    this.props.showModal();
-  }
-
   selectTheFile = (file) => {
     this.props.selectFile(file);
   }
@@ -63,8 +55,6 @@ class FileManagerContainer extends Component {
   render() {
     return (
       <FileManager
-        openModal={ this.openModal }
-        closeModal={ this.closeModal }
         onUploadFinish={ this.onUploadFinish }
         handleRemoveMedia={ this.handleRemoveMedia }
         attachments={ this.props.attachments }
@@ -83,5 +73,5 @@ const mapStateToProps = state => {
 };
 
 export default connect(mapStateToProps, {
-  uploadFiles, deleteMedia, fetchMedia, showModal, hideModal, selectFile,
+  uploadFiles, deleteMedia, fetchMedia, selectFile,
 })(FileManagerContainer);

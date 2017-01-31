@@ -1,7 +1,7 @@
 import { LOGIN_SUCCESS } from '../constants';
 import userReducer from './user';
 
-describe('Auth Duck', () => {
+describe('User Reducer', () => {
   it('Should return the initial state', () => {
     expect(
         userReducer(undefined, {}),

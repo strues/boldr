@@ -1,5 +1,4 @@
 import jwtAuth from './index';
-import { expect } from 'chai';
 
 describe('Storage', () => {
   let Storage;
@@ -32,14 +31,14 @@ describe('Storage', () => {
   function runSuite() {
     it('is a constructor method', () => {
       const storage = new Storage();
-      expect(storage).to.be.an.instanceof(Storage);
+      expect(storage).toBeInstanceOf(Storage);
     });
 
     describe('set()', () => {
       it('should return stored value', () => {
         const storage = new Storage();
         const foo = storage.set('foo', 'bar');
-        expect(foo).to.equal('bar');
+        expect(foo).toEqual('bar');
       });
     });
 
@@ -48,7 +47,7 @@ describe('Storage', () => {
         const storage = new Storage();
         storage.set('foo', 'bar');
         const foo = storage.get('foo');
-        expect(foo).to.equal('bar');
+        expect(foo).toEqual('bar');
       });
     });
 
@@ -58,7 +57,7 @@ describe('Storage', () => {
         storage.set('foo', 'bar');
         storage.remove('foo');
         const foo = storage.get('foo');
-        expect(foo).to.equal(undefined);
+        expect(foo).toEqual(undefined);
       });
     });
   }

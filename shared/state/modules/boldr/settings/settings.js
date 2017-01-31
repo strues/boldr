@@ -3,6 +3,8 @@ import { combineReducers } from 'redux';
 import uniq from 'lodash/uniq';
 import * as t from './constants';
 
+export const STATE_KEY = 'settings';
+
 export const getSettings = createSelector(
   [
     (state) => state.boldr.settings.keys,
@@ -29,10 +31,5 @@ function settingsReducer(state = [], action) {
       return state;
   }
 }
-
-export function isLoaded(globalState) {
-  return globalState.boldr.settings && globalState.boldr.settings.loaded;
-}
-
 
 export default settingsReducer;

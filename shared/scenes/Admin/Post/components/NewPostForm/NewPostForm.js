@@ -9,7 +9,7 @@ import FontIcon from 'react-md/lib/FontIcons';
 import Subheader from 'react-md/lib/Subheaders';
 import TextField from '../../../../../components/Form/TextField';
 import { TextEditor } from '../../../../../components/TextEditor';
-import { Col, Row, Heading, S3Uploader } from '../../../../../components/index';
+import { Col, Row, Heading, FormGroup } from '../../../../../components/index';
 import { uploadPostImage } from '../../../../../state/modules/admin/attachments/actions';
 
 const styled = require('styled-components').default;
@@ -29,11 +29,7 @@ const Footer = styled.div`
 
 type Props = {
   handleSubmit?: Function,
-  reset?: Function,
-  submitting?: boolean,
-  fields?: Object,
   dispatch: Function,
-  pristine?: boolean,
   input?: Object,
   drawer: boolean,
   label?: string,
@@ -105,74 +101,60 @@ class NewPostForm extends Component {
     return (
       <Row>
         <Col xs>
-
           <form onSubmit={ handleSubmit }>
-            <Drawer
-              { ...this.state }
-              onVisibilityToggle={ this._handleToggle }
-              type={ Drawer.DrawerTypes.TEMPORARY }
-              header={ header }
-              style={ { zIndex: 1001, width: '350px' } }
+            <FormGroup>
+            <Field
+              id="post-title"
+              name="title"
+              type="text"
+              component={ TextField }
+              label="Post Title"
+            />
+          </FormGroup>
+            <FormGroup>
+            <Field name="tags" type="text"
+              id="post-tags"
+              helpText="Separate using commas"
+              component={ TextField }
+              label="Tags"
+            />
+          </FormGroup>
+          <FormGroup>
+            <Heading size={ 5 }>Upload a feature image</Heading>
+            <Dropzone
+              className="boldr-dropzone"
+              ref={ (node) => { this.dropzone = node; } }
+              multiple={ false }
+              onDrop={ this.onDrop }
+              accept="image/*"
+              maxSize={ 5242880 }
             >
-              <Wrapper>
-                <Field
-                  id="post-title"
-                  name="title"
-                  type="text"
-                  component={ TextField }
-                  label="Post Title"
-                />
+              <p className="boldr-dropzone__drop-sm">Drop an image here or select one from your computer. <br />
+              It will upload right away.</p>
+            </Dropzone>
+          </FormGroup>
 
-                <Field name="tags" type="text"
-                  id="post-tags"
-                  helpText="Separate using commas"
-                  component={ TextField }
-                  label="Tags"
-                />
-
-                <Subheader primaryText="Upload a feature image" />
-                <S3Uploader
-                  signingUrl="/s3/sign"
-                  server="/api/v1"
-                  accept="image/*"
-                  onProgress={ S3Uploader.onUploadProgress }
-                  onError={ S3Uploader.onUploadError }
-                  onFinish={ this.onUploadFinish }
-
-                  uploadRequestHeaders={ { 'x-amz-acl': 'public-read' } }
-                  contentDisposition="auto"
-                />
-
-
-              <Field name="excerpt"
-                id="post-excerpt"
-                type="text"
-                component={ TextField }
-                label="Excerpt"
-                helpText="A brief overview or area from your post to highlight"
-                rows={ 2 }
-                maxRows={ 4 }
-              />
-              <Footer>
-                <Row>
-                  <Col xs={ 12 } md={ 6 }>
-                    <Heading size={ 4 }>Post Status:</Heading>
-                  </Col>
-                  <Col xs={ 12 } md={ 6 }>
-                    <div>
-                      <label>
-                        <Field name="published" component="input" type="radio" value="false" /> Draft</label>{ ' ' }
-                      <label>
-                        <Field name="published" component="input" type="radio" value="true" /> Publish
-                      </label>
-                    </div>
-                  </Col>
-                </Row>
-                <Button raised primary type="submit" label="Save Post" />
-              </Footer>
-            </Wrapper>
-          </Drawer>
           <Field name="content" component={ renderEditor } />
+          <FormGroup>
+            <Field
+              name="excerpt"
+              id="post-excerpt"
+              type="text"
+              component={ TextField }
+              label="Excerpt"
+
+            />
+          </FormGroup>
+          <FormGroup>
+            <Heading size={ 6 }>Post Status:</Heading>
+            <label style={ { marginRight: '10px' } }>
+              <Field id="draft" name="published" component="input" type="radio" value="false" /> Draft</label>
+            <label>
+              <Field id="published" name="published" component="input" type="radio" value="true" /> Publish
+            </label>
+          </FormGroup>
+
+        <Button raised primary type="submit" label="Save Post" />
         </form>
         <Button floating onClick={ this._toggleRight } style={ fab } secondary>
           <FontIcon>forward</FontIcon>

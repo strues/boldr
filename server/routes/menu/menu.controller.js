@@ -37,7 +37,7 @@ export async function createMenu(req, res, next) {
       .insert(payload);
     return responseHandler(res, 201, newMenu);
   } catch (err) {
-    return res.status(500).json(err);
+    return next(new InternalServer(err));
   }
 }
 

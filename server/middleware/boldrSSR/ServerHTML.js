@@ -8,12 +8,10 @@
 import React, { Children, PropTypes } from 'react';
 import serialize from 'serialize-javascript';
 import getConfig from '../../../config/get';
-import onlyIf from '../../../shared/core/utils/logic/onlyIf';
-import removeNil from '../../../shared/core/utils/arrays/removeNil';
-import getClientBundleEntryAssets from './getClientBundleEntryAssets';
+import { onlyIf, removeNil } from '../../../shared/core/utils';
 import ClientConfigScript from '../../../config/ClientConfigScript';
 import Html from '../../../shared/components/Html';
-
+import getClientBundleEntryAssets from './getClientBundleEntryAssets';
 // PRIVATES
 
 function KeyedComponent({ children }) {

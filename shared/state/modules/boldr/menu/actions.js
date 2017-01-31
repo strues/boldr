@@ -5,11 +5,25 @@ import { menu as menuSchema } from '../../../../core/schemas';
 import * as notif from '../../../../core/constants';
 import { notificationSend } from '../../notifications/notifications';
 import * as t from './constants';
+import { detail, menu } from './schema';
 
-const detail = new schema.Entity('details');
-const menu = new schema.Entity('menus', {
-  details: [detail],
-});
+/**
+  * FETCH MENUS ACTIONS
+  * -------------------------
+  * @exports fetchMenusIfNeeded
+  * @exports fetchMenus
+  *****************************************************************/
+
+export function fetchMenusIfNeeded() {
+  return (dispatch, getState) => {
+    if (shouldFetchMenus(getState())) {
+      return dispatch(fetchMenus());
+    }
+
+    return Promise.resolve();
+  };
+}
+
 export function fetchMenus() {
   return dispatch => {
     dispatch(beginFetchMenus());
@@ -21,15 +35,6 @@ export function fetchMenus() {
       .catch(error => {
         dispatch(fetchMenusError(error));
       });
-  };
-}
-export function fetchMenusIfNeeded() {
-  return (dispatch, getState) => {
-    if (shouldFetchMenus(getState())) {
-      return dispatch(fetchMenus());
-    }
-
-    return Promise.resolve();
   };
 }
 
@@ -49,24 +54,26 @@ function beginFetchMenus() {
     type: t.GET_MAIN_MENU_REQUEST,
   };
 }
+
 function fetchMenusError(error) {
   return {
     type: t.GET_MAIN_MENU_FAILURE,
     error,
   };
 }
-function fetchMenuSuccess(normalizedData) {
-  return {
-    type: t.GET_MAIN_MENU_SUCCESS,
-    payload: normalizedData,
-  };
-}
+
 function fetchMenusSuccess(menuData) {
   return {
     type: t.GET_MAIN_MENU_SUCCESS,
     payload: menuData,
   };
 }
+
+/**
+  * UPDATE MENU DETAIL ACTIONS
+  * -------------------------
+  * @exports updateMenuDetails
+  *****************************************************************/
 
 export function updateMenuDetails(data) {
   return dispatch => {
@@ -105,13 +112,19 @@ function updateMenuDetailsFailure(err) {
 }
 
 
+/**
+  * ADD MENU DETAIL ACTIONS
+  * -------------------------
+  * @exports addMenuDetail
+  *****************************************************************/
+
 export function addMenuDetail(values) {
   return dispatch => {
     dispatch(beginAddMenuDetail());
     return api.doAddNavigationLinks(values)
       .then(response => {
         if (!response.status === 201) {
-          dispatch(addMenuDetailFailure('Error'));
+          dispatch(addMenuDetailFailure(response));
           dispatch(notificationSend(notif.MSG_ADD_LINK_ERROR));
         }
         dispatch(addMenuDetailSuccess(response));
@@ -120,20 +133,22 @@ export function addMenuDetail(values) {
   };
 }
 
-const beginAddMenuDetail = () => {
-  return { type: t.ADD_MENU_DETAIL_REQUEST };
-};
+function beginAddMenuDetail() {
+  return {
+    type: t.ADD_MENU_DETAIL_REQUEST,
+  };
+}
 
-const addMenuDetailSuccess = (response) => {
+function addMenuDetailSuccess(response) {
   return {
     type: t.ADD_MENU_DETAIL_SUCCESS,
     payload: response.body,
   };
-};
+}
 
-const addMenuDetailFailure = (err) => {
+function addMenuDetailFailure(err) {
   return {
     type: t.ADD_MENU_DETAIL_FAILURE,
     error: err,
   };
-};
+}

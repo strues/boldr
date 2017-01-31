@@ -149,8 +149,12 @@ function checkAuthFailure(error) {
   };
 }
 
-// Forgot Password
-// -----------------
+/**
+  * FORGOT PASSWORD ACTIONS
+  * -------------------------
+  * @exports forgotPassword
+  *****************************************************************/
+
 export function forgotPassword(email) {
   return (dispatch) => {
     dispatch({
@@ -170,8 +174,12 @@ export function forgotPassword(email) {
   };
 }
 
-// Reset Password
-// -----------------
+/**
+  * RESET PASSWORD ACTIONS
+  * -------------------------
+  * @exports resetPassword
+  *****************************************************************/
+
 export function resetPassword(password, token) {
   return (dispatch) => {
     dispatch({
@@ -190,6 +198,12 @@ export function resetPassword(password, token) {
       }));
   };
 }
+
+/**
+  * VERIFY ACCOUNT ACTIONS
+  * -------------------------
+  * @exports verifyAccount
+  *****************************************************************/
 
 export function verifyAccount(token) {
   return (dispatch) => {

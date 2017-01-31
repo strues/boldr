@@ -3,25 +3,12 @@ import * as api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import * as t from './constants';
 
-const loadMembers = () => ({
-  type: t.LOAD_MEMBERS_REQUEST,
-});
+/**
+  * FETCH MEMBERS ACTIONS
+  * -------------------------
+  * @exports loadSiteMembers
+  *****************************************************************/
 
-const loadMembersSuccess = (response) => {
-  return {
-    type: t.LOAD_MEMBERS_SUCCESS,
-    payload: response.body,
-  };
-};
-
-// Fail receivers
-const failedToLoadMembers = (err) => ({
-  type: t.LOAD_MEMBERS_FAILURE,
-  loading: false,
-  error: err,
-});
-
-// Public action creators
 export function loadSiteMembers() {
   return dispatch => {
     dispatch(loadMembers());
@@ -35,6 +22,45 @@ export function loadSiteMembers() {
       .catch(err => {
         dispatch(failedToLoadMembers(err));
       });
+  };
+}
+
+const loadMembers = () => ({
+  type: t.LOAD_MEMBERS_REQUEST,
+});
+
+const loadMembersSuccess = (response) => {
+  return {
+    type: t.LOAD_MEMBERS_SUCCESS,
+    payload: response.body,
+  };
+};
+
+const failedToLoadMembers = (err) => ({
+  type: t.LOAD_MEMBERS_FAILURE,
+  loading: false,
+  error: err,
+});
+
+/**
+  * UPDATE MEMBER ACTIONS
+  * -------------------------
+  * @exports updateMember
+  *****************************************************************/
+
+export function updateMember(userData) {
+  return dispatch => {
+    dispatch(beginUpdateMember());
+    return api.doUpdateMember(userData)
+      .then(response => {
+        dispatch(doneUpdateMember(response));
+        dispatch(notificationSend(notif.MSG_UPDATE_MEMBER_SUCCESS));
+      })
+      .catch(
+        err => {
+          dispatch(failUpdateMember(err.message));
+          dispatch(notificationSend(notif.MSG_UPDATE_MEMBER_ERROR));
+        });
   };
 }
 
@@ -53,21 +79,11 @@ const failUpdateMember = (err) => {
   };
 };
 
-export function updateMember(userData) {
-  return dispatch => {
-    dispatch(beginUpdateMember());
-    return api.doUpdateMember(userData)
-      .then(response => {
-        dispatch(doneUpdateMember(response));
-        dispatch(notificationSend(notif.MSG_UPDATE_MEMBER_SUCCESS));
-      })
-      .catch(
-        err => {
-          dispatch(failUpdateMember(err.message));
-          dispatch(notificationSend(notif.MSG_UPDATE_MEMBER_ERROR));
-        });
-  };
-}
+/**
+  * SELECT MEMBER ACTIONS
+  * -------------------------
+  * @exports memberSelected
+  *****************************************************************/
 
 export function memberSelected(userId) {
   return {

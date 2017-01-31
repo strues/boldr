@@ -1,12 +1,13 @@
 import { LAYOUTS } from '../../../../core/constants';
 import * as t from './constants';
 
+export const STATE_KEY = 'ui';
+
 const INITIAL_STATE = {
   loaded: false,
   layout: LAYOUTS.GRID,
   modal: false,
   drawer: false,
-  navbar: false,
 };
 
 function uiReducer(state = INITIAL_STATE, action) {
@@ -35,16 +36,6 @@ function uiReducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         drawer: false,
-      };
-    case t.EXPAND_NAVBAR:
-      return {
-        ...state,
-        navbar: true,
-      };
-    case t.COLLAPSE_NAVBAR:
-      return {
-        ...state,
-        navbar: false,
       };
     default:
       return state;

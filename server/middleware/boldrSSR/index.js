@@ -11,6 +11,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import styleSheet from 'styled-components/lib/models/StyleSheet';
 import Helmet from 'react-helmet';
 import { trigger } from 'redial';
+
 import AppRoot from '../../../shared/components/AppRoot';
 import createRoutes from '../../../shared/scenes';
 import ApiClient from '../../../shared/core/api/apiClient';
@@ -33,13 +34,7 @@ function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
 
   global.navigator = { userAgent: req.headers['user-agent'] };
 
-  const createStore = req => configureStore({
-    boldr: {
-      meta: {
-        host: getHost(req),
-      },
-    },
-  });
+  const createStore = req => configureStore({});
 
   const apiClient = new ApiClient(req);
   const memoryHistory = createMemoryHistory(req.url);

@@ -4,7 +4,7 @@ import { CHANGE_LAYOUT, MODAL_OPEN, MODAL_CLOSED } from './constants';
 import { changeLayout, showModal, hideModal, openDrawer } from './actions';
 import uiReducer from './ui';
 
-describe('UI Duck', () => {
+describe('UI Reducer', () => {
   it('Should return the initial state', () => {
     expect(
         uiReducer(undefined, {}),
@@ -13,7 +13,6 @@ describe('UI Duck', () => {
         layout: 'grid',
         modal: false,
         drawer: false,
-        navbar: false,
       });
   });
   it('should open the modal', () => {
@@ -22,14 +21,12 @@ describe('UI Duck', () => {
       layout: 'grid',
       modal: false,
       drawer: false,
-      navbar: false,
     };
     const stateAfter = {
       loaded: false,
       layout: 'grid',
       modal: true,
       drawer: false,
-      navbar: false,
     };
     expect(
       uiReducer(initialState, {
@@ -43,14 +40,12 @@ describe('UI Duck', () => {
       layout: 'grid',
       modal: true,
       drawer: false,
-      navbar: false,
     };
     const stateAfter = {
       loaded: false,
       layout: 'grid',
       modal: false,
       drawer: false,
-      navbar: false,
     };
     expect(
       uiReducer(initialState, {
@@ -68,7 +63,6 @@ describe('UI Duck', () => {
       layout: 'grid',
       modal: false,
       drawer: false,
-      navbar: false,
     };
 
     expect(
@@ -78,7 +72,6 @@ describe('UI Duck', () => {
       layout: 'list',
       modal: false,
       drawer: false,
-      navbar: false,
     });
   });
 });
@@ -93,7 +86,6 @@ test('changeLayout', () => {
       layout: 'grid',
       modal: false,
       drawer: false,
-      navbar: false,
     },
   });
   store.dispatch(changeLayout('list'));
@@ -114,7 +106,6 @@ test('openModal', () => {
       layout: 'grid',
       modal: false,
       drawer: false,
-      navbar: false,
     },
   });
   store.dispatch(showModal());
@@ -134,7 +125,6 @@ test('closeModal', () => {
       layout: 'grid',
       modal: true,
       drawer: false,
-      navbar: false,
     },
   });
   store.dispatch(hideModal());
@@ -155,7 +145,6 @@ test('Open the drawer', () => {
       isMobile: false,
       modal: false,
       drawer: false,
-      navbar: false,
     },
   });
   store.dispatch(openDrawer());

@@ -8,23 +8,11 @@ import * as t from './constants';
 
 const token = getToken();
 
-const fetchMediaStart = () => {
-  return { type: t.GET_ATTACHMENT_REQUEST };
-};
-
-export function fetchMediaSuccess(response) {
-  return {
-    type: t.GET_ATTACHMENT_SUCCESS,
-    payload: response.body,
-  };
-}
-
-export function fetchMediaFail(err) {
-  return {
-    type: t.GET_ATTACHMENT_FAILURE,
-    error: err,
-  };
-}
+/**
+  * FETCH MEDIA ACTIONS
+  * -------------------------
+  * @exports fetchMedia
+  *****************************************************************/
 
 export function fetchMedia() {
   return (dispatch) => {
@@ -42,23 +30,31 @@ export function fetchMedia() {
   };
 }
 
-const beginUpload = () => {
-  return { type: t.UPLOAD_ATTACHMENT_REQUEST };
-};
-
-function uploadSuccess(response) {
+function fetchMediaStart() {
   return {
-    type: t.UPLOAD_ATTACHMENT_SUCCESS,
+    type: t.GET_ATTACHMENT_REQUEST,
+  };
+}
+
+function fetchMediaSuccess(response) {
+  return {
+    type: t.GET_ATTACHMENT_SUCCESS,
     payload: response.body,
   };
 }
 
-function uploadFail(err) {
+function fetchMediaFail(err) {
   return {
-    type: t.UPLOAD_ATTACHMENT_FAILURE,
+    type: t.GET_ATTACHMENT_FAILURE,
     error: err,
   };
 }
+
+/**
+  * UPLOAD FILE ACTIONS
+  * -------------------------
+  * @exports uploadFiles
+  *****************************************************************/
 
 export function uploadFiles(payload) {
   return (dispatch) => {
@@ -77,23 +73,32 @@ export function uploadFiles(payload) {
       });
   };
 }
-const beginUploadPostImage = () => {
-  return { type: t.UPLOAD_POST_IMG_REQUEST };
-};
 
-function uploadPostImageSuccess(response) {
+function beginUpload() {
   return {
-    type: t.UPLOAD_POST_IMG_SUCCESS,
+    type: t.UPLOAD_ATTACHMENT_REQUEST,
+  };
+}
+
+function uploadSuccess(response) {
+  return {
+    type: t.UPLOAD_ATTACHMENT_SUCCESS,
     payload: response.body,
   };
 }
 
-function uploadPostImageFail(err) {
+function uploadFail(err) {
   return {
-    type: t.UPLOAD_POST_IMG_FAILURE,
+    type: t.UPLOAD_ATTACHMENT_FAILURE,
     error: err,
   };
 }
+
+/**
+  * UPLOAD FILE ACTIONS
+  * -------------------------
+  * @exports uploadFiles
+  *****************************************************************/
 
 export function uploadPostImage(payload) {
   return (dispatch) => {
@@ -113,10 +118,32 @@ export function uploadPostImage(payload) {
       });
   };
 }
-const deleteMediaFail = (err) => ({
-  type: t.DELETE_ATTACHMENT_FAILURE,
-  error: err,
-});
+
+function beginUploadPostImage() {
+  return {
+    type: t.UPLOAD_POST_IMG_REQUEST,
+  };
+}
+
+function uploadPostImageSuccess(response) {
+  return {
+    type: t.UPLOAD_POST_IMG_SUCCESS,
+    payload: response.body,
+  };
+}
+
+function uploadPostImageFail(err) {
+  return {
+    type: t.UPLOAD_POST_IMG_FAILURE,
+    error: err,
+  };
+}
+
+/**
+  * UPLOAD FILE ACTIONS
+  * -------------------------
+  * @exports uploadFiles
+  *****************************************************************/
 
 export function deleteMedia(id) {
   return (dispatch) => {
@@ -136,6 +163,17 @@ export function deleteMedia(id) {
       });
   };
 }
+
+const deleteMediaFail = (err) => ({
+  type: t.DELETE_ATTACHMENT_FAILURE,
+  error: err,
+});
+
+/**
+  * UPDATE FILE ACTIONS
+  * -------------------------
+  * @exports updateAttachment
+  *****************************************************************/
 
 export function updateAttachment(attachmentData) {
   return (dispatch: Function) => {
@@ -173,7 +211,12 @@ const errorUpdateAttachment = (err) => {
     error: err,
   };
 };
-// updateFileProperties
+
+/**
+  * SELECT FILE ACTIONS
+  * -------------------------
+  * @exports updateAttachment
+  *****************************************************************/
 
 export function selectedFile(file: Object) {
   return {

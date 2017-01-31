@@ -2,9 +2,7 @@ import uuid from 'uuid';
 import * as objection from 'objection';
 import { mailer, signToken } from '../../services/index';
 import { welcomeEmail } from '../../services/mailer/templates';
-import User from '../../models/user';
-import Activity from '../../models/activity';
-import Token from '../../models/token';
+import { User, Activity, Token } from '../../models';
 import {
   responseHandler,
   generateHash,

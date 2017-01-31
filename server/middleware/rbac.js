@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import User from '../models/user';
 
-const debug = require('debug')('boldrAPI:rbac');
+const debug = require('debug')('boldr:rbac');
 /**
  * This middleware checks to see if the given user/token combination has the provided role.
  *

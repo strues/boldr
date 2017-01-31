@@ -1,14 +1,11 @@
 import uuid from 'uuid';
 import slugIt from '../../../utils/slugIt';
 import { InternalServer, responseHandler } from '../../../core/index';
-import Activity from '../../../models/activity';
-import Menu from '../../../models/menu';
-import MenuMenuDetail from '../../../models/join/menuMenuDetail';
-import MenuDetail from '../../../models/menuDetail';
+import { Activity, Menu, MenuDetail, MenuMenuDetail } from '../../../models';
 
-const debug = require('debug')('boldrAPI:menuDetail-controller');
+const debug = require('debug')('boldr:menuDetail-controller');
 
-async function getDetails(req, res, next) {
+export async function getDetails(req, res, next) {
   try {
     const links = await MenuDetail.query();
 
@@ -22,14 +19,18 @@ async function getDetails(req, res, next) {
   }
 }
 
-async function showDetail(req, res) {
-  const navigation = await MenuDetail
-    .query()
-    .findById(req.params.id);
-  return responseHandler(res, 200, navigation);
+export async function showDetail(req, res) {
+  try {
+    const navigation = await MenuDetail
+      .query()
+      .findById(req.params.id);
+    return responseHandler(res, 200, navigation);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 }
 
-async function createDetail(req, res, next) {
+export async function createDetail(req, res, next) {
   try {
     const payload = {
       name: req.body.name,
@@ -64,16 +65,14 @@ async function createDetail(req, res, next) {
   }
 }
 
-function updateDetail(req, res) {
+export function updateDetail(req, res) {
   return MenuDetail.query()
     .patchAndFetchById(req.params.id, req.body)
     .then(navigation => responseHandler(res, 202, navigation));
 }
 
-function deleteDetail(req, res) {
+export function deleteDetail(req, res) {
   return MenuDetail.query()
     .deleteById(req.params.id)
     .then(() => responseHandler(res, 204));
 }
-
-export { getDetails, updateDetail, showDetail, createDetail, deleteDetail };

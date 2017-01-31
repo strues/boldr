@@ -6,8 +6,9 @@ import { Grid, Row, Col, Image } from '../../../../components/index';
 import FileEditorForm from '../components/FileEditorForm';
 
 type Props = {
-  currentFile: Object
-}
+  currentFile: Object,
+  updateAttachment: Function,
+};
 export class FileEditor extends Component {
   props: Props;
   render() {
