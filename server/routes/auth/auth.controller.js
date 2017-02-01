@@ -167,14 +167,12 @@ export async function checkAuthentication(req, res, next) {
     const validUser = await User.query().findById(req.user.id).eager('[roles]');
 
     if (!validUser) {
-      return next(new Unauthorized(
-        'Unable to find an account with the given information.',
-      ));
+      return next(new Unauthorized());
     }
     validUser.stripPassword();
     return responseHandler(res, 200, validUser);
   } catch (error) {
-    return next(new BadRequest(error));
+    return next(new BadRequest(err));
   }
 }
 

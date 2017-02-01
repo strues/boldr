@@ -39,7 +39,7 @@ app.get('*', boldrSSR);
 // catch 404 and forward response to errorhandler
 /* istanbul ignore next */
 app.use((req: $Request, res: $Response, next: NextFunction) => {
-  const err: Error = new NotFound();
+  const err: Error = new BadRequest('Invalid route');
   return next(err);
 });
 
