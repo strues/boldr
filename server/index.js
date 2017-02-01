@@ -31,14 +31,14 @@ const listener = server.listen(getConfig('port'), getConfig('host'), () =>
 export default listener;
 
   /* istanbul ignore else */
-function close(listener) {
+function close(server) {
   return new Promise((resolve) => {
-    listener.close(() => {
+    server.close(() => {
       const msg = 'BoldrAPI shutting down...';
       logger.info(msg);
       resolve(msg);
-      if (listener) {
-        listener.close(process.exit.bind(process));
+      if (server) {
+        server.close(process.exit.bind(process));
       } else {
         process.exit();
       }

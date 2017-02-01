@@ -4,7 +4,6 @@ ARG uid=1000
 
 RUN apk update && \
   apk add --no-cache \
-    sudo \
     curl \
     gnupg \
     g++ \
@@ -41,10 +40,11 @@ RUN tar xzf /tmp/yarn-${VERSION}.tar.gz && \
 WORKDIR /app
 COPY package.json /app
 
-RUN yarn install
+RUN yarn install --production
 COPY . /app
 
 ENV NODE_ENV production
 
 EXPOSE 3000
+VOLUME ["/app/node_modules", "/app/public"]
 CMD ["npm", "run", "start"]

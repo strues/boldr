@@ -77,7 +77,7 @@
   },
   "scripts": {
     "analyze": "babel-node internal/scripts/analyze",
-    "apidoc": "apidoc -i server -o public/docs && apidoc-markdown -p public/docs -o docs/apidoc.md",
+    "apidoc": "apidoc -i server -o public/apidocs && apidoc-markdown -p public/apidocs -o docs/apidoc.md",
     "babel": "NODE_ENV=production babel --ignore node_modules",
     "build": "NODE_ENV=production babel-node internal/scripts/build",
     "clean": "babel-node internal/scripts/clean",
