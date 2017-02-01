@@ -1,3 +1,3 @@
-import knex from './postgres';
+import db from './postgres';
 
-export default knex;
+export default db;

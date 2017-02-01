@@ -37,17 +37,17 @@ router.get('/:id', ctrl.showMenu);
  * @apiUse authHeader
  * @apiParam {Number} id The id of the menu
  */
-router.put('/:id', isAuthenticated, ctrl.updateMenu);
+router.put('/:id', isAuthenticated, ctrl.updateMainMenu);
 
 /**
  * @api {patch} /menus/:id Update a navigation
- * @apiName updateMenu
+ * @apiName updateMainMenu
  * @apiGroup Menu
  * @apiPermission admin
  * @apiUse authHeader
  * @apiParam {Number} id The id of the link
  */
-router.patch('/:id', isAuthenticated, ctrl.updateMenu);
+router.patch('/:id', isAuthenticated, ctrl.updateMainMenu);
 
 router.use('/details', detailRoutes);
 export default router;

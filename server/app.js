@@ -6,9 +6,10 @@ import appRootDir from 'app-root-dir';
 import getConfig from '../config/get';
 import logger from './services/logger';
 
-import { NotFound } from './core/errors';
+import { NotFound, BadRequest } from './core/errors';
 import expressMiddleware from './middleware/express';
 import authMiddleware from './middleware/auth';
+import errorHandler from './middleware/errorHandler';
 import rbac from './middleware/rbac';
 import routes from './routes/index';
 import boldrSSR from './middleware/boldrSSR';
@@ -24,6 +25,16 @@ authMiddleware(app);
 app.use(rbac());
 // attaches to router
 app.use('/api/v1', routes);
+
+// $FlowIssue
+app.use((error, req: $Request, res: $Response, next: NextFunction) => {
+  if (error instanceof SyntaxError || error instanceof TypeError) {
+    // console.error(error);
+    return next(new BadRequest('Malformed JSON.'));
+  }
+  /* istanbul ignore next */
+  return next();
+});
 
 app.use(getConfig('bundles.client.webPath'), clientBundle);
 
@@ -44,5 +55,7 @@ app.use((req: $Request, res: $Response, next: NextFunction) => {
 process.on('unhandledRejection', (reason, p) => {
   logger.error('Possibly Unhandled Rejection at: Promise ', p, ' reason: ', reason);
 });
+
+app.use(errorHandler);
 
 export default app;

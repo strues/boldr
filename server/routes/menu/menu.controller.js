@@ -1,4 +1,4 @@
-import { responseHandler, InternalServer } from '../../core/index';
+import { responseHandler, InternalServer, NotFound } from '../../core/index';
 // Model
 import Menu from '../../models/menu';
 
@@ -7,7 +7,7 @@ export async function listMenu(req, res, next) {
     const menus = await Menu.query().eager('details').returning('*');
 
     if (!menus) {
-      return res.status(404).json({ message: 'Unable to find any navigations. Try creating one.' });
+      return next(new NotFound('Unable to find any navigations. Try creating one.'));
     }
 
     return res.status(200).json(menus);
@@ -41,7 +41,7 @@ export async function createMenu(req, res, next) {
   }
 }
 
-export async function updateMenu(req, res, next) {
+export async function updateMainMenu(req, res, next) {
   try {
     const updatedNav = await Menu.query()
       .patchAndFetchById(1, req.body);

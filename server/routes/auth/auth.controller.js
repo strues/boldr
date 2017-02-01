@@ -13,7 +13,7 @@ import {
   Conflict,
 } from '../../core';
 
-const debug = require('debug')('boldr:auth-controller');
+const debug = require('debug')('boldr:auth-ctrl');
 
 /**
  * register creates a new user in the database.
@@ -104,7 +104,12 @@ export async function loginUser(req, res, next) {
     return next(new BadRequest(errors));
   }
 
-  const user = await User.query().where({ email: req.body.email }).eager('[roles]').first();
+  const user = await User
+  .query()
+  .where({ email: req.body.email })
+  .eager('[roles]')
+  .first();
+
   if (!user) {
     return next(new Unauthorized('Unable to find a user matching the provided credentials.'));
   }
@@ -133,8 +138,14 @@ export async function verifyUser(req, res, next) {
       return next(new BadRequest('Invalid account verification code'));
     }
 
-    const token = await Token.query().where({ user_verification_token: req.params.verifToken }).first();
-    const user = await User.query().patchAndFetchById(token.user_id, { verified: true });
+    const token = await Token
+    .query()
+    .where({ user_verification_token: req.params.verifToken })
+    .first();
+
+    const user = await User
+    .query()
+    .patchAndFetchById(token.user_id, { verified: true });
 
     return responseHandler(res, 201, user);
   } catch (err) {
@@ -144,7 +155,11 @@ export async function verifyUser(req, res, next) {
 
 export async function checkAuthentication(req, res, next) {
   try {
-    const validUser = await User.query().findById(req.user.id).eager('[roles]');
+    const validUser = await User
+    .query()
+    .findById(req.user.id)
+    .eager('[roles]');
+
     if (!validUser) {
       return next(new Unauthorized('Unable to find an account with the given information.'));
     }

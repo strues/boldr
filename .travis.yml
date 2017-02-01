@@ -20,7 +20,8 @@ env:
   REDIS_CONN_URI: redis://127.0.0.1:6379/1
   NODE_ENV: test
   TOKEN_SECRET: bbbbaaaasss
-
+git:
+  depth: 3
 addons:
   apt:
     sources:

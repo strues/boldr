@@ -8,10 +8,9 @@ const router = express.Router();
 router.route('/')
       /**
        * @api {get} /posts Retrieve all posts
-       * @apiName listPosts
+       * @apiName ListPosts
        * @apiGroup Post
        * @apiPermission public
-       * @apiUse listParams
        * @apiSuccess {Object[]} posts List of posts.
        * @apiSuccess {String}  posts.uuid             The UUID of the post
        * @apiSuccess {String}s  posts.title            The title of the post
@@ -22,14 +21,14 @@ router.route('/')
        * @apiSuccess {String}  posts.status           One of: draft / published / archived
        * @apiSuccess {Object[]} posts.tags            Array containing the related tags
        * @apiSuccess {Object}   posts.author          The post author's user object
-       * @apiError {Object} 400 Some parameters may contain invalid values.
+       * @apiError   {Object} 400 Some parameters may contain invalid values.
        */
       .get(ctrl.listPosts)
       /**
        * @api {post} /posts Create a new post
-       * @apiName createPost
+       * @apiName CreatePost
        * @apiGroup Post
-       * @apiPermission user
+       * @apiPermission admin
        * @apiUse authHeader
        *
        * @apiParam {String}  title            The title of the post
@@ -48,7 +47,7 @@ router.route('/')
 router.route('/slug/:slug')
       /**
        * @api {get} /posts/slug/:slug Retrieve a post by its slug.
-       * @apiName getSlug
+       * @apiName GetSlug
        * @apiGroup Post
        * @apiPermission public
        * @apiParam {String}     slug             The slug of the post
@@ -69,7 +68,7 @@ router.route('/slug/:slug')
 router.route('/pid/:id')
       /**
        * @api {get} /posts/pid/:id Retrieve a post by its id.
-       * @apiName getId
+       * @apiName GetId
        * @apiGroup Post
        * @apiPermission public
 
@@ -78,7 +77,7 @@ router.route('/pid/:id')
       .get(ctrl.getId)
       /**
        * @api {post} /posts/pid/:id Add a tag to the post
-       * @apiName addTag
+       * @apiName AddTag
        * @apiGroup Post
        * @apiPermission admin
 
@@ -87,7 +86,7 @@ router.route('/pid/:id')
       .post(isAuthenticated, checkRole('Admin'), ctrl.addTag)
       /**
        * @api {put} /posts/pid/:id Update a post by its id
-       * @apiName update
+       * @apiName UpdatePost
        * @apiGroup Post
        * @apiPermission admin
 
@@ -96,7 +95,7 @@ router.route('/pid/:id')
       .put(isAuthenticated, checkRole('Admin'), ctrl.update)
       /**
        * @api {delete} /posts/pid/:id Remove a post by its id
-       * @apiName destroy
+       * @apiName DestroyPost
        * @apiGroup Post
        * @apiPermission admin
 

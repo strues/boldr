@@ -1,11 +1,11 @@
 import redisClient from './redis';
-import knex from './postgres';
+import db from './postgres';
 import mailer from './mailer';
 import { isAuthenticated, signToken } from './authentication';
 
 export {
   redisClient,
-  knex,
+  db,
   mailer,
   isAuthenticated,
   signToken,

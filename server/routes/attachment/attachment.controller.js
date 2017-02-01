@@ -10,7 +10,7 @@ import getConfig from '../../../config/get';
 import Activity from '../../models/activity';
 import Attachment from '../../models/attachment';
 
-const debug = Debug('boldrAPI:attachment-controller');
+const debug = Debug('boldr:attachment-ctrl');
 const gm = require('gm').subClass({ imageMagick: true });
 
 const regex = new RegExp('^.*.((j|J)(p|P)(e|E)?(g|G)|(g|G)(i|I)(f|F)|(p|P)(n|N)(g|G))$');
@@ -93,13 +93,13 @@ export async function deleteAttachment(req, res, next) {
 
 /**
  * Upload an attachment
- * @method uploadImage
+ * @method uploadAttachment
  * @param  {Object}        req  the request object
  * @param  {Object}        res  the response object
  * @param  {Function}       next move to the next middleware
  * @return {Promise}       the newly created attachment
  */
-export async function uploadImage(req, res, next) {
+export async function uploadAttachment(req, res, next) {
   let fstream;
   const busboy = new Busboy({ headers: req.headers });
 

@@ -1,4 +1,4 @@
-
+import { Unauthorized } from '../../core/errors';
 /**
  * Attaches the user object to the request if authenticated
  * Otherwise returns 403
@@ -8,7 +8,7 @@ function isAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     next();
   } else {
-    res.status(401).send('Unauthorized');
+    return new Unauthorized();
   }
 }
 

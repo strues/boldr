@@ -23,7 +23,7 @@ router.get('/', ctrl.listTags);
  */
 // router.get('/:id', controller.show.bind(controller));
 /**
- * @api {get} /tags/posts/:name Returns all posts associated with the tag.
+ * @api {get} /tags/:name/posts Returns all posts associated with the tag.
  * @apiName getTaggedPostsByName
  * @apiGroup Tag
  * @apiPermission public
@@ -31,7 +31,7 @@ router.get('/', ctrl.listTags);
  * @apiSuccess (200) {Object[]} posts List of posts.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get('/posts/:name', ctrl.getTaggedPostsByName);
+router.get('/:name/posts', ctrl.getTaggedPostsByName);
 /**
  * @api {get} /tags/:id/posts Returns all posts associated with the tag.
  * @apiName getTaggedPosts

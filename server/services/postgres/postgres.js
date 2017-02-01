@@ -12,18 +12,4 @@ const db = Knex({
 
 Model.knex(db);
 
-const disconnect = (db) => {
-  return new Promise((resolve, reject) => {
-    db.destroy((err) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve();
-      }
-    });
-  });
-};
-
 export default db;
-
-export { db, disconnect };
