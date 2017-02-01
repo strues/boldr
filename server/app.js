@@ -26,15 +26,6 @@ app.use(rbac());
 // attaches to router
 app.use('/api/v1', routes);
 
-// $FlowIssue
-app.use((error, req: $Request, res: $Response, next: NextFunction) => {
-  if (error instanceof SyntaxError || error instanceof TypeError) {
-    // console.error(error);
-    return next(new BadRequest('Malformed JSON.'));
-  }
-  /* istanbul ignore next */
-  return next();
-});
 
 app.use(getConfig('bundles.client.webPath'), clientBundle);
 

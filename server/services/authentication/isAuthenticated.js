@@ -8,7 +8,7 @@ function isAuthenticated(req, res, next) {
   if (req.isAuthenticated()) {
     next();
   } else {
-    return new Unauthorized();
+    return res.status(401).json('Unauthorized. Please login.');
   }
 }
 
