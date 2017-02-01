@@ -17,7 +17,7 @@ export type Post = {
   excerpt?: String,
   created_at: String,
   updated_at?: String,
-  status: ?String,
+  published: ?Boolean,
   author: ?User,
   seo?: Object,
   tags?: Array<Tag>,

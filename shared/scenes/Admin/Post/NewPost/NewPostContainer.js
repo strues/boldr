@@ -10,6 +10,7 @@ import NewPost from './NewPost';
 type Props = {
   dispatch: Function,
   postImage: PostImage,
+  createPost: Function,
 };
 
 class NewPostContainer extends Component {
@@ -20,7 +21,6 @@ class NewPostContainer extends Component {
   }
 
   handleOnSubmit(values: Post) {
-    console.log(values)
     const postData = {
       title: values.title,
       tags: values.tags,

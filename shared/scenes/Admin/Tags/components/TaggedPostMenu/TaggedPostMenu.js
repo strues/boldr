@@ -1,9 +1,15 @@
+/* @flow */
 import React, { Component } from 'react';
 
 import MenuButton from 'react-md/lib/Menus/MenuButton';
 import ListItem from 'react-md/lib/Lists/ListItem';
+import type { Post } from '../../../../../types/models';
 
-const TaggedPostMenu = (props) => {
+type Props = {
+  post: Post,
+};
+
+const TaggedPostMenu = (props: Props) => {
   return (
     <MenuButton
       id="vert-menu"

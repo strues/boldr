@@ -1,10 +1,9 @@
 /* @flow */
 import React, { Component } from 'react';
 import { Col, Row, Widget, Loader, KeyVisual } from '../../../components/index';
-import ActivityWidget from '../components/ActivityWidget';
-import StatsWidget from '../components/StatsWidget';
 import type { Stats } from '../../../types/models';
 import { loadSiteActivity, fetchStats } from '../../../state/modules/admin/dashboard/actions';
+import { StatsWidget, ActivityWidget } from './components';
 
 type Props = {
   loadSiteActivity: Function,
@@ -21,7 +20,6 @@ const Dashboard = (props: Props) => {
     );
   }
   return (
-      <div>
         <Row>
           <Col xs={ 12 } md={ 8 }>
             <Row>
@@ -46,7 +44,6 @@ const Dashboard = (props: Props) => {
             }
           </Col>
         </Row>
-      </div>
   );
 };
 

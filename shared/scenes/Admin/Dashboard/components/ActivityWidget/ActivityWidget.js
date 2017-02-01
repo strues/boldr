@@ -7,7 +7,8 @@ import ListItem from 'react-md/lib/Lists/ListItem';
 import Divider from 'react-md/lib/Dividers';
 import FontIcon from 'react-md/lib/FontIcons';
 import Paper from 'react-md/lib/Papers';
-import { Heading } from '../../../../components/index';
+
+import { Heading } from '../../../../../components/index';
 import ActivityItem from '../ActivityItem';
 
 type Props = {

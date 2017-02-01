@@ -104,6 +104,7 @@
     "coveragePathIgnorePatterns": [
       "<rootDir>/(internal|config|docs|boldrCMS|.happypack|bin|.idea|public|db)/",
       "/flow-typed/",
+      "/__fixtures__/",
       "/node_modules/",
       "<rootDir>/shared/theme/",
       "<rootDir>/shared/types/"

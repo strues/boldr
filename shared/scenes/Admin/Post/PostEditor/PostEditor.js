@@ -5,14 +5,12 @@ import { connect } from 'react-redux';
 import { updatePost } from '../../../../state/modules/blog/posts';
 import { EditPostForm } from '../components';
 
-export type Props = {
+type Props = {
   dispatch: Function,
   posts: Object,
   params: Object,
   currentPost: Object,
-  drawer: boolean,
-  ui: Object,
-  updatePost: Function
+  updatePost: Function,
 };
 
 class PostEditor extends Component {
@@ -30,8 +28,6 @@ class PostEditor extends Component {
       excerpt: values.excerpt,
       id: this.props.currentPost.id || '',
     };
-
-    console.log('submit', postData);
     this.props.updatePost(postData);
   }
 
@@ -40,9 +36,7 @@ class PostEditor extends Component {
       <div>
         <EditPostForm
           initialValues={ this.props.currentPost }
-          postImage={ this.props.postImage }
           onSubmit={ this.handleSubmit }
-          drawer={ this.props.drawer }
         />
       </div>
     );
@@ -52,10 +46,7 @@ class PostEditor extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    // posts: state.blog.posts,
     currentPost: state.blog.posts.currentPost,
-    drawer: state.boldr.ui.drawer,
-    postImage: state.admin.attachments.postImage,
   };
 };
 export default connect(mapStateToProps, { updatePost })(PostEditor);

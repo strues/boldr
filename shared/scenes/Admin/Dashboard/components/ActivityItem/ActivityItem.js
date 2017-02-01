@@ -5,8 +5,9 @@ import Chip from 'react-md/lib/Chips';
 import Button from 'react-md/lib/Buttons';
 import FontIcon from 'react-md/lib/FontIcons';
 import styled from 'styled-components';
+
 import { format } from 'date-fns';
-import { Icon, Row, Col } from '../../../../components/index';
+import { Icon, Row, Col } from '../../../../../components/index';
 import ActivityItemDetail from '../ActivityItemDetail';
 
 const ActivityPanel = styled.div`

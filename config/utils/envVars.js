@@ -10,7 +10,6 @@ import path from 'path';
 import appRootDir from 'app-root-dir';
 import colors from 'colors/safe';
 import dotenv from 'dotenv';
-import userHome from 'user-home';
 
 import pkg from '../../package.json';
 import onlyIf from '../../shared/core/utils/logic/onlyIf';
@@ -27,18 +26,11 @@ function registerEnvFile() {
   const envFileResolutionOrder = removeNil([
     // Is there an environment config file at the app root for our target
     // environment name?
-    // e.g. /projects/react-universally/.env.development
+    // e.g. /projects/boldr/.env.development
     onlyIf(CONF_ENV, path.resolve(appRootDir.get(), `${envFile}.${CONF_ENV}`)),
     // Is there an environment config file at the app root?
-    // e.g. /projects/react-universally/.env
+    // e.g. /projects/boldr/.env
     path.resolve(appRootDir.get(), envFile),
-    // Is there an environment config file in the executing user's home dir
-    // that is targetting the specific environment?
-    // e.g. /Users/ctrlplusb/.config/react-universally/.env.development
-    onlyIf(CONF_ENV, path.resolve(userHome, '.config', pkg.name, `${envFile}.${CONF_ENV}`)),
-    // Is there an environment config file in the executing user's home dir?
-    // e.g. /Users/ctrlplusb/.config/react-universally/.env
-    path.resolve(userHome, '.config', pkg.name, envFile),
   ]);
 
   // Find the first env file path match.

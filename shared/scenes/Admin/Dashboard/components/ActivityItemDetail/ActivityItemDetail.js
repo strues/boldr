@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import { Icon, Row, Col, Paragraph } from '../../../../components/index';
+// import { Icon, Row, Col, Paragraph } from '../../../../../components/index';
 
 type Props = {
   atype: Number,
