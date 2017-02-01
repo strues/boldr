@@ -10,5 +10,9 @@ export const ADD_TAG_REQUEST = '@boldr/blog/ADD_TAG_REQUEST';
 export const ADD_TAG_SUCCESS = '@boldr/blog/ADD_TAG_SUCCESS';
 export const ADD_TAG_FAILURE = '@boldr/blog/ADD_TAG_FAILURE';
 
+export const DELETE_TAG_REQUEST = '@boldr/blog/DELETE_TAG_REQUEST';
+export const DELETE_TAG_SUCCESS = '@boldr/blog/DELETE_TAG_SUCCESS';
+export const DELETE_TAG_FAILURE = '@boldr/blog/DELETE_TAG_FAILURE';
+
 export const SELECT_TAG = '@boldr/blog/SELECT_TAG';
 export const CLEAR_TAG = '@boldr/blog/CLEAR_TAG';

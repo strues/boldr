@@ -52,6 +52,9 @@ before_script:
 script:
   - yarn run test:ci
 
+after_success:
+  - yarn run coveralls
+
 cache:
   yarn: true
   directories:

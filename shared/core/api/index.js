@@ -195,6 +195,8 @@ export const doAddTag = (values) => {
   return apiClient.post('/tags', { data: payload });
 };
 
+export const doDeleteTag = (id) =>
+  apiClient.del(`/tags/${id}`);
 /**
   * MEMBERS API ROUTES
   * -------------------------

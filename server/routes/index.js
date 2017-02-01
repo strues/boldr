@@ -45,9 +45,17 @@ const router = express.Router();
   * @apiDefine user User access for certain restricted routes.
   * You must pass an authorization header with a token to access this endpoint.
   */
-router.get('/health-check', (req, res) =>
-  res.status(200).json('OK, it works'),
-);
+router.get('/health-check', (req, res) => {
+  res.status(200);
+  res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+  res.set('Pragma', 'no-cache');
+  res.set('Expires', '0');
+  res.json({
+    health: 'good',
+    uptime: process.uptime(),
+    memoryUsage: process.memoryUsage(),
+  });
+});
 
 router.use('/activities', activityRoutes);
 router.use('/admin', adminRoutes);

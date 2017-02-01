@@ -10,14 +10,14 @@ import Paper from 'react-md/lib/Papers';
 import Toolbar from 'react-md/lib/Toolbars';
 import Button from 'react-md/lib/Buttons';
 import { Row, Col } from '../../../components';
-import { selectTag, clearTag, createTag } from '../../../state/modules/blog/tags';
+import { selectTag, clearTag, createTag, deleteTag } from '../../../state/modules/blog/tags';
 import type { Tag } from '../../../types/models';
 import TaggedPost from './components/TaggedPost';
 
 import TagList from './components/TagList';
 import AddTag from './components/AddTag';
 
-export type Props = {
+type Props = {
   tags: Array<Tag>,
   selectTag: Function,
   currentTag: Object,
@@ -40,6 +40,7 @@ class Tags extends Component {
     (this: any).handleAddTagClick = this.handleAddTagClick.bind(this);
     (this: any).handleTagClick = this.handleTagClick.bind(this);
     (this: any).handleTagSubmit = this.handleTagSubmit.bind(this);
+    (this: any).handleDeleteTagClick = this.handleDeleteTagClick.bind(this);
   }
 
   state: State;
@@ -62,7 +63,9 @@ class Tags extends Component {
       posts: false,
     });
   }
-
+  handleDeleteTagClick(id) {
+    this.props.dispatch(deleteTag(id));
+  }
   render() {
     const actions = [
       <MenuButton key="menu" id="tagtb" buttonChildren="more_vert" icon>
@@ -82,7 +85,11 @@ class Tags extends Component {
               actions={ actions }
             />
             <List>
-              <TagList tags={ this.props.tags } handleTagClick={ this.handleTagClick } />
+              <TagList
+                tags={ this.props.tags }
+                handleDeleteTagClick={ this.handleDeleteTagClick }
+                handleTagClick={ this.handleTagClick }
+              />
             </List>
           </Paper>
         </Col>

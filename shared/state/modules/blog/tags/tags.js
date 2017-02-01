@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import { addIdToArray } from '../../../../core/utils';
+import { addIdToArray, removeByKey, removeIdFromArray } from '../../../../core/utils';
 import { FETCH_POSTS_SUCCESS } from '../posts/constants';
 import * as t from './constants';
 
@@ -18,6 +18,8 @@ const all = (state = {}, action) => {
         ...state,
         ...action.payload,
       };
+    case t.DELETE_TAG_SUCCESS:
+      return removeByKey(state, action.id);
     default:
       return state;
   }
@@ -27,7 +29,8 @@ const ids = (state = [], action) => {
   switch (action.type) {
     case t.FETCH_TAGS_SUCCESS:
       return action.payload.result;
-
+    case t.DELETE_TAG_SUCCESS:
+      return removeIdFromArray(state, action.id);
     default:
       return state;
   }

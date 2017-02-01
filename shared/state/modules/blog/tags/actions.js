@@ -180,3 +180,34 @@ function addTagFailure(err) {
     error: err,
   };
 }
+
+/**
+  * DELETE TAG ACTIONS
+  * -------------------------
+  * @exports deleteTag
+  *****************************************************************/
+
+export function deleteTag(id) {
+  return (dispatch) => {
+    dispatch({
+      type: t.DELETE_TAG_REQUEST,
+    });
+    return api.doDeleteTag(id)
+      .then(response => {
+        dispatch({
+          type: t.DELETE_TAG_SUCCESS,
+          id,
+        });
+        dispatch(notificationSend(notif.MSG_DELETE_TAG_SUCCESS));
+      })
+      .catch(err => {
+        dispatch(deleteTagFail(err));
+        dispatch(notificationSend(notif.MSG_DELETE_TAG_FAILURE));
+      });
+  };
+}
+
+const deleteTagFail = (err) => ({
+  type: t.DELETE_TAG_FAILURE,
+  error: err.error.message,
+});

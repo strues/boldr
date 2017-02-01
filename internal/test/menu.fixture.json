@@ -1,0 +1,40 @@
+{
+  "id": 1,
+  "name": "Main",
+  "label": "main",
+  "attributes": {},
+  "restricted": false,
+  "order": 0,
+  "details": [
+    {
+      "id": 1,
+      "label": "about",
+      "name": "About",
+      "attribute": null,
+      "position": 1,
+      "parent_id": null,
+      "link": "/about",
+      "icon": "info"
+    },
+    {
+      "id": 2,
+      "label": "blog",
+      "name": "Blog",
+      "attribute": null,
+      "position": 2,
+      "parent_id": null,
+      "link": "/blog",
+      "icon": "info"
+    },
+    {
+      "id": 8,
+      "label": "NavLink",
+      "name": "NavLink",
+      "attribute": null,
+      "position": 3,
+      "parent_id": null,
+      "link": "/somewhere",
+      "icon": null
+    }
+  ]
+}

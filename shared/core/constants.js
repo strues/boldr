@@ -125,3 +125,10 @@ export const MSG_ADD_TAG_SUCCESS = {
 export const MSG_ADD_TAG_FAILURE = {
   message: 'There was a problem creating the tag', kind: 'error', dismissAfter: 3000,
 };
+export const MSG_DELETE_TAG_SUCCESS = {
+  message: 'Deleted tag', kind: 'success', dismissAfter: 3000,
+};
+
+export const MSG_DELETE_TAG_FAILURE = {
+  message: 'There was a problem removing your tag.', kind: 'error', dismissAfter: 3000,
+};
