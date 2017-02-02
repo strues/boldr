@@ -3,11 +3,8 @@ import { Field, reduxForm, formValueSelector } from 'redux-form';
 import { connect } from 'react-redux';
 import Button from 'react-md/lib/Buttons/Button';
 import Dropzone from 'react-dropzone';
-
-import TextField from '../../../../../components/Form/TextField';
-import { TextEditor } from '../../../../../components/TextEditor';
-import { Col, Row, Heading, FormGroup } from '../../../../../components/index';
-import { uploadPostImage } from '../../../../../state/modules/admin/attachments/actions';
+import { TextField, TextEditor, Col, Row, Heading, FormGroup } from '../../../../../../components';
+import { uploadPostImage } from '../../../../../../state/modules/admin/attachments/actions';
 
 type Props = {
   handleSubmit?: Function,

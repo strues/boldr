@@ -4,7 +4,6 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import type { Post, PostImage } from '../../../../types/models';
 import { createPost } from '../../../../state/modules/blog/posts';
-import { NewPostForm } from '../components';
 import NewPost from './NewPost';
 
 type Props = {
