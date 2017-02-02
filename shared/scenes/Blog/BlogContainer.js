@@ -7,14 +7,12 @@ import type { ReactChildren } from '../../types/react';
 
 const BlogContainer = (props: { children: ReactChildren }) => {
   return (
-    <div>
       <BaseTemplate
         helmetMeta={ <Helmet title="Blog" /> }
         footer={ <Footer /> }
       >
         { props.children }
       </BaseTemplate>
-    </div>
   );
 };
 

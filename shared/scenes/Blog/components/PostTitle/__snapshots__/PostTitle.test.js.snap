@@ -1,0 +1,4 @@
+exports[`<PostTitle /> renders snapshot 1`] = `
+<h1
+  className="boldr-post__title" />
+`;

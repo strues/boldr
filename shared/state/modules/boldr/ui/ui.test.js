@@ -13,6 +13,7 @@ describe('UI Reducer', () => {
         layout: 'grid',
         modal: false,
         drawer: false,
+        isMobile: false,
       });
   });
   it('should open the modal', () => {
@@ -21,12 +22,14 @@ describe('UI Reducer', () => {
       layout: 'grid',
       modal: false,
       drawer: false,
+      isMobile: false,
     };
     const stateAfter = {
       loaded: false,
       layout: 'grid',
       modal: true,
       drawer: false,
+      isMobile: false,
     };
     expect(
       uiReducer(initialState, {
@@ -40,12 +43,14 @@ describe('UI Reducer', () => {
       layout: 'grid',
       modal: true,
       drawer: false,
+      isMobile: false,
     };
     const stateAfter = {
       loaded: false,
       layout: 'grid',
       modal: false,
       drawer: false,
+      isMobile: false,
     };
     expect(
       uiReducer(initialState, {
@@ -63,6 +68,7 @@ describe('UI Reducer', () => {
       layout: 'grid',
       modal: false,
       drawer: false,
+      isMobile: false,
     };
 
     expect(
@@ -72,6 +78,7 @@ describe('UI Reducer', () => {
       layout: 'list',
       modal: false,
       drawer: false,
+      isMobile: false,
     });
   });
 });
@@ -86,6 +93,7 @@ test('changeLayout', () => {
       layout: 'grid',
       modal: false,
       drawer: false,
+      isMobile: false,
     },
   });
   store.dispatch(changeLayout('list'));
@@ -106,6 +114,7 @@ test('openModal', () => {
       layout: 'grid',
       modal: false,
       drawer: false,
+      isMobile: false,
     },
   });
   store.dispatch(showModal());
@@ -125,6 +134,7 @@ test('closeModal', () => {
       layout: 'grid',
       modal: true,
       drawer: false,
+      isMobile: false,
     },
   });
   store.dispatch(hideModal());

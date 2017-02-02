@@ -2,9 +2,11 @@
 import React from 'react';
 import Divider from 'react-md/lib/Dividers';
 import Paper from 'react-md/lib/Papers';
-
-import { Col, Heading } from '../../../../components/index';
+import styled from 'styled-components';
+import { Col, Heading, Icon } from '../../../../components/index';
 import PostImage from '../PostImage';
+import PostTitle from '../PostTitle';
+import PostDate from '../PostDate';
 
 type Props = {
   title: String,
@@ -17,22 +19,14 @@ const PostContent = (props: Props) => {
     };
   }
   return (
-    <Col xs={ 12 } md={ 8 } lg={ 9 }>
-      <Paper zDepth={ 1 }>
     <article>
-      { props.feature_image ?
-        <PostImage imageSrc={ props.feature_image } /> :
-        null
-      }
-      <div style={ { padding: '2em 1.5em' } }>
-       <Heading size={ 1 }>{ props.title }</Heading>
-
+      <Paper zDepth={ 2 } style={ { padding: '1em', marginBottom: '50px' } }>
+       <PostTitle title={ props.title } />
+       <PostDate created={ props.created_at } />
         <Divider />
-        <div className="content" style={ { lineHeight: '1.8em' } } dangerouslySetInnerHTML={ createMarkup() } />
-      </div>
+        <div className="boldr-post__content" dangerouslySetInnerHTML={ createMarkup() } />
+      </Paper>
     </article>
-  </Paper>
-  </Col>
   );
 };
 

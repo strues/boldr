@@ -50,6 +50,7 @@ const PostListing = (props: Props) => {
 
   return (
     <Grid>
+      <div style={ { paddingTop: '20px' } }>
       {
         props.layout === 'grid' ? gridView : listView
       }
@@ -62,6 +63,7 @@ const PostListing = (props: Props) => {
           <FontIcon>view_module</FontIcon>
         </Button>
       }
+    </div>
     </Grid>
   );
 };

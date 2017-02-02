@@ -83,13 +83,8 @@ export const PostCard = (props: Props) => {
             </Col>
           </Row>
         </CardText>
-        <Divider />
         <CardActions>
-          <Row>
-            <Col xs={ 12 }>
-              <TagBlock tags={ postTags } />
-            </Col>
-          </Row>
+        <TagBlock tags={ postTags } />
         </CardActions>
       </Card>
     </div>

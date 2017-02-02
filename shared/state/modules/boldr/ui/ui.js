@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   layout: LAYOUTS.GRID,
   modal: false,
   drawer: false,
+  isMobile: false,
 };
 
 function uiReducer(state = INITIAL_STATE, action) {
@@ -37,8 +38,14 @@ function uiReducer(state = INITIAL_STATE, action) {
         ...state,
         drawer: false,
       };
+    case t.SET_MOBILE_DEVICE:
+      return {
+        ...state,
+        isMobile: action.payload,
+      };
     default:
       return state;
   }
 }
+
 export default uiReducer;
