@@ -1,5 +1,4 @@
 import Knex from 'knex';
-import { Model } from 'objection';
 
 const db = Knex({
   client: 'pg',
@@ -10,9 +9,9 @@ const db = Knex({
   debug: process.env.DATABASE_DEBUG === 'true',
 });
 
-Model.knex(db);
 
-const disconnect = (db) => {
+
+function disconnect(db) {
   return new Promise((resolve, reject) => {
     db.destroy((err) => {
       if (err) {
@@ -22,7 +21,7 @@ const disconnect = (db) => {
       }
     });
   });
-};
+}
 
 export default db;
 

@@ -1,5 +1,6 @@
 engines:
   eslint:
+    channel: eslint-3
     enabled: true
 ratings:
    paths:
@@ -17,3 +18,5 @@ exclude_paths:
   - internal/**
   - shared/**/*.test.js
   - server/**/*.test.js
+  - .happypack/**
+  - release/**

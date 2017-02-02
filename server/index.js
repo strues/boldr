@@ -1,6 +1,8 @@
 
 import http from 'http';
 import { resolve as pathResolve } from 'path';
+import { Model } from 'objection';
+
 import getConfig from '../config/get';
 import db from './services/postgres';
 import logger from './services/logger';
@@ -15,7 +17,7 @@ require('dotenv').load({ silent: true });
 app.set('port', port);
 app.set('json spaces', 2);
 const server = http.createServer(app);
-
+Model.knex(db);
 process.on('SIGTERM', () => close(listener));
 process.on('SIGINT', () => close(listener));
 server.on('listening', onListening);
@@ -29,14 +31,14 @@ const listener = server.listen(getConfig('port'), getConfig('host'), () =>
 export default listener;
 
   /* istanbul ignore else */
-function close(listener) {
+function close(server) {
   return new Promise((resolve) => {
-    listener.close(() => {
+    server.close(() => {
       const msg = 'BoldrAPI shutting down...';
       logger.info(msg);
       resolve(msg);
-      if (listener) {
-        listener.close(process.exit.bind(process));
+      if (server) {
+        server.close(process.exit.bind(process));
       } else {
         process.exit();
       }

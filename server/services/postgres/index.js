@@ -1,3 +1,5 @@
-import knex from './postgres';
+import db, { disconnect } from './postgres';
 
-export default knex;
+export default db;
+
+export { disconnect };

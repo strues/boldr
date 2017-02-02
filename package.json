@@ -39,7 +39,7 @@
       }
     },
     "migrate": {
-      "command": "node --harmony internal/scripts/db.js migrate",
+      "command": "knex migrate:latest",
       "env": {
         "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr",
         "NODE_ENV": "development"
@@ -60,7 +60,7 @@
       }
     },
     "seed": {
-      "command": "node --harmony internal/scripts/db.js seed",
+      "command": "knex seed:run",
       "env": {
         "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr",
         "NODE_ENV": "development"
@@ -73,27 +73,15 @@
         "NODE_ENV": "test",
         "KNEX_TEST_TIMEOUT": 30000
       }
-    },
-    "migrate": {
-      "command": "knex migrate:latest",
-      "env": {
-        "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr",
-        "NODE_ENV": "development"
-      }
-    },
-    "seed": {
-      "command": "knex seed:run",
-      "env": {
-        "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr",
-        "NODE_ENV": "development"
-      }
     }
   },
   "scripts": {
     "analyze": "babel-node internal/scripts/analyze",
+    "apidoc": "apidoc -i server -o public/apidocs && apidoc-markdown -p public/apidocs -o docs/apidoc.md",
     "babel": "NODE_ENV=production babel --ignore node_modules",
     "build": "NODE_ENV=production babel-node internal/scripts/build",
     "clean": "babel-node internal/scripts/clean",
+    "coveralls": "cat ./coverage/lcov.info | coveralls",
     "dev": "better-npm-run dev",
     "flow": "babel-node internal/scripts/flow",
     "flow:defs": "flow-typed install --overwrite",
@@ -117,6 +105,7 @@
     "coveragePathIgnorePatterns": [
       "<rootDir>/(internal|config|docs|boldrCMS|.happypack|bin|.idea|public|db)/",
       "/flow-typed/",
+      "/__fixtures__/",
       "/node_modules/",
       "<rootDir>/shared/theme/",
       "<rootDir>/shared/types/"
@@ -158,7 +147,7 @@
     "connect-redis": "^3.2.0",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.1",
-    "date-fns": "^1.27.1",
+    "date-fns": "^1.27.2",
     "dotenv": "4.0.0",
     "draft-js": "^0.10.0",
     "draft-js-export-html": "^0.5.2",
@@ -215,6 +204,7 @@
     "winston": "^2.3.1"
   },
   "devDependencies": {
+    "apidoc-markdown": "^0.2.0",
     "assets-webpack-plugin": "3.5.1",
     "babel-cli": "6.22.2",
     "babel-core": "^6.22.1",
@@ -239,6 +229,7 @@
     "babel-preset-react": "^6.22.0",
     "babel-preset-stage-2": "^6.22.0",
     "chokidar": "1.6.1",
+    "coveralls": "^2.11.15",
     "css-loader": "0.26.1",
     "cz-conventional-changelog": "^1.2.0",
     "enzyme": "^2.7.1",
@@ -259,7 +250,7 @@
     "md5": "2.2.1",
     "nock": "^9.0.2",
     "node-notifier": "5.0.2",
-    "node-sass": "^4.4.0",
+    "node-sass": "^4.5.0",
     "postcss-css-variables": "^0.6.0",
     "postcss-cssnext": "^2.9.0",
     "postcss-custom-media": "^5.0.1",

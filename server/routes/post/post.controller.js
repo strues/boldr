@@ -6,6 +6,7 @@ import slugIt from '../../utils/slugIt';
 import { Tag, Activity, ActionType, Post, PostTag } from '../../models';
 
 const debug = require('debug')('boldr:post-controller');
+
 export async function listPosts(req, res, next) {
   try {
     const allPosts = await Post.query().eager('[tags,author]').skipUndefined();

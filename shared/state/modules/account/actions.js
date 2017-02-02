@@ -17,7 +17,7 @@ export function doSignup(data) {
     return api.doSignup(data)
       .then(response => {
         if (!response.status === 201) {
-          dispatch(signUpError('Oops! Something went wrong'));
+          dispatch(signUpError(response));
           dispatch(notificationSend(notif.MSG_SIGNUP_ERROR));
         }
         dispatch(signUpSuccess());
@@ -58,7 +58,7 @@ export function doLogin(data) {
     return api.doLogin(data)
       .then(response => {
         if (response.status !== 200) {
-          dispatch(loginError());
+          dispatch(loginError(response));
           dispatch(notificationSend(notif.MSG_LOGIN_ERROR('Unable to login')));
         }
         setToken(response.body.token);
@@ -69,7 +69,7 @@ export function doLogin(data) {
       .catch(err => {
         dispatch(loginError(err));
         dispatch(notificationSend({
-          message: err.response.body.message, kind: 'error', dismissAfter: 3000,
+          message: err.error.message, kind: 'error', dismissAfter: 3000,
         }));
       });
   };
@@ -89,7 +89,7 @@ function loginSuccess(response) {
 function loginError(err) {
   return {
     type: t.LOGIN_FAILURE,
-    error: err.response.body.message,
+    error: err.error.message,
   };
 }
 

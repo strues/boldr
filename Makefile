@@ -37,7 +37,7 @@ files:
 container:
 	cd release; docker build -t strues/boldrcms .
 
-release: compile directories files
+release: compile directories files container
 
 setup-db:
 	make migrate-ci

@@ -5,7 +5,7 @@ function request() {
   return supertest(app);
 }
 
-it('GET /activities', async () => {
+test('GET /activities', async () => {
   const { status } = await request()
       .get('/api/v1/activities');
 

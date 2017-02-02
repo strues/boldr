@@ -4,7 +4,6 @@ import { getToken } from '../services/token';
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 
 function formatUrl(path) {
-  console.log('REQUEST PATH', path);
   const adjustedPath = path[0] !== '/' ? `/${path}` : path;
   if (process.env.NODE_ENV !== 'test') {
     if (__SERVER__) {
@@ -13,7 +12,6 @@ function formatUrl(path) {
       return `http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/api/v1${adjustedPath}`;
     }
   }
-  console.log('----CLIENT REQUEST----');
   // Prepend `/api` to relative URL, to proxy to API server.
   return `/api/v1${adjustedPath}`;
 }

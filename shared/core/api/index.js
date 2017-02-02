@@ -135,14 +135,14 @@ export const doUpload = (payload) => {
 
   return apiClient.post('/attachments/dashboard', { data });
 };
-export const updateFileProperties = (payload) => {
+export const updateFileProperties = (attachmentData) => {
   const data = {
-    file_name: payload.file_name,
-    id: payload.id,
-    file_description: payload.file_description,
+    file_name: attachmentData.file_name,
+    id: attachmentData.id,
+    file_description: attachmentData.file_description,
   };
 
-  return apiClient.put(`/attachments/${payload.id}`, { data });
+  return apiClient.put(`/attachments/${attachmentData.id}`, { data });
 };
 
 export const delAttachment = (id) =>
@@ -186,6 +186,17 @@ export const doFetchTags = (name) =>
 
 export const getAllTags = () =>
   apiClient.get('/tags');
+
+export const doAddTag = (values) => {
+  const payload = {
+    name: values.name,
+    description: values.description,
+  };
+  return apiClient.post('/tags', { data: payload });
+};
+
+export const doDeleteTag = (id) =>
+  apiClient.del(`/tags/${id}`);
 /**
   * MEMBERS API ROUTES
   * -------------------------

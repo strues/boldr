@@ -7,12 +7,27 @@ node_js:
 
 services:
   - docker
+
+branches:
+  only:
+  - master
+  - develop
+
 env:
+  CXX: g++-4.8
   DOCKER_COMPOSE_VERSION: 1.10.0
   POSTGRES_CONN_URI: postgres://postgres:password@127.0.0.1:5432/boldr
   REDIS_CONN_URI: redis://127.0.0.1:6379/1
   NODE_ENV: test
   TOKEN_SECRET: bbbbaaaasss
+git:
+  depth: 3
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - g++-4.8
 
 before_install:
   - sudo /etc/init.d/postgresql stop
@@ -37,6 +52,9 @@ before_script:
 
 script:
   - yarn run test:ci
+
+after_success:
+  - yarn run coveralls
 
 cache:
   yarn: true

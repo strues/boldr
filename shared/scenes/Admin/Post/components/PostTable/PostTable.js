@@ -21,6 +21,7 @@ type Props = {
   posts: Array<Post>,
   id: String,
   feature_image: String,
+  postId: String,
   title: String,
   onRowToggle: Function,
   handleArticlePublishClick: Function,
@@ -35,7 +36,7 @@ type Props = {
 
 const PostTable = (props: Props) => {
   function handlePublishClick() {
-    const postId:String = props.id;
+    const postId = props.id;
     const postStatus = 'draft';
     props.handleArticlePublishClick(postId, postStatus);
   }
@@ -49,8 +50,8 @@ const PostTable = (props: Props) => {
     props.dispatch(selectPost(post));
   }
   function handleClickDelete(post) {
-    const postId: String = post.id;
-    console.log(postId)
+    const postId = post.id;
+
     props.handleDeleteClick(postId);
   }
   const formattedDate = format(props.created_at, 'MM/DD/YYYY');

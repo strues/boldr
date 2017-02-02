@@ -31,9 +31,15 @@ async function getTaggedPostsByName(req, res) {
   return responseHandler(res, 200, tags);
 }
 
-async function createTag(req, res, next) {
+async function createTag(req, res) {
   try {
     const newTag = await Tag.query().insert(req.body);
+    await Activity.query().insert({
+      id: uuid(),
+      user_id: req.user.id,
+      action_type_id: 1,
+      activity_tag: newTag.id,
+    });
     return responseHandler(res, 201, newTag);
   } catch (err) {
     return res.status(500).json(err);

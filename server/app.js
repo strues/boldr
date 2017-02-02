@@ -5,11 +5,8 @@ import type { $Request, $Response, NextFunction } from 'express';
 import appRootDir from 'app-root-dir';
 import getConfig from '../config/get';
 import logger from './services/logger';
-
-import { NotFound } from './core/errors';
-import expressMiddleware from './middleware/express';
-import authMiddleware from './middleware/auth';
-import rbac from './middleware/rbac';
+import { NotFound, BadRequest } from './core/errors';
+import { expressMiddleware, authMiddleware, rbac, errorHandler } from './middleware';
 import routes from './routes/index';
 import boldrSSR from './middleware/boldrSSR';
 import clientBundle from './middleware/clientBundle';
@@ -25,6 +22,7 @@ app.use(rbac());
 // attaches to router
 app.use('/api/v1', routes);
 
+
 app.use(getConfig('bundles.client.webPath'), clientBundle);
 
 // Configure static serving of our "public" root http path static files.
@@ -33,16 +31,18 @@ app.use(express.static(pathResolve(appRootDir.get(), getConfig('publicAssetsPath
 
 // The React application middleware.
 app.get('*', boldrSSR);
-
+app.use('/apidocs', express.static(pathResolve(appRootDir.get(), './public/apidocs')));
 // catch 404 and forward response to errorhandler
 /* istanbul ignore next */
 app.use((req: $Request, res: $Response, next: NextFunction) => {
-  const err: Error = new NotFound();
+  const err: Error = new BadRequest('Invalid route');
   return next(err);
 });
 
 process.on('unhandledRejection', (reason, p) => {
   logger.error('Possibly Unhandled Rejection at: Promise ', p, ' reason: ', reason);
 });
+
+app.use(errorHandler);
 
 export default app;

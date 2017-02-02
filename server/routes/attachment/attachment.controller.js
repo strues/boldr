@@ -10,7 +10,7 @@ import getConfig from '../../../config/get';
 import Activity from '../../models/activity';
 import Attachment from '../../models/attachment';
 
-const debug = Debug('boldrAPI:attachment-controller');
+const debug = Debug('boldr:attachment-ctrl');
 const gm = require('gm').subClass({ imageMagick: true });
 
 const regex = new RegExp('^.*.((j|J)(p|P)(e|E)?(g|G)|(g|G)(i|I)(f|F)|(p|P)(n|N)(g|G))$');
@@ -54,11 +54,22 @@ export async function getAttachment(req, res) {
  * @param  {Object}        res  the response object
  * @return {Object}             returns the response
  */
-export function updateAttachment(req, res) {
-  debug(req.body);
-  return Attachment.query()
-    .patchAndFetchById(req.params.id, req.body)
-    .then(attachment => responseHandler(res, 202, attachment));
+export async function updateAttachment(req, res) {
+  try {
+    const updatedAttachment = await Attachment
+    .query()
+    .patchAndFetchById(req.params.id, req.body);
+
+    await Activity.query().insert({
+      user_id: req.user.id,
+      action_type_id: 2,
+      activity_attachment: req.params.id,
+    });
+
+    return responseHandler(res, 202, updatedAttachment);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 }
 
 /**
@@ -93,13 +104,13 @@ export async function deleteAttachment(req, res, next) {
 
 /**
  * Upload an attachment
- * @method uploadImage
+ * @method uploadAttachment
  * @param  {Object}        req  the request object
  * @param  {Object}        res  the response object
  * @param  {Function}       next move to the next middleware
  * @return {Promise}       the newly created attachment
  */
-export async function uploadImage(req, res, next) {
+export async function uploadAttachment(req, res, next) {
   let fstream;
   const busboy = new Busboy({ headers: req.headers });
 

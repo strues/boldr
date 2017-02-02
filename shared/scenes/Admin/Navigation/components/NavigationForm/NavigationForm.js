@@ -3,7 +3,7 @@ import { Field, reduxForm } from 'redux-form';
 import Button from 'react-md/lib/Buttons';
 import TextField from '../../../../../components/Form/TextField';
 
-export type Props = {
+type Props = {
   handleSubmit?: Function,
   reset?: Function,
   submitting?: boolean,

@@ -18,7 +18,6 @@ type Props = {
   actions: Object,
   ui: Object,
   menu: Object,
-  // settings: Object,
   logo: Object,
   auth: Object,
 };
@@ -68,7 +67,6 @@ class HeaderWrapper extends Component {
       <PrimaryHeader
         auth={ this.props.auth }
         logo={ this.props.logo }
-
         menu={ this.props.menu }
         handleLogoClick= { this.handleLogoClick }
         handleLogoutClick={ this.handleLogoutClick }
