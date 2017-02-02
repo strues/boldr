@@ -92,7 +92,7 @@
     "migration": "better-npm-run migration",
     "seed": "better-npm-run seed",
     "start": "NODE_ENV=production node bin/boldr",
-    "test:ci": "NODE_ENV=test CI=true jest -w 2 --coverage",
+    "test:ci": "NODE_ENV=test CI=true jest --runInBand --coverage",
     "test": "better-npm-run test",
     "test:watch": "NODE_ENV=test jest --watch"
   },
