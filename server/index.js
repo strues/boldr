@@ -1,4 +1,3 @@
-
 import http from 'http';
 import { resolve as pathResolve } from 'path';
 import { Model } from 'objection';
@@ -6,7 +5,11 @@ import { Model } from 'objection';
 import getConfig from '../config/get';
 import db from './services/postgres';
 import logger from './services/logger';
+
+
 import app from './app';
+
+global.Promise = require('bluebird');
 
 const debug = require('debug')('boldr:engine');
 
@@ -18,6 +21,7 @@ app.set('port', port);
 app.set('json spaces', 2);
 const server = http.createServer(app);
 Model.knex(db);
+
 process.on('SIGTERM', () => close(listener));
 process.on('SIGINT', () => close(listener));
 server.on('listening', onListening);

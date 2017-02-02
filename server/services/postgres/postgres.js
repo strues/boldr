@@ -9,8 +9,6 @@ const db = Knex({
   debug: process.env.DATABASE_DEBUG === 'true',
 });
 
-
-
 function disconnect(db) {
   return new Promise((resolve, reject) => {
     db.destroy((err) => {

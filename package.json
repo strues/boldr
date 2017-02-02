@@ -92,7 +92,7 @@
     "migration": "better-npm-run migration",
     "seed": "better-npm-run seed",
     "start": "NODE_ENV=production node bin/boldr",
-    "test:ci": "NODE_ENV=test CI=true jest --runInBand --coverage",
+    "test:ci": "NODE_ENV=test CI=true jest -w2 --coverage",
     "test": "better-npm-run test",
     "test:watch": "NODE_ENV=test jest --watch"
   },
@@ -141,6 +141,7 @@
     "bluebird": "^3.4.7",
     "body-parser": "^1.16.0",
     "busboy": "^0.2.14",
+    "chalk": "^1.1.3",
     "classnames": "^2.2.5",
     "colors": "1.1.2",
     "connect-busboy": "^0.0.2",
