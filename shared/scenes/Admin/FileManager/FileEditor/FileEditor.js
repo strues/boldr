@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Paper from 'react-md/lib/Papers';
 import { Grid, Row, Col, Image } from '../../../../components/index';
+import { updateAttachment } from '../../../../state/modules/admin/attachments/actions';
 import FileEditorForm from '../components/FileEditorForm';
 
 type Props = {
@@ -10,7 +11,20 @@ type Props = {
   updateAttachment: Function,
 };
 export class FileEditor extends Component {
+  constructor() {
+    super();
+    (this: any).handleSubmit = this.handleSubmit.bind(this);
+  }
   props: Props;
+
+  handleSubmit(values: Object) {
+    const attachmentData = {
+      id: this.props.currentFile.id,
+      file_name: values.file_name,
+      file_description: values.file_description,
+    };
+    this.props.updateAttachment(attachmentData);
+  }
   render() {
     return (
       <div>
@@ -20,7 +34,7 @@ export class FileEditor extends Component {
           </Col>
           <Col xs={ 12 } md={ 7 }>
             <Paper zDepth={ 2 }>
-              <FileEditorForm />
+              <FileEditorForm onSubmit={ this.handleSubmit } />
             </Paper>
           </Col>
         </Row>
@@ -35,4 +49,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(FileEditor);
+export default connect(mapStateToProps, { updateAttachment })(FileEditor);

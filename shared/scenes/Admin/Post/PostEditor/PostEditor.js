@@ -23,7 +23,7 @@ class PostEditor extends Component {
   handleSubmit(values) {
     const postData = {
       title: values.title,
-      status: values.status,
+      published: values.published,
       content: values.content,
       excerpt: values.excerpt,
       id: this.props.currentPost.id || '',

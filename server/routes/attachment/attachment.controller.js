@@ -54,11 +54,22 @@ export async function getAttachment(req, res) {
  * @param  {Object}        res  the response object
  * @return {Object}             returns the response
  */
-export function updateAttachment(req, res) {
-  debug(req.body);
-  return Attachment.query()
-    .patchAndFetchById(req.params.id, req.body)
-    .then(attachment => responseHandler(res, 202, attachment));
+export async function updateAttachment(req, res) {
+  try {
+    const updatedAttachment = await Attachment
+    .query()
+    .patchAndFetchById(req.params.id, req.body);
+
+    await Activity.query().insert({
+      user_id: req.user.id,
+      action_type_id: 2,
+      activity_attachment: req.params.id,
+    });
+
+    return responseHandler(res, 202, updatedAttachment);
+  } catch (error) {
+    return res.status(500).json(error);
+  }
 }
 
 /**

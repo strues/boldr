@@ -4,9 +4,11 @@ import Avatar from 'react-md/lib/Avatars';
 import Chip from 'react-md/lib/Chips';
 import Button from 'react-md/lib/Buttons';
 import FontIcon from 'react-md/lib/FontIcons';
+import Link from 'react-router/lib/Link';
 import styled from 'styled-components';
 
 import { format } from 'date-fns';
+import type { Post } from '../../../../../types/models';
 import { Icon, Row, Col } from '../../../../../components/index';
 import ActivityItemDetail from '../ActivityItemDetail';
 
@@ -39,6 +41,8 @@ type Props = {
   activity_user: ?String,
   activity_attachment: ?String,
   activity_menu_detail: ?String,
+  post: ?Post,
+  attachment: ?Object,
 };
 
 const ActivityItem = (props: Props) => {
@@ -49,13 +53,22 @@ const ActivityItem = (props: Props) => {
 
   let ActivityIcon;
   if (isPostType) {
-    ActivityIcon = <Icon kind="new-post" color="#02BCD6" />;
+    ActivityIcon = (
+      // $FlowIssue
+      <Link to={ `/admin/posts/editor/${props.post.slug}` }>
+        <Icon kind="new-post" color="#02BCD6" />
+      </Link>);
   }
   if (isMemberType) {
     ActivityIcon = <FontIcon style={ { color: '#02BCD6' } }>person_add</FontIcon>;
   }
   if (isAttachmentType) {
-    ActivityIcon = <FontIcon style={ { color: '#02BCD6' } }>insert_drive_file</FontIcon>;
+    ActivityIcon = (
+      // $FlowIssue
+      <Link to={ `/admin/filemanager/${props.attachment.id}/editor` }>
+        <FontIcon style={ { color: '#02BCD6' } }>insert_drive_file</FontIcon>
+      </Link>
+    );
   }
   if (isMenuDetailType) {
     ActivityIcon = <FontIcon style={ { color: '#02BCD6' } }>insert_link</FontIcon>;
@@ -73,7 +86,7 @@ const ActivityItem = (props: Props) => {
         </User>
         <ActivityItemDetail atype={ props.action_type_id } />
         <ActivityIcn>
-          { ActivityIcon }
+        { ActivityIcon }
         </ActivityIcn>
       </ActivityPanel>
   );
