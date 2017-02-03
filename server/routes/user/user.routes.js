@@ -3,7 +3,7 @@ import { isAuthenticated } from '../../services/authentication';
 import { checkRole } from '../../middleware/rbac';
 import * as ctrl from './user.controller';
 
-const router = new express.Router();
+const router = express.Router();
 /**
  * @api {get} /users Retrieve all users
  * @apiName listUsers

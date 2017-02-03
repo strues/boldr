@@ -1,7 +1,5 @@
-/* @flow */
 import { resolve as pathResolve } from 'path';
 import express from 'express';
-import type { $Request, $Response, NextFunction } from 'express';
 import appRootDir from 'app-root-dir';
 import getConfig from '../config/get';
 import logger from './services/logger';
@@ -22,7 +20,6 @@ app.use(rbac());
 // attaches to router
 app.use('/api/v1', routes);
 
-
 app.use(getConfig('bundles.client.webPath'), clientBundle);
 
 // Configure static serving of our "public" root http path static files.
@@ -34,8 +31,8 @@ app.get('*', boldrSSR);
 app.use('/apidocs', express.static(pathResolve(appRootDir.get(), './public/apidocs')));
 // catch 404 and forward response to errorhandler
 /* istanbul ignore next */
-app.use((req: $Request, res: $Response, next: NextFunction) => {
-  const err: Error = new BadRequest('Invalid route');
+app.use((req, res, next) => {
+  const err = new BadRequest('Invalid route');
   return next(err);
 });
 

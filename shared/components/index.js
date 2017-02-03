@@ -10,15 +10,17 @@ import Image from './Image';
 import Icon from './Icon';
 import Loader from './Loader';
 import Paragraph from './Paragraph';
-import Box from './Box';
 import Flag from './Flag';
 import Hamburger from './Hamburger';
 import KeyVisual from './KeyVisual';
 import FormCard from './Form/FormCard';
 import FormGroup from './Form/FormGroup';
+import TextField from './Form/TextField';
+import TextEditor from './TextEditor';
 
 export {
   PrimaryHeader,
+  TextField,
   Heading,
   Footer,
   Grid,
@@ -33,9 +35,9 @@ export {
   Widget,
   Loader,
   Paragraph,
-  Box,
   Flag,
   Hamburger,
   KeyVisual,
   FormGroup,
+  TextEditor,
 };

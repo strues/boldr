@@ -1,36 +1,24 @@
 exports[`<PostContent /> renders snapshot 1`] = `
-<Col
-  componentClass="div"
-  lg={9}
-  md={8}
-  xs={12}>
+<article>
   <Paper
     component="div"
-    zDepth={1}>
-    <article>
-      <div
-        style={
-          Object {
-            "padding": "2em 1.5em",
-          }
-        }>
-        <Heading
-          size={1} />
-        <Divider />
-        <div
-          className="content"
-          dangerouslySetInnerHTML={
-            Object {
-              "__html": undefined,
-            }
-          }
-          style={
-            Object {
-              "lineHeight": "1.8em",
-            }
-          } />
-      </div>
-    </article>
+    style={
+      Object {
+        "marginBottom": "50px",
+        "padding": "1em",
+      }
+    }
+    zDepth={2}>
+    <PostTitle />
+    <PostDate />
+    <Divider />
+    <div
+      className="boldr-post__content"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": undefined,
+        }
+      } />
   </Paper>
-</Col>
+</article>
 `;

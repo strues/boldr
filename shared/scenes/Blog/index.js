@@ -7,17 +7,9 @@ export default (store, connect) => {
     component: BlogContainer,
     indexRoute: {
       getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          // System.import('./reducer'),
-          import('./PostListing'),
-        ]);
-        const renderRoute = loadRoute(cb);
-        importModules.then(([component]) => {
-          // injectReducer('blog', reducer.default);
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
+        import('./PostListing/PostListingContainer')
+        .then(loadRoute(cb))
+        .catch(errorLoading);
       },
     },
     childRoutes: [{

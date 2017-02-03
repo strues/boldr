@@ -1,8 +1,7 @@
 /* @flow */
 import React from 'react';
-
-import { NewPostForm } from '../components';
 import type { Post } from '../../../../types/models';
+import NewPostForm from './components/NewPostForm';
 
 type Props = {
   onFormSubmit: Function,

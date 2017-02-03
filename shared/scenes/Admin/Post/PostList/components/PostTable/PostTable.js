@@ -14,8 +14,8 @@ import TableBody from 'react-md/lib/DataTables/TableBody';
 import TableRow from 'react-md/lib/DataTables/TableRow';
 import TableColumn from 'react-md/lib/DataTables/TableColumn';
 import SelectFieldColumn from 'react-md/lib/DataTables/SelectFieldColumn';
-import type { Post } from '../../../../../types/models';
-import { selectPost } from '../../../../../state/modules/blog/posts/actions';
+import type { Post } from '../../../../../../types/models';
+import { selectPost } from '../../../../../../state/modules/blog/posts/actions';
 
 type Props = {
   posts: Array<Post>,

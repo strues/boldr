@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { updatePost } from '../../../../state/modules/blog/posts';
-import { EditPostForm } from '../components';
+import EditPostForm from './components/EditPostForm';
 
 type Props = {
   dispatch: Function,

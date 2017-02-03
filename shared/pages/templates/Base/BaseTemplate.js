@@ -25,7 +25,7 @@ const Wrapper = styled.div`
 const ContentWrapper = styled.section`
   width: 100%;
   box-sizing: border-box;
-  margin: 1rem auto;
+  margin: 0 auto;
 `;
 
 const FooterWrapper = styled.footer`
@@ -53,3 +53,5 @@ const BaseTemplate = (props: Props) => {
 };
 
 export default TemplateProvider(BaseTemplate);
+
+export { Wrapper, FooterWrapper };

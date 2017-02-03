@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { provideHooks } from 'redial';
 import { Loader } from '../../../../components';
 import { updatePost, fetchPostFromSlug } from '../../../../state/modules/blog/posts';
-import { EditPostForm } from '../components';
+import EditPostForm from './components/EditPostForm';
 import PostEditor from './PostEditor';
 
 

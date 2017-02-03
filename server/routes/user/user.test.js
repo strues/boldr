@@ -1,23 +1,20 @@
-import supertest from 'supertest';
+import request from 'supertest';
 import app from '../../app';
 
-function request() {
-  return supertest(app);
-}
-
-it('GET /users -- List', async () => {
-  const { status, body } = await request()
-    .get('/api/v1/users')
-    .set('Accept', 'application/json');
-
-  expect(status).toBe(200);
-  expect(Array.isArray(body)).toBe(true);
+test('GET /users -- List', () => {
+  return request(app)
+      .get('/api/v1/users')
+      .expect((res) => {
+        expect(res.status).toBe(200);
+        expect(Array.isArray(res.body)).toBe(true);
+      });
 });
 
-it('GET /users/:id -- ID', async () => {
-  const { status, body } = await request()
-    .get('/api/v1/users/1b062e26-df71-48ce-b363-4ae9b966e7a0')
-    .set('Accept', 'application/json');
-  expect(status).toBe(200);
-  expect(typeof body).toBe('object');
+test('GET /users/:id -- ID', async () => {
+  return request(app)
+      .get('/api/v1/users/1b062e26-df71-48ce-b363-4ae9b966e7a0')
+      .expect((res) => {
+        expect(res.status).toBe(200);
+        expect(typeof res.body).toBe('object');
+      });
 });

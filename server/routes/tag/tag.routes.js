@@ -2,7 +2,7 @@ import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
 import * as ctrl from './tag.controller';
 
-const router = new express.Router();
+const router = express.Router();
 /**
  * @api {get} /tags Retrieve all tags
  * @apiName Index

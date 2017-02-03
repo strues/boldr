@@ -56,17 +56,9 @@ exports[`<PostCard /> renders snapshot 1`] = `
         </Col>
       </Row>
     </CardText>
-    <Divider />
     <CardActions>
-      <Row
-        componentClass="div">
-        <Col
-          componentClass="div"
-          xs={12}>
-          <TagBlock
-            tags={null} />
-        </Col>
-      </Row>
+      <TagBlock
+        tags={null} />
     </CardActions>
   </Card>
 </div>
