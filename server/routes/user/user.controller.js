@@ -1,4 +1,3 @@
-/* @flow */
 import type { $Response, $Request, NextFunction } from 'express';
 import uuid from 'uuid';
 import * as objection from 'objection';
@@ -17,9 +16,9 @@ import {
 } from '../../core';
 import User from '../../models/user';
 
-const debug = require('debug')('boldrAPI:user-controller');
+const debug = require('debug')('boldr:user-ctrl');
 
-export async function listUsers(req: $Request, res: $Response, next: NextFunction) {
+export async function listUsers(req, res, next) {
   try {
     const users = await User.query().eager('[roles]').omit(['password']);
     debug(users);
@@ -34,7 +33,7 @@ export async function listUsers(req: $Request, res: $Response, next: NextFunctio
   }
 }
 
-export async function getUser(req: $Request, res: $Response, next: NextFunction) {
+export async function getUser(req, res, next) {
   try {
     const user = await User.query()
     .findById(req.params.id)
@@ -48,7 +47,7 @@ export async function getUser(req: $Request, res: $Response, next: NextFunction)
   }
 }
 
-export function updateUser(req: $Request, res: $Response, next: NextFunction) {
+export function updateUser(req, res, next) {
   if ('password' in req.body) {
     req.assert('password', 'Password must be at least 4 characters long').len(4);
   }
@@ -63,7 +62,7 @@ export function updateUser(req: $Request, res: $Response, next: NextFunction) {
     .then(user => res.status(202).json(user));
 }
 
-export async function adminUpdateUser(req: $Request, res: $Response, next: NextFunction) {
+export async function adminUpdateUser(req, res, next) {
   try {
     if (req.body.role) {
       const u = await User.query().findById(req.params.id).eager('roles');
@@ -92,7 +91,7 @@ export async function adminUpdateUser(req: $Request, res: $Response, next: NextF
   }
 }
 
-export async function destroyUser(req: $Request, res: $Response, next: NextFunction) {
+export async function destroyUser(req, res, next) {
   try {
     await User
       .query()
@@ -108,49 +107,53 @@ export async function destroyUser(req: $Request, res: $Response, next: NextFunct
   }
 }
 
-export async function adminCreateUser(req: $Request, res: $Response, next: NextFunction) {
-   // the data for the user being created.
-  const payload = {
-    id: uuid(),
-       // no need to hash here, its taken care of on the model instance
-    email: req.body.email,
-    password: req.body.password,
-    first_name: req.body.first_name,
-    last_name: req.body.last_name,
-    username: req.body.username,
-    avatar_url: req.body.avatar_url,
-  };
-  const checkExisting = await User.query().where('email', req.body.email);
+export async function adminCreateUser(req, res, next) {
+  try {
+    // the data for the user being created.
+    const payload = {
+      id: uuid(),
+        // no need to hash here, its taken care of on the model instance
+      email: req.body.email,
+      password: req.body.password,
+      first_name: req.body.first_name,
+      last_name: req.body.last_name,
+      username: req.body.username,
+      avatar_url: req.body.avatar_url,
+    };
+    const checkExisting = await User.query().where('email', req.body.email);
 
-  if (checkExisting.length) {
-    return next(new Conflict());
+    if (checkExisting.length) {
+      return next(new Conflict());
+    }
+    const newUser = await objection.transaction(User, async (User) => {
+      const user = await User.query().insert(payload);
+      await user.$relatedQuery('roles').relate({ id: 1 });
+
+      if (!user) {
+        return next(new NotFound());
+      }
+      // generate user verification token to send in the email.
+      const verificationToken = await generateHash();
+      // get the mail template
+      const mailBody = await welcomeEmail(verificationToken);
+      // subject
+      const mailSubject = 'Boldr User Verification';
+      // send the welcome email
+      mailer(user, mailBody, mailSubject);
+      // create a relationship between the user and the token
+      const verificationEmail = await user.$relatedQuery('tokens')
+        .insert({
+          user_verification_token: verificationToken,
+          user_id: user.id,
+        });
+
+      if (!verificationEmail) {
+        return next(new InternalServer());
+      }
+    });
+    // Massive transaction is finished, send the data to the user.
+    return responseHandler(res, 201, newUser);
+  } catch (error) {
+    return res.status(500).json(error);
   }
-  const newUser = await objection.transaction(User, async (User) => {
-    const user = await User.query().insert(payload);
-    await user.$relatedQuery('roles').relate({ id: 1 });
-
-    if (!user) {
-      return next(new NotFound());
-    }
-     // generate user verification token to send in the email.
-    const verificationToken = await generateHash();
-     // get the mail template
-    const mailBody = await welcomeEmail(verificationToken);
-     // subject
-    const mailSubject = 'Boldr User Verification';
-     // send the welcome email
-    mailer(user, mailBody, mailSubject);
-     // create a relationship between the user and the token
-    const verificationEmail = await user.$relatedQuery('tokens')
-       .insert({
-         user_verification_token: verificationToken,
-         user_id: user.id,
-       });
-
-    if (!verificationEmail) {
-      return next(new InternalServer());
-    }
-  });
-   // Massive transaction is finished, send the data to the user.
-  return responseHandler(res, 201, newUser);
 }

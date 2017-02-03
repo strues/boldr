@@ -1,0 +1,11 @@
+exports[`<PostDate /> renders snapshot 1`] = `
+<div
+  className="boldr-post__date">
+  <Icon
+    color="#222"
+    kind="calendar"
+    size={24} />
+   
+  01/26/2017
+</div>
+`;

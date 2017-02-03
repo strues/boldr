@@ -5,7 +5,7 @@ const debug = require('debug')('boldr:post-controller');
 
 async function listTags(req, res, next) {
   try {
-    const allTags = await Tag.query().eager('[posts]').skipUndefined();
+    const allTags = await Tag.query().eager('[posts]');
     return responseHandler(res, 200, allTags);
   } catch (err) {
     return res.status(404).json(err);
@@ -13,22 +13,30 @@ async function listTags(req, res, next) {
 }
 
 async function getTaggedPosts(req, res) {
-  const tags = await Tag
-    .query()
-    .findById(req.params.id)
-    .eager('[posts]')
-    .first();
-  return responseHandler(res, 200, tags);
+  try {
+    const tags = await Tag
+      .query()
+      .findById(req.params.id)
+      .eager('[posts]')
+      .first();
+    return responseHandler(res, 200, tags);
+  } catch (error) {
+    return res.status(500).json(err);
+  }
 }
 
 async function getTaggedPostsByName(req, res) {
-  const tags = await Tag
-    .query()
-    .where({ name: req.params.name })
-    .eager('[posts]')
-    .first();
-  debug(tags);
-  return responseHandler(res, 200, tags);
+  try {
+    const tags = await Tag
+      .query()
+      .where({ name: req.params.name })
+      .eager('[posts]')
+      .first();
+    debug(tags);
+    return responseHandler(res, 200, tags);
+  } catch (error) {
+    return res.status(500).json(err);
+  }
 }
 
 async function createTag(req, res) {
