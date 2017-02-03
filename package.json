@@ -107,7 +107,6 @@
       "/flow-typed/",
       "/__fixtures__/",
       "/node_modules/",
-      "<rootDir>/(shared|server)/**/index.js",
       "<rootDir>/shared/theme/",
       "<rootDir>/shared/types/"
     ],
