@@ -109,7 +109,7 @@
     "migration": "better-npm-run migration",
     "seed": "better-npm-run seed",
     "start": "NODE_ENV=production node bin/boldr",
-    "test:ci": "NODE_ENV=test jest --config=internal/jest/jest.node.json -w2 && cp ./coverage/coverage-final.json ./coverage/coverage-node-final.json && jest --config=internal/jest/jest.browser.json -w2 && cp ./coverage/coverage-final.json ./coverage/coverage-browser-final.json && node ./internal/scripts/mapCoverage.js",
+    "test:ci": "NODE_ENV=test jest -i --config=internal/jest/jest.node.json -w2 && cp ./coverage/coverage-final.json ./coverage/coverage-node-final.json && jest -i --config=internal/jest/jest.browser.json -w2 && cp ./coverage/coverage-final.json ./coverage/coverage-browser-final.json && node ./internal/scripts/mapCoverage.js",
     "test": "better-npm-run test",
     "test:node": "better-npm-run test:node",
     "test:browser": "better-npm-run test:browser"
