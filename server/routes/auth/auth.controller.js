@@ -32,6 +32,13 @@ export async function registerUser(req, res, next) {
     req.sanitize('email').normalizeEmail({ remove_dots: false });
     req.sanitize('first_name').trim();
     req.sanitize('last_name').trim();
+
+    const checkExisting = await User.query().where('email', req.body.email);
+
+    if (checkExisting.length) {
+      return res.status(409).json('An account matching this email already exists.');
+    }
+
     const errors = req.validationErrors();
     if (errors) {
       return res.status(400).json(errors);
@@ -48,11 +55,7 @@ export async function registerUser(req, res, next) {
       username: req.body.username,
       avatar_url: req.body.avatar_url,
     };
-    const checkExisting = await User.query().where('email', req.body.email);
 
-    if (checkExisting.length) {
-      return res.status(400).json('An account matching this email already exists.');
-    }
     const newUser = await objection.transaction(User, async User => {
       const user = await User.query().insert(payload);
       await user.$relatedQuery('roles').relate({ id: 1 });

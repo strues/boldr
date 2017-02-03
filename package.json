@@ -84,7 +84,7 @@
       }
     },
     "test:node": {
-      "command": "jest --config=internal/jest/jest.node.json && cp ./coverage/coverage-final.json ./coverage/coverage-node-final.json",
+      "command": "jest -w2 --config=internal/jest/jest.node.json && cp ./coverage/coverage-final.json ./coverage/coverage-node-final.json",
       "env": {
         "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr_test",
         "NODE_ENV": "test",

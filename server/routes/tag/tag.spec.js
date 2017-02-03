@@ -126,21 +126,4 @@ describe('Tags API Endpoint', () => {
         expect(res.status).toBe(204);
       });
   });
-  test('it should relate', async () => {
-    const { body } = await request(app)
-      .post('/api/v1/tags')
-      .set('Authorization', `Bearer ${token}`)
-      .send({
-        name: 'relateme',
-        description: 'a tag for a test.',
-      });
-    const tagId = body.id;
-    const postid = 'cb61bbae-c91e-4014-b665-3485734b88fb';
-    return request(app)
-    .get(`/api/v1/tags/${tagId}/relate/${postid}`)
-    .set('Authorization', `Bearer ${token}`)
-    .expect((res) => {
-      expect(res.status).toBe(200);
-    });
-  });
 });

@@ -1,121 +1,126 @@
-import supertest from 'supertest';
+import request from 'supertest';
 import faker from 'faker';
 import app from '../../app';
 
-function request() {
-  return supertest(app);
-}
-
-const loginData = {
-  email: 'admin@boldr.io',
-  password: 'password',
-};
-
-const badLoginData = {
-  email: 'admin@boldr.io',
-  password: 'fa',
-};
-
-
-describe('---- Auth API', async () => {
-  it('POST /login - Fail without a password', async () => {
-    const { status } = await request()
-      .post('/api/v1/auth/login')
-      .send({ email: 'admin@boldr.io', password: '' });
-
-    expect(status).toBe(400);
-  });
-  it('POST /login - Incorrect password fails', async () => {
-    const { status } = await request()
-      .post('/api/v1/auth/login')
-      .send(badLoginData);
-
-    expect(status).toBe(401);
-  });
-  it('POST /login', async () => {
-    const { status, body } = await request()
-      .post('/api/v1/auth/login')
-      .set('Accept', 'application/json')
-      .send(loginData);
-
-    expect(status).toBe(200);
-    expect(typeof body.token).toBe('string');
-    expect(typeof body.user).toBe('object');
-    // expect(typeof body.user.roles).toBe('array');
-  });
-
-  it('POST /signup -- Fail missing fields', async () => {
-    const { status } = await request()
-        .post('/api/v1/auth/signup')
-        .set('Accept', 'application/json')
-        .send({ email: 'abc@test.com' });
-
-    expect(status).toBe(400);
-  });
-
-  it('POST /signup -- Fail email exists', async () => {
-    const { status } = await request()
-      .post('/api/v1/auth/signup')
-      .set('Accept', 'application/json')
-      .send({
-        email: 'admin@boldr.io',
-        password: 'test',
-      });
-    expect(status).toBe(400);
-  });
-
-  it('POST /signup -- Signup user', async () => {
-    const userData = {
-      email: faker.internet.email(),
-      password: 'password',
-      first_name: faker.name.firstName(),
-      last_name: faker.name.lastName(),
-      username: faker.internet.userName(),
-      avatar_url: faker.image.imageUrl(),
-    };
-    const { status } = await request()
-      .post('/api/v1/auth/signup')
-      .send(userData);
-
-    expect(status).toBe(201);
-  });
-
-  it('GET /check -- Fails w/o auth header', async () => {
-    const { status } = await request()
-      .get('/api/v1/auth/check')
-      .set('Accept', 'application/json');
-
-    expect(status).toBe(401);
-  });
-});
-
-describe('Auth requiring a token', () => {
+describe('Auth API Endpoint', async () => {
   let token;
   beforeAll(async () => {
     const loginData = {
       email: 'admin@boldr.io',
       password: 'password',
     };
-    const { body } = await request().post('/api/v1/auth/login').set('Accept', 'application/json').send(loginData);
+    const { body } = await request(app)
+    .post('/api/v1/auth/login')
+    .set('Accept', 'application/json')
+    .send(loginData);
     token = body.token;
   });
 
-  it('GET /check -- Return user info', async () => {
-    const { status, body } = await request()
-    .get('/api/v1/auth/check')
-    .set('Accept', 'application/json')
-    .set('Authorization', `Bearer ${token}`);
+  const loginData = {
+    email: 'admin@boldr.io',
+    password: 'password',
+  };
 
-    expect(status).toBe(200);
-    expect(typeof body).toBe('object');
+  const badLoginData = {
+    email: 'admin@boldr.io',
+    password: 'fa',
+  };
+
+  test('+++ POST /login - Fail without a password', () => {
+    return request(app)
+      .post('/api/v1/auth/login')
+      .send({ email: 'admin@boldr.io', password: '' })
+      .expect((res) => {
+        expect(res.status).toBe(400);
+      });
+  });
+  test('+++ POST /login - Fails with the wrong password', () => {
+    return request(app)
+      .post('/api/v1/auth/login')
+      .send(badLoginData)
+      .expect((res) => {
+        expect(res.status).toBe(401);
+      });
+  });
+  test('+++ POST /login', () => {
+    return request(app)
+      .post('/api/v1/auth/login')
+      .set('Accept', 'application/json')
+      .send(loginData)
+      .expect((res) => {
+        expect(res.status).toBe(200);
+        expect(typeof res.body.token).toBe('string');
+        expect(typeof res.body.user).toBe('object');
+      });
   });
 
-  it('GET /check -- Fail wrong header.', async () => {
-    const { status } = await request()
+  test('+++ POST /signup -- Fails with missing required fields', () => {
+    return request(app)
+        .post('/api/v1/auth/signup')
+        .set('Accept', 'application/json')
+        .send({ email: 'abc@test.com' })
+        .expect((res) => {
+          expect(res.status).toBe(400);
+        });
+  });
+
+  test('+++ POST /signup -- Fails if email exists', () => {
+    return request(app)
+      .post('/api/v1/auth/signup')
+      .set('Accept', 'application/json')
+      .send({
+        email: 'admin@boldr.io',
+        password: 'test',
+      })
+      .expect((res) => {
+        expect(res.status).toBe(409);
+      });
+  });
+
+  test('+++ POST /signup -- Signup user', () => {
+    return request(app)
+      .post('/api/v1/auth/signup')
+      .set('Accept', 'application/json')
+      .send({
+        email: faker.internet.email(),
+        password: 'password',
+        first_name: faker.name.firstName(),
+        last_name: faker.name.lastName(),
+        username: faker.internet.userName(),
+        avatar_url: faker.image.imageUrl(),
+      })
+      .expect((res) => {
+        expect(res.status).toBe(201);
+      });
+  });
+
+  test('+++ GET /check -- Fails w/o auth header', () => {
+    return request(app)
+      .get('/api/v1/auth/check')
+      .set('Accept', 'application/json')
+      .expect((res) => {
+        expect(res.status).toBe(401);
+      });
+  });
+
+  test('+++ GET /check -- Return user info', () => {
+    return request(app)
     .get('/api/v1/auth/check')
     .set('Accept', 'application/json')
-    .set('Authorization', `${token}`);
+    .set('Authorization', `Bearer ${token}`)
+    .expect((res) => {
+      expect(res.status).toBe(200);
+      expect(typeof res.body).toBe('object');
+    });
+  });
 
-    expect(status).toBe(401);
+  test('+++ GET /check -- Fail wrong header.', () => {
+    return request(app)
+    .get('/api/v1/auth/check')
+    .set('Accept', 'application/json')
+    .set('Authorization', `${token}`)
+    .expect((res) => {
+      expect(res.status).toBe(401);
+    });
   });
 });
