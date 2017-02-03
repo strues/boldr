@@ -32,7 +32,7 @@ test:
     - make setup-db
     - yarn run build
   override:
-    - yarn run test:ci
+    - yarn run test:ci -- -u
   post:
       - bash <(curl -s https://codecov.io/bash)
 general:

@@ -182,7 +182,7 @@ export const doCreateTemplate = (payload) =>
     *****************************************************************/
 
 export const doFetchTags = (name) =>
-  apiClient.get(`/tags/posts/${name}`);
+  apiClient.get(`/tags/${name}/posts`);
 
 export const getAllTags = () =>
   apiClient.get('/tags');
