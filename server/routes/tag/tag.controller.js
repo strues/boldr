@@ -8,11 +8,11 @@ async function listTags(req, res, next) {
     const allTags = await Tag.query().eager('[posts]');
     return responseHandler(res, 200, allTags);
   } catch (err) {
-    return res.status(404).json(err);
+    return next(err);
   }
 }
 
-async function getTaggedPosts(req, res) {
+async function getTaggedPosts(req, res, next) {
   try {
     const tags = await Tag
       .query()
@@ -21,11 +21,11 @@ async function getTaggedPosts(req, res) {
       .first();
     return responseHandler(res, 200, tags);
   } catch (error) {
-    return res.status(500).json(err);
+    return next(error);
   }
 }
 
-async function getTaggedPostsByName(req, res) {
+async function getTaggedPostsByName(req, res, next) {
   try {
     const tags = await Tag
       .query()
@@ -35,36 +35,33 @@ async function getTaggedPostsByName(req, res) {
     debug(tags);
     return responseHandler(res, 200, tags);
   } catch (error) {
-    return res.status(500).json(err);
+    return next(error);
   }
 }
 
-async function createTag(req, res) {
+async function createTag(req, res, next) {
   try {
     const newTag = await Tag.query().insert(req.body);
     await Activity.query().insert({
-      id: uuid(),
       user_id: req.user.id,
       action_type_id: 1,
       activity_tag: newTag.id,
     });
     return responseHandler(res, 201, newTag);
   } catch (err) {
-    return res.status(500).json(err);
+    return next(error);
   }
 }
 
 function updateTag(req, res) {
-  debug(req.body);
   return Tag.query()
     .patchAndFetchById(req.params.id, req.body)
     .then(async (tag) => {
-      // await Activity.query().insert({
-      //   id: uuid(),
-      //   user_id: req.user.id,
-      //   action_type_id: 2,
-      //   activity_post: post.id,
-      // });
+      await Activity.query().insert({
+        user_id: req.user.id,
+        action_type_id: 2,
+        activity_tag: req.params.id,
+      });
       responseHandler(res, 202, tag);
     });
 }
@@ -80,8 +77,8 @@ async function relateTagToPost(req, res, next) {
     const tag = await Tag.query().findById(req.params.id);
     const newRelation = await tag.$relatedQuery('posts').relate({ id: req.params.postid });
     return res.status(200).json(newRelation);
-  } catch (err) {
-    return res.status(500).json(err);
+  } catch (error) {
+    return next(error);
   }
 }
 

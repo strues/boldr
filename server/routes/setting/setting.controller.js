@@ -13,11 +13,11 @@ export async function listSettings(req, res, next) {
 
     return responseHandler(res, 200, settings);
   } catch (error) {
-    return res.status(500).json(error);
+    return next(error);
   }
 }
 
-export async function getSetting(req, res) {
+export async function getSetting(req, res, next) {
   try {
     const setting = await Setting
       .query()
@@ -25,11 +25,11 @@ export async function getSetting(req, res) {
     if (!setting) return res.status(404).json({ error: 'Unable to find a setting matching the id' });
     return responseHandler(res, 200, setting);
   } catch (error) {
-    return res.status(500).json(error);
+    return next(error);
   }
 }
 
-export async function addSetting(req, res) {
+export async function addSetting(req, res, next) {
   try {
     const settingPayload = {
       key: req.body.key,
@@ -41,7 +41,7 @@ export async function addSetting(req, res) {
 
     return responseHandler(res, 201, setting);
   } catch (error) {
-    return res.status(500).json(error);
+    return next(error);
   }
 }
 
