@@ -2,16 +2,16 @@ import uuid from 'uuid';
 import slugIt from '../../utils/slugIt';
 import Page from '../../models/page';
 
-export async function listPages(req, res) {
+export async function listPages(req, res, next) {
   try {
     const pages = await Page.query().eager('[templates]');
     return res.status(200).json(pages);
   } catch (error) {
-    return res.status(500).json(error);
+    return next(error);
   }
 }
 
-export async function getPageByUrl(req, res) {
+export async function getPageByUrl(req, res, next) {
   try {
     const page = await Page
       .query()
@@ -21,11 +21,11 @@ export async function getPageByUrl(req, res) {
 
     return res.status(200).json(page);
   } catch (error) {
-    return res.status(500).json(error);
+    return next(error);
   }
 }
 
-export async function createPage(req, res) {
+export async function createPage(req, res, next) {
   try {
     const payload = {
       id: uuid(),
@@ -39,6 +39,6 @@ export async function createPage(req, res) {
 
     return responseHandler(res, 201, newPage);
   } catch (error) {
-    return res.status(500).json(error);
+    return next(error);
   }
 }

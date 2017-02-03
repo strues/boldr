@@ -74,7 +74,7 @@ export async function createPost(req, res, next) {
   return responseHandler(res, 201, newPost);
 }
 
-export async function getSlug(req, res) {
+export async function getSlug(req, res, next) {
   try {
     const post = await Post
       .query()
@@ -88,7 +88,7 @@ export async function getSlug(req, res) {
     }
     return responseHandler(res, 200, post);
   } catch (error) {
-    return res.status(500).json({ message: error });
+    return next(error);
   }
 }
 
@@ -102,22 +102,26 @@ export async function getId(req, res, next) {
       .first();
     return responseHandler(res, 200, post);
   } catch (error) {
-    return res.status(500).json({ message: error });
+    return next(error);
   }
 }
 
 export async function destroy(req, res, next) {
-  await Post
-      .query()
-      .delete()
-      .where('id', req.params.id)
-      .first();
-  await Activity.query().insert({
-    id: uuid(),
-    user_id: req.user.id,
-    action_type_id: 3,
-  });
-  return res.status(204).send({});
+  try {
+    await Post
+        .query()
+        .delete()
+        .where('id', req.params.id)
+        .first();
+    await Activity.query().insert({
+      id: uuid(),
+      user_id: req.user.id,
+      action_type_id: 3,
+    });
+    return res.status(204).send({});
+  } catch (error) {
+    return next(error);
+  }
 }
 
 export function update(req, res) {
@@ -136,17 +140,21 @@ export function update(req, res) {
 }
 
 export async function addTag(req, res, next) {
-  const post = await Post
-    .query()
-    .findById(req.params.id);
+  try {
+    const post = await Post
+      .query()
+      .findById(req.params.id);
 
-  if (!post) {
-    return res.status(404).json({ message: `Unable to find a post with the ID: ${req.params.id}.` });
+    if (!post) {
+      return res.status(404).json({ message: `Unable to find a post with the ID: ${req.params.id}.` });
+    }
+
+    const tag = await post
+       .$relatedQuery('tags')
+       .insert(req.body);
+
+    return responseHandler(res, 202, tag);
+  } catch (error) {
+    return next(error);
   }
-
-  const tag = await post
-     .$relatedQuery('tags')
-     .insert(req.body);
-
-  return responseHandler(res, 202, tag);
 }

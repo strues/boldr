@@ -7,7 +7,7 @@ export async function listRoles(req, res, next) {
 
     return responseHandler(res, 200, roles);
   } catch (error) {
-    return res.status(500).json(error);
+    return next(error);
   }
 }
 
@@ -17,7 +17,7 @@ export async function getRole(req, res, next) {
 
     return responseHandler(res, 200, role);
   } catch (error) {
-    return res.status(500).json(error);
+    return next(error);
   }
 }
 
@@ -27,6 +27,6 @@ export async function getRoleUsers(req, res, next) {
 
     return responseHandler(res, 200, role);
   } catch (error) {
-    return res.status(500).json(error);
+    return next(error);
   }
 }

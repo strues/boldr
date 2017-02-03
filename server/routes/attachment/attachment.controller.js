@@ -21,13 +21,13 @@ const regex = new RegExp('^.*.((j|J)(p|P)(e|E)?(g|G)|(g|G)(i|I)(f|F)|(p|P)(n|N)(
  * @param  {Object}        res  the response object
  * @return {Promise}            the array of attachment objects
  */
-export async function listAttachments(req, res) {
+export async function listAttachments(req, res, next) {
   try {
     const medias = await Attachment.query();
 
     return responseHandler(res, 200, medias);
   } catch (error) {
-    return res.status(500).json(error);
+    return next(error);
   }
 }
 
@@ -38,12 +38,12 @@ export async function listAttachments(req, res) {
  * @param  {Object}        res  the response object
  * @return {Promise}         the attachment object
  */
-export async function getAttachment(req, res) {
+export async function getAttachment(req, res, next) {
   try {
     const media = await Attachment.query().findById(req.params.id);
     return responseHandler(res, 200, media);
   } catch (err) {
-    return res.status(500).json(err);
+    return next(error);
   }
 }
 
@@ -54,7 +54,7 @@ export async function getAttachment(req, res) {
  * @param  {Object}        res  the response object
  * @return {Object}             returns the response
  */
-export async function updateAttachment(req, res) {
+export async function updateAttachment(req, res, next) {
   try {
     const updatedAttachment = await Attachment
     .query()
@@ -68,7 +68,7 @@ export async function updateAttachment(req, res) {
 
     return responseHandler(res, 202, updatedAttachment);
   } catch (error) {
-    return res.status(500).json(error);
+    return next(error);
   }
 }
 
@@ -98,7 +98,7 @@ export async function deleteAttachment(req, res, next) {
     // send a 204
     return res.status(204).json('Deleted');
   } catch (error) {
-    return res.status(500).json(error);
+    return next(error);
   }
 }
 

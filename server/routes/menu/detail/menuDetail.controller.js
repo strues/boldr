@@ -15,18 +15,18 @@ export async function getDetails(req, res, next) {
 
     return responseHandler(res, 200, links);
   } catch (error) {
-    return res.status(500).json(error);
+    return next(error);
   }
 }
 
-export async function showDetail(req, res) {
+export async function showDetail(req, res, next) {
   try {
     const navigation = await MenuDetail
       .query()
       .findById(req.params.id);
     return responseHandler(res, 200, navigation);
   } catch (error) {
-    return res.status(500).json(error);
+    return next(error);
   }
 }
 
@@ -61,7 +61,7 @@ export async function createDetail(req, res, next) {
 
     return responseHandler(res, 201, newLink);
   } catch (error) {
-    return res.status(500).json(error);
+    return next(error);
   }
 }
 

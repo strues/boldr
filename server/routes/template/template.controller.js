@@ -2,16 +2,16 @@ import uuid from 'uuid';
 import slugIt from '../../utils/slugIt';
 import Template from '../../models/template';
 
-export async function listTemplates(req, res) {
+export async function listTemplates(req, res, next) {
   try {
     const templates = await Template.query();
     return res.status(200).json(templates);
   } catch (error) {
-    return res.status(500).json(error);
+    return next(error);
   }
 }
 
-export async function getTemplateByResource(req, res) {
+export async function getTemplateByResource(req, res, next) {
   try {
     const template = await Template
       .query()
@@ -21,11 +21,11 @@ export async function getTemplateByResource(req, res) {
 
     return res.status(200).json(template);
   } catch (error) {
-    return res.status(500).json(error);
+    return next(error);
   }
 }
 
-export async function createTemplate(req, res) {
+export async function createTemplate(req, res, next) {
   try {
     const payload = {
       resource: req.body.resource,
@@ -38,6 +38,6 @@ export async function createTemplate(req, res) {
 
     return responseHandler(res, 201, newPage);
   } catch (error) {
-    return res.status(500).json(error);
+    return next(error);
   }
 }

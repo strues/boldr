@@ -87,7 +87,7 @@ export async function adminUpdateUser(req, res, next) {
       .patchAndFetchById(req.params.id, payload)
       .then(user => res.status(202).json(user));
   } catch (error) {
-    return res.status(500).json(error);
+    return next(error);
   }
 }
 
@@ -103,7 +103,7 @@ export async function destroyUser(req, res, next) {
 
     return res.status(204).json({ message: 'User deleted.' });
   } catch (error) {
-    return res.status(500).json(error);
+    return next(error);
   }
 }
 
@@ -154,6 +154,6 @@ export async function adminCreateUser(req, res, next) {
     // Massive transaction is finished, send the data to the user.
     return responseHandler(res, 201, newUser);
   } catch (error) {
-    return res.status(500).json(error);
+    return next(error);
   }
 }
