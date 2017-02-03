@@ -2,46 +2,6 @@
 // BEM Sass port of Flexbox Grid - http://flexboxgrid.com //
 // ////////////////////////////////////////////////////// //
 
-// Variables
-$grid-columns: 12 !default;
-
-$grid-gutter: 2rem !default;
-
-$grid-breakpoints: (
-  xs: false,
-  sm: 48em,
-  md: 62em,
-  lg: 75em
-) !default;
-
-$grid-containers: (
-  xs: false,
-  sm: 46rem,
-  md: 61rem,
-  lg: 71rem,
-) !default;
-
-// Mixins
-@mixin breakpoint($breakpoint, $breakpoint-size) {
-  // The grid is mobile first so xs is the default, hence no breakpoint
-  @if $breakpoint == xs {
-    @content;
-  }
-
-  // Add breakpoints for larger screens
-  @else {
-    @media only screen and (min-width: $breakpoint-size) {
-      // Static grid
-      .grid {
-        width: map-get($grid-containers, $breakpoint);
-      }
-
-      @content;
-    }
-  }
-}
-
-// Grid
 .grid,
 .grid--fluid {
   margin: 0 auto;

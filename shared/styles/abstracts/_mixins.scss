@@ -35,6 +35,25 @@
     clear: both;
   }
 }
+// Mixins
+@mixin breakpoint($breakpoint, $breakpoint-size) {
+  // The grid is mobile first so xs is the default, hence no breakpoint
+  @if $breakpoint == xs {
+    @content;
+  }
+
+  // Add breakpoints for larger screens
+  @else {
+    @media only screen and (min-width: $breakpoint-size) {
+      // Static grid
+      .grid {
+        width: map-get($grid-containers, $breakpoint);
+      }
+
+      @content;
+    }
+  }
+}
 @mixin md-box-shadow($elevation) {
    @if $elevation < 0 or $elevation > 5{
     @warn 'The elevation must be a number from 0 - 5. elevation given was `#{$elevation}`';

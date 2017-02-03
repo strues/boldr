@@ -29,17 +29,11 @@ app.use(express.static(pathResolve(appRootDir.get(), getConfig('publicAssetsPath
 // The React application middleware.
 app.get('*', boldrSSR);
 app.use('/apidocs', express.static(pathResolve(appRootDir.get(), './public/apidocs')));
-// catch 404 and forward response to errorhandler
-/* istanbul ignore next */
-app.use((req, res, next) => {
-  const err = new BadRequest('Invalid route');
-  return next(err);
-});
+
+errorHandler(app);
 
 process.on('unhandledRejection', (reason, p) => {
   logger.error('Possibly Unhandled Rejection at: Promise ', p, ' reason: ', reason);
 });
-
-app.use(errorHandler);
 
 export default app;

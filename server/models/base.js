@@ -1,6 +1,5 @@
 /* eslint-disable id-match */
 import { Model, ValidationError } from 'objection';
-import uuid from 'uuid';
 
 /**
  * @class BaseModel
@@ -35,7 +34,6 @@ class BaseModel extends Model {
       this.created_at = new Date().toISOString();
       this.updated_at = new Date().toISOString();
     }
-
   }
 
   /**

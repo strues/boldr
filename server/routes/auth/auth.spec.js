@@ -118,4 +118,4 @@ describe('Auth requiring a token', () => {
 
     expect(status).toBe(401);
   });
-})
+});

@@ -21,7 +21,7 @@ router.get('/', ctrl.listTags);
  * @apiSuccess (200) {Object} tag The tag requested.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-// router.get('/:id', controller.show.bind(controller));
+router.get('/:id', ctrl.getTag);
 /**
  * @api {get} /tags/:name/posts Returns all posts associated with the tag.
  * @apiName getTaggedPostsByName
@@ -41,7 +41,7 @@ router.get('/:name/posts', ctrl.getTaggedPostsByName);
  * @apiSuccess (200) {Object[]} posts List of posts.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get('/:id/posts', ctrl.getTaggedPosts);
+router.get('/posts/:id', ctrl.getTaggedPosts);
 /**
  * @api {post} /tags Create a new tag
  * @apiName create

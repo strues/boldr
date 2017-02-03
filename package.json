@@ -35,7 +35,8 @@
       "env": {
         "NODE_ENV": "development",
         "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr",
-        "REDIS_CONN_URI": "redis://127.0.0.1:6379/1"
+        "REDIS_CONN_URI": "redis://127.0.0.1:6379/1",
+        "DATABASE_DEBUG": true
       }
     },
     "migrate": {
@@ -142,6 +143,7 @@
     "gm": "^1.23.0",
     "helmet": "3.4.0",
     "hpp": "^0.2.1",
+    "http-status": "^1.0.1",
     "humps": "^2.0.0",
     "immutability-helper": "^2.1.1",
     "invariant": "^2.2.2",

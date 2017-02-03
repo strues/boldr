@@ -73,7 +73,7 @@ export async function registerUser(req, res, next) {
         .$relatedQuery('tokens')
         .insert({ user_verification_token: verificationToken, user_id: user.id });
       if (!verificationEmail) {
-        return next(new InternalServer());
+        return res.status(500).json('There was a problem with the mailer.');
       }
     });
     await Activity
@@ -167,12 +167,12 @@ export async function checkAuthentication(req, res, next) {
     const validUser = await User.query().findById(req.user.id).eager('[roles]');
 
     if (!validUser) {
-      return next(new Unauthorized());
+      return res.status(401).json('Unauthorized: Please login again.');
     }
     validUser.stripPassword();
     return responseHandler(res, 200, validUser);
   } catch (error) {
-    return next(new BadRequest(err));
+    return next(new BadRequest(error));
   }
 }
 

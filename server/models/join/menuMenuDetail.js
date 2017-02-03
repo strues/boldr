@@ -3,12 +3,19 @@ import MenuDetail from '../menuDetail';
 import Menu from '../menu';
 import BaseModel from '../base';
 
+/**
+ * This is the join table connecting menus to menu details.
+ *
+ * @see ../Menu
+ * @see ../MenuDetail
+ * @extends ../BaseModel
+ */
 class MenuMenuDetail extends BaseModel {
   static get tableName() {
     return 'menu_menu_detail';
   }
   static addTimestamps = false;
-  static addUUID = false;
+
   static get idColumn() {
     return ['menu_id', 'menu_detail_id'];
   }

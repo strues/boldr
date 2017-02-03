@@ -8,6 +8,22 @@ class Tag extends BaseModel {
     return 'tag';
   }
   static addTimestamps = false;
+  static jsonSchema = {
+    type: 'object',
+    required: ['name'],
+    properties: {
+      id: {
+        type: 'number',
+      },
+      name: {
+        type: 'string',
+        minLength: 3,
+        maxLength: 64,
+        pattern: '^[A-Za-z0-9-_]+$',
+      },
+      description: { type: 'string', maxLength: 255 },
+    },
+  };
   static get relationMappings() {
     return {
       posts: {
