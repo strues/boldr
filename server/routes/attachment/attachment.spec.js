@@ -1,13 +1,11 @@
-import supertest from 'supertest';
+import request from 'supertest';
 import app from '../../app';
 
-function request() {
-  return supertest(app);
-}
-
-it('GET /attachments', async () => {
-  const { status } = await request()
-      .get('/api/v1/attachments');
-
-  expect(status).toBe(200);
+test('GET /attachments', () => {
+  return request(app)
+      .get('/api/v1/attachments')
+      .expect((res) => {
+        expect(res.status).toBe(200);
+        expect(typeof res.body).toBe('object');
+      });
 });
