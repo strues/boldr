@@ -6,7 +6,7 @@ import * as ctrl from './attachment.controller';
 const router = express.Router();
 
 /**
- * @api {get} /attachments    Get all attachment entries from the database.
+ * @api {get} /attachments              List all attachments
  * @apiName GetAllAttachments
  * @apiGroup Attachment
  *
@@ -28,28 +28,28 @@ const router = express.Router();
 router.get('/', ctrl.listAttachments);
 
 /**
- * @api {post} /attachments  Upload an attachment
+ * @api {post} /attachments         Upload attachment
  * @apiName UploadAttachment
  * @apiGroup Attachment
  * @apiPermission user
  */
 router.post('/', isAuthenticated, ctrl.uploadAttachment);
 /**
- * @api {get} /attachments/:id  Get a specific file by its id
+ * @api {get} /attachments/:id    Get specific attachment
  * @apiName GetAttachment
  * @apiGroup Attachment
  *
  * @apiExample Example usage:
  * curl -i https://staging.boldr.io/api/v1/attachments/1
  *
- * @apiParam {String}    id   The medias's id.
+ * @apiParam {String}    id   The attachment's id (uuid)
  *
- * @apiSuccess {String}  id   The Attachment ID
+ * @apiSuccess {String}  id   The Attachment id (uuid)
  */
 router.get('/:id', ctrl.getAttachment);
 
 /**
- * @api {delete} /attachments/:id  Remove attachment from database and S3
+ * @api {delete} /attachments/:id  Delete attachment
  * @apiName DeleteAttachment
  * @apiGroup Attachment
  * @apiUse authHeader
@@ -60,7 +60,7 @@ router.get('/:id', ctrl.getAttachment);
  */
 router.delete('/:id', isAuthenticated, checkRole('Admin'), ctrl.deleteAttachment);
 /**
- * @api {put} /attachments/:id  Updates an attachment in the database
+ * @api {put} /attachments/:id      Update attachment
  * @apiName UpdateAttachment
  * @apiGroup Attachment
  * @apiUse authHeader

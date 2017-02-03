@@ -5,7 +5,7 @@ import * as ctrl from './user.controller';
 
 const router = express.Router();
 /**
- * @api {get} /users Retrieve all users
+ * @api {get} /users        List all users
  * @apiName listUsers
  * @apiGroup User
  * @apiPermission public
@@ -16,7 +16,7 @@ const router = express.Router();
 router.get('/', ctrl.listUsers);
 
 /**
- * @api {get} /users/:id Retrieve user
+ * @api {get} /users/:id     Get user
  * @apiName getUser
  * @apiGroup User
  * @apiPermission public
@@ -26,7 +26,7 @@ router.get('/', ctrl.listUsers);
 router.get('/:id', ctrl.getUser);
 
 /**
- * @api {post} /users Create user
+ * @api {post} /users       Create user
  * @apiName adminCreateUser
  * @apiGroup User
  * @apiPermission admin
@@ -41,7 +41,7 @@ router.get('/:id', ctrl.getUser);
 router.post('/', isAuthenticated, checkRole('Admin'), ctrl.adminCreateUser);
 
 /**
- * @api {put} /users/:id Update user
+ * @api {put} /users/:id      Update user
  * @apiName updateUser
  * @apiGroup User
  * @apiPermission admin
@@ -56,7 +56,7 @@ router.post('/', isAuthenticated, checkRole('Admin'), ctrl.adminCreateUser);
 router.put('/:id', isAuthenticated, ctrl.updateUser);
 router.put('/admin/:id', isAuthenticated, checkRole('Admin'), ctrl.adminUpdateUser);
 /**
- * @api {patch} /users/:id Update user
+ * @api {patch} /users/:id        Update user
  * @apiName updateUser
  * @apiGroup User
  * @apiPermission user
@@ -71,7 +71,7 @@ router.put('/admin/:id', isAuthenticated, checkRole('Admin'), ctrl.adminUpdateUs
 router.patch('/:id', isAuthenticated, ctrl.updateUser);
 
 /**
- * @api {delete} /users/:id Delete user
+ * @api {delete} /users/:id       Delete user
  * @apiName destroyUser
  * @apiGroup User
  * @apiPermission admin

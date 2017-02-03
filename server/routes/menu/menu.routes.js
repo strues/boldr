@@ -5,7 +5,7 @@ import detailRoutes from './detail/menuDetail.routes';
 
 const router = express.Router();
 /**
- * @api {get} /menus Return a list of all menu blocks
+ * @api {get} /menus      List all menus
  * @apiName listMenu
  * @apiGroup Menu
  * @apiPermission public
@@ -13,7 +13,7 @@ const router = express.Router();
 router.get('/', ctrl.listMenu);
 
 /**
- * @api {post} /menus Create a new menu
+ * @api {post} /menus     Create menu
  * @apiName create
  * @apiGroup Menu
  * @apiPermission admin
@@ -22,7 +22,7 @@ router.get('/', ctrl.listMenu);
 router.post('/', isAuthenticated, ctrl.createMenu);
 
 /**
- * @api {get} /menus/:id Return a specific menu by its id.
+ * @api {get} /menus/:id    Get menu
  * @apiName showMenu
  * @apiGroup Menu
  * @apiPermission public
@@ -30,7 +30,7 @@ router.post('/', isAuthenticated, ctrl.createMenu);
  */
 router.get('/:id', ctrl.showMenu);
 /**
- * @api {put} /menus/:id Update a menu
+ * @api {put} /menus/:id    Update menu
  * @apiName updateMenu
  * @apiGroup Menu
  * @apiPermission admin
@@ -40,7 +40,7 @@ router.get('/:id', ctrl.showMenu);
 router.put('/:id', isAuthenticated, ctrl.updateMainMenu);
 
 /**
- * @api {patch} /menus/:id Update a navigation
+ * @api {patch} /menus/:id      Update menu
  * @apiName updateMainMenu
  * @apiGroup Menu
  * @apiPermission admin

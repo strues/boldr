@@ -4,14 +4,14 @@ import * as ctrl from './menuDetail.controller';
 
 const router = express.Router({ mergeParams: true });
 /**
- * @api {get} /menu-details Return a list of all menu details
+ * @api {get} /menu-details     List all menu items
  * @apiName getDetails
  * @apiGroup MenuDetails
  * @apiPermission public
  */
 router.get('/', ctrl.getDetails);
 /**
- * @api {post} /menu-details Create a new menu detail
+ * @api {post} /menu-details    Create menu detail
  * @apiName createDetail
  * @apiGroup MenuDetails
  * @apiUse authHeader
@@ -19,7 +19,7 @@ router.get('/', ctrl.getDetails);
  */
 router.post('/', isAuthenticated, ctrl.createDetail);
 /**
- * @api {get} /menu-details/:id Return a specific menu detail by its id.
+ * @api {get} /menu-details/:id     Get menu detail
  * @apiName showDetail
  * @apiGroup MenuDetails
  * @apiPermission public
@@ -27,7 +27,7 @@ router.post('/', isAuthenticated, ctrl.createDetail);
  */
 router.get('/:id', ctrl.showDetail);
 /**
- * @api {put} /menu-details/:id Update a menu detail
+ * @api {put} /menu-details/:id     Update menu detail
  * @apiName updateDetail
  * @apiGroup MenuDetails
  * @apiPermission admin
@@ -35,7 +35,7 @@ router.get('/:id', ctrl.showDetail);
  */
 router.put('/:id', isAuthenticated, ctrl.updateDetail);
 /**
- * @api {patch} /menu-details/:id Update a menu detail
+ * @api {patch} /menu-details/:id     Update menu detail
  * @apiName updateDetail
  * @apiGroup MenuDetails
  * @apiPermission admin
@@ -44,7 +44,7 @@ router.put('/:id', isAuthenticated, ctrl.updateDetail);
  */
 router.patch('/:id', isAuthenticated, ctrl.updateDetail);
 /**
- * @api {delete} /menu-details/:id Delete a detail
+ * @api {delete} /menu-details/:id    Delete detail
  * @apiName destroy
  * @apiGroup MenuDetails
  * @apiPermission admin

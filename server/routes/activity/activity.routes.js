@@ -5,7 +5,7 @@ import * as ctrl from './activity.controller';
 const router = new express.Router();
 
 /**
- * @api {get} /activities Retrieve all latest activities
+ * @api {get} /activities           List all activities
  * @apiName ListActivities
  * @apiGroup Activity
  * @apiPermission public

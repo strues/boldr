@@ -5,7 +5,7 @@ import * as ctrl from './token.controller';
 const router = express.Router();
 
 /**
- * @api {post} /tokens/forgot-password Send email
+ * @api {post} /tokens/forgot-password    Send forgot password email
  * @apiName forgottenPassword
  * @apiGroup Token
  * @apiParam {String} email Email address to receive the password reset token.
@@ -16,7 +16,7 @@ const router = express.Router();
 router.post('/forgot-password', ctrl.forgottenPassword);
 
 /**
- * @api {post} /tokens/reset-password/:token Submit password
+ * @api {post} /tokens/reset-password/:token  Reset password
  * @apiName resetPassword
  * @apiGroup Token
  * @apiParam {String{6..}} password New account password
