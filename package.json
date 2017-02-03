@@ -73,6 +73,22 @@
         "NODE_ENV": "test",
         "KNEX_TEST_TIMEOUT": 30000
       }
+    },
+    "test:browser": {
+      "command": "jest --config=internal/jest/jest.browser.json && cp ./coverage/coverage-final.json ./coverage/coverage-browser-final.json",
+      "env": {
+        "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr_test",
+        "NODE_ENV": "test",
+        "KNEX_TEST_TIMEOUT": 30000
+      }
+    },
+    "test:node": {
+      "command": "jest --config=internal/jest/jest.node.json && cp ./coverage/coverage-final.json ./coverage/coverage-node-final.json",
+      "env": {
+        "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr_test",
+        "NODE_ENV": "test",
+        "KNEX_TEST_TIMEOUT": 30000
+      }
     }
   },
   "scripts": {
@@ -94,43 +110,8 @@
     "start": "NODE_ENV=production node bin/boldr",
     "test:ci": "NODE_ENV=test jest --config=internal/jest/jest.node.json -w2 && cp ./coverage/coverage-final.json ./coverage/coverage-node-final.json && jest --config=internal/jest/jest.browser.json -w2 && cp ./coverage/coverage-final.json ./coverage/coverage-browser-final.json && node ./internal/scripts/mapCoverage.js",
     "test": "better-npm-run test",
-    "test:watch": "NODE_ENV=test jest --watch"
-  },
-  "jest": {
-    "moduleNameMapper": {
-      "^.*\\.scss$": "<rootDir>/internal/jest/styleMock.js",
-      "^.*\\.css$": "<rootDir>/internal/jest/styleMock.js"
-    },
-    "collectCoverage": true,
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/(internal|config|docs|boldrCMS|.happypack|bin|.idea|public|db)/",
-      "/flow-typed/",
-      "/__fixtures__/",
-      "/node_modules/",
-      "<rootDir>/shared/theme/",
-      "<rootDir>/shared/types/"
-    ],
-    "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
-    },
-    "testRegex": ".*.test\\.js",
-    "setupTestFrameworkScriptFile": "<rootDir>/internal/jest/setup.js",
-    "snapshotSerializers": [
-      "<rootDir>/node_modules/enzyme-to-json/serializer"
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/(internal|config|docs|boldrCMS|.happypack|bin|.idea|public|db)/",
-      "__snapshots__"
-    ],
-    "transformIgnorePatterns": [
-      "/node_modules/",
-      "/.happypack/",
-      "/boldrCMS/",
-      "/db/"
-    ],
-    "coverageReporters": [
-      "json"
-    ]
+    "test:node": "better-npm-run test:node",
+    "test:browser": "better-npm-run test:browser"
   },
   "dependencies": {
     "app-root-dir": "1.0.2",

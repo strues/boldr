@@ -34,7 +34,7 @@ export async function registerUser(req, res, next) {
     req.sanitize('last_name').trim();
     const errors = req.validationErrors();
     if (errors) {
-      return next(new BadRequest(errors));
+      return res.status(400).json(errors);
     }
 
     // the data for the user being created.
@@ -51,7 +51,7 @@ export async function registerUser(req, res, next) {
     const checkExisting = await User.query().where('email', req.body.email);
 
     if (checkExisting.length) {
-      return next(new Conflict());
+      return res.status(400).json('An account matching this email already exists.');
     }
     const newUser = await objection.transaction(User, async User => {
       const user = await User.query().insert(payload);
@@ -106,7 +106,7 @@ export async function loginUser(req, res, next) {
 
     const errors = req.validationErrors();
     if (errors) {
-      return next(new BadRequest(errors));
+      return res.status(400).json(errors);
     }
 
     const user = await User
