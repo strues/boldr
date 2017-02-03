@@ -37,7 +37,7 @@ function errorHandler(error, req, res, next) {
   /* if we get an unhandled error, we want to log to console and turn it into an API error */
   if ((!(error instanceof InternalServer) && !(error[0] instanceof InternalServer))) {
     console.error(err);
-    err = new InternalServer(500, error.type || 'Internal Server Error', error.message || 'An unknown server error occurred');
+    err = new InternalServer(error.message || 'An unknown server error occurred');
   }
   const processedErrors = formatError(err);
 

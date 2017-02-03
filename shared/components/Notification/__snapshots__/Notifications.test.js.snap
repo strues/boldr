@@ -1,0 +1,38 @@
+exports[`<Notifications /> +++ renders snapshot 1`] = `
+<div
+  className={
+    Array [
+      "boldr-notification__container ",
+    ]
+  }>
+  <ReactCSSTransitionGroup
+    transitionAppear={false}
+    transitionEnter={true}
+    transitionEnterTimeout={600}
+    transitionLeave={true}
+    transitionLeaveTimeout={600}
+    transitionName="boldr-notification__transition">
+    <Notification
+      componentClassName="boldr-notification"
+      dismissAfter={3000}
+      id={1}
+      kind="error"
+      message="There was a problem uploading."
+      onDismiss={[Function]} />
+    <Notification
+      componentClassName="boldr-notification"
+      dismissAfter={3000}
+      id={2}
+      kind="success"
+      message="Upload success!"
+      onDismiss={[Function]} />
+    <Notification
+      componentClassName="boldr-notification"
+      dismissAfter={3000}
+      id={3}
+      kind="success"
+      message="Removed file"
+      onDismiss={[Function]} />
+  </ReactCSSTransitionGroup>
+</div>
+`;

@@ -7,6 +7,7 @@ import Blog from './Blog';
 import Admin from './Admin';
 
 export default function createRoutes(store) {
+  /* istanbul ignore next */
   return [
     {
       path: '/',
