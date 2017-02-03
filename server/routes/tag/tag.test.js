@@ -1,14 +1,10 @@
-import supertest from 'supertest';
+import request from 'supertest';
 import app from '../../app';
 
-function request() {
-  return supertest(app);
-}
-
-test('GET /tags -- List', async () => {
-  const { status, body } = await request()
+test('GET /tags -- List', () => {
+  return request(app)
     .get('/api/v1/tags')
-    .set('Accept', 'application/json');
-
-  expect(status).toBe(200);
+    .expect((res) => {
+      expect(res.status).toBe(200);
+    });
 });

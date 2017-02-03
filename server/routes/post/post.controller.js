@@ -5,7 +5,7 @@ import slugIt from '../../utils/slugIt';
 // Models
 import { Tag, Activity, ActionType, Post, PostTag } from '../../models';
 
-const debug = require('debug')('boldr:post-controller');
+const debug = require('debug')('boldr:post-ctrl');
 
 export async function listPosts(req, res, next) {
   try {

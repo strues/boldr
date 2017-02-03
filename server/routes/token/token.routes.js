@@ -2,7 +2,7 @@ import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
 import * as ctrl from './token.controller';
 
-const router = new express.Router();
+const router = express.Router();
 
 /**
  * @api {post} /tokens/forgot-password Send email
