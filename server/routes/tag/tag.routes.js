@@ -5,7 +5,7 @@ import * as ctrl from './tag.controller';
 const router = express.Router();
 /**
  * @api {get} /tags Retrieve all tags
- * @apiName Index
+ * @apiName ListTags
  * @apiGroup Tag
  * @apiPermission public
  * @apiUse listParams
@@ -15,16 +15,16 @@ const router = express.Router();
 router.get('/', ctrl.listTags);
 /**
  * @api {get} /tags/:id Get a specific tag by its id.
- * @apiName Show
+ * @apiName GetTag
  * @apiGroup Tag
  * @apiPermission public
  * @apiSuccess (200) {Object} tag The tag requested.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-// router.get('/:id', controller.show.bind(controller));
+router.get('/:id', ctrl.getTag);
 /**
  * @api {get} /tags/:name/posts Returns all posts associated with the tag.
- * @apiName getTaggedPostsByName
+ * @apiName GetTaggedPostsByName
  * @apiGroup Tag
  * @apiPermission public
  * @apiParam {String} name The tag name
@@ -33,18 +33,18 @@ router.get('/', ctrl.listTags);
  */
 router.get('/:name/posts', ctrl.getTaggedPostsByName);
 /**
- * @api {get} /tags/:id/posts Returns all posts associated with the tag.
- * @apiName getTaggedPosts
+ * @api {get} /tags/posts/:id Returns all posts associated with the tag.
+ * @apiName GetTaggedPosts
  * @apiGroup Tag
  * @apiPermission public
  * @apiParam {Number} id The tag id
  * @apiSuccess (200) {Object[]} posts List of posts.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */
-router.get('/:id/posts', ctrl.getTaggedPosts);
+router.get('/posts/:id', ctrl.getTaggedPosts);
 /**
  * @api {post} /tags Create a new tag
- * @apiName create
+ * @apiName CreateTAg
  * @apiGroup Tag
  * @apiPermission admin
  * @apiHeader {String} Authorization {token}
@@ -56,7 +56,7 @@ router.get('/:id/posts', ctrl.getTaggedPosts);
 router.post('/', isAuthenticated, ctrl.createTag);
 /**
  * @api {put} /tags/:id Update a tag
- * @apiName update
+ * @apiName UpdateTag
  * @apiGroup Tag
  * @apiPermission admin
  * @apiUse authHeader
@@ -68,7 +68,7 @@ router.post('/', isAuthenticated, ctrl.createTag);
 router.put('/:id', isAuthenticated, ctrl.updateTag);
 /**
  * @api {patch} /tags/:id Update a tag
- * @apiName update
+ * @apiName UpdateTag
  * @apiGroup Tag
  * @apiPermission admin
  * @apiUse authHeader
@@ -78,9 +78,30 @@ router.put('/:id', isAuthenticated, ctrl.updateTag);
  * @apiError {Object} 401 Unauthorized. You must be logged in to create a tag.
  */
 router.patch('/:id', isAuthenticated, ctrl.updateTag);
-
+/**
+ * @api {delete} /tags/:id Delete a tag permanently
+ * @apiName DeleteTag
+ * @apiGroup Tag
+ * @apiPermission admin
+ * @apiUse authHeader
+ * @apiParam {Number} id The tag id
+ * @apiSuccess (204)
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError {Object} 401 Unauthorized. You must be logged in to create a tag.
+ */
 router.delete('/:id', isAuthenticated, ctrl.deleteTag);
-
+/**
+ * @api {get} /tags/:id/relate/:postid Add a relationship between a tag and post
+ * @apiName RelateTagToPost
+ * @apiGroup Tag
+ * @apiPermission admin
+ * @apiUse authHeader
+ * @apiParam {Number} id      The tag id
+ * @apiPAram {String} postid  the id (uuid) of the post to relate
+ * @apiSuccess (204)
+ * @apiError {Object} 400 Some parameters may contain invalid values.
+ * @apiError {Object} 401 Unauthorized. You must be logged in to create a tag.
+ */
 router.get('/:id/relate/:postid', ctrl.relateTagToPost);
 
 export default router;

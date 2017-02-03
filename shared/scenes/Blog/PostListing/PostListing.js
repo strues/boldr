@@ -51,19 +51,19 @@ const PostListing = (props: Props) => {
   return (
     <Grid>
       <div style={ { paddingTop: '20px' } }>
-      {
-        props.layout === 'grid' ? gridView : listView
-      }
-      {
-        props.layout === 'grid' ?
-        <Button floating secondary style={ style } onClick={ props.handleChangeLayout } >
-          <FontIcon>view_list</FontIcon>
-        </Button> :
+        {
+          props.layout === 'grid' ? gridView : listView
+        }
+        {
+          props.layout === 'grid' ?
           <Button floating secondary style={ style } onClick={ props.handleChangeLayout } >
-          <FontIcon>view_module</FontIcon>
-        </Button>
-      }
-    </div>
+            <FontIcon>view_list</FontIcon>
+          </Button> :
+            <Button floating secondary style={ style } onClick={ props.handleChangeLayout } >
+            <FontIcon>view_module</FontIcon>
+          </Button>
+        }
+      </div>
     </Grid>
   );
 };

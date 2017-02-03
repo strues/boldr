@@ -1,8 +1,6 @@
 import { EventEmitter } from 'events';
 import { shallow, render, mount } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
-import { Model } from 'objection';
-import db, { disconnect } from '../../server/services/postgres';
 
 // Some of the `jest-runtime` tests are very slow and cause
 // timeouts on travis
@@ -20,16 +18,7 @@ console.error = message => {
   }
 };
 
-beforeAll(async () => {
-  Model.knex(db);
-});
-
-afterAll(() => {
-  disconnect(db);
-});
-
 EventEmitter.defaultMaxListeners = Infinity;
-
 
 global.Array = Array;
 global.Date = Date;

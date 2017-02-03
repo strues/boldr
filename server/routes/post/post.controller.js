@@ -31,7 +31,7 @@ export async function createPost(req, res, next) {
   const existingPost = await Post.query().where('slug', postSlug).first();
   if (existingPost) {
     // return with error
-    return next(new Conflict());
+    return res.status(409).json('A post with this title already exists.');
   }
 
   const newPost = await Post.query().insert({

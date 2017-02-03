@@ -83,13 +83,24 @@ $transition-duration: .25s;
 $toolbar-height: 64;
 $toolbar-z-index: 6;
 
-$tiny: 480;
-$small: 768;
-$medium: 992;
-$large: 1200;
-$grid-width: 1170;
 $grid-columns: 12;
-$grid-gutter-width: 1.875rem;
+
+$grid-gutter: 1rem;
+
+$grid-breakpoints: (
+  xs: false,
+  sm: 46em,
+  md: 61em,
+  lg: 75em
+);
+
+$grid-containers: (
+  xs: false,
+  sm: 46rem,
+  md: 61rem,
+  lg: 76rem,
+);
+
 $primary-header-link-color: $near-black;
 $primary-header-link-hover-color: $accent-color;
 $primary-header-border: 1 solid $cloud;

@@ -53,8 +53,7 @@ class Notification extends Component {
    * Handle action click event
    * @description Handle click events on the
    */
-  _onActionClick(event) {
-    event.preventDefault();
+  _onActionClick() {
     if (this.props.onActionClick) {
       this.props.onActionClick(this.props.id);
     } else {

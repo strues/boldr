@@ -32,9 +32,16 @@ export async function registerUser(req, res, next) {
     req.sanitize('email').normalizeEmail({ remove_dots: false });
     req.sanitize('first_name').trim();
     req.sanitize('last_name').trim();
+
+    const checkExisting = await User.query().where('email', req.body.email);
+
+    if (checkExisting.length) {
+      return res.status(409).json('An account matching this email already exists.');
+    }
+
     const errors = req.validationErrors();
     if (errors) {
-      return next(new BadRequest(errors));
+      return res.status(400).json(errors);
     }
 
     // the data for the user being created.
@@ -48,11 +55,7 @@ export async function registerUser(req, res, next) {
       username: req.body.username,
       avatar_url: req.body.avatar_url,
     };
-    const checkExisting = await User.query().where('email', req.body.email);
 
-    if (checkExisting.length) {
-      return next(new Conflict());
-    }
     const newUser = await objection.transaction(User, async User => {
       const user = await User.query().insert(payload);
       await user.$relatedQuery('roles').relate({ id: 1 });
@@ -73,7 +76,7 @@ export async function registerUser(req, res, next) {
         .$relatedQuery('tokens')
         .insert({ user_verification_token: verificationToken, user_id: user.id });
       if (!verificationEmail) {
-        return next(new InternalServer());
+        return res.status(500).json('There was a problem with the mailer.');
       }
     });
     await Activity
@@ -106,7 +109,7 @@ export async function loginUser(req, res, next) {
 
     const errors = req.validationErrors();
     if (errors) {
-      return next(new BadRequest(errors));
+      return res.status(400).json(errors);
     }
 
     const user = await User
@@ -125,7 +128,7 @@ export async function loginUser(req, res, next) {
       return next(new UserNotVerifiedError());
     }
     const validAuth = await user.authenticate(req.body.password);
-    if (!validAuth) return next(new Unauthorized());
+    if (!validAuth) return res.status(401).json('Unauthorized. Please try again.');
     // remove the password from the response.
     user.stripPassword();
     // sign the token
@@ -167,12 +170,12 @@ export async function checkAuthentication(req, res, next) {
     const validUser = await User.query().findById(req.user.id).eager('[roles]');
 
     if (!validUser) {
-      return next(new Unauthorized());
+      return res.status(401).json('Unauthorized: Please login again.');
     }
     validUser.stripPassword();
     return responseHandler(res, 200, validUser);
   } catch (error) {
-    return next(new BadRequest(err));
+    return next(new BadRequest(error));
   }
 }
 

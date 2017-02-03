@@ -4,19 +4,17 @@ import BaseModel from '../base';
 import Template from '../template';
 
 /**
- * This is the pivot table connecting users to roles.
+ * This is the join table connecting templates to pages.
  *
- * Users can only have one of the same role.
+ * A page can only have one of the same template.
  *
- * @see ../Role
- * @see ../User
- * @see ../../../db/migrations/20160924191402_user_roles.js
- * @extends ./BaseModel
+ * @see ../Template
+ * @see ../Page
+ * @extends ../BaseModel
  */
 class TemplatePage extends BaseModel {
   static tableName = 'template_page';
   static addTimestamps = false;
-  static addUUID = false;
 
   static relationMappings = {
     role: {

@@ -1,16 +1,16 @@
 import slugIt from './slugIt';
 
-it('replace whitespace', async () => {
+test('replace whitespace', () => {
   expect(slugIt('hey hi hello')).toBe('hey-hi-hello');
   expect(slugIt('hey hi hello', '_')).toBe('hey_hi_hello');
 });
 
-it('removes disallowed characters', async () => {
+test('removes disallowed characters', () => {
   expect(slugIt('hey, hi hello')).toBe('hey-hi-hello');
   expect(slugIt('hey- hi hello')).toBe('hey-hi-hello');
   expect(slugIt('hey] hi hello')).toBe('hey-hi-hello');
 });
 
-it('removes whitespaces', async () => {
+test('removes whitespaces', () => {
   expect(slugIt(' hey hi hello ')).toBe('hey-hi-hello');
 });

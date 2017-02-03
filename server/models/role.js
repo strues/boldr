@@ -20,7 +20,6 @@ class Role extends BaseModel {
           through: {
             from: 'user_role.role_id',
             to: 'user_role.user_id',
-            // modelClass: UserRole,
           },
           to: 'user.id',
         },

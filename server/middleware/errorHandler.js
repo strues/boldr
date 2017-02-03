@@ -1,48 +1,28 @@
-import { InternalServer } from '../core/errors';
-/**
-* Create an Error Object
-* @param {Array} or {object} errors - an instance or array of instances of APIError
-* return {object} format - properly-formatted JSONAPI errors object
-*/
-function formatError(errors) {
-  let errorFormat;
+import httpStatus from 'http-status';
 
-  if (Array.isArray(errors)) {
-    const formattedErrors = errors.map(error => {
-      const formattedError = {
-        status: error.status,
-        title: error.title,
-        detail: error.message,
-      };
-      return formattedError;
+import ApiError from '../core/errors/ApiError';
+
+export default (app) => {
+    // catch 404 and forward to error handler
+  app.use((req, res, next) => {
+    const err = new ApiError('Not found', httpStatus.NOT_FOUND);
+
+    return next(err);
+  });
+
+    // error handler - no stacktraces leaked to user unless development
+  app.use((err, req, res, next) => { // eslint-disable-line no-unused-vars
+    const statusCode = err.status || 500;
+
+    const stacktrace = app.get('env') === 'development' ? {
+      stack: err.stack,
+    } : {};
+
+    res.status(statusCode);
+    res.json({
+      status: statusCode,
+      error: err.error || err.message,
+      ...stacktrace,
     });
-    // wrap the array in an object
-    errorFormat = { errors: formattedErrors };
-  } else {
-    const error = errors;
-    const formattedError = {
-      status: error.status,
-      title: error.title,
-      detail: error.message,
-    };
-    // wrap the object in an array and then an object
-    errorFormat = { errors: [formattedError] };
-  }
-  return errorFormat;
-}
-
-function errorHandler(error, req, res, next) {
-  let err = error;
-
-  /* if we get an unhandled error, we want to log to console and turn it into an API error */
-  if ((!(error instanceof InternalServer) && !(error[0] instanceof InternalServer))) {
-    console.error(err);
-    err = new InternalServer(500, error.type || 'Internal Server Error', error.message || 'An unknown server error occurred');
-  }
-  const processedErrors = formatError(err);
-
-  res.status(processedErrors.errors[0].status || 500).json(processedErrors);
-  return next();
-}
-
-export default errorHandler;
+  });
+};

@@ -1,5 +1,5 @@
-import processQuery from './processQuery';
+import slugIt from './slugIt';
 
 export {
-  processQuery,
+  slugIt,
 };

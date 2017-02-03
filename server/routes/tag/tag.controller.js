@@ -1,7 +1,7 @@
 import { responseHandler } from '../../core';
-import Tag from '../../models/tag';
+import { Tag, Activity } from '../../models';
 
-const debug = require('debug')('boldr:post-controller');
+const debug = require('debug')('boldr:tag-ctrl');
 
 async function listTags(req, res, next) {
   try {
@@ -12,13 +12,20 @@ async function listTags(req, res, next) {
   }
 }
 
+async function getTag(req, res, next) {
+  try {
+    const aTag = await Tag.query().findById(req.params.id);
+    return responseHandler(res, 200, aTag);
+  } catch (err) {
+    return next(err);
+  }
+}
 async function getTaggedPosts(req, res, next) {
   try {
     const tags = await Tag
       .query()
       .findById(req.params.id)
-      .eager('[posts]')
-      .first();
+      .eager('posts');
     return responseHandler(res, 200, tags);
   } catch (error) {
     return next(error);
@@ -30,7 +37,7 @@ async function getTaggedPostsByName(req, res, next) {
     const tags = await Tag
       .query()
       .where({ name: req.params.name })
-      .eager('[posts]')
+      .eager('posts')
       .first();
     debug(tags);
     return responseHandler(res, 200, tags);
@@ -41,6 +48,16 @@ async function getTaggedPostsByName(req, res, next) {
 
 async function createTag(req, res, next) {
   try {
+    req.assert('name', 'A name must be provided').notEmpty();
+    const errors = req.validationErrors();
+    if (errors) {
+      return res.status(400).send(errors);
+    }
+    const checkTag = await Tag.query().where({ name: req.body.name });
+
+    if (checkTag.length) {
+      return res.status(409).json('A tag by this name already exists');
+    }
     const newTag = await Tag.query().insert(req.body);
     await Activity.query().insert({
       user_id: req.user.id,
@@ -48,7 +65,7 @@ async function createTag(req, res, next) {
       activity_tag: newTag.id,
     });
     return responseHandler(res, 201, newTag);
-  } catch (err) {
+  } catch (error) {
     return next(error);
   }
 }
@@ -56,12 +73,7 @@ async function createTag(req, res, next) {
 function updateTag(req, res) {
   return Tag.query()
     .patchAndFetchById(req.params.id, req.body)
-    .then(async (tag) => {
-      await Activity.query().insert({
-        user_id: req.user.id,
-        action_type_id: 2,
-        activity_tag: req.params.id,
-      });
+    .then((tag) => {
       responseHandler(res, 202, tag);
     });
 }
@@ -82,4 +94,4 @@ async function relateTagToPost(req, res, next) {
   }
 }
 
-export { listTags, getTaggedPosts, getTaggedPostsByName, createTag, updateTag, deleteTag, relateTagToPost };
+export { listTags, getTag, getTaggedPosts, getTaggedPostsByName, createTag, updateTag, deleteTag, relateTagToPost };

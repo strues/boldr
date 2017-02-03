@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TransitionGroup from 'react-addons-css-transition-group';
 import { notificationDismiss } from '../../state/modules/notifications/notifications';
+
 import Notification from './Notification';
 
 const getter = (obj, propName) => (obj.get ? obj.get(propName) : obj[propName]);
@@ -19,7 +20,7 @@ type Props = {
   CustomComponent: ReactElement,
 };
 
-class Notifications extends Component {
+export class Notifications extends Component {
   constructor() {
     super();
     this._onDismiss = this._onDismiss.bind(this);
@@ -41,18 +42,18 @@ class Notifications extends Component {
     } = this.props;
 
     const renderedNotifications = notifications.map((notification) => (
-    <Notification
-      componentClassName="boldr-notification"
-      dismissAfter={ notification.dismissAfter || dismissAfter }
-      onDismiss={ this._onDismiss }
-      onActionClick={ onActionClick }
-      actionLabel={ actionLabel }
-      key={ getter(notification, 'id') }
-      id={ getter(notification, 'id') }
-      message={ getter(notification, 'message') }
-      kind={ getter(notification, 'kind') }
-    />
-  ));
+      <Notification
+        componentClassName="boldr-notification"
+        dismissAfter={ notification.dismissAfter || dismissAfter }
+        onDismiss={ this._onDismiss }
+        onActionClick={ onActionClick }
+        actionLabel={ actionLabel }
+        key={ getter(notification, 'id') }
+        id={ getter(notification, 'id') }
+        message={ getter(notification, 'message') }
+        kind={ getter(notification, 'kind') }
+      />
+    ));
     const classes = [
       'boldr-notification__container',
       className || null,
