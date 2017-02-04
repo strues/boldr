@@ -10,7 +10,7 @@
     "/flow-typed/",
     "/__fixtures__/",
     "/node_modules/",
-    "<rootDir>/shared/theme/",
+    "<rootDir>/shared/styles/",
     "<rootDir>/shared/types/"
   ],
   "transform": {
