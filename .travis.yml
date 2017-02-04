@@ -51,7 +51,7 @@ before_script:
   - yarn run build
 
 script:
-  - yarn run test:ci -- -u
+  - yarn run test:ci
 
 after_success:
   - yarn run coveralls
