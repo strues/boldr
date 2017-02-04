@@ -23,41 +23,6 @@ class User extends BaseModel {
    * @type {array}
    */
   static hidden = [];
-  static jsonSchema = {
-    type: 'object',
-    required: ['username', 'email', 'password', 'first_name', 'last_name'],
-    properties: {
-      id: {
-        type: 'string',
-        minLength: 36,
-        maxLength: 36,
-        pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
-      },
-      username: {
-        type: 'string',
-        minLength: 3,
-        maxLength: 64,
-        pattern: '^[A-Za-z0-9-_]+$',
-      },
-      email: { type: 'string', format: 'email' },
-      password: { type: 'string', maxLength: 60 },
-      verified: { type: 'boolean', default: false },
-      first_name: { type: 'string', minLength: 3, maxLength: 255 },
-      last_name: { type: 'string', minLength: 3, maxLength: 255 },
-      avatar_url: { type: 'string', minLength: 3, maxLength: 255 },
-      profile_image: { type: 'string', minLength: 3, maxLength: 255 },
-      location: { type: 'string', minLength: 3, maxLength: 255 },
-      bio: { type: 'text', minLength: 3 },
-      website: { type: 'string', minLength: 3, maxLength: 255 },
-      birthday: { type: 'date', minLength: 8, maxLength: 8 },
-      created_at: { type: 'string', format: 'date-time' },
-      updated_at: {
-        type: ['string', 'null'],
-        format: 'date-time',
-        default: null,
-      },
-    },
-  };
 
   static get relationMappings() {
     return {
