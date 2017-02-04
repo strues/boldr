@@ -9,6 +9,7 @@ const router = express.Router();
  * @apiGroup Tag
  * @apiPermission public
  * @apiUse listParams
+ * @apiParam  {String}  include=posts     Return the posts with tags
  * @apiSuccess (200) {Object[]} tags List of tags.
  * @apiError {Object} 400 Some parameters may contain invalid values.
  */

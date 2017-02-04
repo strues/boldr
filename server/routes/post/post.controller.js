@@ -48,7 +48,7 @@ export async function createPost(req, res, next) {
   await newPost.$relatedQuery('author').relate({ id: req.user.id });
 
   if (!req.body.tags) {
-    return next(new BadRequest('You must enter tags'));
+    return res.status(400).json('You must submit at least one tag.');
   }
   req.body.tags = req.body.tags.split(',', 5).map(tag => tag.substr(0, 15));
 

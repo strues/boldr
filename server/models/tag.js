@@ -8,6 +8,7 @@ class Tag extends BaseModel {
     return 'tag';
   }
   static addTimestamps = false;
+
   static jsonSchema = {
     type: 'object',
     required: ['name'],

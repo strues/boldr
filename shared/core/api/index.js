@@ -185,8 +185,9 @@ export const doFetchTags = (name) =>
   apiClient.get(`/tags/${name}/posts`);
 
 export const getAllTags = () =>
+  apiClient.get('/tags?include=posts');
+export const getOnlyTags = () =>
   apiClient.get('/tags');
-
 export const doAddTag = (values) => {
   const payload = {
     name: values.name,

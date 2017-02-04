@@ -5,7 +5,14 @@ const debug = require('debug')('boldr:tag-ctrl');
 
 async function listTags(req, res, next) {
   try {
-    const allTags = await Tag.query().eager('[posts]');
+    const includeQuery = req.query.include;
+    // if request query is include=posts
+    if (includeQuery) {
+      const allTags = await Tag.query().eager(`[${includeQuery}]`);
+      return responseHandler(res, 200, allTags);
+    }
+    // or just return tags
+    const allTags = await Tag.query();
     return responseHandler(res, 200, allTags);
   } catch (err) {
     return next(err);
