@@ -14,7 +14,8 @@ import Slider from 'react-md/lib/Sliders';
 import Dropzone from 'react-dropzone';
 import { connect } from 'react-redux';
 import { uploadFiles } from '../../../state/modules/admin/attachments/actions';
-import FileView from './components/FileView';
+import FileCardView from './components/FileCardView';
+import FileListView from './components/FileListView';
 
 type Props = {
   onUploadFinish: () => void,
@@ -25,9 +26,8 @@ type Props = {
   dispatch: Function,
   ui: Object,
   selectFile: () => void,
-  _timeout: Function,
-
 };
+
 type State = {
   activeTabIndex: Number,
   tabTwoChildren: any,
@@ -46,11 +46,6 @@ class FileManager extends Component {
     (this: any).onOpenClick = this.onOpenClick.bind(this);
   }
   state: State;
-  componentWillUnmount() {
-    if (this._timeout) {
-      clearTimeout(this._timeout);
-    }
-  }
 
   props: Props;
   onDrop(files) {
@@ -65,19 +60,6 @@ class FileManager extends Component {
   }
 
   _handleTabChange(activeTabIndex: Number) {
-    if (activeTabIndex === 1 && !this.state.tabTwoChildren) {
-    // Fake async loading
-      (this: any)._timeout = setTimeout(() => {
-        (this: any)._timeout = null;
-
-        this.setState({
-          tabTwoChildren: [
-            <Slider id="slider" defaultValue={ 30 } key="slider" className="md-cell md-cell--12" />,
-          ],
-        });
-      }, 3000);
-    }
-
     this.setState({ activeTabIndex });
   }
   _toggleCollapse() {
@@ -94,7 +76,8 @@ class FileManager extends Component {
     return (
     <div>
       <Toolbar
-        colored
+        titleStyle={ { color: '#fff' } }
+        style={ { backgroundColor: '#22262d' } }
         title="File Manager"
         nav={ null }
         actions={ <Button onClick={ this._toggleCollapse } label="Upload File" raised primary /> }
@@ -120,7 +103,7 @@ class FileManager extends Component {
       >
         <Tabs tabId="tab">
           <Tab label="Card View">
-            <FileView
+            <FileCardView
               files={ attachments.files }
               removeMedia={ handleRemoveMedia }
               selectFile={ this.props.selectFile }
@@ -134,7 +117,11 @@ class FileManager extends Component {
               transitionEnterTimeout={ 300 }
               transitionLeave={ false }
             >
-              {tabTwoChildren}
+              <FileListView
+                files={ attachments.files }
+                removeMedia={ handleRemoveMedia }
+                selectFile={ this.props.selectFile }
+              />
             </CSSTransitionGroup>
           </Tab>
         </Tabs>

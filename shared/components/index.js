@@ -10,7 +10,6 @@ import Image from './Image';
 import Icon from './Icon';
 import Loader from './Loader';
 import Paragraph from './Paragraph';
-import Flag from './Flag';
 import Hamburger from './Hamburger';
 import KeyVisual from './KeyVisual';
 import FormCard from './Form/FormCard';
@@ -35,7 +34,6 @@ export {
   Widget,
   Loader,
   Paragraph,
-  Flag,
   Hamburger,
   KeyVisual,
   FormGroup,

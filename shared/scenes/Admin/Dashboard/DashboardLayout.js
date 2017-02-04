@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import type { ReactElement } from 'types/react';
 import Avatar from 'react-md/lib/Avatars';
 import NavigationDrawer from 'react-md/lib/NavigationDrawers';
-import { Grid, Col } from '../../../components/index';
+import { Grid, Col, Row } from '../../../components/index';
 import navItems from './buildAdminNav';
 
 const styled = require('styled-components').default;
@@ -15,6 +15,9 @@ const Wrapper = styled.div`
   height: 100%;
   padding-top: 25px;
   box-sizing: border-box;
+  margin-left: 15px;
+  margin-right: 15px;
+  max-width: 2000px;
 `;
 const UserSection = styled.div`
   display: inline-flex;
@@ -75,13 +78,9 @@ class DashboardLayout extends Component {
           desktopType={ NavigationDrawer.DrawerTypes.FULL_HEIGHT }
           toolbarActions={ toolbarActionItems }
         >
-          <Grid fluid>
-            <Col xs>
-              <Wrapper>
+            <Wrapper>
               { this.props.children }
             </Wrapper>
-            </Col>
-          </Grid>
         </NavigationDrawer>
     );
   }

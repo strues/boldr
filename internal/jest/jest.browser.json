@@ -23,13 +23,15 @@
   ],
   "testPathIgnorePatterns": [
     "<rootDir>/(server|internal|config|docs|boldrCMS|.happypack|bin|.idea|public|db)/",
-    "__snapshots__"
+    "__snapshots__",
+    "/styles/"
   ],
   "transformIgnorePatterns": [
     "/node_modules/",
     "/.happypack/",
     "/boldrCMS/",
-    "/db/"
+    "/db/",
+    "/styles/"
   ],
   "coverageReporters": [
     "json"
