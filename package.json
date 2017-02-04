@@ -40,7 +40,7 @@
       }
     },
     "migrate": {
-      "command": "knex migrate:latest",
+      "command": "node --harmony internal/scripts/db.js migrate",
       "env": {
         "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr",
         "NODE_ENV": "development"
