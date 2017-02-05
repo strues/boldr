@@ -1,11 +1,10 @@
-/* @flow */
-
-import { sync as globSync } from 'glob';
+import fs from 'fs';
 import path from 'path';
+import { sync as globSync } from 'glob';
 import appRootDir from 'app-root-dir';
 // $FlowFixMe
 import flowRemoveTypes from 'flow-remove-types';
-import fs from 'fs';
+
 import rimraf from 'rimraf';
 import { exec } from '../utils';
 
