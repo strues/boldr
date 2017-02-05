@@ -32,7 +32,7 @@ Boldr is a modern content management framework. Think of Boldr as the solid foun
 - [Postgres](https://github.com/postgres/postgres) ([Knex](http://knexjs.org/) & [Objection](https://github.com/Vincit/objection.js/))
 - [Redis](http://redis.io/)
 - [Docker](https://github.com/docker/docker)
-- [Webpack v2](https://github.com/webpack/webpack)
+- [Webpack](https://github.com/webpack/webpack)
 
 ## Getting Started / Installation
 
@@ -54,11 +54,19 @@ Quick notes:
   - **Frontend**: 3000 - _React SSR server_  
   - **Webpack**: 3001 - _dev only_  
 
+Boldr is configured by default to serve api documentation from `http://localhost:3000/apidocs/`. The docs are mostly complete and are kept up to date. You can also find them in [the docs folder](docs/apidoc.md) as markdown.
+
+
 ### Development
 
 #### Database
 
+
+The database does not require an initial migration and seed if ran using the provided Docker setup.  
+
+
 To create a new database you may run `npm run createdb`. The configuration for the createdb script is located in `tools/scripts/createDB.js`. Now once you have a fresh database, run the migration command with `npm run migrate` followed by `npm run seed`. Your database is now ready to go!
+
 
 #### CMS
 
@@ -124,8 +132,6 @@ View a **very early** demo at <https://staging.boldr.io>
 
 [cc-img]: https://codeclimate.com/github/strues/boldr/badges/gpa.svg
 [cc-link]: https://codeclimate.com/github/strues/boldr
-[circle-img]: https://circleci.com/gh/strues/boldr.svg?style=svg
-[circle-link]: https://circleci.com/gh/strues/boldr
 [gitter-img]: https://badges.gitter.im/Join%20Chat.svg
 [gitter-link]: https://gitter.im/boldr/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
 [coverage-link]: https://codeclimate.com/github/strues/boldr/coverage
