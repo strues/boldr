@@ -142,7 +142,7 @@ export async function uploadAttachment(req, res, next) {
       // send through graphicsmagick
       gm(readstream).noProfile().quality(70).write(`./public/files/${newFileName}`, async (err) => {
         if (err) {
-          return res.status(500).send('Could not parse upload completely.');
+          return res.status(400).send('Could not parse upload completely.');
         }
         // delete the temporary file
         fs.removeSync(fileLoc);
