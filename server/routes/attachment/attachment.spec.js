@@ -19,22 +19,12 @@ describe('Attachment API Endpoint', () => {
           expect(typeof res.body).toBe('object');
         });
   });
-  //
-  // test('+++ GET /attachments/:id', async () => {
-  //   const { body } = await request(app)
-  //     .post('/api/v1/tags')
-  //     .set('Authorization', `Bearer ${token}`)
-  //     .send({
-  //       name: faker.random.word(),
-  //       description: 'a tag for a test.',
-  //     });
-  //   const tagId = body.id;
-  //   const postid = 'cb61bbae-c91e-4014-b665-3485734b88fb';
-  //   return request(app)
-  //   .get(`/api/v1/tags/${tagId}/relate/${postid}`)
-  //   .set('Authorization', `Bearer ${token}`)
-  //   .expect((res) => {
-  //     expect(res.status).toBe(200);
-  //   });
-  // });
+  test('+++ GET /attachments/:id', () => {
+    return request(app)
+      .get('/api/v1/attachments/013e8568-ea91-11e6-a50e-07030846d478')
+      .expect((res) => {
+        expect(res.status).toBe(200);
+        expect(typeof res.body).toBe('object');
+      });
+  });
 });

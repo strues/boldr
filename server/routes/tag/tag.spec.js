@@ -2,7 +2,7 @@ import request from 'supertest';
 import faker from 'faker';
 import app from '../../app';
 
-describe('Tags API Endpoint', () => {
+describe('Tags API Endpoint', async () => {
   let token;
   beforeAll(async () => {
     const loginData = {

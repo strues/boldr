@@ -18,10 +18,10 @@ if (getConfig('logger.console')) {
   transports.push(
     new winston.transports.Console({
       handleExceptions: true,
+      level: 'error',
       prettyPrint: true,
-      json: false,
       colorize: true,
-      level: 'debug',
+      silent: false,
       timestamp: tsFormat,
     }),
   );
@@ -35,8 +35,6 @@ logger.stream = {
     logger.info(message);
   },
 };
-process.on('unhandledRejection', (reason, Promise) => {
-  logger.warn(`Unhandled rejection at ${Promise}\n`, reason);
-});
+
 export { logger };
 export default logger;

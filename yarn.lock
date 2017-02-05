@@ -3623,11 +3623,7 @@ immutability-helper@^2.1.1:
   dependencies:
     invariant "^2.2.0"
 
-immutable@^3.x.x:
-  version "3.8.1"
-  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
-
-immutable@~3.7.4:
+immutable@^3.x.x, immutable@~3.7.4:
   version "3.7.6"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.7.6.tgz#13b4d3cb12befa15482a26fe1b2ebae640071e4b"
 
@@ -5278,9 +5274,9 @@ object.values@^1.0.3:
     function-bind "^1.1.0"
     has "^1.0.1"
 
-objection@0.7.0-rc.2:
-  version "0.7.0-rc.2"
-  resolved "https://registry.yarnpkg.com/objection/-/objection-0.7.0-rc.2.tgz#a1100f721f537720d498d9f07f68c27fcf1b8eaa"
+objection@0.7.0-rc.3:
+  version "0.7.0-rc.3"
+  resolved "https://registry.yarnpkg.com/objection/-/objection-0.7.0-rc.3.tgz#2b595963516484e80c521929c90756ddfc0f03fc"
   dependencies:
     ajv "^4.8.2"
     babel-runtime "^6.6.1"

@@ -44,9 +44,9 @@ export async function createMenu(req, res, next) {
 export async function updateMainMenu(req, res, next) {
   try {
     const updatedNav = await Menu.query()
-      .patchAndFetchById(1, req.body);
+      .patchAndFetchById(req.params.id, req.body);
 
-    return res.status(201).json(updatedNav);
+    return res.status(202).json(updatedNav);
   } catch (error) {
     return next(new InternalServer(error));
   }

@@ -1,5 +1,6 @@
 import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
+import { checkRole } from '../../middleware/rbac';
 import * as ctrl from './menu.controller';
 import detailRoutes from './detail/menuDetail.routes';
 
@@ -19,7 +20,7 @@ router.get('/', ctrl.listMenu);
  * @apiPermission admin
  * @apiUse authHeader
  */
-router.post('/', isAuthenticated, ctrl.createMenu);
+router.post('/', isAuthenticated, checkRole('Admin'), ctrl.createMenu);
 
 /**
  * @api {get} /menus/:id    Get menu
@@ -37,7 +38,7 @@ router.get('/:id', ctrl.showMenu);
  * @apiUse authHeader
  * @apiParam {Number} id The id of the menu
  */
-router.put('/:id', isAuthenticated, ctrl.updateMainMenu);
+router.put('/:id', isAuthenticated, checkRole('Admin'), ctrl.updateMainMenu);
 
 /**
  * @api {patch} /menus/:id      Update menu
@@ -47,7 +48,7 @@ router.put('/:id', isAuthenticated, ctrl.updateMainMenu);
  * @apiUse authHeader
  * @apiParam {Number} id The id of the link
  */
-router.patch('/:id', isAuthenticated, ctrl.updateMainMenu);
+router.patch('/:id', isAuthenticated, checkRole('Admin'), ctrl.updateMainMenu);
 
 router.use('/details', detailRoutes);
 export default router;

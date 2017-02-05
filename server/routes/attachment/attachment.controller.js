@@ -40,8 +40,8 @@ export async function listAttachments(req, res, next) {
  */
 export async function getAttachment(req, res, next) {
   try {
-    const media = await Attachment.query().findById(req.params.id);
-    return responseHandler(res, 200, media);
+    const file = await Attachment.query().findById(req.params.id);
+    return responseHandler(res, 200, file);
   } catch (err) {
     return next(error);
   }

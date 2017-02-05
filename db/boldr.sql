@@ -36,56 +36,56 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
 --
--- Name: hstore; Type: EXTENSION; Schema: -; Owner: 
+-- Name: hstore; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
 
 
 --
--- Name: EXTENSION hstore; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION hstore; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs';
 
 
 --
--- Name: pgcrypto; Type: EXTENSION; Schema: -; Owner: 
+-- Name: pgcrypto; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
 
 
 --
--- Name: EXTENSION pgcrypto; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION pgcrypto; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
 
 
 --
--- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: 
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
 
 
 --
--- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
@@ -915,11 +915,11 @@ INSERT INTO post (id, title, slug, feature_image, attachments, meta, featured, c
 <p>&nbsp;Donec eget tortor id ipsum maximus commodo nec eu quam. Aliquam erat volutpat. Nunc tincidunt est sit amet justo placerat egestas. Vestibulum efficitur, neque tempor feugiat lacinia, turpis ex efficitur urna, ullamcorper porta ligula lorem id neque. Quisque interdum risus at nisl finibus varius. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.In euismod gravida tortor in placerat. Aenean blandit blandit efficitur. Cras a accumsan augue, at tincidunt massa. Vivamus eleifend sem sed nibh tempor laoreet. Quisque blandit turpis vitae bibendum mattis. Nulla sagittis quam eget diam feugiat ultricies. Aliquam varius tellus et turpis viverra tempus. Nam sit amet ex suscipit, convallis tortor at, malesuada felis. Vestibulum arcu eros, bibendum sit amet tempus placerat, pharetra nec tortor. Ut scelerisque quam non magna tincidunt, nec varius massa blandit.</p>
 <p><br></p>', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, whenan unknown printer took a galley of type and scrambled it to make a type specimen book.', '1b062e26-df71-48ce-b363-4ae9b966e7a0', true, '2017-01-27 02:52:52.687899+00', NULL);
 INSERT INTO post (id, title, slug, feature_image, attachments, meta, featured, content, excerpt, user_id, published, created_at, updated_at) VALUES ('a0207b95-e7ee-4909-b258-1c2e89d1ba2c', 'National Operations Manager', 'National-Operations-Manager', 'http://lorempixel.com/640/480', NULL, NULL, false, 'Impedit ut qui perferendis dolor aliquam consequatur tenetur. Ullam dolor ut dolor qui ut voluptas ut. Laborum quasi cumque quisquam qui qui omnis et. Qui a iste similique ut asperiores id esse et. Laboriosam labore consectetur ut et sed. Aliquam ut expedita.
- Pariatur id sunt. Eius sit nesciunt ea ipsum accusamus necessitatibus et. Possimus mollitia rerum reprehenderit non quia quia et. Omnis occaecati accusamus non dolores quis modi reiciendis. Ab voluptas commodi ullam velit enim et nostrum.
- Et architecto est vel enim enim. Voluptatem autem eaque esse aliquam. Sit explicabo quia sit animi. Ducimus saepe mollitia ullam dolorem.', 'Assumenda ratione quibusdam distinctio. Est ducimus perspiciatis delectus. Distinctio minima qui autem. Impedit fugit eaque molestias et ad. Quasi sed sint aperiam consequatur exercitationem blanditiis rem.', '1b062e26-df71-48ce-b363-4ae9b966e7a0', true, '2017-01-27 05:08:50.752+00', '2017-01-27 05:08:50.752+00');
+Pariatur id sunt. Eius sit nesciunt ea ipsum accusamus necessitatibus et. Possimus mollitia rerum reprehenderit non quia quia et. Omnis occaecati accusamus non dolores quis modi reiciendis. Ab voluptas commodi ullam velit enim et nostrum.
+Et architecto est vel enim enim. Voluptatem autem eaque esse aliquam. Sit explicabo quia sit animi. Ducimus saepe mollitia ullam dolorem.', 'Assumenda ratione quibusdam distinctio. Est ducimus perspiciatis delectus. Distinctio minima qui autem. Impedit fugit eaque molestias et ad. Quasi sed sint aperiam consequatur exercitationem blanditiis rem.', '1b062e26-df71-48ce-b363-4ae9b966e7a0', true, '2017-01-27 05:08:50.752+00', '2017-01-27 05:08:50.752+00');
 INSERT INTO post (id, title, slug, feature_image, attachments, meta, featured, content, excerpt, user_id, published, created_at, updated_at) VALUES ('8a41dcf1-d8db-4376-9b3f-48cc6fa676ad', 'Chief Optimization Analyst', 'Chief-Optimization-Analyst', 'http://lorempixel.com/640/480', NULL, NULL, false, 'Rerum harum illum ipsum. Ipsam quia qui enim omnis quae. Dolores aliquam quis sapiente sint est. Veniam velit deleniti voluptates qui nostrum. Dolor dolores optio saepe. Et aliquam consequatur qui cum ut quis ea.
- Dolores qui et libero quas sit commodi. Et vero ipsa explicabo non aut eos sunt quam sint. Hic at nobis eius vel quisquam nisi enim ut.
- Illum rerum eligendi. Dolores rerum expedita pariatur. Voluptatem ut vel. Aut sunt eum.', 'Veniam omnis quis et sed et. Sit quo non autem illo nesciunt accusamus. Nam officia molestias laborum aut asperiores ipsa hic inventore. Vitae sed et architecto aut vitae.', '1b062e26-df71-48ce-b363-4ae9b966e7a0', true, '2017-01-27 05:11:33.993+00', '2017-01-27 05:11:33.993+00');
+Dolores qui et libero quas sit commodi. Et vero ipsa explicabo non aut eos sunt quam sint. Hic at nobis eius vel quisquam nisi enim ut.
+Illum rerum eligendi. Dolores rerum expedita pariatur. Voluptatem ut vel. Aut sunt eum.', 'Veniam omnis quis et sed et. Sit quo non autem illo nesciunt accusamus. Nam officia molestias laborum aut asperiores ipsa hic inventore. Vitae sed et architecto aut vitae.', '1b062e26-df71-48ce-b363-4ae9b966e7a0', true, '2017-01-27 05:11:33.993+00', '2017-01-27 05:11:33.993+00');
 
 
 --
@@ -1056,6 +1056,7 @@ INSERT INTO user_role (id, user_id, role_id) VALUES (1, '1b062e26-df71-48ce-b363
 INSERT INTO user_role (id, user_id, role_id) VALUES (2, 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f', 2);
 INSERT INTO user_role (id, user_id, role_id) VALUES (8, 'f4d869a6-1a75-469b-a9cc-965c552929e4', 1);
 
+INSERT INTO "attachment" (id, file_name, safe_name, original_name, file_description, user_id, url, created_at, updated_at) VALUES ('013e8568-ea91-11e6-a50e-07030846d478', 'rJw7LCM_x.png', 'SomeFile.png', 'A file somewhere', 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f', 'files/img.png', '2017-01-27 02:52:52.603831+00', NULL);
 
 --
 -- Name: user_role_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
@@ -1664,4 +1665,3 @@ ALTER TABLE ONLY user_role
 --
 -- PostgreSQL database dump complete
 --
-

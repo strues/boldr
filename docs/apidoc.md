@@ -652,7 +652,7 @@ Access-Control-Allow-Credentials: true
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| include			| String[]			|  <p>Return associated models with the request</p>							|
+| include			| String			|  <p>Return the posts with tags</p>							|
 | page			| Number			| **optional** <p>Page number.</p>							|
 | limit			| Number			| **optional** <p>Amount of returned items.</p>							|
 | sort			| String[]			| **optional** <p>Order of returned items.</p>							|
