@@ -1,6 +1,6 @@
 import cors from 'cors';
 import uuid from 'uuid';
-import shrinkRay from 'shrink-ray';
+import compression from 'compression';
 import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 import expressValidator from 'express-validator';
@@ -13,7 +13,7 @@ import getConfig from '../../config/get';
 // Attach a unique "nonce" to every response.  This allows use to declare
 // inline scripts as being safe for execution against our content security policy.
 // @see https://helmetjs.github.io/docs/csp/
-function nonceMiddleware(req: $Request, res: $Response, next: NextFunction) {
+function nonceMiddleware(req, res, next) {
   res.locals.nonce = uuid(); // eslint-disable-line no-param-reassign
   next();
 }
@@ -22,7 +22,7 @@ export default (app) => {
   app.disable('x-powered-by');
   app.set('trust proxy', 'loopback');
   app.use(nonceMiddleware);
-  app.use(shrinkRay());
+  app.use(compression());
   // enable CORS - Cross Origin Resource Sharing
   // allow for sending credentials (auth token) in the headers.
   app.use(cors({ origin: true, credentials: true }));

@@ -11,6 +11,7 @@ import {
   InternalServer,
   NotImplemented,
   UserNotVerifiedError,
+  ApiError,
 }
 from './errors';
 
@@ -20,6 +21,7 @@ export {
   Unauthorized,
   Forbidden,
   NotFound,
+  ApiError,
   MethodNotAllowed,
   Conflict,
   InternalServer,

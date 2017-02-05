@@ -16,8 +16,4 @@ describe('<PostDate />', () => {
       />);
     expect(wrapper.instance().props.created).toBe('2017-01-27T02:52:52.687Z');
   });
-  it('renders snapshot', () => {
-    const wrapper = shallow(<PostDate created="2017-01-27T02:52:52.687Z" />);
-    expect(shallowToJson(wrapper)).toMatchSnapshot();
-  });
 });

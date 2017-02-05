@@ -5,7 +5,7 @@ import * as ctrl from './template.controller';
 const router = express.Router();
 
 /**
- * @api {get} /pages       Get all pages
+ * @api {get} /pages       List all pages
  * @apiName listPages
  * @apiGroup Pages
  * @apiPermission public

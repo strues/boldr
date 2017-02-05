@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.route('/')
       /**
-       * @api {get} /posts Retrieve all posts
+       * @api {get} /posts      List all posts
        * @apiName ListPosts
        * @apiGroup Post
        * @apiPermission public
@@ -25,7 +25,7 @@ router.route('/')
        */
       .get(ctrl.listPosts)
       /**
-       * @api {post} /posts Create a new post
+       * @api {post} /posts         Create post
        * @apiName CreatePost
        * @apiGroup Post
        * @apiPermission admin
@@ -46,7 +46,7 @@ router.route('/')
 
 router.route('/slug/:slug')
       /**
-       * @api {get} /posts/slug/:slug Retrieve a post by its slug.
+       * @api {get} /posts/slug/:slug     Get post by slug
        * @apiName GetSlug
        * @apiGroup Post
        * @apiPermission public
@@ -67,7 +67,7 @@ router.route('/slug/:slug')
 
 router.route('/pid/:id')
       /**
-       * @api {get} /posts/pid/:id Retrieve a post by its id.
+       * @api {get} /posts/pid/:id      Get post by id
        * @apiName GetId
        * @apiGroup Post
        * @apiPermission public
@@ -85,7 +85,7 @@ router.route('/pid/:id')
        */
       .post(isAuthenticated, checkRole('Admin'), ctrl.addTag)
       /**
-       * @api {put} /posts/pid/:id Update a post by its id
+       * @api {put} /posts/pid/:id          Update post by id
        * @apiName UpdatePost
        * @apiGroup Post
        * @apiPermission admin
@@ -94,7 +94,7 @@ router.route('/pid/:id')
        */
       .put(isAuthenticated, checkRole('Admin'), ctrl.update)
       /**
-       * @api {delete} /posts/pid/:id Remove a post by its id
+       * @api {delete} /posts/pid/:id       Delete post by id
        * @apiName DestroyPost
        * @apiGroup Post
        * @apiPermission admin

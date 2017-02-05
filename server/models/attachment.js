@@ -6,9 +6,8 @@ import Post from './post';
 import Activity from './activity';
 
 class Attachment extends BaseModel {
-  static addTimestamps = true;
-  static addUUID = false;
   static get tableName() { return 'attachment'; }
+  static addTimestamps = true;
   static get relationMappings() {
     return {
       owner: {
@@ -37,8 +36,8 @@ class Attachment extends BaseModel {
         join: {
           from: 'attachment.id',
           to: 'activity.activity_attachment',
-        }
-      }
+        },
+      },
     };
   }
 }

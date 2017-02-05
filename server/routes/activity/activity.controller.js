@@ -2,7 +2,7 @@ import { responseHandler, BadRequest } from '../../core';
 
 import Activity from '../../models/activity';
 
-const debug = require('debug')('boldrAPI:activity-controller');
+const debug = require('debug')('boldr:activity-ctrl');
 
 /**
  * Return a list of all recent activities from the database
@@ -23,6 +23,7 @@ export async function listActivities(req, res, next) {
 
     return responseHandler(res, 200, activities);
   } catch (error) {
+    /* istanbul ignore next */
     return next(new BadRequest(error));
   }
 }

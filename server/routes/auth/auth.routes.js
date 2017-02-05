@@ -5,7 +5,7 @@ import * as ctrl from './auth.controller';
 const router = express.Router();
 
 /**
- * @api {post} /auth/login Login
+ * @api {post} /auth/login        Login
  * @apiName Login
  * @apiGroup Auth
  * @apiHeader {String} Authorization Bearer {token}
@@ -45,7 +45,7 @@ const router = express.Router();
 router.post('/login', ctrl.loginUser);
 
 /**
- * @api {post} /auth/signup Signup
+ * @api {post} /auth/signup       Signup
  * @apiName Signup
  * @apiGroup Auth
  * @apiParam {String} email User email address
@@ -61,8 +61,8 @@ router.post('/login', ctrl.loginUser);
 router.post('/signup', ctrl.registerUser);
 
 /**
- * @api {get} /auth/check Check
- * @apiName checkAuthentication
+ * @api {get} /auth/check          Authentication check
+ * @apiName CheckAuthentication
  * @apiGroup Auth
  * @apiUse authHeader
  * @apiSuccess (Success 200) {Object} user Current user data
@@ -71,7 +71,7 @@ router.post('/signup', ctrl.registerUser);
 router.get('/check', isAuthenticated, ctrl.checkAuthentication);
 
 /**
- * @api {get} /auth/verification/:verifToken Verify
+ * @api {get} /auth/verification/:verifToken        Verify user
  * @apiName verify
  * @apiGroup Auth
  * @apiParam {String} verification <VerificationToken>

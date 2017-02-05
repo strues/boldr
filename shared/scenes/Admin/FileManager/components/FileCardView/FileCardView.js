@@ -1,20 +1,9 @@
 /* @flow */
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import { Row, Col } from '../../../../../components/Layout';
-import File from '../File';
 
-const CardGroup = styled.section`
-  display: flex;
-  overflow: hidden;
-`;
-const CardGroupCard = styled.div`
-  flex: 1 1 0;
-  border: none;
-  border-radius: 0;
-  margin-left: 10px;
-  margin-right: 10px;
-`;
+import { Grid, Row, Col } from '../../../../../components';
+import File from '../File';
 
 type Props = {
   selectFile: Function,
@@ -22,20 +11,22 @@ type Props = {
   files: Array<Object>,
 };
 
-const FileView = (props: Props) => {
+const FileCardView = (props: Props) => {
   return (
-      <CardGroup>
+      <Grid fluid>
+      <Row>
         {
           props.files.map((file) =>
-          <CardGroupCard key={ file.id }>
+          <Col sm={ 12 } md={ 4 } lg={ 3 } key={ file.id }>
             <File file={ file } removeMedia={ props.removeMedia } selectFile={ props.selectFile } />
-          </CardGroupCard>)
+          </Col>)
          }
-       </CardGroup>
+       </Row>
+     </Grid>
   );
 };
 
-FileView.propTypes = {
+FileCardView.propTypes = {
   files: PropTypes.arrayOf(PropTypes.shape({
     id: PropTypes.string.isRequired,
     filename: PropTypes.string,
@@ -44,4 +35,4 @@ FileView.propTypes = {
   removeMedia: PropTypes.func,
 };
 
-export default FileView;
+export default FileCardView;

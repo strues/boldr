@@ -40,8 +40,8 @@ export async function listAttachments(req, res, next) {
  */
 export async function getAttachment(req, res, next) {
   try {
-    const media = await Attachment.query().findById(req.params.id);
-    return responseHandler(res, 200, media);
+    const file = await Attachment.query().findById(req.params.id);
+    return responseHandler(res, 200, file);
   } catch (err) {
     return next(error);
   }
@@ -142,7 +142,7 @@ export async function uploadAttachment(req, res, next) {
       // send through graphicsmagick
       gm(readstream).noProfile().quality(70).write(`./public/files/${newFileName}`, async (err) => {
         if (err) {
-          return res.status(500).send('Could not parse upload completely.');
+          return res.status(400).send('Could not parse upload completely.');
         }
         // delete the temporary file
         fs.removeSync(fileLoc);

@@ -71,8 +71,16 @@ export function updateDetail(req, res) {
     .then(navigation => responseHandler(res, 202, navigation));
 }
 
-export function deleteDetail(req, res) {
-  return MenuDetail.query()
-    .deleteById(req.params.id)
-    .then(() => responseHandler(res, 204));
+export async function deleteDetail(req, res, next) {
+  try {
+    const menuD = await MenuDetail.query().findById(req.params.id);
+    if (!menuD) {
+      return res.status(400).json('Unable to find a matching menu detail');
+    }
+    await menuD.$relatedQuery('menu').unrelate().where('menu_detail_id', req.params.id);
+    await MenuDetail.query().deleteById(req.params.id);
+    return responseHandler(res, 204);
+  } catch (error) {
+    return next(error);
+  }
 }

@@ -27,16 +27,10 @@ export function doSignup(data) {
   };
 }
 
-const beginSignUp = () => {
-  return { type: t.SIGNUP_USER_REQUEST };
-};
+const beginSignUp = () => ({ type: t.SIGNUP_USER_REQUEST });
 
 // Signup Success
-const signUpSuccess = () => {
-  return {
-    type: t.SIGNUP_USER_SUCCESS,
-  };
-};
+const signUpSuccess = () => ({ type: t.SIGNUP_USER_SUCCESS });
 
 // Signup Error
 const signUpError = (err) => {
@@ -74,9 +68,7 @@ export function doLogin(data) {
       });
   };
 }
-const beginLogin = () => {
-  return { type: t.LOGIN_REQUEST };
-};
+const beginLogin = () => ({ type: t.LOGIN_REQUEST });
 
 function loginSuccess(response) {
   return {

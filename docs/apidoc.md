@@ -3,53 +3,54 @@
 boldr api documentation
 
 - [Activity](#activity)
-	- [Retrieve all latest activities](#retrieve-all-latest-activities)
+	- [List all activities](#list-all-activities)
 	
 - [Admin](#admin)
-	- [Retrieve the latest counts for various records kept in the database](#retrieve-the-latest-counts-for-various-records-kept-in-the-database)
+	- [List statistics](#list-statistics)
 	
 - [Attachment](#attachment)
-	- [Remove attachment from database and S3](#remove-attachment-from-database-and-s3)
-	- [Get all attachment entries from the database.](#get-all-attachment-entries-from-the-database.)
-	- [Get a specific file by its id](#get-a-specific-file-by-its-id)
-	- [Updates an attachment in the database](#updates-an-attachment-in-the-database)
-	- [Upload an attachment](#upload-an-attachment)
+	- [Delete attachment](#delete-attachment)
+	- [List all attachments](#list-all-attachments)
+	- [Get specific attachment](#get-specific-attachment)
+	- [Update attachment](#update-attachment)
+	- [Upload attachment](#upload-attachment)
 	
 - [Auth](#auth)
+	- [Authentication check](#authentication-check)
 	- [Login](#login)
 	- [Signup](#signup)
-	- [Check](#check)
-	- [Verify](#verify)
+	- [Verify user](#verify-user)
 	
 - [MenuDetails](#menudetails)
-	- [Create a new menu detail](#create-a-new-menu-detail)
-	- [Delete a detail](#delete-a-detail)
-	- [Return a list of all menu details](#return-a-list-of-all-menu-details)
-	- [Return a specific menu detail by its id.](#return-a-specific-menu-detail-by-its-id.)
-	- [Update a menu detail](#update-a-menu-detail)
+	- [Create menu detail](#create-menu-detail)
+	- [Delete detail](#delete-detail)
+	- [List all menu items](#list-all-menu-items)
+	- [Get menu detail](#get-menu-detail)
+	- [Update menu detail](#update-menu-detail)
 	
 - [Menu](#menu)
-	- [Create a new menu](#create-a-new-menu)
-	- [Return a list of all menu blocks](#return-a-list-of-all-menu-blocks)
-	- [Return a specific menu by its id.](#return-a-specific-menu-by-its-id.)
-	- [Update a navigation](#update-a-navigation)
-	- [Update a menu](#update-a-menu)
+	- [Create menu](#create-menu)
+	- [List all menus](#list-all-menus)
+	- [Get menu](#get-menu)
+	- [Update menu](#update-menu)
+	- [Update menu](#update-menu)
 	
 - [Pages](#pages)
-	- [Get all pages](#get-all-pages)
+	- [List all pages](#list-all-pages)
 	
 - [Post](#post)
 	- [Add a tag to the post](#add-a-tag-to-the-post)
-	- [Create a new post](#create-a-new-post)
-	- [Remove a post by its id](#remove-a-post-by-its-id)
-	- [Retrieve a post by its id.](#retrieve-a-post-by-its-id.)
-	- [Retrieve a post by its slug.](#retrieve-a-post-by-its-slug.)
-	- [Retrieve all posts](#retrieve-all-posts)
-	- [Update a post by its id](#update-a-post-by-its-id)
+	- [Create post](#create-post)
+	- [Delete post by id](#delete-post-by-id)
+	- [Get post by id](#get-post-by-id)
+	- [Get post by slug](#get-post-by-slug)
+	- [List all posts](#list-all-posts)
+	- [Update post by id](#update-post-by-id)
 	
 - [Role](#role)
-	- [Get information for the specific role](#get-information-for-the-specific-role)
-	- [Get a list of all roles](#get-a-list-of-all-roles)
+	- [Get specific role](#get-specific-role)
+	- [Get users for role](#get-users-for-role)
+	- [List all roles](#list-all-roles)
 	
 - [Settings](#settings)
 	- [Add an additional setting](#add-an-additional-setting)
@@ -58,29 +59,31 @@ boldr api documentation
 	- [Update a specific setting](#update-a-specific-setting)
 	
 - [Tag](#tag)
-	- [Retrieve all tags](#retrieve-all-tags)
-	- [Get a specific tag by its id.](#get-a-specific-tag-by-its-id.)
-	- [Create a new tag](#create-a-new-tag)
-	- [Returns all posts associated with the tag.](#returns-all-posts-associated-with-the-tag.)
-	- [Returns all posts associated with the tag.](#returns-all-posts-associated-with-the-tag.)
-	- [Update a tag](#update-a-tag)
+	- [Create tag](#create-tag)
+	- [Delete tag permanently](#delete-tag-permanently)
+	- [Get specific tag](#get-specific-tag)
+	- [Get related posts from tag id](#get-related-posts-from-tag-id)
+	- [Get tag by name with related posts](#get-tag-by-name-with-related-posts)
+	- [List all tags](#list-all-tags)
+	- [Relate tag to post](#relate-tag-to-post)
+	- [Update tag](#update-tag)
 	
 - [Token](#token)
-	- [Send email](#send-email)
-	- [Submit password](#submit-password)
+	- [Send forgot password email](#send-forgot-password-email)
+	- [Reset password](#reset-password)
 	
 - [User](#user)
 	- [Create user](#create-user)
 	- [Delete user](#delete-user)
-	- [Retrieve user](#retrieve-user)
-	- [Retrieve all users](#retrieve-all-users)
+	- [Get user](#get-user)
+	- [List all users](#list-all-users)
 	- [Update user](#update-user)
 	
 
 
 # Activity
 
-## Retrieve all latest activities
+## List all activities
 
 
 
@@ -89,7 +92,7 @@ boldr api documentation
 
 # Admin
 
-## Retrieve the latest counts for various records kept in the database
+## List statistics
 
 
 
@@ -98,7 +101,7 @@ boldr api documentation
 
 # Attachment
 
-## Remove attachment from database and S3
+## Delete attachment
 
 
 
@@ -110,7 +113,7 @@ boldr api documentation
 |---------|-----------|--------------------------------------|
 | Authorization			| String			|  <p>The user's token</p>							|
 
-## Get all attachment entries from the database.
+## List all attachments
 
 
 
@@ -125,7 +128,7 @@ Example usage:
 curl -i https://staging.boldr.io/api/v1/attachments
 ```
 
-## Get a specific file by its id
+## Get specific attachment
 
 
 
@@ -136,7 +139,7 @@ curl -i https://staging.boldr.io/api/v1/attachments
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| id			| String			|  <p>The medias's id.</p>							|
+| id			| String			|  <p>The attachment's id (uuid)</p>							|
 
 ### Examples
 
@@ -146,7 +149,7 @@ Example usage:
 curl -i https://staging.boldr.io/api/v1/attachments/1
 ```
 
-## Updates an attachment in the database
+## Update attachment
 
 
 
@@ -158,7 +161,7 @@ curl -i https://staging.boldr.io/api/v1/attachments/1
 |---------|-----------|--------------------------------------|
 | Authorization			| String			|  <p>The user's token</p>							|
 
-## Upload an attachment
+## Upload attachment
 
 
 
@@ -166,6 +169,18 @@ curl -i https://staging.boldr.io/api/v1/attachments/1
 
 
 # Auth
+
+## Authentication check
+
+
+
+	GET /auth/check
+
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| Authorization			| String			|  <p>The user's token</p>							|
 
 ## Login
 
@@ -234,19 +249,7 @@ Access-Control-Allow-Credentials: true
 | username			| String			|  <p>The user's display name</p>							|
 | avatar_url			| String			|  <p>Url for the user's avatar</p>							|
 
-## Check
-
-
-
-	GET /auth/check
-
-### Headers
-
-| Name    | Type      | Description                          |
-|---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>The user's token</p>							|
-
-## Verify
+## Verify user
 
 
 
@@ -261,7 +264,7 @@ Access-Control-Allow-Credentials: true
 
 # MenuDetails
 
-## Create a new menu detail
+## Create menu detail
 
 
 
@@ -273,7 +276,7 @@ Access-Control-Allow-Credentials: true
 |---------|-----------|--------------------------------------|
 | Authorization			| String			|  <p>The user's token</p>							|
 
-## Delete a detail
+## Delete detail
 
 
 
@@ -291,14 +294,14 @@ Access-Control-Allow-Credentials: true
 |---------|-----------|--------------------------------------|
 | id			| Number			|  <p>The id of the detail</p>							|
 
-## Return a list of all menu details
+## List all menu items
 
 
 
 	GET /menu-details
 
 
-## Return a specific menu detail by its id.
+## Get menu detail
 
 
 
@@ -311,7 +314,7 @@ Access-Control-Allow-Credentials: true
 |---------|-----------|--------------------------------------|
 | id			| Number			|  <p>The id of the detail</p>							|
 
-## Update a menu detail
+## Update menu detail
 
 
 
@@ -326,7 +329,7 @@ Access-Control-Allow-Credentials: true
 
 # Menu
 
-## Create a new menu
+## Create menu
 
 
 
@@ -338,14 +341,14 @@ Access-Control-Allow-Credentials: true
 |---------|-----------|--------------------------------------|
 | Authorization			| String			|  <p>The user's token</p>							|
 
-## Return a list of all menu blocks
+## List all menus
 
 
 
 	GET /menus
 
 
-## Return a specific menu by its id.
+## Get menu
 
 
 
@@ -358,7 +361,7 @@ Access-Control-Allow-Credentials: true
 |---------|-----------|--------------------------------------|
 | id			| Number			|  <p>The id of the menu</p>							|
 
-## Update a navigation
+## Update menu
 
 
 
@@ -376,7 +379,7 @@ Access-Control-Allow-Credentials: true
 |---------|-----------|--------------------------------------|
 | id			| Number			|  <p>The id of the link</p>							|
 
-## Update a menu
+## Update menu
 
 
 
@@ -396,7 +399,7 @@ Access-Control-Allow-Credentials: true
 
 # Pages
 
-## Get all pages
+## List all pages
 
 
 
@@ -412,7 +415,7 @@ Access-Control-Allow-Credentials: true
 	POST /posts/pid/:id
 
 
-## Create a new post
+## Create post
 
 
 
@@ -435,21 +438,21 @@ Access-Control-Allow-Credentials: true
 | tags			| String			|  <p>Comma separated tags for the post</p>							|
 | status			| String			|  <p>One of: draft / published / archived</p>							|
 
-## Remove a post by its id
+## Delete post by id
 
 
 
 	DELETE /posts/pid/:id
 
 
-## Retrieve a post by its id.
+## Get post by id
 
 
 
 	GET /posts/pid/:id
 
 
-## Retrieve a post by its slug.
+## Get post by slug
 
 
 
@@ -462,14 +465,14 @@ Access-Control-Allow-Credentials: true
 |---------|-----------|--------------------------------------|
 | slug			| String			|  <p>The slug of the post</p>							|
 
-## Retrieve all posts
+## List all posts
 
 
 
 	GET /posts
 
 
-## Update a post by its id
+## Update post by id
 
 
 
@@ -478,7 +481,7 @@ Access-Control-Allow-Credentials: true
 
 # Role
 
-## Get information for the specific role
+## Get specific role
 
 
 
@@ -491,7 +494,20 @@ Access-Control-Allow-Credentials: true
 |---------|-----------|--------------------------------------|
 | id			| Number			|  <p>the role id</p>							|
 
-## Get a list of all roles
+## Get users for role
+
+
+
+	GET /roles/:id/users
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| id			| Number			|  <p>the role id</p>							|
+
+## List all roles
 
 
 
@@ -544,7 +560,7 @@ Access-Control-Allow-Credentials: true
 
 
 
-	PUT /settings/:id
+	PATCH /settings/:id
 
 ### Headers
 
@@ -562,30 +578,7 @@ Access-Control-Allow-Credentials: true
 
 # Tag
 
-## Retrieve all tags
-
-
-
-	GET /tags
-
-
-### Parameters
-
-| Name    | Type      | Description                          |
-|---------|-----------|--------------------------------------|
-| include			| String[]			|  <p>Return associated models with the request</p>							|
-| page			| Number			| **optional** <p>Page number.</p>							|
-| limit			| Number			| **optional** <p>Amount of returned items.</p>							|
-| sort			| String[]			| **optional** <p>Order of returned items.</p>							|
-
-## Get a specific tag by its id.
-
-
-
-	GET /tags/:id
-
-
-## Create a new tag
+## Create tag
 
 
 
@@ -597,11 +590,36 @@ Access-Control-Allow-Credentials: true
 |---------|-----------|--------------------------------------|
 | Authorization			| String			|  <p>{token}</p>							|
 
-## Returns all posts associated with the tag.
+## Delete tag permanently
 
 
 
-	GET /tags/:id/posts
+	DELETE /tags/:id
+
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| Authorization			| String			|  <p>The user's token</p>							|
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| id			| Number			|  <p>The tag id</p>							|
+
+## Get specific tag
+
+
+
+	GET /tags/:id
+
+
+## Get related posts from tag id
+
+
+
+	GET /tags/posts/:id
 
 
 ### Parameters
@@ -610,7 +628,7 @@ Access-Control-Allow-Credentials: true
 |---------|-----------|--------------------------------------|
 | id			| Number			|  <p>The tag id</p>							|
 
-## Returns all posts associated with the tag.
+## Get tag by name with related posts
 
 
 
@@ -623,11 +641,46 @@ Access-Control-Allow-Credentials: true
 |---------|-----------|--------------------------------------|
 | name			| String			|  <p>The tag name</p>							|
 
-## Update a tag
+## List all tags
 
 
 
-	PUT /tags/:id
+	GET /tags
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| include			| String			|  <p>Return the posts with tags</p>							|
+| page			| Number			| **optional** <p>Page number.</p>							|
+| limit			| Number			| **optional** <p>Amount of returned items.</p>							|
+| sort			| String[]			| **optional** <p>Order of returned items.</p>							|
+
+## Relate tag to post
+
+
+
+	GET /tags/:id/relate/:postid
+
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| Authorization			| String			|  <p>The user's token</p>							|
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| id			| Number			|  <p>The tag id</p>							|
+| postid			| String			|  <p>the id (uuid) of the post to relate</p>							|
+
+## Update tag
+
+
+
+	PATCH /tags/:id
 
 ### Headers
 
@@ -643,7 +696,7 @@ Access-Control-Allow-Credentials: true
 
 # Token
 
-## Send email
+## Send forgot password email
 
 
 
@@ -657,7 +710,7 @@ Access-Control-Allow-Credentials: true
 | email			| String			|  <p>Email address to receive the password reset token.</p>							|
 | link			| String			|  <p>Link to redirect user.</p>							|
 
-## Submit password
+## Reset password
 
 
 
@@ -703,14 +756,14 @@ Access-Control-Allow-Credentials: true
 |---------|-----------|--------------------------------------|
 | Authorization			| String			|  <p>The user's token</p>							|
 
-## Retrieve user
+## Get user
 
 
 
 	GET /users/:id
 
 
-## Retrieve all users
+## List all users
 
 
 

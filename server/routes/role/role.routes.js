@@ -2,9 +2,9 @@ import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
 import * as ctrl from './role.controller';
 
-const router = new express.Router();
+const router = express.Router();
 /**
- * @api {get} /roles       Get a list of all roles
+ * @api {get} /roles       List all roles
  * @apiName ListRoles
  * @apiGroup Role
  * @apiPermission public
@@ -18,7 +18,7 @@ const router = new express.Router();
  */
 router.get('/', ctrl.listRoles);
 /**
- * @api {get} /roles/:id       Get information for the specific role
+ * @api {get} /roles/:id       Get specific role
  * @apiName GetRole
  * @apiGroup Role
  * @apiPermission public
@@ -32,7 +32,7 @@ router.get('/', ctrl.listRoles);
  */
 router.get('/:id', ctrl.getRole);
 /**
- * @api {get} /roles/:id/users       Get all users related to the role
+ * @api {get} /roles/:id/users      Get users for role
  * @apiName GetRoleUsers
  * @apiGroup Role
  * @apiPermission public

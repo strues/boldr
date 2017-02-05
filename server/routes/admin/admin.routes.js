@@ -7,7 +7,7 @@ import * as ctrl from './admin.controller';
 const router = express.Router();
 
 /**
- * @api {get} /stats Retrieve the latest counts for various records kept in the database
+ * @api {get} /stats          List statistics
  * @apiName GetAllStats
  * @apiGroup Admin
  * @apiPermission admin

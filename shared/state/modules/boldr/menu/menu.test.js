@@ -1,6 +1,6 @@
 import menuReducer from './menu';
 
-describe('Menu Duck', () => {
+describe('Menu Reducer', () => {
   it('Should return the initial state', () => {
     expect(
         menuReducer(undefined, {}),
