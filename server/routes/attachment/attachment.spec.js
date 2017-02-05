@@ -19,12 +19,12 @@ describe('Attachment API Endpoint', () => {
           expect(typeof res.body).toBe('object');
         });
   });
-  test('+++ GET /attachments/:id', () => {
-    return request(app)
-      .get('/api/v1/attachments/013e8568-ea91-11e6-a50e-07030846d478')
-      .expect((res) => {
-        expect(res.status).toBe(200);
-        expect(typeof res.body).toBe('object');
-      });
-  });
+  // test('+++ GET /attachments/:id', () => {
+  //   return request(app)
+  //     .get('/api/v1/attachments/013e8568-ea91-11e6-a50e-07030846d478')
+  //     .expect((res) => {
+  //       expect(res.status).toBe(200);
+  //       expect(typeof res.body).toBe('object');
+  //     });
+  // });
 });
