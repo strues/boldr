@@ -80,7 +80,7 @@ describe('Posts API Endpoint', async () => {
           .set('Accept', 'application/json')
           .set('Authorization', `Bearer ${token}`)
           .send({
-            title: 'Just Another Post',
+            title: 'Random Post Title',
             feature_image: 'asdfasdfasdfasdf',
             content: 'aasdfasdf',
             excerpt: 'abavasdf',
