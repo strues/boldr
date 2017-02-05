@@ -13,7 +13,7 @@ import getConfig from '../../config/get';
 // Attach a unique "nonce" to every response.  This allows use to declare
 // inline scripts as being safe for execution against our content security policy.
 // @see https://helmetjs.github.io/docs/csp/
-function nonceMiddleware(req: $Request, res: $Response, next: NextFunction) {
+function nonceMiddleware(req, res, next) {
   res.locals.nonce = uuid(); // eslint-disable-line no-param-reassign
   next();
 }
