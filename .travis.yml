@@ -55,6 +55,7 @@ script:
 
 after_success:
   - yarn run coveralls
+  - bash <(curl -s https://codecov.io/bash)
 
 cache:
   yarn: true

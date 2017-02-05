@@ -1056,7 +1056,7 @@ INSERT INTO user_role (id, user_id, role_id) VALUES (1, '1b062e26-df71-48ce-b363
 INSERT INTO user_role (id, user_id, role_id) VALUES (2, 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f', 2);
 INSERT INTO user_role (id, user_id, role_id) VALUES (8, 'f4d869a6-1a75-469b-a9cc-965c552929e4', 1);
 
-INSERT INTO "attachment" (id, file_name, safe_name, original_name, file_description, user_id, url, created_at, updated_at) VALUES ('013e8568-ea91-11e6-a50e-07030846d478', 'rJw7LCM_x.png', 'SomeFile.png', 'A file somewhere', 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f', 'files/img.png', '2017-01-27 02:52:52.603831+00', NULL);
+INSERT INTO attachment (id, file_name, safe_name, original_name, file_description, user_id, url, created_at, updated_at) VALUES ('013e8568-ea91-11e6-a50e-07030846d478', 'rJw7LCM_x.png', 'SomeFile.png', 'A file somewhere', 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f', 'files/img.png', '2017-01-27 02:52:52.603831+00', NULL);
 
 --
 -- Name: user_role_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
