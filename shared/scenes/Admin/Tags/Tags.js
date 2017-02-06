@@ -9,6 +9,7 @@ import ListItem from 'react-md/lib/Lists/ListItem';
 import Paper from 'react-md/lib/Papers';
 import Toolbar from 'react-md/lib/Toolbars';
 import Button from 'react-md/lib/Buttons';
+import Helmet from 'react-helmet';
 import { Row, Col } from '../../../components';
 import { selectTag, clearTag, createTag, deleteTag } from '../../../state/modules/blog/tags';
 import type { Tag } from '../../../types/models';
@@ -76,6 +77,7 @@ class Tags extends Component {
     ];
     return (
       <Row>
+        <Helmet title="Admin: Tags" />
         <Col sm={ 12 } md={ 4 }>
           <Paper zDepth={ 2 }>
             <Toolbar

@@ -1,9 +1,13 @@
 import settingsReducer from './settings';
 
-describe('Settings Duck', () => {
+describe('Settings Reducer', () => {
   it('Should return the initial state', () => {
     expect(
         settingsReducer(undefined, {}),
-      ).toEqual([]);
+      ).toEqual({
+        all: {},
+        ids: [],
+        isFetching: false,
+      });
   });
 });

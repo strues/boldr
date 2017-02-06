@@ -14,7 +14,7 @@ const Signup = (props) => {
   return (
     <div className="boldr-form__signup">
       <FormCard
-        width={ 450 }
+        width={ 600 }
         title="Signup"
         form={ <SignupForm onSubmit={ props.handleOnSubmit } /> }
         extra1={ formBottom }

@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
+import Button from 'react-md/lib/Buttons';
+import FontIcon from 'react-md/lib/FontIcons';
 
 const Wrapper = styled.section`
   display: table;
@@ -34,6 +36,15 @@ const Img = styled.img`
 `;
 
 const FileListItem = props => {
+  function handleclick() {
+    const mediaId = props.file.id;
+    props.removeMedia(mediaId);
+  }
+
+  function handleSelect() {
+    const file = props.file;
+    props.selectFile(file);
+  }
   return (
     <Wrapper>
       <ImgWrapper>
@@ -41,6 +52,12 @@ const FileListItem = props => {
       </ImgWrapper>
       <Content>
         { props.children }
+        <Button icon onClick={ handleSelect }>
+          <FontIcon>mode_edit</FontIcon>
+        </Button>
+        <Button icon onClick={ handleclick }>
+          <FontIcon>delete_forever</FontIcon>
+        </Button>
       </Content>
     </Wrapper>
   );
@@ -48,6 +65,7 @@ const FileListItem = props => {
 
 FileListItem.propTypes = {
   children: PropTypes.node.isRequired,
+  selectFile: PropTypes.func,
   /**
    * A function which returns the media element to render in the background.
    * It recieves an props object which should be propagated to the JSX element.

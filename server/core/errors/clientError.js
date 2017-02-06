@@ -7,8 +7,8 @@ import HttpError from './httpError';
  * @param {number} code the error code.
  */
 class BadRequest extends HttpError {
-  constructor(message) {
-    super(message || 'The request could not be understood by the server due to malformed syntax.', 'BadRequest', 400);
+  constructor(message = 'The request could not be understood by the server due to malformed syntax.', status = 400, isPublic = false) {
+    super(message, 400, isPublic);
   }
 }
 
@@ -19,9 +19,8 @@ class BadRequest extends HttpError {
  * @param {number} code the error code.
  */
 class Unauthorized extends HttpError {
-  constructor(message) {
-    super(message || `The request requires user authentication. Please try again with the
-    correct authorization header`, 'Unauthorized', 401);
+  constructor(message = 'The request requires user authentication. Please try again with the correct authorization header', status = 401, isPublic = false) {
+    super(message, 401, isPublic);
   }
 }
 
@@ -32,8 +31,8 @@ class Unauthorized extends HttpError {
  * @param {number} code the error code.
  */
 class Forbidden extends HttpError {
-  constructor() {
-    super('Insufficient access rights.', 'Forbidden', 403);
+  constructor(message = 'Insufficient access rights.', status = 403, isPublic = false) {
+    super(message, 403, isPublic);
   }
 }
 
@@ -44,9 +43,9 @@ class Forbidden extends HttpError {
  * @param {number} code the error code.
  */
 class NotFound extends HttpError {
-  constructor() {
+  constructor(message, status = 404, isPublic = false) {
     super(`The server monkeys misplaced the resource you requested. Check for misspellings and
-    try the request again..`, 'NotFound', 404);
+    try the request again..`, 404, isPublic);
   }
 }
 
@@ -57,9 +56,9 @@ class NotFound extends HttpError {
  * @param {number} code the error code.
  */
 class MethodNotAllowed extends HttpError {
-  constructor() {
+  constructor(message, status = 405, isPublic = false) {
     super(`The method received in the request-line is known by the origin server but
-    not supported by the target resource.`, 'MethodNotAllowed', 405);
+    not supported by the target resource.`, 405, isPublic);
   }
 }
 
@@ -70,9 +69,9 @@ class MethodNotAllowed extends HttpError {
  * @param {number} code the error code.
  */
 class Conflict extends HttpError {
-  constructor() {
+  constructor(message, status = 409, isPublic = false) {
     super(`The request could not be completed due to a conflict with the current state
-    of the target resource.`, 'Conflict', 409);
+    of the target resource.`, 409, isPublic);
   }
 }
 /**
@@ -82,9 +81,9 @@ class Conflict extends HttpError {
  * @param {number} code the error code.
  */
 class UserNotVerifiedError extends HttpError {
-  constructor() {
+  constructor(message, status = 401, isPublic = false) {
     super('This account has not been confirmed. Please check your email for a verification link.',
-      'UserNotVerifiedError', 401);
+      401, isPublic);
   }
 }
 

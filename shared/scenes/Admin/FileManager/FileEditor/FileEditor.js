@@ -33,7 +33,7 @@ export class FileEditor extends Component {
             <Image imgSrc={ this.props.currentFile.url } width="400px" />
           </Col>
           <Col xs={ 12 } md={ 7 }>
-            <Paper zDepth={ 2 }>
+            <Paper zDepth={ 2 } style={ { padding: '1em' } }>
               <FileEditorForm onSubmit={ this.handleSubmit } />
             </Paper>
           </Col>

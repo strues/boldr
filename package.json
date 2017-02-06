@@ -143,7 +143,6 @@
     "gm": "^1.23.0",
     "helmet": "3.4.0",
     "hpp": "^0.2.1",
-    "http-status": "^1.0.1",
     "humps": "^2.0.0",
     "immutability-helper": "^2.1.1",
     "invariant": "^2.2.2",

@@ -1,6 +1,7 @@
 /* @flow */
 import React from 'react';
 import Card from 'react-md/lib/Cards/Card';
+import Helmet from 'react-helmet';
 import type { Post } from '../../../../types/models';
 import { selectPost } from '../../../../state/modules/blog/posts/actions';
 import PostTable from './components/PostTable';
@@ -18,6 +19,7 @@ type Props = {
 const PostList = (props: Props) => {
   return (
     <div>
+      <Helmet title="Admin: Post List" />
       <Card tableCard>
         <PostTable posts={ props.posts } handleDeleteClick={ props.handleDeleteClick } />
       </Card>

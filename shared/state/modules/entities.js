@@ -7,6 +7,7 @@ const initialState = {
   users: {},
   menus: {},
   menuDetails: {},
+  settings: {},
 };
 
 export default function entitiesReducer(state = initialState, action) {

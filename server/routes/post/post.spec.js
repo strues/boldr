@@ -51,7 +51,7 @@ describe('Posts API Endpoint', async () => {
             content: faker.lorem.paragraphs(),
             excerpt: faker.lorem.paragraph(),
             published: true,
-            tags: 'foo,bar',
+            tags: ['foo', 'bar'],
           });
 
     expect(status).toBe(400);
@@ -68,7 +68,7 @@ describe('Posts API Endpoint', async () => {
             content: faker.lorem.paragraphs(),
             excerpt: faker.lorem.paragraph(),
             published: true,
-            tags: 'foo,bar',
+            tags: ['foo', 'bar'],
           });
 
     expect(status).toBe(201);
@@ -85,7 +85,7 @@ describe('Posts API Endpoint', async () => {
             content: 'aasdfasdf',
             excerpt: 'abavasdf',
             published: true,
-            tags: 'foo,bar',
+            tags: ['foo', 'bar'],
           });
 
     expect(status).toBe(500);

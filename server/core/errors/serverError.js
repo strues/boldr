@@ -7,9 +7,9 @@ import HttpError from './httpError';
  * @param {number} code the error code.
  */
 class InternalServer extends HttpError {
-  constructor() {
+  constructor(message, status = 500, isPublic = false) {
     super(`The server encountered an unexpected condition which prevented it
-    from fulfilling the request.`, 'InternalServer', 500);
+    from fulfilling the request.`, 500, isPublic);
   }
 }
 
@@ -20,8 +20,8 @@ class InternalServer extends HttpError {
  * @param {number} code the error code.
  */
 class NotImplemented extends HttpError {
-  constructor() {
-    super('The server does not support the functionality required to fulfill the request.', 'NotImplemented', 500);
+  constructor(message, status = 500, isPublic = false) {
+    super('The server does not support the functionality required to fulfill the request.', 500, isPublic);
   }
 }
 

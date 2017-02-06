@@ -7,7 +7,8 @@
   "coverageDirectory": "<rootDir>/coverage",
   "coveragePathIgnorePatterns": [
     "<rootDir>/(internal|config|flow-typed|docs|boldrCMS|.happypack|bin|.idea|shared|client|public|db)/",
-    "/node_modules/"
+    "/node_modules/",
+    "/boldrSSR/"
   ],
   "transform": {
     "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
