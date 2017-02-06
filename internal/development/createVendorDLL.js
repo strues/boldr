@@ -1,8 +1,8 @@
-import webpack from 'webpack';
+import fs from 'fs';
 import { resolve as pathResolve } from 'path';
+import webpack from 'webpack';
 import appRootDir from 'app-root-dir';
 import md5 from 'md5';
-import fs from 'fs';
 import getConfig from '../../config/get';
 import { log } from '../utils';
 

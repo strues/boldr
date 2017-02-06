@@ -2,11 +2,11 @@ import { resolve as pathResolve } from 'path';
 import webpack from 'webpack';
 import appRootDir from 'app-root-dir';
 import { log } from '../utils';
+import webpackConfigFactory from '../webpack/configFactory';
+import getConfig from '../../config/get';
 import HotNodeServer from './hotNodeServer';
 import HotClientServer from './hotClientServer';
 import createVendorDLL from './createVendorDLL';
-import webpackConfigFactory from '../webpack/configFactory';
-import getConfig from '../../config/get';
 
 const usesDevVendorDLL = bundleConfig =>
 bundleConfig.devVendorDLL != null && bundleConfig.devVendorDLL.enabled;

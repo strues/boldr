@@ -44,12 +44,27 @@ module.exports.up = async (db) => {
     table.index('verified');
     table.index('email');
   });
-  await db.schema.createTable('token', (table) => {
+  await db.schema.createTable('verification_token', (table) => {
     // pk
     table.increments('id').unsigned().primary();
-    table.string('user_verification_token');
-    table.string('reset_password_token');
-    table.dateTime('reset_password_expiration');
+    table.string('ip', 32);
+    table.string('token');
+    table.boolean('used').defaultTo(false);
+    table.uuid('user_id').unsigned();
+    table.timestamp('created_at').defaultTo(db.fn.now());
+    table.timestamp('updated_at').nullable().defaultTo(null);
+    // fk
+    table.foreign('user_id').references('id').inTable('user').onDelete('cascade').onUpdate('cascade');
+    // indexes
+    table.index('token');
+  });
+  await db.schema.createTable('reset_token', (table) => {
+    // pk
+    table.increments('id').unsigned().primary();
+    table.string('ip', 32);
+    table.string('token', 255).comment('hashed token');
+    table.dateTime('expiration');
+    table.boolean('used').defaultTo(false);
 
     table.uuid('user_id').unsigned();
     table.timestamp('created_at').defaultTo(db.fn.now());
@@ -57,8 +72,7 @@ module.exports.up = async (db) => {
     // fk
     table.foreign('user_id').references('id').inTable('user').onDelete('cascade').onUpdate('cascade');
     // indexes
-    table.index('reset_password_token');
-    table.index('user_verification_token');
+    table.index('token');
   });
   await db.schema.createTable('tag', (table) => {
     table.increments('id').unsigned().primary();
@@ -73,6 +87,7 @@ module.exports.up = async (db) => {
     table.string('title', 140).unique().notNullable();
     table.string('slug').unique().notNullable();
     table.string('feature_image', 255).nullable();
+    table.string('background_image', 255).nullable();
     table.json('attachments').nullable();
     table.json('meta').nullable();
     table.boolean('featured').defaultTo(false);
@@ -248,7 +263,6 @@ module.exports.down = async (db) => {
   await db.schema.dropTableIfExists('action_type');
   await db.schema.dropTableIfExists('role');
   await db.schema.dropTableIfExists('user');
-  await db.schema.dropTableIfExists('token');
   await db.schema.dropTableIfExists('tag');
   await db.schema.dropTableIfExists('post');
   await db.schema.dropTableIfExists('attachment');
@@ -259,6 +273,8 @@ module.exports.down = async (db) => {
   await db.schema.dropTableIfExists('template');
   await db.schema.dropTableIfExists('page');
   await db.schema.dropTableIfExists('activity');
+  await db.schema.dropTableIfExists('verification_token');
+  await db.schema.dropTableIfExists('reset_token');
   await db.schema.dropTableIfExists('post_attachment');
   await db.schema.dropTableIfExists('post_tag');
   await db.schema.dropTableIfExists('user_role');

@@ -1,9 +1,8 @@
 /* @flow */
-
+import { execSync } from 'child_process';
 import HappyPack from 'happypack';
 import notifier from 'node-notifier';
-import colors from 'colors/safe';
-import { execSync } from 'child_process';
+import chalk from 'chalk';
 import appRootDir from 'app-root-dir';
 
 type HappyPackLoaderConfig = {
@@ -48,10 +47,14 @@ export function log(options: NotificationOptions) {
   const msg = `==> ${title} -> ${options.message}`;
 
   switch (level) {
-    case 'warn': console.log(colors.red(msg)); break;
-    case 'error': console.log(colors.bgRed.white(msg)); break;
+    case 'warn':
+      console.log(chalk.red(msg));
+      break;
+    case 'error':
+      console.log(chalk.white.bgRed(msg));
+      break;
     case 'info':
-    default: console.log(colors.green(msg));
+    default: console.log(chalk.green(msg));
   }
 }
 

@@ -2,7 +2,7 @@ import uuid from 'uuid';
 import * as objection from 'objection';
 import { mailer, signToken } from '../../services/index';
 import { welcomeEmail } from '../../services/mailer/templates';
-import { User, Activity, Token } from '../../models';
+import { User, Activity, VerificationToken } from '../../models';
 import {
   responseHandler,
   generateHash,
@@ -64,17 +64,17 @@ export async function registerUser(req, res, next) {
         throwNotFound();
       }
       // generate user verification token to send in the email.
-      const verificationToken = await generateHash();
+      const verifToken = await uuid();
       // get the mail template
-      const mailBody = await welcomeEmail(verificationToken);
+      const mailBody = await welcomeEmail(verifToken);
       // subject
       const mailSubject = 'Boldr User Verification';
       // send the welcome email
       mailer(user, mailBody, mailSubject);
       // create a relationship between the user and the token
       const verificationEmail = await user
-        .$relatedQuery('tokens')
-        .insert({ user_verification_token: verificationToken, user_id: user.id });
+        .$relatedQuery('verificationToken')
+        .insert({ ip: req.ip, token: verifToken, user_id: user.id });
       if (!verificationEmail) {
         return res.status(500).json('There was a problem with the mailer.');
       }
@@ -150,14 +150,22 @@ export async function verifyUser(req, res, next) {
       return next(new BadRequest('Invalid account verification code'));
     }
 
-    const token = await Token
+    const token = await VerificationToken
       .query()
-      .where({ user_verification_token: req.params.verifToken })
+      .where({ token: req.params.verifToken })
       .first();
 
+    if (token.used === true) {
+      return res.status(401).json('This token has already been used.');
+    }
     const user = await User
       .query()
       .patchAndFetchById(token.user_id, { verified: true });
+
+    await VerificationToken
+      .query()
+      .where({ token: req.params.verifToken })
+      .update({ used: true });
 
     return responseHandler(res, 201, user);
   } catch (err) {

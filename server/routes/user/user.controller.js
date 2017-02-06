@@ -3,7 +3,7 @@ import uuid from 'uuid';
 import * as objection from 'objection';
 import { mailer, signToken } from '../../services/index';
 import { welcomeEmail } from '../../services/mailer/templates';
-import Token from '../../models/token';
+import VerificationToken from '../../models/verificationToken';
 import {
   responseHandler,
   generateHash,
@@ -141,9 +141,9 @@ export async function adminCreateUser(req, res, next) {
       // send the welcome email
       mailer(user, mailBody, mailSubject);
       // create a relationship between the user and the token
-      const verificationEmail = await user.$relatedQuery('tokens')
+      const verificationEmail = await user.$relatedQuery('verificationToken')
         .insert({
-          user_verification_token: verificationToken,
+          token: verificationToken,
           user_id: user.id,
         });
 
