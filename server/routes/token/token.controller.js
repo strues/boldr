@@ -4,7 +4,7 @@ import mailer from '../../services/mailer';
 import { passwordModifiedEmail, forgotPasswordEmail } from '../../services/mailer/templates';
 import User from '../../models/user';
 import { responseHandler, generateHash, BadRequest } from '../../core';
-import Token from '../../models/token';
+import { VerificationToken, ResetToken } from '../../models';
 
 /**
  * forgottenPassword takes an email address, generates a reset token, updates the user in the database, then sends
@@ -24,14 +24,15 @@ export async function forgottenPassword(req, res, next) {
       return res.status(400).json({ error: 'Unable to locate an user with the provided email.' });
     }
     const mailSubject = '[Boldr] Password Reset';
-    const verificationToken = await uuid();
+    const resetPasswordToken = await generateHash();
 
-    await user.$relatedQuery('tokens').insert({
-      reset_password_token: verificationToken,
+    await user.$relatedQuery('resetToken').insert({
+      ip: req.ip,
+      token: resetPasswordToken,
       user_id: user.id,
     });
 
-    const mailBody = forgotPasswordEmail(verificationToken);
+    const mailBody = forgotPasswordEmail(resetPasswordToken);
 
     await mailer(user, mailBody, mailSubject);
     return responseHandler(res, 202, { message: 'Sending email with reset link' });
@@ -48,17 +49,17 @@ export async function forgottenPassword(req, res, next) {
  */
 export async function resetPassword(req, res, next) {
   try {
-    const findToken = await Token
+    const userResetToken = await ResetToken
     .query()
-    .where({ reset_password_token: req.body.token })
+    .where({ token: req.body.token })
     .first();
 
-    if (!findToken) {
+    if (!userResetToken) {
       return res.status(404).json({ error: 'Unable to locate an user with the provided token.' });
     }
     const mailSubject = '[Boldr] Password Changed';
 
-    const user = await User.query().findById(findToken.user_id);
+    const user = await User.query().findById(userResetToken.user_id);
     await User.query().patchAndFetchById(user.id, {
       password: req.body.password,
     });

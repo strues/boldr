@@ -1145,9 +1145,9 @@ base64url@2.0.0, base64url@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/base64url/-/base64url-2.0.0.tgz#eac16e03ea1438eff9423d69baa36262ed1f70bb"
 
-basic-auth@~1.0.3:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/basic-auth/-/basic-auth-1.0.4.tgz#030935b01de7c9b94a824b29f3fccb750d3a5290"
+basic-auth@~1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/basic-auth/-/basic-auth-1.1.0.tgz#45221ee429f7ee1e5035be3f51533f1cdfd29884"
 
 bcrypt-pbkdf@^1.0.0:
   version "1.0.1"
@@ -1663,7 +1663,7 @@ colors@1.0.3, colors@1.0.x:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/colors/-/colors-1.0.3.tgz#0433f44d809680fdeb60ed260f1b0c262e82a40b"
 
-colors@1.1.2, colors@^1.1.2, colors@~1.1.2:
+colors@^1.1.2, colors@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/colors/-/colors-1.1.2.tgz#168a4701756b6a7f51a12ce0c97bfa28c084ed63"
 
@@ -1834,15 +1834,15 @@ cosmiconfig@^2.1.0, cosmiconfig@^2.1.1:
     parse-json "^2.2.0"
     require-from-string "^1.1.0"
 
-coveralls@^2.11.15:
-  version "2.11.15"
-  resolved "https://registry.yarnpkg.com/coveralls/-/coveralls-2.11.15.tgz#37d3474369d66c14f33fa73a9d25cee6e099fca0"
+coveralls@^2.11.16:
+  version "2.11.16"
+  resolved "https://registry.yarnpkg.com/coveralls/-/coveralls-2.11.16.tgz#da9061265142ddee954f68379122be97be8ab4b1"
   dependencies:
     js-yaml "3.6.1"
     lcov-parse "0.0.10"
     log-driver "1.2.5"
     minimist "1.2.0"
-    request "2.75.0"
+    request "2.79.0"
 
 crc@3.4.4:
   version "3.4.4"
@@ -2374,9 +2374,9 @@ draft-js@^0.10.0:
     immutable "~3.7.4"
     object-assign "^4.1.0"
 
-draftjs-utils@^0.5.1:
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/draftjs-utils/-/draftjs-utils-0.5.1.tgz#a5ec87245ee8bac8cd5b05eca8395cfbd43fcd19"
+draftjs-utils@^0.6.2:
+  version "0.6.2"
+  resolved "https://registry.yarnpkg.com/draftjs-utils/-/draftjs-utils-0.6.2.tgz#9d1297c83dcd2a3dc253462bfd8e217e408dfb00"
   dependencies:
     immutable "^3.x.x"
 
@@ -3199,13 +3199,9 @@ generate-object-property@^1.1.0:
   dependencies:
     is-property "^1.0.0"
 
-generic-pool@2.4.2:
+generic-pool@2.4.2, generic-pool@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/generic-pool/-/generic-pool-2.4.2.tgz#886bc5bf0beb7db96e81bcbba078818de5a62683"
-
-generic-pool@^2.4.2:
-  version "2.5.4"
-  resolved "https://registry.yarnpkg.com/generic-pool/-/generic-pool-2.5.4.tgz#38c6188513e14030948ec6e5cf65523d9779299b"
 
 get-caller-file@^1.0.1:
   version "1.0.2"
@@ -4381,9 +4377,9 @@ kind-of@^3.0.2:
   dependencies:
     is-buffer "^1.0.2"
 
-knex@0.12.5:
-  version "0.12.5"
-  resolved "https://registry.yarnpkg.com/knex/-/knex-0.12.5.tgz#47ea9595c83da8d57236eda01938a83320ad5249"
+knex@0.12.6:
+  version "0.12.6"
+  resolved "https://registry.yarnpkg.com/knex/-/knex-0.12.6.tgz#a255f0ea03af2c2c94687a622c08acc1a9463c0e"
   dependencies:
     babel-runtime "^6.11.6"
     bluebird "^3.4.6"
@@ -4934,12 +4930,12 @@ moment@2.x.x, moment@^2.17.1:
   version "2.17.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.17.1.tgz#fed9506063f36b10f066c8b59a144d7faebe1d82"
 
-morgan@^1.7.0:
-  version "1.7.0"
-  resolved "https://registry.yarnpkg.com/morgan/-/morgan-1.7.0.tgz#eb10ca8e50d1abe0f8d3dad5c0201d052d981c62"
+morgan@^1.8.0:
+  version "1.8.0"
+  resolved "https://registry.yarnpkg.com/morgan/-/morgan-1.8.0.tgz#7884d7816b7e5a22db11a9e3a572b197a0e5566c"
   dependencies:
-    basic-auth "~1.0.3"
-    debug "~2.2.0"
+    basic-auth "~1.1.0"
+    debug "2.6.0"
     depd "~1.1.0"
     on-finished "~2.3.0"
     on-headers "~1.0.1"
@@ -5139,9 +5135,9 @@ node-uuid@^1.4.7, node-uuid@~1.4.7:
   version "1.4.7"
   resolved "https://registry.yarnpkg.com/node-uuid/-/node-uuid-1.4.7.tgz#6da5a17668c4b3dd59623bda11cf7fa4c1f60a6f"
 
-nodemailer@^3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-3.0.1.tgz#e6cbf049fee860d3aa9f16e605631b09270753ce"
+nodemailer@^3.0.2:
+  version "3.0.2"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-3.0.2.tgz#6f5ffc608590b1980a9c24820597e60ef8182305"
 
 nomnom@~1.6.2:
   version "1.6.2"
@@ -5274,7 +5270,7 @@ object.values@^1.0.3:
     function-bind "^1.1.0"
     has "^1.0.1"
 
-objection@0.7.0-rc.3:
+objection@0.7.0-rc.4:
   version "0.7.0-rc.3"
   resolved "https://registry.yarnpkg.com/objection/-/objection-0.7.0-rc.3.tgz#2b595963516484e80c521929c90756ddfc0f03fc"
   dependencies:
@@ -6369,9 +6365,9 @@ react-hot-loader@3.0.0-beta.6:
     redbox-react "^1.2.5"
     source-map "^0.4.4"
 
-react-md@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/react-md/-/react-md-1.0.2.tgz#5e6485889c80680755d9261e5ca2820b876a2493"
+react-md@^1.0.4:
+  version "1.0.4"
+  resolved "https://registry.yarnpkg.com/react-md/-/react-md-1.0.4.tgz#4172eaad792148feebfd3c64f97b9139b103b0c9"
   dependencies:
     classnames "^2.2.5"
     invariant "^2.2.1"
@@ -6708,7 +6704,7 @@ repeating@^2.0.0:
   dependencies:
     is-finite "^1.0.0"
 
-request@2, request@2.75.0, request@^2.61.0, request@^2.69.0:
+request@2, request@^2.61.0, request@^2.69.0:
   version "2.75.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.75.0.tgz#d2b8268a286da13eaa5d01adf5d18cc90f657d93"
   dependencies:
@@ -6734,7 +6730,7 @@ request@2, request@2.75.0, request@^2.61.0, request@^2.69.0:
     tough-cookie "~2.3.0"
     tunnel-agent "~0.4.1"
 
-request@^2.55.0, request@^2.79.0:
+request@2.79.0, request@^2.55.0, request@^2.79.0:
   version "2.79.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.79.0.tgz#4dfe5bf6be8b8cdc37fcf93e04b65577722710de"
   dependencies:
@@ -7205,9 +7201,9 @@ style-search@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/style-search/-/style-search-0.1.0.tgz#7958c793e47e32e07d2b5cafe5c0bf8e12e77902"
 
-styled-components@^1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-1.4.2.tgz#4fbb0e30b5adacd5c02ad7f6f1ff869c68fdc9a8"
+styled-components@^1.4.3:
+  version "1.4.3"
+  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-1.4.3.tgz#83fa44e553882aaa3ddc4363ccc435814d690706"
   dependencies:
     buffer "^5.0.2"
     css-to-react-native "^1.0.6"

@@ -8,7 +8,7 @@
 import fs from 'fs';
 import path from 'path';
 import appRootDir from 'app-root-dir';
-import colors from 'colors/safe';
+import chalk from 'chalk';
 import dotenv from 'dotenv';
 
 import pkg from '../../package.json';
@@ -39,7 +39,7 @@ function registerEnvFile() {
   // If we found an env file match the register it.
   if (envFilePath) {
     console.log( // eslint-disable-line no-console
-      colors.bgBlue.white(`==> Registering environment variables from: ${envFilePath}`),
+      chalk.white.bgBlue(`==> Registering environment variables from: ${envFilePath}`),
     );
     dotenv.config({ path: envFilePath });
   }

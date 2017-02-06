@@ -20,7 +20,7 @@ Model.knex(db);
 
 // Create an http listener for our express app.
 const listener = server.listen(getConfig('port'), getConfig('host'), () =>
-  logger.info(`Server listening on port ${getConfig('port')}`),
+  console.log(`Server listening on port ${getConfig('port')}`),
 );
 
 process.on('SIGINT', () => {

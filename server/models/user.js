@@ -5,7 +5,8 @@ import BaseModel from './base';
 // Related Models
 import Role from './role';
 import Attachment from './attachment';
-import Token from './token';
+import ResetToken from './resetToken';
+import VerificationToken from './verificationToken';
 import Post from './post';
 import UserRole from './join/userRole';
 
@@ -89,12 +90,20 @@ class User extends BaseModel {
           to: 'attachment.user_id',
         },
       },
-      tokens: {
+      verificationToken: {
         relation: Model.HasOneRelation,
-        modelClass: Token,
+        modelClass: VerificationToken,
         join: {
           from: 'user.id',
-          to: 'token.user_id',
+          to: 'verification_token.user_id',
+        },
+      },
+      resetToken: {
+        relation: Model.HasOneRelation,
+        modelClass: ResetToken,
+        join: {
+          from: 'user.id',
+          to: 'reset_token.user_id',
         },
       },
     };

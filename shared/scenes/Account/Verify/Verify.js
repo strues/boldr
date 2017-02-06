@@ -27,7 +27,7 @@ class Verify extends Component {
       <div>
         <FormCard
           title="Account verification"
-          form={ <Button raised primary label="Verify" onTouchTap={ this.handleVerify } /> }
+          form={ <Button raised primary label="Verify" onClick={ this.handleVerify } /> }
         />
       </div>
     );

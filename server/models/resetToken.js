@@ -2,17 +2,17 @@ import { Model } from 'objection';
 import BaseModel from './base';
 import User from './user';
 
-class Token extends BaseModel {
-  static get tableName() { return 'token'; }
+class ResetToken extends BaseModel {
+  static get tableName() { return 'reset_token'; }
   static addTimestamps = true;
 
   static get relationMappings() {
     return {
-      tokens: {
+      user: {
         relation: Model.BelongsToOneRelation,
         modelClass: User,
         join: {
-          from: 'token.user_id',
+          from: 'reset_token.user_id',
           to: 'user.id',
         },
       },
@@ -21,4 +21,4 @@ class Token extends BaseModel {
 
 }
 
-export default Token;
+export default ResetToken;
