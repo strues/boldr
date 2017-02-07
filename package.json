@@ -154,7 +154,7 @@
     "morgan": "^1.8.0",
     "nodemailer": "^3.0.2",
     "normalizr": "3.1.0",
-    "objection": "0.7.0-rc.4",
+    "objection": "0.7.0-rc.3",
     "offline-plugin": "^4.6.1",
     "pg": "^6.1.2",
     "pretty-error": "^2.0.2",
