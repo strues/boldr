@@ -8,7 +8,6 @@ import { TextField, TextEditor, Col, Row, Heading, FormGroup } from '../../../..
 import { uploadPostImage } from '../../../../../../state/modules/admin/attachments/actions';
 import RenderTags from '../RenderTags';
 
-
 const Wrapper = styled.section`
   padding: 1em;
   width: 100%;

@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import ExpansionPanel from 'react-md/lib/ExpansionPanels';
 import { connect } from 'react-redux';
+import TextField from 'react-md/lib/TextFields';
+import { Row } from '../../../../../components';
 import { updateBoldrSettings } from '../../../../../state/modules/boldr/settings';
 
 type Props = {
@@ -51,14 +53,18 @@ class SiteUrl extends Component {
         contentClassName="md-grid"
         onSave={ this.handleSubmit }
       >
-      <div>
-        <form onSubmit={ this.handleSubmit }>
-        <label>
-          Name:
-          <input type="text" value={ this.state.value } onChange={ this.handleChange } />
-        </label>
-      </form>
-    </div>
+        <Row>
+          <form onSubmit={ this.handleSubmit }>
+              <TextField
+                style={ { width: '400px' } }
+                id="floatingTitle"
+                label="Web address"
+                placeholder={ this.state.value }
+                value={ this.state.value }
+                onChange={ this.handleChange }
+              />
+        </form>
+        </Row>
     </ExpansionPanel>
     );
   }
