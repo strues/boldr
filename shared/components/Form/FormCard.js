@@ -22,7 +22,7 @@ type Props = {
   width: Number,
   title: String,
   form: any,
-  extra1: any,
+  extra1: ?any,
   extra2: ?any,
 };
 
@@ -32,7 +32,7 @@ const FormCard = (props: Props) => {
       <Col xs={ 12 }>
         <Row xsCenter>
           <Col xs={ 6 }>
-            <Card style={ { maxWidth: props.width || 600 } } className="md-block-centered">
+            <Card style={ { maxWidth: props.width || 600, marginTop: '100px' } } className="md-block-centered">
               <CardTitle
                 className="boldr-form__title"
                 title={ props.title }

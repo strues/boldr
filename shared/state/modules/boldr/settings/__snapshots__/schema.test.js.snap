@@ -1,0 +1,25 @@
+exports[`arrayOfSetting should match the normalizr-arrayOfSetting-schema 1`] = `
+ArraySchema {
+  "schema": EntitySchema {
+    "_getId": [Function],
+    "_key": "settings",
+    "_mergeStrategy": [Function],
+    "_processStrategy": [Function],
+    "schema": Object {
+      "idAttribute": "key",
+    },
+  },
+}
+`;
+
+exports[`setting schema should match the normalizr-setting-schema 1`] = `
+EntitySchema {
+  "_getId": [Function],
+  "_key": "settings",
+  "_mergeStrategy": [Function],
+  "_processStrategy": [Function],
+  "schema": Object {
+    "idAttribute": "key",
+  },
+}
+`;

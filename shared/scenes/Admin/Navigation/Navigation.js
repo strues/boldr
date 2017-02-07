@@ -6,6 +6,7 @@ import ListItem from 'react-md/lib/Lists/ListItem';
 import Button from 'react-md/lib/Buttons';
 import FontIcon from 'react-md/lib/FontIcons';
 import Paper from 'react-md/lib/Papers';
+import Helmet from 'react-helmet';
 import { Row, Col, Modal } from '../../../components/index';
 import { showModal, hideModal } from '../../../state/modules/boldr/ui/actions';
 import { updateMenuDetails, addMenuDetail, getByLabel } from '../../../state/modules/boldr/menu';
@@ -82,6 +83,7 @@ class Navigation extends Component {
 
     return (
       <div>
+        <Helmet title="Admin: Navigation" />
         <Row>
           <Col xs>
           <Paper zDepth={ 1 }>

@@ -48,6 +48,7 @@ export async function createPost(req, res, next) {
         excerpt: req.body.excerpt,
         content: req.body.content,
         feature_image: req.body.feature_image,
+        background_image: req.body.background_image,
         meta: req.body.meta,
         attachments: req.body.attachments,
         published: req.body.published,
@@ -55,18 +56,17 @@ export async function createPost(req, res, next) {
       });
       // relate the author to post
       await createPost.$relatedQuery('author').relate({ id: req.user.id });
-      // split req.body.tags at the comma
-      const reqTags = req.body.tags.split(',', 5).map(tag => tag.substr(0, 15));
-      // loop through and check if tag exists, if it does, relate to the post
-      // if it doesnt exist, create it and then relate.
-      for (let i = 0; i < reqTags.length; i++) {
-        const existingTag = await Tag.query().where('name', reqTags[i]).first();
+
+      const reqTags = req.body.tags;
+
+      reqTags.map(async (tag) => {
+        const existingTag = await Tag.query().where('name', tag).first();
         if (existingTag) {
           createPostTagRelation(existingTag, createPost);
         } else {
-          createPost.$relatedQuery('tags').insert({ name: reqTags[i] });
+          createPost.$relatedQuery('tags').insert({ name: tag });
         }
-      }
+      });
     });
 
     await Activity.query().insert({
@@ -92,7 +92,7 @@ export async function getSlug(req, res, next) {
       .first();
 
     if (!post) {
-      return res.status(404).json({ message: `Unable to find a post matching ${req.params.slug}.` });
+      return res.status(400).json({ message: `Unable to find a post matching ${req.params.slug}.` });
     }
     return responseHandler(res, 200, post);
   } catch (error) {

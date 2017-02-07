@@ -1,4 +1,5 @@
 {
+  "timers": "fake",
   "moduleNameMapper": {
     "^.*\\.scss$": "<rootDir>/internal/jest/styleMock.js",
     "^.*\\.css$": "<rootDir>/internal/jest/styleMock.js"

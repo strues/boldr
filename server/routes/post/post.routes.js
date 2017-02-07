@@ -1,7 +1,10 @@
 import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
 import { checkRole } from '../../middleware/rbac';
+import redisClient from '../../services/redis';
 import * as ctrl from './post.controller';
+
+const cache = require('express-redis-cache')({ client: redisClient });
 
 const router = express.Router();
 
@@ -23,7 +26,7 @@ router.route('/')
        * @apiSuccess {Object}   posts.author          The post author's user object
        * @apiError   {Object} 400 Some parameters may contain invalid values.
        */
-      .get(ctrl.listPosts)
+      .get(cache.route(), ctrl.listPosts)
       /**
        * @api {post} /posts         Create post
        * @apiName CreatePost

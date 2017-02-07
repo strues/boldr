@@ -3,8 +3,10 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import debounce from 'lodash/debounce';
+import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
 import testIfMobile from '../../core/utils/testIfMobile';
+import { fetchSettingsIfNeeded } from '../../state/modules/boldr/settings/actions';
 import { setMobileDevice } from '../../state/modules/boldr/ui/actions';
 import type { ReactChildren } from '../../types/react';
 import Notifications from '../Notification';
@@ -20,6 +22,9 @@ type Props = {
   isMobile: Boolean,
 };
 
+@provideHooks({
+  fetch: ({ dispatch }) => dispatch(fetchSettingsIfNeeded()),
+})
 class App extends Component {
   static childContextTypes = {
     dispatch: React.PropTypes.func,
@@ -33,6 +38,7 @@ class App extends Component {
 
   componentDidMount() {
     const { dispatch, location } = this.props;
+    this.props.dispatch(fetchSettingsIfNeeded());
     window.addEventListener('resize', debounce(event => {
       dispatch(setMobileDevice(testIfMobile()));
     }, 1000));
@@ -52,6 +58,7 @@ const mapStateToProps = (state) => {
   return {
     ui: state.boldr.ui,
     isMobile: state.boldr.ui.isMobile,
+    settings: state.boldr.settings,
   };
 };
 

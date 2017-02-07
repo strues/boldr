@@ -1,35 +1,52 @@
-import { createSelector } from 'reselect';
 import { combineReducers } from 'redux';
-import uniq from 'lodash/uniq';
 import * as t from './constants';
 
 export const STATE_KEY = 'settings';
 
-export const getSettings = createSelector(
-  [
-    (state) => state.boldr.settings.keys,
-    (state) => state.boldr.settings.byKey,
-  ],
-  (keys, byKey) => keys.map(key => byKey[key]),
-);
-
-function settingsReducer(state = [], action) {
+const all = (state = {}, action) => {
   switch (action.type) {
     case t.FETCH_SETTINGS_SUCCESS:
-      return [
+      return {
         ...state,
-        ...action.payload,
-      ];
-
-    case t.FETCH_SETTING_SUCCESS:
-      return [...state, uniq(action.payload.result)];
-
-    case t.DELETE_SETTING:
-      return state.filter(key => key !== action.key);
+        ...action.payload.entities.settings,
+      };
+    // case t.ADD_TAG_SUCCESS:
+    //   return {
+    //     ...state,
+    //     ...action.payload,
+    //   };
 
     default:
       return state;
   }
-}
+};
 
-export default settingsReducer;
+const ids = (state = [], action) => {
+  switch (action.type) {
+    case t.FETCH_SETTINGS_SUCCESS:
+      return action.payload.result;
+
+    default:
+      return state;
+  }
+};
+
+
+const isFetching = (state = false, action) => {
+  switch (action.type) {
+    case t.FETCH_SETTINGS_REQUEST:
+      return true;
+    case t.FETCH_SETTINGS_SUCCESS:
+    case t.FETCH_SETTINGS_FAILURE:
+      return false;
+    default:
+      return state;
+  }
+};
+
+
+export default combineReducers({
+  all,
+  ids,
+  isFetching,
+});

@@ -1,6 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
-import { Col, Row, Widget, Loader, KeyVisual } from '../../../components/index';
+import Helmet from 'react-helmet';
+import { Col, Row, Widget, Loader } from '../../../components/index';
 import type { Stats } from '../../../types/models';
 import { loadSiteActivity, fetchStats } from '../../../state/modules/admin/dashboard/actions';
 import { StatsWidget, ActivityWidget } from './components';
@@ -21,6 +22,7 @@ const Dashboard = (props: Props) => {
   }
   return (
         <Row>
+          <Helmet title="Admin Dashboard" />
           <Col xs={ 12 } md={ 8 }>
             <Row>
               <Col xs={ 6 } md={ 6 }>

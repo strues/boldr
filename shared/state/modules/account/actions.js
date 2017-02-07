@@ -216,3 +216,42 @@ export function verifyAccount(token) {
       }));
   };
 }
+
+
+/**
+  * PROFILE ACTIONS
+  * -------------------------
+  * @exports getProfile
+  *****************************************************************/
+
+export function getProfile(username) {
+  return (dispatch: Function) => {
+    dispatch(requestProfile());
+    return api.getUserProfile(username)
+      .then(response => {
+        if (response.status !== 200) {
+          dispatch(receiveProfileFailed());
+        }
+
+        const data = response.body;
+        dispatch(receiveProfile(data));
+      })
+      .catch(err => {
+        dispatch(receiveProfileFailed(err));
+      });
+  };
+}
+const requestProfile = () => {
+  return { type: t.FETCH_PROFILE_REQUEST };
+};
+
+const receiveProfile = (data) => {
+  return {
+    type: t.FETCH_PROFILE_SUCCESS,
+    payload: data,
+  };
+};
+
+const receiveProfileFailed = (err) => ({
+  type: t.FETCH_PROFILE_FAILURE, error: err,
+});

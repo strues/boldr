@@ -1,6 +1,7 @@
 /* @flow */
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
+
 import { Grid, Row, Col } from '../../../../../components';
 import File from '../File';
 import FileListItem from '../FileListItem';
@@ -16,7 +17,13 @@ const FileListView = (props: Props) => {
       <div className="boldr-filemanager__list">
       {
         props.files.map((file) =>
-        <FileListItem key={ file.id } imgSrc={ file.url }>
+        <FileListItem
+          key={ file.id }
+          imgSrc={ file.url }
+          removeMedia={ props.removeMedia }
+          selectFile={ props.selectFile }
+          file={ file }
+        >
           { file.file_name }
         </FileListItem>
         )

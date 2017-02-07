@@ -1,7 +1,23 @@
+import Drawer from 'react-md/lib/Drawers';
 import { LAYOUTS } from '../../../../core/constants';
 import * as t from './constants';
 
 export const STATE_KEY = 'ui';
+
+function updateDrawerType(state, { drawerType }) {
+  if (state.customDrawerType === drawerType) {
+    return state;
+  }
+
+  return Object.assign({}, state, { customDrawerType: drawerType });
+}
+const { mobile, tablet, desktop } = Drawer.getCurrentMedia();
+let defaultMedia = 'mobile';
+if (desktop) {
+  defaultMedia = 'desktop';
+} else if (tablet) {
+  defaultMedia = 'tablet';
+}
 
 const INITIAL_STATE = {
   loaded: false,
@@ -9,6 +25,10 @@ const INITIAL_STATE = {
   modal: false,
   drawer: false,
   isMobile: false,
+  mobile,
+  tablet,
+  desktop,
+  defaultMedia,
 };
 
 function uiReducer(state = INITIAL_STATE, action) {
@@ -43,6 +63,10 @@ function uiReducer(state = INITIAL_STATE, action) {
         ...state,
         isMobile: action.payload,
       };
+    case t.UPDATE_MEDIA:
+      return Object.assign({}, state, { ...action.media });
+    case t.UPDATE_DRAWER_TYPE:
+      return updateDrawerType(state, action);
     default:
       return state;
   }

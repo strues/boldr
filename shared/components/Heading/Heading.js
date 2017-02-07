@@ -12,6 +12,7 @@ const Heading = (props) => {
     paddingTop: props.top,
     paddingBottom: props.bottom,
     fontSize: props.override,
+    weight: props.weight,
     textDecoration: props.textDeco,
   };
   return React.createElement(tagName, { className, style }, props.children);
@@ -23,6 +24,7 @@ Heading.propTypes = {
   size: PropTypes.oneOf([1, 2, 3, 4, 5, 6]).isRequired,
   color: PropTypes.string,
   align: PropTypes.string,
+  weight: PropTypes.number,
   classname: PropTypes.string,
   children: PropTypes.node,
   top: PropTypes.string,

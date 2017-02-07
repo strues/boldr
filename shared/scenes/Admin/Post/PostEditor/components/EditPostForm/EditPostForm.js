@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Button from 'react-md/lib/Buttons/Button';
 import FontIcon from 'react-md/lib/FontIcons';
+import styled from 'styled-components';
 import { TextField, TextEditor, Col, Row, Heading, FormGroup } from '../../../../../../components';
 import { uploadPostImage } from '../../../../../../state/modules/admin/attachments/actions';
 
@@ -14,7 +15,14 @@ type Props = {
   input?: Object,
   label?: string,
 };
-
+const Wrapper = styled.section`
+  padding: 1em;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .4);
+  background-color: #fff;
+`;
 const EditPostForm = (props: Props) => {
   const { handleSubmit } = props;
     /**
@@ -28,7 +36,9 @@ const EditPostForm = (props: Props) => {
   return (
       <Row>
         <Col xs>
+          <Heading size={ 3 } weight={ 300 }>Editing { props.initialValues.title }</Heading>
           <form onSubmit={ handleSubmit }>
+            <Wrapper>
             <FormGroup>
             <Field
               id="post-title"
@@ -48,8 +58,9 @@ const EditPostForm = (props: Props) => {
                 label="Feature Image"
               />
             </FormGroup>
-
+          </Wrapper>
           <Field name="content" component={ renderEditor } />
+          <Wrapper>
           <FormGroup>
             <Field
               name="excerpt"
@@ -70,6 +81,7 @@ const EditPostForm = (props: Props) => {
           </FormGroup>
 
         <Button raised primary type="submit" label="Save Post" />
+      </Wrapper>
         </form>
         </Col>
       </Row>

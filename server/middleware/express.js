@@ -36,6 +36,14 @@ export default (app) => {
   app.use(bodyParser.text({ type: 'text/plain', limit: getConfig('body.limit') }));
   // parse anything else
   app.use(bodyParser.raw({ limit: getConfig('body.limit') }));
+  app.use(methodOverride((req, res) => {
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+      // look in urlencoded POST bodies and delete it
+      const method = req.body._method;
+      delete req.body._method;
+      return method;
+    }
+  }));
   // must be right after bodyParser
   app.use(expressValidator());
   app.use(busboy({
@@ -45,14 +53,7 @@ export default (app) => {
   }));
   app.use(hpp());
   app.use(flash());
-  app.use(methodOverride((req, res) => {
-    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-      // look in urlencoded POST bodies and delete it
-      const method = req.body._method;
-      delete req.body._method;
-      return method;
-    }
-  }));
+
   if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
     app.use(morgan('dev'));
   }

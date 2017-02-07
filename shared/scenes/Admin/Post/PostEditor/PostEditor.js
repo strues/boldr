@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import Helmet from 'react-helmet';
 import { updatePost } from '../../../../state/modules/blog/posts';
 import EditPostForm from './components/EditPostForm';
 
@@ -34,6 +34,7 @@ class PostEditor extends Component {
   render() {
     return (
       <div>
+        <Helmet title={ `Admin: Editing Post ${this.props.currentPost.title}` } />
         <EditPostForm
           initialValues={ this.props.currentPost }
           onSubmit={ this.handleSubmit }

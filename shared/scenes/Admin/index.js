@@ -66,6 +66,12 @@ export default (store, connect) => {
         },
       },
       {
+        path: 'settings',
+        getComponent(nextState, cb) {
+          import('./Settings').then(loadRoute(cb)).catch(errorLoading);
+        },
+      },
+      {
         path: 'templates',
         getComponent(nextState, cb) {
           import('./Templates').then(loadRoute(cb)).catch(errorLoading);

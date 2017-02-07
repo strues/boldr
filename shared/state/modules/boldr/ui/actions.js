@@ -15,3 +15,10 @@ export const closeDrawer = () => ({ type: t.CLOSE_DRAWER });
 export function setMobileDevice(enabled = true) {
   return { type: t.SET_MOBILE_DEVICE, payload: enabled };
 }
+
+export function updateMedia(drawerType, media) {
+  return { type: t.UPDATE_MEDIA, drawerType, media };
+}
+export function updateDrawerType(drawerType) {
+  return { type: t.UPDATE_DRAWER_TYPE, drawerType };
+}

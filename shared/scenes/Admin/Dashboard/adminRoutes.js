@@ -48,6 +48,11 @@ export default [
     icon: 'people',
   },
   {
+    primaryText: 'Settings',
+    path: 'admin/settings',
+    icon: 'settings_applications',
+  },
+  {
     primaryText: 'Templates',
     path: 'admin/templates',
     icon: 'web',

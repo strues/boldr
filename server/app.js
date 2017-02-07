@@ -4,8 +4,11 @@ import appRootDir from 'app-root-dir';
 import getConfig from '../config/get';
 import { expressMiddleware, authMiddleware, rbac, errorHandler } from './middleware';
 import routes from './routes/index';
+import redisClient from './services/redis';
 import boldrSSR from './middleware/boldrSSR';
 import clientBundle from './middleware/clientBundle';
+
+const cache = require('express-redis-cache')({ client: redisClient });
 
 const app = express();
 
@@ -24,9 +27,14 @@ app.use(express.static(pathResolve(appRootDir.get(), getConfig('publicAssetsPath
 
 app.use('/apidocs', express.static(pathResolve(appRootDir.get(), './public/apidocs')));
 
-// The React application middleware.
-app.get('*', boldrSSR);
+if (process.env.NODE_ENV === 'production') {
+  // The React application middleware.
+  app.get('*', cache.route(), boldrSSR);
+} else {
+  app.get('*', cache.route(), boldrSSR);
+}
 
 errorHandler(app);
 
 export default app;
+export { cache };

@@ -95,6 +95,7 @@ function ServerHTML(props) {
   return (
     <Html
       title={ getConfig('htmlPage.defaultTitle') }
+      titleTemplate={ getConfig('htmlPage.titleTemplate') }
       description={ getConfig('htmlPage.description') }
       appBodyString={ reactAppString }
       headerElements={

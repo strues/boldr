@@ -12,6 +12,7 @@ import CircularProgress from 'react-md/lib/Progress/CircularProgress';
 import TabsContainer from 'react-md/lib/Tabs/TabsContainer';
 import Slider from 'react-md/lib/Sliders';
 import Dropzone from 'react-dropzone';
+import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { uploadFiles } from '../../../state/modules/admin/attachments/actions';
 import FileCardView from './components/FileCardView';
@@ -75,6 +76,7 @@ class FileManager extends Component {
     const { attachments, handleRemoveMedia, onUploadFinish, ui } = this.props;
     return (
     <div>
+      <Helmet title="Admin: File Manager" />
       <Toolbar
         titleStyle={ { color: '#fff' } }
         style={ { backgroundColor: '#22262d' } }

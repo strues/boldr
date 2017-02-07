@@ -1,11 +1,9 @@
-import httpStatus from 'http-status';
-
-import ApiError from '../core/errors/ApiError';
+import HttpError from '../core/errors/httpError';
 
 export default (app) => {
     // catch 404 and forward to error handler
   app.use((req, res, next) => {
-    const err = new ApiError('Not found', httpStatus.NOT_FOUND);
+    const err = new HttpError('Not found', 404);
 
     return next(err);
   });

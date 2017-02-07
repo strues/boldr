@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import { Field, reduxForm, FieldArray } from 'redux-form';
 import { connect } from 'react-redux';
 import Button from 'react-md/lib/Buttons/Button';
 import Dropzone from 'react-dropzone';
+import styled from 'styled-components';
 import { TextField, TextEditor, Col, Row, Heading, FormGroup } from '../../../../../../components';
 import { uploadPostImage } from '../../../../../../state/modules/admin/attachments/actions';
+import RenderTags from '../RenderTags';
 
+const Wrapper = styled.section`
+  padding: 1em;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .4);
+  background-color: #fff;
+`;
 type Props = {
   handleSubmit?: Function,
   reset?: Function,
@@ -54,9 +64,11 @@ class NewPostForm extends Component {
 
     return (
       <Row>
-        <Col xs>
 
+        <Col xs>
+          <Heading size={ 3 } weight={ 300 }>Create a new post</Heading>
           <form onSubmit={ handleSubmit }>
+            <Wrapper>
             <FormGroup>
             <Field
               id="post-title"
@@ -67,15 +79,17 @@ class NewPostForm extends Component {
             />
           </FormGroup>
             <FormGroup>
-            <Field name="tags" type="text"
+            <Heading size={ 5 }>Tags:</Heading>
+            <FieldArray name="tags" type="text"
               id="post-tags"
-              helpText="Separate using commas"
-              component={ TextField }
+              component={ RenderTags }
               label="Tags"
             />
+
           </FormGroup>
+        </Wrapper>
             <FormGroup>
-            <Heading size={ 5 }>Upload a feature image</Heading>
+            <Heading size={ 5 } top="2rem" bottom="2rem">Upload a feature image</Heading>
 
             <Dropzone
               className="boldr-dropzone"
@@ -91,6 +105,7 @@ class NewPostForm extends Component {
             </FormGroup>
 
           <Field name="content" component={ renderEditor } />
+            <Wrapper>
           <FormGroup>
             <Field
               name="excerpt"
@@ -101,9 +116,10 @@ class NewPostForm extends Component {
 
             />
           </FormGroup>
+
           <FormGroup>
-            <Heading size={ 6 }>Post Status:</Heading>
-            <label>
+            <Heading size={ 5 }>Status:</Heading>
+            <label style={ { marginRight: '10px' } }>
               <Field id="draft" name="published" component="input" type="radio" value="false" /> Draft</label>
             <label>
               <Field id="published" name="published" component="input" type="radio" value="true" /> Publish
@@ -111,6 +127,7 @@ class NewPostForm extends Component {
           </FormGroup>
 
         <Button raised primary type="submit" label="Save Post" />
+      </Wrapper>
         </form>
 
         </Col>

@@ -11,6 +11,7 @@ describe('Entities', () => {
         users: {},
         menus: {},
         menuDetails: {},
+        settings: {},
       });
   });
 });

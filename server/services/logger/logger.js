@@ -1,5 +1,5 @@
 /**
- * src/core/logger/logger.js
+ * server/services/logger/logger.js
  * Starts a winston logging session
  *
  * @exports {EventHandler} - Winston event handler

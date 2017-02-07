@@ -6,6 +6,7 @@ import * as api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import { notificationSend } from '../../notifications/notifications';
 import * as t from './constants';
+import { setting as settingSchema, arrayOfSetting } from './schema';
 
 /**
   * FETCH SETTINGS ACTIONS
@@ -37,7 +38,8 @@ export function loadBoldrSettings() {
     dispatch(loadSettings());
     return api.getAllSettings()
       .then(response => {
-        const settingData = response.body;
+        const camelizedJson = camelizeKeys(response.body);
+        const settingData = normalize(response.body, arrayOfSetting);
         return dispatch(doneLoadSettings(settingData));
       })
       .catch(error => {
@@ -52,7 +54,7 @@ export function loadBoldrSettings() {
  * @param  {Object} state   The boldr state which contains the settings
  */
 function shouldFetchSettings(state) {
-  const settings = state.boldr.settings.keys;
+  const settings = state.boldr.settings;
   if (!settings.length) {
     return true;
   }

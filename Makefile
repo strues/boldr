@@ -32,7 +32,7 @@ files:
 container:
 	cd release; docker build -t strues/boldrcms .
 
-release: compile directories files container
+release: compile directories files
 
 setup-db:
 	make migrate-test
