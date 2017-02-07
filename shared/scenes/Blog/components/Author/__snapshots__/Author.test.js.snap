@@ -35,7 +35,14 @@ exports[`<Author /> renders snapshot 1`] = `
             ]
           } />
       }
-      primaryText={NaN} />
+      primaryText={
+        <Link
+          onlyActiveOnIndex={false}
+          style={Object {}}
+          to="/profiles/hey">
+          hey
+        </Link>
+      } />
   </List>
 </div>
 `;

@@ -2,8 +2,10 @@ import App from '../components/App';
 import About from '../pages/About';
 import Home from '../pages/Home';
 import Error404 from '../pages/Error404';
+import Profile from '../pages/Profile';
 import Account from './Account';
 import Blog from './Blog';
+
 import Admin from './Admin';
 
 export default function createRoutes(store) {
@@ -19,6 +21,7 @@ export default function createRoutes(store) {
         Account(store),
         Blog(store),
         Admin(store),
+        Profile(store),
         About,
         Error404,
       ],

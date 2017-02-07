@@ -23,7 +23,7 @@ const SinglePost = (props: Props) => {
     width: 100%;
     background-size: cover;
     background-attachment: fixed;
-    background-image: url( ${props.currentPost.feature_image});
+    background-image: url(${props.currentPost.feature_image});
     align-items: center;
     background-position-x: 0px;
     background-position-y: 0px;

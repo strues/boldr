@@ -1,4 +1,5 @@
 import configureMockStore from 'redux-mock-store';
+import Drawer from 'react-md/lib/Drawers';
 import thunk from 'redux-thunk';
 import { CHANGE_LAYOUT, MODAL_OPEN, MODAL_CLOSED } from './constants';
 import { changeLayout, showModal, hideModal, openDrawer } from './actions';
@@ -14,6 +15,10 @@ describe('UI Reducer', () => {
         modal: false,
         drawer: false,
         isMobile: false,
+        mobile: undefined,
+        tablet: undefined,
+        desktop: undefined,
+        defaultMedia: 'mobile',
       });
   });
   it('should open the modal', () => {
@@ -23,6 +28,10 @@ describe('UI Reducer', () => {
       modal: false,
       drawer: false,
       isMobile: false,
+      mobile: undefined,
+      tablet: undefined,
+      desktop: undefined,
+      defaultMedia: 'mobile',
     };
     const stateAfter = {
       loaded: false,
@@ -30,6 +39,10 @@ describe('UI Reducer', () => {
       modal: true,
       drawer: false,
       isMobile: false,
+      mobile: undefined,
+      tablet: undefined,
+      desktop: undefined,
+      defaultMedia: 'mobile',
     };
     expect(
       uiReducer(initialState, {
@@ -44,6 +57,10 @@ describe('UI Reducer', () => {
       modal: true,
       drawer: false,
       isMobile: false,
+      mobile: undefined,
+      tablet: undefined,
+      desktop: undefined,
+      defaultMedia: 'mobile',
     };
     const stateAfter = {
       loaded: false,
@@ -51,6 +68,10 @@ describe('UI Reducer', () => {
       modal: false,
       drawer: false,
       isMobile: false,
+      mobile: undefined,
+      tablet: undefined,
+      desktop: undefined,
+      defaultMedia: 'mobile',
     };
     expect(
       uiReducer(initialState, {
@@ -69,6 +90,10 @@ describe('UI Reducer', () => {
       modal: false,
       drawer: false,
       isMobile: false,
+      mobile: undefined,
+      tablet: undefined,
+      desktop: undefined,
+      defaultMedia: 'mobile',
     };
 
     expect(
@@ -79,6 +104,10 @@ describe('UI Reducer', () => {
       modal: false,
       drawer: false,
       isMobile: false,
+      mobile: undefined,
+      tablet: undefined,
+      desktop: undefined,
+      defaultMedia: 'mobile',
     });
   });
 });
@@ -94,6 +123,10 @@ test('changeLayout', () => {
       modal: false,
       drawer: false,
       isMobile: false,
+      mobile: undefined,
+      tablet: undefined,
+      desktop: undefined,
+      defaultMedia: 'mobile',
     },
   });
   store.dispatch(changeLayout('list'));
@@ -115,6 +148,10 @@ test('openModal', () => {
       modal: false,
       drawer: false,
       isMobile: false,
+      mobile: undefined,
+      tablet: undefined,
+      desktop: undefined,
+      defaultMedia: 'mobile',
     },
   });
   store.dispatch(showModal());
@@ -135,6 +172,10 @@ test('closeModal', () => {
       modal: true,
       drawer: false,
       isMobile: false,
+      mobile: undefined,
+      tablet: undefined,
+      desktop: undefined,
+      defaultMedia: 'mobile',
     },
   });
   store.dispatch(hideModal());
@@ -155,6 +196,10 @@ test('Open the drawer', () => {
       isMobile: false,
       modal: false,
       drawer: false,
+      mobile: undefined,
+      tablet: undefined,
+      desktop: undefined,
+      defaultMedia: 'mobile',
     },
   });
   store.dispatch(openDrawer());

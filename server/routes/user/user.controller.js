@@ -47,6 +47,21 @@ export async function getUser(req, res, next) {
   }
 }
 
+export async function getUsername(req, res, next) {
+  try {
+    const user = await User.query()
+    .where({ username: req.params.username })
+    .eager('[roles]')
+    .omit(['password'])
+    .first();
+
+    return responseHandler(res, 200, user);
+  } catch (error) {
+    const err = new BadRequest(error);
+    return next(err);
+  }
+}
+
 export function updateUser(req, res, next) {
   if ('password' in req.body) {
     req.assert('password', 'Password must be at least 4 characters long').len(4);

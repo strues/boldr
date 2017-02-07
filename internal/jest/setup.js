@@ -17,7 +17,9 @@ console.error = message => {
     throw new Error(message);
   }
 };
-
+window.matchMedia = function matchMedia() {
+  return false;
+};
 EventEmitter.defaultMaxListeners = Infinity;
 
 global.Array = Array;

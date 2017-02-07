@@ -82,4 +82,14 @@ router.patch('/:id', isAuthenticated, ctrl.updateUser);
  */
 router.delete('/:id', isAuthenticated, checkRole('Admin'), ctrl.destroyUser);
 
+/**
+ * @api {get} /users/:username/profile     Get user profile
+ * @apiName getUsername
+ * @apiGroup User
+ * @apiPermission public
+ * @apiSuccess {Object} user User's data.
+ * @apiError 404 User not found.
+ */
+router.get('/:username/profile', ctrl.getUsername);
+
 export default router;

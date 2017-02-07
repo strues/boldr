@@ -4,3 +4,5 @@ export const MODAL_CLOSED = '@boldr/ui/MODAL_CLOSED';
 export const OPEN_DRAWER = '@boldr/ui/OPEN_DRAWER';
 export const CLOSE_DRAWER = '@boldr/ui/CLOSE_DRAWER';
 export const SET_MOBILE_DEVICE = '@boldr/ui/SET_MOBILE_DEVICE';
+export const UPDATE_MEDIA = '@boldr/ui/UPDATE_MEDIA';
+export const UPDATE_DRAWER_TYPE = '@boldr/ui/UPDATE_DRAWER_TYPE';
