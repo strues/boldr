@@ -37,7 +37,7 @@ const PostTable = (props: Props) => {
        </TableHeader>
        <TableBody>
          {
-           props.posts.map(post => <PostTableRow key={ post.id } { ...post } />)
+           props.posts.map(post => <PostTableRow key={ post.id } handleDeleteClick={ props.handleDeleteClick } { ...post } />)
           }
        </TableBody>
      </DataTable>

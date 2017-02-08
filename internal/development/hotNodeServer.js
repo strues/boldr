@@ -32,7 +32,7 @@ class HotNodeServer {
       });
 
       newServer.stdout.on('data', data => console.log(data.toString().trim()));
-      newServer.stderr.on('data', (data) => {
+      newServer.stderr.on('data', data => {
         log({
           title: name,
           level: 'error',
@@ -62,7 +62,7 @@ class HotNodeServer {
       this.clientCompiling = true;
     });
 
-    clientCompiler.plugin('done', (stats) => {
+    clientCompiler.plugin('done', stats => {
       if (!stats.hasErrors()) {
         this.clientCompiling = false;
       }
@@ -77,7 +77,7 @@ class HotNodeServer {
       });
     });
 
-    compiler.plugin('done', (stats) => {
+    compiler.plugin('done', stats => {
       this.serverCompiling = false;
 
       if (this.disposing) {
@@ -115,11 +115,13 @@ class HotNodeServer {
   dispose() {
     this.disposing = true;
 
-    const stopWatcher = new Promise((resolve) => {
+    const stopWatcher = new Promise(resolve => {
       this.watcher.close(resolve);
     });
 
-    return stopWatcher.then(() => { if (this.server) this.server.kill(); });
+    return stopWatcher.then(() => {
+      if (this.server) this.server.kill();
+    });
   }
 }
 

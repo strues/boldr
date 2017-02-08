@@ -36,56 +36,56 @@ SET client_min_messages = warning;
 SET row_security = off;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
 
 
 --
--- Name: hstore; Type: EXTENSION; Schema: -; Owner: 
+-- Name: hstore; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS hstore WITH SCHEMA public;
 
 
 --
--- Name: EXTENSION hstore; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION hstore; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs';
 
 
 --
--- Name: pgcrypto; Type: EXTENSION; Schema: -; Owner: 
+-- Name: pgcrypto; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
 
 
 --
--- Name: EXTENSION pgcrypto; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION pgcrypto; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
 
 
 --
--- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner: 
+-- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner:
 --
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
 
 
 --
--- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner: 
+-- Name: EXTENSION "uuid-ossp"; Type: COMMENT; Schema: -; Owner:
 --
 
 COMMENT ON EXTENSION "uuid-ossp" IS 'generate universally unique identifiers (UUIDs)';
@@ -998,7 +998,10 @@ SELECT pg_catalog.setval('post_tag_id_seq', 3, true);
 --
 
 SELECT pg_catalog.setval('reset_token_id_seq', 1, false);
+INSERT INTO reset_token(id,ip,token,expiration,used,user_id,created_at,updated_at) VALUES (1,'::ffff:127.0.0.1','c2c81fa8-1ca2-4388-b807-51e4ebb78171',NULL,FALSE,'1b062e26-df71-48ce-b363-4ae9b966e7a0','2017-02-08 23:38:42.855+00','2017-02-08 23:38:42.855+00');
+INSERT INTO reset_token(id,ip,token,expiration,used,user_id,created_at,updated_at) VALUES (2,'::ffff:127.0.0.1','b2c81fa8-1ca2-4388-b807-51e4ebb78171',NULL,FALSE,'1b062e26-df71-48ce-b363-4ae9b966e7a0','2017-02-08 23:38:42.855+00','2017-02-08 23:38:42.855+00');
 
+INSERT INTO reset_token(id,ip,token,expiration,used,user_id,created_at,updated_at) VALUES (3,'::ffff:127.0.0.1','d2c81fa8-1ca2-4388-b807-51e4ebb78171',NULL,FALSE,'1b062e26-df71-48ce-b363-4ae9b966e7a0','2017-02-08 23:38:42.855+00','2017-02-08 23:38:42.855+00');
 
 --
 -- Data for Name: role; Type: TABLE DATA; Schema: public; Owner: postgres
@@ -1730,4 +1733,3 @@ ALTER TABLE ONLY verification_token
 --
 -- PostgreSQL database dump complete
 --
-

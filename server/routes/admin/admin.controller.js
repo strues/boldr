@@ -2,6 +2,13 @@
 import { responseHandler, Conflict, BadRequest } from '../../core/index';
 import { Tag, User, Post } from '../../models';
 
+/**
+ * Returns a list of all stats
+ * @method getAllStats
+ * @param  {Object}        req  the request object
+ * @param  {Object}        res  the response object
+ * @return {Promise}           
+ */
 export async function getAllStats(req, res, next) {
   try {
     const postStats = await Post.query().count();
@@ -16,6 +23,7 @@ export async function getAllStats(req, res, next) {
 
     return responseHandler(res, 200, payload);
   } catch (error) {
+    /* istanbul ignore next */
     return next(new BadRequest());
   }
 }

@@ -2,6 +2,8 @@ import request from 'supertest';
 import db from '../../services/postgres';
 import app from '../../app';
 
+const agent = request.agent(app);
+
 describe('Attachment API Endpoint', () => {
   let token;
   beforeAll(async () => {
@@ -9,7 +11,7 @@ describe('Attachment API Endpoint', () => {
       email: 'admin@boldr.io',
       password: 'password',
     };
-    const { body } = await request(app).post('/api/v1/auth/login').set('Accept', 'application/json').send(loginData);
+    const { body } = await agent.post('/api/v1/auth/login').set('Accept', 'application/json').send(loginData);
     token = body.token;
     await db('attachment').insert({
       id: '1c462e26-df71-48ce-b363-4ae9b966e7a0',
@@ -21,7 +23,7 @@ describe('Attachment API Endpoint', () => {
     });
   });
   test('+++ GET /attachments', () => {
-    return request(app)
+    return agent
         .get('/api/v1/attachments')
         .expect((res) => {
           expect(res.status).toBe(200);
@@ -29,7 +31,7 @@ describe('Attachment API Endpoint', () => {
         });
   });
   test('+++ GET /attachments/:id', () => {
-    return request(app)
+    return agent
       .get('/api/v1/attachments/668e14aa-ebe6-11e6-8ebf-4f81f17749d5')
       .expect((res) => {
         expect(res.status).toBe(200);
@@ -37,7 +39,7 @@ describe('Attachment API Endpoint', () => {
       });
   });
   test('+++ UPDATE /attachments/:id', () => {
-    return request(app)
+    return agent
       .put('/api/v1/attachments/668e14aa-ebe6-11e6-8ebf-4f81f17749d5')
       .set('Authorization', `Bearer ${token}`)
       .send({
@@ -49,7 +51,7 @@ describe('Attachment API Endpoint', () => {
       });
   });
   test('+++ DELETE /attachments/:id', () => {
-    return request(app)
+    return agent
       .del('/api/v1/attachments/1c462e26-df71-48ce-b363-4ae9b966e7a0')
       .set('Authorization', `Bearer ${token}`)
       .expect((res) => {

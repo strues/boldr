@@ -3,6 +3,8 @@ import faker from 'faker';
 import app from '../../app';
 import db from '../../services/postgres';
 
+const agent = request.agent(app);
+
 describe('User API Endpoint', async () => {
   let token;
   beforeAll(async () => {
@@ -10,7 +12,7 @@ describe('User API Endpoint', async () => {
       email: 'admin@boldr.io',
       password: 'password',
     };
-    const { body } = await request(app).post('/api/v1/auth/login').set('Accept', 'application/json').send(loginData);
+    const { body } = await agent.post('/api/v1/auth/login').set('Accept', 'application/json').send(loginData);
     token = body.token;
     await db('user').insert({
       id: 'd42c3ebf-4ae6-4578-ba65-0c8f48b7f41f',
@@ -29,7 +31,7 @@ describe('User API Endpoint', async () => {
     });
   });
   test('+++ GET /users -- List', () => {
-    return request(app)
+    return agent
         .get('/api/v1/users')
         .expect((res) => {
           expect(res.status).toBe(200);
@@ -38,7 +40,7 @@ describe('User API Endpoint', async () => {
   });
 
   test('+++ GET /users/:id -- ID', () => {
-    return request(app)
+    return agent
         .get('/api/v1/users/1b062e26-df71-48ce-b363-4ae9b966e7a0')
         .expect((res) => {
           expect(res.status).toBe(200);
@@ -46,7 +48,7 @@ describe('User API Endpoint', async () => {
         });
   });
   test('+++ GET /users/:username/profile -- Profile', () => {
-    return request(app)
+    return agent
         .get('/api/v1/users/Joey/profile')
         .expect((res) => {
           expect(res.status).toBe(200);
@@ -54,7 +56,7 @@ describe('User API Endpoint', async () => {
         });
   });
   test('+++ UPDATE /users/:id', () => {
-    return request(app)
+    return agent
         .put('/api/v1/users/1b062e26-df71-48ce-b363-4ae9b966e7a0')
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -66,7 +68,7 @@ describe('User API Endpoint', async () => {
         });
   });
   test('+++ UPDATE /users/admin/:id', () => {
-    return request(app)
+    return agent
         .put('/api/v1/users/admin/1b062e26-df71-48ce-b363-4ae9b966e7a0')
         .set('Authorization', `Bearer ${token}`)
         .send({
@@ -78,7 +80,7 @@ describe('User API Endpoint', async () => {
         });
   });
   test('+++ DELETE /users/:id', () => {
-    return request(app)
+    return agent
         .del('/api/v1/users/d42c3ebf-4ae6-4578-ba65-0c8f48b7f41f')
         .set('Authorization', `Bearer ${token}`)
         .expect((res) => {
@@ -86,7 +88,7 @@ describe('User API Endpoint', async () => {
         });
   });
   test('+++ POST /users', () => {
-    return request(app)
+    return agent
       .post('/api/v1/users')
       .set('Authorization', `Bearer ${token}`)
       .send({

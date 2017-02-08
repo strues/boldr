@@ -2,6 +2,8 @@ import request from 'supertest';
 import faker from 'faker';
 import app from '../../app';
 
+const agent = request.agent(app);
+
 describe('Auth API Endpoint', async () => {
   let token;
   beforeAll(async () => {
@@ -9,7 +11,7 @@ describe('Auth API Endpoint', async () => {
       email: 'admin@boldr.io',
       password: 'password',
     };
-    const { body } = await request(app)
+    const { body } = await agent
     .post('/api/v1/auth/login')
     .set('Accept', 'application/json')
     .send(loginData);
@@ -27,7 +29,7 @@ describe('Auth API Endpoint', async () => {
   };
 
   test('+++ POST /login - Fail without a password', () => {
-    return request(app)
+    return agent
       .post('/api/v1/auth/login')
       .send({ email: 'admin@boldr.io', password: '' })
       .expect((res) => {
@@ -35,7 +37,7 @@ describe('Auth API Endpoint', async () => {
       });
   });
   test('+++ POST /login - Fails with the wrong password', () => {
-    return request(app)
+    return agent
       .post('/api/v1/auth/login')
       .send(badLoginData)
       .expect((res) => {
@@ -43,7 +45,7 @@ describe('Auth API Endpoint', async () => {
       });
   });
   test('+++ POST /login', () => {
-    return request(app)
+    return agent
       .post('/api/v1/auth/login')
       .set('Accept', 'application/json')
       .send(loginData)
@@ -55,7 +57,7 @@ describe('Auth API Endpoint', async () => {
   });
 
   test('+++ POST /signup -- Fails with missing required fields', () => {
-    return request(app)
+    return agent
         .post('/api/v1/auth/signup')
         .set('Accept', 'application/json')
         .send({ email: 'abc@test.com' })
@@ -65,7 +67,7 @@ describe('Auth API Endpoint', async () => {
   });
 
   test('+++ POST /signup -- Fails if email exists', () => {
-    return request(app)
+    return agent
       .post('/api/v1/auth/signup')
       .set('Accept', 'application/json')
       .send({
@@ -78,7 +80,7 @@ describe('Auth API Endpoint', async () => {
   });
 
   test('+++ POST /signup -- Signup user', () => {
-    return request(app)
+    return agent
       .post('/api/v1/auth/signup')
       .set('Accept', 'application/json')
       .send({
@@ -95,7 +97,7 @@ describe('Auth API Endpoint', async () => {
   });
 
   test('+++ GET /check -- Fails w/o auth header', () => {
-    return request(app)
+    return agent
       .get('/api/v1/auth/check')
       .set('Accept', 'application/json')
       .expect((res) => {
@@ -104,7 +106,7 @@ describe('Auth API Endpoint', async () => {
   });
 
   test('+++ GET /check -- Return user info', () => {
-    return request(app)
+    return agent
     .get('/api/v1/auth/check')
     .set('Accept', 'application/json')
     .set('Authorization', `Bearer ${token}`)
@@ -115,7 +117,7 @@ describe('Auth API Endpoint', async () => {
   });
 
   test('+++ GET /check -- Fail wrong header.', () => {
-    return request(app)
+    return agent
     .get('/api/v1/auth/check')
     .set('Accept', 'application/json')
     .set('Authorization', `${token}`)

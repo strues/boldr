@@ -18,7 +18,7 @@ if (getConfig('logger.console')) {
   transports.push(
     new winston.transports.Console({
       handleExceptions: true,
-      level: 'error',
+      level: 'silly',
       prettyPrint: true,
       colorize: true,
       silent: false,

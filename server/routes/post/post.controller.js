@@ -118,16 +118,17 @@ export async function getId(req, res, next) {
 
 export async function destroy(req, res, next) {
   try {
+    await Activity
+      .query()
+      .delete()
+      .where({ activity_post: req.params.id })
+      .first();
     await Post
         .query()
         .delete()
         .where('id', req.params.id)
         .first();
-    await Activity.query().insert({
-      id: uuid(),
-      user_id: req.user.id,
-      action_type_id: 3,
-    });
+
     return res.status(204).send({});
   } catch (error) {
     /* istanbul ignore next */
