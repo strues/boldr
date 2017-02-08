@@ -25,7 +25,7 @@ const listener = server.listen(getConfig('port'), getConfig('host'), () =>
 
 process.on('SIGINT', () => {
   logger.info('shutting down!');
-  database.close();
+  db.close();
   server.close();
   process.exit();
 });

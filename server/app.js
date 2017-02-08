@@ -31,10 +31,9 @@ if (process.env.NODE_ENV === 'production') {
   // The React application middleware.
   app.get('*', cache.route(), boldrSSR);
 } else {
-  app.get('*', cache.route(), boldrSSR);
+  app.get('*', boldrSSR);
 }
 
 errorHandler(app);
 
 export default app;
-export { cache };
