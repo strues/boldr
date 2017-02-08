@@ -114,6 +114,7 @@ export async function deleteAttachment(req, res, next) {
  * @param  {Function}       next move to the next middleware
  * @return {Promise}       the newly created attachment
  */
+/* istanbul ignore next */
 export async function uploadAttachment(req, res, next) {
   let fstream;
   const busboy = new Busboy({ headers: req.headers });

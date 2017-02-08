@@ -82,14 +82,13 @@ export function updateUser(req, res, next) {
 export async function adminUpdateUser(req, res, next) {
   try {
     if (req.body.role) {
+      /* istanbul ignore next */
       const u = await User.query().findById(req.params.id).eager('roles');
       await u
          .$relatedQuery('roles')
          .unrelate();
-
+         /* istanbul ignore next */
       const newRole = await u.$relatedQuery('roles').relate({ id: req.body.role });
-
-      debug(newRole);
     }
     const payload = {
       username: req.body.username,
@@ -142,6 +141,7 @@ export async function adminCreateUser(req, res, next) {
     const checkExisting = await User.query().where('email', req.body.email);
 
     if (checkExisting.length) {
+      /* istanbul ignore next */
       return next(new Conflict());
     }
     const newUser = await objection.transaction(User, async (User) => {
@@ -149,6 +149,7 @@ export async function adminCreateUser(req, res, next) {
       await user.$relatedQuery('roles').relate({ id: 1 });
 
       if (!user) {
+        /* istanbul ignore next */
         return next(new NotFound());
       }
       // generate user verification token to send in the email.
