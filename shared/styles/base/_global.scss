@@ -19,6 +19,7 @@ html {
 
 #app {
   height: 100vh;
+  background-color: $body-background;
 }
 
 body {
@@ -31,7 +32,7 @@ body {
   font-family: $font-family;
   font-size: $font-size-base;
   line-height: $line-height-base;
-  background-color: #f3f3f3;
+  background-color: $body-background;
   font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
@@ -47,43 +48,6 @@ a {
     color: darken($primary-color, 10%);
     text-decoration: none;
   }
-}
-
-/*******************************
-          Highlighting
-*******************************/
-/* Site */
-::-webkit-selection {
-  background-color: $selection-color;
-  color: rgba(0, 0, 0, 0.87);
-}
-
-::-moz-selection {
-  background-color: $selection-color;
-  color: rgba(0, 0, 0, 0.87);
-}
-
-::selection {
-  background-color: $selection-color;
-  color: rgba(0, 0, 0, 0.87);
-}
-/* Form */
-input::-webkit-selection,
-textarea::-webkit-selection {
-  background-color: rgba(100, 100, 100, 0.4);
-  color: rgba(0, 0, 0, 0.87);
-}
-
-input::-moz-selection,
-textarea::-moz-selection {
-  background-color: rgba(100, 100, 100, 0.4);
-  color: rgba(0, 0, 0, 0.87);
-}
-
-input::selection,
-textarea::selection {
-  background-color: rgba(100, 100, 100, 0.4);
-  color: rgba(0, 0, 0, 0.87);
 }
 
 .boldr-icon {

@@ -108,7 +108,7 @@ class DashboardLayout extends Component {
           onMediaTypeChange={ this._handleMediaTypeChange }
           defaultMedia={ this.props.ui.defaultMedia }
           navItems={ navItems(pathname) }
-          drawerType={ this.props.ui.customDrawerType }
+          drawerType={ NavigationDrawer.DrawerTypes.PERSISTENT_MINI }
           toolbarActions={ toolbarActionItems }
         >
           <Wrapper>
