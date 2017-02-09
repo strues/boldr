@@ -3,9 +3,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { provideHooks } from 'redial';
 import Helmet from 'react-helmet';
+import { bindActionCreators } from 'redux';
 import { Loader } from '../../components';
 import BaseTemplate from '../templates/Base';
 import { getProfile } from '../../state/modules/account/actions';
+import { openDrawer, closeDrawer } from '../../state/modules/boldr/ui/actions';
 import Profile from './Profile';
 
 type Props = {
@@ -14,6 +16,7 @@ type Props = {
   getProfile: Function,
   isFetching: Boolean,
   profile: Object,
+  drawer: Boolean,
 };
 
 @provideHooks({
@@ -36,8 +39,8 @@ export class ProfileContainer extends Component {
       );
     }
     return (
-      <BaseTemplate helmetMeta={ <Helmet title="Profile" /> }>
-        <Profile profile={ profile } email={ user.email } />
+      <BaseTemplate helmetMeta={ <Helmet title={ `${user.username}'s Profile` } /> }>
+        <Profile profile={ profile } email={ user.email } drawer={ this.props.drawer } { ...this.props } />
       </BaseTemplate>
     );
   }
@@ -46,10 +49,14 @@ export class ProfileContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    drawer: state.boldr.ui.drawer,
     user: state.account.user,
     profile: state.account.profile.current,
     isFetching: state.account.profile.isFetching,
   };
 };
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ getProfile, openDrawer, closeDrawer }, dispatch);
+}
 
-export default connect(mapStateToProps, { getProfile })(ProfileContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);

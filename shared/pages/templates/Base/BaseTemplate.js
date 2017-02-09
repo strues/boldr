@@ -27,7 +27,7 @@ const ContentWrapper = styled.section`
   padding-top: 60px;
   box-sizing: border-box;
   margin: 0 auto;
-  background-color: #ECEFF1;
+  background-color: #e5eaed;
 `;
 
 const FooterWrapper = styled.footer`

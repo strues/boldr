@@ -28,3 +28,7 @@ export const VERIFY_ACCOUNT_FAILURE = '@boldr/auth/VERIFY_ACCOUNT_FAILURE';
 export const FETCH_PROFILE_REQUEST = '@boldr/auth/FETCH_PROFILE_REQUEST';
 export const FETCH_PROFILE_SUCCESS = '@boldr/auth/FETCH_PROFILE_SUCCESS';
 export const FETCH_PROFILE_FAILURE = '@boldr/auth/FETCH_PROFILE_FAILURE';
+
+export const EDIT_PROFILE_REQUEST = '@boldr/auth/EDIT_PROFILE_REQUEST';
+export const EDIT_PROFILE_SUCCESS = '@boldr/auth/EDIT_PROFILE_SUCCESS';
+export const EDIT_PROFILE_FAILURE = '@boldr/auth/EDIT_PROFILE_FAILURE';

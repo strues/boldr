@@ -15,7 +15,7 @@ import KeyVisual from './KeyVisual';
 import FormCard from './Form/FormCard';
 import FormGroup from './Form/FormGroup';
 import TextField from './Form/TextField';
-
+import TextInput from './Form/TextInput';
 
 export {
   PrimaryHeader,
@@ -37,4 +37,5 @@ export {
   Hamburger,
   KeyVisual,
   FormGroup,
+  TextInput,
 };

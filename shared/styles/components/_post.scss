@@ -19,7 +19,10 @@
 }
 .boldr-post__sidebar-author {
   width: 100%;
+  background-color: $white;
+  padding: 1em;
   margin-bottom: 50px;
+  @include md-box-shadow(2);
 }
 // :( important here in order to override semantic ui
 .boldr-post__sidebar-card {

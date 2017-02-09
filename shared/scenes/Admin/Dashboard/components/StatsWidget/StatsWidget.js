@@ -17,7 +17,7 @@ const StatsWidget = (props: Props) => {
   return (
     <div className="boldr-widget__stats">
       <Paper zDepth={ 2 } style={ { padding: '1em' } } className="boldr-paperoverride">
-        <Heading top="5px" align="left" size={ 4 } color="#555">
+        <Heading top="5px" align="left" size={ 4 }>
           <FontIcon style={ { paddingTop: '5px' } }>assessment</FontIcon>{ ' ' } Stats
         </Heading>
       Posts: { props.stats.posts || '' } <br />

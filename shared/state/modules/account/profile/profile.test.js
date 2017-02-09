@@ -8,10 +8,12 @@ describe('Profile Reducer', () => {
       ).toEqual({
         isFetching: false,
         current: {
+          id: '',
           email: '',
           firstName: '',
           lastName: '',
           username: '',
+          location: '',
           avatarUrl: '',
           profileImage: '',
           website: '',

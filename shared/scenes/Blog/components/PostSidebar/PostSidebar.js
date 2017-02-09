@@ -18,16 +18,14 @@ const Sidebar = styled.aside`
 const PostSidebar = (props: Props) => {
   return (
     <div>
-      <Sidebar>
+    <Sidebar>
+      <Author { ...props.author } />
 
-          <Heading size={ 2 } color="#1F2439">Author Details</Heading>
-          <Author { ...props.author } />
-
-        <Paper zDepth={ 1 } style={ { padding: '1em', marginTop: '25px' } } className="boldr-paperoverride">
-          <Heading size={ 2 } color="#1F2439">Tags</Heading>
-          <TagBlock tags={ props.tags } />
-        </Paper>
-      </Sidebar>
+      <Paper zDepth={ 1 } style={ { padding: '1em', marginTop: '25px' } } className="boldr-paperoverride">
+        <Heading size={ 3 }>Related Tags</Heading>
+        <TagBlock tags={ props.tags } />
+      </Paper>
+    </Sidebar>
     </div>
   );
 };
