@@ -2120,7 +2120,7 @@ debug@2.3.3:
   dependencies:
     ms "0.7.2"
 
-debug@2.6.0, debug@^2.1.1, debug@^2.1.3, debug@^2.2.0:
+debug@2.6.0, debug@^2.1.1, debug@^2.1.3, debug@^2.2.0, debug@^2.6.0:
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.0.tgz#bc596bcabe7617f11d9fa15361eded5608b8499b"
   dependencies:
@@ -2854,10 +2854,6 @@ express@4.14.1, express@^4.14.0:
     type-is "~1.6.14"
     utils-merge "1.0.0"
     vary "~1.1.0"
-
-extend@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/extend/-/extend-2.0.1.tgz#1ee8010689e7395ff9448241c98652bc759a8260"
 
 extend@^3.0.0, extend@~3.0.0:
   version "3.0.0"
@@ -5690,14 +5686,6 @@ postcss-convert-values@^2.3.4:
     postcss "^5.0.11"
     postcss-value-parser "^3.1.2"
 
-postcss-css-variables@^0.6.0:
-  version "0.6.0"
-  resolved "https://registry.yarnpkg.com/postcss-css-variables/-/postcss-css-variables-0.6.0.tgz#74afacf34468e055ba7cbe7a2d16ecbbee17bbac"
-  dependencies:
-    escape-string-regexp "^1.0.3"
-    extend "^2.0.1"
-    postcss "^5.0.5"
-
 postcss-cssnext@^2.9.0:
   version "2.9.0"
   resolved "https://registry.yarnpkg.com/postcss-cssnext/-/postcss-cssnext-2.9.0.tgz#064df2a8c21fd2ebb88825df372cf20fca882868"
@@ -5732,7 +5720,7 @@ postcss-cssnext@^2.9.0:
     postcss-selector-matches "^2.0.0"
     postcss-selector-not "^2.0.0"
 
-postcss-custom-media@^5.0.0, postcss-custom-media@^5.0.1:
+postcss-custom-media@^5.0.0:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/postcss-custom-media/-/postcss-custom-media-5.0.1.tgz#138d25a184bf2eb54de12d55a6c01c30a9d8bd81"
   dependencies:
@@ -5939,12 +5927,6 @@ postcss-modules-values@^1.1.0:
   dependencies:
     icss-replace-symbols "^1.0.2"
     postcss "^5.0.14"
-
-postcss-nested@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/postcss-nested/-/postcss-nested-1.0.0.tgz#d136bd4b576bd5632df142c12b2198a9ccf794df"
-  dependencies:
-    postcss "^5.0.2"
 
 postcss-nesting@^2.0.5:
   version "2.3.1"

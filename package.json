@@ -146,6 +146,7 @@
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.1",
     "date-fns": "^1.27.2",
+    "debug": "^2.6.0",
     "dotenv": "4.0.0",
     "draft-js": "^0.10.0",
     "draft-js-import-html": "^0.3.2",
