@@ -1,11 +1,10 @@
 import request from 'supertest';
 import app from '../../app';
 
-const agent = request.agent(app);
 
 describe('Token API Endpoint', () => {
   test('+++ POST /forgot-password', () => {
-    return agent
+    return request(app)
       .post('/api/v1/tokens/forgot-password')
       .send({ email: 'admin@boldr.io' })
       .expect((res) => {
