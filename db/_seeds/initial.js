@@ -270,6 +270,16 @@ function seed(knex, Promise) {
       }),
     ]))
     .then(() => Promise.all([
+      knex('attachment').insert({
+        id: '668e14aa-ebe6-11e6-8ebf-4f81f17749d5',
+        original_name: 'file.png',
+        url: '/files/file.png',
+        user_id: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
+        safe_name: 'file.png',
+        file_name: 'file.png',
+      }),
+    ]))
+    .then(() => Promise.all([
       knex('template_page').insert({
         template_id: 1,
         page_id: '87d1e9b3-b32e-474e-9246-6dce1b21a72d',
