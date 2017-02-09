@@ -370,6 +370,7 @@ CREATE TABLE post (
     published boolean DEFAULT true,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone
+    deleted_at timestamp with time zone
 );
 
 
@@ -667,6 +668,7 @@ CREATE TABLE "user" (
     verified boolean DEFAULT false,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
     updated_at timestamp with time zone
+    deleted_at timestamp with time zone
 );
 
 
