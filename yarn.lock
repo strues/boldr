@@ -2337,12 +2337,6 @@ double-ended-queue@^2.1.0-0:
   version "2.1.0-0"
   resolved "https://registry.yarnpkg.com/double-ended-queue/-/double-ended-queue-2.1.0-0.tgz#103d3527fd31528f40188130c841efdd78264e5c"
 
-draft-js-export-html@^0.5.2:
-  version "0.5.2"
-  resolved "https://registry.yarnpkg.com/draft-js-export-html/-/draft-js-export-html-0.5.2.tgz#089e55ce06d5aed0dbd9af5eee2eb56c58a1c428"
-  dependencies:
-    draft-js-utils "^0.1.5"
-
 draft-js-import-element@^0.4.1:
   version "0.4.3"
   resolved "https://registry.yarnpkg.com/draft-js-import-element/-/draft-js-import-element-0.4.3.tgz#785381a2e0323a9836cfa856c442e9013bd482a4"
@@ -2371,12 +2365,6 @@ draft-js@^0.10.0:
 draftjs-to-html@^0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/draftjs-to-html/-/draftjs-to-html-0.6.1.tgz#f67f08e85af00af4937cdb5e0a319259a0745a5f"
-
-draftjs-utils@^0.6.2:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/draftjs-utils/-/draftjs-utils-0.6.2.tgz#9d1297c83dcd2a3dc253462bfd8e217e408dfb00"
-  dependencies:
-    immutable "^3.x.x"
 
 duplexer2@0.0.2:
   version "0.0.2"
@@ -3528,10 +3516,6 @@ html-tags@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/html-tags/-/html-tags-1.1.1.tgz#869f43859f12d9bdc3892419e494a628aa1b204e"
 
-html-to-draftjs@^0.1.0-beta5:
-  version "0.1.0-beta5"
-  resolved "https://registry.yarnpkg.com/html-to-draftjs/-/html-to-draftjs-0.1.0-beta5.tgz#f4ca47d3ce85787bf548858f2abdddc7fa63faef"
-
 html-webpack-plugin@^2.28.0:
   version "2.28.0"
   resolved "https://registry.yarnpkg.com/html-webpack-plugin/-/html-webpack-plugin-2.28.0.tgz#2e7863b57e5fd48fe263303e2ffc934c3064d009"
@@ -3625,7 +3609,7 @@ immutable@^3.8.1:
   version "3.8.1"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
 
-immutable@^3.x.x, immutable@~3.7.4:
+immutable@~3.7.4:
   version "3.7.6"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.7.6.tgz#13b4d3cb12befa15482a26fe1b2ebae640071e4b"
 
@@ -6364,9 +6348,9 @@ react-draft-wysiwyg@^1.7.0:
     classnames "^2.2.5"
     immutable "^3.8.1"
 
-react-dropzone@^3.9.2:
-  version "3.9.2"
-  resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-3.9.2.tgz#84703d1ee20ea4118f64fa38c14218415fecb1e9"
+react-dropzone@^3.10.0:
+  version "3.10.0"
+  resolved "https://registry.yarnpkg.com/react-dropzone/-/react-dropzone-3.10.0.tgz#d17193f816c038a1c29f1e92411db4a12210f19b"
   dependencies:
     attr-accept "^1.0.3"
 
@@ -7712,9 +7696,9 @@ webidl-conversions@^3.0.0, webidl-conversions@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-3.0.1.tgz#24534275e2a7bc6be7bc86611cc16ae0a5654871"
 
-webpack-bundle-analyzer@2.2.2:
-  version "2.2.2"
-  resolved "https://registry.yarnpkg.com/webpack-bundle-analyzer/-/webpack-bundle-analyzer-2.2.2.tgz#a77bee8d96f5884bb805875c2f65fd7fc9ac1931"
+webpack-bundle-analyzer@2.2.3:
+  version "2.2.3"
+  resolved "https://registry.yarnpkg.com/webpack-bundle-analyzer/-/webpack-bundle-analyzer-2.2.3.tgz#482a4d34fc532c326988c5eddb8d26f9a9646395"
   dependencies:
     acorn "^4.0.3"
     chalk "^1.1.3"
