@@ -6,6 +6,7 @@ describe('Token API Endpoint', () => {
   test('+++ POST /forgot-password', () => {
     return request(app)
       .post('/api/v1/tokens/forgot-password')
+      .set('Accept', 'application/json')
       .send({ email: 'admin@boldr.io' })
       .expect((res) => {
         expect(res.status).toBe(202);

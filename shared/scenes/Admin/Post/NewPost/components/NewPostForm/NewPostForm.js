@@ -98,8 +98,9 @@ class NewPostForm extends Component {
                 It will upload right away.</p>
               </Dropzone>
             </FormGroup>
-            <Field component={ FieldEditor } label="Content" name="content" tabIndex={ 2 } />
-
+            <Wrapper>
+              <Field component={ FieldEditor } label="Content" name="content" tabIndex={ 2 } />
+            </Wrapper>
             <Wrapper>
               <FormGroup>
                 <Field

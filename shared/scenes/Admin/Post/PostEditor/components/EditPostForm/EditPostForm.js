@@ -60,7 +60,9 @@ const EditPostForm = (props: Props) => {
               />
             </FormGroup>
           </Wrapper>
-          <Field name="content" component={ EditorField } />
+          <Wrapper>
+            <Field name="content" component={ EditorField } />
+          </Wrapper>
           <Wrapper>
           <FormGroup>
             <Field

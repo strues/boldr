@@ -1,14 +1,8 @@
-import React, { Component } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import { stateFromHTML } from 'draft-js-import-html';
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 
-const wrapperStyle = {
-  border: 'solid #ddd 1px',
-  marginBottom: 20,
-  borderRadius: 5,
-  padding: 15,
-};
 const editorStyle = {
   minHeight: 400,
 };
@@ -21,7 +15,7 @@ export default class EditorField extends Component {
     }
     this.state = {
       editorState,
-    }
+    };
   }
 
   onChange = editorState => {
@@ -34,10 +28,8 @@ export default class EditorField extends Component {
     const { editorState } = this.state;
     return (
       <Editor
-        wrapperStyle={ wrapperStyle }
         editorStyle={ editorStyle }
-        // toolbarOnFocus
-        {  ...input }
+        { ...input }
         onEditorStateChange={ this.onChange }
         editorState={ editorState }
         placeholder={ placeholder }
@@ -46,3 +38,8 @@ export default class EditorField extends Component {
     // </div>;
   }
 }
+
+EditorField.propTypes = {
+  input: PropTypes.object,
+  placeholder: PropTypes.string,
+};

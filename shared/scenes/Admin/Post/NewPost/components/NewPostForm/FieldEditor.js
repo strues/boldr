@@ -1,13 +1,8 @@
-import React, { PureComponent } from 'react';
+import React, { PropTypes, PureComponent } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 
-const wrapperStyle = {
-  border: 'solid #ddd 1px',
-  marginBottom: 20,
-  borderRadius: 5,
-  padding: 15,
-};
+
 const editorStyle = {
   minHeight: 400,
 };
@@ -27,10 +22,8 @@ export default class FieldEditor extends PureComponent {
     const { editorState } = this.state;
     return (
       <Editor
-        wrapperStyle={ wrapperStyle }
         editorStyle={ editorStyle }
-        // toolbarOnFocus
-        {  ...input }
+        { ...input }
         onEditorStateChange={ this.onChange }
         editorState={ editorState }
         placeholder={ placeholder }
@@ -39,3 +32,8 @@ export default class FieldEditor extends PureComponent {
     // </div>;
   }
 }
+
+FieldEditor.propTypes = {
+  input: PropTypes.object,
+  placeholder: PropTypes.string,
+};
