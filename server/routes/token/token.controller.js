@@ -20,9 +20,6 @@ export async function forgottenPassword(req, res, next) {
     .where({ email: req.body.email })
     .first();
 
-    if (!user) {
-      return res.status(400).json({ error: 'Unable to locate an user with the provided email.' });
-    }
     const mailSubject = '[Boldr] Password Reset';
     const resetPasswordToken = uuid();
 
