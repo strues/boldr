@@ -1,0 +1,24 @@
+exports[`<PostContent /> renders snapshot 1`] = `
+<article>
+  <Paper
+    className="boldr-paperoverride"
+    component="div"
+    style={
+      Object {
+        "marginBottom": "50px",
+        "padding": "1em",
+      }
+    }
+    zDepth={2}>
+    <PostDate />
+    <Divider />
+    <div
+      className="boldr-post__content"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": undefined,
+        }
+      } />
+  </Paper>
+</article>
+`;

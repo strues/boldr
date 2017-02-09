@@ -1,10 +1,15 @@
 /* @flow */
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import {
+  Field,
+  reduxForm,
+  getFormSyncErrors,
+  isValid,
+} from 'redux-form';
 import Button from 'react-md/lib/Buttons';
 import { TextField } from '../../../components/Form';
 import { Row, Col } from '../../../components/Layout';
-import validate from './validate';
+import validate, { requiredValidator, emailValidator } from './validate';
 
 type Props = {
   handleSubmit?: Function
@@ -22,6 +27,7 @@ const SignupForm = (props: Props) => {
             type="email"
             component={ TextField }
             label="Email address"
+            validate={[requiredValidator, emailValidator]}
           />
       </Col>
       <Col xs={ 6 }>
@@ -69,6 +75,7 @@ const SignupForm = (props: Props) => {
           </Row>
         </Col>
       </Row>
+      
       <Button style={ { marginTop: '25px' } } raised primary label="Create Account" type="submit" />
     </form>
   );
@@ -77,4 +84,5 @@ const SignupForm = (props: Props) => {
 export default reduxForm({
   form: 'userSignupForm',
   validate,
+  destroyOnUnmount: false,
 })(SignupForm);

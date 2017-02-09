@@ -28,6 +28,7 @@ type Props = {
 
 const FormCard = (props: Props) => {
   return (
+    <div>
     <Row>
       <Col xs={ 12 }>
         <Row xsCenter>
@@ -52,6 +53,7 @@ const FormCard = (props: Props) => {
         </Row>
       </Col>
     </Row>
+  </div>
   );
 };
 
