@@ -34,6 +34,13 @@
 }
 .boldr-post__title {
   font-size: 5rem;
+  margin-top: 200px!important;
+  font-weight: 200;
+  letter-spacing: .2em;
+  color: $white;
+  background: rgba($mirage, .65);
+  padding: .08em 1rem;
+  box-decoration-break: clone;
 }
 .boldr-post__content {
   padding-top: 25px;

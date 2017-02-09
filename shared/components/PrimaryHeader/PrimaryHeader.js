@@ -57,6 +57,7 @@ class PrimaryHeader extends Component {
       <div className="boldr-ph">
         <Toolbar
           colored
+          fixed
           title={
             <img src="https://boldr.io/boldr.png"
               className="boldr-ph__logo"

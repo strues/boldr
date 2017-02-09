@@ -13,20 +13,24 @@ type Props = {
   content: String,
   feature_image: ?String
 }
+
+const ArticleWrapper = styled.article`
+  margin-top: 0;
+`;
 const PostContent = (props: Props) => {
   function createMarkup() {
     return { __html: props.content,
     };
   }
   return (
-    <article>
-      <Paper zDepth={ 2 } style={ { padding: '1em', marginBottom: '50px' } }>
-       <PostTitle title={ props.title } />
+    <ArticleWrapper>
+      <Paper zDepth={ 2 } style={ { padding: '1em', marginBottom: '50px' } } className="boldr-paperoverride">
+       
        <PostDate created={ props.created_at } />
         <Divider />
         <div className="boldr-post__content" dangerouslySetInnerHTML={ createMarkup() } />
       </Paper>
-    </article>
+    </ArticleWrapper>
   );
 };
 
