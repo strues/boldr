@@ -1,10 +1,11 @@
+import path from 'path';
 import request from 'supertest';
 import db from '../../services/postgres';
 import app from '../../app';
 
 const agent = request.agent(app);
 
-describe('Attachment API Endpoint', () => {
+describe('Attachment API Endpoint', async () => {
   let token;
   beforeAll(async () => {
     const loginData = {
