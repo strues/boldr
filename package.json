@@ -36,7 +36,7 @@
         "NODE_ENV": "development",
         "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr",
         "REDIS_CONN_URI": "redis://127.0.0.1:6379/1",
-        "DATABASE_DEBUG": true
+        "DATABASE_DEBUG": false
       }
     },
     "migrate": {
@@ -131,9 +131,8 @@
     "date-fns": "^1.27.2",
     "dotenv": "4.0.0",
     "draft-js": "^0.10.0",
-    "draft-js-export-html": "^0.5.2",
     "draft-js-import-html": "^0.3.2",
-    "draftjs-utils": "^0.6.2",
+    "draftjs-to-html": "^0.6.1",
     "express": "4.14.1",
     "express-flash": "^0.0.2",
     "express-redis-cache": "^0.5.0",
@@ -163,6 +162,7 @@
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-transition-group": "^15.4.2",
     "react-dom": "15.4.2",
+    "react-draft-wysiwyg": "^1.7.0",
     "react-dropzone": "^3.9.2",
     "react-helmet": "4.0.0",
     "react-md": "^1.0.5",

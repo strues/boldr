@@ -2,6 +2,8 @@
 import React, { Component, PropTypes } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import draftToHtml from 'draftjs-to-html';
+
 import type { Post, PostImage } from '../../../../types/models';
 import { createPost } from '../../../../state/modules/blog/posts';
 import NewPost from './NewPost';
@@ -26,9 +28,11 @@ class NewPostContainer extends Component {
       excerpt: values.excerpt,
       feature_image: this.props.postImage.url || values.feature_image,
       published: values.published,
-      content: values.content,
+      raw_content: values.content,
+      content: draftToHtml(values.content),
       seo: values.seo,
     };
+    // console.log(postData)
     this.props.createPost(postData);
   }
   props: Props;

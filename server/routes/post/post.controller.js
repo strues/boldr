@@ -47,6 +47,7 @@ export async function createPost(req, res, next) {
         slug: postSlug,
         excerpt: req.body.excerpt,
         content: req.body.content,
+        raw_content: req.body.raw_content,
         feature_image: req.body.feature_image,
         background_image: req.body.background_image,
         meta: req.body.meta,

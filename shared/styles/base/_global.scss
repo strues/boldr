@@ -17,12 +17,8 @@ html {
   -webkit-font-smoothing: antialiased;
 }
 
-.boldr-icon {
-  display: inline-block;
-}
-
 #app {
-  background-color: #eef2f6;
+  height: 100vh;
 }
 
 body {
@@ -39,6 +35,20 @@ body {
   font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
+
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: color .3s;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: darken($primary-color, 10%);
+    text-decoration: none;
+  }
+}
+
 /*******************************
           Highlighting
 *******************************/
@@ -74,4 +84,8 @@ input::selection,
 textarea::selection {
   background-color: rgba(100, 100, 100, 0.4);
   color: rgba(0, 0, 0, 0.87);
+}
+
+.boldr-icon {
+  display: inline-block;
 }

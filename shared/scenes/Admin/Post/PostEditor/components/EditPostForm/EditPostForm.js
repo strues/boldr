@@ -5,6 +5,7 @@ import FontIcon from 'react-md/lib/FontIcons';
 import styled from 'styled-components';
 import { TextField, TextEditor, Col, Row, Heading, FormGroup } from '../../../../../../components';
 import { uploadPostImage } from '../../../../../../state/modules/admin/attachments/actions';
+import EditorField from './EditorField';
 
 type Props = {
   handleSubmit?: Function,
@@ -31,7 +32,7 @@ const EditPostForm = (props: Props) => {
      * @param  {string} label
      * @return {element} BoldrEditor
      */
-  const renderEditor = ({ input, label }) => (<TextEditor { ...input } label={ label } />);
+  const renderEditor = ({ input, label }) => (<EditorField { ...input } label={ label } />);
 
   return (
       <Row>
@@ -59,7 +60,7 @@ const EditPostForm = (props: Props) => {
               />
             </FormGroup>
           </Wrapper>
-          <Field name="content" component={ renderEditor } />
+          <Field name="content" component={ EditorField } />
           <Wrapper>
           <FormGroup>
             <Field

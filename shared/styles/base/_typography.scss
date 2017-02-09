@@ -47,7 +47,8 @@ h5:last-child {
 
 p {
   margin: 0em 0em 1em;
-  line-height: 1.4285em;
+  line-height: 1.5;
+  font-feature-settings: 'kern', 'liga';
 }
 p:first-child {
   margin-top: 0em;
@@ -56,14 +57,6 @@ p:last-child {
   margin-bottom: 0em;
 }
 
-a {
-  color: $primary-color;
-  text-decoration: none;
-}
-a:hover {
-  color: darken($primary-color, 5%);
-  text-decoration: none;
-}
 
 .boldr-heading__3 {
   padding-top: .5rem;
