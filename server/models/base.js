@@ -9,9 +9,6 @@ import BaseQueryBuilder from '../utils/queryBuilder';
  * @extends Model
  */
 class BaseModel extends Model {
-
-  // http://vincit.github.io/objection.js/#defaulteageralgorithm
-  static defaultEagerAlgorithm = Model.JoinEagerAlgorithm;
   /**
    * If we should update the created_at attribute when inserted and the updated_at attribute when updated.
    *

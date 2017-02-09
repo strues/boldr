@@ -42,6 +42,13 @@
     "migrate": {
       "command": "node --harmony internal/scripts/db.js migrate",
       "env": {
+        "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr",
+        "NODE_ENV": "development"
+      }
+    },
+    "migrate:test": {
+      "command": "node --harmony internal/scripts/db.js migrate",
+      "env": {
         "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr_test",
         "NODE_ENV": "development"
       }
@@ -61,6 +68,13 @@
       }
     },
     "seed": {
+      "command": "knex seed:run",
+      "env": {
+        "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr",
+        "NODE_ENV": "development"
+      }
+    },
+    "seed:test": {
       "command": "knex seed:run",
       "env": {
         "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr_test",
@@ -105,9 +119,11 @@
     "lint": "eslint client shared server",
     "knex": "./node_modules/.bin/knex",
     "migrate": "better-npm-run migrate",
+    "migrate:test": "better-npm-run migrate:test",
     "migrate:undo": "better-npm-run migrate:undo",
     "migration": "better-npm-run migration",
     "seed": "better-npm-run seed",
+    "seed:test": "better-npm-run seed:test",
     "start": "NODE_ENV=production node bin/boldr",
     "test:ci": "NODE_ENV=test jest -w 2 --config=internal/jest/jest.node.json && cp ./coverage/coverage-final.json ./coverage/coverage-node-final.json && jest -w 2 --config=internal/jest/jest.browser.json && cp ./coverage/coverage-final.json ./coverage/coverage-browser-final.json && node ./internal/scripts/mapCoverage.js",
     "test": "better-npm-run test",
@@ -234,11 +250,8 @@
     "nock": "^9.0.4",
     "node-notifier": "5.0.2",
     "node-sass": "^4.5.0",
-    "postcss-css-variables": "^0.6.0",
     "postcss-cssnext": "^2.9.0",
-    "postcss-custom-media": "^5.0.1",
     "postcss-loader": "^1.2.2",
-    "postcss-nested": "^1.0.0",
     "react-addons-test-utils": "^15.4.2",
     "react-hot-loader": "3.0.0-beta.6",
     "redbox-react": "^1.3.3",
