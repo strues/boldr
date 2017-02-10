@@ -25,4 +25,12 @@
 
 .boldr-ph {
   background-color: $primary-color;
+
+  .md-btn--text {
+    min-width: inherit;
+
+    @include breakpoint(sm, 46em) {
+      min-width: 88px;
+    }
+  }
 }

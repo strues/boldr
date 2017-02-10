@@ -17,6 +17,8 @@ type Props = {
   isFetching: Boolean,
   profile: Object,
   drawer: Boolean,
+  openDrawer: Function,
+  closeDrawer: Function,
 };
 
 @provideHooks({
@@ -40,6 +42,7 @@ export class ProfileContainer extends Component {
     }
     return (
       <BaseTemplate helmetMeta={ <Helmet title={ `${user.username}'s Profile` } /> }>
+      { /* $FlowIssue */}
         <Profile profile={ profile } email={ user.email } drawer={ this.props.drawer } { ...this.props } />
       </BaseTemplate>
     );
@@ -58,5 +61,5 @@ const mapStateToProps = (state) => {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({ getProfile, openDrawer, closeDrawer }, dispatch);
 }
-
+// $FlowIssue
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);

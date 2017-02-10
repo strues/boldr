@@ -68,6 +68,7 @@ class HeaderWrapper extends Component {
         auth={ this.props.auth }
         logo={ this.props.logo }
         menu={ this.props.menu }
+        isMobile={ this.props.ui.isMobile }
         handleLogoClick= { this.handleLogoClick }
         handleLogoutClick={ this.handleLogoutClick }
         handleDashClick={ this.handleDashClick }

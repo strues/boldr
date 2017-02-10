@@ -12,6 +12,9 @@ import OwnProfile from './components/OwnProfile';
 type Props = {
   profile: Object,
   email: String,
+  drawer: Boolean,
+  closeDrawer: Function,
+  openDrawer: Function,
   _toggleDrawer: Function,
   _closeDrawer: Function,
   _handleToggle: Function,
@@ -39,8 +42,8 @@ class Profile extends Component {
   componentDidMount() {
     this.setMe();
   }
-
   props: Props;
+
 
   setMe() {
     const userEmail = this.props.email;
@@ -53,7 +56,7 @@ class Profile extends Component {
   _handleToggle(visible: boolean) {
     this.props.drawer === true
     ? this.props.closeDrawer()
-    : this.props.openDrawer()
+    : this.props.openDrawer();
   }
 
   _closeDrawer() {
@@ -111,7 +114,7 @@ class Profile extends Component {
               </Col>
             </Row>
              <Drawer
-              clickableDesktopOverlay={ false }
+               clickableDesktopOverlay={ false }
                position="right"
                navItems={ null }
                visible={ this.props.drawer }
@@ -124,7 +127,6 @@ class Profile extends Component {
              </Drawer>
           </Paper>
         </Grid>
-
       </div>
     );
   }

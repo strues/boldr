@@ -25,7 +25,7 @@ const styles = {
   alignItems: 'center',
   flexWrap: 'wrap',
 };
-const noop = () => {};
+
 class PrimaryHeader extends Component {
   props: Props;
   render() {
@@ -59,7 +59,7 @@ class PrimaryHeader extends Component {
           colored
           fixed
           title={
-            <img src="https://boldr.io/boldr.png"
+            <img src="https://boldr.io/images/boldr-logo-light.png"
               className="boldr-ph__logo"
               alt="logo" onClick={ this.props.handleLogoClick }
             />

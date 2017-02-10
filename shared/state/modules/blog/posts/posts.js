@@ -89,9 +89,23 @@ export const getPublishedPosts = (state, filter) => {
     case 'all':
       return allPosts;
     case 'published':
-      return allPosts.filter(p => p.published);
+      return allPosts.filter(p => p.published) && allPosts.filter(p => !p.featured);
     case 'draft':
       return allPosts.filter(p => !p.published);
+    default:
+      throw new Error(`Unknown filter: ${filter}.`);
+  }
+};
+
+export const getFeaturedPosts = (state, filter) => {
+  const allPosts = getPosts(state);
+  switch (filter) {
+    case 'all':
+      return allPosts;
+    case 'featured':
+      return allPosts.filter(p => p.featured);
+    case 'not':
+      return allPosts.filter(p => !p.featured);
     default:
       throw new Error(`Unknown filter: ${filter}.`);
   }
