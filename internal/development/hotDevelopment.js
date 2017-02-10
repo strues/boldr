@@ -9,9 +9,9 @@ import HotClientServer from './hotClientServer';
 import createVendorDLL from './createVendorDLL';
 
 const usesDevVendorDLL = bundleConfig =>
-bundleConfig.devVendorDLL != null && bundleConfig.devVendorDLL.enabled;
+  bundleConfig.devVendorDLL != null && bundleConfig.devVendorDLL.enabled;
 
-const vendorDLLsFailed = (err) => {
+const vendorDLLsFailed = err => {
   log({
     title: 'vendorDLL',
     level: 'error',
@@ -33,18 +33,16 @@ const initializeBundle = (name, bundleConfig) => {
       // Install the vendor DLL config for the client bundle if required.
       if (name === 'client' && usesDevVendorDLL(bundleConfig)) {
         // Install the vendor DLL plugin.
-        webpackConfig.plugins.push(
-          new webpack.DllReferencePlugin({
-            // $FlowFixMe
-            manifest: require(
-              pathResolve(
-                appRootDir.get(),
-                bundleConfig.outputPath,
-                `${bundleConfig.devVendorDLL.name}.json`,
-              ),
+        webpackConfig.plugins.push(new webpack.DllReferencePlugin({
+          // $FlowFixMe
+          manifest: require(
+            pathResolve(
+              appRootDir.get(),
+              bundleConfig.outputPath,
+              `${bundleConfig.devVendorDLL.name}.json`,
             ),
-          }),
-        );
+          ),
+        }));
       }
       return webpack(webpackConfig);
     } catch (err) {
@@ -62,32 +60,36 @@ const initializeBundle = (name, bundleConfig) => {
 };
 
 class HotDevelopment {
-
-
   constructor() {
     this.hotClientServer = null;
     this.hotNodeServers = [];
 
-    const clientBundle = initializeBundle('client', getConfig('bundles.client'));
+    const clientBundle = initializeBundle(
+      'client',
+      getConfig('bundles.client'),
+    );
 
-    const nodeBundles = [initializeBundle('server', getConfig('bundles.server'))]
-      .concat(Object.keys(getConfig('additionalNodeBundles')).map(name =>
-        initializeBundle(name, getConfig('additionalNodeBundles')[name]),
-      ));
+    const nodeBundles = [
+      initializeBundle('server', getConfig('bundles.server')),
+    ].concat(
+      Object.keys(
+        getConfig('additionalNodeBundles'),
+      ).map(name =>
+        initializeBundle(name, getConfig('additionalNodeBundles')[name])),
+    );
 
-    Promise
-    // First ensure the client dev vendor DLLs is created if needed.
-      .resolve(
-        usesDevVendorDLL(getConfig('bundles.client'))
-          ? createVendorDLL('client', getConfig('bundles.client'))
-          : true,
-      )
+    Promise// First ensure the client dev vendor DLLs is created if needed.
+    .resolve(
+      usesDevVendorDLL(getConfig('bundles.client'))
+        ? createVendorDLL('client', getConfig('bundles.client'))
+        : true,
+    )
       // Then start the client development server.
       .then(
-        () => new Promise((resolve) => {
+        () => new Promise(resolve => {
           const { createCompiler } = clientBundle;
           const compiler = createCompiler();
-          compiler.plugin('done', (stats) => {
+          compiler.plugin('done', stats => {
             if (!stats.hasErrors()) {
               resolve(compiler);
             }
@@ -97,23 +99,23 @@ class HotDevelopment {
         vendorDLLsFailed,
       )
       // Then start the node development server(s).
-      .then((clientCompiler) => {
-        this.hotNodeServers = nodeBundles
-          .map(({ name, createCompiler }) =>
-            // $FlowFixMe
-            new HotNodeServer(name, createCompiler(), clientCompiler),
-          );
+      .then(clientCompiler => {
+        this.hotNodeServers = nodeBundles.map(
+          ({ name, createCompiler }) => // $FlowFixMe
+          new HotNodeServer(name, createCompiler(), clientCompiler),
+        );
       });
   }
 
   dispose() {
     const safeDisposer = server =>
-      (server ? server.dispose() : Promise.resolve());
+      server ? server.dispose() : Promise.resolve();
 
     // First the hot client server.
-    return safeDisposer(this.hotClientServer)
-    // Then dispose the hot node server(s).
-      .then(() => Promise.all(this.hotNodeServers.map(safeDisposer)));
+    return safeDisposer(
+      this.hotClientServer,
+    )// Then dispose the hot node server(s).
+    .then(() => Promise.all(this.hotNodeServers.map(safeDisposer)));
   }
 }
 

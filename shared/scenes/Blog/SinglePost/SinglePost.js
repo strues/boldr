@@ -2,10 +2,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { Grid, Row, Col } from '../../../components/index';
+import { Grid, Row, Col, Heading } from '../../../components/index';
 import PostSidebar from '../components/PostSidebar';
 import PostContent from '../components/PostContent';
 import { getPosts } from '../../../state/modules/blog/posts';
+import PostTitle from '../components/PostTitle';
 import styled from 'styled-components';
 
 export type Props = {
@@ -35,7 +36,7 @@ const SinglePost = (props: Props) => {
   return (
         <div>
           <Helmet title={ props.currentPost.title } />
-          <PostBg />
+          <PostBg><PostTitle title={ props.currentPost.title } /></PostBg>
           <Grid>
             <Row>
               <Col sm={ 12 } md={ 8 } lg={ 9 }>

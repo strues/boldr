@@ -2,6 +2,7 @@ exports[`arrayOfMedia should match the normalizr-arrayOfTag-schema 1`] = `
 ArraySchema {
   "schema": EntitySchema {
     "_getId": [Function],
+    "_idAttribute": "id",
     "_key": "tags",
     "_mergeStrategy": [Function],
     "_processStrategy": [Function],
@@ -15,6 +16,7 @@ ArraySchema {
 exports[`tag schema should match the normalizr-tag-schema 1`] = `
 EntitySchema {
   "_getId": [Function],
+  "_idAttribute": "id",
   "_key": "tags",
   "_mergeStrategy": [Function],
   "_processStrategy": [Function],

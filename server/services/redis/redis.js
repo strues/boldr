@@ -1,12 +1,10 @@
-import redis from 'redis';
+import Redis from 'ioredis';
 import bluebird from 'bluebird';
 import getConfig from '../../../config/get';
 import logger from '../logger';
 
-bluebird.promisifyAll(redis.RedisClient.prototype);
-bluebird.promisifyAll(redis.Multi.prototype);
 
-const redisClient = redis.createClient(process.env.REDIS_CONN_URI);
+const redisClient = new Redis(process.env.REDIS_CONN_URI);
 
 redisClient.on('connect', () => {
   logger.info('Redis connection has been established!');

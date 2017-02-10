@@ -50,6 +50,7 @@ export async function getTaggedPostsByName(req, res, next) {
 
     return responseHandler(res, 200, tags);
   } catch (error) {
+    /* istanbul ignore next */
     return next(error);
   }
 }
@@ -80,6 +81,7 @@ export async function createTag(req, res, next) {
     });
     return responseHandler(res, 201, newTag);
   } catch (error) {
+      /* istanbul ignore next */
     return next(error);
   }
 }
@@ -92,10 +94,26 @@ export function updateTag(req, res) {
     });
 }
 
-export function deleteTag(req, res) {
-  return Tag.query()
-    .deleteById(req.params.id)
-    .then(() => responseHandler(res, 204));
+export async function deleteTag(req, res, next) {
+  try {
+    // query for the requested tag
+    const tag = await Tag.query().findById(req.params.id);
+    // return a bad request if we cannot locate
+    if (!tag) {
+        /* istanbul ignore next */
+      return res.status(400).json('There was a problem with your request. Unable to find tag.');
+    }
+    // unlink the attachment from the activity
+    await Activity.query().delete().where({ activity_tag: req.params.id }).first();
+
+    // remove the attachment from the database
+    await Tag.query().deleteById(req.params.id);
+    // send a 204
+    return res.status(204).json('Deleted');
+  } catch (error) {
+    /* istanbul ignore next */
+    return next(error);
+  }
 }
 
 export async function relateTagToPost(req, res, next) {
@@ -104,6 +122,7 @@ export async function relateTagToPost(req, res, next) {
     const newRelation = await tag.$relatedQuery('posts').relate({ id: req.params.postid });
     return res.status(200).json(newRelation);
   } catch (error) {
+      /* istanbul ignore next */
     return next(error);
   }
 }

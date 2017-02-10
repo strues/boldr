@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
+import Helmet from 'react-helmet';
 import FormCard from '../../../components/Form/FormCard';
 import SignupForm from './SignupForm';
 
@@ -13,10 +14,11 @@ const Signup = (props) => {
 );
   return (
     <div className="boldr-form__signup">
+      <Helmet title="Signup" />
       <FormCard
         width={ 600 }
         title="Signup"
-        form={ <SignupForm onSubmit={ props.handleOnSubmit } /> }
+        form={ <SignupForm onSubmit={ props.onSubmit } /> }
         extra1={ formBottom }
       />
   </div>
@@ -24,7 +26,7 @@ const Signup = (props) => {
 };
 
 Signup.propTypes = {
-  handleOnSubmit: PropTypes.func,
+  onSubmit: PropTypes.func,
 };
 
 export default Signup;

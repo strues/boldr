@@ -2,6 +2,7 @@ exports[`arrayOfPage should match the normalizr-arrayOfPage-schema 1`] = `
 ArraySchema {
   "schema": EntitySchema {
     "_getId": [Function],
+    "_idAttribute": "id",
     "_key": "pages",
     "_mergeStrategy": [Function],
     "_processStrategy": [Function],
@@ -15,6 +16,7 @@ ArraySchema {
 exports[`page schema should match the normalizr-page-schema 1`] = `
 EntitySchema {
   "_getId": [Function],
+  "_idAttribute": "id",
   "_key": "pages",
   "_mergeStrategy": [Function],
   "_processStrategy": [Function],

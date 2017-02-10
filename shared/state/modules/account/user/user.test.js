@@ -6,11 +6,15 @@ describe('User Reducer', () => {
     expect(
         userReducer(undefined, {}),
       ).toEqual({
+        id: '',
         email: '',
         firstName: '',
         lastName: '',
         username: '',
+        location: '',
         avatarUrl: '',
+        website: '',
+        bio: '',
         role: '',
         roleId: '',
       });

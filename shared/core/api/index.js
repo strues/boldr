@@ -221,6 +221,18 @@ export const doUpdateMember = (userData) => {
 export const getUserProfile = (username) =>
   apiClient.get(`/users/${username}/profile`);
 
+export const doUpdateProfile = (userData) => {
+  const payload = {
+    username: userData.username,
+    first_name: userData.first_name,
+    last_name: userData.last_name,
+    avatar_url: userData.avatar_url,
+    bio: userData.bio,
+    location: userData.location,
+    website: userData.website,
+  };
+  return apiClient.put(`/users/${userData.id}`, { data: userData });
+};
 /**
   * ADMIN API ROUTES
   * -------------------------

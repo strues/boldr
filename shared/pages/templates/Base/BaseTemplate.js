@@ -24,8 +24,10 @@ const Wrapper = styled.div`
 
 const ContentWrapper = styled.section`
   width: 100%;
+  padding-top: 60px;
   box-sizing: border-box;
   margin: 0 auto;
+  background-color: #e5eaed;
 `;
 
 const FooterWrapper = styled.footer`

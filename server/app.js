@@ -1,6 +1,7 @@
 import { resolve as pathResolve } from 'path';
 import express from 'express';
 import appRootDir from 'app-root-dir';
+
 import getConfig from '../config/get';
 import { expressMiddleware, authMiddleware, rbac, errorHandler } from './middleware';
 import routes from './routes/index';
@@ -18,7 +19,7 @@ authMiddleware(app);
 app.use(rbac());
 
 // attaches to router
-app.use('/api/v1', routes);
+routes(app);
 
 app.use(getConfig('bundles.client.webPath'), clientBundle);
 // Configure static serving of our "public" root http path static files.
@@ -31,10 +32,9 @@ if (process.env.NODE_ENV === 'production') {
   // The React application middleware.
   app.get('*', cache.route(), boldrSSR);
 } else {
-  app.get('*', cache.route(), boldrSSR);
+  app.get('*', boldrSSR);
 }
 
 errorHandler(app);
 
 export default app;
-export { cache };

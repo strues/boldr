@@ -2,6 +2,7 @@ exports[`arrayOfTemplate should match the normalizr-arrayOfTemplate-schema 1`] =
 ArraySchema {
   "schema": EntitySchema {
     "_getId": [Function],
+    "_idAttribute": "id",
     "_key": "templates",
     "_mergeStrategy": [Function],
     "_processStrategy": [Function],
@@ -9,6 +10,7 @@ ArraySchema {
       "pages": Array [
         EntitySchema {
           "_getId": [Function],
+          "_idAttribute": "id",
           "_key": "pages",
           "_mergeStrategy": [Function],
           "_processStrategy": [Function],
@@ -25,6 +27,7 @@ ArraySchema {
 exports[`template schema should match the normalizr-template-schema 1`] = `
 EntitySchema {
   "_getId": [Function],
+  "_idAttribute": "id",
   "_key": "templates",
   "_mergeStrategy": [Function],
   "_processStrategy": [Function],
@@ -32,6 +35,7 @@ EntitySchema {
     "pages": Array [
       EntitySchema {
         "_getId": [Function],
+        "_idAttribute": "id",
         "_key": "pages",
         "_mergeStrategy": [Function],
         "_processStrategy": [Function],

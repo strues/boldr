@@ -17,7 +17,7 @@ type Props = {
 const ActivityWidget = (props: Props) => {
   return (
 
-    <Paper zDepth={ 2 }>
+    <Paper zDepth={ 2 } className="boldr-paperoverride">
       <Toolbar
         colored
         title="Recent Activity"

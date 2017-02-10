@@ -2,6 +2,8 @@ import request from 'supertest';
 import faker from 'faker';
 import app from '../../app';
 
+const agent = request.agent(app);
+
 describe('Tags API Endpoint', async () => {
   let token;
   beforeAll(async () => {
@@ -9,7 +11,7 @@ describe('Tags API Endpoint', async () => {
       email: 'admin@boldr.io',
       password: 'password',
     };
-    const { body } = await request(app).post('/api/v1/auth/login').set('Accept', 'application/json').send(loginData);
+    const { body } = await agent.post('/api/v1/auth/login').set('Accept', 'application/json').send(loginData);
     token = body.token;
   });
 
@@ -19,7 +21,7 @@ describe('Tags API Endpoint', async () => {
   };
 
   test('+++ GET /tags', () => {
-    return request(app)
+    return agent
       .get('/api/v1/tags')
       .expect((res) => {
         expect(res.status).toBe(200);
@@ -28,7 +30,7 @@ describe('Tags API Endpoint', async () => {
       });
   });
   test('+++ GET /tags/:id', () => {
-    return request(app)
+    return agent
       .get('/api/v1/tags/1')
       .expect((res) => {
         expect(res.status).toBe(200);
@@ -37,7 +39,7 @@ describe('Tags API Endpoint', async () => {
       });
   });
   test('+++ GET /tags/posts/:id', () => {
-    return request(app)
+    return agent
       .get('/api/v1/tags/posts/1')
       .expect((res) => {
         expect(res.status).toBe(200);
@@ -47,7 +49,7 @@ describe('Tags API Endpoint', async () => {
       });
   });
   test('+++ GET /tags/:name/posts', () => {
-    return request(app)
+    return agent
       .get('/api/v1/tags/javascript/posts')
       .expect((res) => {
         expect(res.status).toBe(200);
@@ -57,7 +59,7 @@ describe('Tags API Endpoint', async () => {
       });
   });
   test('+++ Post /tags - should fail without authentication.', () => {
-    return request(app)
+    return agent
       .post('/api/v1/tags')
       .send({
         name: faker.random.word(),
@@ -68,7 +70,7 @@ describe('Tags API Endpoint', async () => {
       });
   });
   test('+++ Post /tags - should create a new tag.', () => {
-    return request(app)
+    return agent
       .post('/api/v1/tags')
       .set('Authorization', `Bearer ${token}`)
       .send({
@@ -81,7 +83,7 @@ describe('Tags API Endpoint', async () => {
   });
 
   test('+++ Post /tags - should fail without name.', () => {
-    return request(app)
+    return agent
       .post('/api/v1/tags')
       .set('Authorization', `Bearer ${token}`)
       .send(badTag)
@@ -90,7 +92,7 @@ describe('Tags API Endpoint', async () => {
       });
   });
   test('+++ PUT /tags/:id - should update a tag.', () => {
-    return request(app)
+    return agent
       .put('/api/v1/tags/1')
       .set('Authorization', `Bearer ${token}`)
       .send({
@@ -101,7 +103,7 @@ describe('Tags API Endpoint', async () => {
       });
   });
   test('+++ PUT /tags/:id - should fail to update a tag without auth.', () => {
-    return request(app)
+    return agent
       .put('/api/v1/tags/1')
       .send({
         description: faker.random.words(),
@@ -111,7 +113,7 @@ describe('Tags API Endpoint', async () => {
       });
   });
   test('+++ DELETE /tags/:id - should delete a tag.', async () => {
-    const { body } = await request(app)
+    const { body } = await agent
       .post('/api/v1/tags')
       .set('Authorization', `Bearer ${token}`)
       .send({
@@ -119,7 +121,7 @@ describe('Tags API Endpoint', async () => {
         description: 'a tag for a test.',
       });
     const tagId = body.id;
-    return request(app)
+    return agent
       .del(`/api/v1/tags/${tagId}`)
       .set('Authorization', `Bearer ${token}`)
       .expect((res) => {

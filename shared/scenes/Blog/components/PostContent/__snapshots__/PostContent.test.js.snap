@@ -1,6 +1,7 @@
 exports[`<PostContent /> renders snapshot 1`] = `
 <article>
   <Paper
+    className="boldr-paperoverride"
     component="div"
     style={
       Object {
@@ -9,7 +10,6 @@ exports[`<PostContent /> renders snapshot 1`] = `
       }
     }
     zDepth={2}>
-    <PostTitle />
     <PostDate />
     <Divider />
     <div

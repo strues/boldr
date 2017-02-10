@@ -26,7 +26,7 @@ router.route('/')
        * @apiSuccess {Object}   posts.author          The post author's user object
        * @apiError   {Object} 400 Some parameters may contain invalid values.
        */
-      .get(cache.route(), ctrl.listPosts)
+      .get(ctrl.listPosts)
       /**
        * @api {post} /posts         Create post
        * @apiName CreatePost

@@ -76,6 +76,7 @@ boldr api documentation
 	- [Create user](#create-user)
 	- [Delete user](#delete-user)
 	- [Get user](#get-user)
+	- [Get user profile](#get-user-profile)
 	- [List all users](#list-all-users)
 	- [Update user](#update-user)
 	
@@ -761,6 +762,13 @@ Access-Control-Allow-Credentials: true
 
 
 	GET /users/:id
+
+
+## Get user profile
+
+
+
+	GET /users/:username/profile
 
 
 ## List all users

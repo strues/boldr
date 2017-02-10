@@ -2,6 +2,8 @@ import request from 'supertest';
 import faker from 'faker';
 import app from '../../app';
 
+const agent = request.agent(app);
+
 describe('Menu API Endpoint', async () => {
   let token;
   beforeAll(async () => {
@@ -9,11 +11,11 @@ describe('Menu API Endpoint', async () => {
       email: 'admin@boldr.io',
       password: 'password',
     };
-    const { body } = await request(app).post('/api/v1/auth/login').set('Accept', 'application/json').send(loginData);
+    const { body } = await agent.post('/api/v1/auth/login').set('Accept', 'application/json').send(loginData);
     token = body.token;
   });
   test('+++ GET /menus', () => {
-    return request(app)
+    return agent
         .get('/api/v1/menus')
         .set('Accept', 'application/json')
         .expect((res) => {
@@ -21,7 +23,7 @@ describe('Menu API Endpoint', async () => {
         });
   });
   test('+++ GET /menus/:id', () => {
-    return request(app)
+    return agent
         .get('/api/v1/menus/1')
         .set('Accept', 'application/json')
         .expect((res) => {
@@ -30,7 +32,7 @@ describe('Menu API Endpoint', async () => {
         });
   });
   test('+++ POST /menus', () => {
-    return request(app)
+    return agent
         .post('/api/v1/menus')
         .set('Accept', 'application/json')
         .set('Authorization', `Bearer ${token}`)
@@ -46,7 +48,7 @@ describe('Menu API Endpoint', async () => {
         });
   });
   test('+++ PUT /menus/:id', () => {
-    return request(app)
+    return agent
         .put('/api/v1/menus/2')
         .set('Accept', 'application/json')
         .set('Authorization', `Bearer ${token}`)

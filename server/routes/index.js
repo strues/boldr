@@ -16,8 +16,9 @@ import templateRoutes from './template/template.routes';
 import tokenRoutes from './token/token.routes';
 import userRoutes from './user/user.routes';
 
-const router = express.Router();
+const API_PREFIX = '/api/v1';
 
+export default (app) => {
 /**
  * @apiDefine listParams
  * @apiParam {String[]} include=[author,tags] Return associated models with the request
@@ -45,32 +46,39 @@ const router = express.Router();
   * @apiDefine user User access for certain restricted routes.
   * You must pass an authorization header with a token to access this endpoint.
   */
-router.get('/health-check', (req, res) => {
-  res.status(200);
-  res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
-  res.set('Pragma', 'no-cache');
-  res.set('Expires', '0');
-  res.json({
-    health: 'good',
-    uptime: process.uptime(),
-    memoryUsage: process.memoryUsage(),
+  app.get(`${API_PREFIX}/health-check`, (req, res) => {
+    res.status(200);
+    res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.set('Pragma', 'no-cache');
+    res.set('Expires', '0');
+    res.json({
+      health: 'good',
+      uptime: process.uptime(),
+      memoryUsage: process.memoryUsage(),
+    });
   });
-});
 
-router.use('/activities', activityRoutes);
-router.use('/admin', adminRoutes);
-router.use('/attachments', attachmentRoutes);
-router.use('/auth', authRoutes);
-router.use('/menu-details', menuDetailRoutes);
-router.use('/menus', menuRoutes);
-router.use('/pages', pageRoutes);
-router.use('/posts', postRoutes);
-router.use('/roles', roleRoutes);
+  app.use(`${API_PREFIX}/activities`, activityRoutes);
+  app.use(`${API_PREFIX}/admin`, adminRoutes);
+  app.use(`${API_PREFIX}/attachments`, attachmentRoutes);
+  app.use(`${API_PREFIX}/auth`, authRoutes);
+  app.use(`${API_PREFIX}/menu-details`, menuDetailRoutes);
+  app.use(`${API_PREFIX}/menus`, menuRoutes);
+  app.use(`${API_PREFIX}/pages`, pageRoutes);
+  app.use(`${API_PREFIX}/posts`, postRoutes);
+  app.use(`${API_PREFIX}/roles`, roleRoutes);
 
-router.use('/settings', settingRoutes);
-router.use('/tags', tagRoutes);
-router.use('/templates', templateRoutes);
-router.use('/tokens', tokenRoutes);
-router.use('/users', userRoutes);
+  app.use(`${API_PREFIX}/settings`, settingRoutes);
+  app.use(`${API_PREFIX}/tags`, tagRoutes);
+  app.use(`${API_PREFIX}/templates`, templateRoutes);
+  app.use(`${API_PREFIX}/tokens`, tokenRoutes);
+  app.use(`${API_PREFIX}/users`, userRoutes);
 
-export default router;
+  app.use((err, req, res, next) => {
+    if (err) {
+      res.status(err.statusCode || err.status || 500).send(err.data || err.message || {});
+    } else {
+      next();
+    }
+  });
+};

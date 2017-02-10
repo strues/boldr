@@ -222,6 +222,7 @@ export function verifyAccount(token) {
   * PROFILE ACTIONS
   * -------------------------
   * @exports getProfile
+  * @exports editProfile
   *****************************************************************/
 
 export function getProfile(username) {
@@ -255,3 +256,34 @@ const receiveProfile = (data) => {
 const receiveProfileFailed = (err) => ({
   type: t.FETCH_PROFILE_FAILURE, error: err,
 });
+
+export function editProfile(userData) {
+  return dispatch => {
+    dispatch(beginUpdateProfile());
+    return api.doUpdateProfile(userData)
+      .then(response => {
+        dispatch(doneUpdateProfile(response));
+        dispatch(notificationSend(notif.MSG_EDIT_PROFILE_SUCCESS));
+      })
+      .catch(
+        err => {
+          dispatch(failUpdateProfile(err.message));
+          dispatch(notificationSend(notif.MSG_EDIT_PROFILE_FAILURE));
+        });
+  };
+}
+
+const beginUpdateProfile = () => {
+  return { type: t.EDIT_PROFILE_REQUEST };
+};
+
+const doneUpdateProfile = (response) => {
+  return { type: t.EDIT_PROFILE_SUCCESS, payload: response.body };
+};
+
+const failUpdateProfile = (err) => {
+  return {
+    type: t.EDIT_PROFILE_FAILURE,
+    error: err,
+  };
+};

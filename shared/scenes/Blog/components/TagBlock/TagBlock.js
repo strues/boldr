@@ -6,6 +6,7 @@ const TagBlock = (props) => {
     wrapper: {
       display: 'flex',
       flexWrap: 'wrap',
+      backgroundColor: '#fff',
     },
   };
   if (!props.tags) {
@@ -13,7 +14,7 @@ const TagBlock = (props) => {
   }
 
   return (
-    <div style={ styles.wrapper } className="boldr-post__tagblock">
+    <div style={ styles.wrapper } className="boldr-post__tagblock boldr-paperoverride">
 
     {
 

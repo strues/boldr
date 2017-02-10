@@ -1,10 +1,10 @@
 import http from 'http';
 import { resolve as pathResolve } from 'path';
 import { Model } from 'objection';
-
 import getConfig from '../config/get';
-import db from './services/postgres';
+import db, { disconnect } from './services/postgres';
 import logger from './services/logger';
+
 import app from './app';
 
 global.Promise = require('bluebird');
@@ -16,6 +16,8 @@ const port = getConfig('port');
 require('dotenv').load({ silent: true });
 
 const server = http.createServer(app);
+
+
 Model.knex(db);
 
 // Create an http listener for our express app.
@@ -25,7 +27,7 @@ const listener = server.listen(getConfig('port'), getConfig('host'), () =>
 
 process.on('SIGINT', () => {
   logger.info('shutting down!');
-  database.close();
+  disconnect();
   server.close();
   process.exit();
 });
@@ -36,4 +38,5 @@ process.on('uncaughtException', (error) => {
   process.exit(1);
 });
 
+export { server };
 export default listener;

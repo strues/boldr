@@ -323,7 +323,7 @@ export default function webpackConfigFactory(buildOptions: BuildOptions) {
               options: {
                 importLoaders: 1,
                 localIdentName: '[local]__[hash:base64:5]',
-                modules: false,
+                modules: true,
                 sourceMap: true,
               },
             },

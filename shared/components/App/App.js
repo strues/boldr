@@ -11,6 +11,7 @@ import { setMobileDevice } from '../../state/modules/boldr/ui/actions';
 import type { ReactChildren } from '../../types/react';
 import Notifications from '../Notification';
 
+
 if (process.env.NODE_ENV !== 'test') {
   require('../../styles/main.scss');
 }

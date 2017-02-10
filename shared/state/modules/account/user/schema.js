@@ -22,6 +22,7 @@ const userMergeStrategy = (entityA, entityB) => {
 const user = new schema.Entity('users', {}, {
   mergeStrategy: userMergeStrategy,
   processStrategy: userProcessStrategy,
+  idAttribute: 'id',
 });
 
 const arrayOfUsers = [user];

@@ -2,12 +2,14 @@ exports[`arrayOfMedia should match the normalizr-arrayOfPost-schema 1`] = `
 ArraySchema {
   "schema": EntitySchema {
     "_getId": [Function],
+    "_idAttribute": "id",
     "_key": "posts",
     "_mergeStrategy": [Function],
     "_processStrategy": [Function],
     "schema": Object {
       "author": EntitySchema {
         "_getId": [Function],
+        "_idAttribute": "id",
         "_key": "users",
         "_mergeStrategy": [Function],
         "_processStrategy": [Function],
@@ -16,6 +18,7 @@ ArraySchema {
       "tags": Array [
         EntitySchema {
           "_getId": [Function],
+          "_idAttribute": "id",
           "_key": "tags",
           "_mergeStrategy": [Function],
           "_processStrategy": [Function],
@@ -32,12 +35,14 @@ ArraySchema {
 exports[`post schema should match the normalizr-post-schema 1`] = `
 EntitySchema {
   "_getId": [Function],
+  "_idAttribute": "id",
   "_key": "posts",
   "_mergeStrategy": [Function],
   "_processStrategy": [Function],
   "schema": Object {
     "author": EntitySchema {
       "_getId": [Function],
+      "_idAttribute": "id",
       "_key": "users",
       "_mergeStrategy": [Function],
       "_processStrategy": [Function],
@@ -46,6 +51,7 @@ EntitySchema {
     "tags": Array [
       EntitySchema {
         "_getId": [Function],
+        "_idAttribute": "id",
         "_key": "tags",
         "_mergeStrategy": [Function],
         "_processStrategy": [Function],

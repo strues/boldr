@@ -1,16 +1,20 @@
 exports[`detail should match the normalizr-detail-schema 1`] = `
 EntitySchema {
   "_getId": [Function],
+  "_idAttribute": "id",
   "_key": "details",
   "_mergeStrategy": [Function],
   "_processStrategy": [Function],
-  "schema": Object {},
+  "schema": Object {
+    "idAttribute": "id",
+  },
 }
 `;
 
 exports[`menu schema should match the normalizr-menu-schema 1`] = `
 EntitySchema {
   "_getId": [Function],
+  "_idAttribute": "id",
   "_key": "menus",
   "_mergeStrategy": [Function],
   "_processStrategy": [Function],
@@ -18,10 +22,13 @@ EntitySchema {
     "details": Array [
       EntitySchema {
         "_getId": [Function],
+        "_idAttribute": "id",
         "_key": "details",
         "_mergeStrategy": [Function],
         "_processStrategy": [Function],
-        "schema": Object {},
+        "schema": Object {
+          "idAttribute": "id",
+        },
       },
     ],
   },

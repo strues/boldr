@@ -23,11 +23,11 @@ export async function listUsers(req, res, next) {
     const users = await User.query().eager('[roles]').omit(['password']);
     debug(users);
     if (!users) {
-      const err = new NotFound();
-      return next(err);
+      return res.status(400).json('Unable to find any users.');
     }
     return responseHandler(res, 200, users);
   } catch (error) {
+    /* istanbul ignore next */
     const err = new BadRequest(error);
     return next(err);
   }
@@ -42,6 +42,7 @@ export async function getUser(req, res, next) {
 
     return responseHandler(res, 200, user);
   } catch (error) {
+    /* istanbul ignore next */
     const err = new BadRequest(error);
     return next(err);
   }
@@ -57,6 +58,7 @@ export async function getUsername(req, res, next) {
 
     return responseHandler(res, 200, user);
   } catch (error) {
+    /* istanbul ignore next */
     const err = new BadRequest(error);
     return next(err);
   }
@@ -80,14 +82,13 @@ export function updateUser(req, res, next) {
 export async function adminUpdateUser(req, res, next) {
   try {
     if (req.body.role) {
+      /* istanbul ignore next */
       const u = await User.query().findById(req.params.id).eager('roles');
       await u
          .$relatedQuery('roles')
          .unrelate();
-
+         /* istanbul ignore next */
       const newRole = await u.$relatedQuery('roles').relate({ id: req.body.role });
-
-      debug(newRole);
     }
     const payload = {
       username: req.body.username,
@@ -102,6 +103,7 @@ export async function adminUpdateUser(req, res, next) {
       .patchAndFetchById(req.params.id, payload)
       .then(user => res.status(202).json(user));
   } catch (error) {
+    /* istanbul ignore next */
     return next(error);
   }
 }
@@ -112,12 +114,13 @@ export async function destroyUser(req, res, next) {
       .query()
       .findById(req.params.id)
       .then(user => {
-        return user.$relatedQuery('tokens').delete();
+        return user.$relatedQuery('roles').delete();
       });
     await User.query().deleteById(req.params.id);
 
     return res.status(204).json({ message: 'User deleted.' });
   } catch (error) {
+    /* istanbul ignore next */
     return next(error);
   }
 }
@@ -138,6 +141,7 @@ export async function adminCreateUser(req, res, next) {
     const checkExisting = await User.query().where('email', req.body.email);
 
     if (checkExisting.length) {
+      /* istanbul ignore next */
       return next(new Conflict());
     }
     const newUser = await objection.transaction(User, async (User) => {
@@ -145,6 +149,7 @@ export async function adminCreateUser(req, res, next) {
       await user.$relatedQuery('roles').relate({ id: 1 });
 
       if (!user) {
+        /* istanbul ignore next */
         return next(new NotFound());
       }
       // generate user verification token to send in the email.
@@ -169,6 +174,7 @@ export async function adminCreateUser(req, res, next) {
     // Massive transaction is finished, send the data to the user.
     return responseHandler(res, 201, newUser);
   } catch (error) {
+    /* istanbul ignore next */
     return next(error);
   }
 }

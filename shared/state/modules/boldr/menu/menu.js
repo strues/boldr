@@ -13,17 +13,6 @@ const INITIAL_STATE = {
   order: -1,
   details: [],
 };
-const menuState = {
-  id: -1,
-  uuid: '',
-  label: '',
-  name: '',
-  attribute: '',
-  position: '',
-  parent_id: '',
-  link: '',
-  icon: '',
-};
 
 const main = (state = INITIAL_STATE, action) => {
   switch (action.type) {

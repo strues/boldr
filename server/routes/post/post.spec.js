@@ -2,6 +2,7 @@ import request from 'supertest';
 import faker from 'faker';
 import app from '../../app';
 
+const agent = request.agent(app);
 describe('Posts API Endpoint', async () => {
   let token;
   beforeAll(async () => {
@@ -9,12 +10,12 @@ describe('Posts API Endpoint', async () => {
       email: 'admin@boldr.io',
       password: 'password',
     };
-    const { body } = await request(app).post('/api/v1/auth/login').set('Accept', 'application/json').send(loginData);
+    const { body } = await agent.post('/api/v1/auth/login').set('Accept', 'application/json').send(loginData);
     token = body.token;
   });
 
   it('GET /posts -- List', async () => {
-    const { status, body } = await request(app)
+    const { status, body } = await agent
         .get('/api/v1/posts')
         .set('Accept', 'application/json');
 
@@ -25,7 +26,7 @@ describe('Posts API Endpoint', async () => {
   });
 
   it('GET /posts/pid/:id -- By id', async () => {
-    const { status, body } = await request(app)
+    const { status, body } = await agent
         .get('/api/v1/posts/pid/cb61bbae-c91e-4014-b665-3485734b88fb')
         .set('Accept', 'application/json');
     expect(status).toBe(200);
@@ -33,7 +34,7 @@ describe('Posts API Endpoint', async () => {
   });
 
   it('GET /posts/slug/:slug -- By slug', async () => {
-    const { status, body } = await request(app)
+    const { status, body } = await agent
         .get('/api/v1/posts/slug/nother-one')
         .set('Accept', 'application/json');
     expect(status).toBe(200);
@@ -41,7 +42,7 @@ describe('Posts API Endpoint', async () => {
   });
 
   it('POST /posts -- Fails without a title', async () => {
-    const { status } = await request(app)
+    const { status } = await agent
           .post('/api/v1/posts')
           .set('Accept', 'application/json')
           .set('Authorization', `Bearer ${token}`)
@@ -58,7 +59,7 @@ describe('Posts API Endpoint', async () => {
   });
 
   it('POST /posts -- Creates new post', async () => {
-    const { status, body } = await request(app)
+    const { status, body } = await agent
           .post('/api/v1/posts')
           .set('Accept', 'application/json')
           .set('Authorization', `Bearer ${token}`)
@@ -75,7 +76,7 @@ describe('Posts API Endpoint', async () => {
     expect(typeof body).toBe('string');
   });
   it('POST /posts -- Creating a post fails if it already exists', async () => {
-    const { status, body } = await request(app)
+    const { status, body } = await agent
           .post('/api/v1/posts')
           .set('Accept', 'application/json')
           .set('Authorization', `Bearer ${token}`)
@@ -92,7 +93,7 @@ describe('Posts API Endpoint', async () => {
     expect(typeof body).toBe('object');
   });
   it('PUT /posts/:id -- Update a post', async () => {
-    const { status, body } = await request(app)
+    const { status, body } = await agent
           .put('/api/v1/posts/pid/cb61bbae-c91e-4014-b665-3485734b88fb')
           .set('Accept', 'application/json')
           .set('Authorization', `Bearer ${token}`)
@@ -107,7 +108,7 @@ describe('Posts API Endpoint', async () => {
     expect(typeof body).toBe('object');
   });
   it('POST /posts/:id -- Add tag to post', async () => {
-    const { status, body } = await request(app)
+    const { status, body } = await agent
           .post('/api/v1/posts/pid/cb61bbae-c91e-4014-b665-3485734b88fb')
           .set('Accept', 'application/json')
           .set('Authorization', `Bearer ${token}`)

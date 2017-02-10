@@ -21,7 +21,7 @@ module.exports.up = async (db) => {
   });
   await db.schema.createTable('user', (table) => {
     // pk
-    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
+    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
     table.string('email', 100).unique().notNullable();
     table.string('password', 64).notNullable();
     table.string('first_name', 50).notNullable();
@@ -37,6 +37,7 @@ module.exports.up = async (db) => {
 
     table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
     table.timestamp('updated_at').nullable().defaultTo(null);
+    table.timestamp('deleted_at').nullable().defaultTo(null);
     // fk
 
     // indexes
@@ -83,7 +84,7 @@ module.exports.up = async (db) => {
   });
   await db.schema.createTable('post', (table) => {
     // pk | uuid
-    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
+    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
     table.string('title', 140).unique().notNullable();
     table.string('slug').unique().notNullable();
     table.string('feature_image', 255).nullable();
@@ -91,12 +92,14 @@ module.exports.up = async (db) => {
     table.json('attachments').nullable();
     table.json('meta').nullable();
     table.boolean('featured').defaultTo(false);
+    table.text('raw_content');
     table.text('content').notNullable();
     table.text('excerpt').notNullable();
     table.uuid('user_id').unsigned().notNullable();
     table.boolean('published').defaultTo(true);
     table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
     table.timestamp('updated_at').nullable().defaultTo(null);
+    table.timestamp('deleted_at').nullable().defaultTo(null);
     // fk | uuid
     table.foreign('user_id').references('id').inTable('user').onDelete('cascade').onUpdate('cascade');
 
@@ -106,7 +109,7 @@ module.exports.up = async (db) => {
   });
   await db.schema.createTable('attachment', (table) => {
     // pk | uuid
-    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
+    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
     table.string('file_name');
     table.string('safe_name');
     table.string('original_name');
@@ -154,7 +157,7 @@ module.exports.up = async (db) => {
     table.index('link');
   });
   await db.schema.createTable('gallery', (table) => {
-    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
+    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
     table.string('name').unique().notNullable();
     table.string('slug');
     table.string('description');
@@ -179,7 +182,7 @@ module.exports.up = async (db) => {
   });
 
   await db.schema.createTable('page', (table) => {
-    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
+    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
     table.string('name').unique().notNullable();
     table.string('slug').unique();
     table.string('url').unique().notNullable();
@@ -195,7 +198,7 @@ module.exports.up = async (db) => {
   });
 
   await db.schema.createTable('activity', (table) => {
-    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
+    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
     table.uuid('user_id').unsigned().notNullable();
     table.integer('action_type_id').unsigned().notNullable();
     table.uuid('activity_post').unsigned();

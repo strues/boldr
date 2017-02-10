@@ -17,12 +17,9 @@ html {
   -webkit-font-smoothing: antialiased;
 }
 
-.boldr-icon {
-  display: inline-block;
-}
-
 #app {
-  background-color: #eef2f6;
+  height: 100vh;
+  background-color: $body-background;
 }
 
 body {
@@ -35,43 +32,24 @@ body {
   font-family: $font-family;
   font-size: $font-size-base;
   line-height: $line-height-base;
-  // background: $body-background;
+  background-color: $body-background;
   font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
 }
-/*******************************
-          Highlighting
-*******************************/
-/* Site */
-::-webkit-selection {
-  background-color: $selection-color;
-  color: rgba(0, 0, 0, 0.87);
+
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: color .3s;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: darken($primary-color, 10%);
+    text-decoration: none;
+  }
 }
 
-::-moz-selection {
-  background-color: $selection-color;
-  color: rgba(0, 0, 0, 0.87);
-}
-
-::selection {
-  background-color: $selection-color;
-  color: rgba(0, 0, 0, 0.87);
-}
-/* Form */
-input::-webkit-selection,
-textarea::-webkit-selection {
-  background-color: rgba(100, 100, 100, 0.4);
-  color: rgba(0, 0, 0, 0.87);
-}
-
-input::-moz-selection,
-textarea::-moz-selection {
-  background-color: rgba(100, 100, 100, 0.4);
-  color: rgba(0, 0, 0, 0.87);
-}
-
-input::selection,
-textarea::selection {
-  background-color: rgba(100, 100, 100, 0.4);
-  color: rgba(0, 0, 0, 0.87);
+.boldr-icon {
+  display: inline-block;
 }

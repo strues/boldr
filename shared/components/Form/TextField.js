@@ -1,6 +1,6 @@
 
 import TextField from 'react-md/lib/TextFields';
 import wrapFormComponent from './util/wrapFormComponent';
-import mapError from './util/mapError';
+import mapProps from './util/mapProps';
 
-export default wrapFormComponent(TextField, mapError);
+export default wrapFormComponent(TextField, mapProps);

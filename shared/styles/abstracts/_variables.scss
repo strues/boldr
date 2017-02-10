@@ -1,54 +1,15 @@
-
-////
-/// @group colors
-////
-
-/// @type Color
-$black: #000;
-/// @type Color
-$white: #fff;
-/// @type Color
-$snow: #f0f0f0;
-/// @type Color
-$cloud: #dfdfdf;
-
-/// @type Color
-$mirage: rgba(27, 27, 37, 1);
-
-$dark-navy: #262B33;
-
-/// @type Color
-$near-black: #1E232B;
-/// @type Color
-$grape: rgba(64, 64, 78, 1);
-/// @type Color
-$pinkish: rgb(229, 0, 80);
-/// @type Color
-$ocean: #1c3050;
-/// @type Color
-$water: #0376a3;
-/// @type Color
-$lapiz: #14ADC4;
-/// @type Color
-$navy: #044c66;
-
-$primary-color: #02BCD6;
-$md-picker-include-forceful-classes: true;
-$md-primary-color: $primary-color;
-$md-secondary-color: $md-pink-500;
-
 $shadow-color: rgba(0, 0, 0, .2);
 $box-shadow: 0 0 5 $shadow-color;
 
-$body-background: $snow;
+$body-background: #e5eaed;
 
-$accent-color: $md-secondary-color;
+
 $primary-button-bg: $primary-color;
 $primary-button-bg-hover: darken($primary-color, 5%);
 
 $selection-color: darken($snow, 3%);
 $link-color: $accent-color;
-$error-color: rgb(244, 67, 54);
+$error-color:  $md-red-700;
 $footer-bg: $mirage;
 $text-color: $near-black;
 
@@ -108,14 +69,12 @@ $primary-header-bg: $white;
 $primary-header-link: $ocean;
 
 
-$gray-light: #818a91 !default;
-
-$font-weight-normal: normal !default;
+$font-weight-normal: 400;
 $btn-font-weight: $font-weight-normal;
-$border-radius: 0.25rem !default;
-$btn-border-radius:              $border-radius !default;
+$border-radius: 0.25rem;
+$btn-border-radius: $border-radius;
 $btn-line-height: 1.25;
-$border-width: 1 !default;
-$input-btn-border-width: $border-width !default; // For form controls and buttons
+$border-width: 1;
+$input-btn-border-width: $border-width;
 $btn-padding-x: 1rem;
 $btn-padding-y: 0.5rem;

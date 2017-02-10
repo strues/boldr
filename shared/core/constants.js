@@ -62,7 +62,12 @@ export const MSG_LOGIN_ERROR = (err) => {
     message: `There was a problem logging in to your account: ${err}`, kind: 'error', dismissAfter: 3000,
   };
 };
-
+export const MSG_EDIT_PROFILE_SUCCESS = {
+  message: 'Your profile was updated.', kind: 'success', dismissAfter: 3000,
+};
+export const MSG_EDIT_PROFILE_FAILURE = {
+  message: 'There was an issue updating your profile.', kind: 'error', dismissAfter: 3000,
+};
 export const MSG_LOGIN_SUCCESS = {
   message: 'Welcome back!', kind: 'success', dismissAfter: 3000,
 };

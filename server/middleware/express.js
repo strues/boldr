@@ -21,6 +21,9 @@ function nonceMiddleware(req, res, next) {
 export default (app) => {
   app.disable('x-powered-by');
   app.set('trust proxy', 'loopback');
+  if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
+    app.use(morgan('dev'));
+  }
   app.use(nonceMiddleware);
   app.use(compression());
   // enable CORS - Cross Origin Resource Sharing
@@ -53,8 +56,4 @@ export default (app) => {
   }));
   app.use(hpp());
   app.use(flash());
-
-  if (process.env.NODE_ENV === 'development' || process.env.NODE_ENV === 'test') {
-    app.use(morgan('dev'));
-  }
 };

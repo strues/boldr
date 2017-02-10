@@ -20,25 +20,18 @@ const values = {
   // util to create a filter object that can be serialised and included
   // with our client bundle.
   clientConfigFilter: {
-    // This is here as an example showing that you can expose variables
-    // that were potentially provivded by the environment
     welcomeMessage: false,
-    // We only need to expose the enabled flag of the service worker.
     serviceWorker: {
       enabled: true,
     },
-    // We need to expose all the polyfill.io settings.
     polyfillIO: true,
-    // We need to expose all the htmlPage settings.
     htmlPage: true,
   },
 
   // The host on which the server should run.
   host: envVars.string('HOST', 'localhost'),
-
   // The port on which the server should run.
   port: envVars.int('SERVER_PORT', 3000),
-
   // The port on which the client bundle development server should run.
   clientDevServerPort: envVars.int('CLIENT_DEV_PORT', 3001),
   // This is an example environment variable which is consumed within the

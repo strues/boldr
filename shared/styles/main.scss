@@ -1,8 +1,8 @@
-@import 'vendor/reactmd/react-md';
+@import '~react-md/src/scss/react-md';
+@import 'vendor/normalize';
 @import 'abstracts/all';
 
 @include react-md-everything;
-@include react-md-theme-everything($md-primary-color, $md-pink-a-400);
 
 @import 'base/all';
 @import 'components/all';
@@ -19,4 +19,7 @@
     transition-property: opacity;
     transition-timing-function: $md-transition-deceleration;
   }
+}
+.boldr-paperoverride {
+  background-color: $white;
 }
