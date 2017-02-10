@@ -14,7 +14,7 @@ type Props = {
 const ProfileForm = (props: Props) => {
   const { handleSubmit, pristine, reset, submitting } = props;
   return (
-    <form onSubmit={ handleSubmit }>
+    <form onSubmit={ handleSubmit } className="boldr-form__profile">
       <Field id="fname" name="first_name" component={ TextField } type="text" label="First Name" />
       <Field id="lname" name="last_name" component={ TextField } type="text" label="Last Name" />
       <Field id="loc" name="location" component={ TextField } type="text" label="Location" />

@@ -63,6 +63,7 @@ class Profile extends Component {
   _toggleDrawer() {
     this.props.openDrawer();
   }
+
   render() {
     const { profile } = this.props;
 
