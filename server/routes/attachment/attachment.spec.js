@@ -59,6 +59,7 @@ describe('Attachment API Endpoint', async () => {
         expect(res.status).toBe(204);
       });
   });
+});
 //   test('+++ POST /attachments', () => {
 //     return agent
 //       .post('/api/v1/attachments')
