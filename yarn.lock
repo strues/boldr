@@ -2362,9 +2362,15 @@ draft-js@^0.10.0:
     immutable "~3.7.4"
     object-assign "^4.1.0"
 
-draftjs-to-html@^0.6.1:
+draftjs-to-html@^0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/draftjs-to-html/-/draftjs-to-html-0.6.2.tgz#18606a44ce91478e7258d0f05f35ee6f915c2e39"
+
+draftjs-utils@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/draftjs-utils/-/draftjs-utils-0.6.3.tgz#8c53e01bc28a9d3f622f4fcbf0c34cc472fe481a"
+  dependencies:
+    immutable "^3.x.x"
 
 duplexer2@0.0.2:
   version "0.0.2"
@@ -3600,7 +3606,7 @@ immutability-helper@^2.1.1:
   dependencies:
     invariant "^2.2.0"
 
-immutable@^3.8.1:
+immutable@^3.8.1, immutable@^3.x.x:
   version "3.8.1"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
 
@@ -5186,9 +5192,9 @@ normalize-url@^1.4.0:
     query-string "^4.1.0"
     sort-keys "^1.0.0"
 
-normalizr@3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/normalizr/-/normalizr-3.1.0.tgz#5a1eaa334d91b88d2bf7f3c33559e4ed16a56370"
+normalizr@3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/normalizr/-/normalizr-3.2.0.tgz#d68491b331a556ad481d8962765cc120381b6d6d"
 
 "npmlog@0 || 1 || 2 || 3 || 4", npmlog@^4.0.0, npmlog@^4.0.1:
   version "4.0.2"
@@ -6322,11 +6328,12 @@ react-dom@15.4.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
-react-draft-wysiwyg@^1.7.0:
-  version "1.7.1"
-  resolved "https://registry.yarnpkg.com/react-draft-wysiwyg/-/react-draft-wysiwyg-1.7.1.tgz#ca960dd56b892327359beff1f05a83e8e51a164e"
+react-draft-wysiwyg@^1.7.3:
+  version "1.7.3"
+  resolved "https://registry.yarnpkg.com/react-draft-wysiwyg/-/react-draft-wysiwyg-1.7.3.tgz#ba729e4b6ceac0be4227aa1f0e74b2578d4e3ce9"
   dependencies:
     classnames "^2.2.5"
+    draftjs-utils "^0.6.3"
     immutable "^3.8.1"
 
 react-dropzone@^3.10.0:

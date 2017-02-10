@@ -90,7 +90,7 @@
       }
     },
     "test:browser": {
-      "command": "jest --config=internal/jest/jest.browser.json && cp ./coverage/coverage-final.json ./coverage/coverage-browser-final.json",
+      "command": "jest -w 4 --config=internal/jest/jest.browser.json && cp ./coverage/coverage-final.json ./coverage/coverage-browser-final.json",
       "env": {
         "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr_test",
         "NODE_ENV": "test",
@@ -98,7 +98,7 @@
       }
     },
     "test:node": {
-      "command": "jest -i --config=internal/jest/jest.node.json && cp ./coverage/coverage-final.json ./coverage/coverage-node-final.json",
+      "command": "jest -w 4 --config=internal/jest/jest.node.json  --forceExit && cp ./coverage/coverage-final.json ./coverage/coverage-node-final.json",
       "env": {
         "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr_test",
         "NODE_ENV": "test",
@@ -125,7 +125,7 @@
     "seed": "better-npm-run seed",
     "seed:test": "better-npm-run seed:test",
     "start": "NODE_ENV=production node bin/boldr",
-    "test:ci": "NODE_ENV=test jest -i --config=internal/jest/jest.node.json && cp ./coverage/coverage-final.json ./coverage/coverage-node-final.json && jest -i --config=internal/jest/jest.browser.json && cp ./coverage/coverage-final.json ./coverage/coverage-browser-final.json && node ./internal/scripts/mapCoverage.js",
+    "test:ci": "NODE_ENV=test jest -w 4 --config=internal/jest/jest.node.json && cp ./coverage/coverage-final.json ./coverage/coverage-node-final.json && jest -w 4 --config=internal/jest/jest.browser.json --forceExit && cp ./coverage/coverage-final.json ./coverage/coverage-browser-final.json && node ./internal/scripts/mapCoverage.js",
     "test": "better-npm-run test",
     "test:node": "better-npm-run test:node",
     "test:browser": "better-npm-run test:browser"
@@ -150,7 +150,7 @@
     "dotenv": "4.0.0",
     "draft-js": "^0.10.0",
     "draft-js-import-html": "^0.3.2",
-    "draftjs-to-html": "^0.6.1",
+    "draftjs-to-html": "^0.6.2",
     "express": "4.14.1",
     "express-flash": "^0.0.2",
     "express-redis-cache": "^0.5.0",
@@ -171,7 +171,7 @@
     "moment": "^2.17.1",
     "morgan": "^1.8.0",
     "nodemailer": "^3.0.2",
-    "normalizr": "3.1.0",
+    "normalizr": "3.2.0",
     "objection": "0.7.0-rc.3",
     "offline-plugin": "^4.6.1",
     "pg": "^6.1.2",
@@ -180,7 +180,7 @@
     "react-addons-css-transition-group": "^15.4.2",
     "react-addons-transition-group": "^15.4.2",
     "react-dom": "15.4.2",
-    "react-draft-wysiwyg": "^1.7.0",
+    "react-draft-wysiwyg": "^1.7.3",
     "react-dropzone": "^3.10.0",
     "react-helmet": "4.0.0",
     "react-md": "^1.0.5",
