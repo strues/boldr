@@ -59,13 +59,13 @@ describe('Attachment API Endpoint', async () => {
         expect(res.status).toBe(204);
       });
   });
-  test('+++ POST /attachments', () => {
-    return agent
-      .post('/api/v1/attachments')
-      .set('Authorization', `Bearer ${token}`)
-      .attach('image', `${__dirname}/__fixtures__/fix.png`)
-      .expect((res) => {
-        expect(res.status).toBe(201);
-      });
-  });
-});
+//   test('+++ POST /attachments', () => {
+//     return agent
+//       .post('/api/v1/attachments')
+//       .set('Authorization', `Bearer ${token}`)
+//       .attach('image', `${__dirname}/__fixtures__/fix.png`)
+//       .expect((res) => {
+//         expect(res.status).toBe(201);
+//       });
+//   });
+// });
