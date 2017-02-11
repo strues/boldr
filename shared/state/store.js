@@ -26,6 +26,7 @@ export default function configureStore(preloadedState, history, apiClient) {
     applyMiddleware(...middleware),
     ...enhancers,
   ));
+
   // Hot reload
     /* istanbul ignore next */
   if (process.env.NODE_ENV === 'development') {

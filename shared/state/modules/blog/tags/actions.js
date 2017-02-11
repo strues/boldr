@@ -65,7 +65,10 @@ function shouldFetchTags(state) {
   if (!tags.length) {
     return true;
   }
-  return false;
+  if (tags.length) {
+    return false;
+  }
+  return tags;
 }
 
 const requestTags = () => {

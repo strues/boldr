@@ -38,7 +38,7 @@ export function fetchMenus() {
 }
 
 function shouldFetchMenus(state) {
-  const menu = state.boldr.menu.main;
+  const menu = state.boldr.menu.main.details;
   if (!menu.length) {
     return true;
   }

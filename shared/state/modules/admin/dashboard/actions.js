@@ -10,7 +10,7 @@ export const hideSidebar = () => ({ type: t.HIDE_SIDEBAR });
   * @exports loadSiteActivity
   *****************************************************************/
 
-export function loadSiteActivity() {
+export function fetchSiteActivity() {
   return dispatch => {
     dispatch(loadActivities());
     return api.getAllActivities()
@@ -25,7 +25,25 @@ export function loadSiteActivity() {
       });
   };
 }
+export function loadSiteActivity() {
+  return (dispatch, getState) => {
+    if (shouldFetchActivity(getState())) {
+      return dispatch(fetchSiteActivity());
+    }
 
+    return Promise.resolve();
+  };
+}
+function shouldFetchActivity(state) {
+  const activities = state.admin.dashboard.activities;
+  if (!activities.length) {
+    return true;
+  }
+  if (activities.length) {
+    return false;
+  }
+  return activities;
+}
 const loadActivities = () => ({
   type: t.LOAD_ACTIVITIES_REQUEST,
 });
@@ -49,7 +67,7 @@ const failedToLoadActivities = (err) => ({
   * @exports fetchStats
   *****************************************************************/
 
-export function fetchStats() {
+export function fetchDashboardStats() {
   return dispatch => {
     dispatch(beginFetchStats());
     return api.getAllStats()
@@ -63,6 +81,27 @@ export function fetchStats() {
         dispatch(failedToFetchStats(err));
       });
   };
+}
+
+export function fetchStats() {
+  return (dispatch, getState) => {
+    if (shouldFetchStats(getState())) {
+      return dispatch(fetchDashboardStats());
+    }
+
+    return Promise.resolve();
+  };
+}
+
+function shouldFetchStats(state) {
+  const stats = state.admin.dashboard.activities;
+  if (!stats.length) {
+    return true;
+  }
+  if (stats.length) {
+    return false;
+  }
+  return stats;
 }
 
 const beginFetchStats = () => ({

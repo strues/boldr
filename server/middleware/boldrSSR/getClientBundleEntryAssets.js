@@ -38,7 +38,7 @@ export default function getClientBundleEntryAssets() {
 
   if (!fs.existsSync(assetsFilePath)) {
     throw new Error(
-      `We could not find the "${assetsFilePath}" file, which contains a list of the assets of the client bundle.  Please ensure that the client bundle has been built.`,
+      `We could not find the "${assetsFilePath}" file, which contains a list of the assets of the client bundle.`,
     );
   }
 

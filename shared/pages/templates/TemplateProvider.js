@@ -26,10 +26,7 @@ const mapStateToProps = (state) => {
 };
 
 @provideHooks({
-  fetch: ({ dispatch }) => Promise.all([
-    dispatch(fetchMenusIfNeeded()),
-    // dispatch(fetchTemplateResource()),
-  ]),
+  fetch: ({ dispatch }) => dispatch(fetchMenusIfNeeded()),
 })
 @connect(mapStateToProps)
 export default (ComposedComponent: any) => {

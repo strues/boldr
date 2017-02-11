@@ -14,7 +14,7 @@ const token = getToken();
   * @exports fetchMedia
   *****************************************************************/
 
-export function fetchMedia() {
+export function fetchAttachments() {
   return (dispatch) => {
     dispatch(fetchMediaStart());
     return api.getAllAttachments()
@@ -29,7 +29,25 @@ export function fetchMedia() {
       });
   };
 }
+export function fetchMedia() {
+  return (dispatch, getState) => {
+    if (shouldFetchAttachments(getState())) {
+      return dispatch(fetchAttachments());
+    }
 
+    return Promise.resolve();
+  };
+}
+function shouldFetchAttachments(state) {
+  const attachments = state.admin.attachments.files;
+  if (!attachments.length) {
+    return true;
+  }
+  if (attachments.length) {
+    return false;
+  }
+  return attachments;
+}
 function fetchMediaStart() {
   return {
     type: t.GET_ATTACHMENT_REQUEST,

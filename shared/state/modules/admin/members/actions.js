@@ -9,7 +9,7 @@ import * as t from './constants';
   * @exports loadSiteMembers
   *****************************************************************/
 
-export function loadSiteMembers() {
+export function fetchMembers() {
   return dispatch => {
     dispatch(loadMembers());
     return api.getAllMembers()
@@ -24,7 +24,25 @@ export function loadSiteMembers() {
       });
   };
 }
+export function loadSiteMembers() {
+  return (dispatch, getState) => {
+    if (shouldFetchMembers(getState())) {
+      return dispatch(fetchMembers());
+    }
 
+    return Promise.resolve();
+  };
+}
+function shouldFetchMembers(state) {
+  const members = state.admin.members.members;
+  if (!members.length) {
+    return true;
+  }
+  if (members.length) {
+    return false;
+  }
+  return members;
+}
 const loadMembers = () => ({
   type: t.LOAD_MEMBERS_REQUEST,
 });

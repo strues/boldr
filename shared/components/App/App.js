@@ -40,11 +40,18 @@ class App extends Component {
   componentDidMount() {
     const { dispatch, location } = this.props;
     this.props.dispatch(fetchSettingsIfNeeded());
+
     window.addEventListener('resize', debounce(event => {
       dispatch(setMobileDevice(testIfMobile()));
     }, 1000));
   }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize');
+  }
+
   props: Props;
+
   render() {
     return (
     <div>

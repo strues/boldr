@@ -1,6 +1,3 @@
-/* @flow */
-
-import type { $Request, $Response, Middleware, NextFunction } from 'express';
 import React from 'react';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import { Provider } from 'react-redux';
@@ -21,22 +18,23 @@ import ServerHTML from './ServerHTML';
 
 const debug = require('debug')('boldr:ssrMW');
 
+function renderAppToString(store, renderProps, apiClient) {
+  return renderToString(
+    <AppRoot store={ store }>
+      <RouterContext { ...renderProps } helpers={ apiClient } />
+    </AppRoot>
+  );
+}
 /**
  * An express middleware that is capabable of service our React application,
  * supporting server side rendering of the application.
  */
-function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
+function boldrSSR(req, res, next) {
   if (typeof res.locals.nonce !== 'string') {
     throw new Error('A "nonce" value has not been attached to the response');
   }
-  // If path start with /static :: return next()
-  if (req.url.match(/^\/static\/.*/i) !== null) {
-    return next();
-  }
-  const nonce = res.locals.nonce;
 
-  const getHost = req =>
-    `${req.headers['x-forwarded-proto'] || req.protocol}://${req.headers.host}`;
+  const nonce = res.locals.nonce;
 
   global.navigator = { userAgent: req.headers['user-agent'] };
 
@@ -71,13 +69,8 @@ function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
 
     trigger('fetch', components, locals)
        .then(() => {
-         const AppRender = (store, renderProps) => renderToString(
-            <AppRoot store={ store }>
-              <RouterContext { ...renderProps } helpers={ apiClient } />
-            </AppRoot>,
-          );
          const preloadedState = store.getState();
-         const reactAppString = AppRender(store, renderProps);
+         const reactAppString = renderAppToString(store, renderProps, apiClient);
          const helmet = Helmet.rewind();
          // render styled-components styleSheets to string.
          const styles = styleSheet.rules().map(rule => rule.cssText).join('\n');
@@ -100,4 +93,4 @@ function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
   });
 }
 
-export default (boldrSSR: Middleware);
+export default boldrSSR;

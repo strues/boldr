@@ -54,7 +54,7 @@ export function loadBoldrSettings() {
  * @param  {Object} state   The boldr state which contains the settings
  */
 function shouldFetchSettings(state) {
-  const settings = state.boldr.settings;
+  const settings = state.boldr.settings.ids;
   if (!settings.length) {
     return true;
   }
