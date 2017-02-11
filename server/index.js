@@ -17,7 +17,6 @@ require('dotenv').load({ silent: true });
 
 const server = http.createServer(app);
 
-
 Model.knex(db);
 
 // Create an http listener for our express app.

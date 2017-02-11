@@ -4,6 +4,7 @@ import DashboardLayout from './Dashboard/DashboardLayout';
 import DashboardContainer from './Dashboard/DashboardContainer';
 
 export default (store, connect) => {
+  /* istanbul ignore next */
   return {
     path: 'admin',
     component: DashboardLayout,
@@ -31,8 +32,7 @@ export default (store, connect) => {
       {
         path: 'posts/new',
         getComponent(nextState, cb) {
-          System
-            .import('./Post/NewPost/NewPostContainer')
+          import('./Post/NewPost/NewPostContainer')
             .then(loadRoute(cb))
             .catch(errorLoading);
         },

@@ -2,6 +2,7 @@ import { loadRoute, errorLoading } from '../../core/utils';
 import BlogContainer from './BlogContainer';
 
 export default (store, connect) => {
+  /* istanbul ignore next */
   return {
     path: 'blog',
     component: BlogContainer,

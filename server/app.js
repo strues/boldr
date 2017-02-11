@@ -3,11 +3,9 @@ import express from 'express';
 import appRootDir from 'app-root-dir';
 
 import getConfig from '../config/get';
-import { expressMiddleware, authMiddleware, rbac, errorHandler } from './middleware';
+import { boldrSSR, clientBundle, expressMiddleware, authMiddleware, rbac, errorHandler } from './middleware';
 import routes from './routes/index';
 import redisClient from './services/redis';
-import boldrSSR from './middleware/boldrSSR';
-import clientBundle from './middleware/clientBundle';
 
 const cache = require('express-redis-cache')({ client: redisClient });
 

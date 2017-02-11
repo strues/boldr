@@ -1,6 +1,6 @@
 /**
  * Authentication Middleware
- * src/server/middleware/auth
+ * server/middleware/auth
  */
 import jwt from 'jsonwebtoken';
 import User from '../models/user';
