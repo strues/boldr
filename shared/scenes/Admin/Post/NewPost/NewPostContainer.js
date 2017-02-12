@@ -53,7 +53,7 @@ NewPostContainer.contextTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    postImage: state.admin.attachments.postImage,
+    postImage: state.attachments.postImage,
     drawer: state.boldr.ui.drawer,
   };
 };

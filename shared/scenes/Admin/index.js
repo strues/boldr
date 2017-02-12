@@ -1,16 +1,32 @@
-import { loadRoute, errorLoading } from '../../core/utils';
+import { loadRoute, errorLoading, injectAsyncReducer, getAsyncInjectors } from '../../core/utils';
 import { requireAuth } from '../../core/services/token';
 import DashboardLayout from './Dashboard/DashboardLayout';
 import DashboardContainer from './Dashboard/DashboardContainer';
 
-export default (store, connect) => {
+export default (store) => {
+  const { injectReducer } = getAsyncInjectors(store);
   /* istanbul ignore next */
   return {
     path: 'admin',
     component: DashboardLayout,
     onEnter: requireAuth,
     indexRoute: {
-      component: DashboardContainer,
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('./Dashboard/reducer'),
+          import('./Dashboard/DashboardContainer'),
+        ]);
+
+        const renderRoute = loadRoute(cb);
+
+        importModules.then(([reducer, component]) => {
+          injectReducer('dashboard', reducer.default);
+
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
     },
     childRoutes: [
       {
@@ -24,25 +40,58 @@ export default (store, connect) => {
       {
         path: 'posts/editor/:slug',
         getComponent(nextState, cb) {
-          import('./Post/PostEditor')
-            .then(loadRoute(cb))
-            .catch(errorLoading);
+          const importModules = Promise.all([
+            import('./FileManager/reducer'),
+            import('./Post/PostEditor'),
+          ]);
+
+          const renderRoute = loadRoute(cb);
+
+          importModules.then(([reducer, component]) => {
+            injectReducer('attachments', reducer.default);
+
+            renderRoute(component);
+          });
+
+          importModules.catch(errorLoading);
         },
       },
       {
         path: 'posts/new',
         getComponent(nextState, cb) {
-          import('./Post/NewPost/NewPostContainer')
-            .then(loadRoute(cb))
-            .catch(errorLoading);
+          const importModules = Promise.all([
+            import('./FileManager/reducer'),
+            import('./Post/NewPost/NewPostContainer'),
+          ]);
+
+          const renderRoute = loadRoute(cb);
+
+          importModules.then(([reducer, component]) => {
+            injectReducer('attachments', reducer.default);
+
+            renderRoute(component);
+          });
+
+          importModules.catch(errorLoading);
         },
       },
       {
         path: 'filemanager',
         getComponent(nextState, cb) {
-          import('./FileManager')
-            .then(loadRoute(cb))
-            .catch(errorLoading);
+          const importModules = Promise.all([
+            import('./FileManager/reducer'),
+            import('./FileManager'),
+          ]);
+
+          const renderRoute = loadRoute(cb);
+
+          importModules.then(([reducer, component]) => {
+            injectReducer('attachments', reducer.default);
+
+            renderRoute(component);
+          });
+
+          importModules.catch(errorLoading);
         },
       },
       {
@@ -54,15 +103,28 @@ export default (store, connect) => {
         },
       },
       {
-        path: 'navigation',
+        path: 'members',
         getComponent(nextState, cb) {
-          import('./Navigation').then(loadRoute(cb)).catch(errorLoading);
+          const importModules = Promise.all([
+            import('./Members/reducer'),
+            import('./Members'),
+          ]);
+
+          const renderRoute = loadRoute(cb);
+
+          importModules.then(([reducer, component]) => {
+            injectReducer('members', reducer.default);
+
+            renderRoute(component);
+          });
+
+          importModules.catch(errorLoading);
         },
       },
       {
-        path: 'members',
+        path: 'navigation',
         getComponent(nextState, cb) {
-          import('./Members').then(loadRoute(cb)).catch(errorLoading);
+          import('./Navigation').then(loadRoute(cb)).catch(errorLoading);
         },
       },
       {

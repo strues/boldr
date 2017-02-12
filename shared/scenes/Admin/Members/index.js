@@ -1,3 +1,1 @@
-import MembersContainer from './MembersContainer';
-
-export default MembersContainer;
+export { default } from './MembersContainer';

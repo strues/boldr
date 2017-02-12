@@ -75,13 +75,13 @@ const currentPost = (state = {}, action) => {
  */
 
 
-export default combineReducers({
+const postsReducer = combineReducers({
   all,
   ids,
   isFetching,
   currentPost,
 });
-
+export default postsReducer;
 
 export const getPublishedPosts = (state, filter) => {
   const allPosts = getPosts(state);

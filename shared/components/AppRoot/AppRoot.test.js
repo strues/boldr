@@ -10,10 +10,9 @@ describe('<AppRoot />', () => {
   it('uses redux Provider', () => {
     const initialState = {};
     const store = mockStore(initialState);
-    const messages = {};
 
     const renderedComponent = shallow(
-      <AppRoot store={ store } messages={ messages }>
+      <AppRoot store={ store }>
         <div>a child</div>
       </AppRoot>
     );

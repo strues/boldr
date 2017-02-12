@@ -72,9 +72,11 @@ const currentTag = (state = {}, action) => {
       return state;
   }
 };
-export default combineReducers({
+const tagsReducer = combineReducers({
   all,
   ids,
   isFetching,
   currentTag,
 });
+
+export default tagsReducer;

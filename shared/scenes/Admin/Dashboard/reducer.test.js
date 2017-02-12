@@ -1,4 +1,4 @@
-import dashboardReducer from './dashboard';
+import dashboardReducer from './reducer';
 import * as t from './constants';
 
 describe('Dashboard Duck', () => {
@@ -6,7 +6,6 @@ describe('Dashboard Duck', () => {
     expect(
         dashboardReducer(undefined, {}),
       ).toEqual({
-        docked: true,
         open: true,
         loaded: false,
         loading: false,
@@ -17,7 +16,6 @@ describe('Dashboard Duck', () => {
   });
   it('should hide the sidebar', () => {
     const initialState = {
-      docked: true,
       open: true,
       loaded: false,
       loading: false,
@@ -27,7 +25,6 @@ describe('Dashboard Duck', () => {
     };
     const stateAfter = {
       open: false,
-      docked: false,
       loaded: false,
       loading: false,
       error: null,
@@ -42,7 +39,6 @@ describe('Dashboard Duck', () => {
   });
   it('should show the sidebar', () => {
     const initialState = {
-      docked: true,
       open: true,
       loaded: false,
       loading: false,
@@ -52,7 +48,6 @@ describe('Dashboard Duck', () => {
     };
     const stateAfter = {
       loaded: true,
-      docked: true,
       open: true,
       loading: false,
       error: null,

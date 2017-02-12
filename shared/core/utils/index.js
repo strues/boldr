@@ -11,6 +11,7 @@ import {
   stringifiedArray,
   validateArray,
 } from './arrays';
+import { injectAsyncReducer, getAsyncInjectors } from './injectors';
 
 export {
   loadRoute,
@@ -33,4 +34,6 @@ export {
   getIn,
   setIn,
   removeByKey,
+  injectAsyncReducer,
+  getAsyncInjectors,
 };

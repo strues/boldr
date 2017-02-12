@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { findDOMNode } from 'react-dom';
 import Link from 'react-router/lib/Link';
 import { connect } from 'react-redux';
@@ -36,6 +36,7 @@ const UserName = styled.div`
   font-weight: 700;
 `;
 type Props = {
+  defaultMedia: string,
   children: ReactElement,
   dashboard: ?Object,
   account: Object,
@@ -43,7 +44,7 @@ type Props = {
   onMediaTypeChange: Function,
 };
 
-class DashboardLayout extends Component {
+class DashboardLayout extends PureComponent {
   constructor(props: Props) {
     super();
     this.state = {
@@ -122,7 +123,6 @@ class DashboardLayout extends Component {
 function mapStateToProps(state) {
   return {
     router: state.router,
-    dashboard: state.admin.dashboard,
     boldr: state.boldr,
     account: state.account,
     ui: state.boldr.ui,

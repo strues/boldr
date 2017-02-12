@@ -1,4 +1,4 @@
-import membersReducer from './members';
+import membersReducer from './reducer';
 
 describe('Members Duck', () => {
   it('Should return the initial state', () => {

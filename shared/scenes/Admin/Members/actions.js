@@ -1,6 +1,6 @@
-import { notificationSend } from '../../notifications/notifications';
-import * as api from '../../../../core/api';
-import * as notif from '../../../../core/constants';
+import { notificationSend } from '../../../state/modules/notifications/notifications';
+import * as api from '../../../core/api';
+import * as notif from '../../../core/constants';
 import * as t from './constants';
 
 /**
@@ -34,7 +34,7 @@ export function loadSiteMembers() {
   };
 }
 function shouldFetchMembers(state) {
-  const members = state.admin.members.members;
+  const members = state.members.members;
   if (!members.length) {
     return true;
   }

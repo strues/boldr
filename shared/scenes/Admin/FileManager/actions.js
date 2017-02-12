@@ -1,9 +1,9 @@
 import { push } from 'react-router-redux';
 import request from 'superagent';
-import * as api from '../../../../core/api';
-import { getToken } from '../../../../core/services/token';
-import * as notif from '../../../../core/constants';
-import { notificationSend } from '../../notifications/notifications';
+import * as api from '../../../core/api';
+import { getToken } from '../../../core/services/token';
+import * as notif from '../../../core/constants';
+import { notificationSend } from '../../../state/modules/notifications/notifications';
 import * as t from './constants';
 
 const token = getToken();
@@ -38,8 +38,9 @@ export function fetchMedia() {
     return Promise.resolve();
   };
 }
+
 function shouldFetchAttachments(state) {
-  const attachments = state.admin.attachments.files;
+  const attachments = state.attachments.files;
   if (!attachments.length) {
     return true;
   }
@@ -48,6 +49,7 @@ function shouldFetchAttachments(state) {
   }
   return attachments;
 }
+
 function fetchMediaStart() {
   return {
     type: t.GET_ATTACHMENT_REQUEST,

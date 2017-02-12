@@ -4,6 +4,7 @@ import { Model, ValidationError } from 'objection';
 import appRootDir from 'app-root-dir';
 import BaseQueryBuilder from '../utils/queryBuilder';
 
+const rootDir = appRootDir.get();
 /**
  * @class BaseModel
  * @extends Model
@@ -74,7 +75,7 @@ class BaseModel extends Model {
     if (_.startsWith(model, '.') || _.startsWith(model, '/')) {
       modelClass = require(model);
     } else {
-      modelClass = require(`${appRootDir.get()}/server/models/${model}`);
+      modelClass = require(`${rootDir}/server/models/${model}`);
     }
 
     return modelClass.default || modelClass;
@@ -127,6 +128,6 @@ class BaseModel extends Model {
   }
 }
 
-BaseModel.QueryBuilder = BaseQueryBuilder;
+// BaseModel.QueryBuilder = BaseQueryBuilder;
 
 export default BaseModel;
