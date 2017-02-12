@@ -1,1 +1,3 @@
-export { default } from './PostListContainer';
+import PostList from './PostList';
+
+export default PostList;

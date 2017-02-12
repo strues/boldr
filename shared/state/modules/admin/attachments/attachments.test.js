@@ -1,7 +1,7 @@
-import attachmentReducer from './reducer';
+import attachmentReducer from './attachments';
 import { GET_ATTACHMENT_REQUEST } from './constants';
 
-describe('Attachment Reducer', () => {
+describe('Attachment', () => {
   test('Should return the initial state', () => {
     expect(
         attachmentReducer(undefined, {}),

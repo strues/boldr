@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-expressions */
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import type { ReactElement } from 'types/react';
 import { push } from 'react-router-redux';
 import { provideHooks } from 'redial';
 import { Grid, Col, Loader } from '../../../components/index';
-import { loadSiteActivity, fetchStats } from './actions';
+import { loadSiteActivity, fetchStats } from '../../../state/modules/admin/dashboard/actions';
 
 import Dashboard from './Dashboard';
 
@@ -27,7 +27,7 @@ type Props = {
     ]);
   },
 })
-class DashboardContainer extends PureComponent {
+class DashboardContainer extends Component {
   componentDidMount() {
     this.props.loadSiteActivity();
     this.props.fetchStats();
@@ -47,9 +47,9 @@ class DashboardContainer extends PureComponent {
 
 function mapStateToProps(state) {
   return {
-    activities: state.dashboard.activities,
-    stats: state.dashboard.stats,
-    loading: state.dashboard.loading,
+    activities: state.admin.dashboard.activities,
+    stats: state.admin.dashboard.stats,
+    loading: state.admin.dashboard.loading,
   };
 }
 

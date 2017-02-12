@@ -5,7 +5,7 @@ import Button from 'react-md/lib/Buttons/Button';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
 import { TextField, Col, Row, Heading, FormGroup } from '../../../../../../components';
-import { uploadPostImage } from '../../../../FileManager/actions';
+import { uploadPostImage } from '../../../../../../state/modules/admin/attachments/actions';
 import RenderTags from '../RenderTags';
 import FieldEditor from './FieldEditor';
 

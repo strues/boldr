@@ -4,7 +4,7 @@ import Button from 'react-md/lib/Buttons/Button';
 import FontIcon from 'react-md/lib/FontIcons';
 import styled from 'styled-components';
 import { TextField, TextEditor, Col, Row, Heading, FormGroup } from '../../../../../../components';
-import { uploadPostImage } from '../../../../FileManager/actions';
+import { uploadPostImage } from '../../../../../../state/modules/admin/attachments/actions';
 import EditorField from './EditorField';
 
 type Props = {

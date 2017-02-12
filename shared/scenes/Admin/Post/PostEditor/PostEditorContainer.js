@@ -49,7 +49,7 @@ const mapStateToProps = (state, ownProps) => {
     // posts: state.blog.posts,
     currentPost: state.blog.posts.currentPost,
     isFetching: state.blog.posts.isFetching,
-    postImage: state.attachments.postImage,
+    postImage: state.admin.attachments.postImage,
   };
 };
 export default connect(mapStateToProps, { fetchPostFromSlug })(PostEditorContainer);

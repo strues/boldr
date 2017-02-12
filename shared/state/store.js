@@ -1,42 +1,42 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import thunkMiddleware from 'redux-thunk';
-import createReducer from './reducers';
+import rootReducer from './reducers';
 import createMiddleware from './clientMiddleware';
 
 export default function configureStore(preloadedState, history, apiClient) {
   const reduxRouterMiddleware = routerMiddleware(history);
   const middleware = [thunkMiddleware, createMiddleware(apiClient), reduxRouterMiddleware];
 
-  const enhancers = [
-    applyMiddleware(...middleware),
-  ];
+  // Development enhancers
+  const enhancers = [];
 
   /**
    * Redux DevTools Extension
    */
      /* istanbul ignore next */
-     /* eslint-disable no-underscore-dangle */
-  const composeEnhancers =
-       process.env.NODE_ENV !== 'production' &&
-       typeof window === 'object' &&
-       window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ ?
-         window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : compose;
-     /* eslint-enable */
+  if (process.env.NODE_ENV === 'development' && typeof window === 'object') {
+    const devToolsExtension = window.devToolsExtension;
+    if (typeof devToolsExtension === 'function') {
+      enhancers.push(devToolsExtension());
+    }
+  }
   // Creating the store
-  const store = createStore(createReducer(), preloadedState, composeEnhancers(...enhancers));
-  store.asyncReducers = {};
+  const store = createStore(rootReducer, preloadedState, compose(
+    applyMiddleware(...middleware),
+    ...enhancers,
+  ));
+
   // Hot reload
     /* istanbul ignore next */
-  if (module.hot) {
-    module.hot.accept('./reducers', () => {
-      System.import('./reducers').then((reducerModule) => {
-        const createReducers = reducerModule.default;
-        const nextReducers = createReducers(store.asyncReducers);
-
-        store.replaceReducer(nextReducers);
+  if (process.env.NODE_ENV === 'development') {
+      /* istanbul ignore next */
+    if (module.hot) {
+      module.hot.accept('./reducers', () => {
+        const nextReducer = require('./reducers').default;
+        store.replaceReducer(nextReducer);
       });
-    });
+    }
   }
 
   return store;

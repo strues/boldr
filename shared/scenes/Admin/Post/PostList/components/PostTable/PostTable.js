@@ -14,7 +14,7 @@ import PostTableRow from '../PostTableRow';
 type Props = {
   posts: Array<Post>,
   id: String,
-  handleDeleteClick: Function,
+  onRowToggle: Function,
   dispatch: Function,
 };
 
@@ -37,8 +37,7 @@ const PostTable = (props: Props) => {
        </TableHeader>
        <TableBody>
          {
-           props.posts.map(post =>
-             <PostTableRow key={ post.id } handleDeleteClick={ props.handleDeleteClick } { ...post } />)
+           props.posts.map(post => <PostTableRow key={ post.id } handleDeleteClick={ props.handleDeleteClick } { ...post } />)
           }
        </TableBody>
      </DataTable>

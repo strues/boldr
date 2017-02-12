@@ -1,1 +1,3 @@
-export { default } from './NewPostContainer';
+import NewPostContainer from './NewPostContainer';
+
+export default NewPostContainer;

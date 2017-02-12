@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
 import { showModal, hideModal } from '../../../state/modules/boldr/ui/actions';
-import { loadSiteMembers, memberSelected, updateMember } from './actions';
+import { loadSiteMembers, memberSelected, updateMember } from '../../../state/modules/admin/members/actions';
 import Members from './Members';
 
 type Props = {
@@ -76,8 +76,8 @@ export class MembersContainer extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    members: state.members,
-    selected: state.members.selected,
+    members: state.admin.members,
+    selected: state.admin.members.selected,
     ui: state.boldr.ui,
   };
 };

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { provideHooks } from 'redial';
 
-import { uploadFiles, fetchMedia, deleteMedia, selectFile } from './actions';
+import { uploadFiles, fetchMedia, deleteMedia, selectFile } from '../../../state/modules/admin/attachments/actions';
 import FileManager from './FileManager';
 
 type Props = {
@@ -67,7 +67,7 @@ class FileManagerContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    attachments: state.attachments,
+    attachments: state.admin.attachments,
     ui: state.boldr.ui,
   };
 };

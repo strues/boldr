@@ -1,4 +1,4 @@
-import * as api from '../../../core/api';
+import * as api from '../../../../core/api';
 import * as t from './constants';
 
 export const showSidebar = () => ({ type: t.SHOW_SIDEBAR });
@@ -35,7 +35,7 @@ export function loadSiteActivity() {
   };
 }
 function shouldFetchActivity(state) {
-  const activities = state.dashboard.activities;
+  const activities = state.admin.dashboard.activities;
   if (!activities.length) {
     return true;
   }
@@ -94,7 +94,7 @@ export function fetchStats() {
 }
 
 function shouldFetchStats(state) {
-  const stats = state.dashboard.activities;
+  const stats = state.admin.dashboard.activities;
   if (!stats.length) {
     return true;
   }

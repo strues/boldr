@@ -66,9 +66,7 @@ const PostTableRow = (props: Props) => {
          <Link to={ `/admin/posts/editor/${post.slug}` }>
           <Button icon>mode_edit</Button>
         </Link>
-        <Button icon>star_outline</Button>
-        <Button icon>delete_forever</Button>
-        <Button onClick={ () => handleClickDelete(post) } icon>delete</Button>
+        <Button onClick={ () => handleClickDelete(post) } icon>delete_forever</Button>
       </TableColumn>
     </TableRow>
   );

@@ -1,32 +1,16 @@
-import { loadRoute, errorLoading, injectAsyncReducer, getAsyncInjectors } from '../../core/utils';
+import { loadRoute, errorLoading } from '../../core/utils';
 import { requireAuth } from '../../core/services/token';
 import DashboardLayout from './Dashboard/DashboardLayout';
 import DashboardContainer from './Dashboard/DashboardContainer';
 
-export default (store) => {
-  const { injectReducer } = getAsyncInjectors(store);
+export default (store, connect) => {
   /* istanbul ignore next */
   return {
     path: 'admin',
     component: DashboardLayout,
     onEnter: requireAuth,
     indexRoute: {
-      getComponent(nextState, cb) {
-        const importModules = Promise.all([
-          import('./Dashboard/reducer'),
-          import('./Dashboard/DashboardContainer'),
-        ]);
-
-        const renderRoute = loadRoute(cb);
-
-        importModules.then(([reducer, component]) => {
-          injectReducer('dashboard', reducer.default);
-
-          renderRoute(component);
-        });
-
-        importModules.catch(errorLoading);
-      },
+      component: DashboardContainer,
     },
     childRoutes: [
       {
@@ -40,58 +24,25 @@ export default (store) => {
       {
         path: 'posts/editor/:slug',
         getComponent(nextState, cb) {
-          const importModules = Promise.all([
-            import('./FileManager/reducer'),
-            import('./Post/PostEditor'),
-          ]);
-
-          const renderRoute = loadRoute(cb);
-
-          importModules.then(([reducer, component]) => {
-            injectReducer('attachments', reducer.default);
-
-            renderRoute(component);
-          });
-
-          importModules.catch(errorLoading);
+          import('./Post/PostEditor')
+            .then(loadRoute(cb))
+            .catch(errorLoading);
         },
       },
       {
         path: 'posts/new',
         getComponent(nextState, cb) {
-          const importModules = Promise.all([
-            import('./FileManager/reducer'),
-            import('./Post/NewPost/NewPostContainer'),
-          ]);
-
-          const renderRoute = loadRoute(cb);
-
-          importModules.then(([reducer, component]) => {
-            injectReducer('attachments', reducer.default);
-
-            renderRoute(component);
-          });
-
-          importModules.catch(errorLoading);
+          import('./Post/NewPost/NewPostContainer')
+            .then(loadRoute(cb))
+            .catch(errorLoading);
         },
       },
       {
         path: 'filemanager',
         getComponent(nextState, cb) {
-          const importModules = Promise.all([
-            import('./FileManager/reducer'),
-            import('./FileManager'),
-          ]);
-
-          const renderRoute = loadRoute(cb);
-
-          importModules.then(([reducer, component]) => {
-            injectReducer('attachments', reducer.default);
-
-            renderRoute(component);
-          });
-
-          importModules.catch(errorLoading);
+          import('./FileManager')
+            .then(loadRoute(cb))
+            .catch(errorLoading);
         },
       },
       {
@@ -103,28 +54,15 @@ export default (store) => {
         },
       },
       {
-        path: 'members',
-        getComponent(nextState, cb) {
-          const importModules = Promise.all([
-            import('./Members/reducer'),
-            import('./Members'),
-          ]);
-
-          const renderRoute = loadRoute(cb);
-
-          importModules.then(([reducer, component]) => {
-            injectReducer('members', reducer.default);
-
-            renderRoute(component);
-          });
-
-          importModules.catch(errorLoading);
-        },
-      },
-      {
         path: 'navigation',
         getComponent(nextState, cb) {
           import('./Navigation').then(loadRoute(cb)).catch(errorLoading);
+        },
+      },
+      {
+        path: 'members',
+        getComponent(nextState, cb) {
+          import('./Members').then(loadRoute(cb)).catch(errorLoading);
         },
       },
       {

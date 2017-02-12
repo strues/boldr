@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Paper from 'react-md/lib/Papers';
 import { Grid, Row, Col, Image } from '../../../../components/index';
-import { updateAttachment } from '../actions';
+import { updateAttachment } from '../../../../state/modules/admin/attachments/actions';
 import FileEditorForm from '../components/FileEditorForm';
 
 type Props = {

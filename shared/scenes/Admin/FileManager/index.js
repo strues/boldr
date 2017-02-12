@@ -1,1 +1,3 @@
-export { default } from './FileManagerContainer';
+import FileManagerContainer from './FileManagerContainer';
+
+export default FileManagerContainer;
