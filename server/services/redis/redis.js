@@ -3,7 +3,6 @@ import bluebird from 'bluebird';
 import getConfig from '../../../config/get';
 import logger from '../logger';
 
-
 const redisClient = new Redis(process.env.REDIS_CONN_URI);
 
 redisClient.on('connect', () => {

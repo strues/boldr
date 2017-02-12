@@ -10,46 +10,12 @@ class Post extends BaseModel {
   static get tableName() {
     return 'post';
   }
-  static softDelete = true;
   static addTimestamps = true;
   static hidden = ['password'];
   static get idColumn() {
     return 'id';
   }
 
-  // static jsonSchema = {
-  //   type: 'object',
-  //   required: ['title', 'slug', 'content', 'excerpt', 'published'],
-  //   uniqueProperties: ['slug'],
-  //   additionalProperties: true,
-  //   properties: {
-  //     id: {
-  //       type: 'string',
-  //     },
-  //     title: {
-  //       type: 'string',
-  //       minLength: 3,
-  //       maxLength: 140,
-  //     },
-  //     slug: { type: 'string', minLength: 3, maxLength: 140 },
-  //     feature_image: { type: 'string', maxLength: 255 },
-  //     attachments: { type: ['object', 'null'], default: null },
-  //     meta: { type: ['object', 'null'], default: null },
-  //     featured: { type: 'boolean', default: false },
-  //     content: { type: 'string', minLength: 3 },
-  //     excerpt: { type: 'string', minLength: 3, maxLength: 255 },
-  //     published: { type: 'boolean', default: true },
-  //     user_id: {
-  //       type: 'string',
-  //     },
-  //     created_at: { type: 'string', format: 'date-time' },
-  //     updated_at: {
-  //       type: ['string', 'null'],
-  //       format: 'date-time',
-  //       default: null,
-  //     },
-  //   },
-  // };
   static get relationMappings() {
     return {
       author: {

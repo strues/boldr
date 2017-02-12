@@ -86,10 +86,10 @@ class Profile extends Component {
    );
     const editButtons = (
       <Col xs>
-      <Button primary raised label="Edit Profile" onClick={ this._toggleDrawer } />
-      <Button secondary flat label="Upload Profile Image" />
-      <Button secondary flat label="Upload Avatar" />
-    </Col>
+        <Button primary raised label="Edit Profile" onClick={ this._toggleDrawer } />
+        <Button secondary flat label="Upload Profile Image" />
+        <Button secondary flat label="Upload Avatar" />
+      </Col>
     );
     return (
       <div className="boldr-profile">

@@ -2,7 +2,7 @@ import App from '../components/App';
 import About from '../pages/About';
 import Home from '../pages/Home';
 import Error404 from '../pages/Error404';
-import Profile from '../pages/Profile';
+import Profile from './Profile';
 import Account from './Account';
 import Blog from './Blog';
 

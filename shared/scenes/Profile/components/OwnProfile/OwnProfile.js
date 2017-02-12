@@ -16,7 +16,6 @@ class OwnProfile extends Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
   }
   handleFormSubmit(values) {
-
     const userData = {
       id: this.props.profile.id,
       first_name: values.first_name,

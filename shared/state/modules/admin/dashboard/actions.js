@@ -25,6 +25,7 @@ export function fetchSiteActivity() {
       });
   };
 }
+
 export function loadSiteActivity() {
   return (dispatch, getState) => {
     if (shouldFetchActivity(getState())) {
@@ -34,16 +35,15 @@ export function loadSiteActivity() {
     return Promise.resolve();
   };
 }
+
 function shouldFetchActivity(state) {
   const activities = state.admin.dashboard.activities;
-  if (!activities.length) {
-    return true;
-  }
-  if (activities.length) {
-    return false;
-  }
+  if (!activities.length) return true;
+  if (activities.length) return false;
+
   return activities;
 }
+
 const loadActivities = () => ({
   type: t.LOAD_ACTIVITIES_REQUEST,
 });

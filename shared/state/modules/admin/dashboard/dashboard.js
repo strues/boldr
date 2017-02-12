@@ -4,7 +4,6 @@ import * as t from './constants';
 export const STATE_KEY = 'dashboard';
 
 const INITIAL_STATE = {
-  docked: true,
   open: true,
   loaded: false,
   loading: false,
@@ -19,14 +18,12 @@ export default function dashboardReducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         loaded: true,
-        docked: true,
         open: true,
       };
     case t.HIDE_SIDEBAR:
       return {
         ...state,
         open: false,
-        docked: false,
       };
     case t.LOAD_ACTIVITIES_REQUEST:
     case t.FETCH_STATS_REQUEST:
@@ -60,8 +57,4 @@ export default function dashboardReducer(state = INITIAL_STATE, action) {
     default:
       return state;
   }
-}
-
-export function isLoaded(globalState) {
-  return globalState.dashboard.activity && globalState.dashboard.activity.loaded;
 }

@@ -5,7 +5,7 @@ import { provideHooks } from 'redial';
 import Helmet from 'react-helmet';
 import { bindActionCreators } from 'redux';
 import { Loader } from '../../components';
-import BaseTemplate from '../templates/Base';
+import BaseTemplate from '../../pages/templates/Base';
 import { getProfile } from '../../state/modules/account/actions';
 import { openDrawer, closeDrawer } from '../../state/modules/boldr/ui/actions';
 import Profile from './Profile';
