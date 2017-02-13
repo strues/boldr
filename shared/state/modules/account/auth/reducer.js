@@ -49,7 +49,7 @@ function authReducer(state = INITIAL_STATE, action = {}) {
         isAuthenticated: true,
         token: action.token,
       };
-    case t.LOGOUT_USER:
+    case t.LOGOUT:
       return {
         ...state,
         loading: false,

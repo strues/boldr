@@ -10,9 +10,10 @@ import browserHistory from 'react-router/lib/browserHistory';
 import { syncHistoryWithStore } from 'react-router-redux';
 import WebFontLoader from 'webfontloader';
 import { trigger } from 'redial';
-import io from 'socket.io-client';
+
 import AppRoot from '../shared/components/AppRoot';
 import App from '../shared/components/App';
+
 import configureStore from '../shared/state/store';
 import { checkAuth } from '../shared/state/modules/account/actions';
 import { getToken } from '../shared/core/services/token';
@@ -30,6 +31,7 @@ const apiClient = new ApiClient();
 
 const preloadedState = window.__PRELOADED_STATE__;
 const store = configureStore(preloadedState, browserHistory, apiClient);
+
 const history = syncHistoryWithStore(browserHistory, store);
 const routes = createRoutes(store, history);
 const { dispatch } = store;
@@ -39,21 +41,7 @@ if (token) {
   // Update application state. User has token and is probably authenticated
   dispatch(checkAuth(token));
 }
-function initSocket() {
-  const socket = io('');
 
-  socket.on('news', (data) => {
-    console.log(data);
-    socket.emit('my other event', { my: 'data from client' });
-  });
-  socket.on('msg', (data) => {
-    console.log(data);
-  });
-
-  return socket;
-}
-
-global.socket = initSocket();
 const renderApp = () => {
   const { pathname, search, hash } = window.location;
   const location = `${pathname}${search}${hash}`;
@@ -107,8 +95,9 @@ const unsubscribeHistory = renderApp();
 if (process.env.NODE_ENV !== 'production') {
   window.React = React; // enable debugger
 
-  if (!domNode || !domNode.firstChild || !domNode.firstChild.attributes || !domNode.firstChild.attributes['data-react-checksum']) {
-    console.error('Server-side React render was discarded. Make sure that your initial render does not contain any client-side code.');
+  if (!domNode || !domNode.firstChild || !domNode.firstChild.attributes ||
+    !domNode.firstChild.attributes['data-react-checksum']) {
+    console.error('Make sure that your initial render does not contain any client-side code.');
   }
 }
 

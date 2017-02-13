@@ -51,7 +51,7 @@ function userReducer(state = INITIAL_USER_STATE, action = {}) {
         website: action.payload.website,
         bio: action.payload.bio,
       };
-    case t.LOGOUT_USER:
+    case t.LOGOUT:
       return {
         ...state,
         id: '',

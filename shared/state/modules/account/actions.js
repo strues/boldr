@@ -63,7 +63,7 @@ export function doLogin(data) {
       .catch(err => {
         dispatch(loginError(err));
         dispatch(notificationSend({
-          message: err.error.message, kind: 'error', dismissAfter: 3000,
+          message: err, kind: 'error', dismissAfter: 3000,
         }));
       });
   };
@@ -79,9 +79,10 @@ function loginSuccess(response) {
 }
 
 function loginError(err) {
+  console.log(err)
   return {
     type: t.LOGIN_FAILURE,
-    error: err.error.message,
+    error: err
   };
 }
 
@@ -90,14 +91,13 @@ function loginError(err) {
   * -------------------------
   * @exports logout
   *****************************************************************/
-function logoutSuccess() {
-  return { type: t.LOGOUT_USER };
-}
 
 export function logout() {
   return (dispatch) => {
     removeToken();
-    dispatch(logoutSuccess());
+    dispatch({
+      type: t.LOGOUT,
+    });
     dispatch(notificationSend(notif.MSG_LOGOUT));
   };
 }

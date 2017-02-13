@@ -12,7 +12,6 @@ import { makeSelectMobile, makeSelectUi, setMobileDevice } from '../../state/mod
 import type { ReactChildren } from '../../types/react';
 import Notifications from '../Notification';
 
-
 if (process.env.NODE_ENV !== 'test') {
   require('../../styles/main.scss');
 }
@@ -24,11 +23,18 @@ type Props = {
   isMobile: Boolean,
 };
 
+const mapStateToProps = createStructuredSelector({
+  ui: makeSelectUi(),
+  isMobile: makeSelectMobile(),
+});
+
+
 @provideHooks({
   fetch: ({ dispatch }) => {
     return dispatch(fetchSettingsIfNeeded());
   },
 })
+@connect(mapStateToProps)
 class App extends Component {
   static childContextTypes = {
     dispatch: React.PropTypes.func,
@@ -64,9 +70,4 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  ui: makeSelectUi(),
-  isMobile: makeSelectMobile(),
-});
-
-export default connect(mapStateToProps)(App);
+export default App;

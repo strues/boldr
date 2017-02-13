@@ -20,8 +20,7 @@ export const LOGIN_REQUEST = '@boldr/auth/LOGIN_REQUEST';
 export const LOGIN_SUCCESS = '@boldr/auth/LOGIN_SUCCESS';
 export const LOGIN_FAILURE = '@boldr/auth/LOGIN_FAILURE';
 
-export const LOGOUT_USER = '@boldr/auth/LOGOUT_USER';
-export const LOGOUT_USER_FAIL = '@boldr/auth/LOGOUT_USER_FAIL';
+export const LOGOUT = '@boldr/auth/LOGOUT';
 
 export const CHECK_AUTH_REQUEST = '@boldr/auth/CHECK_AUTH_REQUEST';
 export const CHECK_AUTH_SUCCESS = '@boldr/auth/CHECK_AUTH_SUCCESS';

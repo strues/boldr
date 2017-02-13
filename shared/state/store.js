@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
 import thunkMiddleware from 'redux-thunk';
 import rootReducer from './reducers';
-import createMiddleware from './clientMiddleware';
+import createMiddleware from './middleware/clientMiddleware';
 
 export default function configureStore(preloadedState, history, apiClient) {
   const reduxRouterMiddleware = routerMiddleware(history);

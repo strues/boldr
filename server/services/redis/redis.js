@@ -1,12 +1,16 @@
+import url from 'url';
 import Redis from 'ioredis';
 import bluebird from 'bluebird';
 import getConfig from '../../../config/get';
 import logger from '../logger';
 
-const redisClient = new Redis(process.env.REDIS_CONN_URI);
-
-const pub = new Redis(process.env.REDIS_CONN_URI);
-const sub = new Redis(process.env.REDIS_CONN_URI, { return_buffers: true });
+const redisCon = url.parse(process.env.REDIS_CONN_URI);
+const hostAddr = redisCon.host.split(':');
+const redisClient = new Redis({
+  port: redisCon.port,
+  host: hostAddr[0],
+  db: 0,
+});
 
 redisClient.on('connect', () => {
   logger.info('Redis connection has been established!');

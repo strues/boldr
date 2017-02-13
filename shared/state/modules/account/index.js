@@ -2,6 +2,7 @@ import { combineReducers } from 'redux';
 import profileReducer, { STATE_KEY as PROFILE_STATE_KEY } from './profile';
 import authReducer, { STATE_KEY as AUTH_STATE_KEY } from './auth';
 import userReducer, { STATE_KEY as USER_STATE_KEY } from './user';
+
 import {
   doSignup,
   doLogin,
