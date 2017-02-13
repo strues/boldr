@@ -24,9 +24,7 @@ type Props = {
   },
 })
 class FileManagerContainer extends Component {
-  componentDidMount() {
-    this.props.fetchMedia();
-  }
+
   props: Props;
 
   onUploadFinish = (signResult) => {

@@ -21,10 +21,10 @@ type Props = {
 
 @provideHooks({
   fetch: ({ dispatch }) => {
-    return Promise.all([
-      dispatch(loadSiteActivity()),
-      dispatch(fetchStats()),
-    ]);
+    return dispatch(loadSiteActivity());
+  },
+  defer: ({ dispatch }) => {
+    return dispatch(fetchStats());
   },
 })
 class DashboardContainer extends Component {

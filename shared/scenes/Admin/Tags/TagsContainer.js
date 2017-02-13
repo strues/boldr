@@ -19,9 +19,6 @@ type Props = {
   },
 })
 class TagsContainer extends Component {
-  componentDidMount() {
-    this.props.fetchTagsIfNeeded();
-  }
 
   props: Props;
 

@@ -31,9 +31,6 @@ export class MembersContainer extends Component {
   }
   state: Object = { userId: '' };
 
-  componentDidMount() {
-    this.props.loadSiteMembers();
-  }
   props: Props;
 
   closeModal() {

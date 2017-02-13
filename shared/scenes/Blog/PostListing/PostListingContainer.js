@@ -16,7 +16,7 @@ type Props = {
   posts: Array<Post>,
   isFetching: Boolean,
   listTags: Object,
-  ui: UI,
+  layout: string,
   fetchTagsIfNeeded: () => void,
   changeLayout: () => void,
   handleChangeLayout: () => void,
@@ -34,7 +34,7 @@ type Props = {
 export class PostListingContainer extends Component {
   props: Props;
   handleChangeLayout = () => {
-    this.props.ui.layout === 'grid'
+    this.props.layout === 'grid'
     ? this.props.changeLayout(LAYOUTS.LIST)
     : this.props.changeLayout(LAYOUTS.GRID);
   }
@@ -44,14 +44,14 @@ export class PostListingContainer extends Component {
         <FeaturedPostListing
           posts={ this.props.posts }
           listTags={ this.props.listTags }
-          layout={ this.props.ui.layout }
+          layout={ this.props.layout }
           handleChangeLayout={ this.handleChangeLayout }
           isFetching={ this.props.isFetching }
         />
         <VisiblePostListing
           posts={ this.props.posts }
           listTags={ this.props.listTags }
-          layout={ this.props.ui.layout }
+          layout={ this.props.layout }
           handleChangeLayout={ this.handleChangeLayout }
           isFetching={ this.props.isFetching }
         />
@@ -64,7 +64,7 @@ const mapStateToProps = (state) => {
   return {
     listTags: state.blog.tags.all,
     posts: getPosts(state),
-    ui: state.boldr.ui,
+    layout: state.boldr.ui.layout,
     isFetching: state.blog.posts.isFetching,
   };
 };

@@ -3,7 +3,7 @@ import { requireAuth } from '../../core/services/token';
 import DashboardLayout from './Dashboard/DashboardLayout';
 import DashboardContainer from './Dashboard/DashboardContainer';
 
-export default (store, connect) => {
+export default (store) => {
   /* istanbul ignore next */
   return {
     path: 'admin',

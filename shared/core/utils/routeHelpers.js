@@ -15,7 +15,7 @@ const loadRoute = (cb: Function): Function => (componentModule) => {
  * @method errorLoading
  */
 const errorLoading = (err) => {
- console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
+  console.error('Dynamic page loading failed', err); // eslint-disable-line no-console
 };
 
 export {
