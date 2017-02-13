@@ -153,7 +153,6 @@ export async function uploadAttachment(req, res, next) {
         fs.removeSync(fileLoc);
         // TODO: configure url based on config value.
         const newAttachment = await Attachment.query().insert({
-          original_name: filename,
           user_id: req.user.id,
           file_name: newFileName,
           safe_name: newFileName,

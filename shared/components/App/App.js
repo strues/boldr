@@ -3,11 +3,12 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import debounce from 'lodash/debounce';
+import { createStructuredSelector } from 'reselect';
 import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
 import testIfMobile from '../../core/utils/testIfMobile';
-import { fetchSettingsIfNeeded } from '../../state/modules/boldr/settings/actions';
-import { setMobileDevice } from '../../state/modules/boldr/ui/actions';
+import { fetchSettingsIfNeeded, selectSettings } from '../../state/modules/boldr/settings';
+import { makeSelectMobile, makeSelectUi, setMobileDevice } from '../../state/modules/boldr/ui';
 import type { ReactChildren } from '../../types/react';
 import Notifications from '../Notification';
 
@@ -24,7 +25,9 @@ type Props = {
 };
 
 @provideHooks({
-  fetch: ({ dispatch }) => dispatch(fetchSettingsIfNeeded()),
+  fetch: ({ dispatch }) => {
+    return dispatch(fetchSettingsIfNeeded());
+  },
 })
 class App extends Component {
   static childContextTypes = {
@@ -39,7 +42,6 @@ class App extends Component {
 
   componentDidMount() {
     const { dispatch, location } = this.props;
-    this.props.dispatch(fetchSettingsIfNeeded());
 
     window.addEventListener('resize', debounce(event => {
       dispatch(setMobileDevice(testIfMobile()));
@@ -62,12 +64,9 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    ui: state.boldr.ui,
-    isMobile: state.boldr.ui.isMobile,
-    settings: state.boldr.settings,
-  };
-};
+const mapStateToProps = createStructuredSelector({
+  ui: makeSelectUi(),
+  isMobile: makeSelectMobile(),
+});
 
 export default connect(mapStateToProps)(App);

@@ -5,8 +5,10 @@ import FontIcon from 'react-md/lib/FontIcons';
 import type { Post } from '../../../types/models';
 import { Grid, Row, Col, Loader } from '../../../components/index';
 import PostCard from '../components/PostCard';
+import PostFeatured from '../components/PostFeatured';
 
 type Props = {
+  features: Array<Post>,
   posts: Array<Post>,
   layout: Object,
   isFetching: Boolean,
@@ -50,6 +52,14 @@ const PostListing = (props: Props) => {
 
   return (
       <Grid>
+        <div style={ { paddingTop: '20px' } }>
+        {
+          props.features.map((post, i) =>
+            <Col key={ i } xs={ 12 }>
+              <PostFeatured { ...post } listTags={ props.listTags } />
+            </Col>)
+        }
+      </div>
       <div style={ { paddingTop: '20px' } }>
         {
           props.layout === 'grid' ? gridView : listView

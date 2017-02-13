@@ -1,15 +1,20 @@
 import { createSelector } from 'reselect';
-
+import { selectBoldr } from '../selectors';
 /**
   * MENU SELECTORS
   *
   *****************************************************************/
 
-export const listMenuLabels = state => state.boldr.menu.labels;
-export const getMenuEntities = state => state.boldr.menu.byLabel;
 
-export function getByLabel(state, label) {
-  return state.boldr.menu.byLabel[label];
-}
+export const selectMenus = (state) => state.boldr.menu;
+export const selectMainMenu = (state) => state.boldr.menu.main;
 
-export const getMenus = state => state.boldr.menu;
+export const makeSelectMenus = () => createSelector(
+  selectBoldr,
+  (boldrState) => boldrState.menu
+);
+
+export const makeSelectMainMenu = () => createSelector(
+  selectMenus,
+  (menuState) => menuState.main
+);

@@ -33,11 +33,11 @@ module.exports.up = async (db) => {
     table.text('bio').nullable();
     table.date('birthday', 8).nullable();
     table.string('website', 100).nullable();
+    table.json('social').nullable();
     table.boolean('verified').defaultTo(false);
 
     table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
     table.timestamp('updated_at').nullable().defaultTo(null);
-    table.timestamp('deleted_at').nullable().defaultTo(null);
     // fk
 
     // indexes
@@ -99,7 +99,6 @@ module.exports.up = async (db) => {
     table.boolean('published').defaultTo(true);
     table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
     table.timestamp('updated_at').nullable().defaultTo(null);
-    table.timestamp('deleted_at').nullable().defaultTo(null);
     // fk | uuid
     table.foreign('user_id').references('id').inTable('user').onDelete('cascade').onUpdate('cascade');
 
@@ -112,12 +111,11 @@ module.exports.up = async (db) => {
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
     table.string('file_name');
     table.string('safe_name');
-    table.string('original_name');
     table.string('file_description');
     table.string('file_type');
     table.uuid('user_id').unsigned().notNullable();
     table.string('url').notNullable();
-    table.string('s3_key');
+
     table.timestamp('created_at').defaultTo(db.fn.now());
     table.timestamp('updated_at').defaultTo(db.fn.now());
 

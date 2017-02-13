@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import { connect } from 'react-redux';
-
+import Helmet from 'react-helmet';
 import BaseTemplate from '../../pages/templates/Base';
 import type { ReactElement } from '../../types/react';
 
@@ -9,7 +9,7 @@ type Props = { children: ReactElement, auth: Object }; // eslint-disable-line
 
 const Account = (props: Props) => {
   return (
-    <BaseTemplate>
+    <BaseTemplate helmetMeta={ <Helmet title="Account" /> }>
       { props.children }
     </BaseTemplate>
   );

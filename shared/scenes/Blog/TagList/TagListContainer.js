@@ -20,7 +20,7 @@ type Props = {
     return dispatch(fetchTaggedPost(name));
   },
 })
-class TagListContainer extends Component {
+export class TagListContainer extends Component {
 
   componentDidMount() {
     const name = this.props.params.name;

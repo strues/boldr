@@ -128,9 +128,8 @@ export const getAllAttachments = () =>
 export const doUpload = (payload) => {
   const data = {
     file_name: payload.file_name,
-    original_name: payload.original_name,
+    safe_name: payload.safe_name,
     url: payload.url,
-    s3_key: payload.s3_key,
   };
 
   return apiClient.post('/attachments/dashboard', { data });
@@ -230,6 +229,7 @@ export const doUpdateProfile = (userData) => {
     bio: userData.bio,
     location: userData.location,
     website: userData.website,
+    social: userData.social,
   };
   return apiClient.put(`/users/${userData.id}`, { data: userData });
 };

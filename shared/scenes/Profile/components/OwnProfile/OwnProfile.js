@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import ProfileForm from '../ProfileForm';
@@ -9,13 +9,8 @@ const DrawerWrapper = styled.div`
   padding: 1em;
   height: 100%;
 `;
-class OwnProfile extends Component {
-  constructor(props) {
-    super(props);
-
-    this.handleFormSubmit = this.handleFormSubmit.bind(this);
-  }
-  handleFormSubmit(values) {
+class OwnProfile extends PureComponent {
+  handleFormSubmit = (values) => {
     const userData = {
       id: this.props.profile.id,
       first_name: values.first_name,
@@ -26,6 +21,13 @@ class OwnProfile extends Component {
       website: values.website,
       profile_image: values.profileImage,
       avatar_url: values.avatarUrl,
+      social: {
+        facebook: { url: values.facebook },
+        twitter: { url: values.twitter },
+        linkedin: { url: values.linkedin },
+        google: { url: values.google },
+        github: { url: values.github },
+      },
     };
     this.props.dispatch(editProfile(userData));
   }
@@ -40,12 +42,17 @@ class OwnProfile extends Component {
       website: profile.website,
       profile_image: profile.profileImage,
       avatar_url: profile.avatarUrl,
+      facebook: profile.social.facebook.url,
+      twitter: profile.social.twitter.url,
+      github: profile.social.github.url,
+      linkedin: profile.social.linkedin.url,
+      google: profile.social.google.url,
     };
     return (
       <DrawerWrapper>
-      Edit your public profile
-      <ProfileForm onSubmit={ this.handleFormSubmit } initialValues={ initialProfileData } />
-    </DrawerWrapper>
+        Edit your public profile
+        <ProfileForm onSubmit={ this.handleFormSubmit } initialValues={ initialProfileData } />
+      </DrawerWrapper>
     );
   }
 }

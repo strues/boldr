@@ -6,7 +6,7 @@ import Drawer from 'react-md/lib/Drawers';
 import Button from 'react-md/lib/Buttons/Button';
 import Toolbar from 'react-md/lib/Toolbars';
 import { Grid, Col, Row, Heading } from '../../components';
-
+import ProfileContent from './components/ProfileContent';
 import OwnProfile from './components/OwnProfile';
 
 type Props = {
@@ -84,13 +84,7 @@ class Profile extends Component {
        className="md-divider-border md-divider-border--bottom"
      />
    );
-    const editButtons = (
-      <Col xs>
-        <Button primary raised label="Edit Profile" onClick={ this._toggleDrawer } />
-        <Button secondary flat label="Upload Profile Image" />
-        <Button secondary flat label="Upload Avatar" />
-      </Col>
-    );
+
     return (
       <div className="boldr-profile">
         <UserProfileBg />
@@ -98,35 +92,28 @@ class Profile extends Component {
           <Paper zDepth={ 2 } style={ { marginTop: '-100px', padding: '1em', background: '#fff' } }>
             <Row>
               <Col sm={ 12 }>
-               <Row>
-               <Col xs>
-                <Heading size={ 1 }>{ profile.firstName } { ' ' } { profile.lastName }'s Profile</Heading>
-                </Col>
-                {
-                  this.state.me
-                  ? editButtons
-                  : null
-                }
-                </Row>
-                <br />
-                <br />
-                { profile.email }<br />
+                <ProfileContent
+                  me={ this.state.me }
+                  toggleDrawer={ this._toggleDrawer }
+                  profile={ profile }
+                />
               </Col>
             </Row>
-             <Drawer
-               clickableDesktopOverlay={ false }
-               position="right"
-               navItems={ null }
-               visible={ this.props.drawer }
-               onVisibilityToggle={ this._handleToggle }
-               type={ Drawer.DrawerTypes.TEMPORARY }
-               header={ header }
-               style={ { zIndex: 100 } }
-             >
-               <OwnProfile profile={ profile } />
-             </Drawer>
+            <Drawer
+              clickableDesktopOverlay={ false }
+              position="right"
+              navItems={ null }
+              visible={ this.props.drawer }
+              onVisibilityToggle={ this._handleToggle }
+              type={ Drawer.DrawerTypes.TEMPORARY }
+              header={ header }
+              style={ { zIndex: 100 } }
+            >
+              <OwnProfile profile={ profile } />
+            </Drawer>
           </Paper>
         </Grid>
+
       </div>
     );
   }

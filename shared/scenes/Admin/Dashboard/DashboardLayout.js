@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { findDOMNode } from 'react-dom';
 import Link from 'react-router/lib/Link';
 import { connect } from 'react-redux';
@@ -43,7 +43,7 @@ type Props = {
   onMediaTypeChange: Function,
 };
 
-class DashboardLayout extends Component {
+class DashboardLayout extends PureComponent {
   constructor(props: Props) {
     super();
     this.state = {

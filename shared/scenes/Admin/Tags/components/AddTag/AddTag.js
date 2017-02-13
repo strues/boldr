@@ -19,7 +19,7 @@ const style = {
 let AddTag = (props: Props) => { // eslint-disable-line
   const { handleSubmit, reset } = props;
   return (
-    <form className="boldr-form__generic" onSubmit={ handleSubmit }>
+    <form className="boldr-form__addtag" onSubmit={ handleSubmit }>
       <Field id="tag-name" name="name" component={ TextField } type="text" label="Name" />
       <Field id="tag-description" name="description" component={ TextField } type="text" label="Description" />
 

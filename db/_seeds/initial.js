@@ -50,6 +50,23 @@ function seed(knex, Promise) {
         website: 'https://boldr.io',
         profile_image: 'https://boldr.io/images/unknown-avatar.png',
         birthday: '01/01/1988',
+        social: {
+          facebook: {
+            url: 'www.facebook.com',
+          },
+          twitter: {
+            url: 'www.twitter.com',
+          },
+          linkedin: {
+            url: 'www.linkedin.com',
+          },
+          github: {
+            url: 'www.github.com',
+          },
+          google: {
+            url: 'www.google.com',
+          },
+        },
         verified: true,
       }),
       knex('user').insert({
@@ -65,6 +82,23 @@ function seed(knex, Promise) {
         website: 'https://boldr.io',
         profile_image: 'https://boldr.io/images/unknown-avatar.png',
         birthday: '01/01/1988',
+        social: {
+          facebook: {
+            url: 'www.facebook.com',
+          },
+          twitter: {
+            url: 'www.twitter.com',
+          },
+          linkedin: {
+            url: 'www.linkedin.com',
+          },
+          github: {
+            url: 'www.github.com',
+          },
+          google: {
+            url: 'www.google.com',
+          },
+        },
         verified: true,
       }),
       knex('user').insert({
@@ -80,6 +114,23 @@ function seed(knex, Promise) {
         website: 'https://boldr.io',
         profile_image: 'https://boldr.io/images/unknown-avatar.png',
         birthday: '01/01/1988',
+        social: {
+          facebook: {
+            url: 'www.facebook.com',
+          },
+          twitter: {
+            url: 'www.twitter.com',
+          },
+          linkedin: {
+            url: 'www.linkedin.com',
+          },
+          github: {
+            url: 'www.github.com',
+          },
+          google: {
+            url: 'www.google.com',
+          },
+        },
         verified: true,
       }),
     ]))
@@ -98,10 +149,12 @@ function seed(knex, Promise) {
         id: '5c9ed236-79f0-4ff7-93bd-2815f06c74b4',
         title: 'Just Another Post',
         slug: 'just-another-post',
+        featured: true,
         excerpt: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' +
         'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when' +
         'an unknown printer took a galley of type and scrambled it to make a type specimen book.',
         feature_image: 'https://boldr.io/image1.jpg',
+        background_image: 'https://boldr.io/image1.jpg',
         meta: {},
         content: `<h1>Lorem ipsum dolor sit amet.</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien in est aliquam lacinia. Donec fringilla odio nulla, sagittis egestas dolor bibendum ut. Proin eget massa mattis, dictum enim vitae, facilisis eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum imperdiet varius ante. Maecenas sit amet luctus sapien, quis aliquet purus. Cras malesuada quam a dui pretium fermentum. Quisque tempor interdum quam, eu lacinia turpis interdum id. Curabitur non mauris lobortis, mattis nulla id, viverra nisi. Phasellus eget porttitor lorem. Quisque facilisis nec arcu eu fringilla. Vivamus elit ipsum, viverra eu maximus a, venenatis nec nibh.Suspendisse iaculis auctor fermentum. Sed suscipit ante nisl, nec iaculis magna consequat vel. Quisque viverra est a justo egestas, euismod egestas metus hendrerit.</p>
@@ -117,10 +170,12 @@ function seed(knex, Promise) {
         id: 'cb61bbae-c91e-4014-b665-3485734b88fb',
         title: 'Nother One',
         slug: 'nother-one',
+        featured: false,
         excerpt: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' +
         'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when' +
         'an unknown printer took a galley of type and scrambled it to make a type specimen book.',
         feature_image: 'https://boldr.io/image3.jpg',
+        background_image: 'https://boldr.io/image3.jpg',
         meta: {},
         content: `<h1>Lorem ipsum dolor sit amet.</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien in est aliquam lacinia. Donec fringilla odio nulla, sagittis egestas dolor bibendum ut. Proin eget massa mattis, dictum enim vitae, facilisis eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum imperdiet varius ante. Maecenas sit amet luctus sapien, quis aliquet purus. Cras malesuada quam a dui pretium fermentum. Quisque tempor interdum quam, eu lacinia turpis interdum id. Curabitur non mauris lobortis, mattis nulla id, viverra nisi. Phasellus eget porttitor lorem. Quisque facilisis nec arcu eu fringilla. Vivamus elit ipsum, viverra eu maximus a, venenatis nec nibh.Suspendisse iaculis auctor fermentum. Sed suscipit ante nisl, nec iaculis magna consequat vel. Quisque viverra est a justo egestas, euismod egestas metus hendrerit.</p>
@@ -136,10 +191,12 @@ function seed(knex, Promise) {
         id: 'ab33a0ca-b349-4cf8-947f-94f415149492',
         title: 'Random Post Title',
         slug: 'random-post-title',
+        featured: false,
         excerpt: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' +
         'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when' +
         'an unknown printer took a galley of type and scrambled it to make a type specimen book.',
         feature_image: 'https://boldr.io/image2.jpg',
+        background_image: 'https://boldr.io/image2.jpg',
         meta: {},
         content: `<h1>Lorem ipsum dolor sit amet.</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien in est aliquam lacinia. Donec fringilla odio nulla, sagittis egestas dolor bibendum ut. Proin eget massa mattis, dictum enim vitae, facilisis eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum imperdiet varius ante. Maecenas sit amet luctus sapien, quis aliquet purus. Cras malesuada quam a dui pretium fermentum. Quisque tempor interdum quam, eu lacinia turpis interdum id. Curabitur non mauris lobortis, mattis nulla id, viverra nisi. Phasellus eget porttitor lorem. Quisque facilisis nec arcu eu fringilla. Vivamus elit ipsum, viverra eu maximus a, venenatis nec nibh.Suspendisse iaculis auctor fermentum. Sed suscipit ante nisl, nec iaculis magna consequat vel. Quisque viverra est a justo egestas, euismod egestas metus hendrerit.</p>
@@ -272,7 +329,6 @@ function seed(knex, Promise) {
     .then(() => Promise.all([
       knex('attachment').insert({
         id: '668e14aa-ebe6-11e6-8ebf-4f81f17749d5',
-        original_name: 'file.png',
         url: '/files/file.png',
         user_id: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
         safe_name: 'file.png',

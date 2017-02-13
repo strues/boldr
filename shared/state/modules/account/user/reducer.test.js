@@ -13,6 +13,7 @@ describe('User Reducer', () => {
         username: '',
         location: '',
         avatarUrl: '',
+        social: {},
         website: '',
         bio: '',
         role: '',

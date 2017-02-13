@@ -49,6 +49,7 @@ export const PostCard = (props: Props) => {
     content: props.content,
     created_at: props.created_at,
     excerpt: props.excerpt,
+    background_image: props.background_image,
     feature_image: props.feature_image,
     meta: props.meta,
     slug: props.slug,

@@ -6,8 +6,8 @@ import Helmet from 'react-helmet';
 import { bindActionCreators } from 'redux';
 import { Loader } from '../../components';
 import BaseTemplate from '../../pages/templates/Base';
-import { getProfile } from '../../state/modules/account/actions';
-import { openDrawer, closeDrawer } from '../../state/modules/boldr/ui/actions';
+import { selectUser, getProfile } from '../../state/modules/account';
+import { hideModal, showModal, openDrawer, closeDrawer } from '../../state/modules/boldr/ui/actions';
 import Profile from './Profile';
 
 type Props = {
@@ -16,9 +16,12 @@ type Props = {
   getProfile: Function,
   isFetching: Boolean,
   profile: Object,
+  modal: Boolean,
   drawer: Boolean,
   openDrawer: Function,
   closeDrawer: Function,
+  hideModal: Function,
+  showModal: Function,
 };
 
 @provideHooks({
@@ -29,6 +32,12 @@ export class ProfileContainer extends Component {
     const username = this.props.params.username;
 
     this.props.getProfile(username);
+  }
+  closeModal = () => {
+    this.props.hideModal();
+  }
+  openModal = () => {
+    this.props.showModal();
   }
   props: Props;
 
@@ -43,7 +52,15 @@ export class ProfileContainer extends Component {
     return (
       <BaseTemplate helmetMeta={ <Helmet title={ `${user.username}'s Profile` } /> }>
       { /* $FlowIssue */}
-        <Profile profile={ profile } email={ user.email } drawer={ this.props.drawer } { ...this.props } />
+        <Profile
+          profile={ profile }
+          email={ user.email }
+          modal={ this.props.modal }
+          closeModal={ this.closeModal }
+          openModal={ this.openModal }
+          drawer={ this.props.drawer }
+          { ...this.props }
+        />
       </BaseTemplate>
     );
   }
@@ -52,14 +69,15 @@ export class ProfileContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
+    modal: state.boldr.ui.modal,
     drawer: state.boldr.ui.drawer,
-    user: state.account.user,
+    user: selectUser(state),
     profile: state.account.profile.current,
     isFetching: state.account.profile.isFetching,
   };
 };
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getProfile, openDrawer, closeDrawer }, dispatch);
+  return bindActionCreators({ getProfile, openDrawer, closeDrawer, showModal, hideModal }, dispatch);
 }
 // $FlowIssue
 export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);

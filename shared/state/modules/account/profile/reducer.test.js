@@ -16,6 +16,7 @@ describe('Profile Reducer', () => {
           location: '',
           avatarUrl: '',
           profileImage: '',
+          social: {},
           website: '',
           bio: '',
           role: '',

@@ -1,12 +1,12 @@
 /* @fllow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { getSettings, getSettingFromList } from '../../../state/modules/boldr/settings';
+import { selectSettings, selectSettingFromList } from '../../../state/modules/boldr/settings';
 import Settings from './Settings';
 
 const mapStateToProps = (state) => {
   return {
-    settings: getSettings(state),
+    settings: selectSettings(state),
     siteName: getSettingFromList(state, 1),
     siteUrl: getSettingFromList(state, 2),
     siteDesc: getSettingFromList(state, 4),

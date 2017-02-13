@@ -10,7 +10,6 @@ import { fetchTagsIfNeeded } from '../../../state/modules/blog/tags/actions';
 import { getTags } from '../../../state/modules/blog/tags/selectors';
 import type { Post, UI } from '../../../types/models'; // eslint-disable-line
 import VisiblePostListing from './VisiblePostListing';
-import FeaturedPostListing from './FeaturedPostListing';
 
 type Props = {
   posts: Array<Post>,
@@ -40,22 +39,13 @@ export class PostListingContainer extends Component {
   }
   render() {
     return (
-      <div>
-        <FeaturedPostListing
-          posts={ this.props.posts }
-          listTags={ this.props.listTags }
-          layout={ this.props.layout }
-          handleChangeLayout={ this.handleChangeLayout }
-          isFetching={ this.props.isFetching }
-        />
-        <VisiblePostListing
-          posts={ this.props.posts }
-          listTags={ this.props.listTags }
-          layout={ this.props.layout }
-          handleChangeLayout={ this.handleChangeLayout }
-          isFetching={ this.props.isFetching }
-        />
-      </div>
+      <VisiblePostListing
+        posts={ this.props.posts }
+        listTags={ this.props.listTags }
+        layout={ this.props.layout }
+        handleChangeLayout={ this.handleChangeLayout }
+        isFetching={ this.props.isFetching }
+      />
     );
   }
 }
