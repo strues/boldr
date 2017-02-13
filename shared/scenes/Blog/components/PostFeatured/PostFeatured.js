@@ -17,6 +17,7 @@ type Props = {
   slug: String,
   content?: String,
   background_image?: String,
+  comments: ?Array<Object>,
   excerpt?: String,
   created_at: String,
   updated_at?: String,
@@ -75,6 +76,7 @@ export const PostFeatured = (props: Props) => {
     content: props.content,
     created_at: props.created_at,
     excerpt: props.excerpt,
+    comments: props.comments,
     background_image: props.background_image,
     feature_image: props.feature_image,
     meta: props.meta,
@@ -96,6 +98,7 @@ export const PostFeatured = (props: Props) => {
         </ImgWrapper>
         <Content>
           { props.excerpt }
+          { props.comments.length }
         <Row style={ { paddingTop: '20px' } }>
           <Col xs={ 12 }>
             <Row xsEnd>

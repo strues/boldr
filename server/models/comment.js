@@ -18,7 +18,7 @@ class Comment extends BaseModel {
 
   static get relationMappings() {
     return {
-      author: {
+      commenter: {
         relation: Model.BelongsToOneRelation,
         modelClass: User,
         join: {

@@ -2,12 +2,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
+import styled from 'styled-components';
+
 import { Grid, Row, Col, Heading } from '../../../components/index';
 import PostSidebar from '../components/PostSidebar';
 import PostContent from '../components/PostContent';
 import { getPosts } from '../../../state/modules/blog/posts';
 import PostTitle from '../components/PostTitle';
-import styled from 'styled-components';
+import PostComments from '../components/PostComments';
 
 export type Props = {
   loading: boolean,
@@ -31,7 +33,8 @@ const SinglePost = (props: Props) => {
     margin-bottom: 30px;
   `;
   const postAuthor = props.entities.users[props.currentPost.user_id];
-
+  const postComments = props.currentPost.comments.map(c => props.entities.comments[c]);
+  const userEntities = props.entities.users;
   const postTags = props.currentPost.tags.map(id => props.entities.tags[id]);
   return (
         <div>
@@ -41,6 +44,7 @@ const SinglePost = (props: Props) => {
             <Row>
               <Col sm={ 12 } md={ 8 } lg={ 9 }>
                 <PostContent { ...props.currentPost } />
+                <PostComments comments={ postComments } userEntities={ props.entities.users } />
               </Col>
               {
                 props.currentPost.tags
@@ -56,6 +60,7 @@ const SinglePost = (props: Props) => {
 };
 
 const mapStateToProps = (state, ownProps) => {
+  // const postComments =
   return {
     entities: state.entities,
     currentPost: state.blog.posts.currentPost,

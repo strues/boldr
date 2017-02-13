@@ -111,7 +111,7 @@ export async function getId(req, res, next) {
     const post = await Post
       .query()
       .findById(req.params.id)
-      .eager('[tags, author, comments, comments.author]')
+      .eager('[tags, author, comments, comments.commenter]')
       .omit('password')
       .first();
     return responseHandler(res, 200, post);
@@ -192,7 +192,7 @@ export async function addCommentToPost(req, res, next) {
         raw_content: req.body.raw_content,
         user_id: req.user.id,
       });
-    await newComment.$relatedQuery('author').relate({ id: req.user.id });
+    await newComment.$relatedQuery('commenter').relate({ id: req.user.id });
 
     await PostComment.query().insert({ comment_id: newComment.id, post_id: post.id });
 

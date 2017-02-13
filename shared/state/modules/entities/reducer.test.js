@@ -7,6 +7,7 @@ describe('Entities', () => {
       ).toEqual({
         posts: {},
         tags: {},
+        comments: {},
         attachments: {},
         users: {},
         menus: {},
