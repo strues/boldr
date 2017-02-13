@@ -6,7 +6,7 @@ import Helmet from 'react-helmet';
 import { bindActionCreators } from 'redux';
 import { Loader } from '../../components';
 import BaseTemplate from '../../pages/templates/Base';
-import { selectUser, getProfile } from '../../state/modules/account';
+import { getProfile } from '../../state/modules/users';
 import { hideModal, showModal, openDrawer, closeDrawer } from '../../state/modules/boldr/ui/actions';
 import Profile from './Profile';
 
@@ -50,7 +50,7 @@ export class ProfileContainer extends Component {
       );
     }
     return (
-      <BaseTemplate helmetMeta={ <Helmet title={ `${user.username}'s Profile` } /> }>
+      <BaseTemplate helmetMeta={ <Helmet title={ `${profile.username}'s Profile` } /> }>
       { /* $FlowIssue */}
         <Profile
           profile={ profile }
@@ -71,9 +71,9 @@ const mapStateToProps = (state) => {
   return {
     modal: state.boldr.ui.modal,
     drawer: state.boldr.ui.drawer,
-    user: selectUser(state),
-    profile: state.account.profile.current,
-    isFetching: state.account.profile.isFetching,
+    user: state.users.me,
+    profile: state.users.profile,
+    isFetching: state.users.isFetching,
   };
 };
 function mapDispatchToProps(dispatch) {

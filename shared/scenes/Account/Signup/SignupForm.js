@@ -27,7 +27,7 @@ const SignupForm = (props: Props) => {
             type="email"
             component={ TextField }
             label="Email address"
-            validate={[requiredValidator, emailValidator]}
+            validate={ [requiredValidator, emailValidator] }
           />
       </Col>
       <Col xs={ 6 }>
@@ -75,7 +75,7 @@ const SignupForm = (props: Props) => {
           </Row>
         </Col>
       </Row>
-      
+
       <Button style={ { marginTop: '25px' } } raised primary label="Create Account" type="submit" />
     </form>
   );

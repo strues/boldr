@@ -38,7 +38,7 @@ const UserName = styled.div`
 type Props = {
   children: ReactElement,
   dashboard: ?Object,
-  account: Object,
+  me: Object,
   location: Object,
   onMediaTypeChange: Function,
 };
@@ -89,10 +89,10 @@ class DashboardLayout extends PureComponent {
     const { location: { pathname, search } } = this.props;
     const toolbarActionItems = (
       <UserSection>
-        <Avatar src={ this.props.account.user.avatarUrl } role="presentation" />
+        <Avatar src={ this.props.me.avatarUrl } role="presentation" />
         <UserName>
-          <Link to={ `/profiles/${this.props.account.user.username}` } style={ { color: '#fff' } }>
-            { this.props.account.user.firstName}
+          <Link to={ `/profiles/${this.props.me.username}` } style={ { color: '#fff' } }>
+            { this.props.me.firstName}
           </Link>
         </UserName>
       </UserSection>
@@ -124,7 +124,7 @@ function mapStateToProps(state) {
     router: state.router,
     dashboard: state.admin.dashboard,
     boldr: state.boldr,
-    account: state.account,
+    me: state.users.me,
     ui: state.boldr.ui,
   };
 }

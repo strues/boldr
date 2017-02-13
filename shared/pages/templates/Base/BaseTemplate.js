@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import { provideHooks } from 'redial';
 import { fetchTemplateResource } from '../../../state/modules/boldr/templates/actions';
 import { fetchMenusIfNeeded, getByLabel } from '../../../state/modules/boldr/menu';
-import { logout } from '../../../state/modules/account/actions';
+import { logout } from '../../../state/modules/auth/actions';
 import { PrimaryHeader, Footer } from '../../../components/index';
 import type { ReactElement, ReactChildren } from '../../../types/react';
 
@@ -52,7 +52,7 @@ const FooterWrapper = styled.footer`
 const mapStateToProps = (state: Object) => {
   return {
     boldr: state.boldr,
-    auth: state.account.auth,
+    auth: state.auth,
     menu: state.boldr.menu.main,
     ui: state.boldr.ui,
   };

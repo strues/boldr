@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import FormCard from '../../../components/Form/FormCard';
-import { forgotPassword } from '../../../state/modules/account/actions';
+import { forgotPassword } from '../../../state/modules/users/actions';
 import ForgotPasswordForm from './ForgotPasswordForm';
 
 

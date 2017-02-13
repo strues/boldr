@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import FormCard from '../../../components/Form/FormCard';
-import { resetPassword } from '../../../state/modules/account/actions';
+import { resetPassword } from '../../../state/modules/users/actions';
 import ResetPasswordForm from './ResetPasswordForm';
 
 type Props = {
