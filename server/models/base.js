@@ -1,5 +1,6 @@
 /* eslint-disable id-match */
 import { Model, ValidationError } from 'objection';
+
 /**
  * @class BaseModel
  * @extends Model
@@ -39,7 +40,7 @@ class BaseModel extends Model {
    * Ran before updating the database.
    */
   $beforeUpdate() {
-    if (this.constructor.timestamps) {
+    if (this.constructor.addTimestamps) {
       this.updated_at = new Date().toISOString();
     }
   }

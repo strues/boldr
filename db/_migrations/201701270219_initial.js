@@ -131,6 +131,18 @@ module.exports.up = async (db) => {
     table.index('key');
     table.index('value');
   });
+  await db.schema.createTable('comment', (table) => {
+    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
+    table.text('content').notNullable();
+    table.json('raw_content').nullable();
+    table.uuid('user_id').unsigned().notNullable();
+    table.integer('likes').nullable();
+    table.integer('dislikes').nullable();
+    table.boolean('reported').default(false);
+    table.foreign('user_id').references('id').inTable('user').onDelete('cascade').onUpdate('cascade');
+    table.timestamp('created_at').defaultTo(db.fn.now());
+    table.timestamp('updated_at').defaultTo(db.fn.now());
+  });
   await db.schema.createTable('menu', (table) => {
     table.increments('id').unsigned().primary();
     table.string('name').notNullable();
@@ -235,6 +247,15 @@ module.exports.up = async (db) => {
     table.foreign('post_id').references('id').inTable('post').onDelete('cascade').onUpdate('cascade');
     table.foreign('tag_id').references('id').inTable('tag').onDelete('cascade').onUpdate('cascade');
   });
+  await db.schema.createTable('post_comment', (table) => {
+    table.increments('id').primary();
+    table.uuid('post_id').unsigned().notNullable();
+    table.uuid('comment_id').unsigned().notNullable();
+
+    table.unique(['post_id', 'comment_id']);
+    table.foreign('post_id').references('id').inTable('post').onDelete('cascade').onUpdate('cascade');
+    table.foreign('comment_id').references('id').inTable('comment').onDelete('cascade').onUpdate('cascade');
+  });
   await db.schema.createTable('user_role', (table) => {
     table.increments('id').primary();
     table.uuid('user_id').unsigned().notNullable();
@@ -244,6 +265,7 @@ module.exports.up = async (db) => {
     table.foreign('user_id').references('id').inTable('user').onDelete('cascade').onUpdate('cascade');
     table.foreign('role_id').references('id').inTable('role').onDelete('cascade').onUpdate('cascade');
   });
+
   await db.schema.createTable('template_page', (table) => {
     table.increments('id').primary();
     table.uuid('page_id').unsigned().notNullable();
@@ -266,6 +288,7 @@ module.exports.down = async (db) => {
   await db.schema.dropTableIfExists('user');
   await db.schema.dropTableIfExists('tag');
   await db.schema.dropTableIfExists('post');
+  await db.schema.dropTableIfExists('comment');
   await db.schema.dropTableIfExists('attachment');
   await db.schema.dropTableIfExists('setting');
   await db.schema.dropTableIfExists('menu');
@@ -278,6 +301,7 @@ module.exports.down = async (db) => {
   await db.schema.dropTableIfExists('reset_token');
   await db.schema.dropTableIfExists('post_attachment');
   await db.schema.dropTableIfExists('post_tag');
+  await db.schema.dropTableIfExists('post_comment');
   await db.schema.dropTableIfExists('user_role');
   await db.schema.dropTableIfExists('template_page');
   await db.schema.dropTableIfExists('menu_menu_detail');

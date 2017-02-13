@@ -5,6 +5,7 @@ import Tag from './tag';
 import User from './user';
 import Attachment from './attachment';
 import BaseModel from './base';
+import Comment from './comment';
 
 class Post extends BaseModel {
   static get tableName() {
@@ -48,6 +49,18 @@ class Post extends BaseModel {
             to: 'post_attachment.attachment_id',
           },
           to: 'attachment.id',
+        },
+      },
+      comments: {
+        relation: Model.ManyToManyRelation,
+        modelClass: Comment,
+        join: {
+          from: 'post.id',
+          through: {
+            from: 'post_comment.post_id',
+            to: 'post_comment.comment_id',
+          },
+          to: 'comment.id',
         },
       },
     };

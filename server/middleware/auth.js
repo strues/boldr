@@ -25,6 +25,7 @@ export default (app) => {
       const payload = req.isAuthenticated();
       const user = await User.query().findById(payload.sub).eager('[roles]');
       req.user = user;
+      req.user.role = user.roles[0].name;
       next();
     } else {
       next();

@@ -6,6 +6,7 @@ import BaseModel from './base';
 import Role from './role';
 import Attachment from './attachment';
 import ResetToken from './resetToken';
+import Comment from './comment';
 import VerificationToken from './verificationToken';
 import Post from './post';
 import UserRole from './join/userRole';
@@ -68,6 +69,14 @@ class User extends BaseModel {
         join: {
           from: 'user.id',
           to: 'reset_token.user_id',
+        },
+      },
+      comments: {
+        relation: Model.HasManyRelation,
+        modelClass: Comment,
+        join: {
+          from: 'user.id',
+          to: 'comment.user_id',
         },
       },
     };

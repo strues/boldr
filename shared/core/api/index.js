@@ -51,19 +51,19 @@ export const getAllPosts = () =>
   apiClient.get('/posts');
 
 export const getPostById = (postId) =>
-  apiClient.get(`/posts/pid/${postId}`);
+  apiClient.get(`/posts/${postId}`);
 
 export const getPostBySlug = (slug) =>
   apiClient.get(`/posts/slug/${slug}`);
 
 export const delPostById = (postId) =>
-  apiClient.del(`/posts/pid/${postId}`);
+  apiClient.del(`/posts/${postId}`);
 
 export const createPost = (data) =>
   apiClient.post('/posts', { data });
 
 export const putPostId = (postData) =>
-  apiClient.put(`/posts/pid/${postData.id}`, { data: postData });
+  apiClient.put(`/posts/${postData.id}`, { data: postData });
 
   /**
     * SETTINGS API ROUTES
