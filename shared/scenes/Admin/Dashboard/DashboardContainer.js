@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import type { ReactElement } from 'types/react';
 import { push } from 'react-router-redux';
