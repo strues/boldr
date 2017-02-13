@@ -5,6 +5,9 @@ import logger from '../logger';
 
 const redisClient = new Redis(process.env.REDIS_CONN_URI);
 
+const pub = new Redis(process.env.REDIS_CONN_URI);
+const sub = new Redis(process.env.REDIS_CONN_URI, { return_buffers: true });
+
 redisClient.on('connect', () => {
   logger.info('Redis connection has been established!');
 });
@@ -28,3 +31,4 @@ redisClient.on('+node', (data) => {
 });
 
 export default redisClient;
+export { pub, sub };

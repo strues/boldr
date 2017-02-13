@@ -5,7 +5,7 @@ import getConfig from '../config/get';
 import db, { disconnect } from './services/postgres';
 import logger from './services/logger';
 
-import app from './app';
+import app, { server } from './app';
 
 global.Promise = require('bluebird');
 
@@ -14,8 +14,6 @@ const debug = require('debug')('boldr:engine');
 const port = getConfig('port');
 
 require('dotenv').load({ silent: true });
-
-const server = http.createServer(app);
 
 Model.knex(db);
 
