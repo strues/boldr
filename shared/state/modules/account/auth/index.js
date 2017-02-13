@@ -1,4 +1,4 @@
-import authReducer, { STATE_KEY } from './auth';
+import authReducer, { STATE_KEY } from './reducer';
 
 export default authReducer;
 

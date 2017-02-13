@@ -12,9 +12,9 @@ export default function clientMiddleware(client) {
     const [REQUEST, SUCCESS, FAILURE] = types;
     next({ ...rest, type: REQUEST });
 
-    const { auth } = getState();
-
-    client.setJwtToken(auth.token || null);
+    // const { auth } = getState();
+    //
+    // client.setJwtToken(auth.token || null);
 
     const actionPromise = promise(client, dispatch);
     actionPromise.then(

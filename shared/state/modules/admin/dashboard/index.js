@@ -1,4 +1,4 @@
-import dashboardReducer, { STATE_KEY } from './dashboard';
+import dashboardReducer, { STATE_KEY } from './reducer';
 
 export default dashboardReducer;
 

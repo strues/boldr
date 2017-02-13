@@ -1,4 +1,4 @@
-import profileReducer, { STATE_KEY } from './profile';
+import profileReducer, { STATE_KEY } from './reducer';
 
 export default profileReducer;
 

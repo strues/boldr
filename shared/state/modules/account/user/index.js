@@ -1,4 +1,4 @@
-import userReducer, { STATE_KEY } from './user';
+import userReducer, { STATE_KEY } from './reducer';
 
 export default userReducer;
 

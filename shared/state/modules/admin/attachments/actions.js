@@ -4,7 +4,7 @@ import * as api from '../../../../core/api';
 import { getToken } from '../../../../core/services/token';
 import * as notif from '../../../../core/constants';
 import { notificationSend } from '../../notifications/notifications';
-import * as t from './constants';
+import * as t from '../../actionTypes';
 
 const token = getToken();
 

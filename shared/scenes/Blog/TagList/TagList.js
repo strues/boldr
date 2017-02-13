@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
-import { Grid, Col, Row } from '../../../components/Layout';
+import { Grid, Col, Row, Loader } from '../../../components';
 import { fetchTaggedPost } from '../../../state/modules/blog/tags/actions';
 import type { Post } from '../../../types/models';
 import PostCard from '../components/PostCard';
@@ -11,13 +11,14 @@ import PostCard from '../components/PostCard';
 type Props = {
   posts: Array<Post>,
   name: string,
+  isFetching: boolean,
   listTags: Object,
 };
 
 const TagList = (props: Props) => {
-  if (!props.name) {
+  if (props.isFetching || !props.posts) {
     return (
-      <div>Loading</div>
+      <Loader />
     );
   }
   return (

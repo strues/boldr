@@ -6,8 +6,7 @@ import * as api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import type { Post } from '../../../../types/models';
 import { notificationSend } from '../../../../state/modules/notifications/notifications';
-import * as t from './constants';
-
+import * as t from '../../actionTypes';
 import { arrayOfPost } from './schema';
 
 export function togglePostLayoutView() {
@@ -76,18 +75,18 @@ function shouldFetchPosts(state) {
   return false;
 }
 
-const requestPosts = () => {
+export const requestPosts = () => {
   return { type: t.FETCH_POSTS_REQUEST };
 };
 
-const receivePosts = (normalizedData) => {
+export const receivePosts = (normalizedData) => {
   return {
     type: t.FETCH_POSTS_SUCCESS,
     payload: normalizedData,
   };
 };
 
-const receivePostsFailed = (err) => ({
+export const receivePostsFailed = (err) => ({
   type: t.FETCH_POSTS_FAILURE, error: err,
 });
 

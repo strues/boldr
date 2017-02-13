@@ -3,7 +3,7 @@ import * as api from '../../../core/api';
 import { setToken, removeToken } from '../../../core/services/token';
 import * as notif from '../../../core/constants';
 import { notificationSend } from '../notifications/notifications';
-import * as t from './constants';
+import * as t from '../actionTypes';
 
 /**
   * SIGNUP ACTIONS

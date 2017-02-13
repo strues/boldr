@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { getFeaturedPosts } from '../../../state/modules/blog/posts/posts';
+import { getFeaturedPosts } from '../../../state/modules/blog/posts/reducer';
 import FeaturedPost from './FeaturedPost';
 
 const mapStateToProps = (state, { params }) => ({

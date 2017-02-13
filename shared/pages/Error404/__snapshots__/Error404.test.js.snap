@@ -1,7 +1,7 @@
 exports[`<Error404 /> renders snapshot 1`] = `
 <div
   className="error_wrapper">
-  <Connect(TemplateProvider)
+  <Connect(BaseTemplate)
     helmetMeta={
       <HelmetWrapper
         title="404! You might be lost..." />
@@ -13,6 +13,6 @@ exports[`<Error404 /> renders snapshot 1`] = `
     <p>
       SORRY PAGE NOT FOUND
     </p>
-  </Connect(TemplateProvider)>
+  </Connect(BaseTemplate)>
 </div>
 `;

@@ -1,4 +1,4 @@
-import uiReducer, { STATE_KEY } from './ui';
+import uiReducer, { STATE_KEY } from './reducer';
 import { changeLayout, showModal, hideModal, setMobileDevice } from './actions';
 
 export default uiReducer;

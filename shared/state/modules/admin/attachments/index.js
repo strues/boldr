@@ -1,4 +1,4 @@
-import attachmentReducer, { STATE_KEY } from './attachments';
+import attachmentReducer, { STATE_KEY } from './reducer';
 
 export default attachmentReducer;
 

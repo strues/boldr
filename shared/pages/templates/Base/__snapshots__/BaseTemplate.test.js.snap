@@ -1,1 +1,1 @@
-exports[`<BaseTemplate /> renders snapshot 1`] = `<Connect(TemplateProvider) />`;
+exports[`<BaseTemplate /> renders snapshot 1`] = `<Connect(BaseTemplate) />`;

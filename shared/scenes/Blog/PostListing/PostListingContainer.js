@@ -25,24 +25,15 @@ type Props = {
 
 @provideHooks({
   fetch: ({ dispatch }) => {
-    return Promise.all([
-      dispatch(fetchPostsIfNeeded()),
-      dispatch(fetchTagsIfNeeded()),
-    ]);
+    return dispatch(fetchPostsIfNeeded());
+  },
+  defer: ({ dispatch }) => {
+    return dispatch(fetchTagsIfNeeded());
   },
 })
 export class PostListingContainer extends Component {
-  constructor() {
-    super();
-    (this: any).handleChangeLayout = this.handleChangeLayout.bind(this);
-  }
-  componentDidMount() {
-    this.props.fetchTagsIfNeeded();
-    this.props.fetchPostsIfNeeded();
-  }
-
   props: Props;
-  handleChangeLayout() {
+  handleChangeLayout = () => {
     this.props.ui.layout === 'grid'
     ? this.props.changeLayout(LAYOUTS.LIST)
     : this.props.changeLayout(LAYOUTS.GRID);

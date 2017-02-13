@@ -4,7 +4,7 @@ import merge from 'lodash/merge';
 import * as notif from '../../../../core/constants';
 import { notificationSend } from '../../notifications/notifications';
 import * as api from '../../../../core/api';
-import * as t from './constants';
+import * as t from '../../actionTypes';
 import { tag as tagSchema, arrayOfTag } from './schema';
 
 /**
@@ -114,7 +114,7 @@ export function clearTag(tag: Object) {
 export function fetchTaggedPost(name) {
   return (dispatch: Function) => {
     dispatch(requestTaggedPost());
-    return api.doFetchTags(name)
+    return api.doFetchTagPosts(name)
       .then(response => {
         if (response.status !== 200) {
           dispatch(receiveTaggedPostFailed());

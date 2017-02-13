@@ -3,7 +3,7 @@ import { camelizeKeys } from 'humps';
 import * as api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import { notificationSend } from '../../notifications/notifications';
-import * as t from './constants';
+import * as t from '../../actionTypes';
 import { detail, menu } from './schema';
 
 /**

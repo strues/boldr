@@ -1,5 +1,5 @@
 import * as api from '../../../../core/api';
-import * as t from './constants';
+import * as t from '../../actionTypes';
 
 export const showSidebar = () => ({ type: t.SHOW_SIDEBAR });
 export const hideSidebar = () => ({ type: t.HIDE_SIDEBAR });

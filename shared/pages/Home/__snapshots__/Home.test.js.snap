@@ -1,6 +1,6 @@
 exports[`<Home /> renders snapshot 1`] = `
 <div>
-  <Connect(TemplateProvider)
+  <Connect(BaseTemplate)
     footer={<Footer />}
     helmetMeta={
       <HelmetWrapper
@@ -20,6 +20,6 @@ exports[`<Home /> renders snapshot 1`] = `
         Placeholder
       </Row>
     </Grid>
-  </Connect(TemplateProvider)>
+  </Connect(BaseTemplate)>
 </div>
 `;

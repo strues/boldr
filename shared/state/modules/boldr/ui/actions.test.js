@@ -1,7 +1,8 @@
+import * as t from '../../actionTypes';
 import {
   showModal, hideModal, openDrawer, closeDrawer, setMobileDevice, changeLayout, updateDrawerType, updateMedia,
 } from './actions';
-import * as t from './constants';
+
 
 describe('UI Actions', () => {
   describe('showModal', () => {

@@ -1,4 +1,4 @@
-import postsReducer, { STATE_KEY } from './posts';
+import postsReducer, { STATE_KEY } from './reducer';
 import {
   togglePostLayoutView,
   fetchPostsIfNeeded,

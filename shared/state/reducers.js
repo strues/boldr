@@ -7,7 +7,7 @@ import boldrReducer, { STATE_KEY as BOLDR_STATE_KEY } from './modules/boldr';
 import adminReducer, { STATE_KEY as ADMIN_STATE_KEY } from './modules/admin';
 import blogReducer, { STATE_KEY as BLOG_STATE_KEY } from './modules/blog';
 import notificationReducer from './modules/notifications';
-import entities from './modules/entities';
+import entitiesReducer from './modules/entities';
 
 
 const rootReducer = combineReducers({
@@ -16,7 +16,7 @@ const rootReducer = combineReducers({
   [BLOG_STATE_KEY]: blogReducer,
   [ADMIN_STATE_KEY]: adminReducer,
   notifications: notificationReducer,
-  entities,
+  entities: entitiesReducer,
   form: formReducer,
   routing,
 });

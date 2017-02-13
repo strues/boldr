@@ -49,7 +49,7 @@ const PostListing = (props: Props) => {
   );
 
   return (
-    <Grid>
+      <Grid>
       <div style={ { paddingTop: '20px' } }>
         {
           props.layout === 'grid' ? gridView : listView

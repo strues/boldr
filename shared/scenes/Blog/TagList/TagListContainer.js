@@ -16,10 +16,12 @@ type Props = {
 };
 
 @provideHooks({
-  fetch: ({ dispatch, params: { name } }) => dispatch(fetchTaggedPost(name)),
+  fetch: ({ dispatch, params: { name } }) => {
+    return dispatch(fetchTaggedPost(name));
+  },
 })
 class TagListContainer extends Component {
-
+  
   componentDidMount() {
     const name = this.props.params.name;
     this.props.dispatch(fetchTaggedPost(name));
@@ -34,7 +36,7 @@ class TagListContainer extends Component {
       );
     }
     return (
-      <TagList listTags={ this.props.listTags } { ...this.props.currentTag } />
+      <TagList isFetching={ this.props.isFetching } listTags={ this.props.listTags } { ...this.props.currentTag } />
     );
   }
 }

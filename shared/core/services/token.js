@@ -52,8 +52,8 @@ export function requireAuth(nextState, replace) {
   if (!isAuthenticated()) {
     replace({
       pathname: '/account/login',
-      state: { nextPathname: nextState.location.pathname }
-    })
+      state: { nextPathname: nextState.location.pathname },
+    });
   }
 }
 export const isAuthenticated = () => {

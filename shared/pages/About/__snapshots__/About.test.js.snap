@@ -1,6 +1,6 @@
 exports[`<About /> renders snapshot 1`] = `
 <div>
-  <Connect(TemplateProvider)
+  <Connect(BaseTemplate)
     helmetMeta={
       <HelmetWrapper
         title="About" />
@@ -12,6 +12,6 @@ exports[`<About /> renders snapshot 1`] = `
       target="_blank">
       Steven Truesdell
     </a>
-  </Connect(TemplateProvider)>
+  </Connect(BaseTemplate)>
 </div>
 `;
