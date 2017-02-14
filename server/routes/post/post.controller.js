@@ -42,37 +42,36 @@ export async function createPost(req, res, next) {
   }
 
   try {
-    const newPost = await objection.transaction(Post, async Post => {
-      // create the post
-      const createPost = await Post
-      .query()
-      .insert({
-        title: req.body.title,
-        slug: postSlug,
-        excerpt: req.body.excerpt,
-        content: req.body.content,
-        raw_content: req.body.raw_content,
-        feature_image: req.body.feature_image,
-        background_image: req.body.background_image,
-        meta: req.body.meta,
-        attachments: req.body.attachments,
-        published: req.body.published,
-        user_id: req.user.id,
-      });
-      // relate the author to post
-      await createPost.$relatedQuery('author').relate({ id: req.user.id });
-
-      const reqTags = req.body.tags;
-
-      reqTags.map(async (tag) => {
-        const existingTag = await Tag.query().where('name', tag).first();
-        if (existingTag) {
-          createPostTagRelation(existingTag, createPost);
-        } else {
-          createPost.$relatedQuery('tags').insert({ name: tag });
-        }
-      });
+    // create the post
+    const createPost = await Post
+    .query()
+    .insert({
+      title: req.body.title,
+      slug: postSlug,
+      excerpt: req.body.excerpt,
+      content: req.body.content,
+      raw_content: req.body.raw_content,
+      feature_image: req.body.feature_image,
+      background_image: req.body.background_image,
+      meta: req.body.meta,
+      attachments: req.body.attachments,
+      published: req.body.published,
+      user_id: req.user.id,
     });
+    // relate the author to post
+    await createPost.$relatedQuery('author').relate({ id: req.user.id });
+
+    const reqTags = req.body.tags;
+
+    reqTags.map(async (tag) => {
+      const existingTag = await Tag.query().where('name', tag).first();
+      if (existingTag) {
+        createPostTagRelation(existingTag, createPost);
+      } else {
+        createPost.$relatedQuery('tags').insert({ name: tag });
+      }
+    });
+
 
     await Activity.query().insert({
       id: uuid(),

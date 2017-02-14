@@ -140,6 +140,10 @@ export const SELECT_POST = '@boldr/blog/SELECT_POST';
 export const SELECT_POST_SUCCESS = '@boldr/blog/SELECT_POST_SUCCESS';
 export const SELECT_POST_FAILURE = '@boldr/blog/SELECT_POST_FAILURE';
 
+export const FETCH_COMMENTS_REQUEST = '@boldr/blog/FETCH_COMMENTS_REQUEST';
+export const FETCH_COMMENTS_SUCCESS = '@boldr/blog/FETCH_COMMENTS_SUCCESS';
+export const FETCH_COMMENTS_FAILURE = '@boldr/blog/FETCH_COMMENTS_FAILURE';
+
 export const CREATE_COMMENT_REQUEST = '@boldr/blog/CREATE_COMMENT_REQUEST';
 export const CREATE_COMMENT_SUCCESS = '@boldr/blog/CREATE_COMMENT_SUCCESS';
 export const CREATE_COMMENT_FAILURE = '@boldr/blog/CREATE_COMMENT_FAILURE';

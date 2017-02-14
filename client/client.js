@@ -58,7 +58,6 @@ const renderApp = () => {
     );
   });
 };
-
 const unsubscribeHistory = renderApp();
 if (process.env.NODE_ENV !== 'production') {
   window.React = React; // enable debugger

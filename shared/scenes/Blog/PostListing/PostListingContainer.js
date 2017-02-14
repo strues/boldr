@@ -29,6 +29,7 @@ export class PostListingContainer extends Component {
       dispatch(fetchTagsIfNeeded()),
     ]);
   }
+  
   componentDidMount() {
     const { dispatch } = this.props;
     PostListingContainer.fetchData(dispatch);

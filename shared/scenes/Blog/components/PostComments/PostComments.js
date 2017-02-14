@@ -9,6 +9,9 @@ import Comment from '../Comment';
 type Props = {
   userEntities: Object,
   comments: Array<Object>,
+  postId: String,
+  isAuthenticated: Boolean,
+  roleId: Number,
 };
 
 class PostComments extends PureComponent {
@@ -21,18 +24,28 @@ class PostComments extends PureComponent {
   props: Props;
   render() {
     const { comments } = this.props;
+    const canModerate = this.props.roleId === 3;
     return (
       <div className="boldr-comments">
-        PostComments
-        <Button floating fixed secondary onClick={ this.toggleCollapse } style={{ marginBottom: 16 }}>comment</Button>
-        <Collapse collapsed={this.state.collapsed}>
-         <AddComment />
+        { this.props.comments.length } comments
+      {
+        this.props.isAuthenticated
+        ? <Button raised secondary onClick={ this.toggleCollapse } style={ { marginBottom: 16 } }>comment</Button>
+        : null
+      }
+        <Collapse collapsed={ this.state.collapsed }>
+         <AddComment postId={ this.props.postId } />
         </Collapse>
         {
           this.props.comments.map(comment => {
             const commenter = this.props.userEntities[comment.comment_author_id];
             return (
-              <Comment key={ comment.id } commenter={ commenter } comment={ comment } />);
+              <Comment
+                key={ comment.id }
+                commenter={ commenter }
+                canModerate={ canModerate }
+                comment={ comment }
+              />);
           })
         }
       </div>
@@ -42,7 +55,8 @@ class PostComments extends PureComponent {
 
 const mapStateToProps = (state) => {
   return {
-    c: state.blog.comments,
+    isAuthenticated: state.auth.isAuthenticated,
+    roleId: state.users.me.roleId,
   };
 };
 

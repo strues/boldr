@@ -13,7 +13,12 @@ type Props = {
 @connect()
 class AddComment extends PureComponent {
 
-  handleCommentSubmit = (data, postId) => {
+  handleCommentSubmit = (values) => {
+    const data = {
+      content: values.content,
+      raw_content: values.raw_content || null,
+    };
+    const { postId } = this.props;
     this.props.dispatch(newComment(data, postId));
   }
 

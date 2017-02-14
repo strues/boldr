@@ -11,17 +11,23 @@ module.exports.up = async (db) => {
   await db.schema.createTable('role', (table) => {
     // pk
     table.increments('id').unsigned().primary();
+    // uuid
+    table.uuid('uuid').notNullable().defaultTo(db.raw('uuid_generate_v4()'));
+
     table.string('name', 64).notNullable().unique();
     table.string('image', 200).nullable();
     table.text('description').nullable();
+
     table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
     table.timestamp('updated_at').nullable().defaultTo(null);
     // indexes
     table.index('name');
+    table.index('uuid');
   });
   await db.schema.createTable('user', (table) => {
     // pk
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
+
     table.string('email', 100).unique().notNullable();
     table.string('password', 64).notNullable();
     table.string('first_name', 50).notNullable();
@@ -33,6 +39,7 @@ module.exports.up = async (db) => {
     table.text('bio').nullable();
     table.date('birthday', 8).nullable();
     table.string('website', 100).nullable();
+    table.string('language', 10).notNullable().defaultTo('en_US');
     table.json('social').nullable();
     table.boolean('verified').defaultTo(false);
 
@@ -45,6 +52,7 @@ module.exports.up = async (db) => {
     table.index('verified');
     table.index('email');
   });
+  
   await db.schema.createTable('verification_token', (table) => {
     // pk
     table.increments('id').unsigned().primary();
@@ -77,6 +85,8 @@ module.exports.up = async (db) => {
   });
   await db.schema.createTable('tag', (table) => {
     table.increments('id').unsigned().primary();
+    // uuid
+    table.uuid('uuid').notNullable().defaultTo(db.raw('uuid_generate_v4()'));
     table.string('name').notNullable().unique();
     table.string('description').nullable();
 
@@ -86,7 +96,7 @@ module.exports.up = async (db) => {
     // pk | uuid
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
     table.string('title', 140).unique().notNullable();
-    table.string('slug').unique().notNullable();
+    table.string('slug', 140).unique().notNullable();
     table.string('feature_image', 255).nullable();
     table.string('background_image', 255).nullable();
     table.json('attachments').nullable();
@@ -149,6 +159,8 @@ module.exports.up = async (db) => {
   });
   await db.schema.createTable('menu', (table) => {
     table.increments('id').unsigned().primary();
+    // uuid
+    table.uuid('uuid').notNullable().defaultTo(db.raw('uuid_generate_v4()'));
     table.string('name').notNullable();
     table.string('label').notNullable();
     table.json('attributes').nullable();
@@ -159,6 +171,8 @@ module.exports.up = async (db) => {
   });
   await db.schema.createTable('menu_detail', (table) => {
     table.increments('id').unsigned().primary();
+    // uuid
+    table.uuid('uuid').notNullable().defaultTo(db.raw('uuid_generate_v4()'));
     table.string('label', 50).notNullable();
     table.string('name', 50).notNullable();
     table.string('attribute', 255).nullable();
@@ -168,6 +182,7 @@ module.exports.up = async (db) => {
     table.string('icon').nullable();
 
     table.index('label');
+    table.index('uuid');
     table.index('link');
   });
   await db.schema.createTable('gallery', (table) => {

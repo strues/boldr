@@ -86,7 +86,8 @@ describe('Posts API Endpoint', async () => {
           });
 
     expect(status).toBe(201);
-    expect(typeof body).toBe('string');
+    expect(typeof body).toBe('object');
+    expect(body.published).toEqual(true);
   });
   it('POST /posts -- Creating a post fails if it already exists', async () => {
     const { status, body } = await agent

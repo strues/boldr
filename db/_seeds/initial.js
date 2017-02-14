@@ -50,6 +50,7 @@ function seed(knex, Promise) {
         website: 'https://boldr.io',
         profile_image: 'https://boldr.io/images/unknown-avatar.png',
         birthday: '01/01/1988',
+        language: 'en_US',
         social: {
           facebook: {
             url: 'www.facebook.com',
@@ -82,6 +83,7 @@ function seed(knex, Promise) {
         website: 'https://boldr.io',
         profile_image: 'https://boldr.io/images/unknown-avatar.png',
         birthday: '01/01/1988',
+        language: 'en_US',
         social: {
           facebook: {
             url: 'www.facebook.com',
@@ -114,6 +116,7 @@ function seed(knex, Promise) {
         website: 'https://boldr.io',
         profile_image: 'https://boldr.io/images/unknown-avatar.png',
         birthday: '01/01/1988',
+        language: 'en_US',
         social: {
           facebook: {
             url: 'www.facebook.com',

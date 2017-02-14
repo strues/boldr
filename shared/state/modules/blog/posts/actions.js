@@ -7,7 +7,7 @@ import * as notif from '../../../../core/constants';
 import type { Post } from '../../../../types/models';
 import { notificationSend } from '../../../../state/modules/notifications/notifications';
 import * as t from '../../actionTypes';
-import { arrayOfPost } from './schema';
+import { post as postSchema, arrayOfPost } from './schema';
 
 export function togglePostLayoutView() {
   return { type: t.TOGGLE_POST_LAYOUT };
@@ -52,7 +52,6 @@ export function fetchPosts() {
         }
 
         const camelizedJson = camelizeKeys(response.body);
-        // const normalized = normalize(camelizedJson, arrayOf(postSchema, { idAttribute: 'slug' }));
         const normalizedData = normalize(response.body, arrayOfPost);
         // console.log(normalized)
         dispatch(receivePosts(normalizedData));
@@ -113,10 +112,9 @@ export function createPost(data: Post) {
     dispatch(beginCreatePost());
     return api.createPost(data)
       .then(response => {
-        if (response.status !== 201) {
-          dispatch(errorCreatingPost(response));
-        }
-        dispatch(createPostSuccess(response));
+        const camelizedJson = camelizeKeys(response.body);
+        const normalizedData = normalize(response.body, postSchema);
+        dispatch(createPostSuccess(normalizedData));
         dispatch(notificationSend(notif.MSG_CREATE_POST_SUCCESS));
       })
       .catch(err => {
@@ -130,10 +128,10 @@ const beginCreatePost = () => {
   return { type: t.CREATE_POST_REQUEST };
 };
 
-const createPostSuccess = (response: Object) => {
+const createPostSuccess = (normalizedData: Object) => {
   return {
     type: t.CREATE_POST_SUCCESS,
-    payload: response.body,
+    payload: normalizedData,
   };
 };
 

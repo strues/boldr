@@ -5,9 +5,11 @@ import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 import expressValidator from 'express-validator';
 import morgan from 'morgan';
+import expressWinston from 'express-winston';
 import flash from 'express-flash';
 import busboy from 'connect-busboy';
 import hpp from 'hpp';
+import winstonInstance from '../services/logger';
 import getConfig from '../../config/get';
 
 // Attach a unique "nonce" to every response.  This allows use to declare
@@ -55,5 +57,15 @@ export default (app) => {
     },
   }));
   app.use(hpp());
+  if (process.env.NODE_ENV !== 'production') {
+    expressWinston.requestWhitelist.push('body');
+    expressWinston.responseWhitelist.push('body');
+    app.use(expressWinston.logger({
+      winstonInstance,
+      meta: true,
+      msg: 'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
+      colorStatus: true,
+    }));
+  }
   app.use(flash());
 };

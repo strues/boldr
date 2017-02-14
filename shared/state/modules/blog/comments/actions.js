@@ -6,7 +6,7 @@ import * as api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import { notificationSend } from '../../notifications/notifications';
 import * as t from '../../actionTypes';
-
+import { comment as commentSchema } from './schema';
 /**
   * NEW COMMENT ACTIONS
   * -------------------------
@@ -21,7 +21,10 @@ export function newComment(data, postId) {
         if (response.status !== 201) {
           dispatch(errorAddingComment(response));
         }
-        dispatch(newCommentSuccess(response));
+        const camelizedJson = camelizeKeys(response.body);
+        // const normalized = normalize(camelizedJson, arrayOf(postSchema, { idAttribute: 'slug' }));
+        const normalizedData = normalize(response.body, commentSchema);
+        dispatch(newCommentSuccess(normalizedData));
         dispatch(notificationSend(notif.MSG_NEW_COMMENT_SUCCESS));
       })
       .catch(err => {
@@ -35,10 +38,10 @@ const beginNewComment = () => {
   return { type: t.CREATE_COMMENT_REQUEST };
 };
 
-const newCommentSuccess = (response: Object) => {
+const newCommentSuccess = (normalizedData: Object) => {
   return {
     type: t.CREATE_COMMENT_SUCCESS,
-    payload: response.body,
+    payload: normalizedData,
   };
 };
 

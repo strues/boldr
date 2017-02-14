@@ -44,7 +44,11 @@ const SinglePost = (props: Props) => {
             <Row>
               <Col sm={ 12 } md={ 8 } lg={ 9 }>
                 <PostContent { ...props.currentPost } />
-                <PostComments comments={ postComments } userEntities={ props.entities.users } />
+                <PostComments
+                  comments={ postComments }
+                  postId={ props.currentPost.id }
+                  userEntities={ props.entities.users }
+                />
               </Col>
               {
                 props.currentPost.tags

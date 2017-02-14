@@ -13,6 +13,7 @@ export const STATE_KEY = 'posts';
 const all = (state = {}, action) => {
   switch (action.type) {
     case t.FETCH_POSTS_SUCCESS:
+    case t.CREATE_POST_SUCCESS:
       return {
         ...state,
         ...action.payload.entities.posts,
