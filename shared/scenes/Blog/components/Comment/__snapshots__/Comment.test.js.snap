@@ -1,0 +1,54 @@
+exports[`<Comment /> renders snapshot 1`] = `
+<div
+  className="boldr-comment">
+  <styled.section>
+    <styled.div>
+      <Avatar
+        role="presentation"
+        src="google.com"
+        suffixes={
+          Array [
+            "red",
+            "pink",
+            "purple",
+            "deep-purple",
+            "indigo",
+            "blue",
+            "light-blue",
+            "cyan",
+            "teal",
+            "green",
+            "light-green",
+            "lime",
+            "yellow",
+            "amber",
+            "orange",
+            "deep-orange",
+            "brown",
+            "grey",
+            "blue-grey",
+          ]
+        } />
+      <Heading
+        size={4}
+        style={
+          Object {
+            "marginTop": "0px",
+          }
+        }>
+        person
+      </Heading>
+    </styled.div>
+    <styled.div>
+      <styled.div>
+        hey
+      </styled.div>
+      <styled.div>
+        <styled.div>
+          11:25am Feb 14th 2017
+        </styled.div>
+      </styled.div>
+    </styled.div>
+  </styled.section>
+</div>
+`;

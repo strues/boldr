@@ -5,14 +5,20 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 
 import BaseTemplate from '../templates/Base';
-import { Grid, Row, Hero, Footer } from '../../components/index';
+import { Grid, Row, Hero, Footer, Heading } from '../../components/index';
 
 const Home = () => {
   return (
     <div>
       <BaseTemplate
         helmetMeta={ <Helmet title="Home" /> }
-        hero={ <Hero /> }
+        hero={
+          <Hero bgColor="#01579b">
+            <Heading size={ 1 }>
+              A <span style={ { color: 'rgb(229, 0, 80)' } }>modern</span> content management framework.
+            </Heading>
+          </Hero>
+        }
         footer={ <Footer /> }
       >
       <Grid fluid>

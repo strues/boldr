@@ -6,7 +6,24 @@ exports[`<Home /> renders snapshot 1`] = `
       <HelmetWrapper
         title="Home" />
     }
-    hero={<Hero />}>
+    hero={
+      <Hero
+        bgColor="#01579b">
+        <Heading
+          size={1}>
+          A 
+          <span
+            style={
+              Object {
+                "color": "rgb(229, 0, 80)",
+              }
+            }>
+            modern
+          </span>
+           content management framework.
+        </Heading>
+      </Hero>
+    }>
     <Grid
       componentClass="div"
       fluid={true}>

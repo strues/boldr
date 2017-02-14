@@ -4,7 +4,7 @@ import Paper from 'react-md/lib/Papers';
 import Drawer from 'react-md/lib/Drawers';
 import Button from 'react-md/lib/Buttons/Button';
 import Toolbar from 'react-md/lib/Toolbars';
-import { Grid, Col, Row, Heading, Modal } from '../../../../components';
+import { Grid, Col, Row, Heading, Modal, Icon, Social } from '../../../../components';
 
 type Props = {
   profile: Object,
@@ -38,11 +38,19 @@ const ProfileContent = (props: Props) => {
       { profile.website }<br />
       { profile.location }<br />
       { profile.bio }<br />
-      { profile.social.facebook.url }<br />
-      { profile.social.twitter.url }<br />
-      { profile.social.linkedin.url }<br />
-      { profile.social.github.url }<br />
-      { profile.social.google.url }<br />
+      <Social
+        facebook
+        fburl={ profile.social.facebook.url }
+        twitter
+        turl={ profile.social.twitter.url }
+        google
+        gurl={ profile.social.google.url }
+        github
+        ghurl={ profile.social.github.url }
+        linkedin
+        lurl={ profile.social.linkedin.url }
+      />
+
     </div>
   );
 };

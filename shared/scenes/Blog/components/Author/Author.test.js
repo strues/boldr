@@ -4,8 +4,33 @@ import { shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
 import Author from './Author';
 
+const authorProps = {
+  avatar_url: 'abcd',
+  username: 'hey',
+  first_name: 'me',
+  last_name: 'you',
+  bio: 'bio bio',
+  social: {
+    facebook: {
+      url: 'asf',
+    },
+    twitter: {
+      url: 'asf',
+    },
+    google: {
+      url: 'asf',
+    },
+    github: {
+      url: 'asf',
+    },
+    linkedin: {
+      url: 'asf',
+    },
+  },
+};
+
 describe('<Author />', () => {
-  const wrapper = shallow(<Author avatar_url={ 'abcd' } username="hey" />);
+  const wrapper = shallow(<Author { ...authorProps } />);
   it('renders <Author /> without breaking', () => {
     expect(wrapper.find('div').length).toBe(1);
     expect(wrapper.instance().props.username).toBe('hey');

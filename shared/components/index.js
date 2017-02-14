@@ -15,6 +15,14 @@ import Loader from './Loader';
 import KeyVisual from './KeyVisual';
 import { FormCard, FormGroup, InputField } from './Form';
 import RequireAuth from './HOC/Authentication';
+import Social, {
+  Github,
+  Facebook,
+  Twitter,
+  Google,
+  LinkedIn,
+} from './Social';
+
 
 export {
   App,
@@ -38,4 +46,10 @@ export {
   RequireAuth,
   Row,
   Widget,
+  Github,
+  Facebook,
+  Twitter,
+  Google,
+  LinkedIn,
+  Social,
 };
