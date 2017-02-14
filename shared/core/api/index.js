@@ -65,6 +65,15 @@ export const createPost = (data) =>
 export const putPostId = (postData) =>
   apiClient.put(`/posts/${postData.id}`, { data: postData });
 
+export const doNewPostComment = (data, postId) => {
+  const payload = {
+    content: data.content,
+    raw_content: data.raw_content,
+  };
+  return apiClient.post(`/posts/${postId}/comments`, { data: payload });
+};
+
+
   /**
     * SETTINGS API ROUTES
     * -------------------------

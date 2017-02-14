@@ -10,6 +10,7 @@ import OfflinePlugin from 'offline-plugin';
 import appRootDir from 'app-root-dir';
 import WebpackMd5Hash from 'webpack-md5-hash';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import NamedModulesPlugin from 'webpack/lib/NamedModulesPlugin';
 
 import { happyPackPlugin } from '../utils';
 
@@ -146,6 +147,7 @@ export default function webpackConfigFactory(buildOptions) {
           minimize: getConfig('optimizeProductionBuilds'),
         }),
       ),
+      ifDev(() => new NamedModulesPlugin()),
       ifProdClient(
         ifElse(getConfig('optimizeProductionBuilds'))(
           () => new webpack.optimize.UglifyJsPlugin({

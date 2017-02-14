@@ -9,6 +9,7 @@ import Tags from './Tags';
 type Props = {
   tags: Array<Tag>,
   currentTag: Object,
+  dispatch: Function,
   fetchTagsIfNeeded: Function,
 };
 

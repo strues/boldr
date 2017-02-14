@@ -33,14 +33,19 @@ export class ProfileContainer extends Component {
   componentDidMount() {
     const { dispatch, params } = this.props;
 
-   // Fetching data for client side rendering
     ProfileContainer.fetchData(dispatch, params);
   }
+  hideDrawer = () => {
+    this.props.dispatch(closeDrawer());
+  }
+  showDrawer = () => {
+    this.props.dispatch(openDrawer());
+  }
   closeModal = () => {
-    this.props.hideModal();
+    this.props.dispatch(hideModal());
   }
   openModal = () => {
-    this.props.showModal();
+    this.props.dispatch(showModal());
   }
   props: Props;
 
@@ -62,6 +67,8 @@ export class ProfileContainer extends Component {
           closeModal={ this.closeModal }
           openModal={ this.openModal }
           drawer={ this.props.drawer }
+          openDrawer={ this.showDrawer }
+          closeDrawer={ this.hideDrawer }
           { ...this.props }
         />
       </BaseTemplate>
@@ -79,8 +86,8 @@ const mapStateToProps = (state) => {
     isFetching: state.users.isFetching,
   };
 };
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ getProfile, openDrawer, closeDrawer, showModal, hideModal }, dispatch);
-}
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ getProfile, openDrawer, closeDrawer, showModal, hideModal }, dispatch);
+// }
 // $FlowIssue
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);
+export default connect(mapStateToProps)(ProfileContainer);

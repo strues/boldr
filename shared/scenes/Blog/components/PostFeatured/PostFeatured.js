@@ -98,11 +98,12 @@ export const PostFeatured = (props: Props) => {
         </ImgWrapper>
         <Content>
           { props.excerpt }
-          { props.comments.length }
+
         <Row style={ { paddingTop: '20px' } }>
           <Col xs={ 12 }>
             <Row xsEnd>
               <Col xs={ 6 }>
+                { props.comments.length } <span>comments</span>
                 { /* $FlowIssue */ }
                 <Link to={ `/blog/${props.slug}` }>
                   <Button raised primary label="Read More" onClick={ transitionPost } />

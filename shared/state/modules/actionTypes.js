@@ -12,7 +12,7 @@ export const UPDATE_MEDIA = '@boldr/ui/UPDATE_MEDIA';
 export const UPDATE_DRAWER_TYPE = '@boldr/ui/UPDATE_DRAWER_TYPE';
 
 /**
- * Account action types
+ * Auth action types
  * @type {String}
  */
 
@@ -30,6 +30,10 @@ export const SIGNUP_USER_REQUEST = '@boldr/auth/SIGNUP_USER_REQUEST';
 export const SIGNUP_USER_SUCCESS = '@boldr/auth/SIGNUP_USER_SUCCESS';
 export const SIGNUP_USER_FAILURE = '@boldr/auth/SIGNUP_USER_FAILURE';
 
+/**
+ * User action types
+ * @type {String}
+ */
 export const FORGOT_PASSWORD_REQUEST = '@boldr/auth/FORGOT_PASSWORD_REQUEST';
 export const FORGOT_PASSWORD_SUCCESS = '@boldr/auth/FORGOT_PASSWORD_SUCCESS';
 export const FORGOT_PASSWORD_FAILURE = '@boldr/auth/FORGOT_PASSWORD_FAILURE';
@@ -135,6 +139,10 @@ export const TOGGLE_POST_LAYOUT = '@boldr/blog/TOGGLE_POST_LAYOUT';
 export const SELECT_POST = '@boldr/blog/SELECT_POST';
 export const SELECT_POST_SUCCESS = '@boldr/blog/SELECT_POST_SUCCESS';
 export const SELECT_POST_FAILURE = '@boldr/blog/SELECT_POST_FAILURE';
+
+export const CREATE_COMMENT_REQUEST = '@boldr/blog/CREATE_COMMENT_REQUEST';
+export const CREATE_COMMENT_SUCCESS = '@boldr/blog/CREATE_COMMENT_SUCCESS';
+export const CREATE_COMMENT_FAILURE = '@boldr/blog/CREATE_COMMENT_FAILURE';
 
 /**
  * Tag action types
