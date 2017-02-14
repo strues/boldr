@@ -116,31 +116,5 @@ router.route('/:id')
 * @apiError {Object} 401 You must be logged in to comment on a post
 */
 router.post('/:id/comments', isAuthenticated, ctrl.addCommentToPost);
-/**
-* @api {put} /posts/:id/comments/:commentId     Edit comment
-* @apiName EditComment
-* @apiGroup Post
-* @apiPermission member
-* @apiParam   {String}   id   The id (uuid) of the post
-* @apiParam   {String}   commentId  The id (uuid) of the comment
-
-* @apiError {Object} 404 Unable to find a post matching the id.
-* @apiError {Object} 404 Unable to find a comment matching the commentId.
-* @apiError {Object} 401 You must be logged in or an admin to edit
-*/
-router.put('/:id/comments/:commentId', isAuthenticated, ctrl.editComment);
-/**
-* @api {delete} /posts/:id/comments/:commentId     Delete comment
-* @apiName DeleteComment
-* @apiGroup Post
-* @apiPermission admin
-* @apiParam   {String}   id   The id (uuid) of the post
-* @apiParam   {String}   commentId  The id (uuid) of the comment
-
-* @apiError {Object} 404 Unable to find a post matching the id.
-* @apiError {Object} 404 Unable to find a comment matching the commentId.
-* @apiError {Object} 401 You must be logged in or an admin to delete
-*/
-router.delete('/:id/comments/:commentId', isAuthenticated, ctrl.deleteComment);
 
 export default router;

@@ -1,0 +1,41 @@
+exports[`arrayOfComment should match the normalizr-arrayOfComment-schema 1`] = `
+ArraySchema {
+  "schema": EntitySchema {
+    "_getId": [Function],
+    "_idAttribute": "id",
+    "_key": "comments",
+    "_mergeStrategy": [Function],
+    "_processStrategy": [Function],
+    "schema": Object {
+      "commenter": EntitySchema {
+        "_getId": [Function],
+        "_idAttribute": "id",
+        "_key": "users",
+        "_mergeStrategy": [Function],
+        "_processStrategy": [Function],
+        "schema": Object {},
+      },
+    },
+  },
+}
+`;
+
+exports[`comment schema should match the normalizr-comment-schema 1`] = `
+EntitySchema {
+  "_getId": [Function],
+  "_idAttribute": "id",
+  "_key": "comments",
+  "_mergeStrategy": [Function],
+  "_processStrategy": [Function],
+  "schema": Object {
+    "commenter": EntitySchema {
+      "_getId": [Function],
+      "_idAttribute": "id",
+      "_key": "users",
+      "_mergeStrategy": [Function],
+      "_processStrategy": [Function],
+      "schema": Object {},
+    },
+  },
+}
+`;

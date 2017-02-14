@@ -11,13 +11,11 @@ import Icon from './Icon';
 import Loader from './Loader';
 import Paragraph from './Paragraph';
 import KeyVisual from './KeyVisual';
-import FormCard from './Form/FormCard';
-import FormGroup from './Form/FormGroup';
-import TextField from './Form/TextField';
+import { FormCard, FormGroup, InputField } from './Form/FormCard';
+import RequireAuth from './HOC/Authentication';
 
 export {
   PrimaryHeader,
-  TextField,
   Heading,
   Footer,
   Grid,
@@ -34,4 +32,6 @@ export {
   Paragraph,
   KeyVisual,
   FormGroup,
+  RequireAuth,
+  InputField,
 };

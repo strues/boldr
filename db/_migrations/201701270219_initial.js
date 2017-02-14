@@ -135,11 +135,15 @@ module.exports.up = async (db) => {
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
     table.text('content').notNullable();
     table.json('raw_content').nullable();
-    table.uuid('user_id').unsigned().notNullable();
     table.integer('likes').nullable();
     table.integer('dislikes').nullable();
     table.boolean('reported').default(false);
-    table.foreign('user_id').references('id').inTable('user').onDelete('cascade').onUpdate('cascade');
+    table.uuid('comment_author_id').unsigned().notNullable();
+    table.string('comment_author_ip').nullable();
+    table.uuid('comment_parent_id').references('id').inTable('comment');
+
+    table.foreign('comment_author_id').references('id').inTable('user').onDelete('cascade').onUpdate('cascade');
+
     table.timestamp('created_at').defaultTo(db.fn.now());
     table.timestamp('updated_at').defaultTo(db.fn.now());
   });

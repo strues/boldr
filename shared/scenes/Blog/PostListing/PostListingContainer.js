@@ -1,7 +1,6 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
 import { LAYOUTS } from '../../../core/constants';
 import { changeLayout } from '../../../state/modules/boldr/ui';
@@ -16,26 +15,30 @@ type Props = {
   isFetching: Boolean,
   listTags: Object,
   layout: string,
+  dispatch: Function,
   fetchTagsIfNeeded: () => void,
   changeLayout: () => void,
   handleChangeLayout: () => void,
   fetchPostsIfNeeded: () => void,
 };
 
-@provideHooks({
-  fetch: ({ dispatch }) => {
-    return dispatch(fetchPostsIfNeeded());
-  },
-  defer: ({ dispatch }) => {
-    return dispatch(fetchTagsIfNeeded());
-  },
-})
 export class PostListingContainer extends Component {
+  static fetchData(dispatch) {
+    return Promise.all([
+      dispatch(fetchPostsIfNeeded()),
+      dispatch(fetchTagsIfNeeded()),
+    ]);
+  }
+  componentDidMount() {
+    const { dispatch } = this.props;
+    PostListingContainer.fetchData(dispatch);
+  }
+
   props: Props;
   handleChangeLayout = () => {
     this.props.layout === 'grid'
-    ? this.props.changeLayout(LAYOUTS.LIST)
-    : this.props.changeLayout(LAYOUTS.GRID);
+    ? this.props.dispatch(changeLayout(LAYOUTS.LIST))
+    : this.props.dispatch(changeLayout(LAYOUTS.GRID));
   }
   render() {
     return (
@@ -59,6 +62,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {
-  fetchPostsIfNeeded, changeLayout, fetchTagsIfNeeded,
-})(PostListingContainer);
+export default connect(mapStateToProps)(PostListingContainer);

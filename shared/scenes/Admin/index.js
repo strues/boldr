@@ -1,14 +1,14 @@
 import { loadRoute, errorLoading } from '../../core/utils';
-import { requireAuth } from '../../core/services/token';
+import { RequireAuth } from '../../components';
 import DashboardLayout from './Dashboard/DashboardLayout';
 import DashboardContainer from './Dashboard/DashboardContainer';
+
 
 export default (store) => {
   /* istanbul ignore next */
   return {
     path: 'admin',
-    component: DashboardLayout,
-    onEnter: requireAuth,
+    component: RequireAuth(DashboardLayout),
     indexRoute: {
       component: DashboardContainer,
     },

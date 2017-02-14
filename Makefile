@@ -49,3 +49,6 @@ combine-coverage:
 
 test-ci:
 	NODE_ENV=test jest -w2 --config=${NODE_CFG} && cp ${COVERAGE} ${C_NODE} && jest -w2 --config=${BROWSER_CFG} && cp ${COVERAGE} ${C_BROWSER} && node ./internal/scripts/mapCoverage.js
+
+nuke:
+	rm -rf .happypack boldrCMS node_modules/.cache

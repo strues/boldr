@@ -16,7 +16,7 @@ const vendorDLLsFailed = err => {
     title: 'vendorDLL',
     level: 'error',
     message: 'Unfortunately an error occured whilst trying to build the vendor dll(s) used by the development server. Please check the console for more information.',
-    notify: true,
+    notify: false,
   });
   if (err) {
     console.error(err);

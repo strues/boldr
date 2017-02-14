@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import type { ReactElement } from 'types/react';
 import { push } from 'react-router-redux';
-import { provideHooks } from 'redial';
 import { Grid, Col, Loader } from '../../../components/index';
 import { loadSiteActivity, fetchStats } from '../../../state/modules/admin/dashboard/actions';
 
@@ -19,18 +18,16 @@ type Props = {
   stats: Object,
 };
 
-@provideHooks({
-  fetch: ({ dispatch }) => {
-    return dispatch(loadSiteActivity());
-  },
-  defer: ({ dispatch }) => {
-    return dispatch(fetchStats());
-  },
-})
 class DashboardContainer extends Component {
+  static fetchData(dispatch) {
+    return Promise.all([
+      dispatch(loadSiteActivity()),
+      dispatch(fetchStats()),
+    ]);
+  }
   componentDidMount() {
-    this.props.loadSiteActivity();
-    this.props.fetchStats();
+    const { dispatch } = this.props;
+    DashboardContainer.fetchData(dispatch);
   }
   props: Props;
   render() {
@@ -53,4 +50,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { loadSiteActivity, fetchStats })(DashboardContainer);
+export default connect(mapStateToProps)(DashboardContainer);

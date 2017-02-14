@@ -38,7 +38,8 @@ class HotNodeServer {
           level: 'error',
           message: 'Error in server execution, check the console for more info.',
         });
-        console.error(data.toString().trim());
+
+        console.log(data.toString().trim());
       });
       this.server = newServer;
     };

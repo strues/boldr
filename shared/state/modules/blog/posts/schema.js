@@ -1,13 +1,7 @@
 import { schema } from 'normalizr';
-import { user } from '../../account/user/schema';
+import { user } from '../../users/schema';
 import { tag } from '../tags/schema';
-
-const comment = new schema.Entity('comments', {
-  commenter: user,
-}, {
-  processStrategy: (value, parent, key) => {
-    return { ...value, post: parent.id };
-  } }, { idAttribute: 'id' });
+import { comment } from '../comments/schema';
 
 const post = new schema.Entity('posts', {
   author: user,

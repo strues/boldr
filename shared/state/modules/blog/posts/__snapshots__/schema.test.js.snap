@@ -15,6 +15,25 @@ ArraySchema {
         "_processStrategy": [Function],
         "schema": Object {},
       },
+      "comments": Array [
+        EntitySchema {
+          "_getId": [Function],
+          "_idAttribute": "id",
+          "_key": "comments",
+          "_mergeStrategy": [Function],
+          "_processStrategy": [Function],
+          "schema": Object {
+            "commenter": EntitySchema {
+              "_getId": [Function],
+              "_idAttribute": "id",
+              "_key": "users",
+              "_mergeStrategy": [Function],
+              "_processStrategy": [Function],
+              "schema": Object {},
+            },
+          },
+        },
+      ],
       "tags": Array [
         EntitySchema {
           "_getId": [Function],
@@ -48,6 +67,25 @@ EntitySchema {
       "_processStrategy": [Function],
       "schema": Object {},
     },
+    "comments": Array [
+      EntitySchema {
+        "_getId": [Function],
+        "_idAttribute": "id",
+        "_key": "comments",
+        "_mergeStrategy": [Function],
+        "_processStrategy": [Function],
+        "schema": Object {
+          "commenter": EntitySchema {
+            "_getId": [Function],
+            "_idAttribute": "id",
+            "_key": "users",
+            "_mergeStrategy": [Function],
+            "_processStrategy": [Function],
+            "schema": Object {},
+          },
+        },
+      },
+    ],
     "tags": Array [
       EntitySchema {
         "_getId": [Function],

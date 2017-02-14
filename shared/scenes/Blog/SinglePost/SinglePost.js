@@ -34,7 +34,7 @@ const SinglePost = (props: Props) => {
   `;
   const postAuthor = props.entities.users[props.currentPost.user_id];
   const postComments = props.currentPost.comments.map(c => props.entities.comments[c]);
-  const userEntities = props.entities.users;
+
   const postTags = props.currentPost.tags.map(id => props.entities.tags[id]);
   return (
         <div>

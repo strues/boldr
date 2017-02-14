@@ -1,8 +1,6 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { provideHooks } from 'redial';
-import { connect } from 'react-redux';
 import { Grid, Col, Row, Loader } from '../../../components';
 import { fetchTaggedPost } from '../../../state/modules/blog/tags/actions';
 import type { Post } from '../../../types/models';

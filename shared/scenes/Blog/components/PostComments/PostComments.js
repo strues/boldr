@@ -18,7 +18,7 @@ class PostComments extends Component {
         PostComments
         {
           this.props.comments.map(comment => {
-            const commenter = this.props.userEntities[comment.user_id];
+            const commenter = this.props.userEntities[comment.comment_author_id];
             return (
               <Comment key={ comment.id } commenter={ commenter } comment={ comment } />);
           })

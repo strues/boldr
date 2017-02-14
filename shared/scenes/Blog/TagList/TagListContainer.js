@@ -1,7 +1,6 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
 import { Grid, Col, Row, Loader } from '../../../components';
 import { fetchTaggedPost } from '../../../state/modules/blog/tags/actions';
@@ -15,17 +14,19 @@ type Props = {
   dispatch: () => void,
 };
 
-@provideHooks({
-  fetch: ({ dispatch, params: { name } }) => {
-    return dispatch(fetchTaggedPost(name));
-  },
-})
 export class TagListContainer extends Component {
-
-  componentDidMount() {
-    const name = this.props.params.name;
-    this.props.dispatch(fetchTaggedPost(name));
+  static fetchData(dispatch, params) {
+    return Promise.all([
+      dispatch(fetchTaggedPost(params.name)),
+    ]);
   }
+  componentDidMount() {
+    const { dispatch, params } = this.props;
+
+   // Fetching data for client side rendering
+    TagListContainer.fetchData(dispatch, params);
+  }
+
   props: Props;
   render() {
     if (this.props.isFetching) {

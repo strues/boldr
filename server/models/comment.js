@@ -10,7 +10,7 @@ class Comment extends BaseModel {
     return 'comment';
   }
   static addTimestamps = true;
-  static hidden = ['author.password'];
+  static hidden = ['commenter.password'];
 
   static get idColumn() {
     return 'id';
@@ -22,7 +22,7 @@ class Comment extends BaseModel {
         relation: Model.BelongsToOneRelation,
         modelClass: User,
         join: {
-          from: 'comment.user_id',
+          from: 'comment.comment_author_id',
           to: 'user.id',
         },
       },
@@ -36,6 +36,14 @@ class Comment extends BaseModel {
             to: 'post_comment.post_id',
           },
           to: 'post.id',
+        },
+      },
+      replies: {
+        relation: Model.HasManyRelation,
+        modelClass: Comment,
+        join: {
+          from: 'comment.id',
+          to: 'comment.comment_parent_id',
         },
       },
     };

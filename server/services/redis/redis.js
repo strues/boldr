@@ -35,4 +35,3 @@ redisClient.on('+node', (data) => {
 });
 
 export default redisClient;
-export { pub, sub };

@@ -1,7 +1,6 @@
 /* @flow */
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
-import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
 import { showModal, hideModal } from '../../../state/modules/boldr/ui/actions';
 import { loadSiteMembers, memberSelected, updateMember } from '../../../state/modules/admin/members/actions';
@@ -9,6 +8,7 @@ import Members from './Members';
 
 type Props = {
   members: Object,
+  dispatch: Function,
   memberSelected: Function,
   loadSiteMembers: Function,
   updateMember: Function,
@@ -16,12 +16,14 @@ type Props = {
   showModal: () => void,
   ui: Object,
 };
-@provideHooks({
-  fetch: ({ dispatch }) => {
-    return dispatch(loadSiteMembers());
-  },
-})
+
 export class MembersContainer extends Component {
+  static fetchData(dispatch) {
+    return Promise.all([
+      dispatch(loadSiteMembers()),
+    ]);
+  }
+
   constructor(props: Props) {
     super(props);
     (this: any).toggleUser = this.toggleUser.bind(this);
@@ -31,19 +33,23 @@ export class MembersContainer extends Component {
   }
   state: Object = { userId: '' };
 
+  componentDidMount() {
+    const { dispatch } = this.props;
+    MembersContainer.fetchData(dispatch);
+  }
   props: Props;
 
   closeModal() {
-    this.props.hideModal();
+    this.props.dispatch(hideModal());
   }
   openModal() {
-    this.props.showModal();
+    this.props.dispatch(showModal());
   }
 
   toggleUser(userId: String) {
     this.setState({ userId });
-    this.props.memberSelected(userId);
-    this.props.showModal();
+    this.props.dispatch(memberSelected(userId));
+    this.props.dispatch(showModal());
   }
 
   handleSubmit(values: Object) {
@@ -55,7 +61,7 @@ export class MembersContainer extends Component {
       id: this.state.userId,
     };
 
-    this.props.updateMember(userData);
+    this.props.dispatch(updateMember(userData));
   }
   render() {
     return (
@@ -79,6 +85,4 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-export default connect(mapStateToProps, {
-  memberSelected, updateMember, loadSiteMembers, showModal, hideModal,
-})(MembersContainer);
+export default connect(mapStateToProps)(MembersContainer);

@@ -1,5 +1,4 @@
-import redisClient, { pub, sub } from './redis';
+import redisClient from './redis';
 
 
 export default redisClient;
-export { pub, sub };

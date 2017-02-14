@@ -1,7 +1,6 @@
 /* @flow */
 import { execSync } from 'child_process';
 import HappyPack from 'happypack';
-import notifier from 'node-notifier';
 import chalk from 'chalk';
 import appRootDir from 'app-root-dir';
 
@@ -21,7 +20,7 @@ export function happyPackPlugin({ name, loaders }: HappyPackConfig) {
   return new HappyPack({
     id: name,
     verbose: false,
-    threads: 5,
+    threads: 3,
     loaders,
   });
 }
@@ -36,12 +35,12 @@ type NotificationOptions = {
 export function log(options: NotificationOptions) {
   const title = `${options.title.toUpperCase()}`;
 
-  if (options.notify) {
-    notifier.notify({
-      title,
-      message: options.message,
-    });
-  }
+  // if (options.notify) {
+  //   notifier.notify({
+  //     title,
+  //     message: options.message,
+  //   });
+  // }
 
   const level = options.level || 'info';
   const msg = `==> ${title} -> ${options.message}`;
@@ -54,7 +53,7 @@ export function log(options: NotificationOptions) {
       console.log(chalk.white.bgRed(msg));
       break;
     case 'info':
-    default: console.log(chalk.green(msg));
+    default: console.log(chalk.cyan(msg));
   }
 }
 

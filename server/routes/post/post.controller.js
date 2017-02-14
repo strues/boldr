@@ -111,7 +111,7 @@ export async function getId(req, res, next) {
     const post = await Post
       .query()
       .findById(req.params.id)
-      .eager('[tags, author, comments, comments.commenter]')
+      .eager('[tags, author, comments, comments.commenter, comments.replies]')
       .omit('password')
       .first();
     return responseHandler(res, 200, post);
@@ -190,7 +190,8 @@ export async function addCommentToPost(req, res, next) {
       .insert({
         content: req.body.content,
         raw_content: req.body.raw_content,
-        user_id: req.user.id,
+        comment_author_id: req.user.id,
+        comment_author_ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
       });
     await newComment.$relatedQuery('commenter').relate({ id: req.user.id });
 
@@ -198,61 +199,6 @@ export async function addCommentToPost(req, res, next) {
 
     return responseHandler(res, 201, newComment);
   } catch (error) {
-    return next(error);
-  }
-}
-
-export async function editComment(req, res, next) {
-  try {
-    const post = await Post
-      .query()
-      .findById(req.params.id);
-
-    if (!post) {
-      return res.status(404).json({ message: `Unable to find a post with the ID: ${req.params.id}.` });
-    }
-    const comment = await Comment
-    .query()
-    .findById(req.params.commentId);
-
-    if (!comment) {
-      return res.status(404).json({ message: `Unable to find a post with the ID: ${req.params.commentId}.` });
-    }
-    if (req.user.id !== comment.user_id || req.user.role !== 'Admin') {
-      return res.status(401).json('You dont have permission to edit this comment.');
-    }
-    const editedComment = await Comment
-      .query()
-      .update({
-        content: req.body.content,
-        raw_content: req.body.raw_content,
-      })
-      .where({ id: req.params.commentId });
-
-    return responseHandler(res, 202, 'Saved');
-  } catch (error) {
-    return next(error);
-  }
-}
-
-export async function deleteComment(req, res, next) {
-  try {
-    const post = await Post
-      .query()
-      .findById(req.params.id);
-
-    if (!post) {
-      return res.status(404).json({ message: `Unable to find a post with the ID: ${req.params.id}.` });
-    }
-    await Comment
-        .query()
-        .delete()
-        .where('id', req.params.commentId)
-        .first();
-
-    return res.status(204).send({});
-  } catch (error) {
-    /* istanbul ignore next */
     return next(error);
   }
 }

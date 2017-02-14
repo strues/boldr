@@ -3,7 +3,7 @@ import { Field, FieldArray, reduxForm } from 'redux-form';
 import styled from 'styled-components';
 import Button from 'react-md/lib/Buttons';
 import FontIcon from 'react-md/lib/FontIcons';
-import { TextField } from '../../../../../../components';
+import { InputField } from '../../../../../../components';
 
 const TagList = styled.ul`
   list-style-type: none;
@@ -32,7 +32,7 @@ const RenderTags = ({ fields, meta: { touched, error } }) => (
           name={ name }
           type="text"
           label="tag"
-          component={ TextField }
+          component={ InputField }
         />
       </TagItem>)
     }

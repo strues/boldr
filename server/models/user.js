@@ -76,7 +76,7 @@ class User extends BaseModel {
         modelClass: Comment,
         join: {
           from: 'user.id',
-          to: 'comment.user_id',
+          to: 'comment.comment_author_id',
         },
       },
     };

@@ -68,6 +68,11 @@ class BaseModel extends Model {
 
     return json;
   }
+  async reload() {
+    const model = await this.$query();
+    Object.assign(this, model);
+    return this;
+  }
 }
 
 export default BaseModel;

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Button from 'react-md/lib/Buttons/Button';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
-import { TextField, Col, Row, Heading, FormGroup } from '../../../../../../components';
+import { InputField, Col, Row, Heading, FormGroup } from '../../../../../../components';
 import { uploadPostImage } from '../../../../../../state/modules/admin/attachments/actions';
 import RenderTags from '../RenderTags';
 import FieldEditor from './FieldEditor';
@@ -66,7 +66,7 @@ class NewPostForm extends Component {
                   id="post-title"
                   name="title"
                   type="text"
-                  component={ TextField }
+                  component={ InputField }
                   label="Post Title"
                   tabIndex={ 0 }
                 />
@@ -107,7 +107,7 @@ class NewPostForm extends Component {
                   name="excerpt"
                   id="post-excerpt"
                   type="text"
-                  component={ TextField }
+                  component={ InputField }
                   label="Excerpt"
                   tabIndex={ 3 }
 

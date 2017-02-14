@@ -2,7 +2,6 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { provideHooks } from 'redial';
 import { Link } from 'react-router';
 import MenuButton from 'react-md/lib/Menus/MenuButton';
 import Toolbar from 'react-md/lib/Toolbars';
@@ -14,20 +13,24 @@ import TaggedPostMenu from '../TaggedPostMenu';
 
 type Props = {
   currentTag: Object,
+  params: Object,
   isFetching: boolean,
   name: string,
   listTags: Object,
   dispatch: () => void,
 };
 
-@provideHooks({
-  fetch: ({ dispatch, params: { name } }) => dispatch(fetchTaggedPost(name)),
-})
 class TaggedPost extends Component {
-
+  static fetchData(dispatch, params) {
+    return Promise.all([
+      dispatch(fetchTaggedPost(params.name)),
+    ]);
+  }
   componentDidMount() {
-    const name = this.props.name;
-    this.props.dispatch(fetchTaggedPost(name));
+    const { dispatch, params } = this.props;
+
+   // Fetching data for client side rendering
+    TaggedPost.fetchData(dispatch, params);
   }
 
   props: Props;

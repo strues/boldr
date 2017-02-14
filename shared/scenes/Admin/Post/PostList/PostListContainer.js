@@ -1,6 +1,5 @@
 /* @flow */
 import React, { PureComponent } from 'react';
-import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
 import type { ReactElement } from '../../../../types/react';
 import type { Post } from '../../../../types/models';
@@ -17,23 +16,25 @@ type Props = {
   handleDeleteClick: Function,
 };
 
-@provideHooks({
-  fetch: ({ dispatch }) => {
-    return dispatch(fetchPostsIfNeeded());
-  },
-})
 export class PostListContainer extends PureComponent {
+  static fetchData(dispatch) {
+    return Promise.all([
+      dispatch(fetchPostsIfNeeded()),
+    ]);
+  }
   constructor(props: Props) {
     super(props);
     (this: any).handleDeleteClick = this.handleDeleteClick.bind(this);
   }
   componentDidMount() {
-    this.props.fetchPostsIfNeeded();
+    const { dispatch } = this.props;
+    PostListContainer.fetchData(dispatch);
   }
+
   props: Props;
 
   handleDeleteClick(postId: string): void {
-    this.props.deletePost(postId);
+    this.props.dispatch(deletePost(postId));
   }
   render() {
     return (
@@ -48,4 +49,4 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, { fetchPostsIfNeeded, deletePost })(PostListContainer);
+export default connect(mapStateToProps)(PostListContainer);

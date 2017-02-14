@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { provideHooks } from 'redial';
 import { fetchTemplateResource } from '../../../state/modules/boldr/templates/actions';
 import { fetchMenusIfNeeded, getByLabel } from '../../../state/modules/boldr/menu';
 import { logout } from '../../../state/modules/auth/actions';
@@ -20,6 +19,7 @@ type Props = {
   navigate: Function,
   dispatch: Function,
   actions: Object,
+  isMobile: Boolean,
   ui: Object,
   menu: Object,
   logo: Object,
@@ -51,10 +51,9 @@ const FooterWrapper = styled.footer`
 
 const mapStateToProps = (state: Object) => {
   return {
-    boldr: state.boldr,
     auth: state.auth,
     menu: state.boldr.menu.main,
-    ui: state.boldr.ui,
+    isMobile: state.boldr.ui.isMobile,
   };
 };
 
@@ -66,11 +65,13 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-@provideHooks({
-  fetch: ({ dispatch }) => dispatch(fetchMenusIfNeeded()),
-})
 @connect(mapStateToProps, mapDispatchToProps)
 class BaseTemplate extends PureComponent {
+  static fetchData(dispatch, params) {
+    return Promise.all([
+      dispatch(fetchMenusIfNeeded()),
+    ]);
+  }
   constructor() {
     super();
     (this: any).handleLogoClick = this.handleLogoClick.bind(this);
@@ -78,7 +79,9 @@ class BaseTemplate extends PureComponent {
     (this: any).handleDashClick = this.handleDashClick.bind(this);
   }
   componentDidMount() {
-    this.props.dispatch(fetchMenusIfNeeded());
+    const { dispatch } = this.props;
+
+    BaseTemplate.fetchData(dispatch);
   }
   handleLogoClick = (e) => {
     this.props.navigate('/');
@@ -99,7 +102,7 @@ class BaseTemplate extends PureComponent {
             auth={ this.props.auth }
             logo={ this.props.logo }
             menu={ this.props.menu }
-            isMobile={ this.props.ui.isMobile }
+            isMobile={ this.props.isMobile }
             handleLogoClick= { this.handleLogoClick }
             handleLogoutClick={ this.handleLogoutClick }
             handleDashClick={ this.handleDashClick }

@@ -1,7 +1,6 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { provideHooks } from 'redial';
 import Helmet from 'react-helmet';
 import { bindActionCreators } from 'redux';
 import { Loader } from '../../components';
@@ -14,6 +13,7 @@ type Props = {
   params: Object,
   user: Object,
   getProfile: Function,
+  dispatch: Function,
   isFetching: Boolean,
   profile: Object,
   modal: Boolean,
@@ -24,14 +24,17 @@ type Props = {
   showModal: Function,
 };
 
-@provideHooks({
-  fetch: ({ dispatch, params: { username } }) => dispatch(getProfile(username)),
-})
 export class ProfileContainer extends Component {
+  static fetchData(dispatch, params) {
+    return Promise.all([
+      dispatch(getProfile(params.username)),
+    ]);
+  }
   componentDidMount() {
-    const username = this.props.params.username;
+    const { dispatch, params } = this.props;
 
-    this.props.getProfile(username);
+   // Fetching data for client side rendering
+    ProfileContainer.fetchData(dispatch, params);
   }
   closeModal = () => {
     this.props.hideModal();

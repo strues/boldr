@@ -4,7 +4,7 @@ import activityRoutes from './activity/activity.routes';
 import adminRoutes from './admin/admin.routes';
 import attachmentRoutes from './attachment/attachment.routes';
 import authRoutes from './auth/auth.routes';
-
+import commentRoutes from './comment/comment.routes';
 import menuDetailRoutes from './menu/detail/menuDetail.routes';
 import menuRoutes from './menu/menu.routes';
 import pageRoutes from './page/page.routes';
@@ -62,6 +62,7 @@ export default (app) => {
   app.use(`${API_PREFIX}/admin`, adminRoutes);
   app.use(`${API_PREFIX}/attachments`, attachmentRoutes);
   app.use(`${API_PREFIX}/auth`, authRoutes);
+  app.use(`${API_PREFIX}/comments`, commentRoutes);
   app.use(`${API_PREFIX}/menu-details`, menuDetailRoutes);
   app.use(`${API_PREFIX}/menus`, menuRoutes);
   app.use(`${API_PREFIX}/pages`, pageRoutes);

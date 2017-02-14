@@ -2,7 +2,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Button from 'react-md/lib/Buttons';
-import { TextField } from '../../../components/Form';
+import { InputField } from '../../../components/Form';
 import { Row, Col } from '../../../components';
 
 type Props = {
@@ -17,14 +17,14 @@ const LoginForm = (props: Props) => {
         id="email"
         name="email"
         type="email"
-        component={ TextField }
+        component={ InputField }
         label="Email address"
       />
       <Field
         id="password"
         name="password"
         type="password"
-        component={ TextField }
+        component={ InputField }
         label="Password"
       />
       <Button style={ { marginTop: '25px' } } raised primary label="Login" type="submit" />

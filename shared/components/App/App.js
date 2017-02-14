@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import debounce from 'lodash/debounce';
 import { createStructuredSelector } from 'reselect';
-import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
 import testIfMobile from '../../core/utils/testIfMobile';
 import { fetchSettingsIfNeeded, selectSettings } from '../../state/modules/boldr/settings';
@@ -28,14 +27,14 @@ const mapStateToProps = createStructuredSelector({
   isMobile: makeSelectMobile(),
 });
 
-
-@provideHooks({
-  fetch: ({ dispatch }) => {
-    return dispatch(fetchSettingsIfNeeded());
-  },
-})
 @connect(mapStateToProps)
 class App extends Component {
+  static fetchData(dispatch) {
+    return Promise.all([
+      dispatch(fetchSettingsIfNeeded()),
+    ]);
+  }
+
   static childContextTypes = {
     dispatch: React.PropTypes.func,
     isMobile: React.PropTypes.bool,
@@ -48,7 +47,7 @@ class App extends Component {
 
   componentDidMount() {
     const { dispatch, location } = this.props;
-
+    App.fetchData(dispatch);
     window.addEventListener('resize', debounce(event => {
       dispatch(setMobileDevice(testIfMobile()));
     }, 1000));

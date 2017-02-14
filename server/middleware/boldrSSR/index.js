@@ -7,7 +7,6 @@ import createMemoryHistory from 'react-router/lib/createMemoryHistory';
 import { syncHistoryWithStore } from 'react-router-redux';
 import styleSheet from 'styled-components/lib/models/StyleSheet';
 import Helmet from 'react-helmet';
-import { trigger } from 'redial';
 
 import AppRoot from '../../../shared/components/AppRoot';
 import createRoutes from '../../../shared/scenes';
@@ -25,10 +24,7 @@ function renderAppToString(store, renderProps, apiClient) {
     </AppRoot>
   );
 }
-/**
- * An express middleware that is capabable of service our React application,
- * supporting server side rendering of the application.
- */
+
 function boldrSSR(req, res, next) {
   if (typeof res.locals.nonce !== 'string') {
     throw new Error('A "nonce" value has not been attached to the response');
@@ -50,27 +46,19 @@ function boldrSSR(req, res, next) {
   const { dispatch, getState } = store;
 
   match({ history, routes, location: req.url }, (error, redirectLocation, renderProps) => {
-    debug(`path : ${req.url}`);
-    if (error || !renderProps) {
-      return next(error);
-    }
-    if (redirectLocation) {
-      debug('---------------- redirectLocation ----------------');
-      debug(redirectLocation);
-      res.redirect(redirectLocation.pathname + redirectLocation.search);
-    }
-    const { components } = renderProps;
-    const locals = {
-      path: renderProps.location.pathname,
-      query: renderProps.location.query,
-      params: renderProps.params,
-      dispatch,
-    };
+    if (error) return res.status(500).json(error);
+    if (!renderProps) return res.status(404);
+    if (redirectLocation) return res.redirect(redirectLocation.pathname + redirectLocation.search);
 
-    trigger('fetch', components, locals)
-       .then(() => {
+    const promises = renderProps.components
+      .filter(component => component.fetchData)
+      .map(component => component.fetchData(store.dispatch, renderProps.params));
+
+    Promise.all(promises)
+       .then((data) => {
          const preloadedState = store.getState();
          const reactAppString = renderAppToString(store, renderProps, apiClient);
+
          const helmet = Helmet.rewind();
          // render styled-components styleSheets to string.
          const styles = styleSheet.rules().map(rule => rule.cssText).join('\n');
@@ -86,9 +74,8 @@ function boldrSSR(req, res, next) {
          );
          res.status(200).send(html);
        }).catch((err) => {
-         debug('---------------- SSR ON ERROR ----------------');
          debug(err);
-         res.status(500).end();
+         res.status(500).send(err);
        });
   });
 }
