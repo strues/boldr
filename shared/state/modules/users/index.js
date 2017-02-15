@@ -9,6 +9,7 @@ import {
 } from './actions';
 
 import {
+  selectMe,
   selectUsers,
   selectProfile,
   makeSelectCurrentProfile,
@@ -20,6 +21,7 @@ export default usersReducer;
 export {
   usersReducer,
   STATE_KEY,
+  selectMe,
   forgotPassword,
   resetPassword,
   verifyAccount,

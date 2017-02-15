@@ -37,13 +37,16 @@ const Wrapper = styled.section`
   margin-bottom: 10px;
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .4);
   background-color: #fff;
+  height: 350px;
+  position: relative;
 `;
 
 const Content = styled.div`
   padding: 1.5rem;
   vertical-align: middle;
   display: table-cell;
-  padding: 3rem;
+  padding: 1rem;
+  height: 350px;
 `;
 
 const PostTitle = styled.h2`
@@ -57,14 +60,14 @@ const PostTitle = styled.h2`
   box-decoration-break: clone;
 `;
 
-export const PostFeatured = (props: Props) => {
+export const FeaturedPost = (props: Props) => {
   const ImgWrapper = styled.div`
     position: relative;
     overflow: hidden;
     display: table-cell;
     background: url(${props.feature_image});
     background-size: cover;
-    width: 60%;
+    width: 70%;
   `;
   const postTags = props.tags.map(id => props.listTags[id]);
   // Explicitly define post rather than passing additional
@@ -103,7 +106,6 @@ export const PostFeatured = (props: Props) => {
           <Col xs={ 12 }>
             <Row xsEnd>
               <Col xs={ 6 }>
-                { props.comments.length } <span>comments</span>
                 { /* $FlowIssue */ }
                 <Link to={ `/blog/${props.slug}` }>
                   <Button raised primary label="Read More" onClick={ transitionPost } />
@@ -124,4 +126,4 @@ export const PostFeatured = (props: Props) => {
   );
 };
 
-export default connect()(PostFeatured);
+export default connect()(FeaturedPost);

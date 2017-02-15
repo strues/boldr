@@ -4,12 +4,17 @@ import { checkRole } from '../../middleware/rbac';
 
 import * as ctrl from './admin.controller';
 
+/**
+ * @apiDefine AdminGroup
+ *
+ */
+
 const router = express.Router();
 
 /**
  * @api {get} /stats          List statistics
  * @apiName GetAllStats
- * @apiGroup Admin
+ * @apiGroup AdminGroup
  * @apiPermission admin
  * @apiSuccess {Number}   posts            The post count
  * @apiSuccess {Number}   tags             The tag count

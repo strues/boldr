@@ -7,7 +7,7 @@ import { Tag, User, Post } from '../../models';
  * @method getAllStats
  * @param  {Object}        req  the request object
  * @param  {Object}        res  the response object
- * @return {Promise}           
+ * @return {Promise}
  */
 export async function getAllStats(req, res, next) {
   try {

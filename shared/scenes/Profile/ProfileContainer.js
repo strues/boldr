@@ -59,7 +59,7 @@ export class ProfileContainer extends Component {
     }
     return (
       <BaseTemplate helmetMeta={ <Helmet title={ `${profile.username}'s Profile` } /> }>
-      { /* $FlowIssue */}
+
         <Profile
           profile={ profile }
           email={ user.email }

@@ -2,7 +2,7 @@
 /* @flow */
 /* eslint-disable global-require */
 import React from 'react';
-import { render } from 'react-dom';
+import { render, unmountComponentAtNode } from 'react-dom';
 import { Provider } from 'react-redux';
 import Router from 'react-router/lib/Router';
 import match from 'react-router/lib/match';
@@ -58,6 +58,7 @@ const renderApp = () => {
     );
   });
 };
+
 if (process.env.NODE_ENV !== 'production') {
   window.React = React; // enable debugger
 
@@ -72,13 +73,13 @@ if (process.env.NODE_ENV !== 'production') {
 // to react-boilerplate for that tip.)
 require('./registerServiceWorker');
 
-const unsubscribeHistory = renderApp();
-if (process.env.NODE_ENV === 'development' && module.hot) {
-  module.hot.accept(
-    '../shared/scenes',
-    () => {
-      unsubscribeHistory();
-      setTimeout(renderApp);
-    }
-  );
+if (module.hot) {
+  module.hot.accept('../shared/scenes', () => {
+    setImmediate(() => {
+      // Preventing the hot reloading error from react-router
+      unmountComponentAtNode(domNode);
+      renderApp();
+    });
+  });
 }
+renderApp();

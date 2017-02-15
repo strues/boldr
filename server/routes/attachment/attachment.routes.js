@@ -3,12 +3,17 @@ import { isAuthenticated } from '../../services/authentication';
 import { checkRole } from '../../middleware/rbac';
 import * as ctrl from './attachment.controller';
 
+/**
+ * @apiDefine AttachmentGroup
+ *
+ */
+
 const router = express.Router();
 
 /**
  * @api {get} /attachments              List all attachments
  * @apiName GetAllAttachments
- * @apiGroup Attachment
+ * @apiGroup AttachmentGroup
  *
  * @apiExample Example usage:
  * curl -i https://staging.boldr.io/api/v1/attachments
@@ -16,12 +21,10 @@ const router = express.Router();
  * @apiSuccess    {Object[]}    attachments           List of attachments.
  * @apiSuccess    {String}      id                    The attachments's id (uuid)
  * @apiSuccess    {String}      file_name             The attachment's name
- * @apiSuccess    {String}      original_name         The attachment's name prior to uploading.
+ * @apiSuccess    {String}      safe_name             Slugified / normalized file_name
  * @apiSuccess    {String}      file_description      A caption describing the attachment
  * @apiSuccess    {String}      file_type             The mime type
  * @apiSuccess    {String}      url                   The url where the file is located
- * @apiSuccess    {String}      s3_key                AWS S3 key
- * @apiSuccess    {String}      safe_name             The file name that is non-editable by the user.
  * @apiSuccess    {Date}        created_at            The upload date
  * @apiSuccess    {Date}        updated_at            When the attachment was modified.
  */
@@ -30,14 +33,14 @@ router.get('/', ctrl.listAttachments);
 /**
  * @api {post} /attachments         Upload attachment
  * @apiName UploadAttachment
- * @apiGroup Attachment
+ * @apiGroup AttachmentGroup
  * @apiPermission user
  */
 router.post('/', isAuthenticated, ctrl.uploadAttachment);
 /**
  * @api {get} /attachments/:id    Get specific attachment
  * @apiName GetAttachment
- * @apiGroup Attachment
+ * @apiGroup AttachmentGroup
  *
  * @apiExample Example usage:
  * curl -i https://staging.boldr.io/api/v1/attachments/1
@@ -51,7 +54,7 @@ router.get('/:id', ctrl.getAttachment);
 /**
  * @api {delete} /attachments/:id  Delete attachment
  * @apiName DeleteAttachment
- * @apiGroup Attachment
+ * @apiGroup AttachmentGroup
  * @apiUse authHeader
  * @apiPermission admin
  * @apiSuccess (Success 204) 204 No Content.
@@ -62,7 +65,7 @@ router.delete('/:id', isAuthenticated, checkRole('Admin'), ctrl.deleteAttachment
 /**
  * @api {put} /attachments/:id      Update attachment
  * @apiName UpdateAttachment
- * @apiGroup Attachment
+ * @apiGroup AttachmentGroup
  * @apiUse authHeader
  * @apiPermission admin
  * @apiSuccess (Success 202) 202

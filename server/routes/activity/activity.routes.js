@@ -2,12 +2,17 @@ import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
 import * as ctrl from './activity.controller';
 
+/**
+ * @apiDefine ActivityGroup
+ *
+ */
+
 const router = express.Router();
 
 /**
  * @api {get} /activities           List all activities
  * @apiName ListActivities
- * @apiGroup Activity
+ * @apiGroup ActivityGroup
  * @apiPermission public
  * @apiSuccess {String}   id                    The activity's id (uuid)
  * @apiSuccess {String}   user_id               The id (uuid) of user who performed the action

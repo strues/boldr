@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import MenuButton from 'react-md/lib/Menus/MenuButton';
+import Link from 'react-router/lib/Link';
 import ListItem from 'react-md/lib/Lists/ListItem';
 import Button from 'react-md/lib/Buttons/Button';
 import FontIcon from 'react-md/lib/FontIcons';
@@ -47,10 +48,15 @@ class PrimaryHeader extends Component {
         <Button raised secondary label="Sign Up" href="/account/signup" />
       );
     }
+    if (this.props.me.roleId === 3) {
+      actions.push(
+        <Button onClick={ this.props.handleDashClick } icon primary tooltipLabel="Dashboard">dashboard</Button>,
+      );
+    }
     if (this.props.auth.isAuthenticated) {
       actions.push(
-      <Button flat secondary label="Logout" onClick={ this.props.handleLogoutClick } />,
-      <Button onClick={ this.props.handleDashClick } icon primary>dashboard</Button>,
+        <Button href={`/profiles/${this.props.me.username}`} icon tooltipLabel="Profile">perm_identity</Button>,
+        <Button icon onClick={ this.props.handleLogoutClick } tooltipLabel="Logout">exit_to_app</Button>,
       );
     }
     return (

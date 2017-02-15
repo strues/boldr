@@ -19,33 +19,6 @@ import userRoutes from './user/user.routes';
 const API_PREFIX = '/api/v1';
 
 export default (app) => {
-/**
- * @apiDefine listParams
- * @apiParam {String[]} include=[author,tags] Return associated models with the request
- * @apiParam {Number{1..30}} [page=1] Page number.
- * @apiParam {Number{1..100}} [limit=30] Amount of returned items.
- * @apiParam {String[]} [sort=-createdAt] Order of returned items.
- */
-
-/**
- * @apiDefine authHeader
- * @apiHeader {String}  Authorization   The user's token
- * @apiHeaderExample {json} Authorization Header Example:
- *    {
- *      "Authorization": "Bearer JSONWEBTOKEN"
- *    }
- */
-
-/**
- * @apiDefine admin Admin access only
- * You must pass an authorization header with a token associated with an admin user
- * to access this endpoint.
- */
-
- /**
-  * @apiDefine user User access for certain restricted routes.
-  * You must pass an authorization header with a token to access this endpoint.
-  */
   app.get(`${API_PREFIX}/health-check`, (req, res) => {
     res.status(200);
     res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
@@ -83,3 +56,31 @@ export default (app) => {
     }
   });
 };
+
+/**
+ * @apiDefine listParams
+ * @apiParam {String[]} include=[author,tags] Return associated models with the request
+ * @apiParam {Number{1..30}} [page=1] Page number.
+ * @apiParam {Number{1..100}} [limit=30] Amount of returned items.
+ * @apiParam {String[]} [sort=-createdAt] Order of returned items.
+ */
+
+/**
+ * @apiDefine authHeader
+ * @apiHeader {String}  Authorization   The user's token
+ * @apiHeaderExample {json} Authorization Header Example:
+ *    {
+ *      "Authorization": "Bearer JSONWEBTOKEN"
+ *    }
+ */
+
+/**
+ * @apiDefine admin Admin access only
+ * You must pass an authorization header with a token associated with an admin user
+ * to access this endpoint.
+ */
+
+ /**
+  * @apiDefine user User access for certain restricted routes.
+  * You must pass an authorization header with a token to access this endpoint.
+  */

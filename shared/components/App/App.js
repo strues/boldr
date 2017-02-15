@@ -10,10 +10,17 @@ import { fetchSettingsIfNeeded, selectSettings } from '../../state/modules/boldr
 import { makeSelectMobile, makeSelectUi, setMobileDevice } from '../../state/modules/boldr/ui';
 import type { ReactChildren } from '../../types/react';
 import Notifications from '../Notification';
+import styled from 'styled-components';
 
 if (process.env.NODE_ENV !== 'test') {
   require('../../styles/main.scss');
 }
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  box-sizing: border-box;
+`;
 
 type Props = {
   children: ReactChildren,
@@ -61,10 +68,10 @@ class App extends Component {
 
   render() {
     return (
-    <div>
+    <Wrapper>
       { React.Children.toArray(this.props.children) }
       <Notifications />
-    </div>
+    </Wrapper>
     );
   }
 }

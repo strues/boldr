@@ -7,6 +7,7 @@ import { bindActionCreators } from 'redux';
 import { fetchTemplateResource } from '../../../state/modules/boldr/templates/actions';
 import { fetchMenusIfNeeded, getByLabel } from '../../../state/modules/boldr/menu';
 import { logout } from '../../../state/modules/auth/actions';
+import { selectMe } from '../../../state/modules/users';
 import { PrimaryHeader, Footer } from '../../../components/index';
 import type { ReactElement, ReactChildren } from '../../../types/react';
 
@@ -19,6 +20,7 @@ type Props = {
   navigate: Function,
   dispatch: Function,
   actions: Object,
+  me: ?Object,
   isMobile: Boolean,
   ui: Object,
   menu: Object,
@@ -42,6 +44,7 @@ const ContentWrapper = styled.section`
   padding-top: 60px;
   box-sizing: border-box;
   margin: 0 auto;
+  padding-bottom: 150px;
   background-color: #e5eaed;
 `;
 
@@ -51,6 +54,7 @@ const FooterWrapper = styled.footer`
 
 const mapStateToProps = (state: Object) => {
   return {
+    me: selectMe(state),
     auth: state.auth,
     menu: state.boldr.menu.main,
     isMobile: state.boldr.ui.isMobile,
@@ -89,6 +93,9 @@ class BaseTemplate extends PureComponent {
   handleDashClick = (e) => {
     this.props.navigate('/admin');
   }
+  handleProfileClick = (e) => {
+    this.props.navigate(`/profiles/${this.props.me.username}`);
+  }
   handleLogoutClick = (e) => {
     this.props.actions.logout();
   }
@@ -101,8 +108,10 @@ class BaseTemplate extends PureComponent {
           <PrimaryHeader
             auth={ this.props.auth }
             logo={ this.props.logo }
+            me={ this.props.me }
             menu={ this.props.menu }
             isMobile={ this.props.isMobile }
+            handleProfileClick={ this.handleProfileClick }
             handleLogoClick= { this.handleLogoClick }
             handleLogoutClick={ this.handleLogoutClick }
             handleDashClick={ this.handleDashClick }

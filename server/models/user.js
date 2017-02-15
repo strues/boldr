@@ -25,6 +25,10 @@ class User extends BaseModel {
    * @type {array}
    */
   static hidden = [];
+
+  fullName() {
+    return `${this.first_name} ${this.last_name}`;
+  }
   static get relationMappings() {
     return {
       roles: {

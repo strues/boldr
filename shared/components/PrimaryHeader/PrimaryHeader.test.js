@@ -26,8 +26,12 @@ describe('<PrimaryHeader />', () => {
     loading: false,
     token: 'aaaccdf23423b',
   };
+  const fakeMe = {
+    roleId: 3,
+    username: 'abcd',
+  };
   function setup() {
-    const wrapper = shallow(<PrimaryHeader menu={ fakeMenu } auth={ fakeAuth } />);
+    const wrapper = shallow(<PrimaryHeader menu={ fakeMenu } me={ fakeMe } auth={ fakeAuth } />);
     const instance = wrapper.instance();
 
     return { wrapper, instance };

@@ -21,6 +21,11 @@ boldr api documentation
 	- [Signup](#signup)
 	- [Verify user](#verify-user)
 	
+- [Comment](#comment)
+	- [Comment Reply](#comment-reply)
+	- [Delete comment](#delete-comment)
+	- [Edit Comment](#edit-comment)
+	
 - [MenuDetails](#menudetails)
 	- [Create menu detail](#create-menu-detail)
 	- [Delete detail](#delete-detail)
@@ -36,9 +41,10 @@ boldr api documentation
 	- [Update menu](#update-menu)
 	
 - [Pages](#pages)
-	- [List all pages](#list-all-pages)
+	- [Get all pages](#get-all-pages)
 	
 - [Post](#post)
+	- [Comment on post](#comment-on-post)
 	- [Add a tag to the post](#add-a-tag-to-the-post)
 	- [Create post](#create-post)
 	- [Delete post by id](#delete-post-by-id)
@@ -263,6 +269,47 @@ Access-Control-Allow-Credentials: true
 |---------|-----------|--------------------------------------|
 | verification			| String			|  <VerificationToken>							|
 
+# Comment
+
+## Comment Reply
+
+
+
+	POST /:id/reply
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| id			| String			|  <p>The id (uuid) of the comment</p>							|
+
+## Delete comment
+
+
+
+	DELETE /:id
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| id			| String			|  <p>The id (uuid) of the comment</p>							|
+
+## Edit Comment
+
+
+
+	PUT /:id
+
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| id			| String			|  <p>The id (uuid) of the comment</p>							|
+
 # MenuDetails
 
 ## Create menu detail
@@ -319,8 +366,13 @@ Access-Control-Allow-Credentials: true
 
 
 
-	PUT /menu-details/:id
+	PATCH /menu-details/:id
 
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| Authorization			| String			|  <p>The user's token</p>							|
 
 ### Parameters
 
@@ -400,7 +452,7 @@ Access-Control-Allow-Credentials: true
 
 # Pages
 
-## List all pages
+## Get all pages
 
 
 
@@ -409,11 +461,18 @@ Access-Control-Allow-Credentials: true
 
 # Post
 
+## Comment on post
+
+
+
+	POST /posts/:id/comments
+
+
 ## Add a tag to the post
 
 
 
-	POST /posts/pid/:id
+	POST /posts/:id
 
 
 ## Create post
@@ -443,14 +502,14 @@ Access-Control-Allow-Credentials: true
 
 
 
-	DELETE /posts/pid/:id
+	DELETE /posts/:id
 
 
 ## Get post by id
 
 
 
-	GET /posts/pid/:id
+	GET /posts/:id
 
 
 ## Get post by slug
@@ -477,7 +536,7 @@ Access-Control-Allow-Credentials: true
 
 
 
-	PUT /posts/pid/:id
+	PUT /posts/:id
 
 
 # Role
@@ -561,7 +620,7 @@ Access-Control-Allow-Credentials: true
 
 
 
-	PATCH /settings/:id
+	PUT /settings/:id
 
 ### Headers
 
@@ -681,7 +740,7 @@ Access-Control-Allow-Credentials: true
 
 
 
-	PATCH /tags/:id
+	PUT /tags/:id
 
 ### Headers
 
@@ -782,7 +841,7 @@ Access-Control-Allow-Credentials: true
 
 
 
-	PUT /users/:id
+	PATCH /users/:id
 
 ### Headers
 

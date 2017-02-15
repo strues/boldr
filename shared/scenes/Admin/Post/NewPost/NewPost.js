@@ -12,7 +12,7 @@ type Props = {
 const NewPost = (props: Props) => {
   return (
     <div>
-        <Helmet title="Admin: New Post" />
+      <Helmet title="Admin: New Post" />
       <NewPostForm
         onSubmit={ props.onFormSubmit }
         postImage={ props.postImage }

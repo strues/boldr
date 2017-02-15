@@ -16,12 +16,12 @@ const styled = require('styled-components').default;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
   padding-top: 25px;
   box-sizing: border-box;
-  margin-left: 15px;
-  margin-right: 15px;
+  padding-left: 5em;
+  padding-right: 5em;
   max-width: 2000px;
+  background-color: #e5eaed;
 `;
 const UserSection = styled.div`
   display: inline-flex;

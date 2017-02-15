@@ -8,13 +8,23 @@ import { Tag, Activity, ActionType, Post, PostTag, Comment, PostComment } from '
 
 const debug = require('debug')('boldr:post-ctrl');
 
+/**
+ * Retrieves all posts
+ * @method listPosts
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @returns {Promise}
+ */
 export async function listPosts(req, res, next) {
   try {
     const allPosts = await Post
     .query()
+    .skipUndefined()
     .eager('[tags,author,comments]')
-    .omit(['password'])
-    .skipUndefined();
+    .omit(['password']);
+
     return responseHandler(res, 200, allPosts);
   } catch (err) {
     /* istanbul ignore next */
@@ -22,6 +32,15 @@ export async function listPosts(req, res, next) {
   }
 }
 
+/**
+ * Create a post
+ * @method createPost
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @returns {Promise}
+ */
 export async function createPost(req, res, next) {
   req.assert('title', 'A title must be provided').notEmpty();
   req.assert('content', 'Content can not be empty').notEmpty();
@@ -86,13 +105,25 @@ export async function createPost(req, res, next) {
   }
 }
 
+/**
+ * Get a post from its slug.
+ * @method getSlug
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @returns {Promise}
+ */
 export async function getSlug(req, res, next) {
   try {
     const post = await Post
       .query()
       .where({ slug: req.params.slug })
-      .eager('[tags, author]')
-      .omit('password')
+      .eager('[tags, author, comments, comments.commenter, comments.replies]')
+      .modifyEager('comments.[replies]', (builder) => {
+        builder.orderBy('created_at', 'desc');
+      })
+      .omit(['password'])
       .first();
 
     if (!post) {
@@ -105,12 +136,24 @@ export async function getSlug(req, res, next) {
   }
 }
 
+/**
+ * Get post by id
+ * @method getId
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @returns {Promise}
+ */
 export async function getId(req, res, next) {
   try {
     const post = await Post
       .query()
       .findById(req.params.id)
       .eager('[tags, author, comments, comments.commenter, comments.replies]')
+      .modifyEager('comments.[replies]', (builder) => {
+        builder.orderBy('created_at', 'desc');
+      })
       .omit('password')
       .first();
     return responseHandler(res, 200, post);
@@ -120,6 +163,15 @@ export async function getId(req, res, next) {
   }
 }
 
+/**
+ * Delete a post
+ * @method destroy
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @returns {Promise}
+ */
 export async function destroy(req, res, next) {
   try {
     await Activity
@@ -140,6 +192,15 @@ export async function destroy(req, res, next) {
   }
 }
 
+/**
+ * Update a post
+ * @method update
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @returns {Promise}
+ */
 export function update(req, res) {
   debug(req.body);
   return Post.query()
@@ -155,6 +216,15 @@ export function update(req, res) {
     });
 }
 
+/**
+ * Relate a tag to a post
+ * @method addTag
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @returns {Promise}
+ */
 export async function addTag(req, res, next) {
   try {
     const post = await Post
@@ -175,6 +245,15 @@ export async function addTag(req, res, next) {
   }
 }
 
+/**
+ * Add a comment to a post
+ * @method addCommentToPost
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @returns {Promise}
+ */
 export async function addCommentToPost(req, res, next) {
   try {
     const post = await Post

@@ -9,15 +9,12 @@ const commentProps = {
   canModerate: false,
   comment: {
     content: 'hey',
-    created_at: '2017-02-14 18:25:05.75+00',
+    created_at: '2017-02-14',
   },
 };
 describe('<Comment />', () => {
   const wrapper = shallow(<Comment { ...commentProps } />);
   it('renders <Comment /> without breaking', () => {
     expect(wrapper.find('.boldr-comment').length).toBe(1);
-  });
-  it('renders snapshot', () => {
-    expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
 });
