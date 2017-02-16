@@ -60,6 +60,10 @@ type Props = {
   isAuthenticated: Boolean,
 };
 const Comment = (props: Props) => {
+  function createMarkup() {
+    return { __html: props.comment.content,
+    };
+  }
   return (
     <div className="boldr-comment">
       <Wrapper>
@@ -75,7 +79,7 @@ const Comment = (props: Props) => {
             </ReplyButton>
           }
           <CommentBody>
-          { props.comment.content }
+        <div className="boldr-comment__content" dangerouslySetInnerHTML={ createMarkup() } />
         </CommentBody>
         <CommentMeta>
           <CommentDate>

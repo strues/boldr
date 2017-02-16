@@ -1,6 +1,7 @@
 /* @flow */
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
+import draftToHtml from 'draftjs-to-html';
 import { newComment } from '../../../../state/modules/blog/comments/actions';
 import CommentForm from './CommentForm';
 
@@ -15,8 +16,8 @@ class AddComment extends PureComponent {
 
   handleCommentSubmit = (values) => {
     const data = {
-      content: values.content,
-      raw_content: values.raw_content || null,
+      content: draftToHtml(values.content),
+      raw_content: values.content || null,
     };
     const { postId } = this.props;
     this.props.dispatch(newComment(data, postId));
@@ -26,10 +27,7 @@ class AddComment extends PureComponent {
 
   render() {
     return (
-      <div>
-        AddComment
         <CommentForm onSubmit={ this.handleCommentSubmit } />
-      </div>
     );
   }
 }

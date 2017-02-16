@@ -29,7 +29,7 @@ export class PostListingContainer extends Component {
       dispatch(fetchTagsIfNeeded()),
     ]);
   }
-  
+
   componentDidMount() {
     const { dispatch } = this.props;
     PostListingContainer.fetchData(dispatch);
@@ -56,7 +56,7 @@ export class PostListingContainer extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    listTags: state.blog.tags.all,
+    listTags: state.entities.tags,
     posts: getPosts(state),
     layout: state.boldr.ui.layout,
     isFetching: state.blog.posts.isFetching,

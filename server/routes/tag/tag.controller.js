@@ -45,7 +45,7 @@ export async function getTaggedPostsByName(req, res, next) {
     const tags = await Tag
       .query()
       .where({ name: req.params.name })
-      .eager('posts')
+      .eager('[posts,posts.comments]')
       .first();
 
     return responseHandler(res, 200, tags);
