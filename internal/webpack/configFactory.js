@@ -185,27 +185,19 @@ export default function webpackConfigFactory(buildOptions) {
                 sourceMaps: true,
                 comments: false,
                 presets: [
-                  // JSX
                   'react',
-                  // Stage 2 javascript syntax.
                   'stage-2',
                   ifClient(['latest', { es2015: { modules: false } }]),
                   ifNode(['env', { targets: { node: true }, modules: false }]),
                 ].filter(x => x != null),
                 plugins: [
-                  // Required to support react hot loader.
                   ifDevClient('react-hot-loader/babel'),
                   'transform-decorators-legacy',
                   ['transform-class-properties', { spec: true }],
                   ['transform-object-rest-spread', { useBuiltIns: true }],
+                  ifClient(['transform-react-jsx', { useBuiltIns: true }]),
                   'transform-flow-strip-types',
                   'transform-es2015-arrow-functions',
-                  [
-                    'transform-regenerator',
-                    {
-                      async: false,
-                    },
-                  ],
                   [
                     'transform-runtime',
                     {
@@ -214,8 +206,15 @@ export default function webpackConfigFactory(buildOptions) {
                       regenerator: true,
                     },
                   ],
+                  [
+                    'transform-regenerator',
+                    {
+                      async: false,
+                    },
+                  ],
                   ifDev('transform-react-jsx-self'),
                   ifDev('transform-react-jsx-source'),
+                  ifNode('dynamic-import-node'),
                   ifProd('transform-react-inline-elements'),
                   ifProd('transform-react-constant-elements'),
                 ].filter(x => x != null),

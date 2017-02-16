@@ -21,16 +21,16 @@ type Props = {
 };
 
 class TaggedPost extends Component {
-  static fetchData(dispatch, params) {
+  static fetchData(dispatch, props) {
     return Promise.all([
-      dispatch(fetchTaggedPost(params.name)),
+      dispatch(fetchTaggedPost(props.name)),
     ]);
   }
   componentDidMount() {
     const { dispatch, params } = this.props;
 
    // Fetching data for client side rendering
-    TaggedPost.fetchData(dispatch, params);
+    TaggedPost.fetchData(dispatch, this.props);
   }
 
   props: Props;

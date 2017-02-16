@@ -9,6 +9,7 @@ import match from 'react-router/lib/match';
 import browserHistory from 'react-router/lib/browserHistory';
 import { syncHistoryWithStore } from 'react-router-redux';
 import WebFontLoader from 'webfontloader';
+import Perf from 'react-addons-perf';
 
 import AppRoot from '../shared/components/AppRoot';
 import App from '../shared/components/App';
@@ -33,7 +34,7 @@ const store = configureStore(preloadedState, browserHistory, apiClient);
 const history = syncHistoryWithStore(browserHistory, store);
 const routes = createRoutes(store, history);
 const { dispatch } = store;
-
+window.Perf = Perf;
 const token = getToken();
 if (token) {
   // Update application state. User has token and is probably authenticated

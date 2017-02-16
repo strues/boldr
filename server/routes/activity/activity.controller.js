@@ -21,7 +21,7 @@ export async function listActivities(req, res, next) {
     .limit(10)
     .eager('[owner,post,member,attachment,menuDetail,tag]');
 
-    return responseHandler(res, 200, removeNullandUndef(activities));
+    return responseHandler(res, 200, activities);
   } catch (error) {
     /* istanbul ignore next */
     return next(new BadRequest(error));
