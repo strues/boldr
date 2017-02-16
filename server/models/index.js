@@ -1,4 +1,3 @@
-import ActionType from './actionType';
 import Activity from './activity';
 import Attachment from './attachment';
 import Comment from './comment';
@@ -21,7 +20,6 @@ import TemplatePage from './join/templatePage';
 import UserRole from './join/userRole';
 
 export {
-  ActionType,
   Activity,
   Attachment,
   Comment,

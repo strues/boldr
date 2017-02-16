@@ -5,17 +5,17 @@ boldr api documentation
 - [Activity](#activity)
 	- [List all activities](#list-all-activities)
 	
-- [Admin](#admin)
+- [AdminGroup](#admingroup)
 	- [List statistics](#list-statistics)
 	
-- [Attachment](#attachment)
+- [AttachmentGroup](#attachmentgroup)
 	- [Delete attachment](#delete-attachment)
 	- [List all attachments](#list-all-attachments)
 	- [Get specific attachment](#get-specific-attachment)
 	- [Update attachment](#update-attachment)
 	- [Upload attachment](#upload-attachment)
 	
-- [Auth](#auth)
+- [AuthGroup](#authgroup)
 	- [Authentication check](#authentication-check)
 	- [Login](#login)
 	- [Signup](#signup)
@@ -46,7 +46,7 @@ boldr api documentation
 - [Post](#post)
 	- [Comment on post](#comment-on-post)
 	- [Add a tag to the post](#add-a-tag-to-the-post)
-	- [Create post](#create-post)
+	- [Create a new post](#create-a-new-post)
 	- [Delete post by id](#delete-post-by-id)
 	- [Get post by id](#get-post-by-id)
 	- [Get post by slug](#get-post-by-slug)
@@ -92,12 +92,18 @@ boldr api documentation
 
 ## List all activities
 
-
+<p>Return all activities from all admin users. Null or undefined values will not be returned.</p>
 
 	GET /activities
 
+### Headers
 
-# Admin
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| Content-Type			| String			|  <p>Content-Type: application/json</p>							|
+| Authorization			| String			|  <p>Bearer JSONWEBTOKEN</p>							|
+
+# AdminGroup
 
 ## List statistics
 
@@ -106,7 +112,7 @@ boldr api documentation
 	GET /stats
 
 
-# Attachment
+# AttachmentGroup
 
 ## Delete attachment
 
@@ -118,7 +124,7 @@ boldr api documentation
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>The user's token</p>							|
+| Authorization			| String			|  <p>Bearer JSONWEBTOKEN</p>							|
 
 ## List all attachments
 
@@ -166,7 +172,7 @@ curl -i https://staging.boldr.io/api/v1/attachments/1
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>The user's token</p>							|
+| Authorization			| String			|  <p>Bearer JSONWEBTOKEN</p>							|
 
 ## Upload attachment
 
@@ -175,7 +181,7 @@ curl -i https://staging.boldr.io/api/v1/attachments/1
 	POST /attachments
 
 
-# Auth
+# AuthGroup
 
 ## Authentication check
 
@@ -187,7 +193,7 @@ curl -i https://staging.boldr.io/api/v1/attachments/1
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>The user's token</p>							|
+| Authorization			| String			|  <p>Bearer JSONWEBTOKEN</p>							|
 
 ## Login
 
@@ -322,7 +328,7 @@ Access-Control-Allow-Credentials: true
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>The user's token</p>							|
+| Authorization			| String			|  <p>Bearer JSONWEBTOKEN</p>							|
 
 ## Delete detail
 
@@ -334,7 +340,7 @@ Access-Control-Allow-Credentials: true
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>The user's token</p>							|
+| Authorization			| String			|  <p>Bearer JSONWEBTOKEN</p>							|
 
 ### Parameters
 
@@ -372,7 +378,7 @@ Access-Control-Allow-Credentials: true
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>The user's token</p>							|
+| Authorization			| String			|  <p>Bearer JSONWEBTOKEN</p>							|
 
 ### Parameters
 
@@ -392,7 +398,7 @@ Access-Control-Allow-Credentials: true
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>The user's token</p>							|
+| Authorization			| String			|  <p>Bearer JSONWEBTOKEN</p>							|
 
 ## List all menus
 
@@ -424,7 +430,7 @@ Access-Control-Allow-Credentials: true
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>The user's token</p>							|
+| Authorization			| String			|  <p>Bearer JSONWEBTOKEN</p>							|
 
 ### Parameters
 
@@ -442,7 +448,7 @@ Access-Control-Allow-Credentials: true
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>The user's token</p>							|
+| Authorization			| String			|  <p>Bearer JSONWEBTOKEN</p>							|
 
 ### Parameters
 
@@ -475,7 +481,7 @@ Access-Control-Allow-Credentials: true
 	POST /posts/:id
 
 
-## Create post
+## Create a new post
 
 
 
@@ -485,18 +491,24 @@ Access-Control-Allow-Credentials: true
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>The user's token</p>							|
+| Content-Type			| String			|  <p>Content-Type: application/json</p>							|
+| Authorization			| String			|  <p>Bearer JSONWEBTOKEN</p>							|
 
 ### Parameters
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
 | title			| String			|  <p>The title of the post</p>							|
+| slug			| String			|  <p>The slug of the post which is the title, normalized for url use.</p>							|
 | excerpt			| String			|  <p>A short description or snippet of the post</p>							|
-| content			| String			|  <p>The content of the post</p>							|
+| content			| String			|  <p>The content of the post as html</p>							|
+| raw_content			| Object			|  <p>Raw, unprocessed rich content blocks</p>							|
 | feature_image			| String			|  <p>The URL for an image to use with the post</p>							|
-| tags			| String			|  <p>Comma separated tags for the post</p>							|
-| status			| String			|  <p>One of: draft / published / archived</p>							|
+| background_image			| String			|  <p>The URL for a background image to use in the post</p>							|
+| tags			| String[]			|  <p>Array of tag names</p>							|
+| published			| Boolean			|  <p>Whether the post is published for public display</p>							|
+| meta			| Object			|  <p>Meta data for the post</p>							|
+| attachments			| Object			|  <p>Post attachments</p>							|
 
 ## Delete post by id
 
@@ -518,6 +530,11 @@ Access-Control-Allow-Credentials: true
 
 	GET /posts/slug/:slug
 
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| Content-Type			| String			|  <p>Content-Type: application/json</p>							|
 
 ### Parameters
 
@@ -531,6 +548,20 @@ Access-Control-Allow-Credentials: true
 
 	GET /posts
 
+### Headers
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| Content-Type			| String			|  <p>Content-Type: application/json</p>							|
+
+### Parameters
+
+| Name    | Type      | Description                          |
+|---------|-----------|--------------------------------------|
+| include			| String[]			|  <p>Include related properties of the object. This is an alternative way to fetch a relevant data in a single call. ?include=[relationship]</p>							|
+| page			| Number			| **optional** <p>Page number.</p>							|
+| limit			| Number			| **optional** <p>Amount of returned items.</p>							|
+| sort			| String[]			| **optional** <p>Order of returned items.</p>							|
 
 ## Update post by id
 
@@ -586,7 +617,7 @@ Access-Control-Allow-Credentials: true
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>The user's token</p>							|
+| Authorization			| String			|  <p>Bearer JSONWEBTOKEN</p>							|
 
 ### Parameters
 
@@ -626,7 +657,7 @@ Access-Control-Allow-Credentials: true
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>The user's token</p>							|
+| Authorization			| String			|  <p>Bearer JSONWEBTOKEN</p>							|
 
 ### Parameters
 
@@ -660,7 +691,7 @@ Access-Control-Allow-Credentials: true
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>The user's token</p>							|
+| Authorization			| String			|  <p>Bearer JSONWEBTOKEN</p>							|
 
 ### Parameters
 
@@ -727,7 +758,7 @@ Access-Control-Allow-Credentials: true
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>The user's token</p>							|
+| Authorization			| String			|  <p>Bearer JSONWEBTOKEN</p>							|
 
 ### Parameters
 
@@ -746,7 +777,7 @@ Access-Control-Allow-Credentials: true
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>The user's token</p>							|
+| Authorization			| String			|  <p>Bearer JSONWEBTOKEN</p>							|
 
 ### Parameters
 
@@ -795,7 +826,7 @@ Access-Control-Allow-Credentials: true
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>The user's token</p>							|
+| Authorization			| String			|  <p>Bearer JSONWEBTOKEN</p>							|
 
 ### Parameters
 
@@ -814,7 +845,7 @@ Access-Control-Allow-Credentials: true
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>The user's token</p>							|
+| Authorization			| String			|  <p>Bearer JSONWEBTOKEN</p>							|
 
 ## Get user
 
@@ -847,7 +878,7 @@ Access-Control-Allow-Credentials: true
 
 | Name    | Type      | Description                          |
 |---------|-----------|--------------------------------------|
-| Authorization			| String			|  <p>The user's token</p>							|
+| Authorization			| String			|  <p>Bearer JSONWEBTOKEN</p>							|
 
 ### Parameters
 

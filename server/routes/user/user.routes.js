@@ -1,9 +1,13 @@
 import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
 import { checkRole } from '../../middleware/rbac';
+import BaseController from '../../core/baseController';
+import processQuery from '../../utils/processQuery';
+import { User } from '../../models';
 import * as ctrl from './user.controller';
 
 const router = express.Router();
+const controller = new BaseController(User, 'id');
 /**
  * @api {get} /users        List all users
  * @apiName listUsers
@@ -13,7 +17,7 @@ const router = express.Router();
  * @apiError {Object} 400 Some parameters may contain invalid values.
  * @apiError 401 Admin access only.
  */
-router.get('/', ctrl.listUsers);
+router.get('/', processQuery, controller.index.bind(controller));
 
 /**
  * @api {get} /users/:id     Get user

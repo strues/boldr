@@ -2,12 +2,6 @@ module.exports.up = async (db) => {
   await db.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
   await db.raw('CREATE EXTENSION IF NOT EXISTS "hstore"');
 
-  await db.schema.createTable('action_type', (table) => {
-    table.increments('id').unsigned().primary();
-    table.enu('type', ['create', 'update', 'delete', 'register']).notNullable();
-
-    table.index('type');
-  });
   await db.schema.createTable('role', (table) => {
     // pk
     table.increments('id').unsigned().primary();
@@ -52,7 +46,7 @@ module.exports.up = async (db) => {
     table.index('verified');
     table.index('email');
   });
-  
+
   await db.schema.createTable('verification_token', (table) => {
     // pk
     table.increments('id').unsigned().primary();
@@ -229,7 +223,7 @@ module.exports.up = async (db) => {
   await db.schema.createTable('activity', (table) => {
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
     table.uuid('user_id').unsigned().notNullable();
-    table.integer('action_type_id').unsigned().notNullable();
+    table.enu('type', ['create', 'update', 'delete', 'register']).notNullable();
     table.uuid('activity_post').unsigned();
     table.uuid('activity_user').unsigned();
     table.uuid('activity_attachment').unsigned();
@@ -242,7 +236,7 @@ module.exports.up = async (db) => {
     table.timestamp('updated_at').nullable().defaultTo(null);
 
     table.foreign('user_id').references('id').inTable('user').onDelete('cascade').onUpdate('cascade');
-    table.foreign('action_type_id').references('id').inTable('action_type').onDelete('cascade').onUpdate('cascade');
+
     table.foreign('activity_post').references('id').inTable('post').onDelete('cascade').onUpdate('cascade');
     table.foreign('activity_user').references('id').inTable('user').onDelete('cascade').onUpdate('cascade');
     table.foreign('activity_attachment').references('id').inTable('attachment').onDelete('cascade').onUpdate('cascade');
@@ -302,7 +296,6 @@ module.exports.up = async (db) => {
 };
 
 module.exports.down = async (db) => {
-  await db.schema.dropTableIfExists('action_type');
   await db.schema.dropTableIfExists('role');
   await db.schema.dropTableIfExists('user');
   await db.schema.dropTableIfExists('tag');

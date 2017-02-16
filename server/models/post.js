@@ -1,4 +1,5 @@
 import { Model } from 'objection';
+import { slugIt } from '../utils';
 
 // Related Models
 import Tag from './tag';

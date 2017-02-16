@@ -50,7 +50,7 @@ const loadMembers = () => ({
 const loadMembersSuccess = (response) => {
   return {
     type: t.LOAD_MEMBERS_SUCCESS,
-    payload: response.body,
+    payload: response.body.results,
   };
 };
 

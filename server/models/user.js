@@ -13,9 +13,65 @@ import UserRole from './join/userRole';
 
 const debug = require('debug')('boldr:user-model');
 
+/**
+ * User model representing an account and identity of a person.
+ * @class User
+ * @extends BaseModel
+ * @property {String}   first_name
+ * @property {String}   last_name
+ * @property {String}   username
+ * @property {String}   email
+ * @property {String}   bio
+ * @property {String}   location
+ * @property {String}   avatar_url
+ * @property {String}   profile_image
+ * @property {String}   website
+ * @property {String}   language
+ * @property {Boolean}  verified
+ * @property {Object}   [social]
+ * @property {Date}     birthday
+ * @property {Date}     created_at
+ * @property {Date}     updated_at
+ */
 class User extends BaseModel {
   static get tableName() {
     return 'user';
+  }
+
+  static get jsonSchema() {
+    return {
+      type: 'object',
+      required: ['first_name', 'email', 'password', 'last_name', 'username'],
+      properties: {
+        id: {
+          type: 'string',
+          minLength: 36,
+          maxLength: 36,
+          pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
+        },
+        first_name: { type: 'string' },
+        last_name: { type: 'string' },
+        email: {
+          type: 'string',
+        },
+        username: { type: 'string' },
+        password: { type: 'string' },
+        bio: { type: 'string' },
+        location: { type: 'string' },
+        website: { type: 'string' },
+        avatar_url: { type: 'string' },
+        profile_image: { type: 'string' },
+        language: { type: 'string' },
+        social: {
+          type: 'object',
+          properties: {},
+        },
+        verified: { type: 'boolean' },
+        birthday: { type: 'date' },
+        created_at: { type: 'date-time' },
+        updated_at: { type: 'date-time' },
+      },
+    };
   }
   static addTimestamps = true;
 
@@ -26,9 +82,6 @@ class User extends BaseModel {
    */
   static hidden = [];
 
-  fullName() {
-    return `${this.first_name} ${this.last_name}`;
-  }
   static get relationMappings() {
     return {
       roles: {
@@ -86,6 +139,9 @@ class User extends BaseModel {
     };
   }
 
+  fullName() {
+    return `${this.first_name} ${this.last_name}`;
+  }
   stripPassword() {
     delete this['password']; // eslint-disable-line
     return this;

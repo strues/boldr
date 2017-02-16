@@ -558,9 +558,9 @@ babel-jest@^18.0.0:
     babel-plugin-istanbul "^3.0.0"
     babel-preset-jest "^18.0.0"
 
-babel-loader@6.3.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-6.3.0.tgz#e0b47dfb3442a2024f6ffebaae76a1eda376f356"
+babel-loader@6.3.1:
+  version "6.3.1"
+  resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-6.3.1.tgz#e4d590279bbd1dc3b06949850c20ca4187d50991"
   dependencies:
     find-cache-dir "^0.1.1"
     loader-utils "^0.2.16"
@@ -2388,9 +2388,9 @@ draft-js@^0.10.0:
     immutable "~3.7.4"
     object-assign "^4.1.0"
 
-draftjs-to-html@^0.6.2:
-  version "0.6.2"
-  resolved "https://registry.yarnpkg.com/draftjs-to-html/-/draftjs-to-html-0.6.2.tgz#18606a44ce91478e7258d0f05f35ee6f915c2e39"
+draftjs-to-html@^0.6.3:
+  version "0.6.3"
+  resolved "https://registry.yarnpkg.com/draftjs-to-html/-/draftjs-to-html-0.6.3.tgz#80c7ade1517d17b1c65417811f1d16a751fe1a70"
 
 draftjs-utils@^0.6.3:
   version "0.6.3"
@@ -2616,15 +2616,14 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-boldr@0.7.2:
-  version "0.7.2"
-  resolved "https://registry.yarnpkg.com/eslint-config-boldr/-/eslint-config-boldr-0.7.2.tgz#1a4ce031d7a6aa7a55ef2f0e0f0014b1c555416b"
+eslint-config-boldr@0.7.3:
+  version "0.7.3"
+  resolved "https://registry.yarnpkg.com/eslint-config-boldr/-/eslint-config-boldr-0.7.3.tgz#9635e042b9b0fe5aac0999d3681904fcb7e7529f"
   dependencies:
-    babel-eslint "^7.1.1"
-    eslint-plugin-babel "^4.0.0"
-    eslint-plugin-flowtype "^2.29.1"
+    eslint-plugin-babel "^4.0.1"
+    eslint-plugin-flowtype "^2.30.0"
     eslint-plugin-import "^2.2.0"
-    eslint-plugin-react "^6.8.0"
+    eslint-plugin-react "^6.9.0"
 
 eslint-import-resolver-node@^0.2.0:
   version "0.2.3"
@@ -2641,11 +2640,11 @@ eslint-module-utils@^2.0.0:
     debug "2.2.0"
     pkg-dir "^1.0.0"
 
-eslint-plugin-babel@^4.0.0:
+eslint-plugin-babel@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-babel/-/eslint-plugin-babel-4.0.1.tgz#77de74dabd67a6bef3b16bf258f5804e971e7349"
 
-eslint-plugin-flowtype@^2.29.1, eslint-plugin-flowtype@^2.30.0:
+eslint-plugin-flowtype@^2.30.0:
   version "2.30.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-flowtype/-/eslint-plugin-flowtype-2.30.0.tgz#3054a265f9c8afe3046c3d41b72d32a736f9b4ae"
   dependencies:
@@ -2666,7 +2665,7 @@ eslint-plugin-import@^2.2.0:
     minimatch "^3.0.3"
     pkg-up "^1.0.0"
 
-eslint-plugin-react@^6.8.0:
+eslint-plugin-react@^6.9.0:
   version "6.9.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-6.9.0.tgz#54c2e9906b76f9d10142030bdc34e9d6840a0bb2"
   dependencies:
@@ -5164,9 +5163,9 @@ node-uuid@^1.4.7:
   version "1.4.7"
   resolved "https://registry.yarnpkg.com/node-uuid/-/node-uuid-1.4.7.tgz#6da5a17668c4b3dd59623bda11cf7fa4c1f60a6f"
 
-nodemailer@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-3.1.0.tgz#751e032ac9ccf2c5b02f49a0d5a1af78130ec93e"
+nodemailer@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-3.1.1.tgz#cdddb64d86387f902542307b4d92ea00140445a1"
 
 nomnom@~1.6.2:
   version "1.6.2"
@@ -6378,9 +6377,9 @@ react-dom@15.4.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
 
-react-draft-wysiwyg@^1.7.4:
-  version "1.7.4"
-  resolved "https://registry.yarnpkg.com/react-draft-wysiwyg/-/react-draft-wysiwyg-1.7.4.tgz#e729b22696272636c37f3960be2bad8f768aace8"
+react-draft-wysiwyg@^1.7.6:
+  version "1.7.6"
+  resolved "https://registry.yarnpkg.com/react-draft-wysiwyg/-/react-draft-wysiwyg-1.7.6.tgz#ac38ac63eda4c746e393b2f1c95018b7f43be12e"
   dependencies:
     classnames "^2.2.5"
     draftjs-utils "^0.6.3"
@@ -7303,9 +7302,9 @@ sugarss@^0.2.0:
   dependencies:
     postcss "^5.2.4"
 
-superagent@^3.0.0, superagent@^3.4.1:
-  version "3.4.2"
-  resolved "https://registry.yarnpkg.com/superagent/-/superagent-3.4.2.tgz#aa9a00f21720e230a6e7e9d7f07e0ab84509b833"
+superagent@^3.0.0, superagent@^3.4.3:
+  version "3.4.3"
+  resolved "https://registry.yarnpkg.com/superagent/-/superagent-3.4.3.tgz#556648e95636f49173708b7002faaf3088bcea7f"
   dependencies:
     component-emitter "^1.2.0"
     cookiejar "^2.0.6"

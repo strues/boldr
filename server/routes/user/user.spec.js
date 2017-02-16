@@ -35,7 +35,7 @@ describe('User API Endpoint', async () => {
         .get('/api/v1/users')
         .expect((res) => {
           expect(res.status).toBe(200);
-          expect(Array.isArray(res.body)).toBe(true);
+          expect(Array.isArray(res.body.results)).toBe(true);
         });
   });
 

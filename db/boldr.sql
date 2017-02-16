@@ -98,47 +98,13 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: action_type; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE action_type (
-    id integer NOT NULL,
-    type text NOT NULL,
-    CONSTRAINT action_type_type_check CHECK ((type = ANY (ARRAY['create'::text, 'update'::text, 'delete'::text, 'register'::text])))
-);
-
-
-ALTER TABLE action_type OWNER TO postgres;
-
---
--- Name: action_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE action_type_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE action_type_id_seq OWNER TO postgres;
-
---
--- Name: action_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE action_type_id_seq OWNED BY action_type.id;
-
-
---
 -- Name: activity; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE activity (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     user_id uuid NOT NULL,
-    action_type_id integer NOT NULL,
+    type text NOT NULL,
     activity_post uuid,
     activity_user uuid,
     activity_attachment uuid,
@@ -148,7 +114,8 @@ CREATE TABLE activity (
     activity_page uuid,
     activity_role integer,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone
+    updated_at timestamp with time zone,
+    CONSTRAINT activity_type_check CHECK ((type = ANY (ARRAY['create'::text, 'update'::text, 'delete'::text, 'register'::text])))
 );
 
 
@@ -804,13 +771,6 @@ ALTER SEQUENCE verification_token_id_seq OWNED BY verification_token.id;
 
 
 --
--- Name: action_type id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY action_type ALTER COLUMN id SET DEFAULT nextval('action_type_id_seq'::regclass);
-
-
---
 -- Name: menu id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -902,23 +862,6 @@ ALTER TABLE ONLY verification_token ALTER COLUMN id SET DEFAULT nextval('verific
 
 
 --
--- Data for Name: action_type; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-INSERT INTO action_type (id, type) VALUES (1, 'create');
-INSERT INTO action_type (id, type) VALUES (2, 'update');
-INSERT INTO action_type (id, type) VALUES (3, 'delete');
-INSERT INTO action_type (id, type) VALUES (4, 'register');
-
-
---
--- Name: action_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('action_type_id_seq', 1, false);
-
-
---
 -- Data for Name: activity; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -928,7 +871,7 @@ SELECT pg_catalog.setval('action_type_id_seq', 1, false);
 -- Data for Name: attachment; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO attachment (id, file_name, safe_name, file_description, file_type, user_id, url, created_at, updated_at) VALUES ('668e14aa-ebe6-11e6-8ebf-4f81f17749d5', 'file.png', 'file.png', NULL, NULL, '1b062e26-df71-48ce-b363-4ae9b966e7a0', '/files/file.png', '2017-02-15 06:50:18.459432+00', '2017-02-15 06:50:18.459432+00');
+INSERT INTO attachment (id, file_name, safe_name, file_description, file_type, user_id, url, created_at, updated_at) VALUES ('668e14aa-ebe6-11e6-8ebf-4f81f17749d5', 'file.png', 'file.png', NULL, NULL, '1b062e26-df71-48ce-b363-4ae9b966e7a0', '/files/file.png', '2017-02-15 22:36:17.958872+00', '2017-02-15 22:36:17.958872+00');
 
 
 --
@@ -947,15 +890,15 @@ INSERT INTO attachment (id, file_name, safe_name, file_description, file_type, u
 -- Data for Name: menu; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO menu (id, uuid, name, label, attributes, restricted, "order") VALUES (1, 'c70fb13d-a079-4367-bb3c-b6dbe381f767', 'Main', 'main', '{}', false, 0);
+INSERT INTO menu (id, uuid, name, label, attributes, restricted, "order") VALUES (1, '4fee07ab-237f-4214-a3e5-747f4af73e91', 'Main', 'main', '{}', false, 0);
 
 
 --
 -- Data for Name: menu_detail; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO menu_detail (id, uuid, label, name, attribute, "position", parent_id, link, icon) VALUES (1, '7573b409-28f0-4fc0-bff3-a5a959eb575f', 'about', 'About', NULL, 1, NULL, '/about', 'info');
-INSERT INTO menu_detail (id, uuid, label, name, attribute, "position", parent_id, link, icon) VALUES (2, '7febd76e-6535-4e33-b5a0-291d751b47c4', 'blog', 'Blog', NULL, 2, NULL, '/blog', 'info');
+INSERT INTO menu_detail (id, uuid, label, name, attribute, "position", parent_id, link, icon) VALUES (1, '5d3889c8-d302-4d4f-a6b9-1ba9e78ba679', 'about', 'About', NULL, 1, NULL, '/about', 'info');
+INSERT INTO menu_detail (id, uuid, label, name, attribute, "position", parent_id, link, icon) VALUES (2, 'a6b4da1e-f633-4be7-8ca5-dbffd3749a2d', 'blog', 'Blog', NULL, 2, NULL, '/blog', 'info');
 
 
 --
@@ -984,7 +927,7 @@ INSERT INTO menu_menu_detail (menu_id, menu_detail_id) VALUES (1, 2);
 -- Data for Name: migrations; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO migrations (id, name, batch, migration_time) VALUES (1, '201701270219_initial.js', 1, '2017-02-15 06:50:12.184+00');
+INSERT INTO migrations (id, name, batch, migration_time) VALUES (1, '201701270219_initial.js', 1, '2017-02-15 22:36:11.861+00');
 
 
 --
@@ -1005,8 +948,8 @@ INSERT INTO migrations_lock (is_locked) VALUES (0);
 -- Data for Name: page; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO page (id, name, slug, url, layout, data, status, restricted, meta, created_at, updated_at) VALUES ('87d1e9b3-b32e-474e-9246-6dce1b21a72d', 'Home', 'home', 'home', '{"showHero":true,"showPosts":true}', '{}', 'published', false, '{"title":"Home","description":"The home page"}', '2017-02-15 06:50:18.413754+00', NULL);
-INSERT INTO page (id, name, slug, url, layout, data, status, restricted, meta, created_at, updated_at) VALUES ('0a277a50-b482-4b86-b0e7-83fdd3a372af', 'About', 'about', 'about', '{"showHero":true,"showPosts":true}', '{}', 'published', false, '{"title":"About","description":"The about page"}', '2017-02-15 06:50:18.416326+00', NULL);
+INSERT INTO page (id, name, slug, url, layout, data, status, restricted, meta, created_at, updated_at) VALUES ('87d1e9b3-b32e-474e-9246-6dce1b21a72d', 'Home', 'home', 'home', '{"showHero":true,"showPosts":true}', '{}', 'published', false, '{"title":"Home","description":"The home page"}', '2017-02-15 22:36:17.929974+00', NULL);
+INSERT INTO page (id, name, slug, url, layout, data, status, restricted, meta, created_at, updated_at) VALUES ('0a277a50-b482-4b86-b0e7-83fdd3a372af', 'About', 'about', 'about', '{"showHero":true,"showPosts":true}', '{}', 'published', false, '{"title":"About","description":"The about page"}', '2017-02-15 22:36:17.932139+00', NULL);
 
 
 --
@@ -1019,21 +962,21 @@ INSERT INTO post (id, title, slug, feature_image, background_image, attachments,
 <blockquote>&nbsp;In ultricies sagittis ex a dapibus. Nunc feugiat lorem non tincidunt euismod. Duis quam nibh, volutpat sit amet enim non, eleifend ullamcorper diam. Etiam iaculis ante ut libero sollicitudin, eget eleifend nulla gravida. Pellentesque ut gravida augue. Donec nibh orci, rutrum nec sapien eu, lacinia pretium nulla. Nunc turpis sem, placerat ac velit sit amet, aliquet ultrices metus.Curabitur mollis venenatis lectus, at elementum felis dapibus non. Sed vel finibus mauris. Aenean semper arcu lectus, porta feugiat urna tincidunt congue. Ut euismod finibus massa quis condimentum. Vivamus interdum velit nec varius consectetur. Vivamus sodales commodo ante, vel fringilla nunc finibus et. Phasellus non sem finibus, congue nibh ut, ornare tortor.Curabitur sapien est, accumsan at justo a, porta malesuada risus. Integer facilisis viverra mauris condimentum finibus.</blockquote>
 <p><br></p>
 <p>&nbsp;Donec eget tortor id ipsum maximus commodo nec eu quam. Aliquam erat volutpat. Nunc tincidunt est sit amet justo placerat egestas. Vestibulum efficitur, neque tempor feugiat lacinia, turpis ex efficitur urna, ullamcorper porta ligula lorem id neque. Quisque interdum risus at nisl finibus varius. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.In euismod gravida tortor in placerat. Aenean blandit blandit efficitur. Cras a accumsan augue, at tincidunt massa. Vivamus eleifend sem sed nibh tempor laoreet. Quisque blandit turpis vitae bibendum mattis. Nulla sagittis quam eget diam feugiat ultricies. Aliquam varius tellus et turpis viverra tempus. Nam sit amet ex suscipit, convallis tortor at, malesuada felis. Vestibulum arcu eros, bibendum sit amet tempus placerat, pharetra nec tortor. Ut scelerisque quam non magna tincidunt, nec varius massa blandit.</p>
-<p><br></p>', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, whenan unknown printer took a galley of type and scrambled it to make a type specimen book.', '1b062e26-df71-48ce-b363-4ae9b966e7a0', true, '2017-02-15 06:50:18.141615+00', NULL);
+<p><br></p>', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, whenan unknown printer took a galley of type and scrambled it to make a type specimen book.', '1b062e26-df71-48ce-b363-4ae9b966e7a0', true, '2017-02-15 22:36:17.697784+00', NULL);
 INSERT INTO post (id, title, slug, feature_image, background_image, attachments, meta, featured, raw_content, content, excerpt, user_id, published, created_at, updated_at) VALUES ('cb61bbae-c91e-4014-b665-3485734b88fb', 'Nother One', 'nother-one', 'https://boldr.io/image3.jpg', 'https://boldr.io/image3.jpg', NULL, '{}', false, NULL, '<h1>Lorem ipsum dolor sit amet.</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien in est aliquam lacinia. Donec fringilla odio nulla, sagittis egestas dolor bibendum ut. Proin eget massa mattis, dictum enim vitae, facilisis eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum imperdiet varius ante. Maecenas sit amet luctus sapien, quis aliquet purus. Cras malesuada quam a dui pretium fermentum. Quisque tempor interdum quam, eu lacinia turpis interdum id. Curabitur non mauris lobortis, mattis nulla id, viverra nisi. Phasellus eget porttitor lorem. Quisque facilisis nec arcu eu fringilla. Vivamus elit ipsum, viverra eu maximus a, venenatis nec nibh.Suspendisse iaculis auctor fermentum. Sed suscipit ante nisl, nec iaculis magna consequat vel. Quisque viverra est a justo egestas, euismod egestas metus hendrerit.</p>
 <p><br></p>
 <blockquote>&nbsp;In ultricies sagittis ex a dapibus. Nunc feugiat lorem non tincidunt euismod. Duis quam nibh, volutpat sit amet enim non, eleifend ullamcorper diam. Etiam iaculis ante ut libero sollicitudin, eget eleifend nulla gravida. Pellentesque ut gravida augue. Donec nibh orci, rutrum nec sapien eu, lacinia pretium nulla. Nunc turpis sem, placerat ac velit sit amet, aliquet ultrices metus.Curabitur mollis venenatis lectus, at elementum felis dapibus non. Sed vel finibus mauris. Aenean semper arcu lectus, porta feugiat urna tincidunt congue. Ut euismod finibus massa quis condimentum. Vivamus interdum velit nec varius consectetur. Vivamus sodales commodo ante, vel fringilla nunc finibus et. Phasellus non sem finibus, congue nibh ut, ornare tortor.Curabitur sapien est, accumsan at justo a, porta malesuada risus. Integer facilisis viverra mauris condimentum finibus.</blockquote>
 <p><br></p>
 <p>&nbsp;Donec eget tortor id ipsum maximus commodo nec eu quam. Aliquam erat volutpat. Nunc tincidunt est sit amet justo placerat egestas. Vestibulum efficitur, neque tempor feugiat lacinia, turpis ex efficitur urna, ullamcorper porta ligula lorem id neque. Quisque interdum risus at nisl finibus varius. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.In euismod gravida tortor in placerat. Aenean blandit blandit efficitur. Cras a accumsan augue, at tincidunt massa. Vivamus eleifend sem sed nibh tempor laoreet. Quisque blandit turpis vitae bibendum mattis. Nulla sagittis quam eget diam feugiat ultricies. Aliquam varius tellus et turpis viverra tempus. Nam sit amet ex suscipit, convallis tortor at, malesuada felis. Vestibulum arcu eros, bibendum sit amet tempus placerat, pharetra nec tortor. Ut scelerisque quam non magna tincidunt, nec varius massa blandit.</p>
-<p><br></p>', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, whenan unknown printer took a galley of type and scrambled it to make a type specimen book.', 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f', false, '2017-02-15 06:50:18.143286+00', NULL);
+<p><br></p>', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, whenan unknown printer took a galley of type and scrambled it to make a type specimen book.', 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f', false, '2017-02-15 22:36:17.699761+00', NULL);
 INSERT INTO post (id, title, slug, feature_image, background_image, attachments, meta, featured, raw_content, content, excerpt, user_id, published, created_at, updated_at) VALUES ('ab33a0ca-b349-4cf8-947f-94f415149492', 'Random Post Title', 'random-post-title', 'https://boldr.io/image2.jpg', 'https://boldr.io/image2.jpg', NULL, '{}', false, NULL, '<h1>Lorem ipsum dolor sit amet.</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien in est aliquam lacinia. Donec fringilla odio nulla, sagittis egestas dolor bibendum ut. Proin eget massa mattis, dictum enim vitae, facilisis eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum imperdiet varius ante. Maecenas sit amet luctus sapien, quis aliquet purus. Cras malesuada quam a dui pretium fermentum. Quisque tempor interdum quam, eu lacinia turpis interdum id. Curabitur non mauris lobortis, mattis nulla id, viverra nisi. Phasellus eget porttitor lorem. Quisque facilisis nec arcu eu fringilla. Vivamus elit ipsum, viverra eu maximus a, venenatis nec nibh.Suspendisse iaculis auctor fermentum. Sed suscipit ante nisl, nec iaculis magna consequat vel. Quisque viverra est a justo egestas, euismod egestas metus hendrerit.</p>
 <p><br></p>
 <blockquote>&nbsp;In ultricies sagittis ex a dapibus. Nunc feugiat lorem non tincidunt euismod. Duis quam nibh, volutpat sit amet enim non, eleifend ullamcorper diam. Etiam iaculis ante ut libero sollicitudin, eget eleifend nulla gravida. Pellentesque ut gravida augue. Donec nibh orci, rutrum nec sapien eu, lacinia pretium nulla. Nunc turpis sem, placerat ac velit sit amet, aliquet ultrices metus.Curabitur mollis venenatis lectus, at elementum felis dapibus non. Sed vel finibus mauris. Aenean semper arcu lectus, porta feugiat urna tincidunt congue. Ut euismod finibus massa quis condimentum. Vivamus interdum velit nec varius consectetur. Vivamus sodales commodo ante, vel fringilla nunc finibus et. Phasellus non sem finibus, congue nibh ut, ornare tortor.Curabitur sapien est, accumsan at justo a, porta malesuada risus. Integer facilisis viverra mauris condimentum finibus.</blockquote>
 <p><br></p>
 <p>&nbsp;Donec eget tortor id ipsum maximus commodo nec eu quam. Aliquam erat volutpat. Nunc tincidunt est sit amet justo placerat egestas. Vestibulum efficitur, neque tempor feugiat lacinia, turpis ex efficitur urna, ullamcorper porta ligula lorem id neque. Quisque interdum risus at nisl finibus varius. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.In euismod gravida tortor in placerat. Aenean blandit blandit efficitur. Cras a accumsan augue, at tincidunt massa. Vivamus eleifend sem sed nibh tempor laoreet. Quisque blandit turpis vitae bibendum mattis. Nulla sagittis quam eget diam feugiat ultricies. Aliquam varius tellus et turpis viverra tempus. Nam sit amet ex suscipit, convallis tortor at, malesuada felis. Vestibulum arcu eros, bibendum sit amet tempus placerat, pharetra nec tortor. Ut scelerisque quam non magna tincidunt, nec varius massa blandit.</p>
-<p><br></p>', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, whenan unknown printer took a galley of type and scrambled it to make a type specimen book.', '1b062e26-df71-48ce-b363-4ae9b966e7a0', true, '2017-02-15 06:50:18.145808+00', NULL);
+<p><br></p>', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, whenan unknown printer took a galley of type and scrambled it to make a type specimen book.', '1b062e26-df71-48ce-b363-4ae9b966e7a0', true, '2017-02-15 22:36:17.702156+00', NULL);
 
 
 --
@@ -1088,9 +1031,9 @@ SELECT pg_catalog.setval('reset_token_id_seq', 1, false);
 -- Data for Name: role; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO role (id, uuid, name, image, description, created_at, updated_at) VALUES (1, '34852a17-fb65-463e-8972-da2168881f18', 'Member', NULL, 'A verified user without special privileges', '2017-02-15 06:50:18.01609+00', NULL);
-INSERT INTO role (id, uuid, name, image, description, created_at, updated_at) VALUES (2, '25f7cd51-0ccf-4dea-88aa-4d4abf213f36', 'Staff', NULL, 'Allows access to the CMS dashboard.', '2017-02-15 06:50:18.022431+00', NULL);
-INSERT INTO role (id, uuid, name, image, description, created_at, updated_at) VALUES (3, '38718cff-fcc2-4df8-bf07-d58afcc362be', 'Admin', NULL, 'Complete control over the CMS', '2017-02-15 06:50:18.025381+00', NULL);
+INSERT INTO role (id, uuid, name, image, description, created_at, updated_at) VALUES (1, 'e14e4370-90ec-4a57-ada3-43827204c134', 'Member', NULL, 'A verified user without special privileges', '2017-02-15 22:36:17.584859+00', NULL);
+INSERT INTO role (id, uuid, name, image, description, created_at, updated_at) VALUES (2, '10658e41-9803-47ed-8119-6d5683b32b93', 'Staff', NULL, 'Allows access to the CMS dashboard.', '2017-02-15 22:36:17.590978+00', NULL);
+INSERT INTO role (id, uuid, name, image, description, created_at, updated_at) VALUES (3, '4afb9dbd-fea9-42c9-a9b9-6ec031b1c94c', 'Admin', NULL, 'Complete control over the CMS', '2017-02-15 22:36:17.593786+00', NULL);
 
 
 --
@@ -1124,8 +1067,8 @@ SELECT pg_catalog.setval('setting_id_seq', 7, true);
 -- Data for Name: tag; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO tag (id, uuid, name, description) VALUES (1, 'bc851cb7-55d1-4ab5-be76-e5e4fa9ac297', 'javascript', 'Something something JS');
-INSERT INTO tag (id, uuid, name, description) VALUES (2, 'c33b7608-ce14-4256-b9a5-a6d4dbea7209', 'apple', 'Stuff about stuff.');
+INSERT INTO tag (id, uuid, name, description) VALUES (1, 'a1f1d2fb-aeed-4425-b20c-09a154dd88eb', 'javascript', 'Something something JS');
+INSERT INTO tag (id, uuid, name, description) VALUES (2, '060e4c9f-f9d7-469e-801f-40b2f0e9bfe1', 'apple', 'Stuff about stuff.');
 
 
 --
@@ -1139,8 +1082,8 @@ SELECT pg_catalog.setval('tag_id_seq', 2, true);
 -- Data for Name: template; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO template (id, uuid, name, slug, meta, content, created_at, updated_at) VALUES (1, 'c23891fb-88c2-4e91-b95d-c652f15eab0c', 'Base', 'base', '{}', '{}', '2017-02-15 06:50:18.371438+00', NULL);
-INSERT INTO template (id, uuid, name, slug, meta, content, created_at, updated_at) VALUES (2, 'd42f91fb-88c2-4e91-b95d-c652f15eab0c', 'Content', 'content', '{}', '{}', '2017-02-15 06:50:18.373032+00', NULL);
+INSERT INTO template (id, uuid, name, slug, meta, content, created_at, updated_at) VALUES (1, 'c23891fb-88c2-4e91-b95d-c652f15eab0c', 'Base', 'base', '{}', '{}', '2017-02-15 22:36:17.893833+00', NULL);
+INSERT INTO template (id, uuid, name, slug, meta, content, created_at, updated_at) VALUES (2, 'd42f91fb-88c2-4e91-b95d-c652f15eab0c', 'Content', 'content', '{}', '{}', '2017-02-15 22:36:17.895412+00', NULL);
 
 
 --
@@ -1169,9 +1112,9 @@ SELECT pg_catalog.setval('template_page_id_seq', 2, true);
 -- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "user" (id, email, password, first_name, last_name, username, avatar_url, profile_image, location, bio, birthday, website, language, social, verified, created_at, updated_at) VALUES ('1b062e26-df71-48ce-b363-4ae9b966e7a0', 'admin@boldr.io', '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka', 'Joe', 'Gray', 'Joey', 'https://boldr.io/images/unknown-avatar.png', 'https://boldr.io/images/unknown-avatar.png', 'Colorado', 'I am me.', '1988-01-01', 'https://boldr.io', 'en_US', '{"facebook":{"url":"www.facebook.com"},"twitter":{"url":"www.twitter.com"},"linkedin":{"url":"www.linkedin.com"},"github":{"url":"www.github.com"},"google":{"url":"www.google.com"}}', true, '2017-02-15 06:50:18.055827+00', NULL);
-INSERT INTO "user" (id, email, password, first_name, last_name, username, avatar_url, profile_image, location, bio, birthday, website, language, social, verified, created_at, updated_at) VALUES ('f4d869a6-1a75-469b-a9cc-965c552929e4', 'user@boldr.io', '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka', 'Jessica', 'Smith', 'Jess', 'https://boldr.io/images/unknown-avatar.png', 'https://boldr.io/images/unknown-avatar.png', 'Washington', 'Just a person', '1988-01-01', 'https://boldr.io', 'en_US', '{"facebook":{"url":"www.facebook.com"},"twitter":{"url":"www.twitter.com"},"linkedin":{"url":"www.linkedin.com"},"github":{"url":"www.github.com"},"google":{"url":"www.google.com"}}', true, '2017-02-15 06:50:18.057778+00', NULL);
-INSERT INTO "user" (id, email, password, first_name, last_name, username, avatar_url, profile_image, location, bio, birthday, website, language, social, verified, created_at, updated_at) VALUES ('f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f', 'demo@boldr.io', '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka', 'Sam', 'Hunt', 'Samus', 'https://boldr.io/images/unknown-avatar.png', 'https://boldr.io/images/unknown-avatar.png', 'California', 'Someone doing things.', '1988-01-01', 'https://boldr.io', 'en_US', '{"facebook":{"url":"www.facebook.com"},"twitter":{"url":"www.twitter.com"},"linkedin":{"url":"www.linkedin.com"},"github":{"url":"www.github.com"},"google":{"url":"www.google.com"}}', true, '2017-02-15 06:50:18.060027+00', NULL);
+INSERT INTO "user" (id, email, password, first_name, last_name, username, avatar_url, profile_image, location, bio, birthday, website, language, social, verified, created_at, updated_at) VALUES ('1b062e26-df71-48ce-b363-4ae9b966e7a0', 'admin@boldr.io', '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka', 'Joe', 'Gray', 'Joey', 'https://boldr.io/images/unknown-avatar.png', 'https://boldr.io/images/unknown-avatar.png', 'Colorado', 'I am me.', '1988-01-01', 'https://boldr.io', 'en_US', '{"facebook":{"url":"www.facebook.com"},"twitter":{"url":"www.twitter.com"},"linkedin":{"url":"www.linkedin.com"},"github":{"url":"www.github.com"},"google":{"url":"www.google.com"}}', true, '2017-02-15 22:36:17.619881+00', NULL);
+INSERT INTO "user" (id, email, password, first_name, last_name, username, avatar_url, profile_image, location, bio, birthday, website, language, social, verified, created_at, updated_at) VALUES ('f4d869a6-1a75-469b-a9cc-965c552929e4', 'user@boldr.io', '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka', 'Jessica', 'Smith', 'Jess', 'https://boldr.io/images/unknown-avatar.png', 'https://boldr.io/images/unknown-avatar.png', 'Washington', 'Just a person', '1988-01-01', 'https://boldr.io', 'en_US', '{"facebook":{"url":"www.facebook.com"},"twitter":{"url":"www.twitter.com"},"linkedin":{"url":"www.linkedin.com"},"github":{"url":"www.github.com"},"google":{"url":"www.google.com"}}', true, '2017-02-15 22:36:17.621609+00', NULL);
+INSERT INTO "user" (id, email, password, first_name, last_name, username, avatar_url, profile_image, location, bio, birthday, website, language, social, verified, created_at, updated_at) VALUES ('f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f', 'demo@boldr.io', '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka', 'Sam', 'Hunt', 'Samus', 'https://boldr.io/images/unknown-avatar.png', 'https://boldr.io/images/unknown-avatar.png', 'California', 'Someone doing things.', '1988-01-01', 'https://boldr.io', 'en_US', '{"facebook":{"url":"www.facebook.com"},"twitter":{"url":"www.twitter.com"},"linkedin":{"url":"www.linkedin.com"},"github":{"url":"www.github.com"},"google":{"url":"www.google.com"}}', true, '2017-02-15 22:36:17.623956+00', NULL);
 
 
 --
@@ -1201,14 +1144,6 @@ SELECT pg_catalog.setval('user_role_id_seq', 3, true);
 --
 
 SELECT pg_catalog.setval('verification_token_id_seq', 1, false);
-
-
---
--- Name: action_type action_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY action_type
-    ADD CONSTRAINT action_type_pkey PRIMARY KEY (id);
 
 
 --
@@ -1508,13 +1443,6 @@ ALTER TABLE ONLY verification_token
 
 
 --
--- Name: action_type_type_index; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX action_type_type_index ON action_type USING btree (type);
-
-
---
 -- Name: menu_detail_label_index; Type: INDEX; Schema: public; Owner: postgres
 --
 
@@ -1652,14 +1580,6 @@ CREATE INDEX user_verified_index ON "user" USING btree (verified);
 --
 
 CREATE INDEX verification_token_token_index ON verification_token USING btree (token);
-
-
---
--- Name: activity activity_action_type_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY activity
-    ADD CONSTRAINT activity_action_type_id_foreign FOREIGN KEY (action_type_id) REFERENCES action_type(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --

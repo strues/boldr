@@ -4,33 +4,9 @@ import { responseHandler, Conflict, BadRequest } from '../../core/index';
 import slugIt from '../../utils/slugIt';
 
 // Models
-import { Tag, Activity, ActionType, Post, PostTag, Comment, PostComment } from '../../models';
+import { Tag, Activity, Post, PostTag, Comment, PostComment } from '../../models';
 
 const debug = require('debug')('boldr:post-ctrl');
-
-/**
- * Retrieves all posts
- * @method listPosts
- *
- * @param {Object} req
- * @param {Object} res
- * @param {Function} next
- * @returns {Promise}
- */
-export async function listPosts(req, res, next) {
-  try {
-    const allPosts = await Post
-    .query()
-    .skipUndefined()
-    .eager('[tags,author,comments]')
-    .omit(['password']);
-
-    return responseHandler(res, 200, allPosts);
-  } catch (err) {
-    /* istanbul ignore next */
-    return next(new BadRequest(err));
-  }
-}
 
 /**
  * Create a post
@@ -95,7 +71,7 @@ export async function createPost(req, res, next) {
     await Activity.query().insert({
       id: uuid(),
       user_id: req.user.id,
-      action_type_id: 1,
+      type: 'create',
       activity_post: createPost.id,
     });
     return responseHandler(res, 201, createPost);
@@ -209,7 +185,7 @@ export function update(req, res) {
       await Activity.query().insert({
         id: uuid(),
         user_id: req.user.id,
-        action_type_id: 2,
+        type: 'update',
         activity_post: post.id,
       });
       responseHandler(res, 202, post);

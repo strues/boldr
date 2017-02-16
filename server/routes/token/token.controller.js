@@ -24,7 +24,7 @@ export async function forgottenPassword(req, res, next) {
     const resetPasswordToken = uuid();
 
     await user.$relatedQuery('resetToken').insert({
-      ip: req.ip,
+      ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
       token: resetPasswordToken,
       user_id: user.id,
     });

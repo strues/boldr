@@ -59,15 +59,20 @@ export default (app) => {
 
 /**
  * @apiDefine listParams
- * @apiParam {String[]} include=[author,tags] Return associated models with the request
- * @apiParam {Number{1..30}} [page=1] Page number.
- * @apiParam {Number{1..100}} [limit=30] Amount of returned items.
- * @apiParam {String[]} [sort=-createdAt] Order of returned items.
+ * @apiParam {String[]} include   Include related properties of the object.
+ * This is an alternative way to fetch a relevant data in a single call. ?include=[relationship]
+ * @apiParam {Number{1..30}} [page=1]           Page number.
+ * @apiParam {Number{1..100}} [limit=30]        Amount of returned items.
+ * @apiParam {String[]} [sort=-createdAt]       Order of returned items.
+ *
+ * @apiParamExample {url} Return all posts with related author, comments, and tags.
+ * Limit to 10 per page, starting on the first page
+ *    https://staging.boldr.io/api/v1/posts?include=[author,tags,comments]&page[size]=10&page[number]=1
  */
 
 /**
  * @apiDefine authHeader
- * @apiHeader {String}  Authorization   The user's token
+ * @apiHeader {String} Authorization Bearer JSONWEBTOKEN
  * @apiHeaderExample {json} Authorization Header Example:
  *    {
  *      "Authorization": "Bearer JSONWEBTOKEN"

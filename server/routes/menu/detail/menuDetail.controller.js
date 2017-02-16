@@ -55,7 +55,7 @@ export async function createDetail(req, res, next) {
     debug(associateMenuDetail);
     await Activity.query().insert({
       user_id: req.user.id,
-      action_type_id: 1,
+      type: 'create',
       activity_menu_detail: newLink.id,
     });
 

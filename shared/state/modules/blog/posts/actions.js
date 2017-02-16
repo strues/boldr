@@ -51,8 +51,7 @@ export function fetchPosts() {
           dispatch(receivePostsFailed());
         }
 
-        const camelizedJson = camelizeKeys(response.body);
-        const normalizedData = normalize(response.body, arrayOfPost);
+        const normalizedData = normalize(response.body.results, arrayOfPost);
         // console.log(normalized)
         dispatch(receivePosts(normalizedData));
       })

@@ -36,7 +36,7 @@ const ActivityIcn = styled.div`
 type Props = {
   created_at: Date,
   owner: Object,
-  action_type_id: Number,
+  type: String,
   activity_post: ?String,
   activity_user: ?String,
   activity_attachment: ?String,
@@ -84,7 +84,7 @@ const ActivityItem = (props: Props) => {
             avatar={ <Avatar src={ props.owner.avatar_url } role="presentation" /> }
           />
         </User>
-        <ActivityItemDetail atype={ props.action_type_id } />
+        <ActivityItemDetail atype={ props.type } />
         <ActivityIcn>
         { ActivityIcon }
         </ActivityIcn>

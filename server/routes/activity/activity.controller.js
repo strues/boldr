@@ -1,5 +1,5 @@
 import { responseHandler, BadRequest } from '../../core';
-
+import { removeNullandUndef } from '../../utils';
 import Activity from '../../models/activity';
 
 const debug = require('debug')('boldr:activity-ctrl');
@@ -19,9 +19,9 @@ export async function listActivities(req, res, next) {
     .skipUndefined()
     .orderBy('created_at', 'desc')
     .limit(10)
-    .eager('[actionType,owner,post,member,attachment,menuDetail,tag]');
+    .eager('[owner,post,member,attachment,menuDetail,tag]');
 
-    return responseHandler(res, 200, activities);
+    return responseHandler(res, 200, removeNullandUndef(activities));
   } catch (error) {
     /* istanbul ignore next */
     return next(new BadRequest(error));

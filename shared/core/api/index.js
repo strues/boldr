@@ -48,7 +48,7 @@ export const doResetPassword = (password, token) =>
   *****************************************************************/
 
 export const getAllPosts = () =>
-  apiClient.get('/posts');
+  apiClient.get('/posts?include=[author,tags,comments]');
 
 export const getPostById = (postId) =>
   apiClient.get(`/posts/${postId}`);
@@ -213,7 +213,7 @@ export const doDeleteTag = (id) =>
   * @exports doUpdateMember
   *****************************************************************/
 export const getAllMembers = () =>
-  apiClient.get('/users');
+  apiClient.get('/users?include=[roles]');
 
 export const doUpdateMember = (userData) => {
   const payload = {

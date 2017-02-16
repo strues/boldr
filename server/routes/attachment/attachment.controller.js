@@ -64,7 +64,7 @@ export async function updateAttachment(req, res, next) {
 
     await Activity.query().insert({
       user_id: req.user.id,
-      action_type_id: 2,
+      type: 'update',
       activity_attachment: req.params.id,
     });
 
@@ -164,7 +164,7 @@ export async function uploadAttachment(req, res, next) {
         // create an activity entry
         await Activity.query().insert({
           user_id: req.user.id,
-          action_type_id: 1,
+          type: 'create',
           activity_attachment: newAttachment.id,
         });
 

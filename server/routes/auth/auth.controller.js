@@ -84,7 +84,7 @@ export async function registerUser(req, res, next) {
       .insert({
         id: uuid(),
         user_id: payload.id,
-        action_type_id: 4,
+        type: 'register',
         activity_user: payload.id,
       });
     // Massive transaction is finished, send the data to the user.
@@ -102,16 +102,8 @@ export async function registerUser(req, res, next) {
  */
 export async function loginUser(req, res, next) {
   try {
-    req.assert('email', 'Email is invalid').isEmail();
-    req.assert('email', 'Email cannot be blank').notEmpty();
-    req.assert('password', 'Password cannot be blank').notEmpty();
-    req.sanitize('email').normalizeEmail({ remove_dots: false });
 
-    const errors = req.validationErrors();
-    if (errors) {
-      return res.status(400).json(errors);
-    }
-
+    console.log(req.body)
     const user = await User
       .query()
       .where({ email: req.body.email })
