@@ -230,7 +230,7 @@ export default function webpackConfigFactory(buildOptions) {
           { path: 'style-loader' },
           {
             path: 'css-loader',
-            options: {
+            use: {
               importLoaders: 1,
               localIdentName: '[name]__[local]___[hash:base64:5]',
               sourceMap: true,
@@ -242,7 +242,7 @@ export default function webpackConfigFactory(buildOptions) {
           },
           {
             path: 'sass-loader',
-            options: {
+            use: {
               outputStyle: 'expanded',
               sourceMap: true,
             },
@@ -360,7 +360,7 @@ export default function webpackConfigFactory(buildOptions) {
             }),
             ifProdClient(() => ({
               loader: ExtractTextPlugin.extract({
-                fallbackLoader: 'style-loader',
+                fallback: 'style-loader',
                 loader: 'css-loader?sourceMap&importLoaders=2!postcss-loader!sass-loader?outputStyle=expanded&sourceMap&sourceMapContents', // eslint-disable-line
               }),
             })),

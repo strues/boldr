@@ -12,7 +12,6 @@ import Avatar from 'react-md/lib/Avatars';
 
 import type { Post } from '../../../../../../types/models';
 import { selectPost } from '../../../../../../state/modules/blog/posts/actions';
-import PostTableRow from '../PostTableRow';
 
 type Props = {
   posts: Array<Post>,
