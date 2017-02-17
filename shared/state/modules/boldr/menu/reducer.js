@@ -7,10 +7,9 @@ const INITIAL_STATE = {
   id: -1,
   uuid: '',
   name: '',
-  label: '',
+  safe_name: '',
   attributes: {},
   restricted: false,
-  order: -1,
   details: [],
 };
 
@@ -24,10 +23,8 @@ const main = (state = INITIAL_STATE, action) => {
         id: action.payload.id,
         uuid: action.payload.uuid,
         name: action.payload.name,
-        label: action.payload.label,
-        attributes: action.payload.attributes,
+        safe_name: action.payload.label,
         restricted: action.payload.restricted,
-        order: action.payload.order,
         details: action.payload.details,
         // details(undefined, action)
       };

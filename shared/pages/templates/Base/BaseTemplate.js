@@ -8,7 +8,7 @@ import { fetchTemplateResource } from '../../../state/modules/boldr/templates/ac
 import { fetchMenusIfNeeded, getByLabel } from '../../../state/modules/boldr/menu';
 import { logout } from '../../../state/modules/auth/actions';
 import { selectMe } from '../../../state/modules/users';
-import { PrimaryHeader, Footer } from '../../../components/index';
+import { MainHeader, Footer } from '../../../components/index';
 import type { ReactElement, ReactChildren } from '../../../types/react';
 
 type Props = {
@@ -41,7 +41,6 @@ const Wrapper = styled.div`
 
 const ContentWrapper = styled.section`
   width: 100%;
-  padding-top: 60px;
   box-sizing: border-box;
   margin: 0 auto;
   padding-bottom: 150px;
@@ -105,18 +104,18 @@ class BaseTemplate extends PureComponent {
       <Wrapper { ...this.props }>
           { this.props.helmetMeta }
 
-          <PrimaryHeader
+
+          <MainHeader
             auth={ this.props.auth }
             logo={ this.props.logo }
             me={ this.props.me }
-            menu={ this.props.menu }
+            menu={ this.props.menu.details }
             isMobile={ this.props.isMobile }
             handleProfileClick={ this.handleProfileClick }
             handleLogoClick= { this.handleLogoClick }
             handleLogoutClick={ this.handleLogoutClick }
             handleDashClick={ this.handleDashClick }
           />
-
           { this.props.hero ? this.props.hero : null }
 
           <ContentWrapper>

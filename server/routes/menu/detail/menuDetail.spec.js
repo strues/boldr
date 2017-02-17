@@ -39,7 +39,7 @@ describe('Menu Details API', async () => {
         .post('/api/v1/menu-details')
         .set('Accept', 'application/json')
         .set('Authorization', `Bearer ${token}`)
-        .send({ name: faker.random.word(), label: faker.random.word(), link: '/test', position: 4, icon: 'question' })
+        .send({ name: faker.random.word(), href: 'test', order: 4, icon: 'question' })
         .expect((res) => {
           expect(res.status).toBe(201);
         });
@@ -68,7 +68,7 @@ describe('Menu Details API', async () => {
         .put('/api/v1/menu-details/2')
         .set('Accept', 'application/json')
         .set('Authorization', `Bearer ${token}`)
-        .send({ link: '/test', position: 4, icon: 'question' })
+        .send({ href: 'test', order: 4, icon: 'question' })
         .expect((res) => {
           expect(res.status).toBe(202);
         });

@@ -34,11 +34,14 @@ export async function createDetail(req, res, next) {
   try {
     const payload = {
       name: req.body.name,
-      link: req.body.link,
+      safe_name: slugIt(req.body.name),
+      href: req.body.link,
+      mobile_href: req.body.mobile_href,
+      css_classname: req.body.css_classname,
+      has_dropdown: JSON.parse(req.body.has_dropdown),
       icon: req.body.icon,
-      label: slugIt(req.body.name),
-      attribute: req.body.attribute,
-      position: req.body.position,
+      order: req.body.order,
+      childrens: req.body.childrens,
     };
     const newLink = await MenuDetail.query().insert(payload);
 

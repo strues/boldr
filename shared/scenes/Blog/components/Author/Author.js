@@ -20,6 +20,8 @@ const AvatarName = styled.li`
 `;
 const BioBlock = styled.li`
   vertical-align: middle;
+  margin-bottom: 15px;
+  padding-top: 10px;
 `;
 
 type Props = {

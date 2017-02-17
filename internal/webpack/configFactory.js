@@ -60,7 +60,7 @@ export default function webpackConfigFactory(buildOptions) {
       __dirname: true,
       __filename: true,
       global: true,
-      crypto: 'empty',
+      crypto: true,
       process: true,
       module: false,
       clearImmediate: false,
@@ -109,7 +109,7 @@ export default function webpackConfigFactory(buildOptions) {
     resolve: {
       mainFields: ifNode(
         ['module', 'jsnext:main', 'main'],
-        ['web', 'browser', 'style', 'module', 'jsnext:main', 'main']
+        ['web', 'browser', 'style', 'module', 'jsnext:main', 'main'],
       ),
       extensions: getConfig('bundleSrcTypes').map(ext => `.${ext}`),
     },

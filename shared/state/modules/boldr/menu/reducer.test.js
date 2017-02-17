@@ -9,10 +9,9 @@ describe('Menu Reducer', () => {
           id: -1,
           uuid: '',
           name: '',
-          label: '',
+          safe_name: '',
           attributes: {},
           restricted: false,
-          order: -1,
           details: [],
         },
       });

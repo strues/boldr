@@ -156,28 +156,29 @@ module.exports.up = async (db) => {
     // uuid
     table.uuid('uuid').notNullable().defaultTo(db.raw('uuid_generate_v4()'));
     table.string('name').notNullable();
-    table.string('label').notNullable();
+    table.string('safe_name').notNullable();
     table.json('attributes').nullable();
     table.boolean('restricted').default(false);
-    table.integer('order').notNullable();
 
-    table.index('label');
+    table.index('safe_name');
+    table.index('uuid');
   });
   await db.schema.createTable('menu_detail', (table) => {
     table.increments('id').unsigned().primary();
     // uuid
     table.uuid('uuid').notNullable().defaultTo(db.raw('uuid_generate_v4()'));
-    table.string('label', 50).notNullable();
+    table.string('safe_name', 50).notNullable();
     table.string('name', 50).notNullable();
-    table.string('attribute', 255).nullable();
-    table.integer('position');
-    table.integer('parent_id').nullable();
-    table.string('link').notNullable();
+    table.string('css_classname', 255).nullable();
+    table.boolean('has_dropdown').default(false);
+    table.integer('order');
+    table.string('mobile_href', 255).nullable().comment('Mobile href is applicable in cases where the item is a dropdown trigger on desktop. Without a mobile href, it will only be text.');
+    table.string('href').notNullable();
     table.string('icon').nullable();
-
-    table.index('label');
+    table.json('children');
+    table.index('safe_name');
     table.index('uuid');
-    table.index('link');
+    table.index('href');
   });
   await db.schema.createTable('gallery', (table) => {
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();

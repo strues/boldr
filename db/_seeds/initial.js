@@ -1,3 +1,4 @@
+/* eslint-disable */
 function truncate(knex, Promise, tables) {
   return Promise.each(tables,
     (table) => knex.raw(`TRUNCATE TABLE ${table} RESTART IDENTITY CASCADE`));
@@ -228,25 +229,47 @@ function seed(knex, Promise) {
     .then(() => Promise.all([
       knex('menu').insert({
         name: 'Main',
-        label: 'main',
+        safe_name: 'main',
         restricted: false,
-        order: 0,
         attributes: {},
       }),
     ]))
     .then(() => Promise.all([
       knex('menu_detail').insert({
         name: 'About',
-        label: 'about',
-        position: 1,
-        link: '/about',
+        safe_name: 'about',
+        css_classname: 'about-link',
+        has_dropdown: true,
+        order: 1,
+        mobile_href: 'about',
+        href: 'about',
         icon: 'info',
+        children: {
+          key: 'about-menu',
+          items: [
+            {
+              name: 'Tech',
+              id: 'tech',
+              href: 'about/tech',
+              icon: 'change_history'
+            },
+            {
+              name: 'Setup',
+              id: 'setup',
+              href: 'about/setup',
+              icon: 'phonelink_setup'
+            }
+          ]
+        }
       }),
       knex('menu_detail').insert({
         name: 'Blog',
-        label: 'blog',
-        position: 2,
-        link: '/blog',
+        safe_name: 'blog',
+        css_classname: 'blog-link',
+        has_dropdown: false,
+        order: 2,
+        mobile_href: 'blog',
+        href: 'blog',
         icon: 'info',
       }),
     ]))

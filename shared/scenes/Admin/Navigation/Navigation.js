@@ -40,10 +40,16 @@ class Navigation extends Component {
     open: false,
     detail: {
       name: null,
-      position: null,
-      link: null,
+      safe_name: null,
+      order: null,
+      href: null,
+      mobile_href: null,
+      uuid: null,
+      has_dropdown: false,
+      css_classname: null,
       id: null,
       icon: null,
+      children: null,
     },
   };
   onUpdateFormSubmit = (data) => {
@@ -51,7 +57,6 @@ class Navigation extends Component {
   }
 
   onFormSubmit = (values) => {
-    console.log(values)
     this.props.addMenuDetail(values);
   }
   closeModal() {
@@ -67,10 +72,15 @@ class Navigation extends Component {
     this.setState({
       detail: {
         name: item.name,
-        position: item.position,
-        link: item.link,
+        safe_name: item.safe_name,
+        order: item.order,
+        href: item.href,
+        mobile_href: item.mobile_href,
+        has_dropdown: item.has_dropdown,
+        css_classname: item.css_classname,
         id: item.id,
         icon: item.icon,
+        children: item.children,
       },
     });
   }

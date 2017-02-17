@@ -7,7 +7,7 @@ import { Grid, Col, Row } from './Layout';
 import Notifications from './Notification';
 import Modal from './Modal';
 import Hero from './Hero';
-import PrimaryHeader from './PrimaryHeader';
+import MainHeader from './Header';
 import Widget from './Widget';
 import Image from './Image';
 import Icon from './Icon';
@@ -42,7 +42,7 @@ export {
   Loader,
   Modal,
   Notifications,
-  PrimaryHeader,
+  MainHeader,
   RequireAuth,
   Row,
   Widget,

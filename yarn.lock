@@ -82,7 +82,7 @@ acorn@^3.0.4:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-3.3.0.tgz#45e37fb39e8da3f25baee3ff5369e2bb5f22017a"
 
-acorn@^4.0.11, acorn@^4.0.3, acorn@^4.0.4:
+acorn@^4.0.3, acorn@^4.0.4:
   version "4.0.11"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-4.0.11.tgz#edcda3bd937e7556410d42ed5860f67399c794c0"
 
@@ -558,9 +558,9 @@ babel-jest@^18.0.0:
     babel-plugin-istanbul "^3.0.0"
     babel-preset-jest "^18.0.0"
 
-babel-loader@6.3.1:
-  version "6.3.1"
-  resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-6.3.1.tgz#e4d590279bbd1dc3b06949850c20ca4187d50991"
+babel-loader@6.3.2:
+  version "6.3.2"
+  resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-6.3.2.tgz#18de4566385578c1b4f8ffe6cbc668f5e2a5ef03"
   dependencies:
     find-cache-dir "^0.1.1"
     loader-utils "^0.2.16"
@@ -2412,7 +2412,7 @@ duplexer2@0.0.2:
   dependencies:
     readable-stream "~1.1.9"
 
-duplexer@^0.1.1, duplexer@~0.1.1:
+duplexer@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/duplexer/-/duplexer-0.1.1.tgz#ace6ff808c1ce66b57d1ebf97977acb02334cfc1"
 
@@ -2433,7 +2433,7 @@ ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
 
-ejs@^2.3.4, ejs@^2.5.5:
+ejs@^2.3.4:
   version "2.5.5"
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.5.5.tgz#6ef4e954ea7dcf54f66aad2fe7aa421932d9ed77"
 
@@ -2624,14 +2624,15 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-boldr@0.7.3:
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/eslint-config-boldr/-/eslint-config-boldr-0.7.3.tgz#9635e042b9b0fe5aac0999d3681904fcb7e7529f"
+eslint-config-boldr@0.7.6:
+  version "0.7.6"
+  resolved "https://registry.yarnpkg.com/eslint-config-boldr/-/eslint-config-boldr-0.7.6.tgz#7f7909919f08900a749659e26e28764a2deabded"
   dependencies:
     eslint-plugin-babel "^4.0.1"
     eslint-plugin-flowtype "^2.30.0"
     eslint-plugin-import "^2.2.0"
-    eslint-plugin-react "^6.9.0"
+    eslint-plugin-promise "^3.4.2"
+    eslint-plugin-react "6.10.0"
 
 eslint-import-resolver-node@^0.2.0:
   version "0.2.3"
@@ -2673,7 +2674,11 @@ eslint-plugin-import@^2.2.0:
     minimatch "^3.0.3"
     pkg-up "^1.0.0"
 
-eslint-plugin-react@^6.9.0:
+eslint-plugin-promise@^3.4.2:
+  version "3.4.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-promise/-/eslint-plugin-promise-3.4.2.tgz#1be2793eafe2d18b5b123b8136c269f804fe7122"
+
+eslint-plugin-react@6.10.0, eslint-plugin-react@^6.10.0:
   version "6.10.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-6.10.0.tgz#9c48b48d101554b5355413e7c64238abde6ef1ef"
   dependencies:
@@ -2868,7 +2873,7 @@ express-winston@^2.2.0:
     chalk "~0.4.0"
     lodash "~4.11.1"
 
-express@4.14.1, express@^4.14.1:
+express@4.14.1:
   version "4.14.1"
   resolved "https://registry.yarnpkg.com/express/-/express-4.14.1.tgz#646c237f766f148c2120aff073817b9e4d7e0d33"
   dependencies:
@@ -2986,10 +2991,6 @@ fileset@^2.0.2:
   dependencies:
     glob "^7.0.3"
     minimatch "^3.0.3"
-
-filesize@^3.5.4:
-  version "3.5.4"
-  resolved "https://registry.yarnpkg.com/filesize/-/filesize-3.5.4.tgz#742fc7fb6aef4ee3878682600c22f840731e1fda"
 
 fill-range@^2.1.0:
   version "2.2.3"
@@ -3225,13 +3226,9 @@ generate-object-property@^1.1.0:
   dependencies:
     is-property "^1.0.0"
 
-generic-pool@2.4.2:
+generic-pool@2.4.2, generic-pool@^2.4.2:
   version "2.4.2"
   resolved "https://registry.yarnpkg.com/generic-pool/-/generic-pool-2.4.2.tgz#886bc5bf0beb7db96e81bcbba078818de5a62683"
-
-generic-pool@^2.4.2:
-  version "2.5.4"
-  resolved "https://registry.yarnpkg.com/generic-pool/-/generic-pool-2.5.4.tgz#38c6188513e14030948ec6e5cf65523d9779299b"
 
 get-caller-file@^1.0.1:
   version "1.0.2"
@@ -3375,12 +3372,6 @@ griddle-react@^0.7.1:
 growly@^1.2.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/growly/-/growly-1.3.0.tgz#f10748cbe76af964b7c96c93c6bcc28af120c081"
-
-gzip-size@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/gzip-size/-/gzip-size-3.0.0.tgz#546188e9bdc337f673772f81660464b389dce520"
-  dependencies:
-    duplexer "^0.1.1"
 
 handlebars@^4.0.3:
   version "4.0.6"
@@ -4422,9 +4413,9 @@ kind-of@^3.0.2:
   dependencies:
     is-buffer "^1.0.2"
 
-knex@0.12.6:
-  version "0.12.6"
-  resolved "https://registry.yarnpkg.com/knex/-/knex-0.12.6.tgz#a255f0ea03af2c2c94687a622c08acc1a9463c0e"
+knex@0.12.7:
+  version "0.12.7"
+  resolved "https://registry.yarnpkg.com/knex/-/knex-0.12.7.tgz#5793f579f07a2938bf9874693d74bba55c5baa1c"
   dependencies:
     babel-runtime "^6.11.6"
     bluebird "^3.4.6"
@@ -4438,10 +4429,11 @@ knex@0.12.6:
     lodash "^4.6.0"
     minimist "~1.1.0"
     mkdirp "^0.5.0"
-    node-uuid "^1.4.7"
     pg-connection-string "^0.1.3"
     readable-stream "^1.1.12"
+    safe-buffer "^5.0.1"
     tildify "~1.0.0"
+    uuid "^3.0.0"
     v8flags "^2.0.2"
 
 known-css-properties@^0.0.6:
@@ -5175,10 +5167,6 @@ node-sass@^4.5.0:
     sass-graph "^2.1.1"
     stdout-stream "^1.4.0"
 
-node-uuid@^1.4.7:
-  version "1.4.7"
-  resolved "https://registry.yarnpkg.com/node-uuid/-/node-uuid-1.4.7.tgz#6da5a17668c4b3dd59623bda11cf7fa4c1f60a6f"
-
 nodemailer@^3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-3.1.1.tgz#cdddb64d86387f902542307b4d92ea00140445a1"
@@ -5373,10 +5361,6 @@ onecolor@~2.4.0:
 onetime@^1.0.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/onetime/-/onetime-1.1.0.tgz#a1f7838f8314c516f05ecefcbc4ccfe04b4ed789"
-
-opener@^1.4.2:
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/opener/-/opener-1.4.3.tgz#5c6da2c5d7e5831e8ffa3964950f8d6674ac90b8"
 
 optimist@^0.6.1, optimist@~0.6.0:
   version "0.6.1"
@@ -6407,10 +6391,6 @@ react-dropzone@^3.10.0:
   dependencies:
     attr-accept "^1.0.3"
 
-react-edit@^6.2.0:
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/react-edit/-/react-edit-6.2.0.tgz#3911441149e85a257bf778565569897c5321beca"
-
 react-event-listener@^0.4.0:
   version "0.4.1"
   resolved "https://registry.yarnpkg.com/react-event-listener/-/react-event-listener-0.4.1.tgz#86b53974c3df651857766b7b177682ed7c7c8318"
@@ -6508,10 +6488,6 @@ react-swipeable-views@^0.7.10:
     react-event-listener "^0.4.0"
     warning "^3.0.0"
 
-react-visibility-toggles@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/react-visibility-toggles/-/react-visibility-toggles-1.1.1.tgz#66e62250c4c2ae0e11877d7c1da337fb30721421"
-
 react@15.4.2:
   version "15.4.2"
   resolved "https://registry.yarnpkg.com/react/-/react-15.4.2.tgz#41f7991b26185392ba9bae96c8889e7e018397ef"
@@ -6519,18 +6495,6 @@ react@15.4.2:
     fbjs "^0.8.4"
     loose-envify "^1.1.0"
     object-assign "^4.1.0"
-
-reactabular-resizable@^8.6.0:
-  version "8.6.0"
-  resolved "https://registry.yarnpkg.com/reactabular-resizable/-/reactabular-resizable-8.6.0.tgz#5bf25fdf78bab29aaff8f60a295c13505ea7a3f3"
-  dependencies:
-    stylesheet-helpers "^0.2.2"
-
-reactabular-table@^8.6.0:
-  version "8.6.0"
-  resolved "https://registry.yarnpkg.com/reactabular-table/-/reactabular-table-8.6.0.tgz#4b88edff98b378bdc12a4aa06579ca53e192db43"
-  dependencies:
-    classnames "^2.2.5"
 
 read-cache@^1.0.0:
   version "1.0.0"
@@ -6952,10 +6916,6 @@ sax@^1.2.1, sax@~1.2.1:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.2.tgz#fd8631a23bc7826bef5d871bdb87378c95647828"
 
-searchtabular@^1.3.2:
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/searchtabular/-/searchtabular-1.3.2.tgz#13673f87c9f67ff57f25cf8692d6dde139095372"
-
 "semver@2 || 3 || 4 || 5", "semver@2.x || 3.x || 4 || 5", semver@^5.1.0, semver@^5.3.0, semver@~5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.3.0.tgz#9b2ce5d3de02d17c6012ad326aa6b4d0cf54f94f"
@@ -7071,10 +7031,6 @@ sort-keys@^1.0.0:
   resolved "https://registry.yarnpkg.com/sort-keys/-/sort-keys-1.1.2.tgz#441b6d4d346798f1b4e49e8920adfba0e543f9ad"
   dependencies:
     is-plain-obj "^1.0.0"
-
-sortabular@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/sortabular/-/sortabular-1.2.0.tgz#915e3b51a5d1301c04b211e93a1434133cf264fc"
 
 source-list-map@^0.1.4, source-list-map@~0.1.7:
   version "0.1.8"
@@ -7340,10 +7296,6 @@ stylelint@^7.8.0:
     svg-tags "^1.0.0"
     table "^4.0.1"
 
-stylesheet-helpers@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/stylesheet-helpers/-/stylesheet-helpers-0.2.2.tgz#01eaf7e570fa672dcab3ee089cef1927bdbc73be"
-
 sugarss@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/sugarss/-/sugarss-0.2.0.tgz#ac34237563327c6ff897b64742bf6aec190ad39e"
@@ -7415,10 +7367,6 @@ synesthesia@^1.0.1:
 synthetic-dom@^0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/synthetic-dom/-/synthetic-dom-0.2.1.tgz#6c76fcf91ea9a5231318f8f415e27883d534df86"
-
-table-resolver@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/table-resolver/-/table-resolver-3.1.0.tgz#e5329f49a352dbd120e7b23d756143ec5149bf95"
 
 table@3.7.8, table@^3.7.8:
   version "3.7.8"
@@ -7784,21 +7732,6 @@ webidl-conversions@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-4.0.0.tgz#0a8c727ae4e5649687b7742368dcfbf13ed40118"
 
-webpack-bundle-analyzer@2.3.0:
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/webpack-bundle-analyzer/-/webpack-bundle-analyzer-2.3.0.tgz#0d05e96a43033f7cc57f6855b725782ba61e93a4"
-  dependencies:
-    acorn "^4.0.11"
-    chalk "^1.1.3"
-    commander "^2.9.0"
-    ejs "^2.5.5"
-    express "^4.14.1"
-    filesize "^3.5.4"
-    gzip-size "^3.0.0"
-    lodash "^4.17.4"
-    mkdirp "^0.5.1"
-    opener "^1.4.2"
-
 webpack-dev-middleware@1.10.0:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/webpack-dev-middleware/-/webpack-dev-middleware-1.10.0.tgz#7d5be2651e692fddfafd8aaed177c16ff51f0eb8"
@@ -7808,9 +7741,9 @@ webpack-dev-middleware@1.10.0:
     path-is-absolute "^1.0.0"
     range-parser "^1.0.3"
 
-webpack-hot-middleware@2.16.1:
-  version "2.16.1"
-  resolved "https://registry.yarnpkg.com/webpack-hot-middleware/-/webpack-hot-middleware-2.16.1.tgz#ae209bcab2b9b672f1b0fdcf6c5c2a680ff118e1"
+webpack-hot-middleware@2.17.0:
+  version "2.17.0"
+  resolved "https://registry.yarnpkg.com/webpack-hot-middleware/-/webpack-hot-middleware-2.17.0.tgz#5af55fd2bc2f9a4392edd553f2a0fbebd4d75e78"
   dependencies:
     ansi-html "0.0.6"
     html-entities "^1.2.0"
