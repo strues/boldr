@@ -41,7 +41,7 @@ export async function createDetail(req, res, next) {
       has_dropdown: JSON.parse(req.body.has_dropdown),
       icon: req.body.icon,
       order: req.body.order,
-      childrens: req.body.childrens,
+      children: req.body.children,
     };
     const newLink = await MenuDetail.query().insert(payload);
 

@@ -121,5 +121,5 @@ export type MenuDetails = {
   href: String,
   mobile_href: String,
   icon: String,
-  childrens: Array<Object>
+  children: Array<Object>
 };

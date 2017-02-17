@@ -114,6 +114,7 @@ Looking for an open source project to contribute to? All types of contributions 
 - [`Gitbook`](https://strues.gitbooks.io/boldr/content/)
 - [`Roadmap`](ROADMAP.md)
 - [`API`](docs/apidoc.md)
+- [`Editing the Nav`](docs/navigation.md)
 - [`Theming`](docs/theming.md)
 - [`Docker`](docs/docker.md)
 - [`Production`](docs/production.md)
