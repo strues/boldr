@@ -51,9 +51,14 @@ before_script:
   - yarn run build
 
 script:
-  - yarn run test:ci
+  - yarn test:ci
+
+matrix:
+  - yarn test:ci:browser
+  - yarn test:ci:node
 
 after_success:
+  - node ./internal/scripts/mapCoverage.js
   - yarn run coveralls
   - bash <(curl -s https://codecov.io/bash)
 

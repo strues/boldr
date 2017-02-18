@@ -83,7 +83,7 @@
       }
     },
     "test": {
-      "command": "jest --config=internal/jest/jest.node.json && cp ./coverage/coverage-final.json ./coverage/coverage-node-final.json && jest --config=internal/jest/jest.browser.json && cp ./coverage/coverage-final.json ./coverage/coverage-browser-final.json && node ./internal/scripts/mapCoverage.js",
+      "command": "jest --config=internal/jest/jest.node.json && jest --config=internal/jest/jest.browser.json && node ./internal/scripts/mapCoverage.js",
       "env": {
         "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr_test",
         "NODE_ENV": "test",
@@ -91,7 +91,7 @@
       }
     },
     "test:browser": {
-      "command": "jest -w 4 --config=internal/jest/jest.browser.json && cp ./coverage/coverage-final.json ./coverage/coverage-browser-final.json",
+      "command": "jest -w 4 --config=internal/jest/jest.browser.json",
       "env": {
         "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr_test",
         "NODE_ENV": "test",
@@ -99,7 +99,7 @@
       }
     },
     "test:node": {
-      "command": "jest -w 4 --config=internal/jest/jest.node.json  --forceExit && cp ./coverage/coverage-final.json ./coverage/coverage-node-final.json",
+      "command": "jest -w 4 --config=internal/jest/jest.node.json  --forceExit",
       "env": {
         "POSTGRES_CONN_URI": "postgres://postgres:password@localhost:5432/boldr_test",
         "NODE_ENV": "test",
@@ -126,7 +126,9 @@
     "seed": "better-npm-run seed",
     "seed:test": "better-npm-run seed:test",
     "start": "NODE_ENV=production node bin/boldr",
-    "test:ci": "NODE_ENV=test jest -w 4 --config=internal/jest/jest.node.json && cp ./coverage/coverage-final.json ./coverage/coverage-node-final.json && jest -w 4 -u --config=internal/jest/jest.browser.json --forceExit && cp ./coverage/coverage-final.json ./coverage/coverage-browser-final.json && node ./internal/scripts/mapCoverage.js",
+    "test:ci:node": "NODE_ENV=test jest -w 4 --config=internal/jest/jest.node.json",
+    "test:ci:browser": "NODE_ENV=test jest -w 4 -u --config=internal/jest/jest.browser.json --forceExit",
+    "test:ci": "NODE_ENV=test jest -w 4 --config=internal/jest/jest.node.json && jest -w 4 -u --config=internal/jest/jest.browser.json --forceExit",
     "test": "better-npm-run test",
     "test:node": "better-npm-run test:node",
     "test:browser": "better-npm-run test:browser"

@@ -8,9 +8,9 @@ const reporter = createReporter();
 const envs = ['node', 'browser'];
 
 envs.forEach(en => {
-  const coverage = require(`../../coverage/coverage-${en}-final.json`);
+  const coverage = require(`../../coverage/${en}/coverage-final.json`);
   Object.keys(coverage).forEach(
-    filename => map.addFileCoverage(coverage[filename])
+    filename => map.addFileCoverage(coverage[filename]),
   );
 });
 
