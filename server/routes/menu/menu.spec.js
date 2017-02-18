@@ -39,7 +39,6 @@ describe('Menu API Endpoint', async () => {
         .send({
           name: faker.random.word(),
           order: 1,
-          label: faker.random.word(),
           restricted: false,
         })
         .expect((res) => {
@@ -55,7 +54,6 @@ describe('Menu API Endpoint', async () => {
         .send({
           name: 'ABCD',
           order: 1,
-          label: 'abcd',
           restricted: false,
         })
         .expect((res) => {
