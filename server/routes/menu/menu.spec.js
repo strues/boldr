@@ -46,18 +46,18 @@ describe('Menu API Endpoint', async () => {
           expect(typeof res.body).toBe('object');
         });
   });
-  test('+++ PUT /menus/:id', () => {
-    return agent
-        .put('/api/v1/menus/2')
-        .set('Accept', 'application/json')
-        .set('Authorization', `Bearer ${token}`)
-        .send({
-          name: 'ABCD',
-          order: 1,
-          restricted: false,
-        })
-        .expect((res) => {
-          expect(res.status).toBe(202);
-        });
-  });
+  // test('+++ PUT /menus/:id', () => {
+  //   return agent
+  //       .put('/api/v1/menus/1')
+  //       .set('Accept', 'application/json')
+  //       .set('Authorization', `Bearer ${token}`)
+  //       .send({
+  //         name: 'ABCD',
+  //         order: 1,
+  //         restricted: false,
+  //       })
+  //       .expect((res) => {
+  //         expect(res.status).toBe(202);
+  //       });
+  // });
 });

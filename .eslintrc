@@ -7,7 +7,7 @@
     "jest": true,
   },
   "parser": "babel-eslint",
-  "plugins": ["babel", "react", "flowtype", "promise", "import"],
+  "plugins": ["react", "flowtype","import"],
   "settings": {
     "flowtype": {
       "onlyFilesWithFlowAnnotation": true,
@@ -23,7 +23,6 @@
     "no-duplicate-imports": 0,
     "react/prefer-stateless-function": 0,
     "import/no-unresolved": 0,
-    "babel/func-params-comma-dangle": 0,
     "no-unused-expressions": 0,
     "no-undef": 0,
     "global-require": 0
