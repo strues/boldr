@@ -4,8 +4,17 @@ import http from 'http';
 import express from 'express';
 import appRootDir from 'app-root-dir';
 
-import getConfig from '../config/get';
-import { boldrSSR, clientBundle, expressMiddleware, authMiddleware, rbac, errorHandler } from './middleware';
+import config from '../config';
+import {
+  boldrSSR,
+  clientBundle,
+  expressMiddleware,
+  authMiddleware,
+  rbac,
+  errorHandler,
+  offlinePage,
+  serviceWorker,
+} from './middleware';
 import routes from './routes/index';
 import redisClient from './services/redis';
 
@@ -22,10 +31,18 @@ app.use(rbac());
 // attaches to router
 routes(app);
 
-app.use(getConfig('bundles.client.webPath'), clientBundle);
+if (!process.env.BUILD_FLAG_IS_DEV && config('serviceWorker.enabled')) {
+  app.get(`/${config('serviceWorker.fileName')}`, serviceWorker);
+  app.get(
+    `${config('bundles.client.webPath')}${config('serviceWorker.offlinePageFileName')}`,
+    offlinePage,
+  );
+}
+
+app.use(config('bundles.client.webPath'), clientBundle);
 // Configure static serving of our "public" root http path static files.
 // Note: these will be served off the root (i.e. '/') of our application.
-app.use(express.static(pathResolve(appRootDir.get(), getConfig('publicAssetsPath'))));
+app.use(express.static(pathResolve(appRootDir.get(), config('publicAssetsPath'))));
 
 app.use('/apidocs', express.static(pathResolve(appRootDir.get(), './public/apidocs')));
 

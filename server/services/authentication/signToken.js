@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import moment from 'moment';
-import getConfig from '../../../config/get';
+import config from '../../../config';
 
 function signToken(user) {
   const roleinfo = user.roles[0].name;
@@ -13,7 +13,7 @@ function signToken(user) {
     email: user.email,
     role: roleinfo,
   };
-  return jwt.sign(payload, getConfig('token.secret'));
+  return jwt.sign(payload, config('token.secret'));
 }
 
 export default signToken;

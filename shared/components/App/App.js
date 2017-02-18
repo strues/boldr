@@ -5,12 +5,14 @@ import Helmet from 'react-helmet';
 import debounce from 'lodash/debounce';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
+
 import testIfMobile from '../../core/utils/testIfMobile';
 import { fetchSettingsIfNeeded, selectSettings } from '../../state/modules/boldr/settings';
 import { makeSelectMobile, makeSelectUi, setMobileDevice } from '../../state/modules/boldr/ui';
 import type { ReactChildren } from '../../types/react';
 import Notifications from '../Notification';
-import styled from 'styled-components';
+
 
 if (process.env.NODE_ENV !== 'test') {
   require('../../styles/main.scss');

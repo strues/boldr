@@ -1,5 +1,5 @@
 import type { $Response, $Request, NextFunction } from 'express';
-import uuid from 'uuid';
+import uuid from 'uuid/v4';
 import * as objection from 'objection';
 import { mailer, signToken } from '../../services/index';
 import { welcomeEmail } from '../../services/mailer/templates';

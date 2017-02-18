@@ -20,7 +20,7 @@ export function happyPackPlugin({ name, loaders }: HappyPackConfig) {
   return new HappyPack({
     id: name,
     verbose: false,
-    threads: 3,
+    threads: 4,
     loaders,
   });
 }
@@ -47,13 +47,13 @@ export function log(options: NotificationOptions) {
 
   switch (level) {
     case 'warn':
-      console.log(chalk.red(msg));
+      console.log(chalk.red(`⚠️  ${msg}`));
       break;
     case 'error':
-      console.log(chalk.white.bgRed(msg));
+      console.log(chalk.white.bgRed(`⁉️ 🔥  ${msg}`));
       break;
     case 'info':
-    default: console.log(chalk.cyan(msg));
+    default: console.log(chalk.cyan(`😇  ${msg}`));
   }
 }
 

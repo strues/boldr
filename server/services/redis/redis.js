@@ -1,7 +1,7 @@
 import url from 'url';
 import Redis from 'ioredis';
 import bluebird from 'bluebird';
-import getConfig from '../../../config/get';
+import config from '../../../config';
 import logger from '../logger';
 
 const redisCon = url.parse(process.env.REDIS_CONN_URI);
@@ -16,7 +16,7 @@ redisClient.on('connect', () => {
   logger.info('Redis connection has been established!');
 });
 
-redisClient.on('error', err => {
+redisClient.on('error', (err) => {
   logger.error(`Error while connecting to Redis!!! ${err}`);
   process.exit(1);
 });

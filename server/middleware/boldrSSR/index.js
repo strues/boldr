@@ -12,7 +12,7 @@ import AppRoot from '../../../shared/components/AppRoot';
 import createRoutes from '../../../shared/scenes';
 import ApiClient from '../../../shared/core/api/apiClient';
 import configureStore from '../../../shared/state/store';
-import getConfig from '../../../config/get';
+import config from '../../../config';
 import ServerHTML from './ServerHTML';
 
 const debug = require('debug')('boldr:ssrMW');
@@ -21,7 +21,7 @@ function renderAppToString(store, renderProps, apiClient) {
   return renderToString(
     <AppRoot store={ store }>
       <RouterContext { ...renderProps } helpers={ apiClient } />
-    </AppRoot>
+    </AppRoot>,
   );
 }
 
@@ -72,10 +72,10 @@ function boldrSSR(req, res, next) {
              preloadedState={ preloadedState }
            />,
          );
-         res.status(200).send(html);
+         return res.status(200).send(`<!DOCTYPE html>${html}`);
        }).catch((err) => {
          debug(err);
-         res.status(500).send(err);
+         return res.status(500).send(err);
        });
   });
 }

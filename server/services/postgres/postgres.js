@@ -9,16 +9,12 @@ const db = Knex({
   debug: process.env.DATABASE_DEBUG === 'true',
 });
 
-function disconnect(db) {
-  return new Promise((resolve, reject) => {
-    db.destroy((err) => {
-      if (err) {
-        reject(err);
-      } else {
-        resolve();
-      }
-    });
-  });
+async function disconnect(db) {
+  try {
+    await db.destroy();
+  } catch (err) {
+    throw new Error(err);
+  }
 }
 
 export default db;

@@ -3,10 +3,10 @@
 import { resolve as pathResolve } from 'path';
 import express from 'express';
 import appRootDir from 'app-root-dir';
-import getConfig from '../../config/get';
+import config from '../../config';
 
 // Middleware to server our client bundle.
 export default express.static(
-  pathResolve(appRootDir.get(), getConfig('bundles.client.outputPath')),
-  { maxAge: getConfig('browserCacheMaxAge') },
+  pathResolve(appRootDir.get(), config('bundles.client.outputPath')),
+  { maxAge: config('browserCacheMaxAge') },
 );

@@ -4,7 +4,7 @@
  */
 import jwt from 'jsonwebtoken';
 import User from '../models/user';
-import getConfig from '../../config/get';
+import config from '../../config';
 import sessionMiddleware from './session';
 
 const debug = require('debug')('boldr:authMW');
@@ -15,7 +15,7 @@ export default (app) => {
     req.isAuthenticated = () => {
       const token = (req.headers.authorization && req.headers.authorization.split(' ')[1]);
       try {
-        return jwt.verify(token, getConfig('token.secret'));
+        return jwt.verify(token, config('token.secret'));
       } catch (err) {
         return false;
       }

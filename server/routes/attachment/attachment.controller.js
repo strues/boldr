@@ -1,12 +1,11 @@
 import path from 'path';
 import Debug from 'debug';
-import uuid from 'uuid';
+import uuid from 'uuid/v4';
 import * as objection from 'objection';
 import fs from 'fs-extra';
 import shortId from 'shortid';
 import Busboy from 'busboy';
 import { responseHandler, BadRequest } from '../../core/index';
-import getConfig from '../../../config/get';
 import Activity from '../../models/activity';
 import Attachment from '../../models/attachment';
 

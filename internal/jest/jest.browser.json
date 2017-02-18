@@ -1,7 +1,7 @@
 {
   "timers": "fake",
   "moduleNameMapper": {
-    "^.+\\.(css|scss|less)$": "<rootDir>/internal/jest/styleMock.js"
+    "\\.(css|scss)$": "identity-obj-proxy"
   },
   "collectCoverage": true,
   "coverageDirectory": "<rootDir>/coverage",

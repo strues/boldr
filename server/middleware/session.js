@@ -5,15 +5,15 @@
 
 import session from 'express-session';
 import redisClient from '../services/redis';
-import getConfig from '../../config/get';
+import config from '../../config';
 
 const RedisStore = require('connect-redis')(session);
 
-const env = getConfig('env') || 'development';
+const env = config('env') || 'development';
 
 const sessionMiddleware = session({
   store: new RedisStore({ client: redisClient }),
-  secret: getConfig('token.secret'),
+  secret: config('token.secret'),
   name: 'boldr:sid',
   resave: false,
   saveUninitialized: false,

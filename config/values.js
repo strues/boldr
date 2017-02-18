@@ -12,7 +12,7 @@
  * absolute paths should be resolved during runtime by our build internal/server.
  */
 
-import * as envVars from './utils/envVars';
+import * as EnvVars from './utils/EnvVars';
 
 const values = {
   // The configuration values that should be exposed to our client bundle.
@@ -29,39 +29,40 @@ const values = {
   },
 
   // The host on which the server should run.
-  host: envVars.string('HOST', 'localhost'),
+  host: EnvVars.string('HOST', 'localhost'),
   // The port on which the server should run.
-  port: envVars.int('SERVER_PORT', 3000),
+  port: EnvVars.number('PORT', 3000),
   // The port on which the client bundle development server should run.
-  clientDevServerPort: envVars.int('CLIENT_DEV_PORT', 3001),
+  clientDevServerPort: EnvVars.number('CLIENT_DEV_PORT', 3001),
+  apiPrefix: '/api/v1',
   // This is an example environment variable which is consumed within the
   // './client.js' config.  See there for more details.
-  welcomeMessage: envVars.string('WELCOME_MSG', 'Hello world!'),
+  welcomeMessage: EnvVars.string('WELCOME_MSG', 'Hello world!'),
   postgres: {
     name: 'boldr',
-    host: envVars.string('POSTGRES_HOST', 'localhost'),
-    user: envVars.string('POSTGRES_USER', 'postgres'),
-    password: envVars.string('POSTGRES_PASSWORD', 'password'),
-    uri: envVars.string('POSTGRES_CONN_URI', 'postgres://postgres:password@localhost:5432/boldr'),
+    host: EnvVars.string('POSTGRES_HOST', 'localhost'),
+    user: EnvVars.string('POSTGRES_USER', 'postgres'),
+    password: EnvVars.string('POSTGRES_PASSWORD', 'password'),
+    uri: EnvVars.string('POSTGRES_CONN_URI', 'postgres://postgres:password@localhost:5432/boldr'),
     pool: {
       min: 2,
       max: 10,
     },
   },
   redis: {
-    uri: envVars.string('REDIS_CONN_URI', 'redis://127.0.0.1:6379/1'),
+    uri: EnvVars.string('REDIS_CONN_URI', 'redis://127.0.0.1:6379/1'),
   },
   privateKey: null,
   publicKey: null,
   saltRounds: 10,
   token: {
-    secret: envVars.string('TOKEN_SECRET', 'b0ldrs0s3cr3t'),
+    secret: EnvVars.string('TOKEN_SECRET', 'b0ldrs0s3cr3t'),
     expiration: 60 * 60 * 24, // 1 day
   },
   mail: {
-    host: envVars.string('MAIL_HOST', ''),
-    user: envVars.string('MAIL_USER', 'admin@boldr.io'),
-    password: envVars.string('MAIL_PASSWORD', ''),
+    host: EnvVars.string('MAIL_HOST', ''),
+    user: EnvVars.string('MAIL_USER', 'admin@boldr.io'),
+    password: EnvVars.string('MAIL_PASSWORD', ''),
     port: 465,
     ssl: true,
     domain: 'boldr.io',
@@ -137,7 +138,7 @@ const values = {
 
   // Do you want to included source maps (will be served as seperate files)
   // for production builds?
-  includeSourceMapsForProductionBuilds: false,
+  includeSourceMapsForOptimisedClientBundle: false,
 
   // These extensions are tried when resolving src files for our bundles..
   bundleSrcTypes: ['js', 'jsx', 'json'],
@@ -354,7 +355,7 @@ const values = {
 
 // This protects us from accidentally including this configuration in our
 // client bundle. That would be a big NO NO to do. :)
-if (process.env.IS_CLIENT) {
+if (process.env.BUILD_FLAG_IS_CLIENT) {
   throw new Error("You shouldn't be importing the `<projectroot>/config` directly into code that will be included in your 'client' bundle as the configuration object will then get included in your client bundle. Not a safe move! Instead, use the `getConfig` helper function located at `<projectroot>/config/get`.");
 }
 

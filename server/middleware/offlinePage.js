@@ -3,7 +3,7 @@
 import { readFile } from 'fs';
 import { resolve as pathResolve } from 'path';
 import appRootDir from 'app-root-dir';
-import getConfig from '../../config/get';
+import config from '../../config';
 
 /**
  * We need a middleware to intercept calls to our offline page to ensure that
@@ -20,8 +20,8 @@ export default function offlinePageMiddleware(req, res, next) {
   readFile(
     pathResolve(
       appRootDir.get(),
-      getConfig('bundles.client.outputPath'),
-      getConfig('serviceWorker.offlinePageFileName'),
+      config('bundles.client.outputPath'),
+      config('serviceWorker.offlinePageFileName'),
     ),
     'utf-8',
     (err, data) => {
@@ -29,8 +29,8 @@ export default function offlinePageMiddleware(req, res, next) {
         res.status(500).send('Error returning offline page.');
         return;
       }
-      const withNonce = data.replace('NONCE_PLACEHOLDER', nonce);
-      res.send(withNonce);
+      const offlinePageWithNonce = data.replace('OFFLINE_PAGE_NONCE_PLACEHOLDER', nonce);
+      res.send(offlinePageWithNonce);
     },
   );
 }

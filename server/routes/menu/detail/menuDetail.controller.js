@@ -1,4 +1,4 @@
-import uuid from 'uuid';
+import uuid from 'uuid/v4';
 import slugIt from '../../../utils/slugIt';
 import { InternalServer, responseHandler } from '../../../core/index';
 import { Activity, Menu, MenuDetail, MenuMenuDetail } from '../../../models';

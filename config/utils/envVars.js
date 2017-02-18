@@ -18,7 +18,7 @@ import removeNil from '../../shared/core/utils/arrays/removeNil';
 // PRIVATES
 
 function registerEnvFile() {
-  const CONF_ENV = process.env.CONF_ENV;
+  const NODE_ENV = process.env.NODE_ENV;
   const envFile = '.env';
 
   // This is the order in which we will try to resolve an environment configuration
@@ -26,21 +26,25 @@ function registerEnvFile() {
   const envFileResolutionOrder = removeNil([
     // Is there an environment config file at the app root for our target
     // environment name?
-    // e.g. /projects/boldr/.env.development
-    onlyIf(CONF_ENV, path.resolve(appRootDir.get(), `${envFile}.${CONF_ENV}`)),
+    // e.g. /projects/react-universally/.env.staging
+    onlyIf(NODE_ENV, path.resolve(appRootDir.get(), `${envFile}.${NODE_ENV}`)),
     // Is there an environment config file at the app root?
-    // e.g. /projects/boldr/.env
+    // e.g. /projects/react-universally/.env
     path.resolve(appRootDir.get(), envFile),
   ]);
 
   // Find the first env file path match.
-  const envFilePath = envFileResolutionOrder.find(filePath => fs.existsSync(filePath));
+  const envFilePath = envFileResolutionOrder.find(filePath =>
+    fs.existsSync(filePath));
 
   // If we found an env file match the register it.
   if (envFilePath) {
-    console.log( // eslint-disable-line no-console
-      chalk.black.bgYellow(`==> Registering environment variables from: ${envFilePath}`),
-    );
+    console
+      .log( // eslint-disable-line no-console
+        chalk.black.bgYellow(
+          `==> Registering environment variables from: ${envFilePath}`,
+        ),
+      );
     dotenv.config({ path: envFilePath });
   }
 }
@@ -50,12 +54,27 @@ function registerEnvFile() {
 registerEnvFile();
 
 // EXPORTED HELPERS
-
+/**
+ * Gets a string environment variable by the given name.
+ *
+ * @param  {String} name - The name of the environment variable.
+ * @param  {String} defaultVal - The default value to use.
+ *
+ * @return {String} The value.
+ */
 export function string(name, defaultVal) {
   return process.env[name] || defaultVal;
 }
 
-export function int(name, defaultVal) {
+/**
+ * Gets a number environment variable by the given name.
+ *
+ * @param  {String} name - The name of the environment variable.
+ * @param  {number} defaultVal - The default value to use.
+ *
+ * @return {number} The value.
+ */
+export function number(name, defaultVal) {
   return process.env[name]
     ? parseInt(process.env[name], 10)
     : defaultVal;

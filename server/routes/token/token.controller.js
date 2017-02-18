@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import uuid from 'uuid';
+import uuid from 'uuid/v4';
 import mailer from '../../services/mailer';
 import { passwordModifiedEmail, forgotPasswordEmail } from '../../services/mailer/templates';
 import User from '../../models/user';

@@ -7,14 +7,14 @@
 import path from 'path';
 import fs from 'fs';
 import winston from 'winston';
-import getConfig from '../../../config/get';
+import config from '../../../config';
 
 const tsFormat = () => (new Date()).toLocaleTimeString();
 
 const transports = [];
 winston.emitErrs = true;
 
-if (getConfig('logger.console')) {
+if (config('logger.console')) {
   transports.push(
     new winston.transports.Console({
       handleExceptions: true,

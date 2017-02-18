@@ -1,5 +1,6 @@
 import express from 'express';
 
+import config from '../../config';
 import activityRoutes from './activity/activity.routes';
 import adminRoutes from './admin/admin.routes';
 import attachmentRoutes from './attachment/attachment.routes';
@@ -16,7 +17,8 @@ import templateRoutes from './template/template.routes';
 import tokenRoutes from './token/token.routes';
 import userRoutes from './user/user.routes';
 
-const API_PREFIX = '/api/v1';
+
+const API_PREFIX = config('apiPrefix');
 
 export default (app) => {
   app.get(`${API_PREFIX}/health-check`, (req, res) => {
