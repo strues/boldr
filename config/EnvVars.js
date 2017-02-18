@@ -11,9 +11,9 @@ import appRootDir from 'app-root-dir';
 import chalk from 'chalk';
 import dotenv from 'dotenv';
 
-import pkg from '../../package.json';
-import onlyIf from '../../shared/core/utils/logic/onlyIf';
-import removeNil from '../../shared/core/utils/arrays/removeNil';
+import pkg from '../package.json';
+import onlyIf from '../shared/core/utils/logic/onlyIf';
+import removeNil from '../shared/core/utils/arrays/removeNil';
 
 // PRIVATES
 

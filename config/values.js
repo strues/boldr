@@ -12,7 +12,7 @@
  * absolute paths should be resolved during runtime by our build internal/server.
  */
 
-import * as EnvVars from './utils/EnvVars';
+import * as EnvVars from './EnvVars';
 
 const values = {
   // The configuration values that should be exposed to our client bundle.
