@@ -1,6 +1,6 @@
 import uuid from 'uuid/v4';
 import slugIt from '../../../utils/slugIt';
-import { InternalServer, responseHandler } from '../../../core/index';
+import { InternalServer, BadRequest, responseHandler } from '../../../core/index';
 import { Activity, Menu, MenuDetail, MenuMenuDetail } from '../../../models';
 
 const debug = require('debug')('boldr:menuDetail-controller');
@@ -35,7 +35,7 @@ export async function createDetail(req, res, next) {
     const payload = {
       name: req.body.name,
       safe_name: slugIt(req.body.name),
-      href: req.body.link,
+      href: req.body.href,
       mobile_href: req.body.mobile_href,
       css_classname: req.body.css_classname,
       has_dropdown: JSON.parse(req.body.has_dropdown),
@@ -68,17 +68,25 @@ export async function createDetail(req, res, next) {
   }
 }
 
-export function updateDetail(req, res) {
-  return MenuDetail.query()
-    .patchAndFetchById(req.params.id, req.body)
-    .then(navigation => responseHandler(res, 202, navigation));
+export async function updateDetail(req, res, next) {
+  try {
+    const detail = await MenuDetail.query().findById(req.params.id);
+
+    if (!detail) return res.status(404).json('Unable to find a menu detail with that id.');
+
+    const updatedDetail = await MenuDetail.query().updateAndFetchById(req.params.id, req.body);
+
+    return res.status(202).json(updatedDetail);
+  } catch (err) {
+    return next(new BadRequest(err));
+  }
 }
 
 export async function deleteDetail(req, res, next) {
   try {
     const menuD = await MenuDetail.query().findById(req.params.id);
     if (!menuD) {
-      return res.status(400).json('Unable to find a matching menu detail');
+      return res.status(404).json('Unable to find a matching menu detail');
     }
     await menuD.$relatedQuery('menu').unrelate().where('menu_detail_id', req.params.id);
     await MenuDetail.query().deleteById(req.params.id);
