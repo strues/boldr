@@ -5,6 +5,7 @@ import { getToken } from '../../../../core/services/token';
 import * as notif from '../../../../core/constants';
 import { notificationSend } from '../../notifications/notifications';
 import * as t from '../../actionTypes';
+import { editProfile } from '../../users/actions';
 
 const token = getToken();
 
@@ -247,5 +248,52 @@ export function selectFile(file) {
   return (dispatch) => {
     dispatch(selectedFile(file));
     return dispatch(push(`/admin/filemanager/${file.id}/editor`));
+  };
+}
+
+/**
+  * UPLOAD FILE ACTIONS
+  * -------------------------
+  * @exports uploadFiles
+  *****************************************************************/
+
+export function uploadProfileImage(payload) {
+  return (dispatch) => {
+    dispatch(beginUploadProfileImage());
+    return request.post('/api/v1/attachments').attach(payload.name, payload).set('Authorization', `Bearer ${token}`)
+      .then(response => {
+        if (!response.status === 201) {
+          dispatch(uploadProfileImageFail(response));
+          dispatch(notificationSend(notif.MSG_UPLOAD_ERROR));
+        }
+        const userData = { id: response.body.user_id, profile_image: response.body.url };
+        dispatch(editProfile(userData));
+        dispatch(uploadProfileImageSuccess(response));
+        dispatch(notificationSend(notif.MSG_UPLOAD_SUCCESS));
+      })
+      .catch(err => {
+        dispatch(uploadProfileImageFail(err));
+        dispatch(notificationSend(notif.MSG_UPLOAD_ERROR));
+      });
+  };
+}
+
+function beginUploadProfileImage() {
+  return {
+    type: t.UPLOAD_PROFILE_IMG_REQUEST,
+  };
+}
+
+function uploadProfileImageSuccess(response) {
+  return {
+    type: t.UPLOAD_PROFILE_IMG_SUCCESS,
+    payload: response.body,
+  };
+}
+
+function uploadProfileImageFail(err) {
+  return {
+    type: t.UPLOAD_PROFILE_IMG_FAILURE,
+    error: err,
   };
 }

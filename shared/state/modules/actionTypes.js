@@ -79,6 +79,10 @@ export const UPDATE_ATTACHMENT_REQUEST = '@boldr/admin/attachment/UPDATE_ATTACHM
 export const UPDATE_ATTACHMENT_SUCCESS = '@boldr/admin/attachment/UPDATE_ATTACHMENT_SUCCESS';
 export const UPDATE_ATTACHMENT_FAILURE = '@boldr/admin/attachment/UPDATE_ATTACHMENT_FAILURE';
 
+export const UPLOAD_PROFILE_IMG_REQUEST = '@boldr/admin/attachment/UPLOAD_PROFILE_IMG_REQUEST';
+export const UPLOAD_PROFILE_IMG_SUCCESS = '@boldr/admin/attachment/UPLOAD_PROFILE_IMG_SUCCESS';
+export const UPLOAD_PROFILE_IMG_FAILURE = '@boldr/admin/attachment/UPLOAD_PROFILE_IMG_FAILURE';
+
 export const SELECT_FILE = '@boldr/admin/attachment/SELECT_FILE';
 
 /**

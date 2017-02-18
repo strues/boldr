@@ -5,6 +5,7 @@ import Paper from 'react-md/lib/Papers';
 import Drawer from 'react-md/lib/Drawers';
 import Button from 'react-md/lib/Buttons/Button';
 import Toolbar from 'react-md/lib/Toolbars';
+import Dropzone from 'react-dropzone';
 import { Grid, Col, Row, Heading } from '../../components';
 import ProfileContent from './components/ProfileContent';
 import OwnProfile from './components/OwnProfile';
@@ -14,6 +15,7 @@ type Props = {
   email: String,
   drawer: Boolean,
   closeDrawer: Function,
+  uploadProfileImg: Function,
   openDrawer: Function,
   _toggleDrawer: Function,
   _closeDrawer: Function,
@@ -30,11 +32,14 @@ class Profile extends Component {
 
     this.state = {
       me: false,
+      files: [],
     };
     (this: any)._toggleDrawer = this._toggleDrawer.bind(this);
     (this: any)._closeDrawer = this._closeDrawer.bind(this);
     (this: any)._handleToggle = this._handleToggle.bind(this);
     (this: any).setMe = this.setMe.bind(this);
+    (this: any).onDrop = this.onDrop.bind(this);
+    (this: any).onOpenClick = this.onOpenClick.bind(this);
   }
 
   state: State;
@@ -42,8 +47,19 @@ class Profile extends Component {
   componentDidMount() {
     this.setMe();
   }
+
   props: Props;
 
+  onDrop(files) {
+    this.setState({
+      file: files[0],
+    });
+    const payload = files[0];
+    this.props.uploadProfileImg(payload);
+  }
+  onOpenClick() {
+    this.dropzone.open();
+  }
 
   setMe() {
     const userEmail = this.props.email;
@@ -98,6 +114,19 @@ class Profile extends Component {
                   profile={ profile }
                 />
               </Col>
+            </Row>
+            <Row>
+              <Dropzone
+                className="boldr-dropzone"
+                ref={ (node) => { this.dropzone = node; } }
+                multiple={ false }
+                onDrop={ this.onDrop }
+                accept="image/*"
+                maxSize={ 5242880 }
+              >
+                <p className="boldr-dropzone__drop-sm">Drop an image here or select one from your computer. <br />
+                It will upload right away.</p>
+              </Dropzone>
             </Row>
             <Drawer
               clickableDesktopOverlay={ false }

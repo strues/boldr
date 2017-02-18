@@ -51,6 +51,7 @@ const renderApp = () => {
             history={ history }
             routes={ routes }
             helpers={ apiClient }
+            onUpdate={ () => window.scrollTo(0, 0) }
           />
         </AppRoot>
       </ReactHotLoader>,

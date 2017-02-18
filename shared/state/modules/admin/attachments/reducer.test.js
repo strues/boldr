@@ -10,6 +10,7 @@ describe('Attachment', () => {
         error: null,
         files: [],
         postImage: {},
+        profileImage: {},
         currentFile: {},
       });
   });

@@ -239,6 +239,7 @@ export const doUpdateProfile = (userData) => {
     location: userData.location,
     website: userData.website,
     social: userData.social,
+    profile_image: userData.profile_image,
   };
   return apiClient.put(`/users/${userData.id}`, { data: userData });
 };

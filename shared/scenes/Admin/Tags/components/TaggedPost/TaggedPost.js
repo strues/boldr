@@ -54,7 +54,7 @@ class TaggedPost extends Component {
        />
       <List>
         {
-          this.props.currentTag.posts.map(post =>
+          this.props.currentTag && this.props.currentTag.posts.map(post =>
             <ListItem key={ post.id } primaryText={ post.title } rightAvatar={ <TaggedPostMenu post={ post } /> } />
           )
         }

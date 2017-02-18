@@ -5,9 +5,8 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 
 import BaseTemplate from '../templates/Base';
-import { Page, Row, Column } from '../../components/Grid';
 
-import { Grid, Hero, Footer, Heading, Paragraph } from '../../components/index';
+import { Grid, Hero, Row, Footer, Heading, Paragraph } from '../../components/index';
 
 const Home = () => {
   return (
