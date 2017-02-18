@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Button from 'react-md/lib/Buttons/Button';
 import { selectPost } from '../../../../state/modules/blog/posts/actions';
-import { Col, Row, Paragraph } from '../../../../components';
+import { Row, Col, Paragraph } from '../../../../components';
 import type { Tag as TagType } from '../../../../types/models';
 import { media } from '../../../../theme/theme';
 import TagBlock from '../TagBlock';
@@ -45,12 +45,11 @@ const Wrapper = styled.section`
 `;
 
 const Content = styled.div`
-  padding: 1.5rem;
   vertical-align: middle;
   display: flex;
-  padding: 1rem;
+  padding: 3em 1.5em;
   order: 2;
-  flex-direction: row;
+  flex-direction: column;
   width: 100%;
   height: 350px;
   ${media.small`flex-direction: column; width: 30%`}
@@ -58,7 +57,7 @@ const Content = styled.div`
 
 const PostTitle = styled.h2`
   font-size: 3.2rem;
-  margin-top: 200px!important;
+  margin-top: 200px !important;
   font-weight: 200;
   letter-spacing: .2em;
   color: #fff;
@@ -113,21 +112,14 @@ export const FeaturedPost = (props: Props) => {
         </ImgWrapper>
         <Content>
           <Paragraph>{ props.excerpt }</Paragraph>
-
-        <Row style={ { paddingTop: '20px' } }>
-          <Col xs={ 12 }>
-            <Row xsEnd>
-              <Col xs={ 6 }>
-                { /* $FlowIssue */ }
-                <Link to={ `/blog/${props.slug}` }>
-                  <Button raised primary label="Read More" onClick={ transitionPost } />
-                </Link>
-              </Col>
-            </Row>
-          </Col>
+        <Row style={ { paddingTop: '20px' } } xsEnd>
+          { /* $FlowIssue */ }
+          <Link to={ `/blog/${props.slug}` }>
+            <Button raised primary label="Read More" onClick={ transitionPost } />
+          </Link>
         </Row>
         <Row>
-          <Col xs={ 12 }>
+          <Col sm={ 12 }>
           {
             /* $FlowIssue */
             postTags.map(t => <Tag key={ t.id } tag={ t } />)

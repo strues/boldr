@@ -28,8 +28,6 @@ class TaggedPost extends Component {
   }
   componentDidMount() {
     const { dispatch, params } = this.props;
-
-   // Fetching data for client side rendering
     TaggedPost.fetchData(dispatch, this.props);
   }
 

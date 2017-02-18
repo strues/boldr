@@ -20,7 +20,7 @@ const TagList = (props: Props) => {
     );
   }
   return (
-      <div>
+      <div style={ { paddingTop: 50 } }>
         <Grid fluid>
           <Row>
           {
@@ -28,7 +28,7 @@ const TagList = (props: Props) => {
               <Col key={ i } xs={ 12 } md={ 4 }>
                 <PostCard key={ i } listTags={ props.listTags } { ...post } />
               </Col>
-              )
+            ),
             )
           }
           </Row>
