@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Button from 'react-md/lib/Buttons/Button';
 import { selectPost } from '../../../../state/modules/blog/posts/actions';
-import { Col, Row } from '../../../../components';
+import { Col, Row, Paragraph } from '../../../../components';
 import type { Tag as TagType } from '../../../../types/models';
+import { media } from '../../../../theme/theme';
 import TagBlock from '../TagBlock';
 import Tag from '../Tag';
 
@@ -32,31 +33,38 @@ type Props = {
   listTags: Object,
 }
 const Wrapper = styled.section`
-  display: table;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   width: 100%;
   margin-bottom: 10px;
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .4);
   background-color: #fff;
-  height: 350px;
   position: relative;
+  ${media.small`height: 350px; flex-direction: row;`}
 `;
 
 const Content = styled.div`
   padding: 1.5rem;
   vertical-align: middle;
-  display: table-cell;
+  display: flex;
   padding: 1rem;
+  order: 2;
+  flex-direction: row;
+  width: 100%;
   height: 350px;
+  ${media.small`flex-direction: column; width: 30%`}
 `;
 
 const PostTitle = styled.h2`
   font-size: 3.2rem;
-  margin-top: 100px!important;
+  margin-top: 200px!important;
   font-weight: 200;
   letter-spacing: .2em;
   color: #fff;
   background: rgba(27, 27, 37, .65);
   padding: .08em 1rem;
+  width: 100%;
   box-decoration-break: clone;
 `;
 
@@ -64,10 +72,14 @@ export const FeaturedPost = (props: Props) => {
   const ImgWrapper = styled.div`
     position: relative;
     overflow: hidden;
-    display: table-cell;
+    display: flex;
+    flex-direction: row;
+    order: 1;
     background: url(${props.feature_image});
     background-size: cover;
-    width: 70%;
+    background-position: 50% 50%;
+    width: 100%;
+    ${media.small`flex-direction: row; width: 70%`}
   `;
   const postTags = props.tags.map(id => props.listTags[id]);
   // Explicitly define post rather than passing additional
@@ -100,7 +112,7 @@ export const FeaturedPost = (props: Props) => {
           <PostTitle>{ props.title }</PostTitle>
         </ImgWrapper>
         <Content>
-          { props.excerpt }
+          <Paragraph>{ props.excerpt }</Paragraph>
 
         <Row style={ { paddingTop: '20px' } }>
           <Col xs={ 12 }>
@@ -115,10 +127,12 @@ export const FeaturedPost = (props: Props) => {
           </Col>
         </Row>
         <Row>
+          <Col xs={ 12 }>
           {
             /* $FlowIssue */
             postTags.map(t => <Tag key={ t.id } tag={ t } />)
           }
+        </Col>
         </Row>
         </Content>
       </Wrapper>

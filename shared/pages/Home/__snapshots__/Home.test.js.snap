@@ -34,7 +34,9 @@ exports[`<Home /> renders snapshot 1`] = `
             "padding": "25px",
           }
         }>
-        Placeholder
+        <styled.p>
+          Placeholder
+        </styled.p>
       </Row>
     </Grid>
   </Connect(BaseTemplate)>

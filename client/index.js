@@ -20,7 +20,7 @@ import createRoutes from '../shared/scenes';
 import ReactHotLoader from './components/ReactHotLoader';
 
 WebFontLoader.load({
-  google: { families: ['Roboto:300,400,700', 'Material Icons'] },
+  google: { families: ['Roboto:200,400,600', 'Material Icons'] },
 });
 // Get the DOM Element that will host our React application.
 const domNode = document.getElementById('app');

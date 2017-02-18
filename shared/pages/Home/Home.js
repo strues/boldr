@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 
 import BaseTemplate from '../templates/Base';
-import { Grid, Row, Hero, Footer, Heading } from '../../components/index';
+import { Grid, Row, Hero, Footer, Heading, Paragraph } from '../../components/index';
 
 const Home = () => {
   return (
@@ -23,7 +23,7 @@ const Home = () => {
       >
       <Grid fluid>
         <Row style={ { padding: '25px' } }>
-          Placeholder
+          <Paragraph>Placeholder</Paragraph>
         </Row>
       </Grid>
       </BaseTemplate>

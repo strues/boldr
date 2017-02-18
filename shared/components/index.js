@@ -22,7 +22,7 @@ import Social, {
   Google,
   LinkedIn,
 } from './Social';
-
+import Paragraph from './Paragraph';
 
 export {
   App,
@@ -52,4 +52,5 @@ export {
   Google,
   LinkedIn,
   Social,
+  Paragraph,
 };
