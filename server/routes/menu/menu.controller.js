@@ -1,4 +1,5 @@
 import { responseHandler, InternalServer, NotFound } from '../../core/index';
+import { slugIt } from '../../utils';
 // Model
 import Menu from '../../models/menu';
 
@@ -31,7 +32,12 @@ export async function showMenu(req, res, next) {
 
 export async function createMenu(req, res, next) {
   try {
-    const payload = req.body;
+    const payload = {
+      name: req.body.name,
+      safe_name: slugIt(req.body.name),
+      attributes: req.body.attributes,
+      restricted: req.body.restricted,
+    };
     const newMenu = await Menu
       .query()
       .insert(payload);
