@@ -88,20 +88,6 @@ export default function webpackConfigFactory(buildOptions) {
         ['module', 'jsnext:main', 'main'],
         ['web', 'browser', 'style', 'module', 'jsnext:main', 'main'],
       ),
-      extensions: config('bundleSrcTypes').map(ext => `.${ext}`),
-      alias: mergeDeep(
-        ifProd({
-          react$: path.resolve(
-            ROOT_DIR, './node_modules/react/dist/react.min.js',
-          ),
-          'react-dom$': path.resolve(
-            ROOT_DIR, './node_modules/react-dom/dist/react-dom.min.js',
-          ),
-          'react-dom/server$': path.resolve(
-            ROOT_DIR, './node_modules/react-dom/dist/react-dom-server.min.js',
-          ),
-        }),
-      ),
     },
     // node global polyfills
     node: {
@@ -117,11 +103,7 @@ export default function webpackConfigFactory(buildOptions) {
 
     externals: removeNil([
       ifNode(() => nodeExternals({
-        whitelist: removeNil(['source-map-support/register',
-          ifProd('react'),
-          ifProd('react-dom'),
-          ifProd('react-dom/server'),
-        ]).concat(
+        whitelist: removeNil(['source-map-support/register']).concat(
           config('nodeExternalsFileTypeWhitelist') || [],
         ),
       })),

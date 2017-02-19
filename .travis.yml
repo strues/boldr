@@ -47,6 +47,9 @@ before_install:
 install:
   - yarn
 
+before_script:
+  - yarn build:dev
+
 script:
   - yarn test:ci
 
