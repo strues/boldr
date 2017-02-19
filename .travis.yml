@@ -19,7 +19,7 @@ env:
   POSTGRES_CONN_URI: postgres://postgres:password@127.0.0.1:5432/boldr
   REDIS_CONN_URI: redis://127.0.0.1:6379/1
   NODE_ENV: test
-  TOKEN_SECRET: bbbbaaaasss
+  TOKEN_SECRET: b0ldrs0s3cr3t
 git:
   depth: 3
 addons:
@@ -46,9 +46,6 @@ before_install:
 
 install:
   - yarn
-
-before_script:
-  - yarn run build
 
 script:
   - yarn test:ci

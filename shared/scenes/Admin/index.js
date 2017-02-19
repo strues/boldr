@@ -10,7 +10,11 @@ export default (store) => {
     path: 'admin',
     component: RequireAuth(DashboardLayout),
     indexRoute: {
-      component: DashboardContainer,
+      getComponent(nextState, cb) {
+        import('./Dashboard/DashboardContainer')
+          .then(loadRoute(cb))
+          .catch(errorLoading);
+      },
     },
     childRoutes: [
       {
