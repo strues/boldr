@@ -1,4 +1,4 @@
-import membersReducer, { STATE_KEY } from './members';
+import membersReducer, { STATE_KEY } from './reducer';
 
 export default membersReducer;
 

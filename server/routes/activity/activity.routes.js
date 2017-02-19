@@ -1,14 +1,27 @@
 import express from 'express';
 import { isAuthenticated } from '../../services/authentication';
+import { checkRole } from '../../middleware/rbac';
 import * as ctrl from './activity.controller';
+
+/**
+ * @apiDefine Activity
+ */
 
 const router = express.Router();
 
 /**
  * @api {get} /activities           List all activities
- * @apiName ListActivities
+ * @apiName List Activities
  * @apiGroup Activity
- * @apiPermission public
+ * @apiPermission admin
+ * @apiVersion 1.0.0
+ *
+ * @apiHeader {String} Content-Type Content-Type: application/json
+ * @apiUse authHeader
+ *
+ * @apiDescription Return all activities from all admin users. Null or undefined values
+ * will not be returned.
+ *
  * @apiSuccess {String}   id                    The activity's id (uuid)
  * @apiSuccess {String}   user_id               The id (uuid) of user who performed the action
  * @apiSuccess {Number}   action_type_id        The id of the action type relating to the activity.
@@ -21,11 +34,11 @@ const router = express.Router();
  * @apiSuccess {String}   activity_page         The id (uuid) of the page the action was performed on.
  * @apiSuccess {Number}   activity_role         The id of the role the action was performed on.
  * @apiSuccess {Date}     created_at            The date the action was performed.
- * @apiSuccess {Object[]} actionType            The action type object relating to the activity.
+ * @apiSuccess {String}   type                  The action type (create update delete register)
  * @apiSuccess {Object[]} owner                 The user object of the user responsible for the action.
  * @apiSuccess {Object[]} post                  The post object if the activity is a post type
  * @apiSuccess {Object[]} attachment            The attachment object if the activity type matches attachment
  */
-router.get('/', ctrl.listActivities);
+router.get('/', isAuthenticated, checkRole('Admin'), ctrl.listActivities);
 
 export default router;

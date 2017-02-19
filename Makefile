@@ -24,10 +24,10 @@ compile:
 	NODE_ENV=production yarn run build
 
 directories:
-	rm -rf release && mkdir -p release/bin release/db release/public release/boldrCMS && cp bin/boldr.js release/bin/ && cp package.json release/package.json && cp .env release/.env && cp -r db/ release/db/ && cp -r public/ release/public/
+	rm -rf release && cp -a ./bin ./release/ && cp package.json ./release/ && cp -a .env ./release/ && cp -a ./db ./release && cp -a ./public ./release/ && cp -a ./boldrCMS ./release/
 
 files:
-	cp knexfile.js internal/docker/Dockerfile release/ && cp internal/docker/docker-compose.prod.yml release/docker-compose.yml && cp -r boldrCMS/ release/boldrCMS/
+	cp knexfile.js internal/docker/Dockerfile release/ && cp internal/docker/docker-compose.prod.yml release/docker-compose.yml
 
 container:
 	cd release; docker build -t strues/boldrcms .
@@ -49,3 +49,6 @@ combine-coverage:
 
 test-ci:
 	NODE_ENV=test jest -w2 --config=${NODE_CFG} && cp ${COVERAGE} ${C_NODE} && jest -w2 --config=${BROWSER_CFG} && cp ${COVERAGE} ${C_BROWSER} && node ./internal/scripts/mapCoverage.js
+
+nuke:
+	rm -rf .happypack boldrCMS node_modules/.cache

@@ -1,7 +1,6 @@
 const act = {
   id: '63534051-2a4b-4feb-9036-e4cebbfab84b',
   user_id: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
-  action_type_id: 1,
   activity_post: '4f8dfad4-e800-11e6-aab3-27b508157fe1',
   activity_user: null,
   activity_attachment: null,
@@ -12,6 +11,7 @@ const act = {
   activity_role: null,
   created_at: '2017-01-31T21:57:51.487Z',
   updated_at: '2017-01-31T21:57:51.487Z',
+  type: 'create',
   owner: {
     id: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
     email: 'admin@boldr.io',
@@ -28,10 +28,6 @@ const act = {
     verified: true,
     created_at: '2017-01-27T02:52:52.602Z',
     updated_at: null,
-  },
-  actionType: {
-    id: 1,
-    type: 'create',
   },
   post: {
     id: '4f8dfad4-e800-11e6-aab3-27b508157fe1',

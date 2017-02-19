@@ -1,9 +1,9 @@
 import FormCard from './FormCard';
-import TextField from './TextField';
 import FormGroup from './FormGroup';
+import InputField from './InputField';
 
 export {
   FormCard,
-  TextField,
   FormGroup,
+  InputField,
 };

@@ -16,7 +16,6 @@ describe('Attachment API Endpoint', async () => {
     token = body.token;
     await db('attachment').insert({
       id: '1c462e26-df71-48ce-b363-4ae9b966e7a0',
-      original_name: 'file.png',
       url: '/files/file.png',
       user_id: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
       safe_name: 'file.png',

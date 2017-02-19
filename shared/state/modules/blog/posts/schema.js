@@ -1,12 +1,14 @@
 import { schema } from 'normalizr';
-import { user } from '../../account/user/schema';
+import { user } from '../../users/schema';
 import { tag } from '../tags/schema';
+import { comment } from '../comments/schema';
 
 const post = new schema.Entity('posts', {
   author: user,
   tags: [tag],
+  comments: [comment],
 }, { idAttribute: 'id' });
 
 const arrayOfPost = new schema.Array(post);
 
-export { post, arrayOfPost };
+export { post, arrayOfPost, comment };

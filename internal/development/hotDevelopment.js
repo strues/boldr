@@ -1,9 +1,10 @@
+/* eslint-disable eqeqeq */
 import { resolve as pathResolve } from 'path';
 import webpack from 'webpack';
 import appRootDir from 'app-root-dir';
 import { log } from '../utils';
 import webpackConfigFactory from '../webpack/configFactory';
-import getConfig from '../../config/get';
+import config from '../../config';
 import HotNodeServer from './hotNodeServer';
 import HotClientServer from './hotClientServer';
 import createVendorDLL from './createVendorDLL';
@@ -15,8 +16,8 @@ const vendorDLLsFailed = err => {
   log({
     title: 'vendorDLL',
     level: 'error',
-    message: 'Unfortunately an error occured whilst trying to build the vendor dll(s) used by the development server. Please check the console for more information.',
-    notify: true,
+    message: 'Unfortunately an error occured whilst trying to build the vendor dll(s) used by the development server.',
+    notify: false,
   });
   if (err) {
     console.error(err);
@@ -50,7 +51,7 @@ const initializeBundle = (name, bundleConfig) => {
         title: 'development',
         level: 'error',
         message: 'Webpack config is invalid, please check the console for more information.',
-        notify: true,
+        notify: false,
       });
       console.error(err);
       throw err;
@@ -64,24 +65,16 @@ class HotDevelopment {
     this.hotClientServer = null;
     this.hotNodeServers = [];
 
-    const clientBundle = initializeBundle(
-      'client',
-      getConfig('bundles.client'),
-    );
+    const clientBundle = initializeBundle('client', config('bundles.client'));
 
-    const nodeBundles = [
-      initializeBundle('server', getConfig('bundles.server')),
-    ].concat(
-      Object.keys(
-        getConfig('additionalNodeBundles'),
-      ).map(name =>
-        initializeBundle(name, getConfig('additionalNodeBundles')[name])),
-    );
+    const nodeBundles = [initializeBundle('server', config('bundles.server'))]
+    .concat(Object.keys(config('additionalNodeBundles')).map(name =>
+        initializeBundle(name, config('additionalNodeBundles')[name])));
 
     Promise// First ensure the client dev vendor DLLs is created if needed.
     .resolve(
-      usesDevVendorDLL(getConfig('bundles.client'))
-        ? createVendorDLL('client', getConfig('bundles.client'))
+      usesDevVendorDLL(config('bundles.client'))
+        ? createVendorDLL('client', config('bundles.client'))
         : true,
     )
       // Then start the client development server.

@@ -5,10 +5,12 @@ import bodyParser from 'body-parser';
 import methodOverride from 'method-override';
 import expressValidator from 'express-validator';
 import morgan from 'morgan';
+import expressWinston from 'express-winston';
 import flash from 'express-flash';
 import busboy from 'connect-busboy';
 import hpp from 'hpp';
-import getConfig from '../../config/get';
+import winstonInstance from '../services/logger';
+import config from '../../config';
 
 // Attach a unique "nonce" to every response.  This allows use to declare
 // inline scripts as being safe for execution against our content security policy.
@@ -30,15 +32,15 @@ export default (app) => {
   // allow for sending credentials (auth token) in the headers.
   app.use(cors({ origin: true, credentials: true }));
   // parse application/x-www-form-urlencoded
-  app.use(bodyParser.urlencoded({ extended: true, limit: getConfig('body.limit') }));
+  app.use(bodyParser.urlencoded({ extended: true, limit: config('body.limit') }));
   // parse application/anything+json
-  app.use(bodyParser.json({ type: 'application/*+json', limit: getConfig('body.limit') }));
+  app.use(bodyParser.json({ type: 'application/*+json', limit: config('body.limit') }));
   // parse application/json
-  app.use(bodyParser.json({ type: 'application/json', limit: getConfig('body.limit') }));
+  app.use(bodyParser.json({ type: 'application/json', limit: config('body.limit') }));
   // parse text/plain
-  app.use(bodyParser.text({ type: 'text/plain', limit: getConfig('body.limit') }));
+  app.use(bodyParser.text({ type: 'text/plain', limit: config('body.limit') }));
   // parse anything else
-  app.use(bodyParser.raw({ limit: getConfig('body.limit') }));
+  app.use(bodyParser.raw({ limit: config('body.limit') }));
   app.use(methodOverride((req, res) => {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
       // look in urlencoded POST bodies and delete it
@@ -55,5 +57,15 @@ export default (app) => {
     },
   }));
   app.use(hpp());
+  if (process.env.NODE_ENV !== 'production') {
+    expressWinston.requestWhitelist.push('body');
+    expressWinston.responseWhitelist.push('body');
+    app.use(expressWinston.logger({
+      winstonInstance,
+      meta: true,
+      msg: 'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
+      colorStatus: true,
+    }));
+  }
   app.use(flash());
 };

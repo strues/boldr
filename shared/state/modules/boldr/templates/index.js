@@ -1,4 +1,4 @@
-import templatesReducer, { STATE_KEY } from './templates';
+import templatesReducer, { STATE_KEY } from './reducer';
 import { fetchTemplatesIfNeeded, fetchTemplates, fetchTemplateResource } from './actions';
 import { getTemplates } from './selectors';
 

@@ -5,10 +5,7 @@ import ActivityWidget from './ActivityWidget';
 const act = [
   {
     id: 'asdfasdfasdf',
-    actionType: {
-      id: 4,
-      type: 'register',
-    },
+    type: 'register',
     created_at: '08/01/1000',
     owner: {
       avatar_url: 'Me',
@@ -16,10 +13,7 @@ const act = [
   },
   {
     id: 'asdfasdfasdf',
-    actionType: {
-      id: 4,
-      type: 'register',
-    },
+    type: 'register',
     created_at: '08/01/1000',
     owner: {
       avatar_url: 'Me',

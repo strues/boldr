@@ -1,7 +1,6 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { provideHooks } from 'redial';
 import { Loader } from '../../../../components';
 import { updatePost, fetchPostFromSlug } from '../../../../state/modules/blog/posts';
 import EditPostForm from './components/EditPostForm';
@@ -19,14 +18,19 @@ export type Props = {
   updatePost: Function
 };
 
-@provideHooks({
-  fetch: ({ dispatch, params: { slug } }) => dispatch(fetchPostFromSlug(slug)),
-})
 class PostEditorContainer extends Component {
-  componentDidMount() {
-    const slug = this.props.params.slug;
-    this.props.fetchPostFromSlug(slug);
+  static fetchData(dispatch, params) {
+    return Promise.all([
+      dispatch(fetchPostFromSlug(params.slug)),
+    ]);
   }
+  componentDidMount() {
+    const { dispatch, params } = this.props;
+
+   // Fetching data for client side rendering
+    PostEditorContainer.fetchData(dispatch, params);
+  }
+
   props: Props;
 
   render() {
@@ -49,7 +53,7 @@ const mapStateToProps = (state, ownProps) => {
     // posts: state.blog.posts,
     currentPost: state.blog.posts.currentPost,
     isFetching: state.blog.posts.isFetching,
-    postImage: state.admin.attachments.postImage,
+    postImage: state.attachments.postImage,
   };
 };
-export default connect(mapStateToProps, { fetchPostFromSlug })(PostEditorContainer);
+export default connect(mapStateToProps)(PostEditorContainer);

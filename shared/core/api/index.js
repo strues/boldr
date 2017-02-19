@@ -48,22 +48,31 @@ export const doResetPassword = (password, token) =>
   *****************************************************************/
 
 export const getAllPosts = () =>
-  apiClient.get('/posts');
+  apiClient.get('/posts?include=[author,tags,comments]');
 
 export const getPostById = (postId) =>
-  apiClient.get(`/posts/pid/${postId}`);
+  apiClient.get(`/posts/${postId}`);
 
 export const getPostBySlug = (slug) =>
   apiClient.get(`/posts/slug/${slug}`);
 
 export const delPostById = (postId) =>
-  apiClient.del(`/posts/pid/${postId}`);
+  apiClient.del(`/posts/${postId}`);
 
 export const createPost = (data) =>
   apiClient.post('/posts', { data });
 
 export const putPostId = (postData) =>
-  apiClient.put(`/posts/pid/${postData.id}`, { data: postData });
+  apiClient.put(`/posts/${postData.id}`, { data: postData });
+
+export const doNewPostComment = (data, postId) => {
+  const payload = {
+    content: data.content,
+    raw_content: data.raw_content,
+  };
+  return apiClient.post(`/posts/${postId}/comments`, { data: payload });
+};
+
 
   /**
     * SETTINGS API ROUTES
@@ -128,9 +137,8 @@ export const getAllAttachments = () =>
 export const doUpload = (payload) => {
   const data = {
     file_name: payload.file_name,
-    original_name: payload.original_name,
+    safe_name: payload.safe_name,
     url: payload.url,
-    s3_key: payload.s3_key,
   };
 
   return apiClient.post('/attachments/dashboard', { data });
@@ -181,7 +189,7 @@ export const doCreateTemplate = (payload) =>
     * @exports doFetchTags
     *****************************************************************/
 
-export const doFetchTags = (name) =>
+export const doFetchTagPosts = (name) =>
   apiClient.get(`/tags/${name}/posts`);
 
 export const getAllTags = () =>
@@ -205,7 +213,7 @@ export const doDeleteTag = (id) =>
   * @exports doUpdateMember
   *****************************************************************/
 export const getAllMembers = () =>
-  apiClient.get('/users');
+  apiClient.get('/users?include=[roles]');
 
 export const doUpdateMember = (userData) => {
   const payload = {
@@ -230,6 +238,8 @@ export const doUpdateProfile = (userData) => {
     bio: userData.bio,
     location: userData.location,
     website: userData.website,
+    social: userData.social,
+    profile_image: userData.profile_image,
   };
   return apiClient.put(`/users/${userData.id}`, { data: userData });
 };

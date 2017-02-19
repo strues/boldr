@@ -26,7 +26,8 @@ server {
       expires                       10m;
     }
     location ~ ^/(assets/|sitemap\.xml|robots\.txt|favicon\.ico)$ {
-      root YOUR_FILE_STRUCTURE/build/assets;
+      root YOUR_FILE_STRUCTURE/public;
+      ## root /var/www/<yoursitename>/public;
       access_log off;
       log_not_found off;
       expires max;

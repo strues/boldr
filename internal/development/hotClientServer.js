@@ -26,9 +26,6 @@ class HotClientServer {
       headers: {
         'Access-Control-Allow-Origin': '*',
       },
-      // Ensure that the public path is taken from the compiler webpack config
-      // as it will have been created as an absolute path to avoid conflicts
-      // with an node servers.
       publicPath: compiler.options.output.publicPath,
     });
 
@@ -61,7 +58,7 @@ class HotClientServer {
           title: 'client',
           level: 'info',
           message: 'Running with latest changes.',
-          notify: true,
+          notify: false,
         });
       }
     });

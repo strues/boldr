@@ -3,8 +3,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Button from 'react-md/lib/Buttons';
-import { TextField } from '../../../../../components/Form';
-import { Row, Col } from '../../../../../components/Layout';
+import { InputField, Row, Col } from '../../../../../components';
 
 const style = {
   margin: 12,
@@ -25,14 +24,14 @@ const FileEditorForm = (props: Props) => {
           name="file_name"
           type="text"
           label="File name"
-          component={ TextField }
+          component={ InputField }
         />
         <Field
           id="description"
           name="file_description"
           type="text"
           label="Description"
-          component={ TextField }
+          component={ InputField }
         />
         <Row>
           <Button type="submit" label="Save" style={ style } raised primary />

@@ -1,10 +1,11 @@
 import express from 'express';
 
+import config from '../../config';
 import activityRoutes from './activity/activity.routes';
 import adminRoutes from './admin/admin.routes';
 import attachmentRoutes from './attachment/attachment.routes';
 import authRoutes from './auth/auth.routes';
-
+import commentRoutes from './comment/comment.routes';
 import menuDetailRoutes from './menu/detail/menuDetail.routes';
 import menuRoutes from './menu/menu.routes';
 import pageRoutes from './page/page.routes';
@@ -16,36 +17,10 @@ import templateRoutes from './template/template.routes';
 import tokenRoutes from './token/token.routes';
 import userRoutes from './user/user.routes';
 
-const API_PREFIX = '/api/v1';
+
+const API_PREFIX = config('apiPrefix');
 
 export default (app) => {
-/**
- * @apiDefine listParams
- * @apiParam {String[]} include=[author,tags] Return associated models with the request
- * @apiParam {Number{1..30}} [page=1] Page number.
- * @apiParam {Number{1..100}} [limit=30] Amount of returned items.
- * @apiParam {String[]} [sort=-createdAt] Order of returned items.
- */
-
-/**
- * @apiDefine authHeader
- * @apiHeader {String}  Authorization   The user's token
- * @apiHeaderExample {json} Authorization Header Example:
- *    {
- *      "Authorization": "Bearer JSONWEBTOKEN"
- *    }
- */
-
-/**
- * @apiDefine admin Admin access only
- * You must pass an authorization header with a token associated with an admin user
- * to access this endpoint.
- */
-
- /**
-  * @apiDefine user User access for certain restricted routes.
-  * You must pass an authorization header with a token to access this endpoint.
-  */
   app.get(`${API_PREFIX}/health-check`, (req, res) => {
     res.status(200);
     res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
@@ -62,6 +37,7 @@ export default (app) => {
   app.use(`${API_PREFIX}/admin`, adminRoutes);
   app.use(`${API_PREFIX}/attachments`, attachmentRoutes);
   app.use(`${API_PREFIX}/auth`, authRoutes);
+  app.use(`${API_PREFIX}/comments`, commentRoutes);
   app.use(`${API_PREFIX}/menu-details`, menuDetailRoutes);
   app.use(`${API_PREFIX}/menus`, menuRoutes);
   app.use(`${API_PREFIX}/pages`, pageRoutes);
@@ -82,3 +58,36 @@ export default (app) => {
     }
   });
 };
+
+/**
+ * @apiDefine listParams
+ * @apiParam {String[]} include   Include related properties of the object.
+ * This is an alternative way to fetch a relevant data in a single call. ?include=[relationship]
+ * @apiParam {Number{1..30}} [page=1]           Page number.
+ * @apiParam {Number{1..100}} [limit=30]        Amount of returned items.
+ * @apiParam {String[]} [sort=-createdAt]       Order of returned items.
+ *
+ * @apiParamExample {url} Return all posts with related author, comments, and tags.
+ * Limit to 10 per page, starting on the first page
+ *    https://staging.boldr.io/api/v1/posts?include=[author,tags,comments]&page[size]=10&page[number]=1
+ */
+
+/**
+ * @apiDefine authHeader
+ * @apiHeader {String} Authorization Bearer JSONWEBTOKEN
+ * @apiHeaderExample {json} Authorization Header Example:
+ *    {
+ *      "Authorization": "Bearer JSONWEBTOKEN"
+ *    }
+ */
+
+/**
+ * @apiDefine admin Admin access only
+ * You must pass an authorization header with a token associated with an admin user
+ * to access this endpoint.
+ */
+
+ /**
+  * @apiDefine user User access for certain restricted routes.
+  * You must pass an authorization header with a token to access this endpoint.
+  */

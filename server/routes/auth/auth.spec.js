@@ -33,7 +33,7 @@ describe('Auth API Endpoint', async () => {
       .post('/api/v1/auth/login')
       .send({ email: 'admin@boldr.io', password: '' })
       .expect((res) => {
-        expect(res.status).toBe(400);
+        expect(res.status).toBe(401);
       });
   });
   test('+++ POST /login - Fails with the wrong password', () => {

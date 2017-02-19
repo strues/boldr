@@ -6,9 +6,8 @@ import * as api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import type { Post } from '../../../../types/models';
 import { notificationSend } from '../../../../state/modules/notifications/notifications';
-import * as t from './constants';
-
-import { arrayOfPost } from './schema';
+import * as t from '../../actionTypes';
+import { post as postSchema, arrayOfPost } from './schema';
 
 export function togglePostLayoutView() {
   return { type: t.TOGGLE_POST_LAYOUT };
@@ -52,9 +51,7 @@ export function fetchPosts() {
           dispatch(receivePostsFailed());
         }
 
-        const camelizedJson = camelizeKeys(response.body);
-        // const normalized = normalize(camelizedJson, arrayOf(postSchema, { idAttribute: 'slug' }));
-        const normalizedData = normalize(response.body, arrayOfPost);
+        const normalizedData = normalize(response.body.results, arrayOfPost);
         // console.log(normalized)
         dispatch(receivePosts(normalizedData));
       })
@@ -76,18 +73,18 @@ function shouldFetchPosts(state) {
   return false;
 }
 
-const requestPosts = () => {
+export const requestPosts = () => {
   return { type: t.FETCH_POSTS_REQUEST };
 };
 
-const receivePosts = (normalizedData) => {
+export const receivePosts = (normalizedData) => {
   return {
     type: t.FETCH_POSTS_SUCCESS,
     payload: normalizedData,
   };
 };
 
-const receivePostsFailed = (err) => ({
+export const receivePostsFailed = (err) => ({
   type: t.FETCH_POSTS_FAILURE, error: err,
 });
 
@@ -114,10 +111,9 @@ export function createPost(data: Post) {
     dispatch(beginCreatePost());
     return api.createPost(data)
       .then(response => {
-        if (response.status !== 201) {
-          dispatch(errorCreatingPost(response));
-        }
-        dispatch(createPostSuccess(response));
+        const camelizedJson = camelizeKeys(response.body);
+        const normalizedData = normalize(response.body, postSchema);
+        dispatch(createPostSuccess(normalizedData));
         dispatch(notificationSend(notif.MSG_CREATE_POST_SUCCESS));
       })
       .catch(err => {
@@ -131,10 +127,10 @@ const beginCreatePost = () => {
   return { type: t.CREATE_POST_REQUEST };
 };
 
-const createPostSuccess = (response: Object) => {
+const createPostSuccess = (normalizedData: Object) => {
   return {
     type: t.CREATE_POST_SUCCESS,
-    payload: response.body,
+    payload: normalizedData,
   };
 };
 

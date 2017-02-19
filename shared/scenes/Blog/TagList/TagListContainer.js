@@ -1,46 +1,50 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
-import { Grid, Col, Row } from '../../../components/Layout';
+import { Grid, Col, Row, Loader } from '../../../components';
+import { getPosts } from '../../../state/modules/blog/posts';
 import { fetchTaggedPost } from '../../../state/modules/blog/tags/actions';
 import TagList from './TagList';
 
 type Props = {
   currentTag: Object,
   isFetching: boolean,
+  posts: Array<Object>,
   params: Object,
   listTags: Object,
   dispatch: () => void,
 };
 
-@provideHooks({
-  fetch: ({ dispatch, params: { name } }) => dispatch(fetchTaggedPost(name)),
-})
-class TagListContainer extends Component {
-
-  componentDidMount() {
-    const name = this.props.params.name;
-    this.props.dispatch(fetchTaggedPost(name));
+export class TagListContainer extends Component {
+  static fetchData(dispatch, params) {
+    return Promise.all([
+      dispatch(fetchTaggedPost(params.name)),
+    ]);
   }
+  componentDidMount() {
+    const { dispatch, params } = this.props;
+
+   // Fetching data for client side rendering
+    TagListContainer.fetchData(dispatch, params);
+  }
+
   props: Props;
   render() {
     if (this.props.isFetching) {
       return (
-        <div>
-          Loading
-        </div>
+        <Loader />
       );
     }
     return (
-      <TagList listTags={ this.props.listTags } { ...this.props.currentTag } />
+      <TagList isFetching={ this.props.isFetching } listTags={ this.props.listTags } posts={ this.props.posts } />
     );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
+    posts: getPosts(state),
     listTags: state.blog.tags.all,
     isFetching: state.blog.tags.isFetching,
     currentTag: state.blog.tags.currentTag,

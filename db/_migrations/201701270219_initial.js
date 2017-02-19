@@ -2,26 +2,26 @@ module.exports.up = async (db) => {
   await db.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
   await db.raw('CREATE EXTENSION IF NOT EXISTS "hstore"');
 
-  await db.schema.createTable('action_type', (table) => {
-    table.increments('id').unsigned().primary();
-    table.enu('type', ['create', 'update', 'delete', 'register']).notNullable();
-
-    table.index('type');
-  });
   await db.schema.createTable('role', (table) => {
     // pk
     table.increments('id').unsigned().primary();
+    // uuid
+    table.uuid('uuid').notNullable().defaultTo(db.raw('uuid_generate_v4()'));
+
     table.string('name', 64).notNullable().unique();
     table.string('image', 200).nullable();
     table.text('description').nullable();
+
     table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
     table.timestamp('updated_at').nullable().defaultTo(null);
     // indexes
     table.index('name');
+    table.index('uuid');
   });
   await db.schema.createTable('user', (table) => {
     // pk
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
+
     table.string('email', 100).unique().notNullable();
     table.string('password', 64).notNullable();
     table.string('first_name', 50).notNullable();
@@ -33,11 +33,12 @@ module.exports.up = async (db) => {
     table.text('bio').nullable();
     table.date('birthday', 8).nullable();
     table.string('website', 100).nullable();
+    table.string('language', 10).notNullable().defaultTo('en_US');
+    table.json('social').nullable();
     table.boolean('verified').defaultTo(false);
 
     table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
     table.timestamp('updated_at').nullable().defaultTo(null);
-    table.timestamp('deleted_at').nullable().defaultTo(null);
     // fk
 
     // indexes
@@ -45,6 +46,7 @@ module.exports.up = async (db) => {
     table.index('verified');
     table.index('email');
   });
+
   await db.schema.createTable('verification_token', (table) => {
     // pk
     table.increments('id').unsigned().primary();
@@ -77,6 +79,8 @@ module.exports.up = async (db) => {
   });
   await db.schema.createTable('tag', (table) => {
     table.increments('id').unsigned().primary();
+    // uuid
+    table.uuid('uuid').notNullable().defaultTo(db.raw('uuid_generate_v4()'));
     table.string('name').notNullable().unique();
     table.string('description').nullable();
 
@@ -86,7 +90,7 @@ module.exports.up = async (db) => {
     // pk | uuid
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
     table.string('title', 140).unique().notNullable();
-    table.string('slug').unique().notNullable();
+    table.string('slug', 140).unique().notNullable();
     table.string('feature_image', 255).nullable();
     table.string('background_image', 255).nullable();
     table.json('attachments').nullable();
@@ -99,7 +103,6 @@ module.exports.up = async (db) => {
     table.boolean('published').defaultTo(true);
     table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
     table.timestamp('updated_at').nullable().defaultTo(null);
-    table.timestamp('deleted_at').nullable().defaultTo(null);
     // fk | uuid
     table.foreign('user_id').references('id').inTable('user').onDelete('cascade').onUpdate('cascade');
 
@@ -112,12 +115,11 @@ module.exports.up = async (db) => {
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
     table.string('file_name');
     table.string('safe_name');
-    table.string('original_name');
     table.string('file_description');
     table.string('file_type');
     table.uuid('user_id').unsigned().notNullable();
     table.string('url').notNullable();
-    table.string('s3_key');
+
     table.timestamp('created_at').defaultTo(db.fn.now());
     table.timestamp('updated_at').defaultTo(db.fn.now());
 
@@ -133,28 +135,50 @@ module.exports.up = async (db) => {
     table.index('key');
     table.index('value');
   });
+  await db.schema.createTable('comment', (table) => {
+    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
+    table.text('content').notNullable();
+    table.json('raw_content').nullable();
+    table.integer('likes').nullable();
+    table.integer('dislikes').nullable();
+    table.boolean('reported').default(false);
+    table.uuid('comment_author_id').unsigned().notNullable();
+    table.string('comment_author_ip').nullable();
+    table.uuid('comment_parent_id').references('id').inTable('comment');
+
+    table.foreign('comment_author_id').references('id').inTable('user').onDelete('cascade').onUpdate('cascade');
+
+    table.timestamp('created_at').defaultTo(db.fn.now());
+    table.timestamp('updated_at').defaultTo(db.fn.now());
+  });
   await db.schema.createTable('menu', (table) => {
     table.increments('id').unsigned().primary();
+    // uuid
+    table.uuid('uuid').notNullable().defaultTo(db.raw('uuid_generate_v4()'));
     table.string('name').notNullable();
-    table.string('label').notNullable();
+    table.string('safe_name').notNullable();
     table.json('attributes').nullable();
     table.boolean('restricted').default(false);
-    table.integer('order').notNullable();
 
-    table.index('label');
+    table.index('safe_name');
+    table.index('uuid');
   });
   await db.schema.createTable('menu_detail', (table) => {
     table.increments('id').unsigned().primary();
-    table.string('label', 50).notNullable();
+    // uuid
+    table.uuid('uuid').notNullable().defaultTo(db.raw('uuid_generate_v4()'));
+    table.string('safe_name', 50).notNullable();
     table.string('name', 50).notNullable();
-    table.string('attribute', 255).nullable();
-    table.integer('position');
-    table.integer('parent_id').nullable();
-    table.string('link').notNullable();
+    table.string('css_classname', 255).nullable();
+    table.boolean('has_dropdown').default(false);
+    table.integer('order');
+    table.string('mobile_href', 255).nullable().comment('Mobile href is applicable in cases where the item is a dropdown trigger on desktop. Without a mobile href, it will only be text.');
+    table.string('href').notNullable();
     table.string('icon').nullable();
-
-    table.index('label');
-    table.index('link');
+    table.json('children');
+    table.index('safe_name');
+    table.index('uuid');
+    table.index('href');
   });
   await db.schema.createTable('gallery', (table) => {
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
@@ -200,7 +224,7 @@ module.exports.up = async (db) => {
   await db.schema.createTable('activity', (table) => {
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
     table.uuid('user_id').unsigned().notNullable();
-    table.integer('action_type_id').unsigned().notNullable();
+    table.enu('type', ['create', 'update', 'delete', 'register']).notNullable();
     table.uuid('activity_post').unsigned();
     table.uuid('activity_user').unsigned();
     table.uuid('activity_attachment').unsigned();
@@ -213,7 +237,7 @@ module.exports.up = async (db) => {
     table.timestamp('updated_at').nullable().defaultTo(null);
 
     table.foreign('user_id').references('id').inTable('user').onDelete('cascade').onUpdate('cascade');
-    table.foreign('action_type_id').references('id').inTable('action_type').onDelete('cascade').onUpdate('cascade');
+
     table.foreign('activity_post').references('id').inTable('post').onDelete('cascade').onUpdate('cascade');
     table.foreign('activity_user').references('id').inTable('user').onDelete('cascade').onUpdate('cascade');
     table.foreign('activity_attachment').references('id').inTable('attachment').onDelete('cascade').onUpdate('cascade');
@@ -237,6 +261,15 @@ module.exports.up = async (db) => {
     table.foreign('post_id').references('id').inTable('post').onDelete('cascade').onUpdate('cascade');
     table.foreign('tag_id').references('id').inTable('tag').onDelete('cascade').onUpdate('cascade');
   });
+  await db.schema.createTable('post_comment', (table) => {
+    table.increments('id').primary();
+    table.uuid('post_id').unsigned().notNullable();
+    table.uuid('comment_id').unsigned().notNullable();
+
+    table.unique(['post_id', 'comment_id']);
+    table.foreign('post_id').references('id').inTable('post').onDelete('cascade').onUpdate('cascade');
+    table.foreign('comment_id').references('id').inTable('comment').onDelete('cascade').onUpdate('cascade');
+  });
   await db.schema.createTable('user_role', (table) => {
     table.increments('id').primary();
     table.uuid('user_id').unsigned().notNullable();
@@ -246,6 +279,7 @@ module.exports.up = async (db) => {
     table.foreign('user_id').references('id').inTable('user').onDelete('cascade').onUpdate('cascade');
     table.foreign('role_id').references('id').inTable('role').onDelete('cascade').onUpdate('cascade');
   });
+
   await db.schema.createTable('template_page', (table) => {
     table.increments('id').primary();
     table.uuid('page_id').unsigned().notNullable();
@@ -263,11 +297,11 @@ module.exports.up = async (db) => {
 };
 
 module.exports.down = async (db) => {
-  await db.schema.dropTableIfExists('action_type');
   await db.schema.dropTableIfExists('role');
   await db.schema.dropTableIfExists('user');
   await db.schema.dropTableIfExists('tag');
   await db.schema.dropTableIfExists('post');
+  await db.schema.dropTableIfExists('comment');
   await db.schema.dropTableIfExists('attachment');
   await db.schema.dropTableIfExists('setting');
   await db.schema.dropTableIfExists('menu');
@@ -280,6 +314,7 @@ module.exports.down = async (db) => {
   await db.schema.dropTableIfExists('reset_token');
   await db.schema.dropTableIfExists('post_attachment');
   await db.schema.dropTableIfExists('post_tag');
+  await db.schema.dropTableIfExists('post_comment');
   await db.schema.dropTableIfExists('user_role');
   await db.schema.dropTableIfExists('template_page');
   await db.schema.dropTableIfExists('menu_menu_detail');

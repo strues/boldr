@@ -1,4 +1,4 @@
-import pagesReducer, { STATE_KEY } from './pages';
+import pagesReducer, { STATE_KEY } from './reducer';
 import { fetchPagesIfNeeded, fetchPages, fetchPageByUrl } from './actions';
 import { getPages } from './selectors';
 

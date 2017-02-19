@@ -1,7 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 /* @flow */
 import React, { Component } from 'react';
-import { provideHooks } from 'redial';
 import { connect } from 'react-redux';
 import { fetchTagsIfNeeded, getTags } from '../../../state/modules/blog/tags';
 import type { Tag } from '../../../types/models';
@@ -10,19 +9,21 @@ import Tags from './Tags';
 type Props = {
   tags: Array<Tag>,
   currentTag: Object,
+  dispatch: Function,
   fetchTagsIfNeeded: Function,
 };
 
-@provideHooks({
-  fetch: ({ dispatch }) => {
-    return dispatch(fetchTagsIfNeeded());
-  },
-})
-class TagsContainer extends Component {
-  componentDidMount() {
-    this.props.fetchTagsIfNeeded();
-  }
 
+class TagsContainer extends Component {
+  static fetchData(dispatch) {
+    return Promise.all([
+      dispatch(fetchTagsIfNeeded()),
+    ]);
+  }
+  componentDidMount() {
+    const { dispatch } = this.props;
+    TagsContainer.fetchData(dispatch);
+  }
   props: Props;
 
   render() {
@@ -38,4 +39,4 @@ const mapStateToProps = (state) => {
     currentTag: state.blog.tags.currentTag,
   };
 };
-export default connect(mapStateToProps, { fetchTagsIfNeeded })(TagsContainer);
+export default connect(mapStateToProps)(TagsContainer);

@@ -45,7 +45,7 @@ export async function getTaggedPostsByName(req, res, next) {
     const tags = await Tag
       .query()
       .where({ name: req.params.name })
-      .eager('posts')
+      .eager('[posts,posts.comments]')
       .first();
 
     return responseHandler(res, 200, tags);
@@ -76,7 +76,7 @@ export async function createTag(req, res, next) {
     .query()
     .insert({
       user_id: req.user.id,
-      action_type_id: 1,
+      type: 'create',
       activity_tag: newTag.id,
     });
     return responseHandler(res, 201, newTag);

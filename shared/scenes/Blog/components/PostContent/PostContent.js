@@ -10,7 +10,8 @@ import PostDate from '../PostDate';
 type Props = {
   title: String,
   content: String,
-  feature_image: ?String
+  feature_image: ?String,
+  created_at: Date,
 }
 
 const PostContent = (props: Props) => {

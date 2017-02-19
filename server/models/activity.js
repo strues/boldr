@@ -2,7 +2,6 @@ import { Model } from 'objection';
 import BaseModel from './base';
 // Related Model
 import User from './user';
-import ActionType from './actionType';
 import Post from './post';
 import Attachment from './attachment';
 import Tag from './tag';
@@ -19,14 +18,6 @@ class Activity extends BaseModel {
         join: {
           from: 'activity.user_id',
           to: 'user.id',
-        },
-      },
-      actionType: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: ActionType,
-        join: {
-          from: 'activity.action_type_id',
-          to: 'action_type.id',
         },
       },
       post: {

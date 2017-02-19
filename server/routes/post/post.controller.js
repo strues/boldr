@@ -1,23 +1,22 @@
-import uuid from 'uuid';
+import uuid from 'uuid/v4';
 import * as objection from 'objection';
 import { responseHandler, Conflict, BadRequest } from '../../core/index';
 import slugIt from '../../utils/slugIt';
 
 // Models
-import { Tag, Activity, ActionType, Post, PostTag } from '../../models';
+import { Tag, Activity, Post, PostTag, Comment, PostComment } from '../../models';
 
 const debug = require('debug')('boldr:post-ctrl');
 
-export async function listPosts(req, res, next) {
-  try {
-    const allPosts = await Post.query().eager('[tags,author]').skipUndefined();
-    return responseHandler(res, 200, allPosts);
-  } catch (err) {
-    /* istanbul ignore next */
-    return next(new BadRequest(err));
-  }
-}
-
+/**
+ * Create a post
+ * @method createPost
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @returns {Promise}
+ */
 export async function createPost(req, res, next) {
   req.assert('title', 'A title must be provided').notEmpty();
   req.assert('content', 'Content can not be empty').notEmpty();
@@ -38,42 +37,41 @@ export async function createPost(req, res, next) {
   }
 
   try {
-    const newPost = await objection.transaction(Post, async Post => {
-      // create the post
-      const createPost = await Post
-      .query()
-      .insert({
-        title: req.body.title,
-        slug: postSlug,
-        excerpt: req.body.excerpt,
-        content: req.body.content,
-        raw_content: req.body.raw_content,
-        feature_image: req.body.feature_image,
-        background_image: req.body.background_image,
-        meta: req.body.meta,
-        attachments: req.body.attachments,
-        published: req.body.published,
-        user_id: req.user.id,
-      });
-      // relate the author to post
-      await createPost.$relatedQuery('author').relate({ id: req.user.id });
-
-      const reqTags = req.body.tags;
-
-      reqTags.map(async (tag) => {
-        const existingTag = await Tag.query().where('name', tag).first();
-        if (existingTag) {
-          createPostTagRelation(existingTag, createPost);
-        } else {
-          createPost.$relatedQuery('tags').insert({ name: tag });
-        }
-      });
+    // create the post
+    const createPost = await Post
+    .query()
+    .insert({
+      title: req.body.title,
+      slug: postSlug,
+      excerpt: req.body.excerpt,
+      content: req.body.content,
+      raw_content: req.body.raw_content,
+      feature_image: req.body.feature_image,
+      background_image: req.body.background_image,
+      meta: req.body.meta,
+      attachments: req.body.attachments,
+      published: req.body.published,
+      user_id: req.user.id,
     });
+    // relate the author to post
+    await createPost.$relatedQuery('author').relate({ id: req.user.id });
+
+    const reqTags = req.body.tags;
+
+    reqTags.map(async (tag) => {
+      const existingTag = await Tag.query().where('name', tag).first();
+      if (existingTag) {
+        createPostTagRelation(existingTag, createPost);
+      } else {
+        createPost.$relatedQuery('tags').insert({ name: tag });
+      }
+    });
+
 
     await Activity.query().insert({
       id: uuid(),
       user_id: req.user.id,
-      action_type_id: 1,
+      type: 'create',
       activity_post: createPost.id,
     });
     return responseHandler(res, 201, createPost);
@@ -83,13 +81,25 @@ export async function createPost(req, res, next) {
   }
 }
 
+/**
+ * Get a post from its slug.
+ * @method getSlug
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @returns {Promise}
+ */
 export async function getSlug(req, res, next) {
   try {
     const post = await Post
       .query()
       .where({ slug: req.params.slug })
-      .eager('[tags, author]')
-      .omit('password')
+      .eager('[tags, author, comments, comments.commenter, comments.replies]')
+      .modifyEager('comments.[replies]', (builder) => {
+        builder.orderBy('created_at', 'desc');
+      })
+      .omit(['password'])
       .first();
 
     if (!post) {
@@ -102,12 +112,24 @@ export async function getSlug(req, res, next) {
   }
 }
 
+/**
+ * Get post by id
+ * @method getId
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @returns {Promise}
+ */
 export async function getId(req, res, next) {
   try {
     const post = await Post
       .query()
       .findById(req.params.id)
-      .eager('[tags, author]')
+      .eager('[tags, author, comments, comments.commenter, comments.replies]')
+      .modifyEager('comments.[replies]', (builder) => {
+        builder.orderBy('created_at', 'desc');
+      })
       .omit('password')
       .first();
     return responseHandler(res, 200, post);
@@ -117,6 +139,15 @@ export async function getId(req, res, next) {
   }
 }
 
+/**
+ * Delete a post
+ * @method destroy
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @returns {Promise}
+ */
 export async function destroy(req, res, next) {
   try {
     await Activity
@@ -137,6 +168,15 @@ export async function destroy(req, res, next) {
   }
 }
 
+/**
+ * Update a post
+ * @method update
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @returns {Promise}
+ */
 export function update(req, res) {
   debug(req.body);
   return Post.query()
@@ -145,13 +185,22 @@ export function update(req, res) {
       await Activity.query().insert({
         id: uuid(),
         user_id: req.user.id,
-        action_type_id: 2,
+        type: 'update',
         activity_post: post.id,
       });
       responseHandler(res, 202, post);
     });
 }
 
+/**
+ * Relate a tag to a post
+ * @method addTag
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @returns {Promise}
+ */
 export async function addTag(req, res, next) {
   try {
     const post = await Post
@@ -167,6 +216,42 @@ export async function addTag(req, res, next) {
        .insert(req.body);
 
     return responseHandler(res, 202, tag);
+  } catch (error) {
+    return next(error);
+  }
+}
+
+/**
+ * Add a comment to a post
+ * @method addCommentToPost
+ *
+ * @param {Object} req
+ * @param {Object} res
+ * @param {Function} next
+ * @returns {Promise}
+ */
+export async function addCommentToPost(req, res, next) {
+  try {
+    const post = await Post
+      .query()
+      .findById(req.params.id);
+
+    if (!post) {
+      return res.status(404).json({ message: `Unable to find a post with the ID: ${req.params.id}.` });
+    }
+    const newComment = await Comment
+      .query()
+      .insert({
+        content: req.body.content,
+        raw_content: req.body.raw_content,
+        comment_author_id: req.user.id,
+        comment_author_ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+      });
+    await newComment.$relatedQuery('commenter').relate({ id: req.user.id });
+
+    await PostComment.query().insert({ comment_id: newComment.id, post_id: post.id });
+
+    return responseHandler(res, 201, newComment);
   } catch (error) {
     return next(error);
   }

@@ -3,8 +3,8 @@ import { Field, reduxForm } from 'redux-form';
 import Button from 'react-md/lib/Buttons/Button';
 import FontIcon from 'react-md/lib/FontIcons';
 import styled from 'styled-components';
-import { TextField, TextEditor, Col, Row, Heading, FormGroup } from '../../../../../../components';
-import { uploadPostImage } from '../../../../../../state/modules/admin/attachments/actions';
+import { InputField, TextEditor, Col, Row, Heading, FormGroup } from '../../../../../../components';
+import { uploadPostImage } from '../../../../../../state/modules/attachments/actions';
 import EditorField from './EditorField';
 
 type Props = {
@@ -45,7 +45,7 @@ const EditPostForm = (props: Props) => {
               id="post-title"
               name="title"
               type="text"
-              component={ TextField }
+              component={ InputField }
               label="Post Title"
             />
           </FormGroup>
@@ -55,7 +55,7 @@ const EditPostForm = (props: Props) => {
                 name="feature_image"
                 type="text"
                 helpText="URL for your image"
-                component={ TextField }
+                component={ InputField }
                 label="Feature Image"
               />
             </FormGroup>
@@ -69,7 +69,7 @@ const EditPostForm = (props: Props) => {
               name="excerpt"
               id="post-excerpt"
               type="text"
-              component={ TextField }
+              component={ InputField }
               label="Excerpt"
 
             />

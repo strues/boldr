@@ -1,5 +1,5 @@
 import type { $Response, $Request, NextFunction } from 'express';
-import uuid from 'uuid';
+import uuid from 'uuid/v4';
 import * as objection from 'objection';
 import { mailer, signToken } from '../../services/index';
 import { welcomeEmail } from '../../services/mailer/templates';
@@ -18,20 +18,6 @@ import User from '../../models/user';
 
 const debug = require('debug')('boldr:user-ctrl');
 
-export async function listUsers(req, res, next) {
-  try {
-    const users = await User.query().eager('[roles]').omit(['password']);
-    debug(users);
-    if (!users) {
-      return res.status(400).json('Unable to find any users.');
-    }
-    return responseHandler(res, 200, users);
-  } catch (error) {
-    /* istanbul ignore next */
-    const err = new BadRequest(error);
-    return next(err);
-  }
-}
 
 export async function getUser(req, res, next) {
   try {
@@ -163,6 +149,7 @@ export async function adminCreateUser(req, res, next) {
       // create a relationship between the user and the token
       const verificationEmail = await user.$relatedQuery('verificationToken')
         .insert({
+          ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
           token: verificationToken,
           user_id: user.id,
         });

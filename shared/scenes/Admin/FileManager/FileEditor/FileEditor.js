@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Paper from 'react-md/lib/Papers';
 import { Grid, Row, Col, Image } from '../../../../components/index';
-import { updateAttachment } from '../../../../state/modules/admin/attachments/actions';
+import { updateAttachment } from '../../../../state/modules/attachments/actions';
 import FileEditorForm from '../components/FileEditorForm';
 
 type Props = {
@@ -45,7 +45,7 @@ export class FileEditor extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    currentFile: state.admin.attachments.currentFile,
+    currentFile: state.attachments.currentFile,
   };
 };
 

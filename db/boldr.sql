@@ -3,7 +3,7 @@
 --
 
 -- Dumped from database version 9.6.1
--- Dumped by pg_dump version 9.6.1
+-- Dumped by pg_dump version 9.6.2
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -64,6 +64,20 @@ COMMENT ON EXTENSION hstore IS 'data type for storing sets of (key, value) pairs
 
 
 --
+-- Name: pgcrypto; Type: EXTENSION; Schema: -; Owner:
+--
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pgcrypto; Type: COMMENT; Schema: -; Owner:
+--
+
+COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
+
+
+--
 -- Name: uuid-ossp; Type: EXTENSION; Schema: -; Owner:
 --
 
@@ -84,47 +98,13 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: action_type; Type: TABLE; Schema: public; Owner: postgres
---
-
-CREATE TABLE action_type (
-    id integer NOT NULL,
-    type text NOT NULL,
-    CONSTRAINT action_type_type_check CHECK ((type = ANY (ARRAY['create'::text, 'update'::text, 'delete'::text, 'register'::text])))
-);
-
-
-ALTER TABLE action_type OWNER TO postgres;
-
---
--- Name: action_type_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
---
-
-CREATE SEQUENCE action_type_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE action_type_id_seq OWNER TO postgres;
-
---
--- Name: action_type_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
---
-
-ALTER SEQUENCE action_type_id_seq OWNED BY action_type.id;
-
-
---
 -- Name: activity; Type: TABLE; Schema: public; Owner: postgres
 --
 
 CREATE TABLE activity (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     user_id uuid NOT NULL,
-    action_type_id integer NOT NULL,
+    type text NOT NULL,
     activity_post uuid,
     activity_user uuid,
     activity_attachment uuid,
@@ -134,7 +114,8 @@ CREATE TABLE activity (
     activity_page uuid,
     activity_role integer,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone
+    updated_at timestamp with time zone,
+    CONSTRAINT activity_type_check CHECK ((type = ANY (ARRAY['create'::text, 'update'::text, 'delete'::text, 'register'::text])))
 );
 
 
@@ -148,18 +129,37 @@ CREATE TABLE attachment (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     file_name character varying(255),
     safe_name character varying(255),
-    original_name character varying(255),
     file_description character varying(255),
     file_type character varying(255),
     user_id uuid NOT NULL,
     url character varying(255) NOT NULL,
-    s3_key character varying(255),
     created_at timestamp with time zone DEFAULT now(),
     updated_at timestamp with time zone DEFAULT now()
 );
 
 
 ALTER TABLE attachment OWNER TO postgres;
+
+--
+-- Name: comment; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE comment (
+    id uuid DEFAULT uuid_generate_v4() NOT NULL,
+    content text NOT NULL,
+    raw_content json,
+    likes integer,
+    dislikes integer,
+    reported boolean DEFAULT false,
+    comment_author_id uuid NOT NULL,
+    comment_author_ip character varying(255),
+    comment_parent_id uuid,
+    created_at timestamp with time zone DEFAULT now(),
+    updated_at timestamp with time zone DEFAULT now()
+);
+
+
+ALTER TABLE comment OWNER TO postgres;
 
 --
 -- Name: gallery; Type: TABLE; Schema: public; Owner: postgres
@@ -186,11 +186,11 @@ ALTER TABLE gallery OWNER TO postgres;
 
 CREATE TABLE menu (
     id integer NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4() NOT NULL,
     name character varying(255) NOT NULL,
-    label character varying(255) NOT NULL,
+    safe_name character varying(255) NOT NULL,
     attributes json,
-    restricted boolean DEFAULT false,
-    "order" integer NOT NULL
+    restricted boolean DEFAULT false
 );
 
 
@@ -202,17 +202,27 @@ ALTER TABLE menu OWNER TO postgres;
 
 CREATE TABLE menu_detail (
     id integer NOT NULL,
-    label character varying(50) NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4() NOT NULL,
+    safe_name character varying(50) NOT NULL,
     name character varying(50) NOT NULL,
-    attribute character varying(255),
-    "position" integer,
-    parent_id integer,
-    link character varying(255) NOT NULL,
-    icon character varying(255)
+    css_classname character varying(255),
+    has_dropdown boolean DEFAULT false,
+    "order" integer,
+    mobile_href character varying(255),
+    href character varying(255) NOT NULL,
+    icon character varying(255),
+    children json
 );
 
 
 ALTER TABLE menu_detail OWNER TO postgres;
+
+--
+-- Name: COLUMN menu_detail.mobile_href; Type: COMMENT; Schema: public; Owner: postgres
+--
+
+COMMENT ON COLUMN menu_detail.mobile_href IS 'Mobile href is applicable in cases where the item is a dropdown trigger on desktop. Without a mobile href, it will only be text.';
+
 
 --
 -- Name: menu_detail_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
@@ -343,7 +353,7 @@ ALTER TABLE page OWNER TO postgres;
 CREATE TABLE post (
     id uuid DEFAULT uuid_generate_v4() NOT NULL,
     title character varying(140) NOT NULL,
-    slug character varying(255) NOT NULL,
+    slug character varying(140) NOT NULL,
     feature_image character varying(255),
     background_image character varying(255),
     attachments json,
@@ -355,8 +365,7 @@ CREATE TABLE post (
     user_id uuid NOT NULL,
     published boolean DEFAULT true,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone,
-    deleted_at timestamp with time zone
+    updated_at timestamp with time zone
 );
 
 
@@ -373,6 +382,40 @@ CREATE TABLE post_attachment (
 
 
 ALTER TABLE post_attachment OWNER TO postgres;
+
+--
+-- Name: post_comment; Type: TABLE; Schema: public; Owner: postgres
+--
+
+CREATE TABLE post_comment (
+    id integer NOT NULL,
+    post_id uuid NOT NULL,
+    comment_id uuid NOT NULL
+);
+
+
+ALTER TABLE post_comment OWNER TO postgres;
+
+--
+-- Name: post_comment_id_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE post_comment_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE post_comment_id_seq OWNER TO postgres;
+
+--
+-- Name: post_comment_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE post_comment_id_seq OWNED BY post_comment.id;
+
 
 --
 -- Name: post_tag; Type: TABLE; Schema: public; Owner: postgres
@@ -460,6 +503,7 @@ ALTER SEQUENCE reset_token_id_seq OWNED BY reset_token.id;
 
 CREATE TABLE role (
     id integer NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4() NOT NULL,
     name character varying(64) NOT NULL,
     image character varying(200),
     description text,
@@ -533,6 +577,7 @@ ALTER SEQUENCE setting_id_seq OWNED BY setting.id;
 
 CREATE TABLE tag (
     id integer NOT NULL,
+    uuid uuid DEFAULT uuid_generate_v4() NOT NULL,
     name character varying(255) NOT NULL,
     description character varying(255)
 );
@@ -651,10 +696,11 @@ CREATE TABLE "user" (
     bio text,
     birthday date,
     website character varying(100),
+    language character varying(10) DEFAULT 'en_US'::character varying NOT NULL,
+    social json,
     verified boolean DEFAULT false,
     created_at timestamp with time zone DEFAULT now() NOT NULL,
-    updated_at timestamp with time zone,
-    deleted_at timestamp with time zone
+    updated_at timestamp with time zone
 );
 
 
@@ -733,13 +779,6 @@ ALTER SEQUENCE verification_token_id_seq OWNED BY verification_token.id;
 
 
 --
--- Name: action_type id; Type: DEFAULT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY action_type ALTER COLUMN id SET DEFAULT nextval('action_type_id_seq'::regclass);
-
-
---
 -- Name: menu id; Type: DEFAULT; Schema: public; Owner: postgres
 --
 
@@ -758,6 +797,13 @@ ALTER TABLE ONLY menu_detail ALTER COLUMN id SET DEFAULT nextval('menu_detail_id
 --
 
 ALTER TABLE ONLY migrations ALTER COLUMN id SET DEFAULT nextval('migrations_id_seq'::regclass);
+
+
+--
+-- Name: post_comment id; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY post_comment ALTER COLUMN id SET DEFAULT nextval('post_comment_id_seq'::regclass);
 
 
 --
@@ -824,23 +870,6 @@ ALTER TABLE ONLY verification_token ALTER COLUMN id SET DEFAULT nextval('verific
 
 
 --
--- Data for Name: action_type; Type: TABLE DATA; Schema: public; Owner: postgres
---
-
-INSERT INTO action_type (id, type) VALUES (1, 'create');
-INSERT INTO action_type (id, type) VALUES (2, 'update');
-INSERT INTO action_type (id, type) VALUES (3, 'delete');
-INSERT INTO action_type (id, type) VALUES (4, 'register');
-
-
---
--- Name: action_type_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
---
-
-SELECT pg_catalog.setval('action_type_id_seq', 1, false);
-
-
---
 -- Data for Name: activity; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
@@ -850,7 +879,13 @@ SELECT pg_catalog.setval('action_type_id_seq', 1, false);
 -- Data for Name: attachment; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO attachment (id, file_name, safe_name, original_name, file_description, file_type, user_id, url, s3_key, created_at, updated_at) VALUES ('668e14aa-ebe6-11e6-8ebf-4f81f17749d5', 'file.png', 'file.png', 'file.png', NULL, NULL, '1b062e26-df71-48ce-b363-4ae9b966e7a0', '/files/file.png', NULL, '2017-02-09 19:13:17.181235+00', '2017-02-09 19:13:17.181235+00');
+INSERT INTO attachment (id, file_name, safe_name, file_description, file_type, user_id, url, created_at, updated_at) VALUES ('668e14aa-ebe6-11e6-8ebf-4f81f17749d5', 'file.png', 'file.png', NULL, NULL, '1b062e26-df71-48ce-b363-4ae9b966e7a0', '/files/file.png', '2017-02-17 21:24:00.456817+00', '2017-02-17 21:24:00.456817+00');
+
+
+--
+-- Data for Name: comment; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
 
 
 --
@@ -863,15 +898,15 @@ INSERT INTO attachment (id, file_name, safe_name, original_name, file_descriptio
 -- Data for Name: menu; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO menu (id, name, label, attributes, restricted, "order") VALUES (1, 'Main', 'main', '{}', false, 0);
+INSERT INTO menu (id, uuid, name, safe_name, attributes, restricted) VALUES (1, '83fc2c45-75bb-448e-ad32-75f7830ea972', 'Main', 'main', '{}', false);
 
 
 --
 -- Data for Name: menu_detail; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO menu_detail (id, label, name, attribute, "position", parent_id, link, icon) VALUES (1, 'about', 'About', NULL, 1, NULL, '/about', 'info');
-INSERT INTO menu_detail (id, label, name, attribute, "position", parent_id, link, icon) VALUES (2, 'blog', 'Blog', NULL, 2, NULL, '/blog', 'info');
+INSERT INTO menu_detail (id, uuid, safe_name, name, css_classname, has_dropdown, "order", mobile_href, href, icon, children) VALUES (1, 'da3155bc-fc59-41c0-89fb-2938a1638122', 'about', 'About', 'about-link', true, 1, 'about', 'about', 'info', '{"key":"about-menu","items":[{"name":"Tech","id":"tech","href":"about/tech","icon":"change_history"},{"name":"Setup","id":"setup","href":"about/setup","icon":"phonelink_setup"}]}');
+INSERT INTO menu_detail (id, uuid, safe_name, name, css_classname, has_dropdown, "order", mobile_href, href, icon, children) VALUES (2, 'f13c290d-d14d-4609-b6f4-6e617598df76', 'blog', 'Blog', 'blog-link', false, 2, 'blog', 'blog', 'info', NULL);
 
 
 --
@@ -900,7 +935,7 @@ INSERT INTO menu_menu_detail (menu_id, menu_detail_id) VALUES (1, 2);
 -- Data for Name: migrations; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO migrations (id, name, batch, migration_time) VALUES (1, '201701270219_initial.js', 1, '2017-02-09 19:10:13.343+00');
+INSERT INTO migrations (id, name, batch, migration_time) VALUES (1, '201701270219_initial.js', 1, '2017-02-17 21:23:54.045+00');
 
 
 --
@@ -921,41 +956,54 @@ INSERT INTO migrations_lock (is_locked) VALUES (0);
 -- Data for Name: page; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO page (id, name, slug, url, layout, data, status, restricted, meta, created_at, updated_at) VALUES ('87d1e9b3-b32e-474e-9246-6dce1b21a72d', 'Home', 'home', 'home', '{"showHero":true,"showPosts":true}', '{}', 'published', false, '{"title":"Home","description":"The home page"}', '2017-02-09 19:13:17.147397+00', NULL);
-INSERT INTO page (id, name, slug, url, layout, data, status, restricted, meta, created_at, updated_at) VALUES ('0a277a50-b482-4b86-b0e7-83fdd3a372af', 'About', 'about', 'about', '{"showHero":true,"showPosts":true}', '{}', 'published', false, '{"title":"About","description":"The about page"}', '2017-02-09 19:13:17.150413+00', NULL);
+INSERT INTO page (id, name, slug, url, layout, data, status, restricted, meta, created_at, updated_at) VALUES ('87d1e9b3-b32e-474e-9246-6dce1b21a72d', 'Home', 'home', 'home', '{"showHero":true,"showPosts":true}', '{}', 'published', false, '{"title":"Home","description":"The home page"}', '2017-02-17 21:24:00.424156+00', NULL);
+INSERT INTO page (id, name, slug, url, layout, data, status, restricted, meta, created_at, updated_at) VALUES ('0a277a50-b482-4b86-b0e7-83fdd3a372af', 'About', 'about', 'about', '{"showHero":true,"showPosts":true}', '{}', 'published', false, '{"title":"About","description":"The about page"}', '2017-02-17 21:24:00.425767+00', NULL);
 
 
 --
 -- Data for Name: post; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO post (id, title, slug, feature_image, background_image, attachments, meta, featured, raw_content, content, excerpt, user_id, published, created_at, updated_at, deleted_at) VALUES ('5c9ed236-79f0-4ff7-93bd-2815f06c74b4', 'Just Another Post', 'just-another-post', 'https://boldr.io/image1.jpg', NULL, NULL, '{}', false, NULL, '<h1>Lorem ipsum dolor sit amet.</h1>
+INSERT INTO post (id, title, slug, feature_image, background_image, attachments, meta, featured, raw_content, content, excerpt, user_id, published, created_at, updated_at) VALUES ('5c9ed236-79f0-4ff7-93bd-2815f06c74b4', 'Just Another Post', 'just-another-post', 'https://boldr.io/image1.jpg', 'https://boldr.io/image1.jpg', NULL, '{}', true, NULL, '<h1>Lorem ipsum dolor sit amet.</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien in est aliquam lacinia. Donec fringilla odio nulla, sagittis egestas dolor bibendum ut. Proin eget massa mattis, dictum enim vitae, facilisis eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum imperdiet varius ante. Maecenas sit amet luctus sapien, quis aliquet purus. Cras malesuada quam a dui pretium fermentum. Quisque tempor interdum quam, eu lacinia turpis interdum id. Curabitur non mauris lobortis, mattis nulla id, viverra nisi. Phasellus eget porttitor lorem. Quisque facilisis nec arcu eu fringilla. Vivamus elit ipsum, viverra eu maximus a, venenatis nec nibh.Suspendisse iaculis auctor fermentum. Sed suscipit ante nisl, nec iaculis magna consequat vel. Quisque viverra est a justo egestas, euismod egestas metus hendrerit.</p>
 <p><br></p>
 <blockquote>&nbsp;In ultricies sagittis ex a dapibus. Nunc feugiat lorem non tincidunt euismod. Duis quam nibh, volutpat sit amet enim non, eleifend ullamcorper diam. Etiam iaculis ante ut libero sollicitudin, eget eleifend nulla gravida. Pellentesque ut gravida augue. Donec nibh orci, rutrum nec sapien eu, lacinia pretium nulla. Nunc turpis sem, placerat ac velit sit amet, aliquet ultrices metus.Curabitur mollis venenatis lectus, at elementum felis dapibus non. Sed vel finibus mauris. Aenean semper arcu lectus, porta feugiat urna tincidunt congue. Ut euismod finibus massa quis condimentum. Vivamus interdum velit nec varius consectetur. Vivamus sodales commodo ante, vel fringilla nunc finibus et. Phasellus non sem finibus, congue nibh ut, ornare tortor.Curabitur sapien est, accumsan at justo a, porta malesuada risus. Integer facilisis viverra mauris condimentum finibus.</blockquote>
 <p><br></p>
 <p>&nbsp;Donec eget tortor id ipsum maximus commodo nec eu quam. Aliquam erat volutpat. Nunc tincidunt est sit amet justo placerat egestas. Vestibulum efficitur, neque tempor feugiat lacinia, turpis ex efficitur urna, ullamcorper porta ligula lorem id neque. Quisque interdum risus at nisl finibus varius. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.In euismod gravida tortor in placerat. Aenean blandit blandit efficitur. Cras a accumsan augue, at tincidunt massa. Vivamus eleifend sem sed nibh tempor laoreet. Quisque blandit turpis vitae bibendum mattis. Nulla sagittis quam eget diam feugiat ultricies. Aliquam varius tellus et turpis viverra tempus. Nam sit amet ex suscipit, convallis tortor at, malesuada felis. Vestibulum arcu eros, bibendum sit amet tempus placerat, pharetra nec tortor. Ut scelerisque quam non magna tincidunt, nec varius massa blandit.</p>
-<p><br></p>', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, whenan unknown printer took a galley of type and scrambled it to make a type specimen book.', '1b062e26-df71-48ce-b363-4ae9b966e7a0', true, '2017-02-09 19:13:16.875332+00', NULL, NULL);
-INSERT INTO post (id, title, slug, feature_image, background_image, attachments, meta, featured, raw_content, content, excerpt, user_id, published, created_at, updated_at, deleted_at) VALUES ('cb61bbae-c91e-4014-b665-3485734b88fb', 'Nother One', 'nother-one', 'https://boldr.io/image3.jpg', NULL, NULL, '{}', false, NULL, '<h1>Lorem ipsum dolor sit amet.</h1>
+<p><br></p>', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, whenan unknown printer took a galley of type and scrambled it to make a type specimen book.', '1b062e26-df71-48ce-b363-4ae9b966e7a0', true, '2017-02-17 21:24:00.162812+00', NULL);
+INSERT INTO post (id, title, slug, feature_image, background_image, attachments, meta, featured, raw_content, content, excerpt, user_id, published, created_at, updated_at) VALUES ('cb61bbae-c91e-4014-b665-3485734b88fb', 'Nother One', 'nother-one', 'https://boldr.io/image3.jpg', 'https://boldr.io/image3.jpg', NULL, '{}', false, NULL, '<h1>Lorem ipsum dolor sit amet.</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien in est aliquam lacinia. Donec fringilla odio nulla, sagittis egestas dolor bibendum ut. Proin eget massa mattis, dictum enim vitae, facilisis eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum imperdiet varius ante. Maecenas sit amet luctus sapien, quis aliquet purus. Cras malesuada quam a dui pretium fermentum. Quisque tempor interdum quam, eu lacinia turpis interdum id. Curabitur non mauris lobortis, mattis nulla id, viverra nisi. Phasellus eget porttitor lorem. Quisque facilisis nec arcu eu fringilla. Vivamus elit ipsum, viverra eu maximus a, venenatis nec nibh.Suspendisse iaculis auctor fermentum. Sed suscipit ante nisl, nec iaculis magna consequat vel. Quisque viverra est a justo egestas, euismod egestas metus hendrerit.</p>
 <p><br></p>
 <blockquote>&nbsp;In ultricies sagittis ex a dapibus. Nunc feugiat lorem non tincidunt euismod. Duis quam nibh, volutpat sit amet enim non, eleifend ullamcorper diam. Etiam iaculis ante ut libero sollicitudin, eget eleifend nulla gravida. Pellentesque ut gravida augue. Donec nibh orci, rutrum nec sapien eu, lacinia pretium nulla. Nunc turpis sem, placerat ac velit sit amet, aliquet ultrices metus.Curabitur mollis venenatis lectus, at elementum felis dapibus non. Sed vel finibus mauris. Aenean semper arcu lectus, porta feugiat urna tincidunt congue. Ut euismod finibus massa quis condimentum. Vivamus interdum velit nec varius consectetur. Vivamus sodales commodo ante, vel fringilla nunc finibus et. Phasellus non sem finibus, congue nibh ut, ornare tortor.Curabitur sapien est, accumsan at justo a, porta malesuada risus. Integer facilisis viverra mauris condimentum finibus.</blockquote>
 <p><br></p>
 <p>&nbsp;Donec eget tortor id ipsum maximus commodo nec eu quam. Aliquam erat volutpat. Nunc tincidunt est sit amet justo placerat egestas. Vestibulum efficitur, neque tempor feugiat lacinia, turpis ex efficitur urna, ullamcorper porta ligula lorem id neque. Quisque interdum risus at nisl finibus varius. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.In euismod gravida tortor in placerat. Aenean blandit blandit efficitur. Cras a accumsan augue, at tincidunt massa. Vivamus eleifend sem sed nibh tempor laoreet. Quisque blandit turpis vitae bibendum mattis. Nulla sagittis quam eget diam feugiat ultricies. Aliquam varius tellus et turpis viverra tempus. Nam sit amet ex suscipit, convallis tortor at, malesuada felis. Vestibulum arcu eros, bibendum sit amet tempus placerat, pharetra nec tortor. Ut scelerisque quam non magna tincidunt, nec varius massa blandit.</p>
-<p><br></p>', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, whenan unknown printer took a galley of type and scrambled it to make a type specimen book.', 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f', false, '2017-02-09 19:13:16.877325+00', NULL, NULL);
-INSERT INTO post (id, title, slug, feature_image, background_image, attachments, meta, featured, raw_content, content, excerpt, user_id, published, created_at, updated_at, deleted_at) VALUES ('ab33a0ca-b349-4cf8-947f-94f415149492', 'Random Post Title', 'random-post-title', 'https://boldr.io/image2.jpg', NULL, NULL, '{}', false, NULL, '<h1>Lorem ipsum dolor sit amet.</h1>
+<p><br></p>', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, whenan unknown printer took a galley of type and scrambled it to make a type specimen book.', 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f', false, '2017-02-17 21:24:00.164931+00', NULL);
+INSERT INTO post (id, title, slug, feature_image, background_image, attachments, meta, featured, raw_content, content, excerpt, user_id, published, created_at, updated_at) VALUES ('ab33a0ca-b349-4cf8-947f-94f415149492', 'Random Post Title', 'random-post-title', 'https://boldr.io/image2.jpg', 'https://boldr.io/image2.jpg', NULL, '{}', false, NULL, '<h1>Lorem ipsum dolor sit amet.</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien in est aliquam lacinia. Donec fringilla odio nulla, sagittis egestas dolor bibendum ut. Proin eget massa mattis, dictum enim vitae, facilisis eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum imperdiet varius ante. Maecenas sit amet luctus sapien, quis aliquet purus. Cras malesuada quam a dui pretium fermentum. Quisque tempor interdum quam, eu lacinia turpis interdum id. Curabitur non mauris lobortis, mattis nulla id, viverra nisi. Phasellus eget porttitor lorem. Quisque facilisis nec arcu eu fringilla. Vivamus elit ipsum, viverra eu maximus a, venenatis nec nibh.Suspendisse iaculis auctor fermentum. Sed suscipit ante nisl, nec iaculis magna consequat vel. Quisque viverra est a justo egestas, euismod egestas metus hendrerit.</p>
 <p><br></p>
 <blockquote>&nbsp;In ultricies sagittis ex a dapibus. Nunc feugiat lorem non tincidunt euismod. Duis quam nibh, volutpat sit amet enim non, eleifend ullamcorper diam. Etiam iaculis ante ut libero sollicitudin, eget eleifend nulla gravida. Pellentesque ut gravida augue. Donec nibh orci, rutrum nec sapien eu, lacinia pretium nulla. Nunc turpis sem, placerat ac velit sit amet, aliquet ultrices metus.Curabitur mollis venenatis lectus, at elementum felis dapibus non. Sed vel finibus mauris. Aenean semper arcu lectus, porta feugiat urna tincidunt congue. Ut euismod finibus massa quis condimentum. Vivamus interdum velit nec varius consectetur. Vivamus sodales commodo ante, vel fringilla nunc finibus et. Phasellus non sem finibus, congue nibh ut, ornare tortor.Curabitur sapien est, accumsan at justo a, porta malesuada risus. Integer facilisis viverra mauris condimentum finibus.</blockquote>
 <p><br></p>
 <p>&nbsp;Donec eget tortor id ipsum maximus commodo nec eu quam. Aliquam erat volutpat. Nunc tincidunt est sit amet justo placerat egestas. Vestibulum efficitur, neque tempor feugiat lacinia, turpis ex efficitur urna, ullamcorper porta ligula lorem id neque. Quisque interdum risus at nisl finibus varius. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.In euismod gravida tortor in placerat. Aenean blandit blandit efficitur. Cras a accumsan augue, at tincidunt massa. Vivamus eleifend sem sed nibh tempor laoreet. Quisque blandit turpis vitae bibendum mattis. Nulla sagittis quam eget diam feugiat ultricies. Aliquam varius tellus et turpis viverra tempus. Nam sit amet ex suscipit, convallis tortor at, malesuada felis. Vestibulum arcu eros, bibendum sit amet tempus placerat, pharetra nec tortor. Ut scelerisque quam non magna tincidunt, nec varius massa blandit.</p>
-<p><br></p>', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, whenan unknown printer took a galley of type and scrambled it to make a type specimen book.', '1b062e26-df71-48ce-b363-4ae9b966e7a0', true, '2017-02-09 19:13:16.879273+00', NULL, NULL);
+<p><br></p>', 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, whenan unknown printer took a galley of type and scrambled it to make a type specimen book.', '1b062e26-df71-48ce-b363-4ae9b966e7a0', true, '2017-02-17 21:24:00.167307+00', NULL);
 
 
 --
 -- Data for Name: post_attachment; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
+
+
+--
+-- Data for Name: post_comment; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- Name: post_comment_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('post_comment_id_seq', 1, false);
 
 
 --
@@ -991,9 +1039,9 @@ SELECT pg_catalog.setval('reset_token_id_seq', 1, false);
 -- Data for Name: role; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO role (id, name, image, description, created_at, updated_at) VALUES (1, 'Member', NULL, 'A verified user without special privileges', '2017-02-09 19:13:16.747943+00', NULL);
-INSERT INTO role (id, name, image, description, created_at, updated_at) VALUES (2, 'Staff', NULL, 'Allows access to the CMS dashboard.', '2017-02-09 19:13:16.754119+00', NULL);
-INSERT INTO role (id, name, image, description, created_at, updated_at) VALUES (3, 'Admin', NULL, 'Complete control over the CMS', '2017-02-09 19:13:16.758227+00', NULL);
+INSERT INTO role (id, uuid, name, image, description, created_at, updated_at) VALUES (1, 'c9474143-2bc1-441b-9ceb-7c4dcc6f5038', 'Member', NULL, 'A verified user without special privileges', '2017-02-17 21:24:00.041575+00', NULL);
+INSERT INTO role (id, uuid, name, image, description, created_at, updated_at) VALUES (2, '8282b97b-a477-4f8b-875d-b83c6322148d', 'Staff', NULL, 'Allows access to the CMS dashboard.', '2017-02-17 21:24:00.047681+00', NULL);
+INSERT INTO role (id, uuid, name, image, description, created_at, updated_at) VALUES (3, '35325973-24ed-4e13-b0b3-e727378186a0', 'Admin', NULL, 'Complete control over the CMS', '2017-02-17 21:24:00.050811+00', NULL);
 
 
 --
@@ -1027,8 +1075,8 @@ SELECT pg_catalog.setval('setting_id_seq', 7, true);
 -- Data for Name: tag; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO tag (id, name, description) VALUES (1, 'javascript', 'Something something JS');
-INSERT INTO tag (id, name, description) VALUES (2, 'apple', 'Stuff about stuff.');
+INSERT INTO tag (id, uuid, name, description) VALUES (1, '89f50883-1018-4ed9-bef7-b3fe90cb3ea9', 'javascript', 'Something something JS');
+INSERT INTO tag (id, uuid, name, description) VALUES (2, '17d218d4-0ea0-4532-bce9-32d1a1138fa4', 'apple', 'Stuff about stuff.');
 
 
 --
@@ -1042,8 +1090,8 @@ SELECT pg_catalog.setval('tag_id_seq', 2, true);
 -- Data for Name: template; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO template (id, uuid, name, slug, meta, content, created_at, updated_at) VALUES (1, 'c23891fb-88c2-4e91-b95d-c652f15eab0c', 'Base', 'base', '{}', '{}', '2017-02-09 19:13:17.109219+00', NULL);
-INSERT INTO template (id, uuid, name, slug, meta, content, created_at, updated_at) VALUES (2, 'd42f91fb-88c2-4e91-b95d-c652f15eab0c', 'Content', 'content', '{}', '{}', '2017-02-09 19:13:17.110871+00', NULL);
+INSERT INTO template (id, uuid, name, slug, meta, content, created_at, updated_at) VALUES (1, 'c23891fb-88c2-4e91-b95d-c652f15eab0c', 'Base', 'base', '{}', '{}', '2017-02-17 21:24:00.38723+00', NULL);
+INSERT INTO template (id, uuid, name, slug, meta, content, created_at, updated_at) VALUES (2, 'd42f91fb-88c2-4e91-b95d-c652f15eab0c', 'Content', 'content', '{}', '{}', '2017-02-17 21:24:00.389857+00', NULL);
 
 
 --
@@ -1072,9 +1120,9 @@ SELECT pg_catalog.setval('template_page_id_seq', 2, true);
 -- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO "user" (id, email, password, first_name, last_name, username, avatar_url, profile_image, location, bio, birthday, website, verified, created_at, updated_at, deleted_at) VALUES ('1b062e26-df71-48ce-b363-4ae9b966e7a0', 'admin@boldr.io', '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka', 'Joe', 'Gray', 'Joey', 'https://boldr.io/images/unknown-avatar.png', 'https://boldr.io/images/unknown-avatar.png', 'Colorado', 'I am me.', '1988-01-01', 'https://boldr.io', true, '2017-02-09 19:13:16.790622+00', NULL, NULL);
-INSERT INTO "user" (id, email, password, first_name, last_name, username, avatar_url, profile_image, location, bio, birthday, website, verified, created_at, updated_at, deleted_at) VALUES ('f4d869a6-1a75-469b-a9cc-965c552929e4', 'user@boldr.io', '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka', 'Jessica', 'Smith', 'Jess', 'https://boldr.io/images/unknown-avatar.png', 'https://boldr.io/images/unknown-avatar.png', 'Washington', 'Just a person', '1988-01-01', 'https://boldr.io', true, '2017-02-09 19:13:16.792815+00', NULL, NULL);
-INSERT INTO "user" (id, email, password, first_name, last_name, username, avatar_url, profile_image, location, bio, birthday, website, verified, created_at, updated_at, deleted_at) VALUES ('f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f', 'demo@boldr.io', '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka', 'Sam', 'Hunt', 'Samus', 'https://boldr.io/images/unknown-avatar.png', 'https://boldr.io/images/unknown-avatar.png', 'California', 'Someone doing things.', '1988-01-01', 'https://boldr.io', true, '2017-02-09 19:13:16.794376+00', NULL, NULL);
+INSERT INTO "user" (id, email, password, first_name, last_name, username, avatar_url, profile_image, location, bio, birthday, website, language, social, verified, created_at, updated_at) VALUES ('1b062e26-df71-48ce-b363-4ae9b966e7a0', 'admin@boldr.io', '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka', 'Joe', 'Gray', 'Joey', 'https://boldr.io/images/unknown-avatar.png', 'https://boldr.io/images/unknown-avatar.png', 'Colorado', 'I am me.', '1988-01-01', 'https://boldr.io', 'en_US', '{"facebook":{"url":"www.facebook.com"},"twitter":{"url":"www.twitter.com"},"linkedin":{"url":"www.linkedin.com"},"github":{"url":"www.github.com"},"google":{"url":"www.google.com"}}', true, '2017-02-17 21:24:00.077505+00', NULL);
+INSERT INTO "user" (id, email, password, first_name, last_name, username, avatar_url, profile_image, location, bio, birthday, website, language, social, verified, created_at, updated_at) VALUES ('f4d869a6-1a75-469b-a9cc-965c552929e4', 'user@boldr.io', '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka', 'Jessica', 'Smith', 'Jess', 'https://boldr.io/images/unknown-avatar.png', 'https://boldr.io/images/unknown-avatar.png', 'Washington', 'Just a person', '1988-01-01', 'https://boldr.io', 'en_US', '{"facebook":{"url":"www.facebook.com"},"twitter":{"url":"www.twitter.com"},"linkedin":{"url":"www.linkedin.com"},"github":{"url":"www.github.com"},"google":{"url":"www.google.com"}}', true, '2017-02-17 21:24:00.079496+00', NULL);
+INSERT INTO "user" (id, email, password, first_name, last_name, username, avatar_url, profile_image, location, bio, birthday, website, language, social, verified, created_at, updated_at) VALUES ('f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f', 'demo@boldr.io', '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka', 'Sam', 'Hunt', 'Samus', 'https://boldr.io/images/unknown-avatar.png', 'https://boldr.io/images/unknown-avatar.png', 'California', 'Someone doing things.', '1988-01-01', 'https://boldr.io', 'en_US', '{"facebook":{"url":"www.facebook.com"},"twitter":{"url":"www.twitter.com"},"linkedin":{"url":"www.linkedin.com"},"github":{"url":"www.github.com"},"google":{"url":"www.google.com"}}', true, '2017-02-17 21:24:00.081346+00', NULL);
 
 
 --
@@ -1107,14 +1155,6 @@ SELECT pg_catalog.setval('verification_token_id_seq', 1, false);
 
 
 --
--- Name: action_type action_type_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY action_type
-    ADD CONSTRAINT action_type_pkey PRIMARY KEY (id);
-
-
---
 -- Name: activity activity_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1128,6 +1168,14 @@ ALTER TABLE ONLY activity
 
 ALTER TABLE ONLY attachment
     ADD CONSTRAINT attachment_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: comment comment_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY comment
+    ADD CONSTRAINT comment_pkey PRIMARY KEY (id);
 
 
 --
@@ -1216,6 +1264,22 @@ ALTER TABLE ONLY page
 
 ALTER TABLE ONLY post_attachment
     ADD CONSTRAINT post_attachment_pkey PRIMARY KEY (post_id, attachment_id);
+
+
+--
+-- Name: post_comment post_comment_pkey; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY post_comment
+    ADD CONSTRAINT post_comment_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: post_comment post_comment_post_id_comment_id_unique; Type: CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY post_comment
+    ADD CONSTRAINT post_comment_post_id_comment_id_unique UNIQUE (post_id, comment_id);
 
 
 --
@@ -1387,31 +1451,38 @@ ALTER TABLE ONLY verification_token
 
 
 --
--- Name: action_type_type_index; Type: INDEX; Schema: public; Owner: postgres
+-- Name: menu_detail_href_index; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE INDEX action_type_type_index ON action_type USING btree (type);
-
-
---
--- Name: menu_detail_label_index; Type: INDEX; Schema: public; Owner: postgres
---
-
-CREATE INDEX menu_detail_label_index ON menu_detail USING btree (label);
+CREATE INDEX menu_detail_href_index ON menu_detail USING btree (href);
 
 
 --
--- Name: menu_detail_link_index; Type: INDEX; Schema: public; Owner: postgres
+-- Name: menu_detail_safe_name_index; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE INDEX menu_detail_link_index ON menu_detail USING btree (link);
+CREATE INDEX menu_detail_safe_name_index ON menu_detail USING btree (safe_name);
 
 
 --
--- Name: menu_label_index; Type: INDEX; Schema: public; Owner: postgres
+-- Name: menu_detail_uuid_index; Type: INDEX; Schema: public; Owner: postgres
 --
 
-CREATE INDEX menu_label_index ON menu USING btree (label);
+CREATE INDEX menu_detail_uuid_index ON menu_detail USING btree (uuid);
+
+
+--
+-- Name: menu_safe_name_index; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX menu_safe_name_index ON menu USING btree (safe_name);
+
+
+--
+-- Name: menu_uuid_index; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX menu_uuid_index ON menu USING btree (uuid);
 
 
 --
@@ -1454,6 +1525,13 @@ CREATE INDEX reset_token_token_index ON reset_token USING btree (token);
 --
 
 CREATE INDEX role_name_index ON role USING btree (name);
+
+
+--
+-- Name: role_uuid_index; Type: INDEX; Schema: public; Owner: postgres
+--
+
+CREATE INDEX role_uuid_index ON role USING btree (uuid);
 
 
 --
@@ -1517,14 +1595,6 @@ CREATE INDEX user_verified_index ON "user" USING btree (verified);
 --
 
 CREATE INDEX verification_token_token_index ON verification_token USING btree (token);
-
-
---
--- Name: activity activity_action_type_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
---
-
-ALTER TABLE ONLY activity
-    ADD CONSTRAINT activity_action_type_id_foreign FOREIGN KEY (action_type_id) REFERENCES action_type(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -1608,6 +1678,22 @@ ALTER TABLE ONLY attachment
 
 
 --
+-- Name: comment comment_comment_author_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY comment
+    ADD CONSTRAINT comment_comment_author_id_foreign FOREIGN KEY (comment_author_id) REFERENCES "user"(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: comment comment_comment_parent_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY comment
+    ADD CONSTRAINT comment_comment_parent_id_foreign FOREIGN KEY (comment_parent_id) REFERENCES comment(id);
+
+
+--
 -- Name: menu_menu_detail menu_menu_detail_menu_detail_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
 --
 
@@ -1637,6 +1723,22 @@ ALTER TABLE ONLY post_attachment
 
 ALTER TABLE ONLY post_attachment
     ADD CONSTRAINT post_attachment_post_id_foreign FOREIGN KEY (post_id) REFERENCES post(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: post_comment post_comment_comment_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY post_comment
+    ADD CONSTRAINT post_comment_comment_id_foreign FOREIGN KEY (comment_id) REFERENCES comment(id) ON UPDATE CASCADE ON DELETE CASCADE;
+
+
+--
+-- Name: post_comment post_comment_post_id_foreign; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY post_comment
+    ADD CONSTRAINT post_comment_post_id_foreign FOREIGN KEY (post_id) REFERENCES post(id) ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 --
@@ -1714,4 +1816,3 @@ ALTER TABLE ONLY verification_token
 --
 -- PostgreSQL database dump complete
 --
-

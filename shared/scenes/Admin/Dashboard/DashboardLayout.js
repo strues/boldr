@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-expressions */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { findDOMNode } from 'react-dom';
 import Link from 'react-router/lib/Link';
 import { connect } from 'react-redux';
@@ -16,12 +16,12 @@ const styled = require('styled-components').default;
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
   padding-top: 25px;
   box-sizing: border-box;
-  margin-left: 15px;
-  margin-right: 15px;
+  padding-left: 5em;
+  padding-right: 5em;
   max-width: 2000px;
+  background-color: #e5eaed;
 `;
 const UserSection = styled.div`
   display: inline-flex;
@@ -38,12 +38,12 @@ const UserName = styled.div`
 type Props = {
   children: ReactElement,
   dashboard: ?Object,
-  account: Object,
+  me: Object,
   location: Object,
   onMediaTypeChange: Function,
 };
 
-class DashboardLayout extends Component {
+class DashboardLayout extends PureComponent {
   constructor(props: Props) {
     super();
     this.state = {
@@ -89,10 +89,10 @@ class DashboardLayout extends Component {
     const { location: { pathname, search } } = this.props;
     const toolbarActionItems = (
       <UserSection>
-        <Avatar src={ this.props.account.user.avatarUrl } role="presentation" />
+        <Avatar src={ this.props.me.avatarUrl } role="presentation" />
         <UserName>
-          <Link to={ `/profiles/${this.props.account.user.username}` } style={ { color: '#fff' } }>
-            { this.props.account.user.firstName}
+          <Link to={ `/profiles/${this.props.me.username}` } style={ { color: '#fff' } }>
+            { this.props.me.firstName}
           </Link>
         </UserName>
       </UserSection>
@@ -124,7 +124,7 @@ function mapStateToProps(state) {
     router: state.router,
     dashboard: state.admin.dashboard,
     boldr: state.boldr,
-    account: state.account,
+    me: state.users.me,
     ui: state.boldr.ui,
   };
 }

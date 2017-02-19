@@ -3,11 +3,13 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import debounce from 'lodash/debounce';
-import { provideHooks } from 'redial';
+import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
+
 import testIfMobile from '../../core/utils/testIfMobile';
-import { fetchSettingsIfNeeded } from '../../state/modules/boldr/settings/actions';
-import { setMobileDevice } from '../../state/modules/boldr/ui/actions';
+import { fetchSettingsIfNeeded, selectSettings } from '../../state/modules/boldr/settings';
+import { makeSelectMobile, makeSelectUi, setMobileDevice } from '../../state/modules/boldr/ui';
 import type { ReactChildren } from '../../types/react';
 import Notifications from '../Notification';
 
@@ -15,6 +17,12 @@ import Notifications from '../Notification';
 if (process.env.NODE_ENV !== 'test') {
   require('../../styles/main.scss');
 }
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  box-sizing: border-box;
+`;
 
 type Props = {
   children: ReactChildren,
@@ -23,10 +31,19 @@ type Props = {
   isMobile: Boolean,
 };
 
-@provideHooks({
-  fetch: ({ dispatch }) => dispatch(fetchSettingsIfNeeded()),
-})
+const mapStateToProps = createStructuredSelector({
+  ui: makeSelectUi(),
+  isMobile: makeSelectMobile(),
+});
+
+@connect(mapStateToProps)
 class App extends Component {
+  static fetchData(dispatch) {
+    return Promise.all([
+      dispatch(fetchSettingsIfNeeded()),
+    ]);
+  }
+
   static childContextTypes = {
     dispatch: React.PropTypes.func,
     isMobile: React.PropTypes.bool,
@@ -39,28 +56,26 @@ class App extends Component {
 
   componentDidMount() {
     const { dispatch, location } = this.props;
-    this.props.dispatch(fetchSettingsIfNeeded());
+    App.fetchData(dispatch);
     window.addEventListener('resize', debounce(event => {
       dispatch(setMobileDevice(testIfMobile()));
     }, 1000));
   }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize');
+  }
+
   props: Props;
+
   render() {
     return (
-    <div>
+    <Wrapper>
       { React.Children.toArray(this.props.children) }
       <Notifications />
-    </div>
+    </Wrapper>
     );
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    ui: state.boldr.ui,
-    isMobile: state.boldr.ui.isMobile,
-    settings: state.boldr.settings,
-  };
-};
-
-export default connect(mapStateToProps)(App);
+export default App;

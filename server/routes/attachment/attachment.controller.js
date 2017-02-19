@@ -1,12 +1,11 @@
 import path from 'path';
 import Debug from 'debug';
-import uuid from 'uuid';
+import uuid from 'uuid/v4';
 import * as objection from 'objection';
 import fs from 'fs-extra';
 import shortId from 'shortid';
 import Busboy from 'busboy';
 import { responseHandler, BadRequest } from '../../core/index';
-import getConfig from '../../../config/get';
 import Activity from '../../models/activity';
 import Attachment from '../../models/attachment';
 
@@ -64,7 +63,7 @@ export async function updateAttachment(req, res, next) {
 
     await Activity.query().insert({
       user_id: req.user.id,
-      action_type_id: 2,
+      type: 'update',
       activity_attachment: req.params.id,
     });
 
@@ -153,7 +152,6 @@ export async function uploadAttachment(req, res, next) {
         fs.removeSync(fileLoc);
         // TODO: configure url based on config value.
         const newAttachment = await Attachment.query().insert({
-          original_name: filename,
           user_id: req.user.id,
           file_name: newFileName,
           safe_name: newFileName,
@@ -165,7 +163,7 @@ export async function uploadAttachment(req, res, next) {
         // create an activity entry
         await Activity.query().insert({
           user_id: req.user.id,
-          action_type_id: 1,
+          type: 'create',
           activity_attachment: newAttachment.id,
         });
 

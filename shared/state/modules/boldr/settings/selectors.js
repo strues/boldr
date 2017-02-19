@@ -7,9 +7,9 @@ import { createSelector } from 'reselect';
 
 export const getSettingIds = state => state.boldr.settings.ids;
 export const getSettingList = state => state.boldr.settings.all;
-export const getSettingFromList = (state, id) => state.boldr.settings.all[id];
+export const selectSettingFromList = (state, id) => state.boldr.settings.all[id];
 
-export const getSettings = createSelector(
+export const selectSettings = createSelector(
   [getSettingIds, getSettingList],
   (ids, all) => ids.map(id => all[id])
 );

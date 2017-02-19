@@ -4,7 +4,7 @@ import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 
 
 const editorStyle = {
-  minHeight: 400,
+  minHeight: 200,
 };
 export default class FieldEditor extends PureComponent {
   constructor(props) {

@@ -5,6 +5,7 @@ import PostImage from './PostImage';
 import PostSidebar from './PostSidebar';
 import Tag from './Tag';
 import TagBlock from './TagBlock';
+import FeaturedPost from './FeaturedPost';
 
 export {
   Author,
@@ -14,4 +15,5 @@ export {
   PostSidebar,
   Tag,
   TagBlock,
+  FeaturedPost,
 };

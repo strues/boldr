@@ -1,10 +1,10 @@
 /**
  * Authentication Middleware
- * src/server/middleware/auth
+ * server/middleware/auth
  */
 import jwt from 'jsonwebtoken';
 import User from '../models/user';
-import getConfig from '../../config/get';
+import config from '../../config';
 import sessionMiddleware from './session';
 
 const debug = require('debug')('boldr:authMW');
@@ -15,7 +15,7 @@ export default (app) => {
     req.isAuthenticated = () => {
       const token = (req.headers.authorization && req.headers.authorization.split(' ')[1]);
       try {
-        return jwt.verify(token, getConfig('token.secret'));
+        return jwt.verify(token, config('token.secret'));
       } catch (err) {
         return false;
       }
@@ -24,7 +24,10 @@ export default (app) => {
     if (req.isAuthenticated()) {
       const payload = req.isAuthenticated();
       const user = await User.query().findById(payload.sub).eager('[roles]');
+      req.session.user = user;
       req.user = user;
+      req.user.role = user.roles[0].name;
+
       next();
     } else {
       next();

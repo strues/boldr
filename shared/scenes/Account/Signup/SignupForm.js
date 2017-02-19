@@ -7,7 +7,7 @@ import {
   isValid,
 } from 'redux-form';
 import Button from 'react-md/lib/Buttons';
-import { TextField } from '../../../components/Form';
+import { InputField } from '../../../components/Form';
 import { Row, Col } from '../../../components/Layout';
 import validate, { requiredValidator, emailValidator } from './validate';
 
@@ -25,9 +25,9 @@ const SignupForm = (props: Props) => {
             id="email"
             name="email"
             type="email"
-            component={ TextField }
+            component={ InputField }
             label="Email address"
-            validate={[requiredValidator, emailValidator]}
+            validate={ [requiredValidator, emailValidator] }
           />
       </Col>
       <Col xs={ 6 }>
@@ -35,7 +35,7 @@ const SignupForm = (props: Props) => {
           id="password"
           name="password"
           type="password"
-          component={ TextField }
+          component={ InputField }
           label="Password"
         />
       </Col>
@@ -46,7 +46,7 @@ const SignupForm = (props: Props) => {
           id="first-name"
           name="first_name"
           type="text"
-          component={ TextField }
+          component={ InputField }
           label="First name"
         />
       </Col>
@@ -55,7 +55,7 @@ const SignupForm = (props: Props) => {
           id="last-name"
           name="last_name"
           type="text"
-          component={ TextField }
+          component={ InputField }
           label="Last name"
         />
       </Col>
@@ -68,14 +68,14 @@ const SignupForm = (props: Props) => {
                 id="username"
                 name="username"
                 type="text"
-                component={ TextField }
+                component={ InputField }
                 label="Username"
               />
             </Col>
           </Row>
         </Col>
       </Row>
-      
+
       <Button style={ { marginTop: '25px' } } raised primary label="Create Account" type="submit" />
     </form>
   );

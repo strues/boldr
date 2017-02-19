@@ -5,7 +5,7 @@ import * as api from '../../../../core/api';
 
 import * as notif from '../../../../core/constants';
 import { notificationSend } from '../../notifications/notifications';
-import * as t from './constants';
+import * as t from '../../actionTypes';
 import { setting as settingSchema, arrayOfSetting } from './schema';
 
 /**
@@ -54,7 +54,7 @@ export function loadBoldrSettings() {
  * @param  {Object} state   The boldr state which contains the settings
  */
 function shouldFetchSettings(state) {
-  const settings = state.boldr.settings;
+  const settings = state.boldr.settings.ids;
   if (!settings.length) {
     return true;
   }

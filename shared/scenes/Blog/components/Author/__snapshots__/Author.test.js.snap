@@ -33,7 +33,7 @@ exports[`<Author /> renders snapshot 1`] = `
             "blue-grey",
           ]
         } />
-       
+
     </styled.li>
     <styled.li>
       <Link
@@ -43,7 +43,20 @@ exports[`<Author /> renders snapshot 1`] = `
         hey
       </Link>
     </styled.li>
-    <styled.li />
+    <styled.li>
+      bio bio
+    </styled.li>
+    <Social
+      facebook={true}
+      fburl="asf"
+      ghurl="asf"
+      github={true}
+      google={true}
+      gurl="asf"
+      linkedin={true}
+      lurl="asf"
+      turl="asf"
+      twitter={true} />
   </styled.ul>
 </div>
 `;

@@ -3,7 +3,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Button from 'react-md/lib/Buttons';
-import { TextField } from '../../../components/Form';
+import { InputField } from '../../../components/Form';
 
 const style = {
   margin: 12,
@@ -20,7 +20,7 @@ const ForgotPasswordForm = (props: Props) => {
           name="email"
           type="email"
           label="Email"
-          component={ TextField }
+          component={ InputField }
         />
         <Button type="submit" label="Send reset link" style={ style } raised primary />
       </form>

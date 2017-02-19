@@ -15,7 +15,30 @@ import User from '../user';
 class UserRole extends BaseModel {
   static tableName = 'user_role';
   static addTimestamps = false;
-
+  static jsonSchema = {
+    type: 'object',
+    required: ['user_id', 'role_id'],
+    properties: {
+      id: {
+        type: 'string',
+        minLength: 36,
+        maxLength: 36,
+        pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
+      },
+      role_id: {
+        type: 'string',
+        minLength: 36,
+        maxLength: 36,
+        pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
+      },
+      user_id: {
+        type: 'string',
+        minLength: 36,
+        maxLength: 36,
+        pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
+      },
+    },
+  };
   static relationMappings = {
     role: {
       relation: Model.BelongsToOneRelation,

@@ -1,16 +1,15 @@
 /* @flow */
 import React from 'react';
-// import { Icon, Row, Col, Paragraph } from '../../../../../components/index';
 
 type Props = {
   atype: Number,
 };
 
 const ActivityItemDetail = (props: Props) => {
-  const createdType = props.atype === 1;
-  const updatedType = props.atype === 2;
-  const deletedType = props.atype === 3;
-  const registeredType = props.atype === 4;
+  const createdType = props.atype === 'create';
+  const updatedType = props.atype === 'update';
+  const deletedType = props.atype === 'delete';
+  const registeredType = props.atype === 'register';
   if (createdType) {
     return (
       <span>added</span>

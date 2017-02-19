@@ -1,14 +1,14 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { provideHooks } from 'redial';
 
-import { uploadFiles, fetchMedia, deleteMedia, selectFile } from '../../../state/modules/admin/attachments/actions';
+import { uploadFiles, fetchMedia, deleteMedia, selectFile } from '../../../state/modules/attachments/actions';
 import FileManager from './FileManager';
 
 type Props = {
   handleFinish: () => void,
   attachments: Object,
+  dispatch: Function,
   selectFile: () => void,
   deleteMedia: () => void,
   uploadFiles: () => void,
@@ -18,14 +18,17 @@ type Props = {
   ui: Object,
 };
 
-@provideHooks({
-  fetch: ({ dispatch }) => {
-    return dispatch(fetchMedia());
-  },
-})
 class FileManagerContainer extends Component {
+  static fetchData(dispatch) {
+    return Promise.all([
+      dispatch(fetchMedia()),
+    ]);
+  }
   componentDidMount() {
-    this.props.fetchMedia();
+    const { dispatch } = this.props;
+
+   // Fetching data for client side rendering
+    FileManagerContainer.fetchData(dispatch);
   }
   props: Props;
 
@@ -41,15 +44,15 @@ class FileManagerContainer extends Component {
       s3_key: signResult.s3_key,
       url: fileUrl,
     };
-    this.props.uploadFiles(payload);
+    this.props.dispatch(uploadFiles(payload));
   }
 
   handleRemoveMedia = (mediaId) => {
-    this.props.deleteMedia(mediaId);
+    this.props.dispatch(deleteMedia(mediaId));
   }
 
   selectTheFile = (file) => {
-    this.props.selectFile(file);
+    this.props.dispatch(selectFile(file));
   }
 
   render() {
@@ -67,11 +70,9 @@ class FileManagerContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    attachments: state.admin.attachments,
+    attachments: state.attachments,
     ui: state.boldr.ui,
   };
 };
 
-export default connect(mapStateToProps, {
-  uploadFiles, deleteMedia, fetchMedia, selectFile,
-})(FileManagerContainer);
+export default connect(mapStateToProps)(FileManagerContainer);

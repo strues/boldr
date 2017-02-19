@@ -1,4 +1,4 @@
-import tagsReducer, { STATE_KEY } from './tags';
+import tagsReducer, { STATE_KEY } from './reducer';
 import { getTagIds, getTagsList, getTags } from './selectors';
 import { fetchTagsIfNeeded, fetchTags, selectTag, clearTag, createTag, deleteTag } from './actions';
 

@@ -7,9 +7,9 @@
 
 import React, { Children, PropTypes } from 'react';
 import serialize from 'serialize-javascript';
-import getConfig from '../../../config/get';
+import config from '../../../config';
 import { onlyIf, removeNil } from '../../../shared/core/utils';
-import ClientConfigScript from '../../../config/ClientConfigScript';
+import ClientConfig from '../../../config/components/ClientConfig';
 import Html from '../../../shared/components/Html';
 import getClientBundleEntryAssets from './getClientBundleEntryAssets';
 // PRIVATES
@@ -69,17 +69,17 @@ function ServerHTML(props) {
     // Binds the client configuration object to the window object so
     // that we can safely expose some configuration values to the
     // client bundle that gets executed in the browser.
-    <ClientConfigScript key="none" nonce={ nonce } />,
+    <ClientConfig key="client-cfg" nonce={ nonce } />,
     inlineScript(`window.__PRELOADED_STATE__=${serialize(props.preloadedState)};`),
     onlyIf(
-      getConfig('polyfillIO.enabled'),
-      () => scriptTag(getConfig('polyfillIO.url')),
+      config('polyfillIO.enabled'),
+      () => scriptTag(config('polyfillIO.url')),
     ),
     onlyIf(
       process.env.NODE_ENV === 'development'
-      && getConfig('bundles.client.devVendorDLL.enabled'),
+      && config('bundles.client.devVendorDLL.enabled'),
       () => scriptTag(
-        `${getConfig('bundles.client.webPath')}${getConfig('bundles.client.devVendorDLL.name')}.js?t=${Date.now()}`,
+        `${config('bundles.client.webPath')}${config('bundles.client.devVendorDLL.name')}.js?t=${Date.now()}`,
       ),
     ),
     onlyIf(
@@ -94,9 +94,9 @@ function ServerHTML(props) {
 
   return (
     <Html
-      title={ getConfig('htmlPage.defaultTitle') }
-      titleTemplate={ getConfig('htmlPage.titleTemplate') }
-      description={ getConfig('htmlPage.description') }
+      title={ config('htmlPage.defaultTitle') }
+      titleTemplate={ config('htmlPage.titleTemplate') }
+      description={ config('htmlPage.description') }
       appBodyString={ reactAppString }
       headerElements={
         headerElements.map((x, idx) => <KeyedComponent key={ idx }>{x}</KeyedComponent>)
@@ -111,6 +111,8 @@ function ServerHTML(props) {
 ServerHTML.propTypes = {
   reactAppString: PropTypes.string,
   nonce: PropTypes.string,
+  preloadedState: PropTypes.object,
+  styles: PropTypes.object,
   // eslint-disable-next-line react/forbid-prop-types
   helmet: PropTypes.object,
 };

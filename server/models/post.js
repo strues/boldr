@@ -1,10 +1,12 @@
 import { Model } from 'objection';
+import { slugIt } from '../utils';
 
 // Related Models
 import Tag from './tag';
 import User from './user';
 import Attachment from './attachment';
 import BaseModel from './base';
+import Comment from './comment';
 
 class Post extends BaseModel {
   static get tableName() {
@@ -17,39 +19,6 @@ class Post extends BaseModel {
     return 'id';
   }
 
-  // static jsonSchema = {
-  //   type: 'object',
-  //   required: ['title', 'slug', 'content', 'excerpt', 'published'],
-  //   uniqueProperties: ['slug'],
-  //   additionalProperties: true,
-  //   properties: {
-  //     id: {
-  //       type: 'string',
-  //     },
-  //     title: {
-  //       type: 'string',
-  //       minLength: 3,
-  //       maxLength: 140,
-  //     },
-  //     slug: { type: 'string', minLength: 3, maxLength: 140 },
-  //     feature_image: { type: 'string', maxLength: 255 },
-  //     attachments: { type: ['object', 'null'], default: null },
-  //     meta: { type: ['object', 'null'], default: null },
-  //     featured: { type: 'boolean', default: false },
-  //     content: { type: 'string', minLength: 3 },
-  //     excerpt: { type: 'string', minLength: 3, maxLength: 255 },
-  //     published: { type: 'boolean', default: true },
-  //     user_id: {
-  //       type: 'string',
-  //     },
-  //     created_at: { type: 'string', format: 'date-time' },
-  //     updated_at: {
-  //       type: ['string', 'null'],
-  //       format: 'date-time',
-  //       default: null,
-  //     },
-  //   },
-  // };
   static get relationMappings() {
     return {
       author: {
@@ -82,6 +51,18 @@ class Post extends BaseModel {
             to: 'post_attachment.attachment_id',
           },
           to: 'attachment.id',
+        },
+      },
+      comments: {
+        relation: Model.ManyToManyRelation,
+        modelClass: Comment,
+        join: {
+          from: 'post.id',
+          through: {
+            from: 'post_comment.post_id',
+            to: 'post_comment.comment_id',
+          },
+          to: 'comment.id',
         },
       },
     };

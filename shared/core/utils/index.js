@@ -1,5 +1,4 @@
 import { loadRoute, errorLoading } from './routeHelpers';
-import { sort, uniq } from './lists';
 import { filterWithRules, mergeDeep, getIn, setIn, removeByKey } from './objects';
 import { ifElse, onlyIf, requiredParam, validateId } from './logic';
 import {
@@ -22,8 +21,6 @@ export {
   removeKeyFromNestedArray,
   stringifiedArray,
   validateArray,
-  sort,
-  uniq,
   ifElse,
   onlyIf,
   requiredParam,

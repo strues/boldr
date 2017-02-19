@@ -3,7 +3,7 @@ import { camelizeKeys } from 'humps';
 import * as api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import { notificationSend } from '../../notifications/notifications';
-import * as t from './constants';
+import * as t from '../../actionTypes';
 import { detail, menu } from './schema';
 
 /**
@@ -38,7 +38,7 @@ export function fetchMenus() {
 }
 
 function shouldFetchMenus(state) {
-  const menu = state.boldr.menu.main;
+  const menu = state.boldr.menu.main.details;
   if (!menu.length) {
     return true;
   }

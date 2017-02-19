@@ -1,6 +1,3 @@
-/* @flow */
-
-import type { $Request, $Response, Middleware, NextFunction } from 'express';
 import React from 'react';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import { Provider } from 'react-redux';
@@ -10,33 +7,30 @@ import createMemoryHistory from 'react-router/lib/createMemoryHistory';
 import { syncHistoryWithStore } from 'react-router-redux';
 import styleSheet from 'styled-components/lib/models/StyleSheet';
 import Helmet from 'react-helmet';
-import { trigger } from 'redial';
 
 import AppRoot from '../../../shared/components/AppRoot';
 import createRoutes from '../../../shared/scenes';
 import ApiClient from '../../../shared/core/api/apiClient';
 import configureStore from '../../../shared/state/store';
-import getConfig from '../../../config/get';
+import config from '../../../config';
 import ServerHTML from './ServerHTML';
 
 const debug = require('debug')('boldr:ssrMW');
 
-/**
- * An express middleware that is capabable of service our React application,
- * supporting server side rendering of the application.
- */
-function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
+function renderAppToString(store, renderProps, apiClient) {
+  return renderToString(
+    <AppRoot store={ store }>
+      <RouterContext { ...renderProps } helpers={ apiClient } />
+    </AppRoot>,
+  );
+}
+
+function boldrSSR(req, res, next) {
   if (typeof res.locals.nonce !== 'string') {
     throw new Error('A "nonce" value has not been attached to the response');
   }
-  // If path start with /static :: return next()
-  if (req.url.match(/^\/static\/.*/i) !== null) {
-    return next();
-  }
-  const nonce = res.locals.nonce;
 
-  const getHost = req =>
-    `${req.headers['x-forwarded-proto'] || req.protocol}://${req.headers.host}`;
+  const nonce = res.locals.nonce;
 
   global.navigator = { userAgent: req.headers['user-agent'] };
 
@@ -52,32 +46,19 @@ function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
   const { dispatch, getState } = store;
 
   match({ history, routes, location: req.url }, (error, redirectLocation, renderProps) => {
-    debug(`path : ${req.url}`);
-    if (error || !renderProps) {
-      return next(error);
-    }
-    if (redirectLocation) {
-      debug('---------------- redirectLocation ----------------');
-      debug(redirectLocation);
-      res.redirect(redirectLocation.pathname + redirectLocation.search);
-    }
-    const { components } = renderProps;
-    const locals = {
-      path: renderProps.location.pathname,
-      query: renderProps.location.query,
-      params: renderProps.params,
-      dispatch,
-    };
+    if (error) return res.status(500).json(error);
+    if (!renderProps) return res.status(404);
+    if (redirectLocation) return res.redirect(redirectLocation.pathname + redirectLocation.search);
 
-    trigger('fetch', components, locals)
-       .then(() => {
-         const AppRender = (store, renderProps) => renderToString(
-            <AppRoot store={ store }>
-              <RouterContext { ...renderProps } helpers={ apiClient } />
-            </AppRoot>,
-          );
+    const promises = renderProps.components
+      .filter(component => component.fetchData)
+      .map(component => component.fetchData(store.dispatch, renderProps.params));
+
+    Promise.all(promises)
+       .then((data) => {
          const preloadedState = store.getState();
-         const reactAppString = AppRender(store, renderProps);
+         const reactAppString = renderAppToString(store, renderProps, apiClient);
+
          const helmet = Helmet.rewind();
          // render styled-components styleSheets to string.
          const styles = styleSheet.rules().map(rule => rule.cssText).join('\n');
@@ -91,13 +72,12 @@ function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
              preloadedState={ preloadedState }
            />,
          );
-         res.status(200).send(html);
+         return res.status(200).send(`<!DOCTYPE html>${html}`);
        }).catch((err) => {
-         debug('---------------- SSR ON ERROR ----------------');
          debug(err);
-         res.status(500).end();
+         return res.status(500).send(err);
        });
   });
 }
 
-export default (boldrSSR: Middleware);
+export default boldrSSR;

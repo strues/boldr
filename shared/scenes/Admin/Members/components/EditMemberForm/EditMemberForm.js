@@ -4,7 +4,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Button from 'react-md/lib/Buttons';
 import SelectField from 'react-md/lib/SelectFields';
-import TextField from '../../../../../components/Form/TextField';
+import InputField from '../../../../../components/Form/InputField';
 
 const style = {
   margin: 12,
@@ -41,35 +41,35 @@ const EditMemberForm = (props: Props) => {
           name="email"
           type="email"
           label="Email"
-          component={ TextField }
+          component={ InputField }
         />
         <Field
           id="first_name"
           name="first_name"
           type="text"
           label="First name"
-          component={ TextField }
+          component={ InputField }
         />
         <Field
           id="last_name"
           name="last_name"
           type="text"
           label="Last name"
-          component={ TextField }
+          component={ InputField }
         />
         <Field
           id="username"
           name="username"
           type="text"
           label="Username"
-          component={ TextField }
+          component={ InputField }
         />
         <Field
           id="avatar_url"
           name="avatar_url"
           type="text"
           label="Avatar URL"
-          component={ TextField }
+          component={ InputField }
         />
         <Field name="role" component={ renderRoleSelector } />
         <Button type="submit" label="Save" style={ style } raised primary />

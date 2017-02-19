@@ -1,4 +1,3 @@
-export const TOKEN_KEY = 'token';
 
 export const LAYOUTS = {
   GALLERY: 'gallery',
@@ -55,6 +54,13 @@ export const MSG_SIGNUP_ERROR = {
 
 export const MSG_SIGNUP_SUCCESS = {
   message: 'Your account has been created!', kind: 'success', dismissAfter: 3000,
+};
+
+export const MSG_NEW_COMMENT_SUCCESS = {
+  message: 'Comment created!', kind: 'success', dismissAfter: 3000,
+};
+export const MSG_NEW_COMMENT_FAILURE = {
+  message: 'Something went wrong adding your comment. Try again!', kind: 'error', dismissAfter: 3000,
 };
 
 export const MSG_LOGIN_ERROR = (err) => {

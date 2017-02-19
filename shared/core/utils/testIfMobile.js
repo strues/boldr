@@ -3,6 +3,6 @@
 // side, use the isMobile reducer in the store
 const testIfMobile = () => {
   if (typeof window === 'undefined') return false;
-  return document.documentElement.clientWidth < 768; // Bootstrap's screen-sm-min
+  return document.documentElement.clientWidth < 768;
 };
 export default testIfMobile;

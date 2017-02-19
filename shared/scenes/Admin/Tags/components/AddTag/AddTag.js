@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Button from 'react-md/lib/Buttons';
-import TextField from '../../../../../components/Form/TextField';
+import InputField from '../../../../../components/Form/InputField';
 
 type Props = {
   handleSubmit?: Function,
@@ -19,9 +19,9 @@ const style = {
 let AddTag = (props: Props) => { // eslint-disable-line
   const { handleSubmit, reset } = props;
   return (
-    <form className="boldr-form__generic" onSubmit={ handleSubmit }>
-      <Field id="tag-name" name="name" component={ TextField } type="text" label="Name" />
-      <Field id="tag-description" name="description" component={ TextField } type="text" label="Description" />
+    <form className="boldr-form__addtag" onSubmit={ handleSubmit }>
+      <Field id="tag-name" name="name" component={ InputField } type="text" label="Name" />
+      <Field id="tag-description" name="description" component={ InputField } type="text" label="Description" />
 
       <div className="form__footer">
         <Button type="submit" label="Save" style={ style } raised primary />

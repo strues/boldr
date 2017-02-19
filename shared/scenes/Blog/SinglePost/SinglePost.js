@@ -1,13 +1,15 @@
 // @flow
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
+import styled from 'styled-components';
+
 import { Grid, Row, Col, Heading } from '../../../components/index';
 import PostSidebar from '../components/PostSidebar';
 import PostContent from '../components/PostContent';
 import { getPosts } from '../../../state/modules/blog/posts';
 import PostTitle from '../components/PostTitle';
-import styled from 'styled-components';
+import PostComments from '../components/PostComments';
 
 export type Props = {
   loading: boolean,
@@ -15,8 +17,12 @@ export type Props = {
   currentPost: Object,
 };
 
-const SinglePost = (props: Props) => {
-  const PostBg = styled.section`
+class SinglePost extends Component {
+
+  props: Props;
+  render() {
+    const { currentPost, entities } = this.props;
+    const PostBg = styled.section`
     max-height: 400px;
     min-height: 400px;
     height: 100%;
@@ -24,38 +30,45 @@ const SinglePost = (props: Props) => {
     width: 100%;
     background-size: cover;
     background-attachment: fixed;
-    background-image: url(${props.currentPost.feature_image});
+    background-image: url(${currentPost.background_image});
     align-items: center;
     background-position-x: 0px;
     background-position-y: 0px;
     margin-bottom: 30px;
   `;
-  const postAuthor = props.entities.users[props.currentPost.user_id];
+    const postAuthor = entities.users[currentPost.user_id];
+    const postComments = currentPost.comments.map(c => entities.comments[c]);
 
-  const postTags = props.currentPost.tags.map(id => props.entities.tags[id]);
-  return (
+    const postTags = currentPost.tags.map(id => entities.tags[id]);
+    return (
         <div>
-          <Helmet title={ props.currentPost.title } />
-          <PostBg><PostTitle title={ props.currentPost.title } /></PostBg>
+          <Helmet title={ currentPost.title } />
+          <PostBg><PostTitle title={ currentPost.title } /></PostBg>
           <Grid>
             <Row>
               <Col sm={ 12 } md={ 8 } lg={ 9 }>
-                <PostContent { ...props.currentPost } />
+                <PostContent { ...currentPost } />
+                <PostComments
+                  comments={ postComments }
+                  postId={ currentPost.id }
+                  userEntities={ entities.users }
+                />
               </Col>
               {
-                props.currentPost.tags
+                currentPost.tags
                 ? <Col sm={ 12 } md={ 4 } lg={ 3 }>
-                    <PostSidebar { ...props.currentPost } author={ postAuthor } tags={ postTags } />
+                    <PostSidebar { ...currentPost } author={ postAuthor } tags={ postTags } />
                   </Col>
                 : null
               }
             </Row>
           </Grid>
         </div>
-  );
-};
-
+    );
+  }
+}
 const mapStateToProps = (state, ownProps) => {
+  // const postComments =
   return {
     entities: state.entities,
     currentPost: state.blog.posts.currentPost,

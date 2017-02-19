@@ -3,11 +3,11 @@ import { resolve as pathResolve } from 'path';
 import webpack from 'webpack';
 import appRootDir from 'app-root-dir';
 import md5 from 'md5';
-import getConfig from '../../config/get';
+import config from '../../config';
 import { log } from '../utils';
 
 function createVendorDLL(bundleName, bundleConfig) {
-  const dllConfig = getConfig('bundles.client.devVendorDLL');
+  const dllConfig = config('bundles.client.devVendorDLL');
 
   // $FlowFixMe
   const pkg = require(pathResolve(appRootDir.get(), './package.json'));
@@ -62,12 +62,12 @@ function createVendorDLL(bundleName, bundleConfig) {
       log({
         title: 'vendorDLL',
         level: 'info',
-        message: `The following dependencies have been included:\n\t-${devDLLDependencies.join('\n\t-')}\n`,
+        message: `The following 🚧 dependencies have been included:\n\t-${devDLLDependencies.join('\n\t-')}\n`,
       });
 
       const webpackConfig = webpackConfigFactory();
       const vendorDLLCompiler = webpack(webpackConfig);
-      vendorDLLCompiler.run((err) => {
+      vendorDLLCompiler.run(err => {
         if (err) {
           reject(err);
           return;
@@ -80,7 +80,7 @@ function createVendorDLL(bundleName, bundleConfig) {
     });
   }
 
-  return new Promise((resolve, reject) => {
+  return new Promise(async (resolve, reject) => {
     if (!fs.existsSync(vendorDLLHashFilePath)) {
       // builddll
       log({
@@ -88,7 +88,7 @@ function createVendorDLL(bundleName, bundleConfig) {
         level: 'warn',
         message: `Generating a new "${bundleName}" Vendor DLL for boosted development performance`,
       });
-      buildVendorDLL().then(resolve).catch(reject);
+      await buildVendorDLL().then(resolve).catch(reject);
     } else {
       // first check if the md5 hashes match
       const dependenciesHash = fs.readFileSync(vendorDLLHashFilePath, 'utf8');
@@ -100,7 +100,7 @@ function createVendorDLL(bundleName, bundleConfig) {
           level: 'warn',
           message: `New "${bundleName}" vendor dependencies detected. Regenerating the vendor dll...`,
         });
-        buildVendorDLL().then(resolve).catch(reject);
+        await buildVendorDLL().then(resolve).catch(reject);
       } else {
         log({
           title: 'vendorDLL',

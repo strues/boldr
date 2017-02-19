@@ -99,3 +99,27 @@ export type UI = {
   modal: boolean,
   navbar: boolean,
 };
+
+export type Menu = {
+  id: Number,
+  uuid: String,
+  name: String,
+  safe_name: String,
+  attributes: ?Object,
+  restricted: ?Boolean,
+  details: Array<MenuDetails>
+};
+
+export type MenuDetails = {
+  id: Number,
+  uuid: String,
+  name: String,
+  safe_name: String,
+  css_classname: String,
+  has_dropdown: Boolean,
+  order: Number,
+  href: String,
+  mobile_href: String,
+  icon: String,
+  children: Array<Object>
+};

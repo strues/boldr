@@ -12,26 +12,32 @@ $link-color: $accent-color;
 $error-color:  $md-red-700;
 $footer-bg: $mirage;
 $text-color: $near-black;
-
-$contrast-light: #2b343a;
-$contrast-dark: #1d252b;
-
+$header-font-color: $navy;
 // Borders
 $border-color: $cloud;
-$import-google-fonts: false;
+
+/// Font
 $font-name: 'Roboto';
 $font-family: $font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif;
-
 $header-font-name: 'Roboto';
-$header-font-color: $navy;
+
 $header-font-family: $header-font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif;
 
 $font-size-base: 1em;
-$line-height-base: 1.5em;
-$font-weight-base: 400;
+$font-size-large: 2em;
+$font-size-small: 0.9em;
+$font-size-xsmall: 0.7em;
 
-$heading-weight: 300;
-$heading-case: none;
+$line-height-base: 1.5;
+
+$font-weight-base: 400;
+$font-weight-thin: 200;
+$font-weight-bold: 600;
+
+$header-font-weight: $font-weight-thin;
+$header-font-case: none;
+
+
 $window-medium: 768;
 $window-large: 992;
 $window-xlarge: 1200;
@@ -69,8 +75,7 @@ $primary-header-bg: $white;
 $primary-header-link: $ocean;
 
 
-$font-weight-normal: 400;
-$btn-font-weight: $font-weight-normal;
+$btn-font-weight: $font-weight-base;
 $border-radius: 0.25rem;
 $btn-border-radius: $border-radius;
 $btn-line-height: 1.25;

@@ -94,7 +94,7 @@ class BaseModel extends Model {
    * Ran before updating the database.
    */
   $beforeUpdate() {
-    if (this.constructor.timestamps) {
+    if (this.constructor.addTimestamps) {
       this.updated_at = new Date().toISOString();
     }
   }
@@ -124,6 +124,12 @@ class BaseModel extends Model {
     });
 
     return json;
+  }
+
+  async reload() {
+    const model = await this.$query();
+    Object.assign(this, model);
+    return this;
   }
 }
 

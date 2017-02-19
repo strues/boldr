@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import uuid from 'uuid';
+import uuid from 'uuid/v4';
 import mailer from '../../services/mailer';
 import { passwordModifiedEmail, forgotPasswordEmail } from '../../services/mailer/templates';
 import User from '../../models/user';
@@ -24,7 +24,7 @@ export async function forgottenPassword(req, res, next) {
     const resetPasswordToken = uuid();
 
     await user.$relatedQuery('resetToken').insert({
-      ip: req.ip,
+      ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
       token: resetPasswordToken,
       user_id: user.id,
     });
