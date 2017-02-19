@@ -58,7 +58,6 @@ export default (app) => {
     }
   });
 };
-
 /**
  * @apiDefine listParams
  * @apiParam {String[]} include   Include related properties of the object.
