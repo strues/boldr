@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux';
 import { Loader } from '../../components';
 import BaseTemplate from '../../pages/templates/Base';
 import { getProfile } from '../../state/modules/users';
-import { uploadProfileImage } from '../../state/modules/admin/attachments/actions';
+import { uploadProfileImage, uploadAvatarImage } from '../../state/modules/attachments/actions';
 import { hideModal, showModal, openDrawer, closeDrawer } from '../../state/modules/boldr/ui/actions';
 import Profile from './Profile';
 
@@ -48,7 +48,9 @@ export class ProfileContainer extends Component {
   openModal = () => {
     this.props.dispatch(showModal());
   }
-
+  uploadAvatarImg = (payload) => {
+    this.props.dispatch(uploadAvatarImage(payload));
+  }
   uploadProfileImg = (payload) => {
     this.props.dispatch(uploadProfileImage(payload));
   }
@@ -75,6 +77,7 @@ export class ProfileContainer extends Component {
           openDrawer={ this.showDrawer }
           closeDrawer={ this.hideDrawer }
           uploadProfileImg={ this.uploadProfileImg }
+          uploadAvatarImg={ this.uploadAvatarImg }
           { ...this.props }
         />
       </BaseTemplate>
@@ -90,7 +93,8 @@ const mapStateToProps = (state) => {
     user: state.users.me,
     profile: state.users.profile,
     isFetching: state.users.isFetching,
-    profileImage: state.admin.attachments.profileImage,
+    profileImage: state.attachments.profileImage,
+    avatarImage: state.attachments.avatarImage,
   };
 };
 // function mapDispatchToProps(dispatch) {

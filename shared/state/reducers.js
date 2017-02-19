@@ -6,6 +6,8 @@ import boldrReducer, { STATE_KEY as BOLDR_STATE_KEY } from './modules/boldr';
 import adminReducer, { STATE_KEY as ADMIN_STATE_KEY } from './modules/admin';
 import blogReducer, { STATE_KEY as BLOG_STATE_KEY } from './modules/blog';
 import usersReducer, { STATE_KEY as USERS_STATE_KEY } from './modules/users';
+import attachmentReducer, { STATE_KEY as ATTACHMENT_STATE_KEY } from './modules/attachments';
+
 import notificationReducer from './modules/notifications';
 import entitiesReducer from './modules/entities';
 
@@ -16,6 +18,7 @@ const rootReducer = combineReducers({
   [USERS_STATE_KEY]: usersReducer,
   [AUTH_STATE_KEY]: authReducer,
   [ADMIN_STATE_KEY]: adminReducer,
+  [ATTACHMENT_STATE_KEY]: attachmentReducer,
   notifications: notificationReducer,
   entities: entitiesReducer,
   form: formReducer,

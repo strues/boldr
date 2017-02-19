@@ -59,31 +59,35 @@ export const EDIT_PROFILE_FAILURE = '@boldr/auth/EDIT_PROFILE_FAILURE';
  * @type {String}
  */
 
-export const DELETE_ATTACHMENT_REQUEST = '@boldr/admin/attachment/DELETE_ATTACHMENT_REQUEST';
-export const DELETE_ATTACHMENT_SUCCESS = '@boldr/admin/attachment/DELETE_ATTACHMENT_SUCCESS';
-export const DELETE_ATTACHMENT_FAILURE = '@boldr/admin/attachment/DELETE_ATTACHMENT_FAILURE';
+export const DELETE_ATTACHMENT_REQUEST = '@boldr/attachment/DELETE_ATTACHMENT_REQUEST';
+export const DELETE_ATTACHMENT_SUCCESS = '@boldr/attachment/DELETE_ATTACHMENT_SUCCESS';
+export const DELETE_ATTACHMENT_FAILURE = '@boldr/attachment/DELETE_ATTACHMENT_FAILURE';
 
-export const GET_ATTACHMENT_REQUEST = '@boldr/admin/attachment/GET_ATTACHMENT_REQUEST';
-export const GET_ATTACHMENT_SUCCESS = '@boldr/admin/attachment/GET_ATTACHMENT_SUCCESS';
-export const GET_ATTACHMENT_FAILURE = '@boldr/admin/attachment/GET_ATTACHMENT_FAILURE';
+export const GET_ATTACHMENT_REQUEST = '@boldr/attachment/GET_ATTACHMENT_REQUEST';
+export const GET_ATTACHMENT_SUCCESS = '@boldr/attachment/GET_ATTACHMENT_SUCCESS';
+export const GET_ATTACHMENT_FAILURE = '@boldr/attachment/GET_ATTACHMENT_FAILURE';
 
-export const UPLOAD_ATTACHMENT_REQUEST = '@boldr/admin/attachment/UPLOAD_ATTACHMENT_REQUEST';
-export const UPLOAD_ATTACHMENT_SUCCESS = '@boldr/admin/attachment/UPLOAD_ATTACHMENT_SUCCESS';
-export const UPLOAD_ATTACHMENT_FAILURE = '@boldr/admin/attachment/UPLOAD_ATTACHMENT_FAILURE';
+export const UPLOAD_ATTACHMENT_REQUEST = '@boldr/attachment/UPLOAD_ATTACHMENT_REQUEST';
+export const UPLOAD_ATTACHMENT_SUCCESS = '@boldr/attachment/UPLOAD_ATTACHMENT_SUCCESS';
+export const UPLOAD_ATTACHMENT_FAILURE = '@boldr/attachment/UPLOAD_ATTACHMENT_FAILURE';
 
-export const UPLOAD_POST_IMG_REQUEST = '@boldr/admin/attachment/UPLOAD_POST_IMG_REQUEST';
-export const UPLOAD_POST_IMG_SUCCESS = '@boldr/admin/attachment/UPLOAD_POST_IMG_SUCCESS';
-export const UPLOAD_POST_IMG_FAILURE = '@boldr/admin/attachment/UPLOAD_POST_IMG_FAILURE';
+export const UPLOAD_POST_IMG_REQUEST = '@boldr/attachment/UPLOAD_POST_IMG_REQUEST';
+export const UPLOAD_POST_IMG_SUCCESS = '@boldr/attachment/UPLOAD_POST_IMG_SUCCESS';
+export const UPLOAD_POST_IMG_FAILURE = '@boldr/attachment/UPLOAD_POST_IMG_FAILURE';
 
-export const UPDATE_ATTACHMENT_REQUEST = '@boldr/admin/attachment/UPDATE_ATTACHMENT_REQUEST';
-export const UPDATE_ATTACHMENT_SUCCESS = '@boldr/admin/attachment/UPDATE_ATTACHMENT_SUCCESS';
-export const UPDATE_ATTACHMENT_FAILURE = '@boldr/admin/attachment/UPDATE_ATTACHMENT_FAILURE';
+export const UPDATE_ATTACHMENT_REQUEST = '@boldr/attachment/UPDATE_ATTACHMENT_REQUEST';
+export const UPDATE_ATTACHMENT_SUCCESS = '@boldr/attachment/UPDATE_ATTACHMENT_SUCCESS';
+export const UPDATE_ATTACHMENT_FAILURE = '@boldr/attachment/UPDATE_ATTACHMENT_FAILURE';
 
-export const UPLOAD_PROFILE_IMG_REQUEST = '@boldr/admin/attachment/UPLOAD_PROFILE_IMG_REQUEST';
-export const UPLOAD_PROFILE_IMG_SUCCESS = '@boldr/admin/attachment/UPLOAD_PROFILE_IMG_SUCCESS';
-export const UPLOAD_PROFILE_IMG_FAILURE = '@boldr/admin/attachment/UPLOAD_PROFILE_IMG_FAILURE';
+export const UPLOAD_PROFILE_IMG_REQUEST = '@boldr/attachment/UPLOAD_PROFILE_IMG_REQUEST';
+export const UPLOAD_PROFILE_IMG_SUCCESS = '@boldr/attachment/UPLOAD_PROFILE_IMG_SUCCESS';
+export const UPLOAD_PROFILE_IMG_FAILURE = '@boldr/attachment/UPLOAD_PROFILE_IMG_FAILURE';
 
-export const SELECT_FILE = '@boldr/admin/attachment/SELECT_FILE';
+export const UPLOAD_AVATAR_IMG_REQUEST = '@boldr/attachment/UPLOAD_AVATAR_IMG_REQUEST';
+export const UPLOAD_AVATAR_IMG_SUCCESS = '@boldr/attachment/UPLOAD_AVATAR_IMG_SUCCESS';
+export const UPLOAD_AVATAR_IMG_FAILURE = '@boldr/attachment/UPLOAD_AVATAR_IMG_FAILURE';
+
+export const SELECT_FILE = '@boldr/attachment/SELECT_FILE';
 
 /**
  * Activities action types
@@ -221,7 +225,7 @@ export const FETCH_TEMPLATES_FAILURE = '@boldr/templates/FETCH_TEMPLATES_FAILURE
 
 export const FETCH_TEMPLATE_REQUEST = '@boldr/templates/FETCH_TEMPLATE_REQUEST';
 export const FETCH_TEMPLATE_SUCCESS = '@boldr/templates/FETCH_TEMPLATE_SUCCESS';
-export const FETCH_TEMPLATE_FAILURE = '@boldr/templates/FETCH_TEMPLATE_FAILURE';
+export const FETCH_TEMPLATeE_FAILURE = '@boldr/templates/FETCH_TEMPLATE_FAILURE';
 
 /**
  * Page action types

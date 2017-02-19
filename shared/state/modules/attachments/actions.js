@@ -1,11 +1,11 @@
 import { push } from 'react-router-redux';
 import request from 'superagent';
-import * as api from '../../../../core/api';
-import { getToken } from '../../../../core/services/token';
-import * as notif from '../../../../core/constants';
-import { notificationSend } from '../../notifications/notifications';
-import * as t from '../../actionTypes';
-import { editProfile } from '../../users/actions';
+import * as api from '../../../core/api';
+import { getToken } from '../../../core/services/token';
+import * as notif from '../../../core/constants';
+import { notificationSend } from '../notifications/notifications';
+import * as t from '../actionTypes';
+import { editProfile } from '../users/actions';
 
 const token = getToken();
 
@@ -252,9 +252,10 @@ export function selectFile(file) {
 }
 
 /**
-  * UPLOAD FILE ACTIONS
+  * UPLOAD PROFILE ACTIONS
   * -------------------------
-  * @exports uploadFiles
+  * @exports uploadProfileImage
+  * @exports uploadAvatarImage
   *****************************************************************/
 
 export function uploadProfileImage(payload) {
@@ -294,6 +295,46 @@ function uploadProfileImageSuccess(response) {
 function uploadProfileImageFail(err) {
   return {
     type: t.UPLOAD_PROFILE_IMG_FAILURE,
+    error: err,
+  };
+}
+export function uploadAvatarImage(payload) {
+  return (dispatch) => {
+    dispatch(beginUploadAvatarImage());
+    return request.post('/api/v1/attachments').attach(payload.name, payload).set('Authorization', `Bearer ${token}`)
+      .then(response => {
+        if (!response.status === 201) {
+          dispatch(uploadAvatarImageFail(response));
+          dispatch(notificationSend(notif.MSG_UPLOAD_ERROR));
+        }
+        const userData = { id: response.body.user_id, avatar_url: response.body.url };
+        dispatch(editProfile(userData));
+        dispatch(uploadAvatarImageSuccess(response));
+        dispatch(notificationSend(notif.MSG_UPLOAD_SUCCESS));
+      })
+      .catch(err => {
+        dispatch(uploadAvatarImageFail(err));
+        dispatch(notificationSend(notif.MSG_UPLOAD_ERROR));
+      });
+  };
+}
+
+function beginUploadAvatarImage() {
+  return {
+    type: t.UPLOAD_AVATAR_IMG_REQUEST,
+  };
+}
+
+function uploadAvatarImageSuccess(response) {
+  return {
+    type: t.UPLOAD_AVATAR_IMG_SUCCESS,
+    payload: response.body,
+  };
+}
+
+function uploadAvatarImageFail(err) {
+  return {
+    type: t.UPLOAD_AVATAR_IMG_FAILURE,
     error: err,
   };
 }

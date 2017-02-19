@@ -10,7 +10,7 @@ import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
 import Switch from 'react-md/lib/SelectionControls/Switch';
 import { InputField, Col, Row, Heading, FormGroup } from '../../../../../../components';
-import { uploadPostImage } from '../../../../../../state/modules/admin/attachments/actions';
+import { uploadPostImage } from '../../../../../../state/modules/attachments/actions';
 import RenderTags from '../RenderTags';
 import FieldEditor from './FieldEditor';
 

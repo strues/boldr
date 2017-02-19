@@ -9,6 +9,8 @@ import { Grid, Col, Row, Heading, Modal, Icon, Social } from '../../../../compon
 type Props = {
   profile: Object,
   toggleDrawer: Function,
+  handleAvatarImgClick: Function,
+  handleProfileImgClick: Function,
   me: boolean,
 };
 
@@ -18,8 +20,8 @@ const ProfileContent = (props: Props) => {
   const editButtons = (
     <Col xs>
       <Button primary raised label="Edit Profile" onClick={ props.toggleDrawer } />
-      <Button secondary flat label="Upload Profile Image" />
-      <Button secondary flat label="Upload Avatar" />
+      <Button secondary flat label="Upload Profile Image" onClick={ props.handleProfileImgClick } />
+      <Button secondary flat label="Upload Avatar" onClick={ props.handleAvatarImgClick } />
     </Col>
   );
   return (

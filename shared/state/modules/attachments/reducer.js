@@ -1,4 +1,4 @@
-import * as t from '../../actionTypes';
+import * as t from '../actionTypes';
 
 export const STATE_KEY = 'attachments';
 
@@ -7,6 +7,7 @@ const INITIAL_STATE = {
   error: null,
   files: [],
   postImage: {},
+  avatarImage: {},
   profileImage: {},
   currentFile: {},
 };
@@ -22,6 +23,7 @@ export default function attachmentReducer(state = INITIAL_STATE, action = {}) {
     case t.DELETE_ATTACHMENT_REQUEST:
     case t.UPLOAD_POST_IMG_REQUEST:
     case t.UPLOAD_PROFILE_IMG_REQUEST:
+    case t.UPLOAD_AVATAR_IMG_REQUEST:
       return {
         ...state,
         loading: true,
@@ -50,6 +52,12 @@ export default function attachmentReducer(state = INITIAL_STATE, action = {}) {
         loading: false,
         profileImage: action.payload,
       };
+    case t.UPLOAD_AVATAR_IMG_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        avatarImage: action.payload,
+      };
     case t.DELETE_ATTACHMENT_SUCCESS:
       return {
         ...state,
@@ -60,6 +68,7 @@ export default function attachmentReducer(state = INITIAL_STATE, action = {}) {
     case t.DELETE_ATTACHMENT_FAILURE:
     case t.UPLOAD_POST_IMG_FAILURE:
     case t.UPLOAD_PROFILE_IMG_FAILURE:
+    case t.UPLOAD_AVATAR_IMG_FAILURE:
       return {
         ...state,
         loading: false,

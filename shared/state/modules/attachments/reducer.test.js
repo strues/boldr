@@ -1,4 +1,4 @@
-import { GET_ATTACHMENT_REQUEST } from '../../actionTypes';
+import { GET_ATTACHMENT_REQUEST } from '../actionTypes';
 import attachmentReducer from './reducer';
 
 describe('Attachment', () => {
@@ -10,6 +10,7 @@ describe('Attachment', () => {
         error: null,
         files: [],
         postImage: {},
+        avatarImage: {},
         profileImage: {},
         currentFile: {},
       });

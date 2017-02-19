@@ -70,7 +70,7 @@ class Detail extends Component {
         {linkHref
           ?
             <a
-              href={ linkHref }
+              href={ `/${linkHref}` }
               onClick={ this.closeDropdowns }
               className={ cx('boldr-menudetail__link') }
             >{linkContent}</a>
