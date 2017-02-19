@@ -1,7 +1,7 @@
 import { push } from 'react-router-redux';
 import request from 'superagent';
 import * as api from '../../../core/api';
-import { getToken } from '../../../core/services/token';
+import { getToken } from '../../../core/authentication/token';
 import * as notif from '../../../core/constants';
 import { notificationSend } from '../notifications/notifications';
 import * as t from '../actionTypes';
@@ -40,7 +40,7 @@ export function fetchMedia() {
   };
 }
 function shouldFetchAttachments(state) {
-  const attachments = state.admin.attachments.files;
+  const attachments = state.attachments.files;
   if (!attachments.length) {
     return true;
   }

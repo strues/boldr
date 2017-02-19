@@ -6,8 +6,10 @@
 
 Boldr is a modern content management framework. Think of Boldr as the solid foundation for building your next great web application. Unlike other CMS platforms, Boldr is entirely JavaScript. Boldr features Universal / Isomorphic rendering for improved performance and Search Engine Optimization.
 
+
 **Table of Contents**
 - [Boldr](#boldr)
+- [Current Features](#current-features)
 - [Core Technologies](#core-technologies)
 - [Getting Started / Installation](#getting-started-installation)
 - [Editor](#editor)
@@ -19,12 +21,25 @@ Boldr is a modern content management framework. Think of Boldr as the solid foun
 - [Demo](#demo)
 
 
+## Current Features
+
+* Full REST API - Giving you the freedom to do whatever you'd like without looking at an interface.
+* Rich text editor / WYSIWYG
+* Server side rendering
+* Authentication with JSON Web Tokens
+* Content tagging - Easily relate content to similar topics
+* Drag and drop file uploading
+* User management with basic role based access control (major expansion of capabilities planned for a later date)
+* Commenting system
+* Basic user and author profiles.
+* Redis caching
+
 ## Screenshots  
 |         |            |   |
 | ------------- |:-------------:| -----:|
-![blog][blogImg] | ![blog2][blogImg2]  | ![single][blogSingle]
-![dash][dashboardImg] | ![files][filesImg]  | ![members][membersImg]
-![post][newPostImg]  | ![prof][profileImg]  | ![settings][settingsImg]
+![blog][blogImg] | ![blog2][editProfileImg]  | ![single][blogSingle]
+![dash][dashboardImg] | ![files][adminPostListImg]  | ![members][editPostImg]
+![post][postEditorImg]  | ![prof][profileImg]  | ![settings][settingsImg]
 ![tag][tagsImg] |  |
 
 
@@ -58,7 +73,7 @@ Quick notes:
   - **Frontend**: 3000 - _React SSR server_  
   - **Webpack**: 3001 - _dev only_  
 
-Boldr is configured by default to serve api documentation from `http://localhost:3000/apidocs/`. The docs are mostly complete and are kept up to date. You can also find them in [the docs folder](docs/apidoc.md) as markdown.
+Boldr is configured by default to serve api documentation from `http://localhost:3000/apidocs/`. The docs are mostly complete and are kept up to date. You can also find them in [the docs folder](docs/apidoc.md) as markdown or view them live at https://staging.boldr.io/apidocs/.
 
 
 ### Development
@@ -85,17 +100,7 @@ Settings for the build process are located in `config/values.js`.
 
 ### Production
 
-Running Boldr in production is fairly simple. We'll go over the steps right now in order to get you up and running as soon as possible. Please bear with us, as the process for automation continues to evolve.
-
-From the root directory use the command, `make release`.
-
-The `make release` command creates a folder named release in the root of the repository. Then compiles all files and copies them to the release folder.
-
-Upload the contents of the release directory to your preferred host.
-
-Install the production dependencies for `BoldrCMS` packages using `npm install --production`.
-
-Finally using pm2 or your preferred script run Boldr with `npm start`.
+See the [production docs](docs/production.md)
 
 ## Contributing
 
@@ -111,20 +116,20 @@ Looking for an open source project to contribute to? All types of contributions 
 - Play a major role in a community driven project, have some fun, and work on improving your skills.
 
 ## Documentation
-- [`Gitbook`](https://strues.gitbooks.io/boldr/content/)
+
 - [`Roadmap`](ROADMAP.md)
-- [`API`](docs/apidoc.md)
+- [`API Markdown`](docs/apidoc.md)
+- [`API Live`](https://staging.boldr.io/apidocs/)
 - [`Editing the Nav`](docs/navigation.md)
 - [`Theming`](docs/theming.md)
 - [`Docker`](docs/docker.md)
 - [`Production`](docs/production.md)
 - [`Nginx`](docs/nginx.md)
 - [`Troubleshooting`](docs/troubleshooting.md)
-- [`State Tree`](docs/statetree.md)
 
 ## Demo
 
-View a **very early** demo at <https://staging.boldr.io>
+View an **early** demo at <https://staging.boldr.io>
 
 > Email - admin@boldr.io<br>
 > Password - password
@@ -138,12 +143,12 @@ View a **very early** demo at <https://staging.boldr.io>
 [coverage-img]: https://codeclimate.com/github/strues/boldr/badges/coverage.svg
 
 [blogImg]: docs/assets/blog.png
-[blogImg2]: docs/assets/blog2.png
+[editProfileImg]: docs/assets/editProfile.png
 [blogSingle]: docs/assets/blogSingle.png
 [dashboardImg]: docs/assets/dashboard.png
-[filesImg]: docs/assets/files.png
-[membersImg]: docs/assets/members.png
-[newPostImg]: docs/assets/newPost.png
+[adminPostListImg]: docs/assets/adminPostList.png
+[editPostImg]: docs/assets/editPost.png
+[postEditorImg]: docs/assets/postEditor.png
 [profileImg]: docs/assets/profile.png
 [settingsImg]: docs/assets/settings.png
 [tagsImg]: docs/assets/tags.png

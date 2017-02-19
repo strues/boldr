@@ -1,5 +1,6 @@
 import superagent from 'superagent';
-import { getToken } from '../services/token';
+import config from '../../../config';
+import { getToken } from '../authentication/token';
 
 const methods = ['get', 'post', 'put', 'patch', 'del'];
 
@@ -9,11 +10,11 @@ function formatUrl(path) {
     if (typeof window === 'undefined') {
       console.log('----SERVER REQUEST----', path);
       // Prepend host and port of the API server to the path.
-      return `http://${process.env.SERVER_HOST}:${process.env.SERVER_PORT}/api/v1${adjustedPath}`;
+      return `http://${config('host')}:${config('port')}/api/v1${adjustedPath}`;
     }
   }
-  // Prepend `/api` to relative URL, to proxy to API server.
-  return `/api/v1${adjustedPath}`;
+  // Prepend `/api/v1` to relative URL, to proxy to API server.
+  return `${config('apiPrefix')}${adjustedPath}`;
 }
 
 function clean(obj) {

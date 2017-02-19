@@ -26,6 +26,12 @@ const values = {
     },
     polyfillIO: true,
     htmlPage: true,
+    token: {
+      key: true,
+    },
+    host: true,
+    port: true,
+    apiPrefix: true,
   },
 
   // The host on which the server should run.
@@ -56,6 +62,7 @@ const values = {
   publicKey: null,
   saltRounds: 10,
   token: {
+    key: 'jwt',
     secret: EnvVars.string('TOKEN_SECRET', 'b0ldrs0s3cr3t'),
     expiration: 60 * 60 * 24, // 1 day
   },
@@ -107,25 +114,15 @@ const values = {
     defaultTitle: 'Boldr',
     description: 'Your dreams are bold. Your thoughts are bold. So why shouldn\'t your CMS be a little Boldr?',
   },
-
-  // Extended configuration for the Content Security Policy (CSP)
-  // @see src/server/middleware/security for more info.
-  cspExtensions: {
-    childSrc: [],
-    connectSrc: [],
-    defaultSrc: [],
-    fontSrc: [],
-    imgSrc: [],
-    mediaSrc: [],
-    manifestSrc: [],
-    objectSrc: [],
-    scriptSrc: [],
-    styleSrc: [],
-  },
-
   // Path to the public assets that will be served off the root of the
   // HTTP server.
   publicAssetsPath: './public',
+
+  /**
+   * 🚷  MODIFICATION BELOW NOT RECOMMENDED ❗
+   * unless you're very familiar with the innerworkings of Webpack.
+   */
+
 
   // Where does our build output live?
   buildOutputPath: './boldrCMS',
@@ -138,7 +135,7 @@ const values = {
 
   // Do you want to included source maps (will be served as seperate files)
   // for production builds?
-  includeSourceMapsForOptimisedClientBundle: false,
+  incSourceMaps: false,
 
   // These extensions are tried when resolving src files for our bundles..
   bundleSrcTypes: ['js', 'jsx', 'json'],

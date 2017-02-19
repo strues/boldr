@@ -1,4 +1,4 @@
-import { TOKEN_KEY } from '../constants';
+import config from '../../../config';
 import Storage from './storage';
 
 export const parseJWT = (token) => {
@@ -27,14 +27,14 @@ export const parseJWT = (token) => {
 };
 
 export const setToken = (token) => {
-  return Storage.set(TOKEN_KEY, token);
+  return Storage.set(config('token.key'), token);
 };
 export const getToken = (asJSON = false) => {
-  const token = Storage.get(TOKEN_KEY);
+  const token = Storage.get(config('token.key'));
   if (asJSON) return parseJWT(token);
   return token;
 };
 
 export const removeToken = () => {
-  Storage.remove(TOKEN_KEY);
+  Storage.remove(config('token.key'));
 };

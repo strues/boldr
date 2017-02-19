@@ -128,7 +128,7 @@ export default function webpackConfigFactory(buildOptions) {
     ]),
 
     devtool: ifElse(
-      isNode || isDev || config('includeSourceMapsForOptimisedClientBundle'),
+      isNode || isDev || config('incSourceMaps'),
     )('source-map', 'hidden-source-map'),
 
     performance: ifProdClient({ hints: 'warning' }, false),
@@ -170,7 +170,7 @@ export default function webpackConfigFactory(buildOptions) {
       ifProdClient(
         ifElse(config('optimizeProductionBuilds'))(
           () => new webpack.optimize.UglifyJsPlugin({
-            sourceMap: config('includeSourceMapsForOptimisedClientBundle'),
+            sourceMap: config('incSourceMaps'),
             compress: {
               screw_ie8: true,
               warnings: false,

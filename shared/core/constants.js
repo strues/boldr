@@ -1,4 +1,3 @@
-export const TOKEN_KEY = 'token';
 
 export const LAYOUTS = {
   GALLERY: 'gallery',

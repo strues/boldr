@@ -14,7 +14,7 @@ import AppRoot from '../shared/components/AppRoot';
 import App from '../shared/components/App';
 import configureStore from '../shared/state/store';
 import { checkAuth } from '../shared/state/modules/auth/actions';
-import { getToken } from '../shared/core/services/token';
+import { getToken } from '../shared/core/authentication/token';
 import ApiClient from '../shared/core/api/apiClient';
 import createRoutes from '../shared/scenes';
 import ReactHotLoader from './components/ReactHotLoader';

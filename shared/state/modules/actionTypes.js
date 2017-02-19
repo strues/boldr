@@ -225,7 +225,7 @@ export const FETCH_TEMPLATES_FAILURE = '@boldr/templates/FETCH_TEMPLATES_FAILURE
 
 export const FETCH_TEMPLATE_REQUEST = '@boldr/templates/FETCH_TEMPLATE_REQUEST';
 export const FETCH_TEMPLATE_SUCCESS = '@boldr/templates/FETCH_TEMPLATE_SUCCESS';
-export const FETCH_TEMPLATeE_FAILURE = '@boldr/templates/FETCH_TEMPLATE_FAILURE';
+export const FETCH_TEMPLATE_FAILURE = '@boldr/templates/FETCH_TEMPLATE_FAILURE';
 
 /**
  * Page action types
