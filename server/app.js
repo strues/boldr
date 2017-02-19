@@ -46,12 +46,7 @@ app.use(express.static(pathResolve(appRootDir.get(), config('publicAssetsPath'))
 
 app.use('/apidocs', express.static(pathResolve(appRootDir.get(), './public/apidocs')));
 
-if (process.env.NODE_ENV === 'production') {
-  // The React application middleware.
-  app.get('*', cache.route(), boldrSSR);
-} else {
-  app.get('*', boldrSSR);
-}
+app.get('*', boldrSSR);
 
 errorHandler(app);
 

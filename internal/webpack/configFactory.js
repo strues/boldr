@@ -142,6 +142,7 @@ export default function webpackConfigFactory(buildOptions) {
 
       ifClient(() => new WebpackMd5Hash()),
       new webpack.DefinePlugin({
+        'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
         // Is this the "client" bundle?
         'process.env.BUILD_FLAG_IS_CLIENT': JSON.stringify(isClient),
        // Is this the "server" bundle?

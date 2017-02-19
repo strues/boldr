@@ -111,7 +111,7 @@
     "analyze": "babel-node internal/scripts/analyze",
     "apidoc": "rm -rf public/apidocs && rm -rf docs/apidoc.md && apidoc -i server -o public/apidocs && apidoc-markdown -p public/apidocs -o docs/apidoc.md",
     "babel": "NODE_ENV=production babel --ignore node_modules",
-    "build": "NODE_ENV=production babel-node internal/scripts/build",
+    "build": "babel-node internal/scripts/build --optimize",
     "clean": "babel-node internal/scripts/clean",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "dev": "better-npm-run dev",
