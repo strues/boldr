@@ -10,16 +10,15 @@ export type Stats = {
 export type Post = {
   id?: String,
   feature_image?: String,
-  title?: String,
-  slug?: String,
-  content?: String,
+  title: String,
+  slug: String,
+  content: String,
   background_image?: String,
   excerpt?: String,
   created_at: String,
   updated_at?: String,
   published: ?Boolean,
   author: ?User,
-  seo?: Object,
   tags?: Array<Tag>,
   attachments: ?Object,
   meta: ?Object,
@@ -33,7 +32,6 @@ export type PostImage = {
   file_type: String,
   id: String,
   original_name: String,
-  s3_key: String,
   updated_at: String,
   url: String,
   user_id: String
@@ -83,12 +81,36 @@ export type User = {
   website: ?String,
   profile_image: ?String,
   birthday: ?String,
-  facebook_profile: ?String,
-  linkedin_profile: ?String,
-  github_profile: ?String,
-  google_profile: ?String,
-  twitter_profile: ?String,
+  social: ?UserSocial,
   verified: Boolean
+};
+
+export type Facebook = {
+  url: String,
+};
+
+export type Google = {
+  url: String,
+};
+
+export type Twitter = {
+  url: String,
+};
+
+export type Github = {
+  url: String,
+};
+
+export type LinkedIn = {
+  url: String,
+};
+
+export type UserSocial = {
+  google: ?Google,
+  facebook: ?Facebook,
+  twitter: ?Twitter,
+  github: ?Github,
+  linkedin: ?LinkedIn,
 };
 
 export type UI = {
