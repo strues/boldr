@@ -1,6 +1,10 @@
+/* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+type Props = {
+  isAuthenticated: Boolean,
+}
 export default function(ComposedComponent) {
   class Authentication extends Component {
     static contextTypes = {
@@ -18,7 +22,7 @@ export default function(ComposedComponent) {
         this.context.router.push('/');
       }
     }
-
+    props: Props;
     render() {
       return <ComposedComponent { ...this.props } />;
     }

@@ -8,7 +8,6 @@ function formatUrl(path) {
   const adjustedPath = path[0] !== '/' ? `/${path}` : path;
   if (process.env.NODE_ENV !== 'test') {
     if (typeof window === 'undefined') {
-      console.log('----SERVER REQUEST----', path);
       // Prepend host and port of the API server to the path.
       return `http://${config('host')}:${config('port')}/api/v1${adjustedPath}`;
     }

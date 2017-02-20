@@ -1,5 +1,6 @@
 /* @flow */
 /* eslint-disable global-require */
+import '../../styles/main.scss';
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import debounce from 'lodash/debounce';
@@ -14,9 +15,6 @@ import type { ReactChildren } from '../../types/react';
 import Notifications from '../Notification';
 
 
-if (process.env.NODE_ENV !== 'test') {
-  require('../../styles/main.scss');
-}
 const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
