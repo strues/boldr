@@ -15,7 +15,7 @@ describe('<AppRoot />', () => {
     const renderedComponent = shallow(
       <AppRoot store={ store } messages={ messages }>
         <div>a child</div>
-      </AppRoot>
+      </AppRoot>,
     );
 
     expect(renderedComponent.find('Provider').length).toEqual(1);

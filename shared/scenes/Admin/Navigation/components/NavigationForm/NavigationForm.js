@@ -1,6 +1,8 @@
 import React from 'react';
-import { Field, reduxForm, formValueSelector } from 'redux-form';
+import styled from 'styled-components';
+import { Field, reduxForm, formValueSelector, FieldArray } from 'redux-form';
 import { connect } from 'react-redux';
+import Subheader from 'react-md/lib/Subheaders';
 import SelectField from 'react-md/lib/SelectFields';
 import Button from 'react-md/lib/Buttons';
 import InputField from '../../../../../components/Form/InputField';
@@ -9,16 +11,44 @@ type Props = {
   handleSubmit?: Function,
   reset?: Function,
   submitting?: boolean,
-  fields?: Object,
+  fields: ?Array<Object>,
   pristine?: boolean,
   input: Object,
+  hasDropdownValue: boolean,
 };
 
 const style = {
   margin: 12,
 };
 
-let NavigationForm = (props: Props) => { // eslint-disable-line
+const DetailsList = styled.ul`
+  list-style-type: none;
+  padding-left: 0;
+`;
+
+const DetailsListItem = styled.li`
+  padding-left: 0;
+`;
+
+const renderMenuDetails = (props: Props) => (
+  <DetailsList>
+    <DetailsListItem>
+      <Button secondary flat onClick={ () => props.fields.push({}) } label="Add Menu Detail" />
+    </DetailsListItem>
+    {
+      props.fields.map((items, index) => (
+      <DetailsListItem key={ index }>
+        <Button style={ { float: 'right' } } icon onClick={ () => fields.remove(index) }>close</Button>
+        <span>Menu Detail #{index + 1}</span>
+        <Field id="name" name={ `${items}.name` } type="text" component={ InputField } label="Name" />
+        <Field id="href" name={ `${items}.href` } type="text" component={ InputField } label="URL" />
+        <Field id="icon" name={ `${items}.icon` } type="text" component={ InputField } label="Icon" />
+      </DetailsListItem>))
+    }
+  </DetailsList>
+);
+let NavigationForm = (props: Props) => {
+  // eslint-disable-line
   const { handleSubmit, reset, hasDropdownValue } = props;
   const opts = [{ itemValue: true, label: 'Yes' }, { itemValue: false, label: 'No' }];
   const renderDropSelector = ({ input }) => (
@@ -43,11 +73,20 @@ let NavigationForm = (props: Props) => { // eslint-disable-line
       <Field id="nav-icon" name="icon" component={ InputField } type="text" label="Icon" />
       <label>What type of menu item?</label><br />
       <label style={ { marginRight: '10px' } }>
-        <Field id="draft" name="has_dropdown" component="input" type="radio" value="false" /> Single Link</label>
+        <Field id="draft" name="has_dropdown" component="input" type="radio" value="false" /> Single Link
+      </label>
       <label>
         <Field id="published" name="has_dropdown" component="input" type="radio" value="true" /> Dropdown Menu
       </label>
-      { hasDropdownValue === 'true' && <div>has a drop</div>}
+      {
+        hasDropdownValue === 'true'
+        &&
+         <div>
+           <Field id="nav-key" name="key" component={ InputField } type="text" label="Key" />
+          <FieldArray id="nav-items" name="items" component={ renderMenuDetails } />
+        </div>
+      }
+
       <div className="form__footer">
         <Button type="submit" label="Save" style={ style } raised primary />
         <Button label="Reset" onClick={ reset } style={ style } raised secondary />
@@ -60,13 +99,11 @@ NavigationForm = reduxForm({
 })(NavigationForm);
 
 const selector = formValueSelector('navigationForm');
-NavigationForm = connect(
-  state => {
-    const hasDropdownValue = selector(state, 'has_dropdown');
-    return {
-      hasDropdownValue,
-    };
-  },
-)(NavigationForm);
+NavigationForm = connect(state => {
+  const hasDropdownValue = selector(state, 'has_dropdown');
+  return {
+    hasDropdownValue,
+  };
+})(NavigationForm);
 
 export default NavigationForm;

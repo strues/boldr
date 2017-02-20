@@ -8,7 +8,8 @@ type Props = {
   store: Object,
   children: ReactChildren,
 };
-class AppRoot extends PureComponent { // eslint-disable-line react/prefer-stateless-function
+class AppRoot extends PureComponent {
+  static displayName = 'AppRoot';
   props: Props;
 
   render() {

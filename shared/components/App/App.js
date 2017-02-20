@@ -41,7 +41,7 @@ class App extends Component {
       dispatch(fetchSettingsIfNeeded()),
     ]);
   }
-
+  static displayName = 'App';
   static childContextTypes = {
     dispatch: React.PropTypes.func,
     isMobile: React.PropTypes.bool,

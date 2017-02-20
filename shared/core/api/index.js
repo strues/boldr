@@ -108,10 +108,17 @@ export const doUpdateMenuDetails = (data) =>
 export const doAddNavigationLinks = (values) => {
   const payload = {
     name: values.name,
-    link: values.link,
+    href: values.href,
+    mobile_href: values.mobile_href,
+    has_dropdown: values.has_dropdown,
+    css_classname: values.css_classname,
     icon: values.icon,
     menu_id: 1,
-    position: values.position,
+    order: values.order,
+    children: {
+      key: values.key,
+      items: values.items,
+    },
   };
   return apiClient.post('/menu-details', { data: payload });
 };

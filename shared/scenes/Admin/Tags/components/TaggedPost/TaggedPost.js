@@ -33,12 +33,13 @@ class TaggedPost extends Component {
 
   props: Props;
   render() {
-    if (this.props.isFetching) {
+    const { currentTag, isFetching } = this.props;
+    if (isFetching) {
       return (
         <Loader />
       );
     }
-    if (!this.props.currentTag) {
+    if (!currentTag.posts) {
       return (
         <div>NO posts matching the tag</div>
       );
@@ -48,14 +49,14 @@ class TaggedPost extends Component {
       <div>
        <Toolbar
          colored
-         title={ `Posts tagged ${this.props.currentTag.name}` }
+         title={ `Posts tagged ${currentTag.name}` }
          nav={ null }
          actions={ null }
        />
       <List>
         {
-          this.props.currentTag && this.props.currentTag.posts.map(post =>
-            <ListItem key={ post.id } primaryText={ post.title } rightAvatar={ <TaggedPostMenu post={ post } /> } />
+          currentTag.posts && currentTag.posts.map(post =>
+            <ListItem key={ post.id } primaryText={ post.title } rightAvatar={ <TaggedPostMenu post={ post } /> } />,
           )
         }
       </List>

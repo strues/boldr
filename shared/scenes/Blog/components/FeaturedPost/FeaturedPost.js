@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import { Link } from 'react-router';
+import Link from 'react-router/lib/Link';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Button from 'react-md/lib/Buttons/Button';
