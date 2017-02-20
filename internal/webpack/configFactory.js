@@ -17,6 +17,7 @@ import { removeNil, mergeDeep, ifElse } from '../../shared/core/utils';
 import config from '../../config';
 import withServiceWorker from './withServiceWorker';
 
+
 const ROOT_DIR = appRootDir.get();
 
 /**
@@ -148,6 +149,13 @@ export default function webpackConfigFactory(buildOptions) {
       ifProdClient(() => new webpack.LoaderOptionsPlugin({
         minimize: true,
       })),
+      ifProdClient(() => new webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor',
+        children: true,
+        minChunks: Infinity,
+        async: true,
+      })),
+      ifProdClient(new webpack.optimize.AggressiveMergingPlugin()),
 
       ifDev(() => new NamedModulesPlugin()),
       ifProdClient(
