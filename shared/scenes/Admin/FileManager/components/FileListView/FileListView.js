@@ -25,7 +25,7 @@ const FileListView = (props: Props) => {
           file={ file }
         >
           { file.file_name }
-        </FileListItem>
+        </FileListItem>,
         )
        }
     </div>

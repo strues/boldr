@@ -79,10 +79,9 @@ function loginSuccess(response) {
 }
 
 function loginError(err) {
-  console.log(err)
   return {
     type: t.LOGIN_FAILURE,
-    error: err
+    error: err,
   };
 }
 

@@ -36,18 +36,21 @@ const Wrapper = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100%;
+  height: 100%;
   box-sizing: border-box;
 `;
 
 const ContentWrapper = styled.section`
   width: 100%;
+  height: 100%;
   box-sizing: border-box;
+  position: relative;
   margin: 0 auto;
-  padding-bottom: 150px;
+  padding-bottom: 250px;
   background-color: #e5eaed;
 `;
 
-const FooterWrapper = styled.footer`
+const FooterWrapper = styled.div`
   margin-top: auto;
 `;
 

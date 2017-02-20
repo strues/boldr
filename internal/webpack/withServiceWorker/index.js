@@ -98,6 +98,7 @@ export default function withServiceWorker(webpackConfig, bundleConfig) {
         // information on this page.
         navigateFallbackURL: `${bundleConfig.webPath}${config('serviceWorker.offlinePageFileName')}`,
       },
+    
       // According to the Mozilla docs, AppCache is considered deprecated.
       // @see https://mzl.la/1pOZ5wF
       // It does however have much wider support compared to the newer
