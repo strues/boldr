@@ -34,16 +34,16 @@ describe('Menu Details API', async () => {
           expect(res.status).toBe(401);
         });
   });
-  // it('+++ POST /menu-details -- should create a new detail', () => {
-  //   return agent
-  //       .post('/api/v1/menus/details')
-  //       .set('Accept', 'application/json')
-  //       .set('Authorization', `Bearer ${token}`)
-  //       .send({ name: faker.random.word(), href: 'test', order: 4, icon: 'question' })
-  //       .expect((res) => {
-  //         expect(res.status).toBe(201);
-  //       });
-  // });
+  it('+++ POST /menu-details -- should create a new detail', () => {
+    return agent
+        .post('/api/v1/menu-details')
+        .set('Accept', 'application/json')
+        .set('Authorization', `Bearer ${token}`)
+        .send({ name: faker.random.word(), href: 'test', order: 4, icon: 'question', has_dropdown: 'false' })
+        .expect((res) => {
+          expect(res.status).toBe(201);
+        });
+  });
   it('GET /menu-details/:id -- By its id', () => {
     return agent
         .get('/api/v1/menu-details/1')
