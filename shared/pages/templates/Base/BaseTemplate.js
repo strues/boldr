@@ -78,12 +78,6 @@ class BaseTemplate extends PureComponent {
       dispatch(fetchMenusIfNeeded()),
     ]);
   }
-  constructor() {
-    super();
-    (this: any).handleLogoClick = this.handleLogoClick.bind(this);
-    (this: any).handleLogoutClick = this.handleLogoutClick.bind(this);
-    (this: any).handleDashClick = this.handleDashClick.bind(this);
-  }
   componentDidMount() {
     const { dispatch } = this.props;
 
