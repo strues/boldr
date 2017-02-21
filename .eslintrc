@@ -1,5 +1,5 @@
 {
-  "extends": ["boldr"],
+  "extends": ["boldr", "boldr/react"],
   "env": {
     "browser": true,
     "es6": true,
