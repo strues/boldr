@@ -162,7 +162,6 @@
     "express-winston": "^2.2.0",
     "fs-extra": "^2.0.0",
     "gm": "^1.23.0",
-    "griddle-react": "^1.0.0",
     "helmet": "3.4.0",
     "hpp": "^0.2.1",
     "humps": "^2.0.0",
