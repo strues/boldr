@@ -1,7 +1,7 @@
 /* @flow */
 /* eslint-disable react/prop-types */
 /* eslint-disable  react/jsx-no-bind */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Link from 'react-router/lib/Link';
 import { format } from 'date-fns';
@@ -26,15 +26,13 @@ type Props = {
   data: any,
 };
 
-class PostTable extends Component {
-
-  handleRowClick = (rowIndex, event) => {
-    console.log(rowIndex, event)
-  }
+class PostTable extends PureComponent {
   render() {
     const rows = this.props.posts.map(p => (
       <TableRow key={ p.id } onCheckboxClick={ this.handleRowClick }>
-        <TableColumn style={ { maxWidth: '125px' } }><Avatar src={ p.feature_image } role="presentation" /></TableColumn>
+        <TableColumn style={ { maxWidth: '125px' } }>
+          <Avatar src={ p.feature_image } role="presentation" />
+        </TableColumn>
         <TableColumn><Link to={ `/admin/posts/editor/${p.slug}` }>{ p.title }</Link></TableColumn>
         <TableColumn>{ p.published ? <span>Published</span> : <span>Draft</span>}</TableColumn>
         <TableColumn>{ format(p.created_at, 'MMMM Do YYYY') }</TableColumn>
@@ -58,7 +56,7 @@ class PostTable extends Component {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {rows}
+          { rows }
         </TableBody>
       </DataTable>
     );
