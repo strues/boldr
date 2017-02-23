@@ -20,7 +20,7 @@ export function happyPackPlugin({ name, loaders }: HappyPackConfig) {
   return new HappyPack({
     id: name,
     verbose: false,
-    threads: 4,
+    threads: 3,
     loaders,
   });
 }

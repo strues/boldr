@@ -284,7 +284,7 @@ export default function webpackConfigFactory(buildOptions) {
             ifProdClient(() => ({
               loader: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
-                loader: 'css-loader?sourceMap&importLoaders=2!postcss-loader!sass-loader?outputStyle=expanded&sourceMap&sourceMapContents', // eslint-disable-line
+                use: 'css-loader?sourceMap&importLoaders=2!postcss-loader!sass-loader?outputStyle=expanded&sourceMap&sourceMapContents', // eslint-disable-line
               }),
             })),
             ifNode({
@@ -292,10 +292,7 @@ export default function webpackConfigFactory(buildOptions) {
             }),
           ),
         ),
-        // ASSETS (Images/Fonts/etc)
-        // This is bound to our server/client bundles as we only expect to be
-        // serving the client bundle as a Single Page Application through the
-        // server.
+
         ifElse(isClient || isServer)(() => ({
           test: new RegExp(
             `\\.(${config('bundleAssetTypes').join('|')})$`,

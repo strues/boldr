@@ -1,5 +1,5 @@
 /* @flow */
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import type { ReactElement } from '../../../../types/react';
 import type { Post } from '../../../../types/models';
@@ -16,7 +16,7 @@ type Props = {
   handleDeleteClick: Function,
 };
 
-export class PostListContainer extends PureComponent {
+export class PostListContainer extends Component {
   static fetchData(dispatch) {
     return Promise.all([
       dispatch(fetchPostsIfNeeded()),
