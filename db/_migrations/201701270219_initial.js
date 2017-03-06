@@ -96,7 +96,7 @@ module.exports.up = async (db) => {
     table.json('attachments').nullable();
     table.json('meta').nullable();
     table.boolean('featured').defaultTo(false);
-    table.text('raw_content');
+    table.json('raw_content');
     table.text('content').notNullable();
     table.text('excerpt').notNullable();
     table.uuid('user_id').unsigned().notNullable();
