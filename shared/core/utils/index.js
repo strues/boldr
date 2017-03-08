@@ -1,6 +1,6 @@
 import { loadRoute, errorLoading } from './routeHelpers';
 import { filterWithRules, mergeDeep, getIn, setIn, removeByKey } from './objects';
-import { ifElse, onlyIf, requiredParam, validateId } from './logic';
+import { ifElse, requiredParam, validateId } from './logic';
 import {
   removeNil,
   flatten,
@@ -22,7 +22,6 @@ export {
   stringifiedArray,
   validateArray,
   ifElse,
-  onlyIf,
   requiredParam,
   validateId,
   filterWithRules,

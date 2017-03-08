@@ -8,7 +8,7 @@
 import React, { Children, PropTypes } from 'react';
 import serialize from 'serialize-javascript';
 import config from '../../../config';
-import { onlyIf, removeNil } from '../../../shared/core/utils';
+import { ifElse, removeNil } from '../../../shared/core/utils';
 import ClientConfig from '../../../config/components/ClientConfig';
 import Html from '../../../shared/components/Html';
 import getClientBundleEntryAssets from './getClientBundleEntryAssets';
@@ -56,13 +56,12 @@ function ServerHTML(props) {
   );
 
   const headerElements = removeNil([
-    ...onlyIf(helmet, () => helmet.meta.toComponent()),
-    ...onlyIf(helmet, () => helmet.link.toComponent()),
-    onlyIf(
-      clientEntryAssets && clientEntryAssets.css,
-      () => stylesheetTag(clientEntryAssets.css),
-    ),
-    ...onlyIf(helmet, () => helmet.style.toComponent()),
+    ...ifElse(helmet)(() => helmet.meta.toComponent(), []),
+    ...ifElse(helmet)(() => helmet.link.toComponent(), []),
+    ifElse(clientEntryAssets && clientEntryAssets.css)(
+       () => stylesheetTag(clientEntryAssets.css),
+     ),
+    ...ifElse(helmet)(() => helmet.style.toComponent(), []),
   ]);
 
   const bodyElements = removeNil([
@@ -71,24 +70,20 @@ function ServerHTML(props) {
     // client bundle that gets executed in the browser.
     <ClientConfig key="client-cfg" nonce={ nonce } />,
     inlineScript(`window.__PRELOADED_STATE__=${serialize(props.preloadedState)};`),
-    onlyIf(
-      config('polyfillIO.enabled'),
+    ifElse(config('polyfillIO.enabled'))(
       () => scriptTag(config('polyfillIO.url')),
     ),
-    onlyIf(
-      process.env.NODE_ENV === 'development'
-      && config('bundles.client.devVendorDLL.enabled'),
+    ifElse(process.env.BUILD_FLAG_IS_DEV && config('bundles.client.devVendorDLL.enabled'))(
       () => scriptTag(
         `${config('bundles.client.webPath')}${config('bundles.client.devVendorDLL.name')}.js?t=${Date.now()}`,
       ),
     ),
-    onlyIf(
-      clientEntryAssets && clientEntryAssets.js,
+    ifElse(clientEntryAssets && clientEntryAssets.js)(
       () => scriptTag(clientEntryAssets.js),
     ),
-    ...onlyIf(
-      helmet,
+    ...ifElse(helmet)(
       () => helmet.script.toComponent(),
+      [],
     ),
   ]);
 
