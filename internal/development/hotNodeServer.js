@@ -1,7 +1,7 @@
 import path from 'path';
 import { spawn } from 'child_process';
 import appRootDir from 'app-root-dir';
-import { log } from '../utils';
+import { log } from '../util';
 
 class HotNodeServer {
   constructor(name, compiler, clientCompiler) {

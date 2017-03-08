@@ -10,11 +10,8 @@ import path from 'path';
 import appRootDir from 'app-root-dir';
 import chalk from 'chalk';
 import dotenv from 'dotenv';
-
+import { ifElse, removeNil } from 'boldr-utils';
 import pkg from '../package.json';
-import ifElse from '../shared/core/utils/logic/ifElse';
-import removeNil from '../shared/core/utils/arrays/removeNil';
-
 // PRIVATES
 
 function registerEnvFile() {

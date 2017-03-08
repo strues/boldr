@@ -1,8 +1,7 @@
 {
   "presets": [
     ["env", { "targets": { "node": true } }],
-    "stage-2",
     "react"
   ],
-  "plugins": ["transform-decorators-legacy", "dynamic-import-webpack"]
+  "plugins": ["transform-decorators-legacy", "dynamic-import-webpack", "transform-object-rest-spread"]
 }

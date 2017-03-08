@@ -1,4 +1,4 @@
-const { log } = require('../utils');
+import { log } from '../util';
 
 class ListenerManager {
   constructor(listener, name) {
