@@ -1,3 +1,1 @@
-import SinglePost from './SinglePost';
-
-export default SinglePost;
+export { default } from './SinglePost';

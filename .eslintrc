@@ -25,6 +25,13 @@
     "import/no-unresolved": 0,
     "no-unused-expressions": 0,
     "no-undef": 0,
-    "global-require": 0
+    "global-require": 0,
+    "comma-dangle": [2, {
+      "arrays": "always-multiline",
+      "objects": "always-multiline",
+      "imports": "always-multiline",
+      "exports": "always-multiline",
+      "functions": "always-multiline",
+    }],
   }
 }

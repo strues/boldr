@@ -1,26 +1,21 @@
-[include]
-
 [ignore]
-.*node_modules*
 .*node_modules/fbjs.*
-# Including these files causes issues.
 <PROJECT_ROOT>/.*/node_modules/fbjs/.*
 <PROJECT_ROOT>/.*/node_modules/flow-remove-types/.*
 <PROJECT_ROOT>/.*/node_modules/flow-coverage-report/.*
-<PROJECT_ROOT>/.*/node_modules/**/.*
 <PROJECT_ROOT>/.*/internal/.*
 <PROJECT_ROOT>/.*/public/.*
 <PROJECT_ROOT>/.*/docs/.*
-<PROJECT_ROOT>/**/.happypack/.*
+<PROJECT_ROOT>/.happypack/.*
+<PROJECT_ROOT>/.idea/.*
+<PROJECT_ROOT>/boldrCMS/.*
+<PROJECT_ROOT>/coverage/.*
+
+[include]
 
 [libs]
-
-# Official "flow-typed" repository definitions.
 flow-typed/npm
-
-# Type extensions.
 internal/flow/typeExtensions/
-./node_modules/draft-js
 
 [options]
 module.system=haste
@@ -41,4 +36,4 @@ suppress_type=$FlowIssues
 suppress_comment=\\(.\\|\n\\)*\\$FlowIssue
 
 [version]
-0.39.0
+0.41.0

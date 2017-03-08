@@ -7,6 +7,7 @@ import {
   deletePost,
   updatePost,
   fetchPostFromSlug,
+  fetchPostIfNeeded,
 } from './actions';
 
 import { getPosts, getTagEntities } from './selectors';
@@ -15,6 +16,7 @@ export default postsReducer;
 
 export {
   togglePostLayoutView,
+  fetchPostIfNeeded,
   fetchPostsIfNeeded,
   fetchPosts,
   createPost,

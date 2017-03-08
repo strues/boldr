@@ -107,29 +107,29 @@ export function logout() {
   * @exports checkAuth
   *****************************************************************/
 
-export function checkAuth(token) {
-  return (dispatch) => {
-    dispatch(checkAuthRequest());
-    return api.doAuthCheck(token)
-      .then(response => {
-        if (response.status !== 200) {
-          dispatch(checkAuthFailure('Token is invalid'));
-          dispatch(notificationSend(notif.MSG_AUTH_ERROR));
-        }
-        dispatch(checkAuthSuccess(response, token));
-      });
+export const checkAuth = (token) => {
+  return async (dispatch: Function) => {
+    try {
+      dispatch(checkAuthRequest());
+      const data = await api.doAuthCheck(token);
+      const user = data.body;
+      dispatch(checkAuthSuccess(user, token));
+    } catch (err) {
+      dispatch(checkAuthFailure('Token is invalid'));
+      dispatch(notificationSend(notif.MSG_AUTH_ERROR));
+    }
   };
-}
+};
 
 function checkAuthRequest() {
   return { type: t.CHECK_AUTH_REQUEST };
 }
 
-function checkAuthSuccess(response, token) {
+function checkAuthSuccess(user, token) {
   return {
     type: t.CHECK_AUTH_SUCCESS,
     token: token, // eslint-disable-line
-    user: response.body,
+    user,
   };
 }
 

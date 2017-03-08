@@ -7,7 +7,7 @@ const post = new schema.Entity('posts', {
   author: user,
   tags: [tag],
   comments: [comment],
-}, { idAttribute: 'id' });
+}, { idAttribute: 'slug' });
 
 const arrayOfPost = new schema.Array(post);
 

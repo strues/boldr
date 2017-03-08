@@ -15,7 +15,18 @@ class Comment extends BaseModel {
   static get idColumn() {
     return 'id';
   }
-
+  // $beforeInsert() {
+  //   if (this.comment_parent_id) {
+  //     return Comment.query().where('id', this.comment_parent_id).andWhere('comment_parent_id', null).first()
+  //     .then((parentComment) => {
+  //       if (!parentComment) {
+  //         const error = new Error('Comment cant reply');
+  //         error.status = 400;
+  //         throw error;
+  //       }
+  //     });
+  //   }
+  // }
   static get relationMappings() {
     return {
       commenter: {
@@ -44,6 +55,14 @@ class Comment extends BaseModel {
         join: {
           from: 'comment.id',
           to: 'comment.comment_parent_id',
+        },
+      },
+      parent: {
+        relation: Model.BelongsToOneRelation,
+        modelClass: Comment,
+        join: {
+          from: 'comment.comment_parent_id',
+          to: 'comment.id',
         },
       },
     };

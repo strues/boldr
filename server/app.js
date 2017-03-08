@@ -1,9 +1,7 @@
 import { resolve as pathResolve } from 'path';
 import http from 'http';
-
 import express from 'express';
 import appRootDir from 'app-root-dir';
-
 import config from '../config';
 import {
   boldrSSR,

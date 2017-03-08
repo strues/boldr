@@ -75,7 +75,7 @@ export async function addCommentReply(req, res, next) {
         comment_author_ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
       });
     await newReply.$relatedQuery('commenter').relate({ id: req.user.id });
-
+    await newReply.$relatedQuery('parent').relate({ id: newReply.id, comment_parent_id: req.params.id });
     return responseHandler(res, 201, newReply);
   } catch (error) {
     return next(error);

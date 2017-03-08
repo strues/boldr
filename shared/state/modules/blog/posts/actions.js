@@ -42,24 +42,21 @@ export function fetchPostsIfNeeded() {
  * Function to retrieve posts from the api.
  * @return {Array} Posts returned as an array of post objects.
  */
-export function fetchPosts() {
-  return (dispatch: Function) => {
-    dispatch(requestPosts());
-    return api.getAllPosts()
-      .then(response => {
-        if (response.status !== 200) {
-          dispatch(receivePostsFailed());
-        }
+export const fetchPosts = () => {
+  return async (dispatch: Function) => {
+    try {
+      dispatch(requestPosts());
 
-        const normalizedData = normalize(response.body.results, arrayOfPost);
-        // console.log(normalized)
-        dispatch(receivePosts(normalizedData));
-      })
-      .catch(err => {
-        dispatch(receivePostsFailed(err));
-      });
+      const data = await api.getAllPosts();
+      const posts = data.body.results;
+      const normalizedPosts = normalize(posts, arrayOfPost);
+      // console.log(normalized)
+      dispatch(receivePosts(normalizedPosts));
+    } catch (err) {
+      dispatch(receivePostsFailed(err));
+    }
   };
-}
+};
 
 /**
  * Called by fetchPostsIfNeeded to retrieve the state containing posts
@@ -77,14 +74,14 @@ export const requestPosts = () => {
   return { type: t.FETCH_POSTS_REQUEST };
 };
 
-export const receivePosts = (normalizedData) => {
+export const receivePosts = (normalizedPosts: Object) => {
   return {
     type: t.FETCH_POSTS_SUCCESS,
-    payload: normalizedData,
+    payload: normalizedPosts,
   };
 };
 
-export const receivePostsFailed = (err) => ({
+export const receivePostsFailed = (err: String) => ({
   type: t.FETCH_POSTS_FAILURE, error: err,
 });
 
@@ -222,6 +219,35 @@ const errorUpdatingPost = (err) => {
   * @exports fetchPostFromSlug
   *****************************************************************/
 
+  /**
+   * @function fetchPostsIfNeeded
+   * @description Function that determines whether or not posts need to be
+   * fetched from the api. Dispatches either the fetchPosts Function
+   * or returns the resolved promise if the posts are up to date.
+   * @return {Promise} Posts Promise that resolves when posts are fetched
+   * or they arent required to be refreshed.
+   */
+export function fetchPostIfNeeded(slug: String) {
+  return (dispatch: Function, getState: Function) => {
+    if (shouldFetchPost(getState())) {
+      return dispatch(fetchPostFromSlug(slug));
+    }
+
+    return Promise.resolve();
+  };
+}
+/**
+ * Called by fetchPostsIfNeeded to retrieve the state containing posts
+ * @param  {Object} state   The blog state which contains posts
+ */
+function shouldFetchPost(state) {
+  const post = state.blog.posts.currentPost;
+  if (!post.length) {
+    return true;
+  }
+  return false;
+}
+
 export function fetchPostFromSlug(slug: String) {
   return (dispatch: Function) => {
     dispatch(requestPostFromSlug());
@@ -238,6 +264,7 @@ export function fetchPostFromSlug(slug: String) {
       });
   };
 }
+
 const requestPostFromSlug = () => {
   return { type: t.GET_POST_REQUEST };
 };

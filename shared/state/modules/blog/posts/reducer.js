@@ -36,7 +36,6 @@ const ids = (state = [], action) => {
   }
 };
 
-
 const isFetching = (state = false, action) => {
   switch (action.type) {
     case t.FETCH_POSTS_REQUEST:
