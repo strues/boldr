@@ -1,5 +1,6 @@
 {
   "presets": [
+    "stage-2",
     ["env", { "targets": { "node": true } }],
     "react"
   ],
