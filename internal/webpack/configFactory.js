@@ -91,6 +91,7 @@ export default function webpackConfigFactory(buildOptions) {
     node: {
       __dirname: true,
       __filename: true,
+      fs: 'empty',
       global: true,
       crypto: true,
       process: true,

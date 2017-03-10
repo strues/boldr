@@ -22,10 +22,10 @@ type Props = {
   width: Number,
   title: String,
   form: any,
-  extra1: ?any,
+  extra1: any,
   extra2: ?any,
 };
-
+/* $FlowIssue */
 const FormCard = (props: Props) => {
   return (
     <div>

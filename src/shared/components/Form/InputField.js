@@ -19,16 +19,16 @@ const InputField = ({
     meta: { touched, error },
 }) => {
   return (
-          <TextField
-            { ...input }
-            id={ input.name }
-            label={ label }
-            placeholder={ input.placeholder }
-            type={ type }
-            errorText={ error }
-            rows={ rows }
-            maxRows={ maxRows }
-          />
+    <TextField
+      { ...input }
+      id={ input.name }
+      label={ label }
+      placeholder={ input.placeholder }
+      type={ type }
+      errorText={ error }
+      rows={ rows }
+      maxRows={ maxRows }
+    />
   );
 };
 
