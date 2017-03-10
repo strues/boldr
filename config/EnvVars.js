@@ -10,11 +10,8 @@ import path from 'path';
 import appRootDir from 'app-root-dir';
 import chalk from 'chalk';
 import dotenv from 'dotenv';
-
+import { ifElse, removeNil } from 'boldr-utils';
 import pkg from '../package.json';
-import onlyIf from '../shared/core/utils/logic/onlyIf';
-import removeNil from '../shared/core/utils/arrays/removeNil';
-
 // PRIVATES
 
 function registerEnvFile() {
@@ -27,7 +24,7 @@ function registerEnvFile() {
     // Is there an environment config file at the app root for our target
     // environment name?
     // e.g. /projects/react-universally/.env.staging
-    onlyIf(NODE_ENV, path.resolve(appRootDir.get(), `${envFile}.${NODE_ENV}`)),
+    ifElse(NODE_ENV)(path.resolve(appRootDir.get(), `${envFile}.${NODE_ENV}`)),
     // Is there an environment config file at the app root?
     // e.g. /projects/react-universally/.env
     path.resolve(appRootDir.get(), envFile),

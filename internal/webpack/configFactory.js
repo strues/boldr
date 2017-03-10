@@ -9,14 +9,12 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import appRootDir from 'app-root-dir';
 import WebpackMd5Hash from 'webpack-md5-hash';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+
 import NamedModulesPlugin from 'webpack/lib/NamedModulesPlugin';
-
-import { happyPackPlugin } from '../utils';
-
-import { removeNil, mergeDeep, ifElse } from '../../shared/core/utils';
+import { removeNil, mergeDeep, ifElse } from 'boldr-utils';
 import config from '../../config';
+import { styles, emitErrors, uglify, aggressiveMerge, commonsChunk, happyPackPlugin } from './plugins';
 import withServiceWorker from './withServiceWorker';
-
 
 const ROOT_DIR = appRootDir.get();
 
@@ -32,30 +30,30 @@ export default function webpackConfigFactory(buildOptions) {
 
   const NODE_ENV = process.env.NODE_ENV || 'development';
 
-  const isProd = optimize;
+  const isOptimize = optimize;
   const isDev = !optimize;
   const isClient = target === 'client';
   const isServer = target === 'server';
   const isNode = !isClient;
 
   const ifDev = ifElse(isDev);
-  const ifProd = ifElse(isProd);
+  const ifOptimize = ifElse(isOptimize);
   const ifNode = ifElse(isNode);
   const ifClient = ifElse(isClient);
   const ifDevClient = ifElse(isDev && isClient);
-  const ifProdClient = ifElse(isProd && isClient);
+  const ifOptimizeClient = ifElse(isOptimize && isClient);
 
   console.log(
     chalk.white.bgBlue(
-      `==> Creating ${isProd ? 'an optimized' : 'a development'} bundle configuration for the "${target}"`,
+      `==> Creating ${isOptimize
+        ? 'an optimized'
+        : 'a development'} bundle configuration for the "${target}"`,
     ),
   );
 
   const bundleConfig = isServer || isClient
-    ? // This is either our "server" or "client" bundle.
-      config(['bundles', target])
-    : // Otherwise it must be an additional node bundle.
-      config(['additionalNodeBundles', target]);
+    ? config(['bundles', target])
+    : config(['additionalNodeBundles', target]);
 
   if (!bundleConfig) {
     throw new Error('No bundle configuration exists for target:', target);
@@ -68,19 +66,19 @@ export default function webpackConfigFactory(buildOptions) {
       index: removeNil([
         ifDevClient('react-hot-loader/patch'),
         ifDevClient(
-          () => `webpack-hot-middleware/client?reload=true&path=http://${config('host')}:${config('clientDevServerPort')}/__webpack_hmr`, // eslint-disable-line
+          () => `webpack-hot-middleware/client?reload=true&path=http://${config('host')}:${config('hmrPort')}/__webpack_hmr`, // eslint-disable-line
         ), // eslint-disable-line
         ifClient('regenerator-runtime/runtime'),
-        path.resolve(ROOT_DIR, bundleConfig.srcEntryFile),
+        path.resolve(ROOT_DIR, bundleConfig.entryFile),
       ]),
     },
     output: {
       path: path.resolve(ROOT_DIR, bundleConfig.outputPath),
-      filename: ifProdClient('[name]-[chunkhash].js', '[name].js'),
+      filename: ifOptimizeClient('[name]-[chunkhash].js', '[name].js'),
       chunkFilename: '[name]-[chunkhash].js',
       libraryTarget: ifNode('commonjs2', 'var'),
       publicPath: ifDev(
-        `http://${config('host')}:${config('clientDevServerPort')}${config('bundles.client.webPath')}`,
+        `http://${config('host')}:${config('hmrPort')}${config('bundles.client.webPath')}`,
         bundleConfig.webPath,
       ),
     },
@@ -90,10 +88,10 @@ export default function webpackConfigFactory(buildOptions) {
         ['web', 'browser', 'style', 'module', 'jsnext:main', 'main'],
       ),
     },
-    // node global polyfills
     node: {
       __dirname: true,
       __filename: true,
+      fs: 'empty',
       global: true,
       crypto: true,
       process: true,
@@ -101,11 +99,10 @@ export default function webpackConfigFactory(buildOptions) {
       clearImmediate: false,
       setImmediate: false,
     },
-
     externals: removeNil([
       ifNode(() => nodeExternals({
         whitelist: removeNil(['source-map-support/register']).concat(
-          config('nodeExternalsFileTypeWhitelist') || [],
+          config('extWhitelist') || [],
         ),
       })),
     ]),
@@ -114,7 +111,7 @@ export default function webpackConfigFactory(buildOptions) {
       isNode || isDev || config('incSourceMaps'),
     )('source-map', 'hidden-source-map'),
 
-    performance: ifProdClient({ hints: 'warning' }, false),
+    performance: ifOptimizeClient({ hints: 'warning' }, false),
 
     plugins: removeNil([
       ifNode(() => new webpack.BannerPlugin({
@@ -126,14 +123,11 @@ export default function webpackConfigFactory(buildOptions) {
       ifClient(() => new WebpackMd5Hash()),
       new webpack.DefinePlugin({
         'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
-        // Is this the "client" bundle?
         'process.env.BUILD_FLAG_IS_CLIENT': JSON.stringify(isClient),
-       // Is this the "server" bundle?
         'process.env.BUILD_FLAG_IS_SERVER': JSON.stringify(isServer),
-       // Is this a node bundle?
         'process.env.BUILD_FLAG_IS_NODE': JSON.stringify(isNode),
-       // Is this a development build?
         'process.env.BUILD_FLAG_IS_DEV': JSON.stringify(isDev),
+        __DEV__: JSON.stringify(isDev),
         __SERVER__: JSON.stringify(isServer),
       }),
 
@@ -141,42 +135,20 @@ export default function webpackConfigFactory(buildOptions) {
         filename: config('bundleAssetsFileName'),
         path: path.resolve(ROOT_DIR, bundleConfig.outputPath),
       })),
-
-      ifDev(() => new webpack.NoEmitOnErrorsPlugin()),
-
+      ifDev(emitErrors),
       ifDevClient(() => new webpack.HotModuleReplacementPlugin()),
-
-      ifProdClient(() => new webpack.LoaderOptionsPlugin({
+      ifOptimizeClient(() => new webpack.LoaderOptionsPlugin({
         minimize: true,
       })),
-      ifProdClient(() => new webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor',
-        children: true,
-        minChunks: Infinity,
-        async: true,
-      })),
-      ifProdClient(new webpack.optimize.AggressiveMergingPlugin()),
-
+      ifOptimizeClient(commonsChunk),
+      ifOptimizeClient(aggressiveMerge),
       ifDev(() => new NamedModulesPlugin()),
-      ifProdClient(
-        ifElse(config('optimizeProductionBuilds'))(
-          () => new webpack.optimize.UglifyJsPlugin({
-            sourceMap: config('incSourceMaps'),
-            compress: {
-              screw_ie8: true,
-              warnings: false,
-            },
-            mangle: {
-              screw_ie8: true,
-            },
-            output: {
-              comments: false,
-              screw_ie8: true,
-            },
-          }),
+      ifOptimizeClient(
+        ifElse(config('optimizeProdBuild'))(
+          uglify,
         ),
       ),
-      ifProdClient(
+      ifOptimizeClient(
         () => new ExtractTextPlugin({
           filename: '[name]-[chunkhash].css',
           allChunks: true,
@@ -196,7 +168,6 @@ export default function webpackConfigFactory(buildOptions) {
                 comments: false,
                 presets: [
                   'react',
-                  'stage-2',
                   ifClient(['latest', { es2015: { modules: false } }]),
                   ifNode(['env', { targets: { node: true }, modules: false }]),
                 ].filter(x => x != null),
@@ -206,27 +177,20 @@ export default function webpackConfigFactory(buildOptions) {
                   ['transform-class-properties', { spec: true }],
                   ['transform-object-rest-spread', { useBuiltIns: true }],
                   ifClient(['transform-react-jsx', { useBuiltIns: true }]),
+                  ifClient('dynamic-import-webpack'),
                   'transform-flow-strip-types',
                   'transform-es2015-arrow-functions',
-                  [
-                    'transform-runtime',
-                    {
-                      helpers: false,
-                      polyfill: false,
-                      regenerator: true,
-                    },
-                  ],
-                  [
-                    'transform-regenerator',
-                    {
-                      async: false,
-                    },
-                  ],
+                  ['transform-runtime', {
+                    helpers: false,
+                    polyfill: false,
+                    regenerator: true,
+                  }],
+                  ['transform-regenerator', { async: false }],
                   ifDev('transform-react-jsx-self'),
                   ifDev('transform-react-jsx-source'),
                   ifNode('dynamic-import-node'),
-                  ifProd('transform-react-inline-elements'),
-                  ifProd('transform-react-constant-elements'),
+                  ifOptimize('transform-react-inline-elements'),
+                  ifOptimize('transform-react-constant-elements'),
                 ].filter(x => x != null),
               },
               buildOptions,
@@ -234,31 +198,7 @@ export default function webpackConfigFactory(buildOptions) {
           },
         ],
       }),
-      ifDevClient(() => happyPackPlugin({
-        name: 'hp-scss',
-        loaders: [
-          { path: 'style-loader' },
-          {
-            path: 'css-loader',
-            use: {
-              importLoaders: 1,
-              localIdentName: '[name]__[local]___[hash:base64:5]',
-              sourceMap: true,
-              modules: true,
-            },
-          },
-          {
-            path: 'postcss-loader',
-          },
-          {
-            path: 'sass-loader',
-            use: {
-              outputStyle: 'expanded',
-              sourceMap: true,
-            },
-          },
-        ],
-      })),
+      ifDevClient(() => happyPackPlugin(styles)),
     ]),
     module: {
       rules: removeNil([
@@ -272,7 +212,7 @@ export default function webpackConfigFactory(buildOptions) {
           ],
           include: removeNil([
             ...bundleConfig.srcPaths.map(srcPath => path.resolve(ROOT_DIR, srcPath)),
-            ifProdClient(path.resolve(ROOT_DIR, 'src/html')),
+            ifOptimizeClient(path.resolve(ROOT_DIR, 'src/html')),
           ]),
         },
         ifElse(isClient || isServer)(
@@ -281,7 +221,7 @@ export default function webpackConfigFactory(buildOptions) {
             ifDevClient({
               loaders: ['happypack/loader?id=hp-scss'],
             }),
-            ifProdClient(() => ({
+            ifOptimizeClient(() => ({
               loader: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
                 use: 'css-loader?sourceMap&importLoaders=2!postcss-loader!sass-loader?outputStyle=expanded&sourceMap&sourceMapContents', // eslint-disable-line
@@ -302,7 +242,7 @@ export default function webpackConfigFactory(buildOptions) {
           query: {
             publicPath: (
               isDev
-                ? `http://${config('host')}:${config('clientDevServerPort')}${config('bundles.client.webPath')}`
+                ? `http://${config('host')}:${config('hmrPort')}${config('bundles.client.webPath')}`
                 : config('bundles.client.webPath')
             ),
             emitFile: isClient,
@@ -311,7 +251,7 @@ export default function webpackConfigFactory(buildOptions) {
       ]),
     },
   };
-  if (isProd && isClient) {
+  if (isOptimize && isClient) {
     webpackConfig = withServiceWorker(webpackConfig, bundleConfig);
   }
   // Apply the configuration middleware.

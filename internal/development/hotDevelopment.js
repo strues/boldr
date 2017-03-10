@@ -2,15 +2,15 @@
 import { resolve as pathResolve } from 'path';
 import webpack from 'webpack';
 import appRootDir from 'app-root-dir';
-import { log } from '../utils';
+import { log } from '../util';
 import webpackConfigFactory from '../webpack/configFactory';
 import config from '../../config';
 import HotNodeServer from './hotNodeServer';
 import HotClientServer from './hotClientServer';
-import createVendorDLL from './createVendorDLL';
+import buildDevDlls from './buildDevDll';
 
-const usesDevVendorDLL = bundleConfig =>
-  bundleConfig.devVendorDLL != null && bundleConfig.devVendorDLL.enabled;
+const usesDevDlls = bundleConfig =>
+  bundleConfig.devDlls != null && bundleConfig.devDlls.enabled;
 
 const vendorDLLsFailed = err => {
   log({
@@ -32,7 +32,7 @@ const initializeBundle = (name, bundleConfig) => {
         mode: 'development',
       });
       // Install the vendor DLL config for the client bundle if required.
-      if (name === 'client' && usesDevVendorDLL(bundleConfig)) {
+      if (name === 'client' && usesDevDlls(bundleConfig)) {
         // Install the vendor DLL plugin.
         webpackConfig.plugins.push(new webpack.DllReferencePlugin({
           // $FlowFixMe
@@ -40,7 +40,7 @@ const initializeBundle = (name, bundleConfig) => {
             pathResolve(
               appRootDir.get(),
               bundleConfig.outputPath,
-              `${bundleConfig.devVendorDLL.name}.json`,
+              `${bundleConfig.devDlls.name}.json`,
             ),
           ),
         }));
@@ -71,10 +71,9 @@ class HotDevelopment {
     .concat(Object.keys(config('additionalNodeBundles')).map(name =>
         initializeBundle(name, config('additionalNodeBundles')[name])));
 
-    Promise// First ensure the client dev vendor DLLs is created if needed.
-    .resolve(
-      usesDevVendorDLL(config('bundles.client'))
-        ? createVendorDLL('client', config('bundles.client'))
+    Promise.resolve(
+      usesDevDlls(config('bundles.client'))
+        ? buildDevDlls('client', config('bundles.client'))
         : true,
     )
       // Then start the client development server.

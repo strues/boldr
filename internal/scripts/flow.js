@@ -5,7 +5,7 @@
 import { existsSync } from 'fs';
 import { resolve as resolvePath } from 'path';
 import appRootDir from 'app-root-dir';
-import { exec, log } from '../utils';
+import { exec, log } from '../util';
 
 if (!existsSync(resolvePath(appRootDir.get(), './flow-typed'))) {
   log({

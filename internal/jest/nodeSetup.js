@@ -1,6 +1,6 @@
 import { EventEmitter } from 'events';
 import { Model } from 'objection';
-import db, { disconnect } from '../../server/services/postgres';
+import db, { disconnect } from '../../src/server/services/postgres';
 
 // Some of the `jest-runtime` tests are very slow and cause
 // timeouts on travis

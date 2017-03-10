@@ -8,8 +8,8 @@ import { resolve as pathResolve } from 'path';
 import fs from 'fs';
 import webpack from 'webpack';
 import appRootDir from 'app-root-dir';
+import { exec } from '../util';
 import webpackConfigFactory from '../webpack/configFactory';
-import { exec } from '../utils';
 import config from '../../config';
 
 // eslint-disable-next-line no-unused-vars
