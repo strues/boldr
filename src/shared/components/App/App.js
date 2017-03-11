@@ -6,27 +6,23 @@ import Helmet from 'react-helmet';
 import debounce from 'lodash/debounce';
 import { createStructuredSelector } from 'reselect';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
+import classnames from 'classnames';
 import { testIfMobile } from 'boldr-utils';
 
 import { fetchSettingsIfNeeded, selectSettings } from '../../state/modules/boldr/settings';
 import { makeSelectMobile, makeSelectUi, setMobileDevice } from '../../state/modules/boldr/ui';
+import { StyleClasses } from '../../theme/theme';
 import type { ReactChildren } from '../../types/react';
 import Notifications from '../Notification';
 
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100%;
-  box-sizing: border-box;
-`;
+const BASE_ELEMENT = StyleClasses.APP;
 
 type Props = {
   children: ReactChildren,
   dispatch: Function,
+  className: string,
   location: Object,
-  isMobile: Boolean,
+  isMobile: boolean,
 };
 
 const mapStateToProps = createStructuredSelector({
@@ -48,12 +44,21 @@ class App extends Component {
     location: React.PropTypes.object,
   }
   getChildContext() {
-    const { dispatch, isMobile, location } = this.props;
-    return { dispatch, isMobile, location };
+    const {
+      dispatch,
+      isMobile,
+      location,
+    } = this.props;
+    return {
+      dispatch,
+      isMobile,
+      location,
+    };
   }
 
   componentDidMount() {
     const { dispatch, location } = this.props;
+
     App.fetchData(dispatch);
     window.addEventListener('resize', debounce(event => {
       dispatch(setMobileDevice(testIfMobile()));
@@ -67,11 +72,18 @@ class App extends Component {
   props: Props;
 
   render() {
+    const { className, children } = this.props;
+
+    const classes = classnames(
+      'boldr',
+      BASE_ELEMENT,
+      className,
+    );
     return (
-    <Wrapper>
-      { React.Children.toArray(this.props.children) }
+    <div className={ classes }>
+      { React.Children.toArray(children) }
       <Notifications />
-    </Wrapper>
+    </div>
     );
   }
 }

@@ -17,3 +17,10 @@ export const media = Object.keys(SIZES).reduce((accumulator, label) => {
   `;
   return accumulator;
 }, {});
+
+export const BOLDR_NS = 'boldrui-';
+
+export const StyleClasses = {
+  APP: `${BOLDR_NS}app`,
+  FOOTER: `${BOLDR_NS}footer`,
+};

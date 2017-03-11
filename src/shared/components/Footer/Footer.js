@@ -1,8 +1,15 @@
+/* @flow */
 import React from 'react';
 import styled from 'styled-components';
+import classnames from 'classnames';
 import { Row, Col } from '../index';
+import { StyleClasses } from '../../theme/theme';
 
-const FooterContainer = styled.div`
+type Props = {
+  className: string,
+};
+
+const FooterInner = styled.div`
   position: relative;
   right: 0;
   bottom: 0;
@@ -12,13 +19,17 @@ const FooterContainer = styled.div`
   margin-left: auto;
   margin-right: auto;
   max-width: 71rem;
-  background-color: #262B33;
 `;
+const BASE_ELEMENT = StyleClasses.FOOTER;
 
-const Footer = (props) => {
+const Footer = (props: Props) => {
+  const classes = classnames(
+    BASE_ELEMENT,
+    props.className,
+  );
   return (
-    <footer className="boldr-footer">
-      <FooterContainer>
+    <footer className={ classes }>
+      <FooterInner>
         <Row>
           <Col xs={ 12 } md={ 6 }>
             Crafted with ❤️ in Colorado by { ' ' }
@@ -37,7 +48,7 @@ const Footer = (props) => {
             </Row>
           </Col>
       </Row>
-      </FooterContainer>
+      </FooterInner>
     </footer>
   );
 };

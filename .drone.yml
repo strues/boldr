@@ -1,0 +1,19 @@
+debug: true
+pipeline:
+  build:
+    image: node:latest
+    commands:
+      - npm install
+      - npm run build:dev
+      - npm run test:browser
+  # 
+  # publish:
+  #   docker:
+  #     registry: registry.boldr.io
+  #     username: strues
+  #     password: $$PASSWORD
+  #     email: steven@strues.io
+  #     repo: boldr/cms
+  #     tag: $$BRANCH
+  #     file: Dockerfile
+  #     insecure: false
