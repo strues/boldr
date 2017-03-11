@@ -1,14 +1,19 @@
-exports[`test <FileCardView />, renders with files as props 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<FileCardView />, renders with files as props 1`] = `
 <Grid
   componentClass="div"
-  fluid={true}>
+  fluid={true}
+>
   <Row
-    componentClass="div">
+    componentClass="div"
+  >
     <Col
       componentClass="div"
       lg={3}
       md={4}
-      sm={12}>
+      sm={12}
+    >
       <File
         file={
           Object {
@@ -24,13 +29,15 @@ exports[`test <FileCardView />, renders with files as props 1`] = `
             "url": "/files/BkRV_tCDe.jpg",
             "user_id": "1b062e26-df71-48ce-b363-4ae9b966e7a0",
           }
-        } />
+        }
+      />
     </Col>
     <Col
       componentClass="div"
       lg={3}
       md={4}
-      sm={12}>
+      sm={12}
+    >
       <File
         file={
           Object {
@@ -46,7 +53,8 @@ exports[`test <FileCardView />, renders with files as props 1`] = `
             "url": "/files/SkR8Ot0Pe.png",
             "user_id": "1b062e26-df71-48ce-b363-4ae9b966e7a0",
           }
-        } />
+        }
+      />
     </Col>
   </Row>
 </Grid>

@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`arrayOfPage should match the normalizr-arrayOfPage-schema 1`] = `
 ArraySchema {
   "schema": EntitySchema {

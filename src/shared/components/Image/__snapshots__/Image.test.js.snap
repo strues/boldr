@@ -1,4 +1,7 @@
-exports[`test renders snapshot 1`] = `
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders snapshot 1`] = `
 <img
-  className="boldr-image" />
+  className="boldr-image"
+/>
 `;

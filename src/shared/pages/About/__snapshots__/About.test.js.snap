@@ -1,15 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<About /> renders snapshot 1`] = `
 <div>
   <Connect(BaseTemplate)
     helmetMeta={
       <HelmetWrapper
-        title="About" />
-    }>
+        title="About"
+      />
+    }
+  >
     Produced with ❤️ by  
     <a
       href="https://twitter.com/struesco"
       rel="noopener noreferrer"
-      target="_blank">
+      target="_blank"
+    >
       Steven Truesdell
     </a>
   </Connect(BaseTemplate)>

@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<PostContent /> renders snapshot 1`] = `
 <article>
   <Paper
@@ -9,7 +11,8 @@ exports[`<PostContent /> renders snapshot 1`] = `
         "padding": "1em",
       }
     }
-    zDepth={2}>
+    zDepth={2}
+  >
     <PostDate />
     <Divider />
     <div
@@ -18,7 +21,8 @@ exports[`<PostContent /> renders snapshot 1`] = `
         Object {
           "__html": undefined,
         }
-      } />
+      }
+    />
   </Paper>
 </article>
 `;

@@ -1,13 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<Error404 /> renders snapshot 1`] = `
 <div
-  className="error_wrapper">
+  className="error_wrapper"
+>
   <Connect(BaseTemplate)
     helmetMeta={
       <HelmetWrapper
-        title="404! You might be lost..." />
-    }>
+        title="404! You might be lost..."
+      />
+    }
+  >
     <Heading
-      size={1}>
+      size={1}
+    >
       404!
     </Heading>
     <p>

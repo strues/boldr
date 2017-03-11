@@ -1,39 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<PostCard /> renders snapshot 1`] = `
 <div
-  className="boldr-post__card-wrapper">
+  className="boldr-post__card-wrapper"
+>
   <Card
     expanderIconChildren="keyboard_arrow_down"
     expanderIconClassName="material-icons"
-    expanderTooltipPosition="left">
+    expanderTooltipPosition="left"
+  >
     <Media
       aspectRatio="16-9"
       component="section"
-      forceAspect={true}>
+      forceAspect={true}
+    >
       <img
-        role="presentation" />
+        role="presentation"
+      />
       <MediaOverlay
-        component="div">
+        component="div"
+      >
         <CardTitle
           subtitle="Invalid Date"
-          title="Test Post">
+          title="Test Post"
+        >
           <ButtonTooltipedInked
             className="md-cell--right"
             icon={true}
             inkTransitionEnterTimeout={450}
             inkTransitionLeaveTimeout={300}
-            inkTransitionOverlap={150}>
+            inkTransitionOverlap={150}
+          >
             star_outline
           </ButtonTooltipedInked>
         </CardTitle>
       </MediaOverlay>
     </Media>
     <CardText
-      component="section">
+      component="section"
+    >
       <Row
-        componentClass="div">
+        componentClass="div"
+      >
         <Col
           componentClass="div"
-          xs={12}>
+          xs={12}
+        >
           <Link
             onlyActiveOnIndex={false}
             style={
@@ -43,7 +55,8 @@ exports[`<PostCard /> renders snapshot 1`] = `
                 "marginTop": "15px",
               }
             }
-            to="/blog/undefined">
+            to="/blog/undefined"
+          >
             <ButtonTooltipedInked
               inkTransitionEnterTimeout={450}
               inkTransitionLeaveTimeout={300}
@@ -51,14 +64,16 @@ exports[`<PostCard /> renders snapshot 1`] = `
               label="Read More"
               onClick={[Function]}
               primary={true}
-              raised={true} />
+              raised={true}
+            />
           </Link>
         </Col>
       </Row>
     </CardText>
     <CardActions>
       <TagBlock
-        tags={null} />
+        tags={null}
+      />
     </CardActions>
   </Card>
 </div>
