@@ -1,47 +1,34 @@
 FROM mhart/alpine-node:7
 
-ARG uid=1000
-ARG VERSION=0.20.3
-
 RUN apk update && \
   apk add --no-cache \
+    bash \
     curl \
-    gnupg \
+    tar \
     g++ \
     gcc \
     git \
     libev-dev \
     libevent-dev \
     libuv-dev \
+    zlib-dev \
     openssl-dev \
-    make \
-    openssl-dev \
-    python && \
+    make && \
 
-  gpg  --keyserver ha.pool.sks-keyservers.net --recv-keys 9D41F3C3 && \
-  curl -o /tmp/yarn-${VERSION}.tar.gz -sSL https://yarnpkg.com/latest-rc.tar.gz && \
-  curl -o /tmp/yarn-${VERSION}.tar.gz.asc -sSL https://yarnpkg.com/latest-rc.tar.gz.asc && \
-  gpg --verify "/tmp/yarn-${VERSION}.tar.gz.asc" /tmp/yarn-${VERSION}.tar.gz
+  curl -o- -L https://yarnpkg.com/install.sh | bash && \
+  apk del bash curl tar
 
-WORKDIR /opt
-RUN tar xzf /tmp/yarn-${VERSION}.tar.gz && \
-    mv /opt/dist /opt/yarn && \
-    ln -sf /opt/yarn/bin/yarn /bin/yarn && \
-    rm -rf /root/.gnupg /tmp/yarn-${VERSION}.tar.gz /tmp/yarn-${VERSION}.tar.gz.asc \
-    /opt/yarn/end_to_end_tests && \
-    apk del --no-cache curl gnupg && \
-    npm install -g node-gyp && \
-    mkdir /app
-
+# set path to include yarn
+ENV PATH /root/.yarn/bin:$PATH
 # Switch to project directory
 WORKDIR /app
-COPY package.json /app
+COPY package.json yarn.lock /app/
 
-RUN yarn install --production
+RUN yarn install --pure-lockfile --no-progress --production && \
+  yarn cache clean
+
 COPY . /app
 
-ENV NODE_ENV production
-
-EXPOSE 3000
 VOLUME ["/app/node_modules", "/app/public"]
-CMD ["npm", "run", "start"]
+EXPOSE 3000
+CMD ["yarn", "start"]
