@@ -4,11 +4,11 @@ FROM strues/alpine-node:7
 WORKDIR /app
 COPY package.json yarn.lock /app/
 
-RUN yarn install --pure-lockfile --no-progress --production && \
+RUN yarn install --pure-lockfile --no-progress && \
   yarn cache clean
 
 COPY . /app
 
 VOLUME ["/app/node_modules", "/app/public"]
 EXPOSE 3000
-CMD ["yarn", "start"]
+CMD ["yarn", "build:dev"]

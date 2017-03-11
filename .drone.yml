@@ -1,12 +1,12 @@
 debug: true
 pipeline:
   build:
-    image: node:latest
+    image: strues/alpine-node:7
     commands:
-      - npm install
-      - npm run build:dev
-      - npm run test:browser
-  # 
+      - yarn install
+      - yarn build:dev
+      - yarn test:browser
+  #
   # publish:
   #   docker:
   #     registry: registry.boldr.io
