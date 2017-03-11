@@ -3,15 +3,21 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-
+import classnames from 'classnames';
 import { Grid, Row, Col, Heading } from '../../../components/index';
 import { getPosts } from '../../../state/modules/blog/posts';
 import { PostSidebar, PostContent, PostComments, PostTitle } from '../components';
 
+import { StyleClasses } from '../../../theme/theme';
+
+const BASE_ELEMENT = StyleClasses.SINGLE_POST;
+
 export type Props = {
   loading: boolean,
+  className: ?string,
   entities: Object,
   currentPost: Object,
+  sidebarClassName: ?string,
   dispatch: Function,
   params: Object,
 };
@@ -29,13 +35,16 @@ class SinglePost extends PureComponent {
   props: Props;
 
   displaySinglePost = () => {
-    const { currentPost, entities } = this.props;
+    const { currentPost, entities, className } = this.props;
     const postAuthor = entities.users[currentPost.user_id];
     const postComments = currentPost.comments.map(c => entities.comments[c]);
-
+    const classes = classnames(
+      BASE_ELEMENT,
+      className,
+    );
     const postTags = currentPost.tags.map(id => entities.tags[id]);
     return (
-      <div>
+      <div className={ classes }>
       { this.renderPostBg() }
       <Grid>
         <Row>
@@ -50,7 +59,12 @@ class SinglePost extends PureComponent {
           {
             currentPost.tags
             ? <Col sm={ 12 } md={ 4 } lg={ 3 }>
-                <PostSidebar { ...currentPost } author={ postAuthor } tags={ postTags } />
+                <PostSidebar
+                  author={ postAuthor }
+                  tags={ postTags }
+                  className={ props.sidebarClassName }
+                  { ...currentPost }
+                />
               </Col>
             : null
           }

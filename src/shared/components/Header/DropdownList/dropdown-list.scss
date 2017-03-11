@@ -1,24 +1,20 @@
+
 .boldr-menu__dropdown-list {
-  float: left;
-  height: 100%;
-  padding: 5px 20px;
-  ul {
-    list-style-type: none;
-    padding: 0;
+  float: none;
+  width: 100%;
+  margin: 0;
+  height: auto;
+  padding: 0;
+  padding-bottom: 15px;
+
+  @media (min-width: 992px) {
+    padding: 5px 20px;
+    ul {
+      list-style-type: none;
+      padding: 0;
+    }
   }
 }
-
-@media (max-width: 991px) {
-  .boldr-menu__dropdown-list {
-    float: none;
-    width: 100%;
-    margin: 0;
-    height: auto;
-    padding: 0;
-    padding-bottom: 15px;
-  }
-}
-
 .stackedList {
   height: auto;
 }

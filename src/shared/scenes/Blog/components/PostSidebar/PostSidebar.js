@@ -1,32 +1,31 @@
 /* @flow */
 import React from 'react';
-import styled from 'styled-components';
+import classnames from 'classnames';
 import Paper from 'react-md/lib/Papers';
 import { Heading, Col } from '../../../../components/index';
 import type { User, Tag } from '../../../../types/models';
 import Author from '../Author';
-import TagBlock from '../TagBlock';
+import SidebarTags from '../SidebarTags';
+import { StyleClasses } from '../../../../theme/theme';
 
 type Props = {
+  className: ?string,
+  authorClassName: ?string,
+  tagsClassName: ?string,
   tags: Array<Tag>,
   author: User,
 };
-const Sidebar = styled.aside`
-  height: 100%;
-  padding-left: 50px;
-`;
+const BASE_ELEMENT = StyleClasses.POST_SIDEBAR;
 const PostSidebar = (props: Props) => {
+  const classes = classnames(
+    BASE_ELEMENT,
+    props.className,
+  );
   return (
-    <div>
-    <Sidebar>
-      <Author { ...props.author } />
-
-      <Paper zDepth={ 1 } style={ { padding: '1em', marginTop: '25px' } } className="boldr-paperoverride">
-        <Heading size={ 3 }>Related Tags</Heading>
-        <TagBlock tags={ props.tags } />
-      </Paper>
-    </Sidebar>
-    </div>
+    <aside className={ classes }>
+      <Author className={ props.authorClassName } { ...props.author } />
+      <SidebarTags tags={ props.tags } className={ props.tagsClassName } />
+    </aside>
   );
 };
 

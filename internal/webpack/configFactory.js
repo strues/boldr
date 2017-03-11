@@ -142,7 +142,7 @@ export default function webpackConfigFactory(buildOptions) {
       })),
       ifOptimizeClient(commonsChunk),
       ifOptimizeClient(aggressiveMerge),
-      ifDev(() => new NamedModulesPlugin()),
+      ifDevClient(() => new NamedModulesPlugin()),
       ifOptimizeClient(
         ifElse(config('optimizeProdBuild'))(
           uglify,
@@ -168,8 +168,9 @@ export default function webpackConfigFactory(buildOptions) {
                 comments: false,
                 presets: [
                   'react',
-                  ifClient(['latest', { es2015: { modules: false } }]),
-                  ifNode(['env', { targets: { node: true }, modules: false }]),
+                  ifClient(['env', { modules: false }]),
+                  ifNode(['env', { targets: { node: 'current' },
+                    modules: false }]),
                 ].filter(x => x != null),
                 plugins: [
                   ifDevClient('react-hot-loader/babel'),
@@ -177,7 +178,7 @@ export default function webpackConfigFactory(buildOptions) {
                   ['transform-class-properties', { spec: true }],
                   ['transform-object-rest-spread', { useBuiltIns: true }],
                   ifClient(['transform-react-jsx', { useBuiltIns: true }]),
-                  ifClient('dynamic-import-webpack'),
+                  'syntax-dynamic-import',
                   'transform-flow-strip-types',
                   'transform-es2015-arrow-functions',
                   ['transform-runtime', {
@@ -188,7 +189,6 @@ export default function webpackConfigFactory(buildOptions) {
                   ['transform-regenerator', { async: false }],
                   ifDev('transform-react-jsx-self'),
                   ifDev('transform-react-jsx-source'),
-                  ifNode('dynamic-import-node'),
                   ifOptimize('transform-react-inline-elements'),
                   ifOptimize('transform-react-constant-elements'),
                 ].filter(x => x != null),

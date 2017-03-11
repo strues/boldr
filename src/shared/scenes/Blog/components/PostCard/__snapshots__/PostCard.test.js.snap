@@ -2,7 +2,7 @@
 
 exports[`<PostCard /> renders snapshot 1`] = `
 <div
-  className="boldr-post__card-wrapper"
+  className="boldrui-post-card"
 >
   <Card
     expanderIconChildren="keyboard_arrow_down"
@@ -47,14 +47,9 @@ exports[`<PostCard /> renders snapshot 1`] = `
           xs={12}
         >
           <Link
+            className="readmore-link"
             onlyActiveOnIndex={false}
-            style={
-              Object {
-                "float": "right",
-                "marginRight": "15px",
-                "marginTop": "15px",
-              }
-            }
+            style={Object {}}
             to="/blog/undefined"
           >
             <ButtonTooltipedInked

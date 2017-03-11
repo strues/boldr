@@ -1,5 +1,7 @@
 /* @flow */
 import React from 'react';
+import classnames from 'classnames';
+import { StyleClasses } from '../../theme/theme';
 
 type Props = {
   className: String,
@@ -8,10 +10,15 @@ type Props = {
   imgSrc: String,
 };
 
+const BASE_ELEMENT = StyleClasses.IMAGE;
+
 const Image = (props: Props) => {
-  const imgClass = props.className ? props.className : 'boldr-image';
+  const classes = classnames(
+    BASE_ELEMENT,
+    props.className,
+  );
   return (
-    <img src={ props.imgSrc } className={ imgClass } alt={ props.alt } width={ props.width } />
+    <img src={ props.imgSrc } className={ classes } alt={ props.alt } width={ props.width } />
   );
 };
 

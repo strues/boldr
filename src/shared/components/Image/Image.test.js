@@ -5,8 +5,8 @@ import Image from './Image';
 
 it('<Image /> renders the Image svg component', () => {
   const wrapper = shallow(<Image />);
-  const wrapperClass = wrapper.find('.boldr-image');
-  expect(wrapperClass.is('.boldr-image')).toBe(true);
+  const wrapperClass = wrapper.find('.boldrui-image');
+  expect(wrapperClass.is('.boldrui-image')).toBe(true);
 });
 
 it('renders snapshot', () => {

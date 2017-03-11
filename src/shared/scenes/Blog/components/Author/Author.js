@@ -1,45 +1,46 @@
 /* @flow */
 import React from 'react';
 import styled from 'styled-components';
+import classnames from 'classnames';
 import Link from 'react-router/lib/Link';
 import Avatar from 'react-md/lib/Avatars';
 import { Heading, Col, Social } from '../../../../components/index';
+import { StyleClasses } from '../../../../theme/theme';
 
-const AuthorInfo = styled.ul`
-  list-style-type: none;
-  padding-left: 0;
+const BASE_ELEMENT = StyleClasses.POST_SIDEBAR_AUTHOR;
 
-`;
-
-const AvatarName = styled.li`
+const AvatarName = styled.div`
   display: inline-block;
   vertical-align: middle;
   &:first-child {
     margin-right: 15px;
   }
 `;
-const BioBlock = styled.li`
+const BioBlock = styled.div`
   vertical-align: middle;
   margin-bottom: 15px;
   padding-top: 10px;
 `;
 
 type Props = {
-  username: String,
-  avatar_url: String,
-  last_name: String,
-  first_name: String,
-  bio: String,
+  className: string,
+  username: string,
+  avatar_url: string,
+  last_name: string,
+  first_name: string,
+  bio: string,
   social: Object,
 };
 const Author = (props: Props) => {
+  const classes = classnames(
+    BASE_ELEMENT,
+    props.className,
+  );
   const authorName = <Link to={ `/profiles/${props.username}` }>{ props.username }</Link>;
   return (
-    <div className="boldr-post__sidebar-author">
-      <Heading size={ 3 }>Author Details</Heading>
-      <AuthorInfo>
+    <div className={ classes }>
         <AvatarName><Avatar src={ props.avatar_url } role="presentation" /> </AvatarName>
-        <AvatarName>{ authorName }</AvatarName>
+        <AvatarName><Heading size={ 3 }>{ authorName }</Heading></AvatarName>
         <BioBlock>{ props.bio }</BioBlock>
         <Social
           facebook
@@ -53,7 +54,6 @@ const Author = (props: Props) => {
           linkedin
           lurl={ props.social.linkedin.url }
         />
-      </AuthorInfo>
       </div>
   );
 };

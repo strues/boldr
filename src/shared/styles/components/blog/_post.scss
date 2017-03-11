@@ -1,6 +1,12 @@
 
-.boldr-post__card-wrapper {
-  margin-bottom: 10px;
+.#{$boldr-ns}post-card {
+  margin-bottom: 50px;
+
+  a.readmore-link {
+    float: right;
+    margin-top: 15px;
+    margin-right: 15px;
+  }
 }
 .boldr-post__image {
   object-fit: cover;
@@ -14,20 +20,7 @@
     transform: translate3d(0, 0, 0);
   }
 }
-.boldr-post__sidebar {
 
-}
-.boldr-post__sidebar-author {
-  width: 100%;
-  background-color: $white;
-  padding: 1em;
-  margin-bottom: 50px;
-  @include md-box-shadow(2);
-}
-// :( important here in order to override semantic ui
-.boldr-post__sidebar-card {
-  padding: 1rem !important;
-}
 
 .boldr-post__tagblock {
 
@@ -48,4 +41,8 @@
 .boldr-post__content {
   padding-top: 25px;
   line-height: 1.5;
+}
+
+.#{$boldr-ns}single-post {
+
 }
