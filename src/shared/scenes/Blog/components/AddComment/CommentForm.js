@@ -3,6 +3,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import Button from 'react-md/lib/Buttons';
+import classnames from 'classnames';
+import { StyleClasses } from '../../../../theme/theme';
 import FieldEditor from '../../../Admin/Post/NewPost/components/NewPostForm/FieldEditor';
 import { InputField } from '../../../../components';
 
@@ -12,23 +14,22 @@ type Props = {
   submitting?: boolean,
   fields?: Object,
   pristine?: boolean,
+  className: ?string
 };
 
 const style = {
   margin: 12,
 };
-const Wrapper = styled.div`
-  padding: 1em;
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .4);
-  background-color: #fff;
-`;
+const BASE_ELEMENT = StyleClasses.COMMENT_FORM;
+
 let CommentForm = (props: Props) => { // eslint-disable-line
-  const { handleSubmit, reset } = props;
+  const { handleSubmit, reset, className } = props;
+  const classes = classnames(
+    BASE_ELEMENT,
+    className,
+  );
   return (
-    <Wrapper>
+    <div className={ classes }>
     <form className="boldr-form__comment" onSubmit={ handleSubmit }>
       <Field id="content" name="content" component={ FieldEditor } type="text" label="Your comment" />
 
@@ -37,7 +38,7 @@ let CommentForm = (props: Props) => { // eslint-disable-line
         <Button label="Reset" onClick={ reset } style={ style } raised secondary />
       </div>
     </form>
-  </Wrapper>
+  </div>
   );
 };
 CommentForm = reduxForm({

@@ -97,8 +97,5 @@ const mapStateToProps = (state) => {
     avatarImage: state.attachments.avatarImage,
   };
 };
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ getProfile, openDrawer, closeDrawer, showModal, hideModal }, dispatch);
-// }
-// $FlowIssue
+
 export default connect(mapStateToProps)(ProfileContainer);

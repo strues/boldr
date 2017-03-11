@@ -1,18 +1,20 @@
 /* @flow */
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Paper from 'react-md/lib/Papers';
 import Drawer from 'react-md/lib/Drawers';
 import Button from 'react-md/lib/Buttons/Button';
 import Toolbar from 'react-md/lib/Toolbars';
 import Dropzone from 'react-dropzone';
+import classnames from 'classnames';
+import { StyleClasses } from '../../theme/theme';
 import { Grid, Col, Row, Heading } from '../../components';
 import ProfileContent from './components/ProfileContent';
 import OwnProfile from './components/OwnProfile';
 
 type Props = {
+  className: ?string,
   profile: Object,
-  email: String,
+  email: string,
   drawer: Boolean,
   closeDrawer: Function,
   uploadProfileImg: Function,
@@ -25,8 +27,11 @@ type Props = {
 
 type State = {
   me: boolean,
+  showDropzone: boolean,
+  profImg: boolean,
+  files: Array<Object>,
 };
-
+const BASE_ELEMENT = StyleClasses.PROFILE;
 class Profile extends Component {
   constructor() {
     super();
@@ -53,8 +58,9 @@ class Profile extends Component {
   }
 
   props: Props;
-
+  // $FlowIssue
   onDrop(files) {
+      // $FlowIssue
     this.setState({
       file: files[0],
       showDropzone: false,
@@ -67,6 +73,7 @@ class Profile extends Component {
   }
 
   onOpenClick() {
+    // $FlowIssue
     this.dropzone.open();
   }
 
@@ -123,8 +130,11 @@ class Profile extends Component {
     );
   }
   render() {
-    const { profile } = this.props;
-
+    const { profile, className } = this.props;
+    const classes = classnames(
+      BASE_ELEMENT,
+      className,
+    );
     const UserProfileBg = styled.div`
       width: 100%;
       height: 375px;
@@ -135,10 +145,10 @@ class Profile extends Component {
     const header = <Toolbar nav={ close } actions={ null } className="md-divider-border md-divider-border--bottom" />;
 
     return (
-      <div className="boldr-profile">
+      <div className={ classes }>
         <UserProfileBg />
         <Grid>
-          <Paper zDepth={ 2 } style={ { marginTop: '-100px', padding: '1em', background: '#fff' } }>
+          <div className="profile__content">
             <Row>
               <Col sm={ 12 }>
                 <ProfileContent
@@ -167,7 +177,7 @@ class Profile extends Component {
             >
               <OwnProfile profile={ profile } />
             </Drawer>
-          </Paper>
+          </div>
         </Grid>
 
       </div>

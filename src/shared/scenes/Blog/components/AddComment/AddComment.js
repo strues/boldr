@@ -7,8 +7,9 @@ import CommentForm from './CommentForm';
 
 type Props = {
   dispatch: Function,
-  postId: String,
+  postId: string,
   data: Object,
+  commentFormClass: ?string
 };
 
 @connect()
@@ -27,7 +28,7 @@ class AddComment extends PureComponent {
 
   render() {
     return (
-        <CommentForm onSubmit={ this.handleCommentSubmit } />
+        <CommentForm onSubmit={ this.handleCommentSubmit } className={ this.props.commentFormClass } />
     );
   }
 }
