@@ -8,32 +8,26 @@ import PostCard from '../components/PostCard';
 
 type Props = {
   posts: Array<Post>,
-  name: string,
   isFetching: boolean,
   listTags: Object,
 };
 
 const TagList = (props: Props) => {
   if (props.isFetching || !props.posts) {
-    return (
-      <Loader />
-    );
+    return <Loader />;
   }
   return (
-      <div style={ { paddingTop: 50 } }>
-        <Grid fluid>
-          <Row>
-          {
-            props.posts.map((post, i) => (
-              <Col key={ i } xs={ 12 } md={ 4 }>
-                <PostCard key={ i } listTags={ props.listTags } { ...post } />
-              </Col>
-            ),
-            )
-          }
-          </Row>
-        </Grid>
-      </div>
+    <div style={ { paddingTop: 50 } }>
+      <Grid fluid>
+        <Row>
+          {props.posts.map(post => (
+            <Col key={ post.id } xs={ 12 } md={ 4 }>
+              <PostCard listTags={ props.listTags } { ...post } />
+            </Col>
+          ))}
+        </Row>
+      </Grid>
+    </div>
   );
 };
 

@@ -25,27 +25,27 @@ const File = (props: Props) => {
   }
 
   function handleSelect() {
-    const file = props.file;
+    const { file } = props;
     props.selectFile(file);
   }
 
   return (
-      <Card className="boldr-filecard">
-        <Media>
-          <img src={ props.file.url } alt={ props.file.file_name } role="presentation" />
-          <MediaOverlay>
+    <Card className="boldr-filecard">
+      <Media>
+        <img src={ props.file.url } alt={ props.file.file_name } role="presentation" />
+        <MediaOverlay>
           <CardTitle title={ props.file.file_name || 'foo' } />
-          </MediaOverlay>
-        </Media>
-        <CardActions>
-          <Button icon onClick={ handleSelect }>
-            <FontIcon>mode_edit</FontIcon>
-          </Button>
-          <Button icon onClick={ handleclick }>
-            <FontIcon>delete_forever</FontIcon>
-          </Button>
-        </CardActions>
-      </Card>
+        </MediaOverlay>
+      </Media>
+      <CardActions>
+        <Button icon onClick={ handleSelect }>
+          <FontIcon>mode_edit</FontIcon>
+        </Button>
+        <Button icon onClick={ handleclick }>
+          <FontIcon>delete_forever</FontIcon>
+        </Button>
+      </CardActions>
+    </Card>
   );
 };
 

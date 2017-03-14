@@ -42,7 +42,7 @@ const FileListItem = props => {
   }
 
   function handleSelect() {
-    const file = props.file;
+    const { file } = props;
     props.selectFile(file);
   }
   return (
@@ -51,7 +51,7 @@ const FileListItem = props => {
         <Img src={ props.imgSrc } />
       </ImgWrapper>
       <Content>
-        { props.children }
+        {props.children}
         <Button icon onClick={ handleSelect }>
           <FontIcon>mode_edit</FontIcon>
         </Button>

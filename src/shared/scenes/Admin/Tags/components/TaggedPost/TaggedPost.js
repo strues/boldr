@@ -22,9 +22,7 @@ type Props = {
 
 class TaggedPost extends Component {
   static fetchData(dispatch, props) {
-    return Promise.all([
-      dispatch(fetchTaggedPost(props.name)),
-    ]);
+    return Promise.all([dispatch(fetchTaggedPost(props.name))]);
   }
   componentDidMount() {
     const { dispatch, params } = this.props;
@@ -35,37 +33,27 @@ class TaggedPost extends Component {
   render() {
     const { currentTag, isFetching } = this.props;
     if (isFetching) {
-      return (
-        <Loader />
-      );
+      return <Loader />;
     }
     if (!currentTag.posts) {
-      return (
-        <div>NO posts matching the tag</div>
-      );
+      return <div>NO posts matching the tag</div>;
     }
 
     return (
       <div>
-       <Toolbar
-         colored
-         title={ `Posts tagged ${currentTag.name}` }
-         nav={ null }
-         actions={ null }
-       />
-      <List>
-        {
-          currentTag.posts && currentTag.posts.map(post =>
-            <ListItem key={ post.id } primaryText={ post.title } rightAvatar={ <TaggedPostMenu post={ post } /> } />,
-          )
-        }
-      </List>
+        <Toolbar colored title={ `Posts tagged ${currentTag.name}` } nav={ null } actions={ null } />
+        <List>
+          {currentTag.posts &&
+            currentTag.posts.map(post => (
+              <ListItem key={ post.id } primaryText={ post.title } rightAvatar={ <TaggedPostMenu post={ post } /> } />
+            ))}
+        </List>
       </div>
     );
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     listTags: state.blog.tags.all,
     isFetching: state.blog.tags.isFetching,

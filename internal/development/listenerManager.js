@@ -1,4 +1,4 @@
-import { log } from '../util';
+import { log } from '../utils';
 
 class ListenerManager {
   constructor(listener, name) {

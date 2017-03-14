@@ -7,7 +7,7 @@ import { changeLayout } from '../../../state/modules/boldr/ui';
 import { getPosts, fetchPostsIfNeeded } from '../../../state/modules/blog/posts';
 import { fetchTagsIfNeeded } from '../../../state/modules/blog/tags/actions';
 import { getTags } from '../../../state/modules/blog/tags/selectors';
-import type { Post, UI } from '../../../types/models'; // eslint-disable-line
+import type {Post, UI} from '../../../types/models'; // eslint-disable-line
 import VisiblePostListing from './VisiblePostListing';
 
 type Props = {
@@ -24,10 +24,7 @@ type Props = {
 
 export class PostListingContainer extends Component {
   static fetchData(dispatch) {
-    return Promise.all([
-      dispatch(fetchPostsIfNeeded()),
-      dispatch(fetchTagsIfNeeded()),
-    ]);
+    return Promise.all([dispatch(fetchPostsIfNeeded()), dispatch(fetchTagsIfNeeded())]);
   }
 
   componentDidMount() {
@@ -38,9 +35,9 @@ export class PostListingContainer extends Component {
   props: Props;
   handleChangeLayout = () => {
     this.props.layout === 'grid'
-    ? this.props.dispatch(changeLayout(LAYOUTS.LIST))
-    : this.props.dispatch(changeLayout(LAYOUTS.GRID));
-  }
+      ? this.props.dispatch(changeLayout(LAYOUTS.LIST))
+      : this.props.dispatch(changeLayout(LAYOUTS.GRID));
+  };
   render() {
     return (
       <VisiblePostListing
@@ -54,7 +51,7 @@ export class PostListingContainer extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     listTags: state.entities.tags,
     posts: getPosts(state),

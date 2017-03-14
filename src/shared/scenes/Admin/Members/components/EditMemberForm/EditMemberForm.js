@@ -15,13 +15,29 @@ type Props = {
   submitting?: boolean,
   fields?: Object,
   pristine?: boolean,
+  input: Object,
 };
-const roles = [{ value: 1, label: 'Member' }, { value: 2, label: 'Staff' }, { value: 3, label: 'Admin' }];
-
-const renderRoleSelector = ({ input }) => (
+const roles = [
+  {
+    value: 1,
+    label: 'Member',
+  },
+  {
+    value: 2,
+    label: 'Staff',
+  },
+  {
+    value: 3,
+    label: 'Admin',
+  },
+];
+type Prop = {
+  input: Object,
+};
+const renderRoleSelector = (props: Prop) => (
   <div>
     <SelectField
-      { ...input }
+      { ...props.input }
       id="roles"
       label="Role"
       placeholder="Select a role"
@@ -35,46 +51,16 @@ const renderRoleSelector = ({ input }) => (
 const EditMemberForm = (props: Props) => {
   const { handleSubmit, reset } = props;
   return (
-      <form onSubmit={ handleSubmit } className="boldr-form__generic">
-        <Field
-          id="email"
-          name="email"
-          type="email"
-          label="Email"
-          component={ InputField }
-        />
-        <Field
-          id="first_name"
-          name="first_name"
-          type="text"
-          label="First name"
-          component={ InputField }
-        />
-        <Field
-          id="last_name"
-          name="last_name"
-          type="text"
-          label="Last name"
-          component={ InputField }
-        />
-        <Field
-          id="username"
-          name="username"
-          type="text"
-          label="Username"
-          component={ InputField }
-        />
-        <Field
-          id="avatar_url"
-          name="avatar_url"
-          type="text"
-          label="Avatar URL"
-          component={ InputField }
-        />
-        <Field name="role" component={ renderRoleSelector } />
-        <Button type="submit" label="Save" style={ style } raised primary />
-        <Button label="Reset" onClick={ reset } style={ style } flat secondary />
-      </form>
+    <form onSubmit={ handleSubmit } className="boldr-form__generic">
+      <Field id="email" name="email" type="email" label="Email" component={ InputField } />
+      <Field id="first_name" name="first_name" type="text" label="First name" component={ InputField } />
+      <Field id="last_name" name="last_name" type="text" label="Last name" component={ InputField } />
+      <Field id="username" name="username" type="text" label="Username" component={ InputField } />
+      <Field id="avatar_url" name="avatar_url" type="text" label="Avatar URL" component={ InputField } />
+      <Field name="role" component={ renderRoleSelector } />
+      <Button type="submit" label="Save" style={ style } raised primary />
+      <Button label="Reset" onClick={ reset } style={ style } flat secondary />
+    </form>
   );
 };
 

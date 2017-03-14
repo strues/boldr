@@ -29,18 +29,15 @@ type Props = {
 class PostTable extends PureComponent {
   render() {
     const rows = this.props.posts.map(p => (
-      <TableRow key={ p.id } onCheckboxClick={ this.handleRowClick }>
+      <TableRow key={ p.id }>
         <TableColumn style={ { maxWidth: '125px' } }>
           <Avatar src={ p.feature_image } role="presentation" />
         </TableColumn>
-        <TableColumn><Link to={ `/admin/posts/editor/${p.slug}` }>{ p.title }</Link></TableColumn>
-        <TableColumn>{ p.published ? <span>Published</span> : <span>Draft</span>}</TableColumn>
-        <TableColumn>{ format(p.created_at, 'MMMM Do YYYY') }</TableColumn>
+        <TableColumn><Link to={ `/admin/posts/editor/${p.slug}` }>{p.title}</Link></TableColumn>
+        <TableColumn>{p.published ? <span>Published</span> : <span>Draft</span>}</TableColumn>
+        <TableColumn>{format(p.created_at, 'MMMM Do YYYY')}</TableColumn>
         <TableColumn>
-          <Button
-            onClick={ () => this.props.handleDeleteClick(p.id) }
-            icon
-          >delete_forever</Button>
+          <Button onClick={ () => this.props.handleDeleteClick(p.id) } icon>delete_forever</Button>
         </TableColumn>
       </TableRow>
     ));
@@ -56,7 +53,7 @@ class PostTable extends PureComponent {
           </TableRow>
         </TableHeader>
         <TableBody>
-          { rows }
+          {rows}
         </TableBody>
       </DataTable>
     );

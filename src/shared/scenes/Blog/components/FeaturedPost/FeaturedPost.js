@@ -12,26 +12,26 @@ import TagBlock from '../TagBlock';
 import Tag from '../Tag';
 
 type Props = {
-  id?: String,
-  feature_image?: String,
-  title?: String,
-  slug: String,
-  content?: String,
-  background_image?: String,
+  id?: string,
+  feature_image?: string,
+  title?: string,
+  slug: string,
+  content?: string,
+  background_image?: string,
   comments: ?Array<Object>,
-  excerpt?: String,
-  created_at: String,
-  updated_at?: String,
-  status: ?String,
-  author: String,
+  excerpt?: string,
+  created_at: string,
+  updated_at?: string,
+  status: ?string,
+  author: string,
   seo?: Object,
   tags: Array<TagType>,
   attachments: ?Object,
   meta: ?Object,
-  user_id: ?String,
+  user_id: ?string,
   dispatch: Function,
   listTags: Object,
-}
+};
 const Wrapper = styled.section`
   display: flex;
   flex-direction: column;
@@ -108,24 +108,20 @@ export const FeaturedPost = (props: Props) => {
     <div className="boldr-post__featured">
       <Wrapper>
         <ImgWrapper>
-          <PostTitle>{ props.title }</PostTitle>
+          <PostTitle>{props.title}</PostTitle>
         </ImgWrapper>
         <Content>
-          <Paragraph>{ props.excerpt }</Paragraph>
-        <Row style={ { paddingTop: '20px' } } xsEnd>
-          { /* $FlowIssue */ }
-          <Link to={ `/blog/${props.slug}` }>
-            <Button raised primary label="Read More" onClick={ transitionPost } />
-          </Link>
-        </Row>
-        <Row>
-          <Col sm={ 12 }>
-          {
-            /* $FlowIssue */
-            postTags.map(t => <Tag key={ t.id } tag={ t } />)
-          }
-        </Col>
-        </Row>
+          <Paragraph>{props.excerpt}</Paragraph>
+          <Row style={ { paddingTop: '20px' } } xsEnd>
+            <Link to={ `/blog/${props.slug}` }>
+              <Button raised primary label="Read More" onClick={ transitionPost } />
+            </Link>
+          </Row>
+          <Row>
+            <Col sm={ 12 }>
+              { postTags.map(t => <Tag key={ t.id } tag={ t } />)}
+            </Col>
+          </Row>
         </Content>
       </Wrapper>
     </div>

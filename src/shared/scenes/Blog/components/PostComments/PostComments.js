@@ -45,43 +45,43 @@ class PostComments extends Component {
     return (
       <div className="boldr-comments">
         <CommentListHeader>
-        <Heading size={ 2 } fweight={ 200 }>
-          <FontIcon>comment</FontIcon> { comments.length } Comments
+          <Heading size={ 2 } fweight={ 200 }>
+            <FontIcon>comment</FontIcon> { comments.length } Comments
         </Heading>
-      {
-        this.props.isAuthenticated
-        ?
-        <Button
-          raised
-          secondary
-          onClick={ this.toggleCollapse }
-          style={ {
-            marginBottom: 16,
-            marginLeft: 15,
-          } }
-          label="Add Comment"
-        >
-        add
-        </Button>
-        : null
-      }
-    </CommentListHeader>
+          {
+            this.props.isAuthenticated
+            ?
+              <Button
+                raised
+                secondary
+                onClick={ this.toggleCollapse }
+                style={ {
+                  marginBottom: 16,
+                  marginLeft: 15,
+                } }
+                label="Add Comment"
+              >
+              add
+              </Button>
+              : null
+            }
+        </CommentListHeader>
         <Collapse collapsed={ this.state.collapsed }>
-         <AddComment postId={ this.props.postId } />
+          <AddComment postId={ this.props.postId } />
         </Collapse>
         <CommentList>
-        {
+          {
           this.props.comments.map(comment => {
             const commenter = this.props.userEntities[comment.comment_author_id];
             return (
               <CommentItem key={ comment.id }>
-              <Comment
-                commenter={ commenter }
-                canModerate={ canModerate }
-                isAuthenticated={ this.props.isAuthenticated }
-                comment={ comment }
-              />
-            </CommentItem>);
+                <Comment
+                  commenter={ commenter }
+                  canModerate={ canModerate }
+                  isAuthenticated={ this.props.isAuthenticated }
+                  comment={ comment }
+                />
+              </CommentItem>);
           })
         }
         </CommentList>

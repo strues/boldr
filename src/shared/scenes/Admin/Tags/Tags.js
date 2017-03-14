@@ -80,12 +80,7 @@ class Tags extends Component {
         <Helmet title="Admin: Tags" />
         <Col sm={ 12 } md={ 4 }>
           <Paper zDepth={ 2 }>
-            <Toolbar
-              themed
-              title="Tags"
-              nav={ null }
-              actions={ actions }
-            />
+            <Toolbar themed title="Tags" nav={ null } actions={ actions } />
             <List>
               <TagList
                 tags={ this.props.tags }
@@ -96,18 +91,12 @@ class Tags extends Component {
           </Paper>
         </Col>
         <Col sm={ 12 } md={ 8 }>
-          {
-            !this.state.posts
-              ? null
-              : <TaggedPost name={ this.props.currentTag.name } />
-          }
-          {
-            !this.state.add
-              ? null
-              : <Paper zDepth={ 3 } className="boldr-paperoverride">
-                  <AddTag onSubmit={ this.handleTagSubmit } />
-                </Paper>
-          }
+          {!this.state.posts ? null : <TaggedPost name={ this.props.currentTag.name } />}
+          {!this.state.add
+            ? null
+            : <Paper zDepth={ 3 } className="boldr-paperoverride">
+              <AddTag onSubmit={ this.handleTagSubmit } />
+            </Paper>}
         </Col>
       </Row>
     );

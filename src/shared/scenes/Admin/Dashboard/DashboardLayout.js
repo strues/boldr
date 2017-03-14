@@ -40,6 +40,7 @@ type Props = {
   dashboard: ?Object,
   me: Object,
   location: Object,
+  ui: Object,
   onMediaTypeChange: Function,
 };
 
@@ -92,29 +93,29 @@ class DashboardLayout extends PureComponent {
         <Avatar src={ this.props.me.avatarUrl } role="presentation" />
         <UserName>
           <Link to={ `/profiles/${this.props.me.username}` } style={ { color: '#fff' } }>
-            { this.props.me.firstName}
+            {this.props.me.firstName}
           </Link>
         </UserName>
       </UserSection>
     );
 
     return (
-        <NavigationDrawer
-          ref={ this._setContainer }
-          drawerTitle="Boldr"
-          drawerClassName="boldr-drawer__admin"
-          toolbarClassName="boldr-adminbar"
-          desktopMinWidth={ 900 }
-          onMediaTypeChange={ this._handleMediaTypeChange }
-          defaultMedia={ this.props.ui.defaultMedia }
-          navItems={ navItems(pathname) }
-          drawerType={ NavigationDrawer.DrawerTypes.PERSISTENT_MINI }
-          toolbarActions={ toolbarActionItems }
-        >
-          <Wrapper>
-            { this.props.children }
-          </Wrapper>
-        </NavigationDrawer>
+      <NavigationDrawer
+        ref={ this._setContainer }
+        drawerTitle="Boldr"
+        drawerClassName="boldr-drawer__admin"
+        toolbarClassName="boldr-adminbar"
+        desktopMinWidth={ 900 }
+        onMediaTypeChange={ this._handleMediaTypeChange }
+        defaultMedia={ this.props.ui.defaultMedia }
+        navItems={ navItems(pathname) }
+        drawerType={ NavigationDrawer.DrawerTypes.PERSISTENT_MINI }
+        toolbarActions={ toolbarActionItems }
+      >
+        <Wrapper>
+          {this.props.children}
+        </Wrapper>
+      </NavigationDrawer>
     );
   }
 }

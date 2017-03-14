@@ -9,27 +9,24 @@ type Props = {
   dispatch: Function,
   postId: string,
   data: Object,
-  commentFormClass: ?string
+  commentFormClass: ?string,
 };
 
 @connect()
 class AddComment extends PureComponent {
-
-  handleCommentSubmit = (values) => {
+  handleCommentSubmit = values => {
     const data = {
       content: draftToHtml(values.content),
       raw_content: values.content || null,
     };
     const { postId } = this.props;
     this.props.dispatch(newComment(data, postId));
-  }
+  };
 
   props: Props;
 
   render() {
-    return (
-        <CommentForm onSubmit={ this.handleCommentSubmit } className={ this.props.commentFormClass } />
-    );
+    return <CommentForm onSubmit={ this.handleCommentSubmit } className={ this.props.commentFormClass } />;
   }
 }
 

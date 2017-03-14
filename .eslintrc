@@ -1,5 +1,5 @@
 {
-  "extends": ["boldr", "boldr/react"],
+  "extends": ["boldr", "boldr/react", "boldr/import", "boldr/flowtype", "boldr/jsx-a11y"],
   "env": {
     "browser": true,
     "es6": true,
@@ -7,7 +7,6 @@
     "jest": true,
   },
   "parser": "babel-eslint",
-  "plugins": ["react", "flowtype","import"],
   "settings": {
     "flowtype": {
       "onlyFilesWithFlowAnnotation": true,
@@ -25,8 +24,6 @@
     "react/prefer-stateless-function": 0,
     "import/no-unresolved": 0,
     "no-unused-expressions": 0,
-    "no-undef": 0,
-    "class-methods-use-this": 0,
-    "global-require": 0
+    "camelcase": 0
   }
 }

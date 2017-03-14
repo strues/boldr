@@ -19,22 +19,20 @@ const BASE_ELEMENT = StyleClasses.TAG;
 
 const Tag = (props: Props) => {
   const { tag, className } = props;
-  const classes = classnames(
-    BASE_ELEMENT,
-    className,
-  );
+  const classes = classnames(BASE_ELEMENT, className);
   function transitionTag() {
     props.dispatch(selectTag(tag));
   }
   return (
     <div className={ classes }>
-    { /* $FlowIssue */ }
-    <Link to={ `/blog/tags/${tag.name}` }>
-      <Chip onClick={ transitionTag } label={ tag.name } avatar={
-        <Avatar icon={ <FontIcon>local_offer</FontIcon> } /> }
-      />
-    </Link>
- </div>
+      <Link to={ `/blog/tags/${tag.name}` }>
+        <Chip
+          onClick={ transitionTag }
+          label={ tag.name }
+          avatar={ <Avatar icon={ <FontIcon>local_offer</FontIcon> } /> }
+        />
+      </Link>
+    </div>
   );
 };
 

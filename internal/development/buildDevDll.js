@@ -3,7 +3,7 @@ import { resolve as pathResolve } from 'path';
 import webpack from 'webpack';
 import appRootDir from 'app-root-dir';
 import md5 from 'md5';
-import { log } from '../util';
+import { log } from '../utils';
 import config from '../../config';
 
 function buildDevDlls(bundleName, bundleConfig) {

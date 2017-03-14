@@ -20,19 +20,17 @@ type Props = {
 
 class FileManagerContainer extends Component {
   static fetchData(dispatch) {
-    return Promise.all([
-      dispatch(fetchMedia()),
-    ]);
+    return Promise.all([dispatch(fetchMedia())]);
   }
   componentDidMount() {
     const { dispatch } = this.props;
 
-   // Fetching data for client side rendering
+    // Fetching data for client side rendering
     FileManagerContainer.fetchData(dispatch);
   }
   props: Props;
 
-  onUploadFinish = (signResult) => {
+  onUploadFinish = signResult => {
     const signUrl = signResult.signedUrl;
     const splitUrl = signUrl.split('?');
     const fileUrl = splitUrl[0];
@@ -45,15 +43,15 @@ class FileManagerContainer extends Component {
       url: fileUrl,
     };
     this.props.dispatch(uploadFiles(payload));
-  }
+  };
 
-  handleRemoveMedia = (mediaId) => {
+  handleRemoveMedia = mediaId => {
     this.props.dispatch(deleteMedia(mediaId));
-  }
+  };
 
-  selectTheFile = (file) => {
+  selectTheFile = file => {
     this.props.dispatch(selectFile(file));
-  }
+  };
 
   render() {
     return (

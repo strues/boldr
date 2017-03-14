@@ -22,7 +22,7 @@ type Props = {
   className: string,
   id: ?string,
   feature_image: ?string,
-  title: ?string,
+  title: string,
   slug: string,
   content: ?string,
   background_image: ?string,
@@ -43,10 +43,7 @@ type Props = {
 
 export const PostCard = (props: Props) => {
   const formattedDate = dateFns.format(props.created_at, 'MM/DD/YYYY');
-  const classes = classnames(
-    BASE_ELEMENT,
-    props.className,
-  );
+  const classes = classnames(BASE_ELEMENT, props.className);
   const postTags = props.tags ? props.tags.map(id => props.listTags[id]) : null;
   // Explicitly define post rather than passing additional
   // unnecessary props like listTags
@@ -75,15 +72,15 @@ export const PostCard = (props: Props) => {
     <div className={ classes }>
       <Card>
         <Media>
-          <img src={ props.feature_image } role="presentation" />
+          <img src={ props.feature_image } alt={ `${props.title} feature` } role="presentation" />
           <MediaOverlay>
-           <CardTitle title={ props.title } subtitle={ formattedDate }>
-             <Button className="md-cell--right" icon>star_outline</Button>
-           </CardTitle>
-         </MediaOverlay>
+            <CardTitle title={ props.title } subtitle={ formattedDate }>
+              <Button className="md-cell--right" icon>star_outline</Button>
+            </CardTitle>
+          </MediaOverlay>
         </Media>
         <CardText>
-          { props.excerpt }
+          {props.excerpt}
           <Row>
             <Col xs={ 12 }>
               <Link to={ `/blog/${props.slug}` } className="readmore-link">
@@ -93,7 +90,7 @@ export const PostCard = (props: Props) => {
           </Row>
         </CardText>
         <CardActions>
-        <TagBlock tags={ postTags } />
+          <TagBlock tags={ postTags } />
         </CardActions>
       </Card>
     </div>

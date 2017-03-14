@@ -32,29 +32,26 @@ type Props = {
   social: Object,
 };
 const Author = (props: Props) => {
-  const classes = classnames(
-    BASE_ELEMENT,
-    props.className,
-  );
-  const authorName = <Link to={ `/profiles/${props.username}` }>{ props.username }</Link>;
+  const classes = classnames(BASE_ELEMENT, props.className);
+  const authorName = <Link to={ `/profiles/${props.username}` }>{props.username}</Link>;
   return (
     <div className={ classes }>
-        <AvatarName><Avatar src={ props.avatar_url } role="presentation" /> </AvatarName>
-        <AvatarName><Heading size={ 3 }>{ authorName }</Heading></AvatarName>
-        <BioBlock>{ props.bio }</BioBlock>
-        <Social
-          facebook
-          fburl={ props.social.facebook.url }
-          twitter
-          turl={ props.social.twitter.url }
-          google
-          gurl={ props.social.google.url }
-          github
-          ghurl={ props.social.github.url }
-          linkedin
-          lurl={ props.social.linkedin.url }
-        />
-      </div>
+      <AvatarName><Avatar src={ props.avatar_url } role="presentation" /> </AvatarName>
+      <AvatarName><Heading size={ 3 }>{authorName}</Heading></AvatarName>
+      <BioBlock>{props.bio}</BioBlock>
+      <Social
+        facebook
+        fburl={ props.social.facebook.url }
+        twitter
+        turl={ props.social.twitter.url }
+        google
+        gurl={ props.social.google.url }
+        github
+        ghurl={ props.social.github.url }
+        linkedin
+        lurl={ props.social.linkedin.url }
+      />
+    </div>
   );
 };
 

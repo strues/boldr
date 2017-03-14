@@ -31,34 +31,25 @@ const mapStateToProps = (state, ownProps) => {
 
 @connect(mapStateToProps)
 class SinglePost extends PureComponent {
-
   props: Props;
 
   displaySinglePost = () => {
     const { currentPost, entities, className } = this.props;
     const postAuthor = entities.users[currentPost.user_id];
     const postComments = currentPost.comments.map(c => entities.comments[c]);
-    const classes = classnames(
-      BASE_ELEMENT,
-      className,
-    );
+    const classes = classnames(BASE_ELEMENT, className);
     const postTags = currentPost.tags.map(id => entities.tags[id]);
     return (
       <div className={ classes }>
-      { this.renderPostBg() }
-      <Grid>
-        <Row>
-          <Col sm={ 12 } md={ 8 } lg={ 9 }>
-            <PostContent { ...currentPost } />
-            <PostComments
-              comments={ postComments }
-              postId={ currentPost.id }
-              userEntities={ entities.users }
-            />
-          </Col>
-          {
-            currentPost.tags
-            ? <Col sm={ 12 } md={ 4 } lg={ 3 }>
+        {this.renderPostBg()}
+        <Grid>
+          <Row>
+            <Col sm={ 12 } md={ 8 } lg={ 9 }>
+              <PostContent { ...currentPost } />
+              <PostComments comments={ postComments } postId={ currentPost.id } userEntities={ entities.users } />
+            </Col>
+            {currentPost.tags
+              ? <Col sm={ 12 } md={ 4 } lg={ 3 }>
                 <PostSidebar
                   author={ postAuthor }
                   tags={ postTags }
@@ -66,11 +57,10 @@ class SinglePost extends PureComponent {
                   { ...currentPost }
                 />
               </Col>
-            : null
-          }
-        </Row>
-      </Grid>
-    </div>
+              : null}
+          </Row>
+        </Grid>
+      </div>
     );
   };
   renderPostBg = () => {
@@ -89,20 +79,16 @@ class SinglePost extends PureComponent {
       background-position-y: 0px;
       margin-bottom: 30px;
     `;
-    return (
-      <PostBg><PostTitle title={ currentPost.title } /></PostBg>
-    );
-  }
+    return <PostBg><PostTitle title={ currentPost.title } /></PostBg>;
+  };
   render() {
     const { currentPost } = this.props;
 
     return (
-        <div>
-          <Helmet title={ currentPost.title } />
-          {
-            this.displaySinglePost()
-          }
-        </div>
+      <div>
+        <Helmet title={ currentPost.title } />
+        {this.displaySinglePost()}
+      </div>
     );
   }
 }

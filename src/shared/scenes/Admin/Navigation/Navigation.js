@@ -14,7 +14,8 @@ import NavigationEditor from './components/NavigationEditor';
 import NavigationForm from './components/NavigationForm';
 
 function mapStateToProps(state) {
-  return { mainMenu: state.boldr.menu.main, ui: state.boldr.ui };
+  return { mainMenu: state.boldr.menu.main,
+    ui: state.boldr.ui };
 }
 
 type Props = {
@@ -28,7 +29,10 @@ type Props = {
   showModal: Function,
 };
 
-@connect(mapStateToProps, { updateMenuDetails, addMenuDetail, showModal, hideModal })
+@connect(mapStateToProps, { updateMenuDetails,
+  addMenuDetail,
+  showModal,
+  hideModal })
 class Navigation extends Component {
   constructor() {
     super();
@@ -52,13 +56,13 @@ class Navigation extends Component {
       children: null,
     },
   };
-  onUpdateFormSubmit = (data) => {
+  onUpdateFormSubmit = data => {
     this.props.updateMenuDetails(data);
-  }
+  };
 
-  onFormSubmit = (values) => {
+  onFormSubmit = values => {
     this.props.addMenuDetail(values);
-  }
+  };
   closeModal() {
     this.props.hideModal();
   }
@@ -88,7 +92,7 @@ class Navigation extends Component {
   render() {
     const { mainMenu } = this.props;
     const listItems = mainMenu.details.map((item, i) => {
-      return <ListItem key={ i } primaryText={ item.name } onClick={ () => this.handleItemClick(item) } />;
+      return <ListItem key={ item.id } primaryText={ item.name } onClick={ () => this.handleItemClick(item) } />;
     });
 
     return (
@@ -96,31 +100,24 @@ class Navigation extends Component {
         <Helmet title="Admin: Navigation" />
         <Row>
           <Col xs>
-          <Paper zDepth={ 1 }>
-            <List className="navigation__list">
-              { listItems }
-            </List>
-          </Paper>
-          <Button onClick={ this.openModal } icon>
-            <FontIcon>add</FontIcon>
-          </Button>
+            <Paper zDepth={ 1 }>
+              <List className="navigation__list">
+                {listItems}
+              </List>
+            </Paper>
+            <Button onClick={ this.openModal } icon>
+              <FontIcon>add</FontIcon>
+            </Button>
           </Col>
           <Col xs={ 12 } md={ 4 }>
             <Paper zDepth={ 2 } className="boldr-paperoverride">
-              <NavigationEditor
-                initialValues={ this.state.detail }
-                onFormSubmit={ this.onUpdateFormSubmit }
-              />
+              <NavigationEditor initialValues={ this.state.detail } onFormSubmit={ this.onUpdateFormSubmit } />
             </Paper>
           </Col>
         </Row>
-         <Modal
-           visible={ this.props.ui.modal }
-           title="Add a link"
-           onClose={ this.closeModal }
-         >
-           <NavigationForm onSubmit={ this.onFormSubmit } />
-          </Modal>
+        <Modal visible={ this.props.ui.modal } title="Add a link" onClose={ this.closeModal }>
+          <NavigationForm onSubmit={ this.onFormSubmit } />
+        </Modal>
       </div>
     );
   }

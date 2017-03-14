@@ -15,15 +15,12 @@ type Props = {
 const BASE_ELEMENT = StyleClasses.POST_SIDEBAR_TAGS;
 
 const SidebarTags = (props: Props) => {
-  const classes = classnames(
-    BASE_ELEMENT,
-    props.className,
-  );
+  const classes = classnames(BASE_ELEMENT, props.className);
   return (
-      <div className={ classes }>
-        <Heading size={ 3 }>Related Tags</Heading>
-        <TagBlock tags={ props.tags } />
-      </div>
+    <div className={ classes }>
+      <Heading size={ 3 }>Related Tags</Heading>
+      <TagBlock tags={ props.tags } />
+    </div>
   );
 };
 

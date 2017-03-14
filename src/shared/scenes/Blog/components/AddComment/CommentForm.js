@@ -1,4 +1,5 @@
 /* @flow */
+/* eslint-disable import/no-mutable-exports */
 import React from 'react';
 import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
@@ -14,7 +15,7 @@ type Props = {
   submitting?: boolean,
   fields?: Object,
   pristine?: boolean,
-  className: ?string
+  className: ?string,
 };
 
 const style = {
@@ -22,23 +23,21 @@ const style = {
 };
 const BASE_ELEMENT = StyleClasses.COMMENT_FORM;
 
-let CommentForm = (props: Props) => { // eslint-disable-line
+let CommentForm = (props: Props) => {
+  // eslint-disable-line
   const { handleSubmit, reset, className } = props;
-  const classes = classnames(
-    BASE_ELEMENT,
-    className,
-  );
+  const classes = classnames(BASE_ELEMENT, className);
   return (
     <div className={ classes }>
-    <form className="boldr-form__comment" onSubmit={ handleSubmit }>
-      <Field id="content" name="content" component={ FieldEditor } type="text" label="Your comment" />
+      <form className="boldr-form__comment" onSubmit={ handleSubmit }>
+        <Field id="content" name="content" component={ FieldEditor } type="text" label="Your comment" />
 
-      <div className="form__footer">
-        <Button type="submit" label="Save" style={ style } raised primary />
-        <Button label="Reset" onClick={ reset } style={ style } raised secondary />
-      </div>
-    </form>
-  </div>
+        <div className="form__footer">
+          <Button type="submit" label="Save" style={ style } raised primary />
+          <Button label="Reset" onClick={ reset } style={ style } raised secondary />
+        </div>
+      </form>
+    </div>
   );
 };
 CommentForm = reduxForm({

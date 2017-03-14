@@ -54,8 +54,8 @@ class Favicon extends Component {
         contentClassName="md-grid"
         onSave={ this.handleSubmit }
       >
-      <Row>
-        <form onSubmit={ this.handleSubmit }>
+        <Row>
+          <form onSubmit={ this.handleSubmit }>
             <TextField
               style={ { width: '400px' } }
               id="floatingTitle"
@@ -64,9 +64,9 @@ class Favicon extends Component {
               value={ this.state.value }
               onChange={ this.handleChange }
             />
-      </form>
-    </Row>
-    </ExpansionPanel>
+          </form>
+        </Row>
+      </ExpansionPanel>
     );
   }
 }

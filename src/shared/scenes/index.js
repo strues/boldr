@@ -1,3 +1,4 @@
+/* eslint-disable babel/new-cap */
 import App from '../components/App';
 import About from '../pages/About';
 import Home from '../pages/Home';

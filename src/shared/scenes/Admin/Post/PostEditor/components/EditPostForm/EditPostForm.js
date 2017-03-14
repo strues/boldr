@@ -15,6 +15,7 @@ type Props = {
   pristine?: boolean,
   input?: Object,
   label?: string,
+  initialValues: Object
 };
 const Wrapper = styled.section`
   padding: 1em;
@@ -26,29 +27,23 @@ const Wrapper = styled.section`
 `;
 const EditPostForm = (props: Props) => {
   const { handleSubmit } = props;
-    /**
+  /**
      * wraps the editor component for embedding into redux-form as an input component
      * @param  {object} input
      * @param  {string} label
      * @return {element} BoldrEditor
      */
-  const renderEditor = ({ input, label }) => (<EditorField { ...input } label={ label } />);
+  const renderEditor = ({ input, label }) => <EditorField { ...input } label={ label } />;
 
   return (
-      <Row>
-        <Col xs>
-          <Heading size={ 3 } weight={ 300 }>Editing { props.initialValues.title }</Heading>
-          <form onSubmit={ handleSubmit }>
-            <Wrapper>
+    <Row>
+      <Col xs>
+        <Heading size={ 3 } weight={ 300 }>Editing {props.initialValues.title}</Heading>
+        <form onSubmit={ handleSubmit }>
+          <Wrapper>
             <FormGroup>
-            <Field
-              id="post-title"
-              name="title"
-              type="text"
-              component={ InputField }
-              label="Post Title"
-            />
-          </FormGroup>
+              <Field id="post-title" name="title" type="text" component={ InputField } label="Post Title" />
+            </FormGroup>
             <FormGroup>
               <Field
                 id="featureimg"
@@ -64,30 +59,24 @@ const EditPostForm = (props: Props) => {
             <Field name="content" component={ EditorField } />
           </Wrapper>
           <Wrapper>
-          <FormGroup>
-            <Field
-              name="excerpt"
-              id="post-excerpt"
-              type="text"
-              component={ InputField }
-              label="Excerpt"
+            <FormGroup>
+              <Field name="excerpt" id="post-excerpt" type="text" component={ InputField } label="Excerpt" />
+            </FormGroup>
+            <FormGroup>
+              <Heading size={ 6 }>Post Status:</Heading>
+              <label htmlFor="draft" style={ { marginRight: '10px' } }>
+                <Field id="draft" name="published" component="input" type="radio" value="false" /> Draft
+              </label>
+              <label htmlFor="published">
+                <Field id="published" name="published" component="input" type="radio" value="true" /> Publish
+              </label>
+            </FormGroup>
 
-            />
-          </FormGroup>
-          <FormGroup>
-            <Heading size={ 6 }>Post Status:</Heading>
-            <label style={ { marginRight: '10px' } }>
-              <Field id="draft" name="published" component="input" type="radio" value="false" /> Draft</label>
-            <label>
-              <Field id="published" name="published" component="input" type="radio" value="true" /> Publish
-            </label>
-          </FormGroup>
-
-        <Button raised primary type="submit" label="Save Post" />
-      </Wrapper>
+            <Button raised primary type="submit" label="Save Post" />
+          </Wrapper>
         </form>
-        </Col>
-      </Row>
+      </Col>
+    </Row>
   );
 };
 

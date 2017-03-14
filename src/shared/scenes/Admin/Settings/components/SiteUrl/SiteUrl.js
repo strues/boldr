@@ -55,17 +55,17 @@ class SiteUrl extends Component {
       >
         <Row>
           <form onSubmit={ this.handleSubmit }>
-              <TextField
-                style={ { width: '400px' } }
-                id="floatingTitle"
-                label="Web address"
-                placeholder={ this.state.value }
-                value={ this.state.value }
-                onChange={ this.handleChange }
-              />
-        </form>
+            <TextField
+              style={ { width: '400px' } }
+              id="floatingTitle"
+              label="Web address"
+              placeholder={ this.state.value }
+              value={ this.state.value }
+              onChange={ this.handleChange }
+            />
+          </form>
         </Row>
-    </ExpansionPanel>
+      </ExpansionPanel>
     );
   }
 }

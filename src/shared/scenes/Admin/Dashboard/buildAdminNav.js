@@ -32,7 +32,11 @@ function mapToNavItems(route, parents = []) {
   } = route;
 
   if (divider) {
-    return { divider, key: 'divider', ...props };
+    return {
+      divider,
+      key: 'divider',
+      ...props,
+    };
   } else if (subheader) {
     return {
       primaryText,
@@ -42,11 +46,7 @@ function mapToNavItems(route, parents = []) {
     };
   }
 
-  let resolvedNestedItems,
-    resolvedIcon,
-    resolvedComponent,
-    to,
-    key;
+  let resolvedNestedItems, resolvedIcon, resolvedComponent, to, key;
 
   if (nestedItems) {
     resolvedNestedItems = nestedItems.map(route => mapToNavItems(route, parents.length ? [...parents, path] : [path]));
@@ -92,7 +92,7 @@ const routes = adminRoutes.map(route => mapToNavItems(route));
 
 function isNestedActive(nestedItems, pathname) {
   return nestedItems &&
-  nestedItems.some(({ to, nestedItems }) => to === pathname || isNestedActive(nestedItems, pathname));
+    nestedItems.some(({ to, nestedItems }) => to === pathname || isNestedActive(nestedItems, pathname));
 }
 
 function updateActiveRoutes(route, pathname) {
@@ -124,7 +124,8 @@ function extractRealRoutes(route) {
     return route.nestedItems.map(extractRealRoutes);
   } else if (route.to && route.to !== '/') {
     const { primaryText, to } = route;
-    return { primaryText, to };
+    return { primaryText,
+      to };
   }
 
   return null;

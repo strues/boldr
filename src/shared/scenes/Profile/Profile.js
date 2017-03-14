@@ -60,16 +60,14 @@ class Profile extends Component {
   props: Props;
   // $FlowIssue
   onDrop(files) {
-      // $FlowIssue
+    // $FlowIssue
     this.setState({
       file: files[0],
       showDropzone: false,
     });
     const payload = files[0];
     const isProf = this.state.profImg === true;
-    isProf
-      ? this.props.uploadProfileImg(payload)
-      : this.props.uploadAvatarImg(payload);
+    isProf ? this.props.uploadProfileImg(payload) : this.props.uploadAvatarImg(payload);
   }
 
   onOpenClick() {
@@ -122,19 +120,16 @@ class Profile extends Component {
         accept="image/*"
         maxSize={ 5242880 }
       >
-          <p className="boldr-dropzone__drop-sm">
-            Drop an image here or select one from your computer. <br />
-            It will upload right away.
-          </p>
-        </Dropzone>
+        <p className="boldr-dropzone__drop-sm">
+          Drop an image here or select one from your computer. <br />
+          It will upload right away.
+        </p>
+      </Dropzone>
     );
-  }
+  };
   render() {
     const { profile, className } = this.props;
-    const classes = classnames(
-      BASE_ELEMENT,
-      className,
-    );
+    const classes = classnames(BASE_ELEMENT, className);
     const UserProfileBg = styled.div`
       width: 100%;
       height: 375px;
@@ -161,9 +156,7 @@ class Profile extends Component {
               </Col>
             </Row>
             <Row>
-              {
-                this.state.showDropzone === true ? this.renderDropzone() : null
-              }
+              {this.state.showDropzone === true ? this.renderDropzone() : null}
             </Row>
             <Drawer
               clickableDesktopOverlay={ false }

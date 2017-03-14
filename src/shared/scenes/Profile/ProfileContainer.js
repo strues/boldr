@@ -27,9 +27,7 @@ type Props = {
 
 export class ProfileContainer extends Component {
   static fetchData(dispatch, params) {
-    return Promise.all([
-      dispatch(getProfile(params.username)),
-    ]);
+    return Promise.all([dispatch(getProfile(params.username))]);
   }
   componentDidMount() {
     const { dispatch, params } = this.props;
@@ -38,31 +36,29 @@ export class ProfileContainer extends Component {
   }
   hideDrawer = () => {
     this.props.dispatch(closeDrawer());
-  }
+  };
   showDrawer = () => {
     this.props.dispatch(openDrawer());
-  }
+  };
   closeModal = () => {
     this.props.dispatch(hideModal());
-  }
+  };
   openModal = () => {
     this.props.dispatch(showModal());
-  }
-  uploadAvatarImg = (payload) => {
+  };
+  uploadAvatarImg = payload => {
     this.props.dispatch(uploadAvatarImage(payload));
-  }
-  uploadProfileImg = (payload) => {
+  };
+  uploadProfileImg = payload => {
     this.props.dispatch(uploadProfileImage(payload));
-  }
+  };
   props: Props;
 
   render() {
     const { isFetching, profile, user } = this.props;
 
     if (isFetching) {
-      return (
-        <Loader />
-      );
+      return <Loader />;
     }
     return (
       <BaseTemplate helmetMeta={ <Helmet title={ `${profile.username}'s Profile` } /> }>
@@ -85,8 +81,7 @@ export class ProfileContainer extends Component {
   }
 }
 
-
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     modal: state.boldr.ui.modal,
     drawer: state.boldr.ui.drawer,

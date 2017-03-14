@@ -17,19 +17,14 @@ type Props = {
 
 const Members = (props: Props) => {
   return (
-     <div>
-       <Helmet title="Admin: Members" />
-       <MembersList toggleUser={ props.toggleUser } users={ props.users } />
-       <Modal
-         visible={ props.visible }
-         title="Edit User"
-         onClose={ props.close }
-       >
+    <div>
+      <Helmet title="Admin: Members" />
+      <MembersList toggleUser={ props.toggleUser } users={ props.users } />
+      <Modal visible={ props.visible } title="Edit User" onClose={ props.close }>
         <EditMemberForm onSubmit={ props.handleSubmit } initialValues={ props.initialValues } />
-        </Modal>
-     </div>
+      </Modal>
+    </div>
   );
 };
-
 
 export default Members;
