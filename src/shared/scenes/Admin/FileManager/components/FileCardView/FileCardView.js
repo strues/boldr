@@ -13,25 +13,26 @@ type Props = {
 
 const FileCardView = (props: Props) => {
   return (
-      <Grid fluid>
+    <Grid fluid>
       <Row>
-        {
-          props.files.map((file) =>
+        {props.files.map(file => (
           <Col sm={ 12 } md={ 4 } lg={ 3 } key={ file.id }>
             <File file={ file } removeMedia={ props.removeMedia } selectFile={ props.selectFile } />
-          </Col>)
-         }
-       </Row>
-     </Grid>
+          </Col>
+        ))}
+      </Row>
+    </Grid>
   );
 };
 
 FileCardView.propTypes = {
-  files: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
-    filename: PropTypes.string,
-    url: PropTypes.string.isRequired,
-  }).isRequired).isRequired,
+  files: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      filename: PropTypes.string,
+      url: PropTypes.string.isRequired,
+    }).isRequired,
+  ).isRequired,
   removeMedia: PropTypes.func,
 };
 

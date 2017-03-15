@@ -9,7 +9,9 @@ export default [
     icon: 'dashboard',
     primaryText: 'Dashboard',
   },
-  { key: 'divider', divider: true },
+  { key: 'divider',
+    divider: true,
+  },
   {
     primaryText: 'Posts',
     path: 'admin/posts',

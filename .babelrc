@@ -4,5 +4,5 @@
     ["env", { "targets": { "node": true } }],
     "react"
   ],
-  "plugins": ["transform-decorators-legacy", "dynamic-import-webpack", "transform-object-rest-spread"]
+  "plugins": ["transform-decorators-legacy", "syntax-dynamic-import", "transform-object-rest-spread"]
 }

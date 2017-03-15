@@ -1,8 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`arrayOfMedia should match the normalizr-arrayOfPost-schema 1`] = `
 ArraySchema {
   "schema": EntitySchema {
     "_getId": [Function],
-    "_idAttribute": "id",
+    "_idAttribute": "slug",
     "_key": "posts",
     "_mergeStrategy": [Function],
     "_processStrategy": [Function],
@@ -54,7 +56,7 @@ ArraySchema {
 exports[`post schema should match the normalizr-post-schema 1`] = `
 EntitySchema {
   "_getId": [Function],
-  "_idAttribute": "id",
+  "_idAttribute": "slug",
   "_key": "posts",
   "_mergeStrategy": [Function],
   "_processStrategy": [Function],

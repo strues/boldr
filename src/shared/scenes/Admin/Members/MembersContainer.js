@@ -19,9 +19,7 @@ type Props = {
 
 export class MembersContainer extends Component {
   static fetchData(dispatch) {
-    return Promise.all([
-      dispatch(loadSiteMembers()),
-    ]);
+    return Promise.all([dispatch(loadSiteMembers())]);
   }
 
   constructor(props: Props) {
@@ -65,14 +63,14 @@ export class MembersContainer extends Component {
   }
   render() {
     return (
-         <Members
-           toggleUser={ this.toggleUser }
-           users={ this.props.members.members }
-           visible={ this.props.ui.modal }
-           close={ this.closeModal }
-           handleSubmit={ this.handleSubmit }
-           initialValues={ this.props.members.selected[0] }
-         />
+      <Members
+        toggleUser={ this.toggleUser }
+        users={ this.props.members.members }
+        visible={ this.props.ui.modal }
+        close={ this.closeModal }
+        handleSubmit={ this.handleSubmit }
+        initialValues={ this.props.members.selected[0] }
+      />
     );
   }
 }

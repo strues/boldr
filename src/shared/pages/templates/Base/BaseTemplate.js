@@ -26,10 +26,6 @@ type Props = {
   menu: Object,
   logo: Object,
   auth: Object,
-  helmetMeta?: ReactElement,
-  hero?: ReactElement,
-  children: ReactChildren,
-  footer?: ReactElement
 };
 
 const Wrapper = styled.div`
@@ -63,10 +59,16 @@ const mapStateToProps = (state: Object) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    actions: bindActionCreators({ logout, fetchMenusIfNeeded }, dispatch),
-    navigate: (url) => dispatch(push(url)),
+    actions: bindActionCreators(
+      {
+        logout,
+        fetchMenusIfNeeded,
+      },
+      dispatch,
+    ),
+    navigate: url => dispatch(push(url)),
     dispatch,
   };
 };
@@ -74,54 +76,51 @@ const mapDispatchToProps = (dispatch) => {
 @connect(mapStateToProps, mapDispatchToProps)
 class BaseTemplate extends PureComponent {
   static fetchData(dispatch, params) {
-    return Promise.all([
-      dispatch(fetchMenusIfNeeded()),
-    ]);
+    return Promise.all([dispatch(fetchMenusIfNeeded())]);
   }
   componentDidMount() {
     const { dispatch } = this.props;
 
     BaseTemplate.fetchData(dispatch);
   }
-  handleLogoClick = (e) => {
+  handleLogoClick = e => {
     this.props.navigate('/');
-  }
-  handleDashClick = (e) => {
+  };
+  handleDashClick = e => {
     this.props.navigate('/admin');
-  }
-  handleProfileClick = (e) => {
+  };
+  handleProfileClick = e => {
     this.props.navigate(`/profiles/${this.props.me.username}`);
-  }
-  handleLogoutClick = (e) => {
+  };
+  handleLogoutClick = e => {
     this.props.actions.logout();
-  }
+  };
   props: Props;
   render() {
     return (
       <Wrapper { ...this.props }>
-          { this.props.helmetMeta }
+        {this.props.helmetMeta}
 
+        <MainHeader
+          auth={ this.props.auth }
+          logo={ this.props.logo }
+          me={ this.props.me }
+          menu={ this.props.menu.details }
+          isMobile={ this.props.isMobile }
+          handleProfileClick={ this.handleProfileClick }
+          handleLogoClick={ this.handleLogoClick }
+          handleLogoutClick={ this.handleLogoutClick }
+          handleDashClick={ this.handleDashClick }
+        />
+        {this.props.hero ? this.props.hero : null}
 
-          <MainHeader
-            auth={ this.props.auth }
-            logo={ this.props.logo }
-            me={ this.props.me }
-            menu={ this.props.menu.details }
-            isMobile={ this.props.isMobile }
-            handleProfileClick={ this.handleProfileClick }
-            handleLogoClick= { this.handleLogoClick }
-            handleLogoutClick={ this.handleLogoutClick }
-            handleDashClick={ this.handleDashClick }
-          />
-          { this.props.hero ? this.props.hero : null }
+        <ContentWrapper>
+          {this.props.children}
+        </ContentWrapper>
 
-          <ContentWrapper>
-            { this.props.children }
-          </ContentWrapper>
-
-          <FooterWrapper>
-            { this.props.footer || <Footer /> }
-          </FooterWrapper>
+        <FooterWrapper>
+          {this.props.footer || <Footer />}
+        </FooterWrapper>
       </Wrapper>
     );
   }

@@ -36,13 +36,13 @@ const ActivityIcn = styled.div`
 type Props = {
   created_at: Date,
   owner: Object,
-  type: String,
-  activity_post: ?String,
-  activity_user: ?String,
-  activity_attachment: ?String,
-  activity_menu_detail: ?String,
-  post: ?Post,
-  attachment: ?Object,
+  type: string,
+  activity_post: ?string,
+  activity_user: ?string,
+  activity_attachment: ?string,
+  activity_menu_detail: ?string,
+  post: Post,
+  attachment: Object,
 };
 
 const ActivityItem = (props: Props) => {
@@ -54,41 +54,41 @@ const ActivityItem = (props: Props) => {
   let ActivityIcon;
   if (isPostType) {
     ActivityIcon = (
-      // $FlowIssue
       <Link to={ `/admin/posts/editor/${props.post.slug}` }>
         <Icon kind="new-post" color="#02BCD6" />
-      </Link>);
+      </Link>
+    );
   }
   if (isMemberType) {
     ActivityIcon = <FontIcon style={ { color: '#02BCD6' } }>person_add</FontIcon>;
   }
   if (isAttachmentType) {
-    ActivityIcon = (
-      // $FlowIssue
-      <Link to={ `/admin/filemanager/${props.attachment.id}/editor` }>
-        <FontIcon style={ { color: '#02BCD6' } }>insert_drive_file</FontIcon>
-      </Link>
-    );
+    ActivityIcon =
+      (
+        <Link to={ `/admin/filemanager/${props.attachment.id}/editor` }>
+          <FontIcon style={ { color: '#02BCD6' } }>insert_drive_file</FontIcon>
+        </Link>
+      );
   }
   if (isMenuDetailType) {
     ActivityIcon = <FontIcon style={ { color: '#02BCD6' } }>insert_link</FontIcon>;
   }
   return (
-      <ActivityPanel>
-        <DateArea>
-          <Button icon tooltipLabel={ format(props.created_at, 'MM/DD/YYYY') }>access_time</Button>
-        </DateArea>
-        <User>
-          <Chip
-            label={ props.owner.first_name }
-            avatar={ <Avatar src={ props.owner.avatar_url } role="presentation" /> }
-          />
-        </User>
-        <ActivityItemDetail atype={ props.type } />
-        <ActivityIcn>
-        { ActivityIcon }
-        </ActivityIcn>
-      </ActivityPanel>
+    <ActivityPanel>
+      <DateArea>
+        <Button icon tooltipLabel={ format(props.created_at, 'MM/DD/YYYY') }>access_time</Button>
+      </DateArea>
+      <User>
+        <Chip
+          label={ props.owner.first_name }
+          avatar={ <Avatar src={ props.owner.avatar_url } role="presentation" /> }
+        />
+      </User>
+      <ActivityItemDetail atype={ props.type } />
+      <ActivityIcn>
+        {ActivityIcon}
+      </ActivityIcn>
+    </ActivityPanel>
   );
 };
 

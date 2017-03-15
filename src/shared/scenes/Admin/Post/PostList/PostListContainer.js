@@ -10,7 +10,7 @@ import VisiblePostList from './VisiblePostList';
 type Props = {
   children?: ReactElement,
   posts: Array<Post>,
-  dispatch?: () => void,
+  dispatch: () => void,
   deletePost: Function,
   fetchPostsIfNeeded: Function,
   handleDeleteClick: Function,
@@ -18,9 +18,7 @@ type Props = {
 
 export class PostListContainer extends Component {
   static fetchData(dispatch) {
-    return Promise.all([
-      dispatch(fetchPostsIfNeeded()),
-    ]);
+    return Promise.all([dispatch(fetchPostsIfNeeded())]);
   }
   constructor(props: Props) {
     super(props);
@@ -37,13 +35,11 @@ export class PostListContainer extends Component {
     this.props.dispatch(deletePost(postId));
   }
   render() {
-    return (
-      <VisiblePostList posts={ this.props.posts } handleDeleteClick={ this.handleDeleteClick } />
-    );
+    return <VisiblePostList posts={ this.props.posts } handleDeleteClick={ this.handleDeleteClick } />;
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     posts: getPosts(state),
   };

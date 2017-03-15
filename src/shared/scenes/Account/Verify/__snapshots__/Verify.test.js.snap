@@ -1,1 +1,3 @@
-exports[`test <Verify />, renders the verify account form card 1`] = `<Connect(Verify) />`;
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Verify />, renders the verify account form card 1`] = `<Connect(Verify) />`;

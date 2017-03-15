@@ -1,7 +1,7 @@
 import express from 'express';
 import createWebpackMiddleware from 'webpack-dev-middleware';
 import createWebpackHotMiddleware from 'webpack-hot-middleware';
-import { log } from '../util';
+import { log } from '../utils';
 import ListenerManager from './listenerManager';
 
 class HotClientServer {

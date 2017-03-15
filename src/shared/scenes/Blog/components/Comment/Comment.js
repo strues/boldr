@@ -61,7 +61,8 @@ type Props = {
 };
 const Comment = (props: Props) => {
   function createMarkup() {
-    return { __html: props.comment.content,
+    return {
+      __html: props.comment.content,
     };
   }
   return (
@@ -69,31 +70,28 @@ const Comment = (props: Props) => {
       <Wrapper>
         <CommentSide>
           <Avatar src={ props.commenter.avatar_url } role="presentation" />
-          <Heading size={ 4 } style={ { marginTop: '0px' } }>{ props.commenter.username }</Heading>
+          <Heading size={ 4 } style={ { marginTop: '0px' } }>{props.commenter.username}</Heading>
         </CommentSide>
         <Content>
-          {
-            !props.isAuthenticated ? null :
-            <ReplyButton>
+          {!props.isAuthenticated
+            ? null
+            : <ReplyButton>
               <Button flat secondary label="reply" />
-            </ReplyButton>
-          }
+            </ReplyButton>}
           <CommentBody>
-        <div className="boldr-comment__content" dangerouslySetInnerHTML={ createMarkup() } />
-        </CommentBody>
-        <CommentMeta>
-          <CommentDate>
-          { format(props.comment.created_at, 'HH:mma MMM Do YYYY') }
-          </CommentDate>
-          {
-            !props.canModerate
-            ? null :
-            <CommentModButtons>
-              <Button icon>edit</Button>
-              <Button icon>delete</Button>
-            </CommentModButtons>
-          }
-        </CommentMeta>
+            <div className="boldr-comment__content" dangerouslySetInnerHTML={ createMarkup() } />
+          </CommentBody>
+          <CommentMeta>
+            <CommentDate>
+              {format(props.comment.created_at, 'HH:mma MMM Do YYYY')}
+            </CommentDate>
+            {!props.canModerate
+              ? null
+              : <CommentModButtons>
+                <Button icon>edit</Button>
+                <Button icon>delete</Button>
+              </CommentModButtons>}
+          </CommentMeta>
         </Content>
       </Wrapper>
     </div>

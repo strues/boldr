@@ -1,4 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<PostTitle /> renders snapshot 1`] = `
 <h1
-  className="boldr-post__title" />
+  className="boldr-post__title"
+/>
 `;

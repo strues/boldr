@@ -1,0 +1,19 @@
+debug: true
+pipeline:
+  build:
+    image: strues/alpine-node:7
+    commands:
+      - yarn install
+      - yarn build:dev
+      - yarn test:browser
+  #
+  # publish:
+  #   docker:
+  #     registry: registry.boldr.io
+  #     username: strues
+  #     password: $$PASSWORD
+  #     email: steven@strues.io
+  #     repo: boldr/cms
+  #     tag: $$BRANCH
+  #     file: Dockerfile
+  #     insecure: false

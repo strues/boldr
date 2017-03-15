@@ -1,3 +1,4 @@
+/* eslint-disable import/no-mutable-exports */
 import React from 'react';
 import styled from 'styled-components';
 import { Field, reduxForm, formValueSelector, FieldArray } from 'redux-form';
@@ -35,22 +36,30 @@ const renderMenuDetails = (props: Props) => (
     <DetailsListItem>
       <Button secondary flat onClick={ () => props.fields.push({}) } label="Add Menu Detail" />
     </DetailsListItem>
-    {
-      props.fields.map((items, index) => (
-      <DetailsListItem key={ index }>
+    {props.fields.map(items => (
+      <DetailsListItem key={ items.id }>
         <Button style={ { float: 'right' } } icon onClick={ () => fields.remove(index) }>close</Button>
         <span>Menu Detail #{index + 1}</span>
         <Field id="name" name={ `${items}.name` } type="text" component={ InputField } label="Name" />
         <Field id="href" name={ `${items}.href` } type="text" component={ InputField } label="URL" />
         <Field id="icon" name={ `${items}.icon` } type="text" component={ InputField } label="Icon" />
-      </DetailsListItem>))
-    }
+      </DetailsListItem>
+    ))}
   </DetailsList>
 );
 let NavigationForm = (props: Props) => {
   // eslint-disable-line
   const { handleSubmit, reset, hasDropdownValue } = props;
-  const opts = [{ itemValue: true, label: 'Yes' }, { itemValue: false, label: 'No' }];
+  const opts = [
+    {
+      itemValue: true,
+      label: 'Yes',
+    },
+    {
+      itemValue: false,
+      label: 'No',
+    },
+  ];
   const renderDropSelector = ({ input }) => (
     <div>
       <SelectField
@@ -71,21 +80,18 @@ let NavigationForm = (props: Props) => {
       <Field id="nav-position" name="order" component={ InputField } type="text" label="Display Order" />
       <Field id="nav-link" name="href" component={ InputField } type="text" label="Link" />
       <Field id="nav-icon" name="icon" component={ InputField } type="text" label="Icon" />
-      <label>What type of menu item?</label><br />
-      <label style={ { marginRight: '10px' } }>
+      <label htmlFor="menuType">What type of menu item?</label><br />
+      <label htmlFor="single" style={ { marginRight: '10px' } }>
         <Field id="draft" name="has_dropdown" component="input" type="radio" value="false" /> Single Link
       </label>
-      <label>
+      <label htmlFor="dropdown">
         <Field id="published" name="has_dropdown" component="input" type="radio" value="true" /> Dropdown Menu
       </label>
-      {
-        hasDropdownValue === 'true'
-        &&
-         <div>
-           <Field id="nav-key" name="key" component={ InputField } type="text" label="Key" />
+      {hasDropdownValue === 'true' &&
+        <div>
+          <Field id="nav-key" name="key" component={ InputField } type="text" label="Key" />
           <FieldArray id="nav-items" name="items" component={ renderMenuDetails } />
-        </div>
-      }
+        </div>}
 
       <div className="form__footer">
         <Button type="submit" label="Save" style={ style } raised primary />

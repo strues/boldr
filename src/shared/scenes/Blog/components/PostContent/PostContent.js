@@ -12,18 +12,22 @@ type Props = {
   content: String,
   feature_image: ?String,
   created_at: Date,
-}
+};
 
 const PostContent = (props: Props) => {
   function createMarkup() {
-    return { __html: props.content,
+    return {
+      __html: props.content,
     };
   }
   return (
     <article>
-      <Paper zDepth={ 2 } style={ { padding: '1em', marginBottom: '50px' } } className="boldr-paperoverride">
+      <Paper
+        zDepth={ 2 } style={ { padding: '1em',
+          marginBottom: '50px' } } className="boldr-paperoverride"
+      >
 
-       <PostDate created={ props.created_at } />
+        <PostDate created={ props.created_at } />
         <Divider />
         <div className="boldr-post__content" dangerouslySetInnerHTML={ createMarkup() } />
       </Paper>

@@ -18,26 +18,14 @@ type Props = {
 const FileEditorForm = (props: Props) => {
   const { handleSubmit, reset } = props;
   return (
-      <form onSubmit={ handleSubmit } className="boldr-form__fileeditor">
-        <Field
-          id="name"
-          name="file_name"
-          type="text"
-          label="File name"
-          component={ InputField }
-        />
-        <Field
-          id="description"
-          name="file_description"
-          type="text"
-          label="Description"
-          component={ InputField }
-        />
-        <Row>
-          <Button type="submit" label="Save" style={ style } raised primary />
-          <Button label="Reset" onClick={ reset } style={ style } flat secondary />
-        </Row>
-      </form>
+    <form onSubmit={ handleSubmit } className="boldr-form__fileeditor">
+      <Field id="name" name="file_name" type="text" label="File name" component={ InputField } />
+      <Field id="description" name="file_description" type="text" label="Description" component={ InputField } />
+      <Row>
+        <Button type="submit" label="Save" style={ style } raised primary />
+        <Button label="Reset" onClick={ reset } style={ style } flat secondary />
+      </Row>
+    </form>
   );
 };
 

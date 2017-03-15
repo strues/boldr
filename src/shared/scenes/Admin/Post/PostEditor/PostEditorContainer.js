@@ -6,7 +6,6 @@ import { updatePost, fetchPostFromSlug } from '../../../../state/modules/blog/po
 import EditPostForm from './components/EditPostForm';
 import PostEditor from './PostEditor';
 
-
 export type Props = {
   dispatch: Function,
   fetchPostFromSlug: Function,
@@ -15,19 +14,17 @@ export type Props = {
   currentPost: Object,
   isFetching: Boolean,
   ui: Object,
-  updatePost: Function
+  updatePost: Function,
 };
 
 class PostEditorContainer extends Component {
   static fetchData(dispatch, params) {
-    return Promise.all([
-      dispatch(fetchPostFromSlug(params.slug)),
-    ]);
+    return Promise.all([dispatch(fetchPostFromSlug(params.slug))]);
   }
   componentDidMount() {
     const { dispatch, params } = this.props;
 
-   // Fetching data for client side rendering
+    // Fetching data for client side rendering
     PostEditorContainer.fetchData(dispatch, params);
   }
 
@@ -35,18 +32,11 @@ class PostEditorContainer extends Component {
 
   render() {
     if (this.props.isFetching) {
-      return (
-        <Loader />
-      );
+      return <Loader />;
     }
-    return (
-        <PostEditor
-          currentPost={ this.props.currentPost }
-        />
-    );
+    return <PostEditor currentPost={ this.props.currentPost } />;
   }
 }
-
 
 const mapStateToProps = (state, ownProps) => {
   return {

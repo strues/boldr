@@ -30,7 +30,7 @@ class NewPostContainer extends Component {
       published: values.published,
       raw_content: values.content,
       content: draftToHtml(values.content),
-      seo: values.seo,
+      meta: values.meta,
     };
     // console.log(postData)
     this.props.createPost(postData);

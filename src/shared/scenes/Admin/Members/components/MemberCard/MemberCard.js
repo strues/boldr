@@ -12,27 +12,27 @@ const propTypes = {
   handleToggle: PropTypes.func,
 };
 
-const MemberCard = (props) => {
+const MemberCard = props => {
   function handleToggle(user) {
     props.handleToggle(props.user.id);
   }
   return (
     <Card>
-       <CardTitle
-         title={ props.user.username }
-         subtitle={ props.user.roles[0].name }
-         avatar={ <Avatar src={ props.user.avatar_url } role="presentation" /> }
-       />
+      <CardTitle
+        title={ props.user.username }
+        subtitle={ props.user.roles[0].name }
+        avatar={ <Avatar src={ props.user.avatar_url } role="presentation" /> }
+      />
 
-       <CardText>
-         { props.user.id }
+      <CardText>
+        {props.user.id}
 
-        { props.user.email }
+        {props.user.email}
       </CardText>
-     <CardActions>
-         <Button raised primary label="Edit User" onClick={ handleToggle } />
-     </CardActions>
-   </Card>
+      <CardActions>
+        <Button raised primary label="Edit User" onClick={ handleToggle } />
+      </CardActions>
+    </Card>
   );
 };
 

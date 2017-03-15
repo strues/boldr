@@ -8,9 +8,12 @@ import TagBlock from './TagBlock';
 import FeaturedPost from './FeaturedPost';
 import PostComments from './PostComments';
 import PostTitle from './PostTitle';
+import SidebarTags from './SidebarTags';
+import PostDate from './PostDate';
 
 export {
   Author,
+  PostDate,
   PostCard,
   PostTitle,
   PostContent,
@@ -20,4 +23,5 @@ export {
   Tag,
   TagBlock,
   FeaturedPost,
+  SidebarTags,
 };

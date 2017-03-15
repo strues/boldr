@@ -1,62 +1,66 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<Author /> renders snapshot 1`] = `
 <div
-  className="boldr-post__sidebar-author">
-  <Heading
-    size={3}>
-    Author Details
-  </Heading>
-  <styled.ul>
-    <styled.li>
-      <Avatar
-        role="presentation"
-        src="abcd"
-        suffixes={
-          Array [
-            "red",
-            "pink",
-            "purple",
-            "deep-purple",
-            "indigo",
-            "blue",
-            "light-blue",
-            "cyan",
-            "teal",
-            "green",
-            "light-green",
-            "lime",
-            "yellow",
-            "amber",
-            "orange",
-            "deep-orange",
-            "brown",
-            "grey",
-            "blue-grey",
-          ]
-        } />
-
-    </styled.li>
-    <styled.li>
+  className="boldrui-sidebar-author"
+>
+  <styled.div>
+    <Avatar
+      role="presentation"
+      src="abcd"
+      suffixes={
+        Array [
+          "red",
+          "pink",
+          "purple",
+          "deep-purple",
+          "indigo",
+          "blue",
+          "light-blue",
+          "cyan",
+          "teal",
+          "green",
+          "light-green",
+          "lime",
+          "yellow",
+          "amber",
+          "orange",
+          "deep-orange",
+          "brown",
+          "grey",
+          "blue-grey",
+        ]
+      }
+    />
+     
+  </styled.div>
+  <styled.div>
+    <Heading
+      size={3}
+    >
       <Link
         onlyActiveOnIndex={false}
         style={Object {}}
-        to="/profiles/hey">
+        to="/profiles/hey"
+      >
         hey
       </Link>
-    </styled.li>
-    <styled.li>
-      bio bio
-    </styled.li>
-    <Social
-      facebook={true}
-      fburl="asf"
-      ghurl="asf"
-      github={true}
-      google={true}
-      gurl="asf"
-      linkedin={true}
-      lurl="asf"
-      turl="asf"
-      twitter={true} />
-  </styled.ul>
+    </Heading>
+  </styled.div>
+  <styled.div>
+    bio bio
+  </styled.div>
+  <Social
+    facebook={true}
+    fburl="asf"
+    ghurl="asf"
+    github={true}
+    google={true}
+    gurl="asf"
+    linkedin={true}
+    lurl="asf"
+    turl="asf"
+    twitter={true}
+  />
 </div>
 `;

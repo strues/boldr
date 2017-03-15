@@ -1,7 +1,7 @@
 import { resolve as pathResolve } from 'path';
 import chokidar from 'chokidar';
 import appRootDir from 'app-root-dir';
-import { log } from '../util';
+import { log } from '../utils';
 
 let HotDevelopment = require('./hotDevelopment').default;
 let devServer = new HotDevelopment();

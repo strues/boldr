@@ -2,7 +2,7 @@
 import { resolve as pathResolve } from 'path';
 import webpack from 'webpack';
 import appRootDir from 'app-root-dir';
-import { log } from '../util';
+import { log } from '../utils';
 import webpackConfigFactory from '../webpack/configFactory';
 import config from '../../config';
 import HotNodeServer from './hotNodeServer';

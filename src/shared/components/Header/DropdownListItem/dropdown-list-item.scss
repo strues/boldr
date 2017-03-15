@@ -1,5 +1,12 @@
 .boldr-menu__dropdown-listitem {
   position: relative;
+  @media (min-width: 992px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    vertical-align: middle;
+    height: 35px;
+  }
 }
 
 @media (min-width: 992px) {
@@ -10,12 +17,11 @@
 }
 
 .boldr-menu__dropdown-listitem > a {
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  display: block;
+  display: flex;
   width: 100%;
-  font-size: 14px;
-  height: 44px;
-  line-height: 44px;
   text-decoration: none;
   white-space: nowrap;
   color: rgba(0, 0, 0, 0.64);
@@ -55,11 +61,7 @@
     transition: filter 0.1s, opacity 0.1s, -webkit-filter 0.1s;
   }
 }
-@media (min-width: 992px) {
-  .boldr-menu__dropdown-listitem > a .dropdown-link__text {
-    margin-top: -5px;
-  }
-}
+
 .boldr-menu__dropdown-listitem {
   &:hover {
     .dropdown-link__text {

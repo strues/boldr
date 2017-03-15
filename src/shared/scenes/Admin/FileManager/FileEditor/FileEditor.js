@@ -33,7 +33,10 @@ export class FileEditor extends Component {
             <Image imgSrc={ this.props.currentFile.url } width="400px" />
           </Col>
           <Col xs={ 12 } md={ 7 }>
-            <Paper zDepth={ 2 } style={ { padding: '1em', background: '#fff' } }>
+            <Paper
+              zDepth={ 2 } style={ { padding: '1em',
+                background: '#fff' } }
+            >
               <FileEditorForm onSubmit={ this.handleSubmit } />
             </Paper>
           </Col>
@@ -43,7 +46,7 @@ export class FileEditor extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     currentFile: state.attachments.currentFile,
   };

@@ -69,7 +69,7 @@ class NewPostForm extends Component {
   _handleTabChange(activeTabIndex) {
     this.setState({ activeTabIndex });
   }
-  _handleSwitch = (checked) => {
+  _handleSwitch = checked => {
     this.setState({ checked });
   };
   render() {
@@ -78,55 +78,55 @@ class NewPostForm extends Component {
 
     return (
       <NewPost>
-          <Heading size={ 3 } weight={ 300 }>Create a new post</Heading>
-          <form onSubmit={ handleSubmit }>
-            <Wrapper>
-              <FormGroup>
-                <Field
-                  id="post-title"
-                  name="title"
-                  type="text"
-                  component={ InputField }
-                  label="Post Title"
-                  tabIndex={ 0 }
-                />
-              </FormGroup>
-              <FormGroup>
-                <Heading size={ 5 }>Tag your post</Heading>
-                <FieldArray
-                  name="tags"
-                  type="text"
-                  id="post-tags"
-                  component={ RenderTags }
-                  label="Tags"
-                  tabIndex={ 1 }
-                />
-              </FormGroup>
-            </Wrapper>
-            <TabsContainer
-              onTabChange={ this._handleTabChange }
-              activeTabIndex={ activeTabIndex }
-              panelClassName="md-grid"
-              colored
-            >
-              <Tabs tabId="tab">
-                <Tab label="Write">
-                  <Wrapper>
-                    <Field component={ FieldEditor } label="Content" name="content" tabIndex={ 2 } />
-                  </Wrapper>
+        <Heading size={ 3 } weight={ 300 }>Create a new post</Heading>
+        <form onSubmit={ handleSubmit }>
+          <Wrapper>
+            <FormGroup>
+              <Field
+                id="post-title"
+                name="title"
+                type="text"
+                component={ InputField }
+                label="Post Title"
+                tabIndex={ 0 }
+              />
+            </FormGroup>
+            <FormGroup>
+              <Heading size={ 5 }>Tag your post</Heading>
+              <FieldArray
+                name="tags"
+                type="text"
+                id="post-tags"
+                component={ RenderTags }
+                label="Tags"
+                tabIndex={ -1 }
+              />
+            </FormGroup>
+          </Wrapper>
+          <TabsContainer
+            onTabChange={ this._handleTabChange }
+            activeTabIndex={ activeTabIndex }
+            panelClassName="md-grid"
+            colored
+          >
+            <Tabs tabId="tab">
+              <Tab label="Write">
+                <Wrapper>
+                  <Field component={ FieldEditor } label="Content" name="content" tabIndex={ -2 } />
+                </Wrapper>
 
-                </Tab>
-          <Tab label="Publish">
-            <CSSTransitionGroup
-              component="div"
-              className="md-cell md-cell--12"
-              transitionName="md-cross-fade"
-              transitionEnterTimeout={ 300 }
-              transitionLeave={ false }
-            >
-              <FormGroup>
-                <Heading size={ 5 } top="2rem" bottom="0px">Upload a feature image</Heading>
-                {/* <Row>
+              </Tab>
+              <Tab label="Publish">
+                <CSSTransitionGroup
+                  component="div"
+                  className="md-cell md-cell--12"
+                  transitionName="md-cross-fade"
+                  transitionEnterTimeout={ 300 }
+                  transitionLeave={ false }
+                >
+                  <FormGroup>
+                    <Heading size={ 5 } top="2rem" bottom="0px">Upload a feature image</Heading>
+                    {/* <Row>
                 <Switch
                   id="imgSwitch"
                   name="imgSwitch"
@@ -141,47 +141,51 @@ class NewPostForm extends Component {
                   help
                 </Button>
               </Row> */}
-                <Dropzone
-                  className="boldr-dropzone"
-                  ref={ (node) => { this.dropzone = node; } }
-                  multiple={ false }
-                  onDrop={ this.onDrop }
-                  accept="image/*"
-                  maxSize={ 5242880 }
-                >
-                  <p className="boldr-dropzone__drop-sm">Drop an image here or select one from your computer. <br />
-                  It will upload right away.</p>
-                </Dropzone>
-              </FormGroup>
-            <Wrapper>
-              <FormGroup>
-                <Field
-                  name="excerpt"
-                  id="post-excerpt"
-                  type="text"
-                  component={ InputField }
-                  label="Excerpt"
-                  tabIndex={ 3 }
+                    <Dropzone
+                      className="boldr-dropzone"
+                      ref={ node => {
+                        this.dropzone = node;
+                      } }
+                      multiple={ false }
+                      onDrop={ this.onDrop }
+                      accept="image/*"
+                      maxSize={ 5242880 }
+                    >
+                      <p className="boldr-dropzone__drop-sm">
+                        Drop an image here or select one from your computer. <br />
+                        It will upload right away.
+                      </p>
+                    </Dropzone>
+                  </FormGroup>
+                  <Wrapper>
+                    <FormGroup>
+                      <Field
+                        name="excerpt"
+                        id="post-excerpt"
+                        type="text"
+                        component={ InputField }
+                        label="Excerpt"
+                        tabIndex={ -3 }
+                      />
+                    </FormGroup>
 
-                />
-              </FormGroup>
+                    <FormGroup>
+                      <Heading size={ 5 }>Status:</Heading>
+                      <label style={ { marginRight: '10px' } } htmlFor="draft">
+                        <Field id="draft" name="published" component="input" type="radio" value="false" /> Draft
+                      </label>
+                      <label htmlFor="published">
+                        <Field id="published" name="published" component="input" type="radio" value="true" /> Publish
+                      </label>
+                    </FormGroup>
 
-              <FormGroup>
-                <Heading size={ 5 }>Status:</Heading>
-                <label style={ { marginRight: '10px' } }>
-                  <Field id="draft" name="published" component="input" type="radio" value="false" /> Draft</label>
-                <label>
-                  <Field id="published" name="published" component="input" type="radio" value="true" /> Publish
-                </label>
-              </FormGroup>
-
-              <Button raised primary type="submit" label="Save Post" />
-            </Wrapper>
-          </CSSTransitionGroup>
-        </Tab>
-      </Tabs>
-    </TabsContainer>
-          </form>
+                    <Button raised primary type="submit" label="Save Post" />
+                  </Wrapper>
+                </CSSTransitionGroup>
+              </Tab>
+            </Tabs>
+          </TabsContainer>
+        </form>
       </NewPost>
     );
   }

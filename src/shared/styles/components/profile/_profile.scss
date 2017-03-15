@@ -1,0 +1,11 @@
+
+.#{$boldr-ns}profile {
+
+  .profile__content {
+    margin-top: -100px;
+    padding: 1em;
+    background: $white;
+    width: 100%;
+    @include md-box-shadow(2);
+  }
+}

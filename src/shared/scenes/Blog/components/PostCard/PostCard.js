@@ -3,6 +3,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import dateFns from 'date-fns';
+import classnames from 'classnames';
 import Button from 'react-md/lib/Buttons/Button';
 import Divider from 'react-md/lib/Dividers';
 import Card from 'react-md/lib/Cards/Card';
@@ -12,34 +13,37 @@ import CardText from 'react-md/lib/Cards/CardText';
 import Media, { MediaOverlay } from 'react-md/lib/Media';
 import { selectPost } from '../../../../state/modules/blog/posts/actions';
 import { Col, Row } from '../../../../components/Layout';
+import { StyleClasses } from '../../../../theme/theme';
 import type { Tag } from '../../../../types/models';
 import TagBlock from '../TagBlock';
 
+const BASE_ELEMENT = StyleClasses.POST_CARD;
 type Props = {
-  id?: String,
-  feature_image?: String,
-  title?: String,
-  slug: String,
-  content?: String,
-  background_image?: String,
-  excerpt?: String,
-  created_at: String,
-  updated_at?: String,
-  status: ?String,
-  author: String,
+  className: string,
+  id: ?string,
+  feature_image: ?string,
+  title: string,
+  slug: string,
+  content: ?string,
+  background_image: ?string,
+  excerpt: ?string,
+  created_at: string,
+  updated_at: ?string,
+  status: ?string,
+  author: string,
   comments: ?Array<Object>,
-  seo?: Object,
-  tags?: Array<Tag>,
+  seo: ?Object,
+  tags: ?Array<Tag>,
   attachments: ?Object,
   meta: ?Object,
-  user_id: ?String,
+  user_id: ?string,
   dispatch: Function,
   listTags: Object,
-}
+};
 
 export const PostCard = (props: Props) => {
   const formattedDate = dateFns.format(props.created_at, 'MM/DD/YYYY');
-
+  const classes = classnames(BASE_ELEMENT, props.className);
   const postTags = props.tags ? props.tags.map(id => props.listTags[id]) : null;
   // Explicitly define post rather than passing additional
   // unnecessary props like listTags
@@ -65,29 +69,28 @@ export const PostCard = (props: Props) => {
   }
 
   return (
-    <div className="boldr-post__card-wrapper">
+    <div className={ classes }>
       <Card>
         <Media>
-          <img src={ props.feature_image } role="presentation" />
+          <img src={ props.feature_image } alt={ `${props.title} feature` } role="presentation" />
           <MediaOverlay>
-           <CardTitle title={ props.title } subtitle={ formattedDate }>
-             <Button className="md-cell--right" icon>star_outline</Button>
-           </CardTitle>
-         </MediaOverlay>
+            <CardTitle title={ props.title } subtitle={ formattedDate }>
+              <Button className="md-cell--right" icon>star_outline</Button>
+            </CardTitle>
+          </MediaOverlay>
         </Media>
         <CardText>
-          { props.excerpt }
+          {props.excerpt}
           <Row>
             <Col xs={ 12 }>
-              { /* $FlowIssue */}
-              <Link to={ `/blog/${props.slug}` } style={ { float: 'right', marginTop: '15px', marginRight: '15px' } }>
+              <Link to={ `/blog/${props.slug}` } className="readmore-link">
                 <Button raised primary label="Read More" onClick={ transitionPost } />
               </Link>
             </Col>
           </Row>
         </CardText>
         <CardActions>
-        <TagBlock tags={ postTags } />
+          <TagBlock tags={ postTags } />
         </CardActions>
       </Card>
     </div>

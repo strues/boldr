@@ -18,8 +18,11 @@ html {
 }
 
 #app {
-  height: 100vh;
   background-color: $body-background;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  box-sizing: border-box;
 }
 
 body {

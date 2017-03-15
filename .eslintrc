@@ -1,5 +1,5 @@
 {
-  "extends": ["boldr", "boldr/react"],
+  "extends": ["boldr", "boldr/react", "boldr/import", "boldr/flowtype", "boldr/jsx-a11y"],
   "env": {
     "browser": true,
     "es6": true,
@@ -7,7 +7,6 @@
     "jest": true,
   },
   "parser": "babel-eslint",
-  "plugins": ["react", "flowtype","import"],
   "settings": {
     "flowtype": {
       "onlyFilesWithFlowAnnotation": true,
@@ -21,17 +20,10 @@
   "rules": {
     "id-match": 0,
     "no-duplicate-imports": 0,
+    "object-curly-newline": 0,
     "react/prefer-stateless-function": 0,
     "import/no-unresolved": 0,
     "no-unused-expressions": 0,
-    "no-undef": 0,
-    "global-require": 0,
-    "comma-dangle": [2, {
-      "arrays": "always-multiline",
-      "objects": "always-multiline",
-      "imports": "always-multiline",
-      "exports": "always-multiline",
-      "functions": "always-multiline",
-    }],
+    "camelcase": 0
   }
 }

@@ -10,7 +10,7 @@ const DrawerWrapper = styled.div`
   height: 100%;
 `;
 class OwnProfile extends PureComponent {
-  handleFormSubmit = (values) => {
+  handleFormSubmit = values => {
     const userData = {
       id: this.props.profile.id,
       first_name: values.first_name,
@@ -30,7 +30,7 @@ class OwnProfile extends PureComponent {
       },
     };
     this.props.dispatch(editProfile(userData));
-  }
+  };
   render() {
     const { profile } = this.props;
     const initialProfileData = {

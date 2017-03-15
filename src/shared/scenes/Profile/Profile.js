@@ -1,18 +1,20 @@
 /* @flow */
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Paper from 'react-md/lib/Papers';
 import Drawer from 'react-md/lib/Drawers';
 import Button from 'react-md/lib/Buttons/Button';
 import Toolbar from 'react-md/lib/Toolbars';
 import Dropzone from 'react-dropzone';
+import classnames from 'classnames';
+import { StyleClasses } from '../../theme/theme';
 import { Grid, Col, Row, Heading } from '../../components';
 import ProfileContent from './components/ProfileContent';
 import OwnProfile from './components/OwnProfile';
 
 type Props = {
+  className: ?string,
   profile: Object,
-  email: String,
+  email: string,
   drawer: Boolean,
   closeDrawer: Function,
   uploadProfileImg: Function,
@@ -25,8 +27,11 @@ type Props = {
 
 type State = {
   me: boolean,
+  showDropzone: boolean,
+  profImg: boolean,
+  files: Array<Object>,
 };
-
+const BASE_ELEMENT = StyleClasses.PROFILE;
 class Profile extends Component {
   constructor() {
     super();
@@ -53,20 +58,20 @@ class Profile extends Component {
   }
 
   props: Props;
-
+  // $FlowIssue
   onDrop(files) {
+    // $FlowIssue
     this.setState({
       file: files[0],
       showDropzone: false,
     });
     const payload = files[0];
     const isProf = this.state.profImg === true;
-    isProf
-      ? this.props.uploadProfileImg(payload)
-      : this.props.uploadAvatarImg(payload);
+    isProf ? this.props.uploadProfileImg(payload) : this.props.uploadAvatarImg(payload);
   }
 
   onOpenClick() {
+    // $FlowIssue
     this.dropzone.open();
   }
 
@@ -115,16 +120,16 @@ class Profile extends Component {
         accept="image/*"
         maxSize={ 5242880 }
       >
-          <p className="boldr-dropzone__drop-sm">
-            Drop an image here or select one from your computer. <br />
-            It will upload right away.
-          </p>
-        </Dropzone>
+        <p className="boldr-dropzone__drop-sm">
+          Drop an image here or select one from your computer. <br />
+          It will upload right away.
+        </p>
+      </Dropzone>
     );
-  }
+  };
   render() {
-    const { profile } = this.props;
-
+    const { profile, className } = this.props;
+    const classes = classnames(BASE_ELEMENT, className);
     const UserProfileBg = styled.div`
       width: 100%;
       height: 375px;
@@ -135,10 +140,10 @@ class Profile extends Component {
     const header = <Toolbar nav={ close } actions={ null } className="md-divider-border md-divider-border--bottom" />;
 
     return (
-      <div className="boldr-profile">
+      <div className={ classes }>
         <UserProfileBg />
         <Grid>
-          <Paper zDepth={ 2 } style={ { marginTop: '-100px', padding: '1em', background: '#fff' } }>
+          <div className="profile__content">
             <Row>
               <Col sm={ 12 }>
                 <ProfileContent
@@ -151,9 +156,7 @@ class Profile extends Component {
               </Col>
             </Row>
             <Row>
-              {
-                this.state.showDropzone === true ? this.renderDropzone() : null
-              }
+              {this.state.showDropzone === true ? this.renderDropzone() : null}
             </Row>
             <Drawer
               clickableDesktopOverlay={ false }
@@ -167,7 +170,7 @@ class Profile extends Component {
             >
               <OwnProfile profile={ profile } />
             </Drawer>
-          </Paper>
+          </div>
         </Grid>
 
       </div>

@@ -1,15 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<Settings /> renders snapshot 1`] = `
 <div
-  className="boldr-settings">
+  className="boldr-settings"
+>
   <HelmetWrapper
-    title="Admin: Settings" />
+    title="Admin: Settings"
+  />
   <ExpansionList
     component="ul"
     style={
       Object {
         "padding": 16,
       }
-    }>
+    }
+  >
     <Connect(SiteName) />
     <Connect(SiteUrl) />
     <Connect(Logo) />

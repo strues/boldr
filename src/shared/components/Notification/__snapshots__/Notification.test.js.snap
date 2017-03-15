@@ -1,3 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
 exports[`<Notification /> +++ renders snapshot 1`] = `
 <div
   className="boldr-notification"
@@ -27,17 +29,22 @@ exports[`<Notification /> +++ renders snapshot 1`] = `
       "width": "100%",
       "zIndex": "99999",
     }
-  }>
+  }
+>
   <div
-    className="boldr-notification__icon" />
+    className="boldr-notification__icon"
+  />
   <div
-    className="boldr-notification__content">
+    className="boldr-notification__content"
+  >
     <span
-      className="boldr-notification__message">
+      className="boldr-notification__message"
+    >
       There was a problem uploading.
     </span>
   </div>
   <div
-    className="boldr-notification__close" />
+    className="boldr-notification__close"
+  />
 </div>
 `;

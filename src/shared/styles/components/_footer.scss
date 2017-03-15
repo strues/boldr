@@ -8,7 +8,7 @@
   background-color: #1d2025;
   color: $snow;
 }
-.boldr-footer {
+.#{$boldr-ns}footer {
   position: relative;
   right: 0;
   bottom: 0;

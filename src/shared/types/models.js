@@ -8,101 +8,101 @@ export type Stats = {
 };
 
 export type Post = {
-  id?: String,
-  feature_image?: String,
-  title: String,
-  slug: String,
-  content: String,
-  background_image?: String,
-  excerpt?: String,
-  created_at: String,
-  updated_at?: String,
+  id?: string,
+  feature_image?: string,
+  title: string,
+  slug: string,
+  content: string,
+  background_image?: string,
+  excerpt?: string,
+  created_at: string,
+  updated_at?: string,
   published: ?Boolean,
   author: ?User,
   tags?: Array<Tag>,
   attachments: ?Object,
   meta: ?Object,
-  user_id: ?String,
+  user_id: ?string,
 };
 
 export type PostImage = {
-  created_at: String,
-  file_description: ?String,
-  file_name: ?String,
-  file_type: String,
-  id: String,
-  original_name: String,
-  updated_at: String,
-  url: String,
-  user_id: String
+  created_at: string,
+  file_description: ?string,
+  file_name: ?string,
+  file_type: string,
+  id: string,
+  original_name: string,
+  updated_at: string,
+  url: string,
+  user_id: string
 };
 
 export type Tag = {
   id: Number,
-  uuid: String,
-  name: String,
-  description: ?String,
+  uuid: string,
+  name: string,
+  description: ?string,
 };
 
 export type Page = {
-  id: String,
-  name: String,
-  url: String,
+  id: string,
+  name: string,
+  url: string,
   layout: ?Object,
-  status: String,
+  status: string,
   meta: ?Object,
   restricted: Boolean,
   data: ?Object
 }
 
 export type Block = {
-  id: String,
-  name: String,
-  label: String,
+  id: string,
+  name: string,
+  label: string,
   content: ?Object
 }
 
 export type Setting = {
   id: Number,
-  key: String,
-  value: String,
-  description: String
+  key: string,
+  value: string,
+  description: string
 };
 
 export type User = {
-  id: String,
-  email: String,
-  first_name: String,
-  last_name: String,
-  username: String,
-  avatar_url: ?String,
-  location: ?String,
-  bio: ?String,
-  website: ?String,
-  profile_image: ?String,
-  birthday: ?String,
+  id: string,
+  email: string,
+  first_name: string,
+  last_name: string,
+  username: string,
+  avatar_url: ?string,
+  location: ?string,
+  bio: ?string,
+  website: ?string,
+  profile_image: ?string,
+  birthday: ?string,
   social: ?UserSocial,
   verified: Boolean
 };
 
 export type Facebook = {
-  url: String,
+  url: string,
 };
 
 export type Google = {
-  url: String,
+  url: string,
 };
 
 export type Twitter = {
-  url: String,
+  url: string,
 };
 
 export type Github = {
-  url: String,
+  url: string,
 };
 
 export type LinkedIn = {
-  url: String,
+  url: string,
 };
 
 export type UserSocial = {
@@ -116,7 +116,7 @@ export type UserSocial = {
 export type UI = {
   drawer: boolean,
   isMobile: boolean,
-  layout: String,
+  layout: string,
   loaded: boolean,
   modal: boolean,
   navbar: boolean,
@@ -124,9 +124,9 @@ export type UI = {
 
 export type Menu = {
   id: Number,
-  uuid: String,
-  name: String,
-  safe_name: String,
+  uuid: string,
+  name: string,
+  safe_name: string,
   attributes: ?Object,
   restricted: ?Boolean,
   details: Array<MenuDetails>
@@ -134,14 +134,14 @@ export type Menu = {
 
 export type MenuDetails = {
   id: Number,
-  uuid: String,
-  name: String,
-  safe_name: String,
-  css_classname: String,
+  uuid: string,
+  name: string,
+  safe_name: string,
+  css_classname: string,
   has_dropdown: Boolean,
   order: Number,
-  href: String,
-  mobile_href: String,
-  icon: String,
+  href: string,
+  mobile_href: string,
+  icon: string,
   children: Array<Object>
 };

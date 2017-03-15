@@ -41,7 +41,10 @@ class FileManager extends Component {
   constructor(props: Props) {
     super(props);
 
-    (this: any).state = { activeTabIndex: 0, tabTwoChildren: null, collapsed: true, files: [] };
+    (this: any).state = { activeTabIndex: 0,
+      tabTwoChildren: null,
+      collapsed: true,
+      files: [] };
     (this: any)._handleTabChange = this._handleTabChange.bind(this);
     (this: any)._toggleCollapse = this._toggleCollapse.bind(this);
     (this: any).onDrop = this.onDrop.bind(this);
@@ -76,60 +79,64 @@ class FileManager extends Component {
     }
     const { attachments, handleRemoveMedia, onUploadFinish, ui } = this.props;
     return (
-    <div>
-      <Helmet title="Admin: File Manager" />
-      <Toolbar
-        titleStyle={ { color: '#fff' } }
-        style={ { backgroundColor: '#22262d' } }
-        title="File Manager"
-        nav={ null }
-        actions={ <Button onClick={ this._toggleCollapse } label="Upload File" raised primary /> }
-      />
-      <Collapse collapsed={ this.state.collapsed }>
-        <Dropzone
-          className="boldr-dropzone boldr-dropzone__panel"
-          ref={ (node) => { (this: any).dropzone = node; } }
-          multiple={ false }
-          onDrop={ this.onDrop }
-          accept="image/*"
-          maxSize={ 5242880 }
+      <div>
+        <Helmet title="Admin: File Manager" />
+        <Toolbar
+          titleStyle={ { color: '#fff' } }
+          style={ { backgroundColor: '#22262d' } }
+          title="File Manager"
+          nav={ null }
+          actions={ <Button onClick={ this._toggleCollapse } label="Upload File" raised primary /> }
+        />
+        <Collapse collapsed={ this.state.collapsed }>
+          <Dropzone
+            className="boldr-dropzone boldr-dropzone__panel"
+            ref={ node => {
+              (this: any).dropzone = node;
+            } }
+            multiple={ false }
+            onDrop={ this.onDrop }
+            accept="image/*"
+            maxSize={ 5242880 }
+          >
+            <p className="boldr-dropzone__drop">
+              Drop an image here or select one from your computer. <br />
+              It will upload right away.
+            </p>
+          </Dropzone>
+        </Collapse>
+        <TabsContainer
+          onTabChange={ this._handleTabChange }
+          activeTabIndex={ activeTabIndex }
+          panelClassName="md-grid"
+          colored
         >
-          <p className="boldr-dropzone__drop">Drop an image here or select one from your computer. <br />
-          It will upload right away.</p>
-        </Dropzone>
-      </Collapse>
-      <TabsContainer
-        onTabChange={ this._handleTabChange }
-        activeTabIndex={ activeTabIndex }
-        panelClassName="md-grid"
-        colored
-      >
-        <Tabs tabId="tab">
-          <Tab label="Card View">
-            <FileCardView
-              files={ attachments.files }
-              removeMedia={ handleRemoveMedia }
-              selectFile={ this.props.selectFile }
-            />
-          </Tab>
-          <Tab label="List View">
-            <CSSTransitionGroup
-              component="div"
-              className="md-cell md-cell--12"
-              transitionName="md-cross-fade"
-              transitionEnterTimeout={ 300 }
-              transitionLeave={ false }
-            >
-              <FileListView
+          <Tabs tabId="tab">
+            <Tab label="Card View">
+              <FileCardView
                 files={ attachments.files }
                 removeMedia={ handleRemoveMedia }
                 selectFile={ this.props.selectFile }
               />
-            </CSSTransitionGroup>
-          </Tab>
-        </Tabs>
-      </TabsContainer>
-    </div>
+            </Tab>
+            <Tab label="List View">
+              <CSSTransitionGroup
+                component="div"
+                className="md-cell md-cell--12"
+                transitionName="md-cross-fade"
+                transitionEnterTimeout={ 300 }
+                transitionLeave={ false }
+              >
+                <FileListView
+                  files={ attachments.files }
+                  removeMedia={ handleRemoveMedia }
+                  selectFile={ this.props.selectFile }
+                />
+              </CSSTransitionGroup>
+            </Tab>
+          </Tabs>
+        </TabsContainer>
+      </div>
     );
   }
 }

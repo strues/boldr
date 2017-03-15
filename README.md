@@ -7,6 +7,8 @@
 Boldr is a modern content management framework. Think of Boldr as the solid foundation for building your next great web application. Unlike other CMS platforms, Boldr is entirely JavaScript. Boldr features Universal / Isomorphic rendering for improved performance and Search Engine Optimization.
 
 
+> Big release coming soon with a CLI, generators, and more modularity!
+
 **Table of Contents**
 - [Boldr](#boldr)
 - [Current Features](#current-features)
