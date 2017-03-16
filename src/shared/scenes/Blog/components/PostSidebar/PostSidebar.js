@@ -12,8 +12,8 @@ type Props = {
   className: ?string,
   authorClassName: ?string,
   tagsClassName: ?string,
-  tags: Array<Tag>,
-  author: User,
+  postTags: Array<Tag>,
+  postAuthor: User,
 };
 const BASE_ELEMENT = StyleClasses.POST_SIDEBAR;
 const PostSidebar = (props: Props) => {
@@ -23,8 +23,8 @@ const PostSidebar = (props: Props) => {
   );
   return (
     <aside className={ classes }>
-      <Author className={ props.authorClassName } { ...props.author } />
-      <SidebarTags tags={ props.tags } className={ props.tagsClassName } />
+      <Author className={ props.authorClassName } { ...props.postAuthor } />
+      <SidebarTags tags={ props.postTags } className={ props.tagsClassName } />
     </aside>
   );
 };

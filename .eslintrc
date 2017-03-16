@@ -24,6 +24,8 @@
     "react/prefer-stateless-function": 0,
     "import/no-unresolved": 0,
     "no-unused-expressions": 0,
-    "camelcase": 0
+    "camelcase": 0,
+    "jsx-a11y/no-marquee": 0,
+    "babel/new-cap": 0
   }
 }

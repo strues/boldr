@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PostCard /> renders snapshot 1`] = `
+<div
+  className="boldrui-post-card"
+>
+  <Card
+    expanderIconChildren="keyboard_arrow_down"
+    expanderIconClassName="material-icons"
+    expanderTooltipPosition="left"
+  >
+    <Media
+      aspectRatio="16-9"
+      component="section"
+      forceAspect={true}
+    >
+      <img
+        alt="Test Post feature"
+        role="presentation"
+      />
+      <MediaOverlay
+        component="div"
+      >
+        <CardTitle
+          subtitle="Invalid Date"
+          title="Test Post"
+        >
+          <ButtonTooltipedInked
+            className="md-cell--right"
+            icon={true}
+            inkTransitionEnterTimeout={450}
+            inkTransitionLeaveTimeout={300}
+            inkTransitionOverlap={150}
+          >
+            star_outline
+          </ButtonTooltipedInked>
+        </CardTitle>
+      </MediaOverlay>
+    </Media>
+    <CardText
+      component="section"
+    >
+      <Row
+        componentClass="div"
+      >
+        <Col
+          componentClass="div"
+          xs={12}
+        >
+          <Link
+            className="readmore-link"
+            onlyActiveOnIndex={false}
+            style={Object {}}
+            to="/blog/undefined"
+          >
+            <ButtonTooltipedInked
+              inkTransitionEnterTimeout={450}
+              inkTransitionLeaveTimeout={300}
+              inkTransitionOverlap={150}
+              label="Read More"
+              onClick={[Function]}
+              primary={true}
+              raised={true}
+            />
+          </Link>
+        </Col>
+      </Row>
+    </CardText>
+    <CardActions>
+      <TagBlock
+        tags={null}
+      />
+    </CardActions>
+  </Card>
+</div>
+`;
