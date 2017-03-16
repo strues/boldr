@@ -42,7 +42,8 @@ if (token) {
 const renderApp = () => {
   const { pathname, search, hash } = window.location;
   const location = `${pathname}${search}${hash}`;
-  match({ routes, location }, () => {
+  match({ routes,
+    location }, () => {
     render(
       <ReactHotLoader>
         <AppRoot store={ store }>
@@ -60,12 +61,7 @@ const renderApp = () => {
 };
 
 if (process.env.NODE_ENV !== 'production') {
-  window.React = React; // enable debugger
-
-  if (!domNode || !domNode.firstChild || !domNode.firstChild.attributes ||
-    !domNode.firstChild.attributes['data-react-checksum']) {
-    console.error('Make sure that your initial render does not contain any client-side code.');
-  }
+  window.React = React;
 }
 
 // This registers our service worker for asset caching and offline support.
