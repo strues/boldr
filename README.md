@@ -144,13 +144,13 @@ View an **early** demo at <https://staging.boldr.io>
 [coverage-link]: https://codeclimate.com/github/strues/boldr/coverage
 [coverage-img]: https://codeclimate.com/github/strues/boldr/badges/coverage.svg
 
-[blogImg]: docs/assets/blog.png
-[editProfileImg]: docs/assets/editProfile.png
-[blogSingle]: docs/assets/blogSingle.png
-[dashboardImg]: docs/assets/dashboard.png
-[adminPostListImg]: docs/assets/adminPostList.png
-[editPostImg]: docs/assets/editPost.png
-[postEditorImg]: docs/assets/postEditor.png
-[profileImg]: docs/assets/profile.png
-[settingsImg]: docs/assets/settings.png
-[tagsImg]: docs/assets/tags.png
+[blogImg]: /docs/assets/blog.png
+[editProfileImg]: /docs/assets/editProfile.png
+[blogSingle]: /docs/assets/blogSingle.png
+[dashboardImg]: /docs/assets/dashboard.png
+[adminPostListImg]: /docs/assets/adminPostList.png
+[editPostImg]: /docs/assets/editPost.png
+[postEditorImg]: /docs/assets/postEditor.png
+[profileImg]: /docs/assets/profile.png
+[settingsImg]: /docs/assets/settings.png
+[tagsImg]: /docs/assets/tags.png
