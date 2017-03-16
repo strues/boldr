@@ -14,7 +14,7 @@
     "<rootDir>/shared/types/"
   ],
   "transform": {
-    "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+      "^.+\\.js$": "<rootDir>/internal/jest/transform.js"
   },
   "testRegex": ".*.test\\.js",
   "setupTestFrameworkScriptFile": "<rootDir>/internal/jest/setup.js",
