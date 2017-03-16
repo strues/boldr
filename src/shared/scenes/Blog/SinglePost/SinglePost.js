@@ -1,5 +1,5 @@
 // @flow
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
@@ -30,15 +30,18 @@ const mapStateToProps = (state, ownProps) => {
 };
 
 @connect(mapStateToProps)
-class SinglePost extends PureComponent {
+class SinglePost extends Component {
   props: Props;
 
   displaySinglePost = () => {
     const { currentPost, entities, className } = this.props;
-    const postAuthor = entities.users[currentPost.user_id];
+    const { author } = currentPost;
+    const postAuthor = entities.users[author];
     const postComments = currentPost.comments.map(c => entities.comments[c]);
+
     const classes = classnames(BASE_ELEMENT, className);
     const postTags = currentPost.tags.map(id => entities.tags[id]);
+    console.log(postTags);
     return (
       <div className={ classes }>
         {this.renderPostBg()}
@@ -51,9 +54,9 @@ class SinglePost extends PureComponent {
             {currentPost.tags
               ? <Col sm={ 12 } md={ 4 } lg={ 3 }>
                 <PostSidebar
-                  author={ postAuthor }
-                  tags={ postTags }
-                  className={ props.sidebarClassName }
+                  postAuthor={ entities.users[author] }
+                  postTags={ postTags }
+                  className={ this.props.sidebarClassName }
                   { ...currentPost }
                 />
               </Col>
