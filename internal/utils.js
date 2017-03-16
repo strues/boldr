@@ -58,5 +58,6 @@ export function log(options: NotificationOptions) {
 }
 
 export function exec(command: string) {
-  execSync(command, { stdio: 'inherit', cwd: appRootDir.get() });
+  execSync(command, { stdio: 'inherit',
+    cwd: appRootDir.get() });
 }

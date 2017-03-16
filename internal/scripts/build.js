@@ -3,7 +3,7 @@
 import { resolve as pathResolve } from 'path';
 import webpack from 'webpack';
 import appRootDir from 'app-root-dir';
-import { exec } from '../util';
+import { exec } from '../utils';
 import webpackConfigFactory from '../webpack/configFactory';
 import config from '../../config';
 
