@@ -1,3 +1,4 @@
+/* eslint-disable no-confusing-arrow */
 import superagent from 'superagent';
 import config from '../../../../config';
 import { getToken } from '../authentication/token';

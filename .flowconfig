@@ -1,10 +1,14 @@
 [ignore]
-.*node_modules/fbjs.*
-<PROJECT_ROOT>/.*/node_modules/fbjs/.*
-<PROJECT_ROOT>/.*/node_modules/flow-remove-types/.*
-<PROJECT_ROOT>/.*/node_modules/flow-coverage-report/.*
+
+.*/node_modules/fbjs.*
+.*/node_modules/react-swipeable-views/.*
+.*/node_modules/draft-js/.*
+.*/node_modules/stylelint/.*
+.*/node_modules/flow-remove-types/.*
+.*/node_modules/flow-coverage-report/.*
 .*/db/.*
 .*/docs/.*
+.*/dist/.*
 .*/public/.*
 .*/.idea/.*
 .*/.happypack/.*
@@ -12,10 +16,11 @@
 .*/boldrCMS/.*
 
 [include]
+src/shared/types
 
 [libs]
 flow-typed/npm
-internal/flow/typeExtensions/
+internal/flow/typeExtensions
 
 [options]
 emoji=true

@@ -15,10 +15,6 @@ export default function clientMiddleware(client) {
         next({ ...rest,
           type: REQUEST });
 
-        // const { auth } = getState();
-        //
-        // client.setJwtToken(auth.token || null);
-
         const actionPromise = promise(client, dispatch);
         actionPromise
           .then(result => next({ ...rest,
@@ -27,7 +23,7 @@ export default function clientMiddleware(client) {
               error,
               type: FAILURE }))
           .catch(error => {
-            console.error('REDUX MW ERROR:', error);
+            console.error('BOLDR-CORE REDUX MW:', error);
             next({ ...rest,
               error,
               type: FAILURE });

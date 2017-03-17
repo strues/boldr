@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import Button from 'react-md/lib/Buttons';
 import FontIcon from 'react-md/lib/FontIcons';
 import format from 'date-fns/format';
+
 import { Heading } from '../../../../components';
 
 const Wrapper = styled.section`

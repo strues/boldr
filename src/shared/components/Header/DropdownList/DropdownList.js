@@ -1,30 +1,31 @@
+/* @flow */
 import React, { PropTypes } from 'react';
 import classNames from 'classnames/bind';
 import DropdownListItem from '../DropdownListItem';
 import styles from './dropdown-list.scss';
 
+type Props = {
+  data: Array<Object>,
+  parentClass: string,
+  closeDropdowns: () => void,
+};
+
 const cx = classNames.bind(styles);
 
-const DropdownList = ({ data, parentClass, closeDropdowns }) =>
+const DropdownList = (props: Props) =>
   <div className={ cx('boldr-menu__dropdown-list') }>
     <ul role="menubar" aria-hidden="false">
       {
-          data.map(item =>
+        props.data.map(item =>
           <DropdownListItem
             key={ item.id }
             item={ item }
             parentClass={ null }
-            closeDropdowns={ closeDropdowns }
+            closeDropdowns={ props.closeDropdowns }
           />,
         )
       }
     </ul>
   </div>;
-
-DropdownList.propTypes = {
-  data: PropTypes.array,
-  parentClass: PropTypes.string,
-  closeDropdowns: PropTypes.func,
-};
 
 export default DropdownList;

@@ -14,8 +14,10 @@ import NavigationEditor from './components/NavigationEditor';
 import NavigationForm from './components/NavigationForm';
 
 function mapStateToProps(state) {
-  return { mainMenu: state.boldr.menu.main,
-    ui: state.boldr.ui };
+  return {
+    mainMenu: state.boldr.menu.main,
+    ui: state.boldr.ui,
+  };
 }
 
 type Props = {
@@ -29,10 +31,12 @@ type Props = {
   showModal: Function,
 };
 
-@connect(mapStateToProps, { updateMenuDetails,
+@connect(mapStateToProps, {
+  updateMenuDetails,
   addMenuDetail,
   showModal,
-  hideModal })
+  hideModal,
+})
 class Navigation extends Component {
   constructor() {
     super();

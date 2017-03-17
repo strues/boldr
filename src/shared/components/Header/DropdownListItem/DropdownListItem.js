@@ -9,20 +9,17 @@ class DropdownListItem extends Component {
   static propTypes = {
     item: PropTypes.object,
     closeDropdowns: PropTypes.func,
-  }
+  };
 
   render() {
     const { item, closeDropdowns } = this.props;
 
     return (
-      <li
-        className={ cx('boldr-menu__dropdown-listitem') }
-        role="menuitem"
-      >
+      <li className={ cx('boldr-menu__dropdown-listitem') } role="menuitem">
         <a className="dropdown-link" href={ item.href } onClick={ closeDropdowns }>
-        <FontIcon className={ cx('dropdown-link__icon') } role="presentation" alt="" >{ item.icon }</FontIcon>
+          <FontIcon className={ cx('dropdown-link__icon') } role="presentation" alt="">{item.icon}</FontIcon>
           <span className={ cx('dropdown-link__text') }>
-            { item.name }
+            {item.name}
           </span>
         </a>
       </li>

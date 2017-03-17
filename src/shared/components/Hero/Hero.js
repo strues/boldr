@@ -24,11 +24,11 @@ const Hero = (props: Props) => {
     background-size: cover;
   `;
   return (
-  <div className="boldr-hero">
-    <BoldrHero>
-    { props.children }
-     </BoldrHero>
-  </div>
+    <div className="boldr-hero">
+      <BoldrHero>
+        {props.children}
+      </BoldrHero>
+    </div>
   );
 };
 

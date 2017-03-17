@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react';
 
-const Heading = (props) => {
+const Heading = props => {
   const tagName = `h${props.size}`;
   let className = `boldr-heading boldr-heading__${props.size}`;
   if (props.classname) {
@@ -15,7 +15,10 @@ const Heading = (props) => {
     fontWeight: props.fweight,
     textDecoration: props.textDeco,
   };
-  return React.createElement(tagName, { className, style }, props.children);
+  return React.createElement(tagName, {
+    className,
+    style,
+  }, props.children);
 };
 
 export default Heading;

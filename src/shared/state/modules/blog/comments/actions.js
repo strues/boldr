@@ -7,13 +7,14 @@ import * as notif from '../../../../core/constants';
 import { notificationSend } from '../../notifications/notifications';
 import * as t from '../../actionTypes';
 import { comment as commentSchema } from './schema';
+
 /**
   * NEW COMMENT ACTIONS
   * -------------------------
   * @exports newComment
   *****************************************************************/
 
-export function newComment(data, postId) {
+export function newComment(data: Object, postId: string) {
   return (dispatch: Function) => {
     dispatch(beginNewComment());
     return api.doNewPostComment(data, postId)

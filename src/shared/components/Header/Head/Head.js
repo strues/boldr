@@ -31,7 +31,7 @@ const Head = ({
       </button>
       <div className={ cx('boldr-mainheader__brand') }>
         <a href="/" rel="home" className={ cx('boldr-mainheader__logo') } onClick={ closeHeaderDropdown }>
-          <img src="https://boldr.io/boldr.png" className={ cx('boldr-mainheader__logo') } />
+          <img src="https://boldr.io/boldr.png" alt="logo" className={ cx('boldr-mainheader__logo') } />
         </a>
       </div>
     </div>

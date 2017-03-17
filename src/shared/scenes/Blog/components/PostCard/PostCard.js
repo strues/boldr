@@ -11,6 +11,7 @@ import CardTitle from 'react-md/lib/Cards/CardTitle';
 import CardActions from 'react-md/lib/Cards/CardActions';
 import CardText from 'react-md/lib/Cards/CardText';
 import Media, { MediaOverlay } from 'react-md/lib/Media';
+
 import { selectPost } from '../../../../state/modules/blog/posts/actions';
 import { Col, Row } from '../../../../components/Layout';
 import { StyleClasses } from '../../../../theme/theme';
