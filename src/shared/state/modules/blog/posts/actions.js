@@ -82,7 +82,8 @@ export const receivePosts = (normalizedPosts: Object) => {
 };
 
 export const receivePostsFailed = (err: String) => ({
-  type: t.FETCH_POSTS_FAILURE, error: err,
+  type: t.FETCH_POSTS_FAILURE,
+  error: err,
 });
 
 export function selectPost(post: Object) {
@@ -106,7 +107,8 @@ export function selectPost(post: Object) {
 export function createPost(data: Post) {
   return (dispatch: Function) => {
     dispatch(beginCreatePost());
-    return api.createPost(data)
+    return api
+      .createPost(data)
       .then(response => {
         const camelizedJson = camelizeKeys(response.body);
         const normalizedData = normalize(response.body, postSchema);
@@ -131,7 +133,7 @@ const createPostSuccess = (normalizedData: Object) => {
   };
 };
 
-const errorCreatingPost = (err) => {
+const errorCreatingPost = err => {
   return {
     type: t.CREATE_POST_FAILURE,
     error: err,
@@ -149,7 +151,8 @@ export function deletePost(id: String) {
     dispatch({
       type: t.DELETE_POST_REQUEST,
     });
-    return api.delPostById(id)
+    return api
+      .delPostById(id)
       .then(response => {
         if (response.status !== 204) {
           dispatch(deletePostFail(response));
@@ -165,7 +168,7 @@ export function deletePost(id: String) {
   };
 }
 
-const deletePostFail = (err) => ({
+const deletePostFail = err => ({
   type: t.DELETE_POST_FAILURE,
   error: err,
 });
@@ -180,33 +183,37 @@ export function updatePost(postData: Post) {
   return (dispatch: Function) => {
     console.log('action', postData);
     dispatch(updatePostDetails(postData));
-    return api.putPostId(postData)
+    return api
+      .putPostId(postData)
       .then(response => {
         dispatch(updatePostSuccess(response));
-        dispatch(notificationSend({
-          message: 'Updated article.',
-          kind: 'info',
-          dismissAfter: 3000,
-        }));
+        dispatch(
+          notificationSend({
+            message: 'Updated article.',
+            kind: 'info',
+            dismissAfter: 3000,
+          }),
+        );
       })
-      .catch(
-        err => {
-          dispatch(errorUpdatingPost(err.message));
-          dispatch(notificationSend({
+      .catch(err => {
+        dispatch(errorUpdatingPost(err.message));
+        dispatch(
+          notificationSend({
             message: 'There was a problem updating the article.',
             kind: 'error',
             dismissAfter: 3000,
-          }));
-        });
+          }),
+        );
+      });
   };
 }
 const updatePostDetails = () => {
   return { type: t.UPDATE_POST_REQUEST };
 };
-const updatePostSuccess = (response) => {
+const updatePostSuccess = response => {
   return { type: t.UPDATE_POST_SUCCESS };
 };
-const errorUpdatingPost = (err) => {
+const errorUpdatingPost = err => {
   return {
     type: t.UPDATE_POST_FAILURE,
     error: err,
@@ -219,7 +226,7 @@ const errorUpdatingPost = (err) => {
   * @exports fetchPostFromSlug
   *****************************************************************/
 
-  /**
+/**
    * @function fetchPostsIfNeeded
    * @description Function that determines whether or not posts need to be
    * fetched from the api. Dispatches either the fetchPosts Function
@@ -251,7 +258,8 @@ function shouldFetchPost(state) {
 export function fetchPostFromSlug(slug: String) {
   return (dispatch: Function) => {
     dispatch(requestPostFromSlug());
-    return api.getPostBySlug(slug)
+    return api
+      .getPostBySlug(slug)
       .then(response => {
         if (response.status !== 200) {
           dispatch(receivePostFromSlugFailed());
@@ -269,13 +277,14 @@ const requestPostFromSlug = () => {
   return { type: t.GET_POST_REQUEST };
 };
 
-const receivePostFromSlug = (data) => {
+const receivePostFromSlug = data => {
   return {
     type: t.GET_POST_SUCCESS,
     payload: data,
   };
 };
 
-const receivePostFromSlugFailed = (err) => ({
-  type: t.GET_POST_FAILURE, error: err,
+const receivePostFromSlugFailed = err => ({
+  type: t.GET_POST_FAILURE,
+  error: err,
 });

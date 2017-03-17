@@ -3,13 +3,13 @@
 <PROJECT_ROOT>/.*/node_modules/fbjs/.*
 <PROJECT_ROOT>/.*/node_modules/flow-remove-types/.*
 <PROJECT_ROOT>/.*/node_modules/flow-coverage-report/.*
-<PROJECT_ROOT>/.*/internal/.*
-<PROJECT_ROOT>/.*/public/.*
-<PROJECT_ROOT>/.*/docs/.*
-<PROJECT_ROOT>/.happypack/.*
-<PROJECT_ROOT>/.idea/.*
-<PROJECT_ROOT>/boldrCMS/.*
-<PROJECT_ROOT>/coverage/.*
+.*/db/.*
+.*/docs/.*
+.*/public/.*
+.*/.idea/.*
+.*/.happypack/.*
+.*/coverage/.*
+.*/boldrCMS/.*
 
 [include]
 
@@ -18,7 +18,8 @@ flow-typed/npm
 internal/flow/typeExtensions/
 
 [options]
-module.system=haste
+emoji=true
+module.system=node
 
 esproposal.class_static_fields=enable
 esproposal.class_instance_fields=ignore

@@ -36,7 +36,8 @@ export function fetchSettingsIfNeeded() {
 export function loadBoldrSettings() {
   return dispatch => {
     dispatch(loadSettings());
-    return api.getAllSettings()
+    return api
+      .getAllSettings()
       .then(response => {
         const camelizedJson = camelizeKeys(response.body);
         const settingData = normalize(response.body, arrayOfSetting);
@@ -75,7 +76,7 @@ function doneLoadSettings(settingData) {
   };
 }
 
-const failLoadSettings = (error) => ({
+const failLoadSettings = error => ({
   type: t.FETCH_SETTINGS_FAILURE,
   error,
 });
@@ -89,24 +90,29 @@ const failLoadSettings = (error) => ({
 export function updateBoldrSettings(payload) {
   return dispatch => {
     dispatch(beginUpdateSettings());
-    return api.doUpdateSettings(payload)
+    return api
+      .doUpdateSettings(payload)
       .then(response => {
         dispatch(doneUpdateSettings(response));
         dispatch(loadSettings());
-        dispatch(notificationSend({
-          message: 'Updated your settings.',
-          kind: 'info',
-          dismissAfter: 3000,
-        }));
+        dispatch(
+          notificationSend({
+            message: 'Updated your settings.',
+            kind: 'info',
+            dismissAfter: 3000,
+          }),
+        );
         dispatch(push('/admin'));
       })
       .catch(err => {
         dispatch(failUpdateSettings(err));
-        dispatch(notificationSend({
-          message: `We ran into a problem with your set up ${err}`,
-          kind: 'error',
-          dismissAfter: 3000,
-        }));
+        dispatch(
+          notificationSend({
+            message: `We ran into a problem with your set up ${err}`,
+            kind: 'error',
+            dismissAfter: 3000,
+          }),
+        );
       });
   };
 }
@@ -114,12 +120,12 @@ const beginUpdateSettings = () => ({
   type: t.UPDATE_SETTINGS_REQUEST,
 });
 
-const doneUpdateSettings = (response) => ({
+const doneUpdateSettings = response => ({
   type: t.UPDATE_SETTINGS_SUCCESS,
   payload: response.body,
 });
 
-const failUpdateSettings = (err) => ({
+const failUpdateSettings = err => ({
   type: t.UPDATE_SETTINGS_FAILURE,
   error: err,
 });

@@ -75,7 +75,6 @@ const currentPost = (state = {}, action) => {
  * @param  {Object} action      The action object
  */
 
-
 export default combineReducers({
   all,
   ids,
@@ -83,8 +82,7 @@ export default combineReducers({
   currentPost,
 });
 
-
-export const getPublishedPosts = (state, filter) => {
+export const getPublishedPosts = (state: Object, filter: string): Function => {
   const allPosts = getPosts(state);
   switch (filter) {
     case 'all':
@@ -98,7 +96,7 @@ export const getPublishedPosts = (state, filter) => {
   }
 };
 
-export const getFeaturedPosts = (state, filter) => {
+export const getFeaturedPosts = (state: Object, filter: string): Function => {
   const allPosts = getPosts(state);
   switch (filter) {
     case 'all':

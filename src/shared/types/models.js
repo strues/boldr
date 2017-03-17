@@ -17,7 +17,7 @@ export type Post = {
   excerpt?: string,
   created_at: string,
   updated_at?: string,
-  published: ?Boolean,
+  published: ?boolean,
   author: ?User,
   tags?: Array<Tag>,
   attachments: ?Object,
@@ -34,7 +34,7 @@ export type PostImage = {
   original_name: string,
   updated_at: string,
   url: string,
-  user_id: string
+  user_id: string,
 };
 
 export type Tag = {
@@ -51,22 +51,22 @@ export type Page = {
   layout: ?Object,
   status: string,
   meta: ?Object,
-  restricted: Boolean,
-  data: ?Object
-}
+  restricted: boolean,
+  data: ?Object,
+};
 
 export type Block = {
   id: string,
   name: string,
   label: string,
-  content: ?Object
-}
+  content: ?Object,
+};
 
 export type Setting = {
   id: Number,
   key: string,
   value: string,
-  description: string
+  description: string,
 };
 
 export type User = {
@@ -82,7 +82,7 @@ export type User = {
   profile_image: ?string,
   birthday: ?string,
   social: ?UserSocial,
-  verified: Boolean
+  verified: boolean,
 };
 
 export type Facebook = {
@@ -128,8 +128,8 @@ export type Menu = {
   name: string,
   safe_name: string,
   attributes: ?Object,
-  restricted: ?Boolean,
-  details: Array<MenuDetails>
+  restricted: ?boolean,
+  details: Array<MenuDetails>,
 };
 
 export type MenuDetails = {
@@ -138,10 +138,10 @@ export type MenuDetails = {
   name: string,
   safe_name: string,
   css_classname: string,
-  has_dropdown: Boolean,
+  has_dropdown: boolean,
   order: Number,
   href: string,
   mobile_href: string,
   icon: string,
-  children: Array<Object>
+  children: Array<Object>,
 };

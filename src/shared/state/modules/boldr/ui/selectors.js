@@ -5,14 +5,8 @@ import { selectBoldr } from '../selectors';
   *
   *****************************************************************/
 
-export const selectUi = (state) => state.boldr.ui;
+export const selectUi = state => state.boldr.ui;
 
-export const makeSelectUi = () => createSelector(
-  selectBoldr,
-  (boldrState) => boldrState.ui
-);
+export const makeSelectUi = () => createSelector(selectBoldr, boldrState => boldrState.ui);
 
-export const makeSelectMobile = () => createSelector(
-  selectUi,
-  (uiState) => uiState.isMobile
-);
+export const makeSelectMobile = () => createSelector(selectUi, uiState => uiState.isMobile);

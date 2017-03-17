@@ -31,7 +31,6 @@ const ids = (state = [], action) => {
   }
 };
 
-
 const isFetching = (state = false, action) => {
   switch (action.type) {
     case t.FETCH_SETTINGS_REQUEST:
@@ -43,7 +42,6 @@ const isFetching = (state = false, action) => {
       return state;
   }
 };
-
 
 export default combineReducers({
   all,

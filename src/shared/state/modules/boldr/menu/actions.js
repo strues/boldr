@@ -26,7 +26,8 @@ export function fetchMenusIfNeeded() {
 export function fetchMenus() {
   return dispatch => {
     dispatch(beginFetchMenus());
-    return api.getMainNav()
+    return api
+      .getMainNav()
       .then(response => {
         const menuData = response.body;
         return dispatch(fetchMenusSuccess(menuData));
@@ -77,16 +78,16 @@ function fetchMenusSuccess(menuData) {
 export function updateMenuDetails(data) {
   return dispatch => {
     dispatch(beginUpdateMenuDetails());
-    return api.doUpdateMenuDetails(data)
+    return api
+      .doUpdateMenuDetails(data)
       .then(response => {
         dispatch(updateMenuDetailsSuccess(response));
         dispatch(notificationSend(notif.MSG_UPDATE_LINK_SUCCESS));
       })
-      .catch(
-        err => {
-          dispatch(updateMenuDetailsFailure(err.message));
-          dispatch(notificationSend(notif.MSG_UPDATE_LINK_ERROR));
-        });
+      .catch(err => {
+        dispatch(updateMenuDetailsFailure(err.message));
+        dispatch(notificationSend(notif.MSG_UPDATE_LINK_ERROR));
+      });
   };
 }
 
@@ -110,7 +111,6 @@ function updateMenuDetailsFailure(err) {
   };
 }
 
-
 /**
   * ADD MENU DETAIL ACTIONS
   * -------------------------
@@ -120,15 +120,14 @@ function updateMenuDetailsFailure(err) {
 export function addMenuDetail(values) {
   return dispatch => {
     dispatch(beginAddMenuDetail());
-    return api.doAddNavigationLinks(values)
-      .then(response => {
-        if (!response.status === 201) {
-          dispatch(addMenuDetailFailure(response));
-          dispatch(notificationSend(notif.MSG_ADD_LINK_ERROR));
-        }
-        dispatch(addMenuDetailSuccess(response));
-        dispatch(notificationSend(notif.MSG_ADD_LINK_SUCCESS));
-      });
+    return api.doAddNavigationLinks(values).then(response => {
+      if (!response.status === 201) {
+        dispatch(addMenuDetailFailure(response));
+        dispatch(notificationSend(notif.MSG_ADD_LINK_ERROR));
+      }
+      dispatch(addMenuDetailSuccess(response));
+      dispatch(notificationSend(notif.MSG_ADD_LINK_SUCCESS));
+    });
   };
 }
 

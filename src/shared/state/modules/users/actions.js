@@ -5,7 +5,6 @@ import * as notif from '../../../core/constants';
 import { notificationSend } from '../notifications/notifications';
 import * as t from '../actionTypes';
 
-
 /**
   * FORGOT PASSWORD ACTIONS
   * -------------------------
@@ -13,21 +12,24 @@ import * as t from '../actionTypes';
   *****************************************************************/
 
 export function forgotPassword(email) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({
       type: t.FORGOT_PASSWORD_REQUEST,
     });
-    return api.doForgotPassword(email)
+    return api
+      .doForgotPassword(email)
       .then(response => {
         dispatch({
           type: t.FORGOT_PASSWORD_SUCCESS,
         });
         dispatch(push('/'));
         dispatch(notificationSend(notif.MSG_FORGOT_PW_ERROR));
-      }).catch(err => dispatch({
-        type: t.FORGOT_PASSWORD_FAILURE,
-        error: err,
-      }));
+      })
+      .catch(err =>
+        dispatch({
+          type: t.FORGOT_PASSWORD_FAILURE,
+          error: err,
+        }));
   };
 }
 
@@ -38,21 +40,24 @@ export function forgotPassword(email) {
   *****************************************************************/
 
 export function resetPassword(password, token) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({
       type: t.RESET_PASSWORD_REQUEST,
     });
-    return api.doResetPassword(password, token)
+    return api
+      .doResetPassword(password, token)
       .then(response => {
         dispatch({
           type: t.RESET_PASSWORD_SUCCESS,
         });
         push('/login');
         dispatch(notificationSend(notif.MSG_RESET_PW_SUCCESS));
-      }).catch(err => dispatch({
-        type: t.RESET_PASSWORD_FAILURE,
-        error: err,
-      }));
+      })
+      .catch(err =>
+        dispatch({
+          type: t.RESET_PASSWORD_FAILURE,
+          error: err,
+        }));
   };
 }
 
@@ -63,11 +68,12 @@ export function resetPassword(password, token) {
   *****************************************************************/
 
 export function verifyAccount(token) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch({
       type: t.VERIFY_ACCOUNT_REQUEST,
     });
-    return api.doVerifyAccount(token)
+    return api
+      .doVerifyAccount(token)
       .then(response => {
         push('/login');
         dispatch({
@@ -75,13 +81,14 @@ export function verifyAccount(token) {
         });
         dispatch(push('/'));
         dispatch(notificationSend(notif.MSG_VERIFY_USER_SUCCESS));
-      }).catch(err => dispatch({
-        type: t.VERIFY_ACCOUNT_FAILURE,
-        error: err,
-      }));
+      })
+      .catch(err =>
+        dispatch({
+          type: t.VERIFY_ACCOUNT_FAILURE,
+          error: err,
+        }));
   };
 }
-
 
 /**
   * PROFILE ACTIONS
@@ -93,7 +100,8 @@ export function verifyAccount(token) {
 export function getProfile(username) {
   return (dispatch: Function) => {
     dispatch(requestProfile());
-    return api.getUserProfile(username)
+    return api
+      .getUserProfile(username)
       .then(response => {
         if (response.status !== 200) {
           dispatch(receiveProfileFailed());
@@ -111,30 +119,31 @@ const requestProfile = () => {
   return { type: t.FETCH_PROFILE_REQUEST };
 };
 
-const receiveProfile = (data) => {
+const receiveProfile = data => {
   return {
     type: t.FETCH_PROFILE_SUCCESS,
     payload: data,
   };
 };
 
-const receiveProfileFailed = (err) => ({
-  type: t.FETCH_PROFILE_FAILURE, error: err,
+const receiveProfileFailed = err => ({
+  type: t.FETCH_PROFILE_FAILURE,
+  error: err,
 });
 
 export function editProfile(userData) {
   return dispatch => {
     dispatch(beginUpdateProfile());
-    return api.doUpdateProfile(userData)
+    return api
+      .doUpdateProfile(userData)
       .then(response => {
         dispatch(doneUpdateProfile(response));
         dispatch(notificationSend(notif.MSG_EDIT_PROFILE_SUCCESS));
       })
-      .catch(
-        err => {
-          dispatch(failUpdateProfile(err.message));
-          dispatch(notificationSend(notif.MSG_EDIT_PROFILE_FAILURE));
-        });
+      .catch(err => {
+        dispatch(failUpdateProfile(err.message));
+        dispatch(notificationSend(notif.MSG_EDIT_PROFILE_FAILURE));
+      });
   };
 }
 
@@ -142,11 +151,12 @@ const beginUpdateProfile = () => {
   return { type: t.EDIT_PROFILE_REQUEST };
 };
 
-const doneUpdateProfile = (response) => {
-  return { type: t.EDIT_PROFILE_SUCCESS, payload: response.body };
+const doneUpdateProfile = response => {
+  return { type: t.EDIT_PROFILE_SUCCESS,
+    payload: response.body };
 };
 
-const failUpdateProfile = (err) => {
+const failUpdateProfile = err => {
   return {
     type: t.EDIT_PROFILE_FAILURE,
     error: err,
