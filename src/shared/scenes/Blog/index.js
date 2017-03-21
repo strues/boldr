@@ -1,5 +1,6 @@
 import { loadRoute, errorLoading } from 'boldr-utils';
 import BlogContainer from './BlogContainer';
+import PostListingContainer from './PostListing/PostListingContainer';
 
 export default (store) => {
   /* istanbul ignore next */
@@ -7,11 +8,7 @@ export default (store) => {
     path: 'blog',
     component: BlogContainer,
     indexRoute: {
-      getComponent(nextState, cb) {
-        import('./PostListing/PostListingContainer')
-        .then(loadRoute(cb))
-        .catch(errorLoading);
-      },
+      component: PostListingContainer,
     },
     childRoutes: [{
       path: ':slug',
