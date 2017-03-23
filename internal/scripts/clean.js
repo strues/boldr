@@ -1,10 +1,16 @@
-// This script removes any exisitng build output.
+const rimraf = require('rimraf');
 
-import { resolve as pathResolve } from 'path';
-import appRootDir from 'app-root-dir';
-import { exec } from '../utils';
-import config from '../../config';
+process.chdir(__dirname);
 
-const cmd = `$(npm bin)/rimraf ${pathResolve(appRootDir.get(), config('buildOutputPath'))}`;
-
-exec(cmd);
+rimraf.sync('../../packages/*/es');
+rimraf.sync('../../packages/*/.happypack'),
+rimraf.sync('../../packages/*/dist');
+rimraf.sync('../../packages/*/compiled');
+rimraf.sync('../../packages/*/coverage');
+rimraf.sync('../../packages/*/node_modules');
+rimraf.sync('../../packages/*/node_modules/.cache');
+rimraf.sync('../../packages/*/*.log');
+rimraf.sync('../../coverage');
+rimraf.sync('../../node_modules');
+rimraf.sync('../../.changelog');
+rimraf.sync('../../*.log');

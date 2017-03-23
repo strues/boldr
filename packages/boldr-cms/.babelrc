@@ -1,0 +1,8 @@
+{
+  "presets": [
+    "stage-2",
+    ["env", { "targets": { "node": true } }],
+    "react"
+  ],
+  "plugins": ["transform-decorators-legacy", "fast-async", "dynamic-import-node", "dynamic-import-webpack"]
+}

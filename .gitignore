@@ -1,26 +1,12 @@
-
-.DS_Store
-**/*.DS_Store
-
-.idea
-.vscode
-**/*.idea
-**/*.vscode
-
 node_modules
-**/node_modules
+coverage
 
-flow-typed
-.happypack
+packages/*/node_modules
+packages/*/compiled
+packages/*/.happypack
+packages/*/coverage
+
+packages/boldr-cms/public/assets/
+packages/boldr-ui
 
 .env
-*.env
-
-*.log
-
-**/dist
-**/build
-boldrCMS/
-public
-coverage/
-release/
