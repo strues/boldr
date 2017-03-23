@@ -13,7 +13,7 @@
   "homepage": "https://github.com/strues/boldr#readme",
   "scripts": {
     "build": "babel src --out-dir lib",
-    "build:test": "babel src --out-dir lib",
+    "build:test": "echo \"nothing\" && exit 0",
     "clean": "rimraf lib",
     "dev": "better-npm-run dev",
     "format": "prettier-eslint --write \"src/**/*.js\" \"db/**/*.js\" \"internal/**/*.js\"",
@@ -27,7 +27,8 @@
     "start": "NODE_ENV=production node lib/index.js",
     "seed": "better-npm-run seed",
     "seed:test": "better-npm-run seed:test",
-    "test": "better-npm-run test"
+    "test": "better-npm-run test",
+    "test:local": "better-npm-run test:local"
   },
   "dependencies": {
     "app-root-dir": "^1.0.2",
@@ -159,10 +160,17 @@
         "NODE_ENV": "test"
       }
     },
-    "test": {
+    "test:local": {
       "command": "npm run reset && jest -w 2 --forceExit",
       "env": {
         "DATABASE_URI": "postgres://postgres:password@localhost:5432/boldr_test",
+        "NODE_ENV": "test",
+        "KNEX_TEST_TIMEOUT": 30000
+      }
+    },
+    "test": {
+      "command": "jest -w 2 --forceExit",
+      "env": {
         "NODE_ENV": "test",
         "KNEX_TEST_TIMEOUT": 30000
       }
