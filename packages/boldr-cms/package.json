@@ -1,6 +1,6 @@
 {
-  "name": "boldr",
-  "version": "0.0.0",
+  "name": "boldr-cms",
+  "version": "0.1.0",
   "description": "universal react content management framework",
   "main": "boldrCMS/server/index.js",
   "repository": {
@@ -48,7 +48,7 @@
     "analyze": "babel-node internal/scripts/analyze --client",
     "babel": "NODE_ENV=production babel --ignore node_modules",
     "build": "NODE_ENV=production babel-node internal/scripts/build --optimize",
-    "build:dev": "babel-node internal/scripts/build",
+    "build:test": "babel-node internal/scripts/build",
     "clean": "babel-node internal/scripts/clean",
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "dev": "better-npm-run dev",

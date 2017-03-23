@@ -7,12 +7,13 @@
   "author": "Steven Truesdell <steven@strues.io>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/boldr/getBoldr.git"
+    "url": "git+https://github.com/strues/boldr.git"
   },
-  "bugs": "https://github.com/boldr/getBoldr/issues",
-  "homepage": "https://github.com/boldr/getBoldr#readme",
+  "bugs": "https://github.com/strues/boldr/issues",
+  "homepage": "https://github.com/strues/boldr#readme",
   "scripts": {
     "build": "babel src --out-dir lib",
+    "build:test": "babel src --out-dir lib",
     "clean": "rimraf lib",
     "dev": "better-npm-run dev",
     "format": "prettier-eslint --write \"src/**/*.js\" \"db/**/*.js\" \"internal/**/*.js\"",

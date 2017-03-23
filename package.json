@@ -5,8 +5,13 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "bootstrap": "node_modules/.bin/lerna bootstrap",
+    "build:test": "node_modules/.bin/lerna exec yarn run build:test",
     "prettier": "node internal/scripts/prettier.js write",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "map-coverage": "node internal/scripts/mapCoverage.js",
+    "test": "node_modules/.bin/lerna exec yarn run test",
+    "test:ci:node": "node_modules/.bin/lerna exec --scope boldr-api yarn run test",
+    "test:ci:browser": "node_modules/.bin/lerna exec --scope boldr-cms yarn run test"
   },
   "keywords": [],
   "author": "",

@@ -3,6 +3,8 @@
 exports[`renders snapshot 1`] = `
 <div
   className="boldr-icon"
+  role="button"
+  tabIndex={-1}
 >
   <svg
     fill="#fff"

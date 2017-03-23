@@ -1,0 +1,20 @@
+engines:
+  eslint:
+    channel: eslint-3
+    enabled: true
+ratings:
+   paths:
+   - packages/boldr-cms/src/**
+   - packages/boldr-api/src/**
+   - "packages/boldr-cms/**.js"
+   - "packages/boldr-api/**.js"
+exclude_paths:
+  - ./node_modules/**/*
+  - packages/boldr-api/node_modules/**/*
+  - packages/boldr-cms/node_modules/**/*
+  - packages/boldr-cms/boldrCMS/**
+  - packages/boldr-api/db/**
+  - docs/**
+  - bin/**
+  - flow-typed/**
+  - packages/boldr-cms/.happypack/**

@@ -36,9 +36,9 @@ describe('Posts API Endpoint', () => {
     expect(typeof body.results[0].slug).toBe('string');
   });
 
-  it('GET /posts/pid/:id -- By id', async () => {
+  it('GET /posts/:id -- By id', async () => {
     const { status, body } = await agent
-      .get('/api/v1/posts/cb61bbae-c91e-4014-b665-3485734b88fb')
+      .get('/api/v1/posts/5c9ed236-79f0-4ff7-93bd-2815f06c74b4')
       .set('Accept', 'application/json');
     expect(status).toBe(200);
     expect(typeof body).toBe('object');

@@ -4,7 +4,7 @@
     "\\.(css|scss)$": "identity-obj-proxy"
   },
   "collectCoverage": true,
-  "coverageDirectory": "<rootDir>/coverage/browser/coverage-final.json",
+  "coverageDirectory": "<rootDir>/coverage",
   "coveragePathIgnorePatterns": [
     "<rootDir>/(internal|server|config|docs|boldrCMS|.happypack|bin|.idea|public|db)/",
     "/flow-typed/",

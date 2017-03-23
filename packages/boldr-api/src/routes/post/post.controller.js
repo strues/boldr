@@ -128,7 +128,6 @@ export async function getId(req, res, next) {
       .modifyEager('comments.[replies]', builder => {
         builder.orderBy('created_at', 'desc');
       })
-      .omit('password')
       .first();
     return responseHandler(res, 200, post);
   } catch (error) {

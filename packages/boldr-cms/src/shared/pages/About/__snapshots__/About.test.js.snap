@@ -5,6 +5,7 @@ exports[`<About /> renders snapshot 1`] = `
   <Connect(BaseTemplate)
     helmetMeta={
       <HelmetWrapper
+        encodeSpecialCharacters={true}
         title="About"
       />
     }

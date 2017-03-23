@@ -6,6 +6,7 @@ exports[`<Home /> renders snapshot 1`] = `
     footer={<Footer />}
     helmetMeta={
       <HelmetWrapper
+        encodeSpecialCharacters={true}
         title="Home"
       />
     }

@@ -3,7 +3,6 @@
 exports[`<LinkedIn /> 1`] = `
 <a
   href="a"
-  target="_blank"
 >
   <Icon
     color="#1c3050"

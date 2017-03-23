@@ -7,6 +7,7 @@ exports[`<Error404 /> renders snapshot 1`] = `
   <Connect(BaseTemplate)
     helmetMeta={
       <HelmetWrapper
+        encodeSpecialCharacters={true}
         title="404! You might be lost..."
       />
     }

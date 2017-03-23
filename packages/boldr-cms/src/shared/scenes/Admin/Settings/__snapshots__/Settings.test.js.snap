@@ -5,6 +5,7 @@ exports[`<Settings /> renders snapshot 1`] = `
   className="boldr-settings"
 >
   <HelmetWrapper
+    encodeSpecialCharacters={true}
     title="Admin: Settings"
   />
   <ExpansionList

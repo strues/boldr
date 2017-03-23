@@ -49,13 +49,6 @@ export async function getTaggedPostsByName(req, res, next) {
 }
 
 export async function createTag(req, res, next) {
-  req.assert('name', 'A name must be provided').notEmpty();
-  const errors = req.validationErrors();
-
-  if (errors) {
-    return res.status(400).send(errors);
-  }
-
   const checkTag = Tag.query().where({ name: req.body.name });
 
   if (checkTag.length) {
