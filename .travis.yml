@@ -16,7 +16,7 @@ branches:
 env:
   CXX: g++-4.8
   DOCKER_COMPOSE_VERSION: 1.10.0
-  DATEBASE_URI: postgres://postgres:password@127.0.0.1:5432/boldr
+  DATABASE_URI: postgres://postgres:password@127.0.0.1:5432/boldr
   REDIS_URI: redis://127.0.0.1:6379/1
   NODE_ENV: test
   TOKEN_SECRET: b0ldrs0s3cr3t
@@ -60,7 +60,7 @@ matrix:
 
 after_success:
   - yarn map-coverage
-  # - yarn run coveralls
+  - yarn run coveralls
   - bash <(curl -s https://codecov.io/bash)
 
 cache:
