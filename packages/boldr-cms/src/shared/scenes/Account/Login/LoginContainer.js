@@ -2,9 +2,9 @@ import { connect } from 'react-redux';
 import { doLogin } from '../../../state/modules/auth/actions';
 import Login from './Login';
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
-    onSubmit: (submit) => {
+    onSubmit: submit => {
       dispatch(doLogin(submit));
     },
   };

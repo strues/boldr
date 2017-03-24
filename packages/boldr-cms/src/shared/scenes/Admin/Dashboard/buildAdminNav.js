@@ -124,8 +124,10 @@ function extractRealRoutes(route) {
     return route.nestedItems.map(extractRealRoutes);
   } else if (route.to && route.to !== '/') {
     const { primaryText, to } = route;
-    return { primaryText,
-      to };
+    return {
+      primaryText,
+      to,
+    };
   }
 
   return null;

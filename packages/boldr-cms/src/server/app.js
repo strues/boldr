@@ -3,14 +3,7 @@ import http from 'http';
 import httpProxy from 'http-proxy';
 import express from 'express';
 import appRootDir from 'app-root-dir';
-import {
-  boldrSSR,
-  clientBundle,
-  expressMiddleware,
-  errorHandler,
-  offlinePage,
-  serviceWorker,
-} from './middleware';
+import { boldrSSR, clientBundle, expressMiddleware, errorHandler, offlinePage, serviceWorker } from './middleware';
 
 // const proxyTarget = `http://${config.apiHost}:${config.apiPort}/api/v1`;
 const proxyTarget = 'http://0.0.0.0:2121/api/v1';
@@ -21,7 +14,6 @@ const proxy = httpProxy.createProxyServer({
 
 // const cache = require('express-redis-cache')({ client: redisClient });
 const debug = require('debug')('boldr:server-app');
-
 
 const app = express();
 
@@ -46,8 +38,10 @@ proxy.on('error', (error, req, res) => {
     res.writeHead(500, { 'content-type': 'application/json' });
   }
 
-  const json = { error: 'proxy_error',
-    reason: error.message };
+  const json = {
+    error: 'proxy_error',
+    reason: error.message,
+  };
   res.end(JSON.stringify(json));
 });
 if (!process.env.BUILD_FLAG_IS_DEV) {

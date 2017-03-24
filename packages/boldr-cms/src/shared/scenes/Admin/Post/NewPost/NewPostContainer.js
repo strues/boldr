@@ -38,12 +38,7 @@ class NewPostContainer extends Component {
   props: Props;
 
   render() {
-    return (
-      <NewPost
-        onFormSubmit={ this.handleOnSubmit }
-        postImage={ this.props.postImage }
-      />
-    );
+    return <NewPost onFormSubmit={ this.handleOnSubmit } postImage={ this.props.postImage } />;
   }
 }
 
@@ -51,7 +46,7 @@ NewPostContainer.contextTypes = {
   router: PropTypes.object,
 };
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     postImage: state.attachments.postImage,
     drawer: state.boldr.ui.drawer,

@@ -7,7 +7,7 @@ import { verifyAccount } from '../../../state/modules/users/actions';
 
 export type Props = {
   dispatch: () => void,
-  params: Object
+  params: Object,
 };
 
 class Verify extends Component {

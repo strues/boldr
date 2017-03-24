@@ -8,9 +8,8 @@ import Account from './Account';
 import Blog from './Blog';
 import Admin from './Admin';
 
-
 function createChildRoutes(store) {
-/* istanbul ignore next */
+  /* istanbul ignore next */
   return [
     {
       path: '/',
@@ -22,7 +21,6 @@ function createChildRoutes(store) {
     Profile(store),
     About,
     Error404,
-
   ];
 }
 export default function createRoutes(store) {

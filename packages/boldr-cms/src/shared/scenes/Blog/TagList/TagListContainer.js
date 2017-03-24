@@ -18,31 +18,25 @@ type Props = {
 
 export class TagListContainer extends Component {
   static fetchData(dispatch, params) {
-    return Promise.all([
-      dispatch(fetchTaggedPost(params.name)),
-    ]);
+    return Promise.all([dispatch(fetchTaggedPost(params.name))]);
   }
   componentDidMount() {
     const { dispatch, params } = this.props;
 
-   // Fetching data for client side rendering
+    // Fetching data for client side rendering
     TagListContainer.fetchData(dispatch, params);
   }
 
   props: Props;
   render() {
     if (this.props.isFetching) {
-      return (
-        <Loader />
-      );
+      return <Loader />;
     }
-    return (
-      <TagList isFetching={ this.props.isFetching } listTags={ this.props.listTags } posts={ this.props.posts } />
-    );
+    return <TagList isFetching={ this.props.isFetching } listTags={ this.props.listTags } posts={ this.props.posts } />;
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     posts: getPosts(state),
     listTags: state.blog.tags.all,

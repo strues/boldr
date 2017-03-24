@@ -18,13 +18,10 @@ type Props = {
 };
 const BASE_ELEMENT = StyleClasses.PROFILE_DETAIL;
 const ProfileDetail = (props: Props) => {
-  const classes = classnames(
-    BASE_ELEMENT,
-    props.className,
-  );
+  const classes = classnames(BASE_ELEMENT, props.className);
   return (
     <li className={ classes }>
-      <DetailLabel>{ props.label }</DetailLabel> <span>{props.detail}</span>
+      <DetailLabel>{props.label}</DetailLabel> <span>{props.detail}</span>
     </li>
   );
 };

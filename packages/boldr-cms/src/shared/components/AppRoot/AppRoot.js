@@ -16,7 +16,7 @@ class AppRoot extends PureComponent {
     const { store, children } = this.props;
     return (
       <Provider store={ store }>
-        { React.Children.only(children) }
+        {React.Children.only(children)}
       </Provider>
     );
   }

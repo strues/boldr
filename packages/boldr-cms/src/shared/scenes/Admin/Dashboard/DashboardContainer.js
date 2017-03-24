@@ -20,10 +20,7 @@ type Props = {
 
 class DashboardContainer extends Component {
   static fetchData(dispatch) {
-    return Promise.all([
-      dispatch(loadSiteActivity()),
-      dispatch(fetchStats()),
-    ]);
+    return Promise.all([dispatch(loadSiteActivity()), dispatch(fetchStats())]);
   }
   componentDidMount() {
     const { dispatch } = this.props;
@@ -32,13 +29,9 @@ class DashboardContainer extends Component {
   props: Props;
   render() {
     if (this.props.loading) {
-      return (
-        <Loader />
-      );
+      return <Loader />;
     }
-    return (
-      <Dashboard activities={ this.props.activities } stats={ this.props.stats } loading={ this.props.loading } />
-    );
+    return <Dashboard activities={ this.props.activities } stats={ this.props.stats } loading={ this.props.loading } />;
   }
 }
 

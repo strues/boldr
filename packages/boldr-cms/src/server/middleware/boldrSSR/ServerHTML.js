@@ -21,14 +21,7 @@ function KeyedComponent({ children }) {
 const clientEntryAssets = getClientBundleEntryAssets();
 
 function stylesheetTag(stylesheetFilePath) {
-  return (
-    <link
-      href={ stylesheetFilePath }
-      media="screen, projection"
-      rel="stylesheet"
-      type="text/css"
-    />
-  );
+  return <link href={ stylesheetFilePath } media="screen, projection" rel="stylesheet" type="text/css" />;
 }
 function scriptTag(jsFilePath) {
   return <script type="text/javascript" src={ jsFilePath } />;
@@ -46,20 +39,12 @@ function ServerHTML(props) {
   } = props;
 
   // Creates an inline script definition that is protected by the nonce.
-  const inlineScript = body => (
-    <script
-      nonce={ nonce }
-      type="text/javascript"
-      dangerouslySetInnerHTML={ { __html: body } }
-    />
-  );
+  const inlineScript = body => <script nonce={ nonce } type="text/javascript" dangerouslySetInnerHTML={ { __html: body } } />;
 
   const headerElements = removeNil([
     ...ifElse(helmet)(() => helmet.meta.toComponent(), []),
     ...ifElse(helmet)(() => helmet.link.toComponent(), []),
-    ifElse(clientEntryAssets && clientEntryAssets.css)(
-       () => stylesheetTag(clientEntryAssets.css),
-     ),
+    ifElse(clientEntryAssets && clientEntryAssets.css)(() => stylesheetTag(clientEntryAssets.css)),
     ...ifElse(helmet)(() => helmet.style.toComponent(), []),
   ]);
 
@@ -70,18 +55,9 @@ function ServerHTML(props) {
     <ClientConfig key="client-cfg" nonce={ nonce } />,
     inlineScript(`window.__PRELOADED_STATE__=${serialize(props.preloadedState)};`),
     scriptTag('https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Symbol'),
-    ifElse(process.env.BUILD_FLAG_IS_DEV)(
-      () => scriptTag(
-        `/assets/__dev_vendor_dll__.js?t=${Date.now()}`,
-      ),
-    ),
-    ifElse(clientEntryAssets && clientEntryAssets.js)(
-      () => scriptTag(clientEntryAssets.js),
-    ),
-    ...ifElse(helmet)(
-      () => helmet.script.toComponent(),
-      [],
-    ),
+    ifElse(process.env.BUILD_FLAG_IS_DEV)(() => scriptTag(`/assets/__dev_vendor_dll__.js?t=${Date.now()}`)),
+    ifElse(clientEntryAssets && clientEntryAssets.js)(() => scriptTag(clientEntryAssets.js)),
+    ...ifElse(helmet)(() => helmet.script.toComponent(), []),
   ]);
 
   return (
@@ -90,12 +66,8 @@ function ServerHTML(props) {
       titleTemplate="%s - Powered by Boldr"
       description="Your dreams are bold. Your thoughts are bold. So why shouldn't your CMS be a little Boldr?"
       appBodyString={ reactAppString }
-      headerElements={
-        headerElements.map((x, idx) => <KeyedComponent key={ idx }>{x}</KeyedComponent>)
-      }
-      bodyElements={
-        bodyElements.map((x, idx) => <KeyedComponent key={ idx }>{x}</KeyedComponent>)
-      }
+      headerElements={ headerElements.map((x, idx) => <KeyedComponent key={ idx }>{x}</KeyedComponent>) }
+      bodyElements={ bodyElements.map((x, idx) => <KeyedComponent key={ idx }>{x}</KeyedComponent>) }
     />
   );
 }

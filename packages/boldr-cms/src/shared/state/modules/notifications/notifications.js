@@ -11,8 +11,10 @@ export const notificationSend = notification => {
     payload.id = new Date().getTime();
   }
   return dispatch => {
-    dispatch({ type: NOTIFICATION_SEND,
-      payload });
+    dispatch({
+      type: NOTIFICATION_SEND,
+      payload,
+    });
 
     if (payload.dismissAfter) {
       setTimeout(
@@ -33,8 +35,10 @@ export const notificationSend = notification => {
  * @param {Number}  id the notification  action id
  */
 export const notificationDismiss = id => {
-  return { type: NOTIFICATION_DISMISS,
-    payload: id };
+  return {
+    type: NOTIFICATION_DISMISS,
+    payload: id,
+  };
 };
 
 /**

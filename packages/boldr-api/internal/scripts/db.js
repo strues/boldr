@@ -64,7 +64,6 @@ module.exports = task('db', async () => {
   }
 });
 
-
 async function dropDatabase(db) {
   await db.schema.dropTableIfExists('post_attachment');
   await db.schema.dropTableIfExists('post_tag');

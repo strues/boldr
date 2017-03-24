@@ -4,9 +4,7 @@ import notificationReducer, { notificationDismiss, NOTIFICATION_DISMISS, NOTIFIC
 
 describe('Notifications Reducer', () => {
   it('Should return the initial state', () => {
-    expect(
-        notificationReducer(undefined, {}),
-      ).toEqual([]);
+    expect(notificationReducer(undefined, {})).toEqual([]);
   });
   it('should clear the notifications', () => {
     const initialState = [{ id: 1 }, { id: 2 }];
@@ -30,9 +28,7 @@ describe('Notifications Reducer', () => {
 });
 
 test('Dismiss Action', () => {
-  const mockStore = configureMockStore([
-    thunk,
-  ]);
+  const mockStore = configureMockStore([thunk]);
   const store = mockStore({
     notifications: [
       {

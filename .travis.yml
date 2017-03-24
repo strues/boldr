@@ -46,7 +46,7 @@ before_install:
 
 install:
   - yarn
-  - yarn run bootstrap
+  - yarn run bootstrap:ci
 
 before_script:
   - yarn build:test

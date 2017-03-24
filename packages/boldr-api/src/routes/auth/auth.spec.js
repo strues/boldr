@@ -26,8 +26,13 @@ describe('Auth API Endpoint', () => {
   };
 
   test('+++ POST /login - Fail without a password', () => {
-    return agent.post('/api/v1/auth/login').send({ email: 'admin@boldr.io',
-      password: '' }).expect(res => {
+    return agent
+      .post('/api/v1/auth/login')
+      .send({
+        email: 'admin@boldr.io',
+        password: '',
+      })
+      .expect(res => {
         expect(res.status).toBe(401);
       });
   });

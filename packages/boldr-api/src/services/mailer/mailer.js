@@ -22,7 +22,7 @@ export const transporter = createTransport(TRANSPORT_OPTS);
  * @param  {String}      mailSubject the subject line
  * @return {Promise}                  promise that the email is being sent
  */
-export default async function mailer(user, mailBody, mailSubject) {
+export default (async function mailer(user, mailBody, mailSubject) {
   const mailOptions = {
     to: user.email,
     from: config.get('mail.from'),
@@ -38,4 +38,4 @@ export default async function mailer(user, mailBody, mailSubject) {
   } catch (error) {
     return debug(error);
   }
-}
+});

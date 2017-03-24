@@ -10,8 +10,7 @@ describe('<PostTitle />', () => {
   });
 
   it('accepts props and renders them.', () => {
-    const wrapper = shallow(
-      <PostTitle title="Random Post Title" />);
+    const wrapper = shallow(<PostTitle title="Random Post Title" />);
     expect(wrapper.instance().props.title).toBe('Random Post Title');
   });
   it('renders snapshot', () => {

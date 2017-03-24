@@ -11,24 +11,16 @@ const ActivityItemDetail = (props: Props) => {
   const deletedType = props.atype === 'delete';
   const registeredType = props.atype === 'register';
   if (createdType) {
-    return (
-      <span>added</span>
-    );
+    return <span>added</span>;
   }
   if (updatedType) {
-    return (
-      <span>updated</span>
-    );
+    return <span>updated</span>;
   }
   if (deletedType) {
-    return (
-      <span>removed</span>
-    );
+    return <span>removed</span>;
   }
   if (registeredType) {
-    return (
-      <span>registered</span>
-    );
+    return <span>registered</span>;
   }
 };
 

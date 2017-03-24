@@ -8,8 +8,7 @@ import Tag from './Tag';
 describe('<Tag />', () => {
   const store = createStore(() => ({}));
   it('accepts props and renders them.', () => {
-    const wrapper = shallow(
-      <Provider store={ store }><Tag /></Provider>);
+    const wrapper = shallow(<Provider store={ store }><Tag /></Provider>);
     expect(wrapper.find('div').length).toBe(0);
   });
   it('renders snapshot', () => {

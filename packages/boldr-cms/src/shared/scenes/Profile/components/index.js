@@ -3,9 +3,4 @@ import ProfileContent from './ProfileContent';
 import ProfileDetail from './ProfileDetail';
 import ProfileForm from './ProfileForm';
 
-export {
-  OwnProfile,
-  ProfileForm,
-  ProfileContent,
-  ProfileDetail,
-};
+export { OwnProfile, ProfileForm, ProfileContent, ProfileDetail };

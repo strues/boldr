@@ -42,20 +42,20 @@ if (token) {
 const renderApp = () => {
   const { pathname, search, hash } = window.location;
   const location = `${pathname}${search}${hash}`;
-  match({ routes,
-    location }, () => {
-    render(
-      <AppRoot store={ store }>
-        <Router
-          history={ history }
-          routes={ routes }
-          helpers={ apiClient }
-          onUpdate={ () => window.scrollTo(0, 0) }
-        />
-      </AppRoot>,
-      domNode,
-    );
-  });
+  match(
+    {
+      routes,
+      location,
+    },
+    () => {
+      render(
+        <AppRoot store={ store }>
+          <Router history={ history } routes={ routes } helpers={ apiClient } onUpdate={ () => window.scrollTo(0, 0) } />
+        </AppRoot>,
+        domNode,
+      );
+    },
+  );
 };
 
 if (process.env.NODE_ENV !== 'production') {

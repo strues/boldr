@@ -12,7 +12,7 @@ describe('Tags API Endpoint', () => {
       password: 'password',
     };
     const { body } = await agent.post('/api/v1/auth/login').set('Accept', 'application/json').send(loginData);
-    token = body.token;  // eslint-disable-line
+    token = body.token; // eslint-disable-line
   });
 
   const badTag = {

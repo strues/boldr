@@ -8,19 +8,15 @@ import Templates from './Templates';
 
 export type Props = {
   templates?: Object,
-  fetchTemplates: Function
+  fetchTemplates: Function,
 };
 
 export class TemplatesContainer extends Component {
-
   props: Props;
   render() {
-    return (
-      <div>a</div>
-    );
+    return <div>a</div>;
   }
 }
-
 
 const mapStateToProps = (state, ownProps) => {
   return {

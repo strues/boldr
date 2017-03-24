@@ -11,15 +11,19 @@ function nonceMiddleware(req, res, next) {
   next();
 }
 
-export default (app) => {
+export default app => {
   app.disable('x-powered-by');
   app.set('trust proxy', 'loopback');
   app.use(nonceMiddleware);
   app.use(compression());
   // enable CORS - Cross Origin Resource Sharing
   // allow for sending credentials (auth token) in the headers.
-  app.use(cors({ origin: true,
-    credentials: true }));
+  app.use(
+    cors({
+      origin: true,
+      credentials: true,
+    }),
+  );
 
   app.use(hpp());
 };

@@ -1,7 +1,7 @@
 import config from '../../../../config';
 import Storage from './storage';
 
-export const parseJWT = (token) => {
+export const parseJWT = token => {
   if (!token) return null;
   const base64Url = token;
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -26,7 +26,7 @@ export const parseJWT = (token) => {
   }
 };
 
-export const setToken = (token) => {
+export const setToken = token => {
   return Storage.set(config('token.key'), token);
 };
 export const getToken = (asJSON = false) => {

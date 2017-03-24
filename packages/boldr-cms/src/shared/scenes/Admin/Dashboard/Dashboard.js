@@ -16,9 +16,7 @@ type Props = {
 
 const Dashboard = (props: Props) => {
   if (props.loading) {
-    return (
-      <Loader />
-    );
+    return <Loader />;
   }
   return (
     <Row>
@@ -39,11 +37,7 @@ const Dashboard = (props: Props) => {
         </Row>
       </Col>
       <Col xs={ 12 } md={ 4 }>
-        {
-          props.activities
-          ? <ActivityWidget activities={ props.activities } />
-          : null
-        }
+        {props.activities ? <ActivityWidget activities={ props.activities } /> : null}
       </Col>
     </Row>
   );

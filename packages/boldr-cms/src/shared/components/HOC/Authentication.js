@@ -27,7 +27,7 @@ export default function(ComposedComponent) {
     render() {
       return <ComposedComponent { ...this.props } />;
     }
-    }
+  }
 
   function mapStateToProps(state) {
     return { isAuthenticated: state.auth.isAuthenticated };

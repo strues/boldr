@@ -4,14 +4,16 @@ import styles from './head.scss';
 
 const cx = classNames.bind(styles);
 
-const Head = ({
-  toggleDropdownHandler,
-  siteName,
-  siteLogo,
-  dropdownOpen,
-  theme,
-  closeHeaderDropdown,
-}) => {
+const Head = (
+  {
+    toggleDropdownHandler,
+    siteName,
+    siteLogo,
+    dropdownOpen,
+    theme,
+    closeHeaderDropdown,
+  },
+) => {
   return (
     <div
       className={ cx('boldr-mainheader__head', ['theme-boldr'], {

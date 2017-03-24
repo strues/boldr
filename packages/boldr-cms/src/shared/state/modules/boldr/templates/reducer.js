@@ -31,7 +31,6 @@ const ids = (state = [], action) => {
   }
 };
 
-
 const isFetching = (state = false, action) => {
   switch (action.type) {
     case t.FETCH_TEMPLATES_REQUEST:
@@ -62,7 +61,6 @@ const isFetching = (state = false, action) => {
  * @param  {Object} state       The initial state
  * @param  {Object} action      The action object
  */
-
 
 export default combineReducers({
   all,

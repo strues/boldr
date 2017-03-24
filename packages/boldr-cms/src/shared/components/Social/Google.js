@@ -15,9 +15,7 @@ const Google = (props: Props) => {
       </a>
     );
   } else {
-    return (
-      <Icon kind="google" color="#1c3050" size={ props.size } />
-    );
+    return <Icon kind="google" color="#1c3050" size={ props.size } />;
   }
 };
 

@@ -8,8 +8,10 @@ const comment = new schema.Entity(
   },
   {
     processStrategy: (value, parent, key) => {
-      return { ...value,
-        post: parent.id };
+      return {
+        ...value,
+        post: parent.id,
+      };
     },
   },
   { idAttribute: 'id' },

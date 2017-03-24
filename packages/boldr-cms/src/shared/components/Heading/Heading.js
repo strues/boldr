@@ -15,10 +15,14 @@ const Heading = props => {
     fontWeight: props.fweight,
     textDecoration: props.textDeco,
   };
-  return React.createElement(tagName, {
-    className,
-    style,
-  }, props.children);
+  return React.createElement(
+    tagName,
+    {
+      className,
+      style,
+    },
+    props.children,
+  );
 };
 
 export default Heading;

@@ -17,10 +17,7 @@ type Props = {
 };
 const BASE_ELEMENT = StyleClasses.POST_SIDEBAR;
 const PostSidebar = (props: Props) => {
-  const classes = classnames(
-    BASE_ELEMENT,
-    props.className,
-  );
+  const classes = classnames(BASE_ELEMENT, props.className);
   return (
     <aside className={ classes }>
       <Author className={ props.authorClassName } { ...props.postAuthor } />

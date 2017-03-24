@@ -120,7 +120,7 @@ export const FeaturedPost = (props: Props) => {
           </Row>
           <Row>
             <Col sm={ 12 }>
-              { postTags.map(t => <Tag key={ t.id } tag={ t } />)}
+              {postTags.map(t => <Tag key={ t.id } tag={ t } />)}
             </Col>
           </Row>
         </Content>

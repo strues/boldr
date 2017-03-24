@@ -22,7 +22,7 @@ const Modal = (props: Props) => {
       onHide={ props.onClose }
       modal
     >
-      { props.children }
+      {props.children}
     </Dialog>
   );
 };

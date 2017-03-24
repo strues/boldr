@@ -5,7 +5,6 @@ import { Provider } from 'react-redux';
 import Notifications from '../Notification';
 import App from './App';
 
-
 const middlewares = [];
 const mockStore = configureStore(middlewares);
 
@@ -13,13 +12,13 @@ describe('<App />', () => {
   const initialState = {};
   const store = mockStore(initialState);
   it('should render its children', () => {
-    const children = (<h1>Test</h1>);
+    const children = <h1>Test</h1>;
     const renderedComponent = shallow(
       <Provider store={ store }>
-      <App>
-        {children}
-      </App>
-    </Provider>
+        <App>
+          {children}
+        </App>
+      </Provider>,
     );
     expect(renderedComponent.contains(children)).toBe(true);
   });

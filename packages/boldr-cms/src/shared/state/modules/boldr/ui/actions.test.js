@@ -1,8 +1,14 @@
 import * as t from '../../actionTypes';
 import {
-  showModal, hideModal, openDrawer, closeDrawer, setMobileDevice, changeLayout, updateDrawerType, updateMedia,
+  showModal,
+  hideModal,
+  openDrawer,
+  closeDrawer,
+  setMobileDevice,
+  changeLayout,
+  updateDrawerType,
+  updateMedia,
 } from './actions';
-
 
 describe('UI Actions', () => {
   describe('showModal', () => {
@@ -76,7 +82,6 @@ describe('UI Actions', () => {
       const expectedResult = {
         type: t.UPDATE_MEDIA,
         undefined,
-
       };
 
       expect(updateMedia()).toEqual(expectedResult);

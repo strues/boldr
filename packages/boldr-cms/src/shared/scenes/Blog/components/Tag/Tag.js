@@ -26,11 +26,7 @@ const Tag = (props: Props) => {
   return (
     <div className={ classes }>
       <Link to={ `/blog/tags/${tag.name}` }>
-        <Chip
-          onClick={ transitionTag }
-          label={ tag.name }
-          avatar={ <Avatar icon={ <FontIcon>local_offer</FontIcon> } /> }
-        />
+        <Chip onClick={ transitionTag } label={ tag.name } avatar={ <Avatar icon={ <FontIcon>local_offer</FontIcon> } /> } />
       </Link>
     </div>
   );

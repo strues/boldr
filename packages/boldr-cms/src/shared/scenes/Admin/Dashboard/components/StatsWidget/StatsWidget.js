@@ -18,11 +18,11 @@ const StatsWidget = (props: Props) => {
     <div className="boldr-widget__stats">
       <Paper zDepth={ 2 } style={ { padding: '1em' } } className="boldr-paperoverride">
         <Heading top="5px" align="left" size={ 4 }>
-          <FontIcon style={ { paddingTop: '5px' } }>assessment</FontIcon>{ ' ' } Stats
+          <FontIcon style={ { paddingTop: '5px' } }>assessment</FontIcon>{' '} Stats
         </Heading>
-      Posts: { props.stats.posts || '' } <br />
-      Tags: { props.stats.tags || '' }<br />
-      Users: { props.stats.users || '' }<br />
+        Posts: {props.stats.posts || ''} <br />
+        Tags: {props.stats.tags || ''}<br />
+        Users: {props.stats.users || ''}<br />
       </Paper>
     </div>
   );

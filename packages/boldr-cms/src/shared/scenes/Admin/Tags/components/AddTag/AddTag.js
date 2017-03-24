@@ -16,7 +16,8 @@ const style = {
   margin: 12,
 };
 
-let AddTag = (props: Props) => { // eslint-disable-line
+let AddTag = (props: Props) => {
+  // eslint-disable-line
   const { handleSubmit, reset } = props;
   return (
     <form className="boldr-form__addtag" onSubmit={ handleSubmit }>

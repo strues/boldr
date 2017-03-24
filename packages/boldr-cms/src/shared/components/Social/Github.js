@@ -15,9 +15,7 @@ const Github = (props: Props) => {
       </a>
     );
   } else {
-    return (
-      <Icon kind="github" color="#1c3050" size={ props.size } />
-    );
+    return <Icon kind="github" color="#1c3050" size={ props.size } />;
   }
 };
 

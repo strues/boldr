@@ -3,7 +3,6 @@ import { shallow } from 'enzyme';
 import configureStore from 'redux-mock-store';
 import AppRoot from './AppRoot';
 
-
 describe('<AppRoot />', () => {
   const middlewares = [];
   const mockStore = configureStore(middlewares);

@@ -27,16 +27,11 @@ const mockProfile = {
     github: {
       url: 'github',
     },
-
   },
 };
 test('<ProfileContent />, renders the content area', () => {
   const toggleDrawer = jest.fn();
 
-  const wrapper = shallow(<ProfileContent
-    me={ false }
-    toggleDrawer={ toggleDrawer }
-    profile={ mockProfile }
-  />);
+  const wrapper = shallow(<ProfileContent me={ false } toggleDrawer={ toggleDrawer } profile={ mockProfile } />);
   expect(wrapper.is('.boldr-profile__content')).toEqual(true);
 });

@@ -12,9 +12,7 @@ describe('<TagList /> component', () => {
 
   it('simulates a click', () => {
     const handleTagClick = sinon.spy();
-    const wrapper = mount(
-      <TagList tags={ tags } handleTagClick={ handleTagClick } />
-    );
+    const wrapper = mount(<TagList tags={ tags } handleTagClick={ handleTagClick } />);
     wrapper.find('.md-list-item').first().simulate('click');
     expect(handleTagClick.calledOnce).toEqual(false);
   });

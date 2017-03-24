@@ -4,8 +4,10 @@ const tag = new schema.Entity(
   'tags',
   {
     processStrategy: (value, parent, key) => {
-      return { ...value,
-        post: parent.id };
+      return {
+        ...value,
+        post: parent.id,
+      };
     },
   },
   { idAttribute: 'id' },

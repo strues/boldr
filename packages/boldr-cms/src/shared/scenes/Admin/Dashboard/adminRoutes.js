@@ -9,7 +9,8 @@ export default [
     icon: 'dashboard',
     primaryText: 'Dashboard',
   },
-  { key: 'divider',
+  {
+    key: 'divider',
     divider: true,
   },
   {

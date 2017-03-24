@@ -1,11 +1,4 @@
-const httpMethods = [
-  'get',
-  'post',
-  'put',
-  'head',
-  'delete',
-  'options',
-];
+const httpMethods = ['get', 'post', 'put', 'head', 'delete', 'options'];
 function wrapRouter(router) {
   httpMethods.concat(['use', 'all', 'param']).forEach(method => {
     if (typeof router[method] === 'function') {

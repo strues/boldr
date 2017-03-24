@@ -3,16 +3,14 @@ import dashboardReducer from './reducer';
 
 describe('Dashboard reducer', () => {
   it('Should return the initial state', () => {
-    expect(
-        dashboardReducer(undefined, {}),
-      ).toEqual({
-        open: true,
-        loaded: false,
-        loading: false,
-        error: null,
-        activities: [],
-        stats: {},
-      });
+    expect(dashboardReducer(undefined, {})).toEqual({
+      open: true,
+      loaded: false,
+      loading: false,
+      error: null,
+      activities: [],
+      stats: {},
+    });
   });
   it('should hide the sidebar', () => {
     const initialState = {

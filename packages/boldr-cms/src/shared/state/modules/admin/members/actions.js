@@ -88,8 +88,10 @@ const beginUpdateMember = () => {
 };
 
 const doneUpdateMember = response => {
-  return { type: t.UPDATE_MEMBER_SUCCESS,
-    payload: response };
+  return {
+    type: t.UPDATE_MEMBER_SUCCESS,
+    payload: response,
+  };
 };
 
 const failUpdateMember = err => {

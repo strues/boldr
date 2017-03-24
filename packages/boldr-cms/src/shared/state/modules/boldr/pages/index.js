@@ -4,10 +4,4 @@ import { getPages } from './selectors';
 
 export default pagesReducer;
 
-export {
-  STATE_KEY,
-  fetchPagesIfNeeded,
-  fetchPages,
-  fetchPageByUrl,
-  getPages,
-};
+export { STATE_KEY, fetchPagesIfNeeded, fetchPages, fetchPageByUrl, getPages };

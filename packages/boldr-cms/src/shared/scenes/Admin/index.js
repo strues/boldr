@@ -3,58 +3,45 @@ import { RequireAuth } from '../../components';
 import DashboardLayout from './Dashboard/DashboardLayout';
 import DashboardContainer from './Dashboard/DashboardContainer';
 
-
-export default (store) => {
+export default store => {
   /* istanbul ignore next */
   return {
     path: 'admin',
     component: RequireAuth(DashboardLayout),
     indexRoute: {
       getComponent(nextState, cb) {
-        import('./Dashboard/DashboardContainer')
-          .then(loadRoute(cb))
-          .catch(errorLoading);
+        import('./Dashboard/DashboardContainer').then(loadRoute(cb)).catch(errorLoading);
       },
     },
     childRoutes: [
       {
         path: 'posts',
         getComponent(nextState, cb) {
-          import('./Post/PostList/PostListContainer')
-            .then(loadRoute(cb))
-            .catch(errorLoading);
+          import('./Post/PostList/PostListContainer').then(loadRoute(cb)).catch(errorLoading);
         },
       },
       {
         path: 'posts/editor/:slug',
         getComponent(nextState, cb) {
-          import('./Post/PostEditor')
-            .then(loadRoute(cb))
-            .catch(errorLoading);
+          import('./Post/PostEditor').then(loadRoute(cb)).catch(errorLoading);
         },
       },
       {
         path: 'posts/new',
         getComponent(nextState, cb) {
-          import('./Post/NewPost/NewPostContainer')
-            .then(loadRoute(cb))
-            .catch(errorLoading);
+          import('./Post/NewPost/NewPostContainer').then(loadRoute(cb)).catch(errorLoading);
         },
       },
       {
         path: 'filemanager',
         getComponent(nextState, cb) {
-          import('./FileManager')
-            .then(loadRoute(cb))
-            .catch(errorLoading);
+          import('./FileManager').then(loadRoute(cb)).catch(errorLoading);
         },
       },
       {
         path: 'filemanager/:id/editor',
         getComponent(nextState, cb) {
-          import('./FileManager/FileEditor')
-            .then(loadRoute(cb))
-            .catch(errorLoading);
+          import('./FileManager/FileEditor').then(loadRoute(cb)).catch(errorLoading);
         },
       },
       {

@@ -13,12 +13,9 @@ type Props = {
   fetchTagsIfNeeded: Function,
 };
 
-
 class TagsContainer extends Component {
   static fetchData(dispatch) {
-    return Promise.all([
-      dispatch(fetchTagsIfNeeded()),
-    ]);
+    return Promise.all([dispatch(fetchTagsIfNeeded())]);
   }
   componentDidMount() {
     const { dispatch } = this.props;
@@ -27,13 +24,11 @@ class TagsContainer extends Component {
   props: Props;
 
   render() {
-    return (
-      <Tags tags={ this.props.tags } currentTag={ this.props.currentTag } />
-    );
+    return <Tags tags={ this.props.tags } currentTag={ this.props.currentTag } />;
   }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = state => {
   return {
     tags: getTags(state),
     currentTag: state.blog.tags.currentTag,

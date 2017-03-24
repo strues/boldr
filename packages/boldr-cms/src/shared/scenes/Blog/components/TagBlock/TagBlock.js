@@ -5,30 +5,27 @@ import Tag from '../Tag';
 
 const BASE_ELEMENT = StyleClasses.TAG_BLOCK;
 
-const TagBlock = (props) => {
+const TagBlock = props => {
   if (!props.tags) {
     return null;
   }
 
-  const classes = classnames(
-    BASE_ELEMENT,
-    props.className,
-  );
+  const classes = classnames(BASE_ELEMENT, props.className);
   return (
     <div className={ classes }>
-      {
-        props.tags.map(tag => <Tag key={ tag.id } tag={ tag } />)
-      }
+      {props.tags.map(tag => <Tag key={ tag.id } tag={ tag } />)}
     </div>
   );
 };
 
 TagBlock.propTypes = {
   className: React.PropTypes.string,
-  tags: React.PropTypes.arrayOf(React.PropTypes.shape({
-    id: React.PropTypes.number,
-    name: React.PropTypes.name,
-  })),
+  tags: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      id: React.PropTypes.number,
+      name: React.PropTypes.name,
+    }),
+  ),
 };
 
 export default TagBlock;

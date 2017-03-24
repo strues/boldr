@@ -46,17 +46,17 @@ class SinglePost extends Component {
           <Row>
             <Col sm={ 12 } md={ 8 } lg={ 9 }>
               <PostContent { ...currentPost } />
-              {
-                !currentPost.comments ? null
+              {!currentPost.comments
+                ? null
                 : <PostComments
                   comments={ currentPost.comments.map(c => entities.comments[c]) }
                   postId={ currentPost.id }
                   userEntities={ entities.users }
-                />
-              }
+                />}
             </Col>
             {!currentPost.tags
-              ? null : <Col sm={ 12 } md={ 4 } lg={ 3 }>
+              ? null
+              : <Col sm={ 12 } md={ 4 } lg={ 3 }>
                 <PostSidebar
                   postAuthor={ entities.users[author] }
                   postTags={ currentPost.tags.map(id => entities.tags[id]) }

@@ -1,2 +1,1 @@
-
-export const selectBoldr = (state) => state.boldr;
+export const selectBoldr = state => state.boldr;

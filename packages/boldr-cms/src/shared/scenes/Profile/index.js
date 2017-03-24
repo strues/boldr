@@ -1,7 +1,7 @@
 import { loadRoute, errorLoading } from 'boldr-utils';
 import ProfileContainer from './ProfileContainer';
 
-export default (store) => {
+export default store => {
   /* istanbul ignore next */
   return {
     path: 'profiles/:username',

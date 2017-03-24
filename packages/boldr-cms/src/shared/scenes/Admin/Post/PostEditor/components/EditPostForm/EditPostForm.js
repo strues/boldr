@@ -15,7 +15,7 @@ type Props = {
   pristine?: boolean,
   input?: Object,
   label?: string,
-  initialValues: Object
+  initialValues: Object,
 };
 const Wrapper = styled.section`
   padding: 1em;

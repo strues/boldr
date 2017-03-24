@@ -44,42 +44,47 @@ function boldrSSR(req, res, next) {
 
   const { dispatch, getState } = store;
 
-  match({ history,
-    routes,
-    location: req.url }, (error, redirectLocation, renderProps) => {
-    if (error) return res.status(500).json(error);
-    if (!renderProps) return res.status(404);
-    if (redirectLocation) return res.redirect(redirectLocation.pathname + redirectLocation.search);
+  match(
+    {
+      history,
+      routes,
+      location: req.url,
+    },
+    (error, redirectLocation, renderProps) => {
+      if (error) return res.status(500).json(error);
+      if (!renderProps) return res.status(404);
+      if (redirectLocation) return res.redirect(redirectLocation.pathname + redirectLocation.search);
 
-    const promises = renderProps.components
-      .filter(component => component.fetchData)
-      .map(component => component.fetchData(store.dispatch, renderProps.params));
+      const promises = renderProps.components
+        .filter(component => component.fetchData)
+        .map(component => component.fetchData(store.dispatch, renderProps.params));
 
-    Promise.all(promises)
-      .then(data => {
-        const preloadedState = store.getState();
-        const reactAppString = renderAppToString(store, renderProps, apiClient);
+      Promise.all(promises)
+        .then(data => {
+          const preloadedState = store.getState();
+          const reactAppString = renderAppToString(store, renderProps, apiClient);
 
-        const helmet = Helmet.rewind();
-        // render styled-components styleSheets to string.
-        const styles = styleSheet.rules().map(rule => rule.cssText).join('\n');
+          const helmet = Helmet.rewind();
+          // render styled-components styleSheets to string.
+          const styles = styleSheet.rules().map(rule => rule.cssText).join('\n');
 
-        const html = renderToStaticMarkup(
-          <ServerHTML
-            reactAppString={ reactAppString }
-            nonce={ nonce }
-            helmet={ Helmet.rewind() }
-            styles={ styles }
-            preloadedState={ preloadedState }
-          />,
-        );
-        return res.status(200).send(`<!DOCTYPE html>${html}`);
-      })
-      .catch(err => {
-        debug(err);
-        return res.status(500).send(err);
-      });
-  });
+          const html = renderToStaticMarkup(
+            <ServerHTML
+              reactAppString={ reactAppString }
+              nonce={ nonce }
+              helmet={ Helmet.rewind() }
+              styles={ styles }
+              preloadedState={ preloadedState }
+            />,
+          );
+          return res.status(200).send(`<!DOCTYPE html>${html}`);
+        })
+        .catch(err => {
+          debug(err);
+          return res.status(500).send(err);
+        });
+    },
+  );
 }
 
 export default boldrSSR;

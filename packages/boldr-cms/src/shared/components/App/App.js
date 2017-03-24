@@ -29,9 +29,7 @@ const mapStateToProps = createStructuredSelector({
 @connect(mapStateToProps)
 class App extends Component {
   static fetchData(dispatch) {
-    return Promise.all([
-      dispatch(fetchSettingsIfNeeded()),
-    ]);
+    return Promise.all([dispatch(fetchSettingsIfNeeded())]);
   }
   static displayName = 'App';
   static childContextTypes = {
@@ -60,14 +58,10 @@ class App extends Component {
   render() {
     const { className, children } = this.props;
 
-    const classes = classnames(
-      'boldr',
-      BASE_ELEMENT,
-      className,
-    );
+    const classes = classnames('boldr', BASE_ELEMENT, className);
     return (
       <div className={ classes }>
-        { React.Children.toArray(children) }
+        {React.Children.toArray(children)}
         <Notifications />
       </div>
     );

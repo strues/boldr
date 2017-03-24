@@ -24,16 +24,15 @@ const TagList = (props: Props) => {
   }
   return (
     <div>
-      {
-        props.tags.map(tag =>
-          <ListItem
-            key={ tag.id }
-            primaryText={ tag.name }
-            rightIcon={ <FontIcon onClick={ () => handleClickDelete(tag) }>delete_forever</FontIcon> }
-            secondaryText={ tag.description }
-            onClick={ () => handleClick(tag) }
-          />)
-      }
+      {props.tags.map(tag => (
+        <ListItem
+          key={ tag.id }
+          primaryText={ tag.name }
+          rightIcon={ <FontIcon onClick={ () => handleClickDelete(tag) }>delete_forever</FontIcon> }
+          secondaryText={ tag.description }
+          onClick={ () => handleClick(tag) }
+        />
+      ))}
     </div>
   );
 };

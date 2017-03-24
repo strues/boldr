@@ -7,19 +7,17 @@ import uiReducer from './reducer';
 
 describe('UI Reducer', () => {
   it('Should return the initial state', () => {
-    expect(
-        uiReducer(undefined, {}),
-      ).toEqual({
-        loaded: false,
-        layout: 'grid',
-        modal: false,
-        drawer: false,
-        isMobile: false,
-        mobile: undefined,
-        tablet: undefined,
-        desktop: undefined,
-        defaultMedia: 'mobile',
-      });
+    expect(uiReducer(undefined, {})).toEqual({
+      loaded: false,
+      layout: 'grid',
+      modal: false,
+      drawer: false,
+      isMobile: false,
+      mobile: undefined,
+      tablet: undefined,
+      desktop: undefined,
+      defaultMedia: 'mobile',
+    });
   });
   it('should open the modal', () => {
     const initialState = {
@@ -96,9 +94,7 @@ describe('UI Reducer', () => {
       defaultMedia: 'mobile',
     };
 
-    expect(
-      uiReducer(state, action),
-    ).toEqual({
+    expect(uiReducer(state, action)).toEqual({
       loaded: false,
       layout: 'list',
       modal: false,
@@ -113,9 +109,7 @@ describe('UI Reducer', () => {
 });
 
 test('changeLayout', () => {
-  const mockStore = configureMockStore([
-    thunk,
-  ]);
+  const mockStore = configureMockStore([thunk]);
   const store = mockStore({
     ui: {
       loaded: false,
@@ -138,9 +132,7 @@ test('changeLayout', () => {
 });
 
 test('openModal', () => {
-  const mockStore = configureMockStore([
-    thunk,
-  ]);
+  const mockStore = configureMockStore([thunk]);
   const store = mockStore({
     ui: {
       loaded: false,
@@ -162,9 +154,7 @@ test('openModal', () => {
 });
 
 test('closeModal', () => {
-  const mockStore = configureMockStore([
-    thunk,
-  ]);
+  const mockStore = configureMockStore([thunk]);
   const store = mockStore({
     ui: {
       loaded: false,
@@ -186,9 +176,7 @@ test('closeModal', () => {
 });
 
 test('Open the drawer', () => {
-  const mockStore = configureMockStore([
-    thunk,
-  ]);
+  const mockStore = configureMockStore([thunk]);
   const store = mockStore({
     ui: {
       loaded: false,
@@ -209,9 +197,7 @@ test('Open the drawer', () => {
   });
 });
 test('Close the drawer', () => {
-  const mockStore = configureMockStore([
-    thunk,
-  ]);
+  const mockStore = configureMockStore([thunk]);
   const store = mockStore({
     ui: {
       loaded: false,

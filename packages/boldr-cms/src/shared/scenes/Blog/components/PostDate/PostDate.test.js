@@ -10,10 +10,7 @@ describe('<PostDate />', () => {
   });
 
   it('accepts props and renders them.', () => {
-    const wrapper = shallow(
-      <PostDate
-        created="2017-01-27T02:52:52.687Z"
-      />);
+    const wrapper = shallow(<PostDate created="2017-01-27T02:52:52.687Z" />);
     expect(wrapper.instance().props.created).toBe('2017-01-27T02:52:52.687Z');
   });
 });

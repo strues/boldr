@@ -32,11 +32,13 @@ describe('Menu Details API', async () => {
       .post('/api/v1/menu-details')
       .set('Accept', 'application/json')
       .set('Authorization', `Bearer ${token}`)
-      .send({ name: faker.random.word(),
+      .send({
+        name: faker.random.word(),
         href: 'test',
         order: 4,
         icon: 'question',
-        has_dropdown: 'false' })
+        has_dropdown: 'false',
+      })
       .expect(res => {
         expect(res.status).toBe(201);
       });
@@ -57,19 +59,18 @@ describe('Menu Details API', async () => {
     return agent
       .put('/api/v1/menu-details/1')
       .set('Authorization', `Bearer ${token}`)
-      .send({ href: 'test',
+      .send({
+        href: 'test',
         order: 4,
-        icon: 'question' })
+        icon: 'question',
+      })
       .expect(res => {
         expect(res.status).toBe(202);
       });
   });
   it('+++ DELETE /menu-details/:id -- Should delete a detail', () => {
-    return (
-      agent.del('/api/v1/menu-details/2').set('Accept', 'application/json')// .set('Authorization', `Bearer ${token}`)
-      .expect(res => {
-        expect(res.status).toBe(401);
-      })
-    );
+    return agent.del('/api/v1/menu-details/2').set('Accept', 'application/json').expect(res => { // .set('Authorization', `Bearer ${token}`)
+      expect(res.status).toBe(401);
+    });
   });
 });

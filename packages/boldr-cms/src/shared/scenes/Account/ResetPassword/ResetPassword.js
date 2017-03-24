@@ -8,7 +8,7 @@ import ResetPasswordForm from './ResetPasswordForm';
 
 type Props = {
   dispatch: () => void,
-  params: Object
+  params: Object,
 };
 
 class ResetPassword extends Component {
@@ -26,10 +26,7 @@ class ResetPassword extends Component {
   render() {
     return (
       <div>
-        <FormCard
-          title="Reset Password"
-          form={ <ResetPasswordForm onSubmit={ this.handleReset } /> }
-        />
+        <FormCard title="Reset Password" form={ <ResetPasswordForm onSubmit={ this.handleReset } /> } />
       </div>
     );
   }

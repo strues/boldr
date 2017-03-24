@@ -5,13 +5,7 @@ import appRootDir from 'app-root-dir';
 
 // Middleware to server our service worker.
 function serviceWorkerMiddleware(req, res, next) {
-  res.sendFile(
-    pathResolve(
-      appRootDir.get(),
-      './boldrCMS/client',
-      'sw.js',
-    ),
-  );
+  res.sendFile(pathResolve(appRootDir.get(), './boldrCMS/client', 'sw.js'));
 }
 
 export default serviceWorkerMiddleware;

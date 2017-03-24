@@ -3,14 +3,12 @@ import authReducer from './reducer';
 
 describe('Auth Reducer', () => {
   it('Should return the initial state', () => {
-    expect(
-        authReducer(undefined, {}),
-      ).toEqual({
-        isAuthenticated: false,
-        error: null,
-        loading: false,
-        token: null,
-      });
+    expect(authReducer(undefined, {})).toEqual({
+      isAuthenticated: false,
+      error: null,
+      loading: false,
+      token: null,
+    });
   });
   it('should initiate loading', () => {
     const initialState = {

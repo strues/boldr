@@ -6,27 +6,15 @@ import { InputField } from '../../../components/Form';
 import { Row, Col } from '../../../components';
 
 type Props = {
-  handleSubmit?: Function
+  handleSubmit?: Function,
 };
 
 const LoginForm = (props: Props) => {
   const { handleSubmit } = props;
   return (
     <form onSubmit={ handleSubmit } className="boldr-form__generic">
-      <Field
-        id="email"
-        name="email"
-        type="email"
-        component={ InputField }
-        label="Email address"
-      />
-      <Field
-        id="password"
-        name="password"
-        type="password"
-        component={ InputField }
-        label="Password"
-      />
+      <Field id="email" name="email" type="email" component={ InputField } label="Email address" />
+      <Field id="password" name="password" type="password" component={ InputField } label="Password" />
       <Button style={ { marginTop: '25px' } } raised primary label="Login" type="submit" />
     </form>
   );

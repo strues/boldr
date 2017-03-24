@@ -3,14 +3,12 @@ import tagsReducer from './reducer';
 
 describe('Tags', () => {
   it('Should return the initial state', () => {
-    expect(
-        tagsReducer(undefined, {}),
-      ).toEqual({
-        all: {},
-        ids: [],
-        isFetching: false,
-        currentTag: {},
-      });
+    expect(tagsReducer(undefined, {})).toEqual({
+      all: {},
+      ids: [],
+      isFetching: false,
+      currentTag: {},
+    });
   });
   it('should initiate loading', () => {
     const initialState = {

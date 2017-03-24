@@ -282,8 +282,10 @@ export function uploadProfileImage(payload) {
           dispatch(uploadProfileImageFail(response));
           dispatch(notificationSend(notif.MSG_UPLOAD_ERROR));
         }
-        const userData = { id: response.body.user_id,
-          profile_image: response.body.url };
+        const userData = {
+          id: response.body.user_id,
+          profile_image: response.body.url,
+        };
         dispatch(editProfile(userData));
         dispatch(uploadProfileImageSuccess(response));
         dispatch(notificationSend(notif.MSG_UPLOAD_SUCCESS));
@@ -326,8 +328,10 @@ export function uploadAvatarImage(payload) {
           dispatch(uploadAvatarImageFail(response));
           dispatch(notificationSend(notif.MSG_UPLOAD_ERROR));
         }
-        const userData = { id: response.body.user_id,
-          avatarUrl: response.body.url };
+        const userData = {
+          id: response.body.user_id,
+          avatarUrl: response.body.url,
+        };
         dispatch(editProfile(userData));
         dispatch(uploadAvatarImageSuccess(response));
         dispatch(notificationSend(notif.MSG_UPLOAD_SUCCESS));

@@ -10,10 +10,9 @@ type Props = {
 const PostDate = (props: Props) => {
   return (
     <div className="boldr-post__date">
-      <Icon kind="calendar" color="#222" /> { format(props.created, 'MM/DD/YYYY') }
+      <Icon kind="calendar" color="#222" /> {format(props.created, 'MM/DD/YYYY')}
     </div>
   );
 };
-
 
 export default PostDate;

@@ -41,10 +41,12 @@ class FileManager extends Component {
   constructor(props: Props) {
     super(props);
 
-    (this: any).state = { activeTabIndex: 0,
+    (this: any).state = {
+      activeTabIndex: 0,
       tabTwoChildren: null,
       collapsed: true,
-      files: [] };
+      files: [],
+    };
     (this: any)._handleTabChange = this._handleTabChange.bind(this);
     (this: any)._toggleCollapse = this._toggleCollapse.bind(this);
     (this: any).onDrop = this.onDrop.bind(this);

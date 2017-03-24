@@ -5,7 +5,6 @@ import { shallowToJson } from 'enzyme-to-json';
 import configureStore from 'redux-mock-store';
 import Verify from './Verify';
 
-
 test('<Verify />, renders the verify account form card', () => {
   const middlewares = [];
   const mockStore = configureStore(middlewares);

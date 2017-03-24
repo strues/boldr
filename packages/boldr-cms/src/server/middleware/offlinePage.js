@@ -16,20 +16,12 @@ export default function offlinePageMiddleware(req, res, next) {
     throw new Error('A "nonce" value has not been attached to the response');
   }
   const { nonce } = res.locals;
-  readFile(
-    pathResolve(
-      appRootDir.get(),
-      './boldrCMS/client',
-      'offline.html',
-    ),
-    'utf-8',
-    (err, data) => {
-      if (err) {
-        res.status(500).send('Error returning offline page.');
-        return;
-      }
-      const offlinePageWithNonce = data.replace('OFFLINE_PAGE_NONCE_PLACEHOLDER', nonce);
-      res.send(offlinePageWithNonce);
-    },
-  );
+  readFile(pathResolve(appRootDir.get(), './boldrCMS/client', 'offline.html'), 'utf-8', (err, data) => {
+    if (err) {
+      res.status(500).send('Error returning offline page.');
+      return;
+    }
+    const offlinePageWithNonce = data.replace('OFFLINE_PAGE_NONCE_PLACEHOLDER', nonce);
+    res.send(offlinePageWithNonce);
+  });
 }

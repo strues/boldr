@@ -4,10 +4,4 @@ import { getTemplates } from './selectors';
 
 export default templatesReducer;
 
-export {
-  STATE_KEY,
-  fetchTemplatesIfNeeded,
-  fetchTemplates,
-  fetchTemplateResource,
-  getTemplates,
-};
+export { STATE_KEY, fetchTemplatesIfNeeded, fetchTemplates, fetchTemplateResource, getTemplates };

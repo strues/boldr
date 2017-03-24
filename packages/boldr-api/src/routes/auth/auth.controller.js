@@ -3,14 +3,7 @@ import * as objection from 'objection';
 import { mailer, signToken, generateHash } from '../../services';
 import { welcomeEmail } from '../../services/mailer/templates';
 import { User, Activity, VerificationToken } from '../../models';
-import {
-  responseHandler,
-  UserNotVerifiedError,
-  BadRequest,
-  InternalServer,
-  Unauthorized,
-  Conflict,
-} from '../../core';
+import { responseHandler, UserNotVerifiedError, BadRequest, InternalServer, Unauthorized, Conflict } from '../../core';
 
 const debug = require('debug')('boldrAPI:auth-ctrl');
 

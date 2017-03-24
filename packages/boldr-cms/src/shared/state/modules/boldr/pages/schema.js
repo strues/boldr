@@ -2,8 +2,10 @@ import { schema } from 'normalizr';
 
 const page = new schema.Entity('pages', {
   processStrategy: (value, parent, key) => {
-    return { ...value,
-      template: parent.id };
+    return {
+      ...value,
+      template: parent.id,
+    };
   },
 });
 // const tag = new schema.Entity('tags');

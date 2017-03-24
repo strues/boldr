@@ -59,10 +59,7 @@ export default class ApiClient {
             request.send(data);
           }
 
-          request.end(
-            (error, response) =>
-              error ? reject(response || error) : resolve(response),
-          );
+          request.end((error, response) => error ? reject(response || error) : resolve(response));
         });
     });
   }

@@ -23,8 +23,12 @@ const PostContent = (props: Props) => {
   return (
     <article>
       <Paper
-        zDepth={ 2 } style={ { padding: '1em',
-          marginBottom: '50px' } } className="boldr-paperoverride"
+        zDepth={ 2 }
+        style={ {
+          padding: '1em',
+          marginBottom: '50px',
+        } }
+        className="boldr-paperoverride"
       >
 
         <PostDate created={ props.created_at } />

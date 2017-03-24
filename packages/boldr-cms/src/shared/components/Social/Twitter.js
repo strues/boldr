@@ -15,9 +15,7 @@ const Twitter = (props: Props) => {
       </a>
     );
   } else {
-    return (
-      <Icon kind="twitter" color="#1c3050" size={ props.size } />
-    );
+    return <Icon kind="twitter" color="#1c3050" size={ props.size } />;
   }
 };
 

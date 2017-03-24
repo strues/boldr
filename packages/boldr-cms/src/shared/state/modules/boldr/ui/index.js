@@ -4,12 +4,4 @@ import { makeSelectUi, makeSelectMobile } from './selectors';
 
 export default uiReducer;
 
-export {
-  STATE_KEY,
-  makeSelectUi,
-  changeLayout,
-  showModal,
-  hideModal,
-  setMobileDevice,
-  makeSelectMobile,
-};
+export { STATE_KEY, makeSelectUi, changeLayout, showModal, hideModal, setMobileDevice, makeSelectMobile };

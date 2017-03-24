@@ -5,7 +5,6 @@ import { shallowToJson } from 'enzyme-to-json';
 import configureStore from 'redux-mock-store';
 import ResetPassword from './ResetPassword';
 
-
 test('<ResetPassword />, renders the reset password form card', () => {
   const middlewares = [];
   const mockStore = configureStore(middlewares);

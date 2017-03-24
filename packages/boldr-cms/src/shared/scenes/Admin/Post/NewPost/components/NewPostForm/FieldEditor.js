@@ -2,7 +2,6 @@ import React, { PropTypes, PureComponent } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
 
-
 const editorStyle = {
   minHeight: 200,
 };

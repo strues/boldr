@@ -54,16 +54,11 @@ class PostEditor extends Component {
     return (
       <div>
         <Helmet title={ `Admin: Editing Post ${this.props.currentPost.title}` } />
-        <EditPostForm
-          initialValues={ setPostValues }
-
-          onSubmit={ this.handleSubmit }
-        />
+        <EditPostForm initialValues={ setPostValues } onSubmit={ this.handleSubmit } />
       </div>
     );
   }
 }
-
 
 const mapStateToProps = (state, ownProps) => {
   return {

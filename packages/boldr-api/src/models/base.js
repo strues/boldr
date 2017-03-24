@@ -68,7 +68,7 @@ class BaseModel extends Model {
     // Convert the data to camelCase before sending.
     json = mapKeys(json, (value, key) => camelCase(key));
     super.$parseDatabaseJson(json);
-    
+
     Object.keys(this.constructor.transforms).forEach(key => {
       if (json.hasOwnProperty(key)) {
         json[key] = this.constructor.transforms[key](json[key]);

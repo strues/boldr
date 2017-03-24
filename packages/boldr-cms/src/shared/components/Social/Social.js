@@ -33,26 +33,16 @@ type Props = {
 const Social = (props: Props) => {
   return (
     <SocialList>
-      {
-        // $FlowIssue
-        props.facebook ? <SocialItem><Facebook href={ props.fburl } /></SocialItem> : null
-      }
-      {
-        // $FlowIssue
-        props.twitter ? <SocialItem><Twitter href={ props.turl } /></SocialItem> : null
-      }
-      {
-        // $FlowIssue
-        props.github ? <SocialItem><Github href={ props.ghurl } /></SocialItem> : null
-      }
-      {
-        // $FlowIssue
-        props.google ? <SocialItem><Google href={ props.gurl } /></SocialItem> : null
-      }
-      {
-        // $FlowIssue
-        props.linkedin ? <SocialItem><LinkedIn href={ props.lurl } /></SocialItem> : null
-      }
+      {// $FlowIssue
+      props.facebook ? <SocialItem><Facebook href={ props.fburl } /></SocialItem> : null}
+      {// $FlowIssue
+      props.twitter ? <SocialItem><Twitter href={ props.turl } /></SocialItem> : null}
+      {// $FlowIssue
+      props.github ? <SocialItem><Github href={ props.ghurl } /></SocialItem> : null}
+      {// $FlowIssue
+      props.google ? <SocialItem><Google href={ props.gurl } /></SocialItem> : null}
+      {// $FlowIssue
+      props.linkedin ? <SocialItem><LinkedIn href={ props.lurl } /></SocialItem> : null}
     </SocialList>
   );
 };

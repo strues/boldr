@@ -34,8 +34,11 @@ export class FileEditor extends Component {
           </Col>
           <Col xs={ 12 } md={ 7 }>
             <Paper
-              zDepth={ 2 } style={ { padding: '1em',
-                background: '#fff' } }
+              zDepth={ 2 }
+              style={ {
+                padding: '1em',
+                background: '#fff',
+              } }
             >
               <FileEditorForm onSubmit={ this.handleSubmit } />
             </Paper>

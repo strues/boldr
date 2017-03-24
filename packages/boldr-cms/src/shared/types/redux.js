@@ -6,8 +6,8 @@ export type ApiAction<T> = {
 };
 
 export type Store = {
-  dispatch(action: ActionType): ActionType
-}
+  dispatch(action: ActionType): ActionType,
+};
 export type ActionType =
   | 'LOGIN_REQUEST'
   | 'LOGIN_SUCCESS'

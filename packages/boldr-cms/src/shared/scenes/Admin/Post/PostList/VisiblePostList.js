@@ -8,9 +8,6 @@ const mapStateToProps = (state, { params }) => ({
   posts: getPublishedPosts(state, params.filter || 'all'),
 });
 
-const VisiblePostListing = withRouter(connect(
-  mapStateToProps,
-
-)(PostList));
+const VisiblePostListing = withRouter(connect(mapStateToProps)(PostList));
 
 export default VisiblePostListing;

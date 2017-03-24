@@ -11,19 +11,18 @@ describe('<PostCard />', () => {
   });
 
   it('accepts props and renders them.', () => {
-
     const wrapper = shallow(
       <PostCard
         feature_image="http://boldr.io/images/logo.png"
         title="Test Post"
         excerpt="An excerpt"
         slug="test-post"
-      />);
+      />,
+    );
     expect(wrapper.instance().props.feature_image).toBe('http://boldr.io/images/logo.png');
     expect(wrapper.instance().props.title).toBe('Test Post');
     expect(wrapper.instance().props.excerpt).toBe('An excerpt');
     expect(wrapper.instance().props.slug).toBe('test-post');
-
   });
   it('renders snapshot', () => {
     const wrapper = shallow(<PostCard title="Test Post" />);

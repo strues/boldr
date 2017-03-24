@@ -11,11 +11,7 @@ describe('<PostContent />', () => {
   });
 
   it('accepts props and renders them.', () => {
-    const wrapper = shallow(
-      <PostContent
-        feature_image="http://boldr.io/images/logo.png"
-        title="Test Post"
-      />);
+    const wrapper = shallow(<PostContent feature_image="http://boldr.io/images/logo.png" title="Test Post" />);
     expect(wrapper.instance().props.feature_image).toBe('http://boldr.io/images/logo.png');
     expect(wrapper.instance().props.title).toBe('Test Post');
   });
