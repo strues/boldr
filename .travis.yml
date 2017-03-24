@@ -60,7 +60,6 @@ matrix:
 
 after_success:
   - yarn map-coverage
-  - yarn run coveralls
   - bash <(curl -s https://codecov.io/bash)
 
 cache:

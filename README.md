@@ -1,9 +1,9 @@
 <p align="center"><img src="/docs/assets/logo-small.png"></p>
 
-<p align="center"><a href="/packages/boldr-api">Boldr-API</a> || <a href="/packages/boldr-cms">Boldr-CMS</a></p>
+[![Build Status](https://travis-ci.org/strues/boldr.svg?branch=master)](https://travis-ci.org/strues/boldr) | [![codecov](https://codecov.io/gh/strues/boldr/branch/master/graph/badge.svg)](https://codecov.io/gh/strues/boldr)  |  [![Code Climate](https://codeclimate.com/github/strues/boldr/badges/gpa.svg)](https://codeclimate.com/github/strues/boldr)
 
->
-Boldr is a modern content management framework. Think of Boldr as the solid foundation for building your next great web application. Unlike other CMS platforms, Boldr is entirely JavaScript. Boldr features Universal / Isomorphic rendering for improved performance and Search Engine Optimization.
+
+> Boldr is a modern content management framework. Think of Boldr as the solid foundation for building your next great web application. Unlike other CMS platforms, Boldr is entirely JavaScript. Boldr features Universal / Isomorphic rendering for improved performance and Search Engine Optimization.
 
 A CLI is in the early development stages. You will be able to scaffold out a complete or partial Boldr project with a single command. Viewable in its repository [here](https://github.com/boldr/getBoldr)
 
