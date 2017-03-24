@@ -50,7 +50,7 @@ const renderApp = () => {
     () => {
       render(
         <AppRoot store={ store }>
-          <Router history={ history } routes={ routes } helpers={ apiClient } onUpdate={ () => window.scrollTo(0, 0) } />
+          <Router history={ history } routes={ routes } helpers={ apiClient } />
         </AppRoot>,
         domNode,
       );
@@ -62,11 +62,12 @@ if (process.env.NODE_ENV !== 'production') {
   window.React = React;
 }
 
-// This registers our service worker for asset caching and offline support.
-// Keep this as the last item, just in case the code execution failed (thanks
-// to react-boilerplate for that tip.)
-require('./registerServiceWorker');
-
+if (process.env.NODE_ENV === 'production') {
+  // This registers our service worker for asset caching and offline support.
+  // Keep this as the last item, just in case the code execution failed (thanks
+  // to react-boilerplate for that tip.)
+  require('./registerServiceWorker');
+}
 if (module.hot) {
   module.hot.accept('../shared/scenes', () => {
     setImmediate(() => {

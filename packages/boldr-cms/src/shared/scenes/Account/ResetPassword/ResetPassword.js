@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import FormCard from '../../../components/Form/FormCard';
+import { FormCard } from 'boldr-ui';
 import { resetPassword } from '../../../state/modules/users/actions';
 import ResetPasswordForm from './ResetPasswordForm';
 

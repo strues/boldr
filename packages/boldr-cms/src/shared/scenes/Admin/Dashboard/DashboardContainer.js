@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import type { ReactElement } from 'types/react';
 import { push } from 'react-router-redux';
-import { Grid, Col, Loader } from '../../../components/index';
+import { Grid, Col, Loader } from 'boldr-ui';
 import { loadSiteActivity, fetchStats } from '../../../state/modules/admin/dashboard/actions';
 
 import Dashboard from './Dashboard';

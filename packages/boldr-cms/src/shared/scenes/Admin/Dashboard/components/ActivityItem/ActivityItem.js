@@ -6,10 +6,9 @@ import Button from 'react-md/lib/Buttons';
 import FontIcon from 'react-md/lib/FontIcons';
 import Link from 'react-router/lib/Link';
 import styled from 'styled-components';
-
+import { Icon, Row, Col } from 'boldr-ui';
 import { format } from 'date-fns';
-import type { Post } from '../../../../../types/models';
-import { Icon, Row, Col } from '../../../../../components/index';
+
 import ActivityItemDetail from '../ActivityItemDetail';
 
 const ActivityPanel = styled.div`

@@ -7,8 +7,7 @@ import Divider from 'react-md/lib/Dividers';
 import FontIcon from 'react-md/lib/FontIcons';
 import Paper from 'react-md/lib/Papers';
 
-import { Heading } from '../../../../../components/index';
-import type { Stats } from '../../../../../types/models';
+import { Heading } from 'boldr-ui';
 
 type Props = {
   stats: Stats,

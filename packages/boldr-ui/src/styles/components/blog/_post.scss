@@ -1,0 +1,44 @@
+
+.#{$boldr-ns}post-card {
+  margin-bottom: 50px;
+
+  a.readmore-link {
+    float: right;
+    margin-top: 15px;
+    margin-right: 15px;
+  }
+}
+.boldr-post__image {
+  object-fit: cover;
+  transform: translate3d(0, -5px, 0);
+  transition: opacity .35s, transform .35s;
+  height: 400px;
+  width: 100%;
+
+  &:hover {
+    opacity: .7;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.boldr-post__date {
+  padding-bottom: 15px;
+}
+.boldr-post__title {
+  font-size: 5rem;
+  margin-top: 200px!important;
+  font-weight: 200;
+  letter-spacing: .2em;
+  color: $white;
+  background: rgba($mirage, .65);
+  padding: .08em 1rem;
+  box-decoration-break: clone;
+}
+.boldr-post__content {
+  padding-top: 25px;
+  line-height: 1.5;
+}
+
+.#{$boldr-ns}single-post {
+
+}

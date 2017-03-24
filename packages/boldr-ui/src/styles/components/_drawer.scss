@@ -1,0 +1,30 @@
+.boldr-drawer__admin {
+  .md-title--toolbar {
+    color: #fff;
+  }
+  .md-toolbar {
+    background-color: $primary-color;
+  }
+  .md-list--drawer {
+    background-color: $dark-navy;
+  }
+  .md-list-item {
+    .md-list-tile {
+      color: rgba(255, 255, 255, 0.84);
+    }
+    .md-list-tile--active {
+      .md-icon {
+        color: rgba(255, 255, 255, 0.9);
+      }
+    }
+    .md-text {
+      color: #fff;
+      a {
+        color: #fff;
+      }
+    }
+    .md-icon {
+      color: rgba(255, 255, 255, 0.74);
+    }
+  }
+}

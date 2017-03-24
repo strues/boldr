@@ -6,8 +6,8 @@ import Button from 'react-md/lib/Buttons/Button';
 import Toolbar from 'react-md/lib/Toolbars';
 import Dropzone from 'react-dropzone';
 import classnames from 'classnames';
+import { Grid, Col, Row, Heading } from 'boldr-ui';
 import { StyleClasses } from '../../theme/theme';
-import { Grid, Col, Row, Heading } from '../../components';
 import ProfileContent from './components/ProfileContent';
 import OwnProfile from './components/OwnProfile';
 

@@ -1,0 +1,212 @@
+@mixin list-reset() {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+@mixin hide() {
+  display: none;
+  visibility: hidden;
+}
+@mixin show($display: block) {
+  display: $display;
+  visibility: visible;
+}
+@mixin mq($point) {
+   @if $point == lg{
+    @media (min-width: 60em) {
+       @content;
+    }
+  }
+  @else if $point == md {
+     @media (min-width: 48em){
+      @content;
+    }
+  }
+  @else if $point == sm {
+     @media (min-width: 30em){
+      @content;
+    }
+  }
+}
+@mixin clearfix() {
+  &::after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+// Mixins
+@mixin breakpoint($breakpoint, $breakpoint-size) {
+  // The grid is mobile first so xs is the default, hence no breakpoint
+  @if $breakpoint == xs {
+    @content;
+  }
+
+  // Add breakpoints for larger screens
+  @else {
+    @media only screen and (min-width: $breakpoint-size) {
+      // Static grid
+      .grid {
+        width: map-get($grid-containers, $breakpoint);
+      }
+
+      @content;
+    }
+  }
+}
+@mixin md-box-shadow($elevation) {
+   @if $elevation < 0 or $elevation > 5{
+    @warn 'The elevation must be a number from 0 - 5. elevation given was `#{$elevation}`';
+  }
+  @else {
+    $top-shadow-color: rgba($black, .14);
+    $middle-shadow-color: rgba($black, .12);
+    $bottom-shadow-color: rgba($black, if($elevation == 1, .2, .4));
+    @if $elevation == 0 {
+      box-shadow: none;
+    }
+    @else if $elevation == 1 {
+      box-shadow: 0 2px 2px 0 $top-shadow-color, 0 1px 5px 0 $middle-shadow-color, 0 3px 1px -2px $bottom-shadow-color;
+    }
+    @else if $elevation == 2 {
+      box-shadow: 0 4px 5px 0 $top-shadow-color, 0 1px 10px 0 $middle-shadow-color, 0 2px 4px -1px $bottom-shadow-color;
+    }
+    @else if $elevation == 3 {
+      box-shadow: 0 6px 10px 0 $top-shadow-color, 0 1px 18px 0 $middle-shadow-color, 0 3px 5px -1px $bottom-shadow-color;
+    }
+    @else if $elevation == 4 {
+      box-shadow: 0 8px 10px 1px $top-shadow-color, 0 3px 14px 2px $middle-shadow-color, 0 5px 5px -3px $bottom-shadow-color;
+    }
+    @else if $elevation == 5 {
+      box-shadow: 0 16px 24px 2px $top-shadow-color, 0 6px 30px 5px $middle-shadow-color, 0 8px 10px -5px $bottom-shadow-color;
+    }
+  }
+}
+@mixin box-shadow($shadow...) {
+  box-shadow: $shadow;
+}
+@mixin transition($transition...) {
+  transition: $transition;
+}
+@mixin button-variant($color, $background, $border) {
+  $active-background: darken($background, 10%);
+  $active-border: darken($border, 12%);
+  color: $color;
+  background-color: $background;
+  border-color: $border;
+  @include box-shadow($btn-box-shadow);
+  @include hover {
+    color: $color;
+    background-color: $active-background;
+    border-color: $active-border;
+  }
+
+  &.focus,
+  &:focus {
+    color: $color;
+    background-color: $active-background;
+    border-color: $active-border;
+  }
+
+  &.active,
+  &:active,
+  .open > &.dropdown-toggle {
+    color: $color;
+    background-color: $active-background;
+    border-color: $active-border;
+    // Remove the gradient for the pressed/active state
+    background-image: none;
+    @include box-shadow($btn-active-box-shadow);
+
+    &.focus,
+    &:focus,
+    &:hover {
+      color: $color;
+      background-color: darken($background, 17%);
+      border-color: darken($border, 25%);
+    }
+  }
+
+  &.disabled,
+  &:disabled {
+    &.focus,
+    &:focus {
+      background-color: $background;
+      border-color: $border;
+    }
+    @include hover {
+      background-color: $background;
+      border-color: $border;
+    }
+  }
+}
+@mixin button-outline-variant($color, $color-hover: #fff) {
+  color: $color;
+  background-image: none;
+  background-color: transparent;
+  border-color: $color;
+  @include hover {
+    color: $color-hover;
+    background-color: $color;
+    border-color: $color;
+  }
+
+  &.focus,
+  &:focus {
+    color: $color-hover;
+    background-color: $color;
+    border-color: $color;
+  }
+
+  &.active,
+  &:active,
+  .open > &.dropdown-toggle {
+    color: $color-hover;
+    background-color: $color;
+    border-color: $color;
+
+    &.focus,
+    &:focus,
+    &:hover {
+      color: $color-hover;
+      background-color: darken($color, 17%);
+      border-color: darken($color, 25%);
+    }
+  }
+
+  &.disabled,
+  &:disabled {
+    &.focus,
+    &:focus {
+      border-color: lighten($color, 20%);
+    }
+    @include hover {
+      border-color: lighten($color, 20%);
+    }
+  }
+}
+// Button sizes
+@mixin button-size($padding-y, $padding-x, $font-size, $border-radius) {
+  padding: $padding-y $padding-x;
+  font-size: $font-size;
+  @include border-radius($border-radius);
+}
+@mixin border-radius($radius: $border-radius) {
+  border-radius: $radius;
+}
+@mixin border-top-radius($radius) {
+  border-top-right-radius: $radius;
+  border-top-left-radius: $radius;
+}
+@mixin border-right-radius($radius) {
+  border-bottom-right-radius: $radius;
+  border-top-right-radius: $radius;
+}
+@mixin border-bottom-radius($radius) {
+  border-bottom-right-radius: $radius;
+  border-bottom-left-radius: $radius;
+}
+@mixin border-left-radius($radius) {
+  border-bottom-left-radius: $radius;
+  border-top-left-radius: $radius;
+}

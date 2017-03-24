@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Button from 'react-md/lib/Buttons';
-import FormCard from '../../../components/Form/FormCard';
+import { FormCard } from 'boldr-ui';
 import { verifyAccount } from '../../../state/modules/users/actions';
 
 export type Props = {

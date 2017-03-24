@@ -6,7 +6,7 @@ import Button from 'react-md/lib/Buttons/Button';
 import FontIcon from 'react-md/lib/FontIcons';
 import Toolbar from 'react-md/lib/Toolbars';
 import styled from 'styled-components';
-import { Grid, Col, Row, Heading, Modal, Icon, Social } from '../../../../components';
+import { Grid, Col, Row, Heading, Modal, Icon, Social } from 'boldr-ui';
 import ProfileDetail from '../ProfileDetail';
 
 const DetailList = styled.ul`

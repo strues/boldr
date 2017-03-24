@@ -3,10 +3,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-
+import { Grid, Hero, Row, Footer, Heading, Paragraph } from 'boldr-ui';
 import BaseTemplate from '../templates/Base';
-
-import { Grid, Hero, Row, Footer, Heading, Paragraph } from '../../components/index';
 
 const Home = () => {
   return (

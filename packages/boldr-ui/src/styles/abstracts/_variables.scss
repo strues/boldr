@@ -1,0 +1,87 @@
+$boldr-ns: 'boldrui-';
+
+$shadow-color: rgba(0, 0, 0, .2);
+$box-shadow: 0 0 5 $shadow-color;
+
+$body-background: #e5eaed;
+
+
+$primary-button-bg: $primary-color;
+$primary-button-bg-hover: darken($primary-color, 5%);
+
+$selection-color: darken($snow, 3%);
+$link-color: $accent-color;
+$error-color:  $md-red-700;
+$footer-bg: $mirage;
+$text-color: $near-black;
+$header-font-color: $navy;
+// Borders
+$border-color: $cloud;
+
+/// Font
+$font-name: 'Roboto';
+$font-family: $font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+$header-font-name: 'Roboto';
+
+$header-font-family: $header-font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif;
+
+$font-size-base: 1em;
+$font-size-large: 2em;
+$font-size-small: 0.9em;
+$font-size-xsmall: 0.7em;
+
+$line-height-base: 1.5;
+
+$font-weight-base: 400;
+$font-weight-thin: 200;
+$font-weight-bold: 600;
+
+$header-font-weight: $font-weight-thin;
+$header-font-case: none;
+
+
+$window-medium: 768;
+$window-large: 992;
+$window-xlarge: 1200;
+
+$padding: 4;
+$transition-function: cubic-bezier(.25, .8, .25, 1);
+$transition-duration: .25s;
+
+
+$toolbar-height: 64;
+$toolbar-z-index: 6;
+
+$grid-columns: 12;
+
+$grid-gutter: 1rem;
+
+$grid-breakpoints: (
+  xs: false,
+  sm: 46em,
+  md: 61em,
+  lg: 75em
+);
+
+$grid-containers: (
+  xs: false,
+  sm: 46rem,
+  md: 61rem,
+  lg: 76rem,
+);
+
+$primary-header-link-color: $near-black;
+$primary-header-link-hover-color: $accent-color;
+$primary-header-border: 1 solid $cloud;
+$primary-header-bg: $white;
+$primary-header-link: $ocean;
+
+
+$btn-font-weight: $font-weight-base;
+$border-radius: 0.25rem;
+$btn-border-radius: $border-radius;
+$btn-line-height: 1.25;
+$border-width: 1;
+$input-btn-border-width: $border-width;
+$btn-padding-x: 1rem;
+$btn-padding-y: 0.5rem;

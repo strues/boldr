@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import { Col, Row, Widget, Loader } from '../../../components/index';
+import { Col, Row, Widget, Loader } from 'boldr-ui';
 import type { Stats } from '../../../types/models';
 import { loadSiteActivity, fetchStats } from '../../../state/modules/admin/dashboard/actions';
 import { StatsWidget, ActivityWidget } from './components';

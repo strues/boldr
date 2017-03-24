@@ -1,0 +1,20 @@
+.primary-hero {
+  padding-top:100px;
+  height: 625px;
+  width: 100%;
+  background-color: #03A9F4;
+  position: relative;
+  overflow: hidden;
+  /*padding-top: 150px;*/
+  color: $text-color;
+  position: relative;
+  text-align: right;
+  border-bottom: 1px solid #444;
+}
+.hero__tag {
+  font-size: 4em;
+  font-weight: 900;
+  letter-spacing: -.04em;
+  line-height: 1;
+  margin-bottom: .1em;
+  }

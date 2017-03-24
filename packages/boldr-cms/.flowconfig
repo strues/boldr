@@ -17,6 +17,7 @@
 
 [include]
 src/shared/types
+<Project Root>/../boldr-ui/
 
 [libs]
 flow-typed/npm

@@ -1,0 +1,62 @@
+*,
+*::after,
+*::before {
+  box-sizing: inherit;
+}
+
+body,
+html {
+  height: 100%;
+}
+
+html {
+  height: 100%;
+  font-size: $font-size-base;
+  box-sizing: border-box;
+  color: $text-color;
+  -webkit-font-smoothing: antialiased;
+}
+
+#app {
+  background-color: $body-background;
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  overflow-x: hidden;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+  min-width: 320px;
+  font-family: $font-family;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  background-color: $body-background;
+  font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: color .3s;
+
+  &:hover,
+  &:active,
+  &:focus {
+    color: darken($primary-color, 10%);
+    text-decoration: none;
+  }
+}
+
+.boldr-icon {
+  display: inline-block;
+}
+
+.boldr-paperoverride {
+  background-color: $white;
+}

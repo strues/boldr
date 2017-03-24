@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { Link } from 'react-router';
 import Helmet from 'react-helmet';
 
-import FormCard from '../../../components/Form/FormCard';
+import { FormCard } from 'boldr-ui';
 import LoginForm from './LoginForm';
 
 const Login = props => {

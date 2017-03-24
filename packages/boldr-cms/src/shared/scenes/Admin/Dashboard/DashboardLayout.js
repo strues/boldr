@@ -7,7 +7,7 @@ import type { ReactElement } from 'types/react';
 import Avatar from 'react-md/lib/Avatars';
 import Button from 'react-md/lib/Buttons';
 import NavigationDrawer from 'react-md/lib/NavigationDrawers';
-import { Grid, Col, Row } from '../../../components/index';
+import { Grid, Col, Row } from 'boldr-ui';
 import { updateMedia, updateDrawerType } from '../../../state/modules/boldr/ui/actions';
 import navItems from './buildAdminNav';
 

@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Widget /> renders snapshot 1`] = `
+<div
+  className="boldr-widget"
+>
+  <Card
+    expanderIconChildren="keyboard_arrow_down"
+    expanderIconClassName="material-icons"
+    expanderTooltipPosition="left"
+  >
+    <CardTitle
+      title="widget"
+    />
+    <CardText
+      component="section"
+    >
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi. Donec vulputate interdum sollicitudin. Nunc lacinia auctor quam sed pellentesque. Aliquam dui mauris, mattis quis lacus id, pellentesque lobortis odio.
+    </CardText>
+  </Card>
+</div>
+`;

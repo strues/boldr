@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Google /> 1`] = `
+<a
+  href="a"
+  target="_blank"
+>
+  <Icon
+    color="#1c3050"
+    kind="google"
+    size={24}
+  />
+</a>
+`;

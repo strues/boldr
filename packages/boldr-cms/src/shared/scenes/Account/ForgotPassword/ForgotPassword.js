@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import FormCard from '../../../components/Form/FormCard';
+import { FormCard } from 'boldr-ui';
 import { forgotPassword } from '../../../state/modules/users/actions';
 import ForgotPasswordForm from './ForgotPasswordForm';
 

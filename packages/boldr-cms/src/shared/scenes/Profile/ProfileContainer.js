@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { bindActionCreators } from 'redux';
-import { Loader } from '../../components';
+import { Loader } from 'boldr-ui';
 import BaseTemplate from '../../pages/templates/Base';
 import { getProfile } from '../../state/modules/users';
 import { uploadProfileImage, uploadAvatarImage } from '../../state/modules/attachments/actions';

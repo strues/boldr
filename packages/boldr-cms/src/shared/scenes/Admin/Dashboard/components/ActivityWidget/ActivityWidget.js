@@ -8,7 +8,7 @@ import Divider from 'react-md/lib/Dividers';
 import FontIcon from 'react-md/lib/FontIcons';
 import Paper from 'react-md/lib/Papers';
 
-import { Heading } from '../../../../../components/index';
+import { Heading } from 'boldr-ui';
 import ActivityItem from '../ActivityItem';
 
 type Props = {

@@ -7,6 +7,8 @@ packages/*/.happypack
 packages/*/coverage
 
 packages/boldr-cms/public/assets/
-packages/boldr-ui
+packages/boldr-ui/lib
+packages/boldr-ui/dist
+
 
 .env

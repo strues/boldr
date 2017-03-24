@@ -1,0 +1,129 @@
+// ////////////////////////////////////////////////////// //
+// BEM Sass port of Flexbox Grid - http://flexboxgrid.com //
+// ////////////////////////////////////////////////////// //
+
+.grid,
+.grid__fluid {
+  margin: 0 auto;
+}
+
+.grid__fluid {
+  padding-right: $grid-gutter;
+  padding-left: $grid-gutter;
+}
+
+// Rows
+.grid__row {
+  box-sizing: border-box;
+  display: flex;
+  flex: 0 1 auto;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-right: ($grid-gutter / -4);
+  margin-left: ($grid-gutter / -4);
+
+  &--reverse {
+    flex-direction: row-reverse;
+  }
+}
+
+// Columns
+.grid__col {
+  &--reverse {
+    flex-direction: column-reverse;
+  }
+}
+
+@each $breakpoint, $breakpoint-size in $grid-breakpoints {
+  @include breakpoint($breakpoint, $breakpoint-size) {
+    $col-selectors: (".grid__col--#{$breakpoint}");
+
+    @for $col from 1 through $grid-columns {
+      $col-selector: unquote(".grid__col--#{$breakpoint}-#{$col}");
+      $col-selectors: append($col-selectors, $col-selector, comma);
+    }
+
+    @for $col from 1 through $grid-columns {
+      $col-offset-selector: unquote(".grid__col--#{$breakpoint}-offset-#{$col}");
+      $col-selectors: append($col-selectors, $col-offset-selector, comma);
+    }
+
+    #{$col-selectors} {
+      box-sizing: border-box;
+      flex: 0 0 auto;
+      padding-right: ($grid-gutter / 4);
+      padding-left: ($grid-gutter / 4);
+    }
+
+    .grid__col {
+      &--#{$breakpoint} {
+        flex-grow: 1;
+        flex-basis: 0;
+        max-width: 100%;
+
+        @for $col from 1 through $grid-columns {
+          &-#{$col} {
+            flex-basis: (100% / $grid-columns) * $col;
+            max-width: (100% / $grid-columns) * $col;
+          }
+        }
+
+        @for $col from 1 through $grid-columns {
+          &-offset-#{$col} {
+            margin-left: (100% / $grid-columns) * $col;
+          }
+        }
+      }
+    }
+
+    // Utilities
+    .grid {
+      &__row {
+        &--#{$breakpoint}-start {
+          justify-content: flex-start;
+          text-align: start;
+        }
+
+        &--#{$breakpoint}-center {
+          justify-content: center;
+          text-align: center;
+        }
+
+        &--#{$breakpoint}-end {
+          justify-content: flex-end;
+          text-align: end;
+        }
+
+        &--#{$breakpoint}-top {
+          align-items: flex-start;
+        }
+
+        &--#{$breakpoint}-middle {
+          align-items: center;
+        }
+
+        &--#{$breakpoint}-bottom {
+          align-items: flex-end;
+        }
+
+        &--#{$breakpoint}-around {
+          justify-content: space-around;
+        }
+
+        &--#{$breakpoint}-between {
+          justify-content: space-between;
+        }
+      }
+
+      &__col {
+        &--#{$breakpoint}-first {
+          order: -1;
+        }
+
+        &--#{$breakpoint}-last {
+          order: 1;
+        }
+      }
+    }
+  }
+}
