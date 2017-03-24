@@ -11,7 +11,6 @@
     "coveralls": "cat ./coverage/lcov.info | coveralls",
     "prettier": "node_modules/.bin/lerna exec yarn run format",
     "precommit": "node_modules/.bin/lerna exec yarn run format",
-    "prepush": "node_modules/.bin/lerna exec yarn run test",
     "map-coverage": "node internal/scripts/mapCoverage.js",
     "test": "node_modules/.bin/lerna exec yarn run test",
     "test:ci:node": "node_modules/.bin/lerna exec --scope boldr-api yarn run test",
