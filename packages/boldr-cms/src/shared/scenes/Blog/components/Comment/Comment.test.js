@@ -4,8 +4,10 @@ import { shallowToJson } from 'enzyme-to-json';
 import Comment from './Comment';
 
 const commentProps = {
-  commenter: { username: 'person',
-    avatarUrl: 'google.com' },
+  commenter: {
+    username: 'person',
+    avatarUrl: 'google.com',
+  },
   isAuthenticated: false,
   canModerate: false,
   comment: {

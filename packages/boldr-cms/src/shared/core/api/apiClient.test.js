@@ -20,12 +20,16 @@ describe('The ApiClient', () => {
   });
 
   it('should resolve the returned promise if the response is a success', () => {
-    const toto = { description: 'Roger',
+    const toto = {
+      description: 'Roger',
       test: null,
-      test2: undefined };
+      test2: undefined,
+    };
     const cleandToto = { description: 'Roger' };
-    const createdToto = { id: 12,
-      description: 'Roger' };
+    const createdToto = {
+      id: 12,
+      description: 'Roger',
+    };
     nock('http://localhost/').post('/api/v1/totos', cleandToto).reply(201, createdToto);
 
     return client.post('totos', { data: toto }).then(response => {

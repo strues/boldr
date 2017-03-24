@@ -35,8 +35,13 @@ describe('+++ Client Middleware', () => {
     expect(dispatched).toEqual([{ type: 'CREATE_REQUEST' }]);
     rejectPromise('error');
     promise.catch(() => {
-      expect(dispatched).toEqual([{ type: 'CREATE_REQUEST' }, { error: 'error',
-        type: 'CREATE_FAILURE' }]);
+      expect(dispatched).toEqual([
+        { type: 'CREATE_REQUEST' },
+        {
+          error: 'error',
+          type: 'CREATE_FAILURE',
+        },
+      ]);
       done();
     });
   });

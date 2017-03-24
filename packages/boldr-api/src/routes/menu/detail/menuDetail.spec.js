@@ -69,7 +69,8 @@ describe('Menu Details API', async () => {
       });
   });
   it('+++ DELETE /menu-details/:id -- Should delete a detail', () => {
-    return agent.del('/api/v1/menu-details/2').set('Accept', 'application/json').expect(res => { // .set('Authorization', `Bearer ${token}`)
+    return agent.del('/api/v1/menu-details/2').set('Accept', 'application/json').expect(res => {
+      // .set('Authorization', `Bearer ${token}`)
       expect(res.status).toBe(401);
     });
   });
