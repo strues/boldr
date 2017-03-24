@@ -127,8 +127,8 @@ describe('Posts API Endpoint', () => {
         description: 'im a fake tag',
       });
 
-    expect(status).toBe(202);
-    expect(typeof body).toBe('object');
+    expect(status).toBe(400);
+    // expect(typeof body).toBe('object');
   });
   it('+++ POST /posts/:id/comments -- Add comment to post', async () => {
     const { status, body } = await agent
