@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import Paragraph from './Paragraph';
 
-const wrap = (props = {}) => shallow(<Paragraph { ...props } />);
+const wrap = (props = {}) => shallow(<Paragraph {...props} />);
 
 it('renders children when passed in', () => {
   const wrapper = wrap({ children: 'test' });

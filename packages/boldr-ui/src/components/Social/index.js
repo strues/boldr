@@ -8,10 +8,4 @@ import LinkedIn from './LinkedIn';
 
 export default Social;
 
-export {
-  Github,
-  Facebook,
-  Twitter,
-  Google,
-  LinkedIn,
-};
+export { Github, Facebook, Twitter, Google, LinkedIn };

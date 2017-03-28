@@ -1,4 +1,3 @@
-
 import Heading from './Heading';
 import Footer from './Footer';
 import { Grid, Col, Row } from './Layout';
@@ -10,13 +9,7 @@ import Icon from './Icon';
 import Loader from './Loader';
 import { FormCard, FormGroup, InputField } from './Form';
 
-import Social, {
-  Github,
-  Facebook,
-  Twitter,
-  Google,
-  LinkedIn,
-} from './Social';
+import Social, { Github, Facebook, Twitter, Google, LinkedIn } from './Social';
 import Paragraph from './Paragraph';
 
 export {

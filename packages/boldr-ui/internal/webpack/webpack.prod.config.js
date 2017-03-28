@@ -9,7 +9,7 @@ module.exports = {
   devtool: 'hidden-source-map',
   output: {
     publicPath: '/',
-    path: './dist',
+    path: path.resolve(__dirname, '../../dist'),
     filename: 'boldrui.min.js',
     library: 'BoldrUI',
     libraryTarget: 'umd',
@@ -35,7 +35,9 @@ module.exports = {
   },
   module: {
     rules: [
-      { test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader' },
+      { test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel-loader' },
       {
         test: /(\.scss|\.css)$/,
         loader: ExtractTextPlugin.extract({
@@ -69,7 +71,7 @@ module.exports = {
     new ExtractTextPlugin('boldr-ui.[name].min.css'),
     new webpack.DefinePlugin({
       'process.env': {
-        'NODE_ENV': JSON.stringify('production'),
+        NODE_ENV: JSON.stringify('production'),
       },
     }),
     new webpack.optimize.UglifyJsPlugin({

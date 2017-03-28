@@ -1,5 +1,9 @@
 debug: true
 pipeline:
+  cache:
+    mount:
+      - node_modules
+      - .git
   build:
     image: strues/alpine-node:7
     commands:

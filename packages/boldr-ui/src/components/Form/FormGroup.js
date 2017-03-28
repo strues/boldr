@@ -16,7 +16,7 @@ const FormGroup = (props: Props) => {
   `;
   return (
     <FormControlWrap>
-      { props.children }
+      {props.children}
     </FormControlWrap>
   );
 };

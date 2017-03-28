@@ -22,10 +22,10 @@ class Dropdown extends Component {
 
     return (
       <div
-        className={ cx('boldr-menu__dropdown', { 'boldr-menu__dropdown-open': open }) }
-        aria-hidden={ open ? 'false' : 'true' }
+        className={cx('boldr-menu__dropdown', { 'boldr-menu__dropdown-open': open })}
+        aria-hidden={open ? 'false' : 'true'}
       >
-        <DropdownList key={ data.id } data={ data.children.items } closeDropdowns={ closeDropdowns } />
+        <DropdownList key={data.id} data={data.children.items} closeDropdowns={closeDropdowns} />
       </div>
     );
   }

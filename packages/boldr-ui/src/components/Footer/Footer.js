@@ -2,8 +2,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import classnames from 'classnames';
-import {Row, Col} from '../Layout';
-import {StyleClasses} from '../../theme/styleClasses';
+import { Row, Col } from '../Layout';
+import { StyleClasses } from '../../theme/styleClasses';
 
 type Props = {
   className: string,
@@ -33,15 +33,15 @@ const Footer = (props: Props) => {
   const renderCol = (
     <Row>
       <Col xs={12} md={6}>
-        { props.colMain }
+        {props.colMain}
       </Col>
       <Col xs={12} md={6}>
         <Row>
           <Col xs={12} md={3}>
-            { props.col2 }
+            {props.col2}
           </Col>
           <Col xs={12} md={3}>
-            { props.col3 }
+            {props.col3}
           </Col>
         </Row>
       </Col>
@@ -50,7 +50,7 @@ const Footer = (props: Props) => {
   const renderSingle = (
     <Row>
       <Col xs>
-      { props.children }
+        {props.children}
       </Col>
     </Row>
   );

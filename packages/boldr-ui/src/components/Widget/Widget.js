@@ -14,7 +14,7 @@ const Widget = (props: Props) => {
   return (
     <div className="boldr-widget">
       <Card>
-        <CardTitle title={ props.name } />
+        <CardTitle title={props.name} />
         <CardText>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.

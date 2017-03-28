@@ -1,7 +1,7 @@
 /* @flow */
 import React, { PropTypes } from 'react';
 import classnames from 'classnames';
-import {StyleClasses} from '../../theme/styleClasses';
+import { StyleClasses } from '../../theme/styleClasses';
 import type { ReactChildren } from '../../types/react.js.flow';
 
 type Props = {
@@ -32,10 +32,14 @@ const Heading = (props: Props) => {
     fontWeight: props.fweight,
     textDecoration: props.textDeco,
   };
-  return React.createElement(tagName, {
-    className,
-    style,
-  }, props.children);
+  return React.createElement(
+    tagName,
+    {
+      className,
+      style,
+    },
+    props.children,
+  );
 };
 
 export default Heading;

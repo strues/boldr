@@ -9,7 +9,6 @@ import styled from 'styled-components';
 import type { ReactElement } from '../../types/react.js.flow';
 import { Grid, Col, Row } from '../Layout';
 
-
 const FormFooter = styled.ul`
   list-style-type: none;
 `;
@@ -29,31 +28,28 @@ type Props = {
 const FormCard = (props: Props) => {
   return (
     <div>
-    <Row>
-      <Col xs={ 12 }>
-        <Row xsCenter>
-          <Col xs={ 6 }>
-            <Card style={ { maxWidth: props.width || 600, marginTop: '100px' } } className="md-block-centered">
-              <CardTitle
-                className="boldr-form__title"
-                title={ props.title }
-                expander
-              />
-              <CardText>
-                { props.form }
-              </CardText>
-              <CardActions style={ { justifyContent: 'center' } } expandable>
-                <FormFooter>
-                  <FormFooterItem>{ props.extra1 }</FormFooterItem>
-                  <FormFooterItem>{ props.extra2 }</FormFooterItem>
-                </FormFooter>
-              </CardActions>
-            </Card>
-          </Col>
-        </Row>
-      </Col>
-    </Row>
-  </div>
+      <Row>
+        <Col xs={12}>
+          <Row xsCenter>
+            <Col xs={6}>
+              <Card style={{ maxWidth: props.width || 600,
+                marginTop: '100px' }} className="md-block-centered">
+                <CardTitle className="boldr-form__title" title={props.title} expander />
+                <CardText>
+                  {props.form}
+                </CardText>
+                <CardActions style={{ justifyContent: 'center' }} expandable>
+                  <FormFooter>
+                    <FormFooterItem>{props.extra1}</FormFooterItem>
+                    <FormFooterItem>{props.extra2}</FormFooterItem>
+                  </FormFooter>
+                </CardActions>
+              </Card>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
+    </div>
   );
 };
 

@@ -124,17 +124,17 @@ class MainHeader extends Component {
     }
     if (this.props.me.roleId === 3) {
       actions.push(
-        <Button key="dash" onClick={ this.props.handleDashClick } icon primary tooltipLabel="Dashboard">
+        <Button key="dash" onClick={this.props.handleDashClick} icon primary tooltipLabel="Dashboard">
           dashboard
         </Button>,
       );
     }
     if (this.props.auth.isAuthenticated) {
       actions.push(
-        <Button key="prof" href={ `/profiles/${this.props.me.username}` } icon tooltipLabel="Profile">
+        <Button key="prof" href={`/profiles/${this.props.me.username}`} icon tooltipLabel="Profile">
           perm_identity
         </Button>,
-        <Button key="logout" icon onClick={ this.props.handleLogoutClick } tooltipLabel="Logout">
+        <Button key="logout" icon onClick={this.props.handleLogoutClick} tooltipLabel="Logout">
           exit_to_app
         </Button>,
       );
@@ -142,50 +142,50 @@ class MainHeader extends Component {
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <header
-        className={ cx('boldr-mainheader', ['theme-boldr'], className, {
+        className={cx('boldr-mainheader', ['theme-boldr'], className, {
           'boldr-mainheader__dropdown-open': navbarDropdownIsOpen,
           focusable,
-        }) }
-        onKeyDown={ this.handleKeyDown }
+        })}
+        onKeyDown={this.handleKeyDown}
       >
-        <div className={ cx('boldr-mainheader__menu', { 'boldr-mainheader__dropdown-open': navbarDropdownIsOpen }) }>
+        <div className={cx('boldr-mainheader__menu', { 'boldr-mainheader__dropdown-open': navbarDropdownIsOpen })}>
           <div className="grid">
             <Head
-              toggleDropdownHandler={ this.navbarDropdownHandler }
-              dropdownOpen={ navbarDropdownIsOpen }
-              theme={ theme }
+              toggleDropdownHandler={this.navbarDropdownHandler}
+              dropdownOpen={navbarDropdownIsOpen}
+              theme={theme}
               siteName="Boldr"
-              closeHeaderDropdown={ this.closeDropdownOnButtonClick() }
+              closeHeaderDropdown={this.closeDropdownOnButtonClick()}
             />
             <nav
-              className={ cx('boldr-mainheader__collapse', {
+              className={cx('boldr-mainheader__collapse', {
                 'boldr-mainheader__dropdown-open': navbarDropdownIsOpen,
-              }) }
-              ref={ _ref => {
+              })}
+              ref={_ref => {
                 // $FlowIssue
                 this.dropdownContent = _ref;
-              } }
+              }}
               aria-label="Main menu"
             >
-              <ul className={ cx('boldr-mainheader__nav') } role="menubar">
+              <ul className={cx('boldr-mainheader__nav')} role="menubar">
                 {this.props.menu.map(detail => (
                   <Detail
-                    key={ detail.uuid }
-                    detail={ detail }
+                    key={detail.uuid}
+                    detail={detail}
                     theme="theme-boldr"
-                    hasDropdown={ detail.has_dropdown }
-                    closeHeaderDropdown={ this.closeDropdownOnButtonClick() }
-                    moble={ mobileState }
+                    hasDropdown={detail.has_dropdown}
+                    closeHeaderDropdown={this.closeDropdownOnButtonClick()}
+                    moble={mobileState}
                   />
                 ))}
               </ul>
             </nav>
             <div
-              className={ cxN(
+              className={cxN(
                 cx('buttons-group', {
                   'boldr-mainheader__dropdown-open': navbarDropdownIsOpen,
                 }),
-              ) }
+              )}
             >
               {actions}
             </div>

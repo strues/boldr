@@ -1,4 +1,3 @@
-
 export const BOLDR_NS = 'boldrui-';
 
 export const StyleClasses = {

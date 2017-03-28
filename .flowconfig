@@ -8,7 +8,7 @@
 
 [options]
 emoji=true
-module.system=nodes
+module.system=node
 
 esproposal.class_static_fields=enable
 esproposal.class_instance_fields=ignore

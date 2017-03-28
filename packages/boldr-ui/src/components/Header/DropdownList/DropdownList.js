@@ -12,20 +12,14 @@ type Props = {
 
 const cx = classNames.bind(styles);
 
-const DropdownList = (props: Props) =>
-  <div className={ cx('boldr-menu__dropdown-list') }>
+const DropdownList = (props: Props) => (
+  <div className={cx('boldr-menu__dropdown-list')}>
     <ul role="menubar" aria-hidden="false">
-      {
-        props.data.map(item =>
-          <DropdownListItem
-            key={ item.id }
-            item={ item }
-            parentClass={ null }
-            closeDropdowns={ props.closeDropdowns }
-          />,
-        )
-      }
+      {props.data.map(item => (
+        <DropdownListItem key={item.id} item={item} parentClass={null} closeDropdowns={props.closeDropdowns} />
+      ))}
     </ul>
-  </div>;
+  </div>
+);
 
 export default DropdownList;
