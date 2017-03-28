@@ -8,8 +8,10 @@ describe('<Modal />', () => {
     const wrapper = shallow(<Modal visible />);
     const instance = wrapper.instance();
 
-    return { wrapper,
-      instance };
+    return {
+      wrapper,
+      instance,
+    };
   }
 
   it('renders', () => {

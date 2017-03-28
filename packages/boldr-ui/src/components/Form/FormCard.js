@@ -32,8 +32,13 @@ const FormCard = (props: Props) => {
         <Col xs={12}>
           <Row xsCenter>
             <Col xs={6}>
-              <Card style={{ maxWidth: props.width || 600,
-                marginTop: '100px' }} className="md-block-centered">
+              <Card
+                style={{
+                  maxWidth: props.width || 600,
+                  marginTop: '100px',
+                }}
+                className="md-block-centered"
+              >
                 <CardTitle className="boldr-form__title" title={props.title} expander />
                 <CardText>
                   {props.form}
