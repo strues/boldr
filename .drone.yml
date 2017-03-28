@@ -9,7 +9,7 @@ pipeline:
       - yarn test
 services:
   database:
-    build: packages/boldr-api/db
+    image: strues/boldr-pg
   redis:
     image: redis:3.2.6-alpine
 
