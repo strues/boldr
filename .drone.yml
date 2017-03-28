@@ -3,10 +3,11 @@ pipeline:
   build:
     image: strues/alpine-node:7
     commands:
-      - yarn install
-      - yarn build:dev
-      - yarn test:browser
-  #
+      - yarn
+      - yarn run bootstrap:ci
+      - yarn build:test
+      - yarn test
+
   # publish:
   #   docker:
   #     registry: registry.boldr.io
