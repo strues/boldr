@@ -58,7 +58,7 @@ const ProfileContent = (props: Props) => {
         </Col>
         <Col sm={ 12 } md={ 6 }>
           <Col xs>
-            <Heading size={ 1 }>{profile.firstName} {' '} {profile.lastName}'s Profile</Heading>
+            <Heading size={ 1 }>{profile.firstName} {' '} {profile.lastName}&apos;s Profile</Heading>
           </Col>
           <DetailList>
             <ProfileDetail label={ <FontIcon>email</FontIcon> } detail={ profile.email } />

@@ -271,6 +271,7 @@ export function selectFile(file) {
   *****************************************************************/
 
 export function uploadProfileImage(payload) {
+  console.log(payload);
   return dispatch => {
     dispatch(beginUploadProfileImage());
     return request

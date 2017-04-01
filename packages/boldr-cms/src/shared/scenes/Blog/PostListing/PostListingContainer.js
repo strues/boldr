@@ -12,7 +12,7 @@ import VisiblePostListing from './VisiblePostListing';
 
 type Props = {
   posts: Array<Post>,
-  isFetching: Boolean,
+  isFetching: boolean,
   listTags: Object,
   layout: string,
   dispatch: Function,

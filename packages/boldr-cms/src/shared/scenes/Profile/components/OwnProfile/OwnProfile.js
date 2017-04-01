@@ -19,7 +19,7 @@ class OwnProfile extends PureComponent {
       bio: values.bio,
       location: values.location,
       website: values.website,
-      profile_image: values.profileImage,
+      profileImage: values.profileImage,
       avatarUrl: values.avatarUrl,
       social: {
         facebook: { url: values.facebook },
@@ -40,7 +40,7 @@ class OwnProfile extends PureComponent {
       bio: profile.bio,
       location: profile.location,
       website: profile.website,
-      profile_image: profile.profileImage,
+      profileImage: profile.profileImage,
       avatarUrl: profile.avatarUrl,
       facebook: profile.social.facebook.url,
       twitter: profile.social.twitter.url,
