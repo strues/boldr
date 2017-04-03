@@ -8,7 +8,7 @@ import Image from './Image';
 import Icon from './Icon';
 import Loader from './Loader';
 import { FormCard, FormGroup, InputField } from './Form';
-
+import StatsWidget, { StatValue, StatLabel } from './StatsWidget';
 import Social, { Github, Facebook, Twitter, Google, LinkedIn } from './Social';
 import Paragraph from './Paragraph';
 
@@ -34,4 +34,7 @@ export {
   LinkedIn,
   Social,
   Paragraph,
+  StatsWidget,
+  StatValue,
+  StatLabel,
 };

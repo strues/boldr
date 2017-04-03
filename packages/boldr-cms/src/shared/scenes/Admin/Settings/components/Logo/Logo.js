@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import ExpansionPanel from 'react-md/lib/ExpansionPanels';
 import { connect } from 'react-redux';
 import TextField from 'react-md/lib/TextFields';
-import { Row } from '../../../../../components';
+import { Row } from 'boldr-ui';
 import { updateBoldrSettings } from '../../../../../state/modules/boldr/settings';
 
 type Props = {

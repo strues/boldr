@@ -2,8 +2,8 @@
 
 import React from 'react';
 import Helmet from 'react-helmet';
+import { Heading } from 'boldr-ui';
 import BaseTemplate from '../templates/Base';
-import { Heading } from '../../components';
 
 function Error404() {
   return (

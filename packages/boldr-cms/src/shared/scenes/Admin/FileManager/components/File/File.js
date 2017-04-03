@@ -8,6 +8,8 @@ import Avatar from 'react-md/lib/Avatars';
 import Button from 'react-md/lib/Buttons';
 import FontIcon from 'react-md/lib/FontIcons';
 
+import config from '../../../../../../../config';
+
 type Props = {
   removeMedia?: Function,
   selectFile: Function,
@@ -32,7 +34,11 @@ const File = (props: Props) => {
   return (
     <Card className="boldr-filecard">
       <Media>
-        <img src={ props.file.url } alt={ props.file.file_name } role="presentation" />
+        <img
+          src={ `${config('apiUrl')}${props.file.url}` }
+          alt={ props.file.file_name }
+          role="presentation"
+        />
         <MediaOverlay>
           <CardTitle title={ props.file.file_name || 'foo' } />
         </MediaOverlay>

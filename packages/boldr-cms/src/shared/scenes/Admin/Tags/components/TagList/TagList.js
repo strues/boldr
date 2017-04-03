@@ -5,7 +5,6 @@ import ListItem from 'react-md/lib/Lists/ListItem';
 import Paper from 'react-md/lib/Papers';
 import Avatar from 'react-md/lib/Avatars';
 import FontIcon from 'react-md/lib/FontIcons';
-import type { Tag } from '../../../../../types/models';
 
 type Props = {
   tags: Array<Tag>,

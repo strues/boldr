@@ -24,6 +24,9 @@ import {
   LinkedIn,
   Social,
   Paragraph,
+  StatsWidget,
+  StatValue,
+  StatLabel,
 } from './components';
 
 export {
@@ -52,4 +55,7 @@ export {
   BOLDR_NS,
   StyleClasses,
   media,
+  StatsWidget,
+  StatValue,
+  StatLabel,
 };

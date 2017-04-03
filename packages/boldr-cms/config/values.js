@@ -5,6 +5,7 @@ const values = {
     serviceWorker: {
       enabled: true,
     },
+    apiUrl: true,
     polyfillIO: true,
     htmlPage: true,
     token: {
@@ -22,6 +23,7 @@ const values = {
   // The port on which the client bundle development server should run.
   hmrPort: EnvVars.number('HMR_PORT', 3001),
   apiPrefix: '/api/v1',
+  apiUrl: 'http://localhost:2121',
   postgres: {
     name: 'boldr',
     host: EnvVars.string('POSTGRES_HOST', 'localhost'),

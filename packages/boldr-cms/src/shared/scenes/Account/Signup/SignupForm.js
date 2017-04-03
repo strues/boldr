@@ -2,8 +2,7 @@
 import React from 'react';
 import { Field, reduxForm, getFormSyncErrors, isValid } from 'redux-form';
 import Button from 'react-md/lib/Buttons';
-import { InputField } from '../../../components/Form';
-import { Row, Col } from '../../../components/Layout';
+import { InputField, Row, Col } from 'boldr-ui';
 import validate, { requiredValidator, emailValidator } from './validate';
 
 type Props = {

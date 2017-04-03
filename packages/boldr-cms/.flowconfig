@@ -20,7 +20,7 @@ src/shared/types
 <Project Root>/../boldr-ui/
 
 [libs]
-flow-typed/npm
+flow-typed/npm/
 internal/flow/defs/
 
 [options]

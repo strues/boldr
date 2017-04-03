@@ -1,9 +1,9 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { Grid, Col, Row, Loader } from '../../../components';
+import { Grid, Col, Row, Loader } from 'boldr-ui';
 import { fetchTaggedPost } from '../../../state/modules/blog/tags/actions';
-import type { Post } from '../../../types/models';
+
 import PostCard from '../components/PostCard';
 
 type Props = {

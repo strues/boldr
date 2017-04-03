@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Grid, Col, Row, Loader } from '../../../components';
+import { Grid, Col, Row, Loader } from 'boldr-ui';
 import { getPosts } from '../../../state/modules/blog/posts';
 import { fetchTaggedPost } from '../../../state/modules/blog/tags/actions';
 import TagList from './TagList';

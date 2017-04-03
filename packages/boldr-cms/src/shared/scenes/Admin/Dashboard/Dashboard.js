@@ -1,10 +1,9 @@
 /* @flow */
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import { Col, Row, Widget, Loader } from 'boldr-ui';
-import type { Stats } from '../../../types/models';
+import { Col, Row, Widget, Loader, StatsWidget } from 'boldr-ui';
 import { loadSiteActivity, fetchStats } from '../../../state/modules/admin/dashboard/actions';
-import { StatsWidget, ActivityWidget } from './components';
+import { ActivityWidget } from './components';
 
 type Props = {
   loadSiteActivity: Function,

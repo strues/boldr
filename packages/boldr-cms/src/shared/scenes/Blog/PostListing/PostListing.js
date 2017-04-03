@@ -3,8 +3,7 @@ import React from 'react';
 import Button from 'react-md/lib/Buttons/Button';
 import FontIcon from 'react-md/lib/FontIcons';
 import styled from 'styled-components';
-import type { Post } from '../../../types/models';
-import { Grid, Row, Col, Loader } from '../../../components/index';
+import { Grid, Row, Col, Loader } from 'boldr-ui';
 import { FeaturedPost, PostCard } from '../components';
 
 type Props = {

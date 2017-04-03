@@ -1,12 +1,11 @@
-@import '~react-md/src/scss/react-md';
-@import 'vendor/normalize';
+@import '~boldr-ui/lib/styles/boldrui';
+// @import 'vendor/normalize';
 @import 'abstracts/all';
 
-@include react-md-everything;
+// @include react-md-everything;
 
 @import 'base/all';
-@import 'components/all';
-@import 'vendor/griddle';
+// @import 'components/all';
 
 .md-dialog {
   width: 525px;

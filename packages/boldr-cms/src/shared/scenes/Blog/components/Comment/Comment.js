@@ -6,7 +6,7 @@ import Button from 'react-md/lib/Buttons';
 import FontIcon from 'react-md/lib/FontIcons';
 import format from 'date-fns/format';
 
-import { Heading } from '../../../../components';
+import { Heading } from 'boldr-ui';
 
 const Wrapper = styled.section`
   position: relative;

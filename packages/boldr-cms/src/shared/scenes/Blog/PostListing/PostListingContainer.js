@@ -7,7 +7,7 @@ import { changeLayout } from '../../../state/modules/boldr/ui';
 import { getPosts, fetchPostsIfNeeded } from '../../../state/modules/blog/posts';
 import { fetchTagsIfNeeded } from '../../../state/modules/blog/tags/actions';
 import { getTags } from '../../../state/modules/blog/tags/selectors';
-import type {Post, UI} from '../../../types/models'; // eslint-disable-line
+
 import VisiblePostListing from './VisiblePostListing';
 
 type Props = {

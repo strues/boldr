@@ -4,11 +4,11 @@ import styled from 'styled-components';
 import Drawer from 'react-md/lib/Drawers';
 import Button from 'react-md/lib/Buttons/Button';
 import Toolbar from 'react-md/lib/Toolbars';
-// $FlowIssue
+
 import Dropzone from 'react-dropzone';
 import classnames from 'classnames';
-import { Grid, Col, Row, Heading } from 'boldr-ui';
-import { StyleClasses } from '../../theme/theme';
+import { Grid, Col, Row, Heading, StyleClasses } from 'boldr-ui';
+import config from '../../../../config';
 import ProfileContent from './components/ProfileContent';
 import OwnProfile from './components/OwnProfile';
 
@@ -60,14 +60,14 @@ class Profile extends Component {
 
   props: Props;
   // $FlowIssue
-  onDrop(acceptedFiles) {
-    console.log('Accepted files: ', acceptedFiles);
+  onDrop(files) {
+    console.log('Accepted files: ', files);
     // $FlowIssue
     this.setState({
-      file: acceptedFiles,
+      file: files[0],
       showDropzone: false,
     });
-    const payload = acceptedFiles;
+    const payload = files[0];
     console.log(payload);
     const isProf = this.state.profImg === true;
     isProf ? this.props.uploadProfileImg(payload) : this.props.uploadAvatarImg(payload);

@@ -1,12 +1,11 @@
 /* @flow */
 import React from 'react';
 import Helmet from 'react-helmet';
-import type { Post } from '../../../../types/models';
 import NewPostForm from './components/NewPostForm';
 
 type Props = {
   onFormSubmit: Function,
-  postImage: Object,
+  postImage: string,
 };
 
 const NewPost = (props: Props) => {

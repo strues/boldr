@@ -3,7 +3,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchTagsIfNeeded, getTags } from '../../../state/modules/blog/tags';
-import type { Tag } from '../../../types/models';
 import Tags from './Tags';
 
 type Props = {

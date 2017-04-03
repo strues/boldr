@@ -10,9 +10,9 @@ import Paper from 'react-md/lib/Papers';
 import Toolbar from 'react-md/lib/Toolbars';
 import Button from 'react-md/lib/Buttons';
 import Helmet from 'react-helmet';
-import { Row, Col } from '../../../components';
+import { Row, Col } from 'boldr-ui';
+
 import { selectTag, clearTag, createTag, deleteTag } from '../../../state/modules/blog/tags';
-import type { Tag } from '../../../types/models';
 import TaggedPost from './components/TaggedPost';
 
 import TagList from './components/TagList';

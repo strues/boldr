@@ -7,7 +7,8 @@ import Button from 'react-md/lib/Buttons';
 import FontIcon from 'react-md/lib/FontIcons';
 import Paper from 'react-md/lib/Papers';
 import Helmet from 'react-helmet';
-import { Row, Col, Modal } from '../../../components/index';
+import { Row, Col, Modal } from 'boldr-ui';
+
 import { showModal, hideModal } from '../../../state/modules/boldr/ui/actions';
 import { updateMenuDetails, addMenuDetail, getByLabel } from '../../../state/modules/boldr/menu';
 import NavigationEditor from './components/NavigationEditor';

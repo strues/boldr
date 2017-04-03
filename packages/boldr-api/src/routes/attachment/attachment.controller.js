@@ -112,7 +112,7 @@ export async function deleteAttachment(req, res, next) {
  * @return {Promise}       the newly created attachment
  */
 /* istanbul ignore next */
-export async function uploadAttachment(req, res, next) {
+export function uploadAttachment(req, res, next) {
   let fstream;
   const busboy = new Busboy({ headers: req.headers });
 
@@ -126,13 +126,13 @@ export async function uploadAttachment(req, res, next) {
       return next(new BadRequest('Invalid file type'));
     }
     // define temporary file path before processing.
-    const tmpFilePath = path.join(process.cwd(), './public/.tmp');
+    const tmpFilePath = path.join(process.cwd(), './static/uploads/.tmp');
     // generate a shortid for the new file name and keep the ext
     const imgId = shortId.generate();
     // take the shortid and the extension to form the new file name
     const newFileName = imgId + path.extname(filename);
     // stream to file
-    fstream = fs.createWriteStream(`./public/.tmp/${newFileName}`);
+    fstream = fs.createWriteStream(`./static/uploads/.tmp/${newFileName}`);
     // wrtie temporary file from stream
     file.pipe(fstream);
     // once file is written and close is emitted
@@ -142,7 +142,7 @@ export async function uploadAttachment(req, res, next) {
       // create a readstream
       const readstream = fs.createReadStream(fileLoc);
       // send through graphicsmagick
-      gm(readstream).noProfile().quality(70).write(`./public/files/${newFileName}`, async err => {
+      gm(readstream).noProfile().quality(70).write(`./static/uploads/${newFileName}`, async err => {
         if (err) {
           return res.status(400).send('Could not parse upload completely.');
         }
@@ -154,7 +154,7 @@ export async function uploadAttachment(req, res, next) {
           file_name: newFileName,
           safe_name: newFileName,
           // path: `files/${newFileName}`,
-          url: `/files/${newFileName}`,
+          url: `/uploads/${newFileName}`,
           file_description: req.body.file_description,
           file_type: mimetype,
         });

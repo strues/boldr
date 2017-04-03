@@ -4,11 +4,9 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import classnames from 'classnames';
-import { Grid, Row, Col, Heading } from '../../../components/index';
+import { Grid, Row, Col, Heading, StyleClasses } from 'boldr-ui';
 import { getPosts } from '../../../state/modules/blog/posts';
 import { PostSidebar, PostContent, PostComments, PostTitle } from '../components';
-
-import { StyleClasses } from '../../../theme/theme';
 
 const BASE_ELEMENT = StyleClasses.SINGLE_POST;
 
@@ -79,7 +77,7 @@ class SinglePost extends Component {
       width: 100%;
       background-size: cover;
       background-attachment: fixed;
-      background-image: url(${currentPost.background_image});
+      background-image: url(${currentPost.backgroundImage});
       align-items: center;
       background-position-x: 0px;
       background-position-y: 0px;

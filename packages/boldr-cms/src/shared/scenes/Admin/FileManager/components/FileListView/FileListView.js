@@ -1,8 +1,8 @@
 /* @flow */
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-
-import { Grid, Row, Col } from '../../../../../components';
+import { Grid, Row, Col } from 'boldr-ui';
+import config from '../../../../../../../config';
 import File from '../File';
 import FileListItem from '../FileListItem';
 
@@ -18,7 +18,7 @@ const FileListView = (props: Props) => {
       {props.files.map(file => (
         <FileListItem
           key={ file.id }
-          imgSrc={ file.url }
+          imgSrc={ `${config('apiUrl')}${file.url}` }
           removeMedia={ props.removeMedia }
           selectFile={ props.selectFile }
           file={ file }

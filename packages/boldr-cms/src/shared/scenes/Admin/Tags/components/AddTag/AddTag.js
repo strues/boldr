@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Button from 'react-md/lib/Buttons';
-import InputField from '../../../../../components/Form/InputField';
+import { InputField } from 'boldr-ui';
 
 type Props = {
   handleSubmit?: Function,

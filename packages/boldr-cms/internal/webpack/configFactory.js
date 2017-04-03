@@ -20,6 +20,9 @@ import withServiceWorker from './withServiceWorker';
 
 const ROOT_DIR = appRootDir.get();
 
+const prefetches = [];
+
+const prefetchPlugins = prefetches.map((specifier) => new webpack.PrefetchPlugin(specifier));
 /**
  * @param  {Object} buildOptions - The build options.
  * @param  {target} buildOptions.target - The bundle target (e.g 'clinet' || 'server').
@@ -78,6 +81,11 @@ export default function webpackConfigFactory(buildOptions) {
     },
     cache: true,
     resolve: {
+      alias: {
+      // necessary when using symlinks that require these guys
+        react: path.join(ROOT_DIR, 'node_modules', 'react'),
+        'react-dom': path.join(ROOT_DIR, 'node_modules', 'react-dom'),
+      },
       mainFields: ifNode(
         ['module', 'jsnext:main', 'main'],
         ['web', 'browser', 'style', 'module', 'jsnext:main', 'main'],
@@ -105,6 +113,7 @@ export default function webpackConfigFactory(buildOptions) {
 
     performance: ifOptimizeClient({ hints: 'warning' }, false),
     plugins: removeNil([
+      ...prefetchPlugins,
       ifNode(
         () =>
           new webpack.BannerPlugin({
@@ -286,7 +295,6 @@ export default function webpackConfigFactory(buildOptions) {
             }),
           ),
         ),
-
         {
           test: /\.svg(\?v=\d+.\d+.\d+)?$/,
           loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=[name].[ext]',

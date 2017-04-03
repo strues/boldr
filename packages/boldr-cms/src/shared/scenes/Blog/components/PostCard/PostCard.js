@@ -11,25 +11,23 @@ import CardTitle from 'react-md/lib/Cards/CardTitle';
 import CardActions from 'react-md/lib/Cards/CardActions';
 import CardText from 'react-md/lib/Cards/CardText';
 import Media, { MediaOverlay } from 'react-md/lib/Media';
-
+import { Col, Row, StyleClasses } from 'boldr-ui';
 import { selectPost } from '../../../../state/modules/blog/posts/actions';
-import { Col, Row } from '../../../../components/Layout';
-import { StyleClasses } from '../../../../theme/theme';
-import type { Tag } from '../../../../types/models';
+
 import TagBlock from '../TagBlock';
 
 const BASE_ELEMENT = StyleClasses.POST_CARD;
 type Props = {
   className: string,
   id: ?string,
-  feature_image: ?string,
+  featureImage: ?string,
   title: string,
   slug: string,
   content: ?string,
-  background_image: ?string,
+  backgroundImage: ?string,
   excerpt: ?string,
-  created_at: string,
-  updated_at: ?string,
+  createdAt: string,
+  updatedAt: ?string,
   status: ?string,
   author: string,
   comments: ?Array<Object>,
@@ -37,13 +35,13 @@ type Props = {
   tags: ?Array<Tag>,
   attachments: ?Object,
   meta: ?Object,
-  user_id: ?string,
+  userId: ?string,
   dispatch: Function,
   listTags: Object,
 };
 
 export const PostCard = (props: Props) => {
-  const formattedDate = dateFns.format(props.created_at, 'MM/DD/YYYY');
+  const formattedDate = dateFns.format(props.createdAt, 'MM/DD/YYYY');
   const classes = classnames(BASE_ELEMENT, props.className);
   const postTags = props.tags ? props.tags.map(id => props.listTags[id]) : null;
   // Explicitly define post rather than passing additional
@@ -53,17 +51,17 @@ export const PostCard = (props: Props) => {
     author: props.author,
     attachments: props.attachments,
     content: props.content,
-    created_at: props.created_at,
+    createdAt: props.createdAt,
     excerpt: props.excerpt,
-    background_image: props.background_image,
-    feature_image: props.feature_image,
+    backgroundImage: props.backgroundImage,
+    featureImage: props.featureImage,
     comments: props.comments,
     meta: props.meta,
     slug: props.slug,
     status: props.status,
     tags: props.tags,
     title: props.title,
-    user_id: props.user_id,
+    userId: props.userId,
   };
   function transitionPost() {
     props.dispatch(selectPost(post));
@@ -73,7 +71,7 @@ export const PostCard = (props: Props) => {
     <div className={ classes }>
       <Card>
         <Media>
-          <img src={ props.feature_image } alt={ `${props.title} feature` } role="presentation" />
+          <img src={ props.featureImage } alt={ `${props.title} feature` } role="presentation" />
           <MediaOverlay>
             <CardTitle title={ props.title } subtitle={ formattedDate }>
               <Button className="md-cell--right" icon>star_outline</Button>

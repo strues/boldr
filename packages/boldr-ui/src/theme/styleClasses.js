@@ -15,7 +15,11 @@ export const StyleClasses = {
   PROFILE_DETAIL: `${BOLDR_NS}profile-detail`,
   PROFILE: `${BOLDR_NS}profile`,
   SINGLE_POST: `${BOLDR_NS}single-post`,
+  STATS_WIDGET: `${BOLDR_NS}widget__stats`,
+  STATS_LABEL: `${BOLDR_NS}widget__stats-label`,
+  STATS_VALUE: `${BOLDR_NS}widget__stats-value`,
   TAG: `${BOLDR_NS}tag`,
   TAG_BLOCK: `${BOLDR_NS}tagblock`,
   TEXT: `${BOLDR_NS}text`,
+  WIDGET: `${BOLDR_NS}widget`,
 };

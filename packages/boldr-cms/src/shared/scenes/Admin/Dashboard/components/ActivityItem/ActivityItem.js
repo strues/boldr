@@ -33,22 +33,22 @@ const ActivityIcn = styled.div`
   margin-left: 10px;
 `;
 type Props = {
-  created_at: Date,
+  createdAt: Date,
   owner: Object,
   type: string,
-  activity_post: ?string,
-  activity_user: ?string,
-  activity_attachment: ?string,
-  activity_menu_detail: ?string,
+  activityPost: ?string,
+  activityUser: ?string,
+  activityAttachment: ?string,
+  activityMenuDetail: ?string,
   post: Post,
   attachment: Object,
 };
 
 const ActivityItem = (props: Props) => {
-  const isPostType = props.activity_post !== null;
-  const isMemberType = props.activity_user !== null;
-  const isAttachmentType = props.activity_attachment !== null;
-  const isMenuDetailType = props.activity_menu_detail !== null;
+  const isPostType = props.activityPost !== null;
+  const isMemberType = props.activityUser !== null;
+  const isAttachmentType = props.activityAttachment !== null;
+  const isMenuDetailType = props.activityMenuDetail !== null;
 
   let ActivityIcon;
   if (isPostType) {
@@ -74,7 +74,7 @@ const ActivityItem = (props: Props) => {
   return (
     <ActivityPanel>
       <DateArea>
-        <Button icon tooltipLabel={ format(props.created_at, 'MM/DD/YYYY') }>access_time</Button>
+        <Button icon tooltipLabel={ format(props.createdAt, 'MM/DD/YYYY') }>access_time</Button>
       </DateArea>
       <User>
         <Chip label={ props.owner.firstName } avatar={ <Avatar src={ props.owner.avatarUrl } role="presentation" /> } />

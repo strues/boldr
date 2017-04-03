@@ -1,8 +1,23 @@
+$stats-widget-bg: #fff;
 
-.boldr-widget {
-
+.#{$boldr-ns}widget {
+  background-color: #fff;
 }
-.boldr-widget__activity {
+
+.#{$boldr-ns}wiget__activity {
   color: #555;
 }
-.boldr-widget__stats {}
+
+.#{$boldr-ns}widget__stats {
+  @include md-box-shadow(2);
+  background-color: $stats-widget-bg;
+  padding: 1em;
+}
+
+.#{$boldr-ns}widget__stats-label {
+
+}
+
+.#{$boldr-ns}widget__stats-value {
+
+}

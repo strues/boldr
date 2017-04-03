@@ -7,7 +7,8 @@ import MenuButton from 'react-md/lib/Menus/MenuButton';
 import Toolbar from 'react-md/lib/Toolbars';
 import List from 'react-md/lib/Lists/List';
 import ListItem from 'react-md/lib/Lists/ListItem';
-import { Loader } from '../../../../../components';
+import { Loader } from 'boldr-ui';
+
 import { fetchTaggedPost } from '../../../../../state/modules/blog/tags/actions';
 import TaggedPostMenu from '../TaggedPostMenu';
 

@@ -10,9 +10,9 @@ import { Tag, User, Post } from '../../models';
  */
 export async function getAllStats(req, res, next) {
   try {
-    const postStats = await Post.query().count();
-    const tagStats = await Tag.query().count();
-    const userStats = await User.query().count();
+    const postStats = await Post.query().count('*');
+    const tagStats = await Tag.query().count('*');
+    const userStats = await User.query().count('*');
 
     const payload = {
       posts: parseInt(postStats[0].count, 10),

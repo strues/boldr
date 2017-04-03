@@ -17,7 +17,7 @@ function run(task, action, ...args) {
     () => {
       process.stdout.write(`Finished '${taskName}' after ${new Date().getTime() - start.getTime()}ms\n`);
     },
-    err => process.stderr.write(`${err.stack}\n`),
+    err => process.stderr.write(`${err.stack}\n`)
   );
 }
 

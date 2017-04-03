@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import Image from '../../../../components/Image';
+import { Image } from 'boldr-ui';
 
 const PostImage = (props: {imageSrc: String, altText: String}) => {
   return (

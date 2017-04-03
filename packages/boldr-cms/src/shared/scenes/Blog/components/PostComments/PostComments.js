@@ -5,9 +5,10 @@ import Button from 'react-md/lib/Buttons';
 import FontIcon from 'react-md/lib/FontIcons';
 import Collapse from 'react-md/lib/Helpers/Collapse';
 import styled from 'styled-components';
+import { Heading } from 'boldr-ui';
 import AddComment from '../AddComment';
 import Comment from '../Comment';
-import { Heading } from '../../../../components';
+
 
 type Props = {
   userEntities: Object,

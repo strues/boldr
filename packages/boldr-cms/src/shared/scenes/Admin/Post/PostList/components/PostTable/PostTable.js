@@ -15,7 +15,7 @@ import TableColumn from 'react-md/lib/DataTables/TableColumn';
 import TablePagination from 'react-md/lib/DataTables/TablePagination';
 import Avatar from 'react-md/lib/Avatars';
 
-import type { Post } from '../../../../../../types/models';
+import config from '../../../../../../../../config';
 import { selectPost } from '../../../../../../state/modules/blog/posts/actions';
 
 type Props = {
@@ -31,11 +31,11 @@ class PostTable extends PureComponent {
     const rows = this.props.posts.map(p => (
       <TableRow key={ p.id }>
         <TableColumn style={ { maxWidth: '125px' } }>
-          <Avatar src={ p.feature_image } role="presentation" />
+          <Avatar src={ `${config('apiUrl')}${p.featureImage}` } role="presentation" />
         </TableColumn>
         <TableColumn><Link to={ `/admin/posts/editor/${p.slug}` }>{p.title}</Link></TableColumn>
         <TableColumn>{p.published ? <span>Published</span> : <span>Draft</span>}</TableColumn>
-        <TableColumn>{format(p.created_at, 'MMMM Do YYYY')}</TableColumn>
+        <TableColumn>{format(p.createdAt, 'MMMM Do YYYY')}</TableColumn>
         <TableColumn>
           <Button onClick={ () => this.props.handleDeleteClick(p.id) } icon>delete_forever</Button>
         </TableColumn>

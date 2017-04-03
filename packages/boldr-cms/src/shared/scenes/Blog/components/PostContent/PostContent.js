@@ -10,8 +10,8 @@ import PostDate from '../PostDate';
 type Props = {
   title: String,
   content: String,
-  feature_image: ?String,
-  created_at: Date,
+  featureImage: ?String,
+  createdAt: Date,
 };
 
 const PostContent = (props: Props) => {
@@ -31,7 +31,7 @@ const PostContent = (props: Props) => {
         className="boldr-paperoverride"
       >
 
-        <PostDate created={ props.created_at } />
+        <PostDate created={ props.createdAt } />
         <Divider />
         <div className="boldr-post__content" dangerouslySetInnerHTML={ createMarkup() } />
       </Paper>

@@ -3,15 +3,14 @@ import React, { PureComponent } from 'react';
 import { findDOMNode } from 'react-dom';
 import Link from 'react-router/lib/Link';
 import { connect } from 'react-redux';
-import type { ReactElement } from 'types/react';
 import Avatar from 'react-md/lib/Avatars';
 import Button from 'react-md/lib/Buttons';
 import NavigationDrawer from 'react-md/lib/NavigationDrawers';
+import styled from 'styled-components';
 import { Grid, Col, Row } from 'boldr-ui';
+
 import { updateMedia, updateDrawerType } from '../../../state/modules/boldr/ui/actions';
 import navItems from './buildAdminNav';
-
-const styled = require('styled-components').default;
 
 const Wrapper = styled.div`
   display: flex;

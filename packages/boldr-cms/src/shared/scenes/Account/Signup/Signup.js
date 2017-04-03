@@ -14,7 +14,12 @@ const Signup = props => {
   return (
     <div className="boldr-form__signup">
       <Helmet title="Signup" />
-      <FormCard width={ 600 } title="Signup" form={ <SignupForm onSubmit={ props.onSubmit } /> } extra1={ formBottom } />
+      <FormCard
+        width={ 600 }
+        title="Signup"
+        form={ <SignupForm onSubmit={ props.onSubmit } /> }
+        extra1={ formBottom }
+      />
     </div>
   );
 };

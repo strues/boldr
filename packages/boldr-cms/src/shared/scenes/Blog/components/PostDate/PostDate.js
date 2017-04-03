@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import format from 'date-fns/format';
-import { Icon } from '../../../../components/index';
+import { Icon } from 'boldr-ui';
 
 type Props = {
   created: Date,

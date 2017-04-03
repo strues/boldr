@@ -39,7 +39,7 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader' },
       {
-        test: /(\.scss|\.css)$/,
+        test: /\.scss/,
         loader: ExtractTextPlugin.extract({
           fallback: 'style-loader',
           use: [

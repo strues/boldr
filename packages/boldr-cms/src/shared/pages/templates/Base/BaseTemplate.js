@@ -4,11 +4,12 @@ import styled from 'styled-components';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import { Footer } from 'boldr-ui';
 import { fetchTemplateResource } from '../../../state/modules/boldr/templates/actions';
 import { fetchMenusIfNeeded, getByLabel } from '../../../state/modules/boldr/menu';
 import { logout } from '../../../state/modules/auth/actions';
 import { selectMe } from '../../../state/modules/users';
-import { MainHeader, Footer } from '../../../components/index';
+import { MainHeader } from '../../../components/index';
 import type { ReactElement, ReactChildren } from '../../../types/react';
 
 type Props = {

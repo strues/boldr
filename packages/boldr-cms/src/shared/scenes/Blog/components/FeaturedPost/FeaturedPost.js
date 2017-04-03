@@ -4,21 +4,19 @@ import Link from 'react-router/lib/Link';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Button from 'react-md/lib/Buttons/Button';
-
+import { Row, Col, Paragraph, media } from 'boldr-ui';
 import { selectPost } from '../../../../state/modules/blog/posts/actions';
-import { Row, Col, Paragraph } from '../../../../components';
-import type { Tag as TagType } from '../../../../types/models';
-import { media } from '../../../../theme/theme';
+
 import TagBlock from '../TagBlock';
 import Tag from '../Tag';
 
 type Props = {
   id?: string,
-  feature_image?: string,
+  featureImage?: string,
   title?: string,
   slug: string,
   content?: string,
-  background_image?: string,
+  backgroundImage?: string,
   comments: ?Array<Object>,
   excerpt?: string,
   created_at: string,
@@ -26,10 +24,10 @@ type Props = {
   status: ?string,
   author: string,
   seo?: Object,
-  tags: Array<TagType>,
+  tags: Array<Tag>,
   attachments: ?Object,
   meta: ?Object,
-  user_id: ?string,
+  userId: ?string,
   dispatch: Function,
   listTags: Object,
 };
@@ -75,7 +73,7 @@ export const FeaturedPost = (props: Props) => {
     display: flex;
     flex-direction: row;
     order: 1;
-    background: url(${props.feature_image});
+    background: url(${props.featureImage});
     background-size: cover;
     background-position: 50% 50%;
     width: 100%;
@@ -92,14 +90,14 @@ export const FeaturedPost = (props: Props) => {
     created_at: props.created_at,
     excerpt: props.excerpt,
     comments: props.comments,
-    background_image: props.background_image,
-    feature_image: props.feature_image,
+    backgroundImage: props.backgroundImage,
+    featureImage: props.featureImage,
     meta: props.meta,
     slug: props.slug,
     status: props.status,
     tags: props.tags,
     title: props.title,
-    user_id: props.user_id,
+    userId: props.userId,
   };
   function transitionPost() {
     props.dispatch(selectPost(post));

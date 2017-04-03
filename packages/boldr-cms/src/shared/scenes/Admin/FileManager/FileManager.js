@@ -62,6 +62,7 @@ class FileManager extends Component {
     const payload = files[0];
     this.props.dispatch(uploadFiles(payload));
   }
+
   onOpenClick() {
     (this: any).dropzone.open();
   }

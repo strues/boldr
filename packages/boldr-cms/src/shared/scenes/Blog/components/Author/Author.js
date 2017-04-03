@@ -4,8 +4,7 @@ import styled from 'styled-components';
 import classnames from 'classnames';
 import Link from 'react-router/lib/Link';
 import Avatar from 'react-md/lib/Avatars';
-import { Heading, Col, Social } from '../../../../components/index';
-import { StyleClasses } from '../../../../theme/theme';
+import { Heading, Col, Social, StyleClasses } from 'boldr-ui';
 
 const BASE_ELEMENT = StyleClasses.POST_SIDEBAR_AUTHOR;
 
@@ -36,7 +35,7 @@ const Author = (props: Props) => {
   const authorName = <Link to={ `/profiles/${props.username}` }>{props.username}</Link>;
   return (
     <div className={ classes }>
-      <AvatarName><Avatar src={ props.avatarUrl } role="presentation" /> </AvatarName>
+      <AvatarName><Avatar src={ props.avatarUrl } role="presentation" /></AvatarName>
       <AvatarName><Heading size={ 3 }>{authorName}</Heading></AvatarName>
       <BioBlock>{props.bio}</BioBlock>
       <Social
@@ -53,6 +52,10 @@ const Author = (props: Props) => {
       />
     </div>
   );
+};
+
+Author.defaultProps = {
+  avatarUrl: '',
 };
 
 export default Author;

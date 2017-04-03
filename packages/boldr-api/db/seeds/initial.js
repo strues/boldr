@@ -365,7 +365,7 @@ function seed(knex, Promise) {
       Promise.all([
         knex('attachment').insert({
           id: '668e14aa-ebe6-11e6-8ebf-4f81f17749d5',
-          url: '/files/file.png',
+          url: '/uploads/file.png',
           user_id: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
           safe_name: 'file.png',
           file_name: 'file.png',

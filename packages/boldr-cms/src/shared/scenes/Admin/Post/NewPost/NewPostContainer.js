@@ -4,13 +4,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import draftToHtml from 'draftjs-to-html';
 
-import type { Post, PostImage } from '../../../../types/models';
 import { createPost } from '../../../../state/modules/blog/posts';
 import NewPost from './NewPost';
 
 type Props = {
   dispatch: Function,
-  postImage: PostImage,
+  postImage: string,
   createPost: Function,
 };
 
@@ -26,9 +25,9 @@ class NewPostContainer extends Component {
       title: values.title,
       tags: values.tags,
       excerpt: values.excerpt,
-      feature_image: this.props.postImage.url || values.feature_image,
+      featureImage: this.props.postImage.url || values.featureImage,
       published: values.published,
-      raw_content: values.content,
+      rawContent: values.content,
       content: draftToHtml(values.content),
       meta: values.meta,
     };

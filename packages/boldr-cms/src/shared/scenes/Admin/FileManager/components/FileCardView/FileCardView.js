@@ -2,7 +2,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 
-import { Grid, Row, Col } from '../../../../../components';
+import { Grid, Row, Col } from 'boldr-ui';
 import File from '../File';
 
 type Props = {

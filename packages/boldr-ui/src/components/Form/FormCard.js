@@ -24,7 +24,7 @@ type Props = {
   extra1: any,
   extra2: ?any,
 };
-/* $FlowIssue */
+
 const FormCard = (props: Props) => {
   return (
     <div>

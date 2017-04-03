@@ -9,7 +9,7 @@ import TabsContainer from 'react-md/lib/Tabs/TabsContainer';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
 import Switch from 'react-md/lib/SelectionControls/Switch';
-import { InputField, Col, Row, Heading, FormGroup } from '../../../../../../components';
+import { InputField, Col, Row, Heading, FormGroup } from 'boldr-ui';
 import { uploadPostImage } from '../../../../../../state/modules/attachments/actions';
 import RenderTags from '../RenderTags';
 import FieldEditor from './FieldEditor';
@@ -82,11 +82,25 @@ class NewPostForm extends Component {
         <form onSubmit={ handleSubmit }>
           <Wrapper>
             <FormGroup>
-              <Field id="post-title" name="title" type="text" component={ InputField } label="Post Title" tabIndex={ 0 } />
+              <Field
+                id="post-title"
+                name="title"
+                type="text"
+                component={ InputField }
+                label="Post Title"
+                tabIndex={ 0 }
+              />
             </FormGroup>
             <FormGroup>
               <Heading size={ 5 }>Tag your post</Heading>
-              <FieldArray name="tags" type="text" id="post-tags" component={ RenderTags } label="Tags" tabIndex={ -1 } />
+              <FieldArray
+                name="tags"
+                type="text"
+                id="post-tags"
+                component={ RenderTags }
+                label="Tags"
+                tabIndex={ -1 }
+              />
             </FormGroup>
           </Wrapper>
           <TabsContainer

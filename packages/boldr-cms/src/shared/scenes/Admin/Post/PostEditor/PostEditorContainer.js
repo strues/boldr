@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Loader } from '../../../../components';
+import { Loader } from 'boldr-ui';
 import { updatePost, fetchPostFromSlug } from '../../../../state/modules/blog/posts';
 import EditPostForm from './components/EditPostForm';
 import PostEditor from './PostEditor';
