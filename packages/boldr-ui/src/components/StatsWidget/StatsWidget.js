@@ -47,15 +47,13 @@ const StatsWidget = (props: Props) => {
         <FontIcon>assessment</FontIcon> {title}
       </Heading>
       <StatsList>
-      {
-        statistics.map(s => (
-        <StatsListItem key={Math.random()}>
-          <StatLabel name={s.name} tag={ labelTag } className={ labelClassName } />
-          <StatValue total={s.total} tag={ valueTag } className={ valueClassName } />
-        </StatsListItem>
-        ))
-      }
-    </StatsList>
+        {statistics.map(s => (
+          <StatsListItem key={Math.random()}>
+            <StatLabel name={s.name} tag={labelTag} className={labelClassName} />
+            <StatValue total={s.total} tag={valueTag} className={valueClassName} />
+          </StatsListItem>
+        ))}
+      </StatsList>
     </div>
   );
 };

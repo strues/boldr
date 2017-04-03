@@ -173,7 +173,7 @@ module.exports.up = async db => {
     table.boolean('has_dropdown').default(false);
     table.integer('order');
     table.string('mobile_href', 255).nullable().comment(
-      'Mobile href is applicable in cases where the item is a dropdown trigger on desktop. Without a mobile href, it will only be text.' // eslint-disable-line
+      'Mobile href is applicable in cases where the item is a dropdown trigger on desktop. Without a mobile href, it will only be text.', // eslint-disable-line
     );
     table.string('href').notNullable();
     table.string('icon').nullable();

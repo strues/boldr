@@ -23,5 +23,4 @@ app.use('/uploads', Express.static(pathResolve(appRootDir.get(), './static/uploa
 // Catch and format errors
 errorHandler(app);
 
-
 module.exports = app;

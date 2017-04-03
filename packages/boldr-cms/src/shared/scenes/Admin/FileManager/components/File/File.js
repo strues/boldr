@@ -34,11 +34,7 @@ const File = (props: Props) => {
   return (
     <Card className="boldr-filecard">
       <Media>
-        <img
-          src={ `${config('apiUrl')}${props.file.url}` }
-          alt={ props.file.file_name }
-          role="presentation"
-        />
+        <img src={ `${config('apiUrl')}${props.file.url}` } alt={ props.file.file_name } role="presentation" />
         <MediaOverlay>
           <CardTitle title={ props.file.file_name || 'foo' } />
         </MediaOverlay>

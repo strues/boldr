@@ -9,7 +9,6 @@ import { Heading } from 'boldr-ui';
 import AddComment from '../AddComment';
 import Comment from '../Comment';
 
-
 type Props = {
   userEntities: Object,
   comments: Array<Object>,

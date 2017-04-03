@@ -9,6 +9,6 @@ const stats = {
 };
 
 it('<StatsWidget />, renders the widget with props', () => {
-  const wrapper = shallow(<StatsWidget stats={ stats } />);
+  const wrapper = shallow(<StatsWidget stats={stats} />);
   expect(wrapper.instance().props.stats).toEqual(stats);
 });
