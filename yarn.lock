@@ -1264,9 +1264,9 @@ bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.6"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.6.tgz#53344adb14617a13f6e8dd2ce28905d1c0ba3215"
 
-boldr-ui@^0.0.3:
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/boldr-ui/-/boldr-ui-0.0.3.tgz#b9502d3b05b0d484bce54a9a2c531aae60dfffa1"
+boldr-ui@0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/boldr-ui/-/boldr-ui-0.0.5.tgz#28b9ed9095feb2e3c680c90e6a04b0508967105f"
   dependencies:
     classnames "^2.2.5"
     react-md "^1.0.11"
