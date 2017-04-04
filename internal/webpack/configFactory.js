@@ -35,22 +35,22 @@ export default function webpackConfigFactory(buildOptions) {
 
   const NODE_ENV = process.env.NODE_ENV || 'development';
   const mode = NODE_ENV;
-  const isOptimize = optimize;
-  const isDev = !optimize;
+  const isProd = optimize;
+  const isDev = !isProd;
   const isClient = target === 'client';
   const isServer = target === 'server';
   const isNode = !isClient;
 
   const ifDev = ifElse(isDev);
-  const ifOptimize = ifElse(isOptimize);
+  const ifProd = ifElse(isProd);
   const ifNode = ifElse(isNode);
   const ifClient = ifElse(isClient);
   const ifDevClient = ifElse(isDev && isClient);
-  const ifOptimizeClient = ifElse(isOptimize && isClient);
+  const ifProdClient = ifElse(isProd && isClient);
 
   console.log(
     chalk.white.bgBlue(
-      `==> Creating ${isOptimize ? 'an optimized' : 'a development'} bundle configuration for the "${target}"`,
+      `==> Creating ${isProd ? 'an optimized' : 'a development'} bundle configuration for the "${target}"`,
     ),
   );
 
@@ -71,7 +71,7 @@ export default function webpackConfigFactory(buildOptions) {
     },
     output: {
       path: path.resolve(ROOT_DIR, bundleConfig.outputPath),
-      filename: ifOptimizeClient('[name]-[chunkhash].js', '[name].js'),
+      filename: ifProdClient('[name]-[chunkhash].js', '[name].js'),
       chunkFilename: '[name]-[chunkhash].js',
       libraryTarget: ifNode('commonjs2', 'var'),
       publicPath: ifDev(
@@ -111,7 +111,7 @@ export default function webpackConfigFactory(buildOptions) {
 
     devtool: ifElse(isNode || isDev || config('incSourceMaps'))('source-map', 'hidden-source-map'),
 
-    performance: ifOptimizeClient({ hints: 'warning' }, false),
+    performance: ifProdClient({ hints: 'warning' }, false),
     plugins: removeNil([
       ...prefetchPlugins,
       ifNode(
@@ -124,12 +124,14 @@ export default function webpackConfigFactory(buildOptions) {
       ),
 
       ifClient(() => new WebpackMd5Hash()),
+      new webpack.EnvironmentPlugin({
+        NODE_ENV: isProd ? 'production' : 'development',
+        BUILD_FLAG_IS_CLIENT: isClient,
+        BUILD_FLAG_IS_SERVER: isServer,
+        BUILD_FLAG_IS_NODE: isNode,
+        BUILD_FLAG_IS_DEV: isDev,
+      }),
       new webpack.DefinePlugin({
-        'process.env.NODE_ENV': JSON.stringify(NODE_ENV),
-        'process.env.BUILD_FLAG_IS_CLIENT': JSON.stringify(isClient),
-        'process.env.BUILD_FLAG_IS_SERVER': JSON.stringify(isServer),
-        'process.env.BUILD_FLAG_IS_NODE': JSON.stringify(isNode),
-        'process.env.BUILD_FLAG_IS_DEV': JSON.stringify(isDev),
         __DEV__: JSON.stringify(isDev),
         __SERVER__: JSON.stringify(isServer),
       }),
@@ -143,7 +145,7 @@ export default function webpackConfigFactory(buildOptions) {
       ),
       ifDev(() => new webpack.NoEmitOnErrorsPlugin()),
       ifDevClient(() => new webpack.HotModuleReplacementPlugin()),
-      ifOptimizeClient(
+      ifProdClient(
         () =>
           new webpack.LoaderOptionsPlugin({
             minimize: true,
@@ -197,8 +199,8 @@ export default function webpackConfigFactory(buildOptions) {
                 'transform-flow-strip-types',
                 ifDev('transform-react-jsx-self'),
                 ifDev('transform-react-jsx-source'),
-                ifOptimize('transform-react-inline-elements'),
-                ifOptimize('transform-react-constant-elements'),
+                ifProd('transform-react-inline-elements'),
+                ifProd('transform-react-constant-elements'),
               ].filter(x => x != null),
             },
           },
@@ -221,33 +223,29 @@ export default function webpackConfigFactory(buildOptions) {
             path: 'postcss-loader',
           },
           {
-            path: 'sass-loader',
-            use: {
-              outputStyle: 'expanded',
-              sourceMap: true,
-            },
+            path: 'fast-sass-loader',
           },
         ],
       }),
 
-      ifOptimizeClient(
+      ifProdClient(
         () =>
           new webpack.optimize.CommonsChunkPlugin({
             name: 'vendor',
             children: true,
           }),
       ),
-      ifOptimizeClient(() => new webpack.optimize.AggressiveMergingPlugin()),
+      ifProdClient(() => new webpack.optimize.AggressiveMergingPlugin()),
       ifDevClient(() => new NamedModulesPlugin()),
-      ifOptimizeClient(() => new BabiliWebpackPlugin()),
-      ifOptimizeClient(
+      ifProdClient(() => new BabiliWebpackPlugin()),
+      ifProdClient(
         () =>
           new ExtractTextPlugin({
             filename: '[name]-[chunkhash].css',
             allChunks: true,
           }),
       ),
-      ifOptimizeClient(
+      ifProdClient(
         () =>
           new PurifyCSSPlugin({
             paths: [...globSync(`${ROOT_DIR}/src/shared/**/*.js`),
@@ -275,7 +273,7 @@ export default function webpackConfigFactory(buildOptions) {
           ],
           include: removeNil([
             ...bundleConfig.srcPaths.map(srcPath => path.resolve(ROOT_DIR, srcPath)),
-            ifOptimizeClient(path.resolve(ROOT_DIR, 'src/html')),
+            ifProdClient(path.resolve(ROOT_DIR, 'src/html')),
           ]),
         },
         ifElse(isClient || isServer)(
@@ -284,14 +282,14 @@ export default function webpackConfigFactory(buildOptions) {
             ifDevClient({
               loaders: ['happypack/loader?id=hp-scss'],
             }),
-            ifOptimizeClient(() => ({
+            ifProdClient(() => ({
               loader: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
-                use: 'css-loader?sourceMap&importLoaders=2!postcss-loader!sass-loader?outputStyle=expanded&sourceMap&sourceMapContents', // eslint-disable-line
+                use: 'css-loader?sourceMap&importLoaders=2!postcss-loader!fast-sass-loader', // eslint-disable-line
               }),
             })),
             ifNode({
-              loaders: ['css-loader/locals', 'postcss-loader', 'sass-loader'],
+              loaders: ['css-loader/locals', 'postcss-loader', 'fast-sass-loader'],
             }),
           ),
         ),
@@ -303,14 +301,14 @@ export default function webpackConfigFactory(buildOptions) {
           test: /\.(eot|woff|woff2|ttf|otf|png|jpg|jpeg|jp2|jpx|jxr|gif|webp|mp4|mp3|ogg|pdf|html)$/,
           loader: 'file-loader',
           options: {
-            name: ifOptimizeClient('file-[hash:base62:8].[ext]', '[name].[ext]'),
+            name: ifProdClient('file-[hash:base62:8].[ext]', '[name].[ext]'),
             emitFile: isClient,
           },
         },
       ]),
     },
   };
-  if (isOptimize && isClient) {
+  if (isProd && isClient) {
     webpackConfig = withServiceWorker(webpackConfig, bundleConfig);
   }
   // Apply the configuration middleware.

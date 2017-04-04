@@ -16,7 +16,6 @@ import { checkAuth } from '../shared/state/modules/auth/actions';
 import { getToken } from '../shared/core/authentication/token';
 import ApiClient from '../shared/core/api/apiClient';
 import createRoutes from '../shared/scenes';
-// import ReactHotLoader from './components/ReactHotLoader';
 
 WebFontLoader.load({
   google: { families: ['Roboto:200,400,600', 'Material Icons'] },
@@ -69,11 +68,20 @@ if (process.env.NODE_ENV === 'production') {
   require('./registerServiceWorker');
 }
 if (module.hot) {
+  const reRenderApp = () => {
+    try {
+      renderApp();
+    } catch (error) {
+      const RedBox = require('redbox-react').default;
+
+      render(<RedBox error={ error } />, domNode);
+    }
+  };
   module.hot.accept('../shared/scenes', () => {
     setImmediate(() => {
       // Preventing the hot reloading error from react-router
       unmountComponentAtNode(domNode);
-      renderApp();
+      reRenderApp();
     });
   });
 }
