@@ -15,10 +15,6 @@ branches:
 
 env:
   CXX: g++-4.8
-  DOCKER_COMPOSE_VERSION: 1.10.0
-  DATABASE_URI: postgres://postgres:password@127.0.0.1:5432/boldr
-  REDIS_URI: redis://127.0.0.1:6379/1
-  NODE_ENV: test
   TOKEN_SECRET: b0ldrs0s3cr3t
 git:
   depth: 3
@@ -30,36 +26,20 @@ addons:
       - g++-4.8
 
 before_install:
-  - sudo /etc/init.d/postgresql stop
-  - sudo apt-get update
-  - sudo apt-get install -o Dpkg::Options::="--force-confold" --force-yes -y docker-engine
-  - docker-compose --version
-  - sudo rm /usr/local/bin/docker-compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
-  - docker-compose --version
   - export CHROME_BIN=chromium-browser
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-  - docker-compose -f ./packages/boldr-api/docker-compose.yml up --build -d
 
 install:
   - yarn
-  - yarn run bootstrap:ci
 
 before_script:
   - yarn build:test
 
 script:
-  - yarn test
-
-matrix:
-  - yarn test:ci:browser
-  - yarn test:ci:node
+  - yarn test:ci
 
 after_success:
-  - yarn map-coverage
   - bash <(curl -s https://codecov.io/bash)
 
 cache:

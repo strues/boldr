@@ -4,14 +4,8 @@ pipeline:
     image: strues/alpine-node:7
     commands:
       - yarn
-      - yarn run bootstrap:ci
       - yarn build:test
       - yarn test
-services:
-  database:
-    image: strues/boldr-pg
-  redis:
-    image: redis:3.2.6-alpine
 
   # publish:
   #   docker:

@@ -1,9 +1,0 @@
-node_modules
-coverage
-src
-internal
-dev
-.babelrc
-postcss.config.js
-server.js
-*.log

@@ -1,11 +1,27 @@
-<p align="center"><img src="/docs/assets/logo-small.png"></p>
+# What's Boldr?
 
-[![Build Status](https://travis-ci.org/strues/boldr.svg?branch=master)](https://travis-ci.org/strues/boldr) | [![codecov](https://codecov.io/gh/strues/boldr/branch/master/graph/badge.svg)](https://codecov.io/gh/strues/boldr)  |  [![Code Climate](https://codeclimate.com/github/strues/boldr/badges/gpa.svg)](https://codeclimate.com/github/strues/boldr)
+<img src="https://boldr.io/boldr.png" width="179" />
+
+[![Build Status](https://travis-ci.org/strues/boldr.svg?branch=master)](https://travis-ci.org/strues/boldr) [![Code Climate][cc-img]][cc-link]  [![codecov](https://codecov.io/gh/strues/boldr/branch/master/graph/badge.svg)](https://codecov.io/gh/strues/boldr) [![Gitter][gitter-img]][gitter-link] [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+
+Boldr is a modern content management framework. Think of Boldr as the solid foundation for building your next great web application. Unlike other CMS platforms, Boldr is entirely JavaScript. Boldr features Universal / Isomorphic rendering for improved performance and Search Engine Optimization.
 
 
-> Boldr is a modern content management framework. Think of Boldr as the solid foundation for building your next great web application. Unlike other CMS platforms, Boldr is entirely JavaScript. Boldr features Universal / Isomorphic rendering for improved performance and Search Engine Optimization.
+> Big release coming soon with a CLI, generators, and more modularity!
 
-A CLI is in the early development stages. You will be able to scaffold out a complete or partial Boldr project with a single command. Viewable in its repository [here](https://github.com/boldr/getBoldr)
+**Table of Contents**
+- [Boldr](#boldr)
+- [Current Features](#current-features)
+- [Core Technologies](#core-technologies)
+- [Getting Started / Installation](#getting-started-installation)
+- [Editor](#editor)
+- [Usage](#usage)
+  - [Development](#development)
+  - [Production](#production)
+- [Contributing](#contributing)
+- [Documentation](#documentation)
+- [Demo](#demo)
+
 
 ## Current Features
 
@@ -20,6 +36,13 @@ A CLI is in the early development stages. You will be able to scaffold out a com
 * Basic user and author profiles.
 * Redis caching
 
+## Screenshots  
+|         |            |   |
+| ------------- |:-------------:| -----:|
+![blog][blogImg] | ![blog2][editProfileImg]  | ![single][blogSingle]
+![dash][dashboardImg] | ![files][adminPostListImg]  | ![members][editPostImg]
+![post][postEditorImg]  | ![prof][profileImg]  | ![settings][settingsImg]
+![tag][tagsImg] |  |
 
 
 ## Core Technologies
@@ -32,8 +55,6 @@ A CLI is in the early development stages. You will be able to scaffold out a com
 - [Docker](https://github.com/docker/docker)
 - [Webpack](https://github.com/webpack/webpack)
 
-
-
 ## Getting Started / Installation
 
 **Development Disclaimer:** At the moment, Boldr is in active development. Meaning there might be the occasional breaking changes, and architectural adjustments.
@@ -41,8 +62,8 @@ A CLI is in the early development stages. You will be able to scaffold out a com
 That said, I'm confident the majority of large breaking changes is behind us.
 
 1. `git clone https://github.com/strues/boldr.git`
-2. `yarn && yarn bootstrap`
-3. Modify environment variables `cd packages/boldr-api && cp .env_example .env`
+2. `yarn`
+3. Modify environment variables `cp .env_example .env`
 
 
 ## Usage
@@ -50,7 +71,7 @@ That said, I'm confident the majority of large breaking changes is behind us.
 Quick notes:
 
 - Ports
-  - **API**: 2121
+
   - **Frontend**: 3000 - _React SSR server_  
   - **Webpack**: 3001 - _dev only_  
 
@@ -60,7 +81,7 @@ Boldr is configured by default to serve api documentation from `http://localhost
 ### Development
 
 #### Database
-> Located in the [boldr-api package](/packages/boldr-api)
+
 
 The database does not require an initial migration and seed if ran using the provided Docker setup.  
 
@@ -79,42 +100,9 @@ After Boldr has started visit <http://localhost:3000>. The admin account is alre
 
 Settings for the build process are located in `config/values.js`.
 
-
-#### API
-
 ### Production
 
-See the [production docs](/docs/production.md)
-
-
-## Screenshots  
-|         |            |   |
-| ------------- |:-------------:| -----:|
-![blog][blogImg] | ![blog2][editProfileImg]  | ![single][blogSingle]
-![dash][dashboardImg] | ![files][adminPostListImg]  | ![members][editPostImg]
-![post][postEditorImg]  | ![prof][profileImg]  | ![settings][settingsImg]
-![tag][tagsImg] |  |
-
-
-## Documentation
-
-- [`Roadmap`](ROADMAP.md)
-- [`API Markdown`](/docs/apidoc.md)
-- [`API Live`](https://staging.boldr.io/apidocs/)
-- [`Editing the Nav`](/docs/navigation.md)
-- [`Theming`](/docs/theming.md)
-- [`Docker`](/docs/docker.md)
-- [`Production`](/docs/production.md)
-- [`Nginx`](/docs/nginx.md)
-- [`Troubleshooting`](/docs/troubleshooting.md)
-
-## Demo
-
-View an **early** demo at <https://staging.boldr.io>
-
-> Email - admin@boldr.io<br>
-> Password - password
-
+See the [production docs](docs/production.md)
 
 ## Contributing
 
@@ -129,6 +117,32 @@ Looking for an open source project to contribute to? All types of contributions 
 - Build / Installation
 - Play a major role in a community driven project, have some fun, and work on improving your skills.
 
+## Documentation
+
+- [`Roadmap`](ROADMAP.md)
+- [`API Markdown`](docs/apidoc.md)
+- [`API Live`](https://staging.boldr.io/apidocs/)
+- [`Editing the Nav`](docs/navigation.md)
+- [`Theming`](docs/theming.md)
+- [`Docker`](docs/docker.md)
+- [`Production`](docs/production.md)
+- [`Nginx`](docs/nginx.md)
+- [`Troubleshooting`](docs/troubleshooting.md)
+
+## Demo
+
+View an **early** demo at <https://staging.boldr.io>
+
+> Email - admin@boldr.io<br>
+> Password - password
+
+
+[cc-img]: https://codeclimate.com/github/strues/boldr/badges/gpa.svg
+[cc-link]: https://codeclimate.com/github/strues/boldr
+[gitter-img]: https://badges.gitter.im/Join%20Chat.svg
+[gitter-link]: https://gitter.im/boldr/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+[coverage-link]: https://codeclimate.com/github/strues/boldr/coverage
+[coverage-img]: https://codeclimate.com/github/strues/boldr/badges/coverage.svg
 
 [blogImg]: /docs/assets/blog.png
 [editProfileImg]: /docs/assets/editProfile.png

@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Home /> renders snapshot 1`] = `
+<div>
+  <Connect(BaseTemplate)
+    footer={
+      <Footer
+        single={false}
+      />
+    }
+    helmetMeta={
+      <HelmetWrapper
+        encodeSpecialCharacters={true}
+        title="Home"
+      />
+    }
+    hero={
+      <Hero
+        bgColor="#01579b"
+      >
+        <Heading
+          size={1}
+        >
+          A 
+          <span
+            style={
+              Object {
+                "color": "rgb(229, 0, 80)",
+              }
+            }
+          >
+            modern
+          </span>
+           content management framework.
+        </Heading>
+      </Hero>
+    }
+  >
+    <Row
+      componentClass="div"
+      style={
+        Object {
+          "padding": "25px",
+        }
+      }
+    >
+      <styled.p>
+        Placeholder
+      </styled.p>
+    </Row>
+  </Connect(BaseTemplate)>
+</div>
+`;
