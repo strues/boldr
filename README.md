@@ -2,12 +2,14 @@
 
 <img src="https://boldr.io/boldr.png" width="179" />
 
-[![Build Status](https://travis-ci.org/strues/boldr.svg?branch=master)](https://travis-ci.org/strues/boldr) [![Code Climate][cc-img]][cc-link]  [![codecov](https://codecov.io/gh/strues/boldr/branch/master/graph/badge.svg)](https://codecov.io/gh/strues/boldr) [![Gitter][gitter-img]][gitter-link] [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![Build Status](https://travis-ci.org/strues/boldr.svg?branch=master)](https://travis-ci.org/strues/boldr) [![Code Climate][cc-img]][cc-link]  [![codecov](https://codecov.io/gh/strues/boldr/branch/master/graph/badge.svg)](https://codecov.io/gh/strues/boldr)  [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 Boldr is a modern content management framework. Think of Boldr as the solid foundation for building your next great web application. Unlike other CMS platforms, Boldr is entirely JavaScript. Boldr features Universal / Isomorphic rendering for improved performance and Search Engine Optimization.
 
 
 > Big release coming soon with a CLI, generators, and more modularity!
+
+Have questions or want to help with development? Join us on <a href="https://slack.boldr.io" target="blank"><img src="/docs/assets/slack-logo.png" height="25" /></a>
 
 **Table of Contents**
 - [Boldr](#boldr)
@@ -139,8 +141,7 @@ View an **early** demo at <https://staging.boldr.io>
 
 [cc-img]: https://codeclimate.com/github/strues/boldr/badges/gpa.svg
 [cc-link]: https://codeclimate.com/github/strues/boldr
-[gitter-img]: https://badges.gitter.im/Join%20Chat.svg
-[gitter-link]: https://gitter.im/boldr/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge
+
 [coverage-link]: https://codeclimate.com/github/strues/boldr/coverage
 [coverage-img]: https://codeclimate.com/github/strues/boldr/badges/coverage.svg
 
