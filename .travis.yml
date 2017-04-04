@@ -1,18 +1,13 @@
 sudo: required
-
 language: node_js
-
 node_js:
-  - 7.7
-
+- 7.7
 services:
-  - docker
-
+- docker
 branches:
   only:
   - master
   - develop
-
 env:
   CXX: g++-4.8
   TOKEN_SECRET: b0ldrs0s3cr3t
@@ -21,28 +16,25 @@ git:
 addons:
   apt:
     sources:
-      - ubuntu-toolchain-r-test
+    - ubuntu-toolchain-r-test
     packages:
-      - g++-4.8
-
+    - g++-4.8
 before_install:
-  - export CHROME_BIN=chromium-browser
-  - export DISPLAY=:99.0
-  - sh -e /etc/init.d/xvfb start
-
+- export CHROME_BIN=chromium-browser
+- export DISPLAY=:99.0
+- sh -e /etc/init.d/xvfb start
 install:
-  - yarn
-
+- yarn
 before_script:
-  - yarn build:test
-
+- yarn build:test
 script:
-  - yarn test:ci
-
+- yarn test:ci
 after_success:
-  - bash <(curl -s https://codecov.io/bash)
-
+- bash <(curl -s https://codecov.io/bash)
 cache:
   yarn: true
   directories:
-    - node_modules
+  - node_modules
+notifications:
+  slack:
+    secure: nR90LG8s3BI+JVem31SR86n7jBCO8d9BRiKQuyEDvN4Pn6d/5w4U0y8u7KklLBnZbEtI9cQ2obvUSKprk8gJQA9h9+lNGNgFbRNu25Y0g9v7SSwdsaoGmvpYip0ddklcH+Ulnupxc/sqV2ZKcWH5pS5ooSGaRqdyYnupI4SSh7RCq/+cnBt9VCGjgSvB7Ru3UOfSUBVNFqWcwWSTPy512uCxm2HLBILWhNEdXVDjeZg/6cJwrnlBDtvOq31Ya3zl0H0iTj0j0Q4LGb3CUZKiT7DQgWmrWLeso2A37GGQtfvcOsIuvSC8aOzrtPg5yayUWwLec7/yER9gG5ggEXii+SIPFMgvX3pjF8tB1vg1MQ4P3dOfUrGDKRXQqpBRaU8S3cbxt40FWHY1OzODWRAF4tkRhgseqtYlAYxbaDJ8dJmYA2R4ERdZHIAhlmNQPTQy2Pod68qGqj2ugWVWADn5fgFwRmcHtx++jOMKJqCkIctNe6LxI3pbVcaBDtidrmY9aI10Ptd9mjsV7a4bFw4O1zAJIrol6knPMMms49zw4wvezamTjIHZ/h40ND8Z1jYB+uJU/I7aNdZsKQ5N8hF36Puz2eBSMKm01fp2tuy+of6liI+ZPaQ8fOtFqUmdeS6apUfVXmCl4o7Czfw4Gz+Z1OfCDjIAWpSr5+9Kwdg+iRM=
