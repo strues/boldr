@@ -6,7 +6,7 @@
 
 Boldr is a modern content management framework. Think of Boldr as the solid foundation for building your next great web application. Unlike other CMS platforms, Boldr is entirely JavaScript. Boldr features Universal / Isomorphic rendering for improved performance and Search Engine Optimization.
 
-**Big release coming soon with a [CLI](https://github.com/boldr/getBoldr/packages/boldr-cli), generators, and more modularity!**  
+**Big release coming soon with a [CLI](https://github.com/boldr/getBoldr/tree/master/packages/boldr-cli), generators, and more modularity!**  
 > In the mean time, a barebones version of the CLI is available. Install with `npm install -g boldr-cli` and run `boldr-cli new -f` to get setup with both the API and the CMS packages. After running the command you'll have a boldr folder containing both the api and cms. The folder location at the moment is your current working directory.
 
 
