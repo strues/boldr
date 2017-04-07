@@ -2,33 +2,38 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import MenuButton from 'react-md/lib/Menus/MenuButton';
 import Toolbar from 'react-md/lib/Toolbars';
 import List from 'react-md/lib/Lists/List';
 import ListItem from 'react-md/lib/Lists/ListItem';
 import { Loader } from 'boldr-ui';
 
-import { fetchTaggedPost } from '../../../../../state/modules/blog/tags/actions';
+import { fetchTagPostsIfNeeded } from '../../../../../state/modules/blog/tags/actions';
 import TaggedPostMenu from '../TaggedPostMenu';
 
 type Props = {
   currentTag: Object,
-  params: Object,
   isFetching: boolean,
   name: string,
   listTags: Object,
+  match: Object,
+  fetchTagPostsIfNeeded: (name: string) => void,
   dispatch: () => void,
 };
 
 class TaggedPost extends Component {
-  static fetchData(dispatch, props) {
-    return Promise.all([dispatch(fetchTaggedPost(props.name))]);
-  }
-  componentDidMount() {
-    const { dispatch, params } = this.props;
-    TaggedPost.fetchData(dispatch, this.props);
-  }
+  static defaultProps: {
+  currentTag: {},
+  // match: { params: { name: '' } },
+  // fetchTagPostsIfNeeded: () => {},
+};
+
+  // componentDidMount() {
+  //   const { fetchTagPostsIfNeeded, match: { params } } = this.props;
+  //
+  //   fetchTagPostsIfNeeded(params.name);
+  // }
 
   props: Props;
   render() {
@@ -62,4 +67,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(TaggedPost);
+export default connect(mapStateToProps, { fetchTagPostsIfNeeded })(TaggedPost);

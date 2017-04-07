@@ -10,21 +10,21 @@ type Props = {
   posts: Array<Post>,
   dispatch: () => void,
   deletePost: Function,
-  fetchPostsIfNeeded: Function,
+  fetchPostsIfNeeded: () => void,
   handleDeleteClick: Function,
 };
 
 export class PostListContainer extends Component {
-  static fetchData(dispatch) {
-    return Promise.all([dispatch(fetchPostsIfNeeded())]);
-  }
+  static defaultProps: {
+    profile: {},
+    fetchPostsIfNeeded: () => {},
+  };
   constructor(props: Props) {
     super(props);
     (this: any).handleDeleteClick = this.handleDeleteClick.bind(this);
   }
   componentDidMount() {
-    const { dispatch } = this.props;
-    PostListContainer.fetchData(dispatch);
+    this.props.dispatch(fetchPostsIfNeeded());
   }
 
   props: Props;

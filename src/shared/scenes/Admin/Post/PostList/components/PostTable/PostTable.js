@@ -3,7 +3,7 @@
 /* eslint-disable  react/jsx-no-bind */
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import Link from 'react-router/lib/Link';
+import Link from 'react-router-dom/Link';
 import { format } from 'date-fns';
 import Button from 'react-md/lib/Buttons';
 import FontIcon from 'react-md/lib/FontIcons';
@@ -33,7 +33,7 @@ class PostTable extends PureComponent {
         <TableColumn style={ { maxWidth: '125px' } }>
           <Avatar src={ `${config('apiUrl')}${p.featureImage}` } role="presentation" />
         </TableColumn>
-        <TableColumn><Link to={ `/admin/posts/editor/${p.slug}` }>{p.title}</Link></TableColumn>
+        <TableColumn><Link to={ `/admin/post-editor/${p.slug}` }>{p.title}</Link></TableColumn>
         <TableColumn>{p.published ? <span>Published</span> : <span>Draft</span>}</TableColumn>
         <TableColumn>{format(p.createdAt, 'MMMM Do YYYY')}</TableColumn>
         <TableColumn>

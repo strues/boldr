@@ -1,27 +1,31 @@
+/* eslint-disable dot-notation */
 import { createStore, applyMiddleware, compose } from 'redux';
 import { routerMiddleware } from 'react-router-redux';
-import thunkMiddleware from 'redux-thunk';
+import thunk from 'redux-thunk';
+import axios from 'axios';
+import { getToken } from '../core/authentication/token';
 import rootReducer from './reducers';
-import createMiddleware from './middleware/clientMiddleware';
 
-export default function configureStore(preloadedState, history, apiClient) {
+const isBrowser = typeof window === 'object';
+const token = isBrowser ? getToken() : null;
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+
+export default function configureStore(preloadedState, history) {
   const reduxRouterMiddleware = routerMiddleware(history);
 
-  const middleware = [thunkMiddleware, createMiddleware(apiClient), reduxRouterMiddleware];
+  const middlewares = [thunk.withExtraArgument(axios), reduxRouterMiddleware];
 
-  const enhancers = [applyMiddleware(...middleware)];
-
-  /* istanbul ignore next */
-  const devEnhancers = process.env.NODE_ENV !== 'production' &&
-    typeof window === 'object' &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    : compose;
+  const enhancers = [
+    applyMiddleware(...middlewares),
+    __DEV__ && typeof window === 'object' && typeof window.devToolsExtension !== 'undefined'
+      ? window.devToolsExtension()
+      : f => f,
+  ];
 
   // Creating the store
-  const store = createStore(rootReducer, preloadedState, devEnhancers(...enhancers));
-
-  // Hot reload
+  const store = createStore(rootReducer, preloadedState, compose(...enhancers));
+  
   /* istanbul ignore next */
   if (module.hot) {
     module.hot.accept('./reducers', () => {

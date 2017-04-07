@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Helmet from 'react-helmet';
-import BaseTemplate from '../templates/Base';
+import { BaseTemplate } from '../../templates';
 
 function About() {
   return (

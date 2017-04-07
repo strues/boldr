@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames/bind';
+import NavLink from 'react-router-dom/NavLink';
 import Dropdown from '../Dropdown';
 import styles from './detail.scss';
 
@@ -69,9 +70,9 @@ class Detail extends Component {
         aria-haspopup="true"
       >
         {linkHref
-          ? <a href={ `/${linkHref}` } onClick={ this.closeDropdowns } className={ cx('boldr-menudetail__link') }>
+          ? <NavLink to={ `/${linkHref}` } onClick={ this.closeDropdowns } className={ cx('boldr-menudetail__link') }>
             {linkContent}
-          </a>
+          </NavLink>
           : <span tabIndex="0" className={ cx('boldr-menudetail__link') }>{linkContent}</span>}
         {detail.children
           ? <Dropdown data={ detail } closeDropdowns={ this.closeDropdowns } open={ this.state.openDropdown } />

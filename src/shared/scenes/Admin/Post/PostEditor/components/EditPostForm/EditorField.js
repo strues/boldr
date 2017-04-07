@@ -1,7 +1,8 @@
 import React, { PropTypes, Component } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import { stateFromHTML } from 'draft-js-import-html';
-import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
+import convertFromRaw from 'draft-js/lib/convertFromRawToDraftState';
+import EditorState from 'draft-js/lib/EditorState';
 
 const editorStyle = {
   minHeight: 400,

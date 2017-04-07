@@ -49,8 +49,7 @@ exports[`<PostCard /> renders snapshot 1`] = `
         >
           <Link
             className="readmore-link"
-            onlyActiveOnIndex={false}
-            style={Object {}}
+            replace={false}
             to="/blog/undefined"
           >
             <ButtonTooltipedInked

@@ -1,17 +1,15 @@
 /* @flow */
 import React from 'react';
-import { Link } from 'react-router';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import dateFns from 'date-fns';
 import classnames from 'classnames';
 import Button from 'react-md/lib/Buttons/Button';
-import Divider from 'react-md/lib/Dividers';
 import Card from 'react-md/lib/Cards/Card';
 import CardTitle from 'react-md/lib/Cards/CardTitle';
 import CardActions from 'react-md/lib/Cards/CardActions';
 import CardText from 'react-md/lib/Cards/CardText';
-import Media, { MediaOverlay } from 'react-md/lib/Media';
-import { Col, Row, StyleClasses } from 'boldr-ui';
+import { Col, Row, StyleClasses, Media, MediaOverlay } from 'boldr-ui';
 import { selectPost } from '../../../../state/modules/blog/posts/actions';
 
 import TagBlock from '../TagBlock';
@@ -30,7 +28,6 @@ type Props = {
   updatedAt: ?string,
   status: ?string,
   author: string,
-  comments: ?Array<Object>,
   seo: ?Object,
   tags: ?Array<Tag>,
   attachments: ?Object,
@@ -55,7 +52,6 @@ export const PostCard = (props: Props) => {
     excerpt: props.excerpt,
     backgroundImage: props.backgroundImage,
     featureImage: props.featureImage,
-    comments: props.comments,
     meta: props.meta,
     slug: props.slug,
     status: props.status,

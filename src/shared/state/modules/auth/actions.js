@@ -1,5 +1,5 @@
 import { push } from 'react-router-redux';
-import * as api from '../../../core/api';
+import Axios from 'axios';
 import { setToken, removeToken } from '../../../core/authentication/token';
 import * as notif from '../../../core/constants';
 import { notificationSend } from '../notifications/notifications';
@@ -14,9 +14,9 @@ import * as t from '../actionTypes';
 export function doSignup(data) {
   return dispatch => {
     dispatch(beginSignUp());
-    return api.doSignup(data).then(response => {
-      if (!response.status === 201) {
-        dispatch(signUpError(response));
+    return Axios.post('/api/v1/auth/signup', data).then(res => {
+      if (!res.status === 201) {
+        dispatch(signUpError(res));
         dispatch(notificationSend(notif.MSG_SIGNUP_ERROR));
       }
       dispatch(signUpSuccess());
@@ -48,15 +48,14 @@ const signUpError = err => {
 export function doLogin(data) {
   return dispatch => {
     dispatch(beginLogin());
-    return api
-      .doLogin(data)
-      .then(response => {
-        if (response.status !== 200) {
-          dispatch(loginError(response));
+    return Axios.post('/api/v1/auth/login', data)
+      .then(res => {
+        if (res.status !== 200) {
+          dispatch(loginError(res));
           dispatch(notificationSend(notif.MSG_LOGIN_ERROR('Unable to login')));
         }
-        setToken(response.body.token);
-        dispatch(loginSuccess(response));
+        setToken(res.data.token);
+        dispatch(loginSuccess(res));
         dispatch(notificationSend(notif.MSG_LOGIN_SUCCESS));
         dispatch(push('/'));
       })
@@ -74,11 +73,11 @@ export function doLogin(data) {
 }
 const beginLogin = () => ({ type: t.LOGIN_REQUEST });
 
-function loginSuccess(response) {
+function loginSuccess(res) {
   return {
     type: t.LOGIN_SUCCESS,
-    token: response.body.token,
-    user: response.body.user,
+    token: res.data.token,
+    user: res.data.user,
   };
 }
 
@@ -115,8 +114,8 @@ export const checkAuth = token => {
   return async (dispatch: Function) => {
     try {
       dispatch(checkAuthRequest());
-      const data = await api.doAuthCheck(token);
-      const user = data.body;
+      const res = await Axios.get('/api/v1/auth/check');
+      const user = res.data;
       dispatch(checkAuthSuccess(user, token));
     } catch (err) {
       dispatch(checkAuthFailure('Token is invalid'));

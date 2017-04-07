@@ -3,15 +3,15 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 import { Grid, Col, Loader } from 'boldr-ui';
-import { loadSiteActivity, fetchStats } from '../../../state/modules/admin/dashboard/actions';
+import { fetchActivityIfNeeded, fetchStatsIfNeeded } from '../../../state/modules/admin/dashboard/actions';
 
 import Dashboard from './Dashboard';
 
 type Props = {
   children: ReactElement,
   dispatch?: Function,
-  fetchStats: Function,
-  loadSiteActivity: Function,
+  fetchStatsIfNeeded: Function,
+  fetchActivityIfNeeded: Function,
   loading: boolean,
   activities: ?Object,
   stats: Object,
@@ -19,7 +19,7 @@ type Props = {
 
 class DashboardContainer extends Component {
   static fetchData(dispatch) {
-    return Promise.all([dispatch(loadSiteActivity()), dispatch(fetchStats())]);
+    return Promise.all([dispatch(fetchActivityIfNeeded()), dispatch(fetchStatsIfNeeded())]);
   }
   componentDidMount() {
     const { dispatch } = this.props;

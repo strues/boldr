@@ -58,7 +58,7 @@ const ProfileContent = (props: Props) => {
         </Col>
         <Col sm={ 12 } md={ 6 }>
           <Col xs>
-            <Heading size={ 1 }>{profile.firstName} {' '} {profile.lastName}'s Profile</Heading>
+            <Heading size={ 1 }>{profile.firstName} {' '} {profile.lastName}&apos;s Profile</Heading>
           </Col>
           <DetailList>
             <ProfileDetail label={ <FontIcon>email</FontIcon> } detail={ profile.email } />
@@ -66,7 +66,7 @@ const ProfileContent = (props: Props) => {
             <ProfileDetail label={ <FontIcon>location_on</FontIcon> } detail={ profile.location } />
             <ProfileDetail label={ <FontIcon>library_books</FontIcon> } detail={ profile.bio } />
           </DetailList>
-          <Social
+          {/* <Social
             facebook
             fburl={ profile.social.facebook.url }
             twitter
@@ -77,7 +77,7 @@ const ProfileContent = (props: Props) => {
             ghurl={ profile.social.github.url }
             linkedin
             lurl={ profile.social.linkedin.url }
-          />
+          /> */}
         </Col>
       </Row>
     </div>

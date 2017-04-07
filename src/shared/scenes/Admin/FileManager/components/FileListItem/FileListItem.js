@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import Button from 'react-md/lib/Buttons';
 import FontIcon from 'react-md/lib/FontIcons';
+import Link from 'react-router-dom/Link';
 
 const Wrapper = styled.section`
   display: table;
@@ -52,9 +53,11 @@ const FileListItem = props => {
       </ImgWrapper>
       <Content>
         {props.children}
-        <Button icon onClick={ handleSelect }>
-          <FontIcon>mode_edit</FontIcon>
-        </Button>
+        <Link to={ `/admin/file-editor/${props.file.id}` }>
+          <Button icon onClick={ handleSelect }>
+            <FontIcon>mode_edit</FontIcon>
+          </Button>
+        </Link>
         <Button icon onClick={ handleclick }>
           <FontIcon>delete_forever</FontIcon>
         </Button>
@@ -64,7 +67,8 @@ const FileListItem = props => {
 };
 
 FileListItem.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
+  file: PropTypes.object,
   selectFile: PropTypes.func,
   /**
    * A function which returns the media element to render in the background.

@@ -1,8 +1,6 @@
 import { normalize, arrayOf } from 'normalizr';
 import { push } from 'react-router-redux';
-import { camelizeKeys } from 'humps';
-import * as api from '../../../../core/api';
-
+import Axios from 'axios';
 import * as notif from '../../../../core/constants';
 import { notificationSend } from '../../notifications/notifications';
 import * as t from '../../actionTypes';
@@ -12,7 +10,7 @@ import { setting as settingSchema, arrayOfSetting } from './schema';
   * FETCH SETTINGS ACTIONS
   * -------------------------
   * @exports fetchSettingsIfNeeded
-  * @exports loadBoldrSettings
+  * @exports fetchSettings
   *****************************************************************/
 
 /**
@@ -23,32 +21,42 @@ import { setting as settingSchema, arrayOfSetting } from './schema';
  * @return {Promise} Menus Promise that resolves when menus are fetched
  * or they arent required to be refreshed.
  */
-export function fetchSettingsIfNeeded() {
-  return (dispatch, getState) => {
+
+/* istanbul ignore next */
+export const fetchSettingsIfNeeded = (): ThunkAction =>
+  (dispatch: Dispatch, getState: GetState, axios: any) => {
+    /* istanbul ignore next */
     if (shouldFetchSettings(getState())) {
-      return dispatch(loadBoldrSettings());
+      /* istanbul ignore next */
+      return dispatch(fetchSettings(axios));
     }
 
-    return Promise.resolve();
+    /* istanbul ignore next */
+    return null;
   };
-}
 
-export function loadBoldrSettings() {
-  return dispatch => {
-    dispatch(loadSettings());
-    return api
-      .getAllSettings()
-      .then(response => {
-        const camelizedJson = camelizeKeys(response.body);
-        const settingData = normalize(response.body, arrayOfSetting);
-        return dispatch(doneLoadSettings(settingData));
+export const fetchSettings = (axios: any): ThunkAction =>
+  (dispatch: Dispatch) => {
+    dispatch({ type: t.FETCH_SETTINGS_REQUEST });
+
+    return Axios
+      .get('/api/v1/settings')
+      .then(res => {
+        const settingsData = res.data.results;
+        const normalizedSettings = normalize(settingsData, arrayOfSetting);
+
+        dispatch({
+          type: t.FETCH_SETTINGS_SUCCESS,
+          payload: normalizedSettings,
+        });
       })
-      .catch(error => {
-        dispatch(failLoadSettings(error));
+      .catch(err => {
+        dispatch({
+          type: t.FETCH_SETTINGS_FAILURE,
+          error: err,
+        });
       });
   };
-}
-
 /**
  * @function shouldFetchSettings
  * Called by fetchSettingsIfNeeded
@@ -59,27 +67,9 @@ function shouldFetchSettings(state) {
   if (!settings.length) {
     return true;
   }
-  if (settings.length) {
-    return false;
-  }
-  return settings;
+
+  return false;
 }
-
-const loadSettings = () => ({
-  type: t.FETCH_SETTINGS_REQUEST,
-});
-
-function doneLoadSettings(settingData) {
-  return {
-    type: t.FETCH_SETTINGS_SUCCESS,
-    payload: settingData,
-  };
-}
-
-const failLoadSettings = error => ({
-  type: t.FETCH_SETTINGS_FAILURE,
-  error,
-});
 
 /**
   * UPDATE SETTINGS ACTIONS
@@ -88,12 +78,15 @@ const failLoadSettings = error => ({
   *****************************************************************/
 
 export function updateBoldrSettings(payload) {
+  const settingId = payload.id;
+  const data = {
+    value: payload.value,
+  };
   return dispatch => {
     dispatch(beginUpdateSettings());
-    return api
-      .doUpdateSettings(payload)
-      .then(response => {
-        dispatch(doneUpdateSettings(response));
+    return Axios.put(`/api/v1/settings/${settingId}`)
+      .then(res => {
+        dispatch(doneUpdateSettings(res));
         dispatch(loadSettings());
         dispatch(
           notificationSend({
@@ -120,9 +113,9 @@ const beginUpdateSettings = () => ({
   type: t.UPDATE_SETTINGS_REQUEST,
 });
 
-const doneUpdateSettings = response => ({
+const doneUpdateSettings = res => ({
   type: t.UPDATE_SETTINGS_SUCCESS,
-  payload: response.body,
+  payload: res.data,
 });
 
 const failUpdateSettings = err => ({

@@ -2,12 +2,12 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import { Col, Row, Widget, Loader, StatsWidget } from 'boldr-ui';
-import { loadSiteActivity, fetchStats } from '../../../state/modules/admin/dashboard/actions';
+import { fetchActivityIfNeeded, fetchStatsIfNeeded } from '../../../state/modules/admin/dashboard/actions';
 import { ActivityWidget } from './components';
 
 type Props = {
-  loadSiteActivity: Function,
-  fetchStats: Function,
+  fetchActivityIfNeeded: Function,
+  fetchStatsIfNeeded: Function,
   activities: Object,
   loading: boolean,
   stats: Stats,

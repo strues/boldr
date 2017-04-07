@@ -19,14 +19,8 @@ type Props = {
 };
 
 class FileManagerContainer extends Component {
-  static fetchData(dispatch) {
-    return Promise.all([dispatch(fetchMedia())]);
-  }
   componentDidMount() {
-    const { dispatch } = this.props;
-
-    // Fetching data for client side rendering
-    FileManagerContainer.fetchData(dispatch);
+    this.props.dispatch(fetchMedia());
   }
   props: Props;
 

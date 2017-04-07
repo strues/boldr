@@ -3,8 +3,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Col, Row, Loader } from 'boldr-ui';
+import Helmet from 'react-helmet';
 import { getPosts } from '../../../state/modules/blog/posts';
-import { fetchTaggedPost } from '../../../state/modules/blog/tags/actions';
+import BaseTemplate from '../../../templates/BaseTemplate';
+import { fetchTagsIfNeeded, fetchTagPostsIfNeeded } from '../../../state/modules/blog/tags/actions';
 import TagList from './TagList';
 
 type Props = {
@@ -12,27 +14,34 @@ type Props = {
   isFetching: boolean,
   posts: Array<Object>,
   params: Object,
+  match: Object,
   listTags: Object,
-  dispatch: () => void,
+  fetchTagPostsIfNeeded: () => void,
 };
 
 export class TagListContainer extends Component {
-  static fetchData(dispatch, params) {
-    return Promise.all([dispatch(fetchTaggedPost(params.name))]);
-  }
-  componentDidMount() {
-    const { dispatch, params } = this.props;
+  static defaultProps: {
+    match: {params: {name: ''}},
+    fetchTagPostsIfNeeded: () => {},
+  };
 
-    // Fetching data for client side rendering
-    TagListContainer.fetchData(dispatch, params);
+  componentDidMount() {
+    const { fetchTagPostsIfNeeded, match: { params } } = this.props;
+
+    fetchTagPostsIfNeeded(params.name);
   }
 
   props: Props;
   render() {
+    const { match: { params } } = this.props;
     if (this.props.isFetching) {
       return <Loader />;
     }
-    return <TagList isFetching={ this.props.isFetching } listTags={ this.props.listTags } posts={ this.props.posts } />;
+    return (
+      <BaseTemplate helmetMeta={ <Helmet title={ `Posts tagged ${params.name}` } /> }>
+        <TagList isFetching={ this.props.isFetching } listTags={ this.props.listTags } posts={ this.props.posts } />
+      </BaseTemplate>
+    );
   }
 }
 
@@ -45,4 +54,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(TagListContainer);
+export default connect(mapStateToProps, { fetchTagPostsIfNeeded })(TagListContainer);

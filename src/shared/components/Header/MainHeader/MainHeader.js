@@ -1,9 +1,10 @@
 /* @flow */
 import React, { Component, PropTypes } from 'react';
 import Button from 'react-md/lib/Buttons';
+
 import classNames from 'classnames/bind';
 import cxN from 'classnames';
-
+import Link from 'react-router-dom/Link';
 import type { ReactChildren } from '../../../types/react';
 
 import Head from '../Head';
@@ -114,22 +115,26 @@ class MainHeader extends Component {
 
     if (!this.props.auth.isAuthenticated) {
       actions.push(
-        <Button key="login" raised primary label="Log In" href="/account/login" />,
-        <Button key="signup" raised secondary label="Sign Up" href="/account/signup" />,
+        <Link key="login" to="/account/login"><Button raised primary label="Log In" /></Link>,
+        <Link key="signup" to="/account/signup"><Button raised secondary label="Sign Up" /></Link>,
       );
     }
     if (this.props.me.roleId === 3) {
       actions.push(
-        <Button key="dash" onClick={ this.props.handleDashClick } icon primary tooltipLabel="Dashboard">
-          dashboard
-        </Button>,
+        <Link key="dash" to="/admin">
+          <Button icon primary tooltipLabel="Dashboard">
+            dashboard
+          </Button>
+        </Link>,
       );
     }
     if (this.props.auth.isAuthenticated) {
       actions.push(
-        <Button key="prof" href={ `/profiles/${this.props.me.username}` } icon tooltipLabel="Profile">
+        <Link key="prof" to={ `/profiles/${this.props.me.username}` }>
+          <Button icon tooltipLabel="Profile">
           perm_identity
-        </Button>,
+        </Button>
+        </Link>,
         <Button key="logout" icon onClick={ this.props.handleLogoutClick } tooltipLabel="Logout">
           exit_to_app
         </Button>,

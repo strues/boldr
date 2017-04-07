@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import classnames from 'classnames';
-import Link from 'react-router/lib/Link';
+import Link from 'react-router-dom/Link';
 import Avatar from 'react-md/lib/Avatars';
 import { Heading, Col, Social, StyleClasses } from 'boldr-ui';
 

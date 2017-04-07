@@ -38,8 +38,7 @@ exports[`<Author /> renders snapshot 1`] = `
       size={3}
     >
       <Link
-        onlyActiveOnIndex={false}
-        style={Object {}}
+        replace={false}
         to="/profiles/hey"
       >
         hey

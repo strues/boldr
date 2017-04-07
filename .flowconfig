@@ -6,6 +6,7 @@
 .*/node_modules/stylelint/.*
 .*/node_modules/flow-remove-types/.*
 .*/node_modules/flow-coverage-report/.*
+
 .*/db/.*
 .*/docs/.*
 .*/dist/.*
@@ -16,7 +17,7 @@
 .*/boldrCMS/.*
 
 [include]
-src/shared/types
+
 
 [libs]
 flow-typed/npm/
@@ -42,4 +43,4 @@ suppress_type=$FlowIssues
 suppress_comment=\\(.\\|\n\\)*\\$FlowIssue
 
 [version]
-0.42.0
+0.43.1

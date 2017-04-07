@@ -2,7 +2,7 @@
 import React from 'react';
 import Card from 'react-md/lib/Cards/Card';
 import Helmet from 'react-helmet';
-import type { Post } from '../../../../types/models';
+
 import { selectPost } from '../../../../state/modules/blog/posts/actions';
 import PostTable from './components/PostTable';
 

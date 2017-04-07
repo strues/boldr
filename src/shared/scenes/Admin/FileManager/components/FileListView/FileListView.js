@@ -23,7 +23,7 @@ const FileListView = (props: Props) => {
           selectFile={ props.selectFile }
           file={ file }
         >
-          {file.file_name}
+          {file.fileName}
         </FileListItem>
       ))}
     </div>

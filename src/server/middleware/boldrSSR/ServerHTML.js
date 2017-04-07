@@ -1,9 +1,4 @@
-/**
- * This module is responsible for generating the HTML page response for
- * the react application middleware.
- */
-/* eslint-disable react/no-danger */
-/* eslint-disable react/no-array-index-key */
+/* eslint-disable react/no-danger, react/no-array-index-key, react/jsx-key */
 
 import React, { Children, PropTypes } from 'react';
 import serialize from 'serialize-javascript';
@@ -11,7 +6,6 @@ import { ifElse, removeNil } from 'boldr-utils';
 import ClientConfig from '../../../../config/components/ClientConfig';
 import Html from '../../../shared/components/Html';
 import getClientBundleEntryAssets from './getClientBundleEntryAssets';
-// PRIVATES
 
 function KeyedComponent({ children }) {
   return Children.only(children);
@@ -27,8 +21,6 @@ function scriptTag(jsFilePath) {
   return <script type="text/javascript" src={ jsFilePath } />;
 }
 
-// COMPONENT
-
 function ServerHTML(props) {
   const {
     reactAppString,
@@ -39,9 +31,11 @@ function ServerHTML(props) {
   } = props;
 
   // Creates an inline script definition that is protected by the nonce.
-  const inlineScript = body => <script nonce={ nonce } type="text/javascript" dangerouslySetInnerHTML={ { __html: body } } />;
+  const inlineScript = body => <script nonce={nonce} type="text/javascript" dangerouslySetInnerHTML={{__html: body}} />; // eslint-disable-line
 
   const headerElements = removeNil([
+    ...ifElse(helmet)(() => helmet.title.toComponent(), []),
+    ...ifElse(helmet)(() => helmet.base.toComponent(), []),
     ...ifElse(helmet)(() => helmet.meta.toComponent(), []),
     ...ifElse(helmet)(() => helmet.link.toComponent(), []),
     ifElse(clientEntryAssets && clientEntryAssets.css)(() => stylesheetTag(clientEntryAssets.css)),
@@ -52,7 +46,7 @@ function ServerHTML(props) {
     // Binds the client configuration object to the window object so
     // that we can safely expose some configuration values to the
     // client bundle that gets executed in the browser.
-    <ClientConfig key="client-cfg" nonce={ nonce } />,
+    <ClientConfig nonce={ nonce } />,
     inlineScript(`window.__PRELOADED_STATE__=${serialize(props.preloadedState)};`),
     scriptTag('https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Symbol'),
     ifElse(process.env.BUILD_FLAG_IS_DEV)(() => scriptTag(`/assets/__dev_vendor_dll__.js?t=${Date.now()}`)),
@@ -62,12 +56,10 @@ function ServerHTML(props) {
 
   return (
     <Html
-      title="Boldr"
-      titleTemplate="%s - Powered by Boldr"
-      description="Your dreams are bold. Your thoughts are bold. So why shouldn't your CMS be a little Boldr?"
-      appBodyString={ reactAppString }
+      htmlAttributes={ ifElse(helmet)(() => helmet.htmlAttributes.toComponent(), null) }
       headerElements={ headerElements.map((x, idx) => <KeyedComponent key={ idx }>{x}</KeyedComponent>) }
       bodyElements={ bodyElements.map((x, idx) => <KeyedComponent key={ idx }>{x}</KeyedComponent>) }
+      appBodyString={ reactAppString }
     />
   );
 }
@@ -80,7 +72,5 @@ ServerHTML.propTypes = {
   // eslint-disable-next-line react/forbid-prop-types
   helmet: PropTypes.object,
 };
-
-// EXPORT
 
 export default ServerHTML;

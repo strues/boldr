@@ -1,12 +1,10 @@
 /* @flow */
 import React from 'react';
 import classnames from 'classnames';
-import Paper from 'react-md/lib/Papers';
-import { Heading, Col } from '../../../../components/index';
-import type { User, Tag } from '../../../../types/models';
+import { Heading, Col, StyleClasses, Paper } from 'boldr-ui';
+
 import Author from '../Author';
 import SidebarTags from '../SidebarTags';
-import { StyleClasses } from '../../../../theme/theme';
 
 type Props = {
   className: ?string,

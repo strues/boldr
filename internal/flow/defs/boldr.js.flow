@@ -17,7 +17,7 @@ declare type User = {
 };
 
 declare type Post = {
-  id: ?string,
+  id: string,
   featureImage: ?string,
   title: string,
   slug: string,
@@ -112,4 +112,10 @@ declare type MenuDetails = {
   mobileHref: string,
   icon: string,
   children: Array<Object>,
+};
+
+
+declare type NormalizrPayload = {
+  entities: Object,
+  result: Array<string>,
 };

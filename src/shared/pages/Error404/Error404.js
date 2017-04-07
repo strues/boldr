@@ -3,7 +3,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { Heading } from 'boldr-ui';
-import BaseTemplate from '../templates/Base';
+import { BaseTemplate } from '../../templates';
 
 function Error404() {
   return (

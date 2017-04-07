@@ -1,7 +1,7 @@
-import { FETCH_POSTS_REQUEST, GET_POST_FAILURE } from '../../actionTypes';
+import { FETCH_POSTS_REQUEST, FETCH_POST_FAILURE } from '../../actionTypes';
 import postsReducer from './reducer';
 
-describe('Post Duck', () => {
+describe('Post reducer', () => {
   it('Should return the initial state', () => {
     expect(postsReducer(undefined, {})).toEqual({
       all: {},
@@ -44,7 +44,7 @@ describe('Post Duck', () => {
     };
     expect(
       postsReducer(initialState, {
-        type: GET_POST_FAILURE,
+        type: FETCH_POST_FAILURE,
       }),
     ).toEqual(stateAfter);
   });

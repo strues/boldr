@@ -1,4 +1,3 @@
-import * as api from '../../../../core/api';
 import * as t from '../../actionTypes';
 
 export const showSidebar = () => ({ type: t.SHOW_SIDEBAR });
@@ -7,118 +6,96 @@ export const hideSidebar = () => ({ type: t.HIDE_SIDEBAR });
 /**
   * LOAD ACTIVITY ACTIONS
   * -------------------------
-  * @exports loadSiteActivity
+  * @exports fetchActivityIfNeeded
   *****************************************************************/
 
-export function fetchSiteActivity() {
-  return dispatch => {
-    dispatch(loadActivities());
-    return api
-      .getAllActivities()
-      .then(response => {
-        if (response.status !== 200) {
-          dispatch(failedToLoadActivities(response));
-        }
-        dispatch(loadActivitiesSuccess(response));
-      })
-      .catch(err => {
-        dispatch(failedToLoadActivities(err));
-      });
-  };
-}
-
-export function loadSiteActivity() {
-  return (dispatch, getState) => {
+/* istanbul ignore next */
+export const fetchActivityIfNeeded = (): ThunkAction =>
+  (dispatch: Dispatch, getState: GetState, axios: any) => {
+    /* istanbul ignore next */
     if (shouldFetchActivity(getState())) {
-      return dispatch(fetchSiteActivity());
+      /* istanbul ignore next */
+      return dispatch(fetchActivity(axios));
     }
 
-    return Promise.resolve();
+    /* istanbul ignore next */
+    return null;
   };
-}
+
+export const fetchActivity = (axios: any): ThunkAction =>
+  (dispatch: Dispatch) => {
+    dispatch({ type: t.FETCH_ACTIVITY_REQUEST });
+
+    return axios
+      .get('/api/v1/activities')
+      .then(res => {
+        dispatch({
+          type: t.FETCH_ACTIVITY_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: t.FETCH_ACTIVITY_FAILURE,
+          error: err,
+        });
+      });
+  };
 
 function shouldFetchActivity(state) {
   const { activities } = state.admin.dashboard;
-  if (!activities.length) return true;
-  if (activities.length) return false;
+  if (!activities.length) {
+    return true;
+  }
 
-  return activities;
+  return false;
 }
-
-const loadActivities = () => ({
-  type: t.LOAD_ACTIVITIES_REQUEST,
-});
-
-function loadActivitiesSuccess(response) {
-  return {
-    type: t.LOAD_ACTIVITIES_SUCCESS,
-    payload: response.body,
-  };
-}
-
-const failedToLoadActivities = err => ({
-  type: t.LOAD_ACTIVITIES_FAILURE,
-  loading: false,
-  error: err,
-});
 
 /**
   * FETCH STATS ACTIONS
   * -------------------------
+  * @exports fetchStatsIfNeeded
   * @exports fetchStats
   *****************************************************************/
 
-export function fetchDashboardStats() {
-  return dispatch => {
-    dispatch(beginFetchStats());
-    return api
-      .getAllStats()
-      .then(response => {
-        if (response.status !== 200) {
-          dispatch(failedToFetchStats(response));
-        }
-        dispatch(fetchStatsSuccess(response));
-      })
-      .catch(err => {
-        dispatch(failedToFetchStats(err));
-      });
-  };
-}
-
-export function fetchStats() {
-  return (dispatch, getState) => {
-    if (shouldFetchStats(getState())) {
-      return dispatch(fetchDashboardStats());
+/* istanbul ignore next */
+export const fetchStatsIfNeeded = (): ThunkAction =>
+  (dispatch: Dispatch, getState: GetState, axios: any) => {
+    /* istanbul ignore next */
+    if (shouldfetchStats(getState())) {
+      /* istanbul ignore next */
+      return dispatch(fetchStatsIfNeeded(axios));
     }
 
-    return Promise.resolve();
+    /* istanbul ignore next */
+    return null;
   };
-}
 
-function shouldFetchStats(state) {
-  const stats = state.admin.dashboard.activities;
+export const fetchStats = (axios: any): ThunkAction =>
+  (dispatch: Dispatch) => {
+    dispatch({ type: t.FETCH_STATS_REQUEST });
+
+    return axios
+      .get('/api/v1/admin/stats')
+      .then(res => {
+        dispatch({
+          type: t.FETCH_STATS_SUCCESS,
+          payload: res.data,
+        });
+      })
+      .catch(err => {
+        dispatch({
+          type: t.FETCH_STATS_FAILURE,
+          error: err,
+        });
+      });
+  };
+
+function shouldfetchStats(state) {
+  const { stats } = state.admin.dashboard;
   if (!stats.length) {
     return true;
   }
-  if (stats.length) {
-    return false;
-  }
-  return stats;
+
+  return false;
 }
-
-const beginFetchStats = () => ({
-  type: t.FETCH_STATS_REQUEST,
-});
-
-const fetchStatsSuccess = response => {
-  return {
-    type: t.FETCH_STATS_SUCCESS,
-    payload: response.body,
-  };
-};
-
-// Fail receivers
-const failedToFetchStats = err => ({
-  type: t.FETCH_STATS_FAILURE,
-  error: err,
-});

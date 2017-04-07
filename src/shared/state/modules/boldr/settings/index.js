@@ -1,6 +1,6 @@
 import settingsReducer, { STATE_KEY } from './reducer';
 import { selectSettings, selectSettingFromList } from './selectors';
-import { fetchSettingsIfNeeded, loadBoldrSettings, updateBoldrSettings } from './actions';
+import { fetchSettingsIfNeeded, fetchSettings, updateBoldrSettings } from './actions';
 
 export default settingsReducer;
 
@@ -9,6 +9,6 @@ export {
   selectSettings,
   selectSettingFromList,
   fetchSettingsIfNeeded,
-  loadBoldrSettings,
+  fetchSettings,
   updateBoldrSettings,
 };

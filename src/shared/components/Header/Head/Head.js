@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react';
 import classNames from 'classnames/bind';
+import Link from 'react-router-dom/Link';
 import styles from './head.scss';
 
 const cx = classNames.bind(styles);
@@ -32,9 +33,9 @@ const Head = (
         <span className={ cx('iconBar') } />
       </button>
       <div className={ cx('boldr-mainheader__brand') }>
-        <a href="/" rel="home" className={ cx('boldr-mainheader__logo') } onClick={ closeHeaderDropdown }>
+        <Link to="/" rel="home" className={ cx('boldr-mainheader__logo') } onClick={ closeHeaderDropdown }>
           <img src="https://boldr.io/boldr.png" alt="logo" className={ cx('boldr-mainheader__logo') } />
-        </a>
+        </Link>
       </div>
     </div>
   );

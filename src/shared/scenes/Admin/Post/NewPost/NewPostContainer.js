@@ -1,6 +1,5 @@
 /* @flow */
 import React, { Component, PropTypes } from 'react';
-import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import draftToHtml from 'draftjs-to-html';
 
@@ -40,10 +39,6 @@ class NewPostContainer extends Component {
     return <NewPost onFormSubmit={ this.handleOnSubmit } postImage={ this.props.postImage } />;
   }
 }
-
-NewPostContainer.contextTypes = {
-  router: PropTypes.object,
-};
 
 const mapStateToProps = state => {
   return {

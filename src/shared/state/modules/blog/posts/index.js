@@ -6,8 +6,8 @@ import {
   createPost,
   deletePost,
   updatePost,
-  fetchPostFromSlug,
   fetchPostIfNeeded,
+  fetchPostFromSlug,
 } from './actions';
 
 import { getPosts, getTagEntities } from './selectors';

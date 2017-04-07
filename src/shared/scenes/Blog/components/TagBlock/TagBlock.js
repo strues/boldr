@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import { StyleClasses } from '../../../../theme/theme';
+import { StyleClasses } from 'boldr-ui';
 import Tag from '../Tag';
 
 const BASE_ELEMENT = StyleClasses.TAG_BLOCK;

@@ -3,7 +3,7 @@ export default app => {
   app.use((req, res, next) => {
     const err = new Error();
 
-    return next(err);
+    return next(new Error());
   });
 
   // error handler - no stacktraces leaked to user unless development

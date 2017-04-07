@@ -1,13 +1,11 @@
 /* @flow */
+import type { Store as ReduxStore } from 'redux';
 
 export type ApiAction<T> = {
   key: string,
   payload: T,
 };
 
-export type Store = {
-  dispatch(action: ActionType): ActionType,
-};
 export type ActionType =
   | 'LOGIN_REQUEST'
   | 'LOGIN_SUCCESS'
@@ -29,9 +27,9 @@ export type ActionType =
   | 'LOAD_POSTS_REQUEST'
   | 'LOAD_POSTS_SUCCESS'
   | 'LOAD_POSTS_FAILURE'
-  | 'GET_POST_REQUEST'
-  | 'GET_POST_SUCCESS'
-  | 'GET_POST_FAILURE'
+  | 'FETCH_POST_REQUEST'
+  | 'FETCH_POST_SUCCESS'
+  | 'FETCH_POST_FAILURE'
   | 'UPDATE_POST_REQUEST'
   | 'UPDATE_POST_SUCCESS'
   | 'UPDATE_POST_FAILURE'
@@ -44,3 +42,44 @@ export type ActionType =
   | 'DELETE_POST_FAILURE'
   | 'DELETE_POST_REQUEST'
   | 'DELETE_POST_SUCCESS';
+
+export type PostsReducer = {
+  all: Object,
+  ids: Array<Object>,
+  isFetching: boolean,
+  currentPost: Object,
+};
+
+export type BlogReducer = {
+  posts: PostsReducer,
+  tags: any,
+  comments: any,
+};
+
+export type UserInfo = {
+  [userId: string]: {
+    readyStatus: string,
+    err: any,
+    info: Object,
+  },
+};
+
+export type Reducer = {
+  routing: any,
+  blog: BlogReducer,
+};
+
+export type Action =
+  { type: '@boldr/blog/FETCH_POSTS_REQUEST' } |
+  { type: '@boldr/blog/FETCH_POSTS_SUCCESS', payload: NormalizrPayload } |
+  { type: '@boldr/blog/FETCH_POSTS_FAILURE', err: any } |
+  { type: '@boldr/blog/FETCH_POST_REQUEST', slug: string } |
+  { type: '@boldr/blog/FETCH_POST_SUCCESS', slug: string, payload: Post } |
+  { type: '@boldr/blog/FETCH_POST_FAILURE', slug: string, err: any };
+
+export type Store = ReduxStore<Reducer, Action>;
+// eslint-disable-next-line no-use-before-define
+export type Dispatch = (action: Action | ThunkAction | PromiseAction | Array<Action>) => any;
+export type GetState = () => Object;
+export type ThunkAction = (dispatch: Dispatch, getState: GetState) => any;
+export type PromiseAction = Promise<Action>;

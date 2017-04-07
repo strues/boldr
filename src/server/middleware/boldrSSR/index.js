@@ -1,26 +1,26 @@
 import React from 'react';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import { Provider } from 'react-redux';
-import match from 'react-router/lib/match';
-import RouterContext from 'react-router/lib/RouterContext';
-import createMemoryHistory from 'react-router/lib/createMemoryHistory';
-import { syncHistoryWithStore } from 'react-router-redux';
+import createHistory from 'history/createMemoryHistory';
+import { StaticRouter } from 'react-router-dom';
+import { matchRoutes } from 'react-router-config';
 import styleSheet from 'styled-components/lib/models/StyleSheet';
 import Helmet from 'react-helmet';
 
-import AppRoot from '../../../shared/components/AppRoot';
-import createRoutes from '../../../shared/scenes';
-import ApiClient from '../../../shared/core/api/apiClient';
 import configureStore from '../../../shared/state/store';
+import renderRoutes from '../../../shared/core/addRoutes';
+import routes from '../../../shared/routes';
 import ServerHTML from './ServerHTML';
 
 const debug = require('debug')('boldr:ssrMW');
 
-function renderAppToString(store, renderProps, apiClient) {
+function renderAppToString(store, routerContext, req) {
   return renderToString(
-    <AppRoot store={ store }>
-      <RouterContext { ...renderProps } helpers={ apiClient } />
-    </AppRoot>,
+    <Provider store={ store }>
+      <StaticRouter location={ req.url } context={ routerContext }>
+        {renderRoutes(routes)}
+      </StaticRouter>
+    </Provider>,
   );
 }
 
@@ -35,56 +35,63 @@ function boldrSSR(req, res, next) {
 
   const createStore = req => configureStore({});
 
-  const apiClient = new ApiClient(req);
-  const memoryHistory = createMemoryHistory(req.url);
-  const store = createStore(req, memoryHistory, apiClient);
+  const history = createHistory();
+  const store = createStore(history);
 
-  const history = syncHistoryWithStore(memoryHistory, store);
-  const routes = createRoutes(store);
-
+  const routerContext = {};
   const { dispatch, getState } = store;
 
-  match(
-    {
-      history,
-      routes,
-      location: req.url,
-    },
-    (error, redirectLocation, renderProps) => {
-      if (error) return res.status(500).json(error);
-      if (!renderProps) return res.status(404);
-      if (redirectLocation) return res.redirect(redirectLocation.pathname + redirectLocation.search);
+  // Load data on server-side
+  const loadBranchData = () => {
+    const branch = matchRoutes(routes, req.url);
+    const promises = branch.map(({ route, match }) => {
+      // Dispatch the action(s) through the loadData method of "./routes.js"
+      if (route.loadData) return route.loadData(store.dispatch, match.params);
 
-      const promises = renderProps.components
-        .filter(component => component.fetchData)
-        .map(component => component.fetchData(store.dispatch, renderProps.params));
+      return Promise.resolve(null);
+    });
 
-      Promise.all(promises)
-        .then(data => {
-          const preloadedState = store.getState();
-          const reactAppString = renderAppToString(store, renderProps, apiClient);
+    return Promise.all(promises);
+  };
+  // Send response after all the action(s) are dispathed
+  loadBranchData()
+    .then(() => {
+      // Checking is page is 404
+      const status = routerContext.status === '404' ? 404 : 200;
 
-          const helmet = Helmet.rewind();
-          // render styled-components styleSheets to string.
-          const styles = styleSheet.rules().map(rule => rule.cssText).join('\n');
+      const reactAppString = renderAppToString(store, routerContext, req);
 
-          const html = renderToStaticMarkup(
-            <ServerHTML
-              reactAppString={ reactAppString }
-              nonce={ nonce }
-              helmet={ Helmet.rewind() }
-              styles={ styles }
-              preloadedState={ preloadedState }
-            />,
-          );
-          return res.status(200).send(`<!DOCTYPE html>${html}`);
-        })
-        .catch(err => {
-          debug(err);
-          return res.status(500).send(err);
-        });
-    },
-  );
+      const helmet = Helmet.rewind();
+      // render styled-components styleSheets to string.
+      const styles = styleSheet.rules().map(rule => rule.cssText).join('\n');
+
+      const html = renderToStaticMarkup(
+        <ServerHTML
+          reactAppString={ reactAppString }
+          nonce={ nonce }
+          helmet={ Helmet.rewind() }
+          styles={ styles }
+          preloadedState={ store.getState() }
+        />,
+      );
+
+      // Check if the render result contains a redirect, if so we need to set
+      // the specific status and redirect header and end the response
+      if (routerContext.url) {
+        res.status(301).setHeader('Location', routerContext.url);
+        res.end();
+
+        return;
+      }
+
+      // Pass the route and initial state into html template
+      return res.status(status).send(`<!DOCTYPE html>${html}`);
+    })
+    .catch(err => {
+      res.status(404).send('Not Found :(');
+
+      console.error(`==> 😭  Rendering routes error: ${err}`);
+    });
 }
 
 export default boldrSSR;

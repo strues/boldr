@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { bindActionCreators } from 'redux';
 import { Loader } from 'boldr-ui';
-import BaseTemplate from '../../pages/templates/Base';
-import { getProfile } from '../../state/modules/users';
+import { BaseTemplate } from '../../templates';
+import { fetchProfileIfNeeded } from '../../state/modules/users';
 import { uploadProfileImage, uploadAvatarImage } from '../../state/modules/attachments/actions';
 import { hideModal, showModal, openDrawer, closeDrawer } from '../../state/modules/boldr/ui/actions';
 import Profile from './Profile';
@@ -13,12 +13,13 @@ import Profile from './Profile';
 type Props = {
   params: Object,
   user: Object,
-  getProfile: Function,
+  fetchProfileIfNeeded: (username: string) => void,
   dispatch: Function,
-  isFetching: Boolean,
+  isFetching: boolean,
   profile: Object,
-  modal: Boolean,
-  drawer: Boolean,
+  modal: boolean,
+  drawer: boolean,
+  match: Object,
   openDrawer: Function,
   closeDrawer: Function,
   hideModal: Function,
@@ -26,13 +27,13 @@ type Props = {
 };
 
 export class ProfileContainer extends Component {
-  static fetchData(dispatch, params) {
-    return Promise.all([dispatch(getProfile(params.username))]);
-  }
+  static defaultProps: {
+    match: {params: {username: ''}},
+    fetchProfileIfNeeded: () => {},
+  };
   componentDidMount() {
-    const { dispatch, params } = this.props;
-
-    ProfileContainer.fetchData(dispatch, params);
+    const { match: { params } } = this.props;
+    this.props.dispatch(fetchProfileIfNeeded(params.username));
   }
   hideDrawer = () => {
     this.props.dispatch(closeDrawer());
@@ -62,7 +63,6 @@ export class ProfileContainer extends Component {
     }
     return (
       <BaseTemplate helmetMeta={ <Helmet title={ `${profile.username}'s Profile` } /> }>
-
         <Profile
           profile={ profile }
           email={ user.email }

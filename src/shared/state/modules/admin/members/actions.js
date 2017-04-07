@@ -1,65 +1,52 @@
+import Axios from 'axios';
 import { notificationSend } from '../../notifications/notifications';
-import * as api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import * as t from '../../actionTypes';
 
 /**
   * FETCH MEMBERS ACTIONS
   * -------------------------
-  * @exports loadSiteMembers
+  * @exports fetchMembers
   *****************************************************************/
+export const fetchMembers = (axios: any): ThunkAction =>
+  (dispatch: Dispatch) => {
+    dispatch({ type: t.LOAD_MEMBERS_REQUEST });
 
-export function fetchMembers() {
-  return dispatch => {
-    dispatch(loadMembers());
-    return api
-      .getAllMembers()
-      .then(response => {
-        if (response.status !== 200) {
-          dispatch(failedToLoadMembers());
-        }
-        dispatch(loadMembersSuccess(response));
+    return axios
+      .get('/api/v1/users?include=[roles]')
+      .then(res => {
+        dispatch({
+          type: t.LOAD_MEMBERS_SUCCESS,
+          payload: res.data.results,
+        });
       })
       .catch(err => {
-        dispatch(failedToLoadMembers(err));
+        dispatch({
+          type: t.LOAD_MEMBERS_FAILURE,
+          error: err,
+        });
       });
   };
-}
-export function loadSiteMembers() {
-  return (dispatch, getState) => {
+/* istanbul ignore next */
+export const fetchMembersIfNeeded = (): ThunkAction =>
+  (dispatch: Dispatch, getState: GetState, axios: any) => {
+    /* istanbul ignore next */
     if (shouldFetchMembers(getState())) {
-      return dispatch(fetchMembers());
+      /* istanbul ignore next */
+      return dispatch(fetchMembers(axios));
     }
 
-    return Promise.resolve();
+    /* istanbul ignore next */
+    return null;
   };
-}
+
 function shouldFetchMembers(state) {
   const { members } = state.admin.members;
   if (!members.length) {
     return true;
   }
-  if (members.length) {
-    return false;
-  }
-  return members;
+  return false;
 }
-const loadMembers = () => ({
-  type: t.LOAD_MEMBERS_REQUEST,
-});
-
-const loadMembersSuccess = response => {
-  return {
-    type: t.LOAD_MEMBERS_SUCCESS,
-    payload: response.body.results,
-  };
-};
-
-const failedToLoadMembers = err => ({
-  type: t.LOAD_MEMBERS_FAILURE,
-  loading: false,
-  error: err,
-});
 
 /**
   * UPDATE MEMBER ACTIONS
@@ -68,12 +55,19 @@ const failedToLoadMembers = err => ({
   *****************************************************************/
 
 export function updateMember(userData) {
+  const data = {
+    username: userData.username,
+    firstName: userData.firstName,
+    lastName: userData.lastName,
+    avatarUrl: userData.avatarUrl,
+    role: userData.role,
+  };
   return dispatch => {
     dispatch(beginUpdateMember());
-    return api
+    return Axios.put(`/api/v1/users/admin/${userData.id}`, data)
       .doUpdateMember(userData)
-      .then(response => {
-        dispatch(doneUpdateMember(response));
+      .then(res => {
+        dispatch(doneUpdateMember(res));
         dispatch(notificationSend(notif.MSG_UPDATE_MEMBER_SUCCESS));
       })
       .catch(err => {
@@ -87,10 +81,10 @@ const beginUpdateMember = () => {
   return { type: t.UPDATE_MEMBER_REQUEST };
 };
 
-const doneUpdateMember = response => {
+const doneUpdateMember = res => {
   return {
     type: t.UPDATE_MEMBER_SUCCESS,
-    payload: response,
+    payload: res.data,
   };
 };
 

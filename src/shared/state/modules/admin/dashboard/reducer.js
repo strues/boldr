@@ -24,14 +24,14 @@ export default function dashboardReducer(state = INITIAL_STATE, action) {
         ...state,
         open: false,
       };
-    case t.LOAD_ACTIVITIES_REQUEST:
+    case t.FETCH_ACTIVITY_REQUEST:
     case t.FETCH_STATS_REQUEST:
       return {
         ...state,
         loaded: false,
         loading: true,
       };
-    case t.LOAD_ACTIVITIES_SUCCESS:
+    case t.FETCH_ACTIVITY_SUCCESS:
       return {
         ...state,
         activities: action.payload,
@@ -45,7 +45,7 @@ export default function dashboardReducer(state = INITIAL_STATE, action) {
         loaded: true,
         loading: false,
       };
-    case t.LOAD_ACTIVITIES_FAILURE:
+    case t.FETCH_ACTIVITY_FAILURE:
     case t.FETCH_STATS_FAILURE:
       return {
         ...state,

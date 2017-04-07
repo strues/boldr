@@ -1,67 +1,45 @@
 /* @flow */
-/* eslint-disable global-require */
 import '../../styles/main.scss';
 import React, { Component } from 'react';
-import Helmet from 'react-helmet';
-import { createStructuredSelector } from 'reselect';
-import { connect } from 'react-redux';
+import Route from 'react-router-dom/Route';
+import Switch from 'react-router-dom/Switch';
+import uuid from 'uuid';
 import classnames from 'classnames';
-
-import { fetchSettingsIfNeeded, selectSettings } from '../../state/modules/boldr/settings';
-import { makeSelectUi } from '../../state/modules/boldr/ui';
-import { StyleClasses } from '../../theme/theme';
-import type { ReactChildren } from '../../types/react';
-import Notifications from '../Notification';
+// import { renderRoutes } from 'react-router-config';
+import { StyleClasses } from 'boldr-ui';
+import Notifications from '../../components/Notification';
+import renderRoutes from '../../core/addRoutes';
 
 const BASE_ELEMENT = StyleClasses.APP;
 
+// import routes from '../../routes';
+
 type Props = {
-  children: ReactChildren,
-  dispatch: Function,
+  route: Object,
   className: string,
-  location: Object,
 };
 
-const mapStateToProps = createStructuredSelector({
-  ui: makeSelectUi(),
-});
+export const routeWithSubRoutes = (route: Object) => (
+  <Route
+    key={ uuid.v4() }
+    exact={ route.exact || false }
+    path={ route.path }
+    render={ props => <route.component
+      { ...props } routes={ route.routes }
+    /> }
+  />
+);
 
-@connect(mapStateToProps)
 class App extends Component {
-  static fetchData(dispatch) {
-    return Promise.all([dispatch(fetchSettingsIfNeeded())]);
-  }
   static displayName = 'App';
-  static childContextTypes = {
-    dispatch: React.PropTypes.func,
-    location: React.PropTypes.object,
-  };
-  getChildContext() {
-    const {
-      dispatch,
-      location,
-    } = this.props;
-    return {
-      dispatch,
-      location,
-    };
-  }
-
-  componentDidMount() {
-    const { dispatch, location } = this.props;
-
-    App.fetchData(dispatch);
-  }
-
   props: Props;
-
   render() {
-    const { className, children } = this.props;
+    const { className, route } = this.props;
 
     const classes = classnames('boldr', BASE_ELEMENT, className);
     return (
       <div className={ classes }>
-        {React.Children.toArray(children)}
+        {renderRoutes(route.routes)}
         <Notifications />
       </div>
     );

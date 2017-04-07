@@ -1,11 +1,12 @@
-import React, { PropTypes, PureComponent } from 'react';
+import React, { PropTypes, Component } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
-import { EditorState, convertToRaw, convertFromRaw } from 'draft-js';
+import convertToRaw from 'draft-js/lib/convertFromDraftStateToRaw';
+import EditorState from 'draft-js/lib/EditorState';
 
 const editorStyle = {
   minHeight: 200,
 };
-export default class FieldEditor extends PureComponent {
+export default class FieldEditor extends Component {
   constructor(props) {
     super(props);
     this.state = { editorState: EditorState.createEmpty() };
