@@ -7,7 +7,7 @@ const debug = require('debug')('boldr:engine');
 const port = 3000;
 const server = http.createServer(app);
 // Create an http listener for our express app.
-server.listen(port, '0.0.0.0', () => console.log(`Server listening on port ${port}`));
+server.listen(port, () => console.log(`Server listening on port ${port}`));
 
 process.on('SIGINT', () => {
   console.info('shutting down!');

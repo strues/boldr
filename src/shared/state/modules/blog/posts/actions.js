@@ -90,7 +90,6 @@ export const fetchPost = (slug: string, axios: any): ThunkAction =>
       type: t.FETCH_POST_REQUEST,
       slug,
     });
-
     return axios
       .get(`/api/v1/posts/slug/${slug}?include=[author,tags]`)
       .then(res => {

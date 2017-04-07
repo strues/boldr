@@ -30,8 +30,8 @@ export class PostListingContainer extends Component {
   };
 
   componentDidMount() {
-    this.props.fetchPostsIfNeeded();
-    this.props.fetchTagsIfNeeded();
+    this.props.dispatch(fetchPostsIfNeeded());
+    this.props.dispatch(fetchTagsIfNeeded());
   }
 
   props: Props;
@@ -64,7 +64,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {
-  fetchTagsIfNeeded,
-  fetchPostsIfNeeded,
-})(PostListingContainer);
+export default connect(mapStateToProps)(PostListingContainer);

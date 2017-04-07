@@ -92,4 +92,4 @@ export const PostCard = (props: Props) => {
   );
 };
 
-export default connect()(PostCard);
+export default connect(state => state, null, null, { pure: true })(PostCard);

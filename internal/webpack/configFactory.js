@@ -231,8 +231,8 @@ export default function webpackConfigFactory(buildOptions) {
       ifProdClient(
         () =>
           new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
             children: true,
+            minChunks: 6,
           }),
       ),
       ifProdClient(() => new webpack.optimize.AggressiveMergingPlugin()),

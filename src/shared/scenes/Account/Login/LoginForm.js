@@ -5,7 +5,7 @@ import Button from 'react-md/lib/Buttons';
 import { InputField, Row, Col } from 'boldr-ui';
 
 type Props = {
-  handleSubmit?: Function,
+  handleSubmit: Function,
 };
 
 const LoginForm = (props: Props) => {

@@ -7,6 +7,7 @@ import Avatar from 'react-md/lib/Avatars';
 import Button from 'react-md/lib/Buttons';
 import styled from 'styled-components';
 import { Grid, Col, Row, DashboardFooter, Topbar, Sidebar, SidebarLink, SidebarTitle } from 'boldr-ui';
+
 import renderRoutes from '../../core/addRoutes';
 import { fetchActivityIfNeeded, fetchStatsIfNeeded } from '../../state/modules/admin/dashboard/actions';
 
@@ -68,7 +69,6 @@ function mapStateToProps(state) {
     activities: state.admin.dashboard.activities,
     stats: state.admin.dashboard.stats,
     loading: state.admin.dashboard.loading,
-    routing: state.routing,
     dashboard: state.admin.dashboard,
     boldr: state.boldr,
     me: state.users.me,

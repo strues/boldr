@@ -107,6 +107,7 @@ const values = {
     client: {
       // Src entry file.
       entryFile: './src/client/index.js',
+      vendorFile: './src/client/vendor.js',
       // Src paths.
       // @NOTE Mainly for the SW
       srcPaths: ['./src/client', './src/shared', './config'],

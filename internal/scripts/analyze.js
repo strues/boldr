@@ -26,7 +26,7 @@ else throw new Error('Please specify --server OR --client as target');
 const anaylzeFilePath = pathResolve(appRootDir.get(), config('bundles.client.outputPath'), '__analyze__.json');
 
 const clientCompiler = webpack(webpackConfigFactory({ target,
-  optimise: true }));
+  optimize: true }));
 
 clientCompiler.run((err, stats) => {
   if (err) {

@@ -1,4 +1,6 @@
 /* @flow */
+import type { Dispatch } from './types/redux';
+
 import App from './components/App';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -24,7 +26,6 @@ import TagsContainer from './scenes/Admin/Tags/TagsContainer';
 import TaggedPost from './scenes/Admin/Tags/components/TaggedPost';
 import Error404 from './pages/Error404';
 
-import type { Dispatch } from './types/redux';
 import { fetchSettingsIfNeeded } from './state/modules/boldr/settings';
 import { fetchMembersIfNeeded } from './state/modules/admin/members';
 import { fetchMedia } from './state/modules/attachments/actions';

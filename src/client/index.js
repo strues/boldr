@@ -7,6 +7,7 @@ import createHistory from 'history/createBrowserHistory';
 import ConnectedRouter from 'react-router-redux/ConnectedRouter';
 import WebFontLoader from 'webfontloader';
 import { renderRoutes } from 'react-router-config';
+
 import routes from '../shared/routes';
 import configureStore from '../shared/state/store';
 import { checkAuth } from '../shared/state/modules/auth/actions';
