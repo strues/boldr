@@ -31,6 +31,7 @@ esproposal.class_static_fields=enable
 esproposal.class_instance_fields=ignore
 esproposal.decorators=ignore
 esproposal.export_star_as=ignore
+
 module.ignore_non_literal_requires=true
 munge_underscores=false
 
@@ -39,8 +40,8 @@ munge_underscores=false
 module.name_mapper='^\(.*\)\.\(css\|eot\|gif\|ico\|jpg\|jpeg\|less\|otf\|mp3\|mp4\|ogg\|png\|sass\|scss\|sss\|svg\|swf\|ttf\|webp\|woff\|woff2\)$' -> '<PROJECT_ROOT>/internal/flow/stubs/WebpackAsset.js.flow'
 module.name_mapper='^\(state\|components\|scenes\|core\|types\|theme\)\/\(.*\)$' -> '<PROJECT_ROOT>/shared/\1/\2'
 
-suppress_type=$FlowIssues
 suppress_comment=\\(.\\|\n\\)*\\$FlowIssue
+suppress_comment= \\(.\\|\n\\)*\\$FlowIgnore
 
 [version]
 0.43.1

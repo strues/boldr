@@ -1,9 +1,7 @@
 /* @flow */
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import Button from 'react-md/lib/Buttons';
-
-import { InputField, FormGroup, Heading } from 'boldr-ui';
+import { Button, InputField, FormGroup, Heading } from 'boldr-ui';
 
 type Props = {
   handleSubmit: Function,

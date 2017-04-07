@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Col, Row, Loader } from 'boldr-ui';
 import Helmet from 'react-helmet';
+
 import BaseTemplate from '../../../templates/BaseTemplate';
 import { fetchTagPostsIfNeeded } from '../../../state/modules/blog/tags/actions';
 import TagList from './TagList';
@@ -36,10 +37,7 @@ export class TagListContainer extends Component {
     }
     return (
       <BaseTemplate helmetMeta={ <Helmet title={ `Posts tagged ${params.name}` } /> }>
-        <TagList
-          listTags={ this.props.listTags }
-          posts={ this.props.currentTag.posts }
-        />
+        <TagList listTags={ this.props.listTags } posts={ this.props.currentTag.posts } />
       </BaseTemplate>
     );
   }

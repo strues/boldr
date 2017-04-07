@@ -1,9 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
-import ExpansionPanel from 'react-md/lib/ExpansionPanels';
-import TextField from 'react-md/lib/TextFields';
 import { connect } from 'react-redux';
-import { Row } from 'boldr-ui';
+import { TextField, ExpansionPanel, Row } from 'boldr-ui';
 import { updateBoldrSettings } from '../../../../../state/modules/boldr/settings';
 
 type Props = {

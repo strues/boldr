@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import Button from 'react-md/lib/Buttons/Button';
-import FontIcon from 'react-md/lib/FontIcons';
 import styled from 'styled-components';
+import { FontIcon, Button, InputField, Col, Row, Heading, FormGroup } from 'boldr-ui';
 
-import { InputField, Col, Row, Heading, FormGroup } from 'boldr-ui';
 import { uploadPostImage } from '../../../../../../state/modules/attachments/actions';
 import EditorField from './EditorField';
 

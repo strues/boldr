@@ -2,6 +2,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+
 import { showModal, hideModal } from '../../../state/modules/boldr/ui/actions';
 import { fetchMembersIfNeeded, memberSelected, updateMember } from '../../../state/modules/admin/members/actions';
 import Members from './Members';

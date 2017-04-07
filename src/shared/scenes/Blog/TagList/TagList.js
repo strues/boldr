@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react';
 import { Grid, Col, Row, Loader } from 'boldr-ui';
-import { fetchTagPosts } from '../../../state/modules/blog/tags/actions';
 
+import { fetchTagPosts } from '../../../state/modules/blog/tags/actions';
 import PostCard from '../components/PostCard';
 
 type Props = {

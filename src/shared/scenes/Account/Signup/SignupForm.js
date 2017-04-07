@@ -1,8 +1,8 @@
 /* @flow */
 import React from 'react';
 import { Field, reduxForm, getFormSyncErrors, isValid } from 'redux-form';
-import Button from 'react-md/lib/Buttons';
-import { InputField, Row, Col } from 'boldr-ui';
+import { Button, InputField, Row, Col } from 'boldr-ui';
+
 import validate, { requiredValidator, emailValidator } from './validate';
 
 type Props = {

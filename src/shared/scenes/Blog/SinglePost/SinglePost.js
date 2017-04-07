@@ -5,6 +5,7 @@ import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import classnames from 'classnames';
 import { Grid, Row, Col, Heading, StyleClasses } from 'boldr-ui';
+
 import { getPosts, fetchPostIfNeeded } from '../../../state/modules/blog/posts';
 import { PostSidebar, PostContent, PostTitle } from '../components';
 import BaseTemplate from '../../../templates/BaseTemplate';

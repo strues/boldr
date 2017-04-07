@@ -1,13 +1,8 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import List from 'react-md/lib/Lists/List';
-import ListItem from 'react-md/lib/Lists/ListItem';
-import Button from 'react-md/lib/Buttons';
-import FontIcon from 'react-md/lib/FontIcons';
-import Paper from 'react-md/lib/Papers';
 import Helmet from 'react-helmet';
-import { Row, Col, Modal } from 'boldr-ui';
+import { List, ListItem, Button, FontIcon, Paper, Row, Col, Modal } from 'boldr-ui';
 
 import { showModal, hideModal } from '../../../state/modules/boldr/ui/actions';
 import { updateMenuDetails, addMenuDetail, getByLabel } from '../../../state/modules/boldr/menu';

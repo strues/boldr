@@ -5,15 +5,17 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Link from 'react-router-dom/Link';
 import { format } from 'date-fns';
-import Button from 'react-md/lib/Buttons';
-import FontIcon from 'react-md/lib/FontIcons';
-import DataTable from 'react-md/lib/DataTables/DataTable';
-import TableHeader from 'react-md/lib/DataTables/TableHeader';
-import TableBody from 'react-md/lib/DataTables/TableBody';
-import TableRow from 'react-md/lib/DataTables/TableRow';
-import TableColumn from 'react-md/lib/DataTables/TableColumn';
-import TablePagination from 'react-md/lib/DataTables/TablePagination';
-import Avatar from 'react-md/lib/Avatars';
+import {
+  Button,
+  FontIcon,
+  DataTable,
+  TableHeader,
+  TableBody,
+  TableRow,
+  TableColumn,
+  TablePagination,
+  Avatar,
+} from 'boldr-ui';
 
 import config from '../../../../../../../../config';
 import { selectPost } from '../../../../../../state/modules/blog/posts/actions';

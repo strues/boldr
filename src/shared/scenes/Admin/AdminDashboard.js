@@ -3,17 +3,12 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import Link from 'react-router-dom/Link';
 import { connect } from 'react-redux';
-import Avatar from 'react-md/lib/Avatars';
-import Button from 'react-md/lib/Buttons';
 import styled from 'styled-components';
-import { Grid, Col, Row, DashboardFooter, Topbar, Sidebar, SidebarLink, SidebarTitle } from 'boldr-ui';
+import { Avatar, Button, Grid, Col, Row, DashboardFooter, Topbar, Sidebar, SidebarLink, SidebarTitle } from 'boldr-ui';
 
 import renderRoutes from '../../core/addRoutes';
-import { fetchActivityIfNeeded, fetchStatsIfNeeded } from '../../state/modules/admin/dashboard/actions';
 
 type Props = {
-  fetchActivityIfNeeded: () => void,
-  fetchStatsIfNeeded: () => void,
   children: any,
   dashboard: ?Object,
   me: Object,
@@ -23,20 +18,14 @@ type Props = {
   copyright: string,
 };
 
-class AdminContainer extends Component {
-  static defaultProps: {
-    fetchActivityIfNeeded: () => {},
-    fetchStatsIfNeeded: () => {},
-  };
-
+export class AdminDashboard extends Component {
   props: Props;
 
   render() {
-    const { route, location: { pathname, search } } = this.props;
-
+    const { route } = this.props;
     return (
       <div className="boldrui-dashboard">
-        <Topbar me={ this.props.me } />
+        <Topbar me={ this.props.me } logo="https://boldr.io/logo.png" />
         <div className="boldrui-dashboard-body">
           <Sidebar { ...this.props }>
             <SidebarTitle text="content" />
@@ -76,7 +65,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, {
-  fetchActivityIfNeeded,
-  fetchStatsIfNeeded,
-})(AdminContainer);
+export default connect(mapStateToProps)(AdminDashboard);

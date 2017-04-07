@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import Card from 'react-md/lib/Cards/Card';
+import { Card } from 'boldr-ui';
 import Helmet from 'react-helmet';
 
 import { selectPost } from '../../../../state/modules/blog/posts/actions';

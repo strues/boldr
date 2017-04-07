@@ -1,12 +1,8 @@
 /* @flow */
 import React from 'react';
-import Avatar from 'react-md/lib/Avatars';
-import Chip from 'react-md/lib/Chips';
-import Button from 'react-md/lib/Buttons';
-import FontIcon from 'react-md/lib/FontIcons';
 import Link from 'react-router-dom/Link';
 import styled from 'styled-components';
-import { Icon, Row, Col } from 'boldr-ui';
+import { Chip, Button, FontIcon, Avatar, Icon, Row, Col } from 'boldr-ui';
 import { format } from 'date-fns';
 
 import ActivityItemDetail from '../ActivityItemDetail';

@@ -3,10 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Field, reduxForm, formValueSelector, FieldArray } from 'redux-form';
 import { connect } from 'react-redux';
-import Subheader from 'react-md/lib/Subheaders';
-import SelectField from 'react-md/lib/SelectFields';
-import Button from 'react-md/lib/Buttons';
-import { InputField } from 'boldr-ui';
+import { SelectField, Button, InputField } from 'boldr-ui';
 
 type Props = {
   handleSubmit?: Function,

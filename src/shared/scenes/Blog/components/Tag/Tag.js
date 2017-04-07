@@ -1,12 +1,10 @@
 /* @flow */
 import React from 'react';
 import Link from 'react-router-dom/Link';
-import Avatar from 'react-md/lib/Avatars';
-import FontIcon from 'react-md/lib/FontIcons';
-import Chip from 'react-md/lib/Chips';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import { StyleClasses } from 'boldr-ui';
+import { Avatar, FontIcon, Chip, StyleClasses } from 'boldr-ui';
+
 import { selectTag } from '../../../../state/modules/blog/tags/actions';
 
 type Props = {

@@ -1,12 +1,8 @@
 /* @flow */
 import React from 'react';
-import Paper from 'react-md/lib/Papers';
-import Drawer from 'react-md/lib/Drawers';
-import Button from 'react-md/lib/Buttons/Button';
-import FontIcon from 'react-md/lib/FontIcons';
-import Toolbar from 'react-md/lib/Toolbars';
 import styled from 'styled-components';
-import { Grid, Col, Row, Heading, Modal, Icon, Social } from 'boldr-ui';
+import { Paper, Drawer, Button, FontIcon, Toolbar, Grid, Col, Row, Heading, Modal, Icon, Social } from 'boldr-ui';
+
 import ProfileDetail from '../ProfileDetail';
 
 const DetailList = styled.ul`
@@ -58,7 +54,7 @@ const ProfileContent = (props: Props) => {
         </Col>
         <Col sm={ 12 } md={ 6 }>
           <Col xs>
-            <Heading size={ 1 }>{profile.firstName} {' '} {profile.lastName}&apos;s Profile</Heading>
+            <Heading size={ 1 }>{profile.firstName} {' '} {profile.lastName}'s Profile</Heading>
           </Col>
           <DetailList>
             <ProfileDetail label={ <FontIcon>email</FontIcon> } detail={ profile.email } />

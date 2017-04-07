@@ -1,8 +1,8 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Paper from 'react-md/lib/Papers';
-import { Grid, Row, Col, Image } from 'boldr-ui';
+import { Paper, Grid, Row, Col, Image } from 'boldr-ui';
+
 import { updateAttachment } from '../../../../state/modules/attachments/actions';
 import config from '../../../../../../config';
 import FileEditorForm from '../components/FileEditorForm';

@@ -193,6 +193,10 @@ export default function webpackConfigFactory(buildOptions) {
               plugins: [
                 'transform-decorators-legacy',
                 'fast-async',
+                ['react-loadable/babel', {
+                  server: true,
+                  webpack: true,
+                }],
                 ifNode('dynamic-import-node'),
                 ifClient('dynamic-import-webpack'),
                 ifClient(['transform-react-jsx', { useBuiltIns: true }]),

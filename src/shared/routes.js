@@ -1,5 +1,7 @@
-/* @flow */
-import type { Dispatch } from './types/redux';
+/* eslint-disable */
+import Loadable from 'react-loadable';
+import {Loader} from 'boldr-ui';
+import type {Dispatch} from './types/redux';
 
 import App from './components/App';
 import Home from './pages/Home';
@@ -13,8 +15,7 @@ import ProfileContainer from './scenes/Profile/ProfileContainer';
 import PostListingContainer from './scenes/Blog/PostListing/PostListingContainer';
 import SinglePost from './scenes/Blog/SinglePost/SinglePost';
 import TagListContainer from './scenes/Blog/TagList/TagListContainer';
-import AdminContainer from './scenes/Admin/AdminContainer';
-import PostListContainer from './scenes/Admin/Post/PostList/PostListContainer';
+
 import PostEditor from './scenes/Admin/Post/PostEditor';
 import NewPostContainer from './scenes/Admin/Post/NewPost/NewPostContainer';
 import FileManagerContainer from './scenes/Admin/FileManager/FileManagerContainer';
@@ -26,14 +27,32 @@ import TagsContainer from './scenes/Admin/Tags/TagsContainer';
 import TaggedPost from './scenes/Admin/Tags/components/TaggedPost';
 import Error404 from './pages/Error404';
 
-import { fetchSettingsIfNeeded } from './state/modules/boldr/settings';
-import { fetchMembersIfNeeded } from './state/modules/admin/members';
-import { fetchMedia } from './state/modules/attachments/actions';
-import { fetchProfileIfNeeded } from './state/modules/users';
-import { fetchStatsIfNeeded, fetchActivityIfNeeded } from './state/modules/admin/dashboard/actions';
-import { fetchMenusIfNeeded } from './state/modules/boldr/menu/actions';
-import { fetchPostsIfNeeded, fetchPostIfNeeded } from './state/modules/blog/posts';
-import { fetchTagsIfNeeded, fetchTagPostsIfNeeded } from './state/modules/blog/tags/actions';
+import {fetchSettingsIfNeeded} from './state/modules/boldr/settings';
+import {fetchMembersIfNeeded} from './state/modules/admin/members';
+import {fetchMedia} from './state/modules/attachments/actions';
+import {fetchProfileIfNeeded} from './state/modules/users';
+import {fetchStatsIfNeeded, fetchActivityIfNeeded} from './state/modules/admin/dashboard/actions';
+import {fetchMenusIfNeeded} from './state/modules/boldr/menu/actions';
+import {fetchPostsIfNeeded, fetchPostIfNeeded} from './state/modules/blog/posts';
+import {fetchTagsIfNeeded, fetchTagPostsIfNeeded} from './state/modules/blog/tags/actions';
+
+function LoadingComponent({error}) {
+  if (error) {
+    console.log(error);
+    return <p>Error: {error}</p>;
+  } else {
+    return <Loader />;
+  }
+}
+
+const PostListContainer = Loadable({
+  loader: () => import('./scenes/Admin/Post/PostList/PostListContainer'),
+  LoadingComponent,
+});
+const AdminDashboard = Loadable({
+  loader: () => import('./scenes/Admin/AdminDashboard'),
+  LoadingComponent,
+});
 
 export default [
   {
@@ -103,7 +122,7 @@ export default [
       },
       {
         path: '/admin',
-        component: AdminContainer,
+        component: AdminDashboard,
         auth: {
           required: true,
           redirect: '/account/login',

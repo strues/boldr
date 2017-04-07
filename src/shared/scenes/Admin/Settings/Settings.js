@@ -1,8 +1,8 @@
 /* @flow */
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import ExpansionList from 'react-md/lib/ExpansionPanels/ExpansionList';
-import TextField from 'react-md/lib/TextFields';
+import { ExpansionList, TextField } from 'boldr-ui';
+
 import { SiteName, SiteUrl, SiteDescription, Logo, Favicon } from './components';
 
 type Props = {

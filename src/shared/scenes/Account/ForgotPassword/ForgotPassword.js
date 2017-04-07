@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { FormCard } from 'boldr-ui';
+
 import BaseTemplate from '../../../templates/BaseTemplate';
 import { forgotPassword } from '../../../state/modules/users/actions';
 import ForgotPasswordForm from './ForgotPasswordForm';

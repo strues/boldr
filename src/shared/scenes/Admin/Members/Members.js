@@ -3,6 +3,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { Modal } from 'boldr-ui';
+
 import { showModal, hideModal } from '../../../state/modules/boldr/ui/actions';
 import { MembersList, EditMemberForm } from './components';
 

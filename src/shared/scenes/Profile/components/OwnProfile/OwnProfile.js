@@ -1,6 +1,7 @@
 import React, { PureComponent, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+
 import ProfileForm from '../ProfileForm';
 import { editProfile } from '../../../../state/modules/users/actions';
 

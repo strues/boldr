@@ -1,6 +1,6 @@
 /* @flow */
 import React, { Component, PropTypes } from 'react';
-import Button from 'react-md/lib/Buttons';
+import { Button } from 'boldr-ui';
 
 import classNames from 'classnames/bind';
 import cxN from 'classnames';
@@ -132,8 +132,8 @@ class MainHeader extends Component {
       actions.push(
         <Link key="prof" to={ `/profiles/${this.props.me.username}` }>
           <Button icon tooltipLabel="Profile">
-          perm_identity
-        </Button>
+            perm_identity
+          </Button>
         </Link>,
         <Button key="logout" icon onClick={ this.props.handleLogoutClick } tooltipLabel="Logout">
           exit_to_app

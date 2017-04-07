@@ -4,12 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import dateFns from 'date-fns';
 import classnames from 'classnames';
-import Button from 'react-md/lib/Buttons/Button';
-import Card from 'react-md/lib/Cards/Card';
-import CardTitle from 'react-md/lib/Cards/CardTitle';
-import CardActions from 'react-md/lib/Cards/CardActions';
-import CardText from 'react-md/lib/Cards/CardText';
-import { Col, Row, StyleClasses, Media, MediaOverlay } from 'boldr-ui';
+import { Button, Card, CardTitle, CardActions, CardText, Col, Row, StyleClasses, Media, MediaOverlay } from 'boldr-ui';
 import { selectPost } from '../../../../state/modules/blog/posts/actions';
 
 import TagBlock from '../TagBlock';

@@ -1,9 +1,8 @@
 /* @flow */
 import React from 'react';
-import Button from 'react-md/lib/Buttons/Button';
-import FontIcon from 'react-md/lib/FontIcons';
 import styled from 'styled-components';
-import { Grid, Row, Col, Loader } from 'boldr-ui';
+import { Grid, Row, Col, Loader, FontIcon, Button } from 'boldr-ui';
+
 import { FeaturedPost, PostCard } from '../components';
 
 type Props = {

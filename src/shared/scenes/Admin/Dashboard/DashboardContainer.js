@@ -18,18 +18,12 @@ type Props = {
 };
 
 class DashboardContainer extends Component {
-  static fetchData(dispatch) {
-    return Promise.all([dispatch(fetchActivityIfNeeded()), dispatch(fetchStatsIfNeeded())]);
-  }
   componentDidMount() {
-    const { dispatch } = this.props;
-    DashboardContainer.fetchData(dispatch);
+    this.props.fetchActivityIfNeeded();
+    this.props.fetchStatsIfNeeded();
   }
   props: Props;
   render() {
-    if (this.props.loading) {
-      return <Loader />;
-    }
     return <Dashboard activities={ this.props.activities } stats={ this.props.stats } loading={ this.props.loading } />;
   }
 }
@@ -42,4 +36,7 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(DashboardContainer);
+export default connect(mapStateToProps, {
+  fetchActivityIfNeeded,
+  fetchStatsIfNeeded,
+})(DashboardContainer);

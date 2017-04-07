@@ -1,11 +1,5 @@
 import React, { PropTypes } from 'react';
-import Card from 'react-md/lib/Cards/Card';
-import CardTitle from 'react-md/lib/Cards/CardTitle';
-import CardActions from 'react-md/lib/Cards/CardActions';
-import CardText from 'react-md/lib/Cards/CardText';
-import Media, { MediaOverlay } from 'react-md/lib/Media';
-import Avatar from 'react-md/lib/Avatars';
-import Button from 'react-md/lib/Buttons';
+import { Avatar, CardTitle, Card, CardActions, CardText, Button, Media, MediaOverlay } from 'boldr-ui';
 
 const propTypes = {
   user: PropTypes.object,

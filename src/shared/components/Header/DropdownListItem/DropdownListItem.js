@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames/bind';
 import NavLink from 'react-router-dom/NavLink';
-import FontIcon from 'react-md/lib/FontIcons';
+import { FontIcon } from 'boldr-ui';
 import styles from './dropdown-list-item.scss';
 
 const cx = classNames.bind(styles);

@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
-import Button from 'react-md/lib/Buttons';
-import FontIcon from 'react-md/lib/FontIcons';
+import { FontIcon, Button } from 'boldr-ui';
 import Link from 'react-router-dom/Link';
 
 const Wrapper = styled.section`

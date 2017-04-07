@@ -1,16 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
-import Toolbar from 'react-md/lib/Toolbars';
-import Button from 'react-md/lib/Buttons/Button';
-import Collapse from 'react-md/lib/Helpers/Collapse';
-import FontIcon from 'react-md/lib/FontIcons';
-import Paper from 'react-md/lib/Papers';
+import { Toolbar, Button, Collapse, FontIcon, Paper, Tabs, Tab, CircularProgress, TabsContainer, Slider } from 'boldr-ui';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
-import Tabs from 'react-md/lib/Tabs/Tabs';
-import Tab from 'react-md/lib/Tabs/Tab';
-import CircularProgress from 'react-md/lib/Progress/CircularProgress';
-import TabsContainer from 'react-md/lib/Tabs/TabsContainer';
-import Slider from 'react-md/lib/Sliders';
 import Dropzone from 'react-dropzone';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';

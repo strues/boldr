@@ -1,13 +1,10 @@
 /* @flow */
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import Drawer from 'react-md/lib/Drawers';
-import Button from 'react-md/lib/Buttons/Button';
-import Toolbar from 'react-md/lib/Toolbars';
-
 import Dropzone from 'react-dropzone';
 import classnames from 'classnames';
-import { Grid, Col, Row, Heading, StyleClasses } from 'boldr-ui';
+import { Toolbar, Drawer, Button, Grid, Col, Row, Heading, StyleClasses } from 'boldr-ui';
+
 import config from '../../../../config';
 import ProfileContent from './components/ProfileContent';
 import OwnProfile from './components/OwnProfile';

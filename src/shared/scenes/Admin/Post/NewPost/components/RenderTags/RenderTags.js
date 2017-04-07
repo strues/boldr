@@ -3,9 +3,7 @@
 import React, { PropTypes } from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 import styled from 'styled-components';
-import Button from 'react-md/lib/Buttons';
-import FontIcon from 'react-md/lib/FontIcons';
-import { InputField } from 'boldr-ui';
+import { Button, FontIcon, InputField } from 'boldr-ui';
 
 const TagList = styled.ul`
   list-style-type: none;

@@ -2,6 +2,7 @@
 import React, { PropTypes } from 'react';
 import styled from 'styled-components';
 import { Grid, Row, Col } from 'boldr-ui';
+
 import config from '../../../../../../../config';
 import File from '../File';
 import FileListItem from '../FileListItem';

@@ -3,14 +3,8 @@
 import React, { Component } from 'react';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
-import List from 'react-md/lib/Lists/List';
-import MenuButton from 'react-md/lib/Menus/MenuButton';
-import ListItem from 'react-md/lib/Lists/ListItem';
-import Paper from 'react-md/lib/Papers';
-import Toolbar from 'react-md/lib/Toolbars';
-import Button from 'react-md/lib/Buttons';
 import Helmet from 'react-helmet';
-import { Row, Col } from 'boldr-ui';
+import { MenuButton, List, ListItem, Paper, Toolbar, Button, Row, Col } from 'boldr-ui';
 
 import { selectTag, clearTag, createTag, deleteTag } from '../../../state/modules/blog/tags';
 import TaggedPost from './components/TaggedPost';

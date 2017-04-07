@@ -1332,9 +1332,9 @@ bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.6"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.6.tgz#53344adb14617a13f6e8dd2ce28905d1c0ba3215"
 
-boldr-ui@0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/boldr-ui/-/boldr-ui-0.0.7.tgz#b6c17c8ee040edeb0fc73d9be70b6095c9f66d61"
+boldr-ui@0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/boldr-ui/-/boldr-ui-0.0.10.tgz#5ba39a407bd34c33835dface9165dd4313397f1b"
   dependencies:
     classnames "^2.2.5"
     react-md "^1.0.11"
@@ -4152,6 +4152,12 @@ istanbul-reports@^1.0.0:
   dependencies:
     handlebars "^4.0.3"
 
+istanbul-reports@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/istanbul-reports/-/istanbul-reports-1.0.2.tgz#4e8366abe6fa746cc1cd6633f108de12cc6ac6fa"
+  dependencies:
+    handlebars "^4.0.3"
+
 jest-changed-files@^19.0.2:
   version "19.0.2"
   resolved "https://registry.yarnpkg.com/jest-changed-files/-/jest-changed-files-19.0.2.tgz#16c54c84c3270be408e06d2e8af3f3e37a885824"
@@ -6396,6 +6402,12 @@ react-hot-loader@3.0.0-beta.6:
     react-proxy "^3.0.0-alpha.0"
     redbox-react "^1.2.5"
     source-map "^0.4.4"
+
+react-loadable@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/react-loadable/-/react-loadable-3.2.2.tgz#59c1b6d20abbefda9f57cf42d2e275cfdaf394df"
+  dependencies:
+    babel-plugin-syntax-dynamic-import "^6.18.0"
 
 react-md@^1.0.11:
   version "1.0.11"

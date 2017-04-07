@@ -1,10 +1,7 @@
 /* @flow */
 
 import React, { PropTypes } from 'react';
-import ListItem from 'react-md/lib/Lists/ListItem';
-import Paper from 'react-md/lib/Papers';
-import Avatar from 'react-md/lib/Avatars';
-import FontIcon from 'react-md/lib/FontIcons';
+import { ListItem, Paper, Avatar, FontIcon } from 'boldr-ui';
 
 type Props = {
   tags: Array<Tag>,
