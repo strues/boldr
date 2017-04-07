@@ -164,7 +164,7 @@ export default [
           },
           {
             path: '/admin/tags/:name',
-            // exact: true,
+            exact: true,
             component: TaggedPost,
           },
         ],

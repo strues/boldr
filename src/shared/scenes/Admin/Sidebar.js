@@ -6,16 +6,24 @@ import FontIcon from 'react-md/lib/FontIcons';
 type Props = {
   location: Object,
 };
+/*
+  contentLinks = [
+    { href: '/admin', className: 'nav-link', activeClassName: 'active', icon: 'dashboard', text: 'Dashboard' }
+  ]
+  contentLinks.map(c => {
+  return (
+  <li className="nav-item">
+    <NavLink to={ c.href } className={ c.className } activeClassName={ c.activeClassName }>
+      <FontIcon>{c.icon}</FontIcon> {c.text}
+    </NavLink>
+  </li>
+))
+ */
 const Sidebar = (props: Props) => {
   return (
     <div className="sidebar">
       <nav className="sidebar-nav">
         <ul className="nav">
-          <li className="nav-item">
-            <NavLink to={ '/admin' } className="nav-link" activeClassName="active">
-              <FontIcon>dashboard</FontIcon> Dashboard
-            </NavLink>
-          </li>
           <li className="nav-title">
             Content
           </li>
@@ -66,7 +74,6 @@ const Sidebar = (props: Props) => {
               <FontIcon>settings_applications</FontIcon> Settings
             </NavLink>
           </li>
-
         </ul>
       </nav>
     </div>

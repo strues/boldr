@@ -4,16 +4,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Grid, Col, Row, Loader } from 'boldr-ui';
 import Helmet from 'react-helmet';
-import { getPosts } from '../../../state/modules/blog/posts';
 import BaseTemplate from '../../../templates/BaseTemplate';
-import { fetchTagsIfNeeded, fetchTagPostsIfNeeded } from '../../../state/modules/blog/tags/actions';
+import { fetchTagPostsIfNeeded } from '../../../state/modules/blog/tags/actions';
 import TagList from './TagList';
 
 type Props = {
   currentTag: Object,
   isFetching: boolean,
-  posts: Array<Object>,
-  params: Object,
   match: Object,
   listTags: Object,
   fetchTagPostsIfNeeded: () => void,
@@ -39,7 +36,10 @@ export class TagListContainer extends Component {
     }
     return (
       <BaseTemplate helmetMeta={ <Helmet title={ `Posts tagged ${params.name}` } /> }>
-        <TagList isFetching={ this.props.isFetching } listTags={ this.props.listTags } posts={ this.props.posts } />
+        <TagList
+          listTags={ this.props.listTags }
+          posts={ this.props.currentTag.posts }
+        />
       </BaseTemplate>
     );
   }
@@ -47,8 +47,7 @@ export class TagListContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    posts: getPosts(state),
-    listTags: state.blog.tags.all,
+    tags: state.blog.tags.all,
     isFetching: state.blog.tags.isFetching,
     currentTag: state.blog.tags.currentTag,
   };

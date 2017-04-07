@@ -8,12 +8,11 @@ import PostCard from '../components/PostCard';
 
 type Props = {
   posts: Array<Post>,
-  isFetching: boolean,
   listTags: Object,
 };
 
 const TagList = (props: Props) => {
-  if (props.isFetching || !props.posts) {
+  if (!props.posts) {
     return <Loader />;
   }
   return (

@@ -55,7 +55,7 @@ class TopBar extends Component {
 
   render() {
     return (
-      <header className="boldrui-dashboard-header navbar">
+      <header className="boldrui-topbar navbar">
         <button
           className="navbar-toggler mobile-sidebar-toggler hidden-lg-up"
           onClick={ this.mobileSidebarToggle }

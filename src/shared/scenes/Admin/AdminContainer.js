@@ -6,12 +6,9 @@ import { connect } from 'react-redux';
 import Avatar from 'react-md/lib/Avatars';
 import Button from 'react-md/lib/Buttons';
 import styled from 'styled-components';
-import { Grid, Col, Row } from 'boldr-ui';
+import { Grid, Col, Row, DashboardFooter, Topbar, Sidebar, SidebarLink, SidebarTitle } from 'boldr-ui';
 import renderRoutes from '../../core/addRoutes';
 import { fetchActivityIfNeeded, fetchStatsIfNeeded } from '../../state/modules/admin/dashboard/actions';
-import Sidebar from './Sidebar';
-import TopBar from './TopBar';
-import Footer from './Footer';
 
 type Props = {
   fetchActivityIfNeeded: () => void,
@@ -22,7 +19,9 @@ type Props = {
   location: Object,
   ui: Object,
   route: Object,
+  copyright: string,
 };
+
 class AdminContainer extends Component {
   static defaultProps: {
     fetchActivityIfNeeded: () => {},
@@ -36,16 +35,29 @@ class AdminContainer extends Component {
 
     return (
       <div className="boldrui-dashboard">
-        <TopBar me={ this.props.me } />
+        <Topbar me={ this.props.me } />
         <div className="boldrui-dashboard-body">
-          <Sidebar { ...this.props } />
+          <Sidebar { ...this.props }>
+            <SidebarTitle text="content" />
+            <SidebarLink href="/admin/posts" text="List Posts" icon="list" />
+            <SidebarLink href="/admin/new-post" text="Create Post" icon="note_add" />
+            <SidebarLink href="/admin/tags" text="Tags" icon="label" />
+            <SidebarTitle text="media" />
+            <SidebarLink href="/admin/filemanager" text="File Manager" icon="cloud_upload" />
+            <SidebarTitle text="layout" />
+            <SidebarLink href="/admin/navigation" text="Navigation Editor" icon="insert_link" />
+            <SidebarTitle text="users" />
+            <SidebarLink href="/admin/members" text="Members List" icon="people" />
+            <SidebarTitle text="site" />
+            <SidebarLink href="/admin/settings" text="Settings" icon="settings_applications" />
+          </Sidebar>
           <main className="main">
-            <Grid>
+            <Grid fluid>
               {renderRoutes(route.routes)}
             </Grid>
           </main>
         </div>
-        <Footer />
+        <DashboardFooter copyright="© 2017 Steven Truesdell" />
       </div>
     );
   }

@@ -86,7 +86,7 @@ class SinglePost extends PureComponent {
       width: 100%;
       background-size: cover;
       background-attachment: fixed;
-      background-image: url(${currentPost.backgroundImage});
+      background-image: url(${currentPost.featureImage});
       align-items: center;
       background-position-x: 0px;
       background-position-y: 0px;
