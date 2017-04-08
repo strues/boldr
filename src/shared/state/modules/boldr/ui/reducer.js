@@ -1,4 +1,4 @@
-import Drawer from 'react-md/lib/Drawers';
+import { Drawer } from 'boldr-ui';
 import { LAYOUTS } from '../../../../core/constants';
 import * as t from '../../actionTypes';
 
