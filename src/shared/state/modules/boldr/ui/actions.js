@@ -6,6 +6,8 @@ export function changeLayout(layout) {
     payload: layout,
   };
 }
+export const expandSideMenu = () => ({ type: t.EXPAND_SIDEBAR_MENU });
+export const collapseSideMenu = () => ({ type: t.COLLAPSE_SIDEBAR_MENU });
 
 export const showModal = () => ({ type: t.MODAL_OPEN });
 export const hideModal = () => ({ type: t.MODAL_CLOSED });

@@ -10,7 +10,8 @@ export const CLOSE_DRAWER = '@boldr/ui/CLOSE_DRAWER';
 export const SET_MOBILE_DEVICE = '@boldr/ui/SET_MOBILE_DEVICE';
 export const UPDATE_MEDIA = '@boldr/ui/UPDATE_MEDIA';
 export const UPDATE_DRAWER_TYPE = '@boldr/ui/UPDATE_DRAWER_TYPE';
-
+export const EXPAND_SIDEBAR_MENU = '@boldr/ui/EXPAND_SIDEBAR_MENU';
+export const COLLAPSE_SIDEBAR_MENU = '@boldr/ui/COLLAPSE_SIDEBAR_MENU';
 /**
  * Auth action types
  * @type {String}

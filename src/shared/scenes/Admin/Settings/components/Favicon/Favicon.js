@@ -40,13 +40,14 @@ class Favicon extends Component {
   }
   props: Props;
   render() {
-    const { focused } = this.props;
+    const { focused, columnWidths } = this.props;
     const formVal = {
       value: this.props.value,
     };
     return (
       <ExpansionPanel
         focused={ focused }
+        columnWidths={ columnWidths }
         label="Favicon"
         className="md-cell-md-cell--12"
         contentClassName="md-grid"

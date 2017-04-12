@@ -4,8 +4,9 @@ import '../../styles/main.scss';
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import Helmet from 'react-helmet';
+import { connect } from 'react-redux';
 import { StyleClasses } from 'boldr-ui';
-
+import { fetchSettingsIfNeeded } from '../../state/modules/boldr/settings';
 import Notifications from '../../components/Notification';
 import renderRoutes from '../../core/addRoutes';
 
@@ -15,9 +16,12 @@ type Props = {
   route: Object,
   className: string,
 };
-
+@connect()
 class App extends Component {
   static displayName = 'App';
+  componentDidMount() {
+    this.props.dispatch(fetchSettingsIfNeeded());
+  }
   props: Props;
   render() {
     const { className, route } = this.props;

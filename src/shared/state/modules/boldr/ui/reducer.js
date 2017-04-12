@@ -24,6 +24,7 @@ const INITIAL_STATE = {
   layout: LAYOUTS.GRID,
   modal: false,
   drawer: false,
+  expanded: false,
   isMobile: false,
   mobile,
   tablet,
@@ -33,6 +34,16 @@ const INITIAL_STATE = {
 
 function uiReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
+    case t.EXPAND_SIDEBAR_MENU:
+      return {
+        ...state,
+        expanded: true,
+      };
+    case t.COLLAPSE_SIDEBAR_MENU:
+      return {
+        ...state,
+        expanded: false,
+      };
     case t.CHANGE_LAYOUT:
       return {
         ...state,

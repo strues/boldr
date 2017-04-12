@@ -22,3 +22,19 @@ $sidebar-bg: #2D343C;
 .boldr-paperoverride {
   background-color: $white;
 }
+
+.boldrui-dashboard-body {
+  main {
+    margin-left: 240px;
+  }
+  .boldrui-sidebar {
+    width: 240px;
+  }
+}
+
+.boldrui-dash-main {
+
+}
+.boldrui-dash-main.full-width {
+  margin-left: 240!important;
+}

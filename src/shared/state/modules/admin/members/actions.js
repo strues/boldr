@@ -65,7 +65,6 @@ export function updateMember(userData) {
   return dispatch => {
     dispatch(beginUpdateMember());
     return Axios.put(`/api/v1/users/admin/${userData.id}`, data)
-      .doUpdateMember(userData)
       .then(res => {
         dispatch(doneUpdateMember(res));
         dispatch(notificationSend(notif.MSG_UPDATE_MEMBER_SUCCESS));

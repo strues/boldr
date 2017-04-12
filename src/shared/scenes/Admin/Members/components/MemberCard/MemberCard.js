@@ -1,35 +1,35 @@
-import React, { PropTypes } from 'react';
+import React, { PureComponent } from 'react';
 import { Avatar, CardTitle, Card, CardActions, CardText, Button, Media, MediaOverlay } from 'boldr-ui';
 
-const propTypes = {
-  user: PropTypes.object,
-  handleToggle: PropTypes.func,
+type Props = {
+  user: Object,
+  handleToggle: () => void,
 };
 
-const MemberCard = props => {
-  function handleToggle(user) {
-    props.handleToggle(props.user.id);
+class MemberCard extends PureComponent {
+  props: Props;
+  render() {
+    const { user, handleToggle } = this.props;
+
+    return (
+      <Card>
+        <CardTitle
+          title={ user.username }
+          subtitle={ user.roles[0].name }
+          avatar={ <Avatar src={ user.avatarUrl } role="presentation" /> }
+        />
+
+        <CardText>
+          {user.id}
+
+          {user.email}
+        </CardText>
+        <CardActions>
+          <Button raised primary label="Edit User" onClick={ () => handleToggle(user) } />
+        </CardActions>
+      </Card>
+    );
   }
-  return (
-    <Card>
-      <CardTitle
-        title={ props.user.username }
-        subtitle={ props.user.roles[0].name }
-        avatar={ <Avatar src={ props.user.avatarUrl } role="presentation" /> }
-      />
-
-      <CardText>
-        {props.user.id}
-
-        {props.user.email}
-      </CardText>
-      <CardActions>
-        <Button raised primary label="Edit User" onClick={ handleToggle } />
-      </CardActions>
-    </Card>
-  );
-};
-
-MemberCard.propTypes = propTypes;
+}
 
 export default MemberCard;

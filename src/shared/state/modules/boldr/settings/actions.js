@@ -39,10 +39,9 @@ export const fetchSettings = (axios: any): ThunkAction =>
   (dispatch: Dispatch) => {
     dispatch({ type: t.FETCH_SETTINGS_REQUEST });
 
-    return Axios
-      .get('/api/v1/settings')
+    return Axios.get('/api/v1/settings')
       .then(res => {
-        const settingsData = res.data.results;
+        const settingsData = res.data;
         const normalizedSettings = normalize(settingsData, arrayOfSetting);
 
         dispatch({

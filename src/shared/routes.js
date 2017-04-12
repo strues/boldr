@@ -57,6 +57,7 @@ const AdminDashboard = Loadable({
 export default [
   {
     component: App,
+    loadData: async (dispatch: Dispatch) => Promise.all([await dispatch(fetchSettingsIfNeeded())]),
     routes: [
       {
         path: '/',

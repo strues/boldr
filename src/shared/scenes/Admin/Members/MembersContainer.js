@@ -45,7 +45,6 @@ export class MembersContainer extends Component {
   }
 
   toggleUser(userId: String) {
-    this.setState({ userId });
     this.props.dispatch(memberSelected(userId));
     this.props.dispatch(showModal());
   }
@@ -56,7 +55,7 @@ export class MembersContainer extends Component {
       firstName: values.firstName,
       lastName: values.lastName,
       role: values.role,
-      id: this.state.userId,
+      id: this.props.members.selected[0].id,
     };
 
     this.props.dispatch(updateMember(userData));
