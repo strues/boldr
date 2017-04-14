@@ -1,4 +1,5 @@
-import React, { PureComponent, PropTypes } from 'react';
+/* @flow */
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
@@ -10,6 +11,10 @@ const DrawerWrapper = styled.div`
   padding: 1em;
   height: 100%;
 `;
+type Props = {
+  dispatch: () => void,
+  profile: Object,
+};
 class OwnProfile extends PureComponent {
   handleFormSubmit = values => {
     const userData = {
@@ -32,6 +37,7 @@ class OwnProfile extends PureComponent {
     };
     this.props.dispatch(editProfile(userData));
   };
+  props: Props;
   render() {
     const { profile } = this.props;
     const initialProfileData = {
@@ -57,10 +63,5 @@ class OwnProfile extends PureComponent {
     );
   }
 }
-
-OwnProfile.propTypes = {
-  dispatch: PropTypes.func,
-  profile: PropTypes.object,
-};
 
 export default connect()(OwnProfile);

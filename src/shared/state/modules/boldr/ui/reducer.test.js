@@ -14,10 +14,6 @@ describe('UI Reducer', () => {
       drawer: false,
       expanded: false,
       isMobile: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
     });
   });
   it('should open the modal', () => {
@@ -28,10 +24,6 @@ describe('UI Reducer', () => {
       drawer: false,
       expanded: false,
       isMobile: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
     };
     const stateAfter = {
       loaded: false,
@@ -40,10 +32,6 @@ describe('UI Reducer', () => {
       drawer: false,
       expanded: false,
       isMobile: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
     };
     expect(
       uiReducer(initialState, {
@@ -59,10 +47,6 @@ describe('UI Reducer', () => {
       drawer: false,
       expanded: false,
       isMobile: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
     };
     const stateAfter = {
       loaded: false,
@@ -71,10 +55,6 @@ describe('UI Reducer', () => {
       drawer: false,
       expanded: false,
       isMobile: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
     };
     expect(
       uiReducer(initialState, {
@@ -94,10 +74,6 @@ describe('UI Reducer', () => {
       drawer: false,
       expanded: false,
       isMobile: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
     };
 
     expect(uiReducer(state, action)).toEqual({
@@ -107,10 +83,6 @@ describe('UI Reducer', () => {
       drawer: false,
       expanded: false,
       isMobile: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
     });
   });
 });
@@ -125,10 +97,6 @@ test('changeLayout', () => {
       drawer: false,
       expanded: false,
       isMobile: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
     },
   });
   store.dispatch(changeLayout('list'));
@@ -149,10 +117,6 @@ test('openModal', () => {
       drawer: false,
       expanded: false,
       isMobile: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
     },
   });
   store.dispatch(showModal());
@@ -172,10 +136,6 @@ test('closeModal', () => {
       drawer: false,
       expanded: false,
       isMobile: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
     },
   });
   store.dispatch(hideModal());
@@ -195,10 +155,6 @@ test('Open the drawer', () => {
       modal: false,
       drawer: false,
       expanded: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
     },
   });
   store.dispatch(openDrawer());
@@ -217,10 +173,6 @@ test('Close the drawer', () => {
       modal: false,
       drawer: false,
       expanded: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
     },
   });
   store.dispatch(closeDrawer());

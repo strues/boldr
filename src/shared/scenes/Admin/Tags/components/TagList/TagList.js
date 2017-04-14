@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { ListItem, Paper, Avatar, FontIcon } from 'boldr-ui';
 
 type Props = {

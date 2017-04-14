@@ -1,14 +1,5 @@
 import * as t from '../../actionTypes';
-import {
-  showModal,
-  hideModal,
-  openDrawer,
-  closeDrawer,
-  setMobileDevice,
-  changeLayout,
-  updateDrawerType,
-  updateMedia,
-} from './actions';
+import { showModal, hideModal, openDrawer, closeDrawer, setMobileDevice, changeLayout } from './actions';
 
 describe('UI Actions', () => {
   describe('showModal', () => {
@@ -65,26 +56,6 @@ describe('UI Actions', () => {
       };
 
       expect(changeLayout()).toEqual(expectedResult);
-    });
-  });
-  describe('updateDrawerType', () => {
-    it('should return the correct type', () => {
-      const expectedResult = {
-        type: t.UPDATE_DRAWER_TYPE,
-        undefined,
-      };
-
-      expect(updateDrawerType()).toEqual(expectedResult);
-    });
-  });
-  describe('updateMedia', () => {
-    it('should return the correct type', () => {
-      const expectedResult = {
-        type: t.UPDATE_MEDIA,
-        undefined,
-      };
-
-      expect(updateMedia()).toEqual(expectedResult);
     });
   });
 });

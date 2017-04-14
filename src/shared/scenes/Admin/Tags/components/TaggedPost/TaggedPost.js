@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import Link from 'react-router-dom/Link';
 import { Toolbar, MenuButton, List, ListItem, Loader } from 'boldr-ui';
 
 import { fetchTagPostsIfNeeded } from '../../../../../state/modules/blog/tags/actions';
@@ -21,15 +21,7 @@ type Props = {
 class TaggedPost extends Component {
   static defaultProps: {
     currentTag: {},
-    // match: { params: { name: '' } },
-    // fetchTagPostsIfNeeded: () => {},
   };
-
-  // componentDidMount() {
-  //   const { fetchTagPostsIfNeeded, match: { params } } = this.props;
-  //
-  //   fetchTagPostsIfNeeded(params.name);
-  // }
 
   props: Props;
   render() {

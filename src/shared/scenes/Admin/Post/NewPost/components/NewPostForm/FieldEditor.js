@@ -1,4 +1,4 @@
-import React, { PropTypes, Component } from 'react';
+import React, { Component } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import convertToRaw from 'draft-js/lib/convertFromDraftStateToRaw';
 import EditorState from 'draft-js/lib/EditorState';
@@ -6,17 +6,21 @@ import EditorState from 'draft-js/lib/EditorState';
 const editorStyle = {
   minHeight: 200,
 };
-export default class FieldEditor extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { editorState: EditorState.createEmpty() };
-  }
 
+type Props = {
+  input: object,
+  placeholder: string,
+};
+export default class FieldEditor extends Component {
+  state = { editorState: EditorState.createEmpty() };
   onChange = editorState => {
     const { input } = this.props;
     input.onChange(convertToRaw(editorState.getCurrentContent()));
     this.setState({ editorState });
   };
+
+  props: Props;
+
   render() {
     const { input, placeholder } = this.props;
     const { editorState } = this.state;
@@ -32,8 +36,3 @@ export default class FieldEditor extends Component {
     // </div>;
   }
 }
-
-FieldEditor.propTypes = {
-  input: PropTypes.object,
-  placeholder: PropTypes.string,
-};

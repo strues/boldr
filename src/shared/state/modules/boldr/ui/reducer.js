@@ -1,22 +1,17 @@
-import { Drawer } from 'boldr-ui';
 import { LAYOUTS } from '../../../../core/constants';
 import * as t from '../../actionTypes';
 
 export const STATE_KEY = 'ui';
 
-function updateDrawerType(state, { drawerType }) {
-  if (state.customDrawerType === drawerType) {
-    return state;
-  }
-
-  return Object.assign({}, state, { customDrawerType: drawerType });
+function toggleExpandCollapse(state) {
+  const newState = Object.assign({}, state);
+  newState.expanded = !newState.expanded;
+  return newState;
 }
-const { mobile, tablet, desktop } = Drawer.getCurrentMedia();
-let defaultMedia = 'mobile';
-if (desktop) {
-  defaultMedia = 'desktop';
-} else if (tablet) {
-  defaultMedia = 'tablet';
+function toggleSidebar(state) {
+  const newState = Object.assign({}, state);
+  newState.visible = !newState.visible;
+  return newState;
 }
 
 const INITIAL_STATE = {
@@ -24,26 +19,17 @@ const INITIAL_STATE = {
   layout: LAYOUTS.GRID,
   modal: false,
   drawer: false,
-  expanded: false,
+  expanded: true,
   isMobile: false,
-  mobile,
-  tablet,
-  desktop,
-  defaultMedia,
+  visible: true,
 };
 
 function uiReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case t.EXPAND_SIDEBAR_MENU:
-      return {
-        ...state,
-        expanded: true,
-      };
-    case t.COLLAPSE_SIDEBAR_MENU:
-      return {
-        ...state,
-        expanded: false,
-      };
+    case t.TOGGLE_SB_MENU:
+      return toggleExpandCollapse(state);
+    case t.TOGGLE_SIDEBAR:
+      return toggleSidebar(state);
     case t.CHANGE_LAYOUT:
       return {
         ...state,
@@ -74,10 +60,7 @@ function uiReducer(state = INITIAL_STATE, action) {
         ...state,
         isMobile: action.payload,
       };
-    case t.UPDATE_MEDIA:
-      return Object.assign({}, state, { ...action.media });
-    case t.UPDATE_DRAWER_TYPE:
-      return updateDrawerType(state, action);
+
     default:
       return state;
   }

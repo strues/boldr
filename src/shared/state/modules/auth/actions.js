@@ -14,15 +14,16 @@ import * as t from '../actionTypes';
 export function doSignup(data) {
   return dispatch => {
     dispatch(beginSignUp());
-    return Axios.post('/api/v1/auth/signup', data).then(res => {
-      if (!res.status === 201) {
-        dispatch(signUpError(res));
+    return Axios.post('/api/v1/auth/signup', data)
+      .then(res => {
+        dispatch(signUpSuccess());
+        dispatch(push('/'));
+        dispatch(notificationSend(notif.MSG_SIGNUP_SUCCESS));
+      })
+      .catch(err => {
+        dispatch(signUpError(err));
         dispatch(notificationSend(notif.MSG_SIGNUP_ERROR));
-      }
-      dispatch(signUpSuccess());
-      dispatch(push('/'));
-      dispatch(notificationSend(notif.MSG_SIGNUP_SUCCESS));
-    });
+      });
   };
 }
 
@@ -50,10 +51,6 @@ export function doLogin(data) {
     dispatch(beginLogin());
     return Axios.post('/api/v1/auth/login', data)
       .then(res => {
-        if (res.status !== 200) {
-          dispatch(loginError(res));
-          dispatch(notificationSend(notif.MSG_LOGIN_ERROR('Unable to login')));
-        }
         setToken(res.data.token);
         dispatch(loginSuccess(res));
         dispatch(notificationSend(notif.MSG_LOGIN_SUCCESS));

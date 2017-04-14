@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import draftToHtml from 'draftjs-to-html';
 
@@ -12,6 +12,7 @@ type Props = {
   createPost: Function,
 };
 
+// @TODO: refactor this because its poorly done
 class NewPostContainer extends Component {
   constructor() {
     super();
@@ -30,7 +31,6 @@ class NewPostContainer extends Component {
       content: draftToHtml(values.content),
       meta: values.meta,
     };
-    // console.log(postData)
     this.props.createPost(postData);
   }
   props: Props;

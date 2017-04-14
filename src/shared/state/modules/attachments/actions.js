@@ -14,37 +14,35 @@ const token = getToken();
   * @exports fetchMedia
   *****************************************************************/
 
-export const fetchAttachments = (axios: any): ThunkAction =>
-  (dispatch: Dispatch) => {
-    dispatch({ type: t.GET_ATTACHMENT_REQUEST });
+export const fetchAttachments = (axios: any): ThunkAction => (dispatch: Dispatch) => {
+  dispatch({ type: t.GET_ATTACHMENT_REQUEST });
 
-    return axios
-      .get('/api/v1/attachments')
-      .then(res => {
-        dispatch({
-          type: t.GET_ATTACHMENT_SUCCESS,
-          payload: res.data,
-        });
-      })
-      .catch(err => {
-        dispatch({
-          type: t.GET_ATTACHMENT_FAILURE,
-          error: err,
-        });
+  return axios
+    .get('/api/v1/attachments')
+    .then(res => {
+      dispatch({
+        type: t.GET_ATTACHMENT_SUCCESS,
+        payload: res.data,
       });
-  };
+    })
+    .catch(err => {
+      dispatch({
+        type: t.GET_ATTACHMENT_FAILURE,
+        error: err,
+      });
+    });
+};
 /* istanbul ignore next */
-export const fetchMedia = (): ThunkAction =>
-  (dispatch: Dispatch, getState: GetState, axios: any) => {
+export const fetchMedia = (): ThunkAction => (dispatch: Dispatch, getState: GetState, axios: any) => {
+  /* istanbul ignore next */
+  if (shouldFetchAttachments(getState())) {
     /* istanbul ignore next */
-    if (shouldFetchAttachments(getState())) {
-      /* istanbul ignore next */
-      return dispatch(fetchAttachments(axios));
-    }
+    return dispatch(fetchAttachments(axios));
+  }
 
-    /* istanbul ignore next */
-    return null;
-  };
+  /* istanbul ignore next */
+  return null;
+};
 
 function shouldFetchAttachments(state) {
   const attachments = state.attachments.files;
@@ -86,7 +84,9 @@ export function uploadFiles(payload) {
   return dispatch => {
     dispatch(beginUpload());
     const data = new FormData();
-    data.append('payload.name', payload);
+    data.append('file', payload);
+    // data.append('field', 'mediaType', 1);
+    console.log(payload);
     return Axios.post('/api/v1/attachments', data)
       .then(res => {
         if (!res.status === 201) {

@@ -15,6 +15,10 @@ import { getToken } from '../shared/core/authentication/token';
 
 WebFontLoader.load({
   google: { families: ['Roboto:200,400,600', 'Material Icons'] },
+  custom: {
+    families: ['FontAwesome'],
+    urls: ['https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'],
+  },
 });
 
 const domNode = document.querySelector('#app');

@@ -28,7 +28,7 @@ class SiteName extends Component {
   state: State;
 
   handleChange(event) {
-    this.setState({ value: event.target.value });
+    this.setState({ value: event });
   }
 
   handleSubmit(event) {

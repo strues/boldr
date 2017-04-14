@@ -27,7 +27,7 @@ class SiteDescription extends Component {
   }
   state: State;
   handleChange(event) {
-    this.setState({ value: event.target.value });
+    this.setState({ value: event });
   }
 
   handleSubmit(event) {
@@ -35,7 +35,6 @@ class SiteDescription extends Component {
       id: this.props.id,
       value: this.state.value,
     };
-
     this.props.dispatch(updateBoldrSettings(payload));
     event.preventDefault();
   }

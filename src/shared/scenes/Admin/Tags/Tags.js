@@ -1,4 +1,3 @@
-/* eslint-disable react/prefer-stateless-function */
 /* @flow */
 import React, { Component } from 'react';
 import { push } from 'react-router-redux';

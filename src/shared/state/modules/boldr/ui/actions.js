@@ -6,9 +6,10 @@ export function changeLayout(layout) {
     payload: layout,
   };
 }
-export const expandSideMenu = () => ({ type: t.EXPAND_SIDEBAR_MENU });
-export const collapseSideMenu = () => ({ type: t.COLLAPSE_SIDEBAR_MENU });
 
+export const showHideSidebar = () => ({ type: t.TOGGLE_SIDEBAR });
+
+export const expandCollapseSideMenu = () => ({ type: t.TOGGLE_SB_MENU });
 export const showModal = () => ({ type: t.MODAL_OPEN });
 export const hideModal = () => ({ type: t.MODAL_CLOSED });
 export const openDrawer = () => ({ type: t.OPEN_DRAWER });
@@ -18,19 +19,5 @@ export function setMobileDevice(enabled = true) {
   return {
     type: t.SET_MOBILE_DEVICE,
     payload: enabled,
-  };
-}
-
-export function updateMedia(drawerType, media) {
-  return {
-    type: t.UPDATE_MEDIA,
-    drawerType,
-    media,
-  };
-}
-export function updateDrawerType(drawerType) {
-  return {
-    type: t.UPDATE_DRAWER_TYPE,
-    drawerType,
   };
 }

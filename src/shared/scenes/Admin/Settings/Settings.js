@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import { ExpansionList, TextField } from 'boldr-ui';
 
@@ -9,11 +9,11 @@ type Props = {
   siteName: Object,
   siteUrl: Object,
   siteLogo: Object,
-  siteDesc: Object,
+  siteDescription: Object,
   siteFav: Object,
 };
 
-class Settings extends Component {
+class Settings extends PureComponent {
   props: Props;
 
   render() {
@@ -24,7 +24,7 @@ class Settings extends Component {
           <SiteName { ...this.props.siteName } />
           <SiteUrl { ...this.props.siteUrl } />
           <Logo { ...this.props.siteLogo } />
-          <SiteDescription { ...this.props.siteDesc } />
+          <SiteDescription { ...this.props.siteDescription } />
           <Favicon { ...this.props.siteFav } />
         </ExpansionList>
       </div>

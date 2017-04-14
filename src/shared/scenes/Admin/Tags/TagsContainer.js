@@ -1,4 +1,3 @@
-/* eslint-disable react/prefer-stateless-function */
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
@@ -13,12 +12,9 @@ type Props = {
 };
 
 class TagsContainer extends Component {
-  static fetchData(dispatch) {
-    return Promise.all([dispatch(fetchTagsIfNeeded())]);
-  }
   componentDidMount() {
     const { dispatch } = this.props;
-    TagsContainer.fetchData(dispatch);
+    dispatch(fetchTagsIfNeeded());
   }
   props: Props;
 

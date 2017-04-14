@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'react-router-dom/Link';
 import { connect } from 'react-redux';
 import dateFns from 'date-fns';
 import classnames from 'classnames';

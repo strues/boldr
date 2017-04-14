@@ -110,7 +110,7 @@ class Navigation extends Component {
             </Button>
           </Col>
           <Col xs={ 12 } md={ 4 }>
-            <Paper zDepth={ 2 } className="boldr-paperoverride">
+            <Paper zDepth={ 2 }>
               <NavigationEditor initialValues={ this.state.detail } onFormSubmit={ this.onUpdateFormSubmit } />
             </Paper>
           </Col>

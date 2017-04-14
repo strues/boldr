@@ -1,10 +1,12 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import Link from 'react-router-dom/Link';
 import Helmet from 'react-helmet';
 import { FormCard } from 'boldr-ui';
 
 import LoginForm from './LoginForm';
-
+type Props = {
+  onSubmit: () => void,
+};
 const Login = props => {
   return (
     <div className="boldr-form__login">
@@ -18,10 +20,6 @@ const Login = props => {
       />
     </div>
   );
-};
-
-Login.propTypes = {
-  onSubmit: PropTypes.func,
 };
 
 export default Login;

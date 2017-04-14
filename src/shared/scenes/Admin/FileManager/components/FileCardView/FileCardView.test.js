@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import shallow from 'react-test-renderer/shallow';
 import { shallowToJson } from 'enzyme-to-json';
 
 import fakeAttachments from '../../__fixtures__/attachments.fixture';

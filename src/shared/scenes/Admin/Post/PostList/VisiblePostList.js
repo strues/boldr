@@ -1,10 +1,9 @@
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-// import { toggleTodo } from '../actions';
+import withRouter from 'react-router-dom/withRouter';
 import { getPublishedPosts } from '../../../../state/modules/blog/posts/reducer';
 import PostList from './PostList';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   posts: getPublishedPosts(state, 'all'),
 });
 

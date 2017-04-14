@@ -2,7 +2,6 @@
 import Loadable from 'react-loadable';
 import {Loader} from 'boldr-ui';
 import type {Dispatch} from './types/redux';
-
 import App from './components/App';
 import Home from './pages/Home';
 import About from './pages/About';

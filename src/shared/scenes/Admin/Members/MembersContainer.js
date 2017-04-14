@@ -45,8 +45,9 @@ export class MembersContainer extends Component {
   }
 
   toggleUser(userId: String) {
-    this.props.dispatch(memberSelected(userId));
-    this.props.dispatch(showModal());
+    const { dispatch } = this.props;
+    dispatch(memberSelected(userId));
+    dispatch(showModal());
   }
 
   handleSubmit(values: Object) {
@@ -61,14 +62,15 @@ export class MembersContainer extends Component {
     this.props.dispatch(updateMember(userData));
   }
   render() {
+    const { members, ui } = this.props;
     return (
       <Members
         toggleUser={ this.toggleUser }
-        users={ this.props.members.members }
-        visible={ this.props.ui.modal }
+        users={ members.members }
+        visible={ ui.modal }
         close={ this.closeModal }
         handleSubmit={ this.handleSubmit }
-        initialValues={ this.props.members.selected[0] }
+        initialValues={ members.selected[0] }
       />
     );
   }

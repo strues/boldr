@@ -83,10 +83,9 @@ export function updateBoldrSettings(payload) {
   };
   return dispatch => {
     dispatch(beginUpdateSettings());
-    return Axios.put(`/api/v1/settings/${settingId}`)
+    return Axios.put(`/api/v1/settings/${settingId}`, data)
       .then(res => {
-        dispatch(doneUpdateSettings(res));
-        dispatch(loadSettings());
+        dispatch(doneUpdateSettings(res.data));
         dispatch(
           notificationSend({
             message: 'Updated your settings.',
@@ -94,7 +93,6 @@ export function updateBoldrSettings(payload) {
             dismissAfter: 3000,
           }),
         );
-        dispatch(push('/admin'));
       })
       .catch(err => {
         dispatch(failUpdateSettings(err));

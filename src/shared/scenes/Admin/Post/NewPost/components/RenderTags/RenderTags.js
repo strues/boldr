@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-array-index-key */
-import React, { PropTypes } from 'react';
+import React from 'react';
 import { Field, FieldArray, reduxForm } from 'redux-form';
 import styled from 'styled-components';
 import { Button, FontIcon, InputField } from 'boldr-ui';
