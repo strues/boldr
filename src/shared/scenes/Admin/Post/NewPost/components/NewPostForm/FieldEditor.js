@@ -5,6 +5,7 @@ import EditorState from 'draft-js/lib/EditorState';
 
 const editorStyle = {
   minHeight: 200,
+  height: '100%',
 };
 
 type Props = {

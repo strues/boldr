@@ -1,58 +1,63 @@
 import { push } from 'react-router-redux';
-import Axios from 'axios';
+import { normalize, arrayOf, schema } from 'normalizr';
+import api from '../../../core/api';
 import { getToken } from '../../../core/authentication/token';
 import * as notif from '../../../core/constants';
 import { notificationSend } from '../notifications/notifications';
 import * as t from '../actionTypes';
 import { editProfile } from '../users/actions';
+import { media as mediaSchema, arrayOfMedia } from './schema';
 
 const token = getToken();
 
+export const FETCH_MEDIAS_REQUEST = '@boldr/media/FETCH_MEDIAS_REQUEST';
+export const FETCH_MEDIAS_SUCCESS = '@boldr/media/FETCH_MEDIAS_SUCCESS';
+export const FETCH_MEDIAS_FAILURE = '@boldr/media/FETCH_MEDIAS_FAILURE';
 /**
   * FETCH MEDIA ACTIONS
   * -------------------------
   * @exports fetchMedia
   *****************************************************************/
 
-export const fetchAttachments = (axios: any): ThunkAction => (dispatch: Dispatch) => {
-  dispatch({ type: t.GET_ATTACHMENT_REQUEST });
+export const fetchMedia = (axios: any): ThunkAction => (dispatch: Dispatch) => {
+  dispatch({ type: FETCH_MEDIAS_REQUEST });
 
   return axios
-    .get('/api/v1/attachments')
+    .get('/api/v1/media')
     .then(res => {
+      const medias = res.data;
+      const normalizedMedia = normalize(medias, arrayOfMedia);
       dispatch({
-        type: t.GET_ATTACHMENT_SUCCESS,
-        payload: res.data,
+        type: FETCH_MEDIAS_SUCCESS,
+        payload: normalizedMedia,
       });
     })
     .catch(err => {
       dispatch({
-        type: t.GET_ATTACHMENT_FAILURE,
+        type: FETCH_MEDIAS_FAILURE,
         error: err,
       });
     });
 };
 /* istanbul ignore next */
-export const fetchMedia = (): ThunkAction => (dispatch: Dispatch, getState: GetState, axios: any) => {
+export const fetchMediaIfNeeded = (): ThunkAction => (dispatch: Dispatch, getState: GetState, axios: any) => {
   /* istanbul ignore next */
-  if (shouldFetchAttachments(getState())) {
+  if (shouldFetchMedia(getState())) {
     /* istanbul ignore next */
-    return dispatch(fetchAttachments(axios));
+    return dispatch(fetchMedia(axios));
   }
 
   /* istanbul ignore next */
   return null;
 };
 
-function shouldFetchAttachments(state) {
-  const attachments = state.attachments.files;
-  if (!attachments.length) {
-    return true;
-  }
-  if (attachments.length) {
-    return false;
-  }
-  return attachments;
+function shouldFetchMedia(state) {
+  // const medias = state.media.ids;
+  // if (!medias.length) {
+  //   return true;
+  // }
+
+  return true;
 }
 function fetchMediaStart() {
   return {
@@ -60,10 +65,10 @@ function fetchMediaStart() {
   };
 }
 
-function fetchMediaSuccess(response) {
+function fetchMediaSuccess(normalizedMedia) {
   return {
     type: t.GET_ATTACHMENT_SUCCESS,
-    payload: response.body,
+    payload: normalizedMedia,
   };
 }
 
@@ -80,14 +85,14 @@ function fetchMediaFail(err) {
   * @exports uploadFiles
   *****************************************************************/
 
-export function uploadFiles(payload) {
+export function uploadMedia(payload) {
   return dispatch => {
     dispatch(beginUpload());
     const data = new FormData();
     data.append('file', payload);
-    data.append('field', 'mediaType', 1);
+    // data.append('field', 'mediaType', 1);
     console.log(payload);
-    return Axios.post('/api/v1/media', data)
+    return Axios.post('/api/v1/attachments', data)
       .then(res => {
         if (!res.status === 201) {
           dispatch(uploadFail(res));

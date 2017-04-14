@@ -5,6 +5,7 @@ const initialState = {
   tags: {},
   attachments: {},
   users: {},
+  media: {},
   menus: {},
   menuDetails: {},
   settings: {},

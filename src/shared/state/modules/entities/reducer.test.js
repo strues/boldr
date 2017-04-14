@@ -7,6 +7,7 @@ describe('Entities', () => {
       tags: {},
       attachments: {},
       users: {},
+      media: {},
       menus: {},
       menuDetails: {},
       settings: {},

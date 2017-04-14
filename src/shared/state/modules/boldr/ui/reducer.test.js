@@ -1,8 +1,15 @@
 import configureMockStore from 'redux-mock-store';
-import Drawer from 'react-md/lib/Drawers';
 import thunk from 'redux-thunk';
-import { CHANGE_LAYOUT, MODAL_OPEN, MODAL_CLOSED } from '../../actionTypes';
-import { changeLayout, showModal, hideModal, openDrawer, closeDrawer } from './actions';
+import {
+  CHANGE_LAYOUT,
+  MODAL_OPEN,
+  MODAL_CLOSED,
+  changeLayout,
+  showModal,
+  hideModal,
+  openDrawer,
+  closeDrawer,
+} from './actions';
 import uiReducer from './reducer';
 
 describe('UI Reducer', () => {

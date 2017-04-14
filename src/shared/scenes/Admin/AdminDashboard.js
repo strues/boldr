@@ -3,9 +3,6 @@ import React, { Component } from 'react';
 import { findDOMNode } from 'react-dom';
 import NavLink from 'react-router-dom/NavLink';
 import { connect } from 'react-redux';
-
-import styled from 'styled-components';
-
 import {
   Avatar,
   Button,
@@ -13,14 +10,12 @@ import {
   Icon,
   Col,
   Row,
-  FontIcon,
   DashboardFooter,
   Sidebar,
   DashboardWrapper,
   DashboardContent,
   Topbar,
 } from 'boldr-ui';
-import { toggleExpandedItemWithId } from 'boldr-ui/lib/components/Sidebar/SidebarNav';
 import { showHideSidebar, expandCollapseSideMenu } from '../../state/modules/boldr/ui/actions';
 import renderRoutes from '../../core/addRoutes';
 import sidebarLinks from './sidebarLinks';

@@ -29,6 +29,7 @@ import Error404 from './pages/Error404';
 import {fetchSettingsIfNeeded} from './state/modules/boldr/settings';
 import {fetchMembersIfNeeded} from './state/modules/admin/members';
 import {fetchMedia} from './state/modules/attachments/actions';
+import {fetchMediaIfNeeded} from './state/modules/media/actions';
 import {fetchProfileIfNeeded} from './state/modules/users';
 import {fetchStatsIfNeeded, fetchActivityIfNeeded} from './state/modules/admin/dashboard/actions';
 import {fetchMenusIfNeeded} from './state/modules/boldr/menu/actions';
@@ -52,7 +53,10 @@ const AdminDashboard = Loadable({
   loader: () => import('./scenes/Admin/AdminDashboard'),
   LoadingComponent,
 });
-
+const MediaContainer = Loadable({
+  loader: () => import('./scenes/Admin/Media/MediaContainer'),
+  LoadingComponent,
+});
 export default [
   {
     component: App,
@@ -186,6 +190,12 @@ export default [
             path: '/admin/tags/:name',
             exact: true,
             component: TaggedPost,
+          },
+          {
+            path: '/admin/media',
+            exact: true,
+            component: MediaContainer,
+            loadData: async (dispatch: Dispatch) => Promise.all([await dispatch(fetchMediaIfNeeded())]),
           },
         ],
       },
