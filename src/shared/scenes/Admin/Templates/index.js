@@ -1,1 +1,1 @@
-export { default } from './TemplatesContainer';
+export {default} from './TemplatesContainer';

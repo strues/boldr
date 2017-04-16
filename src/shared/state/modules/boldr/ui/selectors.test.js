@@ -1,4 +1,4 @@
-import { selectUi, makeSelectUi, makeSelectMobile } from './selectors';
+import {selectUi, makeSelectUi, makeSelectMobile} from './selectors';
 
 test('should select the ui state', () => {
   const uiState = {};

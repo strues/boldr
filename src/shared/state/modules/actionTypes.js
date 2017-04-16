@@ -60,33 +60,54 @@ export const EDIT_PROFILE_FAILURE = '@boldr/auth/EDIT_PROFILE_FAILURE';
  * @type {String}
  */
 
-export const DELETE_ATTACHMENT_REQUEST = '@boldr/attachment/DELETE_ATTACHMENT_REQUEST';
-export const DELETE_ATTACHMENT_SUCCESS = '@boldr/attachment/DELETE_ATTACHMENT_SUCCESS';
-export const DELETE_ATTACHMENT_FAILURE = '@boldr/attachment/DELETE_ATTACHMENT_FAILURE';
+export const DELETE_ATTACHMENT_REQUEST =
+  '@boldr/attachment/DELETE_ATTACHMENT_REQUEST';
+export const DELETE_ATTACHMENT_SUCCESS =
+  '@boldr/attachment/DELETE_ATTACHMENT_SUCCESS';
+export const DELETE_ATTACHMENT_FAILURE =
+  '@boldr/attachment/DELETE_ATTACHMENT_FAILURE';
 
-export const GET_ATTACHMENT_REQUEST = '@boldr/attachment/GET_ATTACHMENT_REQUEST';
-export const GET_ATTACHMENT_SUCCESS = '@boldr/attachment/GET_ATTACHMENT_SUCCESS';
-export const GET_ATTACHMENT_FAILURE = '@boldr/attachment/GET_ATTACHMENT_FAILURE';
+export const GET_ATTACHMENT_REQUEST =
+  '@boldr/attachment/GET_ATTACHMENT_REQUEST';
+export const GET_ATTACHMENT_SUCCESS =
+  '@boldr/attachment/GET_ATTACHMENT_SUCCESS';
+export const GET_ATTACHMENT_FAILURE =
+  '@boldr/attachment/GET_ATTACHMENT_FAILURE';
 
-export const UPLOAD_ATTACHMENT_REQUEST = '@boldr/attachment/UPLOAD_ATTACHMENT_REQUEST';
-export const UPLOAD_ATTACHMENT_SUCCESS = '@boldr/attachment/UPLOAD_ATTACHMENT_SUCCESS';
-export const UPLOAD_ATTACHMENT_FAILURE = '@boldr/attachment/UPLOAD_ATTACHMENT_FAILURE';
+export const UPLOAD_ATTACHMENT_REQUEST =
+  '@boldr/attachment/UPLOAD_ATTACHMENT_REQUEST';
+export const UPLOAD_ATTACHMENT_SUCCESS =
+  '@boldr/attachment/UPLOAD_ATTACHMENT_SUCCESS';
+export const UPLOAD_ATTACHMENT_FAILURE =
+  '@boldr/attachment/UPLOAD_ATTACHMENT_FAILURE';
 
-export const UPLOAD_POST_IMG_REQUEST = '@boldr/attachment/UPLOAD_POST_IMG_REQUEST';
-export const UPLOAD_POST_IMG_SUCCESS = '@boldr/attachment/UPLOAD_POST_IMG_SUCCESS';
-export const UPLOAD_POST_IMG_FAILURE = '@boldr/attachment/UPLOAD_POST_IMG_FAILURE';
+export const UPLOAD_POST_IMG_REQUEST =
+  '@boldr/attachment/UPLOAD_POST_IMG_REQUEST';
+export const UPLOAD_POST_IMG_SUCCESS =
+  '@boldr/attachment/UPLOAD_POST_IMG_SUCCESS';
+export const UPLOAD_POST_IMG_FAILURE =
+  '@boldr/attachment/UPLOAD_POST_IMG_FAILURE';
 
-export const UPDATE_ATTACHMENT_REQUEST = '@boldr/attachment/UPDATE_ATTACHMENT_REQUEST';
-export const UPDATE_ATTACHMENT_SUCCESS = '@boldr/attachment/UPDATE_ATTACHMENT_SUCCESS';
-export const UPDATE_ATTACHMENT_FAILURE = '@boldr/attachment/UPDATE_ATTACHMENT_FAILURE';
+export const UPDATE_ATTACHMENT_REQUEST =
+  '@boldr/attachment/UPDATE_ATTACHMENT_REQUEST';
+export const UPDATE_ATTACHMENT_SUCCESS =
+  '@boldr/attachment/UPDATE_ATTACHMENT_SUCCESS';
+export const UPDATE_ATTACHMENT_FAILURE =
+  '@boldr/attachment/UPDATE_ATTACHMENT_FAILURE';
 
-export const UPLOAD_PROFILE_IMG_REQUEST = '@boldr/attachment/UPLOAD_PROFILE_IMG_REQUEST';
-export const UPLOAD_PROFILE_IMG_SUCCESS = '@boldr/attachment/UPLOAD_PROFILE_IMG_SUCCESS';
-export const UPLOAD_PROFILE_IMG_FAILURE = '@boldr/attachment/UPLOAD_PROFILE_IMG_FAILURE';
+export const UPLOAD_PROFILE_IMG_REQUEST =
+  '@boldr/attachment/UPLOAD_PROFILE_IMG_REQUEST';
+export const UPLOAD_PROFILE_IMG_SUCCESS =
+  '@boldr/attachment/UPLOAD_PROFILE_IMG_SUCCESS';
+export const UPLOAD_PROFILE_IMG_FAILURE =
+  '@boldr/attachment/UPLOAD_PROFILE_IMG_FAILURE';
 
-export const UPLOAD_AVATAR_IMG_REQUEST = '@boldr/attachment/UPLOAD_AVATAR_IMG_REQUEST';
-export const UPLOAD_AVATAR_IMG_SUCCESS = '@boldr/attachment/UPLOAD_AVATAR_IMG_SUCCESS';
-export const UPLOAD_AVATAR_IMG_FAILURE = '@boldr/attachment/UPLOAD_AVATAR_IMG_FAILURE';
+export const UPLOAD_AVATAR_IMG_REQUEST =
+  '@boldr/attachment/UPLOAD_AVATAR_IMG_REQUEST';
+export const UPLOAD_AVATAR_IMG_SUCCESS =
+  '@boldr/attachment/UPLOAD_AVATAR_IMG_SUCCESS';
+export const UPLOAD_AVATAR_IMG_FAILURE =
+  '@boldr/attachment/UPLOAD_AVATAR_IMG_FAILURE';
 
 export const SELECT_FILE = '@boldr/attachment/SELECT_FILE';
 
@@ -95,9 +116,12 @@ export const SELECT_FILE = '@boldr/attachment/SELECT_FILE';
  * @type {String}
  */
 
-export const FETCH_ACTIVITY_REQUEST = '@boldr/admin/activity/FETCH_ACTIVITY_REQUEST';
-export const FETCH_ACTIVITY_SUCCESS = '@boldr/admin/activity/FETCH_ACTIVITY_SUCCESS';
-export const FETCH_ACTIVITY_FAILURE = '@boldr/admin/activity/FETCH_ACTIVITY_FAILURE';
+export const FETCH_ACTIVITY_REQUEST =
+  '@boldr/admin/activity/FETCH_ACTIVITY_REQUEST';
+export const FETCH_ACTIVITY_SUCCESS =
+  '@boldr/admin/activity/FETCH_ACTIVITY_SUCCESS';
+export const FETCH_ACTIVITY_FAILURE =
+  '@boldr/admin/activity/FETCH_ACTIVITY_FAILURE';
 
 export const SHOW_SIDEBAR = '@boldr/admin/SHOW_SIDEBAR';
 export const HIDE_SIDEBAR = '@boldr/admin/HIDE_SIDEBAR';
@@ -114,9 +138,12 @@ export const FETCH_STATS_FAILURE = '@boldr/admin/stats/FETCH_STATS_FAILURE';
 export const LOAD_MEMBERS_REQUEST = '@boldr/admin/members/LOAD_MEMBERS_REQUEST';
 export const LOAD_MEMBERS_SUCCESS = '@boldr/admin/members/LOAD_MEMBERS_SUCCESS';
 export const LOAD_MEMBERS_FAILURE = '@boldr/admin/members/LOAD_MEMBERS_FAILURE';
-export const UPDATE_MEMBER_REQUEST = '@boldr/admin/members/UPDATE_MEMBER_REQUEST';
-export const UPDATE_MEMBER_SUCCESS = '@boldr/admin/members/UPDATE_MEMBER_SUCCESS';
-export const UPDATE_MEMBER_FAILURE = '@boldr/admin/members/UPDATE_MEMBER_FAILURE';
+export const UPDATE_MEMBER_REQUEST =
+  '@boldr/admin/members/UPDATE_MEMBER_REQUEST';
+export const UPDATE_MEMBER_SUCCESS =
+  '@boldr/admin/members/UPDATE_MEMBER_SUCCESS';
+export const UPDATE_MEMBER_FAILURE =
+  '@boldr/admin/members/UPDATE_MEMBER_FAILURE';
 export const MEMBER_SELECTED = '@boldr/admin/members/MEMBER_SELECTED';
 
 /**
@@ -166,9 +193,12 @@ export const FETCH_TAGS_REQUEST = '@boldr/blog/FETCH_TAGS_REQUEST';
 export const FETCH_TAGS_SUCCESS = '@boldr/blog/FETCH_TAGS_SUCCESS';
 export const FETCH_TAGS_FAILURE = '@boldr/blog/FETCH_TAGS_FAILURE';
 
-export const FETCH_TAGGED_POST_REQUEST = '@boldr/blog/FETCH_TAGGED_POST_REQUEST';
-export const FETCH_TAGGED_POST_SUCCESS = '@boldr/blog/FETCH_TAGGED_POST_SUCCESS';
-export const FETCH_TAGGED_POST_FAILURE = '@boldr/blog/FETCH_TAGGED_POST_FAILURE';
+export const FETCH_TAGGED_POST_REQUEST =
+  '@boldr/blog/FETCH_TAGGED_POST_REQUEST';
+export const FETCH_TAGGED_POST_SUCCESS =
+  '@boldr/blog/FETCH_TAGGED_POST_SUCCESS';
+export const FETCH_TAGGED_POST_FAILURE =
+  '@boldr/blog/FETCH_TAGGED_POST_FAILURE';
 
 export const ADD_TAG_REQUEST = '@boldr/blog/ADD_TAG_REQUEST';
 export const ADD_TAG_SUCCESS = '@boldr/blog/ADD_TAG_SUCCESS';
@@ -194,9 +224,12 @@ export const UPDATE_MENU_REQUEST = '@boldr/admin/menu/UPDATE_MENU_REQUEST';
 export const UPDATE_MENU_SUCCESS = '@boldr/admin/menu/UPDATE_MENU_SUCCESS';
 export const UPDATE_MENU_FAILURE = '@boldr/admin/menu/UPDATE_MENU_FAILURE';
 
-export const ADD_MENU_DETAIL_REQUEST = '@boldr/admin/menu/ADD_MENU_DETAIL_REQUEST';
-export const ADD_MENU_DETAIL_SUCCESS = '@boldr/admin/menu/ADD_MENU_DETAIL_SUCCESS';
-export const ADD_MENU_DETAIL_FAILURE = '@boldr/admin/menu/ADD_MENU_DETAIL_FAILURE';
+export const ADD_MENU_DETAIL_REQUEST =
+  '@boldr/admin/menu/ADD_MENU_DETAIL_REQUEST';
+export const ADD_MENU_DETAIL_SUCCESS =
+  '@boldr/admin/menu/ADD_MENU_DETAIL_SUCCESS';
+export const ADD_MENU_DETAIL_FAILURE =
+  '@boldr/admin/menu/ADD_MENU_DETAIL_FAILURE';
 
 /**
  * Setting action types
@@ -209,9 +242,12 @@ export const FETCH_SETTINGS_FAILURE = '@boldr/settings/FETCH_SETTINGS_FAILURE';
 export const EDIT_SETTING = '@boldr/settings/EDIT_SETTING';
 export const EDIT_SETTING_SUCCESS = '@boldr/settings/EDIT_SETTING_SUCCESS';
 export const EDIT_SETTING_FAILURE = '@boldr/settings/EDIT_SETTING_FAILURE';
-export const UPDATE_SETTINGS_REQUEST = '@boldr/settings/UPDATE_SETTINGS_REQUEST';
-export const UPDATE_SETTINGS_SUCCESS = '@boldr/settings/UPDATE_SETTINGS_SUCCESS';
-export const UPDATE_SETTINGS_FAILURE = '@boldr/settings/UPDATE_SETTINGS_FAILURE';
+export const UPDATE_SETTINGS_REQUEST =
+  '@boldr/settings/UPDATE_SETTINGS_REQUEST';
+export const UPDATE_SETTINGS_SUCCESS =
+  '@boldr/settings/UPDATE_SETTINGS_SUCCESS';
+export const UPDATE_SETTINGS_FAILURE =
+  '@boldr/settings/UPDATE_SETTINGS_FAILURE';
 export const DELETE_SETTING = '@boldr/settings/DELETE_SETTING';
 export const FETCH_SETTING_SUCCESS = '@boldr/settings/FETCH_SETTING_SUCCESS';
 
@@ -220,9 +256,12 @@ export const FETCH_SETTING_SUCCESS = '@boldr/settings/FETCH_SETTING_SUCCESS';
  * @type {String}
  */
 
-export const FETCH_TEMPLATES_REQUEST = '@boldr/templates/FETCH_TEMPLATES_REQUEST';
-export const FETCH_TEMPLATES_SUCCESS = '@boldr/templates/FETCH_TEMPLATES_SUCCESS';
-export const FETCH_TEMPLATES_FAILURE = '@boldr/templates/FETCH_TEMPLATES_FAILURE';
+export const FETCH_TEMPLATES_REQUEST =
+  '@boldr/templates/FETCH_TEMPLATES_REQUEST';
+export const FETCH_TEMPLATES_SUCCESS =
+  '@boldr/templates/FETCH_TEMPLATES_SUCCESS';
+export const FETCH_TEMPLATES_FAILURE =
+  '@boldr/templates/FETCH_TEMPLATES_FAILURE';
 
 export const FETCH_TEMPLATE_REQUEST = '@boldr/templates/FETCH_TEMPLATE_REQUEST';
 export const FETCH_TEMPLATE_SUCCESS = '@boldr/templates/FETCH_TEMPLATE_SUCCESS';

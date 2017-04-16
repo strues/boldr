@@ -1,12 +1,12 @@
-import { push } from 'react-router-redux';
-import { normalize, arrayOf, schema } from 'normalizr';
+import {push} from 'react-router-redux';
+import {normalize, arrayOf, schema} from 'normalizr';
 import api from '../../../core/api';
-import { getToken } from '../../../core/authentication/token';
+import {getToken} from '../../../core/authentication/token';
 import * as notif from '../../../core/constants';
-import { notificationSend } from '../notifications/notifications';
+import {notificationSend} from '../notifications/notifications';
 import * as t from '../actionTypes';
-import { editProfile } from '../users/actions';
-import { media as mediaSchema, arrayOfMedia } from './schema';
+import {editProfile} from '../users/actions';
+import {media as mediaSchema, arrayOfMedia} from './schema';
 
 const token = getToken();
 
@@ -20,7 +20,7 @@ export const FETCH_MEDIAS_FAILURE = '@boldr/media/FETCH_MEDIAS_FAILURE';
   *****************************************************************/
 
 export const fetchMedia = (axios: any): ThunkAction => (dispatch: Dispatch) => {
-  dispatch({ type: FETCH_MEDIAS_REQUEST });
+  dispatch({type: FETCH_MEDIAS_REQUEST});
 
   return axios
     .get('/api/v1/media')
@@ -40,7 +40,11 @@ export const fetchMedia = (axios: any): ThunkAction => (dispatch: Dispatch) => {
     });
 };
 /* istanbul ignore next */
-export const fetchMediaIfNeeded = (): ThunkAction => (dispatch: Dispatch, getState: GetState, axios: any) => {
+export const fetchMediaIfNeeded = (): ThunkAction => (
+  dispatch: Dispatch,
+  getState: GetState,
+  axios: any,
+) => {
   /* istanbul ignore next */
   if (shouldFetchMedia(getState())) {
     /* istanbul ignore next */
@@ -235,10 +239,10 @@ export function updateAttachment(attachmentData) {
   };
 }
 const updateAttachmentReq = () => {
-  return { type: t.UPDATE_ATTACHMENT_REQUEST };
+  return {type: t.UPDATE_ATTACHMENT_REQUEST};
 };
 const updateAttachmentSuccess = response => {
-  return { type: t.UPDATE_ATTACHMENT_SUCCESS };
+  return {type: t.UPDATE_ATTACHMENT_SUCCESS};
 };
 const errorUpdateAttachment = err => {
   return {
@@ -305,7 +309,7 @@ export function uploadProfileImage(payload) {
 
 export function uploadAvatarImage(payload) {
   return dispatch => {
-    dispatch({ type: t.UPLOAD_AVATAR_IMG_REQUEST });
+    dispatch({type: t.UPLOAD_AVATAR_IMG_REQUEST});
     const data = new FormData();
     data.append('payload.name', payload);
     return Axios.post('/api/v1/attachments', data)

@@ -85,9 +85,9 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
-animate-components@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/animate-components/-/animate-components-0.5.0.tgz#e37ee08573805375a841661fb2915c97c12e9414"
+animate-components@^0.6.1:
+  version "0.6.1"
+  resolved "https://registry.yarnpkg.com/animate-components/-/animate-components-0.6.1.tgz#686bdcb57776cdcd28399ae3889e7a59978baa94"
   dependencies:
     react "^15.4.2"
     react-dom "^15.4.2"
@@ -382,7 +382,7 @@ babel-core@^6.0.0, babel-core@^6.23.1, babel-core@^6.24.1:
     slash "^1.0.0"
     source-map "^0.5.0"
 
-babel-eslint@^7.2.1, babel-eslint@^7.2.2:
+babel-eslint@^7.2.2:
   version "7.2.2"
   resolved "https://registry.yarnpkg.com/babel-eslint/-/babel-eslint-7.2.2.tgz#0da2cbe6554fd0fb069f19674f2db2f9c59270ff"
   dependencies:
@@ -1277,17 +1277,18 @@ bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.6"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.6.tgz#53344adb14617a13f6e8dd2ce28905d1c0ba3215"
 
-boldr-ui@0.2.1:
-  version "0.2.1"
-  resolved "https://registry.yarnpkg.com/boldr-ui/-/boldr-ui-0.2.1.tgz#be071d42ea885918a08831ea5382f229076682bd"
+boldr-ui@0.2.5:
+  version "0.2.5"
+  resolved "https://registry.yarnpkg.com/boldr-ui/-/boldr-ui-0.2.5.tgz#3a6bcb1a7ab9d6c74fdbc2b19d24e852c3748e33"
   dependencies:
-    animate-components "^0.5.0"
+    animate-components "^0.6.1"
     classnames "^2.2.5"
     coolors-to-hex "^1.0.3"
     prop-types "^15.5.8"
     react-md "^1.0.11"
-    styled-components "^1.4.4"
+    styled-components "^1.4.5"
     styled-theme "^0.3.3"
+    styled-tools "^0.1.4"
 
 boldr-utils@0.1.15:
   version "0.1.15"
@@ -1854,6 +1855,10 @@ content-type@~1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/content-type/-/content-type-1.0.2.tgz#b7d113aee7a8dd27bd21133c4dc2529df1721eed"
 
+conventional-commit-types-emoji@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/conventional-commit-types-emoji/-/conventional-commit-types-emoji-0.1.0.tgz#f3193a5f9e66dbc6dee5a380d111d8391a4809f6"
+
 convert-source-map@^0.3.3:
   version "0.3.5"
   resolved "https://registry.yarnpkg.com/convert-source-map/-/convert-source-map-0.3.5.tgz#f1d802950af7dd2631a1febe0596550c86ab3190"
@@ -2151,6 +2156,17 @@ currently-unhandled@^0.4.1:
   resolved "https://registry.yarnpkg.com/currently-unhandled/-/currently-unhandled-0.4.1.tgz#988df33feab191ef799a61369dd76c17adf957ea"
   dependencies:
     array-find-index "^1.0.1"
+
+cz-conventional-changelog-emoji@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/cz-conventional-changelog-emoji/-/cz-conventional-changelog-emoji-0.1.0.tgz#8eadd1798b8e3e1bd1568de8577107988c97efff"
+  dependencies:
+    conventional-commit-types-emoji "^0.1.0"
+    lodash.map "^4.6.0"
+    longest "^1.0.1"
+    pad-right "^0.2.2"
+    right-pad "^1.0.1"
+    word-wrap "^1.1.0"
 
 cz-conventional-kawaii@^0.1.4:
   version "0.1.4"
@@ -2670,15 +2686,16 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-boldr@0.8.10:
-  version "0.8.10"
-  resolved "https://registry.yarnpkg.com/eslint-config-boldr/-/eslint-config-boldr-0.8.10.tgz#3fdd5516b60cb9a8ee622eb4f6d5c71d768aaad1"
+eslint-config-boldr@0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/eslint-config-boldr/-/eslint-config-boldr-0.9.1.tgz#3f60b40b2f0d36e8cbc639eca8e71e88fe73fed3"
   dependencies:
-    babel-eslint "^7.2.1"
+    babel-eslint "^7.2.2"
     eslint-plugin-babel "^4.1.1"
     eslint-plugin-flowtype "^2.30.4"
     eslint-plugin-import "^2.2.0"
     eslint-plugin-jsx-a11y "^4.0.0"
+    eslint-plugin-prettier "^2.0.1"
     eslint-plugin-react "6.10.3"
 
 eslint-import-resolver-node@^0.2.0:
@@ -2742,6 +2759,12 @@ eslint-plugin-jsx-a11y@^4.0.0:
     emoji-regex "^6.1.0"
     jsx-ast-utils "^1.0.0"
     object-assign "^4.0.1"
+
+eslint-plugin-prettier@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-prettier/-/eslint-plugin-prettier-2.0.1.tgz#2ae1216cf053dd728360ca8560bf1aabc8af3fa9"
+  dependencies:
+    requireindex "~1.1.0"
 
 eslint-plugin-react@6.10.3:
   version "6.10.3"
@@ -2998,7 +3021,7 @@ fb-watchman@^2.0.0:
   dependencies:
     bser "^2.0.0"
 
-fbjs@^0.8.4, fbjs@^0.8.5, fbjs@^0.8.7, fbjs@^0.8.8, fbjs@^0.8.9:
+fbjs@^0.8.4, fbjs@^0.8.5, fbjs@^0.8.7, fbjs@^0.8.9:
   version "0.8.11"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.11.tgz#340b590b8a2278a01ef7467c07a16da9b753db24"
   dependencies:
@@ -3313,14 +3336,6 @@ github@^0.2.4:
   resolved "https://registry.yarnpkg.com/github/-/github-0.2.4.tgz#24fa7f0e13fa11b946af91134c51982a91ce538b"
   dependencies:
     mime "^1.2.11"
-
-glamor@^2.20.12:
-  version "2.20.24"
-  resolved "https://registry.yarnpkg.com/glamor/-/glamor-2.20.24.tgz#a299af2eec687322634ba38e4a0854d8743d2041"
-  dependencies:
-    babel-runtime "^6.18.0"
-    fbjs "^0.8.8"
-    object-assign "^4.1.0"
 
 glob-base@^0.3.0:
   version "0.3.0"
@@ -4788,7 +4803,7 @@ lodash.keysin@^3.0.0:
     lodash.isarguments "^3.0.0"
     lodash.isarray "^3.0.0"
 
-lodash.map@^4.4.0:
+lodash.map@^4.4.0, lodash.map@^4.6.0:
   version "4.6.0"
   resolved "https://registry.yarnpkg.com/lodash.map/-/lodash.map-4.6.0.tgz#771ec7839e3473d9c4cde28b19394c3562f4f6d3"
 
@@ -5576,6 +5591,12 @@ p-locate@^2.0.0:
   dependencies:
     p-limit "^1.1.0"
 
+pad-right@^0.2.2:
+  version "0.2.2"
+  resolved "https://registry.yarnpkg.com/pad-right/-/pad-right-0.2.2.tgz#6fbc924045d244f2a2a244503060d3bfc6009774"
+  dependencies:
+    repeat-string "^1.5.2"
+
 pako@~0.2.0:
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/pako/-/pako-0.2.9.tgz#f3f7522f4ef782348da8161bad9ecfd51bf83a75"
@@ -6095,7 +6116,7 @@ prettier-eslint@^5.1.0:
     pretty-format "^19.0.0"
     require-relative "^0.8.7"
 
-prettier@^1.0.2:
+prettier@^1.0.2, prettier@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/prettier/-/prettier-1.1.0.tgz#9d6ad005703efefa66b6999b8916bfc6afeaf9f8"
   dependencies:
@@ -6806,6 +6827,10 @@ require-uncached@^1.0.2:
     caller-path "^0.1.0"
     resolve-from "^1.0.0"
 
+requireindex@~1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/requireindex/-/requireindex-1.1.0.tgz#e5404b81557ef75db6e49c5a72004893fe03e162"
+
 requires-port@1.x.x:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/requires-port/-/requires-port-1.0.0.tgz#925d2601d39ac485e091cf0da5c6e694dc3dcaff"
@@ -6867,6 +6892,10 @@ right-align@^0.1.1:
   resolved "https://registry.yarnpkg.com/right-align/-/right-align-0.1.3.tgz#61339b722fe6a3515689210d24e14c96148613ef"
   dependencies:
     align-text "^0.1.1"
+
+right-pad@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/right-pad/-/right-pad-1.0.1.tgz#8ca08c2cbb5b55e74dafa96bf7fd1a27d568c8d0"
 
 rimraf@2, rimraf@2.6.1, rimraf@^2.2.8, rimraf@^2.4.3, rimraf@^2.4.4, rimraf@^2.5.1, rimraf@^2.6.1:
   version "2.6.1"
@@ -7292,17 +7321,17 @@ style-search@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/style-search/-/style-search-0.1.0.tgz#7958c793e47e32e07d2b5cafe5c0bf8e12e77902"
 
-styled-components@^1.4.4:
-  version "1.4.4"
-  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-1.4.4.tgz#c944de423d8ae2363f2ba4ff8fc26d367e7dfa8f"
+styled-components@^1.4.4, styled-components@^1.4.5:
+  version "1.4.5"
+  resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-1.4.5.tgz#20c52f6355e28c7f20a99c05c6d5108a4858cfba"
   dependencies:
     buffer "^5.0.2"
     css-to-react-native "^1.0.6"
     fbjs "^0.8.7"
-    glamor "^2.20.12"
     inline-style-prefixer "^2.0.5"
     is-function "^1.0.1"
     is-plain-object "^2.0.1"
+    prop-types "^15.5.4"
     supports-color "^3.1.2"
 
 styled-theme@^0.3.3:
@@ -7943,6 +7972,10 @@ window-size@0.1.0:
 window-size@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.2.0.tgz#b4315bb4214a3d7058ebeee892e13fa24d98b075"
+
+word-wrap@^1.1.0:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/word-wrap/-/word-wrap-1.2.1.tgz#248f459b465d179a17bc407c854d3151d07e45d8"
 
 wordwrap@0.0.2, wordwrap@~0.0.2:
   version "0.0.2"

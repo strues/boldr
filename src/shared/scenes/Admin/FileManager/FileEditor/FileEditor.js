@@ -1,9 +1,9 @@
 /* @flow */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Paper, Grid, Row, Col, Image } from 'boldr-ui';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {Paper, Grid, Row, Col, Image} from 'boldr-ui';
 
-import { updateAttachment } from '../../../../state/modules/attachments/actions';
+import {updateAttachment} from '../../../../state/modules/attachments/actions';
 import config from '../../../../../../config';
 import FileEditorForm from '../components/FileEditorForm';
 
@@ -30,18 +30,21 @@ export class FileEditor extends Component {
     return (
       <div>
         <Row>
-          <Col xs={ 12 } md={ 5 }>
-            <Image imgSrc={ `${config('apiUrl')}${this.props.currentFile.url}` } width="400px" />
+          <Col xs={12} md={5}>
+            <Image
+              imgSrc={`${config('apiUrl')}${this.props.currentFile.url}`}
+              width="400px"
+            />
           </Col>
-          <Col xs={ 12 } md={ 7 }>
+          <Col xs={12} md={7}>
             <Paper
-              zDepth={ 2 }
-              style={ {
+              zDepth={2}
+              style={{
                 padding: '1em',
                 background: '#fff',
-              } }
+              }}
             >
-              <FileEditorForm onSubmit={ this.handleSubmit } />
+              <FileEditorForm onSubmit={this.handleSubmit} />
             </Paper>
           </Col>
         </Row>
@@ -56,4 +59,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { updateAttachment })(FileEditor);
+export default connect(mapStateToProps, {updateAttachment})(FileEditor);

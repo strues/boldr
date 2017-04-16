@@ -1,11 +1,12 @@
 /* @flow */
-import React, { Component, PropTypes } from 'react';
-import { Button } from 'boldr-ui';
+// $FlowIssue
+import React, {Component} from 'react';
+import {Button} from 'boldr-ui';
 
 import classNames from 'classnames/bind';
 import cxN from 'classnames';
 import Link from 'react-router-dom/Link';
-import type { ReactChildren } from '../../../types/react';
+import type {ReactChildren} from '../../../types/react';
 
 import Head from '../Head';
 import Detail from '../Detail';
@@ -67,27 +68,33 @@ class MainHeader extends Component {
 
   handleResize = () => {
     const mobileState = window.innerWidth < this.props.breakpoint;
-    this.setState({ mobileState }, () => {
+    this.setState({mobileState}, () => {
       this.addOverflowBody();
       this.setHeightDropdown();
     });
   };
 
   navbarDropdownHandler = () => {
-    this.setState({ navbarDropdownIsOpen: !this.state.navbarDropdownIsOpen }, this.addOverflowBody);
+    this.setState(
+      {navbarDropdownIsOpen: !this.state.navbarDropdownIsOpen},
+      this.addOverflowBody,
+    );
   };
 
-  closeDropdownOnButtonClick = callback =>
-    event => {
-      const isMobile = this.state.mobileState;
-      const isDropdownOpen = this.state.navbarDropdownIsOpen;
+  closeDropdownOnButtonClick = callback => event => {
+    const isMobile = this.state.mobileState;
+    const isDropdownOpen = this.state.navbarDropdownIsOpen;
 
-      if (callback) callback(event);
-      if (isMobile && isDropdownOpen) this.navbarDropdownHandler();
-    };
+    if (callback) {
+      callback(event);
+    }
+    if (isMobile && isDropdownOpen) {
+      this.navbarDropdownHandler();
+    }
+  };
 
   addOverflowBody() {
-    const { navbarDropdownIsOpen, mobileState } = this.state;
+    const {navbarDropdownIsOpen, mobileState} = this.state;
 
     if (navbarDropdownIsOpen && mobileState) {
       // $FlowIssue
@@ -99,24 +106,26 @@ class MainHeader extends Component {
   }
 
   handleKeyDown = e => {
-    if (e.keyCode !== 9 || this.state.focusable) return;
-    this.setState({ focusable: true });
+    if (e.keyCode !== 9 || this.state.focusable) {
+      return;
+    }
+    this.setState({focusable: true});
   };
 
   render() {
-    const {
-      className,
-      children,
-      theme,
-    } = this.props;
-    const { navbarDropdownIsOpen, mobileState, focusable } = this.state;
+    const {className, children, theme} = this.props;
+    const {navbarDropdownIsOpen, mobileState, focusable} = this.state;
 
     const actions = [];
 
     if (!this.props.auth.isAuthenticated) {
       actions.push(
-        <Link key="login" to="/account/login"><Button raised primary label="Log In" /></Link>,
-        <Link key="signup" to="/account/signup"><Button raised secondary label="Sign Up" /></Link>,
+        <Link key="login" to="/account/login">
+          <Button raised primary label="Log In" />
+        </Link>,
+        <Link key="signup" to="/account/signup">
+          <Button raised secondary label="Sign Up" />
+        </Link>,
       );
     }
     if (this.props.me.roleId === 3) {
@@ -130,12 +139,17 @@ class MainHeader extends Component {
     }
     if (this.props.auth.isAuthenticated) {
       actions.push(
-        <Link key="prof" to={ `/profiles/${this.props.me.username}` }>
+        <Link key="prof" to={`/profiles/${this.props.me.username}`}>
           <Button icon tooltipLabel="Profile">
             perm_identity
           </Button>
         </Link>,
-        <Button key="logout" icon onClick={ this.props.handleLogoutClick } tooltipLabel="Logout">
+        <Button
+          key="logout"
+          icon
+          onClick={this.props.handleLogoutClick}
+          tooltipLabel="Logout"
+        >
           exit_to_app
         </Button>,
       );
@@ -143,50 +157,53 @@ class MainHeader extends Component {
     /* eslint-disable jsx-a11y/no-static-element-interactions */
     return (
       <header
-        className={ cx('boldr-mainheader', ['theme-boldr'], className, {
+        className={cx('boldr-mainheader', ['theme-boldr'], className, {
           'boldr-mainheader__dropdown-open': navbarDropdownIsOpen,
           focusable,
-        }) }
-        onKeyDown={ this.handleKeyDown }
+        })}
+        onKeyDown={this.handleKeyDown}
       >
-        <div className={ cx('boldr-mainheader__menu', { 'boldr-mainheader__dropdown-open': navbarDropdownIsOpen }) }>
+        <div
+          className={cx('boldr-mainheader__menu', {
+            'boldr-mainheader__dropdown-open': navbarDropdownIsOpen,
+          })}
+        >
           <div className="grid">
             <Head
-              toggleDropdownHandler={ this.navbarDropdownHandler }
-              dropdownOpen={ navbarDropdownIsOpen }
-              theme={ theme }
+              toggleDropdownHandler={this.navbarDropdownHandler}
+              dropdownOpen={navbarDropdownIsOpen}
+              theme={theme}
               siteName="Boldr"
-              closeHeaderDropdown={ this.closeDropdownOnButtonClick() }
+              closeHeaderDropdown={this.closeDropdownOnButtonClick()}
             />
             <nav
-              className={ cx('boldr-mainheader__collapse', {
+              className={cx('boldr-mainheader__collapse', {
                 'boldr-mainheader__dropdown-open': navbarDropdownIsOpen,
-              }) }
-              ref={ _ref => {
-                // $FlowIssue
+              })}
+              ref={_ref => {
                 this.dropdownContent = _ref;
-              } }
+              }}
               aria-label="Main menu"
             >
-              <ul className={ cx('boldr-mainheader__nav') } role="menubar">
+              <ul className={cx('boldr-mainheader__nav')} role="menubar">
                 {this.props.menu.map(detail => (
                   <Detail
-                    key={ detail.uuid }
-                    detail={ detail }
+                    key={detail.uuid}
+                    detail={detail}
                     theme="theme-boldr"
-                    hasDropdown={ detail.has_dropdown }
-                    closeHeaderDropdown={ this.closeDropdownOnButtonClick() }
-                    moble={ mobileState }
+                    hasDropdown={detail.has_dropdown}
+                    closeHeaderDropdown={this.closeDropdownOnButtonClick()}
+                    moble={mobileState}
                   />
                 ))}
               </ul>
             </nav>
             <div
-              className={ cxN(
+              className={cxN(
                 cx('buttons-group', {
                   'boldr-mainheader__dropdown-open': navbarDropdownIsOpen,
                 }),
-              ) }
+              )}
             >
               {actions}
             </div>

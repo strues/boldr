@@ -1,25 +1,37 @@
-import React, { Component, PropTypes } from 'react';
+/* @flow */
+// $FlowIssue
+import React, {Component} from 'react';
 import classNames from 'classnames/bind';
 import NavLink from 'react-router-dom/NavLink';
-import { FontIcon } from 'boldr-ui';
+import {FontIcon} from 'boldr-ui';
 import styles from './dropdown-list-item.scss';
 
 const cx = classNames.bind(styles);
 
+type Props = {
+  item: Object,
+  closeDropdowns: () => void,
+};
 class DropdownListItem extends Component {
-  static propTypes = {
-    item: PropTypes.object,
-    closeDropdowns: PropTypes.func,
-  };
-
+  props: Props;
   render() {
-    const { item, closeDropdowns } = this.props;
+    const {item, closeDropdowns} = this.props;
 
     return (
-      <li className={ cx('boldr-menu__dropdown-listitem') } role="menuitem">
-        <NavLink className="dropdown-link" to={ item.href } onClick={ closeDropdowns }>
-          <FontIcon className={ cx('dropdown-link__icon') } role="presentation" alt="">{item.icon}</FontIcon>
-          <span className={ cx('dropdown-link__text') }>
+      <li className={cx('boldr-menu__dropdown-listitem')} role="menuitem">
+        <NavLink
+          className="dropdown-link"
+          to={item.href}
+          onClick={closeDropdowns}
+        >
+          <FontIcon
+            className={cx('dropdown-link__icon')}
+            role="presentation"
+            alt=""
+          >
+            {item.icon}
+          </FontIcon>
+          <span className={cx('dropdown-link__text')}>
             {item.name}
           </span>
         </NavLink>

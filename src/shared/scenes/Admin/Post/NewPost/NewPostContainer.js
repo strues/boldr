@@ -1,9 +1,9 @@
 /* @flow */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import draftToHtml from 'draftjs-to-html';
 
-import { createPost } from '../../../../state/modules/blog/posts';
+import {createPost} from '../../../../state/modules/blog/posts';
 import NewPost from './NewPost';
 
 type Props = {
@@ -36,7 +36,12 @@ class NewPostContainer extends Component {
   props: Props;
 
   render() {
-    return <NewPost onFormSubmit={ this.handleOnSubmit } postImage={ this.props.postImage } />;
+    return (
+      <NewPost
+        onFormSubmit={this.handleOnSubmit}
+        postImage={this.props.postImage}
+      />
+    );
   }
 }
 
@@ -46,4 +51,4 @@ const mapStateToProps = state => {
     drawer: state.boldr.ui.drawer,
   };
 };
-export default connect(mapStateToProps, { createPost })(NewPostContainer);
+export default connect(mapStateToProps, {createPost})(NewPostContainer);

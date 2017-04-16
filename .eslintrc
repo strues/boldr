@@ -25,6 +25,8 @@
     "import/no-unresolved": 0,
     "no-unused-expressions": 0,
     "camelcase": 0,
-    "babel/new-cap": 0
+    "babel/new-cap": 0,
+    "react/jsx-curly-spacing": 0,
+    "react/jsx-indent": 0
   }
 }

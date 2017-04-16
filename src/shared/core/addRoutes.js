@@ -1,26 +1,29 @@
 import React from 'react';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import Route from 'react-router-dom/Route';
+import Switch from 'react-router-dom/Switch';
+import Redirect from 'react-router-dom/Redirect';
 import uuid from 'uuid';
 
 const checkAuth = (store, route, props) => {
   if (!route.auth) {
-    return <route.component { ...props } route={ route } />;
+    return <route.component {...props} route={route} />;
   }
 
-  const { isAuthenticated } = store.getState().auth;
-  const { required, redirect, status } = route.auth;
+  const {isAuthenticated} = store.getState().auth;
+  const {required, redirect, status} = route.auth;
 
-  const isRedirect = (required && !isAuthenticated) || (!required && isAuthenticated);
+  const isRedirect =
+    (required && !isAuthenticated) || (!required && isAuthenticated);
 
   if (isRedirect) {
     if (props.staticContext) {
       props.staticContext.status = status;
     }
 
-    return <Redirect from={ route.path } to={ redirect } status={ status } />;
+    return <Redirect from={route.path} to={redirect} status={status} />;
   }
 
-  return <route.component { ...props } route={ route } />;
+  return <route.component {...props} route={route} />;
 };
 
 checkAuth.propTypes = {
@@ -35,11 +38,11 @@ const RouteManager = (props, context) => (
   <Switch>
     {props.routes.map(route => (
       <Route
-        key={ uuid.v4() }
-        path={ route.path }
-        render={ props => checkAuth(context.store, route, props) }
-        exact={ route.exact }
-        strict={ route.strict }
+        key={uuid.v4()}
+        path={route.path}
+        render={props => checkAuth(context.store, route, props)}
+        exact={route.exact}
+        strict={route.strict}
       />
     ))}
   </Switch>
@@ -58,5 +61,5 @@ export default routes => {
     return null;
   }
 
-  return <RouteManager routes={ routes } />;
+  return <RouteManager routes={routes} />;
 };

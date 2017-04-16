@@ -1,9 +1,9 @@
 /* @flow */
 
-import React, { Component } from 'react';
-import { Grid, Col, Row, Loader } from 'boldr-ui';
+import React, {Component} from 'react';
+import {Grid, Col, Row, Loader} from 'boldr-ui';
 
-import { fetchTagPosts } from '../../../state/modules/blog/tags/actions';
+import {fetchTagPosts} from '../../../state/modules/blog/tags/actions';
 import PostCard from '../components/PostCard';
 
 type Props = {
@@ -20,8 +20,8 @@ const TagList = (props: Props) => {
       <Grid fluid>
         <Row>
           {props.posts.map(post => (
-            <Col key={ post.id } xs={ 12 } md={ 4 }>
-              <PostCard listTags={ props.listTags } { ...post } />
+            <Col key={post.id} xs={12} md={4}>
+              <PostCard listTags={props.listTags} {...post} />
             </Col>
           ))}
         </Row>

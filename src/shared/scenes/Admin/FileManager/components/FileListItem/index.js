@@ -1,1 +1,1 @@
-export { default } from './FileListItem';
+export {default} from './FileListItem';

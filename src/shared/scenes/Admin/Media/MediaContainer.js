@@ -1,9 +1,9 @@
 /* @flow */
 /* eslint-disable react/prefer-stateless-function */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
-import { fetchMediaIfNeeded } from '../../../state/modules/media/actions';
+import {fetchMediaIfNeeded} from '../../../state/modules/media/actions';
 import Media from './Media';
 
 type Props = {

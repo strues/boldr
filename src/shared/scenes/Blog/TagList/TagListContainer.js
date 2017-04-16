@@ -1,12 +1,12 @@
 /* @flow */
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Grid, Col, Row, Loader } from 'boldr-ui';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {Grid, Col, Row, Loader} from 'boldr-ui';
 import Helmet from 'react-helmet';
 
 import BaseTemplate from '../../../templates/BaseTemplate';
-import { fetchTagPostsIfNeeded } from '../../../state/modules/blog/tags/actions';
+import {fetchTagPostsIfNeeded} from '../../../state/modules/blog/tags/actions';
 import TagList from './TagList';
 
 type Props = {
@@ -24,20 +24,25 @@ export class TagListContainer extends Component {
   };
 
   componentDidMount() {
-    const { fetchTagPostsIfNeeded, match: { params } } = this.props;
+    const {fetchTagPostsIfNeeded, match: {params}} = this.props;
 
     fetchTagPostsIfNeeded(params.name);
   }
 
   props: Props;
   render() {
-    const { match: { params } } = this.props;
+    const {match: {params}} = this.props;
     if (this.props.isFetching) {
       return <Loader />;
     }
     return (
-      <BaseTemplate helmetMeta={ <Helmet title={ `Posts tagged ${params.name}` } /> }>
-        <TagList listTags={ this.props.listTags } posts={ this.props.currentTag.posts } />
+      <BaseTemplate
+        helmetMeta={<Helmet title={`Posts tagged ${params.name}`} />}
+      >
+        <TagList
+          listTags={this.props.listTags}
+          posts={this.props.currentTag.posts}
+        />
       </BaseTemplate>
     );
   }
@@ -51,4 +56,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { fetchTagPostsIfNeeded })(TagListContainer);
+export default connect(mapStateToProps, {fetchTagPostsIfNeeded})(
+  TagListContainer,
+);

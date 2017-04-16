@@ -1,9 +1,9 @@
-import { normalize, schema } from 'normalizr';
+import {normalize, schema} from 'normalizr';
 import Axios from 'axios';
 import * as notif from '../../../../core/constants';
-import { notificationSend } from '../../notifications/notifications';
+import {notificationSend} from '../../notifications/notifications';
 import * as t from '../../actionTypes';
-import { detail, menu } from './schema';
+import {detail, menu} from './schema';
 
 /**
   * FETCH MENUS ACTIONS
@@ -13,33 +13,38 @@ import { detail, menu } from './schema';
   *****************************************************************/
 
 /* istanbul ignore next */
-export const fetchMenusIfNeeded = (): ThunkAction =>
-  (dispatch: Dispatch, getState: GetState, axios: any) => {
+export const fetchMenusIfNeeded = (): ThunkAction => (
+  dispatch: Dispatch,
+  getState: GetState,
+  axios: any,
+) => {
+  /* istanbul ignore next */
+  if (shouldFetchMenus(getState())) {
     /* istanbul ignore next */
-    if (shouldFetchMenus(getState())) {
-      /* istanbul ignore next */
-      return dispatch(fetchMenus(axios));
-    }
+    return dispatch(fetchMenus(axios));
+  }
 
-    /* istanbul ignore next */
-    return null;
-  };
+  /* istanbul ignore next */
+  return null;
+};
 
-export const fetchMenus = (axios: any): ThunkAction =>
-  (dispatch: Dispatch) => {
-    dispatch({ type: t.GET_MAIN_MENU_REQUEST });
+export const fetchMenus = (axios: any): ThunkAction => (dispatch: Dispatch) => {
+  dispatch({type: t.GET_MAIN_MENU_REQUEST});
 
-    return Axios
-      .get('/api/v1/menus/1')
-      .then(res => {
-        dispatch({ type: t.GET_MAIN_MENU_SUCCESS,
-          payload: res.data });
-      })
-      .catch(err => {
-        dispatch({ type: t.GET_MAIN_MENU_SUCCESS,
-          error: err });
+  return Axios.get('/api/v1/menus/1')
+    .then(res => {
+      dispatch({
+        type: t.GET_MAIN_MENU_SUCCESS,
+        payload: res.data,
       });
-  };
+    })
+    .catch(err => {
+      dispatch({
+        type: t.GET_MAIN_MENU_SUCCESS,
+        error: err,
+      });
+    });
+};
 function shouldFetchMenus(state) {
   const menu = state.boldr.menu.main.details;
   if (!menu.length) {

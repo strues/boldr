@@ -1,10 +1,14 @@
 /* @flow */
 /* eslint-disable react/prefer-stateless-function */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
-import { showModal, hideModal } from '../../../state/modules/boldr/ui/actions';
-import { fetchMembersIfNeeded, memberSelected, updateMember } from '../../../state/modules/admin/members/actions';
+import {showModal, hideModal} from '../../../state/modules/boldr/ui/actions';
+import {
+  fetchMembersIfNeeded,
+  memberSelected,
+  updateMember,
+} from '../../../state/modules/admin/members/actions';
 import Members from './Members';
 
 type Props = {
@@ -30,7 +34,7 @@ export class MembersContainer extends Component {
     (this: any).closeModal = this.closeModal.bind(this);
     (this: any).openModal = this.openModal.bind(this);
   }
-  state: Object = { userId: '' };
+  state: Object = {userId: ''};
 
   componentDidMount() {
     this.props.dispatch(fetchMembersIfNeeded());
@@ -45,7 +49,7 @@ export class MembersContainer extends Component {
   }
 
   toggleUser(userId: String) {
-    const { dispatch } = this.props;
+    const {dispatch} = this.props;
     dispatch(memberSelected(userId));
     dispatch(showModal());
   }
@@ -62,15 +66,15 @@ export class MembersContainer extends Component {
     this.props.dispatch(updateMember(userData));
   }
   render() {
-    const { members, ui } = this.props;
+    const {members, ui} = this.props;
     return (
       <Members
-        toggleUser={ this.toggleUser }
-        users={ members.members }
-        visible={ ui.modal }
-        close={ this.closeModal }
-        handleSubmit={ this.handleSubmit }
-        initialValues={ members.selected[0] }
+        toggleUser={this.toggleUser}
+        users={members.members}
+        visible={ui.modal}
+        close={this.closeModal}
+        handleSubmit={this.handleSubmit}
+        initialValues={members.selected[0]}
       />
     );
   }

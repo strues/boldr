@@ -1,6 +1,6 @@
 /* flow */
 import React from 'react';
-import { Divider, Paper, Col, Heading, Icon } from 'boldr-ui';
+import {Divider, Paper, Col, Heading, Icon} from 'boldr-ui';
 import PostImage from '../PostImage';
 import PostTitle from '../PostTitle';
 import PostDate from '../PostDate';
@@ -21,17 +21,20 @@ const PostContent = (props: Props) => {
   return (
     <article>
       <Paper
-        zDepth={ 2 }
-        style={ {
+        zDepth={2}
+        style={{
           padding: '1em',
           marginBottom: '50px',
-        } }
+        }}
         className="boldr-paperoverride"
       >
 
-        <PostDate created={ props.createdAt } />
+        <PostDate created={props.createdAt} />
         <Divider />
-        <div className="boldr-post__content" dangerouslySetInnerHTML={ createMarkup() } />
+        <div
+          className="boldr-post__content"
+          dangerouslySetInnerHTML={createMarkup()}
+        />
       </Paper>
     </article>
   );

@@ -1,10 +1,10 @@
-import { normalize, arrayOf } from 'normalizr';
-import { push } from 'react-router-redux';
+import {normalize, arrayOf} from 'normalizr';
+import {push} from 'react-router-redux';
 import Axios from 'axios';
 import * as notif from '../../../../core/constants';
-import { notificationSend } from '../../notifications/notifications';
+import {notificationSend} from '../../notifications/notifications';
 import * as t from '../../actionTypes';
-import { setting as settingSchema, arrayOfSetting } from './schema';
+import {setting as settingSchema, arrayOfSetting} from './schema';
 
 /**
   * FETCH SETTINGS ACTIONS
@@ -23,39 +23,43 @@ import { setting as settingSchema, arrayOfSetting } from './schema';
  */
 
 /* istanbul ignore next */
-export const fetchSettingsIfNeeded = (): ThunkAction =>
-  (dispatch: Dispatch, getState: GetState, axios: any) => {
+export const fetchSettingsIfNeeded = (): ThunkAction => (
+  dispatch: Dispatch,
+  getState: GetState,
+  axios: any,
+) => {
+  /* istanbul ignore next */
+  if (shouldFetchSettings(getState())) {
     /* istanbul ignore next */
-    if (shouldFetchSettings(getState())) {
-      /* istanbul ignore next */
-      return dispatch(fetchSettings(axios));
-    }
+    return dispatch(fetchSettings(axios));
+  }
 
-    /* istanbul ignore next */
-    return null;
-  };
+  /* istanbul ignore next */
+  return null;
+};
 
-export const fetchSettings = (axios: any): ThunkAction =>
-  (dispatch: Dispatch) => {
-    dispatch({ type: t.FETCH_SETTINGS_REQUEST });
+export const fetchSettings = (axios: any): ThunkAction => (
+  dispatch: Dispatch,
+) => {
+  dispatch({type: t.FETCH_SETTINGS_REQUEST});
 
-    return Axios.get('/api/v1/settings')
-      .then(res => {
-        const settingsData = res.data;
-        const normalizedSettings = normalize(settingsData, arrayOfSetting);
+  return Axios.get('/api/v1/settings')
+    .then(res => {
+      const settingsData = res.data;
+      const normalizedSettings = normalize(settingsData, arrayOfSetting);
 
-        dispatch({
-          type: t.FETCH_SETTINGS_SUCCESS,
-          payload: normalizedSettings,
-        });
-      })
-      .catch(err => {
-        dispatch({
-          type: t.FETCH_SETTINGS_FAILURE,
-          error: err,
-        });
+      dispatch({
+        type: t.FETCH_SETTINGS_SUCCESS,
+        payload: normalizedSettings,
       });
-  };
+    })
+    .catch(err => {
+      dispatch({
+        type: t.FETCH_SETTINGS_FAILURE,
+        error: err,
+      });
+    });
+};
 /**
  * @function shouldFetchSettings
  * Called by fetchSettingsIfNeeded

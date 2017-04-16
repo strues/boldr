@@ -1,9 +1,9 @@
 import React from 'react';
-import { renderToString, renderToStaticMarkup } from 'react-dom/server';
-import { Provider } from 'react-redux';
+import {renderToString, renderToStaticMarkup} from 'react-dom/server';
+import {Provider} from 'react-redux';
 import createHistory from 'history/createMemoryHistory';
-import { StaticRouter } from 'react-router-dom';
-import { matchRoutes } from 'react-router-config';
+import {StaticRouter} from 'react-router-dom';
+import {matchRoutes} from 'react-router-config';
 import styleSheet from 'styled-components/lib/models/StyleSheet';
 import Helmet from 'react-helmet';
 
@@ -16,8 +16,8 @@ const debug = require('debug')('boldr:ssrMW');
 
 function renderAppToString(store, routerContext, req) {
   return renderToString(
-    <Provider store={ store }>
-      <StaticRouter location={ req.url } context={ routerContext }>
+    <Provider store={store}>
+      <StaticRouter location={req.url} context={routerContext}>
         {renderRoutes(routes)}
       </StaticRouter>
     </Provider>,
@@ -29,9 +29,9 @@ function boldrSSR(req, res, next) {
     throw new Error('A "nonce" value has not been attached to the response');
   }
 
-  const { nonce } = res.locals;
+  const {nonce} = res.locals;
 
-  global.navigator = { userAgent: req.headers['user-agent'] };
+  global.navigator = {userAgent: req.headers['user-agent']};
 
   const createStore = req => configureStore({});
 
@@ -42,9 +42,11 @@ function boldrSSR(req, res, next) {
   // Load data on server-side
   const loadBranchData = async () => {
     const branch = await matchRoutes(routes, req.url);
-    const promises = branch.map(({ route, match }) => {
+    const promises = branch.map(({route, match}) => {
       // Dispatch the action(s) through the loadData method of "./routes.js"
-      if (route.loadData) return route.loadData(store.dispatch, match.params);
+      if (route.loadData) {
+        return route.loadData(store.dispatch, match.params);
+      }
 
       return Promise.resolve(null);
     });
@@ -65,11 +67,11 @@ function boldrSSR(req, res, next) {
 
       const html = renderToStaticMarkup(
         <ServerHTML
-          reactAppString={ reactAppString }
-          nonce={ nonce }
-          helmet={ Helmet.rewind() }
-          styles={ styles }
-          preloadedState={ store.getState() }
+          reactAppString={reactAppString}
+          nonce={nonce}
+          helmet={Helmet.rewind()}
+          styles={styles}
+          preloadedState={store.getState()}
         />,
       );
 

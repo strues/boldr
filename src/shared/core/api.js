@@ -1,6 +1,6 @@
 /* eslint-disable dot-notation */
 import axios from 'axios';
-import { getToken } from './authentication/token';
+import {getToken} from './authentication/token';
 
 const isBrowser = typeof window === 'object';
 const token = isBrowser ? getToken() : null;
@@ -10,11 +10,14 @@ const api = axios.create({
 });
 
 api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-api.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8';
+api.defaults.headers.post['Content-Type'] =
+  'application/x-www-form-urlencoded; charset=UTF-8';
 
 api.onUnauthorizedError = callback => {
   api.interceptors.response.use(response => {
-    if (response.status === 401) callback(response);
+    if (response.status === 401) {
+      callback(response);
+    }
     return response;
   });
 };

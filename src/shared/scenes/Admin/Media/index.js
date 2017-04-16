@@ -3,4 +3,4 @@ import MediaContainer from './MediaContainer';
 
 export default MediaContainer;
 
-export { Media };
+export {Media};

@@ -1,12 +1,23 @@
 /* @flow */
-import React, { Component } from 'react';
-import { Toolbar, Button, Collapse, FontIcon, Paper, Tabs, Tab, CircularProgress, TabsContainer, Slider } from 'boldr-ui';
-import CSSTransitionGroup from 'react-addons-css-transition-group';
+import React, {Component} from 'react';
+import {
+  Toolbar,
+  Button,
+  Collapse,
+  FontIcon,
+  Paper,
+  Tabs,
+  Tab,
+  CircularProgress,
+  TabsContainer,
+  Slider,
+} from 'boldr-ui';
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import Dropzone from 'react-dropzone';
 import Helmet from 'react-helmet';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 
-import { uploadFiles } from '../../../state/modules/attachments/actions';
+import {uploadFiles} from '../../../state/modules/attachments/actions';
 import FileCardView from './components/FileCardView';
 import FileListView from './components/FileListView';
 
@@ -59,39 +70,46 @@ class FileManager extends Component {
   }
 
   _handleTabChange(activeTabIndex: Number) {
-    this.setState({ activeTabIndex });
+    this.setState({activeTabIndex});
   }
   _toggleCollapse() {
-    this.setState({ collapsed: !this.state.collapsed });
+    this.setState({collapsed: !this.state.collapsed});
   }
   render() {
-    const { activeTabIndex } = this.state;
-    let { tabTwoChildren } = this.state;
+    const {activeTabIndex} = this.state;
+    let {tabTwoChildren} = this.state;
 
     if (!tabTwoChildren && activeTabIndex === 1) {
       tabTwoChildren = <CircularProgress id="loading-tab-two" key="loading" />;
     }
-    const { attachments, handleRemoveMedia, onUploadFinish, ui } = this.props;
+    const {attachments, handleRemoveMedia, onUploadFinish, ui} = this.props;
     return (
       <div>
         <Helmet title="Admin: File Manager" />
         <Toolbar
-          titleStyle={ { color: '#fff' } }
-          style={ { backgroundColor: '#22262d' } }
+          titleStyle={{color: '#fff'}}
+          style={{backgroundColor: '#22262d'}}
           title="File Manager"
-          nav={ null }
-          actions={ <Button onClick={ this._toggleCollapse } label="Upload File" raised primary /> }
+          nav={null}
+          actions={
+            <Button
+              onClick={this._toggleCollapse}
+              label="Upload File"
+              raised
+              primary
+            />
+          }
         />
-        <Collapse collapsed={ this.state.collapsed }>
+        <Collapse collapsed={this.state.collapsed}>
           <Dropzone
             className="boldr-dropzone boldr-dropzone__panel"
-            ref={ node => {
+            ref={node => {
               (this: any).dropzone = node;
-            } }
-            multiple={ false }
-            onDrop={ this.onDrop }
+            }}
+            multiple={false}
+            onDrop={this.onDrop}
             accept="image/*"
-            maxSize={ 5242880 }
+            maxSize={5242880}
           >
             <p className="boldr-dropzone__drop">
               Drop an image here or select one from your computer. <br />
@@ -100,17 +118,17 @@ class FileManager extends Component {
           </Dropzone>
         </Collapse>
         <TabsContainer
-          onTabChange={ this._handleTabChange }
-          activeTabIndex={ activeTabIndex }
+          onTabChange={this._handleTabChange}
+          activeTabIndex={activeTabIndex}
           panelClassName="md-grid"
           colored
         >
           <Tabs tabId="tab">
             <Tab label="Card View">
               <FileCardView
-                files={ attachments.files }
-                removeMedia={ handleRemoveMedia }
-                selectFile={ this.props.selectFile }
+                files={attachments.files}
+                removeMedia={handleRemoveMedia}
+                selectFile={this.props.selectFile}
               />
             </Tab>
             <Tab label="List View">
@@ -118,13 +136,13 @@ class FileManager extends Component {
                 component="div"
                 className="md-cell md-cell--12"
                 transitionName="md-cross-fade"
-                transitionEnterTimeout={ 300 }
-                transitionLeave={ false }
+                transitionEnterTimeout={300}
+                transitionLeave={false}
               >
                 <FileListView
-                  files={ attachments.files }
-                  removeMedia={ handleRemoveMedia }
-                  selectFile={ this.props.selectFile }
+                  files={attachments.files}
+                  removeMedia={handleRemoveMedia}
+                  selectFile={this.props.selectFile}
                 />
               </CSSTransitionGroup>
             </Tab>

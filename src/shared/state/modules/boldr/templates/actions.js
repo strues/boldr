@@ -1,10 +1,10 @@
-import { normalize, arrayOf, schema } from 'normalizr';
-import { push } from 'react-router-redux';
+import {normalize, arrayOf, schema} from 'normalizr';
+import {push} from 'react-router-redux';
 import Axios from 'axios';
 import * as notif from '../../../../core/constants';
-import { notificationSend } from '../../notifications/notifications';
+import {notificationSend} from '../../notifications/notifications';
 import * as t from '../../actionTypes';
-import { template as templateSchema, arrayOfTemplate } from './schema';
+import {template as templateSchema, arrayOfTemplate} from './schema';
 /**
   * FETCH TEMPLATES
   * -------------------------
@@ -13,40 +13,44 @@ import { template as templateSchema, arrayOfTemplate } from './schema';
   *****************************************************************/
 
 /* istanbul ignore next */
-export const fetchTemplatesIfNeeded = (): ThunkAction =>
-  (dispatch: Dispatch, getState: GetState, axios: any) => {
+export const fetchTemplatesIfNeeded = (): ThunkAction => (
+  dispatch: Dispatch,
+  getState: GetState,
+  axios: any,
+) => {
+  /* istanbul ignore next */
+  if (shouldFetchTemplates(getState())) {
     /* istanbul ignore next */
-    if (shouldFetchTemplates(getState())) {
-      /* istanbul ignore next */
-      return dispatch(fetchTemplates(axios));
-    }
+    return dispatch(fetchTemplates(axios));
+  }
 
-    /* istanbul ignore next */
-    return null;
-  };
+  /* istanbul ignore next */
+  return null;
+};
 
-export const fetchTemplates = (axios: any): ThunkAction =>
-  (dispatch: Dispatch) => {
-    dispatch({ type: t.FETCH_TEMPLATES_REQUEST });
+export const fetchTemplates = (axios: any): ThunkAction => (
+  dispatch: Dispatch,
+) => {
+  dispatch({type: t.FETCH_TEMPLATES_REQUEST});
 
-    return axios
-      .get('/api/v1/templates')
-      .then(res => {
-        const tmpls = res.data.results;
-        const normalizedTemplates = normalize(tmpls, arrayOfTemplate);
+  return axios
+    .get('/api/v1/templates')
+    .then(res => {
+      const tmpls = res.data.results;
+      const normalizedTemplates = normalize(tmpls, arrayOfTemplate);
 
-        dispatch({
-          type: t.FETCH_TEMPLATES_SUCCESS,
-          payload: normalizedTemplates,
-        });
-      })
-      .catch(err => {
-        dispatch({
-          type: t.FETCH_TEMPLATES_FAILURE,
-          error: err,
-        });
+      dispatch({
+        type: t.FETCH_TEMPLATES_SUCCESS,
+        payload: normalizedTemplates,
       });
-  };
+    })
+    .catch(err => {
+      dispatch({
+        type: t.FETCH_TEMPLATES_FAILURE,
+        error: err,
+      });
+    });
+};
 
 function shouldFetchTemplates(state) {
   const templates = state.boldr.templates.labels;
@@ -79,7 +83,7 @@ export function fetchTemplateResource(resource) {
 }
 
 const requestTemplate = () => {
-  return { type: t.FETCH_TEMPLATE_REQUEST };
+  return {type: t.FETCH_TEMPLATE_REQUEST};
 };
 
 const receiveTemplate = res => ({

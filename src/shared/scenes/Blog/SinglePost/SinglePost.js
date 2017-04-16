@@ -1,13 +1,13 @@
 // @flow
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
+import React, {PureComponent} from 'react';
+import {connect} from 'react-redux';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import classnames from 'classnames';
-import { Grid, Row, Col, Heading, StyleClasses } from 'boldr-ui';
+import {Grid, Row, Col, Heading, StyleClasses} from 'boldr-ui';
 
-import { getPosts, fetchPostIfNeeded } from '../../../state/modules/blog/posts';
-import { PostSidebar, PostContent, PostTitle } from '../components';
+import {getPosts, fetchPostIfNeeded} from '../../../state/modules/blog/posts';
+import {PostSidebar, PostContent, PostTitle} from '../components';
 import BaseTemplate from '../../../templates/BaseTemplate';
 
 const BASE_ELEMENT = StyleClasses.SINGLE_POST;
@@ -31,7 +31,7 @@ const mapStateToProps = (state, ownProps) => {
   };
 };
 
-@connect(mapStateToProps, { fetchPostIfNeeded })
+@connect(mapStateToProps, {fetchPostIfNeeded})
 class SinglePost extends PureComponent {
   static defaultProps: {
     currentPost: {},
@@ -40,37 +40,37 @@ class SinglePost extends PureComponent {
   };
 
   componentDidMount() {
-    const { fetchPostIfNeeded, match: { params } } = this.props;
+    const {fetchPostIfNeeded, match: {params}} = this.props;
 
     fetchPostIfNeeded(params.slug);
   }
   props: Props;
 
   displaySinglePost = () => {
-    const { currentPost, entities, className } = this.props;
-    const { author } = currentPost;
+    const {currentPost, entities, className} = this.props;
+    const {author} = currentPost;
     const postAuthor = entities.users[author];
 
     const classes = classnames(BASE_ELEMENT, className);
     return (
-      <BaseTemplate helmetMeta={ <Helmet title={ currentPost.title } /> }>
-        <div className={ classes }>
+      <BaseTemplate helmetMeta={<Helmet title={currentPost.title} />}>
+        <div className={classes}>
           {this.renderPostBg()}
           <Grid>
             <Row>
-              <Col sm={ 12 } md={ 8 } lg={ 9 }>
-                <PostContent { ...currentPost } />
+              <Col sm={12} md={8} lg={9}>
+                <PostContent {...currentPost} />
               </Col>
               {!currentPost.tags
                 ? null
-                : <Col sm={ 12 } md={ 4 } lg={ 3 }>
-                  <PostSidebar
-                    postAuthor={ entities.users[author] }
-                    postTags={ currentPost.tags.map(id => entities.tags[id]) }
-                    className={ this.props.sidebarClassName }
-                    { ...currentPost }
-                  />
-                </Col>}
+                : <Col sm={12} md={4} lg={3}>
+                    <PostSidebar
+                      postAuthor={entities.users[author]}
+                      postTags={currentPost.tags.map(id => entities.tags[id])}
+                      className={this.props.sidebarClassName}
+                      {...currentPost}
+                    />
+                  </Col>}
             </Row>
           </Grid>
         </div>
@@ -78,7 +78,7 @@ class SinglePost extends PureComponent {
     );
   };
   renderPostBg = () => {
-    const { currentPost } = this.props;
+    const {currentPost} = this.props;
     const PostBg = styled.section`
       max-height: 400px;
       min-height: 400px;
@@ -93,14 +93,14 @@ class SinglePost extends PureComponent {
       background-position-y: 0px;
       margin-bottom: 30px;
     `;
-    return <PostBg><PostTitle title={ currentPost.title } /></PostBg>;
+    return <PostBg><PostTitle title={currentPost.title} /></PostBg>;
   };
   render() {
-    const { currentPost } = this.props;
+    const {currentPost} = this.props;
 
     return (
       <div>
-        <Helmet title={ currentPost.title } />
+        <Helmet title={currentPost.title} />
         {this.displaySinglePost()}
       </div>
     );

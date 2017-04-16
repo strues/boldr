@@ -1,8 +1,8 @@
 import React from 'react';
-import { createStore } from 'redux';
-import { shallow } from 'enzyme';
-import { shallowToJson } from 'enzyme-to-json';
-import { PostCard } from './PostCard';
+import {createStore} from 'redux';
+import {shallow} from 'enzyme';
+import {shallowToJson} from 'enzyme-to-json';
+import {PostCard} from './PostCard';
 
 describe('<PostCard />', () => {
   it('renders <PostCard /> without breaking', () => {
@@ -19,7 +19,9 @@ describe('<PostCard />', () => {
         slug="test-post"
       />,
     );
-    expect(wrapper.instance().props.feature_image).toBe('http://boldr.io/images/logo.png');
+    expect(wrapper.instance().props.feature_image).toBe(
+      'http://boldr.io/images/logo.png',
+    );
     expect(wrapper.instance().props.title).toBe('Test Post');
     expect(wrapper.instance().props.excerpt).toBe('An excerpt');
     expect(wrapper.instance().props.slug).toBe('test-post');

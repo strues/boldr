@@ -1,11 +1,12 @@
 /* @flow */
-
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import Link from 'react-router-dom/Link';
-import { Toolbar, MenuButton, List, ListItem, Loader } from 'boldr-ui';
+import {Toolbar, MenuButton, List, ListItem, Loader} from 'boldr-ui';
 
-import { fetchTagPostsIfNeeded } from '../../../../../state/modules/blog/tags/actions';
+import {
+  fetchTagPostsIfNeeded,
+} from '../../../../../state/modules/blog/tags/actions';
 import TaggedPostMenu from '../TaggedPostMenu';
 
 type Props = {
@@ -25,7 +26,7 @@ class TaggedPost extends Component {
 
   props: Props;
   render() {
-    const { currentTag, isFetching } = this.props;
+    const {currentTag, isFetching} = this.props;
     if (isFetching) {
       return <Loader />;
     }
@@ -35,11 +36,20 @@ class TaggedPost extends Component {
 
     return (
       <div>
-        <Toolbar colored title={ `Posts tagged ${currentTag.name}` } nav={ null } actions={ null } />
+        <Toolbar
+          colored
+          title={`Posts tagged ${currentTag.name}`}
+          nav={null}
+          actions={null}
+        />
         <List>
           {currentTag.posts &&
             currentTag.posts.map(post => (
-              <ListItem key={ post.id } primaryText={ post.title } rightAvatar={ <TaggedPostMenu post={ post } /> } />
+              <ListItem
+                key={post.id}
+                primaryText={post.title}
+                rightAvatar={<TaggedPostMenu post={post} />}
+              />
             ))}
         </List>
       </div>
@@ -55,4 +65,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { fetchTagPostsIfNeeded })(TaggedPost);
+export default connect(mapStateToProps, {fetchTagPostsIfNeeded})(TaggedPost);

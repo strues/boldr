@@ -1,7 +1,8 @@
 import React from 'react';
-import { mount, shallow } from 'enzyme';
+import {mount, shallow} from 'enzyme';
 import fakeAttachment from '../../__fixtures__/attachment.fixture';
-import createRouterContext from '../../../../../../../internal/jest/createRouteContext';
+import createRouterContext
+  from '../../../../../../../internal/jest/createRouteContext';
 import FileListItem from './FileListItem';
 
 const file = {
@@ -18,11 +19,13 @@ test('<FileListItem />, renders the widget with props', () => {
   };
   const context = createRouterContext();
   const wrapper = mount(
-    <FileListItem imgSrc={ fakeAttachment.url } file={ file }>
+    <FileListItem imgSrc={fakeAttachment.url} file={file}>
       {fakeAttachment.fileName}
     </FileListItem>,
-    { context,
-      childContextTypes },
+    {
+      context,
+      childContextTypes,
+    },
   );
 
   expect(wrapper.html()).toContain('BkRV_tCDe.jpg');

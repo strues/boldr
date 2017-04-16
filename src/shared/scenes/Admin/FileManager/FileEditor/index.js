@@ -1,1 +1,1 @@
-export { default } from './FileEditor';
+export {default} from './FileEditor';

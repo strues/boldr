@@ -1,11 +1,22 @@
 /* @flow */
 import React from 'react';
 import Link from 'react-router-dom/Link';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import dateFns from 'date-fns';
 import classnames from 'classnames';
-import { Button, Card, CardTitle, CardActions, CardText, Col, Row, StyleClasses, Media, MediaOverlay } from 'boldr-ui';
-import { selectPost } from '../../../../state/modules/blog/posts/actions';
+import {
+  Button,
+  Card,
+  CardTitle,
+  CardActions,
+  CardText,
+  Col,
+  Row,
+  StyleClasses,
+  Media,
+  MediaOverlay,
+} from 'boldr-ui';
+import {selectPost} from '../../../../state/modules/blog/posts/actions';
 
 import TagBlock from '../TagBlock';
 
@@ -59,12 +70,16 @@ export const PostCard = (props: Props) => {
   }
 
   return (
-    <div className={ classes }>
+    <div className={classes}>
       <Card>
         <Media>
-          <img src={ props.featureImage } alt={ `${props.title} feature` } role="presentation" />
+          <img
+            src={props.featureImage}
+            alt={`${props.title} feature`}
+            role="presentation"
+          />
           <MediaOverlay>
-            <CardTitle title={ props.title } subtitle={ formattedDate }>
+            <CardTitle title={props.title} subtitle={formattedDate}>
               <Button className="md-cell--right" icon>star_outline</Button>
             </CardTitle>
           </MediaOverlay>
@@ -72,19 +87,24 @@ export const PostCard = (props: Props) => {
         <CardText>
           {props.excerpt}
           <Row>
-            <Col xs={ 12 }>
-              <Link to={ `/blog/${props.slug}` } className="readmore-link">
-                <Button raised primary label="Read More" onClick={ transitionPost } />
+            <Col xs={12}>
+              <Link to={`/blog/${props.slug}`} className="readmore-link">
+                <Button
+                  raised
+                  primary
+                  label="Read More"
+                  onClick={transitionPost}
+                />
               </Link>
             </Col>
           </Row>
         </CardText>
         <CardActions>
-          <TagBlock tags={ postTags } />
+          <TagBlock tags={postTags} />
         </CardActions>
       </Card>
     </div>
   );
 };
 
-export default connect(state => state, null, null, { pure: true })(PostCard);
+export default connect(state => state, null, null, {pure: true})(PostCard);

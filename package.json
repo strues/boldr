@@ -73,7 +73,7 @@
     "axios": "^0.16.1",
     "better-npm-run": "^0.0.15",
     "bluebird": "^3.5.0",
-    "boldr-ui": "0.2.1",
+    "boldr-ui": "0.2.5",
     "boldr-utils": "0.1.15",
     "chalk": "^1.1.3",
     "classnames": "^2.2.5",
@@ -117,7 +117,9 @@
     "serialize-javascript": "1.3.0",
     "shortid": "^2.2.8",
     "source-map-support": "0.4.14",
-    "styled-components": "^1.4.4",
+    "styled-components": "^1.4.5",
+    "styled-theme": "^0.3.3",
+    "styled-tools": "^0.1.4",
     "uuid": "^3.0.1",
     "webfontloader": "^1.6.27"
   },
@@ -144,11 +146,12 @@
     "babili-webpack-plugin": "^0.0.11",
     "chokidar": "1.6.1",
     "css-loader": "0.28.0",
+    "cz-conventional-changelog-emoji": "^0.1.0",
     "cz-conventional-kawaii": "^0.1.4",
     "enzyme": "^2.8.2",
     "enzyme-to-json": "^1.5.1",
     "eslint": "3.19.0",
-    "eslint-config-boldr": "0.8.10",
+    "eslint-config-boldr": "0.9.1",
     "eslint-loader": "^1.7.1",
     "extract-text-webpack-plugin": "2.1.0",
     "fast-async": "^6.2.2",
@@ -172,6 +175,7 @@
     "postcss-import": "^9.1.0",
     "postcss-loader": "^1.3.3",
     "postcss-reporter": "^3.0.0",
+    "prettier": "^1.1.0",
     "prettier-eslint-cli": "^3.3.0",
     "purifycss-webpack": "^0.6.1",
     "react-addons-perf": "^15.4.2",
@@ -195,7 +199,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "./node_modules/cz-conventional-kawaii"
+      "path": "./node_modules/cz-conventional-changelog-emoji"
     }
   }
 }

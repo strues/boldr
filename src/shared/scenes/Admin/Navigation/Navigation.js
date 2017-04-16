@@ -1,11 +1,24 @@
 /* @flow */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import Helmet from 'react-helmet';
-import { List, ListItem, Button, FontIcon, Paper, Row, Col, Modal } from 'boldr-ui';
+import {
+  List,
+  ListItem,
+  Button,
+  FontIcon,
+  Paper,
+  Row,
+  Col,
+  Modal,
+} from 'boldr-ui';
 
-import { showModal, hideModal } from '../../../state/modules/boldr/ui/actions';
-import { updateMenuDetails, addMenuDetail, getByLabel } from '../../../state/modules/boldr/menu';
+import {showModal, hideModal} from '../../../state/modules/boldr/ui/actions';
+import {
+  updateMenuDetails,
+  addMenuDetail,
+  getByLabel,
+} from '../../../state/modules/boldr/menu';
 import NavigationEditor from './components/NavigationEditor';
 import NavigationForm from './components/NavigationForm';
 
@@ -90,9 +103,15 @@ class Navigation extends Component {
   }
 
   render() {
-    const { mainMenu } = this.props;
+    const {mainMenu} = this.props;
     const listItems = mainMenu.details.map((item, i) => {
-      return <ListItem key={ item.id } primaryText={ item.name } onClick={ () => this.handleItemClick(item) } />;
+      return (
+        <ListItem
+          key={item.id}
+          primaryText={item.name}
+          onClick={() => this.handleItemClick(item)}
+        />
+      );
     });
 
     return (
@@ -100,23 +119,30 @@ class Navigation extends Component {
         <Helmet title="Admin: Navigation" />
         <Row>
           <Col xs>
-            <Paper zDepth={ 1 }>
+            <Paper zDepth={1}>
               <List className="navigation__list">
                 {listItems}
               </List>
             </Paper>
-            <Button onClick={ this.openModal } icon>
+            <Button onClick={this.openModal} icon>
               <FontIcon>add</FontIcon>
             </Button>
           </Col>
-          <Col xs={ 12 } md={ 4 }>
-            <Paper zDepth={ 2 }>
-              <NavigationEditor initialValues={ this.state.detail } onFormSubmit={ this.onUpdateFormSubmit } />
+          <Col xs={12} md={4}>
+            <Paper zDepth={2}>
+              <NavigationEditor
+                initialValues={this.state.detail}
+                onFormSubmit={this.onUpdateFormSubmit}
+              />
             </Paper>
           </Col>
         </Row>
-        <Modal visible={ this.props.ui.modal } title="Add a link" onClose={ this.closeModal }>
-          <NavigationForm onSubmit={ this.onFormSubmit } />
+        <Modal
+          visible={this.props.ui.modal}
+          title="Add a link"
+          onClose={this.closeModal}
+        >
+          <NavigationForm onSubmit={this.onFormSubmit} />
         </Modal>
       </div>
     );

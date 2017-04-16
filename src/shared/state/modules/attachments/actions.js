@@ -1,10 +1,10 @@
-import { push } from 'react-router-redux';
+import {push} from 'react-router-redux';
 import Axios from 'axios';
-import { getToken } from '../../../core/authentication/token';
+import {getToken} from '../../../core/authentication/token';
 import * as notif from '../../../core/constants';
-import { notificationSend } from '../notifications/notifications';
+import {notificationSend} from '../notifications/notifications';
 import * as t from '../actionTypes';
-import { editProfile } from '../users/actions';
+import {editProfile} from '../users/actions';
 
 const token = getToken();
 
@@ -14,8 +14,10 @@ const token = getToken();
   * @exports fetchMedia
   *****************************************************************/
 
-export const fetchAttachments = (axios: any): ThunkAction => (dispatch: Dispatch) => {
-  dispatch({ type: t.GET_ATTACHMENT_REQUEST });
+export const fetchAttachments = (axios: any): ThunkAction => (
+  dispatch: Dispatch,
+) => {
+  dispatch({type: t.GET_ATTACHMENT_REQUEST});
 
   return axios
     .get('/api/v1/attachments')
@@ -33,7 +35,11 @@ export const fetchAttachments = (axios: any): ThunkAction => (dispatch: Dispatch
     });
 };
 /* istanbul ignore next */
-export const fetchMedia = (): ThunkAction => (dispatch: Dispatch, getState: GetState, axios: any) => {
+export const fetchMedia = (): ThunkAction => (
+  dispatch: Dispatch,
+  getState: GetState,
+  axios: any,
+) => {
   /* istanbul ignore next */
   if (shouldFetchAttachments(getState())) {
     /* istanbul ignore next */
@@ -230,10 +236,10 @@ export function updateAttachment(attachmentData) {
   };
 }
 const updateAttachmentReq = () => {
-  return { type: t.UPDATE_ATTACHMENT_REQUEST };
+  return {type: t.UPDATE_ATTACHMENT_REQUEST};
 };
 const updateAttachmentSuccess = response => {
-  return { type: t.UPDATE_ATTACHMENT_SUCCESS };
+  return {type: t.UPDATE_ATTACHMENT_SUCCESS};
 };
 const errorUpdateAttachment = err => {
   return {
@@ -300,7 +306,7 @@ export function uploadProfileImage(payload) {
 
 export function uploadAvatarImage(payload) {
   return dispatch => {
-    dispatch({ type: t.UPLOAD_AVATAR_IMG_REQUEST });
+    dispatch({type: t.UPLOAD_AVATAR_IMG_REQUEST});
     const data = new FormData();
     data.append('payload.name', payload);
     return Axios.post('/api/v1/attachments', data)

@@ -1,10 +1,10 @@
 /* @flow */
-import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
+import React, {PureComponent} from 'react';
+import {connect} from 'react-redux';
 import styled from 'styled-components';
 
 import ProfileForm from '../ProfileForm';
-import { editProfile } from '../../../../state/modules/users/actions';
+import {editProfile} from '../../../../state/modules/users/actions';
 
 const DrawerWrapper = styled.div`
   width: 450px;
@@ -28,18 +28,18 @@ class OwnProfile extends PureComponent {
       profileImage: values.profileImage,
       avatarUrl: values.avatarUrl,
       social: {
-        facebook: { url: values.facebook },
-        twitter: { url: values.twitter },
-        linkedin: { url: values.linkedin },
-        google: { url: values.google },
-        github: { url: values.github },
+        facebook: {url: values.facebook},
+        twitter: {url: values.twitter},
+        linkedin: {url: values.linkedin},
+        google: {url: values.google},
+        github: {url: values.github},
       },
     };
     this.props.dispatch(editProfile(userData));
   };
   props: Props;
   render() {
-    const { profile } = this.props;
+    const {profile} = this.props;
     const initialProfileData = {
       firstName: profile.firstName,
       lastName: profile.lastName,
@@ -58,7 +58,10 @@ class OwnProfile extends PureComponent {
     return (
       <DrawerWrapper>
         Edit your public profile
-        <ProfileForm onSubmit={ this.handleFormSubmit } initialValues={ initialProfileData } />
+        <ProfileForm
+          onSubmit={this.handleFormSubmit}
+          initialValues={initialProfileData}
+        />
       </DrawerWrapper>
     );
   }

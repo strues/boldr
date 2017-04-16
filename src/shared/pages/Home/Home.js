@@ -1,26 +1,30 @@
 /* @flow */
 
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import Helmet from 'react-helmet';
-import { Grid, Hero, Row, Footer, Heading, Paragraph } from 'boldr-ui';
-import { BaseTemplate } from '../../templates';
+import {Grid, Hero, Row, Footer, Heading, Paragraph} from 'boldr-ui';
+import {BaseTemplate} from '../../templates';
 
 const Home = () => {
   return (
     <div>
       <BaseTemplate
-        helmetMeta={ <Helmet title="Home" /> }
+        helmetMeta={<Helmet title="Home" />}
         hero={
           <Hero bgColor="#01579b">
-            <Heading size={ 1 }>
-              A <span style={ { color: 'rgb(229, 0, 80)' } }>modern</span> content management framework.
+            <Heading size={1}>
+              A
+              {' '}
+              <span style={{color: 'rgb(229, 0, 80)'}}>modern</span>
+              {' '}
+              content management framework.
             </Heading>
           </Hero>
         }
-        footer={ <Footer /> }
+        footer={<Footer />}
       >
-        <Row style={ { padding: '25px' } }>
+        <Row style={{padding: '25px'}}>
           <Paragraph>Placeholder</Paragraph>
         </Row>
       </BaseTemplate>

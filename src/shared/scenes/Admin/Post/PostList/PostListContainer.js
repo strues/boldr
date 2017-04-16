@@ -1,8 +1,12 @@
 /* @flow */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchPostsIfNeeded, getPosts, deletePost } from '../../../../state/modules/blog/posts';
-import type { ReactElement } from '../../../../types/react';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {
+  fetchPostsIfNeeded,
+  getPosts,
+  deletePost,
+} from '../../../../state/modules/blog/posts';
+import type {ReactElement} from '../../../../types/react';
 import VisiblePostList from './VisiblePostList';
 
 type Props = {
@@ -33,7 +37,12 @@ export class PostListContainer extends Component {
     this.props.dispatch(deletePost(postId));
   }
   render() {
-    return <VisiblePostList posts={ this.props.posts } handleDeleteClick={ this.handleDeleteClick } />;
+    return (
+      <VisiblePostList
+        posts={this.props.posts}
+        handleDeleteClick={this.handleDeleteClick}
+      />
+    );
   }
 }
 

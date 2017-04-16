@@ -1,10 +1,21 @@
-import usersReducer, { STATE_KEY } from './reducer';
+import usersReducer, {STATE_KEY} from './reducer';
 
 import {
-  fetchProfile, fetchProfileIfNeeded, forgotPassword, resetPassword, verifyAccount, editProfile,
+  fetchProfile,
+  fetchProfileIfNeeded,
+  forgotPassword,
+  resetPassword,
+  verifyAccount,
+  editProfile,
 } from './actions';
 
-import { selectMe, selectUsers, selectProfile, makeSelectCurrentProfile, makeSelectUser } from './selectors';
+import {
+  selectMe,
+  selectUsers,
+  selectProfile,
+  makeSelectCurrentProfile,
+  makeSelectUser,
+} from './selectors';
 
 export default usersReducer;
 

@@ -1,9 +1,12 @@
 /* eslint-disable no-unused-expressions */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
-import { Grid, Col, Loader } from 'boldr-ui';
-import { fetchActivityIfNeeded, fetchStatsIfNeeded } from '../../../state/modules/admin/dashboard/actions';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {push} from 'react-router-redux';
+import {Grid, Col, Loader} from 'boldr-ui';
+import {
+  fetchActivityIfNeeded,
+  fetchStatsIfNeeded,
+} from '../../../state/modules/admin/dashboard/actions';
 
 import Dashboard from './Dashboard';
 
@@ -24,7 +27,13 @@ class DashboardContainer extends Component {
   }
   props: Props;
   render() {
-    return <Dashboard activities={ this.props.activities } stats={ this.props.stats } loading={ this.props.loading } />;
+    return (
+      <Dashboard
+        activities={this.props.activities}
+        stats={this.props.stats}
+        loading={this.props.loading}
+      />
+    );
   }
 }
 

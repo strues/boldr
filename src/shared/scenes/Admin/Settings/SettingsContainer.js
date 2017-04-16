@@ -1,6 +1,9 @@
 /* @fllow */
-import { connect } from 'react-redux';
-import { selectSettings, selectSettingFromList } from '../../../state/modules/boldr/settings';
+import {connect} from 'react-redux';
+import {
+  selectSettings,
+  selectSettingFromList,
+} from '../../../state/modules/boldr/settings';
 import Settings from './Settings';
 
 const mapStateToProps = state => {

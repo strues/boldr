@@ -1,6 +1,6 @@
 import React from 'react';
 import classnames from 'classnames';
-import { StyleClasses } from 'boldr-ui';
+import {StyleClasses} from 'boldr-ui';
 import Tag from '../Tag';
 
 const BASE_ELEMENT = StyleClasses.TAG_BLOCK;
@@ -12,8 +12,8 @@ const TagBlock = props => {
 
   const classes = classnames(BASE_ELEMENT, props.className);
   return (
-    <div className={ classes }>
-      {props.tags.map(tag => <Tag key={ tag.id } tag={ tag } />)}
+    <div className={classes}>
+      {props.tags.map(tag => <Tag key={tag.id} tag={tag} />)}
     </div>
   );
 };

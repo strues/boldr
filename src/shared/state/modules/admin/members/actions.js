@@ -1,5 +1,5 @@
 import Axios from 'axios';
-import { notificationSend } from '../../notifications/notifications';
+import {notificationSend} from '../../notifications/notifications';
 import * as notif from '../../../../core/constants';
 import * as t from '../../actionTypes';
 
@@ -8,40 +8,44 @@ import * as t from '../../actionTypes';
   * -------------------------
   * @exports fetchMembers
   *****************************************************************/
-export const fetchMembers = (axios: any): ThunkAction =>
-  (dispatch: Dispatch) => {
-    dispatch({ type: t.LOAD_MEMBERS_REQUEST });
+export const fetchMembers = (axios: any): ThunkAction => (
+  dispatch: Dispatch,
+) => {
+  dispatch({type: t.LOAD_MEMBERS_REQUEST});
 
-    return axios
-      .get('/api/v1/users?include=[roles]')
-      .then(res => {
-        dispatch({
-          type: t.LOAD_MEMBERS_SUCCESS,
-          payload: res.data.results,
-        });
-      })
-      .catch(err => {
-        dispatch({
-          type: t.LOAD_MEMBERS_FAILURE,
-          error: err,
-        });
+  return axios
+    .get('/api/v1/users?include=[roles]')
+    .then(res => {
+      dispatch({
+        type: t.LOAD_MEMBERS_SUCCESS,
+        payload: res.data.results,
       });
-  };
+    })
+    .catch(err => {
+      dispatch({
+        type: t.LOAD_MEMBERS_FAILURE,
+        error: err,
+      });
+    });
+};
 /* istanbul ignore next */
-export const fetchMembersIfNeeded = (): ThunkAction =>
-  (dispatch: Dispatch, getState: GetState, axios: any) => {
+export const fetchMembersIfNeeded = (): ThunkAction => (
+  dispatch: Dispatch,
+  getState: GetState,
+  axios: any,
+) => {
+  /* istanbul ignore next */
+  if (shouldFetchMembers(getState())) {
     /* istanbul ignore next */
-    if (shouldFetchMembers(getState())) {
-      /* istanbul ignore next */
-      return dispatch(fetchMembers(axios));
-    }
+    return dispatch(fetchMembers(axios));
+  }
 
-    /* istanbul ignore next */
-    return null;
-  };
+  /* istanbul ignore next */
+  return null;
+};
 
 function shouldFetchMembers(state) {
-  const { members } = state.admin.members;
+  const {members} = state.admin.members;
   if (!members.length) {
     return true;
   }
@@ -77,7 +81,7 @@ export function updateMember(userData) {
 }
 
 const beginUpdateMember = () => {
-  return { type: t.UPDATE_MEMBER_REQUEST };
+  return {type: t.UPDATE_MEMBER_REQUEST};
 };
 
 const doneUpdateMember = res => {

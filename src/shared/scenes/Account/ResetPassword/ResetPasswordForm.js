@@ -1,8 +1,8 @@
 /* @flow */
 
 import React from 'react';
-import { Field, reduxForm } from 'redux-form';
-import { Button, InputField } from 'boldr-ui';
+import {Field, reduxForm} from 'redux-form';
+import {Button, InputField} from 'boldr-ui';
 
 const style = {
   margin: 12,
@@ -11,12 +11,30 @@ type Props = {
   handleSubmit: Function,
 };
 const ResetPasswordForm = (props: Props) => {
-  const { handleSubmit } = props;
+  const {handleSubmit} = props;
   return (
-    <form onSubmit={ handleSubmit } className="boldr-form__generic">
-      <Field id="password" name="password" type="password" label="Enter a new password" component={ InputField } />
-      <Field id="confirm" name="confirm" type="password" label="Confirm new password." component={ InputField } />
-      <Button type="submit" label="Reset password" style={ style } raised primary />
+    <form onSubmit={handleSubmit} className="boldr-form__generic">
+      <Field
+        id="password"
+        name="password"
+        type="password"
+        label="Enter a new password"
+        component={InputField}
+      />
+      <Field
+        id="confirm"
+        name="confirm"
+        type="password"
+        label="Confirm new password."
+        component={InputField}
+      />
+      <Button
+        type="submit"
+        label="Reset password"
+        style={style}
+        raised
+        primary
+      />
     </form>
   );
 };

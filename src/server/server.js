@@ -1,5 +1,5 @@
 import http from 'http';
-import { resolve as pathResolve } from 'path';
+import {resolve as pathResolve} from 'path';
 import app from './app';
 
 const debug = require('debug')('boldr:engine');

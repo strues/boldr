@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { setting, arrayOfSetting } from './schema';
+import {setting, arrayOfSetting} from './schema';
 
 describe('setting schema', () => {
   it('should match the normalizr-setting-schema', () => {

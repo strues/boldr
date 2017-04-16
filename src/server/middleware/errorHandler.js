@@ -13,8 +13,8 @@ export default app => {
 
     const stacktrace = app.get('env') === 'development'
       ? {
-        stack: err.stack,
-      }
+          stack: err.stack,
+        }
       : {};
 
     res.status(statusCode);

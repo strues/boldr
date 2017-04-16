@@ -1,1 +1,1 @@
-export { default } from './RenderTags';
+export {default} from './RenderTags';

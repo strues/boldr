@@ -1,11 +1,26 @@
 /* @flow */
-import React, { Component } from 'react';
-import { push } from 'react-router-redux';
-import { connect } from 'react-redux';
+// $FlowIssue
+import React, {Component} from 'react';
+import {push} from 'react-router-redux';
+import {connect} from 'react-redux';
 import Helmet from 'react-helmet';
-import { MenuButton, List, ListItem, Paper, Toolbar, Button, Row, Col } from 'boldr-ui';
+import {
+  MenuButton,
+  List,
+  ListItem,
+  Paper,
+  Toolbar,
+  Button,
+  Row,
+  Col,
+} from 'boldr-ui';
 
-import { selectTag, clearTag, createTag, deleteTag } from '../../../state/modules/blog/tags';
+import {
+  selectTag,
+  clearTag,
+  createTag,
+  deleteTag,
+} from '../../../state/modules/blog/tags';
 import TaggedPost from './components/TaggedPost';
 
 import TagList from './components/TagList';
@@ -63,7 +78,7 @@ class Tags extends Component {
   render() {
     const actions = [
       <MenuButton key="menu" id="tagtb" buttonChildren="more_vert" icon>
-        <ListItem primaryText="Add tag" onClick={ this.handleAddTagClick } />
+        <ListItem primaryText="Add tag" onClick={this.handleAddTagClick} />
         <ListItem primaryText="Tag a post" />
         <ListItem primaryText="Help" />
       </MenuButton>,
@@ -71,25 +86,27 @@ class Tags extends Component {
     return (
       <Row>
         <Helmet title="Admin: Tags" />
-        <Col sm={ 12 } md={ 4 }>
-          <Paper zDepth={ 2 }>
-            <Toolbar themed title="Tags" nav={ null } actions={ actions } />
+        <Col sm={12} md={4}>
+          <Paper zDepth={2}>
+            <Toolbar themed title="Tags" nav={null} actions={actions} />
             <List>
               <TagList
-                tags={ this.props.tags }
-                handleDeleteTagClick={ this.handleDeleteTagClick }
-                handleTagClick={ this.handleTagClick }
+                tags={this.props.tags}
+                handleDeleteTagClick={this.handleDeleteTagClick}
+                handleTagClick={this.handleTagClick}
               />
             </List>
           </Paper>
         </Col>
-        <Col sm={ 12 } md={ 8 }>
-          {!this.state.posts ? null : <TaggedPost name={ this.props.currentTag.name } />}
+        <Col sm={12} md={8}>
+          {!this.state.posts
+            ? null
+            : <TaggedPost name={this.props.currentTag.name} />}
           {!this.state.add
             ? null
-            : <Paper zDepth={ 3 } className="boldr-paperoverride">
-              <AddTag onSubmit={ this.handleTagSubmit } />
-            </Paper>}
+            : <Paper zDepth={3} className="boldr-paperoverride">
+                <AddTag onSubmit={this.handleTagSubmit} />
+              </Paper>}
         </Col>
       </Row>
     );

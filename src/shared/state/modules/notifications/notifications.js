@@ -17,15 +17,12 @@ export const notificationSend = notification => {
     });
 
     if (payload.dismissAfter) {
-      setTimeout(
-        () => {
-          dispatch({
-            type: NOTIFICATION_DISMISS,
-            payload: payload.id,
-          });
-        },
-        payload.dismissAfter,
-      );
+      setTimeout(() => {
+        dispatch({
+          type: NOTIFICATION_DISMISS,
+          payload: payload.id,
+        });
+      }, payload.dismissAfter);
     }
   };
 };
@@ -45,7 +42,7 @@ export const notificationDismiss = id => {
  * Clear all notifications
  */
 export const notificationClear = () => {
-  return { type: NOTIFICATION_CLEAR };
+  return {type: NOTIFICATION_CLEAR};
 };
 
 /**

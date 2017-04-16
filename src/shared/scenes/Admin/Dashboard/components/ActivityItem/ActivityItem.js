@@ -2,8 +2,8 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
 import styled from 'styled-components';
-import { Chip, Button, FontIcon, Avatar, Icon, Row, Col } from 'boldr-ui';
-import { format } from 'date-fns';
+import {Chip, Button, FontIcon, Avatar, Icon, Row, Col} from 'boldr-ui';
+import {format} from 'date-fns';
 
 import ActivityItemDetail from '../ActivityItemDetail';
 
@@ -49,33 +49,38 @@ const ActivityItem = (props: Props) => {
   let ActivityIcon;
   if (isPostType) {
     ActivityIcon = (
-      <Link to={ `/admin/posts/editor/${props.post.slug}` }>
+      <Link to={`/admin/posts/editor/${props.post.slug}`}>
         <Icon kind="new-post" color="#02BCD6" />
       </Link>
     );
   }
   if (isMemberType) {
-    ActivityIcon = <FontIcon style={ { color: '#02BCD6' } }>person_add</FontIcon>;
+    ActivityIcon = <FontIcon style={{color: '#02BCD6'}}>person_add</FontIcon>;
   }
   if (isAttachmentType) {
     ActivityIcon = (
-      <Link to={ `/admin/filemanager/${props.attachment.id}/editor` }>
-        <FontIcon style={ { color: '#02BCD6' } }>insert_drive_file</FontIcon>
+      <Link to={`/admin/filemanager/${props.attachment.id}/editor`}>
+        <FontIcon style={{color: '#02BCD6'}}>insert_drive_file</FontIcon>
       </Link>
     );
   }
   if (isMenuDetailType) {
-    ActivityIcon = <FontIcon style={ { color: '#02BCD6' } }>insert_link</FontIcon>;
+    ActivityIcon = <FontIcon style={{color: '#02BCD6'}}>insert_link</FontIcon>;
   }
   return (
     <ActivityPanel>
       <DateArea>
-        <Button icon tooltipLabel={ format(props.createdAt, 'MM/DD/YYYY') }>access_time</Button>
+        <Button icon tooltipLabel={format(props.createdAt, 'MM/DD/YYYY')}>
+          access_time
+        </Button>
       </DateArea>
       <User>
-        <Chip label={ props.owner.firstName } avatar={ <Avatar src={ props.owner.avatarUrl } role="presentation" /> } />
+        <Chip
+          label={props.owner.firstName}
+          avatar={<Avatar src={props.owner.avatarUrl} role="presentation" />}
+        />
       </User>
-      <ActivityItemDetail atype={ props.type } />
+      <ActivityItemDetail atype={props.type} />
       <ActivityIcn>
         {ActivityIcon}
       </ActivityIcn>

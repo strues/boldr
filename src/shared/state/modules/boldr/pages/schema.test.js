@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { page, arrayOfPage } from './schema';
+import {page, arrayOfPage} from './schema';
 
 describe('page schema', () => {
   it('should match the normalizr-page-schema', () => {

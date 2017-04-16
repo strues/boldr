@@ -2,18 +2,18 @@ const sidebarLinks = [
   {
     id: 1,
     label: 'Content',
-    icon: 'fa-battery-half',
+    icon: 'fa-book',
     items: [
       {
         id: 11,
         label: 'View Posts',
-        icon: 'fa-car',
+        icon: 'fa-list-alt',
         link: '/admin/posts',
       },
       {
         id: 12,
         label: 'New Post',
-        icon: 'fa-bullhorn',
+        icon: 'fa-file-text',
         link: '/admin/new-post',
       },
       {
@@ -26,13 +26,13 @@ const sidebarLinks = [
   },
   {
     label: 'File Manager',
-    icon: 'fa-tags',
+    icon: 'fa-cloud-upload',
     id: 2,
     link: '/admin/filemanager',
   },
   {
     label: 'Media Gallery',
-    icon: 'fa-picture',
+    icon: 'fa-picture-o',
     id: 3,
     link: '/admin/media',
   },

@@ -1,26 +1,20 @@
 /* eslint-disable jsx-a11y/html-has-lang, react/forbid-prop-types */
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 function Html(props) {
-  const {
-    htmlAttributes,
-    headerElements,
-    bodyElements,
-    appBodyString,
-  } = props;
+  const {htmlAttributes, headerElements, bodyElements, appBodyString} = props;
 
   return (
-    (
-      <html { ...htmlAttributes }>
-        <head>
-          {headerElements}
-        </head>
-        <body>
-          <div id="app" dangerouslySetInnerHTML={ { __html: appBodyString } } />
-          {bodyElements}
-        </body>
-      </html>
-    )
+    <html {...htmlAttributes}>
+      <head>
+        {headerElements}
+      </head>
+      <body>
+        <div id="app" dangerouslySetInnerHTML={{__html: appBodyString}} />
+        {bodyElements}
+      </body>
+    </html>
   );
 }
 

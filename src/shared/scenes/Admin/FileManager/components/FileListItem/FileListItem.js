@@ -1,6 +1,7 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { FontIcon, Button } from 'boldr-ui';
+import {FontIcon, Button} from 'boldr-ui';
 import Link from 'react-router-dom/Link';
 
 const Wrapper = styled.section`
@@ -42,22 +43,22 @@ const FileListItem = props => {
   }
 
   function handleSelect() {
-    const { file } = props;
+    const {file} = props;
     props.selectFile(file);
   }
   return (
     <Wrapper>
       <ImgWrapper>
-        <Img src={ props.imgSrc } />
+        <Img src={props.imgSrc} />
       </ImgWrapper>
       <Content>
         {props.children}
-        <Link to={ `/admin/file-editor/${props.file.id}` }>
-          <Button icon onClick={ handleSelect }>
+        <Link to={`/admin/file-editor/${props.file.id}`}>
+          <Button icon onClick={handleSelect}>
             <FontIcon>mode_edit</FontIcon>
           </Button>
         </Link>
-        <Button icon onClick={ handleclick }>
+        <Button icon onClick={handleclick}>
           <FontIcon>delete_forever</FontIcon>
         </Button>
       </Content>

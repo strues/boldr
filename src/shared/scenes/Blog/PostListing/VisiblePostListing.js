@@ -1,9 +1,12 @@
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
-import { getPublishedPosts, getFeaturedPosts } from '../../../state/modules/blog/posts/reducer';
+import {connect} from 'react-redux';
+import withRouter from 'react-router-dom/withRouter';
+import {
+  getPublishedPosts,
+  getFeaturedPosts,
+} from '../../../state/modules/blog/posts/reducer';
 import PostListing from './PostListing';
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = state => ({
   features: getFeaturedPosts(state, 'featured'),
   posts: getPublishedPosts(state, 'published'),
 });

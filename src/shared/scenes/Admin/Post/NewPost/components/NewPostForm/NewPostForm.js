@@ -1,12 +1,25 @@
-import React, { Component } from 'react';
-import { Field, reduxForm, FieldArray } from 'redux-form';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {Field, reduxForm, FieldArray} from 'redux-form';
+import {connect} from 'react-redux';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
-import { TabsContainer, Switch, Tab, Tabs, Button, InputField, Col, Row, Heading, FormGroup } from 'boldr-ui';
+import {
+  TabsContainer,
+  Switch,
+  Tab,
+  Tabs,
+  Button,
+  InputField,
+  Col,
+  Row,
+  Heading,
+  FormGroup,
+} from 'boldr-ui';
 
-import { uploadPostImage } from '../../../../../../state/modules/attachments/actions';
+import {
+  uploadPostImage,
+} from '../../../../../../state/modules/attachments/actions';
 import RenderTags from '../RenderTags';
 import FieldEditor from './FieldEditor';
 
@@ -63,38 +76,57 @@ class NewPostForm extends Component {
     this.dropzone.open();
   }
   _handleTabChange(activeTabIndex) {
-    this.setState({ activeTabIndex });
+    this.setState({activeTabIndex});
   }
   _handleSwitch = checked => {
-    this.setState({ checked });
+    this.setState({checked});
   };
   render() {
-    const { handleSubmit } = this.props;
-    const { activeTabIndex, checked } = this.state;
+    const {handleSubmit} = this.props;
+    const {activeTabIndex, checked} = this.state;
 
     return (
       <NewPost>
-        <Heading size={ 3 } weight={ 300 }>Create a new post</Heading>
-        <form onSubmit={ handleSubmit }>
+        <Heading size={3} weight={300}>Create a new post</Heading>
+        <form onSubmit={handleSubmit}>
           <Wrapper>
             <FormGroup>
-              <Field id="post-title" name="title" type="text" component={ InputField } label="Post Title" tabIndex={ 0 } />
+              <Field
+                id="post-title"
+                name="title"
+                type="text"
+                component={InputField}
+                label="Post Title"
+                tabIndex={0}
+              />
             </FormGroup>
             <FormGroup>
-              <Heading size={ 5 }>Tag your post</Heading>
-              <FieldArray name="tags" type="text" id="post-tags" component={ RenderTags } label="Tags" tabIndex={ -1 } />
+              <Heading size={5}>Tag your post</Heading>
+              <FieldArray
+                name="tags"
+                type="text"
+                id="post-tags"
+                component={RenderTags}
+                label="Tags"
+                tabIndex={-1}
+              />
             </FormGroup>
           </Wrapper>
           <TabsContainer
-            onTabChange={ this._handleTabChange }
-            activeTabIndex={ activeTabIndex }
+            onTabChange={this._handleTabChange}
+            activeTabIndex={activeTabIndex}
             panelClassName="md-grid"
             colored
           >
             <Tabs tabId="tab">
               <Tab label="Write">
                 <Wrapper>
-                  <Field component={ FieldEditor } label="Content" name="content" tabIndex={ -2 } />
+                  <Field
+                    component={FieldEditor}
+                    label="Content"
+                    name="content"
+                    tabIndex={-2}
+                  />
                 </Wrapper>
 
               </Tab>
@@ -103,11 +135,13 @@ class NewPostForm extends Component {
                   component="div"
                   className="md-cell md-cell--12"
                   transitionName="md-cross-fade"
-                  transitionEnterTimeout={ 300 }
-                  transitionLeave={ false }
+                  transitionEnterTimeout={300}
+                  transitionLeave={false}
                 >
                   <FormGroup>
-                    <Heading size={ 5 } top="2rem" bottom="0px">Upload a feature image</Heading>
+                    <Heading size={5} top="2rem" bottom="0px">
+                      Upload a feature image
+                    </Heading>
                     {/* <Row>
                 <Switch
                   id="imgSwitch"
@@ -125,16 +159,18 @@ class NewPostForm extends Component {
               </Row> */}
                     <Dropzone
                       className="boldr-dropzone"
-                      ref={ node => {
+                      ref={node => {
                         this.dropzone = node;
-                      } }
-                      multiple={ false }
-                      onDrop={ this.onDrop }
+                      }}
+                      multiple={false}
+                      onDrop={this.onDrop}
                       accept="image/*"
-                      maxSize={ 5242880 }
+                      maxSize={5242880}
                     >
                       <p className="boldr-dropzone__drop-sm">
-                        Drop an image here or select one from your computer. <br />
+                        Drop an image here or select one from your computer.
+                        {' '}
+                        <br />
                         It will upload right away.
                       </p>
                     </Dropzone>
@@ -145,19 +181,35 @@ class NewPostForm extends Component {
                         name="excerpt"
                         id="post-excerpt"
                         type="text"
-                        component={ InputField }
+                        component={InputField}
                         label="Excerpt"
-                        tabIndex={ -3 }
+                        tabIndex={-3}
                       />
                     </FormGroup>
 
                     <FormGroup>
-                      <Heading size={ 5 }>Status:</Heading>
-                      <label style={ { marginRight: '10px' } } htmlFor="draft">
-                        <Field id="draft" name="published" component="input" type="radio" value="false" /> Draft
+                      <Heading size={5}>Status:</Heading>
+                      <label style={{marginRight: '10px'}} htmlFor="draft">
+                        <Field
+                          id="draft"
+                          name="published"
+                          component="input"
+                          type="radio"
+                          value="false"
+                        />
+                        {' '}
+                        Draft
                       </label>
                       <label htmlFor="published">
-                        <Field id="published" name="published" component="input" type="radio" value="true" /> Publish
+                        <Field
+                          id="published"
+                          name="published"
+                          component="input"
+                          type="radio"
+                          value="true"
+                        />
+                        {' '}
+                        Publish
                       </label>
                     </FormGroup>
 

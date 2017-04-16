@@ -1,4 +1,4 @@
-import { LAYOUTS } from '../../../../core/constants';
+import {LAYOUTS} from '../../../../core/constants';
 import {
   CHANGE_LAYOUT,
   MODAL_OPEN,

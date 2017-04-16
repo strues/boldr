@@ -1,9 +1,9 @@
 /* @flow */
 import React from 'react';
-import { Card } from 'boldr-ui';
+import {Card} from 'boldr-ui';
 import Helmet from 'react-helmet';
 
-import { selectPost } from '../../../../state/modules/blog/posts/actions';
+import {selectPost} from '../../../../state/modules/blog/posts/actions';
 import PostTable from './components/PostTable';
 
 type Props = {
@@ -21,7 +21,10 @@ const PostList = (props: Props) => {
     <div>
       <Helmet title="Admin: Post List" />
       <Card tableCard>
-        <PostTable posts={ props.posts } handleDeleteClick={ props.handleDeleteClick } />
+        <PostTable
+          posts={props.posts}
+          handleDeleteClick={props.handleDeleteClick}
+        />
       </Card>
     </div>
   );

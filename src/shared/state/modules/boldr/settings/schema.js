@@ -1,4 +1,4 @@
-import { schema } from 'normalizr';
+import {schema} from 'normalizr';
 
 const setting = new schema.Entity('settings', {
   idAttribute: 'key',
@@ -6,4 +6,4 @@ const setting = new schema.Entity('settings', {
 
 const arrayOfSetting = new schema.Array(setting);
 
-export { arrayOfSetting, setting };
+export {arrayOfSetting, setting};

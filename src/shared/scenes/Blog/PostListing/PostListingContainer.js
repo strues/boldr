@@ -1,14 +1,14 @@
 /* @flow */
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import Helmet from 'react-helmet';
 
-import { LAYOUTS } from '../../../core/constants';
-import { changeLayout } from '../../../state/modules/boldr/ui';
-import { getPosts, fetchPostsIfNeeded } from '../../../state/modules/blog/posts';
-import { fetchTagsIfNeeded } from '../../../state/modules/blog/tags/actions';
-import { getTags } from '../../../state/modules/blog/tags/selectors';
+import {LAYOUTS} from '../../../core/constants';
+import {changeLayout} from '../../../state/modules/boldr/ui';
+import {getPosts, fetchPostsIfNeeded} from '../../../state/modules/blog/posts';
+import {fetchTagsIfNeeded} from '../../../state/modules/blog/tags/actions';
+import {getTags} from '../../../state/modules/blog/tags/selectors';
 import BaseTemplate from '../../../templates/BaseTemplate';
 import VisiblePostListing from './VisiblePostListing';
 
@@ -43,13 +43,13 @@ export class PostListingContainer extends Component {
   };
   render() {
     return (
-      <BaseTemplate helmetMeta={ <Helmet title="Blog Posts" /> }>
+      <BaseTemplate helmetMeta={<Helmet title="Blog Posts" />}>
         <VisiblePostListing
-          posts={ this.props.posts }
-          listTags={ this.props.listTags }
-          layout={ this.props.layout }
-          handleChangeLayout={ this.handleChangeLayout }
-          isFetching={ this.props.isFetching }
+          posts={this.props.posts}
+          listTags={this.props.listTags}
+          layout={this.props.layout}
+          handleChangeLayout={this.handleChangeLayout}
+          isFetching={this.props.isFetching}
         />
       </BaseTemplate>
     );

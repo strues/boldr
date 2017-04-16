@@ -1,23 +1,25 @@
 /* @flow */
 /* eslint-disable global-require */
 import React from 'react';
-import { render, unmountComponentAtNode } from 'react-dom';
-import { Provider } from 'react-redux';
+import {render, unmountComponentAtNode} from 'react-dom';
+import {Provider} from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
 import ConnectedRouter from 'react-router-redux/ConnectedRouter';
 import WebFontLoader from 'webfontloader';
-import { renderRoutes } from 'react-router-config';
+import {renderRoutes} from 'react-router-config';
 
 import routes from '../shared/routes';
 import configureStore from '../shared/state/store';
-import { checkAuth } from '../shared/state/modules/auth/actions';
-import { getToken } from '../shared/core/authentication/token';
+import {checkAuth} from '../shared/state/modules/auth/actions';
+import {getToken} from '../shared/core/authentication/token';
 
 WebFontLoader.load({
-  google: { families: ['Roboto:200,400,600', 'Material Icons'] },
+  google: {families: ['Roboto:200,400,600', 'Material Icons']},
   custom: {
     families: ['FontAwesome'],
-    urls: ['https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'],
+    urls: [
+      'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
+    ],
   },
 });
 
@@ -26,7 +28,7 @@ const history = createHistory();
 const preloadedState = window.__PRELOADED_STATE__;
 const store = configureStore(preloadedState, history);
 
-const { dispatch } = store;
+const {dispatch} = store;
 
 const token = getToken();
 if (token) {
@@ -37,8 +39,8 @@ if (token) {
 const renderApp = () => {
   // const App = require('../shared/components/App').default;
   render(
-    <Provider store={ store }>
-      <ConnectedRouter history={ history }>
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
         {renderRoutes(routes)}
       </ConnectedRouter>
     </Provider>,
@@ -64,7 +66,7 @@ if (module.hot) {
     } catch (error) {
       const RedBox = require('redbox-react').default;
 
-      render(<RedBox error={ error } />, domNode);
+      render(<RedBox error={error} />, domNode);
     }
   };
   module.hot.accept('../shared/routes', () => {

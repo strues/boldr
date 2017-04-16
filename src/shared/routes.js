@@ -11,13 +11,15 @@ import ForgotPassword from './scenes/Account/ForgotPassword';
 import ResetPassword from './scenes/Account/ResetPassword';
 import Verify from './scenes/Account/Verify';
 import ProfileContainer from './scenes/Profile/ProfileContainer';
-import PostListingContainer from './scenes/Blog/PostListing/PostListingContainer';
+import PostListingContainer
+  from './scenes/Blog/PostListing/PostListingContainer';
 import SinglePost from './scenes/Blog/SinglePost/SinglePost';
 import TagListContainer from './scenes/Blog/TagList/TagListContainer';
 
 import PostEditor from './scenes/Admin/Post/PostEditor';
 import NewPostContainer from './scenes/Admin/Post/NewPost/NewPostContainer';
-import FileManagerContainer from './scenes/Admin/FileManager/FileManagerContainer';
+import FileManagerContainer
+  from './scenes/Admin/FileManager/FileManagerContainer';
 import FileEditor from './scenes/Admin/FileManager/FileEditor';
 import Navigation from './scenes/Admin/Navigation';
 import Members from './scenes/Admin/Members';
@@ -31,10 +33,19 @@ import {fetchMembersIfNeeded} from './state/modules/admin/members';
 import {fetchMedia} from './state/modules/attachments/actions';
 import {fetchMediaIfNeeded} from './state/modules/media/actions';
 import {fetchProfileIfNeeded} from './state/modules/users';
-import {fetchStatsIfNeeded, fetchActivityIfNeeded} from './state/modules/admin/dashboard/actions';
+import {
+  fetchStatsIfNeeded,
+  fetchActivityIfNeeded,
+} from './state/modules/admin/dashboard/actions';
 import {fetchMenusIfNeeded} from './state/modules/boldr/menu/actions';
-import {fetchPostsIfNeeded, fetchPostIfNeeded} from './state/modules/blog/posts';
-import {fetchTagsIfNeeded, fetchTagPostsIfNeeded} from './state/modules/blog/tags/actions';
+import {
+  fetchPostsIfNeeded,
+  fetchPostIfNeeded,
+} from './state/modules/blog/posts';
+import {
+  fetchTagsIfNeeded,
+  fetchTagPostsIfNeeded,
+} from './state/modules/blog/tags/actions';
 
 function LoadingComponent({error}) {
   if (error) {
@@ -60,7 +71,8 @@ const MediaContainer = Loadable({
 export default [
   {
     component: App,
-    loadData: async (dispatch: Dispatch) => Promise.all([await dispatch(fetchSettingsIfNeeded())]),
+    loadData: async (dispatch: Dispatch) =>
+      Promise.all([await dispatch(fetchSettingsIfNeeded())]),
     routes: [
       {
         path: '/',
@@ -77,7 +89,10 @@ export default [
         exact: true,
         component: PostListingContainer,
         loadData: async (dispatch: Dispatch) =>
-          Promise.all([await dispatch(fetchPostsIfNeeded()), await dispatch(fetchTagsIfNeeded())]),
+          Promise.all([
+            await dispatch(fetchPostsIfNeeded()),
+            await dispatch(fetchTagsIfNeeded()),
+          ]),
       },
       {
         path: '/blog/:slug',
@@ -138,7 +153,8 @@ export default [
             exact: true,
             strict: true,
             component: PostListContainer,
-            loadData: async (dispatch: Dispatch) => Promise.all([await dispatch(fetchPostsIfNeeded())]),
+            loadData: async (dispatch: Dispatch) =>
+              Promise.all([await dispatch(fetchPostsIfNeeded())]),
           },
           {
             path: '/admin/new-post',
@@ -156,7 +172,8 @@ export default [
             path: '/admin/filemanager',
             exact: true,
             component: FileManagerContainer,
-            loadData: async (dispatch: Dispatch) => Promise.all([await dispatch(fetchMedia())]),
+            loadData: async (dispatch: Dispatch) =>
+              Promise.all([await dispatch(fetchMedia())]),
           },
           {
             path: '/admin/file-editor/:id',
@@ -167,13 +184,15 @@ export default [
             path: '/admin/navigation',
             exact: true,
             component: Navigation,
-            loadData: async (dispatch: Dispatch) => Promise.all([await dispatch(fetchMenusIfNeeded())]),
+            loadData: async (dispatch: Dispatch) =>
+              Promise.all([await dispatch(fetchMenusIfNeeded())]),
           },
           {
             path: '/admin/members',
             exact: true,
             component: Members,
-            loadData: async (dispatch: Dispatch) => Promise.all([await dispatch(fetchMembersIfNeeded())]),
+            loadData: async (dispatch: Dispatch) =>
+              Promise.all([await dispatch(fetchMembersIfNeeded())]),
           },
           {
             path: '/admin/settings',
@@ -184,7 +203,8 @@ export default [
             path: '/admin/tags',
             exact: true,
             component: TagsContainer,
-            loadData: async (dispatch: Dispatch) => Promise.all([await dispatch(fetchTagsIfNeeded())]),
+            loadData: async (dispatch: Dispatch) =>
+              Promise.all([await dispatch(fetchTagsIfNeeded())]),
           },
           {
             path: '/admin/tags/:name',
@@ -195,7 +215,8 @@ export default [
             path: '/admin/media',
             exact: true,
             component: MediaContainer,
-            loadData: async (dispatch: Dispatch) => Promise.all([await dispatch(fetchMediaIfNeeded())]),
+            loadData: async (dispatch: Dispatch) =>
+              Promise.all([await dispatch(fetchMediaIfNeeded())]),
           },
         ],
       },

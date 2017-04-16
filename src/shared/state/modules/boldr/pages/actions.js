@@ -1,10 +1,10 @@
-import { normalize, arrayOf, schema } from 'normalizr';
-import { push } from 'react-router-redux';
+import {normalize, arrayOf, schema} from 'normalizr';
+import {push} from 'react-router-redux';
 import Axios from 'axios';
 import * as notif from '../../../../core/constants';
-import { notificationSend } from '../../notifications/notifications';
+import {notificationSend} from '../../notifications/notifications';
 import * as t from '../../actionTypes';
-import { page as pageSchema, arrayOfPage } from './schema';
+import {page as pageSchema, arrayOfPage} from './schema';
 
 /**
   * FETCH PAGES
@@ -47,7 +47,7 @@ function shouldFetchPages(state) {
 }
 
 const requestPages = () => {
-  return { type: t.FETCH_PAGES_REQUEST };
+  return {type: t.FETCH_PAGES_REQUEST};
 };
 const receivePages = normalizedData => ({
   type: t.FETCH_PAGES_SUCCESS,
@@ -80,7 +80,7 @@ export function fetchPageByUrl(resource) {
 }
 
 const requestPage = () => {
-  return { type: t.FETCH_PAGE_REQUEST };
+  return {type: t.FETCH_PAGE_REQUEST};
 };
 
 const receivePage = res => ({

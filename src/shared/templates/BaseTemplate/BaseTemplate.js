@@ -1,16 +1,16 @@
 /* @flow */
-import React, { PureComponent } from 'react';
+import React, {PureComponent} from 'react';
 import styled from 'styled-components';
-import { push } from 'react-router-redux';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
-import { Footer } from 'boldr-ui';
+import {push} from 'react-router-redux';
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+import {Footer} from 'boldr-ui';
 
-import { fetchMenusIfNeeded, getByLabel } from '../../state/modules/boldr/menu';
-import { logout } from '../../state/modules/auth/actions';
-import { selectMe } from '../../state/modules/users';
+import {fetchMenusIfNeeded, getByLabel} from '../../state/modules/boldr/menu';
+import {logout} from '../../state/modules/auth/actions';
+import {selectMe} from '../../state/modules/users';
 import MainHeader from '../../components/Header';
-import type { ReactElement, ReactChildren } from '../../types/react';
+import type {ReactElement, ReactChildren} from '../../types/react';
 
 type Props = {
   header: ReactElement,
@@ -97,18 +97,18 @@ class BaseTemplate extends PureComponent {
   props: Props;
   render() {
     return (
-      <Wrapper { ...this.props }>
+      <Wrapper {...this.props}>
         {this.props.helmetMeta}
 
         <MainHeader
-          auth={ this.props.auth }
-          logo={ this.props.logo }
-          me={ this.props.me }
-          menu={ this.props.menu.details }
-          isMobile={ this.props.isMobile }
-          handleProfileClick={ this.handleProfileClick }
-          handleLogoClick={ this.handleLogoClick }
-          handleLogoutClick={ this.handleLogoutClick }
+          auth={this.props.auth}
+          logo={this.props.logo}
+          me={this.props.me}
+          menu={this.props.menu.details}
+          isMobile={this.props.isMobile}
+          handleProfileClick={this.handleProfileClick}
+          handleLogoClick={this.handleLogoClick}
+          handleLogoutClick={this.handleLogoutClick}
         />
         {this.props.hero ? this.props.hero : null}
 
@@ -126,4 +126,4 @@ class BaseTemplate extends PureComponent {
 
 export default BaseTemplate;
 
-export { Wrapper, FooterWrapper };
+export {Wrapper, FooterWrapper};

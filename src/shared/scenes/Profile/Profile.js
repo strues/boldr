@@ -1,9 +1,18 @@
 /* @flow */
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import styled from 'styled-components';
 import Dropzone from 'react-dropzone';
 import classnames from 'classnames';
-import { Toolbar, Drawer, Button, Grid, Col, Row, Heading, StyleClasses } from 'boldr-ui';
+import {
+  Toolbar,
+  Drawer,
+  Button,
+  Grid,
+  Col,
+  Row,
+  Heading,
+  StyleClasses,
+} from 'boldr-ui';
 
 import config from '../../../../config';
 import ProfileContent from './components/ProfileContent';
@@ -14,13 +23,13 @@ type Props = {
   profile: Object,
   email: string,
   drawer: Boolean,
-  closeDrawer: Function,
-  uploadProfileImg: Function,
-  uploadAvatarImg: Function,
-  openDrawer: Function,
-  _toggleDrawer: Function,
-  _closeDrawer: Function,
-  _handleToggle: Function,
+  closeDrawer: ?Function,
+  uploadProfileImg: ?Function,
+  uploadAvatarImg: ?Function,
+  openDrawer: ?Function,
+  _toggleDrawer: ?Function,
+  _closeDrawer: ?Function,
+  _handleToggle: ?Function,
 };
 
 type State = {
@@ -56,10 +65,8 @@ class Profile extends Component {
   }
 
   props: Props;
-  // $FlowIssue
-  onDrop(files) {
+  onDrop(files: Array<Object>) {
     console.log('Accepted files: ', files);
-    // $FlowIssue
     this.setState({
       file: files[0],
       showDropzone: false,
@@ -67,11 +74,12 @@ class Profile extends Component {
     const payload = files[0];
     console.log(payload);
     const isProf = this.state.profImg === true;
-    isProf ? this.props.uploadProfileImg(payload) : this.props.uploadAvatarImg(payload);
+    isProf
+      ? this.props.uploadProfileImg(payload)
+      : this.props.uploadAvatarImg(payload);
   }
 
   onOpenClick() {
-    // $FlowIssue
     this.dropzone.open();
   }
 
@@ -84,7 +92,9 @@ class Profile extends Component {
     });
   }
   _handleToggle(visible: boolean) {
-    this.props.drawer === true ? this.props.closeDrawer() : this.props.openDrawer();
+    this.props.drawer === true
+      ? this.props.closeDrawer()
+      : this.props.openDrawer();
   }
 
   _closeDrawer() {
@@ -112,13 +122,13 @@ class Profile extends Component {
     return (
       <Dropzone
         className="boldr-dropzone"
-        ref={ node => {
+        ref={node => {
           this.dropzone = node;
-        } }
-        multiple={ false }
-        onDrop={ this.onDrop }
+        }}
+        multiple={false}
+        onDrop={this.onDrop}
         accept="image/*"
-        maxSize={ 5242880 }
+        maxSize={5242880}
       >
         <p className="boldr-dropzone__drop-sm">
           Drop an image here or select one from your computer. <br />
@@ -128,7 +138,7 @@ class Profile extends Component {
     );
   };
   render() {
-    const { profile, className } = this.props;
+    const {profile, className} = this.props;
     const classes = classnames(BASE_ELEMENT, className);
     const UserProfileBg = styled.div`
       width: 100%;
@@ -136,22 +146,28 @@ class Profile extends Component {
       background-image: url(${profile.profileImage});
       background-size: cover;
     `;
-    const close = <Button icon onClick={ this._closeDrawer }>close</Button>;
-    const header = <Toolbar nav={ close } actions={ null } className="md-divider-border md-divider-border--bottom" />;
+    const close = <Button icon onClick={this._closeDrawer}>close</Button>;
+    const header = (
+      <Toolbar
+        nav={close}
+        actions={null}
+        className="md-divider-border md-divider-border--bottom"
+      />
+    );
 
     return (
-      <div className={ classes }>
+      <div className={classes}>
         <UserProfileBg />
         <Grid>
           <div className="profile__content">
             <Row>
-              <Col sm={ 12 }>
+              <Col sm={12}>
                 <ProfileContent
-                  me={ this.state.me }
-                  handleProfileImgClick={ this.handleProfileImgClick }
-                  toggleDrawer={ this._toggleDrawer }
-                  handleAvatarImgClick={ this.handleAvatarImgClick }
-                  profile={ profile }
+                  me={this.state.me}
+                  handleProfileImgClick={this.handleProfileImgClick}
+                  toggleDrawer={this._toggleDrawer}
+                  handleAvatarImgClick={this.handleAvatarImgClick}
+                  profile={profile}
                 />
               </Col>
             </Row>
@@ -159,16 +175,16 @@ class Profile extends Component {
               {this.state.showDropzone === true ? this.renderDropzone() : null}
             </Row>
             <Drawer
-              clickableDesktopOverlay={ false }
+              clickableDesktopOverlay={false}
               position="right"
-              navItems={ null }
-              visible={ this.props.drawer }
-              onVisibilityToggle={ this._handleToggle }
-              type={ Drawer.DrawerTypes.TEMPORARY }
-              header={ header }
-              style={ { zIndex: 100 } }
+              navItems={null}
+              visible={this.props.drawer}
+              onVisibilityToggle={this._handleToggle}
+              type={Drawer.DrawerTypes.TEMPORARY}
+              header={header}
+              style={{zIndex: 100}}
             >
-              <OwnProfile profile={ profile } />
+              <OwnProfile profile={profile} />
             </Drawer>
           </div>
         </Grid>

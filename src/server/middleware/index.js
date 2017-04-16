@@ -5,4 +5,11 @@ import offlinePage from './offlinePage';
 import serviceWorker from './serviceWorker';
 import clientBundle from './clientBundle';
 
-export { expressMiddleware, boldrSSR, clientBundle, errorHandler, offlinePage, serviceWorker };
+export {
+  expressMiddleware,
+  boldrSSR,
+  clientBundle,
+  errorHandler,
+  offlinePage,
+  serviceWorker,
+};

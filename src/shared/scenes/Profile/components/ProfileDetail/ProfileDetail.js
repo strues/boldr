@@ -2,9 +2,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import classnames from 'classnames';
-import { StyleClasses } from 'boldr-ui';
+import {StyleClasses} from 'boldr-ui';
 
-import type { ReactElement } from '../../../../types/react';
+import type {ReactElement} from '../../../../types/react';
 
 const DetailLabel = styled.div`
   font-size: 1.4em;
@@ -20,7 +20,7 @@ const BASE_ELEMENT = StyleClasses.PROFILE_DETAIL;
 const ProfileDetail = (props: Props) => {
   const classes = classnames(BASE_ELEMENT, props.className);
   return (
-    <li className={ classes }>
+    <li className={classes}>
       <DetailLabel>{props.label}</DetailLabel> <span>{props.detail}</span>
     </li>
   );

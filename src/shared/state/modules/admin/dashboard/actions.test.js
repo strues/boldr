@@ -1,5 +1,5 @@
 import * as t from '../../actionTypes';
-import { showSidebar, hideSidebar, fetchSiteActivity } from './actions';
+import {showSidebar, hideSidebar, fetchSiteActivity} from './actions';
 
 describe('Dashboard Actions', () => {
   describe('showSidebar', () => {

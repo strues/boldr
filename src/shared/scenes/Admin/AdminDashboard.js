@@ -1,8 +1,8 @@
 /* @flow */
-import React, { Component } from 'react';
-import { findDOMNode } from 'react-dom';
+import React, {Component} from 'react';
+import {findDOMNode} from 'react-dom';
 import NavLink from 'react-router-dom/NavLink';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import {
   Avatar,
   Button,
@@ -16,7 +16,10 @@ import {
   DashboardContent,
   Topbar,
 } from 'boldr-ui';
-import { showHideSidebar, expandCollapseSideMenu } from '../../state/modules/boldr/ui/actions';
+import {
+  showHideSidebar,
+  expandCollapseSideMenu,
+} from '../../state/modules/boldr/ui/actions';
 import renderRoutes from '../../core/addRoutes';
 import sidebarLinks from './sidebarLinks';
 
@@ -36,8 +39,10 @@ export class AdminDashboard extends Component {
   state = {
     hidden: false,
   };
+
   props: Props;
-  handleHideSidebar = e => {
+
+  handleHideSidebar = (e): Function => {
     this.props.dispatch(showHideSidebar());
   };
 
@@ -47,33 +52,32 @@ export class AdminDashboard extends Component {
   clickActivate = () => {
     const activate = '/item41/a';
 
-    this.setState({ activate });
+    this.setState({activate});
   };
   render() {
-    const { route, me, location: { pathname, search } } = this.props;
+    const {route, me, location: {pathname, search}} = this.props;
     return (
       <div
-        style={ {
+        style={{
           display: 'flex',
           height: '100%',
-        } }
+        }}
       >
         {this.props.ui.visible
           ? <Sidebar
-            items={ sidebarLinks }
-            activeItem={ this.props.routing.location.pathname }
-            location={ this.props.routing.location.pathname }
-            onExpandCollapse={ this.onExpandCollapse }
-            onVisibilityChange={ this.handleSidebarClick }
-            visible={ this.props.ui.visible }
-            expanded={ this.props.ui.expanded }
-            logoImg="https://boldr.io/logo.png"
-            logoLink="/"
-            isPrimaryColor
-          />
+              items={sidebarLinks}
+              activeItem={this.props.routing.location.pathname}
+              location={this.props.routing.location.pathname}
+              onExpandCollapse={this.onExpandCollapse}
+              visible={this.props.ui.visible}
+              expanded={this.props.ui.expanded}
+              logoImg="https://boldr.io/logo.png"
+              logoLink="/"
+              isPrimaryColor
+            />
           : null}
         <DashboardWrapper>
-          <Topbar toggleSidebar={ this.handleHideSidebar } />
+          <Topbar toggleSidebar={this.handleHideSidebar} />
           <DashboardContent>
             <Grid fluid>
               {renderRoutes(route.routes)}

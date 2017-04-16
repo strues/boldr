@@ -1,16 +1,23 @@
 /* @flow */
-import { normalize, arrayOf, schema } from 'normalizr';
+import {normalize, arrayOf, schema} from 'normalizr';
 import merge from 'lodash/merge';
 import Axios from 'axios';
 import * as notif from '../../../../core/constants';
-import { notificationSend } from '../../../../state/modules/notifications/notifications';
+import {
+  notificationSend,
+} from '../../../../state/modules/notifications/notifications';
 import * as t from '../../actionTypes';
-import type { Dispatch, GetState, ThunkAction, Reducer } from '../../../../types/redux';
+import type {
+  Dispatch,
+  GetState,
+  ThunkAction,
+  Reducer,
+} from '../../../../types/redux';
 
-import { post as postSchema, arrayOfPost } from './schema';
+import {post as postSchema, arrayOfPost} from './schema';
 
 export function togglePostLayoutView() {
-  return { type: t.TOGGLE_POST_LAYOUT };
+  return {type: t.TOGGLE_POST_LAYOUT};
 }
 
 /**
@@ -28,44 +35,46 @@ export function togglePostLayoutView() {
  * or they arent required to be refreshed.
  */
 /* istanbul ignore next */
-export const fetchPostsIfNeeded = (): ThunkAction =>
-  (dispatch: Dispatch, getState: GetState, axios: any) => {
+export const fetchPostsIfNeeded = (): ThunkAction => (
+  dispatch: Dispatch,
+  getState: GetState,
+  axios: any,
+) => {
+  /* istanbul ignore next */
+  if (shouldFetchPosts(getState())) {
     /* istanbul ignore next */
-    if (shouldFetchPosts(getState())) {
-      /* istanbul ignore next */
-      return dispatch(fetchPosts(axios));
-    }
+    return dispatch(fetchPosts(axios));
+  }
 
-    /* istanbul ignore next */
-    return null;
-  };
+  /* istanbul ignore next */
+  return null;
+};
 
 /**
  * Function to retrieve posts from the api.
  * @return {Array} Posts returned as an array of post objects.
  */
-export const fetchPosts = (axios: any): ThunkAction =>
-  (dispatch: Dispatch) => {
-    dispatch({ type: t.FETCH_POSTS_REQUEST });
+export const fetchPosts = (axios: any): ThunkAction => (dispatch: Dispatch) => {
+  dispatch({type: t.FETCH_POSTS_REQUEST});
 
-    return axios
-      .get('/api/v1/posts?include=[author,tags]')
-      .then(res => {
-        const posts = res.data.results;
-        const normalizedPosts = normalize(posts, arrayOfPost);
+  return axios
+    .get('/api/v1/posts?include=[author,tags]')
+    .then(res => {
+      const posts = res.data.results;
+      const normalizedPosts = normalize(posts, arrayOfPost);
 
-        dispatch({
-          type: t.FETCH_POSTS_SUCCESS,
-          payload: normalizedPosts,
-        });
-      })
-      .catch(err => {
-        dispatch({
-          type: t.FETCH_POSTS_FAILURE,
-          error: err,
-        });
+      dispatch({
+        type: t.FETCH_POSTS_SUCCESS,
+        payload: normalizedPosts,
       });
-  };
+    })
+    .catch(err => {
+      dispatch({
+        type: t.FETCH_POSTS_FAILURE,
+        error: err,
+      });
+    });
+};
 /**
  * Called by fetchPostsIfNeeded to retrieve the state containing posts
  * @param  {Object} state   The blog state which contains posts
@@ -84,27 +93,28 @@ function shouldFetchPosts(state: Reducer) {
   * @exports fetchPost
   * @exports fetchPostIfNeeded
   *****************************************************************/
-export const fetchPost = (slug: string, axios: any): ThunkAction =>
-  (dispatch: Dispatch) => {
-    dispatch({
-      type: t.FETCH_POST_REQUEST,
-      slug,
-    });
-    return axios
-      .get(`/api/v1/posts/slug/${slug}?include=[author,tags]`)
-      .then(res => {
-        dispatch({
-          type: t.FETCH_POST_SUCCESS,
-          payload: res.data,
-        });
-      })
-      .catch(err => {
-        dispatch({
-          type: t.FETCH_POST_FAILURE,
-          error: err,
-        });
+export const fetchPost = (slug: string, axios: any): ThunkAction => (
+  dispatch: Dispatch,
+) => {
+  dispatch({
+    type: t.FETCH_POST_REQUEST,
+    slug,
+  });
+  return axios
+    .get(`/api/v1/posts/slug/${slug}?include=[author,tags]`)
+    .then(res => {
+      dispatch({
+        type: t.FETCH_POST_SUCCESS,
+        payload: res.data,
       });
-  };
+    })
+    .catch(err => {
+      dispatch({
+        type: t.FETCH_POST_FAILURE,
+        error: err,
+      });
+    });
+};
 
 /**
  * @function fetchPostIfNeeded
@@ -115,17 +125,20 @@ export const fetchPost = (slug: string, axios: any): ThunkAction =>
  * or they arent required to be refreshed.
  */
 /* istanbul ignore next */
-export const fetchPostIfNeeded = (slug: string): ThunkAction =>
-  (dispatch: Dispatch, getState: GetState, axios: any) => {
+export const fetchPostIfNeeded = (slug: string): ThunkAction => (
+  dispatch: Dispatch,
+  getState: GetState,
+  axios: any,
+) => {
+  /* istanbul ignore next */
+  if (shouldFetchPost(getState(), slug)) {
     /* istanbul ignore next */
-    if (shouldFetchPost(getState(), slug)) {
-      /* istanbul ignore next */
-      return dispatch(fetchPost(slug, axios));
-    }
+    return dispatch(fetchPost(slug, axios));
+  }
 
-    /* istanbul ignore next */
-    return null;
-  };
+  /* istanbul ignore next */
+  return null;
+};
 
 /**
  * Called by fetchPostIfNeeded to retrieve the state containing posts
@@ -135,11 +148,15 @@ export const fetchPostIfNeeded = (slug: string): ThunkAction =>
 const shouldFetchPost = (state: Reducer, slug: string): boolean => {
   // In development, we want to allow dispatching actions from here
   // or the hot reloading of reducers wont update the component state
-  if (process.env.NODE_ENV === 'development') return true;
+  if (process.env.NODE_ENV === 'development') {
+    return true;
+  }
 
   const singlePost = state.blog.posts.all[slug];
 
-  if (singlePost && state.blog.posts.isFetching) return false;
+  if (singlePost && state.blog.posts.isFetching) {
+    return false;
+  }
 
   return true;
 };
@@ -180,7 +197,7 @@ export function createPost(data: Post) {
 }
 
 const beginCreatePost = () => {
-  return { type: t.CREATE_POST_REQUEST };
+  return {type: t.CREATE_POST_REQUEST};
 };
 
 const createPostSuccess = (normalizedData: Object) => {
@@ -260,10 +277,10 @@ export function updatePost(postData: Post) {
   };
 }
 const updatePostDetails = () => {
-  return { type: t.UPDATE_POST_REQUEST };
+  return {type: t.UPDATE_POST_REQUEST};
 };
 const updatePostSuccess = response => {
-  return { type: t.UPDATE_POST_SUCCESS };
+  return {type: t.UPDATE_POST_SUCCESS};
 };
 const errorUpdatingPost = err => {
   return {

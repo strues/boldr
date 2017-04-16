@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import {shallow} from 'enzyme';
 import ActivityWidget from './ActivityWidget';
 
 const act = [
@@ -22,6 +22,6 @@ const act = [
 ];
 
 it('<ActivityWidget />, renders the widget with props', () => {
-  const wrapper = shallow(<ActivityWidget activities={ act } />);
+  const wrapper = shallow(<ActivityWidget activities={act} />);
   expect(wrapper.instance().props.activities).toEqual(act);
 });

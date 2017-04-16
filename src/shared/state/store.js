@@ -1,6 +1,6 @@
 /* eslint-disable dot-notation */
-import { createStore, applyMiddleware, compose } from 'redux';
-import { routerMiddleware } from 'react-router-redux';
+import {createStore, applyMiddleware, compose} from 'redux';
+import {routerMiddleware} from 'react-router-redux';
 import thunk from 'redux-thunk';
 import api from '../core/api';
 import rootReducer from './reducers';
@@ -12,7 +12,9 @@ export default function configureStore(preloadedState, history) {
 
   const enhancers = [
     applyMiddleware(...middlewares),
-    __DEV__ && typeof window === 'object' && typeof window.devToolsExtension !== 'undefined'
+    __DEV__ &&
+      typeof window === 'object' &&
+      typeof window.devToolsExtension !== 'undefined'
       ? window.devToolsExtension()
       : f => f,
   ];

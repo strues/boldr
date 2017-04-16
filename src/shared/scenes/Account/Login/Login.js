@@ -1,7 +1,7 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
 import Helmet from 'react-helmet';
-import { FormCard } from 'boldr-ui';
+import {FormCard} from 'boldr-ui';
 
 import LoginForm from './LoginForm';
 type Props = {
@@ -13,10 +13,12 @@ const Login = props => {
       <Helmet title="Login" />
       <FormCard
         title="Log In"
-        width={ 450 }
-        form={ <LoginForm onSubmit={ props.onSubmit } /> }
-        extra1={ <Link to="/account/forgot-password">Forgot your password?</Link> }
-        extra2={ <Link to="/account/signup">Create an account</Link> }
+        width={450}
+        form={<LoginForm onSubmit={props.onSubmit} />}
+        extra1={
+          <Link to="/account/forgot-password">Forgot your password?</Link>
+        }
+        extra2={<Link to="/account/signup">Create an account</Link>}
       />
     </div>
   );

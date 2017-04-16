@@ -1,8 +1,13 @@
 /* @flow */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
-import { uploadFiles, fetchMedia, deleteMedia, selectFile } from '../../../state/modules/attachments/actions';
+import {
+  uploadFiles,
+  fetchMedia,
+  deleteMedia,
+  selectFile,
+} from '../../../state/modules/attachments/actions';
 import FileManager from './FileManager';
 
 type Props = {
@@ -50,11 +55,11 @@ class FileManagerContainer extends Component {
   render() {
     return (
       <FileManager
-        onUploadFinish={ this.onUploadFinish }
-        handleRemoveMedia={ this.handleRemoveMedia }
-        attachments={ this.props.attachments }
-        selectFile={ this.selectTheFile }
-        ui={ this.props.ui }
+        onUploadFinish={this.onUploadFinish}
+        handleRemoveMedia={this.handleRemoveMedia}
+        attachments={this.props.attachments}
+        selectFile={this.selectTheFile}
+        ui={this.props.ui}
       />
     );
   }

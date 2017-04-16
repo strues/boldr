@@ -17,10 +17,12 @@ const validate = values => {
   }
   return errors;
 };
-const requiredValidator = value => value ? undefined : 'Required field!';
+const requiredValidator = value => (value ? undefined : 'Required field!');
 
 const emailValidator = value =>
-  value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value) ? 'Invalid email address' : undefined;
+  (value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)
+    ? 'Invalid email address'
+    : undefined);
 
 export default validate;
-export { requiredValidator, emailValidator };
+export {requiredValidator, emailValidator};

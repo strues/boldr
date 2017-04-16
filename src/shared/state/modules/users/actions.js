@@ -1,8 +1,8 @@
-import { push } from 'react-router-redux';
+import {push} from 'react-router-redux';
 import Axios from 'axios';
-import { setToken, removeToken } from '../../../core/authentication/token';
+import {setToken, removeToken} from '../../../core/authentication/token';
 import * as notif from '../../../core/constants';
-import { notificationSend } from '../notifications/notifications';
+import {notificationSend} from '../notifications/notifications';
 import * as t from '../actionTypes';
 
 /**
@@ -16,7 +16,7 @@ export function forgotPassword(email) {
     dispatch({
       type: t.FORGOT_PASSWORD_REQUEST,
     });
-    return Axios.post('/api/v1/tokens/forgot-password', { data: email })
+    return Axios.post('/api/v1/tokens/forgot-password', {data: email})
       .then(res => {
         dispatch({
           type: t.FORGOT_PASSWORD_SUCCESS,
@@ -28,7 +28,8 @@ export function forgotPassword(email) {
         dispatch({
           type: t.FORGOT_PASSWORD_FAILURE,
           error: err,
-        }));
+        }),
+      );
   };
 }
 
@@ -43,7 +44,9 @@ export function resetPassword(password, token) {
     dispatch({
       type: t.RESET_PASSWORD_REQUEST,
     });
-    return Axios.post(`/api/v1/tokens/reset-password/${token}`, { data: password })
+    return Axios.post(`/api/v1/tokens/reset-password/${token}`, {
+      data: password,
+    })
       .then(res => {
         dispatch({
           type: t.RESET_PASSWORD_SUCCESS,
@@ -55,7 +58,8 @@ export function resetPassword(password, token) {
         dispatch({
           type: t.RESET_PASSWORD_FAILURE,
           error: err,
-        }));
+        }),
+      );
   };
 }
 
@@ -82,7 +86,8 @@ export function verifyAccount(token) {
         dispatch({
           type: t.VERIFY_ACCOUNT_FAILURE,
           error: err,
-        }));
+        }),
+      );
   };
 }
 
@@ -93,48 +98,56 @@ export function verifyAccount(token) {
   * @exports editProfile
   *****************************************************************/
 
-export const fetchProfile = (username: string, axios: any): ThunkAction =>
-  (dispatch: Dispatch) => {
-    dispatch({
-      type: t.FETCH_PROFILE_REQUEST,
-      username,
-    });
+export const fetchProfile = (username: string, axios: any): ThunkAction => (
+  dispatch: Dispatch,
+) => {
+  dispatch({
+    type: t.FETCH_PROFILE_REQUEST,
+    username,
+  });
 
-    return axios
-      .get(`/api/v1/users/${username}/profile`)
-      .then(res => {
-        dispatch({
-          type: t.FETCH_PROFILE_SUCCESS,
-          payload: res.data,
-        });
-      })
-      .catch(err => {
-        dispatch({
-          type: t.FETCH_PROFILE_FAILURE,
-          error: err,
-        });
+  return axios
+    .get(`/api/v1/users/${username}/profile`)
+    .then(res => {
+      dispatch({
+        type: t.FETCH_PROFILE_SUCCESS,
+        payload: res.data,
       });
-  };
-export const fetchProfileIfNeeded = (username: string): ThunkAction =>
-    (dispatch: Dispatch, getState: GetState, axios: any) => {
-      /* istanbul ignore next */
-      if (shouldFetchProfile(getState(), username)) {
-        /* istanbul ignore next */
-        return dispatch(fetchProfile(username, axios));
-      }
-
-      /* istanbul ignore next */
-      return null;
-    };
+    })
+    .catch(err => {
+      dispatch({
+        type: t.FETCH_PROFILE_FAILURE,
+        error: err,
+      });
+    });
+};
+export const fetchProfileIfNeeded = (username: string): ThunkAction => (
+  dispatch: Dispatch,
+  getState: GetState,
+  axios: any,
+) => {
   /* istanbul ignore next */
+  if (shouldFetchProfile(getState(), username)) {
+    /* istanbul ignore next */
+    return dispatch(fetchProfile(username, axios));
+  }
+
+  /* istanbul ignore next */
+  return null;
+};
+/* istanbul ignore next */
 const shouldFetchProfile = (state: Reducer, username: string): boolean => {
-    // In development, we want to allow dispatching actions from here
-    // or the hot reloading of reducers wont update the component state
-  if (process.env.NODE_ENV === 'development') return true;
+  // In development, we want to allow dispatching actions from here
+  // or the hot reloading of reducers wont update the component state
+  if (process.env.NODE_ENV === 'development') {
+    return true;
+  }
 
   const theProfile = state.users.profile[username];
 
-  if (theProfile && state.users.isFetching) return false;
+  if (theProfile && state.users.isFetching) {
+    return false;
+  }
 
   return true;
 };
@@ -154,7 +167,7 @@ export function editProfile(userData) {
 }
 
 const beginUpdateProfile = () => {
-  return { type: t.EDIT_PROFILE_REQUEST };
+  return {type: t.EDIT_PROFILE_REQUEST};
 };
 
 const doneUpdateProfile = res => {

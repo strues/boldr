@@ -1,14 +1,22 @@
 /* @flow */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import Helmet from 'react-helmet';
-import { bindActionCreators } from 'redux';
-import { Loader } from 'boldr-ui';
+import {bindActionCreators} from 'redux';
+import {Loader} from 'boldr-ui';
 
-import { BaseTemplate } from '../../templates';
-import { fetchProfileIfNeeded } from '../../state/modules/users';
-import { uploadProfileImage, uploadAvatarImage } from '../../state/modules/attachments/actions';
-import { hideModal, showModal, openDrawer, closeDrawer } from '../../state/modules/boldr/ui/actions';
+import {BaseTemplate} from '../../templates';
+import {fetchProfileIfNeeded} from '../../state/modules/users';
+import {
+  uploadProfileImage,
+  uploadAvatarImage,
+} from '../../state/modules/attachments/actions';
+import {
+  hideModal,
+  showModal,
+  openDrawer,
+  closeDrawer,
+} from '../../state/modules/boldr/ui/actions';
 import Profile from './Profile';
 
 type Props = {
@@ -33,7 +41,7 @@ export class ProfileContainer extends Component {
     fetchProfileIfNeeded: () => {},
   };
   componentDidMount() {
-    const { match: { params } } = this.props;
+    const {match: {params}} = this.props;
     this.props.dispatch(fetchProfileIfNeeded(params.username));
   }
   hideDrawer = () => {
@@ -57,25 +65,27 @@ export class ProfileContainer extends Component {
   props: Props;
 
   render() {
-    const { isFetching, profile, user } = this.props;
+    const {isFetching, profile, user} = this.props;
 
     if (isFetching) {
       return <Loader />;
     }
     return (
-      <BaseTemplate helmetMeta={ <Helmet title={ `${profile.username}'s Profile` } /> }>
+      <BaseTemplate
+        helmetMeta={<Helmet title={`${profile.username}'s Profile`} />}
+      >
         <Profile
-          profile={ profile }
-          email={ user.email }
-          modal={ this.props.modal }
-          closeModal={ this.closeModal }
-          openModal={ this.openModal }
-          drawer={ this.props.drawer }
-          openDrawer={ this.showDrawer }
-          closeDrawer={ this.hideDrawer }
-          uploadProfileImg={ this.uploadProfileImg }
-          uploadAvatarImg={ this.uploadAvatarImg }
-          { ...this.props }
+          profile={profile}
+          email={user.email}
+          modal={this.props.modal}
+          closeModal={this.closeModal}
+          openModal={this.openModal}
+          drawer={this.props.drawer}
+          openDrawer={this.showDrawer}
+          closeDrawer={this.hideDrawer}
+          uploadProfileImg={this.uploadProfileImg}
+          uploadAvatarImg={this.uploadAvatarImg}
+          {...this.props}
         />
       </BaseTemplate>
     );

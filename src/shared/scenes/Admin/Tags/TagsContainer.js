@@ -1,7 +1,8 @@
 /* @flow */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchTagsIfNeeded, getTags } from '../../../state/modules/blog/tags';
+// $FlowIssue
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {fetchTagsIfNeeded, getTags} from '../../../state/modules/blog/tags';
 import Tags from './Tags';
 
 type Props = {
@@ -13,13 +14,13 @@ type Props = {
 
 class TagsContainer extends Component {
   componentDidMount() {
-    const { dispatch } = this.props;
+    const {dispatch} = this.props;
     dispatch(fetchTagsIfNeeded());
   }
   props: Props;
 
   render() {
-    return <Tags tags={ this.props.tags } currentTag={ this.props.currentTag } />;
+    return <Tags tags={this.props.tags} currentTag={this.props.currentTag} />;
   }
 }
 

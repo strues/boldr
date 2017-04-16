@@ -1,7 +1,7 @@
 import React from 'react';
-import { createStore } from 'redux';
-import { shallow } from 'enzyme';
-import { shallowToJson } from 'enzyme-to-json';
+import {createStore} from 'redux';
+import {shallow} from 'enzyme';
+import {shallowToJson} from 'enzyme-to-json';
 import TagBlock from './TagBlock';
 
 const fakeTags = [
@@ -21,7 +21,7 @@ describe('<TagBlock />', () => {
   });
 
   it('renders <TagBlock /> with tags', () => {
-    const wrapper = shallow(<TagBlock tags={ fakeTags } />);
+    const wrapper = shallow(<TagBlock tags={fakeTags} />);
     expect(wrapper.find('div').length).toBe(1);
   });
 
