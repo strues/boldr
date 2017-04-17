@@ -40,6 +40,7 @@ exports[`<Home /> renders snapshot 1`] = `
     }
   >
     <Row
+      componentClass="div"
       style={
         Object {
           "padding": "25px",

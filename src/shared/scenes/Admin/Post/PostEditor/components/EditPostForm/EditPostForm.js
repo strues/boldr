@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React, {Component} from 'react';
 import {Field, reduxForm} from 'redux-form';
 import styled from 'styled-components';
@@ -37,7 +38,8 @@ const Wrapper = styled.section`
 const EditPostForm = (props: Props) => {
   const {handleSubmit} = props;
   /**
-     * wraps the editor component for embedding into redux-form as an input component
+     * wraps the editor component for embedding into redux-form as
+     * an input component
      * @param  {object} input
      * @param  {string} label
      * @return {element} BoldrEditor
@@ -49,7 +51,7 @@ const EditPostForm = (props: Props) => {
   return (
     <Row>
       <Col xs>
-        <Heading size={3} weight={300}>
+        <Heading size={3}>
           Editing {props.initialValues.title}
         </Heading>
         <form onSubmit={handleSubmit}>

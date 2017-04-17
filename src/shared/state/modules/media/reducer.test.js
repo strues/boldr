@@ -7,6 +7,7 @@ describe('Attachment', () => {
       all: {},
       ids: [],
       isFetching: false,
+      currentMedia: {},
     });
   });
 });

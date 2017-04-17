@@ -77,13 +77,16 @@ export class AdminDashboard extends Component {
             />
           : null}
         <DashboardWrapper>
-          <Topbar toggleSidebar={this.handleHideSidebar} />
+          <Topbar
+            toggleSidebar={this.handleHideSidebar}
+            avatarUrl={this.props.me.avatarUrl}
+            username={this.props.me.username}
+          />
           <DashboardContent>
             <Grid fluid>
               {renderRoutes(route.routes)}
             </Grid>
           </DashboardContent>
-          <DashboardFooter copyright="© 2017 Steven Truesdell" />
         </DashboardWrapper>
       </div>
     );

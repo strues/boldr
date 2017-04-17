@@ -1277,14 +1277,15 @@ bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.6"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.6.tgz#53344adb14617a13f6e8dd2ce28905d1c0ba3215"
 
-boldr-ui@0.2.5:
-  version "0.2.5"
-  resolved "https://registry.yarnpkg.com/boldr-ui/-/boldr-ui-0.2.5.tgz#3a6bcb1a7ab9d6c74fdbc2b19d24e852c3748e33"
+boldr-ui@0.2.9:
+  version "0.2.9"
+  resolved "https://registry.yarnpkg.com/boldr-ui/-/boldr-ui-0.2.9.tgz#cb59d3e92fca8a7cf0bc386bc0b94a56da31d55e"
   dependencies:
     animate-components "^0.6.1"
     classnames "^2.2.5"
     coolors-to-hex "^1.0.3"
     prop-types "^15.5.8"
+    ramda "^0.23.0"
     react-md "^1.0.11"
     styled-components "^1.4.5"
     styled-theme "^0.3.3"
@@ -6253,6 +6254,10 @@ raf@^3.1.0:
 railroad-diagrams@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/railroad-diagrams/-/railroad-diagrams-1.0.0.tgz#eb7e6267548ddedfb899c1b90e57374559cddb7e"
+
+ramda@^0.23.0:
+  version "0.23.0"
+  resolved "https://registry.yarnpkg.com/ramda/-/ramda-0.23.0.tgz#ccd13fff73497a93974e3e86327bfd87bd6e8e2b"
 
 randexp@^0.4.2:
   version "0.4.5"

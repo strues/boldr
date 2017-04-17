@@ -15,7 +15,7 @@ import PostListingContainer
   from './scenes/Blog/PostListing/PostListingContainer';
 import SinglePost from './scenes/Blog/SinglePost/SinglePost';
 import TagListContainer from './scenes/Blog/TagList/TagListContainer';
-
+import MediaManager from './scenes/Admin/Media/MediaManager';
 import PostEditor from './scenes/Admin/Post/PostEditor';
 import NewPostContainer from './scenes/Admin/Post/NewPost/NewPostContainer';
 import FileManagerContainer
@@ -30,7 +30,7 @@ import Error404 from './pages/Error404';
 
 import {fetchSettingsIfNeeded} from './state/modules/boldr/settings';
 import {fetchMembersIfNeeded} from './state/modules/admin/members';
-import {fetchMedia} from './state/modules/attachments/actions';
+import {fetchAttachmentsIfNeeded} from './state/modules/attachments/actions';
 import {fetchMediaIfNeeded} from './state/modules/media/actions';
 import {fetchProfileIfNeeded} from './state/modules/users';
 import {
@@ -173,7 +173,7 @@ export default [
             exact: true,
             component: FileManagerContainer,
             loadData: async (dispatch: Dispatch) =>
-              Promise.all([await dispatch(fetchMedia())]),
+              Promise.all([await dispatch(fetchAttachmentsIfNeeded())]),
           },
           {
             path: '/admin/file-editor/:id',
@@ -217,6 +217,11 @@ export default [
             component: MediaContainer,
             loadData: async (dispatch: Dispatch) =>
               Promise.all([await dispatch(fetchMediaIfNeeded())]),
+          },
+          {
+            path: '/admin/media/:id',
+            exact: true,
+            component: MediaManager,
           },
         ],
       },

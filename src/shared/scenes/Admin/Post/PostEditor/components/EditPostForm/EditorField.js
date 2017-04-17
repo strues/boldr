@@ -1,5 +1,4 @@
 /* @flow */
-// $FlowIssue
 import React, {Component} from 'react';
 import {Editor} from 'react-draft-wysiwyg';
 import {stateFromHTML} from 'draft-js-import-html';

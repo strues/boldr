@@ -1,18 +1,30 @@
 import {push} from 'react-router-redux';
 import {normalize, arrayOf, schema} from 'normalizr';
 import api from '../../../core/api';
-import {getToken} from '../../../core/authentication/token';
+
 import * as notif from '../../../core/constants';
 import {notificationSend} from '../notifications/notifications';
 import * as t from '../actionTypes';
 import {editProfile} from '../users/actions';
 import {media as mediaSchema, arrayOfMedia} from './schema';
 
-const token = getToken();
-
 export const FETCH_MEDIAS_REQUEST = '@boldr/media/FETCH_MEDIAS_REQUEST';
 export const FETCH_MEDIAS_SUCCESS = '@boldr/media/FETCH_MEDIAS_SUCCESS';
 export const FETCH_MEDIAS_FAILURE = '@boldr/media/FETCH_MEDIAS_FAILURE';
+export const GET_MEDIA_REQUEST = '@boldr/media/GET_MEDIA_REQUEST';
+export const GET_MEDIA_SUCCESS = '@boldr/media/GET_MEDIA_SUCCESS';
+export const GET_MEDIA_FAILURE = '@boldr/media/GET_MEDIA_FAILURE';
+export const SELECT_MEDIA = '@boldr/media/SELECT_MEDIA';
+export const UPLOAD_MEDIA_REQUEST = '@boldr/media/UPLOAD_MEDIA_REQUEST';
+export const UPLOAD_MEDIA_SUCCESS = '@boldr/media/UPLOAD_MEDIA_SUCCESS';
+export const UPLOAD_MEDIA_FAILURE = '@boldr/media/UPLOAD_MEDIA_FAILURE';
+export const EDIT_MEDIA_REQUEST = '@boldr/media/EDIT_MEDIA_REQUEST';
+export const EDIT_MEDIA_SUCCESS = '@boldr/media/EDIT_MEDIA_SUCCESS';
+export const EDIT_MEDIA_FAILURE = '@boldr/media/EDIT_MEDIA_FAILURE';
+export const DELETE_MEDIA_REQUEST = '@boldr/media/DELETE_MEDIA_REQUEST';
+export const DELETE_MEDIA_SUCCESS = '@boldr/media/DELETE_MEDIA_SUCCESS';
+export const DELETE_MEDIA_FAILURE = '@boldr/media/DELETE_MEDIA_FAILURE';
+
 /**
   * FETCH MEDIA ACTIONS
   * -------------------------
@@ -56,150 +68,95 @@ export const fetchMediaIfNeeded = (): ThunkAction => (
 };
 
 function shouldFetchMedia(state) {
-  // const medias = state.media.ids;
-  // if (!medias.length) {
-  //   return true;
-  // }
+  const medias = state.media.ids;
+  if (!medias.length) {
+    return true;
+  }
 
-  return true;
+  return false;
 }
+
 function fetchMediaStart() {
   return {
-    type: t.GET_ATTACHMENT_REQUEST,
+    type: GET_MEDIA_REQUEST,
   };
 }
 
 function fetchMediaSuccess(normalizedMedia) {
   return {
-    type: t.GET_ATTACHMENT_SUCCESS,
+    type: GET_MEDIA_SUCESS,
     payload: normalizedMedia,
   };
 }
 
 function fetchMediaFail(err) {
   return {
-    type: t.GET_ATTACHMENT_FAILURE,
+    type: GET_MEDIA_FAILURE,
     error: err,
+  };
+}
+export const toggleMedia = filter => ({
+  type: 'TOGGLE_MEDIA_TYPE',
+  filter,
+});
+
+export function selectMedia(file: Object) {
+  return dispatch => {
+    dispatch({
+      type: SELECT_MEDIA,
+      file,
+    });
   };
 }
 
 /**
-  * UPLOAD FILE ACTIONS
+  * UPLOAD MEDIA ACTIONS
   * -------------------------
-  * @exports uploadFiles
+  * @exports uploadMedia
   *****************************************************************/
 
 export function uploadMedia(payload) {
   return dispatch => {
-    dispatch(beginUpload());
+    dispatch({
+      type: UPLOAD_MEDIA_REQUEST,
+    });
     const data = new FormData();
     data.append('file', payload);
-    // data.append('field', 'mediaType', 1);
-    console.log(payload);
-    return Axios.post('/api/v1/attachments', data)
+    return api
+      .post('/api/v1/medias', data)
       .then(res => {
-        if (!res.status === 201) {
-          dispatch(uploadFail(res));
-          dispatch(notificationSend(notif.MSG_UPLOAD_ERROR));
-        }
-        dispatch(uploadSuccess(res));
+        dispatch({
+          type: UPLOAD_MEDIA_SUCCESS,
+          payload: res.data,
+        });
         dispatch(notificationSend(notif.MSG_UPLOAD_SUCCESS));
       })
       .catch(err => {
-        dispatch(uploadFail(err));
+        dispatch({
+          type: t.UPLOAD_ATTACHMENT_FAILURE,
+          error: err,
+        });
       });
   };
 }
-
-function beginUpload() {
-  return {
-    type: t.UPLOAD_ATTACHMENT_REQUEST,
-  };
-}
-
-function uploadSuccess(res) {
-  return {
-    type: t.UPLOAD_ATTACHMENT_SUCCESS,
-    payload: res.data,
-  };
-}
-
-function uploadFail(err) {
-  return {
-    type: t.UPLOAD_ATTACHMENT_FAILURE,
-    error: err,
-  };
-}
-
-/**
-  * UPLOAD FILE ACTIONS
-  * -------------------------
-  * @exports uploadFiles
-  *****************************************************************/
-
-export function uploadPostImage(payload) {
-  return dispatch => {
-    dispatch(beginUploadPostImage());
-    const data = new FormData();
-    data.append('payload.name', payload);
-    return Axios.post('/api/v1/attachments', data)
-      .then(res => {
-        if (!res.status === 201) {
-          dispatch(uploadPostImageFail(res));
-          dispatch(notificationSend(notif.MSG_UPLOAD_ERROR));
-        }
-        dispatch(uploadPostImageSuccess(res));
-        dispatch(notificationSend(notif.MSG_UPLOAD_SUCCESS));
-      })
-      .catch(err => {
-        dispatch(uploadPostImageFail(err));
-        dispatch(notificationSend(notif.MSG_UPLOAD_ERROR));
-      });
-  };
-}
-
-function beginUploadPostImage() {
-  return {
-    type: t.UPLOAD_POST_IMG_REQUEST,
-  };
-}
-
-function uploadPostImageSuccess(res) {
-  return {
-    type: t.UPLOAD_POST_IMG_SUCCESS,
-    payload: res.data,
-  };
-}
-
-function uploadPostImageFail(err) {
-  return {
-    type: t.UPLOAD_POST_IMG_FAILURE,
-    error: err,
-  };
-}
-
-/**
-  * UPLOAD FILE ACTIONS
-  * -------------------------
-  * @exports uploadFiles
-  *****************************************************************/
 
 export function deleteMedia(id) {
   return dispatch => {
     dispatch({
-      type: t.DELETE_ATTACHMENT_REQUEST,
+      type: DELETE_MEDIA_REQUEST,
     });
-    return Axios.delete(`/api/v1/attachments/${id}`)
+    return api
+      .delete(`/api/v1/media/${id}`)
       .then(res => {
         dispatch({
-          type: t.DELETE_ATTACHMENT_SUCCESS,
+          type: DELETE_MEDIA_SUCCESS,
           id,
         });
         dispatch(notificationSend(notif.MSG_FILE_REMOVED));
       })
       .catch(err => {
         dispatch({
-          type: t.DELETE_ATTACHMENT_FAILURE,
+          type: DELETE_MEDIA_FAILURE,
           error: err,
         });
       });
@@ -207,15 +164,16 @@ export function deleteMedia(id) {
 }
 
 /**
-  * UPDATE FILE ACTIONS
+  * UPDATE MEDIA ACTIONS
   * -------------------------
-  * @exports updateAttachment
+  * @exports updateMedia
   *****************************************************************/
 
-export function updateAttachment(attachmentData) {
+export function updateMedia(attachmentData) {
   return (dispatch: Function) => {
     dispatch(updateAttachmentReq());
-    return Axios.put(`/api/v1/attachments/${attachmentData.id}`, attachmentData)
+    return api
+      .put(`/api/v1/media/${attachmentData.id}`, attachmentData)
       .then(res => {
         dispatch(updateAttachmentSuccess(res));
         dispatch(
@@ -239,99 +197,14 @@ export function updateAttachment(attachmentData) {
   };
 }
 const updateAttachmentReq = () => {
-  return {type: t.UPDATE_ATTACHMENT_REQUEST};
+  return {type: UPDATE_MEDIA_REQUEST};
 };
 const updateAttachmentSuccess = response => {
-  return {type: t.UPDATE_ATTACHMENT_SUCCESS};
+  return {type: UPDATE_MEDIA_SUCCESS};
 };
 const errorUpdateAttachment = err => {
   return {
-    type: t.UPDATE_ATTACHMENT_FAILURE,
+    type: UPDATE_MEDIA_FAILURE,
     error: err,
   };
 };
-
-/**
-  * SELECT FILE ACTIONS
-  * -------------------------
-  * @exports updateAttachment
-  *****************************************************************/
-
-export function selectedFile(file: Object) {
-  return {
-    type: t.SELECT_FILE,
-    file,
-  };
-}
-
-export function selectFile(file) {
-  return dispatch => {
-    dispatch(selectedFile(file));
-  };
-}
-
-/**
-  * UPLOAD PROFILE ACTIONS
-  * -------------------------
-  * @exports uploadProfileImage
-  * @exports uploadAvatarImage
-  *****************************************************************/
-
-export function uploadProfileImage(payload) {
-  return dispatch => {
-    dispatch({
-      type: t.UPLOAD_PROFILE_IMG_REQUEST,
-    });
-    const data = new FormData();
-    data.append('payload.name', payload);
-    return Axios.post('/api/v1/attachments', data)
-      .then(res => {
-        const userData = {
-          id: res.data.user_id,
-          profileImage: res.data.url,
-        };
-        dispatch({
-          type: t.UPLOAD_PROFILE_IMG_SUCCESS,
-          payload: res.data,
-        });
-        dispatch(editProfile(userData));
-        dispatch(notificationSend(notif.MSG_UPLOAD_SUCCESS));
-      })
-      .catch(err => {
-        dispatch({
-          type: t.UPLOAD_PROFILE_IMG_FAILURE,
-          error: err,
-        });
-        dispatch(notificationSend(notif.MSG_UPLOAD_ERROR));
-      });
-  };
-}
-
-export function uploadAvatarImage(payload) {
-  return dispatch => {
-    dispatch({type: t.UPLOAD_AVATAR_IMG_REQUEST});
-    const data = new FormData();
-    data.append('payload.name', payload);
-    return Axios.post('/api/v1/attachments', data)
-      .then(res => {
-        const userData = {
-          id: res.data.user_id,
-          avatarUrl: res.data.url,
-        };
-        console.log('user', userData);
-        dispatch(editProfile(userData));
-        dispatch({
-          type: t.UPLOAD_AVATAR_IMG_SUCCESS,
-          payload: res.data,
-        });
-        dispatch(notificationSend(notif.MSG_UPLOAD_SUCCESS));
-      })
-      .catch(err => {
-        dispatch({
-          type: t.UPLOAD_AVATAR_IMG_FAILURE,
-          error: err,
-        });
-        dispatch(notificationSend(notif.MSG_UPLOAD_ERROR));
-      });
-  };
-}

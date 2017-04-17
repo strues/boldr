@@ -1,5 +1,4 @@
 /* @flow */
-// $FlowIssue
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {fetchTagsIfNeeded, getTags} from '../../../state/modules/blog/tags';

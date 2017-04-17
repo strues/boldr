@@ -19,17 +19,13 @@ import ProfileContent from './components/ProfileContent';
 import OwnProfile from './components/OwnProfile';
 
 type Props = {
-  className: ?string,
+  className?: string,
   profile: Object,
   email: string,
-  drawer: Boolean,
-  closeDrawer: ?Function,
-  uploadProfileImg: ?Function,
-  uploadAvatarImg: ?Function,
-  openDrawer: ?Function,
-  _toggleDrawer: ?Function,
-  _closeDrawer: ?Function,
-  _handleToggle: ?Function,
+  drawer: boolean,
+  uploadProfileImg: () => void,
+  uploadAvatarImg: () => void,
+  handleDrawerClick: () => void,
 };
 
 type State = {
@@ -50,9 +46,6 @@ class Profile extends Component {
       showDropzone: false,
       avatar: false,
     };
-    (this: any)._toggleDrawer = this._toggleDrawer.bind(this);
-    (this: any)._closeDrawer = this._closeDrawer.bind(this);
-    (this: any)._handleToggle = this._handleToggle.bind(this);
     (this: any).setMe = this.setMe.bind(this);
     (this: any).onDrop = this.onDrop.bind(this);
     (this: any).onOpenClick = this.onOpenClick.bind(this);
@@ -66,7 +59,7 @@ class Profile extends Component {
 
   props: Props;
   onDrop(files: Array<Object>) {
-    console.log('Accepted files: ', files);
+    // $FlowIssue
     this.setState({
       file: files[0],
       showDropzone: false,
@@ -80,6 +73,7 @@ class Profile extends Component {
   }
 
   onOpenClick() {
+    // $FlowIssue
     this.dropzone.open();
   }
 
@@ -91,19 +85,7 @@ class Profile extends Component {
       me: isMe,
     });
   }
-  _handleToggle(visible: boolean) {
-    this.props.drawer === true
-      ? this.props.closeDrawer()
-      : this.props.openDrawer();
-  }
 
-  _closeDrawer() {
-    this.props.closeDrawer();
-  }
-
-  _toggleDrawer() {
-    this.props.openDrawer();
-  }
   handleAvatarImgClick = () => {
     this.setState({
       profImg: false,
@@ -138,15 +120,18 @@ class Profile extends Component {
     );
   };
   render() {
-    const {profile, className} = this.props;
-    const classes = classnames(BASE_ELEMENT, className);
+    const {profile} = this.props;
+    const classes = classnames(BASE_ELEMENT);
     const UserProfileBg = styled.div`
       width: 100%;
       height: 375px;
       background-image: url(${profile.profileImage});
       background-size: cover;
     `;
-    const close = <Button icon onClick={this._closeDrawer}>close</Button>;
+    const close = (
+      <Button icon onClick={this.props.handleDrawerClick}>close</Button>
+    );
+
     const header = (
       <Toolbar
         nav={close}
@@ -165,7 +150,7 @@ class Profile extends Component {
                 <ProfileContent
                   me={this.state.me}
                   handleProfileImgClick={this.handleProfileImgClick}
-                  toggleDrawer={this._toggleDrawer}
+                  toggleDrawer={this.props.handleDrawerClick}
                   handleAvatarImgClick={this.handleAvatarImgClick}
                   profile={profile}
                 />
@@ -179,7 +164,7 @@ class Profile extends Component {
               position="right"
               navItems={null}
               visible={this.props.drawer}
-              onVisibilityToggle={this._handleToggle}
+              onVisibilityToggle={this.props.handleDrawerClick}
               type={Drawer.DrawerTypes.TEMPORARY}
               header={header}
               style={{zIndex: 100}}

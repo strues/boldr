@@ -4,8 +4,8 @@ import {connect} from 'react-redux';
 
 import {
   uploadFiles,
-  fetchMedia,
-  deleteMedia,
+  fetchAttachmentsIfNeeded,
+  deleteAttachment,
   selectFile,
 } from '../../../state/modules/attachments/actions';
 import FileManager from './FileManager';
@@ -15,9 +15,9 @@ type Props = {
   attachments: Object,
   dispatch: Function,
   selectFile: () => void,
-  deleteMedia: () => void,
+  deleteAttachment: () => void,
   uploadFiles: () => void,
-  fetchMedia: () => void,
+  fetchAttachmentsIfNeeded: () => void,
   hideModal: () => void,
   showModal: () => void,
   ui: Object,
@@ -25,7 +25,7 @@ type Props = {
 
 class FileManagerContainer extends Component {
   componentDidMount() {
-    this.props.dispatch(fetchMedia());
+    this.props.dispatch(fetchAttachmentsIfNeeded());
   }
   props: Props;
 
@@ -45,7 +45,7 @@ class FileManagerContainer extends Component {
   };
 
   handleRemoveMedia = mediaId => {
-    this.props.dispatch(deleteMedia(mediaId));
+    this.props.dispatch(deleteAttachment(mediaId));
   };
 
   selectTheFile = file => {

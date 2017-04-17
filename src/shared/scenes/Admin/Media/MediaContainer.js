@@ -3,17 +3,17 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import {fetchMediaIfNeeded} from '../../../state/modules/media/actions';
+import {fetchMediaIfNeeded, getMedia} from '../../../state/modules/media';
 import Media from './Media';
+import VisibleMedia from './VisibleMedia';
 
 type Props = {
-  members: Object,
   dispatch: Function,
   fetchMediaIfNeeded: () => {},
-  updateMember: Function,
   hideModal: () => void,
   showModal: () => void,
   ui: Object,
+  media: Array<Object>,
 };
 
 export class MediaContainer extends Component {
@@ -28,14 +28,14 @@ export class MediaContainer extends Component {
   props: Props;
 
   render() {
-    return <Media />;
+    return <VisibleMedia media={this.props.media} />;
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   return {
     ui: state.boldr.ui,
-    media: state.boldr.media,
+    media: getMedia(state),
   };
 };
 

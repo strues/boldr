@@ -35,7 +35,7 @@ export const fetchAttachments = (axios: any): ThunkAction => (
     });
 };
 /* istanbul ignore next */
-export const fetchMedia = (): ThunkAction => (
+export const fetchAttachmentsIfNeeded = (): ThunkAction => (
   dispatch: Dispatch,
   getState: GetState,
   axios: any,
@@ -60,25 +60,6 @@ function shouldFetchAttachments(state) {
   }
   return attachments;
 }
-function fetchMediaStart() {
-  return {
-    type: t.GET_ATTACHMENT_REQUEST,
-  };
-}
-
-function fetchMediaSuccess(response) {
-  return {
-    type: t.GET_ATTACHMENT_SUCCESS,
-    payload: response.body,
-  };
-}
-
-function fetchMediaFail(err) {
-  return {
-    type: t.GET_ATTACHMENT_FAILURE,
-    error: err,
-  };
-}
 
 /**
   * UPLOAD FILE ACTIONS
@@ -91,10 +72,8 @@ export function uploadFiles(payload) {
     dispatch(beginUpload());
     const data = new FormData();
     data.append('file', payload);
-    data.append('field', 'mediaType', 1);
-    console.log(payload);
     return api
-      .post('/api/v1/media', data)
+      .post('/api/v1/attachments', data)
       .then(res => {
         if (!res.status === 201) {
           dispatch(uploadFail(res));
@@ -143,10 +122,6 @@ export function uploadPostImage(payload) {
     return api
       .post('/api/v1/attachments', data)
       .then(res => {
-        if (!res.status === 201) {
-          dispatch(uploadPostImageFail(res));
-          dispatch(notificationSend(notif.MSG_UPLOAD_ERROR));
-        }
         dispatch(uploadPostImageSuccess(res));
         dispatch(notificationSend(notif.MSG_UPLOAD_SUCCESS));
       })
@@ -178,12 +153,12 @@ function uploadPostImageFail(err) {
 }
 
 /**
-  * UPLOAD FILE ACTIONS
+  * DELETE FILE ACTIONS
   * -------------------------
-  * @exports uploadFiles
+  * @exports deleteAttachment
   *****************************************************************/
 
-export function deleteMedia(id) {
+export function deleteAttachment(id) {
   return dispatch => {
     dispatch({
       type: t.DELETE_ATTACHMENT_REQUEST,
@@ -205,7 +180,6 @@ export function deleteMedia(id) {
       });
   };
 }
-
 /**
   * UPDATE FILE ACTIONS
   * -------------------------
@@ -258,16 +232,12 @@ const errorUpdateAttachment = err => {
   * @exports updateAttachment
   *****************************************************************/
 
-export function selectedFile(file: Object) {
-  return {
-    type: t.SELECT_FILE,
-    file,
-  };
-}
-
-export function selectFile(file) {
+export function selectFile(file: Object) {
   return dispatch => {
-    dispatch(selectedFile(file));
+    dispatch({
+      type: t.SELECT_FILE,
+      file,
+    });
   };
 }
 

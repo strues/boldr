@@ -138,6 +138,11 @@ exports[`<App /> renders snapshot 1`] = `
                 "loadData": [Function],
                 "path": "/admin/media",
               },
+              Object {
+                "component": [Function],
+                "exact": true,
+                "path": "/admin/media/:id",
+              },
             ],
           },
           Object {
