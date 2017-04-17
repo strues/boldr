@@ -18,10 +18,12 @@ exports[`<Home /> renders snapshot 1`] = `
       <Hero
         bgColor="#01579b"
       >
-        <Heading
+        <Styled(Component)
+          palette="grayscale"
           size={1}
         >
-          A 
+          A
+           
           <span
             style={
               Object {
@@ -31,13 +33,13 @@ exports[`<Home /> renders snapshot 1`] = `
           >
             modern
           </span>
-           content management framework.
-        </Heading>
+           
+          content management framework.
+        </Styled(Component)>
       </Hero>
     }
   >
     <Row
-      componentClass="div"
       style={
         Object {
           "padding": "25px",

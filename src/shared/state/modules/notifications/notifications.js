@@ -48,7 +48,8 @@ export const notificationClear = () => {
 /**
  * reducer for the app-wide notifications.
  * @method notificationReducer
- * @param  {Array}             [state=[]] Empty state array, meant to hold all notification objects.
+ * @param  {Array}             [state=[]] Empty state array, meant to hold all
+ * notification objects.
  * @param  {Object}            action     the action object
  */
 export default function notificationReducer(state = [], action) {

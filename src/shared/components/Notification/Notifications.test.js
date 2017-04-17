@@ -1,5 +1,5 @@
 import React from 'react';
-import shallow from 'react-test-renderer/shallow';
+import {shallow} from 'enzyme';
 import {shallowToJson} from 'enzyme-to-json';
 import {Notifications} from './Notifications';
 import fakeNotifs from './__fixtures__/notifications.fixture';

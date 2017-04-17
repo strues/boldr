@@ -1,5 +1,5 @@
 import {push} from 'react-router-redux';
-import Axios from 'axios';
+import api from '../../../core/api';
 import {getToken} from '../../../core/authentication/token';
 import * as notif from '../../../core/constants';
 import {notificationSend} from '../notifications/notifications';
@@ -93,7 +93,8 @@ export function uploadFiles(payload) {
     data.append('file', payload);
     data.append('field', 'mediaType', 1);
     console.log(payload);
-    return Axios.post('/api/v1/media', data)
+    return api
+      .post('/api/v1/media', data)
       .then(res => {
         if (!res.status === 201) {
           dispatch(uploadFail(res));
@@ -139,7 +140,8 @@ export function uploadPostImage(payload) {
     dispatch(beginUploadPostImage());
     const data = new FormData();
     data.append('payload.name', payload);
-    return Axios.post('/api/v1/attachments', data)
+    return api
+      .post('/api/v1/attachments', data)
       .then(res => {
         if (!res.status === 201) {
           dispatch(uploadPostImageFail(res));
@@ -186,7 +188,8 @@ export function deleteMedia(id) {
     dispatch({
       type: t.DELETE_ATTACHMENT_REQUEST,
     });
-    return Axios.delete(`/api/v1/attachments/${id}`)
+    return api
+      .delete(`/api/v1/attachments/${id}`)
       .then(res => {
         dispatch({
           type: t.DELETE_ATTACHMENT_SUCCESS,
@@ -212,7 +215,8 @@ export function deleteMedia(id) {
 export function updateAttachment(attachmentData) {
   return (dispatch: Function) => {
     dispatch(updateAttachmentReq());
-    return Axios.put(`/api/v1/attachments/${attachmentData.id}`, attachmentData)
+    return api
+      .put(`/api/v1/attachments/${attachmentData.id}`, attachmentData)
       .then(res => {
         dispatch(updateAttachmentSuccess(res));
         dispatch(
@@ -281,7 +285,8 @@ export function uploadProfileImage(payload) {
     });
     const data = new FormData();
     data.append('payload.name', payload);
-    return Axios.post('/api/v1/attachments', data)
+    return api
+      .post('/api/v1/attachments', data)
       .then(res => {
         const userData = {
           id: res.data.user_id,
@@ -309,7 +314,8 @@ export function uploadAvatarImage(payload) {
     dispatch({type: t.UPLOAD_AVATAR_IMG_REQUEST});
     const data = new FormData();
     data.append('payload.name', payload);
-    return Axios.post('/api/v1/attachments', data)
+    return api
+      .post('/api/v1/attachments', data)
       .then(res => {
         const userData = {
           id: res.data.user_id,

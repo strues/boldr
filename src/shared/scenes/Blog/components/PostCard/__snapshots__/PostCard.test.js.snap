@@ -40,11 +40,8 @@ exports[`<PostCard /> renders snapshot 1`] = `
     <CardText
       component="section"
     >
-      <Row
-        componentClass="div"
-      >
+      <Row>
         <Col
-          componentClass="div"
           xs={12}
         >
           <Link

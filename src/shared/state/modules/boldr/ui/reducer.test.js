@@ -19,7 +19,8 @@ describe('UI Reducer', () => {
       layout: 'grid',
       modal: false,
       drawer: false,
-      expanded: false,
+      expanded: true,
+      visible: true,
       isMobile: false,
     });
   });

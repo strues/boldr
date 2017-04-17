@@ -1,5 +1,5 @@
 import {push} from 'react-router-redux';
-import Axios from 'axios';
+import api from '../../../core/api';
 import {setToken, removeToken} from '../../../core/authentication/token';
 import * as notif from '../../../core/constants';
 import {notificationSend} from '../notifications/notifications';
@@ -16,7 +16,8 @@ export function forgotPassword(email) {
     dispatch({
       type: t.FORGOT_PASSWORD_REQUEST,
     });
-    return Axios.post('/api/v1/tokens/forgot-password', {data: email})
+    return api
+      .post('/api/v1/tokens/forgot-password', {data: email})
       .then(res => {
         dispatch({
           type: t.FORGOT_PASSWORD_SUCCESS,
@@ -44,9 +45,10 @@ export function resetPassword(password, token) {
     dispatch({
       type: t.RESET_PASSWORD_REQUEST,
     });
-    return Axios.post(`/api/v1/tokens/reset-password/${token}`, {
-      data: password,
-    })
+    return api
+      .post(`/api/v1/tokens/reset-password/${token}`, {
+        data: password,
+      })
       .then(res => {
         dispatch({
           type: t.RESET_PASSWORD_SUCCESS,
@@ -74,7 +76,8 @@ export function verifyAccount(token) {
     dispatch({
       type: t.VERIFY_ACCOUNT_REQUEST,
     });
-    return Axios.get(`/auth/verification/${token}`)
+    return api
+      .get(`/auth/verification/${token}`)
       .then(res => {
         push('/account/login');
         dispatch({
@@ -154,7 +157,8 @@ const shouldFetchProfile = (state: Reducer, username: string): boolean => {
 export function editProfile(userData) {
   return dispatch => {
     dispatch(beginUpdateProfile());
-    return Axios.put(`/api/v1/users/${userData.id}`, userData)
+    return api
+      .put(`/api/v1/users/${userData.id}`, userData)
       .then(res => {
         dispatch(doneUpdateProfile(res));
         dispatch(notificationSend(notif.MSG_EDIT_PROFILE_SUCCESS));

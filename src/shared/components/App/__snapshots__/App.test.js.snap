@@ -132,6 +132,12 @@ exports[`<App /> renders snapshot 1`] = `
                 "exact": true,
                 "path": "/admin/tags/:name",
               },
+              Object {
+                "component": [Function],
+                "exact": true,
+                "loadData": [Function],
+                "path": "/admin/media",
+              },
             ],
           },
           Object {

@@ -4,13 +4,9 @@ import attachmentReducer from './reducer';
 describe('Attachment', () => {
   test('Should return the initial state', () => {
     expect(attachmentReducer(undefined, {})).toEqual({
-      loading: false,
-      error: null,
-      files: [],
-      postImage: {},
-      avatarImage: {},
-      profileImage: {},
-      currentFile: {},
+      all: {},
+      ids: [],
+      isFetching: false,
     });
   });
 });

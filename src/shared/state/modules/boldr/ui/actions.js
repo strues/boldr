@@ -15,7 +15,7 @@ export const TOGGLE_SIDEBAR = '@boldr/ui/TOGGLE_SIDEBAR';
 
 export function changeLayout(layout) {
   return {
-    type: t.CHANGE_LAYOUT,
+    type: CHANGE_LAYOUT,
     payload: layout,
   };
 }

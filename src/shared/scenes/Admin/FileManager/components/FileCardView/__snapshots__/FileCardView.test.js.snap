@@ -2,14 +2,10 @@
 
 exports[`<FileCardView />, renders with files as props 1`] = `
 <Grid
-  componentClass="div"
   fluid={true}
 >
-  <Row
-    componentClass="div"
-  >
+  <Row>
     <Col
-      componentClass="div"
       lg={3}
       md={4}
       sm={12}
@@ -33,7 +29,6 @@ exports[`<FileCardView />, renders with files as props 1`] = `
       />
     </Col>
     <Col
-      componentClass="div"
       lg={3}
       md={4}
       sm={12}
