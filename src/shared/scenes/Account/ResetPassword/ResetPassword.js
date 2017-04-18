@@ -1,9 +1,11 @@
 /* @flow */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import Helmet from 'react-helmet';
+import {FormCard} from 'boldr-ui';
 
-import { FormCard } from 'boldr-ui';
-import { resetPassword } from '../../../state/modules/users/actions';
+import BaseTemplate from '../../../templates/BaseTemplate';
+import {resetPassword} from '../../../state/modules/users/actions';
 import ResetPasswordForm from './ResetPasswordForm';
 
 type Props = {
@@ -20,14 +22,19 @@ class ResetPassword extends Component {
   props: Props;
 
   handleReset(values, props): void {
-    this.props.dispatch(resetPassword(values.password, this.props.params.token));
+    this.props.dispatch(
+      resetPassword(values.password, this.props.params.token),
+    );
   }
 
   render() {
     return (
-      <div>
-        <FormCard title="Reset Password" form={ <ResetPasswordForm onSubmit={ this.handleReset } /> } />
-      </div>
+      <BaseTemplate helmetMeta={<Helmet title="Reset Password" />}>
+        <FormCard
+          title="Reset Password"
+          form={<ResetPasswordForm onSubmit={this.handleReset} />}
+        />
+      </BaseTemplate>
     );
   }
 }

@@ -1,4 +1,4 @@
-import { selectMenus, selectMainMenu } from './selectors';
+import {selectMenus, selectMainMenu} from './selectors';
 
 test('should select the menu state', () => {
   const menuState = {};

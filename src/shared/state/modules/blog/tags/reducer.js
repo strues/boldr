@@ -1,5 +1,7 @@
-import { combineReducers } from 'redux';
-import { addIdToArray, removeByKey, removeIdFromArray } from 'boldr-utils';
+import {combineReducers} from 'redux';
+import addIdToArray from 'boldr-utils/es/arrays/addIdToArray';
+import removeByKey from 'boldr-utils/es/objects/removeByKey';
+import removeIdFromArray from 'boldr-utils/es/arrays/removeIdFromArray';
 import * as t from '../../actionTypes';
 
 export const STATE_KEY = 'tags';

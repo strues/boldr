@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 import * as t from '../../actionTypes';
 
 export const STATE_KEY = 'templates';

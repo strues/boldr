@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import {combineReducers} from 'redux';
 import * as t from '../../actionTypes';
 
 export const STATE_KEY = 'settings';
@@ -15,6 +15,7 @@ const all = (state = {}, action) => {
     //     ...state,
     //     ...action.payload,
     //   };
+
 
     default:
       return state;

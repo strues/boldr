@@ -1,1 +1,1 @@
-export { default } from './PostTitle';
+export {default} from './PostTitle';

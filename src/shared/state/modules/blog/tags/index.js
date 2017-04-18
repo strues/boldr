@@ -1,6 +1,15 @@
-import tagsReducer, { STATE_KEY } from './reducer';
-import { getTagIds, getTagsList, getTags } from './selectors';
-import { fetchTagsIfNeeded, fetchTags, selectTag, clearTag, createTag, deleteTag } from './actions';
+import tagsReducer, {STATE_KEY} from './reducer';
+import {getTagIds, getTagsList, getTags} from './selectors';
+import {
+  fetchTagsIfNeeded,
+  fetchTagPosts,
+  fetchTagPostsIfNeeded,
+  fetchTags,
+  selectTag,
+  clearTag,
+  createTag,
+  deleteTag,
+} from './actions';
 
 export default tagsReducer;
 
@@ -15,4 +24,6 @@ export {
   getTagsList,
   getTags,
   deleteTag,
+  fetchTagPosts,
+  fetchTagPostsIfNeeded,
 };

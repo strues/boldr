@@ -1,4 +1,4 @@
-import { schema } from 'normalizr';
+import {schema} from 'normalizr';
 
 const tag = new schema.Entity(
   'tags',
@@ -10,9 +10,9 @@ const tag = new schema.Entity(
       };
     },
   },
-  { idAttribute: 'id' },
+  {idAttribute: 'id'},
 );
 // const tag = new schema.Entity('tags');
 const arrayOfTag = new schema.Array(tag);
 
-export { arrayOfTag, tag };
+export {arrayOfTag, tag};

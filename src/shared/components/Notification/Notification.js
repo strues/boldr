@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 const inline = {
   zIndex: '99999',
@@ -45,7 +45,10 @@ class Notification extends Component {
 
   componentDidMount() {
     if (this.props.dismissAfter) {
-      setTimeout(() => this.props.onDismiss(this.props.id), this.props.dismissAfter);
+      setTimeout(
+        () => this.props.onDismiss(this.props.id),
+        this.props.dismissAfter,
+      );
     }
   }
 
@@ -60,16 +63,20 @@ class Notification extends Component {
   }
   props: Props;
   render() {
-    const { kind, actionLabel } = this.props;
+    const {kind, actionLabel} = this.props;
     return (
-      <div style={ inline } className="boldr-notification">
+      <div style={inline} className="boldr-notification">
         <div className="boldr-notification__icon" />
         <div className="boldr-notification__content">
-          <span className="boldr-notification__message">{this.props.message}</span>
+          <span className="boldr-notification__message">
+            {this.props.message}
+          </span>
         </div>
         {actionLabel &&
           <span className="boldr-notification__action">
-            <button onClick={ this._onActionClick }>{this.props.actionLabel}</button>
+            <button onClick={this._onActionClick}>
+              {this.props.actionLabel}
+            </button>
           </span>}
         <div className="boldr-notification__close" />
       </div>

@@ -2,15 +2,16 @@
 
 <img src="https://boldr.io/boldr.png" width="179" />
 
-[![Build Status](https://travis-ci.org/strues/boldr.svg?branch=master)](https://travis-ci.org/strues/boldr) [![Code Climate][cc-img]][cc-link]  [![codecov](https://codecov.io/gh/strues/boldr/branch/master/graph/badge.svg)](https://codecov.io/gh/strues/boldr)  [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![Build Status](https://travis-ci.org/strues/boldr.svg?branch=master)](https://travis-ci.org/strues/boldr) [![Code Climate][cc-img]][cc-link]  [![codecov](https://codecov.io/gh/strues/boldr/branch/master/graph/badge.svg)](https://codecov.io/gh/strues/boldr)  [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)  [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/boldr/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
+
 
 Boldr is a modern content management framework. Think of Boldr as the solid foundation for building your next great web application. Unlike other CMS platforms, Boldr is entirely JavaScript. Boldr features Universal / Isomorphic rendering for improved performance and Search Engine Optimization.
 
 **Big release coming soon with a [CLI](https://github.com/boldr/getBoldr/tree/master/packages/boldr-cli), generators, and more modularity!**  
-> In the mean time, a barebones version of the CLI is available. Install with `npm install -g boldr-cli` and run `boldr-cli new -f` to get setup with both the API and the CMS packages. After running the command you'll have a boldr folder containing both the api and cms. The folder location at the moment is your current working directory.
+> In the mean time, a barebones version of the CLI is available. Install with `npm install -g boldr-cli` and run `boldr-cli init` to get setup with both the API and the CMS packages. After running the command you'll have a boldr folder containing both the api and cms. The folder location at the moment is your current working directory.
 
 
-Have questions or want to help with development? Join us on <a href="https://slack.boldr.io" target="blank"><img src="/docs/assets/slack-logo.png" height="25" /></a>
+Have questions or want to help with development? Join us on [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/boldr/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
 
 **Table of Contents**
 - [Boldr](#boldr)

@@ -1,1 +1,1 @@
-export { default } from './TaggedPostMenu';
+export {default} from './TaggedPostMenu';

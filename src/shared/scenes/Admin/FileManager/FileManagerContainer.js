@@ -1,8 +1,13 @@
 /* @flow */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
-import { uploadFiles, fetchMedia, deleteMedia, selectFile } from '../../../state/modules/attachments/actions';
+import {
+  uploadFiles,
+  fetchAttachmentsIfNeeded,
+  deleteAttachment,
+  selectFile,
+} from '../../../state/modules/attachments/actions';
 import FileManager from './FileManager';
 
 type Props = {
@@ -10,23 +15,17 @@ type Props = {
   attachments: Object,
   dispatch: Function,
   selectFile: () => void,
-  deleteMedia: () => void,
+  deleteAttachment: () => void,
   uploadFiles: () => void,
-  fetchMedia: () => void,
+  fetchAttachmentsIfNeeded: () => void,
   hideModal: () => void,
   showModal: () => void,
   ui: Object,
 };
 
 class FileManagerContainer extends Component {
-  static fetchData(dispatch) {
-    return Promise.all([dispatch(fetchMedia())]);
-  }
   componentDidMount() {
-    const { dispatch } = this.props;
-
-    // Fetching data for client side rendering
-    FileManagerContainer.fetchData(dispatch);
+    this.props.dispatch(fetchAttachmentsIfNeeded());
   }
   props: Props;
 
@@ -46,7 +45,7 @@ class FileManagerContainer extends Component {
   };
 
   handleRemoveMedia = mediaId => {
-    this.props.dispatch(deleteMedia(mediaId));
+    this.props.dispatch(deleteAttachment(mediaId));
   };
 
   selectTheFile = file => {
@@ -56,11 +55,11 @@ class FileManagerContainer extends Component {
   render() {
     return (
       <FileManager
-        onUploadFinish={ this.onUploadFinish }
-        handleRemoveMedia={ this.handleRemoveMedia }
-        attachments={ this.props.attachments }
-        selectFile={ this.selectTheFile }
-        ui={ this.props.ui }
+        onUploadFinish={this.onUploadFinish}
+        handleRemoveMedia={this.handleRemoveMedia}
+        attachments={this.props.attachments}
+        selectFile={this.selectTheFile}
+        ui={this.props.ui}
       />
     );
   }

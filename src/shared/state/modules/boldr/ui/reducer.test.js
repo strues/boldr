@@ -1,8 +1,14 @@
 import configureMockStore from 'redux-mock-store';
-import Drawer from 'react-md/lib/Drawers';
 import thunk from 'redux-thunk';
-import { CHANGE_LAYOUT, MODAL_OPEN, MODAL_CLOSED } from '../../actionTypes';
-import { changeLayout, showModal, hideModal, openDrawer, closeDrawer } from './actions';
+import {
+  CHANGE_LAYOUT,
+  MODAL_OPEN,
+  MODAL_CLOSED,
+  changeLayout,
+  showModal,
+  hideModal,
+  toggleDrawer,
+} from './actions';
 import uiReducer from './reducer';
 
 describe('UI Reducer', () => {
@@ -12,11 +18,9 @@ describe('UI Reducer', () => {
       layout: 'grid',
       modal: false,
       drawer: false,
+      expanded: true,
+      visible: true,
       isMobile: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
     });
   });
   it('should open the modal', () => {
@@ -25,22 +29,16 @@ describe('UI Reducer', () => {
       layout: 'grid',
       modal: false,
       drawer: false,
+      expanded: false,
       isMobile: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
     };
     const stateAfter = {
       loaded: false,
       layout: 'grid',
       modal: true,
       drawer: false,
+      expanded: false,
       isMobile: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
     };
     expect(
       uiReducer(initialState, {
@@ -54,22 +52,16 @@ describe('UI Reducer', () => {
       layout: 'grid',
       modal: true,
       drawer: false,
+      expanded: false,
       isMobile: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
     };
     const stateAfter = {
       loaded: false,
       layout: 'grid',
       modal: false,
       drawer: false,
+      expanded: false,
       isMobile: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
     };
     expect(
       uiReducer(initialState, {
@@ -87,11 +79,8 @@ describe('UI Reducer', () => {
       layout: 'grid',
       modal: false,
       drawer: false,
+      expanded: false,
       isMobile: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
     };
 
     expect(uiReducer(state, action)).toEqual({
@@ -99,11 +88,8 @@ describe('UI Reducer', () => {
       layout: 'list',
       modal: false,
       drawer: false,
+      expanded: false,
       isMobile: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
     });
   });
 });
@@ -116,11 +102,8 @@ test('changeLayout', () => {
       layout: 'grid',
       modal: false,
       drawer: false,
+      expanded: false,
       isMobile: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
     },
   });
   store.dispatch(changeLayout('list'));
@@ -139,11 +122,8 @@ test('openModal', () => {
       layout: 'grid',
       modal: false,
       drawer: false,
+      expanded: false,
       isMobile: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
     },
   });
   store.dispatch(showModal());
@@ -161,11 +141,8 @@ test('closeModal', () => {
       layout: 'grid',
       modal: true,
       drawer: false,
+      expanded: false,
       isMobile: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
     },
   });
   store.dispatch(hideModal());
@@ -184,16 +161,13 @@ test('Open the drawer', () => {
       isMobile: false,
       modal: false,
       drawer: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
+      expanded: false,
     },
   });
-  store.dispatch(openDrawer());
+  store.dispatch(toggleDrawer());
   const action = store.getActions()[0];
   expect(action).toEqual({
-    type: '@boldr/ui/OPEN_DRAWER',
+    type: '@boldr/ui/TOGGLE_DRAWER',
   });
 });
 test('Close the drawer', () => {
@@ -205,15 +179,12 @@ test('Close the drawer', () => {
       isMobile: false,
       modal: false,
       drawer: false,
-      mobile: undefined,
-      tablet: undefined,
-      desktop: undefined,
-      defaultMedia: 'mobile',
+      expanded: false,
     },
   });
-  store.dispatch(closeDrawer());
+  store.dispatch(toggleDrawer());
   const action = store.getActions()[0];
   expect(action).toEqual({
-    type: '@boldr/ui/CLOSE_DRAWER',
+    type: '@boldr/ui/TOGGLE_DRAWER',
   });
 });

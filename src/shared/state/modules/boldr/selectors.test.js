@@ -1,4 +1,4 @@
-import { selectBoldr } from './selectors';
+import {selectBoldr} from './selectors';
 
 test('should select the boldr state', () => {
   const boldrState = {};

@@ -1,18 +1,22 @@
 /* @flow */
 import React from 'react';
-import { Link } from 'react-router';
-import { connect } from 'react-redux';
+import Link from 'react-router-dom/Link';
+import {connect} from 'react-redux';
 import dateFns from 'date-fns';
 import classnames from 'classnames';
-import Button from 'react-md/lib/Buttons/Button';
-import Divider from 'react-md/lib/Dividers';
-import Card from 'react-md/lib/Cards/Card';
-import CardTitle from 'react-md/lib/Cards/CardTitle';
-import CardActions from 'react-md/lib/Cards/CardActions';
-import CardText from 'react-md/lib/Cards/CardText';
-import Media, { MediaOverlay } from 'react-md/lib/Media';
-import { Col, Row, StyleClasses } from 'boldr-ui';
-import { selectPost } from '../../../../state/modules/blog/posts/actions';
+import {
+  Button,
+  Card,
+  CardTitle,
+  CardActions,
+  CardText,
+  Col,
+  Row,
+  StyleClasses,
+  Media,
+  MediaOverlay,
+} from 'boldr-ui';
+import {selectPost} from '../../../../state/modules/blog/posts/actions';
 
 import TagBlock from '../TagBlock';
 
@@ -30,7 +34,6 @@ type Props = {
   updatedAt: ?string,
   status: ?string,
   author: string,
-  comments: ?Array<Object>,
   seo: ?Object,
   tags: ?Array<Tag>,
   attachments: ?Object,
@@ -55,7 +58,6 @@ export const PostCard = (props: Props) => {
     excerpt: props.excerpt,
     backgroundImage: props.backgroundImage,
     featureImage: props.featureImage,
-    comments: props.comments,
     meta: props.meta,
     slug: props.slug,
     status: props.status,
@@ -68,12 +70,16 @@ export const PostCard = (props: Props) => {
   }
 
   return (
-    <div className={ classes }>
+    <div className={classes}>
       <Card>
         <Media>
-          <img src={ props.featureImage } alt={ `${props.title} feature` } role="presentation" />
+          <img
+            src={props.featureImage}
+            alt={`${props.title} feature`}
+            role="presentation"
+          />
           <MediaOverlay>
-            <CardTitle title={ props.title } subtitle={ formattedDate }>
+            <CardTitle title={props.title} subtitle={formattedDate}>
               <Button className="md-cell--right" icon>star_outline</Button>
             </CardTitle>
           </MediaOverlay>
@@ -81,19 +87,24 @@ export const PostCard = (props: Props) => {
         <CardText>
           {props.excerpt}
           <Row>
-            <Col xs={ 12 }>
-              <Link to={ `/blog/${props.slug}` } className="readmore-link">
-                <Button raised primary label="Read More" onClick={ transitionPost } />
+            <Col xs={12}>
+              <Link to={`/blog/${props.slug}`} className="readmore-link">
+                <Button
+                  raised
+                  primary
+                  label="Read More"
+                  onClick={transitionPost}
+                />
               </Link>
             </Col>
           </Row>
         </CardText>
         <CardActions>
-          <TagBlock tags={ postTags } />
+          <TagBlock tags={postTags} />
         </CardActions>
       </Card>
     </div>
   );
 };
 
-export default connect()(PostCard);
+export default connect(state => state, null, null, {pure: true})(PostCard);

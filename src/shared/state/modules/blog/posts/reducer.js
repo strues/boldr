@@ -1,13 +1,12 @@
 /* @flow */
-import { combineReducers } from 'redux';
-import { removeByKey, removeIdFromArray } from 'boldr-utils';
-import * as api from '../../../../core/api';
+import {combineReducers} from 'redux';
+import removeByKey from 'boldr-utils/es/objects/removeByKey';
+import removeIdFromArray from 'boldr-utils/es/arrays/removeIdFromArray';
 import * as notif from '../../../../core/constants';
-import type { Post } from '../../../../types/models';
 
-import { notificationSend } from '../../../../state/modules/notifications';
+import {notificationSend} from '../../../../state/modules/notifications';
 import * as t from '../../actionTypes';
-import { getPosts } from './selectors';
+import {getPosts} from './selectors';
 
 export const STATE_KEY = 'posts';
 
@@ -41,11 +40,11 @@ const isFetching = (state = false, action) => {
   switch (action.type) {
     case t.FETCH_POSTS_REQUEST:
     case t.CREATE_POST_REQUEST:
-    case t.GET_POST_REQUEST:
+    case t.FETCH_POST_REQUEST:
       return true;
     case t.FETCH_POSTS_SUCCESS:
     case t.CREATE_POST_SUCCESS:
-    case t.GET_POST_SUCCESS:
+    case t.FETCH_POST_SUCCESS:
       return false;
     default:
       return state;
@@ -59,7 +58,7 @@ const currentPost = (state = {}, action) => {
         ...state,
         ...action.post,
       };
-    case t.GET_POST_SUCCESS:
+    case t.FETCH_POST_SUCCESS:
       return {
         ...state,
         ...action.payload,
@@ -88,7 +87,9 @@ export const getPublishedPosts = (state: Object, filter: string): Function => {
     case 'all':
       return allPosts;
     case 'published':
-      return allPosts.filter(p => p.published) && allPosts.filter(p => !p.featured);
+      return (
+        allPosts.filter(p => p.published) && allPosts.filter(p => !p.featured)
+      );
     case 'draft':
       return allPosts.filter(p => !p.published);
     default:

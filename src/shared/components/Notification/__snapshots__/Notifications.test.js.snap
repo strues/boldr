@@ -8,11 +8,10 @@ exports[`<Notifications /> +++ renders snapshot 1`] = `
     ]
   }
 >
-  <ReactCSSTransitionGroup
-    transitionAppear={false}
-    transitionEnter={true}
+  <TransitionGroup
+    childFactory={[Function]}
+    component="span"
     transitionEnterTimeout={600}
-    transitionLeave={true}
     transitionLeaveTimeout={600}
     transitionName="boldr-notification__transition"
   >
@@ -40,6 +39,6 @@ exports[`<Notifications /> +++ renders snapshot 1`] = `
       message="Removed file"
       onDismiss={[Function]}
     />
-  </ReactCSSTransitionGroup>
+  </TransitionGroup>
 </div>
 `;

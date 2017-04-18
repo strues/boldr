@@ -1,4 +1,4 @@
-import { schema } from 'normalizr';
+import {schema} from 'normalizr';
 
 const page = new schema.Entity('pages', {
   processStrategy: (value, parent, key) => {
@@ -11,4 +11,4 @@ const page = new schema.Entity('pages', {
 // const tag = new schema.Entity('tags');
 const arrayOfPage = new schema.Array(page);
 
-export { arrayOfPage, page };
+export {arrayOfPage, page};

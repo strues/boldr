@@ -1,7 +1,7 @@
 import React from 'react';
-import { createStore } from 'redux';
-import { shallow } from 'enzyme';
-import { shallowToJson } from 'enzyme-to-json';
+import {createStore} from 'redux';
+import {shallow} from 'enzyme';
+import {shallowToJson} from 'enzyme-to-json';
 import Error404 from './Error404';
 
 describe('<Error404 />', () => {

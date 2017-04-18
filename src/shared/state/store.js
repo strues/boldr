@@ -1,27 +1,27 @@
-import { createStore, applyMiddleware, compose } from 'redux';
-import { routerMiddleware } from 'react-router-redux';
-import thunkMiddleware from 'redux-thunk';
+/* eslint-disable dot-notation */
+import {createStore, applyMiddleware, compose} from 'redux';
+import {routerMiddleware} from 'react-router-redux';
+import thunk from 'redux-thunk';
+import api from '../core/api';
 import rootReducer from './reducers';
-import createMiddleware from './middleware/clientMiddleware';
 
-export default function configureStore(preloadedState, history, apiClient) {
+export default function configureStore(preloadedState, history) {
   const reduxRouterMiddleware = routerMiddleware(history);
 
-  const middleware = [thunkMiddleware, createMiddleware(apiClient), reduxRouterMiddleware];
+  const middlewares = [thunk.withExtraArgument(api), reduxRouterMiddleware];
 
-  const enhancers = [applyMiddleware(...middleware)];
-
-  /* istanbul ignore next */
-  const devEnhancers = process.env.NODE_ENV !== 'production' &&
-    typeof window === 'object' &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    : compose;
+  const enhancers = [
+    applyMiddleware(...middlewares),
+    IS_DEV &&
+      typeof window === 'object' &&
+      typeof window.devToolsExtension !== 'undefined'
+      ? window.devToolsExtension()
+      : f => f,
+  ];
 
   // Creating the store
-  const store = createStore(rootReducer, preloadedState, devEnhancers(...enhancers));
+  const store = createStore(rootReducer, preloadedState, compose(...enhancers));
 
-  // Hot reload
   /* istanbul ignore next */
   if (module.hot) {
     module.hot.accept('./reducers', () => {

@@ -3,9 +3,9 @@ import merge from 'lodash/merge';
 const initialState = {
   posts: {},
   tags: {},
-  comments: {},
   attachments: {},
   users: {},
+  media: {},
   menus: {},
   menuDetails: {},
   settings: {},

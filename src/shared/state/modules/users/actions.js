@@ -1,8 +1,8 @@
-import { push } from 'react-router-redux';
-import * as api from '../../../core/api';
-import { setToken, removeToken } from '../../../core/authentication/token';
+import {push} from 'react-router-redux';
+import api from '../../../core/api';
+import {setToken, removeToken} from '../../../core/authentication/token';
 import * as notif from '../../../core/constants';
-import { notificationSend } from '../notifications/notifications';
+import {notificationSend} from '../notifications/notifications';
 import * as t from '../actionTypes';
 
 /**
@@ -17,8 +17,8 @@ export function forgotPassword(email) {
       type: t.FORGOT_PASSWORD_REQUEST,
     });
     return api
-      .doForgotPassword(email)
-      .then(response => {
+      .post('/api/v1/tokens/forgot-password', {data: email})
+      .then(res => {
         dispatch({
           type: t.FORGOT_PASSWORD_SUCCESS,
         });
@@ -29,7 +29,8 @@ export function forgotPassword(email) {
         dispatch({
           type: t.FORGOT_PASSWORD_FAILURE,
           error: err,
-        }));
+        }),
+      );
   };
 }
 
@@ -45,19 +46,22 @@ export function resetPassword(password, token) {
       type: t.RESET_PASSWORD_REQUEST,
     });
     return api
-      .doResetPassword(password, token)
-      .then(response => {
+      .post(`/api/v1/tokens/reset-password/${token}`, {
+        data: password,
+      })
+      .then(res => {
         dispatch({
           type: t.RESET_PASSWORD_SUCCESS,
         });
-        push('/login');
+        push('/account/login');
         dispatch(notificationSend(notif.MSG_RESET_PW_SUCCESS));
       })
       .catch(err =>
         dispatch({
           type: t.RESET_PASSWORD_FAILURE,
           error: err,
-        }));
+        }),
+      );
   };
 }
 
@@ -73,71 +77,90 @@ export function verifyAccount(token) {
       type: t.VERIFY_ACCOUNT_REQUEST,
     });
     return api
-      .doVerifyAccount(token)
-      .then(response => {
-        push('/login');
+      .get(`/auth/verification/${token}`)
+      .then(res => {
+        push('/account/login');
         dispatch({
           type: t.VERIFY_ACCOUNT_SUCCESS,
         });
-        dispatch(push('/'));
         dispatch(notificationSend(notif.MSG_VERIFY_USER_SUCCESS));
       })
       .catch(err =>
         dispatch({
           type: t.VERIFY_ACCOUNT_FAILURE,
           error: err,
-        }));
+        }),
+      );
   };
 }
 
 /**
   * PROFILE ACTIONS
   * -------------------------
-  * @exports getProfile
+  * @exports fetchProfile
   * @exports editProfile
   *****************************************************************/
 
-export function getProfile(username) {
-  return (dispatch: Function) => {
-    dispatch(requestProfile());
-    return api
-      .getUserProfile(username)
-      .then(response => {
-        if (response.status !== 200) {
-          dispatch(receiveProfileFailed());
-        }
+export const fetchProfile = (username: string, axios: any): ThunkAction => (
+  dispatch: Dispatch,
+) => {
+  dispatch({
+    type: t.FETCH_PROFILE_REQUEST,
+    username,
+  });
 
-        const data = response.body;
-        dispatch(receiveProfile(data));
-      })
-      .catch(err => {
-        dispatch(receiveProfileFailed(err));
+  return axios
+    .get(`/api/v1/users/${username}/profile`)
+    .then(res => {
+      dispatch({
+        type: t.FETCH_PROFILE_SUCCESS,
+        payload: res.data,
       });
-  };
-}
-const requestProfile = () => {
-  return { type: t.FETCH_PROFILE_REQUEST };
+    })
+    .catch(err => {
+      dispatch({
+        type: t.FETCH_PROFILE_FAILURE,
+        error: err,
+      });
+    });
 };
+export const fetchProfileIfNeeded = (username: string): ThunkAction => (
+  dispatch: Dispatch,
+  getState: GetState,
+  axios: any,
+) => {
+  /* istanbul ignore next */
+  if (shouldFetchProfile(getState(), username)) {
+    /* istanbul ignore next */
+    return dispatch(fetchProfile(username, axios));
+  }
 
-const receiveProfile = data => {
-  return {
-    type: t.FETCH_PROFILE_SUCCESS,
-    payload: data,
-  };
+  /* istanbul ignore next */
+  return null;
 };
+/* istanbul ignore next */
+const shouldFetchProfile = (state: Reducer, username: string): boolean => {
+  // In development, we want to allow dispatching actions from here
+  // or the hot reloading of reducers wont update the component state
+  if (process.env.NODE_ENV === 'development') {
+    return true;
+  }
 
-const receiveProfileFailed = err => ({
-  type: t.FETCH_PROFILE_FAILURE,
-  error: err,
-});
+  const theProfile = state.users.profile[username];
 
+  if (theProfile && state.users.isFetching) {
+    return false;
+  }
+
+  return true;
+};
 export function editProfile(userData) {
   return dispatch => {
     dispatch(beginUpdateProfile());
     return api
-      .doUpdateProfile(userData)
-      .then(response => {
-        dispatch(doneUpdateProfile(response));
+      .put(`/api/v1/users/${userData.id}`, userData)
+      .then(res => {
+        dispatch(doneUpdateProfile(res));
         dispatch(notificationSend(notif.MSG_EDIT_PROFILE_SUCCESS));
       })
       .catch(err => {
@@ -148,13 +171,13 @@ export function editProfile(userData) {
 }
 
 const beginUpdateProfile = () => {
-  return { type: t.EDIT_PROFILE_REQUEST };
+  return {type: t.EDIT_PROFILE_REQUEST};
 };
 
-const doneUpdateProfile = response => {
+const doneUpdateProfile = res => {
   return {
     type: t.EDIT_PROFILE_SUCCESS,
-    payload: response.body,
+    payload: res.data,
   };
 };
 

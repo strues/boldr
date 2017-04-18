@@ -36,7 +36,7 @@ class HotNodeServer {
         log({
           title: name,
           level: 'error',
-          message: 'Error in server execution, check the console for more info.',
+          message: 'Error in server exec, check the console for more info.',
         });
 
         console.log(data.toString().trim());
@@ -98,7 +98,7 @@ class HotNodeServer {
         log({
           title: name,
           level: 'error',
-          message: 'Failed to start, please check the console for more information.',
+          message: 'Failed to start, check the console for more information.',
           notify: true,
         });
         console.error(err);
@@ -117,7 +117,9 @@ class HotNodeServer {
     });
 
     return stopWatcher.then(() => {
-      if (this.server) this.server.kill();
+      if (this.server) {
+        this.server.kill();
+      }
     });
   }
 }

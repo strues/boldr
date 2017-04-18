@@ -1,13 +1,17 @@
-import config from '../../../../config';
+// import config from '../../../../config';
 import Storage from './storage';
 
 export const parseJWT = token => {
-  if (!token) return null;
+  if (!token) {
+    return null;
+  }
   const base64Url = token;
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
 
   const parts = base64.split('.');
-  if (parts.length !== 3) return null;
+  if (parts.length !== 3) {
+    return null;
+  }
 
   try {
     const [headerRaw, payloadRaw, signatureRaw] = parts;
@@ -27,14 +31,16 @@ export const parseJWT = token => {
 };
 
 export const setToken = token => {
-  return Storage.set(config('token.key'), token);
+  return Storage.set('jwt', token);
 };
 export const getToken = (asJSON = false) => {
-  const token = Storage.get(config('token.key'));
-  if (asJSON) return parseJWT(token);
+  const token = Storage.get('jwt');
+  if (asJSON) {
+    return parseJWT(token);
+  }
   return token;
 };
 
 export const removeToken = () => {
-  Storage.remove(config('token.key'));
+  Storage.remove('jwt');
 };

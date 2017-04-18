@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import {shallow} from 'enzyme';
 import TaggedPostMenu from './TaggedPostMenu';
 
 const post = {
@@ -11,6 +11,6 @@ const post = {
 };
 
 test('<TaggedPostMenu />, renders the widget with props', () => {
-  const wrapper = shallow(<TaggedPostMenu post={ post } />);
+  const wrapper = shallow(<TaggedPostMenu post={post} />);
   expect(wrapper.instance().props.post).toEqual(post);
 });

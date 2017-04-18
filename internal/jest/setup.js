@@ -1,3 +1,4 @@
+import 'jest-enzyme';
 import { EventEmitter } from 'events';
 import { shallow, render, mount } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
@@ -6,17 +7,11 @@ import { shallowToJson } from 'enzyme-to-json';
 // timeouts on travis
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 
-global.shallow = shallow;
 global.render = render;
-global.render = mount;
+global.mount = mount;
 global.shallowToJson = shallowToJson;
 global.Promise = require('bluebird');
-// Skip createElement warnings but fail tests on any other warning
-console.error = message => {
-  if (!/(React.createElement: type should not be null)/.test(message)) {
-    throw new Error(message);
-  }
-};
+
 window.matchMedia = function matchMedia() {
   return false;
 };

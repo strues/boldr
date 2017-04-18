@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import {shallow} from 'enzyme';
 import SidebarTags from './SidebarTags';
 
 it('<SidebarTags />, renders the tags', () => {

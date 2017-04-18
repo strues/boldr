@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import {shallow} from 'enzyme';
 import ProfileContent from './ProfileContent';
 
 const mockProfile = {
@@ -32,6 +32,12 @@ const mockProfile = {
 test('<ProfileContent />, renders the content area', () => {
   const toggleDrawer = jest.fn();
 
-  const wrapper = shallow(<ProfileContent me={ false } toggleDrawer={ toggleDrawer } profile={ mockProfile } />);
+  const wrapper = shallow(
+    <ProfileContent
+      me={false}
+      toggleDrawer={toggleDrawer}
+      profile={mockProfile}
+    />,
+  );
   expect(wrapper.is('.boldr-profile__content')).toEqual(true);
 });

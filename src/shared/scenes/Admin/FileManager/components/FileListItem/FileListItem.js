@@ -1,7 +1,8 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import Button from 'react-md/lib/Buttons';
-import FontIcon from 'react-md/lib/FontIcons';
+import {FontIcon, Button} from 'boldr-ui';
+import Link from 'react-router-dom/Link';
 
 const Wrapper = styled.section`
   display: table;
@@ -42,20 +43,22 @@ const FileListItem = props => {
   }
 
   function handleSelect() {
-    const { file } = props;
+    const {file} = props;
     props.selectFile(file);
   }
   return (
     <Wrapper>
       <ImgWrapper>
-        <Img src={ props.imgSrc } />
+        <Img src={props.imgSrc} />
       </ImgWrapper>
       <Content>
         {props.children}
-        <Button icon onClick={ handleSelect }>
-          <FontIcon>mode_edit</FontIcon>
-        </Button>
-        <Button icon onClick={ handleclick }>
+        <Link to={`/admin/file-editor/${props.file.id}`}>
+          <Button icon onClick={handleSelect}>
+            <FontIcon>mode_edit</FontIcon>
+          </Button>
+        </Link>
+        <Button icon onClick={handleclick}>
           <FontIcon>delete_forever</FontIcon>
         </Button>
       </Content>
@@ -64,7 +67,8 @@ const FileListItem = props => {
 };
 
 FileListItem.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node,
+  file: PropTypes.object,
   selectFile: PropTypes.func,
   /**
    * A function which returns the media element to render in the background.

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { menu, detail } from './schema';
+import {menu, detail} from './schema';
 
 describe('menu schema', () => {
   it('should match the normalizr-menu-schema', () => {

@@ -1,37 +1,34 @@
 /* @flow */
 /* eslint-disable global-require */
 import React from 'react';
-import { render, unmountComponentAtNode } from 'react-dom';
-import { Provider } from 'react-redux';
-import Router from 'react-router/lib/Router';
-import match from 'react-router/lib/match';
-import browserHistory from 'react-router/lib/browserHistory';
-import { syncHistoryWithStore } from 'react-router-redux';
+import {render, unmountComponentAtNode} from 'react-dom';
+import {Provider} from 'react-redux';
+import createHistory from 'history/createBrowserHistory';
+import ConnectedRouter from 'react-router-redux/ConnectedRouter';
 import WebFontLoader from 'webfontloader';
+import {renderRoutes} from 'react-router-config';
 
-import AppRoot from '../shared/components/AppRoot';
-import App from '../shared/components/App';
+import routes from '../shared/routes';
 import configureStore from '../shared/state/store';
-import { checkAuth } from '../shared/state/modules/auth/actions';
-import { getToken } from '../shared/core/authentication/token';
-import ApiClient from '../shared/core/api/apiClient';
-import createRoutes from '../shared/scenes';
-// import ReactHotLoader from './components/ReactHotLoader';
+import {checkAuth} from '../shared/state/modules/auth/actions';
+import {getToken} from '../shared/core/authentication/token';
 
 WebFontLoader.load({
-  google: { families: ['Roboto:200,400,600', 'Material Icons'] },
+  google: {families: ['Roboto:200,400,600', 'Material Icons']},
+  custom: {
+    families: ['FontAwesome'],
+    urls: [
+      'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
+    ],
+  },
 });
-// Get the DOM Element that will host our React application.
-const domNode = document.getElementById('app');
-// Superagent helper
-const apiClient = new ApiClient();
 
+const domNode = document.querySelector('#app');
+const history = createHistory();
 const preloadedState = window.__PRELOADED_STATE__;
-const store = configureStore(preloadedState, browserHistory, apiClient);
+const store = configureStore(preloadedState, history);
 
-const history = syncHistoryWithStore(browserHistory, store);
-const routes = createRoutes(store, history);
-const { dispatch } = store;
+const {dispatch} = store;
 
 const token = getToken();
 if (token) {
@@ -40,21 +37,14 @@ if (token) {
 }
 
 const renderApp = () => {
-  const { pathname, search, hash } = window.location;
-  const location = `${pathname}${search}${hash}`;
-  match(
-    {
-      routes,
-      location,
-    },
-    () => {
-      render(
-        <AppRoot store={ store }>
-          <Router history={ history } routes={ routes } helpers={ apiClient } />
-        </AppRoot>,
-        domNode,
-      );
-    },
+  // const App = require('../shared/components/App').default;
+  render(
+    <Provider store={store}>
+      <ConnectedRouter history={history}>
+        {renderRoutes(routes)}
+      </ConnectedRouter>
+    </Provider>,
+    domNode,
   );
 };
 
@@ -69,11 +59,20 @@ if (process.env.NODE_ENV === 'production') {
   require('./registerServiceWorker');
 }
 if (module.hot) {
-  module.hot.accept('../shared/scenes', () => {
+  const reRenderApp = () => {
+    try {
+      renderApp(require('../shared/routes'));
+    } catch (error) {
+      const RedBox = require('redbox-react').default;
+
+      render(<RedBox error={error} />, domNode);
+    }
+  };
+  module.hot.accept('../shared/routes', () => {
     setImmediate(() => {
       // Preventing the hot reloading error from react-router
       unmountComponentAtNode(domNode);
-      renderApp();
+      reRenderApp();
     });
   });
 }

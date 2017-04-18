@@ -1,6 +1,6 @@
 import React from 'react';
-import { shallow } from 'enzyme';
-import { shallowToJson } from 'enzyme-to-json';
+import {shallow} from 'enzyme';
+import {shallowToJson} from 'enzyme-to-json';
 import Widget from './Widget';
 
 describe('<Widget />', () => {

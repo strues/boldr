@@ -1,9 +1,16 @@
-import { resolve as pathResolve } from 'path';
+import {resolve as pathResolve} from 'path';
 import http from 'http';
 import httpProxy from 'http-proxy';
 import express from 'express';
 import appRootDir from 'app-root-dir';
-import { boldrSSR, clientBundle, expressMiddleware, errorHandler, offlinePage, serviceWorker } from './middleware';
+import {
+  boldrSSR,
+  clientBundle,
+  expressMiddleware,
+  errorHandler,
+  offlinePage,
+  serviceWorker,
+} from './middleware';
 
 // const proxyTarget = `http://${config.apiHost}:${config.apiPort}/api/v1`;
 const proxyTarget = 'http://0.0.0.0:2121/api/v1';
@@ -27,7 +34,7 @@ app.use((req, res, next) => {
 
 // Proxy to API server
 app.use('/api/v1', (req, res) => {
-  proxy.web(req, res, { target: proxyTarget });
+  proxy.web(req, res, {target: proxyTarget});
 });
 
 proxy.on('error', (error, req, res) => {
@@ -35,7 +42,7 @@ proxy.on('error', (error, req, res) => {
     console.error('proxy error', error);
   }
   if (!res.headersSent) {
-    res.writeHead(500, { 'content-type': 'application/json' });
+    res.writeHead(500, {'content-type': 'application/json'});
   }
 
   const json = {

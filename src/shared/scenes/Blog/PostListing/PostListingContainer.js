@@ -1,13 +1,15 @@
 /* @flow */
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { LAYOUTS } from '../../../core/constants';
-import { changeLayout } from '../../../state/modules/boldr/ui';
-import { getPosts, fetchPostsIfNeeded } from '../../../state/modules/blog/posts';
-import { fetchTagsIfNeeded } from '../../../state/modules/blog/tags/actions';
-import { getTags } from '../../../state/modules/blog/tags/selectors';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import Helmet from 'react-helmet';
 
+import {LAYOUTS} from '../../../core/constants';
+import {changeLayout} from '../../../state/modules/boldr/ui';
+import {getPosts, fetchPostsIfNeeded} from '../../../state/modules/blog/posts';
+import {fetchTagsIfNeeded} from '../../../state/modules/blog/tags/actions';
+import {getTags} from '../../../state/modules/blog/tags/selectors';
+import BaseTemplate from '../../../templates/BaseTemplate';
 import VisiblePostListing from './VisiblePostListing';
 
 type Props = {
@@ -23,13 +25,14 @@ type Props = {
 };
 
 export class PostListingContainer extends Component {
-  static fetchData(dispatch) {
-    return Promise.all([dispatch(fetchPostsIfNeeded()), dispatch(fetchTagsIfNeeded())]);
-  }
+  static defaultProps: {
+    fetchPostsIfNeeded: () => {},
+    fetchTagsIfNeeded: () => {},
+  };
 
   componentDidMount() {
-    const { dispatch } = this.props;
-    PostListingContainer.fetchData(dispatch);
+    this.props.dispatch(fetchPostsIfNeeded());
+    this.props.dispatch(fetchTagsIfNeeded());
   }
 
   props: Props;
@@ -40,13 +43,15 @@ export class PostListingContainer extends Component {
   };
   render() {
     return (
-      <VisiblePostListing
-        posts={ this.props.posts }
-        listTags={ this.props.listTags }
-        layout={ this.props.layout }
-        handleChangeLayout={ this.handleChangeLayout }
-        isFetching={ this.props.isFetching }
-      />
+      <BaseTemplate helmetMeta={<Helmet title="Blog Posts" />}>
+        <VisiblePostListing
+          posts={this.props.posts}
+          listTags={this.props.listTags}
+          layout={this.props.layout}
+          handleChangeLayout={this.handleChangeLayout}
+          isFetching={this.props.isFetching}
+        />
+      </BaseTemplate>
     );
   }
 }

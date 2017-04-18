@@ -1,4 +1,5 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import mergeClassNames from 'classnames';
 import style from './style.css';
 
@@ -23,7 +24,7 @@ const KeyVisual = props => {
     [style.mediaWrapper]: true,
     [style['mediaWrapper--faded']]: isFaded,
   });
-  const assetProps = { className: style.media };
+  const assetProps = {className: style.media};
 
   switch (type) {
     case 'video':
@@ -42,12 +43,12 @@ const KeyVisual = props => {
   }
 
   return (
-    <div { ...rest } className={ finalClassName }>
-      <div className={ mediaClassName }>
+    <div {...rest} className={finalClassName}>
+      <div className={mediaClassName}>
         {asset(assetProps)}
       </div>
-      <div className={ style.contents }>
-        <div className={ style.contentsInner }>
+      <div className={style.contents}>
+        <div className={style.contentsInner}>
           {children}
         </div>
       </div>
@@ -65,7 +66,8 @@ KeyVisual.propTypes = {
    */
   asset: PropTypes.func.isRequired,
   /**
-   * When `true`, the background will fade into a black background to create more contrast to the contents.
+   * When `true`, the background will fade into a black background to
+   * create more contrast to the contents.
    */
   isFaded: PropTypes.bool,
   /**

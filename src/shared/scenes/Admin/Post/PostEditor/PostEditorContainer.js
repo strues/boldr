@@ -1,16 +1,19 @@
 /* @flow */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Loader } from 'boldr-ui';
-import { updatePost, fetchPostFromSlug } from '../../../../state/modules/blog/posts';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {Loader} from 'boldr-ui';
+import {
+  updatePost,
+  fetchPostIfNeeded,
+} from '../../../../state/modules/blog/posts';
 import EditPostForm from './components/EditPostForm';
 import PostEditor from './PostEditor';
 
 export type Props = {
   dispatch: Function,
-  fetchPostFromSlug: Function,
+  fetchPostIfNeeded: () => void,
   posts: Object,
-  params: Object,
+  match: Object,
   currentPost: Object,
   isFetching: Boolean,
   ui: Object,
@@ -18,23 +21,18 @@ export type Props = {
 };
 
 class PostEditorContainer extends Component {
-  static fetchData(dispatch, params) {
-    return Promise.all([dispatch(fetchPostFromSlug(params.slug))]);
-  }
   componentDidMount() {
-    const { dispatch, params } = this.props;
+    const {fetchPostIfNeeded, match: {params}} = this.props;
 
-    // Fetching data for client side rendering
-    PostEditorContainer.fetchData(dispatch, params);
+    fetchPostIfNeeded(params.slug);
   }
-
   props: Props;
 
   render() {
     if (this.props.isFetching) {
       return <Loader />;
     }
-    return <PostEditor currentPost={ this.props.currentPost } />;
+    return <PostEditor currentPost={this.props.currentPost} />;
   }
 }
 
@@ -46,4 +44,6 @@ const mapStateToProps = (state, ownProps) => {
     postImage: state.attachments.postImage,
   };
 };
-export default connect(mapStateToProps)(PostEditorContainer);
+export default connect(mapStateToProps, {fetchPostIfNeeded})(
+  PostEditorContainer,
+);

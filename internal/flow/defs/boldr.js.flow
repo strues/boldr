@@ -17,7 +17,7 @@ declare type User = {
 };
 
 declare type Post = {
-  id: ?string,
+  id: string,
   featureImage: ?string,
   title: string,
   slug: string,
@@ -112,4 +112,33 @@ declare type MenuDetails = {
   mobileHref: string,
   icon: string,
   children: Array<Object>,
+};
+
+
+declare type NormalizrPayload = {
+  entities: Object,
+  result: Array<string>,
+};
+declare type MediaType = {
+  id: number,
+  uuid: string,
+  mediaType: string,
+  createdAt: string,
+  updatedAt: ?string,
+};
+declare type MediaFile = {
+  id: string,
+  fileName: string,
+  safeName: string,
+  thumbName: string,
+  fileDescription: ?string,
+  mediaType: number,
+  mimetype: string,
+  url: string,
+  path: string,
+  userId: string,
+  createdAt: string,
+  updatedAt: string,
+  type: MediaType,
+  owner: string,
 };

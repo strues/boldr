@@ -1,20 +1,25 @@
-import * as t from '../../actionTypes';
 import {
   showModal,
   hideModal,
-  openDrawer,
-  closeDrawer,
   setMobileDevice,
   changeLayout,
-  updateDrawerType,
-  updateMedia,
+  toggleDrawer,
+  CHANGE_LAYOUT,
+  MODAL_OPEN,
+  MODAL_CLOSED,
+  SET_MOBILE_DEVICE,
+  UPDATE_MEDIA,
+  UPDATE_DRAWER_TYPE,
+  TOGGLE_DRAWER,
+  TOGGLE_SB_MENU,
+  TOGGLE_SIDEBAR,
 } from './actions';
 
 describe('UI Actions', () => {
   describe('showModal', () => {
     it('should return the correct type', () => {
       const expectedResult = {
-        type: t.MODAL_OPEN,
+        type: MODAL_OPEN,
       };
 
       expect(showModal()).toEqual(expectedResult);
@@ -23,34 +28,26 @@ describe('UI Actions', () => {
   describe('hideModal', () => {
     it('should return the correct type', () => {
       const expectedResult = {
-        type: t.MODAL_CLOSED,
+        type: MODAL_CLOSED,
       };
 
       expect(hideModal()).toEqual(expectedResult);
     });
   });
-  describe('openDrawer', () => {
+  describe('toggleDrawer', () => {
     it('should return the correct type', () => {
       const expectedResult = {
-        type: t.OPEN_DRAWER,
+        type: TOGGLE_DRAWER,
       };
 
-      expect(openDrawer()).toEqual(expectedResult);
+      expect(toggleDrawer()).toEqual(expectedResult);
     });
   });
-  describe('closeDrawer', () => {
-    it('should return the correct type', () => {
-      const expectedResult = {
-        type: t.CLOSE_DRAWER,
-      };
 
-      expect(closeDrawer()).toEqual(expectedResult);
-    });
-  });
   describe('setMobileDevice', () => {
     it('should return the correct type', () => {
       const expectedResult = {
-        type: t.SET_MOBILE_DEVICE,
+        type: SET_MOBILE_DEVICE,
         payload: true,
       };
 
@@ -60,31 +57,11 @@ describe('UI Actions', () => {
   describe('changeLayout', () => {
     it('should return the correct type', () => {
       const expectedResult = {
-        type: t.CHANGE_LAYOUT,
+        type: CHANGE_LAYOUT,
         payload: undefined,
       };
 
       expect(changeLayout()).toEqual(expectedResult);
-    });
-  });
-  describe('updateDrawerType', () => {
-    it('should return the correct type', () => {
-      const expectedResult = {
-        type: t.UPDATE_DRAWER_TYPE,
-        undefined,
-      };
-
-      expect(updateDrawerType()).toEqual(expectedResult);
-    });
-  });
-  describe('updateMedia', () => {
-    it('should return the correct type', () => {
-      const expectedResult = {
-        type: t.UPDATE_MEDIA,
-        undefined,
-      };
-
-      expect(updateMedia()).toEqual(expectedResult);
     });
   });
 });

@@ -1,10 +1,7 @@
 /* @flow */
 
-import React, { PropTypes } from 'react';
-import ListItem from 'react-md/lib/Lists/ListItem';
-import Paper from 'react-md/lib/Papers';
-import Avatar from 'react-md/lib/Avatars';
-import FontIcon from 'react-md/lib/FontIcons';
+import React from 'react';
+import {ListItem, Paper, Avatar, FontIcon} from 'boldr-ui';
 
 type Props = {
   tags: Array<Tag>,
@@ -25,11 +22,15 @@ const TagList = (props: Props) => {
     <div>
       {props.tags.map(tag => (
         <ListItem
-          key={ tag.id }
-          primaryText={ tag.name }
-          rightIcon={ <FontIcon onClick={ () => handleClickDelete(tag) }>delete_forever</FontIcon> }
-          secondaryText={ tag.description }
-          onClick={ () => handleClick(tag) }
+          key={tag.id}
+          primaryText={tag.name}
+          rightIcon={
+            <FontIcon onClick={() => handleClickDelete(tag)}>
+              delete_forever
+            </FontIcon>
+          }
+          secondaryText={tag.description}
+          onClick={() => handleClick(tag)}
         />
       ))}
     </div>

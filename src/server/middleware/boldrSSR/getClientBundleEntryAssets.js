@@ -3,7 +3,7 @@
  */
 
 import fs from 'fs';
-import { resolve as pathResolve } from 'path';
+import {resolve as pathResolve} from 'path';
 import appRootDir from 'app-root-dir';
 
 let resultCache;
@@ -38,15 +38,16 @@ export default function getClientBundleEntryAssets() {
   );
 
   if (!fs.existsSync(assetsFilePath)) {
-    throw new Error(
-      `We could not find the "${assetsFilePath}" file, which contains a list of the assets of the client bundle.`,
-    );
+    throw new Error(`We could not find the "${assetsFilePath}" file.`);
   }
 
-  const readAssetsJSONFile = () => JSON.parse(fs.readFileSync(assetsFilePath, 'utf8'));
+  const readAssetsJSONFile = () =>
+    JSON.parse(fs.readFileSync(assetsFilePath, 'utf8'));
   const assetsJSONCache = readAssetsJSONFile();
   if (typeof assetsJSONCache.index === 'undefined') {
-    throw new Error('No asset data found for expected "index" entry chunk of client bundle.');
+    throw new Error(
+      'No asset data found for expected "index" entry chunk of client bundle.',
+    );
   }
   resultCache = assetsJSONCache.index;
   return resultCache;

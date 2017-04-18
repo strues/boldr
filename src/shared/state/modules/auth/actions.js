@@ -1,8 +1,8 @@
-import { push } from 'react-router-redux';
-import * as api from '../../../core/api';
-import { setToken, removeToken } from '../../../core/authentication/token';
+import {push} from 'react-router-redux';
+import api from '../../../core/api';
+import {setToken, removeToken} from '../../../core/authentication/token';
 import * as notif from '../../../core/constants';
-import { notificationSend } from '../notifications/notifications';
+import {notificationSend} from '../notifications/notifications';
 import * as t from '../actionTypes';
 
 /**
@@ -14,22 +14,24 @@ import * as t from '../actionTypes';
 export function doSignup(data) {
   return dispatch => {
     dispatch(beginSignUp());
-    return api.doSignup(data).then(response => {
-      if (!response.status === 201) {
-        dispatch(signUpError(response));
+    return api
+      .post('/api/v1/auth/signup', data)
+      .then(res => {
+        dispatch(signUpSuccess());
+        dispatch(push('/'));
+        dispatch(notificationSend(notif.MSG_SIGNUP_SUCCESS));
+      })
+      .catch(err => {
+        dispatch(signUpError(err));
         dispatch(notificationSend(notif.MSG_SIGNUP_ERROR));
-      }
-      dispatch(signUpSuccess());
-      dispatch(push('/'));
-      dispatch(notificationSend(notif.MSG_SIGNUP_SUCCESS));
-    });
+      });
   };
 }
 
-const beginSignUp = () => ({ type: t.SIGNUP_USER_REQUEST });
+const beginSignUp = () => ({type: t.SIGNUP_USER_REQUEST});
 
 // Signup Success
-const signUpSuccess = () => ({ type: t.SIGNUP_USER_SUCCESS });
+const signUpSuccess = () => ({type: t.SIGNUP_USER_SUCCESS});
 
 // Signup Error
 const signUpError = err => {
@@ -49,14 +51,10 @@ export function doLogin(data) {
   return dispatch => {
     dispatch(beginLogin());
     return api
-      .doLogin(data)
-      .then(response => {
-        if (response.status !== 200) {
-          dispatch(loginError(response));
-          dispatch(notificationSend(notif.MSG_LOGIN_ERROR('Unable to login')));
-        }
-        setToken(response.body.token);
-        dispatch(loginSuccess(response));
+      .post('/api/v1/auth/login', data)
+      .then(res => {
+        setToken(res.data.token);
+        dispatch(loginSuccess(res));
         dispatch(notificationSend(notif.MSG_LOGIN_SUCCESS));
         dispatch(push('/'));
       })
@@ -72,13 +70,13 @@ export function doLogin(data) {
       });
   };
 }
-const beginLogin = () => ({ type: t.LOGIN_REQUEST });
+const beginLogin = () => ({type: t.LOGIN_REQUEST});
 
-function loginSuccess(response) {
+function loginSuccess(res) {
   return {
     type: t.LOGIN_SUCCESS,
-    token: response.body.token,
-    user: response.body.user,
+    token: res.data.token,
+    user: res.data.user,
   };
 }
 
@@ -115,8 +113,8 @@ export const checkAuth = token => {
   return async (dispatch: Function) => {
     try {
       dispatch(checkAuthRequest());
-      const data = await api.doAuthCheck(token);
-      const user = data.body;
+      const res = await api.get('/api/v1/auth/check');
+      const user = res.data;
       dispatch(checkAuthSuccess(user, token));
     } catch (err) {
       dispatch(checkAuthFailure('Token is invalid'));
@@ -126,7 +124,7 @@ export const checkAuth = token => {
 };
 
 function checkAuthRequest() {
-  return { type: t.CHECK_AUTH_REQUEST };
+  return {type: t.CHECK_AUTH_REQUEST};
 }
 
 function checkAuthSuccess(user, token) {

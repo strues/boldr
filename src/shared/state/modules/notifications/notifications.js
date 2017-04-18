@@ -17,15 +17,12 @@ export const notificationSend = notification => {
     });
 
     if (payload.dismissAfter) {
-      setTimeout(
-        () => {
-          dispatch({
-            type: NOTIFICATION_DISMISS,
-            payload: payload.id,
-          });
-        },
-        payload.dismissAfter,
-      );
+      setTimeout(() => {
+        dispatch({
+          type: NOTIFICATION_DISMISS,
+          payload: payload.id,
+        });
+      }, payload.dismissAfter);
     }
   };
 };
@@ -45,13 +42,14 @@ export const notificationDismiss = id => {
  * Clear all notifications
  */
 export const notificationClear = () => {
-  return { type: NOTIFICATION_CLEAR };
+  return {type: NOTIFICATION_CLEAR};
 };
 
 /**
  * reducer for the app-wide notifications.
  * @method notificationReducer
- * @param  {Array}             [state=[]] Empty state array, meant to hold all notification objects.
+ * @param  {Array}             [state=[]] Empty state array, meant to hold all
+ * notification objects.
  * @param  {Object}            action     the action object
  */
 export default function notificationReducer(state = [], action) {

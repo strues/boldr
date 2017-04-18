@@ -1,5 +1,6 @@
 /* @flow */
-import React, { Component, PropTypes } from 'react';
+// $FlowIssue
+import React, {Component, PropTypes} from 'react';
 import classNames from 'classnames/bind';
 import DropdownList from '../DropdownList';
 import styles from './dropdown.scss';
@@ -18,14 +19,20 @@ class Dropdown extends Component {
   };
   props: Props;
   render() {
-    const { data, closeDropdowns, open } = this.props;
+    const {data, closeDropdowns, open} = this.props;
 
     return (
       <div
-        className={ cx('boldr-menu__dropdown', { 'boldr-menu__dropdown-open': open }) }
-        aria-hidden={ open ? 'false' : 'true' }
+        className={cx('boldr-menu__dropdown', {
+          'boldr-menu__dropdown-open': open,
+        })}
+        aria-hidden={open ? 'false' : 'true'}
       >
-        <DropdownList key={ data.id } data={ data.children.items } closeDropdowns={ closeDropdowns } />
+        <DropdownList
+          key={data.id}
+          data={data.children.items}
+          closeDropdowns={closeDropdowns}
+        />
       </div>
     );
   }

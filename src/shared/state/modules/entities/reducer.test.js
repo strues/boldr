@@ -5,9 +5,9 @@ describe('Entities', () => {
     expect(entitiesReducer(undefined, {})).toEqual({
       posts: {},
       tags: {},
-      comments: {},
       attachments: {},
       users: {},
+      media: {},
       menus: {},
       menuDetails: {},
       settings: {},

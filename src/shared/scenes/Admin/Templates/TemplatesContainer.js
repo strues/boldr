@@ -1,9 +1,10 @@
 /* eslint-disable react/prefer-stateless-function */
 /* @flow */
-import React, { Component } from 'react';
+// $FlowIssue
+import React, {Component} from 'react';
 
-import { connect } from 'react-redux';
-import { fetchTemplates } from '../../../state/modules/boldr/templates';
+import {connect} from 'react-redux';
+import {fetchTemplates} from '../../../state/modules/boldr/templates';
 import Templates from './Templates';
 
 export type Props = {
@@ -23,4 +24,4 @@ const mapStateToProps = (state, ownProps) => {
     templates: state.boldr.templates,
   };
 };
-export default connect(mapStateToProps, { fetchTemplates })(TemplatesContainer);
+export default connect(mapStateToProps, {fetchTemplates})(TemplatesContainer);

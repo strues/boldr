@@ -1,8 +1,7 @@
-/* eslint-disable react/prefer-stateless-function */
 /* @flow */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchTagsIfNeeded, getTags } from '../../../state/modules/blog/tags';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {fetchTagsIfNeeded, getTags} from '../../../state/modules/blog/tags';
 import Tags from './Tags';
 
 type Props = {
@@ -13,17 +12,14 @@ type Props = {
 };
 
 class TagsContainer extends Component {
-  static fetchData(dispatch) {
-    return Promise.all([dispatch(fetchTagsIfNeeded())]);
-  }
   componentDidMount() {
-    const { dispatch } = this.props;
-    TagsContainer.fetchData(dispatch);
+    const {dispatch} = this.props;
+    dispatch(fetchTagsIfNeeded());
   }
   props: Props;
 
   render() {
-    return <Tags tags={ this.props.tags } currentTag={ this.props.currentTag } />;
+    return <Tags tags={this.props.tags} currentTag={this.props.currentTag} />;
   }
 }
 

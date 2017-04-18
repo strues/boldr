@@ -1,12 +1,21 @@
 /* @flow */
 import React from 'react';
-import Paper from 'react-md/lib/Papers';
-import Drawer from 'react-md/lib/Drawers';
-import Button from 'react-md/lib/Buttons/Button';
-import FontIcon from 'react-md/lib/FontIcons';
-import Toolbar from 'react-md/lib/Toolbars';
 import styled from 'styled-components';
-import { Grid, Col, Row, Heading, Modal, Icon, Social } from 'boldr-ui';
+import {
+  Paper,
+  Drawer,
+  Button,
+  FontIcon,
+  Toolbar,
+  Grid,
+  Col,
+  Row,
+  Heading,
+  Modal,
+  Icon,
+  Social,
+} from 'boldr-ui';
+
 import ProfileDetail from '../ProfileDetail';
 
 const DetailList = styled.ul`
@@ -35,13 +44,28 @@ type Props = {
 };
 
 const ProfileContent = (props: Props) => {
-  const { profile } = props;
+  const {profile} = props;
 
   const editButtons = (
     <EditWrapper>
-      <Button primary raised label="Edit Profile" onClick={ props.toggleDrawer } />
-      <Button secondary flat label="Upload Profile Image" onClick={ props.handleProfileImgClick } />
-      <Button secondary flat label="Upload Avatar" onClick={ props.handleAvatarImgClick } />
+      <Button
+        primary
+        raised
+        label="Edit Profile"
+        onClick={props.toggleDrawer}
+      />
+      <Button
+        secondary
+        flat
+        label="Upload Profile Image"
+        onClick={props.handleProfileImgClick}
+      />
+      <Button
+        secondary
+        flat
+        label="Upload Avatar"
+        onClick={props.handleAvatarImgClick}
+      />
     </EditWrapper>
   );
   return (
@@ -51,22 +75,40 @@ const ProfileContent = (props: Props) => {
         {props.me ? editButtons : null}
       </Row>
       <Row>
-        <Col sm={ 12 } md={ 6 }>
+        <Col sm={12} md={6}>
           <ImgWrapper>
-            <img src={ profile.avatarUrl } className="boldr-profile__avatar" alt={ `${profile.username}'s avatar` } />
+            <img
+              src={profile.avatarUrl}
+              className="boldr-profile__avatar"
+              alt={`${profile.username}'s avatar`}
+            />
           </ImgWrapper>
         </Col>
-        <Col sm={ 12 } md={ 6 }>
+        <Col sm={12} md={6}>
           <Col xs>
-            <Heading size={ 1 }>{profile.firstName} {' '} {profile.lastName}'s Profile</Heading>
+            <Heading size={1}>
+              {profile.firstName} {' '} {profile.lastName}'s Profile
+            </Heading>
           </Col>
           <DetailList>
-            <ProfileDetail label={ <FontIcon>email</FontIcon> } detail={ profile.email } />
-            <ProfileDetail label={ <FontIcon>web</FontIcon> } detail={ profile.website } />
-            <ProfileDetail label={ <FontIcon>location_on</FontIcon> } detail={ profile.location } />
-            <ProfileDetail label={ <FontIcon>library_books</FontIcon> } detail={ profile.bio } />
+            <ProfileDetail
+              label={<FontIcon>email</FontIcon>}
+              detail={profile.email}
+            />
+            <ProfileDetail
+              label={<FontIcon>web</FontIcon>}
+              detail={profile.website}
+            />
+            <ProfileDetail
+              label={<FontIcon>location_on</FontIcon>}
+              detail={profile.location}
+            />
+            <ProfileDetail
+              label={<FontIcon>library_books</FontIcon>}
+              detail={profile.bio}
+            />
           </DetailList>
-          <Social
+          {/* <Social
             facebook
             fburl={ profile.social.facebook.url }
             twitter
@@ -77,7 +119,7 @@ const ProfileContent = (props: Props) => {
             ghurl={ profile.social.github.url }
             linkedin
             lurl={ profile.social.linkedin.url }
-          />
+          /> */}
         </Col>
       </Row>
     </div>

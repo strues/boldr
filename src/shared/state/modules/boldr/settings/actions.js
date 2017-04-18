@@ -1,18 +1,16 @@
-import { normalize, arrayOf } from 'normalizr';
-import { push } from 'react-router-redux';
-import { camelizeKeys } from 'humps';
-import * as api from '../../../../core/api';
-
+import {normalize, arrayOf} from 'normalizr';
+import {push} from 'react-router-redux';
+import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
-import { notificationSend } from '../../notifications/notifications';
+import {notificationSend} from '../../notifications/notifications';
 import * as t from '../../actionTypes';
-import { setting as settingSchema, arrayOfSetting } from './schema';
+import {setting as settingSchema, arrayOfSetting} from './schema';
 
 /**
   * FETCH SETTINGS ACTIONS
   * -------------------------
   * @exports fetchSettingsIfNeeded
-  * @exports loadBoldrSettings
+  * @exports fetchSettings
   *****************************************************************/
 
 /**
@@ -23,32 +21,46 @@ import { setting as settingSchema, arrayOfSetting } from './schema';
  * @return {Promise} Menus Promise that resolves when menus are fetched
  * or they arent required to be refreshed.
  */
-export function fetchSettingsIfNeeded() {
-  return (dispatch, getState) => {
-    if (shouldFetchSettings(getState())) {
-      return dispatch(loadBoldrSettings());
-    }
 
-    return Promise.resolve();
-  };
-}
+/* istanbul ignore next */
+export const fetchSettingsIfNeeded = (): ThunkAction => (
+  dispatch: Dispatch,
+  getState: GetState,
+  axios: any,
+) => {
+  /* istanbul ignore next */
+  if (shouldFetchSettings(getState())) {
+    /* istanbul ignore next */
+    return dispatch(fetchSettings(axios));
+  }
 
-export function loadBoldrSettings() {
-  return dispatch => {
-    dispatch(loadSettings());
-    return api
-      .getAllSettings()
-      .then(response => {
-        const camelizedJson = camelizeKeys(response.body);
-        const settingData = normalize(response.body, arrayOfSetting);
-        return dispatch(doneLoadSettings(settingData));
-      })
-      .catch(error => {
-        dispatch(failLoadSettings(error));
+  /* istanbul ignore next */
+  return null;
+};
+
+export const fetchSettings = (axios: any): ThunkAction => (
+  dispatch: Dispatch,
+) => {
+  dispatch({type: t.FETCH_SETTINGS_REQUEST});
+
+  return api
+    .get('/api/v1/settings')
+    .then(res => {
+      const settingsData = res.data;
+      const normalizedSettings = normalize(settingsData, arrayOfSetting);
+
+      dispatch({
+        type: t.FETCH_SETTINGS_SUCCESS,
+        payload: normalizedSettings,
       });
-  };
-}
-
+    })
+    .catch(err => {
+      dispatch({
+        type: t.FETCH_SETTINGS_FAILURE,
+        error: err,
+      });
+    });
+};
 /**
  * @function shouldFetchSettings
  * Called by fetchSettingsIfNeeded
@@ -59,27 +71,9 @@ function shouldFetchSettings(state) {
   if (!settings.length) {
     return true;
   }
-  if (settings.length) {
-    return false;
-  }
-  return settings;
+
+  return false;
 }
-
-const loadSettings = () => ({
-  type: t.FETCH_SETTINGS_REQUEST,
-});
-
-function doneLoadSettings(settingData) {
-  return {
-    type: t.FETCH_SETTINGS_SUCCESS,
-    payload: settingData,
-  };
-}
-
-const failLoadSettings = error => ({
-  type: t.FETCH_SETTINGS_FAILURE,
-  error,
-});
 
 /**
   * UPDATE SETTINGS ACTIONS
@@ -88,13 +82,16 @@ const failLoadSettings = error => ({
   *****************************************************************/
 
 export function updateBoldrSettings(payload) {
+  const settingId = payload.id;
+  const data = {
+    value: payload.value,
+  };
   return dispatch => {
     dispatch(beginUpdateSettings());
     return api
-      .doUpdateSettings(payload)
-      .then(response => {
-        dispatch(doneUpdateSettings(response));
-        dispatch(loadSettings());
+      .put(`/api/v1/settings/${settingId}`, data)
+      .then(res => {
+        dispatch(doneUpdateSettings(res.data));
         dispatch(
           notificationSend({
             message: 'Updated your settings.',
@@ -102,7 +99,6 @@ export function updateBoldrSettings(payload) {
             dismissAfter: 3000,
           }),
         );
-        dispatch(push('/admin'));
       })
       .catch(err => {
         dispatch(failUpdateSettings(err));
@@ -120,9 +116,9 @@ const beginUpdateSettings = () => ({
   type: t.UPDATE_SETTINGS_REQUEST,
 });
 
-const doneUpdateSettings = response => ({
+const doneUpdateSettings = res => ({
   type: t.UPDATE_SETTINGS_SUCCESS,
-  payload: response.body,
+  payload: res.data,
 });
 
 const failUpdateSettings = err => ({

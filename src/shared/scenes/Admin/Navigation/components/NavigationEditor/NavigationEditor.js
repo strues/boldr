@@ -12,9 +12,11 @@ export type Props = {
 
 const NavigationEditor = (props: Props) => {
   return (
-    <div>
-      <NavigationForm initialValues={ props.initialValues } enableReinitialize onSubmit={ props.onFormSubmit } />
-    </div>
+    <NavigationForm
+      initialValues={props.initialValues}
+      enableReinitialize
+      onSubmit={props.onFormSubmit}
+    />
   );
 };
 

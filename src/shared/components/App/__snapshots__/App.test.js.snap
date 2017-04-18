@@ -1,0 +1,157 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<App /> renders snapshot 1`] = `
+<Connect(App)
+  route={
+    Array [
+      Object {
+        "component": [Function],
+        "loadData": [Function],
+        "routes": Array [
+          Object {
+            "component": [Function],
+            "exact": true,
+            "path": "/",
+          },
+          Object {
+            "component": [Function],
+            "exact": true,
+            "path": "/about",
+          },
+          Object {
+            "component": [Function],
+            "exact": true,
+            "loadData": [Function],
+            "path": "/blog",
+          },
+          Object {
+            "component": [Function],
+            "exact": true,
+            "loadData": [Function],
+            "path": "/blog/:slug",
+          },
+          Object {
+            "component": [Function],
+            "exact": true,
+            "loadData": [Function],
+            "path": "/blog/tags/:name",
+          },
+          Object {
+            "component": [Function],
+            "exact": true,
+            "path": "/account/login",
+          },
+          Object {
+            "component": [Function],
+            "exact": true,
+            "path": "/account/signup",
+          },
+          Object {
+            "component": [Function],
+            "exact": true,
+            "path": "/account/forgot-password",
+          },
+          Object {
+            "component": [Function],
+            "exact": true,
+            "path": "/account/reset-password/:token",
+          },
+          Object {
+            "component": [Function],
+            "exact": true,
+            "path": "/account/verify/:token",
+          },
+          Object {
+            "component": [Function],
+            "loadData": [Function],
+            "path": "/profiles/:username",
+          },
+          Object {
+            "auth": Object {
+              "redirect": "/account/login",
+              "required": true,
+              "status": 307,
+            },
+            "component": [Function],
+            "path": "/admin",
+            "routes": Array [
+              Object {
+                "component": [Function],
+                "exact": true,
+                "loadData": [Function],
+                "path": "/admin/posts",
+                "strict": true,
+              },
+              Object {
+                "component": [Function],
+                "exact": true,
+                "path": "/admin/new-post",
+              },
+              Object {
+                "component": [Function],
+                "exact": true,
+                "loadData": [Function],
+                "path": "/admin/post-editor/:slug",
+              },
+              Object {
+                "component": [Function],
+                "exact": true,
+                "loadData": [Function],
+                "path": "/admin/filemanager",
+              },
+              Object {
+                "component": [Function],
+                "exact": true,
+                "path": "/admin/file-editor/:id",
+              },
+              Object {
+                "component": [Function],
+                "exact": true,
+                "loadData": [Function],
+                "path": "/admin/navigation",
+              },
+              Object {
+                "component": [Function],
+                "exact": true,
+                "loadData": [Function],
+                "path": "/admin/members",
+              },
+              Object {
+                "component": [Function],
+                "exact": true,
+                "path": "/admin/settings",
+              },
+              Object {
+                "component": [Function],
+                "exact": true,
+                "loadData": [Function],
+                "path": "/admin/tags",
+              },
+              Object {
+                "component": [Function],
+                "exact": true,
+                "path": "/admin/tags/:name",
+              },
+              Object {
+                "component": [Function],
+                "exact": true,
+                "loadData": [Function],
+                "path": "/admin/media",
+              },
+              Object {
+                "component": [Function],
+                "exact": true,
+                "path": "/admin/media/:id",
+              },
+            ],
+          },
+          Object {
+            "component": [Function],
+            "path": "*",
+          },
+        ],
+      },
+    ]
+  }
+/>
+`;

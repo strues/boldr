@@ -1,5 +1,5 @@
 import React from 'react';
-import { getTagIds, getTagsList, getTags } from './selectors';
+import {getTagIds, getTagsList, getTags} from './selectors';
 
 const state = {
   blog: {

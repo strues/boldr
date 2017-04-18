@@ -1,21 +1,26 @@
-import React, { PropTypes } from 'react';
-import Card from 'react-md/lib/Cards/Card';
-import CardTitle from 'react-md/lib/Cards/CardTitle';
-import CardActions from 'react-md/lib/Cards/CardActions';
-import CardText from 'react-md/lib/Cards/CardText';
-import Media, { MediaOverlay } from 'react-md/lib/Media';
-import Avatar from 'react-md/lib/Avatars';
-import Button from 'react-md/lib/Buttons';
-import FontIcon from 'react-md/lib/FontIcons';
+import React from 'react';
+import {
+  Avatar,
+  CardTitle,
+  Card,
+  FontIcon,
+  CardActions,
+  CardText,
+  Button,
+  Media,
+  MediaOverlay,
+  Heading,
+} from 'boldr-ui';
 
-import config from '../../../../../../../config';
+import Link from 'react-router-dom/Link';
+// import config from '../../../../../../../config';
 
 type Props = {
   removeMedia?: Function,
   selectFile: Function,
   file?: {
     id?: string,
-    file_name?: string,
+    fileName?: string,
     url?: string,
   },
 };
@@ -27,23 +32,29 @@ const File = (props: Props) => {
   }
 
   function handleSelect() {
-    const { file } = props;
+    const {file} = props;
     props.selectFile(file);
   }
 
   return (
     <Card className="boldr-filecard">
       <Media>
-        <img src={ `${config('apiUrl')}${props.file.url}` } alt={ props.file.file_name } role="presentation" />
+        <img
+          src={`http://localhost:2121${props.file.url}`}
+          alt={props.file.fileName}
+          role="presentation"
+        />
         <MediaOverlay>
-          <CardTitle title={ props.file.file_name || 'foo' } />
+          <CardTitle title={props.file.fileName || 'foo'} />
         </MediaOverlay>
       </Media>
       <CardActions>
-        <Button icon onClick={ handleSelect }>
-          <FontIcon>mode_edit</FontIcon>
-        </Button>
-        <Button icon onClick={ handleclick }>
+        <Link to={`/admin/file-editor/${props.file.id}`}>
+          <Button icon onClick={handleSelect}>
+            <FontIcon>mode_edit</FontIcon>
+          </Button>
+        </Link>
+        <Button icon onClick={handleclick}>
           <FontIcon>delete_forever</FontIcon>
         </Button>
       </CardActions>

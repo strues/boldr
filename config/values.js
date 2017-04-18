@@ -29,7 +29,10 @@ const values = {
     host: EnvVars.string('POSTGRES_HOST', 'localhost'),
     user: EnvVars.string('POSTGRES_USER', 'postgres'),
     password: EnvVars.string('POSTGRES_PASSWORD', 'password'),
-    uri: EnvVars.string('POSTGRES_CONN_URI', 'postgres://postgres:password@localhost:5432/boldr'),
+    uri: EnvVars.string(
+      'POSTGRES_CONN_URI',
+      'postgres://postgres:password@localhost:5432/boldr',
+    ),
     pool: {
       min: 2,
       max: 10,
@@ -72,20 +75,32 @@ const values = {
   htmlPage: {
     titleTemplate: '%s - Powered by Boldr',
     defaultTitle: 'Boldr',
-    description: "Your dreams are bold. Your thoughts are bold. So why shouldn't your CMS be a little Boldr?",
+    description: "Your dreams are bold. Your thoughts are bold. So why shouldn't your CMS be a little Boldr?", // eslint-disable-line
   },
-  // Path to the public assets that will be served off the root of the HTTP server.
+  // Path to the public assets that will be served off the root
+  // of the HTTP server.
   publicAssetsPath: './public',
 
   /**
    * 🚷  MODIFICATION BELOW NOT RECOMMENDED ❗
    * unless you're very familiar with the innerworkings of Webpack.
-   */
-  buildOutputPath: './boldrCMS',
+   */ buildOutputPath: './boldrCMS',
   optimizeProdBuild: true,
   incSourceMaps: false,
   bundleSrcTypes: ['js', 'jsx', 'json'],
-  bundleAssetTypes: ['jpg', 'jpeg', 'png', 'gif', 'ico', 'eot', 'svg', 'ttf', 'woff', 'woff2', 'otf'],
+  bundleAssetTypes: [
+    'jpg',
+    'jpeg',
+    'png',
+    'gif',
+    'ico',
+    'eot',
+    'svg',
+    'ttf',
+    'woff',
+    'woff2',
+    'otf',
+  ],
   bundleAssetsFileName: 'assets.json',
   extWhitelist: [
     /\.(eot|woff|woff2|ttf|otf)$/,
@@ -96,23 +111,20 @@ const values = {
   serviceWorker: {
     enabled: true,
     fileName: 'sw.js',
-    includePublicAssets: [
-      './**/*',
-    ],
+    includePublicAssets: ['./**/*'],
     offlinePageTemplate: './internal/webpack/offlinePageTemplate.js',
     offlinePageFileName: 'offline.html',
   },
-
   bundles: {
     client: {
       // Src entry file.
       entryFile: './src/client/index.js',
-      // Src paths.
-      // @NOTE Mainly for the SW
+       // Src paths. // @NOTE Mainly for the SW
+      vendorFile: './src/client/vendor.js',
+       // Where does the client bundle output live?
       srcPaths: ['./src/client', './src/shared', './config'],
-      // Where does the client bundle output live?
+       // What is the public http path at which we must serve the bundle from?
       outputPath: './boldrCMS/client',
-      // What is the public http path at which we must serve the bundle from?
       webPath: '/assets/',
       devDlls: {
         enabled: true,
@@ -120,17 +132,18 @@ const values = {
           'react',
           'react-dom',
           'react-helmet',
-          'react-router',
+          'react-router-dom',
+          'react-router-redux',
+          'react-router-config',
           'redux',
           'react-redux',
+          'axios',
           'redux-thunk',
-          'react-md',
+          'boldr-ui',
+          'boldr-utils',
           'draft-js',
-          'bluebird',
-          'superagent',
           'draftjs-to-html',
           'draft-js-import-html',
-          'humps',
           'react-dropzone',
           'normalizr',
           'react-addons-css-transition-group',
@@ -146,13 +159,12 @@ const values = {
       },
     },
     server: {
+       // Src paths.
       entryFile: './src/server/index.js',
-      // Src paths.
       srcPaths: ['./src/server', './src/shared', './config'],
       outputPath: './boldrCMS/server',
     },
   },
-
   additionalNodeBundles: {},
   plugins: {
     babelConfig: (babelConfig, buildOptions) => {
@@ -169,8 +181,7 @@ const values = {
 };
 if (process.env.BUILD_FLAG_IS_CLIENT) {
   throw new Error(
-    'Avoid including the values file itself. This will bundle your secrets with your app.',
+    'This will bundle your secrets with your app.',
   );
 }
-
 export default values;

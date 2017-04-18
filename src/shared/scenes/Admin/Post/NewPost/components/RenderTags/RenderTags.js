@@ -1,11 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-array-index-key */
-import React, { PropTypes } from 'react';
-import { Field, FieldArray, reduxForm } from 'redux-form';
+import React from 'react';
+import {Field, FieldArray, reduxForm} from 'redux-form';
 import styled from 'styled-components';
-import Button from 'react-md/lib/Buttons';
-import FontIcon from 'react-md/lib/FontIcons';
-import { InputField } from 'boldr-ui';
+import {Button, FontIcon, InputField} from 'boldr-ui';
 
 const TagList = styled.ul`
   list-style-type: none;
@@ -21,14 +19,30 @@ const TagItem = styled.li`
   padding-left: 0;
 `;
 
-const RenderTags = ({ fields, meta: { touched, error } }) => (
+const RenderTags = ({fields, meta: {touched, error}}) => (
   <div>
-    <Button secondary flat onClick={ () => fields.push('') } style={ { marginBottom: 17 } } label="Add Tag">add</Button>
+    <Button
+      secondary
+      flat
+      onClick={() => fields.push('')}
+      style={{marginBottom: 17}}
+      label="Add Tag"
+    >
+      add
+    </Button>
     <TagList>
       {fields.map((name, index) => (
-        <TagItem key={ index }>
-          <Button onClick={ () => fields.remove(index) } icon primary>close</Button>
-          <Field id={ `tag${index}` } name={ name } type="text" label="tag" component={ InputField } />
+        <TagItem key={index}>
+          <Button onClick={() => fields.remove(index)} icon primary>
+            close
+          </Button>
+          <Field
+            id={`tag${index}`}
+            name={name}
+            type="text"
+            label="tag"
+            component={InputField}
+          />
         </TagItem>
       ))}
     </TagList>

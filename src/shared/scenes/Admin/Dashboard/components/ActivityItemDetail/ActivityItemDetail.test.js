@@ -1,11 +1,11 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import {shallow} from 'enzyme';
 import ActivityItemDetail from './ActivityItemDetail';
 
 const act = 'create';
 
 test('<ActivityItemDetail />, renders the widget with props', () => {
-  const wrapper = shallow(<ActivityItemDetail atype={ act } />);
+  const wrapper = shallow(<ActivityItemDetail atype={act} />);
   expect(wrapper.instance().props.atype).toEqual(act);
 });
 

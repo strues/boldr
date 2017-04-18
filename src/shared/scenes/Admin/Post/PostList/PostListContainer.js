@@ -1,8 +1,12 @@
 /* @flow */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { fetchPostsIfNeeded, getPosts, deletePost } from '../../../../state/modules/blog/posts';
-import type { ReactElement } from '../../../../types/react';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {
+  fetchPostsIfNeeded,
+  getPosts,
+  deletePost,
+} from '../../../../state/modules/blog/posts';
+import type {ReactElement} from '../../../../types/react';
 import VisiblePostList from './VisiblePostList';
 
 type Props = {
@@ -10,21 +14,21 @@ type Props = {
   posts: Array<Post>,
   dispatch: () => void,
   deletePost: Function,
-  fetchPostsIfNeeded: Function,
+  fetchPostsIfNeeded: () => void,
   handleDeleteClick: Function,
 };
 
 export class PostListContainer extends Component {
-  static fetchData(dispatch) {
-    return Promise.all([dispatch(fetchPostsIfNeeded())]);
-  }
+  static defaultProps: {
+    profile: {},
+    fetchPostsIfNeeded: () => {},
+  };
   constructor(props: Props) {
     super(props);
     (this: any).handleDeleteClick = this.handleDeleteClick.bind(this);
   }
   componentDidMount() {
-    const { dispatch } = this.props;
-    PostListContainer.fetchData(dispatch);
+    this.props.dispatch(fetchPostsIfNeeded());
   }
 
   props: Props;
@@ -33,7 +37,12 @@ export class PostListContainer extends Component {
     this.props.dispatch(deletePost(postId));
   }
   render() {
-    return <VisiblePostList posts={ this.props.posts } handleDeleteClick={ this.handleDeleteClick } />;
+    return (
+      <VisiblePostList
+        posts={this.props.posts}
+        handleDeleteClick={this.handleDeleteClick}
+      />
+    );
   }
 }
 

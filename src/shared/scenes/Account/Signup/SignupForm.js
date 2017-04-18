@@ -1,52 +1,82 @@
 /* @flow */
 import React from 'react';
-import { Field, reduxForm, getFormSyncErrors, isValid } from 'redux-form';
-import Button from 'react-md/lib/Buttons';
-import { InputField, Row, Col } from 'boldr-ui';
-import validate, { requiredValidator, emailValidator } from './validate';
+import {Field, reduxForm, getFormSyncErrors, isValid} from 'redux-form';
+import {Button, InputField, Row, Col} from 'boldr-ui';
+
+import validate, {requiredValidator, emailValidator} from './validate';
 
 type Props = {
   handleSubmit?: Function,
 };
 
 const SignupForm = (props: Props) => {
-  const { handleSubmit } = props;
+  const {handleSubmit} = props;
   return (
-    <form onSubmit={ handleSubmit } className="boldr-form__generic">
+    <form onSubmit={handleSubmit} className="boldr-form__generic">
       <Row>
-        <Col xs={ 6 }>
+        <Col xs={6}>
           <Field
             id="email"
             name="email"
             type="email"
-            component={ InputField }
+            component={InputField}
             label="Email address"
-            validate={ [requiredValidator, emailValidator] }
+            validate={[requiredValidator, emailValidator]}
           />
         </Col>
-        <Col xs={ 6 }>
-          <Field id="password" name="password" type="password" component={ InputField } label="Password" />
+        <Col xs={6}>
+          <Field
+            id="password"
+            name="password"
+            type="password"
+            component={InputField}
+            label="Password"
+          />
         </Col>
       </Row>
       <Row>
-        <Col xs={ 6 }>
-          <Field id="first-name" name="firstName" type="text" component={ InputField } label="First name" />
+        <Col xs={6}>
+          <Field
+            id="first-name"
+            name="firstName"
+            type="text"
+            component={InputField}
+            label="First name"
+          />
         </Col>
-        <Col xs={ 6 }>
-          <Field id="last-name" name="lastName" type="text" component={ InputField } label="Last name" />
+        <Col xs={6}>
+          <Field
+            id="last-name"
+            name="lastName"
+            type="text"
+            component={InputField}
+            label="Last name"
+          />
         </Col>
       </Row>
       <Row>
-        <Col xs={ 12 }>
+        <Col xs={12}>
           <Row xsCenter>
-            <Col xs={ 6 }>
-              <Field id="username" name="username" type="text" component={ InputField } label="Username" />
+            <Col xs={6}>
+              <Field
+                id="username"
+                name="username"
+                type="text"
+                component={InputField}
+                label="Username"
+              />
             </Col>
           </Row>
         </Col>
       </Row>
 
-      <Button style={ { marginTop: '25px' } } raised primary label="Create Account" type="submit" />
+      <Button
+        style={{marginTop: '25px'}}
+        raised
+        primary
+        label="Create Account"
+        type="submit"
+      />
     </form>
   );
 };

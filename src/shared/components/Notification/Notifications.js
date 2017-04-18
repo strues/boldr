@@ -1,11 +1,13 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import TransitionGroup from 'react-addons-css-transition-group';
-import { notificationDismiss } from '../../state/modules/notifications/notifications';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import TransitionGroup from 'react-transition-group/TransitionGroup';
+import {
+  notificationDismiss,
+} from '../../state/modules/notifications/notifications';
 
 import Notification from './Notification';
 
-const getter = (obj, propName) => obj.get ? obj.get(propName) : obj[propName]; // eslint-disable-line
+const getter = (obj, propName) => (obj.get ? obj.get(propName) : obj[propName]); // eslint-disable-line
 
 type Props = {
   notifications?: Array<any>,
@@ -48,24 +50,26 @@ export class Notifications extends Component {
     const renderedNotifications = notifications.map(notification => (
       <Notification
         componentClassName="boldr-notification"
-        dismissAfter={ notification.dismissAfter || dismissAfter }
-        onDismiss={ this._onDismiss }
-        onActionClick={ onActionClick }
-        actionLabel={ actionLabel }
-        key={ getter(notification, 'id') }
-        id={ getter(notification, 'id') }
-        message={ getter(notification, 'message') }
-        kind={ getter(notification, 'kind') }
+        dismissAfter={notification.dismissAfter || dismissAfter}
+        onDismiss={this._onDismiss}
+        onActionClick={onActionClick}
+        actionLabel={actionLabel}
+        key={getter(notification, 'id')}
+        id={getter(notification, 'id')}
+        message={getter(notification, 'message')}
+        kind={getter(notification, 'kind')}
       />
     ));
-    const classes = ['boldr-notification__container', className || null].join(' ').split();
+    const classes = ['boldr-notification__container', className || null]
+      .join(' ')
+      .split();
 
     return (
-      <div className={ classes }>
+      <div className={classes}>
         <TransitionGroup
-          transitionName={ 'boldr-notification__transition' }
-          transitionEnterTimeout={ transitionEnterTimeout }
-          transitionLeaveTimeout={ transitionLeaveTimeout }
+          transitionName={'boldr-notification__transition'}
+          transitionEnterTimeout={transitionEnterTimeout}
+          transitionLeaveTimeout={transitionLeaveTimeout}
         >
           {renderedNotifications}
         </TransitionGroup>
@@ -84,5 +88,5 @@ export default connect(
   state => ({
     notifications: state.notifications,
   }),
-  { notificationDismiss },
+  {notificationDismiss},
 )(Notifications);

@@ -1,11 +1,10 @@
-import { push } from 'react-router-redux';
-import request from 'superagent';
-import * as api from '../../../core/api';
-import { getToken } from '../../../core/authentication/token';
+import {push} from 'react-router-redux';
+import api from '../../../core/api';
+import {getToken} from '../../../core/authentication/token';
 import * as notif from '../../../core/constants';
-import { notificationSend } from '../notifications/notifications';
+import {notificationSend} from '../notifications/notifications';
 import * as t from '../actionTypes';
-import { editProfile } from '../users/actions';
+import {editProfile} from '../users/actions';
 
 const token = getToken();
 
@@ -15,31 +14,42 @@ const token = getToken();
   * @exports fetchMedia
   *****************************************************************/
 
-export function fetchAttachments() {
-  return dispatch => {
-    dispatch(fetchMediaStart());
-    return api
-      .getAllAttachments()
-      .then(response => {
-        if (response.status !== 200) {
-          dispatch(fetchMediaFail());
-        }
-        dispatch(fetchMediaSuccess(response));
-      })
-      .catch(err => {
-        dispatch(fetchMediaFail(err));
-      });
-  };
-}
-export function fetchMedia() {
-  return (dispatch, getState) => {
-    if (shouldFetchAttachments(getState())) {
-      return dispatch(fetchAttachments());
-    }
+export const fetchAttachments = (axios: any): ThunkAction => (
+  dispatch: Dispatch,
+) => {
+  dispatch({type: t.GET_ATTACHMENT_REQUEST});
 
-    return Promise.resolve();
-  };
-}
+  return axios
+    .get('/api/v1/attachments')
+    .then(res => {
+      dispatch({
+        type: t.GET_ATTACHMENT_SUCCESS,
+        payload: res.data,
+      });
+    })
+    .catch(err => {
+      dispatch({
+        type: t.GET_ATTACHMENT_FAILURE,
+        error: err,
+      });
+    });
+};
+/* istanbul ignore next */
+export const fetchAttachmentsIfNeeded = (): ThunkAction => (
+  dispatch: Dispatch,
+  getState: GetState,
+  axios: any,
+) => {
+  /* istanbul ignore next */
+  if (shouldFetchAttachments(getState())) {
+    /* istanbul ignore next */
+    return dispatch(fetchAttachments(axios));
+  }
+
+  /* istanbul ignore next */
+  return null;
+};
+
 function shouldFetchAttachments(state) {
   const attachments = state.attachments.files;
   if (!attachments.length) {
@@ -49,25 +59,6 @@ function shouldFetchAttachments(state) {
     return false;
   }
   return attachments;
-}
-function fetchMediaStart() {
-  return {
-    type: t.GET_ATTACHMENT_REQUEST,
-  };
-}
-
-function fetchMediaSuccess(response) {
-  return {
-    type: t.GET_ATTACHMENT_SUCCESS,
-    payload: response.body,
-  };
-}
-
-function fetchMediaFail(err) {
-  return {
-    type: t.GET_ATTACHMENT_FAILURE,
-    error: err,
-  };
 }
 
 /**
@@ -79,16 +70,16 @@ function fetchMediaFail(err) {
 export function uploadFiles(payload) {
   return dispatch => {
     dispatch(beginUpload());
-    return request
-      .post('/api/v1/attachments')
-      .attach(payload.name, payload)
-      .set('Authorization', `Bearer ${token}`)
-      .then(response => {
-        if (!response.status === 201) {
-          dispatch(uploadFail(response));
+    const data = new FormData();
+    data.append('file', payload);
+    return api
+      .post('/api/v1/attachments', data)
+      .then(res => {
+        if (!res.status === 201) {
+          dispatch(uploadFail(res));
           dispatch(notificationSend(notif.MSG_UPLOAD_ERROR));
         }
-        dispatch(uploadSuccess(response));
+        dispatch(uploadSuccess(res));
         dispatch(notificationSend(notif.MSG_UPLOAD_SUCCESS));
       })
       .catch(err => {
@@ -103,10 +94,10 @@ function beginUpload() {
   };
 }
 
-function uploadSuccess(response) {
+function uploadSuccess(res) {
   return {
     type: t.UPLOAD_ATTACHMENT_SUCCESS,
-    payload: response.body,
+    payload: res.data,
   };
 }
 
@@ -126,16 +117,12 @@ function uploadFail(err) {
 export function uploadPostImage(payload) {
   return dispatch => {
     dispatch(beginUploadPostImage());
-    return request
-      .post('/api/v1/attachments')
-      .attach(payload.name, payload)
-      .set('Authorization', `Bearer ${token}`)
-      .then(response => {
-        if (!response.status === 201) {
-          dispatch(uploadPostImageFail(response));
-          dispatch(notificationSend(notif.MSG_UPLOAD_ERROR));
-        }
-        dispatch(uploadPostImageSuccess(response));
+    const data = new FormData();
+    data.append('payload.name', payload);
+    return api
+      .post('/api/v1/attachments', data)
+      .then(res => {
+        dispatch(uploadPostImageSuccess(res));
         dispatch(notificationSend(notif.MSG_UPLOAD_SUCCESS));
       })
       .catch(err => {
@@ -151,10 +138,10 @@ function beginUploadPostImage() {
   };
 }
 
-function uploadPostImageSuccess(response) {
+function uploadPostImageSuccess(res) {
   return {
     type: t.UPLOAD_POST_IMG_SUCCESS,
-    payload: response.body,
+    payload: res.data,
   };
 }
 
@@ -166,19 +153,19 @@ function uploadPostImageFail(err) {
 }
 
 /**
-  * UPLOAD FILE ACTIONS
+  * DELETE FILE ACTIONS
   * -------------------------
-  * @exports uploadFiles
+  * @exports deleteAttachment
   *****************************************************************/
 
-export function deleteMedia(id) {
+export function deleteAttachment(id) {
   return dispatch => {
     dispatch({
       type: t.DELETE_ATTACHMENT_REQUEST,
     });
     return api
-      .delAttachment(id)
-      .then(response => {
+      .delete(`/api/v1/attachments/${id}`)
+      .then(res => {
         dispatch({
           type: t.DELETE_ATTACHMENT_SUCCESS,
           id,
@@ -186,16 +173,13 @@ export function deleteMedia(id) {
         dispatch(notificationSend(notif.MSG_FILE_REMOVED));
       })
       .catch(err => {
-        dispatch(deleteMediaFail(err));
+        dispatch({
+          type: t.DELETE_ATTACHMENT_FAILURE,
+          error: err,
+        });
       });
   };
 }
-
-const deleteMediaFail = err => ({
-  type: t.DELETE_ATTACHMENT_FAILURE,
-  error: err,
-});
-
 /**
   * UPDATE FILE ACTIONS
   * -------------------------
@@ -204,12 +188,11 @@ const deleteMediaFail = err => ({
 
 export function updateAttachment(attachmentData) {
   return (dispatch: Function) => {
-    console.log('action', attachmentData);
     dispatch(updateAttachmentReq());
     return api
-      .updateFileProperties(attachmentData)
-      .then(response => {
-        dispatch(updateAttachmentSuccess(response));
+      .put(`/api/v1/attachments/${attachmentData.id}`, attachmentData)
+      .then(res => {
+        dispatch(updateAttachmentSuccess(res));
         dispatch(
           notificationSend({
             message: 'Updated attachment.',
@@ -231,10 +214,10 @@ export function updateAttachment(attachmentData) {
   };
 }
 const updateAttachmentReq = () => {
-  return { type: t.UPDATE_ATTACHMENT_REQUEST };
+  return {type: t.UPDATE_ATTACHMENT_REQUEST};
 };
 const updateAttachmentSuccess = response => {
-  return { type: t.UPDATE_ATTACHMENT_SUCCESS };
+  return {type: t.UPDATE_ATTACHMENT_SUCCESS};
 };
 const errorUpdateAttachment = err => {
   return {
@@ -249,17 +232,12 @@ const errorUpdateAttachment = err => {
   * @exports updateAttachment
   *****************************************************************/
 
-export function selectedFile(file: Object) {
-  return {
-    type: t.SELECT_FILE,
-    file,
-  };
-}
-
-export function selectFile(file) {
+export function selectFile(file: Object) {
   return dispatch => {
-    dispatch(selectedFile(file));
-    return dispatch(push(`/admin/filemanager/${file.id}/editor`));
+    dispatch({
+      type: t.SELECT_FILE,
+      file,
+    });
   };
 }
 
@@ -271,95 +249,62 @@ export function selectFile(file) {
   *****************************************************************/
 
 export function uploadProfileImage(payload) {
-  console.log(payload);
   return dispatch => {
-    dispatch(beginUploadProfileImage());
-    return request
-      .post('/api/v1/attachments')
-      .attach(payload.name, payload)
-      .set('Authorization', `Bearer ${token}`)
-      .then(response => {
-        if (!response.status === 201) {
-          dispatch(uploadProfileImageFail(response));
-          dispatch(notificationSend(notif.MSG_UPLOAD_ERROR));
-        }
+    dispatch({
+      type: t.UPLOAD_PROFILE_IMG_REQUEST,
+    });
+    const data = new FormData();
+    data.append('payload.name', payload);
+    return api
+      .post('/api/v1/attachments', data)
+      .then(res => {
         const userData = {
-          id: response.body.user_id,
-          profile_image: response.body.url,
+          id: res.data.user_id,
+          profileImage: res.data.url,
         };
+        dispatch({
+          type: t.UPLOAD_PROFILE_IMG_SUCCESS,
+          payload: res.data,
+        });
         dispatch(editProfile(userData));
-        dispatch(uploadProfileImageSuccess(response));
         dispatch(notificationSend(notif.MSG_UPLOAD_SUCCESS));
       })
       .catch(err => {
-        dispatch(uploadProfileImageFail(err));
+        dispatch({
+          type: t.UPLOAD_PROFILE_IMG_FAILURE,
+          error: err,
+        });
         dispatch(notificationSend(notif.MSG_UPLOAD_ERROR));
       });
   };
 }
 
-function beginUploadProfileImage() {
-  return {
-    type: t.UPLOAD_PROFILE_IMG_REQUEST,
-  };
-}
-
-function uploadProfileImageSuccess(response) {
-  return {
-    type: t.UPLOAD_PROFILE_IMG_SUCCESS,
-    payload: response.body,
-  };
-}
-
-function uploadProfileImageFail(err) {
-  return {
-    type: t.UPLOAD_PROFILE_IMG_FAILURE,
-    error: err,
-  };
-}
 export function uploadAvatarImage(payload) {
   return dispatch => {
-    dispatch(beginUploadAvatarImage());
-    return request
-      .post('/api/v1/attachments')
-      .attach(payload.name, payload)
-      .set('Authorization', `Bearer ${token}`)
-      .then(response => {
-        if (!response.status === 201) {
-          dispatch(uploadAvatarImageFail(response));
-          dispatch(notificationSend(notif.MSG_UPLOAD_ERROR));
-        }
+    dispatch({type: t.UPLOAD_AVATAR_IMG_REQUEST});
+    const data = new FormData();
+    data.append('payload.name', payload);
+    return api
+      .post('/api/v1/attachments', data)
+      .then(res => {
         const userData = {
-          id: response.body.user_id,
-          avatarUrl: response.body.url,
+          id: res.data.user_id,
+          avatarUrl: res.data.url,
         };
+        console.log('user', userData);
         dispatch(editProfile(userData));
-        dispatch(uploadAvatarImageSuccess(response));
+        dispatch({
+          type: t.UPLOAD_AVATAR_IMG_SUCCESS,
+          payload: res.data,
+        });
         dispatch(notificationSend(notif.MSG_UPLOAD_SUCCESS));
       })
       .catch(err => {
-        dispatch(uploadAvatarImageFail(err));
+        dispatch({
+          type: t.UPLOAD_AVATAR_IMG_FAILURE,
+          error: err,
+        });
         dispatch(notificationSend(notif.MSG_UPLOAD_ERROR));
       });
-  };
-}
-
-function beginUploadAvatarImage() {
-  return {
-    type: t.UPLOAD_AVATAR_IMG_REQUEST,
-  };
-}
-
-function uploadAvatarImageSuccess(response) {
-  return {
-    type: t.UPLOAD_AVATAR_IMG_SUCCESS,
-    payload: response.body,
-  };
-}
-
-function uploadAvatarImageFail(err) {
-  return {
-    type: t.UPLOAD_AVATAR_IMG_FAILURE,
-    error: err,
   };
 }

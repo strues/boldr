@@ -1,11 +1,20 @@
-import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
-import Button from 'react-md/lib/Buttons/Button';
-import FontIcon from 'react-md/lib/FontIcons';
+/* eslint-disable max-len */
+import React, {Component} from 'react';
+import {Field, reduxForm} from 'redux-form';
 import styled from 'styled-components';
+import {
+  FontIcon,
+  Button,
+  InputField,
+  Col,
+  Row,
+  Heading,
+  FormGroup,
+} from 'boldr-ui';
 
-import { InputField, Col, Row, Heading, FormGroup } from 'boldr-ui';
-import { uploadPostImage } from '../../../../../../state/modules/attachments/actions';
+import {
+  uploadPostImage,
+} from '../../../../../../state/modules/attachments/actions';
 import EditorField from './EditorField';
 
 type Props = {
@@ -27,23 +36,34 @@ const Wrapper = styled.section`
   background-color: #fff;
 `;
 const EditPostForm = (props: Props) => {
-  const { handleSubmit } = props;
+  const {handleSubmit} = props;
   /**
-     * wraps the editor component for embedding into redux-form as an input component
+     * wraps the editor component for embedding into redux-form as
+     * an input component
      * @param  {object} input
      * @param  {string} label
      * @return {element} BoldrEditor
      */
-  const renderEditor = ({ input, label }) => <EditorField { ...input } label={ label } />;
+  const renderEditor = ({input, label}) => (
+    <EditorField {...input} label={label} />
+  );
 
   return (
     <Row>
       <Col xs>
-        <Heading size={ 3 } weight={ 300 }>Editing {props.initialValues.title}</Heading>
-        <form onSubmit={ handleSubmit }>
+        <Heading size={3}>
+          Editing {props.initialValues.title}
+        </Heading>
+        <form onSubmit={handleSubmit}>
           <Wrapper>
             <FormGroup>
-              <Field id="post-title" name="title" type="text" component={ InputField } label="Post Title" />
+              <Field
+                id="post-title"
+                name="title"
+                type="text"
+                component={InputField}
+                label="Post Title"
+              />
             </FormGroup>
             <FormGroup>
               <Field
@@ -51,25 +71,47 @@ const EditPostForm = (props: Props) => {
                 name="feature_image"
                 type="text"
                 helpText="URL for your image"
-                component={ InputField }
+                component={InputField}
                 label="Feature Image"
               />
             </FormGroup>
           </Wrapper>
           <Wrapper>
-            <Field name="content" component={ EditorField } />
+            <Field name="content" component={EditorField} />
           </Wrapper>
           <Wrapper>
             <FormGroup>
-              <Field name="excerpt" id="post-excerpt" type="text" component={ InputField } label="Excerpt" />
+              <Field
+                name="excerpt"
+                id="post-excerpt"
+                type="text"
+                component={InputField}
+                label="Excerpt"
+              />
             </FormGroup>
             <FormGroup>
-              <Heading size={ 6 }>Post Status:</Heading>
-              <label htmlFor="draft" style={ { marginRight: '10px' } }>
-                <Field id="draft" name="published" component="input" type="radio" value="false" /> Draft
+              <Heading size={6}>Post Status:</Heading>
+              <label htmlFor="draft" style={{marginRight: '10px'}}>
+                <Field
+                  id="draft"
+                  name="published"
+                  component="input"
+                  type="radio"
+                  value="false"
+                />
+                {' '}
+                Draft
               </label>
               <label htmlFor="published">
-                <Field id="published" name="published" component="input" type="radio" value="true" /> Publish
+                <Field
+                  id="published"
+                  name="published"
+                  component="input"
+                  type="radio"
+                  value="true"
+                />
+                {' '}
+                Publish
               </label>
             </FormGroup>
 

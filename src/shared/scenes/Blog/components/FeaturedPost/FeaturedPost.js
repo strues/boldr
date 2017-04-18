@@ -1,12 +1,11 @@
 /* @flow */
 import React from 'react';
-import Link from 'react-router/lib/Link';
-import { connect } from 'react-redux';
+import Link from 'react-router-dom/Link';
+import {connect} from 'react-redux';
 import styled from 'styled-components';
-import Button from 'react-md/lib/Buttons/Button';
-import { Row, Col, Paragraph, media } from 'boldr-ui';
-import { selectPost } from '../../../../state/modules/blog/posts/actions';
+import {Button, Row, Col, Paragraph, mediaQuery} from 'boldr-ui';
 
+import {selectPost} from '../../../../state/modules/blog/posts/actions';
 import TagBlock from '../TagBlock';
 import Tag from '../Tag';
 
@@ -40,7 +39,7 @@ const Wrapper = styled.section`
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .4);
   background-color: #fff;
   position: relative;
-  ${media.small`height: 350px; flex-direction: row;`}
+  ${mediaQuery.small`height: 350px; flex-direction: row;`}
 `;
 
 const Content = styled.div`
@@ -51,7 +50,7 @@ const Content = styled.div`
   flex-direction: column;
   width: 100%;
   height: 350px;
-  ${media.small`flex-direction: column; width: 30%`}
+  ${mediaQuery.small`flex-direction: column; width: 30%`}
 `;
 
 const PostTitle = styled.h2`
@@ -77,7 +76,7 @@ export const FeaturedPost = (props: Props) => {
     background-size: cover;
     background-position: 50% 50%;
     width: 100%;
-    ${media.small`flex-direction: row; width: 70%`}
+    ${mediaQuery.small`flex-direction: row; width: 70%`}
   `;
   const postTags = props.tags.map(id => props.listTags[id]);
   // Explicitly define post rather than passing additional
@@ -111,14 +110,19 @@ export const FeaturedPost = (props: Props) => {
         </ImgWrapper>
         <Content>
           <Paragraph>{props.excerpt}</Paragraph>
-          <Row style={ { paddingTop: '20px' } } xsEnd>
-            <Link to={ `/blog/${props.slug}` }>
-              <Button raised primary label="Read More" onClick={ transitionPost } />
+          <Row style={{paddingTop: '20px'}} xsEnd>
+            <Link to={`/blog/${props.slug}`}>
+              <Button
+                raised
+                primary
+                label="Read More"
+                onClick={transitionPost}
+              />
             </Link>
           </Row>
           <Row>
-            <Col sm={ 12 }>
-              {postTags.map(t => <Tag key={ t.id } tag={ t } />)}
+            <Col sm={12}>
+              {postTags.map(t => <Tag key={t.id} tag={t} />)}
             </Col>
           </Row>
         </Content>

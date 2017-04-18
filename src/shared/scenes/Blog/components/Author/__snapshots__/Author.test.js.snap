@@ -34,17 +34,17 @@ exports[`<Author /> renders snapshot 1`] = `
     />
   </styled.div>
   <styled.div>
-    <Heading
+    <Styled(Component)
+      palette="grayscale"
       size={3}
     >
       <Link
-        onlyActiveOnIndex={false}
-        style={Object {}}
+        replace={false}
         to="/profiles/hey"
       >
         hey
       </Link>
-    </Heading>
+    </Styled(Component)>
   </styled.div>
   <styled.div>
     bio bio

@@ -1,4 +1,4 @@
 import NavigationEditor from './NavigationEditor';
 import NavigationForm from './NavigationForm';
 
-export { NavigationForm, NavigationEditor };
+export {NavigationForm, NavigationEditor};

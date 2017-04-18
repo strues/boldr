@@ -1,38 +1,32 @@
 /* @flow */
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import Link from 'react-router-dom/Link';
+import {Toolbar, MenuButton, List, ListItem, Loader} from 'boldr-ui';
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router';
-import MenuButton from 'react-md/lib/Menus/MenuButton';
-import Toolbar from 'react-md/lib/Toolbars';
-import List from 'react-md/lib/Lists/List';
-import ListItem from 'react-md/lib/Lists/ListItem';
-import { Loader } from 'boldr-ui';
-
-import { fetchTaggedPost } from '../../../../../state/modules/blog/tags/actions';
+import {
+  fetchTagPostsIfNeeded,
+} from '../../../../../state/modules/blog/tags/actions';
 import TaggedPostMenu from '../TaggedPostMenu';
 
 type Props = {
   currentTag: Object,
-  params: Object,
   isFetching: boolean,
   name: string,
   listTags: Object,
+  match: Object,
+  fetchTagPostsIfNeeded: (name: string) => void,
   dispatch: () => void,
 };
 
 class TaggedPost extends Component {
-  static fetchData(dispatch, props) {
-    return Promise.all([dispatch(fetchTaggedPost(props.name))]);
-  }
-  componentDidMount() {
-    const { dispatch, params } = this.props;
-    TaggedPost.fetchData(dispatch, this.props);
-  }
+  static defaultProps: {
+    currentTag: {},
+  };
 
   props: Props;
   render() {
-    const { currentTag, isFetching } = this.props;
+    const {currentTag, isFetching} = this.props;
     if (isFetching) {
       return <Loader />;
     }
@@ -42,11 +36,20 @@ class TaggedPost extends Component {
 
     return (
       <div>
-        <Toolbar colored title={ `Posts tagged ${currentTag.name}` } nav={ null } actions={ null } />
+        <Toolbar
+          colored
+          title={`Posts tagged ${currentTag.name}`}
+          nav={null}
+          actions={null}
+        />
         <List>
           {currentTag.posts &&
             currentTag.posts.map(post => (
-              <ListItem key={ post.id } primaryText={ post.title } rightAvatar={ <TaggedPostMenu post={ post } /> } />
+              <ListItem
+                key={post.id}
+                primaryText={post.title}
+                rightAvatar={<TaggedPostMenu post={post} />}
+              />
             ))}
         </List>
       </div>
@@ -62,4 +65,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(TaggedPost);
+export default connect(mapStateToProps, {fetchTagPostsIfNeeded})(TaggedPost);

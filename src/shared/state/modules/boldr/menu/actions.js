@@ -1,10 +1,9 @@
-import { normalize, schema } from 'normalizr';
-import { camelizeKeys } from 'humps';
-import * as api from '../../../../core/api';
+import {normalize, schema} from 'normalizr';
+import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
-import { notificationSend } from '../../notifications/notifications';
+import {notificationSend} from '../../notifications/notifications';
 import * as t from '../../actionTypes';
-import { detail, menu } from './schema';
+import {detail, menu} from './schema';
 
 /**
   * FETCH MENUS ACTIONS
@@ -13,31 +12,40 @@ import { detail, menu } from './schema';
   * @exports fetchMenus
   *****************************************************************/
 
-export function fetchMenusIfNeeded() {
-  return (dispatch, getState) => {
-    if (shouldFetchMenus(getState())) {
-      return dispatch(fetchMenus());
-    }
+/* istanbul ignore next */
+export const fetchMenusIfNeeded = (): ThunkAction => (
+  dispatch: Dispatch,
+  getState: GetState,
+  axios: any,
+) => {
+  /* istanbul ignore next */
+  if (shouldFetchMenus(getState())) {
+    /* istanbul ignore next */
+    return dispatch(fetchMenus(axios));
+  }
 
-    return Promise.resolve();
-  };
-}
+  /* istanbul ignore next */
+  return null;
+};
 
-export function fetchMenus() {
-  return dispatch => {
-    dispatch(beginFetchMenus());
-    return api
-      .getMainNav()
-      .then(response => {
-        const menuData = response.body;
-        return dispatch(fetchMenusSuccess(menuData));
-      })
-      .catch(error => {
-        dispatch(fetchMenusError(error));
+export const fetchMenus = (axios: any): ThunkAction => (dispatch: Dispatch) => {
+  dispatch({type: t.GET_MAIN_MENU_REQUEST});
+
+  return api
+    .get('/api/v1/menus/1')
+    .then(res => {
+      dispatch({
+        type: t.GET_MAIN_MENU_SUCCESS,
+        payload: res.data,
       });
-  };
-}
-
+    })
+    .catch(err => {
+      dispatch({
+        type: t.GET_MAIN_MENU_SUCCESS,
+        error: err,
+      });
+    });
+};
 function shouldFetchMenus(state) {
   const menu = state.boldr.menu.main.details;
   if (!menu.length) {
@@ -79,9 +87,9 @@ export function updateMenuDetails(data) {
   return dispatch => {
     dispatch(beginUpdateMenuDetails());
     return api
-      .doUpdateMenuDetails(data)
-      .then(response => {
-        dispatch(updateMenuDetailsSuccess(response));
+      .put(`/api/v1/menu-details/${data.id}`, data)
+      .then(res => {
+        dispatch(updateMenuDetailsSuccess(res));
         dispatch(notificationSend(notif.MSG_UPDATE_LINK_SUCCESS));
       })
       .catch(err => {
@@ -97,10 +105,10 @@ function beginUpdateMenuDetails() {
   };
 }
 
-function updateMenuDetailsSuccess(response) {
+function updateMenuDetailsSuccess(res) {
   return {
     type: t.UPDATE_MENU_SUCCESS,
-    payload: response.body,
+    payload: res.data,
   };
 }
 
@@ -118,14 +126,28 @@ function updateMenuDetailsFailure(err) {
   *****************************************************************/
 
 export function addMenuDetail(values) {
+  const data = {
+    name: values.name,
+    href: values.href,
+    mobile_href: values.mobile_href,
+    has_dropdown: values.has_dropdown,
+    css_classname: values.css_classname,
+    icon: values.icon,
+    menu_id: 1,
+    order: values.order,
+    children: {
+      key: values.key,
+      items: values.items,
+    },
+  };
   return dispatch => {
     dispatch(beginAddMenuDetail());
-    return api.doAddNavigationLinks(values).then(response => {
-      if (!response.status === 201) {
-        dispatch(addMenuDetailFailure(response));
+    return api.post('/api/v1/menu-details', data).then(res => {
+      if (!res.status === 201) {
+        dispatch(addMenuDetailFailure(res));
         dispatch(notificationSend(notif.MSG_ADD_LINK_ERROR));
       }
-      dispatch(addMenuDetailSuccess(response));
+      dispatch(addMenuDetailSuccess(res));
       dispatch(notificationSend(notif.MSG_ADD_LINK_SUCCESS));
     });
   };
@@ -137,10 +159,10 @@ function beginAddMenuDetail() {
   };
 }
 
-function addMenuDetailSuccess(response) {
+function addMenuDetailSuccess(res) {
   return {
     type: t.ADD_MENU_DETAIL_SUCCESS,
-    payload: response.body,
+    payload: res.data,
   };
 }
 

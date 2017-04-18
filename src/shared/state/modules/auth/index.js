@@ -1,5 +1,5 @@
-import authReducer, { STATE_KEY } from './reducer';
+import authReducer, {STATE_KEY} from './reducer';
 
 export default authReducer;
 
-export { STATE_KEY };
+export {STATE_KEY};
