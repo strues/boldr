@@ -1,18 +1,16 @@
 import {
   showModal,
   hideModal,
-  openDrawer,
-  closeDrawer,
   setMobileDevice,
   changeLayout,
+  toggleDrawer,
   CHANGE_LAYOUT,
   MODAL_OPEN,
   MODAL_CLOSED,
-  OPEN_DRAWER,
-  CLOSE_DRAWER,
   SET_MOBILE_DEVICE,
   UPDATE_MEDIA,
   UPDATE_DRAWER_TYPE,
+  TOGGLE_DRAWER,
   TOGGLE_SB_MENU,
   TOGGLE_SIDEBAR,
 } from './actions';
@@ -36,24 +34,16 @@ describe('UI Actions', () => {
       expect(hideModal()).toEqual(expectedResult);
     });
   });
-  describe('openDrawer', () => {
+  describe('toggleDrawer', () => {
     it('should return the correct type', () => {
       const expectedResult = {
-        type: OPEN_DRAWER,
+        type: TOGGLE_DRAWER,
       };
 
-      expect(openDrawer()).toEqual(expectedResult);
+      expect(toggleDrawer()).toEqual(expectedResult);
     });
   });
-  describe('closeDrawer', () => {
-    it('should return the correct type', () => {
-      const expectedResult = {
-        type: CLOSE_DRAWER,
-      };
 
-      expect(closeDrawer()).toEqual(expectedResult);
-    });
-  });
   describe('setMobileDevice', () => {
     it('should return the correct type', () => {
       const expectedResult = {

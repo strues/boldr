@@ -1,5 +1,11 @@
 import uiReducer, {STATE_KEY} from './reducer';
-import {changeLayout, showModal, hideModal, setMobileDevice} from './actions';
+import {
+  changeLayout,
+  showModal,
+  hideModal,
+  setMobileDevice,
+  toggleDrawer,
+} from './actions';
 import {makeSelectUi, makeSelectMobile} from './selectors';
 
 export default uiReducer;
@@ -12,4 +18,5 @@ export {
   hideModal,
   setMobileDevice,
   makeSelectMobile,
+  toggleDrawer,
 };

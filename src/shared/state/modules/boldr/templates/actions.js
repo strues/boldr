@@ -1,6 +1,6 @@
 import {normalize, arrayOf, schema} from 'normalizr';
 import {push} from 'react-router-redux';
-import Axios from 'axios';
+import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import {notificationSend} from '../../notifications/notifications';
 import * as t from '../../actionTypes';
@@ -72,7 +72,8 @@ export function fetchTemplateResource(resource) {
     if (resource === undefined) {
       resource = 'home';
     }
-    return Axios.get(`/api/v1/templates/${resource}`)
+    return api
+      .get(`/api/v1/templates/${resource}`)
       .then(res => {
         dispatch(receiveTemplate(res));
       })

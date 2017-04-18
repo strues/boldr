@@ -3,12 +3,11 @@ import {
   CHANGE_LAYOUT,
   MODAL_OPEN,
   MODAL_CLOSED,
-  OPEN_DRAWER,
-  CLOSE_DRAWER,
   SET_MOBILE_DEVICE,
   UPDATE_MEDIA,
   UPDATE_DRAWER_TYPE,
   TOGGLE_SB_MENU,
+  TOGGLE_DRAWER,
   TOGGLE_SIDEBAR,
 } from './actions';
 
@@ -24,7 +23,11 @@ function toggleSidebar(state) {
   newState.visible = !newState.visible;
   return newState;
 }
-
+function toggleDrawer(state) {
+  const newState = Object.assign({}, state);
+  newState.drawer = !newState.drawer;
+  return newState;
+}
 const INITIAL_STATE = {
   loaded: false,
   layout: LAYOUTS.GRID,
@@ -41,6 +44,8 @@ function uiReducer(state = INITIAL_STATE, action) {
       return toggleExpandCollapse(state);
     case TOGGLE_SIDEBAR:
       return toggleSidebar(state);
+    case TOGGLE_DRAWER:
+      return toggleDrawer(state);
     case CHANGE_LAYOUT:
       return {
         ...state,
@@ -55,16 +60,6 @@ function uiReducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         modal: false,
-      };
-    case OPEN_DRAWER:
-      return {
-        ...state,
-        drawer: true,
-      };
-    case CLOSE_DRAWER:
-      return {
-        ...state,
-        drawer: false,
       };
     case SET_MOBILE_DEVICE:
       return {

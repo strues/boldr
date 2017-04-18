@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {Paper, Grid, Row, Col, Image} from 'boldr-ui';
 
 import {updateAttachment} from '../../../../state/modules/attachments/actions';
-import config from '../../../../../../config';
+// import config from '../../../../../../config';
 import FileEditorForm from '../components/FileEditorForm';
 
 type Props = {
@@ -32,7 +32,7 @@ export class FileEditor extends Component {
         <Row>
           <Col xs={12} md={5}>
             <Image
-              imgSrc={`${config('apiUrl')}${this.props.currentFile.url}`}
+              imgSrc={`http://localhost:2121${this.props.currentFile.url}`}
               width="400px"
             />
           </Col>

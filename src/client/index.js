@@ -59,7 +59,6 @@ if (process.env.NODE_ENV === 'production') {
   require('./registerServiceWorker');
 }
 if (module.hot) {
-  module.hot.accept('./index.js');
   const reRenderApp = () => {
     try {
       renderApp(require('../shared/routes'));

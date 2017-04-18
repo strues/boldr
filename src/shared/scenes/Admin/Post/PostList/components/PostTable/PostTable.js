@@ -1,8 +1,9 @@
 /* @flow */
 /* eslint-disable react/prop-types, react/jsx-no-bind */
-import React, {PureComponent} from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Link from 'react-router-dom/Link';
+import sort from 'boldr-utils/es/logic/sort';
 import {format} from 'date-fns';
 import {
   Button,
@@ -16,8 +17,10 @@ import {
   Avatar,
 } from 'boldr-ui';
 
-import config from '../../../../../../../../config';
 import {selectPost} from '../../../../../../state/modules/blog/posts/actions';
+import PostTableHeader from './PostTableHeader';
+import PostTableBody from './PostTableBody';
+import TableControls from './TableControls';
 
 type Props = {
   posts: Array<Post>,
@@ -26,46 +29,66 @@ type Props = {
   dispatch: Function,
   data: any,
 };
+type State = {
+  posts: Array<Post>,
+  sortedPosts: Array<Post>,
+  createdAtSorted: boolean,
+  titleSorted: boolean,
+  sortedType: string,
+};
 
-class PostTable extends PureComponent {
+class PostTable extends Component {
+  constructor(props) {
+    super(props);
+    (this: any).state = {
+      sortedType: 'createdAt',
+      titleSorted: null,
+      createdAtSorted: true,
+      sortedPosts: [],
+    };
+  }
+  state: State;
+  componentWillMount() {
+    this.setState({
+      sortedPosts: sort(this.props.posts, 'createdAt', true),
+    });
+  }
+  sort = () => {
+    const key = this.state.sortedType;
+    const sorted = !this.state[`${key}Sorted`];
+
+    this.setState({
+      sortedPosts: sort(this.props.posts, key, sorted),
+      [`${key}Sorted`]: sorted,
+    });
+  };
+
+  changeSortType = value => {
+    const key = value === 'createdAt' ? 'title' : 'createdAt';
+    this.setState({
+      [`${key}Sorted`]: null,
+      [`${value}Sorted`]: true,
+      sortedType: value,
+      sortedPosts: sort(this.props.posts, value, true),
+    });
+  };
+
+  props: Props;
   render() {
-    const rows = this.props.posts.map(p => (
-      <TableRow key={p.id}>
-        <TableColumn style={{maxWidth: '125px'}}>
-          <Avatar
-            src={`${config('apiUrl')}${p.featureImage}`}
-            role="presentation"
-          />
-        </TableColumn>
-        <TableColumn>
-          <Link to={`/admin/post-editor/${p.slug}`}>{p.title}</Link>
-        </TableColumn>
-        <TableColumn>
-          {p.published ? <span>Published</span> : <span>Draft</span>}
-        </TableColumn>
-        <TableColumn>{format(p.createdAt, 'MMMM Do YYYY')}</TableColumn>
-        <TableColumn>
-          <Button onClick={() => this.props.handleDeleteClick(p.id)} icon>
-            delete_forever
-          </Button>
-        </TableColumn>
-      </TableRow>
-    ));
+    const {sortedPosts, createdAtSorted, titleSorted, sortedType} = this.state;
+
     return (
-      <DataTable baseId="posts">
-        <TableHeader>
-          <TableRow>
-            <TableColumn>Feature Image</TableColumn>
-            <TableColumn>Title</TableColumn>
-            <TableColumn>Status</TableColumn>
-            <TableColumn>Created</TableColumn>
-            <TableColumn>Actions</TableColumn>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {rows}
-        </TableBody>
-      </DataTable>
+      <div>
+        <TableControls sorted={sortedType} onSortChange={this.changeSortType} />
+        <DataTable baseId="posts" className="post-list-table">
+          <PostTableHeader
+            createdAtSorted={createdAtSorted}
+            titleSorted={titleSorted}
+            sort={this.sort}
+          />
+          <PostTableBody posts={sortedPosts} />
+        </DataTable>
+      </div>
     );
   }
 }

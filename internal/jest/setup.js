@@ -1,3 +1,4 @@
+import 'jest-enzyme';
 import { EventEmitter } from 'events';
 import { shallow, render, mount } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';

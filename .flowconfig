@@ -44,4 +44,4 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowIssue
 suppress_comment= \\(.\\|\n\\)*\\$FlowIgnore
 
 [version]
-0.44.0
+0.44.1

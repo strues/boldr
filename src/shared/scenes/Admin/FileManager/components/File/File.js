@@ -13,7 +13,7 @@ import {
 } from 'boldr-ui';
 
 import Link from 'react-router-dom/Link';
-import config from '../../../../../../../config';
+// import config from '../../../../../../../config';
 
 type Props = {
   removeMedia?: Function,
@@ -40,7 +40,7 @@ const File = (props: Props) => {
     <Card className="boldr-filecard">
       <Media>
         <img
-          src={`${config('apiUrl')}${props.file.url}`}
+          src={`http://localhost:2121${props.file.url}`}
           alt={props.file.fileName}
           role="presentation"
         />

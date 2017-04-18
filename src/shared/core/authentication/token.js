@@ -1,4 +1,4 @@
-import config from '../../../../config';
+// import config from '../../../../config';
 import Storage from './storage';
 
 export const parseJWT = token => {
@@ -31,10 +31,10 @@ export const parseJWT = token => {
 };
 
 export const setToken = token => {
-  return Storage.set(config('token.key'), token);
+  return Storage.set('jwt', token);
 };
 export const getToken = (asJSON = false) => {
-  const token = Storage.get(config('token.key'));
+  const token = Storage.get('jwt');
   if (asJSON) {
     return parseJWT(token);
   }
@@ -42,5 +42,5 @@ export const getToken = (asJSON = false) => {
 };
 
 export const removeToken = () => {
-  Storage.remove(config('token.key'));
+  Storage.remove('jwt');
 };

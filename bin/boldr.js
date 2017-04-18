@@ -1,3 +1,3 @@
 require('dotenv').load();
 
-require('../boldrCMS/server');
+require('../boldrCMS/server/index.js');

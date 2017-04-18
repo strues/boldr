@@ -14,8 +14,7 @@ import {
 import {
   hideModal,
   showModal,
-  openDrawer,
-  closeDrawer,
+  toggleDrawer,
 } from '../../state/modules/boldr/ui/actions';
 import Profile from './Profile';
 
@@ -33,6 +32,7 @@ type Props = {
   closeDrawer: Function,
   hideModal: Function,
   showModal: Function,
+  toggleDrawer: () => void,
 };
 
 export class ProfileContainer extends Component {
@@ -59,6 +59,9 @@ export class ProfileContainer extends Component {
   uploadAvatarImg = payload => {
     this.props.dispatch(uploadAvatarImage(payload));
   };
+  handleDrawerClick = (e): Function => {
+    this.props.dispatch(toggleDrawer());
+  };
   uploadProfileImg = payload => {
     this.props.dispatch(uploadProfileImage(payload));
   };
@@ -81,8 +84,7 @@ export class ProfileContainer extends Component {
           closeModal={this.closeModal}
           openModal={this.openModal}
           drawer={this.props.drawer}
-          openDrawer={this.showDrawer}
-          closeDrawer={this.hideDrawer}
+          handleDrawerClick={this.handleDrawerClick}
           uploadProfileImg={this.uploadProfileImg}
           uploadAvatarImg={this.uploadAvatarImg}
           {...this.props}

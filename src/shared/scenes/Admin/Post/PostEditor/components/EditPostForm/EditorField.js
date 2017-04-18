@@ -14,6 +14,9 @@ type Props = {
 const editorStyle = {
   minHeight: 400,
 };
+type State = {
+  editorState: EditorState,
+};
 export default class EditorField extends Component {
   constructor(props: Props) {
     super(props);
@@ -27,6 +30,7 @@ export default class EditorField extends Component {
       editorState,
     };
   }
+  state: State;
   props: Props;
   onChange = editorState => {
     const {input} = this.props;

@@ -68,6 +68,7 @@ const MediaContainer = Loadable({
   loader: () => import('./scenes/Admin/Media/MediaContainer'),
   LoadingComponent,
 });
+
 export default [
   {
     component: App,

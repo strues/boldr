@@ -22,11 +22,14 @@ const ROOT_DIR = appRootDir.get();
 
 const prefetches = [];
 
-const prefetchPlugins = prefetches.map((specifier) => new webpack.PrefetchPlugin(specifier));
+const prefetchPlugins = prefetches.map(
+  (specifier) => new webpack.PrefetchPlugin(specifier));
 /**
  * @param  {Object} buildOptions - The build options.
- * @param  {target} buildOptions.target - The bundle target (e.g 'clinet' || 'server').
- * @param  {target} buildOptions.optimize - Build an optimised version of the bundle?
+ * @param  {target} buildOptions.target - The bundle target
+ *  (e.g 'clinet' || 'server').
+ * @param  {target} buildOptions.optimize - Build an optimised
+ * version of the bundle?
  *
  * @return {Object} The webpack configuration.
  */
@@ -50,11 +53,14 @@ export default function webpackConfigFactory(buildOptions) {
 
   console.log(
     chalk.white.bgBlue(
-      `==> Creating ${isProd ? 'an optimized' : 'a development'} bundle configuration for the "${target}"`,
+      `==> Creating ${isProd
+        ? 'an optimized'
+        : 'a development'} bundle configuration for the "${target}"`,
     ),
   );
 
-  const bundleConfig = isServer || isClient ? config(['bundles', target]) : config(['additionalNodeBundles', target]);
+  const bundleConfig = isServer || isClient
+  ? config(['bundles', target]) : config(['additionalNodeBundles', target]);
 
   if (!bundleConfig) {
     throw new Error('No bundle configuration exists for target:', target);
@@ -105,11 +111,11 @@ export default function webpackConfigFactory(buildOptions) {
     externals: removeNil([
       ifNode(() =>
         nodeExternals({
-          whitelist: removeNil(['source-map-support/register']).concat(config('extWhitelist') || []),
+          whitelist: removeNil(['source-map-support/register']).concat(config('extWhitelist') || []), // eslint-disable-line
         })),
     ]),
 
-    devtool: ifElse(isNode || isDev || config('incSourceMaps'))('source-map', 'hidden-source-map'),
+    devtool: ifElse(isNode || isDev || config('incSourceMaps'))('source-map', 'hidden-source-map'), // eslint-disable-line
 
     performance: ifProdClient({ hints: 'warning' }, false),
     plugins: removeNil([
@@ -132,6 +138,7 @@ export default function webpackConfigFactory(buildOptions) {
         BUILD_FLAG_IS_DEV: isDev,
       }),
       new webpack.DefinePlugin({
+        IS_DEV: JSON.stringify(isDev),
         __DEV__: JSON.stringify(isDev),
         __SERVER__: JSON.stringify(isServer),
       }),
@@ -173,7 +180,7 @@ export default function webpackConfigFactory(buildOptions) {
                     targets: {
                       node: 'current',
                     },
-                    exclude: ['transform-async-to-generator', 'transform-regenerator'],
+                    exclude: ['transform-async-to-generator', 'transform-regenerator'], // eslint-disable-line
                   },
                 ]),
                 ifNode([
@@ -185,7 +192,7 @@ export default function webpackConfigFactory(buildOptions) {
                     targets: {
                       node: 'current',
                     },
-                    exclude: ['transform-async-to-generator', 'transform-regenerator'],
+                    exclude: ['transform-async-to-generator', 'transform-regenerator'], // eslint-disable-line
                   },
                 ]),
                 'stage-2',
@@ -276,7 +283,8 @@ export default function webpackConfigFactory(buildOptions) {
             path.resolve(ROOT_DIR, './internal'),
           ],
           include: removeNil([
-            ...bundleConfig.srcPaths.map(srcPath => path.resolve(ROOT_DIR, srcPath)),
+            ...bundleConfig.srcPaths.map(srcPath =>
+              path.resolve(ROOT_DIR, srcPath)),
             ifProdClient(path.resolve(ROOT_DIR, 'src/html')),
           ]),
         },
@@ -293,16 +301,16 @@ export default function webpackConfigFactory(buildOptions) {
               }),
             })),
             ifNode({
-              loaders: ['css-loader/locals', 'postcss-loader', 'fast-sass-loader'],
+              loaders: ['css-loader/locals', 'postcss-loader', 'fast-sass-loader'], // eslint-disable-line
             }),
           ),
         ),
         {
           test: /\.svg(\?v=\d+.\d+.\d+)?$/,
-          loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=[name].[ext]',
+          loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=[name].[ext]', // eslint-disable-line
         },
         {
-          test: /\.(eot|woff|woff2|ttf|otf|png|jpg|jpeg|jp2|jpx|jxr|gif|webp|mp4|mp3|ogg|pdf|html)$/,
+          test: /\.(eot|woff|woff2|ttf|otf|png|jpg|jpeg|jp2|jpx|jxr|gif|webp|mp4|mp3|ogg|pdf|html)$/, // eslint-disable-line
           loader: 'file-loader',
           options: {
             name: ifProdClient('file-[hash:base62:8].[ext]', '[name].[ext]'),

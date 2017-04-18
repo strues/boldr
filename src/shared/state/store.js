@@ -12,7 +12,7 @@ export default function configureStore(preloadedState, history) {
 
   const enhancers = [
     applyMiddleware(...middlewares),
-    __DEV__ &&
+    IS_DEV &&
       typeof window === 'object' &&
       typeof window.devToolsExtension !== 'undefined'
       ? window.devToolsExtension()

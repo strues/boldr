@@ -1,4 +1,4 @@
-import Axios from 'axios';
+import api from '../../../../core/api';
 import {notificationSend} from '../../notifications/notifications';
 import * as notif from '../../../../core/constants';
 import * as t from '../../actionTypes';
@@ -68,7 +68,8 @@ export function updateMember(userData) {
   };
   return dispatch => {
     dispatch(beginUpdateMember());
-    return Axios.put(`/api/v1/users/admin/${userData.id}`, data)
+    return api
+      .put(`/api/v1/users/admin/${userData.id}`, data)
       .then(res => {
         dispatch(doneUpdateMember(res));
         dispatch(notificationSend(notif.MSG_UPDATE_MEMBER_SUCCESS));

@@ -1,6 +1,6 @@
 import {normalize, arrayOf} from 'normalizr';
 import {push} from 'react-router-redux';
-import Axios from 'axios';
+import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import {notificationSend} from '../../notifications/notifications';
 import * as t from '../../actionTypes';
@@ -43,7 +43,8 @@ export const fetchSettings = (axios: any): ThunkAction => (
 ) => {
   dispatch({type: t.FETCH_SETTINGS_REQUEST});
 
-  return Axios.get('/api/v1/settings')
+  return api
+    .get('/api/v1/settings')
     .then(res => {
       const settingsData = res.data;
       const normalizedSettings = normalize(settingsData, arrayOfSetting);
@@ -87,7 +88,8 @@ export function updateBoldrSettings(payload) {
   };
   return dispatch => {
     dispatch(beginUpdateSettings());
-    return Axios.put(`/api/v1/settings/${settingId}`, data)
+    return api
+      .put(`/api/v1/settings/${settingId}`, data)
       .then(res => {
         dispatch(doneUpdateSettings(res.data));
         dispatch(

@@ -1,6 +1,5 @@
 /* @flow */
 import React, {Component} from 'react';
-import {findDOMNode} from 'react-dom';
 import NavLink from 'react-router-dom/NavLink';
 import {connect} from 'react-redux';
 import {
@@ -55,7 +54,7 @@ export class AdminDashboard extends Component {
     this.setState({activate});
   };
   render() {
-    const {route, me, location: {pathname, search}} = this.props;
+    const {route, me, ui, routing, location: {pathname, search}} = this.props;
     return (
       <div
         style={{
@@ -63,14 +62,14 @@ export class AdminDashboard extends Component {
           height: '100%',
         }}
       >
-        {this.props.ui.visible
+        {ui.visible
           ? <Sidebar
               items={sidebarLinks}
-              activeItem={this.props.routing.location.pathname}
-              location={this.props.routing.location.pathname}
-              onExpandCollapse={this.onExpandCollapse}
-              visible={this.props.ui.visible}
-              expanded={this.props.ui.expanded}
+              activeItem={routing.location.pathname}
+              location={routing.location.pathname}
+              // onExpandCollapse={this.onExpandCollapse}
+              visible={ui.visible}
+              expanded={ui.expanded}
               logoImg="https://boldr.io/logo.png"
               logoLink="/"
               isPrimaryColor
@@ -79,8 +78,8 @@ export class AdminDashboard extends Component {
         <DashboardWrapper>
           <Topbar
             toggleSidebar={this.handleHideSidebar}
-            avatarUrl={this.props.me.avatarUrl}
-            username={this.props.me.username}
+            avatarUrl={me.avatarUrl}
+            username={me.username}
           />
           <DashboardContent>
             <Grid fluid>

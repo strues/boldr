@@ -12,8 +12,7 @@ class HotClientServer {
     const httpPath = compiler.options.output.publicPath;
     if (!httpPath.startsWith('http') && !httpPathRegex.test(httpPath)) {
       throw new Error(
-        `You must supply an absolute public path to a development build of a
-        web target bundle as it will be hosted on a seperate development server to any node target bundles.`,
+        `You must supply an absolute public path to a development build`,
       );
     }
 
@@ -49,7 +48,7 @@ class HotClientServer {
         log({
           title: 'client',
           level: 'error',
-          message: 'Build failed, please check the console for more information.',
+          message: 'Build failed, please check the console for more info.',
           notify: true,
         });
         console.error(stats.toString());

@@ -1,5 +1,5 @@
 /* @flow */
-import React from 'react';
+import React, {Component} from 'react';
 import {Card} from 'boldr-ui';
 import Helmet from 'react-helmet';
 
@@ -16,18 +16,21 @@ type Props = {
   dispatch: Function,
 };
 
-const PostList = (props: Props) => {
-  return (
-    <div>
-      <Helmet title="Admin: Post List" />
-      <Card tableCard>
-        <PostTable
-          posts={props.posts}
-          handleDeleteClick={props.handleDeleteClick}
-        />
-      </Card>
-    </div>
-  );
-};
+class PostList extends Component {
+  props: Props;
+  render() {
+    return (
+      <div>
+        <Helmet title="Admin: Post List" />
+        <Card tableCard>
+          <PostTable
+            posts={this.props.posts}
+            handleDeleteClick={this.props.handleDeleteClick}
+          />
+        </Card>
+      </div>
+    );
+  }
+}
 
 export default PostList;

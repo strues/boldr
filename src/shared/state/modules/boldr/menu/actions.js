@@ -1,5 +1,5 @@
 import {normalize, schema} from 'normalizr';
-import Axios from 'axios';
+import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import {notificationSend} from '../../notifications/notifications';
 import * as t from '../../actionTypes';
@@ -31,7 +31,8 @@ export const fetchMenusIfNeeded = (): ThunkAction => (
 export const fetchMenus = (axios: any): ThunkAction => (dispatch: Dispatch) => {
   dispatch({type: t.GET_MAIN_MENU_REQUEST});
 
-  return Axios.get('/api/v1/menus/1')
+  return api
+    .get('/api/v1/menus/1')
     .then(res => {
       dispatch({
         type: t.GET_MAIN_MENU_SUCCESS,
@@ -85,7 +86,8 @@ function fetchMenusSuccess(menuData) {
 export function updateMenuDetails(data) {
   return dispatch => {
     dispatch(beginUpdateMenuDetails());
-    return Axios.put(`/api/v1/menu-details/${data.id}`, data)
+    return api
+      .put(`/api/v1/menu-details/${data.id}`, data)
       .then(res => {
         dispatch(updateMenuDetailsSuccess(res));
         dispatch(notificationSend(notif.MSG_UPDATE_LINK_SUCCESS));
@@ -140,7 +142,7 @@ export function addMenuDetail(values) {
   };
   return dispatch => {
     dispatch(beginAddMenuDetail());
-    return Axios.post('/api/v1/menu-details', data).then(res => {
+    return api.post('/api/v1/menu-details', data).then(res => {
       if (!res.status === 201) {
         dispatch(addMenuDetailFailure(res));
         dispatch(notificationSend(notif.MSG_ADD_LINK_ERROR));

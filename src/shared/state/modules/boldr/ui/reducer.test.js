@@ -7,8 +7,7 @@ import {
   changeLayout,
   showModal,
   hideModal,
-  openDrawer,
-  closeDrawer,
+  toggleDrawer,
 } from './actions';
 import uiReducer from './reducer';
 
@@ -165,10 +164,10 @@ test('Open the drawer', () => {
       expanded: false,
     },
   });
-  store.dispatch(openDrawer());
+  store.dispatch(toggleDrawer());
   const action = store.getActions()[0];
   expect(action).toEqual({
-    type: '@boldr/ui/OPEN_DRAWER',
+    type: '@boldr/ui/TOGGLE_DRAWER',
   });
 });
 test('Close the drawer', () => {
@@ -183,9 +182,9 @@ test('Close the drawer', () => {
       expanded: false,
     },
   });
-  store.dispatch(closeDrawer());
+  store.dispatch(toggleDrawer());
   const action = store.getActions()[0];
   expect(action).toEqual({
-    type: '@boldr/ui/CLOSE_DRAWER',
+    type: '@boldr/ui/TOGGLE_DRAWER',
   });
 });

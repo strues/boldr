@@ -1,6 +1,6 @@
 import {normalize, arrayOf, schema} from 'normalizr';
 import merge from 'lodash/merge';
-import Axios from 'axios';
+import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import {notificationSend} from '../../notifications/notifications';
 import * as t from '../../actionTypes';
@@ -163,7 +163,7 @@ export function createTag(values) {
   };
   return dispatch => {
     dispatch(beginAddTag());
-    return Axios.post('/api/v1/tags', data).then(res => {
+    return api.post('/api/v1/tags', data).then(res => {
       if (!res.status === 201) {
         dispatch(addTagFailure(res));
         dispatch(notificationSend(notif.MSG_ADD_TAG_FAILURE));
@@ -205,7 +205,8 @@ export function deleteTag(id) {
     dispatch({
       type: t.DELETE_TAG_REQUEST,
     });
-    return Axios.delete(`/api/v1/tags/${id}`)
+    return api
+      .delete(`/api/v1/tags/${id}`)
       .then(res => {
         dispatch({
           type: t.DELETE_TAG_SUCCESS,

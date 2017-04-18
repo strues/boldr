@@ -1,5 +1,5 @@
 import {push} from 'react-router-redux';
-import Axios from 'axios';
+import api from '../../../core/api';
 import {setToken, removeToken} from '../../../core/authentication/token';
 import * as notif from '../../../core/constants';
 import {notificationSend} from '../notifications/notifications';
@@ -14,7 +14,8 @@ import * as t from '../actionTypes';
 export function doSignup(data) {
   return dispatch => {
     dispatch(beginSignUp());
-    return Axios.post('/api/v1/auth/signup', data)
+    return api
+      .post('/api/v1/auth/signup', data)
       .then(res => {
         dispatch(signUpSuccess());
         dispatch(push('/'));
@@ -49,7 +50,8 @@ const signUpError = err => {
 export function doLogin(data) {
   return dispatch => {
     dispatch(beginLogin());
-    return Axios.post('/api/v1/auth/login', data)
+    return api
+      .post('/api/v1/auth/login', data)
       .then(res => {
         setToken(res.data.token);
         dispatch(loginSuccess(res));
@@ -111,7 +113,7 @@ export const checkAuth = token => {
   return async (dispatch: Function) => {
     try {
       dispatch(checkAuthRequest());
-      const res = await Axios.get('/api/v1/auth/check');
+      const res = await api.get('/api/v1/auth/check');
       const user = res.data;
       dispatch(checkAuthSuccess(user, token));
     } catch (err) {

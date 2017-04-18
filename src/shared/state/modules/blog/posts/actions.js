@@ -1,7 +1,7 @@
 /* @flow */
 import {normalize, arrayOf, schema} from 'normalizr';
 import merge from 'lodash/merge';
-import Axios from 'axios';
+import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import {
   notificationSend,
@@ -183,7 +183,8 @@ export function selectPost(post: Object) {
 export function createPost(data: Post) {
   return (dispatch: Function) => {
     dispatch(beginCreatePost());
-    return Axios.post('/api/v1/posts', data)
+    return api
+      .post('/api/v1/posts', data)
       .then(res => {
         const normalizedData = normalize(res.data, postSchema);
         dispatch(createPostSuccess(normalizedData));
@@ -225,7 +226,8 @@ export function deletePost(id: string) {
     dispatch({
       type: t.DELETE_POST_REQUEST,
     });
-    return Axios.delete(`/api/v1/posts/${id}`)
+    return api
+      .delete(`/api/v1/posts/${id}`)
       .then(res => {
         dispatch({
           type: t.DELETE_POST_SUCCESS,
@@ -250,7 +252,8 @@ export function deletePost(id: string) {
 export function updatePost(postData: Post) {
   return (dispatch: Function) => {
     dispatch(updatePostDetails(postData));
-    return Axios.put(`/api/v1/posts/${postData.id}`, postData)
+    return api
+      .put(`/api/v1/posts/${postData.id}`, postData)
       .then(res => {
         dispatch({
           type: t.UPDATE_POST_SUCCESS,

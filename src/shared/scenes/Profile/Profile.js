@@ -14,7 +14,7 @@ import {
   StyleClasses,
 } from 'boldr-ui';
 
-import config from '../../../../config';
+// import config from '../../../../config';
 import ProfileContent from './components/ProfileContent';
 import OwnProfile from './components/OwnProfile';
 
