@@ -1,6 +1,10 @@
 import {push} from 'react-router-redux';
 import api from '../../../core/api';
-import {setToken, removeToken} from '../../../core/authentication/token';
+import {
+  setToken,
+  removeToken,
+  parseJWT,
+} from '../../../core/authentication/token';
 import * as notif from '../../../core/constants';
 import {notificationSend} from '../notifications/notifications';
 import * as t from '../actionTypes';

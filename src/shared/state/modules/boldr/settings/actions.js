@@ -6,6 +6,7 @@ import {notificationSend} from '../../notifications/notifications';
 import * as t from '../../actionTypes';
 import {setting as settingSchema, arrayOfSetting} from './schema';
 
+const API_PREFIX = '/api/v1';
 /**
   * FETCH SETTINGS ACTIONS
   * -------------------------
@@ -44,7 +45,7 @@ export const fetchSettings = (axios: any): ThunkAction => (
   dispatch({type: t.FETCH_SETTINGS_REQUEST});
 
   return api
-    .get('/api/v1/settings')
+    .get(`${API_PREFIX}/settings`)
     .then(res => {
       const settingsData = res.data;
       const normalizedSettings = normalize(settingsData, arrayOfSetting);
@@ -89,7 +90,7 @@ export function updateBoldrSettings(payload) {
   return dispatch => {
     dispatch(beginUpdateSettings());
     return api
-      .put(`/api/v1/settings/${settingId}`, data)
+      .put(`${API_PREFIX}/settings/${settingId}`, data)
       .then(res => {
         dispatch(doneUpdateSettings(res.data));
         dispatch(

@@ -9,18 +9,7 @@ ArraySchema {
     "_mergeStrategy": [Function],
     "_processStrategy": [Function],
     "schema": Object {
-      "pages": Array [
-        EntitySchema {
-          "_getId": [Function],
-          "_idAttribute": "id",
-          "_key": "pages",
-          "_mergeStrategy": [Function],
-          "_processStrategy": [Function],
-          "schema": Object {
-            "processStrategy": [Function],
-          },
-        },
-      ],
+      "idAttribute": "id",
     },
   },
 }
@@ -34,18 +23,7 @@ EntitySchema {
   "_mergeStrategy": [Function],
   "_processStrategy": [Function],
   "schema": Object {
-    "pages": Array [
-      EntitySchema {
-        "_getId": [Function],
-        "_idAttribute": "id",
-        "_key": "pages",
-        "_mergeStrategy": [Function],
-        "_processStrategy": [Function],
-        "schema": Object {
-          "processStrategy": [Function],
-        },
-      },
-    ],
+    "idAttribute": "id",
   },
 }
 `;

@@ -23,6 +23,7 @@ import {
 import RenderTags from '../RenderTags';
 import FieldEditor from './FieldEditor';
 
+/* eslint-disable */
 const Wrapper = styled.div`
   padding: 1em;
   width: 100%;
@@ -31,7 +32,7 @@ const Wrapper = styled.div`
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .4);
   background-color: #fff;
 `;
-
+/* eslint-enable */
 const NewPost = styled.section`
   width: 100%;
   margin-top: 10px;
@@ -87,7 +88,7 @@ class NewPostForm extends Component {
 
     return (
       <NewPost>
-        <Heading size={3} weight={300}>Create a new post</Heading>
+        <Heading size={3}>Create a new post</Heading>
         <form onSubmit={handleSubmit}>
           <Wrapper>
             <FormGroup>
@@ -139,7 +140,7 @@ class NewPostForm extends Component {
                   transitionLeave={false}
                 >
                   <FormGroup>
-                    <Heading size={5} top="2rem" bottom="0px">
+                    <Heading size={5}>
                       Upload a feature image
                     </Heading>
                     {/* <Row>

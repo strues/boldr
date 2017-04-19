@@ -23,7 +23,7 @@ WebFontLoader.load({
   },
 });
 
-const domNode = document.querySelector('#app');
+const domNode = document.getElementById('app');
 const history = createHistory();
 const preloadedState = window.__PRELOADED_STATE__;
 const store = configureStore(preloadedState, history);

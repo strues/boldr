@@ -1,5 +1,11 @@
 import mediaReducer, {STATE_KEY, getMediaType} from './reducer';
-import {fetchMediaIfNeeded, toggleMedia, selectMedia} from './actions';
+import {
+  fetchMediaIfNeeded,
+  toggleMedia,
+  selectMedia,
+  editMedia,
+  deleteMedia,
+} from './actions';
 import {getMedia} from './selectors';
 
 export default mediaReducer;
@@ -11,4 +17,6 @@ export {
   getMediaType,
   selectMedia,
   toggleMedia,
+  editMedia,
+  deleteMedia,
 };

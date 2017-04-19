@@ -4,13 +4,13 @@ import httpProxy from 'http-proxy';
 import express from 'express';
 import appRootDir from 'app-root-dir';
 import {
-  boldrSSR,
   clientBundle,
   expressMiddleware,
   errorHandler,
   offlinePage,
   serviceWorker,
 } from './middleware';
+import boldrSSR from './boldrSSR';
 
 // const proxyTarget = `http://${config.apiHost}:${config.apiPort}/api/v1`;
 const proxyTarget = 'http://0.0.0.0:2121/api/v1';
@@ -51,6 +51,7 @@ proxy.on('error', (error, req, res) => {
   };
   res.end(JSON.stringify(json));
 });
+
 if (!process.env.BUILD_FLAG_IS_DEV) {
   app.get(`/sw.js`, serviceWorker);
   app.get('/assets/offline.html', offlinePage);

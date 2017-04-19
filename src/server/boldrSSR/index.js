@@ -1,4 +1,6 @@
+/* @flow */
 import React from 'react';
+import type {$Response, $Request, NextFunction} from 'express';
 import {renderToString, renderToStaticMarkup} from 'react-dom/server';
 import {Provider} from 'react-redux';
 import createHistory from 'history/createMemoryHistory';
@@ -7,14 +9,18 @@ import {matchRoutes} from 'react-router-config';
 import styleSheet from 'styled-components/lib/models/StyleSheet';
 import Helmet from 'react-helmet';
 
-import configureStore from '../../../shared/state/store';
-import renderRoutes from '../../../shared/core/addRoutes';
-import routes from '../../../shared/routes';
-import ServerHTML from './ServerHTML';
+import configureStore from '../../shared/state/store';
+import renderRoutes from '../../shared/core/addRoutes';
+import routes from '../../shared/routes';
+import CreateHtml from './CreateHtml';
 
 const debug = require('debug')('boldr:ssrMW');
 
-function renderAppToString(store, routerContext, req) {
+function renderAppToString(
+  store: Object,
+  routerContext: Object,
+  req: $Request,
+) {
   return renderToString(
     <Provider store={store}>
       <StaticRouter location={req.url} context={routerContext}>
@@ -24,7 +30,7 @@ function renderAppToString(store, routerContext, req) {
   );
 }
 
-function boldrSSR(req, res, next) {
+function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
   if (typeof res.locals.nonce !== 'string') {
     throw new Error('A "nonce" value has not been attached to the response');
   }
@@ -66,7 +72,7 @@ function boldrSSR(req, res, next) {
       const styles = styleSheet.rules().map(rule => rule.cssText).join('\n');
 
       const html = renderToStaticMarkup(
-        <ServerHTML
+        <CreateHtml
           reactAppString={reactAppString}
           nonce={nonce}
           helmet={Helmet.rewind()}
@@ -93,5 +99,4 @@ function boldrSSR(req, res, next) {
       console.error(`==> 😭  Rendering routes error: ${err}`);
     });
 }
-
 export default boldrSSR;

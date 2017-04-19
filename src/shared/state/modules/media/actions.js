@@ -8,6 +8,8 @@ import * as t from '../actionTypes';
 import {editProfile} from '../users/actions';
 import {media as mediaSchema, arrayOfMedia} from './schema';
 
+const API_PREFIX = '/api/v1';
+
 export const FETCH_MEDIAS_REQUEST = '@boldr/media/FETCH_MEDIAS_REQUEST';
 export const FETCH_MEDIAS_SUCCESS = '@boldr/media/FETCH_MEDIAS_SUCCESS';
 export const FETCH_MEDIAS_FAILURE = '@boldr/media/FETCH_MEDIAS_FAILURE';
@@ -35,7 +37,7 @@ export const fetchMedia = (axios: any): ThunkAction => (dispatch: Dispatch) => {
   dispatch({type: FETCH_MEDIAS_REQUEST});
 
   return axios
-    .get('/api/v1/media')
+    .get(`${API_PREFIX}/media`)
     .then(res => {
       const medias = res.data;
       const normalizedMedia = normalize(medias, arrayOfMedia);
@@ -123,7 +125,7 @@ export function uploadMedia(payload) {
     const data = new FormData();
     data.append('file', payload);
     return api
-      .post('/api/v1/medias', data)
+      .post(`${API_PREFIX}/media`, data)
       .then(res => {
         dispatch({
           type: UPLOAD_MEDIA_SUCCESS,
@@ -146,7 +148,7 @@ export function deleteMedia(id) {
       type: DELETE_MEDIA_REQUEST,
     });
     return api
-      .delete(`/api/v1/media/${id}`)
+      .delete(`${API_PREFIX}/media/${id}`)
       .then(res => {
         dispatch({
           type: DELETE_MEDIA_SUCCESS,
@@ -169,13 +171,15 @@ export function deleteMedia(id) {
   * @exports updateMedia
   *****************************************************************/
 
-export function updateMedia(attachmentData) {
+export function editMedia(mediaData) {
   return (dispatch: Function) => {
-    dispatch(updateAttachmentReq());
+    dispatch(editMediaReq());
     return api
-      .put(`/api/v1/media/${attachmentData.id}`, attachmentData)
+      .put(`${API_PREFIX}/media/${mediaData.id}`, mediaData)
       .then(res => {
-        dispatch(updateAttachmentSuccess(res));
+        const media = res.data;
+        const normalizedMedia = normalize(media, mediaSchema);
+        dispatch(editMediaSuccess(normalizedMedia));
         dispatch(
           notificationSend({
             message: 'Updated attachment.',
@@ -185,7 +189,7 @@ export function updateMedia(attachmentData) {
         );
       })
       .catch(err => {
-        dispatch(errorUpdateAttachment(err.message));
+        dispatch(errorUpdateAttachment(err));
         dispatch(
           notificationSend({
             message: 'There was a problem updating the attachment.',
@@ -196,15 +200,18 @@ export function updateMedia(attachmentData) {
       });
   };
 }
-const updateAttachmentReq = () => {
-  return {type: UPDATE_MEDIA_REQUEST};
+const editMediaReq = () => {
+  return {type: EDIT_MEDIA_REQUEST};
 };
-const updateAttachmentSuccess = response => {
-  return {type: UPDATE_MEDIA_SUCCESS};
-};
-const errorUpdateAttachment = err => {
+const editMediaSuccess = normalizedMedia => {
   return {
-    type: UPDATE_MEDIA_FAILURE,
-    error: err,
+    type: EDIT_MEDIA_SUCCESS,
+    payload: normalizedMedia,
+  };
+};
+const errorEditMedia = err => {
+  return {
+    type: EDIT_MEDIA_FAILURE,
+    error: err.message,
   };
 };

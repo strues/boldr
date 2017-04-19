@@ -5,6 +5,7 @@ import * as notif from '../../../core/constants';
 import {notificationSend} from '../notifications/notifications';
 import * as t from '../actionTypes';
 
+const API_PREFIX = '/api/v1';
 /**
   * FORGOT PASSWORD ACTIONS
   * -------------------------
@@ -17,7 +18,7 @@ export function forgotPassword(email) {
       type: t.FORGOT_PASSWORD_REQUEST,
     });
     return api
-      .post('/api/v1/tokens/forgot-password', {data: email})
+      .post(`${API_PREFIX}/tokens/forgot-password`, {data: email})
       .then(res => {
         dispatch({
           type: t.FORGOT_PASSWORD_SUCCESS,
@@ -46,7 +47,7 @@ export function resetPassword(password, token) {
       type: t.RESET_PASSWORD_REQUEST,
     });
     return api
-      .post(`/api/v1/tokens/reset-password/${token}`, {
+      .post(`${API_PREFIX}/tokens/reset-password/${token}`, {
         data: password,
       })
       .then(res => {
@@ -110,7 +111,7 @@ export const fetchProfile = (username: string, axios: any): ThunkAction => (
   });
 
   return axios
-    .get(`/api/v1/users/${username}/profile`)
+    .get(`${API_PREFIX}/users/${username}/profile`)
     .then(res => {
       dispatch({
         type: t.FETCH_PROFILE_SUCCESS,
@@ -158,7 +159,7 @@ export function editProfile(userData) {
   return dispatch => {
     dispatch(beginUpdateProfile());
     return api
-      .put(`/api/v1/users/${userData.id}`, userData)
+      .put(`${API_PREFIX}/users/${userData.id}`, userData)
       .then(res => {
         dispatch(doneUpdateProfile(res));
         dispatch(notificationSend(notif.MSG_EDIT_PROFILE_SUCCESS));

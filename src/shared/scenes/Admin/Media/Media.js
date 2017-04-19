@@ -5,6 +5,7 @@ import Helmet from 'react-helmet';
 import filter from 'lodash/filter';
 import Link from 'react-router-dom/Link';
 import styled from 'styled-components';
+import {VanishIn} from 'animate-components';
 import {
   Grid,
   Col,
@@ -22,6 +23,21 @@ type Props = {
   media: Array<Object>,
   selectMedia: () => void,
 };
+const MediaList = styled.ul`
+  flex-flow: row wrap;
+  list-style-type: none;
+  display: flex;
+  padding: .3rem;
+`;
+const MediaItem = styled.li`
+ align-items: stretch;
+ box-sizing: border-box;
+ column-break-inside: avoid;
+ counter-increment: item;
+ display: flex;
+ justify-content: center;
+ padding: .5rem .7rem;
+`;
 
 const MediaSidePanel = styled.div`
   background-color: #00B4D0;
@@ -71,22 +87,29 @@ class Media extends Component {
           <Col xs={12} md={11}>
             <Heading size={3}>Media</Heading>
             <Row>
-              {this.state.currentlyVisible.map(m => (
-                <Col xs={12} md={4} key={m.id}>
-                  <Photo
-                    src={`http://localhost:2121${m.url}`}
-                    alt={m.fileName}
-                    role="presentation"
-                    cta={
-                      <Link to={`/admin/media/${m.id}`}>
-                        <Button icon onClick={() => this.props.selectMedia(m)}>
-                          edit
-                        </Button>
-                      </Link>
-                    }
-                  />
-                </Col>
-              ))}
+              <MediaList>
+                {this.state.currentlyVisible.map(m => (
+                  <VanishIn transition="1s" key={m.id}>
+                    <MediaItem>
+                      <Photo
+                        src={`http://localhost:2121/uploads/${m.thumbName}`}
+                        alt={m.fileName}
+                        role="presentation"
+                        cta={
+                          <Link to={`/admin/media/${m.id}`}>
+                            <Button
+                              icon
+                              onClick={() => this.props.selectMedia(m)}
+                            >
+                              edit
+                            </Button>
+                          </Link>
+                        }
+                      />
+                    </MediaItem>
+                  </VanishIn>
+                ))}
+              </MediaList>
             </Row>
           </Col>
         </Row>
