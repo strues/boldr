@@ -1,6 +1,6 @@
-import {schema} from 'normalizr';
-import {user} from '../../users/schema';
-import {tag} from '../tags/schema';
+import { schema } from 'normalizr';
+import { user } from '../../users/schema';
+import { tag } from '../tags/schema';
 
 const post = new schema.Entity(
   'posts',
@@ -8,9 +8,9 @@ const post = new schema.Entity(
     author: user,
     tags: [tag],
   },
-  {idAttribute: 'slug'},
+  { idAttribute: 'slug' },
 );
 
 const arrayOfPost = new schema.Array(post);
 
-export {post, arrayOfPost};
+export { post, arrayOfPost };

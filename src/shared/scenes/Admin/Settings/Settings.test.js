@@ -1,6 +1,6 @@
 import React from 'react';
-import {shallow} from 'enzyme';
-import {shallowToJson} from 'enzyme-to-json';
+import { shallow } from 'enzyme';
+import { shallowToJson } from 'enzyme-to-json';
 import fakeSettings from './__fixtures__/settings.fixture';
 import Settings from './Settings';
 

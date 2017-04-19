@@ -1,6 +1,6 @@
 import React from 'react';
-import {shallow} from 'enzyme';
-import {shallowToJson} from 'enzyme-to-json';
+import { shallow } from 'enzyme';
+import { shallowToJson } from 'enzyme-to-json';
 
 import fakeAttachments from '../../__fixtures__/attachments.fixture';
 import FileCardView from './FileCardView';

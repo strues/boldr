@@ -1,5 +1,5 @@
-import settingsReducer, {STATE_KEY} from './reducer';
-import {selectSettings, selectSettingFromList} from './selectors';
+import settingsReducer, { STATE_KEY } from './reducer';
+import { selectSettings, selectSettingFromList } from './selectors';
 import {
   fetchSettingsIfNeeded,
   fetchSettings,

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {tag, arrayOfTag} from './schema';
+import { tag, arrayOfTag } from './schema';
 
 describe('tag schema', () => {
   it('should match the normalizr-tag-schema', () => {

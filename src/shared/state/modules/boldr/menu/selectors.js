@@ -1,5 +1,5 @@
-import {createSelector} from 'reselect';
-import {selectBoldr} from '../selectors';
+import { createSelector } from 'reselect';
+import { selectBoldr } from '../selectors';
 /**
   * MENU SELECTORS
   *

@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import styled from 'styled-components';
-import {Grid, Row, Col} from 'boldr-ui';
+import { Grid, Row, Col } from 'boldr-ui';
 
 // import config from '../../../../../../../config';
 import File from '../File';

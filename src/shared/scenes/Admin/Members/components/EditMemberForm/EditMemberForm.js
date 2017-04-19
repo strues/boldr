@@ -1,8 +1,8 @@
 /* @flow */
 
 import React from 'react';
-import {Field, reduxForm} from 'redux-form';
-import {Button, SelectField, InputField} from 'boldr-ui';
+import { Field, reduxForm } from 'redux-form';
+import { Button, SelectField, InputField } from 'boldr-ui';
 
 const style = {
   margin: 12,
@@ -47,7 +47,7 @@ const renderRoleSelector = (props: Prop) => (
   </div>
 );
 const EditMemberForm = (props: Props) => {
-  const {handleSubmit, reset} = props;
+  const { handleSubmit, reset } = props;
   return (
     <form onSubmit={handleSubmit} className="boldr-form__generic">
       <Field

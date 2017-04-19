@@ -1,12 +1,12 @@
 /* @flow */
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import removeByKey from 'boldr-utils/es/objects/removeByKey';
 import removeIdFromArray from 'boldr-utils/es/arrays/removeIdFromArray';
 import * as notif from '../../../../core/constants';
 
-import {notificationSend} from '../../../../state/modules/notifications';
+import { notificationSend } from '../../../../state/modules/notifications';
 import * as t from '../../actionTypes';
-import {getPosts} from './selectors';
+import { getPosts } from './selectors';
 
 export const STATE_KEY = 'posts';
 

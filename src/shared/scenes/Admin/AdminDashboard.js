@@ -1,8 +1,8 @@
 /* @flow */
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import NavLink from 'react-router-dom/NavLink';
 import styled from 'styled-components';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import {
   Avatar,
   Button,
@@ -60,10 +60,16 @@ export class AdminDashboard extends Component {
   clickActivate = () => {
     const activate = '/item41/a';
 
-    this.setState({activate});
+    this.setState({ activate });
   };
   render() {
-    const {route, me, ui, routing, location: {pathname, search}} = this.props;
+    const {
+      route,
+      me,
+      ui,
+      routing,
+      location: { pathname, search },
+    } = this.props;
     return (
       <DashboardLayout>
         {ui.visible
@@ -86,8 +92,8 @@ export class AdminDashboard extends Component {
             username={me.username}
             link={TopbarLink}
             links={[
-              {title: 'Home', url: '/'},
-              {title: 'Dashboard', url: '/admin'},
+              { title: 'Home', url: '/' },
+              { title: 'Dashboard', url: '/admin' },
             ]}
           />
           <DashboardContent>

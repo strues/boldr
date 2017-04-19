@@ -1,5 +1,5 @@
 import api from '../../../../core/api';
-import {notificationSend} from '../../notifications/notifications';
+import { notificationSend } from '../../notifications/notifications';
 import * as notif from '../../../../core/constants';
 import * as t from '../../actionTypes';
 
@@ -11,7 +11,7 @@ import * as t from '../../actionTypes';
 export const fetchMembers = (axios: any): ThunkAction => (
   dispatch: Dispatch,
 ) => {
-  dispatch({type: t.LOAD_MEMBERS_REQUEST});
+  dispatch({ type: t.LOAD_MEMBERS_REQUEST });
 
   return axios
     .get('/api/v1/users?include=[roles]')
@@ -45,7 +45,7 @@ export const fetchMembersIfNeeded = (): ThunkAction => (
 };
 
 function shouldFetchMembers(state) {
-  const {members} = state.admin.members;
+  const { members } = state.admin.members;
   if (!members.length) {
     return true;
   }
@@ -82,7 +82,7 @@ export function updateMember(userData) {
 }
 
 const beginUpdateMember = () => {
-  return {type: t.UPDATE_MEMBER_REQUEST};
+  return { type: t.UPDATE_MEMBER_REQUEST };
 };
 
 const doneUpdateMember = res => {

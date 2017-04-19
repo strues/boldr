@@ -1,7 +1,7 @@
 /* @flow */
-import React, {Component} from 'react';
-import {Editor} from 'react-draft-wysiwyg';
-import {stateFromHTML} from 'draft-js-import-html';
+import React, { Component } from 'react';
+import { Editor } from 'react-draft-wysiwyg';
+import { stateFromHTML } from 'draft-js-import-html';
 // $FlowIssue
 import convertFromRaw from 'draft-js/lib/convertFromRawToDraftState';
 // $FlowIssue
@@ -33,13 +33,13 @@ export default class EditorField extends Component {
   state: State;
   props: Props;
   onChange = editorState => {
-    const {input} = this.props;
+    const { input } = this.props;
     input.onChange(convertToRaw(editorState.getCurrentContent()));
-    this.setState({editorState});
+    this.setState({ editorState });
   };
   render() {
-    const {input, placeholder} = this.props;
-    const {editorState} = this.state;
+    const { input, placeholder } = this.props;
+    const { editorState } = this.state;
     return (
       <Editor
         editorStyle={editorStyle}

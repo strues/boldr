@@ -1,1 +1,1 @@
-export {default} from './SidebarTags';
+export { default } from './SidebarTags';

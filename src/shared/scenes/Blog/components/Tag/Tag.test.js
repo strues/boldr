@@ -1,8 +1,8 @@
 import React from 'react';
-import {shallow} from 'enzyme';
-import {createStore} from 'redux';
-import {Provider} from 'react-redux';
-import {shallowToJson} from 'enzyme-to-json';
+import { shallow } from 'enzyme';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import { shallowToJson } from 'enzyme-to-json';
 import Tag from './Tag';
 
 describe('<Tag />', () => {

@@ -42,7 +42,7 @@ export const notificationDismiss = id => {
  * Clear all notifications
  */
 export const notificationClear = () => {
-  return {type: NOTIFICATION_CLEAR};
+  return { type: NOTIFICATION_CLEAR };
 };
 
 /**

@@ -1,1 +1,1 @@
-export {default} from './FileListView';
+export { default } from './FileListView';

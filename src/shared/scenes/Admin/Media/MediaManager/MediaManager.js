@@ -1,9 +1,9 @@
 /* @flow */
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Zoom} from 'animate-components';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Zoom } from 'animate-components';
 import styled from 'styled-components';
-import {Photo, Grid, Col, Row, Card, CardText, CardTitle} from 'boldr-ui';
+import { Photo, Grid, Col, Row, Card, CardText, CardTitle } from 'boldr-ui';
 import MediaForm from './components/MediaForm';
 
 type Props = {
@@ -28,7 +28,7 @@ class MediaManager extends Component {
   };
   props: Props;
   render() {
-    const {media} = this.props;
+    const { media } = this.props;
     return (
       <div>
         <Grid>

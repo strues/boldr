@@ -2,7 +2,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import axios from 'axios';
 import moxios from 'moxios';
-import {normalize, arrayOf, schema} from 'normalizr';
+import { normalize, arrayOf, schema } from 'normalizr';
 import {
   FETCH_POSTS_REQUEST,
   FETCH_POSTS_SUCCESS,
@@ -14,8 +14,8 @@ import {
 } from '../../actionTypes';
 import postsFixture from './__fixtures__/posts.fixture';
 import postFixture from './__fixtures__/post.fixture';
-import {fetchPosts, fetchPost, selectPost} from './actions';
-import {post as postSchema, arrayOfPost} from './schema';
+import { fetchPosts, fetchPost, selectPost } from './actions';
+import { post as postSchema, arrayOfPost } from './schema';
 
 const mockStore = configureMockStore([thunk]);
 
@@ -33,13 +33,13 @@ describe('Fetching posts', () => {
       '/api/v1/posts?include=[author,tags,comments,comments.commenter,comments.replies]',
       {
         status: 200,
-        response: {data: postsFixture},
+        response: { data: postsFixture },
       },
     );
 
     const normalizedPosts = normalize(postsFixture, arrayOfPost);
     const expectedActions = [
-      {type: FETCH_POSTS_REQUEST},
+      { type: FETCH_POSTS_REQUEST },
       {
         type: FETCH_POSTS_SUCCESS,
         payload: normalizedPosts,
@@ -59,11 +59,11 @@ describe('Fetching posts', () => {
   test('creates FETCH_POST_SUCCESS when fetching a post is complete', () => {
     moxios.stubRequest('/api/v1/posts/slug/nother-one', {
       status: 200,
-      response: {data: postFixture},
+      response: { data: postFixture },
     });
 
     const expectedActions = [
-      {type: FETCH_POST_REQUEST},
+      { type: FETCH_POST_REQUEST },
       {
         type: FETCH_POST_SUCCESS,
         payload: postFixture,

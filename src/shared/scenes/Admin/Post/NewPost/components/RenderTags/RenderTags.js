@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/no-array-index-key */
 import React from 'react';
-import {Field, FieldArray, reduxForm} from 'redux-form';
+import { Field, FieldArray, reduxForm } from 'redux-form';
 import styled from 'styled-components';
-import {Button, FontIcon, InputField} from 'boldr-ui';
+import { Button, FontIcon, InputField } from 'boldr-ui';
 
 const TagList = styled.ul`
   list-style-type: none;
@@ -19,13 +19,13 @@ const TagItem = styled.li`
   padding-left: 0;
 `;
 
-const RenderTags = ({fields, meta: {touched, error}}) => (
+const RenderTags = ({ fields, meta: { touched, error } }) => (
   <div>
     <Button
       secondary
       flat
       onClick={() => fields.push('')}
-      style={{marginBottom: 17}}
+      style={{ marginBottom: 17 }}
       label="Add Tag"
     >
       add

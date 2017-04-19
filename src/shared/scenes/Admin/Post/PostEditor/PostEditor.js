@@ -1,9 +1,9 @@
 /* @flow */
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import draftToHtml from 'draftjs-to-html';
-import {updatePost} from '../../../../state/modules/blog/posts';
+import { updatePost } from '../../../../state/modules/blog/posts';
 import EditPostForm from './components/EditPostForm';
 
 type Props = {
@@ -35,7 +35,7 @@ class PostEditor extends Component {
   }
 
   render() {
-    const {currentPost} = this.props;
+    const { currentPost } = this.props;
 
     const setPostValues = {
       title: currentPost.title,
@@ -68,4 +68,4 @@ const mapStateToProps = (state, ownProps) => {
     currentPost: state.blog.posts.currentPost,
   };
 };
-export default connect(mapStateToProps, {updatePost})(PostEditor);
+export default connect(mapStateToProps, { updatePost })(PostEditor);

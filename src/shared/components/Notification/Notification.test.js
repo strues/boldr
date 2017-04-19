@@ -1,9 +1,9 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import { shallow } from 'enzyme';
 import sinon from 'sinon';
-import {shallowToJson} from 'enzyme-to-json';
+import { shallowToJson } from 'enzyme-to-json';
 import Notification from './Notification';
-import {fakeNotif} from './__fixtures__/notifications.fixture';
+import { fakeNotif } from './__fixtures__/notifications.fixture';
 
 describe('<Notification />', () => {
   it('+++ should render okay with props', () => {

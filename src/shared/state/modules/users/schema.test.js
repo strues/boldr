@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {user, arrayOfUsers} from './schema';
+import { user, arrayOfUsers } from './schema';
 
 describe('user schema', () => {
   it('should match the normalizr-user-schema', () => {

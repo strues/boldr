@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import { shallow } from 'enzyme';
 import TaggedPostMenu from './TaggedPostMenu';
 
 const post = {

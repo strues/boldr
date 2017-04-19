@@ -1,14 +1,17 @@
 /* @flow */
 
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 
-import {LAYOUTS} from '../../../core/constants';
-import {changeLayout} from '../../../state/modules/boldr/ui';
-import {getPosts, fetchPostsIfNeeded} from '../../../state/modules/blog/posts';
-import {fetchTagsIfNeeded} from '../../../state/modules/blog/tags/actions';
-import {getTags} from '../../../state/modules/blog/tags/selectors';
+import { LAYOUTS } from '../../../core/constants';
+import { changeLayout } from '../../../state/modules/boldr/ui';
+import {
+  getPosts,
+  fetchPostsIfNeeded,
+} from '../../../state/modules/blog/posts';
+import { fetchTagsIfNeeded } from '../../../state/modules/blog/tags/actions';
+import { getTags } from '../../../state/modules/blog/tags/selectors';
 import BaseTemplate from '../../../templates/BaseTemplate';
 import VisiblePostListing from './VisiblePostListing';
 

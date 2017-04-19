@@ -3,7 +3,7 @@
  */
 
 import fs from 'fs';
-import {resolve as pathResolve} from 'path';
+import { resolve as pathResolve } from 'path';
 import appRootDir from 'app-root-dir';
 
 let resultCache;

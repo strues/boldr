@@ -24,7 +24,7 @@ const KeyVisual = props => {
     [style.mediaWrapper]: true,
     [style['mediaWrapper--faded']]: isFaded,
   });
-  const assetProps = {className: style.media};
+  const assetProps = { className: style.media };
 
   switch (type) {
     case 'video':

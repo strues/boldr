@@ -1,9 +1,11 @@
 /* @flow */
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Paper, Grid, Row, Col, Image} from 'boldr-ui';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Paper, Grid, Row, Col, Image } from 'boldr-ui';
 
-import {updateAttachment} from '../../../../state/modules/attachments/actions';
+import {
+  updateAttachment,
+} from '../../../../state/modules/attachments/actions';
 // import config from '../../../../../../config';
 import FileEditorForm from '../components/FileEditorForm';
 
@@ -59,4 +61,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, {updateAttachment})(FileEditor);
+export default connect(mapStateToProps, { updateAttachment })(FileEditor);

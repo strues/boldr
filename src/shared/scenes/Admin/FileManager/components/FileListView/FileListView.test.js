@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import { shallow } from 'enzyme';
 import fakeAttachments from '../../__fixtures__/attachments.fixture';
 import FileListView from './FileListView';
 

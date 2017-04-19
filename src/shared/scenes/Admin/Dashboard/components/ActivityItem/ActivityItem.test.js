@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import { shallow } from 'enzyme';
 import act from '../../__fixtures__/activity.fixture';
 import ActivityItem from './ActivityItem';
 

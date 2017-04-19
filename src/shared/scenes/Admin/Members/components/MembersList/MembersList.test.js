@@ -1,6 +1,6 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
-import {shallowToJson} from 'enzyme-to-json';
+import { shallow, mount } from 'enzyme';
+import { shallowToJson } from 'enzyme-to-json';
 import MembersList from './MembersList';
 
 describe('<MembersList />', () => {

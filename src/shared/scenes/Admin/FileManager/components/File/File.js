@@ -32,7 +32,7 @@ const File = (props: Props) => {
   }
 
   function handleSelect() {
-    const {file} = props;
+    const { file } = props;
     props.selectFile(file);
   }
 

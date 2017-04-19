@@ -1,16 +1,16 @@
 /* @flow */
 import React from 'react';
-import {Field, reduxForm, getFormSyncErrors, isValid} from 'redux-form';
-import {Button, InputField, Row, Col} from 'boldr-ui';
+import { Field, reduxForm, getFormSyncErrors, isValid } from 'redux-form';
+import { Button, InputField, Row, Col } from 'boldr-ui';
 
-import validate, {requiredValidator, emailValidator} from './validate';
+import validate, { requiredValidator, emailValidator } from './validate';
 
 type Props = {
   handleSubmit?: Function,
 };
 
 const SignupForm = (props: Props) => {
-  const {handleSubmit} = props;
+  const { handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit} className="boldr-form__generic">
       <Row>
@@ -71,7 +71,7 @@ const SignupForm = (props: Props) => {
       </Row>
 
       <Button
-        style={{marginTop: '25px'}}
+        style={{ marginTop: '25px' }}
         raised
         primary
         label="Create Account"

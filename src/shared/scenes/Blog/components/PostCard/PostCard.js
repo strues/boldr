@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import Link from 'react-router-dom/Link';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import dateFns from 'date-fns';
 import classnames from 'classnames';
 import {
@@ -16,7 +16,7 @@ import {
   Media,
   MediaOverlay,
 } from 'boldr-ui';
-import {selectPost} from '../../../../state/modules/blog/posts/actions';
+import { selectPost } from '../../../../state/modules/blog/posts/actions';
 
 import TagBlock from '../TagBlock';
 
@@ -107,4 +107,4 @@ export const PostCard = (props: Props) => {
   );
 };
 
-export default connect(state => state, null, null, {pure: true})(PostCard);
+export default connect(state => state, null, null, { pure: true })(PostCard);

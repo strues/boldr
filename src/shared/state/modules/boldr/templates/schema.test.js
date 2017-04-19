@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {template, arrayOfTemplate} from './schema';
+import { template, arrayOfTemplate } from './schema';
 
 describe('template schema', () => {
   it('should match the normalizr-template-schema', () => {

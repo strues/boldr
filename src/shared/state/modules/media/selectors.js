@@ -1,4 +1,4 @@
-import {createSelector} from 'reselect';
+import { createSelector } from 'reselect';
 
 export const getMediaIds = state => state.media.ids;
 export const getMediaList = state => state.media.all;

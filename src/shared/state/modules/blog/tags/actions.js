@@ -1,10 +1,10 @@
-import {normalize, arrayOf, schema} from 'normalizr';
+import { normalize, arrayOf, schema } from 'normalizr';
 import merge from 'lodash/merge';
 import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
-import {notificationSend} from '../../notifications/notifications';
+import { notificationSend } from '../../notifications/notifications';
 import * as t from '../../actionTypes';
-import {tag as tagSchema, arrayOfTag} from './schema';
+import { tag as tagSchema, arrayOfTag } from './schema';
 
 const API_PREFIX = '/api/v1';
 /**
@@ -41,7 +41,7 @@ export const fetchTagsIfNeeded = (): ThunkAction => (
  * @return {Array} Tags returned as an array of tag objects.
  */
 export const fetchTags = (axios: any): ThunkAction => (dispatch: Dispatch) => {
-  dispatch({type: t.FETCH_TAGS_REQUEST});
+  dispatch({ type: t.FETCH_TAGS_REQUEST });
 
   return axios
     .get(`${API_PREFIX}/tags?include=posts`)

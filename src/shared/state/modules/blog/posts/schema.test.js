@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {post, arrayOfPost} from './schema';
+import { post, arrayOfPost } from './schema';
 
 describe('post schema', () => {
   it('should match the normalizr-post-schema', () => {

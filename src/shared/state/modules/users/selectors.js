@@ -1,4 +1,4 @@
-import {createSelector} from 'reselect';
+import { createSelector } from 'reselect';
 
 export const selectUsers = state => state.users;
 export const selectMe = state => state.users.me;

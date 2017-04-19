@@ -1,6 +1,6 @@
 /* eslint-env mocha */
 import React from 'react';
-import {mount} from 'enzyme';
+import { mount } from 'enzyme';
 import PostImage from './PostImage';
 
 it('<PostImage />, renders the post image without blowing up', () => {

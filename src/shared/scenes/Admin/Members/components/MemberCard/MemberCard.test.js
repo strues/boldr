@@ -1,14 +1,14 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
-import {shallowToJson} from 'enzyme-to-json';
-import {Card, Button} from 'boldr-ui';
+import { shallow, mount } from 'enzyme';
+import { shallowToJson } from 'enzyme-to-json';
+import { Card, Button } from 'boldr-ui';
 import MemberCard from './MemberCard';
 
 const userData = {
   id: 'abad-12dc-3dfd',
   username: 'joe',
   email: 'test@test.com',
-  roles: [{id: 1, name: 'admin'}],
+  roles: [{ id: 1, name: 'admin' }],
   avatarUrl: 'http://img.com/img.png',
 };
 const id = 'abad-12dc-3dfd';

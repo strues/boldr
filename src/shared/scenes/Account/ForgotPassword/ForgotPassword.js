@@ -1,10 +1,10 @@
-import React, {PureComponent} from 'react';
-import {connect} from 'react-redux';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import {FormCard} from 'boldr-ui';
+import { FormCard } from 'boldr-ui';
 
 import BaseTemplate from '../../../templates/BaseTemplate';
-import {forgotPassword} from '../../../state/modules/users/actions';
+import { forgotPassword } from '../../../state/modules/users/actions';
 import ForgotPasswordForm from './ForgotPasswordForm';
 
 export type Props = {
@@ -15,7 +15,7 @@ class ForgotPassword extends PureComponent {
   props: Props;
 
   handleSubmit = values => {
-    const {email} = values;
+    const { email } = values;
     this.props.dispatch(forgotPassword(email));
   };
   render() {

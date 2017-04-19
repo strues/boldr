@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import addIdToArray from 'boldr-utils/es/arrays/addIdToArray';
 import removeByKey from 'boldr-utils/es/objects/removeByKey';
 import removeIdFromArray from 'boldr-utils/es/arrays/removeIdFromArray';
@@ -13,7 +13,7 @@ import {
   EDIT_MEDIA_FAILURE,
   SELECT_MEDIA,
 } from './actions';
-import {getMedia} from './selectors';
+import { getMedia } from './selectors';
 
 export const STATE_KEY = 'media';
 

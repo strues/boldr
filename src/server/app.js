@@ -1,4 +1,4 @@
-import {resolve as pathResolve} from 'path';
+import { resolve as pathResolve } from 'path';
 import http from 'http';
 import httpProxy from 'http-proxy';
 import express from 'express';
@@ -34,7 +34,7 @@ app.use((req, res, next) => {
 
 // Proxy to API server
 app.use('/api/v1', (req, res) => {
-  proxy.web(req, res, {target: proxyTarget});
+  proxy.web(req, res, { target: proxyTarget });
 });
 
 proxy.on('error', (error, req, res) => {
@@ -42,7 +42,7 @@ proxy.on('error', (error, req, res) => {
     console.error('proxy error', error);
   }
   if (!res.headersSent) {
-    res.writeHead(500, {'content-type': 'application/json'});
+    res.writeHead(500, { 'content-type': 'application/json' });
   }
 
   const json = {

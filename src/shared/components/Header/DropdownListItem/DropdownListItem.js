@@ -1,9 +1,9 @@
 /* @flow */
 // $FlowIssue
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import classNames from 'classnames/bind';
 import NavLink from 'react-router-dom/NavLink';
-import {FontIcon} from 'boldr-ui';
+import { FontIcon } from 'boldr-ui';
 import styles from './dropdown-list-item.scss';
 
 const cx = classNames.bind(styles);
@@ -15,7 +15,7 @@ type Props = {
 class DropdownListItem extends Component {
   props: Props;
   render() {
-    const {item, closeDropdowns} = this.props;
+    const { item, closeDropdowns } = this.props;
 
     return (
       <li className={cx('boldr-menu__dropdown-listitem')} role="menuitem">

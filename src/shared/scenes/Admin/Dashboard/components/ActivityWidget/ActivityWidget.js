@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import {Avatar, Paper, Divider, FontIcon, Toolbar, Heading} from 'boldr-ui';
+import { Avatar, Paper, Divider, FontIcon, Toolbar, Heading } from 'boldr-ui';
 
 import ActivityItem from '../ActivityItem';
 

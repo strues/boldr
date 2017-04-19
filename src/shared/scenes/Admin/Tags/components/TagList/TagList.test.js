@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
+import { shallow, mount } from 'enzyme';
 import sinon from 'sinon';
 import tags from '../../__fixtures__/tags.fixtures';
 import TagList from './TagList';

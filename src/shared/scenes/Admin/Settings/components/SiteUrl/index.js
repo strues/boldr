@@ -1,1 +1,1 @@
-export {default} from './SiteUrl';
+export { default } from './SiteUrl';

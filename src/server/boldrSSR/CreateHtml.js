@@ -1,15 +1,15 @@
 /* eslint-disable react/no-danger, react/no-array-index-key, react/jsx-key */
 /* @flow */
-import React, {Children, PropTypes} from 'react';
+import React, { Children, PropTypes } from 'react';
 import serialize from 'serialize-javascript';
-import {ifElse, removeNil} from 'boldr-utils';
-import type {Head} from 'react-helmet';
+import { ifElse, removeNil } from 'boldr-utils';
+import type { Head } from 'react-helmet';
 import ClientConfig from '../../../config/components/ClientConfig';
 import Html from '../../shared/components/Html';
 
 import getClientBundleEntryAssets from './getClientBundleEntryAssets';
 
-function KeyedComponent({children}) {
+function KeyedComponent({ children }) {
   return Children.only(children);
 }
 
@@ -51,14 +51,14 @@ export type CreateHtmlProps = {
 };
 
 function CreateHtml(props: CreateHtmlProps) {
-  const {reactAppString, nonce, preloadedState, helmet} = props;
+  const { reactAppString, nonce, preloadedState, helmet } = props;
 
   // Creates an inline script definition that is protected by the nonce.
   const inlineScript = (body: string) => (
     <script
       nonce={nonce}
       type="text/javascript"
-      dangerouslySetInnerHTML={{__html: body}}
+      dangerouslySetInnerHTML={{ __html: body }}
     />
   );
 

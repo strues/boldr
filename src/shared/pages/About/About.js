@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Helmet from 'react-helmet';
-import {BaseTemplate} from '../../templates';
+import { BaseTemplate } from '../../templates';
 
 function About() {
   return (
@@ -22,5 +22,4 @@ function About() {
     </div>
   );
 }
-
 export default About;

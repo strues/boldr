@@ -1,11 +1,11 @@
 /* @flow */
 /* eslint-disable react/prefer-stateless-function */
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import filter from 'lodash/filter';
 import Link from 'react-router-dom/Link';
 import styled from 'styled-components';
-import {VanishIn} from 'animate-components';
+import { VanishIn } from 'animate-components';
 import {
   Grid,
   Col,

@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function Html(props) {
-  const {htmlAttributes, headerElements, bodyElements, appBodyString} = props;
+  const { htmlAttributes, headerElements, bodyElements, appBodyString } = props;
 
   return (
     <html {...htmlAttributes}>
@@ -11,7 +11,7 @@ function Html(props) {
         {headerElements}
       </head>
       <body>
-        <div id="app" dangerouslySetInnerHTML={{__html: appBodyString}} />
+        <div id="app" dangerouslySetInnerHTML={{ __html: appBodyString }} />
         {bodyElements}
       </body>
     </html>

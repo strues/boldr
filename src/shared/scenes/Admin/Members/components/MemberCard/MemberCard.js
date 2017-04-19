@@ -21,7 +21,15 @@ type Props = {
 };
 
 const MemberCard = (props: Props) => {
-  const {user, handleToggle, username, roleName, avatarUrl, id, email} = props;
+  const {
+    user,
+    handleToggle,
+    username,
+    roleName,
+    avatarUrl,
+    id,
+    email,
+  } = props;
   return (
     <Card>
       <CardTitle

@@ -1,7 +1,7 @@
 import React from 'react';
-import {shallow} from 'enzyme';
-import {Provider} from 'react-redux';
-import {shallowToJson} from 'enzyme-to-json';
+import { shallow } from 'enzyme';
+import { Provider } from 'react-redux';
+import { shallowToJson } from 'enzyme-to-json';
 import configureStore from 'redux-mock-store';
 import Verify from './Verify';
 

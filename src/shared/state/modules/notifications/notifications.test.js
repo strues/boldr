@@ -11,7 +11,7 @@ describe('Notifications Reducer', () => {
     expect(notificationReducer(undefined, {})).toEqual([]);
   });
   it('should clear the notifications', () => {
-    const initialState = [{id: 1}, {id: 2}];
+    const initialState = [{ id: 1 }, { id: 2 }];
     const stateAfter = [];
     expect(
       notificationReducer(initialState, {
@@ -20,8 +20,8 @@ describe('Notifications Reducer', () => {
     ).toEqual(stateAfter);
   });
   it('Should remove the selected notification', () => {
-    const initialState = [{id: 1}, {id: 2}];
-    const stateAfter = [{id: 2}];
+    const initialState = [{ id: 1 }, { id: 2 }];
+    const stateAfter = [{ id: 2 }];
     expect(
       notificationReducer(initialState, {
         type: NOTIFICATION_DISMISS,

@@ -1,13 +1,13 @@
 // @flow
-import React, {PureComponent} from 'react';
-import {connect} from 'react-redux';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import classnames from 'classnames';
-import {Grid, Row, Col, Heading, StyleClasses} from 'boldr-ui';
+import { Grid, Row, Col, Heading, StyleClasses } from 'boldr-ui';
 
-import {getPosts, fetchPostIfNeeded} from '../../../state/modules/blog/posts';
-import {PostSidebar, PostContent, PostTitle} from '../components';
+import { getPosts, fetchPostIfNeeded } from '../../../state/modules/blog/posts';
+import { PostSidebar, PostContent, PostTitle } from '../components';
 import BaseTemplate from '../../../templates/BaseTemplate';
 
 const BASE_ELEMENT = StyleClasses.SINGLE_POST;
@@ -24,31 +24,23 @@ export type Props = {
   params: Object,
 };
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    entities: state.entities,
-    currentPost: state.blog.posts.currentPost,
-  };
-};
-
-@connect(mapStateToProps, {fetchPostIfNeeded})
 class SinglePost extends PureComponent {
   static defaultProps: {
     currentPost: {},
-    match: {params: {slug: ''}},
+    match: { params: { slug: '' } },
     fetchPostIfNeeded: () => {},
   };
 
   componentDidMount() {
-    const {fetchPostIfNeeded, match: {params}} = this.props;
+    const { fetchPostIfNeeded, match: { params } } = this.props;
 
     fetchPostIfNeeded(params.slug);
   }
   props: Props;
 
   displaySinglePost = () => {
-    const {currentPost, entities, className} = this.props;
-    const {author} = currentPost;
+    const { currentPost, entities, className } = this.props;
+    const { author } = currentPost;
     const postAuthor = entities.users[author];
 
     const classes = classnames(BASE_ELEMENT, className);
@@ -78,7 +70,7 @@ class SinglePost extends PureComponent {
     );
   };
   renderPostBg = () => {
-    const {currentPost} = this.props;
+    const { currentPost } = this.props;
     const PostBg = styled.section`
       max-height: 400px;
       min-height: 400px;
@@ -96,7 +88,7 @@ class SinglePost extends PureComponent {
     return <PostBg><PostTitle title={currentPost.title} /></PostBg>;
   };
   render() {
-    const {currentPost} = this.props;
+    const { currentPost } = this.props;
 
     return (
       <div>
@@ -107,4 +99,11 @@ class SinglePost extends PureComponent {
   }
 }
 
-export default SinglePost;
+const mapStateToProps = (state, ownProps) => {
+  return {
+    entities: state.entities,
+    currentPost: state.blog.posts.currentPost,
+  };
+};
+
+export default connect(mapStateToProps, { fetchPostIfNeeded })(SinglePost);

@@ -1,1 +1,1 @@
-export {default} from './MediaForm';
+export { default } from './MediaForm';

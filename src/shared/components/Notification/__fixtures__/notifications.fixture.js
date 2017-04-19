@@ -27,4 +27,4 @@ const fakeNotif = {
 };
 
 export default fakeNotifs;
-export {fakeNotif};
+export { fakeNotif };

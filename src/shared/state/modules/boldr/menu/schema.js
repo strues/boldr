@@ -1,12 +1,12 @@
-import {normalize, schema} from 'normalizr';
+import { normalize, schema } from 'normalizr';
 
-const detail = new schema.Entity('details', {idAttribute: 'id'});
+const detail = new schema.Entity('details', { idAttribute: 'id' });
 const menu = new schema.Entity(
   'menus',
   {
     details: [detail],
   },
-  {idAttribute: 'id'},
+  { idAttribute: 'id' },
 );
 
-export {detail, menu};
+export { detail, menu };

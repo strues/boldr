@@ -1,6 +1,5 @@
 /* @flow */
-// $FlowIssue
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames/bind';
 import DropdownList from '../DropdownList';
 import styles from './dropdown.scss';
@@ -19,7 +18,7 @@ class Dropdown extends Component {
   };
   props: Props;
   render() {
-    const {data, closeDropdowns, open} = this.props;
+    const { data, closeDropdowns, open } = this.props;
 
     return (
       <div

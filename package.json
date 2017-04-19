@@ -54,7 +54,7 @@
     "dev": "better-npm-run dev",
     "flow:defs": "flow-typed install --overwrite",
     "flow": "babel-node internal/scripts/flow",
-    "format": "prettier-eslint --write \"src/**/*.js\"",
+    "format": "prettier --single-quote=true --jsx-bracket-same-line=false --trailing-comma=all --write \"src/**/*.js\"",
     "lint": "eslint src",
     "nuke": "rimraf .happypack && rimraf boldrCMS && rimraf node_modules/.cache",
     "precommit": "lint-staged",

@@ -1,1 +1,1 @@
-export {default} from './SiteDescription';
+export { default } from './SiteDescription';

@@ -1,4 +1,4 @@
-import {schema} from 'normalizr';
+import { schema } from 'normalizr';
 
 const userProcessStrategy = (value, parent, key) => {
   switch (key) {
@@ -13,7 +13,7 @@ const userProcessStrategy = (value, parent, key) => {
         comments: [parent.id],
       };
     default:
-      return {...value};
+      return { ...value };
   }
 };
 
@@ -38,4 +38,4 @@ const user = new schema.Entity(
 
 const arrayOfUsers = [user];
 
-export {user, arrayOfUsers};
+export { user, arrayOfUsers };

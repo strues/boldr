@@ -1,4 +1,4 @@
-import React, {Component, PropTypes} from 'react';
+import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames/bind';
 import NavLink from 'react-router-dom/NavLink';
 import Dropdown from '../Dropdown';
@@ -26,8 +26,8 @@ class Detail extends Component {
   };
 
   handleDropdown = e => {
-    const {openDropdown} = this.state;
-    const {mobile} = this.props;
+    const { openDropdown } = this.state;
+    const { mobile } = this.props;
     const isMobile = mobile;
     const shouldOpenDropdown = ['mouseenter', 'focus'].indexOf(e.type) > -1;
 
@@ -35,7 +35,7 @@ class Detail extends Component {
       return;
     }
 
-    this.setState({openDropdown: shouldOpenDropdown});
+    this.setState({ openDropdown: shouldOpenDropdown });
   };
 
   closeItemDropdown = () => {
@@ -43,7 +43,7 @@ class Detail extends Component {
     const isDropdownOpen = this.state.openDropdown;
 
     if (isDesktop && isDropdownOpen) {
-      this.setState({openDropdown: false});
+      this.setState({ openDropdown: false });
     }
   };
 
@@ -53,7 +53,7 @@ class Detail extends Component {
   };
 
   render() {
-    const {detail, hasDropdown, mobile} = this.props;
+    const { detail, hasDropdown, mobile } = this.props;
 
     const linkContent = (
       <DetailContent
@@ -108,7 +108,7 @@ class Detail extends Component {
 
 export default Detail;
 
-const DetailContent = ({name, children}) => (
+const DetailContent = ({ name, children }) => (
   <span>
     <span className={cx('boldr-menudetail__text')}>{name}</span>
     {children

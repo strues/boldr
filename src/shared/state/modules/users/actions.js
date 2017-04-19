@@ -1,8 +1,8 @@
-import {push} from 'react-router-redux';
+import { push } from 'react-router-redux';
 import api from '../../../core/api';
-import {setToken, removeToken} from '../../../core/authentication/token';
+import { setToken, removeToken } from '../../../core/authentication/token';
 import * as notif from '../../../core/constants';
-import {notificationSend} from '../notifications/notifications';
+import { notificationSend } from '../notifications/notifications';
 import * as t from '../actionTypes';
 
 const API_PREFIX = '/api/v1';
@@ -18,7 +18,7 @@ export function forgotPassword(email) {
       type: t.FORGOT_PASSWORD_REQUEST,
     });
     return api
-      .post(`${API_PREFIX}/tokens/forgot-password`, {data: email})
+      .post(`${API_PREFIX}/tokens/forgot-password`, { data: email })
       .then(res => {
         dispatch({
           type: t.FORGOT_PASSWORD_SUCCESS,
@@ -172,7 +172,7 @@ export function editProfile(userData) {
 }
 
 const beginUpdateProfile = () => {
-  return {type: t.EDIT_PROFILE_REQUEST};
+  return { type: t.EDIT_PROFILE_REQUEST };
 };
 
 const doneUpdateProfile = res => {

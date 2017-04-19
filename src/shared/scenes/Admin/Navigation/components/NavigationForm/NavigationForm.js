@@ -1,9 +1,9 @@
 /* eslint-disable import/no-mutable-exports */
 import React from 'react';
 import styled from 'styled-components';
-import {Field, reduxForm, formValueSelector, FieldArray} from 'redux-form';
-import {connect} from 'react-redux';
-import {SelectField, Button, InputField} from 'boldr-ui';
+import { Field, reduxForm, formValueSelector, FieldArray } from 'redux-form';
+import { connect } from 'react-redux';
+import { SelectField, Button, InputField } from 'boldr-ui';
 
 type Props = {
   handleSubmit?: Function,
@@ -41,7 +41,7 @@ const renderMenuDetails = (props: Props) => (
     {props.fields.map(items => (
       <DetailsListItem key={items.id}>
         <Button
-          style={{float: 'right'}}
+          style={{ float: 'right' }}
           icon
           onClick={() => fields.remove(index)}
         >
@@ -75,7 +75,7 @@ const renderMenuDetails = (props: Props) => (
 );
 let NavigationForm = (props: Props) => {
   // eslint-disable-line
-  const {handleSubmit, reset, hasDropdownValue} = props;
+  const { handleSubmit, reset, hasDropdownValue } = props;
   const opts = [
     {
       itemValue: true,
@@ -86,7 +86,7 @@ let NavigationForm = (props: Props) => {
       label: 'No',
     },
   ];
-  const renderDropSelector = ({input}) => (
+  const renderDropSelector = ({ input }) => (
     <div>
       <SelectField
         {...input}
@@ -131,7 +131,7 @@ let NavigationForm = (props: Props) => {
         label="Icon"
       />
       <label htmlFor="menuType">What type of menu item?</label><br />
-      <label htmlFor="single" style={{marginRight: '10px'}}>
+      <label htmlFor="single" style={{ marginRight: '10px' }}>
         <Field
           id="draft"
           name="has_dropdown"

@@ -6,4 +6,4 @@ import MainHeader from './Header';
 import Widget from './Widget';
 import KeyVisual from './KeyVisual';
 
-export {App, Html, KeyVisual, Notifications, MainHeader, Widget};
+export { App, Html, KeyVisual, Notifications, MainHeader, Widget };

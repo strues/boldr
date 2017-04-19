@@ -25,4 +25,4 @@ const emailValidator = value =>
     : undefined);
 
 export default validate;
-export {requiredValidator, emailValidator};
+export { requiredValidator, emailValidator };

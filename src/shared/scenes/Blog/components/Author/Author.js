@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import classnames from 'classnames';
 import Link from 'react-router-dom/Link';
-import {Avatar, Heading, Col, Social, StyleClasses} from 'boldr-ui';
+import { Avatar, Heading, Col, Social, StyleClasses } from 'boldr-ui';
 
 const BASE_ELEMENT = StyleClasses.POST_SIDEBAR_AUTHOR;
 

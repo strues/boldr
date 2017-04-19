@@ -1,7 +1,7 @@
 import React from 'react';
-import {shallow, mount} from 'enzyme';
-import {shallowToJson} from 'enzyme-to-json';
-import {Heading} from 'boldr-ui';
+import { shallow, mount } from 'enzyme';
+import { shallowToJson } from 'enzyme-to-json';
+import { Heading } from 'boldr-ui';
 import Media from './Media';
 
 describe('<Media />', () => {

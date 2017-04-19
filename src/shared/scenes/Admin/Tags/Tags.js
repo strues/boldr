@@ -1,7 +1,7 @@
 /* @flow */
-import React, {Component} from 'react';
-import {push} from 'react-router-redux';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { push } from 'react-router-redux';
+import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import {
   MenuButton,

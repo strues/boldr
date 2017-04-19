@@ -1,7 +1,7 @@
 /* @flow */
 /* eslint-disable react/prop-types, react/jsx-no-bind */
 import React from 'react';
-import {TableHeader, TableRow, TableColumn} from 'boldr-ui';
+import { TableHeader, TableRow, TableColumn } from 'boldr-ui';
 import uuid from 'uuid';
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
   sort: () => void,
 };
 const PostTableHeader = (props: Props) => {
-  const {titleSorted, createdAtSorted, sort} = props;
+  const { titleSorted, createdAtSorted, sort } = props;
   return (
     <TableHeader>
       <TableRow>

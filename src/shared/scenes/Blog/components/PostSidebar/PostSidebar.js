@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import classnames from 'classnames';
-import {Heading, Col, StyleClasses, Paper} from 'boldr-ui';
+import { Heading, Col, StyleClasses, Paper } from 'boldr-ui';
 
 import Author from '../Author';
 import SidebarTags from '../SidebarTags';

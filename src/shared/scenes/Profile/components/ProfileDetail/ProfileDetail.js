@@ -2,9 +2,9 @@
 import React from 'react';
 import styled from 'styled-components';
 import classnames from 'classnames';
-import {StyleClasses} from 'boldr-ui';
+import { StyleClasses } from 'boldr-ui';
 
-import type {ReactElement} from '../../../../types/react';
+import type { ReactElement } from '../../../../types/react';
 
 const DetailLabel = styled.div`
   font-size: 1.4em;

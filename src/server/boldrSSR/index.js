@@ -1,11 +1,11 @@
 /* @flow */
 import React from 'react';
-import type {$Response, $Request, NextFunction} from 'express';
-import {renderToString, renderToStaticMarkup} from 'react-dom/server';
-import {Provider} from 'react-redux';
+import type { $Response, $Request, NextFunction } from 'express';
+import { renderToString, renderToStaticMarkup } from 'react-dom/server';
+import { Provider } from 'react-redux';
 import createHistory from 'history/createMemoryHistory';
-import {StaticRouter} from 'react-router-dom';
-import {matchRoutes} from 'react-router-config';
+import { StaticRouter } from 'react-router-dom';
+import { matchRoutes } from 'react-router-config';
 import styleSheet from 'styled-components/lib/models/StyleSheet';
 import Helmet from 'react-helmet';
 
@@ -35,9 +35,9 @@ function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
     throw new Error('A "nonce" value has not been attached to the response');
   }
 
-  const {nonce} = res.locals;
+  const { nonce } = res.locals;
 
-  global.navigator = {userAgent: req.headers['user-agent']};
+  global.navigator = { userAgent: req.headers['user-agent'] };
 
   const createStore = req => configureStore({});
 
@@ -48,7 +48,7 @@ function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
   // Load data on server-side
   const loadBranchData = async () => {
     const branch = await matchRoutes(routes, req.url);
-    const promises = branch.map(({route, match}) => {
+    const promises = branch.map(({ route, match }) => {
       // Dispatch the action(s) through the loadData method of "./routes.js"
       if (route.loadData) {
         return route.loadData(store.dispatch, match.params);

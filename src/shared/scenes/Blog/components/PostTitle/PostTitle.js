@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 
-const PostTitle = (props: {title: string, classname: ?string}) => {
+const PostTitle = (props: { title: string, classname: ?string }) => {
   let classN = 'boldr-post__title';
   if (props.classname) {
     classN = `${props.classname} boldr-post__title`;

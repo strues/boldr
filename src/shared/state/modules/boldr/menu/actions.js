@@ -1,9 +1,9 @@
-import {normalize, schema} from 'normalizr';
+import { normalize, schema } from 'normalizr';
 import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
-import {notificationSend} from '../../notifications/notifications';
+import { notificationSend } from '../../notifications/notifications';
 import * as t from '../../actionTypes';
-import {detail, menu} from './schema';
+import { detail, menu } from './schema';
 
 const API_PREFIX = '/api/v1';
 /**
@@ -30,7 +30,7 @@ export const fetchMenusIfNeeded = (): ThunkAction => (
 };
 
 export const fetchMenus = (axios: any): ThunkAction => (dispatch: Dispatch) => {
-  dispatch({type: t.GET_MAIN_MENU_REQUEST});
+  dispatch({ type: t.GET_MAIN_MENU_REQUEST });
 
   return api
     .get(`${API_PREFIX}/menus/1`)

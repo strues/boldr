@@ -1,3 +1,3 @@
-import {getToken, parseJWT, setToken, removeToken} from './token';
+import { getToken, parseJWT, setToken, removeToken } from './token';
 
-export {getToken, parseJWT, setToken, removeToken};
+export { getToken, parseJWT, setToken, removeToken };

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 const inline = {
   zIndex: '99999',
@@ -63,7 +63,7 @@ class Notification extends Component {
   }
   props: Props;
   render() {
-    const {kind, actionLabel} = this.props;
+    const { kind, actionLabel } = this.props;
     return (
       <div style={inline} className="boldr-notification">
         <div className="boldr-notification__icon" />

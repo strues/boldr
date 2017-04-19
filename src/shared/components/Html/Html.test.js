@@ -1,4 +1,4 @@
-import {shallow} from 'enzyme';
+import { shallow } from 'enzyme';
 import React from 'react';
 
 import Html from './Html';
@@ -6,10 +6,10 @@ import Html from './Html';
 describe('<Html />', () => {
   it('should render a valid html document', () => {
     const head = {
-      htmlAttributes: {toComponent: () => null},
-      title: {toComponent: () => null},
-      meta: {toComponent: () => null},
-      link: {toComponent: () => null},
+      htmlAttributes: { toComponent: () => null },
+      title: { toComponent: () => null },
+      meta: { toComponent: () => null },
+      link: { toComponent: () => null },
     };
 
     const renderedComponent = shallow(<Html appBodyString={'<div>hi</div>'} />);

@@ -1,6 +1,6 @@
 /* flow */
 import React from 'react';
-import {Divider, Paper, Col, Heading, Icon} from 'boldr-ui';
+import { Divider, Paper, Col, Heading, Icon } from 'boldr-ui';
 import PostImage from '../PostImage';
 import PostTitle from '../PostTitle';
 import PostDate from '../PostDate';

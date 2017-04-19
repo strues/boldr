@@ -1,1 +1,1 @@
-export {default} from './TaggedPost';
+export { default } from './TaggedPost';

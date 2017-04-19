@@ -1,7 +1,7 @@
 import React from 'react';
-import {shallow} from 'enzyme';
-import {shallowToJson} from 'enzyme-to-json';
-import {Notifications} from './Notifications';
+import { shallow } from 'enzyme';
+import { shallowToJson } from 'enzyme-to-json';
+import { Notifications } from './Notifications';
 import fakeNotifs from './__fixtures__/notifications.fixture';
 
 describe('<Notifications />', () => {

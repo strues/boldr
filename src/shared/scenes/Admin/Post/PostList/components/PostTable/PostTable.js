@@ -1,10 +1,10 @@
 /* @flow */
 /* eslint-disable react/prop-types, react/jsx-no-bind */
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Link from 'react-router-dom/Link';
 import sort from 'boldr-utils/es/logic/sort';
-import {format} from 'date-fns';
+import { format } from 'date-fns';
 import {
   Button,
   FontIcon,
@@ -17,7 +17,7 @@ import {
   Avatar,
 } from 'boldr-ui';
 
-import {selectPost} from '../../../../../../state/modules/blog/posts/actions';
+import { selectPost } from '../../../../../../state/modules/blog/posts/actions';
 import PostTableHeader from './PostTableHeader';
 import PostTableBody from './PostTableBody';
 import TableControls from './TableControls';
@@ -75,7 +75,12 @@ class PostTable extends Component {
 
   props: Props;
   render() {
-    const {sortedPosts, createdAtSorted, titleSorted, sortedType} = this.state;
+    const {
+      sortedPosts,
+      createdAtSorted,
+      titleSorted,
+      sortedType,
+    } = this.state;
 
     return (
       <div>

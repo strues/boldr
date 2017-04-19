@@ -1,10 +1,10 @@
 /* @flow */
 /* eslint-disable react/prop-types, react/jsx-no-bind */
-import React, {PureComponent} from 'react';
-import {connect} from 'react-redux';
+import React, { PureComponent } from 'react';
+import { connect } from 'react-redux';
 import Link from 'react-router-dom/Link';
 import cn from 'classnames';
-import {format} from 'date-fns';
+import { format } from 'date-fns';
 import {
   Button,
   FontIcon,
@@ -17,7 +17,7 @@ import {
   Avatar,
 } from 'boldr-ui';
 
-import {selectPost} from '../../../../../../state/modules/blog/posts/actions';
+import { selectPost } from '../../../../../../state/modules/blog/posts/actions';
 
 type Props = {
   posts: Array<Post>,
@@ -43,7 +43,7 @@ class PostTableRow extends PureComponent {
 
     return (
       <TableRow key={title} {...props}>
-        <TableColumn style={{maxWidth: '125px'}}>
+        <TableColumn style={{ maxWidth: '125px' }}>
           <Avatar src={featureImage} role="presentation" />
         </TableColumn>
         <TableColumn>

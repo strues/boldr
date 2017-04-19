@@ -1,4 +1,4 @@
-import usersReducer, {STATE_KEY} from './reducer';
+import usersReducer, { STATE_KEY } from './reducer';
 
 import {
   fetchProfile,

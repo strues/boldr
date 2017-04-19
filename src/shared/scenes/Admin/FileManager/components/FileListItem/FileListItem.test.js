@@ -1,5 +1,5 @@
 import React from 'react';
-import {mount, shallow} from 'enzyme';
+import { mount, shallow } from 'enzyme';
 import fakeAttachment from '../../__fixtures__/attachment.fixture';
 import createRouterContext
   from '../../../../../../../internal/jest/createRouteContext';

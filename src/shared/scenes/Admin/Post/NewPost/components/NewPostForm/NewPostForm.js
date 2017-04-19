@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {Field, reduxForm, FieldArray} from 'redux-form';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { Field, reduxForm, FieldArray } from 'redux-form';
+import { connect } from 'react-redux';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
@@ -50,7 +50,6 @@ type Props = {
   label?: string,
 };
 
-@connect()
 class NewPostForm extends Component {
   constructor(props) {
     super();
@@ -77,14 +76,14 @@ class NewPostForm extends Component {
     this.dropzone.open();
   }
   _handleTabChange(activeTabIndex) {
-    this.setState({activeTabIndex});
+    this.setState({ activeTabIndex });
   }
   _handleSwitch = checked => {
-    this.setState({checked});
+    this.setState({ checked });
   };
   render() {
-    const {handleSubmit} = this.props;
-    const {activeTabIndex, checked} = this.state;
+    const { handleSubmit } = this.props;
+    const { activeTabIndex, checked } = this.state;
 
     return (
       <NewPost>
@@ -153,7 +152,8 @@ class NewPostForm extends Component {
                 />
                 <Button
                   icon
-                  tooltipLabel="The feature image will be used if a background image isnt uploaded."
+                  tooltipLabel="The feature image will
+                  be used if a background image isnt uploaded."
                 >
                   help
                 </Button>
@@ -190,7 +190,7 @@ class NewPostForm extends Component {
 
                     <FormGroup>
                       <Heading size={5}>Status:</Heading>
-                      <label style={{marginRight: '10px'}} htmlFor="draft">
+                      <label style={{ marginRight: '10px' }} htmlFor="draft">
                         <Field
                           id="draft"
                           name="published"
@@ -225,7 +225,7 @@ class NewPostForm extends Component {
     );
   }
 }
-
+NewPostForm = connect()(NewPostForm);
 export default reduxForm({
   form: 'newPostForm',
 })(NewPostForm);

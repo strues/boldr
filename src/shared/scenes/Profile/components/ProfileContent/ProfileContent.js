@@ -44,7 +44,7 @@ type Props = {
 };
 
 const ProfileContent = (props: Props) => {
-  const {profile} = props;
+  const { profile } = props;
 
   const editButtons = (
     <EditWrapper>

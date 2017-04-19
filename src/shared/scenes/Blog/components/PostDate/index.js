@@ -1,1 +1,1 @@
-export {default} from './PostDate';
+export { default } from './PostDate';

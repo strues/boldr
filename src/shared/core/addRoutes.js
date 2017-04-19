@@ -9,8 +9,8 @@ const checkAuth = (store, route, props) => {
     return <route.component {...props} route={route} />;
   }
 
-  const {isAuthenticated} = store.getState().auth;
-  const {required, redirect, status} = route.auth;
+  const { isAuthenticated } = store.getState().auth;
+  const { required, redirect, status } = route.auth;
 
   const isRedirect =
     (required && !isAuthenticated) || (!required && isAuthenticated);

@@ -1,8 +1,8 @@
 import React from 'react';
-import {createStore} from 'redux';
-import {shallow} from 'enzyme';
-import {shallowToJson} from 'enzyme-to-json';
-import {PostCard} from './PostCard';
+import { createStore } from 'redux';
+import { shallow } from 'enzyme';
+import { shallowToJson } from 'enzyme-to-json';
+import { PostCard } from './PostCard';
 
 describe('<PostCard />', () => {
   it('renders <PostCard /> without breaking', () => {

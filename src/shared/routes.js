@@ -1,7 +1,7 @@
 /* eslint-disable */
 import Loadable from 'react-loadable';
-import {Loader} from 'boldr-ui';
-import type {Dispatch} from './types/redux';
+import { Loader } from 'boldr-ui';
+import type { Dispatch } from './types/redux';
 
 import App from './components/App';
 import Home from './pages/Home';
@@ -37,16 +37,16 @@ import DashboardContainer from './scenes/Admin/Dashboard/DashboardContainer';
 
 // Async data loading actions
 
-import {fetchSettingsIfNeeded} from './state/modules/boldr/settings';
-import {fetchMembersIfNeeded} from './state/modules/admin/members';
-import {fetchAttachmentsIfNeeded} from './state/modules/attachments/actions';
-import {fetchMediaIfNeeded} from './state/modules/media/actions';
-import {fetchProfileIfNeeded} from './state/modules/users';
+import { fetchSettingsIfNeeded } from './state/modules/boldr/settings';
+import { fetchMembersIfNeeded } from './state/modules/admin/members';
+import { fetchAttachmentsIfNeeded } from './state/modules/attachments/actions';
+import { fetchMediaIfNeeded } from './state/modules/media/actions';
+import { fetchProfileIfNeeded } from './state/modules/users';
 import {
   fetchStatsIfNeeded,
   fetchActivityIfNeeded,
 } from './state/modules/admin/dashboard/actions';
-import {fetchMenusIfNeeded} from './state/modules/boldr/menu/actions';
+import { fetchMenusIfNeeded } from './state/modules/boldr/menu/actions';
 import {
   fetchPostsIfNeeded,
   fetchPostIfNeeded,
@@ -56,7 +56,7 @@ import {
   fetchTagPostsIfNeeded,
 } from './state/modules/blog/tags/actions';
 
-function LoadingComponent({error}) {
+function LoadingComponent({ error }) {
   if (error) {
     console.log(error);
     return <p>Error: {error}</p>;
@@ -64,7 +64,6 @@ function LoadingComponent({error}) {
     return <Loader />;
   }
 }
-
 const PostListContainer = Loadable({
   loader: () => import('./scenes/Admin/Post/PostList/PostListContainer'),
   LoadingComponent,
@@ -77,7 +76,6 @@ const MediaContainer = Loadable({
   loader: () => import('./scenes/Admin/Media/MediaContainer'),
   LoadingComponent,
 });
-
 export default [
   {
     component: App,

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 
-import {readFile} from 'fs';
-import {resolve as pathResolve} from 'path';
+import { readFile } from 'fs';
+import { resolve as pathResolve } from 'path';
 import appRootDir from 'app-root-dir';
 
 /**
@@ -15,7 +15,7 @@ export default function offlinePageMiddleware(req, res, next) {
   if (typeof res.locals.nonce !== 'string') {
     throw new Error('A "nonce" value has not been attached to the response');
   }
-  const {nonce} = res.locals;
+  const { nonce } = res.locals;
   readFile(
     pathResolve(appRootDir.get(), './boldrCMS/client', 'offline.html'),
     'utf-8',

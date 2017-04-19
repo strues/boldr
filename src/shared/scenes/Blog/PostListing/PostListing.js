@@ -1,9 +1,9 @@
 /* @flow */
 import React from 'react';
 import styled from 'styled-components';
-import {Grid, Row, Col, Loader, FontIcon, Button} from 'boldr-ui';
+import { Grid, Row, Col, Loader, FontIcon, Button } from 'boldr-ui';
 
-import {FeaturedPost, PostCard} from '../components';
+import { FeaturedPost, PostCard } from '../components';
 
 type Props = {
   features: Array<Post>,

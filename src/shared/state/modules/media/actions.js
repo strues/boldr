@@ -1,12 +1,12 @@
-import {push} from 'react-router-redux';
-import {normalize, arrayOf, schema} from 'normalizr';
+import { push } from 'react-router-redux';
+import { normalize, arrayOf, schema } from 'normalizr';
 import api from '../../../core/api';
 
 import * as notif from '../../../core/constants';
-import {notificationSend} from '../notifications/notifications';
+import { notificationSend } from '../notifications/notifications';
 import * as t from '../actionTypes';
-import {editProfile} from '../users/actions';
-import {media as mediaSchema, arrayOfMedia} from './schema';
+import { editProfile } from '../users/actions';
+import { media as mediaSchema, arrayOfMedia } from './schema';
 
 const API_PREFIX = '/api/v1';
 
@@ -34,7 +34,7 @@ export const DELETE_MEDIA_FAILURE = '@boldr/media/DELETE_MEDIA_FAILURE';
   *****************************************************************/
 
 export const fetchMedia = (axios: any): ThunkAction => (dispatch: Dispatch) => {
-  dispatch({type: FETCH_MEDIAS_REQUEST});
+  dispatch({ type: FETCH_MEDIAS_REQUEST });
 
   return axios
     .get(`${API_PREFIX}/media`)
@@ -201,7 +201,7 @@ export function editMedia(mediaData) {
   };
 }
 const editMediaReq = () => {
-  return {type: EDIT_MEDIA_REQUEST};
+  return { type: EDIT_MEDIA_REQUEST };
 };
 const editMediaSuccess = normalizedMedia => {
   return {

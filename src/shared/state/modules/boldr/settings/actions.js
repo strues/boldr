@@ -1,10 +1,10 @@
-import {normalize, arrayOf} from 'normalizr';
-import {push} from 'react-router-redux';
+import { normalize, arrayOf } from 'normalizr';
+import { push } from 'react-router-redux';
 import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
-import {notificationSend} from '../../notifications/notifications';
+import { notificationSend } from '../../notifications/notifications';
 import * as t from '../../actionTypes';
-import {setting as settingSchema, arrayOfSetting} from './schema';
+import { setting as settingSchema, arrayOfSetting } from './schema';
 
 const API_PREFIX = '/api/v1';
 /**
@@ -42,7 +42,7 @@ export const fetchSettingsIfNeeded = (): ThunkAction => (
 export const fetchSettings = (axios: any): ThunkAction => (
   dispatch: Dispatch,
 ) => {
-  dispatch({type: t.FETCH_SETTINGS_REQUEST});
+  dispatch({ type: t.FETCH_SETTINGS_REQUEST });
 
   return api
     .get(`${API_PREFIX}/settings`)
