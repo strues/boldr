@@ -1,10 +1,10 @@
 /* @flow */
-// $FlowIssue
 import React, { Component } from 'react';
-import { Button } from 'boldr-ui';
+import { Button, Grid, Row, Col } from 'boldr-ui';
 
 import classNames from 'classnames/bind';
 import cxN from 'classnames';
+
 import Link from 'react-router-dom/Link';
 import type { ReactChildren } from '../../../types/react';
 
@@ -30,6 +30,7 @@ type Props = {
   handleLogoClick: () => void,
   handleLogoutClick: () => void,
   handleDashClick: () => void,
+  dropdownContent: any,
 };
 
 type State = {
@@ -163,52 +164,56 @@ class MainHeader extends Component {
         })}
         onKeyDown={this.handleKeyDown}
       >
-        <div
-          className={cx('boldr-mainheader__menu', {
-            'boldr-mainheader__dropdown-open': navbarDropdownIsOpen,
-          })}
-        >
-          <div className="grid">
-            <Head
-              toggleDropdownHandler={this.navbarDropdownHandler}
-              dropdownOpen={navbarDropdownIsOpen}
-              theme={theme}
-              siteName="Boldr"
-              closeHeaderDropdown={this.closeDropdownOnButtonClick()}
-            />
-            <nav
-              className={cx('boldr-mainheader__collapse', {
-                'boldr-mainheader__dropdown-open': navbarDropdownIsOpen,
-              })}
-              ref={_ref => {
-                this.dropdownContent = _ref;
-              }}
-              aria-label="Main menu"
-            >
-              <ul className={cx('boldr-mainheader__nav')} role="menubar">
-                {this.props.menu.map(detail => (
-                  <Detail
-                    key={detail.uuid}
-                    detail={detail}
-                    theme="theme-boldr"
-                    hasDropdown={detail.has_dropdown}
-                    closeHeaderDropdown={this.closeDropdownOnButtonClick()}
-                    moble={mobileState}
-                  />
-                ))}
-              </ul>
-            </nav>
-            <div
-              className={cxN(
-                cx('buttons-group', {
+        <Grid>
+          <Row>
+            <Col xs={12}>
+              <div
+                className={cx('boldr-mainheader__menu', {
                   'boldr-mainheader__dropdown-open': navbarDropdownIsOpen,
-                }),
-              )}
-            >
-              {actions}
-            </div>
-          </div>
-        </div>
+                })}
+              >
+                <Head
+                  toggleDropdownHandler={this.navbarDropdownHandler}
+                  dropdownOpen={navbarDropdownIsOpen}
+                  theme={theme}
+                  siteName="Boldr"
+                  closeHeaderDropdown={this.closeDropdownOnButtonClick()}
+                />
+                <nav
+                  className={cx('boldr-mainheader__collapse', {
+                    'boldr-mainheader__dropdown-open': navbarDropdownIsOpen,
+                  })}
+                  ref={_ref => {
+                    (this: any).dropdownContent = _ref;
+                  }}
+                  aria-label="Main menu"
+                >
+                  <ul className={cx('boldr-mainheader__nav')} role="menubar">
+                    {this.props.menu.map(detail => (
+                      <Detail
+                        key={detail.uuid}
+                        detail={detail}
+                        theme="theme-boldr"
+                        hasDropdown={detail.has_dropdown}
+                        closeHeaderDropdown={this.closeDropdownOnButtonClick()}
+                        moble={mobileState}
+                      />
+                    ))}
+                  </ul>
+                </nav>
+                <div
+                  className={cxN(
+                    cx('boldrui-header-menu__footer', {
+                      'boldr-mainheader__dropdown-open': navbarDropdownIsOpen,
+                    }),
+                  )}
+                >
+                  {actions}
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </Grid>
       </header>
     );
   }

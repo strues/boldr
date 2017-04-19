@@ -35,19 +35,17 @@ checkAuth.defaultProps = {
 };
 
 const RouteManager = (props, context) => (
-  <div className="boldr">
-    <Switch>
-      {props.routes.map(route => (
-        <Route
-          key={uuid.v4()}
-          path={route.path}
-          render={props => checkAuth(context.store, route, props)}
-          exact={route.exact}
-          strict={route.strict}
-        />
-      ))}
-    </Switch>
-  </div>
+  <Switch>
+    {props.routes.map(route => (
+      <Route
+        key={uuid.v4()}
+        path={route.path}
+        render={props => checkAuth(context.store, route, props)}
+        exact={route.exact}
+        strict={route.strict}
+      />
+    ))}
+  </Switch>
 );
 
 RouteManager.propTypes = {

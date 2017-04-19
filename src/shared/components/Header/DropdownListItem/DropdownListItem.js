@@ -1,5 +1,5 @@
 /* @flow */
-// $FlowIssue
+
 import React, { Component } from 'react';
 import classNames from 'classnames/bind';
 import NavLink from 'react-router-dom/NavLink';

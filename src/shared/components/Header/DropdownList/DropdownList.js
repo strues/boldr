@@ -14,7 +14,7 @@ const cx = classNames.bind(styles);
 
 const DropdownList = (props: Props) => (
   <div className={cx('boldr-menu__dropdown-list')}>
-    <ul role="menubar" aria-hidden="false">
+    <ul className="boldrui-header__dropdown" role="menubar" aria-hidden="false">
       {props.data.map(item => (
         <DropdownListItem
           key={item.id}
