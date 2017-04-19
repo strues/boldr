@@ -52,7 +52,7 @@ class App extends Component {
     const { className, route } = this.props;
     const classes = classnames('boldr', BASE_ELEMENT, className);
     return (
-      <div>
+      <div className={classes}>
         <Helmet>
           <html lang="en" />
           <title>Boldr</title>
@@ -168,10 +168,8 @@ class App extends Component {
         </Helmet>
         <ThemeProvider theme={theme}>
           <div className={classes}>
-
             {renderRoutes(route.routes)}
             <Notifications />
-
           </div>
         </ThemeProvider>
       </div>
