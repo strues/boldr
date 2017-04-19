@@ -1,20 +1,20 @@
 /* @flow */
 /* eslint-disable global-require */
 import React from 'react';
-import {render, unmountComponentAtNode} from 'react-dom';
-import {Provider} from 'react-redux';
+import { render, unmountComponentAtNode } from 'react-dom';
+import { Provider } from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
 import ConnectedRouter from 'react-router-redux/ConnectedRouter';
 import WebFontLoader from 'webfontloader';
-import {renderRoutes} from 'react-router-config';
+import { renderRoutes } from 'react-router-config';
 
 import routes from '../shared/routes';
 import configureStore from '../shared/state/store';
-import {checkAuth} from '../shared/state/modules/auth/actions';
-import {getToken} from '../shared/core/authentication/token';
+import { checkAuth } from '../shared/state/modules/auth/actions';
+import { getToken } from '../shared/core/authentication/token';
 
 WebFontLoader.load({
-  google: {families: ['Roboto:200,400,600', 'Material Icons']},
+  google: { families: ['Roboto:200,400,600', 'Material Icons'] },
   custom: {
     families: ['FontAwesome'],
     urls: [
@@ -23,12 +23,12 @@ WebFontLoader.load({
   },
 });
 
-const domNode = document.querySelector('#app');
+const domNode = document.getElementById('app');
 const history = createHistory();
 const preloadedState = window.__PRELOADED_STATE__;
 const store = configureStore(preloadedState, history);
 
-const {dispatch} = store;
+const { dispatch } = store;
 
 const token = getToken();
 if (token) {

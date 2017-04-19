@@ -19,6 +19,14 @@ export const parseJWT = token => {
     const header = JSON.parse(atob(headerRaw));
     const payload = JSON.parse(atob(payloadRaw));
     const signature = atob(signatureRaw);
+    const expiredToken = isTokenExpired(payload.exp);
+
+    // If the token is expired, remove it.
+    // this forces the user to login again.
+    if (expiredToken === true) {
+      Storage.remove('jwt');
+      return null;
+    }
     return {
       header,
       payload,
@@ -29,6 +37,13 @@ export const parseJWT = token => {
     return null;
   }
 };
+
+function isTokenExpired(exp) {
+  const date = new Date(0);
+  const expirationDate = date.setUTCSeconds(exp);
+
+  return expirationDate < new Date();
+}
 
 export const setToken = token => {
   return Storage.set('jwt', token);

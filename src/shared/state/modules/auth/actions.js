@@ -1,8 +1,12 @@
-import {push} from 'react-router-redux';
+import { push } from 'react-router-redux';
 import api from '../../../core/api';
-import {setToken, removeToken} from '../../../core/authentication/token';
+import {
+  setToken,
+  removeToken,
+  parseJWT,
+} from '../../../core/authentication/token';
 import * as notif from '../../../core/constants';
-import {notificationSend} from '../notifications/notifications';
+import { notificationSend } from '../notifications/notifications';
 import * as t from '../actionTypes';
 
 /**
@@ -28,10 +32,10 @@ export function doSignup(data) {
   };
 }
 
-const beginSignUp = () => ({type: t.SIGNUP_USER_REQUEST});
+const beginSignUp = () => ({ type: t.SIGNUP_USER_REQUEST });
 
 // Signup Success
-const signUpSuccess = () => ({type: t.SIGNUP_USER_SUCCESS});
+const signUpSuccess = () => ({ type: t.SIGNUP_USER_SUCCESS });
 
 // Signup Error
 const signUpError = err => {
@@ -70,7 +74,7 @@ export function doLogin(data) {
       });
   };
 }
-const beginLogin = () => ({type: t.LOGIN_REQUEST});
+const beginLogin = () => ({ type: t.LOGIN_REQUEST });
 
 function loginSuccess(res) {
   return {
@@ -124,7 +128,7 @@ export const checkAuth = token => {
 };
 
 function checkAuthRequest() {
-  return {type: t.CHECK_AUTH_REQUEST};
+  return { type: t.CHECK_AUTH_REQUEST };
 }
 
 function checkAuthSuccess(user, token) {

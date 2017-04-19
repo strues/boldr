@@ -1,5 +1,5 @@
 /* @flow */
-import {normalize, arrayOf, schema} from 'normalizr';
+import { normalize, arrayOf, schema } from 'normalizr';
 import merge from 'lodash/merge';
 import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
@@ -14,10 +14,10 @@ import type {
   Reducer,
 } from '../../../../types/redux';
 
-import {post as postSchema, arrayOfPost} from './schema';
+import { post as postSchema, arrayOfPost } from './schema';
 
 export function togglePostLayoutView() {
-  return {type: t.TOGGLE_POST_LAYOUT};
+  return { type: t.TOGGLE_POST_LAYOUT };
 }
 
 /**
@@ -55,7 +55,7 @@ export const fetchPostsIfNeeded = (): ThunkAction => (
  * @return {Array} Posts returned as an array of post objects.
  */
 export const fetchPosts = (axios: any): ThunkAction => (dispatch: Dispatch) => {
-  dispatch({type: t.FETCH_POSTS_REQUEST});
+  dispatch({ type: t.FETCH_POSTS_REQUEST });
 
   return axios
     .get('/api/v1/posts?include=[author,tags]')
@@ -198,7 +198,7 @@ export function createPost(data: Post) {
 }
 
 const beginCreatePost = () => {
-  return {type: t.CREATE_POST_REQUEST};
+  return { type: t.CREATE_POST_REQUEST };
 };
 
 const createPostSuccess = (normalizedData: Object) => {
@@ -280,10 +280,10 @@ export function updatePost(postData: Post) {
   };
 }
 const updatePostDetails = () => {
-  return {type: t.UPDATE_POST_REQUEST};
+  return { type: t.UPDATE_POST_REQUEST };
 };
 const updatePostSuccess = response => {
-  return {type: t.UPDATE_POST_SUCCESS};
+  return { type: t.UPDATE_POST_SUCCESS };
 };
 const errorUpdatingPost = err => {
   return {

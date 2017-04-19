@@ -1,14 +1,14 @@
 /* @flow */
 /* eslint-disable react/prop-types, react/jsx-no-bind */
 import React from 'react';
-import {TableBody} from 'boldr-ui';
+import { TableBody } from 'boldr-ui';
 import PostTableRow from './PostTableRow';
 
 type Props = {
   posts: Array<Post>,
 };
 const PostTableBody = (props: Props) => {
-  const {posts} = props;
+  const { posts } = props;
   return (
     <TableBody>
       {posts.map(post => (

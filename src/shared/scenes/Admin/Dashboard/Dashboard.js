@@ -1,12 +1,12 @@
 /* @flow */
 import React from 'react';
 import Helmet from 'react-helmet';
-import {Col, Row, Widget, Loader, StatsWidget} from 'boldr-ui';
+import { Col, Row, Widget, Loader, StatsWidget } from 'boldr-ui';
 import {
   fetchActivityIfNeeded,
   fetchStatsIfNeeded,
 } from '../../../state/modules/admin/dashboard/actions';
-import {ActivityWidget} from './components';
+import { ActivityWidget } from './components';
 
 type Props = {
   fetchActivityIfNeeded: Function,
@@ -33,7 +33,7 @@ const Dashboard = (props: Props) => {
           </Col>
         </Row>
         <Row>
-          <Col xs={12} md={12} style={{paddingTop: '25px'}}>
+          <Col xs={12} md={12} style={{ paddingTop: '25px' }}>
             <Widget name="Widget D" />
           </Col>
         </Row>

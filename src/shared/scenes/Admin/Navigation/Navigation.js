@@ -1,6 +1,6 @@
 /* @flow */
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import {
   List,
@@ -13,7 +13,7 @@ import {
   Modal,
 } from 'boldr-ui';
 
-import {showModal, hideModal} from '../../../state/modules/boldr/ui/actions';
+import { showModal, hideModal } from '../../../state/modules/boldr/ui/actions';
 import {
   updateMenuDetails,
   addMenuDetail,
@@ -40,12 +40,6 @@ type Props = {
   showModal: Function,
 };
 
-@connect(mapStateToProps, {
-  updateMenuDetails,
-  addMenuDetail,
-  showModal,
-  hideModal,
-})
 class Navigation extends Component {
   constructor() {
     super();
@@ -103,7 +97,7 @@ class Navigation extends Component {
   }
 
   render() {
-    const {mainMenu} = this.props;
+    const { mainMenu } = this.props;
     const listItems = mainMenu.details.map((item, i) => {
       return (
         <ListItem
@@ -149,4 +143,9 @@ class Navigation extends Component {
   }
 }
 
-export default Navigation;
+export default connect(mapStateToProps, {
+  updateMenuDetails,
+  addMenuDetail,
+  showModal,
+  hideModal,
+})(Navigation);

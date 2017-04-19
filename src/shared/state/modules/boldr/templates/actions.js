@@ -1,10 +1,10 @@
-import {normalize, arrayOf, schema} from 'normalizr';
-import {push} from 'react-router-redux';
+import { normalize, arrayOf, schema } from 'normalizr';
+import { push } from 'react-router-redux';
 import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
-import {notificationSend} from '../../notifications/notifications';
+import { notificationSend } from '../../notifications/notifications';
 import * as t from '../../actionTypes';
-import {template as templateSchema, arrayOfTemplate} from './schema';
+import { template as templateSchema, arrayOfTemplate } from './schema';
 /**
   * FETCH TEMPLATES
   * -------------------------
@@ -31,7 +31,7 @@ export const fetchTemplatesIfNeeded = (): ThunkAction => (
 export const fetchTemplates = (axios: any): ThunkAction => (
   dispatch: Dispatch,
 ) => {
-  dispatch({type: t.FETCH_TEMPLATES_REQUEST});
+  dispatch({ type: t.FETCH_TEMPLATES_REQUEST });
 
   return axios
     .get('/api/v1/templates')
@@ -84,7 +84,7 @@ export function fetchTemplateResource(resource) {
 }
 
 const requestTemplate = () => {
-  return {type: t.FETCH_TEMPLATE_REQUEST};
+  return { type: t.FETCH_TEMPLATE_REQUEST };
 };
 
 const receiveTemplate = res => ({

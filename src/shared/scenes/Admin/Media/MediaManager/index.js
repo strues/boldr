@@ -1,1 +1,1 @@
-export {default} from './MediaManager';
+export { default } from './MediaManagerContainer';

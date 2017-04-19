@@ -1,9 +1,11 @@
 /* @flow */
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {TextField, ExpansionPanel, Row} from 'boldr-ui';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { TextField, ExpansionPanel, Row } from 'boldr-ui';
 
-import {updateBoldrSettings} from '../../../../../state/modules/boldr/settings';
+import {
+  updateBoldrSettings,
+} from '../../../../../state/modules/boldr/settings';
 
 type Props = {
   id: Number,
@@ -20,7 +22,7 @@ type State = {
 class SiteName extends Component {
   constructor(props) {
     super(props);
-    (this: any).state = {value: this.props.value};
+    (this: any).state = { value: this.props.value };
 
     (this: any).handleChange = this.handleChange.bind(this);
     (this: any).handleSubmit = this.handleSubmit.bind(this);
@@ -28,7 +30,7 @@ class SiteName extends Component {
   state: State;
 
   handleChange(event) {
-    this.setState({value: event});
+    this.setState({ value: event });
   }
 
   handleSubmit(event) {
@@ -42,7 +44,7 @@ class SiteName extends Component {
   }
   props: Props;
   render() {
-    const {focused, columnWidths} = this.props;
+    const { focused, columnWidths } = this.props;
 
     return (
       <ExpansionPanel
@@ -56,7 +58,7 @@ class SiteName extends Component {
         <Row>
           <form onSubmit={this.handleSubmit}>
             <TextField
-              style={{width: '400px'}}
+              style={{ width: '400px' }}
               id="floatingTitle"
               label="Website name"
               placeholder={this.state.value}

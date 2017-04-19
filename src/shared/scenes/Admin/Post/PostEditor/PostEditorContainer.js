@@ -1,7 +1,7 @@
 /* @flow */
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {Loader} from 'boldr-ui';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Loader } from 'boldr-ui';
 import {
   updatePost,
   fetchPostIfNeeded,
@@ -22,7 +22,7 @@ export type Props = {
 
 class PostEditorContainer extends Component {
   componentDidMount() {
-    const {fetchPostIfNeeded, match: {params}} = this.props;
+    const { fetchPostIfNeeded, match: { params } } = this.props;
 
     fetchPostIfNeeded(params.slug);
   }
@@ -44,6 +44,6 @@ const mapStateToProps = (state, ownProps) => {
     postImage: state.attachments.postImage,
   };
 };
-export default connect(mapStateToProps, {fetchPostIfNeeded})(
+export default connect(mapStateToProps, { fetchPostIfNeeded })(
   PostEditorContainer,
 );

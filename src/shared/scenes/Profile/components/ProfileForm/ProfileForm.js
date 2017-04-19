@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
-import {Field, reduxForm} from 'redux-form';
-import {Button, InputField, FormGroup, Heading} from 'boldr-ui';
+import { Field, reduxForm } from 'redux-form';
+import { Button, InputField, FormGroup, Heading } from 'boldr-ui';
 
 type Props = {
   handleSubmit: Function,
@@ -11,7 +11,7 @@ type Props = {
 };
 
 const ProfileForm = (props: Props) => {
-  const {handleSubmit, pristine, reset, submitting} = props;
+  const { handleSubmit, pristine, reset, submitting } = props;
   return (
     <form onSubmit={handleSubmit} className="boldr-form__profile">
       <Field

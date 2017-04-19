@@ -1,13 +1,13 @@
 /* @flow */
 import '../../styles/main.scss';
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import classnames from 'classnames';
 import Helmet from 'react-helmet';
-import {connect} from 'react-redux';
-import {StyleClasses} from 'boldr-ui';
-import {ThemeProvider} from 'styled-components';
+import { connect } from 'react-redux';
+import { StyleClasses } from 'boldr-ui';
+import { ThemeProvider } from 'styled-components';
 
-import {fetchSettingsIfNeeded} from '../../state/modules/boldr/settings';
+import { fetchSettingsIfNeeded } from '../../state/modules/boldr/settings';
 import Notifications from '../../components/Notification';
 import renderRoutes from '../../core/addRoutes';
 
@@ -41,7 +41,7 @@ type Props = {
   className: string,
   dispatch: () => void,
 };
-@connect()
+
 class App extends Component {
   static displayName = 'App';
   componentDidMount() {
@@ -49,7 +49,7 @@ class App extends Component {
   }
   props: Props;
   render() {
-    const {className, route} = this.props;
+    const { className, route } = this.props;
     const classes = classnames('boldr', BASE_ELEMENT, className);
     return (
       <div>
@@ -179,4 +179,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default connect()(App);

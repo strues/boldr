@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
-import React, {Component} from 'react';
-import {Field, reduxForm} from 'redux-form';
+import React, { Component } from 'react';
+import { Field, reduxForm } from 'redux-form';
 import styled from 'styled-components';
 import {
   FontIcon,
@@ -36,7 +36,7 @@ const Wrapper = styled.section`
   background-color: #fff;
 `;
 const EditPostForm = (props: Props) => {
-  const {handleSubmit} = props;
+  const { handleSubmit } = props;
   /**
      * wraps the editor component for embedding into redux-form as
      * an input component
@@ -44,7 +44,7 @@ const EditPostForm = (props: Props) => {
      * @param  {string} label
      * @return {element} BoldrEditor
      */
-  const renderEditor = ({input, label}) => (
+  const renderEditor = ({ input, label }) => (
     <EditorField {...input} label={label} />
   );
 
@@ -91,7 +91,7 @@ const EditPostForm = (props: Props) => {
             </FormGroup>
             <FormGroup>
               <Heading size={6}>Post Status:</Heading>
-              <label htmlFor="draft" style={{marginRight: '10px'}}>
+              <label htmlFor="draft" style={{ marginRight: '10px' }}>
                 <Field
                   id="draft"
                   name="published"

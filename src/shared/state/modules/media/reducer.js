@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import addIdToArray from 'boldr-utils/es/arrays/addIdToArray';
 import removeByKey from 'boldr-utils/es/objects/removeByKey';
 import removeIdFromArray from 'boldr-utils/es/arrays/removeIdFromArray';
@@ -8,15 +8,19 @@ import {
   FETCH_MEDIAS_REQUEST,
   FETCH_MEDIAS_SUCCESS,
   FETCH_MEDIAS_FAILURE,
+  EDIT_MEDIA_REQUEST,
+  EDIT_MEDIA_SUCCESS,
+  EDIT_MEDIA_FAILURE,
   SELECT_MEDIA,
 } from './actions';
-import {getMedia} from './selectors';
+import { getMedia } from './selectors';
 
 export const STATE_KEY = 'media';
 
 const all = (state = {}, action) => {
   switch (action.type) {
     case FETCH_MEDIAS_SUCCESS:
+    case EDIT_MEDIA_SUCCESS:
       return {
         ...state,
         ...action.payload.entities.media,
@@ -30,6 +34,7 @@ const all = (state = {}, action) => {
 const ids = (state = [], action) => {
   switch (action.type) {
     case FETCH_MEDIAS_SUCCESS:
+    case EDIT_MEDIA_SUCCESS:
       return action.payload.result;
     default:
       return state;
@@ -39,9 +44,12 @@ const ids = (state = [], action) => {
 const isFetching = (state = false, action) => {
   switch (action.type) {
     case FETCH_MEDIAS_REQUEST:
+    case EDIT_MEDIA_REQUEST:
       return true;
     case FETCH_MEDIAS_SUCCESS:
     case FETCH_MEDIAS_FAILURE:
+    case EDIT_MEDIA_SUCCESS:
+    case EDIT_MEDIA_FAILURE:
       return false;
     default:
       return state;

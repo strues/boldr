@@ -1,21 +1,28 @@
 /* eslint-disable */
 import Loadable from 'react-loadable';
-import {Loader} from 'boldr-ui';
-import type {Dispatch} from './types/redux';
+import { Loader } from 'boldr-ui';
+import type { Dispatch } from './types/redux';
+
 import App from './components/App';
 import Home from './pages/Home';
 import About from './pages/About';
+import Error404 from './pages/Error404';
+// Account
 import LoginContainer from './scenes/Account/Login/LoginContainer';
 import SignupContainer from './scenes/Account/Signup/SignupContainer';
 import ForgotPassword from './scenes/Account/ForgotPassword';
 import ResetPassword from './scenes/Account/ResetPassword';
 import Verify from './scenes/Account/Verify';
+// Profile
 import ProfileContainer from './scenes/Profile/ProfileContainer';
+// Blog
 import PostListingContainer
   from './scenes/Blog/PostListing/PostListingContainer';
 import SinglePost from './scenes/Blog/SinglePost/SinglePost';
 import TagListContainer from './scenes/Blog/TagList/TagListContainer';
-import MediaManager from './scenes/Admin/Media/MediaManager';
+// Admin
+import MediaManagerContainer
+  from './scenes/Admin/Media/MediaManager/MediaManagerContainer';
 import PostEditor from './scenes/Admin/Post/PostEditor';
 import NewPostContainer from './scenes/Admin/Post/NewPost/NewPostContainer';
 import FileManagerContainer
@@ -26,18 +33,20 @@ import Members from './scenes/Admin/Members';
 import Settings from './scenes/Admin/Settings';
 import TagsContainer from './scenes/Admin/Tags/TagsContainer';
 import TaggedPost from './scenes/Admin/Tags/components/TaggedPost';
-import Error404 from './pages/Error404';
+import DashboardContainer from './scenes/Admin/Dashboard/DashboardContainer';
 
-import {fetchSettingsIfNeeded} from './state/modules/boldr/settings';
-import {fetchMembersIfNeeded} from './state/modules/admin/members';
-import {fetchAttachmentsIfNeeded} from './state/modules/attachments/actions';
-import {fetchMediaIfNeeded} from './state/modules/media/actions';
-import {fetchProfileIfNeeded} from './state/modules/users';
+// Async data loading actions
+
+import { fetchSettingsIfNeeded } from './state/modules/boldr/settings';
+import { fetchMembersIfNeeded } from './state/modules/admin/members';
+import { fetchAttachmentsIfNeeded } from './state/modules/attachments/actions';
+import { fetchMediaIfNeeded } from './state/modules/media/actions';
+import { fetchProfileIfNeeded } from './state/modules/users';
 import {
   fetchStatsIfNeeded,
   fetchActivityIfNeeded,
 } from './state/modules/admin/dashboard/actions';
-import {fetchMenusIfNeeded} from './state/modules/boldr/menu/actions';
+import { fetchMenusIfNeeded } from './state/modules/boldr/menu/actions';
 import {
   fetchPostsIfNeeded,
   fetchPostIfNeeded,
@@ -47,7 +56,7 @@ import {
   fetchTagPostsIfNeeded,
 } from './state/modules/blog/tags/actions';
 
-function LoadingComponent({error}) {
+function LoadingComponent({ error }) {
   if (error) {
     console.log(error);
     return <p>Error: {error}</p>;
@@ -55,7 +64,6 @@ function LoadingComponent({error}) {
     return <Loader />;
   }
 }
-
 const PostListContainer = Loadable({
   loader: () => import('./scenes/Admin/Post/PostList/PostListContainer'),
   LoadingComponent,
@@ -68,7 +76,6 @@ const MediaContainer = Loadable({
   loader: () => import('./scenes/Admin/Media/MediaContainer'),
   LoadingComponent,
 });
-
 export default [
   {
     component: App,
@@ -222,7 +229,7 @@ export default [
           {
             path: '/admin/media/:id',
             exact: true,
-            component: MediaManager,
+            component: MediaManagerContainer,
           },
         ],
       },

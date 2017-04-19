@@ -1,5 +1,5 @@
 /* @flow */
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Toolbar,
   Button,
@@ -15,9 +15,9 @@ import {
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import Dropzone from 'react-dropzone';
 import Helmet from 'react-helmet';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
-import {uploadFiles} from '../../../state/modules/attachments/actions';
+import { uploadFiles } from '../../../state/modules/attachments/actions';
 import FileCardView from './components/FileCardView';
 import FileListView from './components/FileListView';
 
@@ -70,25 +70,25 @@ class FileManager extends Component {
   }
 
   _handleTabChange(activeTabIndex: Number) {
-    this.setState({activeTabIndex});
+    this.setState({ activeTabIndex });
   }
   _toggleCollapse() {
-    this.setState({collapsed: !this.state.collapsed});
+    this.setState({ collapsed: !this.state.collapsed });
   }
   render() {
-    const {activeTabIndex} = this.state;
-    let {tabTwoChildren} = this.state;
+    const { activeTabIndex } = this.state;
+    let { tabTwoChildren } = this.state;
 
     if (!tabTwoChildren && activeTabIndex === 1) {
       tabTwoChildren = <CircularProgress id="loading-tab-two" key="loading" />;
     }
-    const {attachments, handleRemoveMedia, onUploadFinish, ui} = this.props;
+    const { attachments, handleRemoveMedia, onUploadFinish, ui } = this.props;
     return (
       <div>
         <Helmet title="Admin: File Manager" />
         <Toolbar
-          titleStyle={{color: '#fff'}}
-          style={{backgroundColor: '#22262d'}}
+          titleStyle={{ color: '#fff' }}
+          style={{ backgroundColor: '#22262d' }}
           title="File Manager"
           nav={null}
           actions={

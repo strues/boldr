@@ -1,5 +1,5 @@
 /* @flow */
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
 import Dropzone from 'react-dropzone';
 import classnames from 'classnames';
@@ -120,7 +120,7 @@ class Profile extends Component {
     );
   };
   render() {
-    const {profile} = this.props;
+    const { profile } = this.props;
     const classes = classnames(BASE_ELEMENT);
     const UserProfileBg = styled.div`
       width: 100%;
@@ -167,7 +167,7 @@ class Profile extends Component {
               onVisibilityToggle={this.props.handleDrawerClick}
               type={Drawer.DrawerTypes.TEMPORARY}
               header={header}
-              style={{zIndex: 100}}
+              style={{ zIndex: 100 }}
             >
               <OwnProfile profile={profile} />
             </Drawer>

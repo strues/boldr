@@ -1,9 +1,9 @@
 /* @flow */
 /* eslint-disable react/prefer-stateless-function */
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import {fetchMediaIfNeeded, getMedia} from '../../../state/modules/media';
+import { fetchMediaIfNeeded, getMedia } from '../../../state/modules/media';
 import Media from './Media';
 import VisibleMedia from './VisibleMedia';
 

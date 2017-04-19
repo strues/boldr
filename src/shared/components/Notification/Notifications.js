@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import TransitionGroup from 'react-transition-group/TransitionGroup';
 import {
   notificationDismiss,
@@ -88,5 +88,5 @@ export default connect(
   state => ({
     notifications: state.notifications,
   }),
-  {notificationDismiss},
+  { notificationDismiss },
 )(Notifications);

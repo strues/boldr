@@ -1,11 +1,12 @@
-import {normalize, arrayOf, schema} from 'normalizr';
+import { normalize, arrayOf, schema } from 'normalizr';
 import merge from 'lodash/merge';
 import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
-import {notificationSend} from '../../notifications/notifications';
+import { notificationSend } from '../../notifications/notifications';
 import * as t from '../../actionTypes';
-import {tag as tagSchema, arrayOfTag} from './schema';
+import { tag as tagSchema, arrayOfTag } from './schema';
 
+const API_PREFIX = '/api/v1';
 /**
   * FETCH TAG ACTIONS
   * -------------------------
@@ -40,10 +41,10 @@ export const fetchTagsIfNeeded = (): ThunkAction => (
  * @return {Array} Tags returned as an array of tag objects.
  */
 export const fetchTags = (axios: any): ThunkAction => (dispatch: Dispatch) => {
-  dispatch({type: t.FETCH_TAGS_REQUEST});
+  dispatch({ type: t.FETCH_TAGS_REQUEST });
 
   return axios
-    .get('/api/v1/tags?include=posts')
+    .get(`${API_PREFIX}/tags?include=posts`)
     .then(res => {
       const normalizedData = normalize(res.data, arrayOfTag);
       dispatch({
@@ -104,7 +105,7 @@ export const fetchTagPosts = (name: string, axios: any): ThunkAction => (
   });
 
   return axios
-    .get(`/api/v1/tags/${name}/posts`)
+    .get(`${API_PREFIX}/tags/${name}/posts`)
     .then(res => {
       dispatch({
         type: t.FETCH_TAGGED_POST_SUCCESS,
@@ -163,7 +164,7 @@ export function createTag(values) {
   };
   return dispatch => {
     dispatch(beginAddTag());
-    return api.post('/api/v1/tags', data).then(res => {
+    return api.post(`${API_PREFIX}/tags`, data).then(res => {
       if (!res.status === 201) {
         dispatch(addTagFailure(res));
         dispatch(notificationSend(notif.MSG_ADD_TAG_FAILURE));
@@ -206,7 +207,7 @@ export function deleteTag(id) {
       type: t.DELETE_TAG_REQUEST,
     });
     return api
-      .delete(`/api/v1/tags/${id}`)
+      .delete(`${API_PREFIX}/tags/${id}`)
       .then(res => {
         dispatch({
           type: t.DELETE_TAG_SUCCESS,

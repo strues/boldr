@@ -3,4 +3,4 @@ import TagList from './TagList';
 
 export default TagListContainer;
 
-export {TagList};
+export { TagList };

@@ -1,16 +1,16 @@
 /* @flow */
-import React, {PureComponent} from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import {push} from 'react-router-redux';
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
-import {Footer} from 'boldr-ui';
+import { push } from 'react-router-redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import { Footer } from 'boldr-ui';
 
-import {fetchMenusIfNeeded, getByLabel} from '../../state/modules/boldr/menu';
-import {logout} from '../../state/modules/auth/actions';
-import {selectMe} from '../../state/modules/users';
+import { fetchMenusIfNeeded, getByLabel } from '../../state/modules/boldr/menu';
+import { logout } from '../../state/modules/auth/actions';
+import { selectMe } from '../../state/modules/users';
 import MainHeader from '../../components/Header';
-import type {ReactElement, ReactChildren} from '../../types/react';
+import type { ReactElement, ReactChildren } from '../../types/react';
 
 type Props = {
   header: ReactElement,
@@ -52,30 +52,6 @@ const FooterWrapper = styled.div`
   margin-top: auto;
 `;
 
-const mapStateToProps = (state: Object) => {
-  return {
-    me: selectMe(state),
-    auth: state.auth,
-    menu: state.boldr.menu.main,
-    isMobile: state.boldr.ui.isMobile,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    actions: bindActionCreators(
-      {
-        logout,
-        fetchMenusIfNeeded,
-      },
-      dispatch,
-    ),
-    navigate: url => dispatch(push(url)),
-    dispatch,
-  };
-};
-
-@connect(mapStateToProps, mapDispatchToProps)
 class BaseTemplate extends PureComponent {
   static defaultProps: {
     fetchMenusIfNeeded: () => {},
@@ -123,7 +99,29 @@ class BaseTemplate extends PureComponent {
     );
   }
 }
+const mapStateToProps = (state: Object) => {
+  return {
+    me: selectMe(state),
+    auth: state.auth,
+    menu: state.boldr.menu.main,
+    isMobile: state.boldr.ui.isMobile,
+  };
+};
 
-export default BaseTemplate;
+const mapDispatchToProps = dispatch => {
+  return {
+    actions: bindActionCreators(
+      {
+        logout,
+        fetchMenusIfNeeded,
+      },
+      dispatch,
+    ),
+    navigate: url => dispatch(push(url)),
+    dispatch,
+  };
+};
 
-export {Wrapper, FooterWrapper};
+export { Wrapper, FooterWrapper };
+// $FlowIssue
+export default connect(mapStateToProps, mapDispatchToProps)(BaseTemplate);

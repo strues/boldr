@@ -1,10 +1,11 @@
-import {normalize, schema} from 'normalizr';
+import { normalize, schema } from 'normalizr';
 import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
-import {notificationSend} from '../../notifications/notifications';
+import { notificationSend } from '../../notifications/notifications';
 import * as t from '../../actionTypes';
-import {detail, menu} from './schema';
+import { detail, menu } from './schema';
 
+const API_PREFIX = '/api/v1';
 /**
   * FETCH MENUS ACTIONS
   * -------------------------
@@ -29,10 +30,10 @@ export const fetchMenusIfNeeded = (): ThunkAction => (
 };
 
 export const fetchMenus = (axios: any): ThunkAction => (dispatch: Dispatch) => {
-  dispatch({type: t.GET_MAIN_MENU_REQUEST});
+  dispatch({ type: t.GET_MAIN_MENU_REQUEST });
 
   return api
-    .get('/api/v1/menus/1')
+    .get(`${API_PREFIX}/menus/1`)
     .then(res => {
       dispatch({
         type: t.GET_MAIN_MENU_SUCCESS,
@@ -87,7 +88,7 @@ export function updateMenuDetails(data) {
   return dispatch => {
     dispatch(beginUpdateMenuDetails());
     return api
-      .put(`/api/v1/menu-details/${data.id}`, data)
+      .put(`${API_PREFIX}/menu-details/${data.id}`, data)
       .then(res => {
         dispatch(updateMenuDetailsSuccess(res));
         dispatch(notificationSend(notif.MSG_UPDATE_LINK_SUCCESS));
@@ -142,7 +143,7 @@ export function addMenuDetail(values) {
   };
   return dispatch => {
     dispatch(beginAddMenuDetail());
-    return api.post('/api/v1/menu-details', data).then(res => {
+    return api.post(`${API_PREFIX}/menu-details`, data).then(res => {
       if (!res.status === 201) {
         dispatch(addMenuDetailFailure(res));
         dispatch(notificationSend(notif.MSG_ADD_LINK_ERROR));

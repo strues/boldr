@@ -85,7 +85,7 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
-animate-components@^0.6.1:
+animate-components@^0.6.2:
   version "0.6.2"
   resolved "https://registry.yarnpkg.com/animate-components/-/animate-components-0.6.2.tgz#fe48c44e0293224d64871149fd548c81bb0bedee"
   dependencies:
@@ -1277,11 +1277,11 @@ bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.6"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.6.tgz#53344adb14617a13f6e8dd2ce28905d1c0ba3215"
 
-boldr-ui@0.2.11:
-  version "0.2.11"
-  resolved "https://registry.yarnpkg.com/boldr-ui/-/boldr-ui-0.2.11.tgz#e1483c2500761e4f7a56ebccf39761b445a4e839"
+boldr-ui@0.2.13:
+  version "0.2.13"
+  resolved "https://registry.yarnpkg.com/boldr-ui/-/boldr-ui-0.2.13.tgz#0a4c2f48f3b3b95d2a4363ed6091c2102adec58d"
   dependencies:
-    animate-components "^0.6.1"
+    animate-components "^0.6.2"
     classnames "^2.2.5"
     coolors-to-hex "^1.0.3"
     prop-types "^15.5.8"
@@ -2208,6 +2208,10 @@ debug@2.6.3, debug@^2.1.1, debug@^2.2.0, debug@^2.4.5, debug@^2.6.0, debug@^2.6.
 decamelize@^1.0.0, decamelize@^1.1.1, decamelize@^1.1.2:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/decamelize/-/decamelize-1.2.0.tgz#f6534d15148269b20352e7bee26f501f9a191290"
+
+deep-diff@0.3.4:
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/deep-diff/-/deep-diff-0.3.4.tgz#aac5c39952236abe5f037a2349060ba01b00ae48"
 
 deep-eql@^0.1.3:
   version "0.1.3"
@@ -6451,12 +6455,13 @@ react-test-renderer@^15.5.4:
     fbjs "^0.8.9"
     object-assign "^4.1.0"
 
-react-transition-group@^1.1.1:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-1.1.1.tgz#f9d0f0dff82f52574fc5ab30684add24948d0f23"
+react-transition-group@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-1.1.2.tgz#374cd778070f74b0a658045fc532edfd471ad836"
   dependencies:
     chain-function "^1.0.0"
     dom-helpers "^3.2.0"
+    prop-types "^15.5.6"
     warning "^3.0.0"
 
 react@15.5.4, react@^15.4.2:
@@ -6589,6 +6594,12 @@ redux-form@^6.6.3:
     lodash "^4.17.3"
     lodash-es "^4.17.3"
     prop-types "^15.5.6"
+
+redux-logger@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/redux-logger/-/redux-logger-3.0.1.tgz#ae8ae4c3c55ed3dd7aa31509f0856c5d3751057a"
+  dependencies:
+    deep-diff "0.3.4"
 
 redux-mock-store@^1.2.3:
   version "1.2.3"

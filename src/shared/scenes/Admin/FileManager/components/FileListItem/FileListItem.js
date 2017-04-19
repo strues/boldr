@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import {FontIcon, Button} from 'boldr-ui';
+import { FontIcon, Button } from 'boldr-ui';
 import Link from 'react-router-dom/Link';
 
 const Wrapper = styled.section`
@@ -43,7 +43,7 @@ const FileListItem = props => {
   }
 
   function handleSelect() {
-    const {file} = props;
+    const { file } = props;
     props.selectFile(file);
   }
   return (

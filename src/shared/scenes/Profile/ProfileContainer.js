@@ -1,12 +1,12 @@
 /* @flow */
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import {bindActionCreators} from 'redux';
-import {Loader} from 'boldr-ui';
+import { bindActionCreators } from 'redux';
+import { Loader } from 'boldr-ui';
 
-import {BaseTemplate} from '../../templates';
-import {fetchProfileIfNeeded} from '../../state/modules/users';
+import { BaseTemplate } from '../../templates';
+import { fetchProfileIfNeeded } from '../../state/modules/users';
 import {
   uploadProfileImage,
   uploadAvatarImage,
@@ -37,11 +37,11 @@ type Props = {
 
 export class ProfileContainer extends Component {
   static defaultProps: {
-    match: {params: {username: ''}},
+    match: { params: { username: '' } },
     fetchProfileIfNeeded: () => {},
   };
   componentDidMount() {
-    const {match: {params}} = this.props;
+    const { match: { params } } = this.props;
     this.props.dispatch(fetchProfileIfNeeded(params.username));
   }
   hideDrawer = () => {
@@ -68,7 +68,7 @@ export class ProfileContainer extends Component {
   props: Props;
 
   render() {
-    const {isFetching, profile, user} = this.props;
+    const { isFetching, profile, user } = this.props;
 
     if (isFetching) {
       return <Loader />;

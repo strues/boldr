@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-expressions */
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
-import {push} from 'react-router-redux';
-import {Grid, Col, Loader} from 'boldr-ui';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { push } from 'react-router-redux';
+import { Grid, Col, Loader } from 'boldr-ui';
 import {
   fetchActivityIfNeeded,
   fetchStatsIfNeeded,

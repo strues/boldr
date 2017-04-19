@@ -1,8 +1,8 @@
 /* @flow */
 import React from 'react';
-import {Image} from 'boldr-ui';
+import { Image } from 'boldr-ui';
 
-const PostImage = (props: {imageSrc: String, altText: String}) => {
+const PostImage = (props: { imageSrc: String, altText: String }) => {
   return (
     <div className="boldr-post__image-wrap">
       <Image

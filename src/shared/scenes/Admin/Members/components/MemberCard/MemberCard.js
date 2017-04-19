@@ -1,4 +1,4 @@
-import React, {PureComponent} from 'react';
+import React from 'react';
 import {
   Avatar,
   CardTitle,
@@ -13,37 +13,46 @@ import {
 type Props = {
   user: Object,
   handleToggle: () => void,
+  username: string,
+  roleName: string,
+  id: string,
+  email: string,
+  avatarUrl: string,
 };
 
-class MemberCard extends PureComponent {
-  props: Props;
-  render() {
-    const {user, handleToggle} = this.props;
+const MemberCard = (props: Props) => {
+  const {
+    user,
+    handleToggle,
+    username,
+    roleName,
+    avatarUrl,
+    id,
+    email,
+  } = props;
+  return (
+    <Card>
+      <CardTitle
+        title={username}
+        subtitle={roleName}
+        avatar={<Avatar src={avatarUrl} role="presentation" />}
+      />
 
-    return (
-      <Card>
-        <CardTitle
-          title={user.username}
-          subtitle={user.roles[0].name}
-          avatar={<Avatar src={user.avatarUrl} role="presentation" />}
+      <CardText>
+        {id}
+
+        {email}
+      </CardText>
+      <CardActions>
+        <Button
+          raised
+          primary
+          label="Edit User"
+          onClick={() => handleToggle(user)}
         />
-
-        <CardText>
-          {user.id}
-
-          {user.email}
-        </CardText>
-        <CardActions>
-          <Button
-            raised
-            primary
-            label="Edit User"
-            onClick={() => handleToggle(user)}
-          />
-        </CardActions>
-      </Card>
-    );
-  }
-}
+      </CardActions>
+    </Card>
+  );
+};
 
 export default MemberCard;

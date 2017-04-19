@@ -1,12 +1,12 @@
 /* @flow */
 // $FlowIssue
-import React, {Component} from 'react';
-import {Button} from 'boldr-ui';
+import React, { Component } from 'react';
+import { Button } from 'boldr-ui';
 
 import classNames from 'classnames/bind';
 import cxN from 'classnames';
 import Link from 'react-router-dom/Link';
-import type {ReactChildren} from '../../../types/react';
+import type { ReactChildren } from '../../../types/react';
 
 import Head from '../Head';
 import Detail from '../Detail';
@@ -68,7 +68,7 @@ class MainHeader extends Component {
 
   handleResize = () => {
     const mobileState = window.innerWidth < this.props.breakpoint;
-    this.setState({mobileState}, () => {
+    this.setState({ mobileState }, () => {
       this.addOverflowBody();
       this.setHeightDropdown();
     });
@@ -76,7 +76,7 @@ class MainHeader extends Component {
 
   navbarDropdownHandler = () => {
     this.setState(
-      {navbarDropdownIsOpen: !this.state.navbarDropdownIsOpen},
+      { navbarDropdownIsOpen: !this.state.navbarDropdownIsOpen },
       this.addOverflowBody,
     );
   };
@@ -94,7 +94,7 @@ class MainHeader extends Component {
   };
 
   addOverflowBody() {
-    const {navbarDropdownIsOpen, mobileState} = this.state;
+    const { navbarDropdownIsOpen, mobileState } = this.state;
 
     if (navbarDropdownIsOpen && mobileState) {
       // $FlowIssue
@@ -109,12 +109,12 @@ class MainHeader extends Component {
     if (e.keyCode !== 9 || this.state.focusable) {
       return;
     }
-    this.setState({focusable: true});
+    this.setState({ focusable: true });
   };
 
   render() {
-    const {className, children, theme} = this.props;
-    const {navbarDropdownIsOpen, mobileState, focusable} = this.state;
+    const { className, children, theme } = this.props;
+    const { navbarDropdownIsOpen, mobileState, focusable } = this.state;
 
     const actions = [];
 

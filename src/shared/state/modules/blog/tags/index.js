@@ -1,5 +1,5 @@
-import tagsReducer, {STATE_KEY} from './reducer';
-import {getTagIds, getTagsList, getTags} from './selectors';
+import tagsReducer, { STATE_KEY } from './reducer';
+import { getTagIds, getTagsList, getTags } from './selectors';
 import {
   fetchTagsIfNeeded,
   fetchTagPosts,

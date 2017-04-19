@@ -1,10 +1,10 @@
-import templatesReducer, {STATE_KEY} from './reducer';
+import templatesReducer, { STATE_KEY } from './reducer';
 import {
   fetchTemplatesIfNeeded,
   fetchTemplates,
   fetchTemplateResource,
 } from './actions';
-import {getTemplates} from './selectors';
+import { getTemplates } from './selectors';
 
 export default templatesReducer;
 

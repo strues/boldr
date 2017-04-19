@@ -2,8 +2,8 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
 import styled from 'styled-components';
-import {Chip, Button, FontIcon, Avatar, Icon, Row, Col} from 'boldr-ui';
-import {format} from 'date-fns';
+import { Chip, Button, FontIcon, Avatar, Icon, Row, Col } from 'boldr-ui';
+import { format } from 'date-fns';
 
 import ActivityItemDetail from '../ActivityItemDetail';
 
@@ -55,17 +55,19 @@ const ActivityItem = (props: Props) => {
     );
   }
   if (isMemberType) {
-    ActivityIcon = <FontIcon style={{color: '#02BCD6'}}>person_add</FontIcon>;
+    ActivityIcon = <FontIcon style={{ color: '#02BCD6' }}>person_add</FontIcon>;
   }
   if (isAttachmentType) {
     ActivityIcon = (
       <Link to={`/admin/filemanager/${props.attachment.id}/editor`}>
-        <FontIcon style={{color: '#02BCD6'}}>insert_drive_file</FontIcon>
+        <FontIcon style={{ color: '#02BCD6' }}>insert_drive_file</FontIcon>
       </Link>
     );
   }
   if (isMenuDetailType) {
-    ActivityIcon = <FontIcon style={{color: '#02BCD6'}}>insert_link</FontIcon>;
+    ActivityIcon = (
+      <FontIcon style={{ color: '#02BCD6' }}>insert_link</FontIcon>
+    );
   }
   return (
     <ActivityPanel>

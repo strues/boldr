@@ -1,7 +1,7 @@
 import * as t from '../../actionTypes';
 
-export const showSidebar = () => ({type: t.SHOW_SIDEBAR});
-export const hideSidebar = () => ({type: t.HIDE_SIDEBAR});
+export const showSidebar = () => ({ type: t.SHOW_SIDEBAR });
+export const hideSidebar = () => ({ type: t.HIDE_SIDEBAR });
 
 /**
   * LOAD ACTIVITY ACTIONS
@@ -28,7 +28,7 @@ export const fetchActivityIfNeeded = (): ThunkAction => (
 export const fetchActivity = (axios: any): ThunkAction => (
   dispatch: Dispatch,
 ) => {
-  dispatch({type: t.FETCH_ACTIVITY_REQUEST});
+  dispatch({ type: t.FETCH_ACTIVITY_REQUEST });
 
   return axios
     .get('/api/v1/activities')
@@ -47,7 +47,7 @@ export const fetchActivity = (axios: any): ThunkAction => (
 };
 
 function shouldFetchActivity(state) {
-  const {activities} = state.admin.dashboard;
+  const { activities } = state.admin.dashboard;
   if (!activities.length) {
     return true;
   }
@@ -79,7 +79,7 @@ export const fetchStatsIfNeeded = (): ThunkAction => (
 };
 
 export const fetchStats = (axios: any): ThunkAction => (dispatch: Dispatch) => {
-  dispatch({type: t.FETCH_STATS_REQUEST});
+  dispatch({ type: t.FETCH_STATS_REQUEST });
 
   return axios
     .get('/api/v1/admin/stats')
@@ -98,7 +98,7 @@ export const fetchStats = (axios: any): ThunkAction => (dispatch: Dispatch) => {
 };
 
 function shouldfetchStats(state) {
-  const {stats} = state.admin.dashboard;
+  const { stats } = state.admin.dashboard;
   if (!stats.length) {
     return true;
   }

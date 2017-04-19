@@ -1,6 +1,6 @@
 /* @flow */
-import React, {Component} from 'react';
-import {MenuButton, ListItem} from 'boldr-ui';
+import React, { Component } from 'react';
+import { MenuButton, ListItem } from 'boldr-ui';
 
 type Props = {
   post: Post,

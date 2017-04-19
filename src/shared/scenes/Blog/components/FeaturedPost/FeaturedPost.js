@@ -1,11 +1,11 @@
 /* @flow */
 import React from 'react';
 import Link from 'react-router-dom/Link';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
-import {Button, Row, Col, Paragraph, mediaQuery} from 'boldr-ui';
+import { Button, Row, Col, Paragraph, mediaQuery } from 'boldr-ui';
 
-import {selectPost} from '../../../../state/modules/blog/posts/actions';
+import { selectPost } from '../../../../state/modules/blog/posts/actions';
 import TagBlock from '../TagBlock';
 import Tag from '../Tag';
 
@@ -110,7 +110,7 @@ export const FeaturedPost = (props: Props) => {
         </ImgWrapper>
         <Content>
           <Paragraph>{props.excerpt}</Paragraph>
-          <Row style={{paddingTop: '20px'}} xsEnd>
+          <Row style={{ paddingTop: '20px' }} xsEnd>
             <Link to={`/blog/${props.slug}`}>
               <Button
                 raised

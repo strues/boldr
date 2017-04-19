@@ -1,4 +1,4 @@
-import attachmentReducer, {STATE_KEY} from './reducer';
+import attachmentReducer, { STATE_KEY } from './reducer';
 import {
   uploadAvatarImage,
   uploadProfileImage,

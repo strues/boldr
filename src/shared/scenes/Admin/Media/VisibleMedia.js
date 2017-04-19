@@ -1,4 +1,4 @@
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import withRouter from 'react-router-dom/withRouter';
 import {
   getMediaType,
@@ -12,7 +12,7 @@ const mapStateToProps = (state, filter = 'all') => ({
 });
 
 const VisibleMedia = withRouter(
-  connect(mapStateToProps, {toggleMedia, selectMedia})(Media),
+  connect(mapStateToProps, { toggleMedia, selectMedia })(Media),
 );
 
 export default VisibleMedia;

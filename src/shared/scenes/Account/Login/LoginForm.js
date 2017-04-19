@@ -1,14 +1,14 @@
 /* @flow */
 import React from 'react';
-import {Field, reduxForm} from 'redux-form';
-import {Button, InputField, Row, Col} from 'boldr-ui';
+import { Field, reduxForm } from 'redux-form';
+import { Button, InputField, Row, Col } from 'boldr-ui';
 
 type Props = {
   handleSubmit: Function,
 };
 
 const LoginForm = (props: Props) => {
-  const {handleSubmit} = props;
+  const { handleSubmit } = props;
   return (
     <form onSubmit={handleSubmit} className="boldr-form__generic">
       <Field
@@ -26,7 +26,7 @@ const LoginForm = (props: Props) => {
         label="Password"
       />
       <Button
-        style={{marginTop: '25px'}}
+        style={{ marginTop: '25px' }}
         raised
         primary
         label="Login"

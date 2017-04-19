@@ -1,7 +1,8 @@
 /* @flow */
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import NavLink from 'react-router-dom/NavLink';
-import {connect} from 'react-redux';
+import styled from 'styled-components';
+import { connect } from 'react-redux';
 import {
   Avatar,
   Button,
@@ -12,7 +13,9 @@ import {
   DashboardFooter,
   Sidebar,
   DashboardWrapper,
+  Anchor,
   DashboardContent,
+  TopbarLink,
   Topbar,
 } from 'boldr-ui';
 import {
@@ -27,6 +30,7 @@ type Props = {
   dashboard: ?Object,
   me: Object,
   location: Object,
+  match: Object,
   ui: Object,
   route: Object,
   copyright: string,
@@ -34,6 +38,11 @@ type Props = {
   routing: Object,
 };
 
+const DashboardLayout = styled.div`
+  display: flex;
+  height: 100%;
+  position: relative;
+`;
 export class AdminDashboard extends Component {
   state = {
     hidden: false,
@@ -51,23 +60,23 @@ export class AdminDashboard extends Component {
   clickActivate = () => {
     const activate = '/item41/a';
 
-    this.setState({activate});
+    this.setState({ activate });
   };
   render() {
-    const {route, me, ui, routing, location: {pathname, search}} = this.props;
+    const {
+      route,
+      me,
+      ui,
+      routing,
+      location: { pathname, search },
+    } = this.props;
     return (
-      <div
-        style={{
-          display: 'flex',
-          height: '100%',
-        }}
-      >
+      <DashboardLayout>
         {ui.visible
           ? <Sidebar
               items={sidebarLinks}
               activeItem={routing.location.pathname}
               location={routing.location.pathname}
-              // onExpandCollapse={this.onExpandCollapse}
               visible={ui.visible}
               expanded={ui.expanded}
               logoImg="https://boldr.io/logo.png"
@@ -77,9 +86,15 @@ export class AdminDashboard extends Component {
           : null}
         <DashboardWrapper>
           <Topbar
-            toggleSidebar={this.handleHideSidebar}
+            url={this.props.match.path}
+            onMenuClick={this.handleHideSidebar}
             avatarUrl={me.avatarUrl}
             username={me.username}
+            link={TopbarLink}
+            links={[
+              { title: 'Home', url: '/' },
+              { title: 'Dashboard', url: '/admin' },
+            ]}
           />
           <DashboardContent>
             <Grid fluid>
@@ -87,7 +102,7 @@ export class AdminDashboard extends Component {
             </Grid>
           </DashboardContent>
         </DashboardWrapper>
-      </div>
+      </DashboardLayout>
     );
   }
 }

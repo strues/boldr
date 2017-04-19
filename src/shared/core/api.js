@@ -1,6 +1,6 @@
 /* eslint-disable dot-notation */
 import axios from 'axios';
-import {getToken} from './authentication/token';
+import { getToken } from './authentication/token';
 
 const isBrowser = typeof window === 'object';
 const token = isBrowser ? getToken() : null;

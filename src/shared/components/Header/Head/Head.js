@@ -22,7 +22,9 @@ const Head = ({
     >
       <button
         type="button"
-        className={cx('toggleButton', 'collapsed', {closeButton: dropdownOpen})}
+        className={cx('toggleButton', 'collapsed', {
+          closeButton: dropdownOpen,
+        })}
         onClick={toggleDropdownHandler}
       >
         <span className="sr-only">Toggle navigation</span>

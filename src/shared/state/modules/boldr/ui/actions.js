@@ -21,12 +21,12 @@ export function changeLayout(layout) {
   };
 }
 
-export const showHideSidebar = () => ({type: TOGGLE_SIDEBAR});
+export const showHideSidebar = () => ({ type: TOGGLE_SIDEBAR });
 
-export const expandCollapseSideMenu = () => ({type: TOGGLE_SB_MENU});
-export const showModal = () => ({type: MODAL_OPEN});
-export const hideModal = () => ({type: MODAL_CLOSED});
-export const toggleDrawer = () => ({type: TOGGLE_DRAWER});
+export const expandCollapseSideMenu = () => ({ type: TOGGLE_SB_MENU });
+export const showModal = () => ({ type: MODAL_OPEN });
+export const hideModal = () => ({ type: MODAL_CLOSED });
+export const toggleDrawer = () => ({ type: TOGGLE_DRAWER });
 
 export function setMobileDevice(enabled = true) {
   return {

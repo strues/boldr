@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import {Card, CardTitle, CardActions, CardText} from 'boldr-ui';
+import { Card, CardTitle, CardActions, CardText } from 'boldr-ui';
 
 type Props = {
   name?: string,

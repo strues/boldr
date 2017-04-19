@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {Field, reduxForm, FieldArray} from 'redux-form';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { Field, reduxForm, FieldArray } from 'redux-form';
+import { connect } from 'react-redux';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
@@ -23,6 +23,7 @@ import {
 import RenderTags from '../RenderTags';
 import FieldEditor from './FieldEditor';
 
+/* eslint-disable */
 const Wrapper = styled.div`
   padding: 1em;
   width: 100%;
@@ -31,7 +32,7 @@ const Wrapper = styled.div`
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .4);
   background-color: #fff;
 `;
-
+/* eslint-enable */
 const NewPost = styled.section`
   width: 100%;
   margin-top: 10px;
@@ -49,7 +50,6 @@ type Props = {
   label?: string,
 };
 
-@connect()
 class NewPostForm extends Component {
   constructor(props) {
     super();
@@ -76,18 +76,18 @@ class NewPostForm extends Component {
     this.dropzone.open();
   }
   _handleTabChange(activeTabIndex) {
-    this.setState({activeTabIndex});
+    this.setState({ activeTabIndex });
   }
   _handleSwitch = checked => {
-    this.setState({checked});
+    this.setState({ checked });
   };
   render() {
-    const {handleSubmit} = this.props;
-    const {activeTabIndex, checked} = this.state;
+    const { handleSubmit } = this.props;
+    const { activeTabIndex, checked } = this.state;
 
     return (
       <NewPost>
-        <Heading size={3} weight={300}>Create a new post</Heading>
+        <Heading size={3}>Create a new post</Heading>
         <form onSubmit={handleSubmit}>
           <Wrapper>
             <FormGroup>
@@ -139,7 +139,7 @@ class NewPostForm extends Component {
                   transitionLeave={false}
                 >
                   <FormGroup>
-                    <Heading size={5} top="2rem" bottom="0px">
+                    <Heading size={5}>
                       Upload a feature image
                     </Heading>
                     {/* <Row>
@@ -152,7 +152,8 @@ class NewPostForm extends Component {
                 />
                 <Button
                   icon
-                  tooltipLabel="The feature image will be used if a background image isnt uploaded."
+                  tooltipLabel="The feature image will
+                  be used if a background image isnt uploaded."
                 >
                   help
                 </Button>
@@ -189,7 +190,7 @@ class NewPostForm extends Component {
 
                     <FormGroup>
                       <Heading size={5}>Status:</Heading>
-                      <label style={{marginRight: '10px'}} htmlFor="draft">
+                      <label style={{ marginRight: '10px' }} htmlFor="draft">
                         <Field
                           id="draft"
                           name="published"
@@ -224,7 +225,7 @@ class NewPostForm extends Component {
     );
   }
 }
-
+NewPostForm = connect()(NewPostForm);
 export default reduxForm({
   form: 'newPostForm',
 })(NewPostForm);
