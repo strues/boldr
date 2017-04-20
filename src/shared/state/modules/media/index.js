@@ -5,6 +5,7 @@ import {
   selectMedia,
   editMedia,
   deleteMedia,
+  uploadMediaFile,
 } from './actions';
 import { getMedia } from './selectors';
 
@@ -19,4 +20,5 @@ export {
   toggleMedia,
   editMedia,
   deleteMedia,
+  uploadMediaFile,
 };

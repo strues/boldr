@@ -100,7 +100,7 @@ export function selectMedia(file: Object) {
   * @exports uploadMedia
   *****************************************************************/
 
-export function uploadMedia(payload) {
+export function uploadMediaFile(payload) {
   return dispatch => {
     dispatch({
       type: t.UPLOAD_MEDIA_REQUEST,
@@ -110,9 +110,11 @@ export function uploadMedia(payload) {
     return api
       .post(`${API_PREFIX}/media`, data)
       .then(res => {
+        const newMedia = res.data;
+        const normalizedNewMedia = normalize(newMedia, mediaSchema);
         dispatch({
           type: t.UPLOAD_MEDIA_SUCCESS,
-          payload: res.data,
+          payload: normalizedNewMedia,
         });
         dispatch(notificationSend(notif.MSG_UPLOAD_SUCCESS));
       })
@@ -125,7 +127,8 @@ export function uploadMedia(payload) {
   };
 }
 
-export function deleteMedia(id) {
+export function deleteMedia(m) {
+  const { id } = m;
   return dispatch => {
     dispatch({
       type: t.DELETE_MEDIA_REQUEST,

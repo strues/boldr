@@ -21,6 +21,7 @@ import {
 
 type Props = {
   media: Array<Object>,
+  deleteMedia: () => void,
   selectMedia: () => void,
 };
 const MediaList = styled.ul`
@@ -49,6 +50,14 @@ class Media extends Component {
   state = {
     currentlyVisible: this.props.media,
   };
+
+  componentWillReceiveProps(nextProps: Object) {
+    if (this.props.media !== nextProps.media) {
+      this.setState({
+        currentlyVisible: nextProps.media,
+      });
+    }
+  }
 
   handleToggleImage = () => {
     const updatedFilter = filter(this.props.media, m =>
@@ -96,14 +105,22 @@ class Media extends Component {
                         alt={m.fileName}
                         role="presentation"
                         cta={
-                          <Link to={`/admin/media/${m.id}`}>
+                          <div>
+                            <Link to={`/admin/media/${m.id}`}>
+                              <Button
+                                icon
+                                onClick={() => this.props.selectMedia(m)}
+                              >
+                                edit
+                              </Button>
+                            </Link>
                             <Button
                               icon
-                              onClick={() => this.props.selectMedia(m)}
+                              onClick={() => this.props.deleteMedia(m)}
                             >
-                              edit
+                              delete_permanently
                             </Button>
-                          </Link>
+                          </div>
                         }
                       />
                     </MediaItem>

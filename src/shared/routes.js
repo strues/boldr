@@ -23,6 +23,7 @@ import TagListContainer from './scenes/Blog/TagList/TagListContainer';
 // Admin
 import MediaManagerContainer
   from './scenes/Admin/Media/MediaManager/MediaManagerContainer';
+import UploadMedia from './scenes/Admin/Media/UploadMedia';
 import PostEditor from './scenes/Admin/Post/PostEditor';
 import NewPostContainer from './scenes/Admin/Post/NewPost/NewPostContainer';
 import FileManagerContainer
@@ -225,6 +226,11 @@ export default [
             component: MediaContainer,
             loadData: async (dispatch: Dispatch) =>
               Promise.all([await dispatch(fetchMediaIfNeeded())]),
+          },
+          {
+            path: '/admin/media/upload',
+            exact: true,
+            component: UploadMedia,
           },
           {
             path: '/admin/media/:id',

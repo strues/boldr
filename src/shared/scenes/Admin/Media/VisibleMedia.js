@@ -3,6 +3,7 @@ import withRouter from 'react-router-dom/withRouter';
 import {
   getMediaType,
   toggleMedia,
+  deleteMedia,
   selectMedia,
 } from '../../../state/modules/media';
 import Media from './Media';
@@ -12,7 +13,7 @@ const mapStateToProps = (state, filter = 'all') => ({
 });
 
 const VisibleMedia = withRouter(
-  connect(mapStateToProps, { toggleMedia, selectMedia })(Media),
+  connect(mapStateToProps, { toggleMedia, selectMedia, deleteMedia })(Media),
 );
 
 export default VisibleMedia;
