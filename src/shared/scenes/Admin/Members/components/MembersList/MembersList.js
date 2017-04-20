@@ -17,6 +17,7 @@ const MembersList = (props: { users: Array<Object>, toggleUser: Function }) => {
           email={user.email}
           roleName={user.roles[0].name}
           key={user.id}
+          username={user.username}
           handleToggle={handleToggle}
           user={user}
         />

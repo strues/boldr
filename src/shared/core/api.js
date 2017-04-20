@@ -13,6 +13,8 @@ api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 api.defaults.headers.post['Content-Type'] =
   'application/x-www-form-urlencoded; charset=UTF-8';
 
+api.defaults.withCredentials = true;
+
 api.onUnauthorizedError = callback => {
   api.interceptors.response.use(response => {
     if (response.status === 401) {

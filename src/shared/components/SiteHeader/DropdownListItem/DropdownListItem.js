@@ -1,4 +1,5 @@
 /* @flow */
+
 import React, { Component } from 'react';
 import classNames from 'classnames/bind';
 import NavLink from 'react-router-dom/NavLink';
@@ -17,7 +18,7 @@ class DropdownListItem extends Component {
     const { item, closeDropdowns } = this.props;
 
     return (
-      <li className={cx('boldr-menu__dropdown-listitem')} role="menuitem">
+      <li className={cx('boldrui-sh__menu-dropdown-listitem')} role="menuitem">
         <NavLink
           className="dropdown-link"
           to={item.href}

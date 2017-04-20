@@ -13,7 +13,7 @@ type Props = {
 const cx = classNames.bind(styles);
 
 const DropdownList = (props: Props) => (
-  <div className={cx('boldr-menu__dropdown-list')}>
+  <div className={cx('boldrui-sh__nav-dropdown-list')}>
     <ul role="menubar" aria-hidden="false">
       {props.data.map(item => (
         <DropdownListItem

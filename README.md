@@ -11,7 +11,7 @@ Boldr is a modern content management framework. Think of Boldr as the solid foun
 > In the mean time, a barebones version of the CLI is available. Install with `npm install -g boldr-cli` and run `boldr-cli init` to get setup with both the API and the CMS packages. After running the command you'll have a boldr folder containing both the api and cms. The folder location at the moment is your current working directory.
 
 
-Have questions or want to help with development? Join us on [![Gitter chat](https://badges.gitter.im/gitterHQ/gitter.png)](https://gitter.im/boldr/Lobby?utm_source=share-link&utm_medium=link&utm_campaign=share-link)
+Have questions or want to help with development? Join us on <a href="https://slack.boldr.io" target="blank"><img src="/docs/assets/slack-logo.png" height="25" /></a>
 
 **Table of Contents**
 - [Boldr](#boldr)

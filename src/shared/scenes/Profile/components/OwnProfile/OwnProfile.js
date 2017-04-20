@@ -16,6 +16,15 @@ type Props = {
   profile: Object,
 };
 class OwnProfile extends PureComponent {
+  static defaultProps = {
+    social: {
+      facebook: { url: 'https://facebook.com' },
+      twitter: { url: 'https://twitter.com' },
+      linkedin: { url: 'https://linkedin.com' },
+      google: { url: 'https://google.com' },
+      github: { url: 'https://github.com' },
+    },
+  };
   handleFormSubmit = values => {
     const userData = {
       id: this.props.profile.id,

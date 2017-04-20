@@ -1,0 +1,150 @@
+@import '../../styles/abstracts/mixins';
+
+$boldr-ns: 'boldrui-';
+
+.#{$boldr-ns}siteheader {
+	background: #f5f7f9;
+	height: 105px;
+	border-bottom: 1px solid rgba(0, 0, 0, .05);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	transition: all 0.4s ease-in-out;
+
+	&.theme-boldr {
+		background: #f5f7f9;
+		height: 105px;
+		border-bottom: 1px solid rgba(0, 0, 0, .05);
+		box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+		transition: all 0.4s ease-in-out;
+	}
+
+	&:focus {
+		outline: none;
+	}
+
+	&.focusable {
+		&:focus {
+			outline: thin dotted !important;
+		}
+	}
+}
+
+/// The whole mobile nav area
+@media (max-width: 991px) {
+	.#{$boldr-ns}sh__menu.#{$boldr-ns}sh__dropdown-open {
+		background-color: #fff;
+		bottom: 0;
+		left: 0;
+		position: fixed;
+		right: 0;
+		top: 0;
+		z-index: 9100;
+	}
+}
+
+.#{$boldr-ns}sh__collapse {
+	display: none;
+
+	@media (min-width: 992px) {
+		float: left;
+		display: block;
+	}
+
+	&.#{$boldr-ns}sh__dropdown-open {
+		display: block;
+		padding-bottom: 82px;
+		padding-top: 10px;
+	}
+}
+
+/// This is the UL
+.#{$boldr-ns}sh__nav {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	width: 100%;
+	padding-left: 1em;
+
+	@media (min-width: 992px) {
+		float: left;
+		margin-left: 30px;
+		margin-top: 45.5px;
+		margin-bottom: 45.5px;
+		padding-left: 0;
+	}
+}
+
+.#{$boldr-ns}sh__menu-right {
+	display: none;
+	position: relative;
+
+	.btn {
+		font-size: 11px;
+		padding: 8px 18px;
+
+		&.btn-transparent {
+			background-color: transparent !important;
+			border-color: transparent !important;
+			box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2) !important;
+			color: #333 !important;
+
+			&:hover {
+				background-color: transparent !important;
+				border-color: transparent !important;
+				color: #333 !important;
+			}
+		}
+
+		+ .btn {
+			margin-left: 18px;
+		}
+	}
+
+	@media (min-width: 992px) {
+		float: right;
+		display: block;
+		margin-top: 36.5px;
+		margin-bottom: 41.5px;
+	}
+}
+
+@media (max-width: 991px) {
+	.#{$boldr-ns}sh__menu-right.#{$boldr-ns}sh__dropdown-open {
+		background-color: #fff;
+		bottom: 0;
+		left: 0;
+		padding-bottom: 25px;
+		padding-top: 125px;
+		right: 0;
+		text-align: center;
+		display: block;
+		position: absolute;
+
+		&:before {
+			display: block;
+			position: absolute;
+			bottom: 100%;
+			content: "";
+			height: 20px;
+			width: 100%;
+		}
+	}
+}
+
+.overflow {
+	height: 100%;
+	overflow: hidden !important;
+	position: fixed;
+	width: 100%;
+}
+
+.sr-only {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	border: 0;
+}

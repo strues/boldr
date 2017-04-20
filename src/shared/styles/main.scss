@@ -1,40 +1,7 @@
 $boldr-ns: 'boldrui-';
-
-$sidebar-bg: #2D343C;
 @import '~boldr-ui/lib/styles/boldrui';
-@import 'abstracts/all';
 
-@import 'base/all';
-
-.md-dialog {
-  width: 525px;
-}
-.opacity-enter {
-  opacity: 0;
-
-  &.opacity-enter-active {
-    opacity: 1;
-    transition-duration: 1000ms;
-    transition-property: opacity;
-    transition-timing-function: $md-transition-deceleration;
-  }
-}
-.boldr-paperoverride {
-  background-color: $white;
-}
-
-.boldrui-dashboard-body {
-  main {
-    margin-left: 240px;
-  }
-  .boldrui-sidebar {
-    width: 240px;
-  }
-}
-
-.boldrui-dash-main {
-
-}
-.boldrui-dash-main.full-width {
-  margin-left: 240!important;
+.boldr {
+	height: 100%;
+	min-height: 100%;
 }

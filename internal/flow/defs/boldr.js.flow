@@ -109,7 +109,7 @@ declare type MenuDetails = {
   hasDropdown: boolean,
   order: Number,
   href: string,
-  mobileHref: string,
+  mobileHref: ?string,
   icon: string,
   children: Array<Object>,
 };

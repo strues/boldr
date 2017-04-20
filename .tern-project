@@ -1,0 +1,23 @@
+{
+  "ecmaVersion": 7,
+  "libs": [
+  ],
+  "loadEagerly": [
+    "src/**/*.js"
+  ],
+  "dontLoad": [
+    "node_modules/**",
+    ".happypack/**",
+    "boldrCMS/**",
+    "flow-typed/**"
+  ],
+  "plugins": {
+    "modules": {},
+    "es_modules": {},
+    "node": {},
+    "doc_comment": {
+      "fullDocs": true,
+      "strong": true
+    }
+  }
+}

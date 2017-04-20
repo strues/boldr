@@ -3,9 +3,7 @@ import React, { Component } from 'react';
 import { Editor } from 'react-draft-wysiwyg';
 import { stateFromHTML } from 'draft-js-import-html';
 // $FlowIssue
-import convertFromRaw from 'draft-js/lib/convertFromRawToDraftState';
-// $FlowIssue
-import EditorState from 'draft-js/lib/EditorState';
+import { convertToRaw, EditorState } from 'draft-js';
 
 type Props = {
   input: Object,

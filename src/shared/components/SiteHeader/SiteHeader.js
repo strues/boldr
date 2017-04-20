@@ -1,16 +1,14 @@
 /* @flow */
-// $FlowIssue
 import React, { Component } from 'react';
-import { Button } from 'boldr-ui';
-
+import { Button, Grid } from 'boldr-ui';
 import classNames from 'classnames/bind';
 import cxN from 'classnames';
 import Link from 'react-router-dom/Link';
-import type { ReactChildren } from '../../../types/react';
+import type { ReactChildren } from '../../types/react';
 
-import Head from '../Head';
-import Detail from '../Detail';
-import styles from './mainheader.scss';
+import Branding from './Branding';
+import NavItem from './NavItem';
+import styles from './siteheader.scss';
 
 const cx = classNames.bind(styles);
 
@@ -30,15 +28,16 @@ type Props = {
   handleLogoClick: () => void,
   handleLogoutClick: () => void,
   handleDashClick: () => void,
+  dropdownContent: any,
 };
 
 type State = {
-  navbarDropdownIsOpen: boolean,
-  mobileState: boolean,
+  dropdownIsOpen: boolean,
+  isMobile: boolean,
   focusable: ?boolean,
 };
 
-class MainHeader extends Component {
+class SiteHeader extends Component {
   static defaultProps = {
     className: '',
     children: null,
@@ -46,13 +45,14 @@ class MainHeader extends Component {
     breakpoint: 992,
   };
   state = {
-    navbarDropdownIsOpen: false,
-    mobileState: false,
+    dropdownIsOpen: false,
+    isMobile: false,
     focusable: true,
   };
+
   state: State;
+
   componentDidMount() {
-    /* eslint-env browser */
     this.handleResize();
     window.addEventListener('resize', this.handleResize);
   }
@@ -62,41 +62,41 @@ class MainHeader extends Component {
   }
   props: Props;
   setHeightDropdown = () => {
-    const height = this.state.mobileState ? `${window.innerHeight - 75}px` : '';
+    const height = this.state.isMobile ? `${window.innerHeight - 75}px` : '';
     this.dropdownContent.style.height = height;
   };
 
   handleResize = () => {
-    const mobileState = window.innerWidth < this.props.breakpoint;
-    this.setState({ mobileState }, () => {
+    const isMobile = window.innerWidth < this.props.breakpoint;
+    this.setState({ isMobile }, () => {
       this.addOverflowBody();
       this.setHeightDropdown();
     });
   };
 
-  navbarDropdownHandler = () => {
+  handleDropdown = () => {
     this.setState(
-      { navbarDropdownIsOpen: !this.state.navbarDropdownIsOpen },
+      { dropdownIsOpen: !this.state.dropdownIsOpen },
       this.addOverflowBody,
     );
   };
 
   closeDropdownOnButtonClick = callback => event => {
-    const isMobile = this.state.mobileState;
-    const isDropdownOpen = this.state.navbarDropdownIsOpen;
+    const { isMobile } = this.state;
+    const isDropdownOpen = this.state.dropdownIsOpen;
 
     if (callback) {
       callback(event);
     }
     if (isMobile && isDropdownOpen) {
-      this.navbarDropdownHandler();
+      this.handleDropdown();
     }
   };
 
   addOverflowBody() {
-    const { navbarDropdownIsOpen, mobileState } = this.state;
+    const { dropdownIsOpen, isMobile } = this.state;
 
-    if (navbarDropdownIsOpen && mobileState) {
+    if (dropdownIsOpen && isMobile) {
       // $FlowIssue
       document.body.classList.add(cx('overflow'));
     } else {
@@ -113,13 +113,12 @@ class MainHeader extends Component {
   };
 
   render() {
-    const { className, children, theme } = this.props;
-    const { navbarDropdownIsOpen, mobileState, focusable } = this.state;
+    const { className, children, theme, auth, me, menu } = this.props;
+    const { dropdownIsOpen, isMobile, focusable } = this.state;
 
-    const actions = [];
-
-    if (!this.props.auth.isAuthenticated) {
-      actions.push(
+    const menuElements = [];
+    if (!auth.isAuthenticated) {
+      menuElements.push(
         <Link key="login" to="/account/login">
           <Button raised primary label="Log In" />
         </Link>,
@@ -128,8 +127,8 @@ class MainHeader extends Component {
         </Link>,
       );
     }
-    if (this.props.me.roleId === 3) {
-      actions.push(
+    if (me.roleId === 3) {
+      menuElements.push(
         <Link key="dash" to="/admin">
           <Button icon primary tooltipLabel="Dashboard">
             dashboard
@@ -137,9 +136,9 @@ class MainHeader extends Component {
         </Link>,
       );
     }
-    if (this.props.auth.isAuthenticated) {
-      actions.push(
-        <Link key="prof" to={`/profiles/${this.props.me.username}`}>
+    if (auth.isAuthenticated) {
+      menuElements.push(
+        <Link key="prof" to={`/profiles/${me.username}`}>
           <Button icon tooltipLabel="Profile">
             perm_identity
           </Button>
@@ -154,64 +153,64 @@ class MainHeader extends Component {
         </Button>,
       );
     }
-    /* eslint-disable jsx-a11y/no-static-element-interactions */
+
     return (
       <header
-        className={cx('boldr-mainheader', ['theme-boldr'], className, {
-          'boldr-mainheader__dropdown-open': navbarDropdownIsOpen,
+        className={cx('boldrui-siteheader', ['theme-boldr'], className, {
+          'boldrui-sh__dropdown-open': dropdownIsOpen,
           focusable,
         })}
         onKeyDown={this.handleKeyDown}
       >
-        <div
-          className={cx('boldr-mainheader__menu', {
-            'boldr-mainheader__dropdown-open': navbarDropdownIsOpen,
-          })}
-        >
-          <div className="grid">
-            <Head
-              toggleDropdownHandler={this.navbarDropdownHandler}
-              dropdownOpen={navbarDropdownIsOpen}
+        <Grid>
+          <div
+            className={cx('boldrui-sh__menu', {
+              'boldrui-sh__dropdown-open': dropdownIsOpen,
+            })}
+          >
+            <Branding
+              toggleDropdownHandler={this.handleDropdown}
+              dropdownOpen={dropdownIsOpen}
               theme={theme}
               siteName="Boldr"
               closeHeaderDropdown={this.closeDropdownOnButtonClick()}
             />
             <nav
-              className={cx('boldr-mainheader__collapse', {
-                'boldr-mainheader__dropdown-open': navbarDropdownIsOpen,
+              className={cx('boldrui-sh__collapse', {
+                'boldrui-sh__dropdown-open': dropdownIsOpen,
               })}
               ref={_ref => {
-                this.dropdownContent = _ref;
+                (this: any).dropdownContent = _ref;
               }}
               aria-label="Main menu"
             >
-              <ul className={cx('boldr-mainheader__nav')} role="menubar">
-                {this.props.menu.map(detail => (
-                  <Detail
+              <ul className={cx('boldrui-sh__nav')} role="menubar">
+                {menu.map(detail => (
+                  <NavItem
                     key={detail.uuid}
                     detail={detail}
                     theme="theme-boldr"
                     hasDropdown={detail.has_dropdown}
                     closeHeaderDropdown={this.closeDropdownOnButtonClick()}
-                    moble={mobileState}
+                    moble={isMobile}
                   />
                 ))}
               </ul>
             </nav>
             <div
               className={cxN(
-                cx('buttons-group', {
-                  'boldr-mainheader__dropdown-open': navbarDropdownIsOpen,
+                cx('boldrui-sh__menu-right', {
+                  'boldrui-sh__dropdown-open': dropdownIsOpen,
                 }),
               )}
             >
-              {actions}
+              {menuElements}
             </div>
           </div>
-        </div>
+        </Grid>
       </header>
     );
   }
 }
 
-export default MainHeader;
+export default SiteHeader;

@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DropdownList /> should match the snapshot 1`] = `
+<div
+  className="boldrui-sh__nav-dropdown-list"
+>
+  <ul
+    aria-hidden="false"
+    role="menubar"
+  />
+</div>
+`;

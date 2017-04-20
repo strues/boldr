@@ -9,7 +9,7 @@ import { Footer } from 'boldr-ui';
 import { fetchMenusIfNeeded, getByLabel } from '../../state/modules/boldr/menu';
 import { logout } from '../../state/modules/auth/actions';
 import { selectMe } from '../../state/modules/users';
-import MainHeader from '../../components/Header';
+import SiteHeader from '../../components/SiteHeader';
 import type { ReactElement, ReactChildren } from '../../types/react';
 
 type Props = {
@@ -41,6 +41,7 @@ const Wrapper = styled.div`
 const ContentWrapper = styled.section`
   width: 100%;
   height: 100%;
+  min-height: 100%;
   box-sizing: border-box;
   position: relative;
   margin: 0 auto;
@@ -76,7 +77,7 @@ class BaseTemplate extends PureComponent {
       <Wrapper {...this.props}>
         {this.props.helmetMeta}
 
-        <MainHeader
+        <SiteHeader
           auth={this.props.auth}
           logo={this.props.logo}
           me={this.props.me}

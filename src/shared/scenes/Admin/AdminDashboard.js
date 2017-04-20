@@ -41,7 +41,7 @@ type Props = {
 const DashboardLayout = styled.div`
   display: flex;
   height: 100%;
-  position: relative;
+  min-height: 100%;
 `;
 export class AdminDashboard extends Component {
   state = {
@@ -71,7 +71,7 @@ export class AdminDashboard extends Component {
       location: { pathname, search },
     } = this.props;
     return (
-      <DashboardLayout>
+      <div style={{ display: 'flex', height: '100%', minHeight: '100%' }}>
         {ui.visible
           ? <Sidebar
               items={sidebarLinks}
@@ -79,7 +79,7 @@ export class AdminDashboard extends Component {
               location={routing.location.pathname}
               visible={ui.visible}
               expanded={ui.expanded}
-              logoImg="https://boldr.io/logo.png"
+              logoImg="https://boldr.io/assets/boldr-logo-white.png"
               logoLink="/"
               isPrimaryColor
             />
@@ -101,8 +101,9 @@ export class AdminDashboard extends Component {
               {renderRoutes(route.routes)}
             </Grid>
           </DashboardContent>
+          <DashboardFooter copyright="© 2017 Steven Truesdell" />
         </DashboardWrapper>
-      </DashboardLayout>
+      </div>
     );
   }
 }

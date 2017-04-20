@@ -13,5 +13,5 @@ const mapDispatchToProps = dispatch => {
     },
   };
 };
-
-export default connect(mapDispatchToProps)(Signup);
+// $FlowIssue
+export default connect(null, mapDispatchToProps)(Signup);
