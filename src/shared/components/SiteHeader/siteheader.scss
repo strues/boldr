@@ -1,6 +1,8 @@
-@import '../../../styles/abstracts/mixins';
+@import '../../styles/abstracts/mixins';
 
-.boldr-mainheader {
+$boldr-ns: 'boldrui-';
+
+.#{$boldr-ns}siteheader {
 	background: #f5f7f9;
 	height: 105px;
 	border-bottom: 1px solid rgba(0, 0, 0, .05);
@@ -28,7 +30,7 @@
 
 /// The whole mobile nav area
 @media (max-width: 991px) {
-	.boldr-mainheader__menu.boldr-mainheader__dropdown-open {
+	.#{$boldr-ns}sh__menu.#{$boldr-ns}sh__dropdown-open {
 		background-color: #fff;
 		bottom: 0;
 		left: 0;
@@ -39,7 +41,7 @@
 	}
 }
 
-.boldr-mainheader__collapse {
+.#{$boldr-ns}sh__collapse {
 	display: none;
 
 	@media (min-width: 992px) {
@@ -47,7 +49,7 @@
 		display: block;
 	}
 
-	&.boldr-mainheader__dropdown-open {
+	&.#{$boldr-ns}sh__dropdown-open {
 		display: block;
 		padding-bottom: 82px;
 		padding-top: 10px;
@@ -55,36 +57,24 @@
 }
 
 /// This is the UL
-.boldr-mainheader__nav {
+.#{$boldr-ns}sh__nav {
 	list-style-type: none;
 	margin: 0;
 	padding: 0;
 	position: relative;
 	width: 100%;
-
-	&:after,
-	&:before {
-		content: " ";
-		display: table;
-	}
-
-	&:after {
-		clear: both;
-	}
+	padding-left: 1em;
 
 	@media (min-width: 992px) {
 		float: left;
 		margin-left: 30px;
 		margin-top: 45.5px;
 		margin-bottom: 45.5px;
-	}
-
-	@media (max-width: 991px) {
-		padding-left: 1em;
+		padding-left: 0;
 	}
 }
 
-.boldrui-header-menu__footer {
+.#{$boldr-ns}sh__menu-right {
 	display: none;
 	position: relative;
 
@@ -119,7 +109,7 @@
 }
 
 @media (max-width: 991px) {
-	.boldrui-header-menu__footer.boldr-mainheader__dropdown-open {
+	.#{$boldr-ns}sh__menu-right.#{$boldr-ns}sh__dropdown-open {
 		background-color: #fff;
 		bottom: 0;
 		left: 0;

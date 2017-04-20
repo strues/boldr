@@ -1,4 +1,4 @@
-.boldr-mainheader__head {
+.boldrui-sh__branding {
 	position: relative;
 
 	&:after,
@@ -17,7 +17,7 @@
 }
 
 @media (max-width: 991px) {
-	.boldr-mainheader__head.dropdownOpen {
+	.boldrui-sh__branding.dropdownOpen {
 		background-color: #fff;
 
 		&:before {
@@ -34,7 +34,7 @@
 	}
 }
 
-.boldr-mainheader__brand {
+.boldrui-sh__branding-brand {
 	float: left;
 	position: relative;
 	margin-left: 15px;
@@ -51,12 +51,12 @@
 	}
 }
 
-.boldr-mainheader__logo {
+.boldrui-sh__branding-logo {
 	display: block;
 	width: 100px;
 }
 
-.toggleButton {
+.boldrui-sh__toggle {
 	position: relative;
 	float: right;
 	margin-right: 5px;
@@ -67,7 +67,7 @@
 	margin-top: 27.5px;
 	margin-bottom: 27.5px;
 
-	&.closeButton .iconBar {
+	&.boldrui-sh__close .boldrui-sh__menu-icon {
 		&:nth-of-type(2) {
 			top: 10px;
 			width: 0;
@@ -96,7 +96,7 @@
 		outline: 0;
 	}
 
-	.iconBar {
+	.boldrui-sh__menu-icon {
 		display: block;
 		position: absolute;
 		width: 100%;

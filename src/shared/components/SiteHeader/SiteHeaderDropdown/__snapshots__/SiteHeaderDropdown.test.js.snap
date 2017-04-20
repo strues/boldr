@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<SiteHeaderDropdown /> should match the snapshot 1`] = `
+<div
+  aria-hidden="true"
+  className="boldrui-sh__nav-dropdown"
+>
+  <DropdownList
+    data={
+      Array [
+        Object {
+          "id": 1,
+        },
+        Object {
+          "id": 2,
+        },
+      ]
+    }
+  />
+</div>
+`;

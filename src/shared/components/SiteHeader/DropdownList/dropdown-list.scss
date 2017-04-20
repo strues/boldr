@@ -1,4 +1,4 @@
-.boldr-menu__dropdown-list {
+.boldrui-sh__nav-dropdown-list {
 	float: none;
 	width: 100%;
 	margin: 0;
@@ -7,19 +7,14 @@
 	padding-bottom: 15px;
 	list-style-type: none;
 
+	ul {
+		list-style-type: none;
+		padding: 0;
+	}
+
 	@media (min-width: 992px) {
 		padding: 5px 20px;
-
-		ul {
-			list-style-type: none;
-			padding: 0;
-		}
 	}
-}
-
-.boldrui-header__dropdown {
-	list-style-type: none;
-	padding-left: 0;
 }
 
 .stackedList {

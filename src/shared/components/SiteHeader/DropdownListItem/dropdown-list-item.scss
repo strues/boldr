@@ -1,4 +1,4 @@
-.boldr-menu__dropdown-listitem {
+.boldrui-sh__menu-dropdown-listitem{
 	position: relative;
 	align-items: flex-start;
 
@@ -69,7 +69,7 @@
 }
 
 @media (max-width: 991px) {
-	.boldr-menu__dropdown-listitem > a .dropdown-link__icon {
+	.boldrui-sh__menu-dropdown-listitem > a .dropdown-link__icon {
 		display: none;
 	}
 }

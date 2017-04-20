@@ -1,30 +1,23 @@
+/* @flow */
 import React, { Component, PropTypes } from 'react';
 import classNames from 'classnames/bind';
 import NavLink from 'react-router-dom/NavLink';
-import Dropdown from '../Dropdown';
-import styles from './detail.scss';
+import NavItemLabel from '../NavItemLabel';
+import SiteHeaderDropdown from '../SiteHeaderDropdown';
+import styles from './navitem.scss';
 
 const cx = classNames.bind(styles);
-
-class Detail extends Component {
-  static propTypes = {
-    detail: PropTypes.shape({
-      id: PropTypes.number,
-      name: PropTypes.string,
-      mobileHref: PropTypes.string,
-      dropdownClass: PropTypes.string,
-      hasDropdown: PropTypes.bool,
-      children: PropTypes.object,
-    }),
-    hasDropdown: PropTypes.bool,
-    closeHeaderDropdown: PropTypes.func,
-    mobile: PropTypes.bool,
-  };
-
+type Props = {
+  detail: MenuDetails,
+  hasDropdown: boolean,
+  closeHeaderDropdown: () => void,
+  mobile: boolean,
+};
+class NavItem extends Component {
   state = {
     openDropdown: false,
   };
-
+  props: Props;
   handleDropdown = e => {
     const { openDropdown } = this.state;
     const { mobile } = this.props;
@@ -56,19 +49,19 @@ class Detail extends Component {
     const { detail, hasDropdown, mobile } = this.props;
 
     const linkContent = (
-      <DetailContent
+      <NavItemLabel
         name={detail.name}
         children={detail.children}
         theme="theme-boldr"
       />
     );
-    const linkHref = (mobile ? detail.mobile_href : null) || detail.href;
+    const linkHref = (mobile ? detail.mobileHref : null) || detail.href;
 
     return (
       <li
         className={cx(
-          'boldr-menudetail',
-          [`detail-${detail.id}`],
+          'boldrui-sh__navitem',
+          [`item__${detail.id}`],
           ['theme-boldr'],
           {
             'boldr-menudetail__dropdown': hasDropdown,
@@ -86,15 +79,15 @@ class Detail extends Component {
           ? <NavLink
               to={`/${linkHref}`}
               onClick={this.closeDropdowns}
-              className={cx('boldr-menudetail__link')}
+              className={cx('boldrui-sh__navitem-link')}
             >
               {linkContent}
             </NavLink>
-          : <span tabIndex="0" className={cx('boldr-menudetail__link')}>
+          : <span tabIndex="0" className={cx('boldrui-sh__navitem-link')}>
               {linkContent}
             </span>}
         {detail.children
-          ? <Dropdown
+          ? <SiteHeaderDropdown
               data={detail}
               closeDropdowns={this.closeDropdowns}
               open={this.state.openDropdown}
@@ -106,30 +99,4 @@ class Detail extends Component {
   }
 }
 
-export default Detail;
-
-const DetailContent = ({ name, children }) => (
-  <span>
-    <span className={cx('boldr-menudetail__text')}>{name}</span>
-    {children
-      ? <svg
-          width="8"
-          height="4"
-          viewBox="62 7 10 6"
-          className={cx('boldr-menudetail__caret')}
-        >
-          <path
-            // eslint-disable-next-line max-len
-            d="M71.884 7.698l-4.56 5.116c-.013.022-.008.05-.026.07-.083.084-.192.12-.3.116-.106.004-.214-.033-.295-.117-.02-.02-.014-.047-.028-.068L62.115 7.7c-.154-.16-.154-.42 0-.58.156-.16.408-.16.563 0L67 11.97l4.322-4.85c.155-.16.406-.16.56 0 .157.16.157.418.002.578z"
-            fill="#000"
-          />
-        </svg>
-      : null}
-  </span>
-);
-
-DetailContent.propTypes = {
-  name: PropTypes.string,
-  theme: PropTypes.string,
-  children: PropTypes.any,
-};
+export default NavItem;
