@@ -5,7 +5,7 @@ import removeIdFromArray from 'boldr-utils/es/arrays/removeIdFromArray';
 import * as notif from '../../../../core/constants';
 
 import { notificationSend } from '../../../../state/modules/notifications';
-import * as t from '../../actionTypes';
+import * as t from '../constants';
 import { getPosts } from './selectors';
 
 export const STATE_KEY = 'posts';
@@ -14,6 +14,7 @@ const all = (state = {}, action) => {
   switch (action.type) {
     case t.FETCH_POSTS_SUCCESS:
     case t.CREATE_POST_SUCCESS:
+    case t.FETCH_POST_SUCCESS:
       return {
         ...state,
         ...action.payload.entities.posts,
@@ -28,6 +29,7 @@ const all = (state = {}, action) => {
 const ids = (state = [], action) => {
   switch (action.type) {
     case t.FETCH_POSTS_SUCCESS:
+      // case t.FETCH_POST_SUCCESS:
       return action.payload.result;
     case t.DELETE_POST_SUCCESS:
       return removeIdFromArray(state, action.id);

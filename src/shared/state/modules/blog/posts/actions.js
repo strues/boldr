@@ -6,7 +6,7 @@ import * as notif from '../../../../core/constants';
 import {
   notificationSend,
 } from '../../../../state/modules/notifications/notifications';
-import * as t from '../../actionTypes';
+import * as t from '../constants';
 import type {
   Dispatch,
   GetState,
@@ -103,9 +103,11 @@ export const fetchPost = (slug: string, axios: any): ThunkAction => (
   return axios
     .get(`/api/v1/posts/slug/${slug}?include=[author,tags]`)
     .then(res => {
-      dispatch({
+      const singlePost = res.data;
+      const normalizedPost = normalize(singlePost, postSchema);
+      return dispatch({
         type: t.FETCH_POST_SUCCESS,
-        payload: res.data,
+        payload: normalizedPost,
       });
     })
     .catch(err => {

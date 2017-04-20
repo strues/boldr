@@ -23,7 +23,8 @@ const ROOT_DIR = appRootDir.get();
 const prefetches = [];
 
 const prefetchPlugins = prefetches.map(
-  (specifier) => new webpack.PrefetchPlugin(specifier));
+  specifier => new webpack.PrefetchPlugin(specifier),
+);
 /**
  * @param  {Object} buildOptions - The build options.
  * @param  {target} buildOptions.target - The bundle target
@@ -53,14 +54,13 @@ export default function webpackConfigFactory(buildOptions) {
 
   console.log(
     chalk.white.bgBlue(
-      `==> Creating ${isProd
-        ? 'an optimized'
-        : 'a development'} bundle configuration for the "${target}"`,
+      `==> Creating ${isProd ? 'an optimized' : 'a development'} bundle configuration for the "${target}"`,
     ),
   );
 
   const bundleConfig = isServer || isClient
-  ? config(['bundles', target]) : config(['additionalNodeBundles', target]);
+    ? config(['bundles', target])
+    : config(['additionalNodeBundles', target]);
 
   if (!bundleConfig) {
     throw new Error('No bundle configuration exists for target:', target);
@@ -71,7 +71,10 @@ export default function webpackConfigFactory(buildOptions) {
 
     entry: {
       index: removeNil([
-        ifDevClient(() => 'webpack-hot-middleware/client?reload=true&path=http://localhost:3001/__webpack_hmr'), // eslint-disable-line
+        ifDevClient(
+          () =>
+            'webpack-hot-middleware/client?reload=true&path=http://localhost:3001/__webpack_hmr',
+        ), // eslint-disable-line
         path.resolve(ROOT_DIR, bundleConfig.entryFile),
       ]),
     },
@@ -88,7 +91,7 @@ export default function webpackConfigFactory(buildOptions) {
     cache: true,
     resolve: {
       alias: {
-      // necessary when using symlinks that require these guys
+        // necessary when using symlinks that require these guys
         react: path.join(ROOT_DIR, 'node_modules', 'react'),
         'react-dom': path.join(ROOT_DIR, 'node_modules', 'react-dom'),
       },
@@ -111,11 +114,17 @@ export default function webpackConfigFactory(buildOptions) {
     externals: removeNil([
       ifNode(() =>
         nodeExternals({
-          whitelist: removeNil(['source-map-support/register']).concat(config('extWhitelist') || []), // eslint-disable-line
-        })),
+          whitelist: removeNil(['source-map-support/register']).concat(
+            config('extWhitelist') || [],
+          ), // eslint-disable-line
+        }),
+      ),
     ]),
 
-    devtool: ifElse(isNode || isDev || config('incSourceMaps'))('source-map', 'hidden-source-map'), // eslint-disable-line
+    devtool: ifElse(isNode || isDev || config('incSourceMaps'))(
+      'source-map',
+      'hidden-source-map',
+    ), // eslint-disable-line
 
     performance: ifProdClient({ hints: 'warning' }, false),
     plugins: removeNil([
@@ -141,6 +150,7 @@ export default function webpackConfigFactory(buildOptions) {
         IS_DEV: JSON.stringify(isDev),
         __DEV__: JSON.stringify(isDev),
         __SERVER__: JSON.stringify(isServer),
+        DEBUG: JSON.stringify(process.env.DEBUG),
       }),
 
       ifClient(
@@ -170,7 +180,6 @@ export default function webpackConfigFactory(buildOptions) {
               sourceMaps: false,
               comments: false,
               presets: [
-                'react',
                 ifClient([
                   'env',
                   {
@@ -180,7 +189,10 @@ export default function webpackConfigFactory(buildOptions) {
                     targets: {
                       node: 'current',
                     },
-                    exclude: ['transform-async-to-generator', 'transform-regenerator'], // eslint-disable-line
+                    exclude: [
+                      'transform-async-to-generator',
+                      'transform-regenerator',
+                    ], // eslint-disable-line
                   },
                 ]),
                 ifNode([
@@ -192,22 +204,32 @@ export default function webpackConfigFactory(buildOptions) {
                     targets: {
                       node: 'current',
                     },
-                    exclude: ['transform-async-to-generator', 'transform-regenerator'], // eslint-disable-line
+                    exclude: [
+                      'transform-async-to-generator',
+                      'transform-regenerator',
+                    ], // eslint-disable-line
                   },
                 ]),
                 'stage-2',
+                'react',
               ].filter(x => x != null),
               plugins: [
+                'syntax-dynamic-import',
+                'syntax-flow',
+                'syntax-trailing-function-commas',
                 'transform-decorators-legacy',
                 'fast-async',
-                ['react-loadable/babel', {
-                  server: true,
-                  webpack: true,
-                }],
+                [
+                  'react-loadable/babel',
+                  {
+                    server: true,
+                    webpack: true,
+                  },
+                ],
                 ifNode('dynamic-import-node'),
                 ifClient('dynamic-import-webpack'),
                 ifClient(['transform-react-jsx', { useBuiltIns: true }]),
-                'transform-flow-strip-types',
+                ifProd('transform-flow-strip-types'),
                 ifDev('transform-react-jsx-self'),
                 ifDev('transform-react-jsx-source'),
                 ifProd('transform-react-inline-elements'),
@@ -259,8 +281,10 @@ export default function webpackConfigFactory(buildOptions) {
       ifProdClient(
         () =>
           new PurifyCSSPlugin({
-            paths: [...globSync(`${ROOT_DIR}/src/shared/**/*.js`),
-              ...globSync(`${ROOT_DIR}/src/shared/**/*.(scss|css)`)],
+            paths: [
+              ...globSync(`${ROOT_DIR}/src/shared/**/*.js`),
+              ...globSync(`${ROOT_DIR}/src/shared/**/*.(scss|css)`),
+            ],
             styleExtensions: ['.css', '.scss'],
             moduleExtensions: [],
             purifyOptions: {
@@ -284,7 +308,8 @@ export default function webpackConfigFactory(buildOptions) {
           ],
           include: removeNil([
             ...bundleConfig.srcPaths.map(srcPath =>
-              path.resolve(ROOT_DIR, srcPath)),
+              path.resolve(ROOT_DIR, srcPath),
+            ),
             ifProdClient(path.resolve(ROOT_DIR, 'src/html')),
           ]),
         },
@@ -301,7 +326,11 @@ export default function webpackConfigFactory(buildOptions) {
               }),
             })),
             ifNode({
-              loaders: ['css-loader/locals', 'postcss-loader', 'fast-sass-loader'], // eslint-disable-line
+              loaders: [
+                'css-loader/locals',
+                'postcss-loader',
+                'fast-sass-loader',
+              ], // eslint-disable-line
             }),
           ),
         ),

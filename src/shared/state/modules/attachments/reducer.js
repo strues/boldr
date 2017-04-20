@@ -1,4 +1,4 @@
-import * as t from '../actionTypes';
+import * as t from './constants';
 
 export const STATE_KEY = 'attachments';
 

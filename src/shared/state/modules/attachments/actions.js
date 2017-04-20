@@ -3,8 +3,9 @@ import api from '../../../core/api';
 import { getToken } from '../../../core/authentication/token';
 import * as notif from '../../../core/constants';
 import { notificationSend } from '../notifications/notifications';
-import * as t from '../actionTypes';
+
 import { editProfile } from '../users/actions';
+import * as t from './constants';
 
 const token = getToken();
 

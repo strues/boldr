@@ -3,7 +3,7 @@ import { push } from 'react-router-redux';
 import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import { notificationSend } from '../../notifications/notifications';
-import * as t from '../../actionTypes';
+import * as t from '../constants';
 import { template as templateSchema, arrayOfTemplate } from './schema';
 /**
   * FETCH TEMPLATES

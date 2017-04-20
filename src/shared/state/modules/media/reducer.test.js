@@ -1,4 +1,3 @@
-import { GET_ATTACHMENT_REQUEST } from '../actionTypes';
 import attachmentReducer from './reducer';
 
 describe('Attachment', () => {

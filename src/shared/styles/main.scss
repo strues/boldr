@@ -1,7 +1,38 @@
 $boldr-ns: 'boldrui-';
-@import '~boldr-ui/lib/styles/boldrui';
 
-.boldr {
+body {
 	height: 100%;
-	min-height: 100%;
+	min-height: 100vh !important;
 }
+
+#app {
+	min-height: 100vh!important;
+	height: 100%;
+}
+
+/*
+body
+  height: 100%
+  min-height: 100vh;
+app
+  min-height 100vh
+  height: 100%
+
+.boldr none;
+
+<div style={{ height: 100% minHeight: 100vh }}>
+sidebar
+  display: flex;
+  min-height: 100vh;
+
+
+  section
+    height: 100%
+    flex: 1
+    width: 100%;
+ */
+.boldrui-dash-footer {
+	position: relative !important;
+	margin-top: auto;
+}
+@import '~boldr-ui/lib/styles/boldrui';

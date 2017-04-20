@@ -1,7 +1,7 @@
 import api from '../../../../core/api';
 import { notificationSend } from '../../notifications/notifications';
 import * as notif from '../../../../core/constants';
-import * as t from '../../actionTypes';
+import * as t from './constants';
 
 /**
   * FETCH MEMBERS ACTIONS

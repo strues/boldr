@@ -3,7 +3,7 @@ import merge from 'lodash/merge';
 import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import { notificationSend } from '../../notifications/notifications';
-import * as t from '../../actionTypes';
+import * as t from '../constants';
 import { tag as tagSchema, arrayOfTag } from './schema';
 
 const API_PREFIX = '/api/v1';

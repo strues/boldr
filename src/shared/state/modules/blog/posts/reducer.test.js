@@ -1,4 +1,4 @@
-import { FETCH_POSTS_REQUEST, FETCH_POST_FAILURE } from '../../actionTypes';
+import { FETCH_POSTS_REQUEST, FETCH_POST_FAILURE } from '../constants';
 import postsReducer from './reducer';
 
 describe('Post reducer', () => {

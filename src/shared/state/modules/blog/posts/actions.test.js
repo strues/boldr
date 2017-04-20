@@ -11,7 +11,7 @@ import {
   FETCH_POST_SUCCESS,
   FETCH_POST_FAILURE,
   SELECT_POST,
-} from '../../actionTypes';
+} from '../constants';
 import postsFixture from './__fixtures__/posts.fixture';
 import postFixture from './__fixtures__/post.fixture';
 import { fetchPosts, fetchPost, selectPost } from './actions';

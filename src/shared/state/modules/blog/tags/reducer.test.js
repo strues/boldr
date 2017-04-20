@@ -1,4 +1,4 @@
-import { FETCH_TAGS_REQUEST, FETCH_TAGS_FAILURE } from '../../actionTypes';
+import { FETCH_TAGS_REQUEST, FETCH_TAGS_FAILURE } from '../constants';
 import tagsReducer from './reducer';
 
 describe('Tags', () => {

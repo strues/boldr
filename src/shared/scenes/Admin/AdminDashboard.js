@@ -44,10 +44,6 @@ const DashboardLayout = styled.div`
   min-height: 100%;
 `;
 export class AdminDashboard extends Component {
-  state = {
-    hidden: false,
-  };
-
   props: Props;
 
   handleHideSidebar = (e): Function => {
@@ -57,11 +53,7 @@ export class AdminDashboard extends Component {
   onExpandCollapse = () => {
     this.props.dispatch(expandCollapseSideMenu());
   };
-  clickActivate = () => {
-    const activate = '/item41/a';
 
-    this.setState({ activate });
-  };
   render() {
     const {
       route,
@@ -70,8 +62,10 @@ export class AdminDashboard extends Component {
       routing,
       location: { pathname, search },
     } = this.props;
+    // const currentUrl = this.props.location.pathname.split('/');
+    // const isRootAdmin = currentUrl.length === 2;
     return (
-      <div style={{ display: 'flex', height: '100%', minHeight: '100%' }}>
+      <div style={{ display: 'flex', height: '100%', minHeight: '100vh' }}>
         {ui.visible
           ? <Sidebar
               items={sidebarLinks}

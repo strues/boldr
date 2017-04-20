@@ -1,4 +1,4 @@
-import * as t from '../../actionTypes';
+import * as t from './constants';
 
 export const showSidebar = () => ({ type: t.SHOW_SIDEBAR });
 export const hideSidebar = () => ({ type: t.HIDE_SIDEBAR });

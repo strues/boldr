@@ -47,8 +47,8 @@ function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
   const routerContext = {};
   // Load data on server-side
   const loadBranchData = async () => {
-    const branch = await matchRoutes(routes, req.url);
-    const promises = branch.map(({ route, match }) => {
+    const branch = matchRoutes(routes, req.url);
+    const promises = await branch.map(({ route, match }) => {
       // Dispatch the action(s) through the loadData method of "./routes.js"
       if (route.loadData) {
         return route.loadData(store.dispatch, match.params);

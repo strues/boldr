@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import * as t from '../../actionTypes';
+import * as t from '../constants';
 
 export const STATE_KEY = 'templates';
 

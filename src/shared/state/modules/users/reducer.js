@@ -1,46 +1,23 @@
 import { combineReducers } from 'redux';
-import * as t from '../actionTypes';
+import {
+  LOGIN_REQUEST,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  CHECK_AUTH_SUCCESS,
+  LOGOUT,
+} from '../auth/constants';
+import * as t from './constants';
 
 export const STATE_KEY = 'users';
 
-const all = (state = {}, action) => {
-  switch (action.type) {
-    // case t.FETCH_POSTS_SUCCESS:
-    //   return {
-    //     ...state,
-    //     ...action.payload.entities.posts,
-    //   };
-    // case t.DELETE_POST_SUCCESS:
-    //   return removeByKey(state, action.id);
-    default:
-      return state;
-  }
-};
-
-const ids = (state = [], action) => {
-  switch (action.type) {
-    // case t.FETCH_POSTS_SUCCESS:
-    //   return action.payload.result;
-    // case t.DELETE_POST_SUCCESS:
-    //   return removeIdFromArray(state, action.id);
-    default:
-      return state;
-  }
-};
-
-const userlist = combineReducers({
-  all,
-  ids,
-});
-
 const isFetching = (state = false, action) => {
   switch (action.type) {
-    case t.LOGIN_REQUEST:
+    case LOGIN_REQUEST:
     case t.FETCH_PROFILE_REQUEST:
     case t.FORGOT_PASSWORD_REQUEST:
     case t.RESET_PASSWORD_REQUEST:
       return true;
-    case t.LOGIN_SUCCESS:
+    case LOGIN_SUCCESS:
     case t.FETCH_PROFILE_SUCCESS:
     case t.FETCH_PROFILE_FAILURE:
     case t.RESET_PASSWORD_SUCCESS:
@@ -70,8 +47,8 @@ const INITIAL_STATE = {
 
 const me = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case t.LOGIN_SUCCESS:
-    case t.CHECK_AUTH_SUCCESS:
+    case LOGIN_SUCCESS:
+    case CHECK_AUTH_SUCCESS:
       return {
         ...state,
         id: action.user.id,
@@ -103,7 +80,7 @@ const me = (state = INITIAL_STATE, action) => {
         website: action.payload.website,
         bio: action.payload.bio,
       };
-    case t.LOGOUT:
+    case LOGOUT:
       return {
         ...state,
         id: '',
@@ -167,5 +144,4 @@ export default combineReducers({
   me,
   profile,
   isFetching,
-  userlist,
 });

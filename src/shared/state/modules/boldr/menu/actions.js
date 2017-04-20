@@ -2,7 +2,7 @@ import { normalize, schema } from 'normalizr';
 import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import { notificationSend } from '../../notifications/notifications';
-import * as t from '../../actionTypes';
+import * as t from '../constants';
 import { detail, menu } from './schema';
 
 const API_PREFIX = '/api/v1';

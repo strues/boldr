@@ -1,4 +1,4 @@
-import { LOGIN_REQUEST, LOGIN_FAILURE } from '../actionTypes';
+import { LOGIN_REQUEST, LOGIN_FAILURE } from './constants';
 import authReducer from './reducer';
 
 describe('Auth Reducer', () => {
