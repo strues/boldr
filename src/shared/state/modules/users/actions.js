@@ -18,8 +18,16 @@ export function forgotPassword(email) {
       type: t.FORGOT_PASSWORD_REQUEST,
     });
     return api
-      .post(`${API_PREFIX}/tokens/forgot-password`, { data: email })
+      .post(`${API_PREFIX}/tokens/forgot-password`, { email })
       .then(res => {
+        if (res.status !== 202) {
+          const err = JSON.stringify(res.data.message.message);
+          dispatch({
+            type: t.FORGOT_PASSWORD_FAILURE,
+            error: err,
+          });
+          return dispatch(notificationSend(notif.MSG_FORGOT_PW_ERROR));
+        }
         dispatch({
           type: t.FORGOT_PASSWORD_SUCCESS,
         });
@@ -48,9 +56,16 @@ export function resetPassword(password, token) {
     });
     return api
       .post(`${API_PREFIX}/tokens/reset-password/${token}`, {
-        data: password,
+        password,
+        token,
       })
       .then(res => {
+        if (res.status !== 204) {
+          return dispatch({
+            type: t.RESET_PASSWORD_FAILURE,
+            error: res.data.message,
+          });
+        }
         dispatch({
           type: t.RESET_PASSWORD_SUCCESS,
         });
