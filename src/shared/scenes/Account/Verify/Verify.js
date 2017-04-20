@@ -1,5 +1,5 @@
 /* @flow */
-// $FlowIssue
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Button, FormCard } from 'boldr-ui';
@@ -10,7 +10,7 @@ import { verifyAccount } from '../../../state/modules/users/actions';
 
 export type Props = {
   dispatch: () => void,
-  params: Object,
+  match: Object,
 };
 
 class Verify extends Component {
@@ -22,7 +22,7 @@ class Verify extends Component {
 
   handleVerify(event, props): void {
     event.preventDefault();
-    this.props.dispatch(verifyAccount(this.props.params.token));
+    this.props.dispatch(verifyAccount(this.props.match.params.token));
   }
 
   render() {

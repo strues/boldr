@@ -54,7 +54,7 @@ export function resetPassword(password, token) {
         dispatch({
           type: t.RESET_PASSWORD_SUCCESS,
         });
-        push('/account/login');
+        dispatch(push('/account/login'));
         dispatch(notificationSend(notif.MSG_RESET_PW_SUCCESS));
       })
       .catch(err =>
@@ -78,9 +78,9 @@ export function verifyAccount(token) {
       type: t.VERIFY_ACCOUNT_REQUEST,
     });
     return api
-      .get(`/auth/verification/${token}`)
+      .post(`${API_PREFIX}/auth/verify`, { token })
       .then(res => {
-        push('/account/login');
+        dispatch(push('/account/login'));
         dispatch({
           type: t.VERIFY_ACCOUNT_SUCCESS,
         });

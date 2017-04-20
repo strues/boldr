@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import classNames from 'classnames/bind';
 import type { ReactChildren } from '../../../types/react';
 import SiteHeaderDropdown from '../SiteHeaderDropdown';

@@ -21,6 +21,11 @@ export function doSignup(data) {
     return api
       .post('/api/v1/auth/signup', data)
       .then(res => {
+        if (res.status !== 201) {
+          const err = JSON.stringify(res.data.message.message);
+          dispatch(signUpError(err));
+          dispatch(notificationSend(notif.MSG_SIGNUP_ERROR));
+        }
         dispatch(signUpSuccess());
         dispatch(push('/'));
         dispatch(notificationSend(notif.MSG_SIGNUP_SUCCESS));

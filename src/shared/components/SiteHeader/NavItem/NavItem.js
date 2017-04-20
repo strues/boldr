@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import classNames from 'classnames/bind';
 import NavLink from 'react-router-dom/NavLink';
 import NavItemLabel from '../NavItemLabel';
