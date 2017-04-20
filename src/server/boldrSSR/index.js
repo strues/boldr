@@ -8,7 +8,9 @@ import { StaticRouter } from 'react-router-dom';
 import { matchRoutes } from 'react-router-config';
 import styleSheet from 'styled-components/lib/models/StyleSheet';
 import Helmet from 'react-helmet';
-
+import {
+  fetchPostsIfNeeded,
+} from '../../shared/state/modules/blog/posts/actions';
 import configureStore from '../../shared/state/store';
 import renderRoutes from '../../shared/core/addRoutes';
 import routes from '../../shared/routes';
@@ -47,7 +49,7 @@ function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
   const routerContext = {};
   // Load data on server-side
   const loadBranchData = async () => {
-    const branch = matchRoutes(routes, req.url);
+    const branch = await matchRoutes(routes, req.url);
     const promises = await branch.map(({ route, match }) => {
       // Dispatch the action(s) through the loadData method of "./routes.js"
       if (route.loadData) {

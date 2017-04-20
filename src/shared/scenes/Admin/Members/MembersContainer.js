@@ -9,10 +9,12 @@ import {
   memberSelected,
   updateMember,
 } from '../../../state/modules/admin/members/actions';
+import { getUsers } from '../../../state/modules/users/selectors';
 import Members from './Members';
 
 type Props = {
-  members: Object,
+  members: Array<User>,
+  currentMember: User,
   dispatch: Function,
   memberSelected: Function,
   fetchMembersIfNeeded: () => {},
@@ -48,9 +50,9 @@ export class MembersContainer extends Component {
     this.props.dispatch(showModal());
   }
 
-  toggleUser(userId: String) {
+  toggleUser(user: Object) {
     const { dispatch } = this.props;
-    dispatch(memberSelected(userId));
+    dispatch(memberSelected(user));
     dispatch(showModal());
   }
 
@@ -60,21 +62,21 @@ export class MembersContainer extends Component {
       firstName: values.firstName,
       lastName: values.lastName,
       role: values.role,
-      id: this.props.members.selected[0].id,
+      id: this.props.currentMember.id,
     };
 
     this.props.dispatch(updateMember(userData));
   }
   render() {
-    const { members, ui } = this.props;
+    const { members, ui, currentMember } = this.props;
     return (
       <Members
         toggleUser={this.toggleUser}
-        users={members.members}
+        users={members}
         visible={ui.modal}
         close={this.closeModal}
         handleSubmit={this.handleSubmit}
-        initialValues={members.selected[0]}
+        initialValues={currentMember}
       />
     );
   }
@@ -82,8 +84,8 @@ export class MembersContainer extends Component {
 
 const mapStateToProps = (state, ownProps) => {
   return {
-    members: state.admin.members,
-    selected: state.admin.members.selected,
+    members: getUsers(state),
+    currentMember: state.admin.members.currentMember,
     ui: state.boldr.ui,
   };
 };

@@ -63,7 +63,7 @@ const currentPost = (state = {}, action) => {
     case t.FETCH_POST_SUCCESS:
       return {
         ...state,
-        ...action.payload,
+        ...action.payload.entities.posts[action.slug],
       };
     default:
       return state;

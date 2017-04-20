@@ -1,6 +1,9 @@
+import { normalize, arrayOf, schema } from 'normalizr';
+
 import api from '../../../../core/api';
 import { notificationSend } from '../../notifications/notifications';
 import * as notif from '../../../../core/constants';
+import { user as userSchema, arrayOfUsers } from '../../users/schema';
 import * as t from './constants';
 
 /**
@@ -16,9 +19,12 @@ export const fetchMembers = (axios: any): ThunkAction => (
   return axios
     .get('/api/v1/users?include=[roles]')
     .then(res => {
+      const users = res.data.results;
+      const normalizedUsers = normalize(users, arrayOfUsers);
+
       dispatch({
         type: t.LOAD_MEMBERS_SUCCESS,
-        payload: res.data.results,
+        payload: normalizedUsers,
       });
     })
     .catch(err => {
@@ -45,8 +51,8 @@ export const fetchMembersIfNeeded = (): ThunkAction => (
 };
 
 function shouldFetchMembers(state) {
-  const { members } = state.admin.members;
-  if (!members.length) {
+  const { ids } = state.admin.members;
+  if (!ids.length) {
     return true;
   }
   return false;
@@ -71,7 +77,9 @@ export function updateMember(userData) {
     return api
       .put(`/api/v1/users/admin/${userData.id}`, data)
       .then(res => {
-        dispatch(doneUpdateMember(res));
+        const updatedUser = res.data;
+        const normalizedUser = normalize(updatedUser, userSchema);
+        dispatch(doneUpdateMember(normalizedUser));
         dispatch(notificationSend(notif.MSG_UPDATE_MEMBER_SUCCESS));
       })
       .catch(err => {
@@ -85,10 +93,10 @@ const beginUpdateMember = () => {
   return { type: t.UPDATE_MEMBER_REQUEST };
 };
 
-const doneUpdateMember = res => {
+const doneUpdateMember = normalizedUser => {
   return {
     type: t.UPDATE_MEMBER_SUCCESS,
-    payload: res.data,
+    payload: normalizedUser,
   };
 };
 
@@ -105,9 +113,9 @@ const failUpdateMember = err => {
   * @exports memberSelected
   *****************************************************************/
 
-export function memberSelected(userId) {
+export function memberSelected(user) {
   return {
     type: t.MEMBER_SELECTED,
-    id: userId,
+    payload: user,
   };
 }

@@ -108,6 +108,7 @@ export const fetchPost = (slug: string, axios: any): ThunkAction => (
       return dispatch({
         type: t.FETCH_POST_SUCCESS,
         payload: normalizedPost,
+        slug,
       });
     })
     .catch(err => {

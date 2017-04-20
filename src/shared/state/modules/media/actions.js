@@ -118,7 +118,7 @@ export function uploadMedia(payload) {
       })
       .catch(err => {
         dispatch({
-          type: t.t.UPLOAD_ATTACHMENT_FAILURE,
+          type: t.UPLOAD_MEDIA_FAILURE,
           error: err,
         });
       });
