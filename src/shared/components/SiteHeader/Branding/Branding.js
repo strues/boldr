@@ -51,7 +51,7 @@ const Branding = (props: Props) => {
           onClick={closeHeaderDropdown}
         >
           <img
-            src="https://boldr.io/boldr.png"
+            src="https://boldr.io/assets/boldr-text-logo.png"
             alt="logo"
             className={cx('boldrui-sh__branding-logo')}
           />

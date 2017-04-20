@@ -79,7 +79,7 @@ export class AdminDashboard extends Component {
               location={routing.location.pathname}
               visible={ui.visible}
               expanded={ui.expanded}
-              logoImg="https://boldr.io/assets/boldr-white-logo.png"
+              logoImg="https://boldr.io/assets/boldr-logo-white.png"
               logoLink="/"
               isPrimaryColor
             />
