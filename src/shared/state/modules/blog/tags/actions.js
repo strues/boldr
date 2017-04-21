@@ -2,7 +2,7 @@ import { normalize, arrayOf, schema } from 'normalizr';
 import merge from 'lodash/merge';
 import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
-import { notificationSend } from '../../notifications/notifications';
+import { sendNotification } from '../../notifications/notifications';
 import * as t from '../constants';
 import { tag as tagSchema, arrayOfTag } from './schema';
 
@@ -167,10 +167,10 @@ export function createTag(values) {
     return api.post(`${API_PREFIX}/tags`, data).then(res => {
       if (!res.status === 201) {
         dispatch(addTagFailure(res));
-        dispatch(notificationSend(notif.MSG_ADD_TAG_FAILURE));
+        dispatch(sendNotification(notif.MSG_ADD_TAG_FAILURE));
       }
       dispatch(addTagSuccess(res));
-      dispatch(notificationSend(notif.MSG_ADD_TAG_SUCCESS));
+      dispatch(sendNotification(notif.MSG_ADD_TAG_SUCCESS));
     });
   };
 }
@@ -213,11 +213,11 @@ export function deleteTag(id) {
           type: t.DELETE_TAG_SUCCESS,
           id,
         });
-        dispatch(notificationSend(notif.MSG_DELETE_TAG_SUCCESS));
+        dispatch(sendNotification(notif.MSG_DELETE_TAG_SUCCESS));
       })
       .catch(err => {
         dispatch(deleteTagFail(err));
-        dispatch(notificationSend(notif.MSG_DELETE_TAG_FAILURE));
+        dispatch(sendNotification(notif.MSG_DELETE_TAG_FAILURE));
       });
   };
 }

@@ -3,7 +3,7 @@ import { normalize, arrayOf, schema } from 'normalizr';
 import api from '../../../core/api';
 
 import * as notif from '../../../core/constants';
-import { notificationSend } from '../notifications/notifications';
+import { sendNotification } from '../notifications/notifications';
 import { editProfile } from '../users/actions';
 import { media as mediaSchema, arrayOfMedia } from './schema';
 import * as t from './constants';
@@ -116,7 +116,7 @@ export function uploadMediaFile(payload) {
           type: t.UPLOAD_MEDIA_SUCCESS,
           payload: normalizedNewMedia,
         });
-        dispatch(notificationSend(notif.MSG_UPLOAD_SUCCESS));
+        dispatch(sendNotification(notif.MSG_UPLOAD_SUCCESS));
       })
       .catch(err => {
         dispatch({
@@ -140,7 +140,7 @@ export function deleteMedia(m) {
           type: t.DELETE_MEDIA_SUCCESS,
           id,
         });
-        dispatch(notificationSend(notif.MSG_FILE_REMOVED));
+        dispatch(sendNotification(notif.MSG_FILE_REMOVED));
       })
       .catch(err => {
         dispatch({
@@ -167,7 +167,7 @@ export function editMedia(mediaData) {
         const normalizedMedia = normalize(media, mediaSchema);
         dispatch(editMediaSuccess(normalizedMedia));
         dispatch(
-          notificationSend({
+          sendNotification({
             message: 'Updated attachment.',
             kind: 'info',
             dismissAfter: 3000,
@@ -177,7 +177,7 @@ export function editMedia(mediaData) {
       .catch(err => {
         dispatch(errorUpdateAttachment(err));
         dispatch(
-          notificationSend({
+          sendNotification({
             message: 'There was a problem updating the attachment.',
             kind: 'error',
             dismissAfter: 3000,

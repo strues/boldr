@@ -3,6 +3,8 @@ import { spawn } from 'child_process';
 import appRootDir from 'app-root-dir';
 import { log } from '../utils';
 
+const debug = require('debug')('boldr:webpack');
+
 class HotNodeServer {
   constructor(name, compiler, clientCompiler) {
     const compiledEntryFile = path.resolve(
@@ -31,7 +33,7 @@ class HotNodeServer {
         notify: true,
       });
 
-      newServer.stdout.on('data', data => console.log(data.toString().trim()));
+      newServer.stdout.on('data', data => debug(data.toString().trim()));
       newServer.stderr.on('data', data => {
         log({
           title: name,
@@ -39,7 +41,7 @@ class HotNodeServer {
           message: 'Error in server exec, check the console for more info.',
         });
 
-        console.log(data.toString().trim());
+        debug(data.toString().trim());
       });
       this.server = newServer;
     };
@@ -89,7 +91,7 @@ class HotNodeServer {
             message: 'Build failed, check the console for more information.',
             notify: true,
           });
-          console.log(stats.toString());
+          debug(stats.toString());
           return;
         }
 
@@ -101,7 +103,7 @@ class HotNodeServer {
           message: 'Failed to start, check the console for more information.',
           notify: true,
         });
-        console.error(err);
+        debug(err);
       }
     });
 

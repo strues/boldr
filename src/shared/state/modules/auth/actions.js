@@ -6,7 +6,7 @@ import {
   parseJWT,
 } from '../../../core/authentication/token';
 import * as notif from '../../../core/constants';
-import { notificationSend } from '../notifications/notifications';
+import { sendNotification } from '../notifications/notifications';
 import * as t from './constants';
 
 /**
@@ -24,15 +24,15 @@ export function doSignup(data) {
         if (res.status !== 201) {
           const err = JSON.stringify(res.data.message.message);
           dispatch(signUpError(err));
-          dispatch(notificationSend(notif.MSG_SIGNUP_ERROR));
+          dispatch(sendNotification(notif.MSG_SIGNUP_ERROR));
         }
         dispatch(signUpSuccess());
         dispatch(push('/'));
-        dispatch(notificationSend(notif.MSG_SIGNUP_SUCCESS));
+        dispatch(sendNotification(notif.MSG_SIGNUP_SUCCESS));
       })
       .catch(err => {
         dispatch(signUpError(err));
-        dispatch(notificationSend(notif.MSG_SIGNUP_ERROR));
+        dispatch(sendNotification(notif.MSG_SIGNUP_ERROR));
       });
   };
 }
@@ -64,13 +64,13 @@ export function doLogin(data) {
       .then(res => {
         setToken(res.data.token);
         dispatch(loginSuccess(res));
-        dispatch(notificationSend(notif.MSG_LOGIN_SUCCESS));
+        dispatch(sendNotification(notif.MSG_LOGIN_SUCCESS));
         dispatch(push('/'));
       })
       .catch(err => {
         dispatch(loginError(err));
         dispatch(
-          notificationSend({
+          sendNotification({
             message: err,
             kind: 'error',
             dismissAfter: 3000,
@@ -108,7 +108,7 @@ export function logout() {
     dispatch({
       type: t.LOGOUT,
     });
-    dispatch(notificationSend(notif.MSG_LOGOUT));
+    dispatch(sendNotification(notif.MSG_LOGOUT));
   };
 }
 
@@ -127,7 +127,7 @@ export const checkAuth = token => {
       dispatch(checkAuthSuccess(user, token));
     } catch (err) {
       dispatch(checkAuthFailure('Token is invalid'));
-      dispatch(notificationSend(notif.MSG_AUTH_ERROR));
+      dispatch(sendNotification(notif.MSG_AUTH_ERROR));
     }
   };
 };

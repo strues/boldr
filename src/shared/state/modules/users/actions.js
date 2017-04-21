@@ -2,7 +2,7 @@ import { push } from 'react-router-redux';
 import api from '../../../core/api';
 import { setToken, removeToken } from '../../../core/authentication/token';
 import * as notif from '../../../core/constants';
-import { notificationSend } from '../notifications/notifications';
+import { sendNotification } from '../notifications/notifications';
 import * as t from './constants';
 
 const API_PREFIX = '/api/v1';
@@ -26,13 +26,13 @@ export function forgotPassword(email) {
             type: t.FORGOT_PASSWORD_FAILURE,
             error: err,
           });
-          return dispatch(notificationSend(notif.MSG_FORGOT_PW_ERROR));
+          return dispatch(sendNotification(notif.MSG_FORGOT_PW_ERROR));
         }
         dispatch({
           type: t.FORGOT_PASSWORD_SUCCESS,
         });
         dispatch(push('/'));
-        dispatch(notificationSend(notif.MSG_FORGOT_PW_ERROR));
+        dispatch(sendNotification(notif.MSG_FORGOT_PW_ERROR));
       })
       .catch(err =>
         dispatch({
@@ -70,7 +70,7 @@ export function resetPassword(password, token) {
           type: t.RESET_PASSWORD_SUCCESS,
         });
         dispatch(push('/account/login'));
-        dispatch(notificationSend(notif.MSG_RESET_PW_SUCCESS));
+        dispatch(sendNotification(notif.MSG_RESET_PW_SUCCESS));
       })
       .catch(err =>
         dispatch({
@@ -99,7 +99,7 @@ export function verifyAccount(token) {
         dispatch({
           type: t.VERIFY_ACCOUNT_SUCCESS,
         });
-        dispatch(notificationSend(notif.MSG_VERIFY_USER_SUCCESS));
+        dispatch(sendNotification(notif.MSG_VERIFY_USER_SUCCESS));
       })
       .catch(err =>
         dispatch({
@@ -177,11 +177,11 @@ export function editProfile(userData) {
       .put(`${API_PREFIX}/users/${userData.id}`, userData)
       .then(res => {
         dispatch(doneUpdateProfile(res));
-        dispatch(notificationSend(notif.MSG_EDIT_PROFILE_SUCCESS));
+        dispatch(sendNotification(notif.MSG_EDIT_PROFILE_SUCCESS));
       })
       .catch(err => {
         dispatch(failUpdateProfile(err.message));
-        dispatch(notificationSend(notif.MSG_EDIT_PROFILE_FAILURE));
+        dispatch(sendNotification(notif.MSG_EDIT_PROFILE_FAILURE));
       });
   };
 }

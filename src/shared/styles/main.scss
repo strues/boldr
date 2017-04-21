@@ -1,38 +1,24 @@
-$boldr-ns: 'boldrui-';
+@charset 'utf-8';
 
-body {
-	height: 100%;
-	min-height: 100vh !important;
-}
+/// Namespace
+$boldr-ns: 'boldrui-' !default;
+$dash-ns: 'boldrui-dash-'; // .#{$dash-ns}
 
-#app {
-	min-height: 100vh!important;
-	height: 100%;
-}
+@import 'abstracts/colors/all';
 
-/*
-body
-  height: 100%
-  min-height: 100vh;
-app
-  min-height 100vh
-  height: 100%
+// Our variables
+@import 'abstracts/variables';
+// Our mixins
+@import 'abstracts/mixins';
+// Bootstrap components and custom bootstrap component variations
+@import 'vendor/all';
+// Base (typography, grid, animation)
+@import 'base/all';
+@import 'components/all';
 
-.boldr none;
-
-<div style={{ height: 100% minHeight: 100vh }}>
-sidebar
-  display: flex;
-  min-height: 100vh;
-
-
-  section
-    height: 100%
-    flex: 1
-    width: 100%;
- */
-.boldrui-dash-footer {
-	position: relative !important;
-	margin-top: auto;
-}
-@import '~boldr-ui/lib/styles/boldrui';
+@include react-md-everything;
+@include react-md-make-custom-grid('24-40', 24px, 40px, 0);
+@include react-md-make-custom-grid('40-16', 40px, 16px, 0);
+@include boldrui-paper;
+@include boldrui-media;
+@include boldrui-divider;

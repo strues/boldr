@@ -37,8 +37,6 @@ const prefetchPlugins = prefetches.map(
 export default function webpackConfigFactory(buildOptions) {
   const { target, optimize = false } = buildOptions;
 
-  const NODE_ENV = process.env.NODE_ENV || 'development';
-  const mode = NODE_ENV;
   const isProd = optimize;
   const isDev = !isProd;
   const isClient = target === 'client';
@@ -54,7 +52,7 @@ export default function webpackConfigFactory(buildOptions) {
 
   console.log(
     chalk.white.bgBlue(
-      `==> Creating ${isProd ? 'an optimized' : 'a development'} bundle configuration for the "${target}"`,
+      `==> Creating ${isProd ? 'an optimized' : 'a development'} bundle configuration for the "${target}"`, // eslint-disable-line
     ),
   );
 
@@ -219,21 +217,19 @@ export default function webpackConfigFactory(buildOptions) {
                 'syntax-trailing-function-commas',
                 'transform-decorators-legacy',
                 'fast-async',
-                [
+                ifClient([
                   'react-loadable/babel',
                   {
                     server: true,
                     webpack: true,
                   },
-                ],
+                ]),
                 ifNode('dynamic-import-node'),
                 ifClient('dynamic-import-webpack'),
                 ifClient(['transform-react-jsx', { useBuiltIns: true }]),
                 ifProd('transform-flow-strip-types'),
                 ifDev('transform-react-jsx-self'),
                 ifDev('transform-react-jsx-source'),
-                ifProd('transform-react-inline-elements'),
-                ifProd('transform-react-constant-elements'),
               ].filter(x => x != null),
             },
           },
@@ -270,28 +266,26 @@ export default function webpackConfigFactory(buildOptions) {
       ),
       ifProdClient(() => new webpack.optimize.AggressiveMergingPlugin()),
       ifDevClient(() => new NamedModulesPlugin()),
-      ifProdClient(() => new BabiliWebpackPlugin()),
+      ifProdClient(() => new webpack.HashedModuleIdsPlugin()),
+      ifProdClient(() => new webpack.optimize.UglifyJsPlugin({
+            sourceMap: config('includeSourceMapsForOptimisedClientBundle'),
+            compress: {
+              screw_ie8: true,
+              warnings: false,
+            },
+            mangle: {
+              screw_ie8: true,
+            },
+            output: {
+              comments: false,
+              screw_ie8: true,
+            },
+          })),
       ifProdClient(
         () =>
           new ExtractTextPlugin({
             filename: '[name]-[chunkhash].css',
             allChunks: true,
-          }),
-      ),
-      ifProdClient(
-        () =>
-          new PurifyCSSPlugin({
-            paths: [
-              ...globSync(`${ROOT_DIR}/src/shared/**/*.js`),
-              ...globSync(`${ROOT_DIR}/src/shared/**/*.(scss|css)`),
-            ],
-            styleExtensions: ['.css', '.scss'],
-            moduleExtensions: [],
-            purifyOptions: {
-              minify: true,
-              info: true,
-              rejected: true,
-            },
           }),
       ),
     ]),

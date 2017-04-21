@@ -1,4 +1,5 @@
 /* eslint-disable */
+import React from 'react';
 import Loadable from 'react-loadable';
 import { Loader } from 'boldr-ui';
 import type { Dispatch } from './types/redux';

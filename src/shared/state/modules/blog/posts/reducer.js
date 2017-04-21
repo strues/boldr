@@ -4,7 +4,7 @@ import removeByKey from 'boldr-utils/es/objects/removeByKey';
 import removeIdFromArray from 'boldr-utils/es/arrays/removeIdFromArray';
 import * as notif from '../../../../core/constants';
 
-import { notificationSend } from '../../../../state/modules/notifications';
+import { sendNotification } from '../../../../state/modules/notifications';
 import * as t from '../constants';
 import { getPosts } from './selectors';
 

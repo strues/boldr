@@ -2,7 +2,7 @@ import { normalize, arrayOf, schema } from 'normalizr';
 import { push } from 'react-router-redux';
 import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
-import { notificationSend } from '../../notifications/notifications';
+import { sendNotification } from '../../notifications/notifications';
 import * as t from '../constants';
 import { template as templateSchema, arrayOfTemplate } from './schema';
 /**

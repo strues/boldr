@@ -8,9 +8,5 @@
     "syntax-dynamic-import",
     "syntax-flow",
     "syntax-trailing-function-commas",
-    "transform-decorators-legacy",
-    "fast-async",
-    "dynamic-import-node",
-    "dynamic-import-webpack"
   ]
 }

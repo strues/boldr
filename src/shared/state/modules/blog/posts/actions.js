@@ -4,7 +4,7 @@ import merge from 'lodash/merge';
 import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import {
-  notificationSend,
+  sendNotification,
 } from '../../../../state/modules/notifications/notifications';
 import * as t from '../constants';
 import type {
@@ -191,11 +191,11 @@ export function createPost(data: Post) {
       .then(res => {
         const normalizedData = normalize(res.data, postSchema);
         dispatch(createPostSuccess(normalizedData));
-        dispatch(notificationSend(notif.MSG_CREATE_POST_SUCCESS));
+        dispatch(sendNotification(notif.MSG_CREATE_POST_SUCCESS));
       })
       .catch(err => {
         dispatch(errorCreatingPost(err));
-        dispatch(notificationSend(notif.MSG_CREATE_POST_FAILUREURE));
+        dispatch(sendNotification(notif.MSG_CREATE_POST_FAILUREURE));
       });
   };
 }
@@ -263,7 +263,7 @@ export function updatePost(postData: Post) {
           payload: res.data,
         });
         dispatch(
-          notificationSend({
+          sendNotification({
             message: 'Updated article.',
             kind: 'info',
             dismissAfter: 3000,
@@ -273,7 +273,7 @@ export function updatePost(postData: Post) {
       .catch(err => {
         dispatch(errorUpdatingPost(err.message));
         dispatch(
-          notificationSend({
+          sendNotification({
             message: 'There was a problem updating the article.',
             kind: 'error',
             dismissAfter: 3000,

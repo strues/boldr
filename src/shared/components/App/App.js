@@ -166,12 +166,8 @@ class App extends Component {
           />
           <link rel="manifest" href="/manifest.json" />
         </Helmet>
-        <ThemeProvider theme={theme}>
-          <div className={classes}>
-            {renderRoutes(route.routes)}
-            <Notifications />
-          </div>
-        </ThemeProvider>
+        {renderRoutes(route.routes)}
+        <Notifications />
       </div>
     );
   }

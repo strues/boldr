@@ -26,7 +26,7 @@ const sidebarLinks = [
   },
   {
     label: 'File Manager',
-    icon: 'fa-cloud-upload',
+    icon: 'fa-file-code-o',
     id: 2,
     link: '/admin/filemanager',
   },
@@ -38,7 +38,7 @@ const sidebarLinks = [
   },
   {
     label: 'Upload Media',
-    icon: 'fa-picture-o',
+    icon: 'fa-cloud-upload',
     id: 4,
     link: '/admin/media/upload',
   },

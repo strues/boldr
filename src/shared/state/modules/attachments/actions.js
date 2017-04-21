@@ -2,7 +2,7 @@ import { push } from 'react-router-redux';
 import api from '../../../core/api';
 import { getToken } from '../../../core/authentication/token';
 import * as notif from '../../../core/constants';
-import { notificationSend } from '../notifications/notifications';
+import { sendNotification } from '../notifications/notifications';
 
 import { editProfile } from '../users/actions';
 import * as t from './constants';
@@ -78,10 +78,10 @@ export function uploadFiles(payload) {
       .then(res => {
         if (!res.status === 201) {
           dispatch(uploadFail(res));
-          dispatch(notificationSend(notif.MSG_UPLOAD_ERROR));
+          dispatch(sendNotification(notif.MSG_UPLOAD_ERROR));
         }
         dispatch(uploadSuccess(res));
-        dispatch(notificationSend(notif.MSG_UPLOAD_SUCCESS));
+        dispatch(sendNotification(notif.MSG_UPLOAD_SUCCESS));
       })
       .catch(err => {
         dispatch(uploadFail(err));
@@ -124,11 +124,11 @@ export function uploadPostImage(payload) {
       .post('/api/v1/attachments', data)
       .then(res => {
         dispatch(uploadPostImageSuccess(res));
-        dispatch(notificationSend(notif.MSG_UPLOAD_SUCCESS));
+        dispatch(sendNotification(notif.MSG_UPLOAD_SUCCESS));
       })
       .catch(err => {
         dispatch(uploadPostImageFail(err));
-        dispatch(notificationSend(notif.MSG_UPLOAD_ERROR));
+        dispatch(sendNotification(notif.MSG_UPLOAD_ERROR));
       });
   };
 }
@@ -171,7 +171,7 @@ export function deleteAttachment(id) {
           type: t.DELETE_ATTACHMENT_SUCCESS,
           id,
         });
-        dispatch(notificationSend(notif.MSG_FILE_REMOVED));
+        dispatch(sendNotification(notif.MSG_FILE_REMOVED));
       })
       .catch(err => {
         dispatch({
@@ -195,7 +195,7 @@ export function updateAttachment(attachmentData) {
       .then(res => {
         dispatch(updateAttachmentSuccess(res));
         dispatch(
-          notificationSend({
+          sendNotification({
             message: 'Updated attachment.',
             kind: 'info',
             dismissAfter: 3000,
@@ -205,7 +205,7 @@ export function updateAttachment(attachmentData) {
       .catch(err => {
         dispatch(errorUpdateAttachment(err.message));
         dispatch(
-          notificationSend({
+          sendNotification({
             message: 'There was a problem updating the attachment.',
             kind: 'error',
             dismissAfter: 3000,
@@ -268,14 +268,14 @@ export function uploadProfileImage(payload) {
           payload: res.data,
         });
         dispatch(editProfile(userData));
-        dispatch(notificationSend(notif.MSG_UPLOAD_SUCCESS));
+        dispatch(sendNotification(notif.MSG_UPLOAD_SUCCESS));
       })
       .catch(err => {
         dispatch({
           type: t.UPLOAD_PROFILE_IMG_FAILURE,
           error: err,
         });
-        dispatch(notificationSend(notif.MSG_UPLOAD_ERROR));
+        dispatch(sendNotification(notif.MSG_UPLOAD_ERROR));
       });
   };
 }
@@ -298,14 +298,14 @@ export function uploadAvatarImage(payload) {
           type: t.UPLOAD_AVATAR_IMG_SUCCESS,
           payload: res.data,
         });
-        dispatch(notificationSend(notif.MSG_UPLOAD_SUCCESS));
+        dispatch(sendNotification(notif.MSG_UPLOAD_SUCCESS));
       })
       .catch(err => {
         dispatch({
           type: t.UPLOAD_AVATAR_IMG_FAILURE,
           error: err,
         });
-        dispatch(notificationSend(notif.MSG_UPLOAD_ERROR));
+        dispatch(sendNotification(notif.MSG_UPLOAD_ERROR));
       });
   };
 }

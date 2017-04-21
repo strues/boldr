@@ -1,7 +1,7 @@
 import { normalize, schema } from 'normalizr';
 import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
-import { notificationSend } from '../../notifications/notifications';
+import { sendNotification } from '../../notifications/notifications';
 import * as t from '../constants';
 import { detail, menu } from './schema';
 
@@ -91,11 +91,11 @@ export function updateMenuDetails(data) {
       .put(`${API_PREFIX}/menu-details/${data.id}`, data)
       .then(res => {
         dispatch(updateMenuDetailsSuccess(res));
-        dispatch(notificationSend(notif.MSG_UPDATE_LINK_SUCCESS));
+        dispatch(sendNotification(notif.MSG_UPDATE_LINK_SUCCESS));
       })
       .catch(err => {
         dispatch(updateMenuDetailsFailure(err.message));
-        dispatch(notificationSend(notif.MSG_UPDATE_LINK_ERROR));
+        dispatch(sendNotification(notif.MSG_UPDATE_LINK_ERROR));
       });
   };
 }
@@ -146,10 +146,10 @@ export function addMenuDetail(values) {
     return api.post(`${API_PREFIX}/menu-details`, data).then(res => {
       if (!res.status === 201) {
         dispatch(addMenuDetailFailure(res));
-        dispatch(notificationSend(notif.MSG_ADD_LINK_ERROR));
+        dispatch(sendNotification(notif.MSG_ADD_LINK_ERROR));
       }
       dispatch(addMenuDetailSuccess(res));
-      dispatch(notificationSend(notif.MSG_ADD_LINK_SUCCESS));
+      dispatch(sendNotification(notif.MSG_ADD_LINK_SUCCESS));
     });
   };
 }

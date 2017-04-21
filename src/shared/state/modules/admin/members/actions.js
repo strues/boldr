@@ -1,7 +1,7 @@
 import { normalize, arrayOf, schema } from 'normalizr';
 
 import api from '../../../../core/api';
-import { notificationSend } from '../../notifications/notifications';
+import { sendNotification } from '../../notifications/notifications';
 import * as notif from '../../../../core/constants';
 import { user as userSchema, arrayOfUsers } from '../../users/schema';
 import * as t from './constants';
@@ -80,11 +80,11 @@ export function updateMember(userData) {
         const updatedUser = res.data;
         const normalizedUser = normalize(updatedUser, userSchema);
         dispatch(doneUpdateMember(normalizedUser));
-        dispatch(notificationSend(notif.MSG_UPDATE_MEMBER_SUCCESS));
+        dispatch(sendNotification(notif.MSG_UPDATE_MEMBER_SUCCESS));
       })
       .catch(err => {
         dispatch(failUpdateMember(err.message));
-        dispatch(notificationSend(notif.MSG_UPDATE_MEMBER_ERROR));
+        dispatch(sendNotification(notif.MSG_UPDATE_MEMBER_ERROR));
       });
   };
 }

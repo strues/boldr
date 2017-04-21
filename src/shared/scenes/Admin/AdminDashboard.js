@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import NavLink from 'react-router-dom/NavLink';
 import styled from 'styled-components';
+import Loadable from 'react-loadable';
 import { connect } from 'react-redux';
 import {
   Avatar,
@@ -17,6 +18,7 @@ import {
   DashboardContent,
   TopbarLink,
   Topbar,
+  Loader,
 } from 'boldr-ui';
 import {
   showHideSidebar,
@@ -38,11 +40,17 @@ type Props = {
   routing: Object,
 };
 
-const DashboardLayout = styled.div`
-  display: flex;
+const ContentWrapper = styled.section`
+  width: 100%;
   height: 100%;
   min-height: 100%;
+  box-sizing: border-box;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  position: relative;
+  margin: 0 auto;
 `;
+
 export class AdminDashboard extends Component {
   props: Props;
 
@@ -73,6 +81,7 @@ export class AdminDashboard extends Component {
               location={routing.location.pathname}
               visible={ui.visible}
               expanded={ui.expanded}
+              onExpandCollapse={this.onExpandCollapse}
               logoImg="https://boldr.io/assets/boldr-logo-white.png"
               logoLink="/"
               isPrimaryColor
@@ -90,12 +99,11 @@ export class AdminDashboard extends Component {
               { title: 'Dashboard', url: '/admin' },
             ]}
           />
-          <DashboardContent>
-            <Grid fluid>
-              {renderRoutes(route.routes)}
-            </Grid>
-          </DashboardContent>
-          <DashboardFooter copyright="© 2017 Steven Truesdell" />
+
+          <ContentWrapper>
+            {renderRoutes(route.routes)}
+          </ContentWrapper>
+
         </DashboardWrapper>
       </div>
     );

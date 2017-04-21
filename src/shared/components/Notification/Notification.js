@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import uuid from 'uuid';
 
 const inline = {
   zIndex: '99999',
@@ -39,8 +40,7 @@ type Props = {
 class Notification extends Component {
   constructor() {
     super();
-    this._id = new Date().getTime();
-    this._onActionClick = this._onActionClick.bind(this);
+    this._id = uuid.v4();
   }
 
   componentDidMount() {
@@ -52,33 +52,35 @@ class Notification extends Component {
     }
   }
 
-  /*
-   * Handle action click event
-   * @description Handle click events on the
+  /**
+   * @name _onActionClick
+   * Handle click events on the notification
+   * @return {function} returns a function you can call another action with.
    */
-  _onActionClick() {
+  _onActionClick = () => {
     if (this.props.onActionClick) {
       this.props.onActionClick(this.props.id);
     }
-  }
+  };
+
   props: Props;
   render() {
-    const { kind, actionLabel } = this.props;
+    const { kind, actionLabel, message } = this.props;
     return (
-      <div style={inline} className="boldr-notification">
-        <div className="boldr-notification__icon" />
-        <div className="boldr-notification__content">
-          <span className="boldr-notification__message">
-            {this.props.message}
+      <div style={inline} className="boldrui-notification">
+        <div className="boldrui-notification__icon" />
+        <div className="boldrui-notification__content">
+          <span className="boldrui-notification__message">
+            {message}
           </span>
         </div>
         {actionLabel &&
-          <span className="boldr-notification__action">
+          <span className="boldrui-notification__action">
             <button onClick={this._onActionClick}>
-              {this.props.actionLabel}
+              {actionLabel}
             </button>
           </span>}
-        <div className="boldr-notification__close" />
+        <div className="boldrui-notification__close" />
       </div>
     );
   }

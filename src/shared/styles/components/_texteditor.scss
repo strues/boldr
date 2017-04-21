@@ -1,5 +1,5 @@
 .rdw-option-wrapper {
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
   padding: 5px;
   min-width: 25px;
   height: 20px;
@@ -9,20 +9,20 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
-  background: white;
+  background: $white;
   text-transform: capitalize;
 }
 
 .rdw-option-wrapper:hover {
-  box-shadow: 1px 1px 0 #BFBDBD;
+  box-shadow: 1px 1px 0 #bfbdbd;
 }
 
 .rdw-option-wrapper:active {
-  box-shadow: 1px 1px 0 #BFBDBD inset;
+  box-shadow: 1px 1px 0 #bfbdbd inset;
 }
 
 .rdw-option-active {
-  box-shadow: 1px 1px 0 #BFBDBD inset;
+  box-shadow: 1px 1px 0 #bfbdbd inset;
 }
 
 .rdw-option-disabled {
@@ -32,13 +32,12 @@
 
 .rdw-dropdown-wrapper {
   height: 30px;
-  background: white;
+  background: $white;
   cursor: pointer;
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
   border-radius: 2px;
   margin: 0 3px;
   text-transform: capitalize;
-  background: white;
 }
 
 .rdw-dropdown-wrapper:focus {
@@ -46,12 +45,12 @@
 }
 
 .rdw-dropdown-wrapper:hover {
-  box-shadow: 1px 1px 0 #BFBDBD;
-  background-color: #FFFFFF;
+  box-shadow: 1px 1px 0 #bfbdbd;
+  background-color: #fff;
 }
 
 .rdw-dropdown-wrapper:active {
-  box-shadow: 1px 1px 0 #BFBDBD inset;
+  box-shadow: 1px 1px 0 #bfbdbd inset;
 }
 
 .rdw-dropdown-carettoopen {
@@ -87,17 +86,17 @@
 .rdw-dropdown-optionwrapper {
   z-index: 100;
   position: relative;
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
   width: 98%;
-  background: white;
+  background: $white;
   border-radius: 2px;
   margin: 0;
   padding: 0;
 }
 
 .rdw-dropdown-optionwrapper:hover {
-  box-shadow: 1px 1px 0 #BFBDBD;
-  background-color: #FFFFFF;
+  box-shadow: 1px 1px 0 #bfbdbd;
+  background-color: #fff;
 }
 
 .rdw-dropdownoption-default {
@@ -108,7 +107,7 @@
 }
 
 .rdw-dropdownoption-highlighted {
-  background: #F1F1F1;
+  background: #f1f1f1;
 }
 
 .rdw-dropdownoption-active {
@@ -265,12 +264,12 @@
   flex-direction: column;
   width: 175px;
   height: 175px;
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
   padding: 15px;
   border-radius: 2px;
   z-index: 100;
-  background: white;
-  box-shadow: 3px 3px 5px #BFBDBD;
+  background: $white;
+  box-shadow: 3px 3px 5px #bfbdbd;
 }
 
 .rdw-colorpicker-modal-header {
@@ -301,7 +300,7 @@
 .rdw-colorpicker-cube {
   width: 22px;
   height: 22px;
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
 }
 
 .rdw-colorpicker-option {
@@ -312,19 +311,19 @@
   width: 22px;
   height: 22px;
   min-width: 22px;
-  box-shadow: 1px 2px 1px #BFBDBD inset;
+  box-shadow: 1px 2px 1px #bfbdbd inset;
 }
 
 .rdw-colorpicker-option:hover {
-  box-shadow: 1px 2px 1px #BFBDBD;
+  box-shadow: 1px 2px 1px #bfbdbd;
 }
 
 .rdw-colorpicker-option:active {
-  box-shadow: -1px -2px 1px #BFBDBD;
+  box-shadow: -1px -2px 1px #bfbdbd;
 }
 
 .rdw-colorpicker-option-active {
-  box-shadow: 0 0 2px 2px #BFBDBD;
+  box-shadow: 0 0 2px 2px #bfbdbd;
 }
 
 .rdw-link-wrapper {
@@ -356,12 +355,12 @@
   flex-direction: column;
   width: 235px;
   height: 180px;
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
   padding: 15px;
   border-radius: 2px;
   z-index: 100;
-  background: white;
-  box-shadow: 3px 3px 5px #BFBDBD;
+  background: $white;
+  box-shadow: 3px 3px 5px #bfbdbd;
 }
 
 .rdw-link-modal-label {
@@ -371,7 +370,7 @@
 .rdw-link-modal-input {
   margin-top: 5px;
   border-radius: 2px;
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
   height: 25px;
   margin-bottom: 15px;
   padding: 0 5px;
@@ -389,19 +388,19 @@
   margin-left: 10px;
   width: 75px;
   height: 30px;
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
   border-radius: 2px;
   cursor: pointer;
-  background: white;
+  background: $white;
   text-transform: capitalize;
 }
 
 .rdw-link-modal-btn:hover {
-  box-shadow: 1px 1px 0 #BFBDBD;
+  box-shadow: 1px 1px 0 #bfbdbd;
 }
 
 .rdw-link-modal-btn:active {
-  box-shadow: 1px 1px 0 #BFBDBD inset;
+  box-shadow: 1px 1px 0 #bfbdbd inset;
 }
 
 .rdw-link-modal-btn:focus {
@@ -437,15 +436,15 @@
   flex-direction: column;
   width: 235px;
   height: 180px;
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
   padding: 15px;
   border-radius: 2px;
   z-index: 100;
-  background: white;
+  background: $white;
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  box-shadow: 3px 3px 5px #BFBDBD;
+  box-shadow: 3px 3px 5px #bfbdbd;
 }
 
 .rdw-embedded-modal-header {
@@ -466,7 +465,7 @@
   width: 95px;
   border: 1px solid #f1f1f1;
   margin-top: 5px;
-  background: #6EB8D4;
+  background: #6eb8d4;
   border-bottom: 2px solid #0a66b7;
 }
 
@@ -479,7 +478,7 @@
   width: 95%;
   height: 35px;
   margin: 10px 0;
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
   border-radius: 2px;
   font-size: 15px;
   padding: 0 5px;
@@ -498,19 +497,19 @@
   margin: 0 3px;
   width: 75px;
   height: 30px;
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
   border-radius: 2px;
   cursor: pointer;
-  background: white;
+  background: $white;
   text-transform: capitalize;
 }
 
 .rdw-embedded-modal-btn:hover {
-  box-shadow: 1px 1px 0 #BFBDBD;
+  box-shadow: 1px 1px 0 #bfbdbd;
 }
 
 .rdw-embedded-modal-btn:active {
-  box-shadow: 1px 1px 0 #BFBDBD inset;
+  box-shadow: 1px 1px 0 #bfbdbd inset;
 }
 
 .rdw-embedded-modal-btn:focus {
@@ -532,7 +531,7 @@
 .rdw-embedded-modal-size-input {
   width: 45%;
   height: 20px;
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
   border-radius: 2px;
   font-size: 12px;
 }
@@ -558,12 +557,12 @@
   flex-wrap: wrap;
   width: 235px;
   height: 180px;
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
   padding: 15px;
   border-radius: 2px;
   z-index: 100;
-  background: white;
-  box-shadow: 3px 3px 5px #BFBDBD;
+  background: $white;
+  box-shadow: 3px 3px 5px #bfbdbd;
 }
 
 .rdw-emoji-icon {
@@ -603,6 +602,7 @@
   -webkit-animation-delay: -0.16s;
   animation-delay: -0.16s;
 }
+
 @-webkit-keyframes sk-bouncedelay {
   0%,
   100%,
@@ -611,9 +611,10 @@
   }
 
   40% {
-    -webkit-transform: scale(1.0);
+    -webkit-transform: scale(1);
   }
 }
+
 @keyframes sk-bouncedelay {
   0%,
   100%,
@@ -623,8 +624,8 @@
   }
 
   40% {
-    -webkit-transform: scale(1.0);
-    transform: scale(1.0);
+    -webkit-transform: scale(1);
+    transform: scale(1);
   }
 }
 
@@ -643,12 +644,12 @@
   flex-direction: column;
   width: 235px;
   height: 200px;
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
   padding: 15px;
   border-radius: 2px;
   z-index: 100;
-  background: white;
-  box-shadow: 3px 3px 5px #BFBDBD;
+  background: $white;
+  box-shadow: 3px 3px 5px #bfbdbd;
 }
 
 .rdw-image-modal-header {
@@ -674,7 +675,7 @@
 }
 
 .rdw-image-modal-header-label-highlighted {
-  background: #6EB8D4;
+  background: #6eb8d4;
   border-bottom: 2px solid #0a66b7;
 }
 
@@ -724,7 +725,7 @@
   width: 95%;
   height: 35px;
   margin: 25px 0 5px;
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
   border-radius: 2px;
   font-size: 15px;
   padding: 0 5px;
@@ -742,19 +743,19 @@
   margin: 0 5px;
   width: 75px;
   height: 30px;
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
   border-radius: 2px;
   cursor: pointer;
-  background: white;
+  background: $white;
   text-transform: capitalize;
 }
 
 .rdw-image-modal-btn:hover {
-  box-shadow: 1px 1px 0 #BFBDBD;
+  box-shadow: 1px 1px 0 #bfbdbd;
 }
 
 .rdw-image-modal-btn:active {
-  box-shadow: 1px 1px 0 #BFBDBD inset;
+  box-shadow: 1px 1px 0 #bfbdbd inset;
 }
 
 .rdw-image-modal-btn:focus {
@@ -806,7 +807,7 @@
   left: 40%;
   top: 0;
   cursor: pointer;
-  background-color: white;
+  background-color: $white;
 }
 
 .rdw-mention {
@@ -828,11 +829,11 @@
   position: absolute;
   display: flex;
   flex-direction: column;
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
   min-width: 100px;
   max-height: 150px;
   overflow: auto;
-  background: white;
+  background: $white;
   z-index: 100;
 }
 
@@ -842,16 +843,16 @@
 }
 
 .rdw-suggestion-option-active {
-  background-color: #F1F1F1;
+  background-color: #f1f1f1;
 }
 
 .rdw-image-alignment-options-popup {
   position: absolute;
-  background: white;
+  background: $white;
   display: flex;
   padding: 5px 2px;
   border-radius: 2px;
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
   width: 105px;
   cursor: pointer;
   z-index: 100;
@@ -900,11 +901,11 @@
 .rdw-editor-toolbar {
   padding: 6px 5px 0;
   border-radius: 2px;
-  border: 1px solid #F1F1F1;
+  border: 1px solid #f1f1f1;
   display: flex;
   justify-content: flex-start;
   width: 100%;
-  background: white;
+  background: $white;
   flex-wrap: wrap;
   font-size: 15px;
   margin-bottom: 5px;

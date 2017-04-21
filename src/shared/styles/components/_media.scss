@@ -1,0 +1,152 @@
+////
+/// @group media
+////
+
+/// The default aspect ratios to include.
+/// @type List
+$media-aspect-ratios: ('16:9', '4:3', '1:1') !default;
+
+/// A boolean if the overlay styles should be included.
+/// @type Boolean
+$media-inc-overlay: true !default;
+
+/// Boolean if the `.media-embedded` class name should be included.
+/// @type Boolean
+$media-inc-embedded: false !default;
+
+/// A list of class name or html tags that will get the embedded media styles applied
+/// by default in the `.boldrui-media` container.
+/// @type List
+$media-embedded-selectors: ('img' 'iframe' 'svg') !default;
+
+/// The color to use for the media overlay's background color.
+/// @type Color
+$media-overlay-color: rgba($md-black-base, 0.54) !default;
+
+/// A placeholder for making a class or html element use the embedded styles. This class or
+/// element will need to be contained in a class containing `.boldrui-media` to get the correct
+/// styles.
+%boldrui-media-embedded {
+  bottom: 0;
+  height: 100%;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 100%;
+}
+
+/// Creates the styles for media.
+///
+/// @example scss - Example Usage SCSS
+///   @include boldrui-media;
+///
+/// @param {Boolean} include-overlay [$media-inc-overlay] - Boolean if the overlay styles should be included.
+/// @param {Boolean} include-embedded [$media-inc-embedded] - Boolean if the embedded class name should be included.
+///     This does not affect the `$embedded-selectors` param.
+/// @param {List} embedded-selectors [$media-embedded-selectors] - A list of class name or html tags to apply the
+///     embedded styles to by default within a `.boldrui-media` container.
+@mixin boldrui-media($include-overlay: $media-inc-overlay, $include-embedded: $media-inc-embedded, $embedded-selectors: $media-embedded-selectors) {
+  .#{$boldr-ns}media {
+    display: block;
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+    position: relative;
+
+    @if $embedded-selectors and length($embedded-selectors) {
+      @each $selector in $embedded-selectors {
+        #{$selector} {
+          @extend %boldrui-media-embedded;
+        }
+      }
+    }
+  }
+
+  @each $aspect-ratio in $media-aspect-ratios {
+    $map: extract-media($aspect-ratio);
+    $width: map-get($map, width);
+    $height: map-get($map, height);
+
+    @include media-aspect-ratio($width, $height);
+  }
+
+  @if $include-overlay {
+    @include media-overlay;
+  }
+
+  @if $include-embedded {
+    @include media-embedded;
+  }
+}
+
+/// Creates a media aspect ratio that will make the `.media-embedded\` or any of the
+/// `$media-embedded-selectors` children keep the aspect ratio.
+///
+/// @example scss - Example Usage SCSS
+///   @include media-aspect-ratio(16, 9);
+///
+/// @param {Number} width - The width to enforce.
+/// @param {Number} height - The height to enforce.
+@mixin media-aspect-ratio($width, $height) {
+  .#{$boldr-ns}media__#{$width}-#{$height} {
+    padding-bottom: percentage($height / $width);
+  }
+}
+
+/// Very simple mixin to only include the `.media-embedded` class.
+@mixin media-embedded {
+  .#{$boldr-ns}media-embedded {
+    @extend %boldrui-media-embedded;
+  }
+}
+
+/// Creates the styles for the media overlay.
+@mixin media-overlay {
+  .#{$boldr-ns}media-overlay {
+    background: $media-overlay-color;
+    bottom: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+
+    .md-btn,
+    .md-text {
+      color: get-color('text', false);
+    }
+
+    .md-text--secondary {
+      color: get-color('secondary', false);
+    }
+  }
+}
+
+@function extract-media($string) {
+  $index: str-index($string, ':');
+  $width: str-slice($string, 1, $index - 1);
+  $height: str-slice($string, $index + 1);
+
+  @return (width: to-number($width), height: to-number($height));
+}
+
+@function to-number($string) {
+  $strings: ('0', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+  $numbers: (0, 1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+  $result: 0;
+
+  @for $i from 1 through str-length($string) {
+    $character: str-slice($string, $i, $i);
+    $index: index($strings, $character);
+
+    @if not $index {
+      @warn "Unknown character '#{$character}'";
+      $index: 1;
+    }
+
+    $number: nth($numbers, $index);
+    $result: $result * 10 + $number;
+  }
+
+  @return $result;
+}

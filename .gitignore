@@ -17,7 +17,6 @@ flow-typed
 *.env
 
 *.log
-
 **/dist
 **/build
 boldrCMS/

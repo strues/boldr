@@ -4,6 +4,8 @@ import createWebpackHotMiddleware from 'webpack-hot-middleware';
 import { log } from '../utils';
 import ListenerManager from './listenerManager';
 
+const debug = require('debug')('boldr:webpack');
+
 class HotClientServer {
   constructor(compiler) {
     const app = express();
@@ -22,6 +24,14 @@ class HotClientServer {
     this.webpackDevMiddleware = createWebpackMiddleware(compiler, {
       quiet: true,
       noInfo: true,
+      lazy: false,
+      watchOptions: {
+        aggregateTimeout: 300,
+        poll: true,
+      },
+      stats: {
+        colors: true,
+      },
       headers: {
         'Access-Control-Allow-Origin': '*',
       },
@@ -43,7 +53,7 @@ class HotClientServer {
       });
     });
 
-    compiler.plugin('done', (stats) => {
+    compiler.plugin('done', stats => {
       if (stats.hasErrors()) {
         log({
           title: 'client',
@@ -51,7 +61,7 @@ class HotClientServer {
           message: 'Build failed, please check the console for more info.',
           notify: true,
         });
-        console.error(stats.toString());
+        debug(stats.toString());
       } else {
         log({
           title: 'client',
