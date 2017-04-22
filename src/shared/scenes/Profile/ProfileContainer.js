@@ -10,7 +10,8 @@ import { fetchProfileIfNeeded } from '../../state/modules/users';
 import {
   uploadProfileImage,
   uploadAvatarImage,
-} from '../../state/modules/attachments/actions';
+} from '../../scenes/Admin/state';
+
 import {
   hideModal,
   showModal,

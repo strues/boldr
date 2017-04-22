@@ -40,23 +40,22 @@ import DashboardContainer from './scenes/Admin/Dashboard/DashboardContainer';
 // Async data loading actions
 
 import { fetchSettingsIfNeeded } from './state/modules/boldr/settings';
-import { fetchMembersIfNeeded } from './state/modules/admin/members';
-import { fetchAttachmentsIfNeeded } from './state/modules/attachments/actions';
-import { fetchMediaIfNeeded } from './state/modules/media/actions';
-import { fetchProfileIfNeeded } from './state/modules/users';
 import {
+  fetchMembersIfNeeded,
   fetchStatsIfNeeded,
   fetchActivityIfNeeded,
-} from './state/modules/admin/dashboard/actions';
-import { fetchMenusIfNeeded } from './state/modules/boldr/menu/actions';
+  fetchAttachmentsIfNeeded,
+} from './scenes/Admin/state';
+import { fetchMediaIfNeeded } from './state/modules/media/actions';
+import { fetchProfileIfNeeded } from './state/modules/users';
+
+import { fetchMainMenuIfNeeded } from './state/modules/boldr/menu/actions';
 import {
   fetchPostsIfNeeded,
   fetchPostIfNeeded,
-} from './state/modules/blog/posts';
-import {
   fetchTagsIfNeeded,
   fetchTagPostsIfNeeded,
-} from './state/modules/blog/tags/actions';
+} from './scenes/Blog/state';
 
 function LoadingComponent({ error }) {
   if (error) {
@@ -195,7 +194,7 @@ export default [
             exact: true,
             component: Navigation,
             loadData: async (dispatch: Dispatch) =>
-              Promise.all([await dispatch(fetchMenusIfNeeded())]),
+              Promise.all([await dispatch(fetchMainMenuIfNeeded())]),
           },
           {
             path: '/admin/members',

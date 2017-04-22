@@ -4,11 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { showModal, hideModal } from '../../../state/modules/boldr/ui/actions';
-import {
-  fetchMembersIfNeeded,
-  memberSelected,
-  updateMember,
-} from '../../../state/modules/admin/members/actions';
+import { fetchMembersIfNeeded, memberSelected, updateMember } from '../state';
 import { getUsers } from '../../../state/modules/users/selectors';
 import Members from './Members';
 

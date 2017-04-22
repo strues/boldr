@@ -12,6 +12,7 @@ describe('Menu Reducer', () => {
         restricted: false,
         details: [],
       },
+      isFetching: false,
     });
   });
 });

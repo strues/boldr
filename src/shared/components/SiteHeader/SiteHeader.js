@@ -43,6 +43,7 @@ class SiteHeader extends Component {
     children: null,
     theme: 'boldr',
     breakpoint: 992,
+    menu: [],
   };
   state = {
     dropdownIsOpen: false,
@@ -190,7 +191,7 @@ class SiteHeader extends Component {
                     key={detail.uuid}
                     detail={detail}
                     theme="theme-boldr"
-                    hasDropdown={detail.has_dropdown}
+                    hasDropdown={detail.hasDropdown}
                     closeHeaderDropdown={this.closeDropdownOnButtonClick()}
                     moble={isMobile}
                   />

@@ -12,9 +12,7 @@ import {
   FormGroup,
 } from 'boldr-ui';
 
-import {
-  uploadPostImage,
-} from '../../../../../../state/modules/attachments/actions';
+import { uploadPostImage } from '../../../../state';
 import EditorField from './EditorField';
 
 type Props = {

@@ -17,9 +17,7 @@ import {
   FormGroup,
 } from 'boldr-ui';
 
-import {
-  uploadPostImage,
-} from '../../../../../../state/modules/attachments/actions';
+import { uploadPostImage } from '../../../../state';
 import RenderTags from '../RenderTags';
 import FieldEditor from './FieldEditor';
 
@@ -37,7 +35,6 @@ const NewPost = styled.section`
   width: 100%;
   margin-top: 10px;
   padding-bottom: 50px;
-  background-color: #e5eaed;
 `;
 type Props = {
   handleSubmit?: Function,

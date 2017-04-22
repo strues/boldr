@@ -6,9 +6,7 @@ import { Grid, Col, Row, Loader } from 'boldr-ui';
 import Helmet from 'react-helmet';
 
 import BaseTemplate from '../../../templates/BaseTemplate';
-import {
-  fetchTagPostsIfNeeded,
-} from '../../../state/modules/blog/tags/actions';
+import { fetchTagPostsIfNeeded } from '../state/tags/actions';
 import TagList from './TagList';
 
 type Props = {

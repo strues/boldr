@@ -4,7 +4,7 @@ test('should select the menu state', () => {
   const menuState = {};
   const mockedState = {
     boldr: {
-      menu: menuState,
+      menus: menuState,
     },
   };
   expect(selectMenus(mockedState)).toEqual(menuState);

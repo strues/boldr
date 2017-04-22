@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import classnames from 'classnames';
 import { Avatar, FontIcon, Chip, StyleClasses } from 'boldr-ui';
 
-import { selectTag } from '../../../../state/modules/blog/tags/actions';
+import { selectTag } from '../../state/tags/actions';
 
 type Props = {
   className: ?string,

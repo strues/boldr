@@ -22,6 +22,7 @@ export const TOGGLE_DRAWER = '@boldr/ui/TOGGLE_DRAWER';
 export const GET_MAIN_MENU_REQUEST = '@boldr/menu/GET_MAIN_MENU_REQUEST';
 export const GET_MAIN_MENU_SUCCESS = '@boldr/menu/GET_MAIN_MENU_SUCCESS';
 export const GET_MAIN_MENU_FAILURE = '@boldr/menu/FETCH_MENUS_FAILURE';
+export const GET_MAINMENU_SUCCESS = '@boldr/menu/GET_MAINMENU_SUCCESS';
 
 export const UPDATE_MENU_REQUEST = '@boldr/admin/menu/UPDATE_MENU_REQUEST';
 export const UPDATE_MENU_SUCCESS = '@boldr/admin/menu/UPDATE_MENU_SUCCESS';

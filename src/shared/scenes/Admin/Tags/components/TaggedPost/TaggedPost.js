@@ -4,9 +4,7 @@ import { connect } from 'react-redux';
 import Link from 'react-router-dom/Link';
 import { Toolbar, MenuButton, List, ListItem, Loader } from 'boldr-ui';
 
-import {
-  fetchTagPostsIfNeeded,
-} from '../../../../../state/modules/blog/tags/actions';
+import { fetchTagPostsIfNeeded } from '../../../../Blog/state';
 import TaggedPostMenu from '../TaggedPostMenu';
 
 type Props = {

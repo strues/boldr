@@ -12,3 +12,63 @@
     transition-timing-function: $md-transition-deceleration;
   }
 }
+$modal-easeOutQuint: cubic-bezier(0.23, 1, 0.32, 1);
+$ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+.boldrui-modal {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+
+  div {
+    box-sizing: border-box;
+  }
+}
+
+.boldrui-modal__content {
+  .boldrui-paper {
+    padding: 1em;
+  }
+}
+
+.boldrui-modal__portal {
+  .ReactModal__Content.boldrui-modal__content {
+    opacity: 1;
+    transform: scale(0.93);
+    background-color: #fff;
+
+    &--after-open {
+      opacity: 1;
+      transform: scale(1);
+      transition: opacity 0.35s $modal-easeOutQuint, transform 0.35s $modal-easeOutQuint;
+    }
+
+    &--before-close {
+      pointer-events: none;
+      opacity: 0;
+      transform: scale(0.9);
+      transition: opacity 0.3s $modal-easeOutQuint, transform 0.04s $modal-easeOutQuint;
+    }
+  }
+
+  .ReactModal__Overlay.boldrui-modal__overlay {
+    background: rgba(30, 30, 30, 0);
+    opacity: 1;
+
+    &--after-open {
+      background: rgba(30, 30, 30, 0.6);
+      transition: background 0.2s $modal-easeOutQuint;
+    }
+
+    &--before-close {
+      pointer-events: none;
+      background: rgba(30, 30, 30, 0);
+      transition: background 0.15s $ease-out-quad;
+    }
+  }
+}
+
+.boldrui-modal__portal-non-scrollable {
+  .boldrui-modal__overlay {
+    overflow: hidden;
+  }
+}

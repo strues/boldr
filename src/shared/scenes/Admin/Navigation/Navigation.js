@@ -22,13 +22,6 @@ import {
 import NavigationEditor from './components/NavigationEditor';
 import NavigationForm from './components/NavigationForm';
 
-function mapStateToProps(state) {
-  return {
-    mainMenu: state.boldr.menu.main,
-    ui: state.boldr.ui,
-  };
-}
-
 type Props = {
   mainMenu: Object,
   ui: Object,
@@ -51,13 +44,13 @@ class Navigation extends Component {
     open: false,
     detail: {
       name: null,
-      safe_name: null,
+      safeName: null,
       order: null,
       href: null,
       mobile_href: null,
       uuid: null,
-      has_dropdown: false,
-      css_classname: null,
+      hasDropdown: false,
+      cssClassname: null,
       id: null,
       icon: null,
       children: null,
@@ -83,12 +76,12 @@ class Navigation extends Component {
     this.setState({
       detail: {
         name: item.name,
-        safe_name: item.safe_name,
+        safeName: item.safeName,
         order: item.order,
         href: item.href,
-        mobile_href: item.mobile_href,
-        has_dropdown: item.has_dropdown,
-        css_classname: item.css_classname,
+        mobileHref: item.mobileHref,
+        hasDropdown: item.hasDropdown,
+        cssClassname: item.cssClassname,
         id: item.id,
         icon: item.icon,
         children: item.children,
@@ -143,6 +136,12 @@ class Navigation extends Component {
   }
 }
 
+function mapStateToProps(state) {
+  return {
+    mainMenu: state.boldr.menus.main,
+    ui: state.boldr.ui,
+  };
+}
 export default connect(mapStateToProps, {
   updateMenuDetails,
   addMenuDetail,

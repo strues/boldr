@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import draftToHtml from 'draftjs-to-html';
-import { updatePost } from '../../../../state/modules/blog/posts';
+import { updatePost } from '../../../Blog/state';
 import EditPostForm from './components/EditPostForm';
 
 type Props = {

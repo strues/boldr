@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import * as t from '../constants';
 
-export const STATE_KEY = 'menu';
+export const STATE_KEY = 'menus';
 
 const INITIAL_STATE = {
   id: -1,
@@ -11,6 +11,18 @@ const INITIAL_STATE = {
   attributes: {},
   restricted: false,
   details: [],
+};
+
+const isFetching = (state = false, action) => {
+  switch (action.type) {
+    case t.GET_MAIN_MENU_REQUEST:
+      return true;
+    case t.GET_MAIN_MENU_SUCCESS:
+    case t.GET_MAIN_MENU_FAILURE:
+      return false;
+    default:
+      return state;
+  }
 };
 
 const main = (state = INITIAL_STATE, action) => {
@@ -23,10 +35,9 @@ const main = (state = INITIAL_STATE, action) => {
         id: action.payload.id,
         uuid: action.payload.uuid,
         name: action.payload.name,
-        safe_name: action.payload.label,
+        safeName: action.payload.label,
         restricted: action.payload.restricted,
         details: action.payload.details,
-        // details(undefined, action)
       };
     // case t.UPDATE_MENU_SUCCESS:
     //   return {
@@ -42,6 +53,7 @@ const main = (state = INITIAL_STATE, action) => {
 
 const menuReducer = combineReducers({
   main,
+  isFetching,
 });
 
 export default menuReducer;

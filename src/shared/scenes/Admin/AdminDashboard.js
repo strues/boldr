@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import NavLink from 'react-router-dom/NavLink';
 import styled from 'styled-components';
+import last from 'lodash/last';
 import Loadable from 'react-loadable';
 import { connect } from 'react-redux';
 import {
@@ -16,6 +17,7 @@ import {
   DashboardWrapper,
   Anchor,
   DashboardContent,
+  DashboardMain,
   TopbarLink,
   Topbar,
   Loader,
@@ -40,17 +42,6 @@ type Props = {
   routing: Object,
 };
 
-const ContentWrapper = styled.section`
-  width: 100%;
-  height: 100%;
-  min-height: 100%;
-  box-sizing: border-box;
-  padding-left: 1rem;
-  padding-right: 1rem;
-  position: relative;
-  margin: 0 auto;
-`;
-
 export class AdminDashboard extends Component {
   props: Props;
 
@@ -70,10 +61,10 @@ export class AdminDashboard extends Component {
       routing,
       location: { pathname, search },
     } = this.props;
-    // const currentUrl = this.props.location.pathname.split('/');
-    // const isRootAdmin = currentUrl.length === 2;
+
+    // baseLink,
     return (
-      <div style={{ display: 'flex', height: '100%', minHeight: '100vh' }}>
+      <DashboardWrapper>
         {ui.visible
           ? <Sidebar
               items={sidebarLinks}
@@ -87,7 +78,7 @@ export class AdminDashboard extends Component {
               isPrimaryColor
             />
           : null}
-        <DashboardWrapper>
+        <DashboardMain>
           <Topbar
             url={this.props.match.path}
             onMenuClick={this.handleHideSidebar}
@@ -100,12 +91,14 @@ export class AdminDashboard extends Component {
             ]}
           />
 
-          <ContentWrapper>
-            {renderRoutes(route.routes)}
-          </ContentWrapper>
+          <DashboardContent>
+            <Grid fluid>
+              {renderRoutes(route.routes)}
+            </Grid>
+          </DashboardContent>
 
-        </DashboardWrapper>
-      </div>
+        </DashboardMain>
+      </DashboardWrapper>
     );
   }
 }

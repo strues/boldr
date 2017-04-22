@@ -6,7 +6,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Footer } from 'boldr-ui';
 
-import { fetchMenusIfNeeded, getByLabel } from '../../state/modules/boldr/menu';
+import {
+  fetchMainMenuIfNeeded,
+  getByLabel,
+} from '../../state/modules/boldr/menu';
 import { logout } from '../../state/modules/auth/actions';
 import { selectMe } from '../../state/modules/users';
 import SiteHeader from '../../components/SiteHeader';
@@ -17,7 +20,7 @@ type Props = {
   helmetMeta?: ReactElement,
   hero?: ReactElement,
   children: ReactChildren,
-  fetchMenusIfNeeded: () => void,
+  fetchMainMenuIfNeeded: () => void,
   footer?: ReactElement,
   navigate: Function,
   dispatch: Function,
@@ -55,11 +58,11 @@ const FooterWrapper = styled.div`
 
 class BaseTemplate extends PureComponent {
   static defaultProps: {
-    fetchMenusIfNeeded: () => {},
+    fetchMainMenuIfNeeded: () => {},
   };
 
   componentDidMount() {
-    this.props.actions.fetchMenusIfNeeded();
+    this.props.actions.fetchMainMenuIfNeeded();
   }
   handleLogoClick = e => {
     this.props.navigate('/');
@@ -82,6 +85,7 @@ class BaseTemplate extends PureComponent {
           logo={this.props.logo}
           me={this.props.me}
           menu={this.props.menu.details}
+          items={this.props.menu.items}
           isMobile={this.props.isMobile}
           handleProfileClick={this.handleProfileClick}
           handleLogoClick={this.handleLogoClick}
@@ -104,7 +108,7 @@ const mapStateToProps = (state: Object) => {
   return {
     me: selectMe(state),
     auth: state.auth,
-    menu: state.boldr.menu.main,
+    menu: state.boldr.menus.main,
     isMobile: state.boldr.ui.isMobile,
   };
 };
@@ -114,7 +118,7 @@ const mapDispatchToProps = dispatch => {
     actions: bindActionCreators(
       {
         logout,
-        fetchMenusIfNeeded,
+        fetchMainMenuIfNeeded,
       },
       dispatch,
     ),

@@ -1,35 +1,35 @@
-import { normalize, schema } from 'normalizr';
 import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import { sendNotification } from '../../notifications/notifications';
 import * as t from '../constants';
-import { detail, menu } from './schema';
 
 const API_PREFIX = '/api/v1';
 /**
   * FETCH MENUS ACTIONS
   * -------------------------
-  * @exports fetchMenusIfNeeded
-  * @exports fetchMenus
+  * @exports fetchMainMenuIfNeeded
+  * @exports fetchMainMenu
   *****************************************************************/
 
 /* istanbul ignore next */
-export const fetchMenusIfNeeded = (): ThunkAction => (
+export const fetchMainMenuIfNeeded = (): ThunkAction => (
   dispatch: Dispatch,
   getState: GetState,
   axios: any,
 ) => {
   /* istanbul ignore next */
-  if (shouldFetchMenus(getState())) {
+  if (shouldfetchMainMenu(getState())) {
     /* istanbul ignore next */
-    return dispatch(fetchMenus(axios));
+    return dispatch(fetchMainMenu(axios));
   }
 
   /* istanbul ignore next */
   return null;
 };
 
-export const fetchMenus = (axios: any): ThunkAction => (dispatch: Dispatch) => {
+export const fetchMainMenu = (axios: any): ThunkAction => (
+  dispatch: Dispatch,
+) => {
   dispatch({ type: t.GET_MAIN_MENU_REQUEST });
 
   return api
@@ -47,8 +47,8 @@ export const fetchMenus = (axios: any): ThunkAction => (dispatch: Dispatch) => {
       });
     });
 };
-function shouldFetchMenus(state) {
-  const menu = state.boldr.menu.main.details;
+function shouldfetchMainMenu(state) {
+  const menu = state.boldr.menus.main.details;
   if (!menu.length) {
     return true;
   }
@@ -58,20 +58,20 @@ function shouldFetchMenus(state) {
   return menu;
 }
 
-function beginFetchMenus() {
+function beginfetchMainMenu() {
   return {
     type: t.GET_MAIN_MENU_REQUEST,
   };
 }
 
-function fetchMenusError(error) {
+function fetchMainMenuError(error) {
   return {
     type: t.GET_MAIN_MENU_FAILURE,
     error,
   };
 }
 
-function fetchMenusSuccess(menuData) {
+function fetchMainMenuSuccess(menuData) {
   return {
     type: t.GET_MAIN_MENU_SUCCESS,
     payload: menuData,
@@ -130,11 +130,11 @@ export function addMenuDetail(values) {
   const data = {
     name: values.name,
     href: values.href,
-    mobile_href: values.mobile_href,
-    has_dropdown: values.has_dropdown,
-    css_classname: values.css_classname,
+    mobile_href: values.mobileHref,
+    hasDropdown: values.has_dropdown,
+    cssClassname: values.cssClassname,
     icon: values.icon,
-    menu_id: 1,
+    menuId: 1,
     order: values.order,
     children: {
       key: values.key,

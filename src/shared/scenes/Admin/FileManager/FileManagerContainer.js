@@ -7,7 +7,7 @@ import {
   fetchAttachmentsIfNeeded,
   deleteAttachment,
   selectFile,
-} from '../../../state/modules/attachments/actions';
+} from '../state';
 import FileManager from './FileManager';
 
 type Props = {
@@ -67,7 +67,7 @@ class FileManagerContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    attachments: state.attachments,
+    attachments: state.admin.attachments,
     ui: state.boldr.ui,
   };
 };

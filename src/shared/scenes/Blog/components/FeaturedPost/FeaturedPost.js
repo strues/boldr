@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Button, Row, Col, Paragraph, mediaQuery } from 'boldr-ui';
 
-import { selectPost } from '../../../../state/modules/blog/posts/actions';
+import { selectPost } from '../../state/posts/actions';
 import TagBlock from '../TagBlock';
 import Tag from '../Tag';
 

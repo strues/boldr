@@ -21,7 +21,6 @@ const proxy = httpProxy.createProxyServer({
   target: proxyTarget,
   ws: true,
 });
-
 // const cache = require('express-redis-cache')({ client: redisClient });
 const debug = require('debug')('boldr:server-app');
 

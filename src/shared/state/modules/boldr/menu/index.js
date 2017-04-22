@@ -1,7 +1,7 @@
 import menuReducer, { STATE_KEY } from './reducer';
 import {
-  fetchMenus,
-  fetchMenusIfNeeded,
+  fetchMainMenu,
+  fetchMainMenuIfNeeded,
   updateMenuDetails,
   addMenuDetail,
 } from './actions';
@@ -13,8 +13,8 @@ export {
   selectMenus,
   selectMainMenu,
   makeSelectMainMenu,
-  fetchMenus,
-  fetchMenusIfNeeded,
+  fetchMainMenu,
+  fetchMainMenuIfNeeded,
   updateMenuDetails,
   addMenuDetail,
 };

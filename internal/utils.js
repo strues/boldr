@@ -26,7 +26,7 @@ export function log(options: NotificationOptions) {
       console.log(chalk.white.bgRed(`⁉️ 🔥  ${msg}`));
       break;
     case 'info':
-    default: console.log(chalk.cyan(`😇  ${msg}`));
+    default: console.log(chalk.cyan(`♠️  ${msg}`));
   }
 }
 
