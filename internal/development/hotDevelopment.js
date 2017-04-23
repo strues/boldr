@@ -2,7 +2,7 @@
 import { resolve as pathResolve } from 'path';
 import webpack from 'webpack';
 import appRootDir from 'app-root-dir';
-import { log } from '../utils';
+import logger from 'boldr-utils/es/logger';
 import webpackConfigFactory from '../webpack/configFactory';
 import config from '../../config';
 import HotNodeServer from './hotNodeServer';
@@ -15,14 +15,9 @@ const usesDevDlls = bundleConfig =>
   bundleConfig.devDlls != null && bundleConfig.devDlls.enabled;
 
 const vendorDLLsFailed = err => {
-  log({
-    title: 'vendorDLL',
-    level: 'error',
-    message: 'An error occured whilst trying to build the vendor dll(s).',
-    notify: false,
-  });
+  logger.error('An error occured whilst trying to build the vendor dll(s).');
   if (err) {
-    console.error(err);
+    debug(err);
   }
 };
 
@@ -49,12 +44,7 @@ const initializeBundle = (name, bundleConfig) => {
       }
       return webpack(webpackConfig);
     } catch (err) {
-      log({
-        title: 'development',
-        level: 'error',
-        message: 'Webpack config is invalid.',
-        notify: false,
-      });
+      logger.error('Webpack config is invalid.');
       debug(err);
       throw err;
     }

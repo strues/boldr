@@ -1,19 +1,16 @@
 /* eslint-disable eqeqeq */
 import path from 'path';
-import chalk from 'chalk';
 import webpack from 'webpack';
 import { sync as globSync } from 'glob';
 import AssetsPlugin from 'assets-webpack-plugin';
 import autoprefixer from 'autoprefixer';
-import BabiliWebpackPlugin from 'babili-webpack-plugin';
-import PurifyCSSPlugin from 'purifycss-webpack';
 import nodeExternals from 'webpack-node-externals';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import appRootDir from 'app-root-dir';
 import WebpackMd5Hash from 'webpack-md5-hash';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import NamedModulesPlugin from 'webpack/lib/NamedModulesPlugin';
-import { removeNil, mergeDeep, ifElse } from 'boldr-utils';
+import { removeNil, mergeDeep, ifElse, logger } from 'boldr-utils';
 import config from '../../config';
 import { happyPackPlugin } from '../utils';
 import withServiceWorker from './withServiceWorker';
@@ -50,18 +47,15 @@ export default function webpackConfigFactory(buildOptions) {
   const ifDevClient = ifElse(isDev && isClient);
   const ifProdClient = ifElse(isProd && isClient);
 
-  console.log(
-    chalk.white.bgBlue(
-      `==> Creating ${isProd ? 'an optimized' : 'a development'} bundle configuration for the "${target}"`, // eslint-disable-line
-    ),
-  );
+  logger.start(`Creating ${isProd ? 'an optimized' : 'a development'} bundle config for the "${target}"`); // eslint-disable-line
 
   const bundleConfig = isServer || isClient
     ? config(['bundles', target])
     : config(['additionalNodeBundles', target]);
 
   if (!bundleConfig) {
-    throw new Error('No bundle configuration exists for target:', target);
+    logger.error(`No bundle configuration exists for target: ${target}`);
+    throw new Error();
   }
 
   let webpackConfig = {

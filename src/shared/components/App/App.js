@@ -172,5 +172,10 @@ class App extends Component {
     );
   }
 }
+const mapStateToProps = (state, props) => {
+  const { routes } = props.route;
 
-export default connect()(App);
+  return { routes };
+};
+
+export default connect(mapStateToProps)(App);

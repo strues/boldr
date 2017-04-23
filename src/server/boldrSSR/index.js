@@ -29,14 +29,17 @@ function renderAppToString(
   );
 }
 
-function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
+async function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
   if (typeof res.locals.nonce !== 'string') {
     throw new Error('A "nonce" value has not been attached to the response');
   }
 
   const { nonce } = res.locals;
-
   global.navigator = { userAgent: req.headers['user-agent'] };
+
+  // take our array of route objects and match them to the
+  // request.
+  const routeIsMatched = matchRoutes(routes, req.url);
 
   const createStore = req => configureStore({});
 
@@ -45,9 +48,8 @@ function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
 
   const routerContext = {};
   // Load data on server-side
-  const loadBranchData = async () => {
-    const branch = await matchRoutes(routes, req.url);
-    const promises = await branch.map(({ route, match }) => {
+  const loadComponentData = () => {
+    const promises = routeIsMatched.map(({ route, match }) => {
       // Dispatch the action(s) through the loadData method of "./routes.js"
       if (route.loadData) {
         return route.loadData(store.dispatch, match.params);
@@ -55,15 +57,15 @@ function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
 
       return Promise.resolve(null);
     });
-
     return Promise.all(promises);
   };
   // Send response after all the action(s) are dispathed
-  loadBranchData()
+  await loadComponentData()
     .then(() => {
       // Checking is page is 404
       const status = routerContext.status === '404' ? 404 : 200;
-
+      // render the application wrapped with provider, static router and the
+      // store.
       const reactAppString = renderAppToString(store, routerContext, req);
 
       const helmet = Helmet.rewind();
@@ -83,7 +85,9 @@ function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
       // Check if the render result contains a redirect, if so we need to set
       // the specific status and redirect header and end the response
       if (routerContext.url) {
-        res.status(301).setHeader('Location', routerContext.url);
+        res.writeHead(301, {
+          Location: routerContext.url,
+        });
         res.end();
 
         return;
@@ -93,9 +97,8 @@ function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
       return res.status(status).send(`<!DOCTYPE html>${html}`);
     })
     .catch(err => {
-      res.status(404).send('Not Found :(');
-
-      console.error(`==> 😭  Rendering routes error: ${err}`);
+      debug(`💩  Ran into issues rendering routes: ${err}`);
+      return res.status(404).send('Not Found :(');
     });
 }
 export default boldrSSR;

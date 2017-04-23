@@ -3,12 +3,12 @@ import { resolve as pathResolve } from 'path';
 import webpack from 'webpack';
 import appRootDir from 'app-root-dir';
 import md5 from 'md5';
-import { log } from '../utils';
+import logger from 'boldr-utils/es/logger';
 import config from '../../config';
 
 function buildDevDlls(bundleName, bundleConfig) {
   const dllConfig = config('bundles.client.devDlls');
-
+  logger.start('Running Vendor DLL plugin.');
   // $FlowFixMe
   const pkg = require(pathResolve(appRootDir.get(), './package.json'));
 
@@ -56,11 +56,7 @@ function buildDevDlls(bundleName, bundleConfig) {
 
   function buildVendorDLL() {
     return new Promise((resolve, reject) => {
-      log({
-        title: 'vendorDLL',
-        level: 'info',
-        message: `The following 🚧 dependencies have been included:\n\t-${devDLLDependencies.join('\n\t-')}\n`, // eslint-disable-line
-      });
+      logger.info(`The following 🚧 dependencies have been included:\n\t-${devDLLDependencies.join('\n\t-')}\n`); // eslint-disable-line
       const webpackConfig = webpackConfigFactory();
       const vendorDLLCompiler = webpack(webpackConfig);
       vendorDLLCompiler.run(err => {
@@ -75,28 +71,16 @@ function buildDevDlls(bundleName, bundleConfig) {
   }
   return new Promise(async (resolve, reject) => {
     if (!fs.existsSync(vendorDLLHashFilePath)) {
-      log({
-        title: 'vendorDLL',
-        level: 'warn',
-        message: `Generating a new "${bundleName}" Vendor DLL for boosted development performance`, // eslint-disable-line
-      });
+      logger.task(`Generating a new "${bundleName}" Vendor DLL for boosted development performance`); // eslint-disable-line
       await buildVendorDLL().then(resolve).catch(reject);
     } else {
       const dependenciesHash = fs.readFileSync(vendorDLLHashFilePath, 'utf8');
       const dependenciesChanged = dependenciesHash !== currentDependenciesHash;
       if (dependenciesChanged) {
-        log({
-          title: 'vendorDLL',
-          level: 'warn',
-          message: `New "${bundleName}" vendor dependencies detected. Regenerating the vendor dll...`, // eslint-disable-line
-        });
+        logger.task(`New "${bundleName}" vendor dependencies detected. Regenerating the vendor dll...`); // eslint-disable-line
         await buildVendorDLL().then(resolve).catch(reject);
       } else {
-        log({
-          title: 'vendorDLL',
-          level: 'info',
-          message: `No changes to existing "${bundleName}" vendor dependencies. Using the existing vendor dll.`, // eslint-disable-line
-        });
+        logger.task(`No changes to existing "${bundleName}" vendor dependencies. Using the existing vendor dll.`); // eslint-disable-line
         resolve();
       }
     }
