@@ -4,6 +4,7 @@ import Helmet from 'react-helmet';
 import { FormCard } from 'boldr-ui';
 
 import LoginForm from './LoginForm';
+
 type Props = {
   onSubmit: () => void,
 };

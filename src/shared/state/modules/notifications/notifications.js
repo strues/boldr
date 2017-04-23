@@ -38,7 +38,7 @@ export const clearNotification = () => {
  * notification objects.
  * @param  {Object}            action     the action object
  */
-export const initialState = [];
+const initialState = [];
 export default function notificationReducer(state = initialState, action) {
   switch (action.type) {
     case SEND_NOTIFICATION:

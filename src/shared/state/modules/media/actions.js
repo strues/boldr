@@ -6,7 +6,7 @@ import * as notif from '../../../core/constants';
 import { sendNotification } from '../notifications/notifications';
 import { editProfile } from '../users/actions';
 import { media as mediaSchema, arrayOfMedia } from './schema';
-import * as t from './constants';
+import * as t from './actionTypes';
 
 const API_PREFIX = '/api/v1';
 

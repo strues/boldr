@@ -9,9 +9,9 @@ import { Footer } from 'boldr-ui';
 import {
   fetchMainMenuIfNeeded,
   getByLabel,
-} from '../../state/modules/boldr/menu';
-import { logout } from '../../state/modules/auth/actions';
-import { selectMe } from '../../state/modules/users';
+  logout,
+  selectMe,
+} from '../../state';
 import SiteHeader from '../../components/SiteHeader';
 import type { ReactElement, ReactChildren } from '../../types/react';
 
@@ -128,5 +128,4 @@ const mapDispatchToProps = dispatch => {
 };
 
 export { Wrapper, FooterWrapper };
-// $FlowIssue
 export default connect(mapStateToProps, mapDispatchToProps)(BaseTemplate);

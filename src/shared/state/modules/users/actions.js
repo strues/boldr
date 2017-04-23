@@ -3,7 +3,7 @@ import api from '../../../core/api';
 import { setToken, removeToken } from '../../../core/authentication/token';
 import * as notif from '../../../core/constants';
 import { sendNotification } from '../notifications/notifications';
-import * as t from './constants';
+import * as t from './actionTypes';
 
 const API_PREFIX = '/api/v1';
 /**

@@ -5,8 +5,8 @@ import {
   LOGIN_FAILURE,
   CHECK_AUTH_SUCCESS,
   LOGOUT,
-} from '../auth/constants';
-import * as t from './constants';
+} from '../auth/actionTypes';
+import * as t from './actionTypes';
 
 export const STATE_KEY = 'users';
 

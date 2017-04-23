@@ -1,5 +1,5 @@
 import { LAYOUTS } from '../../../../core/constants';
-import * as t from '../constants';
+import * as t from '../actionTypes';
 
 export const STATE_KEY = 'ui';
 

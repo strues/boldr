@@ -1,7 +1,7 @@
 import api from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import { sendNotification } from '../../notifications/notifications';
-import * as t from '../constants';
+import * as t from '../actionTypes';
 
 const API_PREFIX = '/api/v1';
 /**
@@ -42,7 +42,7 @@ export const fetchMainMenu = (axios: any): ThunkAction => (
     })
     .catch(err => {
       dispatch({
-        type: t.GET_MAIN_MENU_SUCCESS,
+        type: t.GET_MAIN_MENU_FAILURE,
         error: err,
       });
     });
@@ -58,26 +58,6 @@ function shouldfetchMainMenu(state) {
   return menu;
 }
 
-function beginfetchMainMenu() {
-  return {
-    type: t.GET_MAIN_MENU_REQUEST,
-  };
-}
-
-function fetchMainMenuError(error) {
-  return {
-    type: t.GET_MAIN_MENU_FAILURE,
-    error,
-  };
-}
-
-function fetchMainMenuSuccess(menuData) {
-  return {
-    type: t.GET_MAIN_MENU_SUCCESS,
-    payload: menuData,
-  };
-}
-
 /**
   * UPDATE MENU DETAIL ACTIONS
   * -------------------------
@@ -86,7 +66,9 @@ function fetchMainMenuSuccess(menuData) {
 
 export function updateMenuDetails(data) {
   return dispatch => {
-    dispatch(beginUpdateMenuDetails());
+    dispatch({
+      type: t.UPDATE_MENU_REQUEST,
+    });
     return api
       .put(`${API_PREFIX}/menu-details/${data.id}`, data)
       .then(res => {
@@ -97,12 +79,6 @@ export function updateMenuDetails(data) {
         dispatch(updateMenuDetailsFailure(err.message));
         dispatch(sendNotification(notif.MSG_UPDATE_LINK_ERROR));
       });
-  };
-}
-
-function beginUpdateMenuDetails() {
-  return {
-    type: t.UPDATE_MENU_REQUEST,
   };
 }
 
@@ -142,7 +118,9 @@ export function addMenuDetail(values) {
     },
   };
   return dispatch => {
-    dispatch(beginAddMenuDetail());
+    dispatch({
+      type: t.ADD_MENU_DETAIL_REQUEST,
+    });
     return api.post(`${API_PREFIX}/menu-details`, data).then(res => {
       if (!res.status === 201) {
         dispatch(addMenuDetailFailure(res));
@@ -151,12 +129,6 @@ export function addMenuDetail(values) {
       dispatch(addMenuDetailSuccess(res));
       dispatch(sendNotification(notif.MSG_ADD_LINK_SUCCESS));
     });
-  };
-}
-
-function beginAddMenuDetail() {
-  return {
-    type: t.ADD_MENU_DETAIL_REQUEST,
   };
 }
 

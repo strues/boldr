@@ -5,15 +5,18 @@ import { routerReducer as routing } from 'react-router-redux';
 import blogReducer, { BLOG_STATE_KEY } from '../scenes/Blog/state';
 import adminReducer, { ADMIN_STATE_KEY } from '../scenes/Admin/state';
 
-import authReducer, { STATE_KEY as AUTH_STATE_KEY } from './modules/auth';
-import boldrReducer, { STATE_KEY as BOLDR_STATE_KEY } from './modules/boldr';
-
-import usersReducer, { STATE_KEY as USERS_STATE_KEY } from './modules/users';
-
-import mediaReducer from './modules/media';
-
-import notificationReducer from './modules/notifications';
-import entitiesReducer from './modules/entities';
+import {
+  AUTH_STATE_KEY,
+  authReducer,
+  BOLDR_STATE_KEY,
+  boldrReducer,
+  USERS_STATE_KEY,
+  usersReducer,
+  MEDIA_STATE_KEY,
+  mediaReducer,
+  notificationReducer,
+  entitiesReducer,
+} from './modules';
 
 const rootReducer = combineReducers({
   [BOLDR_STATE_KEY]: boldrReducer,
@@ -21,7 +24,7 @@ const rootReducer = combineReducers({
   [USERS_STATE_KEY]: usersReducer,
   [AUTH_STATE_KEY]: authReducer,
   [ADMIN_STATE_KEY]: adminReducer,
-  media: mediaReducer,
+  [MEDIA_STATE_KEY]: mediaReducer,
   notifications: notificationReducer,
   entities: entitiesReducer,
   form: formReducer,

@@ -6,7 +6,7 @@ import { Button, FormCard } from 'boldr-ui';
 import Helmet from 'react-helmet';
 
 import BaseTemplate from '../../../templates/BaseTemplate';
-import { verifyAccount } from '../../../state/modules/users/actions';
+import { verifyAccount } from '../../../state';
 
 export type Props = {
   dispatch: () => void,

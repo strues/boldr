@@ -7,7 +7,7 @@ import {
 } from '../../../core/authentication/token';
 import * as notif from '../../../core/constants';
 import { sendNotification } from '../notifications/notifications';
-import * as t from './constants';
+import * as t from './actionTypes';
 
 /**
   * SIGNUP ACTIONS
@@ -17,30 +17,25 @@ import * as t from './constants';
 
 export function doSignup(data) {
   return dispatch => {
-    dispatch(beginSignUp());
+    dispatch({ type: t.SIGNUP_USER_REQUEST });
     return api
       .post('/api/v1/auth/signup', data)
       .then(res => {
         if (res.status !== 201) {
           const err = JSON.stringify(res.data.message.message);
           dispatch(signUpError(err));
-          dispatch(sendNotification(notif.MSG_SIGNUP_ERROR));
+          dispatch(notificationSend(notif.MSG_SIGNUP_ERROR));
         }
-        dispatch(signUpSuccess());
+        dispatch({ type: t.SIGNUP_USER_SUCCESS });
         dispatch(push('/'));
-        dispatch(sendNotification(notif.MSG_SIGNUP_SUCCESS));
+        dispatch(notificationSend(notif.MSG_SIGNUP_SUCCESS));
       })
       .catch(err => {
-        dispatch(signUpError(err));
         dispatch(sendNotification(notif.MSG_SIGNUP_ERROR));
+        return dispatch(signUpError(err));
       });
   };
 }
-
-const beginSignUp = () => ({ type: t.SIGNUP_USER_REQUEST });
-
-// Signup Success
-const signUpSuccess = () => ({ type: t.SIGNUP_USER_SUCCESS });
 
 // Signup Error
 const signUpError = err => {
@@ -58,18 +53,22 @@ const signUpError = err => {
 
 export function doLogin(data) {
   return dispatch => {
-    dispatch(beginLogin());
+    dispatch({ type: t.LOGIN_REQUEST });
     return api
       .post('/api/v1/auth/login', data)
       .then(res => {
         setToken(res.data.token);
-        dispatch(loginSuccess(res));
-        dispatch(sendNotification(notif.MSG_LOGIN_SUCCESS));
+        dispatch({
+          type: t.LOGIN_SUCCESS,
+          token: res.data.token,
+          user: res.data.user,
+        });
         dispatch(push('/'));
+        return dispatch(sendNotification(notif.MSG_LOGIN_SUCCESS));
       })
       .catch(err => {
         dispatch(loginError(err));
-        dispatch(
+        return dispatch(
           sendNotification({
             message: err,
             kind: 'error',
@@ -79,23 +78,6 @@ export function doLogin(data) {
       });
   };
 }
-const beginLogin = () => ({ type: t.LOGIN_REQUEST });
-
-function loginSuccess(res) {
-  return {
-    type: t.LOGIN_SUCCESS,
-    token: res.data.token,
-    user: res.data.user,
-  };
-}
-
-function loginError(err) {
-  return {
-    type: t.LOGIN_FAILURE,
-    error: err,
-  };
-}
-
 /**
   * LOGOUT ACTIONS
   * -------------------------
@@ -121,32 +103,16 @@ export function logout() {
 export const checkAuth = token => {
   return async (dispatch: Function) => {
     try {
-      dispatch(checkAuthRequest());
+      dispatch({ type: t.CHECK_AUTH_REQUEST });
       const res = await api.get('/api/v1/auth/check');
       const user = res.data;
       dispatch(checkAuthSuccess(user, token));
     } catch (err) {
-      dispatch(checkAuthFailure('Token is invalid'));
-      dispatch(sendNotification(notif.MSG_AUTH_ERROR));
+      dispatch({
+        type: t.CHECK_AUTH_FAILURE,
+        err,
+      });
+      return dispatch(sendNotification(notif.MSG_AUTH_ERROR));
     }
   };
 };
-
-function checkAuthRequest() {
-  return { type: t.CHECK_AUTH_REQUEST };
-}
-
-function checkAuthSuccess(user, token) {
-  return {
-    type: t.CHECK_AUTH_SUCCESS,
-    token: token, // eslint-disable-line
-    user,
-  };
-}
-
-function checkAuthFailure(error) {
-  return {
-    type: t.CHECK_AUTH_FAILURE,
-    payload: error,
-  };
-}

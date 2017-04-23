@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { doLogin } from '../../../state/modules/auth/actions';
+import { doLogin } from '../../../state';
 import Login from './Login';
 
 const mapDispatchToProps = dispatch => {

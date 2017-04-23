@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import * as t from '../constants';
+import * as t from '../actionTypes';
 
 export const STATE_KEY = 'menus';
 
@@ -7,7 +7,7 @@ const INITIAL_STATE = {
   id: -1,
   uuid: '',
   name: '',
-  safe_name: '',
+  safeName: '',
   attributes: {},
   restricted: false,
   details: [],

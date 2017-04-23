@@ -1,4 +1,4 @@
-import * as t from '../constants';
+import * as t from '../actionTypes';
 
 export function changeLayout(layout) {
   return {

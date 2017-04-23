@@ -1,4 +1,4 @@
-import uiReducer, { STATE_KEY } from './reducer';
+import uiReducer, { STATE_KEY as UI_STATE_KEY } from './reducer';
 import {
   changeLayout,
   showModal,
@@ -11,7 +11,8 @@ import { makeSelectUi, makeSelectMobile } from './selectors';
 export default uiReducer;
 
 export {
-  STATE_KEY,
+  uiReducer,
+  UI_STATE_KEY,
   makeSelectUi,
   changeLayout,
   showModal,

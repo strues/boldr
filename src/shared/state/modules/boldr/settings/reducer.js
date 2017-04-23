@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import * as t from '../constants';
+import * as t from '../actionTypes';
 
 export const STATE_KEY = 'settings';
 
@@ -44,8 +44,10 @@ const isFetching = (state = false, action) => {
   }
 };
 
-export default combineReducers({
+const settingsReducer = combineReducers({
   all,
   ids,
   isFetching,
 });
+
+export default settingsReducer;
