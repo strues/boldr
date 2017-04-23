@@ -1,14 +1,12 @@
 import { combineReducers } from 'redux';
-import { uiReducer, UI_STATE_KEY } from './ui';
-import { menuReducer, MENU_STATE_KEY } from './menu';
-import { settingsReducer, SETTINGS_STATE_KEY } from './settings';
-
-export const STATE_KEY = 'boldr';
+import { uiReducer } from './ui';
+import { menuReducer } from './menu';
+import { settingsReducer } from './settings';
 
 const boldrReducer = combineReducers({
-  [MENU_STATE_KEY]: menuReducer,
-  [SETTINGS_STATE_KEY]: settingsReducer,
-  [UI_STATE_KEY]: uiReducer,
+  menus: menuReducer,
+  settings: settingsReducer,
+  ui: uiReducer,
 });
 
 export default boldrReducer;

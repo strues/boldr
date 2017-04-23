@@ -85,9 +85,19 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
-animate-components@^0.6.2, animate-components@^0.6.5:
+animate-components@^0.6.5:
   version "0.6.5"
   resolved "https://registry.yarnpkg.com/animate-components/-/animate-components-0.6.5.tgz#09b0fd37c8986694fb06a6bd60fb5c0f1925ce37"
+  dependencies:
+    prop-types "^15.5.8"
+    react "^15.4.2"
+    react-addons-css-transition-group "^15.5.2"
+    react-dom "^15.4.2"
+    styled-components "^1.4.4"
+
+animate-components@^0.7.2:
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/animate-components/-/animate-components-0.7.2.tgz#fe67452ffe9e94d9df16ea4b31a447c6ac465f43"
   dependencies:
     prop-types "^15.5.8"
     react "^15.4.2"
@@ -384,16 +394,7 @@ babel-core@^6.0.0, babel-core@^6.23.1, babel-core@^6.24.1:
     slash "^1.0.0"
     source-map "^0.5.0"
 
-babel-eslint@^7.2.2:
-  version "7.2.2"
-  resolved "https://registry.yarnpkg.com/babel-eslint/-/babel-eslint-7.2.2.tgz#0da2cbe6554fd0fb069f19674f2db2f9c59270ff"
-  dependencies:
-    babel-code-frame "^6.22.0"
-    babel-traverse "^6.23.1"
-    babel-types "^6.23.0"
-    babylon "^6.16.1"
-
-babel-eslint@^7.2.3:
+babel-eslint@^7.2.2, babel-eslint@^7.2.3:
   version "7.2.3"
   resolved "https://registry.yarnpkg.com/babel-eslint/-/babel-eslint-7.2.3.tgz#b2fe2d80126470f5c19442dc757253a897710827"
   dependencies:
@@ -1239,11 +1240,11 @@ babylon@7.0.0-beta.8:
   version "7.0.0-beta.8"
   resolved "https://registry.yarnpkg.com/babylon/-/babylon-7.0.0-beta.8.tgz#2bdc5ae366041442c27e068cce6f0d7c06ea9949"
 
-babylon@^6.11.0, babylon@^6.13.0, babylon@^6.15.0, babylon@^6.16.1:
+babylon@^6.11.0:
   version "6.16.1"
   resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.16.1.tgz#30c5a22f481978a9e7f8cdfdf496b11d94b404d3"
 
-babylon@^6.17.0:
+babylon@^6.13.0, babylon@^6.15.0, babylon@^6.17.0:
   version "6.17.0"
   resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.17.0.tgz#37da948878488b9c4e3c4038893fa3314b3fc932"
 
@@ -1298,17 +1299,18 @@ bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.6"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.6.tgz#53344adb14617a13f6e8dd2ce28905d1c0ba3215"
 
-boldr-ui@0.2.19:
-  version "0.2.19"
-  resolved "https://registry.yarnpkg.com/boldr-ui/-/boldr-ui-0.2.19.tgz#c35d37eca447ae4cd51fa8b77898d5d7cc01d543"
+boldr-ui@0.2.20:
+  version "0.2.20"
+  resolved "https://registry.yarnpkg.com/boldr-ui/-/boldr-ui-0.2.20.tgz#f70defe31653290a3465d99c2ea39381a159b873"
   dependencies:
-    animate-components "^0.6.2"
+    animate-components "^0.7.2"
     classnames "^2.2.5"
     coolors-to-hex "^1.0.3"
     prop-types "^15.5.8"
     ramda "^0.23.0"
-    react-md "^1.0.11"
+    react-md "^1.0.12"
     react-modal "^1.7.7"
+    slate "^0.19.20"
     styled-components "^1.4.5"
     styled-theme "^0.3.3"
     styled-tools "^0.1.4"
@@ -2231,7 +2233,7 @@ debug@2.6.3:
   dependencies:
     ms "0.7.2"
 
-debug@^2.1.1, debug@^2.2.0, debug@^2.4.5, debug@^2.6.0, debug@^2.6.4:
+debug@^2.1.1, debug@^2.2.0, debug@^2.3.2, debug@^2.4.5, debug@^2.6.0, debug@^2.6.4:
   version "2.6.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.4.tgz#7586a9b3c39741c0282ae33445c4e8ac74734fe0"
   dependencies:
@@ -2338,6 +2340,10 @@ diffie-hellman@^5.0.0:
     bn.js "^4.1.0"
     miller-rabin "^4.0.0"
     randombytes "^2.0.0"
+
+direction@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/direction/-/direction-0.1.5.tgz#ce5d797f97e26f8be7beff53f7dc40e1c1a9ec4c"
 
 discontinuous-range@1.0.0:
   version "1.0.0"
@@ -2649,7 +2655,7 @@ es6-iterator@2, es6-iterator@^2.0.1, es6-iterator@~2.0.1:
     es5-ext "^0.10.14"
     es6-symbol "^3.1"
 
-es6-map@^0.1.3:
+es6-map@^0.1.3, es6-map@^0.1.4:
   version "0.1.5"
   resolved "https://registry.yarnpkg.com/es6-map/-/es6-map-0.1.5.tgz#9136e0503dcc06a301690f0bb14ff4e364e949f0"
   dependencies:
@@ -2871,6 +2877,10 @@ esrecurse@^4.1.0:
   dependencies:
     estraverse "~4.1.0"
     object-assign "^4.0.1"
+
+esrever@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/esrever/-/esrever-0.2.0.tgz#96e9d28f4f1b1a76784cd5d490eaae010e7407b8"
 
 estraverse@^1.9.1:
   version "1.9.3"
@@ -3370,6 +3380,10 @@ get-caller-file@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-1.0.2.tgz#f702e63127e7e231c160a80c1554acb70d5047e5"
 
+get-document@1:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/get-document/-/get-document-1.0.0.tgz#4821bce66f1c24cb0331602be6cb6b12c4f01c4b"
+
 get-stdin@5.0.1, get-stdin@^5.0.0:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/get-stdin/-/get-stdin-5.0.1.tgz#122e161591e21ff4c52530305693f20e6393a398"
@@ -3381,6 +3395,12 @@ get-stdin@^4.0.1:
 get-stream@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/get-stream/-/get-stream-3.0.0.tgz#8e943d1358dc37555054ecbe2edb05aa174ede14"
+
+get-window@^1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/get-window/-/get-window-1.1.1.tgz#0750f8970c88a54ac1294deb97add9568b3db594"
+  dependencies:
+    get-document "1"
 
 getpass@^0.1.1:
   version "0.1.6"
@@ -3793,6 +3813,10 @@ immutability-helper@^2.1.2:
   dependencies:
     invariant "^2.2.0"
 
+immutable@^3.8.1:
+  version "3.8.1"
+  resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.8.1.tgz#200807f11ab0f72710ea485542de088075f68cd2"
+
 immutable@^3.x.x, immutable@~3.7.4:
   version "3.7.6"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.7.6.tgz#13b4d3cb12befa15482a26fe1b2ebae640071e4b"
@@ -3935,6 +3959,10 @@ is-dotfile@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/is-dotfile/-/is-dotfile-1.0.2.tgz#2c132383f39199f8edc268ca01b9b007d205cc4d"
 
+is-empty@^1.0.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/is-empty/-/is-empty-1.2.0.tgz#de9bb5b278738a05a0b09a57e1fb4d4a341a9f6b"
+
 is-equal-shallow@^0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/is-equal-shallow/-/is-equal-shallow-0.1.3.tgz#2238098fc221de0bcfa5d9eac4c45d638aa1c534"
@@ -3974,6 +4002,10 @@ is-glob@^2.0.0, is-glob@^2.0.1:
   resolved "https://registry.yarnpkg.com/is-glob/-/is-glob-2.0.1.tgz#d096f926a3ded5600f3fdfd91198cb0888c2d863"
   dependencies:
     is-extglob "^1.0.0"
+
+is-in-browser@^1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/is-in-browser/-/is-in-browser-1.1.3.tgz#56ff4db683a078c6082eb95dad7dc62e1d04f835"
 
 is-my-json-valid@^2.10.0:
   version "2.16.0"
@@ -4523,7 +4555,7 @@ jsx-ast-utils@^1.0.0, jsx-ast-utils@^1.3.4:
   dependencies:
     object-assign "^4.1.0"
 
-keycode@^2.1.7:
+keycode@^2.1.2, keycode@^2.1.7:
   version "2.1.8"
   resolved "https://registry.yarnpkg.com/keycode/-/keycode-2.1.8.tgz#94d2b7098215eff0e8f9a8931d5a59076c4532fb"
 
@@ -6369,9 +6401,9 @@ react-loadable@^3.3.1:
   dependencies:
     babel-plugin-syntax-dynamic-import "^6.18.0"
 
-react-md@^1.0.11:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/react-md/-/react-md-1.0.11.tgz#94df53ed27f9e440c40f7748eee107fc1133a9e4"
+react-md@^1.0.12:
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/react-md/-/react-md-1.0.12.tgz#ace25018988d1e7c6b36ae89a180fd4d42e56f2f"
   dependencies:
     classnames "^2.2.5"
     invariant "^2.2.1"
@@ -6395,6 +6427,10 @@ react-motion@^0.4.5:
   dependencies:
     performance-now "^0.2.0"
     raf "^3.1.0"
+
+react-portal@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-portal/-/react-portal-3.0.0.tgz#9304fce836e8a3216b22588f8dc91b447728f0ae"
 
 react-prop-types@^0.4.0:
   version "0.4.0"
@@ -6901,6 +6937,10 @@ sax@^1.2.1, sax@~1.2.1:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/sax/-/sax-1.2.2.tgz#fd8631a23bc7826bef5d871bdb87378c95647828"
 
+selection-is-backward@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/selection-is-backward/-/selection-is-backward-1.0.0.tgz#97a54633188a511aba6419fc5c1fa91b467e6be1"
+
 "semver@2 || 3 || 4 || 5", semver@^5.1.0, semver@^5.3.0, semver@~5.3.0:
   version "5.3.0"
   resolved "https://registry.yarnpkg.com/semver/-/semver-5.3.0.tgz#9b2ce5d3de02d17c6012ad326aa6b4d0cf54f94f"
@@ -7006,6 +7046,24 @@ sinon@2.1.0:
 slash@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/slash/-/slash-1.0.0.tgz#c41f2f6c39fc16d1cd17ad4b5d896114ae470d55"
+
+slate@^0.19.20:
+  version "0.19.20"
+  resolved "https://registry.yarnpkg.com/slate/-/slate-0.19.20.tgz#3d3a7f772b9fe12f8b2de6d646a44e5ab635f5d5"
+  dependencies:
+    cheerio "^0.22.0"
+    debug "^2.3.2"
+    direction "^0.1.5"
+    es6-map "^0.1.4"
+    esrever "^0.2.0"
+    get-window "^1.1.1"
+    immutable "^3.8.1"
+    is-empty "^1.0.0"
+    is-in-browser "^1.1.3"
+    keycode "^2.1.2"
+    react-portal "^3.0.0"
+    selection-is-backward "^1.0.0"
+    type-of "^2.0.1"
 
 slice-ansi@0.0.4:
   version "0.0.4"
@@ -7586,6 +7644,10 @@ type-is@^1.6.12, type-is@~1.6.14:
   dependencies:
     media-typer "0.3.0"
     mime-types "~2.1.15"
+
+type-of@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/type-of/-/type-of-2.0.1.tgz#e72a1741896568e9f628378d816d6912f7f23972"
 
 typedarray@^0.0.6:
   version "0.0.6"

@@ -1,6 +1,5 @@
 import {
   attachmentReducer,
-  ATTACHMENT_STATE_KEY,
   fetchAttachments,
   fetchAttachmentsIfNeeded,
   uploadFiles,
@@ -14,7 +13,6 @@ import {
 
 import {
   dashboardReducer,
-  DASHBOARD_STATE_KEY,
   showSidebar,
   hideSidebar,
   fetchActivityIfNeeded,
@@ -25,22 +23,19 @@ import {
 
 import {
   membersReducer,
-  MEMBERS_STATE_KEY,
   fetchMembers,
   fetchMembersIfNeeded,
   updateMember,
   memberSelected,
 } from './members';
 
-import adminReducer, { STATE_KEY as ADMIN_STATE_KEY } from './reducer';
+import adminReducer from './reducer';
 
 export default adminReducer;
 
 export {
   adminReducer,
-  ADMIN_STATE_KEY,
   attachmentReducer,
-  ATTACHMENT_STATE_KEY,
   fetchAttachments,
   fetchAttachmentsIfNeeded,
   uploadFiles,
@@ -51,7 +46,6 @@ export {
   uploadProfileImage,
   uploadAvatarImage,
   dashboardReducer,
-  DASHBOARD_STATE_KEY,
   showSidebar,
   hideSidebar,
   fetchActivityIfNeeded,
@@ -59,7 +53,6 @@ export {
   fetchStatsIfNeeded,
   fetchStats,
   membersReducer,
-  MEMBERS_STATE_KEY,
   fetchMembers,
   fetchMembersIfNeeded,
   updateMember,

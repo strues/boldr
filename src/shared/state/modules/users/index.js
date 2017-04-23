@@ -1,4 +1,4 @@
-import usersReducer, { STATE_KEY as USERS_STATE_KEY } from './reducer';
+import usersReducer from './reducer';
 
 import {
   fetchProfile,
@@ -21,7 +21,6 @@ export default usersReducer;
 
 export {
   usersReducer,
-  USERS_STATE_KEY,
   fetchProfileIfNeeded,
   fetchProfile,
   selectMe,

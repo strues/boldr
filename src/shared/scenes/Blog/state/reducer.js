@@ -1,17 +1,11 @@
 import { combineReducers } from 'redux';
 
-import {
-  postsReducer,
-  tagsReducer,
-  POSTS_STATE_KEY,
-  TAGS_STATE_KEY,
-} from './index';
-
-export const STATE_KEY = 'blog';
+import postsReducer from './posts/reducer';
+import tagsReducer from './tags/reducer';
 
 const blogReducer = combineReducers({
-  [POSTS_STATE_KEY]: postsReducer,
-  [TAGS_STATE_KEY]: tagsReducer,
+  posts: postsReducer,
+  tags: tagsReducer,
 });
 
 export default blogReducer;

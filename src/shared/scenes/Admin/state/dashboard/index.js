@@ -1,4 +1,4 @@
-import dashboardReducer, { STATE_KEY as DASHBOARD_STATE_KEY } from './reducer';
+import dashboardReducer from './reducer';
 import {
   showSidebar,
   hideSidebar,
@@ -12,7 +12,6 @@ export default dashboardReducer;
 
 export {
   dashboardReducer,
-  DASHBOARD_STATE_KEY,
   showSidebar,
   hideSidebar,
   fetchActivityIfNeeded,

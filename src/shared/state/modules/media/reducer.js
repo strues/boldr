@@ -6,8 +6,6 @@ import * as t from './actionTypes';
 
 import { getMedia } from './selectors';
 
-export const STATE_KEY = 'media';
-
 const all = (state = {}, action) => {
   switch (action.type) {
     case t.FETCH_MEDIAS_SUCCESS:
@@ -68,12 +66,14 @@ const currentMedia = (state = {}, action) => {
   }
 };
 
-export default combineReducers({
+const mediaReducer = combineReducers({
   all,
   ids,
   isFetching,
   currentMedia,
 });
+
+export default mediaReducer;
 
 export const getMediaType = (state: Object, filter: string): Function => {
   const allMedia = getMedia(state);

@@ -4,8 +4,6 @@ import removeByKey from 'boldr-utils/es/objects/removeByKey';
 import removeIdFromArray from 'boldr-utils/es/arrays/removeIdFromArray';
 import * as t from '../actionTypes';
 
-export const STATE_KEY = 'tags';
-
 const all = (state = {}, action) => {
   switch (action.type) {
     case t.FETCH_TAGS_SUCCESS:
@@ -72,9 +70,11 @@ const currentTag = (state = {}, action) => {
       return state;
   }
 };
-export default combineReducers({
+const tagsReducer = combineReducers({
   all,
   ids,
   isFetching,
   currentTag,
 });
+
+export default tagsReducer;

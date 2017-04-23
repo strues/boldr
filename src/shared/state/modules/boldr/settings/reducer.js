@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux';
 import * as t from '../actionTypes';
 
-export const STATE_KEY = 'settings';
-
 const all = (state = {}, action) => {
   switch (action.type) {
     case t.FETCH_SETTINGS_SUCCESS:

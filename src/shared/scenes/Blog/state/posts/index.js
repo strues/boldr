@@ -1,4 +1,4 @@
-import postsReducer, { STATE_KEY as POSTS_STATE_KEY } from './reducer';
+import postsReducer, { getPublishedPosts, getFeaturedPosts } from './reducer';
 import {
   togglePostLayoutView,
   fetchPostsIfNeeded,
@@ -17,7 +17,6 @@ export default postsReducer;
 
 export {
   postsReducer,
-  POSTS_STATE_KEY,
   togglePostLayoutView,
   fetchPostsIfNeeded,
   fetchPosts,
@@ -31,4 +30,6 @@ export {
   getPosts,
   post,
   arrayOfPost,
+  getPublishedPosts,
+  getFeaturedPosts,
 };

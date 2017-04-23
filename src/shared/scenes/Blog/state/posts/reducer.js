@@ -8,8 +8,6 @@ import { sendNotification } from '../../../../state/modules/notifications';
 import * as t from '../actionTypes';
 import { getPosts } from './selectors';
 
-export const STATE_KEY = 'posts';
-
 const all = (state = {}, action) => {
   switch (action.type) {
     case t.FETCH_POSTS_SUCCESS:
@@ -76,12 +74,14 @@ const currentPost = (state = {}, action) => {
  * @param  {Object} action      The action object
  */
 
-export default combineReducers({
+const postsReducer = combineReducers({
   all,
   ids,
   isFetching,
   currentPost,
 });
+
+export default postsReducer;
 
 export const getPublishedPosts = (state: Object, filter: string): Function => {
   const allPosts = getPosts(state);

@@ -1,7 +1,4 @@
-import mediaReducer, {
-  STATE_KEY as MEDIA_STATE_KEY,
-  getMediaType,
-} from './reducer';
+import mediaReducer, { getMediaType } from './reducer';
 import {
   fetchMediaIfNeeded,
   toggleMedia,
@@ -17,7 +14,6 @@ export default mediaReducer;
 
 export {
   mediaReducer,
-  MEDIA_STATE_KEY,
   fetchMediaIfNeeded,
   getMedia,
   getMediaType,

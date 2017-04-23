@@ -1,7 +1,5 @@
 import * as t from '../actionTypes';
 
-export const STATE_KEY = 'attachments';
-
 const INITIAL_STATE = {
   loading: false,
   error: null,

@@ -22,10 +22,7 @@ import {
   Topbar,
   Loader,
 } from 'boldr-ui';
-import {
-  showHideSidebar,
-  expandCollapseSideMenu,
-} from '../../state/modules/boldr/ui/actions';
+import { showHideSidebar, expandCollapseSideMenu } from '../../state';
 import renderRoutes from '../../core/addRoutes';
 import sidebarLinks from './sidebarLinks';
 

@@ -1,8 +1,6 @@
 import { LAYOUTS } from '../../../../core/constants';
 import * as t from '../actionTypes';
 
-export const STATE_KEY = 'ui';
-
 function toggleExpandCollapse(state) {
   const newState = Object.assign({}, state);
   newState.expanded = !newState.expanded;

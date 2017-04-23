@@ -1,6 +1,5 @@
 import {
   postsReducer,
-  POSTS_STATE_KEY,
   togglePostLayoutView,
   fetchPostsIfNeeded,
   fetchPosts,
@@ -14,11 +13,12 @@ import {
   getPosts,
   post,
   arrayOfPost,
+  getPublishedPosts,
+  getFeaturedPosts,
 } from './posts';
 
 import {
   tagsReducer,
-  TAGS_STATE_KEY,
   fetchTagsIfNeeded,
   fetchTagPosts,
   fetchTagPostsIfNeeded,
@@ -34,15 +34,13 @@ import {
   tag,
 } from './tags';
 
-import blogReducer, { STATE_KEY as BLOG_STATE_KEY } from './reducer';
+import blogReducer from './reducer';
 
 export {
   // main reducer
   blogReducer,
-  BLOG_STATE_KEY,
   // posts
   postsReducer,
-  POSTS_STATE_KEY,
   togglePostLayoutView,
   fetchPostsIfNeeded,
   fetchPosts,
@@ -56,9 +54,10 @@ export {
   getPosts,
   post,
   arrayOfPost,
+  getPublishedPosts,
+  getFeaturedPosts,
   // tags
   tagsReducer,
-  TAGS_STATE_KEY,
   fetchTagsIfNeeded,
   fetchTagPosts,
   fetchTagPostsIfNeeded,

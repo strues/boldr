@@ -1,8 +1,6 @@
 import { combineReducers } from 'redux';
 import * as t from '../actionTypes';
 
-export const STATE_KEY = 'members';
-
 const all = (state = {}, action) => {
   switch (action.type) {
     case t.LOAD_MEMBERS_SUCCESS:
@@ -53,9 +51,11 @@ const currentMember = (state = {}, action) => {
   }
 };
 
-export default combineReducers({
+const membersReducer = combineReducers({
   all,
   ids,
   isFetching,
   currentMember,
 });
+
+export default membersReducer;

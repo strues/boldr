@@ -102,11 +102,15 @@ export function logout() {
 
 export const checkAuth = token => {
   return async (dispatch: Function) => {
+    dispatch({ type: t.CHECK_AUTH_REQUEST });
     try {
-      dispatch({ type: t.CHECK_AUTH_REQUEST });
       const res = await api.get('/api/v1/auth/check');
       const user = res.data;
-      dispatch(checkAuthSuccess(user, token));
+      dispatch({
+        type: t.CHECK_AUTH_SUCCESS,
+        user,
+        token,
+      });
     } catch (err) {
       dispatch({
         type: t.CHECK_AUTH_FAILURE,

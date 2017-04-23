@@ -8,10 +8,7 @@ import { StaticRouter } from 'react-router-dom';
 import { matchRoutes } from 'react-router-config';
 import styleSheet from 'styled-components/lib/models/StyleSheet';
 import Helmet from 'react-helmet';
-import {
-  fetchPostsIfNeeded,
-} from '../../shared/state/modules/blog/posts/actions';
-import configureStore from '../../shared/state/store';
+import { configureStore, fetchPostsIfNeeded } from '../../shared/state';
 import renderRoutes from '../../shared/core/addRoutes';
 import routes from '../../shared/routes';
 import CreateHtml from './CreateHtml';

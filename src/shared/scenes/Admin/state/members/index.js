@@ -1,4 +1,4 @@
-import membersReducer, { STATE_KEY as MEMBERS_STATE_KEY } from './reducer';
+import membersReducer from './reducer';
 import {
   fetchMembers,
   fetchMembersIfNeeded,
@@ -10,7 +10,6 @@ export default membersReducer;
 
 export {
   membersReducer,
-  MEMBERS_STATE_KEY,
   fetchMembers,
   fetchMembersIfNeeded,
   updateMember,

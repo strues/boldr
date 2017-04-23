@@ -1,10 +1,12 @@
-import uiReducer, { STATE_KEY as UI_STATE_KEY } from './reducer';
+import uiReducer from './reducer';
 import {
   changeLayout,
   showModal,
   hideModal,
   setMobileDevice,
   toggleDrawer,
+  showHideSidebar,
+  expandCollapseSideMenu,
 } from './actions';
 import { makeSelectUi, makeSelectMobile } from './selectors';
 
@@ -12,7 +14,6 @@ export default uiReducer;
 
 export {
   uiReducer,
-  UI_STATE_KEY,
   makeSelectUi,
   changeLayout,
   showModal,
@@ -20,4 +21,6 @@ export {
   setMobileDevice,
   makeSelectMobile,
   toggleDrawer,
+  showHideSidebar,
+  expandCollapseSideMenu,
 };

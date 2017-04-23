@@ -1,6 +1,5 @@
 import {
   authReducer,
-  AUTH_STATE_KEY,
   doSignup,
   doLogin,
   logout,
@@ -13,11 +12,9 @@ import entitiesReducer from './entities';
 import {
   // main reducer
   boldrReducer,
-  BOLDR_STATE_KEY,
   selectBoldr,
   // menu
   menuReducer,
-  MENU_STATE_KEY,
   selectMenus,
   selectMainMenu,
   makeSelectMainMenu,
@@ -27,7 +24,6 @@ import {
   addMenuDetail,
   // settings
   settingsReducer,
-  SETTINGS_STATE_KEY,
   selectSettings,
   selectSettingFromList,
   fetchSettingsIfNeeded,
@@ -37,7 +33,6 @@ import {
   setting,
   // ui
   uiReducer,
-  UI_STATE_KEY,
   makeSelectUi,
   changeLayout,
   showModal,
@@ -45,11 +40,12 @@ import {
   setMobileDevice,
   makeSelectMobile,
   toggleDrawer,
+  showHideSidebar,
+  expandCollapseSideMenu,
 } from './boldr';
 
 import {
   mediaReducer,
-  MEDIA_STATE_KEY,
   fetchMediaIfNeeded,
   getMedia,
   getMediaType,
@@ -64,7 +60,6 @@ import {
 
 import {
   usersReducer,
-  USERS_STATE_KEY,
   fetchProfileIfNeeded,
   fetchProfile,
   selectMe,
@@ -87,7 +82,6 @@ import {
 export {
   // auth
   authReducer,
-  AUTH_STATE_KEY,
   doSignup,
   doLogin,
   logout,
@@ -95,11 +89,9 @@ export {
   selectAuth,
   // boldr
   boldrReducer,
-  BOLDR_STATE_KEY,
   selectBoldr,
   // menu
   menuReducer,
-  MENU_STATE_KEY,
   selectMenus,
   selectMainMenu,
   makeSelectMainMenu,
@@ -109,7 +101,6 @@ export {
   addMenuDetail,
   // settings
   settingsReducer,
-  SETTINGS_STATE_KEY,
   selectSettings,
   selectSettingFromList,
   fetchSettingsIfNeeded,
@@ -119,7 +110,8 @@ export {
   setting,
   // ui
   uiReducer,
-  UI_STATE_KEY,
+  showHideSidebar,
+  expandCollapseSideMenu,
   makeSelectUi,
   changeLayout,
   showModal,
@@ -129,7 +121,6 @@ export {
   toggleDrawer,
   // media
   mediaReducer,
-  MEDIA_STATE_KEY,
   fetchMediaIfNeeded,
   getMedia,
   getMediaType,
@@ -142,7 +133,6 @@ export {
   arrayOfMedia,
   // users
   usersReducer,
-  USERS_STATE_KEY,
   fetchProfileIfNeeded,
   fetchProfile,
   selectMe,

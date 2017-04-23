@@ -1,4 +1,4 @@
-import tagsReducer, { STATE_KEY as TAGS_STATE_KEY } from './reducer';
+import tagsReducer from './reducer';
 import { getTagIds, getTagsList, getTags } from './selectors';
 import { arrayOfTag, tag } from './schema';
 
@@ -17,7 +17,6 @@ export default tagsReducer;
 
 export {
   tagsReducer,
-  TAGS_STATE_KEY,
   fetchTagsIfNeeded,
   fetchTagPosts,
   fetchTagPostsIfNeeded,

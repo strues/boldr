@@ -1,7 +1,5 @@
 import * as t from '../actionTypes';
 
-export const STATE_KEY = 'dashboard';
-
 const INITIAL_STATE = {
   open: true,
   loaded: false,

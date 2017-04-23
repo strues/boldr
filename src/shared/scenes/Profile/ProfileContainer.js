@@ -6,17 +6,17 @@ import { bindActionCreators } from 'redux';
 import { Loader } from 'boldr-ui';
 
 import { BaseTemplate } from '../../templates';
-import { fetchProfileIfNeeded } from '../../state/modules/users';
 import {
   uploadProfileImage,
   uploadAvatarImage,
 } from '../../scenes/Admin/state';
 
 import {
+  fetchProfileIfNeeded,
   hideModal,
   showModal,
   toggleDrawer,
-} from '../../state/modules/boldr/ui/actions';
+} from '../../state';
 import Profile from './Profile';
 
 type Props = {
@@ -102,8 +102,8 @@ const mapStateToProps = state => {
     user: state.users.me,
     profile: state.users.profile,
     isFetching: state.users.isFetching,
-    profileImage: state.attachments.profileImage,
-    avatarImage: state.attachments.avatarImage,
+    profileImage: state.admin.attachments.profileImage,
+    avatarImage: state.admin.attachments.avatarImage,
   };
 };
 

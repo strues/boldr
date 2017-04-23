@@ -8,8 +8,6 @@ import {
 } from '../auth/actionTypes';
 import * as t from './actionTypes';
 
-export const STATE_KEY = 'users';
-
 const isFetching = (state = false, action) => {
   switch (action.type) {
     case LOGIN_REQUEST:
@@ -140,8 +138,10 @@ const profile = (state = INITIAL_STATE, action) => {
   }
 };
 
-export default combineReducers({
+const usersReducer = combineReducers({
   me,
   profile,
   isFetching,
 });
+
+export default usersReducer;

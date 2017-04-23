@@ -1,6 +1,5 @@
 import {
   menuReducer,
-  MENU_STATE_KEY,
   selectMenus,
   selectMainMenu,
   makeSelectMainMenu,
@@ -12,7 +11,6 @@ import {
 
 import {
   settingsReducer,
-  SETTINGS_STATE_KEY,
   selectSettings,
   selectSettingFromList,
   fetchSettingsIfNeeded,
@@ -24,7 +22,6 @@ import {
 
 import {
   uiReducer,
-  UI_STATE_KEY,
   makeSelectUi,
   changeLayout,
   showModal,
@@ -32,19 +29,19 @@ import {
   setMobileDevice,
   makeSelectMobile,
   toggleDrawer,
+  showHideSidebar,
+  expandCollapseSideMenu,
 } from './ui';
 
-import boldrReducer, { STATE_KEY as BOLDR_STATE_KEY } from './reducer';
+import boldrReducer from './reducer';
 import { selectBoldr } from './selectors';
 
 export {
   // main reducer
   boldrReducer,
-  BOLDR_STATE_KEY,
   selectBoldr,
   // menu
   menuReducer,
-  MENU_STATE_KEY,
   selectMenus,
   selectMainMenu,
   makeSelectMainMenu,
@@ -54,7 +51,6 @@ export {
   addMenuDetail,
   // settings
   settingsReducer,
-  SETTINGS_STATE_KEY,
   selectSettings,
   selectSettingFromList,
   fetchSettingsIfNeeded,
@@ -64,7 +60,6 @@ export {
   setting,
   // ui
   uiReducer,
-  UI_STATE_KEY,
   makeSelectUi,
   changeLayout,
   showModal,
@@ -72,4 +67,6 @@ export {
   setMobileDevice,
   makeSelectMobile,
   toggleDrawer,
+  showHideSidebar,
+  expandCollapseSideMenu,
 };
