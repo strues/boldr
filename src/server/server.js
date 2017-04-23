@@ -1,8 +1,8 @@
 import http from 'http';
-import {resolve as pathResolve} from 'path';
+import { resolve as pathResolve } from 'path';
 import app from './app';
 
-const debug = require('debug')('boldr:engine');
+const debug = require('debug')('boldr:server');
 
 const port = 3000;
 const server = http.createServer(app);
@@ -16,7 +16,7 @@ process.on('SIGINT', () => {
 });
 
 process.on('uncaughtException', error => {
-  console.error(`uncaughtException: ${error.message}`);
+  debug(`uncaughtException: ${error.message}`);
   console.error(error.stack);
   process.exit(1);
 });

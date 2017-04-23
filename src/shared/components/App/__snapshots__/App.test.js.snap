@@ -141,6 +141,11 @@ exports[`<App /> renders snapshot 1`] = `
               Object {
                 "component": [Function],
                 "exact": true,
+                "path": "/admin/media/upload",
+              },
+              Object {
+                "component": [Function],
+                "exact": true,
                 "path": "/admin/media/:id",
               },
             ],

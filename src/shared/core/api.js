@@ -5,6 +5,8 @@ import { getToken } from './authentication/token';
 const isBrowser = typeof window === 'object';
 const token = isBrowser ? getToken() : null;
 
+export const API_PREFIX = '/api/v1';
+
 const api = axios.create({
   validateStatus: status => status >= 200 && status < 500,
 });

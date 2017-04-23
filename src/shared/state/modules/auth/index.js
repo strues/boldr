@@ -1,5 +1,7 @@
-import authReducer, {STATE_KEY} from './reducer';
+import authReducer from './reducer';
+import { doSignup, doLogin, logout, checkAuth } from './actions';
+import { selectAuth } from './selectors';
 
 export default authReducer;
 
-export {STATE_KEY};
+export { authReducer, doSignup, doLogin, logout, checkAuth, selectAuth };

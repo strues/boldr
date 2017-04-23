@@ -17,7 +17,7 @@ import Dropzone from 'react-dropzone';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 
-import { uploadFiles } from '../../../state/modules/attachments/actions';
+import { uploadFiles } from '../state';
 import FileCardView from './components/FileCardView';
 import FileListView from './components/FileListView';
 

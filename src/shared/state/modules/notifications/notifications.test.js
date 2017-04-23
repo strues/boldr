@@ -1,9 +1,10 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import notificationReducer, {
-  notificationDismiss,
-  NOTIFICATION_DISMISS,
-  NOTIFICATION_CLEAR,
+  dismissNotification,
+  SEND_NOTIFICATION,
+  DISMISS_NOTIFICATION,
+  CLEAR_NOTIFICATION,
 } from './notifications';
 
 describe('Notifications Reducer', () => {
@@ -11,27 +12,29 @@ describe('Notifications Reducer', () => {
     expect(notificationReducer(undefined, {})).toEqual([]);
   });
   it('should clear the notifications', () => {
-    const initialState = [{id: 1}, {id: 2}];
+    const initialState = [{ id: 1 }, { id: 2 }];
     const stateAfter = [];
     expect(
       notificationReducer(initialState, {
-        type: NOTIFICATION_CLEAR,
+        type: CLEAR_NOTIFICATION,
       }),
     ).toEqual(stateAfter);
   });
   it('Should remove the selected notification', () => {
-    const initialState = [{id: 1}, {id: 2}];
-    const stateAfter = [{id: 2}];
+    const initialState = [{ id: 1 }, { id: 2 }];
+    const stateAfter = [{ id: 2 }];
+    const id = 1;
     expect(
       notificationReducer(initialState, {
-        type: NOTIFICATION_DISMISS,
-        payload: 1,
+        type: DISMISS_NOTIFICATION,
+        id,
       }),
     ).toEqual(stateAfter);
   });
 });
 
 test('Dismiss Action', () => {
+  const id = 1;
   const mockStore = configureMockStore([thunk]);
   const store = mockStore({
     notifications: [
@@ -43,10 +46,10 @@ test('Dismiss Action', () => {
       },
     ],
   });
-  store.dispatch(notificationDismiss(1));
+  store.dispatch(dismissNotification(1));
   const action = store.getActions()[0];
   expect(action).toEqual({
-    type: 'NOTIFICATION_DISMISS',
-    payload: 1,
+    type: DISMISS_NOTIFICATION,
+    id,
   });
 });

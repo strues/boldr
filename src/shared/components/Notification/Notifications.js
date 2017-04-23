@@ -1,45 +1,47 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import TransitionGroup from 'react-transition-group/TransitionGroup';
+import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import {
-  notificationDismiss,
+  dismissNotification,
 } from '../../state/modules/notifications/notifications';
 
 import Notification from './Notification';
 
-const getter = (obj, propName) => (obj.get ? obj.get(propName) : obj[propName]); // eslint-disable-line
+const getProp = (obj, propName) =>
+  (obj.get ? obj.get(propName) : obj[propName]); // eslint-disable-line
 
 type Props = {
-  notifications?: Array<any>,
+  notifications?: Array<Object>,
   className?: string,
   transitionEnterTimeout?: number,
   transitionLeaveTimeout?: number,
   dismissAfter: number,
   onActionClick?: Function,
-  notificationDismiss: Function,
+  dismissNotification: Function,
   actionLabel?: string,
-  componentClassName: string,
   CustomComponent: ReactElement,
 };
 
-export class Notifications extends Component {
-  constructor() {
-    super();
-    this._onDismiss = this._onDismiss.bind(this);
-  }
+export class Notifications extends PureComponent {
+  static defaultProps = {
+    className: null,
+    onActionClick: null,
+    action: null,
+    transitionEnterTimeout: 140,
+    transitionLeaveTimeout: 600,
+    dismissAfter: 3000,
+  };
 
   props: Props;
 
-  _onDismiss(id) {
-    this.props.notificationDismiss(id);
-  }
+  _onDismiss = id => {
+    this.props.dismissNotification(id);
+  };
 
   render() {
     const {
       notifications,
       className,
-      componentClassName,
-      CustomComponent,
       transitionEnterTimeout,
       transitionLeaveTimeout,
       onActionClick,
@@ -49,44 +51,38 @@ export class Notifications extends Component {
 
     const renderedNotifications = notifications.map(notification => (
       <Notification
-        componentClassName="boldr-notification"
+        componentClassName="boldrui-notification"
         dismissAfter={notification.dismissAfter || dismissAfter}
         onDismiss={this._onDismiss}
         onActionClick={onActionClick}
         actionLabel={actionLabel}
-        key={getter(notification, 'id')}
-        id={getter(notification, 'id')}
-        message={getter(notification, 'message')}
-        kind={getter(notification, 'kind')}
+        key={getProp(notification, 'id')}
+        id={getProp(notification, 'id')}
+        message={getProp(notification, 'message')}
+        kind={getProp(notification, 'kind')}
       />
     ));
-    const classes = ['boldr-notification__container', className || null]
+    const classes = ['boldrui-notification__container', className || null]
       .join(' ')
       .split();
 
     return (
       <div className={classes}>
-        <TransitionGroup
-          transitionName={'boldr-notification__transition'}
+        <CSSTransitionGroup
+          transitionName={'boldrui-notification__transition'}
           transitionEnterTimeout={transitionEnterTimeout}
           transitionLeaveTimeout={transitionLeaveTimeout}
         >
           {renderedNotifications}
-        </TransitionGroup>
+        </CSSTransitionGroup>
       </div>
     );
   }
 }
 
-Notifications.defaultProps = {
-  className: null,
-  transitionEnterTimeout: 600,
-  transitionLeaveTimeout: 600,
-};
-
 export default connect(
   state => ({
     notifications: state.notifications,
   }),
-  { notificationDismiss },
+  { dismissNotification },
 )(Notifications);

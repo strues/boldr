@@ -1,3 +1,4 @@
+import * as t from '../actionTypes';
 import menuReducer from './reducer';
 
 describe('Menu Reducer', () => {
@@ -7,11 +8,12 @@ describe('Menu Reducer', () => {
         id: -1,
         uuid: '',
         name: '',
-        safe_name: '',
+        safeName: '',
         attributes: {},
         restricted: false,
         details: [],
       },
+      isFetching: false,
     });
   });
 });

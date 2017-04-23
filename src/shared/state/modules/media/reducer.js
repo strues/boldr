@@ -2,30 +2,21 @@ import { combineReducers } from 'redux';
 import addIdToArray from 'boldr-utils/es/arrays/addIdToArray';
 import removeByKey from 'boldr-utils/es/objects/removeByKey';
 import removeIdFromArray from 'boldr-utils/es/arrays/removeIdFromArray';
+import * as t from './actionTypes';
 
-import * as t from '../actionTypes';
-import {
-  FETCH_MEDIAS_REQUEST,
-  FETCH_MEDIAS_SUCCESS,
-  FETCH_MEDIAS_FAILURE,
-  EDIT_MEDIA_REQUEST,
-  EDIT_MEDIA_SUCCESS,
-  EDIT_MEDIA_FAILURE,
-  SELECT_MEDIA,
-} from './actions';
 import { getMedia } from './selectors';
-
-export const STATE_KEY = 'media';
 
 const all = (state = {}, action) => {
   switch (action.type) {
-    case FETCH_MEDIAS_SUCCESS:
-    case EDIT_MEDIA_SUCCESS:
+    case t.FETCH_MEDIAS_SUCCESS:
+    case t.EDIT_MEDIA_SUCCESS:
+    case t.UPLOAD_MEDIA_SUCCESS:
       return {
         ...state,
         ...action.payload.entities.media,
       };
-
+    case t.DELETE_MEDIA_SUCCESS:
+      return removeByKey(state, action.id);
     default:
       return state;
   }
@@ -33,9 +24,13 @@ const all = (state = {}, action) => {
 
 const ids = (state = [], action) => {
   switch (action.type) {
-    case FETCH_MEDIAS_SUCCESS:
-    case EDIT_MEDIA_SUCCESS:
+    case t.FETCH_MEDIAS_SUCCESS:
+    case t.EDIT_MEDIA_SUCCESS:
       return action.payload.result;
+    case t.UPLOAD_MEDIA_SUCCESS:
+      return addIdToArray(state, action.payload.result);
+    case t.DELETE_MEDIA_SUCCESS:
+      return removeIdFromArray(state, action.id);
     default:
       return state;
   }
@@ -43,13 +38,16 @@ const ids = (state = [], action) => {
 
 const isFetching = (state = false, action) => {
   switch (action.type) {
-    case FETCH_MEDIAS_REQUEST:
-    case EDIT_MEDIA_REQUEST:
+    case t.FETCH_MEDIAS_REQUEST:
+    case t.EDIT_MEDIA_REQUEST:
+    case t.UPLOAD_MEDIA_REQUEST:
       return true;
-    case FETCH_MEDIAS_SUCCESS:
-    case FETCH_MEDIAS_FAILURE:
-    case EDIT_MEDIA_SUCCESS:
-    case EDIT_MEDIA_FAILURE:
+    case t.FETCH_MEDIAS_SUCCESS:
+    case t.FETCH_MEDIAS_FAILURE:
+    case t.EDIT_MEDIA_SUCCESS:
+    case t.EDIT_MEDIA_FAILURE:
+    case t.UPLOAD_MEDIA_FAILURE:
+    case t.UPLOAD_MEDIA_SUCCESS:
       return false;
     default:
       return state;
@@ -58,7 +56,7 @@ const isFetching = (state = false, action) => {
 
 const currentMedia = (state = {}, action) => {
   switch (action.type) {
-    case SELECT_MEDIA:
+    case t.SELECT_MEDIA:
       return {
         ...state,
         ...action.file,
@@ -68,12 +66,14 @@ const currentMedia = (state = {}, action) => {
   }
 };
 
-export default combineReducers({
+const mediaReducer = combineReducers({
   all,
   ids,
   isFetching,
   currentMedia,
 });
+
+export default mediaReducer;
 
 export const getMediaType = (state: Object, filter: string): Function => {
   const allMedia = getMedia(state);

@@ -1,9 +1,6 @@
 import { connect } from 'react-redux';
 import withRouter from 'react-router-dom/withRouter';
-import {
-  getPublishedPosts,
-  getFeaturedPosts,
-} from '../../../state/modules/blog/posts/reducer';
+import { getPublishedPosts, getFeaturedPosts } from '../state/posts/reducer';
 import PostListing from './PostListing';
 
 const mapStateToProps = state => ({

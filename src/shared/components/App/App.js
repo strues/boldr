@@ -5,37 +5,12 @@ import classnames from 'classnames';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { StyleClasses } from 'boldr-ui';
-import { ThemeProvider } from 'styled-components';
-
-import { fetchSettingsIfNeeded } from '../../state/modules/boldr/settings';
+import { fetchSettingsIfNeeded } from '../../state';
 import Notifications from '../../components/Notification';
 import renderRoutes from '../../core/addRoutes';
 
 const BASE_ELEMENT = StyleClasses.APP;
-const theme = {
-  palette: {
-    primary: ['#1976d2', '#2196f3', '#71bcf7', '#c2e2fb'],
-    secondary: ['#c2185b', '#e91e63', '#f06292', '#f8bbd0'],
-    danger: ['#d32f2f', '#f44336', '#f8877f', '#ffcdd2'],
-    alert: ['#ffa000', '#ffc107', '#ffd761', '#ffecb3'],
-    success: ['#388e3c', '#4caf50', '#7cc47f', '#c8e6c9'],
-    grayscale: [
-      '#212121',
-      '#616161',
-      '#9e9e9e',
-      '#bdbdbd',
-      '#e0e0e0',
-      '#eeeeee',
-      '#ffffff',
-    ],
-    white: ['#fff', '#fff', '#eee'],
-  },
-  fonts: {
-    primary: 'Roboto, Helvetica, Roboto, sans-serif',
-    pre: 'Consolas, Liberation Mono, Menlo, Courier, monospace',
-    quote: 'Georgia, serif',
-  },
-};
+
 type Props = {
   route: Object,
   className: string,
@@ -166,15 +141,16 @@ class App extends Component {
           />
           <link rel="manifest" href="/manifest.json" />
         </Helmet>
-        <ThemeProvider theme={theme}>
-          <div className={classes}>
-            {renderRoutes(route.routes)}
-            <Notifications />
-          </div>
-        </ThemeProvider>
+        {renderRoutes(route.routes)}
+        <Notifications />
       </div>
     );
   }
 }
+const mapStateToProps = (state, props) => {
+  const { routes } = props.route;
 
-export default connect()(App);
+  return { routes };
+};
+
+export default connect(mapStateToProps)(App);

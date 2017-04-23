@@ -1,7 +1,7 @@
 import { resolve as pathResolve } from 'path';
 import chokidar from 'chokidar';
 import appRootDir from 'app-root-dir';
-import { log } from '../utils';
+import logger from 'boldr-utils/es/logger';
 
 // @TODO: Remove this once babel-loader updates
 // https://github.com/babel/babel-loader/pull/391
@@ -18,11 +18,7 @@ const watcher = chokidar.watch([
 ]);
 watcher.on('ready', () => {
   watcher.on('change', () => {
-    log({
-      title: 'webpack',
-      level: 'warn',
-      message: 'Build config has changed. Restarting the dev devServer...',
-    });
+    logger.info('Build config has changed. Restarting the dev devServer...');
     devServer.dispose().then(() => {
       // Make sure our new webpack bundleConfigs aren't in the module cache.
       Object.keys(require.cache).forEach(modulePath => {

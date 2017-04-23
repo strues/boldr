@@ -17,7 +17,7 @@ import {
   Avatar,
 } from 'boldr-ui';
 
-import { selectPost } from '../../../../../../state/modules/blog/posts/actions';
+import { selectPost } from '../../../../../Blog/state';
 import PostTableHeader from './PostTableHeader';
 import PostTableBody from './PostTableBody';
 import TableControls from './TableControls';

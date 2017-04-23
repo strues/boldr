@@ -3,9 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Paper, Grid, Row, Col, Image } from 'boldr-ui';
 
-import {
-  updateAttachment,
-} from '../../../../state/modules/attachments/actions';
+import { updateAttachment } from '../../state';
 // import config from '../../../../../../config';
 import FileEditorForm from '../components/FileEditorForm';
 
@@ -57,7 +55,7 @@ export class FileEditor extends Component {
 
 const mapStateToProps = state => {
   return {
-    currentFile: state.attachments.currentFile,
+    currentFile: state.admin.attachments.currentFile,
   };
 };
 

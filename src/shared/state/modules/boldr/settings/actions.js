@@ -1,12 +1,11 @@
-import { normalize, arrayOf } from 'normalizr';
+import { normalize } from 'normalizr';
 import { push } from 'react-router-redux';
-import api from '../../../../core/api';
+import api, { API_PREFIX } from '../../../../core/api';
 import * as notif from '../../../../core/constants';
-import { notificationSend } from '../../notifications/notifications';
-import * as t from '../../actionTypes';
+import { sendNotification } from '../../notifications/notifications';
+import * as t from '../actionTypes';
 import { setting as settingSchema, arrayOfSetting } from './schema';
 
-const API_PREFIX = '/api/v1';
 /**
   * FETCH SETTINGS ACTIONS
   * -------------------------
@@ -94,7 +93,7 @@ export function updateBoldrSettings(payload) {
       .then(res => {
         dispatch(doneUpdateSettings(res.data));
         dispatch(
-          notificationSend({
+          sendNotification({
             message: 'Updated your settings.',
             kind: 'info',
             dismissAfter: 3000,
@@ -104,7 +103,7 @@ export function updateBoldrSettings(payload) {
       .catch(err => {
         dispatch(failUpdateSettings(err));
         dispatch(
-          notificationSend({
+          sendNotification({
             message: `We ran into a problem with your set up ${err}`,
             kind: 'error',
             dismissAfter: 3000,

@@ -3,6 +3,7 @@ import http from 'http';
 import httpProxy from 'http-proxy';
 import express from 'express';
 import appRootDir from 'app-root-dir';
+import config from '../../config';
 import {
   clientBundle,
   expressMiddleware,
@@ -12,25 +13,26 @@ import {
 } from './middleware';
 import boldrSSR from './boldrSSR';
 
-// const proxyTarget = `http://${config.apiHost}:${config.apiPort}/api/v1`;
-const proxyTarget = 'http://0.0.0.0:2121/api/v1';
+const proxyPort = parseInt(config('apiPort'), 10);
+// const proxyTarget = `http://${config('apiHost')}:${proxyPort}/api/v1`;
+const proxyTarget = 'http://127.0.0.1:2121/api/v1';
+
 const proxy = httpProxy.createProxyServer({
   target: proxyTarget,
   ws: true,
 });
-
 // const cache = require('express-redis-cache')({ client: redisClient });
 const debug = require('debug')('boldr:server-app');
 
 const app = express();
 
-// contains body-parser, method-override, etc...
-expressMiddleware(app);
 app.use((req, res, next) => {
-  res.setHeader('Service-Worker-Allowed', '*');
   res.setHeader('X-Forwarded-For', req.ip);
   return next();
 });
+
+// contains body-parser, method-override, etc...
+expressMiddleware(app);
 
 // Proxy to API server
 app.use('/api/v1', (req, res) => {

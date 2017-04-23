@@ -5,12 +5,12 @@ import Helmet from 'react-helmet';
 import { FormCard } from 'boldr-ui';
 
 import BaseTemplate from '../../../templates/BaseTemplate';
-import { resetPassword } from '../../../state/modules/users/actions';
+import { resetPassword } from '../../../state';
 import ResetPasswordForm from './ResetPasswordForm';
 
 type Props = {
   dispatch: () => void,
-  params: Object,
+  match: Object,
 };
 
 class ResetPassword extends Component {
@@ -23,7 +23,7 @@ class ResetPassword extends Component {
 
   handleReset(values, props): void {
     this.props.dispatch(
-      resetPassword(values.password, this.props.params.token),
+      resetPassword(values.password, this.props.match.params.token),
     );
   }
 

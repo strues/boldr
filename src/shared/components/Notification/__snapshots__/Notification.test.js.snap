@@ -2,7 +2,7 @@
 
 exports[`<Notification /> +++ renders snapshot 1`] = `
 <div
-  className="boldr-notification"
+  className="boldrui-notification"
   style={
     Object {
       "MozTransform": "translatez(0)",
@@ -32,19 +32,19 @@ exports[`<Notification /> +++ renders snapshot 1`] = `
   }
 >
   <div
-    className="boldr-notification__icon"
+    className="boldrui-notification__icon"
   />
   <div
-    className="boldr-notification__content"
+    className="boldrui-notification__content"
   >
     <span
-      className="boldr-notification__message"
+      className="boldrui-notification__message"
     >
       There was a problem uploading.
     </span>
   </div>
   <div
-    className="boldr-notification__close"
+    className="boldrui-notification__close"
   />
 </div>
 `;

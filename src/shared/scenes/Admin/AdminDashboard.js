@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import NavLink from 'react-router-dom/NavLink';
 import styled from 'styled-components';
+import last from 'lodash/last';
+import Loadable from 'react-loadable';
 import { connect } from 'react-redux';
 import {
   Avatar,
@@ -15,13 +17,12 @@ import {
   DashboardWrapper,
   Anchor,
   DashboardContent,
+  DashboardMain,
   TopbarLink,
   Topbar,
+  Loader,
 } from 'boldr-ui';
-import {
-  showHideSidebar,
-  expandCollapseSideMenu,
-} from '../../state/modules/boldr/ui/actions';
+import { showHideSidebar, expandCollapseSideMenu } from '../../state';
 import renderRoutes from '../../core/addRoutes';
 import sidebarLinks from './sidebarLinks';
 
@@ -38,16 +39,7 @@ type Props = {
   routing: Object,
 };
 
-const DashboardLayout = styled.div`
-  display: flex;
-  height: 100%;
-  min-height: 100%;
-`;
 export class AdminDashboard extends Component {
-  state = {
-    hidden: false,
-  };
-
   props: Props;
 
   handleHideSidebar = (e): Function => {
@@ -57,11 +49,7 @@ export class AdminDashboard extends Component {
   onExpandCollapse = () => {
     this.props.dispatch(expandCollapseSideMenu());
   };
-  clickActivate = () => {
-    const activate = '/item41/a';
 
-    this.setState({ activate });
-  };
   render() {
     const {
       route,
@@ -70,8 +58,10 @@ export class AdminDashboard extends Component {
       routing,
       location: { pathname, search },
     } = this.props;
+
+    // baseLink,
     return (
-      <div style={{ display: 'flex', height: '100%', minHeight: '100%' }}>
+      <DashboardWrapper>
         {ui.visible
           ? <Sidebar
               items={sidebarLinks}
@@ -79,12 +69,13 @@ export class AdminDashboard extends Component {
               location={routing.location.pathname}
               visible={ui.visible}
               expanded={ui.expanded}
+              onExpandCollapse={this.onExpandCollapse}
               logoImg="https://boldr.io/assets/boldr-logo-white.png"
               logoLink="/"
               isPrimaryColor
             />
           : null}
-        <DashboardWrapper>
+        <DashboardMain>
           <Topbar
             url={this.props.match.path}
             onMenuClick={this.handleHideSidebar}
@@ -96,14 +87,15 @@ export class AdminDashboard extends Component {
               { title: 'Dashboard', url: '/admin' },
             ]}
           />
+
           <DashboardContent>
             <Grid fluid>
               {renderRoutes(route.routes)}
             </Grid>
           </DashboardContent>
-          <DashboardFooter copyright="© 2017 Steven Truesdell" />
-        </DashboardWrapper>
-      </div>
+
+        </DashboardMain>
+      </DashboardWrapper>
     );
   }
 }

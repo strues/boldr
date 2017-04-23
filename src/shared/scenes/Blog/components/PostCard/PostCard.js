@@ -16,7 +16,7 @@ import {
   Media,
   MediaOverlay,
 } from 'boldr-ui';
-import { selectPost } from '../../../../state/modules/blog/posts/actions';
+import { selectPost } from '../../state/posts/actions';
 
 import TagBlock from '../TagBlock';
 

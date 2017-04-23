@@ -1,8 +1,12 @@
 {
   "presets": [
-    "stage-2",
     ["env", { "targets": { "node": true } }],
+    "stage-2",
     "react"
   ],
-  "plugins": ["transform-decorators-legacy", "fast-async", "dynamic-import-node", "dynamic-import-webpack"]
+  "plugins": [
+    "syntax-dynamic-import",
+    "syntax-flow",
+    "syntax-trailing-function-commas",
+  ]
 }

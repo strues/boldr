@@ -1,11 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  fetchPostsIfNeeded,
-  getPosts,
-  deletePost,
-} from '../../../../state/modules/blog/posts';
+import { fetchPostsIfNeeded, getPosts, deletePost } from '../../../Blog/state';
 import type { ReactElement } from '../../../../types/react';
 import VisiblePostList from './VisiblePostList';
 

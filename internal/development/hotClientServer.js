@@ -1,8 +1,10 @@
 import express from 'express';
 import createWebpackMiddleware from 'webpack-dev-middleware';
 import createWebpackHotMiddleware from 'webpack-hot-middleware';
-import { log } from '../utils';
+import logger from 'boldr-utils/es/logger';
 import ListenerManager from './listenerManager';
+
+const debug = require('debug')('boldr:webpack');
 
 class HotClientServer {
   constructor(compiler) {
@@ -22,6 +24,14 @@ class HotClientServer {
     this.webpackDevMiddleware = createWebpackMiddleware(compiler, {
       quiet: true,
       noInfo: true,
+      lazy: false,
+      watchOptions: {
+        aggregateTimeout: 300,
+        poll: true,
+      },
+      stats: {
+        colors: true,
+      },
       headers: {
         'Access-Control-Allow-Origin': '*',
       },
@@ -36,29 +46,15 @@ class HotClientServer {
     this.listenerManager = new ListenerManager(listener, 'client');
 
     compiler.plugin('compile', () => {
-      log({
-        title: 'client',
-        level: 'info',
-        message: 'Building new bundle...',
-      });
+      logger.start('Building new bundle...');
     });
 
-    compiler.plugin('done', (stats) => {
+    compiler.plugin('done', stats => {
       if (stats.hasErrors()) {
-        log({
-          title: 'client',
-          level: 'error',
-          message: 'Build failed, please check the console for more info.',
-          notify: true,
-        });
-        console.error(stats.toString());
+        logger.error('Build failed, please check the console for more info.');
+        debug(stats.toString());
       } else {
-        log({
-          title: 'client',
-          level: 'info',
-          message: 'Running with latest changes.',
-          notify: false,
-        });
+        logger.end('Running with latest changes.');
       }
     });
   }

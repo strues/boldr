@@ -4,41 +4,45 @@ exports[`<Notifications /> +++ renders snapshot 1`] = `
 <div
   className={
     Array [
-      "boldr-notification__container ",
+      "boldrui-notification__container ",
     ]
   }
 >
-  <TransitionGroup
-    childFactory={[Function]}
-    component="span"
-    transitionEnterTimeout={600}
+  <CSSTransitionGroup
+    transitionAppear={false}
+    transitionEnter={true}
+    transitionEnterTimeout={140}
+    transitionLeave={true}
     transitionLeaveTimeout={600}
-    transitionName="boldr-notification__transition"
+    transitionName="boldrui-notification__transition"
   >
     <Notification
-      componentClassName="boldr-notification"
+      componentClassName="boldrui-notification"
       dismissAfter={3000}
       id={1}
       kind="error"
       message="There was a problem uploading."
+      onActionClick={null}
       onDismiss={[Function]}
     />
     <Notification
-      componentClassName="boldr-notification"
+      componentClassName="boldrui-notification"
       dismissAfter={3000}
       id={2}
       kind="success"
       message="Upload success!"
+      onActionClick={null}
       onDismiss={[Function]}
     />
     <Notification
-      componentClassName="boldr-notification"
+      componentClassName="boldrui-notification"
       dismissAfter={3000}
       id={3}
       kind="success"
       message="Removed file"
+      onActionClick={null}
       onDismiss={[Function]}
     />
-  </TransitionGroup>
+  </CSSTransitionGroup>
 </div>
 `;

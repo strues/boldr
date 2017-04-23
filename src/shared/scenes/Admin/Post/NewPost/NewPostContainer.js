@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import draftToHtml from 'draftjs-to-html';
 
-import { createPost } from '../../../../state/modules/blog/posts';
+import { createPost } from '../../../Blog/state';
 import NewPost from './NewPost';
 
 type Props = {
@@ -47,7 +47,7 @@ class NewPostContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    postImage: state.attachments.postImage,
+    postImage: state.admin.attachments.postImage,
     drawer: state.boldr.ui.drawer,
   };
 };

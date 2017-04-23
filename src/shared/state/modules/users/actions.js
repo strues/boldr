@@ -1,11 +1,9 @@
 import { push } from 'react-router-redux';
-import api from '../../../core/api';
-import { setToken, removeToken } from '../../../core/authentication/token';
+import { api, API_PREFIX, setToken, removeToken } from '../../../core';
 import * as notif from '../../../core/constants';
-import { notificationSend } from '../notifications/notifications';
-import * as t from '../actionTypes';
+import { sendNotification } from '../notifications/notifications';
+import * as t from './actionTypes';
 
-const API_PREFIX = '/api/v1';
 /**
   * FORGOT PASSWORD ACTIONS
   * -------------------------
@@ -18,13 +16,21 @@ export function forgotPassword(email) {
       type: t.FORGOT_PASSWORD_REQUEST,
     });
     return api
-      .post(`${API_PREFIX}/tokens/forgot-password`, { data: email })
+      .post(`${API_PREFIX}/tokens/forgot-password`, { email })
       .then(res => {
+        if (res.status !== 202) {
+          const err = JSON.stringify(res.data.message.message);
+          dispatch({
+            type: t.FORGOT_PASSWORD_FAILURE,
+            error: err,
+          });
+          return dispatch(sendNotification(notif.MSG_FORGOT_PW_ERROR));
+        }
         dispatch({
           type: t.FORGOT_PASSWORD_SUCCESS,
         });
         dispatch(push('/'));
-        dispatch(notificationSend(notif.MSG_FORGOT_PW_ERROR));
+        dispatch(sendNotification(notif.MSG_FORGOT_PW_ERROR));
       })
       .catch(err =>
         dispatch({
@@ -48,14 +54,21 @@ export function resetPassword(password, token) {
     });
     return api
       .post(`${API_PREFIX}/tokens/reset-password/${token}`, {
-        data: password,
+        password,
+        token,
       })
       .then(res => {
+        if (res.status !== 204) {
+          return dispatch({
+            type: t.RESET_PASSWORD_FAILURE,
+            error: res.data.message,
+          });
+        }
         dispatch({
           type: t.RESET_PASSWORD_SUCCESS,
         });
         dispatch(push('/account/login'));
-        dispatch(notificationSend(notif.MSG_RESET_PW_SUCCESS));
+        dispatch(sendNotification(notif.MSG_RESET_PW_SUCCESS));
       })
       .catch(err =>
         dispatch({
@@ -84,7 +97,7 @@ export function verifyAccount(token) {
         dispatch({
           type: t.VERIFY_ACCOUNT_SUCCESS,
         });
-        dispatch(notificationSend(notif.MSG_VERIFY_USER_SUCCESS));
+        dispatch(sendNotification(notif.MSG_VERIFY_USER_SUCCESS));
       })
       .catch(err =>
         dispatch({
@@ -162,11 +175,11 @@ export function editProfile(userData) {
       .put(`${API_PREFIX}/users/${userData.id}`, userData)
       .then(res => {
         dispatch(doneUpdateProfile(res));
-        dispatch(notificationSend(notif.MSG_EDIT_PROFILE_SUCCESS));
+        dispatch(sendNotification(notif.MSG_EDIT_PROFILE_SUCCESS));
       })
       .catch(err => {
         dispatch(failUpdateProfile(err.message));
-        dispatch(notificationSend(notif.MSG_EDIT_PROFILE_FAILURE));
+        dispatch(sendNotification(notif.MSG_EDIT_PROFILE_FAILURE));
       });
   };
 }

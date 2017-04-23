@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchTagsIfNeeded, getTags } from '../../../state/modules/blog/tags';
+import { fetchTagsIfNeeded, getTags } from '../../Blog/state';
 import Tags from './Tags';
 
 type Props = {

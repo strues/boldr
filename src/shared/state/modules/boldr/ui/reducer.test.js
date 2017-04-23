@@ -1,14 +1,7 @@
 import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
-import {
-  CHANGE_LAYOUT,
-  MODAL_OPEN,
-  MODAL_CLOSED,
-  changeLayout,
-  showModal,
-  hideModal,
-  toggleDrawer,
-} from './actions';
+import * as t from '../actionTypes';
+import { changeLayout, showModal, hideModal, toggleDrawer } from './actions';
 import uiReducer from './reducer';
 
 describe('UI Reducer', () => {
@@ -42,7 +35,7 @@ describe('UI Reducer', () => {
     };
     expect(
       uiReducer(initialState, {
-        type: MODAL_OPEN,
+        type: t.MODAL_OPEN,
       }),
     ).toEqual(stateAfter);
   });
@@ -65,13 +58,13 @@ describe('UI Reducer', () => {
     };
     expect(
       uiReducer(initialState, {
-        type: MODAL_CLOSED,
+        type: t.MODAL_CLOSED,
       }),
     ).toEqual(stateAfter);
   });
   it('should change the layout', () => {
     const action = {
-      type: CHANGE_LAYOUT,
+      type: t.CHANGE_LAYOUT,
       payload: 'list',
     };
     const state = {

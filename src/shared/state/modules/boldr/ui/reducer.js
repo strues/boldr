@@ -1,17 +1,5 @@
 import { LAYOUTS } from '../../../../core/constants';
-import {
-  CHANGE_LAYOUT,
-  MODAL_OPEN,
-  MODAL_CLOSED,
-  SET_MOBILE_DEVICE,
-  UPDATE_MEDIA,
-  UPDATE_DRAWER_TYPE,
-  TOGGLE_SB_MENU,
-  TOGGLE_DRAWER,
-  TOGGLE_SIDEBAR,
-} from './actions';
-
-export const STATE_KEY = 'ui';
+import * as t from '../actionTypes';
 
 function toggleExpandCollapse(state) {
   const newState = Object.assign({}, state);
@@ -40,28 +28,28 @@ const INITIAL_STATE = {
 
 function uiReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case TOGGLE_SB_MENU:
+    case t.TOGGLE_SB_MENU:
       return toggleExpandCollapse(state);
-    case TOGGLE_SIDEBAR:
+    case t.TOGGLE_SIDEBAR:
       return toggleSidebar(state);
-    case TOGGLE_DRAWER:
+    case t.TOGGLE_DRAWER:
       return toggleDrawer(state);
-    case CHANGE_LAYOUT:
+    case t.CHANGE_LAYOUT:
       return {
         ...state,
         layout: action.payload,
       };
-    case MODAL_OPEN:
+    case t.MODAL_OPEN:
       return {
         ...state,
         modal: true,
       };
-    case MODAL_CLOSED:
+    case t.MODAL_CLOSED:
       return {
         ...state,
         modal: false,
       };
-    case SET_MOBILE_DEVICE:
+    case t.SET_MOBILE_DEVICE:
       return {
         ...state,
         isMobile: action.payload,

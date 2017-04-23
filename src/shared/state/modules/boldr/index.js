@@ -1,18 +1,72 @@
-import { combineReducers } from 'redux';
-import uiReducer, { STATE_KEY as UI_STATE_KEY } from './ui';
-import menuReducer, { STATE_KEY as MENU_STATE_KEY } from './menu';
-import settingReducer, { STATE_KEY as SETTINGS_STATE_KEY } from './settings';
-import templatesReducer, {
-  STATE_KEY as TEMPLATES_STATE_KEY,
-} from './templates';
+import {
+  menuReducer,
+  selectMenus,
+  selectMainMenu,
+  makeSelectMainMenu,
+  fetchMainMenu,
+  fetchMainMenuIfNeeded,
+  updateMenuDetails,
+  addMenuDetail,
+} from './menu';
 
-export const STATE_KEY = 'boldr';
+import {
+  settingsReducer,
+  selectSettings,
+  selectSettingFromList,
+  fetchSettingsIfNeeded,
+  fetchSettings,
+  updateBoldrSettings,
+  arrayOfSetting,
+  setting,
+} from './settings';
 
-const boldrReducer = combineReducers({
-  [UI_STATE_KEY]: uiReducer,
-  [MENU_STATE_KEY]: menuReducer,
-  [SETTINGS_STATE_KEY]: settingReducer,
-  [TEMPLATES_STATE_KEY]: templatesReducer,
-});
+import {
+  uiReducer,
+  makeSelectUi,
+  changeLayout,
+  showModal,
+  hideModal,
+  setMobileDevice,
+  makeSelectMobile,
+  toggleDrawer,
+  showHideSidebar,
+  expandCollapseSideMenu,
+} from './ui';
 
-export default boldrReducer;
+import boldrReducer from './reducer';
+import { selectBoldr } from './selectors';
+
+export {
+  // main reducer
+  boldrReducer,
+  selectBoldr,
+  // menu
+  menuReducer,
+  selectMenus,
+  selectMainMenu,
+  makeSelectMainMenu,
+  fetchMainMenu,
+  fetchMainMenuIfNeeded,
+  updateMenuDetails,
+  addMenuDetail,
+  // settings
+  settingsReducer,
+  selectSettings,
+  selectSettingFromList,
+  fetchSettingsIfNeeded,
+  fetchSettings,
+  updateBoldrSettings,
+  arrayOfSetting,
+  setting,
+  // ui
+  uiReducer,
+  makeSelectUi,
+  changeLayout,
+  showModal,
+  hideModal,
+  setMobileDevice,
+  makeSelectMobile,
+  toggleDrawer,
+  showHideSidebar,
+  expandCollapseSideMenu,
+};

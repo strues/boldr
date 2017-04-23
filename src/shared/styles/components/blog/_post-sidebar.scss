@@ -8,11 +8,13 @@
     background-color: $white;
     padding: 1em;
     margin-bottom: 50px;
+
     @include md-box-shadow(2);
   }
   // tags card
   .#{$boldr-ns}sidebar-tags {
     @include md-box-shadow(2);
+
     padding: 1rem;
     background-color: #fff;
   }

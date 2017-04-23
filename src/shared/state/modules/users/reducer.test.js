@@ -32,10 +32,6 @@ describe('Users Reducer', () => {
         roleId: '',
       },
       isFetching: false,
-      userlist: {
-        all: {},
-        ids: [],
-      },
     });
   });
 });

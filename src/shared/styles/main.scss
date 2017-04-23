@@ -1,7 +1,24 @@
-$boldr-ns: 'boldrui-';
-@import '~boldr-ui/lib/styles/boldrui';
+@charset 'utf-8';
 
-.boldr {
-	height: 100%;
-	min-height: 100%;
-}
+/// Namespace
+$boldr-ns: 'boldrui-' !default;
+$dash-ns: 'boldrui-dash-'; // .#{$dash-ns}
+
+@import 'abstracts/colors/all';
+
+// Our variables
+@import 'abstracts/variables';
+// Our mixins
+@import 'abstracts/mixins';
+// Bootstrap components and custom bootstrap component variations
+@import 'vendor/all';
+// Base (typography, grid, animation)
+@import 'base/all';
+@import 'components/all';
+
+@include react-md-everything;
+@include react-md-make-custom-grid('24-40', 24px, 40px, 0);
+@include react-md-make-custom-grid('40-16', 40px, 16px, 0);
+@include boldrui-paper;
+@include boldrui-media;
+@include boldrui-divider;

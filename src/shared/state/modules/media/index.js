@@ -1,17 +1,19 @@
-import mediaReducer, { STATE_KEY, getMediaType } from './reducer';
+import mediaReducer, { getMediaType } from './reducer';
 import {
   fetchMediaIfNeeded,
   toggleMedia,
   selectMedia,
   editMedia,
   deleteMedia,
+  uploadMediaFile,
 } from './actions';
 import { getMedia } from './selectors';
+import { media, arrayOfMedia } from './schema';
 
 export default mediaReducer;
 
 export {
-  STATE_KEY,
+  mediaReducer,
   fetchMediaIfNeeded,
   getMedia,
   getMediaType,
@@ -19,4 +21,7 @@ export {
   toggleMedia,
   editMedia,
   deleteMedia,
+  uploadMediaFile,
+  media,
+  arrayOfMedia,
 };

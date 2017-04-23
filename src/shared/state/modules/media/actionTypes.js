@@ -1,0 +1,16 @@
+export const FETCH_MEDIAS_REQUEST = '@boldr/media/FETCH_MEDIAS_REQUEST';
+export const FETCH_MEDIAS_SUCCESS = '@boldr/media/FETCH_MEDIAS_SUCCESS';
+export const FETCH_MEDIAS_FAILURE = '@boldr/media/FETCH_MEDIAS_FAILURE';
+export const GET_MEDIA_REQUEST = '@boldr/media/GET_MEDIA_REQUEST';
+export const GET_MEDIA_SUCCESS = '@boldr/media/GET_MEDIA_SUCCESS';
+export const GET_MEDIA_FAILURE = '@boldr/media/GET_MEDIA_FAILURE';
+export const SELECT_MEDIA = '@boldr/media/SELECT_MEDIA';
+export const UPLOAD_MEDIA_REQUEST = '@boldr/media/UPLOAD_MEDIA_REQUEST';
+export const UPLOAD_MEDIA_SUCCESS = '@boldr/media/UPLOAD_MEDIA_SUCCESS';
+export const UPLOAD_MEDIA_FAILURE = '@boldr/media/UPLOAD_MEDIA_FAILURE';
+export const EDIT_MEDIA_REQUEST = '@boldr/media/EDIT_MEDIA_REQUEST';
+export const EDIT_MEDIA_SUCCESS = '@boldr/media/EDIT_MEDIA_SUCCESS';
+export const EDIT_MEDIA_FAILURE = '@boldr/media/EDIT_MEDIA_FAILURE';
+export const DELETE_MEDIA_REQUEST = '@boldr/media/DELETE_MEDIA_REQUEST';
+export const DELETE_MEDIA_SUCCESS = '@boldr/media/DELETE_MEDIA_SUCCESS';
+export const DELETE_MEDIA_FAILURE = '@boldr/media/DELETE_MEDIA_FAILURE';

@@ -21,5 +21,5 @@ Work in progress.
 
 Thanks for contributing! :heart:
 
-[issues]: https://github.com/boldr/boldr/issues
-[new-issue]: https://github.com/boldr/boldr/issues/new
+[issues]: https://github.com/strues/boldr/issues
+[new-issue]: https://github.com/strues/boldr/issues/new

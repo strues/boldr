@@ -1,48 +1,34 @@
-export const NOTIFICATION_SEND = 'NOTIFICATION_SEND';
-export const NOTIFICATION_DISMISS = 'NOTIFICATION_DISMISS';
-export const NOTIFICATION_CLEAR = 'NOTIFICATION_CLEAR';
+import uuid from 'uuid';
 
-/**
- *  Send a notification out.
- */
-export const notificationSend = notification => {
-  const payload = Object.assign({}, notification);
-  if (!payload.id) {
-    payload.id = new Date().getTime();
-  }
-  return dispatch => {
-    dispatch({
-      type: NOTIFICATION_SEND,
-      payload,
-    });
+export const SEND_NOTIFICATION = '@boldr/SEND_NOTIFICATION';
+export const DISMISS_NOTIFICATION = '@boldr/DISMISS_NOTIFICATION';
+export const CLEAR_NOTIFICATION = '@boldr/CLEAR_NOTIFICATION';
 
-    if (payload.dismissAfter) {
-      setTimeout(() => {
-        dispatch({
-          type: NOTIFICATION_DISMISS,
-          payload: payload.id,
-        });
-      }, payload.dismissAfter);
-    }
+export function sendNotification(notification) {
+  return {
+    type: SEND_NOTIFICATION,
+    notification: {
+      ...notification,
+      id: uuid.v4(),
+    },
   };
-};
-
+}
 /**
  * Dismiss a notification
- * @param {Number}  id the notification  action id
+ * @param {string}  id  the uuid of the notification to dismiss
  */
-export const notificationDismiss = id => {
+export const dismissNotification = id => {
   return {
-    type: NOTIFICATION_DISMISS,
-    payload: id,
+    type: DISMISS_NOTIFICATION,
+    id,
   };
 };
 
 /**
  * Clear all notifications
  */
-export const notificationClear = () => {
-  return {type: NOTIFICATION_CLEAR};
+export const clearNotification = () => {
+  return { type: CLEAR_NOTIFICATION };
 };
 
 /**
@@ -52,16 +38,14 @@ export const notificationClear = () => {
  * notification objects.
  * @param  {Object}            action     the action object
  */
-export default function notificationReducer(state = [], action) {
-  if (!action || !action.type) {
-    return state;
-  }
+const initialState = [];
+export default function notificationReducer(state = initialState, action) {
   switch (action.type) {
-    case NOTIFICATION_SEND:
-      return [action.payload, ...state];
-    case NOTIFICATION_DISMISS:
-      return state.filter(notification => notification.id !== action.payload);
-    case NOTIFICATION_CLEAR:
+    case SEND_NOTIFICATION:
+      return [...state, action.notification];
+    case DISMISS_NOTIFICATION:
+      return state.filter(notification => notification.id !== action.id);
+    case CLEAR_NOTIFICATION:
       return [];
     default:
       return state;

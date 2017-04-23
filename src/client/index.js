@@ -6,8 +6,8 @@ import { Provider } from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
 import ConnectedRouter from 'react-router-redux/ConnectedRouter';
 import WebFontLoader from 'webfontloader';
-import { renderRoutes } from 'react-router-config';
 
+import renderRoutes from '../shared/core/addRoutes';
 import routes from '../shared/routes';
 import configureStore from '../shared/state/store';
 import { checkAuth } from '../shared/state/modules/auth/actions';
@@ -40,7 +40,7 @@ const renderApp = () => {
   // const App = require('../shared/components/App').default;
   render(
     <Provider store={store}>
-      <ConnectedRouter history={history}>
+      <ConnectedRouter history={history} routes={routes[0].routes}>
         {renderRoutes(routes)}
       </ConnectedRouter>
     </Provider>,

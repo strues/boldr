@@ -1,4 +1,4 @@
-import { log } from '../utils';
+import logger from 'boldr-utils/es/logger';
 
 class ListenerManager {
   constructor(listener, name) {
@@ -34,18 +34,10 @@ class ListenerManager {
       if (this.listener) {
         this.killAllConnections();
 
-        log({
-          title: this.name,
-          level: 'info',
-          message: 'Destroyed all existing connections.',
-        });
+        logger.task('Destroyed all existing connections.');
 
         this.listener.close(() => {
-          log({
-            title: this.name,
-            level: 'info',
-            message: 'Closed listener.',
-          });
+          logger.task('Closed listener.');
 
           resolve();
         });

@@ -1,35 +1,34 @@
-import { normalize, schema } from 'normalizr';
-import api from '../../../../core/api';
+import api, { API_PREFIX } from '../../../../core/api';
 import * as notif from '../../../../core/constants';
-import { notificationSend } from '../../notifications/notifications';
-import * as t from '../../actionTypes';
-import { detail, menu } from './schema';
+import { sendNotification } from '../../notifications/notifications';
+import * as t from '../actionTypes';
 
-const API_PREFIX = '/api/v1';
 /**
   * FETCH MENUS ACTIONS
   * -------------------------
-  * @exports fetchMenusIfNeeded
-  * @exports fetchMenus
+  * @exports fetchMainMenuIfNeeded
+  * @exports fetchMainMenu
   *****************************************************************/
 
 /* istanbul ignore next */
-export const fetchMenusIfNeeded = (): ThunkAction => (
+export const fetchMainMenuIfNeeded = (): ThunkAction => (
   dispatch: Dispatch,
   getState: GetState,
   axios: any,
 ) => {
   /* istanbul ignore next */
-  if (shouldFetchMenus(getState())) {
+  if (shouldfetchMainMenu(getState())) {
     /* istanbul ignore next */
-    return dispatch(fetchMenus(axios));
+    return dispatch(fetchMainMenu(axios));
   }
 
   /* istanbul ignore next */
   return null;
 };
 
-export const fetchMenus = (axios: any): ThunkAction => (dispatch: Dispatch) => {
+export const fetchMainMenu = (axios: any): ThunkAction => (
+  dispatch: Dispatch,
+) => {
   dispatch({ type: t.GET_MAIN_MENU_REQUEST });
 
   return api
@@ -42,13 +41,13 @@ export const fetchMenus = (axios: any): ThunkAction => (dispatch: Dispatch) => {
     })
     .catch(err => {
       dispatch({
-        type: t.GET_MAIN_MENU_SUCCESS,
+        type: t.GET_MAIN_MENU_FAILURE,
         error: err,
       });
     });
 };
-function shouldFetchMenus(state) {
-  const menu = state.boldr.menu.main.details;
+function shouldfetchMainMenu(state) {
+  const menu = state.boldr.menus.main.details;
   if (!menu.length) {
     return true;
   }
@@ -56,26 +55,6 @@ function shouldFetchMenus(state) {
     return false;
   }
   return menu;
-}
-
-function beginFetchMenus() {
-  return {
-    type: t.GET_MAIN_MENU_REQUEST,
-  };
-}
-
-function fetchMenusError(error) {
-  return {
-    type: t.GET_MAIN_MENU_FAILURE,
-    error,
-  };
-}
-
-function fetchMenusSuccess(menuData) {
-  return {
-    type: t.GET_MAIN_MENU_SUCCESS,
-    payload: menuData,
-  };
 }
 
 /**
@@ -86,23 +65,19 @@ function fetchMenusSuccess(menuData) {
 
 export function updateMenuDetails(data) {
   return dispatch => {
-    dispatch(beginUpdateMenuDetails());
+    dispatch({
+      type: t.UPDATE_MENU_REQUEST,
+    });
     return api
       .put(`${API_PREFIX}/menu-details/${data.id}`, data)
       .then(res => {
         dispatch(updateMenuDetailsSuccess(res));
-        dispatch(notificationSend(notif.MSG_UPDATE_LINK_SUCCESS));
+        dispatch(sendNotification(notif.MSG_UPDATE_LINK_SUCCESS));
       })
       .catch(err => {
         dispatch(updateMenuDetailsFailure(err.message));
-        dispatch(notificationSend(notif.MSG_UPDATE_LINK_ERROR));
+        dispatch(sendNotification(notif.MSG_UPDATE_LINK_ERROR));
       });
-  };
-}
-
-function beginUpdateMenuDetails() {
-  return {
-    type: t.UPDATE_MENU_REQUEST,
   };
 }
 
@@ -130,11 +105,11 @@ export function addMenuDetail(values) {
   const data = {
     name: values.name,
     href: values.href,
-    mobile_href: values.mobile_href,
-    has_dropdown: values.has_dropdown,
-    css_classname: values.css_classname,
+    mobile_href: values.mobileHref,
+    hasDropdown: values.has_dropdown,
+    cssClassname: values.cssClassname,
     icon: values.icon,
-    menu_id: 1,
+    menuId: 1,
     order: values.order,
     children: {
       key: values.key,
@@ -142,21 +117,17 @@ export function addMenuDetail(values) {
     },
   };
   return dispatch => {
-    dispatch(beginAddMenuDetail());
+    dispatch({
+      type: t.ADD_MENU_DETAIL_REQUEST,
+    });
     return api.post(`${API_PREFIX}/menu-details`, data).then(res => {
       if (!res.status === 201) {
         dispatch(addMenuDetailFailure(res));
-        dispatch(notificationSend(notif.MSG_ADD_LINK_ERROR));
+        dispatch(sendNotification(notif.MSG_ADD_LINK_ERROR));
       }
       dispatch(addMenuDetailSuccess(res));
-      dispatch(notificationSend(notif.MSG_ADD_LINK_SUCCESS));
+      dispatch(sendNotification(notif.MSG_ADD_LINK_SUCCESS));
     });
-  };
-}
-
-function beginAddMenuDetail() {
-  return {
-    type: t.ADD_MENU_DETAIL_REQUEST,
   };
 }
 

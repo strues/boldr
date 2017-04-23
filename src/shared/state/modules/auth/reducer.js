@@ -1,7 +1,5 @@
-import {combineReducers} from 'redux';
-import * as t from '../actionTypes';
-
-export const STATE_KEY = 'auth';
+import { combineReducers } from 'redux';
+import * as t from './actionTypes';
 
 /**
  * INITIAL STATE

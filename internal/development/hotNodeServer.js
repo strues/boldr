@@ -1,7 +1,9 @@
 import path from 'path';
 import { spawn } from 'child_process';
 import appRootDir from 'app-root-dir';
-import { log } from '../utils';
+import logger from 'boldr-utils/es/logger';
+
+const debug = require('debug')('boldr:webpack');
 
 class HotNodeServer {
   constructor(name, compiler, clientCompiler) {
@@ -15,31 +17,17 @@ class HotNodeServer {
       if (this.server) {
         this.server.kill();
         this.server = null;
-        log({
-          title: name,
-          level: 'info',
-          message: 'Restarting server...',
-        });
+        logger.info('Restarting server...');
       }
 
       const newServer = spawn('node', [compiledEntryFile]);
 
-      log({
-        title: name,
-        level: 'info',
-        message: 'Server running with latest changes.',
-        notify: true,
-      });
+      logger.end('Server running with latest changes.');
 
-      newServer.stdout.on('data', data => console.log(data.toString().trim()));
+      newServer.stdout.on('data', data => debug(data.toString().trim()));
       newServer.stderr.on('data', data => {
-        log({
-          title: name,
-          level: 'error',
-          message: 'Error in server exec, check the console for more info.',
-        });
-
-        console.log(data.toString().trim());
+        logger.error('Error in server exec, check the console for more info.');
+        debug(data.toString().trim());
       });
       this.server = newServer;
     };
@@ -67,11 +55,7 @@ class HotNodeServer {
 
     compiler.plugin('compile', () => {
       this.serverCompiling = true;
-      log({
-        title: name,
-        level: 'info',
-        message: 'Building new bundle...',
-      });
+      logger.task('Building new bundle...');
     });
 
     compiler.plugin('done', stats => {
@@ -83,25 +67,15 @@ class HotNodeServer {
 
       try {
         if (stats.hasErrors()) {
-          log({
-            title: name,
-            level: 'error',
-            message: 'Build failed, check the console for more information.',
-            notify: true,
-          });
-          console.log(stats.toString());
+          logger.error('Build failed, check the console for more information.');
+          debug(stats.toString());
           return;
         }
 
         waitForClientThenStartServer();
       } catch (err) {
-        log({
-          title: name,
-          level: 'error',
-          message: 'Failed to start, check the console for more information.',
-          notify: true,
-        });
-        console.error(err);
+        logger.error('Failed to start, check the console for more information.'); // eslint-disable-line
+        debug(err);
       }
     });
 

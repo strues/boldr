@@ -1,20 +1,21 @@
-import menuReducer, { STATE_KEY } from './reducer';
+import menuReducer from './reducer';
 import {
-  fetchMenus,
-  fetchMenusIfNeeded,
+  fetchMainMenu,
+  fetchMainMenuIfNeeded,
   updateMenuDetails,
   addMenuDetail,
 } from './actions';
+
 import { selectMenus, selectMainMenu, makeSelectMainMenu } from './selectors';
 
 export default menuReducer;
 export {
-  STATE_KEY,
+  menuReducer,
   selectMenus,
   selectMainMenu,
   makeSelectMainMenu,
-  fetchMenus,
-  fetchMenusIfNeeded,
+  fetchMainMenu,
+  fetchMainMenuIfNeeded,
   updateMenuDetails,
   addMenuDetail,
 };

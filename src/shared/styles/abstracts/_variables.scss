@@ -1,66 +1,246 @@
-$shadow-color: rgba(0, 0, 0, .2);
-$box-shadow: 0 0 5 $shadow-color;
-$body-background: #e5eaed;
-$primary-button-bg: $primary-color;
-$primary-button-bg-hover: darken($primary-color, 5%);
-$selection-color: darken($snow, 3%);
-$link-color: $accent-color;
-$error-color: $md-red-700;
-$footer-bg: $mirage;
-$text-color: $near-black;
-$header-font-color: $navy;
-// Borders
-$border-color: $cloud;
+/// Typography
+/// @group typography
+$font-name: 'Roboto' !default;
+/// @group typography
+$font-family: $font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif !default;
+/// @group typography
+$header-font-name: 'Roboto' !default;
+/// @group typography
+$header-font-family: $header-font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif !default;
+/// @group typography
+$font-size-base: 1rem !default;
+/// @group typography
+$font-size-large: 2rem !default;
+/// @group typography
+$font-size-small: 0.9rem !default;
+/// @group typography
+$font-size-xsmall: 0.7rem !default;
+/// @group typography
+$line-height-base: 1.5 !default;
+/// @group typography
+$font-weight-base: 400 !default;
+/// @group typography
+$font-weight-thin: 200 !default;
+/// @group typography
+$font-weight-bold: 600 !default;
+/// @group typography
+$header-font-weight: $font-weight-thin !default;
+/// @group typography
+$btn-font-weight: $font-weight-base !default;
+/// @group typography
+$header-font-case: none !default;
+$md-badge-include-default: true;
+$md-list-include-inline: true;
 
-/// Font
-$font-name: 'Roboto';
-$font-family: $font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif;
-$header-font-name: 'Roboto';
-$header-font-family: $header-font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif;
-$font-size-base: 1em;
-$font-size-large: 2em;
-$font-size-small: 0.9em;
-$font-size-xsmall: 0.7em;
-$line-height-base: 1.5;
-$font-weight-base: 400;
-$font-weight-thin: 200;
-$font-weight-bold: 600;
-$header-font-weight: $font-weight-thin;
-$header-font-case: none;
-$window-medium: 768;
-$window-large: 992;
-$window-xlarge: 1200;
-$padding: 4;
-$transition-function: cubic-bezier(.25, .8, .25, 1);
-$transition-duration: .25s;
-$toolbar-height: 64;
-$toolbar-z-index: 6;
-$grid-columns: 12;
-$grid-gutter: 1rem;
+/// Options
+/// @group options
+$border-width: 1px;
 
+/// The default padding used for most material design components.
+/// @type Number
+/// @group defaults
+$md-default-padding: 16px !default;
+
+/// Spacing
+$spacer: 1rem !default;
+$spacer-x: $spacer !default;
+$spacer-y: $spacer !default;
+$spacers: ( q: ( x: ($spacer-x * 0.25), y: ($spacer-y * 0.25)), h: ( x: ($spacer-x * 0.5), y: ($spacer-y * 0.5)), 0: ( x: 0, y: 0), 1: ( x: $spacer-x, y: $spacer-y), 2: ( x: ($spacer-x * 1.5), y: ($spacer-y * 1.5)), 3: ( x: ($spacer-x * 3), y: ($spacer-y * 3))) !default;
+$btn-line-height: 1.25 !default;
+$input-btn-border-width: $border-width !default;
+$btn-padding-x: 1rem !default;
+$btn-padding-y: 0.5rem !default;
+
+/// The default transition time to use on most animations/transitions.
+/// @type Number
+/// @group transitions
+$transition-length: 0.25s !default;
+$grid-columns: 12 !default;
+$grid-gutter: 2rem !default;
 $grid-breakpoints: (
   xs: false,
-  sm: 46em,
-  md: 61em,
+  sm: 48em,
+  md: 62em,
   lg: 75em
-);
+) !default;
 
 $grid-containers: (
   xs: false,
   sm: 46rem,
   md: 61rem,
-  lg: 76rem,
+  lg: 71rem,
+) !default;
+
+/// The primary color to use throughout the app. This should be a color
+/// with a `-500` suffix.
+/// @type Color
+/// @group themes
+$primary-color: $iris-blue !default;
+
+/// @type Color
+$md-primary-color: $primary-color;
+
+/// The opacity to apply to the primary color with the `md-background--primary` class name.
+/// @type Number
+/// @group themes
+$md-primary-hover-opacity: 0.9 !default;
+
+/// The text color to use for any text that inside the `.md-background--primary` class name.
+/// This should ideally pass the color contrast test when.
+/// @type Color
+$md-primary-background-text-color: $md-white-base !default;
+
+/// The secondary color to use throughout the app. This should be a color
+/// with a `-a-{NUMBER}` suffix.
+/// @type Color
+$md-secondary-color: #66bb6a !default;
+
+/// @type Color
+$accent-color: $md-secondary-color;
+
+/// The opacity to apply to the secondary color with the `md-background--secondary` class name.
+/// @type Number
+/// @group themes
+$md-secondary-hover-opacity: 0.9 !default;
+
+/// The text color to use for any text that inside the `.md-background--secondary` class name.
+/// This should ideally pass the color contrast test when.
+/// @type Color
+$md-secondary-background-text-color: $md-white-base !default;
+
+/// Boolean if the application is to be themed with the light theme.
+/// @type Boolean
+/// @group themes
+$boldrui-light-theme: true !default;
+$shadow-color: rgba(0, 0, 0, 0.2) !default;
+$body-background: $cloud !default;
+$link-color: $accent-color !default;
+$error-color: $carmine-pink !default;
+$text-color: $black-transparent !default;
+$header-font-color: $navy !default;
+$border-color: rgba(0, 0, 0, 0.1) !default;
+
+/// Borders
+/// @group borders
+$border-radius: 0.25rem !default;
+$btn-border-radius: $border-radius !default;
+$border-width: 1 !default;
+
+/// The default min width for a mobile device.
+/// @type Number
+/// @group media-queries
+$md-mobile-min-width: 320px !default;
+/// The default min width for a tablet device.
+/// @type Number
+/// @group media-queries
+$md-tablet-min-width: 768px !default;
+/// The default min width for a desktop screen.
+/// @type Number
+/// @group media-queries
+$md-desktop-min-width: 1025px !default;
+/// The default mobile media query.
+/// @type String
+/// @group media-queries
+$md-mobile-media: 'screen and (min-width: #{$md-mobile-min-width})' !default;
+/// The default media query for a portrait mobile device.
+/// @type String
+/// @group media-queries
+$md-mobile-portrait-media: 'screen and (min-width: #{$md-mobile-min-width}) and (orientation: portrait)' !default;
+/// The default media query for a landscape mobile device.
+/// @type String
+/// @group media-queries
+$md-mobile-landscape-media: 'screen and (min-width: #{$md-mobile-min-width}) and (orientation: landscape)' !default;
+/// The default media query for a tablet device.
+/// @type String
+/// @group media-queries
+$md-tablet-media: 'screen and (min-width: #{$md-tablet-min-width})' !default;
+/// The default media query for a portrait tablet device.
+/// @type String
+/// @group media-queries
+$md-tablet-portrait-media: 'screen and (min-width: #{$md-tablet-min-width}) and (orientation: protrait)' !default;
+/// The default media query for a landscape tablet device.
+/// @type String
+/// @group media-queries
+$md-tablet-landscape-media: 'screen and (min-width: #{$md-tablet-min-width}) and (orientation: landscape)' !default;
+/// The default media query for a desktop device.
+/// @type String
+/// @group media-queries
+$desktop-media: 'screen and (min-width: #{$md-desktop-min-width})' !default;
+/// Boolean if the media queries should be included by default for all component mixins.
+/// Set this to false if you want to manually include them. It is really only beneficial
+/// if you want to join all media queries into one, but you can always use a postcss plugin
+/// to combine them if you are worried about bundle size.
+/// @type Boolean
+/// @group media-queries
+$media-included: true !default;
+/// The default accessible height for a lot of material design components.
+/// @type Number
+/// @group defaults
+$md-height: 48px !default;
+
+$breadcrumb-borders: (
+  bottom: (
+    size:                           1px,
+    style:                          solid,
+    color:                          $border-color
+  )
 );
-$primary-header-link-color: $near-black;
-$primary-header-link-hover-color: $accent-color;
-$primary-header-border: 1 solid $cloud;
-$primary-header-bg: $white;
-$primary-header-link: $ocean;
-$btn-font-weight: $font-weight-base;
-$border-radius: 0.25rem;
-$btn-border-radius: $border-radius;
-$btn-line-height: 1.25;
-$border-width: 1;
-$input-btn-border-width: $border-width;
-$btn-padding-x: 1rem;
-$btn-padding-y: 0.5rem;
+$layout-transition-speed: 0.25s !default;
+$sidebar-width: 200px !default;
+$sidebar-padding: 0;
+$sidebar-top-space: 1rem;
+$sidebar-compact-width: 50px;
+$sidebar-compact-height: $sidebar-compact-width;
+$sidebar-color: #fff;
+$sidebar-bg: $big-stone;
+$sidebar-borders: none;
+$mobile-sidebar-width: 220px;
+$sidebar-nav-title-padding-y: 0.75rem;
+$sidebar-nav-title-padding-x: 1rem;
+$sidebar-nav-title-color: $snow;
+$sidebar-nav-link-padding-y: 0.75rem;
+$sidebar-nav-link-padding-x: 1rem;
+$sidebar-nav-link-color: $grayish;
+$sidebar-nav-link-bg: transparent;
+$sidebar-nav-link-borders: 0;
+$sidebar-nav-link-hover-color: $snow;
+$sidebar-nav-link-hover-bg: $primary-color !default;
+$sidebar-nav-link-hover-icon-color: $snow !important;
+$sidebar-nav-link-hover-borders: 0;
+$sidebar-nav-link-active-color: $snow;
+$sidebar-nav-link-active-bg: $outer-space;
+$sidebar-nav-link-active-icon-color: $primary-color;
+$sidebar-nav-link-active-borders: 0;
+$sidebar-nav-dropdown-color: $grayish;
+$sidebar-nav-dropdown-bg: rgba(0, 0, 0, 0.2);
+$sidebar-nav-dropdown-borders: 0;
+
+/// Dashboard Topbar
+/// @group topbar
+$topbar-bg: $white;
+$topbar-bottom-margin: 25px;
+$topbar-link-color: $text-color;
+$topbar-search-input-color: $text-color;
+$topbar-link-active: $iris-blue;
+$topbar-link-hover: $iris-blue;
+$topbar-font-size: 0.75rem;
+$topbar-font-weight: 600;
+$topbar-font-family: $font-family;
+$topbar-link-transform: uppercase;
+
+/// @group topbar
+$zindex-topbar: 1000;
+$topbar-border: (
+  bottom: (
+    size:                       1px,
+    style:                      solid,
+    color:                      $border-color
+  )
+);
+
+/// Dashboard Footer
+/// @group dashboard
+$dash-footer-height: 50px !default;
+$dash-footer-bg: $snow !default;
+$dash-footer-color: #636c72;
+$dash-footer-line-height: 17px !default;

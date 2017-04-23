@@ -2,10 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Loader } from 'boldr-ui';
-import {
-  updatePost,
-  fetchPostIfNeeded,
-} from '../../../../state/modules/blog/posts';
+import { updatePost, fetchPostIfNeeded } from '../../../Blog/state';
 import EditPostForm from './components/EditPostForm';
 import PostEditor from './PostEditor';
 
@@ -41,7 +38,7 @@ const mapStateToProps = (state, ownProps) => {
     // posts: state.blog.posts,
     currentPost: state.blog.posts.currentPost,
     isFetching: state.blog.posts.isFetching,
-    postImage: state.attachments.postImage,
+    postImage: state.admin.attachments.postImage,
   };
 };
 export default connect(mapStateToProps, { fetchPostIfNeeded })(

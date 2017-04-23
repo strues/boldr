@@ -5,8 +5,8 @@ import MemberCard from '../MemberCard';
 
 const MembersList = (props: { users: Array<Object>, toggleUser: Function }) => {
   function handleToggle(user) {
-    const userId = user.id;
-    props.toggleUser(userId);
+    // const userId = user.id;
+    props.toggleUser(user);
   }
   return (
     <div className="boldrui-members-list">

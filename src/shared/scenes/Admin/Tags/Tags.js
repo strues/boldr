@@ -14,12 +14,7 @@ import {
   Col,
 } from 'boldr-ui';
 
-import {
-  selectTag,
-  clearTag,
-  createTag,
-  deleteTag,
-} from '../../../state/modules/blog/tags';
+import { selectTag, clearTag, createTag, deleteTag } from '../../Blog/state';
 import TaggedPost from './components/TaggedPost';
 
 import TagList from './components/TagList';

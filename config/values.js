@@ -23,7 +23,8 @@ const values = {
   // The port on which the client bundle development server should run.
   hmrPort: EnvVars.number('HMR_PORT', 3001),
   apiPrefix: '/api/v1',
-  apiUrl: 'http://localhost:2121',
+  apiHost: '127.0.0.1',
+  apiUrl: 'http://127.0.0.1:2121',
   postgres: {
     name: 'boldr',
     host: EnvVars.string('POSTGRES_HOST', 'localhost'),
@@ -31,7 +32,7 @@ const values = {
     password: EnvVars.string('POSTGRES_PASSWORD', 'password'),
     uri: EnvVars.string(
       'POSTGRES_CONN_URI',
-      'postgres://postgres:password@localhost:5432/boldr',
+      'postgres://postgres:password@127.0.0.1:5432/boldr',
     ),
     pool: {
       min: 2,

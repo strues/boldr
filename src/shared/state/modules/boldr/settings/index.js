@@ -1,18 +1,21 @@
-import settingsReducer, { STATE_KEY } from './reducer';
+import settingsReducer from './reducer';
 import { selectSettings, selectSettingFromList } from './selectors';
 import {
   fetchSettingsIfNeeded,
   fetchSettings,
   updateBoldrSettings,
 } from './actions';
+import { arrayOfSetting, setting } from './schema';
 
 export default settingsReducer;
 
 export {
-  STATE_KEY,
+  settingsReducer,
   selectSettings,
   selectSettingFromList,
   fetchSettingsIfNeeded,
   fetchSettings,
   updateBoldrSettings,
+  arrayOfSetting,
+  setting,
 };

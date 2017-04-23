@@ -95,7 +95,7 @@ let NavigationForm = (props: Props) => {
         placeholder="Select a role"
         menuItems={opts}
         itemLabel="label"
-        itemValue="has_dropdown.itemValue"
+        itemValue="hasDropdown.itemValue"
         className="md-cell"
       />
     </div>
@@ -133,8 +133,8 @@ let NavigationForm = (props: Props) => {
       <label htmlFor="menuType">What type of menu item?</label><br />
       <label htmlFor="single" style={{ marginRight: '10px' }}>
         <Field
-          id="draft"
-          name="has_dropdown"
+          id="hasDropdown"
+          name="hasDropdown"
           component="input"
           type="radio"
           value="false"
@@ -144,8 +144,8 @@ let NavigationForm = (props: Props) => {
       </label>
       <label htmlFor="dropdown">
         <Field
-          id="published"
-          name="has_dropdown"
+          id="dropdownHasDropdown"
+          name="hasDropdown"
           component="input"
           type="radio"
           value="true"
@@ -182,7 +182,7 @@ NavigationForm = reduxForm({
 
 const selector = formValueSelector('navigationForm');
 NavigationForm = connect(state => {
-  const hasDropdownValue = selector(state, 'has_dropdown');
+  const hasDropdownValue = selector(state, 'hasDropdown');
   return {
     hasDropdownValue,
   };

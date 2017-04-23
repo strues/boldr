@@ -2,24 +2,22 @@
 import { resolve as pathResolve } from 'path';
 import webpack from 'webpack';
 import appRootDir from 'app-root-dir';
-import { log } from '../utils';
+import logger from 'boldr-utils/es/logger';
 import webpackConfigFactory from '../webpack/configFactory';
 import config from '../../config';
 import HotNodeServer from './hotNodeServer';
 import HotClientServer from './hotClientServer';
 import buildDevDlls from './buildDevDll';
 
-const usesDevDlls = bundleConfig => bundleConfig.devDlls != null && bundleConfig.devDlls.enabled;
+const debug = require('debug')('boldr:webpack');
+
+const usesDevDlls = bundleConfig =>
+  bundleConfig.devDlls != null && bundleConfig.devDlls.enabled;
 
 const vendorDLLsFailed = err => {
-  log({
-    title: 'vendorDLL',
-    level: 'error',
-    message: 'Unfortunately an error occured whilst trying to build the vendor dll(s) used by the development server.',
-    notify: false,
-  });
+  logger.error('An error occured whilst trying to build the vendor dll(s).');
   if (err) {
-    console.error(err);
+    debug(err);
   }
 };
 
@@ -46,19 +44,16 @@ const initializeBundle = (name, bundleConfig) => {
       }
       return webpack(webpackConfig);
     } catch (err) {
-      log({
-        title: 'development',
-        level: 'error',
-        message: 'Webpack config is invalid, please check the console for more information.',
-        notify: false,
-      });
-      console.error(err);
+      logger.error('Webpack config is invalid.');
+      debug(err);
       throw err;
     }
   };
-  return { name,
+  return {
+    name,
     bundleConfig,
-    createCompiler };
+    createCompiler,
+  };
 };
 
 class HotDevelopment {
@@ -68,12 +63,19 @@ class HotDevelopment {
 
     const clientBundle = initializeBundle('client', config('bundles.client'));
 
-    const nodeBundles = [initializeBundle('server', config('bundles.server'))].concat(
+    const nodeBundles = [
+      initializeBundle('server', config('bundles.server')),
+    ].concat(
       Object.keys(config('additionalNodeBundles')).map(name =>
-        initializeBundle(name, config('additionalNodeBundles')[name])),
+        initializeBundle(name, config('additionalNodeBundles')[name]),
+      ),
     );
 
-    Promise.resolve(usesDevDlls(config('bundles.client')) ? buildDevDlls('client', config('bundles.client')) : true)
+    Promise.resolve(
+      usesDevDlls(config('bundles.client'))
+        ? buildDevDlls('client', config('bundles.client'))
+        : true,
+    )
       // Then start the client development server.
       .then(
         () =>
@@ -92,18 +94,20 @@ class HotDevelopment {
       // Then start the node development server(s).
       .then(clientCompiler => {
         this.hotNodeServers = nodeBundles.map(
-          (
-            { name, createCompiler },
-          ) => new HotNodeServer(name, createCompiler(), clientCompiler),
+          ({ name, createCompiler }) =>
+            new HotNodeServer(name, createCompiler(), clientCompiler),
         );
       });
   }
 
   dispose() {
-    const safeDisposer = server => server ? server.dispose() : Promise.resolve(); // eslint-disable-line
+    const safeDisposer = server =>
+      (server ? server.dispose() : Promise.resolve());
 
     // First the hot client server.
-    return safeDisposer(this.hotClientServer).then(() => Promise.all(this.hotNodeServers.map(safeDisposer)));
+    return safeDisposer(this.hotClientServer).then(() =>
+      Promise.all(this.hotNodeServers.map(safeDisposer)),
+    );
   }
 }
 
