@@ -1,13 +1,10 @@
 import { normalize } from 'normalizr';
-import api from '../../../../core/api';
+import api, { API_PREFIX } from '../../../../core/api';
 import * as notif from '../../../../core/constants';
-import {
-  sendNotification,
-} from '../../../../state/modules/notifications/notifications';
+import { sendNotification } from '../../../../state';
 import * as t from '../actionTypes';
 import { tag as tagSchema, arrayOfTag } from './schema';
 
-const API_PREFIX = '/api/v1';
 /**
   * FETCH TAG ACTIONS
   * -------------------------

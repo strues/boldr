@@ -1,9 +1,8 @@
-import api from '../../../../core/api';
+import api, { API_PREFIX } from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import { sendNotification } from '../../notifications/notifications';
 import * as t from '../actionTypes';
 
-const API_PREFIX = '/api/v1';
 /**
   * FETCH MENUS ACTIONS
   * -------------------------

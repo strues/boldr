@@ -65,7 +65,7 @@ export default function webpackConfigFactory(buildOptions) {
       index: removeNil([
         ifDevClient(
           () =>
-            'webpack-hot-middleware/client?reload=true&path=http://localhost:3001/__webpack_hmr',
+            `webpack-hot-middleware/client?reload=true&path=http://${config('host')}:${config('hmrPort')}/__webpack_hmr`,
         ), // eslint-disable-line
         path.resolve(ROOT_DIR, bundleConfig.entryFile),
       ]),
@@ -82,11 +82,6 @@ export default function webpackConfigFactory(buildOptions) {
     },
     cache: true,
     resolve: {
-      alias: {
-        // necessary when using symlinks that require these guys
-        react: path.join(ROOT_DIR, 'node_modules', 'react'),
-        'react-dom': path.join(ROOT_DIR, 'node_modules', 'react-dom'),
-      },
       mainFields: ifNode(
         ['module', 'jsnext:main', 'main'],
         ['web', 'browser', 'style', 'module', 'jsnext:main', 'main'],
@@ -140,7 +135,6 @@ export default function webpackConfigFactory(buildOptions) {
       }),
       new webpack.DefinePlugin({
         IS_DEV: JSON.stringify(isDev),
-        __DEV__: JSON.stringify(isDev),
         __SERVER__: JSON.stringify(isServer),
         DEBUG: JSON.stringify(process.env.DEBUG),
       }),

@@ -1,12 +1,11 @@
 import { normalize } from 'normalizr';
 import { push } from 'react-router-redux';
-import api from '../../../../core/api';
+import api, { API_PREFIX } from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import { sendNotification } from '../../notifications/notifications';
 import * as t from '../actionTypes';
 import { setting as settingSchema, arrayOfSetting } from './schema';
 
-const API_PREFIX = '/api/v1';
 /**
   * FETCH SETTINGS ACTIONS
   * -------------------------

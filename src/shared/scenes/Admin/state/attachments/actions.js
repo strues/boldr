@@ -1,6 +1,5 @@
 import { push } from 'react-router-redux';
-import api from '../../../../core/api';
-import { getToken } from '../../../../core/authentication/token';
+import { api, getToken, API_PREFIX } from '../../../../core';
 import * as notif from '../../../../core/constants';
 import {
   sendNotification,
@@ -23,7 +22,7 @@ export const fetchAttachments = (axios: any): ThunkAction => (
   dispatch({ type: t.GET_ATTACHMENT_REQUEST });
 
   return axios
-    .get('/api/v1/attachments')
+    .get(`${API_PREFIX}/attachments`)
     .then(res => {
       dispatch({
         type: t.GET_ATTACHMENT_SUCCESS,
@@ -76,7 +75,7 @@ export function uploadFiles(payload) {
     const data = new FormData();
     data.append('file', payload);
     return api
-      .post('/api/v1/attachments', data)
+      .post(`${API_PREFIX}/attachments`, data)
       .then(res => {
         if (!res.status === 201) {
           dispatch(uploadFail(res));
@@ -123,7 +122,7 @@ export function uploadPostImage(payload) {
     const data = new FormData();
     data.append('payload.name', payload);
     return api
-      .post('/api/v1/attachments', data)
+      .post(`${API_PREFIX}/attachments`, data)
       .then(res => {
         dispatch(uploadPostImageSuccess(res));
         dispatch(sendNotification(notif.MSG_UPLOAD_SUCCESS));
@@ -167,7 +166,7 @@ export function deleteAttachment(id) {
       type: t.DELETE_ATTACHMENT_REQUEST,
     });
     return api
-      .delete(`/api/v1/attachments/${id}`)
+      .delete(`${API_PREFIX}/attachments/${id}`)
       .then(res => {
         dispatch({
           type: t.DELETE_ATTACHMENT_SUCCESS,
@@ -191,9 +190,9 @@ export function deleteAttachment(id) {
 
 export function updateAttachment(attachmentData) {
   return (dispatch: Function) => {
-    dispatch(updateAttachmentReq());
+    dispatch({ type: t.UPDATE_ATTACHMENT_REQUEST });
     return api
-      .put(`/api/v1/attachments/${attachmentData.id}`, attachmentData)
+      .put(`${API_PREFIX}/attachments/${attachmentData.id}`, attachmentData)
       .then(res => {
         dispatch(updateAttachmentSuccess(res));
         dispatch(
@@ -216,9 +215,7 @@ export function updateAttachment(attachmentData) {
       });
   };
 }
-const updateAttachmentReq = () => {
-  return { type: t.UPDATE_ATTACHMENT_REQUEST };
-};
+
 const updateAttachmentSuccess = response => {
   return { type: t.UPDATE_ATTACHMENT_SUCCESS };
 };
@@ -259,7 +256,7 @@ export function uploadProfileImage(payload) {
     const data = new FormData();
     data.append('payload.name', payload);
     return api
-      .post('/api/v1/attachments', data)
+      .post(`${API_PREFIX}/attachments`, data)
       .then(res => {
         const userData = {
           id: res.data.user_id,
@@ -288,13 +285,12 @@ export function uploadAvatarImage(payload) {
     const data = new FormData();
     data.append('payload.name', payload);
     return api
-      .post('/api/v1/attachments', data)
+      .post(`${API_PREFIX}/attachments`, data)
       .then(res => {
         const userData = {
           id: res.data.user_id,
           avatarUrl: res.data.url,
         };
-        console.log('user', userData);
         dispatch(editProfile(userData));
         dispatch({
           type: t.UPLOAD_AVATAR_IMG_SUCCESS,

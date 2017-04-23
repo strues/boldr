@@ -1,9 +1,7 @@
-import { normalize, arrayOf, schema } from 'normalizr';
+import { normalize } from 'normalizr';
 
-import api from '../../../../core/api';
-import {
-  sendNotification,
-} from '../../../../state/modules/notifications/notifications';
+import api, { API_PREFIX } from '../../../../core/api';
+import { sendNotification } from '../../../../state';
 import * as notif from '../../../../core/constants';
 import {
   user as userSchema,
@@ -22,7 +20,7 @@ export const fetchMembers = (axios: any): ThunkAction => (
   dispatch({ type: t.LOAD_MEMBERS_REQUEST });
 
   return axios
-    .get('/api/v1/users?include=[roles]')
+    .get(`${API_PREFIX}/users?include=[roles]`)
     .then(res => {
       const users = res.data.results;
       const normalizedUsers = normalize(users, arrayOfUsers);
@@ -80,7 +78,7 @@ export function updateMember(userData) {
   return dispatch => {
     dispatch(beginUpdateMember());
     return api
-      .put(`/api/v1/users/admin/${userData.id}`, data)
+      .put(`${API_PREFIX}/users/admin/${userData.id}`, data)
       .then(res => {
         const updatedUser = res.data;
         const normalizedUser = normalize(updatedUser, userSchema);

@@ -1,10 +1,11 @@
 import { push } from 'react-router-redux';
-import api from '../../../core/api';
 import {
+  api,
+  API_PREFIX,
   setToken,
   removeToken,
   parseJWT,
-} from '../../../core/authentication/token';
+} from '../../../core';
 import * as notif from '../../../core/constants';
 import { sendNotification } from '../notifications/notifications';
 import * as t from './actionTypes';
@@ -19,7 +20,7 @@ export function doSignup(data) {
   return dispatch => {
     dispatch({ type: t.SIGNUP_USER_REQUEST });
     return api
-      .post('/api/v1/auth/signup', data)
+      .post(`${API_PREFIX}/auth/signup`, data)
       .then(res => {
         if (res.status !== 201) {
           const err = JSON.stringify(res.data.message.message);
@@ -55,7 +56,7 @@ export function doLogin(data) {
   return dispatch => {
     dispatch({ type: t.LOGIN_REQUEST });
     return api
-      .post('/api/v1/auth/login', data)
+      .post(`${API_PREFIX}/auth/login`, data)
       .then(res => {
         setToken(res.data.token);
         dispatch({
@@ -104,7 +105,7 @@ export const checkAuth = token => {
   return async (dispatch: Function) => {
     dispatch({ type: t.CHECK_AUTH_REQUEST });
     try {
-      const res = await api.get('/api/v1/auth/check');
+      const res = await api.get(`${API_PREFIX}/auth/check`);
       const user = res.data;
       dispatch({
         type: t.CHECK_AUTH_SUCCESS,

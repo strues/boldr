@@ -1,3 +1,4 @@
+import { API_PREFIX } from '../../../../core/api';
 import * as t from '../actionTypes';
 
 export const showSidebar = () => ({ type: t.SHOW_SIDEBAR });
@@ -31,7 +32,7 @@ export const fetchActivity = (axios: any): ThunkAction => (
   dispatch({ type: t.FETCH_ACTIVITY_REQUEST });
 
   return axios
-    .get('/api/v1/activities')
+    .get(`${API_PREFIX}/activities`)
     .then(res => {
       dispatch({
         type: t.FETCH_ACTIVITY_SUCCESS,
@@ -82,7 +83,7 @@ export const fetchStats = (axios: any): ThunkAction => (dispatch: Dispatch) => {
   dispatch({ type: t.FETCH_STATS_REQUEST });
 
   return axios
-    .get('/api/v1/admin/stats')
+    .get(`${API_PREFIX}/admin/stats`)
     .then(res => {
       dispatch({
         type: t.FETCH_STATS_SUCCESS,

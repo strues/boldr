@@ -1,10 +1,8 @@
 /* @flow */
 import { normalize } from 'normalizr';
-import api from '../../../../core/api';
+import api, { API_PREFIX } from '../../../../core/api';
 import * as notif from '../../../../core/constants';
-import {
-  sendNotification,
-} from '../../../../state/modules/notifications/notifications';
+import { sendNotification } from '../../../../state';
 
 import type {
   Dispatch,
@@ -57,7 +55,7 @@ export const fetchPosts = (axios: any): ThunkAction => (dispatch: Dispatch) => {
   dispatch({ type: t.FETCH_POSTS_REQUEST });
 
   return axios
-    .get('/api/v1/posts?include=[author,tags]')
+    .get(`${API_PREFIX}/posts?include=[author,tags]`)
     .then(res => {
       const posts = res.data.results;
       const normalizedPosts = normalize(posts, arrayOfPost);
@@ -100,7 +98,7 @@ export const fetchPost = (slug: string, axios: any): ThunkAction => (
     slug,
   });
   return axios
-    .get(`/api/v1/posts/slug/${slug}?include=[author,tags]`)
+    .get(`${API_PREFIX}/posts/slug/${slug}?include=[author,tags]`)
     .then(res => {
       const singlePost = res.data;
       const normalizedPost = normalize(singlePost, postSchema);
@@ -184,9 +182,9 @@ export function selectPost(post: Object) {
  */
 export function createPost(data: Post) {
   return (dispatch: Function) => {
-    dispatch(beginCreatePost());
+    dispatch({ type: t.CREATE_POST_REQUEST });
     return api
-      .post('/api/v1/posts', data)
+      .post(`${API_PREFIX}/posts`, data)
       .then(res => {
         const normalizedData = normalize(res.data, postSchema);
         dispatch(createPostSuccess(normalizedData));
@@ -198,10 +196,6 @@ export function createPost(data: Post) {
       });
   };
 }
-
-const beginCreatePost = () => {
-  return { type: t.CREATE_POST_REQUEST };
-};
 
 const createPostSuccess = (normalizedData: Object) => {
   return {
@@ -229,7 +223,7 @@ export function deletePost(id: string) {
       type: t.DELETE_POST_REQUEST,
     });
     return api
-      .delete(`/api/v1/posts/${id}`)
+      .delete(`${API_PREFIX}/posts/${id}`)
       .then(res => {
         dispatch({
           type: t.DELETE_POST_SUCCESS,
@@ -255,7 +249,7 @@ export function updatePost(postData: Post) {
   return (dispatch: Function) => {
     dispatch({ type: t.UPDATE_POST_REQUEST });
     return api
-      .put(`/api/v1/posts/${postData.id}`, postData)
+      .put(`${API_PREFIX}/posts/${postData.id}`, postData)
       .then(res => {
         dispatch({
           type: t.UPDATE_POST_SUCCESS,
