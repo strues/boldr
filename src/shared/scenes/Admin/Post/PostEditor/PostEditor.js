@@ -1,38 +1,29 @@
 /* @flow */
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import draftToHtml from 'draftjs-to-html';
-import { updatePost } from '../../../Blog/state';
 import EditPostForm from './components/EditPostForm';
 
 type Props = {
-  dispatch: Function,
-  posts: Object,
-  params: Object,
-  currentPost: Object,
-  updatePost: Function,
+  currentPost: Post,
+  updatePost: () => void,
 };
 
-class PostEditor extends Component {
-  constructor(props: Props) {
-    super(props);
-    (this: any).handleSubmit = this.handleSubmit.bind(this);
-  }
-
+class PostEditor extends PureComponent {
   props: Props;
-  handleSubmit(values) {
+
+  handleSubmit = values => {
     const postData = {
       title: values.title,
       excerpt: values.excerpt,
       published: values.published,
-      raw_content: values.content,
+      rawContent: values.content,
       content: draftToHtml(values.content),
       meta: values.meta,
       id: this.props.currentPost.id || '',
     };
     this.props.updatePost(postData);
-  }
+  };
 
   render() {
     const { currentPost } = this.props;
@@ -41,9 +32,9 @@ class PostEditor extends Component {
       title: currentPost.title,
       slug: currentPost.slug,
       content: currentPost.content,
-      raw_content: currentPost.raw_content,
-      feature_image: currentPost.feature_image,
-      background_image: currentPost.background_image,
+      rawContent: currentPost.rawContent,
+      featureImage: currentPost.featureImage,
+      backgroundImage: currentPost.backgroundImage,
       attachments: currentPost.attachments,
       excerpt: currentPost.excerpt,
       tags: currentPost.tags,
@@ -63,9 +54,4 @@ class PostEditor extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
-  return {
-    currentPost: state.blog.posts.currentPost,
-  };
-};
-export default connect(mapStateToProps, { updatePost })(PostEditor);
+export default PostEditor;

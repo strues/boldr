@@ -1,18 +1,15 @@
 import React, { Component } from 'react';
-import { Field, reduxForm, FieldArray } from 'redux-form';
+import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import CSSTransitionGroup from 'react-addons-css-transition-group';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
 import {
   TabsContainer,
-  Switch,
   Tab,
   Tabs,
   Button,
   InputField,
-  Col,
-  Row,
   Heading,
   FormGroup,
 } from 'boldr-ui';
@@ -48,7 +45,7 @@ type Props = {
 };
 
 class NewPostForm extends Component {
-  constructor(props) {
+  constructor() {
     super();
 
     this.state = {
@@ -80,7 +77,7 @@ class NewPostForm extends Component {
   };
   render() {
     const { handleSubmit } = this.props;
-    const { activeTabIndex, checked } = this.state;
+    const { activeTabIndex } = this.state;
 
     return (
       <NewPost>
@@ -99,13 +96,11 @@ class NewPostForm extends Component {
             </FormGroup>
             <FormGroup>
               <Heading size={5}>Tag your post</Heading>
-              <FieldArray
+              <Field
                 name="tags"
-                type="text"
-                id="post-tags"
+                type="checkbox"
                 component={RenderTags}
                 label="Tags"
-                tabIndex={-1}
               />
             </FormGroup>
           </Wrapper>

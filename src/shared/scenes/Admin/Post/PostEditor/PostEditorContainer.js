@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Loader } from 'boldr-ui';
 import { updatePost, fetchPostIfNeeded } from '../../../Blog/state';
-import EditPostForm from './components/EditPostForm';
 import PostEditor from './PostEditor';
 
 export type Props = {
@@ -19,9 +18,8 @@ export type Props = {
 
 class PostEditorContainer extends Component {
   componentDidMount() {
-    const { fetchPostIfNeeded, match: { params } } = this.props;
-
-    fetchPostIfNeeded(params.slug);
+    const { fetchPostIfNeeded, match: { params: { slug } } } = this.props;
+    fetchPostIfNeeded(slug);
   }
   props: Props;
 
@@ -29,11 +27,27 @@ class PostEditorContainer extends Component {
     if (this.props.isFetching) {
       return <Loader />;
     }
-    return <PostEditor currentPost={this.props.currentPost} />;
+    return (
+      <PostEditor
+        updatePost={this.props.updatePost}
+        currentPost={this.props.currentPost}
+      />
+    );
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapDispatchToProps = dispatch => {
+  return {
+    updatePost: postData => {
+      dispatch(updatePost(postData));
+    },
+    fetchPostIfNeeded: slug => {
+      dispatch(fetchPostIfNeeded(slug));
+    },
+  };
+};
+
+const mapStateToProps = state => {
   return {
     // posts: state.blog.posts,
     currentPost: state.blog.posts.currentPost,
@@ -41,6 +55,6 @@ const mapStateToProps = (state, ownProps) => {
     postImage: state.admin.attachments.postImage,
   };
 };
-export default connect(mapStateToProps, { fetchPostIfNeeded })(
+export default connect(mapStateToProps, mapDispatchToProps)(
   PostEditorContainer,
 );

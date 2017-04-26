@@ -1,26 +1,15 @@
 /* @flow */
 import React, { Component } from 'react';
-import NavLink from 'react-router-dom/NavLink';
-import styled from 'styled-components';
-import last from 'lodash/last';
-import Loadable from 'react-loadable';
 import { connect } from 'react-redux';
 import {
-  Avatar,
-  Button,
   Grid,
-  Icon,
-  Col,
-  Row,
   DashboardFooter,
   Sidebar,
   DashboardWrapper,
-  Anchor,
   DashboardContent,
   DashboardMain,
   TopbarLink,
   Topbar,
-  Loader,
 } from 'boldr-ui';
 import { showHideSidebar, expandCollapseSideMenu } from '../../state';
 import renderRoutes from '../../core/addRoutes';
@@ -42,7 +31,7 @@ type Props = {
 export class AdminDashboard extends Component {
   props: Props;
 
-  handleHideSidebar = (e): Function => {
+  handleHideSidebar = (): Function => {
     this.props.dispatch(showHideSidebar());
   };
 

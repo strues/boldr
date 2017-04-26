@@ -22,6 +22,7 @@ declare type Post = {
   title: string,
   slug: string,
   content: string,
+  rawContent: Object,
   backgroundImage: ?string,
   excerpt: ?string,
   createdAt: string,
