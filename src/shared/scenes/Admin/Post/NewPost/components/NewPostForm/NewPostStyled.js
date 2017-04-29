@@ -24,4 +24,4 @@ const Toolbar = styled.div`
   align-items: center;
 `;
 
-export { NewPost, Toolbar, Inner, Wrapper };
+export { NewPost, Toolbar, Inner };
