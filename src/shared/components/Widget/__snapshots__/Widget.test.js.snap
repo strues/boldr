@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Widget /> renders snapshot 1`] = `
+<div
+  className="boldrui-widget"
+>
+  <Card
+    expanderIconChildren="keyboard_arrow_down"
+    expanderIconClassName="material-icons"
+    expanderTooltipPosition="left"
+  >
+    <CardTitle
+      title="widget"
+    />
+    <CardText
+      component="section"
+    />
+  </Card>
+</div>
+`;

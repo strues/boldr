@@ -1,7 +1,7 @@
 debug: true
 pipeline:
   build:
-    image: strues/alpine-node:7
+    image: node:7.9
     commands:
       - yarn
       - yarn build:test

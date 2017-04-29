@@ -3,7 +3,8 @@ import React from 'react';
 import Link from 'react-router-dom/Link';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import { Avatar, FontIcon, Chip, StyleClasses } from 'boldr-ui';
+import Avatar from 'boldr-ui/lib/components/Avatar';
+import { FontIcon, Chip, StyleClasses } from 'boldr-ui';
 
 import { selectTag } from '../../state/tags/actions';
 

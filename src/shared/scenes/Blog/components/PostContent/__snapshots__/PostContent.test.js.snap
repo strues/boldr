@@ -5,6 +5,7 @@ exports[`<PostContent /> renders snapshot 1`] = `
   <Paper
     className="boldr-paperoverride"
     component="div"
+    rounded={false}
     style={
       Object {
         "marginBottom": "50px",

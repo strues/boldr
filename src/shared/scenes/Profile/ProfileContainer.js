@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { bindActionCreators } from 'redux';
 import { Loader } from 'boldr-ui';
 
 import { BaseTemplate } from '../../templates';

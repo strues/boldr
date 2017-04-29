@@ -1,20 +1,7 @@
 /* @flow */
 import React from 'react';
 import styled from 'styled-components';
-import {
-  Paper,
-  Drawer,
-  Button,
-  FontIcon,
-  Toolbar,
-  Grid,
-  Col,
-  Row,
-  Heading,
-  Modal,
-  Icon,
-  Social,
-} from 'boldr-ui';
+import { Button, FontIcon, Col, Row, Heading } from 'boldr-ui';
 
 import ProfileDetail from '../ProfileDetail';
 

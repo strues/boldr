@@ -1,11 +1,5 @@
 import { push } from 'react-router-redux';
-import {
-  api,
-  API_PREFIX,
-  setToken,
-  removeToken,
-  parseJWT,
-} from '../../../core';
+import { api, API_PREFIX, setToken, removeToken } from '../../../core';
 import * as notif from '../../../core/constants';
 import { sendNotification } from '../notifications/notifications';
 import * as t from './actionTypes';
@@ -68,7 +62,10 @@ export function doLogin(data) {
         return dispatch(sendNotification(notif.MSG_LOGIN_SUCCESS));
       })
       .catch(err => {
-        dispatch(loginError(err));
+        dispatch({
+          type: t.LOGIN_FAILURE,
+          error: err,
+        });
         return dispatch(
           sendNotification({
             message: err,

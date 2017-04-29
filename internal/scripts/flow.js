@@ -16,7 +16,7 @@ if (!existsSync(resolvePath(appRootDir.get(), './flow-typed'))) {
 }
 
 try {
-  exec('flow');
+  exec('flow; test $? -eq 0 -o $? -eq 2');
 } catch (err) {
   // Flow will print any errors.
 }

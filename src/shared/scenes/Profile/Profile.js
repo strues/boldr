@@ -10,7 +10,6 @@ import {
   Grid,
   Col,
   Row,
-  Heading,
   StyleClasses,
 } from 'boldr-ui';
 

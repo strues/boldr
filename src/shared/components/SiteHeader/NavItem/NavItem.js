@@ -44,17 +44,16 @@ class NavItem extends Component {
     this.closeItemDropdown();
     this.props.closeHeaderDropdown();
   };
-
+  linkContent = detail => (
+    <NavItemLabel
+      name={detail.name}
+      children={detail.children}
+      theme="theme-boldr"
+    />
+  );
   render() {
     const { detail, hasDropdown, mobile } = this.props;
 
-    const linkContent = (
-      <NavItemLabel
-        name={detail.name}
-        children={detail.children}
-        theme="theme-boldr"
-      />
-    );
     const linkHref = (mobile ? detail.mobileHref : null) || detail.href;
 
     return (
@@ -81,19 +80,17 @@ class NavItem extends Component {
               onClick={this.closeDropdowns}
               className={cx('boldrui-sh__navitem-link')}
             >
-              {linkContent}
+              {this.linkContent(detail)}
             </NavLink>
           : <span tabIndex="0" className={cx('boldrui-sh__navitem-link')}>
-              {linkContent}
+              {this.linkContent(detail)}
             </span>}
-        {detail.children
-          ? <SiteHeaderDropdown
-              data={detail}
-              closeDropdowns={this.closeDropdowns}
-              open={this.state.openDropdown}
-            />
-          : null}
-
+        {detail.children &&
+          <SiteHeaderDropdown
+            data={detail}
+            closeDropdowns={this.closeDropdowns}
+            open={this.state.openDropdown}
+          />}
       </li>
     );
   }

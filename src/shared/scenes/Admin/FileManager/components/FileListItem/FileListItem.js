@@ -1,8 +1,21 @@
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { FontIcon, Button } from 'boldr-ui';
 import Link from 'react-router-dom/Link';
+import type { ReactElement } from '../../../../../types/react';
+
+type Props = {
+  children?: number | string | ReactElement<*> | Array<any>,
+  file: Object,
+  selectFile: () => void,
+  removeMedia: () => void,
+  /**
+   * A function which returns the media element to render in the background.
+   * It recieves an props object which should be propagated to the JSX element.
+   */
+  imgSrc: string,
+};
 
 const Wrapper = styled.section`
   display: table;
@@ -36,7 +49,7 @@ const Img = styled.img`
   max-width: none;
 `;
 
-const FileListItem = props => {
+const FileListItem = (props: Props) => {
   function handleclick() {
     const mediaId = props.file.id;
     props.removeMedia(mediaId);
@@ -64,17 +77,6 @@ const FileListItem = props => {
       </Content>
     </Wrapper>
   );
-};
-
-FileListItem.propTypes = {
-  children: PropTypes.node,
-  file: PropTypes.object,
-  selectFile: PropTypes.func,
-  /**
-   * A function which returns the media element to render in the background.
-   * It recieves an props object which should be propagated to the JSX element.
-   */
-  imgSrc: PropTypes.string.isRequired,
 };
 
 export default FileListItem;

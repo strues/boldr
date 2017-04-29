@@ -1,23 +1,31 @@
 [ignore]
 
-.*/node_modules/fbjs.*
-.*/node_modules/react-swipeable-views/.*
-.*/node_modules/draft-js/.*
-.*/node_modules/stylelint/.*
-.*/node_modules/flow-remove-types/.*
-.*/node_modules/flow-coverage-report/.*
-
+<PROJECT_ROOT>/node_modules/fbjs.*
+<PROJECT_ROOT>/node_modules/react-swipeable-views/.*
+<PROJECT_ROOT>/node_modules/draft-js/.*
+<PROJECT_ROOT>/node_modules/stylelint/.*
+<PROJECT_ROOT>/node_modules/flow-remove-types/.*
+<PROJECT_ROOT>/node_modules/flow-coverage-report/.*
+<PROJECT_ROOT>/node_modules/babel.*
+<PROJECT_ROOT>/node_modules/y18n/test/.*
+<PROJECT_ROOT>/node_modules/\.cache/.*
+<PROJECT_ROOT>/node_modules/styled-components/.*
+<PROJECT_ROOT>/node_modules/enzyme-matchers/.*
+<PROJECT_ROOT>/node_modules/jest-enzyme/.*
+<PROJECT_ROOT>/node_modules/react-event-listener/.*
+<PROJECT_ROOT>/node_modules/draftjs-utils/.*
 .*/db/.*
 .*/docs/.*
 .*/dist/.*
 .*/public/.*
 .*/.idea/.*
+.*/.vscode/.*
 .*/.happypack/.*
 .*/coverage/.*
 .*/boldrCMS/.*
 
 [include]
-
+.*/src/.*
 
 [libs]
 flow-typed/npm/
@@ -44,4 +52,4 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowIssue
 suppress_comment= \\(.\\|\n\\)*\\$FlowIgnore
 
 [version]
-0.44.1
+0.45.0

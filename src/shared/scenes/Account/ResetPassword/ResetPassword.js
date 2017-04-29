@@ -32,6 +32,8 @@ class ResetPassword extends Component {
       <BaseTemplate helmetMeta={<Helmet title="Reset Password" />}>
         <FormCard
           title="Reset Password"
+          skinny
+          lightText
           form={<ResetPasswordForm onSubmit={this.handleReset} />}
         />
       </BaseTemplate>

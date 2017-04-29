@@ -1,3 +1,4 @@
+/* @flow */
 import React from 'react';
 import Link from 'react-router-dom/Link';
 import Helmet from 'react-helmet';
@@ -8,18 +9,15 @@ import LoginForm from './LoginForm';
 type Props = {
   onSubmit: () => void,
 };
-const Login = props => {
+const Login = (props: Props) => {
   return (
     <div className="boldr-form__login">
       <Helmet title="Login" />
       <FormCard
         title="Log In"
-        width={450}
+        lightText
+        skinny
         form={<LoginForm onSubmit={props.onSubmit} />}
-        extra1={
-          <Link to="/account/forgot-password">Forgot your password?</Link>
-        }
-        extra2={<Link to="/account/signup">Create an account</Link>}
       />
     </div>
   );

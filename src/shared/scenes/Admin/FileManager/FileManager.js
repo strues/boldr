@@ -4,13 +4,10 @@ import {
   Toolbar,
   Button,
   Collapse,
-  FontIcon,
-  Paper,
   Tabs,
   Tab,
   CircularProgress,
   TabsContainer,
-  Slider,
 } from 'boldr-ui';
 import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import Dropzone from 'react-dropzone';

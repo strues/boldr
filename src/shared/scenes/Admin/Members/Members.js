@@ -2,9 +2,8 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import Helmet from 'react-helmet';
-import { Row, Modal, Button } from 'boldr-ui';
+import Modal from 'boldr-ui/lib/components/Modal';
 
-import { showModal, hideModal } from '../../../state/modules/boldr/ui/actions';
 import { MembersList, EditMemberForm } from './components';
 
 type Props = {

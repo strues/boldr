@@ -3,3 +3,28 @@
 .react-tagsinput {
   border: none!important;
 }
+
+
+.editor--root {
+  width: 65%;
+  margin: 0 auto;
+}
+.editor--content {
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  padding: .2rem;
+}
+.rdw-editor-main {
+  border: 1px solid rgba(225, 225, 225, 1.00);
+}
+.editor--content > div {
+  min-height: 100px;
+}
+
+.editor--toolbar {
+  background-color: #0275d8;
+}
+
+.toolbar--footer > * {
+  float: right;
+}

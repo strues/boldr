@@ -40,30 +40,23 @@ export class AdminDashboard extends Component {
   };
 
   render() {
-    const {
-      route,
-      me,
-      ui,
-      routing,
-      location: { pathname, search },
-    } = this.props;
+    const { route, me, ui, routing, location: { pathname } } = this.props;
 
     // baseLink,
     return (
       <DashboardWrapper>
-        {ui.visible
-          ? <Sidebar
-              items={sidebarLinks}
-              activeItem={routing.location.pathname}
-              location={routing.location.pathname}
-              visible={ui.visible}
-              expanded={ui.expanded}
-              onExpandCollapse={this.onExpandCollapse}
-              logoImg="https://boldr.io/assets/boldr-logo-white.png"
-              logoLink="/"
-              isPrimaryColor
-            />
-          : null}
+        {ui.visible &&
+          <Sidebar
+            items={sidebarLinks}
+            activeItem={pathname}
+            location={routing.location.pathname}
+            visible={ui.visible}
+            expanded={ui.expanded}
+            onExpandCollapse={this.onExpandCollapse}
+            logoImg="https://boldr.io/assets/boldr-logo-white.png"
+            logoLink="/"
+            isPrimaryColor
+          />}
         <DashboardMain>
           <Topbar
             url={this.props.match.path}

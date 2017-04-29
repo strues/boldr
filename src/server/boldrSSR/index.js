@@ -6,9 +6,10 @@ import { Provider } from 'react-redux';
 import createHistory from 'history/createMemoryHistory';
 import { StaticRouter } from 'react-router-dom';
 import { matchRoutes } from 'react-router-config';
+// $FlowIssue
 import styleSheet from 'styled-components/lib/models/StyleSheet';
 import Helmet from 'react-helmet';
-import { configureStore, fetchPostsIfNeeded } from '../../shared/state';
+import { configureStore } from '../../shared/state';
 import renderRoutes from '../../shared/core/addRoutes';
 import routes from '../../shared/routes';
 import CreateHtml from './CreateHtml';
@@ -76,7 +77,7 @@ async function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
         <CreateHtml
           reactAppString={reactAppString}
           nonce={nonce}
-          helmet={Helmet.rewind()}
+          helmet={helmet}
           styles={styles}
           preloadedState={store.getState()}
         />,

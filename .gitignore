@@ -10,6 +10,7 @@
 node_modules
 **/node_modules
 
+.cache-loader
 flow-typed
 .happypack
 

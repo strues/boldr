@@ -1,6 +1,5 @@
 /* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
 import Link from 'react-router-dom/Link';
 import styles from './branding.scss';
@@ -21,7 +20,6 @@ const Branding = (props: Props) => {
     siteName,
     siteLogo,
     dropdownOpen,
-    theme,
     closeHeaderDropdown,
   } = props;
   return (

@@ -47,9 +47,11 @@ exports[`<Home /> renders snapshot 1`] = `
         }
       }
     >
-      <styled.p>
+      <Paragraph
+        isLead={false}
+      >
         Placeholder
-      </styled.p>
+      </Paragraph>
     </Row>
   </Connect(BaseTemplate)>
 </div>

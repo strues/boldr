@@ -22,7 +22,10 @@ WebFontLoader.load({
     ],
   },
 });
-
+// if (process.env.NODE_ENV !== 'production') {
+//   const { whyDidYouUpdate } = require('why-did-you-update');
+//   whyDidYouUpdate(React);
+// }
 const domNode = document.getElementById('app');
 const history = createHistory();
 const preloadedState = window.__PRELOADED_STATE__;

@@ -1,20 +1,10 @@
 /* @flow */
 import React, { Component } from 'react';
-import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import {
-  MenuButton,
-  List,
-  ListItem,
-  Paper,
-  Toolbar,
-  Button,
-  Row,
-  Col,
-} from 'boldr-ui';
+import { MenuButton, List, ListItem, Paper, Toolbar, Row, Col } from 'boldr-ui';
 
-import { selectTag, clearTag, createTag, deleteTag } from '../../Blog/state';
+import { selectTag, createTag, deleteTag } from '../../Blog/state';
 import TaggedPost from './components/TaggedPost';
 
 import TagList from './components/TagList';

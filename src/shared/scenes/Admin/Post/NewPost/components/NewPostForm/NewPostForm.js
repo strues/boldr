@@ -1,38 +1,39 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
-import CSSTransitionGroup from 'react-addons-css-transition-group';
+import EditorState from 'draft-js/lib/EditorState';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
+import Button from 'boldr-ui/lib/components/Button';
 import {
-  TabsContainer,
-  Tab,
-  Tabs,
-  Button,
   InputField,
-  Heading,
+  Col,
+  RadioField,
+  Paper,
+  Row,
+  FontIcon,
+  Headline,
+  Paragraph,
+  Label,
   FormGroup,
+  Form,
+  Block,
 } from 'boldr-ui';
 
-import { uploadPostImage } from '../../../../state';
+import { isRequired } from '../../../../../../core/validations';
 import RenderTags from '../RenderTags';
 import FieldEditor from './FieldEditor';
+import { Inner, Toolbar, NewPost } from './NewPostStyled';
 
-/* eslint-disable */
-const Wrapper = styled.div`
-  padding: 1em;
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .4);
-  background-color: #fff;
+const HelpTxt = styled.p`
+  font-size: 14px;
+  letter-spacing: 0.8;
+  color: #fff;
 `;
-/* eslint-enable */
-const NewPost = styled.section`
-  width: 100%;
-  margin-top: 10px;
-  padding-bottom: 50px;
-`;
+const statusOptions = [
+  { text: 'Published', value: true },
+  { text: 'Draft', value: false },
+];
+
 type Props = {
   handleSubmit?: Function,
   reset?: Function,
@@ -42,114 +43,78 @@ type Props = {
   pristine?: boolean,
   input?: Object,
   label?: string,
+  uploadImageForPost: Function,
 };
 
 class NewPostForm extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      files: [],
-      activeTabIndex: 0,
-      checked: false,
-    };
-    this._handleTabChange = this._handleTabChange.bind(this);
-    this.onDrop = this.onDrop.bind(this);
-    this.onOpenClick = this.onOpenClick.bind(this);
-  }
+  state = {
+    files: [],
+    editorState: EditorState.createEmpty(),
+  };
 
   props: Props;
-  onDrop(files) {
+
+  onDrop = files => {
     this.setState({
       file: files[0],
     });
     const payload = files[0];
-    this.props.dispatch(uploadPostImage(payload));
-  }
-  onOpenClick() {
+    this.props.uploadImageForPost(payload);
+  };
+  onOpenClick = () => {
     this.dropzone.open();
-  }
-  _handleTabChange(activeTabIndex) {
-    this.setState({ activeTabIndex });
-  }
-  _handleSwitch = checked => {
-    this.setState({ checked });
   };
   render() {
     const { handleSubmit } = this.props;
-    const { activeTabIndex } = this.state;
-
     return (
-      <NewPost>
-        <Heading size={3}>Create a new post</Heading>
-        <form onSubmit={handleSubmit}>
-          <Wrapper>
-            <FormGroup>
-              <Field
-                id="post-title"
-                name="title"
-                type="text"
-                component={InputField}
-                label="Post Title"
-                tabIndex={0}
-              />
-            </FormGroup>
-            <FormGroup>
-              <Heading size={5}>Tag your post</Heading>
-              <Field
-                name="tags"
-                type="checkbox"
-                component={RenderTags}
-                label="Tags"
-              />
-            </FormGroup>
-          </Wrapper>
-          <TabsContainer
-            onTabChange={this._handleTabChange}
-            activeTabIndex={activeTabIndex}
-            panelClassName="md-grid"
-            colored
-          >
-            <Tabs tabId="tab">
-              <Tab label="Write">
-                <Wrapper>
-                  <Field
-                    component={FieldEditor}
-                    label="Content"
-                    name="content"
-                    tabIndex={-2}
-                  />
-                </Wrapper>
-
-              </Tab>
-              <Tab label="Publish">
-                <CSSTransitionGroup
-                  component="div"
-                  className="md-cell md-cell--12"
-                  transitionName="md-cross-fade"
-                  transitionEnterTimeout={300}
-                  transitionLeave={false}
-                >
+      <div>
+        <Headline type="h1">Create a new post</Headline>
+        <NewPost>
+          <Form onSubmit={handleSubmit}>
+            <Row>
+              <Col xs={12} md={8}>
+                <Paper zDepth={1}>
+                  <Toolbar>Content</Toolbar>
+                  <Inner>
+                    <Field
+                      id="post-title"
+                      name="title"
+                      type="text"
+                      component={InputField}
+                      label="Post title"
+                      tabIndex={0}
+                      validate={[isRequired]}
+                    />
+                    <Label label="Post content body" />
+                    <Field
+                      component={FieldEditor}
+                      label="Content"
+                      name="content"
+                      tabIndex={-2}
+                      validate={[isRequired]}
+                    />
+                  </Inner>
+                </Paper>
+              </Col>
+              <Col xs={12} md={4}>
+                <Block dark>
+                  <Headline lightText type="h3">Content Tags</Headline>
+                  <HelpTxt>Hit enter to save tag</HelpTxt>
                   <FormGroup>
-                    <Heading size={5}>
-                      Upload a feature image
-                    </Heading>
-                    {/* <Row>
-                <Switch
-                  id="imgSwitch"
-                  name="imgSwitch"
-                  label="Upload post background image"
-                  checked={ checked }
-                  onChange={ this._handleSwitch }
-                />
-                <Button
-                  icon
-                  tooltipLabel="The feature image will
-                  be used if a background image isnt uploaded."
-                >
-                  help
-                </Button>
-              </Row> */}
+                    <Field
+                      name="tags"
+                      type="checkbox"
+                      component={RenderTags}
+                      label="Tags"
+                      validate={[isRequired]}
+                    />
+                  </FormGroup>
+                </Block>
+                <Block>
+                  <FormGroup>
+                    <Headline type="h3">
+                      Upload a feature image <FontIcon>photo_library</FontIcon>
+                    </Headline>
                     <Dropzone
                       className="boldr-dropzone"
                       ref={node => {
@@ -160,64 +125,49 @@ class NewPostForm extends Component {
                       accept="image/*"
                       maxSize={5242880}
                     >
-                      <p className="boldr-dropzone__drop-sm">
-                        Drop an image here or select one from your computer.
+                      <Paragraph className="boldr-dropzone__drop-sm">
+                        Drop an image here or click to select one from your computer.
                         {' '}
                         <br />
                         It will upload right away.
-                      </p>
+                      </Paragraph>
                     </Dropzone>
                   </FormGroup>
-                  <Wrapper>
-                    <FormGroup>
-                      <Field
-                        name="excerpt"
-                        id="post-excerpt"
-                        type="text"
-                        component={InputField}
-                        label="Excerpt"
-                        tabIndex={-3}
-                      />
-                    </FormGroup>
+                </Block>
+                <FormGroup>
+                  <Field
+                    name="excerpt"
+                    id="post-excerpt"
+                    type="text"
+                    component={InputField}
+                    label="Short excerpt about post"
+                    tabIndex={-3}
+                    validate={[isRequired]}
+                  />
+                </FormGroup>
+                <Block>
+                  <FormGroup>
+                    <Field
+                      name="published"
+                      label="Publishing status"
+                      validate={[isRequired]}
+                      options={statusOptions}
+                      component={RadioField}
+                    />
+                  </FormGroup>
 
-                    <FormGroup>
-                      <Heading size={5}>Status:</Heading>
-                      <label style={{ marginRight: '10px' }} htmlFor="draft">
-                        <Field
-                          id="draft"
-                          name="published"
-                          component="input"
-                          type="radio"
-                          value="false"
-                        />
-                        {' '}
-                        Draft
-                      </label>
-                      <label htmlFor="published">
-                        <Field
-                          id="published"
-                          name="published"
-                          component="input"
-                          type="radio"
-                          value="true"
-                        />
-                        {' '}
-                        Publish
-                      </label>
-                    </FormGroup>
+                  <Button type="submit">Save Post</Button>
+                </Block>
+              </Col>
+            </Row>
 
-                    <Button raised primary type="submit" label="Save Post" />
-                  </Wrapper>
-                </CSSTransitionGroup>
-              </Tab>
-            </Tabs>
-          </TabsContainer>
-        </form>
-      </NewPost>
+          </Form>
+        </NewPost>
+      </div>
     );
   }
 }
-NewPostForm = connect()(NewPostForm);
+
 export default reduxForm({
   form: 'newPostForm',
 })(NewPostForm);

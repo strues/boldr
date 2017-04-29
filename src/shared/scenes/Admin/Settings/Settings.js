@@ -1,7 +1,7 @@
 /* @flow */
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
-import { ExpansionList, TextField } from 'boldr-ui';
+import { ExpansionList } from 'boldr-ui';
 
 import {
   SiteName,
