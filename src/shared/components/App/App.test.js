@@ -12,9 +12,9 @@ const mockStore = configureStore(middlewares);
 describe('<App />', () => {
   it('renders snapshot', () => {
     const store = mockStore({});
-    const wrapper = shallow(
+    const WrapperComp = shallow(
       <Provider store={store}><App route={routes} /></Provider>,
     );
-    expect(shallowToJson(wrapper)).toMatchSnapshot();
+    expect(shallowToJson(WrapperComp)).toMatchSnapshot();
   });
 });
