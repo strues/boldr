@@ -1,14 +1,6 @@
 /* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
-import {
-  CardText,
-  SelectionControl,
-  SelectionControlGroup,
-  TextField,
-  Row,
-  Col,
-} from 'boldr-ui';
+import { CardText, SelectionControlGroup, Row, Col } from 'boldr-ui';
 
 type Props = {
   sorted: string,

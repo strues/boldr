@@ -1,8 +1,16 @@
 /* eslint-disable jsx-a11y/html-has-lang, react/forbid-prop-types */
+/* @flow */
 import React from 'react';
-import PropTypes from 'prop-types';
+import type { ReactElement } from '../../types/react';
 
-function Html(props) {
+type Props = {
+  htmlAttributes?: Object,
+  headerElements?: number | string | ReactElement<*> | Array<any>,
+  bodyElements?: number | string | ReactElement<*> | Array<any>,
+  appBodyString?: string,
+};
+
+function Html(props: Props) {
   const { htmlAttributes, headerElements, bodyElements, appBodyString } = props;
 
   return (
@@ -17,13 +25,6 @@ function Html(props) {
     </html>
   );
 }
-
-Html.propTypes = {
-  htmlAttributes: PropTypes.object,
-  headerElements: PropTypes.node,
-  bodyElements: PropTypes.node,
-  appBodyString: PropTypes.string,
-};
 
 Html.defaultProps = {
   htmlAttributes: null,

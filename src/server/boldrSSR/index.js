@@ -6,9 +6,10 @@ import { Provider } from 'react-redux';
 import createHistory from 'history/createMemoryHistory';
 import { StaticRouter } from 'react-router-dom';
 import { matchRoutes } from 'react-router-config';
+// $FlowIssue
 import styleSheet from 'styled-components/lib/models/StyleSheet';
 import Helmet from 'react-helmet';
-import { configureStore, fetchPostsIfNeeded } from '../../shared/state';
+import { configureStore } from '../../shared/state';
 import renderRoutes from '../../shared/core/addRoutes';
 import routes from '../../shared/routes';
 import CreateHtml from './CreateHtml';
@@ -41,10 +42,10 @@ async function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
   // request.
   const routeIsMatched = matchRoutes(routes, req.url);
 
-  const createStore = req => configureStore({});
-
-  const history = createHistory();
-  const store = createStore(history);
+  const history = createHistory({ initialEntries: [req.url] });
+  const store = configureStore(history, {
+    boldr: { settings: { meta: { initialPageLoad: true } } },
+  });
 
   const routerContext = {};
   // Load data on server-side
@@ -67,7 +68,6 @@ async function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
       // render the application wrapped with provider, static router and the
       // store.
       const reactAppString = renderAppToString(store, routerContext, req);
-
       const helmet = Helmet.rewind();
       // render styled-components styleSheets to string.
       const styles = styleSheet.rules().map(rule => rule.cssText).join('\n');
@@ -76,7 +76,7 @@ async function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
         <CreateHtml
           reactAppString={reactAppString}
           nonce={nonce}
-          helmet={Helmet.rewind()}
+          helmet={helmet}
           styles={styles}
           preloadedState={store.getState()}
         />,

@@ -1,24 +1,30 @@
-@charset 'utf-8';
+@import '~boldr-ui/lib/styles/boldrui.scss';
 
-/// Namespace
-$boldr-ns: 'boldrui-' !default;
-$dash-ns: 'boldrui-dash-'; // .#{$dash-ns}
+.react-tagsinput {
+  border: none!important;
+}
 
-@import 'abstracts/colors/all';
 
-// Our variables
-@import 'abstracts/variables';
-// Our mixins
-@import 'abstracts/mixins';
-// Bootstrap components and custom bootstrap component variations
-@import 'vendor/all';
-// Base (typography, grid, animation)
-@import 'base/all';
-@import 'components/all';
+.editor--root {
+  width: 65%;
+  margin: 0 auto;
+}
+.editor--content {
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  padding: .2rem;
+}
+.rdw-editor-main {
+  border: 1px solid rgba(225, 225, 225, 1.00);
+}
+.editor--content > div {
+  min-height: 100px;
+}
 
-@include react-md-everything;
-@include react-md-make-custom-grid('24-40', 24px, 40px, 0);
-@include react-md-make-custom-grid('40-16', 40px, 16px, 0);
-@include boldrui-paper;
-@include boldrui-media;
-@include boldrui-divider;
+.editor--toolbar {
+  background-color: #0275d8;
+}
+
+.toolbar--footer > * {
+  float: right;
+}

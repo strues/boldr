@@ -43,11 +43,10 @@ const renderMenuDetails = (props: Props) => (
         <Button
           style={{ float: 'right' }}
           icon
-          onClick={() => fields.remove(index)}
+          onClick={() => fields.remove(items.id)}
         >
           close
         </Button>
-        <span>Menu Detail #{index + 1}</span>
         <Field
           id="name"
           name={`${items}.name`}
@@ -78,28 +77,15 @@ let NavigationForm = (props: Props) => {
   const { handleSubmit, reset, hasDropdownValue } = props;
   const opts = [
     {
-      itemValue: true,
-      label: 'Yes',
+      value: true,
+      name: 'Yes',
     },
     {
-      itemValue: false,
-      label: 'No',
+      value: false,
+      name: 'No',
     },
   ];
-  const renderDropSelector = ({ input }) => (
-    <div>
-      <SelectField
-        {...input}
-        id="drop"
-        label="Has Dropdown"
-        placeholder="Select a role"
-        menuItems={opts}
-        itemLabel="label"
-        itemValue="hasDropdown.itemValue"
-        className="md-cell"
-      />
-    </div>
-  );
+
   return (
     <form className="form__navigation" onSubmit={handleSubmit}>
       <Field

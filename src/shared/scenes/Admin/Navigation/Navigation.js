@@ -17,7 +17,6 @@ import { showModal, hideModal } from '../../../state/modules/boldr/ui/actions';
 import {
   updateMenuDetails,
   addMenuDetail,
-  getByLabel,
 } from '../../../state/modules/boldr/menu';
 import NavigationEditor from './components/NavigationEditor';
 import NavigationForm from './components/NavigationForm';

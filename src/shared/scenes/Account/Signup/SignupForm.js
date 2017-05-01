@@ -1,9 +1,12 @@
 /* @flow */
 import React from 'react';
-import { Field, reduxForm, getFormSyncErrors, isValid } from 'redux-form';
-import { Button, InputField, Row, Col } from 'boldr-ui';
+import { Field, reduxForm } from 'redux-form';
+import { Row, Col } from 'boldr-ui';
+import Button from 'boldr-ui/lib/components/Button';
+import InputField from 'boldr-ui/lib/components/Form/Fields/InputField';
+import Form from 'boldr-ui/lib/components/Form/Form';
 
-import validate, { requiredValidator, emailValidator } from './validate';
+import { isRequired, isEmail } from '../../../core/validations';
 
 type Props = {
   handleSubmit?: Function,
@@ -12,7 +15,7 @@ type Props = {
 const SignupForm = (props: Props) => {
   const { handleSubmit } = props;
   return (
-    <form onSubmit={handleSubmit} className="boldr-form__generic">
+    <Form onSubmit={handleSubmit} className="boldr-form__generic">
       <Row>
         <Col xs={6}>
           <Field
@@ -21,7 +24,7 @@ const SignupForm = (props: Props) => {
             type="email"
             component={InputField}
             label="Email address"
-            validate={[requiredValidator, emailValidator]}
+            validate={[isRequired, isEmail]}
           />
         </Col>
         <Col xs={6}>
@@ -31,6 +34,7 @@ const SignupForm = (props: Props) => {
             type="password"
             component={InputField}
             label="Password"
+            validate={[isRequired]}
           />
         </Col>
       </Row>
@@ -42,6 +46,7 @@ const SignupForm = (props: Props) => {
             type="text"
             component={InputField}
             label="First name"
+            validate={[isRequired]}
           />
         </Col>
         <Col xs={6}>
@@ -51,6 +56,7 @@ const SignupForm = (props: Props) => {
             type="text"
             component={InputField}
             label="Last name"
+            validate={[isRequired]}
           />
         </Col>
       </Row>
@@ -64,25 +70,21 @@ const SignupForm = (props: Props) => {
                 type="text"
                 component={InputField}
                 label="Username"
+                validate={[isRequired]}
               />
             </Col>
           </Row>
         </Col>
       </Row>
 
-      <Button
-        style={{ marginTop: '25px' }}
-        raised
-        primary
-        label="Create Account"
-        type="submit"
-      />
-    </form>
+      <Button style={{ marginTop: '25px' }} type="submit" isFullWidth>
+        Create Account
+      </Button>
+    </Form>
   );
 };
 
 export default reduxForm({
   form: 'userSignupForm',
-  validate,
   destroyOnUnmount: false,
 })(SignupForm);

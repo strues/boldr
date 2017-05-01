@@ -2,7 +2,8 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, FormCard } from 'boldr-ui';
+import FormCard from 'boldr-ui/lib/components/Form/FormCard/FormCard';
+import Button from 'boldr-ui/lib/components/Button';
 import Helmet from 'react-helmet';
 
 import BaseTemplate from '../../../templates/BaseTemplate';
@@ -20,7 +21,7 @@ class Verify extends Component {
   }
   props: Props;
 
-  handleVerify(event, props): void {
+  handleVerify(event): void {
     event.preventDefault();
     this.props.dispatch(verifyAccount(this.props.match.params.token));
   }
@@ -30,9 +31,9 @@ class Verify extends Component {
       <BaseTemplate helmetMeta={<Helmet title="Verify Account" />}>
         <FormCard
           title="Account verification"
-          form={
-            <Button raised primary label="Verify" onClick={this.handleVerify} />
-          }
+          skinny
+          lightText
+          form={<Button onClick={this.handleVerify} isFullWidth>Verify</Button>}
         />
       </BaseTemplate>
     );

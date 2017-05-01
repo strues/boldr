@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Button, InputField, FormGroup, Heading } from 'boldr-ui';
+import { Button, InputField, Form, Headline } from 'boldr-ui';
 
 type Props = {
   handleSubmit: Function,
@@ -13,7 +13,7 @@ type Props = {
 const ProfileForm = (props: Props) => {
   const { handleSubmit, pristine, reset, submitting } = props;
   return (
-    <form onSubmit={handleSubmit} className="boldr-form__profile">
+    <Form onSubmit={handleSubmit} className="boldr-form__profile">
       <Field
         id="fname"
         name="firstName"
@@ -49,7 +49,7 @@ const ProfileForm = (props: Props) => {
         type="text"
         label="Bio"
       />
-      <Heading size={4}>Social</Heading>
+      <Headline type="h4">Social</Headline>
       <Field
         id="fb"
         name="facebook"
@@ -101,7 +101,7 @@ const ProfileForm = (props: Props) => {
           label="Clear Values"
         />
       </div>
-    </form>
+    </Form>
   );
 };
 

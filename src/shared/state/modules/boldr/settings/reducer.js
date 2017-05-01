@@ -42,10 +42,28 @@ const isFetching = (state = false, action) => {
   }
 };
 
+const metaInitialState = {
+  status: -1,
+  initialPageLoad: true,
+};
+
+const meta = (state = metaInitialState, action) => {
+  switch (action.type) {
+    case t.INITIAL_PAGE_LOAD:
+      return {
+        ...state,
+        initialPageLoad: false,
+      };
+    default:
+      return state;
+  }
+};
+
 const settingsReducer = combineReducers({
   all,
   ids,
   isFetching,
+  meta,
 });
 
 export default settingsReducer;

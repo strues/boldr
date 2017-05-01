@@ -22,6 +22,11 @@ class TaggedPost extends Component {
     currentTag: {},
   };
 
+  componentDidMount() {
+    const tagName = this.props.currentTag.name;
+    this.props.fetchTagPostsIfNeeded(tagName);
+  }
+
   props: Props;
   render() {
     const { currentTag, isFetching } = this.props;

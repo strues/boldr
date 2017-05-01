@@ -159,10 +159,8 @@ Looking for an open source project to contribute to? All types of contributions 
 ## Screenshots  
 |         |            |   |
 | ------------- |:-------------:| -----:|
-![blog][blogImg] | ![blog2][editProfileImg]  | ![single][blogSingle]
-![dash][dashboardImg] | ![files][adminPostListImg]  | ![members][editPostImg]
-![post][postEditorImg]  | ![prof][profileImg]  | ![settings][settingsImg]
-![tag][tagsImg] |  |
+![createPost][createPostImg] | ![blog2][editProfileImg]  | ![single][blogSingle]
+
 
 
 
@@ -172,13 +170,6 @@ Looking for an open source project to contribute to? All types of contributions 
 [coverage-link]: https://codeclimate.com/github/strues/boldr/coverage
 [coverage-img]: https://codeclimate.com/github/strues/boldr/badges/coverage.svg
 
-[blogImg]: /docs/assets/blog.png
-[editProfileImg]: /docs/assets/editProfile.png
-[blogSingle]: /docs/assets/blogSingle.png
-[dashboardImg]: /docs/assets/dashboard.png
-[adminPostListImg]: /docs/assets/adminPostList.png
-[editPostImg]: /docs/assets/editPost.png
-[postEditorImg]: /docs/assets/postEditor.png
-[profileImg]: /docs/assets/profile.png
-[settingsImg]: /docs/assets/settings.png
-[tagsImg]: /docs/assets/tags.png
+[createPostImg]: /docs/assets/create-post.png
+[editProfileImg]: /docs/assets/create-post.png
+[blogSingle]: /docs/assets/create-post.png

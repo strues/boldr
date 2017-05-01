@@ -1,18 +1,9 @@
 /* eslint-disable max-len */
-import React, { Component } from 'react';
+import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import styled from 'styled-components';
-import {
-  FontIcon,
-  Button,
-  InputField,
-  Col,
-  Row,
-  Heading,
-  FormGroup,
-} from 'boldr-ui';
+import { Button, InputField, Col, Row, Heading, FormGroup } from 'boldr-ui';
 
-import { uploadPostImage } from '../../../../state';
 import EditorField from './EditorField';
 
 type Props = {
@@ -35,16 +26,6 @@ const Wrapper = styled.section`
 `;
 const EditPostForm = (props: Props) => {
   const { handleSubmit } = props;
-  /**
-     * wraps the editor component for embedding into redux-form as
-     * an input component
-     * @param  {object} input
-     * @param  {string} label
-     * @return {element} BoldrEditor
-     */
-  const renderEditor = ({ input, label }) => (
-    <EditorField {...input} label={label} />
-  );
 
   return (
     <Row>

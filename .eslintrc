@@ -24,6 +24,7 @@
     "react/prefer-stateless-function": 0,
     "import/no-unresolved": 0,
     "no-unused-expressions": 0,
+    "no-unused-vars": 2,
     "camelcase": 0,
     "babel/new-cap": 0,
     "react/jsx-curly-spacing": 0,

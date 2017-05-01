@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Paper, Grid, Row, Col, Image } from 'boldr-ui';
+import { Paper, Row, Col, Image } from 'boldr-ui';
 
 import { updateAttachment } from '../../state';
 // import config from '../../../../../../config';

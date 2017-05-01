@@ -1,6 +1,6 @@
 /* @flow */
 import '../../styles/main.scss';
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import classnames from 'classnames';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
@@ -17,7 +17,7 @@ type Props = {
   dispatch: () => void,
 };
 
-class App extends Component {
+class App extends PureComponent {
   static displayName = 'App';
   componentDidMount() {
     this.props.dispatch(fetchSettingsIfNeeded());

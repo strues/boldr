@@ -2,7 +2,9 @@
 
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Button, InputField } from 'boldr-ui';
+import Button from 'boldr-ui/lib/components/Button';
+import InputField from 'boldr-ui/lib/components/Form/Fields/InputField';
+import Form from 'boldr-ui/lib/components/Form/Form';
 
 const style = {
   margin: 12,
@@ -13,7 +15,7 @@ type Props = {
 const ResetPasswordForm = (props: Props) => {
   const { handleSubmit } = props;
   return (
-    <form onSubmit={handleSubmit} className="boldr-form__generic">
+    <Form onSubmit={handleSubmit} className="boldr-form__generic">
       <Field
         id="password"
         name="password"
@@ -28,14 +30,8 @@ const ResetPasswordForm = (props: Props) => {
         label="Confirm new password."
         component={InputField}
       />
-      <Button
-        type="submit"
-        label="Reset password"
-        style={style}
-        raised
-        primary
-      />
-    </form>
+      <Button type="submit" style={style}>Reset Password</Button>
+    </Form>
   );
 };
 

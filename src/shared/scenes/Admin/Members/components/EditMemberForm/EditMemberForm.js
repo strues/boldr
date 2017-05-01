@@ -2,7 +2,8 @@
 
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Button, SelectField, InputField } from 'boldr-ui';
+import Button from 'boldr-ui/lib/components/Button';
+import { Form, SelectField, InputField } from 'boldr-ui';
 
 const style = {
   margin: 12,
@@ -18,38 +19,21 @@ type Props = {
 const roles = [
   {
     value: 1,
-    label: 'Member',
+    name: 'Member',
   },
   {
     value: 2,
-    label: 'Staff',
+    name: 'Staff',
   },
   {
     value: 3,
-    label: 'Admin',
+    name: 'Admin',
   },
 ];
-type Prop = {
-  input: Object,
-};
-const renderRoleSelector = (props: Prop) => (
-  <div>
-    <SelectField
-      {...props.input}
-      id="roles"
-      label="Role"
-      placeholder="Select a role"
-      menuItems={roles}
-      itemLabel="label"
-      itemValue="value"
-      className="md-cell"
-    />
-  </div>
-);
 const EditMemberForm = (props: Props) => {
   const { handleSubmit, reset } = props;
   return (
-    <form onSubmit={handleSubmit} className="boldr-form__generic">
+    <Form onSubmit={handleSubmit} className="boldr-form__generic">
       <Field
         id="email"
         name="email"
@@ -85,10 +69,10 @@ const EditMemberForm = (props: Props) => {
         label="Avatar URL"
         component={InputField}
       />
-      <Field name="role" component={renderRoleSelector} />
-      <Button type="submit" label="Save" style={style} raised primary />
-      <Button label="Reset" onClick={reset} style={style} flat secondary />
-    </form>
+      <Field name="role" component={SelectField} options={roles} />
+      <Button type="submit" style={style}>Save</Button>
+      <Button onClick={reset} style={style} theme="secondary">Reset</Button>
+    </Form>
   );
 };
 

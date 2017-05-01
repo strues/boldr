@@ -1,6 +1,8 @@
 /* @flow */
 import React, { Component } from 'react';
-import { Button, Grid } from 'boldr-ui';
+import Button from 'boldr-ui/lib/components/Button';
+import Grid from 'boldr-ui/lib/components/Layout/Grid';
+import Icon from 'boldr-ui/lib/components/Icons';
 import classNames from 'classnames/bind';
 import cxN from 'classnames';
 import Link from 'react-router-dom/Link';
@@ -99,11 +101,10 @@ class SiteHeader extends Component {
 
     if (dropdownIsOpen && isMobile) {
       // $FlowIssue
-      document.body.classList.add(cx('overflow'));
-    } else {
-      // $FlowIssue
-      document.body.classList.remove(cx('overflow'));
+      return document.body.classList.add(cx('overflow'));
     }
+
+    document.body.classList.remove(cx('overflow'));
   }
 
   handleKeyDown = e => {
@@ -113,48 +114,60 @@ class SiteHeader extends Component {
     this.setState({ focusable: true });
   };
 
-  render() {
-    const { className, children, theme, auth, me, menu } = this.props;
-    const { dropdownIsOpen, isMobile, focusable } = this.state;
-
+  renderMenuItems() {
+    return (
+      <ul className={cx('boldrui-sh__nav')} role="menubar">
+        {this.props.menu.map(detail => (
+          <NavItem
+            key={detail.uuid}
+            detail={detail}
+            theme="theme-boldr"
+            hasDropdown={detail.hasDropdown}
+            closeHeaderDropdown={this.closeDropdownOnButtonClick()}
+            moble={this.state.isMobile}
+          />
+        ))}
+      </ul>
+    );
+  }
+  renderAuthDependent() {
     const menuElements = [];
-    if (!auth.isAuthenticated) {
+    if (!this.props.auth.isAuthenticated) {
       menuElements.push(
         <Link key="login" to="/account/login">
-          <Button raised primary label="Log In" />
+          <Button>Log In</Button>
         </Link>,
         <Link key="signup" to="/account/signup">
-          <Button raised secondary label="Sign Up" />
+          <Button theme="secondary">Signup</Button>
         </Link>,
       );
     }
-    if (me.roleId === 3) {
+    if (this.props.me.roleId === 3) {
       menuElements.push(
         <Link key="dash" to="/admin">
-          <Button icon primary tooltipLabel="Dashboard">
-            dashboard
-          </Button>
+          <Icon kind="dashboard" color="#333" />
         </Link>,
       );
     }
-    if (auth.isAuthenticated) {
+    if (this.props.auth.isAuthenticated) {
       menuElements.push(
-        <Link key="prof" to={`/profiles/${me.username}`}>
-          <Button icon tooltipLabel="Profile">
-            perm_identity
-          </Button>
+        <Link key="prof" to={`/profiles/${this.props.me.username}`}>
+          <Icon kind="account" color="#333" />
         </Link>,
-        <Button
+        <Icon
           key="logout"
-          icon
+          kind="logout"
+          color="#333"
           onClick={this.props.handleLogoutClick}
-          tooltipLabel="Logout"
-        >
-          exit_to_app
-        </Button>,
+        />,
       );
     }
+    return menuElements;
+  }
 
+  render() {
+    const { className, theme } = this.props;
+    const { dropdownIsOpen, focusable } = this.state;
     return (
       <header
         className={cx('boldrui-siteheader', ['theme-boldr'], className, {
@@ -185,18 +198,7 @@ class SiteHeader extends Component {
               }}
               aria-label="Main menu"
             >
-              <ul className={cx('boldrui-sh__nav')} role="menubar">
-                {menu.map(detail => (
-                  <NavItem
-                    key={detail.uuid}
-                    detail={detail}
-                    theme="theme-boldr"
-                    hasDropdown={detail.hasDropdown}
-                    closeHeaderDropdown={this.closeDropdownOnButtonClick()}
-                    moble={isMobile}
-                  />
-                ))}
-              </ul>
+              {this.renderMenuItems()}
             </nav>
             <div
               className={cxN(
@@ -205,7 +207,7 @@ class SiteHeader extends Component {
                 }),
               )}
             >
-              {menuElements}
+              {this.renderAuthDependent()}
             </div>
           </div>
         </Grid>

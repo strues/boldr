@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { Card } from 'boldr-ui';
 import Helmet from 'react-helmet';
 
-import { selectPost } from '../../../Blog/state';
 import PostTable from './components/PostTable';
 
 type Props = {

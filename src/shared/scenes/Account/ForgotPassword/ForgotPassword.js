@@ -24,6 +24,8 @@ class ForgotPassword extends PureComponent {
         <div className="boldr-form__forgot">
           <FormCard
             title="Forgot Password"
+            skinny
+            lightText
             form={<ForgotPasswordForm onSubmit={this.handleSubmit} />}
           />
         </div>

@@ -64,14 +64,11 @@ class BaseTemplate extends PureComponent {
   componentDidMount() {
     this.props.actions.fetchMainMenuIfNeeded();
   }
-  handleLogoClick = e => {
-    this.props.navigate('/');
-  };
 
-  handleProfileClick = e => {
+  handleProfileClick = () => {
     this.props.navigate(`/profiles/${this.props.me.username}`);
   };
-  handleLogoutClick = e => {
+  handleLogoutClick = () => {
     this.props.actions.logout();
   };
   props: Props;
@@ -88,10 +85,9 @@ class BaseTemplate extends PureComponent {
           items={this.props.menu.items}
           isMobile={this.props.isMobile}
           handleProfileClick={this.handleProfileClick}
-          handleLogoClick={this.handleLogoClick}
           handleLogoutClick={this.handleLogoutClick}
         />
-        {this.props.hero ? this.props.hero : null}
+        {this.props.hero || null}
 
         <ContentWrapper>
           {this.props.children}

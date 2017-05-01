@@ -22,11 +22,14 @@ WebFontLoader.load({
     ],
   },
 });
-
+// if (process.env.NODE_ENV !== 'production') {
+//   const { whyDidYouUpdate } = require('why-did-you-update');
+//   whyDidYouUpdate(React);
+// }
 const domNode = document.getElementById('app');
 const history = createHistory();
 const preloadedState = window.__PRELOADED_STATE__;
-const store = configureStore(preloadedState, history);
+const store = configureStore(history, preloadedState);
 
 const { dispatch } = store;
 
@@ -37,6 +40,10 @@ if (token) {
 }
 
 const renderApp = () => {
+  store.dispatch({
+    type: '@boldr/INITIAL_PAGE_LOAD',
+    initialPageLoad: false,
+  });
   // const App = require('../shared/components/App').default;
   render(
     <Provider store={store}>

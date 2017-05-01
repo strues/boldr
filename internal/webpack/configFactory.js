@@ -240,7 +240,7 @@ export default function webpackConfigFactory(buildOptions) {
             path: 'postcss-loader',
           },
           {
-            path: 'fast-sass-loader',
+            path: 'sass-loader',
           },
         ],
       }),
@@ -281,7 +281,10 @@ export default function webpackConfigFactory(buildOptions) {
       rules: removeNil([
         {
           test: /\.jsx?$/,
-          loader: 'happypack/loader?id=hp-js',
+          use: [
+            'cache-loader',
+            'happypack/loader?id=hp-js',
+          ],
           exclude: [
             /node_modules/,
             path.resolve(ROOT_DIR, './.happypack'),
@@ -304,14 +307,14 @@ export default function webpackConfigFactory(buildOptions) {
             ifProdClient(() => ({
               loader: ExtractTextPlugin.extract({
                 fallback: 'style-loader',
-                use: 'css-loader?sourceMap&importLoaders=2!postcss-loader!fast-sass-loader', // eslint-disable-line
+                use: 'css-loader?sourceMap&importLoaders=2!postcss-loader!sass-loader', // eslint-disable-line
               }),
             })),
             ifNode({
               loaders: [
                 'css-loader/locals',
                 'postcss-loader',
-                'fast-sass-loader',
+                'sass-loader',
               ], // eslint-disable-line
             }),
           ),

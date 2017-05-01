@@ -1,26 +1,15 @@
 /* @flow */
 import React, { Component } from 'react';
-import NavLink from 'react-router-dom/NavLink';
-import styled from 'styled-components';
-import last from 'lodash/last';
-import Loadable from 'react-loadable';
 import { connect } from 'react-redux';
 import {
-  Avatar,
-  Button,
   Grid,
-  Icon,
-  Col,
-  Row,
   DashboardFooter,
   Sidebar,
   DashboardWrapper,
-  Anchor,
   DashboardContent,
   DashboardMain,
   TopbarLink,
   Topbar,
-  Loader,
 } from 'boldr-ui';
 import { showHideSidebar, expandCollapseSideMenu } from '../../state';
 import renderRoutes from '../../core/addRoutes';
@@ -42,7 +31,7 @@ type Props = {
 export class AdminDashboard extends Component {
   props: Props;
 
-  handleHideSidebar = (e): Function => {
+  handleHideSidebar = (): Function => {
     this.props.dispatch(showHideSidebar());
   };
 
@@ -51,30 +40,23 @@ export class AdminDashboard extends Component {
   };
 
   render() {
-    const {
-      route,
-      me,
-      ui,
-      routing,
-      location: { pathname, search },
-    } = this.props;
+    const { route, me, ui, routing, location: { pathname } } = this.props;
 
     // baseLink,
     return (
       <DashboardWrapper>
-        {ui.visible
-          ? <Sidebar
-              items={sidebarLinks}
-              activeItem={routing.location.pathname}
-              location={routing.location.pathname}
-              visible={ui.visible}
-              expanded={ui.expanded}
-              onExpandCollapse={this.onExpandCollapse}
-              logoImg="https://boldr.io/assets/boldr-logo-white.png"
-              logoLink="/"
-              isPrimaryColor
-            />
-          : null}
+        {ui.visible &&
+          <Sidebar
+            items={sidebarLinks}
+            activeItem={pathname}
+            location={routing.location.pathname}
+            visible={ui.visible}
+            expanded={ui.expanded}
+            onExpandCollapse={this.onExpandCollapse}
+            logoImg="https://boldr.io/assets/boldr-logo-white.png"
+            logoLink="/"
+            isPrimaryColor
+          />}
         <DashboardMain>
           <Topbar
             url={this.props.match.path}
