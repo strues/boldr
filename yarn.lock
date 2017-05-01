@@ -1242,9 +1242,9 @@ bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.6"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.6.tgz#53344adb14617a13f6e8dd2ce28905d1c0ba3215"
 
-boldr-ui@0.4.0-beta.2:
-  version "0.4.0-beta.2"
-  resolved "https://registry.yarnpkg.com/boldr-ui/-/boldr-ui-0.4.0-beta.2.tgz#098fafa99792738f83a142e6d2d7817904291185"
+boldr-ui@0.4.0-beta.3:
+  version "0.4.0-beta.3"
+  resolved "https://registry.yarnpkg.com/boldr-ui/-/boldr-ui-0.4.0-beta.3.tgz#c796126dcb3107dfb25b289a8efdf1f402e6cb89"
   dependencies:
     animate-components "^0.8.1"
     boldr-utils "0.2.2"

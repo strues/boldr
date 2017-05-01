@@ -6,7 +6,7 @@ import Button from 'boldr-ui/lib/components/Button';
 import InputField from 'boldr-ui/lib/components/Form/Fields/InputField';
 import Form from 'boldr-ui/lib/components/Form/Form';
 
-import validate, { requiredValidator, emailValidator } from './validate';
+import { isRequired, isEmail } from '../../../core/validations';
 
 type Props = {
   handleSubmit?: Function,
@@ -24,7 +24,7 @@ const SignupForm = (props: Props) => {
             type="email"
             component={InputField}
             label="Email address"
-            validate={[requiredValidator, emailValidator]}
+            validate={[isRequired, isEmail]}
           />
         </Col>
         <Col xs={6}>
@@ -34,6 +34,7 @@ const SignupForm = (props: Props) => {
             type="password"
             component={InputField}
             label="Password"
+            validate={[isRequired]}
           />
         </Col>
       </Row>
@@ -45,6 +46,7 @@ const SignupForm = (props: Props) => {
             type="text"
             component={InputField}
             label="First name"
+            validate={[isRequired]}
           />
         </Col>
         <Col xs={6}>
@@ -54,6 +56,7 @@ const SignupForm = (props: Props) => {
             type="text"
             component={InputField}
             label="Last name"
+            validate={[isRequired]}
           />
         </Col>
       </Row>
@@ -67,6 +70,7 @@ const SignupForm = (props: Props) => {
                 type="text"
                 component={InputField}
                 label="Username"
+                validate={[isRequired]}
               />
             </Col>
           </Row>
@@ -82,6 +86,5 @@ const SignupForm = (props: Props) => {
 
 export default reduxForm({
   form: 'userSignupForm',
-  validate,
   destroyOnUnmount: false,
 })(SignupForm);

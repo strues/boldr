@@ -1,5 +1,5 @@
 import { push } from 'react-router-redux';
-import { api, API_PREFIX, setToken, removeToken } from '../../../core';
+import { api, API_PREFIX, getToken } from '../../../core';
 import * as notif from '../../../core/constants';
 import { sendNotification } from '../notifications/notifications';
 import * as t from './actionTypes';
@@ -169,6 +169,7 @@ const shouldFetchProfile = (state: Reducer, username: string): boolean => {
   return true;
 };
 export function editProfile(userData) {
+  console.log(userData);
   return dispatch => {
     dispatch(beginUpdateProfile());
     return api

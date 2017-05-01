@@ -259,7 +259,7 @@ export function uploadProfileImage(payload) {
       .post(`${API_PREFIX}/attachments`, data)
       .then(res => {
         const userData = {
-          id: res.data.user_id,
+          id: res.data.userId,
           profileImage: res.data.url,
         };
         dispatch({
@@ -288,7 +288,7 @@ export function uploadAvatarImage(payload) {
       .post(`${API_PREFIX}/attachments`, data)
       .then(res => {
         const userData = {
-          id: res.data.user_id,
+          id: res.data.userId,
           avatarUrl: res.data.url,
         };
         dispatch(editProfile(userData));

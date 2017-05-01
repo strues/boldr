@@ -59,7 +59,7 @@ export class ProfileContainer extends Component {
   uploadAvatarImg = payload => {
     this.props.dispatch(uploadAvatarImage(payload));
   };
-  handleDrawerClick = (e): Function => {
+  handleDrawerClick = (): Function => {
     this.props.dispatch(toggleDrawer());
   };
   uploadProfileImg = payload => {
@@ -101,8 +101,8 @@ const mapStateToProps = state => {
     user: state.users.me,
     profile: state.users.profile,
     isFetching: state.users.isFetching,
-    profileImage: state.admin.attachments.profileImage,
-    avatarImage: state.admin.attachments.avatarImage,
+    profileImage: state.users.profile.profileImage,
+    avatarImage: state.users.profile.avatarImage,
   };
 };
 

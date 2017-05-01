@@ -64,7 +64,7 @@ class Profile extends Component {
       showDropzone: false,
     });
     const payload = files[0];
-    console.log(payload);
+
     const isProf = this.state.profImg === true;
     isProf
       ? this.props.uploadProfileImg(payload)
@@ -118,13 +118,14 @@ class Profile extends Component {
       </Dropzone>
     );
   };
+  // @TODO: API URL
   render() {
     const { profile } = this.props;
     const classes = classnames(BASE_ELEMENT);
     const UserProfileBg = styled.div`
       width: 100%;
       height: 375px;
-      background-image: url(${profile.profileImage});
+      background-image: url(http://localhost:2121${profile.profileImage});
       background-size: cover;
     `;
     const close = (
