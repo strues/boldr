@@ -49,7 +49,7 @@ const Branding = (props: Props) => {
           onClick={closeHeaderDropdown}
         >
           <img
-            src="https://boldr.io/assets/boldr-text-logo.png"
+            src={siteLogo.value}
             alt="logo"
             className={cx('boldrui-sh__branding-logo')}
           />
@@ -57,6 +57,11 @@ const Branding = (props: Props) => {
       </div>
     </div>
   );
+};
+
+Branding.defaultProps = {
+  siteLogo: { value: '' },
+  siteName: { value: '' },
 };
 
 export default Branding;

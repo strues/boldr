@@ -8,8 +8,9 @@ import { Footer } from 'boldr-ui';
 
 import {
   fetchMainMenuIfNeeded,
-  getByLabel,
+  selectSettings,
   logout,
+  selectSettingFromList,
   selectMe,
 } from '../../state';
 import SiteHeader from '../../components/SiteHeader';
@@ -80,6 +81,7 @@ class BaseTemplate extends PureComponent {
         <SiteHeader
           auth={this.props.auth}
           logo={this.props.logo}
+          siteName={this.props.siteName}
           me={this.props.me}
           menu={this.props.menu.details}
           items={this.props.menu.items}
@@ -104,6 +106,9 @@ const mapStateToProps = (state: Object) => {
   return {
     me: selectMe(state),
     auth: state.auth,
+    settings: selectSettings(state),
+    logo: selectSettingFromList(state, 3),
+    siteName: selectSettingFromList(state, 1),
     menu: state.boldr.menus.main,
     isMobile: state.boldr.ui.isMobile,
   };
