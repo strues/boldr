@@ -55,6 +55,8 @@ export const UPDATE_SETTINGS_FAILURE =
 export const DELETE_SETTING = '@boldr/settings/DELETE_SETTING';
 export const FETCH_SETTING_SUCCESS = '@boldr/settings/FETCH_SETTING_SUCCESS';
 
+export const INITIAL_PAGE_LOAD = '@boldr/INITIAL_PAGE_LOAD';
+
 /**
  * Template action types
  * @type {String}

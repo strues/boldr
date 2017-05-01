@@ -24,4 +24,18 @@ const Toolbar = styled.div`
   align-items: center;
 `;
 
-export { NewPost, Toolbar, Inner };
+const DarkSegment = styled.div`
+  margin-bottom: 1.5rem;
+  padding: 1.5rem;
+  background: #2e363d;
+  border-radius: 3px;
+  box-shadow: 0 1px 1.5px 0 rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.24);
+`;
+
+const HelpTxt = styled.p`
+  font-size: 14px;
+  letter-spacing: 0.8;
+  color: #fff;
+`;
+
+export { NewPost, Toolbar, Inner, DarkSegment, HelpTxt };

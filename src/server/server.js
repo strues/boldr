@@ -1,8 +1,11 @@
 import http from 'http';
-import { resolve as pathResolve } from 'path';
+import https from 'https';
 import app from './app';
 
 const debug = require('debug')('boldr:server');
+
+https.globalAgent.maxSockets = 1000;
+http.globalAgent.maxSockets = 1000;
 
 const port = 3000;
 const server = http.createServer(app);

@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import EditorState from 'draft-js/lib/EditorState';
 import Dropzone from 'react-dropzone';
-import styled from 'styled-components';
 import Button from 'boldr-ui/lib/components/Button';
 import {
   InputField,
@@ -14,21 +13,16 @@ import {
   Headline,
   Paragraph,
   Label,
+  Block,
   FormGroup,
   Form,
-  Block,
 } from 'boldr-ui';
 
 import { isRequired } from '../../../../../../core/validations';
 import RenderTags from '../RenderTags';
 import FieldEditor from './FieldEditor';
-import { Inner, Toolbar, NewPost } from './NewPostStyled';
+import { Inner, Toolbar, NewPost, DarkSegment, HelpTxt } from './NewPostStyled';
 
-const HelpTxt = styled.p`
-  font-size: 14px;
-  letter-spacing: 0.8;
-  color: #fff;
-`;
 const statusOptions = [
   { text: 'Published', value: true },
   { text: 'Draft', value: false },
@@ -97,7 +91,7 @@ class NewPostForm extends Component {
                 </Paper>
               </Col>
               <Col xs={12} md={4}>
-                <Block dark>
+                <DarkSegment>
                   <Headline lightText type="h3">Content Tags</Headline>
                   <HelpTxt>Hit enter to save tag</HelpTxt>
                   <FormGroup>
@@ -109,7 +103,7 @@ class NewPostForm extends Component {
                       validate={[isRequired]}
                     />
                   </FormGroup>
-                </Block>
+                </DarkSegment>
                 <Block>
                   <FormGroup>
                     <Headline type="h3">

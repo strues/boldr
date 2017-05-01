@@ -19,6 +19,10 @@ describe('Boldr Reducer', () => {
         all: {},
         ids: [],
         isFetching: false,
+        meta: {
+          status: -1,
+          initialPageLoad: true,
+        },
       },
       ui: {
         drawer: false,

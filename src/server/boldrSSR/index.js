@@ -42,10 +42,10 @@ async function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
   // request.
   const routeIsMatched = matchRoutes(routes, req.url);
 
-  const createStore = req => configureStore({});
-
-  const history = createHistory();
-  const store = createStore(history);
+  const history = createHistory({ initialEntries: [req.url] });
+  const store = configureStore(history, {
+    boldr: { settings: { meta: { initialPageLoad: true } } },
+  });
 
   const routerContext = {};
   // Load data on server-side
@@ -68,7 +68,6 @@ async function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
       // render the application wrapped with provider, static router and the
       // store.
       const reactAppString = renderAppToString(store, routerContext, req);
-
       const helmet = Helmet.rewind();
       // render styled-components styleSheets to string.
       const styles = styleSheet.rules().map(rule => rule.cssText).join('\n');

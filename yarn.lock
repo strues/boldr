@@ -1242,9 +1242,9 @@ bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.6"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.6.tgz#53344adb14617a13f6e8dd2ce28905d1c0ba3215"
 
-boldr-ui@0.4.0-alpha.6:
-  version "0.4.0-alpha.6"
-  resolved "https://registry.yarnpkg.com/boldr-ui/-/boldr-ui-0.4.0-alpha.6.tgz#4a3faaee1af80b520deafac816354ef90f74ea2e"
+boldr-ui@0.4.0-beta.2:
+  version "0.4.0-beta.2"
+  resolved "https://registry.yarnpkg.com/boldr-ui/-/boldr-ui-0.4.0-beta.2.tgz#098fafa99792738f83a142e6d2d7817904291185"
   dependencies:
     animate-components "^0.8.1"
     boldr-utils "0.2.2"
@@ -3775,9 +3775,9 @@ ignore@^3.2.0:
   version "3.2.7"
   resolved "https://registry.yarnpkg.com/ignore/-/ignore-3.2.7.tgz#4810ca5f1d8eca5595213a34b94f2eb4ed926bbd"
 
-immutability-helper@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/immutability-helper/-/immutability-helper-2.1.2.tgz#734506440d7209b74664dcadaa8ba14e73f2185b"
+immutability-helper@^2.2.0:
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/immutability-helper/-/immutability-helper-2.2.0.tgz#c4385ad4f68315843efaf0cff3575ee82ffa405f"
   dependencies:
     invariant "^2.2.0"
 
@@ -4165,9 +4165,9 @@ istanbul-lib-source-maps@^1.1.1:
     rimraf "^2.4.4"
     source-map "^0.5.3"
 
-istanbul-reports@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/istanbul-reports/-/istanbul-reports-1.0.2.tgz#4e8366abe6fa746cc1cd6633f108de12cc6ac6fa"
+istanbul-reports@^1.0.2, istanbul-reports@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/istanbul-reports/-/istanbul-reports-1.1.0.tgz#1ef3b795889219cfb5fad16365f6ce108d5f8c66"
   dependencies:
     handlebars "^4.0.3"
 
@@ -6334,9 +6334,9 @@ react-dom@15.5.4, react-dom@^15.4.2:
     object-assign "^4.1.0"
     prop-types "~15.5.7"
 
-react-draft-wysiwyg@1.9.6:
-  version "1.9.6"
-  resolved "https://registry.yarnpkg.com/react-draft-wysiwyg/-/react-draft-wysiwyg-1.9.6.tgz#a1c468e13b647b2fcc288483667fa1aaa30a883e"
+react-draft-wysiwyg@1.9.8:
+  version "1.9.8"
+  resolved "https://registry.yarnpkg.com/react-draft-wysiwyg/-/react-draft-wysiwyg-1.9.8.tgz#d4cad68d39dcd4256fd4755e808e978d26aaa594"
   dependencies:
     classnames "^2.2.5"
     draftjs-utils "^0.7.5"

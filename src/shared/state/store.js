@@ -6,7 +6,7 @@ import thunk from 'redux-thunk';
 import api from '../core/api';
 import rootReducer from './reducers';
 
-export default function configureStore(preloadedState, history) {
+export default function configureStore(history, preloadedState) {
   const reduxRouterMiddleware = routerMiddleware(history);
 
   const middlewares = [thunk.withExtraArgument(api), reduxRouterMiddleware];
