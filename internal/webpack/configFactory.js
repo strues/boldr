@@ -1,14 +1,11 @@
 /* eslint-disable eqeqeq */
 import path from 'path';
 import webpack from 'webpack';
-import { sync as globSync } from 'glob';
 import AssetsPlugin from 'assets-webpack-plugin';
-import autoprefixer from 'autoprefixer';
 import nodeExternals from 'webpack-node-externals';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import appRootDir from 'app-root-dir';
 import WebpackMd5Hash from 'webpack-md5-hash';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 import NamedModulesPlugin from 'webpack/lib/NamedModulesPlugin';
 import { removeNil, mergeDeep, ifElse, logger } from 'boldr-utils';
 import config from '../../config';
@@ -137,6 +134,7 @@ export default function webpackConfigFactory(buildOptions) {
         IS_DEV: JSON.stringify(isDev),
         __SERVER__: JSON.stringify(isServer),
         DEBUG: JSON.stringify(process.env.DEBUG),
+        __USE_PROXY__: JSON.stringify(process.env.USE_PROXY),
       }),
 
       ifClient(

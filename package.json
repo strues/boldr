@@ -8,7 +8,8 @@
       "command": "babel-node internal/development",
       "env": {
         "NODE_ENV": "development",
-        "DEBUG": "boldr:*"
+        "DEBUG": "boldr:*",
+        "USE_PROXY": true
       }
     },
     "test": {
@@ -186,7 +187,8 @@
   "scripts": {
     "analyze": "babel-node internal/scripts/analyze --client",
     "babel": "NODE_ENV=production babel --ignore node_modules",
-    "build": "NODE_ENV=production babel-node internal/scripts/build --optimize",
+    "build": "NODE_ENV=production USE_PROXY=false babel-node internal/scripts/build --optimize",
+    "build:proxy": "NODE_ENV=production USE_PROXY=true babel-node internal/scripts/build --optimize",
     "build:test": "babel-node internal/scripts/build",
     "clean": "babel-node internal/scripts/clean",
     "coveralls": "cat ./coverage/lcov.info | coveralls",

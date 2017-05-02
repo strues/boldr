@@ -101,7 +101,7 @@ class Media extends Component {
                   <VanishIn transition="1s" key={m.id}>
                     <MediaItem>
                       <Photo
-                        src={`http://localhost:2121/uploads/${m.thumbName}`}
+                        src={`/uploads/${m.thumbName}`}
                         alt={m.fileName}
                         role="presentation"
                         cta={

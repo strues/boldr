@@ -31,10 +31,7 @@ export class FileEditor extends Component {
       <div>
         <Row>
           <Col xs={12} md={5}>
-            <Image
-              imgSrc={`http://localhost:2121${this.props.currentFile.url}`}
-              width="400px"
-            />
+            <Image imgSrc={this.props.currentFile.url} width="400px" />
           </Col>
           <Col xs={12} md={7}>
             <Paper
