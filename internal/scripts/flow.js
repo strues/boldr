@@ -5,14 +5,11 @@
 import { existsSync } from 'fs';
 import { resolve as resolvePath } from 'path';
 import appRootDir from 'app-root-dir';
-import { exec, log } from '../utils';
+import logger from 'boldr-utils/es/logger';
+import { exec } from '../utils';
 
 if (!existsSync(resolvePath(appRootDir.get(), './flow-typed'))) {
-  log({
-    title: 'flow',
-    level: 'warn',
-    message: 'You haven\'t installed the flow-typed definitions. Please run the `npm run flow:defs` command if you would like to install them.',
-  });
+  logger.info('You haven\'t installed the flow-typed definitions. Please run the `npm run flow:defs` command if you would like to install them.'); // eslint-disable-line
 }
 
 try {
