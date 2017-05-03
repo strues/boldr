@@ -1,6 +1,5 @@
 /* eslint-disable dot-notation */
 import axios from 'axios';
-import config from '../../../config';
 import { getToken } from './authentication/token';
 
 const isBrowser = typeof window === 'object';
