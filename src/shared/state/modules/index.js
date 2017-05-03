@@ -42,6 +42,7 @@ import {
   toggleDrawer,
   showHideSidebar,
   expandCollapseSideMenu,
+  layoutSelector,
 } from './boldr';
 
 import {
@@ -119,6 +120,7 @@ export {
   setMobileDevice,
   makeSelectMobile,
   toggleDrawer,
+  layoutSelector,
   // media
   mediaReducer,
   fetchMediaIfNeeded,

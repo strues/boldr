@@ -22,7 +22,7 @@ type Props = {
   navigate: () => void,
   actions: Object,
   menu: Object,
-  settings: Object,
+  siteName: Object,
   logo: Object,
   boldr: Object,
   auth: Object,
@@ -166,7 +166,7 @@ class SiteHeader extends Component {
   }
 
   render() {
-    const { className, theme } = this.props;
+    const { className, theme, logo, siteName } = this.props;
     const { dropdownIsOpen, focusable } = this.state;
     return (
       <header
@@ -186,7 +186,8 @@ class SiteHeader extends Component {
               toggleDropdownHandler={this.handleDropdown}
               dropdownOpen={dropdownIsOpen}
               theme={theme}
-              siteName="Boldr"
+              siteName={siteName}
+              siteLogo={logo}
               closeHeaderDropdown={this.closeDropdownOnButtonClick()}
             />
             <nav
@@ -200,13 +201,7 @@ class SiteHeader extends Component {
             >
               {this.renderMenuItems()}
             </nav>
-            <div
-              className={cxN(
-                cx('boldrui-sh__menu-right', {
-                  'boldrui-sh__dropdown-open': dropdownIsOpen,
-                }),
-              )}
-            >
+            <div className={cxN(cx('boldrui-sh__menu-right'))}>
               {this.renderAuthDependent()}
             </div>
           </div>

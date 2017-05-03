@@ -1,5 +1,6 @@
 /* @flow */
 import React from 'react';
+// $FlowIssue
 import styled from 'styled-components';
 import { Grid, Row, Col, Loader, FontIcon, Button } from 'boldr-ui';
 
@@ -21,7 +22,7 @@ const FeaturedArea = styled.section`
   margin-bottom: 40px;
 `;
 const PostListing = (props: Props) => {
-  if (props.isFetching || !props.posts) {
+  if (props.isFetching) {
     return <Loader />;
   }
 

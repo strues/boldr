@@ -38,7 +38,7 @@ class MediaManager extends Component {
                 <Col xs={6}>
                   <MediaContent>
                     <Zoom duration="1s">
-                      <Photo src={`http://localhost:2121${media.url}`} />
+                      <Photo src={media.url} />
                     </Zoom>
                   </MediaContent>
                 </Col>

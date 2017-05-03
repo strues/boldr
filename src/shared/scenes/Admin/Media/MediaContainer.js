@@ -7,8 +7,9 @@ import {
   fetchMediaIfNeeded,
   getMedia,
   deleteMedia,
-} from '../../../state/modules/media';
-import Media from './Media';
+  selectSettingFromList,
+} from '../../../state';
+
 import VisibleMedia from './VisibleMedia';
 
 type Props = {
@@ -16,6 +17,7 @@ type Props = {
   fetchMediaIfNeeded: () => {},
   hideModal: () => void,
   showModal: () => void,
+  site: Object,
   ui: Object,
   media: Array<Object>,
 };
@@ -32,12 +34,15 @@ export class MediaContainer extends Component {
   props: Props;
 
   render() {
-    return <VisibleMedia media={this.props.media} />;
+    return (
+      <VisibleMedia media={this.props.media} siteName={this.props.site.value} />
+    );
   }
 }
 
 const mapStateToProps = state => {
   return {
+    site: selectSettingFromList(state, 1),
     ui: state.boldr.ui,
     media: getMedia(state),
   };

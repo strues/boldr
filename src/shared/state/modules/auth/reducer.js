@@ -1,4 +1,3 @@
-import { combineReducers } from 'redux';
 import * as t from './actionTypes';
 
 /**
@@ -20,6 +19,7 @@ function authReducer(state = INITIAL_STATE, action = {}) {
   switch (action.type) {
     case t.LOGIN_FAILURE:
     case t.SIGNUP_USER_FAILURE:
+    case t.CHECK_AUTH_FAILURE:
       return {
         ...state,
         loading: false,

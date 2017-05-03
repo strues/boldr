@@ -58,6 +58,7 @@ $boldr-ns: 'boldrui-';
 }
 
 /// This is the UL
+
 .#{$boldr-ns}sh__nav {
   list-style-type: none;
   margin: 0;
@@ -114,6 +115,7 @@ $boldr-ns: 'boldrui-';
 }
 
 @media (max-width: 991px) {
+
   .#{$boldr-ns}sh__menu-right.#{$boldr-ns}sh__dropdown-open {
     background-color: #fff;
     bottom: 0;

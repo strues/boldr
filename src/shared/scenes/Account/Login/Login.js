@@ -1,6 +1,5 @@
 /* @flow */
 import React from 'react';
-import Link from 'react-router-dom/Link';
 import Helmet from 'react-helmet';
 import { FormCard } from 'boldr-ui';
 
@@ -10,14 +9,17 @@ type Props = {
   onSubmit: () => void,
 };
 const Login = (props: Props) => {
+  function submitLogin(formInput) {
+    props.onSubmit(formInput);
+  }
   return (
     <div className="boldr-form__login">
       <Helmet title="Login" />
       <FormCard
-        title="Log In"
+        title="Log in to your account"
         lightText
         skinny
-        form={<LoginForm onSubmit={props.onSubmit} />}
+        form={<LoginForm onSubmit={submitLogin} />}
       />
     </div>
   );

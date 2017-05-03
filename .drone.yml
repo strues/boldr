@@ -1,4 +1,4 @@
-debug: true
+debug: false
 pipeline:
   build:
     image: node:7.9
@@ -6,14 +6,3 @@ pipeline:
       - yarn
       - yarn build:test
       - yarn test
-
-  # publish:
-  #   docker:
-  #     registry: registry.boldr.io
-  #     username: strues
-  #     password: $$PASSWORD
-  #     email: steven@strues.io
-  #     repo: boldr/cms
-  #     tag: $$BRANCH
-  #     file: Dockerfile
-  #     insecure: false

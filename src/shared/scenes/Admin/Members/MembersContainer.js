@@ -78,7 +78,7 @@ export class MembersContainer extends Component {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   return {
     members: getUsers(state),
     currentMember: state.admin.members.currentMember,

@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import { Link } from 'react-router-dom';
+import Link from 'react-router-dom/Link';
 import Helmet from 'react-helmet';
 import { FormCard } from 'boldr-ui';
 
@@ -14,13 +14,16 @@ const Signup = (props: { onSubmit: () => void }) => {
       <Link to="/account/login"> Login</Link>
     </div>
   );
+  function submitSignup(formInput) {
+    props.onSubmit(formInput);
+  }
   return (
     <BaseTemplate helmetMeta={<Helmet title="Signup" />}>
       <div className="boldr-form__signup">
         <FormCard
-          width={600}
-          title="Signup"
-          form={<SignupForm onSubmit={props.onSubmit} />}
+          skinny={false}
+          title="Create an account"
+          form={<SignupForm onSubmit={submitSignup} />}
           extra1={formBottom}
         />
       </div>

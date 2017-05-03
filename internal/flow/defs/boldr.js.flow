@@ -143,3 +143,16 @@ declare type MediaFile = {
   type: MediaType,
   owner: string,
 };
+
+declare interface userSignupFormInput {
+  email: string,
+  firstName: string,
+  lastName: string,
+  password: string,
+  username: string,
+}
+
+declare interface userLoginFormInput {
+  email: string,
+  password: string,
+}

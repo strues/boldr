@@ -1,14 +1,8 @@
-import { push } from 'react-router-redux';
-import { api, getToken, API_PREFIX } from '../../../../core';
+import { api, API_PREFIX } from '../../../../core';
 import * as notif from '../../../../core/constants';
-import {
-  sendNotification,
-} from '../../../../state/modules/notifications/notifications';
+import { sendNotification, editProfile } from '../../../../state';
 
-import { editProfile } from '../../../../state/modules/users/actions';
 import * as t from '../actionTypes';
-
-const token = getToken();
 
 /**
   * FETCH MEDIA ACTIONS
@@ -91,12 +85,14 @@ export function uploadFiles(payload) {
 }
 
 function beginUpload() {
+  /* istanbul ignore next */
   return {
     type: t.UPLOAD_ATTACHMENT_REQUEST,
   };
 }
 
 function uploadSuccess(res) {
+  /* istanbul ignore next */
   return {
     type: t.UPLOAD_ATTACHMENT_SUCCESS,
     payload: res.data,
@@ -104,6 +100,7 @@ function uploadSuccess(res) {
 }
 
 function uploadFail(err) {
+  /* istanbul ignore next */
   return {
     type: t.UPLOAD_ATTACHMENT_FAILURE,
     error: err,
@@ -122,7 +119,7 @@ export function uploadPostImage(payload) {
     const data = new FormData();
     data.append('payload.name', payload);
     return api
-      .post(`${API_PREFIX}/attachments`, data)
+      .post(`${API_PREFIX}/media`, data)
       .then(res => {
         dispatch(uploadPostImageSuccess(res));
         dispatch(sendNotification(notif.MSG_UPLOAD_SUCCESS));
@@ -141,6 +138,7 @@ function beginUploadPostImage() {
 }
 
 function uploadPostImageSuccess(res) {
+  /* istanbul ignore next */
   return {
     type: t.UPLOAD_POST_IMG_SUCCESS,
     payload: res.data,

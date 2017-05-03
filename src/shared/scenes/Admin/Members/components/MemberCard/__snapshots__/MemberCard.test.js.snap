@@ -1,60 +1,67 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<MemberCard /> should render the user props 1`] = `
-<Card
-  expanderIconChildren="keyboard_arrow_down"
-  expanderIconClassName="material-icons"
-  expanderTooltipPosition="left"
->
-  <CardTitle
-    avatar={
-      <Avatar
-        role="presentation"
-        src="http://img.com/img.png"
-        suffixes={
-          Array [
-            "red",
-            "pink",
-            "purple",
-            "deep-purple",
-            "indigo",
-            "blue",
-            "light-blue",
-            "cyan",
-            "teal",
-            "green",
-            "light-green",
-            "lime",
-            "yellow",
-            "amber",
-            "orange",
-            "deep-orange",
-            "brown",
-            "grey",
-            "blue-grey",
-          ]
-        }
-      />
-    }
-    subtitle="admin"
-    title="joe"
-  />
-  <CardText
-    component="section"
-  >
-    abad-12dc-3dfd
-    test@test.com
-  </CardText>
-  <CardActions>
-    <ButtonTooltipedInked
-      inkTransitionEnterTimeout={450}
-      inkTransitionLeaveTimeout={300}
-      inkTransitionOverlap={150}
-      label="Edit User"
+<styled.li>
+  <styled.div>
+    <styled.ul>
+      <styled.li>
+        <Avatar
+          role="presentation"
+          src="http://img.com/img.png"
+          suffixes={
+            Array [
+              "red",
+              "pink",
+              "purple",
+              "deep-purple",
+              "indigo",
+              "blue",
+              "light-blue",
+              "cyan",
+              "teal",
+              "green",
+              "light-green",
+              "lime",
+              "yellow",
+              "amber",
+              "orange",
+              "deep-orange",
+              "brown",
+              "grey",
+              "blue-grey",
+            ]
+          }
+        />
+      </styled.li>
+      <styled.li>
+        joe
+      </styled.li>
+      <styled.li>
+        Role: 
+        admin
+      </styled.li>
+      <styled.li>
+         
+      </styled.li>
+      <styled.li>
+        test@test.com
+      </styled.li>
+    </styled.ul>
+  </styled.div>
+  <styled.div>
+    <Button
+      disabled={false}
+      icon={false}
+      isAnchor={false}
+      isFullWidth={false}
+      isPending={false}
+      isSmall={false}
+      isTiny={false}
       onClick={[Function]}
-      primary={true}
-      raised={true}
-    />
-  </CardActions>
-</Card>
+      theme="primary"
+    >
+      Edit User
+    </Button>
+  </styled.div>
+</styled.li>
 `;

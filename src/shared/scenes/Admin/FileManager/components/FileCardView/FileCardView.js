@@ -1,8 +1,6 @@
 /* @flow */
 import React from 'react';
-import styled from 'styled-components';
-
-import {Grid, Row, Col} from 'boldr-ui';
+import { Grid, Row, Col } from 'boldr-ui';
 import File from '../File';
 
 type Props = {

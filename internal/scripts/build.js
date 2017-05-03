@@ -17,7 +17,6 @@ exec(`rimraf ${pathResolve(appRootDir.get(), config('buildOutputPath'))}`);
 
 // Get our "fixed" bundle names
 Object.keys(config('bundles'))
-// And the "additional" bundle names
 .concat(Object.keys(config('additionalNodeBundles')))
 // And then build them all.
 .forEach((bundleName) => {

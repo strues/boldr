@@ -5,10 +5,9 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 
 import { LAYOUTS } from '../../../core/constants';
-import { changeLayout } from '../../../state/modules/boldr/ui';
+import { changeLayout, layoutSelector } from '../../../state/modules/boldr/ui';
 import { getPosts, fetchPostsIfNeeded } from '../state/posts';
 import { fetchTagsIfNeeded } from '../state/tags/actions';
-import { getTags } from '../state/tags/selectors';
 import BaseTemplate from '../../../templates/BaseTemplate';
 import VisiblePostListing from './VisiblePostListing';
 
@@ -31,8 +30,10 @@ export class PostListingContainer extends Component {
   };
 
   componentDidMount() {
-    this.props.dispatch(fetchPostsIfNeeded());
-    this.props.dispatch(fetchTagsIfNeeded());
+    Promise.all([
+      this.props.dispatch(fetchPostsIfNeeded()),
+      this.props.dispatch(fetchTagsIfNeeded()),
+    ]);
   }
 
   props: Props;
@@ -60,7 +61,7 @@ const mapStateToProps = state => {
   return {
     listTags: state.entities.tags,
     posts: getPosts(state),
-    layout: state.boldr.ui.layout,
+    layout: layoutSelector(state),
     isFetching: state.blog.posts.isFetching,
   };
 };

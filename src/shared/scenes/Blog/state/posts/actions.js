@@ -1,4 +1,5 @@
 /* @flow */
+// $FlowIssue
 import { normalize } from 'normalizr';
 import api, { API_PREFIX } from '../../../../core/api';
 import * as notif from '../../../../core/constants';

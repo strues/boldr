@@ -30,7 +30,7 @@ import NewPostContainer from './scenes/Admin/Post/NewPost/NewPostContainer';
 import FileManagerContainer
   from './scenes/Admin/FileManager/FileManagerContainer';
 import FileEditor from './scenes/Admin/FileManager/FileEditor';
-import Navigation from './scenes/Admin/Navigation';
+import NavigationContainer from './scenes/Admin/Navigation/NavigationContainer';
 import Members from './scenes/Admin/Members';
 import Settings from './scenes/Admin/Settings';
 import TagsContainer from './scenes/Admin/Tags/TagsContainer';
@@ -192,7 +192,7 @@ export default [
           {
             path: '/admin/navigation',
             exact: true,
-            component: Navigation,
+            component: NavigationContainer,
             loadData: async (dispatch: Dispatch) =>
               Promise.all([await dispatch(fetchMainMenuIfNeeded())]),
           },

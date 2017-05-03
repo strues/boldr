@@ -1,5 +1,5 @@
-import {createSelector} from 'reselect';
-import {selectBoldr} from '../selectors';
+import { createSelector } from 'reselect';
+import { selectBoldr } from '../selectors';
 /**
   * UI SELECTORS
   *
@@ -12,3 +12,5 @@ export const makeSelectUi = () =>
 
 export const makeSelectMobile = () =>
   createSelector(selectUi, uiState => uiState.isMobile);
+
+export const layoutSelector = state => state.boldr.ui.layout;

@@ -1,15 +1,12 @@
 import React from 'react';
 import {
-  Avatar,
   CardTitle,
   Card,
   FontIcon,
   CardActions,
-  CardText,
   Button,
   Media,
   MediaOverlay,
-  Heading,
 } from 'boldr-ui';
 
 import Link from 'react-router-dom/Link';
@@ -32,7 +29,7 @@ const File = (props: Props) => {
   }
 
   function handleSelect() {
-    const {file} = props;
+    const { file } = props;
     props.selectFile(file);
   }
 
