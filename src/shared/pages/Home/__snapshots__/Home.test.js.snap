@@ -18,9 +18,8 @@ exports[`<Home /> renders snapshot 1`] = `
       <Hero
         bgColor="#01579b"
       >
-        <Styled(Component)
-          palette="grayscale"
-          size={1}
+        <Headline
+          type="h1"
         >
           A
            
@@ -35,7 +34,7 @@ exports[`<Home /> renders snapshot 1`] = `
           </span>
            
           content management framework.
-        </Styled(Component)>
+        </Headline>
       </Hero>
     }
   >
