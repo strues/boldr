@@ -20,6 +20,7 @@ const PostTableBody = (props: Props) => {
           published={post.published}
           createdAt={post.createdAt}
           featureImage={post.featureImage}
+          handleDeleteClick={props.handleDeleteClick}
         />
       ))}
     </TableBody>

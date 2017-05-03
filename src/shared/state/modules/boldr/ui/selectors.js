@@ -12,3 +12,5 @@ export const makeSelectUi = () =>
 
 export const makeSelectMobile = () =>
   createSelector(selectUi, uiState => uiState.isMobile);
+
+export const layoutSelector = state => state.boldr.ui.layout;

@@ -15,8 +15,6 @@
   "globals": {
     "__SERVER__": true,
     "__USE_PROXY__": true,
-    "React": true,
-    "expect": true,
   },
   "rules": {
     "id-match": 0,

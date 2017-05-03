@@ -31,6 +31,7 @@ import {
   toggleDrawer,
   showHideSidebar,
   expandCollapseSideMenu,
+  layoutSelector,
 } from './ui';
 
 import boldrReducer from './reducer';
@@ -69,4 +70,5 @@ export {
   toggleDrawer,
   showHideSidebar,
   expandCollapseSideMenu,
+  layoutSelector,
 };

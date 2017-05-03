@@ -6,8 +6,8 @@ import Signup from './Signup';
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSubmit: submit => {
-      dispatch(doSignup(submit));
+    onSubmit: formInput => {
+      dispatch(doSignup(formInput));
     },
   };
 };

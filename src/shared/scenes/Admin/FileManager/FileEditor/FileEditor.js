@@ -21,8 +21,8 @@ export class FileEditor extends Component {
   handleSubmit(values: Object) {
     const attachmentData = {
       id: this.props.currentFile.id,
-      file_name: values.file_name,
-      file_description: values.file_description,
+      fileName: values.fileName,
+      fileDescription: values.fileDescription,
     };
     this.props.updateAttachment(attachmentData);
   }
@@ -31,7 +31,12 @@ export class FileEditor extends Component {
       <div>
         <Row>
           <Col xs={12} md={5}>
-            <Image imgSrc={this.props.currentFile.url} width="400px" />
+            <Image
+              src={this.props.currentFile.url}
+              alt="current file"
+              width={600}
+              height={240}
+            />
           </Col>
           <Col xs={12} md={7}>
             <Paper

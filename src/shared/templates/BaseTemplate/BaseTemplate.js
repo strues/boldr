@@ -1,5 +1,6 @@
 /* @flow */
 import React, { PureComponent } from 'react';
+// $FlowIssue
 import styled from 'styled-components';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
@@ -25,6 +26,7 @@ type Props = {
   footer?: ReactElement,
   navigate: Function,
   dispatch: Function,
+  siteName: string,
   actions: Object,
   me: ?Object,
   isMobile: Boolean,

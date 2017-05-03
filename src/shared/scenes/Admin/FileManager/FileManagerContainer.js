@@ -35,10 +35,10 @@ class FileManagerContainer extends Component {
     const fileUrl = splitUrl[0];
 
     const payload = {
-      file_name: signResult.file_name,
-      original_name: signResult.original_name,
-      file_type: signResult.file_type,
-      s3_key: signResult.s3_key,
+      fileName: signResult.fileName,
+      originalName: signResult.originalName,
+      fileType: signResult.fileType,
+      s3Key: signResult.s3Key,
       url: fileUrl,
     };
     this.props.dispatch(uploadFiles(payload));

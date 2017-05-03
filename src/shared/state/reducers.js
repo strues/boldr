@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import { routerReducer as routing } from 'react-router-redux';
+import { routerReducer } from 'react-router-redux';
 
 import { blogReducer } from '../scenes/Blog/state';
 import { adminReducer } from '../scenes/Admin/state';
@@ -24,7 +24,7 @@ const rootReducer = combineReducers({
   notifications: notificationReducer,
   entities: entitiesReducer,
   form: formReducer,
-  routing,
+  router: routerReducer,
 });
 
 export default rootReducer;

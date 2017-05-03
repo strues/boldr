@@ -27,8 +27,8 @@ export default class FieldEditor extends Component {
     const { editorState } = this.state;
     return (
       <Editor
-        editorStyle={editorStyle}
         {...input}
+        editorStyle={editorStyle}
         onEditorStateChange={this.onChange}
         editorState={editorState}
         placeholder={placeholder}

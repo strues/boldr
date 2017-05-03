@@ -4,25 +4,16 @@ import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import filter from 'lodash/filter';
 import Link from 'react-router-dom/Link';
+// $FlowIssue
 import styled from 'styled-components';
 import { VanishIn } from 'animate-components';
-import {
-  Grid,
-  Col,
-  Row,
-  HorizontalRule,
-  Block,
-  Heading,
-  Photo,
-  Paper,
-  FontIcon,
-  Button,
-} from 'boldr-ui';
+import { Col, Row, Headline, Photo, Button } from 'boldr-ui';
 
 type Props = {
   media: Array<Object>,
   deleteMedia: () => void,
   selectMedia: () => void,
+  siteName: string,
 };
 const MediaList = styled.ul`
   flex-flow: row wrap;
@@ -94,7 +85,9 @@ class Media extends Component {
             </MediaSidePanel>
           </Col>
           <Col xs={12} md={11}>
-            <Heading size={3}>Media</Heading>
+            <Headline type="h2">
+              {this.props.siteName}'s Media Gallery
+            </Headline>
             <Row>
               <MediaList>
                 {this.state.currentlyVisible.map(m => (

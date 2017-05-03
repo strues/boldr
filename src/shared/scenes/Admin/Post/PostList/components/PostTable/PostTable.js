@@ -2,22 +2,9 @@
 /* eslint-disable react/prop-types, react/jsx-no-bind */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Link from 'react-router-dom/Link';
 import sort from 'boldr-utils/es/logic/sort';
-import { format } from 'date-fns';
-import {
-  Button,
-  FontIcon,
-  DataTable,
-  TableHeader,
-  TableBody,
-  TableRow,
-  TableColumn,
-  TablePagination,
-  Avatar,
-} from 'boldr-ui';
+import { DataTable } from 'boldr-ui';
 
-import { selectPost } from '../../../../../Blog/state';
 import PostTableHeader from './PostTableHeader';
 import PostTableBody from './PostTableBody';
 import TableControls from './TableControls';
@@ -25,7 +12,7 @@ import TableControls from './TableControls';
 type Props = {
   posts: Array<Post>,
   id: String,
-  onRowToggle: Function,
+  handleDeleteClick: Function,
   dispatch: Function,
   data: any,
 };
@@ -91,7 +78,10 @@ class PostTable extends Component {
             titleSorted={titleSorted}
             sort={this.sort}
           />
-          <PostTableBody posts={sortedPosts} />
+          <PostTableBody
+            posts={sortedPosts}
+            handleDeleteClick={this.props.handleDeleteClick}
+          />
         </DataTable>
       </div>
     );

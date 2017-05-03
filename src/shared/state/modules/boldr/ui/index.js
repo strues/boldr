@@ -8,7 +8,7 @@ import {
   showHideSidebar,
   expandCollapseSideMenu,
 } from './actions';
-import { makeSelectUi, makeSelectMobile } from './selectors';
+import { makeSelectUi, makeSelectMobile, layoutSelector } from './selectors';
 
 export default uiReducer;
 
@@ -23,4 +23,5 @@ export {
   toggleDrawer,
   showHideSidebar,
   expandCollapseSideMenu,
+  layoutSelector,
 };

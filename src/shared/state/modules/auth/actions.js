@@ -5,16 +5,16 @@ import { sendNotification } from '../notifications/notifications';
 import * as t from './actionTypes';
 
 /**
-  * SIGNUP ACTIONS
-  * -------------------------
-  * @exports signup
-  *****************************************************************/
-
-export function doSignup(data) {
+ * @name doSignup
+ * thunk action sending data to create a user to the api
+ * @param  {Object} formInput contains firstName, lastName, email, password,
+ *                            & username from the userSignupForm
+ */
+export function doSignup(formInput: userSignupFormInput) {
   return dispatch => {
     dispatch({ type: t.SIGNUP_USER_REQUEST });
     return api
-      .post(`${API_PREFIX}/auth/signup`, data)
+      .post(`${API_PREFIX}/auth/signup`, formInput)
       .then(res => {
         if (res.status !== 201) {
           const err = JSON.stringify(res.data.message.message);
@@ -41,17 +41,30 @@ const signUpError = err => {
 };
 
 /**
-  * LOGIN ACTIONS
-  * -------------------------
-  * @exports login
-  *****************************************************************/
-
-export function doLogin(data) {
+ * @name doLogin
+ * thunk action sending data to login a user
+ * @param  {Object} formInput contains email & password from the userLoginForm
+ */
+export function doLogin(formInput: userLoginFormInput) {
   return dispatch => {
     dispatch({ type: t.LOGIN_REQUEST });
     return api
-      .post(`${API_PREFIX}/auth/login`, data)
+      .post(`${API_PREFIX}/auth/login`, formInput)
       .then(res => {
+        if (res.status !== 200) {
+          const err = JSON.stringify(res.data.message.message);
+          dispatch({
+            type: t.LOGIN_FAILURE,
+            error: err,
+          });
+          return dispatch(
+            sendNotification({
+              message: 'There was a problem logging you in.',
+              kind: 'error',
+              dismissAfter: 3000,
+            }),
+          );
+        }
         setToken(res.data.token);
         dispatch({
           type: t.LOGIN_SUCCESS,

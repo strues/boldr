@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 import NewPostForm from './components/NewPostForm';
 
 type Props = {
-  onFormSubmit: () => void,
+  onFormSubmit: Function,
   postImage: string,
   uploadImageForPost: () => void,
 };

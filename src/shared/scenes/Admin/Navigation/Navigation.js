@@ -1,44 +1,35 @@
 /* @flow */
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import {
   List,
   ListItem,
   Button,
   FontIcon,
+  Headline,
   Paper,
+  Divider,
   Row,
   Col,
   Modal,
 } from 'boldr-ui';
 
-import { showModal, hideModal } from '../../../state/modules/boldr/ui/actions';
-import {
-  updateMenuDetails,
-  addMenuDetail,
-} from '../../../state/modules/boldr/menu';
 import NavigationEditor from './components/NavigationEditor';
 import NavigationForm from './components/NavigationForm';
 
 type Props = {
   mainMenu: Object,
-  ui: Object,
+  modal: boolean,
   dispatch?: Function,
   handleItemClick?: Function,
   updateMenuDetails: Function,
   addMenuDetail: Function,
   hideModal: Function,
   showModal: Function,
+  siteName: Object,
 };
 
 class Navigation extends Component {
-  constructor() {
-    super();
-    (this: any).handleItemClick = this.handleItemClick.bind(this);
-    (this: any).closeModal = this.closeModal.bind(this);
-    (this: any).openModal = this.openModal.bind(this);
-  }
   state: Object = {
     open: false,
     detail: {
@@ -62,16 +53,16 @@ class Navigation extends Component {
   onFormSubmit = values => {
     this.props.addMenuDetail(values);
   };
-  closeModal() {
+  closeModal = () => {
     this.props.hideModal();
-  }
-  openModal() {
+  };
+  openModal = () => {
     this.props.showModal();
-  }
+  };
 
   props: Props;
 
-  handleItemClick(item: Object) {
+  handleItemClick = (item: Object) => {
     this.setState({
       detail: {
         name: item.name,
@@ -86,11 +77,11 @@ class Navigation extends Component {
         children: item.children,
       },
     });
-  }
+  };
 
   render() {
     const { mainMenu } = this.props;
-    const listItems = mainMenu.details.map((item, i) => {
+    const listItems = mainMenu.details.map(item => {
       return (
         <ListItem
           key={item.id}
@@ -103,7 +94,16 @@ class Navigation extends Component {
     return (
       <div>
         <Helmet title="Admin: Navigation" />
+        <Headline type="h1">
+          Edit {this.props.siteName.value}'s navigation
+        </Headline>
+        <Divider style={{ marginBottom: '30px' }} />
         <Row>
+          <Col xs>
+            <Paper zDepth={1}>
+              <Headline type="h3">For now only main nav</Headline>
+            </Paper>
+          </Col>
           <Col xs>
             <Paper zDepth={1}>
               <List className="navigation__list">
@@ -124,7 +124,7 @@ class Navigation extends Component {
           </Col>
         </Row>
         <Modal
-          visible={this.props.ui.modal}
+          visible={this.props.modal}
           title="Add a link"
           onClose={this.closeModal}
         >
@@ -135,15 +135,4 @@ class Navigation extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    mainMenu: state.boldr.menus.main,
-    ui: state.boldr.ui,
-  };
-}
-export default connect(mapStateToProps, {
-  updateMenuDetails,
-  addMenuDetail,
-  showModal,
-  hideModal,
-})(Navigation);
+export default Navigation;

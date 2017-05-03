@@ -4,8 +4,8 @@ import Login from './Login';
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSubmit: submit => {
-      dispatch(doLogin(submit));
+    onSubmit: formInput => {
+      dispatch(doLogin(formInput));
     },
   };
 };

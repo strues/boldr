@@ -1,43 +1,33 @@
 /* @flow */
 /* eslint-disable react/prop-types, react/jsx-no-bind */
 import React, { PureComponent } from 'react';
-import { connect } from 'react-redux';
 import Link from 'react-router-dom/Link';
-import cn from 'classnames';
 import { format } from 'date-fns';
-import {
-  Button,
-  FontIcon,
-  DataTable,
-  TableHeader,
-  TableBody,
-  TableRow,
-  TableColumn,
-  TablePagination,
-  Avatar,
-} from 'boldr-ui';
-
-import { selectPost } from '../../../../../Blog/state';
+import { Button, TableRow, TableColumn, Avatar } from 'boldr-ui';
 
 type Props = {
-  posts: Array<Post>,
-  id: String,
-  onRowToggle: Function,
-  dispatch: Function,
-  data: any,
+  featureImage: string,
+  id: string,
+  slug: string,
+  published: boolean,
+  createdAt: Date,
+  title: string,
+  handleDeleteClick: Function,
 };
 
 class PostTableRow extends PureComponent {
+  deletePost = () => {
+    const { id } = this.props;
+    this.props.handleDeleteClick(id);
+  };
+  props: Props;
   render() {
     const {
       featureImage,
       slug,
-      id,
       title,
       published,
       createdAt,
-      handleDeleteClick,
-      className,
       ...props
     } = this.props;
 
@@ -54,7 +44,7 @@ class PostTableRow extends PureComponent {
         </TableColumn>
         <TableColumn numeric>{format(createdAt, 'MMMM Do YYYY')}</TableColumn>
         <TableColumn>
-          <Button onClick={() => handleDeleteClick(id)} icon>
+          <Button onClick={this.deletePost} icon>
             delete_forever
           </Button>
         </TableColumn>

@@ -25,7 +25,7 @@ type Props = {
   route: Object,
   copyright: string,
   dispatch: () => void,
-  routing: Object,
+  router: Object,
 };
 
 export class AdminDashboard extends Component {
@@ -40,7 +40,7 @@ export class AdminDashboard extends Component {
   };
 
   render() {
-    const { route, me, ui, routing, location: { pathname } } = this.props;
+    const { route, me, ui, router, location: { pathname } } = this.props;
 
     // baseLink,
     return (
@@ -49,7 +49,7 @@ export class AdminDashboard extends Component {
           <Sidebar
             items={sidebarLinks}
             activeItem={pathname}
-            location={routing.location.pathname}
+            location={router.location.pathname}
             visible={ui.visible}
             expanded={ui.expanded}
             onExpandCollapse={this.onExpandCollapse}
@@ -87,7 +87,7 @@ function mapStateToProps(state) {
     dashboard: state.admin.dashboard,
     boldr: state.boldr,
     me: state.users.me,
-    routing: state.routing,
+    router: state.router,
     ui: state.boldr.ui,
   };
 }
