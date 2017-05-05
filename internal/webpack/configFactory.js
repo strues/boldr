@@ -4,7 +4,10 @@ import webpack from 'webpack';
 import AssetsPlugin from 'assets-webpack-plugin';
 import nodeExternals from 'webpack-node-externals';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
+import CircularDependencyPlugin from 'circular-dependency-plugin';
 import appRootDir from 'app-root-dir';
+import BabiliPlugin from 'babili-webpack-plugin';
 import WebpackMd5Hash from 'webpack-md5-hash';
 import NamedModulesPlugin from 'webpack/lib/NamedModulesPlugin';
 import { removeNil, mergeDeep, ifElse, logger } from 'boldr-utils';
@@ -61,8 +64,7 @@ export default function webpackConfigFactory(buildOptions) {
     entry: {
       index: removeNil([
         ifDevClient(
-          () =>
-            `webpack-hot-middleware/client?reload=true&path=http://${config('host')}:${config('hmrPort')}/__webpack_hmr`,
+          () => `webpack-hot-middleware/client?reload=true&path=http://${config('host')}:${config('hmrPort')}/__webpack_hmr`,
         ), // eslint-disable-line
         path.resolve(ROOT_DIR, bundleConfig.entryFile),
       ]),
@@ -79,6 +81,7 @@ export default function webpackConfigFactory(buildOptions) {
     },
     cache: true,
     resolve: {
+      extensions: ['.js', '.jsx', '.css', '.scss'],
       mainFields: ifNode(
         ['module', 'jsnext:main', 'main'],
         ['web', 'browser', 'style', 'module', 'jsnext:main', 'main'],
@@ -90,10 +93,6 @@ export default function webpackConfigFactory(buildOptions) {
       fs: 'empty',
       global: true,
       crypto: 'empty',
-      process: true,
-      module: false,
-      clearImmediate: false,
-      setImmediate: false,
     },
     externals: removeNil([
       ifNode(() =>
@@ -136,7 +135,8 @@ export default function webpackConfigFactory(buildOptions) {
         DEBUG: JSON.stringify(process.env.DEBUG),
         __USE_PROXY__: JSON.stringify(process.env.USE_PROXY),
       }),
-
+      ifDev(() => new CircularDependencyPlugin()),
+      ifDev(() => new CaseSensitivePathsPlugin()),
       ifClient(
         () =>
           new AssetsPlugin({
@@ -167,7 +167,7 @@ export default function webpackConfigFactory(buildOptions) {
                 ifClient([
                   'env',
                   {
-                    useBuiltIns: false,
+                    useBuiltIns: true,
                     debug: false,
                     modules: false,
                     targets: {
@@ -182,7 +182,7 @@ export default function webpackConfigFactory(buildOptions) {
                 ifNode([
                   'env',
                   {
-                    useBuiltIns: false,
+                    useBuiltIns: true,
                     debug: false,
                     modules: false,
                     targets: {
@@ -242,8 +242,7 @@ export default function webpackConfigFactory(buildOptions) {
           },
         ],
       }),
-
-      ifProdClient(
+       ifProdClient(
         () =>
           new webpack.optimize.CommonsChunkPlugin({
             children: true,
@@ -253,20 +252,10 @@ export default function webpackConfigFactory(buildOptions) {
       ifProdClient(() => new webpack.optimize.AggressiveMergingPlugin()),
       ifDevClient(() => new NamedModulesPlugin()),
       ifProdClient(() => new webpack.HashedModuleIdsPlugin()),
-      ifProdClient(() => new webpack.optimize.UglifyJsPlugin({
-            sourceMap: config('includeSourceMapsForOptimisedClientBundle'),
-            compress: {
-              screw_ie8: true,
-              warnings: false,
-            },
-            mangle: {
-              screw_ie8: true,
-            },
-            output: {
-              comments: false,
-              screw_ie8: true,
-            },
-          })),
+      ifProdClient(
+        () =>
+          new BabiliPlugin(),
+      ),
       ifProdClient(
         () =>
           new ExtractTextPlugin({
@@ -279,15 +268,13 @@ export default function webpackConfigFactory(buildOptions) {
       rules: removeNil([
         {
           test: /\.jsx?$/,
-          use: [
-            'cache-loader',
-            'happypack/loader?id=hp-js',
-          ],
+          use: ['cache-loader', 'happypack/loader?id=hp-js'],
           exclude: [
             /node_modules/,
             path.resolve(ROOT_DIR, './.happypack'),
             path.resolve(ROOT_DIR, './boldrCMS'),
             path.resolve(ROOT_DIR, './internal'),
+            path.resolve(ROOT_DIR, './.cache-loader'),
           ],
           include: removeNil([
             ...bundleConfig.srcPaths.map(srcPath =>
@@ -309,11 +296,7 @@ export default function webpackConfigFactory(buildOptions) {
               }),
             })),
             ifNode({
-              loaders: [
-                'css-loader/locals',
-                'postcss-loader',
-                'sass-loader',
-              ], // eslint-disable-line
+              loaders: ['css-loader/locals', 'postcss-loader', 'sass-loader'], // eslint-disable-line
             }),
           ),
         ),

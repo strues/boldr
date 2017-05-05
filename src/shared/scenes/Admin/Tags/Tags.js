@@ -4,61 +4,41 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { MenuButton, List, ListItem, Paper, Toolbar, Row, Col } from 'boldr-ui';
 
-import { selectTag, createTag, deleteTag } from '../../Blog/state';
-import TaggedPost from './components/TaggedPost';
+import { createTag, deleteTag } from '../../Blog/state';
 
 import TagList from './components/TagList';
 import AddTag from './components/AddTag';
 
 type Props = {
   tags: Array<Tag>,
-  selectTag: Function,
   currentTag: Object,
   dispatch: Function,
 };
 
 type State = {
-  posts: boolean,
   add: boolean,
 };
 
 class Tags extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      posts: false,
-      add: false,
-    };
-    (this: any).handleAddTagClick = this.handleAddTagClick.bind(this);
-    (this: any).handleTagClick = this.handleTagClick.bind(this);
-    (this: any).handleTagSubmit = this.handleTagSubmit.bind(this);
-    (this: any).handleDeleteTagClick = this.handleDeleteTagClick.bind(this);
-  }
+  state = {
+    add: false,
+  };
 
   state: State;
 
   props: Props;
 
-  handleTagClick(tag: Object) {
-    this.props.dispatch(selectTag(tag));
-    this.setState({
-      posts: true,
-      add: false,
-    });
-  }
-  handleTagSubmit(values) {
+  handleTagSubmit = values => {
     this.props.dispatch(createTag(values));
-  }
-  handleAddTagClick() {
+  };
+  handleAddTagClick = () => {
     this.setState({
       add: true,
-      posts: false,
     });
-  }
-  handleDeleteTagClick(id) {
+  };
+  handleDeleteTagClick = id => {
     this.props.dispatch(deleteTag(id));
-  }
+  };
   render() {
     const actions = [
       <MenuButton key="menu" id="tagtb" buttonChildren="more_vert" icon>
@@ -77,15 +57,11 @@ class Tags extends Component {
               <TagList
                 tags={this.props.tags}
                 handleDeleteTagClick={this.handleDeleteTagClick}
-                handleTagClick={this.handleTagClick}
               />
             </List>
           </Paper>
         </Col>
         <Col sm={12} md={8}>
-          {!this.state.posts
-            ? null
-            : <TaggedPost name={this.props.currentTag.name} />}
           {!this.state.add
             ? null
             : <Paper zDepth={3} className="boldr-paperoverride">

@@ -20,20 +20,14 @@ Join us on <a href="https://slack.boldr.io" target="blank"><img src="/docs/asset
 - [Boldr Repositories](#boldr-repositories)
 - [Current Features](#current-features)
 - [Technology Stack](#core-technologies)
-- [Getting Started / Installation](#getting-started-installation)
-- [Editor](#editor)
+- [Getting Started](#getting-started)
 - [Usage](#usage)
   - [Development](#development)
   - [Production](#production)
-- [Documentation](#documentation)
+- [Documentation](https://docs.boldr.io)
 - [Demo](#demo)
 - [Contributing](#contributing)
 - [Screenshots](#screenshots)
-
-
-**Big release coming soon with a [CLI](https://github.com/boldr/getBoldr/tree/master/packages/boldr-cli), generators, and more modularity!**  
-> In the mean time, a barebones version of the CLI is available. Install with `npm install -g boldr-cli` and run `boldr-cli init` to get setup with both the API and the CMS packages. After running the command you'll have a boldr folder containing both the api and cms. The folder location at the moment is your current working directory.   
-
 
 
 ## Boldr Repositories
@@ -67,7 +61,7 @@ Join us on <a href="https://slack.boldr.io" target="blank"><img src="/docs/asset
 - [Docker](https://github.com/docker/docker)
 - [Webpack](https://github.com/webpack/webpack)
 
-## Getting Started / Installation
+## Getting Started
 
 **Development Disclaimer:** At the moment, Boldr is in active development. Meaning there might be the occasional breaking changes, and architectural adjustments.
 
@@ -122,19 +116,6 @@ Settings for the build process are located in `config/values.js`.
 See the [production docs](docs/production.md)
 
 
-## Documentation
-
-- [`Roadmap`](ROADMAP.md)
-- [`API Markdown`](docs/apidoc.md)
-- [`API Live`](https://staging.boldr.io/apidocs/)
-- [`Editing the Nav`](docs/navigation.md)
-- [`Theming`](docs/theming.md)
-- [`Docker`](docs/docker.md)
-- [`Production`](docs/production.md)
-- [`Nginx`](docs/nginx.md)
-- [`Troubleshooting`](docs/troubleshooting.md)
-
-
 ## Demo
 
 Visit [https://staging.boldr.io](https://staging.boldr.io) and explore the current demo deployment
@@ -159,7 +140,7 @@ Looking for an open source project to contribute to? All types of contributions 
 ## Screenshots  
 |         |            |   |
 | ------------- |:-------------:| -----:|
-![createPost][createPostImg] | ![blog2][editProfileImg]  | ![single][blogSingle]
+![createPost][createPostImg] | ![uploadMedia][uploadMediaImg]  | ![single][blogSingle]
 
 
 
@@ -171,5 +152,5 @@ Looking for an open source project to contribute to? All types of contributions 
 [coverage-img]: https://codeclimate.com/github/strues/boldr/badges/coverage.svg
 
 [createPostImg]: /docs/assets/create-post.png
-[editProfileImg]: /docs/assets/create-post.png
+[uploadMediaImg]: /docs/assets/upload-media.png
 [blogSingle]: /docs/assets/create-post.png

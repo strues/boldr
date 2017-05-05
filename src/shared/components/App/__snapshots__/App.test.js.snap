@@ -130,6 +130,7 @@ exports[`<App /> renders snapshot 1`] = `
               Object {
                 "component": [Function],
                 "exact": true,
+                "loadData": [Function],
                 "path": "/admin/tags/:name",
               },
               Object {

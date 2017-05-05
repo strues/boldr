@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPostsIfNeeded, getPosts, deletePost } from '../../../Blog/state';
 import type { ReactElement } from '../../../../types/react';
-import VisiblePostList from './VisiblePostList';
+import PostList from './PostList';
 
 type Props = {
   children?: ReactElement,
@@ -19,22 +19,20 @@ export class PostListContainer extends Component {
     profile: {},
     fetchPostsIfNeeded: () => {},
   };
-  constructor(props: Props) {
-    super(props);
-    (this: any).handleDeleteClick = this.handleDeleteClick.bind(this);
-  }
+
   componentDidMount() {
     this.props.dispatch(fetchPostsIfNeeded());
   }
 
   props: Props;
 
-  handleDeleteClick(postId: string): void {
+  handleDeleteClick = (postId: string) => {
     this.props.dispatch(deletePost(postId));
-  }
+  };
+
   render() {
     return (
-      <VisiblePostList
+      <PostList
         posts={this.props.posts}
         handleDeleteClick={this.handleDeleteClick}
       />

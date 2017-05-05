@@ -1,5 +1,10 @@
 @import '~boldr-ui/lib/styles/boldrui.scss';
 
+.boldr-dropzone__drop-sm {
+  margin-top: 15px!important;
+  padding: 1em;
+  border: 1px solid #ccc;
+}
 .react-tagsinput {
   border: none!important;
 }

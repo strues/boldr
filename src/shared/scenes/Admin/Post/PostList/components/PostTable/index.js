@@ -1,3 +1,1 @@
-import PostTable from './PostTable';
-
-export default PostTable;
+export { default } from './PostTable';

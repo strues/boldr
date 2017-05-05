@@ -1,12 +1,16 @@
 import { normalize } from 'normalizr';
-
-import api, { API_PREFIX } from '../../../../core/api';
-import { sendNotification } from '../../../../state';
-import * as notif from '../../../../core/constants';
+import {
+  sendNotification,
+} from '../../../../state/modules/notifications/notifications';
 import {
   user as userSchema,
   arrayOfUsers,
 } from '../../../../state/modules/users/schema';
+
+import api, { API_PREFIX } from '../../../../core/api';
+
+import * as notif from '../../../../core/constants';
+
 import * as t from '../actionTypes';
 
 /**

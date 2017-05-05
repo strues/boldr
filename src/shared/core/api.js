@@ -7,15 +7,15 @@ const token = isBrowser ? getToken() : null;
 
 export const API_PREFIX = '/api/v1';
 
+axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+axios.defaults.headers.post['Content-Type'] =
+  'application/x-www-form-urlencoded; charset=UTF-8';
+
+axios.defaults.withCredentials = true;
+
 const api = axios.create({
   validateStatus: status => status >= 200 && status < 500,
 });
-
-api.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-api.defaults.headers.post['Content-Type'] =
-  'application/x-www-form-urlencoded; charset=UTF-8';
-
-api.defaults.withCredentials = true;
 
 api.onUnauthorizedError = callback => {
   api.interceptors.response.use(response => {

@@ -1,5 +1,6 @@
 /* @flow */
 import React from 'react';
+// $FlowIssue
 import styled from 'styled-components';
 import MemberCard from '../MemberCard';
 

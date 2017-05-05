@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   Grid,
-  DashboardFooter,
   Sidebar,
   DashboardWrapper,
   DashboardContent,
@@ -31,7 +30,7 @@ type Props = {
 export class AdminDashboard extends Component {
   props: Props;
 
-  handleHideSidebar = (): Function => {
+  handleHideSidebar = () => {
     this.props.dispatch(showHideSidebar());
   };
 

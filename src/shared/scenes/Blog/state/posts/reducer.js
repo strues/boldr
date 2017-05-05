@@ -87,7 +87,7 @@ export const getPublishedPosts = (state: Object, filter: string): Function => {
   const allPosts = getPosts(state);
   switch (filter) {
     case 'all':
-      return allPosts;
+      return getPosts(state);
     case 'published':
       return (
         allPosts.filter(p => p.published) && allPosts.filter(p => !p.featured)
@@ -95,7 +95,7 @@ export const getPublishedPosts = (state: Object, filter: string): Function => {
     case 'draft':
       return allPosts.filter(p => !p.published);
     default:
-      throw new Error(`Unknown filter: ${filter}.`);
+      return getPosts(state);
   }
 };
 

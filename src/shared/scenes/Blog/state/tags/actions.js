@@ -1,7 +1,9 @@
 import { normalize } from 'normalizr';
 import api, { API_PREFIX } from '../../../../core/api';
 import * as notif from '../../../../core/constants';
-import { sendNotification } from '../../../../state';
+import {
+  sendNotification,
+} from '../../../../state/modules/notifications/notifications';
 import * as t from '../actionTypes';
 import { tag as tagSchema, arrayOfTag } from './schema';
 

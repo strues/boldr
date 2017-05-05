@@ -1,5 +1,6 @@
 /* @flow */
 import React, { Component } from 'react';
+// $FlowIssue
 import { Editor } from 'react-draft-wysiwyg';
 import { stateFromHTML } from 'draft-js-import-html';
 // $FlowIssue
@@ -30,7 +31,7 @@ export default class EditorField extends Component {
   }
   state: State;
   props: Props;
-  onChange = editorState => {
+  onChange = (editorState: Object) => {
     const { input } = this.props;
     input.onChange(convertToRaw(editorState.getCurrentContent()));
     this.setState({ editorState });

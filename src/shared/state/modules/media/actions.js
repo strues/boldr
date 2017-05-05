@@ -1,10 +1,9 @@
-import { push } from 'react-router-redux';
-import { normalize, arrayOf, schema } from 'normalizr';
+import { normalize } from 'normalizr';
 import api, { API_PREFIX } from '../../../core/api';
 
 import * as notif from '../../../core/constants';
 import { sendNotification } from '../notifications/notifications';
-import { editProfile } from '../users/actions';
+
 import { media as mediaSchema, arrayOfMedia } from './schema';
 import * as t from './actionTypes';
 
@@ -125,6 +124,32 @@ export function uploadMediaFile(payload) {
   };
 }
 
+export function uploadMediaUrl(payload) {
+  return dispatch => {
+    dispatch({
+      type: t.UPLOAD_MEDIA_REQUEST,
+    });
+    const data = payload;
+    return api
+      .post(`${API_PREFIX}/media/remote`, data)
+      .then(res => {
+        const newMedia = res.data;
+        const normalizedNewMedia = normalize(newMedia, mediaSchema);
+        dispatch({
+          type: t.UPLOAD_MEDIA_SUCCESS,
+          payload: normalizedNewMedia,
+        });
+        dispatch(sendNotification(notif.MSG_UPLOAD_SUCCESS));
+      })
+      .catch(err => {
+        dispatch({
+          type: t.UPLOAD_MEDIA_FAILURE,
+          error: err,
+        });
+      });
+  };
+}
+
 export function deleteMedia(m) {
   const { id } = m;
   return dispatch => {
@@ -173,7 +198,7 @@ export function editMedia(mediaData) {
         );
       })
       .catch(err => {
-        dispatch(errorUpdateAttachment(err));
+        dispatch(errorEditMedia(err));
         dispatch(
           sendNotification({
             message: 'There was a problem updating the attachment.',

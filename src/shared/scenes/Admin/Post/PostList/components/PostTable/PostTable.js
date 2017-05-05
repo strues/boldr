@@ -1,7 +1,6 @@
 /* @flow */
 /* eslint-disable react/prop-types, react/jsx-no-bind */
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import sort from 'boldr-utils/es/logic/sort';
 import { DataTable } from 'boldr-ui';
 
@@ -25,15 +24,12 @@ type State = {
 };
 
 class PostTable extends Component {
-  constructor(props) {
-    super(props);
-    (this: any).state = {
-      sortedType: 'createdAt',
-      titleSorted: null,
-      createdAtSorted: true,
-      sortedPosts: [],
-    };
-  }
+  state = {
+    sortedType: 'createdAt',
+    titleSorted: null,
+    createdAtSorted: true,
+    sortedPosts: [],
+  };
   state: State;
   componentWillMount() {
     this.setState({
@@ -50,7 +46,7 @@ class PostTable extends Component {
     });
   };
 
-  changeSortType = value => {
+  changeSortType = (value: string) => {
     const key = value === 'createdAt' ? 'title' : 'createdAt';
     this.setState({
       [`${key}Sorted`]: null,
@@ -87,4 +83,4 @@ class PostTable extends Component {
     );
   }
 }
-export default connect()(PostTable);
+export default PostTable;
