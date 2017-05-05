@@ -22,6 +22,7 @@ const UserInfoList = styled.ul`
   display: inline-flex;
   align-items: center;
   list-style-type: none;
+  justify-content: space-between;
 `;
 const UserInfoListItem = styled.li`
   padding-left: 1em;
@@ -31,10 +32,7 @@ const LeftSide = styled.div`
   align-items: flex-start;
   width: 90%;
 `;
-const Label = styled.h4`
-  font-size: 18px;
-  text-transform: uppercase;
-`;
+
 type Props = {
   user: Object,
   handleToggle: () => void,
@@ -67,8 +65,8 @@ const MemberCard = (props: Props) => {
             <Avatar src={avatarUrl} role="presentation" />
           </UserInfoListItem>
           <UserInfoListItem>{username}</UserInfoListItem>
-          <UserInfoListItem>Role: {''}{roleName}</UserInfoListItem>
-          <UserInfoListItem>{firstName} {lastName}</UserInfoListItem>
+          <UserInfoListItem>{roleName}</UserInfoListItem>
+          <UserInfoListItem>{firstName}{' '}{lastName}</UserInfoListItem>
           <UserInfoListItem>{email}</UserInfoListItem>
         </UserInfoList>
       </LeftSide>

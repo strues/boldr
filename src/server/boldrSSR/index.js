@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import type { $Response, $Request, NextFunction } from 'express';
+import type { $Response, $Request } from 'express';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
 import { Provider } from 'react-redux';
 import createHistory from 'history/createMemoryHistory';
@@ -30,7 +30,7 @@ function renderAppToString(
   );
 }
 
-async function boldrSSR(req: $Request, res: $Response, next: NextFunction) {
+async function boldrSSR(req: $Request, res: $Response) {
   if (typeof res.locals.nonce !== 'string') {
     throw new Error('A "nonce" value has not been attached to the response');
   }

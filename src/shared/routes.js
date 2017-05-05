@@ -55,6 +55,7 @@ import {
   fetchPostIfNeeded,
   fetchTagsIfNeeded,
   fetchTagPostsIfNeeded,
+  fetchTagPosts,
 } from './scenes/Blog/state';
 
 function LoadingComponent({ error }) {
@@ -219,6 +220,8 @@ export default [
             path: '/admin/tags/:name',
             exact: true,
             component: TaggedPost,
+            loadData: async (dispatch: Dispatch, params: Object) =>
+              Promise.all([await dispatch(fetchTagPostsIfNeeded(params.name))]),
           },
           {
             path: '/admin/media',

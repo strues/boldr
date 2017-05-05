@@ -23,7 +23,7 @@ class TaggedPost extends Component {
   };
 
   componentDidMount() {
-    const tagName = this.props.currentTag.name;
+    const tagName = this.props.match.params.name;
     this.props.fetchTagPostsIfNeeded(tagName);
   }
 

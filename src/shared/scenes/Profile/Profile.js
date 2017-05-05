@@ -1,6 +1,8 @@
 /* @flow */
 import React, { Component } from 'react';
+// $FlowIssue
 import styled from 'styled-components';
+// $FlowIssue
 import Dropzone from 'react-dropzone';
 import classnames from 'classnames';
 import {

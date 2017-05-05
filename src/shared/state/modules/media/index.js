@@ -5,6 +5,7 @@ import {
   selectMedia,
   editMedia,
   deleteMedia,
+  uploadMediaUrl,
   uploadMediaFile,
 } from './actions';
 import { getMedia } from './selectors';
@@ -22,6 +23,7 @@ export {
   editMedia,
   deleteMedia,
   uploadMediaFile,
+  uploadMediaUrl,
   media,
   arrayOfMedia,
 };

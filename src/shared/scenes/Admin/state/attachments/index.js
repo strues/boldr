@@ -11,8 +11,6 @@ import {
   uploadAvatarImage,
 } from './actions';
 
-export default attachmentReducer;
-
 export {
   attachmentReducer,
   fetchAttachments,
@@ -25,3 +23,5 @@ export {
   uploadProfileImage,
   uploadAvatarImage,
 };
+
+export default attachmentReducer;

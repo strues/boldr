@@ -13,7 +13,7 @@ const PostTableBody = (props: Props) => {
     <TableBody>
       {posts.map(post => (
         <PostTableRow
-          key={post.id || `${post.slug}`}
+          key={post.id}
           id={post.id}
           slug={post.slug}
           title={post.title}

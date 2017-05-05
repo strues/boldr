@@ -1,7 +1,8 @@
 /* @flow */
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { Button, InputField } from 'boldr-ui';
+import Button from 'boldr-ui/lib/components/Button';
+import { InputField, Form } from 'boldr-ui';
 
 type Props = {
   handleSubmit?: Function,
@@ -19,7 +20,7 @@ let AddTag = (props: Props) => {
   // eslint-disable-line
   const { handleSubmit, reset } = props;
   return (
-    <form className="boldr-form__addtag" onSubmit={handleSubmit}>
+    <Form className="boldr-form__addtag" onSubmit={handleSubmit}>
       <Field
         id="tag-name"
         name="name"
@@ -36,10 +37,10 @@ let AddTag = (props: Props) => {
       />
 
       <div className="form__footer">
-        <Button type="submit" label="Save" style={style} raised primary />
-        <Button label="Reset" onClick={reset} style={style} raised secondary />
+        <Button type="submit" style={style}>Save</Button>
+        <Button onClick={reset} style={style} theme="secondary">Reset</Button>
       </div>
-    </form>
+    </Form>
   );
 };
 AddTag = reduxForm({

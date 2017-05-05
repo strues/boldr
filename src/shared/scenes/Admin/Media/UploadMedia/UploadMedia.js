@@ -1,10 +1,12 @@
 /* @flow */
 import React, { Component } from 'react';
+// $FlowIssue
 import Dropzone from 'react-dropzone';
 import Helmet from 'react-helmet';
-import { Paper, Button } from 'boldr-ui';
+import { Paper, Button, Block, Headline, Icon } from 'boldr-ui';
 import { connect } from 'react-redux';
 import { uploadMediaFile } from '../../../../state/modules/media/actions';
+import UploadUrl from './UploadUrl';
 
 type Props = {
   uploadMediaFile: () => void,
@@ -48,34 +50,49 @@ class UploadMedia extends Component {
   }
   render() {
     return (
-      <Paper zDepth={1}>
-        <Dropzone
-          className="boldrui-dropzone boldrui-dropzone__panel"
-          ref={node => {
-            (this: any).dropzone = node;
-          }}
-          multiple={false}
-          onDrop={this.onDrop}
-          accept="image/*"
-          maxSize={5242880}
-        >
-          <p className="boldrui-dropzone__drop">
-            Drop an image here or select one from your computer. <br />
-            It will upload right away.
-          </p>
-        </Dropzone>
-        <div className="boldrui-dropzone__footer">
-          <Button
-            primary
-            icon
-            onClick={() => {
-              this.dropzone.open();
+      <div>
+        <Headline type="h1">
+          <Icon
+            kind="folder-upload"
+            color="rgba(0, 188, 212, 1.00)"
+            size="36"
+          />
+          {' '}
+          Upload Media from the Internet or your computer
+        </Headline>
+        <Block>
+          <UploadUrl />
+        </Block>
+        <Paper zDepth={1}>
+          <Helmet title="Upload Media" />
+          <Dropzone
+            className="boldrui-dropzone boldrui-dropzone__panel"
+            ref={node => {
+              (this: any).dropzone = node;
             }}
+            multiple={false}
+            onDrop={this.onDrop}
+            accept="image/*"
+            maxSize={5242880}
           >
-            file_upload
-          </Button>
-        </div>
-      </Paper>
+            <p className="boldrui-dropzone__drop">
+              Drop an image here or select one from your computer. <br />
+              It will upload right away.
+            </p>
+          </Dropzone>
+          <div className="boldrui-dropzone__footer">
+            <Button
+              primary
+              icon
+              onClick={() => {
+                this.dropzone.open();
+              }}
+            >
+              file_upload
+            </Button>
+          </div>
+        </Paper>
+      </div>
     );
   }
 }

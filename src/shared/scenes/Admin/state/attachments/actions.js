@@ -1,6 +1,9 @@
+import {
+  sendNotification,
+} from '../../../../state/modules/notifications/notifications';
+import { editProfile } from '../../../../state/modules/users/actions';
 import { api, API_PREFIX } from '../../../../core';
 import * as notif from '../../../../core/constants';
-import { sendNotification, editProfile } from '../../../../state';
 
 import * as t from '../actionTypes';
 

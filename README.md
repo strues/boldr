@@ -159,7 +159,7 @@ Looking for an open source project to contribute to? All types of contributions 
 ## Screenshots  
 |         |            |   |
 | ------------- |:-------------:| -----:|
-![createPost][createPostImg] | ![blog2][editProfileImg]  | ![single][blogSingle]
+![createPost][createPostImg] | ![uploadMedia][uploadMediaImg]  | ![single][blogSingle]
 
 
 
@@ -171,5 +171,5 @@ Looking for an open source project to contribute to? All types of contributions 
 [coverage-img]: https://codeclimate.com/github/strues/boldr/badges/coverage.svg
 
 [createPostImg]: /docs/assets/create-post.png
-[editProfileImg]: /docs/assets/create-post.png
+[uploadMediaImg]: /docs/assets/upload-media.png
 [blogSingle]: /docs/assets/create-post.png

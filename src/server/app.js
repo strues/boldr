@@ -29,11 +29,11 @@ if (__USE_PROXY__) {
   debug('Use proxy flag');
   require('./middleware/proxy')(app);
 }
-if (!process.env.BUILD_FLAG_IS_DEV) {
+if (process.env.BUILD_FLAG_IS_DEV === 'false') {
   app.get(`/sw.js`, serviceWorker);
   app.get('/assets/offline.html', offlinePage);
 }
-if (process.env.BUILD_FLAG_IS_DEV) {
+if (process.env.BUILD_FLAG_IS_DEV || process.env.SERVE_ASSETS === 'true') {
   app.use('/assets/', clientBundle);
 }
 // Configure static serving of our "public" root http path static files.

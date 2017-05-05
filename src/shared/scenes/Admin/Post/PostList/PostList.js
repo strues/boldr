@@ -7,12 +7,7 @@ import PostTable from './components/PostTable';
 
 type Props = {
   posts: Array<Post>,
-  post: Post,
-  id: String,
   handleDeleteClick: Function,
-  handleArticlePublishClick: Function,
-  handleArticleDraftClick: Function,
-  dispatch: Function,
 };
 
 class PostList extends Component {

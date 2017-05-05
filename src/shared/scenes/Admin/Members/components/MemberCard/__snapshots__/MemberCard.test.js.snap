@@ -37,7 +37,6 @@ exports[`<MemberCard /> should render the user props 1`] = `
         joe
       </styled.li>
       <styled.li>
-        Role: 
         admin
       </styled.li>
       <styled.li>

@@ -74,6 +74,7 @@ class NewPostForm extends Component {
                       id="post-title"
                       name="title"
                       type="text"
+                      placeholder="A title for the post"
                       component={InputField}
                       label="Post title"
                       tabIndex={0}
@@ -84,6 +85,7 @@ class NewPostForm extends Component {
                       component={FieldEditor}
                       label="Content"
                       name="content"
+                      placeholder="Tell your story"
                       tabIndex={-2}
                       validate={[isRequired]}
                     />
@@ -93,16 +95,14 @@ class NewPostForm extends Component {
               <Col xs={12} md={4}>
                 <DarkSegment>
                   <Headline lightText type="h3">Content Tags</Headline>
-                  <HelpTxt>Hit enter to save tag</HelpTxt>
-                  <FormGroup>
-                    <Field
-                      name="tags"
-                      type="checkbox"
-                      component={RenderTags}
-                      label="Tags"
-                      validate={[isRequired]}
-                    />
-                  </FormGroup>
+                  <HelpTxt>*Hit enter to save a tag</HelpTxt>
+                  <Field
+                    name="tags"
+                    type="checkbox"
+                    component={RenderTags}
+                    label="Tags"
+                    validate={[isRequired]}
+                  />
                 </DarkSegment>
                 <Block>
                   <FormGroup>
@@ -121,7 +121,6 @@ class NewPostForm extends Component {
                     >
                       <Paragraph className="boldr-dropzone__drop-sm">
                         Drop an image here or click to select one from your computer.
-                        {' '}
                         <br />
                         It will upload right away.
                       </Paragraph>
@@ -133,8 +132,9 @@ class NewPostForm extends Component {
                     name="excerpt"
                     id="post-excerpt"
                     type="text"
+                    label="Excerpt"
                     component={InputField}
-                    label="Short excerpt about post"
+                    placeholder="Short excerpt about the post"
                     tabIndex={-3}
                     validate={[isRequired]}
                   />

@@ -1,6 +1,10 @@
+/* @flow */
 import React, { Component } from 'react';
+// $FlowIssue
 import { Editor } from 'react-draft-wysiwyg';
+// $FlowIssue
 import convertToRaw from 'draft-js/lib/convertFromDraftStateToRaw';
+// $FlowIssue
 import EditorState from 'draft-js/lib/EditorState';
 
 const editorStyle = {
@@ -9,12 +13,12 @@ const editorStyle = {
 };
 
 type Props = {
-  input: object,
+  input: Object,
   placeholder: string,
 };
 export default class FieldEditor extends Component {
   state = { editorState: EditorState.createEmpty() };
-  onChange = editorState => {
+  onChange = (editorState: Object) => {
     const { input } = this.props;
     input.onChange(convertToRaw(editorState.getCurrentContent()));
     this.setState({ editorState });
