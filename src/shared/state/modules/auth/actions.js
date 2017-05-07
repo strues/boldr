@@ -52,10 +52,10 @@ export function doLogin(formInput: userLoginFormInput) {
       .post(`${API_PREFIX}/auth/login`, formInput)
       .then(res => {
         if (res.status !== 200) {
-          const err = JSON.stringify(res.data.message.message);
+          const errMsg = JSON.stringify(res.data.message.message);
           dispatch({
             type: t.LOGIN_FAILURE,
-            error: err,
+            error: errMsg,
           });
           return dispatch(
             sendNotification({
@@ -123,6 +123,7 @@ export const checkAuth = token => {
         token,
       });
     } catch (err) {
+      removeToken();
       dispatch({
         type: t.CHECK_AUTH_FAILURE,
         err,

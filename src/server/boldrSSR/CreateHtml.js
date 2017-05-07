@@ -68,8 +68,8 @@ function CreateHtml(props: CreateHtmlProps) {
     ...ifElse(helmet)(() => helmet.base.toComponent(), []),
     ...ifElse(helmet)(() => helmet.meta.toComponent(), []),
     ...ifElse(helmet)(() => helmet.link.toComponent(), []),
-    ifElse(clientEntryAssets && clientEntryAssets.css)(() =>
-      createStyleElement(clientEntryAssets.css),
+    ifElse(clientEntryAssets && clientEntryAssets.index.css)(() =>
+      createStyleElement(clientEntryAssets.index.css),
     ),
     ...ifElse(helmet)(() => helmet.style.toComponent(), []),
   ]);
@@ -86,8 +86,15 @@ function CreateHtml(props: CreateHtmlProps) {
     ifElse(process.env.BUILD_FLAG_IS_DEV)(() =>
       createScriptElement(`/assets/__dev_vendor_dll__.js?t=${Date.now()}`),
     ),
-    ifElse(clientEntryAssets && clientEntryAssets.js)(() =>
-      createScriptElement(clientEntryAssets.js),
+    ifElse(!process.env.BUILD_FLAG_IS_DEV)(() =>
+      createScriptElement(clientEntryAssets.common.js),
+    ),
+    ifElse(!process.env.BUILD_FLAG_IS_DEV)(() =>
+      createScriptElement(clientEntryAssets.vendor.js),
+    ),
+
+    ifElse(clientEntryAssets && clientEntryAssets.index.js)(() =>
+      createScriptElement(clientEntryAssets.index.js),
     ),
     ...ifElse(helmet)(() => helmet.script.toComponent(), []),
   ]);

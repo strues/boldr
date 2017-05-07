@@ -8,7 +8,6 @@ import {
   Button,
   Card,
   CardTitle,
-  CardActions,
   CardText,
   Col,
   Row,
@@ -99,9 +98,7 @@ export const PostCard = (props: Props) => {
             </Col>
           </Row>
         </CardText>
-        <CardActions>
-          <TagBlock tags={postTags} />
-        </CardActions>
+        <TagBlock tags={postTags} />
       </Card>
     </div>
   );

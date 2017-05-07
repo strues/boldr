@@ -17,7 +17,7 @@ const TagList = (props: Props) => {
   }
   return (
     <div>
-      <Grid fluid>
+      <Grid>
         <Row>
           {props.posts.map(post => (
             <Col key={post.id} xs={12} md={4}>

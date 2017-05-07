@@ -182,7 +182,7 @@
   "scripts": {
     "analyze": "babel-node internal/scripts/analyze --client",
     "babel": "NODE_ENV=production babel --ignore node_modules",
-    "build": "NODE_ENV=production USE_PROXY=false babel-node internal/scripts/build --optimize",
+    "build": "NODE_ENV=production USE_PROXY=false babel-node --max_old_space_size=4096 internal/scripts/build --optimize",
     "build:proxy": "NODE_ENV=production USE_PROXY=true babel-node internal/scripts/build --optimize",
     "build:test": "babel-node internal/scripts/build",
     "clean": "babel-node internal/scripts/clean",
@@ -192,7 +192,7 @@
     "flow:defs": "flow-typed install --overwrite",
     "format": "prettier --single-quote=true --jsx-bracket-same-line=false --trailing-comma=all --write \"src/**/*.js\"",
     "lint": "eslint src",
-    "nuke": "rimraf .happypack && rimraf boldrCMS && rimraf node_modules/.cache",
+    "nuke": "rimraf .happypack && rimraf boldrCMS && rimraf node_modules/.cache && rimraf .cache-loader",
     "precommit": "lint-staged",
     "prepush": "yarn test",
     "start": "NODE_ENV=production node boldrCMS/server/index.js",
