@@ -144,6 +144,8 @@ const values = {
           'draft-js',
           'draftjs-to-html',
           'draft-js-import-html',
+          'material-ui',
+          'react-tap-event-plugin',
           'react-dropzone',
           'normalizr',
           'react-transition-group',

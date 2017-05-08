@@ -146,11 +146,7 @@ export default function webpackConfigFactory(buildOptions) {
       ),
     ]),
 
-    devtool: ifElse(isNode || isDev || config('incSourceMaps'))(
-      'source-map',
-      'hidden-source-map',
-    ), // eslint-disable-line
-
+    devtool: isDev ? 'cheap-module-eval-source-map' : 'hidden-source-map',
     performance: ifProdClient({ hints: 'warning' }, false),
     plugins: removeNil([
       ...prefetchPlugins,
@@ -257,6 +253,10 @@ export default function webpackConfigFactory(buildOptions) {
                 ifClient('dynamic-import-webpack'),
                 ifClient(['transform-react-jsx', { useBuiltIns: true }]),
                 ifProd('transform-flow-strip-types'),
+                ifProdClient([
+                  'transform-react-remove-prop-types',
+                  { removeImport: true },
+                ]),
                 ifDev('transform-react-jsx-self'),
                 ifDev('transform-react-jsx-source'),
               ].filter(x => x != null),

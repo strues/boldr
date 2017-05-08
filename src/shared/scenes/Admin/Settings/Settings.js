@@ -1,15 +1,9 @@
 /* @flow */
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
-import { ExpansionList } from 'boldr-ui';
+import { HeaderPanel, SettingsPanel } from 'boldr-ui';
 
-import {
-  SiteName,
-  SiteUrl,
-  SiteDescription,
-  Logo,
-  Favicon,
-} from './components';
+import General from './components/General';
 
 type Props = {
   siteName: Object,
@@ -26,13 +20,26 @@ class Settings extends PureComponent {
     return (
       <div className="boldr-settings">
         <Helmet title="Admin: Settings" />
-        <ExpansionList style={{ padding: 16 }}>
-          <SiteName {...this.props.siteName} />
-          <SiteUrl {...this.props.siteUrl} />
-          <Logo {...this.props.siteLogo} />
-          <SiteDescription {...this.props.siteDescription} />
-          <Favicon {...this.props.siteFav} />
-        </ExpansionList>
+        <SettingsPanel>
+          <HeaderPanel
+            title="Boldr's Settings"
+            subtitle="Modify how Boldr interacts with your website."
+            image={
+              <img
+                src="https://boldr.io/assets/boldr-white-logo.png"
+                width="100"
+                alt="boldr logo"
+              />
+            }
+          />
+          <General
+            siteName={this.props.siteName}
+            siteUrl={this.props.siteUrl}
+            siteLogo={this.props.siteLogo}
+            siteDescription={this.props.siteDescription}
+            siteFavicon={this.props.siteFav}
+          />
+        </SettingsPanel>
       </div>
     );
   }

@@ -6,12 +6,18 @@ import { Provider } from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
 import ConnectedRouter from 'react-router-redux/ConnectedRouter';
 import WebFontLoader from 'webfontloader';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
+import muiTheme from '../shared/templates/muiTheme';
 import renderRoutes from '../shared/core/addRoutes';
 import routes from '../shared/routes';
 import configureStore from '../shared/state/store';
 import { checkAuth } from '../shared/state/modules/auth/actions';
 import { getToken } from '../shared/core/authentication/token';
+
+injectTapEventPlugin();
 
 WebFontLoader.load({
   google: { families: ['Roboto:200,400,600', 'Material Icons'] },
@@ -48,7 +54,9 @@ const renderApp = () => {
   render(
     <Provider store={store}>
       <ConnectedRouter history={history} routes={routes[0].routes}>
-        {renderRoutes(routes)}
+        <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
+          {renderRoutes(routes)}
+        </MuiThemeProvider>
       </ConnectedRouter>
     </Provider>,
     domNode,

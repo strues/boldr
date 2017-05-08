@@ -85,6 +85,7 @@ class Media extends Component {
             </MediaSidePanel>
           </Col>
           <Col xs={12} md={11}>
+
             <Headline type="h2">
               {this.props.siteName}'s Media Gallery
             </Headline>

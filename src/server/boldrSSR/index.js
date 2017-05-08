@@ -9,9 +9,13 @@ import { matchRoutes } from 'react-router-config';
 // $FlowIssue
 import styleSheet from 'styled-components/lib/models/StyleSheet';
 import Helmet from 'react-helmet';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import getMuiTheme from 'material-ui/styles/getMuiTheme';
+
 import { configureStore } from '../../shared/state';
 import renderRoutes from '../../shared/core/addRoutes';
 import routes from '../../shared/routes';
+import muiTheme from '../../shared/templates/muiTheme';
 import CreateHtml from './CreateHtml';
 
 const debug = require('debug')('boldr:ssrMW');
@@ -24,7 +28,9 @@ function renderAppToString(
   return renderToString(
     <Provider store={store}>
       <StaticRouter location={req.url} context={routerContext}>
-        {renderRoutes(routes)}
+        <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
+          {renderRoutes(routes)}
+        </MuiThemeProvider>
       </StaticRouter>
     </Provider>,
   );
@@ -68,6 +74,7 @@ async function boldrSSR(req: $Request, res: $Response) {
       // render the application wrapped with provider, static router and the
       // store.
       const reactAppString = renderAppToString(store, routerContext, req);
+
       const helmet = Helmet.rewind();
       // render styled-components styleSheets to string.
       const styles = styleSheet.rules().map(rule => rule.cssText).join('\n');

@@ -1,12 +1,11 @@
 /* @flow */
-
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { TextField, ExpansionPanel, Row } from 'boldr-ui';
-
+import { TextField } from 'boldr-ui';
+import Button from 'boldr-ui/lib/components/Button';
 import {
   updateBoldrSettings,
-} from '../../../../../state/modules/boldr/settings';
+} from '../../../../../../state/modules/boldr/settings';
 
 type Props = {
   id: Number,
@@ -20,7 +19,7 @@ type Props = {
 type State = {
   value: any,
 };
-class SiteUrl extends Component {
+class Favicon extends Component {
   constructor(props) {
     super(props);
     this.state = { value: this.props.value };
@@ -44,32 +43,20 @@ class SiteUrl extends Component {
   }
   props: Props;
   render() {
-    const { focused, columnWidths } = this.props;
-
     return (
-      <ExpansionPanel
-        focused={focused}
-        columnWidths={columnWidths}
-        label="Site URL"
-        className="md-cell-md-cell--12"
-        contentClassName="md-grid"
-        onSave={this.handleSubmit}
-      >
-        <Row>
-          <form onSubmit={this.handleSubmit}>
-            <TextField
-              style={{ width: '400px' }}
-              id="floatingTitle"
-              label="Web address"
-              placeholder={this.state.value}
-              value={this.state.value}
-              onChange={this.handleChange}
-            />
-          </form>
-        </Row>
-      </ExpansionPanel>
+      <form onSubmit={this.handleSubmit}>
+        <TextField
+          style={{ width: '400px' }}
+          id="floatingTitle"
+          label="Favicon"
+          placeholder={this.state.value}
+          value={this.state.value}
+          onChange={this.handleChange}
+        />
+        <Button onClick={this.handleSubmit}>Save</Button>
+      </form>
     );
   }
 }
 
-export default connect()(SiteUrl);
+export default connect()(Favicon);

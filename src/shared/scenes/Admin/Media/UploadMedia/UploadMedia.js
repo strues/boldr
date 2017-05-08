@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 // $FlowIssue
 import Dropzone from 'react-dropzone';
+import styled from 'styled-components';
 import Helmet from 'react-helmet';
 import { Paper, Button, Block, Headline, Icon } from 'boldr-ui';
 import { connect } from 'react-redux';
@@ -20,6 +21,10 @@ type State = {
   percentComplete: number,
   uploadIsComplete: boolean,
 };
+
+const MediaTitleArea = styled.div`
+  margin-bottom: 35px;
+`;
 
 class UploadMedia extends Component {
   state = {
@@ -51,18 +56,20 @@ class UploadMedia extends Component {
   render() {
     return (
       <div>
-        <Headline type="h1">
-          <Icon
-            kind="folder-upload"
-            color="rgba(0, 188, 212, 1.00)"
-            size="36"
-          />
-          {' '}
-          Upload Media from the Internet or your computer
-        </Headline>
-        <Block>
-          <UploadUrl />
-        </Block>
+
+        <UploadUrl />
+
+        <MediaTitleArea>
+          <Headline type="h1">
+            <Icon
+              kind="folder-upload"
+              color="rgba(0, 188, 212, 1.00)"
+              size="36"
+            />
+            {' '}
+            Upload from your computer
+          </Headline>
+        </MediaTitleArea>
         <Paper zDepth={1}>
           <Helmet title="Upload Media" />
           <Dropzone

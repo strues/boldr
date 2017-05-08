@@ -12,7 +12,7 @@ type Props = {
 class PostEditor extends PureComponent {
   props: Props;
 
-  handleSubmit = values => {
+  handleSubmit = (values: Object) => {
     const postData = {
       title: values.title,
       excerpt: values.excerpt,

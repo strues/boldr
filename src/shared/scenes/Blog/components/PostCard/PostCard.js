@@ -4,17 +4,14 @@ import Link from 'react-router-dom/Link';
 import { connect } from 'react-redux';
 import dateFns from 'date-fns';
 import classnames from 'classnames';
+import { Button, Col, Row, StyleClasses } from 'boldr-ui';
 import {
-  Button,
   Card,
+  CardActions,
+  CardMedia,
   CardTitle,
   CardText,
-  Col,
-  Row,
-  StyleClasses,
-  Media,
-  MediaOverlay,
-} from 'boldr-ui';
+} from 'material-ui/Card';
 import { selectPost } from '../../state/posts/actions';
 
 import TagBlock from '../TagBlock';
@@ -71,18 +68,12 @@ export const PostCard = (props: Props) => {
   return (
     <div className={classes}>
       <Card>
-        <Media>
-          <img
-            src={props.featureImage}
-            alt={`${props.title} feature`}
-            role="presentation"
-          />
-          <MediaOverlay>
-            <CardTitle title={props.title} subtitle={formattedDate}>
-              <Button className="md-cell--right" icon>star_outline</Button>
-            </CardTitle>
-          </MediaOverlay>
-        </Media>
+        <CardMedia
+          overlay={<CardTitle title={props.title} subtitle={formattedDate} />}
+        >
+          <img src={props.featureImage} alt={`${props.title} feature image`} />
+        </CardMedia>
+
         <CardText>
           {props.excerpt}
           <Row>
@@ -98,7 +89,9 @@ export const PostCard = (props: Props) => {
             </Col>
           </Row>
         </CardText>
-        <TagBlock tags={postTags} />
+        <CardActions>
+          <TagBlock tags={postTags} />
+        </CardActions>
       </Card>
     </div>
   );

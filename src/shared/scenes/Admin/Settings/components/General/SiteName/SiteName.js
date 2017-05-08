@@ -1,11 +1,13 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { TextField, ExpansionPanel, Row } from 'boldr-ui';
+
+import { TextField } from 'boldr-ui';
+import Button from 'boldr-ui/lib/components/Button';
 
 import {
   updateBoldrSettings,
-} from '../../../../../state/modules/boldr/settings';
+} from '../../../../../../state/modules/boldr/settings';
 
 type Props = {
   id: Number,
@@ -44,30 +46,18 @@ class SiteName extends Component {
   }
   props: Props;
   render() {
-    const { focused, columnWidths } = this.props;
-
     return (
-      <ExpansionPanel
-        focused={focused}
-        columnWidths={columnWidths}
-        label="Site Name"
-        className="md-cell-md-cell--12"
-        contentClassName="md-grid"
-        onSave={this.handleSubmit}
-      >
-        <Row>
-          <form onSubmit={this.handleSubmit}>
-            <TextField
-              style={{ width: '400px' }}
-              id="floatingTitle"
-              label="Website name"
-              placeholder={this.state.value}
-              value={this.state.value}
-              onChange={this.handleChange}
-            />
-          </form>
-        </Row>
-      </ExpansionPanel>
+      <form onSubmit={this.handleSubmit}>
+        <TextField
+          style={{ width: '400px' }}
+          id="floatingTitle"
+          label="Website name"
+          placeholder={this.state.value}
+          value={this.state.value}
+          onChange={this.handleChange}
+        />
+        <Button onClick={this.handleSubmit}>Save</Button>
+      </form>
     );
   }
 }
