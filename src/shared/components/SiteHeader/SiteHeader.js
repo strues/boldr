@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import Button from 'boldr-ui/lib/components/Button';
 import Grid from 'boldr-ui/lib/components/Layout/Grid';
 import Icon from 'boldr-ui/lib/components/Icons';
+import IconButton from 'material-ui/IconButton';
 import classNames from 'classnames/bind';
 import cxN from 'classnames';
 import Link from 'react-router-dom/Link';
@@ -145,21 +146,27 @@ class SiteHeader extends Component {
     if (this.props.me.roleId === 3) {
       menuElements.push(
         <Link key="dash" to="/admin">
-          <Icon kind="dashboard" color="#333" />
+          <IconButton tooltip="dashboard">
+            <Icon kind="dashboard" color="#00bcd4" />
+          </IconButton>
         </Link>,
       );
     }
     if (this.props.auth.isAuthenticated) {
       menuElements.push(
         <Link key="prof" to={`/profiles/${this.props.me.username}`}>
-          <Icon kind="account" color="#333" />
+          <IconButton tooltip="account">
+            <Icon kind="account" color="#2d343c" />
+          </IconButton>
         </Link>,
-        <Icon
-          key="logout"
-          kind="logout"
-          color="#333"
-          onClick={this.props.handleLogoutClick}
-        />,
+        <IconButton key="logo" tooltip="logout">
+          <Icon
+            key="logout"
+            kind="logout"
+            color="#2d343c"
+            onClick={this.props.handleLogoutClick}
+          />
+        </IconButton>,
       );
     }
     return menuElements;

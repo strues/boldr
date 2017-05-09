@@ -3,8 +3,10 @@ import React from 'react';
 import Link from 'react-router-dom/Link';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
-import Avatar from 'boldr-ui/lib/components/Avatar';
-import { FontIcon, Chip, StyleClasses } from 'boldr-ui';
+import Chip from 'material-ui/Chip';
+import Avatar from 'material-ui/Avatar';
+// import Avatar from 'boldr-ui/lib/components/Avatar';
+import { FontIcon, StyleClasses } from 'boldr-ui';
 
 import { selectTag } from '../../state/tags/actions';
 
@@ -24,11 +26,9 @@ const Tag = (props: Props) => {
   return (
     <div className={classes}>
       <Link to={`/blog/tags/${tag.name}`}>
-        <Chip
-          onClick={transitionTag}
-          label={tag.name}
-          avatar={<Avatar icon={<FontIcon>local_offer</FontIcon>} />}
-        />
+        <Chip onTouchTap={transitionTag}>
+          <Avatar icon={<FontIcon>local_offer</FontIcon>} />{tag.name}
+        </Chip>
       </Link>
     </div>
   );

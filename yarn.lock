@@ -1437,14 +1437,13 @@ bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.6"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.6.tgz#53344adb14617a13f6e8dd2ce28905d1c0ba3215"
 
-boldr-ui@0.4.0-beta.10:
-  version "0.4.0-beta.10"
-  resolved "https://registry.yarnpkg.com/boldr-ui/-/boldr-ui-0.4.0-beta.10.tgz#c8af0dcbf35480e07f9427ba6e1031ca9ff8ab80"
+boldr-ui@0.4.0-rc.2:
+  version "0.4.0-rc.2"
+  resolved "https://registry.yarnpkg.com/boldr-ui/-/boldr-ui-0.4.0-rc.2.tgz#4d1901eee977ff4f2850e79c88fe64eebd009304"
   dependencies:
     animate-components "^0.9.0"
     boldr-utils "0.2.2"
     classnames "^2.2.5"
-    material-ui "^0.18.0"
     prop-types "^15.5.8"
     ramda "^0.23.0"
     react-click-outside "^2.3.0"
@@ -1455,6 +1454,7 @@ boldr-ui@0.4.0-beta.10:
     react-tagsinput "^3.16.1"
     react-tap-event-plugin "^2.0.1"
     react-visibility-sensor "^3.9.0"
+    redux-form-material-ui "^4.2.0"
     styled-theme "^0.3.3"
     styled-tools "^0.1.4"
     uuid "^3.0.1"
@@ -1756,7 +1756,22 @@ cheerio@^0.22.0:
     lodash.reject "^4.4.0"
     lodash.some "^4.4.0"
 
-chokidar@1.6.1, chokidar@^1.4.3, chokidar@^1.6.1:
+chokidar@1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-1.7.0.tgz#798e689778151c8076b4b360e5edd28cda2bb468"
+  dependencies:
+    anymatch "^1.3.0"
+    async-each "^1.0.0"
+    glob-parent "^2.0.0"
+    inherits "^2.0.1"
+    is-binary-path "^1.0.0"
+    is-glob "^2.0.0"
+    path-is-absolute "^1.0.0"
+    readdirp "^2.0.0"
+  optionalDependencies:
+    fsevents "^1.0.0"
+
+chokidar@^1.4.3, chokidar@^1.6.1:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-1.6.1.tgz#2f4447ab5e96e50fb3d789fd90d4c72e0e4c70c2"
   dependencies:
@@ -2696,11 +2711,7 @@ ejs@^2.3.4, ejs@^2.5.6:
   version "2.5.6"
   resolved "https://registry.yarnpkg.com/ejs/-/ejs-2.5.6.tgz#479636bfa3fe3b1debd52087f0acb204b4f19c88"
 
-electron-to-chromium@^1.2.7:
-  version "1.3.8"
-  resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.8.tgz#b2c8a2c79bb89fbbfd3724d9555e15095b5f5fb6"
-
-electron-to-chromium@^1.3.9:
+electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.9:
   version "1.3.9"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.9.tgz#db1cba2a26aebcca2f7f5b8b034554468609157d"
 
@@ -5188,7 +5199,7 @@ map-obj@^1.0.0, map-obj@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/map-obj/-/map-obj-1.0.1.tgz#d933ceb9205d82bdcf4886f6742bdc2b4dea146d"
 
-material-ui@0.18.0, material-ui@^0.18.0:
+material-ui@0.18.0:
   version "0.18.0"
   resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-0.18.0.tgz#fcf5eddfe87d066792bd44f09b4f7c9ca7f620d6"
   dependencies:
@@ -6073,9 +6084,9 @@ postcss-load-plugins@^2.3.0:
     cosmiconfig "^2.1.1"
     object-assign "^4.1.0"
 
-postcss-loader@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.yarnpkg.com/postcss-loader/-/postcss-loader-2.0.1.tgz#4078aef52336c2434415aabaacbf9d7e7ae025e8"
+postcss-loader@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/postcss-loader/-/postcss-loader-2.0.2.tgz#031d6de5f0d0204c90acd2a3027c68d5f7e5243f"
   dependencies:
     loader-utils "^1.x"
     postcss "^6.x"
@@ -6870,6 +6881,10 @@ reduce-function-call@^1.0.1:
   resolved "https://registry.yarnpkg.com/reduce-function-call/-/reduce-function-call-1.0.2.tgz#5a200bf92e0e37751752fe45b0ab330fd4b6be99"
   dependencies:
     balanced-match "^0.4.2"
+
+redux-form-material-ui@^4.2.0:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/redux-form-material-ui/-/redux-form-material-ui-4.2.0.tgz#1e670936eb08de8e51bd43a55fb9966b4a691a9d"
 
 redux-form@^6.6.3:
   version "6.6.3"

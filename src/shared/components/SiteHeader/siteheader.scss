@@ -3,14 +3,14 @@ $boldr-ns: 'boldrui-';
 
 .#{$boldr-ns}siteheader {
   background: #f5f7f9;
-  height: 105px;
+  height: 80px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
   transition: all 0.4s ease-in-out;
 
   &.theme-boldr {
     background: #f5f7f9;
-    height: 105px;
+    height: 80px;
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
     box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
     transition: all 0.4s ease-in-out;
@@ -70,7 +70,7 @@ $boldr-ns: 'boldrui-';
   @media (min-width: 992px) {
     float: left;
     margin-left: 30px;
-    margin-top: 45.5px;
+    margin-top: 27.5px;
     margin-bottom: 45.5px;
     padding-left: 0;
   }
@@ -105,11 +105,15 @@ $boldr-ns: 'boldrui-';
   @media (min-width: 992px) {
     float: right;
     display: block;
-    margin-top: 36.5px;
+    margin-top: 19.5px;
     margin-bottom: 41.5px;
 
     svg {
       margin-right: 10px;
+
+      &:hover {
+        color: rgba(46, 54, 61, 1.00);
+      }
     }
   }
 }

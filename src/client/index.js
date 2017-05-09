@@ -40,7 +40,7 @@ const store = configureStore(history, preloadedState);
 const { dispatch } = store;
 
 const token = getToken();
-if (token) {
+if (!!token) {
   // Update application state. User has token and is probably authenticated
   dispatch(checkAuth(token));
 }

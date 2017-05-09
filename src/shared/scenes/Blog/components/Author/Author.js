@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import classnames from 'classnames';
 import Link from 'react-router-dom/Link';
-import { Avatar, Heading, Col, Social, StyleClasses } from 'boldr-ui';
+import { Avatar, Headline, Col, Social, StyleClasses } from 'boldr-ui';
 
 const BASE_ELEMENT = StyleClasses.POST_SIDEBAR_AUTHOR;
 
@@ -39,7 +39,7 @@ const Author = (props: Props) => {
       <AvatarName>
         <Avatar src={props.avatarUrl} role="presentation" />
       </AvatarName>
-      <AvatarName><Heading size={3}>{authorName}</Heading></AvatarName>
+      <AvatarName><Headline type="h3">{authorName}</Headline></AvatarName>
       <BioBlock>{props.bio}</BioBlock>
       <Social
         facebook

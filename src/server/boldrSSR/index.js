@@ -92,12 +92,7 @@ async function boldrSSR(req: $Request, res: $Response) {
       // Check if the render result contains a redirect, if so we need to set
       // the specific status and redirect header and end the response
       if (routerContext.url) {
-        res.writeHead(301, {
-          Location: routerContext.url,
-        });
-        res.end();
-
-        return;
+        res.redirect(routerContext.status, routerContext.url);
       }
 
       // Pass the route and initial state into html template
@@ -105,7 +100,7 @@ async function boldrSSR(req: $Request, res: $Response) {
     })
     .catch(err => {
       debug(`💩  Ran into issues rendering routes: ${err}`);
-      return res.status(404).send('Not Found :(');
+      return res.status(500).send(`Ran into a few issues: ${err}`);
     });
 }
 export default boldrSSR;

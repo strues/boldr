@@ -18,7 +18,7 @@ export default {
   fontFamily: 'Roboto, sans-serif',
   borderRadius: 2,
   palette: {
-    primary1Color: cyan500,
+    primary1Color: 'rgba(0, 180, 208, 1.00)',
     primary2Color: cyan700,
     primary3Color: grey400,
     accent1Color: green400,

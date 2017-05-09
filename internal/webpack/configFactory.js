@@ -13,7 +13,7 @@ import NamedModulesPlugin from 'webpack/lib/NamedModulesPlugin';
 import { removeNil, mergeDeep, ifElse, logger } from 'boldr-utils';
 import config from '../../config';
 import { happyPackPlugin } from '../utils';
-import withServiceWorker from './withServiceWorker';
+import withServiceWorker from './withServiceWorker'; // eslint-disable-line
 
 const ROOT_DIR = appRootDir.get();
 
@@ -86,19 +86,17 @@ export default function webpackConfigFactory(buildOptions) {
   const ifProdClient = ifElse(isProd && isClient);
 
   logger.start(
-    `Creating ${isProd ? 'an optimized' : 'a development'} bundle config for the "${target}"`,
-  ); // eslint-disable-line
+    `Creating ${isProd ? 'an optimized' : 'a development'} bundle for the "${target}"`,// eslint-disable-line
+  );
 
-  const bundleConfig = isServer || isClient
-    ? config(['bundles', target])
-    : config(['additionalNodeBundles', target]);
+  const bundleConfig = config(['bundles', target]);
 
   if (!bundleConfig) {
     logger.error(`No bundle configuration exists for target: ${target}`);
     throw new Error();
   }
 
-  let webpackConfig = {
+  let webpackConfig = {// eslint-disable-line
     target: isClient ? 'web' : 'node',
 
     entry: removeEmptyKeys({
@@ -107,7 +105,7 @@ export default function webpackConfigFactory(buildOptions) {
           () =>
             `webpack-hot-middleware/client?reload=true&path=http://${config('host')}:${config('hmrPort')}/__webpack_hmr`,
         ), // eslint-disable-line
-        path.resolve(ROOT_DIR, bundleConfig.entryFile),
+        path.resolve(ROOT_DIR, `src/${target}/index.js`),
       ]),
       vendor: ifProd(vendors),
     }),
@@ -124,6 +122,10 @@ export default function webpackConfigFactory(buildOptions) {
     cache: true,
     resolve: {
       extensions: ['.js', '.jsx', '.css', '.scss'],
+      modules: [
+        path.resolve(ROOT_DIR, './src'),
+        path.resolve(ROOT_DIR, './node_modules'),
+      ],
       mainFields: ifNode(
         ['module', 'jsnext:main', 'main'],
         ['web', 'browser', 'style', 'module', 'jsnext:main', 'main'],
@@ -150,6 +152,10 @@ export default function webpackConfigFactory(buildOptions) {
     performance: ifProdClient({ hints: 'warning' }, false),
     plugins: removeNil([
       ...prefetchPlugins,
+      new webpack.LoaderOptionsPlugin({
+        minimize: isProd,
+        debug: !isProd,
+      }),
       ifNode(
         () =>
           new webpack.BannerPlugin({
@@ -158,8 +164,9 @@ export default function webpackConfigFactory(buildOptions) {
             entryOnly: false,
           }),
       ),
-
-      ifClient(() => new WebpackMd5Hash()),
+      ifDev(() => new CircularDependencyPlugin()),
+      ifDev(() => new CaseSensitivePathsPlugin()),
+      ifProdClient(() => new WebpackMd5Hash()),
       new webpack.EnvironmentPlugin({
         NODE_ENV: isProd ? 'production' : 'development',
         BUILD_FLAG_IS_CLIENT: isClient,
@@ -173,24 +180,17 @@ export default function webpackConfigFactory(buildOptions) {
         DEBUG: JSON.stringify(process.env.DEBUG),
         __USE_PROXY__: JSON.stringify(process.env.USE_PROXY),
       }),
-      ifDev(() => new CircularDependencyPlugin()),
-      ifDev(() => new CaseSensitivePathsPlugin()),
+
       ifClient(
         () =>
           new AssetsPlugin({
-            filename: config('bundleAssetsFileName'),
+            filename: 'assets.json',
             path: path.resolve(ROOT_DIR, bundleConfig.outputPath),
           }),
       ),
       ifDev(() => new webpack.NoEmitOnErrorsPlugin()),
       ifDevClient(() => new webpack.HotModuleReplacementPlugin()),
 
-      ifProdClient(
-        () =>
-          new webpack.LoaderOptionsPlugin({
-            minimize: true,
-          }),
-      ),
       happyPackPlugin({
         name: 'hp-js',
         loaders: [
@@ -371,9 +371,9 @@ export default function webpackConfigFactory(buildOptions) {
       ]),
     },
   };
-  if (isProd && isClient) {
-    webpackConfig = withServiceWorker(webpackConfig, bundleConfig);
-  }
+  // if (isProd && isClient) {
+  //   webpackConfig = withServiceWorker(webpackConfig, bundleConfig);
+  // }
   // Apply the configuration middleware.
   return config('plugins.webpackConfig')(webpackConfig, buildOptions);
 }

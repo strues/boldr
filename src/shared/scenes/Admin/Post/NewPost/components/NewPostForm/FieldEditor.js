@@ -27,7 +27,7 @@ export default class FieldEditor extends Component {
   props: Props;
 
   render() {
-    const { input, placeholder } = this.props;
+    const { input } = this.props;
     const { editorState } = this.state;
     return (
       <Editor
@@ -35,7 +35,6 @@ export default class FieldEditor extends Component {
         editorStyle={editorStyle}
         onEditorStateChange={this.onChange}
         editorState={editorState}
-        placeholder={placeholder}
       />
     );
   }

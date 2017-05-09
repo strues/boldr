@@ -8,19 +8,19 @@ exports[`<Settings /> renders snapshot 1`] = `
     encodeSpecialCharacters={true}
     title="Admin: Settings"
   />
-  <ExpansionList
-    component="ul"
-    style={
-      Object {
-        "padding": 16,
+  <SettingsPanel>
+    <HeaderPanel
+      image={
+        <img
+          alt="boldr logo"
+          src="https://boldr.io/assets/boldr-white-logo.png"
+          width="100"
+        />
       }
-    }
-  >
-    <Connect(SiteName) />
-    <Connect(SiteUrl) />
-    <Connect(Logo) />
-    <Connect(SiteDescription) />
-    <Connect(Favicon) />
-  </ExpansionList>
+      subtitle="Modify how Boldr interacts with your website."
+      title="Boldr's Settings"
+    />
+    <Connect(General) />
+  </SettingsPanel>
 </div>
 `;

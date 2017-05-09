@@ -63,6 +63,11 @@ exports[`<App /> renders snapshot 1`] = `
           },
           Object {
             "component": [Function],
+            "exact": true,
+            "path": "/account/preferences",
+          },
+          Object {
+            "component": [Function],
             "loadData": [Function],
             "path": "/profiles/:username",
           },

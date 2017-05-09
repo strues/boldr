@@ -13,7 +13,7 @@
       }
     },
     "test": {
-      "command": "jest -w 4 --config=internal/jest/jest.json",
+      "command": "jest",
       "env": {
         "NODE_ENV": "test"
       }
@@ -32,7 +32,7 @@
     "app-root-dir": "1.0.2",
     "axios": "^0.16.1",
     "bluebird": "^3.5.0",
-    "boldr-ui": "0.4.0-beta.10",
+    "boldr-ui": "0.4.0-rc.2",
     "boldr-utils": "0.2.2",
     "classnames": "^2.2.5",
     "compression": "^1.6.2",
@@ -106,7 +106,7 @@
     "better-npm-run": "^0.0.15",
     "cache-loader": "^1.0.3",
     "case-sensitive-paths-webpack-plugin": "^2.0.0",
-    "chokidar": "1.6.1",
+    "chokidar": "1.7.0",
     "circular-dependency-plugin": "^3.0.0",
     "css-loader": "0.28.1",
     "cz-conventional-changelog-emoji": "^0.1.0",
@@ -132,7 +132,7 @@
     "node-sass": "^4.5.2",
     "postcss": "^6.0.1",
     "postcss-import": "^9.1.0",
-    "postcss-loader": "^2.0.1",
+    "postcss-loader": "^2.0.2",
     "postcss-reporter": "^3.0.0",
     "prettier": "^1.3.1",
     "react-addons-perf": "^15.4.2",
@@ -202,5 +202,45 @@
     "start": "NODE_ENV=production node boldrCMS/server/index.js",
     "test": "better-npm-run test",
     "test:ci": "NODE_ENV=test jest -w 4 -u --config=internal/jest/jest.json --forceExit"
+  },
+  "jest": {
+    "timers": "fake",
+    "moduleNameMapper": {
+      "\\.(css|scss)$": "identity-obj-proxy",
+      ".*\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/internal/jest/fileMock.js"
+    },
+    "collectCoverage": true,
+    "coverageDirectory": "<rootDir>/coverage",
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/(internal|server|config|docs|boldrCMS|.happypack|bin|.idea|public|db)/",
+      "/flow-typed/",
+      "/__fixtures__/",
+      "/node_modules/",
+      "<rootDir>/shared/styles/",
+      "<rootDir>/shared/types/"
+    ],
+    "transform": {
+        "^.+\\.js$": "<rootDir>/internal/jest/transform.js"
+    },
+    "testRegex": ".*.test\\.js",
+    "setupTestFrameworkScriptFile": "<rootDir>/internal/jest/setup.js",
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/enzyme-to-json/serializer"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/(server|internal|config|docs|boldrCMS|.happypack|bin|.idea|public|db)/",
+      "__snapshots__",
+      "/styles/"
+    ],
+    "transformIgnorePatterns": [
+      "/node_modules/",
+      "/.happypack/",
+      "/boldrCMS/",
+      "/db/",
+      "/styles/"
+    ],
+    "coverageReporters": [
+      "json"
+    ]
   }
 }

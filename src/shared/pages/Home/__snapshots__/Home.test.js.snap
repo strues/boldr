@@ -16,7 +16,7 @@ exports[`<Home /> renders snapshot 1`] = `
     }
     hero={
       <Hero
-        bgColor="#01579b"
+        bgColor="#00b4d0"
       >
         <Headline
           type="h1"
@@ -38,20 +38,67 @@ exports[`<Home /> renders snapshot 1`] = `
       </Hero>
     }
   >
-    <Row
+    <Grid
       componentClass="div"
-      style={
-        Object {
-          "padding": "25px",
-        }
-      }
     >
-      <Paragraph
-        isLead={false}
+      <Row
+        componentClass="div"
+        style={
+          Object {
+            "paddingTop": "75px",
+          }
+        }
       >
-        Placeholder
-      </Paragraph>
-    </Row>
+        <Col
+          componentClass="div"
+          md={4}
+          xs={12}
+        >
+          <Headline
+            type="h2"
+          >
+            Placeholder 1
+          </Headline>
+          <Paragraph
+            isLead={false}
+          >
+            Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.
+          </Paragraph>
+        </Col>
+        <Col
+          componentClass="div"
+          md={4}
+          xs={12}
+        >
+          <Headline
+            type="h2"
+          >
+            Placeholder 2
+          </Headline>
+          <Paragraph
+            isLead={false}
+          >
+            Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.
+          </Paragraph>
+        </Col>
+        <Col
+          componentClass="div"
+          md={4}
+          xs={12}
+        >
+          <Headline
+            type="h2"
+          >
+            Placeholder 3
+          </Headline>
+          <Paragraph
+            isLead={false}
+          >
+            Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.
+          </Paragraph>
+        </Col>
+      </Row>
+    </Grid>
   </Connect(BaseTemplate)>
 </div>
 `;

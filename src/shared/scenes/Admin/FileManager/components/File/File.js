@@ -1,14 +1,12 @@
 import React from 'react';
+import { FontIcon, Button } from 'boldr-ui';
 import {
-  CardTitle,
   Card,
-  FontIcon,
   CardActions,
-  Button,
-  Media,
-  MediaOverlay,
-} from 'boldr-ui';
-
+  CardMedia,
+  CardTitle,
+  CardText,
+} from 'material-ui/Card';
 import Link from 'react-router-dom/Link';
 // import config from '../../../../../../../config';
 
@@ -35,16 +33,13 @@ const File = (props: Props) => {
 
   return (
     <Card className="boldr-filecard">
-      <Media>
+      <CardMedia overlay={<CardTitle title={props.file.fileName} />}>
         <img
           src={`http://localhost:2121${props.file.url}`}
           alt={props.file.fileName}
           role="presentation"
         />
-        <MediaOverlay>
-          <CardTitle title={props.file.fileName || 'foo'} />
-        </MediaOverlay>
-      </Media>
+      </CardMedia>
       <CardActions>
         <Link to={`/admin/file-editor/${props.file.id}`}>
           <Button icon onClick={handleSelect}>

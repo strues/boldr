@@ -12,12 +12,11 @@ exports[`<Error404 /> renders snapshot 1`] = `
       />
     }
   >
-    <Styled(Component)
-      palette="grayscale"
-      size={1}
+    <Headline
+      type="h1"
     >
       404!
-    </Styled(Component)>
+    </Headline>
     <p>
       SORRY PAGE NOT FOUND
     </p>

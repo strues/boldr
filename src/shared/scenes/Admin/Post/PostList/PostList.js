@@ -1,7 +1,9 @@
 /* @flow */
 import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
-import { Card, Avatar, Button } from 'boldr-ui';
+import { Paper, Avatar } from 'boldr-ui';
+import ArrowUpward from 'material-ui/svg-icons/navigation/arrow-upward';
+import ArrowDownward from 'material-ui/svg-icons/navigation/arrow-downward';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import Griddle, {
@@ -12,6 +14,33 @@ import Griddle, {
 } from 'griddle-react';
 
 import { format } from 'date-fns';
+
+const styleConfig = {
+  icons: {
+    TableHeadingCell: {
+      sortDescendingIcon: (
+        <ArrowUpward
+          style={{
+            height: '16px',
+            width: '16px',
+            display: 'inline-block',
+            verticalAlign: 'middle',
+          }}
+        />
+      ),
+      sortAscendingIcon: (
+        <ArrowDownward
+          style={{
+            height: '16px',
+            width: '16px',
+            display: 'inline-block',
+            verticalAlign: 'middle',
+          }}
+        />
+      ),
+    },
+  },
+};
 
 type Props = {
   posts: Array<Post>,
@@ -34,39 +63,45 @@ class PostList extends Component {
     return (
       <div>
         <Helmet title="Admin: Post List" />
-        <Card tableCard>
+        <Paper zDepth={3}>
 
           <Griddle
             plugins={[plugins.LocalPlugin]}
             resultsPerPage={10}
             data={this.state.posts}
+            styleConfig={styleConfig}
             showFilter
           >
             <RowDefinition>
               <ColumnDefinition
                 id="featureImage"
                 title="Feature Image"
+                order={1}
+                sortable={false}
                 customComponent={AvatarColumn}
               />
               <ColumnDefinition
                 id="title"
                 title="Title"
+                order={2}
                 customComponent={enhancedWithRowData(TitleColumn)}
               />
               <ColumnDefinition
                 id="createdAt"
                 title="Created"
+                order={3}
                 customComponent={DateColumn}
               />
               <ColumnDefinition
                 id="published"
                 title="Status"
+                order={4}
                 customComponent={PublishColumn}
               />
 
             </RowDefinition>
           </Griddle>
-        </Card>
+        </Paper>
       </div>
     );
   }

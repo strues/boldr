@@ -2,8 +2,8 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Link from 'react-router-dom/Link';
-
-import Row from 'boldr-ui/lib/components/Layout/Row';
+// $FlowIssue
+import styled from 'styled-components';
 import Button from 'boldr-ui/lib/components/Button';
 import InputField from 'boldr-ui/lib/components/Form/Fields/InputField';
 import Form from 'boldr-ui/lib/components/Form/Form';
@@ -13,6 +13,20 @@ type Props = {
   handleSubmit: Function,
 };
 
+const FormBottom = styled.div`
+  justify-content: center;
+  display: flex;
+  width: 100%;
+  font-size: 14px;
+  text-align: center;
+`;
+const FormBottomList = styled.ul`
+  list-style-type: none;
+  padding-left: 0;
+`;
+const FormBottomListItem = styled.li`
+  padding-left: 0;
+`;
 const LoginForm = (props: Props) => {
   const { handleSubmit } = props;
   return (
@@ -33,12 +47,16 @@ const LoginForm = (props: Props) => {
         label="Password"
       />
       <Button type="submit" isFullWidth>Login</Button>
-      <Row style={{ justifyContent: 'center' }}>
-        <Link to="/account/forgot-password">Forgot your password?</Link>
-      </Row>
-      <Row style={{ justifyContent: 'center' }}>
-        <Link to="/account/signup">Create an account</Link>
-      </Row>
+      <FormBottom>
+        <FormBottomList>
+          <FormBottomListItem>
+            <Link to="/account/forgot-password">Forgot your password?</Link>
+          </FormBottomListItem>
+          <FormBottomListItem>
+            <Link to="/account/signup">Create an account</Link>
+          </FormBottomListItem>
+        </FormBottomList>
+      </FormBottom>
     </Form>
   );
 };

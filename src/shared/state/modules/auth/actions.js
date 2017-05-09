@@ -71,8 +71,8 @@ export function doLogin(formInput: userLoginFormInput) {
           token: res.data.token,
           user: res.data.user,
         });
-        dispatch(push('/'));
-        return dispatch(sendNotification(notif.MSG_LOGIN_SUCCESS));
+        dispatch(sendNotification(notif.MSG_LOGIN_SUCCESS));
+        return dispatch(push('/'));
       })
       .catch(err => {
         dispatch({

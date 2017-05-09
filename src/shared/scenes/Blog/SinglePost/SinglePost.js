@@ -2,9 +2,10 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
+// $FlowIssue
 import styled from 'styled-components';
 import classnames from 'classnames';
-import { Grid, Row, Col, Heading, StyleClasses } from 'boldr-ui';
+import { Grid, Row, Col, StyleClasses } from 'boldr-ui';
 
 import { getPosts, fetchPostIfNeeded } from '../state/posts';
 import { PostSidebar, PostContent, PostTitle } from '../components';
@@ -99,7 +100,7 @@ class SinglePost extends PureComponent {
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   return {
     entities: state.entities,
     currentPost: state.blog.posts.currentPost,

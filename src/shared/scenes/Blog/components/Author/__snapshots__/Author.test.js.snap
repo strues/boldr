@@ -34,9 +34,8 @@ exports[`<Author /> renders snapshot 1`] = `
     />
   </styled.div>
   <styled.div>
-    <Styled(Component)
-      palette="grayscale"
-      size={3}
+    <Headline
+      type="h3"
     >
       <Link
         replace={false}
@@ -44,7 +43,7 @@ exports[`<Author /> renders snapshot 1`] = `
       >
         hey
       </Link>
-    </Styled(Component)>
+    </Headline>
   </styled.div>
   <styled.div>
     bio bio

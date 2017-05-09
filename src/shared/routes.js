@@ -14,8 +14,10 @@ import SignupContainer from './scenes/Account/Signup/SignupContainer';
 import ForgotPassword from './scenes/Account/ForgotPassword';
 import ResetPassword from './scenes/Account/ResetPassword';
 import Verify from './scenes/Account/Verify';
+import PreferencesContainer from './scenes/Account/Preferences';
 // Profile
 import ProfileContainer from './scenes/Profile/ProfileContainer';
+
 // Blog
 import PostListingContainer
   from './scenes/Blog/PostListing/PostListingContainer';
@@ -142,6 +144,11 @@ export default [
         path: '/account/verify/:token',
         exact: true,
         component: Verify,
+      },
+      {
+        path: '/account/preferences',
+        component: PreferencesContainer,
+        exact: true,
       },
       {
         path: '/profiles/:username',

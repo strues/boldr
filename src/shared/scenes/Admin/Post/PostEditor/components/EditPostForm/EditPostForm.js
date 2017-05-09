@@ -3,7 +3,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import styled from 'styled-components';
-import { Button, InputField, Col, Row, Heading, FormGroup } from 'boldr-ui';
+import { Button, InputField, Col, Row, Headline, FormGroup } from 'boldr-ui';
 
 import EditorField from './EditorField';
 
@@ -31,9 +31,9 @@ const EditPostForm = (props: Props) => {
   return (
     <Row>
       <Col xs>
-        <Heading size={3}>
+        <Headline type="h3">
           Editing {props.initialValues.title}
-        </Heading>
+        </Headline>
         <form onSubmit={handleSubmit}>
           <Wrapper>
             <FormGroup>
@@ -70,7 +70,7 @@ const EditPostForm = (props: Props) => {
               />
             </FormGroup>
             <FormGroup>
-              <Heading size={6}>Post Status:</Heading>
+              <Headline type="h4">Post Status:</Headline>
               <label htmlFor="draft" style={{ marginRight: '10px' }}>
                 <Field
                   id="draft"

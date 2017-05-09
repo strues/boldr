@@ -85,7 +85,6 @@ class NewPostForm extends Component {
                       component={FieldEditor}
                       label="Content"
                       name="content"
-                      placeholder="Tell your story"
                       tabIndex={-2}
                       validate={[isRequired]}
                     />

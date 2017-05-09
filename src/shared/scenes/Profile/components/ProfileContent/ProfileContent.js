@@ -1,7 +1,10 @@
 /* @flow */
 import React from 'react';
+import Link from 'react-router-dom/Link';
+// $FlowIssue
 import styled from 'styled-components';
-import { Button, FontIcon, Col, Row, Heading } from 'boldr-ui';
+import Button from 'boldr-ui/lib/components/Button';
+import { FontIcon, Col, Row, Headline } from 'boldr-ui';
 
 import ProfileDetail from '../ProfileDetail';
 
@@ -35,24 +38,9 @@ const ProfileContent = (props: Props) => {
 
   const editButtons = (
     <EditWrapper>
-      <Button
-        primary
-        raised
-        label="Edit Profile"
-        onClick={props.toggleDrawer}
-      />
-      <Button
-        secondary
-        flat
-        label="Upload Profile Image"
-        onClick={props.handleProfileImgClick}
-      />
-      <Button
-        secondary
-        flat
-        label="Upload Avatar"
-        onClick={props.handleAvatarImgClick}
-      />
+      <Link to="/account/preferences">
+        <Button>Edit Profile</Button>
+      </Link>
     </EditWrapper>
   );
   return (
@@ -73,9 +61,9 @@ const ProfileContent = (props: Props) => {
         </Col>
         <Col sm={12} md={6}>
           <Col xs>
-            <Heading size={1}>
+            <Headline type="h1">
               {profile.firstName} {' '} {profile.lastName}'s Profile
-            </Heading>
+            </Headline>
           </Col>
           <DetailList>
             <ProfileDetail
