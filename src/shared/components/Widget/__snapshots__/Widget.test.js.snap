@@ -5,16 +5,14 @@ exports[`<Widget /> renders snapshot 1`] = `
   className="boldrui-widget"
 >
   <Card
-    expanderIconChildren="keyboard_arrow_down"
-    expanderIconClassName="material-icons"
-    expanderTooltipPosition="left"
+    expandable={false}
+    expanded={null}
+    initiallyExpanded={false}
   >
     <CardTitle
       title="widget"
     />
-    <CardText
-      component="section"
-    />
+    <CardText />
   </Card>
 </div>
 `;

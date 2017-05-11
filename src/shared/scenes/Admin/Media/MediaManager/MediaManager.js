@@ -1,9 +1,8 @@
 /* @flow */
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import { Zoom } from 'animate-components';
 import styled from 'styled-components';
-import { Photo, Grid, Col, Row, Card, CardText, CardTitle } from 'boldr-ui';
+import { Photo, Grid, Col, Row, Block, Headline } from 'boldr-ui';
 import MediaForm from './components/MediaForm';
 
 type Props = {
@@ -50,15 +49,13 @@ class MediaManager extends Component {
               <Row xsCenter>
                 <Col xs={8}>
                   <MediaFormCard>
-                    <Card>
-                      <CardTitle title="Edit media attributes" />
-                      <CardText>
-                        <MediaForm
-                          initialValues={media}
-                          onSubmit={this.handleSubmit}
-                        />
-                      </CardText>
-                    </Card>
+                    <Block>
+                      <Headline type="h2">Edit media attributes</Headline>
+                      <MediaForm
+                        initialValues={media}
+                        onSubmit={this.handleSubmit}
+                      />
+                    </Block>
                   </MediaFormCard>
                 </Col>
               </Row>

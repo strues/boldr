@@ -5,12 +5,7 @@ const userProcessStrategy = (value, parent, key) => {
     case 'author':
       return {
         ...value,
-        posts: [parent.id],
-      };
-    case 'commenter':
-      return {
-        ...value,
-        comments: [parent.id],
+        articles: [parent.id],
       };
     default:
       return { ...value };
@@ -21,8 +16,7 @@ const userMergeStrategy = (entityA, entityB) => {
   return {
     ...entityA,
     ...entityB,
-    posts: [...(entityA.posts || []), ...(entityB.posts || [])],
-    comments: [...(entityA.comments || []), ...(entityB.comments || [])],
+    articles: [...(entityA.articles || []), ...(entityB.articles || [])],
   };
 };
 

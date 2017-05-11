@@ -1,7 +1,7 @@
 import merge from 'lodash/merge';
 
 const initialState = {
-  posts: {},
+  articles: {},
   tags: {},
   attachments: {},
   users: {},

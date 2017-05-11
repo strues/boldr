@@ -61,7 +61,7 @@ class UploadComputer extends Component {
         <Col xs={6}>
           <Paper zDepth={1}>
             <MediaTitleArea>
-              <Headline type="h1">
+              <Headline type="h2">
                 <Icon
                   kind="folder-upload"
                   color="rgba(0, 188, 212, 1.00)"

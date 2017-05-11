@@ -1,0 +1,67 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`arrayOfArticle should match the normalizr-arrayOfArticle-schema 1`] = `
+ArraySchema {
+  "schema": EntitySchema {
+    "_getId": [Function],
+    "_idAttribute": "slug",
+    "_key": "articles",
+    "_mergeStrategy": [Function],
+    "_processStrategy": [Function],
+    "schema": Object {
+      "author": EntitySchema {
+        "_getId": [Function],
+        "_idAttribute": "id",
+        "_key": "users",
+        "_mergeStrategy": [Function],
+        "_processStrategy": [Function],
+        "schema": Object {},
+      },
+      "tags": Array [
+        EntitySchema {
+          "_getId": [Function],
+          "_idAttribute": "id",
+          "_key": "tags",
+          "_mergeStrategy": [Function],
+          "_processStrategy": [Function],
+          "schema": Object {
+            "processStrategy": [Function],
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`article schema should match the normalizr-article-schema 1`] = `
+EntitySchema {
+  "_getId": [Function],
+  "_idAttribute": "slug",
+  "_key": "articles",
+  "_mergeStrategy": [Function],
+  "_processStrategy": [Function],
+  "schema": Object {
+    "author": EntitySchema {
+      "_getId": [Function],
+      "_idAttribute": "id",
+      "_key": "users",
+      "_mergeStrategy": [Function],
+      "_processStrategy": [Function],
+      "schema": Object {},
+    },
+    "tags": Array [
+      EntitySchema {
+        "_getId": [Function],
+        "_idAttribute": "id",
+        "_key": "tags",
+        "_mergeStrategy": [Function],
+        "_processStrategy": [Function],
+        "schema": Object {
+          "processStrategy": [Function],
+        },
+      },
+    ],
+  },
+}
+`;

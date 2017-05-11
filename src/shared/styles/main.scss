@@ -64,24 +64,12 @@ table.griddle-table tbody > tr:hover {
 input.griddle-filter {
   background: rgba(255, 255, 255, 0.9);
   padding-left: 20px;
-  width: calc(100% - 20px);
-  margin-top: 10px;
-  margin-bottom: 0;
+  width: 240px;
+  height: 30px;
+  margin: 10px;
 }
 
 input.griddle-filter::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: #8f8f8f;
-}
-
-input.griddle-filter::-moz-placeholder { /* Firefox 19+ */
-  color: #8f8f8f;
-}
-
-input.griddle-filter:-ms-input-placeholder { /* IE 10+ */
-  color: #8f8f8f;
-}
-
-input.griddle-filter:-moz-placeholder { /* Firefox 18- */
   color: #8f8f8f;
 }
 

@@ -1,0 +1,62 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ArticleCard /> renders snapshot 1`] = `
+<div
+  className="boldrui-post-card"
+>
+  <Card
+    expandable={false}
+    expanded={null}
+    initiallyExpanded={false}
+  >
+    <CardMedia
+      overlay={
+        <CardTitle
+          subtitle="Invalid Date"
+          title="Test Post"
+        />
+      }
+    >
+      <img
+        alt="Test Post feature image"
+      />
+    </CardMedia>
+    <CardText>
+      <Row
+        componentClass="div"
+      >
+        <Col
+          componentClass="div"
+          xs={12}
+        >
+          <Link
+            className="readmore-link"
+            replace={false}
+            to="/blog/undefined"
+          >
+            <FlatButton
+              disabled={false}
+              fullWidth={false}
+              label="Read More"
+              labelPosition="after"
+              labelStyle={Object {}}
+              onKeyboardFocus={[Function]}
+              onMouseEnter={[Function]}
+              onMouseLeave={[Function]}
+              onTouchStart={[Function]}
+              onTouchTap={[Function]}
+              primary={true}
+              secondary={false}
+            />
+          </Link>
+        </Col>
+      </Row>
+    </CardText>
+    <CardActions>
+      <TagBlock
+        tags={null}
+      />
+    </CardActions>
+  </Card>
+</div>
+`;

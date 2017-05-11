@@ -6,7 +6,7 @@ import { Grid, Col, Row, Loader } from 'boldr-ui';
 import Helmet from 'react-helmet';
 
 import BaseTemplate from '../../../templates/BaseTemplate';
-import { fetchTagPostsIfNeeded } from '../state/tags/actions';
+import { fetchTagArticlesIfNeeded } from '../state/tags/actions';
 import TagList from './TagList';
 
 type Props = {
@@ -14,19 +14,19 @@ type Props = {
   isFetching: boolean,
   match: Object,
   listTags: Object,
-  fetchTagPostsIfNeeded: () => void,
+  fetchTagArticlesIfNeeded: () => void,
 };
 
 export class TagListContainer extends Component {
   static defaultProps: {
     match: { params: { name: '' } },
-    fetchTagPostsIfNeeded: () => {},
+    fetchTagArticlesIfNeeded: () => {},
   };
 
   componentDidMount() {
-    const { fetchTagPostsIfNeeded, match: { params } } = this.props;
+    const { fetchTagArticlesIfNeeded, match: { params } } = this.props;
 
-    fetchTagPostsIfNeeded(params.name);
+    fetchTagArticlesIfNeeded(params.name);
   }
 
   props: Props;
@@ -41,7 +41,7 @@ export class TagListContainer extends Component {
       >
         <TagList
           listTags={this.props.listTags}
-          posts={this.props.currentTag.posts}
+          articles={this.props.currentTag.articles}
         />
       </BaseTemplate>
     );
@@ -56,6 +56,6 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps, { fetchTagPostsIfNeeded })(
+export default connect(mapStateToProps, { fetchTagArticlesIfNeeded })(
   TagListContainer,
 );

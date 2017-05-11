@@ -16,7 +16,7 @@ declare type User = {
   verified: boolean,
 };
 
-declare type Post = {
+declare type Article = {
   id: string,
   featureImage: ?string,
   title: string,
@@ -32,7 +32,7 @@ declare type Post = {
   tags: ?Array<Tag>,
   attachments: ?Object,
   meta: ?Object,
-  user_id: ?string,
+  userId: ?string,
 };
 
 declare type Tag = {

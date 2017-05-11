@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ArticleContent /> renders snapshot 1`] = `
+<article>
+  <Paper
+    className="boldr-paperoverride"
+    component="div"
+    rounded={false}
+    style={
+      Object {
+        "marginBottom": "50px",
+        "padding": "1em",
+      }
+    }
+    zDepth={2}
+  >
+    <ArticleDate />
+    <Divider />
+    <div
+      className="boldr-post__content"
+      dangerouslySetInnerHTML={
+        Object {
+          "__html": undefined,
+        }
+      }
+    />
+  </Paper>
+</article>
+`;

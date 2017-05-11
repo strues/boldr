@@ -17,8 +17,8 @@ const api = axios.create({
   validateStatus: status => status >= 200 && status < 500,
 });
 
-api.onUnauthorizedError = callback => {
-  api.interceptors.response.use(response => {
+axios.onUnauthorizedError = callback => {
+  axios.interceptors.response.use(response => {
     if (response.status === 401) {
       callback(response);
     }

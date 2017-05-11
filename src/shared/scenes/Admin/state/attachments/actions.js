@@ -116,31 +116,31 @@ function uploadFail(err) {
   * @exports uploadFiles
   *****************************************************************/
 
-export function uploadPostImage(payload) {
+export function uploadArticleImage(payload) {
   return dispatch => {
-    dispatch(beginUploadPostImage());
+    dispatch(beginuploadArticleImage());
     const data = new FormData();
     data.append('payload.name', payload);
     return api
       .post(`${API_PREFIX}/media`, data)
       .then(res => {
-        dispatch(uploadPostImageSuccess(res));
+        dispatch(uploadArticleImageSuccess(res));
         dispatch(sendNotification(notif.MSG_UPLOAD_SUCCESS));
       })
       .catch(err => {
-        dispatch(uploadPostImageFail(err));
+        dispatch(uploadArticleImageFail(err));
         dispatch(sendNotification(notif.MSG_UPLOAD_ERROR));
       });
   };
 }
 
-function beginUploadPostImage() {
+function beginuploadArticleImage() {
   return {
     type: t.UPLOAD_POST_IMG_REQUEST,
   };
 }
 
-function uploadPostImageSuccess(res) {
+function uploadArticleImageSuccess(res) {
   /* istanbul ignore next */
   return {
     type: t.UPLOAD_POST_IMG_SUCCESS,
@@ -148,7 +148,7 @@ function uploadPostImageSuccess(res) {
   };
 }
 
-function uploadPostImageFail(err) {
+function uploadArticleImageFail(err) {
   return {
     type: t.UPLOAD_POST_IMG_FAILURE,
     error: err,

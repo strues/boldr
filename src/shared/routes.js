@@ -19,24 +19,25 @@ import PreferencesContainer from './scenes/Account/Preferences';
 import ProfileContainer from './scenes/Profile/ProfileContainer';
 
 // Blog
-import PostListingContainer
-  from './scenes/Blog/PostListing/PostListingContainer';
-import SinglePost from './scenes/Blog/SinglePost/SinglePost';
+import ArticleListingContainer
+  from './scenes/Blog/ArticleListing/ArticleListingContainer';
+import Article from './scenes/Blog/Article/Article';
 import TagListContainer from './scenes/Blog/TagList/TagListContainer';
 // Admin
 import MediaManagerContainer
   from './scenes/Admin/Media/MediaManager/MediaManagerContainer';
 import UploadMedia from './scenes/Admin/Media/UploadMedia';
-import PostEditor from './scenes/Admin/Post/PostEditor';
-import NewPostContainer from './scenes/Admin/Post/NewPost/NewPostContainer';
+import ArticleEditor from './scenes/Admin/Content/ArticleEditor';
+import NewArticleContainer
+  from './scenes/Admin/Content/NewArticle/NewArticleContainer';
 import FileManagerContainer
   from './scenes/Admin/FileManager/FileManagerContainer';
 import FileEditor from './scenes/Admin/FileManager/FileEditor';
 import NavigationContainer from './scenes/Admin/Navigation/NavigationContainer';
 import Members from './scenes/Admin/Members';
 import Settings from './scenes/Admin/Settings';
-import TagsContainer from './scenes/Admin/Tags/TagsContainer';
-import TaggedPost from './scenes/Admin/Tags/components/TaggedPost';
+import TagsContainer from './scenes/Admin/Content/Tags/TagsContainer';
+import TaggedPost from './scenes/Admin/Content/Tags/components/TaggedPost';
 import DashboardContainer from './scenes/Admin/Dashboard/DashboardContainer';
 
 // Async data loading actions
@@ -53,10 +54,10 @@ import { fetchProfileIfNeeded } from './state/modules/users';
 
 import { fetchMainMenuIfNeeded } from './state/modules/boldr/menu/actions';
 import {
-  fetchPostsIfNeeded,
-  fetchPostIfNeeded,
+  fetchArticlesIfNeeded,
+  fetchArticleIfNeeded,
   fetchTagsIfNeeded,
-  fetchTagPostsIfNeeded,
+  fetchTagArticlesIfNeeded,
   fetchTagPosts,
 } from './scenes/Blog/state';
 
@@ -68,8 +69,8 @@ function LoadingComponent({ error }) {
     return <Loader />;
   }
 }
-const PostListContainer = Loadable({
-  loader: () => import('./scenes/Admin/Post/PostList/PostListContainer'),
+const ArticlesContainer = Loadable({
+  loader: () => import('./scenes/Admin/Content/Articles/ArticlesContainer'),
   LoadingComponent,
 });
 const AdminDashboard = Loadable({
@@ -99,26 +100,26 @@ export default [
       {
         path: '/blog',
         exact: true,
-        component: PostListingContainer,
+        component: ArticleListingContainer,
         loadData: async (dispatch: Dispatch) =>
           Promise.all([
-            await dispatch(fetchPostsIfNeeded()),
+            await dispatch(fetchArticlesIfNeeded()),
             await dispatch(fetchTagsIfNeeded()),
           ]),
       },
       {
         path: '/blog/:slug',
         exact: true,
-        component: SinglePost,
+        component: Article,
         loadData: async (dispatch: Dispatch, params: Object) =>
-          Promise.all([await dispatch(fetchPostIfNeeded(params.slug))]),
+          Promise.all([await dispatch(fetchArticleIfNeeded(params.slug))]),
       },
       {
         path: '/blog/tags/:name',
         exact: true,
         component: TagListContainer,
         loadData: async (dispatch: Dispatch, params: Object) =>
-          Promise.all([await dispatch(fetchTagPostsIfNeeded(params.name))]),
+          Promise.all([await dispatch(fetchTagArticlesIfNeeded(params.name))]),
       },
       {
         path: '/account/login',
@@ -166,24 +167,40 @@ export default [
         },
         routes: [
           {
-            path: '/admin/posts',
+            path: '/admin/content/articles',
             exact: true,
             strict: true,
-            component: PostListContainer,
+            component: ArticlesContainer,
             loadData: async (dispatch: Dispatch) =>
-              Promise.all([await dispatch(fetchPostsIfNeeded())]),
+              Promise.all([await dispatch(fetchArticlesIfNeeded())]),
           },
           {
-            path: '/admin/new-post',
+            path: '/admin/content/articles/new',
             exact: true,
-            component: NewPostContainer,
+            component: NewArticleContainer,
           },
           {
-            path: '/admin/post-editor/:slug',
+            path: '/admin/content/articles/:slug',
             exact: true,
-            component: PostEditor,
+            component: ArticleEditor,
             loadData: async (dispatch: Dispatch, params: Object) =>
-              Promise.all([await dispatch(fetchPostIfNeeded(params.slug))]),
+              Promise.all([await dispatch(fetchArticleIfNeeded(params.slug))]),
+          },
+          {
+            path: '/admin/content/tags',
+            exact: true,
+            component: TagsContainer,
+            loadData: async (dispatch: Dispatch) =>
+              Promise.all([await dispatch(fetchTagsIfNeeded())]),
+          },
+          {
+            path: '/admin/content/tags/:name',
+            exact: true,
+            component: TaggedPost,
+            loadData: async (dispatch: Dispatch, params: Object) =>
+              Promise.all([
+                await dispatch(fetchTagArticlesIfNeeded(params.name)),
+              ]),
           },
           {
             path: '/admin/filemanager',
@@ -216,20 +233,7 @@ export default [
             exact: true,
             component: Settings,
           },
-          {
-            path: '/admin/tags',
-            exact: true,
-            component: TagsContainer,
-            loadData: async (dispatch: Dispatch) =>
-              Promise.all([await dispatch(fetchTagsIfNeeded())]),
-          },
-          {
-            path: '/admin/tags/:name',
-            exact: true,
-            component: TaggedPost,
-            loadData: async (dispatch: Dispatch, params: Object) =>
-              Promise.all([await dispatch(fetchTagPostsIfNeeded(params.name))]),
-          },
+
           {
             path: '/admin/media',
             exact: true,

@@ -1,9 +1,11 @@
-/* eslint-disable import/no-mutable-exports */
+/* eslint-disable import/no-mutable-exports, react/no-array-index-key */
 import React from 'react';
 import styled from 'styled-components';
 import { Field, reduxForm, formValueSelector, FieldArray } from 'redux-form';
 import { connect } from 'react-redux';
-import { SelectField, Button, InputField } from 'boldr-ui';
+import IconButton from 'material-ui/IconButton';
+import FlatButton from 'material-ui/FlatButton';
+import { InputField, FontIcon } from 'boldr-ui';
 
 type Props = {
   handleSubmit?: Function,
@@ -28,25 +30,23 @@ const DetailsListItem = styled.li`
   padding-left: 0;
 `;
 
-const renderMenuDetails = (props: Props) => (
+const renderMenuDetails = ({ fields }: Props) => (
   <DetailsList>
     <DetailsListItem>
-      <Button
+      <FlatButton
         secondary
-        flat
-        onClick={() => props.fields.push({})}
+        onTouchTap={() => fields.push({})}
         label="Add Menu Detail"
       />
     </DetailsListItem>
-    {props.fields.map(items => (
-      <DetailsListItem key={items.id}>
-        <Button
+    {fields.map((items, index) => (
+      <DetailsListItem key={index}>
+        <IconButton
           style={{ float: 'right' }}
-          icon
-          onClick={() => fields.remove(items.id)}
+          onClick={() => fields.remove(index)}
         >
-          close
-        </Button>
+          <FontIcon>close</FontIcon>
+        </IconButton>
         <Field
           id="name"
           name={`${items}.name`}
@@ -75,16 +75,6 @@ const renderMenuDetails = (props: Props) => (
 let NavigationForm = (props: Props) => {
   // eslint-disable-line
   const { handleSubmit, reset, hasDropdownValue } = props;
-  const opts = [
-    {
-      value: true,
-      name: 'Yes',
-    },
-    {
-      value: false,
-      name: 'No',
-    },
-  ];
 
   return (
     <form className="form__navigation" onSubmit={handleSubmit}>
@@ -156,8 +146,8 @@ let NavigationForm = (props: Props) => {
         </div>}
 
       <div className="form__footer">
-        <Button type="submit" label="Save" style={style} raised primary />
-        <Button label="Reset" onClick={reset} style={style} raised secondary />
+        <FlatButton type="submit" label="Save" style={style} primary />
+        <FlatButton label="Reset" onTouchTap={reset} style={style} secondary />
       </div>
     </form>
   );

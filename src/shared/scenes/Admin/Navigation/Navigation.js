@@ -1,18 +1,10 @@
 /* @flow */
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import {
-  List,
-  ListItem,
-  Button,
-  FontIcon,
-  Headline,
-  Paper,
-  Divider,
-  Row,
-  Col,
-  Modal,
-} from 'boldr-ui';
+import List from 'material-ui/List/List';
+import ListItem from 'material-ui/List/ListItem';
+import IconButton from 'material-ui/IconButton';
+import { FontIcon, Headline, Paper, Divider, Row, Col, Modal } from 'boldr-ui';
 
 import NavigationEditor from './components/NavigationEditor';
 import NavigationForm from './components/NavigationForm';
@@ -86,7 +78,7 @@ class Navigation extends Component {
         <ListItem
           key={item.id}
           primaryText={item.name}
-          onClick={() => this.handleItemClick(item)}
+          onTouchTap={() => this.handleItemClick(item)}
         />
       );
     });
@@ -110,9 +102,9 @@ class Navigation extends Component {
                 {listItems}
               </List>
             </Paper>
-            <Button onClick={this.openModal} icon>
+            <IconButton onTouchTap={this.openModal}>
               <FontIcon>add</FontIcon>
-            </Button>
+            </IconButton>
           </Col>
           <Col xs={12} md={4}>
             <Paper zDepth={2}>

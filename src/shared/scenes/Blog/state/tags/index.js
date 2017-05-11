@@ -5,7 +5,7 @@ import { arrayOfTag, tag } from './schema';
 import {
   fetchTagsIfNeeded,
   fetchTagPosts,
-  fetchTagPostsIfNeeded,
+  fetchTagArticlesIfNeeded,
   fetchTags,
   selectTag,
   clearTag,
@@ -19,7 +19,7 @@ export {
   tagsReducer,
   fetchTagsIfNeeded,
   fetchTagPosts,
-  fetchTagPostsIfNeeded,
+  fetchTagArticlesIfNeeded,
   fetchTags,
   selectTag,
   clearTag,

@@ -1,27 +1,25 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import React from 'react';
 import { Grid, Col, Row, Loader } from 'boldr-ui';
-
-import { fetchTagPosts } from '../state/tags/actions';
-import PostCard from '../components/PostCard';
+import ArticleCard from '../components/ArticleCard';
 
 type Props = {
-  posts: Array<Post>,
+  articles: Array<Article>,
   listTags: Object,
 };
 
 const TagList = (props: Props) => {
-  if (!props.posts) {
+  if (!props.articles) {
     return <Loader />;
   }
   return (
     <div>
       <Grid>
         <Row>
-          {props.posts.map(post => (
-            <Col key={post.id} xs={12} md={4}>
-              <PostCard listTags={props.listTags} {...post} />
+          {props.articles.map(article => (
+            <Col key={article.id} xs={12} md={4}>
+              <ArticleCard listTags={props.listTags} {...article} />
             </Col>
           ))}
         </Row>

@@ -4,10 +4,10 @@ import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import filter from 'lodash/filter';
 import Link from 'react-router-dom/Link';
-// $FlowIssue
 import styled from 'styled-components';
 import { VanishIn } from 'animate-components';
-import { Col, Row, Headline, Photo, Button } from 'boldr-ui';
+import IconButton from 'material-ui/IconButton';
+import { Col, Row, Headline, Photo, FontIcon } from 'boldr-ui';
 
 type Props = {
   media: Array<Object>,
@@ -75,13 +75,15 @@ class Media extends Component {
         <Row>
           <Col xs={12} md={1}>
             <MediaSidePanel>
-              <Button icon onClick={this.handleToggleImage}>
-                photo_library
-              </Button>
+              <IconButton onTouchTap={this.handleToggleImage}>
+
+                <FontIcon>photo_library</FontIcon>
+              </IconButton>
               {' '}
-              <Button icon onClick={this.handleToggleVideo}>
-                personal_video
-              </Button>
+              <IconButton onTouchTap={this.handleToggleVideo}>
+
+                <FontIcon>personal_video</FontIcon>
+              </IconButton>
             </MediaSidePanel>
           </Col>
           <Col xs={12} md={11}>
@@ -101,19 +103,17 @@ class Media extends Component {
                         cta={
                           <div>
                             <Link to={`/admin/media/${m.id}`}>
-                              <Button
-                                icon
-                                onClick={() => this.props.selectMedia(m)}
+                              <IconButton
+                                onTouchTap={() => this.props.selectMedia(m)}
                               >
-                                edit
-                              </Button>
+                                <FontIcon>edit</FontIcon>
+                              </IconButton>
                             </Link>
-                            <Button
-                              icon
-                              onClick={() => this.props.deleteMedia(m)}
+                            <IconButton
+                              onTouchTap={() => this.props.deleteMedia(m)}
                             >
-                              delete_permanently
-                            </Button>
+                              <FontIcon>delete_permanently</FontIcon>
+                            </IconButton>
                           </div>
                         }
                       />

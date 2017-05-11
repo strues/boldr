@@ -1,25 +1,25 @@
 import Author from './Author';
-import PostCard from './PostCard';
-import PostContent from './PostContent';
-import PostImage from './PostImage';
-import PostSidebar from './PostSidebar';
+import ArticleCard from './ArticleCard';
+import ArticleContent from './ArticleContent';
+import ArticleImage from './ArticleImage';
+import ArticleSidebar from './ArticleSidebar';
 import Tag from './Tag';
 import TagBlock from './TagBlock';
-import FeaturedPost from './FeaturedPost';
-import PostTitle from './PostTitle';
+import FeaturedArticle from './FeaturedArticle';
+import ArticleTitle from './ArticleTitle';
 import SidebarTags from './SidebarTags';
-import PostDate from './PostDate';
+import ArticleDate from './ArticleDate';
 
 export {
   Author,
-  PostDate,
-  PostCard,
-  PostTitle,
-  PostContent,
-  PostImage,
-  PostSidebar,
+  ArticleDate,
+  ArticleCard,
+  ArticleTitle,
+  ArticleContent,
+  ArticleImage,
+  ArticleSidebar,
   Tag,
   TagBlock,
-  FeaturedPost,
+  FeaturedArticle,
   SidebarTags,
 };

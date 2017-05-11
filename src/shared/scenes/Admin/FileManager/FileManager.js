@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
-import { Toolbar, Button, Collapse } from 'boldr-ui';
-
+import RaisedButton from 'material-ui/RaisedButton';
+import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 // $FlowIssue
 import Dropzone from 'react-dropzone';
 import Helmet from 'react-helmet';
@@ -64,36 +64,32 @@ class FileManager extends Component {
       <div>
         <Helmet title="Admin: File Manager" />
         <Toolbar
-          titleStyle={{ color: '#fff' }}
-          style={{ backgroundColor: 'rgba(46, 54, 61, 1.00)' }}
-          title="File Manager"
-          nav={null}
-          actions={
-            <Button
-              onClick={this._toggleCollapse}
+          style={{ backgroundColor: 'rgba(46, 54, 61, 1.00)', color: '#fff' }}
+        >
+          <ToolbarGroup>
+            <ToolbarTitle text="File Manager" />
+            <RaisedButton
+              onTouchTap={this._toggleCollapse}
               label="Upload File"
-              raised
               secondary
             />
-          }
-        />
-        <Collapse collapsed={this.state.collapsed}>
-          <Dropzone
-            className="boldr-dropzone boldr-dropzone__panel"
-            ref={node => {
-              (this: any).dropzone = node;
-            }}
-            multiple={false}
-            onDrop={this.onDrop}
-            accept="image/*"
-            maxSize={5242880}
-          >
-            <p className="boldr-dropzone__drop">
-              Drop an image here or select one from your computer. <br />
-              It will upload right away.
-            </p>
-          </Dropzone>
-        </Collapse>
+          </ToolbarGroup>
+        </Toolbar>
+        <Dropzone
+          className="boldr-dropzone boldr-dropzone__panel"
+          ref={node => {
+            (this: any).dropzone = node;
+          }}
+          multiple={false}
+          onDrop={this.onDrop}
+          accept="image/*"
+          maxSize={5242880}
+        >
+          <p className="boldr-dropzone__drop">
+            Drop an image here or select one from your computer. <br />
+            It will upload right away.
+          </p>
+        </Dropzone>
         <FileCardView
           files={attachments.files}
           removeMedia={handleRemoveMedia}

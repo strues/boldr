@@ -44,7 +44,7 @@ export const fetchTags = (axios: any): ThunkAction => (dispatch: Dispatch) => {
   dispatch({ type: t.FETCH_TAGS_REQUEST });
 
   return axios
-    .get(`${API_PREFIX}/tags?include=posts`)
+    .get(`${API_PREFIX}/tags?include=articles`)
     .then(res => {
       const normalizedData = normalize(res.data, arrayOfTag);
       dispatch({
@@ -105,7 +105,7 @@ export const fetchTagPosts = (name: string, axios: any): ThunkAction => (
   });
 
   return axios
-    .get(`${API_PREFIX}/tags/${name}/posts`)
+    .get(`${API_PREFIX}/tags/${name}/articles`)
     .then(res => {
       dispatch({
         type: t.FETCH_TAGGED_POST_SUCCESS,
@@ -120,7 +120,7 @@ export const fetchTagPosts = (name: string, axios: any): ThunkAction => (
     });
 };
 /* istanbul ignore next */
-export const fetchTagPostsIfNeeded = (name: string): ThunkAction => (
+export const fetchTagArticlesIfNeeded = (name: string): ThunkAction => (
   dispatch: Dispatch,
   getState: GetState,
   axios: any,

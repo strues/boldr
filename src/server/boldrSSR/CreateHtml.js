@@ -49,10 +49,11 @@ export type CreateHtmlProps = {
   nonce: string,
   preloadedState: Object,
   helmet: Head,
+  styles: Object,
 };
 
 function CreateHtml(props: CreateHtmlProps) {
-  const { reactAppString, nonce, preloadedState, helmet } = props;
+  const { reactAppString, nonce, preloadedState, helmet, styles } = props;
 
   // Creates an inline script definition that is protected by the nonce.
   const inlineScript = (body: string) => (

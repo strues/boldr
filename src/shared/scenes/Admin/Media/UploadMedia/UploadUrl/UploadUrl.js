@@ -26,7 +26,7 @@ class UploadUrl extends Component {
         <Col xs={6}>
           <Block>
             <MediaTitleArea>
-              <Headline type="h1">
+              <Headline type="h2">
                 <Icon
                   kind="folder-upload"
                   color="rgba(0, 188, 212, 1.00)"

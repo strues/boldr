@@ -84,19 +84,31 @@ exports[`<App /> renders snapshot 1`] = `
                 "component": [Function],
                 "exact": true,
                 "loadData": [Function],
-                "path": "/admin/posts",
+                "path": "/admin/content/articles",
                 "strict": true,
               },
               Object {
                 "component": [Function],
                 "exact": true,
-                "path": "/admin/new-post",
+                "path": "/admin/content/articles/new",
               },
               Object {
                 "component": [Function],
                 "exact": true,
                 "loadData": [Function],
-                "path": "/admin/post-editor/:slug",
+                "path": "/admin/content/articles/:slug",
+              },
+              Object {
+                "component": [Function],
+                "exact": true,
+                "loadData": [Function],
+                "path": "/admin/content/tags",
+              },
+              Object {
+                "component": [Function],
+                "exact": true,
+                "loadData": [Function],
+                "path": "/admin/content/tags/:name",
               },
               Object {
                 "component": [Function],
@@ -125,18 +137,6 @@ exports[`<App /> renders snapshot 1`] = `
                 "component": [Function],
                 "exact": true,
                 "path": "/admin/settings",
-              },
-              Object {
-                "component": [Function],
-                "exact": true,
-                "loadData": [Function],
-                "path": "/admin/tags",
-              },
-              Object {
-                "component": [Function],
-                "exact": true,
-                "loadData": [Function],
-                "path": "/admin/tags/:name",
               },
               Object {
                 "component": [Function],

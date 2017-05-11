@@ -1,6 +1,6 @@
 const httpProxy = require('http-proxy');
 
-const proxyTarget = 'http://127.0.0.1:2121/api/v1';
+const proxyTarget = 'http://127.0.0.1:2121';
 
 const proxy = httpProxy.createProxyServer({
   target: proxyTarget,
@@ -10,9 +10,15 @@ const proxy = httpProxy.createProxyServer({
 module.exports = app => {
   // Proxy to API server
   app.use('/api/v1', (req, res) => {
-    proxy.web(req, res, { target: proxyTarget });
+    proxy.web(req, res, { target: `${proxyTarget}/api/v1` });
   });
 
+  app.use('/graphql', (req, res) => {
+    proxy.web(req, res, { target: `${proxyTarget}/graphql` });
+  });
+  app.use('/graphiql', (req, res) => {
+    proxy.web(req, res, { target: `${proxyTarget}/graphiql` });
+  });
   app.use('/uploads/', (req, res) => {
     proxy.web(req, res, { target: 'http://localhost:2121/uploads' });
   });

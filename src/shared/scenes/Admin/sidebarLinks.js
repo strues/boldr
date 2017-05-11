@@ -6,21 +6,21 @@ const sidebarLinks = [
     items: [
       {
         id: 11,
-        label: 'View Posts',
+        label: 'Articles',
         icon: 'fa-list-alt',
-        link: '/admin/posts',
+        link: '/admin/content/articles',
       },
       {
         id: 12,
-        label: 'New Post',
+        label: 'New Article',
         icon: 'fa-file-text',
-        link: '/admin/new-post',
+        link: '/admin/content/articles/new',
       },
       {
         label: 'Tags',
         icon: 'fa-tags',
         id: 13,
-        link: '/admin/tags',
+        link: '/admin/content/tags',
       },
     ],
   },

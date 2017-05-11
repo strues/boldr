@@ -1,11 +1,8 @@
 /* @flow */
 import React, { Component } from 'react';
-// $FlowIssue
 import styled from 'styled-components';
 import classnames from 'classnames';
 import { Grid, Col, Row, StyleClasses } from 'boldr-ui';
-
-// import config from '../../../../config';
 import ProfileContent from './components/ProfileContent';
 
 type Props = {

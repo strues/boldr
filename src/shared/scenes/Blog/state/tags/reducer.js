@@ -7,7 +7,7 @@ import * as t from '../actionTypes';
 const all = (state = {}, action) => {
   switch (action.type) {
     case t.FETCH_TAGS_SUCCESS:
-    case t.FETCH_POSTS_SUCCESS:
+    case t.FETCH_ARTICLES_SUCCESS:
       return {
         ...state,
         ...action.payload.entities.tags,

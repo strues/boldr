@@ -27,27 +27,27 @@ export type ActionType =
   | 'LOAD_POSTS_REQUEST'
   | 'LOAD_POSTS_SUCCESS'
   | 'LOAD_POSTS_FAILURE'
-  | 'FETCH_POST_REQUEST'
-  | 'FETCH_POST_SUCCESS'
-  | 'FETCH_POST_FAILURE'
-  | 'UPDATE_POST_REQUEST'
-  | 'UPDATE_POST_SUCCESS'
-  | 'UPDATE_POST_FAILURE'
-  | 'SELECT_POST'
-  | 'SELECT_POST_SUCCESS'
-  | 'SELECT_POST_FAILURE'
-  | 'CREATE_POST_REQUEST'
-  | 'CREATE_POST_SUCCESS'
-  | 'CREATE_POST_FAILURE'
-  | 'DELETE_POST_FAILURE'
-  | 'DELETE_POST_REQUEST'
-  | 'DELETE_POST_SUCCESS';
+  | 'FETCH_ARTICLE_REQUEST'
+  | 'FETCH_ARTICLE_SUCCESS'
+  | 'FETCH_ARTICLE_FAILURE'
+  | 'UPDATE_ARTICLE_REQUEST'
+  | 'UPDATE_ARTICLE_SUCCESS'
+  | 'UPDATE_ARTICLE_FAILURE'
+  | 'SELECT_ARTICLE'
+  | 'SELECT_ARTICLE_SUCCESS'
+  | 'SELECT_ARTICLE_FAILURE'
+  | 'CREATE_ARTICLE_REQUEST'
+  | 'CREATE_ARTICLE_SUCCESS'
+  | 'CREATE_ARTICLE_FAILURE'
+  | 'DELETE_ARTICLE_FAILURE'
+  | 'DELETE_ARTICLE_REQUEST'
+  | 'DELETE_ARTICLE_SUCCESS';
 
 export type PostsReducer = {
   all: Object,
   ids: Array<Object>,
   isFetching: boolean,
-  currentPost: Object,
+  currentArticle: Object,
 };
 
 export type BlogReducer = {
@@ -70,12 +70,12 @@ export type Reducer = {
 };
 
 export type Action =
-  | { type: '@boldr/blog/FETCH_POSTS_REQUEST' }
-  | { type: '@boldr/blog/FETCH_POSTS_SUCCESS', payload: NormalizrPayload }
-  | { type: '@boldr/blog/FETCH_POSTS_FAILURE', err: any }
-  | { type: '@boldr/blog/FETCH_POST_REQUEST', slug: string }
-  | { type: '@boldr/blog/FETCH_POST_SUCCESS', slug: string, payload: Post }
-  | { type: '@boldr/blog/FETCH_POST_FAILURE', slug: string, err: any };
+  | { type: '@boldr/blog/FETCH_ARTICLES_REQUEST' }
+  | { type: '@boldr/blog/FETCH_ARTICLES_SUCCESS', payload: NormalizrPayload }
+  | { type: '@boldr/blog/FETCH_ARTICLES_FAILURE', err: any }
+  | { type: '@boldr/blog/FETCH_ARTICLE_REQUEST', slug: string }
+  | { type: '@boldr/blog/FETCH_ARTICLE_SUCCESS', slug: string, payload: Post }
+  | { type: '@boldr/blog/FETCH_ARTICLE_FAILURE', slug: string, err: any };
 
 export type Store = ReduxStore<Reducer, Action>;
 // eslint-disable-next-line no-use-before-define

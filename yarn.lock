@@ -102,9 +102,9 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
-animate-components@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/animate-components/-/animate-components-0.9.0.tgz#c554d3220f06a7c7bbd623b2b2b84a21fba16f6b"
+animate-components@^0.9.1:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/animate-components/-/animate-components-0.9.1.tgz#66d887570bd414698604bdeef931eb20108eb96a"
   dependencies:
     html-tags "^1.1.1"
     prop-types "^15.5.8"
@@ -1150,9 +1150,9 @@ babel-plugin-transform-react-jsx@^6.24.1:
     babel-plugin-syntax-jsx "^6.8.0"
     babel-runtime "^6.22.0"
 
-babel-plugin-transform-react-remove-prop-types@^0.4.4:
-  version "0.4.4"
-  resolved "https://registry.yarnpkg.com/babel-plugin-transform-react-remove-prop-types/-/babel-plugin-transform-react-remove-prop-types-0.4.4.tgz#ef3f6fc166b0d1f53f828d1a9dda90106ac27cd8"
+babel-plugin-transform-react-remove-prop-types@^0.4.5:
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/babel-plugin-transform-react-remove-prop-types/-/babel-plugin-transform-react-remove-prop-types-0.4.5.tgz#79d1958437ae23d4fbc0b11d1a041498ddb23877"
   dependencies:
     babel-traverse "^6.24.1"
 
@@ -1437,17 +1437,15 @@ bn.js@^4.0.0, bn.js@^4.1.0, bn.js@^4.1.1, bn.js@^4.4.0:
   version "4.11.6"
   resolved "https://registry.yarnpkg.com/bn.js/-/bn.js-4.11.6.tgz#53344adb14617a13f6e8dd2ce28905d1c0ba3215"
 
-boldr-ui@0.4.0-rc.2:
-  version "0.4.0-rc.2"
-  resolved "https://registry.yarnpkg.com/boldr-ui/-/boldr-ui-0.4.0-rc.2.tgz#4d1901eee977ff4f2850e79c88fe64eebd009304"
+boldr-ui@0.4.0-rc.5:
+  version "0.4.0-rc.5"
+  resolved "https://registry.yarnpkg.com/boldr-ui/-/boldr-ui-0.4.0-rc.5.tgz#e5757e09c73f4a4e8edb73104304ca2654c61003"
   dependencies:
-    animate-components "^0.9.0"
     boldr-utils "0.2.2"
     classnames "^2.2.5"
     prop-types "^15.5.8"
     ramda "^0.23.0"
     react-click-outside "^2.3.0"
-    react-md "^1.0.13"
     react-modal "^1.7.7"
     react-swipeable-views "^0.12.1"
     react-swipeable-views-utils "^0.12.0"
@@ -1756,24 +1754,9 @@ cheerio@^0.22.0:
     lodash.reject "^4.4.0"
     lodash.some "^4.4.0"
 
-chokidar@1.7.0:
+chokidar@1.7.0, chokidar@^1.4.3, chokidar@^1.6.1:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-1.7.0.tgz#798e689778151c8076b4b360e5edd28cda2bb468"
-  dependencies:
-    anymatch "^1.3.0"
-    async-each "^1.0.0"
-    glob-parent "^2.0.0"
-    inherits "^2.0.1"
-    is-binary-path "^1.0.0"
-    is-glob "^2.0.0"
-    path-is-absolute "^1.0.0"
-    readdirp "^2.0.0"
-  optionalDependencies:
-    fsevents "^1.0.0"
-
-chokidar@^1.4.3, chokidar@^1.6.1:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-1.6.1.tgz#2f4447ab5e96e50fb3d789fd90d4c72e0e4c70c2"
   dependencies:
     anymatch "^1.3.0"
     async-each "^1.0.0"
@@ -2669,9 +2652,9 @@ draft-js-utils@^0.1.5:
   version "0.1.7"
   resolved "https://registry.yarnpkg.com/draft-js-utils/-/draft-js-utils-0.1.7.tgz#e2b6927ca620edf1855a4bfc1cf1d21080a70f16"
 
-draft-js@^0.10.0:
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/draft-js/-/draft-js-0.10.0.tgz#29d16191012b932fdab28a9b37ec1538f421abf6"
+draft-js@^0.10.1:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/draft-js/-/draft-js-0.10.1.tgz#6f1219d8095729691429ca6fd7a58d2a8be5cb67"
   dependencies:
     fbjs "^0.8.7"
     immutable "~3.7.4"
@@ -3363,9 +3346,9 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
-flow-bin@0.45.0:
-  version "0.45.0"
-  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.45.0.tgz#009dd0f577a3f665c74ca8be827ae8c2dd8fd6b5"
+flow-bin@0.46.0:
+  version "0.46.0"
+  resolved "https://registry.yarnpkg.com/flow-bin/-/flow-bin-0.46.0.tgz#06ad7fe19dddb1042264438064a2a32fee12b872"
 
 flow-parser@0.45.0:
   version "0.45.0"
@@ -4000,7 +3983,7 @@ inline-style-prefixer@^2.0.5:
     bowser "^1.0.0"
     hyphenate-style-name "^1.0.1"
 
-inline-style-prefixer@^3.0.2:
+inline-style-prefixer@^3.0.2, inline-style-prefixer@^3.0.3:
   version "3.0.3"
   resolved "https://registry.yarnpkg.com/inline-style-prefixer/-/inline-style-prefixer-3.0.3.tgz#eca9767080b29a8afcf13299fe6358e1f320bbeb"
   dependencies:
@@ -5932,7 +5915,7 @@ pbkdf2@^3.0.3:
   dependencies:
     create-hmac "^1.1.2"
 
-performance-now@^0.2.0, performance-now@~0.2.0:
+performance-now@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-0.2.0.tgz#33ef30c5c77d4ea21c5a53869d91b56d8f2555e5"
 
@@ -6084,9 +6067,9 @@ postcss-load-plugins@^2.3.0:
     cosmiconfig "^2.1.1"
     object-assign "^4.1.0"
 
-postcss-loader@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/postcss-loader/-/postcss-loader-2.0.2.tgz#031d6de5f0d0204c90acd2a3027c68d5f7e5243f"
+postcss-loader@^2.0.5:
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/postcss-loader/-/postcss-loader-2.0.5.tgz#c19d3e8b83eb1ac316f5621ef4c0ef5b3d1b8b3a"
   dependencies:
     loader-utils "^1.x"
     postcss "^6.x"
@@ -6384,11 +6367,12 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.0.0, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@~15.5.7:
-  version "15.5.8"
-  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.8.tgz#6b7b2e141083be38c8595aa51fc55775c7199394"
+prop-types@^15.0.0, prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.5.9, prop-types@~15.5.7:
+  version "15.5.9"
+  resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.9.tgz#d478eef0e761396942f70c78e772f76e8be747c9"
   dependencies:
     fbjs "^0.8.9"
+    loose-envify "^1.3.1"
 
 propagate@0.4.0:
   version "0.4.0"
@@ -6449,12 +6433,6 @@ querystring-es3@^0.2.0:
 querystring@0.2.0, querystring@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
-
-raf@^3.1.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/raf/-/raf-3.3.0.tgz#93845eeffc773f8129039f677f80a36044eee2c3"
-  dependencies:
-    performance-now "~0.2.0"
 
 railroad-diagrams@^1.0.0:
   version "1.0.0"
@@ -6578,18 +6556,6 @@ react-loadable@^3.3.1:
   dependencies:
     babel-plugin-syntax-dynamic-import "^6.18.0"
 
-react-md@^1.0.13:
-  version "1.0.13"
-  resolved "https://registry.yarnpkg.com/react-md/-/react-md-1.0.13.tgz#dd349421184ce6645ba30401bde4e0b4affde3bd"
-  dependencies:
-    classnames "^2.2.5"
-    invariant "^2.2.1"
-    prop-types "^15.5.8"
-    react-motion "^0.5.0"
-    react-prop-types "^0.4.0"
-    react-swipeable-views "^0.12.1"
-    react-transition-group "^1.1.3"
-
 react-modal@^1.7.7:
   version "1.7.7"
   resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-1.7.7.tgz#70205f51c58708c487aff681ba3fed7946e391d9"
@@ -6599,20 +6565,6 @@ react-modal@^1.7.7:
     exenv "1.2.0"
     lodash.assign "^4.2.0"
     prop-types "^15.5.7"
-
-react-motion@^0.5.0:
-  version "0.5.0"
-  resolved "https://registry.yarnpkg.com/react-motion/-/react-motion-0.5.0.tgz#1708fc2aee552900d21c1e6bed28346863e017b6"
-  dependencies:
-    performance-now "^0.2.0"
-    prop-types "^15.5.8"
-    raf "^3.1.0"
-
-react-prop-types@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/react-prop-types/-/react-prop-types-0.4.0.tgz#f99b0bfb4006929c9af2051e7c1414a5c75b93d0"
-  dependencies:
-    warning "^3.0.0"
 
 react-redux@5.0.4, react-redux@^5.0.2:
   version "5.0.4"
@@ -6886,9 +6838,9 @@ redux-form-material-ui@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/redux-form-material-ui/-/redux-form-material-ui-4.2.0.tgz#1e670936eb08de8e51bd43a55fb9966b4a691a9d"
 
-redux-form@^6.6.3:
-  version "6.6.3"
-  resolved "https://registry.yarnpkg.com/redux-form/-/redux-form-6.6.3.tgz#62362654f2214c83a8f9fcb8313702bb46f92205"
+redux-form@^6.7.0:
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/redux-form/-/redux-form-6.7.0.tgz#9fb0769e76f14febf1dd7686e02c4ab2d6f953aa"
   dependencies:
     deep-equal "^1.0.1"
     es6-error "^4.0.0"
@@ -7195,9 +7147,9 @@ sass-graph@^2.1.1:
     scss-tokenizer "^0.1.2"
     yargs "^6.6.0"
 
-sass-loader@^6.0.3:
-  version "6.0.3"
-  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-6.0.3.tgz#33983b1f90d27ddab0e57d0dac403dce9bc7ecfd"
+sass-loader@^6.0.5:
+  version "6.0.5"
+  resolved "https://registry.yarnpkg.com/sass-loader/-/sass-loader-6.0.5.tgz#a847910f36442aa56c5985879d54eb519e24a328"
   dependencies:
     async "^2.1.5"
     clone-deep "^0.2.4"
@@ -8097,9 +8049,9 @@ webidl-conversions@^4.0.0:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/webidl-conversions/-/webidl-conversions-4.0.1.tgz#8015a17ab83e7e1b311638486ace81da6ce206a0"
 
-webpack-bundle-analyzer@^2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/webpack-bundle-analyzer/-/webpack-bundle-analyzer-2.6.0.tgz#9b8052d6aa26004f49ab76e88c45445ecd03f15a"
+webpack-bundle-analyzer@^2.7.0:
+  version "2.7.0"
+  resolved "https://registry.yarnpkg.com/webpack-bundle-analyzer/-/webpack-bundle-analyzer-2.7.0.tgz#9a8320a9e33917ade47aa1369013bbf4d4a9f5af"
   dependencies:
     acorn "^5.0.3"
     chalk "^1.1.3"

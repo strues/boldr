@@ -1,14 +1,8 @@
 import React from 'react';
-import { FontIcon, Button } from 'boldr-ui';
-import {
-  Card,
-  CardActions,
-  CardMedia,
-  CardTitle,
-  CardText,
-} from 'material-ui/Card';
+import { FontIcon } from 'boldr-ui';
+import { Card, CardActions, CardMedia, CardTitle } from 'material-ui/Card';
+import IconButton from 'material-ui/IconButton';
 import Link from 'react-router-dom/Link';
-// import config from '../../../../../../../config';
 
 type Props = {
   removeMedia?: Function,
@@ -42,13 +36,13 @@ const File = (props: Props) => {
       </CardMedia>
       <CardActions>
         <Link to={`/admin/file-editor/${props.file.id}`}>
-          <Button icon onClick={handleSelect}>
+          <IconButton onTouchTap={handleSelect}>
             <FontIcon>mode_edit</FontIcon>
-          </Button>
+          </IconButton>
         </Link>
-        <Button icon onClick={handleclick}>
+        <IconButton onTouchTap={handleclick}>
           <FontIcon>delete_forever</FontIcon>
-        </Button>
+        </IconButton>
       </CardActions>
     </Card>
   );
