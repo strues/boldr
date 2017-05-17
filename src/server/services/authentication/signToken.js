@@ -8,6 +8,7 @@ function signToken(user: Object) {
     iss: 'boldr',
     sub: user.id,
     algorithms: ['HS256'],
+    iat: Math.floor(Date.now() / 1000),
     // Expires 24hrs from now this is written as the amount of time since
     // the unix epoch ~ 1970
     exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24,

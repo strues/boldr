@@ -10,7 +10,7 @@ import {
   TopbarLink,
   Topbar,
 } from 'boldr-ui';
-import { showHideSidebar, expandCollapseSideMenu } from '../../state';
+import { selectMe, showHideSidebar, expandCollapseSideMenu } from '../../state';
 import renderRoutes from '../../core/addRoutes';
 import sidebarLinks from './sidebarLinks';
 
@@ -85,7 +85,7 @@ function mapStateToProps(state) {
   return {
     dashboard: state.admin.dashboard,
     boldr: state.boldr,
-    me: state.users.me,
+    me: selectMe(state),
     router: state.router,
     ui: state.boldr.ui,
   };

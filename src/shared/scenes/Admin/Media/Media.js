@@ -89,7 +89,7 @@ class Media extends Component {
           <Col xs={12} md={11}>
 
             <Headline type="h2">
-              {this.props.siteName}'s Media Gallery
+             Media Gallery
             </Headline>
             <Row>
               <MediaList>

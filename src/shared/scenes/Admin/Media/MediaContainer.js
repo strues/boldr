@@ -35,14 +35,13 @@ export class MediaContainer extends Component {
 
   render() {
     return (
-      <VisibleMedia media={this.props.media} siteName={this.props.site.value} />
+      <VisibleMedia media={this.props.media} />
     );
   }
 }
 
 const mapStateToProps = state => {
   return {
-    site: selectSettingFromList(state, 1),
     ui: state.boldr.ui,
     media: getMedia(state),
   };

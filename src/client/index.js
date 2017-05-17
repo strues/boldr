@@ -19,6 +19,7 @@ import renderRoutes from '../shared/core/addRoutes';
 import { checkAuth } from '../shared/state/modules/auth/actions';
 import { getToken } from '../shared/core/authentication/token';
 import routes from '../shared/routes';
+import ReactHotLoader from './ReactHotLoader';
 
 // click helper required for Material-UI
 injectTapEventPlugin();
@@ -55,17 +56,19 @@ if (!!token) {
 }
 function renderApp(BoldrApp) {
   render(
-    <ApolloProvider store={store} client={client}>
-      <ConnectedRouter
-        history={history}
-        forceRefresh={!supportsHistory}
-        routes={routes[0].routes}
-      >
-        <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
-          {renderRoutes(routes)}
-        </MuiThemeProvider>
-      </ConnectedRouter>
-    </ApolloProvider>,
+    <ReactHotLoader>
+      <ApolloProvider store={store} client={client}>
+        <ConnectedRouter
+          history={history}
+          forceRefresh={!supportsHistory}
+          routes={routes[0].routes}
+        >
+          <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
+            {renderRoutes(routes)}
+          </MuiThemeProvider>
+        </ConnectedRouter>
+      </ApolloProvider>
+    </ReactHotLoader>,
     MOUNT_POINT,
   );
 }

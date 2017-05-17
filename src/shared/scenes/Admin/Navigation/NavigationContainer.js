@@ -11,7 +11,6 @@ import Navigation from './Navigation';
 
 function mapStateToProps(state) {
   return {
-    siteName: selectSettingFromList(state, 1),
     mainMenu: state.boldr.menus.main,
     modal: state.boldr.ui.modal,
   };

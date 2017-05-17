@@ -38,7 +38,7 @@ app.use(
   graphqlExpress(req => ({
     schema: graphqlSchema,
     context: {
-      user: req.user ? User.query().findById(req.user.id).eager('roles') : null,
+      user: req.user ? req.user : null,
     },
     debug: true,
   })),

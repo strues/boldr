@@ -66,7 +66,7 @@ export function uploadMedia(req, res, next) {
     media: {},
     userId: req.user.id,
   };
-  const UPLOAD_DIR = path.resolve(appRoot.get(), './static/uploads/');
+  const UPLOAD_DIR = path.resolve(appRoot.get(), './public/uploads/');
   const form = new formidable.IncomingForm();
   form.hash = 'sha1';
   form.keepExtensions = true;
@@ -155,7 +155,7 @@ export function uploadMedia(req, res, next) {
         mimetype: data.media.type,
         url: `/uploads/${data.media.fileName}`,
         mediaType: isImageType ? 1 : 2,
-        path: `${appRoot.get()}/static/uploads/${data.media.fileName}`,
+        path: `${appRoot.get()}/public/uploads/${data.media.fileName}`,
       };
 
       const newImage = await Media.query().insert(payload);
@@ -168,7 +168,7 @@ export function uploadFromUrl(req, res, next) {
     request.head(uri, (err, res, body) => {
       request(uri)
         .pipe(
-          fs.createWriteStream(`${appRoot.get()}/static/uploads/${filename}`),
+          fs.createWriteStream(`${appRoot.get()}/public/uploads/${filename}`),
         )
         .on('close', callback)
         .on('error', err);
@@ -191,7 +191,7 @@ export function uploadFromUrl(req, res, next) {
         safeName: newFilename,
         thumbName: newFilename,
         url: `/uploads/${newFilename}`,
-        path: `${appRoot.get()}/static/uploads/${newFilename}`,
+        path: `${appRoot.get()}/public/uploads/${newFilename}`,
         userId: req.user.id,
       });
 
@@ -250,7 +250,7 @@ export async function deleteMedia(req, res, next) {
     // remove the attachment from the database
     await Media.query().deleteById(req.params.id);
     // remove from the file system.
-    fs.removeSync(`./static/uploads/${media.safeName}`);
+    fs.removeSync(`./public/uploads/${media.safeName}`);
     // send a 204
     return res.status(204).json('Deleted');
   } catch (error) {

@@ -5,8 +5,8 @@
 import jwt from 'jsonwebtoken';
 import User from '../models/user';
 import { mainRedisClient } from '../services/redis';
+import config from '../config';
 import sessionMiddleware from './session';
-
 import rbac from './rbac';
 
 const debug = require('debug')('boldr:authMW');
@@ -34,6 +34,7 @@ export default app => {
         .skipUndefined();
       req.session.user = user;
       req.user = user;
+      debug(req.user);
       req.user.role = user.roles[0].name;
       next();
     }

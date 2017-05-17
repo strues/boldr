@@ -69,25 +69,27 @@ Join us on <a href="https://slack.boldr.io" target="blank"><img src="/docs/asset
 That said, I'm confident the majority of large breaking changes is behind us.
 
 **Step 1**
-First you must somehow get the files to your machine. Below outlines two options. Using the CLI is recommended. Boldr relies on an API in order to get its data. Running Boldr's API, at least until you get a grasp on how everything works together, will provide the best possible experience.
-
-
-**Using Boldr-CLI:**  
-
-```shell
-   yarn global --add boldr-cli
-   boldr-cli init
-   cd boldr-cms
-   yarn
-```  
-
-**Using git:**  
+First you must somehow get the files to your machine. 
 
 ```shell
   git clone git@github.com:strues/boldr.git <DIR_NAME>
   cd <DIR_NAME>
   yarn
 ```  
+
+**Step 2**   
+
+Prerequisites:
+
+* [Docker](https://docs.docker.com/engine/installation/) (version >1.10.0)
+* [Docker Compose](https://docs.docker.com/compose/install/) (version >1.8.0)
+
+Install the dependencies and setup your database.
+
+If you are running Docker and just want to get Boldr running ASAP, you should use the provided `docker-compose.yml` file. All that's required on your part is running `docker-compose up --build -d`.
+
+#### Not running Docker? Or want to use a different database host? No problem.   
+Modify the db key in the `boldr.js` file located in the `.boldr` directory of the project root. You will also need to swap out anywhere in the `package.json` where the `process.env.BOLDR__DB__URL` is set so that it matches your settings.
 
 
 ## Usage

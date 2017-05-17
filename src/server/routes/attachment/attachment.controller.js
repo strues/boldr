@@ -101,7 +101,7 @@ export async function deleteAttachment(req, res, next) {
     // remove the attachment from the database
     await Attachment.query().deleteById(req.params.id);
     // remove from the file system.
-    fs.removeSync(`./static/uploads/${attachment.safeName}`);
+    fs.removeSync(`./public/uploads/${attachment.safeName}`);
     // send a 204
     return res.status(204).json('Deleted');
   } catch (error) {
@@ -124,7 +124,7 @@ export function uploadAttachment(req, res, next) {
     attach: {},
     userId: req.user.id,
   };
-  const UPLOAD_DIR = path.resolve(appRoot.get(), './static/uploads/');
+  const UPLOAD_DIR = path.resolve(appRoot.get(), './public/uploads/');
   const form = new formidable.IncomingForm();
   form.hash = 'sha1';
   form.keepExtensions = true;

@@ -87,7 +87,7 @@ class Navigation extends Component {
       <div>
         <Helmet title="Admin: Navigation" />
         <Headline type="h1">
-          Edit {this.props.siteName.value}'s navigation
+          Edit your site's navigation
         </Headline>
         <Divider style={{ marginBottom: '30px' }} />
         <Row>

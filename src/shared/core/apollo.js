@@ -4,8 +4,10 @@ import PropTypes from 'prop-types';
 import { createNetworkInterface, ApolloClient } from 'react-apollo';
 import { getToken } from './authentication/token';
 
+const inBrowser = typeof window === 'object';
+
 // ----------------------
-const token = getToken();
+const token = !inBrowser ? null : getToken();
 const networkInterface = createNetworkInterface({
   uri: 'http://localhost:3000/api/v1/graphql',
   opts: {
@@ -20,7 +22,7 @@ networkInterface.use([
       }
 
       // get the authentication token from local storage if it exists
-      if (!!token) {
+      if (token) {
         req.options.headers.authorization = `Bearer ${token}`;
       }
       next();
