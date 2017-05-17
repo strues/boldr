@@ -1,7 +1,6 @@
 import { combineReducers } from 'redux';
-import addIdToArray from 'boldr-utils/es/arrays/addIdToArray';
-import removeByKey from 'boldr-utils/es/objects/removeByKey';
-import removeIdFromArray from 'boldr-utils/es/arrays/removeIdFromArray';
+
+import {addIdToArray,removeIdFromArray, removeByKey} from 'boldr-utils';
 import * as t from '../actionTypes';
 
 const all = (state = {}, action) => {

@@ -1,32 +1,46 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchTagsIfNeeded, getTags } from '../../../Blog/state';
+import { gql, graphql } from 'react-apollo';
+import { Loader } from 'boldr-ui';
 import Tags from './Tags';
 
 type Props = {
-  tags: Array<Tag>,
-  currentTag: Object,
-  dispatch: Function,
-  fetchTagsIfNeeded: Function,
+  data: Data,
+};
+type Data = {
+  getTags: Array<Tag>,
+  loading: boolean,
 };
 
 class TagsContainer extends Component {
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(fetchTagsIfNeeded());
-  }
   props: Props;
 
   render() {
-    return <Tags tags={this.props.tags} currentTag={this.props.currentTag} />;
+    const { loading, getTags } = this.props.data;
+    if (loading) {
+      return <Loader />;
+    }
+    return <Tags tags={getTags} />;
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    tags: getTags(state),
-    currentTag: state.blog.tags.currentTag,
-  };
-};
-export default connect(mapStateToProps)(TagsContainer);
+export default graphql(
+  gql`
+  query tags($offset: Int!, $limit: Int!) {
+      getTags(offset:$offset,limit:$limit) {
+        id,
+        name,
+        description,
+      }
+  }
+`,
+  {
+    options: props => ({
+      variables: {
+        offset: 0,
+        limit: 20,
+      },
+    }),
+  },
+)(TagsContainer);

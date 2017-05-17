@@ -3,6 +3,7 @@ import Route from 'react-router-dom/Route';
 import Switch from 'react-router-dom/Switch';
 import Redirect from 'react-router-dom/Redirect';
 import uuid from 'uuid';
+import PropTypes from 'prop-types';
 
 const checkAuth = (store, route, props) => {
   if (!route.auth) {
@@ -27,7 +28,7 @@ const checkAuth = (store, route, props) => {
 };
 
 checkAuth.propTypes = {
-  staticContext: React.PropTypes.object,
+  staticContext: PropTypes.object,
 };
 
 checkAuth.defaultProps = {
@@ -49,11 +50,11 @@ const RouteManager = (props, context) => (
 );
 
 RouteManager.propTypes = {
-  routes: React.PropTypes.array.isRequired,
+  routes: PropTypes.array.isRequired,
 };
 
 RouteManager.contextTypes = {
-  store: React.PropTypes.object,
+  store: PropTypes.object,
 };
 
 export default routes => {

@@ -1,7 +1,11 @@
+import { ValidationError } from 'objection';
+import HttpError from '../core/errors/httpError';
+import { formatValidationErrors } from '../utils';
+
 export default app => {
   // catch 404 and forward to error handler
   app.use((req, res, next) => {
-    const err = new Error();
+    const err = new HttpError('Not found', 404);
 
     return next(err);
   });
@@ -11,15 +15,22 @@ export default app => {
     // eslint-disable-line no-unused-vars
     const statusCode = err.status || 500;
 
+    const isValidationError = (err.error || {}) instanceof ValidationError;
+
     const stacktrace = app.get('env') === 'development'
-      ? {
-          stack: err.stack,
-        }
+      ? { stack: err.stack }
       : {};
+
+    const validation = isValidationError
+      ? { validation: formatValidationErrors(err.error.data) }
+      : {};
+
+    const message = isValidationError ? 'Validation error.' : err.message;
 
     res.status(statusCode);
     res.json({
-      error: err.error || err.message,
+      message,
+      ...validation,
       ...stacktrace,
     });
   });

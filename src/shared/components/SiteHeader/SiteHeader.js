@@ -23,7 +23,7 @@ type Props = {
   navigate: () => void,
   actions: Object,
   menu: Object,
-  siteName: Object,
+  settings: Array<Object>,
   logo: Object,
   boldr: Object,
   auth: Object,
@@ -173,8 +173,17 @@ class SiteHeader extends Component {
   }
 
   render() {
-    const { className, theme, logo, siteName } = this.props;
+    const { className, theme, settings } = this.props;
     const { dropdownIsOpen, focusable } = this.state;
+
+    function filterSiteName(obj) {
+      return parseInt(obj.id, 10) === 1;
+    }
+    function filterSiteLogo(obj) {
+      return parseInt(obj.id, 10) === 3;
+    }
+    const siteName = settings.find(filterSiteName);
+    const logo = settings.find(filterSiteLogo);
     return (
       <header
         className={cx('boldrui-siteheader', ['theme-boldr'], className, {

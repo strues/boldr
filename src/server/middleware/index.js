@@ -1,13 +1,13 @@
 import expressMiddleware from './express';
+import authMiddleware from './auth';
+import rbac from './rbac';
 import errorHandler from './errorHandler';
-import offlinePage from './offlinePage';
-import serviceWorker from './serviceWorker';
-import clientBundle from './clientBundle';
+import sessionMiddleware from './session';
 
 export {
   expressMiddleware,
-  clientBundle,
+  authMiddleware,
+  rbac,
   errorHandler,
-  offlinePage,
-  serviceWorker,
+  sessionMiddleware,
 };

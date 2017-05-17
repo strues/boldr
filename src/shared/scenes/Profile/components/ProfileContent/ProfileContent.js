@@ -1,10 +1,10 @@
 /* @flow */
+/* eslint-disable react/no-unescaped-entities */
 import React from 'react';
 import Link from 'react-router-dom/Link';
-// $FlowIssue
 import styled from 'styled-components';
 import Button from 'boldr-ui/lib/components/Button';
-import { FontIcon, Col, Row, Headline } from 'boldr-ui';
+import { FontIcon, Col, Row, Headline, Social } from 'boldr-ui';
 
 import ProfileDetail from '../ProfileDetail';
 
@@ -83,18 +83,18 @@ const ProfileContent = (props: Props) => {
               detail={profile.bio}
             />
           </DetailList>
-          {/* <Social
+          <Social
             facebook
-            fburl={ profile.social.facebook.url }
+            fburl={profile.socialMedia.facebookUrl}
             twitter
-            turl={ profile.social.twitter.url }
+            turl={profile.socialMedia.twitterUrl}
             google
-            gurl={ profile.social.google.url }
+            gurl={profile.socialMedia.googleUrl}
             github
-            ghurl={ profile.social.github.url }
+            ghurl={profile.socialMedia.githubUrl}
             linkedin
-            lurl={ profile.social.linkedin.url }
-          /> */}
+            lurl={profile.socialMedia.linkedinUrl}
+          />
         </Col>
       </Row>
     </div>

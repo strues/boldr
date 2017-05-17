@@ -6,7 +6,6 @@ import ArticleCard from '../components/ArticleCard';
 
 type Props = {
   articles: Array<Article>,
-  listTags: Object,
 };
 
 const TagList = (props: Props) => {
@@ -19,7 +18,7 @@ const TagList = (props: Props) => {
         <Row>
           {props.articles.map(article => (
             <Col key={article.id} xs={12} md={4}>
-              <ArticleCard listTags={props.listTags} {...article} />
+              <ArticleCard listTags={article.tags} article={article} />
             </Col>
           ))}
         </Row>

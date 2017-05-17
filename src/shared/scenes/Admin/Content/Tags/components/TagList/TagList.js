@@ -4,6 +4,7 @@ import React from 'react';
 import Link from 'react-router-dom/Link';
 import IconButton from 'material-ui/IconButton';
 import { FontIcon } from 'boldr-ui';
+import { gql, graphql } from 'react-apollo';
 import ListItem from 'material-ui/List/ListItem';
 
 type Props = {
@@ -21,7 +22,7 @@ const TagList = (props: Props) => {
   return (
     <div>
       {props.tags.map(tag => (
-        <Link key={tag.id} to={`/admin/tags/${tag.name}`}>
+        <Link key={tag.id} to={`/admin/content/tags/${tag.name}`}>
           <ListItem
             primaryText={tag.name}
             rightIconButton={

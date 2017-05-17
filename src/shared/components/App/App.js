@@ -3,9 +3,7 @@ import '../../styles/main.scss';
 import React, { PureComponent } from 'react';
 import classnames from 'classnames';
 import Helmet from 'react-helmet';
-import { connect } from 'react-redux';
 import { StyleClasses } from 'boldr-ui';
-import { fetchSettingsIfNeeded } from '../../state';
 import Notifications from '../../components/Notification';
 import renderRoutes from '../../core/addRoutes';
 
@@ -14,14 +12,10 @@ const BASE_ELEMENT = StyleClasses.APP;
 type Props = {
   route: Object,
   className: string,
-  dispatch: () => void,
 };
 
 class App extends PureComponent {
   static displayName = 'App';
-  componentDidMount() {
-    this.props.dispatch(fetchSettingsIfNeeded());
-  }
   props: Props;
   render() {
     const { className, route } = this.props;
@@ -42,6 +36,13 @@ class App extends PureComponent {
             content="/favicons/mstile-144x144.png"
           />
           <meta name="theme-color" content="#2b2b2b" />
+          <link
+            rel="icon"
+            type="image/png"
+            href="/favicons/favicon-32x32.png"
+            sizes="32x32"
+          />
+          <link rel="icon" sizes="16x16 32x32" href="/favicons/favicon.ico" />
           <link
             rel="apple-touch-icon-precomposed"
             sizes="152x152"
@@ -110,13 +111,6 @@ class App extends PureComponent {
             href="/favicons/favicon-96x96.png"
             sizes="96x96"
           />
-          <link
-            rel="icon"
-            type="image/png"
-            href="/favicons/favicon-32x32.png"
-            sizes="32x32"
-          />
-          <link rel="icon" sizes="16x16 32x32" href="/favicon.ico" />
 
           <meta name="msapplication-TileColor" content="#2b2b2b" />
           <meta
@@ -147,10 +141,4 @@ class App extends PureComponent {
     );
   }
 }
-const mapStateToProps = (state, props) => {
-  const { routes } = props.route;
-
-  return { routes };
-};
-
-export default connect(mapStateToProps)(App);
+export default App;

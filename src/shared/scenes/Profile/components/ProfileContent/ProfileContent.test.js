@@ -11,33 +11,14 @@ const mockProfile = {
   website: 'www.com',
   avatarUrl: 'www.com/image.png',
   backgroundImage: 'www.com/png',
-  social: {
-    facebook: {
-      url: 'facebook',
-    },
-    twitter: {
-      url: 'twitter',
-    },
-    google: {
-      url: 'google',
-    },
-    linkedin: {
-      url: 'linkedin',
-    },
-    github: {
-      url: 'github',
-    },
+  socialMedia: {
+    facebookUrl: 'facebook',
+    twitterUrl: 'facebook',
+    googleUrl: 'facebook',
+    githubUrl: 'facebook',
   },
 };
 test('<ProfileContent />, renders the content area', () => {
-  const toggleDrawer = jest.fn();
-
-  const wrapper = shallow(
-    <ProfileContent
-      me={false}
-      toggleDrawer={toggleDrawer}
-      profile={mockProfile}
-    />,
-  );
+  const wrapper = shallow(<ProfileContent me={false} profile={mockProfile} />);
   expect(wrapper.is('.boldr-profile__content')).toEqual(true);
 });

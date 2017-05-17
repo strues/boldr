@@ -1,7 +1,6 @@
-/* eslint-disable jsx-a11y/html-has-lang, react/forbid-prop-types */
 /* @flow */
+/* eslint-disable jsx-a11y/html-has-lang, react/forbid-prop-types */
 import React from 'react';
-import type { ReactElement } from '../../types/react';
 
 type Props = {
   htmlAttributes?: Object,

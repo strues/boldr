@@ -3,39 +3,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-
+import { gql, graphql } from 'react-apollo';
 import { LAYOUTS } from '../../../core/constants';
 import { changeLayout, layoutSelector } from '../../../state/modules/boldr/ui';
-import { getArticles, fetchArticlesIfNeeded } from '../state/articles';
-import { fetchTagsIfNeeded } from '../state/tags/actions';
 import BaseTemplate from '../../../templates/BaseTemplate';
-import VisibleArticleListing from './VisibleArticleListing';
+import ArticleListing from './ArticleListing';
 
-type Props = {
+type Data = {
   articles: Array<Article>,
-  isFetching: boolean,
-  listTags: Object,
+  loading: boolean,
+};
+type Props = {
   layout: string,
   dispatch: Function,
-  fetchTagsIfNeeded: () => void,
   changeLayout: () => void,
   handleChangeLayout: () => void,
-  fetchArticlesIfNeeded: () => void,
+  data: Data,
 };
 
 export class ArticleListingContainer extends Component {
-  static defaultProps: {
-    fetchArticlesIfNeeded: () => {},
-    fetchTagsIfNeeded: () => {},
-  };
-
-  componentDidMount() {
-    Promise.all([
-      this.props.dispatch(fetchArticlesIfNeeded()),
-      this.props.dispatch(fetchTagsIfNeeded()),
-    ]);
-  }
-
   props: Props;
   handleChangeLayout = () => {
     this.props.layout === 'grid'
@@ -43,14 +29,15 @@ export class ArticleListingContainer extends Component {
       : this.props.dispatch(changeLayout(LAYOUTS.GRID));
   };
   render() {
+    const { articles, loading } = this.props.data;
     return (
       <BaseTemplate helmetMeta={<Helmet title="Blog Posts" />}>
-        <VisibleArticleListing
-          articles={this.props.articles}
-          listTags={this.props.listTags}
+        {/* $FlowIssue */}
+        <ArticleListing
+          loading={loading}
+          articles={articles}
           layout={this.props.layout}
           handleChangeLayout={this.handleChangeLayout}
-          isFetching={this.props.isFetching}
         />
       </BaseTemplate>
     );
@@ -59,11 +46,35 @@ export class ArticleListingContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    listTags: state.entities.tags,
-    articles: getArticles(state),
     layout: layoutSelector(state),
-    isFetching: state.blog.articles.isFetching,
   };
 };
 
-export default connect(mapStateToProps)(ArticleListingContainer);
+const ARTICLES_QUERY = gql`
+  query articles($offset: Int!, $limit: Int!) {
+    articles(offset: $offset, limit: $limit) {
+      id,
+      title,
+      slug,
+      featureImage
+      featured
+      published
+      createdAt
+      excerpt
+      tags {
+        id,
+        name
+      },
+    }
+  }
+`;
+
+const ArticleListingContainerWithData = graphql(ARTICLES_QUERY, {
+  options: props => ({
+    variables: {
+      offset: 0,
+      limit: 20,
+    },
+  }),
+})(ArticleListingContainer);
+export default connect(mapStateToProps)(ArticleListingContainerWithData);

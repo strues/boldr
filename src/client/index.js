@@ -1,26 +1,33 @@
 /* @flow */
 /* eslint-disable global-require */
+import './polyfill';
+
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
-import { Provider } from 'react-redux';
 import createHistory from 'history/createBrowserHistory';
 import ConnectedRouter from 'react-router-redux/ConnectedRouter';
 import WebFontLoader from 'webfontloader';
 import injectTapEventPlugin from 'react-tap-event-plugin';
+import { ApolloProvider } from 'react-apollo';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
+import { browserClient } from '../shared/core/apollo';
 import muiTheme from '../shared/templates/muiTheme';
-import renderRoutes from '../shared/core/addRoutes';
-import routes from '../shared/routes';
 import configureStore from '../shared/state/store';
+import renderRoutes from '../shared/core/addRoutes';
 import { checkAuth } from '../shared/state/modules/auth/actions';
 import { getToken } from '../shared/core/authentication/token';
+import routes from '../shared/routes';
 
+// click helper required for Material-UI
 injectTapEventPlugin();
 
+// Async font loading
 WebFontLoader.load({
-  google: { families: ['Roboto:200,400,600', 'Material Icons'] },
+  google: {
+    families: ['Roboto:200,400,600', 'Material Icons'],
+  },
   custom: {
     families: ['FontAwesome'],
     urls: [
@@ -28,15 +35,17 @@ WebFontLoader.load({
     ],
   },
 });
-// if (process.env.NODE_ENV !== 'production') {
-//   const { whyDidYouUpdate } = require('why-did-you-update');
-//   whyDidYouUpdate(React);
-// }
-const domNode = document.getElementById('app');
+const MOUNT_POINT = document.getElementById('app');
+
+// Does the user's browser support the HTML5 history API?
+// If the user's browser doesn't support the HTML5 history API then we
+// will force full page refreshes on each page change.
+const supportsHistory = 'pushState' in window.history;
+// Apollo browser client
+const client = browserClient();
 const history = createHistory();
 const preloadedState = window.__PRELOADED_STATE__;
-const store = configureStore(history, preloadedState);
-
+const store = configureStore(client, preloadedState, history);
 const { dispatch } = store;
 
 const token = getToken();
@@ -44,49 +53,37 @@ if (!!token) {
   // Update application state. User has token and is probably authenticated
   dispatch(checkAuth(token));
 }
-
-const renderApp = () => {
-  store.dispatch({
-    type: '@boldr/INITIAL_PAGE_LOAD',
-    initialPageLoad: false,
-  });
-  // const App = require('../shared/components/App').default;
+function renderApp(BoldrApp) {
   render(
-    <Provider store={store}>
-      <ConnectedRouter history={history} routes={routes[0].routes}>
+    <ApolloProvider store={store} client={client}>
+      <ConnectedRouter
+        history={history}
+        forceRefresh={!supportsHistory}
+        routes={routes[0].routes}
+      >
         <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
           {renderRoutes(routes)}
         </MuiThemeProvider>
       </ConnectedRouter>
-    </Provider>,
-    domNode,
+    </ApolloProvider>,
+    MOUNT_POINT,
   );
-};
-
-if (process.env.NODE_ENV !== 'production') {
-  window.React = React;
 }
 
-if (process.env.NODE_ENV === 'production') {
-  // This registers our service worker for asset caching and offline support.
-  // Keep this as the last item, just in case the code execution failed (thanks
-  // to react-boilerplate for that tip.)
-  require('./registerServiceWorker');
-}
 if (module.hot) {
   const reRenderApp = () => {
     try {
-      renderApp(require('../shared/routes'));
+      renderApp(require('../shared/components/App/App').default);
     } catch (error) {
       const RedBox = require('redbox-react').default;
 
-      render(<RedBox error={error} />, domNode);
+      render(<RedBox error={error} />, MOUNT_POINT);
     }
   };
-  module.hot.accept('../shared/routes', () => {
+  module.hot.accept('../shared/components/App/App', () => {
     setImmediate(() => {
       // Preventing the hot reloading error from react-router
-      unmountComponentAtNode(domNode);
+      unmountComponentAtNode(MOUNT_POINT);
       reRenderApp();
     });
   });

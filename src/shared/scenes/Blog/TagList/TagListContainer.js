@@ -1,61 +1,60 @@
 /* @flow */
 
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, { PureComponent } from 'react';
 import { Grid, Col, Row, Loader } from 'boldr-ui';
 import Helmet from 'react-helmet';
-
+import { gql, graphql } from 'react-apollo';
 import BaseTemplate from '../../../templates/BaseTemplate';
-import { fetchTagArticlesIfNeeded } from '../state/tags/actions';
 import TagList from './TagList';
 
 type Props = {
-  currentTag: Object,
+  data: Object,
   isFetching: boolean,
   match: Object,
-  listTags: Object,
-  fetchTagArticlesIfNeeded: () => void,
 };
 
-export class TagListContainer extends Component {
-  static defaultProps: {
-    match: { params: { name: '' } },
-    fetchTagArticlesIfNeeded: () => {},
-  };
-
-  componentDidMount() {
-    const { fetchTagArticlesIfNeeded, match: { params } } = this.props;
-
-    fetchTagArticlesIfNeeded(params.name);
-  }
-
+export class TagListContainer extends PureComponent {
   props: Props;
   render() {
-    const { match: { params } } = this.props;
-    if (this.props.isFetching) {
+    const { data: { loading, articlesByTag }, match: { params } } = this.props;
+    if (loading) {
       return <Loader />;
     }
     return (
       <BaseTemplate
         helmetMeta={<Helmet title={`Posts tagged ${params.name}`} />}
       >
-        <TagList
-          listTags={this.props.listTags}
-          articles={this.props.currentTag.articles}
-        />
+        <TagList articles={articlesByTag} />
       </BaseTemplate>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    tags: state.blog.tags.all,
-    isFetching: state.blog.tags.isFetching,
-    currentTag: state.blog.tags.currentTag,
-  };
-};
-
-export default connect(mapStateToProps, { fetchTagArticlesIfNeeded })(
-  TagListContainer,
-);
+export default graphql(
+  gql`
+  query article($name: String!) {
+      articlesByTag(name: $name,offset:0,limit:20) {
+        id,
+        title,
+        content,
+        slug,
+        featureImage,
+        backgroundImage,
+        excerpt,
+        createdAt,
+        userId,
+        tags {
+          id,
+          name
+        }
+      }
+  }
+`,
+  {
+    options: props => ({
+      variables: {
+        name: props.match.params.name,
+      },
+    }),
+  },
+)(TagListContainer);

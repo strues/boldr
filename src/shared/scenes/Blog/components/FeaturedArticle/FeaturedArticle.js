@@ -78,7 +78,6 @@ export const FeaturedArticle = (props: Props) => {
     width: 100%;
     ${mediaQuery.small`flex-direction: row; width: 70%`}
   `;
-  const articleTags = props.tags.map(id => props.listTags[id]);
   // Explicitly define post rather than passing additional
   // unnecessary props like listTags
   const article = {
@@ -121,7 +120,7 @@ export const FeaturedArticle = (props: Props) => {
           </Row>
           <Row>
             <Col sm={12}>
-              {articleTags.map(t => <Tag key={t.id} tag={t} />)}
+              {props.tags.map(t => <Tag key={t.id} tag={t} />)}
             </Col>
           </Row>
         </Content>

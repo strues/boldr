@@ -1,168 +1,169 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<App /> renders snapshot 1`] = `
-<Connect(App)
-  route={
-    Array [
-      Object {
-        "component": [Function],
-        "loadData": [Function],
-        "routes": Array [
-          Object {
-            "component": [Function],
-            "exact": true,
-            "path": "/",
-          },
-          Object {
-            "component": [Function],
-            "exact": true,
-            "path": "/about",
-          },
-          Object {
-            "component": [Function],
-            "exact": true,
-            "loadData": [Function],
-            "path": "/blog",
-          },
-          Object {
-            "component": [Function],
-            "exact": true,
-            "loadData": [Function],
-            "path": "/blog/:slug",
-          },
-          Object {
-            "component": [Function],
-            "exact": true,
-            "loadData": [Function],
-            "path": "/blog/tags/:name",
-          },
-          Object {
-            "component": [Function],
-            "exact": true,
-            "path": "/account/login",
-          },
-          Object {
-            "component": [Function],
-            "exact": true,
-            "path": "/account/signup",
-          },
-          Object {
-            "component": [Function],
-            "exact": true,
-            "path": "/account/forgot-password",
-          },
-          Object {
-            "component": [Function],
-            "exact": true,
-            "path": "/account/reset-password/:token",
-          },
-          Object {
-            "component": [Function],
-            "exact": true,
-            "path": "/account/verify/:token",
-          },
-          Object {
-            "component": [Function],
-            "exact": true,
-            "path": "/account/preferences",
-          },
-          Object {
-            "component": [Function],
-            "loadData": [Function],
-            "path": "/profiles/:username",
-          },
-          Object {
-            "auth": Object {
-              "redirect": "/account/login",
-              "required": true,
-              "status": 307,
-            },
-            "component": [Function],
-            "path": "/admin",
-            "routes": Array [
-              Object {
-                "component": [Function],
-                "exact": true,
-                "loadData": [Function],
-                "path": "/admin/content/articles",
-                "strict": true,
-              },
-              Object {
-                "component": [Function],
-                "exact": true,
-                "path": "/admin/content/articles/new",
-              },
-              Object {
-                "component": [Function],
-                "exact": true,
-                "loadData": [Function],
-                "path": "/admin/content/articles/:slug",
-              },
-              Object {
-                "component": [Function],
-                "exact": true,
-                "loadData": [Function],
-                "path": "/admin/content/tags",
-              },
-              Object {
-                "component": [Function],
-                "exact": true,
-                "loadData": [Function],
-                "path": "/admin/content/tags/:name",
-              },
-              Object {
-                "component": [Function],
-                "exact": true,
-                "loadData": [Function],
-                "path": "/admin/filemanager",
-              },
-              Object {
-                "component": [Function],
-                "exact": true,
-                "path": "/admin/file-editor/:id",
-              },
-              Object {
-                "component": [Function],
-                "exact": true,
-                "loadData": [Function],
-                "path": "/admin/navigation",
-              },
-              Object {
-                "component": [Function],
-                "exact": true,
-                "loadData": [Function],
-                "path": "/admin/members",
-              },
-              Object {
-                "component": [Function],
-                "exact": true,
-                "path": "/admin/settings",
-              },
-              Object {
-                "component": [Function],
-                "exact": true,
-                "loadData": [Function],
-                "path": "/admin/media",
-              },
-              Object {
-                "component": [Function],
-                "exact": true,
-                "path": "/admin/media/upload",
-              },
-              Object {
-                "component": [Function],
-                "exact": true,
-                "path": "/admin/media/:id",
-              },
-            ],
-          },
-          Object {
-            "component": [Function],
-            "path": "*",
-          },
-        ],
-      },
-    ]
-  }
-/>
+exports[`renders App 1`] = `
+<div
+  className="boldr boldrui-app"
+>
+  <HelmetWrapper
+    encodeSpecialCharacters={true}
+  >
+    <html
+      lang="en"
+    />
+    <title>
+      Boldr
+    </title>
+    <meta
+      content="Boldr"
+      name="application-name"
+    />
+    <meta
+      content="A modern, bold take on a cms"
+      name="description"
+    />
+    <meta
+      charSet="utf-8"
+    />
+    <meta
+      content="IE=edge"
+      httpEquiv="X-UA-Compatible"
+    />
+    <meta
+      content="width=device-width, initial-scale=1"
+      name="viewport"
+    />
+    <meta
+      content="#2b2b2b"
+      name="msapplication-TileColor"
+    />
+    <meta
+      content="/favicons/mstile-144x144.png"
+      name="msapplication-TileImage"
+    />
+    <meta
+      content="#2b2b2b"
+      name="theme-color"
+    />
+    <link
+      href="/favicons/favicon-32x32.png"
+      rel="icon"
+      sizes="32x32"
+      type="image/png"
+    />
+    <link
+      href="/favicons/favicon.ico"
+      rel="icon"
+      sizes="16x16 32x32"
+    />
+    <link
+      href="/favicons/apple-touch-icon-152x152.png"
+      rel="apple-touch-icon-precomposed"
+      sizes="152x152"
+    />
+    <link
+      href="/favicons/apple-touch-icon-144x144.png"
+      rel="apple-touch-icon-precomposed"
+      sizes="144x144"
+    />
+    <link
+      href="/favicons/apple-touch-icon-120x120.png"
+      rel="apple-touch-icon-precomposed"
+      sizes="120x120"
+    />
+    <link
+      href="/favicons/apple-touch-icon-114x114.png"
+      rel="apple-touch-icon-precomposed"
+      sizes="114x114"
+    />
+    <link
+      href="/favicons/apple-touch-icon-76x76.png"
+      rel="apple-touch-icon-precomposed"
+      sizes="76x76"
+    />
+    <link
+      href="/favicons/apple-touch-icon-72x72.png"
+      rel="apple-touch-icon-precomposed"
+      sizes="72x72"
+    />
+    <link
+      href="/favicons/apple-touch-icon-57x57.png"
+      rel="apple-touch-icon-precomposed"
+      sizes="57x57"
+    />
+    <link
+      href="/favicons/apple-touch-icon-60x60.png"
+      rel="apple-touch-icon-precomposed"
+      sizes="60x60"
+    />
+    <link
+      href="/favicons/apple-touch-icon-180x180.png"
+      rel="apple-touch-icon"
+      sizes="180x180"
+    />
+    <link
+      color="#00a9d9"
+      href="/favicons/safari-pinned-tab.svg"
+      rel="mask-icon"
+    />
+    <link
+      href="/favicons/favicon-196x196.png"
+      rel="icon"
+      sizes="196x196"
+      type="image/png"
+    />
+    <link
+      href="/favicons/favicon-128.png"
+      rel="icon"
+      sizes="128x128"
+      type="image/png"
+    />
+    <link
+      href="/favicons/favicon-96x96.png"
+      rel="icon"
+      sizes="96x96"
+      type="image/png"
+    />
+    <meta
+      content="#2b2b2b"
+      name="msapplication-TileColor"
+    />
+    <meta
+      content="/favicons/mstile-144x144.png"
+      name="msapplication-TileImage"
+    />
+    <meta
+      content="/favicons/mstile-70x70.png"
+      name="msapplication-square70x70logo"
+    />
+    <meta
+      content="/favicons/mstile-150x150.png"
+      name="msapplication-square150x150logo"
+    />
+    <meta
+      content="/favicons/mstile-310x150.png"
+      name="msapplication-wide310x150logo"
+    />
+    <meta
+      content="/favicons/mstile-310x310.png"
+      name="msapplication-square310x310logo"
+    />
+    <link
+      href="/manifest.json"
+      rel="manifest"
+    />
+  </HelmetWrapper>
+  <RouteManager
+    routes={
+      Array [
+        Object {
+          "id": 1,
+        },
+        Object {
+          "id": 2,
+        },
+      ]
+    }
+  />
+  <Connect(Notifications) />
+</div>
 `;

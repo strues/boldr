@@ -1,40 +1,30 @@
-# top-most EditorConfig file
-root = true
-
 [*]
-end_of_line = lf
-insert_final_newline = true
+charset=utf-8
+end_of_line=lf
+trim_trailing_whitespace=true
+insert_final_newline=true
+indent_style=space
+indent_size=2
 
-# Set default charset
-[*]
-charset = utf-8
-indent_size = 2
-indent_style = space
-trim_trailing_whitespace = true
+[{*.ng,*.sht,*.html,*.shtm,*.shtml,*.htm}]
+indent_style=space
+indent_size=4
 
-# JavaScript, JSON, JSX
-[*.{js,json,jsx}]
-indent_size = 2
-indent_style = space
-trim_trailing_whitespace = true
-insert_final_newline = true
+[{*.jhm,*.xslt,*.xul,*.rng,*.xsl,*.xsd,*.ant,*.svg,*.tld,*.fxml,*.jrxml,*.xml,*.jnlp,*.wsdl}]
+indent_style=space
+indent_size=4
 
-# CSS
-# SASS
-# https://sass-guidelin.es/#syntax--formatting
-# https://google.github.io/styleguide/htmlcssguide.xml#General_Formatting_Rules
-# http://cssguidelin.es/#syntax-and-formatting
-[*.{css,sass,scss}]
-indent_size = 2
-indent_style = space
-trim_trailing_whitespace = true
+[{.babelrc,.stylelintrc,.eslintrc,*.json,*.jsb3,*.jsb2,*.bowerrc}]
+indent_style=space
+indent_size=2
 
+[{*.ats,*.ts}]
+indent_style=space
+indent_size=4
+
+[{*.yml,*.yaml}]
+indent_style=space
+indent_size=2
 
 [*.md]
 trim_trailing_whitespace=false
-
-# YAML
-# http://yaml.org/spec/1.2/2009-07-21/spec.html#id2576668
-[*.{yaml,yml}]
-indent_size = 2
-indent_style = space

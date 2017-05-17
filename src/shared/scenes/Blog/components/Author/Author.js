@@ -22,43 +22,35 @@ const BioBlock = styled.div`
 
 type Props = {
   className: string,
-  username: string,
-  avatarUrl: string,
-  lastName: string,
-  firstName: string,
-  bio: string,
-  social: Object,
+  author: Object,
 };
 const Author = (props: Props) => {
+  const { author } = props;
   const classes = classnames(BASE_ELEMENT, props.className);
   const authorName = (
-    <Link to={`/profiles/${props.username}`}>{props.username}</Link>
+    <Link to={`/profiles/${author.username}`}>{author.username}</Link>
   );
   return (
     <div className={classes}>
       <AvatarName>
-        <Avatar src={props.avatarUrl} role="presentation" />
+        <Avatar src={author.avatarUrl} role="presentation" />
       </AvatarName>
       <AvatarName><Headline type="h3">{authorName}</Headline></AvatarName>
-      <BioBlock>{props.bio}</BioBlock>
+      <BioBlock>{author.bio}</BioBlock>
       <Social
         facebook
-        fburl={props.social.facebook.url}
+        fburl={author.socialMedia.facebookUrl}
         twitter
-        turl={props.social.twitter.url}
+        turl={author.socialMedia.twitterUrl}
         google
-        gurl={props.social.google.url}
+        gurl={author.socialMedia.googleUrl}
         github
-        ghurl={props.social.github.url}
+        ghurl={author.socialMedia.githubUrl}
         linkedin
-        lurl={props.social.linkedin.url}
+        lurl={author.socialMedia.linkedinUrl}
       />
     </div>
   );
-};
-
-Author.defaultProps = {
-  avatarUrl: '',
 };
 
 export default Author;

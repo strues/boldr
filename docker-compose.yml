@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  database:
+    build: ./.boldr/db
+    restart: always
+    tty: true
+    environment:
+      - PGDATA=/var/lib/postgresql/data
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=postgres
+    ports:
+      - "5432:5432"
+    expose:
+      - "5432"
+    volumes:
+      - database_volume:/var/lib/postgresql/data
+    healthcheck:
+      test: exit 0
+    networks:
+      - boldr
+
+  redis:
+    image: strues/redis:3.2.8-alpine
+    restart: always
+    read_only: false
+    security_opt:
+     - "no-new-privileges"
+    volumes:
+      - redis_volume:/data:rw
+    ports:
+      - "6379:6379"
+    expose:
+      - "6379"
+    networks:
+      - boldr
+
+volumes:
+  database_volume: {}
+  redis_volume: {}
+
+networks:
+  boldr:
+    driver: bridge

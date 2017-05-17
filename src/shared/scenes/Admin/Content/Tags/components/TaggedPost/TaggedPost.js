@@ -5,9 +5,8 @@ import Link from 'react-router-dom/Link';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 import List from 'material-ui/List/List';
 import ListItem from 'material-ui/List/ListItem';
+import { gql, graphql } from 'react-apollo';
 import { Loader } from 'boldr-ui';
-
-import { fetchTagArticlesIfNeeded } from '../../../../../Blog/state';
 
 type Props = {
   currentTag: Object,
@@ -15,54 +14,62 @@ type Props = {
   name: string,
   listTags: Object,
   match: Object,
-  fetchTagArticlesIfNeeded: (name: string) => void,
-  dispatch: () => void,
 };
 
 class TaggedPost extends Component {
-  static defaultProps: {
-    currentTag: {},
-  };
-
-  componentDidMount() {
-    const tagName = this.props.match.params.name;
-    this.props.fetchTagArticlesIfNeeded(tagName);
-  }
-
   props: Props;
   render() {
-    const { currentTag, isFetching } = this.props;
-    if (isFetching) {
+    const { articlesByTag, loading } = this.props.data;
+    if (loading) {
       return <Loader />;
     }
-    if (!currentTag.posts) {
-      return <div>NO posts matching the tag</div>;
+    if (!articlesByTag) {
+      return <div>No posts matching the tag</div>;
     }
 
     return (
       <div>
         <Toolbar>
-          <ToolbarTitle text={`Posts tagged ${currentTag.name}`} />
+          <ToolbarTitle text={`Posts tagged ${this.props.match.params.name}`} />
         </Toolbar>
         <List>
-          {currentTag.posts &&
-            currentTag.posts.map(post => (
-              <ListItem key={post.id} primaryText={post.title} />
-            ))}
+          {articlesByTag.map(post => (
+            <ListItem key={post.id} primaryText={post.title} />
+          ))}
         </List>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    listTags: state.blog.tags.all,
-    isFetching: state.blog.tags.isFetching,
-    currentTag: state.blog.tags.currentTag,
-  };
-};
-
-export default connect(mapStateToProps, { fetchTagArticlesIfNeeded })(
-  TaggedPost,
-);
+export default graphql(
+  gql`
+  query tags($name: String!, $offset: Int!, $limit: Int!) {
+    articlesByTag(name: $name, offset: $offset, limit: $limit) {
+      id,
+      title,
+      slug,
+      featureImage,
+      featured,
+      backgroundImage,
+      published,
+      createdAt,
+      excerpt,
+      userId,
+      tags {
+        id,
+        name
+      },
+    }
+  }
+`,
+  {
+    options: props => ({
+      variables: {
+        name: props.match.params.name,
+        limit: 20,
+        offset: 0,
+      },
+    }),
+  },
+)(TaggedPost);

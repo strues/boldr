@@ -2,7 +2,7 @@
 
 exports[`<About /> renders snapshot 1`] = `
 <div>
-  <Connect(BaseTemplate)
+  <Connect(Apollo(BaseTemplate))
     helmetMeta={
       <HelmetWrapper
         encodeSpecialCharacters={true}
@@ -25,6 +25,6 @@ exports[`<About /> renders snapshot 1`] = `
     >
       Steven Truesdell
     </a>
-  </Connect(BaseTemplate)>
+  </Connect(Apollo(BaseTemplate))>
 </div>
 `;

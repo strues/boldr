@@ -4,7 +4,7 @@ exports[`<Error404 /> renders snapshot 1`] = `
 <div
   className="error_wrapper"
 >
-  <Connect(BaseTemplate)
+  <Connect(Apollo(BaseTemplate))
     helmetMeta={
       <HelmetWrapper
         encodeSpecialCharacters={true}
@@ -20,6 +20,6 @@ exports[`<Error404 /> renders snapshot 1`] = `
     <p>
       SORRY PAGE NOT FOUND
     </p>
-  </Connect(BaseTemplate)>
+  </Connect(Apollo(BaseTemplate))>
 </div>
 `;

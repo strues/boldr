@@ -1,11 +1,11 @@
 /* @flow */
 import React, { PureComponent } from 'react';
-// $FlowIssue
+import { compose, graphql, gql } from 'react-apollo';
 import styled from 'styled-components';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Footer } from 'boldr-ui';
+import { Footer, Loader } from 'boldr-ui';
 
 import {
   fetchMainMenuIfNeeded,
@@ -27,14 +27,13 @@ type Props = {
   footer?: ReactElement,
   navigate: Function,
   dispatch: Function,
-  siteName: string,
   actions: Object,
-  me: ?Object,
+  me: ?User,
   isMobile: Boolean,
   ui: Object,
   menu: Object,
-  logo: Object,
   auth: Object,
+  data: Object,
 };
 
 const Wrapper = styled.div`
@@ -77,15 +76,17 @@ class BaseTemplate extends PureComponent {
   };
   props: Props;
   render() {
+    if (this.props.data.loading) {
+      return <Loader />;
+    }
     return (
       <Wrapper {...this.props}>
         {this.props.helmetMeta}
 
         <SiteHeader
           auth={this.props.auth}
-          logo={this.props.logo}
-          siteName={this.props.siteName}
           me={this.props.me}
+          settings={this.props.data.settings}
           menu={this.props.menu.details}
           items={this.props.menu.items}
           isMobile={this.props.isMobile}
@@ -109,9 +110,6 @@ const mapStateToProps = (state: Object) => {
   return {
     me: selectMe(state),
     auth: state.auth,
-    settings: selectSettings(state),
-    logo: selectSettingFromList(state, 3),
-    siteName: selectSettingFromList(state, 1),
     menu: state.boldr.menus.main,
     isMobile: state.boldr.ui.isMobile,
   };
@@ -132,4 +130,19 @@ const mapDispatchToProps = dispatch => {
 };
 
 export { Wrapper, FooterWrapper };
-export default connect(mapStateToProps, mapDispatchToProps)(BaseTemplate);
+const SETTINGS_QUERY = gql`
+query {
+    settings {
+      id,
+      key,
+      value,
+      label,
+      description,
+    }
+}
+`;
+const BaseTemplateWithData = graphql(SETTINGS_QUERY)(BaseTemplate);
+// $FlowIssue
+export default connect(mapStateToProps, mapDispatchToProps)(
+  BaseTemplateWithData,
+);

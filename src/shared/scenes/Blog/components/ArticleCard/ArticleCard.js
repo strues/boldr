@@ -20,79 +20,44 @@ import TagBlock from '../TagBlock';
 const BASE_ELEMENT = StyleClasses.POST_CARD;
 type Props = {
   className: string,
-  id: ?string,
-  featureImage: ?string,
-  title: string,
-  slug: string,
-  content: ?string,
-  backgroundImage: ?string,
-  excerpt: ?string,
-  createdAt: string,
-  updatedAt: ?string,
-  status: ?string,
-  author: string,
-  seo: ?Object,
-  tags: ?Array<Tag>,
-  attachments: ?Object,
-  meta: ?Object,
-  userId: ?string,
-  dispatch: Function,
-  listTags: Object,
+  article: Article,
+  dispatch: () => void,
 };
 
 export const ArticleCard = (props: Props) => {
-  const formattedDate = dateFns.format(props.createdAt, 'MM/DD/YYYY');
+  const formattedDate = dateFns.format(props.article.createdAt, 'MM/DD/YYYY');
   const classes = classnames(BASE_ELEMENT, props.className);
-  const articleTags = props.tags
-    ? props.tags.map(id => props.listTags[id])
-    : null;
-  // Explicitly define post rather than passing additional
-  // unnecessary props like listTags
-  const article = {
-    id: props.id,
-    author: props.author,
-    attachments: props.attachments,
-    content: props.content,
-    createdAt: props.createdAt,
-    excerpt: props.excerpt,
-    backgroundImage: props.backgroundImage,
-    featureImage: props.featureImage,
-    meta: props.meta,
-    slug: props.slug,
-    status: props.status,
-    tags: props.tags,
-    title: props.title,
-    userId: props.userId,
-  };
+
   function transitionPost() {
+    const { article } = props;
     props.dispatch(selectArticle(article));
   }
-
+  const { title, featureImage, slug, tags, excerpt } = props.article;
   return (
     <div className={classes}>
       <Card>
         <CardMedia
-          overlay={<CardTitle title={props.title} subtitle={formattedDate} />}
+          overlay={<CardTitle title={title} subtitle={formattedDate} />}
         >
-          <img src={props.featureImage} alt={`${props.title} feature image`} />
+          <img src={featureImage} alt={`${title} feature image`} />
         </CardMedia>
 
         <CardText>
-          {props.excerpt}
+          {excerpt}
           <Row>
             <Col xs={12}>
-              <Link to={`/blog/${props.slug}`} className="readmore-link">
+              <Link to={`/blog/${slug}`} className="readmore-link">
                 <FlatButton
                   primary
                   label="Read More"
-                  onTouchTap={transitionPost}
+                  onClick={transitionPost}
                 />
               </Link>
             </Col>
           </Row>
         </CardText>
         <CardActions>
-          <TagBlock tags={articleTags} />
+          <TagBlock tags={tags} />
         </CardActions>
       </Card>
     </div>

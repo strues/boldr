@@ -2,24 +2,25 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { gql, graphql } from 'react-apollo';
+import { Loader } from 'boldr-ui';
 import { showModal, hideModal } from '../../../state/modules/boldr/ui/actions';
 import { fetchMembersIfNeeded, memberSelected, updateMember } from '../state';
 import { getUsers } from '../../../state/modules/users/selectors';
 import Members from './Members';
 
 type Props = {
-  members: Array<User>,
+  data: Data,
+  hideModal: () => void,
   currentMember: User,
   dispatch: Function,
-  memberSelected: Function,
-  fetchMembersIfNeeded: () => {},
-  updateMember: Function,
-  hideModal: () => void,
   showModal: () => void,
   ui: Object,
 };
-
+type Data = {
+  users: Array<User>,
+  loading: boolean,
+};
 export class MembersContainer extends Component {
   static defaultProps: {
     profile: {},
@@ -34,9 +35,6 @@ export class MembersContainer extends Component {
   }
   state: Object = { userId: '' };
 
-  componentDidMount() {
-    this.props.dispatch(fetchMembersIfNeeded());
-  }
   props: Props;
 
   closeModal() {
@@ -64,11 +62,15 @@ export class MembersContainer extends Component {
     this.props.dispatch(updateMember(userData));
   }
   render() {
-    const { members, ui, currentMember } = this.props;
+    const { loading, users } = this.props.data;
+    const { ui, currentMember } = this.props;
+    if (loading) {
+      return <Loader />;
+    }
     return (
       <Members
         toggleUser={this.toggleUser}
-        users={members}
+        users={users}
         visible={ui.modal}
         close={this.closeModal}
         handleSubmit={this.handleSubmit}
@@ -80,10 +82,38 @@ export class MembersContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    members: getUsers(state),
-    currentMember: state.admin.members.currentMember,
     ui: state.boldr.ui,
+    currentMember: state.admin.members.currentMember,
   };
 };
 
-export default connect(mapStateToProps)(MembersContainer);
+export const MEMBERS_QUERY = gql`
+query {
+    users {
+      id,
+      email,
+      username,
+      firstName,
+      lastName,
+      avatarUrl,
+      profileImage,
+      bio,
+      location,
+      website,
+      roles {
+        name,
+        id
+      },
+      socialMedia {
+        facebookUrl,
+        githubUrl,
+        twitterUrl,
+        linkedinUrl,
+        googleUrl,
+        stackoverflowUrl
+      }
+    }
+}
+`;
+const MembersContainerWithData = graphql(MEMBERS_QUERY)(MembersContainer);
+export default connect(mapStateToProps)(MembersContainerWithData);

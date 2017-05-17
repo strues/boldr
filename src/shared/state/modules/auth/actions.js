@@ -23,7 +23,7 @@ export function doSignup(formInput: userSignupFormInput) {
         }
         dispatch({ type: t.SIGNUP_USER_SUCCESS });
         dispatch(push('/'));
-        dispatch(notificationSend(notif.MSG_SIGNUP_SUCCESS));
+        return dispatch(notificationSend(notif.MSG_SIGNUP_SUCCESS));
       })
       .catch(err => {
         dispatch(sendNotification(notif.MSG_SIGNUP_ERROR));

@@ -1,9 +1,9 @@
 /* eslint-disable */
 import React from 'react';
-import Loadable from 'react-loadable';
 import { Loader } from 'boldr-ui';
 import type { Dispatch } from './types/redux';
 
+import Loadable from './components/Loadable/Loadable';
 import App from './components/App';
 import Home from './pages/Home';
 import About from './pages/About';
@@ -37,7 +37,7 @@ import NavigationContainer from './scenes/Admin/Navigation/NavigationContainer';
 import Members from './scenes/Admin/Members';
 import Settings from './scenes/Admin/Settings';
 import TagsContainer from './scenes/Admin/Content/Tags/TagsContainer';
-import TaggedPost from './scenes/Admin/Content/Tags/components/TaggedPost';
+import TaggedPost from './scenes/Admin/Content/Tags/components/TaggedPost/TaggedPost';
 import DashboardContainer from './scenes/Admin/Dashboard/DashboardContainer';
 
 // Async data loading actions
@@ -101,25 +101,16 @@ export default [
         path: '/blog',
         exact: true,
         component: ArticleListingContainer,
-        loadData: async (dispatch: Dispatch) =>
-          Promise.all([
-            await dispatch(fetchArticlesIfNeeded()),
-            await dispatch(fetchTagsIfNeeded()),
-          ]),
       },
       {
         path: '/blog/:slug',
         exact: true,
         component: Article,
-        loadData: async (dispatch: Dispatch, params: Object) =>
-          Promise.all([await dispatch(fetchArticleIfNeeded(params.slug))]),
       },
       {
         path: '/blog/tags/:name',
         exact: true,
         component: TagListContainer,
-        loadData: async (dispatch: Dispatch, params: Object) =>
-          Promise.all([await dispatch(fetchTagArticlesIfNeeded(params.name))]),
       },
       {
         path: '/account/login',
@@ -154,8 +145,7 @@ export default [
       {
         path: '/profiles/:username',
         component: ProfileContainer,
-        loadData: async (dispatch: Dispatch, params: Object) =>
-          Promise.all([await dispatch(fetchProfileIfNeeded(params.username))]),
+
       },
       {
         path: '/admin',
@@ -171,8 +161,7 @@ export default [
             exact: true,
             strict: true,
             component: ArticlesContainer,
-            loadData: async (dispatch: Dispatch) =>
-              Promise.all([await dispatch(fetchArticlesIfNeeded())]),
+
           },
           {
             path: '/admin/content/articles/new',
@@ -183,31 +172,23 @@ export default [
             path: '/admin/content/articles/:slug',
             exact: true,
             component: ArticleEditor,
-            loadData: async (dispatch: Dispatch, params: Object) =>
-              Promise.all([await dispatch(fetchArticleIfNeeded(params.slug))]),
-          },
-          {
-            path: '/admin/content/tags',
-            exact: true,
-            component: TagsContainer,
-            loadData: async (dispatch: Dispatch) =>
-              Promise.all([await dispatch(fetchTagsIfNeeded())]),
           },
           {
             path: '/admin/content/tags/:name',
             exact: true,
             component: TaggedPost,
-            loadData: async (dispatch: Dispatch, params: Object) =>
-              Promise.all([
-                await dispatch(fetchTagArticlesIfNeeded(params.name)),
-              ]),
+          },
+          {
+            path: '/admin/content/tags',
+            exact: true,
+            component: TagsContainer,
+
           },
           {
             path: '/admin/filemanager',
             exact: true,
             component: FileManagerContainer,
-            loadData: async (dispatch: Dispatch) =>
-              Promise.all([await dispatch(fetchAttachmentsIfNeeded())]),
+
           },
           {
             path: '/admin/file-editor/:id',
@@ -218,15 +199,13 @@ export default [
             path: '/admin/navigation',
             exact: true,
             component: NavigationContainer,
-            loadData: async (dispatch: Dispatch) =>
-              Promise.all([await dispatch(fetchMainMenuIfNeeded())]),
+
           },
           {
             path: '/admin/members',
             exact: true,
             component: Members,
-            loadData: async (dispatch: Dispatch) =>
-              Promise.all([await dispatch(fetchMembersIfNeeded())]),
+
           },
           {
             path: '/admin/settings',
@@ -238,8 +217,7 @@ export default [
             path: '/admin/media',
             exact: true,
             component: MediaContainer,
-            loadData: async (dispatch: Dispatch) =>
-              Promise.all([await dispatch(fetchMediaIfNeeded())]),
+
           },
           {
             path: '/admin/media/upload',

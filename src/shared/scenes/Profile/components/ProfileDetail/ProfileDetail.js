@@ -1,6 +1,5 @@
 /* @flow */
 import React from 'react';
-// $FlowIssue
 import styled from 'styled-components';
 import classnames from 'classnames';
 import { StyleClasses } from 'boldr-ui';

@@ -29,7 +29,7 @@ class Navigation extends Component {
       safeName: null,
       order: null,
       href: null,
-      mobile_href: null,
+      mobileHref: null,
       uuid: null,
       hasDropdown: false,
       cssClassname: null,

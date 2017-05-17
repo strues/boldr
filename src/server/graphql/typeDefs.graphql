@@ -1,0 +1,259 @@
+################################################################################
+## Custom Scalar Types
+################################################################################
+
+# Date represented as an ISO8601 string.
+scalar Date
+# A JSON object type, useful for Postgres JSON fields
+scalar JSON
+
+################################################################################
+## Users
+################################################################################
+
+# a registered user of the site
+type User {
+  id: ID!
+  email: String!
+  username: String!
+  articles: [Article]
+  roles: [Role]
+  firstName: String!
+  lastName: String!
+  location: String
+  profileImage: String
+  birthday: Date
+  bio: String
+  language: String
+  avatarUrl: String!
+  website: String
+  socialMedia: Social
+}
+
+# social media account info belonging to a user
+type Social {
+  id: ID!
+  userId: ID!
+  facebookUrl: String
+  twitterUrl: String
+  githubUrl: String
+  linkedinUrl: String
+  googleUrl: String
+  stackoverflowUrl: String
+}
+
+################################################################################
+## Roles
+################################################################################
+
+# role / permission group for users
+type Role {
+  id: ID!
+  name: String!
+  description: String
+  image: String
+  users: [User]
+}
+
+################################################################################
+## Articles
+################################################################################
+
+# An article or blog post
+type Article {
+  # unique uuid id for the article
+  id: ID!
+  # title of the article
+  title: String!
+  # slug for the article
+  slug: String!
+  # html content of the article
+  content: String!
+  # raw object of the article content
+  rawContent: String
+  # show description of the article
+  excerpt: String!
+  # whether or not the article is featured
+  featured: Boolean!
+  # is the article published or a draft
+  published: Boolean!
+  # url of the article feature image
+  featureImage: String!
+  # url of the article background image
+  backgroundImage: String
+  # the time the article was created
+  createdAt: Date!
+  # the time the article was updated
+  updatedAt: Date!
+  # the time the article was deleted
+  deletedAt: Date
+  # the id of the user who created the article
+  userId: String!
+  # the user who created the article
+  author: User!
+  # tags related to the article
+  tags: [Tag]
+  # uploaded content for the article
+  media: [Media]
+}
+################################################################################
+## Tags
+################################################################################
+
+# tags relate content together
+type Tag {
+  id: ID!
+  name: String!
+  description: String
+  articles: [Article]
+}
+################################################################################
+## Media
+################################################################################
+
+# uploaded images, videos or audio
+type Media {
+  # unique uuid id for the media
+  id: ID!
+  # name of the media
+  fileName: String!
+  # identifier which cannot be changed
+  safeName: String!
+  # thumbnail filename
+  thumbName: String!
+  # description of the media
+  fileDescription: String!
+  # image, video, audio
+  mediaType: Int!
+  # mime-type
+  mimetype: String
+  # accessible url
+  url: String!
+  # path to the locally stored file
+  path: String
+  # owner id
+  userId: String!
+  # date the media was uploaded
+  createdAt: Date!
+  # date the media was updated
+  updatedAt: Date
+}
+################################################################################
+## Settings
+################################################################################
+
+# editable site settings
+type Setting {
+  id: ID!
+  key: String!
+  value: String!
+  label: String
+  description: String
+}
+
+################################################################################
+## Menus
+################################################################################
+
+# site navigation elements
+type Menu {
+  id: Int!
+  uuid: String!
+  name: String!
+  safeName: String
+  attributes: String
+  restricted: Boolean!
+  details: [MenuDetail]
+}
+################################################################################
+## Menu Details
+################################################################################
+
+# links and other menu content
+type MenuDetail {
+  id: Int!
+  uuid: String!
+  safeName: String!
+  name: String!
+  cssClassname: String
+  hasDropdown: Boolean!
+  order: Int!
+  mobileHref: String!
+  href: String!
+  icon: String!
+  children: [MenuDetailChild]
+}
+
+# dropdown menu items
+type MenuDetailChild {
+  key: String!
+  items: [MenuDetail]
+}
+
+
+################################################################################
+## Auth
+################################################################################
+
+# Authentication type
+type Auth {
+  token: String
+  errors: [Error]
+}
+
+# Error type.
+type Error {
+  key: String
+  value: String
+}
+################################################################################
+## Queries
+################################################################################
+
+type RootQuery {
+  articles(offset: Int!, limit: Int!): [Article]
+  articlesByUser(username: String!): [Article]
+  articlesByTag(name: String!, offset: Int!, limit: Int!): [Article]
+  articleById(id: String!): Article
+  articleBySlug(slug: String!): Article
+  menus: [Menu]
+  menuById(id: Int!):[Menu]
+  settings: [Setting]
+  getTags(offset: Int!, limit: Int!): [Tag]
+  users: [User]
+  currentUser: User
+  userById(id: String!): User
+  userByEmail(email: String!): User
+  userByUsername(username: String!): User
+}
+
+################################################################################
+## Mutations
+################################################################################
+
+type RootMutation {
+  dummy: Int
+  # Sign up.
+  # registerUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
+  # Sign in.
+  loginUser(email: String!, password: String!): Auth
+}
+
+
+################################################################################
+## Subscriptions
+################################################################################
+
+type Subscription {
+  dummy: Int
+}
+
+################################################################################
+## Schema
+################################################################################
+
+schema {
+  query: RootQuery
+  mutation: RootMutation
+  subscription: Subscription
+}

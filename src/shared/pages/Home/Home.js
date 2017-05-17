@@ -17,7 +17,7 @@ const Home = () => {
               {' '}
               <span style={{ color: 'rgb(229, 0, 80)' }}>modern</span>
               {' '}
-              content management framework.
+              Content Management Framework.
             </Headline>
           </Hero>
         }

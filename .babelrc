@@ -1,12 +1,3 @@
 {
-  "presets": [
-    ["env", { "targets": { "node": true } }],
-    "stage-2",
-    "react"
-  ],
-  "plugins": [
-    "syntax-dynamic-import",
-    "syntax-flow",
-    "syntax-trailing-function-commas",
-  ]
+  "presets": ["boldr/node"]
 }

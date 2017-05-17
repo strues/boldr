@@ -3,45 +3,71 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Loader } from 'boldr-ui';
+import { gql, graphql } from 'react-apollo';
 
 import { BaseTemplate } from '../../templates';
-
-import { fetchProfileIfNeeded } from '../../state';
 import Profile from './Profile';
 
 type Props = {
-  params: Object,
-  user: Object,
-  fetchProfileIfNeeded: (username: string) => void,
-  dispatch: Function,
-  isFetching: boolean,
-  profile: Object,
+  user: User,
+  data: Data,
   match: Object,
 };
 
+type Data = {
+  userByUsername: User,
+  loading: boolean,
+};
+
+type State = {
+  me: boolean,
+};
 export class ProfileContainer extends Component {
-  static defaultProps: {
-    match: { params: { username: '' } },
-    fetchProfileIfNeeded: () => {},
+  static defaultProps = {
+    user: {
+      email: '',
+    },
+    data: {
+      userByUsername: {
+        email: '',
+      },
+    },
   };
+  constructor() {
+    super();
+
+    this.state = {
+      me: false,
+    };
+    (this: any).setMe = this.setMe.bind(this);
+  }
+  state: State;
+
   componentDidMount() {
-    const { match: { params } } = this.props;
-    this.props.dispatch(fetchProfileIfNeeded(params.username));
+    this.setMe();
   }
 
   props: Props;
 
+  setMe() {
+    const userEmail = this.props.user.email;
+    const profEmail = this.props.data.userByUsername.email;
+    const isMe = userEmail === profEmail;
+    this.setState({
+      me: isMe,
+    });
+  }
   render() {
-    const { isFetching, profile, user } = this.props;
+    const { loading, userByUsername } = this.props.data;
 
-    if (isFetching) {
+    if (loading) {
       return <Loader />;
     }
     return (
       <BaseTemplate
-        helmetMeta={<Helmet title={`${profile.username}'s Profile`} />}
+        helmetMeta={<Helmet title={`${userByUsername.username}'s Profile`} />}
       >
-        <Profile profile={profile} email={user.email} {...this.props} />
+        <Profile profile={userByUsername} me={this.state.me} />
       </BaseTemplate>
     );
   }
@@ -50,11 +76,41 @@ export class ProfileContainer extends Component {
 const mapStateToProps = state => {
   return {
     user: state.users.me,
-    profile: state.users.profile,
-    isFetching: state.users.isFetching,
-    profileImage: state.users.profile.profileImage,
-    avatarImage: state.users.profile.avatarImage,
   };
 };
 
-export default connect(mapStateToProps)(ProfileContainer);
+const PROFILE_QUERY = gql`
+query user($username: String!) {
+    userByUsername(username: $username) {
+      id,
+      email,
+      username,
+      firstName,
+      lastName,
+      avatarUrl,
+      profileImage,
+      bio,
+      location,
+      website,
+      roles {
+        name
+      },
+      socialMedia {
+        facebookUrl,
+        githubUrl,
+        twitterUrl,
+        linkedinUrl,
+        googleUrl,
+        stackoverflowUrl
+      }
+    }
+}
+`;
+const ProfileContainerWithData = graphql(PROFILE_QUERY, {
+  options: props => ({
+    variables: {
+      username: props.match.params.username,
+    },
+  }),
+})(ProfileContainer);
+export default connect(mapStateToProps)(ProfileContainerWithData);

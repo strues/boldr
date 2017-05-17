@@ -1,33 +1,46 @@
-/* eslint-disable dot-notation */
 import { createStore, applyMiddleware, compose } from 'redux';
+import thunkMiddleware from 'redux-thunk';
 import { routerMiddleware } from 'react-router-redux';
-import thunk from 'redux-thunk';
-
 import api from '../core/api';
-import rootReducer from './reducers';
+import getReducers from './reducers';
 
-export default function configureStore(history, preloadedState) {
+const inBrowser = typeof window === 'object';
+
+export default function configureStore(apolloClient, preloadedState, history) {
   const reduxRouterMiddleware = routerMiddleware(history);
-
-  const middlewares = [thunk.withExtraArgument(api), reduxRouterMiddleware];
-
-  const enhancers = [
-    applyMiddleware(...middlewares),
-    IS_DEV &&
-      typeof window === 'object' &&
-      typeof window.devToolsExtension !== 'undefined'
-      ? window.devToolsExtension()
-      : f => f,
+  const middleware = [
+    thunkMiddleware.withExtraArgument(api),
+    apolloClient.middleware(),
+    reduxRouterMiddleware,
   ];
 
-  // Creating the store
-  const store = createStore(rootReducer, preloadedState, compose(...enhancers));
+  const enhancers = [applyMiddleware(...middleware)];
+  // Here we only want to include redux-logger during development.
+  /* istanbul ignore next */
+  if (process.env.NODE_ENV === `development`) {
+    const { logger } = require(`redux-logger`);
+    middleware.push(logger);
+  }
 
   /* istanbul ignore next */
-  if (module.hot) {
+  const devEnhancers = process.env.NODE_ENV !== 'production' &&
+    inBrowser &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    : compose;
+
+  // Creating the store
+  const store = createStore(
+    getReducers(apolloClient),
+    preloadedState,
+    devEnhancers(...enhancers),
+  );
+
+  if (process.env.NODE_ENV === 'development' && module.hot) {
     module.hot.accept('./reducers', () => {
-      const nextReducer = require('./reducers').default;
-      store.replaceReducer(nextReducer);
+      const nextRootReducer = require('./reducers').default; // eslint-disable-line
+
+      store.replaceReducer(nextRootReducer);
     });
   }
 

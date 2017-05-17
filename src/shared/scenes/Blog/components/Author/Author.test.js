@@ -10,30 +10,21 @@ const authorProps = {
   firstName: 'me',
   lastName: 'you',
   bio: 'bio bio',
-  social: {
-    facebook: {
-      url: 'asf',
-    },
-    twitter: {
-      url: 'asf',
-    },
-    google: {
-      url: 'asf',
-    },
-    github: {
-      url: 'asf',
-    },
-    linkedin: {
-      url: 'asf',
-    },
+  socialMedia: {
+    facebookUrl: 'http://facebook.com',
+    githubUrl: 'http://facebook.com',
+    twitterUrl: 'http://facebook.com',
+    linkedinUrl: 'http://facebook.com',
+    googleUrl: 'http://facebook.com',
+    stackoverflowUrl: 'http://facebook.com',
   },
 };
 
 describe('<Author />', () => {
-  const wrapper = shallow(<Author {...authorProps} />);
+  const wrapper = shallow(<Author author={authorProps} />);
   it('renders <Author /> without breaking', () => {
     expect(wrapper.find('div').length).toBe(1);
-    expect(wrapper.instance().props.username).toBe('hey');
+    expect(wrapper.instance().props.author.username).toBe('hey');
   });
   it('renders snapshot', () => {
     expect(shallowToJson(wrapper)).toMatchSnapshot();

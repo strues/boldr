@@ -1,33 +1,24 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {
-  fetchArticlesIfNeeded,
-  getArticles,
-  deletePost,
-} from '../../../Blog/state';
-import type { ReactElement } from '../../../../types/react';
+import { gql, graphql } from 'react-apollo';
+import { Loader } from 'boldr-ui';
+import { deletePost } from '../../../Blog/state';
 import Articles from './Articles';
 
-type Props = {
-  children?: ReactElement,
+type Data = {
   articles: Array<Article>,
+  loading: boolean,
+};
+
+type Props = {
   dispatch: () => void,
   deletePost: Function,
-  fetchArticlesIfNeeded: () => void,
+  data: Data,
   handleDeleteClick: Function,
 };
 
 export class ArticlesContainer extends Component {
-  static defaultProps: {
-    profile: {},
-    fetchArticlesIfNeeded: () => {},
-  };
-
-  componentDidMount() {
-    this.props.dispatch(fetchArticlesIfNeeded());
-  }
-
   props: Props;
 
   handleDeleteClick = (postId: string) => {
@@ -35,19 +26,45 @@ export class ArticlesContainer extends Component {
   };
 
   render() {
+    if (this.props.data.loading) {
+      return <Loader />;
+    }
     return (
       <Articles
-        articles={this.props.articles}
+        articles={this.props.data.articles}
         handleDeleteClick={this.handleDeleteClick}
       />
     );
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    articles: getArticles(state),
-  };
-};
+const ARTICLES_QUERY = gql`
+  query articles($offset: Int!, $limit: Int!) {
+    articles(offset: $offset, limit: $limit) {
+      id,
+      title,
+      slug,
+      featureImage,
+      featured,
+      backgroundImage,
+      published,
+      createdAt,
+      excerpt,
+      userId,
+      tags {
+        id,
+        name
+      },
+    }
+  }
+`;
 
-export default connect(mapStateToProps)(ArticlesContainer);
+const ArticlesContainerWithData = graphql(ARTICLES_QUERY, {
+  options: () => ({
+    variables: {
+      offset: 0,
+      limit: 20,
+    },
+  }),
+})(ArticlesContainer);
+export default connect()(ArticlesContainerWithData);

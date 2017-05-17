@@ -6,13 +6,12 @@ import FloatingActionButton from 'material-ui/FloatingActionButton';
 import { FeaturedArticle, ArticleCard } from '../components';
 
 type Props = {
-  features: Array<Article>,
-  articles: Array<Article>,
+  loading: boolean,
   layout: Object,
-  isFetching: Boolean,
-  listTags: Object,
   handleChangeLayout: () => void,
+  articles: Array<Article>,
 };
+
 const CardSpacer = styled.div`
   margin-bottom: 50px;
 `;
@@ -25,59 +24,45 @@ const style = {
   right: '20px',
   bottom: '70px',
 };
-const ArticleListing = (props: Props) => {
-  if (props.isFetching) {
-    return <Loader />;
+
+class ArticleListing extends React.PureComponent {
+  props: Props;
+
+  renderArticles = () => {
+    const { articles } = this.props;
+    const allArticles =
+      articles.filter(p => p.published) && articles.filter(p => !p.featured);
+    return allArticles.map(article => (
+      <Col key={article.id} xs={12} md={4}>
+        <CardSpacer>
+          <ArticleCard article={article} tags={article.tags} />
+        </CardSpacer>
+      </Col>
+    ));
+  };
+  renderFeature = () => {
+    const { articles } = this.props;
+    const featuredArticles = articles.filter(p => p.featured);
+    return featuredArticles.map(article => (
+      <Col key={article.id} xs={12}>
+        <FeaturedArticle {...article} />
+      </Col>
+    ));
+  };
+  render() {
+    if (this.props.loading) {
+      return <Loader />;
+    }
+    return (
+      <Grid>
+        <FeaturedArea>
+          {this.renderFeature()}
+        </FeaturedArea>
+        <Row>
+          {this.renderArticles()}
+        </Row>
+      </Grid>
+    );
   }
-
-  const gridView = (
-    <Row>
-      {props.articles.map(article => (
-        <Col key={article.id} xs={12} md={4}>
-          <CardSpacer>
-            <ArticleCard {...article} listTags={props.listTags} />
-          </CardSpacer>
-        </Col>
-      ))}
-    </Row>
-  );
-
-  const listView = (
-    <div>
-      {props.articles.map(article => (
-        <Col key={article.id} xs={12}>
-          <ArticleCard {...article} listTags={props.listTags} />
-        </Col>
-      ))}
-    </div>
-  );
-
-  return (
-    <Grid>
-      <FeaturedArea>
-        {props.features.map(article => (
-          <Col key={article.id} xs={12}>
-            <FeaturedArticle {...article} listTags={props.listTags} />
-          </Col>
-        ))}
-      </FeaturedArea>
-      {props.layout === 'grid' ? gridView : listView}
-      {props.layout === 'grid'
-        ? <FloatingActionButton
-            secondary
-            style={style}
-            onTouchTap={props.handleChangeLayout}
-          >
-            <FontIcon>view_list</FontIcon>
-          </FloatingActionButton>
-        : <FloatingActionButton
-            style={style}
-            onTouchTap={props.handleChangeLayout}
-          >
-            <FontIcon>view_module</FontIcon>
-          </FloatingActionButton>}
-    </Grid>
-  );
-};
-
+}
 export default ArticleListing;

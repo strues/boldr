@@ -2,7 +2,7 @@
 
 exports[`<Home /> renders snapshot 1`] = `
 <div>
-  <Connect(BaseTemplate)
+  <Connect(Apollo(BaseTemplate))
     footer={
       <Footer
         single={false}
@@ -33,7 +33,7 @@ exports[`<Home /> renders snapshot 1`] = `
             modern
           </span>
            
-          content management framework.
+          Content Management Framework.
         </Headline>
       </Hero>
     }
@@ -99,6 +99,6 @@ exports[`<Home /> renders snapshot 1`] = `
         </Col>
       </Row>
     </Grid>
-  </Connect(BaseTemplate)>
+  </Connect(Apollo(BaseTemplate))>
 </div>
 `;

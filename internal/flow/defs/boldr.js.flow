@@ -1,4 +1,13 @@
 /* @flow */
+import React from 'react';
+
+declare type ReactElement = React.Element<any>;
+
+declare type ReactNode = string | number | ReactElement | Array<ReactElement>;
+
+declare type ReactChild = ReactNode | boolean | void | null;
+
+declare type ReactChildren = ReactChild | Array<ReactChildren>;
 
 declare type User = {
   id: string,
@@ -28,6 +37,7 @@ declare type Article = {
   createdAt: string,
   updatedAt: ?string,
   published: ?boolean,
+  featured: ?boolean,
   author: ?User,
   tags: ?Array<Tag>,
   attachments: ?Object,
@@ -115,7 +125,6 @@ declare type MenuDetails = {
   children: Array<Object>,
 };
 
-
 declare type NormalizrPayload = {
   entities: Object,
   result: Array<string>,
@@ -156,3 +165,12 @@ declare interface userLoginFormInput {
   email: string,
   password: string,
 }
+
+declare type AuthToken = {
+  iss: string,
+  sub: string,
+  iat: ?number,
+  exp: number,
+  email: string,
+  role: string,
+};
