@@ -1,8 +1,18 @@
-debug: false
+debug: true
 pipeline:
   build:
     image: node:7.9
+    environment:
+      - BOLDR__DB__URL=postgres://postgres:password@127.0.0.1:5432/boldr_test
+      - BOLDR__REDIS__URL=redis://127.0.0.1:6379
     commands:
-      - yarn
-      - yarn build:test
-      - yarn test
+      - yarn global add node-gyp
+      - yarn install --pure-lockfile
+      - yarn test:ci
+services:
+  database:
+    image: strues/boldr-pg:0.1.0
+  redis:
+    image: strues/redis:3.2.8-alpine
+    expose:
+      - "6379"

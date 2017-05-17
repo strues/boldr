@@ -1,8 +1,9 @@
 sudo: required
 language: node_js
 node_js:
-- 7.9
-
+- 7.10
+services:
+  - docker
 branches:
   only:
   - master
@@ -11,19 +12,17 @@ env:
   TOKEN_SECRET: b0ldrs0s3cr3t
 git:
   depth: 3
-addons:
-  apt:
-    sources:
-    - ubuntu-toolchain-r-test
-    packages:
-    - g++-4.8
-
+before_install:
+ - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+ - chmod +x docker-compose
+ - sudo mv docker-compose /usr/local/bin
 install:
 - yarn
 before_script:
-- yarn build:test
+ - docker-compose build
+ - docker-compose up -d
 script:
-- yarn test:ci
+- yarn test
 after_success:
 - bash <(curl -s https://codecov.io/bash)
 cache:
