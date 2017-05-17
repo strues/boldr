@@ -8,7 +8,7 @@ pipeline:
     commands:
       - yarn global add node-gyp
       - yarn install --pure-lockfile
-      - yarn test:ci
+      - yarn test
 services:
   database:
     image: strues/boldr-pg:0.1.0
