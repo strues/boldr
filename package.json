@@ -129,6 +129,7 @@
     "babel-preset-env": "^1.4.0",
     "boldr-dx": "^0.3.0-rc.1",
     "cross-env": "^5.0.0",
+    "cz-conventional-changelog-emoji": "^0.1.0",
     "enzyme": "^2.8.2",
     "eslint": "^3.19.0",
     "eslint-config-boldr": "^0.9.6",

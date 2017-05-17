@@ -32,14 +32,13 @@ Join us on <a href="https://slack.boldr.io" target="blank"><img src="/docs/asset
 
 ## Boldr Repositories
 
-- [Boldr API](https://github.com/boldr/boldr-api)
 - [Boldr UI](https://github.com/boldr/boldr-ui)
 - [Boldr Tools](https://github.com/boldr/boldr-tools)
 
 
 ## Current Features
 
-* Standalone REST API - Giving you the freedom to do whatever you'd like without looking at an interface.
+* GraphQL and REST API.
 * Rich Text Editor / WYSIWYG
 * Server side rendering
 * Authentication with JSON Web Tokens
@@ -48,6 +47,7 @@ Join us on <a href="https://slack.boldr.io" target="blank"><img src="/docs/asset
 * User management with basic role based access control (major expansion of capabilities planned for a later date)
 * Basic user and author profiles.
 * Redis caching
+* Behind-the-scenes commandline build tools
 * Command line interface - Quick and easy project bootstrapping
 
 
@@ -56,6 +56,7 @@ Join us on <a href="https://slack.boldr.io" target="blank"><img src="/docs/asset
 - [Node](https://github.com/nodejs/node)
 - [Express](https://github.com/expressjs/express)
 - [React](https://github.com/facebook/react)
+- [GraphQL](https://github.com/facebook/graphql)
 - [Postgres](https://github.com/postgres/postgres) ([Knex](http://knexjs.org/) & [Objection](https://github.com/Vincit/objection.js/))
 - [Redis](http://redis.io/)
 - [Docker](https://github.com/docker/docker)
@@ -88,15 +89,12 @@ First you must somehow get the files to your machine. Below outlines two options
   yarn
 ```  
 
-If you don't feel like installing a global CLI, but still want to use the API, grab the files from https://github.com/boldr/boldr-api
-
 
 ## Usage
 
 Boldr runs on the following ports:
 **Frontend**: 3000 - _React SSR server_  
 **Webpack**: 3001 - _dev only_  
-
 
 
 ### Development
@@ -109,7 +107,8 @@ After Boldr has started visit <http://localhost:3000>. If you're using the API, 
 > Email - admin@boldr.io
 > Password - password
 
-Settings for the build process are located in `config/values.js`.
+All configuration happens in the `.boldr/boldr.js` file. There you are able to modify values for the server as well as the build process.
+
 
 ### Production
 
