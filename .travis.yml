@@ -9,10 +9,12 @@ branches:
   - master
   - develop
 env:
+  DOCKER_COMPOSE_VERSION: 1.13.0
   TOKEN_SECRET: b0ldrs0s3cr3t
 git:
   depth: 3
 before_install:
+ - sudo rm /usr/local/bin/docker-compose
  - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
  - chmod +x docker-compose
  - sudo mv docker-compose /usr/local/bin
