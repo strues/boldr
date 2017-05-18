@@ -10,5 +10,6 @@ logs
 .idea
 .boldrrc
 public/assets
-server
+public/uploads
+lib
 !src/server

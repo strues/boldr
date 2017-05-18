@@ -2,7 +2,6 @@
 import { combineReducers } from 'redux';
 import removeIdFromArray from 'boldr-utils/es/arrays/removeIdFromArray';
 import removeByKey from 'boldr-utils/es/objects/removeByKey';
-
 import * as t from '../actionTypes';
 import { getArticles } from './selectors';
 

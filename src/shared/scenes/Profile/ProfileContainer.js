@@ -51,7 +51,9 @@ export class ProfileContainer extends Component {
 
   setMe() {
     const userEmail = this.props.user.email;
-    const profEmail = this.props.data.loading ? '' : this.props.data.userByUsername.email;
+    const profEmail = this.props.data.loading
+      ? ''
+      : this.props.data.userByUsername.email;
     const isMe = userEmail === profEmail;
     this.setState({
       me: isMe,

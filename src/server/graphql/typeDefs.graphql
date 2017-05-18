@@ -124,7 +124,7 @@ type Media {
   # description of the media
   fileDescription: String!
   # image, video, audio
-  mediaType: Int!
+  mediaType: [MediaType]
   # mime-type
   mimetype: String
   # accessible url
@@ -136,6 +136,20 @@ type Media {
   # date the media was uploaded
   createdAt: Date!
   # date the media was updated
+  updatedAt: Date
+}
+
+# Category of various media
+type MediaType {
+  # auto incrementing id
+  id: ID!
+  # uuid for the media type
+  uuid: String!
+  # media type
+  mediaType: String!
+  # date the media type was created
+  createdAt: Date!
+  # date the media type was updated
   updatedAt: Date
 }
 ################################################################################
@@ -218,6 +232,7 @@ type RootQuery {
   articleBySlug(slug: String!): Article
   menus: [Menu]
   menuById(id: Int!):[Menu]
+  listMedia(offset: Int!, limit: Int!): [Media]
   settings: [Setting]
   getTags(offset: Int!, limit: Int!): [Tag]
   users: [User]

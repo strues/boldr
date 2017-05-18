@@ -15,15 +15,16 @@
 <PROJECT_ROOT>/node_modules/jest-enzyme/.*
 <PROJECT_ROOT>/node_modules/react-event-listener/.*
 <PROJECT_ROOT>/node_modules/draftjs-utils/.*
+<PROJECT_ROOT>/node_modules/boldr-dx/.*
+<PROJECT_ROOT>/node_modules/eslint-plugin-jsx-a11y/.*
 .*/db/.*
 .*/docs/.*
 .*/dist/.*
 .*/public/.*
 .*/.idea/.*
 .*/.vscode/.*
-.*/.happypack/.*
 .*/coverage/.*
-.*/boldrCMS/.*
+.*/lib/.*
 
 [include]
 .*/src/.*

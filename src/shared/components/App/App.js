@@ -1,6 +1,6 @@
 /* @flow */
 import '../../styles/main.scss';
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import classnames from 'classnames';
 import Helmet from 'react-helmet';
 import { StyleClasses } from 'boldr-ui';
@@ -14,7 +14,7 @@ type Props = {
   className: string,
 };
 
-class App extends PureComponent {
+class App extends Component {
   static displayName = 'App';
   props: Props;
   render() {

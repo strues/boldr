@@ -6,6 +6,7 @@ import Article from '../models/article';
 import Tag from '../models/tag';
 import User from '../models/user';
 import Media from '../models/media';
+import MediaType from '../models/mediaType';
 import Role from '../models/role';
 import Menu from '../models/menu';
 import MenuDetail from '../models/menuDetail';
@@ -71,6 +72,7 @@ export default {
   },
 
   RootQuery: {
+    // articles
     articles(obj, args, context) {
       const { offset, limit } = args;
 
@@ -105,15 +107,23 @@ export default {
 
       return Article.getArticleBySlug(args.slug).then(jsonResult);
     },
+    listMedia(obj, args) {
+      const { offset, limit } = args;
+      debug('GraphQL.Resolvers.Query.listMedia');
 
+      return Media.listMedia(offset, limit).then(jsonResult);
+    },
+    // tags
     getTags(obj, args) {
       debug('GraphQL.Resolvers.Query.tags');
       const { offset, limit } = args;
       return Tag.getTags(offset, limit).then(jsonResult);
     },
+    // user related
     currentUser(obj, args, context) {
       return context.user || null;
     },
+
     users(obj, args) {
       const { offset, limit } = args;
       debug('GraphQL.Resolvers.Query.users');
@@ -176,6 +186,7 @@ export default {
         });
     },
   },
+  // Custom Scalars
   JSON: {
     __name: 'JSON',
     __description: `The JSON scalar type represents JSON values as specified by

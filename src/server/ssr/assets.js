@@ -9,6 +9,7 @@ export default function assets() {
   if (!isDev && resultCache) {
     return resultCache;
   }
+  // $FlowIssue
   if (!fs.existsSync(__ASSETS_MANIFEST__)) {
     throw new Error(
       `We could not find the "${__ASSETS_MANIFEST__}" file, which contains a list of the assets of the client bundle.  Please ensure that the client bundle has been built.`,

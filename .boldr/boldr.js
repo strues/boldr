@@ -22,7 +22,7 @@ module.exports = {
     },
     server: {
       entry: path.resolve(__dirname, '../src/server/index.js'),
-      bundleDir: path.resolve(__dirname, '../server'),
+      bundleDir: path.resolve(__dirname, '../lib'),
     },
     vendor: [
       'animate-components',

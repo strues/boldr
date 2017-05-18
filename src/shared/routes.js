@@ -23,6 +23,7 @@ import ArticleListingContainer
   from './scenes/Blog/ArticleListing/ArticleListingContainer';
 import Article from './scenes/Blog/Article/Article';
 import TagListContainer from './scenes/Blog/TagList/TagListContainer';
+
 // Admin
 import MediaManagerContainer
   from './scenes/Admin/Media/MediaManager/MediaManagerContainer';
@@ -40,27 +41,6 @@ import TagsContainer from './scenes/Admin/Content/Tags/TagsContainer';
 import TaggedPost from './scenes/Admin/Content/Tags/components/TaggedPost/TaggedPost';
 import DashboardContainer from './scenes/Admin/Dashboard/DashboardContainer';
 
-// Async data loading actions
-
-import { fetchSettingsIfNeeded } from './state/modules/boldr/settings';
-import {
-  fetchMembersIfNeeded,
-  fetchStatsIfNeeded,
-  fetchActivityIfNeeded,
-  fetchAttachmentsIfNeeded,
-} from './scenes/Admin/state';
-import { fetchMediaIfNeeded } from './state/modules/media/actions';
-import { fetchProfileIfNeeded } from './state/modules/users';
-
-import { fetchMainMenuIfNeeded } from './state/modules/boldr/menu/actions';
-import {
-  fetchArticlesIfNeeded,
-  fetchArticleIfNeeded,
-  fetchTagsIfNeeded,
-  fetchTagArticlesIfNeeded,
-  fetchTagPosts,
-} from './scenes/Blog/state';
-
 function LoadingComponent({ error }) {
   if (error) {
     console.log(error);
@@ -70,22 +50,22 @@ function LoadingComponent({ error }) {
   }
 }
 const ArticlesContainer = Loadable({
-  loader: () => import('./scenes/Admin/Content/Articles/ArticlesContainer'),
+  // $FlowIssue
+  loader: () => import('./scenes/Admin/Content/Articles/ArticlesContainer' /* webpackChunkName: "dashboard-articles" */),
   LoadingComponent,
 });
 const AdminDashboard = Loadable({
-  loader: () => import('./scenes/Admin/AdminDashboard'),
+  loader: () => import('./scenes/Admin/AdminDashboard' /* webpackChunkName: "dashboard" */),
   LoadingComponent,
 });
 const MediaContainer = Loadable({
   loader: () => import('./scenes/Admin/Media/MediaContainer'),
   LoadingComponent,
 });
+
 export default [
   {
     component: App,
-    loadData: async (dispatch: Dispatch) =>
-      Promise.all([await dispatch(fetchSettingsIfNeeded())]),
     routes: [
       {
         path: '/',

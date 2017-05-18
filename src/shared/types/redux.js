@@ -43,7 +43,7 @@ export type ActionType =
   | 'DELETE_ARTICLE_REQUEST'
   | 'DELETE_ARTICLE_SUCCESS';
 
-export type PostsReducer = {
+export type ArticlesReducer = Object & {
   all: Object,
   ids: Array<Object>,
   isFetching: boolean,
@@ -51,9 +51,8 @@ export type PostsReducer = {
 };
 
 export type BlogReducer = {
-  posts: PostsReducer,
+  articles: ArticlesReducer,
   tags: any,
-  comments: any,
 };
 
 export type UserInfo = {
@@ -74,7 +73,7 @@ export type Action =
   | { type: '@boldr/blog/FETCH_ARTICLES_SUCCESS', payload: NormalizrPayload }
   | { type: '@boldr/blog/FETCH_ARTICLES_FAILURE', err: any }
   | { type: '@boldr/blog/FETCH_ARTICLE_REQUEST', slug: string }
-  | { type: '@boldr/blog/FETCH_ARTICLE_SUCCESS', slug: string, payload: Post }
+  | { type: '@boldr/blog/FETCH_ARTICLE_SUCCESS', slug: string, payload: Article }
   | { type: '@boldr/blog/FETCH_ARTICLE_FAILURE', slug: string, err: any };
 
 export type Store = ReduxStore<Reducer, Action>;

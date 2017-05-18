@@ -1,8 +1,6 @@
 /* @flow */
 import React, { Component } from 'react';
-// $FlowIssue
 import Dropzone from 'react-dropzone';
-// $FlowIssue
 import styled from 'styled-components';
 import IconButton from 'material-ui/IconButton';
 import UploadFile from 'material-ui/svg-icons/file/file-upload';

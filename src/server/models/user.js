@@ -30,10 +30,10 @@ const debug = require('debug')('boldr:user-model');
  * @property {String}   website
  * @property {String}   language
  * @property {Boolean}  verified
- * @property {Object}   [social]
  * @property {Date}     birthday
  * @property {Date}     createdAt
  * @property {Date}     updatedAt
+ * @property {Date}     deletedAt
  */
 class User extends BaseModel {
   static get tableName() {
@@ -68,6 +68,7 @@ class User extends BaseModel {
         birthday: { type: 'date' },
         createdAt: { type: 'date-time' },
         updatedAt: { type: 'date-time' },
+        deletedAt: { type: 'date-time' },
       },
     };
   }

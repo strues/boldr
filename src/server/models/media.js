@@ -42,6 +42,9 @@ class Media extends BaseModel {
       },
     };
   }
+  static listMedia(offset, limit) {
+    return Media.query().offset(offset).limit(limit);
+  }
 }
 
 export default Media;

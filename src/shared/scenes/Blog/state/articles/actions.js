@@ -65,13 +65,13 @@ export const fetchArticles = (axios: any): ThunkAction => (
       const articles = res.data.results;
       const normalizedArticles = normalize(articles, arrayOfArticle);
 
-      dispatch({
+      return dispatch({
         type: t.FETCH_ARTICLES_SUCCESS,
         payload: normalizedArticles,
       });
     })
     .catch(err => {
-      dispatch({
+      return dispatch({
         type: t.FETCH_ARTICLES_FAILURE,
         error: err,
       });
@@ -114,7 +114,7 @@ export const fetchArticle = (slug: string, axios: any): ThunkAction => (
       });
     })
     .catch(err => {
-      dispatch({
+      return dispatch({
         type: t.FETCH_ARTICLE_FAILURE,
         error: err,
       });
@@ -174,7 +174,7 @@ export function selectArticle(post: Object) {
 }
 
 /**
-  * CREATE POST ACTIONS
+  * CREATE ARTICLE ACTIONS
   * -------------------------
   * @exports createArticle
   *****************************************************************/
@@ -185,7 +185,7 @@ export function selectArticle(post: Object) {
  * @param  {Object} data        The data from the form / post editor
  * @return {Object}             Response object.
  */
-export function createArticle(data: Post) {
+export function createArticle(data: Article) {
   return (dispatch: Function) => {
     dispatch({ type: t.CREATE_ARTICLE_REQUEST });
     return api
@@ -193,11 +193,11 @@ export function createArticle(data: Post) {
       .then(res => {
         const normalizedData = normalize(res.data, articleSchema);
         dispatch(createArticleSuccess(normalizedData));
-        dispatch(sendNotification(notif.MSG_CREATE_ARTICLE_SUCCESS));
+        return dispatch(sendNotification(notif.MSG_CREATE_ARTICLE_SUCCESS));
       })
       .catch(err => {
         dispatch(errorCreatingPost(err));
-        dispatch(sendNotification(notif.MSG_CREATE_ARTICLE_FAILUREURE));
+        return dispatch(sendNotification(notif.MSG_CREATE_ARTICLE_FAILUREURE));
       });
   };
 }
@@ -229,14 +229,14 @@ export function deletePost(id: string) {
     });
     return api
       .delete(`${API_PREFIX}/articles/${id}`)
-      .then(res => {
-        dispatch({
+      .then(() => {
+        return dispatch({
           type: t.DELETE_ARTICLE_SUCCESS,
           id,
         });
       })
       .catch(err => {
-        dispatch({
+        return dispatch({
           type: t.DELETE_ARTICLE_FAILURE,
           error: err,
         });
@@ -245,21 +245,17 @@ export function deletePost(id: string) {
 }
 
 /**
-  * UPDATE POST ACTIONS
+  * UPDATE ARTICLE ACTIONS
   * -------------------------
   * @exports updateArticle
   *****************************************************************/
 
-export function updateArticle(postData: Post) {
+export function updateArticle(postData: Article) {
   return (dispatch: Function) => {
     dispatch({ type: t.UPDATE_ARTICLE_REQUEST });
     return api
       .put(`${API_PREFIX}/articles/${postData.id}`, postData)
       .then(res => {
-        dispatch({
-          type: t.UPDATE_ARTICLE_SUCCESS,
-          payload: res.data,
-        });
         dispatch(
           sendNotification({
             message: 'Updated article.',
@@ -267,12 +263,12 @@ export function updateArticle(postData: Post) {
             dismissAfter: 3000,
           }),
         );
+        return dispatch({
+          type: t.UPDATE_ARTICLE_SUCCESS,
+          payload: res.data,
+        });
       })
       .catch(err => {
-        dispatch({
-          type: t.UPDATE_ARTICLE_FAILURE,
-          error: err,
-        });
         dispatch(
           sendNotification({
             message: 'There was a problem updating the article.',
@@ -280,6 +276,10 @@ export function updateArticle(postData: Post) {
             dismissAfter: 3000,
           }),
         );
+        return dispatch({
+          type: t.UPDATE_ARTICLE_FAILURE,
+          error: err,
+        });
       });
   };
 }
