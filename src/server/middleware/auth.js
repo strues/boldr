@@ -34,7 +34,6 @@ export default app => {
         .skipUndefined();
       req.session.user = user;
       req.user = user;
-      debug(req.user);
       req.user.role = user.roles[0].name;
       next();
     }

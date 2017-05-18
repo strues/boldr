@@ -8,7 +8,7 @@ import flash from 'express-flash';
 import cors from 'cors';
 import responseTime from 'response-time';
 import hpp from 'hpp';
-import uuid from 'uuid';
+import uuid from 'uuid/v4';
 import config from '../config';
 
 function nonceMiddleware(req, res, next) {
@@ -25,14 +25,16 @@ export default app => {
   app.use(
     cors({
       origin(origin, cb) {
-        const whitelist = config.cors.whitelist
-          ? config.cors.whitelist
-          : [];
+        const whitelist = config.cors.whitelist ? config.cors.whitelist : [];
         cb(null, whitelist.includes(origin));
       },
       credentials: true,
     }),
   );
+  app.use((req, res, next) => {
+    res.set('Request-Id', uuid());
+    next();
+  });
   app.use(cookieParser(config.token.secret));
   if (
     process.env.NODE_ENV === 'development' ||
@@ -65,11 +67,13 @@ export default app => {
     }),
   );
   app.use(responseTime());
-  app.use((req, res, next) => {
-    res.set('Request-Id', uuid.v4());
-    next();
-  });
-  app.use(hpp());
 
+  app.use(hpp());
+  app.use((err, req, res, next) => {
+    if (err && (!next || res.headersSent)) {
+      return;
+    }
+    res.sendStatus(500);
+  });
   app.use(flash());
 };

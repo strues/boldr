@@ -6,9 +6,6 @@ const { EventEmitter } = require('events');
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
 global.Promise = require('bluebird');
 
-window.matchMedia = function matchMedia() {
-  return false;
-};
 EventEmitter.defaultMaxListeners = Infinity;
 
 global.Array = Array;

@@ -51,23 +51,23 @@
     "bcrypt": "^1.0.2",
     "better-npm-run": "^0.0.15",
     "bluebird": "^3.5.0",
-    "body-parser": "^1.17.1",
+    "body-parser": "^1.17.2",
     "boldr-config": "^0.1.4",
     "boldr-ui": "^0.4.0-rc.6.1",
-    "boldr-utils": "0.2.11",
+    "boldr-utils": "0.2.12",
     "classnames": "^2.2.5",
     "compression": "^1.6.2",
     "connect-redis": "^3.3.0",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.3",
     "date-fns": "^1.28.4",
-    "debug": "^2.6.7",
+    "debug": "^2.6.8",
     "draft-js": "^0.10.1",
     "draft-js-import-html": "^0.3.2",
     "draftjs-to-html": "^0.7.2",
     "express": "^4.15.3",
     "express-flash": "^0.0.2",
-    "express-session": "^1.15.2",
+    "express-session": "^1.15.3",
     "express-validator": "^3.2.0",
     "formidable": "^1.1.1",
     "fs-extra": "^3.0.1",
@@ -80,7 +80,7 @@
     "helmet": "^3.6.0",
     "history": "^4.6.1",
     "hpp": "^0.2.2",
-    "ioredis": "^2.5.0",
+    "ioredis": "^3.0.0",
     "isomorphic-fetch": "^2.2.1",
     "jsonwebtoken": "^7.4.1",
     "knex": "^0.13.0",
@@ -100,7 +100,7 @@
     "react-draft-wysiwyg": "^1.9.9",
     "react-dropzone": "^3.13.1",
     "react-helmet": "5.0.3",
-    "react-redux": "^5.0.4",
+    "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "react-router-redux": "next",
     "react-tap-event-plugin": "^2.0.1",
@@ -122,12 +122,12 @@
     "winston": "^2.3.1"
   },
   "devDependencies": {
-    "autoprefixer": "^7.1.0",
+    "autoprefixer": "^7.1.1",
     "babel-eslint": "7.2.3",
     "babel-jest": "^20.0.3",
-    "babel-preset-boldr": "^0.8.1",
+    "babel-preset-boldr": "^0.8.2",
     "babel-preset-env": "^1.4.0",
-    "boldr-dx": "0.3.0-rc.3",
+    "boldr-dx": "0.3.1",
     "cross-env": "^5.0.0",
     "cz-conventional-changelog-emoji": "^0.1.0",
     "enzyme": "^2.8.2",
@@ -139,7 +139,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^20.0.3",
     "jest-enzyme": "^3.1.1",
-    "lint-staged": "^3.4.1",
+    "lint-staged": "^3.4.2",
     "moxios": "^0.4.0",
     "postcss-discard-comments": "^2.0.4",
     "postcss-reporter": "^3.0.0",
@@ -193,21 +193,21 @@
       }
     },
     "rollback": {
-      "command": "babel-node node_modules/.bin/knex migrate:rollback",
+      "command": "cross-env node --harmony internal/scripts/db.js migrate:undo",
       "env": {
         "BOLDR__DB__URL": "postgres://postgres:password@localhost:5432/boldr_test",
         "NODE_ENV": "test"
       }
     },
     "seed": {
-      "command": "cross-env knex seed:run",
+      "command": "cross-env node --harmony internal/scripts/db.js seed",
       "env": {
         "BOLDR__DB__URL": "postgres://postgres:password@localhost:5432/boldr",
         "NODE_ENV": "development"
       }
     },
     "seed:test": {
-      "command": "cross-env knex seed:run",
+      "command": "cross-env node --harmony internal/scripts/db.js seed",
       "env": {
         "BOLDR__DB__URL": "postgres://postgres:password@localhost:5432/boldr_test",
         "NODE_ENV": "test"

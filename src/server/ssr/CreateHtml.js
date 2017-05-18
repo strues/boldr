@@ -104,10 +104,7 @@ export default function CreateHtml(props: Props) {
       createScriptElement(clientAssets.vendor.js),
     ),
     ifElse(isDev)(() =>
-      createScriptElement(
-        // $FlowIssue
-        `http://localhost:${process.env.BOLDR__DEV_PORT}/assets/__vendor_dlls__.js?t=${uuid()}`,
-      ),
+      createScriptElement(`/assets/__vendor_dlls__.js?t=${uuid()}`),
     ),
 
     ifElse(clientAssets && clientAssets.app.js)(() =>
