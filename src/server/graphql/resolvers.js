@@ -13,6 +13,12 @@ import MenuDetail from '../models/menuDetail';
 import Setting from '../models/setting';
 import Social from '../models/social';
 import UsersConnector from './connectors/users';
+import {
+  GraphQLEmail,
+  GraphQLURL,
+  GraphQLPassword,
+  GraphQLUUID,
+} from './scalars/scalars';
 
 const debug = require('debug')('boldr:resolvers');
 
@@ -205,6 +211,10 @@ export default {
       return null;
     },
   },
+  URL: GraphQLURL,
+  Email: GraphQLEmail,
+  UUID: GraphQLUUID,
+  Password: GraphQLPassword,
   Date: {
     __parseValue(value) {
       // value from the client

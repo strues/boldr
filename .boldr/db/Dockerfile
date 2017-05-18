@@ -1,4 +1,4 @@
-FROM postgres:9.6.2-alpine
+FROM postgres:9.6.3-alpine
 
 COPY boldr.sql /docker-entrypoint-initdb.d/10-init.sql
 COPY boldr_test.sql /docker-entrypoint-initdb.d/20-init.sql

@@ -6,6 +6,14 @@
 scalar Date
 # A JSON object type, useful for Postgres JSON fields
 scalar JSON
+# A UUID
+scalar UUID
+# Custom email type
+scalar Email
+# Custom URL type
+scalar URL
+# password
+scalar Password
 
 ################################################################################
 ## Users
@@ -13,8 +21,8 @@ scalar JSON
 
 # a registered user of the site
 type User {
-  id: ID!
-  email: String!
+  id: UUID!
+  email: Email!
   username: String!
   articles: [Article]
   roles: [Role]
@@ -25,21 +33,21 @@ type User {
   birthday: Date
   bio: String
   language: String
-  avatarUrl: String!
-  website: String
+  avatarUrl: URL!
+  website: URL
   socialMedia: Social
 }
 
 # social media account info belonging to a user
 type Social {
-  id: ID!
-  userId: ID!
-  facebookUrl: String
-  twitterUrl: String
-  githubUrl: String
-  linkedinUrl: String
-  googleUrl: String
-  stackoverflowUrl: String
+  id: UUID!
+  userId: UUID!
+  facebookUrl: URL
+  twitterUrl: URL
+  githubUrl: URL
+  linkedinUrl: URL
+  googleUrl: URL
+  stackoverflowUrl: URL
 }
 
 ################################################################################
@@ -62,7 +70,7 @@ type Role {
 # An article or blog post
 type Article {
   # unique uuid id for the article
-  id: ID!
+  id: UUID!
   # title of the article
   title: String!
   # slug for the article

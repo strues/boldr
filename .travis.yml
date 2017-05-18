@@ -9,23 +9,32 @@ branches:
   - master
   - develop
 env:
-  COMPOSE_VERSION: 1.13.0
+  DOCKER_COMPOSE_VERSION: 1.13.0
   TOKEN_SECRET: b0ldrs0s3cr3t
+  BOLDR__DB__URL: postgres://postgres:password@127.0.0.1:5432/boldr_test
+  BOLDR__REDIS__URL: redis://127.0.0.1:6379/0
+  NODE_ENV: test
 git:
   depth: 3
 before_install:
- - sudo apt-get update
- - sudo apt-get -y -o Dpkg::Options::="--force-confnew" install docker-engine
- - docker --version
- - sudo rm /usr/local/bin/docker-compose
- - curl -L https://github.com/docker/compose/releases/download/${COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
- - chmod +x docker-compose
- - sudo mv docker-compose /usr/local/bin
+  - sudo /etc/init.d/postgresql stop
+  # Install the latest version of Docker
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - sudo apt-get -qq update
+  - sudo apt-get install -qqy docker-ce
+  # Install Docker Compose
+  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
+  - docker-compose --version
+
 install:
 - yarn
 before_script:
  - docker-compose build
  - docker-compose up -d
+ - docker-compose ps
 script:
 - yarn test
 after_success:
