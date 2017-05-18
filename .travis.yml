@@ -9,7 +9,7 @@ branches:
   - master
   - develop
 env:
-  DOCKER_COMPOSE_VERSION: 1.13.0
+  COMPOSE_VERSION: 1.13.0
   TOKEN_SECRET: b0ldrs0s3cr3t
 git:
   depth: 3

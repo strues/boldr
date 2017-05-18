@@ -2,49 +2,68 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { gql, graphql } from 'react-apollo';
+import { bindActionCreators } from 'redux';
+import { Loader } from 'boldr-ui';
 import {
-  fetchMediaIfNeeded,
-  getMedia,
+  getMediaType,
+  toggleMedia,
   deleteMedia,
-  selectSettingFromList,
-} from '../../../state';
+  selectMedia,
+} from '../../../state/modules/media';
 
-import VisibleMedia from './VisibleMedia';
+import Media from './Media';
 
 type Props = {
+  data: Data,
+  selectMedia: () => void,
+  deleteMedia: () => void,
+  toggleMedia: () => void,
   dispatch: Function,
-  fetchMediaIfNeeded: () => {},
-  hideModal: () => void,
-  showModal: () => void,
-  site: Object,
-  ui: Object,
-  media: Array<Object>,
+};
+
+type Data = {
+  listMedia: Array<Object>,
+  loading: boolean,
 };
 
 export class MediaContainer extends Component {
-  static defaultProps: {
-    profile: {},
-    fetchMediaIfNeeded: () => {},
-  };
-
-  componentDidMount() {
-    this.props.dispatch(fetchMediaIfNeeded());
-  }
   props: Props;
 
   render() {
-    return (
-      <VisibleMedia media={this.props.media} />
-    );
+    const { loading, listMedia } = this.props.data;
+    if (loading) {
+      return <Loader />;
+    }
+    return <Media media={listMedia} />;
   }
 }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    { toggleMedia, selectMedia, deleteMedia },
+    dispatch,
+  );
+}
 
-const mapStateToProps = state => {
-  return {
-    ui: state.boldr.ui,
-    media: getMedia(state),
-  };
-};
+const MEDIA_QUERY = gql`
+query listMedia($offset: Int!, $limit: Int!) {
+      listMedia(offset:$offset,limit:$limit) {
+        id,
+        thumbName,
+        fileName,
+        url,
+        fileDescription,
+      }
+  }
+`;
 
-export default connect(mapStateToProps)(MediaContainer);
+const MediaContainerWithData = graphql(MEDIA_QUERY, {
+  options: props => ({
+    variables: {
+      offset: 0,
+      limit: 20,
+    },
+  }),
+})(MediaContainer);
+// $FlowIssue
+export default connect(null, mapDispatchToProps)(MediaContainerWithData);
