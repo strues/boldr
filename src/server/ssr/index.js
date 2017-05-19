@@ -55,7 +55,10 @@ async function ssrMiddleware(req: $Request, res: $Response) {
       const reactAppString = renderToString(appComponent);
       const helmet = Helmet.renderStatic();
       const preloadedState = store.getState();
-      const styledStyles = styleSheet.rules().map(rule => rule.cssText).join('\n');
+      const styledStyles = styleSheet
+        .rules()
+        .map(rule => rule.cssText)
+        .join('\n');
 
       // render styled-components styleSheets to string.
       // Render the application to static HTML markup
@@ -65,7 +68,7 @@ async function ssrMiddleware(req: $Request, res: $Response) {
           reactAppString={reactAppString}
           nonce={res.locals.nonce}
           helmet={helmet}
-          styles={ styledStyles }
+          styles={styledStyles}
           preloadedState={preloadedState}
         />,
       );

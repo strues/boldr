@@ -7,7 +7,6 @@ import * as ctrl from './user.controller';
 
 const router = wrapRouter(new Router());
 
-
 /**
  * @api {get} /users/:id     Get user
  * @apiName getUser

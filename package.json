@@ -40,6 +40,7 @@
     "reset": "better-npm-run reset",
     "migrate:test": "better-npm-run migrate:test",
     "migration": "better-npm-run migration",
+    "prettier": "node ./internal/scripts/prettier.js write",
     "start": "NODE_ENV=production node server/app.js",
     "seed": "better-npm-run seed",
     "test": "NODE_ENV=test jest"

@@ -6,10 +6,10 @@ import Media from './Media';
 
 describe('<Media />', () => {
   it('should render with the proper heading', () => {
-    const renderedComponent = shallow(<Media media={[]} siteName="Boldr" />);
+    const renderedComponent = shallow(<Media media={[]} />);
     expect(
       renderedComponent.contains(
-        <Headline type="h2">Boldr's Media Gallery</Headline>,
+        <Headline type="h2">Media Gallery</Headline>,
       ),
     ).toEqual(true);
   });

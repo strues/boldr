@@ -13,7 +13,7 @@ export const redisOptions = {
   host: redisCon.hostname,
   db: process.env.NODE_ENV === 'test' ? 1 : 0,
   // eslint-disable-next-line
-  retry_strategy:(options) => {
+  retry_strategy: options => {
     if (options.error && options.error.code === 'ECONNREFUSED') {
       // End reconnecting on a specific error and flush all commands
       // with a individual error

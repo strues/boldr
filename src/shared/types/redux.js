@@ -73,7 +73,11 @@ export type Action =
   | { type: '@boldr/blog/FETCH_ARTICLES_SUCCESS', payload: NormalizrPayload }
   | { type: '@boldr/blog/FETCH_ARTICLES_FAILURE', err: any }
   | { type: '@boldr/blog/FETCH_ARTICLE_REQUEST', slug: string }
-  | { type: '@boldr/blog/FETCH_ARTICLE_SUCCESS', slug: string, payload: Article }
+  | {
+      type: '@boldr/blog/FETCH_ARTICLE_SUCCESS',
+      slug: string,
+      payload: Article,
+    }
   | { type: '@boldr/blog/FETCH_ARTICLE_FAILURE', slug: string, err: any };
 
 export type Store = ReduxStore<Reducer, Action>;

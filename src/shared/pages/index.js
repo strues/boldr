@@ -11,6 +11,6 @@ export default new Scene({
     <Route exact path="/" component={Home} />,
     <Route exact path="/about" component={About} />,
 
-    <Route path="*" component={Error404}/>
+    <Route path="*" component={Error404} />,
   ],
 });

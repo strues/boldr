@@ -38,7 +38,8 @@ import NavigationContainer from './scenes/Admin/Navigation/NavigationContainer';
 import Members from './scenes/Admin/Members';
 import Settings from './scenes/Admin/Settings';
 import TagsContainer from './scenes/Admin/Content/Tags/TagsContainer';
-import TaggedPost from './scenes/Admin/Content/Tags/components/TaggedPost/TaggedPost';
+import TaggedPost
+  from './scenes/Admin/Content/Tags/components/TaggedPost/TaggedPost';
 import DashboardContainer from './scenes/Admin/Dashboard/DashboardContainer';
 
 function LoadingComponent({ error }) {
@@ -51,11 +52,15 @@ function LoadingComponent({ error }) {
 }
 const ArticlesContainer = Loadable({
   // $FlowIssue
-  loader: () => import('./scenes/Admin/Content/Articles/ArticlesContainer' /* webpackChunkName: "dashboard-articles" */),
+  loader: () =>
+    import(
+      './scenes/Admin/Content/Articles/ArticlesContainer' /* webpackChunkName: "dashboard-articles" */,
+    ),
   LoadingComponent,
 });
 const AdminDashboard = Loadable({
-  loader: () => import('./scenes/Admin/AdminDashboard' /* webpackChunkName: "dashboard" */),
+  loader: () =>
+    import('./scenes/Admin/AdminDashboard' /* webpackChunkName: "dashboard" */),
   LoadingComponent,
 });
 const MediaContainer = Loadable({
@@ -125,7 +130,6 @@ export default [
       {
         path: '/profiles/:username',
         component: ProfileContainer,
-
       },
       {
         path: '/admin',
@@ -141,7 +145,6 @@ export default [
             exact: true,
             strict: true,
             component: ArticlesContainer,
-
           },
           {
             path: '/admin/content/articles/new',
@@ -162,13 +165,11 @@ export default [
             path: '/admin/content/tags',
             exact: true,
             component: TagsContainer,
-
           },
           {
             path: '/admin/filemanager',
             exact: true,
             component: FileManagerContainer,
-
           },
           {
             path: '/admin/file-editor/:id',
@@ -179,13 +180,11 @@ export default [
             path: '/admin/navigation',
             exact: true,
             component: NavigationContainer,
-
           },
           {
             path: '/admin/members',
             exact: true,
             component: Members,
-
           },
           {
             path: '/admin/settings',
@@ -197,7 +196,6 @@ export default [
             path: '/admin/media',
             exact: true,
             component: MediaContainer,
-
           },
           {
             path: '/admin/media/upload',

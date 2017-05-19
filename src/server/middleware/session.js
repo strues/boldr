@@ -22,7 +22,7 @@ const sessionOptions = {
   cookie: {
     secure: false,
     // 24hr
-    maxAge: 8.64e+7,
+    maxAge: 8.64e7,
   },
   store: new RedisStore({
     client: mainRedisClient,

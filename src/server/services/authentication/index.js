@@ -3,7 +3,6 @@ import signToken from './signToken';
 
 export { isAuthenticated, signToken };
 
-
 /*
 const encryptPassword = (password, callback) => {
   // Generate a salt then run callback

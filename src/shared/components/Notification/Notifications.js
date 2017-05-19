@@ -8,7 +8,7 @@ import {
 import Notification from './Notification';
 
 const getProp = (obj, propName) =>
-  (obj.get ? obj.get(propName) : obj[propName]); // eslint-disable-line
+  obj.get ? obj.get(propName) : obj[propName]; // eslint-disable-line
 
 type Props = {
   notifications?: Array<Object>,

@@ -25,7 +25,8 @@ function failedToGetData(err) {
 export const getAppData = () => {
   return dispatch => {
     dispatch(requestDataStart());
-    return axios.get('http://jsonplaceholder.typicode.com/posts')
+    return axios
+      .get('http://jsonplaceholder.typicode.com/posts')
       .then(res => {
         const { data } = res;
         return dispatch(gotRequestData(data));
