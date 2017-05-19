@@ -2,13 +2,19 @@
 import React, { Component } from 'react';
 import { Zoom } from 'animate-components';
 import styled from 'styled-components';
-import { Photo, Grid, Col, Row, Block, Headline } from 'boldr-ui';
+import { gql, graphql } from 'react-apollo';
+import { Photo, Grid, Col, Row, Block, Headline, Loader } from 'boldr-ui';
 import MediaForm from './components/MediaForm';
 
 type Props = {
-  media: MediaFile,
+  data: Data,
   editMedia: () => void,
 };
+type Data = {
+  mediaById: MediaFile,
+  loading: boolean,
+};
+
 const MediaContent = styled.div`
   padding-top: 3rem;
   margin-bottom: 4rem;
@@ -16,10 +22,11 @@ const MediaContent = styled.div`
 const MediaFormCard = styled.div`
   margin-bottom: 2rem;
 `;
-class MediaManager extends Component {
+
+export class MediaManager extends Component {
   handleSubmit = (values: Object) => {
     const mediaData = {
-      id: this.props.media.id,
+      id: this.props.data.mediaById.id,
       fileName: values.fileName,
       fileDescription: values.fileDescription,
     };
@@ -27,7 +34,11 @@ class MediaManager extends Component {
   };
   props: Props;
   render() {
-    const { media } = this.props;
+    const { mediaById, loading } = this.props.data;
+
+    if (loading) {
+      return <Loader />;
+    }
     return (
       <div>
         <Grid>
@@ -37,7 +48,7 @@ class MediaManager extends Component {
                 <Col xs={6}>
                   <MediaContent>
                     <Zoom duration="1s">
-                      <Photo src={media.url} />
+                      <Photo src={mediaById.url} />
                     </Zoom>
                   </MediaContent>
                 </Col>
@@ -52,7 +63,7 @@ class MediaManager extends Component {
                     <Block>
                       <Headline type="h2">Edit media attributes</Headline>
                       <MediaForm
-                        initialValues={media}
+                        initialValues={mediaById}
                         onSubmit={this.handleSubmit}
                       />
                     </Block>
@@ -67,4 +78,22 @@ class MediaManager extends Component {
   }
 }
 
-export default MediaManager;
+export const MEDIA_BY_ID_QUERY = gql`
+  query media($id: UUID!) {
+      mediaById(id: $id) {
+        id,
+        fileName,
+        thumbName,
+        fileDescription,
+        url,
+      }
+  }
+`;
+
+export default graphql(MEDIA_BY_ID_QUERY, {
+  options: props => ({
+    variables: {
+      id: props.match.params.id,
+    },
+  }),
+})(MediaManager);

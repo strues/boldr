@@ -1,0 +1,49 @@
+.boldrui-collapsible__wrapper {
+  position: relative;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  background: #fff;
+}
+
+.boldrui-collapsible__toggler {
+  display: block;
+  font-weight: 600;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.boldrui-collapsible__toggler-active {
+  opacity: 0.8;
+  color: currentColor;
+}
+
+.boldrui-collapsible__toggler-icon {
+  position: absolute;
+  right: 1rem;
+  top: 1.1rem;
+}
+
+.boldrui-collapsible__toggler-icon__delete {
+  position: absolute;
+  right: 3rem;
+  top: 1rem;
+}
+
+.boldrui-collapsible__contents {
+  visibility: hidden;
+  display: none;
+  padding: 1.5rem 0 0;
+}
+
+.boldrui-collapsible__contents-active {
+  visibility: visible;
+  display: block;
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+}

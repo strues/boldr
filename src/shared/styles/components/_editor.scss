@@ -1,0 +1,18 @@
+.boldrui-editor__root {
+  width: 65%;
+  margin: 0 auto;
+}
+
+.editor--content {
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  padding: 0.2rem;
+}
+
+.editor--content > div {
+  min-height: 100px;
+}
+
+.editor--toolbar {
+  background-color: #0275d8;
+}

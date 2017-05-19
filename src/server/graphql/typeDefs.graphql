@@ -122,15 +122,15 @@ type Tag {
 # uploaded images, videos or audio
 type Media {
   # unique uuid id for the media
-  id: ID!
+  id: UUID!
   # name of the media
   fileName: String!
   # identifier which cannot be changed
-  safeName: String!
+  safeName: String
   # thumbnail filename
-  thumbName: String!
+  thumbName: String
   # description of the media
-  fileDescription: String!
+  fileDescription: String
   # image, video, audio
   mediaType: [MediaType]
   # mime-type
@@ -241,6 +241,7 @@ type RootQuery {
   menus: [Menu]
   menuById(id: Int!):[Menu]
   listMedia(offset: Int!, limit: Int!): [Media]
+  mediaById(id: UUID!): Media
   settings: [Setting]
   getTags(offset: Int!, limit: Int!): [Tag]
   users: [User]

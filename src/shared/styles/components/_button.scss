@@ -1,0 +1,162 @@
+.#{$boldr-ns}btn {
+  position: relative;
+  display: inline-block;
+  border: 0;
+  border-radius: 3px;
+  padding: 0.6rem 1.5rem;
+  vertical-align: top;
+  cursor: pointer;
+  font-weight: 400;
+  font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  text-align: center;
+  font-size: 1.1rem;
+  text-decoration: none;
+  word-wrap: break-word;
+  line-height: 1.1;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 300ms ease-in-out;
+  will-change: opacity, padding-left;
+
+  &:hover {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  }
+
+  &:hover,
+  &:focus {
+    outline: 0;
+    text-decoration: none;
+  }
+
+  &:active {
+    opacity: 0.65;
+  }
+
+  span {
+    vertical-align: middle;
+  }
+
+  &[aria-disabled],
+  &[disabled] {
+    /* If applied on an anchor tag, we need to disable click events manually via the pointer-events spec */
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: default;
+  }
+}
+
+.#{$boldr-ns}btn__primary {
+  @extend .#{$boldr-ns}btn;
+
+  background: $primary-color;
+  color: #fff;
+}
+
+.#{$boldr-ns}btn__secondary {
+  @extend .#{$boldr-ns}btn;
+
+  background: $secondary-color;
+  color: #fff;
+}
+
+.#{$boldr-ns}btn__boldrPrimary {
+  @extend .#{$boldr-ns}btn;
+
+  color: $primary-color;
+  background: #fff;
+}
+
+.#{$boldr-ns}btn__grey {
+  @extend .#{$boldr-ns}btn;
+
+  color: $text-color;
+  background: #efefef;
+}
+
+.#{$boldr-ns}btn + .#{$boldr-ns}btn:not(.isFullWidth) {
+  margin-left: 1em;
+}
+
+.#{$boldr-ns}btn__isFullWidth {
+  @extend .#{$boldr-ns}btn;
+
+  width: 100%;
+}
+
+.#{$boldr-ns}btn__isTiny {
+  @extend .#{$boldr-ns}btn;
+
+  padding: 0.8rem 2rem;
+  font-size: 13px;
+}
+
+.#{$boldr-ns}btn__isSmall {
+  @extend .#{$boldr-ns}btn;
+
+  padding: 1rem 2rem;
+  font-size: 14.5px;
+}
+
+.#{$boldr-ns}btn__isPending {
+  @extend .#{$boldr-ns}btn;
+
+  padding-left: calc(2.5rem + 0.5rem + 16px);
+}
+
+.#{$boldr-ns}btn__isPending.#{$boldr-ns}btn__isSmall,
+.#{$boldr-ns}btn__isPending.#{$boldr-ns}btn__isTiny {
+  padding-left: calc(2rem + 0.5rem + 16px);
+}
+
+.#{$boldr-ns}btn__icon {
+  @extend .#{$boldr-ns}btn;
+
+  padding-bottom: 0;
+  padding-top: 3px;
+  max-width: 60px;
+  width: 100%;
+}
+
+.#{$boldr-ns}loader-wrapper {
+  position: absolute;
+  top: calc(50% - 8px);
+  left: 2.5rem;
+  line-height: 0;
+
+  .#{$boldr-ns}btn__isSmall &,
+  .#{$boldr-ns}btn__isTiny & {
+    left: 2rem;
+  }
+}
+
+.#{$boldr-ns}loader-wrapper__enter {
+  animation: fadeInLeft 0.6s 0.3s both;
+}
+
+.#{$boldr-ns}loader-wrapper__leave {
+  animation: fadeOutRight 0.6s both;
+}
+
+@keyframes fadeInLeft {
+
+  from {
+    opacity: 0;
+    transform: translate3d(-10px, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes fadeOutRight {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+
+  to {
+    opacity: 0;
+    transform: translate3d(-10px, 0, 0);
+  }
+}

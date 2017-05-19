@@ -1,0 +1,113 @@
+$light-gray: #d9d8dd;
+$dark-gray: #626166;
+$tag-base-height: 26px !default;
+$tag-base-font-size: 12px !default;
+$tag-base-border-radius: 12px !default;
+$tag-base-font-color: $dark-gray !default;
+$tag-base-margin: 5px !default;
+$tag-base-font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
+
+//-- Tags
+$tag-background-color: $light-gray !default;
+$tag-background-hover-color: darken($light-gray, 6%) !default;
+$tag-remove-color: $black !default;
+$tag-remove-font-size: $tag-base-font-size !default;
+$tag-remove-hover-color: lighten($tag-remove-color, 40%) !default;
+$tag-intro-animation: slide-left 0.8s cubic-bezier(0.19, 1, 0.22, 1) !default;
+
+//-- Input
+$tag-input-bg-color: $white !default;
+$tag-input-border: 1px solid $light-gray !default;
+$tag-input-placeholder-color: rgba($dark-gray, 0.5) !default;
+$tag-input-border-focus-color: darken($light-gray, 15%) !default;
+
+%tags-ui-base {
+  font-size: $tag-base-font-size;
+  height: $tag-base-height;
+  color: $tag-base-font-color;
+  border-radius: $tag-base-border-radius;
+  font-family: $tag-base-font-family;
+  display: inline-block;
+  padding: 0 9px;
+}
+
+.react-tagsinput {
+  @extend %tags-ui-base;
+
+  $height: $tag-base-height - 2;
+
+  transition: border-color 0.3s ease;
+  background: none;
+  border: 0;
+  height: $height;
+  margin-top: $tag-base-margin;
+
+  &::-input-placeholder {
+    color: $tag-input-placeholder-color;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $tag-input-border-focus-color;
+  }
+}
+
+.react-tagsinput--focused {
+  border-color: $tag-input-border-focus-color;
+}
+
+.react-tagsinput-tag {
+  @extend %tags-ui-base;
+
+  line-height: $tag-base-height;
+  -webkit-font-smoothing: antialiased;
+  animation: $tag-intro-animation;
+  background: $tag-background-color;
+  margin: $tag-base-margin $tag-base-margin 0 0;
+  transition: background 0.3s ease;
+  cursor: default;
+
+  &:hover,
+  &.active {
+    background: $tag-background-hover-color;
+  }
+}
+
+.react-tagsinput-remove {
+  font-size: $tag-remove-font-size;
+  color: $tag-remove-color;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  display: inline-block;
+  margin-left: 7px;
+  text-decoration: none;
+
+  &:hover {
+    color: $tag-remove-hover-color;
+  }
+}
+
+.react-tagsinput-tag a::before {
+  content: ' ×';
+}
+
+.react-tagsinput-input {
+  @extend %tags-ui-base;
+
+  $height: $tag-base-height - 2;
+
+  transition: border-color 0.3s ease;
+  background: $tag-input-bg-color;
+  border: $tag-input-border;
+  height: $height;
+  margin-top: $tag-base-margin;
+
+  &::-input-placeholder {
+    color: $tag-input-placeholder-color;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $tag-input-border-focus-color;
+  }
+}

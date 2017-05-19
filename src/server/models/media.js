@@ -45,6 +45,9 @@ class Media extends BaseModel {
   static listMedia(offset, limit) {
     return Media.query().offset(offset).limit(limit);
   }
+  static getMediaById(id) {
+    return Media.query().findById(id);
+  }
 }
 
 export default Media;

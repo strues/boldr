@@ -1,0 +1,125 @@
+.boldrui-form {
+  margin-bottom: 30px;
+  width: auto;
+
+  select[readonly],
+  textarea[readonly] {
+    background-color: #fff;
+    cursor: text;
+  }
+}
+
+.boldrui-form__fieldset {
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+.boldrui-form__legend {
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+  width: 100%;
+  border-bottom: 1px solid #e5e5e5;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.boldrui-form__control-group {
+  margin-bottom: 20px;
+
+  &.has-error {
+
+    .boldrui-form__control-label,
+    .boldrui-form__error-desc,
+    .boldrui-form__help-block {
+      color: #f44;
+    }
+  }
+}
+
+.boldrui-form__static-value {
+  padding-top: 5px;
+  font-size: 14px;
+  line-height: 18px;
+  padding-bottom: 5px;
+  word-break: break-all;
+}
+
+.boldrui-form__control-action {
+  padding-top: 5px;
+  display: inline-block;
+  font-size: 14px;
+  line-height: 18px;
+}
+
+.boldrui-form__required {
+  margin-right: 6px;
+  font-size: 16px;
+  color: #f00;
+  vertical-align: middle;
+}
+
+.boldrui-form__help-block,
+.boldrui-form__error-desc,
+.boldrui-form__help-desc {
+  line-height: 14px;
+  font-size: 12px;
+  margin-top: 6px;
+  margin-bottom: 0;
+  color: #999;
+
+  ul li {
+    font-size: 12px;
+    line-height: 12px;
+  }
+
+  a {
+    color: #38f;
+  }
+
+  &:empty {
+    margin-top: 0 !important;
+  }
+}
+
+.boldrui-form--horizontal {
+
+  .boldrui-form__control-label {
+    display: inline-block;
+    width: 120px;
+    font-size: 12px;
+    line-height: 30px;
+    text-align: right;
+    vertical-align: top;
+
+    & + .boldrui-form__controls {
+      margin-left: 10px;
+    }
+  }
+
+  .boldrui-form__controls {
+    display: inline-block;
+    word-break: break-all;
+    vertical-align: top;
+  }
+
+  .boldrui-form__form-actions {
+    padding: 0 0 0 130px;
+    margin: 25px 0 10px;
+    background: none;
+    border: none;
+  }
+
+  .boldrui-form__checkbox-group {
+    font-size: 0;
+    line-height: 28px;
+  }
+
+  .boldrui-form__checkbox {
+    line-height: 28px;
+  }
+
+  .boldrui-form__radio-group {
+    line-height: 28px;
+  }
+}

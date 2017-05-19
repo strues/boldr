@@ -119,6 +119,11 @@ export default {
 
       return Media.listMedia(offset, limit).then(jsonResult);
     },
+    mediaById(obj, args) {
+      const { id } = args;
+      debug('GraphQL.Resolvers.Query.mediaById', args);
+      return Media.getMediaById(id).then(jsonResult);
+    },
     // tags
     getTags(obj, args) {
       debug('GraphQL.Resolvers.Query.tags');

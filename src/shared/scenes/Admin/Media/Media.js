@@ -103,9 +103,7 @@ class Media extends Component {
                         cta={
                           <div>
                             <Link to={`/admin/media/${m.id}`}>
-                              <IconButton
-                                onTouchTap={() => this.props.selectMedia(m)}
-                              >
+                              <IconButton>
                                 <FontIcon>edit</FontIcon>
                               </IconButton>
                             </Link>

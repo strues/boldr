@@ -1,0 +1,33 @@
+////
+/// @group helpers
+////
+
+/// A placeholder for displaying an element inline
+%boldrui-inline-block {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+/// A simple placeholder for setting the width to 100%.
+%boldrui-full-width {
+  width: 100%;
+}
+
+/// A simple placeholder for centering an item.
+%boldrui-block-centered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.boldrui-inline-block {
+  @extend %boldrui-inline-block;
+}
+
+.boldrui-full-width {
+  @extend %boldrui-full-width;
+}
+
+.boldrui-block-centered {
+  @extend %boldrui-block-centered;
+}

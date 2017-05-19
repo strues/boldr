@@ -1,0 +1,15 @@
+.boldrui-form__label {
+  display: block;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+
+  &[for] {
+    cursor: pointer;
+  }
+}
+
+.boldrui-form__required {
+  color: $error-color;
+}

@@ -1,0 +1,88 @@
+.boldr-card {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  background: #fff;
+  display: inline-block;
+  width: 100%;
+}
+
+.boldr-card__image {
+  overflow-x: hidden;
+  overflow-y: hidden;
+  max-height: 300px;
+  object-fit: cover;
+}
+
+.boldr-card__img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.boldr-card__content {
+  padding: 1rem;
+  margin-bottom: 15px;
+}
+
+.boldr-card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  vertical-align: middle;
+
+  .tagblock {
+    align-items: center !important;
+
+    a {
+      margin-left: 5px;
+    }
+  }
+}
+
+.boldrui-card {
+  display: block;
+  width: 100%;
+  margin-bottom: 1.6rem;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  font-size: 1.4rem;
+  background: #fff;
+  border-radius: 0.2rem;
+  cursor: pointer;
+  color: currentColor;
+
+  &,
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.boldrui-card__img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-top: 56.25%;
+  overflow: hidden;
+}
+
+.boldrui-card__img,
+.boldrui-card__img > img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  min-width: 100%;
+  min-height: 100%;
+  max-width: none;
+}
+
+.boldrui-card__contents {
+  padding: 1.6rem;
+
+  :last-child {
+    margin-bottom: 0;
+  }
+}
+
+.boldrui-card__actions {
+  text-align: right;
+}
