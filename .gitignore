@@ -13,3 +13,4 @@ public/assets
 public/uploads
 lib
 !src/server
+configOutput.json

@@ -1,4 +1,4 @@
-import { Model } from 'objection';
+import { Model } from 'boldr-orm';
 import MenuDetail from '../menuDetail';
 import Menu from '../menu';
 import BaseModel from '../base';

@@ -1,4 +1,4 @@
-import { Model } from 'objection';
+import { Model } from 'boldr-orm';
 import Media from '../media';
 import Article from '../article';
 import BaseModel from '../base';

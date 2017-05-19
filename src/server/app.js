@@ -16,13 +16,11 @@ import User from './models/user';
 const debug = require('debug')('boldr:app');
 
 const app: express$Application = express();
-
 // Base Express middleware
 // body-parser, method-override, busboy, cors
 expressMiddleware(app);
 // Session middleware, authentication check, rbac
 authMiddleware(app);
-
 // All routes for the app
 routes(app);
 app.use(
@@ -37,6 +35,7 @@ app.use(
   bodyParser.json(),
   graphqlExpress(req => ({
     schema: graphqlSchema,
+    // formatError,
     context: {
       user: req.user ? req.user : null,
     },

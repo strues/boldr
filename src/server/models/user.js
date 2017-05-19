@@ -1,5 +1,5 @@
 /* eslint-disable id-match */ /* eslint-disable no-unused-vars */
-import { Model } from 'objection';
+import { Model } from 'boldr-orm';
 import BaseModel from './base';
 // Related Models
 import Role from './role';
@@ -13,7 +13,7 @@ import Social from './social';
 
 const Promise = require('bluebird');
 const bcrypt = Promise.promisifyAll(require('bcrypt'));
-const debug = require('debug')('boldr:user-model');
+const debug = require('debug')('boldr:server:models:user');
 
 /**
  * User model representing an account and identity of a person.
@@ -73,9 +73,7 @@ class User extends BaseModel {
     };
   }
   static addTimestamps = true;
-  static get softDelete() {
-    return true;
-  }
+  static softDelete = true;
   /**
    * An array of attribute names that will be excluded from being returned.
    *

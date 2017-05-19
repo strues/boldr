@@ -1,8 +1,11 @@
 import 'isomorphic-fetch';
+import {enableEnhancedStackTraces} from './core/debugUtil';
 import http from 'http';
 import { logger, initializeDb, disconnect, destroyRedis } from './services';
 import app from './app';
 import config from './config';
+
+enableEnhancedStackTraces();
 
 const server = http.createServer(app);
 
@@ -14,8 +17,7 @@ initializeDb()
     server.on('listening', () => {
       const address = server.address();
       logger.info(
-        '🚀  Starting server on %s:%s',
-        address.address,
+        'Boldr running on port %s',
         address.port,
       );
     });
@@ -23,9 +25,7 @@ initializeDb()
       logger.error(`⚠️  ${err}`);
       throw err;
     });
-    return server.listen(port, () => {
-      console.log(`🚀  Server running on port: ${port}`);
-    });
+    return server.listen(port);
   })
   .catch(err => {
     logger.error(err);

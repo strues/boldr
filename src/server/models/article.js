@@ -1,4 +1,4 @@
-import { Model } from 'objection';
+import { Model } from 'boldr-orm';
 import { slugIt } from '../utils';
 
 // Related Models
@@ -13,9 +13,7 @@ class Article extends BaseModel {
     return 'article';
   }
 
-  static get softDelete() {
-    return true;
-  }
+  static softDelete = true;
   static addTimestamps = true;
   static hidden = ['password'];
   static get idColumn() {

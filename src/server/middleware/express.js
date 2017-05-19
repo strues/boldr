@@ -43,6 +43,7 @@ export default app => {
     app.use(morgan('dev'));
   }
   app.use(compression());
+
   app.use(bodyParser.json({ type: 'application/json' }));
   // parse application/x-www-form-urlencoded
   app.use(bodyParser.urlencoded({ extended: true }));
@@ -67,7 +68,6 @@ export default app => {
     }),
   );
   app.use(responseTime());
-
   app.use(hpp());
   app.use((err, req, res, next) => {
     if (err && (!next || res.headersSent)) {

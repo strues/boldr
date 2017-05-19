@@ -1,5 +1,5 @@
 /* eslint-disable id-match */
-import { Model, ValidationError } from 'objection';
+import { Model, ValidationError } from 'boldr-orm';
 
 /**
  * @class BaseModel

@@ -1,4 +1,4 @@
-import { Model } from 'objection';
+import { Model } from 'boldr-orm';
 import BaseModel from './base';
 import ContentType from './contentType';
 
@@ -7,9 +7,8 @@ class Block extends BaseModel {
     return 'block';
   }
   static addTimestamps = true;
-  static get softDelete() {
-    return true;
-  }
+  static softDelete = true;
+
   static get relationMappings() {
     return {
       contentType: {

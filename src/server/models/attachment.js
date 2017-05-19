@@ -1,4 +1,4 @@
-import { Model } from 'objection';
+import { Model } from 'boldr-orm';
 import BaseModel from './base';
 // Related Models
 import User from './user';
