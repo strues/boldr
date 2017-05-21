@@ -1,4 +1,4 @@
-const fakeSettings = [
+module.exports = [
   {
     id: 1,
     key: 'site_name',

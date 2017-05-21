@@ -128,7 +128,7 @@
     "babel-code-frame": "^6.22.0",
     "babel-eslint": "7.2.3",
     "babel-jest": "^20.0.3",
-    "babel-preset-boldr": "^0.8.2",
+    "babel-preset-boldr": "^0.8.3",
     "babel-preset-env": "^1.5.0",
     "boldr-dx": "^0.3.3",
     "cross-env": "^5.0.0",
@@ -235,10 +235,10 @@
     "timers": "fake",
     "moduleNameMapper": {
       "\\.(css|scss)$": "identity-obj-proxy",
-      ".*\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "./internal/jest/fileMock.js"
+      ".*\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/internal/jest/fileMock.js"
     },
     "collectCoverage": true,
-    "coverageDirectory": "./coverage",
+    "coverageDirectory": "<rootDir>/coverage",
     "coveragePathIgnorePatterns": [
       "<rootDir>/(internal|server|.boldr|docs|bin|.idea|public|db)/",
       "/flow-typed/",
@@ -246,10 +246,10 @@
       "/node_modules/"
     ],
     "transform": {
-      "^.+\\.js$": "./internal/jest/transform.js"
+      "^.+\\.jsx?$": "<rootDir>/internal/jest/transform.js"
     },
     "testRegex": ".*.test\\.js",
-    "setupTestFrameworkScriptFile": "./internal/jest/setup.js",
+    "setupTestFrameworkScriptFile": "<rootDir>/internal/jest/setup.js",
     "snapshotSerializers": [
       "<rootDir>/node_modules/enzyme-to-json/serializer"
     ],
