@@ -38,12 +38,12 @@
     "knex": "./node_modules/.bin/knex",
     "migrate": "better-npm-run migrate",
     "reset": "better-npm-run reset",
-    "migrate:test": "better-npm-run migrate:test",
+    "migrate:test": "node --harmony internal/scripts/db.js migrate",
     "migration": "better-npm-run migration",
     "prettier": "node ./internal/scripts/prettier.js write",
     "start": "NODE_ENV=production node server/app.js",
     "seed": "better-npm-run seed",
-     "seed:test": "better-npm-run seed:test",
+    "seed:test": "node --harmony internal/scripts/db.js seed",
     "test": "NODE_ENV=test jest",
     "test:ci": "NODE_ENV=test CI=true jest"
   },
@@ -174,13 +174,7 @@
         "NODE_ENV": "development"
       }
     },
-    "migrate:test": {
-      "command": "cross-env node --harmony internal/scripts/db.js migrate",
-      "env": {
-        "NODE_ENV": "development",
-        "BOLDR__DB__URL": "postgres://postgres:password@database:5432/test"
-      }
-    },
+
     "migration": {
       "command": "cross-env node --harmony internal/scripts/db.js migration",
       "env": {
@@ -207,13 +201,6 @@
       "env": {
         "BOLDR__DB__URL": "postgres://postgres:password@localhost:5432/boldr",
         "NODE_ENV": "development"
-      }
-    },
-    "seed:test": {
-      "command": "cross-env node --harmony internal/scripts/db.js seed",
-      "env": {
-        "NODE_ENV": "test",
-        "BOLDR__DB__URL": "postgres://postgres:password@database:5432/test"
       }
     },
     "test": {

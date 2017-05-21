@@ -2,39 +2,28 @@ sudo: required
 language: node_js
 node_js:
 - 7.10
+addons:
+  postgresql: "9.6"
 services:
-  - docker
+  - postgresql
+  - redis-server
 branches:
   only:
   - master
   - develop
 env:
-  DOCKER_COMPOSE_VERSION: 1.13.0
   TOKEN_SECRET: b0ldrs0s3cr3t
-  BOLDR__DB__URL: postgres://postgres:password@127.0.0.1:5432/boldr_test
+  BOLDR__DB__URL: postgres://postgres@127.0.0.1:5432/travis_ci_test
   BOLDR__REDIS__URL: redis://127.0.0.1:6379/0
   NODE_ENV: test
 git:
   depth: 3
-before_install:
-  - sudo /etc/init.d/postgresql stop
-  # Install the latest version of Docker
-  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-  - sudo apt-get -qq update
-  - sudo apt-get install -qqy docker-ce
-  # Install Docker Compose
-  - curl -L https://github.com/docker/compose/releases/download/${DOCKER_COMPOSE_VERSION}/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
-  - docker-compose --version
-
 install:
 - yarn
 before_script:
- - docker-compose build
- - docker-compose up -d
- - docker-compose ps
+  - psql -c 'create database travis_ci_test;' -U postgres
+  - BOLDR__DB__URL=postgres://postgres@127.0.0.1:5432/travis_ci_test yarn run migrate:test
+  - BOLDR__DB__URL=postgres://postgres@127.0.0.1:5432/travis_ci_test yarn run seed:test
 script:
 - yarn test
 after_success:
