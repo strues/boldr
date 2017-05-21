@@ -3,7 +3,6 @@ import { Model } from 'boldr-orm';
 import Promise from 'bluebird';
 import Bcrypt from 'bcrypt';
 import _debug from 'debug';
-import BaseModel from './Base';
 // Related Models
 import Role from './Role';
 import Attachment from './Attachment';
@@ -37,7 +36,7 @@ const debug = _debug('boldr:server:models:user');
  * @property {Date}     updatedAt
  * @property {Date}     deletedAt
  */
-class User extends BaseModel {
+class User extends Model {
   static get tableName() {
     return 'user';
   }
@@ -82,7 +81,37 @@ class User extends BaseModel {
    * @type {array}
    */
   static hidden = [];
+    /**
+   * Before updating make sure we hash the password if provided.
+   *
+   * @param {object} queryContext
+   */
+  $beforeUpdate(queryContext) {
+    super.$beforeUpdate(queryContext);
 
+    if (this.hasOwnProperty('password')) {
+      this.password = bcrypt.hashAsync(this.password, 10);
+    }
+  }
+  /**
+   * Before inserting make sure we hash the password if provided.
+   *
+   * @param {object} queryContext
+   */
+  $beforeInsert(queryContext) {
+    super.$beforeInsert(queryContext);
+
+    if (this.hasOwnProperty('password')) {
+      this.password = bcrypt.hashSync(this.password, 10);
+    }
+    if (this.firstName) {
+      this.firstName = this.firstName.trim();
+    }
+    if (this.lastName) {
+      this.lastName = this.lastName.trim();
+    }
+    this.email = this.email.trim();
+  }
   static get relationMappings() {
     return {
       roles: {
@@ -177,25 +206,7 @@ class User extends BaseModel {
     delete this['password']; // eslint-disable-line
     return this;
   }
-  /**
-   * Before inserting make sure we hash the password if provided.
-   *
-   * @param {object} queryContext
-   */
-  $beforeInsert(queryContext) {
-    super.$beforeInsert(queryContext);
 
-    if (this.hasOwnProperty('password')) {
-      this.password = bcrypt.hashSync(this.password, 10);
-    }
-    if (this.firstName) {
-      this.firstName = this.firstName.trim();
-    }
-    if (this.lastName) {
-      this.lastName = this.lastName.trim();
-    }
-    this.email = this.email.trim();
-  }
 
   /**
    * authenticate is specific to the user instance. compares the hashed password
@@ -206,18 +217,7 @@ class User extends BaseModel {
   authenticate(plainText) {
     return bcrypt.compareAsync(plainText, this.password);
   }
-  /**
-   * Before updating make sure we hash the password if provided.
-   *
-   * @param {object} queryContext
-   */
-  $beforeUpdate(queryContext) {
-    super.$beforeUpdate(queryContext);
 
-    if (this.hasOwnProperty('password')) {
-      this.password = bcrypt.hashAsync(this.password, 10);
-    }
-  }
 
   /**
    * Checks to see if this user has the provided role or not.

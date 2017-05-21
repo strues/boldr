@@ -290,7 +290,7 @@ type RootQuery {
 type RootMutation {
   dummy: Int
   # Sign up.
-  registerUser(firstName: String!, lastName: String!, email: String!, password: String!, username: String!): NewUser
+  registerUser(firstName: String!, lastName: String!, email: String!, password: String!, username: String!): User
   # Sign in.
   loginUser(email: String!, password: String!): Auth
 }

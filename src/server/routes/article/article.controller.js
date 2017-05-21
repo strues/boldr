@@ -281,7 +281,7 @@ export async function getArticlesWithArchive(req, res, next) {
     const articles = await Article.query()
       .eager('[author,tags,media]')
       .skipUndefined()
-      .includeDeleted();
+      .withArchived();
 
     return res.status(200).json(articles);
   } catch (err) {

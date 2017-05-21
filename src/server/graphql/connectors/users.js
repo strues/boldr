@@ -65,33 +65,51 @@ export default class UsersConnector {
         .catch(err => reject(err));
     });
   }
-  static async registerUser(args, req) {
-    try {
-      await transaction(User.knex(), async () => {
-        const user = await User.query().saveAndFetch(args);
-        await user.$relatedQuery('roles').relate({ id: 1 });
+  static registerUser(args) {
+    return new Promise((resolve, reject) => {
+      // Validate the data
+      if (!args.email) {
+        return reject({
+          code: 'email.empty',
+          message: 'Email is empty.',
+        });
+      }
 
-        // generate user verification token to send in the email.
-        const verifToken = uuid.v4();
-        // get the mail template
-        const mailBody = welcomeEmail(verifToken);
-        // subject
-        const mailSubject = 'Boldr User Verification';
-        // send the welcome email
-        mailer(user, mailBody, mailSubject);
-        // create a relationship between the user and the token
-        const verificationEmail = await user
-          .$relatedQuery('verificationToken')
-          .insert({
-            ip: req.ip,
+      if (!args.password) {
+        return reject({
+          code: 'password.empty',
+          message: 'You have to provide a password.',
+        });
+      }
+
+      // Find the user
+      return User.query()
+        .saveAndFetch(args)
+        .then(user => {
+          if (!user) {
+            return reject({
+              code: 'user.conflict',
+              message: 'A user with this information already exists.',
+            });
+          }
+          user.$relatedQuery('roles').relate({ id: 1 });
+          // generate user verification token to send in the email.
+          const verifToken = uuid.v4();
+          // get the mail template
+          const mailBody = welcomeEmail(verifToken);
+          // subject
+          const mailSubject = 'Boldr User Verification';
+          // send the welcome email
+          mailer(user, mailBody, mailSubject);
+          // create a relationship between the user and the token
+          user.$relatedQuery('verificationToken').insert({
             token: verifToken,
             userId: user.id,
           });
-        // @TODO: USER is resolved here, but lost
-        return user;
-      });
-    } catch (error) {
-      return new BadRequest(error);
-    }
+
+          return resolve(user);
+        })
+        .catch(err => reject(err));
+    });
   }
 }

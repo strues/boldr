@@ -206,11 +206,10 @@ export default {
           throw new Error(err);
         });
     },
-    registerUser(obj, args, req) {
+    registerUser(obj, args) {
       const errors = [];
-      return UsersConnector.registerUser(args, req)
+      return UsersConnector.registerUser(args)
         .then(newUser => {
-          console.log(newUser);
           return newUser;
         })
         .catch(err => {

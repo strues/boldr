@@ -1,6 +1,6 @@
 import 'isomorphic-fetch';
-import { enableEnhancedStackTraces } from './core/debugUtil';
 import http from 'http';
+import { enableEnhancedStackTraces } from './core/debugUtil';
 import { logger, initializeDb, disconnect, destroyRedis } from './services';
 import app from './app';
 import config from './config';
