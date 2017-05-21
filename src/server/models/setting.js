@@ -1,7 +1,6 @@
 import { Model } from 'boldr-orm';
-import BaseModel from './Base';
 
-class Setting extends BaseModel {
+class Setting extends Model {
   static tableName = 'setting';
   static jsonSchema = {
     type: 'object',

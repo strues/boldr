@@ -1,8 +1,7 @@
 import { Model } from 'boldr-orm';
-import BaseModel from './Base';
 import Media from './Media';
 
-class MediaType extends BaseModel {
+class MediaType extends Model {
   static get tableName() {
     return 'media_type';
   }

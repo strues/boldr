@@ -1,7 +1,6 @@
 import { Model } from 'boldr-orm';
 import MenuDetail from '../MenuDetail';
 import Menu from '../Menu';
-import BaseModel from '../Base';
 
 /**
  * This is the join table connecting menus to menu details.
@@ -10,7 +9,7 @@ import BaseModel from '../Base';
  * @see ../MenuDetail
  * @extends ../BaseModel
  */
-class MenuMenuDetail extends BaseModel {
+class MenuMenuDetail extends Model {
   static get tableName() {
     return 'menu_menu_detail';
   }

@@ -1,5 +1,4 @@
 import { Model } from 'boldr-orm';
-import BaseModel from './Base';
 import User from './User';
 
 /**
@@ -15,7 +14,7 @@ import User from './User';
  * @property {String} linkedinUrl
  * @property {String}   userId
  */
-class Social extends BaseModel {
+class Social extends Model {
   static tableName = 'social';
   static jsonSchema = {
     type: 'object',

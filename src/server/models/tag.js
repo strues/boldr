@@ -1,9 +1,8 @@
 import { Model } from 'boldr-orm';
-import BaseModel from './Base';
 // Related Model
 import Article from './Article';
 
-class Tag extends BaseModel {
+class Tag extends Model {
   static get tableName() {
     return 'tag';
   }

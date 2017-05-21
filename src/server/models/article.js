@@ -5,10 +5,9 @@ import { slugIt } from '../utils';
 import Tag from './Tag';
 import User from './User';
 import Attachment from './Attachment';
-import BaseModel from './Base';
 import Media from './Media';
 
-class Article extends BaseModel {
+class Article extends Model {
   static get tableName() {
     return 'article';
   }

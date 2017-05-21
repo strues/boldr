@@ -1,5 +1,4 @@
 import { Model } from 'boldr-orm';
-import BaseModel from './Base';
 import User from './User';
 
 /**
@@ -14,7 +13,7 @@ import User from './User';
  * @property {Date}     createdAt
  * @property {Date}     updatedAt
  */
-class VerificationToken extends BaseModel {
+class VerificationToken extends Model {
   static get tableName() {
     return 'verification_token';
   }

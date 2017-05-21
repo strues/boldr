@@ -1,10 +1,9 @@
 import { Model } from 'boldr-orm';
-import BaseModel from './Base';
 // Related Model
 import User from './User';
 import UserRole from './join/UserRole';
 
-class Role extends BaseModel {
+class Role extends Model {
   static get tableName() {
     return 'role';
   }

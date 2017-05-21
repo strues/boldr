@@ -1,6 +1,5 @@
 import { Model } from 'boldr-orm';
 import Role from '../Role';
-import BaseModel from '../Base';
 import User from '../User';
 
 /**
@@ -12,7 +11,7 @@ import User from '../User';
  * @see ../User
  * @extends ../BaseModel
  */
-class UserRole extends BaseModel {
+class UserRole extends Model {
   static tableName = 'user_role';
   static addTimestamps = false;
   static jsonSchema = {
