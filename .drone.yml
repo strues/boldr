@@ -1,4 +1,3 @@
-debug: true
 workspace:
   base: /boldr
   path: src/github.com/strues/boldr
@@ -7,8 +6,9 @@ clone:
   git:
     image: plugins/git
     depth: 10
+
 pipeline:
-  build:
+  test:
     image: node:7.10
     environment:
       - BOLDR__DB__URL=postgres://postgres:password@database:5432/test
