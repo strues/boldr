@@ -178,7 +178,7 @@
       "command": "cross-env node --harmony internal/scripts/db.js migrate",
       "env": {
         "NODE_ENV": "development",
-        "BOLDR__DB_URL": "postgres://postgres:password@database:5432/test"
+        "BOLDR__DB__URL": "postgres://postgres:password@database:5432/test"
       }
     },
     "migration": {
@@ -213,7 +213,7 @@
       "command": "cross-env node --harmony internal/scripts/db.js seed",
       "env": {
         "NODE_ENV": "test",
-        "BOLDR__DB_URL": "postgres://postgres:password@database:5432/test"
+        "BOLDR__DB__URL": "postgres://postgres:password@database:5432/test"
       }
     },
     "test": {
