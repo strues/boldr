@@ -25,7 +25,6 @@ module.exports = {
       bundleDir: path.resolve(__dirname, '../lib'),
     },
     vendor: [
-      'animate-components',
       'apollo-client',
       'axios',
       'boldr-ui',

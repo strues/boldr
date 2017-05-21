@@ -5,7 +5,7 @@ import Helmet from 'react-helmet';
 import filter from 'lodash/filter';
 import Link from 'react-router-dom/Link';
 import styled from 'styled-components';
-import { VanishIn } from 'animate-components';
+
 import IconButton from 'material-ui/IconButton';
 import { Col, Row, Headline, Photo, FontIcon } from 'boldr-ui';
 
@@ -94,7 +94,7 @@ class Media extends Component {
             <Row>
               <MediaList>
                 {this.state.currentlyVisible.map(m => (
-                  <VanishIn transition="1s" key={m.id}>
+
                     <MediaItem>
                       <Photo
                         src={`/uploads/${m.thumbName}`}
@@ -116,7 +116,7 @@ class Media extends Component {
                         }
                       />
                     </MediaItem>
-                  </VanishIn>
+
                 ))}
               </MediaList>
             </Row>

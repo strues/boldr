@@ -1,6 +1,6 @@
 /* @flow */
 import React, { Component } from 'react';
-import { Zoom } from 'animate-components';
+
 import styled from 'styled-components';
 import { gql, graphql } from 'react-apollo';
 import { Photo, Grid, Col, Row, Block, Headline, Loader } from 'boldr-ui';
@@ -47,9 +47,9 @@ export class MediaManager extends Component {
               <Row xsCenter>
                 <Col xs={6}>
                   <MediaContent>
-                    <Zoom duration="1s">
+
                       <Photo src={mediaById.url} />
-                    </Zoom>
+
                   </MediaContent>
                 </Col>
               </Row>

@@ -48,7 +48,6 @@
     "test:ci": "NODE_ENV=test CI=true jest"
   },
   "dependencies": {
-    "animate-components": "^1.0.0",
     "apollo-client": "^1.2.2",
     "axios": "^0.16.1",
     "bcrypt": "^1.0.2",
