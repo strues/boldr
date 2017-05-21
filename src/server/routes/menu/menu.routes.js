@@ -2,7 +2,7 @@ import { Router } from 'express';
 import BaseController from '../../core/baseController';
 import { isAuthenticated } from '../../services/authentication';
 import { checkRole } from '../../middleware/rbac';
-import Menu from '../../models/menu';
+import Menu from '../../models/Menu';
 import { wrapRouter } from '../../utils/asyncRouter';
 import * as ctrl from './menu.controller';
 import detailRoutes from './detail/menuDetail.routes';

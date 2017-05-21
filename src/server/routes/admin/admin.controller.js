@@ -1,6 +1,9 @@
 import { slugIt } from '../../utils';
 import { responseHandler, Conflict, BadRequest } from '../../core/index';
-import { Tag, User, Article, ContentType, MediaType } from '../../models';
+import Tag from '../../models/Tag';
+import User from '../../models/User';
+import Article from '../../models/Article';
+import MediaType from '../../models/MediaType';
 
 /**
  * Returns a list of all stats
@@ -27,42 +30,7 @@ export async function getAllStats(req, res, next) {
     return next(new BadRequest());
   }
 }
-/**
- * [listContentTypes description]
- * @param  {[type]}   req  [description]
- * @param  {[type]}   res  [description]
- * @param  {Function} next [description]
- * @return {[type]}        [description]
- */
-export async function listContentTypes(req, res, next) {
-  try {
-    const contentTypes = await ContentType.query();
-    return res.status(200).json(contentTypes);
-  } catch (error) {
-    return next(error);
-  }
-}
 
-/**
- * [addContentType description]
- * @param {[type]}   req  [description]
- * @param {[type]}   res  [description]
- * @param {Function} next [description]
- */
-export async function addContentType(req, res, next) {
-  try {
-    const payload = {
-      name: req.body.name,
-      safeName: slugIt(req.body.name),
-      image: req.body.image,
-      description: req.body.description,
-    };
-    const newContentType = await ContentType.query().insert(payload);
-    return res.status(201).json(newContentType);
-  } catch (error) {
-    return next(error);
-  }
-}
 /**
  * [listMediaTypes description]
  * @param  {[type]}   req  [description]

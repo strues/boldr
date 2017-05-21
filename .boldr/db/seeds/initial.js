@@ -1,6 +1,9 @@
 /* eslint-disable */
 function truncate(knex, Promise, tables) {
-  return Promise.each(tables, table => knex.raw(`TRUNCATE TABLE ${table} RESTART IDENTITY CASCADE`));
+  return Promise.each(tables, table =>
+  // prettier-ignore
+    knex.raw(`TRUNCATE TABLE ${table} RESTART IDENTITY CASCADE`)
+  );
 }
 
 const tables = [
@@ -12,12 +15,8 @@ const tables = [
   'article_tag',
   'menu',
   'menu_detail',
-  'template',
-  'page',
   'menu_menu_detail',
   'setting',
-  'template_page',
-  'content_type',
   'media_type',
 ];
 
@@ -37,7 +36,9 @@ function seed(knex, Promise) {
           name: 'Admin',
           description: 'Complete control over the CMS',
         }),
-      ]))
+        // prettier-ignore
+      ])
+    )
     .then(() =>
       Promise.all([
         knex('user').insert({
@@ -88,9 +89,11 @@ function seed(knex, Promise) {
           language: 'en_US',
           verified: true,
         }),
-      ]))
-      .then(() =>
-        Promise.all([
+        // prettier-ignore
+      ])
+    )
+    .then(() =>
+      Promise.all([
         knex('social').insert({
           userId: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
           facebookUrl: 'https://facebook.com',
@@ -118,7 +121,9 @@ function seed(knex, Promise) {
           googleUrl: 'https://google.com',
           stackoverflowUrl: 'https://stackoverflow.com',
         }),
-      ]))
+        // prettier-ignore
+      ])
+    )
     .then(() =>
       Promise.all([
         knex('tag').insert({
@@ -129,7 +134,9 @@ function seed(knex, Promise) {
           name: 'apple',
           description: 'Stuff about stuff.',
         }),
-      ]))
+        // prettier-ignore
+      ])
+    )
     .then(() =>
       Promise.all([
         knex('article').insert({
@@ -195,7 +202,9 @@ function seed(knex, Promise) {
           published: true,
           userId: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
         }),
-      ]))
+        // prettier-ignore
+      ])
+    )
     .then(() =>
       Promise.all([
         knex('article_tag').insert({
@@ -210,7 +219,9 @@ function seed(knex, Promise) {
           articleId: 'ab33a0ca-b349-4cf8-947f-94f415149492',
           tagId: 2,
         }),
-      ]))
+        // prettier-ignore
+      ])
+    )
     .then(() =>
       Promise.all([
         knex('menu').insert({
@@ -219,7 +230,9 @@ function seed(knex, Promise) {
           restricted: false,
           attributes: {},
         }),
-      ]))
+        // prettier-ignore
+      ])
+    )
     .then(() =>
       Promise.all([
         knex('menu_detail').insert({
@@ -259,7 +272,9 @@ function seed(knex, Promise) {
           href: 'blog',
           icon: 'info',
         }),
-      ]))
+        // prettier-ignore
+      ])
+    )
     .then(() =>
       Promise.all([
         knex('menu_menu_detail').insert({
@@ -270,7 +285,9 @@ function seed(knex, Promise) {
           menuId: 1,
           menuDetailId: 2,
         }),
-      ]))
+        // prettier-ignore
+      ])
+    )
     .then(() =>
       Promise.all([
         knex('user_role').insert({
@@ -285,147 +302,29 @@ function seed(knex, Promise) {
           userId: 'f4d869a6-1a75-469b-a9cc-965c552929e4',
           roleId: 1,
         }),
-      ]))
+        // prettier-ignore
+      ])
+    )
     .then(() =>
       Promise.all([
-        knex('template').insert({
+        knex('media_type').insert({
           id: 1,
-          uuid: 'c23891fb-88c2-4e91-b95d-c652f15eab0c',
-          slug: 'base',
-          name: 'Base',
-          meta: {},
-          content: {},
+          uuid: '51ad0cb8-39e9-4ee5-80ca-50ebb35b372c',
+          mediaType: 'image',
         }),
-        knex('template').insert({
+        knex('media_type').insert({
           id: 2,
-          uuid: 'd42f91fb-88c2-4e91-b95d-c652f15eab0c',
-          slug: 'content',
-          name: 'Content',
-          meta: {},
-          content: {},
+          uuid: '78614bdc-fd05-418e-b02c-a65e71075e70',
+          mediaType: 'video',
         }),
-      ]))
-    .then(() =>
-      Promise.all([
-        knex('page').insert({
-          id: '87d1e9b3-b32e-474e-9246-6dce1b21a72d',
-          name: 'Home',
-          slug: 'home',
-          url: 'home',
-          layout: {
-            showHero: true,
-            showPosts: true,
-          },
-          data: {},
-          status: 'published',
-          restricted: false,
-          meta: {
-            title: 'Home',
-            description: 'The home page',
-          },
+        knex('media_type').insert({
+          id: 3,
+          uuid: '3f9bb6d3-241b-4087-885f-117ead57bc73',
+          mediaType: 'audio',
         }),
-        knex('page').insert({
-          id: '0a277a50-b482-4b86-b0e7-83fdd3a372af',
-          name: 'About',
-          slug: 'about',
-          url: 'about',
-          layout: {
-            showHero: true,
-            showPosts: true,
-          },
-          data: {},
-          status: 'published',
-          restricted: false,
-          meta: {
-            title: 'About',
-            description: 'The about page',
-          },
-        }),
-      ]))
-    // .then(() =>
-    //   Promise.all([
-    //     knex('attachment').insert({
-    //       id: '668e14aa-ebe6-11e6-8ebf-4f81f17749d5',
-    //       url: '/uploads/file.png',
-    //       userId: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
-    //       safeName: 'file.png',
-    //       fileName: 'file.png',
-    //     }),
-    //   ]))
-    .then(() =>
-      Promise.all([
-        knex('template_page').insert({
-          templateId: 1,
-          pageId: '87d1e9b3-b32e-474e-9246-6dce1b21a72d',
-        }),
-        knex('template_page').insert({
-          templateId: 2,
-          pageId: '0a277a50-b482-4b86-b0e7-83fdd3a372af',
-        }),
-      ]))
-      .then(() =>
-    Promise.all([
-      knex('content_type').insert({
-        id: 1,
-        uuid: '29f45e4b-9c66-4083-8daa-279921ec71e7',
-        name: 'Page',
-        safeName: 'page'
-      }),
-      knex('content_type').insert({
-        id: 2,
-        uuid: '524d6cfd-b447-443b-b758-4afee35aab50',
-        name: 'Post',
-        safeName: 'post'
-      }),
-      knex('content_type').insert({
-        id: 3,
-        uuid: '943d6b80-948e-4d93-a555-6f13bf581046',
-        name: 'FAQ',
-        safeName: 'faq'
-      }),
-      knex('content_type').insert({
-        id: 4,
-        uuid: '93a98080-fb1d-437c-9731-a66ebaece248',
-        name: 'Project',
-        safeName: 'project'
-      }),
-      knex('content_type').insert({
-        id: 5,
-        uuid: 'e2d2689d-d265-4e5b-b8f4-8df0feea2e05',
-        name: 'Link',
-        safeName: 'link'
-      }),
-      knex('content_type').insert({
-        id: 6,
-        uuid: '3f4aaba7-5835-4493-82c3-f341d5ba9c09',
-        name: 'Hero',
-        safeName: 'hero'
-      }),
-      knex('content_type').insert({
-        id: 7,
-        uuid: '132ee9d4-f653-4097-a311-1cc56a8629fd',
-        name: 'Carousel',
-        safeName: 'carousel'
-      }),
-    ]))
-    .then(() =>
-  Promise.all([
-    knex('media_type').insert({
-      id: 1,
-      uuid: '51ad0cb8-39e9-4ee5-80ca-50ebb35b372c',
-      mediaType: 'image',
-    }),
-    knex('media_type').insert({
-      id: 2,
-      uuid: '78614bdc-fd05-418e-b02c-a65e71075e70',
-      mediaType: 'video',
-    }),
-    knex('media_type').insert({
-      id: 3,
-      uuid: '3f9bb6d3-241b-4087-885f-117ead57bc73',
-      mediaType: 'audio',
-    })
-  ]))
+        // prettier-ignore
+      ])
+    )
     .then(() =>
       Promise.all([
         knex('setting').insert({
@@ -470,7 +369,9 @@ function seed(knex, Promise) {
           value: true,
           description: "Toggle allowing user's to register for accounts.",
         }),
-      ]));
+        // prettier-ignore
+      ])
+    );
 }
 
-module.exports = {seed};
+module.exports = { seed };

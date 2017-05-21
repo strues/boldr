@@ -27,16 +27,7 @@ describe('Admin API Endpoint', () => {
         expect(typeof res.body).toBe('object');
       });
   });
-  it('GET /types/content -- Return content types', () => {
-    return agent
-      .get('/api/v1/admin/types/content')
-      .set('Accept', 'application/json')
-      .set('Authorization', `Bearer ${token}`)
-      .expect(res => {
-        expect(res.status).toBe(200);
-        expect(typeof res.body).toBe('object');
-      });
-  });
+
   it('GET /types/media -- Return media types', () => {
     return agent
       .get('/api/v1/admin/types/media')

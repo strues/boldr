@@ -1,13 +1,16 @@
 import uuid from 'uuid/v4';
+import _debug from 'debug';
 import slugIt from '../../../utils/slugIt';
 import {
   InternalServer,
   BadRequest,
   responseHandler,
 } from '../../../core/index';
-import { Activity, Menu, MenuDetail, MenuMenuDetail } from '../../../models';
+import Menu from '../../../models/Menu';
+import MenuDetail from '../../../models/MenuDetail';
+import MenuMenuDetail from '../../../models/join/MenuMenuDetail';
 
-const debug = require('debug')('boldr:menuDetail-ctrl');
+const debug = _debug('boldr:server:menuDetail-ctrl');
 
 export async function getDetails(req, res, next) {
   try {
@@ -60,11 +63,6 @@ export async function createDetail(req, res, next) {
       menuDetailId: newLink.id,
     });
     debug(associateMenuDetail);
-    await Activity.query().insert({
-      userId: req.user.id,
-      type: 'create',
-      activityMenuDetail: newLink.id,
-    });
 
     return responseHandler(res, 201, newLink);
   } catch (error) {
@@ -76,9 +74,9 @@ export async function updateDetail(req, res, next) {
   try {
     const detail = await MenuDetail.query().findById(req.params.id);
 
-    if (!detail)
+    if (!detail) {
       return res.status(404).json('Unable to find a menu detail with that id.');
-
+    }
     const updatedDetail = await MenuDetail.query().updateAndFetchById(
       req.params.id,
       req.body,

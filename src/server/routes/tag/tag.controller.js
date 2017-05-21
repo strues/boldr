@@ -1,5 +1,5 @@
 import { responseHandler } from '../../core';
-import { Tag, Activity } from '../../models';
+import Tag from '../../models/Tag';
 
 const debug = require('debug')('boldr:tag-ctrl');
 
@@ -55,11 +55,6 @@ export async function createTag(req, res, next) {
   try {
     const newTag = await Tag.query().insert(req.body);
 
-    await Activity.query().insert({
-      userId: req.user.id,
-      type: 'create',
-      activityTag: newTag.id,
-    });
     return responseHandler(res, 201, newTag);
   } catch (error) {
     /* istanbul ignore next */
@@ -84,12 +79,6 @@ export async function deleteTag(req, res, next) {
         .status(400)
         .json('There was a problem with your request. Unable to find tag.');
     }
-    // unlink the attachment from the activity
-    await Activity.query()
-      .delete()
-      .where({ activityTag: req.params.id })
-      .first();
-
     // remove the attachment from the database
     await Tag.query().deleteById(req.params.id);
     // send a 204

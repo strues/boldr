@@ -1,6 +1,6 @@
 import { Model } from 'boldr-orm';
-import BaseModel from './base';
-import Media from './media';
+import BaseModel from './Base';
+import Media from './Media';
 
 class MediaType extends BaseModel {
   static get tableName() {
@@ -19,6 +19,10 @@ class MediaType extends BaseModel {
         },
       },
     };
+  }
+
+  static listTypes() {
+    return MediaType.query();
   }
 }
 

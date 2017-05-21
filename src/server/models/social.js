@@ -1,6 +1,6 @@
 import { Model } from 'boldr-orm';
-import BaseModel from './base';
-import User from './user';
+import BaseModel from './Base';
+import User from './User';
 
 /**
  * Social used for user's social media profiles. Belongs to User

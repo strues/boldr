@@ -2,11 +2,11 @@ import { Model } from 'boldr-orm';
 import { slugIt } from '../utils';
 
 // Related Models
-import Tag from './tag';
-import User from './user';
-import Attachment from './attachment';
-import BaseModel from './base';
-import Media from './media';
+import Tag from './Tag';
+import User from './User';
+import Attachment from './Attachment';
+import BaseModel from './Base';
+import Media from './Media';
 
 class Article extends BaseModel {
   static get tableName() {

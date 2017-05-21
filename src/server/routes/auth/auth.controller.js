@@ -2,7 +2,9 @@ import uuid from 'uuid';
 import * as objection from 'objection';
 import { mailer, signToken, generateHash } from '../../services';
 import { welcomeEmail } from '../../services/mailer/templates';
-import { User, Activity, VerificationToken } from '../../models';
+import User from '../../models/User';
+import VerificationToken from '../../models/VerificationToken';
+
 import {
   responseHandler,
   UserNotVerifiedError,
@@ -84,12 +86,7 @@ export async function registerUser(req, res, next) {
         return res.status(500).json('There was a problem with the mailer.');
       }
     });
-    await Activity.query().insert({
-      id: uuid.v4(),
-      userId: payload.id,
-      type: 'register',
-      activityUser: payload.id,
-    });
+
     // Massive transaction is finished, send the data to the user.
     return responseHandler(res, 201, 'Account created.');
   } catch (error) {

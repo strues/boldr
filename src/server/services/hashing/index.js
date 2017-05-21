@@ -1,3 +1,3 @@
-import { generateHash, randomString, SALT } from './hashing';
+import { generateHash, comparePassword } from './hashing';
 
-export { generateHash, randomString, SALT };
+export { generateHash, comparePassword };

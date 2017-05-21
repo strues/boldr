@@ -1,19 +1,21 @@
 /* eslint-disable id-match */ /* eslint-disable no-unused-vars */
 import { Model } from 'boldr-orm';
-import BaseModel from './base';
+import Promise from 'bluebird';
+import Bcrypt from 'bcrypt';
+import _debug from 'debug';
+import BaseModel from './Base';
 // Related Models
-import Role from './role';
-import Attachment from './attachment';
-import ResetToken from './resetToken';
-import VerificationToken from './verificationToken';
-import Article from './article';
-import UserRole from './join/userRole';
-import Media from './media';
-import Social from './social';
+import Role from './Role';
+import Attachment from './Attachment';
+import ResetToken from './ResetToken';
+import VerificationToken from './VerificationToken';
+import Article from './Article';
+import UserRole from './join/UserRole';
+import Media from './Media';
+import Social from './Social';
 
-const Promise = require('bluebird');
-const bcrypt = Promise.promisifyAll(require('bcrypt'));
-const debug = require('debug')('boldr:server:models:user');
+const bcrypt = Promise.promisifyAll(Bcrypt);
+const debug = _debug('boldr:server:models:user');
 
 /**
  * User model representing an account and identity of a person.

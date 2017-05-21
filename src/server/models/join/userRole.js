@@ -1,7 +1,7 @@
 import { Model } from 'boldr-orm';
-import Role from '../role';
-import BaseModel from '../base';
-import User from '../user';
+import Role from '../Role';
+import BaseModel from '../Base';
+import User from '../User';
 
 /**
  * This is the join table connecting users to roles.

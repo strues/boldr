@@ -4,7 +4,7 @@ import { isAuthenticated } from '../../services/authentication';
 import { checkRole } from '../../middleware/rbac';
 import redisClient from '../../services/redis';
 import { wrapRouter } from '../../utils/asyncRouter';
-import Article from '../../models/article';
+import Article from '../../models/Article';
 import * as ctrl from './article.controller';
 
 // const cache = require('express-redis-cache')({ client: redisClient });

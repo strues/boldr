@@ -2,6 +2,7 @@
 /* eslint-disable babel/new-cap, id-match */
 import { resolve as pathResolve } from 'path';
 import express from 'express';
+import _debug from 'debug';
 import { makeExecutableSchema } from 'graphql-tools';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import bodyParser from 'body-parser';
@@ -11,9 +12,9 @@ import ssrMiddleware from './ssr';
 import graphqlSchema from './graphql/schema';
 import graphqlResolvers from './graphql/resolvers';
 import config from './config';
-import User from './models/user';
+import User from './models/User';
 
-const debug = require('debug')('boldr:app');
+const debug = _debug('boldr:server:app');
 
 const app: express$Application = express();
 // Base Express middleware
@@ -23,6 +24,7 @@ expressMiddleware(app);
 authMiddleware(app);
 // All routes for the app
 routes(app);
+
 app.use(
   '/graphiql',
   graphiqlExpress({

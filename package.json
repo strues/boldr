@@ -43,7 +43,9 @@
     "prettier": "node ./internal/scripts/prettier.js write",
     "start": "NODE_ENV=production node server/app.js",
     "seed": "better-npm-run seed",
-    "test": "NODE_ENV=test jest"
+     "seed:test": "better-npm-run seed:test",
+    "test": "NODE_ENV=test jest",
+    "test:ci": "NODE_ENV=test CI=true jest"
   },
   "dependencies": {
     "animate-components": "^0.9.4",
@@ -176,7 +178,6 @@
     "migrate:test": {
       "command": "cross-env node --harmony internal/scripts/db.js migrate",
       "env": {
-        "BOLDR__DB__URL": "postgres://postgres:password@localhost:5432/boldr_test",
         "NODE_ENV": "development"
       }
     },
@@ -211,7 +212,6 @@
     "seed:test": {
       "command": "cross-env node --harmony internal/scripts/db.js seed",
       "env": {
-        "BOLDR__DB__URL": "postgres://postgres:password@localhost:5432/boldr_test",
         "NODE_ENV": "test"
       }
     },
@@ -227,8 +227,6 @@
       "command": "jest --forceExit",
       "env": {
         "NODE_ENV": "test",
-        "BOLDR__REDIS__URL": "redis://127.0.0.1:6379",
-        "BOLDR__DB__URL": "postgres://postgres:password@127.0.0.1:5432/boldr_test",
         "BOLDR__TOKEN__SECRET": "b0ldrs0s3cr3t",
         "KNEX_TEST_TIMEOUT": 30000
       }

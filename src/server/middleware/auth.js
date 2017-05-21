@@ -3,13 +3,14 @@
  * server/middleware/auth
  */
 import jwt from 'jsonwebtoken';
-import User from '../models/user';
+import _debug from 'debug';
+import User from '../models/User';
 import { mainRedisClient } from '../services/redis';
 import config from '../config';
 import sessionMiddleware from './session';
 import rbac from './rbac';
 
-const debug = require('debug')('boldr:authMW');
+const debug = _debug('boldr:server:authMW');
 
 export default app => {
   app.use(sessionMiddleware);

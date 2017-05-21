@@ -1,7 +1,7 @@
 import { Model } from 'boldr-orm';
-import MenuDetail from '../menuDetail';
-import Menu from '../menu';
-import BaseModel from '../base';
+import MenuDetail from '../MenuDetail';
+import Menu from '../Menu';
+import BaseModel from '../Base';
 
 /**
  * This is the join table connecting menus to menu details.

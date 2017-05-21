@@ -1,7 +1,7 @@
 import { Model } from 'boldr-orm';
-import Media from '../media';
-import Article from '../article';
-import BaseModel from '../base';
+import Media from '../Media';
+import Article from '../Article';
+import BaseModel from '../Base';
 
 /**
  * This is the join table connecting media to articles.

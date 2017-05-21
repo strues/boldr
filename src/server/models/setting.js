@@ -1,5 +1,5 @@
 import { Model } from 'boldr-orm';
-import BaseModel from './base';
+import BaseModel from './Base';
 
 class Setting extends BaseModel {
   static tableName = 'setting';

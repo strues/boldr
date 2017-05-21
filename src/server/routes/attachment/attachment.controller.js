@@ -8,8 +8,7 @@ import shortId from 'shortid';
 import sharp from 'sharp';
 import formidable from 'formidable';
 import { responseHandler, BadRequest } from '../../core/index';
-import Activity from '../../models/activity';
-import Attachment from '../../models/attachment';
+import Attachment from '../../models/Attachment';
 import { logger } from '../../services';
 import appRoot from '../../utils/appRoot';
 
@@ -63,12 +62,6 @@ export async function updateAttachment(req, res, next) {
       req.body,
     );
 
-    await Activity.query().insert({
-      userId: req.user.id,
-      type: 'update',
-      activityAttachment: req.params.id,
-    });
-
     return responseHandler(res, 202, updatedAttachment);
   } catch (error) {
     /* istanbul ignore next */
@@ -92,12 +85,6 @@ export async function deleteAttachment(req, res, next) {
     if (!attachment) {
       return next(new BadRequest());
     }
-    // unlink the attachment from the activity
-    await Activity.query()
-      .delete()
-      .where({ activityAttachment: req.params.id })
-      .first();
-
     // remove the attachment from the database
     await Attachment.query().deleteById(req.params.id);
     // remove from the file system.
@@ -189,12 +176,7 @@ export function uploadAttachment(req, res, next) {
         url: `/uploads/${data.attach.imageName}`,
       };
       const newAttachment = await Attachment.query().insert(payload);
-      // create an activity entry
-      await Activity.query().insert({
-        userId: req.user.id,
-        type: 'create',
-        activityAttachment: newAttachment.id,
-      });
+
       return res.status(201).json(newAttachment);
     });
 }

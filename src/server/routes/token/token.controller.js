@@ -5,10 +5,10 @@ import {
   passwordModifiedEmail,
   forgotPasswordEmail,
 } from '../../services/mailer/templates';
-import User from '../../models/user';
+import User from '../../models/User';
 import { responseHandler, BadRequest } from '../../core';
-import { VerificationToken, ResetToken } from '../../models';
-
+import VerificationToken from '../../models/VerificationToken';
+import ResetToken from '../../models/ResetToken';
 /**
  * forgottenPassword takes an email address, generates a reset token, updates the user in the database, then sends
  * an email with the token to reset the user password.

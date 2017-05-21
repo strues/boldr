@@ -22,15 +22,6 @@ router
   .get(ctrl.getAllStats);
 
 /**
- * @api {get} /types/content          List content types
- * @apiName ListContentTypes
- * @apiGroup Admin
- * @apiPermission admin
- */
-router.get('/types/content', ctrl.listContentTypes);
-router.post('/types/content', ctrl.addContentType);
-
-/**
    * @api {get} /types/media          List media types
    * @apiName ListMediaTypes
    * @apiGroup Admin

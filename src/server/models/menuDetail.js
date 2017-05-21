@@ -1,7 +1,7 @@
 import { Model } from 'boldr-orm';
-import BaseModel from './base';
+import BaseModel from './Base';
 // Related Model
-import Menu from './menu';
+import Menu from './Menu';
 
 class MenuDetail extends BaseModel {
   static get tableName() {

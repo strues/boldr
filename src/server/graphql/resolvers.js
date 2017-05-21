@@ -1,17 +1,17 @@
 import invokeMap from 'lodash/invokeMap';
 import isArray from 'lodash/isArray';
 import { Kind } from 'graphql/language';
-
-import Article from '../models/article';
-import Tag from '../models/tag';
-import User from '../models/user';
-import Media from '../models/media';
-import MediaType from '../models/mediaType';
-import Role from '../models/role';
-import Menu from '../models/menu';
-import MenuDetail from '../models/menuDetail';
-import Setting from '../models/setting';
-import Social from '../models/social';
+import Attachment from '../models/Attachment';
+import Article from '../models/Article';
+import Tag from '../models/Tag';
+import User from '../models/User';
+import Media from '../models/Media';
+import MediaType from '../models/MediaType';
+import Role from '../models/Role';
+import Menu from '../models/Menu';
+import MenuDetail from '../models/MenuDetail';
+import Setting from '../models/Setting';
+import Social from '../models/Social';
 import UsersConnector from './connectors/users';
 import {
   GraphQLEmail,
@@ -113,6 +113,12 @@ export default {
 
       return Article.getArticleBySlug(args.slug).then(jsonResult);
     },
+    attachments(obj, args) {
+      const { offset, limit } = args;
+      debug('GraphQL.Resolvers.Query.attachments');
+
+      return Attachment.listAttachments(offset, limit).then(jsonResult);
+    },
     listMedia(obj, args) {
       const { offset, limit } = args;
       debug('GraphQL.Resolvers.Query.listMedia');
@@ -123,6 +129,10 @@ export default {
       const { id } = args;
       debug('GraphQL.Resolvers.Query.mediaById', args);
       return Media.getMediaById(id).then(jsonResult);
+    },
+    mediaTypes(obj, args) {
+      debug('GraphQL.Resolvers.Query.mediaById', args);
+      return MediaType.listTypes().then(jsonResult);
     },
     // tags
     getTags(obj, args) {
@@ -191,6 +201,26 @@ export default {
             });
 
             return { token: null, errors };
+          }
+
+          throw new Error(err);
+        });
+    },
+    registerUser(obj, args, req) {
+      const errors = [];
+      return UsersConnector.registerUser(args, req)
+        .then(newUser => {
+          console.log(newUser);
+          return newUser;
+        })
+        .catch(err => {
+          if (err.code && err.message) {
+            errors.push({
+              key: err.code,
+              value: err.message,
+            });
+
+            return { user: null, errors };
           }
 
           throw new Error(err);

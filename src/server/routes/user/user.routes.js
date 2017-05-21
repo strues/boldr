@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { isAuthenticated } from '../../services/authentication';
 import { checkRole } from '../../middleware/rbac';
 import { wrapRouter } from '../../utils/asyncRouter';
-import { User } from '../../models';
+import User from '../../models/User';
 import * as ctrl from './user.controller';
 
 const router = wrapRouter(new Router());

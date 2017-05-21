@@ -2,7 +2,7 @@ import uuid from 'uuid';
 import * as objection from 'objection';
 import { mailer, signToken, generateHash } from '../../services/index';
 import { welcomeEmail } from '../../services/mailer/templates';
-import VerificationToken from '../../models/verificationToken';
+import VerificationToken from '../../models/VerificationToken';
 import {
   responseHandler,
   UserNotVerifiedError,
@@ -12,7 +12,7 @@ import {
   Unauthorized,
   Conflict,
 } from '../../core';
-import User from '../../models/user';
+import User from '../../models/User';
 
 const debug = require('debug')('boldr:user-ctrl');
 

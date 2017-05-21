@@ -1,19 +1,16 @@
 import uuid from 'uuid/v4';
 import * as objection from 'objection';
+import _debug from 'debug';
 import { responseHandler, Conflict, BadRequest } from '../../core/index';
 import slugIt from '../../utils/slugIt';
+import Tag from '../../models/Tag';
+import User from '../../models/User';
+import Article from '../../models/Article';
+import Media from '../../models/Media';
+import ArticleTag from '../../models/join/ArticleTag';
+import ArticleMedia from '../../models/join/ArticleMedia';
 
-// Models
-import {
-  Tag,
-  Activity,
-  Article,
-  ArticleTag,
-  Media,
-  ArticleMedia,
-} from '../../models';
-
-const debug = require('debug')('boldr:article-ctrl');
+const debug = _debug('boldr:server:article-ctrl');
 
 /**
  * Create an article
@@ -204,10 +201,6 @@ export async function getId(req, res, next) {
  */
 export async function destroy(req, res, next) {
   try {
-    await Activity.query()
-      .delete()
-      .where({ activityActivity: req.params.id })
-      .first();
     await Article.query().delete().where('id', req.params.id).first();
 
     return res.status(204).send({});
@@ -230,14 +223,8 @@ export function update(req, res) {
   debug(req.body);
   return Article.query()
     .patchAndFetchById(req.params.id, req.body)
-    .then(async article => {
-      await Activity.query().insert({
-        id: uuid(),
-        userId: req.user.id,
-        type: 'update',
-        activityArticle: article.id,
-      });
-      responseHandler(res, 202, article);
+    .then(article => {
+      return responseHandler(res, 202, article);
     });
 }
 

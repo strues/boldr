@@ -191,128 +191,17 @@ module.exports.up = async db => {
     table.string('cssClassname', 255).nullable();
     table.boolean('hasDropdown').default(false);
     table.integer('order');
-    table
-      .string('mobileHref', 255)
-      .nullable()
-      .comment(
-        'Mobile href is applicable in cases where the item is a dropdown' +
-        'trigger on desktop. Without a mobile href, it will only be text.'); // eslint-disable-line
+    table.string('mobileHref', 255).nullable().comment(
+      'Mobile href is applicable in cases where the item is a dropdown' +
+        // prettier-ignore
+        'trigger on desktop. Without a mobile href, it will only be text.' // eslint-disable-line
+    );
     table.string('href').notNullable();
     table.string('icon').nullable();
-    table.json('children');
+    table.jsonb('children');
     table.index('safeName');
     table.index('uuid');
     table.index('href');
-  });
-
-  await db.schema.createTableIfNotExists('template', table => {
-    table.increments('id').unsigned().primary();
-    table.uuid('uuid');
-    table.string('name', 100).unique().notNullable();
-    table.string('slug', 110).notNullable();
-    table.json('meta');
-    table.json('content');
-    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
-
-    table.index('slug');
-    table.index('uuid');
-  });
-
-  await db.schema.createTable('page', table => {
-    table
-      .uuid('id')
-      .notNullable()
-      .defaultTo(db.raw('uuid_generate_v4()'))
-      .primary();
-    table.string('name').unique().notNullable();
-    table.string('slug').unique();
-    table.string('url').unique().notNullable();
-    table.json('layout');
-    table.json('data');
-    table.enu('status', ['published', 'draft', 'archived']).defaultTo('draft');
-    table.boolean('restricted').default(false);
-    table.json('meta');
-    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
-
-    table.index('name');
-  });
-
-  await db.schema.createTable('activity', table => {
-    table
-      .uuid('id')
-      .notNullable()
-      .defaultTo(db.raw('uuid_generate_v4()'))
-      .primary();
-    table.uuid('userId').unsigned().notNullable();
-    table.enu('type', ['create', 'update', 'delete', 'register']).notNullable();
-    table.uuid('activityArticle').unsigned();
-    table.uuid('activityUser').unsigned();
-    table.uuid('activityAttachment').unsigned();
-    table.integer('activityTag').unsigned();
-    table.integer('activityMenuDetail').unsigned();
-    table.integer('activityTemplate').unsigned();
-    table.uuid('activityPage').unsigned();
-    table.integer('activityRole').unsigned();
-    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
-
-    table
-      .foreign('userId')
-      .references('id')
-      .inTable('user')
-      .onDelete('cascade')
-      .onUpdate('cascade');
-
-    table
-      .foreign('activityArticle')
-      .references('id')
-      .inTable('article')
-      .onDelete('cascade')
-      .onUpdate('cascade');
-    table
-      .foreign('activityUser')
-      .references('id')
-      .inTable('user')
-      .onDelete('cascade')
-      .onUpdate('cascade');
-    table
-      .foreign('activityAttachment')
-      .references('id')
-      .inTable('attachment')
-      .onDelete('cascade')
-      .onUpdate('cascade');
-    table
-      .foreign('activityTag')
-      .references('id')
-      .inTable('tag')
-      .onDelete('cascade')
-      .onUpdate('cascade');
-    table
-      .foreign('activityMenuDetail')
-      .references('id')
-      .inTable('menu_detail')
-      .onDelete('cascade')
-      .onUpdate('cascade');
-    table
-      .foreign('activityTemplate')
-      .references('id')
-      .inTable('template')
-      .onDelete('cascade')
-      .onUpdate('cascade');
-    table
-      .foreign('activityPage')
-      .references('id')
-      .inTable('page')
-      .onDelete('cascade')
-      .onUpdate('cascade');
-    table
-      .foreign('activityRole')
-      .references('id')
-      .inTable('role')
-      .onDelete('cascade')
-      .onUpdate('cascade');
   });
 
   await db.schema.createTable('article_tag', table => {
@@ -355,25 +244,6 @@ module.exports.up = async db => {
       .onUpdate('cascade');
   });
 
-  await db.schema.createTable('template_page', table => {
-    table.increments('id').primary();
-    table.uuid('pageId').unsigned().notNullable();
-    table.integer('templateId').unsigned().notNullable();
-
-    table.unique(['pageId', 'templateId']);
-    table
-      .foreign('pageId')
-      .references('id')
-      .inTable('page')
-      .onDelete('cascade')
-      .onUpdate('cascade');
-    table
-      .foreign('templateId')
-      .references('id')
-      .inTable('template')
-      .onDelete('cascade')
-      .onUpdate('cascade');
-  });
   await db.schema.createTable('menu_menu_detail', table => {
     table.integer('menuId').notNullable().references('id').inTable('menu');
     table
@@ -394,14 +264,10 @@ module.exports.down = async db => {
   await db.schema.dropTableIfExists('setting');
   await db.schema.dropTableIfExists('menu');
   await db.schema.dropTableIfExists('menu_detail');
-  await db.schema.dropTableIfExists('template');
-  await db.schema.dropTableIfExists('page');
-  await db.schema.dropTableIfExists('activity');
   await db.schema.dropTableIfExists('verification_token');
   await db.schema.dropTableIfExists('reset_token');
   await db.schema.dropTableIfExists('article_tag');
   await db.schema.dropTableIfExists('user_role');
-  await db.schema.dropTableIfExists('template_page');
   await db.schema.dropTableIfExists('menu_menu_detail');
 };
 

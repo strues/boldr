@@ -1,7 +1,7 @@
 import { responseHandler, InternalServer, NotFound } from '../../core/index';
 import { slugIt } from '../../utils';
 // Model
-import Menu from '../../models/menu';
+import Menu from '../../models/Menu';
 
 export async function listMenu(req, res, next) {
   try {

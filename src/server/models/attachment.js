@@ -1,8 +1,7 @@
 import { Model } from 'boldr-orm';
-import BaseModel from './base';
+import BaseModel from './Base';
 // Related Models
-import User from './user';
-import Activity from './activity';
+import User from './User';
 
 class Attachment extends BaseModel {
   static get tableName() {
@@ -19,27 +18,10 @@ class Attachment extends BaseModel {
           to: 'user.id',
         },
       },
-      // posts: {
-      //   relation: Model.ManyToManyRelation,
-      //   modelClass: Post,
-      //   join: {
-      //     from: 'attachment.id',
-      //     through: {
-      //       from: 'post_attachment.attachmentId',
-      //       to: 'post_attachment.postId',
-      //     },
-      //     to: 'post.id',
-      //   },
-      // },
-      activity: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: Activity,
-        join: {
-          from: 'attachment.id',
-          to: 'activity.activityAttachment',
-        },
-      },
     };
+  }
+  static listAttachments(offset, limit) {
+    return Attachment.query().offset(offset).limit(limit);
   }
 }
 

@@ -1,6 +1,6 @@
 import { Model } from 'boldr-orm';
-import BaseModel from './base';
-import User from './user';
+import BaseModel from './Base';
+import User from './User';
 
 class ResetToken extends BaseModel {
   static get tableName() {

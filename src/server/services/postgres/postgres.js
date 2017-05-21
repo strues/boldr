@@ -1,5 +1,6 @@
 /* @flow */
 
+import path from 'path';
 import knex from 'knex';
 import { Model } from 'boldr-orm';
 import config from '../../config';
@@ -22,7 +23,10 @@ const db = knex(knexOpts);
 
 function initializeDb(): Promise<mixed> {
   Model.knex(db);
-
+  Model.setBasePath(path.join(__dirname, '..', '..', 'models'));
+  // prefer ajv validation over partial objection schema assumptions
+  // https://github.com/epoberezkin/ajv/issues/410
+  Model.pickJsonSchemaProperties = false;
   return db.raw('select 1+1 as result');
 }
 

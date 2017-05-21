@@ -92,7 +92,7 @@ type Article {
   # the time the article was created
   createdAt: Date!
   # the time the article was updated
-  updatedAt: Date!
+  updatedAt: Date
   # the time the article was deleted
   deletedAt: Date
   # the id of the user who created the article
@@ -160,6 +160,34 @@ type MediaType {
   # date the media type was updated
   updatedAt: Date
 }
+
+################################################################################
+## Attachment
+################################################################################
+
+type Attachment {
+  # unique uuid id for the media
+  id: UUID!
+  # name of the media
+  fileName: String!
+  # identifier which cannot be changed
+  safeName: String
+  # description of the media
+  fileDescription: String
+  # image, video, audio
+  fileType: String
+  # path to the locally stored file
+  path: String
+  # url to access
+  url: String
+  # owner id
+  userId: UUID!
+  # date the media was uploaded
+  createdAt: Date!
+  # date the media was updated
+  updatedAt: Date
+}
+
 ################################################################################
 ## Settings
 ################################################################################
@@ -203,15 +231,8 @@ type MenuDetail {
   mobileHref: String!
   href: String!
   icon: String!
-  children: [MenuDetailChild]
+  children: JSON
 }
-
-# dropdown menu items
-type MenuDetailChild {
-  key: String!
-  items: [MenuDetail]
-}
-
 
 ################################################################################
 ## Auth
@@ -223,6 +244,15 @@ type Auth {
   errors: [Error]
 }
 
+# Authentication type
+type NewUser {
+  id: UUID
+  email: Email
+  username: String
+  firstName: String
+  lastName: String
+  errors: [Error]
+}
 # Error type.
 type Error {
   key: String
@@ -238,10 +268,12 @@ type RootQuery {
   articlesByTag(name: String!, offset: Int!, limit: Int!): [Article]
   articleById(id: String!): Article
   articleBySlug(slug: String!): Article
+  attachments(offset: Int!, limit: Int!): [Attachment]
   menus: [Menu]
   menuById(id: Int!):[Menu]
   listMedia(offset: Int!, limit: Int!): [Media]
   mediaById(id: UUID!): Media
+  mediaTypes: [MediaType]
   settings: [Setting]
   getTags(offset: Int!, limit: Int!): [Tag]
   users: [User]
@@ -258,7 +290,7 @@ type RootQuery {
 type RootMutation {
   dummy: Int
   # Sign up.
-  # registerUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
+  registerUser(firstName: String!, lastName: String!, email: String!, password: String!, username: String!): NewUser
   # Sign in.
   loginUser(email: String!, password: String!): Auth
 }

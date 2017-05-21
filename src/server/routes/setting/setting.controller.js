@@ -1,5 +1,5 @@
 import { responseHandler } from '../../core';
-import Setting from '../../models/setting';
+import Setting from '../../models/Setting';
 
 const debug = require('debug')('boldr:settings-ctrl');
 

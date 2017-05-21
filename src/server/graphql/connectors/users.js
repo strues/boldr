@@ -1,16 +1,16 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import uuid from 'uuid';
+import { transaction } from 'objection';
+import { comparePassword } from '../../services/hashing';
 import signToken from '../../services/authentication/signToken';
 import config from '../../config';
-import User from '../../models/user';
+import User from '../../models/User';
 
-const comparePassword = (currentPassword, candidatePassword, callback) =>
-  bcrypt.compare(candidatePassword, currentPassword, (err, isMatch) => {
-    if (err) {
-      return callback(err);
-    }
-    return callback(null, isMatch);
-  });
+import { mailer, generateHash } from '../../services';
+import { welcomeEmail } from '../../services/mailer/templates';
+import VerificationToken from '../../models/VerificationToken';
+import { BadRequest } from '../../core/errors';
 
 export default class UsersConnector {
   static loginUser(args) {
@@ -64,5 +64,34 @@ export default class UsersConnector {
         })
         .catch(err => reject(err));
     });
+  }
+  static async registerUser(args, req) {
+    try {
+      await transaction(User.knex(), async () => {
+        const user = await User.query().saveAndFetch(args);
+        await user.$relatedQuery('roles').relate({ id: 1 });
+
+        // generate user verification token to send in the email.
+        const verifToken = uuid.v4();
+        // get the mail template
+        const mailBody = welcomeEmail(verifToken);
+        // subject
+        const mailSubject = 'Boldr User Verification';
+        // send the welcome email
+        mailer(user, mailBody, mailSubject);
+        // create a relationship between the user and the token
+        const verificationEmail = await user
+          .$relatedQuery('verificationToken')
+          .insert({
+            ip: req.ip,
+            token: verifToken,
+            userId: user.id,
+          });
+        // @TODO: USER is resolved here, but lost
+        return user;
+      });
+    } catch (error) {
+      return new BadRequest(error);
+    }
   }
 }

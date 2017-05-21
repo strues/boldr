@@ -1,18 +1,32 @@
 debug: true
+workspace:
+  base: /boldr
+  path: src/github.com/strues/boldr
+
+clone:
+  git:
+    image: plugins/git
+    depth: 10
 pipeline:
   build:
-    image: node:7.9
+    image: node:7.10
     environment:
-      - BOLDR__DB__URL=postgres://postgres:password@127.0.0.1:5432/boldr_test
-      - BOLDR__REDIS__URL=redis://127.0.0.1:6379
+      - BOLDR__DB__URL=postgres://postgres:password@database:5432/test
+      - BOLDR__REDIS__URL=redis://cache:6379
     commands:
-      - yarn global add node-gyp
       - yarn install --pure-lockfile
-      - yarn test
+      - sleep 15
+      - BOLDR__DB__URL=postgres://postgres:password@database:5432/test yarn run migrate:test
+      - BOLDR__DB__URL=postgres://postgres:password@database:5432/test yarn run seed:test
+      - BOLDR__DB__URL=postgres://postgres:password@database:5432/test BOLDR__REDIS__URL=redis://cache:6379 yarn run test:ci
 services:
   database:
-    image: strues/boldr-pg:0.1.0
-  redis:
+    image: postgres:9.6.3-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=test
+      - POSTGRES_PASSWORD=password
+  cache:
     image: strues/redis:3.2.8-alpine
     expose:
       - "6379"
