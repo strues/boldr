@@ -292,7 +292,8 @@ type RootMutation {
   # Sign up.
   registerUser(firstName: String!, lastName: String!, email: String!, password: String!, username: String!): User
   # Sign in.
-  loginUser(email: String!, password: String!): Auth
+  loginUser(email: String!, password: String!): Auth,
+  createArticle(title: String!, slug: String, excerpt: String, published: Boolean, backgroundImage: String, featureImage: String, content: String, rawContent: JSON, tags: [String]): Article
 }
 
 

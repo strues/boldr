@@ -12,6 +12,7 @@ import Menu from '../models/Menu';
 import MenuDetail from '../models/MenuDetail';
 import Setting from '../models/Setting';
 import Social from '../models/Social';
+import ArticlesConnector from './connectors/articles';
 import UsersConnector from './connectors/users';
 import {
   GraphQLEmail,
@@ -220,6 +221,25 @@ export default {
             });
 
             return { user: null, errors };
+          }
+
+          throw new Error(err);
+        });
+    },
+    createArticle(obj, args, context) {
+      const errors = [];
+      return ArticlesConnector.createArticle(args, context)
+        .then(newArticle => {
+          return newArticle;
+        })
+        .catch(err => {
+          if (err.code && err.message) {
+            errors.push({
+              key: err.code,
+              value: err.message,
+            });
+
+            return { article: null, errors };
           }
 
           throw new Error(err);

@@ -130,7 +130,7 @@ const mapDispatchToProps = dispatch => {
 };
 
 export { Wrapper, FooterWrapper };
-const SETTINGS_QUERY = gql`
+export const SETTINGS_QUERY = gql`
 query {
     settings {
       id,

@@ -1,20 +1,41 @@
-/* @fllow */
+/* @flow */
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { compose, graphql, gql } from 'react-apollo';
+import { Loader } from 'boldr-ui';
 import {
   selectSettings,
   selectSettingFromList,
 } from '../../../state/modules/boldr/settings';
 import Settings from './Settings';
 
-const mapStateToProps = state => {
-  return {
-    settings: selectSettings(state),
-    siteName: selectSettingFromList(state, 1),
-    siteUrl: selectSettingFromList(state, 2),
-    siteDescription: selectSettingFromList(state, 4),
-    siteLogo: selectSettingFromList(state, 3),
-    siteFav: selectSettingFromList(state, 5),
-  };
+type Props = {
+  data: Data,
 };
+type Data = {
+  settings: Array<Setting>,
+  loading: boolean,
+};
+export const SETTINGS_QUERY = gql`
+query {
+    settings {
+      id,
+      key,
+      value,
+      label,
+      description,
+    }
+}
+`;
 
-export default connect(mapStateToProps)(Settings);
+@graphql(SETTINGS_QUERY)
+export default class SettingsContainer extends Component {
+  props: Props;
+  render() {
+    const { loading, settings } = this.props.data;
+    if (loading) {
+      return <Loader />;
+    }
+    return <Settings settings={settings} />;
+  }
+}

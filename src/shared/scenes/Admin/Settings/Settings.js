@@ -6,17 +6,33 @@ import { HeaderPanel, SettingsPanel } from 'boldr-ui';
 import General from './components/General';
 
 type Props = {
-  siteName: Object,
-  siteUrl: Object,
-  siteLogo: Object,
-  siteDescription: Object,
-  siteFav: Object,
+  settings: Array<Setting>,
 };
-
+function filterSiteName(obj) {
+  return parseInt(obj.id, 10) === 1;
+}
+function filterSiteUrl(obj) {
+  return parseInt(obj.id, 10) === 2;
+}
+function filterSiteLogo(obj) {
+  return parseInt(obj.id, 10) === 3;
+}
+function filterSiteDescript(obj) {
+  return parseInt(obj.id, 10) === 4;
+}
+function filterSiteFav(obj) {
+  return parseInt(obj.id, 10) === 5;
+}
 class Settings extends PureComponent {
   props: Props;
 
   render() {
+    const { settings } = this.props;
+    const siteName = settings.find(filterSiteName);
+    const siteLogo = settings.find(filterSiteLogo);
+    const siteDescription = settings.find(filterSiteDescript);
+    const siteFavicon = settings.find(filterSiteFav);
+    const siteUrl = settings.find(filterSiteUrl);
     return (
       <div className="boldr-settings">
         <Helmet title="Admin: Settings" />
@@ -33,11 +49,11 @@ class Settings extends PureComponent {
             }
           />
           <General
-            siteName={this.props.siteName}
-            siteUrl={this.props.siteUrl}
-            siteLogo={this.props.siteLogo}
-            siteDescription={this.props.siteDescription}
-            siteFavicon={this.props.siteFav}
+            siteName={siteName}
+            siteUrl={siteUrl}
+            siteLogo={siteLogo}
+            siteDescription={siteDescription}
+            siteFavicon={siteFavicon}
           />
         </SettingsPanel>
       </div>
