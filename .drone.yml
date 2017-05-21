@@ -13,6 +13,7 @@ pipeline:
     environment:
       - BOLDR__DB__URL=postgres://postgres:password@database:5432/test
       - BOLDR__REDIS__URL=redis://cache:6379
+      - NODE_ENV=test
     commands:
       - yarn install --pure-lockfile
       - sleep 15
@@ -28,4 +29,3 @@ services:
       - POSTGRES_PASSWORD=password
   cache:
     image: redis
-
