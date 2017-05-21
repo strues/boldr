@@ -27,6 +27,5 @@ services:
       - POSTGRES_DB=test
       - POSTGRES_PASSWORD=password
   cache:
-    image: strues/redis:3.2.8-alpine
-    expose:
-      - "6379"
+    image: redis
+
