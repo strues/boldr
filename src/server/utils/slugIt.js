@@ -1,6 +1,6 @@
-export default function(string, replacement) {
+export default function(slug, replacement) {
   return (
-    string
+    slug
       .split('')
       .reduce((result, ch) => {
         // allowed

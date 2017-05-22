@@ -1,12 +1,11 @@
-import { Model } from 'boldr-orm';
+import { Model } from 'objection';
 
 // Related Model
 import MenuDetail from './MenuDetail';
+import BaseModel from './Base';
 
-class Menu extends Model {
-  static get tableName() {
-    return 'menu';
-  }
+class Menu extends BaseModel {
+  static tableName = 'menu';
   static addTimestamps = false;
   static get relationMappings() {
     return {

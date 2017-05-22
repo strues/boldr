@@ -11,15 +11,15 @@ pipeline:
   test:
     image: node:7.10
     environment:
-      - BOLDR__DB__URL=tcp://postgres:password@database:5432/test
-      - BOLDR__REDIS__URL=tcp://cache:6379
+      - BOLDR__DB__URL=postgres://postgres:password@database:5432/test
+      - BOLDR__REDIS__URL=redis://cache:6379
       - NODE_ENV=test
     commands:
       - yarn install --pure-lockfile
       - sleep 15
-      - BOLDR__DB__URL=tcp://postgres:password@database:5432/test yarn run migrate:test
-      - BOLDR__DB__URL=tcp://postgres:password@database:5432/test yarn run seed:test
-      - BOLDR__DB__URL=tcp://postgres:password@database:5432/test BOLDR__REDIS__URL=tcp://cache:6379 yarn run test
+      - BOLDR__DB__URL=postgres://postgres:password@database:5432/test yarn run migrate:test
+      - BOLDR__DB__URL=postgres://postgres:password@database:5432/test yarn run seed:test
+      - BOLDR__DB__URL=postgres://postgres:password@database:5432/test BOLDR__REDIS__URL=redis://cache:6379 yarn run test
 services:
   database:
     image: postgres:9.6.3-alpine

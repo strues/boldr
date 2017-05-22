@@ -99,6 +99,8 @@ module.exports.up = async db => {
     table.uuid('uuid').notNullable().defaultTo(db.raw('uuid_generate_v4()'));
     table.string('name').notNullable().unique();
     table.string('description').nullable();
+    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updatedAt').nullable().defaultTo(null);
 
     table.index('name');
   });
@@ -165,6 +167,8 @@ module.exports.up = async db => {
     table.string('label', 100).notNullable();
     table.string('value', 255).notNullable();
     table.string('description', 255).notNullable();
+    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updatedAt').nullable().defaultTo(null);
 
     table.index('key');
     table.index('value');
@@ -178,6 +182,8 @@ module.exports.up = async db => {
     table.string('safeName').notNullable();
     table.json('attributes').nullable();
     table.boolean('restricted').default(false);
+    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updatedAt').nullable().defaultTo(null);
 
     table.index('safeName');
     table.index('uuid');
@@ -199,6 +205,8 @@ module.exports.up = async db => {
     table.string('href').notNullable();
     table.string('icon').nullable();
     table.jsonb('children');
+    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updatedAt').nullable().defaultTo(null);
     table.index('safeName');
     table.index('uuid');
     table.index('href');
@@ -208,7 +216,8 @@ module.exports.up = async db => {
     table.increments('id').primary();
     table.uuid('articleId').unsigned().notNullable();
     table.integer('tagId').unsigned().notNullable();
-
+    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updatedAt').nullable().defaultTo(null);
     table.unique(['articleId', 'tagId']);
     table
       .foreign('articleId')
@@ -228,7 +237,8 @@ module.exports.up = async db => {
     table.increments('id').primary();
     table.uuid('userId').unsigned().notNullable();
     table.integer('roleId').unsigned().notNullable();
-
+    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updatedAt').nullable().defaultTo(null);
     table.unique(['userId', 'roleId']);
     table
       .foreign('userId')
@@ -251,6 +261,8 @@ module.exports.up = async db => {
       .notNullable()
       .references('id')
       .inTable('menu_detail');
+          table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updatedAt').nullable().defaultTo(null);
     table.primary(['menuId', 'menuDetailId']);
   });
 };

@@ -1,7 +1,7 @@
-import { Model } from 'boldr-orm';
+import { Model } from 'objection';
 import MenuDetail from '../MenuDetail';
 import Menu from '../Menu';
-
+import BaseModel from '../Base';
 /**
  * This is the join table connecting menus to menu details.
  *
@@ -9,11 +9,9 @@ import Menu from '../Menu';
  * @see ../MenuDetail
  * @extends ../BaseModel
  */
-class MenuMenuDetail extends Model {
-  static get tableName() {
-    return 'menu_menu_detail';
-  }
-  static addTimestamps = false;
+class MenuMenuDetail extends BaseModel {
+  static tableName = 'menu_menu_detail';
+  static addTimestamps = true;
 
   static get idColumn() {
     return ['menuId', 'menuDetailId'];

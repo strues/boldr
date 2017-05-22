@@ -1,10 +1,10 @@
-import { Model } from 'boldr-orm';
+import { Model } from 'objection';
 import Media from './Media';
 
-class MediaType extends Model {
-  static get tableName() {
-    return 'media_type';
-  }
+import BaseModel from './Base';
+
+class MediaType extends BaseModel {
+  static tableName = 'media_type';
   static addTimestamps = true;
 
   static get relationMappings() {

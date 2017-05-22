@@ -1,4 +1,4 @@
-import { Model } from 'boldr-orm';
+import { Model } from 'objection';
 import { slugIt } from '../utils';
 
 // Related Models
@@ -6,13 +6,14 @@ import Tag from './Tag';
 import User from './User';
 import Attachment from './Attachment';
 import Media from './Media';
+import BaseModel from './Base';
 
-class Article extends Model {
-  static get tableName() {
-    return 'article';
+class Article extends BaseModel {
+  static tableName = 'article';
+
+  static get softDelete() {
+    return true;
   }
-
-  static softDelete = true;
   static addTimestamps = true;
   static hidden = ['password'];
   static get idColumn() {

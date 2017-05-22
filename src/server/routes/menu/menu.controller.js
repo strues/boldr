@@ -5,7 +5,7 @@ import Menu from '../../models/Menu';
 
 export async function listMenu(req, res, next) {
   try {
-    const menus = await Menu.query().eager('[details]').skipUndefined();
+    const menus = await Menu.query();
 
     if (!menus) {
       return next(
@@ -23,7 +23,7 @@ export async function showMenu(req, res, next) {
   try {
     const menu = await Menu.query()
       .findById(req.params.id)
-      .eager('[details]')
+      .eager('details')
       .skipUndefined();
 
     return responseHandler(res, 200, menu);

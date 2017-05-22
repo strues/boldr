@@ -1,12 +1,11 @@
-import { Model } from 'boldr-orm';
+import { Model } from 'objection';
 // Related Model
 import User from './User';
 import UserRole from './join/UserRole';
+import BaseModel from './Base';
 
-class Role extends Model {
-  static get tableName() {
-    return 'role';
-  }
+class Role extends BaseModel {
+  static tableName = 'role';
   static addTimestamps = true;
   static hidden = ['password'];
   static jsonSchema = {

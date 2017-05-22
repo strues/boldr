@@ -54,6 +54,8 @@ module.exports.up = async db => {
       .inTable('media')
       .onDelete('cascade')
       .onUpdate('cascade');
+          table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updatedAt').nullable().defaultTo(null);
     table.primary(['articleId', 'mediaId']);
   });
 };

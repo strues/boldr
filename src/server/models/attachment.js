@@ -1,11 +1,10 @@
-import { Model } from 'boldr-orm';
+import { Model } from 'objection';
 // Related Models
 import User from './User';
+import BaseModel from './Base';
 
-class Attachment extends Model {
-  static get tableName() {
-    return 'attachment';
-  }
+class Attachment extends BaseModel {
+  static tableName = 'attachment';
   static addTimestamps = true;
   static get relationMappings() {
     return {

@@ -1,5 +1,5 @@
 /* eslint-disable id-match */ /* eslint-disable no-unused-vars */
-import { Model } from 'boldr-orm';
+import { Model } from 'objection';
 import Promise from 'bluebird';
 import Bcrypt from 'bcrypt';
 import _debug from 'debug';
@@ -12,6 +12,7 @@ import Article from './Article';
 import UserRole from './join/UserRole';
 import Media from './Media';
 import Social from './Social';
+import BaseModel from './Base';
 
 const bcrypt = Promise.promisifyAll(Bcrypt);
 const debug = _debug('boldr:server:models:user');
@@ -36,11 +37,11 @@ const debug = _debug('boldr:server:models:user');
  * @property {Date}     updatedAt
  * @property {Date}     deletedAt
  */
-class User extends Model {
-  static get tableName() {
-    return 'user';
+class User extends BaseModel {
+  static tableName = 'user';
+  static get softDelete() {
+    return true;
   }
-
   static get jsonSchema() {
     return {
       type: 'object',
@@ -74,7 +75,6 @@ class User extends Model {
     };
   }
   static addTimestamps = true;
-  static softDelete = true;
   /**
    * An array of attribute names that will be excluded from being returned.
    *

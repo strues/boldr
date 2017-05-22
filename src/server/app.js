@@ -5,14 +5,12 @@ import express from 'express';
 import _debug from 'debug';
 import { makeExecutableSchema } from 'graphql-tools';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
-import bodyParser from 'body-parser';
 import routes from './routes/index';
 import { expressMiddleware, authMiddleware, errorHandler } from './middleware';
 import ssrMiddleware from './ssr';
 import graphqlSchema from './graphql/schema';
 import graphqlResolvers from './graphql/resolvers';
 import config from './config';
-import User from './models/User';
 
 const debug = _debug('boldr:server:app');
 
@@ -34,7 +32,6 @@ app.use(
 
 app.use(
   '/api/v1/graphql',
-  bodyParser.json(),
   graphqlExpress(req => ({
     schema: graphqlSchema,
     // formatError,

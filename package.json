@@ -55,7 +55,7 @@
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
     "boldr-config": "^0.1.4",
-    "boldr-orm": "0.1.3",
+    "boldr-orm": "0.1.6",
     "boldr-ui": "^0.4.0-rc.6.1",
     "boldr-utils": "0.3.0",
     "classnames": "^2.2.5",
@@ -94,6 +94,7 @@
     "nodemailer": "^4.0.1",
     "normalizr": "^3.2.3",
     "objection": "next",
+    "objection-softdelete": "^1.0.1",
     "pg": "^6.2.2",
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
@@ -128,9 +129,9 @@
     "babel-code-frame": "^6.22.0",
     "babel-eslint": "7.2.3",
     "babel-jest": "^20.0.3",
-    "babel-preset-boldr": "^0.8.4",
+    "babel-preset-boldr": "^0.8.5",
     "babel-preset-env": "^1.5.0",
-    "boldr-dx": "^0.3.3",
+    "boldr-dx": "^0.3.4",
     "cross-env": "^5.0.0",
     "cz-conventional-changelog-emoji": "^0.1.0",
     "enzyme": "^2.8.2",
@@ -174,7 +175,6 @@
         "NODE_ENV": "development"
       }
     },
-
     "migration": {
       "command": "cross-env node --harmony internal/scripts/db.js migration",
       "env": {

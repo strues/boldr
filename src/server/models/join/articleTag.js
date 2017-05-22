@@ -1,7 +1,7 @@
-import { Model } from 'boldr-orm';
+import { Model } from 'objection';
 import Tag from '../Tag';
 import Article from '../Article';
-
+import BaseModel from '../Base';
 /**
  * This is the join table connecting tags to articles.
  *
@@ -9,12 +9,10 @@ import Article from '../Article';
  * @see ../Article
  * @extends ../BaseModel
  */
-class ArticleTag extends Model {
-  static get tableName() {
-    return 'article_tag';
-  }
+class ArticleTag extends BaseModel {
+  static tableName = 'article_tag';
 
-  static addTimestamps = false;
+  static addTimestamps = true;
 
   static get idColumn() {
     return ['articleId', 'tagId'];

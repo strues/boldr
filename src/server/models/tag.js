@@ -1,11 +1,10 @@
-import { Model } from 'boldr-orm';
+import { Model } from 'objection';
 // Related Model
 import Article from './Article';
+import BaseModel from './Base';
 
-class Tag extends Model {
-  static get tableName() {
-    return 'tag';
-  }
+class Tag extends BaseModel {
+  static tableName = 'tag';
   static addTimestamps = false;
 
   static jsonSchema = {

@@ -1,7 +1,7 @@
-import { Model } from 'boldr-orm';
+import { Model } from 'objection';
 import Role from '../Role';
 import User from '../User';
-
+import BaseModel from '../Base';
 /**
  * This is the join table connecting users to roles.
  *
@@ -11,9 +11,9 @@ import User from '../User';
  * @see ../User
  * @extends ../BaseModel
  */
-class UserRole extends Model {
+class UserRole extends BaseModel {
   static tableName = 'user_role';
-  static addTimestamps = false;
+  static addTimestamps = true;
   static jsonSchema = {
     type: 'object',
     required: ['userId', 'roleId'],

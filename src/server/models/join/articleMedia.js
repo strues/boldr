@@ -1,7 +1,7 @@
-import { Model } from 'boldr-orm';
+import { Model } from 'objection';
 import Media from '../Media';
 import Article from '../Article';
-
+import BaseModel from '../Base';
 /**
  * This is the join table connecting media to articles.
  *
@@ -9,12 +9,10 @@ import Article from '../Article';
  * @see ../Article
  * @extends ../BaseModel
  */
-class ArticleMedia extends Model {
-  static get tableName() {
-    return 'article_media';
-  }
+class ArticleMedia extends BaseModel {
+  static tableName = 'article_media';
 
-  static addTimestamps = false;
+  static addTimestamps = true;
 
   static get idColumn() {
     return ['articleId', 'mediaId'];

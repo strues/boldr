@@ -1,10 +1,9 @@
-import { Model } from 'boldr-orm';
+import { Model } from 'objection';
 import User from './User';
+import BaseModel from './Base';
 
-class ResetToken extends Model {
-  static get tableName() {
-    return 'reset_token';
-  }
+class ResetToken extends BaseModel {
+  static tableName = 'reset_token';
   static addTimestamps = true;
 
   static get relationMappings() {

@@ -13,7 +13,8 @@ module.exports.up = async (db) => {
     table.string('linkedinUrl', 255).nullable();
     table.string('googleUrl', 255).nullable();
     table.string('stackoverflowUrl', 255).nullable();
-
+    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updatedAt').nullable().defaultTo(null);
      // fk | uuid
     table
       .foreign('userId')
