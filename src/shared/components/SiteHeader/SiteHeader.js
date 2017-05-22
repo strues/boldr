@@ -118,7 +118,7 @@ class SiteHeader extends Component {
   renderMenuItems() {
     return (
       <ul className={cx('boldrui-sh__nav')} role="menubar">
-        {this.props.menu.map(detail => (
+        {this.props.details.map(detail => (
           <NavItem
             key={detail.uuid}
             detail={detail}

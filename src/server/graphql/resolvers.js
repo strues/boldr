@@ -128,6 +128,7 @@ export default {
     },
     mediaById(obj, args) {
       const { id } = args;
+
       debug('GraphQL.Resolvers.Query.mediaById', args);
       return Media.getMediaById(id).then(jsonResult);
     },

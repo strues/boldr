@@ -13,7 +13,7 @@ type Props = {
   closeDropdowns: () => void,
 };
 const DropdownListItem = ({ item, closeDropdowns }: Props) => (
-  <li className={cx('boldrui-sh__menu-dropdown-listitem')} role="menuitem">
+  <li className={cx('boldrui-sh__menu-dropdown-listitem')}>
     <NavLink className="dropdown-link" to={item.href} onClick={closeDropdowns}>
       <FontIcon
         className={cx('dropdown-link__icon')}

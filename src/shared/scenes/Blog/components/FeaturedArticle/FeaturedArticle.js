@@ -114,7 +114,7 @@ export const FeaturedArticle = (props: Props) => {
               <FlatButton
                 primary
                 label="Read More"
-                onTouchTap={transitionPost}
+                onClick={transitionPost}
               />
             </Link>
           </Row>

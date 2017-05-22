@@ -270,7 +270,7 @@ type RootQuery {
   articleBySlug(slug: String!): Article
   attachments(offset: Int!, limit: Int!): [Attachment]
   menus: [Menu]
-  menuById(id: Int!):[Menu]
+  menuById(id: Int!): [Menu]
   listMedia(offset: Int!, limit: Int!): [Media]
   mediaById(id: UUID!): Media
   mediaTypes: [MediaType]

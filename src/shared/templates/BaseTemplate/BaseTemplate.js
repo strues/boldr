@@ -1,20 +1,13 @@
 /* @flow */
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import { compose, graphql, gql } from 'react-apollo';
 import styled from 'styled-components';
-import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
 import { Footer, Loader } from 'boldr-ui';
 
-import {
-  fetchMainMenuIfNeeded,
-  selectSettings,
-  logout,
-  selectSettingFromList,
-  selectMe,
-} from '../../state';
-import SiteHeader from '../../components/SiteHeader';
+import { selectMe } from '../../state/modules/users/selectors';
+import SiteHeaderContainer
+  from '../../components/SiteHeader/SiteHeaderContainer';
 
 import type { ReactElement, ReactChildren } from '../../types/react';
 
@@ -23,15 +16,11 @@ type Props = {
   helmetMeta?: ReactElement,
   hero?: ReactElement,
   children: ReactChildren,
-  fetchMainMenuIfNeeded: () => void,
   footer?: ReactElement,
-  navigate: Function,
   dispatch: Function,
   actions: Object,
   me: ?User,
-  isMobile: Boolean,
-  ui: Object,
-  menu: Object,
+  isMobile: boolean,
   auth: Object,
   data: Object,
 };
@@ -59,39 +48,21 @@ const FooterWrapper = styled.div`
   margin-top: auto;
 `;
 
-class BaseTemplate extends PureComponent {
-  static defaultProps: {
-    fetchMainMenuIfNeeded: () => {},
-  };
-
-  componentDidMount() {
-    this.props.actions.fetchMainMenuIfNeeded();
-  }
-
-  handleProfileClick = () => {
-    this.props.navigate(`/profiles/${this.props.me.username}`);
-  };
-  handleLogoutClick = () => {
-    this.props.actions.logout();
-  };
+class BaseTemplate extends Component {
   props: Props;
   render() {
     if (this.props.data.loading) {
       return <Loader />;
     }
     return (
-      <Wrapper {...this.props}>
+      <Wrapper>
         {this.props.helmetMeta}
 
-        <SiteHeader
+        <SiteHeaderContainer
           auth={this.props.auth}
           me={this.props.me}
           settings={this.props.data.settings}
-          menu={this.props.menu.details}
-          items={this.props.menu.items}
           isMobile={this.props.isMobile}
-          handleProfileClick={this.handleProfileClick}
-          handleLogoutClick={this.handleLogoutClick}
         />
         {this.props.hero || null}
 
@@ -106,32 +77,18 @@ class BaseTemplate extends PureComponent {
     );
   }
 }
+
 const mapStateToProps = (state: Object) => {
   return {
     me: selectMe(state),
     auth: state.auth,
-    menu: state.boldr.menus.main,
     isMobile: state.boldr.ui.isMobile,
-  };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    actions: bindActionCreators(
-      {
-        logout,
-        fetchMainMenuIfNeeded,
-      },
-      dispatch,
-    ),
-    navigate: url => dispatch(push(url)),
-    dispatch,
   };
 };
 
 export { Wrapper, FooterWrapper };
 export const SETTINGS_QUERY = gql`
-query {
+  query {
     settings {
       id,
       key,
@@ -141,8 +98,6 @@ query {
     }
 }
 `;
-const BaseTemplateWithData = graphql(SETTINGS_QUERY)(BaseTemplate);
-// $FlowIssue
-export default connect(mapStateToProps, mapDispatchToProps)(
-  BaseTemplateWithData,
+export default compose(graphql(SETTINGS_QUERY), connect(mapStateToProps))(
+  BaseTemplate,
 );
