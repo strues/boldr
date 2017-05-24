@@ -67,6 +67,7 @@ export class ProfileContainer extends Component {
     }
     return (
       <BaseTemplate
+        bgImg={userByUsername.profileImage}
         helmetMeta={<Helmet title={`${userByUsername.username}'s Profile`} />}
       >
         <Profile profile={userByUsername} me={this.state.me} />

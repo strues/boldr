@@ -4,24 +4,21 @@ services:
   database:
     build: ./.boldr/db
     restart: always
-    tty: true
+    container_name: boldr_database
     environment:
-      - PGDATA=/var/lib/postgresql/data
+      - PGDATA=/var/lib/postgresql/data/pgdata
       - POSTGRES_PASSWORD=password
       - POSTGRES_USER=postgres
     ports:
       - "5432:5432"
-    expose:
-      - "5432"
     volumes:
-      - database_volume:/var/lib/postgresql/data
-    healthcheck:
-      test: exit 0
+      - database_volume:/var/lib/postgresql/data/pgdata
     networks:
       - boldr
 
   redis:
     image: strues/redis:3.2.8-alpine
+    container_name: boldr_redis
     restart: always
     read_only: false
     security_opt:
@@ -30,8 +27,6 @@ services:
       - redis_volume:/data:rw
     ports:
       - "6379:6379"
-    expose:
-      - "6379"
     networks:
       - boldr
 

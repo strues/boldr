@@ -28,8 +28,9 @@ export default app => {
       next();
     } else {
       const payload = req.isAuthenticated();
+      debug(payload);
       const user = await User.query()
-        .findById(payload.sub)
+        .findById(payload.subject)
         .eager('roles')
         .skipUndefined();
       req.session.user = user;

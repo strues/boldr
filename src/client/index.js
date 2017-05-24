@@ -18,7 +18,7 @@ import createApolloClient from '../shared/core/createApolloClient';
 import muiTheme from '../shared/templates/muiTheme';
 import configureStore from '../shared/state/store';
 import renderRoutes from '../shared/core/addRoutes';
-import routes from '../shared/routes';
+import Routes from '../shared/routes';
 import { checkAuth } from '../shared/scenes/Account/state/actions';
 import { getToken } from '../shared/core/authentication/token';
 import ReactHotLoader from './ReactHotLoader';
@@ -40,39 +40,58 @@ WebFontLoader.load({
 });
 
 const MOUNT_POINT = document.getElementById('app');
+// Load the JWT if it exists.
+// Get token will return null if it does not exist
 const token = getToken();
+
 // Does the user's browser support the HTML5 history API?
 // If the user's browser doesn't support the HTML5 history API then we
 // will force full page refreshes on each page change.
 const supportsHistory = 'pushState' in window.history;
-// Apollo browser client
+
+// Apollo network interface
 const networkInterface = createBatchingNetworkInterface({
   opts: {
     credentials: 'same-origin',
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
   },
   batchInterval: 20,
   uri: '/api/v1/graphql',
 });
+networkInterface.use([
+  {
+    applyBatchMiddleware(req, next) {
+      // If headers dont exist for some reason
+      // create them.
+      if (!req.options.headers) {
+        req.options.headers = {};
+      }
+
+      // Add our auth token to the headers
+      // Authorization: 'Bearer Token'
+      if (token) {
+        req.options.headers.authorization = `Bearer ${token}`;
+      }
+      next();
+    },
+  },
+]);
 const client = createApolloClient(networkInterface);
 const history = createHistory();
 const preloadedState = window.__APOLLO_STATE__;
 const store = configureStore(client, preloadedState, history);
 const { dispatch } = store;
 
-if (!!token) {
+if (token) {
   // Update application state. User has token and is probably authenticated
   dispatch(checkAuth(token));
 }
-function renderApp(Component) {
+function renderApp(passedRoutes) {
   render(
     <ReactHotLoader>
       <ApolloProvider store={store} client={client}>
         <ConnectedRouter history={history} forceRefresh={!supportsHistory}>
           <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
-            {renderRoutes(routes)}
+            {passedRoutes}
           </MuiThemeProvider>
         </ConnectedRouter>
       </ApolloProvider>
@@ -84,14 +103,14 @@ function renderApp(Component) {
 if (module.hot) {
   const reRenderApp = () => {
     try {
-      renderApp(require('../shared/components/App/App').default);
+      renderApp(require('../shared/routes').default);
     } catch (error) {
       const RedBox = require('redbox-react').default;
 
       render(<RedBox error={error} />, MOUNT_POINT);
     }
   };
-  module.hot.accept('../shared/components/App/App', () => {
+  module.hot.accept('../shared/routes', () => {
     setImmediate(() => {
       // Preventing the hot reloading error from react-router
       unmountComponentAtNode(MOUNT_POINT);
@@ -99,4 +118,4 @@ if (module.hot) {
     });
   });
 }
-renderApp();
+renderApp(<Routes />);

@@ -1,0 +1,11 @@
+.marginChildren {
+  & > *:not(:last-child) {
+    margin-bottom: 16px;
+  }
+}
+
+.marginChildrenRight {
+  & > *:not(:last-child) {
+    margin-right: 16px;
+  }
+}

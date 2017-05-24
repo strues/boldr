@@ -135,10 +135,10 @@ class SiteHeader extends Component {
     const menuElements = [];
     if (!this.props.auth.isAuthenticated) {
       menuElements.push(
-        <Link key="login" to="/account/login">
+        <Link key="login" to="/login">
           <Button>Log In</Button>
         </Link>,
-        <Link key="signup" to="/account/signup">
+        <Link key="signup" to="/signup">
           <Button theme="secondary">Signup</Button>
         </Link>,
       );

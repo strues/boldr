@@ -12,16 +12,9 @@ type Props = {
 const BASE_ELEMENT = StyleClasses.PROFILE;
 const Profile = ({ profile, me }: Props) => {
   const classes = classnames(BASE_ELEMENT);
-  const UserProfileBg = styled.div`
-      width: 100%;
-      height: 375px;
-      background-image: url(${profile.profileImage});
-      background-size: cover;
-    `;
 
   return (
     <div className={classes}>
-      <UserProfileBg />
       <Grid>
         <div className="profile__content">
           <Row>

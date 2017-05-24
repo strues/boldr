@@ -1,6 +1,9 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Switch from 'react-router-dom/Switch';
+import Route from 'react-router-dom/Route';
+import flatMapDeep from 'lodash/flatMapDeep';
 import {
   Grid,
   Sidebar,
@@ -13,8 +16,15 @@ import {
 import { selectMe, showHideSidebar, expandCollapseSideMenu } from '../../state';
 import renderRoutes from '../../core/addRoutes';
 import sidebarLinks from './sidebarLinks';
+import routes from './routes';
+import Breadcrumbs from './Breadcrumbs';
 
 type Props = {
+  flattenedRoutes: Array<{
+    path: string,
+    component: ReactElement<*>,
+    exact: boolean,
+  }>,
   children: any,
   dashboard: ?Object,
   me: Object,
@@ -27,7 +37,17 @@ type Props = {
   router: Object,
 };
 
+const flattenRoutes = topRoutes =>
+  flatMapDeep(topRoutes, ({ routes: nestedRoutes, ...other }) => [
+    other,
+    ...flattenRoutes(nestedRoutes),
+  ]);
+
 export class AdminDashboard extends Component {
+  constructor(props: Props) {
+    super(props);
+    (this: any).flattenedRoutes = flattenRoutes(routes);
+  }
   props: Props;
 
   handleHideSidebar = () => {
@@ -70,8 +90,13 @@ export class AdminDashboard extends Component {
           />
 
           <DashboardContent>
+          <Breadcrumbs location={this.props.location} />
             <Grid fluid>
-              {renderRoutes(route.routes)}
+              <Switch>
+                {this.flattenedRoutes.map(props => (
+                  <Route key={props.path} {...props} />
+                ))}
+              </Switch>
             </Grid>
           </DashboardContent>
 

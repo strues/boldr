@@ -9,6 +9,8 @@ import { selectMe } from '../../state/modules/users/selectors';
 import SiteHeaderContainer
   from '../../components/SiteHeader/SiteHeaderContainer';
 
+import type { ReactElement, ReactChildren } from '../../types/react';
+
 type Props = {
   header: ReactElement,
   helmetMeta?: ReactElement,
@@ -57,15 +59,18 @@ class BaseTemplate extends Component {
       return <Loader />;
     }
     return (
-      <Wrapper>
+      <Wrapper {...this.props}>
         {this.props.helmetMeta}
-        <Hero bgColor={this.props.bgColor} bgImg={this.props.bgImg}>
+        <Hero bgImg={ this.props.bgImg } bgColor={ this.props.bgColor }>
           <SiteHeaderContainer
             auth={this.props.auth}
             me={this.props.me}
             settings={this.props.data.settings}
             isMobile={this.props.isMobile}
           />
+          {
+            this.props.hero || null
+          }
         </Hero>
         <ContentWrapper>
           {this.props.children}

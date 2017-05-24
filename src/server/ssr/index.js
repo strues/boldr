@@ -19,7 +19,7 @@ import createApolloClient from '../../shared/core/createApolloClient';
 import configureStore from '../../shared/state/store';
 import muiTheme from '../../shared/templates/muiTheme';
 import renderRoutes from '../../shared/core/addRoutes';
-import routes from '../../shared/routes';
+import Routes from '../../shared/routes';
 import CreateHtml from './CreateHtml';
 
 const debug = require('debug')('boldr:ssrMW');
@@ -52,7 +52,7 @@ async function ssrMiddleware(req: $Request, res: $Response) {
     <StaticRouter location={req.url} context={routerContext}>
       <ApolloProvider store={store} client={client}>
         <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
-          {renderRoutes(routes)}
+          <Routes />
         </MuiThemeProvider>
       </ApolloProvider>
     </StaticRouter>

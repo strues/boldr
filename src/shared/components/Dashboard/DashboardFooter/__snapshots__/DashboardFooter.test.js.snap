@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DashboardFooter /> renders snapshot 1`] = `
+<footer
+  className="boldrui-dash-footer"
+>
+  <Grid
+    componentClass="div"
+    fluid={true}
+  >
+    <Row
+      componentClass="div"
+    >
+      <Col
+        componentClass="div"
+        md={8}
+        xs={12}
+      >
+        <span
+          className="boldrui-dash-footer-copyright"
+        >
+          widget
+        </span>
+      </Col>
+      <Col
+        componentClass="div"
+        md={4}
+        xs={12}
+      >
+        <span
+          className="boldrui-dash-footer-powered"
+        >
+          Powered by 
+          <a
+            href="https://boldr.io"
+          >
+            Boldr
+          </a>
+        </span>
+      </Col>
+    </Row>
+  </Grid>
+</footer>
+`;

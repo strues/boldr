@@ -6,7 +6,7 @@ import classnames from 'classnames';
 import { Grid, Row, Col, StyleClasses, Loader } from 'boldr-ui';
 import { gql, graphql } from 'react-apollo';
 import { ArticleSidebar, ArticleContent, ArticleTitle } from '../components';
-import BaseTemplate from '../../../templates/BaseTemplate';
+import BlogSingleTemplate from '../../../templates/BlogSingle';
 
 const BASE_ELEMENT = StyleClasses.SINGLE_POST;
 
@@ -29,9 +29,13 @@ class Article extends PureComponent {
     const { data: { articleBySlug }, className } = this.props;
     const classes = classnames(BASE_ELEMENT, className);
     return (
-      <BaseTemplate helmetMeta={<Helmet title={articleBySlug.title} />}>
+      <BlogSingleTemplate
+        bgImg={articleBySlug.featureImage}
+        articleTitle={articleBySlug.title}
+        helmetMeta={<Helmet title={articleBySlug.title} />}
+      >
         <div className={classes}>
-          {this.renderPostBg()}
+
           <Grid>
             <Row>
               <Col sm={12} md={8} lg={9}>
@@ -41,7 +45,7 @@ class Article extends PureComponent {
             </Row>
           </Grid>
         </div>
-      </BaseTemplate>
+      </BlogSingleTemplate>
     );
   };
 

@@ -5,9 +5,12 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Footer, Loader, Headline } from 'boldr-ui';
 import Hero from '../../components/Hero/Hero';
+import ArticleTitle from '../../scenes/Blog/components/ArticleTitle';
 import { selectMe } from '../../state/modules/users/selectors';
 import SiteHeaderContainer
   from '../../components/SiteHeader/SiteHeaderContainer';
+
+import type { ReactElement, ReactChildren } from '../../types/react';
 
 type Props = {
   header: ReactElement,
@@ -21,6 +24,9 @@ type Props = {
   isMobile: boolean,
   auth: Object,
   data: Object,
+  bgImg: ?string,
+  articleTitle: string,
+  bgColor: ?string,
 };
 
 const Wrapper = styled.div`
@@ -46,7 +52,7 @@ const FooterWrapper = styled.div`
   margin-top: auto;
 `;
 
-class BaseTemplate extends Component {
+class BlogSingleTemplate extends Component {
   static defaultProps = {
     bgColor: '#00b4d0',
   };
@@ -57,15 +63,16 @@ class BaseTemplate extends Component {
       return <Loader />;
     }
     return (
-      <Wrapper>
+      <Wrapper {...this.props}>
         {this.props.helmetMeta}
-        <Hero bgColor={this.props.bgColor} bgImg={this.props.bgImg}>
+        <Hero bgImg={this.props.bgImg} bgColor={this.props.bgColor}>
           <SiteHeaderContainer
             auth={this.props.auth}
             me={this.props.me}
             settings={this.props.data.settings}
             isMobile={this.props.isMobile}
           />
+          <ArticleTitle title={ this.props.articleTitle } />
         </Hero>
         <ContentWrapper>
           {this.props.children}
@@ -100,5 +107,5 @@ export const SETTINGS_QUERY = gql`
 }
 `;
 export default compose(graphql(SETTINGS_QUERY), connect(mapStateToProps))(
-  BaseTemplate,
+  BlogSingleTemplate,
 );

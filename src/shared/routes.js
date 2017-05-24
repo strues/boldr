@@ -1,15 +1,19 @@
-/* eslint-disable */
-import React from 'react';
-import { Loader } from 'boldr-ui';
-import type { Dispatch } from './types/redux';
+import './styles/main.scss';
+import React, { Component } from 'react';
+import classnames from 'classnames';
+import Helmet from 'react-helmet';
 
-import Loadable from './components/Loadable/Loadable';
-import App from './components/App';
+import { StyleClasses } from 'boldr-ui';
+import Notifications from './components/Notification';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import { getToken } from './core/authentication/token';
+import App from './components/App/App';
+import LoginContainer from './scenes/Account/Login';
+import AdminDashboard from './scenes/Admin/AdminDashboard';
 import Home from './pages/Home';
 import About from './pages/About';
 import Error404 from './pages/Error404';
 // Account
-import LoginContainer from './scenes/Account/Login/LoginContainer';
 import SignupContainer from './scenes/Account/Signup/SignupContainer';
 import ForgotPassword from './scenes/Account/ForgotPassword';
 import ResetPassword from './scenes/Account/ResetPassword';
@@ -22,197 +26,85 @@ import ProfileContainer from './scenes/Profile/ProfileContainer';
 import ArticleListingContainer
   from './scenes/Blog/ArticleListing/ArticleListingContainer';
 import Article from './scenes/Blog/Article/Article';
-import TagListContainer from './scenes/Blog/TagList/TagListContainer';
+import BlogContainer from './scenes/Blog/BlogContainer';
+import urls from './urls';
 
-// Admin
-import MediaManagerContainer
-  from './scenes/Admin/Media/MediaManager/MediaManagerContainer';
-import UploadMedia from './scenes/Admin/Media/UploadMedia';
-import ArticleEditor from './scenes/Admin/Content/ArticleEditor';
-import NewArticleContainer
-  from './scenes/Admin/Content/NewArticle/NewArticleContainer';
-import FileManagerContainer
-  from './scenes/Admin/FileManager/FileManagerContainer';
-import FileEditor from './scenes/Admin/FileManager/FileEditor';
-import NavigationContainer from './scenes/Admin/Navigation/NavigationContainer';
-import Members from './scenes/Admin/Members';
-import Settings from './scenes/Admin/Settings';
-import TagsContainer from './scenes/Admin/Content/Tags/TagsContainer';
-import TaggedPost
-  from './scenes/Admin/Content/Tags/components/TaggedPost/TaggedPost';
-import DashboardContainer from './scenes/Admin/Dashboard/DashboardContainer';
+const BASE_ELEMENT = StyleClasses.APP;
+// const RedirectBasedOffLoggedin = () => {
+//   if (hasAccessToken()) {
+//     debug('redirecting logged in user to home');
+//     return <Redirect to={urls.associatedEventsList()} />;
+//   }
+//   debug('redirecting logged out user to marketing home');
+//   return <Redirect to={urls.marketingHome()} />;
+// };
+export const hasAccessToken = () => {
+  const token = getToken();
+  return !!token;
+};
 
-function LoadingComponent({ error }) {
-  if (error) {
-    console.log(error);
-    return <p>Error: {error}</p>;
-  } else {
-    return <Loader />;
+const PrivateRoute = ({ store, component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      hasAccessToken
+        ? <Component {...props} />
+        : <Redirect
+            to={{
+              pathname: '/login',
+              state: { from: props.location },
+            }}
+          />}
+  />
+);
+
+export default class Routes extends Component {
+  render() {
+    const { className, route } = this.props;
+    const classes = classnames('boldr', BASE_ELEMENT, className);
+    return (
+      <div className={classes}>
+        <Helmet>
+          <html lang="en" />
+          <title>Boldr</title>
+          <meta name="application-name" content="Boldr" />
+          <meta name="description" content="A modern, bold take on a cms" />
+          <meta charSet="utf-8" />
+          <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta name="theme-color" content="#2b2b2b" />
+          <link rel="icon" sizes="16x16 32x32" href="/favicons/favicon.ico" />
+          <link
+            rel="apple-touch-icon-precomposed"
+            sizes="144x144"
+            href="/favicons/apple-touch-icon-144x144.png"
+          />
+
+          <meta name="msapplication-TileColor" content="#2b2b2b" />
+          <meta
+            name="msapplication-TileImage"
+            content="/favicons/mstile-144x144.png"
+          />
+          <link rel="manifest" href="/manifest.json" />
+        </Helmet>
+        <Switch>
+          <Route path="/login" component={LoginContainer} />
+          <Route path="/signup" component={SignupContainer} />
+          <Route path="/account/forgot-password" component={ForgotPassword} />
+          <Route
+            path="/account/reset-password/:token"
+            component={ResetPassword}
+          />
+          <Route path="/account/verify/:token" component={Verify} />
+          <Route path="/account/preferences" component={PreferencesContainer} />
+          <Route path="/profiles/:username" component={ProfileContainer} />
+          <Route path="/blog" component={BlogContainer} />
+          <PrivateRoute path="/admin" component={AdminDashboard} />
+          <Route path="/" exact render={Home} />
+          <Route component={Error404} />
+        </Switch>
+        <Notifications />
+      </div>
+    );
   }
 }
-const ArticlesContainer = Loadable({
-  // $FlowIssue
-  loader: () =>
-    import(
-      './scenes/Admin/Content/Articles/ArticlesContainer' /* webpackChunkName: "dashboard-articles" */,
-    ),
-  LoadingComponent,
-});
-const AdminDashboard = Loadable({
-  loader: () =>
-    import('./scenes/Admin/AdminDashboard' /* webpackChunkName: "dashboard" */),
-  LoadingComponent,
-});
-const MediaContainer = Loadable({
-  loader: () => import('./scenes/Admin/Media/MediaContainer'),
-  LoadingComponent,
-});
-
-export default [
-  {
-    component: App,
-    routes: [
-      {
-        path: '/',
-        exact: true,
-        component: Home,
-      },
-      {
-        path: '/about',
-        exact: true,
-        component: About,
-      },
-      {
-        path: '/blog',
-        exact: true,
-        component: ArticleListingContainer,
-      },
-      {
-        path: '/blog/:slug',
-        exact: true,
-        component: Article,
-      },
-      {
-        path: '/blog/tags/:name',
-        exact: true,
-        component: TagListContainer,
-      },
-      {
-        path: '/account/login',
-        exact: true,
-        component: LoginContainer,
-      },
-      {
-        path: '/account/signup',
-        exact: true,
-        component: SignupContainer,
-      },
-      {
-        path: '/account/forgot-password',
-        exact: true,
-        component: ForgotPassword,
-      },
-      {
-        path: '/account/reset-password/:token',
-        exact: true,
-        component: ResetPassword,
-      },
-      {
-        path: '/account/verify/:token',
-        exact: true,
-        component: Verify,
-      },
-      {
-        path: '/account/preferences',
-        component: PreferencesContainer,
-        exact: true,
-      },
-      {
-        path: '/profiles/:username',
-        component: ProfileContainer,
-      },
-      {
-        path: '/admin',
-        component: AdminDashboard,
-        auth: {
-          required: true,
-          redirect: '/account/login',
-          status: 307,
-        },
-        routes: [
-          {
-            path: '/admin/content/articles',
-            exact: true,
-            strict: true,
-            component: ArticlesContainer,
-          },
-          {
-            path: '/admin/content/articles/new',
-            exact: true,
-            component: NewArticleContainer,
-          },
-          {
-            path: '/admin/content/articles/:slug',
-            exact: true,
-            component: ArticleEditor,
-          },
-          {
-            path: '/admin/content/tags/:name',
-            exact: true,
-            component: TaggedPost,
-          },
-          {
-            path: '/admin/content/tags',
-            exact: true,
-            component: TagsContainer,
-          },
-          {
-            path: '/admin/filemanager',
-            exact: true,
-            component: FileManagerContainer,
-          },
-          {
-            path: '/admin/file-editor/:id',
-            exact: true,
-            component: FileEditor,
-          },
-          {
-            path: '/admin/navigation',
-            exact: true,
-            component: NavigationContainer,
-          },
-          {
-            path: '/admin/members',
-            exact: true,
-            component: Members,
-          },
-          {
-            path: '/admin/settings',
-            exact: true,
-            component: Settings,
-          },
-
-          {
-            path: '/admin/media',
-            exact: true,
-            component: MediaContainer,
-          },
-          {
-            path: '/admin/media/upload',
-            exact: true,
-            component: UploadMedia,
-          },
-          {
-            path: '/admin/media/:id',
-            exact: true,
-            component: MediaManagerContainer,
-          },
-        ],
-      },
-      {
-        path: '*',
-        component: Error404,
-      },
-    ],
-  },
-];
