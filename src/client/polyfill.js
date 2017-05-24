@@ -1,9 +1,5 @@
 /* eslint-disable */
 /* istanbul-ignore-next */
-if (!global.Promise) global.Promise = require('bluebird');
-/* istanbul-ignore-next */
-if (!global.fetch) global.fetch = require('isomorphic-fetch');
-/* istanbul-ignore-next */
 require('babel-runtime/core-js/promise').default = require('bluebird');
 /* istanbul-ignore-next */
 if (typeof window !== 'undefined') {

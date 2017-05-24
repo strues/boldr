@@ -3,19 +3,21 @@
 import React from 'react';
 
 type Props = {
-  htmlAttributes?: Object,
+  htmlAttributes: ?Object,
   headerElements?: number | string | ReactElement<*> | Array<any>,
   bodyElements?: number | string | ReactElement<*> | Array<any>,
   appBodyString?: string,
+  styledCss: ?Array<Object>,
 };
 
 function Html(props: Props) {
-  const { htmlAttributes, headerElements, bodyElements, appBodyString } = props;
+  const { htmlAttributes, headerElements, bodyElements, appBodyString, styledCss } = props;
 
   return (
     <html {...htmlAttributes}>
       <head>
         {headerElements}
+        {styledCss}
       </head>
       <body>
         <div id="app" dangerouslySetInnerHTML={{ __html: appBodyString }} />

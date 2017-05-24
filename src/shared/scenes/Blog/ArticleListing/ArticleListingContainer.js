@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { gql, graphql } from 'react-apollo';
+import { Loader } from 'boldr-ui';
 import { LAYOUTS } from '../../../core/constants';
 import { changeLayout, layoutSelector } from '../../../state/modules/boldr/ui';
 import BaseTemplate from '../../../templates/BaseTemplate';
@@ -30,6 +31,9 @@ export class ArticleListingContainer extends Component {
   };
   render() {
     const { articles, loading } = this.props.data;
+    if (loading) {
+      return <Loader />;
+    }
     return (
       <BaseTemplate helmetMeta={<Helmet title="Blog Posts" />}>
         {/* $FlowIssue */}

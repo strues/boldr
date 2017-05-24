@@ -6,10 +6,10 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Loader } from 'boldr-ui';
 import SiteHeader from './SiteHeader';
+import { logout } from '../../scenes/Account/state/actions';
 import {
   fetchMainMenuIfNeeded,
   selectSettings,
-  logout,
   selectSettingFromList,
   selectMe,
 } from '../../state';

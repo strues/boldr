@@ -1,7 +1,6 @@
 /* @flow */
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-// $FlowIssue
 import Dropzone from 'react-dropzone';
 import { Col, Row, Grid } from 'boldr-ui';
 import { BaseTemplate } from '../../../templates';

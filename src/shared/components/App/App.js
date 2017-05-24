@@ -3,6 +3,7 @@ import '../../styles/main.scss';
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import Helmet from 'react-helmet';
+
 import { StyleClasses } from 'boldr-ui';
 import Notifications from '../../components/Notification';
 import renderRoutes from '../../core/addRoutes';

@@ -1,12 +1,3 @@
-import {
-  authReducer,
-  doSignup,
-  doLogin,
-  logout,
-  checkAuth,
-  selectAuth,
-} from './auth';
-
 import entitiesReducer from './entities';
 
 import {
@@ -81,13 +72,6 @@ import {
 } from './notifications';
 
 export {
-  // auth
-  authReducer,
-  doSignup,
-  doLogin,
-  logout,
-  checkAuth,
-  selectAuth,
   // boldr
   boldrReducer,
   selectBoldr,

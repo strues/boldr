@@ -1,7 +1,9 @@
 import { push } from 'react-router-redux';
 import { api, API_PREFIX, setToken, removeToken } from '../../../core';
 import * as notif from '../../../core/constants';
-import { sendNotification } from '../notifications/notifications';
+import {
+  sendNotification,
+} from '../../../state/modules/notifications/notifications';
 import * as t from './actionTypes';
 
 /**
@@ -45,50 +47,18 @@ const signUpError = err => {
  * thunk action sending data to login a user
  * @param  {Object} formInput contains email & password from the userLoginForm
  */
-export function doLogin(formInput: userLoginFormInput) {
-  return dispatch => {
-    dispatch({ type: t.LOGIN_REQUEST });
-    return api
-      .post(`${API_PREFIX}/auth/login`, formInput)
-      .then(res => {
-        if (res.status !== 200) {
-          const errMsg = JSON.stringify(res.data.message.message);
-          dispatch({
-            type: t.LOGIN_FAILURE,
-            error: errMsg,
-          });
-          return dispatch(
-            sendNotification({
-              message: 'There was a problem logging you in.',
-              kind: 'error',
-              dismissAfter: 3000,
-            }),
-          );
-        }
-        setToken(res.data.token);
-        dispatch({
-          type: t.LOGIN_SUCCESS,
-          token: res.data.token,
-          user: res.data.user,
-        });
-        dispatch(sendNotification(notif.MSG_LOGIN_SUCCESS));
-        return dispatch(push('/'));
-      })
-      .catch(err => {
-        dispatch({
-          type: t.LOGIN_FAILURE,
-          error: err,
-        });
-        return dispatch(
-          sendNotification({
-            message: err,
-            kind: 'error',
-            dismissAfter: 3000,
-          }),
-        );
-      });
-  };
-}
+
+export const doLogin = token => {
+  console.log(token);
+  setToken(token);
+  dispatch({
+    type: t.LOGIN_SUCCESS,
+    token,
+  });
+  dispatch(sendNotification(notif.MSG_LOGIN_SUCCESS));
+  return dispatch(push('/'));
+};
+
 /**
   * LOGOUT ACTIONS
   * -------------------------
@@ -104,7 +74,22 @@ export function logout() {
     dispatch(sendNotification(notif.MSG_LOGOUT));
   };
 }
+export const loginUserRequest = ({ username }) => ({
+  type: t.LOGIN_REQUEST,
+  username,
+});
 
+export function loginUserSuccess(token) {
+  return {
+    type: t.LOGIN_SUCCESS,
+    token,
+  };
+}
+
+export const loginUserError = ({ error }) => ({
+  type: t.LOGIN_FAILURE,
+  error,
+});
 /**
   * AUTH CHECK ACTIONS
   * -------------------------

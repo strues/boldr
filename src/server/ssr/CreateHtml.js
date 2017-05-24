@@ -51,11 +51,12 @@ type Props = {
   reactAppString: string,
   nonce: string,
   preloadedState: Object,
+  styledCss: ?Array<any>,
   helmet: Head,
 };
 
 export default function CreateHtml(props: Props) {
-  const { reactAppString, nonce, preloadedState, helmet } = props;
+  const { reactAppString, nonce, preloadedState, helmet, styledCss } = props;
 
   // Creates an inline script definition that is protected by the nonce.
   const inlineScript = body => (
@@ -82,21 +83,15 @@ export default function CreateHtml(props: Props) {
     ifElse(isProd && clientAssets && clientAssets.app.css)(() =>
       createStyleElement(clientAssets.app.css),
     ),
+
     ...ifElse(helmet)(() => helmet.style.toComponent(), []),
   ]);
 
   const bodyElements = removeNil([
     // Places the Redux store data on the window available at
     // window.__PRELOADED_STATE__
-    inlineScript(
-      `window.__PRELOADED_STATE__=${serialize(props.preloadedState)};`,
-    ),
-    // Polyfill whatever the browser doesnt provide that is necessary
-    // for the application to run. Much lighter than using babel-polyfill
-    // and results in smaller bundles.
-    createScriptElement(
-      'https://cdn.polyfill.io/v2/polyfill.min.js?features=default,Symbol',
-    ),
+    inlineScript(`window.__APOLLO_STATE__=${serialize(preloadedState)};`),
+
     ifElse(isProd && clientAssets && clientAssets.common)(() =>
       createScriptElement(clientAssets.common.js),
     ),
@@ -106,7 +101,6 @@ export default function CreateHtml(props: Props) {
     ifElse(isDev)(() =>
       createScriptElement(`/assets/__vendor_dlls__.js?t=${uuid()}`),
     ),
-
     ifElse(clientAssets && clientAssets.app.js)(() =>
       createScriptElement(clientAssets.app.js),
     ),
@@ -119,6 +113,7 @@ export default function CreateHtml(props: Props) {
         () => helmet.htmlAttributes.toComponent(),
         null,
       )}
+      styledCss={styledCss}
       headerElements={headerElements.map((x, idx) => (
         <KeyedComponent key={idx}>{x}</KeyedComponent>
       ))}

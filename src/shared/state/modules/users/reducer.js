@@ -5,7 +5,7 @@ import {
   LOGIN_FAILURE,
   CHECK_AUTH_SUCCESS,
   LOGOUT,
-} from '../auth/actionTypes';
+} from '../../../scenes/Account/state/actionTypes';
 import * as t from './actionTypes';
 
 const isFetching = (state = false, action) => {
@@ -46,7 +46,6 @@ const INITIAL_STATE = {
 
 const me = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case LOGIN_SUCCESS:
     case CHECK_AUTH_SUCCESS:
       return {
         ...state,

@@ -12,9 +12,7 @@ export default app => {
   app.use((err, req, res, next) => {
     // eslint-disable-line no-unused-vars
     const statusCode = err.status || 500;
-
     const isValidationError = (err.error || {}) instanceof ValidationError;
-
     const stacktrace = app.get('env') === 'development'
       ? { stack: err.stack }
       : {};

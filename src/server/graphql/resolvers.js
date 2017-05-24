@@ -105,7 +105,6 @@ export default {
 
     articleById(obj, args) {
       debug('GraphQL.Resolvers.Query.articlesById');
-
       return Article.getArticleById(args.id).then(jsonResult);
     },
 
@@ -114,12 +113,14 @@ export default {
 
       return Article.getArticleBySlug(args.slug).then(jsonResult);
     },
+    // attachments
     attachments(obj, args) {
       const { offset, limit } = args;
       debug('GraphQL.Resolvers.Query.attachments');
 
       return Attachment.listAttachments(offset, limit).then(jsonResult);
     },
+    // media
     listMedia(obj, args) {
       const { offset, limit } = args;
       debug('GraphQL.Resolvers.Query.listMedia');

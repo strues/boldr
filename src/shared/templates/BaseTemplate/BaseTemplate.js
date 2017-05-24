@@ -3,13 +3,11 @@ import React, { Component } from 'react';
 import { compose, graphql, gql } from 'react-apollo';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { Footer, Loader } from 'boldr-ui';
-
+import { Footer, Loader, Headline } from 'boldr-ui';
+import Hero from '../../components/Hero/Hero';
 import { selectMe } from '../../state/modules/users/selectors';
 import SiteHeaderContainer
   from '../../components/SiteHeader/SiteHeaderContainer';
-
-import type { ReactElement, ReactChildren } from '../../types/react';
 
 type Props = {
   header: ReactElement,
@@ -49,6 +47,10 @@ const FooterWrapper = styled.div`
 `;
 
 class BaseTemplate extends Component {
+  static defaultProps = {
+    bgColor: '#00b4d0',
+  };
+
   props: Props;
   render() {
     if (this.props.data.loading) {
@@ -57,15 +59,14 @@ class BaseTemplate extends Component {
     return (
       <Wrapper>
         {this.props.helmetMeta}
-
-        <SiteHeaderContainer
-          auth={this.props.auth}
-          me={this.props.me}
-          settings={this.props.data.settings}
-          isMobile={this.props.isMobile}
-        />
-        {this.props.hero || null}
-
+        <Hero bgColor={this.props.bgColor}>
+          <SiteHeaderContainer
+            auth={this.props.auth}
+            me={this.props.me}
+            settings={this.props.data.settings}
+            isMobile={this.props.isMobile}
+          />
+        </Hero>
         <ContentWrapper>
           {this.props.children}
         </ContentWrapper>

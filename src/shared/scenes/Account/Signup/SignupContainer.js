@@ -1,7 +1,7 @@
 // @flow
 import { connect } from 'react-redux';
 
-import { doSignup } from '../../../state';
+import { doSignup } from '../state';
 import Signup from './Signup';
 
 const mapDispatchToProps = dispatch => {
@@ -11,5 +11,5 @@ const mapDispatchToProps = dispatch => {
     },
   };
 };
-
+// $FlowIssue
 export default connect(null, mapDispatchToProps)(Signup);

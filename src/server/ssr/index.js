@@ -9,11 +9,14 @@ import StaticRouter from 'react-router-dom/StaticRouter';
 import Helmet from 'react-helmet';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import styleSheet from 'styled-components/lib/models/StyleSheet';
+
+import { ServerStyleSheet } from 'styled-components';
+
 import { ApolloProvider, getDataFromTree } from 'react-apollo';
-import { serverClient } from '../../shared/core/apollo';
+import { createBatchingNetworkInterface } from 'apollo-client';
+
+import createApolloClient from '../../shared/core/createApolloClient';
 import configureStore from '../../shared/state/store';
-import App from '../../shared/components/App';
 import muiTheme from '../../shared/templates/muiTheme';
 import renderRoutes from '../../shared/core/addRoutes';
 import routes from '../../shared/routes';
@@ -27,12 +30,19 @@ async function ssrMiddleware(req: $Request, res: $Response) {
   }
 
   global.navigator = { userAgent: req.headers['user-agent'] };
-
+  let networkInterface = createBatchingNetworkInterface({
+    uri: 'http://localhost:3000/api/v1/graphql',
+    opts: {
+      credentials: 'same-origin',
+      headers: req.headers,
+    },
+    batchInterval: 20,
+  });
+  const preloadedState = {};
   // Create a new server Apollo client for this request
-  const client = serverClient();
-  const history = createHistory({ initialEntries: [req.url] });
-  const store = configureStore(client, {}, history);
-
+  const client = createApolloClient(networkInterface);
+  const history = createHistory();
+  const store = configureStore(client, preloadedState, history);
   // Create context for React Router
   const routerContext = {};
   // Generate the HTML from our React tree.  We're wrapping the result
@@ -47,47 +57,39 @@ async function ssrMiddleware(req: $Request, res: $Response) {
       </ApolloProvider>
     </StaticRouter>
   );
-  await getDataFromTree(appComponent)
-    .then(() => {
-      // Checking is page is 404
-      const status = routerContext.status === '404' ? 404 : 200;
-      // Render our application to a string for the first time
-      const reactAppString = renderToString(appComponent);
-      const helmet = Helmet.renderStatic();
-      const preloadedState = store.getState();
-      const styledStyles = styleSheet
-        .rules()
-        .map(rule => rule.cssText)
-        .join('\n');
+  await getDataFromTree(appComponent);
 
-      // render styled-components styleSheets to string.
-      // Render the application to static HTML markup
-      const html = renderToStaticMarkup(
-        // $FlowIssue
-        <CreateHtml
-          reactAppString={reactAppString}
-          nonce={res.locals.nonce}
-          helmet={helmet}
-          styles={styledStyles}
-          preloadedState={preloadedState}
-        />,
-      );
-      // Check if the render result contains a redirect, if so we need to set
-      // the specific status and redirect header and end the response
-      if (routerContext.url) {
-        res.writeHead(301, {
-          Location: routerContext.url,
-        });
-        res.end();
-
-        return;
-      }
-      // Pass the route and initial state into html template
-      return res.status(status).send(`<!DOCTYPE html>${html}`);
-    })
-    .catch(err => {
-      debug(`💩  Ran into issues rendering routes: ${err}`);
-      return res.status(500).send(`Ran into a few issues: ${err}`);
+  const sheet = new ServerStyleSheet();
+  const reactAppString = renderToString(sheet.collectStyles(appComponent));
+  const css = sheet.getStyleElement();
+  if (routerContext.url) {
+    res.writeHead(301, {
+      Location: routerContext.url,
     });
+    res.end();
+  }
+  // Checking is page is 404
+  const status = routerContext.status === '404' ? 404 : 200;
+  // Render our application to a string for the first time
+
+  const helmet = Helmet.renderStatic();
+  const finalState = store.getState();
+  // render styled-components styleSheets to string.
+  // Render the application to static HTML markup
+  const html = renderToStaticMarkup(
+    // $FlowIssue
+    <CreateHtml
+      reactAppString={reactAppString}
+      nonce={res.locals.nonce}
+      helmet={helmet}
+      styledCss={css}
+      preloadedState={finalState}
+    />,
+  );
+  // Check if the render result contains a redirect, if so we need to set
+  // the specific status and redirect header and end the response
+
+  // Pass the route and initial state into html template
+  return res.status(status).send(`<!DOCTYPE html>${html}`);
 }
 export default ssrMiddleware;

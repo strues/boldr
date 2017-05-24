@@ -87,7 +87,6 @@ export async function createArticle(req, res, next) {
           .skipUndefined();
       }
     });
-
     const relatedFeatureImg = await Media.query()
       .where('url', req.body.featureImage)
       .first()

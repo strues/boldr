@@ -6,7 +6,9 @@ module.exports = {
     NODE_ENV: process.env.NODE_ENV,
     BOLDR__SERVER_PORT: process.env.BOLDR__SERVER_PORT,
     BOLDR__DEV_PORT: process.env.BOLDR__DEV_PORT,
+    BOLDR__DEBUG: process.env.BOLDR__DEBUG,
   },
+  // plugins: [require('boldr-plugin-webpack')],
   bundle: {
     verbose: true,
     debug: false,

@@ -24,7 +24,6 @@ export default app => {
         return false;
       }
     };
-
     if (!req.isAuthenticated()) {
       next();
     } else {

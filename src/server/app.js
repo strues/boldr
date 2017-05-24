@@ -15,8 +15,7 @@ import config from './config';
 const debug = _debug('boldr:server:app');
 
 const app: express$Application = express();
-// Base Express middleware
-// body-parser, method-override, busboy, cors
+// Base Express middleware - body-parser, method-override, cors
 expressMiddleware(app);
 // Session middleware, authentication check, rbac
 authMiddleware(app);
@@ -34,7 +33,6 @@ app.use(
   '/api/v1/graphql',
   graphqlExpress(req => ({
     schema: graphqlSchema,
-    // formatError,
     context: {
       user: req.user ? req.user : null,
     },

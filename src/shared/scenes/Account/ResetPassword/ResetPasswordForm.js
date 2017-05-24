@@ -2,9 +2,10 @@
 
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import Button from 'boldr-ui/lib/components/Button';
+
 import InputField from 'boldr-ui/lib/components/Form/Fields/InputField';
 import Form from 'boldr-ui/lib/components/Form/Form';
+import Button from '../../../components/Button';
 
 const style = {
   margin: 12,

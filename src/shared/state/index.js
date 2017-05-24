@@ -1,11 +1,4 @@
 import {
-  // auth
-  authReducer,
-  doSignup,
-  doLogin,
-  logout,
-  checkAuth,
-  selectAuth,
   // boldr
   boldrReducer,
   selectBoldr,
@@ -78,13 +71,6 @@ import configureStore from './store';
 export {
   rootReducer,
   configureStore,
-  // auth
-  authReducer,
-  doSignup,
-  doLogin,
-  logout,
-  checkAuth,
-  selectAuth,
   // boldr
   boldrReducer,
   selectBoldr,

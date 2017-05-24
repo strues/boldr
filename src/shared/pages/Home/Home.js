@@ -10,17 +10,6 @@ const Home = () => {
     <div>
       <BaseTemplate
         helmetMeta={<Helmet title="Home" />}
-        hero={
-          <Hero bgColor="#00b4d0">
-            <Headline type="h1">
-              A
-              {' '}
-              <span style={{ color: 'rgb(229, 0, 80)' }}>modern</span>
-              {' '}
-              Content Management Framework.
-            </Headline>
-          </Hero>
-        }
         footer={<Footer />}
       >
         <Grid>

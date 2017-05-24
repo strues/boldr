@@ -22,7 +22,6 @@ export function checkPermissions({ role = null }) {
     return next();
   };
 }
-
 /**
  * This checks to make sure that the user has a given role.
  *

@@ -9,7 +9,6 @@ import { mainRedisClient } from '../services/redis';
 import config from '../config';
 
 const RedisStore = require('connect-redis')(session);
-
 const env = process.env.NODE_ENV || 'development';
 const sessionOptions = {
   secret: config.token.secret,

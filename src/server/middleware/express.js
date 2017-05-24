@@ -35,11 +35,9 @@ export default app => {
     res.set('Request-Id', uuid());
     next();
   });
+
   app.use(cookieParser(config.token.secret));
-  if (
-    process.env.NODE_ENV === 'development' ||
-    process.env.NODE_ENV === 'test'
-  ) {
+  if (process.env.NODE_ENV !== 'production') {
     app.use(morgan('dev'));
   }
   app.use(compression());
@@ -56,6 +54,7 @@ export default app => {
       next();
     },
   );
+
   app.use(expressValidator());
   app.use(
     methodOverride((req, res) => {
@@ -67,6 +66,7 @@ export default app => {
       }
     }),
   );
+
   app.use(responseTime());
   app.use(hpp());
   app.use((err, req, res, next) => {
