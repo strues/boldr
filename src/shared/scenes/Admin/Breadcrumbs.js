@@ -1,3 +1,4 @@
+/* @flow */
 import React from 'react';
 import matchPath from 'react-router-dom/matchPath';
 import Breadcrumb from '../../components/Breadcrumb';

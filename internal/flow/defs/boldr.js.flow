@@ -167,10 +167,11 @@ declare interface userLoginFormInput {
 }
 
 declare type AuthToken = {
-  iss: string,
-  sub: string,
+  issuer: string,
+  subject: string,
+  algorithms: Array<string>,
   iat: ?number,
-  exp: number,
+  expiresIn: string | number,
   email: string,
   role: string,
 };

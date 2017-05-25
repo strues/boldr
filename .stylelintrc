@@ -25,6 +25,6 @@
         "selector-no-vendor-prefix": true,
         "media-feature-name-no-vendor-prefix": true,
         "media-feature-colon-space-after": "always",
-    "unit-whitelist": ["em", "rem", "deg", "vh", "px", "%", "s"]
+    "unit-whitelist": ["em", "rem", "ms", "deg", "vh", "px", "%", "s"]
   }
 }

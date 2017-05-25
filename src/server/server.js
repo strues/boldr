@@ -45,4 +45,17 @@ process.on('uncaughtException', error => {
   process.exit(1);
 });
 
+if (module.hot) {
+  module.hot.dispose(() => {
+    try {
+      if (server) {
+        server.close();
+      }
+    } catch (error) {
+      logger.error(error.stack);
+    }
+  });
+  module.hot.accept();
+}
+
 export default server;

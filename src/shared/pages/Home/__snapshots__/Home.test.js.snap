@@ -2,7 +2,7 @@
 
 exports[`<Home /> renders snapshot 1`] = `
 <div>
-  <Connect(Apollo(BaseTemplate))
+  <Apollo(Connect(BaseTemplate))
     footer={
       <Footer
         single={false}
@@ -14,29 +14,7 @@ exports[`<Home /> renders snapshot 1`] = `
         title="Home"
       />
     }
-    hero={
-      <Hero
-        bgColor="#00b4d0"
-      >
-        <Headline
-          type="h1"
-        >
-          A
-           
-          <span
-            style={
-              Object {
-                "color": "rgb(229, 0, 80)",
-              }
-            }
-          >
-            modern
-          </span>
-           
-          Content Management Framework.
-        </Headline>
-      </Hero>
-    }
+    heroContent={<HomeHero />}
   >
     <Grid
       componentClass="div"
@@ -99,6 +77,6 @@ exports[`<Home /> renders snapshot 1`] = `
         </Col>
       </Row>
     </Grid>
-  </Connect(Apollo(BaseTemplate))>
+  </Apollo(Connect(BaseTemplate))>
 </div>
 `;

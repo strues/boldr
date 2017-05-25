@@ -34,6 +34,10 @@ $header-font-case: none !default;
 $md-badge-include-default: true;
 $md-list-include-inline: true;
 
+/// Misc
+/// @group misc
+$speed: 86ms !default;
+$easing: ease-out !default;
 /// Options
 /// @group options
 $border-width: 1px;
@@ -52,7 +56,13 @@ $btn-line-height: 1.25 !default;
 $input-btn-border-width: $border-width !default;
 $btn-padding-x: 1rem !default;
 $btn-padding-y: 0.5rem !default;
-
+// $tablet: 769px !default
+// // 960px container + 40px
+// $desktop: 1000px !default
+// // 1152px container + 40
+// $widescreen: 1192px !default
+// // 1344px container + 40
+// $fullhd: 1384px !default
 /// The default transition time to use on most animations/transitions.
 /// @type Number
 /// @group transitions

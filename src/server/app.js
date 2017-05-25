@@ -45,6 +45,7 @@ app.use(
   '/uploads',
   express.static(pathResolve(config.bundle.publicDir, './uploads')),
 );
+
 // Setup the public directory so that we can serve static assets.
 app.use(express.static(config.bundle.publicDir));
 // Pass any get request through the SSR middleware before sending it back
@@ -52,4 +53,4 @@ app.get('*', ssrMiddleware);
 // Catch and format errors
 errorHandler(app);
 
-export default app; // eslint-disable-line
+export default app;

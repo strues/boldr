@@ -1,0 +1,39 @@
+
+$breadcrumb-padding-y:          .75rem !default;
+$breadcrumb-padding-x:          1rem !default;
+$breadcrumb-item-padding:       .5rem !default;
+
+$breadcrumb-bg:                 $cloud !default;
+$breadcrumb-divider-color:      $gray-light !default;
+$breadcrumb-active-color:       $gray-light !default;
+$breadcrumb-divider:            "/" !default;
+
+.boldrui-breadcrumb {
+  padding: $breadcrumb-padding-y $breadcrumb-padding-x;
+  margin-bottom: 1rem;
+  list-style: none;
+  background-color: $breadcrumb-bg;
+  @include clearfix;
+}
+
+.boldrui-breadcrumb__item {
+  float: left;
+
+  + .boldrui-breadcrumb__item:before {
+    display: inline-block;
+    padding-right: $breadcrumb-item-padding;
+    padding-left: $breadcrumb-item-padding;
+    color: $breadcrumb-divider-color;
+    content: "#{$breadcrumb-divider}";
+  }
+  + .boldrui-breadcrumb__item:hover:before {
+    text-decoration: underline;
+  }
+  + .boldrui-breadcrumb__item:hover:before {
+    text-decoration: none;
+  }
+
+  &.active {
+    color: $breadcrumb-active-color;
+  }
+}

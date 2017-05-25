@@ -3,7 +3,7 @@
 import './polyfill';
 
 import React from 'react';
-import { render, unmountComponentAtNode } from 'react-dom';
+import ReactDOM from 'react-dom';
 import createHistory from 'history/createBrowserHistory';
 import ConnectedRouter from 'react-router-redux/ConnectedRouter';
 import WebFontLoader from 'webfontloader';
@@ -17,8 +17,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 import createApolloClient from '../shared/core/createApolloClient';
 import muiTheme from '../shared/templates/muiTheme';
 import configureStore from '../shared/state/store';
-import renderRoutes from '../shared/core/addRoutes';
-import Routes from '../shared/routes';
+import App from '../shared/App';
 import { checkAuth } from '../shared/scenes/Account/state/actions';
 import { getToken } from '../shared/core/authentication/token';
 import ReactHotLoader from './ReactHotLoader';
@@ -85,13 +84,13 @@ if (token) {
   // Update application state. User has token and is probably authenticated
   dispatch(checkAuth(token));
 }
-function renderApp(passedRoutes) {
-  render(
+function renderApp(passedApp) {
+  ReactDOM.render(
     <ReactHotLoader>
       <ApolloProvider store={store} client={client}>
         <ConnectedRouter history={history} forceRefresh={!supportsHistory}>
           <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
-            {passedRoutes}
+            {passedApp}
           </MuiThemeProvider>
         </ConnectedRouter>
       </ApolloProvider>
@@ -101,21 +100,9 @@ function renderApp(passedRoutes) {
 }
 
 if (module.hot) {
-  const reRenderApp = () => {
-    try {
-      renderApp(require('../shared/routes').default);
-    } catch (error) {
-      const RedBox = require('redbox-react').default;
-
-      render(<RedBox error={error} />, MOUNT_POINT);
-    }
-  };
-  module.hot.accept('../shared/routes', () => {
-    setImmediate(() => {
-      // Preventing the hot reloading error from react-router
-      unmountComponentAtNode(MOUNT_POINT);
-      reRenderApp();
-    });
+  module.hot.accept('../shared/App', () => {
+    const NewApp = require('../shared/App').default;
+    renderApp(<NewApp />);
   });
 }
-renderApp(<Routes />);
+renderApp(<App />);

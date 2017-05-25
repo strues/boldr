@@ -38,7 +38,8 @@ const ContentWrapper = styled.section`
   box-sizing: border-box;
   position: relative;
   margin: 0 auto;
-  padding-bottom: 250px;
+  padding-top: 50px;
+  padding-bottom: 150px;
   background-color: #e5eaed;
 `;
 
@@ -66,6 +67,7 @@ class BaseTemplate extends Component {
             settings={this.props.data.settings}
             isMobile={this.props.isMobile}
           />
+          {this.props.heroContent}
         </Hero>
         <ContentWrapper>
           {this.props.children}

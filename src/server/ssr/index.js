@@ -9,8 +9,7 @@ import StaticRouter from 'react-router-dom/StaticRouter';
 import Helmet from 'react-helmet';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-
-import { ServerStyleSheet } from 'styled-components';
+import styleSheet from 'styled-components/lib/models/StyleSheet';
 
 import { ApolloProvider, getDataFromTree } from 'react-apollo';
 import { createBatchingNetworkInterface } from 'apollo-client';
@@ -18,8 +17,7 @@ import { createBatchingNetworkInterface } from 'apollo-client';
 import createApolloClient from '../../shared/core/createApolloClient';
 import configureStore from '../../shared/state/store';
 import muiTheme from '../../shared/templates/muiTheme';
-import renderRoutes from '../../shared/core/addRoutes';
-import Routes from '../../shared/routes';
+import App from '../../shared/App';
 import CreateHtml from './CreateHtml';
 
 const debug = require('debug')('boldr:ssrMW');
@@ -52,16 +50,15 @@ async function ssrMiddleware(req: $Request, res: $Response) {
     <StaticRouter location={req.url} context={routerContext}>
       <ApolloProvider store={store} client={client}>
         <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
-          <Routes />
+          <App />
         </MuiThemeProvider>
       </ApolloProvider>
     </StaticRouter>
   );
   await getDataFromTree(appComponent);
 
-  const sheet = new ServerStyleSheet();
-  const reactAppString = renderToString(sheet.collectStyles(appComponent));
-  const css = sheet.getStyleElement();
+  const reactAppString = renderToString(appComponent);
+  const css = styleSheet.rules().map(rule => rule.cssText).join('\n');
   if (routerContext.url) {
     res.writeHead(301, {
       Location: routerContext.url,

@@ -9,7 +9,6 @@ import Attachment from './Attachment';
 import ResetToken from './ResetToken';
 import VerificationToken from './VerificationToken';
 import Article from './Article';
-import UserRole from './join/UserRole';
 import Media from './Media';
 import Social from './Social';
 import BaseModel from './Base';
@@ -81,7 +80,7 @@ class User extends BaseModel {
    * @type {array}
    */
   static hidden = [];
-    /**
+  /**
    * Before updating make sure we hash the password if provided.
    *
    * @param {object} queryContext

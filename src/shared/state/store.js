@@ -15,13 +15,6 @@ export default function configureStore(apolloClient, preloadedState, history) {
   ];
 
   const enhancers = [applyMiddleware(...middleware)];
-  // Here we only want to include redux-logger during development.
-  /* istanbul ignore next */
-  if (process.env.NODE_ENV === `development`) {
-    const { logger } = require(`redux-logger`);
-    middleware.push(logger);
-  }
-
   /* istanbul ignore next */
   const devEnhancers = process.env.NODE_ENV !== 'production' &&
     inBrowser &&

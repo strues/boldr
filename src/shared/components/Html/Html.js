@@ -17,7 +17,6 @@ function Html(props: Props) {
     <html {...htmlAttributes}>
       <head>
         {headerElements}
-        {styledCss}
       </head>
       <body>
         <div id="app" dangerouslySetInnerHTML={{ __html: appBodyString }} />

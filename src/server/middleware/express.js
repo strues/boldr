@@ -4,9 +4,7 @@ import methodOverride from 'method-override';
 import cookieParser from 'cookie-parser';
 import expressValidator from 'express-validator';
 import morgan from 'morgan';
-import flash from 'express-flash';
 import cors from 'cors';
-import responseTime from 'response-time';
 import hpp from 'hpp';
 import uuid from 'uuid/v4';
 import config from '../config';
@@ -66,8 +64,6 @@ export default app => {
       }
     }),
   );
-
-  app.use(responseTime());
   app.use(hpp());
   app.use((err, req, res, next) => {
     if (err && (!next || res.headersSent)) {
@@ -75,5 +71,4 @@ export default app => {
     }
     res.sendStatus(500);
   });
-  app.use(flash());
 };

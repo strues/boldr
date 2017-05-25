@@ -21,6 +21,10 @@
   @media (min-width: 992px) {
     padding: 20px 20px;
     font-size: 16px;
+
+    &:hover {
+      color: #fff;
+    }
   }
 }
 

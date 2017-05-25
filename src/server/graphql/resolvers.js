@@ -107,7 +107,6 @@ export default {
       debug('GraphQL.Resolvers.Query.articlesById');
       return Article.getArticleById(args.id).then(jsonResult);
     },
-
     articleBySlug(obj, args) {
       debug('GraphQL.Resolvers.Query.articleBySlug');
 

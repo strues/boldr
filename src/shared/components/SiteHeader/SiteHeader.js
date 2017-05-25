@@ -147,7 +147,7 @@ class SiteHeader extends Component {
       menuElements.push(
         <Link key="dash" to="/admin">
           <IconButton tooltip="dashboard">
-            <Icon kind="dashboard" color="#00bcd4" />
+            <Icon kind="dashboard" color="#2d343c" />
           </IconButton>
         </Link>,
       );

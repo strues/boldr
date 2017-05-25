@@ -1,0 +1,278 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Accordion different className 1`] = `
+<div
+  className="testCSSClass"
+>
+  <AccordionItem
+    accordion={false}
+    className="boldrui-accordion__item"
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </AccordionItem>
+  <AccordionItem
+    accordion={false}
+    className="boldrui-accordion__item"
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </AccordionItem>
+</div>
+`;
+
+exports[`Accordion handleClick function accordion false 1`] = `
+<div
+  className="boldrui-accordion"
+>
+  <AccordionItem
+    accordion={false}
+    className="boldrui-accordion__item"
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </AccordionItem>
+  <AccordionItem
+    accordion={false}
+    className="boldrui-accordion__item"
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </AccordionItem>
+</div>
+`;
+
+exports[`Accordion handleClick function accordion false 2`] = `
+<div
+  className="boldrui-accordion"
+>
+  <AccordionItem
+    accordion={false}
+    className="boldrui-accordion__item"
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </AccordionItem>
+  <AccordionItem
+    accordion={false}
+    className="boldrui-accordion__item"
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </AccordionItem>
+</div>
+`;
+
+exports[`Accordion handleClick function accordion false 3`] = `
+<div
+  className="boldrui-accordion"
+>
+  <AccordionItem
+    accordion={false}
+    className="boldrui-accordion__item"
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </AccordionItem>
+  <AccordionItem
+    accordion={false}
+    className="boldrui-accordion__item"
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </AccordionItem>
+</div>
+`;
+
+exports[`Accordion handleClick function accordion true 1`] = `
+<div
+  className="boldrui-accordion"
+>
+  <AccordionItem
+    accordion={true}
+    className="boldrui-accordion__item"
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </AccordionItem>
+  <AccordionItem
+    accordion={true}
+    className="boldrui-accordion__item"
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </AccordionItem>
+</div>
+`;
+
+exports[`Accordion handleClick function accordion true 2`] = `
+<div
+  className="boldrui-accordion"
+>
+  <AccordionItem
+    accordion={true}
+    className="boldrui-accordion__item"
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </AccordionItem>
+  <AccordionItem
+    accordion={true}
+    className="boldrui-accordion__item"
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </AccordionItem>
+</div>
+`;
+
+exports[`Accordion handles disabled children 1`] = `
+<div
+  className="boldrui-accordion"
+>
+  <AccordionItem
+    accordion={false}
+    className="boldrui-accordion__item"
+    disabled={true}
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </AccordionItem>
+  <AccordionItem
+    accordion={false}
+    className="boldrui-accordion__item"
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </AccordionItem>
+</div>
+`;
+
+exports[`Accordion pre expanded accordion 1`] = `
+<div
+  className="boldrui-accordion"
+>
+  <AccordionItem
+    accordion={true}
+    className="boldrui-accordion__item"
+    expanded={true}
+    onClick={[Function]}
+  >
+    Fake Child
+  </AccordionItem>
+  <AccordionItem
+    accordion={true}
+    className="boldrui-accordion__item"
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </AccordionItem>
+</div>
+`;
+
+exports[`Accordion pre expanded accordion when accordion is false 1`] = `
+<div
+  className="boldrui-accordion"
+>
+  <AccordionItem
+    accordion={false}
+    className="boldrui-accordion__item"
+    expanded={true}
+    onClick={[Function]}
+  >
+    Fake Child
+  </AccordionItem>
+  <AccordionItem
+    accordion={false}
+    className="boldrui-accordion__item"
+    expanded={true}
+    onClick={[Function]}
+  >
+    Fake Child
+  </AccordionItem>
+</div>
+`;
+
+exports[`Accordion renders correctly with accordion false 1`] = `
+<div
+  className="boldrui-accordion"
+>
+  <AccordionItem
+    accordion={false}
+    className="boldrui-accordion__item"
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake child
+  </AccordionItem>
+  <AccordionItem
+    accordion={false}
+    className="boldrui-accordion__item"
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake child
+  </AccordionItem>
+</div>
+`;
+
+exports[`Accordion renders correctly with min params 1`] = `
+<div
+  className="boldrui-accordion"
+>
+  <AccordionItem
+    accordion={true}
+    className="boldrui-accordion__item"
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake child
+  </AccordionItem>
+  <AccordionItem
+    accordion={true}
+    className="boldrui-accordion__item"
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake child
+  </AccordionItem>
+</div>
+`;
+
+exports[`Accordion works with multiple pre expanded accordion. Extra expands are just ignored. 1`] = `
+<div
+  className="boldrui-accordion"
+>
+  <AccordionItem
+    accordion={true}
+    className="boldrui-accordion__item"
+    expanded={true}
+    onClick={[Function]}
+  >
+    Fake Child
+  </AccordionItem>
+  <AccordionItem
+    accordion={true}
+    className="boldrui-accordion__item"
+    expanded={false}
+    onClick={[Function]}
+  >
+    Fake Child
+  </AccordionItem>
+</div>
+`;

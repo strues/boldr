@@ -104,6 +104,33 @@ type Article {
   # uploaded content for the article
   media: [Media]
 }
+
+# Input for addArticle Mutation
+input AddArticleInput {
+  # title of the article
+  title: String!
+  # slug for the article
+  slug: String!
+  # html content of the article
+  content: String!
+  # raw object of the article content
+  rawContent: JSON
+  # show description of the article
+  excerpt: String!
+  # whether or not the article is featured
+  featured: Boolean!
+  # is the article published or a draft
+  published: Boolean!
+  # url of the article feature image
+  featureImage: String!
+  # url of the article background image
+  backgroundImage: String
+  # the id of the user who created the article
+  userId: UUID!
+  # tags related to the article
+  tags: String
+}
+
 ################################################################################
 ## Tags
 ################################################################################
@@ -115,6 +142,15 @@ type Tag {
   description: String
   articles: [Article]
 }
+
+# input for addTag Mutation
+input AddTagInput {
+  # name of the tag
+  name: String!
+  # description
+  description: String
+}
+
 ################################################################################
 ## Media
 ################################################################################

@@ -9,6 +9,6 @@ if (module.hot) {
       process.exit(250);
     }
   });
-  module.hot.accept();
+  module.hot.accept('./server');
   logger.info('✅  Server-side HMR Enabled!');
 }

@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders snapshot 1`] = `
+<label
+  className="boldrui-form__label"
+  htmlFor="test"
+>
+  test
+</label>
+`;

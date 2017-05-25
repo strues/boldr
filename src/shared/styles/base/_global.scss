@@ -17,34 +17,46 @@ html {
   font-size: $font-size-base;
   box-sizing: border-box;
   color: $text-color;
-}
-
-body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  min-width: 300px;
   overflow-x: hidden;
-  font-family: $font-family;
-  font-size: $font-size-base;
-  line-height: $line-height-base;
+  overflow-y: scroll;
   background-color: $body-background;
   text-rendering: optimizeLegibility;
 }
 
-#app {
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
+body {
+  font-family: $font-family;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  background-color: $body-background;
 }
 
 a {
   color: $primary-color;
   text-decoration: none;
-  transition: color 0.3s;
+  cursor: pointer;
+  text-decoration: none;
+  transition: none $speed $easing;
 
   &:hover,
   &:active,
   &:focus {
     color: darken($primary-color, 10%);
-    text-decoration: none;
   }
+}
+
+hr {
+  background-color: $border-color;
+  border: none;
+  display: block;
+  height: 1px;
+  margin: 1.5rem 0;
+}
+
+img {
+  max-width: 100%;
 }
 
 .boldr-icon {
@@ -56,7 +68,6 @@ a {
 }
 
 :root {
-
   :focus {
     outline: none !important;
   }

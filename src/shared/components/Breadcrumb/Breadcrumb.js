@@ -16,12 +16,16 @@ class Breadcrumb extends React.Component {
         {...elementProps}
         role="navigation"
         aria-label="breadcrumbs"
-        className={classNames(className, classes)}
+        className={classNames('boldrui-breadcrumb')}
       />
     );
   }
 }
 
-Breadcrumb.Item = BreadcrumbItem;
+const defaultProps = {
+  className: 'boldrui-breadcrumb',
+};
 
+Breadcrumb.Item = BreadcrumbItem;
+Breadcrumb.defaultProps = defaultProps;
 export default bsClass('breadcrumb', Breadcrumb);

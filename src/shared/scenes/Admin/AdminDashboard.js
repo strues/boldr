@@ -14,7 +14,6 @@ import {
   Topbar,
 } from 'boldr-ui';
 import { selectMe, showHideSidebar, expandCollapseSideMenu } from '../../state';
-import renderRoutes from '../../core/addRoutes';
 import sidebarLinks from './sidebarLinks';
 import routes from './routes';
 import Breadcrumbs from './Breadcrumbs';
@@ -68,7 +67,7 @@ export class AdminDashboard extends Component {
           <Sidebar
             items={sidebarLinks}
             activeItem={pathname}
-            location={router.location.pathname}
+            location={this.props.location}
             visible={ui.visible}
             expanded={ui.expanded}
             onExpandCollapse={this.onExpandCollapse}

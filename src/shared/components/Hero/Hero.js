@@ -16,13 +16,12 @@ const Hero = (props: Props) => {
     background-image: url(${props.bgImg});
     height: ${props.bgHeight}px;
     position: relative;
-    text-align: right;
     background-size: cover;
     background-position-x: 50%;
     background-position-y: 50%;
   `;
   return (
-    <div className="boldr-hero">
+    <div className="boldrui-hero">
       <BoldrHero>
         {props.children}
       </BoldrHero>

@@ -1,5 +1,5 @@
-import classNames from 'classnames';
 import React from 'react';
+import classNames from 'classnames';
 import PropTypes from 'prop-types';
 
 import SafeAnchor from './SafeAnchor';
@@ -26,24 +26,21 @@ const propTypes = {
 
 const defaultProps = {
   active: false,
+  className: 'boldrui-breadcrumb__item',
 };
 
-class BreadcrumbItem extends React.Component {
-  render() {
-    const { active, href, title, target, className, ...props } = this.props;
+const BreadcrumbItem = props => {
+  const { active, href, title, target, className, ...rest } = props;
 
-    // Don't try to render these props on non-active <span>.
-    const linkProps = { href, title, target };
+  // Don't try to render these props on non-active <span>.
+  const linkProps = { href, title, target };
 
-    return (
-      <li className={classNames(className, { active })}>
-        {active
-          ? <span {...props} />
-          : <SafeAnchor {...props} {...linkProps} />}
-      </li>
-    );
-  }
-}
+  return (
+    <li className={classNames('boldrui-breadcrumb__item', { active })}>
+      {active ? <span {...rest} /> : <SafeAnchor {...rest} {...linkProps} />}
+    </li>
+  );
+};
 
 BreadcrumbItem.propTypes = propTypes;
 BreadcrumbItem.defaultProps = defaultProps;

@@ -1,32 +1,30 @@
-import React from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-
-const propTypes = {
-  href: PropTypes.string,
-  onClick: PropTypes.func,
-  disabled: PropTypes.bool,
-  role: PropTypes.string,
-  tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-
-  componentClass: PropTypes.any,
-};
-
-const defaultProps = {
-  componentClass: 'a',
-};
 
 function isTrivialHref(href) {
   return !href || href.trim() === '#';
 }
 
 /**
- * There are situations due to browser quirks or Bootstrap CSS where
+ * There are situations due to browser quirks where
  * an anchor tag is needed, when semantically a button tag is the
  * better choice. SafeAnchor ensures that when an anchor is used like a
  * button its accessible. It also emulates input `disabled` behavior for
  * links, which is usually desirable for Buttons, NavItems, MenuItems, etc.
  */
-class SafeAnchor extends React.Component {
+class SafeAnchor extends PureComponent {
+  static defaultProps = {
+    componentClass: 'a',
+  };
+  static propTypes = {
+    href: PropTypes.string,
+    onClick: PropTypes.func,
+    disabled: PropTypes.bool,
+    role: PropTypes.string,
+    tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+    componentClass: PropTypes.any,
+  };
   constructor(props, context) {
     super(props, context);
 
@@ -68,8 +66,5 @@ class SafeAnchor extends React.Component {
     return <Component {...props} onClick={this.handleClick} />;
   }
 }
-
-SafeAnchor.propTypes = propTypes;
-SafeAnchor.defaultProps = defaultProps;
 
 export default SafeAnchor;

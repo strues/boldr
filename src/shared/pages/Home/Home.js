@@ -4,13 +4,16 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import { Hero, Row, Grid, Col, Footer, Headline, Paragraph } from 'boldr-ui';
 import { BaseTemplate } from '../../templates';
+import HomeHero from './HomeHero';
 
 const Home = () => {
   return (
     <div>
       <BaseTemplate
-        helmetMeta={<Helmet title="Home" />}
-        footer={<Footer />}
+      helmetMeta={<Helmet title="Home" />}
+      footer={<Footer />}
+
+      heroContent={<HomeHero />}
       >
         <Grid>
           <Row style={{ paddingTop: '75px' }}>

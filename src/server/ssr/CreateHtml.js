@@ -66,7 +66,9 @@ export default function CreateHtml(props: Props) {
       dangerouslySetInnerHTML={{ __html: body }}
     />
   ); // eslint-disable-line
-
+  const createInlineStyleElement = (css: Object) => {
+    return <style nonce={nonce} type="text/css">{css}</style>;
+  };
   const headerElements = removeNil([
     // if React Helmet component, render the helmet data
     // else act as an empty array.
@@ -113,7 +115,6 @@ export default function CreateHtml(props: Props) {
         () => helmet.htmlAttributes.toComponent(),
         null,
       )}
-      styledCss={styledCss}
       headerElements={headerElements.map((x, idx) => (
         <KeyedComponent key={idx}>{x}</KeyedComponent>
       ))}
