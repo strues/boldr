@@ -9,7 +9,7 @@ import StaticRouter from 'react-router-dom/StaticRouter';
 import Helmet from 'react-helmet';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import getMuiTheme from 'material-ui/styles/getMuiTheme';
-import styleSheet from 'styled-components/lib/models/StyleSheet';
+import { ServerStyleSheet } from 'styled-components';
 
 import { ApolloProvider, getDataFromTree } from 'react-apollo';
 import { createBatchingNetworkInterface } from 'apollo-client';
@@ -41,6 +41,7 @@ async function ssrMiddleware(req: $Request, res: $Response) {
   const client = createApolloClient(networkInterface);
   const history = createHistory();
   const store = configureStore(client, preloadedState, history);
+  const sheet = new ServerStyleSheet();
   // Create context for React Router
   const routerContext = {};
   // Generate the HTML from our React tree.  We're wrapping the result
@@ -57,8 +58,8 @@ async function ssrMiddleware(req: $Request, res: $Response) {
   );
   await getDataFromTree(appComponent);
 
-  const reactAppString = renderToString(appComponent);
-  const css = styleSheet.rules().map(rule => rule.cssText).join('\n');
+  const reactAppString = renderToString(sheet.collectStyles(appComponent));
+
   if (routerContext.url) {
     res.writeHead(301, {
       Location: routerContext.url,
@@ -68,7 +69,7 @@ async function ssrMiddleware(req: $Request, res: $Response) {
   // Checking is page is 404
   const status = routerContext.status === '404' ? 404 : 200;
   // Render our application to a string for the first time
-
+  const css = sheet.getStyleTags();
   const helmet = Helmet.renderStatic();
   const finalState = store.getState();
   // render styled-components styleSheets to string.

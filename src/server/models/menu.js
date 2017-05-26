@@ -28,7 +28,7 @@ class Menu extends BaseModel {
     return Menu.query();
   }
   static getById(id) {
-    return Menu.query().where({ id });
+    return Menu.query().where({ id }).eager('[details]');
   }
 }
 

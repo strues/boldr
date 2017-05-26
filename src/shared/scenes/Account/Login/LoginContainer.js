@@ -11,9 +11,20 @@ import { loginUserSuccess, loginUserError } from '../state/actions';
 import Login from './Login';
 
 export const LOGIN_USER_MUTATION = gql`
-  mutation loginUser($email: String!, $password: String!) {
-    loginUser(email: $email, password: $password) {
+  mutation loginUser($user: UserLoginInput!) {
+    loginUser(user: $user) {
       token,
+      user {
+        id
+        username
+        firstName
+        lastName
+        email
+        roles {
+          id
+          name
+        }
+      },
       errors {
         key
         value
@@ -26,7 +37,12 @@ const withMutation = graphql(LOGIN_USER_MUTATION, {
   props: ({ mutate }) => ({
     loginUser: formInput =>
       mutate({
-        variables: { email: formInput.email, password: formInput.password },
+        variables: {
+          user: {
+            email: formInput.email,
+            password: formInput.password,
+          },
+        },
       }),
   }),
 });

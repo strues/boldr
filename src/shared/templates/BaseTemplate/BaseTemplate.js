@@ -64,7 +64,7 @@ class BaseTemplate extends Component {
           <SiteHeaderContainer
             auth={this.props.auth}
             me={this.props.me}
-            settings={this.props.data.settings}
+            settings={this.props.data.getSettings}
             isMobile={this.props.isMobile}
           />
           {this.props.heroContent}
@@ -92,7 +92,7 @@ const mapStateToProps = (state: Object) => {
 export { Wrapper, FooterWrapper };
 export const SETTINGS_QUERY = gql`
   query {
-    settings {
+    getSettings {
       id,
       key,
       value,

@@ -126,7 +126,7 @@ input AddArticleInput {
   # url of the article background image
   backgroundImage: String
   # the id of the user who created the article
-  userId: UUID!
+  userId: UUID
   # tags related to the article
   tags: String
 }
@@ -329,7 +329,7 @@ type RootMutation {
   registerUser(firstName: String!, lastName: String!, email: String!, password: String!, username: String!): User
   # Sign in.
   loginUser(email: String!, password: String!): Auth,
-  createArticle(title: String!, slug: String, excerpt: String, published: Boolean, backgroundImage: String, featureImage: String, content: String, rawContent: JSON, tags: [String]): Article
+  createArticle(title: String!, slug: String, excerpt: String, published: Boolean, backgroundImage: String, featureImage: String, content: String, rawContent: JSON, tags: String): Article
 }
 
 

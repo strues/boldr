@@ -1,8 +1,17 @@
 import http from 'http';
+import Promise from 'bluebird';
 import { enableEnhancedStackTraces } from './core/debugUtil';
 import { logger, initializeDb, disconnect, destroyRedis } from './services';
 import app from './app';
 import config from './config';
+
+global.Promise = Promise;
+Promise.config({
+  warnings: true,
+  longStackTraces: true,
+  cancellation: true,
+  monitoring: true,
+});
 
 if (process.env.NODE_ENV === 'development') {
   enableEnhancedStackTraces();

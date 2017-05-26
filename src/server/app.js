@@ -3,14 +3,14 @@
 import { resolve as pathResolve } from 'path';
 import express from 'express';
 import _debug from 'debug';
-import { makeExecutableSchema } from 'graphql-tools';
+import formatError from 'boldr-utils/es/gql/errors';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import routes from './routes/index';
 import { expressMiddleware, authMiddleware, errorHandler } from './middleware';
 import ssrMiddleware from './ssr';
-import graphqlSchema from './graphql/schema';
-import graphqlResolvers from './graphql/resolvers';
+
 import config from './config';
+import RootSchema from './data/rootSchema';
 
 const debug = _debug('boldr:server:app');
 
@@ -21,24 +21,31 @@ expressMiddleware(app);
 authMiddleware(app);
 // All routes for the app
 routes(app);
-
 app.use(
   '/graphiql',
   graphiqlExpress({
     endpointURL: '/api/v1/graphql',
   }),
 );
-
-app.use(
-  '/api/v1/graphql',
-  graphqlExpress(req => ({
-    schema: graphqlSchema,
+console.log('fooo');
+const graphqlHandler = graphqlExpress(req => {
+  const query = req.query.query || req.body.query;
+  if (query && query.length > 2000) {
+    // None of our app's queries are this long
+    // Probably indicates someone trying to send an overly expensive query
+    throw new Error('Query too large.');
+  }
+  return {
+    schema: RootSchema,
     context: {
+      req,
       user: req.user ? req.user : null,
     },
     debug: true,
-  })),
-);
+  };
+});
+
+app.use('/api/v1/graphql', graphqlHandler);
 // Configure static serving of our "public" root http path static files.
 // Note: these will be served off the root (i.e. '/') of our application.
 app.use(
@@ -48,6 +55,7 @@ app.use(
 
 // Setup the public directory so that we can serve static assets.
 app.use(express.static(config.bundle.publicDir));
+
 // Pass any get request through the SSR middleware before sending it back
 app.get('*', ssrMiddleware);
 // Catch and format errors

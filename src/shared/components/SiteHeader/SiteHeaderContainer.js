@@ -24,7 +24,7 @@ type Props = {
   auth: Object,
 };
 type SiteHeaderData = {
-  menuById: Menu,
+  getMenuById: Menu,
   loading: boolean,
 };
 class SiteHeaderContainer extends React.Component {
@@ -36,7 +36,7 @@ class SiteHeaderContainer extends React.Component {
   };
   props: Props;
   render() {
-    const { loading, menuById } = this.props.data;
+    const { loading, getMenuById } = this.props.data;
     if (loading) {
       return <Loader />;
     }
@@ -45,7 +45,7 @@ class SiteHeaderContainer extends React.Component {
         auth={this.props.auth}
         me={this.props.me}
         settings={this.props.settings}
-        details={ menuById[0].details}
+        details={getMenuById.details}
         isMobile={this.props.isMobile}
         handleProfileClick={this.handleProfileClick}
         handleLogoutClick={this.handleLogoutClick}
@@ -55,9 +55,10 @@ class SiteHeaderContainer extends React.Component {
 }
 
 export const MENU_QUERY = gql`
- query menuById($id: Int!) {
- menuById(id: $id) {
+ query getMenuById($id: ID!) {
+ getMenuById(id: $id) {
     id,
+    name,
     details {
       id,
       uuid,
