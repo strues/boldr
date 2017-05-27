@@ -1,11 +1,11 @@
 /* @flow */
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import Row from 'boldr-ui/lib/components/Layout/Row';
-import Col from 'boldr-ui/lib/components/Layout/Col';
-import Button from 'boldr-ui/lib/components/Button';
-import InputField from 'boldr-ui/lib/components/Form/Fields/InputField';
-import Form from 'boldr-ui/lib/components/Form/Form';
+import Row from '~components/Layout/Row';
+import Col from '~components/Layout/Col';
+import Button from '~components/Button';
+import InputField from '~components/Form/Fields/InputField';
+import Form from '~components/Form/Form';
 
 import { isRequired, isEmail } from '../../../core/validations';
 

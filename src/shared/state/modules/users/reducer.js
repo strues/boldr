@@ -95,6 +95,17 @@ const me = (state = INITIAL_STATE, action) => {
         role: '',
         roleId: '',
       };
+    case '@boldr/user/SET_USER_LOGGED_IN':
+      return {
+        ...state,
+        id: action.user.id,
+        firstName: action.user.firstName,
+        lastName: action.user.lastName,
+        username: action.user.username,
+        email: action.user.email,
+        role: action.user.roles[0].name,
+        roleId: action.user.roles[0].id,
+      };
     default:
       return state;
   }

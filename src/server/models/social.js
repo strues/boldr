@@ -14,7 +14,7 @@ import User from './User';
  * @property {String}   userId
  */
 class Social extends Model {
-  static tableName = 'social';
+  static tableName = 'user_social_media';
   static jsonSchema = {
     type: 'object',
     required: ['id', 'userId'],
@@ -71,7 +71,7 @@ class Social extends Model {
         relation: Model.BelongsToOneRelation,
         modelClass: User,
         join: {
-          from: 'social.userId',
+          from: 'user_social_media.userId',
           to: 'user.id',
         },
       },

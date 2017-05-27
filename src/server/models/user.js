@@ -168,7 +168,7 @@ class User extends Model {
         modelClass: Social,
         join: {
           from: 'user.id',
-          to: 'social.userId',
+          to: 'user_social_media.userId',
         },
       },
     };

@@ -1,5 +1,5 @@
 module.exports.up = async (db) => {
-  await db.schema.createTable('social', table => {
+  await db.schema.createTable('user_social_media', table => {
     // pk
     table
       .uuid('id')
@@ -29,7 +29,7 @@ module.exports.up = async (db) => {
 };
 
 module.exports.down = async (db) => {
-  await db.schema.dropTableIfExists('social');
+  await db.schema.dropTableIfExists('user_social_media');
 };
 
 module.exports.configuration = { transaction: true };

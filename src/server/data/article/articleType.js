@@ -90,10 +90,52 @@ const ArticleType = new GraphQLObjectType({
     author: {
       type: UserType,
       description: 'Users belonging to a role.',
-      // resolve({ id }) {
-        // const r = getRethink();
-        // return r.table('TeamMember').getAll(id, { index: 'userId' }).run();
-      // },
+    },
+  }),
+});
+
+export const CreateArticleInput = new GraphQLInputObjectType({
+  name: 'CreateArticleInput',
+  fields: () => ({
+    title: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'The title of the article',
+    },
+    slug: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'The slug / normalized article title.',
+    },
+    content: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'html content of the article',
+    },
+    rawContent: {
+      type: GraphQLJSON,
+      description: 'Raw JSON of the article',
+    },
+    excerpt: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'Short description of the article',
+    },
+    featured: {
+      type: new GraphQLNonNull(GraphQLBoolean),
+      description: 'True if the article is featured',
+    },
+    published: {
+      type: new GraphQLNonNull(GraphQLBoolean),
+      description: 'True if the article is published',
+    },
+    featureImage: {
+      type: GraphQLURL,
+      description: 'url of the article feature image',
+    },
+    backgroundImage: {
+      type: GraphQLURL,
+      description: 'url of the article background image',
+    },
+    tags: {
+      type: new GraphQLList(TagType),
+      description: 'Tags relating articles together',
     },
   }),
 });

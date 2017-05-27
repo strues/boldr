@@ -23,7 +23,7 @@ describe('Media API Endpoint', () => {
       userId: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
       safeName: 'fiele.png',
       fileName: 'fiele.png',
-      mediaType: 1,
+      mediaType: 'image',
     });
   });
   test('+++ GET /media', () => {
@@ -64,7 +64,6 @@ describe('Media API Endpoint', () => {
     return agent
       .post('/api/v1/media')
       .set('Authorization', `Bearer ${token}`)
-      .field('mediaType', 1)
       .attach('file', path.join(__dirname, '__fixtures__/fix.png'))
       .expect(res => {
         expect(res.status).toBe(201);

@@ -3,18 +3,22 @@ import util from 'util';
 import url from 'url';
 import uuid from 'uuid';
 import _debug from 'debug';
-import * as objection from 'objection';
 import request from 'request';
 import fs from 'fs-extra';
 import shortId from 'shortid';
-
+import appRoot from 'boldr-utils/es/node/appRoot';
 import sharp from 'sharp';
 import formidable from 'formidable';
 import { responseHandler, BadRequest } from '../../core/index';
-import MediaType from '../../models/MediaType';
 import Media from '../../models/Media';
 import { logger } from '../../services';
-import appRoot from '../../utils/appRoot';
+
+
+const imgRegex = new RegExp(
+  '^.*.((j|J)(p|P)(e|E)?(g|G)|(g|G)(i|I)(f|F)|(p|P)(n|N)(g|G))$',
+);
+const vidRegex = new RegExp('^.*.((m|M)(p|P)(4)|(m|M)(k|K)(v|V))$');
+
 const debug = _debug('boldr:media');
 /**
  * Returns a list of all attachments
@@ -25,7 +29,7 @@ const debug = _debug('boldr:media');
  */
 export async function listMedia(req, res, next) {
   try {
-    const medias = await Media.query().eager('[type,uploader]');
+    const medias = await Media.query().eager('uploader');
 
     return responseHandler(res, 200, medias);
   } catch (error) {
@@ -43,7 +47,7 @@ export async function listMedia(req, res, next) {
  */
 export async function getMedia(req, res, next) {
   try {
-    const file = await Media.query().findById(req.params.id).eager('[type]');
+    const file = await Media.query().findById(req.params.id);
     return responseHandler(res, 200, file);
   } catch (err) {
     /* istanbul ignore next */
@@ -139,10 +143,6 @@ export function uploadMedia(req, res, next) {
     })
     .parse(req)
     .on('end', async () => {
-      const imgRegex = new RegExp(
-        '^.*.((j|J)(p|P)(e|E)?(g|G)|(g|G)(i|I)(f|F)|(p|P)(n|N)(g|G))$',
-      );
-      const vidRegex = new RegExp('^.*.((m|M)(p|P)(4)|(m|M)(k|K)(v|V))$');
       const isImageType = data.media.fileName.match(imgRegex);
       const isVideoType = data.media.fileName.match(vidRegex);
 
@@ -153,7 +153,7 @@ export function uploadMedia(req, res, next) {
         thumbName: data.media.thumbnailName,
         mimetype: data.media.type,
         url: `/uploads/${data.media.fileName}`,
-        mediaType: isImageType ? 1 : 2,
+        mediaType: isImageType ? 'image' : 'video',
         path: `${appRoot.get()}/public/uploads/${data.media.fileName}`,
       };
 
@@ -185,7 +185,8 @@ export function uploadFromUrl(req, res, next) {
     const newFilename = shortId() + path.extname(onlyTheFilename);
     download(urlParsed.href, newFilename, async () => {
       const newImage = await Media.query().insert({
-        mediaType: 1,
+        // @TODO: remove mediaType hardcode
+        mediaType: 'image',
         fileName: newFilename,
         safeName: newFilename,
         thumbName: newFilename,

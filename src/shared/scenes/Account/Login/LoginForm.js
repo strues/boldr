@@ -4,9 +4,9 @@ import { Field, reduxForm } from 'redux-form';
 import Link from 'react-router-dom/Link';
 // $FlowIssue
 import styled from 'styled-components';
-import Button from 'boldr-ui/lib/components/Button';
-import InputField from 'boldr-ui/lib/components/Form/Fields/InputField';
-import Form from 'boldr-ui/lib/components/Form/Form';
+import Button from '~components/Button';
+import InputField from '~components/Form/Fields/InputField';
+import Form from '~components/Form/Form';
 import { isEmail } from '../../../core/validations';
 
 type Props = {
@@ -53,7 +53,7 @@ const LoginForm = (props: Props) => {
             <Link to="/account/forgot-password">Forgot your password?</Link>
           </FormBottomListItem>
           <FormBottomListItem>
-            <Link to="/account/signup">Create an account</Link>
+            <Link to="/signup">Create an account</Link>
           </FormBottomListItem>
         </FormBottomList>
       </FormBottom>

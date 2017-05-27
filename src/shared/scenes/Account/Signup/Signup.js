@@ -2,7 +2,7 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
 import Helmet from 'react-helmet';
-import { FormCard } from 'boldr-ui';
+import FormCard from '~components/Form/FormCard';
 
 import BaseTemplate from '../../../templates/BaseTemplate';
 import SignupForm from './SignupForm';

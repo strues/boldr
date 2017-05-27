@@ -1,6 +1,14 @@
 version: '3'
 
 services:
+  # proxy:
+  #   links:
+  #     - cmf
+  #     - api
+  #   build: ./.boldr/docker/proxy
+  #   ports:
+  #     - 3000:80
+
   database:
     build: ./.boldr/db
     restart: always

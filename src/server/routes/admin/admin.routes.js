@@ -21,12 +21,4 @@ router
   .route('/stats', isAuthenticated, checkRole('Admin'))
   .get(ctrl.getAllStats);
 
-/**
-   * @api {get} /types/media          List media types
-   * @apiName ListMediaTypes
-   * @apiGroup Admin
-   * @apiPermission admin
-   */
-router.route('/types/media').get(ctrl.listMediaTypes);
-
 export default router;

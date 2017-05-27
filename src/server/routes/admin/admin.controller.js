@@ -3,7 +3,6 @@ import { responseHandler, Conflict, BadRequest } from '../../core/index';
 import Tag from '../../models/Tag';
 import User from '../../models/User';
 import Article from '../../models/Article';
-import MediaType from '../../models/MediaType';
 
 /**
  * Returns a list of all stats
@@ -28,24 +27,5 @@ export async function getAllStats(req, res, next) {
   } catch (error) {
     /* istanbul ignore next */
     return next(new BadRequest());
-  }
-}
-
-/**
- * [listMediaTypes description]
- * @param  {[type]}   req  [description]
- * @param  {[type]}   res  [description]
- * @param  {Function} next [description]
- * @return {[type]}        [description]
- */
-export async function listMediaTypes(req, res, next) {
-  try {
-    const mediaTypes = await MediaType.query()
-      .allowEager('[files]')
-      .eager(req.query.eager)
-      .skipUndefined();
-    return res.status(200).json(mediaTypes);
-  } catch (error) {
-    return next(error);
   }
 }

@@ -8,16 +8,10 @@ import Signup from './Signup';
 export const SIGNUP_USER_MUTATION = gql`
   mutation signupUser($user: UserSignupInput!) {
     signupUser(user: $user) {
-      user {
-        username
+      username
         firstName
         lastName
         email
-      },
-      errors {
-        key
-        value
-      }
     }
   }
 `;
@@ -44,8 +38,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     ownProps
       .signupUser(formInput)
       .then(res => {
-        const { username } = res.data.signupUser;
-        if (!username) {
+        if (res.data.signupUser.errors) {
           dispatch(
             sendNotification({
               message: res.data.signupUser.errors[0].value,

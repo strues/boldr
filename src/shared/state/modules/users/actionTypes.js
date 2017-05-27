@@ -21,3 +21,5 @@ export const FETCH_PROFILE_FAILURE = '@boldr/user/FETCH_PROFILE_FAILURE';
 export const EDIT_PROFILE_REQUEST = '@boldr/user/EDIT_PROFILE_REQUEST';
 export const EDIT_PROFILE_SUCCESS = '@boldr/user/EDIT_PROFILE_SUCCESS';
 export const EDIT_PROFILE_FAILURE = '@boldr/user/EDIT_PROFILE_FAILURE';
+
+export const SET_USER_LOGGED_IN = '@boldr/user/SET_USER_LOGGED_IN';

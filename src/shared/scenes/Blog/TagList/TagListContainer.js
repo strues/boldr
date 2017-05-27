@@ -16,7 +16,10 @@ type Props = {
 export class TagListContainer extends PureComponent {
   props: Props;
   render() {
-    const { data: { loading, getArticlesForTag }, match: { params } } = this.props;
+    const {
+      data: { loading, getArticlesForTag },
+      match: { params },
+    } = this.props;
     if (loading) {
       return <Loader />;
     }

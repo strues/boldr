@@ -4,15 +4,16 @@ import { connect } from 'react-redux';
 import Switch from 'react-router-dom/Switch';
 import Route from 'react-router-dom/Route';
 import flatMapDeep from 'lodash/flatMapDeep';
+
+import Grid from '~components/Layout/Grid';
+import Sidebar from '~components/Sidebar';
 import {
-  Grid,
-  Sidebar,
   DashboardWrapper,
   DashboardContent,
   DashboardMain,
-  TopbarLink,
-  Topbar,
-} from 'boldr-ui';
+} from '~components/Dashboard';
+import Topbar from '~components/Topbar';
+import TopbarLink from '~components/Topbar/TopbarLink';
 import { selectMe, showHideSidebar, expandCollapseSideMenu } from '../../state';
 import sidebarLinks from './sidebarLinks';
 import routes from './routes';
@@ -89,7 +90,7 @@ export class AdminDashboard extends Component {
           />
 
           <DashboardContent>
-          <Breadcrumbs location={this.props.location} />
+            <Breadcrumbs location={this.props.location} />
             <Grid fluid>
               <Switch>
                 {this.flattenedRoutes.map(props => (

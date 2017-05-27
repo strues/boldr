@@ -3,10 +3,9 @@ import gql from 'graphql-tag';
 import { connect } from 'react-redux';
 import { push } from 'react-router-redux';
 
-import {
-  sendNotification,
-} from '../../../state/modules/notifications/notifications';
+import { sendNotification } from '~state/modules/notifications/notifications';
 import { setToken } from '../../../core/authentication/token';
+import { setUserLoggedIn } from '~state/modules/users/actions';
 import { loginUserSuccess, loginUserError } from '../state/actions';
 import Login from './Login';
 
@@ -67,8 +66,10 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
             }),
           );
         }
+        const { loginUser } = res.data;
         setToken(token);
-        dispatch(loginUserSuccess(token));
+        dispatch(loginUserSuccess(loginUser));
+        dispatch(setUserLoggedIn(loginUser));
         dispatch(
           sendNotification({
             message: 'Welcome back!',

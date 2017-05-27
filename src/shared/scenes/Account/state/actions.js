@@ -82,10 +82,10 @@ export const loginUserRequest = ({ username }) => ({
   username,
 });
 
-export function loginUserSuccess(token) {
+export function loginUserSuccess(loginUser) {
   return {
     type: t.LOGIN_SUCCESS,
-    token,
+    token: loginUser.token,
   };
 }
 

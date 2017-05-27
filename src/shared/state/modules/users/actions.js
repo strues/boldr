@@ -202,3 +202,11 @@ const failUpdateProfile = err => {
     error: err,
   };
 };
+
+
+export function setUserLoggedIn(loginUser) {
+  return {
+    type: t.SET_USER_LOGGED_IN,
+    user: loginUser.user,
+  };
+}

@@ -1,5 +1,4 @@
 import { Model } from 'boldr-orm';
-import MediaType from './MediaType';
 import User from './User';
 import Article from './Article';
 
@@ -9,14 +8,6 @@ class Media extends Model {
 
   static get relationMappings() {
     return {
-      type: {
-        relation: Model.BelongsToOneRelation,
-        modelClass: MediaType,
-        join: {
-          from: 'media.mediaType',
-          to: 'media_type.id',
-        },
-      },
       uploader: {
         relation: Model.BelongsToOneRelation,
         modelClass: User,

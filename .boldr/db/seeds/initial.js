@@ -17,7 +17,6 @@ const tables = [
   'menu_detail',
   'menu_menu_detail',
   'setting',
-  'media_type',
 ];
 
 function seed(knex, Promise) {
@@ -94,7 +93,7 @@ function seed(knex, Promise) {
     )
     .then(() =>
       Promise.all([
-        knex('social').insert({
+        knex('user_social_media').insert({
           userId: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
           facebookUrl: 'https://facebook.com',
           twitterUrl: 'https://twitter.com',
@@ -103,7 +102,7 @@ function seed(knex, Promise) {
           googleUrl: 'https://google.com',
           stackoverflowUrl: 'https://stackoverflow.com',
         }),
-        knex('social').insert({
+        knex('user_social_media').insert({
           userId: 'f4d869a6-1a75-469b-a9cc-965c552929e4',
           facebookUrl: 'https://facebook.com',
           twitterUrl: 'https://twitter.com',
@@ -112,7 +111,7 @@ function seed(knex, Promise) {
           googleUrl: 'https://google.com',
           stackoverflowUrl: 'https://stackoverflow.com',
         }),
-        knex('social').insert({
+        knex('user_social_media').insert({
           userId: 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f',
           facebookUrl: 'https://facebook.com',
           twitterUrl: 'https://twitter.com',
@@ -305,26 +304,7 @@ function seed(knex, Promise) {
         // prettier-ignore
       ])
     )
-    .then(() =>
-      Promise.all([
-        knex('media_type').insert({
-          id: 1,
-          uuid: '51ad0cb8-39e9-4ee5-80ca-50ebb35b372c',
-          mediaType: 'image',
-        }),
-        knex('media_type').insert({
-          id: 2,
-          uuid: '78614bdc-fd05-418e-b02c-a65e71075e70',
-          mediaType: 'video',
-        }),
-        knex('media_type').insert({
-          id: 3,
-          uuid: '3f9bb6d3-241b-4087-885f-117ead57bc73',
-          mediaType: 'audio',
-        }),
-        // prettier-ignore
-      ])
-    )
+
     .then(() =>
       Promise.all([
         knex('setting').insert({

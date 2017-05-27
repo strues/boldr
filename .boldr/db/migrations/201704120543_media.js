@@ -1,16 +1,4 @@
 module.exports.up = async db => {
-  await db.schema.createTable('media_type', table => {
-    // pk
-    table.increments('id').primary();
-    // uuid
-    table.uuid('uuid').notNullable().defaultTo(db.raw('uuid_generate_v4()'));
-    table.string('mediaType', 32).notNullable().unique();
-    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
-
-    table.index('uuid');
-    table.index('mediaType');
-  });
   await db.schema.createTable('media', table => {
     // pk
     table
@@ -22,11 +10,7 @@ module.exports.up = async db => {
     table.string('safeName', 128).notNullable();
     table.string('thumbName', 128);
     table.string('fileDescription').nullable();
-    table
-      .integer('mediaType')
-      .unsigned()
-      .references('id')
-      .inTable('media_type');
+    table.enu('mediaType', ['image', 'video', 'audio']);
     table.string('mimetype');
     table.string('url').notNullable();
     table.string('path');
@@ -61,7 +45,6 @@ module.exports.up = async db => {
 };
 
 module.exports.down = async db => {
-  await db.schema.dropTableIfExists('media_type');
   await db.schema.dropTableIfExists('media');
   await db.schema.dropTableIfExists('article_media');
 };

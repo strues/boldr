@@ -2,12 +2,11 @@
 
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import FormCard from 'boldr-ui/lib/components/Form/FormCard/FormCard';
-
 import Helmet from 'react-helmet';
-import Button from '../../../components/Button';
+import FormCard from '~components/Form/FormCard/FormCard';
 import BaseTemplate from '../../../templates/BaseTemplate';
-import { verifyAccount } from '../../../state/modules/users/actions';
+import Button from '~components/Button';
+import { verifyAccount } from '~state/modules/users/actions';
 
 export type Props = {
   dispatch: () => void,

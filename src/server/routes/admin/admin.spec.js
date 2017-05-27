@@ -28,14 +28,4 @@ describe('Admin API Endpoint', () => {
       });
   });
 
-  it('GET /types/media -- Return media types', () => {
-    return agent
-      .get('/api/v1/admin/types/media')
-      .set('Accept', 'application/json')
-      .set('Authorization', `Bearer ${token}`)
-      .expect(res => {
-        expect(res.status).toBe(200);
-        expect(typeof res.body).toBe('object');
-      });
-  });
 });
