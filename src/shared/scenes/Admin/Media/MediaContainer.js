@@ -23,7 +23,7 @@ type Props = {
 };
 
 type Data = {
-  listMedia: Array<Object>,
+  getMedia: Array<Object>,
   loading: boolean,
 };
 
@@ -31,11 +31,11 @@ export class MediaContainer extends Component {
   props: Props;
 
   render() {
-    const { loading, listMedia } = this.props.data;
+    const { loading, getMedia } = this.props.data;
     if (loading) {
       return <Loader />;
     }
-    return <Media media={listMedia} />;
+    return <Media media={getMedia} />;
   }
 }
 function mapDispatchToProps(dispatch) {
@@ -46,8 +46,8 @@ function mapDispatchToProps(dispatch) {
 }
 
 const MEDIA_QUERY = gql`
-query listMedia($offset: Int!, $limit: Int!) {
-      listMedia(offset:$offset,limit:$limit) {
+query getMedia($offset: Int!, $limit: Int!) {
+      getMedia(offset:$offset,limit:$limit) {
         id,
         thumbName,
         fileName,

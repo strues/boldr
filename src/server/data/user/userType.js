@@ -214,8 +214,7 @@ const UserType = new GraphQLObjectType({
       resolve(user, args, ctx) {
         return User.query()
           .findById(user.id)
-          .then(result => result.$relatedQuery('socialMedia'))
-          .then(jsonResult);
+          .then(result => result.$relatedQuery('socialMedia'));
       },
     },
     articles: {

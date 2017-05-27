@@ -34,13 +34,16 @@ export function doSignup(formInput: userSignupFormInput) {
   };
 }
 
-// Signup Error
-const signUpError = err => {
+export function signupUserSuccess() {
   return {
-    type: t.SIGNUP_USER_FAILURE,
-    error: err,
+    type: t.SIGNUP_USER_SUCCESS,
   };
-};
+}
+
+export const signupUserError = ({ error }) => ({
+  type: t.SIGNUP_USER_FAILURE,
+  error,
+});
 
 /**
  * @name doLogin
