@@ -15,7 +15,7 @@ exports[`<ArticleSidebar />, renders the sidebar 1`] = `
       "mutate": [Function],
       "networkInterface": MockNetworkInterface {
         "mockedResponsesByKey": Object {
-          "{\\"variables\\":{\\"id\\":\\"aasdf\\"},\\"query\\":\\"query ($id: String!) {\\\\n  userById(id: $id) {\\\\n    username\\\\n    avatarUrl\\\\n    bio\\\\n    socialMedia {\\\\n      facebookUrl\\\\n      githubUrl\\\\n      twitterUrl\\\\n      linkedinUrl\\\\n      googleUrl\\\\n      stackoverflowUrl\\\\n      __typename\\\\n    }\\\\n    __typename\\\\n  }\\\\n}\\\\n\\"}": Array [
+          "{\\"variables\\":{\\"id\\":\\"aasdf\\"},\\"query\\":\\"query ($userId: UUID!) {\\\\n  getUserByUserId(userId: $userId) {\\\\n    username\\\\n    avatarUrl\\\\n    bio\\\\n    socialMedia {\\\\n      facebookUrl\\\\n      githubUrl\\\\n      twitterUrl\\\\n      linkedinUrl\\\\n      googleUrl\\\\n      stackoverflowUrl\\\\n      __typename\\\\n    }\\\\n    __typename\\\\n  }\\\\n}\\\\n\\"}": Array [
             Object {
               "request": Object {
                 "query": Object {
@@ -35,13 +35,13 @@ exports[`<ArticleSidebar />, renders the sidebar 1`] = `
                                 "kind": "Argument",
                                 "name": Object {
                                   "kind": "Name",
-                                  "value": "id",
+                                  "value": "userId",
                                 },
                                 "value": Object {
                                   "kind": "Variable",
                                   "name": Object {
                                     "kind": "Name",
-                                    "value": "id",
+                                    "value": "userId",
                                   },
                                 },
                               },
@@ -50,7 +50,7 @@ exports[`<ArticleSidebar />, renders the sidebar 1`] = `
                             "kind": "Field",
                             "name": Object {
                               "kind": "Name",
-                              "value": "userById",
+                              "value": "getUserByUserId",
                             },
                             "selectionSet": Object {
                               "kind": "SelectionSet",
@@ -198,7 +198,7 @@ exports[`<ArticleSidebar />, renders the sidebar 1`] = `
                               "kind": "NamedType",
                               "name": Object {
                                 "kind": "Name",
-                                "value": "String",
+                                "value": "UUID",
                               },
                             },
                           },
@@ -206,7 +206,7 @@ exports[`<ArticleSidebar />, renders the sidebar 1`] = `
                             "kind": "Variable",
                             "name": Object {
                               "kind": "Name",
-                              "value": "id",
+                              "value": "userId",
                             },
                           },
                         },
@@ -215,11 +215,11 @@ exports[`<ArticleSidebar />, renders the sidebar 1`] = `
                   ],
                   "kind": "Document",
                   "loc": Object {
-                    "end": 283,
+                    "end": 299,
                     "source": Object {
                       "body": "
-      query ($id: String!) {
-          userById(id: $id) {
+      query($userId: UUID!) {
+          getUserByUserId(userId: $userId) {
             username,
             avatarUrl,
             bio,
