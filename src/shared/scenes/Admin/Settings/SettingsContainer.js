@@ -13,12 +13,12 @@ type Props = {
   data: Data,
 };
 type Data = {
-  settings: Array<Setting>,
+  getSettings: Array<Setting>,
   loading: boolean,
 };
 export const SETTINGS_QUERY = gql`
 query {
-    settings {
+    getSettings {
       id,
       key,
       value,
@@ -32,10 +32,10 @@ query {
 export default class SettingsContainer extends Component {
   props: Props;
   render() {
-    const { loading, settings } = this.props.data;
+    const { loading, getSettings } = this.props.data;
     if (loading) {
       return <Loader />;
     }
-    return <Settings settings={settings} />;
+    return <Settings settings={getSettings} />;
   }
 }

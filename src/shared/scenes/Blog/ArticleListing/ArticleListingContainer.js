@@ -11,7 +11,7 @@ import BaseTemplate from '../../../templates/BaseTemplate';
 import ArticleListing from './ArticleListing';
 
 type Data = {
-  articles: Array<Article>,
+  getArticles: Array<Article>,
   loading: boolean,
 };
 type Props = {
@@ -30,7 +30,7 @@ export class ArticleListingContainer extends Component {
       : this.props.dispatch(changeLayout(LAYOUTS.GRID));
   };
   render() {
-    const { articles, loading } = this.props.data;
+    const { getArticles, loading } = this.props.data;
     if (loading) {
       return <Loader />;
     }
@@ -39,7 +39,7 @@ export class ArticleListingContainer extends Component {
         {/* $FlowIssue */}
         <ArticleListing
           loading={loading}
-          articles={articles}
+          articles={getArticles}
           layout={this.props.layout}
           handleChangeLayout={this.handleChangeLayout}
         />
@@ -55,8 +55,8 @@ const mapStateToProps = state => {
 };
 
 const ARTICLES_QUERY = gql`
-  query articles($offset: Int!, $limit: Int!) {
-    articles(offset: $offset, limit: $limit) {
+  query getArticles($offset: Int!, $limit: Int!) {
+    getArticles(offset: $offset, limit: $limit) {
       id,
       title,
       slug,

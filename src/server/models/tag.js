@@ -1,9 +1,8 @@
-import { Model } from 'objection';
+import { Model } from 'boldr-orm';
 // Related Model
 import Article from './Article';
-import BaseModel from './Base';
 
-class Tag extends BaseModel {
+class Tag extends Model {
   static tableName = 'tag';
   static addTimestamps = false;
 

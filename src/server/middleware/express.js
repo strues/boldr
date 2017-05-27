@@ -39,7 +39,6 @@ export default app => {
     app.use(morgan('dev'));
   }
   app.use(compression());
-
   app.use(bodyParser.json({ type: 'application/json' }));
   // parse application/x-www-form-urlencoded
   app.use(bodyParser.urlencoded({ extended: true }));

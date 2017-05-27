@@ -81,7 +81,7 @@ export class BlogContainer extends Component {
 
 export const SETTINGS_QUERY = gql`
   query {
-    settings {
+    getSettings {
       id,
       key,
       value,

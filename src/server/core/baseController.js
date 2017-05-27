@@ -2,9 +2,8 @@
 // types
 import type { $Response, $Request, NextFunction } from 'express';
 import type { Model, Id } from 'objection';
-// externals
 import Promise from 'bluebird';
-// locals
+
 import * as utilities from '../utils/transform';
 function getParameterFilters(req: $Request, filterProperties: Object) {
   let paramFilter;

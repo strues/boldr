@@ -1,10 +1,9 @@
-import { Model } from 'objection';
+import { Model } from 'boldr-orm';
 import MediaType from './MediaType';
 import User from './User';
 import Article from './Article';
-import BaseModel from './Base';
 
-class Media extends BaseModel {
+class Media extends Model {
   static tableName = 'media';
   static addTimestamps = true;
 

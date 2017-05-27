@@ -23,7 +23,6 @@ const port = parseInt(config.server.port, 10);
 initializeDb()
   .then(() => {
     logger.info('Database connected successfully');
-
     server.on('listening', () => {
       const address = server.address();
       logger.info('Boldr running on port %s', address.port);
@@ -53,18 +52,5 @@ process.on('uncaughtException', error => {
   debug(error.stack);
   process.exit(1);
 });
-
-if (module.hot) {
-  module.hot.dispose(() => {
-    try {
-      if (server) {
-        server.close();
-      }
-    } catch (error) {
-      logger.error(error.stack);
-    }
-  });
-  module.hot.accept();
-}
 
 export default server;

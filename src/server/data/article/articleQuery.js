@@ -1,5 +1,12 @@
-import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt } from 'graphql';
+import {
+  GraphQLList,
+  GraphQLNonNull,
+  GraphQLID,
+  GraphQLInt,
+  GraphQLString,
+} from 'graphql';
 import jsonResult from 'boldr-utils/es/gql/jsonResult';
+import { GraphQLUUID } from '../scalars';
 import Article from '../../models/Article';
 import ArticleType from './articleType';
 
@@ -27,6 +34,11 @@ export default {
   getArticlesForTag: {
     type: new GraphQLList(ArticleType),
     description: 'Return all articles matching the given tag.',
+    args: {
+      name: { type: GraphQLString },
+      offset: { type: GraphQLInt },
+      limit: { type: GraphQLInt },
+    },
     async resolve(source, { name, offset, limit }, context) {
       const articles = await Article.getArticlesByTag(name, offset, limit).then(
         jsonResult,
@@ -37,24 +49,15 @@ export default {
       return articles;
     },
   },
-  getArticleById: {
-    type: ArticleType,
-    description: 'Return a specific article using its id',
-    async resolve(source, args, context) {
-      const article = await Article.getArticleById(args.id).then(jsonResult);
-      if (!article) {
-        throw errorObj({ _error: 'Project ID not found' });
-      }
-      return article;
-    },
-  },
+
   getArticleBySlug: {
     type: ArticleType,
     description: 'Return a specific article using its slug',
-    async resolve(source, args, context) {
-      const article = await Article.getArticleBySlug(args.slug).then(
-        jsonResult,
-      );
+    args: {
+      slug: { type: GraphQLString },
+    },
+    async resolve(_, { slug }, context) {
+      const article = await Article.getArticleBySlug(slug);
       if (!article) {
         throw errorObj({ _error: 'Project ID not found' });
       }

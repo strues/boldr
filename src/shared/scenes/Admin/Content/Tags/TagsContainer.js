@@ -27,7 +27,7 @@ class TagsContainer extends Component {
 
 export default graphql(
   gql`
-  query tags($offset: Int!, $limit: Int!) {
+  query getTags($offset: Int!, $limit: Int!) {
       getTags(offset:$offset,limit:$limit) {
         id,
         name,

@@ -1,8 +1,9 @@
 /* @flow */
-
+import path from 'path';
 import knex from 'knex';
-import * as objection from 'objection';
-import * as objectionSoftDelete from 'objection-softdelete';
+import { Model } from 'boldr-orm';
+// import * as objection from 'objection';
+// import * as objectionSoftDelete from 'objection-softdelete';
 import config from '../../config';
 
 const knexOpts = {
@@ -22,10 +23,11 @@ const knexOpts = {
 const db = knex(knexOpts);
 
 function initializeDb(): Promise<mixed> {
-  const { Model } = objection;
+  // const { Model } = objection;
   Model.knex(db);
+  Model.setBasePath(path.join(__dirname, '..', '..', 'models'));
   Model.pickJsonSchemaProperties = false;
-  objectionSoftDelete.register(objection);
+  // objectionSoftDelete.register(objection);
 
   return db.raw('select 1+1 as result');
 }

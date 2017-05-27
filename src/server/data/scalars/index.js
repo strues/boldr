@@ -1,7 +1,24 @@
 import GraphQLJSON from './GraphQLJSON';
-import GraphQLUUID from './GraphQLUUID';
-import GraphQLEmail from './GraphQLEmail';
-import GraphQLDateTime from './GraphQLDateTime';
-import GraphQLURL from './GraphQLURL';
+import {
+  GraphQLEmail,
+  GraphQLURL,
+  GraphQLLimitedString,
+  GraphQLPassword,
+  GraphQLDateTime,
+  GraphQLUUID,
+} from './scalars';
 
-export { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON };
+import { GraphQLCustomScalarType } from './types';
+
+import { Factory } from './factory';
+
+export {
+  GraphQLCustomScalarType,
+  GraphQLEmail,
+  GraphQLURL,
+  GraphQLLimitedString,
+  GraphQLPassword,
+  GraphQLDateTime,
+  GraphQLUUID,
+  GraphQLJSON,
+};

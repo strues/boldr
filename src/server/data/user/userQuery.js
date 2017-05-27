@@ -1,4 +1,10 @@
-import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt } from 'graphql';
+import {
+  GraphQLList,
+  GraphQLNonNull,
+  GraphQLID,
+  GraphQLInt,
+  GraphQLString,
+} from 'graphql';
 import jsonResult from 'boldr-utils/es/gql/jsonResult';
 import {
   GraphQLEmail,
@@ -25,7 +31,6 @@ export default {
       },
     },
     async resolve(_, { limit, offset }, context) {
-
       const users = await User.query().offset(offset).limit(limit);
       if (users) {
         return users;
@@ -38,13 +43,29 @@ export default {
     description: 'A query for admin to find a user by their id',
     args: {
       userId: {
-        type: new GraphQLNonNull(GraphQLID),
+        type: new GraphQLNonNull(GraphQLUUID),
         description: 'The user ID for the desired user',
       },
     },
     async resolve(_, { userId }, context) {
-
       const user = await User.query().findById(userId);
+      if (user) {
+        return user;
+      }
+      console.log('error');
+    },
+  },
+  getUserByUsername: {
+    type: UserType,
+    description: 'A query to retrieve a user by their username',
+    args: {
+      username: {
+        type: new GraphQLNonNull(GraphQLString),
+        description: 'The username for the desired user',
+      },
+    },
+    async resolve(_, { username }, context) {
+      const user = await User.getUserByUsername(username);
       if (user) {
         return user;
       }

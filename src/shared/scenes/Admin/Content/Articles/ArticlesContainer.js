@@ -7,7 +7,7 @@ import { deletePost } from '../../../Blog/state';
 import Articles from './Articles';
 
 type Data = {
-  articles: Array<Article>,
+  getArticles: Array<Article>,
   loading: boolean,
 };
 
@@ -26,12 +26,13 @@ export class ArticlesContainer extends Component {
   };
 
   render() {
-    if (this.props.data.loading) {
+    const { loading, getArticles } = this.props.data;
+    if (loading) {
       return <Loader />;
     }
     return (
       <Articles
-        articles={this.props.data.articles}
+        articles={getArticles}
         handleDeleteClick={this.handleDeleteClick}
       />
     );
@@ -39,8 +40,8 @@ export class ArticlesContainer extends Component {
 }
 
 const ARTICLES_QUERY = gql`
-  query articles($offset: Int!, $limit: Int!) {
-    articles(offset: $offset, limit: $limit) {
+  query getArticles($offset: Int!, $limit: Int!) {
+    getArticles(offset: $offset, limit: $limit) {
       id,
       title,
       slug,

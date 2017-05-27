@@ -1,7 +1,6 @@
-import { Model } from 'objection';
-import BaseModel from './Base';
+import { Model } from 'boldr-orm';
 
-class Setting extends BaseModel {
+class Setting extends Model {
   static tableName = 'setting';
   static jsonSchema = {
     type: 'object',

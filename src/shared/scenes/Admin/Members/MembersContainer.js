@@ -18,7 +18,7 @@ type Props = {
   ui: Object,
 };
 type Data = {
-  users: Array<User>,
+  getUsers: Array<User>,
   loading: boolean,
 };
 export class MembersContainer extends Component {
@@ -62,7 +62,7 @@ export class MembersContainer extends Component {
     this.props.dispatch(updateMember(userData));
   }
   render() {
-    const { loading, users } = this.props.data;
+    const { loading, getUsers } = this.props.data;
     const { ui, currentMember } = this.props;
     if (loading) {
       return <Loader />;
@@ -70,7 +70,7 @@ export class MembersContainer extends Component {
     return (
       <Members
         toggleUser={this.toggleUser}
-        users={users}
+        users={getUsers}
         visible={ui.modal}
         close={this.closeModal}
         handleSubmit={this.handleSubmit}
@@ -88,8 +88,8 @@ const mapStateToProps = state => {
 };
 
 export const MEMBERS_QUERY = gql`
-query {
-    users {
+query getUsers($offset: Int!, $limit: Int!) {
+    getUsers(offset:$offset,limit:$limit) {
       id,
       email,
       username,
@@ -115,5 +115,12 @@ query {
     }
 }
 `;
-const MembersContainerWithData = graphql(MEMBERS_QUERY)(MembersContainer);
+const MembersContainerWithData = graphql(MEMBERS_QUERY, {
+  options: props => ({
+    variables: {
+      offset: 0,
+      limit: 20,
+    },
+  }),
+})(MembersContainer);
 export default connect(mapStateToProps)(MembersContainerWithData);

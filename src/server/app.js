@@ -4,11 +4,11 @@ import { resolve as pathResolve } from 'path';
 import express from 'express';
 import _debug from 'debug';
 import formatError from 'boldr-utils/es/gql/errors';
+import appRoot from 'boldr-utils/es/node/appRoot';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import routes from './routes/index';
 import { expressMiddleware, authMiddleware, errorHandler } from './middleware';
 import ssrMiddleware from './ssr';
-
 import config from './config';
 import RootSchema from './data/rootSchema';
 
@@ -21,13 +21,14 @@ expressMiddleware(app);
 authMiddleware(app);
 // All routes for the app
 routes(app);
+
 app.use(
   '/graphiql',
   graphiqlExpress({
     endpointURL: '/api/v1/graphql',
   }),
 );
-console.log('fooo');
+
 const graphqlHandler = graphqlExpress(req => {
   const query = req.query.query || req.body.query;
   if (query && query.length > 2000) {
@@ -50,11 +51,10 @@ app.use('/api/v1/graphql', graphqlHandler);
 // Note: these will be served off the root (i.e. '/') of our application.
 app.use(
   '/uploads',
-  express.static(pathResolve(config.bundle.publicDir, './uploads')),
+  express.static(pathResolve(appRoot.get(), './public/uploads')),
 );
-
 // Setup the public directory so that we can serve static assets.
-app.use(express.static(config.bundle.publicDir));
+app.use(express.static(pathResolve(appRoot.get(), './public')));
 
 // Pass any get request through the SSR middleware before sending it back
 app.get('*', ssrMiddleware);

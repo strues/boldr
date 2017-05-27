@@ -1,10 +1,9 @@
-import { Model } from 'objection';
+import { Model } from 'boldr-orm';
 // Related Model
 import User from './User';
 import UserRole from './join/UserRole';
-import BaseModel from './Base';
 
-class Role extends BaseModel {
+class Role extends Model {
   static tableName = 'role';
   static addTimestamps = true;
   static hidden = ['password'];

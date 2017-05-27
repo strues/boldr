@@ -122,7 +122,6 @@ export function frameToString(frame) {
 export function prepareStackTrace(nativeError, structuredStackTrace) {
   const frames = getRelevantFrames(structuredStackTrace);
   const firstFrame = frames[0];
-
   // Need the first frame for highlighting affected source code, sometimes that's not available.
   if (firstFrame != null) {
     const wrappedFirstFrame = wrapCallSite(firstFrame);

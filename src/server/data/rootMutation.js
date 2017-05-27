@@ -1,5 +1,4 @@
 import { GraphQLObjectType } from 'graphql';
-
 import user from './user/userMutation';
 
 const rootFields = Object.assign({}, user);

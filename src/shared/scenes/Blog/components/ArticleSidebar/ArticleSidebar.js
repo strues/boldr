@@ -15,22 +15,22 @@ type Props = {
 };
 const BASE_ELEMENT = StyleClasses.POST_SIDEBAR;
 const ArticleSidebar = (props: Props) => {
-  const { userById, loading } = props.data;
+  const { getUserByUserId, loading } = props.data;
   const classes = classnames(BASE_ELEMENT, props.className);
   if (loading) {
     return <Loader />;
   }
   return (
     <aside className={classes}>
-      <Author className={props.authorClassName} author={userById} />
+      <Author className={props.authorClassName} author={getUserByUserId} />
       <SidebarTags tags={props.tags} className={props.tagsClassName} />
     </aside>
   );
 };
 
 export const SIDEBAR_QUERY = gql`
-  query ($id: String!) {
-      userById(id: $id) {
+  query($userId: UUID!) {
+      getUserByUserId(userId: $userId) {
         username,
         avatarUrl,
         bio,
@@ -49,7 +49,7 @@ export const SIDEBAR_QUERY = gql`
 export default graphql(SIDEBAR_QUERY, {
   options: props => ({
     variables: {
-      id: props.authorId,
+      userId: props.authorId,
     },
   }),
 })(ArticleSidebar);

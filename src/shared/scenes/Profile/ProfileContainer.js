@@ -15,7 +15,7 @@ type Props = {
 };
 
 type Data = {
-  userByUsername: User,
+  getUserByUsername: User,
   loading: boolean,
 };
 
@@ -28,7 +28,7 @@ export class ProfileContainer extends Component {
       email: '',
     },
     data: {
-      userByUsername: {
+      getUserByUsername: {
         email: '',
       },
     },
@@ -53,24 +53,26 @@ export class ProfileContainer extends Component {
     const userEmail = this.props.user.email;
     const profEmail = this.props.data.loading
       ? ''
-      : this.props.data.userByUsername.email;
+      : this.props.data.getUserByUsername.email;
     const isMe = userEmail === profEmail;
     this.setState({
       me: isMe,
     });
   }
   render() {
-    const { loading, userByUsername } = this.props.data;
+    const { loading, getUserByUsername } = this.props.data;
 
     if (loading) {
       return <Loader />;
     }
     return (
       <BaseTemplate
-        bgImg={userByUsername.profileImage}
-        helmetMeta={<Helmet title={`${userByUsername.username}'s Profile`} />}
+        bgImg={getUserByUsername.profileImage}
+        helmetMeta={
+          <Helmet title={`${getUserByUsername.username}'s Profile`} />
+        }
       >
-        <Profile profile={userByUsername} me={this.state.me} />
+        <Profile profile={getUserByUsername} me={this.state.me} />
       </BaseTemplate>
     );
   }
@@ -83,8 +85,8 @@ const mapStateToProps = state => {
 };
 
 const PROFILE_QUERY = gql`
-query user($username: String!) {
-    userByUsername(username: $username) {
+query getUserByUsername($username: String!) {
+    getUserByUsername(username: $username) {
       id,
       email,
       username,

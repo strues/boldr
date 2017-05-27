@@ -18,7 +18,6 @@ import {
   GraphQLJSON,
 } from '../scalars';
 
-
 const MenuDetailType = new GraphQLObjectType({
   name: 'MenuDetail',
   description: 'links and other menu content',

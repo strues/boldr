@@ -14,20 +14,20 @@ export type Props = {
   data: Data,
 };
 type Data = {
-  articleBySlug: Article,
+  getArticleBySlug: Article,
   loading: boolean,
 };
 class ArticleEditorContainer extends Component {
   props: Props;
   render() {
-    const { loading, articleBySlug } = this.props.data;
+    const { loading, getArticleBySlug } = this.props.data;
     if (loading) {
       return <Loader />;
     }
     return (
       <ArticleEditor
         updateArticle={this.props.updateArticle}
-        currentArticle={articleBySlug}
+        currentArticle={getArticleBySlug}
       />
     );
   }
@@ -50,8 +50,8 @@ const mapStateToProps = state => {
   };
 };
 const ARTICLES_QUERY = gql`
-  query articles($slug: String!) {
-    articleBySlug(slug: $slug) {
+  query getArticleBySlug($slug: String!) {
+    getArticleBySlug(slug: $slug) {
       id,
       title,
       slug,

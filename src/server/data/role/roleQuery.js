@@ -15,7 +15,6 @@ export default {
     type: new GraphQLList(RoleType),
     description: 'A query for a listing of all roles',
     async resolve(_, args, context) {
-
       const roles = await Role.query().returning('*');
       if (roles) {
         return roles;

@@ -186,6 +186,10 @@ const UserType = new GraphQLObjectType({
       type: GraphQLURL,
       description: "Url for the user's profile background image",
     },
+    location: {
+      type: GraphQLString,
+      description: 'Location the user lives',
+    },
     language: {
       type: GraphQLString,
       description: 'Language the user prefers',

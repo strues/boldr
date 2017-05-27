@@ -16,7 +16,7 @@ import getMuiTheme from 'material-ui/styles/getMuiTheme';
 
 import createApolloClient from '../shared/core/createApolloClient';
 import muiTheme from '../shared/templates/muiTheme';
-import configureStore from '../shared/state/store';
+import configureStore from '~state/store';
 import App from '../shared/App';
 import { checkAuth } from '../shared/scenes/Account/state/actions';
 import { getToken } from '../shared/core/authentication/token';

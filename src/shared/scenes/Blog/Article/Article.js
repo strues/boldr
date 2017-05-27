@@ -26,21 +26,21 @@ class Article extends PureComponent {
   props: Props;
 
   displaySingleArticle = () => {
-    const { data: { articleBySlug }, className } = this.props;
+    const { data: { getArticleBySlug }, className } = this.props;
     const classes = classnames(BASE_ELEMENT, className);
     return (
       <BaseTemplate
-        bgImg={articleBySlug.featureImage}
-        heroContent={<ArticleTitle title={articleBySlug.title} />}
-        articleTitle={articleBySlug.title}
-        helmetMeta={<Helmet title={articleBySlug.title} />}
+        bgImg={getArticleBySlug.featureImage}
+        heroContent={<ArticleTitle title={getArticleBySlug.title} />}
+        articleTitle={getArticleBySlug.title}
+        helmetMeta={<Helmet title={getArticleBySlug.title} />}
       >
         <div className={classes}>
 
           <Grid>
             <Row>
               <Col sm={12} md={8} lg={9}>
-                <ArticleContent {...articleBySlug} />
+                <ArticleContent {...getArticleBySlug} />
               </Col>
               {this.renderArticleSidebar()}
             </Row>
@@ -51,20 +51,20 @@ class Article extends PureComponent {
   };
 
   renderArticleSidebar = () => {
-    const { articleBySlug } = this.props.data;
+    const { getArticleBySlug } = this.props.data;
 
     return (
       <Col sm={12} md={4} lg={3}>
         <ArticleSidebar
-          authorId={articleBySlug.userId}
-          tags={articleBySlug.tags}
+          authorId={getArticleBySlug.userId}
+          tags={getArticleBySlug.tags}
           className={this.props.sidebarClassName}
         />
       </Col>
     );
   };
   renderPostBg = () => {
-    const { articleBySlug } = this.props.data;
+    const { getArticleBySlug } = this.props.data;
     const PostBg = styled.section`
     max-height: 400px;
     min-height: 400px;
@@ -73,14 +73,14 @@ class Article extends PureComponent {
     width: 100%;
     background-size: cover;
     background-attachment: fixed;
-    background-image: url(${articleBySlug.featureImage});
+    background-image: url(${getArticleBySlug.featureImage});
     align-items: center;
     background-position-x: 50%;
     background-position-y: 50%;
     margin-bottom: 30px;
 
   `;
-    return <PostBg><ArticleTitle title={articleBySlug.title} /></PostBg>;
+    return <PostBg><ArticleTitle title={getArticleBySlug.title} /></PostBg>;
   };
   render() {
     if (this.props.data.loading) {
@@ -97,8 +97,8 @@ class Article extends PureComponent {
 
 export default graphql(
   gql`
-  query article($slug: String!) {
-      articleBySlug(slug: $slug) {
+  query getArticleBySlug($slug: String!) {
+      getArticleBySlug(slug: $slug) {
         id,
         title,
         content,

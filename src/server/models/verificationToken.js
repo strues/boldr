@@ -1,6 +1,5 @@
-import { Model } from 'objection';
+import { Model } from 'boldr-orm';
 import User from './User';
-import BaseModel from './Base';
 /**
  * VerificationToken used for account verification. Belongs to User
  * @class VerificationToken
@@ -13,7 +12,7 @@ import BaseModel from './Base';
  * @property {Date}     createdAt
  * @property {Date}     updatedAt
  */
-class VerificationToken extends BaseModel {
+class VerificationToken extends Model {
   static get tableName() {
     return 'verification_token';
   }

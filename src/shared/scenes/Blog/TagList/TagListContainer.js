@@ -16,7 +16,7 @@ type Props = {
 export class TagListContainer extends PureComponent {
   props: Props;
   render() {
-    const { data: { loading, articlesByTag }, match: { params } } = this.props;
+    const { data: { loading, getArticlesForTag }, match: { params } } = this.props;
     if (loading) {
       return <Loader />;
     }
@@ -24,7 +24,7 @@ export class TagListContainer extends PureComponent {
       <BaseTemplate
         helmetMeta={<Helmet title={`Posts tagged ${params.name}`} />}
       >
-        <TagList articles={articlesByTag} />
+        <TagList articles={getArticlesForTag} />
       </BaseTemplate>
     );
   }
@@ -32,8 +32,8 @@ export class TagListContainer extends PureComponent {
 
 export default graphql(
   gql`
-  query article($name: String!) {
-      articlesByTag(name: $name,offset:0,limit:20) {
+  query getArticlesForTag($name: String!) {
+      getArticlesForTag(name: $name,offset:0,limit:20) {
         id,
         title,
         content,
