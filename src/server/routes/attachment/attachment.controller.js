@@ -4,8 +4,6 @@ import uuid from 'uuid/v4';
 import * as objection from 'objection';
 import fs from 'fs-extra';
 import shortId from 'shortid';
-
-import sharp from 'sharp';
 import formidable from 'formidable';
 import { responseHandler, BadRequest } from '../../core/index';
 import Attachment from '../../models/Attachment';

@@ -2,7 +2,10 @@
 
 import React from 'react';
 import Helmet from 'react-helmet';
-import { Hero, Row, Grid, Col, Footer, Headline, Paragraph } from 'boldr-ui';
+import Footer from '~components/Footer';
+import Headline from '~components/Headline';
+import Paragraph from '~components/Paragraph';
+import { Grid, Row, Col } from '~components/Layout';
 import { BaseTemplate } from '../../templates';
 import HomeHero from './HomeHero';
 
@@ -10,26 +13,25 @@ const Home = () => {
   return (
     <div>
       <BaseTemplate
-      helmetMeta={<Helmet title="Home" />}
-      footer={<Footer />}
-
-      heroContent={<HomeHero />}
+        helmetMeta={<Helmet title="Home" />}
+        footer={<Footer />}
+        heroContent={<HomeHero />}
       >
         <Grid>
-          <Row style={{ paddingTop: '75px' }}>
-            <Col xs={12} md={4}>
+          <Row>
+            <Col sm={12} md={4}>
               <Headline type="h2">Placeholder 1</Headline>
               <Paragraph>
                 Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.
               </Paragraph>
             </Col>
-            <Col xs={12} md={4}>
+            <Col sm={12} md={4}>
               <Headline type="h2">Placeholder 2</Headline>
               <Paragraph>
                 Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.
               </Paragraph>
             </Col>
-            <Col xs={12} md={4}>
+            <Col sm={12} md={4}>
               <Headline type="h2">Placeholder 3</Headline>
               <Paragraph>
                 Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.

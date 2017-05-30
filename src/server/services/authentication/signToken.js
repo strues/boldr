@@ -1,6 +1,5 @@
 /* @flow */
 import jwt from 'jsonwebtoken';
-import format from 'date-fns/format';
 import config from '../../config';
 
 function signToken(user: Object) {

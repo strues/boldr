@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import dateFns from 'date-fns';
 import classnames from 'classnames';
 import FlatButton from 'material-ui/FlatButton';
-import { Col, Row, StyleClasses } from 'boldr-ui';
+import { StyleClasses } from 'boldr-ui';
+import Col from '~components/Layout/Col';
+import Row from '~components/Layout/Row';
 import {
   Card,
   CardActions,
@@ -45,7 +47,7 @@ export const ArticleCard = (props: Props) => {
         <CardText>
           {excerpt}
           <Row>
-            <Col xs={12}>
+            <Col sm={12}>
               <Link to={`/blog/${slug}`} className="readmore-link">
                 <FlatButton
                   primary

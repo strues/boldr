@@ -33,6 +33,7 @@ export default app => {
     res.set('Request-Id', uuid());
     next();
   });
+  app.set('json spaces', 2);
 
   app.use(cookieParser(config.token.secret));
   if (process.env.NODE_ENV !== 'production') {

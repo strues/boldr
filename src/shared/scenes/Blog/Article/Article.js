@@ -3,8 +3,9 @@ import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import classnames from 'classnames';
-import { Grid, Row, Col, StyleClasses, Loader } from 'boldr-ui';
+import { StyleClasses, Loader } from 'boldr-ui';
 import { gql, graphql } from 'react-apollo';
+import { Grid, Row, Col } from '~components/Layout';
 import { ArticleSidebar, ArticleContent, ArticleTitle } from '../components';
 import BaseTemplate from '../../../templates/BaseTemplate';
 
@@ -36,8 +37,7 @@ class Article extends PureComponent {
         helmetMeta={<Helmet title={getArticleBySlug.title} />}
       >
         <div className={classes}>
-
-          <Grid>
+          <Grid fluid>
             <Row>
               <Col sm={12} md={8} lg={9}>
                 <ArticleContent {...getArticleBySlug} />
@@ -63,25 +63,7 @@ class Article extends PureComponent {
       </Col>
     );
   };
-  renderPostBg = () => {
-    const { getArticleBySlug } = this.props.data;
-    const PostBg = styled.section`
-    max-height: 400px;
-    min-height: 400px;
-    height: 100%;
-    overflow: hidden;
-    width: 100%;
-    background-size: cover;
-    background-attachment: fixed;
-    background-image: url(${getArticleBySlug.featureImage});
-    align-items: center;
-    background-position-x: 50%;
-    background-position-y: 50%;
-    margin-bottom: 30px;
 
-  `;
-    return <PostBg><ArticleTitle title={getArticleBySlug.title} /></PostBg>;
-  };
   render() {
     if (this.props.data.loading) {
       return <Loader />;

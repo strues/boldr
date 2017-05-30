@@ -1,9 +1,9 @@
 /* @flow */
 
 import React, { PureComponent } from 'react';
-import { Grid, Col, Row, Loader } from 'boldr-ui';
 import Helmet from 'react-helmet';
 import { gql, graphql } from 'react-apollo';
+import Loader from '~components/Loader';
 import BaseTemplate from '../../../templates/BaseTemplate';
 import TagList from './TagList';
 

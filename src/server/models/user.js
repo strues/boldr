@@ -1,7 +1,7 @@
 /* eslint-disable id-match */ /* eslint-disable no-unused-vars */
 import { Model } from 'boldr-orm';
 import Promise from 'bluebird';
-import Bcrypt from 'bcrypt';
+import Bcrypt from 'bcryptjs';
 import _debug from 'debug';
 // Related Models
 import Role from './Role';

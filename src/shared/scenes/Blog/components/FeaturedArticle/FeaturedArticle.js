@@ -3,7 +3,9 @@ import React from 'react';
 import Link from 'react-router-dom/Link';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { Row, Col, Paragraph, mediaQuery } from 'boldr-ui';
+import {Row, Col} from '~components/Layout';
+import Paragraph from '~components/Paragraph';
+import { mediaQuery } from '../../../../theme/theme';
 import FlatButton from 'material-ui/FlatButton';
 import { selectArticle } from '../../state/articles/actions';
 import TagBlock from '../TagBlock';
@@ -111,11 +113,7 @@ export const FeaturedArticle = (props: Props) => {
           <Paragraph>{props.excerpt}</Paragraph>
           <Row style={{ paddingTop: '20px' }} xsEnd>
             <Link to={`/blog/${props.slug}`}>
-              <FlatButton
-                primary
-                label="Read More"
-                onClick={transitionPost}
-              />
+              <FlatButton primary label="Read More" onClick={transitionPost} />
             </Link>
           </Row>
           <Row>

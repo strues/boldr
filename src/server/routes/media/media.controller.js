@@ -5,14 +5,13 @@ import uuid from 'uuid';
 import _debug from 'debug';
 import request from 'request';
 import fs from 'fs-extra';
+import Jimp from 'jimp';
 import shortId from 'shortid';
 import appRoot from 'boldr-utils/es/node/appRoot';
-import sharp from 'sharp';
 import formidable from 'formidable';
 import { responseHandler, BadRequest } from '../../core/index';
 import Media from '../../models/Media';
 import { logger } from '../../services';
-
 
 const imgRegex = new RegExp(
   '^.*.((j|J)(p|P)(e|E)?(g|G)|(g|G)(i|I)(f|F)|(p|P)(n|N)(g|G))$',
@@ -115,11 +114,17 @@ export function uploadMedia(req, res, next) {
     .on('file', (name, file) => {
       // here we have the file buffer data
       // we're going to create a thumbnail with it.
-      sharp(file.path)
-        .resize(320, 240)
-        .toFile(path.join(UPLOAD_DIR, file.thumbnailSaveName), (err, info) =>
-          console.log(err, info),
-        );
+      Jimp.read(file.path, (err, image) => {
+        if (err) {
+          return debug('error', err);
+        }
+        image
+          .resize(320, 240)
+          .write(path.join(UPLOAD_DIR, file.thumbnailSaveName), (err, info) =>
+            console.log(err, info),
+          );
+        // do stuff with the image (if no exception)
+      });
       if (!thumbnailSet) {
         data.thumbnail = {
           data: fs.readFileSync(file.path),

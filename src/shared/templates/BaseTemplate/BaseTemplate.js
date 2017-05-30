@@ -21,6 +21,9 @@ type Props = {
   isMobile: boolean,
   auth: Object,
   data: Object,
+  bgColor: ?string,
+  bgImg: ?string,
+  heroContent: any,
 };
 
 const Wrapper = styled.div`

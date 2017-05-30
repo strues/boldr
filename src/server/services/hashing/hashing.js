@@ -1,6 +1,6 @@
 /* eslint-disable import/prefer-default-export */
 import Promise from 'bluebird';
-import Bcrypt from 'bcrypt';
+import Bcrypt from 'bcryptjs';
 
 const bcrypt = Promise.promisifyAll(Bcrypt);
 

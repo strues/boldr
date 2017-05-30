@@ -1,5 +1,4 @@
 import { GraphQLID, GraphQLInt, GraphQLString, GraphQLNonNull } from 'graphql';
-import bcrypt from 'bcrypt';
 import uuid from 'uuid';
 import jwt from 'jsonwebtoken';
 import { comparePassword } from '../../services/hashing';

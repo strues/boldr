@@ -19,11 +19,11 @@ type Props = {
 class TaggedPost extends Component {
   props: Props;
   render() {
-    const { articlesByTag, loading } = this.props.data;
+    const { getArticlesForTag, loading } = this.props.data;
     if (loading) {
       return <Loader />;
     }
-    if (!articlesByTag) {
+    if (!getArticlesForTag) {
       return <div>No posts matching the tag</div>;
     }
 
@@ -33,7 +33,7 @@ class TaggedPost extends Component {
           <ToolbarTitle text={`Posts tagged ${this.props.match.params.name}`} />
         </Toolbar>
         <List>
-          {articlesByTag.map(post => (
+          {getArticlesForTag.map(post => (
             <ListItem key={post.id} primaryText={post.title} />
           ))}
         </List>
@@ -45,7 +45,7 @@ class TaggedPost extends Component {
 export default graphql(
   gql`
   query tags($name: String!, $offset: Int!, $limit: Int!) {
-    articlesByTag(name: $name, offset: $offset, limit: $limit) {
+    getArticlesForTag(name: $name, offset: $offset, limit: $limit) {
       id,
       title,
       slug,

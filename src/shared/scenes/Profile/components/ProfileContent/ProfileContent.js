@@ -3,8 +3,12 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
 import styled from 'styled-components';
-import Button from 'boldr-ui/lib/components/Button';
-import { FontIcon, Col, Row, Headline, Social } from 'boldr-ui';
+import Button from '~components/Button';
+import FontIcon from '~components/FontIcon';
+import Col from '~components/Layout/Col';
+import Row from '~components/Layout/Row';
+import Headline from '~components/Headline';
+import Social from '~components/Social';
 
 import ProfileDetail from '../ProfileDetail';
 
@@ -60,11 +64,11 @@ const ProfileContent = (props: Props) => {
           </ImgWrapper>
         </Col>
         <Col sm={12} md={6}>
-          <Col xs>
-            <Headline type="h1">
-              {profile.firstName} {' '} {profile.lastName}'s Profile
-            </Headline>
-          </Col>
+
+          <Headline type="h1">
+            {profile.firstName} {' '} {profile.lastName}'s Profile
+          </Headline>
+
           <DetailList>
             <ProfileDetail
               label={<FontIcon>email</FontIcon>}

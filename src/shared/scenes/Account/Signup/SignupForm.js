@@ -18,7 +18,7 @@ const SignupForm = (props: Props) => {
   return (
     <Form onSubmit={handleSubmit} className="boldr-form__generic">
       <Row>
-        <Col xs={6}>
+        <Col sm={6}>
           <Field
             id="email"
             name="email"
@@ -28,7 +28,7 @@ const SignupForm = (props: Props) => {
             validate={[isRequired, isEmail]}
           />
         </Col>
-        <Col xs={6}>
+        <Col sm={6}>
           <Field
             id="password"
             name="password"
@@ -40,7 +40,7 @@ const SignupForm = (props: Props) => {
         </Col>
       </Row>
       <Row>
-        <Col xs={6}>
+        <Col sm={6}>
           <Field
             id="first-name"
             name="firstName"
@@ -50,7 +50,7 @@ const SignupForm = (props: Props) => {
             validate={[isRequired]}
           />
         </Col>
-        <Col xs={6}>
+        <Col sm={6}>
           <Field
             id="last-name"
             name="lastName"
@@ -62,9 +62,9 @@ const SignupForm = (props: Props) => {
         </Col>
       </Row>
       <Row>
-        <Col xs={12}>
-          <Row xsCenter>
-            <Col xs={6}>
+        <Col sm={12}>
+          <Row>
+            <Col sm={6} smOffset={3}>
               <Field
                 id="username"
                 name="username"
