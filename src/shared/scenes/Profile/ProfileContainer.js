@@ -2,9 +2,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { Loader } from 'boldr-ui';
 import { gql, graphql } from 'react-apollo';
-
+import Loader from '~components/Loader';
 import { BaseTemplate } from '../../templates';
 import Profile from './Profile';
 

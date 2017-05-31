@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import classnames from 'classnames';
-import { StyleClasses } from 'boldr-ui';
+import { StyleClasses } from '../../../../theme/styleClasses';
 
 import type { ReactElement } from '../../../../types/react';
 

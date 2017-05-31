@@ -4,41 +4,36 @@ exports[`<DashboardFooter /> renders snapshot 1`] = `
 <footer
   className="boldrui-dash-footer"
 >
-  <Grid
+  <Row
     componentClass="div"
-    fluid={true}
   >
-    <Row
+    <Col
       componentClass="div"
+      md={9}
+      sm={8}
     >
-      <Col
-        componentClass="div"
-        md={8}
-        xs={12}
+      <span
+        className="boldrui-dash-footer-copyright"
       >
-        <span
-          className="boldrui-dash-footer-copyright"
-        >
-          widget
-        </span>
-      </Col>
-      <Col
-        componentClass="div"
-        md={4}
-        xs={12}
+        widget
+      </span>
+    </Col>
+    <Col
+      componentClass="div"
+      md={3}
+      sm={4}
+    >
+      <span
+        className="boldrui-dash-footer-powered"
       >
-        <span
-          className="boldrui-dash-footer-powered"
+        Powered by 
+        <a
+          href="https://boldr.io"
         >
-          Powered by 
-          <a
-            href="https://boldr.io"
-          >
-            Boldr
-          </a>
-        </span>
-      </Col>
-    </Row>
-  </Grid>
+          Boldr
+        </a>
+      </span>
+    </Col>
+  </Row>
 </footer>
 `;

@@ -1,12 +1,17 @@
 /* @flow */
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import Button from 'boldr-ui/lib/components/Button';
-import { InputField, Form } from 'boldr-ui';
+import { graphql, compose } from 'react-apollo';
+import gql from 'graphql-tag';
+import Button from '~components/Button';
+import Form from '~components/Form/Form';
+import InputField from '~components/Form/Fields/InputField';
+import { formatReduxFormErrors } from '~core/reduxFormErrors';
 
 type Props = {
+  addTagMutation: Function,
   handleSubmit?: Function,
-  reset?: Function,
+  reset: ?Function,
   submitting?: boolean,
   fields?: Object,
   pristine?: boolean,
@@ -16,35 +21,61 @@ const style = {
   margin: 12,
 };
 
-let AddTag = (props: Props) => {
-  // eslint-disable-line
-  const { handleSubmit, reset } = props;
-  return (
-    <Form className="boldr-form__addtag" onSubmit={handleSubmit}>
-      <Field
-        id="tag-name"
-        name="name"
-        component={InputField}
-        type="text"
-        label="Name"
-      />
-      <Field
-        id="tag-description"
-        name="description"
-        component={InputField}
-        type="text"
-        label="Description"
-      />
+class AddTag extends React.Component {
+  addTagMutation = values => {
+    const { addTagMutation } = this.props;
 
-      <div className="form__footer">
-        <Button type="submit" style={style}>Save</Button>
-        <Button onClick={reset} style={style} theme="secondary">Reset</Button>
-      </div>
-    </Form>
-  );
-};
-AddTag = reduxForm({
-  form: 'addTagForm',
-})(AddTag);
+    return addTagMutation(values).catch(formatReduxFormErrors);
+  };
+  props: Props;
+  render() {
+    // eslint-disable-line
+    const { handleSubmit, reset } = this.props;
+    return (
+      <Form
+        className="boldr-form__addtag"
+        onSubmit={handleSubmit(this.addTagMutation)}
+      >
+        <Field
+          id="tag-name"
+          name="name"
+          component={InputField}
+          type="text"
+          label="Name"
+        />
+        <Field
+          id="tag-description"
+          name="description"
+          component={InputField}
+          type="text"
+          label="Description"
+        />
 
-export default AddTag;
+        <div className="form__footer">
+          <Button type="submit" style={style}>Save</Button>
+          <Button onClick={reset} style={style} theme="secondary">Reset</Button>
+        </div>
+      </Form>
+    );
+  }
+}
+
+export const ADD_TAG_MUTATION = gql`
+  mutation addTag($tag: AddTagInput!) {
+    addTag(tag: $tag) {
+      name
+      description
+    }
+  }
+`;
+
+export default compose(
+  graphql(ADD_TAG_MUTATION, {
+    props: ({ mutate }) => ({
+      addTagMutation: values => mutate({ variables: { tag: values } }),
+    }),
+  }),
+  reduxForm({
+    form: 'addTagForm',
+  }),
+)(AddTag);

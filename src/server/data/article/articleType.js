@@ -134,7 +134,7 @@ export const CreateArticleInput = new GraphQLInputObjectType({
       description: 'url of the article background image',
     },
     tags: {
-      type: new GraphQLList(TagType),
+      type: GraphQLString,
       description: 'Tags relating articles together',
     },
   }),

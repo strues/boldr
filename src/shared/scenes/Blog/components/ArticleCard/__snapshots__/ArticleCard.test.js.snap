@@ -29,7 +29,7 @@ exports[`<ArticleCard /> renders snapshot 1`] = `
       >
         <Col
           componentClass="div"
-          xs={12}
+          sm={12}
         >
           <Link
             className="readmore-link"

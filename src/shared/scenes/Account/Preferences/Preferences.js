@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import Dropzone from 'react-dropzone';
-import { Col, Row, Grid } from 'boldr-ui';
+import { Col, Row, Grid } from '~components/Layout';
 import { BaseTemplate } from '../../../templates';
 import EditProfile from './components/EditProfile';
 

@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import FormCard from '../../../components/Form/FormCard';
+import FormCard from '~components/Form/FormCard';
 import LoginForm from './LoginForm';
 
 type Props = {

@@ -45,4 +45,18 @@ const TagType = new GraphQLObjectType({
   }),
 });
 
+export const AddTagInput = new GraphQLInputObjectType({
+  name: 'AddTagInput',
+  fields: () => ({
+    name: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'The name of the tag',
+    },
+    description: {
+      type: GraphQLString,
+      description: 'A description of the tag.',
+    },
+  }),
+});
+
 export default TagType;

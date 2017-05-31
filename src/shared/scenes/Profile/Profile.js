@@ -2,7 +2,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import classnames from 'classnames';
-import { Grid, Col, Row, StyleClasses } from 'boldr-ui';
+import { Grid, Col, Row } from '~components/Layout';
+import { StyleClasses } from '../../theme/styleClasses';
 import ProfileContent from './components/ProfileContent';
 
 type Props = {

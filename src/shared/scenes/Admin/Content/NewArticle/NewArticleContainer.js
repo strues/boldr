@@ -1,6 +1,8 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { graphql } from 'react-apollo';
+import gql from 'graphql-tag';
 import draftToHtml from 'draftjs-to-html';
 import { uploadArticleImage } from '../../state';
 import { createArticle } from '../../../Blog/state';
@@ -23,17 +25,8 @@ class NewArticleContainer extends Component {
     this.props.uploadArticleImage(payload);
   }
   handleOnSubmit(values: Article) {
-    const postData = {
-      title: values.title,
-      tags: values.tags,
-      excerpt: values.excerpt,
-      featureImage: this.props.postImage.url || values.featureImage,
-      published: values.published,
-      rawContent: values.content,
-      content: draftToHtml(values.content),
-      meta: values.meta,
-    };
-    this.props.createArticle(postData);
+
+    this.props.onSubmit(values);
   }
   props: Props;
 
@@ -53,6 +46,49 @@ const mapStateToProps = state => {
     postImage: state.admin.attachments.postImage,
   };
 };
-export default connect(mapStateToProps, { createArticle, uploadArticleImage })(
-  NewArticleContainer,
+
+export const CREATE_ARTICLE_MUTATION = gql`
+  mutation createArticle($article: CreateArticleInput!) {
+    createArticle(article: $article) {
+      title
+      slug
+      content
+      rawContent
+      featured
+      published
+      excerpt
+      featureImage
+
+    }
+  }
+`;
+const withMutation = graphql(CREATE_ARTICLE_MUTATION, {
+  props: ({ mutate }) => ({
+    createArticle: values =>
+      mutate({
+        variables: {
+          article: {
+            title: values.title,
+            slug: values.title,
+            content: draftToHtml(values.content),
+            rawContent: values.rawContent,
+            featured: false,
+            published: values.published,
+            excerpt: values.excerpt,
+            featureImage: values.featureImage,
+            tags: values.tags,
+          },
+        },
+      }),
+  }),
+});
+const mapDispatchToProps = (dispatch, ownProps) => ({
+  uploadArticleImage: () => dispatch(uploadArticleImage()),
+  onSubmit: values => {
+    ownProps.createArticle(values).then(res => {}).catch(error => {});
+  },
+});
+
+export default withMutation(
+  connect(mapStateToProps, mapDispatchToProps)(NewArticleContainer),
 );

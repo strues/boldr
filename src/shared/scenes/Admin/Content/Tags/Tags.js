@@ -80,7 +80,7 @@ class Tags extends Component {
           {!this.state.add
             ? null
             : <Paper zDepth={3} className="boldr-paperoverride">
-                <AddTag onSubmit={this.handleTagSubmit} />
+                <AddTag />
               </Paper>}
         </Col>
       </Row>
