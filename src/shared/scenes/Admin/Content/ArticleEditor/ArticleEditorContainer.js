@@ -49,7 +49,8 @@ const mapStateToProps = state => {
     postImage: state.admin.attachments.postImage,
   };
 };
-const ARTICLES_QUERY = gql`
+
+export const GET_ARTICLE_QUERY = gql`
   query getArticleBySlug($slug: String!) {
     getArticleBySlug(slug: $slug) {
       id,
@@ -72,7 +73,7 @@ const ARTICLES_QUERY = gql`
   }
 `;
 
-const ArticleEditorContainerWithData = graphql(ARTICLES_QUERY, {
+const ArticleEditorContainerWithData = graphql(GET_ARTICLE_QUERY, {
   options: props => ({
     variables: {
       slug: props.match.params.slug,

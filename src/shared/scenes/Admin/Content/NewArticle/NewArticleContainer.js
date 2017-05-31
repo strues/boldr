@@ -48,8 +48,8 @@ const mapStateToProps = state => {
 };
 
 export const CREATE_ARTICLE_MUTATION = gql`
-  mutation createArticle($article: CreateArticleInput!) {
-    createArticle(article: $article) {
+  mutation createArticle($input: CreateArticleInput!) {
+    createArticle(input: $input) {
       title
       slug
       content
@@ -67,7 +67,7 @@ const withMutation = graphql(CREATE_ARTICLE_MUTATION, {
     createArticle: values =>
       mutate({
         variables: {
-          article: {
+          input: {
             title: values.title,
             slug: values.title,
             content: draftToHtml(values.content),

@@ -2,6 +2,7 @@
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import draftToHtml from 'draftjs-to-html';
+import { gql, graphql } from 'react-apollo';
 import EditArticleForm from './components/EditArticleForm';
 
 type Props = {
@@ -13,16 +14,9 @@ class ArticleEditor extends PureComponent {
   props: Props;
 
   handleSubmit = (values: Object) => {
-    const postData = {
-      title: values.title,
-      excerpt: values.excerpt,
-      published: values.published,
-      rawContent: values.content,
-      content: draftToHtml(values.content),
-      meta: values.meta,
-      id: this.props.currentArticle.id || '',
-    };
-    this.props.updateArticle(postData);
+    const articleId = this.props.currentArticle.id;
+
+    this.props.editArticle(articleId, values);
   };
 
   render() {
@@ -37,7 +31,6 @@ class ArticleEditor extends PureComponent {
       backgroundImage: currentArticle.backgroundImage,
       attachments: currentArticle.attachments,
       excerpt: currentArticle.excerpt,
-      tags: currentArticle.tags,
       meta: currentArticle.meta,
       published: currentArticle.published,
       author: currentArticle.author,
@@ -56,4 +49,38 @@ class ArticleEditor extends PureComponent {
   }
 }
 
-export default ArticleEditor;
+export const EDIT_ARTICLE_MUTATION = gql`
+  mutation editArticle($id: UUID!, $input: EditArticleInput!) {
+    editArticle(id: $id, input: $input) {
+      title
+      slug
+      content
+      rawContent
+      featured
+      published
+      excerpt
+      featureImage
+    }
+  }
+`;
+
+export default graphql(EDIT_ARTICLE_MUTATION, {
+  props: ({ mutate }) => ({
+    editArticle: (articleId, values) =>
+      mutate({
+        variables: {
+          id: articleId,
+          input: {
+            title: values.title,
+            slug: values.title,
+            content: draftToHtml(values.content),
+            rawContent: values.rawContent,
+            featured: false,
+            published: values.published,
+            excerpt: values.excerpt,
+            featureImage: values.featureImage,
+          },
+        },
+      }),
+  }),
+})(ArticleEditor);
