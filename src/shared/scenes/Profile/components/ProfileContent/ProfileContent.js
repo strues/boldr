@@ -49,7 +49,7 @@ const ProfileContent = (props: Props) => {
   );
   return (
     <div className="boldr-profile__content">
-      <Row xsEnd>
+      <Row end="xs">
 
         {props.me ? editButtons : null}
       </Row>

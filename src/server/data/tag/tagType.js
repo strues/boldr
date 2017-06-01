@@ -45,8 +45,8 @@ const TagType = new GraphQLObjectType({
   }),
 });
 
-export const AddTagInput = new GraphQLInputObjectType({
-  name: 'AddTagInput',
+export const TagInput = new GraphQLInputObjectType({
+  name: 'TagInput',
   fields: () => ({
     name: {
       type: new GraphQLNonNull(GraphQLString),
@@ -58,5 +58,7 @@ export const AddTagInput = new GraphQLInputObjectType({
     },
   }),
 });
+
+
 
 export default TagType;

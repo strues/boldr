@@ -1,13 +1,12 @@
 /* @flow */
 import React, { Component } from 'react';
 import Button from '~components/Button';
-import Grid from 'boldr-ui/lib/components/Layout/Grid';
-import Icon from 'boldr-ui/lib/components/Icons';
+import Grid from '~components/Layout/Grid';
+import Icon from '~components/Icons';
 import IconButton from 'material-ui/IconButton';
 import classNames from 'classnames/bind';
 import cxN from 'classnames';
 import Link from 'react-router-dom/Link';
-import type { ReactChildren } from '../../types/react';
 
 import Branding from './Branding';
 import NavItem from './NavItem';
@@ -192,7 +191,7 @@ class SiteHeader extends Component {
         })}
         onKeyDown={this.handleKeyDown}
       >
-        <Grid>
+        <Grid fluid={false}>
           <div
             className={cx('boldrui-sh__menu', {
               'boldrui-sh__dropdown-open': dropdownIsOpen,

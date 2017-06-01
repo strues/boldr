@@ -55,7 +55,7 @@ app.use(
 );
 // Setup the public directory so that we can serve static assets.
 app.use(express.static(pathResolve(appRoot.get(), './public')));
-
+// app.get('/admin', adminSsr);
 // Pass any get request through the SSR middleware before sending it back
 app.get('*', ssrMiddleware);
 // Catch and format errors

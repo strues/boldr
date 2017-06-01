@@ -96,4 +96,5 @@ const SiteHeaderContainerWithData = graphql(MENU_QUERY, {
     },
   }),
 })(SiteHeaderContainer);
+// $FlowIssue
 export default connect(null, mapDispatchToProps)(SiteHeaderContainerWithData);

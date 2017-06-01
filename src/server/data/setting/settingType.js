@@ -15,6 +15,7 @@ import {
   GraphQLUUID,
   GraphQLJSON,
 } from '../scalars';
+
 const SettingType = new GraphQLObjectType({
   name: 'Setting',
   description: 'Editable site settings',
@@ -42,4 +43,25 @@ const SettingType = new GraphQLObjectType({
   }),
 });
 
+export const SettingInput = new GraphQLInputObjectType({
+  name: 'SettingInput',
+  fields: () => ({
+    key: {
+      type: GraphQLString,
+      description: 'The setting option',
+    },
+    value: {
+      type: GraphQLString,
+      description: 'The value of the setting',
+    },
+    label: {
+      type: GraphQLString,
+      description: 'A non-normalized key',
+    },
+    description: {
+      type: GraphQLString,
+      description: 'The description for what the setting does.',
+    },
+  }),
+});
 export default SettingType;

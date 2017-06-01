@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 
 import styled from 'styled-components';
 import { gql, graphql } from 'react-apollo';
-import { Photo, Grid, Col, Row, Block, Headline, Loader } from 'boldr-ui';
+import { Grid, Col, Row } from '~components/Layout';
+import { Photo, Block, Headline, Loader } from 'boldr-ui';
 import MediaForm from './components/MediaForm';
 
 type Props = {
@@ -11,7 +12,7 @@ type Props = {
   editMedia: () => void,
 };
 type Data = {
-  mediaById: MediaFile,
+  getMediaById: MediaFile,
   loading: boolean,
 };
 
@@ -23,10 +24,10 @@ const MediaFormCard = styled.div`
   margin-bottom: 2rem;
 `;
 
-export class MediaManager extends Component {
+class MediaManager extends Component {
   handleSubmit = (values: Object) => {
     const mediaData = {
-      id: this.props.data.mediaById.id,
+      id: this.props.data.getMediaById.id,
       fileName: values.fileName,
       fileDescription: values.fileDescription,
     };
@@ -34,7 +35,7 @@ export class MediaManager extends Component {
   };
   props: Props;
   render() {
-    const { mediaById, loading } = this.props.data;
+    const { getMediaById, loading } = this.props.data;
 
     if (loading) {
       return <Loader />;
@@ -44,11 +45,11 @@ export class MediaManager extends Component {
         <Grid>
           <Row>
             <Col xs={12}>
-              <Row xsCenter>
+              <Row center="xs">
                 <Col xs={6}>
                   <MediaContent>
 
-                      <Photo src={mediaById.url} />
+                      <Photo src={getMediaById.url} />
 
                   </MediaContent>
                 </Col>
@@ -57,13 +58,13 @@ export class MediaManager extends Component {
           </Row>
           <Row>
             <Col xs={12}>
-              <Row xsCenter>
+              <Row center="xs">
                 <Col xs={8}>
                   <MediaFormCard>
                     <Block>
                       <Headline type="h2">Edit media attributes</Headline>
                       <MediaForm
-                        initialValues={mediaById}
+                        initialValues={getMediaById}
                         onSubmit={this.handleSubmit}
                       />
                     </Block>
@@ -79,8 +80,8 @@ export class MediaManager extends Component {
 }
 
 export const MEDIA_BY_ID_QUERY = gql`
-  query media($id: UUID!) {
-      mediaById(id: $id) {
+  query getMediaById($id: UUID!) {
+      getMediaById(id: $id) {
         id,
         fileName,
         thumbName,
@@ -90,10 +91,11 @@ export const MEDIA_BY_ID_QUERY = gql`
   }
 `;
 
-export default graphql(MEDIA_BY_ID_QUERY, {
+const MediaManagerWithData = graphql(MEDIA_BY_ID_QUERY, {
   options: props => ({
     variables: {
       id: props.match.params.id,
     },
   }),
 })(MediaManager);
+export default MediaManagerWithData;

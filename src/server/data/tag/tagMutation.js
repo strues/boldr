@@ -6,19 +6,19 @@ import {
   GraphQLString,
 } from 'graphql';
 import Tag from '../../models/Tag';
-import TagType, { AddTagInput } from './tagType';
+import TagType, { TagInput } from './tagType';
 
 export default {
   addTag: {
     type: TagType,
     description: 'creating a new tag',
     args: {
-      tag: {
-        type: new GraphQLNonNull(AddTagInput),
+      input: {
+        type: new GraphQLNonNull(TagInput),
       },
     },
     async resolve(_, args, context) {
-      const payload = await Tag.query().saveAndFetch(args.tag);
+      const payload = await Tag.query().saveAndFetch(args.input);
       return payload;
     },
   },

@@ -19,17 +19,17 @@ export default {
     type: UserLoginResponse,
     description: 'for troubleshooting by admins, create a JWT for a given userId',
     args: {
-      user: {
+      input: {
         type: new GraphQLNonNull(UserLoginInput),
       },
     },
     async resolve(_, args, context) {
       const user = await User.query()
-        .where({ email: args.user.email })
+        .where({ email: args.input.email })
         .eager('[roles,socialMedia]')
         .first();
 
-      const validAuth = await user.authenticate(args.user.password);
+      const validAuth = await user.authenticate(args.input.password);
       // remove the password from the response.
       user.stripPassword();
       // sign the token
@@ -46,21 +46,21 @@ export default {
     type: UserType,
     description: 'A user registering for an account.',
     args: {
-      user: {
+      input: {
         type: new GraphQLNonNull(UserSignupInput),
       },
     },
     async resolve(_, args, context) {
       console.log(args);
       const checkUser = await User.query()
-        .where({ email: args.user.email })
+        .where({ email: args.input.email })
         .first();
 
       if (checkUser) {
         return new Error('The user exists');
       }
 
-      const newUser = await User.query().insert(args.user);
+      const newUser = await User.query().insert(args.input);
       await newUser.$relatedQuery('roles').relate({ id: 1 });
 
       if (!newUser) {

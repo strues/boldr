@@ -34,7 +34,7 @@ class ArticleListing extends React.PureComponent {
     const allArticles =
       articles.filter(p => p.published) && articles.filter(p => !p.featured);
     return allArticles.map(article => (
-      <Col key={article.id} sm={12} md={4}>
+      <Col key={article.id} xs={12} md={4}>
         <CardSpacer>
           <ArticleCard article={article} tags={article.tags} />
         </CardSpacer>
@@ -45,7 +45,7 @@ class ArticleListing extends React.PureComponent {
     const { articles } = this.props;
     const featuredArticles = articles.filter(p => p.featured);
     return featuredArticles.map(article => (
-      <Col key={article.id} sm={12}>
+      <Col key={article.id} xs={12}>
         <FeaturedArticle {...article} />
       </Col>
     ));
@@ -55,7 +55,7 @@ class ArticleListing extends React.PureComponent {
       return <Loader />;
     }
     return (
-      <Grid>
+      <Grid fluid={ false }>
         <FeaturedArea>
           {this.renderFeature()}
         </FeaturedArea>

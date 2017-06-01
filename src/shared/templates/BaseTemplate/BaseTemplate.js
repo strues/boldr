@@ -27,8 +27,6 @@ type Props = {
 };
 
 const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
   min-height: 100%;
   height: 100%;
   box-sizing: border-box;
@@ -64,15 +62,15 @@ class BaseTemplate extends Component {
       return (
         <Wrapper>
           {this.props.helmetMeta}
-            <Hero bgColor={this.props.bgColor} bgImg={this.props.bgImg}>
-            <SiteHeaderContainer
+          <SiteHeaderContainer
             auth={this.props.auth}
             me={this.props.me}
             settings={this.props.data.getSettings}
             isMobile={this.props.isMobile}
           />
-              {this.props.heroContent}
-            </Hero>
+          <Hero bgColor={this.props.bgColor} bgImg={this.props.bgImg}>
+            {this.props.heroContent}
+          </Hero>
 
           <ContentWrapper>
             {this.props.children}

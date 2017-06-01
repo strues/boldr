@@ -23,6 +23,7 @@ module.exports = {
     srcDir: path.resolve(__dirname, '../src'),
     client: {
       entry: path.resolve(__dirname, '../src/client/index.js'),
+      admin: path.resolve(__dirname, '../src/client/admin.js'),
       bundleDir: path.resolve(__dirname, '../public/assets'),
     },
     server: {

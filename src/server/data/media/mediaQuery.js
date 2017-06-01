@@ -42,7 +42,7 @@ export default {
       },
     },
     async resolve(_, { id }, context) {
-      const media = await Media.query().getMediaById(id).then(jsonResult);
+      const media = await Media.getMediaById(id);
       if (media) {
         return media;
       }

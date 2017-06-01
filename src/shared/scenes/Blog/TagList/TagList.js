@@ -15,10 +15,10 @@ const TagList = (props: Props) => {
   }
   return (
     <div>
-      <Grid>
+      <Grid fluid={false}>
         <Row>
           {props.articles.map(article => (
-            <Col key={article.id} sm={12} md={4}>
+            <Col key={article.id} xs={12} md={4}>
               <ArticleCard listTags={article.tags} article={article} />
             </Col>
           ))}

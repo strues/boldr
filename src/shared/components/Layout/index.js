@@ -1,5 +1,11 @@
-import Row from './Row';
-import Col from './Col';
-import Grid from './Grid';
+import Grid from './Grid'
+import Row from './Row'
+import Col from './Col'
+import { BASE_CONF } from './config'
 
-export { Row, Col, Grid };
+export {
+  Grid,
+  Row,
+  Col,
+  BASE_CONF
+}

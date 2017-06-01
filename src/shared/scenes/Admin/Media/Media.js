@@ -94,29 +94,27 @@ class Media extends Component {
             <Row>
               <MediaList>
                 {this.state.currentlyVisible.map(m => (
-
-                    <MediaItem>
-                      <Photo
-                        src={`/uploads/${m.thumbName}`}
-                        alt={m.fileName}
-                        role="presentation"
-                        cta={
-                          <div>
-                            <Link to={`/admin/media/${m.id}`}>
-                              <IconButton>
-                                <FontIcon>edit</FontIcon>
-                              </IconButton>
-                            </Link>
-                            <IconButton
-                              onTouchTap={() => this.props.deleteMedia(m)}
-                            >
-                              <FontIcon>delete_permanently</FontIcon>
+                  <MediaItem key={m.id}>
+                    <Photo
+                      src={`/uploads/${m.thumbName}`}
+                      alt={m.fileName}
+                      role="presentation"
+                      cta={
+                        <div>
+                          <Link to={`/admin/media/${m.id}`}>
+                            <IconButton>
+                              <FontIcon>edit</FontIcon>
                             </IconButton>
-                          </div>
-                        }
-                      />
-                    </MediaItem>
-
+                          </Link>
+                          <IconButton
+                            onTouchTap={() => this.props.deleteMedia(m)}
+                          >
+                            <FontIcon>delete_permanently</FontIcon>
+                          </IconButton>
+                        </div>
+                      }
+                    />
+                  </MediaItem>
                 ))}
               </MediaList>
             </Row>

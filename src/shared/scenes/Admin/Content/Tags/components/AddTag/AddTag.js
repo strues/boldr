@@ -61,8 +61,8 @@ class AddTag extends React.Component {
 }
 
 export const ADD_TAG_MUTATION = gql`
-  mutation addTag($tag: AddTagInput!) {
-    addTag(tag: $tag) {
+  mutation addTag($input: TagInput!) {
+    addTag(input: $input) {
       name
       description
     }
@@ -72,7 +72,7 @@ export const ADD_TAG_MUTATION = gql`
 export default compose(
   graphql(ADD_TAG_MUTATION, {
     props: ({ mutate }) => ({
-      addTagMutation: values => mutate({ variables: { tag: values } }),
+      addTagMutation: values => mutate({ variables: { input: values } }),
     }),
   }),
   reduxForm({

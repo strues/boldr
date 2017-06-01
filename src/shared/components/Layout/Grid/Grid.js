@@ -1,34 +1,37 @@
-import React from 'react';
-import classNames from 'classnames';
 
-export type Props = {
-  fluid?: boolean,
-  className?: string,
-  style?: Object,
-  children?: number | string | React.Element | Array<any>,
-  componentClass: ?string,
-};
+import React from 'react'
+import PropTypes from 'prop-types'
+import styled, { css } from 'styled-components'
 
-const Grid = ({ fluid, className, style, children, componentClass }: Props) => {
-  const ComponentClass = componentClass;
+import createProps from '../createProps'
+import config, { DIMENSION_NAMES } from '../config'
 
-  const classes = classNames(
-    {
-      grid: !fluid,
-      grid__fluid: fluid,
-    },
-    className,
-  );
+const Grid = props => (
+  React.createElement(props.tagName || 'div', createProps(Grid.propTypes, props))
+)
 
-  return (
-    <ComponentClass className={classes} style={style}>
-      {children}
-    </ComponentClass>
-  );
-};
+Grid.displayName = 'Grid'
 
-Grid.defaultProps = {
-  componentClass: 'div',
-};
+Grid.propTypes = {
+  fluid: PropTypes.bool,
+  tagName: PropTypes.string,
+  children: PropTypes.node
+}
 
-export default Grid;
+export default styled(Grid)`
+  margin-right: auto;
+  margin-left: auto;
+
+  ${p => p.fluid && css`
+    padding-right: ${p => config(p).outerMargin + 'rem'};
+    padding-left: ${p => config(p).outerMargin + 'rem'};
+  `}
+
+  ${p => !p.fluid && css`
+    ${DIMENSION_NAMES.map(t =>
+      config(p).container[t] && config(p).media[t]`
+        width: ${p => config(p).container[t]}rem;
+      `
+    )}
+  `}
+`

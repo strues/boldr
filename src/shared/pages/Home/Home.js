@@ -19,19 +19,19 @@ const Home = () => {
       >
         <Grid>
           <Row>
-            <Col sm={12} md={4}>
+            <Col xs={12} md={4}>
               <Headline type="h2">Placeholder 1</Headline>
               <Paragraph>
                 Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.
               </Paragraph>
             </Col>
-            <Col sm={12} md={4}>
+            <Col xs={12} md={4}>
               <Headline type="h2">Placeholder 2</Headline>
               <Paragraph>
                 Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.
               </Paragraph>
             </Col>
-            <Col sm={12} md={4}>
+            <Col xs={12} md={4}>
               <Headline type="h2">Placeholder 3</Headline>
               <Paragraph>
                 Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.
