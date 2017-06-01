@@ -46,7 +46,7 @@ const LoginForm = (props: Props) => {
         component={InputField}
         label="Password"
       />
-      <Button type="submit" isFullWidth>Login</Button>
+      <Button htmlType="submit" kind="primary" block>Login</Button>
       <FormBottom>
         <FormBottomList>
           <FormBottomListItem>

@@ -3,10 +3,10 @@ import React from 'react';
 import Link from 'react-router-dom/Link';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import {Row, Col} from '~components/Layout';
+import { Row, Col } from '~components/Layout';
 import Paragraph from '~components/Paragraph';
 import { mediaQuery } from '../../../../theme/theme';
-import FlatButton from 'material-ui/FlatButton';
+import Button from '~components/Button';
 import { selectArticle } from '../../state/articles/actions';
 import TagBlock from '../TagBlock';
 import Tag from '../Tag';
@@ -113,7 +113,7 @@ export const FeaturedArticle = (props: Props) => {
           <Paragraph>{props.excerpt}</Paragraph>
           <Row style={{ paddingTop: '20px' }} xsEnd>
             <Link to={`/blog/${props.slug}`}>
-              <FlatButton primary label="Read More" onClick={transitionPost} />
+              <Button kind="primary" onClick={transitionPost} outline>Read More</Button>
             </Link>
           </Row>
           <Row>

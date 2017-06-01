@@ -36,20 +36,21 @@ exports[`<ArticleCard /> renders snapshot 1`] = `
             replace={false}
             to="/blog/test-post"
           >
-            <FlatButton
+            <Button
+              block={false}
+              bordered={true}
+              className=""
               disabled={false}
-              fullWidth={false}
-              label="Read More"
-              labelPosition="after"
-              labelStyle={Object {}}
+              htmlType="button"
+              kind="primary"
+              loading={false}
               onClick={[Function]}
-              onKeyboardFocus={[Function]}
-              onMouseEnter={[Function]}
-              onMouseLeave={[Function]}
-              onTouchStart={[Function]}
-              primary={true}
-              secondary={false}
-            />
+              outline={true}
+              prefix="boldrui"
+              size="medium"
+            >
+              Read More
+            </Button>
           </Link>
         </Col>
       </Row>

@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from 'boldr-ui/lib/components/Button';
+import Button from '~components/Button';
 import { Avatar } from 'boldr-ui';
 import styled from 'styled-components';
 
@@ -71,7 +71,7 @@ const MemberCard = (props: Props) => {
         </UserInfoList>
       </LeftSide>
       <RightSide>
-        <Button onClick={() => handleToggle(user)}>Edit User</Button>
+        <Button onClick={() => handleToggle(user)} kind="primary">Edit</Button>
       </RightSide>
     </MemListItem>
   );

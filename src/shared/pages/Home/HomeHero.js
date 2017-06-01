@@ -16,7 +16,7 @@ const HomeHero = () => {
           <Col xs={6}>
             <Headline type="h1">Meet Boldr.</Headline>
             <Paragraph isLead>A modern content management framework.</Paragraph>
-            <Button>Learn More</Button>
+            <Button type="primary">Learn More</Button>
           </Col>
         </Row>
       </Grid>

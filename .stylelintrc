@@ -20,7 +20,7 @@
         "comment-whitespace-inside": "always",
         "at-rule-no-vendor-prefix": true,
         "rule-empty-line-before": "always",
-        "selector-pseudo-element-colon-notation": "single",
+        "selector-pseudo-element-colon-notation": "double",
         "selector-pseudo-class-parentheses-space-inside": "never",
         "selector-no-vendor-prefix": true,
         "media-feature-name-no-vendor-prefix": true,

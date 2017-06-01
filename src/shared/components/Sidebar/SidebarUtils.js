@@ -37,7 +37,7 @@ FaIcon.defaultProps = {
 export const createItemTree = (input, level = 0) =>
   input.map(
     item =>
-      (item.items
+      item.items
         ? {
             expanded: false,
             active: false,
@@ -50,13 +50,13 @@ export const createItemTree = (input, level = 0) =>
             active: false,
             level,
             ...item,
-          }),
+          },
   );
 
 export const collapseTree = items =>
   items.map(
     item =>
-      (item.items
+      item.items
         ? {
             ...item,
             expanded: false,
@@ -65,13 +65,13 @@ export const collapseTree = items =>
         : {
             ...item,
             expanded: false,
-          }),
+          },
   );
 
 export const deactivateTree = items =>
   items.map(
     item =>
-      (item.items
+      item.items
         ? {
             ...item,
             active: false,
@@ -80,7 +80,7 @@ export const deactivateTree = items =>
         : {
             ...item,
             active: false,
-          }),
+          },
   );
 
 const expandParent = parentItem => () => {
@@ -100,21 +100,34 @@ const switchItem = (activate, items, id, link = null, switchParentFn = null) =>
       (!id && newItem.link && newItem.link === link)
     ) {
       // This item is to be toggled or activated
-      if (!activate) newItem.expanded = !newItem.expanded;
-      if (activate) newItem.active = true;
+      if (!activate) {
+        newItem.expanded = !newItem.expanded;
+      }
+      if (activate) {
+        newItem.active = true;
+      }
 
       // Collapse / deactivate all children, if it has any (e.g. "clean-up")
-      if (!activate && newItem.items)
+      if (!activate && newItem.items) {
         newItem.items = collapseTree(newItem.items);
-      if (activate && newItem.items)
+      }
+
+      if (activate && newItem.items) {
         newItem.items = deactivateTree(newItem.items);
+      }
 
       // Activate / expand the parent
-      if (switchParentFn) switchParentFn();
+      if (switchParentFn) {
+        switchParentFn();
+      }
     } else {
       // Not this item, so collapse / deactivate it and process its children if it has any
-      if (!activate) newItem.expanded = false;
-      if (activate) newItem.active = false;
+      if (!activate) {
+        newItem.expanded = false;
+      }
+      if (activate) {
+        newItem.active = false;
+      }
       if (newItem.items) {
         newItem.items = activate
           ? switchItem(true, newItem.items, id, link, activateParent(newItem))
@@ -122,8 +135,12 @@ const switchItem = (activate, items, id, link = null, switchParentFn = null) =>
       }
 
       // If the child was the targeted item, it expanded / activate the parent -> Pass up along the tree
-      if (!activate && newItem.expanded && switchParentFn) switchParentFn();
-      if (activate && newItem.active && switchParentFn) switchParentFn();
+      if (!activate && newItem.expanded && switchParentFn) {
+        switchParentFn();
+      }
+      if (activate && newItem.active && switchParentFn) {
+        switchParentFn();
+      }
     }
 
     return newItem;

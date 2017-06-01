@@ -11,7 +11,13 @@ type Props = {
 };
 
 function Html(props: Props) {
-  const { htmlAttributes, headerElements, bodyElements, appBodyString, styledCss } = props;
+  const {
+    htmlAttributes,
+    headerElements,
+    bodyElements,
+    appBodyString,
+    styledCss,
+  } = props;
 
   return (
     <html {...htmlAttributes}>

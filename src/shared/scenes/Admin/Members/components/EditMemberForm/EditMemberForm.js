@@ -2,8 +2,10 @@
 
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import Button from 'boldr-ui/lib/components/Button';
-import { Form, SelectInput, InputField } from 'boldr-ui';
+import Button from '~components/Button';
+import Select from '~components/Select';
+import { Form, InputField } from 'boldr-ui';
+import { SelectInput } from '~components/Form';
 
 const style = {
   margin: 12,
@@ -19,15 +21,15 @@ type Props = {
 const roles = [
   {
     value: 1,
-    key: 'Member',
+    text: 'Member',
   },
   {
     value: 2,
-    key: 'Staff',
+    text: 'Staff',
   },
   {
     value: 3,
-    key: 'Admin',
+    text: 'Admin',
   },
 ];
 const EditMemberForm = (props: Props) => {
@@ -70,8 +72,8 @@ const EditMemberForm = (props: Props) => {
         component={InputField}
       />
       <Field name="role" component={SelectInput} options={roles} />
-      <Button type="submit" style={style}>Save</Button>
-      <Button onClick={reset} style={style} theme="secondary">Reset</Button>
+      <Button htmlType="submit" style={style} kind="primary">Save</Button>
+      <Button onClick={reset} style={style} kind="secondary">Reset</Button>
     </Form>
   );
 };

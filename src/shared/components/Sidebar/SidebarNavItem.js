@@ -1,3 +1,4 @@
+/* @flow */
 /* eslint-disable  jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import PropTypes from 'prop-types';
@@ -27,7 +28,7 @@ type SidebarNavItemProps = {
 const SidebarNavItem = (props: SidebarNavItemProps) =>
   // if item has a link as its direct props it must be a link. We render
   // and move on. Imagine that.
-  (props.link
+  props.link
     ? <div
         className={classnames(BASE_ELEMENT, `level-${props.level}`, {
           active: props.active,
@@ -76,7 +77,7 @@ const SidebarNavItem = (props: SidebarNavItemProps) =>
               ))
             : null}
         </div>
-      </div>);
+      </div>;
 
 SidebarNavItem.defaultProps = {
   link: null,

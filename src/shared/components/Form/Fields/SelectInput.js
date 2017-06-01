@@ -1,7 +1,8 @@
 // @flow
 
 import React from 'react';
-import styled from 'styled-components';
+
+import Select, { SelectTrigger } from '~components/Select';
 import InputWrapper from '../InputWrapper';
 /**
  * An internal error handler to make sure we always pass
@@ -21,6 +22,8 @@ type Props = {
   options: Array<any>,
 };
 
+const { Option } = Select;
+
 const SelectInput = (props: Props) => {
   const { meta } = props;
   const showError = meta.touched && meta.error && meta.invalid;
@@ -29,77 +32,25 @@ const SelectInput = (props: Props) => {
 
   return (
     <InputWrapper {...props}>
-      <SelectContainer>
-        <SelectInputArea
-          {...props.input}
-          id={props.input.key}
-          name={props.input.key}
-          showError={showError}
-          visited={meta.visited}
-        >
-          {props.options.map(option => (
-            <OptionInput disabled={option.disabled} key={option.value}>
-              {option.key}
-            </OptionInput>
-          ))}
-        </SelectInputArea>
-        <SelectArrow />
-      </SelectContainer>
+      <Select
+        {...props.input}
+        id={props.input.text}
+        name={props.input.text}
+        showError={showError}
+        visited={meta.visited}
+      >
+        {props.options.map(option => (
+          <Option
+            disabled={option.disabled}
+            key={option.value}
+            value={option.value}
+          >
+            {option.text}
+          </Option>
+        ))}
+      </Select>
     </InputWrapper>
   );
 };
-
-const SelectContainer = styled.div`
-  position: relative;
-  svg {
-    position: absolute;
-    top: 5px;
-    right: 16px;
-  }
-`;
-
-const SelectInputArea = styled.select`
-  background: #fff;
-  border-radius: 3px;
-  border: solid 1px #babbbb;
-  border-color: ${props => (props.showError ? '#f44336' : '')};
-  padding: 0.8rem;
-  font-size: 16px;
-  width: 100%;
-  margin: 0 auto .5rem;
-  max-width: auto;
-  color: #484848;
-
-  &:active,
-  &:focus {
-    border-color: ${props => (props.showError ? '#f44336' : '#babbbb')};
-    outline: none;
-  }
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  -o-appearance: none;
-  appearance: none;
-  option[value=""][disabled] {
-    display: none;
-  }
-`;
-
-const OptionInput = styled.option`
-  &:first-child {
-    color: red;
-  }
-`;
-
-const SelectArrow = () => (
-  <svg
-    fill="#676767"
-    width="36"
-    viewBox="0 0 24 24"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path d="M7 10l5 5 5-5z" /><path d="M0 0h24v24H0z" fill="none" />
-  </svg>
-);
 
 export default SelectInput;

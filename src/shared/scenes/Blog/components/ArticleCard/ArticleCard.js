@@ -4,10 +4,10 @@ import Link from 'react-router-dom/Link';
 import { connect } from 'react-redux';
 import dateFns from 'date-fns';
 import classnames from 'classnames';
-import FlatButton from 'material-ui/FlatButton';
 import { StyleClasses } from 'boldr-ui';
 import Col from '~components/Layout/Col';
 import Row from '~components/Layout/Row';
+import Button from '~components/Button';
 import {
   Card,
   CardActions,
@@ -49,11 +49,9 @@ export const ArticleCard = (props: Props) => {
           <Row>
             <Col sm={12}>
               <Link to={`/blog/${slug}`} className="readmore-link">
-                <FlatButton
-                  primary
-                  label="Read More"
-                  onClick={transitionPost}
-                />
+                <Button kind="primary" onClick={transitionPost} outline>
+                  Read More
+                </Button>
               </Link>
             </Col>
           </Row>

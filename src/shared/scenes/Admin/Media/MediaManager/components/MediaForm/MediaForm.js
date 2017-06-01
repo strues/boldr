@@ -3,6 +3,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
+import Button from '~components/Button';
 import RaisedButton from 'material-ui/RaisedButton';
 import FlatButton from 'material-ui/FlatButton';
 import { TextField, Form } from 'boldr-ui';
@@ -46,8 +47,8 @@ const MediaForm = (props: Props) => {
         component={TextField}
       />
       <FormBottom>
-        <RaisedButton type="submit" label="Save" style={style} primary />
-        <FlatButton label="Reset" onTouchTap={reset} style={style} secondary />
+        <Button type="submit" kind="primary" style={style}>Save</Button>
+        <Button onClick={reset} style={style} kind="secondary">Reset</Button>
       </FormBottom>
     </Form>
   );

@@ -1,6 +1,6 @@
 /* @flow */
 import React, { Component } from 'react';
-import Button from 'boldr-ui/lib/components/Button';
+import Button from '~components/Button';
 import Grid from 'boldr-ui/lib/components/Layout/Grid';
 import Icon from 'boldr-ui/lib/components/Icons';
 import IconButton from 'material-ui/IconButton';
@@ -136,10 +136,10 @@ class SiteHeader extends Component {
     if (!this.props.auth.isAuthenticated) {
       menuElements.push(
         <Link key="login" to="/login">
-          <Button>Log In</Button>
+          <Button kind="primary" outline>Log In</Button>
         </Link>,
         <Link key="signup" to="/signup">
-          <Button theme="secondary">Signup</Button>
+          <Button kind="secondary">Signup</Button>
         </Link>,
       );
     }

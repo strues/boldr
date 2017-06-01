@@ -3,7 +3,7 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: $font-family;
+  font-family: $header-font-family;
   color: $text-color;
   line-height: 1.2857em;
   margin: calc(2rem - 0.14285em) 0 1rem;
@@ -42,8 +42,6 @@ h5 {
 }
 
 .boldrui-h {
-  font-weight: 100;
-  margin: 0;
   text-rendering: optimizeLegibility;
 }
 
@@ -80,6 +78,7 @@ h5:last-child {
 p {
   margin: 0 0 1em;
   line-height: 1.5;
+  font-weight: 300;
   font-feature-settings: 'kern', 'liga';
 }
 

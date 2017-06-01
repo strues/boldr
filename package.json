@@ -222,6 +222,7 @@
       "\\.(css|scss)$": "identity-obj-proxy",
       "^~components(.*)$": "<rootDir>/src/shared/components$1",
       "^~state(.*)$": "<rootDir>/src/shared/state$1",
+      "^~core(.*)$": "<rootDir>/src/shared/core$1",
       "^~scenes(.*)$": "<rootDir>/src/shared/scenes$1",
       "^~blog(.*)$": "<rootDir>/src/shared/scenes/Blog$1",
       "^~admin(.*)$": "<rootDir>/src/shared/scenes/Admin$1",

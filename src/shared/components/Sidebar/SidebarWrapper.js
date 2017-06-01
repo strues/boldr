@@ -1,6 +1,6 @@
+/* @flow */
 import React from 'react';
 import styled from 'styled-components';
-import type { ReactChildren } from '../../types/react.js.flow';
 
 type Props = {
   children: ReactChildren,

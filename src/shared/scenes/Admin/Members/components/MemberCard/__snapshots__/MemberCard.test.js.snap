@@ -49,17 +49,19 @@ exports[`<MemberCard /> should render the user props 1`] = `
   </styled.div>
   <styled.div>
     <Button
+      block={false}
+      bordered={true}
+      className=""
       disabled={false}
-      icon={false}
-      isAnchor={false}
-      isFullWidth={false}
-      isPending={false}
-      isSmall={false}
-      isTiny={false}
+      htmlType="button"
+      kind="primary"
+      loading={false}
       onClick={[Function]}
-      theme="primary"
+      outline={false}
+      prefix="boldrui"
+      size="medium"
     >
-      Edit User
+      Edit
     </Button>
   </styled.div>
 </styled.li>

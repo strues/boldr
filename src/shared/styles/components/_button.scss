@@ -1,162 +1,385 @@
-.#{$boldr-ns}btn {
-  position: relative;
-  display: inline-block;
-  border: 0;
-  border-radius: 3px;
-  padding: 0.6rem 1.5rem;
-  vertical-align: top;
-  cursor: pointer;
-  font-weight: 400;
-  font-family: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  text-align: center;
-  font-size: 1.1rem;
-  text-decoration: none;
-  word-wrap: break-word;
-  line-height: 1.1;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 300ms ease-in-out;
-  will-change: opacity, padding-left;
+$btn-white: #fff;
+$btn-gray: #bbb;
+$btn-light-gray: #e5e5e5;
+$btn-primary: $primary-color;
+$btn-primary-hover: darken($primary-color, 5%);
+$btn-primary-active: darken($primary-color, 5%);
+$btn-danger: #f44;
+$btn-danger-hover: #f66;
+$btn-danger-active: #e33;
+$btn-secondary: $secondary-color;
+$btn-secondary-hover: darken($secondary-color, 5%);
+$btn-secondary-active: darken($secondary-color, 5%);
 
-  &:hover {
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+.#{$boldr-ns}btn {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid transparent;
+  height: 2.25em;
+  line-height: 1.5;
+  font-size: 1rem;
+  padding-bottom: calc(0.375em - 1px);
+  padding-left: calc(0.625em - 1px);
+  padding-right: calc(0.625em - 1px);
+  padding-top: calc(0.375em - 1px);
+  border-radius: 3px;
+  color: #333;
+  background: $btn-white;
+  text-align: center;
+  position: relative;
+  vertical-align: top;
+  box-sizing: border-box;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: background-color 0.3s;
+
+  &:focus {
+    outline: none;
   }
 
-  &:hover,
+  &:link,
+  &:visited,
   &:focus {
-    outline: 0;
+    color: #333;
+    text-decoration: none;
+  }
+
+  &:hover {
+    color: $btn-primary-hover;
+    border-color: $btn-primary-hover;
     text-decoration: none;
   }
 
   &:active {
-    opacity: 0.65;
+    color: #333;
+    background: $btn-light-gray;
+    border-color: $btn-gray;
+    text-decoration: none;
   }
 
-  span {
-    vertical-align: middle;
-  }
-
-  &[aria-disabled],
-  &[disabled] {
-    /* If applied on an anchor tag, we need to disable click events manually via the pointer-events spec */
-    pointer-events: none;
-    opacity: 0.5;
-    cursor: default;
+  &.#{$boldr-ns}btn__loading {
+    &:hover,
+    &:active {
+      background: $btn-white;
+      border: 1px solid $btn-gray;
+    }
   }
 }
 
-.#{$boldr-ns}btn__primary {
-  @extend .#{$boldr-ns}btn;
-
-  background: $primary-color;
-  color: #fff;
+.#{$boldr-ns}btn + .#{$boldr-ns}btn {
+  margin-left: 10px;
 }
 
-.#{$boldr-ns}btn__secondary {
-  @extend .#{$boldr-ns}btn;
-
-  background: $secondary-color;
-  color: #fff;
+.#{$boldr-ns}btn__large {
+  font-size: 1.5rem;
+  padding: 0 30px;
 }
 
-.#{$boldr-ns}btn__boldrPrimary {
-  @extend .#{$boldr-ns}btn;
-
-  color: $primary-color;
-  background: #fff;
+.#{$boldr-ns}btn__small {
+  font-size: 0.75rem;
+  border-radius: 2px;
+  padding: 0 5px;
 }
 
-.#{$boldr-ns}btn__grey {
-  @extend .#{$boldr-ns}btn;
-
-  color: $text-color;
-  background: #efefef;
-}
-
-.#{$boldr-ns}btn + .#{$boldr-ns}btn:not(.isFullWidth) {
-  margin-left: 1em;
-}
-
-.#{$boldr-ns}btn__isFullWidth {
-  @extend .#{$boldr-ns}btn;
-
+.#{$boldr-ns}btn__block {
+  display: block;
   width: 100%;
+  padding: 0;
 }
 
-.#{$boldr-ns}btn__isTiny {
-  @extend .#{$boldr-ns}btn;
+.boldrui-btn__primary {
+  color: $btn-white;
+  background: $btn-primary;
+  border-color: $btn-primary;
 
-  padding: 0.8rem 2rem;
-  font-size: 13px;
-}
+  &:link,
+  &:visited,
+  &:focus {
+    color: $btn-white;
+  }
 
-.#{$boldr-ns}btn__isSmall {
-  @extend .#{$boldr-ns}btn;
+  &:hover {
+    color: $btn-white;
+    background: $btn-primary-hover;
+    border-color: $btn-primary-hover;
+  }
 
-  padding: 1rem 2rem;
-  font-size: 14.5px;
-}
+  &:active {
+    color: $btn-white;
+    background: $btn-primary-active;
+    border-color: $btn-primary-active;
+  }
 
-.#{$boldr-ns}btn__isPending {
-  @extend .#{$boldr-ns}btn;
+  &.boldrui-btn__loading {
+    &:hover,
+    &:active {
+      background: $btn-primary;
+      border-color: $btn-primary;
+    }
 
-  padding-left: calc(2.5rem + 0.5rem + 16px);
-}
-
-.#{$boldr-ns}btn__isPending.#{$boldr-ns}btn__isSmall,
-.#{$boldr-ns}btn__isPending.#{$boldr-ns}btn__isTiny {
-  padding-left: calc(2rem + 0.5rem + 16px);
-}
-
-.#{$boldr-ns}btn__icon {
-  @extend .#{$boldr-ns}btn;
-
-  padding-bottom: 0;
-  padding-top: 3px;
-  max-width: 60px;
-  width: 100%;
-}
-
-.#{$boldr-ns}loader-wrapper {
-  position: absolute;
-  top: calc(50% - 8px);
-  left: 2.5rem;
-  line-height: 0;
-
-  .#{$boldr-ns}btn__isSmall &,
-  .#{$boldr-ns}btn__isTiny & {
-    left: 2rem;
+    &::after {
+      border-color: $btn-white transparent transparent transparent;
+    }
   }
 }
 
-.#{$boldr-ns}loader-wrapper__enter {
-  animation: fadeInLeft 0.6s 0.3s both;
-}
+.boldrui-btn__primary-outline {
+  color: $btn-primary;
+  border-color: $btn-primary;
+  background: $btn-white;
 
-.#{$boldr-ns}loader-wrapper__leave {
-  animation: fadeOutRight 0.6s both;
-}
-
-@keyframes fadeInLeft {
-
-  from {
-    opacity: 0;
-    transform: translate3d(-10px, 0, 0);
+  &:link,
+  &:visited,
+  &:focus {
+    color: $btn-primary;
   }
 
-  to {
-    opacity: 1;
-    transform: none;
+  &:hover {
+    color: $btn-primary-hover;
+    border-color: $btn-primary-hover;
+  }
+
+  &:active {
+    color: $btn-primary-active;
+    background: $btn-light-gray;
+    border-color: $btn-primary-active;
+  }
+
+  &.boldrui-btn__loading {
+    &:hover,
+    &:active {
+      border-color: $btn-primary;
+      background: $btn-white;
+    }
+
+    &::after {
+      border-color: $btn-primary transparent transparent transparent;
+    }
   }
 }
 
-@keyframes fadeOutRight {
-  from {
-    opacity: 1;
-    transform: none;
+.boldrui-btn__danger {
+  color: $btn-white;
+  background: $btn-danger;
+  border-color: $btn-danger;
+
+  &:link,
+  &:visited,
+  &:focus {
+    color: $btn-white;
   }
 
-  to {
-    opacity: 0;
-    transform: translate3d(-10px, 0, 0);
+  &:hover {
+    color: $btn-white;
+    background: $btn-danger-hover;
+    border-color: $btn-danger-hover;
+  }
+
+  &:active {
+    color: $btn-white;
+    background: $btn-danger-active;
+    border-color: $btn-danger-active;
+  }
+
+  &.boldrui-btn__loading {
+    &:hover,
+    &:active {
+      background: $btn-danger;
+      border-color: $btn-danger-active;
+    }
+
+    &::after {
+      border-color: $btn-white transparent transparent transparent;
+    }
+  }
+}
+
+.boldrui-btn__danger-outline {
+  color: $btn-danger;
+  border-color: $btn-danger;
+  background: $btn-white;
+
+  &:link,
+  &:visited,
+  &:focus {
+    color: $btn-danger;
+  }
+
+  &:hover {
+    color: $btn-danger-hover;
+    border-color: $btn-danger-hover;
+  }
+
+  &:active {
+    color: $btn-danger-active;
+    background: $btn-light-gray;
+    border-color: $btn-danger-active;
+  }
+
+  &.boldrui-btn__loading {
+    &:hover,
+    &:active {
+      border-color: $btn-danger;
+      background: $btn-white;
+    }
+
+    &::after {
+      border-color: $btn-danger transparent transparent transparent;
+    }
+  }
+}
+
+.boldrui-btn__secondary {
+  color: $btn-white;
+  background: $btn-secondary;
+  border-color: $btn-secondary;
+
+  &:link,
+  &:visited,
+  &:focus {
+    color: $btn-white;
+  }
+
+  &:hover {
+    color: $btn-white;
+    background: $btn-secondary-hover;
+    border-color: $btn-secondary-hover;
+  }
+
+  &:active {
+    color: $btn-white;
+    background: $btn-secondary-active;
+    border-color: $btn-secondary-active;
+  }
+
+  &.boldrui-btn__loading {
+    &:hover,
+    &:active {
+      background: $btn-secondary;
+      border-color: $btn-secondary-active;
+    }
+
+    &::after {
+      border-color: $btn-white transparent transparent transparent;
+    }
+  }
+}
+
+.boldrui-btn__secondary-outline {
+  color: $btn-secondary;
+  border-color: $btn-secondary;
+  background: $btn-white;
+
+  &:link,
+  &:visited,
+  &:focus {
+    color: $btn-secondary;
+  }
+
+  &:hover {
+    color: $btn-secondary-hover;
+    border-color: $btn-secondary-hover;
+  }
+
+  &:active {
+    color: $btn-secondary-active;
+    background: $btn-light-gray;
+    border-color: $btn-secondary-active;
+  }
+
+  &.boldrui-btn__loading {
+    &:hover,
+    &:active {
+      border-color: $btn-secondary;
+      background: $btn-white;
+    }
+
+    &::after {
+      border-color: $btn-secondary transparent transparent transparent;
+    }
+  }
+}
+
+.boldrui-btn__disabled,
+.boldrui-btn__disabled[disabled] {
+  color: $btn-gray;
+  background: #f8f8f8;
+  border-color: $btn-light-gray;
+  cursor: not-allowed;
+
+  &:link,
+  &:visited,
+  &:focus {
+    color: $btn-gray;
+  }
+
+  &:hover {
+    color: $btn-gray;
+    background: #f8f8f8;
+    border-color: $btn-light-gray;
+  }
+
+  &:active {
+    color: $btn-gray;
+    background: #f8f8f8;
+    border-color: $btn-light-gray;
+  }
+}
+
+.boldrui-btn__loading {
+  position: relative;
+  color: transparent;
+  cursor: not-allowed;
+
+  &:link,
+  &:visited,
+  &:focus,
+  &:hover,
+  &:active {
+    color: transparent;
+  }
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 16px;
+    margin-left: -8px;
+    margin-top: -8px;
+    border: 3px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    box-sizing: border-box;
+  }
+
+  &::after {
+    border-color: #666 transparent transparent;
+    animation: btn-spin 0.6s linear;
+    animation-iteration-count: infinite;
+  }
+}
+
+@keyframes btn-spin {
+  0% {
+    transform: rotate(0);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.boldrui-btn__border-transparent {
+  border-color: transparent;
+
+  &:hover {
+    border-color: transparent;
+  }
+
+  &:active {
+    border-color: transparent;
   }
 }

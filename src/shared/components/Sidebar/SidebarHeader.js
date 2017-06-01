@@ -1,3 +1,4 @@
+/* @flow */
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'react-router-dom/Link';
@@ -17,19 +18,18 @@ const InfoElement = styled.div`
   padding-left: 6px;
   padding-top: 6px;
 `;
-const SidebarHeader = (props: Props) => {
-  const SbHeader = styled.div`
+const Header = styled.div`
     display: block;
     position: relative;
     height: 54px;
-    background-color:${props => (props.isPrimaryColor ? '#00bcd4' : '#fff')};
-    line-height: 53px;
+    background-color: #00bcd4;
+    line-height: 54px;
     padding: 0 18px;
     box-shadow: 0 1px 1px rgba(0,0,0,.1);
-}
   `;
+const SidebarHeader = (props: Props) => {
   return (
-    <SbHeader {...props}>
+    <Header>
       <LogoElement>
         <Link to={props.logoLink}>
           <img
@@ -44,7 +44,7 @@ const SidebarHeader = (props: Props) => {
           />
         </Link>
       </LogoElement>
-    </SbHeader>
+    </Header>
   );
 };
 

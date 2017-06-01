@@ -5,7 +5,7 @@ import serialize from 'serialize-javascript';
 import { ifElse, removeNil } from 'boldr-utils';
 import uuid from 'uuid/v4';
 import type { Head } from 'react-helmet';
-import Html from '../../shared/components/Html';
+import Html from './Html';
 import assets from './assets';
 
 // This is output by Webpack after the bundle is compiled. It contains

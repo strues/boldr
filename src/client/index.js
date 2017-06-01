@@ -28,7 +28,7 @@ injectTapEventPlugin();
 // Async font loading
 WebFontLoader.load({
   google: {
-    families: ['Roboto:200,400,600', 'Material Icons'],
+    families: ['Roboto:300,600', 'Chivo:400,600', 'Material Icons'],
   },
   custom: {
     families: ['FontAwesome'],

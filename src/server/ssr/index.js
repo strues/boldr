@@ -28,8 +28,8 @@ async function ssrMiddleware(req: $Request, res: $Response) {
   }
 
   global.navigator = { userAgent: req.headers['user-agent'] };
-  let networkInterface = createBatchingNetworkInterface({
-    uri: 'http://localhost:3000/api/v1/graphql',
+  const networkInterface = createBatchingNetworkInterface({
+    uri: process.env.GRAPHQL_URI,
     opts: {
       credentials: 'same-origin',
       headers: req.headers,

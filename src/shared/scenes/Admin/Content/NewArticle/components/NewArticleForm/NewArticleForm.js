@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import EditorState from 'draft-js/lib/EditorState';
 import Dropzone from 'react-dropzone';
-import Button from 'boldr-ui/lib/components/Button';
+import Button from '~components/Button';
 import { RadioButton } from 'material-ui/RadioButton';
 import {
   InputField,
@@ -148,7 +148,7 @@ class NewArticleForm extends Component {
                     </Field>
                   </FormGroup>
 
-                  <Button type="submit">Save Post</Button>
+                  <Button htmlType="submit" kind="primary">Save Post</Button>
                 </Block>
               </Col>
             </Row>

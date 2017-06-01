@@ -78,7 +78,7 @@ const SignupForm = (props: Props) => {
         </Col>
       </Row>
 
-      <Button style={{ marginTop: '25px' }} type="submit" isFullWidth>
+      <Button style={{ marginTop: '25px' }} htmlType="submit" kind="primary" block>
         Create Account
       </Button>
     </Form>

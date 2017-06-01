@@ -12,6 +12,7 @@ module.exports = {
   },
   // plugins: [require('boldr-plugin-webpack')],
   bundle: {
+    graphlUri: 'http://localhost:3000/api/v1/graphql',
     verbose: true,
     debug: false,
     cssModules: true,

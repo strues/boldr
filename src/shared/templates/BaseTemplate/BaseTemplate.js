@@ -60,18 +60,40 @@ class BaseTemplate extends Component {
     if (this.props.data.loading) {
       return <Loader />;
     }
-    return (
-      <Wrapper>
-        {this.props.helmetMeta}
-        <Hero bgColor={this.props.bgColor} bgImg={this.props.bgImg}>
-          <SiteHeaderContainer
+    if (this.props.heroContent) {
+      return (
+        <Wrapper>
+          {this.props.helmetMeta}
+            <Hero bgColor={this.props.bgColor} bgImg={this.props.bgImg}>
+            <SiteHeaderContainer
             auth={this.props.auth}
             me={this.props.me}
             settings={this.props.data.getSettings}
             isMobile={this.props.isMobile}
           />
-          {this.props.heroContent}
-        </Hero>
+              {this.props.heroContent}
+            </Hero>
+
+          <ContentWrapper>
+            {this.props.children}
+          </ContentWrapper>
+
+          <FooterWrapper>
+            {this.props.footer || <Footer />}
+          </FooterWrapper>
+        </Wrapper>
+      );
+    }
+    return (
+      <Wrapper>
+        {this.props.helmetMeta}
+        <SiteHeaderContainer
+          auth={this.props.auth}
+          me={this.props.me}
+          settings={this.props.data.getSettings}
+          isMobile={this.props.isMobile}
+        />
+
         <ContentWrapper>
           {this.props.children}
         </ContentWrapper>

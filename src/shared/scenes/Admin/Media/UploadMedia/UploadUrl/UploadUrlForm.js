@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import Button from 'boldr-ui/lib/components/Button';
-import { Form, InputField } from 'boldr-ui';
+import Button from '~components/Button';
+import { Form, InputField } from '~components/Form';
 
 const style = {
   margin: 12,
@@ -29,8 +29,10 @@ const UploadUrlForm = (props: Props) => {
         component={InputField}
       />
 
-      <Button type="submit" style={style}>Upload</Button>
-      <Button onClick={reset} style={style} theme="secondary">Reset</Button>
+      <Button type="submit" kind="primary" style={style}>Upload</Button>
+      <Button onClick={reset} style={style} kind="secondary" outline>
+        Reset
+      </Button>
     </Form>
   );
 };

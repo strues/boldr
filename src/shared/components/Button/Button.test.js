@@ -1,70 +1,229 @@
 import React from 'react';
-import sinon from 'sinon';
-import { shallow, mount } from 'enzyme';
-import { Link as RouterLink } from 'react-router-dom';
-import Loader from '../Loader';
+import ReactDOM from 'react-dom';
+import TestUtils from 'react-dom/test-utils';
 import Button from './Button';
 
-describe('(React Component) Button', () => {
-  it('should render the passed contents.', () => {
-    const wrapper = shallow(<Button>test</Button>);
+describe('<Button />', () => {
+  let button;
+  let buttonNode;
 
-    expect(wrapper.text()).toContain('test');
+  function mount(Component) {
+    button = TestUtils.renderIntoDocument(Component);
+    buttonNode = ReactDOM.findDOMNode(button);
+  }
+
+  afterEach(() => {
+    button = null;
+    buttonNode = null;
   });
 
-  it('should render a semantic button element.', () => {
-    const wrapper = shallow(<Button>test</Button>);
+  test('Default Button', () => {
+    mount(<Button>OK</Button>);
 
-    expect(wrapper.type()).toEqual('button');
+    expect(buttonNode.className).toContain('boldrui-btn');
+    expect(buttonNode.textContent).toBe('OK');
+    expect(buttonNode.tagName.toLowerCase()).toBe('button');
   });
 
-  it('should render a anchor element in case the "isAnchor" prop is truthy.', () => {
-    const wrapper = shallow(<Button isAnchor>test</Button>);
+  test('Primary Button', () => {
+    mount(<Button kind="primary" />);
+    expect(buttonNode.classList.contains('boldrui-btn__primary')).toBe(true);
 
-    expect(wrapper.type()).toEqual('a');
+    mount(<Button kind="primary" outline />);
+    expect(buttonNode.classList.contains('boldrui-btn__primary')).toBe(false);
+    expect(buttonNode.classList.contains('boldrui-btn__primary-outline')).toBe(
+      true,
+    );
   });
 
-  it('should render a Link component in case the "to" prop is provided.', () => {
-    const wrapper = shallow(<Button to="/foo">test</Button>);
+  test('Secondary Button', () => {
+    mount(<Button kind="secondary" />);
+    expect(buttonNode.classList.contains('boldrui-btn__secondary')).toBe(true);
 
-    expect(wrapper.type()).toEqual(RouterLink);
+    mount(<Button kind="secondary" outline />);
+    expect(buttonNode.classList.contains('boldrui-btn__secondary')).toBe(false);
+    expect(
+      buttonNode.classList.contains('boldrui-btn__secondary-outline'),
+    ).toBe(true);
   });
 
-  it('should add the passed "className" prop to the rendered button if passed.', () => {
-    const btn = shallow(<Button className="test">test</Button>);
-    expect(btn.is('.test')).toBe(true);
+  test('Danger Button', () => {
+    mount(<Button kind="danger" />);
+    expect(buttonNode.classList.contains('boldrui-btn__danger')).toBe(true);
+
+    mount(<Button kind="danger" outline />);
+    expect(buttonNode.classList.contains('boldrui-btn__danger')).toBe(false);
+    expect(buttonNode.classList.contains('boldrui-btn__danger-outline')).toBe(
+      true,
+    );
   });
 
-  it('should render an "aria-disabled" attribute on the Link component in case the "disabled" prop is truthy.', () => {
-    const wrapper = shallow(<Button to="/foo" disabled>test</Button>);
+  test('Transparent Border Button', () => {
+    mount(<Button bordered={false} />);
 
-    expect(wrapper.prop('aria-disabled')).toEqual(true);
+    expect(buttonNode.className).toContain('boldrui-btn__border-transparent');
   });
 
-  it('should not render an "disabled" attribute on the Link component in case the "disabled" prop is truthy.', () => {
-    const wrapper = shallow(<Button to="/foo" disabled>test</Button>);
+  test('Large Button', () => {
+    mount(<Button size="large" />);
 
-    expect(wrapper.prop('disabled')).toEqual(undefined);
+    expect(buttonNode.className).toContain('boldrui-btn__large');
   });
 
-  it('should render an "disabled" attribute on the Button component in case the "disabled" prop is truthy.', () => {
-    const wrapper = shallow(<Button disabled>test</Button>);
+  test('Small Button', () => {
+    mount(<Button size="small" />);
 
-    expect(wrapper.prop('disabled')).toEqual(true);
+    expect(buttonNode.className).toContain('boldrui-btn__small');
   });
 
-  it('should not render an "aria-disabled" attribute on the Button component in case the "disabled" prop is truthy.', () => {
-    const wrapper = shallow(<Button disabled>test</Button>);
+  test('Custom ClassName', () => {
+    mount(<Button className="custom-btn" />);
 
-    expect(wrapper.prop('aria-disabled')).toEqual(true);
+    expect(buttonNode.className).toContain('boldrui-btn');
+    expect(buttonNode.className).toContain('custom-btn');
   });
 
-  it('should propagate props to the wrapper element.', () => {
-    const handler = sinon.spy();
-    const wrapper = mount(<Button onClick={handler}>test</Button>);
+  test('Block Button', () => {
+    mount(<Button block />);
 
-    wrapper.find('button').simulate('click');
+    expect(buttonNode.className).toContain('boldrui-btn__block');
+  });
 
-    expect(handler.calledOnce).toEqual(true);
+  test('Prefix', () => {
+    mount(<Button prefix="custom" />);
+
+    expect(buttonNode.classList.contains('boldrui-btn')).toBe(false);
+    expect(buttonNode.classList.contains('custom-btn')).toBe(true);
+  });
+
+  test('Link Button', () => {
+    mount(<Button href="https://boldr.io/" target="_blank" />);
+
+    expect(buttonNode.tagName.toLowerCase()).toBe('a');
+    expect(buttonNode.href).toBe('https://boldr.io/');
+    expect(buttonNode.target).toBe('_blank');
+  });
+
+  test('onClick', () => {
+    let isClicked = false;
+    mount(
+      <Button
+        onClick={() => {
+          isClicked = true;
+        }}
+      />,
+    );
+
+    TestUtils.Simulate.click(buttonNode);
+    expect(isClicked).toBe(true);
+  });
+
+  test('Disabled Button', () => {
+    let isClicked = false;
+    mount(
+      <Button
+        disabled
+        onClick={() => {
+          isClicked = true;
+        }}
+      />,
+    );
+
+    expect(buttonNode.disabled).toBe(true);
+    expect(buttonNode.classList.contains('boldrui-btn__disabled')).toBe(true);
+    TestUtils.Simulate.click(buttonNode);
+    expect(isClicked).toBe(false);
+  });
+
+  test('Disabled Link Button', () => {
+    let isClicked = false;
+    mount(
+      <Button
+        disabled
+        href="https://boldr.io/"
+        onClick={() => {
+          isClicked = true;
+        }}
+      />,
+    );
+
+    expect(buttonNode.classList.contains('boldrui-btn__disabled')).toBe(true);
+    expect(buttonNode.href).toBe('');
+    TestUtils.Simulate.click(buttonNode);
+    expect(isClicked).toBe(false);
+  });
+
+  test('Loading Button', () => {
+    let isClicked = false;
+    mount(
+      <Button
+        loading
+        onClick={() => {
+          isClicked = true;
+        }}
+      />,
+    );
+
+    expect(buttonNode.disabled).toBe(true);
+    expect(buttonNode.classList.contains('boldrui-btn__loading')).toBe(true);
+    expect(buttonNode.classList.contains('boldrui-btn__disabled')).toBe(false);
+    TestUtils.Simulate.click(buttonNode);
+
+    expect(isClicked).toBe(false);
+  });
+
+  test('Loading Link Button', () => {
+    let isClicked = false;
+    mount(
+      <Button
+        href="https://boldr.io/"
+        loading
+        onClick={() => {
+          isClicked = true;
+        }}
+      />,
+    );
+
+    expect(buttonNode.classList.contains('boldrui-btn__loading')).toBe(true);
+    expect(buttonNode.classList.contains('boldrui-btn__disabled')).toBe(false);
+    expect(buttonNode.href).toBe('');
+    TestUtils.Simulate.click(buttonNode);
+    expect(isClicked).toBe(false);
+  });
+
+  test('Button htmlType', () => {
+    mount(<Button />);
+    expect(buttonNode.type).toBe('button');
+
+    mount(<Button htmlType="submit" />);
+    expect(buttonNode.type).toBe('submit');
+
+    mount(<Button htmlType="reset" />);
+    expect(buttonNode.type).toBe('reset');
+
+    mount(<Button htmlType="button" />);
+    expect(buttonNode.type).toBe('button');
+  });
+
+  test('Custom inline style', () => {
+    mount(<Button style={{ fontSize: '20px' }} />);
+    expect(buttonNode.style.fontSize).toBe('20px');
+  });
+
+  test('Component', () => {
+    function Link({ to, children, ...rest }) {
+      return <a href={`/#${to}`} {...rest}>{children}</a>;
+    }
+    mount(<Button to="/path" component={Link} />);
+
+    expect(buttonNode.href).toBe('/#/path');
+    expect(buttonNode.classList.contains('boldrui-btn')).toBe(true);
+    expect(buttonNode.tagName.toLowerCase()).toBe('a');
+  });
+
+  test('Link with additional props', () => {
+    mount(<Button href="https://www.boldr.io" download="foobar" />);
+
+    expect(buttonNode.download).toBe('foobar');
   });
 });
