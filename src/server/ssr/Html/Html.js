@@ -24,7 +24,7 @@ function Html(props: Props) {
       <head>
         {headerElements}
       </head>
-      <body>
+      <body className="ltr">
         <div id="app" dangerouslySetInnerHTML={{ __html: appBodyString }} />
         {bodyElements}
       </body>

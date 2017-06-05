@@ -1,11 +1,11 @@
 /* @flow */
 import React, { Component } from 'react';
-import { Editor } from 'react-draft-wysiwyg';
+import Editor from '~components/BoldrEditor';
 // $FlowIssue
 import convertToRaw from 'draft-js/lib/convertFromDraftStateToRaw';
 // $FlowIssue
 import EditorState from 'draft-js/lib/EditorState';
-
+// import import { DraftJSEditor, Renderer, defaultBlocks }
 const editorStyle = {
   minHeight: 200,
   height: '100%',
@@ -34,6 +34,16 @@ export default class FieldEditor extends Component {
         editorStyle={editorStyle}
         onEditorStateChange={this.onChange}
         editorState={editorState}
+        toolbarClassName="playground-toolbar"
+        wrapperClassName="playground-wrapper"
+        editorClassName="playground-editor"
+        toolbar={{
+          history: { inDropdown: true },
+          inline: { inDropdown: false },
+          list: { inDropdown: true },
+          link: { showOpenOptionOnHover: true },
+          textAlign: { inDropdown: true },
+        }}
       />
     );
   }

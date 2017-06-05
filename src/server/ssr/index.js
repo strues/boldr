@@ -8,7 +8,9 @@ import createHistory from 'history/createMemoryHistory';
 import StaticRouter from 'react-router-dom/StaticRouter';
 import Helmet from 'react-helmet';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import createPalette from 'material-ui/styles/palette';
+import createMuiTheme from 'material-ui/styles/theme';
+import { cyan, pink } from 'material-ui/styles/colors';
 import { ServerStyleSheet } from 'styled-components';
 
 import { ApolloProvider, getDataFromTree } from 'react-apollo';
@@ -16,11 +18,23 @@ import { createBatchingNetworkInterface } from 'apollo-client';
 
 import createApolloClient from '../../shared/core/createApolloClient';
 import configureStore from '../../shared/state/store';
-import muiTheme from '../../shared/templates/muiTheme';
+// import muiTheme from '../../shared/templates/muiTheme';
 import App from '../../shared/App';
 import CreateHtml from './CreateHtml';
 
 const debug = require('debug')('boldr:ssrMW');
+
+function createStyleManager() {
+  return MuiThemeProvider.createDefaultContext({
+    theme: createMuiTheme({
+      palette: createPalette({
+        primary: cyan,
+        accent: pink,
+        type: 'light',
+      }),
+    }),
+  });
+}
 
 async function ssrMiddleware(req: $Request, res: $Response) {
   if (typeof res.locals.nonce !== 'string') {
@@ -42,6 +56,7 @@ async function ssrMiddleware(req: $Request, res: $Response) {
   const history = createHistory();
   const store = configureStore(client, preloadedState, history);
   const sheet = new ServerStyleSheet();
+  const { styleManager, theme } = createStyleManager();
   // Create context for React Router
   const routerContext = {};
   // Generate the HTML from our React tree.  We're wrapping the result
@@ -50,7 +65,7 @@ async function ssrMiddleware(req: $Request, res: $Response) {
   const appComponent = (
     <StaticRouter location={req.url} context={routerContext}>
       <ApolloProvider store={store} client={client}>
-        <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
+        <MuiThemeProvider styleManager={styleManager} theme={theme}>
           <App />
         </MuiThemeProvider>
       </ApolloProvider>
@@ -72,6 +87,7 @@ async function ssrMiddleware(req: $Request, res: $Response) {
   const css = sheet.getStyleTags();
   const helmet = Helmet.renderStatic();
   const finalState = store.getState();
+  const materialCss = styleManager.sheetsToString()
   // render styled-components styleSheets to string.
   // Render the application to static HTML markup
   const html = renderToStaticMarkup(
@@ -81,6 +97,7 @@ async function ssrMiddleware(req: $Request, res: $Response) {
       nonce={res.locals.nonce}
       helmet={helmet}
       styledCss={css}
+      materialCss={materialCss}
       preloadedState={finalState}
     />,
   );

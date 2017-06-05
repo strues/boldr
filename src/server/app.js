@@ -49,10 +49,7 @@ const graphqlHandler = graphqlExpress(req => {
 app.use('/api/v1/graphql', graphqlHandler);
 // Configure static serving of our "public" root http path static files.
 // Note: these will be served off the root (i.e. '/') of our application.
-app.use(
-  '/uploads',
-  express.static(pathResolve(appRoot.get(), './public/uploads')),
-);
+app.use('/uploads', express.static(pathResolve(appRoot.get(), './public/uploads')));
 // Setup the public directory so that we can serve static assets.
 app.use(express.static(pathResolve(appRoot.get(), './public')));
 // app.get('/admin', adminSsr);

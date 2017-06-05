@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import FlatButton from 'material-ui/FlatButton';
+import Button from '~components/Button';
 import { InputField, Row, Form } from 'boldr-ui';
 
 const style = {
@@ -34,8 +34,8 @@ const FileEditorForm = (props: Props) => {
         component={InputField}
       />
       <Row>
-        <FlatButton type="submit" label="Save" style={style} primary />
-        <FlatButton label="Reset" onTouchTap={reset} style={style} secondary />
+        <Button htmlType="submit" style={style} kind="primary">Save</Button>
+        <Button onClick={reset} style={style} kind="secondary">Reset</Button>
       </Row>
     </Form>
   );

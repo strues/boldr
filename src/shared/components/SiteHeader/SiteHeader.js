@@ -145,7 +145,7 @@ class SiteHeader extends Component {
     if (this.props.me.roleId === 3) {
       menuElements.push(
         <Link key="dash" to="/admin">
-          <IconButton tooltip="dashboard">
+          <IconButton>
             <Icon kind="dashboard" color="#2d343c" />
           </IconButton>
         </Link>,
@@ -154,11 +154,11 @@ class SiteHeader extends Component {
     if (this.props.auth.isAuthenticated) {
       menuElements.push(
         <Link key="prof" to={`/profiles/${this.props.me.username}`}>
-          <IconButton tooltip="account">
+          <IconButton>
             <Icon kind="account" color="#2d343c" />
           </IconButton>
         </Link>,
-        <IconButton key="logo" tooltip="logout">
+        <IconButton key="logo">
           <Icon
             key="logout"
             kind="logout"

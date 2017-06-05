@@ -4,7 +4,8 @@ import { Field, reduxForm } from 'redux-form';
 import EditorState from 'draft-js/lib/EditorState';
 import Dropzone from 'react-dropzone';
 import Button from '~components/Button';
-import { RadioButton } from 'material-ui/RadioButton';
+import Radio from 'material-ui/Radio';
+
 import {
   InputField,
   Col,
@@ -15,7 +16,8 @@ import {
   Paragraph,
   Label,
   Block,
-  RadioButtonGroup,
+  RadioField,
+  // RadioButtonGroup,
   FormGroup,
   Form,
 } from 'boldr-ui';
@@ -36,7 +38,10 @@ type Props = {
   label?: string,
   uploadImageForArticle: Function,
 };
-
+const radioOpts = [
+  { value: 'draft', text: 'Draft' },
+  { value: 'published', text: 'Published' },
+];
 class NewArticleForm extends Component {
   state = {
     files: [],
@@ -140,11 +145,12 @@ class NewArticleForm extends Component {
                     <Label label="Publishing status" required />
                     <Field
                       name="published"
-                      component={RadioButtonGroup}
+                      component={RadioField}
                       validate={[isRequired]}
+                      options={radioOpts}
                     >
-                      <RadioButton value="true" label="Published" />
-                      <RadioButton value="false" label="Draft" />
+                      <Radio value="true" label="Published" />
+                      <Radio value="false" label="Draft" />
                     </Field>
                   </FormGroup>
 

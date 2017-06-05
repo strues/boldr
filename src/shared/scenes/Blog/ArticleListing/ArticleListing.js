@@ -1,8 +1,9 @@
 /* @flow */
 import React from 'react';
 import styled from 'styled-components';
-import { Loader, FontIcon } from 'boldr-ui';
-import FloatingActionButton from 'material-ui/FloatingActionButton';
+import Loader from '~components/Loader';
+import FontIcon from '~components/FontIcon';
+// import Button from 'material-ui/Button';
 import { Grid, Row, Col } from '~components/Layout';
 import { FeaturedArticle, ArticleCard } from '../components';
 
@@ -26,7 +27,7 @@ const style = {
   bottom: '70px',
 };
 
-class ArticleListing extends React.PureComponent {
+class ArticleListing extends React.Component {
   props: Props;
 
   renderArticles = () => {
@@ -42,8 +43,10 @@ class ArticleListing extends React.PureComponent {
     ));
   };
   renderFeature = () => {
-    const { articles } = this.props;
-    const featuredArticles = articles.filter(p => p.featured);
+    const { articles, loading } = this.props;
+    const featuredArticles = loading
+      ? <Loader />
+      : articles.filter(p => p.featured);
     return featuredArticles.map(article => (
       <Col key={article.id} xs={12}>
         <FeaturedArticle {...article} />
@@ -55,7 +58,7 @@ class ArticleListing extends React.PureComponent {
       return <Loader />;
     }
     return (
-      <Grid fluid={ false }>
+      <Grid fluid={false}>
         <FeaturedArea>
           {this.renderFeature()}
         </FeaturedArea>

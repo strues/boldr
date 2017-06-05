@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
-import { Loader } from 'boldr-ui';
+import Loader from '~components/Loader';
 import { deletePost } from '../../../Blog/state';
 import Articles from './Articles';
 

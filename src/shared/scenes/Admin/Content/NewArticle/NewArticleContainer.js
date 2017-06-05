@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
-import draftToHtml from 'draftjs-to-html';
+import { convertToHTML } from 'draft-convert';
 import { uploadArticleImage } from '../../state';
 import { createArticle } from '../../../Blog/state';
 import NewArticle from './NewArticle';
@@ -70,7 +70,7 @@ const withMutation = graphql(CREATE_ARTICLE_MUTATION, {
           input: {
             title: values.title,
             slug: values.title,
-            content: draftToHtml(values.content),
+            content: convertToHTML(values.content),
             rawContent: values.rawContent,
             featured: false,
             published: values.published,

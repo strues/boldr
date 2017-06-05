@@ -2,7 +2,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import styled from 'styled-components';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from '~components/Button';
 import { InputField, Col, Row, Headline, FormGroup } from 'boldr-ui';
 
 import EditorField from './EditorField';
@@ -95,7 +95,7 @@ const EditArticleForm = (props: Props) => {
               </label>
             </FormGroup>
 
-            <RaisedButton primary type="submit" label="Save Post" />
+            <Button htmlType="submit" kind="primary">Save Post</Button>
           </Wrapper>
         </form>
       </Col>

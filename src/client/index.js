@@ -11,11 +11,12 @@ import injectTapEventPlugin from 'react-tap-event-plugin';
 import { ApolloProvider } from 'react-apollo';
 import { createBatchingNetworkInterface } from 'apollo-client';
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import getMuiTheme from 'material-ui/styles/getMuiTheme';
+import { MuiThemeProvider,  createMuiTheme } from 'material-ui/styles';
+import createPalette from 'material-ui/styles/palette';
+import { cyan, pink } from 'material-ui/styles/colors';
 
 import createApolloClient from '../shared/core/createApolloClient';
-import muiTheme from '../shared/templates/muiTheme';
+// import muiTheme from '../shared/templates/muiTheme';
 import configureStore from '~state/store';
 import App from '../shared/App';
 import { checkAuth } from '../shared/scenes/Account/state/actions';
@@ -24,7 +25,17 @@ import ReactHotLoader from './ReactHotLoader';
 
 // click helper required for Material-UI
 injectTapEventPlugin();
-
+function createStyleManager() {
+  return MuiThemeProvider.createDefaultContext({
+    theme: createMuiTheme({
+      palette: createPalette({
+        primary: cyan,
+        accent: pink,
+        type: 'light',
+      }),
+    }),
+  });
+}
 // Async font loading
 WebFontLoader.load({
   google: {
@@ -79,7 +90,7 @@ const history = createHistory();
 const preloadedState = window.__APOLLO_STATE__;
 const store = configureStore(client, preloadedState, history);
 const { dispatch } = store;
-
+const { styleManager, theme } = createStyleManager();
 if (token) {
   // Update application state. User has token and is probably authenticated
   dispatch(checkAuth(token));
@@ -89,7 +100,7 @@ function renderApp(passedApp) {
     <ReactHotLoader>
       <ApolloProvider store={store} client={client}>
         <ConnectedRouter history={history} forceRefresh={!supportsHistory}>
-          <MuiThemeProvider muiTheme={getMuiTheme(muiTheme)}>
+          <MuiThemeProvider styleManager={styleManager} theme={theme}>
             {passedApp}
           </MuiThemeProvider>
         </ConnectedRouter>

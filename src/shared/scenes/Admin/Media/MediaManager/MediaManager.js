@@ -4,7 +4,10 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { gql, graphql } from 'react-apollo';
 import { Grid, Col, Row } from '~components/Layout';
-import { Photo, Block, Headline, Loader } from 'boldr-ui';
+import Photo from '~components/Photo';
+import Block from '~components/Block';
+import Headline from '~components/Headline';
+import Loader from '~components/Loader';
 import MediaForm from './components/MediaForm';
 
 type Props = {

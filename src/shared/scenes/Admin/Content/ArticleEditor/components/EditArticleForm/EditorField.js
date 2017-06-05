@@ -1,7 +1,8 @@
 /* @flow */
 import React, { Component } from 'react';
-import { Editor } from 'react-draft-wysiwyg';
-import { stateFromHTML } from 'draft-js-import-html';
+import Editor from '~components/BoldrEditor';
+// $FlowIssue
+import { convertFromHTML } from 'draft-convert';
 // $FlowIssue
 import { convertToRaw, EditorState } from 'draft-js';
 
@@ -21,7 +22,7 @@ export default class EditorField extends Component {
     let editorState = EditorState.createEmpty();
     if (props.input.value) {
       editorState = EditorState.createWithContent(
-        stateFromHTML(props.input.value),
+        convertFromHTML(props.input.value),
       );
     }
     this.state = {
@@ -40,11 +41,20 @@ export default class EditorField extends Component {
     const { editorState } = this.state;
     return (
       <Editor
-        editorStyle={editorStyle}
         {...input}
+        editorStyle={editorStyle}
         onEditorStateChange={this.onChange}
         editorState={editorState}
-        placeholder={placeholder}
+        toolbarClassName="playground-toolbar"
+        wrapperClassName="playground-wrapper"
+        editorClassName="playground-editor"
+        toolbar={{
+          history: { inDropdown: true },
+          inline: { inDropdown: false },
+          list: { inDropdown: true },
+          link: { showOpenOptionOnHover: true },
+          textAlign: { inDropdown: true },
+        }}
       />
     );
   }

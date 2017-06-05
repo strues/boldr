@@ -1,9 +1,12 @@
 /* @flow */
 import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
-import { Paper, Avatar, Headline } from 'boldr-ui';
-import ArrowUpward from 'material-ui/svg-icons/navigation/arrow-upward';
-import ArrowDownward from 'material-ui/svg-icons/navigation/arrow-downward';
+import Paper from '~components/Paper';
+import Avatar from '~components/Avatar';
+import Headline from '~components/Headline';
+import Loader from '~components/Loader';
+import ArrowUpward from 'material-ui-icons/ArrowUpward';
+import ArrowDownward from 'material-ui-icons/ArrowDownward';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import Griddle, {

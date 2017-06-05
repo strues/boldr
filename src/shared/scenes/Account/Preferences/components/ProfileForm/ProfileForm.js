@@ -2,8 +2,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { InputField, Form, Headline } from 'boldr-ui';
-import FlatButton from 'material-ui/FlatButton';
+import { InputField, Form } from '~components/Form';
+import Button from '~components/Button';
+import Headline from '~components/Headline';
 
 type Props = {
   handleSubmit: Function,
@@ -88,18 +89,9 @@ let ProfileForm = (props: Props) => {
         label="LinkedIn"
       />
       <div>
-        <FlatButton
-          primary
-          type="submit"
-          disabled={pristine || submitting}
-          label="Submit"
-        />
-        <FlatButton
-          secondary
-          disabled={pristine || submitting}
-          onTouchTap={reset}
-          label="Clear Values"
-        />
+        <Button htmlType="submit" kind="primary">Save</Button>
+
+        <Button onClick={reset} kind="primary">Reset</Button>
       </div>
     </Form>
   );

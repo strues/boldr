@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextField from 'material-ui/TextField';
-import FlatButton from 'material-ui/FlatButton';
+import Button from '~components/Button';
 
 import {
   updateBoldrSettings,
@@ -48,7 +48,7 @@ class SiteName extends Component {
           value={this.state.value}
           onChange={this.handleChange}
         />
-        <FlatButton onTouchTap={this.handleSubmit} label="Save" primary />
+         <Button htmlType="submit" kind="primary" onClick={this.handleSubmit}>Save</Button>
       </form>
     );
   }

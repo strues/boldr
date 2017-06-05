@@ -96,5 +96,12 @@ const SiteHeaderContainerWithData = graphql(MENU_QUERY, {
     },
   }),
 })(SiteHeaderContainer);
+const mapStateToProps = (state: Object) => {
+  return {
+    me: selectMe(state),
+    auth: state.auth,
+    isMobile: state.boldr.ui.isMobile,
+  };
+};
 // $FlowIssue
-export default connect(null, mapDispatchToProps)(SiteHeaderContainerWithData);
+export default connect(mapStateToProps, mapDispatchToProps)(SiteHeaderContainerWithData);

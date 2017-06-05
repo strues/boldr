@@ -4,16 +4,15 @@ import Link from 'react-router-dom/Link';
 import { connect } from 'react-redux';
 import dateFns from 'date-fns';
 import classnames from 'classnames';
-import { StyleClasses } from 'boldr-ui';
+import { StyleClasses } from '../../../../theme/styleClasses';
 import Col from '~components/Layout/Col';
 import Row from '~components/Layout/Row';
 import Button from '~components/Button';
-import {
-  Card,
-  CardActions,
+import Card, {
+  CardHeader,
   CardMedia,
-  CardTitle,
-  CardText,
+  CardContent,
+  CardActions,
 } from 'material-ui/Card';
 import { selectArticle } from '../../state/articles/actions';
 
@@ -38,13 +37,12 @@ export const ArticleCard = (props: Props) => {
   return (
     <div className={classes}>
       <Card>
-        <CardMedia
-          overlay={<CardTitle title={title} subtitle={formattedDate} />}
-        >
+        <CardHeader title={title} subheader={formattedDate} />
+        <CardMedia>
           <img src={featureImage} alt={`${title} feature image`} />
         </CardMedia>
 
-        <CardText>
+        <CardContent>
           {excerpt}
           <Row>
             <Col sm={12}>
@@ -55,7 +53,7 @@ export const ArticleCard = (props: Props) => {
               </Link>
             </Col>
           </Row>
-        </CardText>
+        </CardContent>
         <CardActions>
           <TagBlock tags={tags} />
         </CardActions>

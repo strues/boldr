@@ -1,7 +1,8 @@
 /* @flow */
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import { Col, Row, Grid } from 'boldr-ui';
+
+import { Col, Row, Grid } from '~components/Layout';
 import ProfileForm from '../ProfileForm';
 import { editProfile } from '../../../../../state/modules/users/actions';
 

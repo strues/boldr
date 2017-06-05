@@ -4,9 +4,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 import Button from '~components/Button';
-import RaisedButton from 'material-ui/RaisedButton';
-import FlatButton from 'material-ui/FlatButton';
-import { TextField, Form } from 'boldr-ui';
+import { InputField, Form } from '~components/Form';
 
 const style = {
   margin: 12,
@@ -34,20 +32,18 @@ const MediaForm = (props: Props) => {
         id="name"
         name="fileName"
         type="text"
-        floatingLabelText="File name"
-        fullWidth
-        component={TextField}
+        label="File name"
+        component={InputField}
       />
       <Field
         id="description"
         name="fileDescription"
         type="text"
-        fullWidth
-        floatingLabelText="Description"
-        component={TextField}
+        label="Description"
+        component={InputField}
       />
       <FormBottom>
-        <Button type="submit" kind="primary" style={style}>Save</Button>
+        <Button htmlType="submit" kind="primary" style={style}>Save</Button>
         <Button onClick={reset} style={style} kind="secondary">Reset</Button>
       </FormBottom>
     </Form>

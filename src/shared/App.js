@@ -1,13 +1,19 @@
 /* @flow */
+// @NOTE: "connecting" this component with react-redux will cause
+// the navigation to stop working. Routes change, but the view does not.
+// @TODO: Check browser history and get link 258am
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import Helmet from 'react-helmet';
+import { compose, graphql, gql } from 'react-apollo';
+import { connect } from 'react-redux';
+import { selectMe } from './state/modules/users/selectors';
 import { injectGlobal, ThemeProvider } from 'styled-components';
 import { StyleClasses } from 'boldr-ui';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import Notifications from './components/Notification';
 import { getToken } from './core/authentication/token';
-import { BASE_CONF } from '~components/Layout';
+import { BASE_CONF } from './components/Layout';
 // Start routes
 import AdminDashboard from './scenes/Admin/AdminDashboard';
 import Home from './pages/Home';
@@ -26,7 +32,7 @@ import ProfileContainer from './scenes/Profile/ProfileContainer';
 import BlogContainer from './scenes/Blog/BlogContainer';
 import urls from './urls';
 import normalizeStyled from './theme/normalizeStyled';
-
+import SiteHeaderContainer from './components/SiteHeader/SiteHeaderContainer';
 import './styles/main.scss';
 const BASE_ELEMENT = StyleClasses.APP;
 
@@ -44,7 +50,7 @@ type ProtectedProps = {
   location: Object,
 };
 // $FlowIssue
-const ProtectedRoute = ({ component: Component, ...rest }: ProtectedProps) => (
+const ProtectedRoute = ({ component: Component, ...rest }: ProtectedProps) =>
   <Route
     {...rest}
     render={props =>
@@ -56,20 +62,26 @@ const ProtectedRoute = ({ component: Component, ...rest }: ProtectedProps) => (
               state: { from: props.location },
             }}
           />}
-  />
-);
+  />;
 
 type Props = {
   className: ?string,
+  ui: Object,
 };
 
-export default class App extends Component {
+class App extends Component {
   static defaultProps = {
     className: 'app',
   };
   state = {
     theme: BASE_CONF,
   };
+  componentDidMount() {
+    const jssStyles = document.getElementById('jss-server-side');
+    if (jssStyles && jssStyles.parentNode) {
+      jssStyles.parentNode.removeChild(jssStyles);
+    }
+  }
   props: Props;
   render() {
     const { className } = this.props;
@@ -84,10 +96,7 @@ export default class App extends Component {
             <meta name="description" content="A modern, bold take on a cms" />
             <meta charSet="utf-8" />
             <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1"
-            />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
             <meta name="theme-color" content="#2b2b2b" />
             <link rel="icon" sizes="16x16 32x32" href="/favicons/favicon.ico" />
             <link
@@ -97,31 +106,25 @@ export default class App extends Component {
             />
 
             <meta name="msapplication-TileColor" content="#2b2b2b" />
-            <meta
-              name="msapplication-TileImage"
-              content="/favicons/mstile-144x144.png"
-            />
+            <meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png" />
             <link rel="manifest" href="/manifest.json" />
           </Helmet>
+          <SiteHeaderContainer
 
+            settings={this.props.data.getSettings}
+
+          />
           <Switch>
             <Route path="/login" component={LoginContainer} />
             <Route path="/signup" component={SignupContainer} />
             <Route path="/account/forgot-password" component={ForgotPassword} />
-            <Route
-              path="/account/reset-password/:token"
-              exact
-              component={ResetPassword}
-            />
+            <Route path="/account/reset-password/:token" exact component={ResetPassword} />
             <Route path="/account/verify/:token" exact component={Verify} />
-            <Route
-              path="/account/preferences"
-              component={PreferencesContainer}
-            />
+            <Route path="/account/preferences" component={PreferencesContainer} />
             <Route path="/profiles/:username" component={ProfileContainer} />
             <Route path="/blog" component={BlogContainer} />
             <ProtectedRoute path="/admin" component={AdminDashboard} />
-            <Route path="/" exact render={Home} />
+            <Route path="/" exact component={Home} />
             <Route component={Error404} />
           </Switch>
           <Notifications />
@@ -131,3 +134,16 @@ export default class App extends Component {
     );
   }
 }
+
+export const SETTINGS_QUERY = gql`
+  query {
+    getSettings {
+      id,
+      key,
+      value,
+      label,
+      description,
+    }
+}
+`;
+export default graphql(SETTINGS_QUERY)(App);

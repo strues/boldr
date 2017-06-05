@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Field, reduxForm, formValueSelector, FieldArray } from 'redux-form';
 import { connect } from 'react-redux';
 import IconButton from 'material-ui/IconButton';
-import FlatButton from 'material-ui/FlatButton';
+import Button from '~components/Button';
 import { InputField, FontIcon } from 'boldr-ui';
 
 type Props = {
@@ -33,11 +33,9 @@ const DetailsListItem = styled.li`
 const renderMenuDetails = ({ fields }: Props) => (
   <DetailsList>
     <DetailsListItem>
-      <FlatButton
-        secondary
-        onTouchTap={() => fields.push({})}
-        label="Add Menu Detail"
-      />
+      <Button kind="secondary" onClick={() => fields.push({})}>
+        Add Menu Detail
+      </Button>
     </DetailsListItem>
     {fields.map((items, index) => (
       <DetailsListItem key={index}>
@@ -146,8 +144,8 @@ let NavigationForm = (props: Props) => {
         </div>}
 
       <div className="form__footer">
-        <FlatButton type="submit" label="Save" style={style} primary />
-        <FlatButton label="Reset" onTouchTap={reset} style={style} secondary />
+        <Button htmlType="submit" style={style} kind="primary">Save</Button>
+        <Button onClick={reset} style={style} kind="secondary">Reset</Button>
       </div>
     </form>
   );

@@ -6,6 +6,7 @@ import Helmet from 'react-helmet';
 import { gql, graphql } from 'react-apollo';
 import { Loader } from 'boldr-ui';
 import { LAYOUTS } from '../../../core/constants';
+// $FlowIssue
 import { changeLayout, layoutSelector } from '~state/modules/boldr/ui';
 import BaseTemplate from '../../../templates/BaseTemplate';
 import ArticleListing from './ArticleListing';

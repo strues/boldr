@@ -3,7 +3,6 @@ import React from 'react';
 
 import styled from 'styled-components';
 import Headline from '../../Headline';
-import type { ReactElement } from '../../../types/react.js.flow';
 import { Grid, Col, Row } from '../../Layout';
 
 type Props = {

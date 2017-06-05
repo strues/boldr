@@ -4,7 +4,7 @@
 $boldr-ns: 'boldrui-' !default;
 $dash-ns: 'boldrui-dash-'; // .#{$dash-ns}
 
-// @import 'vendor/normalize';
+@import 'vendor/draft';
 @import 'abstracts/colors/all';
 
 // Our variables
@@ -98,3 +98,4 @@ input.griddle-filter::-webkit-input-placeholder { /* Chrome/Opera/Safari */
 table.griddle-table th {
   text-transform: capitalize;
 }
+

@@ -56,7 +56,7 @@ type Props = {
 };
 
 export default function CreateHtml(props: Props) {
-  const { reactAppString, nonce, preloadedState, helmet, styledCss } = props;
+  const { reactAppString, nonce, preloadedState, helmet, styledCss, materialCss } = props;
 
   // Creates an inline script definition that is protected by the nonce.
   const inlineScript = body => (
@@ -68,6 +68,9 @@ export default function CreateHtml(props: Props) {
   ); // eslint-disable-line
   const createInlineStyleElement = (css: Object) => {
     return <style nonce={nonce} type="text/css">{css}</style>;
+  };
+    const materialStyleElement = (materialCss: Object) => {
+    return <style nonce={nonce} id="jss-server-side" type="text/css">{materialCss}</style>;
   };
   const headerElements = removeNil([
     // if React Helmet component, render the helmet data
@@ -97,6 +100,7 @@ export default function CreateHtml(props: Props) {
     ifElse(isProd && clientAssets && clientAssets.common)(() =>
       createScriptElement(clientAssets.common.js),
     ),
+    materialStyleElement(materialCss),
     ifElse(isProd && clientAssets && clientAssets.vendor.js)(() =>
       createScriptElement(clientAssets.vendor.js),
     ),
@@ -115,6 +119,7 @@ export default function CreateHtml(props: Props) {
         () => helmet.htmlAttributes.toComponent(),
         null,
       )}
+      materialCss={materialCss}
       headerElements={headerElements.map((x, idx) => (
         <KeyedComponent key={idx}>{x}</KeyedComponent>
       ))}

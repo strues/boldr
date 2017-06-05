@@ -1,7 +1,7 @@
 /* @flow */
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
-import draftToHtml from 'draftjs-to-html';
+import { convertToHTML } from 'draft-convert';
 import { gql, graphql } from 'react-apollo';
 import EditArticleForm from './components/EditArticleForm';
 
@@ -73,7 +73,7 @@ export default graphql(EDIT_ARTICLE_MUTATION, {
           input: {
             title: values.title,
             slug: values.title,
-            content: draftToHtml(values.content),
+            content: convertToHTML(values.content),
             rawContent: values.rawContent,
             featured: false,
             published: values.published,

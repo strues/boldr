@@ -3,8 +3,11 @@ import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
 import IconButton from 'material-ui/IconButton';
-import UploadFile from 'material-ui/svg-icons/file/file-upload';
-import { Row, Col, Paper, Headline, Icon } from 'boldr-ui';
+import UploadFile from 'material-ui-icons/FileUpload';
+import { Row, Col } from '~components/Layout';
+import Paper from '~components/Paper';
+import Headline from '~components/Headline';
+import Icon from '~components/Icons';
 import { connect } from 'react-redux';
 import { uploadMediaFile } from '../../../../../state/modules/media/actions';
 
@@ -55,7 +58,7 @@ class UploadComputer extends Component {
   }
   render() {
     return (
-      <Row xsCenter>
+      <Row center="xs">
         <Col xs={6}>
           <Paper zDepth={1}>
             <MediaTitleArea>

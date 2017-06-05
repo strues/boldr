@@ -1,6 +1,6 @@
 /* @flow */
 import React, { Component } from 'react';
-import RaisedButton from 'material-ui/RaisedButton';
+import Button from '~components/Button';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 // $FlowIssue
 import Dropzone from 'react-dropzone';
@@ -68,11 +68,10 @@ class FileManager extends Component {
         >
           <ToolbarGroup>
             <ToolbarTitle text="File Manager" />
-            <RaisedButton
-              onTouchTap={this._toggleCollapse}
-              label="Upload File"
-              secondary
-            />
+            <Button
+              onClick={this._toggleCollapse}
+              kind="secondary"
+            >Upload File</Button>
           </ToolbarGroup>
         </Toolbar>
         <Dropzone

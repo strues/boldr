@@ -10,16 +10,16 @@ import UploadMedia from './Media/UploadMedia';
 import ArticleEditor from './Content/ArticleEditor';
 import NewArticleContainer
   from './Content/NewArticle/NewArticleContainer';
-import FileManagerContainer
-  from './FileManager/FileManagerContainer';
-import FileEditor from './FileManager/FileEditor';
-import NavigationContainer from './Navigation/NavigationContainer';
+// import FileManagerContainer
+//   from './FileManager/FileManagerContainer';
+// import FileEditor from './FileManager/FileEditor';
+// import NavigationContainer from './Navigation/NavigationContainer';
 import Members from './Members';
-import Settings from './Settings';
+// import Settings from './Settings';
 import TagsContainer from './Content/Tags/TagsContainer';
 import TaggedPost
   from './Content/Tags/components/TaggedPost/TaggedPost';
-import DashboardContainer from './Dashboard/DashboardContainer';
+
 
 function LoadingComponent({ error }) {
   if (error) {
@@ -37,11 +37,7 @@ const ArticlesContainer = Loadable({
     ),
   LoadingComponent,
 });
-const Dashboard = Loadable({
-  loader: () =>
-    import('./Dashboard' /* webpackChunkName: "dashboard" */),
-  LoadingComponent,
-});
+
 const MediaContainer = Loadable({
   loader: () => import('./Media/MediaContainer'),
   LoadingComponent,
@@ -84,35 +80,35 @@ export default [
       },
     ],
   },
-  {
-        exact: true,
-        path: '/admin/filemanager',
-        breadcrumb: <Icon kind="folder-upload" />,
-        component: FileManagerContainer,
-        routes: [
-            {
-                exact: true,
-                breadcrumb: 'File Editor',
-                path: '/admin/filemanager/:id',
-                component: FileEditor,
-                routes: [],
-            },
-        ],
-    },
-    {
-        exact: true,
-        path: '/admin/navigation',
-        breadcrumb: <Icon kind="more" />,
-        component: NavigationContainer,
-        routes: [],
-    },
-    {
-        exact: true,
-        path: '/admin/settings',
-        breadcrumb: <Icon kind="settings" />,
-        component: Settings,
-        routes: [],
-    },
+  // {
+  //       exact: true,
+  //       path: '/admin/filemanager',
+  //       breadcrumb: <Icon kind="folder-upload" />,
+  //       component: FileManagerContainer,
+  //       routes: [
+  //           {
+  //               exact: true,
+  //               breadcrumb: 'File Editor',
+  //               path: '/admin/filemanager/:id',
+  //               component: FileEditor,
+  //               routes: [],
+  //           },
+  //       ],
+  //   },
+  //   {
+  //       exact: true,
+  //       path: '/admin/navigation',
+  //       breadcrumb: <Icon kind="more" />,
+  //       component: NavigationContainer,
+  //       routes: [],
+  //   },
+  //   {
+  //       exact: true,
+  //       path: '/admin/settings',
+  //       breadcrumb: <Icon kind="settings" />,
+  //       component: Settings,
+  //       routes: [],
+  //   },
     {
         exact: true,
         path: '/admin/members',
