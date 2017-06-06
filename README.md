@@ -12,8 +12,13 @@
 Think of Boldr as the solid foundation for building your next great web application. Unlike most other CMS platforms, Boldr is entirely JavaScript. Boldr features Universal / Isomorphic rendering for improved performance and Search Engine Optimization.
 
 
+#### Incoming 💥  Breaking  💥  Changes and Major Improvements
+
+Pardon the mess while things get resettled over the next 24 hours in the next and dev branches.
+
+
 **Have questions or want to help with development?**
-Join us on <a href="https://slack.boldr.io" target="blank"><img src="/docs/assets/slack-logo.png" height="25" /></a>
+Come visit with us [![Join the chat at https://gitter.im/boldr/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/boldr/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 
 ## Table of Contents
