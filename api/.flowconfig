@@ -1,0 +1,8 @@
+[ignore]
+.*/build/.*
+.*/config/.*
+.*/coverage/.*
+.*/tools/.*
+
+[options]
+esproposal.export_star_as=enable

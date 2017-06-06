@@ -16,10 +16,6 @@ Think of Boldr as the solid foundation for building your next great web applicat
 Join us on <a href="https://slack.boldr.io" target="blank"><img src="/docs/assets/slack-logo.png" height="25" /></a>
 
 
-#### Incoming 💥  Breaking  💥  Changes and Major Improvements
-
-Pardon the mess while things get resettled over the next 24 hours.
-
 ## Table of Contents
 - [Boldr Repositories](#boldr-repositories)
 - [Current Features](#current-features)

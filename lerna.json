@@ -1,0 +1,17 @@
+{
+  "lerna": "2.0.0-rc.5",
+  "npmClient": "yarn",
+  "commands": {
+    "bootstrap": {
+      "ignore": [
+        "api"
+      ]
+    }
+  },
+  "packages": [
+    "api/*",
+    "web/*",
+    "packages/*"
+  ],
+  "version": "independent"
+}

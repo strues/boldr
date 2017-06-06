@@ -1,0 +1,4 @@
+{
+  "root": true,
+  "extends": ["boldr", "boldr/flowtype", "boldr/promise", "boldr/import"]
+}

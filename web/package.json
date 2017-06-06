@@ -1,0 +1,245 @@
+{
+  "name": "boldr-cmf",
+  "description": "universal react content management framework",
+  "version": "0.0.0",
+  "author": "Steven Truesdell <steven@strues.io>",
+  "bugs": {
+    "url": "https://github.com/strues/boldr/issues"
+  },
+  "license": "MIT",
+  "main": "boldrCMS/server/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strues/boldr.git"
+  },
+  "engines": {
+    "node": ">=7.0.0",
+    "npm": ">=3.0.0",
+    "yarn": ">=0.23.0"
+  },
+  "homepage": "https://github.com/strues/boldr#readme",
+  "keywords": [
+    "cms",
+    "express",
+    "javascript",
+    "node",
+    "postgres",
+    "react",
+    "redux",
+    "universal",
+    "webpack"
+  ],
+  "scripts": {
+    "build": "NODE_ENV=production BOLDR__SERVER_PORT=3000 BOLDR__DEV_PORT=3001 DEBUG=boldr:* boldr build",
+    "clean": "NODE_ENV=development boldr clean",
+    "dev": "NODE_ENV=development BOLDR__SERVER_PORT=3000 BOLDR__DEV_PORT=3001 BOLDR__DEBUG=1 DEBUG=boldr:server:* boldr dev",
+    "lint": "node ./node_modules/.bin/eslint src",
+    "flow": "node ./node_modules/.bin/flow check",
+    "knex": "./node_modules/.bin/knex",
+    "migrate": "better-npm-run migrate",
+    "reset": "better-npm-run reset",
+    "migrate:test": "node --harmony internal/scripts/db.js migrate",
+    "migration": "better-npm-run migration",
+    "prettier": "node ./internal/scripts/prettier.js write",
+    "start": "NODE_ENV=production node server/app.js",
+    "seed": "better-npm-run seed",
+    "seed:test": "node --harmony internal/scripts/db.js seed",
+    "test": "NODE_ENV=test jest",
+    "test:ci": "NODE_ENV=test CI=true jest"
+  },
+  "dependencies": {
+    "apollo-client": "^1.4.0",
+    "axios": "^0.16.1",
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.2",
+    "boldr-config": "^0.1.4",
+    "boldr-core": "0.0.3",
+    "boldr-ui": "0.4.0-rc.9",
+    "boldr-utils": "0.3.2",
+    "classnames": "^2.2.5",
+    "compression": "^1.6.2",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.3",
+    "date-fns": "^1.28.5",
+    "debug": "^2.6.8",
+    "dotenv": "^4.0.0",
+    "draft-convert": "^1.4.6",
+    "draft-js": "^0.10.1",
+    "draftjs-utils": "^0.7.5",
+    "express": "^4.15.3",
+    "fs-extra": "^3.0.1",
+    "graphql-tag": "^2.2.1",
+    "griddle-react": "^1.3.1",
+    "lodash": "^4.17.4",
+    "material-ui": "next",
+    "material-ui-icons": "^1.0.0-alpha.3",
+    "normalizr": "^3.2.3",
+    "prop-types": "^15.5.10",
+    "react": "^15.5.4",
+    "react-apollo": "^1.4.1",
+    "react-dom": "^15.5.4",
+    "react-dropzone": "^3.13.2",
+    "react-helmet": "5.1.3",
+    "react-redux": "^5.0.5",
+    "react-router-dom": "^4.1.1",
+    "react-router-redux": "next",
+    "react-tap-event-plugin": "^2.0.1",
+    "react-transition-group": "^1.1.3",
+    "redux": "^3.6.0",
+    "redux-form": "^6.7.0",
+    "redux-thunk": "^2.2.0",
+    "reselect": "^3.0.1",
+    "serialize-javascript": "^1.3.0",
+    "styled-components": "^2.0.0",
+    "uuid": "^3.0.1",
+    "webfontloader": "^1.6.28"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.1.1",
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "7.2.3",
+    "babel-jest": "^20.0.3",
+    "babel-preset-boldr": "0.9.4",
+    "babel-preset-env": "^1.5.1",
+    "better-npm-run": "^0.0.15",
+    "boldr-cli": "0.0.3",
+    "cross-env": "^5.0.0",
+    "cz-conventional-changelog-emoji": "^0.1.0",
+    "enzyme": "^2.8.2",
+    "eslint": "^3.19.0",
+    "eslint-config-boldr": "^0.9.9",
+    "faker": "^4.1.0",
+    "flow-bin": "^0.47.0",
+    "husky": "^0.13.4",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^20.0.4",
+    "jest-enzyme": "^3.2.0",
+    "lint-staged": "^3.6.0",
+    "moxios": "^0.4.0",
+    "nodemon": "^1.11.0",
+    "postcss-discard-comments": "^2.0.4",
+    "postcss-import": "^10.0.0",
+    "postcss-reporter": "^3.0.0",
+    "prettier": "^1.4.1",
+    "react-hot-loader": "3.0.0-beta.6",
+    "react-test-renderer": "15.5.4",
+    "redbox-react": "^1.4.0",
+    "redux-mock-store": "^1.2.3",
+    "rimraf": "^2.6.1",
+    "sinon": "^2.3.2",
+    "supertest": "^3.0.0"
+  },
+  "betterScripts": {
+    "dev": {
+      "command": "cross-env boldr-dx dev",
+      "env": {
+        "NODE_ENV": "development",
+        "BOLDR__DB__URL": "postgres://postgres:password@0.0.0.0:5432/boldr",
+        "BOLDR__REDIS__URL": "redis://0.0.0.0:6379/0",
+        "BOLDR__SERVER_PORT": "3000",
+        "BOLDR__DEV_PORT": "3001",
+        "BOLDR__DEBUG": "1",
+        "DEBUG": "boldr:*"
+      }
+    },
+    "migrate": {
+      "command": "cross-env node --harmony internal/scripts/db.js migrate",
+      "env": {
+        "BOLDR__DB__URL": "postgres://postgres:password@localhost:5432/boldr",
+        "NODE_ENV": "development"
+      }
+    },
+    "migration": {
+      "command": "cross-env node --harmony internal/scripts/db.js migration",
+      "env": {
+        "BOLDR__DB__URL": "postgres://postgres:password@localhost:5432/boldr",
+        "NODE_ENV": "development"
+      }
+    },
+    "reset": {
+      "command": "cross-env node --harmony internal/scripts/db.js reset",
+      "env": {
+        "BOLDR__DB__URL": "postgres://postgres:password@localhost:5432/boldr_test",
+        "NODE_ENV": "development"
+      }
+    },
+    "rollback": {
+      "command": "cross-env node --harmony internal/scripts/db.js migrate:undo",
+      "env": {
+        "BOLDR__DB__URL": "postgres://postgres:password@localhost:5432/boldr_test",
+        "NODE_ENV": "test"
+      }
+    },
+    "seed": {
+      "command": "cross-env node --harmony internal/scripts/db.js seed",
+      "env": {
+        "BOLDR__DB__URL": "postgres://postgres:password@localhost:5432/boldr",
+        "NODE_ENV": "development"
+      }
+    },
+    "test": {
+      "command": "npm run reset && jest -w 2 --forceExit",
+      "env": {
+        "BOLDR__DB__URL": "postgres://postgres:password@127.0.0.1:5432/boldr_test",
+        "NODE_ENV": "test",
+        "KNEX_TEST_TIMEOUT": 30000
+      }
+    },
+    "test:ci": {
+      "command": "jest --forceExit",
+      "env": {
+        "NODE_ENV": "test",
+        "BOLDR__TOKEN__SECRET": "b0ldrs0s3cr3t",
+        "KNEX_TEST_TIMEOUT": 30000
+      }
+    }
+  },
+  "jest": {
+    "timers": "fake",
+    "moduleNameMapper": {
+      "\\.(css|scss)$": "identity-obj-proxy",
+      "^~components(.*)$": "<rootDir>/src/shared/components$1",
+      "^~state(.*)$": "<rootDir>/src/shared/state$1",
+      "^~core(.*)$": "<rootDir>/src/shared/core$1",
+      "^~scenes(.*)$": "<rootDir>/src/shared/scenes$1",
+      "^~blog(.*)$": "<rootDir>/src/shared/scenes/Blog$1",
+      "^~admin(.*)$": "<rootDir>/src/shared/scenes/Admin$1",
+      ".*\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/internal/jest/fileMock.js"
+    },
+    "collectCoverage": true,
+    "coverageDirectory": "<rootDir>/coverage",
+    "coveragePathIgnorePatterns": [
+      "<rootDir>/(internal|server|.boldr|docs|bin|.idea|public|db)/",
+      "/flow-typed/",
+      "/__fixtures__/",
+      "/node_modules/"
+    ],
+    "transform": {
+      "^.+\\.jsx?$": "<rootDir>/internal/jest/transform.js"
+    },
+    "testRegex": ".*.test\\.js",
+    "setupTestFrameworkScriptFile": "<rootDir>/internal/jest/setup.js",
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/enzyme-to-json/serializer"
+    ],
+    "testPathIgnorePatterns": [
+      "<rootDir>/(internal|server|.boldr|docs|bin|.idea|public|db)/",
+      "__snapshots__",
+      "/styles/"
+    ],
+    "transformIgnorePatterns": [
+      "/node_modules/",
+      "/.boldr/",
+      "/db/",
+      "/styles/"
+    ],
+    "coverageReporters": [
+      "json"
+    ]
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog-emoji"
+    }
+  }
+}

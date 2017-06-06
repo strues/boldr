@@ -1,47 +1,70 @@
 version: '3'
 
 services:
-  # proxy:
-  #   links:
-  #     - cmf
-  #     - api
-  #   build: ./.boldr/docker/proxy
-  #   ports:
-  #     - 3000:80
-
-  database:
-    build: ./.boldr/db
-    restart: always
-    container_name: boldr_database
+  nginx:
+    image: nginx:1.13.1-alpine
+    read_only: true
+    container_name: boldr_nginx
+    tmpfs:
+      - /var/cache/nginx
+      - /var/log/nginx
+      - /var/run
+    depends_on:
+      - api
+    ports:
+      - "8080:80"
+      - "8443:443"
+    # restart: always
+    volumes:
+      - ./internal/docker/nginx/snippets:/etc/nginx/snippets:ro
+      - ./internal/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+      args:
+        - NODE_ENV=development
+    # you can use standard debug config or experimental node inspect
+    command: node ../node_modules/nodemon/bin/nodemon.js
+    container_name: boldr_api
+    hostname: api
+    user: node
+    working_dir: /opt/app
+    depends_on:
+      - db
+      - redis
     environment:
-      - PGDATA=/var/lib/postgresql/data/pgdata
-      - POSTGRES_PASSWORD=password
-      - POSTGRES_USER=postgres
+      - NODE_ENV=development
+      - CORS_ORIGIN=http://localhost:3001,http://localhost:3000
+      - DATABASE_URL=postgres://postgres@db:5432/boldr
+      - DATABASE_DEBUG=false
+      - REDIS_URL=redis://redis:6379/0
+    expose:
+      - "8080"
     ports:
-      - "5432:5432"
+      - "5858:5858"
+      - "9229:9229"
     volumes:
-      - database_volume:/var/lib/postgresql/data/pgdata
-    networks:
-      - boldr
-
+      - yarn:/root/.cache/yarn
+      - ./api/:/opt/app
+  db:
+    build: ./internal/docker/postgres
+    container_name: boldr_db
+    read_only: true
+    tmpfs:
+      - /tmp
+      - /var/run/postgresql
+    volumes:
+      - db:/var/lib/postgresql/data
   redis:
-    image: strues/redis:3.2.8-alpine
+    image: redis:3.2.9-alpine
+    read_only: true
     container_name: boldr_redis
-    restart: always
-    read_only: false
-    security_opt:
-     - "no-new-privileges"
     volumes:
-      - redis_volume:/data:rw
-    ports:
-      - "6379:6379"
-    networks:
-      - boldr
+      - redis:/data
+    user: redis
 
 volumes:
-  database_volume: {}
-  redis_volume: {}
-
-networks:
-  boldr:
-    driver: bridge
+  db:
+  redis:
+  yarn:
