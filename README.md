@@ -18,8 +18,8 @@ Pardon the mess while things get resettled over the next 24 hours in the next an
 
 
 **Have questions or want to help with development?**
-Come visit with us [![Join the chat at https://gitter.im/boldr/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/boldr/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-
+Come visit with us
+[![Join the chat at https://gitter.im/getboldr](https://badges.gitter.im/getboldr.svg)](https://gitter.im/getboldr?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Table of Contents
 - [Boldr Repositories](#boldr-repositories)
