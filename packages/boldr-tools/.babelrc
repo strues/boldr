@@ -1,0 +1,27 @@
+{
+  "plugins": [
+    "transform-object-rest-spread",
+    "lodash",
+    "ramda"
+  ],
+  "env": {
+    "commonjs": {
+      "presets": [["env", {
+        "targets": {
+          "browsers": ["last 2 versions"]
+        }
+        }]]
+    },
+    "es": {
+      "presets": [
+        ["env", {
+        "modules": false,
+        "loose": true,
+        "targets": {
+          "node": 7
+        }
+        }
+        ]]
+    }
+}
+}

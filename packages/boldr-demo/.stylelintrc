@@ -1,0 +1,9 @@
+{
+  "extends": "stylelint-config-standard",
+  "rules": {
+	"color-hex-case": "upper",
+	"selector-pseudo-element-colon-notation": "single",
+	"selector-pseudo-class-no-unknown": [true, {"ignorePseudoClasses": ["global"]}],
+	"indentation": null
+  }
+}

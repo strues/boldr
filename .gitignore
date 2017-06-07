@@ -6,9 +6,9 @@ https://www.gitignore.io/api/osx,node,windows,webstorm,visualstudiocode
 
 api/.env
 api/node_modules
-web/.env
-web/public/assets
-web/node_modules
+legacy-web/.env
+legacy-web/public/assets
+legacy-web/node_modules
 
 
 ### Node ###
