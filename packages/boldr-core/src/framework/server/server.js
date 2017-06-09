@@ -6,9 +6,11 @@ import webpack from 'webpack';
 import fs from 'fs-extra';
 import _debug from 'debug';
 import uuid from 'uuid';
+import appRoot from 'boldr-utils/lib/node/appRoot';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import createDevDlls from '../../webpack/createDevDlls';
+
 import createClientConfig from '../../webpack/createWebpackClientConfig';
 import Ssr from './ssrMiddleware';
 
@@ -17,9 +19,8 @@ function nonceMiddleware(req, res, next) {
   res.locals.nonce = uuid.v4(); // eslint-disable-line no-param-reassign
   next();
 }
-export default async function boldrServer(config) {
+export default (async function boldrServer(config) {
   const app = express();
-
   app.use(nonceMiddleware);
 
   let clientInfo;
@@ -74,4 +75,4 @@ export default async function boldrServer(config) {
   app.use(ssrMw(() => clientInfo));
 
   return app;
-}
+});

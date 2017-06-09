@@ -1,0 +1,9 @@
+.editorconfig
+images
+__tests__
+__mocks__
+coverage
+.babelrc
+*.log
+src
+node_modules

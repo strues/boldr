@@ -1,0 +1,25 @@
+[ignore]
+.*/node_modules/fbjs/.*
+.*/packages/boldr-base/.*
+
+[libs]
+flow-typed/npm
+internal/flow/defs/
+
+[options]
+emoji=true
+module.system=node
+
+esproposal.class_static_fields=enable
+esproposal.class_instance_fields=enable
+esproposal.decorators=ignore
+esproposal.export_star_as=ignore
+module.system.node.resolve_dirname=node_modules
+module.ignore_non_literal_requires=true
+munge_underscores=false
+
+
+suppress_comment=\\(.\\|\n\\)*\\$FlowIssue
+
+[version]
+=> 0.46.0

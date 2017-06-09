@@ -10,7 +10,8 @@ legacy-web/.env
 legacy-web/public/assets
 legacy-web/node_modules
 
-
+packages/boldr-cli
+packages/boldr-tools
 ### Node ###
 # Logs
 logs

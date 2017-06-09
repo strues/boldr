@@ -4,7 +4,7 @@
 import path from 'path';
 import webpack from 'webpack';
 import _debug from 'debug';
-import logger from 'boldr-tools/es/logger';
+import logger from 'boldr-utils/lib/logger';
 import createWebpackServerConfig from '../../webpack/createWebpackServerConfig';
 import getDefault from '../../internal/getDefault';
 

@@ -1,0 +1,11 @@
+dist
+build
+coverage
+node_modules
+**/flow-typed/**
+**/example/**
+**/demo/**
+docs/
+
+*.bundle.js
+*.js.map

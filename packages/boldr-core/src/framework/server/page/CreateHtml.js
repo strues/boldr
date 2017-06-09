@@ -5,8 +5,8 @@
  */
 import React, { Children } from 'react';
 import serialize from 'serialize-javascript';
-import ifElse from 'boldr-tools/es/logic/ifElse';
-import removeNil from 'boldr-tools/es/arrays/removeNil';
+import ifElse from 'boldr-utils/lib/logic/ifElse';
+import removeNil from 'boldr-utils/lib/arrays/removeNil';
 
 import type { Head } from 'react-helmet';
 import Html from './Html';

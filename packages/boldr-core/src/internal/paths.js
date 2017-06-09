@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'mz/fs';
-import appRoot from 'boldr-tools/es/node/appRoot';
+import appRoot from 'boldr-utils/lib/node/appRoot';
 
 function ensureSlash(path, needsSlash) {
   const hasSlash = path.endsWith('/');

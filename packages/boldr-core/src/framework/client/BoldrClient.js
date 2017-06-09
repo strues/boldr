@@ -2,11 +2,9 @@
  * @module boldr/framework/client/client
  */
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
 import ReactDOM from 'react-dom';
 import createHistory from 'history/createBrowserHistory';
 import ConnectedRouter from 'react-router-redux/ConnectedRouter';
-import WebFontLoader from 'webfontloader';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { ApolloProvider } from 'react-apollo';
 import { createBatchingNetworkInterface } from 'apollo-client';
