@@ -9,7 +9,7 @@ api/node_modules
 legacy-web/.env
 legacy-web/public/assets
 legacy-web/node_modules
-
+packages/boldr-utils/lib
 packages/boldr-cli
 packages/boldr-tools
 ### Node ###
