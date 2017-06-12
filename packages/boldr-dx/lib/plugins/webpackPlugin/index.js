@@ -439,7 +439,6 @@ var plugin = function (engine) {
             }
           }.bind(this));
         }
-
         return $return(true);
       }.$asyncbind(this));
     }

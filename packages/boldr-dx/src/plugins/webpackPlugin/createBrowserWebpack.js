@@ -282,7 +282,15 @@ export default function createBrowserWebpack(
               sourceMaps: true,
               comments: false,
               cacheDirectory: _DEV,
-              presets: [require.resolve('babel-preset-boldr/browser')],
+              presets: [
+                [
+                  require.resolve('babel-preset-boldr/browser'),
+                  {
+                    useBuiltins: true,
+                    exclude: ['transform-regenerator', 'transform-async-to-generator'],
+                  },
+                ],
+              ],
               plugins: removeNil([
                 ifDev(require.resolve('react-hot-loader/babel')),
                 [

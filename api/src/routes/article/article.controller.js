@@ -34,9 +34,7 @@ export async function createArticle(req, res, next) {
   }
   const articleSlug = slugIt(req.body.title);
   // look for a matching slug in the database
-  const existingArticle = await Article.query()
-    .where('slug', articleSlug)
-    .first();
+  const existingArticle = await Article.query().where('slug', articleSlug).first();
   if (existingArticle) {
     return res.status(409).json('A post with this title already exists.');
   }
@@ -72,19 +70,13 @@ export async function createArticle(req, res, next) {
 
     reqTags.map(async tag => {
       debug(tag);
-      const existingTag = await Tag.query()
-        .where('name', tag)
-        .first()
-        .skipUndefined();
+      const existingTag = await Tag.query().where('name', tag).first().skipUndefined();
       if (existingTag) {
         debug('existingTag', existingTag);
         await createArticleTagRelation(existingTag, newArticle);
       } else {
         debug('tag', tag);
-        await createArticle
-          .$relatedQuery('tags')
-          .insert({ name: tag })
-          .skipUndefined();
+        await createArticle.$relatedQuery('tags').insert({ name: tag }).skipUndefined();
       }
     });
     const relatedFeatureImg = await Media.query()
@@ -107,34 +99,13 @@ export async function createArticle(req, res, next) {
 export async function relateMediaToArticle(req, res, next) {
   try {
     const article = await Article.query().findById(req.params.id);
-    const newRelation = await article
-      .$relatedQuery('media')
-      .relate({ id: req.params.mediaId });
+    const newRelation = await article.$relatedQuery('media').relate({ id: req.params.mediaId });
     return res.status(200).json(newRelation);
   } catch (error) {
     /* istanbul ignore next */
     return next(error);
   }
 }
-// export async function addMediaToPost(req, res, next) {
-//   try {
-//     const post = await transaction(Post.knex(), async function (trx) {
-//           const p = await Post
-//             .query(trx)
-//             .findById(req.params.id);
-//
-//           if (!p) {
-//             throwNotFound();
-//           }
-//
-//           return await p
-//             .$relatedQuery('media', trx)
-//             .insert(req.body);
-//         });
-//   } catch (err) {
-//
-//   }
-// }
 
 /**
  * Get an article from its slug.
@@ -220,11 +191,9 @@ export async function destroy(req, res, next) {
  */
 export function update(req, res) {
   debug(req.body);
-  return Article.query()
-    .patchAndFetchById(req.params.id, req.body)
-    .then(article => {
-      return responseHandler(res, 202, article);
-    });
+  return Article.query().patchAndFetchById(req.params.id, req.body).then(article => {
+    return responseHandler(res, 202, article);
+  });
 }
 
 /**
@@ -257,9 +226,7 @@ export async function addTag(req, res, next) {
 export async function relateArticleToMedia(req, res, next) {
   try {
     const article = await Article.query().findById(req.params.id);
-    const newRelation = await article
-      .$relatedQuery('media')
-      .relate({ id: req.params.mediaId });
+    const newRelation = await article.$relatedQuery('media').relate({ id: req.params.mediaId });
     return res.status(200).json(newRelation);
   } catch (error) {
     /* istanbul ignore next */
@@ -290,9 +257,7 @@ export async function getArticlesWithArchive(req, res, next) {
 
 export async function permanentlyDeleteArticle(req, res, next) {
   try {
-    const article = await Article.query()
-      .forceDelete()
-      .where({ id: req.params.id });
+    const article = await Article.query().forceDelete().where({ id: req.params.id });
 
     return res.status(204).json(article);
   } catch (err) {

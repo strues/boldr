@@ -8,7 +8,7 @@ import Menu from '../Menu';
  * @see ../MenuDetail
  * @extends ../BaseModel
  */
-class MenuMenuDetail extends Model {
+class MenuMenuDetail extends BaseModel {
   static tableName = 'menu_menu_detail';
   static addTimestamps = true;
 

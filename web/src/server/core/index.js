@@ -5,10 +5,10 @@ import {
   NotFound,
   MethodNotAllowed,
   Conflict,
+  InternalServer,
+  NotImplemented,
   UserNotVerifiedError,
-} from './clientError';
-import HttpError from './httpError';
-import { InternalServer, NotImplemented } from './serverError';
+} from './errors';
 
 export {
   BadRequest,
@@ -20,5 +20,4 @@ export {
   InternalServer,
   NotImplemented,
   UserNotVerifiedError,
-  HttpError,
 };

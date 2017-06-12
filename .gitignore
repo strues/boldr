@@ -6,12 +6,15 @@ https://www.gitignore.io/api/osx,node,windows,webstorm,visualstudiocode
 
 api/.env
 api/node_modules
-legacy-web/.env
-legacy-web/public/assets
-legacy-web/node_modules
+
+
 packages/boldr-utils/lib
 packages/boldr-cli
 packages/boldr-tools
+web/node_modules
+web/.env
+web/dist
+web/public
 ### Node ###
 # Logs
 logs

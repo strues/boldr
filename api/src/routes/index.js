@@ -2,7 +2,6 @@ import express from 'express';
 
 import config from '../config';
 import articleRoutes from './article/article.routes';
-import adminRoutes from './admin/admin.routes';
 import attachmentRoutes from './attachment/attachment.routes';
 import authRoutes from './auth/auth.routes';
 import mediaRoutes from './media/media.routes';
@@ -14,7 +13,7 @@ import tagRoutes from './tag/tag.routes';
 import tokenRoutes from './token/token.routes';
 import userRoutes from './user/user.routes';
 
-const API_PREFIX = config.server.apiPrefix;
+const API_PREFIX = config.api.prefix;
 
 export default app => {
   app.get(`${API_PREFIX}/health-check`, (req, res) => {
@@ -29,7 +28,6 @@ export default app => {
     });
   });
 
-  app.use(`${API_PREFIX}/admin`, adminRoutes);
   app.use(`${API_PREFIX}/articles`, articleRoutes);
   app.use(`${API_PREFIX}/attachments`, attachmentRoutes);
   app.use(`${API_PREFIX}/auth`, authRoutes);

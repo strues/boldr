@@ -21,7 +21,7 @@ const defaultOptions = {
 const config = {
   default: {
     ignore: ['**/node_modules/**'],
-    patterns: ['packages/*/src/**/', 'packages/*/internal/**/', 'api/**'],
+    patterns: ['packages/*/src/**/', 'packages/*/internal/**/', 'api/src/**', 'web/src/**'],
   },
 };
 

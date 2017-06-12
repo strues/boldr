@@ -15,9 +15,7 @@ export async function listSettings(req, res, next) {
     const settings = await Setting.query();
 
     if (!settings) {
-      return res
-        .status(404)
-        .json({ message: 'Unable to find any settings. Theres a problem.' });
+      return res.status(404).json({ message: 'Unable to find any settings. Theres a problem.' });
     }
 
     return responseHandler(res, 200, settings);
@@ -38,9 +36,7 @@ export async function getSetting(req, res, next) {
   try {
     const setting = await Setting.query().findById(req.params.id);
     if (!setting)
-      return res
-        .status(404)
-        .json({ error: 'Unable to find a setting matching the id' });
+      return res.status(404).json({ error: 'Unable to find a setting matching the id' });
     return responseHandler(res, 200, setting);
   } catch (error) {
     /* istanbul ignore next */

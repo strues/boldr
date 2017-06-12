@@ -6,14 +6,13 @@
   "commands": {
     "bootstrap": {
       "ignore": [
-        "api",
-        "packages/boldr-cli",
-        "packages/boldr-tools"
+        "packages/boldr-cli"
       ]
     }
   },
   "packages": [
     "api/*",
+    "web/**",
     "packages/*"
   ],
   "version": "independent",

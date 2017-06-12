@@ -1,11 +1,7 @@
 import uuid from 'uuid/v4';
 import _debug from 'debug';
 import slugIt from '../../../utils/slugIt';
-import {
-  InternalServer,
-  BadRequest,
-  responseHandler,
-} from '../../../core/index';
+import { InternalServer, BadRequest, responseHandler } from '../../../core/index';
 import Menu from '../../../models/Menu';
 import MenuDetail from '../../../models/MenuDetail';
 import MenuMenuDetail from '../../../models/join/MenuMenuDetail';
@@ -17,9 +13,7 @@ export async function getDetails(req, res, next) {
     const links = await MenuDetail.query();
 
     if (!links) {
-      return res
-        .status(404)
-        .json({ message: 'Unable to find any links. Try creating one.' });
+      return res.status(404).json({ message: 'Unable to find any links. Try creating one.' });
     }
 
     return responseHandler(res, 200, links);
@@ -77,10 +71,7 @@ export async function updateDetail(req, res, next) {
     if (!detail) {
       return res.status(404).json('Unable to find a menu detail with that id.');
     }
-    const updatedDetail = await MenuDetail.query().updateAndFetchById(
-      req.params.id,
-      req.body,
-    );
+    const updatedDetail = await MenuDetail.query().updateAndFetchById(req.params.id, req.body);
 
     return res.status(202).json(updatedDetail);
   } catch (err) {
@@ -94,10 +85,7 @@ export async function deleteDetail(req, res, next) {
     if (!menuD) {
       return res.status(404).json('Unable to find a matching menu detail');
     }
-    await menuD
-      .$relatedQuery('menu')
-      .unrelate()
-      .where('menuDetailId', req.params.id);
+    await menuD.$relatedQuery('menu').unrelate().where('menuDetailId', req.params.id);
     await MenuDetail.query().deleteById(req.params.id);
     return responseHandler(res, 204);
   } catch (error) {

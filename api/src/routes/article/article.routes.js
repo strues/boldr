@@ -2,7 +2,6 @@
 import { Router } from 'express';
 import { isAuthenticated } from '../../services/authentication';
 import { checkRole } from '../../middleware/rbac';
-import redisClient from '../../services/redis';
 import { wrapRouter } from '../../utils/asyncRouter';
 import Article from '../../models/Article';
 import * as ctrl from './article.controller';
@@ -76,12 +75,7 @@ router
  * @apiPermission admin
  * @apiUse authHeader
  */
-router.get(
-  '/archived',
-  isAuthenticated,
-  checkRole('Admin'),
-  ctrl.getArticlesWithArchive,
-);
+router.get('/archived', isAuthenticated, checkRole('Admin'), ctrl.getArticlesWithArchive);
 
 router
   .route('/:id')
@@ -147,11 +141,6 @@ router.get('/:id/relate/:mediaId', ctrl.relateArticleToMedia);
  */
 router.delete('/:id/remove', ctrl.permanentlyDeleteArticle);
 
-router.get(
-  '/:id/relate/:mediaId',
-  isAuthenticated,
-  checkRole('Admin'),
-  ctrl.relateMediaToArticle,
-);
+router.get('/:id/relate/:mediaId', isAuthenticated, checkRole('Admin'), ctrl.relateMediaToArticle);
 
 export default router;

@@ -315,7 +315,6 @@ function createBrowserWebpack() {
       __ASSETS_MANIFEST__: JSON.stringify(_path2.default.join(bundle.assetsDir || '', 'assets-manifest.json')),
       'process.browser': JSON.stringify(true),
       'process.server': JSON.stringify(false)
-
     }), (0, _happyPackPlugin2.default)({
       name: 'hp-js',
       loaders: [{
@@ -326,7 +325,10 @@ function createBrowserWebpack() {
           sourceMaps: true,
           comments: false,
           cacheDirectory: _DEV,
-          presets: [require.resolve('babel-preset-boldr/browser')],
+          presets: [[require.resolve('babel-preset-boldr/browser'), {
+            useBuiltins: true,
+            exclude: ['transform-regenerator', 'transform-async-to-generator']
+          }]],
           plugins: (0, _removeNil2.default)([ifDev(require.resolve('react-hot-loader/babel')), [require.resolve('babel-plugin-styled-components'), {
             ssr: true
           }], [require.resolve('./util/loadableBabel.js'), {

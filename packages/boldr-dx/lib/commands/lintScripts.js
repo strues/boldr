@@ -44,9 +44,7 @@ module.exports = function (config, flags) {
     if (output.code === 0) {
       _logger2.default.end('Linting complete. ' + (output.stdout === '' ? 'Damn, your code is beautiful  💕' : 'Maybe you want to check it over again  😦'));
     }
-
     process.exit(output.code > 0 ? 1 : 0);
   }.bind(undefined);
-
   lint();
 }.bind(undefined);

@@ -11,6 +11,7 @@ import { expressMiddleware, authMiddleware, errorHandler } from './middleware';
 import { mainRedisClient } from './services/redis';
 import RootSchema from './data/rootSchema';
 import config from './config';
+import routes from './routes';
 
 const debug = _debug('boldr:api:app');
 const app = express();
@@ -30,6 +31,7 @@ app.use(
     endpointURL: '/api/v1/graphql',
   }),
 );
+routes(app);
 
 const graphqlHandler = graphqlExpress(req => {
   const query = req.query.query || req.body.query;

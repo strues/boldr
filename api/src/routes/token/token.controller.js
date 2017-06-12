@@ -1,10 +1,7 @@
 /* eslint-disable no-unused-vars */
 import uuid from 'uuid/v4';
 import { mailer, generateHash } from '../../services';
-import {
-  passwordModifiedEmail,
-  forgotPasswordEmail,
-} from '../../services/mailer/templates';
+import { passwordModifiedEmail, forgotPasswordEmail } from '../../services/mailer/templates';
 import User from '../../models/User';
 import { responseHandler, BadRequest } from '../../core';
 import VerificationToken from '../../models/VerificationToken';
@@ -49,14 +46,10 @@ export async function forgottenPassword(req, res, next) {
  */
 export async function resetPassword(req, res, next) {
   try {
-    const userResetToken = await ResetToken.query()
-      .where({ token: req.body.token })
-      .first();
+    const userResetToken = await ResetToken.query().where({ token: req.body.token }).first();
     console.log(userResetToken);
     if (!userResetToken) {
-      return res
-        .status(404)
-        .json({ error: 'Unable to locate an user with the provided token.' });
+      return res.status(404).json({ error: 'Unable to locate an user with the provided token.' });
     }
     const mailSubject = '[Boldr] Password Changed';
 

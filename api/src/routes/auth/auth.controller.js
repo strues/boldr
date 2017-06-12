@@ -36,9 +36,7 @@ export async function registerUser(req, res, next) {
   const checkExisting = await User.query().where('email', req.body.email);
 
   if (checkExisting.length) {
-    return res
-      .status(409)
-      .json('An account matching this email already exists.');
+    return res.status(409).json('An account matching this email already exists.');
   }
 
   const errors = req.validationErrors();
@@ -75,13 +73,11 @@ export async function registerUser(req, res, next) {
       // send the welcome email
       mailer(user, mailBody, mailSubject);
       // create a relationship between the user and the token
-      const verificationEmail = await user
-        .$relatedQuery('verificationToken')
-        .insert({
-          ip: req.ip,
-          token: verifToken,
-          userId: user.id,
-        });
+      const verificationEmail = await user.$relatedQuery('verificationToken').insert({
+        ip: req.ip,
+        token: verifToken,
+        userId: user.id,
+      });
       if (!verificationEmail) {
         return res.status(500).json('There was a problem with the mailer.');
       }
@@ -107,11 +103,7 @@ export async function loginUser(req, res, next) {
     .eager('[roles,socialMedia]')
     .first();
   if (!user) {
-    return next(
-      new Unauthorized(
-        'Unable to find an account matching the information provided.',
-      ),
-    );
+    return next(new Unauthorized('Unable to find an account matching the information provided.'));
   }
 
   if (!user.verified) {
@@ -146,9 +138,7 @@ export async function verifyUserRegister(req, res, next) {
       return next(new BadRequest('Invalid account verification code'));
     }
 
-    const userToken = await VerificationToken.query()
-      .where({ token: req.body.token })
-      .first();
+    const userToken = await VerificationToken.query().where({ token: req.body.token }).first();
 
     if (userToken.used === true) {
       return res.status(401).json('This token has already been used.');
@@ -157,9 +147,7 @@ export async function verifyUserRegister(req, res, next) {
       verified: true,
     });
 
-    VerificationToken.query()
-      .where({ token: req.body.token })
-      .update({ used: true });
+    VerificationToken.query().where({ token: req.body.token }).update({ used: true });
 
     return responseHandler(res, 201, user);
   } catch (err) {
@@ -168,9 +156,7 @@ export async function verifyUserRegister(req, res, next) {
 }
 export async function checkAuthentication(req, res, next) {
   try {
-    const validUser = await User.query()
-      .findById(req.user.id)
-      .eager('[roles,socialMedia]');
+    const validUser = await User.query().findById(req.user.id).eager('[roles,socialMedia]');
 
     if (!validUser) {
       return res.status(401).json('Unauthorized: Please login again.');

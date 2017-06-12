@@ -8,7 +8,6 @@ import {
   GraphQLInt,
   GraphQLInputObjectType,
 } from 'graphql';
-// import jsonResult from 'boldr-utils/es/gql/jsonResult';
 import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON } from '../scalars';
 import User from '../../models/User';
 import ArticleType from '../article/articleType';
@@ -198,8 +197,7 @@ const UserType = new GraphQLObjectType({
       resolve(user, args, ctx) {
         return User.query()
           .findById(user.id)
-          .then(result => result.$relatedQuery('roles'))
-          .then(jsonResult);
+          .then(result => result.$relatedQuery('roles'));
       },
     },
     socialMedia: {
