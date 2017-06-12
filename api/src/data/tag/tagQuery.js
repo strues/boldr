@@ -1,12 +1,6 @@
 import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt } from 'graphql';
-import jsonResult from 'boldr-utils/es/gql/jsonResult';
-import {
-  GraphQLEmail,
-  GraphQLURL,
-  GraphQLDateTime,
-  GraphQLUUID,
-  GraphQLJSON,
-} from '../scalars';
+import jsonResult from 'boldr-utils/lib/gql/jsonResult';
+import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON } from '../scalars';
 import Tag from '../../models/Tag';
 import TagType from './tagType';
 
@@ -25,7 +19,6 @@ export default {
       },
     },
     async resolve(_, { limit, offset }, context) {
-
       const tags = await Tag.query().offset(offset).limit(limit);
       if (tags) {
         return tags;

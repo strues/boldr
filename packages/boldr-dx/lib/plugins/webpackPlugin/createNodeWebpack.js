@@ -269,7 +269,9 @@ function createNodeWebpack() {
       __IS_SERVER__: JSON.stringify(true),
       __IS_CLIENT__: JSON.stringify(false),
       __CHUNK_MANIFEST__: JSON.stringify(_path2.default.join(bundle.assetsDir || '', 'chunk-manifest.json')),
-      __ASSETS_MANIFEST__: JSON.stringify(_path2.default.join(bundle.assetsDir || '', 'assets-manifest.json'))
+      __ASSETS_MANIFEST__: JSON.stringify(_path2.default.join(bundle.assetsDir || '', 'assets-manifest.json')),
+      'process.browser': JSON.stringify(false),
+      'process.server': JSON.stringify(true)
     }),
     // case sensitive paths
     ifDev(function () {

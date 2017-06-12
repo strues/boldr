@@ -1,5 +1,5 @@
 import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt } from 'graphql';
-import jsonResult from 'boldr-utils/es/gql/jsonResult';
+import jsonResult from 'boldr-utils/lib/gql/jsonResult';
 import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID } from '../scalars';
 import Attachment from '../../models/Attachment';
 import AttachmentType from './attachmentType';

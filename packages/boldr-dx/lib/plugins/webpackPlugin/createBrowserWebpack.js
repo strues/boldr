@@ -9,8 +9,6 @@ var _path = require('path');
 
 var _path2 = _interopRequireDefault(_path);
 
-var _crypto = require('crypto');
-
 var _debug2 = require('debug');
 
 var _debug3 = _interopRequireDefault(_debug2);
@@ -314,7 +312,10 @@ function createBrowserWebpack() {
       __IS_SERVER__: JSON.stringify(false),
       __IS_CLIENT__: JSON.stringify(true),
       __CHUNK_MANIFEST__: JSON.stringify(_path2.default.join(bundle.assetsDir || '', 'chunk-manifest.json')),
-      __ASSETS_MANIFEST__: JSON.stringify(_path2.default.join(bundle.assetsDir || '', 'assets-manifest.json'))
+      __ASSETS_MANIFEST__: JSON.stringify(_path2.default.join(bundle.assetsDir || '', 'assets-manifest.json')),
+      'process.browser': JSON.stringify(true),
+      'process.server': JSON.stringify(false)
+
     }), (0, _happyPackPlugin2.default)({
       name: 'hp-js',
       loaders: [{

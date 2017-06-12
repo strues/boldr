@@ -8,13 +8,7 @@ import {
   GraphQLInt,
   GraphQLInputObjectType,
 } from 'graphql';
-import {
-  GraphQLEmail,
-  GraphQLURL,
-  GraphQLDateTime,
-  GraphQLUUID,
-  GraphQLJSON,
-} from '../scalars';
+import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON } from '../scalars';
 import UserType from '../user/userType';
 
 const RoleType = new GraphQLObjectType({
@@ -45,7 +39,6 @@ const RoleType = new GraphQLObjectType({
     users: {
       type: new GraphQLList(UserType),
       description: 'Users belonging to a role.',
-
     },
   }),
 });

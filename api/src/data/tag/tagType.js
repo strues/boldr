@@ -8,13 +8,7 @@ import {
   GraphQLInt,
   GraphQLInputObjectType,
 } from 'graphql';
-import {
-  GraphQLEmail,
-  GraphQLURL,
-  GraphQLDateTime,
-  GraphQLUUID,
-  GraphQLJSON,
-} from '../scalars';
+import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON } from '../scalars';
 
 import ArticleType from '../article/articleType';
 
@@ -58,7 +52,5 @@ export const TagInput = new GraphQLInputObjectType({
     },
   }),
 });
-
-
 
 export default TagType;

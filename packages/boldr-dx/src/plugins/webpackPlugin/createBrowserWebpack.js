@@ -270,7 +270,6 @@ export default function createBrowserWebpack(
         ),
         'process.browser': JSON.stringify(true),
         'process.server': JSON.stringify(false),
-
       }),
       happyPackPlugin({
         name: 'hp-js',

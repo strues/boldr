@@ -46,8 +46,8 @@
     "babel-jest": "^20.0.3",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-env": "^1.5.2",
-    "eslint": "^3.19.0",
-    "eslint-config-boldr": "^0.9.9",
+    "eslint": "^4.0.0",
+    "eslint-config-boldr": "^0.9.10",
     "jest": "^20.0.4",
     "prettier": "^1.4.4",
     "rimraf": "^2.6.1"

@@ -324,7 +324,7 @@ function _newArrowCheck(innerThis, boundThis) { if (innerThis !== boundThis) { t
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-var debug = (0, _debug3.default)('boldr:dx:services:hotNode');
+var debug = (0, _debug3.default)('boldr:dx:services:devServer');
 
 var DevServer = function () {
   function DevServer(serverCompiler, clientCompiler) {

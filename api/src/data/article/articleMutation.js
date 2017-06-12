@@ -1,10 +1,4 @@
-import {
-  GraphQLList,
-  GraphQLNonNull,
-  GraphQLID,
-  GraphQLInt,
-  GraphQLString,
-} from 'graphql';
+import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt, GraphQLString } from 'graphql';
 import _debug from 'debug';
 import { GraphQLUUID } from '../scalars';
 import slugIt from '../../utils/slugIt';
@@ -14,10 +8,7 @@ import Article from '../../models/Article';
 import Media from '../../models/Media';
 import ArticleTag from '../../models/join/ArticleTag';
 import ArticleMedia from '../../models/join/ArticleMedia';
-import ArticleType, {
-  CreateArticleInput,
-  EditArticleInput,
-} from './articleType';
+import ArticleType, { CreateArticleInput, EditArticleInput } from './articleType';
 
 const debug = _debug('boldr:server:articleMutation');
 
@@ -47,20 +38,14 @@ export default {
 
       args.input.tags.map(async tag => {
         console.log(tag);
-        const existingTag = await Tag.query()
-          .where('name', tag)
-          .first()
-          .skipUndefined();
+        const existingTag = await Tag.query().where('name', tag).first().skipUndefined();
         if (existingTag) {
           await ArticleTag.query().insert({
             tagId: existingTag.id,
             articleId: newArticle.id,
           });
         } else {
-          await newArticle
-            .$relatedQuery('tags')
-            .insert({ name: tag })
-            .skipUndefined();
+          await newArticle.$relatedQuery('tags').insert({ name: tag }).skipUndefined();
         }
       });
       const relatedFeatureImg = await Media.query()

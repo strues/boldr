@@ -67,7 +67,6 @@ const plugin: Plugin = (engine: Engine, runOnce: boolean = false): PluginControl
         logger.end('Development stopped. 💠  All listeners removed.');
       });
     },
-
     async end() {
       if (serverCompiler) {
         terminate(process.pid, err => {
@@ -78,7 +77,6 @@ const plugin: Plugin = (engine: Engine, runOnce: boolean = false): PluginControl
           }
         });
       }
-
       return true;
     },
   };

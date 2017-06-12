@@ -19,9 +19,7 @@ function task(args, options) {
 }
 
 function register(program) {
-  program
-    .command('build', 'Compile the browser and server bundles for production.')
-    .action(task);
+  program.command('build', 'Compile the browser and server bundles for production.').action(task);
 }
 
 export default { register };

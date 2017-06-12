@@ -240,8 +240,8 @@ export default function createNodeWebpack({ config, mode = 'development', name =
         __ASSETS_MANIFEST__: JSON.stringify(
           path.join(bundle.assetsDir || '', 'assets-manifest.json'),
         ),
-        'process.browser': JSON.stringify(true),
-        'process.server': JSON.stringify(false),
+        'process.browser': JSON.stringify(false),
+        'process.server': JSON.stringify(true),
       }),
       // case sensitive paths
       ifDev(() => new CaseSensitivePathsPlugin()),

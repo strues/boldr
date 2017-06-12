@@ -24,10 +24,9 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function clean(config) {
   var rootDir = process.cwd();
-  _fsExtra2.default.removeSync(String(rootDir) + '/node_modules/.cache/');
+  _fsExtra2.default.removeSync(String(rootDir) + '/node_modules/.boldr_cache/');
   _fsExtra2.default.removeSync(config.bundle.assetsDir);
   _fsExtra2.default.removeSync(config.bundle.server.bundleDir);
-  _fsExtra2.default.removeSync(config.bundle.assetsDir);
 }
 
 function cleanInput(directory) {

@@ -8,13 +8,7 @@ import {
   GraphQLInt,
   GraphQLInputObjectType,
 } from 'graphql';
-import {
-  GraphQLEmail,
-  GraphQLURL,
-  GraphQLDateTime,
-  GraphQLUUID,
-  GraphQLJSON,
-} from '../scalars';
+import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON } from '../scalars';
 
 const SettingType = new GraphQLObjectType({
   name: 'Setting',

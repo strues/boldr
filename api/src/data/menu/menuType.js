@@ -8,7 +8,7 @@ import {
   GraphQLInt,
   GraphQLInputObjectType,
 } from 'graphql';
-import jsonResult from 'boldr-utils/es/gql/jsonResult';
+import jsonResult from 'boldr-utils/lib/gql/jsonResult';
 import {
   GraphQLEmail,
   GraphQLURL,

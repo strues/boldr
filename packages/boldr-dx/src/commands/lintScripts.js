@@ -15,22 +15,19 @@ module.exports = (config, flags) => {
 
   const lint = () => {
     const esLintLibrary = require.resolve('eslint');
-    const eslint = esLintLibrary.replace(
-      /(.*)(lib\/api\.js)/,
-      '$1bin/eslint.js',
-    ); // eslint-disable-line
+    const eslint = esLintLibrary.replace(/(.*)(lib\/api\.js)/, '$1bin/eslint.js'); // eslint-disable-line
 
     const cmd = `${eslint} src/ -c ${configFile} --color ${flags.join(' ')}`;
     const output = shell.exec(cmd);
 
     if (output.code === 0) {
       logger.end(
-        `Linting complete. ${output.stdout === '' ? 'Damn, your code is beautiful  💕' : 'Maybe you want to check it over again  😦'}`,
+        `Linting complete. ${output.stdout === ''
+          ? 'Damn, your code is beautiful  💕'
+          : 'Maybe you want to check it over again  😦'}`,
       );
     }
-
     process.exit(output.code > 0 ? 1 : 0);
   };
-
   lint();
 };

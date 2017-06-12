@@ -1,10 +1,4 @@
-import {
-  GraphQLList,
-  GraphQLNonNull,
-  GraphQLID,
-  GraphQLInt,
-  GraphQLString,
-} from 'graphql';
+import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt, GraphQLString } from 'graphql';
 import Setting from '../../models/Setting';
 import SettingType, { SettingInput } from './settingType';
 

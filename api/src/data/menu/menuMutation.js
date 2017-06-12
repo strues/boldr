@@ -1,11 +1,3 @@
-import {
-  GraphQLList,
-  GraphQLNonNull,
-  GraphQLID,
-  GraphQLInt,
-  GraphQLString,
-} from 'graphql';
+import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt, GraphQLString } from 'graphql';
 
-export default {
-
-};
+export default {};

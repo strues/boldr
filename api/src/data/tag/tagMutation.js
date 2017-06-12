@@ -1,10 +1,4 @@
-import {
-  GraphQLList,
-  GraphQLNonNull,
-  GraphQLID,
-  GraphQLInt,
-  GraphQLString,
-} from 'graphql';
+import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt, GraphQLString } from 'graphql';
 import Tag from '../../models/Tag';
 import TagType, { TagInput } from './tagType';
 

@@ -22,7 +22,6 @@ export default class Project extends Boldr {
     this.initWebpackSetup();
     this.initDatabaseSetup();
     this.initRedisSetup();
-
   }
   initWebpackSetup() {
     this.services.set('project', {

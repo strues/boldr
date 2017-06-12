@@ -4,7 +4,6 @@ const chalk = require('chalk');
 const glob = require('glob');
 import logger from 'boldr-utils/lib/logger';
 
-
 const PATHS = require('../config/paths');
 
 function runCommand(cmd, args, cwd) {
@@ -12,9 +11,7 @@ function runCommand(cmd, args, cwd) {
     cwd = __dirname;
   }
 
-  const displayArgs = args.length > 25
-    ? args.slice(0, 25) + '...'
-    : args.join(' ');
+  const displayArgs = args.length > 25 ? args.slice(0, 25) + '...' : args.join(' ');
   console.log(chalk.dim('$ cd ' + cwd + `\n$ ${cmd} ${displayArgs}\n`));
   const result = spawn(cmd, args, {
     cwd,
@@ -40,9 +37,7 @@ function worker(config) {
     const files = glob.sync(globPattern, { ignore });
 
     const args = Object.keys(defaultOptions)
-      .map(
-        key => `--${key}=${(options && options[key]) || defaultOptions[key]}`,
-      )
+      .map(key => `--${key}=${(options && options[key]) || defaultOptions[key]}`)
       .concat(`--${shouldWrite ? 'write' : 'l'}`, files);
 
     try {
@@ -51,14 +46,10 @@ function worker(config) {
       console.log(e);
       if (!shouldWrite) {
         console.log(
-          chalk.red(
-            `  This project uses prettier to format all JavaScript code.\n`,
-          ) +
+          chalk.red(`  This project uses prettier to format all JavaScript code.\n`) +
             chalk.dim(`    Please run `) +
             chalk.reset('yarn prettier') +
-            chalk.dim(
-              ` and add changes to files listed above to your commit.`,
-            ) +
+            chalk.dim(` and add changes to files listed above to your commit.`) +
             `\n`,
         );
       }
@@ -82,10 +73,7 @@ function task(args, options) {
   const shouldWrite = process.argv[2] === 'write';
   const isWindows = process.platform === 'win32';
   const prettier = isWindows ? 'prettier.cmd' : 'prettier';
-  const prettierCmd = path.resolve(
-    __dirname,
-    `../node_modules/.bin/${prettier}`,
-  );
+  const prettierCmd = path.resolve(__dirname, `../node_modules/.bin/${prettier}`);
   logger.info('Loading configuration.');
 
   const inputOptions = options;

@@ -1,5 +1,5 @@
 import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt, GraphQLString } from 'graphql';
-import jsonResult from 'boldr-utils/es/gql/jsonResult';
+import jsonResult from 'boldr-utils/lib/gql/jsonResult';
 import { GraphQLUUID } from '../scalars';
 import Article from '../../models/Article';
 import ArticleType from './articleType';
