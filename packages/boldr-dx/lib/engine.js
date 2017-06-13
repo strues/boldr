@@ -348,18 +348,13 @@ var Engine = function () {
     _classCallCheck(this, Engine);
 
     this.cwd = cwd;
-    this.configFileName = './boldr.config.js';
+    this.configFileName = 'boldr.config.js';
   }
 
   _createClass(Engine, [{
     key: 'getConfigPath',
     value: function getConfigPath() {
       return _path2.default.resolve(this.cwd, './boldr.config.js');
-    }
-  }, {
-    key: 'getInputOptions',
-    value: function getInputOptions() {
-      return this.inputOptions;
     }
   }, {
     key: 'getConfiguration',
@@ -372,7 +367,6 @@ var Engine = function () {
   }, {
     key: 'getNodeEnv',
     value: function getNodeEnv() {
-      debug('getNodeEnv: ', this.getConfiguration());
       return this.getConfiguration().env.NODE_ENV;
     }
   }, {

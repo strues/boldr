@@ -21,7 +21,9 @@ $dash-ns: 'boldrui-dash-'; // .#{$dash-ns}
 // @include react-md-everything;
 @include boldrui-paper;
 @include boldrui-divider;
-
+.boldr-profile__content {
+  margin-top: 200px;
+}
 .boldr-dropzone__drop-sm {
   margin-top: 15px !important;
   padding: 1em;

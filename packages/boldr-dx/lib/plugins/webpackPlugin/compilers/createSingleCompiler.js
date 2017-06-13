@@ -32,20 +32,16 @@ function createSingleCompiler(webpackConfig) {
   return new Promise(function (resolve, reject) {
     _newArrowCheck(this, _this);
 
-    try {
-      (0, _webpack2.default)(webpackConfig, function (err, stats) {
-        _newArrowCheck(this, _this);
+    (0, _webpack2.default)(webpackConfig, function (err, stats) {
+      _newArrowCheck(this, _this);
 
-        if (err || stats.hasErrors()) {
-          debug(err);
-          return reject(err);
-        }
+      if (err || stats.hasErrors()) {
+        debug(err);
+        return reject(err);
+      }
 
-        return resolve();
-      }.bind(this));
-    } catch (e) {
-      return reject(e);
-    }
+      return resolve();
+    }.bind(this));
   }.bind(this));
 }
 

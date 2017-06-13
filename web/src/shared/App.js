@@ -30,7 +30,6 @@ import PreferencesContainer from './scenes/Account/Preferences';
 import ProfileContainer from './scenes/Profile/ProfileContainer';
 // Blog
 import BlogContainer from './scenes/Blog/BlogContainer';
-import urls from './urls';
 import normalizeStyled from './theme/normalizeStyled';
 import SiteHeaderContainer from './components/SiteHeader/SiteHeaderContainer';
 import './styles/main.scss';
@@ -109,11 +108,7 @@ class App extends Component {
             <meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png" />
             <link rel="manifest" href="/manifest.json" />
           </Helmet>
-          <SiteHeaderContainer
-
-            settings={this.props.data.getSettings}
-
-          />
+          <SiteHeaderContainer settings={this.props.data.getSettings} />
           <Switch>
             <Route path="/login" component={LoginContainer} />
             <Route path="/signup" component={SignupContainer} />

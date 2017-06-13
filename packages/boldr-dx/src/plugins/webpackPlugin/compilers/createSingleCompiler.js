@@ -11,18 +11,14 @@ const debug = _debug('boldr:dx:webpack:createSingleCompiler');
  */
 function createSingleCompiler(webpackConfig: WebpackCompiler): Promise<any> {
   return new Promise((resolve, reject) => {
-    try {
-      webpack(webpackConfig, (err, stats) => {
-        if (err || stats.hasErrors()) {
-          debug(err);
-          return reject(err);
-        }
+    webpack(webpackConfig, (err, stats) => {
+      if (err || stats.hasErrors()) {
+        debug(err);
+        return reject(err);
+      }
 
-        return resolve();
-      });
-    } catch (e) {
-      return reject(e);
-    }
+      return resolve();
+    });
   });
 }
 

@@ -1,6 +1,6 @@
 import http from 'http';
 import Promise from 'bluebird';
-import { enableEnhancedStackTraces } from './core/debugUtil';
+import { enableEnhancedStackTraces } from './utils/debugUtil';
 import { logger } from './services';
 import app from './app';
 

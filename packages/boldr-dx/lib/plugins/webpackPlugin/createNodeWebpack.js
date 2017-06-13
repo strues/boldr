@@ -88,8 +88,6 @@ var cache = {
 
 // This is the Webpack configuration for Node
 function createNodeWebpack() {
-  var _this = this;
-
   var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
       config = _ref.config,
       _ref$mode = _ref.mode,
@@ -98,13 +96,7 @@ function createNodeWebpack() {
       name = _ref$name === undefined ? 'server' : _ref$name;
 
   debug('MODE: ', mode);
-  _fs2.default.writeFile('nodeconfig.json', JSON.stringify(config), 'utf8', function (err) {
-    _newArrowCheck(this, _this);
 
-    if (err) {
-      return debug(err);
-    }
-  }.bind(this));
   var envVariables = config.env,
       bundle = config.bundle;
 
@@ -151,17 +143,6 @@ function createNodeWebpack() {
       fs: true
     },
     performance: false,
-    stats: {
-      colors: true,
-      reasons: bundle.debug,
-      hash: bundle.verbose,
-      version: bundle.verbose,
-      timings: true,
-      chunks: bundle.verbose,
-      chunkModules: bundle.verbose,
-      cached: bundle.verbose,
-      cachedAssets: bundle.verbose
-    },
     resolve: {
       extensions: ['.js', '.json', '.jsx'],
       modules: ['node_modules', _paths2.default.projectNodeModules].concat(_paths2.default.nodePaths),
@@ -187,7 +168,7 @@ function createNodeWebpack() {
       rules: (0, _removeNil2.default)([
       // js
       {
-        test: /\.(js|jsx)$/,
+        test: /\.js$/,
         include: bundle.srcDir,
         exclude: EXCLUDES,
         use: (0, _removeNil2.default)([ifDev({
@@ -205,8 +186,9 @@ function createNodeWebpack() {
             comments: false,
             cacheDirectory: _DEV,
             presets: [[require.resolve('babel-preset-boldr/node'), {
-              debug: true,
+              debug: false,
               useBuiltins: true,
+              modules: false,
               targets: {
                 node: 8
               },
@@ -272,34 +254,20 @@ function createNodeWebpack() {
       __ASSETS_MANIFEST__: JSON.stringify(_path2.default.join(bundle.assetsDir || '', 'assets-manifest.json')),
       'process.browser': JSON.stringify(false),
       'process.server': JSON.stringify(true)
-    }),
-    // case sensitive paths
-    ifDev(function () {
-      _newArrowCheck(this, _this);
-
-      return new _caseSensitivePathsWebpackPlugin2.default();
-    }.bind(this)), ifDev(function () {
-      _newArrowCheck(this, _this);
-
-      return new _LoggerPlugin2.default({
-        verbose: bundle.verbose,
-        target: 'server'
-      });
-    }.bind(this)), ifDev(function () {
-      _newArrowCheck(this, _this);
-
-      return new _circularDependencyPlugin2.default({
-        exclude: /a\.js|node_modules/,
-        // show a warning when there is a circular dependency
-        failOnError: false
-      });
-    }.bind(this))]))
+    })]))
   };
 
   if (_DEV) {
     nodeConfig.stats = 'none';
     nodeConfig.watch = true;
-    nodeConfig.plugins.push(new _writeFileWebpackPlugin2.default({ log: false }));
+    nodeConfig.plugins.push(new _caseSensitivePathsWebpackPlugin2.default(), new _LoggerPlugin2.default({
+      verbose: bundle.verbose,
+      target: 'server'
+    }), new _circularDependencyPlugin2.default({
+      exclude: /a\.js|node_modules/,
+      // show a warning when there is a circular dependency
+      failOnError: false
+    }));
   }
   return nodeConfig;
 }

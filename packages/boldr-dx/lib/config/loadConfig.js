@@ -11,22 +11,14 @@ var debug = require('debug')('boldr:dx:config:loadConfig');
 var defaultConfig = require('./defaultConfig');
 
 module.exports = function loadConfig(engine) {
-  try {
-    var configModulePath = engine.getConfigPath();
-    var inputOpts = engine.getInputOptions();
-    // first clean up require cache so we always load fresh config
-    delete require.cache[configModulePath];
-    // then require the fresh config
-    var config = require(configModulePath); // eslint-disable-line global-require
-
-    debug('Loaded fresh config values');
-
-    return {
-      env: _extends({}, defaultConfig.env, config.env || {}),
-      plugins: [].concat(_toConsumableArray(defaultConfig.plugins), _toConsumableArray(config.plugins || [])),
-      bundle: _extends({}, defaultConfig.bundle, config.bundle)
-    };
-  } catch (e) {
-    return defaultConfig;
-  }
+  var configModulePath = engine.getConfigPath();
+  // first clean up require cache so we always load fresh config
+  delete require.cache[configModulePath];
+  // then require the fresh config
+  var config = require(configModulePath); // eslint-disable-line global-require
+  return {
+    env: _extends({}, defaultConfig.env, config.env || {}),
+    plugins: [].concat(_toConsumableArray(defaultConfig.plugins), _toConsumableArray(config.plugins || [])),
+    bundle: _extends({}, defaultConfig.bundle, config.bundle)
+  };
 };

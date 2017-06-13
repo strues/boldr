@@ -69,13 +69,7 @@ const plugin: Plugin = (engine: Engine, runOnce: boolean = false): PluginControl
     },
     async end() {
       if (serverCompiler) {
-        terminate(process.pid, err => {
-          if (err) {
-            debug(`ERR RESTART: ${err}`);
-          } else {
-            logger.task('Terminated.');
-          }
-        });
+        terminate(process.pid);
       }
       return true;
     },

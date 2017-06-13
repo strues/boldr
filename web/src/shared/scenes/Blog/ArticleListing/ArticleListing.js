@@ -32,26 +32,23 @@ class ArticleListing extends React.Component {
 
   renderArticles = () => {
     const { articles } = this.props;
-    const allArticles =
-      articles.filter(p => p.published) && articles.filter(p => !p.featured);
-    return allArticles.map(article => (
+    const allArticles = articles.filter(p => p.published) && articles.filter(p => !p.featured);
+    return allArticles.map(article =>
       <Col key={article.id} xs={12} md={4}>
         <CardSpacer>
           <ArticleCard article={article} tags={article.tags} />
         </CardSpacer>
-      </Col>
-    ));
+      </Col>,
+    );
   };
   renderFeature = () => {
     const { articles, loading } = this.props;
-    const featuredArticles = loading
-      ? <Loader />
-      : articles.filter(p => p.featured);
-    return featuredArticles.map(article => (
+    const featuredArticles = loading ? <Loader /> : articles.filter(p => p.featured);
+    return featuredArticles.map(article =>
       <Col key={article.id} xs={12}>
         <FeaturedArticle {...article} />
-      </Col>
-    ));
+      </Col>,
+    );
   };
   render() {
     if (this.props.loading) {

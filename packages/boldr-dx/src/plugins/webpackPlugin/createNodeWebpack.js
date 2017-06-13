@@ -30,11 +30,7 @@ const cache = {
 // This is the Webpack configuration for Node
 export default function createNodeWebpack({ config, mode = 'development', name = 'server' } = {}) {
   debug('MODE: ', mode);
-  fs.writeFile('nodeconfig.json', JSON.stringify(config), 'utf8', err => {
-    if (err) {
-      return debug(err);
-    }
-  });
+
   const { env: envVariables, bundle } = config;
   process.env.BABEL_ENV = mode;
 
@@ -86,17 +82,6 @@ export default function createNodeWebpack({ config, mode = 'development', name =
       fs: true,
     },
     performance: false,
-    stats: {
-      colors: true,
-      reasons: bundle.debug,
-      hash: bundle.verbose,
-      version: bundle.verbose,
-      timings: true,
-      chunks: bundle.verbose,
-      chunkModules: bundle.verbose,
-      cached: bundle.verbose,
-      cachedAssets: bundle.verbose,
-    },
     resolve: {
       extensions: ['.js', '.json', '.jsx'],
       modules: ['node_modules', PATHS.projectNodeModules].concat(PATHS.nodePaths),
@@ -128,7 +113,7 @@ export default function createNodeWebpack({ config, mode = 'development', name =
       rules: removeNil([
         // js
         {
-          test: /\.(js|jsx)$/,
+          test: /\.js$/,
           include: bundle.srcDir,
           exclude: EXCLUDES,
           use: removeNil([
@@ -151,8 +136,9 @@ export default function createNodeWebpack({ config, mode = 'development', name =
                   [
                     require.resolve('babel-preset-boldr/node'),
                     {
-                      debug: true,
+                      debug: false,
                       useBuiltins: true,
+                      modules: false,
                       targets: {
                         node: 8,
                       },
@@ -243,30 +229,24 @@ export default function createNodeWebpack({ config, mode = 'development', name =
         'process.browser': JSON.stringify(false),
         'process.server': JSON.stringify(true),
       }),
-      // case sensitive paths
-      ifDev(() => new CaseSensitivePathsPlugin()),
-      ifDev(
-        () =>
-          new LoggerPlugin({
-            verbose: bundle.verbose,
-            target: 'server',
-          }),
-      ),
-      ifDev(
-        () =>
-          new CircularDependencyPlugin({
-            exclude: /a\.js|node_modules/,
-            // show a warning when there is a circular dependency
-            failOnError: false,
-          }),
-      ),
     ]),
   };
 
   if (_DEV) {
     nodeConfig.stats = 'none';
     nodeConfig.watch = true;
-    nodeConfig.plugins.push(new WriteFilePlugin({ log: false }));
+    nodeConfig.plugins.push(
+      new CaseSensitivePathsPlugin(),
+      new LoggerPlugin({
+        verbose: bundle.verbose,
+        target: 'server',
+      }),
+      new CircularDependencyPlugin({
+        exclude: /a\.js|node_modules/,
+        // show a warning when there is a circular dependency
+        failOnError: false,
+      }),
+    );
   }
   return nodeConfig;
 }

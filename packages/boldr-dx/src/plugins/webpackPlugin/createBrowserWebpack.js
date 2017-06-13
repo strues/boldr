@@ -247,7 +247,6 @@ export default function createBrowserWebpack(
         debug: _DEV,
         context: CWD,
       }),
-
       new ProgressBarPlugin({
         format: `${chalk.cyan.bold('Boldr')} status [:bar] ${chalk.magenta(
           ':percent',
@@ -311,8 +310,11 @@ export default function createBrowserWebpack(
           },
         ],
       }),
-      ifDev(() => new webpack.NamedModulesPlugin()),
-
+      new AssetsPlugin({
+        filename: 'assets-manifest.json',
+        path: bundle.assetsDir,
+        prettyPrint: true,
+      }),
       ifProd(() => new webpack.HashedModuleIdsPlugin()),
       ifProd(
         () =>
@@ -355,28 +357,7 @@ export default function createBrowserWebpack(
       ),
 
       ifProd(() => new webpack.optimize.AggressiveMergingPlugin()),
-      // case sensitive paths
-      ifDev(() => new CaseSensitivePathsPlugin()),
-      ifDev(
-        () =>
-          new CircularDependencyPlugin({
-            exclude: /a\.js|node_modules/,
-            // show a warning when there is a circular dependency
-            failOnError: false,
-          }),
-      ),
-      ifDev(
-        () =>
-          new LoggerPlugin({
-            verbose: bundle.verbose,
-            target: 'web',
-          }),
-      ),
-      new AssetsPlugin({
-        filename: 'assets-manifest.json',
-        path: bundle.assetsDir,
-        prettyPrint: true,
-      }),
+
       ifProd(
         () =>
           new StatsPlugin('stats.json', {
@@ -391,11 +372,6 @@ export default function createBrowserWebpack(
             manifestVariable: 'CHUNK_MANIFEST',
           }),
       ),
-      // Errors during development will kill any of our NodeJS processes.
-      // this prevents that from happening.
-      ifDev(() => new webpack.NoEmitOnErrorsPlugin()),
-      //  We need this plugin to enable hot module reloading
-      ifDev(() => new webpack.HotModuleReplacementPlugin()),
       ifProd(
         () =>
           new BundleAnalyzerPlugin({
@@ -406,8 +382,12 @@ export default function createBrowserWebpack(
       ),
     ]),
   };
+
   if (_DEV) {
     browserConfig.plugins.push(
+      new webpack.NoEmitOnErrorsPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NamedModulesPlugin(),
       happyPackPlugin({
         name: 'hp-css',
         loaders: [
@@ -453,6 +433,15 @@ export default function createBrowserWebpack(
           },
         ],
       }),
+      new CircularDependencyPlugin({
+        exclude: /a\.js|node_modules/,
+        failOnError: false,
+      }),
+      new LoggerPlugin({
+        verbose: bundle.verbose,
+        target: 'web',
+      }),
+      new CaseSensitivePathsPlugin(),
       new webpack.DllReferencePlugin({
         manifest: require(path.resolve(bundle.assetsDir, '__vendor_dlls__.json')),
       }),

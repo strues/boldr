@@ -90,7 +90,6 @@ async function ssrMiddleware(req: $Request, res: $Response) {
   // render styled-components styleSheets to string.
   // Render the application to static HTML markup
   const html = renderToStaticMarkup(
-    // $FlowIssue
     <CreateHtml
       reactAppString={reactAppString}
       nonce={res.locals.nonce}

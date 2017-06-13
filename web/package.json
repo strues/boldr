@@ -52,7 +52,6 @@
     "axios": "^0.16.2",
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.2",
-    "boldr-config": "^0.1.4",
     "boldr-core": "0.0.3",
     "boldr-ui": "0.4.0-rc.9",
     "boldr-utils": "0.4.0-rc.1",
@@ -136,63 +135,12 @@
       "command": "cross-env boldr-dx dev",
       "env": {
         "NODE_ENV": "development",
-        "BOLDR__DB__URL": "postgres://postgres:password@0.0.0.0:5432/boldr",
-        "BOLDR__REDIS__URL": "redis://0.0.0.0:6379/0",
-        "BOLDR__SERVER_PORT": "3000",
-        "BOLDR__DEV_PORT": "3001",
-        "BOLDR__DEBUG": "1",
+        "BOLDR_DB__URL": "postgres://postgres:password@0.0.0.0:5432/boldr",
+        "BOLDR_REDIS__URL": "redis://0.0.0.0:6379/0",
+        "BOLDR_SERVER_PORT": "3000",
+        "BOLDR_DEV_PORT": "3001",
+        "BOLDR_DEBUG": "1",
         "DEBUG": "boldr:*"
-      }
-    },
-    "migrate": {
-      "command": "cross-env node --harmony internal/scripts/db.js migrate",
-      "env": {
-        "BOLDR__DB__URL": "postgres://postgres:password@localhost:5432/boldr",
-        "NODE_ENV": "development"
-      }
-    },
-    "migration": {
-      "command": "cross-env node --harmony internal/scripts/db.js migration",
-      "env": {
-        "BOLDR__DB__URL": "postgres://postgres:password@localhost:5432/boldr",
-        "NODE_ENV": "development"
-      }
-    },
-    "reset": {
-      "command": "cross-env node --harmony internal/scripts/db.js reset",
-      "env": {
-        "BOLDR__DB__URL": "postgres://postgres:password@localhost:5432/boldr_test",
-        "NODE_ENV": "development"
-      }
-    },
-    "rollback": {
-      "command": "cross-env node --harmony internal/scripts/db.js migrate:undo",
-      "env": {
-        "BOLDR__DB__URL": "postgres://postgres:password@localhost:5432/boldr_test",
-        "NODE_ENV": "test"
-      }
-    },
-    "seed": {
-      "command": "cross-env node --harmony internal/scripts/db.js seed",
-      "env": {
-        "BOLDR__DB__URL": "postgres://postgres:password@localhost:5432/boldr",
-        "NODE_ENV": "development"
-      }
-    },
-    "test": {
-      "command": "npm run reset && jest -w 2 --forceExit",
-      "env": {
-        "BOLDR__DB__URL": "postgres://postgres:password@127.0.0.1:5432/boldr_test",
-        "NODE_ENV": "test",
-        "KNEX_TEST_TIMEOUT": 30000
-      }
-    },
-    "test:ci": {
-      "command": "jest --forceExit",
-      "env": {
-        "NODE_ENV": "test",
-        "BOLDR__TOKEN__SECRET": "b0ldrs0s3cr3t",
-        "KNEX_TEST_TIMEOUT": 30000
       }
     }
   },

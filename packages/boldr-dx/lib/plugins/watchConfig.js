@@ -347,7 +347,7 @@ var plugin = function (engine) {
 
           // start chokidar and watch for .boldr/boldr.js changes
           // everytime configuration changes, restart whole build
-          watcher = chokidar.watch('' + String(path.resolve(engine.cwd, './.boldr')), {
+          watcher = chokidar.watch('' + String(path.resolve(engine.cwd, 'boldr.config.js')), {
             cwd: engine.cwd
           });
 
@@ -375,40 +375,7 @@ var plugin = function (engine) {
     },
     start: function start() {
       return new Promise(function ($return, $error) {
-        var _this3 = this;
-
-        return $return(new Promise(function (resolve, reject) {
-          _newArrowCheck(this, _this3);
-
-          logger.start('Watching configuration');
-          var updater = restartOnChange(engine);
-
-          // start chokidar and watch for .boldr/boldr.js changes
-          // everytime configuration changes, restart whole build
-          watcher = chokidar.watch('' + String(path.resolve(engine.cwd, './.boldr')), {
-            cwd: engine.cwd
-          });
-
-          watcher.on('ready', function () {
-            _newArrowCheck(this, _this3);
-
-            ['add', 'change', 'unlink'].forEach(function (event) {
-              _newArrowCheck(this, _this3);
-
-              return watcher.on(event, updater);
-            }.bind(this));
-            resolve();
-          }.bind(this));
-
-          watcher.on('error', function (error) {
-            _newArrowCheck(this, _this3);
-
-            logger.error('Watch configuration plugin failed');
-            logger.error(error);
-
-            reject(error);
-          }.bind(this));
-        }.bind(this)));
+        return $return(Promise.resolve());
       }.$asyncbind(this));
     },
     end: function end() {

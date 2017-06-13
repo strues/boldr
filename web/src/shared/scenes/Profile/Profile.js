@@ -19,7 +19,7 @@ const Profile = ({ profile, me }: Props) => {
       <Grid>
         <div className="profile__content">
           <Row>
-            <Col sm={12}>
+            <Col xs={12}>
               <ProfileContent me={me} profile={profile} />
             </Col>
           </Row>

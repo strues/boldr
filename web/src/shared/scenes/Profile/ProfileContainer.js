@@ -50,9 +50,7 @@ export class ProfileContainer extends Component {
 
   setMe() {
     const userEmail = this.props.user.email;
-    const profEmail = this.props.data.loading
-      ? ''
-      : this.props.data.getUserByUsername.email;
+    const profEmail = this.props.data.loading ? '' : this.props.data.getUserByUsername.email;
     const isMe = userEmail === profEmail;
     this.setState({
       me: isMe,
@@ -67,9 +65,7 @@ export class ProfileContainer extends Component {
     return (
       <BaseTemplate
         bgImg={getUserByUsername.profileImage}
-        helmetMeta={
-          <Helmet title={`${getUserByUsername.username}'s Profile`} />
-        }
+        helmetMeta={<Helmet title={`${getUserByUsername.username}'s Profile`} />}
       >
         <Profile profile={getUserByUsername} me={this.state.me} />
       </BaseTemplate>

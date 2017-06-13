@@ -37,9 +37,9 @@ class Article extends PureComponent {
         helmetMeta={<Helmet title={getArticleBySlug.title} />}
       >
         <div className={classes}>
-          <Grid fluid>
+          <Grid>
             <Row>
-              <Col sm={12} md={8} lg={9}>
+              <Col xs={12} md={8} lg={9}>
                 <ArticleContent {...getArticleBySlug} />
               </Col>
               {this.renderArticleSidebar()}
@@ -54,7 +54,7 @@ class Article extends PureComponent {
     const { getArticleBySlug } = this.props.data;
 
     return (
-      <Col sm={12} md={4} lg={3}>
+      <Col xs={12} md={4} lg={3}>
         <ArticleSidebar
           authorId={getArticleBySlug.userId}
           tags={getArticleBySlug.tags}

@@ -337,11 +337,11 @@ function createBrowserWebpack() {
           }]])
         }
       }]
-    }), ifDev(function () {
-      _newArrowCheck(this, _this);
-
-      return new _webpack2.default.NamedModulesPlugin();
-    }.bind(this)), ifProd(function () {
+    }), new _assetsWebpackPlugin2.default({
+      filename: 'assets-manifest.json',
+      path: bundle.assetsDir,
+      prettyPrint: true
+    }), ifProd(function () {
       _newArrowCheck(this, _this);
 
       return new _webpack2.default.HashedModuleIdsPlugin();
@@ -391,32 +391,7 @@ function createBrowserWebpack() {
       _newArrowCheck(this, _this);
 
       return new _webpack2.default.optimize.AggressiveMergingPlugin();
-    }.bind(this)),
-    // case sensitive paths
-    ifDev(function () {
-      _newArrowCheck(this, _this);
-
-      return new _caseSensitivePathsWebpackPlugin2.default();
-    }.bind(this)), ifDev(function () {
-      _newArrowCheck(this, _this);
-
-      return new _circularDependencyPlugin2.default({
-        exclude: /a\.js|node_modules/,
-        // show a warning when there is a circular dependency
-        failOnError: false
-      });
-    }.bind(this)), ifDev(function () {
-      _newArrowCheck(this, _this);
-
-      return new _LoggerPlugin2.default({
-        verbose: bundle.verbose,
-        target: 'web'
-      });
-    }.bind(this)), new _assetsWebpackPlugin2.default({
-      filename: 'assets-manifest.json',
-      path: bundle.assetsDir,
-      prettyPrint: true
-    }), ifProd(function () {
+    }.bind(this)), ifProd(function () {
       _newArrowCheck(this, _this);
 
       return new _statsWebpackPlugin2.default('stats.json', {
@@ -430,19 +405,6 @@ function createBrowserWebpack() {
         filename: 'chunk-manifest.json',
         manifestVariable: 'CHUNK_MANIFEST'
       });
-    }.bind(this)),
-    // Errors during development will kill any of our NodeJS processes.
-    // this prevents that from happening.
-    ifDev(function () {
-      _newArrowCheck(this, _this);
-
-      return new _webpack2.default.NoEmitOnErrorsPlugin();
-    }.bind(this)),
-    //  We need this plugin to enable hot module reloading
-    ifDev(function () {
-      _newArrowCheck(this, _this);
-
-      return new _webpack2.default.HotModuleReplacementPlugin();
     }.bind(this)), ifProd(function () {
       _newArrowCheck(this, _this);
 
@@ -453,8 +415,9 @@ function createBrowserWebpack() {
       });
     }.bind(this))]))
   };
+
   if (_DEV) {
-    browserConfig.plugins.push((0, _happyPackPlugin2.default)({
+    browserConfig.plugins.push(new _webpack2.default.NoEmitOnErrorsPlugin(), new _webpack2.default.HotModuleReplacementPlugin(), new _webpack2.default.NamedModulesPlugin(), (0, _happyPackPlugin2.default)({
       name: 'hp-css',
       loaders: [{ path: 'style-loader' }, {
         path: 'css-loader',
@@ -488,7 +451,13 @@ function createBrowserWebpack() {
       }, { path: 'postcss-loader' }, {
         path: 'fast-sass-loader'
       }]
-    }), new _webpack2.default.DllReferencePlugin({
+    }), new _circularDependencyPlugin2.default({
+      exclude: /a\.js|node_modules/,
+      failOnError: false
+    }), new _LoggerPlugin2.default({
+      verbose: bundle.verbose,
+      target: 'web'
+    }), new _caseSensitivePathsWebpackPlugin2.default(), new _webpack2.default.DllReferencePlugin({
       manifest: require(_path2.default.resolve(bundle.assetsDir, '__vendor_dlls__.json'))
     }));
   }

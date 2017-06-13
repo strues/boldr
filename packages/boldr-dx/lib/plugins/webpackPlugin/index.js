@@ -426,18 +426,8 @@ var plugin = function (engine) {
     },
     end: function end() {
       return new Promise(function ($return, $error) {
-        var _this2 = this;
-
         if (serverCompiler) {
-          (0, _terminate2.default)(process.pid, function (err) {
-            _newArrowCheck(this, _this2);
-
-            if (err) {
-              debug('ERR RESTART: ' + String(err));
-            } else {
-              _logger2.default.task('Terminated.');
-            }
-          }.bind(this));
+          (0, _terminate2.default)(process.pid);
         }
         return $return(true);
       }.$asyncbind(this));

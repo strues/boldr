@@ -36,7 +36,7 @@ const plugin: Plugin = (engine: Engine, runOnce: boolean = false): PluginControl
 
         // start chokidar and watch for .boldr/boldr.js changes
         // everytime configuration changes, restart whole build
-        watcher = chokidar.watch(`${path.resolve(engine.cwd, './.boldr')}`, {
+        watcher = chokidar.watch(`${path.resolve(engine.cwd, 'boldr.config.js')}`, {
           cwd: engine.cwd,
         });
 
@@ -54,28 +54,7 @@ const plugin: Plugin = (engine: Engine, runOnce: boolean = false): PluginControl
       });
     },
     async start() {
-      return new Promise((resolve, reject) => {
-        logger.start('Watching configuration');
-        const updater = restartOnChange(engine);
-
-        // start chokidar and watch for .boldr/boldr.js changes
-        // everytime configuration changes, restart whole build
-        watcher = chokidar.watch(`${path.resolve(engine.cwd, './.boldr')}`, {
-          cwd: engine.cwd,
-        });
-
-        watcher.on('ready', () => {
-          ['add', 'change', 'unlink'].forEach(event => watcher.on(event, updater));
-          resolve();
-        });
-
-        watcher.on('error', error => {
-          logger.error('Watch configuration plugin failed');
-          logger.error(error);
-
-          reject(error);
-        });
-      });
+      return Promise.resolve();
     },
 
     async end() {
