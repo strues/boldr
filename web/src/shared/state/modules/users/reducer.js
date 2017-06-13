@@ -11,13 +11,10 @@ import * as t from './actionTypes';
 const isFetching = (state = false, action) => {
   switch (action.type) {
     case LOGIN_REQUEST:
-    case t.FETCH_PROFILE_REQUEST:
     case t.FORGOT_PASSWORD_REQUEST:
     case t.RESET_PASSWORD_REQUEST:
       return true;
     case LOGIN_SUCCESS:
-    case t.FETCH_PROFILE_SUCCESS:
-    case t.FETCH_PROFILE_FAILURE:
     case t.RESET_PASSWORD_SUCCESS:
     case t.FORGOT_PASSWORD_SUCCESS:
     case t.FORGOT_PASSWORD_FAILURE:
@@ -113,23 +110,6 @@ const me = (state = INITIAL_STATE, action) => {
 
 const profile = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case t.FETCH_PROFILE_SUCCESS:
-      return {
-        ...state,
-        id: action.payload.id,
-        email: action.payload.email,
-        firstName: action.payload.firstName,
-        lastName: action.payload.lastName,
-        username: action.payload.username,
-        avatarUrl: action.payload.avatarUrl,
-        profileImage: action.payload.profileImage,
-        socialMedia: action.payload.socialMedia,
-        location: action.payload.location,
-        website: action.payload.website,
-        bio: action.payload.bio,
-        role: action.payload.roles[0].name,
-        roleId: action.payload.roles[0].id,
-      };
     case t.EDIT_PROFILE_SUCCESS:
       return {
         ...state,

@@ -32,20 +32,21 @@ export class ArticleListingContainer extends Component {
   };
   render() {
     const { getArticles, loading } = this.props.data;
-    if (loading) {
+    if (loading && !getArticles) {
       return <Loader />;
+    } else {
+      return (
+        <BaseTemplate helmetMeta={<Helmet title="Blog Posts" />}>
+          {/* $FlowIssue */}
+          <ArticleListing
+            loading={loading}
+            articles={getArticles}
+            layout={this.props.layout}
+            handleChangeLayout={this.handleChangeLayout}
+          />
+        </BaseTemplate>
+      );
     }
-    return (
-      <BaseTemplate helmetMeta={<Helmet title="Blog Posts" />}>
-        {/* $FlowIssue */}
-        <ArticleListing
-          loading={loading}
-          articles={getArticles}
-          layout={this.props.layout}
-          handleChangeLayout={this.handleChangeLayout}
-        />
-      </BaseTemplate>
-    );
   }
 }
 

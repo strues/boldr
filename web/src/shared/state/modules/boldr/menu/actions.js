@@ -4,60 +4,6 @@ import { sendNotification } from '../../notifications/notifications';
 import * as t from '../actionTypes';
 
 /**
-  * FETCH MENUS ACTIONS
-  * -------------------------
-  * @exports fetchMainMenuIfNeeded
-  * @exports fetchMainMenu
-  *****************************************************************/
-
-/* istanbul ignore next */
-export const fetchMainMenuIfNeeded = (): ThunkAction => (
-  dispatch: Dispatch,
-  getState: GetState,
-  axios: any,
-) => {
-  /* istanbul ignore next */
-  if (shouldfetchMainMenu(getState())) {
-    /* istanbul ignore next */
-    return dispatch(fetchMainMenu(axios));
-  }
-
-  /* istanbul ignore next */
-  return null;
-};
-
-export const fetchMainMenu = (axios: any): ThunkAction => (
-  dispatch: Dispatch,
-) => {
-  dispatch({ type: t.GET_MAIN_MENU_REQUEST });
-
-  return api
-    .get(`${API_PREFIX}/menus/1`)
-    .then(res => {
-      dispatch({
-        type: t.GET_MAIN_MENU_SUCCESS,
-        payload: res.data,
-      });
-    })
-    .catch(err => {
-      dispatch({
-        type: t.GET_MAIN_MENU_FAILURE,
-        error: err,
-      });
-    });
-};
-function shouldfetchMainMenu(state) {
-  const menu = state.boldr.menus.main.details;
-  if (!menu.length) {
-    return true;
-  }
-  if (menu.length) {
-    return false;
-  }
-  return menu;
-}
-
-/**
   * UPDATE MENU DETAIL ACTIONS
   * -------------------------
   * @exports updateMenuDetails

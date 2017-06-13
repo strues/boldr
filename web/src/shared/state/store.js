@@ -23,11 +23,7 @@ export default function configureStore(apolloClient, preloadedState, history) {
     : compose;
 
   // Creating the store
-  const store = createStore(
-    getReducers(apolloClient),
-    preloadedState,
-    devEnhancers(...enhancers),
-  );
+  const store = createStore(getReducers(apolloClient), preloadedState, devEnhancers(...enhancers));
 
   if (process.env.NODE_ENV === 'development' && module.hot) {
     module.hot.accept('./reducers', () => {

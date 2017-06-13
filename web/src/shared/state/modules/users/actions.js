@@ -108,66 +108,6 @@ export function verifyAccount(token) {
   };
 }
 
-/**
-  * PROFILE ACTIONS
-  * -------------------------
-  * @exports fetchProfile
-  * @exports editProfile
-  *****************************************************************/
-
-export const fetchProfile = (username: string, axios: any): ThunkAction => (
-  dispatch: Dispatch,
-) => {
-  dispatch({
-    type: t.FETCH_PROFILE_REQUEST,
-    username,
-  });
-
-  return axios
-    .get(`${API_PREFIX}/users/${username}/profile`)
-    .then(res => {
-      dispatch({
-        type: t.FETCH_PROFILE_SUCCESS,
-        payload: res.data,
-      });
-    })
-    .catch(err => {
-      dispatch({
-        type: t.FETCH_PROFILE_FAILURE,
-        error: err,
-      });
-    });
-};
-export const fetchProfileIfNeeded = (username: string): ThunkAction => (
-  dispatch: Dispatch,
-  getState: GetState,
-  axios: any,
-) => {
-  /* istanbul ignore next */
-  if (shouldFetchProfile(getState(), username)) {
-    /* istanbul ignore next */
-    return dispatch(fetchProfile(username, axios));
-  }
-
-  /* istanbul ignore next */
-  return null;
-};
-/* istanbul ignore next */
-const shouldFetchProfile = (state: Reducer, username: string): boolean => {
-  // In development, we want to allow dispatching actions from here
-  // or the hot reloading of reducers wont update the component state
-  if (process.env.NODE_ENV === 'development') {
-    return true;
-  }
-
-  const theProfile = state.users.profile[username];
-
-  if (theProfile && state.users.isFetching) {
-    return false;
-  }
-
-  return true;
-};
 export function editProfile(userData) {
   console.log(userData);
   return dispatch => {
@@ -202,7 +142,6 @@ const failUpdateProfile = err => {
     error: err,
   };
 };
-
 
 export function setUserLoggedIn(loginUser) {
   return {

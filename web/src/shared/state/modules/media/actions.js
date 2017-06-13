@@ -1,3 +1,4 @@
+/* @flow */
 import { normalize } from 'normalizr';
 import api, { API_PREFIX } from '../../../core/api';
 
@@ -7,76 +8,6 @@ import { sendNotification } from '../notifications/notifications';
 import { media as mediaSchema, arrayOfMedia } from './schema';
 import * as t from './actionTypes';
 
-/**s
-  * FETCH MEDIA ACTIONS
-  * -------------------------
-  * @exports fetchMedia
-  *****************************************************************/
-
-export const fetchMedia = (axios: any): ThunkAction => (dispatch: Dispatch) => {
-  dispatch({ type: t.FETCH_MEDIAS_REQUEST });
-
-  return axios
-    .get(`${API_PREFIX}/media`)
-    .then(res => {
-      const medias = res.data;
-      const normalizedMedia = normalize(medias, arrayOfMedia);
-      dispatch({
-        type: t.FETCH_MEDIAS_SUCCESS,
-        payload: normalizedMedia,
-      });
-    })
-    .catch(err => {
-      dispatch({
-        type: t.FETCH_MEDIAS_FAILURE,
-        error: err,
-      });
-    });
-};
-/* istanbul ignore next */
-export const fetchMediaIfNeeded = (): ThunkAction => (
-  dispatch: Dispatch,
-  getState: GetState,
-  axios: any,
-) => {
-  /* istanbul ignore next */
-  if (shouldFetchMedia(getState())) {
-    /* istanbul ignore next */
-    return dispatch(fetchMedia(axios));
-  }
-
-  /* istanbul ignore next */
-  return null;
-};
-
-function shouldFetchMedia(state) {
-  const medias = state.media.ids;
-  if (!medias.length) {
-    return true;
-  }
-
-  return false;
-}
-
-function fetchMediaStart() {
-  return {
-    type: t.GET_MEDIA_REQUEST,
-  };
-}
-
-function fetchMediaSuccess(normalizedMedia) {
-  return {
-    type: t.GET_MEDIA_SUCCESS,
-    payload: normalizedMedia,
-  };
-}
-
-function fetchMediaFail(err) {
-  return {
-    type: t.GET_MEDIA_FAILURE,
-    error: err,
-  };
-}
 export const toggleMedia = filter => ({
   type: 'TOGGLE_MEDIA_TYPE',
   filter,

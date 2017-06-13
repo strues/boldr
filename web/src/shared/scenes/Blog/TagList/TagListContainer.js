@@ -16,17 +16,12 @@ type Props = {
 export class TagListContainer extends PureComponent {
   props: Props;
   render() {
-    const {
-      data: { loading, getArticlesForTag },
-      match: { params },
-    } = this.props;
+    const { data: { loading, getArticlesForTag }, match: { params } } = this.props;
     if (loading) {
       return <Loader />;
     }
     return (
-      <BaseTemplate
-        helmetMeta={<Helmet title={`Posts tagged ${params.name}`} />}
-      >
+      <BaseTemplate helmetMeta={<Helmet title={`Posts tagged ${params.name}`} />}>
         <TagList articles={getArticlesForTag} />
       </BaseTemplate>
     );

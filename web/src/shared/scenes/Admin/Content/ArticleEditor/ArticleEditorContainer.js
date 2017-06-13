@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import { Loader } from 'boldr-ui';
-import { updateArticle, fetchArticleIfNeeded } from '../../../Blog/state';
+import { updateArticle } from '../../../Blog/state';
 import ArticleEditor from './ArticleEditor';
 
 export type Props = {
@@ -25,10 +25,7 @@ class ArticleEditorContainer extends Component {
       return <Loader />;
     }
     return (
-      <ArticleEditor
-        updateArticle={this.props.updateArticle}
-        currentArticle={getArticleBySlug}
-      />
+      <ArticleEditor updateArticle={this.props.updateArticle} currentArticle={getArticleBySlug} />
     );
   }
 }
@@ -37,9 +34,6 @@ const mapDispatchToProps = dispatch => {
   return {
     updateArticle: postData => {
       dispatch(updateArticle(postData));
-    },
-    fetchArticleIfNeeded: slug => {
-      dispatch(fetchArticleIfNeeded(slug));
     },
   };
 };
@@ -81,6 +75,4 @@ const ArticleEditorContainerWithData = graphql(GET_ARTICLE_QUERY, {
   }),
 })(ArticleEditorContainer);
 // $FlowIssue
-export default connect(mapStateToProps, mapDispatchToProps)(
-  ArticleEditorContainerWithData,
-);
+export default connect(mapStateToProps, mapDispatchToProps)(ArticleEditorContainerWithData);

@@ -7,18 +7,13 @@ import flatMapDeep from 'lodash/flatMapDeep';
 
 import Grid from '~components/Layout/Grid';
 import Sidebar from '~components/Sidebar';
-import {
-  DashboardWrapper,
-  DashboardContent,
-  DashboardMain,
-} from '~components/Dashboard';
+import { DashboardWrapper, DashboardContent, DashboardMain } from '~components/Dashboard';
 import Topbar from '~components/Topbar';
 import TopbarLink from '~components/Topbar/TopbarLink';
 import { selectMe, showHideSidebar, expandCollapseSideMenu } from '../../state';
 import sidebarLinks from './sidebarLinks';
 import routes from './routes';
 import Breadcrumbs from './Breadcrumbs';
-
 
 type Props = {
   flattenedRoutes: Array<{
@@ -84,19 +79,14 @@ export class AdminDashboard extends Component {
             avatarUrl={me.avatarUrl}
             username={me.username}
             link={TopbarLink}
-            links={[
-              { title: 'Home', url: '/' },
-              { title: 'Dashboard', url: '/admin' },
-            ]}
+            links={[{ title: 'Home', url: '/' }, { title: 'Dashboard', url: '/admin' }]}
           />
 
           <DashboardContent>
             <Breadcrumbs location={this.props.location} />
             <Grid fluid>
               <Switch>
-                {this.flattenedRoutes.map(props => (
-                  <Route key={props.path} {...props} />
-                ))}
+                {this.flattenedRoutes.map(props => <Route key={props.path} {...props} />)}
               </Switch>
             </Grid>
           </DashboardContent>

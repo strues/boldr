@@ -1,7 +1,0 @@
-node_modules
-npm-debug.log
-.DS_Store
-flow-typed
-__tests__
-__mocks__
-src

@@ -9,7 +9,6 @@ import { getMedia } from './selectors';
 
 const all = (state = {}, action) => {
   switch (action.type) {
-    case t.FETCH_MEDIAS_SUCCESS:
     case t.EDIT_MEDIA_SUCCESS:
     case t.UPLOAD_MEDIA_SUCCESS:
       return {
@@ -25,7 +24,6 @@ const all = (state = {}, action) => {
 
 const ids = (state = [], action) => {
   switch (action.type) {
-    case t.FETCH_MEDIAS_SUCCESS:
     case t.EDIT_MEDIA_SUCCESS:
       return action.payload.result;
     case t.UPLOAD_MEDIA_SUCCESS:
@@ -39,12 +37,9 @@ const ids = (state = [], action) => {
 
 const isFetching = (state = false, action) => {
   switch (action.type) {
-    case t.FETCH_MEDIAS_REQUEST:
     case t.EDIT_MEDIA_REQUEST:
     case t.UPLOAD_MEDIA_REQUEST:
       return true;
-    case t.FETCH_MEDIAS_SUCCESS:
-    case t.FETCH_MEDIAS_FAILURE:
     case t.EDIT_MEDIA_SUCCESS:
     case t.EDIT_MEDIA_FAILURE:
     case t.UPLOAD_MEDIA_FAILURE:

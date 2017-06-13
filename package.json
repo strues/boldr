@@ -1,5 +1,4 @@
 {
-  "name": "boldr",
   "private": true,
   "version": "0.0.0",
   "description": "<p align=\"center\"><img src=\"/docs/assets/boldr-text-logo.png\" width=\"200\"></p>",
@@ -37,7 +36,7 @@
     "eslint": "^4.0.0",
     "eslint-config-boldr": "^0.10.0",
     "execa": "^0.7.0",
-    "flow-bin": "^0.47.0",
+    "flow-bin": "^0.48.0",
     "glob": "^7.1.2",
     "jest": "^20.0.4",
     "lerna": "2.0.0-rc.5",

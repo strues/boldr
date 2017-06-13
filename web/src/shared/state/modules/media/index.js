@@ -1,6 +1,5 @@
 import mediaReducer, { getMediaType } from './reducer';
 import {
-  fetchMediaIfNeeded,
   toggleMedia,
   selectMedia,
   editMedia,
@@ -15,7 +14,6 @@ export default mediaReducer;
 
 export {
   mediaReducer,
-  fetchMediaIfNeeded,
   getMedia,
   getMediaType,
   selectMedia,

@@ -3,7 +3,6 @@ import * as t from '../actionTypes';
 
 const all = (state = {}, action) => {
   switch (action.type) {
-    case t.LOAD_MEMBERS_SUCCESS:
     case t.UPDATE_MEMBER_SUCCESS:
       return {
         ...state,
@@ -17,8 +16,7 @@ const all = (state = {}, action) => {
 
 const ids = (state = [], action) => {
   switch (action.type) {
-    case t.LOAD_MEMBERS_SUCCESS:
-      return action.payload.result;
+
     default:
       return state;
   }
@@ -26,12 +24,9 @@ const ids = (state = [], action) => {
 
 const isFetching = (state = false, action) => {
   switch (action.type) {
-    case t.LOAD_MEMBERS_REQUEST:
     case t.UPDATE_MEMBER_REQUEST:
       return true;
-    case t.LOAD_MEMBERS_SUCCESS:
     case t.UPDATE_MEMBER_SUCCESS:
-    case t.LOAD_MEMBERS_FAILURE:
     case t.UPDATE_MEMBER_FAILURE:
       return false;
     default:

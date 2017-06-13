@@ -17,11 +17,11 @@ const TagList = (props: Props) => {
     <div>
       <Grid fluid={false}>
         <Row>
-          {props.articles.map(article => (
+          {props.articles.map(article =>
             <Col key={article.id} xs={12} md={4}>
               <ArticleCard listTags={article.tags} article={article} />
-            </Col>
-          ))}
+            </Col>,
+          )}
         </Row>
       </Grid>
     </div>

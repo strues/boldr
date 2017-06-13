@@ -65,15 +65,16 @@ class Article extends PureComponent {
   };
 
   render() {
-    if (this.props.data.loading) {
+    if (this.props.data.loading && !this.props.data.getArticleBySlug) {
       return <Loader />;
+    } else {
+      return (
+        <div>
+          <Helmet title="article" />
+          {this.displaySingleArticle()}
+        </div>
+      );
     }
-    return (
-      <div>
-        <Helmet title="article" />
-        {this.displaySingleArticle()}
-      </div>
-    );
   }
 }
 

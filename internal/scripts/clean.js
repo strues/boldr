@@ -50,9 +50,20 @@ shell.exec('yarn unlink', {
 });
 logTask('unlinked boldr-core\n');
 shell.exec('yarn unlink', {
-  cwd: path.join(process.cwd(), 'packages', 'boldr-tools'),
+  cwd: path.join(process.cwd(), 'packages', 'boldr-dx'),
 });
-logTask('unlinked boldr-tools');
-
+logTask('unlinked boldr-dx');
+shell.exec('yarn unlink', {
+  cwd: path.join(process.cwd(), 'packages', 'boldr-utils'),
+});
+logTask('unlinked boldr-utils');
+shell.exec('yarn unlink', {
+  cwd: path.join(process.cwd(), 'packages', 'boldr-cli'),
+});
+logTask('unlinked boldr-cli');
+shell.exec('yarn unlink', {
+  cwd: path.join(process.cwd(), 'web'),
+});
+logTask('unlinked boldr');
 // Done
 console.log('\n✅  cleaned\n');

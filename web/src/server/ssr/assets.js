@@ -1,7 +1,6 @@
 /* @flow */
 
-import fs from 'fs';
-// import getAssetsManfiest from 'boldr-core/lib/utils/getAssetsManifest';
+import fs from 'mz/fs';
 const isDev = process.env.NODE_ENV === 'development';
 
 let resultCache;

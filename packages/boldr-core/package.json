@@ -8,21 +8,19 @@
   },
   "license": "MIT",
   "author": "Steven Truesdell <steven@strues.io>",
-  "main": "./lib/index.js",
-  "bin": {
-    "boldr-core": "./bin/boldr-core.js"
-  },
+  "main": "lib/boldr-core.js",
+  "jsnext:main": "lib/boldr-core.es.js",
+  "module": "lib/boldr-core.es.js",
   "files": [
-    "bin",
-    "lib/*",
-    "es/*"
+    "lib/boldr-core.es.js",
+    "lib/boldr-core.js"
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/strues/boldr.git"
   },
   "scripts": {
-    "build": "yarn run clean && yarn run build:es && yarn run build:common",
+    "build": "yarn run clean && NODE_ENV=production rollup -c rollup.prod.js",
     "build:es": "NODE_ENV=production BABEL_ENV=es babel src -d ./es",
     "build:common": "NODE_ENV=production BABEL_ENV=common babel src -d ./lib",
     "clean": "rimraf lib && rimraf es",
@@ -56,12 +54,12 @@
     "babel-core": "^6.25.0",
     "babel-preset-boldr": "^0.9.6",
     "boldr-tools": "^0.0.2",
-    "boldr-utils": "0.4.0-rc.1",
+    "boldr-utils": "^0.4.0-rc.1",
     "caporal": "^0.6.0",
     "debug": "^2.6.8",
     "dotenv": "^4.0.0",
     "eslint": "^4.0.0",
-    "eslint-config-boldr": "^0.9.10",
+    "eslint-config-boldr": "^0.10.0",
     "execa": "^0.7.0",
     "express": "^4.15.3",
     "fs-extra": "^3.0.1",
@@ -98,8 +96,18 @@
     "webfontloader": "^1.6.28"
   },
   "devDependencies": {
+    "babel-plugin-external-helpers": "^6.22.0",
     "fast-async": "^6.2.2",
     "prettier": "^1.4.4",
-    "rimraf": "^2.6.1"
+    "rimraf": "^2.6.1",
+    "rollup": "^0.43.0",
+    "rollup-plugin-babel": "^2.7.1",
+    "rollup-plugin-babili": "^3.1.0",
+    "rollup-plugin-commonjs": "^8.0.2",
+    "rollup-plugin-multi-entry": "^2.0.1",
+    "rollup-plugin-node-globals": "^1.1.0",
+    "rollup-plugin-node-resolve": "^3.0.0",
+    "rollup-plugin-replace": "^1.1.1",
+    "rollup-plugin-uglify": "^2.0.1"
   }
 }

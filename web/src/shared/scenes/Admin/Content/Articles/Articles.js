@@ -9,11 +9,7 @@ import ArrowUpward from 'material-ui-icons/ArrowUpward';
 import ArrowDownward from 'material-ui-icons/ArrowDownward';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import Griddle, {
-  plugins,
-  RowDefinition,
-  ColumnDefinition,
-} from 'griddle-react';
+import Griddle, { plugins, RowDefinition, ColumnDefinition } from 'griddle-react';
 
 import { format } from 'date-fns';
 
@@ -111,21 +107,17 @@ class Articles extends Component {
 
 export default Articles;
 
-const PublishColumn = ({ value }) => (
+const PublishColumn = ({ value }) =>
   <span>
     {value === true ? 'Published' : 'Draft'}
-  </span>
-);
+  </span>;
 
 const DateColumn = ({ value }) => <span>{format(value, 'MM/DD/YY')}</span>;
 
 const AvatarColumn = ({ value }) => <Avatar src={value} />;
 
 const rowDataSelector = (state, { griddleKey }) => {
-  return state
-    .get('data')
-    .find(rowMap => rowMap.get('griddleKey') === griddleKey)
-    .toJSON();
+  return state.get('data').find(rowMap => rowMap.get('griddleKey') === griddleKey).toJSON();
 };
 
 const enhancedWithRowData = connect((state, props) => {

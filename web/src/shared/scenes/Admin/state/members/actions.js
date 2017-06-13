@@ -1,69 +1,12 @@
 import { normalize } from 'normalizr';
-import {
-  sendNotification,
-} from '../../../../state/modules/notifications/notifications';
-import {
-  user as userSchema,
-  arrayOfUsers,
-} from '../../../../state/modules/users/schema';
+import { sendNotification } from '../../../../state/modules/notifications/notifications';
+import { user as userSchema, arrayOfUsers } from '../../../../state/modules/users/schema';
 
 import api, { API_PREFIX } from '../../../../core/api';
 
 import * as notif from '../../../../core/constants';
 
 import * as t from '../actionTypes';
-
-/**
-  * FETCH MEMBERS ACTIONS
-  * -------------------------
-  * @exports fetchMembers
-  *****************************************************************/
-export const fetchMembers = (axios: any): ThunkAction => (
-  dispatch: Dispatch,
-) => {
-  dispatch({ type: t.LOAD_MEMBERS_REQUEST });
-
-  return axios
-    .get(`${API_PREFIX}/users?include=[roles]`)
-    .then(res => {
-      const users = res.data.results;
-      const normalizedUsers = normalize(users, arrayOfUsers);
-
-      dispatch({
-        type: t.LOAD_MEMBERS_SUCCESS,
-        payload: normalizedUsers,
-      });
-    })
-    .catch(err => {
-      dispatch({
-        type: t.LOAD_MEMBERS_FAILURE,
-        error: err,
-      });
-    });
-};
-/* istanbul ignore next */
-export const fetchMembersIfNeeded = (): ThunkAction => (
-  dispatch: Dispatch,
-  getState: GetState,
-  axios: any,
-) => {
-  /* istanbul ignore next */
-  if (shouldFetchMembers(getState())) {
-    /* istanbul ignore next */
-    return dispatch(fetchMembers(axios));
-  }
-
-  /* istanbul ignore next */
-  return null;
-};
-
-function shouldFetchMembers(state) {
-  const { ids } = state.admin.members;
-  if (!ids.length) {
-    return true;
-  }
-  return false;
-}
 
 /**
   * UPDATE MEMBER ACTIONS

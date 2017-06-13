@@ -27,9 +27,7 @@ type Props = {
 const Author = (props: Props) => {
   const { author } = props;
   const classes = classnames(BASE_ELEMENT, props.className);
-  const authorName = (
-    <Link to={`/profiles/${author.username}`}>{author.username}</Link>
-  );
+  const authorName = <Link to={`/profiles/${author.username}`}>{author.username}</Link>;
   return (
     <div className={classes}>
       <AvatarName>

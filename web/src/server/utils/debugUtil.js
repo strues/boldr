@@ -1,5 +1,6 @@
 import codeFrame from 'babel-code-frame';
 import chalk from 'chalk';
+import logger from 'boldr-utils/lib/logger';
 import { wrapCallSite } from 'source-map-support';
 import { readFileSync } from 'fs';
 
@@ -146,10 +147,7 @@ export function prepareStackTrace(nativeError, structuredStackTrace) {
     }
   }
 
-  return frames
-    .map(frame => frameToString(frame))
-    .filter(item => item != null)
-    .join('\n');
+  return frames.map(frame => frameToString(frame)).filter(item => item != null).join('\n');
 }
 
 /**
@@ -166,7 +164,9 @@ export function highlightStack(stack) {
         return line.replace(
           /(at )(.*?)(@)(.*?):([0-9]+)(:)([0-9]+)/,
           (match, intro, id, symbol, filename, lineNo, separator, columnNo) =>
-            `  - ${chalk.white(id)} ${chalk.dim(filename)} [${chalk.yellow(lineNo)}:${chalk.yellow(columnNo)}]`,
+            `  - ${chalk.white(id)} ${chalk.dim(filename)} [${chalk.yellow(lineNo)}:${chalk.yellow(
+              columnNo,
+            )}]`,
         );
       }
 
@@ -185,16 +185,12 @@ export function logError(nativeError) {
     // Triggering generating formatted stacktrace
     String(nativeError.stack);
 
-    const formattedMessage = chalk.red(
-      `${nativeError.name}: ${nativeError.message}`,
-    );
+    const formattedMessage = chalk.red(`${nativeError.name}: ${nativeError.message}`);
     const formattedStack = highlightStack(nativeError.stack);
 
     // Optionally display source code except
     if (nativeError.code) {
-      console.error(
-        `${formattedMessage}\n\n${nativeError.code}\n\n${formattedStack}`,
-      );
+      console.error(`${formattedMessage}\n\n${nativeError.code}\n\n${formattedStack}`);
     } else {
       console.error(`${formattedMessage}\n\n${formattedStack}`);
     }
@@ -226,5 +222,5 @@ export function enableEnhancedStackTraces(debug = false) {
   // https://github.com/v8/v8/wiki/Stack-Trace-API
   Error.prepareStackTrace = prepareStackTrace;
 
-  console.log('Activated enhanced stack traces');
+  logger.task('Activated enhanced stack traces');
 }

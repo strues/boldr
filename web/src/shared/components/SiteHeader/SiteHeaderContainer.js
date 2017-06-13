@@ -7,12 +7,7 @@ import { bindActionCreators } from 'redux';
 import { Loader } from 'boldr-ui';
 import SiteHeader from './SiteHeader';
 import { logout } from '../../scenes/Account/state/actions';
-import {
-  fetchMainMenuIfNeeded,
-  selectSettings,
-  selectSettingFromList,
-  selectMe,
-} from '../../state';
+import { selectSettings, selectSettingFromList, selectMe } from '../../state';
 
 type Props = {
   data: SiteHeaderData,
@@ -81,7 +76,6 @@ const mapDispatchToProps = dispatch => {
     actions: bindActionCreators(
       {
         logout,
-        fetchMainMenuIfNeeded,
       },
       dispatch,
     ),

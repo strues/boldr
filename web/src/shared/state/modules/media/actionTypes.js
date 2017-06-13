@@ -1,9 +1,3 @@
-export const FETCH_MEDIAS_REQUEST = '@boldr/media/FETCH_MEDIAS_REQUEST';
-export const FETCH_MEDIAS_SUCCESS = '@boldr/media/FETCH_MEDIAS_SUCCESS';
-export const FETCH_MEDIAS_FAILURE = '@boldr/media/FETCH_MEDIAS_FAILURE';
-export const GET_MEDIA_REQUEST = '@boldr/media/GET_MEDIA_REQUEST';
-export const GET_MEDIA_SUCCESS = '@boldr/media/GET_MEDIA_SUCCESS';
-export const GET_MEDIA_FAILURE = '@boldr/media/GET_MEDIA_FAILURE';
 export const SELECT_MEDIA = '@boldr/media/SELECT_MEDIA';
 export const UPLOAD_MEDIA_REQUEST = '@boldr/media/UPLOAD_MEDIA_REQUEST';
 export const UPLOAD_MEDIA_SUCCESS = '@boldr/media/UPLOAD_MEDIA_SUCCESS';

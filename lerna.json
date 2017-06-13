@@ -2,10 +2,11 @@
   "lerna": "2.0.0-rc.5",
   "npmClient": "yarn",
   "hoist": true,
-  "nohoist": "*loader",
+  "nohoist": "*-loader,loader-*",
   "commands": {
     "bootstrap": {
       "ignore": [
+        "api/*",
         "packages/boldr-cli"
       ]
     }

@@ -1,10 +1,6 @@
 import {
   articlesReducer,
   togglePostLayoutView,
-  fetchArticlesIfNeeded,
-  fetchArticles,
-  fetchArticle,
-  fetchArticleIfNeeded,
   createArticle,
   deletePost,
   updateArticle,
@@ -19,10 +15,6 @@ import {
 
 import {
   tagsReducer,
-  fetchTagsIfNeeded,
-  fetchTagPosts,
-  fetchTagArticlesIfNeeded,
-  fetchTags,
   selectTag,
   clearTag,
   createTag,
@@ -42,10 +34,6 @@ export {
   // posts
   articlesReducer,
   togglePostLayoutView,
-  fetchArticlesIfNeeded,
-  fetchArticles,
-  fetchArticle,
-  fetchArticleIfNeeded,
   createArticle,
   deletePost,
   updateArticle,
@@ -58,10 +46,6 @@ export {
   getFeaturedArticles,
   // tags
   tagsReducer,
-  fetchTagsIfNeeded,
-  fetchTagPosts,
-  fetchTagArticlesIfNeeded,
-  fetchTags,
   selectTag,
   clearTag,
   createTag,

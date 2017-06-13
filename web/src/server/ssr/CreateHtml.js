@@ -1,12 +1,11 @@
 /* @flow */
-/* eslint-disable react/no-danger, react/no-array-index-key, react/jsx-key */
+/* eslint-disable react/no-danger, react/no-array-index-key, react/jsx-key, jsx-a11y/html-has-lang */
 import React, { Children } from 'react';
 import serialize from 'serialize-javascript';
 import ifElse from 'boldr-utils/lib/logic/ifElse';
 import removeNil from 'boldr-utils/lib/arrays/removeNil';
 import uuid from 'uuid/v4';
 import type { Head } from 'react-helmet';
-import Html from './Html';
 import assets from './assets';
 
 // This is output by Webpack after the bundle is compiled. It contains
@@ -102,14 +101,14 @@ export default function CreateHtml(props: Props) {
   ]);
 
   return (
-    <Html
-      htmlAttributes={ifElse(helmet)(() => helmet.htmlAttributes.toComponent(), null)}
-      materialCss={materialCss}
-      headerElements={headerElements.map((x, idx) =>
-        <KeyedComponent key={idx}>{x}</KeyedComponent>,
-      )}
-      bodyElements={bodyElements.map((x, idx) => <KeyedComponent key={idx}>{x}</KeyedComponent>)}
-      appBodyString={reactAppString}
-    />
+    <html {...helmet.htmlAttributes.toComponent()}>
+      <head>
+        {headerElements.map((x, idx) => <KeyedComponent key={idx}>{x}</KeyedComponent>)}
+      </head>
+      <body>
+        <div id="app" dangerouslySetInnerHTML={{ __html: reactAppString }} />
+        {bodyElements.map((x, idx) => <KeyedComponent key={idx}>{x}</KeyedComponent>)}
+      </body>
+    </html>
   );
 }

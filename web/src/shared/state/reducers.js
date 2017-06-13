@@ -4,13 +4,7 @@ import { routerReducer } from 'react-router-redux';
 import { blogReducer } from '../scenes/Blog/state';
 import { adminReducer } from '../scenes/Admin/state';
 import { authReducer } from '../scenes/Account/state';
-import {
-  boldrReducer,
-  usersReducer,
-  mediaReducer,
-  notificationReducer,
-  entitiesReducer,
-} from './modules';
+import { boldrReducer, usersReducer, mediaReducer, notificationReducer } from './modules';
 
 export default function getReducers(apolloClient) {
   return combineReducers({
@@ -22,7 +16,6 @@ export default function getReducers(apolloClient) {
     admin: adminReducer,
     media: mediaReducer,
     notifications: notificationReducer,
-    entities: entitiesReducer,
     form: formReducer,
     router: routerReducer,
   });

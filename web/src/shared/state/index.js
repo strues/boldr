@@ -61,8 +61,6 @@ import {
   sendNotification,
   dismissNotification,
   clearNotification,
-  // entities
-  entitiesReducer,
 } from './modules';
 
 import rootReducer from './reducers';
@@ -133,6 +131,4 @@ export {
   sendNotification,
   dismissNotification,
   clearNotification,
-  // entities
-  entitiesReducer,
 };

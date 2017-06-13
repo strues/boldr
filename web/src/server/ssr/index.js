@@ -1,9 +1,7 @@
 /* @flow */
-import 'isomorphic-fetch';
 import React from 'react';
 import type { $Response, $Request } from 'express';
 import { renderToString, renderToStaticMarkup } from 'react-dom/server';
-import { Provider } from 'react-redux';
 import createHistory from 'history/createMemoryHistory';
 import StaticRouter from 'react-router-dom/StaticRouter';
 import Helmet from 'react-helmet';
@@ -62,13 +60,13 @@ async function ssrMiddleware(req: $Request, res: $Response) {
   // in `react-router`'s <StaticRouter> which will pull out URL info and
   // store it in our empty `route` object
   const appComponent = (
-    <StaticRouter location={req.url} context={routerContext}>
-      <ApolloProvider store={store} client={client}>
+    <ApolloProvider store={store} client={client}>
+      <StaticRouter location={req.url} context={routerContext}>
         <MuiThemeProvider styleManager={styleManager} theme={theme}>
           <App />
         </MuiThemeProvider>
-      </ApolloProvider>
-    </StaticRouter>
+      </StaticRouter>
+    </ApolloProvider>
   );
   await getDataFromTree(appComponent);
 

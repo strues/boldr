@@ -3,7 +3,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Loader from '~components/Loader';
 import FontIcon from '~components/FontIcon';
-// import Button from 'material-ui/Button';
 import { Grid, Row, Col } from '~components/Layout';
 import { FeaturedArticle, ArticleCard } from '../components';
 
@@ -33,7 +32,7 @@ class ArticleListing extends React.Component {
   renderArticles = () => {
     const { articles } = this.props;
     const allArticles = articles.filter(p => p.published) && articles.filter(p => !p.featured);
-    return allArticles.map(article =>
+    return articles.map(article =>
       <Col key={article.id} xs={12} md={4}>
         <CardSpacer>
           <ArticleCard article={article} tags={article.tags} />

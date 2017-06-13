@@ -1,5 +1,3 @@
-import entitiesReducer from './entities';
-
 import {
   // main reducer
   boldrReducer,
@@ -9,8 +7,6 @@ import {
   selectMenus,
   selectMainMenu,
   makeSelectMainMenu,
-  fetchMainMenu,
-  fetchMainMenuIfNeeded,
   updateMenuDetails,
   addMenuDetail,
   // settings
@@ -38,7 +34,6 @@ import {
 
 import {
   mediaReducer,
-  fetchMediaIfNeeded,
   getMedia,
   getMediaType,
   selectMedia,
@@ -52,8 +47,6 @@ import {
 
 import {
   usersReducer,
-  fetchProfileIfNeeded,
-  fetchProfile,
   selectMe,
   forgotPassword,
   resetPassword,
@@ -88,8 +81,6 @@ export {
   settingsReducer,
   selectSettings,
   selectSettingFromList,
-  fetchSettingsIfNeeded,
-  fetchSettings,
   updateBoldrSettings,
   arrayOfSetting,
   setting,
@@ -107,7 +98,6 @@ export {
   layoutSelector,
   // media
   mediaReducer,
-  fetchMediaIfNeeded,
   getMedia,
   getMediaType,
   selectMedia,
@@ -119,8 +109,6 @@ export {
   arrayOfMedia,
   // users
   usersReducer,
-  fetchProfileIfNeeded,
-  fetchProfile,
   selectMe,
   forgotPassword,
   resetPassword,
@@ -135,6 +123,4 @@ export {
   sendNotification,
   dismissNotification,
   clearNotification,
-  // entities
-  entitiesReducer,
 };

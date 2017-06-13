@@ -103,7 +103,6 @@ class App extends Component {
               sizes="144x144"
               href="/favicons/apple-touch-icon-144x144.png"
             />
-
             <meta name="msapplication-TileColor" content="#2b2b2b" />
             <meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png" />
             <link rel="manifest" href="/manifest.json" />
@@ -123,7 +122,6 @@ class App extends Component {
             <Route component={Error404} />
           </Switch>
           <Notifications />
-
         </div>
       </ThemeProvider>
     );
@@ -141,4 +139,11 @@ export const SETTINGS_QUERY = gql`
     }
 }
 `;
-export default graphql(SETTINGS_QUERY)(App);
+
+const mapStateToProps = state => {
+  return {
+    router: state.router,
+  };
+};
+
+export default compose(graphql(SETTINGS_QUERY), connect(mapStateToProps))(App);
