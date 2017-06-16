@@ -1,64 +1,10 @@
-import {
-  sendNotification,
-} from '../../../../state/modules/notifications/notifications';
+/* @flow */
+import { sendNotification } from '../../../../state/modules/notifications/notifications';
 import { editProfile } from '../../../../state/modules/users/actions';
 import { api, API_PREFIX } from '../../../../core';
 import * as notif from '../../../../core/constants';
 
 import * as t from '../actionTypes';
-
-/**
-  * FETCH MEDIA ACTIONS
-  * -------------------------
-  * @exports fetchMedia
-  *****************************************************************/
-
-export const fetchAttachments = (axios: any): ThunkAction => (
-  dispatch: Dispatch,
-) => {
-  dispatch({ type: t.GET_ATTACHMENT_REQUEST });
-
-  return axios
-    .get(`${API_PREFIX}/attachments`)
-    .then(res => {
-      dispatch({
-        type: t.GET_ATTACHMENT_SUCCESS,
-        payload: res.data,
-      });
-    })
-    .catch(err => {
-      dispatch({
-        type: t.GET_ATTACHMENT_FAILURE,
-        error: err,
-      });
-    });
-};
-/* istanbul ignore next */
-export const fetchAttachmentsIfNeeded = (): ThunkAction => (
-  dispatch: Dispatch,
-  getState: GetState,
-  axios: any,
-) => {
-  /* istanbul ignore next */
-  if (shouldFetchAttachments(getState())) {
-    /* istanbul ignore next */
-    return dispatch(fetchAttachments(axios));
-  }
-
-  /* istanbul ignore next */
-  return null;
-};
-
-function shouldFetchAttachments(state) {
-  const attachments = state.admin.attachments.files;
-  if (!attachments.length) {
-    return true;
-  }
-  if (attachments.length) {
-    return false;
-  }
-  return attachments;
-}
 
 /**
   * UPLOAD FILE ACTIONS
@@ -79,7 +25,7 @@ export function uploadFiles(payload) {
           dispatch(sendNotification(notif.MSG_UPLOAD_ERROR));
         }
         dispatch(uploadSuccess(res));
-        dispatch(sendNotification(notif.MSG_UPLOAD_SUCCESS));
+        return dispatch(sendNotification(notif.MSG_UPLOAD_SUCCESS));
       })
       .catch(err => {
         dispatch(uploadFail(err));
@@ -125,7 +71,7 @@ export function uploadArticleImage(payload) {
       .post(`${API_PREFIX}/media`, data)
       .then(res => {
         dispatch(uploadArticleImageSuccess(res));
-        dispatch(sendNotification(notif.MSG_UPLOAD_SUCCESS));
+        return dispatch(sendNotification(notif.MSG_UPLOAD_SUCCESS));
       })
       .catch(err => {
         dispatch(uploadArticleImageFail(err));
@@ -173,7 +119,7 @@ export function deleteAttachment(id) {
           type: t.DELETE_ATTACHMENT_SUCCESS,
           id,
         });
-        dispatch(sendNotification(notif.MSG_FILE_REMOVED));
+        return dispatch(sendNotification(notif.MSG_FILE_REMOVED));
       })
       .catch(err => {
         dispatch({
@@ -196,7 +142,7 @@ export function updateAttachment(attachmentData) {
       .put(`${API_PREFIX}/attachments/${attachmentData.id}`, attachmentData)
       .then(res => {
         dispatch(updateAttachmentSuccess(res));
-        dispatch(
+        return dispatch(
           sendNotification({
             message: 'Updated attachment.',
             kind: 'info',
@@ -268,7 +214,7 @@ export function uploadProfileImage(payload) {
           payload: res.data,
         });
         dispatch(editProfile(userData));
-        dispatch(sendNotification(notif.MSG_UPLOAD_SUCCESS));
+        return dispatch(sendNotification(notif.MSG_UPLOAD_SUCCESS));
       })
       .catch(err => {
         dispatch({
@@ -297,7 +243,7 @@ export function uploadAvatarImage(payload) {
           type: t.UPLOAD_AVATAR_IMG_SUCCESS,
           payload: res.data,
         });
-        dispatch(sendNotification(notif.MSG_UPLOAD_SUCCESS));
+        return dispatch(sendNotification(notif.MSG_UPLOAD_SUCCESS));
       })
       .catch(err => {
         dispatch({

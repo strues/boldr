@@ -13,11 +13,7 @@ import {
   settingsReducer,
   selectSettings,
   selectSettingFromList,
-  fetchSettingsIfNeeded,
-  fetchSettings,
   updateBoldrSettings,
-  arrayOfSetting,
-  setting,
 } from './settings';
 
 import {
@@ -54,11 +50,7 @@ export {
   settingsReducer,
   selectSettings,
   selectSettingFromList,
-  fetchSettingsIfNeeded,
-  fetchSettings,
   updateBoldrSettings,
-  arrayOfSetting,
-  setting,
   // ui
   uiReducer,
   makeSelectUi,

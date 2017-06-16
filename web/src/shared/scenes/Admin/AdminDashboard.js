@@ -10,6 +10,7 @@ import Sidebar from '~components/Sidebar';
 import { DashboardWrapper, DashboardContent, DashboardMain } from '~components/Dashboard';
 import Topbar from '~components/Topbar';
 import TopbarLink from '~components/Topbar/TopbarLink';
+import { hideHeader } from '~state/modules/boldr/ui/actions';
 import { selectMe, showHideSidebar, expandCollapseSideMenu } from '../../state';
 import sidebarLinks from './sidebarLinks';
 import routes from './routes';
@@ -45,6 +46,10 @@ export class AdminDashboard extends Component {
     (this: any).flattenedRoutes = flattenRoutes(routes);
   }
   props: Props;
+
+  componentDidMount() {
+    this.props.hideHeader();
+  }
 
   handleHideSidebar = () => {
     this.props.dispatch(showHideSidebar());
@@ -107,4 +112,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(AdminDashboard);
+export default connect(mapStateToProps, { hideHeader })(AdminDashboard);

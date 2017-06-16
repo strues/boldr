@@ -14,6 +14,7 @@ type Props = {
   actions: Object,
   navigate: () => void,
   me: User,
+  showHeader: boolean,
   isMobile: boolean,
   settings: Array<Setting>,
   auth: Object,
@@ -34,18 +35,23 @@ class SiteHeaderContainer extends React.Component {
     const { loading, getMenuById } = this.props.data;
     if (loading) {
       return <Loader />;
+    } else {
+      return (
+        <div>
+          {this.props.showHeader
+            ? <SiteHeader
+                auth={this.props.auth}
+                me={this.props.me}
+                settings={this.props.settings}
+                details={getMenuById.details}
+                isMobile={this.props.isMobile}
+                handleProfileClick={this.handleProfileClick}
+                handleLogoutClick={this.handleLogoutClick}
+              />
+            : null}
+        </div>
+      );
     }
-    return (
-      <SiteHeader
-        auth={this.props.auth}
-        me={this.props.me}
-        settings={this.props.settings}
-        details={getMenuById.details}
-        isMobile={this.props.isMobile}
-        handleProfileClick={this.handleProfileClick}
-        handleLogoutClick={this.handleLogoutClick}
-      />
-    );
   }
 }
 
@@ -95,6 +101,7 @@ const mapStateToProps = (state: Object) => {
     me: selectMe(state),
     auth: state.auth,
     isMobile: state.boldr.ui.isMobile,
+    showHeader: state.boldr.ui.showHeader,
   };
 };
 // $FlowIssue

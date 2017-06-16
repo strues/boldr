@@ -13,8 +13,7 @@ import { ServerStyleSheet } from 'styled-components';
 
 import { ApolloProvider, getDataFromTree } from 'react-apollo';
 import { createBatchingNetworkInterface } from 'apollo-client';
-
-import createApolloClient from '../../shared/core/createApolloClient';
+import { createApolloClient } from 'boldr-core';
 import configureStore from '../../shared/state/store';
 import App from '../../shared/App';
 import CreateHtml from './CreateHtml';

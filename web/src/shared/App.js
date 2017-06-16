@@ -1,7 +1,4 @@
 /* @flow */
-// @NOTE: "connecting" this component with react-redux will cause
-// the navigation to stop working. Routes change, but the view does not.
-// @TODO: Check browser history and get link 258am
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import Helmet from 'react-helmet';
@@ -66,8 +63,14 @@ const ProtectedRoute = ({ component: Component, ...rest }: ProtectedProps) =>
 type Props = {
   className: ?string,
   ui: Object,
+  data: Object,
+  location: Location,
 };
 
+type Location = {
+  pathname: string,
+  hash: ?string,
+};
 class App extends Component {
   static defaultProps = {
     className: 'app',
@@ -80,6 +83,10 @@ class App extends Component {
     if (jssStyles && jssStyles.parentNode) {
       jssStyles.parentNode.removeChild(jssStyles);
     }
+  }
+  componentWillReceiveProps(nextProps) {
+    const { location: prevLocation } = this.props;
+    const { location: nextLocation } = nextProps;
   }
   props: Props;
   render() {

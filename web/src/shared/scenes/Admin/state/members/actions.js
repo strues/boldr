@@ -1,6 +1,5 @@
-import { normalize } from 'normalizr';
+
 import { sendNotification } from '../../../../state/modules/notifications/notifications';
-import { user as userSchema, arrayOfUsers } from '../../../../state/modules/users/schema';
 
 import api, { API_PREFIX } from '../../../../core/api';
 
@@ -28,9 +27,9 @@ export function updateMember(userData) {
       .put(`${API_PREFIX}/users/admin/${userData.id}`, data)
       .then(res => {
         const updatedUser = res.data;
-        const normalizedUser = normalize(updatedUser, userSchema);
+        const normalizedUser = updatedUser;
         dispatch(doneUpdateMember(normalizedUser));
-        dispatch(sendNotification(notif.MSG_UPDATE_MEMBER_SUCCESS));
+        return dispatch(sendNotification(notif.MSG_UPDATE_MEMBER_SUCCESS));
       })
       .catch(err => {
         dispatch(failUpdateMember(err.message));

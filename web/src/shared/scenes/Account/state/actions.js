@@ -1,3 +1,4 @@
+/* @flow */
 import { push } from 'react-router-redux';
 import { api, API_PREFIX, setToken, removeToken } from '../../../core';
 import * as notif from '../../../core/constants';
@@ -98,7 +99,7 @@ export const loginUserError = ({ error }) => ({
   *****************************************************************/
 
 export const checkAuth = token => {
-  return async (dispatch: Function) => {
+  return (dispatch: Function) => {
     dispatch({ type: t.CHECK_AUTH_REQUEST });
     return api
       .get(`${API_PREFIX}/auth/check`)

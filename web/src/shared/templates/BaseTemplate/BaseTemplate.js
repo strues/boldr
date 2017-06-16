@@ -2,10 +2,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+
 import { Footer, Loader, Headline } from 'boldr-ui';
+import { showHeader } from '~state/modules/boldr/ui/actions';
 import Hero from '../../components/Hero/Hero';
 
-type Props = {
+export type Props = {
   header: ReactElement,
   helmetMeta?: ReactElement,
   hero?: ReactElement,
@@ -44,11 +46,13 @@ const FooterWrapper = styled.div`
   margin-top: auto;
 `;
 
-export default class BaseTemplate extends Component {
+export class BaseTemplate extends Component {
   static defaultProps = {
     bgColor: '#00b4d0',
   };
-
+  componentDidMount() {
+    this.props.showHeader();
+  }
   props: Props;
   render() {
     return (
@@ -71,4 +75,9 @@ export default class BaseTemplate extends Component {
   }
 }
 
-export { Wrapper, FooterWrapper };
+const mapStateToProps = state => {
+  return {
+    showHeader: state.boldr.ui.showHeader,
+  };
+};
+export default connect(mapStateToProps, { showHeader })(BaseTemplate);

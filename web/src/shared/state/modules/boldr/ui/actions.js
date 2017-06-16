@@ -8,6 +8,8 @@ export function changeLayout(layout) {
 }
 
 export const showHideSidebar = () => ({ type: t.TOGGLE_SIDEBAR });
+export const hideHeader = () => ({ type: t.HIDE_HEADER });
+export const showHeader = () => ({ type: t.SHOW_HEADER });
 
 export const expandCollapseSideMenu = () => ({ type: t.TOGGLE_SB_MENU });
 export const showModal = () => ({ type: t.MODAL_OPEN });

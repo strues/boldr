@@ -16,6 +16,7 @@ function toggleDrawer(state) {
   newState.drawer = !newState.drawer;
   return newState;
 }
+
 const INITIAL_STATE = {
   loaded: false,
   layout: LAYOUTS.GRID,
@@ -24,6 +25,7 @@ const INITIAL_STATE = {
   expanded: true,
   isMobile: false,
   visible: true,
+  showHeader: true,
 };
 
 function uiReducer(state = INITIAL_STATE, action) {
@@ -34,6 +36,16 @@ function uiReducer(state = INITIAL_STATE, action) {
       return toggleSidebar(state);
     case t.TOGGLE_DRAWER:
       return toggleDrawer(state);
+    case t.SHOW_HEADER:
+      return {
+        ...state,
+        showHeader: true,
+      };
+    case t.HIDE_HEADER:
+      return {
+        ...state,
+        showHeader: false,
+      };
     case t.CHANGE_LAYOUT:
       return {
         ...state,

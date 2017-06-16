@@ -1,10 +1,5 @@
 import menuReducer from './reducer';
-import {
-  fetchMainMenu,
-  fetchMainMenuIfNeeded,
-  updateMenuDetails,
-  addMenuDetail,
-} from './actions';
+import { fetchMainMenu, fetchMainMenuIfNeeded, updateMenuDetails, addMenuDetail } from './actions';
 
 import { selectMenus, selectMainMenu, makeSelectMainMenu } from './selectors';
 

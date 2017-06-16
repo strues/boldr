@@ -7,9 +7,13 @@ import { enableBatching } from 'redux-batched-actions';
 import thunkMiddleware from 'redux-thunk';
 import invariant from 'invariant';
 
+import boldrReducers from './reducers';
+import httpMiddleware from './middlewares/http';
+import cmfMiddleware from './middlewares/cmf';
+
 const preReducers = [];
 const enhancers = [];
-const middlewares = [thunkMiddleware];
+const middlewares = [thunkMiddleware, httpMiddleware, cmfMiddleware];
 
 /**
  * setRouterMiddleware overwrites the default router middleware
@@ -21,7 +25,7 @@ function setRouterMiddleware(middleware) {
   defaultRouterOverwrite = true;
 }
 
-export function addPreReducer(reducers) {
+function addPreReducer(reducers) {
   if (typeof reducers === 'function') {
     preReducers.push(reducers);
   } else if (Array.isArray(reducers)) {
@@ -29,7 +33,7 @@ export function addPreReducer(reducers) {
   }
 }
 
-export function preApplyReducer(reducer) {
+function preApplyReducer(reducer) {
   if (preReducers.length === 0) {
     return reducer;
   }
@@ -45,7 +49,7 @@ export function preApplyReducer(reducer) {
  * @param  {function|Object} projectReducer   The reducer from the user's project
  * @return {function}            [description]
  */
-export function getReducer(projectReducer, apolloClient) {
+function getReducer(projectReducer, apolloClient) {
   let mainReducer = {};
   if (projectReducer) {
     if (typeof projectReducer === 'object') {
@@ -59,7 +63,7 @@ export function getReducer(projectReducer, apolloClient) {
     invariant(true, 'You must supply a reducer via the init function.');
   }
   if (!mainReducer.apollo) {
-    mainReducer.boldr = apolloClient.reducer();
+    mainReducer.apollo = apolloClient.reducer();
   }
 
   if (!mainReducer.boldr) {
@@ -69,7 +73,7 @@ export function getReducer(projectReducer, apolloClient) {
   return enableBatching(preApplyReducer(combineReducers(mainReducer)));
 }
 
-export function getMiddlewares(middleware) {
+function getMiddlewares(middleware) {
   if (Array.isArray(middleware)) {
     middleware.forEach(mid => {
       if (middlewares.indexOf(mid) === -1) {
@@ -92,13 +96,14 @@ export function getMiddlewares(middleware) {
  * @param  {Array|function} middleware      redux middleware
  * @return {Object}                         The store
  */
-export function init(projectReducer, apolloClient, history, preloadedState, enhancer, middleware) {
+function init(projectReducer, apolloClient, history, preloadedState, enhancer) {
+  const middleware = [];
   const reduxRouterMiddleware = routerMiddleware(history);
-
-  const reducer = getReducer(projectReducer, apolloClient);
   if (typeof enhancer === 'function') {
     enhancers.push(enhancer);
   }
+  const reducer = getReducer(projectReducer, apolloClient);
+
   middleware.push(apolloClient.middleware(), reduxRouterMiddleware);
 
   const mw = getMiddlewares(middleware);
@@ -107,3 +112,12 @@ export function init(projectReducer, apolloClient, history, preloadedState, enha
 
   return store;
 }
+
+export default {
+  addPreReducer,
+  setRouterMiddleware,
+  init,
+  // for testing purepose only
+  getReducer,
+  getMiddlewares,
+};

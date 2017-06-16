@@ -19,10 +19,13 @@ export default {
     'apollo-client',
     'redux-batched-actions',
     'invariant',
+    'immutable',
+    'hoist-non-react-statics',
   ],
   globals: {
     react: 'React',
     'react-dom': 'ReactDOM',
+    immutable: 'Immutable',
   },
   targets: [
     { dest: './lib/boldr-core.es.js', format: 'es' },

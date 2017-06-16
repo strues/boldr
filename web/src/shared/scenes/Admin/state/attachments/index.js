@@ -1,7 +1,5 @@
 import attachmentReducer from './reducer';
 import {
-  fetchAttachments,
-  fetchAttachmentsIfNeeded,
   uploadFiles,
   uploadArticleImage,
   deleteAttachment,
@@ -13,8 +11,6 @@ import {
 
 export {
   attachmentReducer,
-  fetchAttachments,
-  fetchAttachmentsIfNeeded,
   uploadFiles,
   uploadArticleImage,
   deleteAttachment,

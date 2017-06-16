@@ -7,9 +7,7 @@ import { getArticles } from './selectors';
 
 const all = (state = {}, action) => {
   switch (action.type) {
-    case t.FETCH_ARTICLES_SUCCESS:
     case t.CREATE_ARTICLE_SUCCESS:
-    case t.FETCH_ARTICLE_SUCCESS:
       return {
         ...state,
         ...action.payload.entities.articles,
@@ -23,9 +21,6 @@ const all = (state = {}, action) => {
 
 const ids = (state = [], action) => {
   switch (action.type) {
-    case t.FETCH_ARTICLES_SUCCESS:
-      // case t.FETCH_ARTICLE_SUCCESS:
-      return action.payload.result;
     case t.DELETE_ARTICLE_SUCCESS:
       return removeIdFromArray(state, action.id);
     default:
@@ -35,13 +30,9 @@ const ids = (state = [], action) => {
 
 const isFetching = (state = false, action) => {
   switch (action.type) {
-    case t.FETCH_ARTICLES_REQUEST:
     case t.CREATE_ARTICLE_REQUEST:
-    case t.FETCH_ARTICLE_REQUEST:
       return true;
-    case t.FETCH_ARTICLES_SUCCESS:
     case t.CREATE_ARTICLE_SUCCESS:
-    case t.FETCH_ARTICLE_SUCCESS:
       return false;
     default:
       return state;
@@ -54,11 +45,6 @@ const currentArticle = (state = {}, action) => {
       return {
         ...state,
         ...action.article,
-      };
-    case t.FETCH_ARTICLE_SUCCESS:
-      return {
-        ...state,
-        ...action.payload.entities.articles[action.slug],
       };
     default:
       return state;
@@ -80,18 +66,13 @@ const articlesReducer = combineReducers({
 
 export default articlesReducer;
 
-export const getPublishedArticles = (
-  state: Object,
-  filter: string,
-): Function => {
+export const getPublishedArticles = (state: Object, filter: string): Function => {
   const allPosts = getArticles(state);
   switch (filter) {
     case 'all':
       return getArticles(state);
     case 'published':
-      return (
-        allPosts.filter(p => p.published) && allPosts.filter(p => !p.featured)
-      );
+      return allPosts.filter(p => p.published) && allPosts.filter(p => !p.featured);
     case 'draft':
       return allPosts.filter(p => !p.published);
     default:
@@ -99,10 +80,7 @@ export const getPublishedArticles = (
   }
 };
 
-export const getFeaturedArticles = (
-  state: Object,
-  filter: string,
-): Function => {
+export const getFeaturedArticles = (state: Object, filter: string): Function => {
   const allPosts = getArticles(state);
   switch (filter) {
     case 'all':

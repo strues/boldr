@@ -1,21 +1,6 @@
 import dashboardReducer from './reducer';
-import {
-  showSidebar,
-  hideSidebar,
-  fetchActivityIfNeeded,
-  fetchActivity,
-  fetchStatsIfNeeded,
-  fetchStats,
-} from './actions';
+import { showSidebar, hideSidebar } from './actions';
 
 export default dashboardReducer;
 
-export {
-  dashboardReducer,
-  showSidebar,
-  hideSidebar,
-  fetchActivityIfNeeded,
-  fetchActivity,
-  fetchStatsIfNeeded,
-  fetchStats,
-};
+export { dashboardReducer, showSidebar, hideSidebar };

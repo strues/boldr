@@ -1,10 +1,8 @@
 /* @flow */
-import { normalize } from 'normalizr';
 import api, { API_PREFIX } from '../../../../core/api';
 import * as notif from '../../../../core/constants';
 import { sendNotification } from '../../../../state/modules/notifications/notifications';
 import * as t from '../actionTypes';
-import { tag as tagSchema, arrayOfTag } from './schema';
 
 /**
   * SELECT TAG ACTIONS
@@ -44,7 +42,7 @@ export function createTag(values) {
         return dispatch(sendNotification(notif.MSG_ADD_TAG_FAILURE));
       }
       dispatch(addTagSuccess(res));
-      dispatch(sendNotification(notif.MSG_ADD_TAG_SUCCESS));
+      return dispatch(sendNotification(notif.MSG_ADD_TAG_SUCCESS));
     });
   };
 }
@@ -87,7 +85,7 @@ export function deleteTag(id) {
           type: t.DELETE_TAG_SUCCESS,
           id,
         });
-        dispatch(sendNotification(notif.MSG_DELETE_TAG_SUCCESS));
+        return dispatch(sendNotification(notif.MSG_DELETE_TAG_SUCCESS));
       })
       .catch(err => {
         dispatch(deleteTagFail(err));

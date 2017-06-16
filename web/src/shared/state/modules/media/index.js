@@ -8,7 +8,7 @@ import {
   uploadMediaFile,
 } from './actions';
 import { getMedia } from './selectors';
-import { media, arrayOfMedia } from './schema';
+
 
 export default mediaReducer;
 
@@ -22,6 +22,4 @@ export {
   deleteMedia,
   uploadMediaFile,
   uploadMediaUrl,
-  media,
-  arrayOfMedia,
 };

@@ -1,6 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
+import { Grid, Col, Row } from '~components/Layout';
 import FormCard from '~components/Form/FormCard';
 import LoginForm from './LoginForm';
 
@@ -14,12 +15,17 @@ const Login = (props: Props) => {
   return (
     <div className="boldr-form__login">
       <Helmet title="Login" />
-      <FormCard
-        title="Log in to your account"
-        lightText
-        skinny
-        form={<LoginForm onSubmit={submitLogin} />}
-      />
+      <Grid>
+        <Row>
+          <Col xs={12}>
+            <Row center="xs">
+              <Col xs={6}>
+                <LoginForm onSubmit={submitLogin} />
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Grid>
     </div>
   );
 };

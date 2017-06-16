@@ -18,7 +18,7 @@ export function updateMenuDetails(data) {
       .put(`${API_PREFIX}/menu-details/${data.id}`, data)
       .then(res => {
         dispatch(updateMenuDetailsSuccess(res));
-        dispatch(sendNotification(notif.MSG_UPDATE_LINK_SUCCESS));
+        return dispatch(sendNotification(notif.MSG_UPDATE_LINK_SUCCESS));
       })
       .catch(err => {
         dispatch(updateMenuDetailsFailure(err.message));
@@ -51,7 +51,7 @@ export function addMenuDetail(values) {
   const data = {
     name: values.name,
     href: values.href,
-    mobile_href: values.mobileHref,
+    mobileHref: values.mobileHref,
     hasDropdown: values.has_dropdown,
     cssClassname: values.cssClassname,
     icon: values.icon,
@@ -69,10 +69,10 @@ export function addMenuDetail(values) {
     return api.post(`${API_PREFIX}/menu-details`, data).then(res => {
       if (!res.status === 201) {
         dispatch(addMenuDetailFailure(res));
-        dispatch(sendNotification(notif.MSG_ADD_LINK_ERROR));
+        return dispatch(sendNotification(notif.MSG_ADD_LINK_ERROR));
       }
       dispatch(addMenuDetailSuccess(res));
-      dispatch(sendNotification(notif.MSG_ADD_LINK_SUCCESS));
+      return dispatch(sendNotification(notif.MSG_ADD_LINK_SUCCESS));
     });
   };
 }

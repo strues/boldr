@@ -8,13 +8,6 @@ const all = (state = {}, action) => {
         ...state,
         ...action.payload.entities.settings,
       };
-    // case t.ADD_TAG_SUCCESS:
-    //   return {
-    //     ...state,
-    //     ...action.payload,
-    //   };
-
-
     default:
       return state;
   }

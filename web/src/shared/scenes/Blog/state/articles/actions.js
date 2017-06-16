@@ -5,8 +5,6 @@ import * as notif from '../../../../core/constants';
 
 import type { Dispatch, GetState, ThunkAction, Reducer } from '../../../../types/redux';
 import * as t from '../actionTypes';
-import { article as articleSchema, arrayOfArticle } from './schema';
-
 export function togglePostLayoutView() {
   return { type: t.TOGGLE_POST_LAYOUT };
 }
@@ -36,7 +34,7 @@ export function createArticle(data: Article) {
     return api
       .post(`${API_PREFIX}/articles`, data)
       .then(res => {
-        const normalizedData = normalize(res.data, articleSchema);
+        const normalizedData = res.data;
         dispatch(createArticleSuccess(normalizedData));
         return dispatch(sendNotification(notif.MSG_CREATE_ARTICLE_SUCCESS));
       })

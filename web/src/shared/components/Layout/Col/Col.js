@@ -14,11 +14,7 @@ const DimensionPropTypes = DIMENSION_NAMES.reduce((propTypes, dimension) => {
   return propTypes;
 }, {});
 
-const Col = props =>
-  React.createElement(
-    props.tagName || 'div',
-    createProps(Col.propTypes, props),
-  );
+const Col = props => React.createElement(props.tagName || 'div', createProps(Col.propTypes, props));
 
 Col.propTypes = {
   ...DimensionPropTypes,
@@ -35,37 +31,39 @@ export default styled(Col)`
   padding-right: ${p => config(p).gutterWidth / 2}rem;
   padding-left: ${p => config(p).gutterWidth / 2}rem;
 
-  ${p => p.reverse && `
+  ${p =>
+    p.reverse &&
+    `
     flex-direction: column-reverse;
   `}
 
-  ${p => Object.keys(p)
+  ${p =>
+    Object.keys(p)
       .filter(k => ~DIMENSION_NAMES.indexOf(k))
       .sort(k => DIMENSION_NAMES.indexOf(k))
       .map(
         k =>
-          config(p).media[k]`${Number.isInteger(p[k]) ? // Integer value
-              `
+          config(p).media[k]`${Number.isInteger(p[k])
+            ? `
         flex-basis: ${100 / config(p).gridSize * p[k]}%;
         max-width: ${100 / config(p).gridSize * p[k]}%;
         display: block;
-      ` : // Boolean
-              p[k] ? // Auto-width
-                  `
+      `
+            : p[k]
+              ? `
           flex-grow: 1;
           flex-basis: 0;
           max-width: 100%;
           display: block;
-        ` : // Hide element
-                  'display: none;'}`,
+        `
+              : 'display: none;'}`,
       )}
 
-  ${p => Object.keys(p)
-      .filter(k => ~offsetProps.indexOf(k))
-      .map(
-        k =>
-          config(p).media[k.replace(/Offset$/, '')]`
+  ${p =>
+    Object.keys(p).filter(k => ~offsetProps.indexOf(k)).map(
+      k =>
+        config(p).media[k.replace(/Offset$/, '')]`
         margin-left: ${100 / config(p).gridSize * p[k]}%;
       `,
-      )}
+    )}
 `;

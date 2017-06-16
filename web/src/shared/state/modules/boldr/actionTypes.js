@@ -6,7 +6,8 @@ export const CHANGE_LAYOUT = '@boldr/ui/CHANGE_LAYOUT';
 export const MODAL_OPEN = '@boldr/ui/MODAL_OPEN';
 export const MODAL_CLOSED = '@boldr/ui/MODAL_CLOSED';
 export const OPEN_DRAWER = '@boldr/ui/OPEN_DRAWER';
-
+export const SHOW_HEADER = '@boldr/ui/SHOW_HEADER';
+export const HIDE_HEADER = '@boldr/ui/HIDE_HEADER';
 export const SET_MOBILE_DEVICE = '@boldr/ui/SET_MOBILE_DEVICE';
 export const UPDATE_MEDIA = '@boldr/ui/UPDATE_MEDIA';
 export const UPDATE_DRAWER_TYPE = '@boldr/ui/UPDATE_DRAWER_TYPE';
@@ -28,12 +29,9 @@ export const UPDATE_MENU_REQUEST = '@boldr/admin/menu/UPDATE_MENU_REQUEST';
 export const UPDATE_MENU_SUCCESS = '@boldr/admin/menu/UPDATE_MENU_SUCCESS';
 export const UPDATE_MENU_FAILURE = '@boldr/admin/menu/UPDATE_MENU_FAILURE';
 
-export const ADD_MENU_DETAIL_REQUEST =
-  '@boldr/admin/menu/ADD_MENU_DETAIL_REQUEST';
-export const ADD_MENU_DETAIL_SUCCESS =
-  '@boldr/admin/menu/ADD_MENU_DETAIL_SUCCESS';
-export const ADD_MENU_DETAIL_FAILURE =
-  '@boldr/admin/menu/ADD_MENU_DETAIL_FAILURE';
+export const ADD_MENU_DETAIL_REQUEST = '@boldr/admin/menu/ADD_MENU_DETAIL_REQUEST';
+export const ADD_MENU_DETAIL_SUCCESS = '@boldr/admin/menu/ADD_MENU_DETAIL_SUCCESS';
+export const ADD_MENU_DETAIL_FAILURE = '@boldr/admin/menu/ADD_MENU_DETAIL_FAILURE';
 
 /**
  * Setting action types
@@ -46,12 +44,9 @@ export const FETCH_SETTINGS_FAILURE = '@boldr/settings/FETCH_SETTINGS_FAILURE';
 export const EDIT_SETTING = '@boldr/settings/EDIT_SETTING';
 export const EDIT_SETTING_SUCCESS = '@boldr/settings/EDIT_SETTING_SUCCESS';
 export const EDIT_SETTING_FAILURE = '@boldr/settings/EDIT_SETTING_FAILURE';
-export const UPDATE_SETTINGS_REQUEST =
-  '@boldr/settings/UPDATE_SETTINGS_REQUEST';
-export const UPDATE_SETTINGS_SUCCESS =
-  '@boldr/settings/UPDATE_SETTINGS_SUCCESS';
-export const UPDATE_SETTINGS_FAILURE =
-  '@boldr/settings/UPDATE_SETTINGS_FAILURE';
+export const UPDATE_SETTINGS_REQUEST = '@boldr/settings/UPDATE_SETTINGS_REQUEST';
+export const UPDATE_SETTINGS_SUCCESS = '@boldr/settings/UPDATE_SETTINGS_SUCCESS';
+export const UPDATE_SETTINGS_FAILURE = '@boldr/settings/UPDATE_SETTINGS_FAILURE';
 export const DELETE_SETTING = '@boldr/settings/DELETE_SETTING';
 export const FETCH_SETTING_SUCCESS = '@boldr/settings/FETCH_SETTING_SUCCESS';
 
@@ -62,12 +57,9 @@ export const INITIAL_PAGE_LOAD = '@boldr/INITIAL_PAGE_LOAD';
  * @type {String}
  */
 
-export const FETCH_TEMPLATES_REQUEST =
-  '@boldr/templates/FETCH_TEMPLATES_REQUEST';
-export const FETCH_TEMPLATES_SUCCESS =
-  '@boldr/templates/FETCH_TEMPLATES_SUCCESS';
-export const FETCH_TEMPLATES_FAILURE =
-  '@boldr/templates/FETCH_TEMPLATES_FAILURE';
+export const FETCH_TEMPLATES_REQUEST = '@boldr/templates/FETCH_TEMPLATES_REQUEST';
+export const FETCH_TEMPLATES_SUCCESS = '@boldr/templates/FETCH_TEMPLATES_SUCCESS';
+export const FETCH_TEMPLATES_FAILURE = '@boldr/templates/FETCH_TEMPLATES_FAILURE';
 
 export const FETCH_TEMPLATE_REQUEST = '@boldr/templates/FETCH_TEMPLATE_REQUEST';
 export const FETCH_TEMPLATE_SUCCESS = '@boldr/templates/FETCH_TEMPLATE_SUCCESS';

@@ -2,7 +2,6 @@ import articlesReducer, { getPublishedArticles, getFeaturedArticles } from './re
 import { togglePostLayoutView, createArticle, deletePost, updateArticle } from './actions';
 
 import { getArticleIds, getArticlesList, getArticles } from './selectors';
-import { article, arrayOfArticle } from './schema';
 
 export default articlesReducer;
 
@@ -15,8 +14,6 @@ export {
   getArticleIds,
   getArticlesList,
   getArticles,
-  article,
-  arrayOfArticle,
   getPublishedArticles,
   getFeaturedArticles,
 };

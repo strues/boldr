@@ -13,9 +13,8 @@ import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import createPalette from 'material-ui/styles/palette';
 import { cyan, pink } from 'material-ui/styles/colors';
 
-import createApolloClient from '../shared/core/createApolloClient';
-// import muiTheme from '../shared/templates/muiTheme';
-import configureStore from '~state/store';
+import { createApolloClient } from 'boldr-core';
+import configureStore from '../shared/state/store';
 import App from '../shared/App';
 import { checkAuth } from '../shared/scenes/Account/state/actions';
 import { getToken } from '../shared/core/authentication/token';
@@ -41,9 +40,7 @@ WebFontLoader.load({
   },
   custom: {
     families: ['FontAwesome'],
-    urls: [
-      'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css',
-    ],
+    urls: ['https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css'],
   },
 });
 
@@ -60,9 +57,9 @@ const supportsHistory = 'pushState' in window.history;
 // Apollo network interface
 const networkInterface = createBatchingNetworkInterface({
   opts: {
-    credentials: 'true',
+    credentials: 'include',
   },
-  batchInterval: 20,
+  batchInterval: 10,
   uri: 'http://localhost:8080/api/v1/graphql',
 });
 networkInterface.use([

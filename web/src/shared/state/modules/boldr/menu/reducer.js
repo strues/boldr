@@ -37,13 +37,6 @@ const main = (state = INITIAL_STATE, action) => {
         restricted: action.payload.restricted,
         details: action.payload.details,
       };
-    // case t.UPDATE_MENU_SUCCESS:
-    //   return {
-    //     ...state,
-    //     details: [
-    //       ...state.details.slice(0, action.payload)
-    //     ]
-    //   };
     default:
       return state;
   }

@@ -1,11 +1,8 @@
 /* @flow */
-import { normalize } from 'normalizr';
 import api, { API_PREFIX } from '../../../core/api';
 
 import * as notif from '../../../core/constants';
 import { sendNotification } from '../notifications/notifications';
-
-import { media as mediaSchema, arrayOfMedia } from './schema';
 import * as t from './actionTypes';
 
 export const toggleMedia = filter => ({
@@ -38,13 +35,11 @@ export function uploadMediaFile(payload) {
     return api
       .post(`${API_PREFIX}/media`, data)
       .then(res => {
-        const newMedia = res.data;
-        const normalizedNewMedia = normalize(newMedia, mediaSchema);
         dispatch({
           type: t.UPLOAD_MEDIA_SUCCESS,
-          payload: normalizedNewMedia,
+          payload: newMedia,
         });
-        dispatch(sendNotification(notif.MSG_UPLOAD_SUCCESS));
+        return dispatch(sendNotification(notif.MSG_UPLOAD_SUCCESS));
       })
       .catch(err => {
         dispatch({
@@ -65,12 +60,11 @@ export function uploadMediaUrl(payload) {
       .post(`${API_PREFIX}/media/remote`, data)
       .then(res => {
         const newMedia = res.data;
-        const normalizedNewMedia = normalize(newMedia, mediaSchema);
         dispatch({
           type: t.UPLOAD_MEDIA_SUCCESS,
-          payload: normalizedNewMedia,
+          payload: newMedia,
         });
-        dispatch(sendNotification(notif.MSG_UPLOAD_SUCCESS));
+        return dispatch(sendNotification(notif.MSG_UPLOAD_SUCCESS));
       })
       .catch(err => {
         dispatch({
@@ -94,7 +88,7 @@ export function deleteMedia(m) {
           type: t.DELETE_MEDIA_SUCCESS,
           id,
         });
-        dispatch(sendNotification(notif.MSG_FILE_REMOVED));
+        return dispatch(sendNotification(notif.MSG_FILE_REMOVED));
       })
       .catch(err => {
         dispatch({
@@ -118,9 +112,8 @@ export function editMedia(mediaData) {
       .put(`${API_PREFIX}/media/${mediaData.id}`, mediaData)
       .then(res => {
         const media = res.data;
-        const normalizedMedia = normalize(media, mediaSchema);
-        dispatch(editMediaSuccess(normalizedMedia));
-        dispatch(
+        dispatch(editMediaSuccess(media));
+        return dispatch(
           sendNotification({
             message: 'Updated attachment.',
             kind: 'info',
@@ -143,10 +136,10 @@ export function editMedia(mediaData) {
 const editMediaReq = () => {
   return { type: t.EDIT_MEDIA_REQUEST };
 };
-const editMediaSuccess = normalizedMedia => {
+const editMediaSuccess = media => {
   return {
     type: t.EDIT_MEDIA_SUCCESS,
-    payload: normalizedMedia,
+    payload: media,
   };
 };
 const errorEditMedia = err => {

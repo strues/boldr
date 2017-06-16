@@ -1,7 +1,5 @@
 import {
   attachmentReducer,
-  fetchAttachments,
-  fetchAttachmentsIfNeeded,
   uploadFiles,
   uploadArticleImage,
   deleteAttachment,
@@ -11,23 +9,9 @@ import {
   uploadAvatarImage,
 } from './attachments';
 
-import {
-  dashboardReducer,
-  showSidebar,
-  hideSidebar,
-  fetchActivityIfNeeded,
-  fetchActivity,
-  fetchStatsIfNeeded,
-  fetchStats,
-} from './dashboard';
+import { dashboardReducer, showSidebar, hideSidebar } from './dashboard';
 
-import {
-  membersReducer,
-  fetchMembers,
-  fetchMembersIfNeeded,
-  updateMember,
-  memberSelected,
-} from './members';
+import { membersReducer, updateMember, memberSelected } from './members';
 
 import adminReducer from './reducer';
 
@@ -36,8 +20,6 @@ export default adminReducer;
 export {
   adminReducer,
   attachmentReducer,
-  fetchAttachments,
-  fetchAttachmentsIfNeeded,
   uploadFiles,
   uploadArticleImage,
   deleteAttachment,
@@ -48,13 +30,7 @@ export {
   dashboardReducer,
   showSidebar,
   hideSidebar,
-  fetchActivityIfNeeded,
-  fetchActivity,
-  fetchStatsIfNeeded,
-  fetchStats,
   membersReducer,
-  fetchMembers,
-  fetchMembersIfNeeded,
   updateMember,
   memberSelected,
 };

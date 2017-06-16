@@ -7,8 +7,6 @@ import {
   getArticleIds,
   getArticlesList,
   getArticles,
-  article,
-  arrayOfArticle,
   getPublishedArticles,
   getFeaturedArticles,
 } from './articles';
@@ -22,8 +20,6 @@ import {
   getTagIds,
   getTagsList,
   getTags,
-  arrayOfTag,
-  tag,
 } from './tags';
 
 import blogReducer from './reducer';
@@ -40,8 +36,6 @@ export {
   getArticleIds,
   getArticlesList,
   getArticles,
-  article,
-  arrayOfArticle,
   getPublishedArticles,
   getFeaturedArticles,
   // tags
@@ -53,8 +47,6 @@ export {
   getTagIds,
   getTagsList,
   getTags,
-  arrayOfTag,
-  tag,
 };
 
 export default blogReducer;

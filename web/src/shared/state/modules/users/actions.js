@@ -30,7 +30,7 @@ export function forgotPassword(email) {
           type: t.FORGOT_PASSWORD_SUCCESS,
         });
         dispatch(push('/'));
-        dispatch(sendNotification(notif.MSG_FORGOT_PW_ERROR));
+        return dispatch(sendNotification(notif.MSG_FORGOT_PW_ERROR));
       })
       .catch(err =>
         dispatch({
@@ -68,7 +68,7 @@ export function resetPassword(password, token) {
           type: t.RESET_PASSWORD_SUCCESS,
         });
         dispatch(push('/account/login'));
-        dispatch(sendNotification(notif.MSG_RESET_PW_SUCCESS));
+        return dispatch(sendNotification(notif.MSG_RESET_PW_SUCCESS));
       })
       .catch(err =>
         dispatch({
@@ -97,7 +97,7 @@ export function verifyAccount(token) {
         dispatch({
           type: t.VERIFY_ACCOUNT_SUCCESS,
         });
-        dispatch(sendNotification(notif.MSG_VERIFY_USER_SUCCESS));
+        return dispatch(sendNotification(notif.MSG_VERIFY_USER_SUCCESS));
       })
       .catch(err =>
         dispatch({
@@ -109,14 +109,13 @@ export function verifyAccount(token) {
 }
 
 export function editProfile(userData) {
-  console.log(userData);
   return dispatch => {
     dispatch(beginUpdateProfile());
     return api
       .put(`${API_PREFIX}/users/${userData.id}`, userData)
       .then(res => {
         dispatch(doneUpdateProfile(res));
-        dispatch(sendNotification(notif.MSG_EDIT_PROFILE_SUCCESS));
+        return dispatch(sendNotification(notif.MSG_EDIT_PROFILE_SUCCESS));
       })
       .catch(err => {
         dispatch(failUpdateProfile(err.message));

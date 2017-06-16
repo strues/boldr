@@ -14,6 +14,7 @@ describe('UI Reducer', () => {
       expanded: true,
       visible: true,
       isMobile: false,
+      showHeader: true,
     });
   });
   it('should open the modal', () => {
@@ -24,6 +25,7 @@ describe('UI Reducer', () => {
       drawer: false,
       expanded: false,
       isMobile: false,
+      showHeader: true,
     };
     const stateAfter = {
       loaded: false,
@@ -32,6 +34,7 @@ describe('UI Reducer', () => {
       drawer: false,
       expanded: false,
       isMobile: false,
+      showHeader: true,
     };
     expect(
       uiReducer(initialState, {
@@ -47,6 +50,7 @@ describe('UI Reducer', () => {
       drawer: false,
       expanded: false,
       isMobile: false,
+      showHeader: true,
     };
     const stateAfter = {
       loaded: false,
@@ -55,6 +59,7 @@ describe('UI Reducer', () => {
       drawer: false,
       expanded: false,
       isMobile: false,
+      showHeader: true,
     };
     expect(
       uiReducer(initialState, {
@@ -74,6 +79,7 @@ describe('UI Reducer', () => {
       drawer: false,
       expanded: false,
       isMobile: false,
+      showHeader: true,
     };
 
     expect(uiReducer(state, action)).toEqual({
@@ -83,6 +89,7 @@ describe('UI Reducer', () => {
       drawer: false,
       expanded: false,
       isMobile: false,
+      showHeader: true,
     });
   });
 });
@@ -97,6 +104,7 @@ test('changeLayout', () => {
       drawer: false,
       expanded: false,
       isMobile: false,
+      showHeader: true,
     },
   });
   store.dispatch(changeLayout('list'));
@@ -117,6 +125,7 @@ test('openModal', () => {
       drawer: false,
       expanded: false,
       isMobile: false,
+      showHeader: true,
     },
   });
   store.dispatch(showModal());
@@ -136,6 +145,7 @@ test('closeModal', () => {
       drawer: false,
       expanded: false,
       isMobile: false,
+      showHeader: true,
     },
   });
   store.dispatch(hideModal());
@@ -155,6 +165,7 @@ test('Open the drawer', () => {
       modal: false,
       drawer: false,
       expanded: false,
+      showHeader: true,
     },
   });
   store.dispatch(toggleDrawer());
@@ -173,6 +184,7 @@ test('Close the drawer', () => {
       modal: false,
       drawer: false,
       expanded: false,
+      showHeader: true,
     },
   });
   store.dispatch(toggleDrawer());
