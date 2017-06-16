@@ -3,22 +3,20 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-import { Footer, Loader, Headline } from 'boldr-ui';
+import Footer from '~components/Footer';
 import { showHeader } from '~state/modules/boldr/ui/actions';
 import Hero from '../../components/Hero/Hero';
 
 export type Props = {
-  header: ReactElement,
   helmetMeta?: ReactElement,
   hero?: ReactElement,
   children: ReactChildren,
   footer?: ReactElement,
-  dispatch: Function,
-  actions: Object,
   me: ?User,
   isMobile: boolean,
   auth: Object,
   data: Object,
+  showHeader: () => void,
   bgColor: ?string,
   bgImg: ?string,
   heroContent: any,

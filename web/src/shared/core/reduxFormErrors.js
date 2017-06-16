@@ -10,9 +10,7 @@ const flattenErrorObject = (data, accum, key) => {
       flattenErrorObject(data[nestedKey], accum, nestedKey);
     });
   } else {
-    data.forEach(keyMessage =>
-      accum.push(`Error on field ${key}: ${keyMessage}`),
-    );
+    data.forEach(keyMessage => accum.push(`Error on field ${key}: ${keyMessage}`));
   }
 };
 
@@ -31,7 +29,9 @@ export const formatRemoteErrors = errors =>
   }, []);
 
 export const formatGeneralAPIErrors = response => {
-  if (!responseHasErrors(response)) return null;
+  if (!responseHasErrors(response)) {
+    return null;
+  }
   return formatRemoteErrors(response.graphQLErrors);
 };
 
@@ -58,7 +58,9 @@ export const formatGeneralReduxFormErrors = response => {
 };
 
 export const formatReduxFormErrors = response => {
-  if (!responseHasErrors(response)) return null;
+  if (!responseHasErrors(response)) {
+    return null;
+  }
   const errors = response.graphQLErrors.reduce(
     (accum, { message, data }) => {
       if (!data) {

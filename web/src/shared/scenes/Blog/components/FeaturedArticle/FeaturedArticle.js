@@ -126,5 +126,8 @@ export const FeaturedArticle = (props: Props) => {
     </div>
   );
 };
-
+const defaultProps = {
+  tags: [],
+};
+FeaturedArticle.defaultProps = defaultProps;
 export default connect()(FeaturedArticle);

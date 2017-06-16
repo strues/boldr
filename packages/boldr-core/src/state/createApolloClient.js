@@ -4,7 +4,7 @@
 
 import ApolloClient from 'apollo-client';
 
-const hasWindow = typeof window !== 'undefined';
+export const hasWindow = typeof window !== 'undefined';
 
 const createApolloClient = networkInterface => {
   const params = {

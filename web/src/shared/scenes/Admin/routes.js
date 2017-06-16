@@ -2,7 +2,7 @@
 /* eslint-disable */
 import React from 'react';
 import { Loader, Icon } from 'boldr-ui';
-import Loadable from '../../components/Loadable/Loadable';
+import Loadable from 'react-loadable';
 // Admin
 import MediaManagerContainer
   from './Media/MediaManager/MediaManagerContainer';
@@ -102,13 +102,13 @@ export default [
   //       component: NavigationContainer,
   //       routes: [],
   //   },
-  //   {
-  //       exact: true,
-  //       path: '/admin/settings',
-  //       breadcrumb: <Icon kind="settings" />,
-  //       component: Settings,
-  //       routes: [],
-  //   },
+    // {
+    //     exact: true,
+    //     path: '/admin/settings',
+    //     breadcrumb: <Icon kind="settings" />,
+    //     component: Settings,
+    //     routes: [],
+    // },
     {
         exact: true,
         path: '/admin/members',

@@ -29,6 +29,7 @@ type Props = {
   match: Object,
   ui: Object,
   route: Object,
+  hideHeader: () => void,
   copyright: string,
   dispatch: () => void,
   router: Object,
@@ -45,12 +46,11 @@ export class AdminDashboard extends Component {
     super(props);
     (this: any).flattenedRoutes = flattenRoutes(routes);
   }
-  props: Props;
 
   componentDidMount() {
-    this.props.hideHeader();
+    this.props.dispatch(hideHeader());
   }
-
+  props: Props;
   handleHideSidebar = () => {
     this.props.dispatch(showHideSidebar());
   };
@@ -112,4 +112,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, { hideHeader })(AdminDashboard);
+export default connect(mapStateToProps)(AdminDashboard);

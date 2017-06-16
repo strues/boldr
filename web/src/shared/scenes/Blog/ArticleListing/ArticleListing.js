@@ -1,12 +1,14 @@
 /* @flow */
-import React from 'react';
+import React, { Component } from 'react';
 import styled from 'styled-components';
-import { gql, graphql } from 'react-apollo';
+import { compose, gql, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 // $FlowIssue
 import { changeLayout, layoutSelector } from '~state/modules/boldr/ui';
 import Loader from '~components/Loader';
+import withApolloFetchingContainer from '~components/ApolloFetching';
+import View from '~components/View';
 import FontIcon from '~components/FontIcon';
 import { Grid, Row, Col } from '~components/Layout';
 import { LAYOUTS } from '../../../core/constants';
@@ -15,6 +17,7 @@ import { FeaturedArticle, ArticleCard } from '../components';
 type Props = {
   loading: boolean,
   dispatch: Function,
+  renderWhenReady: () => any,
   layout: Object,
   handleChangeLayout: () => void,
   changeLayout: () => void,
@@ -37,7 +40,12 @@ const style = {
   bottom: '70px',
 };
 
-class ArticleListing extends React.Component {
+class ArticleListing extends Component {
+  static defaultProps = {
+    data: {
+      getArticles: [],
+    },
+  };
   props: Props;
   handleChangeLayout = () => {
     this.props.layout === 'grid'
@@ -48,7 +56,7 @@ class ArticleListing extends React.Component {
     const { getArticles, loading } = this.props.data;
     const allArticles =
       getArticles.filter(p => p.published) && getArticles.filter(p => !p.featured);
-    return getArticles.map(article =>
+    return allArticles.map(article =>
       <Col key={article.id} xs={12} md={4}>
         <CardSpacer>
           <ArticleCard article={article} tags={article.tags} />
@@ -56,6 +64,7 @@ class ArticleListing extends React.Component {
       </Col>,
     );
   };
+
   renderFeature = () => {
     const { getArticles, loading } = this.props.data;
     const featuredArticles = loading ? <Loader /> : getArticles.filter(p => p.featured);
@@ -65,25 +74,23 @@ class ArticleListing extends React.Component {
       </Col>,
     );
   };
+
+  renderBody = () =>
+    <View marginChildren>
+      <Row>{this.renderFeature()}</Row>
+      <Row>
+        {this.renderArticles()}
+      </Row>
+    </View>;
+
   render() {
+    const { renderWhenReady } = this.props;
     const { getArticles, loading } = this.props.data;
-    if (loading && !getArticles) {
-      return <Loader />;
-    } else {
-      return (
-        <Grid>
-          <Row>
-            {getArticles.map(article =>
-              <Col key={article.id} xs={12} md={4}>
-                <CardSpacer>
-                  <ArticleCard article={article} tags={article.tags} />
-                </CardSpacer>
-              </Col>,
-            )}
-          </Row>
-        </Grid>
-      );
-    }
+    return (
+      <Grid>
+        {renderWhenReady(this.renderBody)}
+      </Grid>
+    );
   }
 }
 
@@ -93,7 +100,7 @@ const mapStateToProps = state => {
   };
 };
 
-const ARTICLES_QUERY = gql`
+export const ARTICLES_QUERY = gql`
   query getArticles($offset: Int!, $limit: Int!) {
     getArticles(offset: $offset, limit: $limit) {
       id,
@@ -112,12 +119,19 @@ const ARTICLES_QUERY = gql`
   }
 `;
 
-const ArticleListingWithData = graphql(ARTICLES_QUERY, {
-  options: props => ({
-    variables: {
-      offset: 0,
-      limit: 20,
-    },
+const ArticleListingWithData = compose(
+  graphql(ARTICLES_QUERY, {
+    options: props => ({
+      variables: {
+        offset: 0,
+        limit: 20,
+      },
+    }),
   }),
-})(ArticleListing);
+  withApolloFetchingContainer(() =>
+    <View marginChildren>
+      <Loader />
+    </View>,
+  ),
+)(ArticleListing);
 export default connect(mapStateToProps)(ArticleListingWithData);

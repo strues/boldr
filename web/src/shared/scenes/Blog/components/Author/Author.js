@@ -50,5 +50,10 @@ const Author = (props: Props) => {
     </div>
   );
 };
-
+const defaultProps = {
+  author: {
+    username: 'Placeholder',
+  },
+};
+Author.defaultProps = defaultProps;
 export default Author;

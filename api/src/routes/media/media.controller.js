@@ -7,15 +7,13 @@ import request from 'request';
 import fs from 'fs-extra';
 import Jimp from 'jimp';
 import shortId from 'shortid';
-import appRoot from 'boldr-utils/es/node/appRoot';
+import appRoot from 'boldr-utils/lib/node/appRoot';
 import formidable from 'formidable';
 import { responseHandler, BadRequest } from '../../core/index';
 import Media from '../../models/Media';
 import { logger } from '../../services';
 
-const imgRegex = new RegExp(
-  '^.*.((j|J)(p|P)(e|E)?(g|G)|(g|G)(i|I)(f|F)|(p|P)(n|N)(g|G))$',
-);
+const imgRegex = new RegExp('^.*.((j|J)(p|P)(e|E)?(g|G)|(g|G)(i|I)(f|F)|(p|P)(n|N)(g|G))$');
 const vidRegex = new RegExp('^.*.((m|M)(p|P)(4)|(m|M)(k|K)(v|V))$');
 
 const debug = _debug('boldr:media');
@@ -68,7 +66,7 @@ export function uploadMedia(req, res, next) {
     media: {},
     userId: req.user.id,
   };
-  const UPLOAD_DIR = path.resolve(appRoot.get(), './public/uploads/');
+  const UPLOAD_DIR = path.resolve(appRoot.get(), './uploads/');
   const form = new formidable.IncomingForm();
   form.hash = 'sha1';
   form.keepExtensions = true;
@@ -118,11 +116,11 @@ export function uploadMedia(req, res, next) {
         if (err) {
           return debug('error', err);
         }
-        image
-          .resize(320, 240)
-          .write(path.join(UPLOAD_DIR, file.thumbnailSaveName), (err, info) =>
-            console.log(err, info),
-          );
+        image.resize(320, 240).write(path.join(UPLOAD_DIR, file.thumbnailSaveName), (err, info) => {
+          if (err) {
+            logger.error(err);
+          }
+        });
         // do stuff with the image (if no exception)
       });
       if (!thumbnailSet) {
@@ -159,7 +157,7 @@ export function uploadMedia(req, res, next) {
         mimetype: data.media.type,
         url: `/uploads/${data.media.fileName}`,
         mediaType: isImageType ? 'image' : 'video',
-        path: `${appRoot.get()}/public/uploads/${data.media.fileName}`,
+        path: `${appRoot.get()}/uploads/${data.media.fileName}`,
       };
 
       const newImage = await Media.query().insert(payload);
@@ -171,9 +169,7 @@ export function uploadFromUrl(req, res, next) {
   const download = (uri, filename, callback) => {
     request.head(uri, (err, res, body) => {
       request(uri)
-        .pipe(
-          fs.createWriteStream(`${appRoot.get()}/public/uploads/${filename}`),
-        )
+        .pipe(fs.createWriteStream(`${appRoot.get()}/uploads/${filename}`))
         .on('close', callback)
         .on('error', err);
     });
@@ -196,7 +192,7 @@ export function uploadFromUrl(req, res, next) {
         safeName: newFilename,
         thumbName: newFilename,
         url: `/uploads/${newFilename}`,
-        path: `${appRoot.get()}/public/uploads/${newFilename}`,
+        path: `${appRoot.get()}/uploads/${newFilename}`,
         userId: req.user.id,
       });
 
@@ -214,10 +210,7 @@ export function uploadFromUrl(req, res, next) {
  */
 export async function updateMedia(req, res, next) {
   try {
-    const updatedMedia = await Media.query().patchAndFetchById(
-      req.params.id,
-      req.body,
-    );
+    const updatedMedia = await Media.query().patchAndFetchById(req.params.id, req.body);
     //
     // await Activity.query().insert({
     //   userId: req.user.id,
@@ -255,7 +248,7 @@ export async function deleteMedia(req, res, next) {
     // remove the attachment from the database
     await Media.query().deleteById(req.params.id);
     // remove from the file system.
-    fs.removeSync(`./public/uploads/${media.safeName}`);
+    fs.removeSync(`./uploads/${media.safeName}`);
     // send a 204
     return res.status(204).json('Deleted');
   } catch (error) {

@@ -3,11 +3,12 @@ import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import classnames from 'classnames';
-import { StyleClasses, Loader } from 'boldr-ui';
 import { gql, graphql } from 'react-apollo';
+import Loader from '~components/Loader';
 import { Grid, Row, Col } from '~components/Layout';
 import { ArticleSidebar, ArticleContent, ArticleTitle } from '../components';
 import BaseTemplate from '../../../templates/BaseTemplate';
+import { StyleClasses } from '../../../theme/styleClasses';
 
 const BASE_ELEMENT = StyleClasses.SINGLE_POST;
 
@@ -77,9 +78,7 @@ class Article extends PureComponent {
     }
   }
 }
-
-export default graphql(
-  gql`
+export const GET_ARTICLE_QUERY = gql`
   query getArticleBySlug($slug: String!) {
       getArticleBySlug(slug: $slug) {
         id,
@@ -96,12 +95,11 @@ export default graphql(
         }
       }
   }
-`,
-  {
-    options: props => ({
-      variables: {
-        slug: props.match.params.slug,
-      },
-    }),
-  },
-)(Article);
+`;
+export default graphql(GET_ARTICLE_QUERY, {
+  options: props => ({
+    variables: {
+      slug: props.match.params.slug,
+    },
+  }),
+})(Article);

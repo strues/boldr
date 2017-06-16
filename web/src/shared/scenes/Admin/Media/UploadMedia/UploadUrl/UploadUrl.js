@@ -11,13 +11,13 @@ const MediaTitleArea = styled.div`
 `;
 
 type Props = {
-  uploadMediaUrl: () => void,
+  dispatch: () => void,
 };
 class UploadUrl extends Component {
   handleSubmit = values => {
     const payload = values;
 
-    this.props.uploadMediaUrl(payload);
+    this.props.dispatch(uploadMediaUrl(payload));
   };
   props: Props;
   render() {
@@ -27,11 +27,7 @@ class UploadUrl extends Component {
           <Block>
             <MediaTitleArea>
               <Headline type="h2">
-                <Icon
-                  kind="folder-upload"
-                  color="rgba(0, 188, 212, 1.00)"
-                  size="36"
-                />
+                <Icon kind="folder-upload" color="rgba(0, 188, 212, 1.00)" size="36" />
                 {' '}
                 Upload from the Internet
               </Headline>
@@ -44,4 +40,4 @@ class UploadUrl extends Component {
   }
 }
 
-export default connect(null, { uploadMediaUrl })(UploadUrl);
+export default connect()(UploadUrl);

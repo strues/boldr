@@ -8,6 +8,7 @@ import { selectMe } from './state/modules/users/selectors';
 import { injectGlobal, ThemeProvider } from 'styled-components';
 import { StyleClasses } from 'boldr-ui';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import AnimatedRouter from './components/AnimatedRouter';
 import Notifications from './components/Notification';
 import { getToken } from './core/authentication/token';
 import { BASE_CONF } from './components/Layout';
@@ -84,10 +85,6 @@ class App extends Component {
       jssStyles.parentNode.removeChild(jssStyles);
     }
   }
-  componentWillReceiveProps(nextProps) {
-    const { location: prevLocation } = this.props;
-    const { location: nextLocation } = nextProps;
-  }
   props: Props;
   render() {
     const { className } = this.props;
@@ -115,19 +112,20 @@ class App extends Component {
             <link rel="manifest" href="/manifest.json" />
           </Helmet>
           <SiteHeaderContainer settings={this.props.data.getSettings} />
-          <Switch>
-            <Route path="/login" component={LoginContainer} />
-            <Route path="/signup" component={SignupContainer} />
-            <Route path="/account/forgot-password" component={ForgotPassword} />
-            <Route path="/account/reset-password/:token" exact component={ResetPassword} />
-            <Route path="/account/verify/:token" exact component={Verify} />
-            <Route path="/account/preferences" component={PreferencesContainer} />
-            <Route path="/profiles/:username" component={ProfileContainer} />
-            <Route path="/blog" component={BlogContainer} />
+          <AnimatedRouter.Switch>
             <ProtectedRoute path="/admin" component={AdminDashboard} />
-            <Route path="/" exact component={Home} />
-            <Route component={Error404} />
-          </Switch>
+            <AnimatedRouter.Route path="/login" component={LoginContainer} />
+            <AnimatedRouter.Route path="/signup" component={SignupContainer} />
+            <AnimatedRouter.Route path="/account/forgot-password" component={ForgotPassword} />
+            <AnimatedRouter.Route path="/account/reset-password/:token" exact component={ResetPassword} />
+            <AnimatedRouter.Route path="/account/verify/:token" exact component={Verify} />
+            <AnimatedRouter.Route path="/account/preferences" component={PreferencesContainer} />
+            <AnimatedRouter.Route path="/profiles/:username" component={ProfileContainer} />
+            <AnimatedRouter.Route path="/blog" component={BlogContainer} />
+            <AnimatedRouter.Route path="/about" exact component={About} />
+            <AnimatedRouter.Route path="/" exact component={Home} />
+            <AnimatedRouter.Route component={Error404} />
+          </AnimatedRouter.Switch>
           <Notifications />
         </div>
       </ThemeProvider>

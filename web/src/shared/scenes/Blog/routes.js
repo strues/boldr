@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
+import Loadable from 'react-loadable';
 import { Loader, Icon } from 'boldr-ui';
-import Loadable from '../../components/Loadable/Loadable';
 import ArticleListing from './ArticleListing';
 import Article from './Article/Article';
 import TagListContainer from './TagList/TagListContainer';

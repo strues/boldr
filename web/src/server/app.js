@@ -14,9 +14,7 @@ import ssrMiddleware from './ssr';
 
 const debug = _debug('boldr:server:app');
 
-if (process.env.NODE_ENV === 'development') {
-  enableEnhancedStackTraces(true);
-}
+enableEnhancedStackTraces();
 
 const app: express$Application = express();
 
@@ -24,7 +22,8 @@ const server = http.createServer(app);
 
 const port = parseInt(process.env.BOLDR_SERVER_PORT, 10);
 
-const targetUrl = 'http://localhost:8080';
+const targetUrl = process.env.PROXY_TARGET_URL;
+
 const proxy = httpProxy.createProxyServer({
   target: targetUrl,
   ws: true,
@@ -71,14 +70,13 @@ app.get('*', ssrMiddleware);
 // Catch and format errors
 errorHandler(app);
 
-export default app;
-
 server.listen(port);
 
 server.on('listening', () => {
   const address = server.address();
   logger.info('Boldr running on port %s', address.port);
 });
+
 server.on('error', err => {
   logger.error(err);
   throw err;
@@ -95,3 +93,5 @@ process.on('uncaughtException', error => {
   debug(error.stack);
   process.exit(1);
 });
+
+export default app;

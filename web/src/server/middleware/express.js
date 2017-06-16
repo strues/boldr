@@ -2,6 +2,7 @@ import compression from 'compression';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import uuid from 'uuid';
+import morgan from 'morgan';
 
 function nonceMiddleware(req, res, next) {
   res.locals.nonce = uuid.v4(); // eslint-disable-line no-param-reassign
@@ -20,9 +21,11 @@ export default app => {
       credentials: true,
     }),
   );
-
+  if (process.env.NODE_ENV === 'development') {
+    app.use(morgan('dev'));
+  }
   app.use((req, res, next) => {
-    res.set('Request-Id', uuid());
+    res.set('Request-Id', uuid.v4());
     next();
   });
   app.set('json spaces', 2);

@@ -2,6 +2,7 @@
 const path = require('path');
 const dotenv = require('dotenv');
 dotenv.load();
+const base = (...args) => Reflect.apply(resolve, null, [path.resolve(__dirname), ...args])
 
 module.exports = {
   env: {
@@ -13,9 +14,10 @@ module.exports = {
   },
   // plugins: [require('boldr-plugin-webpack')],
   bundle: {
+    base,
     graphlUrl: 'http://localhost:3000/api/v1/graphql',
     verbose: true,
-    debug: false,
+    debug: true,
     cssModules: true,
     wpProfile: false,
     webPath: '/assets/',
@@ -44,6 +46,7 @@ module.exports = {
       'graphql-tag',
       'griddle-react',
       'lodash',
+      'hoist-non-react-statics',
       'material-ui',
       'material-ui-icons',
       'prop-types',
@@ -52,6 +55,8 @@ module.exports = {
       'react-dom',
       'react-dropzone',
       'react-helmet',
+      'react-motion',
+      'data-driven-motion',
       'react-redux',
       'react-router-dom',
       'react-router-redux',

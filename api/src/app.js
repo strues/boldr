@@ -2,6 +2,7 @@
 /* eslint-disable id-match */
 import path from 'path';
 import express from 'express';
+import appRoot from 'boldr-utils/lib/node/appRoot';
 import _debug from 'debug';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import PrettyError from 'pretty-error';
@@ -58,7 +59,7 @@ const graphqlHandler = graphqlExpress(req => {
   };
 });
 app.use('/api/v1/graphql', graphqlHandler);
-
+app.use(express.static(path.resolve(appRoot.get(), 'uploads')));
 errorHandler(app);
 
 export default app;

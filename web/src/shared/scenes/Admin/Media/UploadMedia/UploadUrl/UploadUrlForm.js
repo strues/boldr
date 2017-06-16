@@ -29,7 +29,7 @@ const UploadUrlForm = (props: Props) => {
         component={InputField}
       />
 
-      <Button type="submit" kind="primary" style={style}>Upload</Button>
+      <Button htmlType="submit" kind="primary" style={style}>Upload</Button>
       <Button onClick={reset} style={style} kind="secondary" outline>
         Reset
       </Button>

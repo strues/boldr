@@ -48,6 +48,7 @@ function isTokenExpired(exp) {
 export const setToken = token => {
   return Storage.set('jwt', token);
 };
+
 export const getToken = (asJSON = false) => {
   const token = Storage.get('jwt');
   if (asJSON) {

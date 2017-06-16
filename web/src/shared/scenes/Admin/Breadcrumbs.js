@@ -7,10 +7,7 @@ import View from '../../components/View';
 import rootRoutes from './routes';
 
 const generatePathname = (path, params) =>
-  Object.keys(params).reduce(
-    (pathname, key) => pathname.replace(`:${key}`, params[key]),
-    path,
-  );
+  Object.keys(params).reduce((pathname, key) => pathname.replace(`:${key}`, params[key]), path);
 
 const generateBreadcrumbs = (accum, topRoutes, location) => {
   topRoutes.some(({ path, breadcrumb, routes }) => {
@@ -36,13 +33,13 @@ const Breadcrumbs = ({ location }: { location: Location }) => {
       }}
     >
       <Breadcrumb>
-        {generatedBreadcrumbs.map(({ breadcrumb, pathname }, index) => (
+        {generatedBreadcrumbs.map(({ breadcrumb, pathname }, index) =>
           <LinkContainer to={pathname} key={pathname}>
             <Breadcrumb.Item active={generatedBreadcrumbs.length - 1 === index}>
               {breadcrumb}
             </Breadcrumb.Item>
-          </LinkContainer>
-        ))}
+          </LinkContainer>,
+        )}
       </Breadcrumb>
     </View>
   );

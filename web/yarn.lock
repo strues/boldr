@@ -975,6 +975,10 @@ base64-js@^1.0.2:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/base64-js/-/base64-js-1.2.0.tgz#a39992d723584811982be5e290bb6a53d86700f1"
 
+basic-auth@~1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/basic-auth/-/basic-auth-1.1.0.tgz#45221ee429f7ee1e5035be3f51533f1cdfd29884"
+
 bcrypt-pbkdf@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/bcrypt-pbkdf/-/bcrypt-pbkdf-1.0.1.tgz#63bc5dcb61331b92bc05fd528953c33462a06f8d"
@@ -1506,6 +1510,13 @@ dashdash@^1.12.0:
   dependencies:
     assert-plus "^1.0.0"
 
+data-driven-motion@^0.0.11:
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/data-driven-motion/-/data-driven-motion-0.0.11.tgz#4ee34905d9e5cdcdac2e03585cc3ddd9312e05bf"
+  dependencies:
+    prop-types "^15.5.10"
+    react-motion "^0.4.7"
+
 date-fns@^1.27.2, date-fns@^1.28.5:
   version "1.28.5"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.28.5.tgz#257cfc45d322df45ef5658665967ee841cd73faf"
@@ -1522,7 +1533,7 @@ debug@2.6.7:
   dependencies:
     ms "2.0.0"
 
-debug@^2.1.1, debug@^2.2.0, debug@^2.4.5, debug@^2.6.3, debug@^2.6.8:
+debug@2.6.8, debug@^2.1.1, debug@^2.2.0, debug@^2.4.5, debug@^2.6.3, debug@^2.6.8:
   version "2.6.8"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.8.tgz#e731531ca2ede27d188222427da17821d68ff4fc"
   dependencies:
@@ -3895,6 +3906,16 @@ minimist@^1.1.1, minimist@^1.2.0:
   dependencies:
     minimist "0.0.8"
 
+morgan@^1.8.2:
+  version "1.8.2"
+  resolved "https://registry.yarnpkg.com/morgan/-/morgan-1.8.2.tgz#784ac7734e4a453a9c6e6e8680a9329275c8b687"
+  dependencies:
+    basic-auth "~1.1.0"
+    debug "2.6.8"
+    depd "~1.1.0"
+    on-finished "~2.3.0"
+    on-headers "~1.0.1"
+
 moxios@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/moxios/-/moxios-0.4.0.tgz#fc0da2c65477d725ca6b9679d58370ed0c52f53b"
@@ -4342,6 +4363,10 @@ performance-now@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-0.2.0.tgz#33ef30c5c77d4ea21c5a53869d91b56d8f2555e5"
 
+performance-now@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/performance-now/-/performance-now-2.1.0.tgz#6309f4e0e5fa913ec1c69307ae364b4b377c9e7b"
+
 pify@^2.0.0, pify@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
@@ -4492,6 +4517,12 @@ qs@6.4.0, qs@^6.1.0, qs@~6.4.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
 
+raf@^3.1.0:
+  version "3.3.2"
+  resolved "https://registry.yarnpkg.com/raf/-/raf-3.3.2.tgz#0c13be0b5b49b46f76d6669248d527cf2b02fe27"
+  dependencies:
+    performance-now "^2.1.0"
+
 rafl@~1.2.1:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/rafl/-/rafl-1.2.2.tgz#fe930f758211020d47e38815f5196a8be4150740"
@@ -4614,6 +4645,23 @@ react-modal@^1.7.7:
     exenv "1.2.0"
     lodash.assign "^4.2.0"
     prop-types "^15.5.7"
+
+react-motion@^0.4.7:
+  version "0.4.8"
+  resolved "https://registry.yarnpkg.com/react-motion/-/react-motion-0.4.8.tgz#23bb2dd27c2d8e00d229e45572d105efcf40a35e"
+  dependencies:
+    create-react-class "^15.5.2"
+    performance-now "^0.2.0"
+    prop-types "^15.5.8"
+    raf "^3.1.0"
+
+react-motion@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/react-motion/-/react-motion-0.5.0.tgz#1708fc2aee552900d21c1e6bed28346863e017b6"
+  dependencies:
+    performance-now "^0.2.0"
+    prop-types "^15.5.8"
+    raf "^3.1.0"
 
 react-proxy@^3.0.0-alpha.0:
   version "3.0.0-alpha.1"
