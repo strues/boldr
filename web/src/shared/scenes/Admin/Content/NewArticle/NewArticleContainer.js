@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { convertToHTML } from 'draft-convert';
-import { uploadArticleImage } from '../../state';
+import { uploadArticleImage } from '../../state/attachments/actions';
 import { createArticle } from '../../../Blog/state';
 import NewArticle from './NewArticle';
 
 type Props = {
   dispatch: Function,
   postImage: string,
+  onSubmit: Function,
   uploadArticleImage: Function,
   createArticle: Function,
 };
@@ -25,7 +26,6 @@ class NewArticleContainer extends Component {
     this.props.uploadArticleImage(payload);
   }
   handleOnSubmit(values: Article) {
-
     this.props.onSubmit(values);
   }
   props: Props;
@@ -85,10 +85,8 @@ const withMutation = graphql(CREATE_ARTICLE_MUTATION, {
 const mapDispatchToProps = (dispatch, ownProps) => ({
   uploadArticleImage: () => dispatch(uploadArticleImage()),
   onSubmit: values => {
-    ownProps.createArticle(values).then(res => {}).catch(error => {});
+    ownProps.createArticle(values);
   },
 });
 
-export default withMutation(
-  connect(mapStateToProps, mapDispatchToProps)(NewArticleContainer),
-);
+export default withMutation(connect(mapStateToProps, mapDispatchToProps)(NewArticleContainer));

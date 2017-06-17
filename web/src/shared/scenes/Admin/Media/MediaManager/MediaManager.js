@@ -45,38 +45,33 @@ class MediaManager extends Component {
     }
     return (
       <div>
-        <Grid>
-          <Row>
-            <Col xs={12}>
-              <Row center="xs">
-                <Col xs={6}>
-                  <MediaContent>
+        <Row>
+          <Col xs={12}>
+            <Row center="xs">
+              <Col xs={6}>
+                <MediaContent>
 
-                      <Photo src={getMediaById.url} />
+                  <Photo src={getMediaById.url} />
 
-                  </MediaContent>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <Row center="xs">
-                <Col xs={8}>
-                  <MediaFormCard>
-                    <Block>
-                      <Headline type="h2">Edit media attributes</Headline>
-                      <MediaForm
-                        initialValues={getMediaById}
-                        onSubmit={this.handleSubmit}
-                      />
-                    </Block>
-                  </MediaFormCard>
-                </Col>
-              </Row>
-            </Col>
-          </Row>
-        </Grid>
+                </MediaContent>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={12}>
+            <Row center="xs">
+              <Col xs={8}>
+                <MediaFormCard>
+                  <Block>
+                    <Headline type="h2">Edit media attributes</Headline>
+                    <MediaForm initialValues={getMediaById} onSubmit={this.handleSubmit} />
+                  </Block>
+                </MediaFormCard>
+              </Col>
+            </Row>
+          </Col>
+        </Row>
       </div>
     );
   }

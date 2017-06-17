@@ -7,7 +7,10 @@ import Link from 'react-router-dom/Link';
 import styled from 'styled-components';
 
 import IconButton from 'material-ui/IconButton';
-import { Col, Row, Headline, Photo, FontIcon } from 'boldr-ui';
+import { Col, Row } from '~components/Layout';
+import Headline from '~components/Headline';
+import Photo from '~components/Photo';
+import FontIcon from '~components/FontIcon';
 
 type Props = {
   media: Array<Object>,
@@ -38,62 +41,21 @@ const MediaSidePanel = styled.div`
   padding: 1rem;
 `;
 class Media extends Component {
-  state = {
-    currentlyVisible: this.props.media,
-  };
-
-  componentWillReceiveProps(nextProps: Object) {
-    if (this.props.media !== nextProps.media) {
-      this.setState({
-        currentlyVisible: nextProps.media,
-      });
-    }
-  }
-
-  handleToggleImage = () => {
-    const updatedFilter = filter(this.props.media, m =>
-      m.type.mediaType.includes('image'),
-    );
-    this.setState({
-      currentlyVisible: updatedFilter,
-    });
-  };
-  handleToggleVideo = () => {
-    const updatedFilter = filter(this.props.media, m =>
-      m.type.mediaType.includes('video'),
-    );
-    this.setState({
-      currentlyVisible: updatedFilter,
-    });
-  };
-
   props: Props;
   render() {
+    const { media } = this.props;
     return (
       <div>
         <Helmet title="Media" />
         <Row>
-          <Col xs={12} md={1}>
-            <MediaSidePanel>
-              <IconButton onTouchTap={this.handleToggleImage}>
-
-                <FontIcon>photo_library</FontIcon>
-              </IconButton>
-              {' '}
-              <IconButton onTouchTap={this.handleToggleVideo}>
-
-                <FontIcon>personal_video</FontIcon>
-              </IconButton>
-            </MediaSidePanel>
-          </Col>
-          <Col xs={12} md={11}>
+          <Col xs={12}>
 
             <Headline type="h2">
               Media Gallery
             </Headline>
             <Row>
               <MediaList>
-                {this.state.currentlyVisible.map(m => (
+                {media.map(m =>
                   <MediaItem key={m.id}>
                     <Photo
                       src={`/uploads/${m.thumbName}`}
@@ -106,16 +68,12 @@ class Media extends Component {
                               <FontIcon>edit</FontIcon>
                             </IconButton>
                           </Link>
-                          <IconButton
-                            onTouchTap={() => this.props.deleteMedia(m)}
-                          >
-                            <FontIcon>delete_permanently</FontIcon>
-                          </IconButton>
+
                         </div>
                       }
                     />
-                  </MediaItem>
-                ))}
+                  </MediaItem>,
+                )}
               </MediaList>
             </Row>
           </Col>

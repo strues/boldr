@@ -1,9 +1,9 @@
-.boldrui-accordion__body {
+.#{$boldr-ns}accordion__body {
   display: block;
   animation: fadein 0.35s ease-in;
 }
 
-.boldrui-accordion__body--hidden {
+.#{$boldr-ns}accordion__body--hidden {
   display: none;
   opacity: 0;
   animation: fadein 0.35s ease-in;

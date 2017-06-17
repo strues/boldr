@@ -1,4 +1,4 @@
-.#{$dash-ns}footer {
+.#{$boldr-ns}footer {
   height: $dash-footer-height;
   line-height: $dash-footer-line-height;
   color: $dash-footer-color;
@@ -9,11 +9,11 @@
   padding: 13px 0;
 }
 
-.#{$dash-ns}footer-copyright {
+.#{$boldr-ns}footer-copyright {
   padding-left: 25px;
 }
 
-.#{$dash-ns}footer-powered {
+.#{$boldr-ns}footer-powered {
   float: right;
   padding-right: 15px;
 };

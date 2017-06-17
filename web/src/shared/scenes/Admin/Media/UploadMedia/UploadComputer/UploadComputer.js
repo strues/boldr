@@ -9,7 +9,7 @@ import Paper from '~components/Paper';
 import Headline from '~components/Headline';
 import Icon from '~components/Icons';
 import { connect } from 'react-redux';
-import { uploadMediaFile } from '../../../../../state/modules/media/actions';
+import { uploadMediaFile } from '../../../state/media/actions';
 
 type Props = {
   uploadMediaFile: () => void,
@@ -104,5 +104,5 @@ class UploadComputer extends Component {
   }
 }
 
-const mapStateToProps = state => ({ media: state.media });
+const mapStateToProps = state => ({ media: state.admin.media });
 export default connect(mapStateToProps, { uploadMediaFile })(UploadComputer);

@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import EditorState from 'draft-js/lib/EditorState';
 import Dropzone from 'react-dropzone';
-import Button from '~components/Button';
 import Radio from 'material-ui/Radio';
+import Button from '~components/Button';
 
 import {
   InputField,
@@ -20,7 +20,7 @@ import {
   // RadioButtonGroup,
   FormGroup,
   Form,
-} from 'boldr-ui';
+} from '~components';
 
 import { isRequired } from '../../../../../../core/validations';
 import RenderTags from '../RenderTags';
@@ -38,10 +38,7 @@ type Props = {
   label?: string,
   uploadImageForArticle: Function,
 };
-const radioOpts = [
-  { value: 'draft', text: 'Draft' },
-  { value: 'published', text: 'Published' },
-];
+const radioOpts = [{ value: 'draft', text: 'Draft' }, { value: 'published', text: 'Published' }];
 class NewArticleForm extends Component {
   state = {
     files: [],

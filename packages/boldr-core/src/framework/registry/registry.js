@@ -1,9 +1,8 @@
 /**
  * This is the core principle of boldr-core.
  * The registry will register everything from a react component to redux action.
- * @module boldr-core/lib/registry
+ * @module boldr-core/lib/framework/registry
  */
-/* eslint no-underscore-dangle: ["error", {"allow": ["_registry", "_isLocked"] }]*/
 
 /**
  * The registry that will have the singleton
@@ -50,8 +49,7 @@ function addToRegistry(id, item) {
   }
   if (item === undefined) {
     throw new Error(
-      `BOLDR_CORE: you can't register undefined in '${id}'.
-			You may have an import error in your configuration`,
+      `BOLDR_CORE: you can't register undefined in '${id}'.You may have an import error in your configuration`,
     );
   }
   registry[id] = item;

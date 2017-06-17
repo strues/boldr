@@ -1,20 +1,33 @@
-.boldrui-block {
+////
+/// @group block
+////
+
+/// The default block background color
+/// @type Color
+$block-bg: $white;
+/// The dark block background color
+/// @type Color
+$block-bg-dark: $outer-space;
+
+.#{$boldr-ns}block {
+  @include md-shadow(2);
   margin-bottom: 1.5rem;
   padding: 1.5rem;
-  background: #fff;
+  background: $block-bg;
   border-radius: 3px;
-  box-shadow: 0 1px 1.5px 0 rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.24);
+
 
   > :last-child {
     margin-bottom: 0;
   }
 }
-.boldrui-block__dark {
+
+.#{$boldr-ns}block__dark {
+  @include md-shadow(2);
   margin-bottom: 1.5rem;
   padding: 1.5rem;
-  background: $outer-space;
+  background: $block-bg-dark;
   border-radius: 3px;
-  box-shadow: 0 1px 1.5px 0 rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.24);
 
   > :last-child {
     margin-bottom: 0;

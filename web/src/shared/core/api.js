@@ -12,7 +12,6 @@ axios.defaults.headers.post['Content-Type'] =
   'application/x-www-form-urlencoded; charset=UTF-8';
 
 axios.defaults.withCredentials = true;
-
 const api = axios.create({
   validateStatus: status => status >= 200 && status < 500,
 });

@@ -5,7 +5,6 @@ import Editor from '~components/BoldrEditor';
 import convertToRaw from 'draft-js/lib/convertFromDraftStateToRaw';
 // $FlowIssue
 import EditorState from 'draft-js/lib/EditorState';
-// import import { DraftJSEditor, Renderer, defaultBlocks }
 const editorStyle = {
   minHeight: 200,
   height: '100%',

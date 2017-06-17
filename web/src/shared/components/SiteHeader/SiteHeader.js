@@ -27,6 +27,7 @@ type Props = {
   boldr: Object,
   auth: Object,
   me: Object,
+  details: Array<Object>,
   handleLogoClick: () => void,
   handleLogoutClick: () => void,
   handleDashClick: () => void,
@@ -78,10 +79,7 @@ class SiteHeader extends Component {
   };
 
   handleDropdown = () => {
-    this.setState(
-      { dropdownIsOpen: !this.state.dropdownIsOpen },
-      this.addOverflowBody,
-    );
+    this.setState({ dropdownIsOpen: !this.state.dropdownIsOpen }, this.addOverflowBody);
   };
 
   closeDropdownOnButtonClick = callback => event => {
@@ -116,8 +114,8 @@ class SiteHeader extends Component {
 
   renderMenuItems() {
     return (
-      <ul className={cx('boldrui-sh__nav')} role="menubar">
-        {this.props.details.map(detail => (
+      <ul className={cx('boldrui-sh__nav')}>
+        {this.props.details.map(detail =>
           <NavItem
             key={detail.uuid}
             detail={detail}
@@ -125,8 +123,8 @@ class SiteHeader extends Component {
             hasDropdown={detail.hasDropdown}
             closeHeaderDropdown={this.closeDropdownOnButtonClick()}
             moble={this.state.isMobile}
-          />
-        ))}
+          />,
+        )}
       </ul>
     );
   }
@@ -159,12 +157,7 @@ class SiteHeader extends Component {
           </IconButton>
         </Link>,
         <IconButton key="logo">
-          <Icon
-            key="logout"
-            kind="logout"
-            color="#2d343c"
-            onClick={this.props.handleLogoutClick}
-          />
+          <Icon key="logout" kind="logout" color="#2d343c" onClick={this.props.handleLogoutClick} />
         </IconButton>,
       );
     }
@@ -184,13 +177,7 @@ class SiteHeader extends Component {
     const siteName = settings.find(filterSiteName);
     const logo = settings.find(filterSiteLogo);
     return (
-      <header
-        className={cx('boldrui-siteheader', ['theme-boldr'], className, {
-          'boldrui-sh__dropdown-open': dropdownIsOpen,
-          focusable,
-        })}
-        onKeyDown={this.handleKeyDown}
-      >
+      <header className={cx('boldrui-siteheader', ['theme-boldr'], className)}>
         <Grid fluid={false}>
           <div
             className={cx('boldrui-sh__menu', {

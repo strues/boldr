@@ -20,7 +20,7 @@ $dash-ns: 'boldrui-dash-'; // .#{$dash-ns}
 
 // @include react-md-everything;
 @include boldrui-paper;
-@include boldrui-divider;
+
 .boldr-profile__content {
   margin-top: 200px;
 }
@@ -100,4 +100,3 @@ input.griddle-filter::-webkit-input-placeholder { /* Chrome/Opera/Safari */
 table.griddle-table th {
   text-transform: capitalize;
 }
-

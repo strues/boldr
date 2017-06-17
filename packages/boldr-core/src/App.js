@@ -2,6 +2,7 @@
  * @module boldr-core/lib/App
  */
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 
 import RegistryProvider from './RegistryProvider';
@@ -24,7 +25,7 @@ export default function App(props) {
 }
 
 App.propTypes = {
-  store: React.PropTypes.object.isRequired,
-  children: React.PropTypes.node,
-  history: React.PropTypes.object,
+  store: PropTypes.object.isRequired,
+  children: PropTypes.node,
+  history: PropTypes.object,
 };

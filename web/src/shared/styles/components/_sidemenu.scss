@@ -1,0 +1,207 @@
+
+.boldrui-drill-view__wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+}
+
+.boldrui-drill-view__panel {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.boldrui-sidemenu__root {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: #375b74;
+}
+
+.boldrui-sidemenu__logo {
+  display: block;
+  padding: 0;
+  margin: 0 auto;
+  border: 0;
+  background: transparent;
+  outline: 0;
+  cursor: pointer;
+  color: $D80;
+}
+
+.boldrui-sidemenu__promo {
+  padding: 1em 0;
+  margin-top: auto;
+  text-align: center;
+}
+
+
+// FOOTER
+.boldrui-sidemenu__footer {
+  display: flex;
+  align-items: center;
+  height: 54px;
+  background-color: #476b84;
+}
+
+.boldrui-sidemenu__link {
+  padding: 0 17px;
+  display: flex;
+  flex: 1 0 auto;
+  align-items: center;
+  height: 100%;
+  font-family: $header-font-family;
+  font-size: 16px;
+  color: $D80;
+  text-decoration: none;
+
+  &:hover {
+    background: $D30;
+    text-decoration: none;
+  }
+
+  &:focus,
+  &:active { text-decoration: none; }
+
+  &.boldrui-sidemenu__link-tiny {
+    flex: 0 0 54px;
+    justify-content: center;
+    padding: 0;
+  }
+}
+
+.boldrui-sidemenu__link-tiny {
+  border: 1px solid #375b74;
+  border-top: 0;
+  border-bottom: 0;
+
+  &:first-child { border-left-color: transparent; }
+  &:last-child { border-right-color: transparent; }
+
+  &:hover { background: #577083; }
+}
+
+.boldrui-sidemenu__link-icon {
+  line-height: 1;
+  svg { vertical-align: -1px; }
+}
+
+.boldrui-sidemenu__link:not(.boldrui-sidemenu__link-tiny) .boldrui-sidemenu__link-icon { margin-right: 15px; }
+
+
+/// NAV
+///
+$padding-horizontal: 30px;
+$padding-vertical: 14px;
+
+.boldrui-sidemenu__navigation {
+  margin-bottom: auto;
+  overflow: auto;
+  flex: 1;
+}
+
+.boldrui-sidemenu__link-base {
+  display: block;
+  padding: $padding-vertical $padding-horizontal;
+  transition: .2s ease all;
+  color: $D80;
+  cursor: pointer;
+  font-size: 14px;
+  text-decoration: none;
+  line-height: 14px;
+}
+
+.boldrui-sidemenu__link-layout {
+  position: relative;
+  display: block;
+
+  &:hover,
+  &:focus {
+    text-decoration: none;
+
+    .boldrui-sidemenu__link-arrow {
+      opacity: 100;
+    }
+  }
+
+  &:hover:not(.boldrui-sidemenu__link-active),
+  &:focus:not(.boldrui-sidemenu__link-active),
+  &:hover:not(.boldrui-sidemenu__link-active) a,
+  &:focus:not(.boldrui-sidemenu__link-active) a {
+    background: #33566f;
+    color: #9fd8fc;
+    transition: 0.3s;
+  }
+
+  &.boldrui-sidemenu__link-diminished-hover:hover,
+  &.boldrui-sidemenu__link-diminished-hover:hover a {
+    background: transparent;
+    color: $B20;
+  }
+
+  &.boldrui-sidemenu__link-diminished-hover:focus,
+  &.boldrui-sidemenu__link-diminished-hover:focus a {
+    background: transparent;
+  }
+}
+
+.boldrui-sidemenu__link-layout, .boldrui-sidemenu__link-layout a {
+  color: $D80;
+}
+
+.boldrui-sidemenu__link-layout a {
+  @extend .boldrui-sidemenu__link-base;
+}
+
+.boldrui-sidemenu__link-active a {
+  color: #9fd8fc;
+  background: #2A4F68;
+  transition: 0.3s;
+}
+
+.boldrui-sidemenu__link-arrow {
+  position: absolute;
+  right: 25px;
+  top: 16px;
+  opacity: 0;
+  font-size: 10px;
+  transition: 0.5s;
+}
+
+.boldrui-sidemenu__separator {
+  margin: 20px $padding-horizontal;
+  border-bottom: 1px solid $D30;
+}
+
+.boldrui-sidemenu__back-link {
+  @extend .boldrui-sidemenu__link-base;
+  position: relative;
+  margin-bottom: 36px;
+  margin-top: 21px;
+
+  &:hover {
+    .boldrui-sidemenu__back-arrow {
+      margin-right: 15px;
+      margin-left: -5px;
+    }
+  }
+}
+
+.boldrui-sidemenu__back-arrow {
+  font-size: 10px;
+  margin-right: 10px;
+  transition: 0.5s;
+}
+
+.boldrui-sidemenu__cat-label {
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  text-transform: uppercase;
+  line-height: 14px;
+  padding: $padding-vertical $padding-horizontal;
+}

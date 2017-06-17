@@ -1,15 +1,23 @@
+////
+/// @group button
+////
+
 $btn-white: #fff;
 $btn-gray: #bbb;
 $btn-light-gray: #e5e5e5;
+
 $btn-primary: $primary-color;
 $btn-primary-hover: darken($primary-color, 5%);
 $btn-primary-active: darken($primary-color, 5%);
-$btn-danger: #f44;
-$btn-danger-hover: #f66;
-$btn-danger-active: #e33;
+
 $btn-secondary: $secondary-color;
 $btn-secondary-hover: darken($secondary-color, 5%);
 $btn-secondary-active: darken($secondary-color, 5%);
+
+$btn-danger: #f44;
+$btn-danger-hover: #f66;
+$btn-danger-active: #e33;
+
 
 .#{$boldr-ns}btn {
   display: inline-flex;
@@ -88,7 +96,7 @@ $btn-secondary-active: darken($secondary-color, 5%);
   padding: 0;
 }
 
-.boldrui-btn__primary {
+.#{$boldr-ns}btn__primary {
   color: $btn-white;
   background: $btn-primary;
   border-color: $btn-primary;
@@ -111,7 +119,7 @@ $btn-secondary-active: darken($secondary-color, 5%);
     border-color: $btn-primary-active;
   }
 
-  &.boldrui-btn__loading {
+  &.#{$boldr-ns}btn__loading {
     &:hover,
     &:active {
       background: $btn-primary;
@@ -124,7 +132,7 @@ $btn-secondary-active: darken($secondary-color, 5%);
   }
 }
 
-.boldrui-btn__primary-outline {
+.#{$boldr-ns}btn__primary-outline {
   color: $btn-primary;
   border-color: $btn-primary;
   background: $btn-white;
@@ -146,7 +154,7 @@ $btn-secondary-active: darken($secondary-color, 5%);
     border-color: $btn-primary-active;
   }
 
-  &.boldrui-btn__loading {
+  &.#{$boldr-ns}btn__loading {
     &:hover,
     &:active {
       border-color: $btn-primary;
@@ -159,7 +167,7 @@ $btn-secondary-active: darken($secondary-color, 5%);
   }
 }
 
-.boldrui-btn__danger {
+.#{$boldr-ns}btn__danger {
   color: $btn-white;
   background: $btn-danger;
   border-color: $btn-danger;
@@ -182,7 +190,7 @@ $btn-secondary-active: darken($secondary-color, 5%);
     border-color: $btn-danger-active;
   }
 
-  &.boldrui-btn__loading {
+  &.#{$boldr-ns}btn__loading {
     &:hover,
     &:active {
       background: $btn-danger;
@@ -195,7 +203,7 @@ $btn-secondary-active: darken($secondary-color, 5%);
   }
 }
 
-.boldrui-btn__danger-outline {
+.#{$boldr-ns}btn__danger-outline {
   color: $btn-danger;
   border-color: $btn-danger;
   background: $btn-white;
@@ -217,7 +225,7 @@ $btn-secondary-active: darken($secondary-color, 5%);
     border-color: $btn-danger-active;
   }
 
-  &.boldrui-btn__loading {
+  &.#{$boldr-ns}btn__loading {
     &:hover,
     &:active {
       border-color: $btn-danger;
@@ -230,7 +238,7 @@ $btn-secondary-active: darken($secondary-color, 5%);
   }
 }
 
-.boldrui-btn__secondary {
+.#{$boldr-ns}btn__secondary {
   color: $btn-white;
   background: $btn-secondary;
   border-color: $btn-secondary;
@@ -253,7 +261,7 @@ $btn-secondary-active: darken($secondary-color, 5%);
     border-color: $btn-secondary-active;
   }
 
-  &.boldrui-btn__loading {
+  &.#{$boldr-ns}btn__loading {
     &:hover,
     &:active {
       background: $btn-secondary;
@@ -266,7 +274,7 @@ $btn-secondary-active: darken($secondary-color, 5%);
   }
 }
 
-.boldrui-btn__secondary-outline {
+.#{$boldr-ns}btn__secondary-outline {
   color: $btn-secondary;
   border-color: $btn-secondary;
   background: $btn-white;
@@ -288,7 +296,7 @@ $btn-secondary-active: darken($secondary-color, 5%);
     border-color: $btn-secondary-active;
   }
 
-  &.boldrui-btn__loading {
+  &.#{$boldr-ns}btn__loading {
     &:hover,
     &:active {
       border-color: $btn-secondary;
@@ -301,8 +309,8 @@ $btn-secondary-active: darken($secondary-color, 5%);
   }
 }
 
-.boldrui-btn__disabled,
-.boldrui-btn__disabled[disabled] {
+.#{$boldr-ns}btn__disabled,
+.#{$boldr-ns}btn__disabled[disabled] {
   color: $btn-gray;
   background: #f8f8f8;
   border-color: $btn-light-gray;
@@ -327,7 +335,7 @@ $btn-secondary-active: darken($secondary-color, 5%);
   }
 }
 
-.boldrui-btn__loading {
+.#{$boldr-ns}btn__loading {
   position: relative;
   color: transparent;
   cursor: not-allowed;
@@ -372,7 +380,7 @@ $btn-secondary-active: darken($secondary-color, 5%);
   }
 }
 
-.boldrui-btn__border-transparent {
+.#{$boldr-ns}btn__border-transparent {
   border-color: transparent;
 
   &:hover {

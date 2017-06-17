@@ -2,8 +2,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { Row, Col, Block, Headline, Icon } from 'boldr-ui';
-import { uploadMediaUrl } from '../../../../../state/modules/media/actions';
+import { Col, Row } from '~components/Layout';
+import Headline from '~components/Headline';
+import Block from '~components/Block';
+import Icon from '~components/Icons';
+import { uploadMediaUrl } from '../../../state/media/actions';
 import UploadUrlForm from './UploadUrlForm';
 
 const MediaTitleArea = styled.div`

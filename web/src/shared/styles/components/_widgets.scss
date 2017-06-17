@@ -9,7 +9,7 @@ $stats-widget-bg: #fff;
 }
 
 .#{$boldr-ns}widget__stats {
-  @include md-box-shadow(2);
+  @include md-shadow(2);
 
   background-color: $stats-widget-bg;
   padding: 1em;

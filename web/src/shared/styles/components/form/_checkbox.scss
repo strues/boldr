@@ -1,4 +1,4 @@
-.boldrui-checkbox-wrap {
+.#{$boldr-ns}checkbox__wrap {
   display: inline-block;
   cursor: pointer;
   font-weight: 400;
@@ -9,7 +9,7 @@
   margin-right: 15px;
   vertical-align: middle;
 
-  &.boldrui-checkbox-disabled {
+  &.#{$boldr-ns}checkbox__disabled {
     cursor: not-allowed;
   }
 
@@ -18,7 +18,7 @@
   }
 }
 
-.boldrui-checkbox {
+.#{$boldr-ns}checkbox {
   position: relative;
   display: inline-block;
   width: 14px;
@@ -52,7 +52,7 @@
   }
 }
 
-.boldrui-checkbox-inner {
+.#{$boldr-ns}checkbox__inner {
   position: relative;
   top: 0;
   left: 0;
@@ -76,8 +76,8 @@
   }
 }
 
-.boldrui-checkbox-checked {
-  .boldrui-checkbox-inner {
+.#{$boldr-ns}checkbox__checked {
+  .#{$boldr-ns}checkbox__inner {
     border-color: #27f;
     background: #38f;
 
@@ -95,8 +95,8 @@
   }
 }
 
-.boldrui-checkbox-indeterminate {
-  .boldrui-checkbox-inner {
+.#{$boldr-ns}checkbox__indeterminate {
+  .#{$boldr-ns}checkbox__inner {
     border-color: #38f;
     background: #fff;
 
@@ -112,8 +112,8 @@
   }
 }
 
-.boldrui-checkbox-disabled {
-  .boldrui-checkbox-inner {
+.#{$boldr-ns}checkbox__disabled {
+  .#{$boldr-ns}checkbox__inner {
     opacity: 0.4;
   }
 

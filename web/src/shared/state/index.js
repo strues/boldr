@@ -25,15 +25,7 @@ import {
   toggleDrawer,
   showHideSidebar,
   expandCollapseSideMenu,
-  // media
-  mediaReducer,
-  getMedia,
-  getMediaType,
-  selectMedia,
-  toggleMedia,
-  editMedia,
-  deleteMedia,
-  uploadMediaFile,
+
   // users
   usersReducer,
   selectMe,
@@ -86,15 +78,6 @@ export {
   toggleDrawer,
   showHideSidebar,
   expandCollapseSideMenu,
-  // media
-  mediaReducer,
-  getMedia,
-  getMediaType,
-  selectMedia,
-  toggleMedia,
-  editMedia,
-  deleteMedia,
-  uploadMediaFile,
   // users
   usersReducer,
   selectMe,

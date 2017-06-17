@@ -39,7 +39,7 @@ async function ssrMiddleware(req: $Request, res: $Response) {
 
   global.navigator = { userAgent: req.headers['user-agent'] };
   const networkInterface = createBatchingNetworkInterface({
-    uri: process.env.GRAPHQL_URL,
+    uri: process.env.BOLDR_GRAPHQL_URL,
     opts: {
       credentials: 'same-origin',
       headers: req.headers,

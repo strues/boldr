@@ -11,7 +11,7 @@ const createApolloClient = networkInterface => {
     },
     networkInterface,
   };
-  if (__IS_CLIENT__) {
+  if (__CLIENT__) {
     if (window.__APOLLO_STATE__) {
       params.initialState = window.__APOLLO_STATE__;
     }

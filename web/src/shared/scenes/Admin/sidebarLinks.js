@@ -24,12 +24,12 @@ const sidebarLinks = [
       },
     ],
   },
-  {
-    label: 'File Manager',
-    icon: 'fa-file-code-o',
-    id: 2,
-    link: '/admin/filemanager',
-  },
+  // {
+  //   label: 'File Manager',
+  //   icon: 'fa-file-code-o',
+  //   id: 2,
+  //   link: '/admin/filemanager',
+  // },
   {
     label: 'Media Gallery',
     icon: 'fa-picture-o',
@@ -42,12 +42,12 @@ const sidebarLinks = [
     id: 4,
     link: '/admin/media/upload',
   },
-  {
-    label: 'Edit Navigation',
-    icon: 'fa-link',
-    id: 5,
-    link: '/admin/navigation',
-  },
+  // {
+  //   label: 'Edit Navigation',
+  //   icon: 'fa-link',
+  //   id: 5,
+  //   link: '/admin/navigation',
+  // },
   {
     label: 'Members List',
     icon: 'fa-users',

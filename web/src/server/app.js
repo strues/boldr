@@ -1,15 +1,20 @@
 /* @flow */
 /* eslint-disable babel/new-cap, id-match */
 import 'isomorphic-fetch/fetch-npm-node';
-import http from 'http';
 import { resolve as pathResolve } from 'path';
 import express from 'express';
 import _debug from 'debug';
-import httpProxy from 'http-proxy';
 import appRoot from 'boldr-utils/lib/node/appRoot';
 import logger from 'boldr-utils/lib/logger';
+import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
+import { printSchema } from 'graphql';
+import DataLoader from './DataLoader';
+import { expressMiddleware, authMiddleware, errorHandler } from './middleware';
+import { mainRedisClient } from './services/redis';
+import RootSchema from './data/rootSchema';
+import config from './config';
+import routes from './routes';
 import { enableEnhancedStackTraces } from './utils/debugUtil';
-import { expressMiddleware, errorHandler } from './middleware';
 import ssrMiddleware from './ssr';
 
 const debug = _debug('boldr:server:app');
@@ -18,46 +23,49 @@ enableEnhancedStackTraces();
 
 const app: express$Application = express();
 
-const server = http.createServer(app);
-
-const port = parseInt(process.env.BOLDR_SERVER_PORT, 10);
-
-const targetUrl = process.env.PROXY_TARGET_URL;
-
-const proxy = httpProxy.createProxyServer({
-  target: targetUrl,
-  ws: true,
-});
-
 // Base Express middleware - body-parser, method-override, cors
 expressMiddleware(app);
+// Session middleware, authentication check, rbac
+authMiddleware(app);
 
-// Proxy to API server
-app.use('/api/v1', (req, res) => {
-  proxy.web(req, res, { target: `${targetUrl}/api/v1` });
+app.get('/graphql/schema', (req, res) => {
+  res.type('text/plain').send(printSchema(RootSchema));
 });
 
-app.use('/ws', (req, res) => {
-  proxy.web(req, res, { target: `${targetUrl}/ws` });
-});
+app.use(
+  '/graphiql',
+  graphiqlExpress({
+    endpointURL: `${config.api.prefix}/graphql`,
+  }),
+);
 
-server.on('upgrade', (req, socket, head) => {
-  proxy.ws(req, socket, head);
-});
+routes(app);
 
-proxy.on('error', (error, req, res) => {
-  let json;
-  if (error.code !== 'ECONNRESET') {
-    console.error('proxy error', error);
+const graphqlHandler = graphqlExpress(req => {
+  const query = req.query.query || req.body.query;
+  if (query && query.length > 2000) {
+    // None of our app's queries are this long
+    // Probably indicates someone trying to send an overly expensive query
+    throw new Error('Query too large.');
   }
-  if (!res.headersSent) {
-    res.writeHead(500, { 'content-type': 'application/json' });
-  }
-
-  json = { error: 'proxy_error', reason: error.message };
-  res.end(JSON.stringify(json));
+  return {
+    schema: RootSchema,
+    context: {
+      req,
+      user: req.user ? req.user : null,
+      ...DataLoader.create(),
+    },
+    debug: true,
+    pretty: process.env.NODE_ENV !== 'production',
+    formatError: error => ({
+      message: error.message,
+      state: error.originalError && error.originalError.state,
+      locations: error.locations,
+      path: error.path,
+    }),
+  };
 });
-
+app.use(`${config.api.prefix}/graphql`, graphqlHandler);
 // Configure static serving of our "public" root http path static files.
 // Note: these will be served off the root (i.e. '/') of our application.
 app.use('/uploads', express.static(pathResolve(appRoot.get(), './public/uploads')));
@@ -69,29 +77,5 @@ app.use(express.static(pathResolve(appRoot.get(), './dist/assets')));
 app.get('*', ssrMiddleware);
 // Catch and format errors
 errorHandler(app);
-
-server.listen(port);
-
-server.on('listening', () => {
-  const address = server.address();
-  logger.info('Boldr running on port %s', address.port);
-});
-
-server.on('error', err => {
-  logger.error(err);
-  throw err;
-});
-
-process.on('SIGINT', () => {
-  logger.info('shutting down!');
-  server.close();
-  process.exit();
-});
-
-process.on('uncaughtException', error => {
-  logger.error(`uncaughtException: ${error.message}`);
-  debug(error.stack);
-  process.exit(1);
-});
 
 export default app;

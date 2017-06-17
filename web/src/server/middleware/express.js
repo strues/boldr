@@ -1,8 +1,11 @@
-import compression from 'compression';
 import bodyParser from 'body-parser';
-import cors from 'cors';
-import uuid from 'uuid';
+import methodOverride from 'method-override';
+import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
+import cors from 'cors';
+import hpp from 'hpp';
+import uuid from 'uuid';
+import config from '../config';
 
 function nonceMiddleware(req, res, next) {
   res.locals.nonce = uuid.v4(); // eslint-disable-line no-param-reassign
@@ -29,8 +32,7 @@ export default app => {
     next();
   });
   app.set('json spaces', 2);
-
-  app.use(compression());
+  app.use(cookieParser(config.token.secret));
   app.use(bodyParser.json({ type: 'application/json' }));
   // parse application/x-www-form-urlencoded
   app.use(bodyParser.urlencoded({ extended: true }));
@@ -40,6 +42,16 @@ export default app => {
     }
     next();
   });
+  app.use(
+    methodOverride((req, res) => {
+      if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+        // look in urlencoded POST bodies and delete it
+        const method = req.body._method;
+        delete req.body._method;
+        return method;
+      }
+    }),
+  );
   app.use((err, req, res, next) => {
     if (err && (!next || res.headersSent)) {
       return;

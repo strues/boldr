@@ -60,7 +60,7 @@ const networkInterface = createBatchingNetworkInterface({
     credentials: 'include',
   },
   batchInterval: 10,
-  uri: 'http://localhost:8080/api/v1/graphql',
+  uri: 'http://localhost:3000/api/v1/graphql',
 });
 networkInterface.use([
   {

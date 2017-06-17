@@ -33,19 +33,6 @@ import {
 } from './boldr';
 
 import {
-  mediaReducer,
-  getMedia,
-  getMediaType,
-  selectMedia,
-  toggleMedia,
-  editMedia,
-  deleteMedia,
-  uploadMediaFile,
-  media,
-  arrayOfMedia,
-} from './media';
-
-import {
   usersReducer,
   selectMe,
   forgotPassword,
@@ -96,17 +83,6 @@ export {
   makeSelectMobile,
   toggleDrawer,
   layoutSelector,
-  // media
-  mediaReducer,
-  getMedia,
-  getMediaType,
-  selectMedia,
-  toggleMedia,
-  editMedia,
-  deleteMedia,
-  uploadMediaFile,
-  media,
-  arrayOfMedia,
   // users
   usersReducer,
   selectMe,

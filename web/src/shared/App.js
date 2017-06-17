@@ -117,7 +117,11 @@ class App extends Component {
             <AnimatedRouter.Route path="/login" component={LoginContainer} />
             <AnimatedRouter.Route path="/signup" component={SignupContainer} />
             <AnimatedRouter.Route path="/account/forgot-password" component={ForgotPassword} />
-            <AnimatedRouter.Route path="/account/reset-password/:token" exact component={ResetPassword} />
+            <AnimatedRouter.Route
+              path="/account/reset-password/:token"
+              exact
+              component={ResetPassword}
+            />
             <AnimatedRouter.Route path="/account/verify/:token" exact component={Verify} />
             <AnimatedRouter.Route path="/account/preferences" component={PreferencesContainer} />
             <AnimatedRouter.Route path="/profiles/:username" component={ProfileContainer} />

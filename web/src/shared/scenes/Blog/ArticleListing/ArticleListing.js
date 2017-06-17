@@ -87,9 +87,11 @@ class ArticleListing extends Component {
     const { renderWhenReady } = this.props;
     const { getArticles, loading } = this.props.data;
     return (
-      <Grid>
-        {renderWhenReady(this.renderBody)}
-      </Grid>
+      <View marginTop>
+        <Grid>
+          {renderWhenReady(this.renderBody)}
+        </Grid>
+      </View>
     );
   }
 }

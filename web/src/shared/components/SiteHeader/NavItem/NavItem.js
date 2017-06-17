@@ -44,13 +44,8 @@ class NavItem extends Component {
     this.closeItemDropdown();
     this.props.closeHeaderDropdown();
   };
-  linkContent = detail => (
-    <NavItemLabel
-      name={detail.name}
-      children={detail.children}
-      theme="theme-boldr"
-    />
-  );
+  linkContent = detail =>
+    <NavItemLabel name={detail.name} children={detail.children} theme="theme-boldr" />;
   render() {
     const { detail, hasDropdown, mobile } = this.props;
 
@@ -58,31 +53,25 @@ class NavItem extends Component {
 
     return (
       <li
-        className={cx(
-          'boldrui-sh__navitem',
-          [`item__${detail.id}`],
-          ['theme-boldr'],
-          {
-            'boldr-menudetail__dropdown': hasDropdown,
-            'boldr-menudetail__dropdown-open': this.state.openDropdown,
-          },
-        )}
+        className={cx('boldrui-sh__navitem', [`item__${detail.id}`], ['theme-boldr'], {
+          'boldr-menudetail__dropdown': hasDropdown,
+          'boldr-menudetail__dropdown-open': this.state.openDropdown,
+        })}
         onMouseEnter={this.handleDropdown}
         onFocus={this.handleDropdown}
         onMouseLeave={this.handleDropdown}
         onBlur={this.handleDropdown}
-        role="menuitem"
         aria-haspopup="true"
       >
         {linkHref
           ? <NavLink
-              to={`/${linkHref}`}
+              to={linkHref}
               onClick={this.closeDropdowns}
               className={cx('boldrui-sh__navitem-link')}
             >
               {this.linkContent(detail)}
             </NavLink>
-          : <span tabIndex="0" className={cx('boldrui-sh__navitem-link')}>
+          : <span className={cx('boldrui-sh__navitem-link')}>
               {this.linkContent(detail)}
             </span>}
         {detail.children &&

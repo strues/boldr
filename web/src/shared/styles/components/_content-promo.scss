@@ -1,53 +1,53 @@
-.boldrui-cont-promo__wrapper {
+.#{$boldr-ns}contentpromo__wrapper {
   position: relative;
   padding: 6rem 0;
 }
 
-.boldrui-cont-promo__bright {
+.#{$boldr-ns}contentpromo__bright {
   background: #fff;
 }
 
-.boldrui-cont-promo__secondary {
+.#{$boldr-ns}contentpromo__secondary {
   background: $secondary-color;
   color: #fff;
 }
 
-.boldrui-cont-promo__teritary {
+.#{$boldr-ns}contentpromo__teritary {
   background: $teritary-color;
 }
 
-.boldrui-cont-promo__darkgrey {
+.#{$boldr-ns}contentpromo__darkgrey {
   background: $outer-space;
   color: #fff;
 }
 
-.boldrui-cont-promo__grey {
+.#{$boldr-ns}contentpromo__grey {
   background: $grayish;
 }
 
-.boldrui-cont-promo__light-grey {
+.#{$boldr-ns}contentpromo__light-grey {
   background: $cloud;
 }
 
-.boldrui-cont-promo__tiny {
+.#{$boldr-ns}contentpromo__tiny {
   padding-top: 3rem;
   padding-bottom: 3rem;
 }
 
-.boldrui-cont-promo__narrow > .boldrui-cont-promo__contents {
+.#{$boldr-ns}contentpromo__narrow > .#{$boldr-ns}contentpromo__contents {
   max-width: 900px;
 }
 
-.boldrui-cont-promo__wide > .boldrui-cont-promo__contents {
+.#{$boldr-ns}contentpromo__wide > .#{$boldr-ns}contentpromo__contents {
   max-width: none;
   width: 100%;
 }
 
-.boldrui-cont-promo__centered {
+.#{$boldr-ns}contentpromo__centered {
   text-align: center;
 }
 
-.boldrui-cont-promo__contents {
+.#{$boldr-ns}contentpromo__contents {
   position: relative;
   z-index: 1;
   width: 90%;

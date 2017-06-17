@@ -106,7 +106,7 @@ $md-primary-hover-opacity: 0.9 !default;
 /// The text color to use for any text that inside the `.md-background--primary` class name.
 /// This should ideally pass the color contrast test when.
 /// @type Color
-$md-primary-background-text-color: $md-white-base !default;
+$md-primary-background-text-color: $white !default;
 
 /// The secondary color to use throughout the app. This should be a color
 /// with a `-a-{NUMBER}` suffix.
@@ -125,7 +125,7 @@ $md-secondary-hover-opacity: 0.9 !default;
 /// This should ideally pass the color contrast test when.
 /// @type Color
 $media-included: true !default;
-$md-secondary-background-text-color: $md-white-base !default;
+$md-secondary-background-text-color: $white !default;
 $md-transition-deceleration: cubic-bezier(0, 0, 0.2, 1);
 /// Boolean if the application is to be themed with the light theme.
 /// @type Boolean
@@ -134,7 +134,6 @@ $boldrui-light-theme: true !default;
 $shadow-color: rgba(0, 0, 0, 0.2) !default;
 $body-background: $cloud !default;
 $link-color: $accent-color !default;
-$link-active-color: $accent-color !default;
 $error-color: $carmine-pink !default;
 $warning-color: $golden !default;
 $text-color: $black-transparent !default;

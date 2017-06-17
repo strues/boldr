@@ -15,7 +15,7 @@ import api from './api';
  * @param  {object} context The react context with the registry
  * @return {object} ReactElement
  */
-const UIRouter = (props, context) => {
+const RouterProvider = (props, context) => {
   const routes = api.route.getRoutesFromSettings(context, props.routes);
   if (routes.path === '/' && !!routes.component) {
     return <BaseRouter routes={routes} history={props.history} />;
@@ -23,12 +23,12 @@ const UIRouter = (props, context) => {
   return <div className="is-loading">loading</div>;
 };
 
-UIRouter.propTypes = {
-  history: React.PropTypes.object,
-  routes: React.PropTypes.object,
+RouterProvider.propTypes = {
+  history: PropTypes.object,
+  routes: PropTypes.object,
 };
-UIRouter.contextTypes = {
-  registry: React.PropTypes.object,
+RouterProvider.contextTypes = {
+  registry: PropTypes.object,
 };
-const mapStateToProps = state => ({ routes: state.cmf.settings.routes });
-export default connect(mapStateToProps)(UIRouter);
+const mapStateToProps = state => ({ routes: state.boldr.settings.routes });
+export default connect(mapStateToProps)(RouterProvider);

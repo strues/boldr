@@ -1,4 +1,4 @@
-.boldrui-flag__wrapper {
+.#{$boldr-ns}flag__wrapper {
   width: 100%;
 
   @media screen and (min-width: $medium-viewport) {
@@ -6,7 +6,7 @@
   }
 }
 
-.boldrui-flag__img-wrapper {
+.#{$boldr-ns}flag__img-wrapper {
   position: relative;
   overflow: hidden;
 
@@ -22,20 +22,20 @@
 
 @media screen and (min-width: $large-viewport) {
 
-  .boldrui-flag__img-wrapper-40 {
+.#{$boldr-ns}flag__img-wrapper-40 {
     width: 40%;
   }
 
-  .boldrui-flag__img-wrapper-60 {
+.#{$boldr-ns}flag__img-wrapper-60 {
     width: 60%;
   }
 
-  .boldrui-flag__img-wrapper-80 {
+.#{$boldr-ns}flag__img-wrapper-80 {
     width: 80%;
   }
 }
 
-.boldrui-flag__contents {
+.#{$boldr-ns}flag__contents {
   padding: 1.5rem;
   vertical-align: middle;
 
@@ -45,8 +45,8 @@
   }
 }
 
-.boldrui-flag__img,
-.boldrui-flag__img > img {
+.#{$boldr-ns}flag__img,
+.#{$boldr-ns}flag__img > img {
   width: 100%;
 
   @media screen and (min-width: $medium-viewport) {
@@ -67,7 +67,7 @@
  * to avoid non-loading images even though they are in the UAs viewport.
  */
 
-.boldrui-flag__img > span {
+.#{$boldr-ns}flag__img > span {
   position: absolute;
   top: 50%;
   left: 50%;

@@ -28,13 +28,7 @@ const MediaForm = (props: Props) => {
   const { handleSubmit, reset } = props;
   return (
     <Form onSubmit={handleSubmit} className="boldr-form__fileeditor">
-      <Field
-        id="name"
-        name="fileName"
-        type="text"
-        label="File name"
-        component={InputField}
-      />
+      <Field id="name" name="fileName" type="text" label="File name" component={InputField} />
       <Field
         id="description"
         name="fileDescription"
