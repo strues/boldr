@@ -16,8 +16,8 @@ services:
   #     - "8443:443"
   #   # restart: always
   #   volumes:
-  #     - ./internal/docker/nginx/snippets:/etc/nginx/snippets:ro
-  #     - ./internal/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+  #     - ./.boldr/docker/nginx/snippets:/etc/nginx/snippets:ro
+  #     - ./.boldr/docker/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
   # api:
   #   build:
   #     context: ./api
@@ -48,9 +48,9 @@ services:
   #     - yarn:/root/.cache/yarn
   #     - ./api/:/opt/app
   db:
-    build: ./internal/docker/postgres
+    build: ./.boldr/docker/postgres
     container_name: boldr_db
-    read_only: true
+    restart: always
     expose:
       - "5432"
     ports:
@@ -64,6 +64,7 @@ services:
     image: redis:3.2.9-alpine
     read_only: true
     container_name: boldr_redis
+    restart: always
     expose:
       - "6379"
     ports:

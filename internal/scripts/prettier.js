@@ -1,29 +1,37 @@
-#!/usr/bin/env node
+/* eslint-disable */
 
-/* eslint-disable prefer-destructuring, prefer-template */
-const path = require('path');
 const chalk = require('chalk');
 const glob = require('glob');
-const runCmd = require('./run');
+const path = require('path');
+const execFileSync = require('child_process').execFileSync;
 
 const shouldWrite = process.argv[2] === 'write';
 const isWindows = process.platform === 'win32';
 const prettier = isWindows ? 'prettier.cmd' : 'prettier';
-const prettierCmd = path.resolve(__dirname, '../../node_modules/.bin/' + prettier);
+
+const prettierCmd = path.resolve(
+  __dirname,
+  // prettier-ignore
+  `../../node_modules/.bin/${prettier}`
+);
 const defaultOptions = {
-  'bracket-spacing': 'true',
-  'print-width': 100,
-  'single-quote': 'true',
+  'single-quote': true,
   'trailing-comma': 'all',
-  'jsx-bracket-same-line': 'false',
-  parser: 'flow',
+  'print-width': 80,
+  'jsx-bracket-same-line': false,
 };
 const config = {
   default: {
+    patterns: ['src/**/*.js', '__tests__/**/*.js', '__mocks__/**/*.js'],
     ignore: ['**/node_modules/**'],
-    patterns: ['packages/*/src/**/', 'packages/*/internal/**/', 'api/src/**', 'web/src/**'],
   },
 };
+
+function exec(command, args) {
+  console.log(`> ${[command].concat(args).join(' ')}`);
+  const options = {};
+  return execFileSync(command, args, options).toString();
+}
 
 Object.keys(config).forEach(key => {
   const patterns = config[key].patterns;
@@ -31,18 +39,18 @@ Object.keys(config).forEach(key => {
   const ignore = config[key].ignore;
 
   const globPattern = patterns.length > 1
-    ? `{${patterns.join(',')}}*.js`
-    : `${patterns.join(',')}*.js`;
+    ? `{${patterns.join(',')}}`
+    : `${patterns.join(',')}`;
   const files = glob.sync(globPattern, { ignore });
 
-  const args = Object.keys(defaultOptions)
-    .map(key => `--${key}=${(options && options[key]) || defaultOptions[key]}`)
-    .concat('--write', files);
+  const args = Object.keys(defaultOptions).map(
+    k => `--${k}=${(options && options[k]) || defaultOptions[k]}`
+  );
+  args.push(`--${shouldWrite ? 'write' : 'l'}`);
 
   try {
-    console.log(chalk.cyan('Making code your code pretty again\n'));
-    runCmd(prettierCmd, args, path.resolve(__dirname, '../..'));
+    exec(prettierCmd, [...args, ...files]);
   } catch (e) {
-    console.log(e);
+    throw e;
   }
 });

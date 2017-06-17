@@ -1,0 +1,9 @@
+.#{$boldr-ns}profile {
+  .profile__content {
+    padding: 1em;
+    background: $white;
+    width: 100%;
+
+    @include md-shadow(2);
+  }
+}

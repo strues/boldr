@@ -1,9 +1,0 @@
-{
-  "extends": [
-      "boldr",
-      "boldr/react",
-      "boldr/flowtype",
-      "boldr/jsx-a11y",
-      "boldr/promise"
-    ]
-}

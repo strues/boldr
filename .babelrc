@@ -1,7 +1,10 @@
 {
   "presets": [["boldr/node", {
     "targets": {
-      "node": "current"
-    }
-  }]]
+      "node": 8
+    },
+    "modules": "commonjs",
+    "exclude": ["transform-regenerator", "transform-async-to-generator"],
+    "useBuiltIns": true
+    }]]
 }
