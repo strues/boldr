@@ -4,8 +4,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Button from '~components/Button';
 import Select from '~components/Select';
-import { Form, InputField } from 'boldr-ui';
-import { SelectInput } from '~components/Form';
+import { SelectInput, Form, InputField } from '~components/Form';
 
 const style = {
   margin: 12,
@@ -36,13 +35,7 @@ const EditMemberForm = (props: Props) => {
   const { handleSubmit, reset } = props;
   return (
     <Form onSubmit={handleSubmit} className="boldr-form__generic">
-      <Field
-        id="email"
-        name="email"
-        type="email"
-        label="Email"
-        component={InputField}
-      />
+      <Field id="email" name="email" type="email" label="Email" component={InputField} />
       <Field
         id="firstName"
         name="firstName"
@@ -50,20 +43,8 @@ const EditMemberForm = (props: Props) => {
         label="First name"
         component={InputField}
       />
-      <Field
-        id="lastName"
-        name="lastName"
-        type="text"
-        label="Last name"
-        component={InputField}
-      />
-      <Field
-        id="username"
-        name="username"
-        type="text"
-        label="Username"
-        component={InputField}
-      />
+      <Field id="lastName" name="lastName" type="text" label="Last name" component={InputField} />
+      <Field id="username" name="username" type="text" label="Username" component={InputField} />
       <Field
         id="avatarUrl"
         name="avatarUrl"

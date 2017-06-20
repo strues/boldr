@@ -1,10 +1,11 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Paper, Row, Col, Image } from 'boldr-ui';
-
+// internal
+import { Row, Col } from '~components/Layout';
+import Paper from '~components/Paper';
+import Image from '~components/Image';
 import { updateAttachment } from '../../state';
-// import config from '../../../../../../config';
 import FileEditorForm from '../components/FileEditorForm';
 
 type Props = {
@@ -31,12 +32,7 @@ export class FileEditor extends Component {
       <div>
         <Row>
           <Col xs={12} md={5}>
-            <Image
-              src={this.props.currentFile.url}
-              alt="current file"
-              width={600}
-              height={240}
-            />
+            <Image src={this.props.currentFile.url} alt="current file" width={600} height={240} />
           </Col>
           <Col xs={12} md={7}>
             <Paper

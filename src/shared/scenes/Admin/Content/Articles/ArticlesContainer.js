@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
+// internal
 import Loader from '~components/Loader';
 import { deletePost } from '../../../Blog/state';
 import Articles from './Articles';
@@ -30,12 +31,7 @@ export class ArticlesContainer extends Component {
     if (loading) {
       return <Loader />;
     }
-    return (
-      <Articles
-        articles={getArticles}
-        handleDeleteClick={this.handleDeleteClick}
-      />
-    );
+    return <Articles articles={getArticles} handleDeleteClick={this.handleDeleteClick} />;
   }
 }
 

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Switch from 'react-router-dom/Switch';
 import Route from 'react-router-dom/Route';
 import flatMapDeep from 'lodash/flatMapDeep';
-
+// internal
 import Grid from '~components/Layout/Grid';
 import Sidebar from '~components/Sidebar';
 import { DashboardWrapper, DashboardContent, DashboardMain } from '~components/Dashboard';

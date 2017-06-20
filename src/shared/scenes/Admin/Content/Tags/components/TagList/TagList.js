@@ -2,10 +2,11 @@
 
 import React from 'react';
 import Link from 'react-router-dom/Link';
-import IconButton from 'material-ui/IconButton';
-import { FontIcon } from 'boldr-ui';
 import { gql, graphql } from 'react-apollo';
+import IconButton from 'material-ui/IconButton';
 import ListItem from 'material-ui/List/ListItem';
+// internal
+import FontIcon from '~components/FontIcon';
 
 type Props = {
   tags: Array<Tag>,
@@ -21,15 +22,12 @@ const TagList = (props: Props) => {
   }
   return (
     <div>
-      {props.tags.map(tag => (
+      {props.tags.map(tag =>
         <Link key={tag.id} to={`/admin/content/tags/${tag.name}`}>
           <ListItem
             primaryText={tag.name}
             rightIconButton={
-              <IconButton
-                onTouchTap={() => handleClickDelete(tag)}
-                tooltip="Delete"
-              >
+              <IconButton onTouchTap={() => handleClickDelete(tag)} tooltip="Delete">
                 <FontIcon>
                   delete_forever
                 </FontIcon>
@@ -37,8 +35,8 @@ const TagList = (props: Props) => {
             }
             secondaryText={tag.description}
           />
-        </Link>
-      ))}
+        </Link>,
+      )}
     </div>
   );
 };

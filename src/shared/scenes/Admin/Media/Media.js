@@ -5,8 +5,8 @@ import Helmet from 'react-helmet';
 import filter from 'lodash/filter';
 import Link from 'react-router-dom/Link';
 import styled from 'styled-components';
-
 import IconButton from 'material-ui/IconButton';
+
 import { Col, Row } from '~components/Layout';
 import Headline from '~components/Headline';
 import Photo from '~components/Photo';

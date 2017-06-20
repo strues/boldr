@@ -7,7 +7,7 @@ import EditArticleForm from './components/EditArticleForm';
 
 type Props = {
   currentArticle: Article,
-  updateArticle: () => void,
+  editArticle: () => void,
 };
 
 class ArticleEditor extends PureComponent {
@@ -37,13 +37,8 @@ class ArticleEditor extends PureComponent {
     };
     return (
       <div>
-        <Helmet
-          title={`Admin: Editing Post ${this.props.currentArticle.title}`}
-        />
-        <EditArticleForm
-          initialValues={setPostValues}
-          onSubmit={this.handleSubmit}
-        />
+        <Helmet title={`Admin: Editing Post ${this.props.currentArticle.title}`} />
+        <EditArticleForm initialValues={setPostValues} onSubmit={this.handleSubmit} />
       </div>
     );
   }

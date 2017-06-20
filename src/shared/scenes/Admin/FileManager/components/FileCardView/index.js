@@ -1,3 +1,1 @@
-import FileCardView from './FileCardView';
-
-export default FileCardView;
+export { default } from './FileCardView';

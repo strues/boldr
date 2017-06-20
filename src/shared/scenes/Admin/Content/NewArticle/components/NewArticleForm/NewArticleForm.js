@@ -22,7 +22,7 @@ import {
   Form,
 } from '~components';
 
-import { isRequired } from '../../../../../../core/validations';
+import { isRequired } from '~core/validations';
 import { setMedia } from '../../../../state/media/actions';
 import RenderTags from '../RenderTags';
 import FieldEditor from './FieldEditor';

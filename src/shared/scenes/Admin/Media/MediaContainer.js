@@ -4,15 +4,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import { bindActionCreators } from 'redux';
-import { Loader } from 'boldr-ui';
-import { getMediaType, toggleMedia, deleteMedia, selectMedia } from '../state/media';
+import Loader from '~components/Loader';
+import { getMediaType, toggleMedia } from '../state/media';
 
 import Media from './Media';
 
 type Props = {
   data: Data,
-  selectMedia: () => void,
-  deleteMedia: () => void,
   toggleMedia: () => void,
   dispatch: Function,
 };
@@ -34,7 +32,7 @@ export class MediaContainer extends Component {
   }
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ toggleMedia, selectMedia, deleteMedia }, dispatch);
+  return bindActionCreators({ toggleMedia }, dispatch);
 }
 
 const MEDIA_QUERY = gql`

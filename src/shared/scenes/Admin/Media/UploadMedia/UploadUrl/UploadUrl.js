@@ -2,10 +2,12 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+
 import { Col, Row } from '~components/Layout';
 import Headline from '~components/Headline';
 import Block from '~components/Block';
 import Icon from '~components/Icons';
+
 import { uploadMediaUrl } from '../../../state/media/actions';
 import UploadUrlForm from './UploadUrlForm';
 

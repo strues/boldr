@@ -2,7 +2,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
-import { Loader } from 'boldr-ui';
+// internal
+import Loader from '~components/Loader';
 import Tags from './Tags';
 
 type Props = {

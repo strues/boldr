@@ -4,16 +4,17 @@ import styled from 'styled-components';
 import { graphql, gql } from 'react-apollo';
 import IconButton from 'material-ui/IconButton';
 import UploadFile from 'material-ui-icons/FileUpload';
+import { connect } from 'react-redux';
+
 import { Row, Col } from '~components/Layout';
 import Paper from '~components/Paper';
 import Headline from '~components/Headline';
 import Icon from '~components/Icons';
-import { connect } from 'react-redux';
 
 type Props = {
   uploadMediaFile: () => void,
   dispatch: () => void,
-  dropzone: () => void,
+  mutate: () => void,
 };
 
 type State = {
@@ -38,6 +39,7 @@ class UploadComputer extends Component {
       });
     }
   };
+  props: Props;
   render() {
     return (
       <Row center="xs">
@@ -52,15 +54,7 @@ class UploadComputer extends Component {
             </MediaTitleArea>
 
             <input type="file" required onChange={this.handleChange} />
-            {/* <div className="boldrui-dropzone__footer">
-              <IconButton
-                onTouchTap={() => {
-                  (this: any).dropzone.open();
-                }}
-              >
-                <UploadFile />
-              </IconButton>
-            </div> */}
+
           </Paper>
         </Col>
       </Row>

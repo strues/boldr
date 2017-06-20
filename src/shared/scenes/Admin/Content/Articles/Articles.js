@@ -1,17 +1,17 @@
 /* @flow */
 import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
-import Paper from '~components/Paper';
-import Avatar from '~components/Avatar';
-import Headline from '~components/Headline';
-import Loader from '~components/Loader';
 import ArrowUpward from 'material-ui-icons/ArrowUpward';
 import ArrowDownward from 'material-ui-icons/ArrowDownward';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import Griddle, { plugins, RowDefinition, ColumnDefinition } from 'griddle-react';
-
 import { format } from 'date-fns';
+import Griddle, { plugins, RowDefinition, ColumnDefinition } from 'griddle-react';
+// internal
+import Paper from '~components/Paper';
+import Avatar from '~components/Avatar';
+import Headline from '~components/Headline';
+import Loader from '~components/Loader';
 
 const styleConfig = {
   icons: {

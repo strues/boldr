@@ -2,14 +2,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { Paper, Row, Col } from 'boldr-ui';
-// import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
-// import IconMenu from 'material-ui/IconMenu';
 import IconButton from 'material-ui/IconButton';
-import NavigationExpandMoreIcon
-  from 'material-ui-icons/ExpandMore';
+import NavigationExpandMoreIcon from 'material-ui-icons/ExpandMore';
 import MenuItem from 'material-ui/Menu/MenuItem';
 import List from 'material-ui/List/List';
+// internal
+import Paper from '~components/Paper';
+import { Row, Col } from '~components/Layout';
 import { createTag, deleteTag } from '../../../Blog/state';
 
 import TagList from './components/TagList';
@@ -57,10 +56,7 @@ class Tags extends Component {
 
             </Toolbar> */}
             <List>
-              <TagList
-                tags={this.props.tags}
-                handleDeleteTagClick={this.handleDeleteTagClick}
-              />
+              <TagList tags={this.props.tags} handleDeleteTagClick={this.handleDeleteTagClick} />
             </List>
           </Paper>
         </Col>

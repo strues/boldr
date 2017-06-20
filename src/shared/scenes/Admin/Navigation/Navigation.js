@@ -115,11 +115,7 @@ class Navigation extends Component {
             </Paper>
           </Col>
         </Row>
-        <Modal
-          visible={this.props.modal}
-          title="Add a link"
-          onClose={this.closeModal}
-        >
+        <Modal visible={this.props.modal} title="Add a link" onClose={this.closeModal}>
           <NavigationForm onSubmit={this.onFormSubmit} />
         </Modal>
       </div>

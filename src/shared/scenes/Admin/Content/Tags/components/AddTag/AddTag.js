@@ -3,6 +3,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
+// internal
 import Button from '~components/Button';
 import Form from '~components/Form/Form';
 import InputField from '~components/Form/Fields/InputField';
@@ -32,17 +33,8 @@ class AddTag extends React.Component {
     // eslint-disable-line
     const { handleSubmit, reset } = this.props;
     return (
-      <Form
-        className="boldr-form__addtag"
-        onSubmit={handleSubmit(this.addTagMutation)}
-      >
-        <Field
-          id="tag-name"
-          name="name"
-          component={InputField}
-          type="text"
-          label="Name"
-        />
+      <Form className="boldr-form__addtag" onSubmit={handleSubmit(this.addTagMutation)}>
+        <Field id="tag-name" name="name" component={InputField} type="text" label="Name" />
         <Field
           id="tag-description"
           name="description"

@@ -2,12 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {
-  uploadFiles,
-  fetchAttachmentsIfNeeded,
-  deleteAttachment,
-  selectFile,
-} from '../state';
+import { uploadFiles, fetchAttachmentsIfNeeded, deleteAttachment, selectFile } from '../state';
 import FileManager from './FileManager';
 
 type Props = {

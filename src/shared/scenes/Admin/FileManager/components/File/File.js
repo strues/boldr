@@ -1,8 +1,9 @@
+// @flow
 import React from 'react';
-import { FontIcon } from 'boldr-ui';
 import { Card, CardActions, CardMedia, CardTitle } from 'material-ui/Card';
 import IconButton from 'material-ui/IconButton';
 import Link from 'react-router-dom/Link';
+import FontIcon from '~components/FontIcon';
 
 type Props = {
   removeMedia?: Function,

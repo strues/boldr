@@ -1,7 +1,8 @@
 import React from 'react';
-import Button from '~components/Button';
-import { Avatar } from 'boldr-ui';
 import styled from 'styled-components';
+// internal
+import Button from '~components/Button';
+import Avatar from '~components/Avatar';
 
 const MemListItem = styled.li`
   width: 100%;
@@ -46,16 +47,7 @@ type Props = {
 };
 
 const MemberCard = (props: Props) => {
-  const {
-    user,
-    handleToggle,
-    username,
-    roleName,
-    avatarUrl,
-    lastName,
-    firstName,
-    email,
-  } = props;
+  const { user, handleToggle, username, roleName, avatarUrl, lastName, firstName, email } = props;
   return (
     <MemListItem>
       <LeftSide>

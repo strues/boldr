@@ -22,19 +22,7 @@ class NewArticleContainer extends Component {
   }
 
   handleOnSubmit(values: Article) {
-    const payload = {
-      title: values.title,
-      slug: values.title,
-      content: convertToHTML(values.content),
-      rawContent: values.rawContent,
-      featured: false,
-      published: values.published,
-      excerpt: values.excerpt,
-      featureImage: `/uploads/media/${this.props.featImage}`,
-      tags: values.tags,
-    };
-    console.log(payload)
-    this.props.onSubmit(payload);
+    this.props.onSubmit(values);
   }
   props: Props;
 
@@ -60,19 +48,19 @@ export const CREATE_ARTICLE_MUTATION = gql`
 `;
 const withMutation = graphql(CREATE_ARTICLE_MUTATION, {
   props: ({ mutate }) => ({
-    createArticle: (payload, ownProps) =>
+    createArticle: values =>
       mutate({
         variables: {
           input: {
-            title: payload.title,
-            slug: payload.title,
-            content: payload.content,
-            rawContent: payload.rawContent,
-            featured: payload.featured,
-            published: payload.published,
-            excerpt: payload.excerpt,
-            featureImage: payload.featureImage,
-            tags: payload.tags,
+            title: values.title,
+            slug: values.title,
+            content: convertToHTML(values.content),
+            rawContent: values.rawContent,
+            featured: values.featured,
+            published: values.published,
+            excerpt: values.excerpt,
+            featureImage: values.featureImage,
+            tags: values.tags,
           },
         },
       }),
@@ -85,8 +73,8 @@ const mapStateToProps = state => {
   };
 };
 const mapDispatchToProps = (dispatch, ownProps) => ({
-  onSubmit: payload => {
-    ownProps.createArticle(payload);
+  onSubmit: values => {
+    ownProps.createArticle(values);
   },
 });
 
