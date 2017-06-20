@@ -16,15 +16,7 @@ import Members from './Members';
 // import Settings from './Settings';
 import TagsContainer from './Content/Tags/TagsContainer';
 import TaggedPost from './Content/Tags/components/TaggedPost/TaggedPost';
-//
-// function LoadingComponent({ error }) {
-//   if (error) {
-//     console.log(error);
-//     return <p>Error: {error}</p>;
-//   } else {
-//     return <Loader />;
-//   }
-// }
+
 const LoadingComponent = (props: { isLoading: boolean, timedOut: boolean, error: boolean }) => {
   if (props.isLoading) {
     // While our other component is loading...

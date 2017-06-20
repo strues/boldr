@@ -57,23 +57,23 @@ class SiteHeaderContainer extends React.Component {
 
 export const MENU_QUERY = gql`
  query getMenuById($id: ID!) {
- getMenuById(id: $id) {
-    id,
-    name,
-    details {
+   getMenuById(id: $id) {
       id,
-      uuid,
-      safeName,
       name,
-      cssClassname,
-      icon,
-      hasDropdown,
-      order,
-      mobileHref,
-      href,
-      children
+      details {
+        id,
+        uuid,
+        safeName,
+        name,
+        cssClassname,
+        icon,
+        hasDropdown,
+        order,
+        mobileHref,
+        href,
+        children
+      }
     }
-  }
   }
 `;
 
@@ -89,6 +89,7 @@ const mapDispatchToProps = dispatch => {
     dispatch,
   };
 };
+
 const SiteHeaderContainerWithData = graphql(MENU_QUERY, {
   options: props => ({
     variables: {
@@ -96,6 +97,7 @@ const SiteHeaderContainerWithData = graphql(MENU_QUERY, {
     },
   }),
 })(SiteHeaderContainer);
+
 const mapStateToProps = (state: Object) => {
   return {
     me: selectMe(state),

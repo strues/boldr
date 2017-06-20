@@ -12,6 +12,7 @@ import { DashboardWrapper, DashboardContent, DashboardMain } from '@@components/
 import Topbar from '@@components/Topbar';
 import TopbarLink from '@@components/Topbar/TopbarLink';
 import { hideHeader } from '@@state/modules/boldr/ui/actions';
+import flattenRoutes from '@@core/flattenRoutes';
 import { selectMe, showHideSidebar, expandCollapseSideMenu } from '../../state';
 import sidebarLinks from './sidebarLinks';
 import routes from './routes';
@@ -35,12 +36,6 @@ type Props = {
   dispatch: () => void,
   router: Object,
 };
-
-const flattenRoutes = topRoutes =>
-  flatMapDeep(topRoutes, ({ routes: nestedRoutes, ...other }) => [
-    other,
-    ...flattenRoutes(nestedRoutes),
-  ]);
 
 export class AdminDashboard extends Component {
   constructor(props: Props) {
