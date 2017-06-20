@@ -147,3 +147,10 @@ const errorEditMedia = err => {
     error: err.message,
   };
 };
+
+export const setMedia = data => {
+  return {
+    type: t.SET_MEDIA,
+    data,
+  };
+};

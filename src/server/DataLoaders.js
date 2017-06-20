@@ -42,7 +42,7 @@ function mapToMany(keys, keyFn, type, rows) {
 export default {
   create: () => ({
     users: new DataLoader(keys =>
-      db.table('users').whereIn('id', keys).select('*').then(mapTo(keys, x => x.id, 'User')),
+      db.table('user').whereIn('id', keys).select('*').then(mapTo(keys, x => x.id, 'User')),
     ),
     roles: new DataLoader(keys =>
       db.table('roles').whereIn('id', keys).select('*').then(mapTo(keys, x => x.id, 'Role')),
@@ -55,6 +55,19 @@ export default {
     ),
     media: new DataLoader(keys =>
       db.table('media').whereIn('id', keys).select('*').then(mapTo(keys, x => x.id, 'Media')),
+    ),
+    settings: new DataLoader(keys =>
+      db.table('setting').whereIn('id', keys).select('*').then(mapTo(keys, x => x.id, 'Setting')),
+    ),
+    menus: new DataLoader(keys =>
+      db.table('menu').whereIn('id', keys).select('*').then(mapTo(keys, x => x.id, 'Menu')),
+    ),
+    details: new DataLoader(keys =>
+      db
+        .table('menu_detail')
+        .whereIn('id', keys)
+        .select('*')
+        .then(mapTo(keys, x => x.id, 'MenuDetail')),
     ),
     // commentsByStory: new DataLoader(keys =>
     //   db

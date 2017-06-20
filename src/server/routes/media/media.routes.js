@@ -47,13 +47,6 @@ router.get('/', ctrl.listMedia);
  */
 router.get('/:id', ctrl.getMedia);
 
-/**
- * @api {post} /media         Upload media
- * @apiName UploadMedia
- * @apiGroup Media
- * @apiPermission user
- */
-router.post('/', isAuthenticated, ctrl.uploadMedia);
 
 /**
  * @api {post} /media/remote         Upload from a remote resource

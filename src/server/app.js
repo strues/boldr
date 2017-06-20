@@ -4,12 +4,13 @@ import 'isomorphic-fetch/fetch-npm-node';
 import { resolve as pathResolve } from 'path';
 import express from 'express';
 import _debug from 'debug';
+import bodyParser from 'body-parser';
 import appRoot from 'boldr-utils/lib/node/appRoot';
 import logger from 'boldr-utils/lib/logger';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import { printSchema } from 'graphql';
-import DataLoader from './DataLoader';
-import { expressMiddleware, authMiddleware, errorHandler } from './middleware';
+import DataLoaders from './DataLoaders';
+import { expressMiddleware, authMiddleware, errorHandler, apolloUpload } from './middleware';
 import { mainRedisClient } from './services/redis';
 import RootSchema from './data/rootSchema';
 import config from './config';
@@ -53,7 +54,7 @@ const graphqlHandler = graphqlExpress(req => {
     context: {
       req,
       user: req.user ? req.user : null,
-      ...DataLoader.create(),
+      ...DataLoaders.create(),
     },
     debug: true,
     pretty: process.env.NODE_ENV !== 'production',
@@ -65,7 +66,15 @@ const graphqlHandler = graphqlExpress(req => {
     }),
   };
 });
-app.use(`${config.api.prefix}/graphql`, graphqlHandler);
+
+app.use(
+  `${config.api.prefix}/graphql`,
+  bodyParser.json(),
+  apolloUpload({
+    uploadDir: pathResolve(appRoot.get(), './public/uploads/tmp'),
+  }),
+  graphqlHandler,
+);
 // Configure static serving of our "public" root http path static files.
 // Note: these will be served off the root (i.e. '/') of our application.
 app.use('/uploads', express.static(pathResolve(appRoot.get(), './public/uploads')));

@@ -30,9 +30,9 @@
     "webpack"
   ],
   "scripts": {
-    "build": "NODE_ENV=production BOLDR__SERVER_PORT=3000 BOLDR__DEV_PORT=3001 DEBUG=boldr:* boldr build",
+    "build": "better-npm-run build",
     "clean": "NODE_ENV=development boldr clean",
-    "dev": "NODE_ENV=development BOLDR_PORT=3000 BOLDR_DEV_PORT=3001 BOLDR_DEBUG=1 DEBUG=boldr:* boldr-dx dev",
+    "dev": "better-npm-run dev",
     "lint": "node ./node_modules/.bin/eslint src",
     "flow": "node ./node_modules/.bin/flow check",
     "knex": "./node_modules/.bin/knex",
@@ -50,6 +50,7 @@
   },
   "dependencies": {
     "apollo-client": "^1.4.2",
+    "apollo-upload-client": "^4.0.3",
     "axios": "^0.16.2",
     "bcryptjs": "^2.4.3",
     "bluebird": "^3.5.0",
@@ -87,27 +88,29 @@
     "material-ui": "next",
     "material-ui-icons": "^1.0.0-alpha.3",
     "method-override": "^2.3.9",
+    "mkdirp": "^0.5.1",
     "moment": "^2.18.1",
     "morgan": "^1.8.2",
     "node-fetch": "^1.7.1",
     "nodemailer": "^4.0.1",
+    "object-path": "^0.11.4",
     "objection": "^0.8.3",
-    "pg": "^6.2.4",
-    "pretty-error": "^2.1.0",
+    "pg": "^6.3.0",
+    "pretty-error": "^2.1.1",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-apollo": "^1.4.2",
     "react-dom": "^15.6.1",
     "react-dropzone": "^3.13.2",
     "react-helmet": "5.1.3",
-    "react-loadable": "^4.0.1",
+    "react-loadable": "^4.0.2",
     "react-motion": "^0.5.0",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
     "react-router-redux": "next",
     "react-tap-event-plugin": "^2.0.1",
     "react-transition-group": "^1.2.0",
-    "redux": "^3.6.0",
+    "redux": "^3.7.0",
     "redux-form": "^6.8.0",
     "redux-thunk": "^2.2.0",
     "request": "^2.81.0",
@@ -123,10 +126,12 @@
     "winston": "^2.3.1"
   },
   "devDependencies": {
+    "@boldr/cli": "^0.1.0",
+    "@boldr/plugin-webpack": "^0.1.0",
     "babel-cli": "^6.24.1",
     "babel-eslint": "7.2.3",
     "babel-jest": "^20.0.3",
-    "babel-preset-boldr": "^0.9.6",
+    "babel-preset-boldr": "^0.9.7",
     "babel-preset-env": "^1.5.2",
     "better-npm-run": "^0.0.15",
     "chalk": "^1.1.3",
@@ -142,7 +147,7 @@
     "identity-obj-proxy": "^3.0.0",
     "jest": "^20.0.4",
     "jest-enzyme": "^3.2.0",
-    "lint-staged": "^3.6.1",
+    "lint-staged": "^4.0.0",
     "moxios": "^0.4.0",
     "node-sass": "^4.5.3",
     "nodemon": "^1.11.0",
@@ -158,16 +163,81 @@
     "supertest": "^3.0.0"
   },
   "betterScripts": {
+    "build": {
+      "command": "cross-env boldr build",
+      "env": {
+        "NODE_ENV": "production",
+        "BOLDR_PORT": "3000",
+        "BOLDR_DEV_PORT": "3001",
+        "BOLDR_DEBUG": "true",
+        "DEBUG": "boldr:*"
+      }
+    },
     "dev": {
-      "command": "cross-env boldr-dx dev",
+      "command": "cross-env boldr dev",
       "env": {
         "NODE_ENV": "development",
-        "BOLDR_DB__URL": "postgres://postgres:password@0.0.0.0:5432/boldr",
-        "BOLDR_REDIS__URL": "redis://0.0.0.0:6379/0",
-        "BOLDR_SERVER_PORT": "3000",
+        "BOLDR_PORT": "3000",
         "BOLDR_DEV_PORT": "3001",
-        "BOLDR_DEBUG": "1",
+        "BOLDR_DEBUG": "true",
         "DEBUG": "boldr:*"
+      }
+    },
+    "migrate": {
+      "command": "cross-env node --harmony internal/scripts/db.js migrate",
+      "env": {
+        "DATABASE_URL": "postgres://postgres:password@localhost:5432/boldr",
+        "NODE_ENV": "development"
+      }
+    },
+    "migrate:test": {
+      "command": "cross-env node --harmony internal/scripts/db.js migrate",
+      "env": {
+        "DATABASE_URL": "postgres://postgres:password@localhost:5432/boldr_test",
+        "NODE_ENV": "development"
+      }
+    },
+    "migration": {
+      "command": "cross-env node --harmony internal/scripts/db.js migration",
+      "env": {
+        "DATABASE_URL": "postgres://postgres:password@localhost:5432/boldr",
+        "NODE_ENV": "development"
+      }
+    },
+    "reset": {
+      "command": "cross-env node --harmony internal/scripts/db.js reset",
+      "env": {
+        "DATABASE_URL": "postgres://postgres:password@localhost:5432/boldr_test",
+        "NODE_ENV": "development"
+      }
+    },
+    "rollback": {
+      "command": "babel-node node_modules/.bin/knex migrate:rollback",
+      "env": {
+        "DATABASE_URL": "postgres://postgres:password@localhost:5432/boldr_test",
+        "NODE_ENV": "test"
+      }
+    },
+    "seed": {
+      "command": "cross-env node --harmony internal/scripts/db.js seed",
+      "env": {
+        "DATABASE_URL": "postgres://postgres:password@localhost:5432/boldr",
+        "NODE_ENV": "development"
+      }
+    },
+    "seed:test": {
+      "command": "cross-env knex seed:run",
+      "env": {
+        "BOLDR__DB__URL": "postgres://postgres:password@localhost:5432/boldr_test",
+        "NODE_ENV": "test"
+      }
+    },
+    "test": {
+      "command": "npm run reset && jest -w 2 --forceExit",
+      "env": {
+        "BOLDR__DB__URL": "postgres://postgres:password@127.0.0.1:5432/boldr_test",
+        "NODE_ENV": "test",
+        "KNEX_TEST_TIMEOUT": 30000
       }
     }
   },

@@ -7,8 +7,7 @@ import ConnectedRouter from 'react-router-redux/ConnectedRouter';
 import WebFontLoader from 'webfontloader';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import { ApolloProvider } from 'react-apollo';
-import { createBatchingNetworkInterface } from 'apollo-client';
-
+import { createBatchNetworkInterface } from 'apollo-upload-client';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import createPalette from 'material-ui/styles/palette';
 import { cyan, pink } from 'material-ui/styles/colors';
@@ -33,6 +32,7 @@ function createStyleManager() {
     }),
   });
 }
+
 // Async font loading
 WebFontLoader.load({
   google: {
@@ -55,7 +55,7 @@ const token = getToken();
 const supportsHistory = 'pushState' in window.history;
 
 // Apollo network interface
-const networkInterface = createBatchingNetworkInterface({
+const networkInterface = createBatchNetworkInterface({
   opts: {
     credentials: 'include',
   },

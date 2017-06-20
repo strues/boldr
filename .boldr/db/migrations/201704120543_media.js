@@ -6,12 +6,13 @@ module.exports.up = async db => {
       .notNullable()
       .defaultTo(db.raw('uuid_generate_v4()'))
       .primary();
-    table.string('fileName', 128).notNullable().unique();
+    table.string('name', 128).notNullable().unique();
     table.string('safeName', 128).notNullable();
     table.string('thumbName', 128);
+    table.integer('size');
     table.string('fileDescription').nullable();
     table.enu('mediaType', ['image', 'video', 'audio']);
-    table.string('mimetype');
+    table.string('type');
     table.string('url').notNullable();
     table.string('path');
     table.uuid('userId').unsigned().references('id').inTable('user');
@@ -19,7 +20,7 @@ module.exports.up = async db => {
     table.timestamp('createdAt').defaultTo(db.fn.now());
     table.timestamp('updatedAt').defaultTo(db.fn.now());
 
-    table.index('fileName');
+    table.index('name');
     table.index('url');
     table.index('mediaType');
   });

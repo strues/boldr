@@ -50,12 +50,17 @@ const isFetching = (state = false, action) => {
   }
 };
 
-const currentMedia = (state = {}, action) => {
+const currentMedia = (state = { uploadMedia: { name: '' }}, action) => {
   switch (action.type) {
     case t.SELECT_MEDIA:
       return {
         ...state,
         ...action.file,
+      };
+    case t.SET_MEDIA:
+      return {
+        ...state,
+        ...action.data,
       };
     default:
       return state;

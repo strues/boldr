@@ -72,13 +72,7 @@ const EditArticleForm = (props: Props) => {
             <FormGroup>
               <Headline type="h4">Post Status:</Headline>
               <label htmlFor="draft" style={{ marginRight: '10px' }}>
-                <Field
-                  id="draft"
-                  name="published"
-                  component="input"
-                  type="radio"
-                  value="false"
-                />
+                <Field id="draft" name="published" component="input" type="radio" value="false" />
                 {' '}
                 Draft
               </label>

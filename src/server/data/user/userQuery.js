@@ -1,8 +1,11 @@
 import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt, GraphQLString } from 'graphql';
+import _debug from 'debug';
 import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON } from '../scalars';
 import User from '../../models/User';
 import { db } from '../../services/db';
 import UserType from './userType';
+
+const debug = _debug('boldr:server:userQuery');
 
 export default {
   getUsers: {
@@ -19,8 +22,8 @@ export default {
       },
     },
     async resolve(_, { limit, offset }, context) {
+      debug(context);
       const users = await db.table('user').select('*');
-      // const users = await User.query()
       if (users) {
         return users;
       }
@@ -37,7 +40,8 @@ export default {
       },
     },
     async resolve(_, { userId }, context) {
-      const user = await User.query().findById(userId);
+      // const user = await User.query().findById(userId);
+      const user = await context.users.load(userId);
       if (user) {
         return user;
       }

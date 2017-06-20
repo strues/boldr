@@ -14,6 +14,7 @@ initializeDb();
 const server = app.listen(port, host, () => {
   logger.info(`Boldr is listening on http://${host}:${port}/`);
 });
+
 function handleExit(options, err) {
   if (options.cleanup) {
     const actions = [server.close, disconnect, destroyRedis];

@@ -59,7 +59,7 @@ class Media extends Component {
                   <MediaItem key={m.id}>
                     <Photo
                       src={`/uploads/${m.thumbName}`}
-                      alt={m.fileName}
+                      alt={m.name}
                       role="presentation"
                       cta={
                         <div>

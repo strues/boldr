@@ -42,7 +42,7 @@ query getMedia($offset: Int!, $limit: Int!) {
       getMedia(offset:$offset,limit:$limit) {
         id,
         thumbName,
-        fileName,
+        name,
         url,
         fileDescription,
       }

@@ -8,3 +8,4 @@ export const EDIT_MEDIA_FAILURE = '@boldr/media/EDIT_MEDIA_FAILURE';
 export const DELETE_MEDIA_REQUEST = '@boldr/media/DELETE_MEDIA_REQUEST';
 export const DELETE_MEDIA_SUCCESS = '@boldr/media/DELETE_MEDIA_SUCCESS';
 export const DELETE_MEDIA_FAILURE = '@boldr/media/DELETE_MEDIA_FAILURE';
+export const SET_MEDIA = '@boldr/media/SET_MEDIA';

@@ -9,13 +9,7 @@ import {
   GraphQLInputObjectType,
   GraphQLEnumType,
 } from 'graphql';
-import {
-  GraphQLEmail,
-  GraphQLURL,
-  GraphQLDateTime,
-  GraphQLUUID,
-  GraphQLJSON,
-} from '../scalars';
+import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON } from '../scalars';
 
 const MediaTypeType = new GraphQLEnumType({
   name: 'MediaType',
@@ -25,6 +19,7 @@ const MediaTypeType = new GraphQLEnumType({
     audio: { value: 'audio' },
   },
 });
+
 const MediaType = new GraphQLObjectType({
   name: 'Media',
   description: 'Uploaded images, videos or audio',
@@ -33,7 +28,7 @@ const MediaType = new GraphQLObjectType({
       type: GraphQLUUID,
       description: 'The identifying uuid.',
     },
-    fileName: {
+    name: {
       type: GraphQLString,
       description: 'The name of the file',
     },
@@ -53,9 +48,13 @@ const MediaType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'The description of the upload',
     },
-    mimetype: {
+    type: {
       type: GraphQLString,
-      description: 'The description of the upload',
+      description: 'The mimetype of the upload',
+    },
+    size: {
+      type: GraphQLInt,
+      description: 'The size of the upload',
     },
     path: {
       type: GraphQLString,
@@ -76,6 +75,54 @@ const MediaType = new GraphQLObjectType({
     updatedAt: {
       type: GraphQLDateTime,
       description: 'The timestamp when the article was last updated',
+    },
+  }),
+});
+
+export const FileType = new GraphQLObjectType({
+  name: 'File',
+  fields: () => ({
+    id: {
+      type: GraphQLUUID,
+      description: 'The identifying uuid.',
+    },
+    name: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'The file name',
+    },
+    type: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'The type of file.',
+    },
+    size: {
+      type: new GraphQLNonNull(GraphQLInt),
+      description: 'The size of the file',
+    },
+    path: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'The path to the file.',
+    },
+  }),
+});
+
+export const UploadMediaInput = new GraphQLInputObjectType({
+  name: 'UploadMediaInput',
+  fields: () => ({
+    name: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'The file name',
+    },
+    type: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'The type of file.',
+    },
+    size: {
+      type: new GraphQLNonNull(GraphQLInt),
+      description: 'The size of the file',
+    },
+    path: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'The path to the file.',
     },
   }),
 });

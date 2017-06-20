@@ -50,11 +50,11 @@ const ArticleType = new GraphQLObjectType({
       description: 'True if the article is published',
     },
     featureImage: {
-      type: GraphQLURL,
+      type: GraphQLString,
       description: 'url of the article feature image',
     },
     backgroundImage: {
-      type: GraphQLURL,
+      type: GraphQLString,
       description: 'url of the article background image',
     },
     userId: {
@@ -120,11 +120,11 @@ export const CreateArticleInput = new GraphQLInputObjectType({
       description: 'True if the article is published',
     },
     featureImage: {
-      type: GraphQLURL,
+      type: GraphQLString,
       description: 'url of the article feature image',
     },
     backgroundImage: {
-      type: GraphQLURL,
+      type: GraphQLString,
       description: 'url of the article background image',
     },
     tags: {

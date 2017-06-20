@@ -1,8 +1,8 @@
 /* @flow */
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 import EditorState from 'draft-js/lib/EditorState';
-import Dropzone from 'react-dropzone';
 import Radio from 'material-ui/Radio';
 import Button from '~components/Button';
 
@@ -23,9 +23,11 @@ import {
 } from '~components';
 
 import { isRequired } from '../../../../../../core/validations';
+import { setMedia } from '../../../../state/media/actions';
 import RenderTags from '../RenderTags';
 import FieldEditor from './FieldEditor';
 import { Inner, Toolbar, NewPost, DarkSegment, HelpTxt } from './NewPostStyled';
+import UploadArticleImage from './UploadArticleImage';
 
 type Props = {
   handleSubmit?: Function,
@@ -36,9 +38,11 @@ type Props = {
   pristine?: boolean,
   input?: Object,
   label?: string,
-  uploadImageForArticle: Function,
 };
+
 const radioOpts = [{ value: 'draft', text: 'Draft' }, { value: 'published', text: 'Published' }];
+
+@connect()
 class NewArticleForm extends Component {
   state = {
     files: [],
@@ -46,17 +50,9 @@ class NewArticleForm extends Component {
   };
 
   props: Props;
-
-  onDrop = files => {
-    this.setState({
-      file: files[0],
-    });
-    const payload = files[0];
-    this.props.uploadImageForArticle(payload);
-  };
-  onOpenClick = () => {
-    this.dropzone.open();
-  };
+  handleSetMedia = (data) => {
+    this.props.dispatch(setMedia(data))
+  }
   render() {
     const { handleSubmit } = this.props;
     return (
@@ -107,22 +103,8 @@ class NewArticleForm extends Component {
                     <Headline type="h3">
                       Upload a feature image <FontIcon>photo_library</FontIcon>
                     </Headline>
-                    <Dropzone
-                      className="boldr-dropzone"
-                      ref={node => {
-                        this.dropzone = node;
-                      }}
-                      multiple={false}
-                      onDrop={this.onDrop}
-                      accept="image/*"
-                      maxSize={5242880}
-                    >
-                      <Paragraph className="boldr-dropzone__drop-sm">
-                        Drop an image here or click to select one from your computer.
-                        <br />
-                        It will upload right away.
-                      </Paragraph>
-                    </Dropzone>
+                    <UploadArticleImage handleSetMedia={ this.handleSetMedia }/>
+
                   </FormGroup>
                 </Block>
                 <FormGroup>

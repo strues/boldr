@@ -8,12 +8,7 @@ import {
   GraphQLInt,
   GraphQLInputObjectType,
 } from 'graphql';
-import {
-  GraphQLEmail,
-  GraphQLURL,
-  GraphQLDateTime,
-  GraphQLUUID,
-} from '../scalars';
+import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID } from '../scalars';
 
 const AttachmentType = new GraphQLObjectType({
   name: 'Attachment',

@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
-import Dropzone from 'react-dropzone';
 import styled from 'styled-components';
+import { graphql, gql } from 'react-apollo';
 import IconButton from 'material-ui/IconButton';
 import UploadFile from 'material-ui-icons/FileUpload';
 import { Row, Col } from '~components/Layout';
@@ -9,7 +9,6 @@ import Paper from '~components/Paper';
 import Headline from '~components/Headline';
 import Icon from '~components/Icons';
 import { connect } from 'react-redux';
-import { uploadMediaFile } from '../../../state/media/actions';
 
 type Props = {
   uploadMediaFile: () => void,
@@ -30,32 +29,15 @@ const MediaTitleArea = styled.div`
 `;
 
 class UploadComputer extends Component {
-  state = {
-    files: [],
-    file: {},
-    percentComplete: 100,
-    uploadIsComplete: false,
+  handleChange = ({ target }) => {
+    if (target.validity.valid) {
+      this.props.mutate({
+        variables: {
+          file: target.files[0],
+        },
+      });
+    }
   };
-  state: State;
-  props: Props;
-  uploadSuccess = () => {
-    this.setState({
-      uploadIsComplete: true,
-      percentComplete: 100,
-    });
-    // this.props.onUpload();
-  };
-  onDrop = files => {
-    this.setState({
-      file: files[0],
-    });
-    const payload = files[0];
-    this.props.uploadMediaFile(payload);
-  };
-
-  onOpenClick() {
-    (this: any).dropzone.open();
-  }
   render() {
     return (
       <Row center="xs">
@@ -63,32 +45,14 @@ class UploadComputer extends Component {
           <Paper zDepth={1}>
             <MediaTitleArea>
               <Headline type="h2">
-                <Icon
-                  kind="folder-upload"
-                  color="rgba(0, 188, 212, 1.00)"
-                  size="36"
-                />
+                <Icon kind="folder-upload" color="rgba(0, 188, 212, 1.00)" size="36" />
                 {' '}
                 Upload from your computer
               </Headline>
             </MediaTitleArea>
 
-            <Dropzone
-              className="boldrui-dropzone boldrui-dropzone__panel"
-              ref={node => {
-                (this: any).dropzone = node;
-              }}
-              multiple={false}
-              onDrop={this.onDrop}
-              accept="image/*"
-              maxSize={5242880}
-            >
-              <p className="boldrui-dropzone__drop">
-                Drop an image here or select one from your computer. <br />
-                It will upload right away.
-              </p>
-            </Dropzone>
-            <div className="boldrui-dropzone__footer">
+            <input type="file" required onChange={this.handleChange} />
+            {/* <div className="boldrui-dropzone__footer">
               <IconButton
                 onTouchTap={() => {
                   (this: any).dropzone.open();
@@ -96,7 +60,7 @@ class UploadComputer extends Component {
               >
                 <UploadFile />
               </IconButton>
-            </div>
+            </div> */}
           </Paper>
         </Col>
       </Row>
@@ -104,5 +68,13 @@ class UploadComputer extends Component {
   }
 }
 
-const mapStateToProps = state => ({ media: state.admin.media });
-export default connect(mapStateToProps, { uploadMediaFile })(UploadComputer);
+export default graphql(gql`
+  mutation uploadMedia ($file: UploadMediaInput!) {
+    uploadMedia (file: $file) {
+      id
+      name
+      type
+      path
+    }
+  }
+`)(UploadComputer);

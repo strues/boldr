@@ -240,8 +240,8 @@ function seed(knex, Promise) {
           cssClassname: 'about-link',
           hasDropdown: true,
           order: 1,
-          mobileHref: 'about',
-          href: 'about',
+          mobileHref: '/about',
+          href: '/about',
           icon: 'info',
           children: {
             key: 'about-menu',
@@ -249,13 +249,13 @@ function seed(knex, Promise) {
               {
                 name: 'Tech',
                 id: 'tech',
-                href: 'about/tech',
+                href: '/about/tech',
                 icon: 'change_history',
               },
               {
                 name: 'Setup',
                 id: 'setup',
-                href: 'about/setup',
+                href: '/about/setup',
                 icon: 'phonelink_setup',
               },
             ],
@@ -267,8 +267,8 @@ function seed(knex, Promise) {
           cssClassname: 'blog-link',
           hasDropdown: false,
           order: 2,
-          mobileHref: 'blog',
-          href: 'blog',
+          mobileHref: '/blog',
+          href: '/blog',
           icon: 'info',
         }),
         // prettier-ignore

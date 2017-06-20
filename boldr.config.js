@@ -12,7 +12,7 @@ module.exports = {
     BOLDR_DEBUG: process.env.BOLDR_DEBUG,
     BOLDR_GRAPHQL: process.env.BOLDR_GRAPHQL,
   },
-  // plugins: [require('boldr-plugin-webpack')],
+  plugins: [require('@boldr/plugin-webpack')],
   bundle: {
     base,
     graphlUrl: 'http://localhost:3000/api/v1/graphql',
