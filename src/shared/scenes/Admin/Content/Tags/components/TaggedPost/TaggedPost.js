@@ -2,9 +2,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Link from 'react-router-dom/Link';
-import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
-import List from 'material-ui/List/List';
-import ListItem from 'material-ui/List/ListItem';
+import Toolbar from 'material-ui/Toolbar';
+import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import { gql, graphql } from 'react-apollo';
 
 import Loader from '~components/Loader';
@@ -31,10 +30,12 @@ class TaggedPost extends Component {
     return (
       <div>
         <Toolbar>
-          <ToolbarTitle text={`Posts tagged ${this.props.match.params.name}`} />
+        {`Posts tagged ${this.props.match.params.name}`}
         </Toolbar>
         <List>
-          {getArticlesForTag.map(post => <ListItem key={post.id} primaryText={post.title} />)}
+          {getArticlesForTag.map(post =>
+            <ListItem key={post.id}><ListItemText primary={post.title} /></ListItem>,
+          )}
         </List>
       </div>
     );

@@ -16,4 +16,26 @@ export default {
       return payload;
     },
   },
+  editTag: {
+    type: TagType,
+    description: 'Edit an existing tag',
+    args: {
+      id: {
+        type: new GraphQLNonNull(GraphQLID),
+        description: 'The tag ID',
+      },
+      input: {
+        type: new GraphQLNonNull(TagInput),
+        description: 'The fields (name, description) for editing a tag.',
+      },
+    },
+    async resolve(_, args, context) {
+      debug(args);
+      const updatedTag = await Tag.query().patchAndFetchById(args.id, {
+        name: args.input.name,
+        description: args.input.description,
+      });
+      return updatedTag;
+    },
+  },
 };

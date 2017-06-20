@@ -1,13 +1,18 @@
 /* @flow */
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
+import styled from 'styled-components';
 import { Grid, Col, Row } from '~components/Layout';
-import FormCard from '~components/Form/FormCard';
+import Paper from '~components/Paper';
 import LoginForm from './LoginForm';
 
 type Props = {
   onSubmit: () => void,
 };
+
+const Spacer = styled.div`
+  margin-top: 100px;
+`;
 const Login = (props: Props) => {
   function submitLogin(formInput) {
     props.onSubmit(formInput);
@@ -20,6 +25,7 @@ const Login = (props: Props) => {
           <Col xs={12}>
             <Row center="xs">
               <Col xs={6}>
+                <Spacer />
                 <LoginForm onSubmit={submitLogin} />
               </Col>
             </Row>

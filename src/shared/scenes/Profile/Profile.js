@@ -16,17 +16,7 @@ const Profile = ({ profile, me }: Props) => {
 
   return (
     <div className={classes}>
-
-      <Grid>
-        <Row>
-          <div className="profile__content">
-            <Col xs={12}>
-              <ProfileContent me={me} profile={profile} />
-            </Col>
-          </div>
-        </Row>
-      </Grid>
-
+      <ProfileContent me={me} profile={profile} />
     </div>
   );
 };

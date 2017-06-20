@@ -252,20 +252,24 @@ export const EditUserInput = new GraphQLInputObjectType({
       type: new GraphQLNonNull(GraphQLEmail),
       description: 'The email address of the account to login to.',
     },
-    password: {
+    location: {
       type: GraphQLString,
-      description: 'The password belonging to the account.',
+      description: 'Where the user is from.',
+    },
+    bio: {
+      type: GraphQLString,
+      description: 'Information about the user.',
     },
     username: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
       description: 'The username for the new user',
     },
     firstName: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
       description: 'The first name of the user.',
     },
     lastName: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
       description: 'The last name of the user.',
     },
   }),

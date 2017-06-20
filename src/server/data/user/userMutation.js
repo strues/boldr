@@ -5,13 +5,15 @@ import { mailer, signToken, generateHash, comparePassword } from '../../services
 import { welcomeEmail } from '../../services/mailer/templates';
 import User from '../../models/User';
 import VerificationToken from '../../models/VerificationToken';
+import { GraphQLUUID } from '../scalars';
 import {
   UserLoginInput,
   UserLoginResponse,
   UserSignupInput,
   AuthError,
 } from './auth/userAuthTypes';
-import UserType from './userType';
+
+import UserType, { EditUserInput } from './userType';
 
 export default {
   loginUser: {
@@ -78,6 +80,30 @@ export default {
         userId: newUser.id,
       });
       return newUser;
+    },
+  },
+  editUseer: {
+    type: UserType,
+    description: 'Edit an existing user',
+    args: {
+      id: {
+        type: new GraphQLNonNull(GraphQLUUID),
+        description: 'The user ID',
+      },
+      input: {
+        type: new GraphQLNonNull(EditUserInput),
+        description: 'The required fields for editing a user.',
+      },
+    },
+    async resolve(_, args, context) {
+      const updatedUser = await User.query().patchAndFetchById(args.id, {
+        firstName: args.input.firstName,
+        lastName: args.input.lastName,
+        bio: args.input.bio,
+        email: args.input.email,
+        location: args.input.location,
+      });
+      return updatedUser;
     },
   },
 };

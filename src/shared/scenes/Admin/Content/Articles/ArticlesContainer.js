@@ -30,8 +30,9 @@ export class ArticlesContainer extends Component {
     const { loading, getArticles } = this.props.data;
     if (loading) {
       return <Loader />;
+    } else {
+      return <Articles articles={getArticles} handleDeleteClick={this.handleDeleteClick} />;
     }
-    return <Articles articles={getArticles} handleDeleteClick={this.handleDeleteClick} />;
   }
 }
 

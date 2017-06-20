@@ -5,7 +5,7 @@ import Helmet from 'react-helmet';
 import IconButton from 'material-ui/IconButton';
 import NavigationExpandMoreIcon from 'material-ui-icons/ExpandMore';
 import MenuItem from 'material-ui/Menu/MenuItem';
-import List from 'material-ui/List/List';
+import List from 'material-ui/List';
 // internal
 import Paper from '~components/Paper';
 import { Row, Col } from '~components/Layout';

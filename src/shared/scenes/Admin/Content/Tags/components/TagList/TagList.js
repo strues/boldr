@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'react-router-dom/Link';
 import { gql, graphql } from 'react-apollo';
 import IconButton from 'material-ui/IconButton';
-import ListItem from 'material-ui/List/ListItem';
+import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 // internal
 import FontIcon from '~components/FontIcon';
 
@@ -24,17 +24,14 @@ const TagList = (props: Props) => {
     <div>
       {props.tags.map(tag =>
         <Link key={tag.id} to={`/admin/content/tags/${tag.name}`}>
-          <ListItem
-            primaryText={tag.name}
-            rightIconButton={
-              <IconButton onTouchTap={() => handleClickDelete(tag)} tooltip="Delete">
-                <FontIcon>
-                  delete_forever
-                </FontIcon>
-              </IconButton>
-            }
-            secondaryText={tag.description}
-          />
+        <ListItem>
+          <ListItemIcon onClick={() => handleClickDelete(tag)}>
+           <FontIcon>
+             delete_forever
+           </FontIcon>
+         </ListItemIcon>
+         <ListItemText primary={tag.name} secondary={tag.description}/>
+        </ListItem>
         </Link>,
       )}
     </div>

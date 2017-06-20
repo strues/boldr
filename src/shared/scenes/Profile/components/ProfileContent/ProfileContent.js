@@ -7,6 +7,7 @@ import Button from '~components/Button';
 import FontIcon from '~components/FontIcon';
 import Col from '~components/Layout/Col';
 import Row from '~components/Layout/Row';
+import Grid from '~components/Layout/Grid';
 import Headline from '~components/Headline';
 import Social from '~components/Social';
 
@@ -20,8 +21,7 @@ const DetailList = styled.ul`
 `;
 const ImgWrapper = styled.div`
   width: 100%;
-  display: flex;
-  justify-content: center;
+
 `;
 const EditWrapper = styled.div`
   width: 100%;
@@ -49,45 +49,42 @@ const ProfileContent = (props: Props) => {
   );
   return (
     <div className="boldr-profile__content">
-      <Row end="xs">
-
-        {props.me ? editButtons : null}
-      </Row>
-      <Row>
-        <Col sm={12} md={6}>
-          <ImgWrapper>
+      <Grid fluid={false}>
+        <Row>
+          {props.me ? editButtons : null}
+          <Col xs={12} md={6}>
             <img
               src={profile.avatarUrl}
               className="boldr-profile__avatar"
               alt={`${profile.username}'s avatar`}
             />
-          </ImgWrapper>
-        </Col>
-        <Col sm={12} md={6}>
-          <Headline type="h1">
-            {profile.firstName} {' '} {profile.lastName}'s Profile
-          </Headline>
+          </Col>
+          <Col xs={12} md={6}>
+            <Headline type="h1">
+              {profile.firstName} {' '} {profile.lastName}'s Profile
+            </Headline>
 
-          <DetailList>
-            <ProfileDetail label={<FontIcon>email</FontIcon>} detail={profile.email} />
-            <ProfileDetail label={<FontIcon>web</FontIcon>} detail={profile.website} />
-            <ProfileDetail label={<FontIcon>location_on</FontIcon>} detail={profile.location} />
-            <ProfileDetail label={<FontIcon>library_books</FontIcon>} detail={profile.bio} />
-          </DetailList>
-          <Social
-            facebook
-            fburl={profile.socialMedia.facebookUrl}
-            twitter
-            turl={profile.socialMedia.twitterUrl}
-            google
-            gurl={profile.socialMedia.googleUrl}
-            github
-            ghurl={profile.socialMedia.githubUrl}
-            linkedin
-            lurl={profile.socialMedia.linkedinUrl}
-          />
-        </Col>
-      </Row>
+            <DetailList>
+              <ProfileDetail label={<FontIcon>email</FontIcon>} detail={profile.email} />
+              <ProfileDetail label={<FontIcon>web</FontIcon>} detail={profile.website} />
+              <ProfileDetail label={<FontIcon>location_on</FontIcon>} detail={profile.location} />
+              <ProfileDetail label={<FontIcon>library_books</FontIcon>} detail={profile.bio} />
+            </DetailList>
+            <Social
+              facebook
+              fburl={profile.socialMedia.facebookUrl}
+              twitter
+              turl={profile.socialMedia.twitterUrl}
+              google
+              gurl={profile.socialMedia.googleUrl}
+              github
+              ghurl={profile.socialMedia.githubUrl}
+              linkedin
+              lurl={profile.socialMedia.linkedinUrl}
+            />
+          </Col>
+        </Row>
+      </Grid>
     </div>
   );
 };
