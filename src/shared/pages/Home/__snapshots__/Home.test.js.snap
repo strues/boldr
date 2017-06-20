@@ -2,7 +2,7 @@
 
 exports[`<Home /> renders snapshot 1`] = `
 <div>
-  <Apollo(Connect(BaseTemplate))
+  <Connect(BaseTemplate)
     footer={
       <Footer
         single={false}
@@ -16,16 +16,11 @@ exports[`<Home /> renders snapshot 1`] = `
     }
     heroContent={<HomeHero />}
   >
-    <Grid
-      componentClass="div"
-    >
-      <Row
-        componentClass="div"
-      >
-        <Col
-          componentClass="div"
+    <Styled(Grid)>
+      <Styled(Row)>
+        <Styled(Col)
           md={4}
-          sm={12}
+          xs={12}
         >
           <Headline
             type="h2"
@@ -37,11 +32,10 @@ exports[`<Home /> renders snapshot 1`] = `
           >
             Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.
           </Paragraph>
-        </Col>
-        <Col
-          componentClass="div"
+        </Styled(Col)>
+        <Styled(Col)
           md={4}
-          sm={12}
+          xs={12}
         >
           <Headline
             type="h2"
@@ -53,11 +47,10 @@ exports[`<Home /> renders snapshot 1`] = `
           >
             Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.
           </Paragraph>
-        </Col>
-        <Col
-          componentClass="div"
+        </Styled(Col)>
+        <Styled(Col)
           md={4}
-          sm={12}
+          xs={12}
         >
           <Headline
             type="h2"
@@ -69,9 +62,9 @@ exports[`<Home /> renders snapshot 1`] = `
           >
             Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate. Eget mattis at, laoreet vel velit lorem.
           </Paragraph>
-        </Col>
-      </Row>
-    </Grid>
-  </Apollo(Connect(BaseTemplate))>
+        </Styled(Col)>
+      </Styled(Row)>
+    </Styled(Grid)>
+  </Connect(BaseTemplate)>
 </div>
 `;

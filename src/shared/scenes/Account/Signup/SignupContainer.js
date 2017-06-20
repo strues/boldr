@@ -2,6 +2,7 @@
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
+// internal
 import { signupUserError, signupUserSuccess } from '../state/actions';
 import Signup from './Signup';
 

@@ -4,11 +4,8 @@ exports[`<DashboardFooter /> renders snapshot 1`] = `
 <footer
   className="boldrui-dash-footer"
 >
-  <Row
-    componentClass="div"
-  >
-    <Col
-      componentClass="div"
+  <Styled(Row)>
+    <Styled(Col)
       md={9}
       sm={8}
     >
@@ -17,9 +14,8 @@ exports[`<DashboardFooter /> renders snapshot 1`] = `
       >
         widget
       </span>
-    </Col>
-    <Col
-      componentClass="div"
+    </Styled(Col)>
+    <Styled(Col)
       md={3}
       sm={4}
     >
@@ -33,7 +29,7 @@ exports[`<DashboardFooter /> renders snapshot 1`] = `
           Boldr
         </a>
       </span>
-    </Col>
-  </Row>
+    </Styled(Col)>
+  </Styled(Row)>
 </footer>
 `;

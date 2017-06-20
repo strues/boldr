@@ -4,31 +4,21 @@ exports[`<ArticleCard /> renders snapshot 1`] = `
 <div
   className="boldrui-post-card"
 >
-  <Card
-    expandable={false}
-    expanded={null}
-    initiallyExpanded={false}
-  >
-    <CardMedia
-      overlay={
-        <CardTitle
-          subtitle="Invalid Date"
-          title="Test Post"
-        />
-      }
-    >
+  <withStyles(Card)>
+    <withStyles(CardHeader)
+      subheader="Invalid Date"
+      title="Test Post"
+    />
+    <withStyles(CardMedia)>
       <img
         alt="Test Post feature image"
         src="http://boldr.io/images/logo.png"
       />
-    </CardMedia>
-    <CardText>
+    </withStyles(CardMedia)>
+    <withStyles(CardContent)>
       An excerpt
-      <Row
-        componentClass="div"
-      >
-        <Col
-          componentClass="div"
+      <Styled(Row)>
+        <Styled(Col)
           sm={12}
         >
           <Link
@@ -52,10 +42,10 @@ exports[`<ArticleCard /> renders snapshot 1`] = `
               Read More
             </Button>
           </Link>
-        </Col>
-      </Row>
-    </CardText>
-    <CardActions>
+        </Styled(Col)>
+      </Styled(Row)>
+    </withStyles(CardContent)>
+    <withStyles(CardActions)>
       <TagBlock
         tags={
           Array [
@@ -66,7 +56,7 @@ exports[`<ArticleCard /> renders snapshot 1`] = `
           ]
         }
       />
-    </CardActions>
-  </Card>
+    </withStyles(CardActions)>
+  </withStyles(Card)>
 </div>
 `;

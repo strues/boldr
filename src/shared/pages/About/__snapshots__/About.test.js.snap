@@ -2,7 +2,7 @@
 
 exports[`<About /> renders snapshot 1`] = `
 <div>
-  <Apollo(Connect(BaseTemplate))
+  <Connect(BaseTemplate)
     helmetMeta={
       <HelmetWrapper
         encodeSpecialCharacters={true}
@@ -10,21 +10,11 @@ exports[`<About /> renders snapshot 1`] = `
       />
     }
   >
-    Produced with 
-    <span
-      aria-label="heart"
-      role="img"
+    <Headline
+      type="h1"
     >
-      ❤️
-    </span>
-    by  
-    <a
-      href="https://twitter.com/struesco"
-      rel="noopener noreferrer"
-      target="_blank"
-    >
-      Steven Truesdell
-    </a>
-  </Apollo(Connect(BaseTemplate))>
+      About
+    </Headline>
+  </Connect(BaseTemplate)>
 </div>
 `;

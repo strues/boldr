@@ -8,8 +8,8 @@ exports[`<Settings /> renders snapshot 1`] = `
     encodeSpecialCharacters={true}
     title="Admin: Settings"
   />
-  <SettingsPanel>
-    <HeaderPanel
+  <undefined>
+    <undefined
       image={
         <img
           alt="boldr logo"
@@ -67,6 +67,6 @@ exports[`<Settings /> renders snapshot 1`] = `
         }
       }
     />
-  </SettingsPanel>
+  </undefined>
 </div>
 `;

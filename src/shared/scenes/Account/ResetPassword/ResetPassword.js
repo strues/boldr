@@ -22,9 +22,7 @@ class ResetPassword extends Component {
   props: Props;
 
   handleReset(values, props): void {
-    this.props.dispatch(
-      resetPassword(values.password, this.props.match.params.token),
-    );
+    this.props.dispatch(resetPassword(values.password, this.props.match.params.token));
   }
 
   render() {

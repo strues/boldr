@@ -9,8 +9,6 @@ describe('Dashboard reducer', () => {
       loaded: false,
       loading: false,
       error: null,
-      activities: [],
-      stats: {},
     });
   });
   it('should hide the sidebar', () => {
@@ -19,16 +17,12 @@ describe('Dashboard reducer', () => {
       loaded: false,
       loading: false,
       error: null,
-      activities: [],
-      stats: {},
     };
     const stateAfter = {
       open: false,
       loaded: false,
       loading: false,
       error: null,
-      activities: [],
-      stats: {},
     };
     expect(
       dashboardReducer(initialState, {
@@ -42,16 +36,12 @@ describe('Dashboard reducer', () => {
       loaded: false,
       loading: false,
       error: null,
-      activities: [],
-      stats: {},
     };
     const stateAfter = {
       loaded: true,
       open: true,
       loading: false,
       error: null,
-      activities: [],
-      stats: {},
     };
     expect(
       dashboardReducer(initialState, {

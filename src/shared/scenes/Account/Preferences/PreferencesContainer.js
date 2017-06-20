@@ -1,5 +1,6 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+// internal
 import { uploadProfileImage, uploadAvatarImage } from '../../Admin/state';
 import Preferences from './Preferences';
 

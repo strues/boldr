@@ -29,6 +29,7 @@ describe('Boldr Reducer', () => {
         expanded: true,
         isMobile: false,
         layout: 'grid',
+        showHeader: true,
         loaded: false,
         visible: true,
         modal: false,

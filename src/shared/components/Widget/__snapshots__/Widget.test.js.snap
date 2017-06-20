@@ -4,15 +4,11 @@ exports[`<Widget /> renders snapshot 1`] = `
 <div
   className="boldrui-widget"
 >
-  <Card
-    expandable={false}
-    expanded={null}
-    initiallyExpanded={false}
-  >
-    <CardTitle
+  <undefined>
+    <undefined
       title="widget"
     />
-    <CardText />
-  </Card>
+    <undefined />
+  </undefined>
 </div>
 `;

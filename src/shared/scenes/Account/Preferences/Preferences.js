@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import Dropzone from 'react-dropzone';
+// internal
 import { Col, Row, Grid } from '~components/Layout';
 import { BaseTemplate } from '../../../templates';
 import EditProfile from './components/EditProfile';
@@ -51,9 +52,7 @@ class Preferences extends Component {
     const payload = files[0];
 
     const isProf = this.state.profImg === true;
-    isProf
-      ? this.props.uploadProfileImg(payload)
-      : this.props.uploadAvatarImg(payload);
+    isProf ? this.props.uploadProfileImg(payload) : this.props.uploadAvatarImg(payload);
   }
   handleAvatarImgClick = () => {
     this.setState({
@@ -94,9 +93,7 @@ class Preferences extends Component {
         <Grid>
           <Row>
             <Col xs={12} md={4}>
-              {this.props.me
-                ? <EditProfile profile={this.props.me} />
-                : <h1>Loading</h1>}
+              {this.props.me ? <EditProfile profile={this.props.me} /> : <h1>Loading</h1>}
             </Col>
             <Col xs={12} md={4}>
               {this.renderDropzone()}

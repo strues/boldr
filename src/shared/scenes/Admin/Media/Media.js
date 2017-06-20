@@ -49,7 +49,6 @@ class Media extends Component {
         <Helmet title="Media" />
         <Row>
           <Col xs={12}>
-
             <Headline type="h2">
               Media Gallery
             </Headline>

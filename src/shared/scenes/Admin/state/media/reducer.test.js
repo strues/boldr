@@ -6,7 +6,7 @@ describe('Attachment', () => {
       all: {},
       ids: [],
       isFetching: false,
-      currentMedia: {},
+      currentMedia: { uploadMedia: { name: '' } },
     });
   });
 });

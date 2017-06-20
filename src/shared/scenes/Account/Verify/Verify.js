@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
+// internal
 import FormCard from '~components/Form/FormCard/FormCard';
 import BaseTemplate from '../../../templates/BaseTemplate';
 import Button from '~components/Button';

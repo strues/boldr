@@ -1,15 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<FileCardView />, renders with files as props 1`] = `
-<Grid
-  componentClass="div"
+<Styled(Grid)
   fluid={true}
 >
-  <Row
-    componentClass="div"
-  >
-    <Col
-      componentClass="div"
+  <Styled(Row)>
+    <Styled(Col)
       lg={3}
       md={4}
       sm={12}
@@ -31,9 +27,8 @@ exports[`<FileCardView />, renders with files as props 1`] = `
           }
         }
       />
-    </Col>
-    <Col
-      componentClass="div"
+    </Styled(Col)>
+    <Styled(Col)
       lg={3}
       md={4}
       sm={12}
@@ -55,7 +50,7 @@ exports[`<FileCardView />, renders with files as props 1`] = `
           }
         }
       />
-    </Col>
-  </Row>
-</Grid>
+    </Styled(Col)>
+  </Styled(Row)>
+</Styled(Grid)>
 `;
