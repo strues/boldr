@@ -1,8 +1,8 @@
 /* @flow */
 import React, { Component } from 'react';
-import Button from '~components/Button';
-import Grid from '~components/Layout/Grid';
-import Icon from '~components/Icons';
+import Button from '@@components/Button';
+import Grid from '@@components/Layout/Grid';
+import Icon from '@@components/Icons';
 import IconButton from 'material-ui/IconButton';
 import classNames from 'classnames/bind';
 import cxN from 'classnames';

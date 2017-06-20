@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 // internal
-import Loader from '~components/Loader';
+import Loader from '@@components/Loader';
 import Tags from './Tags';
 
 type Props = {

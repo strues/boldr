@@ -7,8 +7,8 @@ import NavigationExpandMoreIcon from 'material-ui-icons/ExpandMore';
 import MenuItem from 'material-ui/Menu/MenuItem';
 import List from 'material-ui/List';
 // internal
-import Paper from '~components/Paper';
-import { Row, Col } from '~components/Layout';
+import Paper from '@@components/Paper';
+import { Row, Col } from '@@components/Layout';
 import { createTag, deleteTag } from '../../../Blog/state';
 
 import TagList from './components/TagList';

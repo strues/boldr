@@ -4,8 +4,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 // internal
-import Button from '~components/Button';
-import { InputField, Form } from '~components/Form';
+import Button from '@@components/Button';
+import { InputField, Form } from '@@components/Form';
 
 const style = {
   margin: 12,

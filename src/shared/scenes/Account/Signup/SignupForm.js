@@ -2,12 +2,12 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 // internal
-import Row from '~components/Layout/Row';
-import Col from '~components/Layout/Col';
-import Button from '~components/Button';
-import InputField from '~components/Form/Fields/InputField';
-import Form from '~components/Form/Form';
-import { isRequired, isEmail } from '~core/validations';
+import Row from '@@components/Layout/Row';
+import Col from '@@components/Layout/Col';
+import Button from '@@components/Button';
+import InputField from '@@components/Form/Fields/InputField';
+import Form from '@@components/Form/Form';
+import { isRequired, isEmail } from '@@core/validations';
 
 type Props = {
   handleSubmit: Function,

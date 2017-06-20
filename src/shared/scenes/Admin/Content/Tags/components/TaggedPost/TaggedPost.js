@@ -6,7 +6,7 @@ import Toolbar from 'material-ui/Toolbar';
 import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import { gql, graphql } from 'react-apollo';
 
-import Loader from '~components/Loader';
+import Loader from '@@components/Loader';
 
 type Props = {
   data: Object,

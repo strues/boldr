@@ -2,7 +2,7 @@
 
 import React from 'react';
 import classNames from 'classnames';
-import Icon from '~components/Icons';
+import Icon from '@@components/Icons';
 import Option from '../../../Option';
 
 const RemoveComponent = ({ config, onChange }) => {

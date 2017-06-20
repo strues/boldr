@@ -2,8 +2,8 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { Grid, Col, Row } from '~components/Layout';
-import Paper from '~components/Paper';
+import { Grid, Col, Row } from '@@components/Layout';
+import Paper from '@@components/Paper';
 import LoginForm from './LoginForm';
 
 type Props = {

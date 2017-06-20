@@ -1,6 +1,6 @@
 import { push } from 'react-router-redux';
-import { api, API_PREFIX, getToken } from '~core';
-import * as notif from '~core/constants';
+import { api, API_PREFIX, getToken } from '@@core';
+import * as notif from '@@core/constants';
 import { sendNotification } from '../notifications/notifications';
 import * as t from './actionTypes';
 

@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import dateFns from 'date-fns';
 import classnames from 'classnames';
 import { StyleClasses } from '../../../../theme/styleClasses';
-import Col from '~components/Layout/Col';
-import Row from '~components/Layout/Row';
-import Button from '~components/Button';
+import Col from '@@components/Layout/Col';
+import Row from '@@components/Layout/Row';
+import Button from '@@components/Button';
 import Card, {
   CardHeader,
   CardMedia,

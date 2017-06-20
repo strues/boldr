@@ -13,7 +13,7 @@ $paper-transition-time: $transition-length * 2 !default;
     .#{$boldr-ns}paper__#{$i} {
       @include md-shadow($i);
 
-      background-color: #fff;
+      background-color: $white;
     }
 
     @if $i == 0 and $include-media {

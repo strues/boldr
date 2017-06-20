@@ -3,7 +3,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import flatMapDeep from 'lodash/flatMapDeep';
-import AnimatedRouter from '~components/AnimatedRouter';
+import AnimatedRouter from '@@components/AnimatedRouter';
 import routes from './routes';
 
 type Props = {
@@ -20,9 +20,7 @@ const BlogContainer = (props: Props) => {
   const flattenedRoutes = flattenRoutes(routes);
   return (
     <div>
-      <AnimatedRouter.Switch>
-        {flattenedRoutes.map(props => <AnimatedRouter.Route key={props.path} {...props} />)}
-      </AnimatedRouter.Switch>
+      {flattenedRoutes.map(props => <AnimatedRouter.Route key={props.path} {...props} />)}
     </div>
   );
 };

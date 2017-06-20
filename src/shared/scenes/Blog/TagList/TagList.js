@@ -1,8 +1,8 @@
 /* @flow */
 
 import React from 'react';
-import Loader from '~components/Loader';
-import { Grid, Col, Row } from '~components/Layout';
+import Loader from '@@components/Loader';
+import { Grid, Col, Row } from '@@components/Layout';
 import ArticleCard from '../components/ArticleCard';
 
 type Props = {

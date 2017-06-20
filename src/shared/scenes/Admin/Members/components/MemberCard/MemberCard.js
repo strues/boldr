@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 // internal
-import Button from '~components/Button';
-import Avatar from '~components/Avatar';
+import Button from '@@components/Button';
+import Avatar from '@@components/Avatar';
 
 const MemListItem = styled.li`
   width: 100%;

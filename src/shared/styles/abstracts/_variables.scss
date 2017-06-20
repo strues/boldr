@@ -1,12 +1,16 @@
+
+/// Namespace
+$boldr-ns: "boldrui-" !default;
+$dash-ns: "boldrui-dash-"; // .#{$dash-ns}
 /// Typography
 /// @group typography
-$font-name: 'Roboto' !default;
+$font-name: "Roboto" !default;
 /// @group typography
-$font-family: $font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif !default;
+$font-family: $font-name, "Helvetica Neue", Arial, Helvetica, sans-serif !default;
 /// @group typography
-$header-font-name: 'Chivo' !default;
+$header-font-name: "Chivo" !default;
 /// @group typography
-$header-font-family: $header-font-name, 'Helvetica Neue', Arial, Helvetica, sans-serif !default;
+$header-font-family: $header-font-name, "Helvetica Neue", Arial, Helvetica, sans-serif !default;
 /// @group typography
 $font-size-base: 1rem !default;
 /// @group typography
@@ -26,7 +30,7 @@ $font-weight-thin: 200 !default;
 /// @group typography
 $font-weight-bold: 600 !default;
 /// @group typography
-$header-font-weight: $font-weight-thin !default;
+$header-font-weight: $font-weight-bold !default;
 /// @group typography
 $btn-font-weight: $font-weight-base !default;
 /// @group typography
@@ -133,7 +137,8 @@ $md-transition-deceleration: cubic-bezier(0, 0, 0.2, 1);
 $boldrui-light-theme: true !default;
 $shadow-color: rgba(0, 0, 0, 0.2) !default;
 $body-background: $cloud !default;
-$link-color: $accent-color !default;
+$link-color: $primary-color !default;
+$link-hover-color: $carmine-pink;
 $error-color: $carmine-pink !default;
 $warning-color: $golden !default;
 $text-color: $black-transparent !default;
@@ -154,6 +159,35 @@ $breadcrumb-borders: (
   )
 );
 $layout-transition-speed: 0.25s !default;
+
+/// Button
+/// @group btn
+$btn-white: #fff;
+$btn-gray: #bbb;
+$btn-light-gray: #e5e5e5;
+
+$btn-primary: $primary-color;
+$btn-primary-hover: darken($primary-color, 5%);
+$btn-primary-active: darken($primary-color, 5%);
+
+$btn-secondary: $secondary-color;
+$btn-secondary-hover: darken($secondary-color, 5%);
+$btn-secondary-active: darken($secondary-color, 5%);
+
+$btn-danger: #f44;
+$btn-danger-hover: #f66;
+$btn-danger-active: #e33;
+
+
+/// Site Header
+/// @group siteheader
+$site-header-bg: $snow;
+$site-header-height: 70px;
+
+
+
+/// Dashboard Sidebar
+/// @group sidebar
 $sidebar-width: 200px !default;
 $sidebar-padding: 0;
 $sidebar-top-space: 1rem;
@@ -206,14 +240,6 @@ $topbar-border: (
   )
 );
 
-/// Dashboard Footer
-/// @group dashboard
-$dash-footer-height: 50px !default;
-$dash-footer-bg: $snow !default;
-$dash-footer-color: #636c72;
-$dash-footer-line-height: 17px !default;
-
-
 /// The default min width for a mobile device.
 /// @type Number
 /// @group media-queries
@@ -263,3 +289,10 @@ $md-tablet-landscape-media: 'screen and (min-width: #{$md-tablet-min-width}) and
 /// @type String
 /// @group media-queries
 $desktop-media: 'screen and (min-width: #{$md-desktop-min-width})' !default;
+
+
+
+/// Z-Indexes
+/// @group zindex
+/// Efficient way of keeping track of z-indexes
+$site-header-zindex: 2000;

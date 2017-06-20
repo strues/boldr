@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import { bindActionCreators } from 'redux';
-import Loader from '~components/Loader';
+import Loader from '@@components/Loader';
 import { getMediaType, toggleMedia } from '../state/media';
 
 import Media from './Media';

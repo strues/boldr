@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // internal
-import { Row, Col } from '~components/Layout';
-import Paper from '~components/Paper';
-import Image from '~components/Image';
+import { Row, Col } from '@@components/Layout';
+import Paper from '@@components/Paper';
+import Image from '@@components/Image';
 import { updateAttachment } from '../../state';
 import FileEditorForm from '../components/FileEditorForm';
 

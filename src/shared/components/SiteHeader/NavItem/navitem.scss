@@ -1,3 +1,4 @@
+@import "../../../styles/abstracts/all";
 .boldrui-sh__navitem {
   margin-bottom: 25px;
 
@@ -8,7 +9,7 @@
 
 .boldrui-sh__navitem-link {
   padding: 15px;
-  color: currentColor;
+  color: $link-color;
   text-decoration: none;
   cursor: pointer;
   font-size: 20px;
@@ -23,7 +24,7 @@
     font-size: 16px;
 
     &:hover {
-      color: #fff;
+      color: $link-hover-color;
     }
   }
 }

@@ -1,24 +1,11 @@
-@charset 'utf-8';
+@charset "utf-8";
 
-/// Namespace
-$boldr-ns: 'boldrui-' !default;
-$dash-ns: 'boldrui-dash-'; // .#{$dash-ns}
+@import "vendor/draft";
+@import "abstracts/all";
+@import "vendor/griddle";
+@import "base/all";
+@import "components/all";
 
-@import 'vendor/draft';
-@import 'abstracts/colors/all';
-
-// Our variables
-@import 'abstracts/variables';
-// Our mixins
-@import 'abstracts/mixins';
-// Bootstrap components and custom bootstrap component variations
-// @import 'vendor/all';
-// Base (typography, grid, animation)
-
-@import 'base/all';
-@import 'components/all';
-
-// @include react-md-everything;
 @include boldrui-paper;
 
 .boldr-dropzone__drop-sm {
@@ -56,44 +43,4 @@ $dash-ns: 'boldrui-dash-'; // .#{$dash-ns}
 
 .toolbar--footer > * {
   float: right;
-}
-
-.griddle-row {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
-}
-
-table.griddle-table {
-  width: calc(100% - 40px);
-  margin-left: auto;
-  margin-right: auto;
-  font-family: 'Roboto', sans-serif;
-  font-size: 14.5px;
-  margin-bottom: 10px;
-  text-align: center;
-}
-
-table.griddle-table tr {
-  border-bottom: 1px solid rgba(177, 168, 168, 0.77);
-}
-
-table.griddle-table tbody > tr:hover {
-  background-color: rgba(224, 224, 224, 0.77);
-  cursor: pointer;
-  cursor: hand;
-}
-
-input.griddle-filter {
-  background: rgba(255, 255, 255, 0.9);
-  padding-left: 20px;
-  width: 240px;
-  height: 30px;
-  margin: 10px;
-}
-
-input.griddle-filter::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-  color: #8f8f8f;
-}
-
-table.griddle-table th {
-  text-transform: capitalize;
 }

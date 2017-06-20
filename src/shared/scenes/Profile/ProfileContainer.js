@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { gql, graphql } from 'react-apollo';
-import Loader from '~components/Loader';
-import { BaseTemplate } from '../../templates';
+import Loader from '@@components/Loader';
 import Profile from './Profile';
 
 type Props = {
@@ -63,12 +62,10 @@ export class ProfileContainer extends Component {
       return <Loader />;
     }
     return (
-      <BaseTemplate
-        bgImg={getUserByUsername.profileImage}
-        helmetMeta={<Helmet title={`${getUserByUsername.username}'s Profile`} />}
-      >
+      <div>
+        <Helmet title={`${getUserByUsername.username}'s Profile`} />
         <Profile profile={getUserByUsername} me={this.state.me} />
-      </BaseTemplate>
+      </div>
     );
   }
 }

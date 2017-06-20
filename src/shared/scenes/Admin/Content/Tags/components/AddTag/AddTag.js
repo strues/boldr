@@ -4,10 +4,10 @@ import { Field, reduxForm } from 'redux-form';
 import { graphql, compose } from 'react-apollo';
 import gql from 'graphql-tag';
 // internal
-import Button from '~components/Button';
-import Form from '~components/Form/Form';
-import InputField from '~components/Form/Fields/InputField';
-import { formatReduxFormErrors } from '~core/reduxFormErrors';
+import Button from '@@components/Button';
+import Form from '@@components/Form/Form';
+import InputField from '@@components/Form/Fields/InputField';
+import { formatReduxFormErrors } from '@@core/reduxFormErrors';
 
 type Props = {
   addTagMutation: Function,

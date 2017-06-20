@@ -2,9 +2,9 @@
 
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import Button from '~components/Button';
-import Select from '~components/Select';
-import { SelectInput, Form, InputField } from '~components/Form';
+import Button from '@@components/Button';
+import Select from '@@components/Select';
+import { SelectInput, Form, InputField } from '@@components/Form';
 
 const style = {
   margin: 12,

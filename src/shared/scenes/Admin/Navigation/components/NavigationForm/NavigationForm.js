@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { Field, reduxForm, formValueSelector, FieldArray } from 'redux-form';
 import { connect } from 'react-redux';
 import IconButton from 'material-ui/IconButton';
-import Button from '~components/Button';
+import Button from '@@components/Button';
 import { InputField, FontIcon } from 'boldr-ui';
 
 type Props = {

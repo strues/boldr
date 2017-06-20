@@ -3,9 +3,8 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 
-import FormCard from '~components/Form/FormCard';
-import BaseTemplate from '../../../templates/BaseTemplate';
-import { forgotPassword } from '~state/modules/users/actions';
+import FormCard from '@@components/Form/FormCard';
+import { forgotPassword } from '@@state/modules/users/actions';
 import ForgotPasswordForm from './ForgotPasswordForm';
 
 type Props = {
@@ -21,7 +20,8 @@ class ForgotPassword extends PureComponent {
   };
   render() {
     return (
-      <BaseTemplate helmetMeta={<Helmet title="Forgot Password" />}>
+      <div>
+        <Helmet title="Forgot Password" />
         <div className="boldr-form__forgot">
           <FormCard
             title="Forgot Password"
@@ -30,7 +30,7 @@ class ForgotPassword extends PureComponent {
             form={<ForgotPasswordForm onSubmit={this.handleSubmit} />}
           />
         </div>
-      </BaseTemplate>
+      </div>
     );
   }
 }

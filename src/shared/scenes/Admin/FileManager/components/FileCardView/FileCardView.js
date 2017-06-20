@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 // internal
-import { Grid, Row, Col } from '~components/Layout';
+import { Grid, Row, Col } from '@@components/Layout';
 import File from '../File';
 
 type Props = {

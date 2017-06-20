@@ -3,13 +3,14 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
 import styled from 'styled-components';
-import Button from '~components/Button';
-import FontIcon from '~components/FontIcon';
-import Col from '~components/Layout/Col';
-import Row from '~components/Layout/Row';
-import Grid from '~components/Layout/Grid';
-import Headline from '~components/Headline';
-import Social from '~components/Social';
+// internal
+import Button from '@@components/Button';
+import FontIcon from '@@components/FontIcon';
+import Col from '@@components/Layout/Col';
+import Row from '@@components/Layout/Row';
+import Grid from '@@components/Layout/Grid';
+import Headline from '@@components/Headline';
+import Social from '@@components/Social';
 
 import ProfileDetail from '../ProfileDetail';
 

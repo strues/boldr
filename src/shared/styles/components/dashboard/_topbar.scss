@@ -1,7 +1,7 @@
 .#{$boldr-ns}topbar {
+  @include md-shadow(2);
   background: $topbar-bg;
   margin-bottom: 15px;
-  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12);
   width: 100%;
   padding-right: 50px;
 }
@@ -83,7 +83,7 @@
   }
 }
 
-.#{$boldr-ns}topbar-child:before {
+.#{$boldr-ns}topbar-child::before {
   @include clearfix;
 }
 
@@ -103,7 +103,7 @@
   text-indent: 0.5em;
   margin-right: 0;
   color: $topbar-search-input-color;
-  text-shadow: 0 0 0 $near-black;
+  text-shadow: 0 0 0 $black-transparent;
   transition: all 250ms;
 }
 

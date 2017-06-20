@@ -8,10 +8,10 @@ import Helmet from 'react-helmet';
 import { format } from 'date-fns';
 import Griddle, { plugins, RowDefinition, ColumnDefinition } from 'griddle-react';
 // internal
-import Paper from '~components/Paper';
-import Avatar from '~components/Avatar';
-import Headline from '~components/Headline';
-import Loader from '~components/Loader';
+import Paper from '@@components/Paper';
+import Avatar from '@@components/Avatar';
+import Headline from '@@components/Headline';
+import Loader from '@@components/Loader';
 
 const styleConfig = {
   icons: {

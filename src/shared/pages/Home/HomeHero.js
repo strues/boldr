@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Headline, Paragraph } from 'boldr-ui';
-import { Grid, Col, Row } from '~components/Layout';
+import { Grid, Col, Row } from '@@components/Layout';
 import Button from '../../components/Button';
 
 const ContentArea = styled.div`

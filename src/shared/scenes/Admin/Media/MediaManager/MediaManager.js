@@ -3,11 +3,11 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { gql, graphql } from 'react-apollo';
 // internal
-import { Grid, Col, Row } from '~components/Layout';
-import Photo from '~components/Photo';
-import Block from '~components/Block';
-import Headline from '~components/Headline';
-import Loader from '~components/Loader';
+import { Grid, Col, Row } from '@@components/Layout';
+import Photo from '@@components/Photo';
+import Block from '@@components/Block';
+import Headline from '@@components/Headline';
+import Loader from '@@components/Loader';
 import MediaForm from './components/MediaForm';
 
 type Props = {

@@ -2,7 +2,7 @@
 import React from 'react';
 import { graphql, gql } from 'react-apollo';
 
-import Upload from '~components/Upload';
+import Upload from '@@components/Upload';
 
 type Props = {
   mutate: Function,

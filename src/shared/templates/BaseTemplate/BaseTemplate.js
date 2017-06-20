@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 
-import Footer from '~components/Footer';
-import { showHeader } from '~state/modules/boldr/ui/actions';
+import Footer from '@@components/Footer';
+import { showHeader } from '@@state/modules/boldr/ui/actions';
 import Hero from '../../components/Hero/Hero';
 
 export type Props = {
@@ -31,12 +31,7 @@ const Wrapper = styled.div`
 const ContentWrapper = styled.section`
   width: 100%;
   height: 100%;
-  min-height: 100%;
-  box-sizing: border-box;
-  position: relative;
-  margin: 0 auto;
-  padding-top: 50px;
-  padding-bottom: 150px;
+
   background-color: #e5eaed;
 `;
 

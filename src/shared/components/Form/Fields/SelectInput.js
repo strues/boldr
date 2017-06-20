@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import Select, { SelectTrigger } from '~components/Select';
+import Select, { SelectTrigger } from '@@components/Select';
 import InputWrapper from '../InputWrapper';
 /**
  * An internal error handler to make sure we always pass

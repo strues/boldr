@@ -1,6 +1,6 @@
 /* @flow */
 import React, { Component } from 'react';
-import Button from '~components/Button';
+import Button from '@@components/Button';
 import { Toolbar, ToolbarGroup, ToolbarTitle } from 'material-ui/Toolbar';
 // $FlowIssue
 import Helmet from 'react-helmet';

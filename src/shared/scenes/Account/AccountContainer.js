@@ -9,8 +9,8 @@ import { Footer, Loader, Headline } from 'boldr-ui';
 import Switch from 'react-router-dom/Switch';
 import Route from 'react-router-dom/Route';
 import flatMapDeep from 'lodash/flatMapDeep';
-import { selectMe } from '~state/modules/users/selectors';
-import SiteHeaderContainer from '~components/SiteHeader/SiteHeaderContainer';
+import { selectMe } from '@@state/modules/users/selectors';
+import SiteHeaderContainer from '@@components/SiteHeader/SiteHeaderContainer';
 import routes from './routes';
 
 type Data = {

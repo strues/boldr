@@ -2,9 +2,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { InputField, Form } from '~components/Form';
-import Button from '~components/Button';
-import Headline from '~components/Headline';
+import { InputField, Form } from '@@components/Form';
+import Button from '@@components/Button';
+import Headline from '@@components/Headline';
 
 type Props = {
   handleSubmit: Function,

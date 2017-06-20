@@ -3,8 +3,7 @@ import React from 'react';
 import Link from 'react-router-dom/Link';
 import Helmet from 'react-helmet';
 // internal
-import FormCard from '~components/Form/FormCard';
-import BaseTemplate from '../../../templates/BaseTemplate';
+import FormCard from '@@components/Form/FormCard';
 import SignupForm from './SignupForm';
 
 const Signup = (props: { onSubmit: () => void }) => {
@@ -18,7 +17,8 @@ const Signup = (props: { onSubmit: () => void }) => {
     props.onSubmit(formInput);
   }
   return (
-    <BaseTemplate helmetMeta={<Helmet title="Signup" />}>
+    <div>
+      <Helmet title="Signup" />
       <div className="boldr-form__signup">
         <FormCard
           skinny={false}
@@ -27,7 +27,7 @@ const Signup = (props: { onSubmit: () => void }) => {
           extra1={formBottom}
         />
       </div>
-    </BaseTemplate>
+    </div>
   );
 };
 

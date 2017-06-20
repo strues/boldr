@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import classnames from 'classnames';
+// internal
 import { StyleClasses } from '../../../../theme/styleClasses';
 
 const DetailLabel = styled.div`

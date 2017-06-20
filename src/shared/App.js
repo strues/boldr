@@ -4,33 +4,22 @@ import classnames from 'classnames';
 import Helmet from 'react-helmet';
 import { compose, graphql, gql } from 'react-apollo';
 import { connect } from 'react-redux';
-import { selectMe } from './state/modules/users/selectors';
 import { injectGlobal, ThemeProvider } from 'styled-components';
-import { StyleClasses } from 'boldr-ui';
 import { Route, Switch, Redirect } from 'react-router-dom';
+// internal
+import { StyleClasses } from './theme/styleClasses';
 import AnimatedRouter from './components/AnimatedRouter';
 import Notifications from './components/Notification';
 import { getToken } from './core/authentication/token';
 import { BASE_CONF } from './components/Layout';
 // Start routes
 import AdminDashboard from './scenes/Admin/AdminDashboard';
-import Home from './pages/Home';
-import About from './pages/About';
+import Page from './pages/Page';
 import Error404 from './pages/Error404';
-// Account
-import SignupContainer from './scenes/Account/Signup/SignupContainer';
-import LoginContainer from './scenes/Account/Login';
-import ForgotPassword from './scenes/Account/ForgotPassword';
-import ResetPassword from './scenes/Account/ResetPassword';
-import Verify from './scenes/Account/Verify';
-import PreferencesContainer from './scenes/Account/Preferences';
-// Profile
-import ProfileContainer from './scenes/Profile/ProfileContainer';
-// Blog
-import BlogContainer from './scenes/Blog/BlogContainer';
 import normalizeStyled from './theme/normalizeStyled';
 import SiteHeaderContainer from './components/SiteHeader/SiteHeaderContainer';
 import './styles/main.scss';
+
 const BASE_ELEMENT = StyleClasses.APP;
 
 injectGlobal`
@@ -109,25 +98,12 @@ class App extends Component {
             />
             <meta name="msapplication-TileColor" content="#2b2b2b" />
             <meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png" />
-            <link rel="manifest" href="/manifest.json" />
+            {__DEV__ ? null : <link rel="manifest" href="/manifest.json" />}
           </Helmet>
           <SiteHeaderContainer settings={this.props.data.getSettings} />
           <AnimatedRouter.Switch>
             <ProtectedRoute path="/admin" component={AdminDashboard} />
-            <AnimatedRouter.Route path="/login" component={LoginContainer} />
-            <AnimatedRouter.Route path="/signup" component={SignupContainer} />
-            <AnimatedRouter.Route path="/account/forgot-password" component={ForgotPassword} />
-            <AnimatedRouter.Route
-              path="/account/reset-password/:token"
-              exact
-              component={ResetPassword}
-            />
-            <AnimatedRouter.Route path="/account/verify/:token" exact component={Verify} />
-            <AnimatedRouter.Route path="/account/preferences" component={PreferencesContainer} />
-            <AnimatedRouter.Route path="/profiles/:username" component={ProfileContainer} />
-            <AnimatedRouter.Route path="/blog" component={BlogContainer} />
-            <AnimatedRouter.Route path="/about" exact component={About} />
-            <AnimatedRouter.Route path="/" exact component={Home} />
+            <AnimatedRouter.Route path="/" component={Page} />
             <AnimatedRouter.Route component={Error404} />
           </AnimatedRouter.Switch>
           <Notifications />

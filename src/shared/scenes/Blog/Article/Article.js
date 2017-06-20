@@ -4,10 +4,10 @@ import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import classnames from 'classnames';
 import { gql, graphql } from 'react-apollo';
-import Loader from '~components/Loader';
-import { Grid, Row, Col } from '~components/Layout';
+import Hero from '@@components/Hero';
+import Loader from '@@components/Loader';
+import { Grid, Row, Col } from '@@components/Layout';
 import { ArticleSidebar, ArticleContent, ArticleTitle } from '../components';
-import BaseTemplate from '../../../templates/BaseTemplate';
 import { StyleClasses } from '../../../theme/styleClasses';
 
 const BASE_ELEMENT = StyleClasses.SINGLE_POST;
@@ -31,23 +31,20 @@ class Article extends PureComponent {
     const { data: { getArticleBySlug }, className } = this.props;
     const classes = classnames(BASE_ELEMENT, className);
     return (
-      <BaseTemplate
-        bgImg={getArticleBySlug.featureImage}
-        heroContent={<ArticleTitle title={getArticleBySlug.title} />}
-        articleTitle={getArticleBySlug.title}
-        helmetMeta={<Helmet title={getArticleBySlug.title} />}
-      >
-        <div className={classes}>
-          <Grid>
-            <Row>
-              <Col xs={12} md={8} lg={9}>
-                <ArticleContent {...getArticleBySlug} />
-              </Col>
-              {this.renderArticleSidebar()}
-            </Row>
-          </Grid>
-        </div>
-      </BaseTemplate>
+      <div className={classes}>
+        <Helmet title={getArticleBySlug.title} />
+        <Hero bgImg={getArticleBySlug.featureImage}>
+          <ArticleTitle title={getArticleBySlug.title} />
+        </Hero>
+        <Grid>
+          <Row>
+            <Col xs={12} md={8} lg={9}>
+              <ArticleContent {...getArticleBySlug} />
+            </Col>
+            {this.renderArticleSidebar()}
+          </Row>
+        </Grid>
+      </div>
     );
   };
 

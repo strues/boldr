@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import TextField from 'material-ui/TextField';
-import Button from '~components/Button';
+import Button from '@@components/Button';
 
 import {
   updateBoldrSettings,

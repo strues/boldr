@@ -4,10 +4,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 // internal
-import FormCard from '~components/Form/FormCard/FormCard';
-import BaseTemplate from '../../../templates/BaseTemplate';
-import Button from '~components/Button';
-import { verifyAccount } from '~state/modules/users/actions';
+import FormCard from '@@components/Form/FormCard/FormCard';
+import Button from '@@components/Button';
+import { verifyAccount } from '@@state/modules/users/actions';
 
 export type Props = {
   dispatch: () => void,
@@ -28,14 +27,15 @@ class Verify extends Component {
 
   render() {
     return (
-      <BaseTemplate helmetMeta={<Helmet title="Verify Account" />}>
+      <div>
+        <Helmet title="Verify Account" />
         <FormCard
           title="Account verification"
           skinny
           lightText
           form={<Button onClick={this.handleVerify} isFullWidth>Verify</Button>}
         />
-      </BaseTemplate>
+      </div>
     );
   }
 }

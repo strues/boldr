@@ -2,7 +2,7 @@
 const path = require('path');
 const dotenv = require('dotenv');
 dotenv.load();
-const base = (...args) => Reflect.apply(resolve, null, [path.resolve(__dirname), ...args])
+const base = (...args) => Reflect.apply(resolve, null, [path.resolve(__dirname), ...args]);
 
 module.exports = {
   env: {
@@ -19,8 +19,9 @@ module.exports = {
     verbose: true,
     debug: true,
     cssModules: true,
-    wpProfile: false,
+    wpProfile: true,
     webPath: '/assets/',
+    browsers: ['> .5% in US', 'last 1 versions'],
     publicDir: path.resolve(__dirname, 'public'),
     assetsDir: path.resolve(__dirname, 'dist/assets'),
     srcDir: path.resolve(__dirname, 'src'),

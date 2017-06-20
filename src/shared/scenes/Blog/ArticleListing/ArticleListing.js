@@ -5,12 +5,12 @@ import { compose, gql, graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 // $FlowIssue
-import { changeLayout, layoutSelector } from '~state/modules/boldr/ui';
-import Loader from '~components/Loader';
-import withApolloFetchingContainer from '~components/ApolloFetching';
-import View from '~components/View';
-import FontIcon from '~components/FontIcon';
-import { Grid, Row, Col } from '~components/Layout';
+import { changeLayout, layoutSelector } from '@@state/modules/boldr/ui';
+import Loader from '@@components/Loader';
+import withApolloFetchingContainer from '@@components/ApolloFetching';
+import View from '@@components/View';
+import FontIcon from '@@components/FontIcon';
+import { Grid, Row, Col } from '@@components/Layout';
 import { LAYOUTS } from '../../../core/constants';
 import { FeaturedArticle, ArticleCard } from '../components';
 
@@ -76,22 +76,20 @@ class ArticleListing extends Component {
   };
 
   renderBody = () =>
-    <View marginChildren>
+    <div>
       <Row>{this.renderFeature()}</Row>
       <Row>
         {this.renderArticles()}
       </Row>
-    </View>;
+    </div>;
 
   render() {
     const { renderWhenReady } = this.props;
     const { getArticles, loading } = this.props.data;
     return (
-      <View marginTop>
-        <Grid>
-          {renderWhenReady(this.renderBody)}
-        </Grid>
-      </View>
+      <Grid>
+        {renderWhenReady(this.renderBody)}
+      </Grid>
     );
   }
 }

@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import EditorState from 'draft-js/lib/EditorState';
-import Radio from 'material-ui/Radio';
-import Button from '~components/Button';
+// import Radio from 'material-ui/Radio';
+import Button from '@@components/Button';
 
 import {
   InputField,
@@ -20,9 +20,11 @@ import {
   // RadioButtonGroup,
   FormGroup,
   Form,
-} from '~components';
+} from '@@components';
 
-import { isRequired } from '~core/validations';
+import { isRequired } from '@@core/validations';
+import Radio from '@@components/Radio/Radio';
+import RadioGroup from '@@components/Radio/RadioGroup';
 import { setMedia } from '../../../../state/media/actions';
 import RenderTags from '../RenderTags';
 import FieldEditor from './FieldEditor';
@@ -50,9 +52,9 @@ class NewArticleForm extends Component {
   };
 
   props: Props;
-  handleSetMedia = (data) => {
-    this.props.dispatch(setMedia(data))
-  }
+  handleSetMedia = data => {
+    this.props.dispatch(setMedia(data));
+  };
   render() {
     const { handleSubmit } = this.props;
     return (
@@ -103,7 +105,7 @@ class NewArticleForm extends Component {
                     <Headline type="h3">
                       Upload a feature image <FontIcon>photo_library</FontIcon>
                     </Headline>
-                    <UploadArticleImage handleSetMedia={ this.handleSetMedia }/>
+                    <UploadArticleImage handleSetMedia={this.handleSetMedia} />
 
                   </FormGroup>
                 </Block>
@@ -127,10 +129,7 @@ class NewArticleForm extends Component {
                       component={RadioField}
                       validate={[isRequired]}
                       options={radioOpts}
-                    >
-                      <Radio value="true" label="Published" />
-                      <Radio value="false" label="Draft" />
-                    </Field>
+                    />
                   </FormGroup>
 
                   <Button htmlType="submit" kind="primary">Save Post</Button>

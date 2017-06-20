@@ -1,0 +1,36 @@
+.griddle-row {
+  border-bottom : 1px solid rgba(0, 0, 0, 0.12) !important;
+}
+
+table.griddle-table {
+  width         : calc(100% - 40px);
+  margin-right  : auto;
+  margin-bottom : 10px;
+  margin-left   : auto;
+  text-align    : center;
+  font-family   : Roboto,
+    sans-serif;
+  font-size     : 14.5px;
+}
+
+table.griddle-table tr {
+  border-bottom : 1px solid rgba(177, 168, 168, 0.77);
+}
+
+table.griddle-table tbody > tr:hover {
+  background-color : rgba(224, 224, 224, 0.77);
+  cursor           : pointer;
+  cursor           : hand;
+}
+
+input.griddle-filter {
+  width        : 240px;
+  height       : 30px;
+  margin       : 10px;
+  padding-left : 20px;
+  background   : rgba(255, 255, 255, 0.9);
+}
+
+table.griddle-table th {
+  text-transform : capitalize;
+}

@@ -1,6 +1,6 @@
 /* @flow */
 import React, { Component } from 'react';
-import Editor from '~components/BoldrEditor';
+import Editor from '@@components/BoldrEditor';
 // $FlowIssue
 import { convertFromHTML } from 'draft-convert';
 // $FlowIssue

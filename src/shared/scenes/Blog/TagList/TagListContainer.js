@@ -3,8 +3,7 @@
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import { gql, graphql } from 'react-apollo';
-import Loader from '~components/Loader';
-import BaseTemplate from '../../../templates/BaseTemplate';
+import Loader from '@@components/Loader';
 import TagList from './TagList';
 
 type Props = {
@@ -21,9 +20,10 @@ export class TagListContainer extends PureComponent {
       return <Loader />;
     }
     return (
-      <BaseTemplate helmetMeta={<Helmet title={`Posts tagged ${params.name}`} />}>
+      <div>
+        <Helmet title={`Posts tagged ${params.name}`} />
         <TagList articles={getArticlesForTag} />
-      </BaseTemplate>
+      </div>
     );
   }
 }

@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Icon from '~components/Icons';
+import Icon from '@@components/Icons';
 
 function findLinkEntities(contentBlock, callback, contentState) {
   contentBlock.findEntityRanges(character => {

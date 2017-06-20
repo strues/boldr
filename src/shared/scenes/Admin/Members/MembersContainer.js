@@ -4,8 +4,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 // internal
-import Loader from '~components/Loader';
-import { showModal, hideModal } from '~state/modules/boldr/ui/actions';
+import Loader from '@@components/Loader';
+import { showModal, hideModal } from '@@state/modules/boldr/ui/actions';
 import { fetchMembersIfNeeded, memberSelected, updateMember } from '../state';
 import { getUsers } from '../../../state/modules/users/selectors';
 import Members from './Members';

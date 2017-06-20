@@ -7,7 +7,7 @@ h5 {
   color: $text-color;
   line-height: 1.2857em;
   margin: calc(2rem - 0.14285em) 0 1rem;
-  font-weight: 600;
+  font-weight: $header-font-weight;
   padding: 0;
 }
 
@@ -79,7 +79,7 @@ p {
   margin: 0 0 1em;
   line-height: 1.5;
   font-weight: 300;
-  font-feature-settings: 'kern', 'liga';
+  font-feature-settings: "kern", "liga";
 }
 
 p:first-child {

@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Icon from '~components/Icons';
+import Icon from '@@components/Icons';
 import { stopPropagation } from '../../../../utils/common';
 import { getFirstIcon } from '../../../../utils/toolbar';
 import Option from '../../../Option';

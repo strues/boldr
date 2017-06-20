@@ -13,11 +13,6 @@ $md-colors-include-class-names: false !default;
 /// Boolean if the there should be warnings about colors not being from material design. This
 /// is enabled by default to alert users of the lib to set the correct fallback colors.
 /// @type Boolean
-/// @see md-data-table-contextual-fallback-color
-/// @see md-linear-progress-fallback-color
-/// @see md-switch-ball-fallback-color
-/// @see md-slider-warn-md
-/// @see validate-slider-primary-color
 /// @group colors, themes
 $md-colors-warn-md: true !default;
 

@@ -3,8 +3,7 @@ import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import Dropzone from 'react-dropzone';
 // internal
-import { Col, Row, Grid } from '~components/Layout';
-import { BaseTemplate } from '../../../templates';
+import { Col, Row, Grid } from '@@components/Layout';
 import EditProfile from './components/EditProfile';
 
 type Props = {
@@ -89,7 +88,8 @@ class Preferences extends Component {
   };
   render() {
     return (
-      <BaseTemplate helmetMeta={<Helmet title="Account Preferences" />}>
+      <div>
+        <Helmet title="Account Preferences" />
         <Grid>
           <Row>
             <Col xs={12} md={4}>
@@ -100,7 +100,7 @@ class Preferences extends Component {
             </Col>
           </Row>
         </Grid>
-      </BaseTemplate>
+      </div>
     );
   }
 }

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import { bindActionCreators } from 'redux';
-import { updateMenuDetails, addMenuDetail } from '~state';
+import { updateMenuDetails, addMenuDetail } from '@@state';
 import Navigation from './Navigation';
 
 type Props = {

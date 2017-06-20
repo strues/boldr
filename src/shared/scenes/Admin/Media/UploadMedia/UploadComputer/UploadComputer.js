@@ -6,10 +6,10 @@ import IconButton from 'material-ui/IconButton';
 import UploadFile from 'material-ui-icons/FileUpload';
 import { connect } from 'react-redux';
 
-import { Row, Col } from '~components/Layout';
-import Paper from '~components/Paper';
-import Headline from '~components/Headline';
-import Icon from '~components/Icons';
+import { Row, Col } from '@@components/Layout';
+import Paper from '@@components/Paper';
+import Headline from '@@components/Headline';
+import Icon from '@@components/Icons';
 
 type Props = {
   uploadMediaFile: () => void,

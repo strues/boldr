@@ -17,6 +17,7 @@ const Hero = (props: Props) => {
     height: ${props.bgHeight}px;
     position: relative;
     background-size: cover;
+    margin-bottom: 20px;
     background-position-x: 50%;
     background-position-y: 50%;
   `;

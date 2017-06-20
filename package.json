@@ -45,12 +45,12 @@
     "start": "NODE_ENV=production node server/app.js",
     "seed": "better-npm-run seed",
     "seed:test": "node --harmony internal/scripts/db.js seed",
-    "test": "NODE_ENV=test jest",
+    "test": "NODE_ENV=test jest --config jest.config.json",
     "test:ci": "NODE_ENV=test CI=true jest"
   },
   "dependencies": {
     "apollo-client": "^1.4.2",
-    "apollo-upload-client": "^4.0.3",
+    "apollo-upload-client": "^4.0.6",
     "axios": "^0.16.2",
     "bcryptjs": "^2.4.3",
     "bluebird": "^3.5.0",
@@ -95,7 +95,7 @@
     "nodemailer": "^4.0.1",
     "object-path": "^0.11.4",
     "objection": "^0.8.3",
-    "pg": "^6.3.0",
+    "pg": "^6.3.1",
     "pretty-error": "^2.1.1",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
@@ -103,7 +103,7 @@
     "react-dom": "^15.6.1",
     "react-dropzone": "^3.13.2",
     "react-helmet": "5.1.3",
-    "react-loadable": "^4.0.2",
+    "react-loadable": "^4.0.3",
     "react-motion": "^0.5.0",
     "react-redux": "^5.0.5",
     "react-router-dom": "^4.1.1",
@@ -127,7 +127,6 @@
   },
   "devDependencies": {
     "@boldr/cli": "^0.1.0",
-    "@boldr/plugin-webpack": "^0.1.0",
     "babel-cli": "^6.24.1",
     "babel-eslint": "7.2.3",
     "babel-jest": "^20.0.3",
@@ -159,7 +158,7 @@
     "redbox-react": "^1.4.2",
     "redux-mock-store": "^1.2.3",
     "rimraf": "^2.6.1",
-    "sinon": "^2.3.4",
+    "sinon": "^2.3.5",
     "supertest": "^3.0.0"
   },
   "betterScripts": {
@@ -179,7 +178,6 @@
         "NODE_ENV": "development",
         "BOLDR_PORT": "3000",
         "BOLDR_DEV_PORT": "3001",
-        "BOLDR_DEBUG": "true",
         "DEBUG": "boldr:*"
       }
     },
@@ -241,49 +239,10 @@
       }
     }
   },
-  "jest": {
-    "timers": "fake",
-    "moduleNameMapper": {
-      "\\.(css|scss)$": "identity-obj-proxy",
-      "^~components(.*)$": "<rootDir>/src/shared/components$1",
-      "^~state(.*)$": "<rootDir>/src/shared/state$1",
-      "^~core(.*)$": "<rootDir>/src/shared/core$1",
-      "^~scenes(.*)$": "<rootDir>/src/shared/scenes$1",
-      "^~blog(.*)$": "<rootDir>/src/shared/scenes/Blog$1",
-      "^~admin(.*)$": "<rootDir>/src/shared/scenes/Admin$1",
-      ".*\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/internal/jest/fileMock.js"
-    },
-    "collectCoverage": true,
-    "coverageDirectory": "<rootDir>/coverage",
-    "coveragePathIgnorePatterns": [
-      "<rootDir>/(internal|server|.boldr|docs|bin|.idea|public|db)/",
-      "/flow-typed/",
-      "/__fixtures__/",
-      "/node_modules/"
-    ],
-    "transform": {
-      "^.+\\.jsx?$": "<rootDir>/internal/jest/transform.js"
-    },
-    "testRegex": ".*.test\\.js",
-    "setupTestFrameworkScriptFile": "<rootDir>/internal/jest/setup.js",
-    "snapshotSerializers": [
-      "<rootDir>/node_modules/enzyme-to-json/serializer"
-    ],
-    "testPathIgnorePatterns": [
-      "<rootDir>/(internal|server|.boldr|docs|bin|.idea|public|db)/",
-      "__snapshots__",
-      "/styles/"
-    ],
-    "transformIgnorePatterns": [
-      "/node_modules/",
-      "/.boldr/",
-      "/db/",
-      "/styles/"
-    ],
-    "coverageReporters": [
-      "json"
-    ]
-  },
+  "browserslist": [
+    "> .5% in US",
+    "last 1 versions"
+  ],
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog-emoji"

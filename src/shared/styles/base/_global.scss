@@ -1,75 +1,73 @@
 *,
-*:after,
-*:before {
-  box-sizing: inherit;
+*::after,
+*::before {
+  box-sizing : inherit;
 }
 
 body,
 html {
-  height: 100%;
-  width: 100%;
-  padding: 0;
-  margin: 0;
+  width   : 100%;
+  height  : 100%;
+  margin  : 0;
+  padding : 0;
 }
 
 html {
-  height: 100%;
-  font-size: $font-size-base;
-  box-sizing: border-box;
-  color: $text-color;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  min-width: 300px;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  background-color: $body-background;
-  text-rendering: optimizeLegibility;
+  box-sizing              : border-box;
+  min-width               : 300px;
+  height                  : 100%;
+  color                   : $text-color;
+  overflow-x              : hidden;
+  overflow-y              : scroll;
+  font-size               : $font-size-base;
+  -webkit-font-smoothing  : antialiased;
+  -moz-osx-font-smoothing : grayscale;
 }
 
 body {
-  font-family: $font-family;
-  font-size: $font-size-base;
-  font-weight: 300;
-  line-height: $line-height-base;
-  background-color: $body-background;
+  background-color : $body-background;
+  font-family      : $font-family;
+  font-size        : $font-size-base;
+  font-weight      : 300;
+  line-height      : $line-height-base;
 }
 
 a {
-  color: $primary-color;
-  text-decoration: none;
-  cursor: pointer;
-  text-decoration: none;
-  transition: none $speed $easing;
+  color           : $link-color;
+  text-decoration : none;
+  text-decoration : none;
+  transition      : none $speed $easing;
+  cursor          : pointer;
 
-  &:hover,
   &:active,
-  &:focus {
-    color: darken($primary-color, 10%);
+  &:focus,
+  &:hover {
+    color : $link-hover-color;
   }
 }
 
 hr {
-  background-color: $border-color;
-  border: none;
-  display: block;
-  height: 1px;
-  margin: 1.5rem 0;
+  display          : block;
+  height           : 1px;
+  margin           : 1.5rem 0;
+  border           : none;
+  background-color : $border-color;
 }
 
 img {
-  max-width: 100%;
+  max-width : 100%;
 }
 
 .boldr-icon {
-  display: inline-block;
+  display : inline-block;
 }
 
 .boldrui-dash-main .container-fluid {
-  padding: 0 30px;
+  padding : 0 30px;
 }
 
 :root {
   :focus {
-    outline: none !important;
+    outline : none !important;
   }
 }

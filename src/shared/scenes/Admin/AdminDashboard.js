@@ -5,12 +5,13 @@ import Switch from 'react-router-dom/Switch';
 import Route from 'react-router-dom/Route';
 import flatMapDeep from 'lodash/flatMapDeep';
 // internal
-import Grid from '~components/Layout/Grid';
-import Sidebar from '~components/Sidebar';
-import { DashboardWrapper, DashboardContent, DashboardMain } from '~components/Dashboard';
-import Topbar from '~components/Topbar';
-import TopbarLink from '~components/Topbar/TopbarLink';
-import { hideHeader } from '~state/modules/boldr/ui/actions';
+import Grid from '@@components/Layout/Grid';
+import AnimatedRouter from '@@components/AnimatedRouter';
+import Sidebar from '@@components/Sidebar';
+import { DashboardWrapper, DashboardContent, DashboardMain } from '@@components/Dashboard';
+import Topbar from '@@components/Topbar';
+import TopbarLink from '@@components/Topbar/TopbarLink';
+import { hideHeader } from '@@state/modules/boldr/ui/actions';
 import { selectMe, showHideSidebar, expandCollapseSideMenu } from '../../state';
 import sidebarLinks from './sidebarLinks';
 import routes from './routes';
@@ -90,9 +91,11 @@ export class AdminDashboard extends Component {
           <DashboardContent>
             <Breadcrumbs location={this.props.location} />
             <Grid fluid>
-              <Switch>
-                {this.flattenedRoutes.map(props => <Route key={props.path} {...props} />)}
-              </Switch>
+              <AnimatedRouter.Switch>
+                {this.flattenedRoutes.map(props =>
+                  <AnimatedRouter.Route key={props.path} {...props} />,
+                )}
+              </AnimatedRouter.Switch>
             </Grid>
           </DashboardContent>
 

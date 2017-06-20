@@ -7,10 +7,10 @@ import Link from 'react-router-dom/Link';
 import styled from 'styled-components';
 import IconButton from 'material-ui/IconButton';
 
-import { Col, Row } from '~components/Layout';
-import Headline from '~components/Headline';
-import Photo from '~components/Photo';
-import FontIcon from '~components/FontIcon';
+import { Col, Row } from '@@components/Layout';
+import Headline from '@@components/Headline';
+import Photo from '@@components/Photo';
+import FontIcon from '@@components/FontIcon';
 
 type Props = {
   media: Array<Object>,
