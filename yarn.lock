@@ -7525,9 +7525,9 @@ stylehacks@^2.3.2:
     text-table "^0.2.0"
     write-file-stdout "0.0.2"
 
-stylelint-config-boldr@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/stylelint-config-boldr/-/stylelint-config-boldr-0.1.0.tgz#276eaf907b576c7ce477f11801c9b498bbdb99c5"
+stylelint-config-boldr@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/stylelint-config-boldr/-/stylelint-config-boldr-0.1.1.tgz#6a3795682242843ce3164a459774ed6bb08249cc"
   dependencies:
     stylelint-order "^0.5.0"
     stylelint-scss "^1.4.4"

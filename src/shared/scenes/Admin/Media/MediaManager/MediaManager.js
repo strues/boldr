@@ -47,7 +47,7 @@ class MediaManager extends Component {
       <div>
         <Row>
           <Col xs={12}>
-            <Row center="xs">
+            <Row xsCenter>
               <Col xs={6}>
                 <MediaContent>
 
@@ -60,7 +60,7 @@ class MediaManager extends Component {
         </Row>
         <Row>
           <Col xs={12}>
-            <Row center="xs">
+            <Row xsCenter>
               <Col xs={8}>
                 <MediaFormCard>
                   <Block>
@@ -81,7 +81,7 @@ export const MEDIA_BY_ID_QUERY = gql`
   query getMediaById($id: UUID!) {
       getMediaById(id: $id) {
         id,
-        fileName,
+        name,
         thumbName,
         fileDescription,
         url,

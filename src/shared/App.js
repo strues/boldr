@@ -20,10 +20,6 @@ import './styles/main.scss';
 
 const BASE_ELEMENT = StyleClasses.APP;
 
-injectGlobal`
-  ${normalizeStyled}
-`;
-
 export const hasAccessToken = () => {
   const token = getToken();
   return !!token;

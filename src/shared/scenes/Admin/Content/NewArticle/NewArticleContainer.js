@@ -16,14 +16,10 @@ type Props = {
 };
 
 class NewArticleContainer extends Component {
-  constructor() {
-    super();
-    (this: any).handleOnSubmit = this.handleOnSubmit.bind(this);
-  }
-
-  handleOnSubmit(values: Article) {
+  handleOnSubmit = (values: Article) => {
     this.props.onSubmit(values);
-  }
+  };
+
   props: Props;
 
   render() {

@@ -3,29 +3,29 @@ $errorBorderColor: #f44;
 $borderRadius: 3px;
 
 .boldrui-form__error {
-  color: $error-color;
-  font-weight: 600;
-  margin-bottom: 0.6rem;
+    color: $error-color;
+    margin-bottom: 0.6rem;
+    font-weight: 600;
 }
 
 .boldrui-form__warning {
-  color: $warning-color;
-  font-weight: 600;
-  margin-bottom: 0.6rem;
+    color: $warning-color;
+    margin-bottom: 0.6rem;
+    font-weight: 600;
 }
 
 .boldrui-input__wrapper {
-  display: flex;
-  position: relative;
-  height: 40px;
-  max-height: 40px;
-  line-height: 40px;
-  margin-bottom: 2em;
+    position: relative;
+    display: flex;
+    height: 40px;
+    max-height: 40px;
+    margin-bottom: 2em;
+    line-height: 40px;
 }
 
 .boldrui-textarea__wrapper {
-  height: auto;
-  max-height: none;
+    height: auto;
+    max-height: none;
 }
 
 .boldrui-input,
@@ -43,120 +43,118 @@ $borderRadius: 3px;
 .boldrui-input[type=color],
 .boldrui-input[type=search],
 .boldrui-textarea {
-  display: inline-block;
-  flex: 1;
-  min-width: 80px;
-  height: 40px;
-  box-sizing: border-box;
-  padding: 1rem;
-  margin: 0 auto 0.5rem;
-  border: 1px solid $defaultBorderColor;
-  color: $text-color;
-  font-size: 12px;
-  border-radius: $borderRadius;
-  box-shadow: none;
-  transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
-  appearance: none;
+    box-sizing: border-box;
+    display: inline-block;
+    flex: 1;
+    min-width: 80px;
+    height: 40px;
+    padding: 1rem;
+    color: $text-color;
+    border: 1px solid $defaultBorderColor;
+    border-radius: $borderRadius;
+    box-shadow: none;
+    margin: 0 auto 0.5rem;
+    font-size: 12px;
+    transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    appearance: none;
 
-  &:focus {
-    outline: none;
-    border: 1px solid $primary-color;
-    box-shadow: 0 0 5px #bdf;
-  }
+    &:focus {
+        border: 1px solid $primary-color;
+        box-shadow: 0 0 5px #bdf;
+        outline: none;
+    }
 }
 
 .boldrui-textarea[disabled],
 .boldrui-input[disabled],
 .boldrui-input[readonly] {
-  border-color: #e5e5e5;
-  background-color: #f8f8f8;
-  cursor: not-allowed;
-  color: #cacaca;
-
-  &:focus {
+    color: #cacaca;
+    background-color: #f8f8f8;
     border-color: #e5e5e5;
-    box-shadow: none;
-  }
+    cursor: not-allowed;
+
+    &:focus {
+        border-color: #e5e5e5;
+        box-shadow: none;
+    }
 }
 
 .boldrui-input__addon-before,
 .boldrui-input__addon-after {
-  display: inline-block;
-  height: 40px;
-  padding: 0 5px;
-  border: 1px solid $defaultBorderColor;
-  box-sizing: border-box;
-  vertical-align: middle;
-  background-color: #e5e5e5;
-  font-size: 12px;
+    box-sizing: border-box;
+    display: inline-block;
+    height: 40px;
+    padding: 0 5px;
+    background-color: #e5e5e5;
+    border: 1px solid $defaultBorderColor;
+    font-size: 12px;
+    vertical-align: middle;
 }
 
 .boldrui-input__addon-before {
-  border-top-left-radius: $borderRadius;
-  border-bottom-left-radius: $borderRadius;
-  border-right: none;
-  padding-top: 5px;
+    padding-top: 5px;
+    border-right: none;
+    border-top-left-radius: $borderRadius;
+    border-bottom-left-radius: $borderRadius;
 
-  svg {
-    display: inline-block;
-    vertical-align: middle;
-  }
+    svg {
+        display: inline-block;
+        vertical-align: middle;
+    }
 }
 
 .boldrui-input__addon-after {
-  border-top-right-radius: $borderRadius;
-  border-bottom-right-radius: $borderRadius;
-  border-left: none;
+    border-left: none;
+    border-top-right-radius: $borderRadius;
+    border-bottom-right-radius: $borderRadius;
 }
 
 .boldrui-input__addons {
+    & > .boldrui-input {
+        border-radius: 0;
+    }
 
-  & > .boldrui-input {
-    border-radius: 0;
-  }
+    & > .boldrui-input:first-child {
+        border-top-left-radius: $borderRadius;
+        border-bottom-left-radius: $borderRadius;
+    }
 
-  & > .boldrui-input:first-child {
-    border-top-left-radius: $borderRadius;
-    border-bottom-left-radius: $borderRadius;
-  }
+    & > .boldrui-input[disabled]:first-child {
+        border-right: 1px solid $defaultBorderColor;
+    }
 
-  & > .boldrui-input[disabled]:first-child {
-    border-right: 1px solid $defaultBorderColor;
-  }
+    & > .boldrui-input:last-child {
+        border-top-right-radius: $borderRadius;
+        border-bottom-right-radius: $borderRadius;
+    }
 
-  & > .boldrui-input:last-child {
-    border-top-right-radius: $borderRadius;
-    border-bottom-right-radius: $borderRadius;
-  }
-
-  & > .boldrui-input[disabled]:last-child {
-    border-left: 1px solid $defaultBorderColor;
-  }
+    & > .boldrui-input[disabled]:last-child {
+        border-left: 1px solid $defaultBorderColor;
+    }
 }
 
 .boldrui-textarea {
-  height: 54px;
-  padding: 5px 10px;
-  appearance: none;
+    height: 54px;
+    padding: 5px 10px;
+    appearance: none;
 }
 
 /** placeholder **/
 $placeholderColor: #999;
 
 .boldrui-input::-input-placeholder { /* WebKit browsers */
-  color: $placeholderColor;
+    color: $placeholderColor;
 }
 
 .has-error {
+    .boldrui-textarea,
+    .boldrui-input {
+        color: #f44;
+        border: 1px solid $errorBorderColor;
 
-  .boldrui-textarea,
-  .boldrui-input {
-    border: 1px solid $errorBorderColor;
-    color: #f44;
-
-    &:focus {
-      border-color: $errorBorderColor;
-      box-shadow: 0 0 5px #fdd;
+        &:focus {
+            border-color: $errorBorderColor;
+            box-shadow: 0 0 5px #fdd;
+        }
     }
-  }
 }

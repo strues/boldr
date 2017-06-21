@@ -10,6 +10,7 @@ $block-bg: $white;
 $block-bg-dark: $outer-space;
 
 .#{$boldr-ns}block {
+
     @include md-shadow(2);
     padding: 1.5rem;
     background: $block-bg;
@@ -22,6 +23,7 @@ $block-bg-dark: $outer-space;
 }
 
 .#{$boldr-ns}block__dark {
+
     @include md-shadow(2);
     padding: 1.5rem;
     background: $block-bg-dark;

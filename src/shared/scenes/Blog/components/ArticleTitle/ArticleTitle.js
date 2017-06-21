@@ -12,7 +12,7 @@ const TitleWrapper = styled.div`
 const ArticleTitle = (props: { title: string }) => {
   return (
     <TitleWrapper>
-      <Headline type="h1" lightText>{props.title}</Headline>
+      <Headline type="h1" className="boldrui-post__title" lightText>{props.title}</Headline>
     </TitleWrapper>
   );
 };

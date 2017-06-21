@@ -2,25 +2,25 @@
 
 import React from 'react';
 import Helmet from 'react-helmet';
+import styled from 'styled-components';
 import Footer from '@@components/Footer';
 import Headline from '@@components/Headline';
 import Paragraph from '@@components/Paragraph';
 import Button from '../../components/Button';
-import Hero from '../../components/Hero';
 import { Grid, Row, Col } from '@@components/Layout';
-import HomeHero from './HomeHero';
 
+const HomeHero = styled.div`
+  background-color: #00b4d0;
+  height: 450px;
+  width: 100%;
+`;
 const Home = () => {
   return (
     <div>
       <Helmet title="Home" />
-      <Hero bgColor="#00b4d0">
+      <HomeHero>
         <Headline type="h1">Meet Boldr.</Headline>
-        <Paragraph isLead>
-          A modern content management framework.
-        </Paragraph>
-        <Button type="primary">Learn More</Button>
-      </Hero>
+      </HomeHero>
       <Grid>
         <Row>
           <Col xs={12} md={4}>

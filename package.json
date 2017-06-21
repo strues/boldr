@@ -158,7 +158,7 @@
     "rimraf": "^2.6.1",
     "sinon": "^2.3.5",
     "stylelint": "^7.11.1",
-    "stylelint-config-boldr": "^0.1.0",
+    "stylelint-config-boldr": "^0.1.1",
     "supertest": "^3.0.0"
   },
   "betterScripts": {

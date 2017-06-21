@@ -63,7 +63,7 @@ class ArticleListing extends Component {
   };
 
   renderFeature = () => {
-    const { getArticles, loading } = this.props.data;
+    const { getArticles } = this.props.data;
     const featuredArticles = getArticles.filter(p => p.featured);
     return featuredArticles.map(article => <FeaturedArticle key={article.id} {...article} />);
   };
@@ -80,7 +80,7 @@ class ArticleListing extends Component {
     const { renderWhenReady } = this.props;
     const { getArticles, loading } = this.props.data;
     return (
-      <Grid fluid={false}>
+      <Grid>
         {renderWhenReady(this.renderBody)}
       </Grid>
     );

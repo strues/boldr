@@ -28,7 +28,9 @@ const MediaTitleArea = styled.div`
   padding-top: 50px;
   margin-bottom: 35px;
 `;
-
+const MediaInputArea = styled.div`
+  padding-bottom: 50px;
+`;
 class UploadComputer extends Component {
   handleChange = ({ target }) => {
     if (target.validity.valid) {
@@ -52,9 +54,9 @@ class UploadComputer extends Component {
                 Upload from your computer
               </Headline>
             </MediaTitleArea>
-
-            <input type="file" required onChange={this.handleChange} />
-
+            <MediaInputArea>
+              <input type="file" required onChange={this.handleChange} />
+            </MediaInputArea>
           </Paper>
         </Col>
       </Row>

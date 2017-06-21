@@ -37,7 +37,7 @@ const Wrapper = styled.section`
   flex-direction: column;
   justify-content: space-around;
   width: 100%;
-  margin-bottom: 10px;
+  margin-bottom: 40px;
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .4);
   background-color: #fff;
   position: relative;
@@ -99,27 +99,19 @@ export const FeaturedArticle = (props: Props) => {
     title: props.title,
     userId: props.userId,
   };
-  function transitionPost() {
-    props.dispatch(selectArticle(article));
-  }
 
   return (
-    <div className="boldr-post__featured">
+    <div className="boldrui-feat-post">
       <Wrapper>
         <ImgWrapper>
           <PostTitle>{props.title}</PostTitle>
         </ImgWrapper>
         <Content>
           <Paragraph>{props.excerpt}</Paragraph>
-          <Row style={{ paddingTop: '20px' }} xsCenter>
+          <Row xsCenter>
             <Link to={`/blog/${props.slug}`}>
-              <Button kind="primary" onClick={transitionPost} outline>Read More</Button>
+              <Button kind="primary" outline>Read More</Button>
             </Link>
-          </Row>
-          <Row>
-            <Col sm={12}>
-              {props.tags.map(t => <Tag key={t.id} tag={t} />)}
-            </Col>
           </Row>
         </Content>
       </Wrapper>
