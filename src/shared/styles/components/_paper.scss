@@ -9,24 +9,23 @@ $paper-transition-time: $transition-length * 2 !default;
 
 /// Creates the styles for paper.
 @mixin boldrui-paper($include-media: $media-included) {
-  @for $i from 0 through 5 {
-    .#{$boldr-ns}paper__#{$i} {
-      @include md-shadow($i);
-
-      background-color: $white;
-    }
-
-    @if $i == 0 and $include-media {
-      @media #{$desktop-media} {
-        .#{$boldr-ns}paper__#{$i}-hover {
-          transition-duration: $paper-transition-time;
-          transition-property: box-shadow;
-
-          &:hover {
-            @include md-shadow(3);
-          }
+    @for $i from 0 through 5 {
+        .#{$boldr-ns}paper__#{$i} {
+            @include md-shadow($i);
+            background-color: $white;
         }
-      }
+
+        @if $i == 0 and $include-media {
+            @media #{$desktop-media} {
+                .#{$boldr-ns}paper__#{$i}-hover {
+                    transition-property: box-shadow;
+                    transition-duration: $paper-transition-time;
+
+                    &:hover {
+                        @include md-shadow(3);
+                    }
+                }
+            }
+        }
     }
-  }
 }

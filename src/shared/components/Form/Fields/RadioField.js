@@ -1,10 +1,17 @@
+// @flow
 import React from 'react';
 import styled from 'styled-components';
 import Radio from '@@components/Radio/Radio';
 import RadioGroup from '@@components/Radio/RadioGroup';
 import InputWrapper from '../InputWrapper';
 
-const RadioField = props => {
+export type Props = {
+  input: Object,
+  meta: Object,
+  options: Array<string>,
+};
+
+const RadioField = (props: Props) => {
   const { meta, ...rest } = props;
   const showError = meta.touched && meta.error && meta.invalid;
 

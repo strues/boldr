@@ -2,11 +2,10 @@
 
 exports[`Accordion different className 1`] = `
 <div
-  className="testCSSClass"
+  className="boldrui-accordion"
 >
   <AccordionItem
     accordion={false}
-    className="boldrui-accordion__item"
     expanded={false}
     onClick={[Function]}
   >
@@ -14,7 +13,6 @@ exports[`Accordion different className 1`] = `
   </AccordionItem>
   <AccordionItem
     accordion={false}
-    className="boldrui-accordion__item"
     expanded={false}
     onClick={[Function]}
   >
@@ -29,7 +27,6 @@ exports[`Accordion handleClick function accordion false 1`] = `
 >
   <AccordionItem
     accordion={false}
-    className="boldrui-accordion__item"
     expanded={false}
     onClick={[Function]}
   >
@@ -37,7 +34,6 @@ exports[`Accordion handleClick function accordion false 1`] = `
   </AccordionItem>
   <AccordionItem
     accordion={false}
-    className="boldrui-accordion__item"
     expanded={false}
     onClick={[Function]}
   >
@@ -52,7 +48,6 @@ exports[`Accordion handleClick function accordion false 2`] = `
 >
   <AccordionItem
     accordion={false}
-    className="boldrui-accordion__item"
     expanded={false}
     onClick={[Function]}
   >
@@ -60,7 +55,6 @@ exports[`Accordion handleClick function accordion false 2`] = `
   </AccordionItem>
   <AccordionItem
     accordion={false}
-    className="boldrui-accordion__item"
     expanded={false}
     onClick={[Function]}
   >
@@ -75,7 +69,6 @@ exports[`Accordion handleClick function accordion false 3`] = `
 >
   <AccordionItem
     accordion={false}
-    className="boldrui-accordion__item"
     expanded={false}
     onClick={[Function]}
   >
@@ -83,7 +76,6 @@ exports[`Accordion handleClick function accordion false 3`] = `
   </AccordionItem>
   <AccordionItem
     accordion={false}
-    className="boldrui-accordion__item"
     expanded={false}
     onClick={[Function]}
   >
@@ -98,7 +90,6 @@ exports[`Accordion handleClick function accordion true 1`] = `
 >
   <AccordionItem
     accordion={true}
-    className="boldrui-accordion__item"
     expanded={false}
     onClick={[Function]}
   >
@@ -106,7 +97,6 @@ exports[`Accordion handleClick function accordion true 1`] = `
   </AccordionItem>
   <AccordionItem
     accordion={true}
-    className="boldrui-accordion__item"
     expanded={false}
     onClick={[Function]}
   >
@@ -121,7 +111,6 @@ exports[`Accordion handleClick function accordion true 2`] = `
 >
   <AccordionItem
     accordion={true}
-    className="boldrui-accordion__item"
     expanded={false}
     onClick={[Function]}
   >
@@ -129,7 +118,6 @@ exports[`Accordion handleClick function accordion true 2`] = `
   </AccordionItem>
   <AccordionItem
     accordion={true}
-    className="boldrui-accordion__item"
     expanded={false}
     onClick={[Function]}
   >
@@ -144,7 +132,6 @@ exports[`Accordion handles disabled children 1`] = `
 >
   <AccordionItem
     accordion={false}
-    className="boldrui-accordion__item"
     disabled={true}
     expanded={false}
     onClick={[Function]}
@@ -153,7 +140,6 @@ exports[`Accordion handles disabled children 1`] = `
   </AccordionItem>
   <AccordionItem
     accordion={false}
-    className="boldrui-accordion__item"
     expanded={false}
     onClick={[Function]}
   >
@@ -168,7 +154,6 @@ exports[`Accordion pre expanded accordion 1`] = `
 >
   <AccordionItem
     accordion={true}
-    className="boldrui-accordion__item"
     expanded={true}
     onClick={[Function]}
   >
@@ -176,7 +161,6 @@ exports[`Accordion pre expanded accordion 1`] = `
   </AccordionItem>
   <AccordionItem
     accordion={true}
-    className="boldrui-accordion__item"
     expanded={false}
     onClick={[Function]}
   >
@@ -191,7 +175,6 @@ exports[`Accordion pre expanded accordion when accordion is false 1`] = `
 >
   <AccordionItem
     accordion={false}
-    className="boldrui-accordion__item"
     expanded={true}
     onClick={[Function]}
   >
@@ -199,7 +182,6 @@ exports[`Accordion pre expanded accordion when accordion is false 1`] = `
   </AccordionItem>
   <AccordionItem
     accordion={false}
-    className="boldrui-accordion__item"
     expanded={true}
     onClick={[Function]}
   >
@@ -214,7 +196,6 @@ exports[`Accordion renders correctly with accordion false 1`] = `
 >
   <AccordionItem
     accordion={false}
-    className="boldrui-accordion__item"
     expanded={false}
     onClick={[Function]}
   >
@@ -222,7 +203,6 @@ exports[`Accordion renders correctly with accordion false 1`] = `
   </AccordionItem>
   <AccordionItem
     accordion={false}
-    className="boldrui-accordion__item"
     expanded={false}
     onClick={[Function]}
   >
@@ -237,7 +217,6 @@ exports[`Accordion renders correctly with min params 1`] = `
 >
   <AccordionItem
     accordion={true}
-    className="boldrui-accordion__item"
     expanded={false}
     onClick={[Function]}
   >
@@ -245,7 +224,6 @@ exports[`Accordion renders correctly with min params 1`] = `
   </AccordionItem>
   <AccordionItem
     accordion={true}
-    className="boldrui-accordion__item"
     expanded={false}
     onClick={[Function]}
   >
@@ -260,7 +238,6 @@ exports[`Accordion works with multiple pre expanded accordion. Extra expands are
 >
   <AccordionItem
     accordion={true}
-    className="boldrui-accordion__item"
     expanded={true}
     onClick={[Function]}
   >
@@ -268,7 +245,6 @@ exports[`Accordion works with multiple pre expanded accordion. Extra expands are
   </AccordionItem>
   <AccordionItem
     accordion={true}
-    className="boldrui-accordion__item"
     expanded={false}
     onClick={[Function]}
   >

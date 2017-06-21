@@ -21,9 +21,7 @@ export default class EditorField extends Component {
     super(props);
     let editorState = EditorState.createEmpty();
     if (props.input.value) {
-      editorState = EditorState.createWithContent(
-        convertFromHTML(props.input.value),
-      );
+      editorState = EditorState.createWithContent(convertFromHTML(props.input.value));
     }
     this.state = {
       editorState,

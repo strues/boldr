@@ -1,11 +1,4 @@
-import Grid from './Grid'
-import Row from './Row'
-import Col from './Col'
-import { BASE_CONF } from './config'
-
-export {
-  Grid,
-  Row,
-  Col,
-  BASE_CONF
-}
+export { default as Grid } from './Grid';
+export { default as Col } from './Col';
+export { default as Row } from './Row';
+export { default as CenterBlock } from './CenterBlock';

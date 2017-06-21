@@ -1,14 +1,21 @@
+// @flow
 import React from 'react';
 import styled from 'styled-components';
 import Label from './Label';
 import Feedback from './Feedback';
+
+type Props = {
+  ui: Object,
+  label: string,
+  children: ReactChildren,
+};
 
 /**
  * A wrapper around form input fields that will act as
  * a utility to enable streamlined labeling, styling,
  * and error handling
  */
-export const InputWrapper = props => {
+export const InputWrapper = (props: Prop) => {
   return (
     <InputWrapperContainer ui={props.ui}>
       {props.label && <Label {...props} />}

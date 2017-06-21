@@ -6,10 +6,11 @@ import cxN from 'classnames';
  * The paragraph should be used to display long strings.
  * A good rule is to separate long texts in paragraphs after the third row.
  */
-const Paragraph = ({ className, isLead, children, ...rest }) => {
+const Paragraph = ({ className, isLead, isLight, children, ...rest }) => {
   const finalClassName = cxN({
     'boldrui-paragraph': true,
     'boldrui-paragraph__lead': isLead,
+    'boldrui-paragraph__light': isLight,
     [className]: className && className.length,
   });
 
@@ -27,10 +28,12 @@ Paragraph.propTypes = {
    * slightly bigger manner.
    */
   isLead: PropTypes.bool,
+  isLight: PropTypes.bool,
   className: PropTypes.string,
 };
 Paragraph.defaultProps = {
   isLead: false,
+  isLight: false,
 };
 
 export default Paragraph;

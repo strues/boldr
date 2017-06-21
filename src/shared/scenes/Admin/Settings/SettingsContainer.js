@@ -2,11 +2,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { compose, graphql, gql } from 'react-apollo';
-import { Loader } from 'boldr-ui';
-import {
-  selectSettings,
-  selectSettingFromList,
-} from '../../../state/modules/boldr/settings';
+// internal
+import Loader from '@@components/Loader';
+import { selectSettings, selectSettingFromList } from '../../../state/modules/boldr/settings';
 import Settings from './Settings';
 
 type Props = {
@@ -16,8 +14,17 @@ type Data = {
   getSettings: Array<Setting>,
   loading: boolean,
 };
+
+const SettingsContainer = (props: Props) => {
+  const { loading, getSettings } = props.data;
+  if (loading) {
+    return <Loader />;
+  }
+  return <Settings settings={getSettings} />;
+};
+
 export const SETTINGS_QUERY = gql`
-query {
+  query {
     getSettings {
       id,
       key,
@@ -25,17 +32,11 @@ query {
       label,
       description,
     }
-}
+  }
 `;
 
-@graphql(SETTINGS_QUERY)
-export default class SettingsContainer extends Component {
-  props: Props;
-  render() {
-    const { loading, getSettings } = this.props.data;
-    if (loading) {
-      return <Loader />;
-    }
-    return <Settings settings={getSettings} />;
-  }
-}
+export default graphql(SETTINGS_QUERY, {
+  options: () => ({
+    fetchPolicy: 'cache-and-network',
+  }),
+})(SettingsContainer);

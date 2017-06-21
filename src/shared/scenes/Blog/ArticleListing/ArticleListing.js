@@ -46,12 +46,9 @@ class ArticleListing extends Component {
       getArticles: [],
     },
   };
+
   props: Props;
-  handleChangeLayout = () => {
-    this.props.layout === 'grid'
-      ? this.props.dispatch(changeLayout(LAYOUTS.LIST))
-      : this.props.dispatch(changeLayout(LAYOUTS.GRID));
-  };
+
   renderArticles = () => {
     const { getArticles, loading } = this.props.data;
     const allArticles =
@@ -67,17 +64,13 @@ class ArticleListing extends Component {
 
   renderFeature = () => {
     const { getArticles, loading } = this.props.data;
-    const featuredArticles = loading ? <Loader /> : getArticles.filter(p => p.featured);
-    return featuredArticles.map(article =>
-      <Col key={article.id} xs={12}>
-        <FeaturedArticle {...article} />
-      </Col>,
-    );
+    const featuredArticles = getArticles.filter(p => p.featured);
+    return featuredArticles.map(article => <FeaturedArticle key={article.id} {...article} />);
   };
 
   renderBody = () =>
-    <div>
-      <Row>{this.renderFeature()}</Row>
+    <div className="boldrui-pad-top">
+      {this.renderFeature()}
       <Row>
         {this.renderArticles()}
       </Row>
@@ -87,7 +80,7 @@ class ArticleListing extends Component {
     const { renderWhenReady } = this.props;
     const { getArticles, loading } = this.props.data;
     return (
-      <Grid>
+      <Grid fluid={false}>
         {renderWhenReady(this.renderBody)}
       </Grid>
     );

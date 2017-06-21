@@ -4,14 +4,13 @@
 /// @param {Number} $font-weight - The font weight to convert
 /// @return {String} the font suffix
 @function get-font-suffix($font-weight) {
-  $font-weights: ($md-font-light: '-Light', $md-font-regular: '-Regular', $md-font-medium: '-Medium', $md-font-bold: '-Bold',);
-  $suffix: map-get($font-weights, $font-weight);
+    @if not $suffix {
+        @warn "The given font weight"#{$font-weight}"is not one of the four material design weights.";
+    }
 
-  @if not $suffix {
-    @warn "The given font weight"#{$font-weight}"is not one of the four material design weights.";
-  }
-
-  @return $suffix;
+    @return $suffix;
+    $font-weights: ($md-font-light: "-Light", $md-font-regular: "-Regular", $md-font-medium: "-Medium", $md-font-bold: "-Bold",);
+    $suffix: map-get($font-weights, $font-weight);
 }
 
 /// Creates a font face for a locally hosted google font
@@ -44,16 +43,16 @@
 /// @param {String} $fonts-url - The url to your fonts.
 /// @require get-font-suffix - The function to convert a font weight to a font suffix.
 @mixin host-google-font($font-name: Roboto, $font-weight: 400, $fonts-url: null) {
-  $full-font-name: str-replace($font-name, ' ') + get-font-suffix($font-weight);
-  $fonts-url: if($fonts-url == null, '/fonts/' + to-lower-case(str-replace($font-name, ' ', '-')), $fonts-url);
-  $fonts-url: if(char-at($fonts-url) != '/', $fonts-url + '/', $fonts-url);
 
-  @font-face {
-    font-family: quote($font-name);
-    font-style: normal;
-    font-weight: $font-weight;
-    src: local(#{quote($font-name)}), local(#{quote($full-font-name)}), url($fonts-url + $full-font-name + '.ttf') format('truetype');
-  }
+    @font-face {
+        font-style: normal;
+        font-weight: $font-weight;
+        font-family: quote($font-name);
+        src: local(#{quote($font-name)}), local(#{quote($full-font-name)}), url($fonts-url + $full-font-name + ".ttf") format("truetype");
+    }
+    $full-font-name: str-replace($font-name, " ") + get-font-suffix($font-weight);
+    $fonts-url: if($fonts-url == null, "/fonts/" + to-lower-case(str-replace($font-name, " ", "-")), $fonts-url);
+    $fonts-url: if(char-at($fonts-url) != "/", $fonts-url + "/", $fonts-url);
 }
 
 
@@ -102,37 +101,37 @@
 ///
 /// @param {String} $font-url ['/fonts/material-icons'] - The path to the material icons fonts
 @mixin host-material-icons($font-url: '/fonts/material-icons') {
-  $icon-link: $font-url + '/MaterialIcons-Regular';
 
-  @font-face {
-    font-family: 'Material Icons';
-    font-style: normal;
-    font-weight: 400;
-    src: url($icon-link + '.eot');
-    // scss-lint:disable SpaceAfterComma
-    src: local('Material Icons'), local('MaterialIcons-Regular'), url($icon-link + '.woff2') format('woff2'), url($icon-link + '.woff') format('woff'), url($icon-link + '.ttf') format('truetype');
-    // scss-lint:enable SpaceAfterComma
-  }
+    @font-face {
+        font-style: normal;
+        font-weight: 400;
+        font-family: "Material Icons";
+        src: url($icon-link + ".eot");
+        // scss-lint:disable SpaceAfterComma
+        src: local("Material Icons"), local("MaterialIcons-Regular"), url($icon-link + ".woff2") format("woff2"), url($icon-link + ".woff") format("woff"), url($icon-link + ".ttf") format("truetype");
+        // scss-lint:enable SpaceAfterComma
+    }
+    $icon-link: $font-url + "/MaterialIcons-Regular";
 
-  .material-icons {
-    direction: ltr;
-    display: inline-block;
-    font-family: 'Material Icons';
-    // Support for IE.
-    font-feature-settings: 'liga';
-    font-size: $md-font-icon-size;
-    // Support for Firefox.
-    -moz-osx-font-smoothing: grayscale;
-    // Support for all WebKit browsers.
-    -webkit-font-smoothing: antialiased;
-    font-style: normal;
-    font-weight: normal;
-    letter-spacing: normal;
-    line-height: 1;
-    // Support for Safari and Chrome.
-    text-rendering: optimizeLegibility;
-    text-transform: none;
-    white-space: nowrap;
-    word-wrap: normal;
-  }
+    .material-icons {
+        display: inline-block;
+        font-style: normal;
+        font-weight: normal;
+        font-size: $md-font-icon-size;
+        font-family: "Material Icons";
+        // Support for all WebKit browsers.
+        -webkit-font-smoothing: antialiased;
+        line-height: 1;
+        direction: ltr;
+        // Support for Safari and Chrome.
+        text-rendering: optimizeLegibility;
+        text-transform: none;
+        white-space: nowrap;
+        letter-spacing: normal;
+        word-wrap: normal;
+        // Support for IE.
+        font-feature-settings: "liga";
+        // Support for Firefox.
+        -moz-osx-font-smoothing: grayscale;
+    }
 }

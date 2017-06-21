@@ -1,39 +1,36 @@
 
-$breadcrumb-padding-y:          .75rem !default;
-$breadcrumb-padding-x:          1rem !default;
-$breadcrumb-item-padding:       .5rem !default;
-
-$breadcrumb-bg:                 $cloud !default;
-$breadcrumb-divider-color:      $gray-light !default;
-$breadcrumb-active-color:       $gray-light !default;
-$breadcrumb-divider:            "/" !default;
+$breadcrumb-padding-y: 0.75rem !default;
+$breadcrumb-padding-x: 1rem !default;
+$breadcrumb-item-padding: 0.5rem !default;
+$breadcrumb-bg: $cloud !default;
+$breadcrumb-divider-color: $gray-light !default;
+$breadcrumb-active-color: $gray-light !default;
+$breadcrumb-divider: "/" !default;
 
 .boldrui-breadcrumb {
-  padding: $breadcrumb-padding-y $breadcrumb-padding-x;
-  margin-bottom: 1rem;
-  list-style: none;
-  background-color: $breadcrumb-bg;
-  @include clearfix;
+    @include clearfix();
+    list-style: none;
+    padding: $breadcrumb-padding-y $breadcrumb-padding-x;
+    background-color: $breadcrumb-bg;
+    margin-bottom: 1rem;
 }
 
 .boldrui-breadcrumb__item {
-  float: left;
+    float: left;
 
-  + .boldrui-breadcrumb__item:before {
-    display: inline-block;
-    padding-right: $breadcrumb-item-padding;
-    padding-left: $breadcrumb-item-padding;
-    color: $breadcrumb-divider-color;
-    content: "#{$breadcrumb-divider}";
-  }
-  + .boldrui-breadcrumb__item:hover:before {
-    text-decoration: underline;
-  }
-  + .boldrui-breadcrumb__item:hover:before {
-    text-decoration: none;
-  }
+    + .boldrui-breadcrumb__item::before {
+        content: "#{$breadcrumb-divider}";
+        display: inline-block;
+        padding-right: $breadcrumb-item-padding;
+        padding-left: $breadcrumb-item-padding;
+        color: $breadcrumb-divider-color;
+    }
 
-  &.active {
-    color: $breadcrumb-active-color;
-  }
+    + .boldrui-breadcrumb__item:hover::before {
+        text-decoration: underline;
+    }
+
+    &.active {
+        color: $breadcrumb-active-color;
+    }
 }

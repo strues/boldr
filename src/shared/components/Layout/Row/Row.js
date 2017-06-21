@@ -1,107 +1,112 @@
-import React from 'react';
+/* @flow */
+/* eslint-disable camelcase */
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import classNames from 'classnames';
 
-import createProps from '../createProps';
-import config, { DIMENSION_NAMES } from '../config';
-
-const ModificatorType = PropTypes.oneOf(DIMENSION_NAMES);
-
-const Row = props => React.createElement(props.tagName || 'div', createProps(Row.propTypes, props));
-
-Row.displayName = 'Row';
-
-Row.propTypes = {
-  reverse: PropTypes.bool,
-  start: ModificatorType,
-  center: ModificatorType,
-  end: ModificatorType,
-  top: ModificatorType,
-  middle: ModificatorType,
-  bottom: ModificatorType,
-  around: ModificatorType,
-  between: ModificatorType,
-  first: ModificatorType,
-  last: ModificatorType,
-  tagName: PropTypes.string,
-  children: PropTypes.node,
+export type Props = {
+  reverse?: boolean,
+  className?: string,
+  style?: Object,
+  children?: number | string | React.Element | Array<any>,
+  xsStart?: boolean,
+  smStart?: boolean,
+  mdStart?: boolean,
+  lgStart?: boolean,
+  xsCenter?: boolean,
+  smCenter?: boolean,
+  mdCenter?: boolean,
+  lgCenter?: boolean,
+  xsEnd?: boolean,
+  smEnd?: boolean,
+  mdEnd?: boolean,
+  lgEnd?: boolean,
+  xsTop?: boolean,
+  smTop?: boolean,
+  mdTop?: boolean,
+  lgTop?: boolean,
+  xsMiddle?: boolean,
+  smMiddle?: boolean,
+  mdMiddle?: boolean,
+  lgMiddle?: boolean,
+  xsBottom?: boolean,
+  smBottom?: boolean,
+  mdBottom?: boolean,
+  lgBottom?: boolean,
+  xsAround?: boolean,
+  smAround?: boolean,
+  mdAround?: boolean,
+  lgAround?: boolean,
+  xsBetween?: boolean,
+  smBetween?: boolean,
+  mdBetween?: boolean,
+  lgBetween?: boolean,
+  componentClass: ReactElement,
 };
 
-export default styled(Row)`
-  box-sizing: border-box;
-  display: flex;
-  flex: 0 1 auto;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin-right: ${p => config(p).gutterWidth / 2 * -1}rem;
-  margin-left: ${p => config(p).gutterWidth / 2 * -1}rem;
+class Row extends PureComponent {
+  props: Props;
+  render() {
+    const ComponentClass = this.props.componentClass;
 
-  ${p =>
-    p.reverse &&
-    `
-    flex-direction: row-reverse;
-  `}
+    const classes = classNames(
+      {
+        grid__row: true,
+        'grid__row--reverse': this.props.reverse,
 
-  ${p =>
-    p.start &&
-    config(p).media[p.start]`
-    justify-content: flex-start;
-    text-align: start;
-  `}
+        'grid__row--xs-start': this.props.xsStart,
+        'grid__row--sm-start': this.props.smStart,
+        'grid__row--md-start': this.props.mdStart,
+        'grid__row--lg-start': this.props.lgStart,
 
-  ${p =>
-    p.center &&
-    config(p).media[p.center]`
-    justify-content: center;
-    text-align: center;
-  `}
+        'grid__row--xs-center': this.props.xsCenter,
+        'grid__row--sm-center': this.props.smCenter,
+        'grid__row--md-center': this.props.mdCenter,
+        'grid__row--lg-center': this.props.lgCenter,
 
-  ${p =>
-    p.end &&
-    config(p).media[p.end]`
-    justify-content: flex-end;
-    text-align: end;
-  `}
+        'grid__row--xs-end': this.props.xsEnd,
+        'grid__row--sm-end': this.props.smEnd,
+        'grid__row--md-end': this.props.mdEnd,
+        'grid__row--lg-end': this.props.lgEnd,
 
-  ${p =>
-    p.top &&
-    config(p).media[p.top]`
-    align-items: flex-start;
-  `}
+        'grid__row--xs-top': this.props.xsTop,
+        'grid__row--sm-top': this.props.smTop,
+        'grid__row--md-top': this.props.mdTop,
+        'grid__row--lg-top': this.props.lgTop,
 
-  ${p =>
-    p.middle &&
-    config(p).media[p.middle]`
-    align-items: center;
-  `}
+        'grid__row--xs-middle': this.props.xsMiddle,
+        'grid__row--sm-middle': this.props.smMiddle,
+        'grid__row--md-middle': this.props.mdMiddle,
+        'grid__row--lg-middle': this.props.lgMiddle,
 
-  ${p =>
-    p.bottom &&
-    config(p).media[p.bottom]`
-    align-items: flex-end;
-  `}
+        'grid__row--xs-bottom': this.props.xsBottom,
+        'grid__row--sm-bottom': this.props.smBottom,
+        'grid__row--md-bottom': this.props.mdBottom,
+        'grid__row--lg-bottom': this.props.lgBottom,
 
-  ${p =>
-    p.around &&
-    config(p).media[p.around]`
-    justify-content: space-around;
-  `}
+        'grid__row--xs-around': this.props.xsAround,
+        'grid__row--sm-around': this.props.smAround,
+        'grid__row--md-around': this.props.mdAround,
+        'grid__row--lg-around': this.props.lgAround,
 
-  ${p =>
-    p.between &&
-    config(p).media[p.between]`
-    justify-content: space-between;
-  `}
+        'grid__row--xs-between': this.props.xsBetween,
+        'grid__row--sm-between': this.props.smBetween,
+        'grid__row--md-between': this.props.mdBetween,
+        'grid__row--lg-between': this.props.lgBetween,
+      },
+      this.props.className,
+    );
 
-  ${p =>
-    p.first &&
-    config(p).media[p.first]`
-    order: -1;
-  `}
+    return (
+      <ComponentClass className={classes} style={this.props.style}>
+        {this.props.children}
+      </ComponentClass>
+    );
+  }
+}
 
-  ${p =>
-    p.last &&
-    config(p).media[p.last]`
-    order: 1;
-  `}
-`;
+Row.defaultProps = {
+  componentClass: 'div',
+};
+
+export default Row;

@@ -1,60 +1,60 @@
 .#{$boldr-ns}contentpromo__wrapper {
-  position: relative;
-  padding: 6rem 0;
+    position: relative;
+    padding: 6rem 0;
 }
 
 .#{$boldr-ns}contentpromo__bright {
-  background: #fff;
+    background: #fff;
 }
 
 .#{$boldr-ns}contentpromo__secondary {
-  background: $secondary-color;
-  color: #fff;
+    color: #fff;
+    background: $secondary-color;
 }
 
 .#{$boldr-ns}contentpromo__teritary {
-  background: $teritary-color;
+    background: $teritary-color;
 }
 
 .#{$boldr-ns}contentpromo__darkgrey {
-  background: $outer-space;
-  color: #fff;
+    color: #fff;
+    background: $outer-space;
 }
 
 .#{$boldr-ns}contentpromo__grey {
-  background: $grayish;
+    background: $grayish;
 }
 
 .#{$boldr-ns}contentpromo__light-grey {
-  background: $cloud;
+    background: $cloud;
 }
 
 .#{$boldr-ns}contentpromo__tiny {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+    padding-top: 3rem;
+    padding-bottom: 3rem;
 }
 
 .#{$boldr-ns}contentpromo__narrow > .#{$boldr-ns}contentpromo__contents {
-  max-width: 900px;
+    max-width: 900px;
 }
 
 .#{$boldr-ns}contentpromo__wide > .#{$boldr-ns}contentpromo__contents {
-  max-width: none;
-  width: 100%;
+    width: 100%;
+    max-width: none;
 }
 
 .#{$boldr-ns}contentpromo__centered {
-  text-align: center;
+    text-align: center;
 }
 
 .#{$boldr-ns}contentpromo__contents {
-  position: relative;
-  z-index: 1;
-  width: 90%;
-  max-width: 1700px;
-  margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    width: 90%;
+    max-width: 1700px;
+    margin: 0 auto;
 
-  > :last-child {
-    margin-bottom: 0;
-  }
+    > :last-child {
+        margin-bottom: 0;
+    }
 }

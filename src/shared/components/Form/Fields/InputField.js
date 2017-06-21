@@ -16,15 +16,7 @@ type Props = {
   addonAfter: ?any,
 };
 
-const InputField = ({
-  input,
-  addonBefore,
-  placeholder,
-  addonAfter,
-  label,
-  type,
-  meta,
-}: Props) => (
+const InputField = ({ input, addonBefore, placeholder, addonAfter, label, type, meta }: Props) =>
   <div>
     <Label label={label} />
     <div>
@@ -37,7 +29,6 @@ const InputField = ({
       />
       {meta.touched && <Feedback meta={meta} />}
     </div>
-  </div>
-);
+  </div>;
 
 export default InputField;

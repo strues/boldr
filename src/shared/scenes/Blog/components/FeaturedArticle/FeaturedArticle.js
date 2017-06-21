@@ -111,7 +111,7 @@ export const FeaturedArticle = (props: Props) => {
         </ImgWrapper>
         <Content>
           <Paragraph>{props.excerpt}</Paragraph>
-          <Row style={{ paddingTop: '20px' }} end="xs">
+          <Row style={{ paddingTop: '20px' }} xsCenter>
             <Link to={`/blog/${props.slug}`}>
               <Button kind="primary" onClick={transitionPost} outline>Read More</Button>
             </Link>

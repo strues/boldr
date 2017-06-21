@@ -2,19 +2,14 @@
 
 exports[`<About /> renders snapshot 1`] = `
 <div>
-  <Connect(BaseTemplate)
-    helmetMeta={
-      <HelmetWrapper
-        encodeSpecialCharacters={true}
-        title="About"
-      />
-    }
+  <HelmetWrapper
+    encodeSpecialCharacters={true}
+    title="About"
+  />
+  <Headline
+    type="h1"
   >
-    <Headline
-      type="h1"
-    >
-      About
-    </Headline>
-  </Connect(BaseTemplate)>
+    About
+  </Headline>
 </div>
 `;

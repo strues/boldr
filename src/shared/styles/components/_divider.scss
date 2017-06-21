@@ -14,41 +14,41 @@ $divider-color: $big-stone;
 $divider-border-color: $divider-color;
 
 .#{$boldr-ns}divider {
-  background: $divider-color;
-  border: 0;
-  content: '';
-  display: block;
-  height: $divider-height;
-  margin: 0;
+    content: "";
+    display: block;
+    height: $divider-height;
+    background: $divider-color;
+    border: 0;
+    margin: 0;
 }
 
 .#{$boldr-ns}divider__vertical {
-  height: 100%;
-  width: $divider-height;
+    width: $divider-height;
+    height: 100%;
 }
 
 .#{$boldr-ns}divider__inset {
-  margin-left: 40px;
+    margin-left: 40px;
 }
 
 .#{$boldr-ns}divider-border {
-  border-color: $divider-border-color;
-  border-style: solid;
-  border-width: 0;
+    border-width: 0;
+    border-style: solid;
+    border-color: $divider-border-color;
 }
 
 .#{$boldr-ns}divider-border__top {
-  border-top-width: 1px;
+    border-top-width: 1px;
 }
 
 .#{$boldr-ns}divider-border__right {
-  border-right-width: 1px;
+    border-right-width: 1px;
 }
 
 .#{$boldr-ns}divider-border__bottom {
-  border-bottom-width: 1px;
+    border-bottom-width: 1px;
 }
 
 .#{$boldr-ns}divider-border__left {
-  border-left-width: 1px;
+    border-left-width: 1px;
 }

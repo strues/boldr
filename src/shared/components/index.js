@@ -7,7 +7,6 @@ export {
 } from './Accordion';
 export { default as Anchor } from './Anchor';
 export { default as Avatar } from './Avatar';
-export { default as AnimatedRouter } from './AnimatedRouter';
 export { default as Block } from './Block';
 export { default as Button } from './Button';
 export { default as Caption } from './Caption';

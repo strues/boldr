@@ -15,7 +15,6 @@ class Accordion extends Component {
   static defaultProps = {
     accordion: true,
     onChange: () => {},
-    className: 'boldrui-accordion',
   };
   constructor(props: Props) {
     super(props);
@@ -85,9 +84,9 @@ class Accordion extends Component {
   }
 
   render() {
-    const { className, children } = this.props;
+    const { children } = this.props;
     return (
-      <div className={className}>
+      <div className="boldrui-accordion">
         {this.renderItems()}
       </div>
     );

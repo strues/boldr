@@ -2,7 +2,7 @@
 /* eslint-disable */
 import React from 'react';
 import { Loader, Icon } from 'boldr-ui';
-import Loadable from 'react-loadable';
+import loadable from '@@core/loadable';
 // Admin
 import MediaManagerContainer from './Media/MediaManager/MediaManagerContainer';
 import UploadMedia from './Media/UploadMedia';
@@ -13,33 +13,13 @@ import NewArticleContainer from './Content/NewArticle/NewArticleContainer';
 // import FileEditor from './FileManager/FileEditor';
 // import NavigationContainer from './Navigation/NavigationContainer';
 import Members from './Members';
-// import Settings from './Settings';
+import Settings from './Settings';
 import TagsContainer from './Content/Tags/TagsContainer';
 import TaggedPost from './Content/Tags/components/TaggedPost/TaggedPost';
 
-const LoadingComponent = (props: { isLoading: boolean, timedOut: boolean, error: boolean }) => {
-  if (props.isLoading) {
-    // While our other component is loading...
-    return props.timedOut ? <div>loader timed out!</div> : <Loader />;
-  }
-  if (props.error) {
-    // If something went wrong
-    return <div>Something went wrong...</div>;
-  }
-  return null;
-};
-const ArticlesContainer = Loadable({
-  // $FlowIssue
-  loader: () =>
-    import('./Content/Articles/ArticlesContainer' /* webpackChunkName: "dashboard-articles" */),
-  loading: props => <LoadingComponent {...props} />
-});
+const ArticlesContainer = loadable(() => import('./Content/Articles/ArticlesContainer' /* webpackChunkName: "dashArticles" */))
 
-const MediaContainer = Loadable({
-  loader: () => import('./Media/MediaContainer'),
-  loading: props => <LoadingComponent {...props} />
-});
-
+const MediaContainer = loadable(() => import('./Media/MediaContainer' /* webpackChunkName: "dashMedia" */))
 export default [
   {
     path: '/admin/content/articles',
@@ -98,13 +78,13 @@ export default [
   //       component: NavigationContainer,
   //       routes: [],
   //   },
-  // {
-  //     exact: true,
-  //     path: '/admin/settings',
-  //     breadcrumb: <Icon kind="settings" />,
-  //     component: Settings,
-  //     routes: [],
-  // },
+  {
+      exact: true,
+      path: '/admin/settings',
+      breadcrumb: <Icon kind="settings" />,
+      component: Settings,
+      routes: [],
+  },
   {
     exact: true,
     path: '/admin/members',

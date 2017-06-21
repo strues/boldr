@@ -1,65 +1,65 @@
 .#{$boldr-ns}flag__wrapper {
-  width: 100%;
+    width: 100%;
 
-  @media screen and (min-width: $medium-viewport) {
-    display: table;
-  }
+    @media screen and (min-width: $medium-viewport) {
+        display: table;
+    }
 }
 
 .#{$boldr-ns}flag__img-wrapper {
-  position: relative;
-  overflow: hidden;
+    position: relative;
+    overflow: hidden;
 
-  @media screen and (min-width: $medium-viewport) {
-    display: table-cell;
-    width: 50%;
-  }
+    @media screen and (min-width: $medium-viewport) {
+        display: table-cell;
+        width: 50%;
+    }
 
-  @media screen and (max-width: $medium-viewport) and (orientation: landscape) {
-    max-height: 65vh;
-  }
+    @media screen and (max-width: $medium-viewport) and (orientation: landscape) {
+        max-height: 65vh;
+    }
 }
 
 @media screen and (min-width: $large-viewport) {
 
-.#{$boldr-ns}flag__img-wrapper-40 {
-    width: 40%;
-  }
+    .#{$boldr-ns}flag__img-wrapper-40 {
+        width: 40%;
+    }
 
-.#{$boldr-ns}flag__img-wrapper-60 {
-    width: 60%;
-  }
+    .#{$boldr-ns}flag__img-wrapper-60 {
+        width: 60%;
+    }
 
-.#{$boldr-ns}flag__img-wrapper-80 {
-    width: 80%;
-  }
+    .#{$boldr-ns}flag__img-wrapper-80 {
+        width: 80%;
+    }
 }
 
 .#{$boldr-ns}flag__contents {
-  padding: 1.5rem;
-  vertical-align: middle;
+    padding: 1.5rem;
+    vertical-align: middle;
 
-  @media screen and (min-width: $medium-viewport) {
-    display: table-cell;
-    padding: 3rem;
-  }
+    @media screen and (min-width: $medium-viewport) {
+        display: table-cell;
+        padding: 3rem;
+    }
 }
 
 .#{$boldr-ns}flag__img,
 .#{$boldr-ns}flag__img > img {
-  width: 100%;
+    width: 100%;
 
-  @media screen and (min-width: $medium-viewport) {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    max-width: none;
-  }
+    @media screen and (min-width: $medium-viewport) {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: auto;
+        min-width: 100%;
+        max-width: none;
+        height: auto;
+        min-height: 100%;
+        transform: translateX(-50%) translateY(-50%);
+    }
 }
 
 /**
@@ -68,7 +68,7 @@
  */
 
 .#{$boldr-ns}flag__img > span {
-  position: absolute;
-  top: 50%;
-  left: 50%;
+    position: absolute;
+    top: 50%;
+    left: 50%;
 }

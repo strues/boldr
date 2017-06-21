@@ -1,3 +1,28 @@
+// ////////////////////////////////////////////////////// //
+// BEM Sass port of Flexbox Grid - http://flexboxgrid.com //
+// ////////////////////////////////////////////////////// //
+
+// Mixins
+@mixin breakpoint($breakpoint, $breakpoint-size) {
+  // The grid is mobile first so xs is the default, hence no breakpoint
+  @if $breakpoint == xs {
+    @content;
+  }
+
+  // Add breakpoints for larger screens
+  @else {
+    @media only screen and (min-width: $breakpoint-size) {
+      // Static grid
+      .grid {
+        width: map-get($grid-containers, $breakpoint);
+      }
+
+      @content;
+    }
+  }
+}
+
+// Grid
 .grid,
 .grid--fluid {
   margin: 0 auto;
@@ -8,6 +33,7 @@
   padding-left: $grid-gutter;
 }
 
+// Rows
 .grid__row {
   box-sizing: border-box;
   display: flex;
@@ -22,8 +48,8 @@
   }
 }
 
+// Columns
 .grid__col {
-
   &--reverse {
     flex-direction: column-reverse;
   }
@@ -31,15 +57,15 @@
 
 @each $breakpoint, $breakpoint-size in $grid-breakpoints {
   @include breakpoint($breakpoint, $breakpoint-size) {
-    $col-selectors: ('.grid__col--#{$breakpoint}');
+    $col-selectors: (".grid__col--#{$breakpoint}");
 
     @for $col from 1 through $grid-columns {
-      $col-selector: unquote('.grid__col--#{$breakpoint}-#{$col}');
+      $col-selector: unquote(".grid__col--#{$breakpoint}-#{$col}");
       $col-selectors: append($col-selectors, $col-selector, comma);
     }
 
     @for $col from 1 through $grid-columns {
-      $col-offset-selector: unquote('.grid__col--#{$breakpoint}-offset-#{$col}');
+      $col-offset-selector: unquote(".grid__col--#{$breakpoint}-offset-#{$col}");
       $col-selectors: append($col-selectors, $col-offset-selector, comma);
     }
 
@@ -51,14 +77,12 @@
     }
 
     .grid__col {
-
       &--#{$breakpoint} {
         flex-grow: 1;
         flex-basis: 0;
         max-width: 100%;
 
         @for $col from 1 through $grid-columns {
-
           &-#{$col} {
             flex-basis: (100% / $grid-columns) * $col;
             max-width: (100% / $grid-columns) * $col;
@@ -66,7 +90,6 @@
         }
 
         @for $col from 1 through $grid-columns {
-
           &-offset-#{$col} {
             margin-left: (100% / $grid-columns) * $col;
           }
@@ -74,10 +97,9 @@
       }
     }
 
+    // Utilities
     .grid {
-
       &__row {
-
         &--#{$breakpoint}-start {
           justify-content: flex-start;
           text-align: start;
@@ -115,7 +137,6 @@
       }
 
       &__col {
-
         &--#{$breakpoint}-first {
           order: -1;
         }

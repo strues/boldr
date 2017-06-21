@@ -4,117 +4,147 @@ $line-height: 1.29;
 $padding: 18px;
 $border-radius: 8px;
 $shadow-color: rgba(0, 0, 0, 0.2);
-$shadow-color-arrow: rgba(0, 0, 0, .1);
+$shadow-color-arrow: rgba(0, 0, 0, 0.1);
 $shadow: 0 0 11px 0 $shadow-color;
 
 .boldrui-tooltip__root {
-  position: absolute;
-  z-index: $zIndex;
+    position: absolute;
+    z-index: $zIndex;
 }
 
 .boldrui-tooltip {
-  position: relative;
-  display: inline-block;
-  border-radius: $border-radius;
-  padding: $padding;
-  font-size: $font-size;
-  line-height: $line-height;
-  box-shadow: $shadow;
-  word-wrap: break-word;
-  -webkit-font-smoothing: antialiased;
-  &.light {
-    color: $D10;
-    background: $D80;
-  }
-  &.dark {
-    color: $D80;
-    background: $D10;
-  }
-  &.error {
-    color: white;
-    background: $R00;
-  }
-  &.normal {
-    font-size: 14px;
-    line-height: 18px;
-    text-align: center;
-  }
-  &.large {
-    font-size: 16px;
-    line-height: 24px;
-    text-align: center;
-  }
+    position: relative;
+    display: inline-block;
+    padding: $padding;
+    border-radius: $border-radius;
+    box-shadow: $shadow;
+    font-size: $font-size;
+    -webkit-font-smoothing: antialiased;
+    line-height: $line-height;
+    word-wrap: break-word;
+
+    &.light {
+        color: $D10;
+        background: $D80;
+    }
+
+    &.dark {
+        color: $D80;
+        background: $D10;
+    }
+
+    &.error {
+        color: $white;
+        background: $R00;
+    }
+
+    &.normal {
+        font-size: 14px;
+        line-height: 18px;
+        text-align: center;
+    }
+
+    &.large {
+        font-size: 16px;
+        line-height: 24px;
+        text-align: center;
+    }
 }
 
 .boldrui-tooltip__arrow {
-  $arrow-size: 10px;
-  position: absolute;
-  height: $arrow-size;
-  width: $arrow-size;
-  transform: rotateZ(45deg);
-  background: inherit;
-  &.bottom, &.top {
-    left: 50%;
-    margin-left: -$arrow-size/2;
-  }
-  &.bottom {
-    bottom: -4px;
-    box-shadow: 3px 3px 6px $shadow-color-arrow;
-  }
-  &.top {
-    top: -4px;
-    box-shadow: -3px -3px 6px $shadow-color-arrow;
-  }
-  &.left, &.right {
-    top: 50%;
-    margin-top: -5px;
-  }
-  &.right {
-    right: -5px;
-    box-shadow: 3px -3px 6px $shadow-color-arrow;
-  }
-  &.left {
-    left: -5px;
-    box-shadow: -3px 3px 6px $shadow-color-arrow;
-  }
+    $arrow-size: 10px;
+    position: absolute;
+    width: $arrow-size;
+    height: $arrow-size;
+    background: inherit;
+    transform: rotateZ(45deg);
+
+    &.bottom,
+    &.top {
+        left: 50%;
+        margin-left: -$arrow-size / 2;
+    }
+
+    &.bottom {
+        bottom: -4px;
+        box-shadow: 3px 3px 6px $shadow-color-arrow;
+    }
+
+    &.top {
+        top: -4px;
+        box-shadow: -3px -3px 6px $shadow-color-arrow;
+    }
+
+    &.left,
+    &.right {
+        top: 50%;
+        margin-top: -5px;
+    }
+
+    &.right {
+        right: -5px;
+        box-shadow: 3px -3px 6px $shadow-color-arrow;
+    }
+
+    &.left {
+        left: -5px;
+        box-shadow: -3px 3px 6px $shadow-color-arrow;
+    }
 }
 
-.boldrui-tooltip__fadeIn { animation: fadeIn .3s cubic-bezier(0.23, 1, 0.32, 1) both; }
+.boldrui-tooltip__fadeIn {    animation: fadeIn 0.3s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
 
-.bounce-on-top, .bounce-on-bottom { animation: bounceVertically   1s ease infinite; }
-.bounce-on-left, .bounce-on-right { animation: bounceHorizontally 1s ease infinite; }
+.bounce-on-top,
+.bounce-on-bottom {    animation: bounceVertically 1s ease infinite;
+}
+
+.bounce-on-left,
+.bounce-on-right {    animation: bounceHorizontally 1s ease infinite;
+}
 
 .bounce-on-top,
 .bounce-on-bottom,
 .bounce-on-left,
 .bounce-on-right {
-  &:hover {
-    animation-play-state: paused;
-    -webkit-animation-play-state: paused;
-    -moz-animation-play-state: paused;
-    -o-animation-play-state: paused;
-  }
+    &:hover {
+        -webkit-animation-play-state: paused;
+        -moz-animation-play-state: paused;
+        -o-animation-play-state: paused;
+        animation-play-state: paused;
+    }
 }
 
 @keyframes fadeIn {
-  from {
-    opacity: .85;
-    transform: scale(.9);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
+    from {
+        opacity: 0.85;
+        transform: scale(0.9);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
 
 @keyframes bounceVertically {
-    0% { transform: translateY(0); }
-   50% { transform: translateY(-10px); }
-  100% { transform: translateY(0); }
+    0% {        transform: translateY(0);
+    }
+
+    50% {        transform: translateY(-10px);
+    }
+
+    100% {        transform: translateY(0);
+    }
 }
 
 @keyframes bounceHorizontally {
-    0% { transform: translateX(0); }
-   50% { transform: translateX(-10px); }
-  100% { transform: translateX(0); }
+    0% {        transform: translateX(0);
+    }
+
+    50% {        transform: translateX(-10px);
+    }
+
+    100% {        transform: translateX(0);
+    }
 }

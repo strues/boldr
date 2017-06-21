@@ -102,7 +102,7 @@ class NewArticleForm extends Component {
                 </DarkSegment>
                 <Block>
                   <FormGroup>
-                    <Headline type="h3">
+                    <Headline type="h4">
                       Upload a feature image <FontIcon>photo_library</FontIcon>
                     </Headline>
                     <UploadArticleImage handleSetMedia={this.handleSetMedia} />

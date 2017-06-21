@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import { bindActionCreators } from 'redux';
-import { updateMenuDetails, addMenuDetail } from '@@state';
+import { updateMenuDetails, addMenuDetail } from '@@state/modules/boldr/menu/actions';
 import Navigation from './Navigation';
 
 type Props = {
@@ -25,23 +25,23 @@ class NavigationContainer extends Component {
 
 export const MENU_QUERY = gql`
  query getMenuById($id: ID!) {
- getMenuById(id: $id) {
-    id,
-    name,
-    details {
+   getMenuById(id: $id) {
       id,
-      uuid,
-      safeName,
       name,
-      cssClassname,
-      icon,
-      hasDropdown,
-      order,
-      mobileHref,
-      href,
-      children
+      details {
+        id,
+        uuid,
+        safeName,
+        name,
+        cssClassname,
+        icon,
+        hasDropdown,
+        order,
+        mobileHref,
+        href,
+        children
+      }
     }
-  }
   }
 `;
 

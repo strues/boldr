@@ -1,13 +1,20 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { ExpandablePanel, SettingsGroup, SettingsItem } from 'boldr-ui';
-
-import SiteDescription from './SiteDescription';
-import SiteName from './SiteName';
-import Logo from './Logo';
-import Favicon from './Favicon';
-import SiteUrl from './SiteUrl';
+import styled from 'styled-components';
+// internal
+import Headline from '@@components/Headline';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemTitle,
+  AccordionItemBody,
+} from '@@components/Accordion';
+// import SiteDescription from './SiteDescription';
+// import SiteName from './SiteName';
+// import Logo from './Logo';
+// import Favicon from './Favicon';
+// import SiteUrl from './SiteUrl';
 
 type Props = {
   siteName: Object,
@@ -17,49 +24,74 @@ type Props = {
   siteLogo: Object,
 };
 
+const ContentArea = styled.div`
+  height: 100%;
+  background-color: #fff;
+  border: 1px solid #e1e7ea;
+  display: flex;
+  padding: 1em;
+  flex-direction: column;
+  flex: 1;
+`;
 class General extends Component {
   props: Props;
   render() {
     return (
-      <ExpandablePanel
-        title="General Settings"
-        description="The basics of site customization"
-      >
-        <SettingsGroup title="Site Meta">
-          <SettingsItem
-            title="Site Name"
-            description="The name of your website."
-          >
-            <SiteName {...this.props.siteName} />
-          </SettingsItem>
-          <SettingsItem
-            title="Site Description"
-            description="The description of your website."
-          >
-            <SiteDescription {...this.props.siteDescription} />
-          </SettingsItem>
-          <SettingsItem
-            title="Site URL"
-            description="The address of your website."
-          >
-            <SiteUrl {...this.props.siteUrl} />
-          </SettingsItem>
-        </SettingsGroup>
-        <SettingsGroup title="Site Branding">
-          <SettingsItem
-            title="Logo"
-            description="The logo image for your website."
-          >
-            <Logo {...this.props.siteLogo} />
-          </SettingsItem>
-          <SettingsItem
-            title="Favicon"
-            description="A favicon to use for your site"
-          >
-            <Favicon {...this.props.siteFavicon} />
-          </SettingsItem>
-        </SettingsGroup>
-      </ExpandablePanel>
+      <ContentArea>
+        <Headline type="h3">General Settings</Headline>
+        <Accordion>
+          <AccordionItem>
+            <AccordionItemTitle>
+              <Headline type="h4">Site Name</Headline>
+            </AccordionItemTitle>
+            <AccordionItemBody>
+              <p>
+                A story you havent told.
+              </p>
+            </AccordionItemBody>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionItemTitle>
+              <Headline type="h4">Site Description</Headline>
+            </AccordionItemTitle>
+            <AccordionItemBody>
+              <p>
+                A story you havent told.
+              </p>
+            </AccordionItemBody>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionItemTitle>
+              <Headline type="h4">Site URL</Headline>
+            </AccordionItemTitle>
+            <AccordionItemBody>
+              <p>
+                A story you havent told.
+              </p>
+            </AccordionItemBody>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionItemTitle>
+              <Headline type="h4">Logo</Headline>
+            </AccordionItemTitle>
+            <AccordionItemBody>
+              <p>
+                A story you havent told.
+              </p>
+            </AccordionItemBody>
+          </AccordionItem>
+          <AccordionItem>
+            <AccordionItemTitle>
+              <Headline type="h4">Favicon</Headline>
+            </AccordionItemTitle>
+            <AccordionItemBody>
+              <p>
+                A story you havent told.
+              </p>
+            </AccordionItemBody>
+          </AccordionItem>
+        </Accordion>
+      </ContentArea>
     );
   }
 }

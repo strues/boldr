@@ -4,7 +4,6 @@ import { NavLink, withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 
 import { StyleClasses } from '../../theme/styleClasses';
-import type { ReactChildren, ReactElement } from '../../types/react.js.flow';
 
 import SidebarWrapper from './SidebarWrapper';
 import SidebarHeader from './SidebarHeader';

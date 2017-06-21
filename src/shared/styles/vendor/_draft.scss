@@ -12,213 +12,213 @@
 .DraftEditor-editorContainer,
 .DraftEditor-root,
 .public-DraftEditor-content {
-  height: inherit;
-  text-align: initial;
+    height: inherit;
+    text-align: initial;
 }
 
 .public-DraftEditor-content[contenteditable=true] {
-  -webkit-user-modify: read-write-plaintext-only;
+    -webkit-user-modify: read-write-plaintext-only;
 }
 
 .DraftEditor-root {
-  position: relative;
+    position: relative;
 }
 
 .DraftEditor-editorContainer {
-  background-color: rgba(255, 255, 255, 0);
-  border-left: 0.1px solid transparent;
-  position: relative;
-  z-index: 1;
+    position: relative;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0);
+    border-left: 0.1px solid transparent;
 }
 
 .public-DraftEditor-block {
-  position: relative;
+    position: relative;
 }
 
 .DraftEditor-alignLeft .public-DraftStyleDefault-block {
-  text-align: left;
+    text-align: left;
 }
 
 .DraftEditor-alignLeft .public-DraftEditorPlaceholder-root {
-  left: 0;
-  text-align: left;
+    left: 0;
+    text-align: left;
 }
 
 .DraftEditor-alignCenter .public-DraftStyleDefault-block {
-  text-align: center;
+    text-align: center;
 }
 
 .DraftEditor-alignCenter .public-DraftEditorPlaceholder-root {
-  margin: 0 auto;
-  text-align: center;
-  width: 100%;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
 }
 
 .DraftEditor-alignRight .public-DraftStyleDefault-block {
-  text-align: right;
+    text-align: right;
 }
 
 .DraftEditor-alignRight .public-DraftEditorPlaceholder-root {
-  right: 0;
-  text-align: right;
+    right: 0;
+    text-align: right;
 }
 
 .public-DraftEditorPlaceholder-root {
-  color: #9197a3;
-  position: absolute;
-  z-index: 0;
+    position: absolute;
+    z-index: 0;
+    color: #9197a3;
 }
 
 .public-DraftEditorPlaceholder-hasFocus {
-  color: #bdc1c9;
+    color: #bdc1c9;
 }
 
 .DraftEditorPlaceholder-hidden {
-  display: none;
+    display: none;
 }
 
 .public-DraftStyleDefault-block {
-  position: relative;
-  white-space: pre-wrap;
+    position: relative;
+    white-space: pre-wrap;
 }
 
 .public-DraftStyleDefault-ltr {
-  direction: ltr;
-  text-align: left;
+    direction: ltr;
+    text-align: left;
 }
 
 .public-DraftStyleDefault-rtl {
-  direction: rtl;
-  text-align: right;
+    direction: rtl;
+    text-align: right;
 }
 
 .public-DraftStyleDefault-listLTR {
-  direction: ltr;
+    direction: ltr;
 }
 
 .public-DraftStyleDefault-listRTL {
-  direction: rtl;
+    direction: rtl;
 }
 
 .public-DraftStyleDefault-ol,
 .public-DraftStyleDefault-ul {
-  margin: 16px 0;
-  padding: 0;
+    padding: 0;
+    margin: 16px 0;
 }
 
 .public-DraftStyleDefault-depth0.public-DraftStyleDefault-listLTR {
-  margin-left: 1.5em;
+    margin-left: 1.5em;
 }
 
 .public-DraftStyleDefault-depth0.public-DraftStyleDefault-listRTL {
-  margin-right: 1.5em;
+    margin-right: 1.5em;
 }
 
 .public-DraftStyleDefault-depth1.public-DraftStyleDefault-listLTR {
-  margin-left: 3em;
+    margin-left: 3em;
 }
 
 .public-DraftStyleDefault-depth1.public-DraftStyleDefault-listRTL {
-  margin-right: 3em;
+    margin-right: 3em;
 }
 
 .public-DraftStyleDefault-depth2.public-DraftStyleDefault-listLTR {
-  margin-left: 4.5em;
+    margin-left: 4.5em;
 }
 
 .public-DraftStyleDefault-depth2.public-DraftStyleDefault-listRTL {
-  margin-right: 4.5em;
+    margin-right: 4.5em;
 }
 
 .public-DraftStyleDefault-depth3.public-DraftStyleDefault-listLTR {
-  margin-left: 6em;
+    margin-left: 6em;
 }
 
 .public-DraftStyleDefault-depth3.public-DraftStyleDefault-listRTL {
-  margin-right: 6em;
+    margin-right: 6em;
 }
 
 .public-DraftStyleDefault-depth4.public-DraftStyleDefault-listLTR {
-  margin-left: 7.5em;
+    margin-left: 7.5em;
 }
 
 .public-DraftStyleDefault-depth4.public-DraftStyleDefault-listRTL {
-  margin-right: 7.5em;
+    margin-right: 7.5em;
 }
 
 .public-DraftStyleDefault-unorderedListItem {
-  list-style-type: square;
-  position: relative;
+    position: relative;
+    list-style-type: square;
 }
 
 .public-DraftStyleDefault-unorderedListItem.public-DraftStyleDefault-depth0 {
-  list-style-type: disc;
+    list-style-type: disc;
 }
 
 .public-DraftStyleDefault-unorderedListItem.public-DraftStyleDefault-depth1 {
-  list-style-type: circle;
+    list-style-type: circle;
 }
 
 .public-DraftStyleDefault-orderedListItem {
-  list-style-type: none;
-  position: relative;
+    position: relative;
+    list-style-type: none;
 }
 
 .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-listLTR:before {
-  left: -36px;
-  position: absolute;
-  text-align: right;
-  width: 30px;
+    position: absolute;
+    left: -36px;
+    width: 30px;
+    text-align: right;
 }
 
 .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-listRTL:before {
-  position: absolute;
-  right: -36px;
-  text-align: left;
-  width: 30px;
+    position: absolute;
+    right: -36px;
+    width: 30px;
+    text-align: left;
 }
 
 .public-DraftStyleDefault-orderedListItem:before {
-  content: counter(ol0) '. ';
-  counter-increment: ol0;
+    content: counter(ol0) '. ';
+    counter-increment: ol0;
 }
 
 .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth1:before {
-  content: counter(ol1) '. ';
-  counter-increment: ol1;
+    content: counter(ol1) '. ';
+    counter-increment: ol1;
 }
 
 .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth2:before {
-  content: counter(ol2) '. ';
-  counter-increment: ol2;
+    content: counter(ol2) '. ';
+    counter-increment: ol2;
 }
 
 .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth3:before {
-  content: counter(ol3) '. ';
-  counter-increment: ol3;
+    content: counter(ol3) '. ';
+    counter-increment: ol3;
 }
 
 .public-DraftStyleDefault-orderedListItem.public-DraftStyleDefault-depth4:before {
-  content: counter(ol4) '. ';
-  counter-increment: ol4;
+    content: counter(ol4) '. ';
+    counter-increment: ol4;
 }
 
 .public-DraftStyleDefault-depth0.public-DraftStyleDefault-reset {
-  counter-reset: ol0;
+    counter-reset: ol0;
 }
 
 .public-DraftStyleDefault-depth1.public-DraftStyleDefault-reset {
-  counter-reset: ol1;
+    counter-reset: ol1;
 }
 
 .public-DraftStyleDefault-depth2.public-DraftStyleDefault-reset {
-  counter-reset: ol2;
+    counter-reset: ol2;
 }
 
 .public-DraftStyleDefault-depth3.public-DraftStyleDefault-reset {
-  counter-reset: ol3;
+    counter-reset: ol3;
 }
 
 .public-DraftStyleDefault-depth4.public-DraftStyleDefault-reset {
-  counter-reset: ol4;
+    counter-reset: ol4;
 }

@@ -7,7 +7,6 @@ type Props = {
   accordion: boolean,
   onClick: () => void,
   children: ReactChildren,
-  className: string,
 };
 
 class AccordionItem extends Component {
@@ -15,7 +14,6 @@ class AccordionItem extends Component {
     accordion: true,
     expanded: false,
     onClick: () => {},
-    className: 'boldrui-accordion__item',
   };
   constructor(props) {
     super(props);
@@ -51,9 +49,8 @@ class AccordionItem extends Component {
   }
 
   render() {
-    const { className } = this.props;
     return (
-      <div className={className}>
+      <div className="boldrui-accordion__item">
         {this.renderChildren()}
       </div>
     );

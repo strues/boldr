@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import AnimatedRouter from '@@components/AnimatedRouter';
+import Route from 'react-router-dom/Route';
 import flattenRoutes from '@@core/flattenRoutes';
 import routes from './routes';
 
@@ -14,7 +14,7 @@ const BlogContainer = (props: Props) => {
   const flattenedRoutes = flattenRoutes(routes);
   return (
     <div>
-      {flattenedRoutes.map(props => <AnimatedRouter.Route key={props.path} {...props} />)}
+      {flattenedRoutes.map(props => <Route key={props.path} {...props} />)}
     </div>
   );
 };

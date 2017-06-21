@@ -1,50 +1,54 @@
 .boldrui-dropzone {
-  border: 1px solid $dark-navy;
+    border: 1px solid $dark-navy;
 }
 
 .boldrui-dropzone__panel {
-  height: 250px;
-  margin: 0 auto;
-  width: 100%;
-  align-items: center;
+    align-items: center;
+    width: 100%;
+    height: 250px;
+    margin: 0 auto;
 }
 
 .boldrui-dropzone__drop {
-  text-align: center;
-  padding-top: 100px;
+    padding-top: 100px;
+    text-align: center;
 }
 
 .boldrui-dropzone__drop-sm {
-  text-align: center;
-  padding-top: 50px;
-  padding-bottom: 50px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
 }
+
 .preview {
-  position: relative;
-  height: 220px;
-  width: 200px;
-  cursor: move;
+    position: relative;
+    width: 200px;
+    height: 220px;
+    cursor: move;
 }
 
 .preview img {
-  max-width: 100%;
-  max-height: 100%;
+    max-width: 100%;
+    max-height: 100%;
 }
+
 .boldrui-dropzone__empty {
-  color: #a1a1a1;
-  font-size: 16px;
-  border: 2px dashed rgba(0,0,0,0.1);
-  padding: 80px;
-  margin: 20px 20px 0 20px;
-  background-color: rgb(255,255,255);
+    padding: 80px;
+    color: #a1a1a1;
+    background-color: rgb(255, 255, 255);
+    border: 2px dashed rgba(0, 0, 0, 0.1);
+    margin: 20px 20px 0;
+    font-size: 16px;
 }
 
 .boldrui-dropzone__active {
-  background-color: rgba(18,179,117, 0.4);
+    background-color: rgba(18, 179, 117, 0.4);
 }
+
 .boldrui-dropzone__reject {
-  background-color: rgba(244,67,54,0.8);
+    background-color: rgba(244, 67, 54, 0.8);
 }
+
 .boldrui-dropzone__footer {
-  background-color: rgba(0,0,0,0.05);
+    background-color: rgba(0, 0, 0, 0.05);
 }

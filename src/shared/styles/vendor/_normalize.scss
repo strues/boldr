@@ -23,8 +23,8 @@ h3,
 h4,
 h5,
 h6 {
-  margin: 0;
-  padding: 0;
+    padding: 0;
+    margin: 0;
 }
 
 h1,
@@ -33,32 +33,32 @@ h3,
 h4,
 h5,
 h6 {
-  font-size: 100%;
-  font-weight: normal;
+    font-weight: normal;
+    font-size: 100%;
 }
 
 ul {
-  list-style: none;
+    list-style: none;
 }
 
 button,
 input,
 select,
 textarea {
-  margin: 0;
+    margin: 0;
 }
 
 html {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 * {
-  box-sizing: inherit;
+    box-sizing: inherit;
 }
 
 *:before,
 *:after {
-  box-sizing: inherit;
+    box-sizing: inherit;
 }
 
 img,
@@ -66,12 +66,12 @@ embed,
 object,
 audio,
 video {
-  height: auto;
-  max-width: 100%;
+    max-width: 100%;
+    height: auto;
 }
 
 iframe {
-  border: 0;
+    border: 0;
 }
 
 // table {
@@ -86,14 +86,14 @@ iframe {
 // }
 
 html {
-  background-color: #fff;
-  font-size: 16px;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-  min-width: 300px;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    min-width: 300px;
+    background-color: #fff;
+    font-size: 16px;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
 }
 
 article,
@@ -103,7 +103,7 @@ footer,
 header,
 hgroup,
 section {
-  display: block;
+    display: block;
 }
 
 body,
@@ -111,90 +111,90 @@ button,
 input,
 select,
 textarea {
-  font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+    font-family: BlinkMacSystemFont, -apple-system, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
 }
 
 code,
 pre {
-  -moz-osx-font-smoothing: auto;
-  -webkit-font-smoothing: auto;
-  font-family: monospace;
+    font-family: monospace;
+    -moz-osx-font-smoothing: auto;
+    -webkit-font-smoothing: auto;
 }
 
 body {
-  color: #4a4a4a;
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 1.5;
+    color: #4a4a4a;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5;
 }
 
 a {
-  color: #00d1b2;
-  cursor: pointer;
-  text-decoration: none;
-  -webkit-transition: none 86ms ease-out;
-  transition: none 86ms ease-out;
+    color: #00d1b2;
+    text-decoration: none;
+    -webkit-transition: none 86ms ease-out;
+    transition: none 86ms ease-out;
+    cursor: pointer;
 }
 
 a:hover {
-  color: #363636;
+    color: #363636;
 }
 
 code {
-  background-color: whitesmoke;
-  color: #ff3860;
-  font-size: 0.8em;
-  font-weight: normal;
-  padding: 0.25em 0.5em 0.25em;
+    padding: 0.25em 0.5em 0.25em;
+    color: #ff3860;
+    background-color: whitesmoke;
+    font-weight: normal;
+    font-size: 0.8em;
 }
 
 hr {
-  background-color: #dbdbdb;
-  border: none;
-  display: block;
-  height: 1px;
-  margin: 1.5rem 0;
+    display: block;
+    height: 1px;
+    background-color: #dbdbdb;
+    border: none;
+    margin: 1.5rem 0;
 }
 
 img {
-  max-width: 100%;
+    max-width: 100%;
 }
 
 input[type="checkbox"],
 input[type="radio"] {
-  vertical-align: baseline;
+    vertical-align: baseline;
 }
 
 small {
-  font-size: 0.8em;
+    font-size: 0.8em;
 }
 
 span {
-  font-style: inherit;
-  font-weight: inherit;
+    font-style: inherit;
+    font-weight: inherit;
 }
 
 strong {
-  color: #363636;
-  font-weight: 700;
+    color: #363636;
+    font-weight: 700;
 }
 
 pre {
-  background-color: whitesmoke;
-  color: #4a4a4a;
-  font-size: 0.8em;
-  white-space: pre;
-  word-wrap: normal;
+    color: #4a4a4a;
+    background-color: whitesmoke;
+    font-size: 0.8em;
+    white-space: pre;
+    word-wrap: normal;
 }
 
 pre code {
-  -webkit-overflow-scrolling: touch;
-  background: none;
-  color: inherit;
-  display: block;
-  font-size: 1em;
-  overflow-x: auto;
-  padding: 1.25rem 1.5rem;
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 1.25rem 1.5rem;
+    color: inherit;
+    background: none;
+    font-size: 1em;
 }
 
 // table {

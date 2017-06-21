@@ -10,9 +10,7 @@ import InputWrapper from '../InputWrapper';
  */
 const handlePropsError = options => {
   if (!options && !Array.isArray(options)) {
-    throw new Error(
-      'Select component requires an array of options passed as an options prop',
-    );
+    throw new Error('Select component requires an array of options passed as an options prop');
   }
 };
 
@@ -39,15 +37,11 @@ const SelectInput = (props: Props) => {
         showError={showError}
         visited={meta.visited}
       >
-        {props.options.map(option => (
-          <Option
-            disabled={option.disabled}
-            key={option.value}
-            value={option.value}
-          >
+        {props.options.map(option =>
+          <Option disabled={option.disabled} key={option.value} value={option.value}>
             {option.text}
-          </Option>
-        ))}
+          </Option>,
+        )}
       </Select>
     </InputWrapper>
   );

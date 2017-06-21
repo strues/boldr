@@ -17,8 +17,7 @@ const Feedback = (props: Props) => {
     <InputErrorContainer>
 
       {meta.error && <div className="boldrui-form__error">{meta.error}</div>}
-      {meta.warning &&
-        <div className="boldrui-form__warning">{meta.warning}</div>}
+      {meta.warning && <div className="boldrui-form__warning">{meta.warning}</div>}
     </InputErrorContainer>
   );
 };

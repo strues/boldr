@@ -7,7 +7,6 @@ type Props = {
   onClick: () => void,
   ariaControls: string,
   children: ReactChildren,
-  className: string,
   role: string,
 };
 
@@ -17,7 +16,6 @@ class AccordionItemTitle extends PureComponent {
     expanded: false,
     onClick: () => {},
     ariaControls: '',
-    className: 'boldrui-accordion__title',
     role: '',
   };
 
@@ -29,24 +27,15 @@ class AccordionItemTitle extends PureComponent {
   };
   props: Props;
   render() {
-    const {
-      id,
-      expanded,
-      ariaControls,
-      onClick,
-      children,
-      className,
-      role,
-    } = this.props;
+    const { id, expanded, ariaControls, onClick, children, role } = this.props;
     return (
       <div // eslint-disable-line jsx-a11y/no-static-element-interactions
         id={id}
         aria-expanded={expanded}
         aria-controls={ariaControls}
-        className={className}
+        className="boldrui-accordion__title"
         onClick={onClick}
         role={role}
-        tabIndex="0"
         onKeyPress={this.handleKeyPress}
       >
         {children}

@@ -1,8 +1,18 @@
 /* @flow */
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
-import { HeaderPanel, SettingsPanel } from 'boldr-ui';
-
+import styled from 'styled-components';
+import { Grid, Col, Row } from '@@components/Layout';
+import Headline from '@@components/Headline';
+import Paper from '@@components/Paper';
+import {
+  Accordion,
+  AccordionItem,
+  AccordionItemTitle,
+  AccordionItemBody,
+} from '@@components/Accordion';
+// import { HeaderPanel, SettingsPanel } from 'boldr-ui';
+import SettingsAside from './components/SettingsAside';
 import General from './components/General';
 
 type Props = {
@@ -23,6 +33,14 @@ function filterSiteDescript(obj) {
 function filterSiteFav(obj) {
   return parseInt(obj.id, 10) === 5;
 }
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  padding: 0;
+  height: 100%;
+`;
 class Settings extends PureComponent {
   props: Props;
 
@@ -34,28 +52,12 @@ class Settings extends PureComponent {
     const siteFavicon = settings.find(filterSiteFav);
     const siteUrl = settings.find(filterSiteUrl);
     return (
-      <div className="boldr-settings">
+      <div>
         <Helmet title="Admin: Settings" />
-        <SettingsPanel>
-          <HeaderPanel
-            title="Boldr's Settings"
-            subtitle="Modify how Boldr interacts with your website."
-            image={
-              <img
-                src="https://boldr.io/assets/boldr-white-logo.png"
-                width="100"
-                alt="boldr logo"
-              />
-            }
-          />
-          <General
-            siteName={siteName}
-            siteUrl={siteUrl}
-            siteLogo={siteLogo}
-            siteDescription={siteDescription}
-            siteFavicon={siteFavicon}
-          />
-        </SettingsPanel>
+        <Content>
+          <SettingsAside />
+          <General />
+        </Content>
       </div>
     );
   }

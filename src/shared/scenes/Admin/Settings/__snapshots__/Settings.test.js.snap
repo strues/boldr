@@ -1,72 +1,14 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Settings /> renders snapshot 1`] = `
-<div
-  className="boldr-settings"
->
+<div>
   <HelmetWrapper
     encodeSpecialCharacters={true}
     title="Admin: Settings"
   />
-  <undefined>
-    <undefined
-      image={
-        <img
-          alt="boldr logo"
-          src="https://boldr.io/assets/boldr-white-logo.png"
-          width="100"
-        />
-      }
-      subtitle="Modify how Boldr interacts with your website."
-      title="Boldr's Settings"
-    />
-    <Connect(General)
-      siteDescription={
-        Object {
-          "description": "Meta header for search results.",
-          "id": 4,
-          "key": "site_description",
-          "label": "Site Description",
-          "value": "A modern CMS",
-        }
-      }
-      siteFavicon={
-        Object {
-          "description": "Favicon to use for your website.",
-          "id": 5,
-          "key": "favicon",
-          "label": "Favicon",
-          "value": "https://boldr.io/favicon.ico",
-        }
-      }
-      siteLogo={
-        Object {
-          "description": "The logo is displayed in the header area.",
-          "id": 3,
-          "key": "site_logo",
-          "label": "Site Logo",
-          "value": "https://boldr.io/boldr.png",
-        }
-      }
-      siteName={
-        Object {
-          "description": "The website name.",
-          "id": 1,
-          "key": "site_name",
-          "label": "Site Name",
-          "value": "Boldr",
-        }
-      }
-      siteUrl={
-        Object {
-          "description": "The address used to access your website.",
-          "id": 2,
-          "key": "site_url",
-          "label": "Site URL",
-          "value": "abcd",
-        }
-      }
-    />
-  </undefined>
+  <styled.div>
+    <SettingsAside />
+    <Connect(General) />
+  </styled.div>
 </div>
 `;

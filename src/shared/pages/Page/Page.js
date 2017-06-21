@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import AnimatedRouter from '@@components/AnimatedRouter';
 import Footer from '@@components/Footer';
 import { showHeader } from '@@state/modules/boldr/ui/actions';
 import Hero from '../../components/Hero';
@@ -39,14 +38,6 @@ const ContentWrapper = styled.section`
   width: 100%;
   height: 100%;
   min-height: 100%;
-  background-color: #e5eaed;
-`;
-
-const FooterWrapper = styled.div`
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
 `;
 
 export class Page extends Component {
@@ -58,24 +49,17 @@ export class Page extends Component {
     return (
       <Wrapper>
         <ContentWrapper>
-          <AnimatedRouter.Route path="/login" component={LoginContainer} />
-          <AnimatedRouter.Route path="/signup" component={SignupContainer} />
-          <AnimatedRouter.Route path="/account/forgot-password" component={ForgotPassword} />
-          <AnimatedRouter.Route
-            path="/account/reset-password/:token"
-            exact
-            component={ResetPassword}
-          />
-          <AnimatedRouter.Route path="/account/verify/:token" exact component={Verify} />
-          <AnimatedRouter.Route path="/account/preferences" component={PreferencesContainer} />
-          <AnimatedRouter.Route path="/profiles/:username" component={ProfileContainer} />
-          <AnimatedRouter.Route path="/blog" component={BlogContainer} />
-          <AnimatedRouter.Route path="/about" exact component={About} />
-          <AnimatedRouter.Route path="/" exact component={Home} />
+          <Route path="/login" component={LoginContainer} />
+          <Route path="/signup" component={SignupContainer} />
+          <Route path="/account/forgot-password" component={ForgotPassword} />
+          <Route path="/account/reset-password/:token" exact component={ResetPassword} />
+          <Route path="/account/verify/:token" exact component={Verify} />
+          <Route path="/account/preferences" component={PreferencesContainer} />
+          <Route path="/profiles/:username" component={ProfileContainer} />
+          <Route path="/blog" component={BlogContainer} />
+          <Route path="/about" exact component={About} />
+          <Route path="/" exact component={Home} />
         </ContentWrapper>
-        {/* <FooterWrapper>
-          <Footer />
-        </FooterWrapper> */}
       </Wrapper>
     );
   }

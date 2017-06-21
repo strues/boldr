@@ -27,7 +27,7 @@ class UploadUrl extends Component {
   props: Props;
   render() {
     return (
-      <Row center="xs">
+      <Row xsCenter>
         <Col xs={6}>
           <Block>
             <MediaTitleArea>

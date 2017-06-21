@@ -4,7 +4,8 @@ import Helmet from 'react-helmet';
 import List from 'material-ui/List/List';
 import ListItem from 'material-ui/List/ListItem';
 import IconButton from 'material-ui/IconButton';
-import { FontIcon, Headline, Paper, Divider, Row, Col, Modal } from 'boldr-ui';
+import { FontIcon, Headline, Paper, Divider, Row, Col } from '@@components/index';
+import { Modal } from 'boldr-ui';
 
 import NavigationEditor from './components/NavigationEditor';
 import NavigationForm from './components/NavigationForm';

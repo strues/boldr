@@ -50,7 +50,7 @@ const ProfileContent = (props: Props) => {
   );
   return (
     <div className="boldr-profile__content">
-      <Grid fluid={false}>
+      <Grid>
         <Row>
           {props.me ? editButtons : null}
           <Col xs={12} md={6}>

@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { StyleClasses, BOLDR_NS } from '../../theme/styleClasses';
-import type { ReactChildren, ReactElement } from '../../types/react.js.flow';
 import SidebarNavItem from './SidebarNavItem';
 import {
   createItemTree,

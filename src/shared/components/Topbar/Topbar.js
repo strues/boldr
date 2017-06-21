@@ -16,10 +16,7 @@ class Topbar extends Component {
     className: PropTypes.string,
     logo: PropTypes.node,
     url: PropTypes.string.isRequired,
-    link: PropTypes.oneOfType([
-      PropTypes.func,
-      PropTypes.instanceOf(React.Component),
-    ]),
+    link: PropTypes.oneOfType([PropTypes.func, PropTypes.instanceOf(React.Component)]),
     links: PropTypes.arrayOf(PropTypes.object),
     search: PropTypes.bool.isRequired,
     sidebarToggleable: PropTypes.bool,
@@ -95,9 +92,7 @@ class Topbar extends Component {
      * @param {object} e - Native keyboard event
      */
   _handleKey = e => {
-    const isSearchInput = e.target.classList.contains(
-      `${BASE_ELEMENT}-search__input`,
-    );
+    const isSearchInput = e.target.classList.contains(`${BASE_ELEMENT}-search__input`);
 
     if (e.which === 9 && isSearchInput) {
       this.setState({
@@ -148,7 +143,7 @@ class Topbar extends Component {
         <div className={`${BASE_ELEMENT}__inner`}>
           <Toggler
             sidebarToggleable
-            iconColor="#rgba(0, 0, 0, 0.87)"
+            iconColor="rgba(0, 0, 0, 0.87)"
             onClick={this.props.onMenuClick}
           />
           <nav className={`${BASE_ELEMENT}__links`}>
@@ -167,6 +162,7 @@ class Topbar extends Component {
                 <img
                   className={`${BASE_ELEMENT}__user-avatar`}
                   src={this.props.avatarUrl}
+                  alt="user avatar image"
                   height="24"
                 />
                 <Link

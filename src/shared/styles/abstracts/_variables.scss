@@ -74,17 +74,17 @@ $transition-length: 0.25s !default;
 $grid-columns: 12 !default;
 $grid-gutter: 2rem !default;
 $grid-breakpoints: (
-  xs: false,
-  sm: 48em,
-  md: 62em,
-  lg: 75em
+    xs: false,
+    sm: 48em,
+    md: 62em,
+    lg: 75em
 ) !default;
 
 $grid-containers: (
-  xs: false,
-  sm: 46rem,
-  md: 61rem,
-  lg: 71rem,
+    xs: false,
+    sm: 46rem,
+    md: 61rem,
+    lg: 71rem,
 ) !default;
 
 $small-viewport: 48em;
@@ -142,6 +142,7 @@ $link-hover-color: $carmine-pink;
 $error-color: $carmine-pink !default;
 $warning-color: $golden !default;
 $text-color: $black-transparent !default;
+$text-color-light: #afbbca;
 $header-font-color: $navy !default;
 $border-color: rgba(0, 0, 0, 0.1) !default;
 
@@ -152,11 +153,11 @@ $btn-border-radius: $border-radius !default;
 $border-width: 1 !default;
 
 $breadcrumb-borders: (
-  bottom: (
-    size:                           1px,
-    style:                          solid,
-    color:                          $border-color
-  )
+    bottom: (
+        size:                           1px,
+        style:                          solid,
+        color:                          $border-color
+    )
 );
 $layout-transition-speed: 0.25s !default;
 
@@ -233,11 +234,11 @@ $topbar-link-transform: uppercase;
 /// @group topbar
 $zindex-topbar: 1000;
 $topbar-border: (
-  bottom: (
-    size:                       1px,
-    style:                      solid,
-    color:                      $border-color
-  )
+    bottom: (
+        size:                       1px,
+        style:                      solid,
+        color:                      $border-color
+    )
 );
 
 /// The default min width for a mobile device.

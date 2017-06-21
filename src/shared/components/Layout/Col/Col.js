@@ -1,69 +1,77 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import styled from 'styled-components';
+/* @flow */
+/* eslint-disable prefer-template */
+import React, { PureComponent } from 'react';
+import classNames from 'classnames';
+import isNumber from 'lodash/isNumber';
 
-import createProps from '../createProps';
-import config, { DIMENSION_NAMES } from '../config';
-
-const ModificatorType = PropTypes.oneOfType([PropTypes.number, PropTypes.bool]);
-
-const offsetProps = DIMENSION_NAMES.map(d => d + 'Offset');
-const DimensionPropTypes = DIMENSION_NAMES.reduce((propTypes, dimension) => {
-  propTypes[dimension] = ModificatorType;
-  propTypes[dimension + 'Offset'] = PropTypes.number;
-  return propTypes;
-}, {});
-
-const Col = props => React.createElement(props.tagName || 'div', createProps(Col.propTypes, props));
-
-Col.propTypes = {
-  ...DimensionPropTypes,
-  reverse: PropTypes.bool,
-  tagName: PropTypes.string,
-  children: PropTypes.node,
+export type Props = {
+  className?: string,
+  style?: Object,
+  componentClass: ReactElement,
+  children?: number | string | React.Element | Array<any>,
+  xs?: number | boolean,
+  sm?: number | boolean,
+  md?: number | boolean,
+  lg?: number | boolean,
+  xsOffset?: number,
+  smOffset?: number,
+  mdOffset?: number,
+  lgOffset?: number,
+  reverse?: boolean,
+  xsFirst?: boolean,
+  smFirst?: boolean,
+  mdFirst?: boolean,
+  lgFirst?: boolean,
+  xsLast?: boolean,
+  smLast?: boolean,
+  mdLast?: boolean,
+  lgLast?: boolean,
 };
 
-Col.displayName = 'Col';
+class Col extends PureComponent {
+  static defaultProps = {
+    componentClass: 'div',
+  };
+  props: Props;
+  render() {
+    const ComponentClass = this.props.componentClass;
 
-export default styled(Col)`
-  box-sizing: border-box;
-  flex: 0 0 auto;
-  padding-right: ${p => config(p).gutterWidth / 2}rem;
-  padding-left: ${p => config(p).gutterWidth / 2}rem;
+    const classes = classNames(
+      {
+        ['grid__col--xs' + (isNumber(this.props.xs) ? '-' + this.props.xs : '')]:
+          this.props.xs >= 0,
+        ['grid__col--sm' + (isNumber(this.props.sm) ? '-' + this.props.sm : '')]:
+          this.props.sm >= 0,
+        ['grid__col--md' + (isNumber(this.props.md) ? '-' + this.props.md : '')]:
+          this.props.md >= 0,
+        ['grid__col--lg' + (isNumber(this.props.lg) ? '-' + this.props.lg : '')]:
+          this.props.lg >= 0,
 
-  ${p =>
-    p.reverse &&
-    `
-    flex-direction: column-reverse;
-  `}
+        ['grid__col--xs-offset-' + this.props.xsOffset]: this.props.xsOffset >= 0,
+        ['grid__col--sm-offset-' + this.props.smOffset]: this.props.smOffset >= 0,
+        ['grid__col--md-offset-' + this.props.mdOffset]: this.props.mdOffset >= 0,
+        ['grid__col--lg-offset-' + this.props.lgOffset]: this.props.lgOffset >= 0,
 
-  ${p =>
-    Object.keys(p)
-      .filter(k => ~DIMENSION_NAMES.indexOf(k))
-      .sort(k => DIMENSION_NAMES.indexOf(k))
-      .map(
-        k =>
-          config(p).media[k]`${Number.isInteger(p[k])
-            ? `
-        flex-basis: ${100 / config(p).gridSize * p[k]}%;
-        max-width: ${100 / config(p).gridSize * p[k]}%;
-        display: block;
-      `
-            : p[k]
-              ? `
-          flex-grow: 1;
-          flex-basis: 0;
-          max-width: 100%;
-          display: block;
-        `
-              : 'display: none;'}`,
-      )}
+        'grid__col--reverse': this.props.reverse,
 
-  ${p =>
-    Object.keys(p).filter(k => ~offsetProps.indexOf(k)).map(
-      k =>
-        config(p).media[k.replace(/Offset$/, '')]`
-        margin-left: ${100 / config(p).gridSize * p[k]}%;
-      `,
-    )}
-`;
+        'grid__col--xs-first': this.props.xsFirst,
+        'grid__col--sm-first': this.props.smFirst,
+        'grid__col--md-first': this.props.mdFirst,
+        'grid__col--lg-first': this.props.lgFirst,
+
+        'grid__col--xs-last': this.props.xsLast,
+        'grid__col--sm-last': this.props.smLast,
+        'grid__col--md-last': this.props.mdLast,
+        'grid__col--lg-last': this.props.lgLast,
+      },
+      this.props.className,
+    );
+
+    return (
+      <ComponentClass className={classes} style={this.props.style}>
+        {this.props.children}
+      </ComponentClass>
+    );
+  }
+}
+export default Col;

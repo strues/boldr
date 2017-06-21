@@ -1,56 +1,56 @@
 .#{$boldr-ns}notification__transition-enter {
-  opacity: 0.01;
-  transition: opacity 0.5s ease-in;
+    opacity: 0.01;
+    transition: opacity 0.5s ease-in;
 }
 
 .#{$boldr-ns}notification__transition-enter-active {
-  opacity: 1;
+    opacity: 1;
 }
 
 .#{$boldr-ns}notification__transition-leave {
-  opacity: 1;
-  transition: opacity 0.5s ease-in;
+    opacity: 1;
+    transition: opacity 0.5s ease-in;
 }
 
 .#{$boldr-ns}notification__transition-leave-active {
-  opacity: 0.01;
+    opacity: 0.01;
 }
 
 .#{$boldr-ns}notification {
-  position: relative;
-  font: 1rem 400 Helvetica, sans-serif;
-  overflow: hidden;
-  border-radius: 4px;
-  margin-bottom: 2px;
-  max-height: 400px;
-  box-sizing: border-box;
-  box-shadow: 0 0 1px 1px rgba(10, 10, 11, 0.125);
-  padding: 0.5rem;
-  color: #fff;
+    position: relative;
+    box-sizing: border-box;
+    overflow: hidden;
+    max-height: 400px;
+    padding: 0.5rem;
+    color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 0 1px 1px rgba(10, 10, 11, 0.125);
+    margin-bottom: 2px;
+    font: 1rem 400 Helvetica, sans-serif;
 }
 
 .#{$boldr-ns}notification__success {
-  background-color: #64ce83;
+    background-color: #64ce83;
 }
 
 .#{$boldr-ns}notification__info {
-  background-color: #3ea2ff;
+    background-color: #3ea2ff;
 }
 
 .#{$boldr-ns}notification__warning {
-  background-color: #ff7f48;
+    background-color: #ff7f48;
 }
 
 .#{$boldr-ns}notification__danger {
-  background-color: #e74c3c;
+    background-color: #e74c3c;
 }
 
 .#{$boldr-ns}notification__container {
-  bottom: 24px;
-  left: 24px;
-  position: fixed;
-  z-index: 9999;
-  align-items: flex-start;
-  flex-direction: column;
-  display: flex;
+    position: fixed;
+    bottom: 24px;
+    left: 24px;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
 }

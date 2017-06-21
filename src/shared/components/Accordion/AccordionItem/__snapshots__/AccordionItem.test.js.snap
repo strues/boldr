@@ -56,7 +56,7 @@ exports[`AccordionItem renders correctly with accordion true 1`] = `
 
 exports[`AccordionItem renders with different className 1`] = `
 <div
-  className="testCSSClass"
+  className="boldrui-accordion__item"
 >
   <div
     ariaControls="boldrui-accordion__body-mock-uuid-hash"

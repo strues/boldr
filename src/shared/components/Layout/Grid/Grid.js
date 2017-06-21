@@ -1,41 +1,38 @@
-import React from 'react';
+/* @flow */
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
-import styled, { css } from 'styled-components';
+import classNames from 'classnames';
 
-import createProps from '../createProps';
-import config, { DIMENSION_NAMES } from '../config';
-
-const Grid = props =>
-  React.createElement(props.tagName || 'div', createProps(Grid.propTypes, props));
-
-Grid.displayName = 'Grid';
-
-Grid.propTypes = {
-  fluid: PropTypes.bool,
-  tagName: PropTypes.string,
-  children: PropTypes.node,
+export type Props = {
+  fluid: boolean,
+  className: ?string,
+  style: ?Object,
+  children: ReactChildren,
+  componentClass: ReactElement,
 };
 
-export default styled(Grid)`
-  margin-right: auto;
-  margin-left: auto;
+class Grid extends PureComponent {
+  static defaultProps = {
+    componentClass: 'div',
+  };
+  props: Props;
+  render() {
+    const ComponentClass = this.props.componentClass;
 
-  ${p =>
-    p.fluid &&
-    css`
-    padding-right: ${p => config(p).outerMargin + 'rem'};
-    padding-left: ${p => config(p).outerMargin + 'rem'};
-  `}
+    const classes = classNames(
+      {
+        grid: !this.props.fluid,
+        'grid--fluid': this.props.fluid,
+      },
+      this.props.className,
+    );
 
-  ${p =>
-    !p.fluid &&
-    css`
-    ${DIMENSION_NAMES.map(
-      t =>
-        config(p).container[t] &&
-        config(p).media[t]`
-        width: ${p => config(p).container[t]}rem;
-      `,
-    )}
-  `}
-`;
+    return (
+      <ComponentClass className={classes} style={this.props.style}>
+        {this.props.children}
+      </ComponentClass>
+    );
+  }
+}
+
+export default Grid;

@@ -17,8 +17,11 @@ exports[`<ArticleCard /> renders snapshot 1`] = `
     </withStyles(CardMedia)>
     <withStyles(CardContent)>
       An excerpt
-      <Styled(Row)>
-        <Styled(Col)
+      <Row
+        componentClass="div"
+      >
+        <Col
+          componentClass="div"
           sm={12}
         >
           <Link
@@ -42,8 +45,8 @@ exports[`<ArticleCard /> renders snapshot 1`] = `
               Read More
             </Button>
           </Link>
-        </Styled(Col)>
-      </Styled(Row)>
+        </Col>
+      </Row>
     </withStyles(CardContent)>
     <withStyles(CardActions)>
       <TagBlock

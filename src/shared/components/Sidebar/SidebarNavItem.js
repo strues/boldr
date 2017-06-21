@@ -3,7 +3,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import type { ReactChildren, ReactElement } from '../../types/react.js.flow';
 import { StyleClasses, BOLDR_NS } from '../../theme/styleClasses';
 import Anchor from '../Anchor';
 import type { SidebarLink, SidebarLinks } from './Sidebar';

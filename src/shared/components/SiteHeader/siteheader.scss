@@ -1,156 +1,160 @@
-@import "../../styles/abstracts/all";
-
+@import "../../styles/abstracts/colors/all";
+@import "../../styles/abstracts/variables";
+@import "../../styles/abstracts/mixins";
 
 .#{$boldr-ns}siteheader {
-  height        : $site-header-height;
-  background-color    : $site-header-bg;
-  transition    : all 0.4s ease-in-out;
-  z-index: $site-header-zindex;
+    z-index: $site-header-zindex;
+    height: $site-header-height;
+    background-color: $site-header-bg;
+    transition: all 0.4s ease-in-out;
 
-  &.theme-boldr {
-    @include        md-shadow(3);
-    height        : $site-header-height;
-    background-color    : $site-header-bg;
-    transition    : all 0.4s ease-in-out;
-  }
-
-  &:focus {
-    outline : none;
-  }
-
-  &.focusable {
-    &:focus {
-      outline : thin dotted !important;
+    &.theme-boldr {
+        @include md-shadow(3);
+        height: $site-header-height;
+        background-color: $site-header-bg;
+        transition: all 0.4s ease-in-out;
     }
-  }
+
+    &:focus {
+        outline: none;
+    }
+
+    &.focusable {
+        &:focus {
+            outline: thin dotted !important;
+        }
+    }
 }
 
 // / The whole mobile nav area
 
 @media (max-width: 991px) {
-  .#{$boldr-ns}sh__menu.#{$boldr-ns}sh__dropdown-open {
-    z-index          : $site-header-zindex;
-    position         : fixed;
-    top              : 0;
-    right            : 0;
-    bottom           : 0;
-    left             : 0;
-    background-color : $site-header-bg;
-  }
+    .#{$boldr-ns}sh__menu.#{$boldr-ns}sh__dropdown-open {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: $site-header-zindex;
+        background-color: $site-header-bg;
+    }
 }
 
 .#{$boldr-ns}sh__collapse {
-  display : none;
-  @media (min-width: 992px) {
-    display : block;
-    float   : left;
-  }
 
-  &.#{$boldr-ns}sh__dropdown-open {
-    z-index        : 1500;
-    display        : block;
-    padding-top    : 10px;
-    padding-bottom : 82px;
-  }
+    @media (min-width: 992px) {
+        display: block;
+        float: left;
+    }
+    display: none;
+
+    &.#{$boldr-ns}sh__dropdown-open {
+        z-index: 1500;
+        display: block;
+        padding-top: 10px;
+        padding-bottom: 82px;
+    }
 }
 
 // / This is the UL
 
 .#{$boldr-ns}sh__nav {
-  z-index         : $site-header-zindex;
-  position        : relative;
-  width           : 100%;
-  margin          : 0;
-  padding         : 0;
-  padding-left    : 1em;
-  list-style-type : none;
-  @media (min-width: 992px) {
-    float        : left;
-    margin-top   : 20px;
-    margin-left  : 30px;
-    padding-left : 0;
-  }
+
+    @media (min-width: 992px) {
+        float: left;
+        padding-left: 0;
+        margin-top: 20px;
+        margin-left: 30px;
+    }
+    position: relative;
+    z-index: $site-header-zindex;
+    list-style-type: none;
+    width: 100%;
+    padding: 0;
+    padding-left: 1em;
+    margin: 0;
 }
 
 .#{$boldr-ns}sh__menu-right {
-  display  : none;
-  position : relative;
 
-  .btn {
-    padding   : 8px 18px;
-    font-size : 11px;
+    @media (min-width: 992px) {
+        display: block;
+        float: right;
+        margin-top: 13.5px;
+        margin-bottom: 41.5px;
 
-    &.btn-transparent {
-      color            : text-color !important;
-      border-color     : transparent !important;
-      background-color : transparent !important;
-      box-shadow       : inset 0 0 0 1px rgba(0, 0, 0, 0.2) !important;
+        svg {
+            margin-right: 10px;
 
-      &:hover {
-        color            : $primary-color !important;
-        border-color     : transparent !important;
-        background-color : transparent !important;
-      }
+            &:hover {
+                color: rgba(46, 54, 61, 1);
+            }
+        }
     }
+    position: relative;
+    display: none;
 
-    + .btn {
-      margin-left : 18px;
+    .btn {
+        padding: 8px 18px;
+        font-size: 11px;
+
+        &.btn-transparent {
+            color: text-color !important;
+            background-color: transparent !important;
+            border-color: transparent !important;
+            box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.2) !important;
+
+            &:hover {
+                color: $primary-color !important;
+                background-color: transparent !important;
+                border-color: transparent !important;
+            }
+        }
+
+        + .btn {
+            margin-left: 18px;
+        }
     }
-  }
-  @media (min-width: 992px) {
-    display       : block;
-    float         : right;
-    margin-top    : 13.5px;
-    margin-bottom : 41.5px;
-
-    svg {
-      margin-right : 10px;
-
-      &:hover {
-        color : rgba(46, 54, 61, 1.00);
-      }
-    }
-  }
 }
 
 @media (max-width: 991px) {
-  .#{$boldr-ns}sh__menu-right.#{$boldr-ns}sh__dropdown-open {
-    z-index          : $site-header-zindex;
-    display          : block;
-    position         : absolute;
-    right            : 0;
-    bottom           : 0;
-    left             : 0;
-    padding-top      : 125px;
-    padding-bottom   : 25px;
-    background-color : $site-header-bg;
-    text-align       : center;
+    .#{$boldr-ns}sh__menu-right.#{$boldr-ns}sh__dropdown-open {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: $site-header-zindex;
+        display: block;
+        padding-top: 125px;
+        padding-bottom: 25px;
+        background-color: $site-header-bg;
+        text-align: center;
 
-    &::before {
-      content  : "";
-      display  : block;
-      position : absolute;
-      bottom   : 100%;
-      width    : 100%;
-      height   : 20px;
+        &::before {
+            content: "";
+            position: absolute;
+            bottom: 100%;
+            display: block;
+            width: 100%;
+            height: 20px;
+        }
     }
-  }
 }
 
 .overflow {
-  position : fixed;
-  width    : 100%;
-  height   : 100%;
-  overflow : hidden !important;
+    position: fixed;
+    overflow: hidden !important;
+    width: 100%;
+    height: 100%;
 }
 
 .sr-only {
-  position : absolute;
-  width    : 1px;
-  height   : 1px;
-  clip     : rect(0, 0, 0, 0);
-  margin   : -1px;
-  padding  : 0;
-  overflow : hidden;
-  border   : 0;
+    position: absolute;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    border: 0;
+    margin: -1px;
 }

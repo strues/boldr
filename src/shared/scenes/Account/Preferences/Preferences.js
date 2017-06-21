@@ -1,7 +1,6 @@
 /* @flow */
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import Dropzone from 'react-dropzone';
 // internal
 import { Col, Row, Grid } from '@@components/Layout';
 import EditProfile from './components/EditProfile';
@@ -28,8 +27,6 @@ class Preferences extends Component {
       showDropzone: false,
       avatar: false,
     };
-
-    (this: any).onDrop = this.onDrop.bind(this);
   }
 
   state: State;
@@ -41,18 +38,18 @@ class Preferences extends Component {
   uploadAvatarImg = payload => {
     this.props.uploadAvatarImage(payload);
   };
-
-  onDrop(files: Array<Object>) {
-    // $FlowIssue
-    this.setState({
-      file: files[0],
-      showDropzone: false,
-    });
-    const payload = files[0];
-
-    const isProf = this.state.profImg === true;
-    isProf ? this.props.uploadProfileImg(payload) : this.props.uploadAvatarImg(payload);
-  }
+  //
+  // onDrop(files: Array<Object>) {
+  //   // $FlowIssue
+  //   this.setState({
+  //     file: files[0],
+  //     showDropzone: false,
+  //   });
+  //   const payload = files[0];
+  //
+  //   const isProf = this.state.profImg === true;
+  //   isProf ? this.props.uploadProfileImg(payload) : this.props.uploadAvatarImg(payload);
+  // }
   handleAvatarImgClick = () => {
     this.setState({
       profImg: false,
@@ -67,36 +64,16 @@ class Preferences extends Component {
       showDropzone: true,
     });
   };
-  renderDropzone = () => {
-    return (
-      <Dropzone
-        className="boldr-dropzone"
-        ref={node => {
-          this.dropzone = node;
-        }}
-        multiple={false}
-        onDrop={this.onDrop}
-        accept="image/*"
-        maxSize={5242880}
-      >
-        <p className="boldr-dropzone__drop-sm">
-          Drop an image here or select one from your computer. <br />
-          It will upload right away.
-        </p>
-      </Dropzone>
-    );
-  };
+
   render() {
     return (
       <div>
         <Helmet title="Account Preferences" />
         <Grid>
           <Row>
-            <Col xs={12} md={4}>
-              {this.props.me ? <EditProfile profile={this.props.me} /> : <h1>Loading</h1>}
-            </Col>
-            <Col xs={12} md={4}>
-              {this.renderDropzone()}
+            <Col xs={12} md={4}>nav</Col>
+            <Col xs={12} md={8}>
+              <EditProfile profile={this.props.me} />
             </Col>
           </Row>
         </Grid>

@@ -3,7 +3,6 @@ import React from 'react';
 
 import styled from 'styled-components';
 import Headline from '../../Headline';
-import { Grid, Col, Row } from '../../Layout';
 
 type Props = {
   skinny: string,
@@ -54,7 +53,7 @@ const FormHeader = styled.div`
 
 FormCard.defaultProps = {
   formTitleSize: 'h3',
-  width: '600px',
+  skinny: false,
 };
 
 export default FormCard;

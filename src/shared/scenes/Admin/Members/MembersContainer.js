@@ -89,32 +89,32 @@ const mapStateToProps = state => {
 };
 
 export const MEMBERS_QUERY = gql`
-query getUsers($offset: Int!, $limit: Int!) {
-    getUsers(offset:$offset,limit:$limit) {
-      id,
-      email,
-      username,
-      firstName,
-      lastName,
-      avatarUrl,
-      profileImage,
-      bio,
-      location,
-      website,
-      roles {
-        name,
-        id
-      },
-      socialMedia {
-        facebookUrl,
-        githubUrl,
-        twitterUrl,
-        linkedinUrl,
-        googleUrl,
-        stackoverflowUrl
+  query getUsers($offset: Int!, $limit: Int!) {
+      getUsers(offset:$offset,limit:$limit) {
+        id,
+        email,
+        username,
+        firstName,
+        lastName,
+        avatarUrl,
+        profileImage,
+        bio,
+        location,
+        website,
+        roles {
+          name,
+          id
+        },
+        socialMedia {
+          facebookUrl,
+          githubUrl,
+          twitterUrl,
+          linkedinUrl,
+          googleUrl,
+          stackoverflowUrl
+        }
       }
-    }
-}
+  }
 `;
 const MembersContainerWithData = graphql(MEMBERS_QUERY, {
   options: props => ({

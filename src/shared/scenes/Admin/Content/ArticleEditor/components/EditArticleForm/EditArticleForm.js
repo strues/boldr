@@ -3,7 +3,7 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import styled from 'styled-components';
 import Button from '@@components/Button';
-import { InputField, Col, Row, Headline, FormGroup } from 'boldr-ui';
+import { InputField, Col, Row, Headline, FormGroup } from '@@components';
 
 import EditorField from './EditorField';
 

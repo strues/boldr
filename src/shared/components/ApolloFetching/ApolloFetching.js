@@ -3,7 +3,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import hoistStatics from 'hoist-non-react-statics';
 
-import { AnimatedFade } from '../Animations';
 import View from '../View';
 import { formatGeneralAPIErrors } from '../../core/reduxFormErrors';
 
@@ -42,11 +41,11 @@ const withApolloFetchingContainer = (
     renderWhenReady = fn => {
       const { content, key } = this.getRenderedContent(fn);
       return (
-        <AnimatedFade getKey={() => key}>
-          <View tabsContainer data-foo="bar">
+
+          <div>
             {content}
-          </View>
-        </AnimatedFade>
+          </div>
+
       );
     };
 
