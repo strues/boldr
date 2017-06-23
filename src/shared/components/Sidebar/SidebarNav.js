@@ -1,6 +1,5 @@
 /* @flow */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { StyleClasses, BOLDR_NS } from '../../theme/styleClasses';
 import SidebarNavItem from './SidebarNavItem';
@@ -17,7 +16,6 @@ type Props = {
   navClassName: ?string,
   items: SidebarLinks,
   isPrimaryColor: ?boolean,
-  match: ?Object,
   activeItem: ?string,
   location: Object,
   expanded: boolean,
@@ -51,7 +49,7 @@ class SidebarNav extends Component {
 
   props: Props;
   onItemClick = (id, items) => e => {
-    e.stopPropagation();
+    // e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
     e.preventDefault();
     this.toggleItem(id, items);
@@ -59,12 +57,13 @@ class SidebarNav extends Component {
   toggleItem = (id, items) => {
     if (this.props.onExpandCollapse) {
       this.props.onExpandCollapse();
+    } else {
+      toggleExpandedItemWithId(id, items);
     }
-    toggleExpandedItemWithId(id, items);
   };
 
   renderItems = () =>
-    this.props.items.map(item => (
+    this.props.items.map(item =>
       <SidebarNavItem
         key={item.id}
         level={0}
@@ -73,10 +72,9 @@ class SidebarNav extends Component {
         activeItem={this.props.activeItem}
         onItemClick={this.onItemClick}
         location={this.props.location}
-        match={this.props.match}
         {...item}
-      />
-    ));
+      />,
+    );
 
   render() {
     const { navClassName } = this.props;

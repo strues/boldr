@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import { Divider, Paper, Col, Heading, Icon } from 'boldr-ui';
+import { Divider, Paper, Col, Heading, Icon } from '@boldr/ui';
 import ArticleDate from '../ArticleDate';
 
 type Props = {

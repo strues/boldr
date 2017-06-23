@@ -2,7 +2,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import Helmet from 'react-helmet';
-import Modal from 'boldr-ui/lib/components/Modal';
+import Modal from '@boldr/ui/Modal';
 
 import { MembersList, EditMemberForm } from './components';
 

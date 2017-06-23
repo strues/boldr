@@ -16,7 +16,8 @@ import { logger } from '../../services';
 const imgRegex = new RegExp('^.*.((j|J)(p|P)(e|E)?(g|G)|(g|G)(i|I)(f|F)|(p|P)(n|N)(g|G))$');
 const vidRegex = new RegExp('^.*.((m|M)(p|P)(4)|(m|M)(k|K)(v|V))$');
 
-const debug = _debug('boldr:media');
+const debug = _debug('boldr:server:media');
+
 /**
  * Returns a list of all attachments
  * @method listMedia
@@ -51,7 +52,119 @@ export async function getMedia(req, res, next) {
     return next(error);
   }
 }
+/**
+ * Upload a media file
+ * @method UploadMedia
+ * @param  {Object}        req  the request object
+ * @param  {Object}        res  the response object
+ * @param  {Function}      next move to the next middleware
+ * @return {Promise}       the created media
+ */
+/* istanbul ignore next */
+export function uploadMedia(req, res, next) {
+  let thumbnailSet = false;
+  const data = {
+    media: {},
+    userId: req.user.id,
+  };
+  const UPLOAD_DIR = path.resolve(appRoot.get(), './public/uploads/');
+  const form = new formidable.IncomingForm();
+  form.hash = 'sha1';
+  form.keepExtensions = true;
+  form.encoding = 'utf-8';
+  form.multiples = true;
+  form.on('progress', (recv, total) => {
+    logger.info(
+      'received: %s % (%s / %s bytes)',
+      Number(recv / total * 100).toFixed(2),
+      recv,
+      total,
+    );
+  });
 
+  form.on('error', err => {
+    next(err);
+  });
+
+  form.on('aborted', (name, file) => {
+    logger.warn(
+      'aborted: name="%s", path="%s", type="%s", size=%s bytes',
+      file.name,
+      file.path,
+      file.type,
+      file.size,
+    );
+    res.status(308).end();
+  });
+  form
+    .on('fileBegin', (name, file) => {
+      // the beginning of the file buffer.
+      const id = shortId.generate();
+      const fileName = file.name;
+      // declare path to formidable. make sure to include the file extension.
+      // nobody wants raw blobs.
+      const actualFileName = id + path.extname(fileName);
+      file.path = path.join(UPLOAD_DIR, actualFileName);
+      // name the image thumbnail.
+      file.thumbnailSaveName = `${id}_small${path.extname(fileName)}`;
+      // inject value attach to 'file' envent
+      file.saveName = actualFileName;
+    })
+    .on('file', (name, file) => {
+      // here we have the file buffer data
+      // we're going to create a thumbnail with it.
+      Jimp.read(file.path, (err, image) => {
+        if (err) {
+          return debug('error', err);
+        }
+        image
+          .resize(320, 240)
+          .write(path.join(UPLOAD_DIR, file.thumbnailSaveName), (err, info) =>
+            console.log(err, info),
+          );
+        // do stuff with the image (if no exception)
+      });
+      if (!thumbnailSet) {
+        data.thumbnail = {
+          data: fs.readFileSync(file.path),
+          contentType: file.type,
+        };
+        thumbnailSet = true;
+      }
+      data.media = {
+        type: file.type,
+        img: {
+          data: fs.readFileSync(file.path),
+          contentType: file.type,
+        },
+        fileName: file.saveName,
+        thumbnailName: file.thumbnailSaveName,
+      };
+    })
+    .on('field', (field, value) => {
+      // receive field argument
+      data[field] = value;
+    })
+    .parse(req)
+    .on('end', async () => {
+      const isImageType = data.media.fileName.match(imgRegex);
+      const isVideoType = data.media.fileName.match(vidRegex);
+
+      const payload = {
+        userId: req.user.id,
+        name: data.media.fileName,
+        safeName: data.media.fileName,
+        thumbName: data.media.thumbnailName,
+        mimetype: data.media.type,
+        url: `/uploads/${data.media.fileName}`,
+        mediaType: isImageType ? 'image' : 'video',
+        path: `${appRoot.get()}/public/uploads/${data.media.fileName}`,
+      };
+
+      const newImage = await Media.query().insert(payload);
+      return res.status(201).json(newImage);
+    });
+}
 export function uploadFromUrl(req, res, next) {
   const download = (uri, filename, callback) => {
     request.head(uri, (err, res, body) => {
@@ -75,7 +188,7 @@ export function uploadFromUrl(req, res, next) {
       const newImage = await Media.query().insert({
         // @TODO: remove mediaType hardcode
         mediaType: 'image',
-        fileName: newFilename,
+        name: newFilename,
         safeName: newFilename,
         thumbName: newFilename,
         url: `/uploads/${newFilename}`,
@@ -98,13 +211,6 @@ export function uploadFromUrl(req, res, next) {
 export async function updateMedia(req, res, next) {
   try {
     const updatedMedia = await Media.query().patchAndFetchById(req.params.id, req.body);
-    //
-    // await Activity.query().insert({
-    //   userId: req.user.id,
-    //   type: 'update',
-    //   activityAttachment: req.params.id,
-    // });
-
     return responseHandler(res, 202, updatedMedia);
   } catch (error) {
     /* istanbul ignore next */
@@ -128,9 +234,6 @@ export async function deleteMedia(req, res, next) {
     if (!media) {
       return next(new BadRequest());
     }
-    // unlink the attachment from the activity
-    // await Activity.query().delete()
-    // .where({ activityAttachment: req.params.id }).first();
 
     // remove the attachment from the database
     await Media.query().deleteById(req.params.id);

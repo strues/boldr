@@ -26,22 +26,30 @@ const Home = () => {
           <Col xs={12} md={4}>
             <Headline type="h2">Placeholder 1</Headline>
             <Paragraph>
-              Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate.
-              Eget mattis at, laoreet vel velit lorem.
+              This proposal introduces an Observable type to the ECMAScript standard library.
+              The Observable type can be used to model push-based data sources such as DOM
+              events, timer intervals, and sockets.
             </Paragraph>
           </Col>
           <Col xs={12} md={4}>
             <Headline type="h2">Placeholder 2</Headline>
             <Paragraph>
-              Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate.
-              Eget mattis at, laoreet vel velit lorem.
+              The iterator interface (introduced in ECMAScript 2015) is a sequential data access
+              protocol which enables the development of generic and composable data consumers and
+              transformers. Their primary interface is a next() method which returns a value, done
+              tuple, where done is a boolean indicating whether the end of the iterator has been
+              reached, and value is the yielded value in the sequence.
             </Paragraph>
           </Col>
           <Col xs={12} md={4}>
             <Headline type="h2">Placeholder 3</Headline>
             <Paragraph>
-              Eget mattis at, laoreet vel et velit aliquam diam ante, aliquet sit amet vulputate.
-              Eget mattis at, laoreet vel velit lorem.
+              In ECMAScript, a realm consists of a global object and an associated set of primordial
+              objects -- mutable objects like Array.prototype that must exist before any code runs.
+              Objects within a realm implicitly share these primordials and can therefore easily
+              disrupt each other by primordial poisoning -- modifying these objects to behave badly.
+              This disruption may happen accidentally or maliciously. Today, in the browser, realms
+              can be created via same origin iframes.
             </Paragraph>
           </Col>
         </Row>

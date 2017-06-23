@@ -16,6 +16,8 @@ $shadow: 0 0 11px 0 $shadow-color;
     position: relative;
     display: inline-block;
     padding: $padding;
+    color: $text-color;
+    background: $white;
     border-radius: $border-radius;
     box-shadow: $shadow;
     font-size: $font-size;
@@ -24,18 +26,18 @@ $shadow: 0 0 11px 0 $shadow-color;
     word-wrap: break-word;
 
     &.light {
-        color: $D10;
-        background: $D80;
+        color: $text-color;
+        background: $white;
     }
 
     &.dark {
-        color: $D80;
-        background: $D10;
+        color: $text-color-light;
+        background: $big-stone;
     }
 
     &.error {
-        color: $white;
-        background: $R00;
+        color: $error-color;
+        background: $white;
     }
 
     &.normal {
@@ -92,15 +94,18 @@ $shadow: 0 0 11px 0 $shadow-color;
     }
 }
 
-.boldrui-tooltip__fadeIn {    animation: fadeIn 0.3s cubic-bezier(0.23, 1, 0.32, 1) both;
+.boldrui-tooltip__fadeIn {
+    animation: fadeIn 0.3s cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 
 .bounce-on-top,
-.bounce-on-bottom {    animation: bounceVertically 1s ease infinite;
+.bounce-on-bottom {
+    animation: bounceVertically 1s ease infinite;
 }
 
 .bounce-on-left,
-.bounce-on-right {    animation: bounceHorizontally 1s ease infinite;
+.bounce-on-right {
+    animation: bounceHorizontally 1s ease infinite;
 }
 
 .bounce-on-top,
@@ -108,9 +113,6 @@ $shadow: 0 0 11px 0 $shadow-color;
 .bounce-on-left,
 .bounce-on-right {
     &:hover {
-        -webkit-animation-play-state: paused;
-        -moz-animation-play-state: paused;
-        -o-animation-play-state: paused;
         animation-play-state: paused;
     }
 }
@@ -128,23 +130,29 @@ $shadow: 0 0 11px 0 $shadow-color;
 }
 
 @keyframes bounceVertically {
-    0% {        transform: translateY(0);
+    0% {
+        transform: translateY(0);
     }
 
-    50% {        transform: translateY(-10px);
+    50% {
+        transform: translateY(-10px);
     }
 
-    100% {        transform: translateY(0);
+    100% {
+        transform: translateY(0);
     }
 }
 
 @keyframes bounceHorizontally {
-    0% {        transform: translateX(0);
+    0% {
+        transform: translateX(0);
     }
 
-    50% {        transform: translateX(-10px);
+    50% {
+        transform: translateX(-10px);
     }
 
-    100% {        transform: translateX(0);
+    100% {
+        transform: translateX(0);
     }
 }

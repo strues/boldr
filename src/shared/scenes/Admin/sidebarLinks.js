@@ -2,23 +2,23 @@ const sidebarLinks = [
   {
     id: 1,
     label: 'Content',
-    icon: 'fa-book',
+    icon: 'package',
     items: [
       {
         id: 11,
         label: 'Articles',
-        icon: 'fa-list-alt',
+        icon: 'file-text',
         link: '/admin/content/articles',
       },
       {
         id: 12,
         label: 'New Article',
-        icon: 'fa-file-text',
+        icon: 'file-plus',
         link: '/admin/content/articles/new',
       },
       {
         label: 'Tags',
-        icon: 'fa-tags',
+        icon: 'tag',
         id: 13,
         link: '/admin/content/tags',
       },
@@ -32,13 +32,13 @@ const sidebarLinks = [
   // },
   {
     label: 'Media Gallery',
-    icon: 'fa-picture-o',
+    icon: 'image',
     id: 3,
     link: '/admin/media',
   },
   {
     label: 'Upload Media',
-    icon: 'fa-cloud-upload',
+    icon: 'folder-upload',
     id: 4,
     link: '/admin/media/upload',
   },
@@ -50,13 +50,13 @@ const sidebarLinks = [
   // },
   {
     label: 'Members List',
-    icon: 'fa-users',
+    icon: 'account',
     id: 6,
     link: '/admin/members',
   },
   {
     label: 'Site Settings',
-    icon: 'fa-gear',
+    icon: 'settings',
     id: 7,
     exact: true,
     link: '/admin/settings',

@@ -1,8 +1,7 @@
-// @flow
 /* eslint-disable */
 import React from 'react';
-import { Loader, Icon } from 'boldr-ui';
-import loadable from '@@core/loadable';
+import Icon from '@@components/Icons';
+import AsyncComponent from '@@components/AsyncComponent';
 // Admin
 import MediaManagerContainer from './Media/MediaManager/MediaManagerContainer';
 import UploadMedia from './Media/UploadMedia';
@@ -17,9 +16,11 @@ import Settings from './Settings';
 import TagsContainer from './Content/Tags/TagsContainer';
 import TaggedPost from './Content/Tags/components/TaggedPost/TaggedPost';
 
-const ArticlesContainer = loadable(() => import('./Content/Articles/ArticlesContainer' /* webpackChunkName: "dashArticles" */))
+const ArticlesContainer = AsyncComponent({
+  loader: () => import('./Content/Articles/ArticlesContainer'),
+});
 
-const MediaContainer = loadable(() => import('./Media/MediaContainer' /* webpackChunkName: "dashMedia" */))
+const MediaContainer = AsyncComponent({ loader: () => import('./Media/MediaContainer') });
 export default [
   {
     path: '/admin/content/articles',
@@ -79,11 +80,11 @@ export default [
   //       routes: [],
   //   },
   {
-      exact: true,
-      path: '/admin/settings',
-      breadcrumb: <Icon kind="settings" />,
-      component: Settings,
-      routes: [],
+    exact: true,
+    path: '/admin/settings',
+    breadcrumb: <Icon kind="settings" />,
+    component: Settings,
+    routes: [],
   },
   {
     exact: true,

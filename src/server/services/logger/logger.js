@@ -1,5 +1,5 @@
 import winston from 'winston';
-import moment from 'moment';
+import {format} from 'date-fns';
 
 const isProd = process.env.NODE_ENV === 'production';
 const LOG_LEVEL = process.env.LOG_LEVEL || 'debug';
@@ -11,7 +11,7 @@ const logTransports = [
     level: LOG_LEVEL,
     handleExceptions: true,
     json: isProd,
-    timestamp: () => moment().format('YYYY-MM-DD THH:mm:ss, SSSZ'),
+    timestamp: () => format('YYYY-MM-DD THH:mm:ss, SSSZ'),
     prettyPrint: !isProd,
     colorize: !isProd,
   }),

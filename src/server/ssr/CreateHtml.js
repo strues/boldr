@@ -86,7 +86,7 @@ export default function CreateHtml(props: Props) {
   const bodyElements = removeNil([
     // Places the Redux store data on the window available at
     // window.__PRELOADED_STATE__
-    inlineScript(`window.__APOLLO_STATE__=${serialize(preloadedState)};`),
+    inlineScript(`window.__APOLLO_STATE__=${serialize(preloadedState, { isJSON: true })};`),
 
     ifElse(isProd && clientAssets && clientAssets.common)(() =>
       createScriptElement(clientAssets.common.js),

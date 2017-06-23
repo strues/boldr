@@ -7,25 +7,91 @@
 /// @type Number
 $paper-transition-time: $transition-length * 2 !default;
 
-/// Creates the styles for paper.
-@mixin boldrui-paper($include-media: $media-included) {
-    @for $i from 0 through 5 {
-        .#{$boldr-ns}paper__#{$i} {
-            @include md-shadow($i);
-            background-color: $white;
-        }
+.boldrui-paper {
+    padding: 1em;
+    background-color: $paper-light-bg;
 
-        @if $i == 0 and $include-media {
-            @media #{$desktop-media} {
-                .#{$boldr-ns}paper__#{$i}-hover {
-                    transition-property: box-shadow;
-                    transition-duration: $paper-transition-time;
+    &.boldrui-paper__0 {
 
-                    &:hover {
-                        @include md-shadow(3);
-                    }
-                }
-            }
-        }
+        @include md-shadow(0);
+    }
+
+    &.boldrui-paper__1 {
+
+        @include md-shadow(1);
+    }
+
+    &.boldrui-paper__2 {
+
+        @include md-shadow(2);
+    }
+
+    &.boldrui-paper__3 {
+
+        @include md-shadow(3);
+    }
+
+    &.boldrui-paper__4 {
+
+        @include md-shadow(4);
+    }
+
+    &.boldrui-paper__5 {
+
+        @include md-shadow(5);
+    }
+}
+
+.boldrui-paper__dark {
+    padding: 1em;
+    color: $text-color-light;
+    background-color: $paper-dark-bg;
+
+    &.boldrui-paper__0 {
+
+        @include md-shadow(0);
+    }
+
+    &.boldrui-paper__1 {
+
+        @include md-shadow(1);
+    }
+
+    &.boldrui-paper__2 {
+
+        @include md-shadow(2);
+    }
+
+    &.boldrui-paper__3 {
+
+        @include md-shadow(3);
+    }
+
+    &.boldrui-paper__4 {
+
+        @include md-shadow(4);
+    }
+
+    &.boldrui-paper__5 {
+
+        @include md-shadow(5);
+    }
+}
+
+.boldrui-paper__round {
+    border-radius: $border-radius;
+}
+
+.boldrui-paper__no-pad {
+    padding: 0;
+}
+
+.boldrui-paper__0-hover {
+    transition-property: box-shadow;
+    transition-duration: $paper-transition-time;
+
+    &:hover {
+
+        @include md-shadow(3);
     }
 }

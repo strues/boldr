@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
+import Icon from '@boldr/ui/Icons/Icon';
 // internal
 import Headline from '@@components/Headline';
 import Paragraph from '@@components/Paragraph';
-import HorizontalRule from '@@components/HorizontalRule';
-import Icon from '@@components/Icons';
+import Divider from '@@components/Divider';
 
 const Wrapper = styled.aside`
   height: 100%;
@@ -47,7 +47,7 @@ class SettingsAside extends PureComponent {
           <Headline type="h3">Settings</Headline>
           <Paragraph isLead>Modify how Boldr interacts with your website.</Paragraph>
         </SidebarHeader>
-        <HorizontalRule />
+        <Divider />
         <SettingsList>
           <SettingsListItem>
             <SettingsTitle>

@@ -2,18 +2,14 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
 import { connect } from 'react-redux';
-import dateFns from 'date-fns';
+import {format} from 'date-fns';
 import classnames from 'classnames';
+
 import { StyleClasses } from '../../../../theme/styleClasses';
 import Col from '@@components/Layout/Col';
 import Row from '@@components/Layout/Row';
 import Button from '@@components/Button';
-import Card, {
-  CardHeader,
-  CardMedia,
-  CardContent,
-  CardActions,
-} from 'material-ui/Card';
+import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-ui/Card';
 import { selectArticle } from '../../state/articles/actions';
 
 import TagBlock from '../TagBlock';
@@ -26,7 +22,7 @@ type Props = {
 };
 
 export const ArticleCard = (props: Props) => {
-  const formattedDate = dateFns.format(props.article.createdAt, 'MM/DD/YYYY');
+  const formattedDate = format(props.article.createdAt, 'MM/DD/YYYY');
   const classes = classnames(BASE_ELEMENT, props.className);
 
   function transitionPost() {

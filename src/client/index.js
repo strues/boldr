@@ -6,8 +6,7 @@ import createHistory from 'history/createBrowserHistory';
 import ConnectedRouter from 'react-router-redux/ConnectedRouter';
 import WebFontLoader from 'webfontloader';
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import { ApolloProvider } from 'react-apollo';
-import { createBatchNetworkInterface } from 'apollo-upload-client';
+import { ApolloProvider, createBatchingNetworkInterface } from 'react-apollo';
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles';
 import createPalette from 'material-ui/styles/palette';
 import { cyan, pink } from 'material-ui/styles/colors';
@@ -55,12 +54,9 @@ const token = getToken();
 const supportsHistory = 'pushState' in window.history;
 
 // Apollo network interface
-const networkInterface = createBatchNetworkInterface({
-  opts: {
-    credentials: 'include',
-  },
-  batchInterval: 10,
+const networkInterface = createBatchingNetworkInterface({
   uri: 'http://localhost:3000/api/v1/graphql',
+  batchInterval: 10,
 });
 networkInterface.use([
   {

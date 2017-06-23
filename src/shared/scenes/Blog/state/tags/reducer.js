@@ -1,7 +1,4 @@
 import { combineReducers } from 'redux';
-import removeIdFromArray from 'boldr-utils/lib/arrays/removeIdFromArray';
-import removeByKey from 'boldr-utils/lib/objects/removeByKey';
-import addIdToArray from 'boldr-utils/lib/arrays/addIdToArray';
 
 import * as t from '../actionTypes';
 
@@ -18,8 +15,6 @@ const all = (state = {}, action) => {
         ...state,
         ...action.payload,
       };
-    case t.DELETE_TAG_SUCCESS:
-      return removeByKey(state, action.id);
     default:
       return state;
   }
@@ -29,8 +24,6 @@ const ids = (state = [], action) => {
   switch (action.type) {
     case t.FETCH_TAGS_SUCCESS:
       return action.payload.result;
-    case t.DELETE_TAG_SUCCESS:
-      return removeIdFromArray(state, action.id);
     default:
       return state;
   }

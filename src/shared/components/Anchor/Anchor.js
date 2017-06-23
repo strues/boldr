@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import NavLink from 'react-router-dom/NavLink';
+import Icon from '@boldr/ui/Icons/Icon';
 
 type Props = {
   href: string,
@@ -9,20 +10,18 @@ type Props = {
   label: string,
   children: any,
   onClick: () => void,
-  icon: any,
+  icon: ?ReactElement,
+  iconColor: ?string,
+  iconSize: ?string,
 };
 
 const Anchor = (props: Props) => {
-  const { href, className, label, onClick, icon } = props;
+  const { href, className, label, onClick, icon, iconColor, iconSize } = props;
   return (
-    <NavLink
-      to={href}
-      className="boldrui-link"
-      onClick={onClick}
-      title={label}
-      {...props}
-    >
-      {props.icon ? <i className={classnames('fa', props.icon)} /> : null}
+    <NavLink to={href} className="boldrui-link" onClick={onClick} title={label} {...props}>
+      {props.icon
+        ? <Icon className="boldrui-icon" color={iconColor} size={iconSize} kind={props.icon} />
+        : null}
       {label}
     </NavLink>
   );

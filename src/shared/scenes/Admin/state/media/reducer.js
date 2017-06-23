@@ -1,7 +1,4 @@
 import { combineReducers } from 'redux';
-import removeIdFromArray from 'boldr-utils/lib/arrays/removeIdFromArray';
-import removeByKey from 'boldr-utils/lib/objects/removeByKey';
-import addIdToArray from 'boldr-utils/lib/arrays/addIdToArray';
 
 import * as t from './actionTypes';
 
@@ -15,8 +12,6 @@ const all = (state = {}, action) => {
         ...state,
         ...action.payload.entities.media,
       };
-    case t.DELETE_MEDIA_SUCCESS:
-      return removeByKey(state, action.id);
     default:
       return state;
   }
@@ -26,10 +21,6 @@ const ids = (state = [], action) => {
   switch (action.type) {
     case t.EDIT_MEDIA_SUCCESS:
       return action.payload.result;
-    case t.UPLOAD_MEDIA_SUCCESS:
-      return addIdToArray(state, action.payload.result);
-    case t.DELETE_MEDIA_SUCCESS:
-      return removeIdFromArray(state, action.id);
     default:
       return state;
   }

@@ -2,15 +2,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import Icon from '@boldr/ui/Icons/Icon';
 
-export const Chevron = props => (
-  <i
-    className={classNames('fa', props.className, {
-      'fa-chevron-left': !props.expanded,
-      'fa-chevron-down': props.expanded,
-    })}
-  />
-);
+export const Chevron = props => {
+  const iconKind = props.expanded ? 'chevron-down' : 'chevron-left';
+  return <Icon className={props.className} color="#fff" kind={iconKind} />;
+};
 
 Chevron.propTypes = {
   className: PropTypes.string,
@@ -22,9 +19,7 @@ Chevron.defaultProps = {
   expanded: false,
 };
 
-export const FaIcon = props => (
-  <i className={classNames('fa', props.className)} />
-);
+export const FaIcon = props => <i className={classNames('fa', props.className)} />;
 
 FaIcon.propTypes = {
   className: PropTypes.string,
@@ -37,15 +32,20 @@ FaIcon.defaultProps = {
 export const createItemTree = (input, level = 0) =>
   input.map(
     item =>
+      // Content
+      // --- Articles
+      // ---- New Article
       item.items
         ? {
             expanded: false,
             active: false,
             level,
             ...item,
+            // create the sub menu
             items: createItemTree(item.items, level + 1),
           }
         : {
+            // here we dont have child items
             expanded: false,
             active: false,
             level,
@@ -95,10 +95,7 @@ const switchItem = (activate, items, id, link = null, switchParentFn = null) =>
   items.map(item => {
     const newItem = { ...item };
 
-    if (
-      (id && newItem.id === id) ||
-      (!id && newItem.link && newItem.link === link)
-    ) {
+    if ((id && newItem.id === id) || (!id && newItem.link && newItem.link === link)) {
       // This item is to be toggled or activated
       if (!activate) {
         newItem.expanded = !newItem.expanded;
@@ -146,12 +143,9 @@ const switchItem = (activate, items, id, link = null, switchParentFn = null) =>
     return newItem;
   });
 
-export const toggleExpandedItemWithId = (id, items) =>
-  switchItem(false, items, id);
-export const toggleExpandedItemWithLink = (link, items) =>
-  switchItem(false, items, null, link);
+export const toggleExpandedItemWithId = (id, items) => switchItem(false, items, id);
+export const toggleExpandedItemWithLink = (link, items) => switchItem(false, items, null, link);
 
 export const activateItemWithId = (id, items) => switchItem(true, items, id);
 
-export const activateItemWithLink = (link, items) =>
-  switchItem(true, items, null, link);
+export const activateItemWithLink = (link, items) => switchItem(true, items, null, link);

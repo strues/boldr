@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import Footer from '@@components/Footer';
 import { showHeader } from '@@state/modules/boldr/ui/actions';
 import Hero from '../../components/Hero';
 // Account
@@ -49,16 +48,18 @@ export class Page extends Component {
     return (
       <Wrapper>
         <ContentWrapper>
-          <Route path="/login" component={LoginContainer} />
-          <Route path="/signup" component={SignupContainer} />
-          <Route path="/account/forgot-password" component={ForgotPassword} />
-          <Route path="/account/reset-password/:token" exact component={ResetPassword} />
-          <Route path="/account/verify/:token" exact component={Verify} />
-          <Route path="/account/preferences" component={PreferencesContainer} />
-          <Route path="/profiles/:username" component={ProfileContainer} />
-          <Route path="/blog" component={BlogContainer} />
-          <Route path="/about" exact component={About} />
-          <Route path="/" exact component={Home} />
+          <Switch>
+            <Route path="/login" component={LoginContainer} />
+            <Route path="/signup" component={SignupContainer} />
+            <Route path="/account/forgot-password" component={ForgotPassword} />
+            <Route path="/account/reset-password/:token" exact component={ResetPassword} />
+            <Route path="/account/verify/:token" exact component={Verify} />
+            <Route path="/account/preferences" component={PreferencesContainer} />
+            <Route path="/profiles/:username" component={ProfileContainer} />
+            <Route path="/blog" component={BlogContainer} />
+            <Route path="/about" exact component={About} />
+            <Route path="/" exact component={Home} />
+          </Switch>
         </ContentWrapper>
       </Wrapper>
     );

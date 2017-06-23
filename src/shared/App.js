@@ -4,17 +4,15 @@ import classnames from 'classnames';
 import Helmet from 'react-helmet';
 import { compose, graphql, gql } from 'react-apollo';
 import { connect } from 'react-redux';
-import { injectGlobal } from 'styled-components';
 import { Route, Switch, Redirect } from 'react-router-dom';
+import AsyncComponent from './components/AsyncComponent';
 // internal
 import { StyleClasses } from './theme/styleClasses';
 import Notifications from './components/Notification';
 import { getToken } from './core/authentication/token';
 // Start routes
-import AdminDashboard from './scenes/Admin/AdminDashboard';
 import Page from './pages/Page';
 import Error404 from './pages/Error404';
-import normalizeStyled from './theme/normalizeStyled';
 import SiteHeaderContainer from './components/SiteHeader/SiteHeaderContainer';
 import './styles/main.scss';
 
@@ -55,6 +53,8 @@ type Location = {
   pathname: string,
   hash: ?string,
 };
+const AdminDashboard = AsyncComponent({ loader: () => import('./scenes/Admin/AdminDashboard') });
+
 class App extends Component {
   static defaultProps = {
     className: 'app',

@@ -154,3 +154,48 @@ export const setMedia = data => {
     data,
   };
 };
+
+/**
+  * UPLOAD FILE ACTIONS
+  * -------------------------
+  * @exports uploadFiles
+  *****************************************************************/
+//
+// export function uploadArticleImage(payload) {
+//   return dispatch => {
+//     dispatch(beginuploadArticleImage());
+//     const data = new FormData();
+//     data.append('payload.name', payload);
+//     return api
+//       .post(`${API_PREFIX}/media`, data)
+//       .then(res => {
+//         dispatch(uploadArticleImageSuccess(res));
+//         dispatch(sendNotification(notif.MSG_UPLOAD_SUCCESS));
+//       })
+//       .catch(err => {
+//         dispatch(uploadArticleImageFail(err));
+//         dispatch(sendNotification(notif.MSG_UPLOAD_ERROR));
+//       });
+//   };
+// }
+//
+// function beginuploadArticleImage() {
+//   return {
+//     type: t.UPLOAD_POST_IMG_REQUEST,
+//   };
+// }
+//
+// function uploadArticleImageSuccess(res) {
+//   /* istanbul ignore next */
+//   return {
+//     type: t.UPLOAD_POST_IMG_SUCCESS,
+//     payload: res.data,
+//   };
+// }
+//
+// function uploadArticleImageFail(err) {
+//   return {
+//     type: t.UPLOAD_POST_IMG_FAILURE,
+//     error: err,
+//   };
+// }

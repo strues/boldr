@@ -32,8 +32,8 @@ $tag-input-border-focus-color: darken($light-gray, 15%) !default;
 }
 
 .react-tagsinput {
-    @extend %tags-ui-base;
 
+    @extend %tags-ui-base;
     $height: $tag-base-height - 2;
     height: $height;
     background: none;
@@ -56,6 +56,7 @@ $tag-input-border-focus-color: darken($light-gray, 15%) !default;
 }
 
 .react-tagsinput-tag {
+
     @extend %tags-ui-base;
     background: $tag-background-color;
     margin: $tag-base-margin $tag-base-margin 0 0;
@@ -86,12 +87,12 @@ $tag-input-border-focus-color: darken($light-gray, 15%) !default;
 }
 
 .react-tagsinput-tag a::before {
-    content: ' ×';
+    content: " ×";
 }
 
 .react-tagsinput-input {
-    @extend %tags-ui-base;
 
+    @extend %tags-ui-base;
     $height: $tag-base-height - 2;
     height: $height;
     background: $tag-input-bg-color;
@@ -107,4 +108,55 @@ $tag-input-border-focus-color: darken($light-gray, 15%) !default;
         border-color: $tag-input-border-focus-color;
         outline: none;
     }
+}
+
+.boldrui-tag {
+    display: inline-flex;
+    height: 22px;
+    padding: 0 8px;
+    opacity: 1;
+    background: $tag-bg;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    margin-right: 8px;
+    font-size: $tag-font-size;
+    line-height: 20px;
+    white-space: nowrap;
+    transition: all 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+    cursor: pointer;
+
+    .boldrui-tag__thumb {
+        margin-right: 5px;
+    }
+
+    .boldrui-tag__remove--btn {
+        padding-bottom: 2px;
+        padding-left: 10px;
+        color: $primary-color;
+        font-size: 14px;
+        cursor: pointer;
+
+        &::before {
+            content: "x";
+        }
+    }
+
+    &.boldrui-tag__disabled {
+        color: $text-color-disabled;
+        background-color: #f1f1f1;
+    }
+}
+
+.boldrui-tag__lg {
+    height: 36px;
+}
+
+.boldrui-tag__wrap {
+    overflow: hidden;
+}
+
+.boldrui-tag__inner-wrap {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }

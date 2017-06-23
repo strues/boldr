@@ -37,8 +37,7 @@ module.exports = {
     vendor: [
       'apollo-client',
       'axios',
-      'boldr-ui',
-      'boldr-utils',
+      '@boldr/ui',
       'classnames',
       'date-fns',
       'draft-convert',
@@ -60,6 +59,8 @@ module.exports = {
       'react-router-redux',
       'react-tap-event-plugin',
       'react-transition-group',
+      'react-tagsinput',
+      'react-dropzone',
       'redux',
       'redux-form',
       'redux-thunk',

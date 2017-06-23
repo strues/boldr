@@ -23,7 +23,6 @@ type Props = {
   className: ?string,
   navClassName: ?string,
   items: SidebarLinks,
-  match: Object,
   location: Object,
   linkComponent: ReactElement,
   chevronComponent: ReactElement,
@@ -58,7 +57,6 @@ class Sidebar extends Component {
   props: Props;
 
   render() {
-    // BASE_ELEMENT = boldrui-dash-sidebar
     const classes = classnames(BASE_ELEMENT, this.props.className);
 
     return (
@@ -74,7 +72,6 @@ class Sidebar extends Component {
           activeItem={this.props.activeItem}
           navClassName={this.props.navClassName}
           location={this.props.location}
-          match={this.props.match}
           expanded={this.props.expanded}
           onExpandCollapse={this.props.onExpandCollapse}
         />

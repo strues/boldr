@@ -116,7 +116,7 @@
 
 .#{$boldr-ns}btn__primary-outline {
     color: $btn-primary;
-    background: $btn-white;
+    background: transparent;
     border-color: $btn-primary;
 
     &:link,
@@ -132,7 +132,7 @@
 
     &:active {
         color: $btn-primary-active;
-        background: $btn-light-gray;
+        background: $primary-color;
         border-color: $btn-primary-active;
     }
 

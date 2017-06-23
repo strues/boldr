@@ -4,10 +4,11 @@ import { graphql, gql } from 'react-apollo';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { Loader } from 'boldr-ui';
-import SiteHeader from './SiteHeader';
+import Loader from '@boldr/ui/Loader';
+
 import { logout } from '../../scenes/Account/state/actions';
 import { selectSettings, selectSettingFromList, selectMe } from '../../state';
+import SiteHeader from './SiteHeader';
 
 type Props = {
   data: SiteHeaderData,

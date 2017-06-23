@@ -1,8 +1,10 @@
 /* @flow */
 import React from 'react';
 import classnames from 'classnames';
-import { Headline, Col, Loader, StyleClasses } from 'boldr-ui';
+import { Headline, Loader } from '@boldr/ui';
 import { gql, graphql } from 'react-apollo';
+import { StyleClasses } from '../../../../theme/styleClasses';
+
 import Author from '../Author';
 import SidebarTags from '../SidebarTags';
 

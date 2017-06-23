@@ -1,7 +1,8 @@
 /* @flow */
 import React from 'react';
 import classnames from 'classnames';
-import { Headline, StyleClasses } from 'boldr-ui';
+import Headline from '@boldr/ui/Headline';
+import {StyleClasses} from '../../../../theme/styleClasses';
 import TagBlock from '../TagBlock';
 
 type Props = {

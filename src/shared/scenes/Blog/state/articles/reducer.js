@@ -1,7 +1,5 @@
 /* @flow */
 import { combineReducers } from 'redux';
-import removeIdFromArray from 'boldr-utils/lib/arrays/removeIdFromArray';
-import removeByKey from 'boldr-utils/lib/objects/removeByKey';
 import * as t from '../actionTypes';
 import { getArticles } from './selectors';
 
@@ -12,8 +10,6 @@ const all = (state = {}, action) => {
         ...state,
         ...action.payload.entities.articles,
       };
-    case t.DELETE_ARTICLE_SUCCESS:
-      return removeByKey(state, action.id);
     default:
       return state;
   }
@@ -21,8 +17,7 @@ const all = (state = {}, action) => {
 
 const ids = (state = [], action) => {
   switch (action.type) {
-    case t.DELETE_ARTICLE_SUCCESS:
-      return removeIdFromArray(state, action.id);
+
     default:
       return state;
   }

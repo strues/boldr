@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import { Headline } from 'boldr-ui';
+import { Headline } from '@boldr/ui';
 import styled from 'styled-components';
 
 const TitleWrapper = styled.div`

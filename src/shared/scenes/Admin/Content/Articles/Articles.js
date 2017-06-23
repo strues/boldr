@@ -5,7 +5,7 @@ import ArrowUpward from 'material-ui-icons/ArrowUpward';
 import ArrowDownward from 'material-ui-icons/ArrowDownward';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { format } from 'date-fns';
+import {format} from 'date-fns';
 import Griddle, { plugins, RowDefinition, ColumnDefinition } from 'griddle-react';
 // internal
 import Paper from '@@components/Paper';
