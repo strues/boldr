@@ -16,8 +16,9 @@ const prettierCmd = path.resolve(
 );
 const defaultOptions = {
   'single-quote': true,
+
   'trailing-comma': 'all',
-  'print-width': 80,
+  'print-width': 100,
   'jsx-bracket-same-line': false,
 };
 const config = {

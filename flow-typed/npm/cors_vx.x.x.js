@@ -1,4 +1,4 @@
-// flow-typed signature: 3571b49235ed5f61008d5f00e8d01105
+// flow-typed signature: da70bf76e8e23fb2744852e011d04c53
 // flow-typed version: <<STUB>>/cors_v^2.8.3/flow_v0.48.0
 
 /**
@@ -26,7 +26,63 @@ declare module 'cors/lib/index' {
   declare module.exports: any;
 }
 
+declare module 'cors/test/basic-auth' {
+  declare module.exports: any;
+}
+
+declare module 'cors/test/body-events' {
+  declare module.exports: any;
+}
+
+declare module 'cors/test/cors' {
+  declare module.exports: any;
+}
+
+declare module 'cors/test/error-response' {
+  declare module.exports: any;
+}
+
+declare module 'cors/test/example-app' {
+  declare module.exports: any;
+}
+
+declare module 'cors/test/issue-2' {
+  declare module.exports: any;
+}
+
+declare module 'cors/test/issue-31' {
+  declare module.exports: any;
+}
+
+declare module 'cors/test/support/env' {
+  declare module.exports: any;
+}
+
 // Filename aliases
 declare module 'cors/lib/index.js' {
   declare module.exports: $Exports<'cors/lib/index'>;
+}
+declare module 'cors/test/basic-auth.js' {
+  declare module.exports: $Exports<'cors/test/basic-auth'>;
+}
+declare module 'cors/test/body-events.js' {
+  declare module.exports: $Exports<'cors/test/body-events'>;
+}
+declare module 'cors/test/cors.js' {
+  declare module.exports: $Exports<'cors/test/cors'>;
+}
+declare module 'cors/test/error-response.js' {
+  declare module.exports: $Exports<'cors/test/error-response'>;
+}
+declare module 'cors/test/example-app.js' {
+  declare module.exports: $Exports<'cors/test/example-app'>;
+}
+declare module 'cors/test/issue-2.js' {
+  declare module.exports: $Exports<'cors/test/issue-2'>;
+}
+declare module 'cors/test/issue-31.js' {
+  declare module.exports: $Exports<'cors/test/issue-31'>;
+}
+declare module 'cors/test/support/env.js' {
+  declare module.exports: $Exports<'cors/test/support/env'>;
 }

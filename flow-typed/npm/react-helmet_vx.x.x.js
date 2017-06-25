@@ -1,4 +1,4 @@
-// flow-typed signature: 3e212a11ad1f22058a50c1b92b3ab800
+// flow-typed signature: 5a81e4c6a336b40b12d8a7f85e457c8f
 // flow-typed version: <<STUB>>/react-helmet_v5.1.3/flow_v0.48.0
 
 /**
@@ -46,6 +46,18 @@ declare module 'react-helmet/lib/HelmetUtils' {
   declare module.exports: any;
 }
 
+declare module 'react-helmet/test/HelmetDeclarativeTest' {
+  declare module.exports: any;
+}
+
+declare module 'react-helmet/test/HelmetTest' {
+  declare module.exports: any;
+}
+
+declare module 'react-helmet/test/test' {
+  declare module.exports: any;
+}
+
 // Filename aliases
 declare module 'react-helmet/es/Helmet.js' {
   declare module.exports: $Exports<'react-helmet/es/Helmet'>;
@@ -64,4 +76,13 @@ declare module 'react-helmet/lib/HelmetConstants.js' {
 }
 declare module 'react-helmet/lib/HelmetUtils.js' {
   declare module.exports: $Exports<'react-helmet/lib/HelmetUtils'>;
+}
+declare module 'react-helmet/test/HelmetDeclarativeTest.js' {
+  declare module.exports: $Exports<'react-helmet/test/HelmetDeclarativeTest'>;
+}
+declare module 'react-helmet/test/HelmetTest.js' {
+  declare module.exports: $Exports<'react-helmet/test/HelmetTest'>;
+}
+declare module 'react-helmet/test/test.js' {
+  declare module.exports: $Exports<'react-helmet/test/test'>;
 }
