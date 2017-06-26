@@ -9,3 +9,4 @@ public/uploads
 !src/server
 configOutput.json
 internal/seed.js
+build

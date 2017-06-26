@@ -4,7 +4,7 @@ import Link from 'react-router-dom/Link';
 import { connect } from 'react-redux';
 import { format } from 'date-fns';
 import classnames from 'classnames';
-import Card, { CardHeader, CardMedia, CardContent, CardActions } from 'material-ui/Card';
+import { Card, CardTitle, CardText, CardActions, Media, MediaOverlay } from '@boldr/ui';
 import { StyleClasses } from '../../../../theme/styleClasses';
 import Col from '@boldr/ui/Layout/Col';
 import Row from '@boldr/ui/Layout/Row';
@@ -32,28 +32,22 @@ export const ArticleCard = (props: Props) => {
   const { title, featureImage, slug, tags, excerpt } = props.article;
   return (
     <div className={classes}>
-      <Card>
-        <CardHeader title={title} subheader={formattedDate} />
-        <CardMedia>
-          <img src={featureImage} alt={`${title} feature image`} />
-        </CardMedia>
-
-        <CardContent>
-          {excerpt}
-          <Row>
-            <Col sm={12}>
-              <Link to={`/blog/${slug}`} className="readmore-link">
-                <Button kind="primary" onClick={transitionPost} outline>
-                  Read More
-                </Button>
-              </Link>
-            </Col>
-          </Row>
-        </CardContent>
-        <CardActions>
-          <TagBlock tags={tags} />
+      <Card style={{ maxWidth: 600 }} className="md-block-centered">
+        <Media>
+          <img src={featureImage} alt={`${title} feature image`} role="presentation" />
+        </Media>
+        <CardTitle title={title} subtitle={formattedDate} />
+        <CardActions expander>
+          <Button kind="primary" onClick={transitionPost} href={`/blog/${slug}`} outline>
+            Read More
+          </Button>
         </CardActions>
+        <CardText expandable>
+          {excerpt}
+        </CardText>
+        <TagBlock tags={tags} />
       </Card>
+
     </div>
   );
 };

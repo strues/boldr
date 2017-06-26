@@ -1,5 +1,7 @@
 @import "../../styles/abstracts/colors/all";
+
 @import "../../styles/abstracts/variables";
+
 @import "../../styles/abstracts/mixins";
 
 .#{$boldr-ns}siteheader {
@@ -9,6 +11,7 @@
     transition: all 0.4s ease-in-out;
 
     &.theme-boldr {
+
         @include md-shadow(3);
         height: $site-header-height;
         background-color: $site-header-bg;
@@ -23,6 +26,12 @@
         &:focus {
             outline: thin dotted !important;
         }
+    }
+
+    &::after,
+    &::before {
+        content: " ";
+        display: table;
     }
 }
 
@@ -57,7 +66,6 @@
 }
 
 // / This is the UL
-
 .#{$boldr-ns}sh__nav {
 
     @media (min-width: 992px) {
@@ -73,6 +81,10 @@
     padding: 0;
     padding-left: 1em;
     margin: 0;
+}
+
+.#{$boldr-ns}sh__nav-dropdown-open {
+    height: 100%;
 }
 
 .#{$boldr-ns}sh__menu-right {

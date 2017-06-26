@@ -3,7 +3,8 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
 import styled from 'styled-components';
-import { Grid, Col, Row } from '@boldr/ui';
+import { Grid, Col, Row } from '@boldr/ui/Layout';
+import Paper from '@boldr/ui/Paper';
 // internal
 import Button from '../../../../components/Button';
 import FontIcon from '../../../../components/FontIcon';
@@ -48,9 +49,11 @@ const ProfileContent = (props: Props) => {
   );
   return (
     <div className="boldr-profile__content">
+
       <Grid>
         <Row>
           {props.me ? editButtons : null}
+
           <Col xs={12} md={6}>
             <img
               src={profile.avatarUrl}
@@ -82,8 +85,10 @@ const ProfileContent = (props: Props) => {
               lurl={profile.socialMedia.linkedinUrl}
             />
           </Col>
+
         </Row>
       </Grid>
+
     </div>
   );
 };

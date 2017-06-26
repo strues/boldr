@@ -61,7 +61,7 @@ export default class Radio extends PureComponent {
     const classString = classNames({
       [className]: !!className,
       [`${prefix}-radio-wrap`]: true,
-      [`${prefix}-radio-checked`]: !!checked,
+      [`${prefix}-radio-checked`]: checked,
       [`${prefix}-radio-disabled`]: disabled || readOnly,
     });
 
@@ -72,7 +72,7 @@ export default class Radio extends PureComponent {
           <input
             {...others}
             type="radio"
-            checked={!!checked}
+            checked={checked}
             disabled={disabled}
             readOnly={readOnly}
             onChange={this.handleChange}

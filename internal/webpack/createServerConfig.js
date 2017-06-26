@@ -188,6 +188,11 @@ module.exports = function createServerConfig(options) {
             emitFile: false,
           },
         },
+        {
+          test: /\.(graphql|gql)$/,
+          exclude: /node_modules/,
+          loader: 'graphql-tag/loader',
+        },
       ],
     },
     plugins: [

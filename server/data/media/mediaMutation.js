@@ -30,7 +30,7 @@ export default {
       const actualFileName = id + path.extname(args.file.name);
 
       fs.moveSync(args.file.path, `${UPLOAD_DIR}/media/${actualFileName}`);
-      const thumbnailSaveName = `${id}-thumb${path.extname(args.file.name)}`;
+      const thumbnailSaveName = `${id}thumb${path.extname(args.file.name)}`;
       Jimp.read(`${UPLOAD_DIR}/media/${actualFileName}`, (err, image) => {
         if (err) {
           return debug('error', err);

@@ -57,7 +57,7 @@ class Media extends Component {
                 {media.map(m =>
                   <MediaItem key={m.id}>
                     <Photo
-                      src={`/uploads/${m.thumbName}`}
+                      src={`/uploads/media/${m.thumbName}`}
                       alt={m.name}
                       role="presentation"
                       cta={

@@ -93,7 +93,10 @@ class App extends React.Component {
           <meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png" />
           {__DEV__ ? null : <link rel="manifest" href="/manifest.json" />}
         </Helmet>
-        <SiteHeaderContainer settings={this.props.data.getSettings} />
+        <SiteHeaderContainer
+          menu={this.props.data.getMenuById}
+          settings={this.props.data.getSettings}
+        />
         <Switch>
           <ProtectedRoute path="/admin" component={AdminDashboard} />
           <Route path="/" component={Page} />
@@ -116,5 +119,4 @@ export const SETTINGS_QUERY = gql`
     }
   }
 `;
-
 export default graphql(SETTINGS_QUERY)(App);

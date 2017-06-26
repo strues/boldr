@@ -144,7 +144,13 @@ module.exports = function createClientConfig(options) {
           exclude: EXCLUDES,
           include: config.srcDir,
           use: ExtractCssChunks.extract({
-            use: [
+            use: removeNil([
+              ifDev({
+                loader: 'cache-loader',
+                options: {
+                  cacheDirectory: config.cacheDir,
+                },
+              }),
               {
                 loader: 'css-loader',
                 options: {
@@ -173,7 +179,7 @@ module.exports = function createClientConfig(options) {
                   ],
                 },
               },
-            ],
+            ]),
           }),
         },
         // scss
@@ -182,7 +188,13 @@ module.exports = function createClientConfig(options) {
           include: config.srcDir,
           exclude: EXCLUDES,
           use: ExtractCssChunks.extract({
-            use: [
+            use: removeNil([
+              ifDev({
+                loader: 'cache-loader',
+                options: {
+                  cacheDirectory: config.cacheDir,
+                },
+              }),
               {
                 loader: 'css-loader',
                 options: {
@@ -219,8 +231,39 @@ module.exports = function createClientConfig(options) {
                   includePaths: [config.srcDir],
                 },
               },
-            ],
+            ]),
           }),
+        },
+        // json
+        {
+          test: /\.json$/,
+          loader: 'json-loader',
+        },
+        // url
+        {
+          test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
+          loader: 'url-loader',
+          exclude: EXCLUDES,
+          options: { limit: 10000, emitFile: true },
+        },
+        {
+          test: /\.svg(\?v=\d+.\d+.\d+)?$/,
+          exclude: EXCLUDES,
+          loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=[name].[ext]', // eslint-disable-line
+        },
+        // file
+        {
+          test: /\.(ico|eot|ttf|otf|mp4|mp3|ogg|pdf|html)$/, // eslint-disable-line
+          loader: 'file-loader',
+          exclude: EXCLUDES,
+          options: {
+            emitFile: true,
+          },
+        },
+        {
+          test: /\.(graphql|gql)$/,
+          exclude: /node_modules/,
+          loader: 'graphql-tag/loader',
         },
       ],
     },

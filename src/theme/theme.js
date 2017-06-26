@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { css, ThemeProvider } from 'styled-components';
+
 const SIZES = {
-  large: 1200,
-  medium: 976,
-  small: 768,
+  large: 75,
+  medium: 62,
+  small: 48,
 };
 
 const theme = {

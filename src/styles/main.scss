@@ -1,44 +1,76 @@
 @charset "utf-8";
+
 @import "vendor/normalize";
+
 @import "vendor/draft";
+
 @import "abstracts/all";
+
 @import "vendor/griddle";
+
 @import "base/all";
+
 @import "components/all";
 
 .boldr-dropzone__drop-sm {
-  margin-top: 15px !important;
-  padding: 1em;
-  border: 1px solid #ccc;
+    padding: 1em;
+    border: 1px solid #ccc;
+    margin-top: 15px !important;
 }
 
 .react-tagsinput {
-  border: none !important;
+    border: none !important;
 }
 
 .editor--root {
-  width: 65%;
-  margin: 0 auto;
+    width: 65%;
+    margin: 0 auto;
 }
 
 .editor--content {
-  margin: 0 auto;
-  border: 1px solid #ccc;
-  padding: 0.2rem;
+    padding: 0.2rem;
+    border: 1px solid #ccc;
+    margin: 0 auto;
+}
+
+.boldrui-card-title {
+    padding: 1em;
+}
+
+.boldrui-card-text {
+    padding: 1em;
+}
+
+.boldrui-card-footer {
+    padding-left: 1em;
+}
+
+h3.boldrui-card-title--title {
+    margin-top: -10px;
+}
+
+.boldrui-card-footer__inline {
+    svg {
+        margin-left: 220px;
+    }
+}
+
+.boldrui-tagblock {
+    padding: 1em;
 }
 
 .rdw-editor-main {
-  border: 1px solid rgba(225, 225, 225, 1.00);
+    border: 1px solid rgba(225, 225, 225, 1);
 }
 
 .editor--content > div {
-  min-height: 100px;
+    min-height: 100px;
 }
 
 .editor--toolbar {
-  background-color: #0275d8;
+    background-color: #0275d8;
 }
 
 .toolbar--footer > * {
-  float: right;
+    float: right;
 }

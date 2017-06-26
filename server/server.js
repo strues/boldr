@@ -6,41 +6,41 @@ import { db, initializeDb, disconnect } from './services/db';
 import logger from './services/logger';
 import { destroyRedis } from './services/redis';
 
-const port = parseInt(process.env.BOLDR_PORT, 10);
+const processPort = parseInt(process.env.BOLDR_PORT, 10);
 const host = process.env.BOLDR_HOST || '0.0.0.0';
 // Launch Node.js server
-initializeDb();
+const port = processPort || 3000;
+const server = http.createServer(app);
 
-const server = app.listen(port, host, () => {
-  logger.info(`Boldr is listening on http://${host}:${port}/`);
+initializeDb()
+  .then(() => {
+    logger.info('Database connected successfully');
+    server.on('listening', () => {
+      const address = server.address();
+      logger.info('Boldr running on port %s', address.port);
+    });
+    server.on('error', err => {
+      logger.error(`⚠️  ${err}`);
+      throw err;
+    });
+    return server.listen(port);
+  })
+  .catch(err => {
+    logger.error(err);
+    process.exit(1);
+  });
+
+process.on('SIGINT', () => {
+  logger.info('shutting down!');
+  disconnect();
+  destroyRedis();
+  server.close();
+  process.exit();
 });
 
-function handleExit(options, err) {
-  if (options.cleanup) {
-    const actions = [server.close, disconnect, destroyRedis];
-    actions.forEach((close, i) => {
-      try {
-        close(() => {
-          if (i === actions.length - 1) {
-            process.exit();
-          }
-        });
-      } catch (err) {
-        if (i === actions.length - 1) {
-          process.exit();
-        }
-      }
-    });
-  }
-  if (err) {
-    logger.error(err.stack);
-  }
-  if (options.exit) {
-    process.exit();
-  }
-}
-
-process.on('exit', handleExit.bind(null, { cleanup: true }));
-process.on('SIGINT', handleExit.bind(null, { exit: true }));
-process.on('SIGTERM', handleExit.bind(null, { exit: true }));
-process.on('uncaughtException', handleExit.bind(null, { exit: true }));
+process.on('uncaughtException', error => {
+  logger.error(`uncaughtException: ${error.message}`);
+  logger.error(error.stack);
+  debug(error.stack);
+  process.exit(1);
+});

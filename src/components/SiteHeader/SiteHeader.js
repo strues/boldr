@@ -2,17 +2,26 @@
 import React, { Component } from 'react';
 import IconButton from 'material-ui/IconButton';
 import classNames from 'classnames/bind';
+import styled from 'styled-components';
 import cxN from 'classnames';
 import Link from 'react-router-dom/Link';
-
-import Button from '@@components/Button';
-import Grid from '@@components/Layout/Grid';
-import Icon from '@@components/Icons';
+import { mediaQuery } from '../../theme/theme';
+import Button from '../Button';
+import Grid from '../Layout/Grid';
+import Icon from '../Icons';
 import Branding from './Branding';
 import NavItem from './NavItem';
 import styles from './siteheader.scss';
 
 const cx = classNames.bind(styles);
+
+const Container = styled.div`
+  margin: 0 auto;
+  width: auto;
+  ${mediaQuery.large`width: 71rem;`}
+  ${mediaQuery.medium`width: 61rem;`}
+  ${mediaQuery.small`width: 46rem;`}
+`;
 
 type Props = {
   className: string,
@@ -168,22 +177,15 @@ class SiteHeader extends Component {
     const { className, theme, settings } = this.props;
     const { dropdownIsOpen, focusable } = this.state;
 
-    function filterSiteName(obj) {
-      return parseInt(obj.id, 10) === 1;
-    }
-    function filterSiteLogo(obj) {
-      return parseInt(obj.id, 10) === 3;
-    }
-    // const siteName = settings.find(filterSiteName);
-    // const logo = settings.find(filterSiteLogo);
     return (
       <header className={cx('boldrui-siteheader', ['theme-boldr'], className)}>
-        <Grid fluid={false}>
-          <div
-            className={cx('boldrui-sh__menu', {
-              'boldrui-sh__dropdown-open': dropdownIsOpen,
-            })}
-          >
+
+        <div
+          className={cx('boldrui-sh__menu', {
+            'boldrui-sh__dropdown-open': dropdownIsOpen,
+          })}
+        >
+          <Grid>
             <Branding
               toggleDropdownHandler={this.handleDropdown}
               dropdownOpen={dropdownIsOpen}
@@ -192,22 +194,24 @@ class SiteHeader extends Component {
               siteLogo="https://boldr.io/assets/boldr-logo-white.png"
               closeHeaderDropdown={this.closeDropdownOnButtonClick()}
             />
-            <nav
+            <div
               className={cx('boldrui-sh__collapse', {
                 'boldrui-sh__dropdown-open': dropdownIsOpen,
               })}
               ref={_ref => {
                 (this: any).dropdownContent = _ref;
               }}
-              aria-label="Main menu"
             >
-              {this.renderMenuItems()}
-            </nav>
+              <nav className={cx('boldrui-sh__navmain')} role="navigation" aria-label="Main menu">
+                {this.renderMenuItems()}
+              </nav>
+            </div>
             <div className={cxN(cx('boldrui-sh__menu-right'))}>
               {this.renderAuthDependent()}
             </div>
-          </div>
-        </Grid>
+          </Grid>
+        </div>
+
       </header>
     );
   }

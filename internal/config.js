@@ -75,6 +75,7 @@ module.exports = {
     'react-tap-event-plugin',
     'react-transition-group',
     'react-tagsinput',
+    'react-motion',
     'react-dropzone',
     'redux',
     'redux-form',

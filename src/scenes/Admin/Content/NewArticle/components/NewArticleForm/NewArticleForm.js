@@ -16,15 +16,14 @@ import {
   Paragraph,
   Label,
   Block,
-  RadioField,
+  // RadioField,
   // RadioButtonGroup,
   FormGroup,
   Form,
 } from '../../../../../../components';
 
 import { isRequired } from '../../../../../../core/util/validations';
-import Radio from '../../../../../../components/Radio/Radio';
-import RadioGroup from '../../../../../../components/Radio/RadioGroup';
+
 import { setMedia } from '../../../../state/media/actions';
 import RenderTags from '../RenderTags';
 import FieldEditor from './FieldEditor';
@@ -44,7 +43,6 @@ type Props = {
 
 const radioOpts = [{ value: 'draft', text: 'Draft' }, { value: 'published', text: 'Published' }];
 
-@connect()
 class NewArticleForm extends Component {
   state = {
     files: [],
@@ -100,15 +98,7 @@ class NewArticleForm extends Component {
                     validate={[isRequired]}
                   />
                 </DarkSegment>
-                <Block>
-                  <FormGroup>
-                    <Headline type="h4">
-                      Upload a feature image <FontIcon>photo_library</FontIcon>
-                    </Headline>
-                    <UploadArticleImage handleSetMedia={this.handleSetMedia} />
 
-                  </FormGroup>
-                </Block>
                 <FormGroup>
                   <Field
                     name="excerpt"
@@ -124,12 +114,31 @@ class NewArticleForm extends Component {
                 <Block>
                   <FormGroup>
                     <Label label="Publishing status" required />
-                    <Field
-                      name="published"
-                      component={RadioField}
-                      validate={[isRequired]}
-                      options={radioOpts}
-                    />
+                    <div>
+                      <label>
+                        <Field
+                          validate={[isRequired]}
+                          name="published"
+                          component="input"
+                          type="radio"
+                          value="draft"
+                        />
+                        {' '}
+                        Draft
+                      </label>
+                      {' '}
+                      <label>
+                        <Field
+                          validate={[isRequired]}
+                          name="published"
+                          component="input"
+                          type="radio"
+                          value="published"
+                        />
+                        {' '}
+                        Published
+                      </label>
+                    </div>
                   </FormGroup>
 
                   <Button htmlType="submit" kind="primary">Save Post</Button>
