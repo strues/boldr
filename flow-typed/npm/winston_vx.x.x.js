@@ -1,4 +1,4 @@
-// flow-typed signature: 4cb2ab1ebcd830a2f41ef0b8cd26b96c
+// flow-typed signature: b5cac275555bfe5f88026bbaa634f9db
 // flow-typed version: <<STUB>>/winston_v^2.3.1/flow_v0.48.0
 
 /**
@@ -82,54 +82,6 @@ declare module 'winston/lib/winston/transports/transport' {
   declare module.exports: any;
 }
 
-declare module 'winston/test/helpers' {
-  declare module.exports: any;
-}
-
-declare module 'winston/test/transports/console-test' {
-  declare module.exports: any;
-}
-
-declare module 'winston/test/transports/file-archive-test' {
-  declare module.exports: any;
-}
-
-declare module 'winston/test/transports/file-maxfiles-test' {
-  declare module.exports: any;
-}
-
-declare module 'winston/test/transports/file-maxsize-test' {
-  declare module.exports: any;
-}
-
-declare module 'winston/test/transports/file-open-test' {
-  declare module.exports: any;
-}
-
-declare module 'winston/test/transports/file-stress-test' {
-  declare module.exports: any;
-}
-
-declare module 'winston/test/transports/file-tailrolling-test' {
-  declare module.exports: any;
-}
-
-declare module 'winston/test/transports/file-test' {
-  declare module.exports: any;
-}
-
-declare module 'winston/test/transports/http-test' {
-  declare module.exports: any;
-}
-
-declare module 'winston/test/transports/memory-test' {
-  declare module.exports: any;
-}
-
-declare module 'winston/test/transports/transport' {
-  declare module.exports: any;
-}
-
 // Filename aliases
 declare module 'winston/lib/winston.js' {
   declare module.exports: $Exports<'winston/lib/winston'>;
@@ -175,40 +127,4 @@ declare module 'winston/lib/winston/transports/memory.js' {
 }
 declare module 'winston/lib/winston/transports/transport.js' {
   declare module.exports: $Exports<'winston/lib/winston/transports/transport'>;
-}
-declare module 'winston/test/helpers.js' {
-  declare module.exports: $Exports<'winston/test/helpers'>;
-}
-declare module 'winston/test/transports/console-test.js' {
-  declare module.exports: $Exports<'winston/test/transports/console-test'>;
-}
-declare module 'winston/test/transports/file-archive-test.js' {
-  declare module.exports: $Exports<'winston/test/transports/file-archive-test'>;
-}
-declare module 'winston/test/transports/file-maxfiles-test.js' {
-  declare module.exports: $Exports<'winston/test/transports/file-maxfiles-test'>;
-}
-declare module 'winston/test/transports/file-maxsize-test.js' {
-  declare module.exports: $Exports<'winston/test/transports/file-maxsize-test'>;
-}
-declare module 'winston/test/transports/file-open-test.js' {
-  declare module.exports: $Exports<'winston/test/transports/file-open-test'>;
-}
-declare module 'winston/test/transports/file-stress-test.js' {
-  declare module.exports: $Exports<'winston/test/transports/file-stress-test'>;
-}
-declare module 'winston/test/transports/file-tailrolling-test.js' {
-  declare module.exports: $Exports<'winston/test/transports/file-tailrolling-test'>;
-}
-declare module 'winston/test/transports/file-test.js' {
-  declare module.exports: $Exports<'winston/test/transports/file-test'>;
-}
-declare module 'winston/test/transports/http-test.js' {
-  declare module.exports: $Exports<'winston/test/transports/http-test'>;
-}
-declare module 'winston/test/transports/memory-test.js' {
-  declare module.exports: $Exports<'winston/test/transports/memory-test'>;
-}
-declare module 'winston/test/transports/transport.js' {
-  declare module.exports: $Exports<'winston/test/transports/transport'>;
 }

@@ -1,4 +1,4 @@
-// flow-typed signature: 2a6a8ad31550639d28b6a144e04782ac
+// flow-typed signature: 9b57844bb075f8c72e55b7dbed3a5ca8
 // flow-typed version: <<STUB>>/connect-redis_v^3.3.0/flow_v0.48.0
 
 /**
@@ -30,14 +30,6 @@ declare module 'connect-redis/lib/connect-redis' {
   declare module.exports: any;
 }
 
-declare module 'connect-redis/test/connect-redis-test' {
-  declare module.exports: any;
-}
-
-declare module 'connect-redis/test/redis-server' {
-  declare module.exports: any;
-}
-
 // Filename aliases
 declare module 'connect-redis/bench/redisbench.js' {
   declare module.exports: $Exports<'connect-redis/bench/redisbench'>;
@@ -50,10 +42,4 @@ declare module 'connect-redis/index.js' {
 }
 declare module 'connect-redis/lib/connect-redis.js' {
   declare module.exports: $Exports<'connect-redis/lib/connect-redis'>;
-}
-declare module 'connect-redis/test/connect-redis-test.js' {
-  declare module.exports: $Exports<'connect-redis/test/connect-redis-test'>;
-}
-declare module 'connect-redis/test/redis-server.js' {
-  declare module.exports: $Exports<'connect-redis/test/redis-server'>;
 }

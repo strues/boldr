@@ -1,4 +1,4 @@
-// flow-typed signature: 5e772f2f1044b6472f6c877cab583422
+// flow-typed signature: 10f3b90d11f12d4d3831f6aa6bb066a8
 // flow-typed version: <<STUB>>/graphql-subscriptions_v^0.4.3/flow_v0.48.0
 
 /**
@@ -42,14 +42,6 @@ declare module 'graphql-subscriptions/dist/subscriptions-manager' {
   declare module.exports: any;
 }
 
-declare module 'graphql-subscriptions/dist/test/asyncIteratorSubscription' {
-  declare module.exports: any;
-}
-
-declare module 'graphql-subscriptions/dist/test/tests' {
-  declare module.exports: any;
-}
-
 declare module 'graphql-subscriptions/dist/validation' {
   declare module.exports: any;
 }
@@ -73,12 +65,6 @@ declare module 'graphql-subscriptions/dist/pubsub.js' {
 }
 declare module 'graphql-subscriptions/dist/subscriptions-manager.js' {
   declare module.exports: $Exports<'graphql-subscriptions/dist/subscriptions-manager'>;
-}
-declare module 'graphql-subscriptions/dist/test/asyncIteratorSubscription.js' {
-  declare module.exports: $Exports<'graphql-subscriptions/dist/test/asyncIteratorSubscription'>;
-}
-declare module 'graphql-subscriptions/dist/test/tests.js' {
-  declare module.exports: $Exports<'graphql-subscriptions/dist/test/tests'>;
 }
 declare module 'graphql-subscriptions/dist/validation.js' {
   declare module.exports: $Exports<'graphql-subscriptions/dist/validation'>;

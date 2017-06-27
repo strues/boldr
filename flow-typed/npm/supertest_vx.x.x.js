@@ -1,4 +1,4 @@
-// flow-typed signature: 98f20cb895636c2dbc2b4922560e996f
+// flow-typed signature: 21df2f426747e2d67424d6ef2b6b9f50
 // flow-typed version: <<STUB>>/supertest_v^3.0.0/flow_v0.48.0
 
 /**
@@ -30,10 +30,6 @@ declare module 'supertest/lib/test' {
   declare module.exports: any;
 }
 
-declare module 'supertest/test/supertest' {
-  declare module.exports: any;
-}
-
 // Filename aliases
 declare module 'supertest/index' {
   declare module.exports: $Exports<'supertest'>;
@@ -46,7 +42,4 @@ declare module 'supertest/lib/agent.js' {
 }
 declare module 'supertest/lib/test.js' {
   declare module.exports: $Exports<'supertest/lib/test'>;
-}
-declare module 'supertest/test/supertest.js' {
-  declare module.exports: $Exports<'supertest/test/supertest'>;
 }

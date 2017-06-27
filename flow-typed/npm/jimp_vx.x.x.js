@@ -1,4 +1,4 @@
-// flow-typed signature: 3a4bef0b288510c5c2ad79e4ac9e1582
+// flow-typed signature: 6995869af5ed3fa83463322936e63e46
 // flow-typed version: <<STUB>>/jimp_v^0.2.28/flow_v0.48.0
 
 /**
@@ -22,10 +22,6 @@ declare module 'jimp' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'jimp/browser/examples/jimp-worker' {
-  declare module.exports: any;
-}
-
 declare module 'jimp/browser/lib/jimp' {
   declare module.exports: any;
 }
@@ -63,9 +59,6 @@ declare module 'jimp/server' {
 }
 
 // Filename aliases
-declare module 'jimp/browser/examples/jimp-worker.js' {
-  declare module.exports: $Exports<'jimp/browser/examples/jimp-worker'>;
-}
 declare module 'jimp/browser/lib/jimp.js' {
   declare module.exports: $Exports<'jimp/browser/lib/jimp'>;
 }

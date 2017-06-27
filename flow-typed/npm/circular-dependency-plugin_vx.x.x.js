@@ -1,4 +1,4 @@
-// flow-typed signature: c395cd8424e0c16479fbcbaaba0ec229
+// flow-typed signature: 6fd059de5ae417954a2566b5979f35bc
 // flow-typed version: <<STUB>>/circular-dependency-plugin_v^3.0.0/flow_v0.48.0
 
 /**
@@ -22,84 +22,9 @@ declare module 'circular-dependency-plugin' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
-declare module 'circular-dependency-plugin/__tests__/deps/a' {
-  declare module.exports: any;
-}
 
-declare module 'circular-dependency-plugin/__tests__/deps/b' {
-  declare module.exports: any;
-}
-
-declare module 'circular-dependency-plugin/__tests__/deps/c' {
-  declare module.exports: any;
-}
-
-declare module 'circular-dependency-plugin/__tests__/deps/context/a' {
-  declare module.exports: any;
-}
-
-declare module 'circular-dependency-plugin/__tests__/deps/d' {
-  declare module.exports: any;
-}
-
-declare module 'circular-dependency-plugin/__tests__/deps/e' {
-  declare module.exports: any;
-}
-
-declare module 'circular-dependency-plugin/__tests__/deps/f' {
-  declare module.exports: any;
-}
-
-declare module 'circular-dependency-plugin/__tests__/deps/g' {
-  declare module.exports: any;
-}
-
-declare module 'circular-dependency-plugin/__tests__/deps/h' {
-  declare module.exports: any;
-}
-
-declare module 'circular-dependency-plugin/__tests__/deps/i' {
-  declare module.exports: any;
-}
-
-declare module 'circular-dependency-plugin/__tests__/index_test' {
-  declare module.exports: any;
-}
 
 // Filename aliases
-declare module 'circular-dependency-plugin/__tests__/deps/a.js' {
-  declare module.exports: $Exports<'circular-dependency-plugin/__tests__/deps/a'>;
-}
-declare module 'circular-dependency-plugin/__tests__/deps/b.js' {
-  declare module.exports: $Exports<'circular-dependency-plugin/__tests__/deps/b'>;
-}
-declare module 'circular-dependency-plugin/__tests__/deps/c.js' {
-  declare module.exports: $Exports<'circular-dependency-plugin/__tests__/deps/c'>;
-}
-declare module 'circular-dependency-plugin/__tests__/deps/context/a.js' {
-  declare module.exports: $Exports<'circular-dependency-plugin/__tests__/deps/context/a'>;
-}
-declare module 'circular-dependency-plugin/__tests__/deps/d.js' {
-  declare module.exports: $Exports<'circular-dependency-plugin/__tests__/deps/d'>;
-}
-declare module 'circular-dependency-plugin/__tests__/deps/e.js' {
-  declare module.exports: $Exports<'circular-dependency-plugin/__tests__/deps/e'>;
-}
-declare module 'circular-dependency-plugin/__tests__/deps/f.js' {
-  declare module.exports: $Exports<'circular-dependency-plugin/__tests__/deps/f'>;
-}
-declare module 'circular-dependency-plugin/__tests__/deps/g.js' {
-  declare module.exports: $Exports<'circular-dependency-plugin/__tests__/deps/g'>;
-}
-declare module 'circular-dependency-plugin/__tests__/deps/h.js' {
-  declare module.exports: $Exports<'circular-dependency-plugin/__tests__/deps/h'>;
-}
-declare module 'circular-dependency-plugin/__tests__/deps/i.js' {
-  declare module.exports: $Exports<'circular-dependency-plugin/__tests__/deps/i'>;
-}
-declare module 'circular-dependency-plugin/__tests__/index_test.js' {
-  declare module.exports: $Exports<'circular-dependency-plugin/__tests__/index_test'>;
-}
 declare module 'circular-dependency-plugin/index' {
   declare module.exports: $Exports<'circular-dependency-plugin'>;
 }

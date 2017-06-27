@@ -1,4 +1,4 @@
-// flow-typed signature: 8f644ab0ae0913cf40bced02014e29e2
+// flow-typed signature: 52dc7547e2db872c0669a070e5f79d6e
 // flow-typed version: <<STUB>>/lint-staged_v^4.0.0/flow_v0.48.0
 
 /**
@@ -46,42 +46,6 @@ declare module 'lint-staged/src/runScript' {
   declare module.exports: any;
 }
 
-declare module 'lint-staged/test/__mocks__/execa' {
-  declare module.exports: any;
-}
-
-declare module 'lint-staged/test/__mocks__/npm-which' {
-  declare module.exports: any;
-}
-
-declare module 'lint-staged/test/calcChunkSize.spec' {
-  declare module.exports: any;
-}
-
-declare module 'lint-staged/test/findBin.spec' {
-  declare module.exports: any;
-}
-
-declare module 'lint-staged/test/generateTasks.spec' {
-  declare module.exports: any;
-}
-
-declare module 'lint-staged/test/readConfigOption.spec' {
-  declare module.exports: any;
-}
-
-declare module 'lint-staged/test/runScript-mock-findBin.spec' {
-  declare module.exports: any;
-}
-
-declare module 'lint-staged/test/runScript-mock-pMap.spec' {
-  declare module.exports: any;
-}
-
-declare module 'lint-staged/test/runScript.spec' {
-  declare module.exports: any;
-}
-
 declare module 'lint-staged/wallaby' {
   declare module.exports: any;
 }
@@ -110,33 +74,6 @@ declare module 'lint-staged/src/readConfigOption.js' {
 }
 declare module 'lint-staged/src/runScript.js' {
   declare module.exports: $Exports<'lint-staged/src/runScript'>;
-}
-declare module 'lint-staged/test/__mocks__/execa.js' {
-  declare module.exports: $Exports<'lint-staged/test/__mocks__/execa'>;
-}
-declare module 'lint-staged/test/__mocks__/npm-which.js' {
-  declare module.exports: $Exports<'lint-staged/test/__mocks__/npm-which'>;
-}
-declare module 'lint-staged/test/calcChunkSize.spec.js' {
-  declare module.exports: $Exports<'lint-staged/test/calcChunkSize.spec'>;
-}
-declare module 'lint-staged/test/findBin.spec.js' {
-  declare module.exports: $Exports<'lint-staged/test/findBin.spec'>;
-}
-declare module 'lint-staged/test/generateTasks.spec.js' {
-  declare module.exports: $Exports<'lint-staged/test/generateTasks.spec'>;
-}
-declare module 'lint-staged/test/readConfigOption.spec.js' {
-  declare module.exports: $Exports<'lint-staged/test/readConfigOption.spec'>;
-}
-declare module 'lint-staged/test/runScript-mock-findBin.spec.js' {
-  declare module.exports: $Exports<'lint-staged/test/runScript-mock-findBin.spec'>;
-}
-declare module 'lint-staged/test/runScript-mock-pMap.spec.js' {
-  declare module.exports: $Exports<'lint-staged/test/runScript-mock-pMap.spec'>;
-}
-declare module 'lint-staged/test/runScript.spec.js' {
-  declare module.exports: $Exports<'lint-staged/test/runScript.spec'>;
 }
 declare module 'lint-staged/wallaby.js' {
   declare module.exports: $Exports<'lint-staged/wallaby'>;

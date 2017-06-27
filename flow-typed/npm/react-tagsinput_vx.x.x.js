@@ -1,4 +1,4 @@
-// flow-typed signature: 87c25a8180f8811a5b9cfe4cae4b7ab9
+// flow-typed signature: 0db32a11c9447f191be3547e52576efe
 // flow-typed version: <<STUB>>/react-tagsinput_v^3.17.0/flow_v0.48.0
 
 /**
@@ -34,10 +34,6 @@ declare module 'react-tagsinput/src/index' {
   declare module.exports: any;
 }
 
-declare module 'react-tagsinput/test/index' {
-  declare module.exports: any;
-}
-
 // Filename aliases
 declare module 'react-tagsinput/postcss.config.js' {
   declare module.exports: $Exports<'react-tagsinput/postcss.config'>;
@@ -47,7 +43,4 @@ declare module 'react-tagsinput/react-tagsinput.js' {
 }
 declare module 'react-tagsinput/src/index.js' {
   declare module.exports: $Exports<'react-tagsinput/src/index'>;
-}
-declare module 'react-tagsinput/test/index.js' {
-  declare module.exports: $Exports<'react-tagsinput/test/index'>;
 }

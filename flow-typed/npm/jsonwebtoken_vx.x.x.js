@@ -1,4 +1,4 @@
-// flow-typed signature: 238f271634c3c75a3b50c492fcac449f
+// flow-typed signature: be49335dc0bfa07d81c0cf3d19b004cb
 // flow-typed version: <<STUB>>/jsonwebtoken_v^7.4.1/flow_v0.48.0
 
 /**
@@ -46,90 +46,6 @@ declare module 'jsonwebtoken/sign' {
   declare module.exports: any;
 }
 
-declare module 'jsonwebtoken/test/async_sign.tests' {
-  declare module.exports: any;
-}
-
-declare module 'jsonwebtoken/test/buffer.tests' {
-  declare module.exports: any;
-}
-
-declare module 'jsonwebtoken/test/encoding.tests' {
-  declare module.exports: any;
-}
-
-declare module 'jsonwebtoken/test/expires_format.tests' {
-  declare module.exports: any;
-}
-
-declare module 'jsonwebtoken/test/iat.tests' {
-  declare module.exports: any;
-}
-
-declare module 'jsonwebtoken/test/invalid_exp.tests' {
-  declare module.exports: any;
-}
-
-declare module 'jsonwebtoken/test/issue_147.tests' {
-  declare module.exports: any;
-}
-
-declare module 'jsonwebtoken/test/issue_196.tests' {
-  declare module.exports: any;
-}
-
-declare module 'jsonwebtoken/test/issue_304.tests' {
-  declare module.exports: any;
-}
-
-declare module 'jsonwebtoken/test/issue_70.tests' {
-  declare module.exports: any;
-}
-
-declare module 'jsonwebtoken/test/jwt.hs.tests' {
-  declare module.exports: any;
-}
-
-declare module 'jsonwebtoken/test/jwt.rs.tests' {
-  declare module.exports: any;
-}
-
-declare module 'jsonwebtoken/test/keyid.tests' {
-  declare module.exports: any;
-}
-
-declare module 'jsonwebtoken/test/non_object_values.tests' {
-  declare module.exports: any;
-}
-
-declare module 'jsonwebtoken/test/noTimestamp.tests' {
-  declare module.exports: any;
-}
-
-declare module 'jsonwebtoken/test/rsa-public-key.tests' {
-  declare module.exports: any;
-}
-
-declare module 'jsonwebtoken/test/set_headers.tests' {
-  declare module.exports: any;
-}
-
-declare module 'jsonwebtoken/test/undefined_secretOrPublickey.tests' {
-  declare module.exports: any;
-}
-
-declare module 'jsonwebtoken/test/util/fakeDate' {
-  declare module.exports: any;
-}
-
-declare module 'jsonwebtoken/test/verify.tests' {
-  declare module.exports: any;
-}
-
-declare module 'jsonwebtoken/test/wrong_alg.tests' {
-  declare module.exports: any;
-}
-
 declare module 'jsonwebtoken/verify' {
   declare module.exports: any;
 }
@@ -158,69 +74,6 @@ declare module 'jsonwebtoken/lib/TokenExpiredError.js' {
 }
 declare module 'jsonwebtoken/sign.js' {
   declare module.exports: $Exports<'jsonwebtoken/sign'>;
-}
-declare module 'jsonwebtoken/test/async_sign.tests.js' {
-  declare module.exports: $Exports<'jsonwebtoken/test/async_sign.tests'>;
-}
-declare module 'jsonwebtoken/test/buffer.tests.js' {
-  declare module.exports: $Exports<'jsonwebtoken/test/buffer.tests'>;
-}
-declare module 'jsonwebtoken/test/encoding.tests.js' {
-  declare module.exports: $Exports<'jsonwebtoken/test/encoding.tests'>;
-}
-declare module 'jsonwebtoken/test/expires_format.tests.js' {
-  declare module.exports: $Exports<'jsonwebtoken/test/expires_format.tests'>;
-}
-declare module 'jsonwebtoken/test/iat.tests.js' {
-  declare module.exports: $Exports<'jsonwebtoken/test/iat.tests'>;
-}
-declare module 'jsonwebtoken/test/invalid_exp.tests.js' {
-  declare module.exports: $Exports<'jsonwebtoken/test/invalid_exp.tests'>;
-}
-declare module 'jsonwebtoken/test/issue_147.tests.js' {
-  declare module.exports: $Exports<'jsonwebtoken/test/issue_147.tests'>;
-}
-declare module 'jsonwebtoken/test/issue_196.tests.js' {
-  declare module.exports: $Exports<'jsonwebtoken/test/issue_196.tests'>;
-}
-declare module 'jsonwebtoken/test/issue_304.tests.js' {
-  declare module.exports: $Exports<'jsonwebtoken/test/issue_304.tests'>;
-}
-declare module 'jsonwebtoken/test/issue_70.tests.js' {
-  declare module.exports: $Exports<'jsonwebtoken/test/issue_70.tests'>;
-}
-declare module 'jsonwebtoken/test/jwt.hs.tests.js' {
-  declare module.exports: $Exports<'jsonwebtoken/test/jwt.hs.tests'>;
-}
-declare module 'jsonwebtoken/test/jwt.rs.tests.js' {
-  declare module.exports: $Exports<'jsonwebtoken/test/jwt.rs.tests'>;
-}
-declare module 'jsonwebtoken/test/keyid.tests.js' {
-  declare module.exports: $Exports<'jsonwebtoken/test/keyid.tests'>;
-}
-declare module 'jsonwebtoken/test/non_object_values.tests.js' {
-  declare module.exports: $Exports<'jsonwebtoken/test/non_object_values.tests'>;
-}
-declare module 'jsonwebtoken/test/noTimestamp.tests.js' {
-  declare module.exports: $Exports<'jsonwebtoken/test/noTimestamp.tests'>;
-}
-declare module 'jsonwebtoken/test/rsa-public-key.tests.js' {
-  declare module.exports: $Exports<'jsonwebtoken/test/rsa-public-key.tests'>;
-}
-declare module 'jsonwebtoken/test/set_headers.tests.js' {
-  declare module.exports: $Exports<'jsonwebtoken/test/set_headers.tests'>;
-}
-declare module 'jsonwebtoken/test/undefined_secretOrPublickey.tests.js' {
-  declare module.exports: $Exports<'jsonwebtoken/test/undefined_secretOrPublickey.tests'>;
-}
-declare module 'jsonwebtoken/test/util/fakeDate.js' {
-  declare module.exports: $Exports<'jsonwebtoken/test/util/fakeDate'>;
-}
-declare module 'jsonwebtoken/test/verify.tests.js' {
-  declare module.exports: $Exports<'jsonwebtoken/test/verify.tests'>;
-}
-declare module 'jsonwebtoken/test/wrong_alg.tests.js' {
-  declare module.exports: $Exports<'jsonwebtoken/test/wrong_alg.tests'>;
 }
 declare module 'jsonwebtoken/verify.js' {
   declare module.exports: $Exports<'jsonwebtoken/verify'>;

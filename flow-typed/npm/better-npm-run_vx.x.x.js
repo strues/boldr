@@ -1,4 +1,4 @@
-// flow-typed signature: 53eb0192329a309b41693fb0f7eaacad
+// flow-typed signature: b208b8fb6cc42f4982452967cb241fab
 // flow-typed version: <<STUB>>/better-npm-run_v^0.0.15/flow_v0.48.0
 
 /**
@@ -26,22 +26,6 @@ declare module 'better-npm-run/lib/exec' {
   declare module.exports: any;
 }
 
-declare module 'better-npm-run/test/command' {
-  declare module.exports: any;
-}
-
-declare module 'better-npm-run/test/env-extend' {
-  declare module.exports: any;
-}
-
-declare module 'better-npm-run/test/env' {
-  declare module.exports: any;
-}
-
-declare module 'better-npm-run/test/params' {
-  declare module.exports: any;
-}
-
 // Filename aliases
 declare module 'better-npm-run/index' {
   declare module.exports: $Exports<'better-npm-run'>;
@@ -51,16 +35,4 @@ declare module 'better-npm-run/index.js' {
 }
 declare module 'better-npm-run/lib/exec.js' {
   declare module.exports: $Exports<'better-npm-run/lib/exec'>;
-}
-declare module 'better-npm-run/test/command.js' {
-  declare module.exports: $Exports<'better-npm-run/test/command'>;
-}
-declare module 'better-npm-run/test/env-extend.js' {
-  declare module.exports: $Exports<'better-npm-run/test/env-extend'>;
-}
-declare module 'better-npm-run/test/env.js' {
-  declare module.exports: $Exports<'better-npm-run/test/env'>;
-}
-declare module 'better-npm-run/test/params.js' {
-  declare module.exports: $Exports<'better-npm-run/test/params'>;
 }

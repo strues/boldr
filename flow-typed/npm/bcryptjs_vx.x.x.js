@@ -1,4 +1,4 @@
-// flow-typed signature: 537895aa4930204571ad8edb73424908
+// flow-typed signature: e5cfa0ad36de3b497518bf544d656030
 // flow-typed version: <<STUB>>/bcryptjs_v^2.4.3/flow_v0.48.0
 
 /**
@@ -70,10 +70,6 @@ declare module 'bcryptjs/src/wrap' {
   declare module.exports: any;
 }
 
-declare module 'bcryptjs/tests/suite' {
-  declare module.exports: any;
-}
-
 // Filename aliases
 declare module 'bcryptjs/dist/bcrypt.js' {
   declare module.exports: $Exports<'bcryptjs/dist/bcrypt'>;
@@ -116,7 +112,4 @@ declare module 'bcryptjs/src/bcrypt/util/base64.js' {
 }
 declare module 'bcryptjs/src/wrap.js' {
   declare module.exports: $Exports<'bcryptjs/src/wrap'>;
-}
-declare module 'bcryptjs/tests/suite.js' {
-  declare module.exports: $Exports<'bcryptjs/tests/suite'>;
 }
