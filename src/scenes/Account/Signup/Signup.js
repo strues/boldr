@@ -2,15 +2,21 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
 import Helmet from 'react-helmet';
+import styled from 'styled-components';
+import { Grid, Col, Row } from '@boldr/ui/Layout';
 // internal
 import FormCard from '../../../components/Form/FormCard';
 import SignupForm from './SignupForm';
+
+const Spacer = styled.div`
+  margin-top: 100px;
+`;
 
 const Signup = (props: { onSubmit: () => void }) => {
   const formBottom = (
     <div>
       <span>Already have an account?</span>
-      <Link to="/account/login"> Login</Link>
+      <Link to="/login"> Login</Link>
     </div>
   );
   function submitSignup(formInput) {
@@ -19,14 +25,19 @@ const Signup = (props: { onSubmit: () => void }) => {
   return (
     <div>
       <Helmet title="Signup" />
-      <div className="boldr-form__signup">
-        <FormCard
-          skinny={false}
-          title="Create an account"
-          form={<SignupForm onSubmit={submitSignup} />}
-          extra1={formBottom}
-        />
-      </div>
+      <Grid>
+        <Row>
+          <Col xs={12}>
+            <Row center="xs">
+              <Col xs={12} sm={8}>
+                <Spacer />
+                <SignupForm onSubmit={submitSignup} />
+                {formBottom}
+              </Col>
+            </Row>
+          </Col>
+        </Row>
+      </Grid>
     </div>
   );
 };

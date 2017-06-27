@@ -32,6 +32,11 @@ export const config = convict({
     format: Boolean,
     default: false,
   },
+  siteUrl: {
+    format: String,
+    default: 'http://localhost:3000',
+    env: 'SITE_URL',
+  },
   api: {
     port: {
       format: 'port',

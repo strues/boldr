@@ -11,7 +11,7 @@ const logTransports = [
     level: LOG_LEVEL,
     handleExceptions: true,
     json: isProd,
-    timestamp: () => format('YYYY-MM-DD THH:mm:ss, SSSZ'),
+    timestamp: () => format(Date.now(), 'YYYY-MM-DD THH:mm:ss'),
     prettyPrint: !isProd,
     colorize: !isProd,
   }),

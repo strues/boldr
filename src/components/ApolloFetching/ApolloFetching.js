@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import hoistStatics from 'hoist-non-react-statics';
 
-import View from '../View';
+// import View from '../View';
 import { formatGeneralAPIErrors } from '../../core/reduxFormErrors';
 
 const getDisplayName = WrappedComponent =>

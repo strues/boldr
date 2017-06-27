@@ -17,7 +17,7 @@ const ForgotPasswordForm = (props: Props) => {
   return (
     <Form onSubmit={handleSubmit} className="boldr-form__generic">
       <Field id="email" name="email" type="email" label="Email" component={InputField} />
-      <Button type="submit" style={style} isFullWidth>Send Reset Link</Button>
+      <Button htmlType="submit" style={style} kind="primary" outline>Send Reset Link</Button>
     </Form>
   );
 };

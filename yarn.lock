@@ -23,16 +23,16 @@
     simple-git "^1.73.0"
     update-notifier "^2.2.0"
 
-"@boldr/ui@0.1.0-beta.5":
-  version "0.1.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@boldr/ui/-/ui-0.1.0-beta.5.tgz#930441c238669f2eb2ab55a035b1322fde56ef87"
+"@boldr/ui@0.1.0-beta.8":
+  version "0.1.0-beta.8"
+  resolved "https://registry.yarnpkg.com/@boldr/ui/-/ui-0.1.0-beta.8.tgz#7a6f1b5aaaff488f1046ac4740e76fd9d9c67154"
   dependencies:
     classnames "^2.2.5"
     lodash "^4.17.4"
     object-assign "^4.1.1"
     prop-types "^15.5.10"
     ramda "^0.24.1"
-    react-modal "^2.0.6"
+    react-modal "^2.1.0"
     react-motion "^0.5.0"
     react-visibility-sensor "^3.10.0"
     styled-components "^2.1.0"
@@ -2032,7 +2032,7 @@ create-hmac@^1.1.0, create-hmac@^1.1.2, create-hmac@^1.1.4:
     safe-buffer "^5.0.1"
     sha.js "^2.4.8"
 
-create-react-class@^15.5.1, create-react-class@^15.5.3, create-react-class@^15.6.0:
+create-react-class@^15.5.1, create-react-class@^15.5.2, create-react-class@^15.5.3, create-react-class@^15.6.0:
   version "15.6.0"
   resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.6.0.tgz#ab448497c26566e1e29413e883207d57cfe7bed4"
   dependencies:
@@ -2273,6 +2273,13 @@ dashdash@^1.12.0:
   resolved "https://registry.yarnpkg.com/dashdash/-/dashdash-1.14.1.tgz#853cfa0f7cbe2fed5de20326b8dd581035f6e2f0"
   dependencies:
     assert-plus "^1.0.0"
+
+data-driven-motion@^0.0.11:
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/data-driven-motion/-/data-driven-motion-0.0.11.tgz#4ee34905d9e5cdcdac2e03585cc3ddd9312e05bf"
+  dependencies:
+    prop-types "^15.5.10"
+    react-motion "^0.4.7"
 
 dataloader@^1.3.0:
   version "1.3.0"
@@ -3875,6 +3882,10 @@ hoist-non-react-statics@^1.0.0, hoist-non-react-statics@^1.0.3, hoist-non-react-
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
 
+hoist-non-react-statics@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.0.0.tgz#843180515e0281952b08f41c620ca74870c7e354"
+
 home-or-tmp@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/home-or-tmp/-/home-or-tmp-2.0.0.tgz#e36c3f2d2cae7d746a857e38d18d5f32a7882db8"
@@ -4013,10 +4024,6 @@ immutable@^3.8.1:
 immutable@^3.x.x, immutable@~3.7.4:
   version "3.7.6"
   resolved "https://registry.yarnpkg.com/immutable/-/immutable-3.7.6.tgz#13b4d3cb12befa15482a26fe1b2ebae640071e4b"
-
-import-inspector@^2.0.0:
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/import-inspector/-/import-inspector-2.0.0.tgz#ce75fdb6a277d2800effe097e2295bc8690b2923"
 
 import-lazy@^2.1.0:
   version "2.1.0"
@@ -4382,10 +4389,6 @@ is-upper-case@^1.1.0:
 is-utf8@^0.2.0:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/is-utf8/-/is-utf8-0.2.1.tgz#4b0da1442104d1b336340e80797e865cf39f7d72"
-
-is-webpack-bundle@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/is-webpack-bundle/-/is-webpack-bundle-1.0.0.tgz#576a50bb7c53d1d6a5c1647939c93ae2cbb90eea"
 
 is-windows@^0.2.0:
   version "0.2.0"
@@ -7396,22 +7399,23 @@ react-hot-loader@^3.0.0-beta.7:
     redbox-react "^1.3.6"
     source-map "^0.4.4"
 
-react-loadable@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/react-loadable/-/react-loadable-4.0.3.tgz#296c5cdfba3d402d66d2120d52fc08c2ca1f3088"
-  dependencies:
-    import-inspector "^2.0.0"
-    is-webpack-bundle "^1.0.0"
-    webpack-require-weak "^1.0.0"
-
-react-modal@^2.0.6:
-  version "2.0.6"
-  resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-2.0.6.tgz#00eaa806ec6b52625e25716cda07734692c99e31"
+react-modal@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-modal/-/react-modal-2.1.0.tgz#0d230d393ef17f45cc4f962bec261bb0c39d6fcd"
   dependencies:
     element-class "^0.2.0"
     exenv "1.2.0"
     prop-types "^15.5.10"
     react-dom-factories "^1.0.0"
+
+react-motion@^0.4.7:
+  version "0.4.8"
+  resolved "https://registry.yarnpkg.com/react-motion/-/react-motion-0.4.8.tgz#23bb2dd27c2d8e00d229e45572d105efcf40a35e"
+  dependencies:
+    create-react-class "^15.5.2"
+    performance-now "^0.2.0"
+    prop-types "^15.5.8"
+    raf "^3.1.0"
 
 react-motion@^0.5.0:
   version "0.5.0"
@@ -9254,12 +9258,6 @@ webpack-hot-middleware@^2.18.0:
     html-entities "^1.2.0"
     querystring "^0.2.0"
     strip-ansi "^3.0.0"
-
-webpack-require-weak@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/webpack-require-weak/-/webpack-require-weak-1.0.1.tgz#a6a8e60871bebbe5b085a915ab0af633a412433f"
-  dependencies:
-    is-webpack-bundle "^1.0.0"
 
 webpack-sources@^0.2.3:
   version "0.2.3"

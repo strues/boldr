@@ -9,7 +9,7 @@ const welcomeEmail = verificationToken =>
         <div style='background-color: #f2f2f2; padding: 45px;'>
         <div style='background-color: #ffffff; padding: 40px; text-align: center;'>
         <p style='color: #5f5f5f;'>Click the big button below to activate your account.</p>
-        <a href="${config.server.siteUrl}/account/verify/${verificationToken}"
+        <a href="${config.siteUrl}/account/verify/${verificationToken}"
         style='background-color: #288feb; color: #fff;
         padding: 14px; text-decoration: none; border-radius: 5px;
         margin-top: 20px; display: inline-block;'>Activate Account</a>
@@ -24,7 +24,7 @@ const forgotPasswordEmail = verificationToken =>
     <div style='background-color: #f2f2f2; padding: 45px;'>
     <div style='background-color: #ffffff; padding: 40px; text-align: center;'>
     <p style='color: #5f5f5f;'>Click the big button below to finish resetting your password.</p>
-    <a href="${config.server.siteUrl}/account/reset-password/${verificationToken}"
+    <a href="${config.siteUrl}/account/reset-password/${verificationToken}"
     style='background-color: #288feb; color: #fff;
     padding: 14px; text-decoration: none; border-radius: 5px;
     margin-top: 20px; display: inline-block;'>Reset password</a>

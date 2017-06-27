@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import cxN from 'classnames';
 import omit from 'lodash/omit';
+import Link from 'react-router-dom/Link';
 
 const BLACK_LIST = [
   'type',
@@ -73,14 +74,14 @@ export default class Button extends Component {
     const nodeProps = omit(this.props, LINK_BLACKLIST);
 
     return (
-      <Element
-        {...(disabled ? {} : { href, target })}
+      <Link
+        {...(disabled ? {} : { to: href, target })}
         {...nodeProps}
         className={classNames}
         onClick={this.handleClick}
       >
         {this.props.children}
-      </Element>
+      </Link>
     );
   }
 

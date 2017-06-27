@@ -10,7 +10,7 @@ import appRoot from 'boldr-utils/lib/node/appRoot';
 import { GraphQLUUID } from '../scalars';
 import Media from '../../models/Media';
 import slugIt from '../../utils/slugIt';
-import MediaType, { FileType, UploadMediaInput } from './mediaType';
+import MediaType, { FileType, UploadMediaInput, EditMediaInput } from './mediaType';
 
 const debug = _debug('boldr:server:articleMutation');
 const UPLOAD_DIR = path.resolve(appRoot.get(), './public/uploads');
@@ -54,6 +54,28 @@ export default {
         userId: context.user.id,
       });
       return newMedia;
+    },
+  },
+  editMedia: {
+    type: MediaType,
+    description: 'Edit an existing media file',
+    args: {
+      id: {
+        type: new GraphQLNonNull(GraphQLUUID),
+        description: 'The media ID',
+      },
+      input: {
+        type: new GraphQLNonNull(EditMediaInput),
+        description: 'The required fields for editing a media file.',
+      },
+    },
+    async resolve(_, args, context) {
+      debug(args);
+      const updatedArticle = await Media.query().patchAndFetchById(args.id, {
+        name: args.input.name,
+        fileDescription: args.input.fileDescription,
+      });
+      return updatedArticle;
     },
   },
 };

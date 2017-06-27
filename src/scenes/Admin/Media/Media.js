@@ -6,16 +6,15 @@ import filter from 'lodash/filter';
 import Link from 'react-router-dom/Link';
 import styled from 'styled-components';
 import IconButton from 'material-ui/IconButton';
-
-import { Col, Row } from '@@components/Layout';
-import Headline from '@@components/Headline';
-import Photo from '@@components/Photo';
-import FontIcon from '@@components/FontIcon';
+import ImageDisplay from '@boldr/ui/ImageDisplay';
+import { Col, Row } from '@boldr/ui/Layout';
+import Headline from '@boldr/ui/Headline';
+import FontIcon from '@boldr/ui/FontIcon';
 
 type Props = {
   media: Array<Object>,
   deleteMedia: () => void,
-  selectMedia: () => void,
+  imageUpdateClick: () => void,
   siteName: string,
 };
 const MediaList = styled.ul`
@@ -41,6 +40,9 @@ const MediaSidePanel = styled.div`
   padding: 1rem;
 `;
 class Media extends Component {
+  handleClick = m => {
+    this.props.imageUpdateClick(m);
+  };
   props: Props;
   render() {
     const { media } = this.props;
@@ -56,20 +58,12 @@ class Media extends Component {
               <MediaList>
                 {media.map(m =>
                   <MediaItem key={m.id}>
-                    <Photo
-                      src={`/uploads/media/${m.thumbName}`}
-                      alt={m.name}
-                      role="presentation"
-                      cta={
-                        <div>
-                          <Link to={`/admin/media/${m.id}`}>
-                            <IconButton>
-                              <FontIcon>edit</FontIcon>
-                            </IconButton>
-                          </Link>
-
-                        </div>
-                      }
+                    <ImageDisplay
+                      onRemoveImage={() => {}}
+                      onUpdateImage={() => {
+                        this.handleClick(m);
+                      }}
+                      imageSrc={`/uploads/media/${m.thumbName}`}
                     />
                   </MediaItem>,
                 )}

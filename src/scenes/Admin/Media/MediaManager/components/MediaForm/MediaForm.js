@@ -4,8 +4,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Field, reduxForm } from 'redux-form';
 // internal
-import Button from '@@components/Button';
-import { InputField, Form } from '@@components/Form';
+import Button from '@boldr/ui/Button';
+import { InputField, Form } from '@boldr/ui/Form';
 
 const style = {
   margin: 12,
@@ -29,7 +29,7 @@ const MediaForm = (props: Props) => {
   const { handleSubmit, reset } = props;
   return (
     <Form onSubmit={handleSubmit} className="boldr-form__fileeditor">
-      <Field id="name" name="fileName" type="text" label="File name" component={InputField} />
+      <Field id="name" name="name" type="text" label="File name" component={InputField} />
       <Field
         id="description"
         name="fileDescription"

@@ -7,14 +7,14 @@ import EditArticleForm from './components/EditArticleForm';
 
 type Props = {
   currentArticle: Article,
-  editArticle: () => void,
+  editArticle: Function,
 };
 
 class ArticleEditor extends PureComponent {
   props: Props;
 
   handleSubmit = (values: Object) => {
-    const articleId = this.props.currentArticle.id;
+    const articleId: string = this.props.currentArticle.id;
 
     this.props.editArticle(articleId, values);
   };

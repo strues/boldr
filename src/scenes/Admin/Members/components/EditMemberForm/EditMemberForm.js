@@ -52,7 +52,7 @@ const EditMemberForm = (props: Props) => {
         label="Avatar URL"
         component={InputField}
       />
-      <Field name="role" component={SelectInput} options={roles} />
+      <Field name="role" label="Role" component={SelectInput} options={roles} />
       <Button htmlType="submit" style={style} kind="primary">Save</Button>
       <Button onClick={reset} style={style} kind="secondary">Reset</Button>
     </Form>

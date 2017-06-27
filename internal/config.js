@@ -76,6 +76,7 @@ module.exports = {
     'react-transition-group',
     'react-tagsinput',
     'react-motion',
+    'data-driven-motion',
     'react-dropzone',
     'redux',
     'redux-form',

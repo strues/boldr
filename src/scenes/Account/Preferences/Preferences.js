@@ -71,8 +71,8 @@ class Preferences extends Component {
         <Helmet title="Account Preferences" />
         <Grid>
           <Row>
-            <Col xs={12} md={4}>nav</Col>
-            <Col xs={12} md={8}>
+            <Col sm={12} md={4}>nav</Col>
+            <Col sm={12} md={8}>
               <EditProfile profile={this.props.me} />
             </Col>
           </Row>

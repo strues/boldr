@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import uuid from 'uuid/v4';
+import uuid from 'uuid';
 import { mailer, generateHash } from '../../services';
 import { passwordModifiedEmail, forgotPasswordEmail } from '../../services/mailer/templates';
 import User from '../../models/User';
@@ -14,27 +14,22 @@ import ResetToken from '../../models/ResetToken';
  * @returns {*}
  */
 export async function forgottenPassword(req, res, next) {
-  try {
-    const user = await User.query().where({ email: req.body.email }).first();
+  const user = await User.query().where({ email: req.body.email }).first();
+  const mailSubject = '[Boldr] Password Reset';
+  const resetPasswordToken = uuid.v4();
 
-    const mailSubject = '[Boldr] Password Reset';
-    const resetPasswordToken = uuid();
+  await user.$relatedQuery('resetToken').insert({
+    ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
+    token: resetPasswordToken,
+    userId: user.id,
+  });
 
-    await user.$relatedQuery('resetToken').insert({
-      ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
-      token: resetPasswordToken,
-      userId: user.id,
-    });
+  const mailBody = forgotPasswordEmail(resetPasswordToken);
 
-    const mailBody = forgotPasswordEmail(resetPasswordToken);
-
-    await mailer(user, mailBody, mailSubject);
-    return responseHandler(res, 202, {
-      message: 'Sending email with reset link',
-    });
-  } catch (error) {
-    return next(new BadRequest(error));
-  }
+  mailer(user, mailBody, mailSubject);
+  return responseHandler(res, 202, {
+    message: 'Sending email with reset link',
+  });
 }
 
 /**

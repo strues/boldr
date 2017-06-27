@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Helmet from 'react-helmet';
-import Headline from '../../components/Headline';
+import Headline from '@boldr/ui/Headline';
 
 function About() {
   return (

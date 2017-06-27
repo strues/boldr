@@ -4,9 +4,9 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 // internal
-import Headline from '../../components/Headline';
-import Paragraph from '../../components/Paragraph';
-import { Grid, Row, Col } from '../../components/Layout';
+import Headline from '@boldr/ui/Headline';
+import Paragraph from '@boldr/ui/Paragraph';
+import { Grid, Row, Col } from '@boldr/ui/Layout';
 
 const HomeHero = styled.div`
   background-color: #00b4d0;

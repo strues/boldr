@@ -1,6 +1,6 @@
-import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt, GraphQLString } from 'graphql';
+import { GraphQLList, GraphQLNonNull, GraphQLInt, GraphQLString } from 'graphql';
 import _debug from 'debug';
-import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON } from '../scalars';
+import { GraphQLUUID } from '../scalars';
 import User from '../../models/User';
 import { db } from '../../services/db';
 import UserType from './userType';

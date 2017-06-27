@@ -119,4 +119,5 @@ export const SETTINGS_QUERY = gql`
     }
   }
 `;
+
 export default graphql(SETTINGS_QUERY)(App);

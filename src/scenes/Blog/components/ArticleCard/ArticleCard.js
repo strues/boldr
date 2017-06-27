@@ -8,7 +8,7 @@ import { Card, CardTitle, CardText, CardActions, Media, MediaOverlay } from '@bo
 import { StyleClasses } from '../../../../theme/styleClasses';
 import Col from '@boldr/ui/Layout/Col';
 import Row from '@boldr/ui/Layout/Row';
-import Button from '@boldr/ui/Button';
+import Button from '../../../../components/Button';
 
 import { selectArticle } from '../../state/articles/actions';
 

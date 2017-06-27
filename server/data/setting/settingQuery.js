@@ -8,10 +8,11 @@ export default {
     description: 'A query for a listing of all settings',
     async resolve(_, { limit, offset }, context) {
       const settings = await Setting.query().returning('*');
-      if (settings) {
-        return settings;
+      if (!settings) {
+        console.log('error');
       }
-      console.log('error');
+
+      return settings;
     },
   },
 };

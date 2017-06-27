@@ -1,18 +1,18 @@
 /* @flow */
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { gql, graphql } from 'react-apollo';
+import { compose, gql, graphql } from 'react-apollo';
 // internal
-import { Grid, Col, Row } from '@@components/Layout';
-import Photo from '@@components/Photo';
-import Block from '@@components/Block';
-import Headline from '@@components/Headline';
-import Loader from '@@components/Loader';
+import { Grid, Col, Row } from '@boldr/ui/Layout';
+import Photo from '@boldr/ui/Photo';
+import Block from '@boldr/ui/Block';
+import Headline from '@boldr/ui/Headline';
+import Loader from '@boldr/ui/Loader';
 import MediaForm from './components/MediaForm';
 
 type Props = {
   data: Data,
-  editMedia: () => void,
+  editMediaFile: Function,
 };
 type Data = {
   getMediaById: MediaFile,
@@ -29,12 +29,9 @@ const MediaFormCard = styled.div`
 
 class MediaManager extends Component {
   handleSubmit = (values: Object) => {
-    const mediaData = {
-      id: this.props.data.getMediaById.id,
-      fileName: values.fileName,
-      fileDescription: values.fileDescription,
-    };
-    this.props.editMedia(mediaData);
+    const mediaId = this.props.data.getMediaById.id;
+
+    this.props.editMediaFile(mediaId, values);
   };
   props: Props;
   render() {
@@ -89,11 +86,35 @@ export const MEDIA_BY_ID_QUERY = gql`
   }
 `;
 
-const MediaManagerWithData = graphql(MEDIA_BY_ID_QUERY, {
-  options: props => ({
-    variables: {
-      id: props.match.params.id,
-    },
+export const EDIT_MEDIA_MUTATION = gql`
+  mutation editMedia($id: UUID!, $input: EditMediaInput!) {
+    editMedia(id: $id, input: $input) {
+      name
+      fileDescription
+    }
+  }
+`;
+const MediaManagerWithData = compose(
+  graphql(MEDIA_BY_ID_QUERY, {
+    options: props => ({
+      variables: {
+        id: props.match.params.id,
+      },
+    }),
   }),
-})(MediaManager);
+  graphql(EDIT_MEDIA_MUTATION, {
+    props: ({ mutate }) => ({
+      editMediaFile: (mediaId, values) =>
+        mutate({
+          variables: {
+            id: mediaId,
+            input: {
+              name: values.name,
+              fileDescription: values.fileDescription,
+            },
+          },
+        }),
+    }),
+  }),
+)(MediaManager);
 export default MediaManagerWithData;

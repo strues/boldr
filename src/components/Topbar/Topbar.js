@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
+import Avatar from '../Avatar';
 import { StyleClasses } from '../../theme/styleClasses';
 import { mediaQuery } from '../../theme/theme';
 import Toggler from '../Toggler/Toggler';
@@ -159,11 +160,9 @@ class Topbar extends Component {
             : null}
           {this.props.avatarUrl
             ? <div className={`${BASE_ELEMENT}__user`}>
-                <img
+                <Avatar
                   className={`${BASE_ELEMENT}__user-avatar`}
                   src={this.props.avatarUrl}
-                  alt="user avatar image"
-                  height="24"
                 />
                 <Link
                   className={`${BASE_ELEMENT}__user-link`}

@@ -5,5 +5,8 @@
       "boldr/flowtype",
       "boldr/promise",
       "boldr/import"
-    ]
+    ],
+  "globals": {
+    "__CLIENT__": true
+  }
 }

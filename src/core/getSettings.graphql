@@ -1,0 +1,9 @@
+query getSettings {
+  getSettings {
+    id,
+    key,
+    value,
+    label,
+    description,
+  }
+}

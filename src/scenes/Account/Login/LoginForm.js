@@ -4,6 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import Link from 'react-router-dom/Link';
 // $FlowIssue
 import styled from 'styled-components';
+
 import Button from '../../../components/Button';
 import InputField from '../../../components/Form/Fields/InputField';
 import Form from '../../../components/Form/Form';

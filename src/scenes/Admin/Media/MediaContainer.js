@@ -2,40 +2,43 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {push } from 'react-router-redux';
 import { gql, graphql } from 'react-apollo';
 import { bindActionCreators } from 'redux';
-import Loader from '@@components/Loader';
-import { getMediaType, toggleMedia } from '../state/media';
+import Loader from '@boldr/ui/Loader';
 
 import Media from './Media';
 
 type Props = {
   data: Data,
-  toggleMedia: () => void,
+  navigate: () => void,
   dispatch: Function,
 };
 
 type Data = {
-  getMedia: Array<Object>,
+  getMedia: Array<Media>,
   loading: boolean,
 };
 
 export class MediaContainer extends Component {
   props: Props;
 
+  imageUpdateClick = (m: Media) => {
+    this.props.navigate(`/admin/media/${m.id}`);
+  };
   render() {
     const { loading, getMedia } = this.props.data;
     if (loading) {
       return <Loader />;
     }
-    return <Media media={getMedia} />;
+    return <Media media={getMedia} imageUpdateClick={this.imageUpdateClick} />;
   }
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ toggleMedia }, dispatch);
+  return bindActionCreators({ navigate: url => dispatch(push(url)) }, dispatch);
 }
 
-const MEDIA_QUERY = gql`
+export const MEDIA_QUERY = gql`
 query getMedia($offset: Int!, $limit: Int!) {
       getMedia(offset:$offset,limit:$limit) {
         id,

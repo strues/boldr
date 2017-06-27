@@ -1,6 +1,5 @@
-import BaseModel, { mergeSchemas } from './BaseModel';
 import { slugIt } from '../utils';
-
+import BaseModel, { mergeSchemas } from './BaseModel';
 // Related Models
 import Tag from './Tag';
 import User from './User';
