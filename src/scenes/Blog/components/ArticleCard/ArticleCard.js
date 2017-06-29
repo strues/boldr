@@ -5,11 +5,10 @@ import { connect } from 'react-redux';
 import { format } from 'date-fns';
 import classnames from 'classnames';
 import { Card, CardTitle, CardText, CardActions, Media, MediaOverlay } from '@boldr/ui';
-import { StyleClasses } from '../../../../theme/styleClasses';
 import Col from '@boldr/ui/Layout/Col';
 import Row from '@boldr/ui/Layout/Row';
-import Button from '../../../../components/Button';
-
+import Button from '@boldr/ui/Button';
+import { StyleClasses } from '../../../../theme/styleClasses';
 import { selectArticle } from '../../state/articles/actions';
 
 import TagBlock from '../TagBlock';

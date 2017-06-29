@@ -4,62 +4,69 @@ exports[`<ArticleCard /> renders snapshot 1`] = `
 <div
   className="boldrui-post-card"
 >
-  <withStyles(Card)>
-    <withStyles(CardHeader)
-      subheader="Invalid Date"
-      title="Test Post"
-    />
-    <withStyles(CardMedia)>
+  <Card
+    animate={true}
+    className="md-block-centered"
+    expanderIconChildren="keyboard_arrow_down"
+    expanderIconClassName="material-icons"
+    expanderTooltipPosition="left"
+    style={
+      Object {
+        "maxWidth": 600,
+      }
+    }
+  >
+    <Media
+      aspectRatio="16-9"
+      component="section"
+      forceAspect={true}
+    >
       <img
         alt="Test Post feature image"
+        role="presentation"
         src="http://boldr.io/images/logo.png"
       />
-    </withStyles(CardMedia)>
-    <withStyles(CardContent)>
-      An excerpt
-      <Row
-        componentClass="div"
+    </Media>
+    <CardTitle
+      subtitle="Invalid Date"
+      title="Test Post"
+    />
+    <CardActions
+      expander={true}
+    >
+      <Button
+        block={false}
+        bordered={true}
+        className=""
+        disabled={false}
+        href="/blog/test-post"
+        htmlType="button"
+        kind="primary"
+        loading={false}
+        onClick={[Function]}
+        outline={true}
+        prefix="boldrui"
+        size="medium"
       >
-        <Col
-          componentClass="div"
-          sm={12}
-        >
-          <Link
-            className="readmore-link"
-            replace={false}
-            to="/blog/test-post"
-          >
-            <Button
-              block={false}
-              bordered={true}
-              className=""
-              disabled={false}
-              htmlType="button"
-              kind="primary"
-              loading={false}
-              onClick={[Function]}
-              outline={true}
-              prefix="boldrui"
-              size="medium"
-            >
-              Read More
-            </Button>
-          </Link>
-        </Col>
-      </Row>
-    </withStyles(CardContent)>
-    <withStyles(CardActions)>
-      <TagBlock
-        tags={
-          Array [
-            Object {
-              "id": 1,
-              "name": "abc",
-            },
-          ]
-        }
-      />
-    </withStyles(CardActions)>
-  </withStyles(Card)>
+        Read More
+      </Button>
+    </CardActions>
+    <CardText
+      component="section"
+      expandable={true}
+    >
+      An excerpt
+    </CardText>
+    <TagBlock
+      tags={
+        Array [
+          Object {
+            "id": 1,
+            "name": "abc",
+          },
+        ]
+      }
+    />
+  </Card>
 </div>
 `;

@@ -14,7 +14,7 @@ type Data = {
   loading: boolean,
 };
 
-class TagsContainer extends Component {
+export class TagsContainer extends Component {
   props: Props;
 
   render() {

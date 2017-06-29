@@ -15,6 +15,7 @@ exports[`<Home /> renders snapshot 1`] = `
   </styled.div>
   <Grid
     componentClass="div"
+    fluid={false}
   >
     <Row
       componentClass="div"
