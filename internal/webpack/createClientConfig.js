@@ -2,6 +2,7 @@
 
 const path = require('path');
 const fs = require('fs');
+const dotenv = require('dotenv');
 const webpack = require('webpack');
 const StatsPlugin = require('stats-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
@@ -18,7 +19,7 @@ const VerboseProgress = require('./plugins/VerboseProgress');
 
 const LOCAL_IDENT = '[name]__[local]___[hash:base64:5]';
 const EXCLUDES = [/node_modules/, config.assetsDir, config.serverCompiledDir];
-
+dotenv.load();
 module.exports = function createClientConfig(options) {
   const _DEV = process.env.NODE_ENV === 'development';
   const _PROD = process.env.NODE_ENV === 'production';
@@ -59,7 +60,7 @@ module.exports = function createClientConfig(options) {
       filename: _DEV ? '[name].js' : '[name]-[chunkhash].js',
       chunkFilename: _DEV ? '[name]-[hash].js' : '[name]-[chunkhash].js',
       // Full URL in dev otherwise we expect our bundled output to be served from /assets/
-      publicPath: '/',
+      publicPath: '/assets/',
       // only dev
       pathinfo: _DEV,
       libraryTarget: 'var',
@@ -72,7 +73,7 @@ module.exports = function createClientConfig(options) {
     // Cache the generated webpack modules and chunks to improve build speed.
     cache: _DEV,
     // true if prod & enabled in settings
-    profile: !_DEV,
+    profile: false,
     // Include polyfills and/or mocks for node features unavailable in browser
     // environments. These are typically necessary because package's will
     // occasionally include node only code.
@@ -232,6 +233,7 @@ module.exports = function createClientConfig(options) {
       // inlined when compiled with Webpack.
       new webpack.EnvironmentPlugin({
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        BOLDR_GRAPHQL_URL: JSON.stringify(process.env.BOLDR_GRAPHQL_URL),
       }),
       new webpack.DefinePlugin({
         __DEV__: JSON.stringify(_DEV),

@@ -77,7 +77,7 @@ app.use(
 // Note: these will be served off the root (i.e. '/') of our application.
 app.use('/uploads', express.static(pathResolve(appRoot.get(), './public/uploads')));
 
-app.use(express.static(pathResolve(appRoot.get(), './build/assets')));
+app.use('/assets', express.static(pathResolve(appRoot.get(), './build/assets')));
 // Setup the public directory so that we can serve static assets.
 app.use(express.static(pathResolve(appRoot.get(), './public')));
 // Pass any get request through the SSR middleware before sending it back
@@ -85,8 +85,8 @@ app.use(express.static(pathResolve(appRoot.get(), './public')));
 if (process.env.NODE_ENV === 'development') {
   app.use(require('./middleware/hot'));
 } else {
-  const clientStats = require('../build/assets/client-stats.json');
-  const serverRenderer = require('../build/serverRenderer.js').default;
+  const clientStats = require('../assets/client-stats.json');
+  const serverRenderer = require('../serverRenderer.js').default;
 
   // server.use(publicPath, express.static(outputPath))
   app.use(serverRenderer({ clientStats }));

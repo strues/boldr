@@ -2,6 +2,7 @@
 const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
+const dotenv = require('dotenv');
 const ifElse = require('boldr-utils/lib/logic/ifElse');
 const StatsPlugin = require('stats-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
@@ -11,7 +12,7 @@ const ChunkNames = require('./plugins/ChunkNames');
 const VerboseProgress = require('./plugins/VerboseProgress');
 
 const CWD = fs.realpathSync(process.cwd());
-
+dotenv.load();
 const cache = {
   'server-production': {},
   'server-development': {},
@@ -48,7 +49,7 @@ module.exports = function createServerConfig(options) {
       path: path.join(CWD, 'build'),
       filename: 'serverRenderer.js',
       sourcePrefix: '  ',
-      publicPath: '/',
+      publicPath: '/assets/',
       // only prod
       pathinfo: _DEV,
       libraryTarget: 'commonjs2',
@@ -204,6 +205,7 @@ module.exports = function createServerConfig(options) {
       // inlined when compiled with Webpack.
       new webpack.EnvironmentPlugin({
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+        BOLDR_GRAPHQL_URL: JSON.stringify(process.env.BOLDR_GRAPHQL_URL),
       }),
       new webpack.DefinePlugin({
         __DEV__: JSON.stringify(_DEV),

@@ -29,7 +29,7 @@ const token = getToken();
 
 // Apollo network interface
 const networkInterface = createBatchingNetworkInterface({
-  uri: 'http://localhost:3000/api/v1/graphql',
+  uri: process.env.BOLDR_GRAPHQL_URL,
   batchInterval: 10,
 });
 networkInterface.use([

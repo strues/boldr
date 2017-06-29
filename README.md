@@ -13,11 +13,10 @@ Think of Boldr as the solid foundation for building your next great web applicat
 
 
 **Have questions or want to help with development?**
-Join us on <a href="https://slack.boldr.io" target="blank"><img src="/docs/assets/slack-logo.png" height="25" /></a>
-
+Come visit with us
+[![Join the chat at https://gitter.im/boldr](https://badges.gitter.im/boldr.svg)](https://gitter.im/boldr?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Table of Contents
-- [Boldr Repositories](#boldr-repositories)
 - [Current Features](#current-features)
 - [Technology Stack](#core-technologies)
 - [Getting Started](#getting-started)
@@ -30,15 +29,9 @@ Join us on <a href="https://slack.boldr.io" target="blank"><img src="/docs/asset
 - [Screenshots](#screenshots)
 
 
-## Boldr Repositories
-
-- [Boldr UI](https://github.com/boldr/boldr-ui)
-- [Boldr Tools](https://github.com/boldr/boldr-tools)
-
-
 ## Current Features
 
-* GraphQL and REST API.
+* GraphQL API
 * Rich Text Editor / WYSIWYG
 * Server side rendering
 * Authentication with JSON Web Tokens
@@ -47,7 +40,6 @@ Join us on <a href="https://slack.boldr.io" target="blank"><img src="/docs/asset
 * User management with basic role based access control (major expansion of capabilities planned for a later date)
 * Basic user and author profiles.
 * Redis caching
-* Behind-the-scenes commandline build tools
 * Command line interface - Quick and easy project bootstrapping
 
 
@@ -56,7 +48,6 @@ Join us on <a href="https://slack.boldr.io" target="blank"><img src="/docs/asset
 - [Node](https://github.com/nodejs/node)
 - [Express](https://github.com/expressjs/express)
 - [React](https://github.com/facebook/react)
-- [GraphQL](https://github.com/facebook/graphql)
 - [Postgres](https://github.com/postgres/postgres) ([Knex](http://knexjs.org/) & [Objection](https://github.com/Vincit/objection.js/))
 - [Redis](http://redis.io/)
 - [Docker](https://github.com/docker/docker)
@@ -69,7 +60,9 @@ Join us on <a href="https://slack.boldr.io" target="blank"><img src="/docs/asset
 That said, I'm confident the majority of large breaking changes is behind us.
 
 **Step 1**
-First you must somehow get the files to your machine. 
+First you must somehow get the files to your machine.
+
+**Using git:**  
 
 ```shell
   git clone git@github.com:strues/boldr.git <DIR_NAME>
@@ -77,30 +70,21 @@ First you must somehow get the files to your machine.
   yarn
 ```  
 
-**Step 2**   
-
-Prerequisites:
-
-* [Docker](https://docs.docker.com/engine/installation/) (version >1.10.0)
-* [Docker Compose](https://docs.docker.com/compose/install/) (version >1.8.0)
-
-Install the dependencies and setup your database.
-
-If you are running Docker and just want to get Boldr running ASAP, you should use the provided `docker-compose.yml` file. All that's required on your part is running `docker-compose up --build -d`.
-
-#### Not running Docker? Or want to use a different database host? No problem.   
-Modify the db key in the `boldr.js` file located in the `.boldr` directory of the project root. You will also need to swap out anywhere in the `package.json` where the `process.env.BOLDR__DB__URL` is set so that it matches your settings.
-
-
 ## Usage
 
-Boldr runs on the following ports:
-**Frontend**: 3000 - _React SSR server_  
-**Webpack**: 3001 - _dev only_  
+1. Install the files: `yarn install`   
+2. Copy the environment sample: `cp .env_example .env`   
+3. Checkout `server/config.js` and modify any settings.   
+4. Setup services    
+
+Boldr requires a Postgres database and a Redis service. Using the docker-compose.yml file included in the repo is the quickest way.
+
+`docker-compose up --build -d` starts the necessary services (postgres and redis).
+
+Ensure the database is setup with the proper tables and seed data.
 
 
 ### Development
-
 
 Run the CMS using `npm run dev`
 
@@ -108,8 +92,6 @@ After Boldr has started visit <http://localhost:3000>. If you're using the API, 
 
 > Email - admin@boldr.io
 > Password - password
-
-All configuration happens in the `.boldr/boldr.js` file. There you are able to modify values for the server as well as the build process.
 
 
 ### Production
