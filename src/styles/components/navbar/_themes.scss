@@ -104,14 +104,14 @@ $material-brown-fg: #fff;
 // ******* default material-indigo *******
 .#{$boldr-ns}navbar-menu-material-indigo,
 .#{$boldr-ns}navbar-menu-material-indigo .dropdown ul {
-    background-color: $material-indigo-bg;
+    background-color: $midnight;
     color: $material-indigo-fg;
 }
 
 .#{$boldr-ns}navbar-menu-material-indigo {
     .active,
     .#{$boldr-ns}navbar-item:hover {
-        background-color: $material-indigo-hl;
+        background-color: #364b60;
     }
 
     .#{$boldr-ns}navbar-hamburger {

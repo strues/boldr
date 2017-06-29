@@ -42,12 +42,12 @@ const sidebarLinks = [
     id: 4,
     link: '/admin/media/upload',
   },
-  // {
-  //   label: 'Edit Navigation',
-  //   icon: 'fa-link',
-  //   id: 5,
-  //   link: '/admin/navigation',
-  // },
+  {
+    label: 'Navigation',
+    icon: 'navigation',
+    id: 5,
+    link: '/admin/navigation',
+  },
   {
     label: 'Members List',
     icon: 'account',

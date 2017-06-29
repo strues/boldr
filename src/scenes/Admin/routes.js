@@ -20,6 +20,9 @@ const ArticlesContainer = universal(() => import('./Content/Articles/ArticlesCon
 const MediaContainer = universal(() => import('./Media/MediaContainer'), {
   resolve: () => require.resolveWeak('./Media/MediaContainer'),
 });
+const NavigationContainer = universal(() => import('./Navigation/NavigationContainer'), {
+  resolve: () => require.resolveWeak('./Navigation/NavigationContainer'),
+});
 
 export default [
   {
@@ -57,13 +60,13 @@ export default [
       },
     ],
   },
-  //   {
-  //       exact: true,
-  //       path: '/admin/navigation',
-  //       breadcrumb: <Icon kind="more" />,
-  //       component: NavigationContainer,
-  //       routes: [],
-  //   },
+    {
+        exact: true,
+        path: '/admin/navigation',
+        breadcrumb: <Icon kind="more" />,
+        component: NavigationContainer,
+        routes: [],
+    },
   {
     exact: true,
     path: '/admin/settings',

@@ -59,6 +59,9 @@ export default {
     settings: new DataLoader(keys =>
       db.table('setting').whereIn('id', keys).select('*').then(mapTo(keys, x => x.id, 'Setting')),
     ),
+    pages: new DataLoader(keys =>
+      db.table('page').whereIn('id', keys).select('*').then(mapTo(keys, x => x.id, 'Page')),
+    ),
     menus: new DataLoader(keys =>
       db.table('menu').whereIn('id', keys).select('*').then(mapTo(keys, x => x.id, 'Menu')),
     ),

@@ -243,14 +243,7 @@ module.exports = function createClientConfig(options) {
 
       // Automatically assign quite useful and matching chunk names based on file names.
       new ChunkNames(),
-      new webpack.optimize.CommonsChunkPlugin({
-        names: ['bootstrap'],
-        filename: _DEV ? '[name].js' : '[name]-[chunkhash].js',
-        minChunks: Infinity,
-      }),
-      new ExtractCssChunks({
-        filename: _DEV ? '[name].css' : '[name].[contenthash:base62:8].css'
-      }),
+
       /**
        * HappyPack Plugins are used as caching mechanisms to reduce the amount
        * of time Webpack spends rebuilding, during your bundling during
@@ -295,6 +288,14 @@ module.exports = function createClientConfig(options) {
           },
         ],
       }),
+      new webpack.optimize.CommonsChunkPlugin({
+        names: ['bootstrap'],
+        filename: _DEV ? '[name].js' : '[name]-[chunkhash].js',
+        minChunks: Infinity,
+      }),
+      new ExtractCssChunks({
+        filename: _DEV ? '[name].css' : '[name].[contenthash:base62:8].css',
+      }),
     ],
   };
 
@@ -315,6 +316,7 @@ module.exports = function createClientConfig(options) {
       // Improve OS compatibility
       // @see https://github.com/Urthen/case-sensitive-paths-webpack-plugin
       new CaseSensitivePathsPlugin(),
+      new webpack.NamedModulesPlugin(),
       // Dll reference speeds up development by grouping all of your vendor dependencies
       // in a DLL file. This is not compiled again, unless package.json contents
       // have changed.
@@ -330,7 +332,7 @@ module.exports = function createClientConfig(options) {
       // Use HashedModuleIdsPlugin to generate IDs that preserves over builds
       // @see https://github.com/webpack/webpack.js.org/issues/652#issuecomment-273324529
       // @NOTE: if using flushChunkNames rather than flushModuleIds you must disable this...
-      // new webpack.HashedModuleIdsPlugin(),
+      new webpack.HashedModuleIdsPlugin(),
       new StatsPlugin('client-stats.json'),
       new UglifyPlugin({
         compress: true,

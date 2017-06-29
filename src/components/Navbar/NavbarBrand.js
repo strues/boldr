@@ -5,14 +5,14 @@ import Link from 'react-router-dom/Link';
 import cxN from 'classnames';
 
 export type Props = {
-  isFixed: boolean,
+  logoImg: ?string,
 };
 
-const NavbarBrand = props => {
+const NavbarBrand = (props: Props) => {
   return (
     <li className="boldrui-navbar-header">
       <Link to="/" className="boldrui-navbar-brand">
-        Boldr
+        <img src={props.logoImg} alt="logo" height="65px" className="boldrui-navbar-logo" />
       </Link>
       <label
         id="boldrui-navbar-hamburger"

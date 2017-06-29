@@ -16,6 +16,7 @@ import Home from '../Home';
 import About from '../About';
 import Error404 from '../Error404';
 import MENU_QUERY from './getMenu.graphql';
+import PAGES_QUERY from './page.graphql';
 
 export type Props = {
   me: ?User,
@@ -37,7 +38,7 @@ const ContentWrapper = styled.section`
   width: 100%;
   height: 100%;
   min-height: 100%;
-  padding-top: 58px;
+  padding-top: 70px;
 `;
 
 const AccountContainer = universal(() => import('../../scenes/Account/AccountContainer'), {
@@ -67,6 +68,7 @@ export class Page extends Component {
               handleLogoutClick={this.handleLogoutClick}
               auth={this.props.auth}
               currentUser={this.props.me}
+              logoImg="https://boldr.io/assets/boldr-logo-white.png"
               isFixed
             />}
         <ContentWrapper>

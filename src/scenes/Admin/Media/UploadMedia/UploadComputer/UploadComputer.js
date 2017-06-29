@@ -8,6 +8,7 @@ import { Row, Col } from '@boldr/ui/Layout';
 import Paper from '@boldr/ui/Paper';
 import Headline from '@boldr/ui/Headline';
 import Icon from '@boldr/ui/Icons';
+import Uploader from '../../../../../components/Upload/Uploader';
 import UPLOAD_MEDIA_MUTATION from './uploadMedia.graphql';
 
 export type Props = {

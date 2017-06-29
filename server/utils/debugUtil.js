@@ -1,8 +1,9 @@
+import { readFileSync } from 'fs';
 import codeFrame from 'babel-code-frame';
 import chalk from 'chalk';
 import logger from 'boldr-utils/lib/logger';
 import { wrapCallSite } from 'source-map-support';
-import { readFileSync } from 'fs';
+
 
 const FUNCTION_NAME_FILTERS = [/__webpack_require__/];
 const SOURCE_FILE_FILTERS = [/\/webpack\/bootstrap/];

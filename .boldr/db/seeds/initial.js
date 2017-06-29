@@ -7,6 +7,7 @@ function truncate(knex, Promise, tables) {
 }
 
 const tables = [
+  'page',
   '"user"',
   'article',
   'role',
@@ -21,6 +22,26 @@ const tables = [
 
 function seed(knex, Promise) {
   return truncate(knex, Promise, tables)
+  .then(() =>
+    Promise.all([
+      knex('page').insert({
+        title: 'Home',
+        slug: 'home',
+        url: '/',
+      }),
+      knex('page').insert({
+        title: 'About',
+        slug: 'about',
+        url: '/about',
+      }),
+      knex('page').insert({
+        title: 'Portfolio',
+        slug: 'portfolio',
+        url: '/portfolio',
+      }),
+      // prettier-ignore
+    ])
+  )
     .then(() =>
       Promise.all([
         knex('role').insert({

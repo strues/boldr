@@ -10,7 +10,34 @@ class Article extends BaseModel {
   static tableName = 'article';
   // static softDelete = true;
   static addTimestamps = true;
-  static hidden = ['password'];
+
+  static jsonSchema = mergeSchemas(BaseModel.jsonSchema, {
+    required: ['title', 'slug', 'content', 'published', 'userId'],
+    properties: {
+      id: {
+        type: 'string',
+        minLength: 36,
+        maxLength: 36,
+        pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', // eslint-disable-line
+      },
+      title: { type: 'string' },
+      slug: { type: 'string' },
+      excerpt: { type: 'string' },
+      content: {
+        type: 'string',
+      },
+      rawContent: { type: 'json' },
+      published: { type: 'boolean' },
+      featureImage: { type: 'string' },
+      backgroundImage: { type: 'string' },
+      featured: { type: 'boolean' },
+      userId: { type: 'string' },
+      createdAt: { type: 'date-time' },
+      updatedAt: { type: 'date-time' },
+      deletedAt: { type: 'date-time' },
+    },
+  });
+
   static get idColumn() {
     return 'id';
   }

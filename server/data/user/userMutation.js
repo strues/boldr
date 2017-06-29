@@ -82,7 +82,7 @@ export default {
       return newUser;
     },
   },
-  editUseer: {
+  editUser: {
     type: UserType,
     description: 'Edit an existing user',
     args: {

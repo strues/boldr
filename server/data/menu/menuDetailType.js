@@ -31,11 +31,11 @@ const MenuDetailType = new GraphQLObjectType({
       description: 'The uuid',
     },
     name: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
       description: 'The name of the role',
     },
     safeName: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
       description: 'Lowercase, normalized, name',
     },
     cssClassname: {
@@ -68,5 +68,53 @@ const MenuDetailType = new GraphQLObjectType({
     },
   }),
 });
-
+export const EditDetailInput = new GraphQLInputObjectType({
+  name: 'EditDetailInput',
+  fields: () => ({
+    id: {
+      type: GraphQLID,
+      description: 'The id',
+    },
+    uuid: {
+      type: GraphQLUUID,
+      description: 'The uuid',
+    },
+    name: {
+      type: GraphQLString,
+      description: 'The name of the role',
+    },
+    safeName: {
+      type: GraphQLString,
+      description: 'Lowercase, normalized, name',
+    },
+    cssClassname: {
+      type: GraphQLString,
+      description: 'Custom css classname for the link',
+    },
+    hasDropdown: {
+      type: GraphQLBoolean,
+      description: 'True if the item has a dropdown',
+    },
+    order: {
+      type: GraphQLInt,
+      description: 'The display order',
+    },
+    mobileHref: {
+      type: GraphQLString,
+      description: 'Mobile only link',
+    },
+    href: {
+      type: GraphQLString,
+      description: 'The link',
+    },
+    icon: {
+      type: GraphQLString,
+      description: 'Icon kind',
+    },
+    children: {
+      type: GraphQLJSON,
+      description: 'Children are dropdown links',
+    },
+  }),
+});
 export default MenuDetailType;

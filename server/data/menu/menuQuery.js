@@ -8,8 +8,11 @@ import {
   GraphQLDateTime,
   GraphQLUUID,
 } from '../scalars';
+import { db } from '../../services/db';
 import Menu from '../../models/Menu';
+import MenuDetail from '../../models/MenuDetail';
 import MenuType from './menuType';
+import MenuDetailType from './menuDetailType';
 
 export default {
   getMenuById: {
@@ -24,6 +27,17 @@ export default {
         return menu;
       }
       console.log('error');
+    },
+  },
+  details: {
+    type: new GraphQLList(MenuDetailType),
+    description: 'A query returning all links',
+    async resolve(_, args, context) {
+      const details = await db.table('menu_detail').select('*');
+      if (!details) {
+        return console.log('err');
+      }
+      return details;
     },
   },
 };

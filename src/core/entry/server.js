@@ -47,17 +47,17 @@ export default ({ clientStats, outputPath }) => {
       },
       batchInterval: 20,
     });
-    const client = createApolloClient(networkInterface);
+    const apolloClient = createApolloClient(networkInterface);
     const history = createMemoryHistory({ initialEntries: ['/'] });
     const initialState = {};
-    const store = configureStore(client, initialState, history);
+    const store = configureStore(apolloClient, initialState, history);
     //
     const sheet = new ServerStyleSheet();
     const routerContext = {};
 
     const appComponent = (
       <StaticRouter location={req.url} context={routerContext}>
-      <ApolloProvider store={store} client={client}>
+      <ApolloProvider store={store} client={apolloClient}>
           <App />
       </ApolloProvider>
       </StaticRouter>
@@ -77,7 +77,7 @@ export default ({ clientStats, outputPath }) => {
     });
 
     const preloadedState = store.getState();
-
+    preloadedState.apollo = apolloClient.getInitialState();
     const styleTags = sheet.getStyleTags();
 
     if (routerContext.url) {

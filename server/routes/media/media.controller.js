@@ -165,9 +165,9 @@ export function uploadMedia(req, res, next) {
       return res.status(201).json(newImage);
     });
 }
-export function uploadFromUrl(req, res, next) {
-  const download = (uri, filename, callback) => {
-    request.head(uri, (err, res, body) => {
+export async function uploadFromUrl(req, res, next) {
+  const download = async (uri, filename, callback) => {
+    await request.head(uri, (err, res, body) => {
       request(uri)
         .pipe(fs.createWriteStream(`${appRoot.get()}/public/uploads/${filename}`))
         .on('close', callback)
@@ -184,10 +184,10 @@ export function uploadFromUrl(req, res, next) {
       : '';
 
     const newFilename = shortId() + path.extname(onlyTheFilename);
-    download(urlParsed.href, newFilename, async () => {
+    await download(urlParsed.href, newFilename, async () => {
       const newImage = await Media.query().insert({
         // @TODO: remove mediaType hardcode
-        mediaType: 'image',
+        type: 'image',
         name: newFilename,
         safeName: newFilename,
         thumbName: newFilename,

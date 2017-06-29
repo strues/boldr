@@ -48,20 +48,17 @@ export default class BaseModel extends Model {
       id: {
         type: ['integer', 'string'],
       },
-      createdAt: {
-        type: 'string',
-      },
-      updatedAt: {
-        type: 'string',
-      },
-      deletedAt: {
-        type: 'string',
-      },
+      createdAt: { type: 'date' },
+      updatedAt: { type: 'date' },
+      deletedAt: { type: 'date' },
     },
   };
 
   // Centralize the models.
   static modelPaths = [__dirname];
+  // http://vincit.github.io/objection.js/#defaulteageralgorithm
+  static defaultEagerAlgorithm = Model.JoinEagerAlgorithm;
+
   /**
    * Ran before inserting into the database.
    */

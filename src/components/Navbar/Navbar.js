@@ -11,6 +11,7 @@ export type Props = {
   menu: Object,
   settings: Array<Setting>,
   currentUser: User,
+  logoImg: ?string,
   breakpoint: ?number,
   handleLogoutClick: Function,
   auth: Object,
@@ -99,7 +100,7 @@ class Navbar extends Component {
           }}
         >
           <ul className="boldrui-navbar-navigation">
-            <NavbarBrand settings={settings} />
+            <NavbarBrand settings={settings} logoImg={this.props.logoImg} />
             {details.map(detail =>
               <NavItem
                 key={detail.uuid}

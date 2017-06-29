@@ -6,7 +6,6 @@ import express from 'express';
 import _debug from 'debug';
 import bodyParser from 'body-parser';
 import appRoot from 'boldr-utils/lib/node/appRoot';
-import logger from 'boldr-utils/lib/logger';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import { printSchema } from 'graphql';
 import DataLoaders from './DataLoaders';

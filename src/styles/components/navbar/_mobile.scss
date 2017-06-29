@@ -123,7 +123,7 @@
     }
 }
 
-.dropdown {
+.#{$boldr-ns}navbar-dropdown {
     position: relative;
     height: auto;
     min-height: $boldrui-navbar-height;

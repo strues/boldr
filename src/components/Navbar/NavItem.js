@@ -29,7 +29,7 @@ class NavItem extends React.Component {
     const { openDropdown } = this.state;
     const { mobile } = this.props;
     const isMobile = mobile;
-    const shouldOpenDropdown = !openDropdown;
+    const shouldOpenDropdown = openDropdown === false;
 
     if (shouldOpenDropdown === openDropdown || isMobile) {
       return;
@@ -63,10 +63,10 @@ class NavItem extends React.Component {
       icon,
       hasDropdown,
     } = this.props;
-
+    const liClass = cxN('boldrui-navbar-item', { 'boldrui-navbar-dropdown': hasDropdown });
     return (
       <li
-        className="boldrui-navbar-item"
+        className={liClass}
         onMouseEnter={this.handleDropdown}
         // onFocus={this.handleDropdown}
         onClick={this.handleDropdown}

@@ -3,63 +3,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 
-const Menu = styled.ul`
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  z-index: 2000;
-  padding: 0;
-  position: relative;
-  background: ${props => props.open && 'transparent'};
-  transition: all 0.2s ease;
-
-  @media (max-width: 768px) {
-    align-items: initial;
-    width: 100%;
-  }
-`;
-const Toggle = styled.li`
-  display: block;
-  cursor: pointer;
-  padding: 0px 20px 0px 10px;
-  transition: transform 0.3s ease, top 0.3s ease, bottom 0.3s ease;
-  color: ${props => (props.theme.text ? props.theme.text : 'white')};
-  line-height: ${props => (props.theme.height ? props.theme.height : '50px')};
-
-  @media (max-width: 768px) {
-    line-height: initial;
-    position: relative;
-    margin: 0;
-    padding: 10px 20px 10px 10px;
-  }
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: ${props => (props.open ? '9px' : '0px')};
-    bottom: 0;
-    right: 5px;
-    margin: auto;
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-top: 5px solid ${props => (props.theme.text ? props.theme.text : 'white')};
-    transform: ${props => (props.open ? 'rotateX(180deg)' : 'rotateX(0deg)')};
-    transform-origin: top;
-    transition: inherit;
-
-    @media (max-width: 768px) {
-      top: ${props => (props.open ? '19px' : '11px')};
-      right: 25px;
-      bottom: ${props => (props.open ? '11px' : '10px')};
-      top: none;
-    }
-  }
-`;
 const List = styled.ul`
   position: absolute;
   top: 100%;
@@ -163,7 +106,7 @@ export default class NavbarMenu extends Component {
     let { items } = this.props;
     items = items.map((item, i) => {
       return (
-        <Item key={i}>
+        <Item key={i} className="boldrui-navbar-item">
           <Link href={item.href}>
             {item.name}
           </Link>
@@ -177,14 +120,20 @@ export default class NavbarMenu extends Component {
     const { name, open } = this.props;
     const { width } = this.state;
     return (
-      <Menu open={open} innerRef={el => (this.menu = el)} width={width}>
-        <Toggle onClick={this.handleClick} open={open} width={width}>
+      <span open={open} width={width}>
+        <a
+          className="boldrui-link"
+          onClick={this.handleClick}
+          open={open}
+          width={width}
+          onKeyDown={this.handleClick}
+        >
           {name}
-        </Toggle>
+        </a>
         <List open={open} innerRef={el => (this.list = el)}>
           {this.renderItems()}
         </List>
-      </Menu>
+      </span>
     );
   }
 }

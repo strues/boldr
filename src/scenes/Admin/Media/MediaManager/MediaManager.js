@@ -51,8 +51,8 @@ class MediaManager extends Component {
                 <MediaContent>
                   <ResponsiveImage
                     src={getMediaById.url}
-                    width={600}
-                    height={900}
+                    width={640}
+                    height={420}
                     alt={getMediaById.name}
                   />
                 </MediaContent>
