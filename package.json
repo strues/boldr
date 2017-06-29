@@ -50,7 +50,7 @@
     "seed": "better-npm-run seed",
     "seed:test": "node --harmony internal/scripts/db.js seed",
     "test": "NODE_ENV=test jest --config jest.config.json",
-    "test:ci": "NODE_ENV=test CI=true jest"
+    "test:ci": "NODE_ENV=test jest --config jest.config.json"
   },
   "dependencies": {
     "@boldr/ui": "0.1.0-beta.12",
