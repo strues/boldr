@@ -1,0 +1,31 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Social /> 1`] = `
+<styled.ul>
+  <styled.li>
+    <Facebook
+      size={24}
+    />
+  </styled.li>
+  <styled.li>
+    <Twitter
+      size={24}
+    />
+  </styled.li>
+  <styled.li>
+    <Github
+      size={24}
+    />
+  </styled.li>
+  <styled.li>
+    <Google
+      size={24}
+    />
+  </styled.li>
+  <styled.li>
+    <LinkedIn
+      size={24}
+    />
+  </styled.li>
+</styled.ul>
+`;

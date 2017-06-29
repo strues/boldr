@@ -1,0 +1,51 @@
+module.exports = [
+  {
+    id: 1,
+    key: 'site_name',
+    label: 'Site Name',
+    value: 'Boldr',
+    description: 'The website name.',
+  },
+  {
+    id: 3,
+    key: 'site_logo',
+    label: 'Site Logo',
+    value: 'https://boldr.io/boldr.png',
+    description: 'The logo is displayed in the header area.',
+  },
+  {
+    id: 4,
+    key: 'site_description',
+    label: 'Site Description',
+    value: 'A modern CMS',
+    description: 'Meta header for search results.',
+  },
+  {
+    id: 5,
+    key: 'favicon',
+    label: 'Favicon',
+    value: 'https://boldr.io/favicon.ico',
+    description: 'Favicon to use for your website.',
+  },
+  {
+    id: 6,
+    key: 'google_analytics',
+    label: 'Google Analytics ID',
+    value: 'UA-323432',
+    description: 'Google Analytics tracking code',
+  },
+  {
+    id: 7,
+    key: 'allow_registration',
+    label: 'Allow Registration',
+    value: 'true',
+    description: "Toggle allowing user's to register for accounts.",
+  },
+  {
+    id: 2,
+    key: 'site_url',
+    label: 'Site URL',
+    value: 'abcd',
+    description: 'The address used to access your website.',
+  },
+];

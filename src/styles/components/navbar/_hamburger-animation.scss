@@ -1,0 +1,29 @@
+.#{$boldr-ns}navbar-checkbox {
+    &:checked {
+        + .#{$boldr-ns}navbar-menu {
+            .#{$boldr-ns}navbar-hamburger-doublespin {
+                span {
+                    &::before {
+                        transform: rotate(225deg);
+                    }
+
+                    &::after {
+                        transform: rotate(-225deg);
+                    }
+                }
+            }
+
+            .#{$boldr-ns}navbar-hamburger-spin {
+                span {
+                    &::before {
+                        transform: rotate(45deg);
+                    }
+
+                    &::after {
+                        transform: rotate(-45deg);
+                    }
+                }
+            }
+        }
+    }
+}

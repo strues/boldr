@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MemberCard /> should render the user props 1`] = `
+<styled.li>
+  <styled.div>
+    <styled.ul>
+      <styled.li>
+        <Avatar
+          role="presentation"
+          src="http://img.com/img.png"
+          suffixes={
+            Array [
+              "red",
+              "pink",
+              "purple",
+              "deep-purple",
+              "indigo",
+              "blue",
+              "light-blue",
+              "cyan",
+              "teal",
+              "green",
+              "light-green",
+              "lime",
+              "yellow",
+              "amber",
+              "orange",
+              "deep-orange",
+              "brown",
+              "grey",
+              "blue-grey",
+            ]
+          }
+        />
+      </styled.li>
+      <styled.li>
+        joe
+      </styled.li>
+      <styled.li>
+        admin
+      </styled.li>
+      <styled.li>
+         
+      </styled.li>
+      <styled.li>
+        test@test.com
+      </styled.li>
+    </styled.ul>
+  </styled.div>
+  <styled.div>
+    <Button
+      block={false}
+      bordered={true}
+      className=""
+      disabled={false}
+      htmlType="button"
+      kind="primary"
+      loading={false}
+      onClick={[Function]}
+      outline={false}
+      prefix="boldrui"
+      size="medium"
+    >
+      Edit
+    </Button>
+  </styled.div>
+</styled.li>
+`;

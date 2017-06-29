@@ -1,0 +1,9 @@
+query GetSettingsQuery {
+  settings {
+    id
+    key
+    value
+    label
+    description
+  }
+}

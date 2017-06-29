@@ -1,0 +1,147 @@
+.griddle-row {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.12) !important;
+}
+
+table.griddle-table {
+    width: calc(100% - 40px);
+    margin-right: auto;
+    margin-bottom: 10px;
+    margin-left: auto;
+    font-size: 14.5px;
+    font-family: Roboto, sans-serif;
+    text-align: center;
+}
+
+table.griddle-table tr {
+    border-bottom: 1px solid rgba(177, 168, 168, 0.77);
+}
+
+table.griddle-table tbody > tr:hover {
+    background-color: rgba(224, 224, 224, 0.77);
+    cursor: pointer;
+    cursor: hand;
+}
+
+input.griddle-filter {
+    width: 240px;
+    height: 30px;
+    padding-left: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    margin: 10px;
+}
+
+table.griddle-table th {
+    text-transform: capitalize;
+}
+
+.griddle-settings-toggle {
+    float: right;
+    height: 2.25em;
+    padding: calc(0.375em - 1px) calc(0.625em - 1px);
+    color: $btn-primary;
+    background: $btn-white;
+    border: 1px solid transparent;
+    border-color: $btn-primary;
+    border-radius: 3px;
+    margin-top: -40px;
+    margin-right: 10px;
+    font-size: 1rem;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+    transition: background-color 0.3s;
+    cursor: pointer;
+    user-select: none;
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.griddle-filter {
+    box-sizing: border-box;
+    display: inline-block;
+    flex: 1;
+    min-width: 80px;
+    height: 40px;
+    padding: 1rem;
+    color: $text-color;
+    border: 1px solid $border-color;
+    border-radius: 3px;
+    box-shadow: none;
+    margin: 0 auto 0.5rem;
+    margin-left: 10px;
+    font-size: 12px;
+    transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    appearance: none;
+
+    &:focus {
+        border: 1px solid $primary-color;
+        box-shadow: 0 0 5px #bdf;
+        outline: none;
+    }
+}
+
+.griddle-settings {
+    padding-left: 10px;
+
+    button {
+        height: 2.25em;
+        padding: calc(0.375em - 1px) calc(0.625em - 1px);
+        color: $btn-primary;
+        background: $btn-white;
+        border: 1px solid transparent;
+        border-color: $btn-primary;
+        border-radius: 3px;
+        margin-left: 10px;
+        font-size: 1rem;
+        line-height: 1.5;
+        text-align: center;
+        white-space: nowrap;
+        transition: background-color 0.3s;
+        cursor: pointer;
+        user-select: none;
+
+        &:focus {
+            outline: none;
+        }
+    }
+
+    input[type="text"] {
+        box-sizing: border-box;
+        display: inline-block;
+        flex: 1;
+        min-width: 80px;
+        height: 40px;
+        padding: 1rem;
+        color: $text-color;
+        border: 1px solid $border-color;
+        border-radius: 3px;
+        box-shadow: none;
+        margin: 0 auto 0.5rem;
+        font-size: 12px;
+        transition: border 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        appearance: none;
+
+        &:focus {
+            border: 1px solid $primary-color;
+            box-shadow: 0 0 5px #bdf;
+            outline: none;
+        }
+    }
+
+    label {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+
+    input[type="checkbox"] {
+        margin-right: 5px;
+        margin-bottom: 5px;
+    }
+}
+
+.griddle-pagination {
+    padding-left: 10px;
+    padding-bottom: 10px;
+}

@@ -1,0 +1,60 @@
+.#{$boldr-ns}cont-promo__wrapper {
+    position: relative;
+    padding: 6rem 0;
+}
+
+.#{$boldr-ns}cont-promo__bright {
+    background: #fff;
+}
+
+.#{$boldr-ns}cont-promo__secondary {
+    color: #fff;
+    background: $secondary-color;
+}
+
+.#{$boldr-ns}cont-promo__teritary {
+    background: $teritary-color;
+}
+
+.#{$boldr-ns}cont-promo__darkgrey {
+    color: #fff;
+    background: $outer-space;
+}
+
+.#{$boldr-ns}cont-promo__grey {
+    background: $grayish;
+}
+
+.#{$boldr-ns}cont-promo__light-grey {
+    background: $cloud;
+}
+
+.#{$boldr-ns}cont-promo__tiny {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.#{$boldr-ns}cont-promo__narrow > .#{$boldr-ns}cont-promo__contents {
+    max-width: 900px;
+}
+
+.#{$boldr-ns}cont-promo__wide > .#{$boldr-ns}cont-promo__contents {
+    width: 100%;
+    max-width: none;
+}
+
+.#{$boldr-ns}cont-promo__centered {
+    text-align: center;
+}
+
+.#{$boldr-ns}cont-promo__contents {
+    position: relative;
+    z-index: 1;
+    width: 90%;
+    max-width: 1700px;
+    margin: 0 auto;
+
+    > :last-child {
+        margin-bottom: 0;
+    }
+}

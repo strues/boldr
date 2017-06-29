@@ -1,0 +1,140 @@
+
+%tags-ui-base {
+    display: inline-block;
+    height: $tag-base-height;
+    padding: 0 9px;
+    color: $tag-base-font-color;
+    border-radius: $tag-base-border-radius;
+    font-size: $tag-base-font-size;
+    font-family: $tag-base-font-family;
+}
+
+.react-tagsinput {
+
+    @extend %tags-ui-base;
+    $height: $tag-base-height - 2;
+    height: $height;
+    background: none;
+    border: 0;
+    margin-top: $tag-base-margin;
+    transition: border-color 0.3s ease;
+
+    &::-input-placeholder {
+        color: $tag-input-placeholder-color;
+    }
+
+    &:focus {
+        border-color: $tag-input-border-focus-color;
+        outline: none;
+    }
+}
+
+.react-tagsinput--focused {
+    border-color: $tag-input-border-focus-color;
+}
+
+.react-tagsinput-tag {
+
+    @extend %tags-ui-base;
+    background: $tag-background-color;
+    margin: $tag-base-margin $tag-base-margin 0 0;
+    -webkit-font-smoothing: antialiased;
+    line-height: $tag-base-height;
+    transition: background 0.3s ease;
+    animation: $tag-intro-animation;
+    cursor: default;
+
+    &:hover,
+    &.active {
+        background: $tag-background-hover-color;
+    }
+}
+
+.react-tagsinput-remove {
+    display: inline-block;
+    color: $tag-remove-color;
+    margin-left: 7px;
+    font-size: $tag-remove-font-size;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    cursor: pointer;
+
+    &:hover {
+        color: $tag-remove-hover-color;
+    }
+}
+
+.react-tagsinput-tag a::before {
+    content: " ×";
+}
+
+.react-tagsinput-input {
+
+    @extend %tags-ui-base;
+    $height: $tag-base-height - 2;
+    height: $height;
+    background: $tag-input-bg-color;
+    border: $tag-input-border;
+    margin-top: $tag-base-margin;
+    transition: border-color 0.3s ease;
+
+    &::-input-placeholder {
+        color: $tag-input-placeholder-color;
+    }
+
+    &:focus {
+        border-color: $tag-input-border-focus-color;
+        outline: none;
+    }
+}
+
+.#{$boldr-ns}tag {
+    display: inline-flex;
+    height: 22px;
+    padding: 0 8px;
+    opacity: 1;
+    background: $tag-bg;
+    border: 1px solid $border-color;
+    border-radius: 4px;
+    margin-right: 8px;
+    font-size: $tag-font-size;
+    line-height: 20px;
+    white-space: nowrap;
+    transition: all 0.3s cubic-bezier(0.78, 0.14, 0.15, 0.86);
+    cursor: pointer;
+
+    .#{$boldr-ns}tag__thumb {
+        margin-right: 5px;
+    }
+
+    .#{$boldr-ns}tag__remove--btn {
+        padding-bottom: 2px;
+        padding-left: 10px;
+        color: $primary-color;
+        font-size: 14px;
+        cursor: pointer;
+
+        &::before {
+            content: "x";
+        }
+    }
+
+    &.#{$boldr-ns}tag__disabled {
+        color: $text-color-disabled;
+        background-color: #f1f1f1;
+    }
+}
+
+.#{$boldr-ns}tag__lg {
+    height: 36px;
+}
+
+.#{$boldr-ns}tag__wrap {
+    overflow: hidden;
+}
+
+.#{$boldr-ns}tag__inner-wrap {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

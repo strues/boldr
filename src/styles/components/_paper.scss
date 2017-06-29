@@ -1,0 +1,91 @@
+////
+/// @group paper
+////
+.#{$boldr-ns}paper {
+    padding: 1em;
+    background-color: $paper-light-bg;
+
+    &.#{$boldr-ns}paper__0 {
+
+        @include md-shadow(0);
+    }
+
+    &.#{$boldr-ns}paper__1 {
+
+        @include md-shadow(1);
+    }
+
+    &.#{$boldr-ns}paper__2 {
+
+        @include md-shadow(2);
+    }
+
+    &.#{$boldr-ns}paper__3 {
+
+        @include md-shadow(3);
+    }
+
+    &.#{$boldr-ns}paper__4 {
+
+        @include md-shadow(4);
+    }
+
+    &.#{$boldr-ns}paper__5 {
+
+        @include md-shadow(5);
+    }
+}
+
+.#{$boldr-ns}paper__dark {
+    padding: 1em;
+    color: $text-color-light;
+    background-color: $paper-dark-bg;
+
+    &.#{$boldr-ns}paper__0 {
+
+        @include md-shadow(0);
+    }
+
+    &.#{$boldr-ns}paper__1 {
+
+        @include md-shadow(1);
+    }
+
+    &.#{$boldr-ns}paper__2 {
+
+        @include md-shadow(2);
+    }
+
+    &.#{$boldr-ns}paper__3 {
+
+        @include md-shadow(3);
+    }
+
+    &.#{$boldr-ns}paper__4 {
+
+        @include md-shadow(4);
+    }
+
+    &.#{$boldr-ns}paper__5 {
+
+        @include md-shadow(5);
+    }
+}
+
+.#{$boldr-ns}paper__round {
+    border-radius: $border-radius;
+}
+
+.#{$boldr-ns}paper__no-pad {
+    padding: 0;
+}
+
+.#{$boldr-ns}paper__0-hover {
+    transition-property: box-shadow;
+    transition-duration: $paper-transition-time;
+
+    &:hover {
+
+        @include md-shadow(3);
+    }
+}

@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Error404 /> renders snapshot 1`] = `
+<div
+  className="error_wrapper"
+>
+  <HelmetWrapper
+    encodeSpecialCharacters={true}
+    title="404! You might be lost..."
+  />
+  <Headline
+    type="h1"
+  >
+    404!
+  </Headline>
+  <p>
+    SORRY PAGE NOT FOUND
+  </p>
+</div>
+`;

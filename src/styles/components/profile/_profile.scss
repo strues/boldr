@@ -1,0 +1,13 @@
+.#{$boldr-ns}profile {
+    .profile__content {
+
+        @include md-shadow(2);
+        width: 100%;
+        padding: 1em;
+        background: $white;
+    }
+}
+
+.boldr-profile__content {
+    padding-top: 50px;
+}

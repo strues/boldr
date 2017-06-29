@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Anchor /> renders snapshot 1`] = `
+<NavLink
+  activeClassName="active"
+  className="boldrui-link"
+  href="/"
+  onClick={[Function]}
+  title="Home"
+  to="/"
+/>
+`;

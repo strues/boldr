@@ -1,0 +1,10 @@
+/src/
+/flow-typed/
+/demo/
+/docs/
+/node_modules/
+/.storybook/
+
+*.md
+
+.babelrc

@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Settings /> renders snapshot 1`] = `
+<div>
+  <HelmetWrapper
+    encodeSpecialCharacters={true}
+    title="Admin: Settings"
+  />
+  <styled.div>
+    <SettingsAside />
+    <Connect(General) />
+  </styled.div>
+</div>
+`;

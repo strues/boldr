@@ -1,0 +1,71 @@
+// File taken from mq-sass
+// https://github.com/jonsuh/mq-sass/blob/master/stylesheets/mq-sass/_functions.scss
+
+// Strip units
+// ==================================================
+// Derived from Bourbon by thoughtbot (http://bourbon.io)
+@function _mq-strip-units($val) {
+
+    @return ($val / ($val * 0 + 1));
+}
+
+// Pixels to Ems
+// ==================================================
+// Derived from Bourbon by thoughtbot (http://bourbon.io)
+@function _mq-em($pxval, $base: $mq-em-base) {
+    // alteration to prevent strings from causing an error
+    @if (type-of($pxval) == "string") {
+
+        @return $pxval;
+    }
+
+    @if not unitless($pxval) {
+        $pxval: _mq-strip-units($pxval);
+    }
+
+    @if not unitless($base) {
+        $base: _mq-strip-units($base);
+    }
+
+    @return ($pxval / $base) * 1em;
+}
+
+// Turn string into a number
+// http://hugogiraudel.com/2014/01/15/sass-string-to-number/
+@function number($string) {
+    // Matrices
+    $strings: "0" "1" "2" "3" "4" "5" "6" "7" "8" "9";
+    $numbers: 0   1   2   3   4   5   6   7   8   9;
+
+    // Result
+    $result: 0;
+
+    // Looping through all characters
+    @for $i from 1 through str-length($string) {
+        $character: str-slice($string, $i, $i);
+        $index: index($strings, $character);
+
+        @if not $index {
+
+            @warn "Unknown character `#{$character}`.";
+            @return false;
+        }
+        $number: nth($numbers, $index);
+        $result: $result * 10 + $number;
+    }
+
+    @return $result;
+}
+
+// For getting the number values in ratio based ranges
+@function get-start($string) {
+    $string: unquote($string);
+
+    @return number( str-slice($string, 1, 1) );
+}
+
+@function get-end($string) {
+    $string: unquote($string);
+
+    @return number( str-slice($string, str-length($string), str-length($string)) );
+}

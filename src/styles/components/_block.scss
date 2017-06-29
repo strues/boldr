@@ -1,0 +1,28 @@
+////
+/// @group block
+////
+.#{$boldr-ns}block {
+
+    @include md-shadow(2);
+    padding: 1.5rem;
+    background: $block-bg;
+    border-radius: 3px;
+    margin-bottom: 1.5rem;
+
+    > :last-child {
+        margin-bottom: 0;
+    }
+}
+
+.#{$boldr-ns}block__dark {
+
+    @include md-shadow(2);
+    padding: 1.5rem;
+    background: $block-bg-dark;
+    border-radius: 3px;
+    margin-bottom: 1.5rem;
+
+    > :last-child {
+        margin-bottom: 0;
+    }
+}

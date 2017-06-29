@@ -1,0 +1,74 @@
+.#{$boldr-ns}flag__wrapper {
+    width: 100%;
+
+    @media screen and (min-width: $bp-medium) {
+        display: table;
+    }
+}
+
+.#{$boldr-ns}flag__img-wrapper {
+    position: relative;
+    overflow: hidden;
+
+    @media screen and (min-width: $bp-medium) {
+        display: table-cell;
+        width: 50%;
+    }
+
+    @media screen and (max-width: $bp-medium) and (orientation: landscape) {
+        max-height: 65vh;
+    }
+}
+
+@media screen and (min-width: $bp-large) {
+
+    .#{$boldr-ns}flag__img-wrapper-40 {
+        width: 40%;
+    }
+
+    .#{$boldr-ns}flag__img-wrapper-60 {
+        width: 60%;
+    }
+
+    .#{$boldr-ns}flag__img-wrapper-80 {
+        width: 80%;
+    }
+}
+
+.#{$boldr-ns}flag__contents {
+    padding: 1.5rem;
+    vertical-align: middle;
+
+    @media screen and (min-width: $bp-medium) {
+        display: table-cell;
+        padding: 3rem;
+    }
+}
+
+.#{$boldr-ns}flag__img,
+.#{$boldr-ns}flag__img > img {
+    width: 100%;
+
+    @media screen and (min-width: $bp-medium) {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: auto;
+        min-width: 100%;
+        max-width: none;
+        height: auto;
+        min-height: 100%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+}
+
+/**
+ * The scroll visibility sensor should always be centered within the picture element
+ * to avoid non-loading images even though they are in the UAs viewport.
+ */
+
+.#{$boldr-ns}flag__img > span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}

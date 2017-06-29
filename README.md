@@ -12,17 +12,11 @@
 Think of Boldr as the solid foundation for building your next great web application. Unlike most other CMS platforms, Boldr is entirely JavaScript. Boldr features Universal / Isomorphic rendering for improved performance and Search Engine Optimization.
 
 
-#### Incoming 💥  Breaking  💥  Changes and Major Improvements
-
-Pardon the mess while things get resettled over the next 24 hours in the next and dev branches.
-
-
 **Have questions or want to help with development?**
 Come visit with us
 [![Join the chat at https://gitter.im/boldr](https://badges.gitter.im/boldr.svg)](https://gitter.im/boldr?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ## Table of Contents
-- [Boldr Repositories](#boldr-repositories)
 - [Current Features](#current-features)
 - [Technology Stack](#core-technologies)
 - [Getting Started](#getting-started)
@@ -35,16 +29,9 @@ Come visit with us
 - [Screenshots](#screenshots)
 
 
-## Boldr Repositories
-
-- [Boldr API](https://github.com/boldr/boldr-api)
-- [Boldr UI](https://github.com/boldr/boldr-ui)
-- [Boldr Tools](https://github.com/boldr/boldr-tools)
-
-
 ## Current Features
 
-* Standalone REST API - Giving you the freedom to do whatever you'd like without looking at an interface.
+* GraphQL API
 * Rich Text Editor / WYSIWYG
 * Server side rendering
 * Authentication with JSON Web Tokens
@@ -73,17 +60,7 @@ Come visit with us
 That said, I'm confident the majority of large breaking changes is behind us.
 
 **Step 1**
-First you must somehow get the files to your machine. Below outlines two options. Using the CLI is recommended. Boldr relies on an API in order to get its data. Running Boldr's API, at least until you get a grasp on how everything works together, will provide the best possible experience.
-
-
-**Using Boldr-CLI:**  
-
-```shell
-   yarn global --add boldr-cli
-   boldr-cli init
-   cd boldr-cms
-   yarn
-```  
+First you must somehow get the files to your machine.
 
 **Using git:**  
 
@@ -93,19 +70,21 @@ First you must somehow get the files to your machine. Below outlines two options
   yarn
 ```  
 
-If you don't feel like installing a global CLI, but still want to use the API, grab the files from https://github.com/boldr/boldr-api
-
-
 ## Usage
 
-Boldr runs on the following ports:
-**Frontend**: 3000 - _React SSR server_  
-**Webpack**: 3001 - _dev only_  
+1. Install the files: `yarn install`   
+2. Copy the environment sample: `cp .env_example .env`   
+3. Checkout `server/config.js` and modify any settings.   
+4. Setup services    
 
+Boldr requires a Postgres database and a Redis service. Using the docker-compose.yml file included in the repo is the quickest way.
+
+`docker-compose up --build -d` starts the necessary services (postgres and redis).
+
+Ensure the database is setup with the proper tables and seed data.
 
 
 ### Development
-
 
 Run the CMS using `npm run dev`
 
@@ -114,7 +93,6 @@ After Boldr has started visit <http://localhost:3000>. If you're using the API, 
 > Email - admin@boldr.io
 > Password - password
 
-Settings for the build process are located in `config/values.js`.
 
 ### Production
 

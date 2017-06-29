@@ -1,0 +1,65 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ArticleCard /> renders snapshot 1`] = `
+<div
+  className="boldrui-post-card"
+>
+  <withStyles(Card)>
+    <withStyles(CardHeader)
+      subheader="Invalid Date"
+      title="Test Post"
+    />
+    <withStyles(CardMedia)>
+      <img
+        alt="Test Post feature image"
+        src="http://boldr.io/images/logo.png"
+      />
+    </withStyles(CardMedia)>
+    <withStyles(CardContent)>
+      An excerpt
+      <Row
+        componentClass="div"
+      >
+        <Col
+          componentClass="div"
+          sm={12}
+        >
+          <Link
+            className="readmore-link"
+            replace={false}
+            to="/blog/test-post"
+          >
+            <Button
+              block={false}
+              bordered={true}
+              className=""
+              disabled={false}
+              htmlType="button"
+              kind="primary"
+              loading={false}
+              onClick={[Function]}
+              outline={true}
+              prefix="boldrui"
+              size="medium"
+            >
+              Read More
+            </Button>
+          </Link>
+        </Col>
+      </Row>
+    </withStyles(CardContent)>
+    <withStyles(CardActions)>
+      <TagBlock
+        tags={
+          Array [
+            Object {
+              "id": 1,
+              "name": "abc",
+            },
+          ]
+        }
+      />
+    </withStyles(CardActions)>
+  </withStyles(Card)>
+</div>
+`;

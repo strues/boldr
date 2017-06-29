@@ -1,0 +1,8 @@
+query SinglePage($slug: String!) {
+  singlePage(slug: $slug) {
+    id
+    url
+    title
+    slug
+  }
+}

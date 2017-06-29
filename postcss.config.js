@@ -1,12 +1,12 @@
-const path = require('path');
-const autoprefixer = require('autoprefixer');
-const postcssImport = require('postcss-import');
-const postcssReporter = require('postcss-reporter');
-
-module.exports = {
+module.exports = () => ({
+  // The list of plugins for PostCSS
+  // https://github.com/postcss/postcss
   plugins: [
-    postcssImport({ path: path.resolve(process.cwd(), './shared/styles') }),
-    autoprefixer(),
-    postcssReporter({ clearMessages: true }),
+    require('postcss-flexbugs-fixes')(),
+    require('autoprefixer')({
+      browsers: ['> 1%', 'last 2 versions'],
+      flexbox: 'no-2009',
+    }),
+    require('postcss-discard-duplicates')(),
   ],
-};
+});

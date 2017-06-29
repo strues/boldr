@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Paper /> Matches the snap 1`] = `
+<div
+  className="boldrui-paper boldrui-paper__1"
+/>
+`;

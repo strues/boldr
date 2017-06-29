@@ -1,12 +1,10 @@
 {
-  "presets": [
-    ["env", { "targets": { "node": true } }],
-    "stage-2",
-    "react"
-  ],
-  "plugins": [
-    "syntax-dynamic-import",
-    "syntax-flow",
-    "syntax-trailing-function-commas",
-  ]
+  "presets": [["boldr/node", {
+    "targets": {
+      "node": 8
+    },
+    "modules": "commonjs",
+    "exclude": ["transform-regenerator", "transform-async-to-generator"],
+    "useBuiltIns": true
+    }]]
 }

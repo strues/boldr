@@ -1,8 +1,0 @@
-debug: false
-pipeline:
-  build:
-    image: node:7.9
-    commands:
-      - yarn
-      - yarn build:test
-      - yarn test

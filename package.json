@@ -1,154 +1,16 @@
 {
-  "name": "boldr-cmf",
+  "name": "boldr",
   "description": "universal react content management framework",
   "version": "0.0.0",
   "author": "Steven Truesdell <steven@strues.io>",
-  "betterScripts": {
-    "dev": {
-      "command": "babel-node internal/development",
-      "env": {
-        "NODE_ENV": "development",
-        "DEBUG": "boldr:*",
-        "USE_PROXY": true
-      }
-    },
-    "test": {
-      "command": "jest -w 4 --config=internal/jest/jest.json",
-      "env": {
-        "NODE_ENV": "test"
-      }
-    }
-  },
   "bugs": {
     "url": "https://github.com/strues/boldr/issues"
   },
-  "config": {
-    "commitizen": {
-      "path": "./node_modules/cz-conventional-changelog-emoji"
-    }
-  },
-  "dependencies": {
-    "animate-components": "^0.9.0",
-    "app-root-dir": "1.0.2",
-    "axios": "^0.16.1",
-    "bluebird": "^3.5.0",
-    "boldr-ui": "0.4.0-beta.9",
-    "boldr-utils": "0.2.2",
-    "classnames": "^2.2.5",
-    "compression": "^1.6.2",
-    "cors": "^2.8.3",
-    "date-fns": "^1.28.4",
-    "debug": "^2.6.6",
-    "draft-js": "^0.10.0",
-    "draft-js-import-html": "^0.3.2",
-    "draftjs-to-html": "^0.7.2",
-    "express": "4.15.2",
-    "helmet": "3.6.0",
-    "history": "^4.6.1",
-    "hpp": "^0.2.2",
-    "http-proxy": "^1.16.2",
-    "invariant": "^2.2.2",
-    "lodash": "^4.17.4",
-    "normalizr": "3.2.2",
-    "offline-plugin": "^4.7.0",
-    "prop-types": "^15.5.8",
-    "react": "15.5.4",
-    "react-dom": "15.5.4",
-    "react-draft-wysiwyg": "1.9.8",
-    "react-dropzone": "3.13.1",
-    "react-helmet": "5.0.3",
-    "react-loadable": "^3.3.1",
-    "react-redux": "5.0.4",
-    "react-router-config": "1.0.0-beta.3",
-    "react-router-dom": "^4.1.1",
-    "react-router-redux": "next",
-    "react-transition-group": "^1.1.3",
-    "redux": "^3.6.0",
-    "redux-form": "^6.6.3",
-    "redux-thunk": "^2.2.0",
-    "reselect": "^3.0.0",
-    "response-time": "^2.3.2",
-    "serialize-javascript": "1.3.0",
-    "source-map-support": "0.4.15",
-    "styled-components": "^1.4.6",
-    "uuid": "^3.0.1",
-    "webfontloader": "^1.6.27"
-  },
-  "devDependencies": {
-    "assets-webpack-plugin": "3.5.1",
-    "autoprefixer": "^6.7.7",
-    "babel-cli": "6.24.1",
-    "babel-core": "^6.24.1",
-    "babel-eslint": "^7.2.3",
-    "babel-jest": "^19.0.0",
-    "babel-loader": "7.0.0",
-    "babel-plugin-dynamic-import-node": "^1.0.2",
-    "babel-plugin-dynamic-import-webpack": "^1.0.1",
-    "babel-plugin-syntax-dynamic-import": "^6.18.0",
-    "babel-plugin-syntax-flow": "^6.18.0",
-    "babel-plugin-syntax-trailing-function-commas": "^6.22.0",
-    "babel-plugin-transform-decorators-legacy": "^1.3.4",
-    "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "babel-plugin-transform-react-constant-elements": "^6.23.0",
-    "babel-plugin-transform-react-inline-elements": "^6.22.0",
-    "babel-plugin-transform-react-jsx": "^6.24.1",
-    "babel-plugin-transform-react-jsx-self": "^6.22.0",
-    "babel-plugin-transform-react-jsx-source": "^6.22.0",
-    "babel-preset-babili": "^0.0.12",
-    "babel-preset-env": "1.4.0",
-    "babel-preset-react": "^6.24.1",
-    "babel-preset-stage-2": "^6.24.1",
-    "babili-webpack-plugin": "^0.0.11",
-    "better-npm-run": "^0.0.15",
-    "cache-loader": "^1.0.3",
-    "case-sensitive-paths-webpack-plugin": "^2.0.0",
-    "chokidar": "1.6.1",
-    "circular-dependency-plugin": "^3.0.0",
-    "css-loader": "0.28.1",
-    "cz-conventional-changelog-emoji": "^0.1.0",
-    "enzyme": "^2.8.2",
-    "enzyme-to-json": "^1.5.1",
-    "eslint": "3.19.0",
-    "eslint-config-boldr": "0.9.3",
-    "extract-text-webpack-plugin": "2.1.0",
-    "fast-async": "^6.2.2",
-    "file-loader": "0.11.1",
-    "flow-bin": "0.45.0",
-    "glob": "7.1.1",
-    "happypack": "^3.0.3",
-    "html-webpack-plugin": "^2.28.0",
-    "husky": "^0.13.3",
-    "identity-obj-proxy": "^3.0.0",
-    "jest": "^19.0.2",
-    "jest-enzyme": "^3.1.0",
-    "lint-staged": "^3.4.1",
-    "md5": "2.2.1",
-    "moxios": "^0.4.0",
-    "nock": "^9.0.13",
-    "node-sass": "^4.5.2",
-    "postcss": "^5.2.17",
-    "postcss-import": "^9.1.0",
-    "postcss-loader": "^1.3.3",
-    "postcss-reporter": "^3.0.0",
-    "prettier": "^1.3.1",
-    "react-addons-perf": "^15.4.2",
-    "react-test-renderer": "^15.5.4",
-    "redbox-react": "^1.3.6",
-    "redux-mock-store": "^1.2.3",
-    "rimraf": "2.6.1",
-    "sass-loader": "^6.0.3",
-    "sinon": "2.2.0",
-    "style-loader": "0.17.0",
-    "stylelint": "^7.10.1",
-    "supertest": "^3.0.0",
-    "url-loader": "^0.5.8",
-    "webpack": "2.5.0",
-    "webpack-bundle-analyzer": "^2.4.0",
-    "webpack-dev-middleware": "1.10.2",
-    "webpack-hot-middleware": "2.18.0",
-    "webpack-md5-hash": "0.0.5",
-    "webpack-node-externals": "1.5.4",
-    "why-did-you-update": "^0.0.8"
+  "license": "MIT",
+  "main": "dist/server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strues/boldr.git"
   },
   "engines": {
     "node": ">=7.0.0",
@@ -167,36 +29,245 @@
     "universal",
     "webpack"
   ],
-  "license": "MIT",
-  "lint-staged": {
-    "src/**/*.js": [
-      "prettier --single-quote=true --jsx-bracket-same-line=false --trailing-comma=all --write \"src/**/*.js\"",
-      "git add"
-    ]
-  },
-  "main": "boldrCMS/server/index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/strues/boldr.git"
-  },
   "scripts": {
-    "analyze": "babel-node internal/scripts/analyze --client",
-    "babel": "NODE_ENV=production babel --ignore node_modules",
-    "build": "NODE_ENV=production USE_PROXY=false babel-node internal/scripts/build --optimize",
-    "build:proxy": "NODE_ENV=production USE_PROXY=true babel-node internal/scripts/build --optimize",
-    "build:test": "babel-node internal/scripts/build",
-    "clean": "babel-node internal/scripts/clean",
-    "coveralls": "cat ./coverage/lcov.info | coveralls",
+    "build": "npm run clean && npm run build:client && npm run build:ssr && npm run build:server",
+    "build:client": "NODE_ENV=production webpack --progress -p --config internal/webpack/createClientConfig.js",
+    "build:server": "NODE_ENV=production babel server --out-dir build/server",
+    "build:ssr": "NODE_ENV=production webpack --progress -p --config internal/webpack/createServerConfig.js",
+    "clean": "rimraf build && rimraf node_modules/.boldr_cache",
     "dev": "better-npm-run dev",
-    "flow": "babel-node internal/scripts/flow",
-    "flow:defs": "flow-typed install --overwrite",
-    "format": "prettier --single-quote=true --jsx-bracket-same-line=false --trailing-comma=all --write \"src/**/*.js\"",
-    "lint": "eslint src",
-    "nuke": "rimraf .happypack && rimraf boldrCMS && rimraf node_modules/.cache",
-    "precommit": "lint-staged",
-    "prepush": "yarn test",
-    "start": "NODE_ENV=production node boldrCMS/server/index.js",
-    "test": "better-npm-run test",
-    "test:ci": "NODE_ENV=test jest -w 4 -u --config=internal/jest/jest.json --forceExit"
+    "lint": "node ./node_modules/.bin/eslint src",
+    "flow": "node ./node_modules/.bin/flow check",
+    "knex": "./node_modules/.bin/knex",
+    "migrate": "better-npm-run migrate",
+    "develop": "NODE_ENV=development nodemon",
+    "reset": "better-npm-run reset",
+    "migrate:test": "node --harmony internal/scripts/db.js migrate",
+    "migration": "better-npm-run migration",
+    "prettier": "node ./internal/scripts/prettier.js write",
+    "start": "NODE_ENV=production node server/app.js",
+    "stylelint": "./node_modules/.bin/stylelint ./src/shared/styles/**/*.scss  -s scss --fix ",
+    "seed": "better-npm-run seed",
+    "seed:test": "node --harmony internal/scripts/db.js seed",
+    "test": "NODE_ENV=test jest --config jest.config.json",
+    "test:ci": "NODE_ENV=test CI=true jest"
+  },
+  "dependencies": {
+    "@boldr/ui": "0.1.0-beta.12",
+    "apollo-client": "1.6.1",
+    "apollo-upload-client": "^5.0.0",
+    "axios": "^0.16.2",
+    "babel-code-frame": "^6.22.0",
+    "bcryptjs": "^2.4.3",
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.17.2",
+    "boldr-utils": "^0.4.0-rc.2",
+    "classnames": "^2.2.5",
+    "connect-redis": "^3.3.0",
+    "convict": "^4.0.0",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.3",
+    "data-driven-motion": "^0.0.11",
+    "dataloader": "^1.3.0",
+    "date-fns": "^2.0.0-alpha.1",
+    "debug": "^2.6.8",
+    "dotenv": "^4.0.0",
+    "draft-convert": "^1.4.7",
+    "draft-js": "^0.10.1",
+    "draftjs-utils": "^0.7.5",
+    "express": "^4.15.3",
+    "express-session": "^1.15.3",
+    "formidable": "^1.1.1",
+    "graphql": "^0.10.3",
+    "graphql-server-express": "^0.9.0",
+    "graphql-subscriptions": "^0.4.3",
+    "graphql-tag": "^2.4.2",
+    "griddle-react": "next",
+    "hoist-non-react-statics": "^2.0.0",
+    "hpp": "^0.2.2",
+    "ioredis": "^3.1.1",
+    "jimp": "^0.2.28",
+    "jsonwebtoken": "^7.4.1",
+    "knex": "^0.13.0",
+    "lodash": "^4.17.4",
+    "method-override": "^2.3.9",
+    "mkdirp": "^0.5.1",
+    "morgan": "^1.8.2",
+    "nodemailer": "^4.0.1",
+    "object-path": "^0.11.4",
+    "objection": "^0.8.4",
+    "pg": "^6.4.0",
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-apollo": "^1.4.2",
+    "react-dom": "^15.6.1",
+    "react-dropzone": "^3.13.3",
+    "react-helmet": "5.1.3",
+    "react-motion": "^0.5.0",
+    "react-redux": "^5.0.5",
+    "react-router-dom": "^4.1.1",
+    "react-tagsinput": "^3.17.0",
+    "react-transition-group": "^1.2.0",
+    "react-universal-component": "^1.2.6",
+    "redux": "^3.7.1",
+    "redux-form": "^6.8.0",
+    "redux-thunk": "^2.2.0",
+    "request": "^2.81.0",
+    "reselect": "^3.0.1",
+    "serialize-javascript": "^1.3.0",
+    "shortid": "^2.2.8",
+    "source-map-support": "^0.4.15",
+    "styled-components": "^2.1.0",
+    "subscriptions-transport-ws": "^0.7.3",
+    "uuid": "^3.1.0",
+    "validator": "^7.1.0",
+    "webfontloader": "^1.6.28",
+    "webpack-flush-chunks": "^1.0.10",
+    "winston": "^2.3.1"
+  },
+  "devDependencies": {
+    "@boldr/cli": "^0.1.0",
+    "autoprefixer": "^7.1.1",
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "7.2.3",
+    "babel-jest": "^20.0.3",
+    "babel-loader": "^7.1.1",
+    "babel-plugin-styled-components": "^1.1.6",
+    "babel-preset-boldr": "^0.9.7",
+    "babel-preset-env": "^1.5.2",
+    "babel-watch": "^2.0.6",
+    "better-npm-run": "^0.0.15",
+    "cache-loader": "^1.0.3",
+    "case-sensitive-paths-webpack-plugin": "^2.1.1",
+    "chalk": "^1.1.3",
+    "circular-dependency-plugin": "^3.0.0",
+    "cross-env": "^5.0.1",
+    "css-loader": "^0.28.4",
+    "cz-conventional-changelog-emoji": "^0.1.0",
+    "enzyme": "^2.9.1",
+    "eslint": "^4.1.1",
+    "eslint-config-boldr": "^0.10.5",
+    "extract-css-chunks-webpack-plugin": "^1.0.15",
+    "faker": "^4.1.0",
+    "fast-sass-loader": "^1.2.5",
+    "file-loader": "^0.11.2",
+    "flow-bin": "^0.49.1",
+    "happypack": "4.0.0-beta.1",
+    "husky": "^0.14.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^20.0.4",
+    "jest-enzyme": "^3.4.0",
+    "lint-staged": "^4.0.0",
+    "loader-utils": "^1.1.0",
+    "md5": "^2.2.1",
+    "moxios": "^0.4.0",
+    "node-sass": "^4.5.3",
+    "postcss-discard-duplicates": "^2.1.0",
+    "postcss-flexbugs-fixes": "^3.0.0",
+    "postcss-loader": "^2.0.6",
+    "postcss-scss": "^1.0.2",
+    "prettier": "^1.5.2",
+    "react-hot-loader": "^3.0.0-beta.7",
+    "react-test-renderer": "^15.6.1",
+    "redbox-react": "^1.4.2",
+    "redux-mock-store": "^1.2.3",
+    "require-from-string": "^1.2.1",
+    "rimraf": "^2.6.1",
+    "sinon": "^2.3.6",
+    "stats-webpack-plugin": "^0.6.1",
+    "stylelint": "^7.12.0",
+    "stylelint-config-boldr": "^0.1.2",
+    "supertest": "^3.0.0",
+    "uglifyjs-webpack-plugin": "^0.4.6",
+    "url-loader": "^0.5.9",
+    "webpack": "^3.0.0",
+    "webpack-dev-middleware": "^1.11.0",
+    "webpack-hot-middleware": "^2.18.0"
+  },
+  "betterScripts": {
+    "build": {
+      "command": "cross-env boldr build",
+      "env": {
+        "NODE_ENV": "production",
+        "BOLDR_PORT": "3000",
+        "BOLDR_DEV_PORT": "3001",
+        "DEBUG": "boldr:*"
+      }
+    },
+    "dev": {
+      "command": "babel-watch ./server/index.js",
+      "env": {
+        "NODE_ENV": "development",
+        "BOLDR_PORT": "3000",
+        "BOLDR_DEV_PORT": "3001",
+        "DEBUG": "boldr:*"
+      }
+    },
+    "migrate": {
+      "command": "cross-env node --harmony internal/scripts/db.js migrate",
+      "env": {
+        "DATABASE_URL": "postgres://postgres:password@localhost:5432/boldr",
+        "NODE_ENV": "development"
+      }
+    },
+    "migrate:test": {
+      "command": "cross-env node --harmony internal/scripts/db.js migrate",
+      "env": {
+        "DATABASE_URL": "postgres://postgres:password@localhost:5432/boldr_test",
+        "NODE_ENV": "development"
+      }
+    },
+    "migration": {
+      "command": "cross-env node --harmony internal/scripts/db.js migration",
+      "env": {
+        "DATABASE_URL": "postgres://postgres:password@localhost:5432/boldr",
+        "NODE_ENV": "development"
+      }
+    },
+    "reset": {
+      "command": "cross-env node --harmony internal/scripts/db.js reset",
+      "env": {
+        "DATABASE_URL": "postgres://postgres:password@localhost:5432/boldr_test",
+        "NODE_ENV": "development"
+      }
+    },
+    "rollback": {
+      "command": "babel-node node_modules/.bin/knex migrate:rollback",
+      "env": {
+        "DATABASE_URL": "postgres://postgres:password@localhost:5432/boldr_test",
+        "NODE_ENV": "test"
+      }
+    },
+    "seed": {
+      "command": "cross-env node --harmony internal/scripts/db.js seed",
+      "env": {
+        "DATABASE_URL": "postgres://postgres:password@localhost:5432/boldr",
+        "NODE_ENV": "development"
+      }
+    },
+    "seed:test": {
+      "command": "cross-env knex seed:run",
+      "env": {
+        "BOLDR__DB__URL": "postgres://postgres:password@localhost:5432/boldr_test",
+        "NODE_ENV": "test"
+      }
+    },
+    "test": {
+      "command": "npm run reset && jest -w 2 --forceExit",
+      "env": {
+        "BOLDR__DB__URL": "postgres://postgres:password@127.0.0.1:5432/boldr_test",
+        "NODE_ENV": "test",
+        "KNEX_TEST_TIMEOUT": 30000
+      }
+    }
+  },
+  "browserslist": [
+    "> .5% in US",
+    "last 1 versions"
+  ],
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog-emoji"
+    }
   }
 }

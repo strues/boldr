@@ -1,0 +1,8 @@
+query GetPagesQuery {
+  pages {
+    id
+    title
+    slug
+    url
+  }
+}
