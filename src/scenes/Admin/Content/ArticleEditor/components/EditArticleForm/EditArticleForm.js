@@ -2,8 +2,10 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import styled from 'styled-components';
-import Button from '@@components/Button';
-import { InputField, Col, Row, Headline, FormGroup } from '@@components';
+import Button from '@boldr/ui/Button';
+import { Col, Row } from '@boldr/ui/Layout';
+import Headline from '@boldr/ui/Headline';
+import { InputField, FormGroup } from '@boldr/ui/Form';
 
 import EditorField from './EditorField';
 
@@ -22,7 +24,8 @@ const Wrapper = styled.section`
   width: 100%;
   margin-top: 10px;
   margin-bottom: 10px;
-  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12), 0 2px 4px -1px rgba(0, 0, 0, .4);
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12),
+    0 2px 4px -1px rgba(0, 0, 0, .4);
   background-color: #fff;
 `;
 const EditArticleForm = (props: Props) => {
@@ -72,8 +75,13 @@ const EditArticleForm = (props: Props) => {
             <FormGroup>
               <Headline type="h4">Post Status:</Headline>
               <label htmlFor="draft" style={{ marginRight: '10px' }}>
-                <Field id="draft" name="published" component="input" type="radio" value="false" />
-                {' '}
+                <Field
+                  id="draft"
+                  name="published"
+                  component="input"
+                  type="radio"
+                  value="false"
+                />{' '}
                 Draft
               </label>
               <label htmlFor="published">
@@ -83,13 +91,14 @@ const EditArticleForm = (props: Props) => {
                   component="input"
                   type="radio"
                   value="true"
-                />
-                {' '}
+                />{' '}
                 Publish
               </label>
             </FormGroup>
 
-            <Button htmlType="submit" kind="primary">Save Post</Button>
+            <Button htmlType="submit" kind="primary">
+              Save Post
+            </Button>
           </Wrapper>
         </form>
       </Col>

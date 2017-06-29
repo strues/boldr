@@ -53,8 +53,12 @@ const EditMemberForm = (props: Props) => {
         component={InputField}
       />
       <Field name="role" label="Role" component={SelectInput} options={roles} />
-      <Button htmlType="submit" style={style} kind="primary">Save</Button>
-      <Button onClick={reset} style={style} kind="secondary">Reset</Button>
+      <Button htmlType="submit" style={style} kind="primary">
+        Save
+      </Button>
+      <Button onClick={reset} style={style} kind="secondary">
+        Reset
+      </Button>
     </Form>
   );
 };

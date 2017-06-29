@@ -2,7 +2,6 @@ const express = require('express');
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
-const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const buildWebpackDlls = require('../../internal/webpack/buildWebpackDlls');
 const createServerConfig = require('../../internal/webpack/createServerConfig');
 const createClientConfig = require('../../internal/webpack/createClientConfig');
@@ -19,8 +18,8 @@ async function setupHotDev() {
 
   const multiCompiler = webpack([clientConfig, serverConfig]);
   const clientCompiler = multiCompiler.compilers[0];
-  multiCompiler.apply(new FriendlyErrorsWebpackPlugin());
-  router.use(webpackDevMiddleware(multiCompiler, { publicPath }));
+
+  router.use(webpackDevMiddleware(multiCompiler, { publicPath, noInfo: true }));
   router.use(webpackHotMiddleware(clientCompiler));
   router.use(
     wpServerMiddleware(multiCompiler, {

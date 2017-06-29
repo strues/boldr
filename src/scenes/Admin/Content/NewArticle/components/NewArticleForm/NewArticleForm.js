@@ -3,24 +3,13 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import EditorState from 'draft-js/lib/EditorState';
-// import Radio from 'material-ui/Radio';
-import Button from '../../../../../../components/Button';
-
-import {
-  InputField,
-  Col,
-  Paper,
-  Row,
-  FontIcon,
-  Headline,
-  Paragraph,
-  Label,
-  Block,
-  // RadioField,
-  // RadioButtonGroup,
-  FormGroup,
-  Form,
-} from '../../../../../../components';
+import Button from '@boldr/ui/Button';
+import { Col, Row } from '@boldr/ui/Layout';
+import Paper from '@boldr/ui/Paper';
+import Paragraph from '@boldr/ui/Paragraph';
+import Headline from '@boldr/ui/Headline';
+import Block from '@boldr/ui/Block';
+import { InputField, Label, FormGroup, Form } from '@boldr/ui/Form';
 
 import { isRequired } from '../../../../../../core/util/validations';
 
@@ -30,7 +19,7 @@ import FieldEditor from './FieldEditor';
 import { Inner, Toolbar, NewPost, DarkSegment, HelpTxt } from './NewPostStyled';
 import UploadArticleImage from './UploadArticleImage';
 
-type Props = {
+export type Props = {
   handleSubmit?: Function,
   reset?: Function,
   submitting?: boolean,
@@ -88,7 +77,9 @@ class NewArticleForm extends Component {
               </Col>
               <Col xs={12} md={4}>
                 <DarkSegment>
-                  <Headline lightText type="h3">Content Tags</Headline>
+                  <Headline lightText type="h3">
+                    Content Tags
+                  </Headline>
                   <HelpTxt>*Hit enter to save a tag</HelpTxt>
                   <Field
                     name="tags"
@@ -115,37 +106,35 @@ class NewArticleForm extends Component {
                   <FormGroup>
                     <Label label="Publishing status" required />
                     <div>
-                      <label>
+                      <label htmlFor="published">
                         <Field
                           validate={[isRequired]}
                           name="published"
                           component="input"
                           type="radio"
                           value="draft"
-                        />
-                        {' '}
+                        />{' '}
                         Draft
-                      </label>
-                      {' '}
-                      <label>
+                      </label>{' '}
+                      <label htmlFor="published">
                         <Field
                           validate={[isRequired]}
                           name="published"
                           component="input"
                           type="radio"
                           value="published"
-                        />
-                        {' '}
+                        />{' '}
                         Published
                       </label>
                     </div>
                   </FormGroup>
 
-                  <Button htmlType="submit" kind="primary">Save Post</Button>
+                  <Button htmlType="submit" kind="primary">
+                    Save Post
+                  </Button>
                 </Block>
               </Col>
             </Row>
-
           </Form>
         </NewPost>
       </div>

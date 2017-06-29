@@ -5,13 +5,16 @@ const fs = require('fs');
 const webpack = require('webpack');
 const StatsPlugin = require('stats-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
-const { removeNil, ifElse } = require('boldr-utils');
+const ifElse = require('boldr-utils/lib/logic/ifElse');
 const UglifyPlugin = require('uglifyjs-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 
 const config = require('../config');
 const happyPackPlugin = require('./plugins/happyPackPlugin');
+const WebpackDigestHash = require('./plugins/ChunkHash');
+const ChunkNames = require('./plugins/ChunkNames');
+const VerboseProgress = require('./plugins/VerboseProgress');
 
 const LOCAL_IDENT = '[name]__[local]___[hash:base64:5]';
 const EXCLUDES = [/node_modules/, config.assetsDir, config.serverCompiledDir];
@@ -34,7 +37,7 @@ module.exports = function createClientConfig(options) {
     // For production
     if (!_DEV) {
       entry = {
-        main: `${config.srcDir}/core/client.js`,
+        main: `${config.srcDir}/core/entry/client.js`,
         vendor: config.vendorFiles,
       };
     }
@@ -60,6 +63,7 @@ module.exports = function createClientConfig(options) {
       // only dev
       pathinfo: _DEV,
       libraryTarget: 'var',
+      crossOriginLoading: 'anonymous',
       devtoolModuleFilenameTemplate: info => path.resolve(info.absoluteResourcePath),
     },
     // fail on err
@@ -89,7 +93,6 @@ module.exports = function createClientConfig(options) {
       version: config.isVerbose,
       timings: true,
       chunks: config.isVerbose,
-      chunkModules: config.isVerbose,
       cached: config.isVerbose,
       cachedAssets: config.isVerbose,
     },
@@ -128,7 +131,7 @@ module.exports = function createClientConfig(options) {
           test: /\.(js|jsx)$/,
           exclude: EXCLUDES,
           include: [config.srcDir],
-          use: removeNil([
+          use: [
             ifDev({
               loader: 'cache-loader',
               options: {
@@ -136,59 +139,15 @@ module.exports = function createClientConfig(options) {
               },
             }),
             { loader: 'happypack/loader?id=hp-js' },
-          ]),
-        },
-        // css
-        {
-          test: /\.css$/,
-          exclude: EXCLUDES,
-          include: config.srcDir,
-          use: ExtractCssChunks.extract({
-            use: removeNil([
-              ifDev({
-                loader: 'cache-loader',
-                options: {
-                  cacheDirectory: config.cacheDir,
-                },
-              }),
-              {
-                loader: 'css-loader',
-                options: {
-                  autoprefixer: false,
-                  modules: true,
-                  importLoaders: 1,
-                  localIdentName: LOCAL_IDENT,
-                  context: config.rootDir,
-                },
-              },
-              {
-                loader: 'postcss-loader',
-                options: {
-                  // https://webpack.js.org/guides/migrating/#complex-options
-                  ident: 'postcss',
-                  plugins: () => [
-                    require('postcss-import')({
-                      root: path.resolve(config.rootDir),
-                    }),
-                    require('postcss-flexbugs-fixes'),
-                    require('postcss-cssnext')({
-                      browsers: ['> .5% in US', 'last 1 versions'],
-                      flexbox: 'no-2009',
-                    }),
-                    require('postcss-discard-duplicates'),
-                  ],
-                },
-              },
-            ]),
-          }),
+          ].filter(Boolean),
         },
         // scss
         {
-          test: /\.scss$/,
+          test: /\.(scss|css)$/,
           include: config.srcDir,
           exclude: EXCLUDES,
           use: ExtractCssChunks.extract({
-            use: removeNil([
+            use: [
               ifDev({
                 loader: 'cache-loader',
                 options: {
@@ -200,6 +159,7 @@ module.exports = function createClientConfig(options) {
                 options: {
                   importLoaders: 2,
                   localIdentName: LOCAL_IDENT,
+                  minimize: !_DEV,
                   // sourceMap: true,
                   modules: false,
                   context: config.rootDir,
@@ -211,12 +171,9 @@ module.exports = function createClientConfig(options) {
                   // https://webpack.js.org/guides/migrating/#complex-options
                   ident: 'postcss',
                   parser: 'postcss-scss',
-                  options: {
-                    // sourceMap: true,
-                  },
                   plugins: () => [
                     require('postcss-flexbugs-fixes'),
-                    require('postcss-cssnext')({
+                    require('autoprefixer')({
                       browsers: ['> 1%', 'last 2 versions'],
                       flexbox: 'no-2009',
                     }),
@@ -225,13 +182,9 @@ module.exports = function createClientConfig(options) {
                 },
               },
               {
-                loader: 'sass-loader',
-                options: {
-                  // sourceMap: true,
-                  includePaths: [config.srcDir],
-                },
+                loader: 'fast-sass-loader',
               },
-            ]),
+            ].filter(Boolean),
           }),
         },
         // json
@@ -285,13 +238,19 @@ module.exports = function createClientConfig(options) {
         __SERVER__: JSON.stringify(false),
         __CLIENT__: JSON.stringify(true),
       }),
+      // Custom progress plugin
+      new VerboseProgress(),
 
+      // Automatically assign quite useful and matching chunk names based on file names.
+      new ChunkNames(),
       new webpack.optimize.CommonsChunkPlugin({
         names: ['bootstrap'],
         filename: _DEV ? '[name].js' : '[name]-[chunkhash].js',
         minChunks: Infinity,
       }),
-      new ExtractCssChunks(),
+      new ExtractCssChunks({
+        filename: _DEV ? '[name].css' : '[name].[contenthash:base62:8].css'
+      }),
       /**
        * HappyPack Plugins are used as caching mechanisms to reduce the amount
        * of time Webpack spends rebuilding, during your bundling during
@@ -306,7 +265,7 @@ module.exports = function createClientConfig(options) {
             path: 'babel-loader',
             query: {
               babelrc: false,
-              compact: true,
+              compact: _PROD,
               sourceMaps: true,
               comments: false,
               cacheDirectory: !_DEV,
@@ -345,10 +304,6 @@ module.exports = function createClientConfig(options) {
       new webpack.NoEmitOnErrorsPlugin(),
       // Hot reloading
       new webpack.HotModuleReplacementPlugin(),
-      // Readable module names for development
-      // https://github.com/webpack/webpack.js.org/issues/652#issuecomment-273023082
-      // @NOTE: if using flushChunkNames rather than flushModuleIds you must disable this...
-      new webpack.NamedModulesPlugin(),
       // Detect modules with circular dependencies when bundling with webpack.
       // @see https://github.com/aackerman/circular-dependency-plugin
       new CircularDependencyPlugin({
@@ -371,10 +326,11 @@ module.exports = function createClientConfig(options) {
   }
   if (_PROD) {
     browserConfig.plugins.push(
+      new WebpackDigestHash(),
       // Use HashedModuleIdsPlugin to generate IDs that preserves over builds
       // @see https://github.com/webpack/webpack.js.org/issues/652#issuecomment-273324529
       // @NOTE: if using flushChunkNames rather than flushModuleIds you must disable this...
-      new webpack.HashedModuleIdsPlugin(),
+      // new webpack.HashedModuleIdsPlugin(),
       new StatsPlugin('client-stats.json'),
       new UglifyPlugin({
         compress: true,

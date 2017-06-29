@@ -3,12 +3,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Switch from 'react-router-dom/Switch';
 import Route from 'react-router-dom/Route';
-
+import Topbar from '@boldr/ui/Topbar';
 // internal
 import Sidebar from '../../components/Sidebar';
 import { DashboardWrapper, DashboardContent, DashboardMain } from '../../components/Dashboard';
-import Topbar from '../../components/Topbar';
-import TopbarLink from '../../components/Topbar/TopbarLink';
+
+import TopbarLink from '@boldr/ui/Topbar/TopbarLink';
 import flattenRoutes from '../../core/util/flattenRoutes';
 import { selectMe } from '../../state/users/selectors';
 import { hideHeader, showHideSidebar, expandCollapseSideMenu } from '../../state/boldr/ui/actions';

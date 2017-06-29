@@ -1,0 +1,234 @@
+// ******* color variables *******
+$dark-bg: #212121;
+$dark-hl: #424242;
+$dark-fg: #fff;
+
+$light-bg: #e0e0e0;
+$light-hl: #bdbdbd;
+$light-fg: #212121;
+
+$material-red-bg: #b71c1c;
+$material-red-hl: #c62828;
+$material-red-fg: #fff;
+
+$material-cyan-bg: #006064;
+$material-cyan-hl: #00838f;
+$material-cyan-fg: #fff;
+
+$material-indigo-bg: #1a237e;
+$material-indigo-hl: #283593;
+$material-indigo-fg: #fff;
+
+$material-green-bg: #1b5e20;
+$material-green-hl: #2e7d32;
+$material-green-fg: #fff;
+
+$material-amber-bg: #ff6f00;
+$material-amber-hl: #ff8f00;
+$material-amber-fg: #fff;
+
+$material-bluegrey-bg: #263238;
+$material-bluegrey-hl: #37474f;
+$material-bluegrey-fg: #fff;
+
+$material-brown-bg: #3e2723;
+$material-brown-hl: #4e342e;
+$material-brown-fg: #fff;
+
+// ******* default dark *******
+.#{$boldr-ns}navbar-menu-dark,
+.#{$boldr-ns}navbar-menu-dark .dropdown ul {
+    background-color: $dark-bg;
+    color: $dark-fg;
+}
+
+.#{$boldr-ns}navbar-menu-dark {
+    .active,
+    .#{$boldr-ns}navbar-item:hover {
+        background-color: $dark-hl;
+    }
+
+    .#{$boldr-ns}navbar-hamburger {
+        span,
+        span::before,
+        span::after {
+            background-color: $dark-fg;
+        }
+    }
+}
+
+// ******* default light *******
+.#{$boldr-ns}navbar-menu-light,
+.#{$boldr-ns}navbar-menu-light .dropdown ul {
+    background-color: $light-bg;
+    color: $light-fg;
+}
+
+.#{$boldr-ns}navbar-menu-light {
+    .active,
+    .#{$boldr-ns}navbar-item:hover {
+        background-color: $light-hl;
+    }
+
+    .#{$boldr-ns}navbar-hamburger {
+        span,
+        span::before,
+        span::after {
+            background-color: $light-fg;
+        }
+    }
+}
+
+// ******* default material-red *******
+.#{$boldr-ns}navbar-menu-material-red,
+.#{$boldr-ns}navbar-menu-material-red .dropdown ul {
+    background-color: $material-red-bg;
+    color: $material-red-fg;
+}
+
+.#{$boldr-ns}navbar-menu-material-red {
+    .active,
+    .#{$boldr-ns}navbar-item:hover {
+        background-color: $material-red-hl;
+    }
+
+    .#{$boldr-ns}navbar-hamburger {
+        span,
+        span::before,
+        span::after {
+            background-color: $material-red-fg;
+        }
+    }
+}
+
+// ******* default material-indigo *******
+.#{$boldr-ns}navbar-menu-material-indigo,
+.#{$boldr-ns}navbar-menu-material-indigo .dropdown ul {
+    background-color: $material-indigo-bg;
+    color: $material-indigo-fg;
+}
+
+.#{$boldr-ns}navbar-menu-material-indigo {
+    .active,
+    .#{$boldr-ns}navbar-item:hover {
+        background-color: $material-indigo-hl;
+    }
+
+    .#{$boldr-ns}navbar-hamburger {
+        span,
+        span::before,
+        span::after {
+            background-color: $material-indigo-fg;
+        }
+    }
+}
+
+// ******* default material-green *******
+.#{$boldr-ns}navbar-menu-material-green,
+.#{$boldr-ns}navbar-menu-material-green .dropdown ul {
+    background-color: $material-green-bg;
+    color: $material-green-fg;
+}
+
+.#{$boldr-ns}navbar-menu-material-green {
+    .active,
+    .#{$boldr-ns}navbar-item:hover {
+        background-color: $material-green-hl;
+    }
+
+    .#{$boldr-ns}navbar-hamburger {
+        span,
+        span::before,
+        span::after {
+            background-color: $material-green-fg;
+        }
+    }
+}
+
+// ******* default material-amber *******
+.#{$boldr-ns}navbar-menu-material-amber,
+.#{$boldr-ns}navbar-menu-material-amber .dropdown ul {
+    background-color: $material-amber-bg;
+    color: $material-amber-fg;
+}
+
+.#{$boldr-ns}navbar-menu-material-amber {
+    .active,
+    .#{$boldr-ns}navbar-item:hover {
+        background-color: $material-amber-hl;
+    }
+
+    .#{$boldr-ns}navbar-hamburger {
+        span,
+        span::before,
+        span::after {
+            background-color: $material-amber-fg;
+        }
+    }
+}
+
+// ******* default material-brown *******
+.#{$boldr-ns}navbar-menu-material-brown,
+.#{$boldr-ns}navbar-menu-material-brown .dropdown ul {
+    background-color: $material-brown-bg;
+    color: $material-brown-fg;
+}
+
+.#{$boldr-ns}navbar-menu-material-brown {
+    .active,
+    .#{$boldr-ns}navbar-item:hover {
+        background-color: $material-brown-hl;
+    }
+
+    .#{$boldr-ns}navbar-hamburger {
+        span,
+        span::before,
+        span::after {
+            background-color: $material-brown-fg;
+        }
+    }
+}
+
+// ******* default material-bluegrey *******
+.#{$boldr-ns}navbar-menu-material-bluegrey,
+.#{$boldr-ns}navbar-menu-material-bluegrey .dropdown ul {
+    background-color: $material-bluegrey-bg;
+    color: $material-bluegrey-fg;
+}
+
+.#{$boldr-ns}navbar-menu-material-bluegrey {
+    .active,
+    .#{$boldr-ns}navbar-item:hover {
+        background-color: $material-bluegrey-hl;
+    }
+
+    .#{$boldr-ns}navbar-hamburger {
+        span,
+        span::before,
+        span::after {
+            background-color: $material-bluegrey-fg;
+        }
+    }
+}
+
+// ******* default material-cyan *******
+.#{$boldr-ns}navbar-menu-material-cyan,
+.#{$boldr-ns}navbar-menu-material-cyan .dropdown ul {
+    background-color: $material-cyan-bg;
+    color: $material-cyan-fg;
+}
+
+.#{$boldr-ns}navbar-menu-material-cyan {
+    .active,
+    .#{$boldr-ns}navbar-item:hover {
+        background-color: $material-cyan-hl;
+    }
+
+    .#{$boldr-ns}navbar-hamburger {
+        span,
+        span::before,
+        span::after {
+            background-color: $material-cyan-fg;
+        }
+    }
+}

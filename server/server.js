@@ -11,7 +11,21 @@ const host = process.env.BOLDR_HOST || '0.0.0.0';
 // Launch Node.js server
 const port = processPort || 3000;
 const server = http.createServer(app);
-
+// // WebSocket server for subscriptions
+// const websocketServer = createServer((request, response) => {
+//   response.writeHead(404);
+//   response.end();
+// });
+//
+// websocketServer.listen(WS_PORT, () => console.log( // eslint-disable-line no-console
+//   `Websocket Server is now running on http://localhost:${WS_PORT}`
+// ));
+//
+// // eslint-disable-next-line
+// new SubscriptionServer(
+//   { subscriptionManager },
+//   websocketServer
+// );
 initializeDb()
   .then(() => {
     logger.info('Database connected successfully');

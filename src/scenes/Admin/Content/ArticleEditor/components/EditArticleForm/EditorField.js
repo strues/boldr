@@ -1,12 +1,12 @@
 /* @flow */
 import React, { Component } from 'react';
-import Editor from '@@components/BoldrEditor';
 // $FlowIssue
 import { convertFromHTML } from 'draft-convert';
 // $FlowIssue
 import { convertToRaw, EditorState } from 'draft-js';
+import Editor from '../../../../../../components/BoldrEditor';
 
-type Props = {
+export type Props = {
   input: Object,
   placeholder: string,
 };

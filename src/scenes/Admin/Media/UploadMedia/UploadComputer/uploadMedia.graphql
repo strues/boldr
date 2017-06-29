@@ -1,0 +1,8 @@
+mutation uploadMedia($file: UploadMediaInput!) {
+  uploadMedia(file: $file) {
+    id
+    name
+    type
+    path
+  }
+}

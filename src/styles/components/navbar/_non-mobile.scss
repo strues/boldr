@@ -1,0 +1,53 @@
+@media screen and (min-width: $boldrui-navbar-breakpoint) {
+    .#{$boldr-ns}navbar-navigation {
+        flex-flow: row;
+        justify-content: flex-end;
+    }
+
+    .#{$boldr-ns}navbar-hamburger {
+        display: none;
+    }
+
+    .#{$boldr-ns}navbar-checkbox {
+        &:not(:checked) ~ .#{$boldr-ns}navbar-menu {
+            overflow: visible;
+        }
+
+        &:checked ~ .#{$boldr-ns}navbar-menu {
+            height: $boldrui-navbar-height;
+        }
+    }
+
+    .#{$boldr-ns}navbar-menu {
+        .#{$boldr-ns}navbar-item {
+            border-top: 0;
+        }
+    }
+
+    .#{$boldr-ns}navbar-menu-right .#{$boldr-ns}navbar-header {
+        margin-right: auto;
+    }
+
+    .dropdown {
+        height: $boldrui-navbar-height;
+
+        &:hover > ul {
+            position: absolute;
+            top: $boldrui-navbar-height;
+            left: 0;
+            padding: 0;
+        }
+
+        > ul {
+            display: none;
+
+            .#{$boldr-ns}navbar-item {
+                padding: 5px 10px;
+
+                a {
+                    white-space: nowrap;
+                }
+            }
+        }
+    }
+}

@@ -1,8 +1,8 @@
+/* @flow */
 import React from 'react';
 import styled from 'styled-components';
-// internal
-import Button from '../../../../../components/Button';
-import Avatar from '../../../../../components/Avatar';
+import Button from '@boldr/ui/Button';
+import Avatar from '@boldr/ui/Avatar';
 
 const MemListItem = styled.li`
   width: 100%;
@@ -51,19 +51,28 @@ const MemberCard = (props: Props) => {
   return (
     <MemListItem>
       <LeftSide>
-
         <UserInfoList>
           <UserInfoListItem>
             <Avatar src={avatarUrl} role="presentation" />
           </UserInfoListItem>
-          <UserInfoListItem>{username}</UserInfoListItem>
-          <UserInfoListItem>{roleName}</UserInfoListItem>
-          <UserInfoListItem>{firstName}{' '}{lastName}</UserInfoListItem>
-          <UserInfoListItem>{email}</UserInfoListItem>
+          <UserInfoListItem>
+            {username}
+          </UserInfoListItem>
+          <UserInfoListItem>
+            {roleName}
+          </UserInfoListItem>
+          <UserInfoListItem>
+            {firstName} {lastName}
+          </UserInfoListItem>
+          <UserInfoListItem>
+            {email}
+          </UserInfoListItem>
         </UserInfoList>
       </LeftSide>
       <RightSide>
-        <Button onClick={() => handleToggle(user)} kind="primary">Edit</Button>
+        <Button onClick={() => handleToggle(user)} kind="primary">
+          Edit
+        </Button>
       </RightSide>
     </MemListItem>
   );

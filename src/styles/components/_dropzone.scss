@@ -1,20 +1,20 @@
-.boldrui-dropzone {
+.#{$boldr-ns}dropzone {
     border: 1px solid $dark-navy;
 }
 
-.boldrui-dropzone__panel {
+.#{$boldr-ns}dropzone__panel {
     align-items: center;
     width: 100%;
     height: 250px;
     margin: 0 auto;
 }
 
-.boldrui-dropzone__drop {
+.#{$boldr-ns}dropzone__drop {
     padding-top: 100px;
     text-align: center;
 }
 
-.boldrui-dropzone__drop-sm {
+.#{$boldr-ns}dropzone__drop-sm {
     padding-top: 50px;
     padding-bottom: 50px;
     text-align: center;
@@ -32,7 +32,7 @@
     max-height: 100%;
 }
 
-.boldrui-dropzone__empty {
+.#{$boldr-ns}dropzone__empty {
     padding: 80px;
     color: #a1a1a1;
     background-color: rgb(255, 255, 255);
@@ -41,14 +41,14 @@
     font-size: 16px;
 }
 
-.boldrui-dropzone__active {
+.#{$boldr-ns}dropzone__active {
     background-color: rgba(18, 179, 117, 0.4);
 }
 
-.boldrui-dropzone__reject {
+.#{$boldr-ns}dropzone__reject {
     background-color: rgba(244, 67, 54, 0.8);
 }
 
-.boldrui-dropzone__footer {
+.#{$boldr-ns}dropzone__footer {
     background-color: rgba(0, 0, 0, 0.05);
 }

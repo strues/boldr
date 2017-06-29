@@ -1,9 +1,0 @@
-{
-    "verbose": false,
-    "watch": [
-      "server/",
-      "internal/webpack/",
-      "src/core/renderer.js"
-    ],
-    "exec": "babel-node server/index.js"
-}

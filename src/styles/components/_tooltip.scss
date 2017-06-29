@@ -1,28 +1,22 @@
-$zIndex: 2000;
-$font-size: 14px;
-$line-height: 1.29;
-$padding: 18px;
-$border-radius: 8px;
-$shadow-color: rgba(0, 0, 0, 0.2);
-$shadow-color-arrow: rgba(0, 0, 0, 0.1);
-$shadow: 0 0 11px 0 $shadow-color;
-
-.boldrui-tooltip__root {
+////
+/// @group tooltip
+////
+.#{$boldr-ns}tooltip__root {
     position: absolute;
-    z-index: $zIndex;
+    z-index: $tooltip-z-index;
 }
 
-.boldrui-tooltip {
+.#{$boldr-ns}tooltip {
     position: relative;
     display: inline-block;
-    padding: $padding;
+    padding: $tooltip-padding;
     color: $text-color;
     background: $white;
-    border-radius: $border-radius;
-    box-shadow: $shadow;
-    font-size: $font-size;
+    border-radius: $tooltip-border-radius;
+    box-shadow: $tooltip-shadow;
+    font-size: $tooltip-font-size;
     -webkit-font-smoothing: antialiased;
-    line-height: $line-height;
+    line-height: $tooltip-line-height;
     word-wrap: break-word;
 
     &.light {
@@ -53,7 +47,7 @@ $shadow: 0 0 11px 0 $shadow-color;
     }
 }
 
-.boldrui-tooltip__arrow {
+.#{$boldr-ns}tooltip__arrow {
     $arrow-size: 10px;
     position: absolute;
     width: $arrow-size;
@@ -69,12 +63,12 @@ $shadow: 0 0 11px 0 $shadow-color;
 
     &.bottom {
         bottom: -4px;
-        box-shadow: 3px 3px 6px $shadow-color-arrow;
+        box-shadow: 3px 3px 6px $tooltip-shadow-color-arrow;
     }
 
     &.top {
         top: -4px;
-        box-shadow: -3px -3px 6px $shadow-color-arrow;
+        box-shadow: -3px -3px 6px $tooltip-shadow-color-arrow;
     }
 
     &.left,
@@ -85,16 +79,16 @@ $shadow: 0 0 11px 0 $shadow-color;
 
     &.right {
         right: -5px;
-        box-shadow: 3px -3px 6px $shadow-color-arrow;
+        box-shadow: 3px -3px 6px $tooltip-shadow-color-arrow;
     }
 
     &.left {
         left: -5px;
-        box-shadow: -3px 3px 6px $shadow-color-arrow;
+        box-shadow: -3px 3px 6px $tooltip-shadow-color-arrow;
     }
 }
 
-.boldrui-tooltip__fadeIn {
+.#{$boldr-ns}tooltip__fadeIn {
     animation: fadeIn 0.3s cubic-bezier(0.23, 1, 0.32, 1) both;
 }
 

@@ -1,23 +1,13 @@
 // @flow
 
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 // internal
+import { replacePath } from '../../../core/RouterConnection';
 import { signupUserError, signupUserSuccess } from '../state/actions';
 import Signup from './Signup';
-
-export const SIGNUP_USER_MUTATION = gql`
-  mutation signupUser($input: UserSignupInput!) {
-    signupUser(input: $input) {
-      username
-        firstName
-        lastName
-        email
-    }
-  }
-`;
+import SIGNUP_USER_MUTATION from './signup.mutation.graphql';
 
 const withMutation = graphql(SIGNUP_USER_MUTATION, {
   props: ({ mutate }) => ({
@@ -63,7 +53,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
             dismissAfter: 3000,
           }),
         );
-        return dispatch(push('/'));
+        return dispatch(replacePath('/'));
       })
       .catch(error => {
         dispatch(

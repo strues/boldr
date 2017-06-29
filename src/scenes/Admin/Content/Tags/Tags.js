@@ -2,10 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import IconButton from 'material-ui/IconButton';
-import NavigationExpandMoreIcon from 'material-ui-icons/ExpandMore';
-import MenuItem from 'material-ui/Menu/MenuItem';
-import List from 'material-ui/List';
+
 // internal
 import Paper from '@boldr/ui/Paper';
 import { Row, Col } from '@boldr/ui/Layout';
@@ -55,16 +52,18 @@ class Tags extends Component {
               <ToolbarTitle text="Tags" />
 
             </Toolbar> */}
-            <List>
+            {/* <List>
               <TagList tags={this.props.tags} handleDeleteTagClick={this.handleDeleteTagClick} />
-            </List>
+            </List> */}
+            a
           </Paper>
         </Col>
         <Col sm={12} md={8}>
           {!this.state.add
             ? null
             : <Paper zDepth={3} className="boldr-paperoverride">
-                <AddTag />
+                {/* <AddTag /> */}
+                a
               </Paper>}
         </Col>
       </Row>

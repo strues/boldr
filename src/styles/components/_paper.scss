@@ -1,92 +1,86 @@
 ////
 /// @group paper
 ////
-
-
-/// The defualt transition time for the paper to raise from 0 to 3
-/// @type Number
-$paper-transition-time: $transition-length * 2 !default;
-
-.boldrui-paper {
+.#{$boldr-ns}paper {
     padding: 1em;
     background-color: $paper-light-bg;
 
-    &.boldrui-paper__0 {
+    &.#{$boldr-ns}paper__0 {
 
         @include md-shadow(0);
     }
 
-    &.boldrui-paper__1 {
+    &.#{$boldr-ns}paper__1 {
 
         @include md-shadow(1);
     }
 
-    &.boldrui-paper__2 {
+    &.#{$boldr-ns}paper__2 {
 
         @include md-shadow(2);
     }
 
-    &.boldrui-paper__3 {
+    &.#{$boldr-ns}paper__3 {
 
         @include md-shadow(3);
     }
 
-    &.boldrui-paper__4 {
+    &.#{$boldr-ns}paper__4 {
 
         @include md-shadow(4);
     }
 
-    &.boldrui-paper__5 {
+    &.#{$boldr-ns}paper__5 {
 
         @include md-shadow(5);
     }
 }
 
-.boldrui-paper__dark {
+.#{$boldr-ns}paper__dark {
     padding: 1em;
     color: $text-color-light;
     background-color: $paper-dark-bg;
 
-    &.boldrui-paper__0 {
+    &.#{$boldr-ns}paper__0 {
 
         @include md-shadow(0);
     }
 
-    &.boldrui-paper__1 {
+    &.#{$boldr-ns}paper__1 {
 
         @include md-shadow(1);
     }
 
-    &.boldrui-paper__2 {
+    &.#{$boldr-ns}paper__2 {
 
         @include md-shadow(2);
     }
 
-    &.boldrui-paper__3 {
+    &.#{$boldr-ns}paper__3 {
 
         @include md-shadow(3);
     }
 
-    &.boldrui-paper__4 {
+    &.#{$boldr-ns}paper__4 {
 
         @include md-shadow(4);
     }
 
-    &.boldrui-paper__5 {
+    &.#{$boldr-ns}paper__5 {
 
         @include md-shadow(5);
     }
 }
 
-.boldrui-paper__round {
+.#{$boldr-ns}paper__round {
     border-radius: $border-radius;
 }
 
-.boldrui-paper__no-pad {
+.#{$boldr-ns}paper__no-pad {
     padding: 0;
 }
 
-.boldrui-paper__0-hover {
+.#{$boldr-ns}paper__0-hover {
     transition-property: box-shadow;
     transition-duration: $paper-transition-time;
 

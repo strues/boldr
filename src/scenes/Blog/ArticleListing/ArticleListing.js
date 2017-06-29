@@ -11,6 +11,7 @@ import withApolloFetchingContainer from '../../../components/ApolloFetching';
 import View from '../../../components/View';
 import { Grid, Row, Col } from '../../../components/Layout';
 import { FeaturedArticle, ArticleCard } from '../components';
+import ARTICLES_QUERY from './articles.graphql';
 
 type Props = {
   loading: boolean,
@@ -22,12 +23,10 @@ type Props = {
   data: Data,
 };
 type Data = {
-  getArticles: Array<Article>,
+  articles: Array<Article>,
   loading: boolean,
 };
-const CardSpacer = styled.div`
-  margin-bottom: 50px;
-`;
+const CardSpacer = styled.div`margin-bottom: 50px;`;
 const FeaturedArea = styled.section`
   padding-top: 50px;
   margin-bottom: 40px;
@@ -41,16 +40,16 @@ const style = {
 class ArticleListing extends Component {
   static defaultProps = {
     data: {
-      getArticles: [],
+      articles: [],
     },
   };
 
   props: Props;
 
   renderArticles = () => {
-    const { getArticles, loading } = this.props.data;
+    const { articles, loading } = this.props.data;
     const allArticles =
-      getArticles.filter(p => p.published) && getArticles.filter(p => !p.featured);
+      articles.filter(p => p.published) && articles.filter(p => !p.featured);
     return allArticles.map(article =>
       <Col key={article.id} xs={12} md={4}>
         <CardSpacer>
@@ -61,8 +60,8 @@ class ArticleListing extends Component {
   };
 
   renderFeature = () => {
-    const { getArticles } = this.props.data;
-    const featuredArticles = getArticles.filter(p => p.featured);
+    const { articles } = this.props.data;
+    const featuredArticles = articles.filter(p => p.featured);
     return featuredArticles.map(article => <FeaturedArticle key={article.id} {...article} />);
   };
 
@@ -76,7 +75,7 @@ class ArticleListing extends Component {
 
   render() {
     const { renderWhenReady } = this.props;
-    const { getArticles, loading } = this.props.data;
+    const { articles, loading } = this.props.data;
     return (
       <Grid>
         {renderWhenReady(this.renderBody)}
@@ -90,25 +89,6 @@ const mapStateToProps = state => {
     layout: layoutSelector(state),
   };
 };
-
-export const ARTICLES_QUERY = gql`
-  query getArticles($offset: Int!, $limit: Int!) {
-    getArticles(offset: $offset, limit: $limit) {
-      id,
-      title,
-      slug,
-      featureImage
-      featured
-      published
-      createdAt
-      excerpt
-      tags {
-        id,
-        name
-      },
-    }
-  }
-`;
 
 const ArticleListingWithData = compose(
   graphql(ARTICLES_QUERY, {

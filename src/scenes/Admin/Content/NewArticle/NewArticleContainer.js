@@ -2,12 +2,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
-import gql from 'graphql-tag';
 import { convertToHTML } from 'draft-convert';
 import { createArticle } from '../../../Blog/state';
 import NewArticle from './NewArticle';
+import CREATE_ARTICLE_MUTATION from './createArticle.graphql';
 
-type Props = {
+export type Props = {
   dispatch: Function,
   postImage: string,
   onSubmit: Function,
@@ -27,21 +27,6 @@ class NewArticleContainer extends Component {
   }
 }
 
-export const CREATE_ARTICLE_MUTATION = gql`
-  mutation createArticle($input: CreateArticleInput!) {
-    createArticle(input: $input) {
-      title
-      slug
-      content
-      rawContent
-      featured
-      published
-      excerpt
-      featureImage
-
-    }
-  }
-`;
 const withMutation = graphql(CREATE_ARTICLE_MUTATION, {
   props: ({ mutate }) => ({
     createArticle: values =>

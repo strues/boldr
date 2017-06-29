@@ -1,4 +1,4 @@
-.boldrui-form {
+.#{$boldr-ns}form {
     width: auto;
     margin-bottom: 30px;
 
@@ -9,13 +9,13 @@
     }
 }
 
-.boldrui-form__fieldset {
+.#{$boldr-ns}form__fieldset {
     padding: 0;
     border: 0;
     margin: 0;
 }
 
-.boldrui-form__legend {
+.#{$boldr-ns}form__legend {
     width: 100%;
     padding-bottom: 8px;
     border-bottom: 1px solid #e5e5e5;
@@ -24,19 +24,19 @@
     font-size: 14px;
 }
 
-.boldrui-form__control-group {
+.#{$boldr-ns}form__control-group {
     margin-bottom: 20px;
 
     &.has-error {
-        .boldrui-form__control-label,
-        .boldrui-form__error-desc,
-        .boldrui-form__help-block {
+        .#{$boldr-ns}form__control-label,
+        .#{$boldr-ns}form__error-desc,
+        .#{$boldr-ns}form__help-block {
             color: #f44;
         }
     }
 }
 
-.boldrui-form__static-value {
+.#{$boldr-ns}form__static-value {
     padding-top: 5px;
     padding-bottom: 5px;
     font-size: 14px;
@@ -44,23 +44,23 @@
     word-break: break-all;
 }
 
-.boldrui-form__control-action {
+.#{$boldr-ns}form__control-action {
     display: inline-block;
     padding-top: 5px;
     font-size: 14px;
     line-height: 18px;
 }
 
-.boldrui-form__required {
+.#{$boldr-ns}form__required {
     color: #f00;
     margin-right: 6px;
     font-size: 16px;
     vertical-align: middle;
 }
 
-.boldrui-form__help-block,
-.boldrui-form__error-desc,
-.boldrui-form__help-desc {
+.#{$boldr-ns}form__help-block,
+.#{$boldr-ns}form__error-desc,
+.#{$boldr-ns}form__help-desc {
     color: #999;
     margin-top: 6px;
     margin-bottom: 0;
@@ -81,8 +81,8 @@
     }
 }
 
-.boldrui-form--horizontal {
-    .boldrui-form__control-label {
+.#{$boldr-ns}form--horizontal {
+    .#{$boldr-ns}form__control-label {
         display: inline-block;
         width: 120px;
         font-size: 12px;
@@ -90,34 +90,34 @@
         text-align: right;
         vertical-align: top;
 
-        & + .boldrui-form__controls {
+        & + .#{$boldr-ns}form__controls {
             margin-left: 10px;
         }
     }
 
-    .boldrui-form__controls {
+    .#{$boldr-ns}form__controls {
         display: inline-block;
         vertical-align: top;
         word-break: break-all;
     }
 
-    .boldrui-form__form-actions {
+    .#{$boldr-ns}form__form-actions {
         padding: 0 0 0 130px;
         background: none;
         border: none;
         margin: 25px 0 10px;
     }
 
-    .boldrui-form__checkbox-group {
+    .#{$boldr-ns}form__checkbox-group {
         font-size: 0;
         line-height: 28px;
     }
 
-    .boldrui-form__checkbox {
+    .#{$boldr-ns}form__checkbox {
         line-height: 28px;
     }
 
-    .boldrui-form__radio-group {
+    .#{$boldr-ns}form__radio-group {
         line-height: 28px;
     }
 }

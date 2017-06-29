@@ -1,0 +1,12 @@
+mutation createArticle($input: CreateArticleInput!) {
+  createArticle(input: $input) {
+    title
+    slug
+    content
+    rawContent
+    featured
+    published
+    excerpt
+    featureImage
+  }
+}

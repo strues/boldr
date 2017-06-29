@@ -1,10 +1,10 @@
 /* @flow */
 import React, { Component } from 'react';
-import Editor from '@@components/BoldrEditor';
 // $FlowIssue
 import convertToRaw from 'draft-js/lib/convertFromDraftStateToRaw';
 // $FlowIssue
 import EditorState from 'draft-js/lib/EditorState';
+import Editor from '../../../../../../components/BoldrEditor';
 
 const editorStyle = {
   minHeight: 200,

@@ -5,7 +5,9 @@ import { FormGroup, Label } from '@@components/index';
 
 const RenderTags = ({ input, label, meta: { touched, error, warning } }) =>
   <FormGroup color={`${touched && error ? 'danger' : ''}`}>
-    <Label>{label}</Label>
+    <Label>
+      {label}
+    </Label>
     <div>
       <TagsInput
         value={input.value || []}
@@ -13,7 +15,15 @@ const RenderTags = ({ input, label, meta: { touched, error, warning } }) =>
         state={`${touched && error ? 'danger' : ''}`}
         inputProps={{ placeholder: label }}
       />
-      {touched && ((error && <span>{error}</span>) || (warning && <span>{warning}</span>))}
+      {touched &&
+        ((error &&
+          <span>
+            {error}
+          </span>) ||
+          (warning &&
+            <span>
+              {warning}
+            </span>))}
     </div>
   </FormGroup>;
 

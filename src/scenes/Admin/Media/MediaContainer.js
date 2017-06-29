@@ -2,12 +2,12 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {push } from 'react-router-redux';
 import { gql, graphql } from 'react-apollo';
 import { bindActionCreators } from 'redux';
 import Loader from '@boldr/ui/Loader';
-
+import { replacePath } from '../../../core/RouterConnection';
 import Media from './Media';
+import MEDIA_QUERY from './getMedia.graphql';
 
 type Props = {
   data: Data,
@@ -35,20 +35,8 @@ export class MediaContainer extends Component {
   }
 }
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ navigate: url => dispatch(push(url)) }, dispatch);
+  return bindActionCreators({ navigate: url => dispatch(replacePath(url)) }, dispatch);
 }
-
-export const MEDIA_QUERY = gql`
-query getMedia($offset: Int!, $limit: Int!) {
-      getMedia(offset:$offset,limit:$limit) {
-        id,
-        thumbName,
-        name,
-        url,
-        fileDescription,
-      }
-  }
-`;
 
 const MediaContainerWithData = graphql(MEDIA_QUERY, {
   options: props => ({

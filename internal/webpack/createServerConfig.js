@@ -2,11 +2,13 @@
 const path = require('path');
 const fs = require('fs');
 const webpack = require('webpack');
-const { removeNil, ifElse } = require('boldr-utils');
+const ifElse = require('boldr-utils/lib/logic/ifElse');
 const StatsPlugin = require('stats-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const config = require('../config');
+const ChunkNames = require('./plugins/ChunkNames');
+const VerboseProgress = require('./plugins/VerboseProgress');
 
 const CWD = fs.realpathSync(process.cwd());
 
@@ -35,7 +37,7 @@ module.exports = function createServerConfig(options) {
 
   const nodeConfig = {
     // pass either node or web
-    target: 'node',
+    target: 'async-node',
     name: 'server',
     // user's project root
     context: config.rootDir,
@@ -44,12 +46,13 @@ module.exports = function createServerConfig(options) {
     entry: [`${config.srcDir}/core/entry/server.js`],
     output: {
       path: path.join(CWD, 'build'),
-      filename: 'server.js',
+      filename: 'serverRenderer.js',
       sourcePrefix: '  ',
       publicPath: '/',
       // only prod
       pathinfo: _DEV,
       libraryTarget: 'commonjs2',
+      crossOriginLoading: 'anonymous',
       devtoolModuleFilenameTemplate: info => path.resolve(info.absoluteResourcePath),
     },
     // true if prod
@@ -93,7 +96,7 @@ module.exports = function createServerConfig(options) {
           test: /\.js$/,
           include: config.srcDir,
           // exclude: EXCLUDES,
-          use: removeNil([
+          use: [
             ifDev({
               loader: 'cache-loader',
               options: {
@@ -104,7 +107,7 @@ module.exports = function createServerConfig(options) {
               loader: 'babel-loader',
               options: {
                 babelrc: false,
-                compact: true,
+                compact: !_DEV,
                 sourceMaps: true,
                 comments: false,
                 cacheDirectory: _DEV,
@@ -116,7 +119,8 @@ module.exports = function createServerConfig(options) {
                       useBuiltins: true,
                       modules: false,
                       targets: {
-                        node: 'current',
+                        uglify: !_DEV,
+                        node: 8,
                       },
                       exclude: ['transform-regenerator', 'transform-async-to-generator'],
                     },
@@ -132,24 +136,11 @@ module.exports = function createServerConfig(options) {
                 ],
               },
             },
-          ]),
-        },
-        {
-          test: /\.css$/,
-          exclude: EXCLUDES,
-          use: [
-            {
-              loader: 'css-loader/locals',
-              options: {
-                importLoaders: 1,
-              },
-            },
-            { loader: 'postcss-loader' },
-          ],
+          ].filter(Boolean),
         },
         // scss
         {
-          test: /\.scss$/,
+          test: /\.(scss|css)$/,
           exclude: EXCLUDES,
           use: [
             {
@@ -159,7 +150,7 @@ module.exports = function createServerConfig(options) {
               },
             },
             { loader: 'postcss-loader' },
-            { loader: 'sass-loader' },
+            { loader: 'fast-sass-loader' },
           ],
         },
         // json
@@ -197,10 +188,15 @@ module.exports = function createServerConfig(options) {
     },
     plugins: [
       new webpack.LoaderOptionsPlugin({
-        minimize: _PROD,
+        minimize: false,
         debug: !_DEV,
         context: config.rootDir,
       }),
+      // Custom progress plugin
+      new VerboseProgress(),
+
+      // Automatically assign quite useful and matching chunk names based on file names.
+      new ChunkNames(),
       new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
       // EnvironmentPlugin is essentially DefinePlugin but allows you to
       // forgo the process.env. when defining.
@@ -223,8 +219,6 @@ module.exports = function createServerConfig(options) {
   };
 
   if (_DEV) {
-    nodeConfig.stats = 'none';
-    nodeConfig.watch = true;
     nodeConfig.plugins.push(
       new CaseSensitivePathsPlugin(),
       new CircularDependencyPlugin({

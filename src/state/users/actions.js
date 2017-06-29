@@ -1,4 +1,4 @@
-import { push } from 'react-router-redux';
+import { replacePath } from '../../core/RouterConnection';
 import { api, API_PREFIX, getToken } from '../../core';
 import * as notif from '../../core/constants';
 import { sendNotification } from '../notifications/notifications';
@@ -29,7 +29,7 @@ export function forgotPassword(email) {
         dispatch({
           type: t.FORGOT_PASSWORD_SUCCESS,
         });
-        dispatch(push('/'));
+        dispatch(replacePath('/'));
         return dispatch(sendNotification(notif.MSG_FORGOT_PW_ERROR));
       })
       .catch(err =>
@@ -67,7 +67,7 @@ export function resetPassword(password, token) {
         dispatch({
           type: t.RESET_PASSWORD_SUCCESS,
         });
-        dispatch(push('/account/login'));
+        dispatch(replacePath('/login'));
         return dispatch(sendNotification(notif.MSG_RESET_PW_SUCCESS));
       })
       .catch(err =>
@@ -93,7 +93,7 @@ export function verifyAccount(token) {
     return api
       .post(`${API_PREFIX}/auth/verify`, { token })
       .then(res => {
-        dispatch(push('/account/login'));
+        dispatch(replacePath('/login'));
         dispatch({
           type: t.VERIFY_ACCOUNT_SUCCESS,
         });

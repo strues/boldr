@@ -2,17 +2,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
+import Loader from '@boldr/ui/Loader';
 // internal
-import Loader from '@@components/Loader';
 import { deletePost } from '../../../Blog/state';
 import Articles from './Articles';
+import ARTICLES_QUERY from './articles.graphql';
 
 type Data = {
-  getArticles: Array<Article>,
+  articles: Array<Article>,
   loading: boolean,
 };
 
-type Props = {
+export type Props = {
   dispatch: () => void,
   deletePost: Function,
   data: Data,
@@ -27,35 +28,14 @@ export class ArticlesContainer extends Component {
   };
 
   render() {
-    const { loading, getArticles } = this.props.data;
+    const { loading, articles } = this.props.data;
     if (loading) {
       return <Loader />;
     } else {
-      return <Articles articles={getArticles} handleDeleteClick={this.handleDeleteClick} />;
+      return <Articles articles={articles} handleDeleteClick={this.handleDeleteClick} />;
     }
   }
 }
-
-const ARTICLES_QUERY = gql`
-  query getArticles($offset: Int!, $limit: Int!) {
-    getArticles(offset: $offset, limit: $limit) {
-      id,
-      title,
-      slug,
-      featureImage,
-      featured,
-      backgroundImage,
-      published,
-      createdAt,
-      excerpt,
-      userId,
-      tags {
-        id,
-        name
-      },
-    }
-  }
-`;
 
 const ArticlesContainerWithData = graphql(ARTICLES_QUERY, {
   options: () => ({

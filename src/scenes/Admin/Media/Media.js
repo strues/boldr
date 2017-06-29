@@ -5,7 +5,6 @@ import Helmet from 'react-helmet';
 import filter from 'lodash/filter';
 import Link from 'react-router-dom/Link';
 import styled from 'styled-components';
-import IconButton from 'material-ui/IconButton';
 import ImageDisplay from '@boldr/ui/ImageDisplay';
 import { Col, Row } from '@boldr/ui/Layout';
 import Headline from '@boldr/ui/Headline';
@@ -24,17 +23,17 @@ const MediaList = styled.ul`
   padding: .3rem;
 `;
 const MediaItem = styled.li`
- align-items: stretch;
- box-sizing: border-box;
- column-break-inside: avoid;
- counter-increment: item;
- display: flex;
- justify-content: center;
- padding: .5rem .7rem;
+  align-items: stretch;
+  box-sizing: border-box;
+  column-break-inside: avoid;
+  counter-increment: item;
+  display: flex;
+  justify-content: center;
+  padding: .5rem .7rem;
 `;
 
 const MediaSidePanel = styled.div`
-  background-color: #00B4D0;
+  background-color: #00b4d0;
   width: 100%;
   height: 100%;
   padding: 1rem;
@@ -51,9 +50,7 @@ class Media extends Component {
         <Helmet title="Media" />
         <Row>
           <Col xs={12}>
-            <Headline type="h2">
-              Media Gallery
-            </Headline>
+            <Headline type="h2">Media Gallery</Headline>
             <Row>
               <MediaList>
                 {media.map(m =>

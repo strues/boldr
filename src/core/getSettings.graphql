@@ -1,5 +1,5 @@
-query getSettings {
-  getSettings {
+query settings {
+  settings {
     id,
     key,
     value,

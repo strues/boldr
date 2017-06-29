@@ -3,7 +3,6 @@ import ArticleCard from './ArticleCard';
 import ArticleContent from './ArticleContent';
 import ArticleImage from './ArticleImage';
 import ArticleSidebar from './ArticleSidebar';
-import Tag from './Tag';
 import TagBlock from './TagBlock';
 import FeaturedArticle from './FeaturedArticle';
 import ArticleTitle from './ArticleTitle';
@@ -18,7 +17,6 @@ export {
   ArticleContent,
   ArticleImage,
   ArticleSidebar,
-  Tag,
   TagBlock,
   FeaturedArticle,
   SidebarTags,

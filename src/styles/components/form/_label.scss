@@ -1,4 +1,4 @@
-.boldrui-form__label {
+.#{$boldr-ns}form__label {
   display: block;
   font-size: 1rem;
   font-weight: 600;
@@ -10,6 +10,6 @@
   }
 }
 
-.boldrui-form__required {
+.#{$boldr-ns}form__required {
   color: $error-color;
 }

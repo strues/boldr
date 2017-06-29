@@ -1,18 +1,6 @@
 ////
 /// @group divider
 ////
-
-
-/// Boolean if the base classes for divider borders should be included.
-/// @type Boolean
-$divider-inc-borders: true !default;
-
-/// The height for a Divider
-/// @type Number
-$divider-height: 1px !default;
-$divider-color: $big-stone;
-$divider-border-color: $divider-color;
-
 .#{$boldr-ns}divider {
     content: "";
     display: block;

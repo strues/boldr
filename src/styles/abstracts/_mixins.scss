@@ -1,4 +1,5 @@
-@import 'mixins/typography';
+@import "mixins/typography";
+@import "functions";
 
 @mixin list-reset() {
     list-style-type: none;
@@ -74,9 +75,188 @@ $black-base: rgba(0, 0, 0, 1);
 }
 
 @mixin clearfix {
-    &:after {
+    &::after {
         content: "";
         display: table;
         clear: both;
     }
+}
+$mediaQuery: ();
+
+$mq-ems: false !default;
+$mq-em-base: 16px !default;
+
+@function calculateMQ ($range, $setting1: null, $setting2: null){
+
+	$swap-values: false;
+
+	@if ($setting2 != null){
+
+		@if (type-of($setting1) == 'string'){
+
+			$setting1_1: get-start($setting1);
+			$setting1_2: get-end($setting1);
+
+			$setting2_1: get-start($setting2);
+			$setting2_2: get-end($setting2);
+
+			$swap-values: $setting1_1 / $setting1_2 < $setting2_1 / $setting2_2;
+		} @else {
+			@if ($setting1 < $setting2){
+				$swap-values: true;
+			}
+		}
+
+		//Swaps the settings around
+		@if ($swap-values){
+			$temp: $setting1;
+			$setting1: $setting2;
+			$setting2: $temp;
+		}
+
+	} @else {
+		$setting2: 0;
+	}
+
+	$mediaString: '';
+
+	@if ($range == 'orientation'){
+		@if ($setting1 != 'landscape' and $setting1 != 'portrait'){
+			@error '"orientation" range only accepts the values "landscape" and "portrait". Currently providing the value "#{$setting1}".';
+		}
+	}
+
+	@if (str-index($range, 'inside') != null or str-index($range, 'outside') != null){
+		@if ($setting2 == 0) {
+			@error '"#{$range}" range requires a second value. Currently only providing "#{$setting1}" as a value.';
+		}
+	} @else {
+		@if ($setting2 != 0) {
+			@error '"#{$range}" range can only take one value. Currently providing both "#{$setting1}" and "#{$setting2}" values.';
+		}
+	}
+
+	@if (str-index($range, 'ratio') == null){
+		//if a standard media query
+		@if (type-of($setting1) != number and $range != 'orientation'){
+			@if ($setting2 != 0) {
+				@error '"#{$range}" range requires the settings ("#{$setting1}" and "#{$setting2}") to be pixel values';
+			} @else {
+				@error '"#{$range}" range requires the setting "#{$setting1}" to be a pixel value';
+			}
+		}
+	} @else {
+		//else if it's a ratio...
+		@if ((($setting2 != 0) and (type-of($setting2) != string))){
+			@error '"#{$range}" range requires the settings ("#{$setting1}" and "#{$setting2}") to both be strings in this format "4 / 3" (width ratio / height ratio).';
+		} @else if (type-of($setting1) != string) {
+			@error '"#{$range}" range requires the setting "#{$setting1}" to be a string in this format "4 / 3" (width ratio / height ratio).';
+		}
+	}
+
+	$setting1Plus: $setting1 + 1;
+	$setting2Plus: $setting2 + 1;
+
+	@if ($mq-ems) {
+		$setting1: _mq-em($setting1);
+		$setting2: _mq-em($setting2);
+		$setting1Plus: _mq-em($setting1Plus);
+		$setting2Plus: _mq-em($setting2Plus);
+	}
+
+	$mediaString: map-get((
+	//*1 value given*/
+		min : 'screen and (min-width: #{$setting1Plus})',
+		max : 'screen and (max-width: #{$setting1})',
+		min-height : 'screen and (min-height: #{$setting1Plus})',
+		max-height : 'screen and (max-height: #{$setting1})',
+		ratio : 'screen and (aspect-ratio: #{$setting1})',
+		min-ratio : 'screen and (min-aspect-ratio: #{$setting1})',
+		max-ratio : 'screen and (max-aspect-ratio: #{$setting1})',
+		device-ratio : 'screen and (device-aspect-ratio: #{$setting1})',
+		min-device-ratio : 'screen and (min-device-aspect-ratio: #{$setting1})',
+		max-device-ratio : 'screen and (max-device-aspect-ratio: #{$setting1})',
+		orientation : 'screen and (orientation: #{$setting1})',
+	//*2 values given*/
+		inside : 'screen and (max-width: #{$setting1}) and (min-width: #{$setting2Plus})',
+		outside : 'screen and (max-width: #{$setting2}), screen and (min-width: #{$setting1Plus})',
+		inside-height : 'screen and (max-height: #{$setting1}) and (min-height: #{$setting2Plus})',
+		outside-height : 'screen and (max-height: #{$setting2}), screen and (min-height: #{$setting1Plus})',
+		inside-ratio : 'screen and (max-aspect-ratio: #{$setting1}) and (min-aspect-ratio: #{$setting2})',
+		outside-ratio : 'screen and (max-aspect-ratio: #{$setting2}), screen and (min-aspect-ratio: #{$setting1})',
+		inside-device-ratio : 'screen and (max-device-aspect-ratio: #{$setting1}) and (min-device-aspect-ratio: #{$setting2})',
+		outside-device-ratio : 'screen and (max-device-aspect-ratio: #{$setting2}), screen and (min-device-aspect-ratio: #{$setting1})',
+	), $range);
+
+	@return $mediaString;
+}
+
+@mixin mq($range, $setting1: null, $setting2: null) {
+
+	@if (length($range) > 1) {
+
+		//Uses this functionality if using a single level MQ variable
+		//eg:
+		//$MQ-example--single: inside, 1000px, 500px;
+		//@include mq($MQ-example--single){}
+		@if (type-of(nth($range,1)) == string){
+
+			$newRange: nth($range,1);
+			$newWidth1: nth($range,2);
+			$newWidth2: null;
+			@if (length($range) == 3){
+				$newWidth2: nth($range,3);
+			}
+
+			@media #{calculateMQ($newRange, $newWidth1, $newWidth2)} {
+				@content;
+			}
+
+
+		//Uses this functionality if using a multi level MQ variable
+		//eg:
+		//$MQ-example--multiple:
+		//	(inside, 1000px, 500px),
+		//	(min, 1200px)
+		//;
+		//@include mq($MQ-example--multiple){}
+		} @else {
+			$mediaQuery: ();
+
+			@each $mqSet in $range {
+
+				$newRange: nth($mqSet,1);
+				$newWidth1: nth($mqSet,2);
+				$newWidth2: null;
+				@if (length($mqSet) == 3){
+					$newWidth2: nth($mqSet,3);
+				}
+
+				$mediaQuery: append($mediaQuery, calculateMQ($newRange, $newWidth1, $newWidth2), 'comma');
+
+			}//end @each
+
+			@media #{$mediaQuery} {
+				@content;
+			}
+		}
+
+	// Uses this functionality if placing MQ data inline
+	// eg:
+	// @include mq(inside, 1000px, 500px);
+	} @else {
+
+		@media #{calculateMQ($range, $setting1, $setting2)} {
+			@content;
+		}
+	}
+}
+
+@mixin retina($density: 2) {
+		@media
+		only screen and (min-device-pixel-ratio: $density),
+		only screen and (min-resolution: $density * 96ppi),
+		only screen and (min-resolution: $density * 1dppx) {
+			@content;
+	}
 }

@@ -6,8 +6,8 @@ h5 {
     padding: 0;
     color: $text-color;
     margin: calc(2rem - 0.14285em) 0 1rem;
-    font-weight: $header-font-weight;
-    font-family: $header-font-family;
+    font-weight: $headline-font-weight;
+    font-family: $headline-font-family;
     line-height: 1.2857em;
 }
 
@@ -41,14 +41,6 @@ h5 {
     font-size: 1rem;
 }
 
-.boldrui-h {
-    text-rendering: optimizeLegibility;
-}
-
-.boldrui-h-light {
-    color: #fff;
-}
-
 h1:first-child,
 h2:first-child,
 h3:first-child,
@@ -65,16 +57,6 @@ h5:last-child {
     margin-bottom: 0;
 }
 
-.#{$boldr-ns}heading--1 {
-    font-size: 3.5em;
-}
-
-.#{$boldr-ns}heading__3 {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-    font-weight: 200;
-}
-
 p {
     margin: 0 0 1em;
     font-weight: 300;
@@ -89,9 +71,7 @@ p:first-child {
 p:last-child {
     margin-bottom: 0;
 }
-.boldrui-paragraph__light {
-    color: $text-color-light;
-}
+
 .md-icon {
     color: $icon-color;
     font-size: $font-icon-size;

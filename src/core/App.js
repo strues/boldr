@@ -1,21 +1,19 @@
 /* @flow */
-import React from 'react';
-import classnames from 'classnames';
+import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import { graphql, gql } from 'react-apollo';
+import { compose, graphql, gql } from 'react-apollo';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import universal from 'react-universal-component';
 // internal
 import '../styles/main.scss';
-import { StyleClasses } from '../theme/styleClasses';
+import Loader from '@boldr/ui/Loader';
 import Notifications from '../components/Notification';
 // Start routes
-import Page from '../pages/Page';
+// import Page from '../pages/Page';
 import Error404 from '../pages/Error404';
-import SiteHeaderContainer from '../components/SiteHeader/SiteHeaderContainer';
+import Navbar from '../components/Navbar';
 import { getToken } from './authentication/token';
-
-const BASE_ELEMENT = StyleClasses.APP;
+import SETTINGS_QUERY from './getSettings.graphql';
 
 export const hasAccessToken = () => {
   const token = getToken();
@@ -41,7 +39,7 @@ const ProtectedRoute = ({ component: Component, ...rest }: ProtectedProps) =>
           />}
   />;
 
-type Props = {
+export type Props = {
   className: ?string,
   ui: Object,
   data: Object,
@@ -56,24 +54,18 @@ type Location = {
 const AdminDashboard = universal(() => import('../scenes/Admin/AdminDashboard'), {
   resolve: () => require.resolveWeak('../scenes/Admin/AdminDashboard'),
 });
+const Page = universal(() => import('../pages/Page'), {
+  resolve: () => require.resolveWeak('../pages/Page'),
+});
 
-class App extends React.Component {
-  static defaultProps = {
-    className: 'app',
-  };
-
-  componentDidMount() {
-    const jssStyles = document.getElementById('jss-server-side');
-    if (jssStyles && jssStyles.parentNode) {
-      jssStyles.parentNode.removeChild(jssStyles);
-    }
-  }
+class App extends Component {
   props: Props;
   render() {
-    const { className } = this.props;
-    const classes = classnames('boldr', BASE_ELEMENT, className);
+    if (this.props.data.loading) {
+      return <Loader />;
+    }
     return (
-      <div className={classes}>
+      <div className="boldr">
         <Helmet>
           <html lang="en" />
           <title>Boldr</title>
@@ -93,10 +85,6 @@ class App extends React.Component {
           <meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png" />
           {__DEV__ ? null : <link rel="manifest" href="/manifest.json" />}
         </Helmet>
-        <SiteHeaderContainer
-          menu={this.props.data.getMenuById}
-          settings={this.props.data.getSettings}
-        />
         <Switch>
           <ProtectedRoute path="/admin" component={AdminDashboard} />
           <Route path="/" component={Page} />
@@ -107,17 +95,5 @@ class App extends React.Component {
     );
   }
 }
-
-export const SETTINGS_QUERY = gql`
-  query getSettings {
-    getSettings {
-      id,
-      key,
-      value,
-      label,
-      description,
-    }
-  }
-`;
 
 export default graphql(SETTINGS_QUERY)(App);

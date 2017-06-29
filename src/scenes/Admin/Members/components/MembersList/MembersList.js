@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
-// $FlowIssue
 import styled from 'styled-components';
+// internal
 import MemberCard from '../MemberCard';
 
 const MemList = styled.ul`

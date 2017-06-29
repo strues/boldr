@@ -9,8 +9,10 @@ import tag from './tag/tagQuery';
 import user from './user/userQuery';
 
 const rootFields = Object.assign({}, article, attachment, media, menu, role, settings, tag, user);
+
 const RootQueryType = new GraphQLObjectType({
   name: 'Query',
   fields: () => rootFields,
 });
+
 export default RootQueryType;

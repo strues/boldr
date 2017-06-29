@@ -87,10 +87,10 @@ if (process.env.NODE_ENV === 'development') {
   app.use(require('./middleware/hot'));
 } else {
   const clientStats = require('../build/assets/client-stats.json');
-  const serverRender = require('../build/server.js').default;
+  const serverRenderer = require('../build/serverRenderer.js').default;
 
   // server.use(publicPath, express.static(outputPath))
-  app.use(serverRender({ clientStats }));
+  app.use(serverRenderer({ clientStats }));
 }
 
 // Catch and format errors

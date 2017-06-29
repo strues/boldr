@@ -5,8 +5,9 @@ import Article from '../../models/Article';
 import ArticleType from './articleType';
 
 export default {
-  getArticles: {
+  articles: {
     type: new GraphQLList(ArticleType),
+    name: 'GetArticlesQuery',
     description: 'A paginated query for all the articles.',
     args: {
       offset: {

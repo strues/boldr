@@ -8,9 +8,6 @@ import MediaManagerContainer from './Media/MediaManager/MediaManagerContainer';
 import UploadMedia from './Media/UploadMedia';
 import ArticleEditor from './Content/ArticleEditor';
 import NewArticleContainer from './Content/NewArticle/NewArticleContainer';
-// import FileManagerContainer
-//   from './FileManager/FileManagerContainer';
-// import FileEditor from './FileManager/FileEditor';
 // import NavigationContainer from './Navigation/NavigationContainer';
 import Members from './Members';
 import Settings from './Settings';
@@ -60,21 +57,6 @@ export default [
       },
     ],
   },
-  // {
-  //       exact: true,
-  //       path: '/admin/filemanager',
-  //       breadcrumb: <Icon kind="folder-upload" />,
-  //       component: FileManagerContainer,
-  //       routes: [
-  //           {
-  //               exact: true,
-  //               breadcrumb: 'File Editor',
-  //               path: '/admin/filemanager/:id',
-  //               component: FileEditor,
-  //               routes: [],
-  //           },
-  //       ],
-  //   },
   //   {
   //       exact: true,
   //       path: '/admin/navigation',

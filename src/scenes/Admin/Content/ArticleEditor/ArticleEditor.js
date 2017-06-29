@@ -4,6 +4,7 @@ import Helmet from 'react-helmet';
 import { convertToHTML } from 'draft-convert';
 import { gql, graphql } from 'react-apollo';
 import EditArticleForm from './components/EditArticleForm';
+import EDIT_ARTICLE_MUTATION from './editArticle.mutation.graphql';
 
 type Props = {
   currentArticle: Article,
@@ -43,21 +44,6 @@ class ArticleEditor extends PureComponent {
     );
   }
 }
-
-export const EDIT_ARTICLE_MUTATION = gql`
-  mutation editArticle($id: UUID!, $input: EditArticleInput!) {
-    editArticle(id: $id, input: $input) {
-      title
-      slug
-      content
-      rawContent
-      featured
-      published
-      excerpt
-      featureImage
-    }
-  }
-`;
 
 export default graphql(EDIT_ARTICLE_MUTATION, {
   props: ({ mutate }) => ({

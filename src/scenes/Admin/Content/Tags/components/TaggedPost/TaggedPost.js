@@ -2,11 +2,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Link from 'react-router-dom/Link';
-import Toolbar from 'material-ui/Toolbar';
-import List, { ListItem, ListItemIcon, ListItemText } from 'material-ui/List';
 import { gql, graphql } from 'react-apollo';
 
 import Loader from '@boldr/ui/Loader';
+import ARTICLES_TAG_QUERY from './articlesTag.graphql';
 
 type Props = {
   data: Object,
@@ -29,49 +28,27 @@ class TaggedPost extends Component {
 
     return (
       <div>
-        <Toolbar>
+        <div>
           {`Posts tagged ${this.props.match.params.name}`}
-        </Toolbar>
-        <List>
+        </div>
+        <ul>
           {getArticlesForTag.map(post =>
-            <ListItem key={post.id}>
-              <ListItemText primary={post.title} />
-            </ListItem>,
+            <li key={post.id}>
+              {post.title}
+            </li>,
           )}
-        </List>
+        </ul>
       </div>
     );
   }
 }
 
-export default graphql(
-  gql`
-  query tags($name: String!, $offset: Int!, $limit: Int!) {
-    getArticlesForTag(name: $name, offset: $offset, limit: $limit) {
-      id,
-      title,
-      slug,
-      featureImage,
-      featured,
-      backgroundImage,
-      published,
-      createdAt,
-      excerpt,
-      userId,
-      tags {
-        id,
-        name
-      },
-    }
-  }
-`,
-  {
-    options: props => ({
-      variables: {
-        name: props.match.params.name,
-        limit: 20,
-        offset: 0,
-      },
-    }),
-  },
-)(TaggedPost);
+export default graphql(ARTICLES_TAG_QUERY, {
+  options: props => ({
+    variables: {
+      name: props.match.params.name,
+      limit: 20,
+      offset: 0,
+    },
+  }),
+})(TaggedPost);

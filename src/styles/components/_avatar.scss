@@ -1,11 +1,6 @@
 ////
 /// @group avatar
 ////
-
-/// The default size for an avatar
-/// @type Number
-$avatar-size: 40px !default;
-
 .#{$boldr-ns}avatar {
     overflow: hidden;
     width: $avatar-size;

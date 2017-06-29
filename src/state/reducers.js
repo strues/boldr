@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import { reducer as formReducer } from 'redux-form';
-import { routerReducer } from 'react-router-redux';
+import { routerReducer } from '../core/RouterConnection';
 // internal reducers
 import blogReducer from '../scenes/Blog/state/reducer';
 import adminReducer from '../scenes/Admin/state/reducer';

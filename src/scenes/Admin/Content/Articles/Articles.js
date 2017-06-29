@@ -1,46 +1,27 @@
 /* @flow */
 import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
-import ArrowUpward from 'material-ui-icons/ArrowUpward';
-import ArrowDownward from 'material-ui-icons/ArrowDownward';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { format } from 'date-fns';
 import Griddle, { plugins, RowDefinition, ColumnDefinition } from 'griddle-react';
 // internal
-import Paper from '@@components/Paper';
-import Avatar from '@@components/Avatar';
-import Headline from '@@components/Headline';
-import Loader from '@@components/Loader';
+import Paper from '@boldr/ui/Paper';
+import Icon from '@boldr/ui/Icons/Icon';
+import Avatar from '@boldr/ui/Avatar';
+import Headline from '@boldr/ui/Headline';
+import Loader from '@boldr/ui/Loader';
 
 const styleConfig = {
   icons: {
     TableHeadingCell: {
-      sortDescendingIcon: (
-        <ArrowUpward
-          style={{
-            height: '16px',
-            width: '16px',
-            display: 'inline-block',
-            verticalAlign: 'middle',
-          }}
-        />
-      ),
-      sortAscendingIcon: (
-        <ArrowDownward
-          style={{
-            height: '16px',
-            width: '16px',
-            display: 'inline-block',
-            verticalAlign: 'middle',
-          }}
-        />
-      ),
+      sortDescendingIcon: <Icon kind="chevron-up" color="#222" size="16px" />,
+      sortAscendingIcon: <Icon kind="chevron-down" color="#222" size="16px" />,
     },
   },
 };
 
-type Props = {
+export type Props = {
   articles: Array<Article>,
   handleDeleteClick: Function,
 };
@@ -62,7 +43,6 @@ class Articles extends Component {
       <div>
         <Helmet title="Admin: Post List" />
         <Paper zDepth={3}>
-
           <Griddle
             plugins={[plugins.LocalPlugin]}
             resultsPerPage={10}
@@ -96,7 +76,6 @@ class Articles extends Component {
                 order={4}
                 customComponent={PublishColumn}
               />
-
             </RowDefinition>
           </Griddle>
         </Paper>
@@ -112,7 +91,10 @@ const PublishColumn = ({ value }) =>
     {value === true ? 'Published' : 'Draft'}
   </span>;
 
-const DateColumn = ({ value }) => <span>{format(value, 'MM/DD/YY')}</span>;
+const DateColumn = ({ value }) =>
+  <span>
+    {format(value, 'MM/DD/YY')}
+  </span>;
 
 const AvatarColumn = ({ value }) => <Avatar src={value} />;
 
@@ -130,7 +112,9 @@ function TitleColumn({ value, griddleKey, rowData }) {
   return (
     <div className="TitleColumn">
       <strong>
-        <Link to={`/admin/content/articles/${rowData.slug}`}>{value}</Link>
+        <Link to={`/admin/content/articles/${rowData.slug}`}>
+          {value}
+        </Link>
       </strong>
     </div>
   );

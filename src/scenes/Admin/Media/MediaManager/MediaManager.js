@@ -2,12 +2,16 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { compose, gql, graphql } from 'react-apollo';
-// internal
 import { Grid, Col, Row } from '@boldr/ui/Layout';
-import Photo from '@boldr/ui/Photo';
+import ResponsiveImage from '@boldr/ui/ResponsiveImage';
 import Block from '@boldr/ui/Block';
 import Headline from '@boldr/ui/Headline';
 import Loader from '@boldr/ui/Loader';
+
+// graphql
+import MEDIA_BY_ID_QUERY from '../mediaById.graphql';
+import EDIT_MEDIA_MUTATION from '../editMedia.graphql';
+// form
 import MediaForm from './components/MediaForm';
 
 type Props = {
@@ -23,9 +27,7 @@ const MediaContent = styled.div`
   padding-top: 3rem;
   margin-bottom: 4rem;
 `;
-const MediaFormCard = styled.div`
-  margin-bottom: 2rem;
-`;
+const MediaFormCard = styled.div`margin-bottom: 2rem;`;
 
 class MediaManager extends Component {
   handleSubmit = (values: Object) => {
@@ -47,9 +49,12 @@ class MediaManager extends Component {
             <Row xsCenter>
               <Col xs={6}>
                 <MediaContent>
-
-                  <Photo src={getMediaById.url} />
-
+                  <ResponsiveImage
+                    src={getMediaById.url}
+                    width={600}
+                    height={900}
+                    alt={getMediaById.name}
+                  />
                 </MediaContent>
               </Col>
             </Row>
@@ -74,26 +79,6 @@ class MediaManager extends Component {
   }
 }
 
-export const MEDIA_BY_ID_QUERY = gql`
-  query getMediaById($id: UUID!) {
-      getMediaById(id: $id) {
-        id,
-        name,
-        thumbName,
-        fileDescription,
-        url,
-      }
-  }
-`;
-
-export const EDIT_MEDIA_MUTATION = gql`
-  mutation editMedia($id: UUID!, $input: EditMediaInput!) {
-    editMedia(id: $id, input: $input) {
-      name
-      fileDescription
-    }
-  }
-`;
 const MediaManagerWithData = compose(
   graphql(MEDIA_BY_ID_QUERY, {
     options: props => ({

@@ -1,7 +1,5 @@
-.md-dialog {
-    width: 525px;
-}
-
+/// @group dialog
+///
 .opacity-enter {
     opacity: 0;
 
@@ -9,13 +7,11 @@
         opacity: 1;
         transition-property: opacity;
         transition-duration: 1000ms;
-        transition-timing-function: $md-transition-deceleration;
+        transition-timing-function: $modal-transition-deceleration;
     }
 }
-$modal-easeOutQuint: cubic-bezier(0.23, 1, 0.32, 1);
-$ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 
-.boldrui-modal {
+.#{$boldr-ns}modal {
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
 
@@ -24,14 +20,14 @@ $ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
 }
 
-.boldrui-modal__content {
-    .boldrui-paper {
+.#{$boldr-ns}modal__content {
+    .#{$boldr-ns}paper {
         padding: 1em;
     }
 }
 
-.boldrui-modal__portal {
-    .ReactModal__Content.boldrui-modal__content {
+.#{$boldr-ns}modal__portal {
+    .ReactModal__Content.#{$boldr-ns}modal__content {
         opacity: 1;
         background-color: #fff;
         transform: scale(0.93);
@@ -39,36 +35,36 @@ $ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
         &--after-open {
             opacity: 1;
             transform: scale(1);
-            transition: opacity 0.35s $modal-easeOutQuint, transform 0.35s $modal-easeOutQuint;
+            transition: opacity 0.35s $modal-ease-out-quint, transform 0.35s $modal-ease-out-quint;
         }
 
         &--before-close {
             opacity: 0;
             transform: scale(0.9);
-            transition: opacity 0.3s $modal-easeOutQuint, transform 0.04s $modal-easeOutQuint;
+            transition: opacity 0.3s $modal-ease-out-quint, transform 0.04s $modal-ease-out-quint;
             pointer-events: none;
         }
     }
 
-    .ReactModal__Overlay.boldrui-modal__overlay {
+    .ReactModal__Overlay.#{$boldr-ns}modal__overlay {
         opacity: 1;
         background: rgba(30, 30, 30, 0);
 
         &--after-open {
             background: rgba(30, 30, 30, 0.6);
-            transition: background 0.2s $modal-easeOutQuint;
+            transition: background 0.2s $modal-ease-out-quint;
         }
 
         &--before-close {
             background: rgba(30, 30, 30, 0);
-            transition: background 0.15s $ease-out-quad;
+            transition: background 0.15s $modal-ease-out-quad;
             pointer-events: none;
         }
     }
 }
 
-.boldrui-modal__portal-non-scrollable {
-    .boldrui-modal__overlay {
+.#{$boldr-ns}modal__portal-non-scrollable {
+    .#{$boldr-ns}modal__overlay {
         overflow: hidden;
     }
 }

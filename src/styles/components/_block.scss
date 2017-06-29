@@ -1,14 +1,6 @@
 ////
 /// @group block
 ////
-
-/// The default block background color
-/// @type Color
-$block-bg: $white;
-/// The dark block background color
-/// @type Color
-$block-bg-dark: $outer-space;
-
 .#{$boldr-ns}block {
 
     @include md-shadow(2);

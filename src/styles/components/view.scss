@@ -1,10 +1,10 @@
-.boldrui-view__margin-children {
+.#{$boldr-ns}view__margin-children {
     & > *:not(:last-child) {
         margin-bottom: 16px;
     }
 }
 
-.boldrui-view__margin-children-right {
+.#{$boldr-ns}view__margin-children-right {
     & > *:not(:last-child) {
         margin-right: 16px;
     }

@@ -20,7 +20,6 @@ export default app => {
       : {};
 
     const message = isValidationError ? 'Validation error.' : err.message;
-
     res.status(statusCode);
     res.json({
       message,

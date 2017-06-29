@@ -3,6 +3,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
+import NavLink from 'react-router-dom/NavLink';
 import Icon from '@boldr/ui/Icons/Icon';
 import { StyleClasses, BOLDR_NS } from '../../theme/styleClasses';
 import Anchor from '../Anchor';

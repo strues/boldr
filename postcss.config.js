@@ -3,9 +3,10 @@ module.exports = () => ({
   // https://github.com/postcss/postcss
   plugins: [
     require('postcss-flexbugs-fixes')(),
-    require('postcss-cssnext')({
+    require('autoprefixer')({
       browsers: ['> 1%', 'last 2 versions'],
       flexbox: 'no-2009',
     }),
+    require('postcss-discard-duplicates')(),
   ],
 });

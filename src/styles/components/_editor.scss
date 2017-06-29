@@ -42,6 +42,7 @@
 
 .boldr-editor-wrapper {
     box-sizing: content-box;
+
     &:focus {
         outline: none;
     }
@@ -58,7 +59,6 @@
 }
 
 /// Color Picker
-
 .boldr-editor__colorpicker-wrapper {
     position: relative;
     display: flex;
@@ -67,6 +67,7 @@
 }
 
 .boldr-editor__colorpicker-modal {
+
     @include md-shadow(2);
     position: absolute;
     top: 35px;
@@ -123,20 +124,21 @@
     margin: 3px;
 
     &:hover {
+
         @include md-shadow(3);
     }
 
     &:active {
+
         @include md-shadow(3);
     }
 }
 
 .boldr-editor__colorpicker-option-active {
-    box-shadow: 0 0px 2px 2px #bfbdbd;
+    box-shadow: 0 0 2px 2px #bfbdbd;
 }
 
 /// Embed
-
 .boldr-editor__embedded-wrapper {
     position: relative;
     display: flex;
@@ -145,6 +147,7 @@
 }
 
 .boldr-editor__embedded-modal {
+
     @include md-shadow(2);
     position: absolute;
     top: 35px;
@@ -263,6 +266,7 @@
 }
 
 .boldr-editor__emoji-modal {
+
     @include md-shadow(2);
     position: absolute;
     top: 35px;
@@ -356,6 +360,7 @@
 }
 
 .boldr-editor__image-modal {
+
     @include md-shadow(2);
     position: absolute;
     top: 35px;
@@ -540,6 +545,7 @@
 }
 
 .boldr-editor__link-modal {
+
     @include md-shadow(2);
     position: absolute;
     top: 35px;
@@ -801,15 +807,18 @@
     cursor: pointer;
 
     &:hover {
+
         @include md-shadow(2);
     }
 
     &:active {
+
         @include md-shadow(2);
     }
 }
 
 .boldr-editor__option-active {
+
     @include md-shadow(3);
 }
 

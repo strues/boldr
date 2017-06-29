@@ -1,7 +1,7 @@
 .#{$boldr-ns}flag__wrapper {
     width: 100%;
 
-    @media screen and (min-width: $medium-viewport) {
+    @media screen and (min-width: $bp-medium) {
         display: table;
     }
 }
@@ -10,17 +10,17 @@
     position: relative;
     overflow: hidden;
 
-    @media screen and (min-width: $medium-viewport) {
+    @media screen and (min-width: $bp-medium) {
         display: table-cell;
         width: 50%;
     }
 
-    @media screen and (max-width: $medium-viewport) and (orientation: landscape) {
+    @media screen and (max-width: $bp-medium) and (orientation: landscape) {
         max-height: 65vh;
     }
 }
 
-@media screen and (min-width: $large-viewport) {
+@media screen and (min-width: $bp-large) {
 
     .#{$boldr-ns}flag__img-wrapper-40 {
         width: 40%;
@@ -39,7 +39,7 @@
     padding: 1.5rem;
     vertical-align: middle;
 
-    @media screen and (min-width: $medium-viewport) {
+    @media screen and (min-width: $bp-medium) {
         display: table-cell;
         padding: 3rem;
     }
@@ -49,7 +49,7 @@
 .#{$boldr-ns}flag__img > img {
     width: 100%;
 
-    @media screen and (min-width: $medium-viewport) {
+    @media screen and (min-width: $bp-medium) {
         position: absolute;
         top: 50%;
         left: 50%;

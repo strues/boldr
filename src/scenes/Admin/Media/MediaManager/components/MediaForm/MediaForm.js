@@ -38,8 +38,12 @@ const MediaForm = (props: Props) => {
         component={InputField}
       />
       <FormBottom>
-        <Button htmlType="submit" kind="primary" style={style}>Save</Button>
-        <Button onClick={reset} style={style} kind="secondary">Reset</Button>
+        <Button htmlType="submit" kind="primary" style={style}>
+          Save
+        </Button>
+        <Button onClick={reset} style={style} kind="secondary">
+          Reset
+        </Button>
       </FormBottom>
     </Form>
   );

@@ -9,6 +9,7 @@ import Loader from '@@components/Loader';
 import { Grid, Row, Col } from '@@components/Layout';
 import { ArticleSidebar, ArticleContent, ArticleTitle } from '../components';
 import { StyleClasses } from '../../../theme/styleClasses';
+import GET_ARTICLE_QUERY from './article.graphql';
 
 const BASE_ELEMENT = StyleClasses.SINGLE_POST;
 
@@ -75,24 +76,7 @@ class Article extends PureComponent {
     }
   }
 }
-export const GET_ARTICLE_QUERY = gql`
-  query getArticleBySlug($slug: String!) {
-      getArticleBySlug(slug: $slug) {
-        id,
-        title,
-        content,
-        slug,
-        featureImage,
-        backgroundImage,
-        createdAt,
-        userId,
-        tags {
-          id,
-          name
-        }
-      }
-  }
-`;
+
 export default graphql(GET_ARTICLE_QUERY, {
   options: props => ({
     variables: {

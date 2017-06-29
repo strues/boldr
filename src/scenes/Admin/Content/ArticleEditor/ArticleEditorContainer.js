@@ -2,9 +2,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
-import { Loader } from '@boldr/ui';
-import { updateArticle } from '../../../Blog/state';
+import Loader from '@boldr/ui/Loader';
 import ArticleEditor from './ArticleEditor';
+import GET_ARTICLE_QUERY from './article.graphql';
 
 export type Props = {
   dispatch: Function,
@@ -24,48 +24,15 @@ class ArticleEditorContainer extends Component {
     if (loading) {
       return <Loader />;
     }
-    return (
-      <ArticleEditor updateArticle={this.props.updateArticle} currentArticle={getArticleBySlug} />
-    );
+    return <ArticleEditor currentArticle={getArticleBySlug} />;
   }
 }
-
-const mapDispatchToProps = dispatch => {
-  return {
-    updateArticle: postData => {
-      dispatch(updateArticle(postData));
-    },
-  };
-};
 
 const mapStateToProps = state => {
   return {
     postImage: state.admin.attachments.postImage,
   };
 };
-
-export const GET_ARTICLE_QUERY = gql`
-  query getArticleBySlug($slug: String!) {
-    getArticleBySlug(slug: $slug) {
-      id,
-      title,
-      slug,
-      featureImage,
-      featured,
-      backgroundImage,
-      content,
-      rawContent,
-      published,
-      createdAt,
-      excerpt,
-      userId,
-      tags {
-        id,
-        name
-      },
-    }
-  }
-`;
 
 const ArticleEditorContainerWithData = graphql(GET_ARTICLE_QUERY, {
   options: props => ({
@@ -75,4 +42,4 @@ const ArticleEditorContainerWithData = graphql(GET_ARTICLE_QUERY, {
   }),
 })(ArticleEditorContainer);
 // $FlowIssue
-export default connect(mapStateToProps, mapDispatchToProps)(ArticleEditorContainerWithData);
+export default connect(mapStateToProps, null)(ArticleEditorContainerWithData);

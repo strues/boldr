@@ -1,19 +1,16 @@
 /* @flow */
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { graphql, gql } from 'react-apollo';
-import IconButton from 'material-ui/IconButton';
-import UploadFile from 'material-ui-icons/FileUpload';
+import { graphql } from 'react-apollo';
 import { connect } from 'react-redux';
 
-import { Row, Col } from '@@components/Layout';
-import Paper from '@@components/Paper';
-import Headline from '@@components/Headline';
-import Icon from '@@components/Icons';
+import { Row, Col } from '@boldr/ui/Layout';
+import Paper from '@boldr/ui/Paper';
+import Headline from '@boldr/ui/Headline';
+import Icon from '@boldr/ui/Icons';
+import UPLOAD_MEDIA_MUTATION from './uploadMedia.graphql';
 
-type Props = {
-  uploadMediaFile: () => void,
-  dispatch: () => void,
+export type Props = {
   mutate: () => void,
 };
 
@@ -28,9 +25,9 @@ const MediaTitleArea = styled.div`
   padding-top: 50px;
   margin-bottom: 35px;
 `;
-const MediaInputArea = styled.div`
-  padding-bottom: 50px;
-`;
+
+const MediaInputArea = styled.div`padding-bottom: 50px;`;
+
 class UploadComputer extends Component {
   handleChange = ({ target }) => {
     if (target.validity.valid) {
@@ -49,9 +46,8 @@ class UploadComputer extends Component {
           <Paper zDepth={1}>
             <MediaTitleArea>
               <Headline type="h2">
-                <Icon kind="folder-upload" color="rgba(0, 188, 212, 1.00)" size="36" />
-                {' '}
-                Upload from your computer
+                <Icon kind="folder-upload" color="rgba(0, 188, 212, 1.00)" size="36" /> Upload from
+                your computer
               </Headline>
             </MediaTitleArea>
             <MediaInputArea>
@@ -64,13 +60,4 @@ class UploadComputer extends Component {
   }
 }
 
-export default graphql(gql`
-  mutation uploadMedia ($file: UploadMediaInput!) {
-    uploadMedia (file: $file) {
-      id
-      name
-      type
-      path
-    }
-  }
-`)(UploadComputer);
+export default graphql(UPLOAD_MEDIA_MUTATION)(UploadComputer);

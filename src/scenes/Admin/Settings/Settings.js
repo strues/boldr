@@ -2,15 +2,16 @@
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { Grid, Col, Row } from '../../../components/Layout';
-import Headline from '../../../components/Headline';
-import Paper from '../../../components/Paper';
+import { Grid, Col, Row } from '@boldr/ui/Layout';
+import Headline from '@boldr/ui/Headline';
+import Paper from '@boldr/ui/Paper';
+
 import {
   Accordion,
   AccordionItem,
   AccordionItemTitle,
   AccordionItemBody,
-} from '../../../components/Accordion';
+} from '@boldr/ui/Accordion';
 // import { HeaderPanel, SettingsPanel } from 'boldr-ui';
 import SettingsAside from './components/SettingsAside';
 import General from './components/General';

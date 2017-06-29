@@ -1,36 +1,13 @@
 import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { connect } from 'react-redux';
-import { push } from 'react-router-redux';
-
+import { replacePath } from '../../../core/RouterConnection';
 import { sendNotification } from '../../../state/notifications/notifications';
 import { setToken } from '../../../core/authentication/token';
 import { setUserLoggedIn } from '../../../state/users/actions';
 import { loginUserSuccess, loginUserError } from '../state/actions';
 import Login from './Login';
-
-export const LOGIN_USER_MUTATION = gql`
-  mutation loginUser($input: UserLoginInput!) {
-    loginUser(input: $input) {
-      token,
-      user {
-        id
-        username
-        firstName
-        lastName
-        email
-        roles {
-          id
-          name
-        }
-      },
-      errors {
-        key
-        value
-      }
-    }
-  }
-`;
+import LOGIN_USER_MUTATION from './login.mutation.graphql';
 
 const withMutation = graphql(LOGIN_USER_MUTATION, {
   props: ({ mutate }) => ({
@@ -77,7 +54,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
             dismissAfter: 3000,
           }),
         );
-        return dispatch(push('/'));
+        return dispatch(replacePath('/'));
       })
       .catch(error => {
         dispatch(

@@ -1,0 +1,19 @@
+query getMenuById($id: ID!) {
+  getMenuById(id: $id) {
+    id
+    name
+    details {
+      id
+      uuid
+      safeName
+      name
+      cssClassname
+      icon
+      hasDropdown
+      order
+      mobileHref
+      href
+      children
+    }
+  }
+}

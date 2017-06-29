@@ -1,10 +1,10 @@
 /* @flow */
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { gql, graphql } from 'react-apollo';
+import { graphql } from 'react-apollo';
 // internal
 import Loader from '@boldr/ui/Loader';
 import Tags from './Tags';
+import TAGS_QUERY from './tags.graphql';
 
 type Props = {
   data: Data,
@@ -26,22 +26,11 @@ class TagsContainer extends Component {
   }
 }
 
-export default graphql(
-  gql`
-  query getTags($offset: Int!, $limit: Int!) {
-      getTags(offset:$offset,limit:$limit) {
-        id,
-        name,
-        description,
-      }
-  }
-`,
-  {
-    options: props => ({
-      variables: {
-        offset: 0,
-        limit: 20,
-      },
-    }),
-  },
-)(TagsContainer);
+export default graphql(TAGS_QUERY, {
+  options: props => ({
+    variables: {
+      offset: 0,
+      limit: 20,
+    },
+  }),
+})(TagsContainer);

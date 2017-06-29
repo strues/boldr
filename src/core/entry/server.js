@@ -4,17 +4,13 @@ import type { $Response, $Request, NextFunction } from 'express';
 import { renderToString } from 'react-dom/server';
 import serialize from 'serialize-javascript';
 import { compose } from 'redux';
-import createHistory from 'history/createMemoryHistory';
+import createMemoryHistory from 'history/createMemoryHistory';
 import StaticRouter from 'react-router-dom/StaticRouter';
 import { ServerStyleSheet } from 'styled-components';
 import Helmet from 'react-helmet';
 import { flushModuleIds } from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import createPalette from 'material-ui/styles/palette';
-import createMuiTheme from 'material-ui/styles/theme';
-import { cyan, pink } from 'material-ui/styles/colors';
 import { ApolloProvider, getDataFromTree } from 'react-apollo';
 import { createBatchingNetworkInterface } from 'apollo-client';
 
@@ -26,17 +22,6 @@ const isDev = process.env.NODE_ENV === 'development';
 
 const debug = require('debug')('boldr:ssrMW');
 
-function createStyleManager() {
-  return MuiThemeProvider.createDefaultContext({
-    theme: createMuiTheme({
-      palette: createPalette({
-        primary: cyan,
-        accent: pink,
-        type: 'light',
-      }),
-    }),
-  });
-}
 /**
  * Express middleware to render HTML
  * @param  {object}     clientStats Webpack stats output
@@ -63,23 +48,19 @@ export default ({ clientStats, outputPath }) => {
       batchInterval: 20,
     });
     const client = createApolloClient(networkInterface);
-    const history = createHistory();
+    const history = createMemoryHistory({ initialEntries: ['/'] });
     const initialState = {};
     const store = configureStore(client, initialState, history);
-
-    const { styleManager, theme } = createStyleManager();
     //
     const sheet = new ServerStyleSheet();
     const routerContext = {};
 
     const appComponent = (
+      <StaticRouter location={req.url} context={routerContext}>
       <ApolloProvider store={store} client={client}>
-        <StaticRouter location={req.url} context={routerContext}>
-          <MuiThemeProvider styleManager={styleManager} theme={theme}>
-            <App />
-          </MuiThemeProvider>
-        </StaticRouter>
+          <App />
       </ApolloProvider>
+      </StaticRouter>
     );
 
     await getDataFromTree(appComponent);
@@ -98,7 +79,7 @@ export default ({ clientStats, outputPath }) => {
     const preloadedState = store.getState();
 
     const styleTags = sheet.getStyleTags();
-    const materialCss = styleManager.sheetsToString();
+
     if (routerContext.url) {
       res.status(301).setHeader('Location', routerContext.url);
       res.redirect(routerContext.url);
@@ -119,7 +100,6 @@ export default ({ clientStats, outputPath }) => {
               ${styleTags}
               ${styles}
               ${helmet.style.toString()}
-               <style nonce=${nonce} id="jss-server-side" type="text/css">${materialCss}</style>
             </head>
             <body ${helmet.bodyAttributes.toString()}>
               <div id="app"><div>${markup}</div></div>
@@ -142,7 +122,6 @@ export default ({ clientStats, outputPath }) => {
               ${helmet.link.toString()}
               ${styleTags}
               ${styles}
-               <style nonce=${nonce} id="jss-server-side" type="text/css">${materialCss}</style>
             </head>
             <body>
               <div id="app">${markup}</div>

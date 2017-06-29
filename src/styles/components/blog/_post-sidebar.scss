@@ -1,24 +1,27 @@
 .#{$boldr-ns}post-sidebar {
-  height       : 100%;
-  padding-left : 0;
-  // author card
 
-  .#{$boldr-ns}sidebar-author {
-    @include           md-shadow(2);
-    display          : block;
-    width            : 100%;
-    margin-bottom    : 50px;
-    padding          : 1em;
-    background-color : $white;
-  }
-  // tags card
+    @media (min-width: $bp-medium) {
+        padding-left: 50px;
+    }
+    height: 100%;
+    padding-left: 0;
+    // author card
 
-  .#{$boldr-ns}sidebar-tags {
-    @include           md-shadow(2);
-    padding          : 1rem;
-    background-color : #fff;
-  }
-  @media (min-width: $medium-viewport) {
-    padding-left : 50px;
-  }
+    .#{$boldr-ns}sidebar-author {
+
+        @include md-shadow(2);
+        display: block;
+        width: 100%;
+        padding: 1em;
+        background-color: $white;
+        margin-bottom: 50px;
+    }
+    // tags card
+
+    .#{$boldr-ns}sidebar-tags {
+
+        @include md-shadow(2);
+        padding: 1rem;
+        background-color: #fff;
+    }
 }

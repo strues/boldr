@@ -5,12 +5,9 @@ import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import { Grid, Col, Row } from '@boldr/ui/Layout';
 // internal
-import FormCard from '../../../components/Form/FormCard';
 import SignupForm from './SignupForm';
 
-const Spacer = styled.div`
-  margin-top: 100px;
-`;
+const Spacer = styled.div`margin-top: 100px;`;
 
 const Signup = (props: { onSubmit: () => void }) => {
   const formBottom = (
@@ -28,7 +25,7 @@ const Signup = (props: { onSubmit: () => void }) => {
       <Grid>
         <Row>
           <Col xs={12}>
-            <Row center="xs">
+            <Row xsCenter>
               <Col xs={12} sm={8}>
                 <Spacer />
                 <SignupForm onSubmit={submitSignup} />

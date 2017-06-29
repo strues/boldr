@@ -2,17 +2,15 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { Grid, Col, Row } from '../../../components/Layout';
-import Paper from '../../../components/Paper';
+import { Grid, Col, Row } from '@boldr/ui/Layout';
+import Paper from '@boldr/ui/Paper';
 import LoginForm from './LoginForm';
 
 type Props = {
   onSubmit: () => void,
 };
 
-const Spacer = styled.div`
-  margin-top: 100px;
-`;
+const Spacer = styled.div`margin-top: 100px;`;
 const Login = (props: Props) => {
   function submitLogin(formInput) {
     props.onSubmit(formInput);
@@ -23,7 +21,7 @@ const Login = (props: Props) => {
       <Grid>
         <Row>
           <Col xs={12}>
-            <Row center="xs">
+            <Row xsCenter>
               <Col xs={6}>
                 <Spacer />
                 <LoginForm onSubmit={submitLogin} />

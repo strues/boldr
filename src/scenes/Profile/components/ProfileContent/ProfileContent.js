@@ -5,11 +5,12 @@ import Link from 'react-router-dom/Link';
 import styled from 'styled-components';
 import { Grid, Col, Row } from '@boldr/ui/Layout';
 import Paper from '@boldr/ui/Paper';
+import Icon from '@boldr/ui/Icons/Icon';
 // internal
-import Button from '../../../../components/Button';
-import FontIcon from '../../../../components/FontIcon';
-import Headline from '../../../../components/Headline';
-import Social from '../../../../components/Social';
+import Button from '@boldr/ui/Button';
+import FontIcon from '@boldr/ui/FontIcon';
+import Headline from '@boldr/ui/Headline';
+import Social from '@boldr/ui/Social';
 
 import ProfileDetail from '../ProfileDetail';
 
@@ -19,10 +20,7 @@ const DetailList = styled.ul`
   flex-direction: column;
   list-style-type: none;
 `;
-const ImgWrapper = styled.div`
-  width: 100%;
-
-`;
+const ImgWrapper = styled.div`width: 100%;`;
 const EditWrapper = styled.div`
   width: 100%;
   display: block;
@@ -49,7 +47,6 @@ const ProfileContent = (props: Props) => {
   );
   return (
     <div className="boldr-profile__content">
-
       <Grid>
         <Row>
           {props.me ? editButtons : null}
@@ -63,14 +60,26 @@ const ProfileContent = (props: Props) => {
           </Col>
           <Col xs={12} md={6}>
             <Headline type="h1">
-              {profile.firstName} {' '} {profile.lastName}'s Profile
+              {profile.firstName} {profile.lastName}'s Profile
             </Headline>
 
             <DetailList>
-              <ProfileDetail label={<FontIcon>email</FontIcon>} detail={profile.email} />
-              <ProfileDetail label={<FontIcon>web</FontIcon>} detail={profile.website} />
-              <ProfileDetail label={<FontIcon>location_on</FontIcon>} detail={profile.location} />
-              <ProfileDetail label={<FontIcon>library_books</FontIcon>} detail={profile.bio} />
+              <ProfileDetail
+                label={<Icon kind="zap" color="#222" size="24" />}
+                detail={profile.email}
+              />
+              <ProfileDetail
+                label={<Icon kind="globe" color="#222" size="24" />}
+                detail={profile.website}
+              />
+              <ProfileDetail
+                label={<Icon kind="navigation" color="#222" size="24" />}
+                detail={profile.location}
+              />
+              <ProfileDetail
+                label={<Icon kind="account-card" color="#222" size="24" />}
+                detail={profile.bio}
+              />
             </DetailList>
             <Social
               facebook
@@ -85,10 +94,8 @@ const ProfileContent = (props: Props) => {
               lurl={profile.socialMedia.linkedinUrl}
             />
           </Col>
-
         </Row>
       </Grid>
-
     </div>
   );
 };

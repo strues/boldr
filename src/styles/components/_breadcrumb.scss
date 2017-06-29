@@ -1,13 +1,6 @@
+/// @group breadcrumb
+.#{$boldr-ns}breadcrumb {
 
-$breadcrumb-padding-y: 0.75rem !default;
-$breadcrumb-padding-x: 1rem !default;
-$breadcrumb-item-padding: 0.5rem !default;
-$breadcrumb-bg: $cloud !default;
-$breadcrumb-divider-color: $gray-light !default;
-$breadcrumb-active-color: $gray-light !default;
-$breadcrumb-divider: "/" !default;
-
-.boldrui-breadcrumb {
     @include clearfix();
     list-style: none;
     padding: $breadcrumb-padding-y $breadcrumb-padding-x;
@@ -15,10 +8,10 @@ $breadcrumb-divider: "/" !default;
     margin-bottom: 1rem;
 }
 
-.boldrui-breadcrumb__item {
+.#{$boldr-ns}breadcrumb__item {
     float: left;
 
-    + .boldrui-breadcrumb__item::before {
+    + .#{$boldr-ns}breadcrumb__item::before {
         content: "#{$breadcrumb-divider}";
         display: inline-block;
         padding-right: $breadcrumb-item-padding;
@@ -26,7 +19,7 @@ $breadcrumb-divider: "/" !default;
         color: $breadcrumb-divider-color;
     }
 
-    + .boldrui-breadcrumb__item:hover::before {
+    + .#{$boldr-ns}breadcrumb__item:hover::before {
         text-decoration: underline;
     }
 

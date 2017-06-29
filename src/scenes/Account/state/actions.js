@@ -1,5 +1,5 @@
 /* @flow */
-import { push } from 'react-router-redux';
+import { replacePath } from '../../../core/RouterConnection';
 import { api, API_PREFIX, setToken, removeToken } from '../../../core';
 import * as notif from '../../../core/constants';
 import { sendNotification } from '../../../state/notifications/notifications';
@@ -23,7 +23,7 @@ export function doSignup(formInput: userSignupFormInput) {
           dispatch(notificationSend(notif.MSG_SIGNUP_ERROR));
         }
         dispatch({ type: t.SIGNUP_USER_SUCCESS });
-        dispatch(push('/'));
+        dispatch(replacePath('/'));
         return dispatch(notificationSend(notif.MSG_SIGNUP_SUCCESS));
       })
       .catch(err => {
@@ -58,7 +58,7 @@ export const doLogin = (token: string) => {
     token,
   });
   dispatch(sendNotification(notif.MSG_LOGIN_SUCCESS));
-  return dispatch(push('/'));
+  return dispatch(replacePath('/'));
 };
 
 /**

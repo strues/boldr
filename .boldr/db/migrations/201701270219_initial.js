@@ -101,6 +101,7 @@ module.exports.up = async db => {
     table.string('description').nullable();
     table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
     table.timestamp('updatedAt').nullable().defaultTo(null);
+    table.timestamp('deletedAt').nullable().defaultTo(null);
 
     table.index('name');
   });

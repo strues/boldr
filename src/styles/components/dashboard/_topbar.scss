@@ -85,7 +85,7 @@
 
 .#{$boldr-ns}topbar-child::before {
 
-    @include clearfix;
+    @include clearfix();
 }
 
 .#{$boldr-ns}topbar-search {

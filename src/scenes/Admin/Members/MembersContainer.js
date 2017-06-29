@@ -2,15 +2,16 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { gql, graphql } from 'react-apollo';
-// internal
+import { graphql } from 'react-apollo';
 import Loader from '@boldr/ui/Loader';
+// internal
 import { showModal, hideModal } from '../../../state/boldr/ui/actions';
 import { fetchMembersIfNeeded, memberSelected, updateMember } from '../state';
 import { getUsers } from '../../../state/users/selectors';
 import Members from './Members';
+import MEMBERS_QUERY from './users.graphql';
 
-type Props = {
+export type Props = {
   data: Data,
   hideModal: () => void,
   currentMember: User,
@@ -88,34 +89,6 @@ const mapStateToProps = state => {
   };
 };
 
-export const MEMBERS_QUERY = gql`
-  query getUsers($offset: Int!, $limit: Int!) {
-      getUsers(offset:$offset,limit:$limit) {
-        id,
-        email,
-        username,
-        firstName,
-        lastName,
-        avatarUrl,
-        profileImage,
-        bio,
-        location,
-        website,
-        roles {
-          name,
-          id
-        },
-        socialMedia {
-          facebookUrl,
-          githubUrl,
-          twitterUrl,
-          linkedinUrl,
-          googleUrl,
-          stackoverflowUrl
-        }
-      }
-  }
-`;
 const MembersContainerWithData = graphql(MEMBERS_QUERY, {
   options: props => ({
     variables: {
