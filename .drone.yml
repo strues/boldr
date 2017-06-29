@@ -1,0 +1,6 @@
+pipeline:
+  build:
+    image: node:8
+    commands:
+      - yarn install --pure-lockfile
+      - yarn test:ci
