@@ -4,4 +4,4 @@ pipeline:
     commands:
       - yarn install --pure-lockfile
       - yarn test:ci
-      - yarn add codecov && ./node_modules/.bin/codecov
+      - yarn add codecov && ./node_modules/.bin/codecov -t a3dc697a-382d-4d84-a07b-1f5682c3d70a
