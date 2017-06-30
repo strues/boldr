@@ -60,7 +60,6 @@ module.exports = {
     'draft-js',
     'draftjs-utils',
     'graphql-tag',
-    'griddle-react',
     'lodash',
     'hoist-non-react-statics',
     'prop-types',

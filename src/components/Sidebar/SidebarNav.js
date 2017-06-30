@@ -12,7 +12,8 @@ import {
 import type { SidebarLink, SidebarLinks } from './Sidebar';
 
 const BASE_ELEMENT = StyleClasses.SIDEBAR_NAV;
-type Props = {
+
+export type Props = {
   navClassName: ?string,
   items: SidebarLinks,
   isPrimaryColor: ?boolean,
@@ -48,12 +49,14 @@ class SidebarNav extends Component {
   }
 
   props: Props;
+
   onItemClick = (id, items) => e => {
     // e.stopPropagation();
     e.nativeEvent.stopImmediatePropagation();
     e.preventDefault();
     this.toggleItem(id, items);
   };
+
   toggleItem = (id, items) => {
     if (this.props.onExpandCollapse) {
       this.props.onExpandCollapse();

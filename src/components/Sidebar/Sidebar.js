@@ -19,7 +19,7 @@ export type SidebarLink = {
 
 export type SidebarLinks = Array<SidebarLink>;
 
-type Props = {
+export type Props = {
   className: ?string,
   navClassName: ?string,
   items: SidebarLinks,
@@ -28,7 +28,7 @@ type Props = {
   chevronComponent: ReactElement,
   iconComponent: ReactElement,
   isPrimaryColor: ?boolean,
-  activeItem: string,
+  activeItem: ?string,
   // sidebar is hidden or visible? default visible
   visible: boolean,
   // expand or collapse menu item?

@@ -6,6 +6,8 @@ query GetArticlesQuery($offset: Int!, $limit: Int!) {
     featureImage,
     featured,
     backgroundImage,
+    content,
+    rawContent,
     published,
     createdAt,
     excerpt,

@@ -2,9 +2,10 @@
 import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
 import Helmet from 'react-helmet';
 import { format } from 'date-fns';
-import Griddle, { plugins, RowDefinition, ColumnDefinition } from 'griddle-react';
+
 // internal
 import Paper from '@boldr/ui/Paper';
 import Icon from '@boldr/ui/Icons/Icon';
@@ -12,110 +13,48 @@ import Avatar from '@boldr/ui/Avatar';
 import Headline from '@boldr/ui/Headline';
 import Loader from '@boldr/ui/Loader';
 
-const styleConfig = {
-  icons: {
-    TableHeadingCell: {
-      sortDescendingIcon: <Icon kind="chevron-up" color="#222" size="16px" />,
-      sortAscendingIcon: <Icon kind="chevron-down" color="#222" size="16px" />,
-    },
-  },
-};
+import ArticleList from './components/ArticleList';
+import ArticlePreview from './components/ArticlePreview';
 
 export type Props = {
   articles: Array<Article>,
+  article: Article,
   handleDeleteClick: Function,
+  handleClick: Function,
 };
 
-class Articles extends Component {
-  state = {
-    articles: this.props.articles,
-  };
-  componentWillReceiveProps(nextProps: Object) {
-    if (nextProps.articles) {
-      this.setState({ articles: nextProps.articles });
-    }
-  }
+const SideB = styled.div`
+  display: flex;
+  flex-basis: 360px;
+  flex-direction: column;
+  flex-shrink: 0;
+`;
 
+const Listing = styled.div`flex-direction: column;`;
+const Container = styled.section`
+  display: flex;
+  flex-direction: row;
+`;
+class Articles extends Component {
   props: Props;
 
   render() {
     return (
-      <div>
+      <Container>
         <Helmet title="Admin: Post List" />
-        <Paper zDepth={3}>
-          <Griddle
-            plugins={[plugins.LocalPlugin]}
-            resultsPerPage={10}
-            data={this.state.articles}
-            styleConfig={styleConfig}
-            showFilter
-          >
-            <RowDefinition>
-              <ColumnDefinition
-                id="featureImage"
-                title="Feature Image"
-                order={1}
-                sortable={false}
-                customComponent={AvatarColumn}
-              />
-              <ColumnDefinition
-                id="title"
-                title="Title"
-                order={2}
-                customComponent={enhancedWithRowData(TitleColumn)}
-              />
-              <ColumnDefinition
-                id="createdAt"
-                title="Created"
-                order={3}
-                customComponent={DateColumn}
-              />
-              <ColumnDefinition
-                id="published"
-                title="Status"
-                order={4}
-                customComponent={PublishColumn}
-              />
-            </RowDefinition>
-          </Griddle>
-        </Paper>
-      </div>
+        <SideB>
+          <ArticleList articles={this.props.articles} handleClick={this.props.handleClick} />
+        </SideB>
+        <Listing>
+          <ArticlePreview article={this.props.article} />
+        </Listing>
+      </Container>
     );
   }
 }
-
-export default Articles;
-
-const PublishColumn = ({ value }) =>
-  <span>
-    {value === true ? 'Published' : 'Draft'}
-  </span>;
-
-const DateColumn = ({ value }) =>
-  <span>
-    {format(value, 'MM/DD/YY')}
-  </span>;
-
-const AvatarColumn = ({ value }) => <Avatar src={value} />;
-
-const rowDataSelector = (state, { griddleKey }) => {
-  return state.get('data').find(rowMap => rowMap.get('griddleKey') === griddleKey).toJSON();
-};
-
-const enhancedWithRowData = connect((state, props) => {
+const mapStateToProps = state => {
   return {
-    rowData: rowDataSelector(state, props),
+    article: state.admin.dashboard.article,
   };
-});
-
-function TitleColumn({ value, griddleKey, rowData }) {
-  return (
-    <div className="TitleColumn">
-      <strong>
-        <Link to={`/admin/content/articles/${rowData.slug}`}>
-          {value}
-        </Link>
-      </strong>
-    </div>
-  );
-}
+};
+export default connect(mapStateToProps)(Articles);

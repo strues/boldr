@@ -47,15 +47,7 @@ class Tags extends Component {
         <Helmet title="Admin: Tags" />
         <Col sm={12} md={4}>
           <Paper zDepth={2}>
-            {/* <Toolbar>
-
-              <ToolbarTitle text="Tags" />
-
-            </Toolbar> */}
-            {/* <List>
-              <TagList tags={this.props.tags} handleDeleteTagClick={this.handleDeleteTagClick} />
-            </List> */}
-            a
+            <TagList tags={this.props.tags} handleDeleteTagClick={this.handleDeleteTagClick} />
           </Paper>
         </Col>
         <Col sm={12} md={8}>

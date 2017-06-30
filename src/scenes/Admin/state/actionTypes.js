@@ -5,6 +5,7 @@
 
 export const SHOW_SIDEBAR = '@boldr/admin/SHOW_SIDEBAR';
 export const HIDE_SIDEBAR = '@boldr/admin/HIDE_SIDEBAR';
+export const SET_ARTICLE = '@boldr/admin/SET_ARTICLE';
 
 /**
  * Members action types

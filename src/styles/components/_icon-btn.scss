@@ -1,0 +1,609 @@
+.#{$boldr-ns}iconbtn-suffix {
+    padding: 0 0 0 10px;
+}
+
+.#{$boldr-ns}iconbtn-prefix {
+    padding: 0 10px 0 0;
+}
+
+.#{$boldr-ns}iconbtn {
+    box-sizing: border-box;
+    height: $icon-btn-height;
+    padding: 0 23px;
+    border: 0;
+    background-color: transparent;
+    border-radius: $icon-btn-height / 2;
+    outline: none;
+    -webkit-font-smoothing: antialiased;
+    text-align: center;
+    transition: background-color 100ms linear, border-color 100ms linear, color 100ms linear;
+    cursor: pointer;
+
+    &.transparent {
+        padding: 0 24px;
+    }
+
+    &.close-standard,
+    &.close-dark,
+    &.close-transparent {
+        width: $icon-btn-close-height;
+        height: $icon-btn-close-height;
+        padding: 0;
+        border-radius: $icon-btn-close-height / 2;
+    }
+
+    &.icon-greybackground,
+    &.icon-standard,
+    &.icon-standardsecondary,
+    &.icon-white,
+    &.icon-whitesecondary {
+        width: $icon-btn-height;
+        height: $icon-btn-height;
+        padding: 0;
+        border-radius: $icon-btn-height / 2;
+    }
+}
+
+.button > .inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+
+.button > .inner,
+.button > div,
+.button > .inner > div {
+    color: inherit;
+    font-size: inherit;
+    font-family: inherit;
+    line-height: inherit;
+}
+
+.heightsmall {
+    height: $icon-btn-sm-height;
+    padding: 0 17px;
+    border-radius: $icon-btn-sm-height / 2;
+
+    &.transparent {
+        padding: 0 18px;
+    }
+
+    &.icon-greybackground,
+    &.icon-standard,
+    &.icon-standardsecondary,
+    &.icon-white,
+    &.icon-whitesecondary {
+        width: $icon-btn-sm-height;
+        height: $icon-btn-sm-height;
+        padding: 0;
+        border-radius: $icon-btn-sm-height / 2;
+    }
+}
+
+.heightlarge {
+    height: $icon-btn-lg-height;
+    padding: 0 29px;
+    border-radius: $icon-btn-lg-height / 2;
+
+    &.transparent {
+        padding: 0 30px;
+    }
+
+    &.close-standard,
+    &.close-dark,
+    &.close-transparent {
+        width: $icon-btn-lg-close-height;
+        height: $icon-btn-lg-close-height;
+        padding: 0;
+        border-radius: $icon-btn-lg-close-height / 2;
+    }
+}
+//
+// .fullblue,
+// .icon-standard {
+//
+//     @extend .t1_2;
+//     background-color: $B10;
+//     border-color: $B10;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_2;
+//     }
+// }
+//
+// .login {
+//     min-width: 100px;
+//     height: 42px;
+//     color: #fff;
+//     background-color: $B10;
+//     border-color: $B10;
+//     border-radius: 24px;
+//     font-size: 16px;
+// }
+//
+// .fullpurple {
+//
+//     @extend .t1_2;
+//     background-color: $P10;
+//     border-color: $P10;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_2;
+//     }
+// }
+//
+// .fullgreen {
+//
+//     @extend .t1_2;
+//     background-color: $G10;
+//     border-color: $G10;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_2;
+//     }
+// }
+//
+// .fullred {
+//
+//     @extend .t1_2;
+//     background-color: $R10;
+//     border-color: $R10;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_2;
+//     }
+// }
+//
+// .emptygreen {
+//
+//     @extend .t1_3;
+//     color: $G10;
+//     background-color: $D80;
+//     border-color: $G10;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_3;
+//         color: $G10;
+//     }
+// }
+//
+// .emptyred {
+//
+//     @extend .t1_3;
+//     color: $R00;
+//     background-color: transparent;
+//     border-color: $R10;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_3;
+//         color: $R00;
+//     }
+// }
+//
+// .emptyblue {
+//
+//     @extend .t1_3;
+//     background-color: $D80;
+//     border-color: #5babef;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_3;
+//     }
+// }
+//
+// .emptylogin {
+//     min-width: 100px;
+//     height: 42px;
+//     color: $B10;
+//     background-color: $D80;
+//     border-color: #5babef;
+//     border-radius: 24px;
+//     font-size: 16px;
+// }
+//
+// .emptypurple {
+//
+//     @extend .t1_3;
+//     color: $P00;
+//     background-color: transparent;
+//     border-color: $P10;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_3;
+//         color: $P00;
+//     }
+// }
+//
+// .close-transparent,
+// .transparent {
+//
+//     @extend .t1_2;
+//     background-color: rgba($D10, 0.12);
+//     border: 0;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_2;
+//     }
+// }
+//
+// .transparentblue,
+// .icon-standardsecondary {
+//
+//     @extend .t1_3;
+//     background-color: transparent;
+//     border-color: $B10;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_3;
+//     }
+// }
+//
+// .emptybluesecondary,
+// .icon-greybackground,
+// .whiteblueprimary,
+// .icon-white,
+// .whiteblue {
+//
+//     @extend .t1_3;
+//     background-color: $D80;
+//     border-color: $D80;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_3;
+//     }
+// }
+//
+// .whitebluesecondary,
+// .icon-whitesecondary {
+//
+//     @extend .t1_2;
+//     background-color: transparent;
+//     border-color: $D80;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_2;
+//     }
+// }
+//
+// .close-standard {
+//     color: $B10;
+//     background-color: transparent;
+//     border-color: transparent;
+// }
+//
+// .close-dark {
+//     color: $D10;
+//     background-color: transparent;
+//     border-color: transparent;
+// }
+//
+// .fullgreen:hover,
+// .fullgreen.hover,
+// .emptygreen:hover,
+// .emptygreen.hover {
+//
+//     @extend .t1_2;
+//     background-color: $G20;
+//     border-color: $G20;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_2;
+//     }
+// }
+//
+// .fullred:hover,
+// .fullred.hover,
+// .emptyred:hover,
+// .emptyred.hover {
+//
+//     @extend .t1_2;
+//     background-color: $R20;
+//     border-color: $R20;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_2;
+//     }
+// }
+//
+// .icon-greybackground:hover,
+// .icon-greybackground.hover,
+// .icon-standard:hover,
+// .icon-standard.hover,
+// .fullblue:hover,
+// .fullblue.hover,
+// .emptyblue:hover,
+// .emptyblue.hover,
+// .icon-standardsecondary:hover,
+// .icon-standardsecondary.hover,
+// .transparentblue:hover,
+// .transparentblue.hover,
+// .whiteblue:hover,
+// .whiteblue.hover {
+//
+//     @extend .t1_2;
+//     background-color: $B20;
+//     border-color: $B20;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_2;
+//     }
+// }
+//
+// .login:hover,
+// .login.hover {
+//     background-color: $B20;
+//     border-color: $B20;
+// }
+//
+// .emptylogin:hover,
+// .emptylogin.hover {
+//     color: #fff;
+//     background-color: #5babef;
+// }
+//
+// .icon-whitesecondary:hover,
+// .icon-whitesecondary.hover,
+// .whitebluesecondary:hover,
+// .whitebluesecondary.hover,
+// .icon-white:hover,
+// .icon-white.hover,
+// .whiteblueprimary:hover,
+// .whiteblueprimary.hover,
+// .emptybluesecondary:hover,
+// .emptybluesecondary.hover {
+//
+//     @extend .t1_3;
+//     background-color: $B50;
+//     border-color: $B50;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_3;
+//     }
+// }
+//
+// .transparent:hover,
+// .transparent.hover,
+// .close-transparent:hover,
+// .close-transparent.hover {
+//
+//     @extend .t1_2;
+//     background-color: rgba($D10, 0.18);
+//
+//     &.heightsmall {
+//
+//         @extend .t3_2;
+//     }
+// }
+//
+// .emptypurple:hover,
+// .emptypurple.hover,
+// .fullpurple:hover,
+// .fullpurple.hover {
+//
+//     @extend .t1_2;
+//     background-color: $P20;
+//     border-color: $P20;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_2;
+//     }
+// }
+//
+// .close-standard:hover,
+// .close-standard.hover,
+// .close-dark:hover,
+// .close-dark.hover {
+//     color: $B20;
+//     background-color: transparent;
+//     border-color: transparent;
+// }
+//
+// .icon-greybackground:active,
+// .icon-greybackground.active,
+// .icon-standard:active,
+// .icon-standard.active,
+// .fullblue:active,
+// .fullblue.active,
+// .icon-standardsecondary:active,
+// .icon-standardsecondary.active,
+// .transparentblue:active,
+// .transparentblue.active,
+// .whiteblue:active,
+// .whiteblue.active,
+// .emptyblue:active,
+// .emptyblue.active {
+//
+//     @extend .t1_2;
+//     background-color: $B10;
+//     border-color: $B10;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_2;
+//     }
+// }
+//
+// .login:active,
+// .login.active {
+//     background-color: $B10;
+//     border-color: $B10;
+// }
+//
+// .emptylogin:active,
+// .emptylogin.active {
+//     color: #fff;
+//     background-color: #5babef;
+// }
+//
+// .icon-white:active,
+// .icon-white.active,
+// .whiteblueprimary:active,
+// .whiteblueprimary.active,
+// .icon-whitesecondary:active,
+// .icon-whitesecondary.active,
+// .whitebluesecondary:active,
+// .whitebluesecondary.active {
+//
+//     @extend .t1_3;
+//     background-color: $B40;
+//     border-color: $B40;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_3;
+//     }
+// }
+//
+// .emptybluesecondary:active,
+// .emptybluesecondary.active {
+//
+//     @extend .t1_3;
+//     background-color: $D80;
+//     border-color: $D80;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_3;
+//     }
+// }
+//
+// .emptypurple:active,
+// .emptypurple.active,
+// .fullpurple:active,
+// .fullpurple.active {
+//
+//     @extend .t1_2;
+//     background-color: $P10;
+//     border-color: $P10;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_2;
+//     }
+// }
+//
+// .fullgreen:active,
+// .fullgreen.active,
+// .emptygreen:active,
+// .emptygreen.active {
+//
+//     @extend .t1_2;
+//     background-color: $G00;
+//     border-color: $G00;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_2;
+//     }
+// }
+//
+// .fullred:active,
+// .fullred.active,
+// .emptyred:active,
+// .emptyred.active {
+//
+//     @extend .t1_2;
+//     background-color: $R10;
+//     border-color: $R10;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_2;
+//     }
+// }
+//
+// .transparent:active,
+// .transparent.active,
+// .close-transparent:active,
+// .close-transparent.active {
+//
+//     @extend .t1_2;
+//     background-color: rgba($D10, 0.12);
+//
+//     &.heightsmall {
+//
+//         @extend .t3_2;
+//     }
+// }
+//
+// .close-standard:active,
+// .close-standard.active,
+// .close-dark:active,
+// .close-dark.active {
+//     color: $B10;
+//     background-color: transparent;
+//     border-color: transparent;
+// }
+//
+// .button.transparent.disabled,
+// .button.fullred.disabled,
+// .button.fullgreen.disabled,
+// .button.fullpurple.disabled,
+// .button.icon-greybackground.disabled,
+// .button.icon-standard.disabled,
+// .button.fullblue.disabled,
+// .button.login.disabled,
+// .button.emptylogin.disabled,
+// .button.icon-white.disabled,
+// .button.whiteblueprimary.disabled,
+// .button.close-transparent.disabled {
+//
+//     @extend .t1_2;
+//     background-color: $D55;
+//     border-color: $D55;
+//     pointer-events: none;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_2;
+//     }
+// }
+//
+// .button.emptyred.disabled,
+// .button.emptygreen.disabled,
+// .button.emptybluesecondary.disabled,
+// .button.emptyblue.disabled,
+// .button.emptypurple.disabled,
+// .button.icon-standardsecondary.disabled,
+// .button.transparentblue.disabled,
+// .button.whiteblue.disabled,
+// .button.icon-whitesecondary.disabled,
+// .button.whitebluesecondary.disabled {
+//
+//     @extend .t1_4;
+//     background-color: transparent;
+//     border-color: $D55;
+//     pointer-events: none;
+//
+//     &.heightsmall {
+//
+//         @extend .t3_4;
+//     }
+// }
+//
+// .button.close-standard.disabled,
+// .button.close-dark.disabled {
+//     color: $D55;
+//     background-color: transparent;
+//     border-color: transparent;
+//     pointer-events: none;
+// }

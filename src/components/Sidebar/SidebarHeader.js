@@ -19,14 +19,14 @@ const InfoElement = styled.div`
   padding-top: 6px;
 `;
 const Header = styled.div`
-    display: block;
-    position: relative;
-    height: 54px;
-    background-color: #00bcd4;
-    line-height: 54px;
-    padding: 0 18px;
-    box-shadow: 0 1px 1px rgba(0,0,0,.1);
-  `;
+  display: block;
+  position: relative;
+  height: 54px;
+  background-color: #00bcd4;
+  line-height: 54px;
+  padding: 0 18px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .1);
+`;
 const SidebarHeader = (props: Props) => {
   return (
     <Header>

@@ -46,7 +46,6 @@
     }
 
     &.#{$boldr-ns}btn__loading {
-
         &:hover,
         &:active {
             background: $btn-white;
@@ -100,7 +99,6 @@
     }
 
     &.#{$boldr-ns}btn__loading {
-
         &:hover,
         &:active {
             background: $btn-primary;
@@ -136,7 +134,6 @@
     }
 
     &.#{$boldr-ns}btn__loading {
-
         &:hover,
         &:active {
             background: $btn-white;
@@ -173,7 +170,6 @@
     }
 
     &.#{$boldr-ns}btn__loading {
-
         &:hover,
         &:active {
             background: $btn-danger;
@@ -209,7 +205,6 @@
     }
 
     &.#{$boldr-ns}btn__loading {
-
         &:hover,
         &:active {
             background: $btn-white;
@@ -246,7 +241,6 @@
     }
 
     &.#{$boldr-ns}btn__loading {
-
         &:hover,
         &:active {
             background: $btn-secondary;
@@ -282,7 +276,6 @@
     }
 
     &.#{$boldr-ns}btn__loading {
-
         &:hover,
         &:active {
             background: $btn-white;
@@ -336,7 +329,7 @@
 
     &::before,
     &::after {
-        content: '';
+        content: "";
         position: absolute;
         top: 50%;
         left: 50%;
@@ -357,7 +350,6 @@
 }
 
 @keyframes btn-spin {
-
     0% {
         transform: rotate(0);
     }
@@ -376,5 +368,29 @@
 
     &:active {
         border-color: transparent;
+    }
+}
+
+.touch-ripple {
+    position: absolute;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    transform: rotate(0deg);
+
+    .ripple {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.16;
+        background: #ccc;
+        border-radius: 50%;
+        transform: scale(0);
+        transition: opacity 1s ease-out, transform 0.5s ease-out;
+        pointer-events: none;
     }
 }

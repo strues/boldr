@@ -20,6 +20,11 @@ export default function dashboardReducer(state = INITIAL_STATE, action) {
         ...state,
         open: false,
       };
+    case t.SET_ARTICLE:
+      return {
+        ...state,
+        article: action.article,
+      };
     default:
       return state;
   }

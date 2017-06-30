@@ -21,13 +21,13 @@ const FormBottom = styled.div`
   font-size: 14px;
   text-align: center;
 `;
+
 const FormBottomList = styled.ul`
   list-style-type: none;
   padding-left: 0;
 `;
-const FormBottomListItem = styled.li`
-  padding-left: 0;
-`;
+
+const FormBottomListItem = styled.li`padding-left: 0;`;
 const LoginForm = (props: Props) => {
   const { handleSubmit } = props;
   return (
@@ -47,7 +47,9 @@ const LoginForm = (props: Props) => {
         component={InputField}
         label="Password"
       />
-      <Button htmlType="submit" kind="primary" block>Login</Button>
+      <Button htmlType="submit" kind="primary" block>
+        Login
+      </Button>
       <FormBottom>
         <FormBottomList>
           <FormBottomListItem>
