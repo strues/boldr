@@ -491,7 +491,9 @@ $sidebar-compact-height: $sidebar-compact-width;
 /// @type Color
 $sidebar-color: #fff;
 /// @group dash-sidebar
-$sidebar-bg: $big-stone;
+$sidebar-nav-bg: $midnight;
+/// @group dash-sidebar
+$sidebar-nav-expanded-bg: $madison;
 /// @group dash-sidebar
 $sidebar-borders: none;
 /// @group dash-sidebar
@@ -523,7 +525,8 @@ $sidebar-nav-link-hover-borders: 0;
 /// @group dash-sidebar
 $sidebar-nav-link-active-color: $snow;
 /// @group dash-sidebar
-$sidebar-nav-link-active-bg: $outer-space;
+$sidebar-nav-link-active-bg: $madison;
+$sidebar-nav-active-bg: $cello;
 /// @group dash-sidebar
 $sidebar-nav-link-active-icon-color: $primary-color;
 /// @group dash-sidebar

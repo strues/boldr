@@ -19,7 +19,7 @@ async function setupHotDev() {
   const multiCompiler = webpack([clientConfig, serverConfig]);
   const clientCompiler = multiCompiler.compilers[0];
 
-  router.use(webpackDevMiddleware(multiCompiler, { publicPath, noInfo: true }));
+  router.use(webpackDevMiddleware(multiCompiler, { publicPath }));
   router.use(webpackHotMiddleware(clientCompiler));
   router.use(
     wpServerMiddleware(multiCompiler, {

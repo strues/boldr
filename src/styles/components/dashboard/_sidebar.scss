@@ -4,7 +4,7 @@
 .#{$boldr-ns}sidebar-nav {
     height: 100%;
     min-height: 100%;
-    background-color: $big-stone;
+    background-color: $sidebar-nav-bg;
 
     .#{$boldr-ns}sidebar-header-logo {
         display: inline-block;
@@ -38,12 +38,14 @@
 }
 
 .#{$boldr-ns}sidebar-nav.boldr-theme {
+    background-color: $sidebar-nav-bg;
     .active.#{$boldr-ns}sidebar-nav-item-link {
         color: #f1f1f1;
+        background: $sidebar-nav-active-bg;
     }
 
     .#{$boldr-ns}sidebar-nav-item-title {
-        background-color: $sidebar-bg;
+        background-color: $sidebar-nav-bg;
     }
 
     .#{$boldr-ns}sidebar-nav-item-title,
@@ -74,7 +76,7 @@
 
         &.active,
         &.expanded {
-            background-color: $outer-space;
+            background-color: $sidebar-nav-expanded-bg;
 
             &.level-0,
             &.level-1,

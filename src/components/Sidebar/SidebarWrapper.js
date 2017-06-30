@@ -13,7 +13,7 @@ const SidebarWrapper = (props: Props) => {
   display: flex;
   flex-direction: column;
   width: ${props => (props.fullWidth ? '200px' : '60px')};
-  background: ${props => (props.sidebarDark ? '#333c44' : '#fff')};
+  background: ${props => (props.sidebarDark ? '#2d3e50' : '#fff')};
   box-shadow: 1px 0 2px rgba(0,0,0,.15);
   flex-direction: column;
   transform: translateX(0);

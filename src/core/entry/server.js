@@ -57,9 +57,9 @@ export default ({ clientStats, outputPath }) => {
 
     const appComponent = (
       <StaticRouter location={req.url} context={routerContext}>
-      <ApolloProvider store={store} client={apolloClient}>
+        <ApolloProvider store={store} client={apolloClient}>
           <App />
-      </ApolloProvider>
+        </ApolloProvider>
       </StaticRouter>
     );
 
@@ -103,7 +103,7 @@ export default ({ clientStats, outputPath }) => {
             </head>
             <body ${helmet.bodyAttributes.toString()}>
               <div id="app"><div>${markup}</div></div>
-              <script nonce=${nonce} type="text/javascript" src="/boldrDLLs.js"></script>
+              <script nonce=${nonce} type="text/javascript" src="/assets/boldrDLLs.js"></script>
               ${js}
               <script type="text/javascript" nonce=${nonce}>
                 window.__APOLLO_STATE__=${serialize(preloadedState, {

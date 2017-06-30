@@ -85,8 +85,8 @@ app.use(express.static(pathResolve(appRoot.get(), './public')));
 if (process.env.NODE_ENV === 'development') {
   app.use(require('./middleware/hot'));
 } else {
-  const clientStats = require('../assets/client-stats.json');
-  const serverRenderer = require('../serverRenderer.js').default;
+  const clientStats = require('../build/assets/client-stats.json');
+  const serverRenderer = require('../build/serverRenderer.js').default;
 
   // server.use(publicPath, express.static(outputPath))
   app.use(serverRenderer({ clientStats }));

@@ -128,8 +128,8 @@ function wpServerMiddleware(multiCompiler, options) {
   });
 
   return (req, res, next) => {
-    debug(`Receive request ${req.url}`);
     if (error) {
+      debug(error);
       return next(error);
     }
     serverRenderer(req, res, next);

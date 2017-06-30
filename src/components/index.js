@@ -8,7 +8,6 @@ export {
 export { default as Anchor } from './Anchor';
 export { default as Avatar } from './Avatar';
 export { default as Block } from './Block';
-export { default as Button } from './Button';
 export { default as Caption } from './Caption';
 export { default as Checkbox, CheckboxGroup } from './Checkbox';
 export { default as Collapsible } from './Collapsible';

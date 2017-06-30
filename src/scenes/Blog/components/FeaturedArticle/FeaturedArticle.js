@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { Row, Col } from '@@components/Layout';
 import Paragraph from '@@components/Paragraph';
 import { mediaQuery } from '../../../../theme/theme';
-import Button from '@@components/Button';
+import Button from '@boldr/ui/Button';
 import { selectArticle } from '../../state/articles/actions';
 import TagBlock from '../TagBlock';
 

@@ -214,7 +214,7 @@ ansi-styles@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-2.2.1.tgz#b432dd3358b634cf75e1e4664368240533c1ddbe"
 
-ansi-styles@^3.0.0:
+ansi-styles@^3.0.0, ansi-styles@^3.1.0:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/ansi-styles/-/ansi-styles-3.1.0.tgz#09c202d5c917ec23188caa5c9cb9179cd9547750"
   dependencies:
@@ -239,7 +239,22 @@ ap@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/ap/-/ap-0.2.0.tgz#ae0942600b29912f0d2b14ec60c45e8f330b6110"
 
-apollo-client@1.6.1, apollo-client@^1.4.0, apollo-client@^1.5.0:
+apollo-client@1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-1.7.0.tgz#3d6fdf6ead0a07d3e02d32d9191f26cbcfb6e4f6"
+  dependencies:
+    graphql "^0.10.0"
+    graphql-anywhere "^3.0.1"
+    graphql-tag "^2.0.0"
+    redux "^3.4.0"
+    symbol-observable "^1.0.2"
+    whatwg-fetch "^2.0.0"
+  optionalDependencies:
+    "@types/async" "^2.0.31"
+    "@types/graphql" "^0.9.0"
+    "@types/isomorphic-fetch" "0.0.34"
+
+apollo-client@^1.4.0, apollo-client@^1.5.0:
   version "1.6.1"
   resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-1.6.1.tgz#1b82e02ae5082c5e43b09daffdeced5a56e7128f"
   dependencies:
@@ -1580,6 +1595,14 @@ chalk@^1.0.0, chalk@^1.1.0, chalk@^1.1.1, chalk@^1.1.3:
     has-ansi "^2.0.0"
     strip-ansi "^3.0.0"
     supports-color "^2.0.0"
+
+chalk@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/chalk/-/chalk-2.0.0.tgz#c25c5b823fedff921aa5d83da3ecb5392e84e533"
+  dependencies:
+    ansi-styles "^3.1.0"
+    escape-string-regexp "^1.0.5"
+    supports-color "^4.0.0"
 
 change-case@^3.0.1:
   version "3.0.1"
@@ -3752,25 +3775,25 @@ graphql-anywhere@^3.0.0, graphql-anywhere@^3.0.1:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/graphql-anywhere/-/graphql-anywhere-3.1.0.tgz#3ea0d8e8646b5cee68035016a9a7557c15c21e96"
 
-graphql-server-core@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/graphql-server-core/-/graphql-server-core-0.9.0.tgz#34dac2d90e0b9c5f2c4c666f08dab74c15b8a327"
+graphql-server-core@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/graphql-server-core/-/graphql-server-core-1.0.0.tgz#25d92b6279a81263f0714136636a54910c1fafe0"
   optionalDependencies:
     "@types/graphql" "^0.9.0"
 
-graphql-server-express@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/graphql-server-express/-/graphql-server-express-0.9.0.tgz#00d39aa8136da205359882933849945dd19b80f0"
+graphql-server-express@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/graphql-server-express/-/graphql-server-express-1.0.0.tgz#038b73552255f6180c51a73bee8d7f9d68c5e201"
   dependencies:
-    graphql-server-core "^0.9.0"
-    graphql-server-module-graphiql "^0.9.0"
+    graphql-server-core "^1.0.0"
+    graphql-server-module-graphiql "^1.0.0"
   optionalDependencies:
     "@types/express" "^4.0.35"
     "@types/graphql" "^0.9.1"
 
-graphql-server-module-graphiql@^0.9.0:
-  version "0.9.0"
-  resolved "https://registry.yarnpkg.com/graphql-server-module-graphiql/-/graphql-server-module-graphiql-0.9.0.tgz#dfe877066052f94a3ff57ff4790b3023e9ef2b4a"
+graphql-server-module-graphiql@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/graphql-server-module-graphiql/-/graphql-server-module-graphiql-1.0.0.tgz#1b302481423f83b3c0f43cb30bfdc30bfe3d0a82"
 
 graphql-subscriptions@^0.4.3:
   version "0.4.3"
@@ -8531,9 +8554,9 @@ validator@7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/validator/-/validator-7.0.0.tgz#c74deb8063512fac35547938e6f0b1504a282fd2"
 
-validator@^7.1.0:
-  version "7.1.0"
-  resolved "https://registry.yarnpkg.com/validator/-/validator-7.1.0.tgz#331695afc7e6d72f980bddd68aa296d6b3d6c8b6"
+validator@^7.2.0:
+  version "7.2.0"
+  resolved "https://registry.yarnpkg.com/validator/-/validator-7.2.0.tgz#a63dcbaba51d4350bf8df20988e0d5a54d711791"
 
 value-equal@^0.2.0:
   version "0.2.1"
