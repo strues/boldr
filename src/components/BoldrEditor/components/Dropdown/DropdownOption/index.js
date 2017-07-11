@@ -4,23 +4,25 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
+export type Props = {
+  children: ?ReactChildren,
+  value: ?any,
+  onClick: ?Function,
+  onSelect: ?Function,
+  setHighlighted: ?Function,
+  index: ?number,
+  disabled: ?boolean,
+  active: ?boolean,
+  highlighted: ?boolean,
+  className: ?string,
+  activeClassName: ?string,
+  disabledClassName: ?string,
+  highlightedClassName: ?string,
+  title: ?string,
+};
+
 export default class DropDownOption extends Component {
-  static propTypes = {
-    children: PropTypes.any,
-    value: PropTypes.any,
-    onClick: PropTypes.func,
-    onSelect: PropTypes.func,
-    setHighlighted: PropTypes.func,
-    index: PropTypes.number,
-    disabled: PropTypes.bool,
-    active: PropTypes.bool,
-    highlighted: PropTypes.bool,
-    className: PropTypes.string,
-    activeClassName: PropTypes.string,
-    disabledClassName: PropTypes.string,
-    highlightedClassName: PropTypes.string,
-    title: PropTypes.string,
-  };
+  props: Props;
 
   onClick: Function = (event): void => {
     const { onSelect, onClick, value, disabled } = this.props;

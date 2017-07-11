@@ -8,17 +8,18 @@ import { getFirstIcon } from '../../../../utils/toolbar';
 import Option from '../../../Option';
 import { Dropdown, DropdownOption } from '../../../Dropdown';
 
-export default class History extends Component {
-  static propTypes = {
-    expanded: PropTypes.bool,
-    doExpand: PropTypes.func,
-    doCollapse: PropTypes.func,
-    onExpandEvent: PropTypes.func,
-    config: PropTypes.object,
-    onChange: PropTypes.func,
-    currentState: PropTypes.object,
-  };
+export type Props = {
+  expanded: ?boolean,
+  onExpandEvent: ?Function,
+  doExpand: ?Function,
+  doCollapse: ?Function,
+  onChange: ?Function,
+  config: ?Object,
+  currentState: ?Object,
+};
 
+export default class History extends Component {
+  props: Props;
   onChange = obj => {
     const { onChange } = this.props;
     onChange(obj);

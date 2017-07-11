@@ -1,6 +1,7 @@
+/* @flow */
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
+import { CSSTransitionGroup } from 'react-transition-group';
 import { dismissNotification } from '../../state/notifications/notifications';
 
 import Notification from './Notification';

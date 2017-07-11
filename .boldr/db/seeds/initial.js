@@ -164,9 +164,7 @@ function seed(knex, Promise) {
           title: 'Just Another Post',
           slug: 'just-another-post',
           featured: true,
-          excerpt: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' +
-            'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when' +
-            'an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+          excerpt: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
           featureImage: 'https://boldr.io/image1.jpg',
           featureImage: 'https://boldr.io/image1.jpg',
           meta: {},
@@ -185,9 +183,7 @@ function seed(knex, Promise) {
           title: 'Nother One',
           slug: 'nother-one',
           featured: false,
-          excerpt: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' +
-            'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when' +
-            'an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+          excerpt: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
           featureImage: 'https://boldr.io/image3.jpg',
           featureImage: 'https://boldr.io/image3.jpg',
           meta: {},
@@ -206,9 +202,7 @@ function seed(knex, Promise) {
           title: 'Random Post Title',
           slug: 'random-post-title',
           featured: false,
-          excerpt: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' +
-            'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when' +
-            'an unknown printer took a galley of type and scrambled it to make a type specimen book.',
+          excerpt: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
           featureImage: 'https://boldr.io/image2.jpg',
           featureImage: 'https://boldr.io/image2.jpg',
           meta: {},
@@ -257,7 +251,7 @@ function seed(knex, Promise) {
       Promise.all([
         knex('menu_detail').insert({
           name: 'About',
-          safeName: 'about',
+          safeName: 'About',
           cssClassname: 'about-link',
           hasDropdown: true,
           order: 1,
@@ -284,7 +278,7 @@ function seed(knex, Promise) {
         }),
         knex('menu_detail').insert({
           name: 'Blog',
-          safeName: 'blog',
+          safeName: 'Blog',
           cssClassname: 'blog-link',
           hasDropdown: false,
           order: 2,

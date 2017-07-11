@@ -4,18 +4,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
+export type Props = {
+  onClick: Function,
+  children: ?ReactChildren,
+  value: ?string,
+  className: ?string,
+  activeClassName: ?string,
+  active: ?boolean,
+  disabled: ?boolean,
+  title: ?string,
+};
 export default class Option extends Component {
-  static propTypes = {
-    onClick: PropTypes.func.isRequired,
-    children: PropTypes.any,
-    value: PropTypes.string,
-    className: PropTypes.string,
-    activeClassName: PropTypes.string,
-    active: PropTypes.bool,
-    disabled: PropTypes.bool,
-    title: PropTypes.string,
-  };
-
+  props: Props;
   onClick: Function = () => {
     const { disabled, onClick, value } = this.props;
     if (!disabled) {

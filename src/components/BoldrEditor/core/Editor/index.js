@@ -1,5 +1,5 @@
-/* eslint-disable max-lines, flowtype/no-types-missing-file-annotation, react/no-array-index-key */
 /* @flow */
+/* eslint-disable max-lines, flowtype/no-types-missing-file-annotation, react/no-array-index-key */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import {
@@ -34,48 +34,48 @@ import getHashtagDecorator from '../Decorators/HashTag';
 import getBlockRenderFunc from '../../Renderer';
 import defaultToolbar from '../../config/defaultToolbar';
 
-export default class BoldrEditor extends Component {
-  static propTypes = {
-    onChange: PropTypes.func,
-    onEditorStateChange: PropTypes.func,
-    onContentStateChange: PropTypes.func,
-    defaultContentState: PropTypes.object,
-    contentState: PropTypes.object,
-    editorState: PropTypes.object,
-    defaultEditorState: PropTypes.object,
-    toolbarOnFocus: PropTypes.bool,
-    spellCheck: PropTypes.bool,
-    stripPastedStyles: PropTypes.bool,
-    toolbar: PropTypes.object,
-    toolbarCustomButtons: PropTypes.array,
-    toolbarClassName: PropTypes.string,
-    toolbarHidden: PropTypes.bool,
-    editorClassName: PropTypes.string,
-    wrapperClassName: PropTypes.string,
-    toolbarStyle: PropTypes.object,
-    editorStyle: PropTypes.object,
-    wrapperStyle: PropTypes.object,
-    uploadCallback: PropTypes.func,
-    onFocus: PropTypes.func,
-    onBlur: PropTypes.func,
-    onTab: PropTypes.func,
-    mention: PropTypes.object,
-    hashtag: PropTypes.object,
-    textAlignment: PropTypes.string,
-    readOnly: PropTypes.bool,
-    tabIndex: PropTypes.number,
-    placeholder: PropTypes.string,
-    ariaLabel: PropTypes.string,
-    ariaOwneeID: PropTypes.string,
-    ariaActiveDescendantID: PropTypes.string,
-    ariaAutoComplete: PropTypes.string,
-    ariaDescribedBy: PropTypes.string,
-    ariaExpanded: PropTypes.string,
-    ariaHasPopup: PropTypes.string,
-    customBlockRenderFunc: PropTypes.func,
-    customDecorators: PropTypes.array,
-  };
+export type Props = {
+  onChange: ?Function,
+  onEditorStateChange: ?Function,
+  onContentStateChange: ?Function,
+  defaultContentState: ?Object,
+  contentState: ?Object,
+  editorState: ?Object,
+  defaultEditorState: ?Object,
+  toolbarOnFocus: ?boolean,
+  spellCheck: ?boolean,
+  stripPastedStyles: ?boolean,
+  toolbar: ?Object,
+  toolbarCustomButtons: ?Array<any>,
+  toolbarClassName: ?string,
+  toolbarHidden: ?boolean,
+  editorClassName: ?string,
+  wrapperClassName: ?string,
+  toolbarStyle: ?Object,
+  editorStyle: ?Object,
+  wrapperStyle: ?Object,
+  uploadCallback: ?Function,
+  onFocus: ?Function,
+  onBlur: ?Function,
+  onTab: ?Function,
+  mention: ?Object,
+  hashtag: ?Object,
+  textAlignment: ?string,
+  readOnly: ?boolean,
+  tabIndex: ?number,
+  placeholder: ?string,
+  ariaLabel: ?string,
+  ariaOwneeID: ?string,
+  ariaActiveDescendantID: ?string,
+  ariaAutoComplete: ?string,
+  ariaDescribedBy: ?string,
+  ariaExpanded: ?string,
+  ariaHasPopup: ?string,
+  customBlockRenderFunc: ?Function,
+  customDecorators: ?Array<any>,
+};
 
+export default class BoldrEditor extends Component {
   static defaultProps = {
     toolbarOnFocus: false,
     toolbarHidden: false,
@@ -159,6 +159,8 @@ export default class BoldrEditor extends Component {
     this.editorProps = this.filterEditorProps(props);
     this.customStyleMap = getCustomStyleMap();
   }
+
+  props: Props;
 
   onEditorBlur: Function = (): void => {
     this.setState({

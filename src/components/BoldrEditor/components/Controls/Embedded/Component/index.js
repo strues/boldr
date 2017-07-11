@@ -3,16 +3,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import Icon from '@@components/Icons';
+import Icon from '../../../../../Icons/Icon';
 import { stopPropagation } from '../../../../utils/common';
 import Option from '../../../Option';
 
 export type Props = {
-  expanded: boolean,
-  onExpandEvent: Function,
-  doCollapse: Function,
-  onChange: Function,
-  config: Object,
+  expanded: ?boolean,
+  onExpandEvent: ?Function,
+  doCollapse: ?Function,
+  onChange: ?Function,
+  config: ?Object,
 };
 
 class LayoutComponent extends Component {

@@ -32,9 +32,9 @@ const List = styled.ul`
     position: relative;
     top: 0;
     border: none;
-    color: #000;
+    color: #fff;
     box-shadow: none;
-    background: #15317e;
+    background: #364b60;
   }
 `;
 const Item = styled.li`
@@ -43,12 +43,12 @@ const Item = styled.li`
   transition: all 0.14s ease;
 
   &:hover {
-    color: white;
-    background: #15317e;
+    color: #fff;
+    background: #364b60;
   }
 
   @media (max-width: 768px) {
-    color: white;
+    color: #fff;
   }
 `;
 const Link = styled.a`

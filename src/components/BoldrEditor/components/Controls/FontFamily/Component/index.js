@@ -6,17 +6,17 @@ import classNames from 'classnames';
 
 import { Dropdown, DropdownOption } from '../../../Dropdown';
 
-class LayoutComponent extends Component {
-  static propTypes = {
-    expanded: PropTypes.bool,
-    onExpandEvent: PropTypes.func,
-    doExpand: PropTypes.func,
-    doCollapse: PropTypes.func,
-    onChange: PropTypes.func,
-    config: PropTypes.object,
-    currentState: PropTypes.object,
-  };
+export type Props = {
+  expanded: ?boolean,
+  onExpandEvent: ?Function,
+  doExpand: ?Function,
+  doCollapse: ?Function,
+  onChange: ?Function,
+  config: ?Object,
+  currentState: ?Object,
+};
 
+class LayoutComponent extends Component {
   state: Object = {
     defaultFontFamily: undefined,
   };
@@ -31,12 +31,11 @@ class LayoutComponent extends Component {
       });
     }
   }
-
+  props: Props;
   render() {
     const { defaultFontFamily } = this.state;
     const {
       config: { icon, className, dropdownClassName, options, title },
-      translations,
       onChange,
       expanded,
       doCollapse,

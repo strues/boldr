@@ -8,13 +8,13 @@ import Option from '../../../Option';
 import { Dropdown, DropdownOption } from '../../../Dropdown';
 
 type Props = {
-  expanded: boolean,
-  onExpandEvent: Function,
-  doExpand: Function,
-  doCollapse: Function,
-  onChange: Function,
-  config: Object,
-  currentState: Object,
+  expanded: ?boolean,
+  onExpandEvent: ?Function,
+  doExpand: ?Function,
+  doCollapse: ?Function,
+  onChange: ?Function,
+  config: ?Object,
+  currentState: ?Object,
 };
 
 class LayoutComponent extends Component {
