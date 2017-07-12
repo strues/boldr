@@ -1,16 +1,18 @@
 // stylelint-disable length-zero-no-unit, max-line-length
 
-// Strip units
-// ==================================================
-// Derived from Bourbon by thoughtbot (http://bourbon.io)
+///
+/// @group functions
+///
+
+/// Strip units
+/// Derived from Bourbon by thoughtbot (http://bourbon.io)
 @function _mq-strip-units($val) {
 
     @return ($val / ($val * 0 + 1));
 }
 
-// Pixels to Ems
-// ==================================================
-// Derived from Bourbon by thoughtbot (http://bourbon.io)
+/// Pixels to Ems
+/// Derived from Bourbon by thoughtbot (http://bourbon.io)
 @function _mq-em($pxval, $base: $mq-em-base) {
     // alteration to prevent strings from causing an error
     @if (type-of($pxval) == "string") {
@@ -29,8 +31,8 @@
     @return ($pxval / $base) * 1em;
 }
 
-// Turn string into a number
-// http://hugogiraudel.com/2014/01/15/sass-string-to-number/
+/// Turn string into a number
+/// http://hugogiraudel.com/2014/01/15/sass-string-to-number/
 @function number($string) {
     // Matrices
     $strings: "0" "1" "2" "3" "4" "5" "6" "7" "8" "9";
@@ -56,7 +58,7 @@
     @return $result;
 }
 
-// For getting the number values in ratio based ranges
+/// For getting the number values in ratio based ranges
 @function get-start($string) {
     $string: unquote($string);
 
@@ -75,20 +77,20 @@
     @return type-of($number) == number and floor(abs($number)) == abs($number);
 }
 
-// Returns a number without a unit. For example 16px becomes 16
+/// Returns a number without a unit. For example 16px becomes 16
 @function strip-units($number) {
 
     @return $number / ($number * 0 + 1);
 }
 
-// Returns an EM value. For example 24px becomes 1.5em
+/// Returns an EM value. For example 24px becomes 1.5em
 @function em-calc($target, $context: $base-font-size) {
 
     @return strip-units(($target / $context)) + 0em;
 }
 
-// Returns an EM value that is a multiple of our defined base vertical unit. For
-// example 3 becomes 1.125em
+/// Returns an EM value that is a multiple of our defined base vertical unit. For
+/// example 3 becomes 1.125em
 @function em-rhythm($lines: $base-vertical-unit, $font-size: $base-em-font-size, $silent: false) {
 
     @if is-int($lines) == false and $silent == false {
@@ -99,8 +101,8 @@
     @return (strip-units($lines) * strip-units($base-vertical-unit)) / (strip-units($font-size) * strip-units($base-font-size)) + 0em;
 }
 
-// Returns a unitless number that is a multiple of our defined base vertical unit.
-// For example 3 becomes 1.125
+/// Returns a unitless number that is a multiple of our defined base vertical unit.
+/// For example 3 becomes 1.125
 @function unitless-rhythm($lines: $base-line-multi, $font-size: $base-em-font-size, $silent: false) {
 
     @if is-int($lines) == false and $silent == false {

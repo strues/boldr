@@ -1,6 +1,8 @@
-// ==============================================================================
-// Default Type Styles
-// ==============================================================================
+// stylelint-disable length-zero-no-unit, selector-no-qualifying-type
+
+///
+/// @group typography
+///
 
 // Stops devices from scaling up text.
 @include typography-init();
@@ -143,7 +145,7 @@ em {
 }
 
 strong {
-    font-weight: bold;
+    font-weight: 600;
 }
 
 blockquote {
@@ -203,20 +205,20 @@ ol {
     list-style: decimal;
 }
 
-// [1] https://developer.mozilla.org/en-US/docs/CSS/font-variant
+/// [1] @link https://developer.mozilla.org/en-US/docs/CSS/font-variant
 abbr {
     font-weight: 600;
     font-variant: small-caps; // [1]
     text-transform: lowercase;
 }
 
-// Cursor changed to a question mark when it has a title
+/// Cursor changed to a question mark when it has a title
 abbr[title]:hover {
     cursor: help;
 }
 
-// Creates horizontal rules that obey the baseline.
-// [1] Zero outs the user agent border
+/// Creates horizontal rules that obey the baseline.
+/// [1] Zero outs the user agent border
 hr {
 
     @include rhythm-border-top(1px, 4);

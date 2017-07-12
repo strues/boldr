@@ -1,3 +1,9 @@
+// stylelint-disable length-zero-no-unit, max-line-length
+
+///
+/// @group mixins
+///
+
 // Sets the type in EMs and makes a vertical rhythm unitless line-height that is
 // based on context.
 @mixin set-type($lines: $base-line-multi, $font-size: $base-em-font-size, $silent: false) {
@@ -73,8 +79,6 @@
 @mixin typography-init() {
     html {
         font-size: ($base-font-size / 16px) * 100%;
-        -webkit-text-size-adjust: 100%;
-        -ms-text-size-adjust: 100%;
     }
 
     body {
@@ -82,7 +86,6 @@
         @include set-leading();
     }
 }
-
 
 @mixin list-reset() {
     list-style-type: none;
@@ -97,14 +100,17 @@
 
 @mixin breakpoint($breakpoint, $breakpoint-size) {
     // The grid is mobile first so xs is the default, hence no breakpoint
-  @if $breakpoint == xs {
+    @if $breakpoint == xs {
+
         @content;
     }
 
     @else {
+
         @media only screen and (min-width: $breakpoint-size) {
 
             @content;
+
             .grid {
                 width: map-get($grid-containers, $breakpoint);
             }
@@ -114,10 +120,12 @@
 $black-base: rgba(0, 0, 0, 1);
 
 @mixin md-shadow($elevation) {
-  $top-shadow-color: rgba($black-base, 0.14);
-  $middle-shadow-color: rgba($black-base, 0.12);
-  $bottom-shadow-color: rgba($black-base, if($elevation == 1, 0.2, 0.4));
+    $top-shadow-color: rgba($black-base, 0.14);
+    $middle-shadow-color: rgba($black-base, 0.12);
+    $bottom-shadow-color: rgba($black-base, if($elevation == 1, 0.2, 0.4));
+
     @if $elevation < 0 or $elevation > 5 {
+
         @warn "The elevation must be a number from 0 - 5. elevation given was `#{$elevation}`";
     }
 
@@ -164,205 +172,178 @@ $black-base: rgba(0, 0, 0, 1);
         clear: both;
     }
 }
-$mediaQuery: ();
-
+$media-query: ();
 $mq-ems: false !default;
 $mq-em-base: 16px !default;
 
-@function calculateMQ ($range, $setting1: null, $setting2: null){
+@function calculate-mq($range, $setting1: null, $setting2: null) {
 
-	$swap-values: false;
+    @if ($setting2 != null) {
 
-	@if ($setting2 != null){
+        @if (type-of($setting1) == "string") {
+            $setting1-1: get-start($setting1);
+            $setting1-2: get-end($setting1);
+            $setting2-1: get-start($setting2);
+            $setting2-2: get-end($setting2);
+            $swap-values: $setting1 - 1 / $setting1 - 2 < $setting2 - 1 / $setting2 - 2;
+        }
 
-		@if (type-of($setting1) == 'string'){
+        @else {
 
-			$setting1_1: get-start($setting1);
-			$setting1_2: get-end($setting1);
+            @if ($setting1 < $setting2) {
+                $swap-values: true;
+            }
+        }
 
-			$setting2_1: get-start($setting2);
-			$setting2_2: get-end($setting2);
+        @if ($swap-values) {
+            $temp: $setting1;
+            $setting1: $setting2;
+            $setting2: $temp;
+        }
+    }
 
-			$swap-values: $setting1_1 / $setting1_2 < $setting2_1 / $setting2_2;
-		} @else {
-			@if ($setting1 < $setting2){
-				$swap-values: true;
-			}
-		}
+    @else {
+        $setting2: 0;
+    }
 
-		//Swaps the settings around
-		@if ($swap-values){
-			$temp: $setting1;
-			$setting1: $setting2;
-			$setting2: $temp;
-		}
+    @if ($range == "orientation") {
 
-	} @else {
-		$setting2: 0;
-	}
+        @if ($setting1 != "landscape" and $setting1 != "portrait") {
 
-	$mediaString: '';
+            @error ""orientation"range only accepts the values"landscape"and"portrait". Currently providing the value"#{$setting1}".";
+        }
+    }
 
-	@if ($range == 'orientation'){
-		@if ($setting1 != 'landscape' and $setting1 != 'portrait'){
-			@error '"orientation" range only accepts the values "landscape" and "portrait". Currently providing the value "#{$setting1}".';
-		}
-	}
+    @if (str-index($range, "inside") != null or str-index($range, "outside") != null) {
 
-	@if (str-index($range, 'inside') != null or str-index($range, 'outside') != null){
-		@if ($setting2 == 0) {
-			@error '"#{$range}" range requires a second value. Currently only providing "#{$setting1}" as a value.';
-		}
-	} @else {
-		@if ($setting2 != 0) {
-			@error '"#{$range}" range can only take one value. Currently providing both "#{$setting1}" and "#{$setting2}" values.';
-		}
-	}
+        @if ($setting2 == 0) {
 
-	@if (str-index($range, 'ratio') == null){
-		//if a standard media query
-		@if (type-of($setting1) != number and $range != 'orientation'){
-			@if ($setting2 != 0) {
-				@error '"#{$range}" range requires the settings ("#{$setting1}" and "#{$setting2}") to be pixel values';
-			} @else {
-				@error '"#{$range}" range requires the setting "#{$setting1}" to be a pixel value';
-			}
-		}
-	} @else {
-		//else if it's a ratio...
-		@if ((($setting2 != 0) and (type-of($setting2) != string))){
-			@error '"#{$range}" range requires the settings ("#{$setting1}" and "#{$setting2}") to both be strings in this format "4 / 3" (width ratio / height ratio).';
-		} @else if (type-of($setting1) != string) {
-			@error '"#{$range}" range requires the setting "#{$setting1}" to be a string in this format "4 / 3" (width ratio / height ratio).';
-		}
-	}
+            @error ""#{$range}"range requires a second value. Currently only providing"#{$setting1}"as a value.";
+        }
+    }
 
-	$setting1Plus: $setting1 + 1;
-	$setting2Plus: $setting2 + 1;
+    @else {
 
-	@if ($mq-ems) {
-		$setting1: _mq-em($setting1);
-		$setting2: _mq-em($setting2);
-		$setting1Plus: _mq-em($setting1Plus);
-		$setting2Plus: _mq-em($setting2Plus);
-	}
+        @if ($setting2 != 0) {
 
-	$mediaString: map-get((
-	//*1 value given*/
-		min : 'screen and (min-width: #{$setting1Plus})',
-		max : 'screen and (max-width: #{$setting1})',
-		min-height : 'screen and (min-height: #{$setting1Plus})',
-		max-height : 'screen and (max-height: #{$setting1})',
-		ratio : 'screen and (aspect-ratio: #{$setting1})',
-		min-ratio : 'screen and (min-aspect-ratio: #{$setting1})',
-		max-ratio : 'screen and (max-aspect-ratio: #{$setting1})',
-		device-ratio : 'screen and (device-aspect-ratio: #{$setting1})',
-		min-device-ratio : 'screen and (min-device-aspect-ratio: #{$setting1})',
-		max-device-ratio : 'screen and (max-device-aspect-ratio: #{$setting1})',
-		orientation : 'screen and (orientation: #{$setting1})',
-	//*2 values given*/
-		inside : 'screen and (max-width: #{$setting1}) and (min-width: #{$setting2Plus})',
-		outside : 'screen and (max-width: #{$setting2}), screen and (min-width: #{$setting1Plus})',
-		inside-height : 'screen and (max-height: #{$setting1}) and (min-height: #{$setting2Plus})',
-		outside-height : 'screen and (max-height: #{$setting2}), screen and (min-height: #{$setting1Plus})',
-		inside-ratio : 'screen and (max-aspect-ratio: #{$setting1}) and (min-aspect-ratio: #{$setting2})',
-		outside-ratio : 'screen and (max-aspect-ratio: #{$setting2}), screen and (min-aspect-ratio: #{$setting1})',
-		inside-device-ratio : 'screen and (max-device-aspect-ratio: #{$setting1}) and (min-device-aspect-ratio: #{$setting2})',
-		outside-device-ratio : 'screen and (max-device-aspect-ratio: #{$setting2}), screen and (min-device-aspect-ratio: #{$setting1})',
-	), $range);
+            @error ""#{$range}"range can only take one value. Currently providing both"#{$setting1}"and"#{$setting2}"values.";
+        }
+    }
 
-	@return $mediaString;
+    @if (str-index($range, "ratio") == null) {
+
+        @if (type-of($setting1) != number and $range != "orientation") {
+
+            @if ($setting2 != 0) {
+
+                @error ""#{$range}"range requires the settings ("#{$setting1}"and"#{$setting2}") to be pixel values";
+            }
+
+            @else {
+
+                @error ""#{$range}"range requires the setting"#{$setting1}"to be a pixel value";
+            }
+        }
+    }
+
+    @else {
+
+        @if ((($setting2 != 0) and (type-of($setting2) != string))) {
+
+            @error ""#{$range}"range requires the settings ("#{$setting1}"and"#{$setting2}") to both be strings in this format"4 / 3"(width ratio / height ratio).";
+        }
+
+        @else if(type-of($setting1) != string) {
+
+            @error ""#{$range}"range requires the setting"#{$setting1}"to be a string in this format"4 / 3"(width ratio / height ratio).";
+        }
+    }
+
+    @if ($mq-ems) {
+        $setting1: _mq-em($setting1);
+        $setting2: _mq-em($setting2);
+        $setting1-plus: _mq-em($setting1-plus);
+        $setting2-plus: _mq-em($setting2-plus);
+    }
+
+    @return $media-string;
+    $swap-values: false;
+    $media-string: "";
+    $setting1-plus: $setting1 + 1;
+    $setting2-plus: $setting2 + 1;
+    $media-string: map-get((min: "screen and (min-width: #{$setting1-plus})", max: "screen and (max-width: #{$setting1})", min-height: "screen and (min-height: #{$setting1-plus})", max-height: "screen and (max-height: #{$setting1})", ratio: "screen and (aspect-ratio: #{$setting1})", min-ratio : "screen and (min-aspect-ratio: #{$setting1})", max-ratio : "screen and (max-aspect-ratio: #{$setting1})", device-ratio : "screen and (device-aspect-ratio: #{$setting1})", min-device-ratio : "screen and (min-device-aspect-ratio: #{$setting1})", max-device-ratio : "screen and (max-device-aspect-ratio: #{$setting1})", orientation : "screen and (orientation: #{$setting1})", inside : "screen and (max-width: #{$setting1}) and (min-width: #{$setting2-plus})", outside : "screen and (max-width: #{$setting2}), screen and (min-width: #{$setting1-plus})", inside-height : "screen and (max-height: #{$setting1}) and (min-height: #{$setting2-plus})", outside-height : "screen and (max-height: #{$setting2}), screen and (min-height: #{$setting1-plus})", inside-ratio : "screen and (max-aspect-ratio: #{$setting1}) and (min-aspect-ratio: #{$setting2})", outside-ratio : "screen and (max-aspect-ratio: #{$setting2}), screen and (min-aspect-ratio: #{$setting1})", inside-device-ratio : "screen and (max-device-aspect-ratio: #{$setting1}) and (min-device-aspect-ratio: #{$setting2})", outside-device-ratio : "screen and (max-device-aspect-ratio: #{$setting2}), screen and (min-device-aspect-ratio: #{$setting1})",), $range);
 }
 
 @mixin mq($range, $setting1: null, $setting2: null) {
 
-	@if (length($range) > 1) {
+    @if (length($range) > 1) {
 
-		//Uses this functionality if using a single level MQ variable
-		//eg:
-		//$MQ-example--single: inside, 1000px, 500px;
-		//@include mq($MQ-example--single){}
-		@if (type-of(nth($range,1)) == string){
+        @if (type-of(nth($range, 1)) == string) {
 
-			$newRange: nth($range,1);
-			$newWidth1: nth($range,2);
-			$newWidth2: null;
-			@if (length($range) == 3){
-				$newWidth2: nth($range,3);
-			}
+            @if (length($range) == 3) {
+                $new-width2: nth($range, 3);
+            }
 
-			@media #{calculateMQ($newRange, $newWidth1, $newWidth2)} {
-				@content;
-			}
+            @media #{calculate-mq($new-range, $new-width1, $new-width2)} {
 
+                @content;
+            }
+            $new-range: nth($range, 1);
+            $new-width1: nth($range, 2);
+            $new-width2: null;
+        }
 
-		//Uses this functionality if using a multi level MQ variable
-		//eg:
-		//$MQ-example--multiple:
-		//	(inside, 1000px, 500px),
-		//	(min, 1200px)
-		//;
-		//@include mq($MQ-example--multiple){}
-		} @else {
-			$mediaQuery: ();
+        @else {
 
-			@each $mqSet in $range {
+            @each $mqSet in $range {
 
-				$newRange: nth($mqSet,1);
-				$newWidth1: nth($mqSet,2);
-				$newWidth2: null;
-				@if (length($mqSet) == 3){
-					$newWidth2: nth($mqSet,3);
-				}
+                @if (length($mqSet) == 3) {
+                    $new-width2: nth($mqSet, 3);
+                }
+                $new-range: nth($mqSet, 1);
+                $new-width1: nth($mqSet, 2);
+                $new-width2: null;
+                $media-query: append($media-query, calculate-mq($new-range, $new-width1, $new-width2), "comma");
+            }
 
-				$mediaQuery: append($mediaQuery, calculateMQ($newRange, $newWidth1, $newWidth2), 'comma');
+            @media #{$media-query} {
 
-			}//end @each
+                @content;
+            }
+            $media-query: ();
+        }
+    }
 
-			@media #{$mediaQuery} {
-				@content;
-			}
-		}
+    @else {
 
-	// Uses this functionality if placing MQ data inline
-	// eg:
-	// @include mq(inside, 1000px, 500px);
-	} @else {
+        @media #{calculate-mq($range, $setting1, $setting2)} {
 
-		@media #{calculateMQ($range, $setting1, $setting2)} {
-			@content;
-		}
-	}
+            @content;
+        }
+    }
 }
 
-@mixin retina($density: 2) {
-		@media
-		only screen and (min-device-pixel-ratio: $density),
-		only screen and (min-resolution: $density * 96ppi),
-		only screen and (min-resolution: $density * 1dppx) {
-			@content;
-	}
-}
 @mixin box-shadow($shadow...) {
-    -webkit-box-shadow: $shadow;
-    box-shadow:         $shadow;
+    box-shadow: $shadow;
 }
 
 @mixin notification-variant($background, $border-color, $icon) {
-    background-color: $background;
-    border-left:      2px solid #{$border-color};
-    color:            #524c4c;
 
-    @if $icon != '' {
-        .notification-icon:before {
+    @if $icon != "" {
+        .notification-icon::before {
             content: $icon;
-            color:   $border-color;
+            color: $border-color;
         }
-    } @else {
+    }
+
+    @else {
         .notification-icon {
             display: none;
         }
     }
+    color: #524c4c;
+    background-color: $background;
+    border-left: 2px solid #{$border-color};
 }
 
 /**
@@ -371,56 +352,51 @@ $mq-em-base: 16px !default;
  * @param $margin-bottom Initial `margin-bottom` value
  */
 @mixin notification-keyframes($direction, $margin-bottom: $window-padding) {
-    $animation-name: '#{$direction}#{$margin-bottom}';
+    $animation-name: "#{$direction}#{$margin-bottom}";
+    $translate: "translateX";
+    $value: 100%;
+    $transform-start: "#{$translate}(0%)";
+    $transform-end: "#{$translate}(#{$value})";
 
-    @keyframes :local(#{$animation-name}-enter) {
+    @if $direction == "left" or $direction == "top" {
+        $value: -#{$value};
+    }
+
+    @if $direction == "top" or $direction == "bottom" {
+        $translate: "translateY";
+    }
+
+    @keyframes #{$animation-name}-enter {
         0% {
             #{$direction}: -#{$notification-max-width};
-            opacity:       0;
+            opacity: 0;
         }
         100% {
             #{$direction}: 0;
-            opacity:       1;
+            opacity: 1;
         }
     }
 
-    @keyframes :local(#{$animation-name}-leave) {
-        $translate: 'translateX';
-        $value: 100%;
-
-        @if $direction == 'left' or $direction == 'top' {
-            $value: -#{$value};
-        }
-
-        @if $direction == 'top' or $direction == 'bottom' {
-            $translate: 'translateY';
-        }
-
-        $transform_start: '#{$translate}(0%)';
-        $transform_end: '#{$translate}(#{$value})';
-
+    @keyframes #{$animation-name}-leave {
         0% {
-            -webkit-transform: #{$transform_start};
-            transform:         #{$transform_start};
-            opacity:           1;
-            max-height:        200px;
-            margin-bottom:     $margin-bottom;
+            max-height: 200px;
+            opacity: 1;
+            margin-bottom: $margin-bottom;
+            transform: #{$transform-start};
         }
         40% {
+            max-height: 200px;
             margin-bottom: $margin-bottom;
-            max-height:    200px;
         }
         50% {
-            -webkit-transform: #{$transform_end};
-            transform:         #{$transform_end};
-            opacity:           0;
+            opacity: 0;
+            transform: #{$transform-end};
         }
         100% {
-            -webkit-transform: #{$transform_end};
-            transform:         #{$transform_end};
-            opacity:           0;
-            max-height:        0;
-            margin-bottom:     0;
+            max-height: 0;
+            opacity: 0;
+            margin-bottom: 0;
+            transform: #{$transform-end};
         }
     }
 }
@@ -431,30 +407,130 @@ $mq-em-base: 16px !default;
  * @param $margin-bottom Initial `margin-bottom` value
  */
 @mixin notification-animation($direction, $margin-bottom: $window-padding) {
-    $animation-name: '#{$direction}#{$margin-bottom}';
+    $animation-name: "#{$direction}#{$margin-bottom}";
 
     .notification-wrapper {
-        position:      relative;
-        #{$direction}: 0;
+        position: relative;
 
         // enter animation
         &-enter {
-            -webkit-animation-fill-mode: forwards;
-            animation-fill-mode:         forwards;
-            -webkit-animation-name:      #{$animation-name}-enter;
-            animation-name:              #{$animation-name}-enter;
-            -webkit-animation-duration:  .4s;
-            animation-duration:          .4s;
+            animation-name: #{$animation-name}-enter;
+            animation-duration: 0.4s;
+            animation-fill-mode: forwards;
         }
 
         // leave animation
         &-leave {
-            -webkit-animation-fill-mode: forwards;
-            animation-fill-mode:         forwards;
-            -webkit-animation-name:      #{$animation-name}-leave;
-            animation-name:              #{$animation-name}-leave;
-            -webkit-animation-duration:  .8s;
-            animation-duration:          .8s;
+            animation-name: #{$animation-name}-leave;
+            animation-duration: 0.8s;
+            animation-fill-mode: forwards;
+        }
+        #{$direction}: 0;
+    }
+}
+
+/// Mixin to generate a gradient for the divider border.
+//
+/// @example:
+//
+///   .c-divider--top {
+///     @include divider-gradient(top, color(grey-20));
+///   }
+//
+/// OPTIONS
+/// - direction:
+///    - top Creates a horizontal gradient for the top edge
+///    - right Creates a vertical gradient for the right side
+///    - bottom Creates a horizontal gradient for the bottom edge
+///    - left Creates a vertical gradient for the left side
+
+@mixin divider-gradient($direction: "bottom", $color: color(grey-20)) {
+
+    /// Check if direction exists in direction map:
+    @if map-has-key($directions, $direction) {
+
+        @each $prefix in $vendor-prefixes {
+            background: -#{$prefix}-linear-gradient(#{$direction-legacy}, $color-points);
+        }
+        /// Fetch both the legacy and standard versions for given direction
+        $direction-legacy: map-get-deep($directions, $direction, legacy);
+        $direction-standard: map-get-deep($directions, $direction, standard);
+        /// Fetch other gradient properties
+        $color-points: rgba($color, 0), $color, rgba($color, 0);
+        $position: map-get-deep($directions, $direction, position);
+        /// Set vendor prefixes for use on legacy gradients
+        $vendor-prefixes: "webkit", "moz", "ms", "o";
+        background: $color;
+        background: linear-gradient(#{$direction-standard}, $color-points);
+    }
+    /// The direction map stores values for the direction for both legacy prefixed
+    /// and standard gradients for the divider line.
+
+    $directions: (top: (legacy: "left", position: "center bottom", standard: "to right"), right: (legacy: "top", position: "right bottom", standard: "to bottom"), bottom: (legacy: "left", position: "center bottom", standard: "to right"), left: (legacy: "top", position: "left bottom", standard: "to bottom",));
+}
+
+/// Mixin to generate a faux-shadow gradient for the divider.
+///
+/// @example usage:
+///
+///   .c-divider--top {
+///     &::after {
+///      @include divider-shadow(top, $divider-shadow-color);
+///     }
+///   }
+//
+/// OPTIONS
+/// - direction:
+///    - "top" Creates a faux-shadow radial gradient for the top edge
+///    - "right" Creates a faux-shadow radial gradient for the right side
+///    - "bottom" Creates a faux-shadow radial gradient for the bottom edge
+///    - "left" Creates a faux-shadow radial gradient for the left side
+
+@mixin divider-shadow($direction: "bottom", $color: rgba(color(text), 0.15)) {
+
+    /// Check if direction exists in direction map:
+    @if map-has-key($directions, $direction) {
+
+        @each $prefix in $vendor-prefixes {
+            background: -#{$prefix}-radial-gradient(#{$legacy}, $color-points);
+        }
+        /// Fetch both the legacy and standard versions for given direction
+        $standard: map-get-deep($directions, $direction, standard);
+        $legacy: map-get-deep($directions, $direction, legacy);
+        /// Fetch other gradient properties
+        $color-points: $color, transparent 40%;
+        /// Set vendor prefixes for use on legacy gradients
+        $vendor-prefixes: "webkit", "moz", "ms", "o";
+        background: radial-gradient(#{$standard}, $color-points);
+    }
+
+    @else {
+
+        @warn "#{$direction}` is not a valid direction, it must be top, right, bottom or left.";
+    }
+    /// The direction map stores values for the direction for both legacy prefixed
+    /// and standard gradients for the divider shadow.
+
+    $directions: (top: (standard: "at 50% 100%", legacy: "50% 100%"), right: (standard: "farthest-corner at 0 50%", legacy: "0 50%, farthest-corner"), bottom: (standard: "at 50% 0%", legacy: "50% 0%"), left: (standard: "farthest-corner at 100% 50%", legacy: "100% 50%, farthest-corner"));
+}
+
+/// breakpoint
+@mixin breakpoint($breakpoint, $breakpoint-size) {
+    /// The grid is mobile first so xs is the default, hence no breakpoint
+    @if $breakpoint == xs {
+
+        @content;
+    }
+
+    @else {
+
+        @media only screen and (min-width: $breakpoint-size) {
+
+            @content;
+            // Static grid
+            .grid {
+                width: map-get($grid-containers, $breakpoint);
+            }
         }
     }
 }

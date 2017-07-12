@@ -5,24 +5,7 @@ html {
     padding: 0;
     margin: 0;
 }
-/// Set global `box-sizing` state to `border-box`
-///
-/// @note: Usage of `inherit` allows easier override of that parameter in components.
-///        So, instead of
-///
-///           .component {
-///
-///             &,
-///             &:before,
-///             &:after { box-sizing: content-box }
-///
-///           }
-///
-///        to override we need to specify only
-///
-///           .component { box-sizing: content-box; }
-///
-///        Details https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+
 html {
     box-sizing: border-box;
     overflow-x: hidden;
@@ -105,4 +88,14 @@ ol {
     li::before {
         margin-right: 0.2em;
     }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+    color: $text-color;
+    font-weight: $headline-font-weight;
+    font-family: $headline-font-family;
 }
