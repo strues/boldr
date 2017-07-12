@@ -1,6 +1,7 @@
 {
   "extends": "stylelint-config-boldr",
   "rules": {
+    "function-url-data-uris": null,
     "declaration-block-no-ignored-properties": null,
     "scss/at-function-pattern": null,
     "selector-no-universal": null,

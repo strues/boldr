@@ -1,33 +1,11 @@
 @charset "utf-8";
-
-@import "vendor/draft";
+@import "vendor/all";
 @import "abstracts/all";
-
-@import "vendor/griddle";
-
 @import "base/all";
-
 @import "components/all";
-
-.boldr-dropzone__drop-sm {
-    padding: 1em;
-    border: 1px solid #ccc;
-    margin-top: 15px !important;
-}
 
 .react-tagsinput {
     border: none !important;
-}
-
-.editor--root {
-    width: 65%;
-    margin: 0 auto;
-}
-
-.editor--content {
-    padding: 0.2rem;
-    border: 1px solid #ccc;
-    margin: 0 auto;
 }
 
 .boldrui-card-title {
@@ -56,8 +34,15 @@ h3.boldrui-card-title--title {
     padding: 1em;
 }
 
-.rdw-editor-main {
-    border: 1px solid rgba(225, 225, 225, 1);
+.editor--root {
+    width: 65%;
+    margin: 0 auto;
+}
+
+.editor--content {
+    padding: 0.2rem;
+    border: 1px solid #ccc;
+    margin: 0 auto;
 }
 
 .editor--content > div {

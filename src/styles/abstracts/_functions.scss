@@ -1,5 +1,4 @@
-// File taken from mq-sass
-// https://github.com/jonsuh/mq-sass/blob/master/stylesheets/mq-sass/_functions.scss
+// stylelint-disable length-zero-no-unit, max-line-length
 
 // Strip units
 // ==================================================
@@ -68,4 +67,46 @@
     $string: unquote($string);
 
     @return number( str-slice($string, str-length($string), str-length($string)) );
+}
+
+/// Check if value is an integer and returns true or false
+@function is-int($number) {
+
+    @return type-of($number) == number and floor(abs($number)) == abs($number);
+}
+
+// Returns a number without a unit. For example 16px becomes 16
+@function strip-units($number) {
+
+    @return $number / ($number * 0 + 1);
+}
+
+// Returns an EM value. For example 24px becomes 1.5em
+@function em-calc($target, $context: $base-font-size) {
+
+    @return strip-units(($target / $context)) + 0em;
+}
+
+// Returns an EM value that is a multiple of our defined base vertical unit. For
+// example 3 becomes 1.125em
+@function em-rhythm($lines: $base-vertical-unit, $font-size: $base-em-font-size, $silent: false) {
+
+    @if is-int($lines) == false and $silent == false {
+
+        @warn #{$lines} + $not-integer-txt;
+    }
+
+    @return (strip-units($lines) * strip-units($base-vertical-unit)) / (strip-units($font-size) * strip-units($base-font-size)) + 0em;
+}
+
+// Returns a unitless number that is a multiple of our defined base vertical unit.
+// For example 3 becomes 1.125
+@function unitless-rhythm($lines: $base-line-multi, $font-size: $base-em-font-size, $silent: false) {
+
+    @if is-int($lines) == false and $silent == false {
+
+        @warn #{$lines} + $not-integer-txt;
+    }
+
+    @return ($lines * strip-units($base-vertical-unit)) / (strip-units($font-size) * strip-units($base-font-size));
 }

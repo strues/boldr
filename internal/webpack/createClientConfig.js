@@ -88,16 +88,7 @@ module.exports = function createClientConfig(options) {
       maxAssetSize: 1000000,
       maxEntrypointSize: 1000000,
     },
-    stats: {
-      colors: true,
-      reasons: config.isVerbose,
-      hash: config.isVerbose,
-      version: config.isVerbose,
-      timings: true,
-      chunks: config.isVerbose,
-      cached: config.isVerbose,
-      cachedAssets: config.isVerbose,
-    },
+
     resolve: {
       // look for files in the descendants of src/ then node_modules
       modules: [config.srcDir, 'node_modules'],
