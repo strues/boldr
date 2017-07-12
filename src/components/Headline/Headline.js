@@ -13,7 +13,8 @@ const Headline = ({ className, type, theme, lightText, children, ...rest }) => {
   const finalClassName = mergeClassNames({
     'boldrui-h': true,
     'boldrui-h-light': lightText,
-    type: true,
+    [themeClassName]: true,
+    [className]: className && className.length,
   });
 
   switch (type) {

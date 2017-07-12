@@ -7,6 +7,6 @@ describe('<Login />', () => {
     const handleOnSubmit = jest.fn();
 
     const wrapper = shallow(<Login onSubmit={handleOnSubmit} />);
-    expect(wrapper.find('.boldr-form__login').length).toBe(1);
+    expect(wrapper.find('.login-wrapper').length).toBe(1);
   });
 });

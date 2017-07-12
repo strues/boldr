@@ -3,7 +3,7 @@
 exports[`<ArticleTitle /> renders snapshot 1`] = `
 <styled.div>
   <Headline
-    className="boldrui-post__title"
+    className="boldrui-article__title"
     lightText={true}
     type="h1"
   />

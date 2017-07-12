@@ -2653,9 +2653,9 @@ download@^5.0.3:
     mkdirp "^0.5.1"
     pify "^2.3.0"
 
-draft-convert@^1.4.7:
-  version "1.4.7"
-  resolved "https://registry.yarnpkg.com/draft-convert/-/draft-convert-1.4.7.tgz#28a4c7e1f7304bcaf1bfadf5476c8e73d184b09b"
+draft-convert@^1.4.8:
+  version "1.4.8"
+  resolved "https://registry.yarnpkg.com/draft-convert/-/draft-convert-1.4.8.tgz#74740ace368979539bd27b7418d9901e067ef26f"
   dependencies:
     immutable "~3.7.4"
     invariant "^2.2.1"
@@ -2783,9 +2783,9 @@ entities@^1.1.1, entities@~1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/entities/-/entities-1.1.1.tgz#6e5c2d0a5621b5dadaecef80b90edfb5cd7772f0"
 
-enzyme-matchers@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/enzyme-matchers/-/enzyme-matchers-3.4.0.tgz#48c2db3d5c70c8ac3b0993f7b2673367457eea9c"
+enzyme-matchers@^3.5.1:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/enzyme-matchers/-/enzyme-matchers-3.5.1.tgz#a9ca6fdf65c74e51afcbb3d51c24d0bab8c020e3"
   dependencies:
     deep-equal-ident "^1.1.1"
 
@@ -4063,9 +4063,13 @@ hoist-non-react-statics@^1.0.3, hoist-non-react-statics@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
 
-hoist-non-react-statics@^2.0.0, hoist-non-react-statics@^2.1.0:
+hoist-non-react-statics@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.1.0.tgz#44879d7c06796a5f1baaaed29833bfdc9995ca32"
+
+hoist-non-react-statics@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.1.1.tgz#71f47fe91400f57d55e867277e3a5013829dcb45"
 
 home-or-tmp@^2.0.0:
   version "2.0.0"
@@ -4754,12 +4758,12 @@ jest-environment-node@^20.0.3:
     jest-mock "^20.0.3"
     jest-util "^20.0.3"
 
-jest-enzyme@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/jest-enzyme/-/jest-enzyme-3.4.0.tgz#c19bc8cc48cd8faa72e504077e5c1a9187bb93e2"
+jest-enzyme@^3.5.1:
+  version "3.5.1"
+  resolved "https://registry.yarnpkg.com/jest-enzyme/-/jest-enzyme-3.5.1.tgz#e8a7d0c635990029b007b8a4da05d31f425fd590"
   dependencies:
     "@types/react" "^15.0.22"
-    enzyme-matchers "^3.4.0"
+    enzyme-matchers "^3.5.1"
     enzyme-to-json "^1.5.0"
 
 jest-haste-map@^20.0.4:
@@ -4863,6 +4867,10 @@ jest-snapshot@^20.0.3:
     jest-util "^20.0.3"
     natural-compare "^1.4.0"
     pretty-format "^20.0.3"
+
+jest-transform-graphql@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/jest-transform-graphql/-/jest-transform-graphql-2.1.0.tgz#903cb66bb27bc2772fd3e5dd4f7e9b57230f5829"
 
 jest-util@^20.0.3:
   version "20.0.3"
