@@ -41,7 +41,7 @@
         &--before-close {
             opacity: 0;
             transform: scale(0.9);
-            transition: opacity 0.3s $modal-ease-out-quint, transform 0.04s $modal-ease-out-quint;
+            transition: opacity 0.3s $modal-ease-out-quint, transform 0.14s $modal-ease-out-quint;
             pointer-events: none;
         }
     }

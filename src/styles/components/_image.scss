@@ -1,4 +1,6 @@
-
+///
+/// @group image
+///
 .#{$boldr-ns}img__wrapper {
     display: inline-block;
     background-size: cover;
@@ -12,14 +14,4 @@
 
 .#{$boldr-ns}img__loaded {
     opacity: 1;
-}
-
-.IconButton {
-    padding: 12px;
-    background: none;
-    border: 0;
-    margin: 0;
-    outline: 0;
-    line-height: 0;
-    user-select: none;
 }
