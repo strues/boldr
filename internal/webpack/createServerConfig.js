@@ -4,7 +4,7 @@ const fs = require('fs');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
 const ifElse = require('boldr-utils/lib/logic/ifElse');
-const StatsPlugin = require('stats-webpack-plugin');
+const WriteFilePlugin = require('write-file-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const config = require('../config');
@@ -222,6 +222,7 @@ module.exports = function createServerConfig(options) {
 
   if (_DEV) {
     nodeConfig.plugins.push(
+      new WriteFilePlugin(),
       new CaseSensitivePathsPlugin(),
       new CircularDependencyPlugin({
         exclude: /a\.js|node_modules/,

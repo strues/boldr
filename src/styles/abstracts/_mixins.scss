@@ -260,3 +260,118 @@ $mq-em-base: 16px !default;
 			@content;
 	}
 }
+@mixin box-shadow($shadow...) {
+    -webkit-box-shadow: $shadow;
+    box-shadow:         $shadow;
+}
+
+@mixin notification-variant($background, $border-color, $icon) {
+    background-color: $background;
+    border-left:      2px solid #{$border-color};
+    color:            #524c4c;
+
+    @if $icon != '' {
+        .notification-icon:before {
+            content: $icon;
+            color:   $border-color;
+        }
+    } @else {
+        .notification-icon {
+            display: none;
+        }
+    }
+}
+
+/**
+ * Mixin to create a keyframes for a notification
+ * @param $direction (left|top|right|bottom) Translation direction
+ * @param $margin-bottom Initial `margin-bottom` value
+ */
+@mixin notification-keyframes($direction, $margin-bottom: $window-padding) {
+    $animation-name: '#{$direction}#{$margin-bottom}';
+
+    @keyframes :local(#{$animation-name}-enter) {
+        0% {
+            #{$direction}: -#{$notification-max-width};
+            opacity:       0;
+        }
+        100% {
+            #{$direction}: 0;
+            opacity:       1;
+        }
+    }
+
+    @keyframes :local(#{$animation-name}-leave) {
+        $translate: 'translateX';
+        $value: 100%;
+
+        @if $direction == 'left' or $direction == 'top' {
+            $value: -#{$value};
+        }
+
+        @if $direction == 'top' or $direction == 'bottom' {
+            $translate: 'translateY';
+        }
+
+        $transform_start: '#{$translate}(0%)';
+        $transform_end: '#{$translate}(#{$value})';
+
+        0% {
+            -webkit-transform: #{$transform_start};
+            transform:         #{$transform_start};
+            opacity:           1;
+            max-height:        200px;
+            margin-bottom:     $margin-bottom;
+        }
+        40% {
+            margin-bottom: $margin-bottom;
+            max-height:    200px;
+        }
+        50% {
+            -webkit-transform: #{$transform_end};
+            transform:         #{$transform_end};
+            opacity:           0;
+        }
+        100% {
+            -webkit-transform: #{$transform_end};
+            transform:         #{$transform_end};
+            opacity:           0;
+            max-height:        0;
+            margin-bottom:     0;
+        }
+    }
+}
+
+/*
+ * Mixin to create an animation for a notification
+ * @param $direction (left|top|right|bottom) Translation direction
+ * @param $margin-bottom Initial `margin-bottom` value
+ */
+@mixin notification-animation($direction, $margin-bottom: $window-padding) {
+    $animation-name: '#{$direction}#{$margin-bottom}';
+
+    .notification-wrapper {
+        position:      relative;
+        #{$direction}: 0;
+
+        // enter animation
+        &-enter {
+            -webkit-animation-fill-mode: forwards;
+            animation-fill-mode:         forwards;
+            -webkit-animation-name:      #{$animation-name}-enter;
+            animation-name:              #{$animation-name}-enter;
+            -webkit-animation-duration:  .4s;
+            animation-duration:          .4s;
+        }
+
+        // leave animation
+        &-leave {
+            -webkit-animation-fill-mode: forwards;
+            animation-fill-mode:         forwards;
+            -webkit-animation-name:      #{$animation-name}-leave;
+            animation-name:              #{$animation-name}-leave;
+            -webkit-animation-duration:  .8s;
+            animation-duration:          .8s;
+        }
+    }
+}

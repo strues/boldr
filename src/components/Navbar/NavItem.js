@@ -65,13 +65,7 @@ class NavItem extends React.Component {
     } = this.props;
     const liClass = cxN('boldrui-navbar-item', { 'boldrui-navbar-dropdown': hasDropdown });
     return (
-      <li
-        className={liClass}
-        onMouseEnter={this.handleDropdown}
-        // onFocus={this.handleDropdown}
-        onClick={this.handleDropdown}
-        onKeyPress={this.handleDropdown}
-      >
+      <li className={liClass} onClick={this.handleDropdown} onKeyPress={this.handleDropdown}>
         {!hasDropdown
           ? <NavLink to={href} className={cxN('boldrui-siteheader__navitem--link')}>
               {safeName}

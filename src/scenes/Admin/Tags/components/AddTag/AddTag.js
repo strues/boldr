@@ -7,7 +7,7 @@ import gql from 'graphql-tag';
 import Button from '@boldr/ui/Button';
 import Form from '@boldr/ui/Form/Form';
 import InputField from '@boldr/ui/Form/Fields/InputField';
-import { formatReduxFormErrors } from '../../../../../../core/reduxFormErrors';
+import { formatReduxFormErrors } from '../../../../../core/reduxFormErrors';
 
 type Props = {
   addTagMutation: Function,

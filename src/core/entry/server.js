@@ -69,7 +69,7 @@ export default ({ clientStats, outputPath }) => {
 
     const helmet = Helmet.renderStatic();
     const moduleIds = flushModuleIds();
-    const { js, styles, publicPath } = flushChunks(clientStats, {
+    const { js, styles, publicPath, cssHash } = flushChunks(clientStats, {
       moduleIds,
       before: ['bootstrap'],
       after: ['main'],
@@ -110,6 +110,7 @@ export default ({ clientStats, outputPath }) => {
                   json: true,
                 })}
               </script>
+              ${cssHash}
             </body>
           </html>`);
     } else {

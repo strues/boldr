@@ -13,7 +13,7 @@ import { selectArticle } from '../../state/articles/actions';
 
 import TagBlock from '../TagBlock';
 
-const BASE_ELEMENT = StyleClasses.POST_CARD;
+const BASE_ELEMENT = StyleClasses.ARTICLE_CARD;
 type Props = {
   className: string,
   article: Article,

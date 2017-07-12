@@ -1,55 +1,75 @@
-import configureMockStore from 'redux-mock-store';
-import thunk from 'redux-thunk';
-import notificationReducer, {
-  dismissNotification,
-  SEND_NOTIFICATION,
-  DISMISS_NOTIFICATION,
-  CLEAR_NOTIFICATION,
+import notificationsReducer, {
+  initialState,
+  showNotification,
+  hideNotification,
+  hideAllNotifications,
+  removeNotification,
+  SHOW_NOTIFICATION,
+  HIDE_NOTIFICATION,
+  REMOVE_NOTIFICATION,
+  HIDE_ALL_NOTIFICATIONS,
 } from './notifications';
 
-describe('Notifications Reducer', () => {
-  it('Should return the initial state', () => {
-    expect(notificationReducer(undefined, {})).toEqual([]);
+describe('notifications reducer', () => {
+  const uid = 'testUid';
+  it('returns the initial state', () => {
+    expect(notificationsReducer(undefined, {})).toEqual(initialState);
   });
-  it('should clear the notifications', () => {
-    const initialState = [{ id: 1 }, { id: 2 }];
-    const stateAfter = [];
-    expect(
-      notificationReducer(initialState, {
-        type: CLEAR_NOTIFICATION,
-      }),
-    ).toEqual(stateAfter);
+
+  it('should handle showNotification properly', () => {
+    const options = { uid };
+    const expected = [...initialState, { uid, options, isVisible: true }];
+    expect(notificationsReducer(initialState, showNotification(options))).toEqual(expected);
   });
-  it('Should remove the selected notification', () => {
-    const initialState = [{ id: 1 }, { id: 2 }];
-    const stateAfter = [{ id: 2 }];
-    const id = 1;
-    expect(
-      notificationReducer(initialState, {
-        type: DISMISS_NOTIFICATION,
-        id,
-      }),
-    ).toEqual(stateAfter);
+
+  it('should handle hideNotification properly', () => {
+    const testState = [{ uid, isVisible: true }];
+    const expected = [{ uid, isVisible: false }];
+    expect(notificationsReducer(testState, hideNotification(uid))).toEqual(expected);
+  });
+
+  it('should handle hideAllNotifications properly', () => {
+    const testState = [{ uid: 1, isVisible: true }, { uid: 2, isVisible: true }];
+    const expectedState = [{ uid: 1, isVisible: false }, { uid: 2, isVisible: false }];
+    expect(notificationsReducer(testState, hideAllNotifications())).toEqual(expectedState);
+  });
+
+  it('should handle removeNotification properly', () => {
+    const nonTargetNotification = { uid: 'aontherTestUid' };
+    const testState = [{ uid }, nonTargetNotification];
+    const expected = [nonTargetNotification];
+    expect(notificationsReducer(testState, removeNotification(uid))).toEqual(expected);
   });
 });
 
-test('Dismiss Action', () => {
-  const id = 1;
-  const mockStore = configureMockStore([thunk]);
-  const store = mockStore({
-    notifications: [
-      {
-        id: 1,
-      },
-      {
-        id: 2,
-      },
-    ],
+describe('notifications actions', () => {
+  const uid = 'testUid';
+  describe('showNotification', () => {
+    it('should return correct type and passed options object', () => {
+      const options = {};
+      const expected = { type: SHOW_NOTIFICATION, options };
+      expect(showNotification(options)).toEqual(expected);
+    });
   });
-  store.dispatch(dismissNotification(1));
-  const action = store.getActions()[0];
-  expect(action).toEqual({
-    type: DISMISS_NOTIFICATION,
-    id,
+
+  describe('hideNotification', () => {
+    it('should return correct type and passed uid', () => {
+      const expected = { type: HIDE_NOTIFICATION, uid };
+      expect(hideNotification(uid)).toEqual(expected);
+    });
+  });
+
+  describe('hideAllNotifications', () => {
+    it('should return correct type', () => {
+      const expected = { type: HIDE_ALL_NOTIFICATIONS };
+      expect(hideAllNotifications()).toEqual(expected);
+    });
+  });
+
+  describe('removeNotification', () => {
+    it('should return correct type and passed uid', () => {
+      const expected = { type: REMOVE_NOTIFICATION, uid };
+      expect(removeNotification(uid)).toEqual(expected);
+    });
   });
 });

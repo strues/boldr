@@ -2,7 +2,7 @@
 
 exports[`<ArticleCard /> renders snapshot 1`] = `
 <div
-  className="boldrui-post-card"
+  className="boldrui-article-card"
 >
   <Card
     animate={true}

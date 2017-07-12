@@ -215,23 +215,23 @@ exports[`<ArticleSidebar />, renders the sidebar 1`] = `
                   ],
                   "kind": "Document",
                   "loc": Object {
-                    "end": 299,
+                    "end": 265,
                     "source": Object {
                       "body": "
       query($userId: UUID!) {
-          getUserByUserId(userId: $userId) {
-            username,
-            avatarUrl,
-            bio,
-            socialMedia {
-              facebookUrl,
-              githubUrl,
-              twitterUrl,
-              linkedinUrl,
-              googleUrl,
-              stackoverflowUrl
-            }
+        getUserByUserId(userId: $userId) {
+          username
+          avatarUrl
+          bio
+          socialMedia {
+            facebookUrl
+            githubUrl
+            twitterUrl
+            linkedinUrl
+            googleUrl
+            stackoverflowUrl
           }
+        }
       }
     ",
                       "name": "GraphQL request",

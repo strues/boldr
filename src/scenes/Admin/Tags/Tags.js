@@ -6,7 +6,7 @@ import Helmet from 'react-helmet';
 // internal
 import Paper from '@boldr/ui/Paper';
 import { Row, Col } from '@boldr/ui/Layout';
-import { createTag, deleteTag } from '../../../Blog/state';
+import { createTag, deleteTag } from '../../Blog/state';
 
 import TagList from './components/TagList';
 import AddTag from './components/AddTag';

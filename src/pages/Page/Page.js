@@ -71,6 +71,7 @@ export class Page extends Component {
               logoImg="https://boldr.io/assets/boldr-logo-white.png"
               isFixed
             />}
+
         <ContentWrapper>
           <Switch>
             <Route path="/login" component={LoginContainer} />

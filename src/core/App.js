@@ -7,11 +7,12 @@ import universal from 'react-universal-component';
 // internal
 import '../styles/main.scss';
 import Loader from '@boldr/ui/Loader';
-// import Notifications from '../components/Notification';
+
 // Start routes
-import Page from '../pages/Page';
+// import Page from '../pages/Page';
 import Error404 from '../pages/Error404';
 import Navbar from '../components/Navbar';
+import boldrNotificationsFactory, { Notif } from '../components/Notifications';
 import { getToken } from './authentication/token';
 import SETTINGS_QUERY from './getSettings.graphql';
 
@@ -54,10 +55,10 @@ type Location = {
 const AdminDashboard = universal(() => import('../scenes/Admin/AdminDashboard'), {
   resolve: () => require.resolveWeak('../scenes/Admin/AdminDashboard'),
 });
-// const Page = universal(() => import('../pages/Page'), {
-//   resolve: () => require.resolveWeak('../pages/Page'),
-// });
-
+const Page = universal(() => import('../pages/Page'), {
+  resolve: () => require.resolveWeak('../pages/Page'),
+});
+const NotificationContainer = boldrNotificationsFactory(Notif);
 class App extends Component {
   props: Props;
   render() {
@@ -90,7 +91,7 @@ class App extends Component {
           <Route path="/" component={Page} />
           <Route component={Error404} />
         </Switch>
-        {/* <Notifications /> */}
+        <NotificationContainer />
       </div>
     );
   }

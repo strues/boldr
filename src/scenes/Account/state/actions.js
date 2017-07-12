@@ -2,7 +2,7 @@
 import { replacePath } from '../../../core/RouterConnection';
 import { api, API_PREFIX, setToken, removeToken } from '../../../core';
 import * as notif from '../../../core/constants';
-import { sendNotification } from '../../../state/notifications/notifications';
+import { sendNotification, showNotification } from '../../../state/notifications/notifications';
 import * as t from './actionTypes';
 
 /**
@@ -57,7 +57,7 @@ export const doLogin = (token: string) => {
     type: t.LOGIN_SUCCESS,
     token,
   });
-  dispatch(sendNotification(notif.MSG_LOGIN_SUCCESS));
+  dispatch(showNotification(notif.MSG_LOGIN_SUCCESS));
   return dispatch(replacePath('/'));
 };
 
@@ -73,7 +73,7 @@ export function logout() {
     dispatch({
       type: t.LOGOUT,
     });
-    dispatch(sendNotification(notif.MSG_LOGOUT));
+    dispatch(showNotification({ type: 'success', text: 'Logged out.' }));
   };
 }
 export const loginUserRequest = ({ username }) => ({

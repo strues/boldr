@@ -8,6 +8,7 @@ const StatsPlugin = require('stats-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const ifElse = require('boldr-utils/lib/logic/ifElse');
 const UglifyPlugin = require('uglifyjs-webpack-plugin');
+const WriteFilePlugin = require('write-file-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 
@@ -279,6 +280,7 @@ module.exports = function createClientConfig(options) {
                 ],
               ],
               plugins: [
+                'dual-import',
                 [
                   'babel-plugin-styled-components',
                   {
@@ -290,13 +292,13 @@ module.exports = function createClientConfig(options) {
           },
         ],
       }),
+      new ExtractCssChunks({
+        filename: _DEV ? '[name].css' : '[name].[contenthash:base62:8].css',
+      }),
       new webpack.optimize.CommonsChunkPlugin({
         names: ['bootstrap'],
         filename: _DEV ? '[name].js' : '[name]-[chunkhash].js',
         minChunks: Infinity,
-      }),
-      new ExtractCssChunks({
-        filename: _DEV ? '[name].css' : '[name].[contenthash:base62:8].css',
       }),
     ],
   };
@@ -305,6 +307,7 @@ module.exports = function createClientConfig(options) {
     browserConfig.plugins.push(
       // Dont let errors stop our processes during development
       new webpack.NoEmitOnErrorsPlugin(),
+      new WriteFilePlugin(),
       // Hot reloading
       new webpack.HotModuleReplacementPlugin(),
       // Detect modules with circular dependencies when bundling with webpack.

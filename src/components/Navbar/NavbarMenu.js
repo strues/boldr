@@ -28,7 +28,7 @@ const List = styled.ul`
   z-index: 10000;
   white-space: nowrap;
 
-  @media (max-width: 768px) {
+  @media (max-width: 991px) {
     position: relative;
     top: 0;
     border: none;
@@ -47,7 +47,7 @@ const Item = styled.li`
     background: #364b60;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: 991px) {
     color: #fff;
   }
 `;
@@ -57,7 +57,7 @@ const Link = styled.a`
   padding: 10px 10px 10px 5px;
   display: block;
 
-  @media (max-width: 768px) {
+  @media (max-width: 991px) {
     padding: 10px 0px 10px 40px;
   }
 `;
@@ -72,25 +72,10 @@ type Props = {
 
 export default class NavbarMenu extends Component {
   static displayName = 'Dropdown';
-  constructor() {
-    super();
-    this.state = {
-      width: null,
-    };
-  }
-  componentDidMount() {
-    this.adjustWidth();
-  }
-  adjustWidth = () => {
-    this.setState({
-      width: getComputedStyle(this.list).width,
-    });
-  };
 
   props: Props;
   handleClick = (e: Event): void => {
     const { open, handleDropdown, mobile } = this.props;
-    const { width } = this.state;
     if (open) {
       this.list.style.height = 'auto';
       // If dropdown is clicked while open, set Navbar's activeIndex to -1
@@ -106,7 +91,7 @@ export default class NavbarMenu extends Component {
     let { items } = this.props;
     items = items.map((item, i) => {
       return (
-        <Item key={i} className="boldrui-navbar-item">
+        <Item key={i}>
           <Link href={item.href}>
             {item.name}
           </Link>
@@ -118,16 +103,9 @@ export default class NavbarMenu extends Component {
 
   render() {
     const { name, open } = this.props;
-    const { width } = this.state;
     return (
-      <span open={open} width={width}>
-        <a
-          className="boldrui-link"
-          onClick={this.handleClick}
-          open={open}
-          width={width}
-          onKeyDown={this.handleClick}
-        >
+      <span>
+        <a className="boldrui-link" onClick={this.handleClick} onKeyDown={this.handleClick}>
           {name}
         </a>
         <List open={open} innerRef={el => (this.list = el)}>

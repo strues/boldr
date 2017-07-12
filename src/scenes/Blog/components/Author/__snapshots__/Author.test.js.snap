@@ -2,7 +2,7 @@
 
 exports[`<Author /> renders snapshot 1`] = `
 <div
-  className="boldrui-sidebar-author"
+  className="boldrui-article-sidebar__author"
 >
   <styled.div>
     <Avatar

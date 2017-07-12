@@ -29,7 +29,7 @@ class ArticlePreview extends Component {
             {article.title}
           </Col>
           <Col xs={12} sm={3}>
-            <Link to={`/admin/content/articles/${article.slug}`}>
+            <Link to={`/admin/articles/${article.slug}`}>
               <Icon kind="edit" color="#222" />
               {''}Edit
             </Link>

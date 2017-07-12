@@ -37,6 +37,16 @@ export const POSITIONS = {
   bottomLeft: BOTTOM_LEFT_POSITION,
   bottomRight: BOTTOM_RIGHT_POSITION,
 };
+
+// default value for notifications
+export const DEFAULT_NOTIFICATION = {
+  status: DEFAULT_STATUS,
+  position: TOP_RIGHT_POSITION,
+  dismissible: true,
+  dismissAfter: 5000,
+  allowHTML: false,
+  closeButton: false,
+};
 export const MSG_UPLOAD_ERROR = {
   message: 'There was a problem uploading.',
   kind: 'error',
@@ -94,9 +104,8 @@ export const MSG_EDIT_PROFILE_FAILURE = {
   dismissAfter: 3000,
 };
 export const MSG_LOGIN_SUCCESS = {
-  message: 'Welcome back!',
-  kind: 'success',
-  dismissAfter: 3000,
+  text: 'Welcome back!',
+  type: 'success',
 };
 
 export const MSG_LOGOUT = {

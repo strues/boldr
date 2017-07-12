@@ -38,7 +38,7 @@ const TagList = (props: Props) => {
   return (
     <List>
       {props.tags.map(tag =>
-        <Link key={tag.id} to={`/admin/content/tags/${tag.name}`}>
+        <Link key={tag.id} to={`/admin/tags/${tag.name}`}>
           <ListItem>
             <Icon kind="trash" color="#222" size="24" onClick={() => handleClickDelete(tag)} />
             <TagName>

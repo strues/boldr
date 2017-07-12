@@ -1,4 +1,4 @@
-.#{$boldr-ns}post-card {
+.#{$boldr-ns}article-card {
     margin-bottom: 50px;
 
     a.readmore-link {
@@ -25,7 +25,7 @@
     padding-bottom: 15px;
 }
 
-.#{$boldr-ns}post__title {
+.#{$boldr-ns}article__title {
     padding: 0.08em 1rem;
     color: $white;
     background: rgba($mirage, 0.65);

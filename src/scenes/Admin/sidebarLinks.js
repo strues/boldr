@@ -1,35 +1,29 @@
 const sidebarLinks = [
   {
     id: 1,
-    label: 'Content',
-    icon: 'package',
+    label: 'Articles',
+    icon: 'posts',
     items: [
       {
         id: 11,
-        label: 'Articles',
+        label: 'Listing',
         icon: 'file-text',
-        link: '/admin/content/articles',
+        link: '/admin/articles',
       },
       {
         id: 12,
         label: 'New Article',
         icon: 'file-plus',
-        link: '/admin/content/articles/new',
-      },
-      {
-        label: 'Tags',
-        icon: 'tag',
-        id: 13,
-        link: '/admin/content/tags',
+        link: '/admin/articles/new',
       },
     ],
   },
-  // {
-  //   label: 'File Manager',
-  //   icon: 'fa-file-code-o',
-  //   id: 2,
-  //   link: '/admin/filemanager',
-  // },
+  {
+    label: 'Tags',
+    icon: 'tag',
+    id: 13,
+    link: '/admin/tags',
+  },
   {
     label: 'Media Gallery',
     icon: 'image',

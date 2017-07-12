@@ -6,16 +6,16 @@ import Icon from '@boldr/ui/Icons/Icon';
 // Admin
 import MediaManagerContainer from './Media/MediaManager/MediaManagerContainer';
 import UploadMedia from './Media/UploadMedia';
-import ArticleEditor from './Content/ArticleEditor';
-import NewArticleContainer from './Content/NewArticle/NewArticleContainer';
+import ArticleEditor from './Articles/ArticleEditor';
+import NewArticleContainer from './Articles/NewArticle/NewArticleContainer';
 // import NavigationContainer from './Navigation/NavigationContainer';
 import Members from './Members';
 import Settings from './Settings';
-import TagsContainer from './Content/Tags/TagsContainer';
-import TaggedPost from './Content/Tags/components/TaggedPost/TaggedPost';
+import TagsContainer from './Tags/TagsContainer';
+import TaggedPost from './Tags/components/TaggedPost/TaggedPost';
 
-const ArticlesContainer = universal(() => import('./Content/Articles/ArticlesContainer'), {
-  resolve: () => require.resolveWeak('./Content/Articles/ArticlesContainer'),
+const ArticlesContainer = universal(() => import('./Articles/ArticleListing/ArticlesContainer'), {
+  resolve: () => require.resolveWeak('./Articles/ArticleListing/ArticlesContainer'),
 });
 const MediaContainer = universal(() => import('./Media/MediaContainer'), {
   resolve: () => require.resolveWeak('./Media/MediaContainer'),
@@ -26,36 +26,37 @@ const NavigationContainer = universal(() => import('./Navigation/NavigationConta
 
 export default [
   {
-    path: '/admin/content/articles',
-    breadcrumb: <Icon kind="shovel" />,
+    path: '/admin/articles',
+    breadcrumb: <Icon kind="posts" />,
     exact: true,
     component: ArticlesContainer,
     routes: [
       {
         breadcrumb: 'New Article',
-        path: '/admin/content/articles/new',
+        path: '/admin/articles/new',
         component: NewArticleContainer,
         routes: [],
       },
       {
         exact: true,
         breadcrumb: 'Edit Article',
-        path: '/admin/content/articles/:slug',
+        path: '/admin/articles/:slug',
         component: ArticleEditor,
         routes: [],
-      },
+      }
+    ],
+  },
+  {
+    exact: true,
+    breadcrumb: <Icon kind="tags" />,
+    path: '/admin/tags',
+    component: TagsContainer,
+    routes: [
       {
         exact: true,
         breadcrumb: 'Tagged Posts',
-        path: '/admin/content/tags/:name',
+        path: '/admin/tags/:name',
         component: TaggedPost,
-        routes: [],
-      },
-      {
-        exact: true,
-        breadcrumb: 'Tags',
-        path: '/admin/content/tags',
-        component: TagsContainer,
         routes: [],
       },
     ],

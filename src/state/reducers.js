@@ -7,7 +7,7 @@ import adminReducer from '../scenes/Admin/state/reducer';
 import authReducer from '../scenes/Account/state/reducer';
 import usersReducer from './users/reducer';
 import boldrReducer from './boldr/reducer';
-import notificationReducer from './notifications/notifications';
+import notificationsReducer from './notifications/notifications';
 
 /**
  * Placeholder for a non active reducer in Redux.
@@ -71,7 +71,7 @@ export default function getReducers(apolloClient) {
     users: usersReducer,
     auth: authReducer,
     admin: adminReducer,
-    notifications: notificationReducer,
+    notifications: notificationsReducer,
     form: formReducer,
     router: routerReducer,
   });
