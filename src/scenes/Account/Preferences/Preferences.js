@@ -2,13 +2,16 @@
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 // internal
-import { Col, Row, Grid } from '../../../components/Layout';
+import { Col, Row, Grid } from '@boldr/ui/Layout';
 import EditProfile from './components/EditProfile';
 
 type Props = {
+  currentUser: Object,
   uploadProfileImg: () => void,
   uploadAvatarImg: () => void,
   handleDrawerClick: () => void,
+  uploadAvatarImage: Function,
+  uploadProfileImage: Function,
 };
 type State = {
   me: boolean,
@@ -67,13 +70,15 @@ class Preferences extends Component {
 
   render() {
     return (
-      <div>
+      <div className="preferences-wrapper">
         <Helmet title="Account Preferences" />
         <Grid>
           <Row>
-            <Col sm={12} md={4}>nav</Col>
+            <Col sm={12} md={4}>
+              nav
+            </Col>
             <Col sm={12} md={8}>
-              <EditProfile profile={this.props.me} />
+              <EditProfile profile={this.props.currentUser} />
             </Col>
           </Row>
         </Grid>

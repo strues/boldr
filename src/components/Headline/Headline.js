@@ -13,29 +13,53 @@ const Headline = ({ className, type, theme, lightText, children, ...rest }) => {
   const finalClassName = mergeClassNames({
     'boldrui-h': true,
     'boldrui-h-light': lightText,
-    [themeClassName]: true,
-    [className]: className && className.length,
+    type: true,
   });
 
   switch (type) {
     case 'h1':
-      return <h1 {...rest} className={finalClassName}>{children}</h1>;
+      return (
+        <h1 {...rest} className={finalClassName}>
+          {children}
+        </h1>
+      );
     case 'h2':
-      return <h2 {...rest} className={finalClassName}>{children}</h2>;
+      return (
+        <h2 {...rest} className={finalClassName}>
+          {children}
+        </h2>
+      );
     case 'h3':
-      return <h3 {...rest} className={finalClassName}>{children}</h3>;
+      return (
+        <h3 {...rest} className={finalClassName}>
+          {children}
+        </h3>
+      );
     case 'h4':
-      return <h4 {...rest} className={finalClassName}>{children}</h4>;
+      return (
+        <h4 {...rest} className={finalClassName}>
+          {children}
+        </h4>
+      );
     case 'h5':
-      return <h5 {...rest} className={finalClassName}>{children}</h5>;
+      return (
+        <h5 {...rest} className={finalClassName}>
+          {children}
+        </h5>
+      );
     case 'h6':
-      return <h6 {...rest} className={finalClassName}>{children}</h6>;
+      return (
+        <h6 {...rest} className={finalClassName}>
+          {children}
+        </h6>
+      );
     default:
       return '';
   }
 };
 Headline.propTypes = {
   children: PropTypes.node.isRequired,
+  lightText: PropTypes.bool,
 
   /**
    * The semantic type of the heading, default to `h1`.

@@ -8,7 +8,6 @@ export const HIDE_NOTIFICATION = '@boldr/HIDE_NOTIFICATION';
 export const REMOVE_NOTIFICATION = '@boldr/REMOVE_NOTIFICATION';
 export const HIDE_ALL_NOTIFICATIONS = '@boldr/HIDE_ALL_NOTIFICATIONS';
 
-
 export function showNotification(options = {}) {
   return {
     type: SHOW_NOTIFICATION,

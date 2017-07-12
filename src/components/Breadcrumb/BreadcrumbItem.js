@@ -1,48 +1,47 @@
+/* @flow */
 import React from 'react';
-import classNames from 'classnames';
-import PropTypes from 'prop-types';
-
+import cx from 'classnames';
+import { StyleClasses } from '../../theme/styleClasses';
 import SafeAnchor from './SafeAnchor';
 
-const propTypes = {
+const BASE_ELEMENT = StyleClasses.BREADCRUMB_ITEM;
+
+export type Props = {
   /**
    * If set to true, renders `span` instead of `a`
    */
-  active: PropTypes.bool,
+  active?: boolean,
   /**
    * `href` attribute for the inner `a` element
    */
-  href: PropTypes.string,
+  href?: string,
   /**
    * `title` attribute for the inner `a` element
    */
-  title: PropTypes.node,
+  title?: string,
   /**
    * `target` attribute for the inner `a` element
    */
-  target: PropTypes.string,
-  className: PropTypes.string,
+  target?: string,
+  className?: string,
 };
-
 const defaultProps = {
   active: false,
-  className: 'boldrui-breadcrumb__item',
 };
 
-const BreadcrumbItem = props => {
+const BreadcrumbItem = (props: Props) => {
   const { active, href, title, target, className, ...rest } = props;
 
   // Don't try to render these props on non-active <span>.
   const linkProps = { href, title, target };
-
+  const classes = cx(BASE_ELEMENT, className);
   return (
-    <li className={classNames('boldrui-breadcrumb__item', { active })}>
+    <li className={classes}>
       {active ? <span {...rest} /> : <SafeAnchor {...rest} {...linkProps} />}
     </li>
   );
 };
 
-BreadcrumbItem.propTypes = propTypes;
 BreadcrumbItem.defaultProps = defaultProps;
 
 export default BreadcrumbItem;

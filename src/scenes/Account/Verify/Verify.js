@@ -27,13 +27,17 @@ class Verify extends Component {
 
   render() {
     return (
-      <div>
+      <div className="verify-wrapper">
         <Helmet title="Verify Account" />
         <FormCard
           title="Account verification"
           skinny
           lightText
-          form={<Button onClick={this.handleVerify} isFullWidth>Verify</Button>}
+          form={
+            <Button onClick={this.handleVerify} kind="primary" block>
+              Verify
+            </Button>
+          }
         />
       </div>
     );

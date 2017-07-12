@@ -11,12 +11,14 @@ import { isRequired, isEmail } from '../../../core/util/validations';
 
 type Props = {
   handleSubmit: Function,
+  submitting?: boolean,
+  pristine?: boolean,
 };
 
 const SignupForm = (props: Props) => {
-  const { handleSubmit } = props;
+  const { handleSubmit, submitting, pristine } = props;
   return (
-    <Form onSubmit={handleSubmit} className="boldr-form__generic">
+    <Form onSubmit={handleSubmit} className="boldrui-form boldrui-form--signup">
       <Row>
         <Col sm={6}>
           <Field
@@ -25,6 +27,7 @@ const SignupForm = (props: Props) => {
             type="email"
             component={InputField}
             label="Email address"
+            placeholder="admin@boldr.io"
             validate={[isRequired, isEmail]}
           />
         </Col>
@@ -35,6 +38,7 @@ const SignupForm = (props: Props) => {
             type="password"
             component={InputField}
             label="Password"
+            placeholder="*****"
             validate={[isRequired]}
           />
         </Col>
@@ -47,6 +51,7 @@ const SignupForm = (props: Props) => {
             type="text"
             component={InputField}
             label="First name"
+            placeholder="Steven"
             validate={[isRequired]}
           />
         </Col>
@@ -57,6 +62,7 @@ const SignupForm = (props: Props) => {
             type="text"
             component={InputField}
             label="Last name"
+            placeholder="Smith"
             validate={[isRequired]}
           />
         </Col>
@@ -70,6 +76,7 @@ const SignupForm = (props: Props) => {
                 name="username"
                 type="text"
                 component={InputField}
+                placeholder="AwesomeUserName"
                 label="Username"
                 validate={[isRequired]}
               />
@@ -78,7 +85,13 @@ const SignupForm = (props: Props) => {
         </Col>
       </Row>
 
-      <Button style={{ marginTop: '25px' }} htmlType="submit" kind="primary" block>
+      <Button
+        style={{ marginTop: '25px' }}
+        htmlType="submit"
+        kind="primary"
+        disabled={submitting || pristine}
+        block
+      >
         Create Account
       </Button>
     </Form>

@@ -6,7 +6,7 @@ import Preferences from './Preferences';
 
 const mapStateToProps = state => {
   return {
-    me: state.users.me,
+    currentUser: state.users.me,
   };
 };
 

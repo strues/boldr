@@ -5,6 +5,6 @@ import ArticleImage from './ArticleImage';
 
 it('<ArticleImage />, renders the post image without blowing up', () => {
   const wrapper = mount(<ArticleImage />);
-  const innerWrapper = wrapper.find('.boldr-post__image-wrap');
-  expect(innerWrapper.is('.boldr-post__image-wrap')).toBe(true);
+  const innerWrapper = wrapper.find('.boldrui-article__image-wrapper');
+  expect(innerWrapper.is('.boldrui-article__image-wrapper')).toBe(true);
 });

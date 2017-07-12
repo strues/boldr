@@ -46,7 +46,6 @@ export const ArticleCard = (props: Props) => {
         </CardText>
         <TagBlock tags={tags} />
       </Card>
-
     </div>
   );
 };

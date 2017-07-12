@@ -8,7 +8,7 @@
     }
 }
 
-.boldr-post__image {
+.#{$boldr-ns}article__image {
     width: 100%;
     height: 400px;
     object-fit: cover;
@@ -21,7 +21,7 @@
     }
 }
 
-.boldr-post__date {
+.#{$boldr-ns}article__date {
     padding-bottom: 15px;
 }
 
@@ -35,7 +35,7 @@
     box-decoration-break: clone;
 }
 
-.boldr-post__content {
+.#{$boldr-ns}article__content {
     padding-top: 25px;
     line-height: 1.5;
 }

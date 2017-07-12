@@ -5,6 +5,7 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 // internal
 import { replacePath } from '../../../core/RouterConnection';
+import { showNotification } from '../../../state/notifications/notifications';
 import { signupUserError, signupUserSuccess } from '../state/actions';
 import Signup from './Signup';
 import SIGNUP_USER_MUTATION from './signup.mutation.graphql';
@@ -33,10 +34,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       .then(res => {
         if (res.data.signupUser.errors) {
           dispatch(
-            sendNotification({
-              message: res.data.signupUser.errors[0].value,
-              kind: 'error',
-              dismissAfter: 3000,
+            showNotification({
+              text: res.data.signupUser.errors[0].value,
+              type: 'error',
             }),
           );
           dispatch(
@@ -47,10 +47,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         }
         dispatch(signupUserSuccess(res.data.signupUser));
         dispatch(
-          sendNotification({
-            message: 'Account created!',
-            kind: 'success',
-            dismissAfter: 3000,
+          showNotification({
+            text: 'Account created!',
+            type: 'success',
           }),
         );
         return dispatch(replacePath('/'));

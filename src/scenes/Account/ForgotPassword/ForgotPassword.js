@@ -22,7 +22,7 @@ class ForgotPassword extends PureComponent {
     return (
       <div>
         <Helmet title="Forgot Password" />
-        <div className="boldr-form__forgot">
+        <div className="forgotpw-wrapper">
           <FormCard
             title="Forgot Password"
             skinny

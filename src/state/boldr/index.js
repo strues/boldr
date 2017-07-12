@@ -19,7 +19,6 @@ import {
 import {
   uiReducer,
   makeSelectUi,
-  changeLayout,
   showModal,
   hideModal,
   setMobileDevice,
@@ -27,7 +26,6 @@ import {
   toggleDrawer,
   showHideSidebar,
   expandCollapseSideMenu,
-  layoutSelector,
 } from './ui';
 
 import boldrReducer from './reducer';

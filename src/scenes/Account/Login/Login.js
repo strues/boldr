@@ -16,7 +16,7 @@ const Login = (props: Props) => {
     props.onSubmit(formInput);
   }
   return (
-    <div className="boldr-form__login">
+    <div className="login-wrapper">
       <Helmet title="Login" />
       <Grid>
         <Row>

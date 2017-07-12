@@ -30,17 +30,18 @@ const generateBreadcrumbs = (acc, topRoutes, location) => {
 };
 
 const Breadcrumbs = ({ location }: { location: Location }) => {
-  const generatedBreadcrumbs = generateBreadcrumbs([], rootRoutes, location);
+  const crumbs = generateBreadcrumbs([], rootRoutes, location);
   return (
     <View
       style={{
-        visibility: generatedBreadcrumbs.length < 2 ? 'hidden' : 'inherit',
+        display: crumbs.length < 2 ? 'none' : 'inherit',
+        visibility: crumbs.length < 2 ? 'hidden' : 'inherit',
       }}
     >
       <Breadcrumb>
-        {generatedBreadcrumbs.map(({ breadcrumb, pathname }, index) =>
+        {crumbs.map(({ breadcrumb, pathname }, index) =>
           <LinkContainer to={pathname} key={pathname}>
-            <Breadcrumb.Item active={generatedBreadcrumbs.length - 1 === index}>
+            <Breadcrumb.Item active={crumbs.length - 1 === index}>
               {breadcrumb}
             </Breadcrumb.Item>
           </LinkContainer>,

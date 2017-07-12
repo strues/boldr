@@ -1,10 +1,17 @@
+/* @flow */
 import React, { PureComponent } from 'react';
-import PropTypes from 'prop-types';
 
 function isTrivialHref(href) {
   return !href || href.trim() === '#';
 }
-
+export type Props = {
+  href?: string,
+  onClick?: Function,
+  disabled?: boolean,
+  role?: string,
+  tabIndex?: string | number,
+  componentClass?: any,
+};
 /**
  * There are situations due to browser quirks where
  * an anchor tag is needed, when semantically a button tag is the
@@ -15,15 +22,6 @@ function isTrivialHref(href) {
 class SafeAnchor extends PureComponent {
   static defaultProps = {
     componentClass: 'a',
-  };
-  static propTypes = {
-    href: PropTypes.string,
-    onClick: PropTypes.func,
-    disabled: PropTypes.bool,
-    role: PropTypes.string,
-    tabIndex: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
-
-    componentClass: PropTypes.any,
   };
   constructor(props, context) {
     super(props, context);
@@ -47,7 +45,7 @@ class SafeAnchor extends PureComponent {
       onClick(event);
     }
   }
-
+  props: Props;
   render() {
     const { componentClass: Component, disabled, ...props } = this.props;
 

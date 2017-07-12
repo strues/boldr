@@ -25,7 +25,7 @@ class ResetPassword extends Component {
 
   render() {
     return (
-      <div>
+      <div className="resetpw-wrapper">
         <Helmet title="Reset Password" />
         <FormCard
           title="Reset Password"

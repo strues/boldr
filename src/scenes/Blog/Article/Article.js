@@ -1,17 +1,15 @@
 // @flow
-import React, { PureComponent } from 'react';
+import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import classnames from 'classnames';
-import { gql, graphql } from 'react-apollo';
 import Hero from '@@components/Hero';
 import Loader from '@@components/Loader';
 import { Grid, Row, Col } from '@@components/Layout';
 import { ArticleSidebar, ArticleContent, ArticleTitle } from '../components';
 import { StyleClasses } from '../../../theme/styleClasses';
-import GET_ARTICLE_QUERY from './article.graphql';
 
-const BASE_ELEMENT = StyleClasses.SINGLE_POST;
+const BASE_ELEMENT = StyleClasses.ARTICLE_SINGLE;
 
 export type Props = {
   loading: boolean,
@@ -25,7 +23,7 @@ export type Props = {
   params: Object,
 };
 
-class Article extends PureComponent {
+class Article extends Component {
   props: Props;
 
   displaySingleArticle = () => {
@@ -68,7 +66,7 @@ class Article extends PureComponent {
       return <Loader />;
     } else {
       return (
-        <div>
+        <div className="single-article">
           <Helmet title="article" />
           {this.displaySingleArticle()}
         </div>
@@ -77,10 +75,4 @@ class Article extends PureComponent {
   }
 }
 
-export default graphql(GET_ARTICLE_QUERY, {
-  options: props => ({
-    variables: {
-      slug: props.match.params.slug,
-    },
-  }),
-})(Article);
+export default Article;

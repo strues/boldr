@@ -4,6 +4,7 @@ import Link from 'react-router-dom/Link';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import { Grid, Col, Row } from '@boldr/ui/Layout';
+import Paragraph from '@boldr/ui/Paragraph';
 // internal
 import SignupForm from './SignupForm';
 
@@ -12,15 +13,17 @@ const Spacer = styled.div`margin-top: 100px;`;
 const Signup = (props: { onSubmit: () => void }) => {
   const formBottom = (
     <div>
-      <span>Already have an account?</span>
-      <Link to="/login"> Login</Link>
+      <Paragraph>Already have an account?</Paragraph>
+      <Link to="/login" className="boldrui-link">
+        Login
+      </Link>
     </div>
   );
   function submitSignup(formInput) {
     props.onSubmit(formInput);
   }
   return (
-    <div>
+    <div className="signup-wrapper">
       <Helmet title="Signup" />
       <Grid>
         <Row>

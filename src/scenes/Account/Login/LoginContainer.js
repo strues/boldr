@@ -2,7 +2,7 @@ import { graphql } from 'react-apollo';
 import gql from 'graphql-tag';
 import { connect } from 'react-redux';
 import { replacePath } from '../../../core/RouterConnection';
-import { sendNotification } from '../../../state/notifications/notifications';
+import { showNotification } from '../../../state/notifications/notifications';
 import { setToken } from '../../../core/authentication/token';
 import { setUserLoggedIn } from '../../../state/users/actions';
 import { loginUserSuccess, loginUserError } from '../state/actions';
@@ -48,10 +48,9 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
         dispatch(loginUserSuccess(loginUser));
         dispatch(setUserLoggedIn(loginUser));
         dispatch(
-          sendNotification({
-            message: 'Welcome back!',
-            kind: 'success',
-            dismissAfter: 3000,
+          showNotification({
+            text: 'Welcome back!',
+            type: 'success',
           }),
         );
         return dispatch(replacePath('/'));
