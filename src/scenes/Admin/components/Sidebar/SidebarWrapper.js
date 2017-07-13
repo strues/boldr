@@ -22,7 +22,6 @@ const SidebarWrapper = (props: Props) => {
     position: relative;
     left: 0;
     top: 0;
-    height: 100%;
   `;
   return (
     <SidebarWrap {...props}>

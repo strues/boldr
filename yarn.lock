@@ -233,7 +233,7 @@ ap@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/ap/-/ap-0.2.0.tgz#ae0942600b29912f0d2b14ec60c45e8f330b6110"
 
-apollo-client@1.8.0:
+apollo-client@1.8.0, apollo-client@^1.8.0:
   version "1.8.0"
   resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-1.8.0.tgz#3b5d1976a06a0f82b2fc66fe71754868193dadb9"
   dependencies:
@@ -248,7 +248,7 @@ apollo-client@1.8.0:
     "@types/graphql" "^0.9.0"
     "@types/isomorphic-fetch" "0.0.34"
 
-apollo-client@^1.4.0, apollo-client@^1.5.0:
+apollo-client@^1.4.0:
   version "1.7.0"
   resolved "https://registry.yarnpkg.com/apollo-client/-/apollo-client-1.7.0.tgz#3d6fdf6ead0a07d3e02d32d9191f26cbcfb6e4f6"
   dependencies:
@@ -263,12 +263,13 @@ apollo-client@^1.4.0, apollo-client@^1.5.0:
     "@types/graphql" "^0.9.0"
     "@types/isomorphic-fetch" "0.0.34"
 
-apollo-upload-client@^5.0.0:
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/apollo-upload-client/-/apollo-upload-client-5.0.0.tgz#a42769a8f3d8d6f7e688d979858fe4beadc56d5a"
+apollo-upload-client@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/apollo-upload-client/-/apollo-upload-client-5.1.0.tgz#51f5a88f150b4332a58f704023292fb0e34392b3"
   dependencies:
-    apollo-client "^1.5.0"
+    apollo-client "^1.8.0"
     babel-runtime "^6.23.0"
+    extract-files "^1.1.0"
 
 app-root-path@^2.0.0:
   version "2.0.1"
@@ -2036,9 +2037,9 @@ core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
-cors@^2.8.3:
-  version "2.8.3"
-  resolved "https://registry.yarnpkg.com/cors/-/cors-2.8.3.tgz#4cf78e1d23329a7496b2fc2225b77ca5bb5eb802"
+cors@^2.8.4:
+  version "2.8.4"
+  resolved "https://registry.yarnpkg.com/cors/-/cors-2.8.4.tgz#2bd381f2eb201020105cd50ea59da63090694686"
   dependencies:
     object-assign "^4"
     vary "^1"
@@ -3300,6 +3301,12 @@ extract-css-chunks-webpack-plugin@^2.0.4:
     schema-utils "^0.3.0"
     style-loader "^0.18.2"
     webpack-sources "^1.0.1"
+
+extract-files@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/extract-files/-/extract-files-1.1.0.tgz#da55e55d8b718b6b8e25a77df353c8909e65497a"
+  dependencies:
+    babel-runtime "^6.23.0"
 
 extsprintf@1.0.2:
   version "1.0.2"
@@ -8933,15 +8940,6 @@ uglify-js@3.0.x:
 uglify-js@^2.6, uglify-js@^2.8.29:
   version "2.8.29"
   resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-2.8.29.tgz#29c5733148057bb4e1f75df35b7a9cb72e6a59dd"
-  dependencies:
-    source-map "~0.5.1"
-    yargs "~3.10.0"
-  optionalDependencies:
-    uglify-to-browserify "~1.0.0"
-
-"uglify-js@git://github.com/mishoo/UglifyJS2#harmony-v2.8.22":
-  version "2.8.22"
-  resolved "git://github.com/mishoo/UglifyJS2#278577f3cb75e72320564805ee91be63e5f9c806"
   dependencies:
     source-map "~0.5.1"
     yargs "~3.10.0"

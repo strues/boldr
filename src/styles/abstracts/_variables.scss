@@ -519,70 +519,71 @@ $modal-transition-deceleration: cubic-bezier(0, 0, 0.2, 1);
 ///
 /// ==========================================================
 
-/// @group dash-sidebar
+/// @group dashboard
 /// @type Number
 $sidebar-width: 200px !default;
-/// @group dash-sidebar
+/// @group dashboard
 /// @type Number
 $sidebar-padding: 0 !default;
-/// @group dash-sidebar
+/// @group dashboard
 /// @type Number
 $sidebar-top-space: 1rem !default;
-/// @group dash-sidebar
+/// @group dashboard
 /// @type Number
 $sidebar-compact-width: 50px;
-/// @group dash-sidebar
+/// @group dashboard
 /// @type Number
 $sidebar-compact-height: $sidebar-compact-width;
-/// @group dash-sidebar
+/// @group dashboard
 /// @type Color
 $sidebar-color: #fff;
-/// @group dash-sidebar
+/// @group dashboard
 $sidebar-nav-bg: $midnight;
-/// @group dash-sidebar
+/// @group dashboard
 $sidebar-nav-expanded-bg: $madison;
-/// @group dash-sidebar
+/// @group dashboard
 $sidebar-borders: none;
-/// @group dash-sidebar
+/// @group dashboard
 $mobile-sidebar-width: 220px;
-/// @group dash-sidebar
+/// @group dashboard
 $sidebar-nav-title-padding-y: 0.75rem;
-/// @group dash-sidebar
+/// @group dashboard
 $sidebar-nav-title-padding-x: 1rem;
-/// @group dash-sidebar
+/// @group dashboard
 $sidebar-nav-title-color: $snow;
-/// @group dash-sidebar
+/// @group dashboard
 $sidebar-nav-link-padding-y: 0.75rem;
-/// @group dash-sidebar
+/// @group dashboard
 $sidebar-nav-link-padding-x: 1rem;
-/// @group dash-sidebar
+/// @group dashboard
 $sidebar-nav-link-color: #f1f1f1;
-/// @group dash-sidebar
+/// @group dashboard
 $sidebar-nav-link-bg: transparent;
-/// @group dash-sidebar
+/// @group dashboard
 $sidebar-nav-link-borders: 0;
-/// @group dash-sidebar
+/// @group dashboard
 $sidebar-nav-link-hover-color: $snow;
-/// @group dash-sidebar
+/// @group dashboard
 $sidebar-nav-link-hover-bg: $primary-color !default;
-/// @group dash-sidebar
+/// @group dashboard
 $sidebar-nav-link-hover-icon-color: $snow !important;
-/// @group dash-sidebar
+/// @group dashboard
 $sidebar-nav-link-hover-borders: 0;
-/// @group dash-sidebar
+/// @group dashboard
 $sidebar-nav-link-active-color: $snow;
-/// @group dash-sidebar
+/// @group dashboard
 $sidebar-nav-link-active-bg: $madison;
+$sidebar-nav-active-link-color: $water;
 $sidebar-nav-active-bg: $cello;
-/// @group dash-sidebar
+/// @group dashboard
 $sidebar-nav-link-active-icon-color: $primary-color;
-/// @group dash-sidebar
+/// @group dashboard
 $sidebar-nav-link-active-borders: 0;
-/// @group dash-sidebar
+/// @group dashboard
 $sidebar-nav-dropdown-color: #f1f1f1;
-/// @group dash-sidebar
+/// @group dashboard
 $sidebar-nav-dropdown-bg: rgba(0, 0, 0, 0.2);
-/// @group dash-sidebar
+/// @group dashboard
 $sidebar-nav-dropdown-borders: 0;
 
 /// ==========================================================

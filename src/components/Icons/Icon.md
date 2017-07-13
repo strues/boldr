@@ -4,7 +4,7 @@
 account, account-card, archive, calendar, chevron-right,
 close, dashboard, delete, edit, facebook, folder-upload,
 github, google, grid-view, hidden, linkedin, list-view, logout,
-menu, more, more_vert, new-post, posts, routes, search, settings, 
+menu, more, more-vert, new-post, posts, routes, search, settings, 
 shovel, tags, twitter, visible,
 ```
 

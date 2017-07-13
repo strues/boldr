@@ -30,10 +30,12 @@ body {
     font-size: $font-size-base;
     font-family: $font-family;
     line-height: $line-height-base;
+    height: 100%;
+    min-height: 100%;
 }
 
 #app {
-    height: 100%;
+    min-height: 100%;
 }
 
 .boldr {

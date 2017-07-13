@@ -117,12 +117,15 @@
         }
     }
 }
-$black-base: rgba(0, 0, 0, 1);
+
+@mixin transition($prop, $time) {
+    transition: $prop $time ease;
+}
 
 @mixin md-shadow($elevation) {
-    $top-shadow-color: rgba($black-base, 0.14);
-    $middle-shadow-color: rgba($black-base, 0.12);
-    $bottom-shadow-color: rgba($black-base, if($elevation == 1, 0.2, 0.4));
+    $top-shadow-color: rgba($black, 0.14);
+    $middle-shadow-color: rgba($black, 0.12);
+    $bottom-shadow-color: rgba($black, if($elevation == 1, 0.2, 0.4));
 
     @if $elevation < 0 or $elevation > 5 {
 

@@ -7,13 +7,13 @@
     background-color: $sidebar-nav-bg;
 
     .#{$boldr-ns}sidebar-header-logo {
-      display: inline-block;
-width: 43px;
-height: 43px;
-margin: 0 18.5px;
-background-size: cover;
-border-radius: 3px;
-box-shadow: 0 0 5px rgba(0,0,0,.7);
+        display: inline-block;
+        width: 43px;
+        height: 43px;
+        margin: 0 18.5px;
+        background-size: cover;
+        border-radius: 3px;
+        box-shadow: 0 0 5px rgba(0,0,0,.7);
     }
 
     .#{$boldr-ns}sidebar-nav-item {
@@ -43,8 +43,12 @@ box-shadow: 0 0 5px rgba(0,0,0,.7);
 
 .#{$boldr-ns}sidebar-nav.boldr-theme {
     background-color: $sidebar-nav-bg;
+    height: 100vh;
+    min-height: 100%;
     .active.#{$boldr-ns}sidebar-nav-item-link {
-        color: #f1f1f1;
+
+        @include transition(color, 200ms);
+        color: $sidebar-nav-active-link-color;
         background: $sidebar-nav-active-bg;
     }
 
@@ -70,7 +74,9 @@ box-shadow: 0 0 5px rgba(0,0,0,.7);
         }
 
         &:hover {
-            color: $sidebar-nav-link-hover-color;
+
+            @include transition(color, 200ms);
+            color: #00bcd4;
             // background-color: $color-navbar-background-hover;
         }
     }

@@ -31,7 +31,7 @@ const iconList = [
   'close',
   'search',
   'more',
-  'more_vert',
+  'more-vert',
   'archive',
   'account',
   'logout',
@@ -300,7 +300,7 @@ export default class Icon extends PureComponent {
 
           </BaseIcon>
         );
-      case 'more_vert':
+      case 'more-vert':
         return (
           <BaseIcon viewBox="0 0 24 24" {...this.props}>
 
