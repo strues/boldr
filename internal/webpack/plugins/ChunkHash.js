@@ -27,16 +27,18 @@ const hashType = 'sha256';
 const digestType = 'base62';
 const digestLength = 8;
 
+// eslint-disable-next-line
 ChunkHash.prototype.apply = function(compiler) {
   compiler.plugin('compilation', compilation => {
-    compilation.plugin('chunk-hash', (chunk, chunkHash) => {
-      const source = chunk.modules
+    compilation.plugin('chunk-hash', (Chunk, chunkHash) => {
+      const source = Chunk.mapModules(module => module)
         .sort(compareModules)
         .map(getModuleSource)
         // we provide an initialValue in case there is an empty module source. Ref: http://es5.github.io/#x15.4.4.21
         .reduce(concatenateSource, '');
 
       const generatedHash = loaderUtils.getHashDigest(source, hashType, digestType, digestLength);
+      // eslint-disable-next-line
       chunkHash.digest = function() {
         return generatedHash;
       };

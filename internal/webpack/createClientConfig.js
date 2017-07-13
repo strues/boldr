@@ -10,7 +10,10 @@ const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const ifElse = require('boldr-utils/lib/logic/ifElse');
 const UglifyPlugin = require('uglifyjs-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
+const SriPlugin = require('webpack-subresource-integrity');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
+const YarnAddWebpackPlugin = require('yarn-add-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 const loaderUtils = require('loader-utils');
 
 const config = require('../config');
@@ -19,32 +22,64 @@ const WebpackDigestHash = require('./plugins/ChunkHash');
 const ChunkNames = require('./plugins/ChunkNames');
 const VerboseProgress = require('./plugins/VerboseProgress');
 
-const LOCAL_IDENT = '[name]__[local]___[hash:base64:5]';
+const LOCAL_IDENT = '[local]-[hash:base62:8]';
 const EXCLUDES = [/node_modules/, config.assetsDir, config.serverCompiledDir];
 const CACHE_HASH_TYPE = 'sha256';
 const CACHE_DIGEST_TYPE = 'base62';
 const CACHE_DIGEST_LENGTH = 4;
+const ASSET_FILES = /\.(eot|woff|woff2|ttf|otf|svg|png|jpg|jpeg|jp2|jpx|jxr|gif|webp|mp4|mp3|ogg|pdf|html|ico)$/;
+const JS_FILES = /\.(js|jsx)$/;
+const STYLE_FILES = /\.(css|scss)$/;
+
+const cssLoaderOptions = {
+  modules: false,
+  localIdentName: LOCAL_IDENT,
+  importLoaders: 2,
+  minimize: false,
+  sourceMap: false,
+};
+
+const postCSSLoaderRule = {
+  loader: 'postcss-loader',
+  options: {
+    // https://webpack.js.org/guides/migrating/#complex-options
+    ident: 'postcss',
+    parser: 'postcss-scss',
+    plugins: () => [
+      require('postcss-flexbugs-fixes'),
+      require('autoprefixer')({
+        browsers: ['> 1%', 'last 2 versions'],
+        flexbox: 'no-2009',
+      }),
+      require('postcss-discard-duplicates'),
+    ],
+  },
+};
+
+const PKG = require(path.resolve(appRoot.get(), 'package.json'));
+
+const CACHE_HASH = loaderUtils.getHashDigest(
+  JSON.stringify(PKG),
+  CACHE_HASH_TYPE,
+  CACHE_DIGEST_TYPE,
+  CACHE_DIGEST_LENGTH,
+);
+const cacheLoader = {
+  loader: 'cache-loader',
+  options: {
+    cacheDirectory: path.resolve(
+      config.cacheDir,
+      `loader-${CACHE_HASH}-client-${process.env.NODE_ENV}`,
+    ),
+  },
+};
 
 dotenv.load();
+
 module.exports = function createClientConfig(options) {
   const _DEV = process.env.NODE_ENV === 'development';
   const _PROD = process.env.NODE_ENV === 'production';
-  const PROJECT_CONFIG = require(path.resolve(appRoot.get(), 'package.json'));
-  const CACHE_HASH = loaderUtils.getHashDigest(
-    JSON.stringify(PROJECT_CONFIG),
-    CACHE_HASH_TYPE,
-    CACHE_DIGEST_TYPE,
-    CACHE_DIGEST_LENGTH,
-  );
-  const cacheLoader = {
-    loader: 'cache-loader',
-    options: {
-      cacheDirectory: path.resolve(
-        config.cacheDir,
-        `loader-${CACHE_HASH}-client-${process.env.NODE_ENV}`,
-      ),
-    },
-  };
+
   const ifDev = ifElse(_DEV);
 
   const getEntry = () => {
@@ -86,6 +121,7 @@ module.exports = function createClientConfig(options) {
       pathinfo: _DEV,
       libraryTarget: 'var',
       crossOriginLoading: 'anonymous',
+      devtoolModuleFilenameTemplate: info => path.resolve(info.absoluteResourcePath),
     },
     // fail on err
     bail: _PROD,
@@ -93,7 +129,8 @@ module.exports = function createClientConfig(options) {
     // Cache the generated webpack modules and chunks to improve build speed.
     cache: _DEV,
     // true if prod & enabled in settings
-    profile: false,
+    // eslint-disable-next-line eqeqeq
+    profile: process.env.ENABLE_PROFILE == '1',
     // Include polyfills and/or mocks for node features unavailable in browser
     // environments. These are typically necessary because package's will
     // occasionally include node only code.
@@ -101,6 +138,7 @@ module.exports = function createClientConfig(options) {
       fs: 'empty',
       net: 'empty',
       tls: 'empty',
+      dgram: 'empty',
     },
     performance: {
       hints: _PROD ? 'warning' : false,
@@ -110,7 +148,7 @@ module.exports = function createClientConfig(options) {
 
     resolve: {
       // look for files in the descendants of src/ then node_modules
-      modules: [config.srcDir, 'node_modules'],
+      modules: ['node_modules', path.resolve(appRoot.get(), './node_modules')],
       // Webpack will look for the following fields when searching for libraries
       mainFields: ['web', 'browser', 'style', 'module', 'jsnext:main', 'main'],
       descriptionFiles: ['package.json'],
@@ -134,7 +172,7 @@ module.exports = function createClientConfig(options) {
       rules: [
         // js
         {
-          test: /\.(js|jsx)$/,
+          test: JS_FILES,
           exclude: EXCLUDES,
           include: [config.srcDir],
           use: [cacheLoader, { loader: 'happypack/loader?id=hp-js' }],
@@ -149,31 +187,9 @@ module.exports = function createClientConfig(options) {
               cacheLoader,
               {
                 loader: 'css-loader',
-                options: {
-                  importLoaders: 2,
-                  localIdentName: '[name]__[local]--[hash:base64:5]',
-                  minimize: !_DEV,
-                  // sourceMap: true,
-                  modules: false,
-                  context: config.rootDir,
-                },
+                options: cssLoaderOptions,
               },
-              {
-                loader: 'postcss-loader',
-                options: {
-                  // https://webpack.js.org/guides/migrating/#complex-options
-                  ident: 'postcss',
-                  parser: 'postcss-scss',
-                  plugins: () => [
-                    require('postcss-flexbugs-fixes'),
-                    require('autoprefixer')({
-                      browsers: ['> 1%', 'last 2 versions'],
-                      flexbox: 'no-2009',
-                    }),
-                    require('postcss-discard-duplicates'),
-                  ],
-                },
-              },
+              postCSSLoaderRule,
               {
                 loader: 'fast-sass-loader',
               },
@@ -190,7 +206,7 @@ module.exports = function createClientConfig(options) {
           test: /\.(png|jpg|jpeg|gif|svg|woff|woff2)$/,
           loader: 'url-loader',
           exclude: EXCLUDES,
-          options: { limit: 10000, emitFile: true },
+          options: { limit: 10000, emitFile: true, name: 'media/[name].[hash:8].[ext]' },
         },
         {
           test: /\.svg(\?v=\d+.\d+.\d+)?$/,
@@ -233,10 +249,25 @@ module.exports = function createClientConfig(options) {
         __CLIENT__: JSON.stringify(true),
       }),
       // Custom progress plugin
-      new VerboseProgress(),
+      new VerboseProgress({ prefix: 'Client' }),
 
       // Automatically assign quite useful and matching chunk names based on file names.
       new ChunkNames(),
+      new SriPlugin({
+        hashFuncNames: ['sha256', 'sha512'],
+        enabled: _PROD,
+      }),
+      _DEV
+        ? new YarnAddWebpackPlugin({
+            peerDependencies: true,
+          })
+        : null,
+      _PROD
+        ? new HtmlWebpackPlugin({
+            inject: true,
+            template: path.resolve(config.srcDir, 'core/index.ejs'),
+          })
+        : null,
       // Detect modules with circular dependencies when bundling with webpack.
       // @see https://github.com/aackerman/circular-dependency-plugin
       _DEV
@@ -296,22 +327,19 @@ module.exports = function createClientConfig(options) {
           },
         ],
       }),
-      new ExtractCssChunks(),
+      new ExtractCssChunks({
+        filename: _DEV ? '[name].css' : '[name].[contenthash:base62:8].css',
+      }),
 
       new webpack.optimize.CommonsChunkPlugin({
         names: ['bootstrap'],
         filename: _DEV ? '[name].js' : '[name]-[chunkhash].js',
         minChunks: Infinity,
       }),
-      // _PROD
-      //   ? new webpack.optimize.CommonsChunkPlugin({
-      //       name: 'vendor',
-      //       minChunks: ({ resource }) =>
-      //         resource !== undefined && resource.indexOf('node_modules') !== -1,
-      //     })
-      //   : null,
+
       // Hot reloading
       _DEV ? new webpack.HotModuleReplacementPlugin() : null,
+
       // Dll reference speeds up development by grouping all of your vendor dependencies
       // in a DLL file. This is not compiled again, unless package.json contents
       // have changed.
@@ -321,7 +349,10 @@ module.exports = function createClientConfig(options) {
             manifest: require(path.resolve(config.assetsDir, 'boldrDLLs.json')),
           })
         : null,
+
+      // Supress errors to console
       _DEV ? new webpack.NoEmitOnErrorsPlugin() : null,
+
       _PROD
         ? new StatsPlugin('client-stats.json', {
             chunkModules: true,

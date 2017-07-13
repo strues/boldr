@@ -3,7 +3,7 @@ import React from 'react';
 import isBoolean from 'lodash/isBoolean';
 import classNames from 'classnames';
 import styleVars from '../../theme/styleVars';
-import styles from './View.scss';
+// import styles from './View.scss';
 
 type sizes = 'small' | 'medium' | 'large';
 
@@ -79,9 +79,7 @@ const View = ({
     inline ? 'span' : 'div',
     {
       style: generatedStyleObj,
-      className: classNames(
-        marginChildren && styles.marginChildren,
-        marginChildrenRight && styles.marginChildrenRight,
+      className: classNames({'marginChildren': marginChildren, 'marginChildrenRight': marginChildrenRight },
         className,
       ),
       ...props,

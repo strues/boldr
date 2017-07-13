@@ -44,7 +44,7 @@ export default ({ clientStats, outputPath }) => {
         credentials: 'same-origin',
         headers: req.headers,
       },
-      batchInterval: 20,
+      batchInterval: 10,
     });
     const apolloClient = createApolloClient(networkInterface);
     const history = createMemoryHistory({ initialEntries: ['/'] });

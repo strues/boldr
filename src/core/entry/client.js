@@ -5,15 +5,14 @@ import ReactDOM from 'react-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
 import WebFontLoader from 'webfontloader';
-import { ApolloProvider } from 'react-apollo';
+import ApolloProvider from 'react-apollo/lib/ApolloProvider';
 import { createBatchingNetworkInterface } from 'apollo-upload-client';
-import AppContainer from 'react-hot-loader/lib/AppContainer';
 import { checkAuth } from '../../scenes/Account/state/actions';
 import { getToken } from '../authentication/token';
 import configureStore from '../store';
 import RouterConnection from '../RouterConnection';
 import createApolloClient from '../createApolloClient';
-// import ReactHotLoader from '../util/ReactHotLoader';
+import ReactHotLoader from '../util/ReactHotLoader';
 import App from '../App';
 
 // Async font loading
@@ -51,10 +50,10 @@ networkInterface.use([
     },
   },
 ]);
-const client = createApolloClient(networkInterface);
+const apolloClient = createApolloClient(networkInterface);
 const history = createBrowserHistory();
 const preloadedState = window.__APOLLO_STATE__;
-const store = configureStore(client, preloadedState, history);
+const store = configureStore(apolloClient, preloadedState, history);
 const { dispatch } = store;
 
 if (token) {
@@ -63,15 +62,15 @@ if (token) {
 }
 function renderApp(passedApp) {
   ReactDOM.render(
-    <AppContainer>
-      <ApolloProvider store={store} client={client}>
+    <ReactHotLoader>
+      <ApolloProvider store={store} client={apolloClient}>
         <BrowserRouter>
           <RouterConnection>
             {passedApp}
           </RouterConnection>
         </BrowserRouter>
       </ApolloProvider>
-    </AppContainer>,
+    </ReactHotLoader>,
     MOUNT_POINT,
   );
 }

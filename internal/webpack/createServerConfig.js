@@ -7,8 +7,8 @@ const ifElse = require('boldr-utils/lib/logic/ifElse');
 const appRoot = require('boldr-utils/lib/node/appRoot');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
+const YarnAddWebpackPlugin = require('yarn-add-webpack-plugin');
 const loaderUtils = require('loader-utils');
-
 const config = require('../config');
 const ChunkNames = require('./plugins/ChunkNames');
 const VerboseProgress = require('./plugins/VerboseProgress');
@@ -20,44 +20,74 @@ const cache = {
   'server-production': {},
   'server-development': {},
 };
-const LOCAL_IDENT = '[name]__[local]___[hash:base64:5]';
+const LOCAL_IDENT = '[local]-[hash:base62:8]';
 const EXCLUDES = [/node_modules/, config.assetsDir, config.serverCompiledDir];
 const CACHE_HASH_TYPE = 'sha256';
 const CACHE_DIGEST_TYPE = 'base62';
 const CACHE_DIGEST_LENGTH = 4;
+const ASSET_FILES = /\.(eot|woff|woff2|ttf|otf|svg|png|jpg|jpeg|jp2|jpx|jxr|gif|webp|mp4|mp3|ogg|pdf|html|ico)$/;
+const JS_FILES = /\.(js|mjs|jsx)$/;
+const STYLE_FILES = /\.(css|scss)$/;
+
+const cssLoaderOptions = {
+  modules: false,
+  localIdentName: LOCAL_IDENT,
+  importLoaders: 2,
+  minimize: false,
+  sourceMap: false,
+};
+
+const postCSSLoaderRule = {
+  loader: 'postcss-loader',
+  options: {
+    // https://webpack.js.org/guides/migrating/#complex-options
+    ident: 'postcss',
+    parser: 'postcss-scss',
+    plugins: () => [
+      require('postcss-flexbugs-fixes'),
+      require('autoprefixer')({
+        browsers: ['> 1%', 'last 2 versions'],
+        flexbox: 'no-2009',
+      }),
+      require('postcss-discard-duplicates'),
+    ],
+  },
+};
+const PKG = require(path.resolve(appRoot.get(), 'package.json'));
+
+const CACHE_HASH = loaderUtils.getHashDigest(
+  JSON.stringify(PKG),
+  CACHE_HASH_TYPE,
+  CACHE_DIGEST_TYPE,
+  CACHE_DIGEST_LENGTH,
+);
+const nodeModules = path.join(CWD, 'node_modules');
+const serverExternals = fs
+  .readdirSync(nodeModules)
+  .filter(
+    x => !/\.bin|react-universal-component|require-universal-module|webpack-flush-chunks/.test(x),
+  )
+  .reduce((externals, request) => {
+    externals[request] = `commonjs ${request}`;
+    return externals;
+  }, {});
+
+const cacheLoader = {
+  loader: 'cache-loader',
+  options: {
+    cacheDirectory: path.resolve(
+      config.cacheDir,
+      `loader-${CACHE_HASH}-server-${process.env.NODE_ENV}`,
+    ),
+  },
+};
 // This is the Webpack configuration for Node
 module.exports = function createServerConfig(options) {
   // debug(boldrRoot.toString());
   const _DEV = process.env.NODE_ENV === 'development';
   const _PROD = process.env.NODE_ENV === 'production';
   const ifDev = ifElse(_DEV);
-  const PROJECT_CONFIG = require(path.resolve(appRoot.get(), 'package.json'));
-  const CACHE_HASH = loaderUtils.getHashDigest(
-    JSON.stringify(PROJECT_CONFIG),
-    CACHE_HASH_TYPE,
-    CACHE_DIGEST_TYPE,
-    CACHE_DIGEST_LENGTH,
-  );
-  const nodeModules = path.join(CWD, 'node_modules');
-  const serverExternals = fs
-    .readdirSync(nodeModules)
-    .filter(
-      x => !/\.bin|react-universal-component|require-universal-module|webpack-flush-chunks/.test(x),
-    )
-    .reduce((externals, request) => {
-      externals[request] = `commonjs ${request}`;
-      return externals;
-    }, {});
 
-  const cacheLoader = {
-    loader: 'cache-loader',
-    options: {
-      cacheDirectory: path.resolve(
-        config.cacheDir,
-        `loader-${CACHE_HASH}-server-${process.env.NODE_ENV}`,
-      ),
-    },
-  };
   const nodeConfig = {
     // pass either node or web
     target: 'async-node',
@@ -65,12 +95,11 @@ module.exports = function createServerConfig(options) {
     // user's project root
     context: config.rootDir,
     // sourcemap
-    devtool: '#source-map',
+    devtool: 'source-map',
     entry: [`${config.srcDir}/core/entry/server.js`],
     output: {
       path: path.join(CWD, 'build'),
       filename: 'serverRenderer.js',
-      sourcePrefix: '  ',
       publicPath: '/assets/',
       // only prod
       pathinfo: _DEV,
@@ -78,16 +107,17 @@ module.exports = function createServerConfig(options) {
       crossOriginLoading: 'anonymous',
     },
     // true if prod
-    bail: _PROD,
+    bail: !_DEV,
     // cache dev
     cache: _DEV,
     // true if prod & enabled in settings
-    profile: false,
+    // eslint-disable-next-line eqeqeq
+    profile: process.env.ENABLE_PROFILE == '1',
 
     performance: false,
     resolve: {
-      extensions: ['.js', '.json', '.jsx'],
-      modules: [config.srcDir, 'node_modules'],
+      extensions: ['.js', '.json', '.jsx', '.css', '.scss'],
+      modules: ['node_modules', path.resolve(appRoot.get(), './node_modules')],
       mainFields: ['module', 'jsnext:main', 'main'],
       alias: {
         '@@scenes': path.resolve(config.srcDir, 'scenes'),
@@ -99,6 +129,7 @@ module.exports = function createServerConfig(options) {
         '@@theme': path.resolve(config.srcDir, 'theme'),
       },
     },
+    node: { console: true, __filename: true, __dirname: true },
     externals: serverExternals,
     module: {
       noParse: [/\.min\.js/],
@@ -155,12 +186,9 @@ module.exports = function createServerConfig(options) {
             cacheLoader,
             {
               loader: 'css-loader/locals',
-              options: {
-                localIdentName: '[name]__[local]--[hash:base64:5]',
-                importLoaders: false,
-              },
+              options: cssLoaderOptions,
             },
-            { loader: 'postcss-loader' },
+            postCSSLoaderRule,
             { loader: 'fast-sass-loader' },
           ],
         },
@@ -216,8 +244,13 @@ module.exports = function createServerConfig(options) {
         __SERVER__: JSON.stringify(false),
         __CLIENT__: JSON.stringify(true),
       }),
+      _DEV
+        ? new YarnAddWebpackPlugin({
+            peerDependencies: true,
+          })
+        : null,
       // Custom progress plugin
-      new VerboseProgress(),
+      new VerboseProgress({ prefix: 'Server' }),
 
       // Automatically assign quite useful and matching chunk names based on file names.
       new ChunkNames(),
