@@ -4,13 +4,14 @@ const path = require('path');
 const fs = require('fs');
 const dotenv = require('dotenv');
 const webpack = require('webpack');
+const appRoot = require('boldr-utils/lib/node/appRoot');
 const StatsPlugin = require('stats-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const ifElse = require('boldr-utils/lib/logic/ifElse');
 const UglifyPlugin = require('uglifyjs-webpack-plugin');
-const WriteFilePlugin = require('write-file-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
+const loaderUtils = require('loader-utils');
 
 const config = require('../config');
 const happyPackPlugin = require('./plugins/happyPackPlugin');
@@ -20,11 +21,30 @@ const VerboseProgress = require('./plugins/VerboseProgress');
 
 const LOCAL_IDENT = '[name]__[local]___[hash:base64:5]';
 const EXCLUDES = [/node_modules/, config.assetsDir, config.serverCompiledDir];
+const CACHE_HASH_TYPE = 'sha256';
+const CACHE_DIGEST_TYPE = 'base62';
+const CACHE_DIGEST_LENGTH = 4;
+
 dotenv.load();
 module.exports = function createClientConfig(options) {
   const _DEV = process.env.NODE_ENV === 'development';
   const _PROD = process.env.NODE_ENV === 'production';
-
+  const PROJECT_CONFIG = require(path.resolve(appRoot.get(), 'package.json'));
+  const CACHE_HASH = loaderUtils.getHashDigest(
+    JSON.stringify(PROJECT_CONFIG),
+    CACHE_HASH_TYPE,
+    CACHE_DIGEST_TYPE,
+    CACHE_DIGEST_LENGTH,
+  );
+  const cacheLoader = {
+    loader: 'cache-loader',
+    options: {
+      cacheDirectory: path.resolve(
+        config.cacheDir,
+        `loader-${CACHE_HASH}-client-${process.env.NODE_ENV}`,
+      ),
+    },
+  };
   const ifDev = ifElse(_DEV);
 
   const getEntry = () => {
@@ -58,15 +78,14 @@ module.exports = function createClientConfig(options) {
     output: {
       // build/assets/*
       path: config.assetsDir,
-      filename: _DEV ? '[name].js' : '[name]-[chunkhash].js',
-      chunkFilename: _DEV ? '[name]-[hash].js' : '[name]-[chunkhash].js',
+      filename: _DEV ? '[name].js' : '[name].[chunkhash].js',
+      chunkFilename: _DEV ? '[name].js' : '[name]-[chunkhash].js',
       // Full URL in dev otherwise we expect our bundled output to be served from /assets/
       publicPath: '/assets/',
       // only dev
       pathinfo: _DEV,
       libraryTarget: 'var',
       crossOriginLoading: 'anonymous',
-      devtoolModuleFilenameTemplate: info => path.resolve(info.absoluteResourcePath),
     },
     // fail on err
     bail: _PROD,
@@ -107,13 +126,7 @@ module.exports = function createClientConfig(options) {
         '@@theme': path.resolve(config.srcDir, 'theme'),
       },
     },
-    // Locations Webpack should look for loaders.
-    // You can also use the resolveLoader to resolve you're webpack 2/3 loaders
-    // without the -loader
-    resolveLoader: {
-      modules: [config.nodeModules, config.srcDir],
-      moduleExtensions: ['-loader'],
-    },
+
     module: {
       strictExportPresence: true,
       // dont parse minimized files
@@ -124,15 +137,7 @@ module.exports = function createClientConfig(options) {
           test: /\.(js|jsx)$/,
           exclude: EXCLUDES,
           include: [config.srcDir],
-          use: [
-            ifDev({
-              loader: 'cache-loader',
-              options: {
-                cacheDirectory: config.cacheDir,
-              },
-            }),
-            { loader: 'happypack/loader?id=hp-js' },
-          ].filter(Boolean),
+          use: [cacheLoader, { loader: 'happypack/loader?id=hp-js' }],
         },
         // scss
         {
@@ -141,17 +146,12 @@ module.exports = function createClientConfig(options) {
           exclude: EXCLUDES,
           use: ExtractCssChunks.extract({
             use: [
-              ifDev({
-                loader: 'cache-loader',
-                options: {
-                  cacheDirectory: config.cacheDir,
-                },
-              }),
+              cacheLoader,
               {
                 loader: 'css-loader',
                 options: {
                   importLoaders: 2,
-                  localIdentName: LOCAL_IDENT,
+                  localIdentName: '[name]__[local]--[hash:base64:5]',
                   minimize: !_DEV,
                   // sourceMap: true,
                   modules: false,
@@ -177,7 +177,7 @@ module.exports = function createClientConfig(options) {
               {
                 loader: 'fast-sass-loader',
               },
-            ].filter(Boolean),
+            ],
           }),
         },
         // json
@@ -237,7 +237,20 @@ module.exports = function createClientConfig(options) {
 
       // Automatically assign quite useful and matching chunk names based on file names.
       new ChunkNames(),
-
+      // Detect modules with circular dependencies when bundling with webpack.
+      // @see https://github.com/aackerman/circular-dependency-plugin
+      _DEV
+        ? new CircularDependencyPlugin({
+            // exclude detection of files based on a RegExp
+            exclude: /a\.js|node_modules/,
+            // add errors to webpack instead of warnings
+            failOnError: false,
+          })
+        : null,
+      // Improve OS compatibility
+      // @see https://github.com/Urthen/case-sensitive-paths-webpack-plugin
+      _DEV ? new CaseSensitivePathsPlugin() : null,
+      _DEV ? new webpack.NamedModulesPlugin() : null,
       /**
        * HappyPack Plugins are used as caching mechanisms to reduce the amount
        * of time Webpack spends rebuilding, during your bundling during
@@ -283,60 +296,48 @@ module.exports = function createClientConfig(options) {
           },
         ],
       }),
-      new ExtractCssChunks({
-        filename: _DEV ? '[name].css' : '[name].[contenthash:base62:8].css',
-      }),
+      new ExtractCssChunks(),
+
       new webpack.optimize.CommonsChunkPlugin({
         names: ['bootstrap'],
         filename: _DEV ? '[name].js' : '[name]-[chunkhash].js',
         minChunks: Infinity,
       }),
-    ],
-  };
-
-  if (_DEV) {
-    browserConfig.plugins.push(
-      // Dont let errors stop our processes during development
-      new webpack.NoEmitOnErrorsPlugin(),
-      new WriteFilePlugin(),
+      // _PROD
+      //   ? new webpack.optimize.CommonsChunkPlugin({
+      //       name: 'vendor',
+      //       minChunks: ({ resource }) =>
+      //         resource !== undefined && resource.indexOf('node_modules') !== -1,
+      //     })
+      //   : null,
       // Hot reloading
-      new webpack.HotModuleReplacementPlugin(),
-      // Detect modules with circular dependencies when bundling with webpack.
-      // @see https://github.com/aackerman/circular-dependency-plugin
-      new CircularDependencyPlugin({
-        // exclude detection of files based on a RegExp
-        exclude: /a\.js|node_modules/,
-        // add errors to webpack instead of warnings
-        failOnError: false,
-      }),
-      // Improve OS compatibility
-      // @see https://github.com/Urthen/case-sensitive-paths-webpack-plugin
-      new CaseSensitivePathsPlugin(),
-      new webpack.NamedModulesPlugin(),
+      _DEV ? new webpack.HotModuleReplacementPlugin() : null,
       // Dll reference speeds up development by grouping all of your vendor dependencies
       // in a DLL file. This is not compiled again, unless package.json contents
       // have changed.
-      new webpack.DllReferencePlugin({
-        context: config.rootDir,
-        manifest: require(path.resolve(config.assetsDir, 'boldrDLLs.json')),
-      }),
-    );
-  }
-  if (_PROD) {
-    browserConfig.plugins.push(
-      new WebpackDigestHash(),
+      _DEV
+        ? new webpack.DllReferencePlugin({
+            context: config.rootDir,
+            manifest: require(path.resolve(config.assetsDir, 'boldrDLLs.json')),
+          })
+        : null,
+      _DEV ? new webpack.NoEmitOnErrorsPlugin() : null,
+      _PROD
+        ? new StatsPlugin('client-stats.json', {
+            chunkModules: true,
+            // eslint-disable-next-line
+            exclude: [/node_modules[\\\/]react/],
+          })
+        : null,
+
+      _PROD ? new UglifyPlugin() : null,
+      _PROD ? new webpack.optimize.ModuleConcatenationPlugin() : null,
+      _PROD ? new WebpackDigestHash() : null,
       // Use HashedModuleIdsPlugin to generate IDs that preserves over builds
       // @see https://github.com/webpack/webpack.js.org/issues/652#issuecomment-273324529
       // @NOTE: if using flushChunkNames rather than flushModuleIds you must disable this...
-      new webpack.HashedModuleIdsPlugin(),
-      new StatsPlugin('client-stats.json'),
-      new UglifyPlugin({
-        compress: true,
-        mangle: true,
-        comments: false,
-        sourceMap: true,
-      }),
-    );
-  }
+      _PROD ? new webpack.HashedModuleIdsPlugin() : null,
+    ].filter(Boolean),
+  };
   return browserConfig;
 };

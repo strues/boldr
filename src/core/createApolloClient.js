@@ -2,14 +2,22 @@ import ApolloClient from 'apollo-client';
 
 const createApolloClient = networkInterface => {
   const params = {
-    dataIdFromObject: o => o.id,
+    dataIdFromObject: result => {
+      if (result.id && result.__typename) {
+        // eslint-disable-line no-underscore-dangle
+        return result.__typename + result.id; // eslint-disable-line no-underscore-dangle
+      }
+      return null;
+    },
+
     networkInterface,
   };
   if (__CLIENT__ && typeof window !== 'undefined') {
     if (window.__APOLLO_STATE__) {
       params.initialState = window.__APOLLO_STATE__;
     }
-    params.ssrForceFetchDelay = 200;
+    params.ssrForceFetchDelay = 100;
+    params.connectToDevTools = true;
   } else {
     params.ssrMode = true;
   }

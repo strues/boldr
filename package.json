@@ -31,9 +31,9 @@
   ],
   "scripts": {
     "build": "npm run clean && npm run build:client && npm run build:ssr && npm run build:server",
-    "build:client": "NODE_ENV=production webpack --progress -p --config internal/webpack/createClientConfig.js",
+    "build:client": "NODE_ENV=production webpack --progress --config internal/webpack/createClientConfig.js",
     "build:server": "NODE_ENV=production babel server --out-dir build/server",
-    "build:ssr": "NODE_ENV=production webpack --progress -p --config internal/webpack/createServerConfig.js",
+    "build:ssr": "NODE_ENV=production webpack --progress --config internal/webpack/createServerConfig.js",
     "clean": "rimraf build && rimraf node_modules/.boldr_cache",
     "dev": "better-npm-run dev",
     "lint": "node ./node_modules/.bin/eslint src",
@@ -68,7 +68,6 @@
     "convict": "^4.0.0",
     "cookie-parser": "^1.4.3",
     "cors": "^2.8.3",
-    "data-driven-motion": "^0.0.11",
     "dataloader": "^1.3.0",
     "date-fns": "^2.0.0-alpha.1",
     "debug": "^2.6.8",
@@ -109,7 +108,7 @@
     "react-tagsinput": "^3.17.0",
     "react-transition-group": "^2.0.2",
     "react-universal-component": "^1.4.1",
-    "redux": "^3.7.1",
+    "redux": "^3.7.2",
     "redux-form": "^7.0.0",
     "redux-thunk": "^2.2.0",
     "reselect": "^3.0.1",
@@ -163,6 +162,7 @@
     "md5": "^2.2.1",
     "moxios": "^0.4.0",
     "node-sass": "^4.5.3",
+    "ora": "^1.3.0",
     "postcss-discard-duplicates": "^2.1.0",
     "postcss-flexbugs-fixes": "^3.0.0",
     "postcss-loader": "^2.0.6",
@@ -184,8 +184,7 @@
     "url-loader": "^0.5.9",
     "webpack": "^3.2.0",
     "webpack-dev-middleware": "^1.11.0",
-    "webpack-hot-middleware": "^2.18.2",
-    "write-file-webpack-plugin": "^4.1.0"
+    "webpack-hot-middleware": "^2.18.2"
   },
   "betterScripts": {
     "build": {

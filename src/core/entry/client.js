@@ -7,12 +7,13 @@ import BrowserRouter from 'react-router-dom/BrowserRouter';
 import WebFontLoader from 'webfontloader';
 import { ApolloProvider } from 'react-apollo';
 import { createBatchingNetworkInterface } from 'apollo-upload-client';
+import AppContainer from 'react-hot-loader/lib/AppContainer';
 import { checkAuth } from '../../scenes/Account/state/actions';
 import { getToken } from '../authentication/token';
 import configureStore from '../store';
 import RouterConnection from '../RouterConnection';
 import createApolloClient from '../createApolloClient';
-import ReactHotLoader from '../util/ReactHotLoader';
+// import ReactHotLoader from '../util/ReactHotLoader';
 import App from '../App';
 
 // Async font loading
@@ -62,7 +63,7 @@ if (token) {
 }
 function renderApp(passedApp) {
   ReactDOM.render(
-    <ReactHotLoader>
+    <AppContainer>
       <ApolloProvider store={store} client={client}>
         <BrowserRouter>
           <RouterConnection>
@@ -70,7 +71,7 @@ function renderApp(passedApp) {
           </RouterConnection>
         </BrowserRouter>
       </ApolloProvider>
-    </ReactHotLoader>,
+    </AppContainer>,
     MOUNT_POINT,
   );
 }
@@ -81,4 +82,5 @@ if (module.hot) {
     renderApp(<NewApp />);
   });
 }
+
 renderApp(<App />);

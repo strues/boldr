@@ -4,27 +4,40 @@ const fs = require('fs');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
 const ifElse = require('boldr-utils/lib/logic/ifElse');
-const WriteFilePlugin = require('write-file-webpack-plugin');
+const appRoot = require('boldr-utils/lib/node/appRoot');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
+const loaderUtils = require('loader-utils');
+
 const config = require('../config');
 const ChunkNames = require('./plugins/ChunkNames');
 const VerboseProgress = require('./plugins/VerboseProgress');
 
 const CWD = fs.realpathSync(process.cwd());
 dotenv.load();
+
 const cache = {
   'server-production': {},
   'server-development': {},
 };
+const LOCAL_IDENT = '[name]__[local]___[hash:base64:5]';
 const EXCLUDES = [/node_modules/, config.assetsDir, config.serverCompiledDir];
+const CACHE_HASH_TYPE = 'sha256';
+const CACHE_DIGEST_TYPE = 'base62';
+const CACHE_DIGEST_LENGTH = 4;
 // This is the Webpack configuration for Node
 module.exports = function createServerConfig(options) {
   // debug(boldrRoot.toString());
   const _DEV = process.env.NODE_ENV === 'development';
   const _PROD = process.env.NODE_ENV === 'production';
   const ifDev = ifElse(_DEV);
-
+  const PROJECT_CONFIG = require(path.resolve(appRoot.get(), 'package.json'));
+  const CACHE_HASH = loaderUtils.getHashDigest(
+    JSON.stringify(PROJECT_CONFIG),
+    CACHE_HASH_TYPE,
+    CACHE_DIGEST_TYPE,
+    CACHE_DIGEST_LENGTH,
+  );
   const nodeModules = path.join(CWD, 'node_modules');
   const serverExternals = fs
     .readdirSync(nodeModules)
@@ -36,6 +49,15 @@ module.exports = function createServerConfig(options) {
       return externals;
     }, {});
 
+  const cacheLoader = {
+    loader: 'cache-loader',
+    options: {
+      cacheDirectory: path.resolve(
+        config.cacheDir,
+        `loader-${CACHE_HASH}-server-${process.env.NODE_ENV}`,
+      ),
+    },
+  };
   const nodeConfig = {
     // pass either node or web
     target: 'async-node',
@@ -54,7 +76,6 @@ module.exports = function createServerConfig(options) {
       pathinfo: _DEV,
       libraryTarget: 'commonjs2',
       crossOriginLoading: 'anonymous',
-      devtoolModuleFilenameTemplate: info => path.resolve(info.absoluteResourcePath),
     },
     // true if prod
     bail: _PROD,
@@ -62,12 +83,7 @@ module.exports = function createServerConfig(options) {
     cache: _DEV,
     // true if prod & enabled in settings
     profile: false,
-    node: {
-      console: false,
-      __filename: true,
-      __dirname: true,
-      fs: false,
-    },
+
     performance: false,
     resolve: {
       extensions: ['.js', '.json', '.jsx'],
@@ -83,10 +99,6 @@ module.exports = function createServerConfig(options) {
         '@@theme': path.resolve(config.srcDir, 'theme'),
       },
     },
-    resolveLoader: {
-      modules: [config.nodeModules, config.srcDir],
-      moduleExtensions: ['-loader'],
-    },
     externals: serverExternals,
     module: {
       noParse: [/\.min\.js/],
@@ -98,12 +110,7 @@ module.exports = function createServerConfig(options) {
           include: config.srcDir,
           // exclude: EXCLUDES,
           use: [
-            ifDev({
-              loader: 'cache-loader',
-              options: {
-                cacheDirectory: config.cacheDir,
-              },
-            }),
+            cacheLoader,
             {
               loader: 'babel-loader',
               options: {
@@ -128,6 +135,7 @@ module.exports = function createServerConfig(options) {
                   ],
                 ],
                 plugins: [
+                  'dual-import',
                   [
                     'babel-plugin-styled-components',
                     {
@@ -144,10 +152,12 @@ module.exports = function createServerConfig(options) {
           test: /\.(scss|css)$/,
           exclude: EXCLUDES,
           use: [
+            cacheLoader,
             {
               loader: 'css-loader/locals',
               options: {
-                importLoaders: 1,
+                localIdentName: '[name]__[local]--[hash:base64:5]',
+                importLoaders: false,
               },
             },
             { loader: 'postcss-loader' },
@@ -193,12 +203,6 @@ module.exports = function createServerConfig(options) {
         debug: !_DEV,
         context: config.rootDir,
       }),
-      // Custom progress plugin
-      new VerboseProgress(),
-
-      // Automatically assign quite useful and matching chunk names based on file names.
-      new ChunkNames(),
-      new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
       // EnvironmentPlugin is essentially DefinePlugin but allows you to
       // forgo the process.env. when defining.
       // Anything placed in EnvironmentPlugin / DefinePlugin will be
@@ -212,24 +216,27 @@ module.exports = function createServerConfig(options) {
         __SERVER__: JSON.stringify(false),
         __CLIENT__: JSON.stringify(true),
       }),
+      // Custom progress plugin
+      new VerboseProgress(),
+
+      // Automatically assign quite useful and matching chunk names based on file names.
+      new ChunkNames(),
+      _DEV ? new CaseSensitivePathsPlugin() : null,
+      _DEV
+        ? new CircularDependencyPlugin({
+            exclude: /a\.js|node_modules/,
+            // show a warning when there is a circular dependency
+            failOnError: false,
+          })
+        : null,
+      new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
+
       new webpack.BannerPlugin({
         banner: 'require("source-map-support").install();',
         raw: true,
         entryOnly: true,
       }),
-    ],
+    ].filter(Boolean),
   };
-
-  if (_DEV) {
-    nodeConfig.plugins.push(
-      new WriteFilePlugin(),
-      new CaseSensitivePathsPlugin(),
-      new CircularDependencyPlugin({
-        exclude: /a\.js|node_modules/,
-        // show a warning when there is a circular dependency
-        failOnError: false,
-      }),
-    );
-  }
   return nodeConfig;
 };

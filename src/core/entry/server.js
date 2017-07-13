@@ -3,7 +3,6 @@ import React from 'react';
 import type { $Response, $Request, NextFunction } from 'express';
 import { renderToString } from 'react-dom/server';
 import serialize from 'serialize-javascript';
-import { compose } from 'redux';
 import createMemoryHistory from 'history/createMemoryHistory';
 import StaticRouter from 'react-router-dom/StaticRouter';
 import { ServerStyleSheet } from 'styled-components';

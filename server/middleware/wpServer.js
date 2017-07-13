@@ -23,8 +23,8 @@ function findStats(multiStats, name) {
 }
 
 function getFilename(serverStats, outputPath, chunkName) {
-  const assetsByChunkName = serverStats.toJson().assetsByChunkName;
-  let filename = assetsByChunkName[chunkName] || '';
+  const { assetsByChunkName } = serverStats.toJson();
+  const filename = assetsByChunkName[chunkName] || '';
   // If source maps are generated `assetsByChunkName.main`
   // will be an array of filenames.
   return path.join(
@@ -94,15 +94,24 @@ function wpServerMiddleware(multiCompiler, options) {
   }
 
   const outputFs = serverCompiler.outputFileSystem;
-  const outputPath = serverCompiler.outputPath;
+  const { outputPath } = serverCompiler;
 
   installSourceMapSupport(outputFs);
 
   let serverRenderer;
   let error = false;
+  let isCompiling = true;
+  const compilingResponse = `
+          <head>
+              <title>Compiling...</title>
+              <meta http-equiv="refresh" content="1">
+          </head>
+          <code>Webpack is compiling. Please wait...</code>
+      `;
 
   multiCompiler.plugin('done', multiStats => {
     error = false;
+    isCompiling = false;
     const clientStats = findStats(multiStats, 'client');
     const serverStats = findStats(multiStats, 'server');
     // Server compilation errors need to be propagated to the client.
@@ -131,6 +140,9 @@ function wpServerMiddleware(multiCompiler, options) {
     if (error) {
       debug(error);
       return next(error);
+    }
+    if (isCompiling) {
+      return res.send(compilingResponse);
     }
     serverRenderer(req, res, next);
   };
