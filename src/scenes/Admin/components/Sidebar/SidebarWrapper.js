@@ -10,15 +10,19 @@ type Props = {
 
 const SidebarWrapper = (props: Props) => {
   const SidebarWrap = styled.aside`
-  display: flex;
-  flex-direction: column;
-  width: ${props => (props.fullWidth ? '200px' : '60px')};
-  background: ${props => (props.sidebarDark ? '#2d3e50' : '#fff')};
-  box-shadow: 1px 0 2px rgba(0,0,0,.15);
-  flex-direction: column;
-  transform: translateX(0);
-  transform: translate3d(0, 0, 0);
-  white-space: nowrap;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 1px 0 2px rgba(0, 0, 0, .15);
+    flex-direction: column;
+    flex-basis: 200px;
+    white-space: nowrap;
+    background: #202b39;
+    width: 200px;
+    flex-shrink: 0;
+    position: relative;
+    left: 0;
+    top: 0;
+    height: 100%;
   `;
   return (
     <SidebarWrap {...props}>

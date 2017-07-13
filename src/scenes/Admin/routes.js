@@ -13,7 +13,7 @@ import Members from './Members';
 import Settings from './Settings';
 import TagsContainer from './Tags/TagsContainer';
 import TaggedPost from './Tags/components/TaggedPost/TaggedPost';
-
+import Content from './Content';
 const ArticlesContainer = universal(() => import('./Articles/ArticleListing/ArticlesContainer'), {
   resolve: () => require.resolveWeak('./Articles/ArticleListing/ArticlesContainer'),
 });
@@ -25,6 +25,13 @@ const NavigationContainer = universal(() => import('./Navigation/NavigationConta
 });
 
 export default [
+  {
+    exact: true,
+    path: '/admin',
+    breadcrumb: <Icon kind="settings" />,
+    component: Content,
+    routes: [],
+  },
   {
     path: '/admin/articles',
     breadcrumb: <Icon kind="posts" />,

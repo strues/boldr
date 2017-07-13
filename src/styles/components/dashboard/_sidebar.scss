@@ -7,9 +7,13 @@
     background-color: $sidebar-nav-bg;
 
     .#{$boldr-ns}sidebar-header-logo {
-        display: inline-block;
-        height: 40px;
-        vertical-align: middle;
+      display: inline-block;
+width: 43px;
+height: 43px;
+margin: 0 18.5px;
+background-size: cover;
+border-radius: 3px;
+box-shadow: 0 0 5px rgba(0,0,0,.7);
     }
 
     .#{$boldr-ns}sidebar-nav-item {

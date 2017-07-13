@@ -2,8 +2,8 @@
 import React from 'react';
 import Link from 'react-router-dom/Link';
 import classnames from 'classnames';
-import { Col, Row } from '../../Layout';
-import { StyleClasses } from '../../../theme/styleClasses';
+import { Col, Row } from '@boldr/ui/Layout';
+import { StyleClasses } from '../../../../../theme/styleClasses';
 
 const BASE_ELEMENT = StyleClasses.DASHBOARD_FOOTER;
 type Props = {

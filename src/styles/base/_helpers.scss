@@ -20,6 +20,11 @@
     margin-left: auto;
 }
 
+.boldrui-cf {
+
+    @include clearfix();
+}
+
 .boldrui-inline-block {
 
     @extend %boldrui-inline-block;

@@ -1,0 +1,239 @@
+$activecolor: black;
+$color: #666;
+$tabbg: #f8f8f8;
+$activetabbg: white;
+$disablecolor: #c9c9c9;
+$slidercolor: #0099fc;
+
+.#{$boldr-ns}tabs {
+    font-size: 14px;
+    line-height: 1.42857143;
+
+    &-nav {
+        position: relative;
+        border-bottom: 1px solid #e4e4e4;
+        margin-bottom: 10px;
+        outline: none;
+        user-select: none;
+
+        &-add {
+            display: inline-block;
+            float: right;
+            width: 20px;
+            height: 100%;
+            text-align: center;
+            vertical-align: middle;
+            cursor: pointer;
+
+            span {
+                position: relative;
+                top: 50%;
+                display: block;
+                height: 20px;
+                border: 1px solid #e4d4e4;
+                border-radius: 2px;
+                margin-top: -10px;
+                line-height: 18px;
+            }
+        }
+
+        &-content {
+            overflow: hidden;
+            height: 35px;
+            margin-bottom: -1px;
+
+            &-prev::before {
+                content: "\E600";
+            }
+
+            &-next::before {
+                content: "\E600";
+            }
+        }
+
+        &-ink-bar {
+            display: none;
+        }
+    }
+
+    &-scroll {
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    &-tabwrap {
+        position: relative;
+        float: left;
+    }
+
+    &-tab {
+        position: relative;
+        box-sizing: border-box;
+        display: inline-block;
+        color: $color;
+        background-color: $tabbg;
+        border-top: 1px solid #e4e4e4;
+        border-right: 1px solid #e4e4e4;
+        cursor: pointer;
+
+        &-inner {
+            position: relative;
+            box-sizing: border-box;
+            min-width: 90px;
+            padding: 8px 15px;
+            font-size: 12px;
+            text-align: center;
+
+            &-del {
+                position: absolute;
+                top: 3px;
+                right: 3px;
+                display: none;
+                font-size: 12px;
+                line-height: 1;
+            }
+        }
+    }
+
+    &-tab:first-child {
+        border: 1px solid #e4e4e4;
+        border-bottom: 0;
+        border-top-left-radius: 4px;
+    }
+
+    &-tab:last-child {
+        border-top-right-radius: 4px;
+    }
+
+    &-tab:hover {
+        color: $activecolor;
+
+        .#{$boldr-ns}tabs-tab-inner-del {
+            display: inline;
+        }
+    }
+
+    .#{$boldr-ns}tabs-actived {
+        position: relative;
+        color: $activecolor;
+        background-color: $activetabbg;
+
+        .#{$boldr-ns}tabs-tab-inner {
+            padding-bottom: 9px;
+        }
+    }
+
+    .#{$boldr-ns}tabs-disabled {
+        color: $disablecolor;
+
+        &.#{$boldr-ns}tabs-tab {
+            cursor: not-allowed;
+        }
+
+        &.#{$boldr-ns}tabs-tab:hover {
+            color: $disablecolor;
+        }
+    }
+}
+
+.#{$boldr-ns}tabs-size-huge {
+    .#{$boldr-ns}tabs-nav {
+        margin-bottom: 15px;
+    }
+
+    .#{$boldr-ns}tabs-nav-content {
+        height: 50px;
+    }
+
+    .#{$boldr-ns}tabs-tab-inner {
+        padding: 14px 40px;
+        font-size: 14px;
+    }
+
+    .#{$boldr-ns}tabs-actived {
+        .#{$boldr-ns}tabs-tab-inner {
+            padding-bottom: 15px;
+            background-color: $activetabbg;
+        }
+    }
+}
+
+.#{$boldr-ns}tabs-align-center {
+    .#{$boldr-ns}tabs-tabwrap {
+        float: none;
+    }
+}
+
+.#{$boldr-ns}tabs-align-right {
+    .#{$boldr-ns}tabs-tabwrap {
+        float: right;
+    }
+
+    .#{$boldr-ns}tabs-nav-add {
+        float: left;
+    }
+}
+
+.#{$boldr-ns}tabs-type-card {
+    .#{$boldr-ns}tabs-tab {
+        border-color: $tabbg;
+        border-radius: 0;
+    }
+
+    .#{$boldr-ns}tabs-tab:first-child {
+        border-color: $tabbg;
+        border-radius: 0;
+    }
+
+    .#{$boldr-ns}tabs-tab:last-child {
+        border-color: $tabbg;
+        border-radius: 0;
+    }
+
+    .#{$boldr-ns}tabs-actived {
+        background-color: $tabbg !important;
+        border: 0;
+        border-radius: 0;
+
+        .#{$boldr-ns}tabs-tab-inner {
+            background-color: white;
+            border: 1px solid #e4e4d4 !important;
+            border-bottom: 0 !important;
+            border-top-left-radius: 6px !important;
+            border-top-right-radius: 6px !important;
+        }
+    }
+}
+
+.#{$boldr-ns}tabs-type-slider {
+    &.#{$boldr-ns}tabs-nav {
+        border: 0;
+    }
+
+    .#{$boldr-ns}tabs-tab {
+        background-color: transparent;
+        border: 0;
+    }
+
+    .#{$boldr-ns}tabs-actived {
+        background-color: transparent;
+
+        .#{$boldr-ns}tabs-tab-inner {
+            background-color: transparent;
+        }
+    }
+
+    .#{$boldr-ns}tabs-nav-ink-bar {
+        position: absolute;
+        bottom: 0;
+        z-index: 10;
+        display: block;
+        width: 0;
+        height: 2px;
+        background-color: $slidercolor;
+    }
+}
+
+.#{$boldr-ns}tabs-third-level {
+    background-color: #f8f8f8;
+}

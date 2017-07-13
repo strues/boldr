@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import { StyleClasses, BOLDR_NS } from '../../theme/styleClasses';
+import { StyleClasses, BOLDR_NS } from '../../../../theme/styleClasses';
 import SidebarNavItem from './SidebarNavItem';
 import {
   createItemTree,

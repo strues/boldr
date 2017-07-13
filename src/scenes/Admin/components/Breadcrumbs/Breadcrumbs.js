@@ -2,10 +2,10 @@
 import React from 'react';
 import matchPath from 'react-router-dom/matchPath';
 // internal
-import Breadcrumb from '../../components/Breadcrumb';
-import LinkContainer from '../../components/LinkContainer';
-import View from '../../components/View';
-import rootRoutes from './routes';
+import Breadcrumb from '../../../../components/Breadcrumb';
+import LinkContainer from '../../../../components/LinkContainer';
+import View from '../../../../components/View';
+import rootRoutes from '../../routes';
 
 const generatePathname = (path, params) => {
   return Object.keys(params).reduce(

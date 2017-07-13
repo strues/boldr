@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import cn from 'classnames';
-import Avatar from '../Avatar';
-import { StyleClasses } from '../../theme/styleClasses';
-import { mediaQuery } from '../../theme/theme';
-import Toggler from '../Toggler/Toggler';
+import Avatar from '@boldr/ui/Avatar';
+import Toggler from '@boldr/ui/Toggler';
+
+import { StyleClasses } from '../../../../theme/styleClasses';
+import { mediaQuery } from '../../../../theme/theme';
 import TopbarPlainLink from './TopbarPlainLink';
 import TopbarSearch from './TopbarSearch';
 import TopbarLink from './TopbarLink';
@@ -113,9 +114,8 @@ class Topbar extends Component {
     return links.map((link, index) => {
       const active = this._isActive(link, url);
       const activeLinkModifier = active ? `${BASE_ELEMENT}__link--active` : '';
-      const offsetModifer = !search && links.length - 1 === index
-        ? `${BASE_ELEMENT}__link--offset`
-        : '';
+      const offsetModifer =
+        !search && links.length - 1 === index ? `${BASE_ELEMENT}__link--offset` : '';
 
       return (
         <Link
@@ -160,20 +160,15 @@ class Topbar extends Component {
             : null}
           {this.props.avatarUrl
             ? <div className={`${BASE_ELEMENT}__user`}>
-                <Avatar
-                  className={`${BASE_ELEMENT}__user-avatar`}
-                  src={this.props.avatarUrl}
-                />
+                <Avatar className={`${BASE_ELEMENT}__user-avatar`} src={this.props.avatarUrl} />
                 <Link
                   className={`${BASE_ELEMENT}__user-link`}
                   url={`/profiles/${this.props.username}`}
                 >
                   {this.props.username}
                 </Link>
-
               </div>
             : null}
-
         </div>
       </header>
     );

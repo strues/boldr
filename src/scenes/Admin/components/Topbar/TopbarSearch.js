@@ -2,8 +2,8 @@
 // @flow
 import React, { PureComponent } from 'react';
 import cn from 'classnames';
-import { StyleClasses } from '../../theme/styleClasses';
-import Icon from '../Icons';
+import Icon from '@boldr/ui/Icons/Icon';
+import { StyleClasses } from '../../../../theme/styleClasses';
 
 const BASE_ELEMENT = StyleClasses.TOPBAR_SEARCH;
 

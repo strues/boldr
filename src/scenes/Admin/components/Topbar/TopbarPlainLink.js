@@ -1,6 +1,5 @@
 /* @flow */
 import React from 'react';
-import type { ReactChildren } from '../../types/react.js.flow';
 
 type Props = {
   index: string | number,

@@ -32,6 +32,14 @@ body {
     line-height: $line-height-base;
 }
 
+#app {
+    height: 100%;
+}
+
+.boldr {
+    height: 100%;
+}
+
 a {
     color: $link-color;
     text-decoration: none;

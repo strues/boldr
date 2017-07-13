@@ -1,9 +1,9 @@
 /* @flow */
 import React, { Component } from 'react';
-import { NavLink, withRouter } from 'react-router-dom';
+import withRouter from 'react-router-dom/withRouter';
 import classnames from 'classnames';
 
-import { StyleClasses } from '../../theme/styleClasses';
+import { StyleClasses } from '../../../../theme/styleClasses';
 
 import SidebarWrapper from './SidebarWrapper';
 import SidebarHeader from './SidebarHeader';

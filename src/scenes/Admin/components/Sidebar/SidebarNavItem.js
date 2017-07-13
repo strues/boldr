@@ -1,12 +1,12 @@
 /* @flow */
 /* eslint-disable  jsx-a11y/no-static-element-interactions */
 import React from 'react';
-import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import NavLink from 'react-router-dom/NavLink';
 import Icon from '@boldr/ui/Icons/Icon';
-import { StyleClasses, BOLDR_NS } from '../../theme/styleClasses';
-import Anchor from '../Anchor';
+
+import { StyleClasses, BOLDR_NS } from '../../../../theme/styleClasses';
+import Anchor from '../../../../components/Anchor';
 import type { SidebarLink, SidebarLinks } from './Sidebar';
 import { Chevron, FaIcon } from './SidebarUtils';
 

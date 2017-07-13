@@ -2,19 +2,24 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Switch from 'react-router-dom/Switch';
+import styled from 'styled-components';
 import Route from 'react-router-dom/Route';
-import Topbar from '@boldr/ui/Topbar';
-import TopbarLink from '@boldr/ui/Topbar/TopbarLink';
-// internal
-import Sidebar from '../../components/Sidebar';
-import { DashboardWrapper, DashboardContent, DashboardMain } from '../../components/Dashboard';
 
+// internal
 import flattenRoutes from '../../core/util/flattenRoutes';
 import { selectMe } from '../../state/users/selectors';
 import { hideHeader, showHideSidebar, expandCollapseSideMenu } from '../../state/boldr/ui/actions';
 import sidebarLinks from './sidebarLinks';
 import routes from './routes';
-import Breadcrumbs from './Breadcrumbs';
+import {
+  Breadcrumbs,
+  Sidebar,
+  Topbar,
+  TopbarLink,
+  DashboardWrapper,
+  DashboardContent,
+  DashboardMain,
+} from './components';
 
 type Props = {
   flattenedRoutes: Array<{
@@ -34,6 +39,25 @@ type Props = {
   dispatch: Function,
   router: Object,
 };
+
+const SideArea = styled.div`
+  background-color: green;
+  display: flex;
+  flex-basis: 275px;
+
+  flex-shrink: 0;
+
+  padding: 1.2em;
+  @media screen and (min-width: 600px) {
+    width: 180px;
+  }
+`;
+
+const TbArea = styled.div`
+  width: 100%;
+  height: 70px;
+  margin-bottom: 10px;
+`;
 
 export class AdminDashboard extends Component {
   constructor(props: Props) {
@@ -56,7 +80,6 @@ export class AdminDashboard extends Component {
   render() {
     const { me, ui, location: { pathname } } = this.props;
 
-    // baseLink,
     return (
       <DashboardWrapper>
         {ui.visible &&
@@ -72,15 +95,16 @@ export class AdminDashboard extends Component {
             isPrimaryColor
           />}
         <DashboardMain>
-          <Topbar
-            url={this.props.match.path}
-            onMenuClick={this.handleHideSidebar}
-            avatarUrl={me.avatarUrl}
-            username={me.username}
-            link={TopbarLink}
-            links={[{ title: 'Home', url: '/' }, { title: 'Dashboard', url: '/admin' }]}
-          />
-
+          <TbArea>
+            <Topbar
+              url={this.props.match.path}
+              onMenuClick={this.handleHideSidebar}
+              avatarUrl={me.avatarUrl}
+              username={me.username}
+              link={TopbarLink}
+              links={[{ title: 'Home', url: '/' }, { title: 'Dashboard', url: '/admin' }]}
+            />
+          </TbArea>
           <DashboardContent>
             <Breadcrumbs location={this.props.location} />
             <Switch>
