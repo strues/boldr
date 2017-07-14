@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import classnames from 'classnames';
-import Hero from '@@components/Hero';
+import HeroArticle from '@@components/Hero/HeroArticle';
 import Loader from '@@components/Loader';
 import { Grid, Row, Col } from '@@components/Layout';
 import { ArticleSidebar, ArticleContent, ArticleTitle } from '../components';
@@ -32,9 +32,9 @@ class Article extends Component {
     return (
       <div className={classes}>
         <Helmet title={getArticleBySlug.title} />
-        <Hero bgImg={getArticleBySlug.image}>
+        <HeroArticle bgImg={getArticleBySlug.image}>
           <ArticleTitle title={getArticleBySlug.title} />
-        </Hero>
+        </HeroArticle>
         <Grid>
           <Row>
             <Col xs={12} md={8} lg={9}>

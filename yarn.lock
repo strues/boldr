@@ -717,6 +717,13 @@ babel-plugin-jest-hoist@^20.0.3:
   version "20.0.3"
   resolved "https://registry.yarnpkg.com/babel-plugin-jest-hoist/-/babel-plugin-jest-hoist-20.0.3.tgz#afedc853bd3f8dc3548ea671fbe69d03cc2c1767"
 
+babel-plugin-lodash@^3.2.11:
+  version "3.2.11"
+  resolved "https://registry.yarnpkg.com/babel-plugin-lodash/-/babel-plugin-lodash-3.2.11.tgz#21c8fdec9fe1835efaa737873e3902bdd66d5701"
+  dependencies:
+    glob "^7.1.1"
+    lodash "^4.17.2"
+
 babel-plugin-styled-components@^1.1.7:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/babel-plugin-styled-components/-/babel-plugin-styled-components-1.1.7.tgz#a92c239779cc80e7838b645c12865c61c4ca71ce"
@@ -1052,11 +1059,14 @@ babel-polyfill@^6.23.0:
     core-js "^2.4.0"
     regenerator-runtime "^0.10.0"
 
-babel-preset-boldr@^0.9.8:
-  version "0.9.8"
-  resolved "https://registry.yarnpkg.com/babel-preset-boldr/-/babel-preset-boldr-0.9.8.tgz#dc5661815a4d65c4e1bca6a549cf3b0d56d1925c"
+babel-preset-boldr@0.10.0:
+  version "0.10.0"
+  resolved "https://registry.yarnpkg.com/babel-preset-boldr/-/babel-preset-boldr-0.10.0.tgz#17b601e996c569e0e53ea6d57e1b413e71efbce4"
   dependencies:
+    babel-plugin-dual-import "^1.1.1"
     babel-plugin-dynamic-import-node "^1.0.2"
+    babel-plugin-lodash "^3.2.11"
+    babel-plugin-styled-components "^1.1.7"
     babel-plugin-syntax-dynamic-import "^6.18.0"
     babel-plugin-syntax-flow "^6.18.0"
     babel-plugin-transform-class-properties "^6.24.1"
@@ -1072,7 +1082,7 @@ babel-preset-boldr@^0.9.8:
     babel-plugin-transform-react-remove-prop-types "^0.4.6"
     babel-preset-env "^1.6.0"
     babel-preset-react "^6.24.1"
-    fast-async "^6.2.2"
+    fast-async "^6.3.0"
 
 babel-preset-env@^1.6.0:
   version "1.6.0"
@@ -3361,11 +3371,12 @@ faker@^4.1.0:
   version "4.1.0"
   resolved "https://registry.yarnpkg.com/faker/-/faker-4.1.0.tgz#1e45bbbecc6774b3c195fad2835109c6d748cc3f"
 
-fast-async@^6.2.2:
-  version "6.2.2"
-  resolved "https://registry.yarnpkg.com/fast-async/-/fast-async-6.2.2.tgz#dcbbaaacc92209d9179110f1aa5fb72d8174b0b4"
+fast-async@^6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/fast-async/-/fast-async-6.3.0.tgz#b90e7d68f273905878a76ab7047dd080ebc3c40f"
   dependencies:
-    nodent ">=3.0.17"
+    nodent-compiler ">=3.1.0"
+    nodent-runtime ">=3.0.4"
 
 fast-deep-equal@^0.1.0:
   version "0.1.0"
@@ -5704,7 +5715,7 @@ lodash@^3.10.1:
   version "3.10.1"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-3.10.1.tgz#5bf45e8e49ba4189e17d482789dfd15bd140b7b6"
 
-lodash@^4.0.0, lodash@^4.1.0, lodash@^4.11.1, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.6.0, lodash@^4.6.1, lodash@^4.7.0, lodash@^4.8.2, lodash@~4.17.4:
+lodash@^4.0.0, lodash@^4.1.0, lodash@^4.11.1, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.2.1, lodash@^4.3.0, lodash@^4.6.0, lodash@^4.6.1, lodash@^4.7.0, lodash@^4.8.2, lodash@~4.17.4:
   version "4.17.4"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -6142,19 +6153,17 @@ nodemailer@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/nodemailer/-/nodemailer-4.0.1.tgz#b95864b07facee8287e8232effd6f1d56ec75ab2"
 
-nodent-runtime@>=3.0.4:
-  version "3.0.4"
-  resolved "https://registry.yarnpkg.com/nodent-runtime/-/nodent-runtime-3.0.4.tgz#a801ecb7bb0f6c39a69b24cc2fa370cfa8b492da"
-
-nodent@>=3.0.17:
-  version "3.0.18"
-  resolved "https://registry.yarnpkg.com/nodent/-/nodent-3.0.18.tgz#98d1a2bc1089b78cf4fbd46a404ace3a8dcc0fd8"
+nodent-compiler@>=3.1.0:
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/nodent-compiler/-/nodent-compiler-3.1.0.tgz#01f8c43b6c4425dabec25c915a8cf308e7d37da9"
   dependencies:
     acorn ">=2.5.2"
     acorn-es7-plugin ">=1.1.6"
-    nodent-runtime ">=3.0.4"
-    resolve "^1.2.0"
     source-map "^0.5.6"
+
+nodent-runtime@>=3.0.4:
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/nodent-runtime/-/nodent-runtime-3.0.4.tgz#a801ecb7bb0f6c39a69b24cc2fa370cfa8b492da"
 
 "nopt@2 || 3":
   version "3.0.6"
@@ -6689,19 +6698,19 @@ pg-types@1.*:
     postgres-date "~1.0.0"
     postgres-interval "^1.1.0"
 
-pg@^6.4.0:
-  version "6.4.0"
-  resolved "https://registry.yarnpkg.com/pg/-/pg-6.4.0.tgz#cb76ba2e7c2eab89fc64bf7a9fe648ced72436dc"
+pg@^6.4.1:
+  version "6.4.1"
+  resolved "https://registry.yarnpkg.com/pg/-/pg-6.4.1.tgz#3eabd8ca056814437c769f17ff7a0c36ac7023c5"
   dependencies:
     buffer-writer "1.0.1"
     packet-reader "0.3.1"
     pg-connection-string "0.1.3"
     pg-pool "1.*"
     pg-types "1.*"
-    pgpass "1.x"
+    pgpass "1.*"
     semver "4.3.2"
 
-pgpass@1.x:
+pgpass@1.*:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/pgpass/-/pgpass-1.0.2.tgz#2a7bb41b6065b67907e91da1b07c1847c877b306"
   dependencies:
@@ -7453,9 +7462,9 @@ react-transition-group@^1.2.0:
     prop-types "^15.5.6"
     warning "^3.0.0"
 
-react-transition-group@^2.0.2:
-  version "2.0.2"
-  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.0.2.tgz#894012704fd2d2dc57cf5e377f9d182f3c306402"
+react-transition-group@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.1.0.tgz#3a4d115e1b515da3dd0280597b3b00cbbbee996b"
   dependencies:
     chain-function "^1.0.0"
     classnames "^2.2.5"

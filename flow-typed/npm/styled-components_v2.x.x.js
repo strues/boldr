@@ -1,5 +1,5 @@
-// flow-typed signature: 3a2f61dde69e3311cdc6d0f14863a9ef
-// flow-typed version: b2ad6292df/styled-components_v2.x.x/flow_>=v0.25.x
+// flow-typed signature: 13dd8d47f3937f64fe9cd3ec4aa79e55
+// flow-typed version: d04eb04853/styled-components_v2.x.x/flow_>=v0.25.x
 
 // @flow
 
@@ -53,7 +53,7 @@ declare module 'styled-components' {
     injectGlobal: (strings: Array<string>, ...interpolations: Array<Interpolation>) => void,
     css: (strings: Array<string>, ...interpolations: Array<Interpolation>) => Array<Interpolation>,
     keyframes: (strings: Array<string>, ...interpolations: Array<Interpolation>) => string,
-    withTheme: (component: Component) => React$Component<*, ThemeProviderProps, *>,
+    withTheme: (component: Component) => ReactClass<*>,
     ServerStyleSheet: typeof Npm$StyledComponents$ServerStyleSheet,
     StyleSheetManager: typeof Npm$StyledComponents$StyleSheetManager,
     ThemeProvider: typeof Npm$StyledComponents$ThemeProvider,
@@ -207,7 +207,7 @@ declare module 'styled-components/native' {
 
   declare module.exports: {
     css: (strings: Array<string>, ...interpolations: Array<Interpolation>) => Array<Interpolation>,
-    withTheme: (component: Component) => React$Component<*, ThemeProviderProps, *>,
+    withTheme: (component: Component) => ReactClass<*>,
     keyframes: (strings: Array<string>, ...interpolations: Array<Interpolation>) => string,
     ThemeProvider: typeof Npm$StyledComponents$ThemeProvider,
 

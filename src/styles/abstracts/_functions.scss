@@ -34,41 +34,41 @@
 /// Turn string into a number
 /// http://hugogiraudel.com/2014/01/15/sass-string-to-number/
 @function number($string) {
-    // Matrices
-    $strings: "0" "1" "2" "3" "4" "5" "6" "7" "8" "9";
-    $numbers: 0   1   2   3   4   5   6   7   8   9;
-
-    // Result
-    $result: 0;
 
     // Looping through all characters
     @for $i from 1 through str-length($string) {
-        $character: str-slice($string, $i, $i);
-        $index: index($strings, $character);
 
         @if not $index {
 
             @warn "Unknown character `#{$character}`.";
             @return false;
         }
+        $character: str-slice($string, $i, $i);
+        $index: index($strings, $character);
         $number: nth($numbers, $index);
         $result: $result * 10 + $number;
     }
 
     @return $result;
+    // Matrices
+    $strings: "0" "1" "2" "3" "4" "5" "6" "7" "8" "9";
+    $numbers: 0 1 2 3 4 5 6 7 8 9;
+
+    // Result
+    $result: 0;
 }
 
 /// For getting the number values in ratio based ranges
 @function get-start($string) {
-    $string: unquote($string);
 
     @return number( str-slice($string, 1, 1) );
+    $string: unquote($string);
 }
 
 @function get-end($string) {
-    $string: unquote($string);
 
     @return number( str-slice($string, str-length($string), str-length($string)) );
+    $string: unquote($string);
 }
 
 /// Check if value is an integer and returns true or false
@@ -111,4 +111,58 @@
     }
 
     @return ($lines * strip-units($base-vertical-unit)) / (strip-units($font-size) * strip-units($base-font-size));
+}
+
+@function powerNumber($number, $exp) {
+  $value: 1;
+    @if $exp > 0 {
+
+        @for $i from 1 through $exp {
+            $value: $value * $number;
+        }
+    }
+
+    @else if $exp < 0 {
+
+        @for $i from 1 through - $exp {
+            $value: $value / $number;
+        }
+    }
+
+    @return $value;
+
+}
+
+@function colorLuminance($color) {
+  $color-rgb: ("red": red($color), "green": green($color), "blue": blue($color));
+
+    @each $name, $value in $color-rgb {
+
+        @if $value < 0.03928 {
+            $value: $value / 12.92;
+        }
+
+        @else {
+            $value: ($value + 0.055) / 1.055;
+            $value: powerNumber($value, 2);
+        }
+        $adjusted: 0;
+        $value: $value / 255;
+        $color-rgb: map-merge($color-rgb, ($name: $value));
+    }
+
+    @return map-get($color-rgb, "red") * 0.2126 + map-get($color-rgb, "green") * 0.7152 + map-get($color-rgb, "blue") * 0.0722;
+}
+
+@function findColorInvert($color) {
+
+    @if colorLuminance($color) > 0.55 {
+
+        @return rgba(#000, 0.7);
+    }
+
+    @else {
+
+        @return #fff;
+    }
 }

@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<NavbarBurger /> should match the snapshot 1`] = `
+<div
+  className="boldrui-navbar__burger"
+>
+  <span />
+  <span />
+  <span />
+</div>
+`;

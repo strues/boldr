@@ -5,6 +5,7 @@ const fs = require('fs');
 const dotenv = require('dotenv');
 const webpack = require('webpack');
 const appRoot = require('boldr-utils/lib/node/appRoot');
+const filterEmpty = require('boldr-utils/lib/objects/filterEmpty');
 const StatsPlugin = require('stats-webpack-plugin');
 const ExtractCssChunks = require('extract-css-chunks-webpack-plugin');
 const ifElse = require('boldr-utils/lib/logic/ifElse');
@@ -22,7 +23,7 @@ const WebpackDigestHash = require('./plugins/ChunkHash');
 const ChunkNames = require('./plugins/ChunkNames');
 const VerboseProgress = require('./plugins/VerboseProgress');
 
-const LOCAL_IDENT = '[local]-[hash:base62:8]';
+const LOCAL_IDENT = '[local]-[hash:base62:8b';
 const EXCLUDES = [/node_modules/, config.assetsDir, config.serverCompiledDir];
 const CACHE_HASH_TYPE = 'sha256';
 const CACHE_DIGEST_TYPE = 'base62';
@@ -130,7 +131,7 @@ module.exports = function createClientConfig(options) {
     cache: _DEV,
     // true if prod & enabled in settings
     // eslint-disable-next-line eqeqeq
-    profile: process.env.ENABLE_PROFILE == '1',
+    profile: process.env.ENABLE_PROFILE === '1',
     // Include polyfills and/or mocks for node features unavailable in browser
     // environments. These are typically necessary because package's will
     // occasionally include node only code.
@@ -154,7 +155,7 @@ module.exports = function createClientConfig(options) {
       descriptionFiles: ['package.json'],
       // We want files with the following extensions...
       extensions: ['.js', '.json', '.jsx', '.css', '.scss'],
-      alias: {
+      alias: filterEmpty({
         '@@scenes': path.resolve(config.srcDir, 'scenes'),
         '@@state': path.resolve(config.srcDir, 'state'),
         '@@admin': path.resolve(config.srcDir, 'scenes/Admin'),
@@ -162,7 +163,19 @@ module.exports = function createClientConfig(options) {
         '@@components': path.resolve(config.srcDir, 'components'),
         '@@core': path.resolve(config.srcDir, 'core'),
         '@@theme': path.resolve(config.srcDir, 'theme'),
-      },
+        'styled-components': _PROD
+          ? path.resolve(appRoot.get(), './node_modules/styled-components/package.json')
+          : null,
+        'hoist-non-react-statics': _PROD
+          ? path.resolve(appRoot.get(), './node_modules/hoist-non-react-statics/package.json')
+          : null,
+        'apollo-client': _PROD
+          ? path.resolve(appRoot.get(), './node_modules/apollo-client/package.json')
+          : null,
+        immutable: _PROD
+          ? path.resolve(appRoot.get(), './node_modules/immutable/package.json')
+          : null,
+      }),
     },
 
     module: {
@@ -311,15 +324,6 @@ module.exports = function createClientConfig(options) {
                       uglify: !_DEV,
                       browsers: ['> .5% in US', 'last 1 versions'],
                     },
-                  },
-                ],
-              ],
-              plugins: [
-                'dual-import',
-                [
-                  'babel-plugin-styled-components',
-                  {
-                    ssr: true,
                   },
                 ],
               ],

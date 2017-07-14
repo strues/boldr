@@ -1,28 +1,21 @@
 /* @flow */
 import React from 'react';
-import styled from 'styled-components';
-import Link from 'react-router-dom/Link';
-import cxN from 'classnames';
+import classNames from 'classnames';
+import { StyleClasses } from '../../theme/styleClasses';
+import { withHelpersModifiers } from '../../core/util/boldrui';
 
 export type Props = {
-  logoImg: ?string,
+  tag?: string,
+  isTransparent?: boolean,
+  className?: string,
 };
 
-const NavbarBrand = (props: Props) => {
-  return (
-    <li className="boldrui-navbar-header">
-      <Link to="/" className="boldrui-navbar-brand">
-        <img src={props.logoImg} alt="logo" height="65px" className="boldrui-navbar-logo" />
-      </Link>
-      <label
-        id="boldrui-navbar-hamburger"
-        className="boldrui-navbar-hamburger boldrui-navbar-hamburger-doublespin"
-        htmlFor="boldrui-navbar-checkbox"
-      >
-        <span />
-      </label>
-    </li>
-  );
-};
+const BASE_ELEMENT = StyleClasses.NAVBAR_BRAND;
 
-export default NavbarBrand;
+export function NavbarBrand({ tag = 'div', ...props }: Props) {
+  const className = classNames(BASE_ELEMENT, props.className);
+
+  return React.createElement(tag, { ...props, className });
+}
+
+export default withHelpersModifiers(NavbarBrand);

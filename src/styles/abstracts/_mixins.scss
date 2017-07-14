@@ -537,3 +537,317 @@ $mq-em-base: 16px !default;
         }
     }
 }
+
+@mixin arrow($color) {
+    content: " ";
+    position: absolute;
+    display: block;
+    width: 0.5em;
+    height: 0.5em;
+    border: 1px solid $color;
+    border-top: 0;
+    border-right: 0;
+    transform: rotate(-45deg);
+    pointer-events: none;
+}
+
+@mixin block {
+    &:not(:last-child) {
+        margin-bottom: 1.5rem;
+    }
+}
+
+@mixin center($width, $height: 0) {
+
+    @if $height != 0 {
+        top: calc(50% - (#{$height} / 2));
+        left: calc(50% - (#{$width} / 2));
+    }
+
+    @else {
+        top: calc(50% - (#{$width} / 2));
+        left: calc(50% - (#{$width} / 2));
+    }
+    position: absolute;
+}
+
+@mixin delete {
+
+    @include unselectable();
+    position: relative;
+    display: inline-block;
+    flex-grow: 0;
+    flex-shrink: 0;
+    width: 20px;
+    min-width: 20px;
+    max-width: 20px;
+    height: 20px;
+    min-height: 20px;
+    max-height: 20px;
+    background-color: rgba($black, 0.2);
+    border: none;
+    border-radius: 290486px;
+    outline: none;
+    font-size: $size-normal;
+    vertical-align: top;
+    cursor: pointer;
+
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: block;
+        background-color: $white;
+        transform: translateX(-50%) translateY(-50%) rotate(45deg);
+        transform-origin: center center;
+    }
+
+    &::before {
+        width: 50%;
+        height: 2px;
+    }
+
+    &::after {
+        width: 2px;
+        height: 50%;
+    }
+
+    &:hover,
+    &:focus {
+        background-color: rgba($black, 0.3);
+    }
+
+    &:active {
+        background-color: rgba($black, 0.4);
+    }
+
+    // Sizes
+    &.is-small {
+        width: 16px;
+        min-width: 16px;
+        max-width: 16px;
+        height: 16px;
+        min-height: 16px;
+        max-height: 16px;
+    }
+
+    &.is-medium {
+        width: 24px;
+        min-width: 24px;
+        max-width: 24px;
+        height: 24px;
+        min-height: 24px;
+        max-height: 24px;
+    }
+
+    &.is-large {
+        width: 32px;
+        min-width: 32px;
+        max-width: 32px;
+        height: 32px;
+        min-height: 32px;
+        max-height: 32px;
+    }
+}
+
+@mixin fa($size, $dimensions) {
+    display: inline-block;
+    width: $dimensions;
+    height: $dimensions;
+    font-size: $size;
+    line-height: $dimensions;
+    text-align: center;
+    vertical-align: top;
+}
+
+@mixin hamburger($dimensions) {
+    position: relative;
+    display: block;
+    width: $dimensions;
+    height: $dimensions;
+    cursor: pointer;
+
+    span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        display: block;
+        width: 15px;
+        height: 1px;
+        background-color: $text;
+        margin-left: -7px;
+        transition: none $speed $easing;
+        transition-property: background, left, opacity, transform;
+
+        &:nth-child(1) {
+            margin-top: -6px;
+        }
+
+        &:nth-child(2) {
+            margin-top: -1px;
+        }
+
+        &:nth-child(3) {
+            margin-top: 4px;
+        }
+    }
+
+    &:hover {
+        background-color: $background;
+    }
+
+    // Modifers
+    &.is-active {
+        span {
+            background-color: $link;
+
+            &:nth-child(1) {
+                margin-left: -5px;
+                transform: rotate(45deg);
+                transform-origin: left top;
+            }
+
+            &:nth-child(2) {
+                opacity: 0;
+            }
+
+            &:nth-child(3) {
+                margin-left: -5px;
+                transform: rotate(-45deg);
+                transform-origin: left bottom;
+            }
+        }
+    }
+}
+
+@mixin loader {
+    content: "";
+    position: relative;
+    display: block;
+    width: 1em;
+    height: 1em;
+    border: 2px solid $border;
+    border-top-color: transparent;
+    border-right-color: transparent;
+    border-radius: 290486px;
+    animation: spinAround 500ms infinite linear;
+}
+
+@mixin overflow-touch {
+    -webkit-overflow-scrolling: touch;
+}
+
+@mixin overlay($offset: 0) {
+    position: absolute;
+    top: $offset;
+    right: $offset;
+    bottom: $offset;
+    left: $offset;
+}
+
+@mixin placeholder {
+
+    @each $placeholder in $placeholders {
+        &:#{$placeholder}-placeholder {
+
+            @content;
+        }
+    }
+    $placeholders: ":-moz" ":-webkit-input" "-moz" "-ms-input";
+}
+
+@mixin unselectable {
+    user-select: none;
+}
+
+// Responsiveness
+
+@mixin from($device) {
+
+    @media screen and (min-width: $device) {
+
+        @content;
+    }
+}
+
+@mixin until($device) {
+
+    @media screen and (max-width: $device - 1px) {
+
+        @content;
+    }
+}
+
+@mixin mobile {
+
+    @media screen and (max-width: $tablet - 1px) {
+
+        @content;
+    }
+}
+
+@mixin tablet {
+
+    @media screen and (min-width: $tablet), print {
+
+        @content;
+    }
+}
+
+@mixin tablet-only {
+
+    @media screen and (min-width: $tablet) and (max-width: $desktop - 1px) {
+
+        @content;
+    }
+}
+
+@mixin touch {
+
+    @media screen and (max-width: $desktop - 1px) {
+
+        @content;
+    }
+}
+
+@mixin desktop {
+
+    @media screen and (min-width: $desktop) {
+
+        @content;
+    }
+}
+
+@mixin desktop-only {
+
+    @media screen and (min-width: $desktop) and (max-width: $widescreen - 1px) {
+
+        @content;
+    }
+}
+
+@mixin widescreen {
+
+    @media screen and (min-width: $widescreen) {
+
+        @content;
+    }
+}
+
+@mixin widescreen-only {
+
+    @media screen and (min-width: $widescreen) and (max-width: $fullhd - 1px) {
+
+        @content;
+    }
+}
+
+@mixin fullhd {
+
+    @media screen and (min-width: $fullhd) {
+
+        @content;
+    }
+}

@@ -40,8 +40,6 @@ internal/flow/defs/
 emoji=true
 module.system=node
 module.system.node.resolve_dirname=node_modules
-module.system.node.resolve_dirname=./src
-module.ignore_non_literal_requires=true
 
 log.file=./internal/flow/logs/flow.log
 
@@ -49,7 +47,8 @@ esproposal.class_static_fields=enable
 esproposal.class_instance_fields=enable
 esproposal.decorators=ignore
 esproposal.export_star_as=ignore
-
+# Set this to true and Flow will no longer complain when you use require() with something other than a string literal.
+module.ignore_non_literal_requires=true
 munge_underscores=false
 
 # This is so that we can import static files in our webpack supported components

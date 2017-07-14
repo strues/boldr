@@ -1,7 +1,6 @@
 /* @flow */
 import React from 'react';
 import styled from 'styled-components';
-import { font, palette } from 'styled-theme';
 import { theme } from '../../theme';
 
 const Dimmer = styled.div`
@@ -11,7 +10,7 @@ const Dimmer = styled.div`
   background: rgba(0,0,0, .35);
   border-radius: ${theme.borders.radius};
   opacity: 0;
-  color: ${palette('white', 0)};
+  color: #fff;
   display: flex;
   flex-direction: column;
   justify-content: center;

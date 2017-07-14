@@ -1,15 +1,16 @@
 /* @flow */
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import { compose, graphql, gql } from 'react-apollo';
-import { Route, Switch, Redirect } from 'react-router-dom';
+import { graphql } from 'react-apollo';
+import Route from 'react-router-dom/Route';
+import Redirect from 'react-router-dom/Redirect';
+import Switch from 'react-router-dom/Switch';
 import universal from 'react-universal-component';
 // internal
 import '../styles/main.scss';
 import Loader from '@boldr/ui/Loader';
 
 // Start routes
-// import Page from '../pages/Page';
 import Error404 from '../pages/Error404';
 import Navbar from '../components/Navbar';
 import boldrNotificationsFactory, { Notif } from '../components/Notifications';

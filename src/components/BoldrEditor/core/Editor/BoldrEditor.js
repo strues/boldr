@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow weak*/
 /* eslint-disable max-lines, flowtype/no-types-missing-file-annotation, react/no-array-index-key */
 import React, { Component } from 'react';
 import {

@@ -54,11 +54,10 @@ const apolloClient = createApolloClient(networkInterface);
 const history = createBrowserHistory();
 const preloadedState = window.__APOLLO_STATE__;
 const store = configureStore(apolloClient, preloadedState, history);
-const { dispatch } = store;
 
 if (token) {
   // Update application state. User has token and is probably authenticated
-  dispatch(checkAuth(token));
+  store.dispatch(checkAuth(token));
 }
 function renderApp(passedApp) {
   ReactDOM.render(

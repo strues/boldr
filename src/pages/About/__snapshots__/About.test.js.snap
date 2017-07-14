@@ -11,5 +11,14 @@ exports[`<About /> renders snapshot 1`] = `
   >
     About
   </Headline>
+  <withHelpersModifiers(Section)>
+    <withHelpersModifiers(Container)>
+      <Headline
+        type="h1"
+      >
+        About
+      </Headline>
+    </withHelpersModifiers(Container)>
+  </withHelpersModifiers(Section)>
 </div>
 `;

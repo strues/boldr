@@ -11,7 +11,7 @@ export default class FocusHandler {
     this.inputFocused = true;
   };
 
-  isEditorBlur = (event): void => {
+  isEditorBlur = (event: Event): void => {
     if (event.target.tagName === 'INPUT' && !this.editorFocused) {
       this.inputFocused = false;
       return true;

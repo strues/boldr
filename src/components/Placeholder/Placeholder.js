@@ -26,7 +26,9 @@ class Placeholder extends PureComponent {
         className={classNames(styles.base, light && styles.light)}
         style={{ width: children ? undefined : `${width || this.width}%` }}
       >
-        <View className={styles.text}>{children || '\u00A0'}</View>
+        <View className={styles.text}>
+          {children || '\u00A0'}
+        </View>
       </View>
     );
   }

@@ -18,7 +18,17 @@
 
 /// Namespace
 $boldr-ns: "boldrui-" !default;
+$text: $grey-dark !default;
+$tablet: 769px !default;
 
+// 960px container + 40px
+$desktop: 1000px !default;
+
+// 1152px container + 40
+$widescreen: 1192px !default;
+
+// 1344px container + 40
+$fullhd: 1384px !default;
 /// ==========================================================
 ///
 /// 1. Typography
@@ -180,6 +190,9 @@ $spacers:
         2: ( x: ($spacer-x * 1.5), y: ($spacer-y * 1.5)),
         3: ( x: ($spacer-x * 3), y: ($spacer-y * 3))) !default;
 
+$radius-small: 2px !default;
+$radius: 3px !default;
+$radius-large: 5px !default;
 /// ==========================================================
 ///
 /// 3. Transitions
@@ -300,6 +313,40 @@ $icon-btn-lg-close-height: 24px;
 /// 6. Navbar
 ///
 /// ==========================================================
+$background: $white-ter !default;
+
+$border: $grey-lighter !default;
+$border-hover: $grey-light !default;
+$link: $primary-color !default;
+$link-invert: $accent-color !default;
+$link-visited: $purple !default;
+
+$link-hover: $grey-darker !default;
+$link-hover-border: $grey-light !default;
+
+$link-focus: $grey-darker !default;
+$link-focus-border: $primary-color !default;
+
+$link-active: $grey-darker !default;
+$link-active-border: $grey-dark !default;
+$navbar-background: $white !default;
+$navbar-height: 4.25rem !default;
+$navbar-item: $text-color !default;
+$navbar-item-hover: $black !default;
+$navbar-item-hover-background: $background !default;
+$navbar-item-active: $black !default;
+$navbar-item-active-background: transparent !default;
+$navbar-dropdown-background: $white !default;
+$navbar-dropdown-border: $border !default;
+$navbar-dropdown-offset: -4px !default;
+$navbar-dropdown-arrow: $link !default;
+$navbar-dropdown-radius: $radius-large !default;
+$navbar-dropdown-z: 20 !default;
+$navbar-dropdown-item-hover: $black !default;
+$navbar-dropdown-item-hover-background: $background !default;
+$navbar-dropdown-item-active: $primary-color !default;
+$navbar-dropdown-item-active-background: $background !default;
+$navbar-divider-background: $border !default;
 
 /// @group navbar
 $boldrui-navbar-height: 70px !default;

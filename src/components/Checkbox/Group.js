@@ -1,7 +1,6 @@
 /* @flow */
 import React, { PureComponent } from 'react';
 import classNames from 'classnames';
-import type { ReactChildren } from '../../types/react.js.flow';
 
 function findIndex(array, predicate) {
   for (let i = 0; i < array.length; i++) {
@@ -13,7 +12,7 @@ function findIndex(array, predicate) {
   return -1;
 }
 
-type Props = {
+export type Props = {
   value: Array<Object>,
   isValueEqual: () => void,
   onChange: () => void,

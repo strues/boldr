@@ -63,6 +63,7 @@ module.exports = {
     'lodash',
     'hoist-non-react-statics',
     'prop-types',
+    'immutable',
     'react',
     'react-apollo',
     'react-dom',

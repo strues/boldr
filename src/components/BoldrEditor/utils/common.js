@@ -42,14 +42,14 @@ export function isEmptyString(str: string): boolean {
 * The function will return true for simple javascript object,
 * which is not any other built in type like Array.
 */
-export function isMap(obj) {
+export function isMap(obj: Object) {
   return Object.prototype.toString.call(obj) === '[object Object]';
 }
 
 /**
 * The function will return filter out props fron and return new props.
 */
-export function filter(obj, keys) {
+export function filter(obj: Object, keys: Array<string>) {
   const filteredKeys = Object.keys(obj).filter(key => keys.indexOf(key) < 0);
   const filteredObject = {};
   if (filteredKeys && filteredKeys.length > 0) {
@@ -60,6 +60,6 @@ export function filter(obj, keys) {
   return filteredObject;
 }
 
-export function stopPropagation(event) {
+export function stopPropagation(event: Event) {
   event.stopPropagation();
 }

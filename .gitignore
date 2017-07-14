@@ -10,3 +10,4 @@ public/uploads
 configOutput.json
 internal/seed.js
 build
+src/styles/vendor/bulma

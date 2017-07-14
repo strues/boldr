@@ -4,6 +4,7 @@ const fs = require('fs');
 const webpack = require('webpack');
 const dotenv = require('dotenv');
 const ifElse = require('boldr-utils/lib/logic/ifElse');
+const filterEmpty = require('boldr-utils/lib/objects/filterEmpty');
 const appRoot = require('boldr-utils/lib/node/appRoot');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
@@ -119,7 +120,7 @@ module.exports = function createServerConfig(options) {
       extensions: ['.js', '.json', '.jsx', '.css', '.scss'],
       modules: ['node_modules', path.resolve(appRoot.get(), './node_modules')],
       mainFields: ['module', 'jsnext:main', 'main'],
-      alias: {
+      alias: filterEmpty({
         '@@scenes': path.resolve(config.srcDir, 'scenes'),
         '@@state': path.resolve(config.srcDir, 'state'),
         '@@admin': path.resolve(config.srcDir, 'scenes/Admin'),
@@ -127,7 +128,19 @@ module.exports = function createServerConfig(options) {
         '@@components': path.resolve(config.srcDir, 'components'),
         '@@core': path.resolve(config.srcDir, 'core'),
         '@@theme': path.resolve(config.srcDir, 'theme'),
-      },
+        'styled-components': _PROD
+          ? path.resolve(appRoot.get(), './node_modules/styled-components/package.json')
+          : null,
+        'hoist-non-react-statics': _PROD
+          ? path.resolve(appRoot.get(), './node_modules/hoist-non-react-statics/package.json')
+          : null,
+        'apollo-client': _PROD
+          ? path.resolve(appRoot.get(), './node_modules/apollo-client/package.json')
+          : null,
+        immutable: _PROD
+          ? path.resolve(appRoot.get(), './node_modules/immutable/package.json')
+          : null,
+      }),
     },
     node: { console: true, __filename: true, __dirname: true },
     externals: serverExternals,
@@ -162,15 +175,6 @@ module.exports = function createServerConfig(options) {
                         node: 8,
                       },
                       exclude: ['transform-regenerator', 'transform-async-to-generator'],
-                    },
-                  ],
-                ],
-                plugins: [
-                  'dual-import',
-                  [
-                    'babel-plugin-styled-components',
-                    {
-                      ssr: true,
                     },
                   ],
                 ],

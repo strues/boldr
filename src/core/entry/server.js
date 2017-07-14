@@ -1,12 +1,12 @@
-/* @flow */
+import path from 'path';
 import React from 'react';
-import type { $Response, $Request, NextFunction } from 'express';
 import { renderToString } from 'react-dom/server';
 import serialize from 'serialize-javascript';
 import createMemoryHistory from 'history/createMemoryHistory';
 import StaticRouter from 'react-router-dom/StaticRouter';
 import { ServerStyleSheet } from 'styled-components';
 import Helmet from 'react-helmet';
+import appRoot from 'boldr-utils/lib/node/appRoot';
 import { flushModuleIds } from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
 
@@ -34,7 +34,7 @@ export default ({ clientStats, outputPath }) => {
      * @param  {object}     res Express response object
      * @return {undefined}  undefined
      */
-  return async (req: $Request, res: $Response, next: NextFunction) => {
+  return async (req, res, next) => {
     const { nonce } = res.locals;
     global.navigator = { userAgent: req.headers['user-agent'] };
 
@@ -65,14 +65,15 @@ export default ({ clientStats, outputPath }) => {
     await getDataFromTree(appComponent);
 
     const markup = renderToString(sheet.collectStyles(appComponent));
-
-    const helmet = Helmet.renderStatic();
     const moduleIds = flushModuleIds();
+    const helmet = Helmet.renderStatic();
+    console.log(outputPath);
     const { js, styles, publicPath, cssHash } = flushChunks(clientStats, {
       moduleIds,
-      before: ['bootstrap'],
+      before: ['bootstrap', 'vendor'],
       after: ['main'],
       outputPath,
+      rootDir: path.resolve(appRoot.get()),
     });
 
     const preloadedState = store.getState();

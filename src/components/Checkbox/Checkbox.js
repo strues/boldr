@@ -1,10 +1,8 @@
 /* @flow */
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import type { ReactChildren } from '../../types/react.js.flow';
 
-type Props = {
+export type Props = {
   checked: number | boolean,
   disabled: boolean,
   readOnly: boolean,
