@@ -4,11 +4,13 @@ import React, { Component } from 'react';
 import Helmet from 'react-helmet';
 import filter from 'lodash/filter';
 import Link from 'react-router-dom/Link';
+import { graphql } from 'react-apollo';
 import styled from 'styled-components';
 import ImageDisplay from '@boldr/ui/ImageDisplay';
 import { Col, Row } from '@boldr/ui/Layout';
 import Headline from '@boldr/ui/Headline';
 import FontIcon from '@boldr/ui/FontIcon';
+import DELETE_MEDIA from './deleteMedia.graphql';
 
 type Props = {
   media: Array<Object>,
@@ -38,13 +40,14 @@ const MediaSidePanel = styled.div`
   height: 100%;
   padding: 1rem;
 `;
+
 class Media extends Component {
   handleClick = m => {
     this.props.imageUpdateClick(m);
   };
   props: Props;
   render() {
-    const { media } = this.props;
+    const { media, deleteMedia } = this.props;
     return (
       <div>
         <Helmet title="Media" />
@@ -56,7 +59,7 @@ class Media extends Component {
                 {media.map(m =>
                   <MediaItem key={m.id}>
                     <ImageDisplay
-                      onRemoveImage={() => {}}
+                      onRemoveImage={deleteMedia(m.id)}
                       onUpdateImage={() => {
                         this.handleClick(m);
                       }}
@@ -73,4 +76,20 @@ class Media extends Component {
   }
 }
 
-export default Media;
+export default graphql(DELETE_MEDIA, {
+  props: ({ mutate }) => ({
+    deleteMedia(id) {
+      return () =>
+        mutate({
+          variables: { id },
+          optimisticResponse: {
+            __typename: 'Mutation',
+            deleteMedia: {
+              id,
+              __typename: 'Media',
+            },
+          },
+        });
+    },
+  }),
+})(Media);

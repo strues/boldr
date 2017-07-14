@@ -28,12 +28,12 @@ export const ArticleCard = (props: Props) => {
     const { article } = props;
     props.dispatch(selectArticle(article));
   }
-  const { title, featureImage, slug, tags, excerpt } = props.article;
+  const { title, image, slug, tags, excerpt } = props.article;
   return (
     <div className={classes}>
       <Card style={{ maxWidth: 600 }} className="md-block-centered">
         <Media>
-          <img src={featureImage} alt={`${title} feature image`} role="presentation" />
+          <img src={image} alt={`${title} feature image`} role="presentation" />
         </Media>
         <CardTitle title={title} subtitle={formattedDate} />
         <CardActions expander>

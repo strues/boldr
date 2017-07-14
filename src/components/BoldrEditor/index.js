@@ -1,5 +1,3 @@
 /* @flow */
 
-import Editor from './core';
-
-export default Editor;
+export { default } from './core';

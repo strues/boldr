@@ -1,5 +1,5 @@
-import Embedded from './Embedded';
-import getImageComponent from './Image';
+import getEmbedRender from './EmbedRender';
+import getImageRender from './ImageRender';
 
 const getBlockRenderFunc = (config, customBlockRenderer) => block => {
   if (typeof customBlockRenderer === 'function') {
@@ -13,12 +13,12 @@ const getBlockRenderFunc = (config, customBlockRenderer) => block => {
     const entity = contentState.getEntity(block.getEntityAt(0));
     if (entity && entity.type === 'IMAGE') {
       return {
-        component: getImageComponent(config),
+        component: getImageRender(config),
         editable: false,
       };
     } else if (entity && entity.type === 'EMBEDDED_LINK') {
       return {
-        component: Embedded,
+        component: getEmbedRender,
         editable: false,
       };
     }

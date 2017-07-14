@@ -1,0 +1,6 @@
+
+mutation deleteMedia($id: UUID!) {
+    deleteMedia(id: $id) {
+        id
+    }
+}

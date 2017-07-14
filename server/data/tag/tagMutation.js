@@ -1,4 +1,5 @@
 import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt, GraphQLString } from 'graphql';
+import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON } from '../scalars';
 import Tag from '../../models/Tag';
 import TagType, { TagInput } from './tagType';
 
@@ -21,7 +22,7 @@ export default {
     description: 'Edit an existing tag',
     args: {
       id: {
-        type: new GraphQLNonNull(GraphQLID),
+        type: new GraphQLNonNull(GraphQLUUID),
         description: 'The tag ID',
       },
       input: {

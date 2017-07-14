@@ -93,7 +93,7 @@ export default class NavbarMenu extends Component {
       return (
         <Item key={i}>
           <Link href={item.href}>
-            {item.name}
+            {item.title}
           </Link>
         </Item>
       );

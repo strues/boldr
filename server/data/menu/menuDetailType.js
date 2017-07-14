@@ -23,16 +23,12 @@ const MenuDetailType = new GraphQLObjectType({
   description: 'links and other menu content',
   fields: () => ({
     id: {
-      type: GraphQLID,
-      description: 'The id',
-    },
-    uuid: {
       type: GraphQLUUID,
-      description: 'The uuid',
+      description: 'The id (uuid)',
     },
-    name: {
+    title: {
       type: GraphQLString,
-      description: 'The name of the role',
+      description: 'The title text for the menu link',
     },
     safeName: {
       type: GraphQLString,
@@ -72,16 +68,12 @@ export const EditDetailInput = new GraphQLInputObjectType({
   name: 'EditDetailInput',
   fields: () => ({
     id: {
-      type: GraphQLID,
+      type: GraphQLUUID,
       description: 'The id',
     },
-    uuid: {
-      type: GraphQLUUID,
-      description: 'The uuid',
-    },
-    name: {
+    title: {
       type: GraphQLString,
-      description: 'The name of the role',
+      description: 'The title text for the menu link',
     },
     safeName: {
       type: GraphQLString,

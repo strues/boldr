@@ -48,7 +48,6 @@ export default {
         safeName: actualFileName,
         thumbName: thumbnailSaveName,
         type: args.file.type,
-        mediaType: 'image',
         url: `/uploads/media/${actualFileName}`,
         path: `${UPLOAD_DIR}/media/${actualFileName}`,
         userId: context.user.id,
@@ -71,11 +70,25 @@ export default {
     },
     async resolve(_, args, context) {
       debug(args);
-      const updatedArticle = await Media.query().patchAndFetchById(args.id, {
+      const updatedMedia = await Media.query().patchAndFetchById(args.id, {
         name: args.input.name,
         fileDescription: args.input.fileDescription,
       });
-      return updatedArticle;
+      return updatedMedia;
+    },
+  },
+  deleteMedia: {
+    type: MediaType,
+    description: 'Remove a media file from the server',
+    args: {
+      id: {
+        type: new GraphQLNonNull(GraphQLUUID),
+        description: 'The media ID',
+      },
+    },
+    async resolve(_, args, context) {
+      const removedMedia = await Media.query().deleteById(args.id);
+      return removedMedia;
     },
   },
 };

@@ -1,9 +1,9 @@
 query getMediaById($id: UUID!) {
     getMediaById(id: $id) {
-      id,
-      name,
-      thumbName,
-      fileDescription,
-      url,
+      id
+      name
+      thumbName
+      fileDescription
+      url
     }
 }

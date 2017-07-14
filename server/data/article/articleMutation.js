@@ -91,4 +91,18 @@ export default {
       return updatedArticle;
     },
   },
+  deleteArticle: {
+    type: ArticleType,
+    description: 'Remove an article from the database',
+    args: {
+      id: {
+        type: new GraphQLNonNull(GraphQLUUID),
+        description: 'The article ID',
+      },
+    },
+    async resolve(_, args, context) {
+      const removedArticle = await Article.query().deleteById(args.id);
+      return removedArticle;
+    },
+  },
 };

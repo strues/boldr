@@ -1,19 +1,18 @@
 query getArticleBySlug($slug: String!) {
   getArticleBySlug(slug: $slug) {
-    id,
-    title,
-    slug,
-    featureImage,
-    featured,
-    backgroundImage,
-    content,
-    rawContent,
-    published,
-    createdAt,
-    excerpt,
-    userId,
+    id
+    title
+    slug
+    image
+    featured
+    content
+    rawContent
+    published
+    createdAt
+    excerpt
+    userId
     tags {
-      id,
+      id
       name
     },
   }

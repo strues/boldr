@@ -1,9 +1,8 @@
 query GetDetailsQuery {
   details {
     id
-    uuid
     safeName
-    name
+    title
     cssClassname
     icon
     hasDropdown

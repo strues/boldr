@@ -4,9 +4,8 @@ query getMenuById($id: ID!) {
     name
     details {
       id
-      uuid
       safeName
-      name
+      title
       cssClassname
       icon
       hasDropdown

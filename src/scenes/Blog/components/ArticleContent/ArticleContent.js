@@ -8,7 +8,7 @@ import ArticleDate from '../ArticleDate';
 export type Props = {
   title?: string,
   content: string,
-  featureImage?: string,
+  image?: string,
   createdAt: Date,
   className?: string,
 };

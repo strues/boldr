@@ -24,7 +24,6 @@ exports[`<ArticleCard /> renders snapshot 1`] = `
       <img
         alt="Test Post feature image"
         role="presentation"
-        src="http://boldr.io/images/logo.png"
       />
     </Media>
     <CardTitle

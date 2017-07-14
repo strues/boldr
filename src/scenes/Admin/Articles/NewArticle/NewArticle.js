@@ -4,14 +4,18 @@ import Helmet from 'react-helmet';
 import NewArticleForm from './components/NewArticleForm';
 
 type Props = {
-  onFormSubmit: Function,
+  onSubmit: Function,
 };
 
 const NewArticle = (props: Props) => {
+  const handleOnSubmit = (values: Article) => {
+    props.onSubmit(values);
+  };
+
   return (
     <div>
       <Helmet title="Admin: New Post" />
-      <NewArticleForm onSubmit={props.onFormSubmit} />
+      <NewArticleForm onSubmit={handleOnSubmit} />
     </div>
   );
 };

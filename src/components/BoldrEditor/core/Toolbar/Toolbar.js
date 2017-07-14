@@ -7,10 +7,10 @@ export default class Toolbar extends Component {
   render() {
     return (
       <div
-        className={classNames('boldr-editor-toolbar', this.props.toolbarClassName)}
+        className={classNames('boldrui-editor-toolbar', this.props.toolbarClassName)}
         style={this.props.toolbarStyle}
         onMouseDown={this.props.preventDefault}
-        aria-label="boldr-editor-toolbar"
+        aria-label="boldrui-editor-toolbar"
         aria-hidden={(!this.props.editorFocused && this.props.toolbarOnFocus).toString()}
         onFocus={this.props.onToolbarFocus}
       >

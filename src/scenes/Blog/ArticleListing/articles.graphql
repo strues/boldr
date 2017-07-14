@@ -3,7 +3,7 @@ query GetArticlesQuery($offset: Int!, $limit: Int!) {
     id
     title
     slug
-    featureImage
+    image
     featured
     published
     createdAt

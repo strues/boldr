@@ -42,7 +42,7 @@ const ArticleListItem = (props: Props) => {
   return (
     <ListItem onClick={() => handleClick(article)}>
       <ListHead>
-        <Avatar src={article.featureImage} />
+        <Avatar src={article.image} />
         {article.title}
         <Menu>
           <MenuItem

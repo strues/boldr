@@ -17,12 +17,8 @@ const TagType = new GraphQLObjectType({
   description: 'A tag relates content together',
   fields: () => ({
     id: {
-      type: GraphQLID,
-      description: 'The tag id',
-    },
-    uuid: {
       type: GraphQLUUID,
-      description: 'The uuid of the tag',
+      description: 'The tag id (uuid)',
     },
     name: {
       type: new GraphQLNonNull(GraphQLString),

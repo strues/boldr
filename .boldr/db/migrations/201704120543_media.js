@@ -11,10 +11,9 @@ module.exports.up = async db => {
     table.string('thumbName', 128);
     table.integer('size');
     table.string('fileDescription').nullable();
-    table.enu('mediaType', ['image', 'video', 'audio']);
-    table.string('type');
+    table.string('type').notNullable();
     table.string('url').notNullable();
-    table.string('path');
+    table.string('path').notNullable();
     table.uuid('userId').unsigned().references('id').inTable('user');
 
     table.timestamp('createdAt').defaultTo(db.fn.now());
@@ -22,7 +21,6 @@ module.exports.up = async db => {
 
     table.index('name');
     table.index('url');
-    table.index('mediaType');
   });
   await db.schema.createTable('article_media', table => {
     table

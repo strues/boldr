@@ -51,7 +51,7 @@ const EditArticleForm = (props: Props) => {
             <FormGroup>
               <Field
                 id="featureimg"
-                name="feature_image"
+                name="image"
                 type="text"
                 helpText="URL for your image"
                 component={InputField}

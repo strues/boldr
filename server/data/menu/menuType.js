@@ -35,11 +35,7 @@ const MenuType = new GraphQLObjectType({
     },
     name: {
       type: new GraphQLNonNull(GraphQLString),
-      description: 'The name of the role',
-    },
-    safeName: {
-      type: new GraphQLNonNull(GraphQLString),
-      description: 'Lowercase, normalized, name',
+      description: 'The name of the menu',
     },
     attributes: {
       type: GraphQLString,

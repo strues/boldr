@@ -103,7 +103,7 @@ class Navbar extends Component {
             <NavbarBrand settings={settings} logoImg={this.props.logoImg} />
             {details.map(detail =>
               <NavItem
-                key={detail.uuid}
+                key={detail.id}
                 closeHeaderDropdown={this.closeDropdownOnButtonClick()}
                 mobile={this.state.isMobile}
                 {...detail}

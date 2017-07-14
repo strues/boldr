@@ -49,13 +49,9 @@ const ArticleType = new GraphQLObjectType({
       type: GraphQLBoolean,
       description: 'True if the article is published',
     },
-    featureImage: {
+    image: {
       type: GraphQLString,
       description: 'url of the article feature image',
-    },
-    backgroundImage: {
-      type: GraphQLString,
-      description: 'url of the article background image',
     },
     userId: {
       type: GraphQLUUID,

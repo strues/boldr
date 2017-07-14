@@ -12,9 +12,9 @@ export type Props = {
   hasDropdown: ?boolean,
   href: string,
   icon: ?string,
-  id: number,
+  id: string,
   mobileHref: ?string,
-  name: string,
+  title: string,
   safeName: ?string,
   uuid: ?string,
   closeHeaderDropdown: ?Function,
@@ -58,7 +58,7 @@ class NavItem extends React.Component {
       href,
       cssClassname,
       children,
-      name,
+      title,
       safeName,
       icon,
       hasDropdown,
@@ -71,7 +71,7 @@ class NavItem extends React.Component {
               {safeName}
             </NavLink>
           : <NavbarMenu
-              name={safeName}
+              name={title}
               closeDropdowns={this.closeDropdowns}
               handleDropdown={this.handleDropdown}
               mobile={this.props.mobile}

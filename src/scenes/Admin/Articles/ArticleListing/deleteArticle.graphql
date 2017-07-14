@@ -1,0 +1,6 @@
+
+mutation deleteArticle($id: UUID!) {
+    deleteArticle(id: $id) {
+        id
+    }
+}

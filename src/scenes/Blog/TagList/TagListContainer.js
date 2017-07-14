@@ -31,18 +31,17 @@ export class TagListContainer extends PureComponent {
 export default graphql(
   gql`
   query getArticlesForTag($name: String!) {
-      getArticlesForTag(name: $name,offset:0,limit:20) {
-        id,
-        title,
-        content,
-        slug,
-        featureImage,
-        backgroundImage,
-        excerpt,
-        createdAt,
-        userId,
+      getArticlesForTag(name: $name, offset:0, limit:20) {
+        id
+        title
+        content
+        slug
+        image
+        excerpt
+        createdAt
+        userId
         tags {
-          id,
+          id
           name
         }
       }

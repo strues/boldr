@@ -27,12 +27,11 @@ declare type User = {
 
 declare type Article = {
   id: string,
-  featureImage: ?string,
+  image: ?string,
   title: string,
   slug: string,
   content: string,
   rawContent: Object,
-  backgroundImage: ?string,
   excerpt: ?string,
   createdAt: string,
   updatedAt: ?string,
@@ -46,8 +45,7 @@ declare type Article = {
 };
 
 declare type Tag = {
-  id: number,
-  uuid: ?string,
+  id: string,
   name: string,
   description: ?string,
 };
@@ -112,9 +110,8 @@ declare type Menu = {
 };
 
 declare type MenuDetails = {
-  id: number,
-  uuid: string,
-  name: string,
+  id: string,
+  title: string,
   safeName: string,
   cssClassname: string,
   hasDropdown: boolean,

@@ -32,7 +32,7 @@ class Article extends Component {
     return (
       <div className={classes}>
         <Helmet title={getArticleBySlug.title} />
-        <Hero bgImg={getArticleBySlug.featureImage}>
+        <Hero bgImg={getArticleBySlug.image}>
           <ArticleTitle title={getArticleBySlug.title} />
         </Hero>
         <Grid>

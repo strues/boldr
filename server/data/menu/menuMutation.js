@@ -1,4 +1,13 @@
 import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt, GraphQLString } from 'graphql';
+import {
+  GraphQLEmail,
+  GraphQLURL,
+  GraphQLLimitedString,
+  GraphQLPassword,
+  GraphQLDateTime,
+  GraphQLUUID,
+  GraphQLJSON,
+} from '../scalars';
 import MenuDetail from '../../models/MenuDetail';
 import slugIt from '../../utils/slugIt';
 import MenuDetailType, { EditDetailInput } from './menuDetailType';
@@ -9,7 +18,7 @@ export default {
     description: 'Edit menu details',
     args: {
       id: {
-        type: new GraphQLNonNull(GraphQLID),
+        type: new GraphQLNonNull(GraphQLUUID),
         description: 'The detail ID',
       },
       input: {
@@ -20,8 +29,8 @@ export default {
     async resolve(_, args, context) {
       debug(args);
       const updatedDetail = await MenuDetail.query().patchAndFetchById(args.id, {
-        name: args.input.name,
-        safeName: slugIt(args.input.name),
+        title: args.input.title,
+        safeName: slugIt(args.input.title),
         href: args.input.href,
         mobileHref: args.input.mobileHref,
         cssClassname: args.input.cssClassname,

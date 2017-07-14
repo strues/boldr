@@ -7,6 +7,6 @@ mutation editArticle($id: UUID!, $input: EditArticleInput!) {
     featured
     published
     excerpt
-    featureImage
+    image
   }
 }

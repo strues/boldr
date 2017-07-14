@@ -1,17 +1,16 @@
 query tags($name: String!, $offset: Int!, $limit: Int!) {
   getArticlesForTag(name: $name, offset: $offset, limit: $limit) {
-    id,
-    title,
-    slug,
-    featureImage,
-    featured,
-    backgroundImage,
-    published,
-    createdAt,
-    excerpt,
-    userId,
+    id
+    title
+    slug
+    image
+    featured
+    published
+    createdAt
+    excerpt
+    userId
     tags {
-      id,
+      id
       name
     },
   }

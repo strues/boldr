@@ -11,15 +11,6 @@ import {
 } from 'graphql';
 import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON } from '../scalars';
 
-const MediaTypeType = new GraphQLEnumType({
-  name: 'MediaType',
-  values: {
-    image: { value: 'image' },
-    video: { value: 'video' },
-    audio: { value: 'audio' },
-  },
-});
-
 const MediaType = new GraphQLObjectType({
   name: 'Media',
   description: 'Uploaded images, videos or audio',
@@ -39,10 +30,6 @@ const MediaType = new GraphQLObjectType({
     thumbName: {
       type: GraphQLString,
       description: 'thumbnail filename',
-    },
-    mediaType: {
-      type: MediaTypeType,
-      description: 'Type of media can be Image, Audio, or Video',
     },
     fileDescription: {
       type: GraphQLString,
