@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LevelItem /> should match the snapshot 1`] = `
+<div
+  className="boldrui-level__item"
+>
+  My LevelItem
+</div>
+`;

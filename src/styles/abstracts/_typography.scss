@@ -18,8 +18,8 @@ body {
     padding: 0;
     color: $text-color;
     margin: 0;
-    font-weight: 400;
-    font-family: $font-serif;
+    font-weight: $font-weight-base;
+    font-family: $font-family-base;
 }
 
 h1,
@@ -37,8 +37,8 @@ h6,
     padding-top: 0;
     padding-bottom: 0;
     margin-top: 0;
-    font-weight: 600;
-    font-family: $font-sans;
+    font-weight: $headline-font-weight;
+    font-family: $headline-font-family;
 }
 
 // [1] Applies a margin bottom that is a multiple of the vertical grid in EMs.
@@ -156,7 +156,7 @@ blockquote {
     margin-top: em-rhythm(4);
     margin-bottom: em-rhythm(4);
     margin-left: 0;
-    font-family: $font-serif;
+    font-family: $font-family-serif;
 
     p {
         margin-bottom: em-rhythm(2);
@@ -173,7 +173,7 @@ blockquote {
 
 pre,
 code {
-    font-family: $font-mono;
+    font-family: $font-family-monospace;
 }
 
 time,

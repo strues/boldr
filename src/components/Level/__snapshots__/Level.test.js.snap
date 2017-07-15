@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Level should match the snapshot 1`] = `
+<nav
+  className="boldrui-level"
+>
+  My Level
+</nav>
+`;

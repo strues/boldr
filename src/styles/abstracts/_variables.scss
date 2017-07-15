@@ -18,7 +18,7 @@
 
 /// Namespace
 $boldr-ns: "boldrui-" !default;
-$text: $grey-dark !default;
+
 $tablet: 769px !default;
 
 // 960px container + 40px
@@ -29,6 +29,7 @@ $widescreen: 1192px !default;
 
 // 1344px container + 40
 $fullhd: 1384px !default;
+
 /// ==========================================================
 ///
 /// 1. Typography
@@ -40,10 +41,18 @@ $fullhd: 1384px !default;
 $font-name: "Roboto" !default;
 /// @group typography
 /// @type String
-$font-family: $font-name, "Helvetica Neue", arial, helvetica, sans-serif !default;
+$headline-font-name: "Chivo" !default;
 /// @group typography
 /// @type String
-$headline-font-name: "Chivo" !default;
+$font-family-base: $font-name, "Helvetica Neue", arial, helvetica, sans-serif !default;
+/// @group typography
+/// @type String
+$font-family-serif: georgia, "Times New Roman", serif;
+$family-sans-serif: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial", sans-serif !default;
+
+/// @group typography
+/// @type String
+$font-family-monospace: "Lucida Console", monaco, monospace;
 /// @group typography
 /// @type String
 $headline-font-family: $headline-font-name, "Helvetica Neue", arial, helvetica, sans-serif !default;
@@ -78,21 +87,52 @@ $font-weight-bold: 600 !default;
 /// @type Number
 $headline-font-weight: $font-weight-bold !default;
 /// @group typography
-/// @type Number
-$btn-font-weight: $font-weight-base !default;
-/// @group typography
 /// @type String
 $headline-font-case: none !default;
 
-$font-sans: "Roboto", helvetica, arial, sans-serif;
-$font-serif: georgia, "Times New Roman", serif;
-$font-mono: "Lucida Console", monaco, monospace;
+$render-mode: optimizeLegibility !default;
+
+$size-1: 3rem !default;
+$size-2: 2.5rem !default;
+$size-3: 2rem !default;
+$size-4: 1.5rem !default;
+$size-5: 1.25rem !default;
+$size-6: 1rem !default;
+$size-7: 0.75rem !default;
+
+$weight-light: 300 !default;
+$weight-normal: 400 !default;
+$weight-semibold: 500 !default;
+$weight-bold: 700 !default;
+
+// General colors
+$background: $white-ter !default;
+
+$border: $grey-lighter !default;
+$border-hover: $grey-light !default;
+
+// Text colors
+$text: $grey-dark !default;
+$text-invert: findColorInvert($text) !default;
+$text-light: $grey !default;
+$text-strong: $grey-darker !default;
+
+// Code colors
+$code: $red !default;
+$code-background: $background !default;
+
+$pre: $text !default;
+$pre-background: $background !default;
+
+// Typography
+$family-primary: $font-family-base !default;
+$family-code: $font-family-monospace !default;
 
 $base-vertical-unit: 6px;
 $base-line-multi: 4;
 $base-font-size: 16px;
 $ms-ratio: 1.414;
-$paragraph-indent: true;
+$paragraph-indent: false;
 $paragraph-justify: true;
 $load-typesetted: true;
 $global-init: true;
@@ -190,9 +230,25 @@ $spacers:
         2: ( x: ($spacer-x * 1.5), y: ($spacer-y * 1.5)),
         3: ( x: ($spacer-x * 3), y: ($spacer-y * 3))) !default;
 
+$size-small: $size-7 !default;
+$size-normal: $size-6 !default;
+$size-medium: $size-5 !default;
+$size-large: $size-4 !default;
+$sizes: $size-1 $size-2 $size-3 $size-4 $size-5 $size-6 !default;
+
+/// small border radius
+/// @type Number
+/// @group global
 $radius-small: 2px !default;
+/// default border radius
+/// @type Number
+/// @group global
 $radius: 3px !default;
+/// large border radius
+/// @type Number
+/// @group global
 $radius-large: 5px !default;
+
 /// ==========================================================
 ///
 /// 3. Transitions
@@ -249,6 +305,15 @@ $body-background: $cloud !default;
 $link-color: $primary-color !default;
 /// @group theme
 $link-hover-color: $carmine-pink;
+$link: $primary-color !default;
+$link-invert: $accent-color !default;
+$link-visited: $purple !default;
+$link-hover: $grey-darker !default;
+$link-hover-border: $grey-light !default;
+$link-focus: $grey-darker !default;
+$link-focus-border: $primary-color !default;
+$link-active: $grey-darker !default;
+$link-active-border: $grey-dark !default;
 /// @group theme
 $error-color: $carmine-pink !default;
 /// @group theme
@@ -268,6 +333,9 @@ $headline-font-color: $navy !default;
 ///
 /// ==========================================================
 
+/// @group typography
+/// @type Number
+$btn-font-weight: $font-weight-base !default;
 /// @group btn
 $btn-line-height: 1.25 !default;
 /// @group btn
@@ -308,6 +376,7 @@ $icon-btn-close-height: 18px;
 $icon-btn-sm-height: 30px;
 $icon-btn-lg-height: 42px;
 $icon-btn-lg-close-height: 24px;
+
 /// ==========================================================
 ///
 /// 6. Navbar
@@ -317,51 +386,43 @@ $background: $white-ter !default;
 
 $border: $grey-lighter !default;
 $border-hover: $grey-light !default;
-$link: $primary-color !default;
-$link-invert: $accent-color !default;
-$link-visited: $purple !default;
 
-$link-hover: $grey-darker !default;
-$link-hover-border: $grey-light !default;
-
-$link-focus: $grey-darker !default;
-$link-focus-border: $primary-color !default;
-
-$link-active: $grey-darker !default;
-$link-active-border: $grey-dark !default;
+/// @group navbar
 $navbar-background: $white !default;
+/// @group navbar
 $navbar-height: 4.25rem !default;
+/// @group navbar
 $navbar-item: $text-color !default;
+/// @group navbar
 $navbar-item-hover: $black !default;
+/// @group navbar
 $navbar-item-hover-background: $background !default;
+/// @group navbar
 $navbar-item-active: $black !default;
+/// @group navbar
 $navbar-item-active-background: transparent !default;
+/// @group navbar
 $navbar-dropdown-background: $white !default;
+/// @group navbar
 $navbar-dropdown-border: $border !default;
+/// @group navbar
 $navbar-dropdown-offset: -4px !default;
+/// @group navbar
 $navbar-dropdown-arrow: $link !default;
+/// @group navbar
 $navbar-dropdown-radius: $radius-large !default;
+/// @group navbar
 $navbar-dropdown-z: 20 !default;
+/// @group navbar
 $navbar-dropdown-item-hover: $black !default;
+/// @group navbar
 $navbar-dropdown-item-hover-background: $background !default;
+/// @group navbar
 $navbar-dropdown-item-active: $primary-color !default;
+/// @group navbar
 $navbar-dropdown-item-active-background: $background !default;
+/// @group navbar
 $navbar-divider-background: $border !default;
-
-/// @group navbar
-$boldrui-navbar-height: 70px !default;
-/// @group navbar
-$boldrui-navbar-breakpoint: 768px !default;
-/// @group navbar
-$boldrui-navbar-padding: 25px 24px 20px 24px !default;
-/// @group navbar
-$boldrui-navbar-transition: 0.6s ease !default;
-/// @group navbar
-$hamburger-line-height: 2px !default;
-/// @group navbar
-$hamburger-width: 26px !default;
-/// @group navbar
-$boldrui-navbar-shadow: 0 1px 3px rgba(#000, 0.12), 0 1px 2px rgba(#000, 0.24) !default;
 
 /// ==========================================================
 ///
@@ -657,7 +718,7 @@ $topbar-font-size: 0.75rem;
 /// @group topbar
 $topbar-font-weight: 600;
 /// @group topbar
-$topbar-font-family: $font-family;
+$topbar-font-family: $font-family-base;
 /// @group topbar
 $topbar-link-transform: uppercase;
 /// @group topbar
