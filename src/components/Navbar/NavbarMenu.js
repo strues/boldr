@@ -4,10 +4,10 @@ import classNames from 'classnames';
 import {
   getActiveModifiers,
   removeActiveModifiers,
-  withHelpersModifiers,
+  createWrappedComponent,
 } from '../../core/util/boldrui';
 import { StyleClasses } from '../../theme/styleClasses';
-import { getHTMLProps } from '../../core/util/helpers';
+import { getDomSafeProps } from '../../core/util/helpers';
 
 export type Props = {
   tag?: string,
@@ -23,9 +23,9 @@ export function NavbarMenu({ tag = 'div', ...props }: Props) {
     props.className,
   );
 
-  const HTMLProps = getHTMLProps(props, removeActiveModifiers);
+  const HTMLProps = getDomSafeProps(props, removeActiveModifiers);
 
   return React.createElement(tag, { ...HTMLProps, className });
 }
 
-export default withHelpersModifiers(NavbarMenu);
+export default createWrappedComponent(NavbarMenu);

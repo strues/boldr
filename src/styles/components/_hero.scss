@@ -1,6 +1,6 @@
 // Components
 
-.hero-video {
+.#{$boldr-ns}hero__video {
 
     @include overlay();
 
@@ -25,7 +25,7 @@
     }
 }
 
-.hero-buttons {
+.#{$boldr-ns}hero__buttons {
 
     // Responsiveness
   @include mobile() {
@@ -51,13 +51,13 @@
 
 // Containers
 
-.hero-head,
-.hero-foot {
+.#{$boldr-ns}hero__head,
+.#{$boldr-ns}hero__foot {
     flex-grow: 0;
     flex-shrink: 0;
 }
 
-.hero-body {
+.#{$boldr-ns}hero__body {
     flex-grow: 1;
     flex-shrink: 0;
     padding: 3rem 1.5rem;
@@ -65,7 +65,7 @@
 
 // Main container
 
-.hero {
+.#{$boldr-ns}hero {
 
     // Colors
   @each $name, $pair in $colors {
@@ -212,7 +212,7 @@
     &.is-medium {
 
         @include tablet() {
-            .hero-body {
+            .#{$boldr-ns}hero__body {
                 padding-top: 9rem;
                 padding-bottom: 9rem;
             }
@@ -222,7 +222,7 @@
     &.is-large {
 
         @include tablet() {
-            .hero-body {
+            .#{$boldr-ns}hero__body {
                 padding-top: 18rem;
                 padding-bottom: 18rem;
             }
@@ -231,11 +231,11 @@
 
     &.is-halfheight,
     &.is-fullheight {
-        .hero-body {
+        .#{$boldr-ns}hero__body {
             display: flex;
             align-items: center;
 
-            & > .container {
+            & > .#{$boldr-ns}container {
                 flex-grow: 1;
                 flex-shrink: 1;
             }

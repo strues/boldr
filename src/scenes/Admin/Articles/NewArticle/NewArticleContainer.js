@@ -4,8 +4,8 @@ import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import { convertToHTML } from 'draft-convert';
 import { createArticle } from '../../../Blog/state';
+import CREATE_ARTICLE_MUTATION from '../gql/createArticle.mutation.graphql';
 import NewArticle from './NewArticle';
-import CREATE_ARTICLE_MUTATION from './createArticle.graphql';
 
 const withMutation = graphql(CREATE_ARTICLE_MUTATION, {
   props: ({ mutate }) => ({

@@ -2,7 +2,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { StyleClasses } from '../../theme/styleClasses';
-import { withHelpersModifiers } from '../../core/util/boldrui';
+import { createWrappedComponent } from '../../core/util/boldrui';
 
 export type Props = {
   tag?: string,
@@ -22,4 +22,4 @@ export function NavbarDropdown({ tag = 'div', isBoxed, ...props }: Props) {
   return React.createElement(tag, { ...props, className });
 }
 
-export default withHelpersModifiers(NavbarDropdown);
+export default createWrappedComponent(NavbarDropdown);

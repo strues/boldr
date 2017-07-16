@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 type Props = {
   children: ReactChildren,
-  paddingTop: string,
-  paddingBottom: string,
+  paddingTop?: string,
+  paddingBottom?: string,
 };
 
 const FormGroup = (props: Props) => {

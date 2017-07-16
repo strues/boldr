@@ -12,18 +12,36 @@ const SocialList = styled.ul`
   display: inline-flex;
   justify-content: space-between;
 `;
-const SocialItem = styled.li`
-  padding-left: 0;
-`;
+const SocialItem = styled.li`padding-left: 0;`;
 
 const Social = props => {
   return (
     <SocialList>
-      {props.facebook ? <SocialItem><Facebook href={props.fburl} /></SocialItem> : null}
-      {props.twitter ? <SocialItem><Twitter href={props.turl} /></SocialItem> : null}
-      {props.github ? <SocialItem><Github href={props.ghurl} /></SocialItem> : null}
-      {props.google ? <SocialItem><Google href={props.gurl} /></SocialItem> : null}
-      {props.linkedin ? <SocialItem><LinkedIn href={props.lurl} /></SocialItem> : null}
+      {props.facebook
+        ? <SocialItem>
+            <Facebook href={props.fburl} />
+          </SocialItem>
+        : null}
+      {props.twitter
+        ? <SocialItem>
+            <Twitter href={props.turl} />
+          </SocialItem>
+        : null}
+      {props.github
+        ? <SocialItem>
+            <Github href={props.ghurl} />
+          </SocialItem>
+        : null}
+      {props.google
+        ? <SocialItem>
+            <Google href={props.gurl} />
+          </SocialItem>
+        : null}
+      {props.linkedin
+        ? <SocialItem>
+            <LinkedIn href={props.lurl} />
+          </SocialItem>
+        : null}
     </SocialList>
   );
 };

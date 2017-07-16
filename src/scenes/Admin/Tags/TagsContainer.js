@@ -4,7 +4,7 @@ import { graphql } from 'react-apollo';
 // internal
 import Loader from '@boldr/ui/Loader';
 import Tags from './Tags';
-import TAGS_QUERY from './tags.graphql';
+import TAGS_QUERY from './gql/tags.graphql';
 
 type Props = {
   data: Data,

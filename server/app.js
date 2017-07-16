@@ -7,7 +7,6 @@ import _debug from 'debug';
 import bodyParser from 'body-parser';
 import appRoot from 'boldr-utils/lib/node/appRoot';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
-import { printSchema } from 'graphql';
 import DataLoaders from './DataLoaders';
 import { expressMiddleware, authMiddleware, errorHandler, apolloUpload } from './middleware';
 import { mainRedisClient } from './services/redis';
@@ -26,10 +25,6 @@ const app: express$Application = express();
 expressMiddleware(app);
 // Session middleware, authentication check, rbac
 authMiddleware(app);
-
-app.get('/graphql/schema', (req, res) => {
-  res.type('text/plain').send(printSchema(RootSchema));
-});
 
 app.use(
   '/graphiql',

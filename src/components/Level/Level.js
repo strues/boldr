@@ -2,7 +2,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { StyleClasses } from '../../theme/styleClasses';
-import { withHelpersModifiers } from '../../core/util/boldrui';
+import { createWrappedComponent } from '../../core/util/boldrui';
 
 export type Props = {
   tag?: string,
@@ -26,4 +26,4 @@ export function Level({ tag = 'nav', ...props }: Props) {
   return React.createElement(tag, { ...HTMLProps, className });
 }
 
-export default withHelpersModifiers(Level);
+export default createWrappedComponent(Level);

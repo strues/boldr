@@ -5,8 +5,13 @@ import styled from 'styled-components';
 import Button from '@boldr/ui/Button';
 import { Col, Row } from '@boldr/ui/Layout';
 import Headline from '@boldr/ui/Headline';
-import { InputField, FormGroup } from '@boldr/ui/Form';
-
+import {
+  FormGroup,
+  Label,
+  FormField,
+  TextFormField,
+  RadioFormField,
+} from '../../../../../../components/Form';
 import EditorField from './EditorField';
 
 type Props = {
@@ -44,7 +49,7 @@ const EditArticleForm = (props: Props) => {
                 id="post-title"
                 name="title"
                 type="text"
-                component={InputField}
+                component={TextFormField}
                 label="Post Title"
               />
             </FormGroup>
@@ -53,8 +58,8 @@ const EditArticleForm = (props: Props) => {
                 id="featureimg"
                 name="image"
                 type="text"
-                helpText="URL for your image"
-                component={InputField}
+                placeholder="URL for your image"
+                component={TextFormField}
                 label="Feature Image"
               />
             </FormGroup>
@@ -68,32 +73,28 @@ const EditArticleForm = (props: Props) => {
                 name="excerpt"
                 id="post-excerpt"
                 type="text"
-                component={InputField}
+                component={TextFormField}
                 label="Excerpt"
               />
             </FormGroup>
             <FormGroup>
-              <Headline type="h4">Post Status:</Headline>
-              <label htmlFor="draft" style={{ marginRight: '10px' }}>
+              <FormField isGrouped>
+                <Label>Publishing status</Label>
                 <Field
-                  id="draft"
                   name="published"
-                  component="input"
                   type="radio"
-                  value="false"
-                />{' '}
-                Draft
-              </label>
-              <label htmlFor="published">
+                  value="draft"
+                  component={RadioFormField}
+                  label="Draft"
+                />
                 <Field
-                  id="published"
                   name="published"
-                  component="input"
                   type="radio"
-                  value="true"
-                />{' '}
-                Publish
-              </label>
+                  value="published"
+                  component={RadioFormField}
+                  label="Published"
+                />
+              </FormField>
             </FormGroup>
 
             <Button htmlType="submit" kind="primary">

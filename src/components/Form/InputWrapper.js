@@ -32,6 +32,4 @@ export default InputWrapper;
  * to override the custom theme per form. Make sure you pass
  * ui an object
  */
-const InputWrapperContainer = styled.div`
-  margin-bottom: 1rem;
-`;
+const InputWrapperContainer = styled.div`margin-bottom: 1rem;`;

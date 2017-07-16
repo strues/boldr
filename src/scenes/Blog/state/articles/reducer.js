@@ -1,7 +1,6 @@
 /* @flow */
 import { combineReducers } from 'redux';
 import * as t from '../actionTypes';
-import { getArticles } from './selectors';
 
 const all = (state = {}, action) => {
   switch (action.type) {
@@ -59,31 +58,3 @@ const articlesReducer = combineReducers({
 });
 
 export default articlesReducer;
-
-export const getPublishedArticles = (state: Object, filter: string): Function => {
-  const allPosts = getArticles(state);
-  switch (filter) {
-    case 'all':
-      return getArticles(state);
-    case 'published':
-      return allPosts.filter(p => p.published) && allPosts.filter(p => !p.featured);
-    case 'draft':
-      return allPosts.filter(p => !p.published);
-    default:
-      return getArticles(state);
-  }
-};
-
-export const getFeaturedArticles = (state: Object, filter: string): Function => {
-  const allPosts = getArticles(state);
-  switch (filter) {
-    case 'all':
-      return allPosts;
-    case 'featured':
-      return allPosts.filter(p => p.featured);
-    case 'not':
-      return allPosts.filter(p => !p.featured);
-    default:
-      throw new Error(`Unknown filter: ${filter}.`);
-  }
-};

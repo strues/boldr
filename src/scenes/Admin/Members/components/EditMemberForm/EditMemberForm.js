@@ -3,8 +3,16 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Button from '@boldr/ui/Button';
-import Select from '@boldr/ui/Select';
-import { SelectInput, Form, InputField } from '@boldr/ui/Form';
+import {
+  Form,
+  FormField,
+  Control,
+  TextFormField,
+  TextAreaFormField,
+  SelectFormField,
+  CheckboxFormField,
+  RadioFormField,
+} from '../../../../../components/Form';
 
 const style = {
   margin: 12,
@@ -35,30 +43,49 @@ const EditMemberForm = (props: Props) => {
   const { handleSubmit, reset } = props;
   return (
     <Form onSubmit={handleSubmit} className="boldr-form__generic">
-      <Field id="email" name="email" type="email" label="Email" component={InputField} />
+      <Field id="email" name="email" type="email" label="Email" component={TextFormField} />
       <Field
         id="firstName"
         name="firstName"
         type="text"
         label="First name"
-        component={InputField}
+        component={TextFormField}
       />
-      <Field id="lastName" name="lastName" type="text" label="Last name" component={InputField} />
-      <Field id="username" name="username" type="text" label="Username" component={InputField} />
+      <Field
+        id="lastName"
+        name="lastName"
+        type="text"
+        label="Last name"
+        component={TextFormField}
+      />
+      <Field id="username" name="username" type="text" label="Username" component={TextFormField} />
       <Field
         id="avatarUrl"
         name="avatarUrl"
         type="text"
         label="Avatar URL"
-        component={InputField}
+        component={TextFormField}
       />
-      <Field name="role" label="Role" component={SelectInput} options={roles} />
-      <Button htmlType="submit" style={style} kind="primary">
-        Save
-      </Button>
-      <Button onClick={reset} style={style} kind="secondary">
-        Reset
-      </Button>
+      <Field
+        id="user-role"
+        name="role"
+        type="select"
+        component={SelectFormField}
+        label="Role"
+        options={roles}
+      />
+      <FormField isGrouped>
+        <Control>
+          <Button htmlType="submit" style={style} kind="primary">
+            Save
+          </Button>
+        </Control>
+        <Control>
+          <Button onClick={reset} style={style} kind="secondary">
+            Reset
+          </Button>
+        </Control>
+      </FormField>
     </Form>
   );
 };

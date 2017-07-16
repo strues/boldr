@@ -2,7 +2,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { withHelpersModifiers } from '../../core/util/boldrui';
+import { createWrappedComponent } from '../../core/util/boldrui';
 
 export type Props = {
   tag?: string,
@@ -15,6 +15,7 @@ export function Container({ tag = 'div', ...props }: Props) {
     'boldrui-container',
     {
       'is-fluid': props.isFluid,
+      'is-flex': true,
     },
     props.className,
   );
@@ -24,4 +25,4 @@ export function Container({ tag = 'div', ...props }: Props) {
   return React.createElement(tag, { ...HTMLProps, className });
 }
 
-export default withHelpersModifiers(Container);
+export default createWrappedComponent(Container);

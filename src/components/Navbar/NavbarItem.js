@@ -6,9 +6,9 @@ import { StyleClasses } from '../../theme/styleClasses';
 import {
   getActiveModifiers,
   removeActiveModifiers,
-  withHelpersModifiers,
+  createWrappedComponent,
 } from '../../core/util/boldrui';
-import { getHTMLProps, combineModifiers } from '../../core/util/helpers';
+import { getDomSafeProps, combineModifiers } from '../../core/util/helpers';
 
 export type Props = {
   tag?: string,
@@ -32,7 +32,7 @@ export function NavbarItem({ tag = 'div', render, isHoverable, hasDropdown, ...p
     props.className,
   );
 
-  const HTMLProps = getHTMLProps(props, removeActiveModifiers);
+  const HTMLProps = getDomSafeProps(props, removeActiveModifiers);
 
   if (render) {
     return render({ ...HTMLProps, className });
@@ -47,4 +47,4 @@ export function NavbarItem({ tag = 'div', render, isHoverable, hasDropdown, ...p
   return React.createElement(tag, { ...HTMLProps, className });
 }
 
-export default withHelpersModifiers(NavbarItem);
+export default createWrappedComponent(NavbarItem);

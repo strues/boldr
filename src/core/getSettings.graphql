@@ -1,9 +1,9 @@
 query settings {
   settings {
-    id,
-    key,
-    value,
-    label,
-    description,
+    id
+    key
+    value
+    label
+    description
   }
 }

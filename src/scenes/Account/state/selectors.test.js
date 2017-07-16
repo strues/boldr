@@ -1,6 +1,6 @@
 import { selectAuth } from './selectors';
 
-test('should select the boldr state', () => {
+test('should select the auth state', () => {
   const authState = {};
   const mockedState = {
     auth: authState,

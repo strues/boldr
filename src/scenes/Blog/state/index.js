@@ -1,26 +1,6 @@
-import {
-  articlesReducer,
-  togglePostLayoutView,
-  createArticle,
-  deletePost,
-  updateArticle,
-  getArticleIds,
-  getArticlesList,
-  getArticles,
-  getPublishedArticles,
-  getFeaturedArticles,
-} from './articles';
+import { articlesReducer, togglePostLayoutView } from './articles';
 
-import {
-  tagsReducer,
-  selectTag,
-  clearTag,
-  createTag,
-  deleteTag,
-  getTagIds,
-  getTagsList,
-  getTags,
-} from './tags';
+import { tagsReducer, selectTag, clearTag } from './tags';
 
 import blogReducer from './reducer';
 
@@ -30,23 +10,10 @@ export {
   // posts
   articlesReducer,
   togglePostLayoutView,
-  createArticle,
-  deletePost,
-  updateArticle,
-  getArticleIds,
-  getArticlesList,
-  getArticles,
-  getPublishedArticles,
-  getFeaturedArticles,
   // tags
   tagsReducer,
   selectTag,
   clearTag,
-  createTag,
-  deleteTag,
-  getTagIds,
-  getTagsList,
-  getTags,
 };
 
 export default blogReducer;

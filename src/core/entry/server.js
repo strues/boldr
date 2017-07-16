@@ -13,13 +13,11 @@ import flushChunks from 'webpack-flush-chunks';
 import { ApolloProvider, getDataFromTree } from 'react-apollo';
 import { createBatchingNetworkInterface } from 'apollo-client';
 
-import createApolloClient from '../createApolloClient';
+import apolloClient from '../createApolloClient';
 import App from '../App';
 import configureStore from '../store';
 
 const isDev = process.env.NODE_ENV === 'development';
-
-const debug = require('debug')('boldr:ssrMW');
 
 /**
  * Express middleware to render HTML
@@ -38,15 +36,6 @@ export default ({ clientStats, outputPath }) => {
     const { nonce } = res.locals;
     global.navigator = { userAgent: req.headers['user-agent'] };
 
-    const networkInterface = createBatchingNetworkInterface({
-      uri: process.env.BOLDR_GRAPHQL_URL,
-      opts: {
-        credentials: 'same-origin',
-        headers: req.headers,
-      },
-      batchInterval: 10,
-    });
-    const apolloClient = createApolloClient(networkInterface);
     const history = createMemoryHistory({ initialEntries: ['/'] });
     const initialState = {};
     const store = configureStore(apolloClient, initialState, history);
@@ -55,11 +44,11 @@ export default ({ clientStats, outputPath }) => {
     const routerContext = {};
 
     const appComponent = (
-      <StaticRouter location={req.url} context={routerContext}>
-        <ApolloProvider store={store} client={apolloClient}>
+      <ApolloProvider store={store} client={apolloClient}>
+        <StaticRouter location={req.url} context={routerContext}>
           <App />
-        </ApolloProvider>
-      </StaticRouter>
+        </StaticRouter>
+      </ApolloProvider>
     );
 
     await getDataFromTree(appComponent);
@@ -67,8 +56,8 @@ export default ({ clientStats, outputPath }) => {
     const markup = renderToString(sheet.collectStyles(appComponent));
     const moduleIds = flushModuleIds();
     const helmet = Helmet.renderStatic();
-    console.log(outputPath);
-    const { js, styles, publicPath, cssHash } = flushChunks(clientStats, {
+
+    const { js, styles, publicPath, cssHash } = await flushChunks(clientStats, {
       moduleIds,
       before: ['bootstrap', 'vendor'],
       after: ['main'],
@@ -132,6 +121,7 @@ export default ({ clientStats, outputPath }) => {
                   json: true,
                 })}
               </script>
+               ${cssHash}
             </body>
           </html>`);
     }

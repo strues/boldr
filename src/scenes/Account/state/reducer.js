@@ -8,6 +8,7 @@ const INITIAL_STATE = {
   error: null,
   loading: false,
   token: null,
+  info: null,
 };
 
 /**
@@ -36,12 +37,34 @@ function authReducer(state = INITIAL_STATE, action = {}) {
         isAuthenticated: false,
       };
     case t.LOGIN_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        isAuthenticated: true,
+        token: action.token,
+        info: action.info,
+      };
     case t.CHECK_AUTH_SUCCESS:
       return {
         ...state,
         loading: false,
         isAuthenticated: true,
         token: action.token,
+        info: {
+          id: action.user.id,
+          email: action.user.email,
+          firstName: action.user.firstName,
+          lastName: action.user.lastName,
+          username: action.user.username,
+          avatarUrl: action.user.avatarUrl,
+          profileImage: action.user.profileImage,
+          location: action.user.location,
+          bio: action.user.bio,
+          website: action.user.website,
+          socialMedia: action.user.socialMedia,
+          role: action.user.roles[0].name,
+          roleId: action.user.roles[0].id,
+        },
       };
     case t.LOGOUT:
       return {

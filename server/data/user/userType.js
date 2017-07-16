@@ -12,7 +12,6 @@ import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON } f
 import User from '../../models/User';
 import ArticleType from '../article/articleType';
 import MediaType from '../media/mediaType';
-import AttachmentType from '../attachment/attachmentType';
 import RoleType from '../role/roleType';
 
 export const SocialType = new GraphQLObjectType({
@@ -210,13 +209,6 @@ const UserType = new GraphQLObjectType({
       description: 'Articles the user has written',
       resolve(user, args, ctx) {
         return User.query().findById(user.id).then(result => result.$relatedQuery('articles'));
-      },
-    },
-    files: {
-      type: new GraphQLList(AttachmentType),
-      description: 'Articles the user has written',
-      resolve(user, args, ctx) {
-        return User.query().findById(user.id).then(result => result.$relatedQuery('files'));
       },
     },
     uploads: {

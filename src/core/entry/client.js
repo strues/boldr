@@ -5,13 +5,12 @@ import ReactDOM from 'react-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
 import WebFontLoader from 'webfontloader';
-import ApolloProvider from 'react-apollo/lib/ApolloProvider';
-import { createBatchingNetworkInterface } from 'apollo-upload-client';
+import { ApolloProvider } from 'react-apollo';
 import { checkAuth } from '../../scenes/Account/state/actions';
 import { getToken } from '../authentication/token';
 import configureStore from '../store';
 import RouterConnection from '../RouterConnection';
-import createApolloClient from '../createApolloClient';
+import apolloClient from '../createApolloClient';
 import ReactHotLoader from '../util/ReactHotLoader';
 import App from '../App';
 
@@ -27,30 +26,6 @@ const MOUNT_POINT = document.getElementById('app');
 // Get token will return null if it does not exist
 const token = getToken();
 
-// Apollo network interface
-const networkInterface = createBatchingNetworkInterface({
-  uri: process.env.BOLDR_GRAPHQL_URL,
-  batchInterval: 10,
-});
-networkInterface.use([
-  {
-    applyBatchMiddleware(req, next) {
-      // If headers don't exist for some reason
-      // create them.
-      if (!req.options.headers) {
-        req.options.headers = {};
-      }
-
-      // Add our auth token to the headers
-      // Authorization: 'Bearer Token'
-      if (token) {
-        req.options.headers.authorization = `Bearer ${token}`;
-      }
-      next();
-    },
-  },
-]);
-const apolloClient = createApolloClient(networkInterface);
 const history = createBrowserHistory();
 const preloadedState = window.__APOLLO_STATE__;
 const store = configureStore(apolloClient, preloadedState, history);

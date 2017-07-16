@@ -6,7 +6,17 @@ describe('<FormCard />', () => {
   let wrapper;
 
   beforeEach(() => {
-    wrapper = shallow(<FormCard skinny title="Fcard" form={<form><input type="text" /></form>} />);
+    wrapper = shallow(
+      <FormCard
+        skinny
+        title="Fcard"
+        form={
+          <form>
+            <input type="text" />
+          </form>
+        }
+      />,
+    );
   });
 
   test('+++ <FormCard />, should render', () => {

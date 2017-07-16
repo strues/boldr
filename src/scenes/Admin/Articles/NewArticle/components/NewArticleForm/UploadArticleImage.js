@@ -26,8 +26,8 @@ const UploadArticleImage = ({ mutate, handleSetMedia }: Props) => {
 };
 
 export default graphql(gql`
-  mutation uploadMedia ($file: UploadMediaInput!) {
-    uploadMedia (file: $file) {
+  mutation uploadMedia($file: UploadMediaInput!) {
+    uploadMedia(file: $file) {
       id
       name
       type

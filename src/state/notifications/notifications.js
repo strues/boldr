@@ -62,7 +62,6 @@ export const clearNotification = () => {
   return { type: CLEAR_NOTIFICATION };
 };
 
-
 export const initialState = [];
 
 export default function notificationsReducer(state = initialState, action) {

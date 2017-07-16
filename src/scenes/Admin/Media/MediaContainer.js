@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import Loader from '@boldr/ui/Loader';
 import { replacePath } from '../../../core/RouterConnection';
 import Media from './Media';
-import MEDIA_QUERY from './getMedia.graphql';
+import MEDIA_QUERY from './gql/getMedia.graphql';
 
 type Props = {
   data: Data,

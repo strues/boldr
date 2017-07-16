@@ -3,7 +3,6 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOGIN_FAILURE,
-  CHECK_AUTH_SUCCESS,
   LOGOUT,
 } from '../../scenes/Account/state/actionTypes';
 import * as t from './actionTypes';
@@ -43,23 +42,6 @@ const INITIAL_STATE = {
 
 const me = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case CHECK_AUTH_SUCCESS:
-      return {
-        ...state,
-        id: action.user.id,
-        email: action.user.email,
-        firstName: action.user.firstName,
-        lastName: action.user.lastName,
-        username: action.user.username,
-        avatarUrl: action.user.avatarUrl,
-        profileImage: action.user.profileImage,
-        location: action.user.location,
-        bio: action.user.bio,
-        website: action.user.website,
-        socialMedia: action.user.socialMedia,
-        role: action.user.roles[0].name,
-        roleId: action.user.roles[0].id,
-      };
     case t.EDIT_PROFILE_SUCCESS:
       return {
         ...state,

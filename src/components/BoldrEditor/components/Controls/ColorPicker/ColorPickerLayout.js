@@ -82,7 +82,10 @@ class ColorPickerLayout extends Component {
               active={currentSelectedColor === color}
               onClick={this.onChange}
             >
-              <span style={{ backgroundColor: color }} className="boldrui-editor__colorpicker-cube" />
+              <span
+                style={{ backgroundColor: color }}
+                className="boldrui-editor__colorpicker-cube"
+              />
             </Option>,
           )}
         </span>

@@ -10,7 +10,8 @@ export default class Storage {
 }
 
 Storage.defaults = {
-  storage: typeof window !== 'undefined' ? window.localStorage : null, // localStorage, sessionStorage or custom conforming to storage API
+  // localStorage, sessionStorage or custom conforming to storage API
+  storage: typeof window !== 'undefined' ? window.localStorage : null,
 };
 
 Storage.create = opts => new Storage(opts);

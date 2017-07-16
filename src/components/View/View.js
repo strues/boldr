@@ -79,7 +79,8 @@ const View = ({
     inline ? 'span' : 'div',
     {
       style: generatedStyleObj,
-      className: classNames({'marginChildren': marginChildren, 'marginChildrenRight': marginChildrenRight },
+      className: classNames(
+        { marginChildren: marginChildren, marginChildrenRight: marginChildrenRight },
         className,
       ),
       ...props,

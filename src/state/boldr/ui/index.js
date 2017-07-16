@@ -1,5 +1,4 @@
 export { default } from './reducer';
-export { makeSelectUi, makeSelectMobile, layoutSelector } from './selectors';
 export {
   changeLayout,
   showModal,

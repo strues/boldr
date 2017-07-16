@@ -2,9 +2,9 @@
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import { convertToHTML } from 'draft-convert';
-import { gql, graphql } from 'react-apollo';
+import { graphql } from 'react-apollo';
+import EDIT_ARTICLE_MUTATION from '../gql/editArticle.mutation.graphql';
 import EditArticleForm from './components/EditArticleForm';
-import EDIT_ARTICLE_MUTATION from './editArticle.mutation.graphql';
 
 type Props = {
   currentArticle: Article,

@@ -1,4 +1,4 @@
-export function getHTMLProps(props, ...args) {
+export function getDomSafeProps(props, ...args) {
   return args.length > 0 ? args.reduce((rest, fn) => ({ ...fn(rest) }), props) : props;
 }
 

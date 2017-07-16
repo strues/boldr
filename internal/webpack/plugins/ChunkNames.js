@@ -1,8 +1,8 @@
+/* eslint-disable prefer-destructuring, eqeqeq */
 const path = require('path');
 const loaderUtils = require('loader-utils');
-const appRoot = require('boldr-utils/lib/node/appRoot');
 
-const CWD = appRoot.get();
+const CWD = process.cwd();
 const HASH_TYPE = 'sha256';
 const DIGEST_TYPE = 'base62';
 const DIGEST_LENGTH = 4;
@@ -11,8 +11,8 @@ const SKIP_FOLDERS = ['src', 'build', 'server', 'internal', 'public', 'coverage'
 
 function generateChunkName(request, rawRequest) {
   // Strip prefixed loader syntax from Webpack
-  const splittedRequest = request.split('!');
-  const cleanRequest = splittedRequest[splittedRequest.length - 1];
+  const splicedRequest = request.split('!');
+  const cleanRequest = splicedRequest[splicedRequest.length - 1];
 
   // Getting relative path inside working directory
   let relative = path.relative(CWD, cleanRequest);
@@ -46,18 +46,32 @@ function generateChunkName(request, rawRequest) {
   return result;
 }
 
+function getFirstModule(iterable) {
+  for (const entry of iterable) {
+    return entry;
+  }
+}
+
 module.exports = class ChunkNames {
+  constructor({ debug = false }) {
+    this.debug = debug;
+  }
   apply(compiler) {
+    const debug = this.debug;
     compiler.plugin('compilation', compilation => {
       compilation.plugin('optimize', () => {
         compilation.chunks.forEach(chunk => {
-          const { entryModule } = chunk;
-          if (entryModule) {
-            const { userRequest, rawRequest } = entryModule;
+          const firstModule = getFirstModule(chunk.modulesIterable);
+          // const { entryModule } = chunk;
+          if (firstModule) {
+            const userRequest = firstModule.userRequest;
+            const rawRequest = firstModule.rawRequest;
             const oldName = chunk.name;
-            // eslint-disable-next-line eqeqeq
             if (userRequest && oldName == null) {
               chunk.name = generateChunkName(userRequest, rawRequest);
+              if (debug) {
+                console.log('Assigned ChunkName:', chunk.name);
+              }
             }
           }
         });

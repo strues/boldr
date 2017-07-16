@@ -102,7 +102,10 @@ export default class Input extends Component {
           {...inputProps}
           onKeyDown={this.handleKeyDown}
         />
-        {addonAfter && <span className={`${prefix}-input__addon-after`}>{addonAfter}</span>}
+        {addonAfter &&
+          <span className={`${prefix}-input__addon-after`}>
+            {addonAfter}
+          </span>}
       </div>
     );
   }

@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import classNames from 'classnames';
-import { getSizeModifiers, removeSizeProps, withHelpersModifiers } from '../../core/util/boldrui';
-import { getHTMLProps, isOption } from '../../core/util/helpers';
+import { getSizeModifiers, removeSizeProps, createWrappedComponent } from '../../core/util/boldrui';
+import { getDomSafeProps, isOption } from '../../core/util/helpers';
 
 export type Props = {
   tag?: string,
@@ -19,9 +19,9 @@ export function Section({ tag = 'section', ...props }: Props) {
     props.className,
   );
 
-  const HTMLProps = getHTMLProps(props, removeSizeProps);
+  const HTMLProps = getDomSafeProps(props, removeSizeProps);
 
   return React.createElement(tag, { ...HTMLProps, className });
 }
 
-export default withHelpersModifiers(Section);
+export default createWrappedComponent(Section);

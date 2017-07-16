@@ -1,16 +1,11 @@
 /* @flow */
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { compose, gql, graphql } from 'react-apollo';
 import { Grid, Col, Row } from '@boldr/ui/Layout';
 import ResponsiveImage from '@boldr/ui/ResponsiveImage';
 import Block from '@boldr/ui/Block';
 import Headline from '@boldr/ui/Headline';
 import Loader from '@boldr/ui/Loader';
-
-// graphql
-import MEDIA_BY_ID_QUERY from '../mediaById.graphql';
-import EDIT_MEDIA_MUTATION from '../editMedia.graphql';
 // form
 import MediaForm from './components/MediaForm';
 
@@ -79,27 +74,4 @@ class MediaManager extends Component {
   }
 }
 
-const MediaManagerWithData = compose(
-  graphql(MEDIA_BY_ID_QUERY, {
-    options: props => ({
-      variables: {
-        id: props.match.params.id,
-      },
-    }),
-  }),
-  graphql(EDIT_MEDIA_MUTATION, {
-    props: ({ mutate }) => ({
-      editMediaFile: (mediaId, values) =>
-        mutate({
-          variables: {
-            id: mediaId,
-            input: {
-              name: values.name,
-              fileDescription: values.fileDescription,
-            },
-          },
-        }),
-    }),
-  }),
-)(MediaManager);
-export default MediaManagerWithData;
+export default MediaManager;

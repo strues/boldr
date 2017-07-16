@@ -10,7 +10,7 @@ import ImageDisplay from '@boldr/ui/ImageDisplay';
 import { Col, Row } from '@boldr/ui/Layout';
 import Headline from '@boldr/ui/Headline';
 import FontIcon from '@boldr/ui/FontIcon';
-import DELETE_MEDIA from './deleteMedia.graphql';
+import DELETE_MEDIA from './gql/deleteMedia.graphql';
 
 type Props = {
   media: Array<Object>,

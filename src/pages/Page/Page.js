@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Route, Switch, Redirect } from 'react-router-dom';
-import { compose, graphql, gql } from 'react-apollo';
+import { graphql } from 'react-apollo';
 import universal from 'react-universal-component';
 import Icon from '@boldr/ui/Icons/Icon';
 
@@ -99,7 +99,7 @@ const mapStateToProps = state => {
   return {
     showHeader: state.boldr.ui.showHeader,
     auth: state.auth,
-    me: state.users.me,
+    me: state.auth.info,
   };
 };
 

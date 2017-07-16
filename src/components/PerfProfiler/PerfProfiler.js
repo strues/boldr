@@ -31,7 +31,9 @@ class PerfProfiler extends React.Component {
     return (
       <div className={styles.perfProfiler}>
         <h1>Performance Profiler</h1>
-        <button onClick={this.toggle}>{started ? 'Stop' : 'Start'}</button>
+        <button onClick={this.toggle}>
+          {started ? 'Stop' : 'Start'}
+        </button>
         <button onClick={this.printWasted}>Print Wasted</button>
         <button onClick={this.printOperations}>Print Operations</button>
       </div>

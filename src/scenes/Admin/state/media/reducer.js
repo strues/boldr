@@ -1,8 +1,5 @@
 import { combineReducers } from 'redux';
-
 import * as t from './actionTypes';
-
-import { getMedia } from './selectors';
 
 const all = (state = {}, action) => {
   switch (action.type) {
@@ -66,17 +63,3 @@ const mediaReducer = combineReducers({
 });
 
 export default mediaReducer;
-
-export const getMediaType = (state: Object, filter: string): Function => {
-  const allMedia = getMedia(state);
-  switch (filter) {
-    case 'all':
-      return allMedia;
-    case 'image':
-      return allMedia.filter(m => m.type.mediaType[filter]);
-    case 'video':
-      return allMedia.filter(m => !m.type.mediaType);
-    default:
-      throw new Error(`Unknown filter: ${filter}.`);
-  }
-};

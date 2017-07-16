@@ -1,5 +1,5 @@
 import React from 'react';
-import {shallow} from 'enzyme';
+import { shallow } from 'enzyme';
 import Signup from './Signup';
 
 it('<Signup />, renders the signup form card', () => {

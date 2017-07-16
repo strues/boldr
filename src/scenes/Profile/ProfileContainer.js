@@ -77,31 +77,31 @@ const mapStateToProps = state => {
 };
 
 const PROFILE_QUERY = gql`
-query getUserByUsername($username: String!) {
+  query getUserByUsername($username: String!) {
     getUserByUsername(username: $username) {
-      id,
-      email,
-      username,
-      firstName,
-      lastName,
-      avatarUrl,
-      profileImage,
-      bio,
-      location,
-      website,
+      id
+      email
+      username
+      firstName
+      lastName
+      avatarUrl
+      profileImage
+      bio
+      location
+      website
       roles {
         name
-      },
+      }
       socialMedia {
-        facebookUrl,
-        githubUrl,
-        twitterUrl,
-        linkedinUrl,
-        googleUrl,
+        facebookUrl
+        githubUrl
+        twitterUrl
+        linkedinUrl
+        googleUrl
         stackoverflowUrl
       }
     }
-}
+  }
 `;
 const ProfileContainerWithData = graphql(PROFILE_QUERY, {
   options: props => ({

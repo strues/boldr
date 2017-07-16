@@ -1,0 +1,6 @@
+mutation addTag($input: TagInput!) {
+  addTag(input: $input) {
+    name
+    description
+  }
+}

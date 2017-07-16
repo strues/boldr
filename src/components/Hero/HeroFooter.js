@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import classNames from 'classnames';
-import { withHelpersModifiers } from '../../core/util/boldrui';
+import { createWrappedComponent } from '../../core/util/boldrui';
 
 export type Props = {
   tag?: string,
@@ -13,4 +13,4 @@ export function HeroFooter({ tag = 'footer', ...props }: Props) {
   return React.createElement(tag, { ...props, className });
 }
 
-export default withHelpersModifiers(HeroFooter);
+export default createWrappedComponent(HeroFooter);

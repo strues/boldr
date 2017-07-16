@@ -3,9 +3,8 @@ import React from 'react';
 import styled from 'styled-components';
 import { Field, reduxForm, formValueSelector, FieldArray } from 'redux-form';
 import { connect } from 'react-redux';
-import IconButton from 'material-ui/IconButton';
-import Button from '@@components/Button';
-import { InputField, FontIcon } from 'boldr-ui';
+import Button from '@boldr/ui/Button';
+import { InputField, FontIcon } from '@boldr/ui';
 
 type Props = {
   handleSubmit?: Function,
@@ -26,9 +25,7 @@ const DetailsList = styled.ul`
   padding-left: 0;
 `;
 
-const DetailsListItem = styled.li`
-  padding-left: 0;
-`;
+const DetailsListItem = styled.li`padding-left: 0;`;
 
 const renderMenuDetails = ({ fields }: Props) =>
   <DetailsList>
@@ -64,10 +61,16 @@ let NavigationForm = (props: Props) => {
       />
       <Field id="nav-link" name="href" component={InputField} type="text" label="Link" />
       <Field id="nav-icon" name="icon" component={InputField} type="text" label="Icon" />
-      <label htmlFor="menuType">What type of menu item?</label><br />
+      <label htmlFor="menuType">What type of menu item?</label>
+      <br />
       <label htmlFor="single" style={{ marginRight: '10px' }}>
-        <Field id="hasDropdown" name="hasDropdown" component="input" type="radio" value="false" />
-        {' '}
+        <Field
+          id="hasDropdown"
+          name="hasDropdown"
+          component="input"
+          type="radio"
+          value="false"
+        />{' '}
         Single Link
       </label>
       <label htmlFor="dropdown">
@@ -77,8 +80,7 @@ let NavigationForm = (props: Props) => {
           component="input"
           type="radio"
           value="true"
-        />
-        {' '}
+        />{' '}
         Dropdown Menu
       </label>
       {hasDropdownValue === 'true' &&
@@ -88,8 +90,12 @@ let NavigationForm = (props: Props) => {
         </div>}
 
       <div className="form__footer">
-        <Button htmlType="submit" style={style} kind="primary">Save</Button>
-        <Button onClick={reset} style={style} kind="secondary">Reset</Button>
+        <Button htmlType="submit" style={style} kind="primary">
+          Save
+        </Button>
+        <Button onClick={reset} style={style} kind="secondary">
+          Reset
+        </Button>
       </div>
     </form>
   );

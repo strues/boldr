@@ -15,7 +15,9 @@ export type MetaProps = {
 };
 
 const CustomForm = styled.form`
-  display: {props => props.inline ? 'inline' : 'block'};
+  display: {
+    props: 'block';
+  }
 `;
 const Form = (props: Props) => {
   const { handleSubmit } = props;

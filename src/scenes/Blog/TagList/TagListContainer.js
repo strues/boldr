@@ -30,8 +30,8 @@ export class TagListContainer extends PureComponent {
 
 export default graphql(
   gql`
-  query getArticlesForTag($name: String!) {
-      getArticlesForTag(name: $name, offset:0, limit:20) {
+    query getArticlesForTag($name: String!) {
+      getArticlesForTag(name: $name, offset: 0, limit: 20) {
         id
         title
         content
@@ -45,8 +45,8 @@ export default graphql(
           name
         }
       }
-  }
-`,
+    }
+  `,
   {
     options: props => ({
       variables: {

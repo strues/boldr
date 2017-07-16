@@ -6,7 +6,6 @@ import Helmet from 'react-helmet';
 // internal
 import Paper from '@boldr/ui/Paper';
 import { Row, Col } from '@boldr/ui/Layout';
-import { createTag, deleteTag } from '../../Blog/state';
 
 import TagList from './components/TagList';
 import AddTag from './components/AddTag';
@@ -31,7 +30,7 @@ class Tags extends Component {
   props: Props;
 
   handleTagSubmit = values => {
-    this.props.dispatch(createTag(values));
+    console.log(values);
   };
   handleAddTagClick = () => {
     this.setState({
@@ -39,7 +38,7 @@ class Tags extends Component {
     });
   };
   handleDeleteTagClick = id => {
-    this.props.dispatch(deleteTag(id));
+    console.log(id);
   };
   render() {
     return (
@@ -64,19 +63,3 @@ class Tags extends Component {
 }
 
 export default connect()(Tags);
-
-/*
-              <IconMenu
-                iconButtonElement={
-                  <IconButton touch>
-                    <NavigationExpandMoreIcon />
-                  </IconButton>
-                }
-              >
-                <MenuItem
-                  primaryText="Add tag"
-                  onTouchTap={this.handleAddTagClick}
-                />
-                <MenuItem primaryText="Tag a post" />
-              </IconMenu>
-              */

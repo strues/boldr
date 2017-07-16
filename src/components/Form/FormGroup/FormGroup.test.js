@@ -8,6 +8,10 @@ test('+++ <FormGroup />, should render', () => {
 });
 
 test('+++ <FormGroup />, should render children', () => {
-  const wrapper = shallow(<FormGroup><h2>fasfa</h2></FormGroup>);
+  const wrapper = shallow(
+    <FormGroup>
+      <h2>fasfa</h2>
+    </FormGroup>,
+  );
   expect(wrapper.find('h2').length).toBe(1);
 });

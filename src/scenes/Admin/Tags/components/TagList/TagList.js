@@ -2,7 +2,6 @@
 
 import React from 'react';
 import Link from 'react-router-dom/Link';
-import { gql, graphql } from 'react-apollo';
 import Icon from '@boldr/ui/Icons/Icon';
 import styled from 'styled-components';
 

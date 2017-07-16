@@ -98,6 +98,10 @@
     visibility: hidden;
 }
 
+@mixin unselectable {
+    user-select: none;
+}
+
 @mixin breakpoint($breakpoint, $breakpoint-size) {
     // The grid is mobile first so xs is the default, hence no breakpoint
     @if $breakpoint == xs {
@@ -748,14 +752,14 @@ $mq-em-base: 16px !default;
 }
 
 @mixin placeholder {
-
+  $placeholders: ":-moz" ":-webkit-input" "-moz" "-ms-input";
     @each $placeholder in $placeholders {
         &:#{$placeholder}-placeholder {
 
             @content;
         }
     }
-    $placeholders: ":-moz" ":-webkit-input" "-moz" "-ms-input";
+
 }
 
 @mixin unselectable {
@@ -850,4 +854,10 @@ $mq-em-base: 16px !default;
 
         @content;
     }
+}
+
+@mixin vertical-center {
+  position: absolute;
+  top: 50%;
+  transform: translate(0, -50%);
 }

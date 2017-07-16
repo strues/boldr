@@ -6,7 +6,9 @@ import { HeroHeader } from './HeroHeader';
 describe('HeroHeader', () => {
   it('should render a header with .boldrui-hero__head', () => {
     const component = shallow(<HeroHeader>Any Content</HeroHeader>);
-    expect(component.contains(<header className="boldrui-hero__head">Any Content</header>)).toBe(true);
+    expect(component.contains(<header className="boldrui-hero__head">Any Content</header>)).toBe(
+      true,
+    );
   });
 
   it('should render a div with .boldrui-hero__head', () => {

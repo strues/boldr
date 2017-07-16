@@ -50,7 +50,7 @@ export default [
         path: '/admin/articles/:slug',
         component: ArticleEditor,
         routes: [],
-      }
+      },
     ],
   },
   {
@@ -68,13 +68,13 @@ export default [
       },
     ],
   },
-    {
-        exact: true,
-        path: '/admin/navigation',
-        breadcrumb: <Icon kind="more" />,
-        component: NavigationContainer,
-        routes: [],
-    },
+  {
+    exact: true,
+    path: '/admin/navigation',
+    breadcrumb: <Icon kind="more" />,
+    component: NavigationContainer,
+    routes: [],
+  },
   {
     exact: true,
     path: '/admin/settings',

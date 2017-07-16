@@ -1,8 +1,9 @@
+// @flow
 import React from 'react';
 import classNames from 'classnames';
 
 // import { Grid } from './grid/grid';
-import { combineModifiers, getHTMLProps, isBetween, is, isOption } from './helpers';
+import { combineModifiers, getDomSafeProps, isBetween, is, isOption } from './helpers';
 
 export const isMobile = is({ mobile: true });
 export const isTablet = is({ tablet: true });
@@ -264,8 +265,11 @@ function getDisplayName(WrappedComponent) {
   return WrappedComponent.displayName || WrappedComponent.name;
 }
 
-export function withHelpersModifiers(Component) {
-  const SFC = props => {
+type Props = {
+  className?: string,
+};
+export function createWrappedComponent(Component) {
+  const Wrapped = (props: Props) => {
     const className = classNames(
       {
         ...combineModifiers(props, getHelpersModifiers, getFullWidthModifiers),
@@ -273,12 +277,12 @@ export function withHelpersModifiers(Component) {
       props.className,
     );
 
-    const rest = getHTMLProps(props, removeHelpersProps, removeFullWidthProps);
+    const rest = getDomSafeProps(props, removeHelpersProps, removeFullWidthProps);
 
     return className ? <Component {...rest} className={className} /> : <Component {...rest} />;
   };
 
-  SFC.displayName = `withHelpersModifiers(${getDisplayName(Component)})`;
+  Wrapped.displayName = `createWrappedComponent(${getDisplayName(Component)})`;
 
-  return SFC;
+  return Wrapped;
 }

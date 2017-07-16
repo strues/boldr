@@ -62,7 +62,9 @@ describe('Avatar', () => {
 
   it('can apply a random color with custom suffixes', () => {
     const avatar = TestUtils.renderIntoDocument(
-      <Avatar random suffixes={['wat-wat', 'oh-no']}>M</Avatar>,
+      <Avatar random suffixes={['wat-wat', 'oh-no']}>
+        M
+      </Avatar>,
     );
 
     const avatarNode = ReactDOM.findDOMNode(avatar);

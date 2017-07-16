@@ -19,7 +19,11 @@ describe('<Flag />', () => {
   });
 
   it('should add the passed "className" prop to the rendered node if passed.', () => {
-    const wrapper = shallow(<Flag {...requiredProps} className="test">My Contents</Flag>);
+    const wrapper = shallow(
+      <Flag {...requiredProps} className="test">
+        My Contents
+      </Flag>,
+    );
 
     expect(wrapper.is('.test')).toEqual(true);
   });
@@ -33,7 +37,11 @@ describe('<Flag />', () => {
   });
   it('should propagate props to the wrapper element.', () => {
     const handler = sinon.spy();
-    const wrapper = mount(<Flag {...requiredProps} onClick={handler}>My Contents</Flag>);
+    const wrapper = mount(
+      <Flag {...requiredProps} onClick={handler}>
+        My Contents
+      </Flag>,
+    );
 
     wrapper.simulate('click');
 

@@ -2,7 +2,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { StyleClasses } from '../../theme/styleClasses';
-import { withHelpersModifiers } from '../../core/util/boldrui';
+import { createWrappedComponent } from '../../core/util/boldrui';
 
 export type Props = {
   tag?: string,
@@ -18,4 +18,4 @@ export function NavbarBrand({ tag = 'div', ...props }: Props) {
   return React.createElement(tag, { ...props, className });
 }
 
-export default withHelpersModifiers(NavbarBrand);
+export default createWrappedComponent(NavbarBrand);

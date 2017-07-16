@@ -78,7 +78,11 @@ export default class Radio extends PureComponent {
             onChange={this.handleChange}
           />
         </span>
-        {children !== undefined ? <span>{children}</span> : null}
+        {children !== undefined
+          ? <span>
+              {children}
+            </span>
+          : null}
       </label>
     );
   }

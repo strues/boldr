@@ -1,37 +1,13 @@
 /* @flow */
 import { replacePath } from '../../../core/RouterConnection';
-import { api, API_PREFIX, setToken, removeToken } from '../../../core';
+import { API_PREFIX, setToken, removeToken } from '../../../core';
 import * as notif from '../../../core/constants';
 import { sendNotification, showNotification } from '../../../state/notifications/notifications';
+import { setUserLoggedIn } from '../../../state/users/actions';
+import LOGIN_MUTATION from '../gql/login.mutation.graphql';
+import SIGNUP_MUTATION from '../gql/signup.mutation.graphql';
+import apolloClient from '../../../core/createApolloClient';
 import * as t from './actionTypes';
-
-/**
- * @name doSignup
- * thunk action sending data to create a user to the api
- * @param  {Object} formInput contains firstName, lastName, email, password,
- *                            & username from the userSignupForm
- */
-export function doSignup(formInput: userSignupFormInput) {
-  return dispatch => {
-    dispatch({ type: t.SIGNUP_USER_REQUEST });
-    return api
-      .post(`${API_PREFIX}/auth/signup`, formInput)
-      .then(res => {
-        if (res.status !== 201) {
-          const err = JSON.stringify(res.data.message.message);
-          dispatch(signUpError(err));
-          dispatch(notificationSend(notif.MSG_SIGNUP_ERROR));
-        }
-        dispatch({ type: t.SIGNUP_USER_SUCCESS });
-        dispatch(replacePath('/'));
-        return dispatch(notificationSend(notif.MSG_SIGNUP_SUCCESS));
-      })
-      .catch(err => {
-        dispatch(sendNotification(notif.MSG_SIGNUP_ERROR));
-        return dispatch(signUpError(err));
-      });
-  };
-}
 
 export function signupUserSuccess() {
   return {
@@ -44,22 +20,139 @@ export const signupUserError = ({ error }) => ({
   error,
 });
 
+const signupUserMutation = opts =>
+  apolloClient.mutate({
+    mutation: SIGNUP_MUTATION,
+    ...opts,
+  });
+/**
+ * @name doSignup
+ * thunk action sending data to login a user
+ * @param  {String} token the JWT returned on a successful login
+ */
+export function doSignup(formInput) {
+  return dispatch => {
+    signupUserMutation({
+      variables: {
+        input: {
+          email: formInput.email,
+          password: formInput.password,
+          firstName: formInput.firstName,
+          lastName: formInput.lastName,
+          username: formInput.username,
+        },
+      },
+    })
+      .then(res => {
+        if (res.data.signupUser.errors) {
+          dispatch(
+            showNotification({
+              text: res.data.signupUser.errors[0].value,
+              type: 'error',
+            }),
+          );
+          dispatch(
+            signupUserError({
+              error: res.data.signupUser.errors,
+            }),
+          );
+        }
+        dispatch(signupUserSuccess(res.data.signupUser));
+        dispatch(
+          showNotification({
+            text: 'Account created!',
+            type: 'success',
+          }),
+        );
+        return dispatch(replacePath('/'));
+      })
+      .catch(error => {
+        dispatch(
+          signupUserError({
+            error,
+          }),
+        );
+      });
+  };
+}
+
+const loginUserMutation = opts =>
+  apolloClient.mutate({
+    mutation: LOGIN_MUTATION,
+    ...opts,
+  });
 /**
  * @name doLogin
  * thunk action sending data to login a user
  * @param  {String} token the JWT returned on a successful login
  */
+export function doLogin(formInput) {
+  return dispatch => {
+    loginUserMutation({
+      variables: {
+        input: {
+          email: formInput.email,
+          password: formInput.password,
+        },
+      },
+    })
+      .then(res => {
+        if (!res.data.loginUser.token) {
+          dispatch(
+            sendNotification({
+              message: res.data.loginUser.errors[0].value,
+              kind: 'error',
+              dismissAfter: 3000,
+            }),
+          );
+          return dispatch(
+            loginUserError({
+              error: res.data.loginUser.errors,
+            }),
+          );
+        }
+        const { loginUser } = res.data;
+        setToken(loginUser.token);
+        dispatch(loginUserSuccess(loginUser));
+        dispatch(setUserLoggedIn(loginUser));
+        dispatch(
+          showNotification({
+            text: 'Welcome back!',
+            type: 'success',
+          }),
+        );
+        return dispatch(replacePath('/'));
+      })
+      .catch(() => {
+        dispatch(
+          loginUserError({
+            error: res.data.loginUser.errors,
+          }),
+        );
+      });
+  };
+}
 
-export const doLogin = (token: string) => {
-  console.log(token);
-  setToken(token);
-  dispatch({
+export function loginUserSuccess(loginUser) {
+  return {
     type: t.LOGIN_SUCCESS,
-    token,
-  });
-  dispatch(showNotification(notif.MSG_LOGIN_SUCCESS));
-  return dispatch(replacePath('/'));
-};
+    token: loginUser.token,
+    info: {
+      firstName: loginUser.user.firstName,
+      lastName: loginUser.user.lastName,
+      email: loginUser.user.email,
+      username: loginUser.user.username,
+      avatarUrl: loginUser.user.avatarUrl,
+      role: loginUser.user.roles[0].name,
+      roleId: loginUser.user.roles[0].id,
+    },
+  };
+}
+
+export const loginUserError = ({ error }) => ({
+  type: t.LOGIN_FAILURE,
+  error,
+});
 
 /**
   * LOGOUT ACTIONS
@@ -76,35 +169,28 @@ export function logout() {
     dispatch(showNotification({ type: 'success', text: 'Logged out.' }));
   };
 }
-export const loginUserRequest = ({ username }) => ({
-  type: t.LOGIN_REQUEST,
-  username,
-});
 
-export function loginUserSuccess(loginUser) {
-  return {
-    type: t.LOGIN_SUCCESS,
-    token: loginUser.token,
-  };
-}
-
-export const loginUserError = ({ error }) => ({
-  type: t.LOGIN_FAILURE,
-  error,
-});
 /**
   * AUTH CHECK ACTIONS
   * -------------------------
   * @exports checkAuth
   *****************************************************************/
 
-export const checkAuth = token => {
+export const checkAuth = (token: string) => {
   return (dispatch: Function) => {
     dispatch({ type: t.CHECK_AUTH_REQUEST });
-    return api
-      .get(`${API_PREFIX}/auth/check`)
+    return fetch(`${API_PREFIX}/auth/check`, {
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    })
+      .then(response => {
+        return response.json();
+      })
       .then(res => {
-        const user = res.data;
+        const user = res;
         return dispatch({
           type: t.CHECK_AUTH_SUCCESS,
           user,

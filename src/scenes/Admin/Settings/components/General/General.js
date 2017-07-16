@@ -45,9 +45,8 @@ class General extends Component {
               <Headline type="h4">Site Name</Headline>
             </AccordionItemTitle>
             <AccordionItemBody>
-              <p>
-                A story you havent told.
-              </p>
+              s
+              {/* <SiteName /> */}
             </AccordionItemBody>
           </AccordionItem>
           <AccordionItem>
@@ -55,9 +54,7 @@ class General extends Component {
               <Headline type="h4">Site Description</Headline>
             </AccordionItemTitle>
             <AccordionItemBody>
-              <p>
-                A story you havent told.
-              </p>
+              <p>A story you havent told.</p>
             </AccordionItemBody>
           </AccordionItem>
           <AccordionItem>
@@ -65,9 +62,7 @@ class General extends Component {
               <Headline type="h4">Site URL</Headline>
             </AccordionItemTitle>
             <AccordionItemBody>
-              <p>
-                A story you havent told.
-              </p>
+              <p>A story you havent told.</p>
             </AccordionItemBody>
           </AccordionItem>
           <AccordionItem>
@@ -75,9 +70,7 @@ class General extends Component {
               <Headline type="h4">Logo</Headline>
             </AccordionItemTitle>
             <AccordionItemBody>
-              <p>
-                A story you havent told.
-              </p>
+              <p>A story you havent told.</p>
             </AccordionItemBody>
           </AccordionItem>
           <AccordionItem>
@@ -85,9 +78,7 @@ class General extends Component {
               <Headline type="h4">Favicon</Headline>
             </AccordionItemTitle>
             <AccordionItemBody>
-              <p>
-                A story you havent told.
-              </p>
+              <p>A story you havent told.</p>
             </AccordionItemBody>
           </AccordionItem>
         </Accordion>

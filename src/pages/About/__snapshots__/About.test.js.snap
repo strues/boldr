@@ -11,14 +11,14 @@ exports[`<About /> renders snapshot 1`] = `
   >
     About
   </Headline>
-  <withHelpersModifiers(Section)>
-    <withHelpersModifiers(Container)>
+  <createWrappedComponent(Section)>
+    <createWrappedComponent(Container)>
       <Headline
         type="h1"
       >
         About
       </Headline>
-    </withHelpersModifiers(Container)>
-  </withHelpersModifiers(Section)>
+    </createWrappedComponent(Container)>
+  </createWrappedComponent(Section)>
 </div>
 `;

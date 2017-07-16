@@ -9,8 +9,13 @@ import Paper from '@boldr/ui/Paper';
 import Paragraph from '@boldr/ui/Paragraph';
 import Headline from '@boldr/ui/Headline';
 import Block from '@boldr/ui/Block';
-import { InputField, Label, FormGroup, Form } from '@boldr/ui/Form';
-
+import Form, {
+  Label,
+  FormGroup,
+  FormField,
+  TextFormField,
+  RadioFormField,
+} from '../../../../../../components/Form';
 import { isRequired } from '../../../../../../core/util/validations';
 
 import { setMedia } from '../../../../state/media/actions';
@@ -59,7 +64,7 @@ class NewArticleForm extends Component {
                       name="title"
                       type="text"
                       placeholder="A title for the post"
-                      component={InputField}
+                      component={TextFormField}
                       label="Post title"
                       tabIndex={0}
                       validate={[isRequired]}
@@ -96,7 +101,7 @@ class NewArticleForm extends Component {
                     id="post-excerpt"
                     type="text"
                     label="Excerpt"
-                    component={InputField}
+                    component={TextFormField}
                     placeholder="Short excerpt about the article"
                     tabIndex={-3}
                     validate={[isRequired]}
@@ -104,29 +109,25 @@ class NewArticleForm extends Component {
                 </FormGroup>
                 <Block>
                   <FormGroup>
-                    <Label label="Publishing status" required />
-                    <div>
-                      <label htmlFor="published">
-                        <Field
-                          validate={[isRequired]}
-                          name="published"
-                          component="input"
-                          type="radio"
-                          value="draft"
-                        />{' '}
-                        Draft
-                      </label>{' '}
-                      <label htmlFor="published">
-                        <Field
-                          validate={[isRequired]}
-                          name="published"
-                          component="input"
-                          type="radio"
-                          value="published"
-                        />{' '}
-                        Published
-                      </label>
-                    </div>
+                    <FormField isGrouped>
+                      <Label>Publishing status</Label>
+                      <Field
+                        name="published"
+                        type="radio"
+                        value="draft"
+                        component={RadioFormField}
+                        validate={[isRequired]}
+                        label="Draft"
+                      />
+                      <Field
+                        name="published"
+                        type="radio"
+                        value="published"
+                        component={RadioFormField}
+                        validate={[isRequired]}
+                        label="Published"
+                      />
+                    </FormField>
                   </FormGroup>
 
                   <Button htmlType="submit" kind="primary">

@@ -1,10 +1,10 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { gql, graphql } from 'react-apollo';
+import { graphql } from 'react-apollo';
 import Loader from '@boldr/ui/Loader';
+import GET_ARTICLE_QUERY from '../gql/article.graphql';
 import ArticleEditor from './ArticleEditor';
-import GET_ARTICLE_QUERY from './article.graphql';
 
 export type Props = {
   dispatch: Function,
@@ -28,18 +28,11 @@ class ArticleEditorContainer extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    postImage: state.admin.attachments.postImage,
-  };
-};
-
-const ArticleEditorContainerWithData = graphql(GET_ARTICLE_QUERY, {
+// $FlowIssue
+export default graphql(GET_ARTICLE_QUERY, {
   options: props => ({
     variables: {
       slug: props.match.params.slug,
     },
   }),
 })(ArticleEditorContainer);
-// $FlowIssue
-export default connect(mapStateToProps, null)(ArticleEditorContainerWithData);

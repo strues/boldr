@@ -35,8 +35,9 @@ describe('<NotificationContainer />', () => {
   });
 
   it('maps state to props', () => {
-    expect(mountedComponent.find('NotificationContainer').props())
-      .toMatchObject(testNotificationState);
+    expect(mountedComponent.find('NotificationContainer').props()).toMatchObject(
+      testNotificationState,
+    );
   });
 
   it('maps dispatch to props', () => {

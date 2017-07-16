@@ -96,7 +96,9 @@ describe('Controlled CheckboxGroup', () => {
     it('checkbox disabled in group', () => {
       const checkboxGroup = TestUtils.renderIntoDocument(
         <CheckboxGroup value={['apple']}>
-          <Checkbox value="apple" disabled>Apple</Checkbox>
+          <Checkbox value="apple" disabled>
+            Apple
+          </Checkbox>
           <Checkbox value="banana">Banana</Checkbox>
         </CheckboxGroup>,
       );
@@ -125,7 +127,9 @@ describe('Controlled CheckboxGroup', () => {
     it('checkbox not disabled in disabled group', () => {
       const checkboxGroup = TestUtils.renderIntoDocument(
         <CheckboxGroup value={['apple']} disabled>
-          <Checkbox value="apple" disabled={false}>Apple</Checkbox>
+          <Checkbox value="apple" disabled={false}>
+            Apple
+          </Checkbox>
           <Checkbox value="banana">Banana</Checkbox>
         </CheckboxGroup>,
       );
@@ -185,7 +189,9 @@ describe('Controlled CheckboxGroup', () => {
     it('checkbox readOnly in group', () => {
       const checkboxGroup = TestUtils.renderIntoDocument(
         <CheckboxGroup value={['apple']}>
-          <Checkbox value="apple" readOnly>Apple</Checkbox>
+          <Checkbox value="apple" readOnly>
+            Apple
+          </Checkbox>
           <Checkbox value="banana">Banana</Checkbox>
         </CheckboxGroup>,
       );
@@ -214,7 +220,9 @@ describe('Controlled CheckboxGroup', () => {
     it('checkbox not readOnly in readOnly group', () => {
       const checkboxGroup = TestUtils.renderIntoDocument(
         <CheckboxGroup value={['apple']} readOnly>
-          <Checkbox value="apple" readOnly={false}>Apple</Checkbox>
+          <Checkbox value="apple" readOnly={false}>
+            Apple
+          </Checkbox>
           <Checkbox value="banana">Banana</Checkbox>
         </CheckboxGroup>,
       );

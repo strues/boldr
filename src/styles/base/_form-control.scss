@@ -1,0 +1,51 @@
+$form-control-radius: $radius !default;
+$form-control-radius-small: $radius-small !default;
+
+$form-control-padding-vertical: calc(0.375em - 1px) !default;
+$form-control-padding-horizontal: calc(0.625em - 1px) !default;
+
+@mixin control {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  align-items: center;
+  border: 1px solid transparent;
+  border-radius: $form-control-radius;
+  box-shadow: none;
+  display: inline-flex;
+  font-size: $size-normal;
+  height: 2.25em;
+  justify-content: flex-start;
+  line-height: 1.5;
+  padding-bottom: $form-control-padding-vertical;
+  padding-left: $form-control-padding-horizontal;
+  padding-right: $form-control-padding-horizontal;
+  padding-top: $form-control-padding-vertical;
+  position: relative;
+  vertical-align: top;
+
+  // States
+  &:focus,
+  &.is-focused,
+  &:active,
+  &.is-active {
+    outline: none;
+  }
+
+  &[disabled] {
+    cursor: not-allowed;
+  }
+}
+
+// The controls sizes use mixins so they can be used at different breakpoints
+@mixin control-small {
+  border-radius: $form-control-radius-small;
+  font-size: $size-small;
+}
+
+@mixin control-medium {
+  font-size: $size-medium;
+}
+
+@mixin control-large {
+  font-size: $size-large;
+}

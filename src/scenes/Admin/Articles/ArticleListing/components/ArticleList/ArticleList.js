@@ -6,6 +6,7 @@ import ArticleListItem from '../ArticleListItem';
 
 export type Props = {
   articles: Array<Article>,
+  handleClick: Function,
 };
 
 const List = styled.ul`
@@ -20,7 +21,11 @@ class ArticleList extends Component {
         <ArticleListHead />
         <List>
           {this.props.articles.map(article =>
-            <ArticleListItem key={article.id} article={article} handleClick={this.props.handleClick}/>,
+            <ArticleListItem
+              key={article.id}
+              article={article}
+              handleClick={this.props.handleClick}
+            />,
           )}
         </List>
       </div>

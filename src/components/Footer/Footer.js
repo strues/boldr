@@ -57,9 +57,7 @@ const Footer = (props: Props) => {
   return (
     <footer className={classes}>
       <FooterInner>
-
         {props.single ? renderSingle : renderCol}
-
       </FooterInner>
     </footer>
   );

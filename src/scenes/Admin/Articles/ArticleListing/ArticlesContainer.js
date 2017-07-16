@@ -5,10 +5,9 @@ import { bindActionCreators } from 'redux';
 import { gql, graphql } from 'react-apollo';
 import Loader from '@boldr/ui/Loader';
 // internal
-import { deletePost } from '../../../Blog/state';
 import { setArticle } from '../../state/dashboard/actions';
+import ARTICLES_QUERY from '../gql/articles.graphql';
 import Articles from './Articles';
-import ARTICLES_QUERY from './articles.graphql';
 
 type Data = {
   articles: Array<Article>,
@@ -24,10 +23,6 @@ export type Props = {
 
 export class ArticlesContainer extends Component {
   props: Props;
-
-  handleDeleteClick = (postId: string) => {
-    this.props.dispatch(deletePost(postId));
-  };
 
   handleClick = article => {
     this.props.dispatch(setArticle(article));

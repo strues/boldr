@@ -5,8 +5,7 @@ import { Field, reduxForm } from 'redux-form';
 import Row from '@boldr/ui/Layout/Row';
 import Col from '@boldr/ui/Layout/Col';
 import Button from '@boldr/ui/Button';
-import InputField from '@boldr/ui/Form/Fields/InputField';
-import Form from '../../../components/Form/Form';
+import Form, { TextFormField } from '../../../components/Form';
 import { isRequired, isEmail } from '../../../core/util/validations';
 
 type Props = {
@@ -25,7 +24,7 @@ const SignupForm = (props: Props) => {
             id="email"
             name="email"
             type="email"
-            component={InputField}
+            component={TextFormField}
             label="Email address"
             placeholder="admin@boldr.io"
             validate={[isRequired, isEmail]}
@@ -36,7 +35,7 @@ const SignupForm = (props: Props) => {
             id="password"
             name="password"
             type="password"
-            component={InputField}
+            component={TextFormField}
             label="Password"
             placeholder="*****"
             validate={[isRequired]}
@@ -49,7 +48,7 @@ const SignupForm = (props: Props) => {
             id="first-name"
             name="firstName"
             type="text"
-            component={InputField}
+            component={TextFormField}
             label="First name"
             placeholder="Steven"
             validate={[isRequired]}
@@ -60,7 +59,7 @@ const SignupForm = (props: Props) => {
             id="last-name"
             name="lastName"
             type="text"
-            component={InputField}
+            component={TextFormField}
             label="Last name"
             placeholder="Smith"
             validate={[isRequired]}
@@ -75,7 +74,7 @@ const SignupForm = (props: Props) => {
                 id="username"
                 name="username"
                 type="text"
-                component={InputField}
+                component={TextFormField}
                 placeholder="AwesomeUserName"
                 label="Username"
                 validate={[isRequired]}

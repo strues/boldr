@@ -58,12 +58,10 @@ export default class Group extends PureComponent {
           ...checkbox.props,
           onChange: this.onCheckboxChange,
           checked: findIndex(value, val => isValueEqual(val, checkbox.props.value)) !== -1,
-          disabled: checkbox.props.disabled !== void 0
-            ? checkbox.props.disabled
-            : this.props.disabled,
-          readOnly: checkbox.props.readOnly !== void 0
-            ? checkbox.props.readOnly
-            : this.props.readOnly,
+          disabled:
+            checkbox.props.disabled !== void 0 ? checkbox.props.disabled : this.props.disabled,
+          readOnly:
+            checkbox.props.readOnly !== void 0 ? checkbox.props.readOnly : this.props.readOnly,
         });
       }
     });
@@ -73,6 +71,10 @@ export default class Group extends PureComponent {
       [className]: !!className,
     });
 
-    return <div className={classString} style={style}>{children}</div>;
+    return (
+      <div className={classString} style={style}>
+        {children}
+      </div>
+    );
   }
 }

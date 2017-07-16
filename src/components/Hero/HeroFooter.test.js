@@ -6,7 +6,9 @@ import { HeroFooter } from './HeroFooter';
 describe('HeroFooter', () => {
   it('should render a footer with .boldrui-hero__footer', () => {
     const component = shallow(<HeroFooter>Any Content</HeroFooter>);
-    expect(component.contains(<footer className="boldrui-hero__footer">Any Content</footer>)).toBe(true);
+    expect(component.contains(<footer className="boldrui-hero__footer">Any Content</footer>)).toBe(
+      true,
+    );
   });
 
   it('should render a div with .boldrui-hero__footer', () => {
@@ -16,7 +18,9 @@ describe('HeroFooter', () => {
 
   it('should render a footer with .boldrui-hero__footer', () => {
     const component = shallow(<HeroFooter>Any Content</HeroFooter>);
-    expect(component.contains(<footer className="boldrui-hero__footer">Any Content</footer>)).toBe(true);
+    expect(component.contains(<footer className="boldrui-hero__footer">Any Content</footer>)).toBe(
+      true,
+    );
   });
 
   it('should render a footer with .boldrui-hero__footer and custom classNames', () => {

@@ -17,6 +17,7 @@ describe('Auth Reducer', () => {
       error: null,
       loading: false,
       token: null,
+      info: null,
     });
   });
   it('should handle LOGIN_REQUEST', () => {
@@ -25,12 +26,14 @@ describe('Auth Reducer', () => {
       error: null,
       loading: false,
       token: null,
+      info: null,
     };
     const stateAfter = {
       isAuthenticated: false,
       error: null,
       loading: true,
       token: null,
+      info: null,
     };
     expect(
       authReducer(initialState, {
@@ -44,12 +47,14 @@ describe('Auth Reducer', () => {
       error: null,
       loading: true,
       token: null,
+      info: null,
     };
     const stateAfter = {
       isAuthenticated: false,
       error: undefined,
       loading: false,
       token: '',
+      info: null,
     };
     expect(
       authReducer(initialState, {
@@ -63,12 +68,14 @@ describe('Auth Reducer', () => {
       error: null,
       loading: false,
       token: null,
+      info: null,
     };
     const stateAfter = {
       isAuthenticated: false,
       error: null,
       loading: true,
       token: null,
+      info: null,
     };
     expect(
       authReducer(initialState, {
@@ -82,12 +89,14 @@ describe('Auth Reducer', () => {
       error: null,
       loading: true,
       token: null,
+      info: null,
     };
     const stateAfter = {
       isAuthenticated: false,
       error: undefined,
       loading: false,
       token: '',
+      info: null,
     };
     expect(
       authReducer(initialState, {
@@ -101,12 +110,14 @@ describe('Auth Reducer', () => {
       error: null,
       loading: false,
       token: null,
+      info: null,
     };
     const stateAfter = {
       isAuthenticated: false,
       error: null,
       loading: true,
       token: null,
+      info: null,
     };
     expect(
       authReducer(initialState, {
@@ -120,12 +131,14 @@ describe('Auth Reducer', () => {
       error: null,
       loading: true,
       token: null,
+      info: null,
     };
     const stateAfter = {
       isAuthenticated: false,
       error: undefined,
       loading: false,
       token: '',
+      info: null,
     };
     expect(
       authReducer(initialState, {
@@ -139,12 +152,14 @@ describe('Auth Reducer', () => {
       error: null,
       loading: false,
       token: 'abcdcdc',
+      info: null,
     };
     const stateAfter = {
       isAuthenticated: false,
       error: null,
       loading: false,
       token: '',
+      info: null,
     };
     expect(
       authReducer(initialState, {
@@ -158,12 +173,14 @@ describe('Auth Reducer', () => {
       error: null,
       loading: true,
       token: '',
+      info: null,
     };
     const stateAfter = {
       isAuthenticated: false,
       error: null,
       loading: false,
       token: '',
+      info: null,
     };
     expect(
       authReducer(initialState, {

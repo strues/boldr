@@ -4,9 +4,9 @@ import classNames from 'classnames';
 import {
   getActiveModifiers,
   removeActiveModifiers,
-  withHelpersModifiers,
+  createWrappedComponent,
 } from '../../core/util/boldrui';
-import { getHTMLProps, combineModifiers } from '../../core/util/helpers';
+import { getDomSafeProps, combineModifiers } from '../../core/util/helpers';
 import { StyleClasses } from '../../theme/styleClasses';
 
 export type Props = {
@@ -31,9 +31,9 @@ export function NavbarLink({ tag = 'a', render, ...props }: Props) {
     return render({ ...props, className });
   }
 
-  const HTMLProps = getHTMLProps(props, removeActiveModifiers);
+  const HTMLProps = getDomSafeProps(props, removeActiveModifiers);
 
   return React.createElement(tag, { ...HTMLProps, className });
 }
 
-export default withHelpersModifiers(NavbarLink);
+export default createWrappedComponent(NavbarLink);

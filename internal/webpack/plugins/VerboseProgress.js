@@ -59,7 +59,7 @@ module.exports = class VerboseProgress {
       spinner = ora({ interval: 16 });
       spinner.start();
 
-      display(0, 'compiling');
+      display(0, 'Compiling');
 
       compilation.plugin('build-module', module => {
         lastModule = module.identifier();

@@ -1,6 +1,6 @@
 import { sendNotification } from '../../../../state/notifications/notifications';
-
-import api, { API_PREFIX } from '../../../../core/api';
+import { API_PREFIX } from '../../../../core';
+import { getToken } from '../../../../core/authentication/token';
 
 import * as notif from '../../../../core/constants';
 
@@ -20,10 +20,23 @@ export function updateMember(userData) {
     avatarUrl: userData.avatarUrl,
     role: userData.role,
   };
+  const token = getToken();
   return dispatch => {
     dispatch(beginUpdateMember());
-    return api
-      .put(`${API_PREFIX}/users/admin/${userData.id}`, data)
+    return fetch(`${API_PREFIX}/users/admin/${userData.id}`, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        data,
+      }),
+    })
+      .then(response => {
+        return response.json();
+      })
       .then(res => {
         const updatedUser = res.data;
         const normalizedUser = updatedUser;

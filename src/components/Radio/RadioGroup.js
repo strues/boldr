@@ -45,6 +45,10 @@ export default class RadioGroup extends PureComponent {
       [className]: !!className,
     });
 
-    return <div className={classString} style={style}>{children}</div>;
+    return (
+      <div className={classString} style={style}>
+        {children}
+      </div>
+    );
   }
 }

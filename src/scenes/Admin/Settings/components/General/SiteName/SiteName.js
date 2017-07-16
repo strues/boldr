@@ -1,10 +1,40 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import TextField from 'material-ui/TextField';
-import Button from '@@components/Button';
+import { Field, reduxForm } from 'redux-form';
+import Button from '@boldr/ui/Button';
+import { isEmail, isRequired } from '../../../../../../core/util/validations';
 
-import { updateBoldrSettings } from '../../../../../../state/modules/boldr/settings';
+import {
+  Checkbox,
+  Control,
+  Help,
+  Input,
+  Label,
+  Radio,
+  Select,
+  TextArea,
+  FormField,
+  FieldBody,
+  FieldLabel,
+} from '../../../../../../components/FormNew';
+import {
+  ReduxFormInput,
+  ReduxFormSelect,
+  ReduxFormCheckbox,
+  ReduxFormRadio,
+} from '../../../../../../components/FormNew/FormHelpers';
+
+const validate = values => {
+  const errors = {};
+  if (!values.siteName) {
+    errors.siteName = 'Required';
+  }
+  if (!values.f) {
+    errors.f = 'Required';
+  }
+  return errors;
+};
 
 type Props = {
   id: Number,
@@ -18,34 +48,56 @@ type Props = {
 type State = {
   value: any,
 };
+const colors = [
+  { value: 'red', text: 'Red' },
+  { value: 'orange', text: 'Orange' },
+  { value: 'yellow', text: 'Yellow' },
+];
 class SiteName extends Component {
-  state = { value: this.props.value };
-  state: State;
-
-  handleChange = event => {
-    this.setState({ value: event.target.value });
-  };
-
   handleSubmit = event => {
     const payload = {
       id: this.props.id,
       value: this.state.value,
     };
-
-    this.props.dispatch(updateBoldrSettings(payload));
+    console.log(payload);
+    // this.props.dispatch(updateBoldrSettings(payload));
     event.preventDefault();
   };
   props: Props;
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <TextField
-          style={{ width: '400px' }}
-          id="siteNameInput"
-          floatingLabelText="Website name"
-          value={this.state.value}
-          onChange={this.handleChange}
+        <Field name="siteName" type="text" component={ReduxFormInput} label="Site Name" />
+        <Field name="f" type="text" component={ReduxFormInput} label="Site Name" />
+        <Field
+          name="colrs"
+          type="select"
+          component={ReduxFormSelect}
+          label="Colors"
+          options={colors}
         />
+        <Field
+          name="employed"
+          id="employed"
+          component={ReduxFormCheckbox}
+          type="checkbox"
+          label="employed"
+        />
+        <Field
+          name="colors"
+          type="radio"
+          value="hello"
+          component={ReduxFormRadioGroup}
+          label="Colors"
+        />
+        <FormField isGrouped>
+          <Control>
+            <Button kind="primary">Submit</Button>
+          </Control>
+          <Control>
+            <Button kind="secondary">Cancel</Button>
+          </Control>
+        </FormField>
         <Button htmlType="submit" kind="primary" onClick={this.handleSubmit}>
           Save
         </Button>
@@ -54,4 +106,7 @@ class SiteName extends Component {
   }
 }
 
-export default connect()(SiteName);
+export default reduxForm({
+  form: 'siteName',
+  validate,
+})(SiteName);

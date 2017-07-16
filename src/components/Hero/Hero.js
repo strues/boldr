@@ -6,9 +6,9 @@ import {
   removeSizeProps,
   getColorModifiers,
   getSizeModifiers,
-  withHelpersModifiers,
+  createWrappedComponent,
 } from '../../core/util/boldrui';
-import { combineModifiers, getHTMLProps } from '../../core/util/helpers';
+import { combineModifiers, getDomSafeProps } from '../../core/util/helpers';
 
 export type Props = {
   tag?: string,
@@ -31,9 +31,9 @@ export function Hero({ tag = 'section', ...props }: Props) {
 
   const { isBold, isFullHeight, ...rest } = props;
 
-  const HTMLProps = getHTMLProps(rest, removeColorProps, removeSizeProps);
+  const HTMLProps = getDomSafeProps(rest, removeColorProps, removeSizeProps);
 
   return React.createElement(tag, { ...HTMLProps, className });
 }
 
-export default withHelpersModifiers(Hero);
+export default createWrappedComponent(Hero);

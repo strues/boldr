@@ -5,9 +5,9 @@ import { StyleClasses } from '../../theme/styleClasses';
 import {
   getActiveModifiers,
   removeActiveModifiers,
-  withHelpersModifiers,
+  createWrappedComponent,
 } from '../../core/util/boldrui';
-import { getHTMLProps } from '../../core/util/helpers';
+import { getDomSafeProps } from '../../core/util/helpers';
 
 export type Props = {
   tag?: string,
@@ -25,7 +25,7 @@ export function NavbarBurger({ tag = 'div', ...props }: Props) {
     props.className,
   );
 
-  const { children, ...HTMLProps } = getHTMLProps(props, removeActiveModifiers);
+  const { children, ...HTMLProps } = getDomSafeProps(props, removeActiveModifiers);
 
   return React.createElement(
     tag,
@@ -36,4 +36,4 @@ export function NavbarBurger({ tag = 'div', ...props }: Props) {
   );
 }
 
-export default withHelpersModifiers(NavbarBurger);
+export default createWrappedComponent(NavbarBurger);

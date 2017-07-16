@@ -137,12 +137,12 @@ describe('get*Modifiers functions', () => {
   });
 });
 
-describe('withHelpersModifiers', () => {
+describe('createWrappedComponent', () => {
   it('should render a Component without modification', () => {
     const Component = props => {
       return <div>Hello World</div>;
     };
-    const WithHelpersModifiersComponent = BoldrUI.withHelpersModifiers(Component);
+    const WithHelpersModifiersComponent = BoldrUI.createWrappedComponent(Component);
 
     expect(shallow(<WithHelpersModifiersComponent />).contains(<Component />)).toBe(true);
   });
@@ -151,7 +151,7 @@ describe('withHelpersModifiers', () => {
     const Component = props => {
       return <div>Hello World</div>;
     };
-    const WithHelpersModifiersComponent = BoldrUI.withHelpersModifiers(Component);
+    const WithHelpersModifiersComponent = BoldrUI.createWrappedComponent(Component);
     const renderedComponent = <WithHelpersModifiersComponent isColor="black" className="custom" />;
     expect(
       shallow(renderedComponent).contains(<Component isColor="black" className="custom" />),
@@ -162,7 +162,7 @@ describe('withHelpersModifiers', () => {
     const Component = props => {
       return <div>Hello World</div>;
     };
-    const WithHelpersModifiersComponent = BoldrUI.withHelpersModifiers(Component);
+    const WithHelpersModifiersComponent = BoldrUI.createWrappedComponent(Component);
     const renderedComponent = (
       <WithHelpersModifiersComponent isColor="black" isFullWidth className="custom" />
     );
@@ -178,7 +178,7 @@ describe('withHelpersModifiers', () => {
     const Component = props => {
       return <div>Hello World</div>;
     };
-    const WithHelpersModifiersComponent = BoldrUI.withHelpersModifiers(Component);
+    const WithHelpersModifiersComponent = BoldrUI.createWrappedComponent(Component);
     const renderedComponent = <WithHelpersModifiersComponent isDisplay="flex" className="custom" />;
     const shallowedComponent = shallow(renderedComponent);
 
@@ -191,7 +191,7 @@ describe('withHelpersModifiers', () => {
     const Component = props => {
       return <div>Hello World</div>;
     };
-    const WithHelpersModifiersComponent = BoldrUI.withHelpersModifiers(Component);
+    const WithHelpersModifiersComponent = BoldrUI.createWrappedComponent(Component);
     const renderedComponent = (
       <WithHelpersModifiersComponent
         isDisplay={{ flex: ['default', 'mobile'] }}
@@ -210,7 +210,7 @@ describe('withHelpersModifiers', () => {
     const Component = props => {
       return <div>Hello World</div>;
     };
-    const WithHelpersModifiersComponent = BoldrUI.withHelpersModifiers(Component);
+    const WithHelpersModifiersComponent = BoldrUI.createWrappedComponent(Component);
     const renderedComponent = (
       <WithHelpersModifiersComponent
         isDisplay={{ flex: 'default', block: ['default', 'tablet-only'] }}
@@ -230,7 +230,7 @@ describe('withHelpersModifiers', () => {
     const Component = props => {
       return <div>Hello World</div>;
     };
-    const WithHelpersModifiersComponent = BoldrUI.withHelpersModifiers(Component);
+    const WithHelpersModifiersComponent = BoldrUI.createWrappedComponent(Component);
     const renderedComponent = (
       <WithHelpersModifiersComponent
         isDisplay={['block-mobile', 'flex-desktop-only', 'flex']}
@@ -250,7 +250,7 @@ describe('withHelpersModifiers', () => {
     const Component = props => {
       return <div>Hello World</div>;
     };
-    const WithHelpersModifiersComponent = BoldrUI.withHelpersModifiers(Component);
+    const WithHelpersModifiersComponent = BoldrUI.createWrappedComponent(Component);
     const renderedComponent = (
       <WithHelpersModifiersComponent
         isDisplay={{ flex: 'mobile', lol: false }}
@@ -268,7 +268,7 @@ describe('withHelpersModifiers', () => {
     const Component = props => {
       return <div>Hello World</div>;
     };
-    const WithHelpersModifiersComponent = BoldrUI.withHelpersModifiers(Component);
+    const WithHelpersModifiersComponent = BoldrUI.createWrappedComponent(Component);
     const renderedComponent = <WithHelpersModifiersComponent isHidden className="custom" />;
     const shallowedComponent = shallow(renderedComponent);
 
@@ -281,7 +281,7 @@ describe('withHelpersModifiers', () => {
     const Component = props => {
       return <div>Hello World</div>;
     };
-    const WithHelpersModifiersComponent = BoldrUI.withHelpersModifiers(Component);
+    const WithHelpersModifiersComponent = BoldrUI.createWrappedComponent(Component);
     const renderedComponent = (
       <WithHelpersModifiersComponent isHidden={['desktop-only', 'touch']} className="custom" />
     );
@@ -297,7 +297,7 @@ describe('withHelpersModifiers', () => {
     const Component = props => {
       return <div>Hello World</div>;
     };
-    const WithHelpersModifiersComponent = BoldrUI.withHelpersModifiers(Component);
+    const WithHelpersModifiersComponent = BoldrUI.createWrappedComponent(Component);
     const renderedComponent = (
       <WithHelpersModifiersComponent isHidden={['desktop-only', 'lol']} className="custom" />
     );
@@ -312,7 +312,7 @@ describe('withHelpersModifiers', () => {
     const Component = props => {
       return <div>Hello World</div>;
     };
-    const WithHelpersModifiersComponent = BoldrUI.withHelpersModifiers(Component);
+    const WithHelpersModifiersComponent = BoldrUI.createWrappedComponent(Component);
     const renderedComponent = (
       <WithHelpersModifiersComponent isHidden="mobile" className="custom" />
     );
@@ -327,7 +327,7 @@ describe('withHelpersModifiers', () => {
     const Component = props => {
       return <div>Hello World</div>;
     };
-    const WithHelpersModifiersComponent = BoldrUI.withHelpersModifiers(Component);
+    const WithHelpersModifiersComponent = BoldrUI.createWrappedComponent(Component);
     const renderedComponent = <WithHelpersModifiersComponent isHidden="lol" className="custom" />;
     const shallowedComponent = shallow(renderedComponent);
 
@@ -339,7 +339,7 @@ describe('withHelpersModifiers', () => {
     const Component = props => {
       return <div>Hello World</div>;
     };
-    const WithHelpersModifiersComponent = BoldrUI.withHelpersModifiers(Component);
+    const WithHelpersModifiersComponent = BoldrUI.createWrappedComponent(Component);
     const renderedComponent = <WithHelpersModifiersComponent isHidden={false} className="custom" />;
     const shallowedComponent = shallow(renderedComponent);
 
@@ -351,7 +351,7 @@ describe('withHelpersModifiers', () => {
     const Component = props => {
       return <div>Hello World</div>;
     };
-    const WithHelpersModifiersComponent = BoldrUI.withHelpersModifiers(Component);
+    const WithHelpersModifiersComponent = BoldrUI.createWrappedComponent(Component);
     const renderedComponent = <WithHelpersModifiersComponent isDisplay="none" className="custom" />;
     const shallowedComponent = shallow(renderedComponent);
 
@@ -363,7 +363,7 @@ describe('withHelpersModifiers', () => {
     const Component = props => {
       return <div>Hello World</div>;
     };
-    const WithHelpersModifiersComponent = BoldrUI.withHelpersModifiers(Component);
+    const WithHelpersModifiersComponent = BoldrUI.createWrappedComponent(Component);
     const renderedComponent = <WithHelpersModifiersComponent isDisplay={1} className="custom" />;
     const shallowedComponent = shallow(renderedComponent);
 
@@ -375,7 +375,7 @@ describe('withHelpersModifiers', () => {
     const Component = props => {
       return <div>Hello World</div>;
     };
-    const WithHelpersModifiersComponent = BoldrUI.withHelpersModifiers(Component);
+    const WithHelpersModifiersComponent = BoldrUI.createWrappedComponent(Component);
 
     expect(
       shallow(<WithHelpersModifiersComponent hasTextAlign="left" className="custom" />).hasClass(
@@ -404,7 +404,7 @@ describe('withHelpersModifiers', () => {
     const Component = props => {
       return <div>Hello World</div>;
     };
-    const WithHelpersModifiersComponent = BoldrUI.withHelpersModifiers(Component);
+    const WithHelpersModifiersComponent = BoldrUI.createWrappedComponent(Component);
 
     expect(
       shallow(<WithHelpersModifiersComponent hasTextColor="white" className="custom" />).hasClass(

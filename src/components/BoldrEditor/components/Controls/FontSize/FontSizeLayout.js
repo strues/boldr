@@ -58,7 +58,11 @@ export default class FontSizeLayout extends Component {
           onExpandEvent={onExpandEvent}
           title={title}
         >
-          {currentFontSize ? <span>{currentFontSize}</span> : <img src={icon} alt="" />}
+          {currentFontSize
+            ? <span>
+                {currentFontSize}
+              </span>
+            : <img src={icon} alt="" />}
           {options.map((size, index) =>
             <DropdownOption
               className="boldrui-editor__fontsize-option"

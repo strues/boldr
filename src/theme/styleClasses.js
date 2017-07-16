@@ -2,6 +2,7 @@ export const BOLDR_NS = 'boldrui-';
 
 export const StyleClasses = {
   APP: 'boldrui-app',
+  ALERT: 'boldrui-alert',
   BREADCRUMB: 'boldrui-breadcrumb',
   BREADCRUMB_ITEM: 'boldrui-breadcrumb__item',
   CARD: 'boldrui-card',
@@ -40,6 +41,16 @@ export const StyleClasses = {
   LEVEL_ITEM: 'boldrui-level__item',
   LEVEL_LEFT: 'boldrui-level__left',
   LEVEL_RIGHT: 'boldrui-level__right',
+  // form
+  INPUT: 'boldrui-form__input',
+  TEXTAREA: 'boldrui-form__textarea',
+  RADIO: 'boldrui-form__radio',
+  SELECT: 'boldrui-form__select',
+  FORM_HELP: 'boldrui-form__help',
+  CHECKBOX: 'boldrui-form__checkbox',
+  FORM_FIELD: 'boldrui-form__field',
+  FORM_LABEL: 'boldrui-form__label',
+  FORM_CONTROL: 'boldrui-form__control',
   PROFILE: 'boldrui-profile',
   SIDEBAR: 'boldrui-sidebar',
   SIDEBAR_NAV: 'boldrui-sidebar-nav',

@@ -1,4 +1,4 @@
-.level-item {
+.#{$boldr-ns}level__item {
   align-items: center;
   display: flex;
   flex-basis: auto;
@@ -19,13 +19,13 @@
   }
 }
 
-.level-left,
-.level-right {
+.#{$boldr-ns}level__left,
+.#{$boldr-ns}level-right {
   flex-basis: auto;
   flex-grow: 0;
   flex-shrink: 0;
 
-  .level-item {
+  .#{$boldr-ns}level__item {
     &:not(:last-child) {
       margin-right: 0.75rem;
     }
@@ -37,13 +37,13 @@
   }
 }
 
-.level-left {
+.#{$boldr-ns}level__left {
   align-items: center;
   justify-content: flex-start;
 
   // Responsiveness
   @include mobile() {
-    & + .level-right {
+    & + .#{$boldr-ns}level__right {
       margin-top: 1.5rem;
     }
   }
@@ -53,7 +53,7 @@
   }
 }
 
-.level-right {
+.#{$boldr-ns}level__right {
   align-items: center;
   justify-content: flex-end;
 
@@ -63,7 +63,7 @@
   }
 }
 
-.level {
+.#{$boldr-ns}level {
   @include block();
 
   align-items: center;
@@ -82,16 +82,16 @@
   &.is-mobile {
     display: flex;
 
-    .level-left,
-    .level-right {
+    .#{$boldr-ns}level__left,
+    .#{$boldr-ns}level__right {
       display: flex;
     }
 
-    .level-left + .level-right {
+    .#{$boldr-ns}level__left + .#{$boldr-ns}level__right {
       margin-top: 0;
     }
 
-    .level-item {
+    .#{$boldr-ns}level__item {
       &:not(:last-child) {
         margin-bottom: 0;
       }
@@ -106,7 +106,7 @@
   @include tablet() {
     display: flex;
 
-    & > .level-item {
+    & > .#{$boldr-ns}level__item {
       &:not(.is-narrow) {
         flex-grow: 1;
       }

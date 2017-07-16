@@ -1,8 +1,6 @@
 import tagsReducer from './reducer';
-import { getTagIds, getTagsList, getTags } from './selectors';
-
-import { selectTag, clearTag, createTag, deleteTag } from './actions';
+import { selectTag, clearTag } from './actions';
 
 export default tagsReducer;
 
-export { tagsReducer, selectTag, clearTag, createTag, deleteTag, getTagIds, getTagsList, getTags };
+export { tagsReducer, selectTag, clearTag };

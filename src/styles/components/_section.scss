@@ -1,4 +1,4 @@
-.section {
+.#{$boldr-ns}section {
 
     @include desktop() {
         &.is-medium {
@@ -12,7 +12,7 @@
     padding: 3rem 1.5rem;
     background-color: $white;
 }
-.footer {
+.#{$boldr-ns}footer {
     padding: 3rem 1.5rem 6rem;
     background-color: $background;
 }

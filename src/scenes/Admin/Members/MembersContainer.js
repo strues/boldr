@@ -7,7 +7,6 @@ import Loader from '@boldr/ui/Loader';
 // internal
 import { showModal, hideModal } from '../../../state/boldr/ui/actions';
 import { fetchMembersIfNeeded, memberSelected, updateMember } from '../state';
-import { getUsers } from '../../../state/users/selectors';
 import Members from './Members';
 import MEMBERS_QUERY from './users.graphql';
 

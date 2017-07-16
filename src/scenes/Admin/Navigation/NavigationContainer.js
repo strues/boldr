@@ -21,7 +21,7 @@ class NavigationContainer extends Component {
         <ContentPromo isCentered>
           <Headline kind="h1">Navigation</Headline>
         </ContentPromo>
-        </div>
+      </div>
     );
   }
 }

@@ -6,8 +6,7 @@ import Link from 'react-router-dom/Link';
 import styled from 'styled-components';
 
 import Button from '@boldr/ui/Button';
-import InputField from '../../../components/Form/Fields/InputField';
-import Form from '../../../components/Form/Form';
+import Form, { TextFormField } from '../../../components/Form';
 import { isEmail, isRequired } from '../../../core/util/validations';
 
 type Props = {
@@ -38,7 +37,7 @@ const LoginForm = (props: Props) => {
         id="email"
         name="email"
         type="email"
-        component={InputField}
+        component={TextFormField}
         label="Email Address"
         placeholder="admin@boldr.io"
         validate={[isEmail, isRequired]}
@@ -47,7 +46,7 @@ const LoginForm = (props: Props) => {
         id="password"
         name="password"
         type="password"
-        component={InputField}
+        component={TextFormField}
         validate={[isRequired]}
         placeholder="*****"
         label="Password"

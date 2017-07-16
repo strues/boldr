@@ -3,9 +3,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
+import Button from '@boldr/ui/Button';
 // internal
 import FormCard from '../../../components/Form/FormCard/FormCard';
-import Button from '@boldr/ui/Button';
+
 import { verifyAccount } from '../../../state/users/actions';
 
 export type Props = {

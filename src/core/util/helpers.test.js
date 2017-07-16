@@ -1,14 +1,14 @@
 import React from 'react';
-import { getHTMLProps, combineModifiers } from './helpers';
+import { getDomSafeProps, combineModifiers } from './helpers';
 
-describe('getHTMLProps', () => {
+describe('getDomSafeProps', () => {
   const props = {
     href: '#',
     onClick: f => f,
   };
 
   it('should return props when no removeFunctions are passed', () => {
-    expect(getHTMLProps(props)).toEqual(props);
+    expect(getDomSafeProps(props)).toEqual(props);
   });
 
   it('should remove props with more than one function as parameter', () => {
@@ -22,7 +22,7 @@ describe('getHTMLProps', () => {
       return rest;
     };
 
-    expect(getHTMLProps(props, removeHref, removeOnClick)).toEqual({});
+    expect(getDomSafeProps(props, removeHref, removeOnClick)).toEqual({});
   });
 });
 

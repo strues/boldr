@@ -234,7 +234,7 @@ exports[`<ArticleSidebar />, renders the sidebar 1`] = `
         }
       }
     ",
-                      "name": "GraphQL request",
+                      "name": "GraphQL",
                     },
                     "start": 0,
                   },
@@ -276,7 +276,7 @@ exports[`<ArticleSidebar />, renders the sidebar 1`] = `
       "resetStore": [Function],
       "setStore": [Function],
       "ssrMode": false,
-      "version": "1.7.0",
+      "version": "1.8.1",
       "watchQuery": [Function],
     }
   }

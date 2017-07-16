@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import classNames from 'classnames';
-import { withHelpersModifiers } from '../../core/util/boldrui';
+import { createWrappedComponent } from '../../core/util/boldrui';
 import { StyleClasses } from '../../theme/styleClasses';
 
 export type Props = {
@@ -16,4 +16,4 @@ export function NavbarStart({ tag = 'div', ...props }: Props) {
   return React.createElement(tag, { ...props, className });
 }
 
-export default withHelpersModifiers(NavbarStart);
+export default createWrappedComponent(NavbarStart);

@@ -1,5 +1,5 @@
 import { replacePath } from '../../core/RouterConnection';
-import { api, API_PREFIX, getToken } from '../../core';
+import { API_PREFIX, getToken } from '../../core';
 import * as notif from '../../core/constants';
 import { sendNotification } from '../notifications/notifications';
 import * as t from './actionTypes';
@@ -15,8 +15,17 @@ export function forgotPassword(email) {
     dispatch({
       type: t.FORGOT_PASSWORD_REQUEST,
     });
-    return api
-      .post(`${API_PREFIX}/tokens/forgot-password`, { email })
+    return fetch(`${API_PREFIX}/tokens/forgot-password`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    })
+      .then(response => {
+        return response.json();
+      })
       .then(res => {
         if (res.status !== 202) {
           const err = JSON.stringify(res.data.message.message);
@@ -52,16 +61,25 @@ export function resetPassword(password, token) {
     dispatch({
       type: t.RESET_PASSWORD_REQUEST,
     });
-    return api
-      .post(`${API_PREFIX}/tokens/reset-password/${token}`, {
+    return fetch(`${API_PREFIX}/tokens/reset-password/${token}`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
         password,
         token,
+      }),
+    })
+      .then(response => {
+        return response.json();
       })
       .then(res => {
         if (res.status !== 204) {
           return dispatch({
             type: t.RESET_PASSWORD_FAILURE,
-            error: res.data.message,
+            error: res.message,
           });
         }
         dispatch({
@@ -90,8 +108,19 @@ export function verifyAccount(token) {
     dispatch({
       type: t.VERIFY_ACCOUNT_REQUEST,
     });
-    return api
-      .post(`${API_PREFIX}/auth/verify`, { token })
+    return fetch(`${API_PREFIX}/auth/verify`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        token,
+      }),
+    })
+      .then(response => {
+        return response.json();
+      })
       .then(res => {
         dispatch(replacePath('/login'));
         dispatch({
@@ -111,8 +140,19 @@ export function verifyAccount(token) {
 export function editProfile(userData) {
   return dispatch => {
     dispatch(beginUpdateProfile());
-    return api
-      .put(`${API_PREFIX}/users/${userData.id}`, userData)
+    return fetch(`${API_PREFIX}/users/${userData.id}`, {
+      method: 'PUT',
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        userData,
+      }),
+    })
+      .then(response => {
+        return response.json();
+      })
       .then(res => {
         dispatch(doneUpdateProfile(res));
         return dispatch(sendNotification(notif.MSG_EDIT_PROFILE_SUCCESS));
@@ -131,7 +171,7 @@ const beginUpdateProfile = () => {
 const doneUpdateProfile = res => {
   return {
     type: t.EDIT_PROFILE_SUCCESS,
-    payload: res.data,
+    payload: res,
   };
 };
 

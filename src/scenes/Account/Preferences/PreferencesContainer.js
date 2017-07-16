@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 // internal
-import { uploadProfileImage, uploadAvatarImage } from '../../Admin/state';
+// import { uploadProfileImage, uploadAvatarImage } from '../../Admin/state';
 import Preferences from './Preferences';
 
 const mapStateToProps = state => {
@@ -10,11 +10,11 @@ const mapStateToProps = state => {
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    uploadProfileImage: bindActionCreators(uploadProfileImage, dispatch),
-    uploadAvatarImage: bindActionCreators(uploadAvatarImage, dispatch),
-  };
-};
+// const mapDispatchToProps = dispatch => {
+//   return {
+//     uploadProfileImage: bindActionCreators(uploadProfileImage, dispatch),
+//     uploadAvatarImage: bindActionCreators(uploadAvatarImage, dispatch),
+//   };
+// };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Preferences);
+export default connect(mapStateToProps)(Preferences);

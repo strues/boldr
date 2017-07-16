@@ -241,7 +241,7 @@ module.exports = function createServerConfig(options) {
       // inlined when compiled with Webpack.
       new webpack.EnvironmentPlugin({
         NODE_ENV: JSON.stringify(process.env.NODE_ENV),
-        BOLDR_GRAPHQL_URL: JSON.stringify(process.env.BOLDR_GRAPHQL_URL),
+        GRAPHQL_ENDPOINT: JSON.stringify(process.env.GRAPHQL_ENDPOINT),
       }),
       new webpack.DefinePlugin({
         __DEV__: JSON.stringify(_DEV),
@@ -257,7 +257,7 @@ module.exports = function createServerConfig(options) {
       new VerboseProgress({ prefix: 'Server' }),
 
       // Automatically assign quite useful and matching chunk names based on file names.
-      new ChunkNames(),
+      new ChunkNames({ debug: process.env.LOG_CHUNKNAMES === '1' }),
       _DEV ? new CaseSensitivePathsPlugin() : null,
       _DEV
         ? new CircularDependencyPlugin({

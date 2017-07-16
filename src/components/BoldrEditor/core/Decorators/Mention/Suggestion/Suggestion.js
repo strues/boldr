@@ -228,7 +228,9 @@ function getSuggestionComponent() {
           aria-haspopup="true"
           aria-label="boldrui-editor__suggestion-popup"
         >
-          <span>{children}</span>
+          <span>
+            {children}
+          </span>
           {showSuggestions &&
             <span
               className={classNames('boldrui-editor__suggestion-dropdown', dropdownClassName)}

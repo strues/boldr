@@ -7,7 +7,6 @@ import Route from 'react-router-dom/Route';
 
 // internal
 import flattenRoutes from '../../core/util/flattenRoutes';
-import { selectMe } from '../../state/users/selectors';
 import { hideHeader, showHideSidebar, expandCollapseSideMenu } from '../../state/boldr/ui/actions';
 import sidebarLinks from './sidebarLinks';
 import routes from './routes';
@@ -121,7 +120,7 @@ function mapStateToProps(state) {
   return {
     dashboard: state.admin.dashboard,
     boldr: state.boldr,
-    me: selectMe(state),
+    me: state.users.me,
     router: state.router,
     ui: state.boldr.ui,
   };

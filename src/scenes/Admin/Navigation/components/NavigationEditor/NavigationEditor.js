@@ -11,9 +11,7 @@ export type Props = {
     name?: string,
   },
 };
-const FormInner = styled.div`
-  padding: 1em;
-`;
+const FormInner = styled.div`padding: 1em;`;
 const NavigationEditor = (props: Props) => {
   return (
     <FormInner>

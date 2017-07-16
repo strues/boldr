@@ -1,0 +1,806 @@
+schema {
+  query: Query
+  mutation: RootMutation
+}
+
+# A blog post or article
+type Article {
+  # The identifier for the article
+  id: UUID
+
+  # The title of the article
+  title: String
+
+  # The slug / normalized article title.
+  slug: String!
+
+  # html content of the article
+  content: String
+
+  # Raw JSON of the article
+  rawContent: JSON
+
+  # Short description of the article
+  excerpt: String
+
+  # True if the article is featured
+  featured: Boolean
+
+  # True if the article is published
+  published: Boolean
+
+  # url of the article feature image
+  image: String
+
+  # True if the article is published
+  userId: UUID
+
+  # The timestamp when the article was created
+  createdAt: DateTime
+
+  # The timestamp when the article was last updated
+  updatedAt: DateTime
+
+  # The timestamp when the article was deleted
+  deletedAt: DateTime
+
+  # Tags relating articles together
+  tags: [Tag]
+
+  # Media uploaded with the article
+  media: [Media]
+
+  # Users belonging to a role.
+  author: User
+}
+
+# Attachments are files uploaded by users
+type Attachment {
+  # The identifying uuid.
+  id: UUID
+
+  # The name of the file
+  fileName: String
+
+  # identifier which cannot be changed
+  safeName: String!
+
+  # mimetype
+  fileType: String
+
+  # The role description
+  description: String
+  path: String
+
+  # The relative url to access the file
+  url: String
+
+  # The id of the user the file belongs to.
+  userId: UUID
+
+  # The timestamp when the article was created
+  createdAt: DateTime
+
+  # The timestamp when the article was last updated
+  updatedAt: DateTime
+}
+
+type AuthError {
+  # The error key.
+  key: String
+
+  # The error message.
+  value: String
+}
+
+input CreateArticleInput {
+  # The title of the article
+  title: String!
+
+  # The slug / normalized article title.
+  slug: String!
+
+  # html content of the article
+  content: String!
+
+  # Raw JSON of the article
+  rawContent: JSON
+
+  # Short description of the article
+  excerpt: String!
+
+  # True if the article is featured
+  featured: Boolean!
+
+  # True if the article is published
+  published: Boolean!
+
+  # url of the article feature image
+  featureImage: String
+
+  # url of the article background image
+  backgroundImage: String
+
+  # Tags relating articles together
+  tags: String
+}
+
+# The DateTime scalar type represents date time strings complying to ISO-8601.
+scalar DateTime
+
+input EditArticleInput {
+  # The title of the article
+  title: String!
+
+  # The slug / normalized article title.
+  slug: String!
+
+  # html content of the article
+  content: String!
+
+  # Raw JSON of the article
+  rawContent: JSON
+
+  # Short description of the article
+  excerpt: String!
+
+  # True if the article is featured
+  featured: Boolean!
+
+  # True if the article is published
+  published: Boolean!
+
+  # url of the article feature image
+  featureImage: URL
+
+  # url of the article background image
+  backgroundImage: URL
+}
+
+input EditDetailInput {
+  # The id
+  id: UUID
+
+  # The title text for the menu link
+  title: String
+
+  # Lowercase, normalized, name
+  safeName: String
+
+  # Custom css classname for the link
+  cssClassname: String
+
+  # True if the item has a dropdown
+  hasDropdown: Boolean
+
+  # The display order
+  order: Int
+
+  # Mobile only link
+  mobileHref: String
+
+  # The link
+  href: String
+
+  # Icon kind
+  icon: String
+
+  # Children are dropdown links
+  children: JSON
+}
+
+input EditMediaInput {
+  # The file name
+  name: String!
+
+  # A description of the file
+  fileDescription: String
+}
+
+input EditUserInput {
+  # The email address of the account to login to.
+  email: Email!
+
+  # Where the user is from.
+  location: String
+
+  # Information about the user.
+  bio: String
+
+  # The username for the new user
+  username: String
+
+  # The first name of the user.
+  firstName: String
+
+  # The last name of the user.
+  lastName: String
+}
+
+# The Email scalar type represents E-Mail addresses compliant to RFC 822.
+scalar Email
+
+type File {
+  # The identifying uuid.
+  id: UUID
+
+  # The file name
+  name: String!
+
+  # The type of file.
+  type: String!
+
+  # The size of the file
+  size: Int!
+
+  # The path to the file.
+  path: String!
+}
+
+# The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+scalar JSON
+
+# Uploaded images, videos or audio
+type Media {
+  # The identifying uuid.
+  id: UUID
+
+  # The name of the file
+  name: String
+
+  # identifier which cannot be changed
+  safeName: String!
+
+  # thumbnail filename
+  thumbName: String
+
+  # The description of the upload
+  fileDescription: String
+
+  # The mimetype of the upload
+  type: String
+
+  # The size of the upload
+  size: Int
+  path: String
+
+  # The relative url to access the file
+  url: String
+
+  # The id of the user the file belongs to.
+  userId: UUID
+
+  # The timestamp when the article was created
+  createdAt: DateTime
+
+  # The timestamp when the article was last updated
+  updatedAt: DateTime
+}
+
+# Navigation for the site
+type Menu {
+  # The id
+  id: ID
+
+  # The uuid
+  uuid: UUID
+
+  # The name of the menu
+  name: String!
+
+  # Custom css classname for the link
+  attributes: String
+
+  # True if the menu should be hidden from unauth
+  restricted: Boolean
+
+  # Links
+  details: [MenuDetail]
+}
+
+# links and other menu content
+type MenuDetail {
+  # The id (uuid)
+  id: UUID
+
+  # The title text for the menu link
+  title: String
+
+  # Lowercase, normalized, name
+  safeName: String
+
+  # Custom css classname for the link
+  cssClassname: String
+
+  # True if the item has a dropdown
+  hasDropdown: Boolean
+
+  # The display order
+  order: Int
+
+  # Mobile only link
+  mobileHref: String
+
+  # The link
+  href: String
+
+  # Icon kind
+  icon: String
+
+  # Children are dropdown links
+  children: JSON
+}
+
+# Page of the website
+type Page {
+  # The page's id (uuid)
+  id: UUID
+
+  # The title of the page
+  title: String!
+
+  # Normalized version of the page title
+  slug: String!
+
+  # A URL to access the page
+  url: String
+
+  # Page meta data
+  meta: JSON
+
+  # Page content blocks
+  blocks: JSON
+
+  # Page html markup
+  markup: String
+}
+
+type Query {
+  # A paginated query for all the articles.
+  articles(
+    # The number of articles to offset
+    offset: Int!
+
+    # The maximum number of articles to return at a time.
+    limit: Int!
+  ): [Article]
+
+  # Return all articles matching the given tag.
+  getArticlesForTag(name: String, offset: Int, limit: Int): [Article]
+
+  # Return a specific article using its slug
+  getArticleBySlug(slug: String): Article
+
+  # A query for a listing of all attachments
+  getAttachments(
+    # The number of attachments to offset
+    offset: Int!
+
+    # The maximum number of attachments to return at a time.
+    limit: Int!
+  ): [Attachment]
+
+  # A query for a listing of all media
+  getMedia(
+    # The number of media to offset
+    offset: Int!
+
+    # The maximum number of media to return at a time.
+    limit: Int!
+  ): [Media]
+
+  # A query for a returning a single media by its id
+  getMediaById(
+    # The id of the requested media
+    id: UUID!
+  ): Media
+
+  # A query for a specific menu
+  getMenuById(id: ID): Menu
+
+  # A query returning all links
+  details: [MenuDetail]
+
+  # A query for a listing of all pages
+  pages: [Page]
+
+  # A query for a single page
+  singlePage(slug: String): Page
+
+  # A query for a listing of all roles
+  getRoles: [Role]
+
+  # A query for a listing of all settings
+  settings: [Setting]
+
+  # A query for a listing of all tags
+  getTags(
+    # The number of tags to offset
+    offset: Int!
+
+    # The maximum number of tags to return at a time.
+    limit: Int!
+  ): [Tag]
+
+  # A query for a listing of all users
+  getUsers(
+    # The number of users to offset
+    offset: Int!
+
+    # The maximum number of users to return at a time.
+    limit: Int!
+  ): [User]
+
+  # A query for admin to find a user by their id
+  getUserByUserId(
+    # The user ID for the desired user
+    userId: UUID!
+  ): User
+
+  # A query to retrieve a user by their username
+  getUserByUsername(
+    # The username for the desired user
+    username: String!
+  ): User
+
+  # Given an auth token, return the user and auth token
+  getCurrentUser: User
+}
+
+# Reset password token.
+type ResetToken {
+  # The identifier (usually email) of blocked user
+  id: ID
+
+  # The ip address of the person performing the reset
+  ip: String
+
+  # The reset token
+  token: String
+
+  # True if the token has been used before.
+  used: Boolean
+
+  # The IP address of the blocked user
+  userId: UUID
+
+  # The timestamp when the article was created
+  createdAt: DateTime
+
+  # The timestamp when the article was last updated
+  updatedAt: DateTime
+}
+
+# Role or permission group for users
+type Role {
+  # The role id
+  id: ID
+
+  # The role uuid
+  uuid: UUID
+
+  # The name of the role
+  name: String!
+
+  # An image for role identification
+  image: URL
+
+  # The role description
+  description: String
+
+  # Users belonging to a role.
+  users: [User]
+}
+
+type RootMutation {
+  # Adds a new article to the database.
+  createArticle(input: CreateArticleInput!): Article
+
+  # Edit an existing article
+  editArticle(
+    # The article ID
+    id: UUID!
+
+    # The required fields for creating an article.
+    input: EditArticleInput!
+  ): Article
+
+  # Remove an article from the database
+  deleteArticle(
+    # The article ID
+    id: UUID!
+  ): Article
+
+  # Upload a new media file and store in the database.
+  uploadMedia(
+    # The file to upload
+    file: UploadMediaInput!
+  ): File
+
+  # Edit an existing media file
+  editMedia(
+    # The media ID
+    id: UUID!
+
+    # The required fields for editing a media file.
+    input: EditMediaInput!
+  ): Media
+
+  # Remove a media file from the server
+  deleteMedia(
+    # The media ID
+    id: UUID!
+  ): Media
+
+  # Edit menu details
+  editDetails(
+    # The detail ID
+    id: UUID!
+
+    # The required fields for editing a detail.
+    input: EditDetailInput!
+  ): MenuDetail
+
+  # creating a new tag
+  editSetting(id: Int, input: SettingInput!): Setting
+
+  # creating a new tag
+  addTag(input: TagInput!): Tag
+
+  # Edit an existing tag
+  editTag(
+    # The tag ID
+    id: UUID!
+
+    # The fields (name, description) for editing a tag.
+    input: TagInput!
+  ): Tag
+
+  # for troubleshooting by admins, create a JWT for a given userId
+  loginUser(input: UserLoginInput!): UserLoginResponse
+
+  # A user registering for an account.
+  signupUser(input: UserSignupInput!): User
+
+  # Edit an existing user
+  editUser(
+    # The user ID
+    id: UUID!
+
+    # The required fields for editing a user.
+    input: EditUserInput!
+  ): User
+}
+
+# Editable site settings
+type Setting {
+  # The identifier for the setting
+  id: ID
+
+  # The setting option
+  key: String
+
+  # The value of the setting
+  value: String
+
+  # A non-normalized key
+  label: URL
+
+  # The description for what the setting does.
+  description: String
+}
+
+input SettingInput {
+  # The setting option
+  key: String
+
+  # The value of the setting
+  value: String
+
+  # A non-normalized key
+  label: String
+
+  # The description for what the setting does.
+  description: String
+}
+
+type Social {
+  # The id
+  id: UUID
+
+  # The unique identifier for the user for the identity.
+  userId: UUID
+
+  # The facebook profile url for the user.
+  facebookUrl: URL
+
+  # The facebook profile url for the user.
+  twitterUrl: URL
+
+  # The facebook profile url for the user.
+  googleUrl: URL
+
+  # The facebook profile url for the user.
+  githubUrl: URL
+
+  # The facebook profile url for the user.
+  linkedinUrl: URL
+
+  # The facebook profile url for the user.
+  stackoverflowUrl: URL
+}
+
+# A tag relates content together
+type Tag {
+  # The tag id (uuid)
+  id: UUID
+
+  # The name of the tag
+  name: String!
+
+  # A description of the tag
+  description: String
+
+  # Articles related to the tag.
+  articles: [Article]
+}
+
+input TagInput {
+  # The name of the tag
+  name: String!
+
+  # A description of the tag.
+  description: String
+}
+
+input UploadMediaInput {
+  # The file name
+  name: String!
+
+  # The type of file.
+  type: String!
+
+  # The size of the file
+  size: Int!
+
+  # The path to the file.
+  path: String!
+}
+
+# The URL scalar type represents URL addresses.
+scalar URL
+
+# The user or account
+type User {
+  # The users id (uuid)
+  id: UUID
+
+  # The timestamp when the user was deleted
+  deletedAt: DateTime
+
+  # The timestamp when the user was last updated
+  updatedAt: DateTime
+
+  # The timestamp when the user was created
+  createdAt: DateTime
+
+  # The user email
+  email: Email!
+
+  # The username of the user
+  username: String
+
+  # true if email is verified, false otherwise
+  verified: Boolean
+
+  # The website of the user
+  website: URL
+
+  # The first name of the user
+  firstName: String
+
+  # The last name associated with the user
+  lastName: String
+
+  # Information about the user
+  bio: String
+
+  # url of user's avatar picture
+  avatarUrl: URL
+
+  # Url for the user's profile background image
+  profileImage: URL
+
+  # Location the user lives
+  location: String
+
+  # Language the user prefers
+  language: String
+
+  # When the user was born
+  birthday: DateTime
+
+  # Roles the user belongs to.
+  roles: [Role]
+
+  # Social media profiles of the user.
+  socialMedia: Social
+
+  # Articles the user has written
+  articles: [Article]
+
+  # Articles the user has written
+  files: [Attachment]
+
+  # Articles the user has written
+  uploads: [Media]
+
+  # Articles the user has written
+  verificationToken: VerificationToken
+
+  # Articles the user has written
+  resetToken: ResetToken
+}
+
+input UserLoginInput {
+  # The email address of the account to login to.
+  email: Email!
+
+  # The password belonging to the account.
+  password: String!
+}
+
+type UserLoginResponse {
+  # The JSONWebToken for the user.
+  token: String
+
+  # The user who logged in.
+  user: User
+
+  # Any auth related errors.
+  errors: [AuthError]
+}
+
+input UserSignupInput {
+  # The email address of the account to login to.
+  email: Email!
+
+  # The password belonging to the account.
+  password: String!
+
+  # The username for the new user
+  username: String!
+
+  # The first name of the user.
+  firstName: String!
+
+  # The last name of the user.
+  lastName: String!
+}
+
+# The UUID scalar type represents a UUID.
+scalar UUID
+
+# Account verification token for a user
+type VerificationToken {
+  # The identifier (usually email) of blocked user
+  id: ID
+
+  # The ip address of the person performing the reset
+  ip: String
+
+  # The reset token
+  token: String
+
+  # True if the token has been used before.
+  used: Boolean
+
+  # The IP address of the blocked user
+  userId: UUID
+
+  # The timestamp when the article was created
+  createdAt: DateTime
+
+  # The timestamp when the article was last updated
+  updatedAt: DateTime
+}

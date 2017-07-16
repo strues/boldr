@@ -5,7 +5,7 @@ import Link from 'react-router-dom/Link';
 import { gql, graphql } from 'react-apollo';
 
 import Loader from '@boldr/ui/Loader';
-import ARTICLES_TAG_QUERY from './articlesTag.graphql';
+import ARTICLES_TAG_QUERY from '../../gql/articlesTag.graphql';
 
 type Props = {
   data: Object,

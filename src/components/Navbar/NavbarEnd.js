@@ -2,7 +2,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import { StyleClasses } from '../../theme/styleClasses';
-import { withHelpersModifiers } from '../../core/util/boldrui';
+import { createWrappedComponent } from '../../core/util/boldrui';
 
 export type Props = {
   tag?: string,
@@ -18,5 +18,5 @@ export function NavbarEnd({ tag = 'div', ...props }: Props) {
   return React.createElement(tag, { ...props, className });
 }
 
-const HOC = withHelpersModifiers(NavbarEnd);
+const HOC = createWrappedComponent(NavbarEnd);
 export default HOC;

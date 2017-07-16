@@ -3,8 +3,7 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Button from '@boldr/ui/Button';
-import InputField from '../../../components/Form/Fields/InputField';
-import Form from '../../../components/Form/Form';
+import Form, { TextFormField } from '../../../components/Form';
 
 const style = {
   margin: 12,
@@ -24,7 +23,7 @@ const ForgotPasswordForm = (props: Props) => {
         type="email"
         placeholder="admin@boldr.io"
         label="Email Address"
-        component={InputField}
+        component={TextFormField}
       />
       <Button
         htmlType="submit"

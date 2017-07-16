@@ -1,12 +1,11 @@
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import getReducers from '../state/reducers';
-import api from './api';
 
 const inBrowser = typeof window === 'object';
 
 export default function configureStore(apolloClient, preloadedState, history) {
-  const middleware = [thunkMiddleware.withExtraArgument(api), apolloClient.middleware()];
+  const middleware = [apolloClient.middleware(), thunkMiddleware];
 
   const enhancers = [applyMiddleware(...middleware)];
   /* istanbul ignore next */

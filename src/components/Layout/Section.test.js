@@ -6,7 +6,9 @@ import { Section } from './Section';
 describe('Section', () => {
   it('should render a section with .section', () => {
     const container = shallow(<Section>My Section</Section>);
-    expect(container.contains(<section className="boldrui-section">My Section</section>)).toBe(true);
+    expect(container.contains(<section className="boldrui-section">My Section</section>)).toBe(
+      true,
+    );
   });
 
   it('should render a div with .section', () => {
