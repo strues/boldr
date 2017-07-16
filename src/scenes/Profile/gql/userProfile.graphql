@@ -1,0 +1,25 @@
+query getUserByUsername($username: String!) {
+  getUserByUsername(username: $username) {
+    id
+    email
+    username
+    firstName
+    lastName
+    avatarUrl
+    profileImage
+    bio
+    location
+    website
+    roles {
+      name
+    }
+    socialMedia {
+      facebookUrl
+      githubUrl
+      twitterUrl
+      linkedinUrl
+      googleUrl
+      stackoverflowUrl
+    }
+  }
+}

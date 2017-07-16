@@ -12,7 +12,7 @@ import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON } f
 
 const PermissionType = new GraphQLObjectType({
   name: 'Permission',
-  description: 'PErmissions are lists of rules that describe access to resources',
+  description: 'Permissions are lists of rules that describe access to resources',
   fields: {
     id: {
       type: GraphQLID,

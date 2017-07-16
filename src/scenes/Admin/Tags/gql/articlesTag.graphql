@@ -1,4 +1,4 @@
-query tags($name: String!, $offset: Int!, $limit: Int!) {
+query tags($name: String, $offset: Int, $limit: Int) {
   getArticlesForTag(name: $name, offset: $offset, limit: $limit) {
     id
     title
@@ -12,6 +12,6 @@ query tags($name: String!, $offset: Int!, $limit: Int!) {
     tags {
       id
       name
-    },
+    }
   }
 }

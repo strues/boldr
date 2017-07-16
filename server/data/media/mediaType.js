@@ -16,7 +16,7 @@ const MediaType = new GraphQLObjectType({
   description: 'Uploaded images, videos or audio',
   fields: () => ({
     id: {
-      type: GraphQLUUID,
+      type: GraphQLID,
       description: 'The identifying uuid.',
     },
     name: {
@@ -52,7 +52,7 @@ const MediaType = new GraphQLObjectType({
       description: 'The relative url to access the file',
     },
     userId: {
-      type: GraphQLUUID,
+      type: GraphQLID,
       description: 'The id of the user the file belongs to.',
     },
     createdAt: {
@@ -70,7 +70,7 @@ export const FileType = new GraphQLObjectType({
   name: 'File',
   fields: () => ({
     id: {
-      type: GraphQLUUID,
+      type: GraphQLID,
       description: 'The identifying uuid.',
     },
     name: {

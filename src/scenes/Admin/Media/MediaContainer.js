@@ -2,7 +2,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { gql, graphql } from 'react-apollo';
+import { graphql } from 'react-apollo';
 import { bindActionCreators } from 'redux';
 import Loader from '@boldr/ui/Loader';
 import { replacePath } from '../../../core/RouterConnection';
@@ -12,7 +12,6 @@ import MEDIA_QUERY from './gql/getMedia.graphql';
 type Props = {
   data: Data,
   navigate: () => void,
-  dispatch: Function,
 };
 
 type Data = {
@@ -39,7 +38,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const MediaContainerWithData = graphql(MEDIA_QUERY, {
-  options: props => ({
+  options: () => ({
     variables: {
       offset: 0,
       limit: 20,

@@ -1,9 +1,9 @@
 /* eslint-disable */
-const postFixture = {
+const articleFixture = {
   id: 'cb61bbae-c91e-4014-b665-3485734b88fb',
   title: 'Nother One',
   slug: 'nother-one',
-  featureImage: 'https://boldr.io/image3.jpg',
+  image: 'https://boldr.io/image3.jpg',
   attachments: null,
   meta: {},
   featured: false,
@@ -16,6 +16,7 @@ const postFixture = {
   published: false,
   createdAt: '2017-01-27T02:52:52.686Z',
   updatedAt: null,
+  deletedAt: null,
   author: {
     id: 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f',
     email: 'demo@boldr.io',
@@ -42,4 +43,4 @@ const postFixture = {
   ],
 };
 
-export default postFixture;
+export default articleFixture;

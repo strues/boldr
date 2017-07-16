@@ -1,19 +1,18 @@
 /* @flow */
-import React, { Component } from 'react';
+import React from 'react';
 import { graphql } from 'react-apollo';
 // internal
 import Loader from '@boldr/ui/Loader';
-import { selectSettings, selectSettingFromList } from '../../../state/boldr/settings';
 import Settings from './Settings';
 import SETTINGS_QUERY from './settings.graphql';
 
 type Props = {
   data: Data,
 };
-type Data = {
+interface Data {
   settings: Array<Setting>,
   loading: boolean,
-};
+}
 
 const SettingsContainer = (props: Props) => {
   const { loading, settings } = props.data;

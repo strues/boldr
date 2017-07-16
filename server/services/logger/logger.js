@@ -1,5 +1,7 @@
 import winston from 'winston';
 import { format } from 'date-fns';
+import { config } from '../../config';
+import WinstonToDebugLogger from './winstonToDebugLogger';
 
 const isProd = process.env.NODE_ENV === 'production';
 const LOG_LEVEL = process.env.LOG_LEVEL || 'debug';
@@ -7,6 +9,9 @@ const LOG_LEVEL = process.env.LOG_LEVEL || 'debug';
 winston.emitErrs = true;
 
 const logTransports = [
+  new WinstonToDebugLogger({
+    level: config.get('isDebug') ? 'silly' : 'error',
+  }),
   new winston.transports.Console({
     level: LOG_LEVEL,
     handleExceptions: true,

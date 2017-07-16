@@ -66,7 +66,7 @@ export default {
     description: 'Edit an existing article',
     args: {
       id: {
-        type: new GraphQLNonNull(GraphQLUUID),
+        type: new GraphQLNonNull(GraphQLID),
         description: 'The article ID',
       },
       input: {
@@ -96,7 +96,7 @@ export default {
     description: 'Remove an article from the database',
     args: {
       id: {
-        type: new GraphQLNonNull(GraphQLUUID),
+        type: new GraphQLNonNull(GraphQLID),
         description: 'The article ID',
       },
     },

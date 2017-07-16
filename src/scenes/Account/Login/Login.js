@@ -1,9 +1,8 @@
 /* @flow */
-import React, { Component } from 'react';
+import React from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import { Grid, Col, Row } from '@boldr/ui/Layout';
-import Paper from '@boldr/ui/Paper';
 import LoginForm from './LoginForm';
 
 type Props = {
@@ -17,7 +16,7 @@ const Login = (props: Props) => {
   }
   return (
     <div className="login-wrapper">
-      <Helmet title="Login" />
+      <Helmet title="Account Login" />
       <Grid>
         <Row>
           <Col xs={12}>

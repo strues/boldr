@@ -15,7 +15,7 @@ const AttachmentType = new GraphQLObjectType({
   description: 'Attachments are files uploaded by users',
   fields: () => ({
     id: {
-      type: GraphQLUUID,
+      type: GraphQLID,
       description: 'The identifying uuid.',
     },
     fileName: {
@@ -43,7 +43,7 @@ const AttachmentType = new GraphQLObjectType({
       description: 'The relative url to access the file',
     },
     userId: {
-      type: GraphQLUUID,
+      type: GraphQLID,
       description: 'The id of the user the file belongs to.',
     },
     createdAt: {

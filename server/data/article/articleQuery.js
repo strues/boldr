@@ -1,6 +1,7 @@
 import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt, GraphQLString } from 'graphql';
 import jsonResult from 'boldr-utils/lib/gql/jsonResult';
 import { GraphQLUUID } from '../scalars';
+import logger from '../../services/logger';
 import Article from '../../models/Article';
 import ArticleType from './articleType';
 
@@ -8,20 +9,20 @@ export default {
   articles: {
     type: new GraphQLList(ArticleType),
     name: 'GetArticlesQuery',
-    description: 'A paginated query for all the articles.',
+    description: 'Returns all articles from the database..',
     args: {
       offset: {
-        type: new GraphQLNonNull(GraphQLInt),
+        type: GraphQLInt,
         description: 'The number of articles to offset',
       },
       limit: {
-        type: new GraphQLNonNull(GraphQLInt),
+        type: GraphQLInt,
         description: 'The maximum number of articles to return at a time.',
       },
     },
-    async resolve(source, { offset, limit }, context) {
-      const articles = await Article.getArticles(offset, limit).then(jsonResult);
-      return articles;
+    resolve(_, { offset, limit }) {
+      // const articles = Article.getArticles(offset, limit).then(jsonResult);
+      return Article.getArticles(offset, limit);
     },
   },
   getArticlesForTag: {
@@ -32,12 +33,8 @@ export default {
       offset: { type: GraphQLInt },
       limit: { type: GraphQLInt },
     },
-    async resolve(source, { name, offset, limit }, context) {
-      const articles = await Article.getArticlesByTag(name, offset, limit).then(jsonResult);
-      if (!articles) {
-        throw errorObj({ _error: 'Project ID not found' });
-      }
-      return articles;
+    resolve(_, { name, offset, limit }) {
+      return Article.getArticlesByTag(name, offset, limit);
     },
   },
 
@@ -47,12 +44,10 @@ export default {
     args: {
       slug: { type: GraphQLString },
     },
-    async resolve(_, { slug }, context) {
-      const article = await Article.getArticleBySlug(slug);
-      if (!article) {
-        throw errorObj({ _error: 'Project ID not found' });
-      }
-      return article;
+    resolve(_, { slug }) {
+      // const article = await Article.getArticleBySlug(slug);
+
+      return Article.getArticleBySlug(slug);
     },
   },
 };

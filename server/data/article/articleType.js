@@ -10,6 +10,7 @@ import {
 } from 'graphql';
 import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON } from '../scalars';
 import { UserType } from '../user';
+import Article from '../../models/Article';
 import MediaType from '../media/mediaType';
 import TagType from '../tag/tagType';
 
@@ -18,7 +19,7 @@ const ArticleType = new GraphQLObjectType({
   description: 'A blog post or article',
   fields: () => ({
     id: {
-      type: GraphQLUUID,
+      type: GraphQLID,
       description: 'The identifier for the article',
     },
     title: {
@@ -54,7 +55,7 @@ const ArticleType = new GraphQLObjectType({
       description: 'url of the article feature image',
     },
     userId: {
-      type: GraphQLUUID,
+      type: GraphQLID,
       description: 'True if the article is published',
     },
     createdAt: {
@@ -72,6 +73,9 @@ const ArticleType = new GraphQLObjectType({
     tags: {
       type: new GraphQLList(TagType),
       description: 'Tags relating articles together',
+      resolve(_, args, ctx) {
+        return Article.query().findById(_.id).then(result => result.$relatedQuery('tags'));
+      },
     },
     media: {
       type: new GraphQLList(MediaType),

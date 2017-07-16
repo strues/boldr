@@ -1,5 +1,5 @@
 import { replacePath } from '../../core/RouterConnection';
-import { API_PREFIX, getToken } from '../../core';
+import { API_PREFIX } from '../../core';
 import * as notif from '../../core/constants';
 import { sendNotification } from '../notifications/notifications';
 import * as t from './actionTypes';

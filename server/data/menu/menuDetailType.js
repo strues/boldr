@@ -23,7 +23,7 @@ const MenuDetailType = new GraphQLObjectType({
   description: 'links and other menu content',
   fields: () => ({
     id: {
-      type: GraphQLUUID,
+      type: GraphQLID,
       description: 'The id (uuid)',
     },
     title: {
@@ -68,7 +68,7 @@ export const EditDetailInput = new GraphQLInputObjectType({
   name: 'EditDetailInput',
   fields: () => ({
     id: {
-      type: GraphQLUUID,
+      type: GraphQLID,
       description: 'The id',
     },
     title: {

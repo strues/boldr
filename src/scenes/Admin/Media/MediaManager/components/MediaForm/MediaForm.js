@@ -14,7 +14,6 @@ type Props = {
   handleSubmit?: Function,
   reset?: Function,
   submitting?: boolean,
-  fields?: Object,
   pristine?: boolean,
 };
 const FormBottom = styled.div`
@@ -26,7 +25,7 @@ const FormBottom = styled.div`
 `;
 
 const MediaForm = (props: Props) => {
-  const { handleSubmit, reset } = props;
+  const { handleSubmit, reset, submitting, pristine } = props;
   return (
     <Form onSubmit={handleSubmit} className="boldr-form__fileeditor">
       <Field id="name" name="name" type="text" label="File name" component={TextFormField} />
@@ -38,7 +37,7 @@ const MediaForm = (props: Props) => {
         component={TextFormField}
       />
       <FormBottom>
-        <Button htmlType="submit" kind="primary" style={style}>
+        <Button htmlType="submit" kind="primary" style={style} disabled={submitting || pristine}>
           Save
         </Button>
         <Button onClick={reset} style={style} kind="secondary">

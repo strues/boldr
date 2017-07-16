@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Grid, Col, Row } from '@boldr/ui/Layout';
+import { Col, Row } from '@boldr/ui/Layout';
 import ResponsiveImage from '@boldr/ui/ResponsiveImage';
 import Block from '@boldr/ui/Block';
 import Headline from '@boldr/ui/Headline';

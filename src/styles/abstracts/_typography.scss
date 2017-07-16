@@ -56,14 +56,14 @@ h1,
 
     @include set-type(6, $ms-up2); // [2]
 
-    @media (min-width: 43.75em) {
+    @media (min-width: $bp-small) {
 
         @include set-type(8, $ms-up3); // [5]
         // [3]
         margin-bottom: em-rhythm(1, $ms-up3); // [4]
     }
 
-    @media (min-width: 56.25em) {
+    @media (min-width: $bp-medium) {
 
         @include set-type(10, $ms-up4);
         margin-bottom: em-rhythm(1, $ms-up4);
@@ -76,13 +76,13 @@ h2,
 
     @include set-type(5, $ms-up1);
 
-    @media (min-width: 43.75em) {
+    @media (min-width: $bp-small) {
 
         @include set-type(6, $ms-up2);
         margin-bottom: em-rhythm(1, $ms-up2);
     }
 
-    @media (min-width: 56.25em) {
+    @media (min-width: $bp-medium) {
 
         @include set-type(8, $ms-up3);
         margin-bottom: em-rhythm(1, $ms-up3);
@@ -95,7 +95,7 @@ h3,
 
     @include set-type(5, $ms-up1);
 
-    @media (min-width: 56.25em) {
+    @media (min-width: $bp-medium) {
 
         @include set-type(6, $ms-up2);
         margin-bottom: em-rhythm(1, $ms-up2);
@@ -121,7 +121,7 @@ h6,
 
 p {
 
-    @media (min-width: 43.75em) {
+    @media (min-width: $bp-small) {
 
         @if $paragraph-justify {
             text-align: justify;

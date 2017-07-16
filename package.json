@@ -45,6 +45,7 @@
     "migrate:test": "node --harmony internal/scripts/db.js migrate",
     "migration": "better-npm-run migration",
     "prettier": "node ./internal/scripts/prettier.js write",
+    "postinstall": "rimraf node_modules/react-apollo/node_modules/react-dom",
     "start": "NODE_ENV=production node server/app.js",
     "sassdoc": "sassdoc src/styles --dest=docs/sassdoc",
     "stylelint": "./node_modules/.bin/stylelint ./src/shared/styles/**/*.scss  -s scss --fix ",
@@ -118,7 +119,6 @@
     "styled-components": "^2.1.1",
     "subscriptions-transport-ws": "^0.8.1",
     "uuid": "^3.1.0",
-    "webfontloader": "^1.6.28",
     "webpack-flush-chunks": "^1.1.10",
     "winston": "^2.3.1"
   },
@@ -142,7 +142,7 @@
     "cz-conventional-changelog-emoji": "^0.1.0",
     "enzyme": "^2.9.1",
     "eslint": "^4.2.0",
-    "eslint-config-boldr": "^0.11.1",
+    "eslint-config-boldr": "^0.11.2",
     "eslint-plugin-graphql": "^1.1.0",
     "extract-css-chunks-webpack-plugin": "^2.0.4",
     "faker": "^4.1.0",
@@ -189,7 +189,7 @@
       "command": "cross-env boldr build",
       "env": {
         "NODE_ENV": "production",
-        "BOLDR_PORT": "3000",
+        "PORT": "3000",
         "BOLDR_DEV_PORT": "3001",
         "DEBUG": "boldr:*"
       }
@@ -198,7 +198,7 @@
       "command": "babel-watch ./server/index.js",
       "env": {
         "NODE_ENV": "development",
-        "BOLDR_PORT": "3000",
+        "PORT": "3000",
         "BOLDR_DEV_PORT": "3001",
         "DEBUG": "boldr:*"
       }

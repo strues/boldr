@@ -1,10 +1,5 @@
 import { combineReducers } from 'redux';
-import {
-  LOGIN_REQUEST,
-  LOGIN_SUCCESS,
-  LOGIN_FAILURE,
-  LOGOUT,
-} from '../../scenes/Account/state/actionTypes';
+import { LOGIN_REQUEST, LOGIN_SUCCESS, LOGOUT } from '../../scenes/Account/state/actionTypes';
 import * as t from './actionTypes';
 
 const isFetching = (state = false, action) => {

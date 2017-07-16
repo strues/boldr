@@ -1,4 +1,4 @@
-import { GraphQLList, GraphQLNonNull, GraphQLInt, GraphQLString } from 'graphql';
+import { GraphQLList, GraphQLNonNull, GraphQLInt, GraphQLString, GraphQLID } from 'graphql';
 import _debug from 'debug';
 import { GraphQLUUID } from '../scalars';
 import User from '../../models/User';
@@ -13,11 +13,11 @@ export default {
     description: 'A query for a listing of all users',
     args: {
       offset: {
-        type: new GraphQLNonNull(GraphQLInt),
+        type: GraphQLInt,
         description: 'The number of users to offset',
       },
       limit: {
-        type: new GraphQLNonNull(GraphQLInt),
+        type: GraphQLInt,
         description: 'The maximum number of users to return at a time.',
       },
     },
@@ -35,7 +35,7 @@ export default {
     description: 'A query for admin to find a user by their id',
     args: {
       userId: {
-        type: new GraphQLNonNull(GraphQLUUID),
+        type: new GraphQLNonNull(GraphQLID),
         description: 'The user ID for the desired user',
       },
     },

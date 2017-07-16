@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { doLogin } from '../state/actions';
 import Login from './Login';
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   onSubmit: formInput => {
     dispatch(doLogin(formInput));
   },

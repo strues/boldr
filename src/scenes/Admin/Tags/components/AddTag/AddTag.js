@@ -1,14 +1,17 @@
 /* @flow */
-import React from 'react';
+import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { graphql, compose } from 'react-apollo';
+import styled from 'styled-components';
 // internal
 import Button from '@boldr/ui/Button';
-import { Form, TextFormField } from '../../../../../components/Form';
+import Headline from '../../../../../components/Headline';
+import { Control, FormGroup, FormField, Form, TextFormField } from '../../../../../components/Form';
 import { formatReduxFormErrors } from '../../../../../core/reduxFormErrors';
 import ADD_TAG_MUTATION from '../../gql/addTag.mutation.graphql';
+import TAGS_QUERY from '../../gql/tags.graphql';
 
-type Props = {
+export type Props = {
   addTagMutation: Function,
   handleSubmit?: Function,
   reset: ?Function,
@@ -21,7 +24,19 @@ const style = {
   margin: 12,
 };
 
-class AddTag extends React.Component {
+const TagFormPanel = styled.div`
+  padding: 2em;
+  margin: 0 auto;
+`;
+
+const SubTitle = styled.h3`
+  font-size: 1.4em;
+  font-weight: 300;
+  font-family: Chivo;
+  margin: 0;
+`;
+
+class AddTag extends Component {
   addTagMutation = values => {
     const { addTagMutation } = this.props;
 
@@ -32,25 +47,31 @@ class AddTag extends React.Component {
     // eslint-disable-line
     const { handleSubmit, reset } = this.props;
     return (
-      <Form className="boldr-form__addtag" onSubmit={handleSubmit(this.addTagMutation)}>
-        <Field id="tag-name" name="name" component={TextFormField} type="text" label="Name" />
-        <Field
-          id="tag-description"
-          name="description"
-          component={TextFormField}
-          type="text"
-          label="Description"
-        />
-
-        <div className="form__footer">
-          <Button type="submit" style={style}>
-            Save
-          </Button>
-          <Button onClick={reset} style={style} theme="secondary">
-            Reset
-          </Button>
-        </div>
-      </Form>
+      <TagFormPanel>
+        <Headline type="h3">Add a New Tag</Headline>
+        <Form className="boldr-form__addtag" onSubmit={handleSubmit(this.addTagMutation)}>
+          <Field id="tag-name" name="name" component={TextFormField} type="text" label="Name" />
+          <Field
+            id="tag-description"
+            name="description"
+            component={TextFormField}
+            type="text"
+            label="Description"
+          />
+          <FormField isGrouped>
+            <Control>
+              <Button htmlType="submit" kind="primary" style={style}>
+                Save
+              </Button>
+            </Control>
+            <Control>
+              <Button onClick={reset} style={style} kind="secondary">
+                Reset
+              </Button>
+            </Control>
+          </FormField>
+        </Form>
+      </TagFormPanel>
     );
   }
 }
@@ -58,7 +79,19 @@ class AddTag extends React.Component {
 export default compose(
   graphql(ADD_TAG_MUTATION, {
     props: ({ mutate }) => ({
-      addTagMutation: values => mutate({ variables: { input: values } }),
+      addTagMutation: values =>
+        mutate({
+          variables: { input: values },
+          refetchQueries: [
+            {
+              query: TAGS_QUERY,
+              variables: {
+                offset: 0,
+                limit: 20,
+              },
+            },
+          ],
+        }),
     }),
   }),
   reduxForm({

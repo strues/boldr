@@ -2,12 +2,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import { gql, graphql } from 'react-apollo';
+import { graphql } from 'react-apollo';
 import Loader from '@boldr/ui/Loader';
+import PROFILE_QUERY from './gql/userProfile.graphql';
 import Profile from './Profile';
 
 type Props = {
-  user: User,
+  currentUser: User,
   data: Data,
   match: Object,
 };
@@ -22,7 +23,7 @@ type State = {
 };
 export class ProfileContainer extends Component {
   static defaultProps = {
-    user: {
+    currentUser: {
       email: '',
     },
     data: {
@@ -48,7 +49,7 @@ export class ProfileContainer extends Component {
   props: Props;
 
   setMe() {
-    const userEmail = this.props.user.email;
+    const userEmail = this.props.currentUser.email;
     const profEmail = this.props.data.loading ? '' : this.props.data.getUserByUsername.email;
     const isMe = userEmail === profEmail;
     this.setState({
@@ -72,37 +73,10 @@ export class ProfileContainer extends Component {
 
 const mapStateToProps = state => {
   return {
-    user: state.users.me,
+    currentUser: state.auth.info,
   };
 };
 
-const PROFILE_QUERY = gql`
-  query getUserByUsername($username: String!) {
-    getUserByUsername(username: $username) {
-      id
-      email
-      username
-      firstName
-      lastName
-      avatarUrl
-      profileImage
-      bio
-      location
-      website
-      roles {
-        name
-      }
-      socialMedia {
-        facebookUrl
-        githubUrl
-        twitterUrl
-        linkedinUrl
-        googleUrl
-        stackoverflowUrl
-      }
-    }
-  }
-`;
 const ProfileContainerWithData = graphql(PROFILE_QUERY, {
   options: props => ({
     variables: {

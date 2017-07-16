@@ -14,13 +14,6 @@ export type Props = {
   mutate: () => void,
 };
 
-type State = {
-  files: Array<Object>,
-  file: Object,
-  percentComplete: number,
-  uploadIsComplete: boolean,
-};
-
 const MediaTitleArea = styled.div`
   padding-top: 50px;
   margin-bottom: 35px;

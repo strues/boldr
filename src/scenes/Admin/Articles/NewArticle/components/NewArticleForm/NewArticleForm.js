@@ -1,12 +1,10 @@
 /* @flow */
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
 import EditorState from 'draft-js/lib/EditorState';
 import Button from '@boldr/ui/Button';
 import { Col, Row } from '@boldr/ui/Layout';
 import Paper from '@boldr/ui/Paper';
-import Paragraph from '@boldr/ui/Paragraph';
 import Headline from '@boldr/ui/Headline';
 import Block from '@boldr/ui/Block';
 import Form, {
@@ -22,7 +20,7 @@ import { setMedia } from '../../../../state/media/actions';
 import RenderTags from '../RenderTags';
 import FieldEditor from './FieldEditor';
 import { Inner, Toolbar, NewPost, DarkSegment, HelpTxt } from './NewPostStyled';
-import UploadArticleImage from './UploadArticleImage';
+// import UploadArticleImage from './UploadArticleImage';
 
 export type Props = {
   handleSubmit?: Function,
@@ -34,8 +32,6 @@ export type Props = {
   input?: Object,
   label?: string,
 };
-
-const radioOpts = [{ value: 'draft', text: 'Draft' }, { value: 'published', text: 'Published' }];
 
 class NewArticleForm extends Component {
   state = {

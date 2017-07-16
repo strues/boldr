@@ -14,6 +14,16 @@ import {
 } from '../../../../../../components/Form';
 import EditorField from './EditorField';
 
+const Wrapper = styled.section`
+  padding: 1em;
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12),
+    0 2px 4px -1px rgba(0, 0, 0, .4);
+  background-color: #fff;
+`;
+
 type Props = {
   handleSubmit?: Function,
   reset?: Function,
@@ -24,15 +34,7 @@ type Props = {
   label?: string,
   initialValues: Object,
 };
-const Wrapper = styled.section`
-  padding: 1em;
-  width: 100%;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12),
-    0 2px 4px -1px rgba(0, 0, 0, .4);
-  background-color: #fff;
-`;
+
 const EditArticleForm = (props: Props) => {
   const { handleSubmit } = props;
 

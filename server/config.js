@@ -1,3 +1,6 @@
+import path from 'path';
+import fs from 'fs';
+import appRoot from 'boldr-utils/lib/node/appRoot';
 import convict from 'convict';
 
 /**
@@ -32,17 +35,22 @@ export const config = convict({
     format: Boolean,
     default: false,
   },
+  isDebug: {
+    format: Boolean,
+    default: false,
+    env: 'BOLDR_DEBUG',
+  },
   siteUrl: {
     format: String,
     default: 'http://localhost:3000',
     env: 'SITE_URL',
   },
-  api: {
+  server: {
     port: {
       format: 'port',
       default: 3000,
       arg: 'boldr-port',
-      env: 'BOLDR_PORT',
+      env: 'PORT',
     },
     protocol: {
       format: String,
@@ -141,9 +149,14 @@ export const config = convict({
 });
 
 // Load environment dependent configuration
-
+const env = config.get('env');
 config.set('isProd', config.get('env') === 'production');
 config.set('isDev', config.get('env') === 'development');
+// Load environment dependent configuration
+const configPath = path.resolve(appRoot.get(), `./config/${env}.json`);
+const localConfig = fs.existsSync(configPath) ? require(configPath) : {};
+
+config.load(localConfig);
 config.validate();
 
 export default config.getProperties();

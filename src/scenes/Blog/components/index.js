@@ -1,23 +1,10 @@
-import Author from './Author';
-import ArticleCard from './ArticleCard';
-import ArticleContent from './ArticleContent';
-import ArticleImage from './ArticleImage';
-import ArticleSidebar from './ArticleSidebar';
-import TagBlock from './TagBlock';
-import FeaturedArticle from './FeaturedArticle';
-import ArticleTitle from './ArticleTitle';
-import SidebarTags from './SidebarTags';
-import ArticleDate from './ArticleDate';
-
-export {
-  Author,
-  ArticleDate,
-  ArticleCard,
-  ArticleTitle,
-  ArticleContent,
-  ArticleImage,
-  ArticleSidebar,
-  TagBlock,
-  FeaturedArticle,
-  SidebarTags,
-};
+export { default as Author } from './Author';
+export { default as ArticleCard } from './ArticleCard';
+export { default as ArticleContent } from './ArticleContent';
+export { default as ArticleImage } from './ArticleImage';
+export { default as ArticleSidebar } from './ArticleSidebar';
+export { default as TagBlock } from './TagBlock';
+export { default as FeaturedArticle } from './FeaturedArticle';
+export { default as ArticleTitle } from './ArticleTitle';
+export { default as SidebarTags } from './SidebarTags';
+export { default as ArticleDate } from './ArticleDate';

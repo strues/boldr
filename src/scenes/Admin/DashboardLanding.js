@@ -1,16 +1,12 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { gql, graphql } from 'react-apollo';
-import { bindActionCreators } from 'redux';
 import Headline from '@boldr/ui/Headline';
 import Icon from '@boldr/ui/Icons/Icon';
 import ContentPromo from '@boldr/ui/ContentPromo';
 import Tabs from '../../components/Tabs';
 
 export type Props = {
-  data: Object,
-  actions: Object,
   currentUser: User,
 };
 

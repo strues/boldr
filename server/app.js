@@ -3,19 +3,15 @@
 import 'isomorphic-fetch/fetch-npm-node';
 import { resolve as pathResolve } from 'path';
 import express from 'express';
-import _debug from 'debug';
 import bodyParser from 'body-parser';
 import appRoot from 'boldr-utils/lib/node/appRoot';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import DataLoaders from './DataLoaders';
 import { expressMiddleware, authMiddleware, errorHandler, apolloUpload } from './middleware';
-import { mainRedisClient } from './services/redis';
 import RootSchema from './data/rootSchema';
 import config from './config';
 import routes from './routes';
 import { enableEnhancedStackTraces } from './utils/debugUtil';
-
-const debug = _debug('boldr:server:app');
 
 enableEnhancedStackTraces();
 
@@ -29,7 +25,7 @@ authMiddleware(app);
 app.use(
   '/graphiql',
   graphiqlExpress({
-    endpointURL: `${config.api.prefix}/graphql`,
+    endpointURL: `${config.server.prefix}/graphql`,
   }),
 );
 
@@ -61,7 +57,7 @@ const graphqlHandler = graphqlExpress(req => {
 });
 
 app.use(
-  `${config.api.prefix}/graphql`,
+  `${config.server.prefix}/graphql`,
   bodyParser.json(),
   apolloUpload({
     uploadDir: pathResolve(appRoot.get(), './public/uploads/tmp'),

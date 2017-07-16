@@ -87,7 +87,7 @@ export default {
     description: 'Edit an existing user',
     args: {
       id: {
-        type: new GraphQLNonNull(GraphQLUUID),
+        type: new GraphQLNonNull(GraphQLID),
         description: 'The user ID',
       },
       input: {

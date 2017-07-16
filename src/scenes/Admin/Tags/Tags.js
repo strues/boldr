@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-
+import Loader from '@boldr/ui/Loader';
 // internal
 import Paper from '@boldr/ui/Paper';
 import { Row, Col } from '@boldr/ui/Layout';
@@ -11,7 +11,7 @@ import TagList from './components/TagList';
 import AddTag from './components/AddTag';
 
 type Props = {
-  tags: Array<Tag>,
+  data: Data,
   currentTag: Object,
   dispatch: Function,
 };
@@ -20,7 +20,16 @@ type State = {
   add: boolean,
 };
 
+type Data = {
+  getTags: Array<Tag>,
+  loading: boolean,
+};
 class Tags extends Component {
+  static defaultProps = {
+    data: {
+      getTags: [],
+    },
+  };
   state = {
     add: false,
   };
@@ -41,23 +50,24 @@ class Tags extends Component {
     console.log(id);
   };
   render() {
+    const { loading, getTags } = this.props.data;
+    if (loading) {
+      return <Loader />;
+    }
     return (
-      <Row>
+      <div>
         <Helmet title="Admin: Tags" />
-        <Col sm={12} md={4}>
-          <Paper zDepth={2}>
-            <TagList tags={this.props.tags} handleDeleteTagClick={this.handleDeleteTagClick} />
-          </Paper>
-        </Col>
-        <Col sm={12} md={8}>
-          {!this.state.add
-            ? null
-            : <Paper zDepth={3} className="boldr-paperoverride">
-                {/* <AddTag /> */}
-                a
-              </Paper>}
-        </Col>
-      </Row>
+        <Row>
+          <Col sm={12} md={5} lg={4}>
+            <AddTag />
+          </Col>
+          <Col sm={12} md={7} lg={8}>
+            <Paper zDepth={2}>
+              <TagList tags={getTags} handleDeleteTagClick={this.handleDeleteTagClick} />
+            </Paper>
+          </Col>
+        </Row>
+      </div>
     );
   }
 }

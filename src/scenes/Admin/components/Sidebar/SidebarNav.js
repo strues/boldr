@@ -1,15 +1,10 @@
 /* @flow */
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import { StyleClasses, BOLDR_NS } from '../../../../theme/styleClasses';
+import { StyleClasses } from '../../../../theme/styleClasses';
 import SidebarNavItem from './SidebarNavItem';
-import {
-  createItemTree,
-  toggleExpandedItemWithId,
-  expandParent,
-  activateItemWithLink,
-} from './SidebarUtils';
-import type { SidebarLink, SidebarLinks } from './Sidebar';
+import { createItemTree, toggleExpandedItemWithId, activateItemWithLink } from './SidebarUtils';
+import type { SidebarLinks } from './Sidebar';
 
 const BASE_ELEMENT = StyleClasses.SIDEBAR_NAV;
 

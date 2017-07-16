@@ -1,6 +1,6 @@
 // @flow
-import { gql, graphql } from 'react-apollo';
-import GET_ARTICLE_QUERY from './article.graphql';
+import { graphql } from 'react-apollo';
+import GET_ARTICLE_QUERY from '../gql/article.graphql';
 import Article from './Article';
 
 export default graphql(GET_ARTICLE_QUERY, {

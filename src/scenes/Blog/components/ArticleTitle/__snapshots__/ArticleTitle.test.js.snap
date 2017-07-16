@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ArticleTitle /> renders snapshot 1`] = `
-<styled.div>
+<ArticleTitle__TitleWrapper>
   <Headline
     className="boldrui-article__title"
     lightText={true}
     type="h1"
   />
-</styled.div>
+</ArticleTitle__TitleWrapper>
 `;

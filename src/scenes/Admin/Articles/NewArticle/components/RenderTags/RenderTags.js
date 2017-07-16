@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import TagsInput from 'react-tagsinput';
-import { FormGroup, Label } from '@@components/index';
+import { FormGroup, Label } from '../../../../../../components/Form';
 
 const RenderTags = ({ input, label, meta: { touched, error, warning } }) =>
   <FormGroup color={`${touched && error ? 'danger' : ''}`}>

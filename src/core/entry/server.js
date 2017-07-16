@@ -11,7 +11,6 @@ import { flushModuleIds } from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
 
 import { ApolloProvider, getDataFromTree } from 'react-apollo';
-import { createBatchingNetworkInterface } from 'apollo-client';
 
 import apolloClient from '../createApolloClient';
 import App from '../App';
@@ -50,14 +49,23 @@ export default ({ clientStats, outputPath }) => {
         </StaticRouter>
       </ApolloProvider>
     );
-
-    await getDataFromTree(appComponent);
+    try {
+      // Recurse the component tree and prefetch all Apollo data queries to
+      // populate the Apollo Client Redux store. This allows an instant
+      // server side render.
+      // See: http://dev.apollodata.com/react/server-side-rendering.html#getDataFromTree
+      await getDataFromTree(appComponent);
+    } catch (error) {
+      // Prevent Apollo Client GraphQL errors from crashing SSR.
+      // Handle them in components via the data.error prop:
+      // http://dev.apollodata.com/react/api-queries.html#graphql-query-data-error
+    }
 
     const markup = renderToString(sheet.collectStyles(appComponent));
     const moduleIds = flushModuleIds();
     const helmet = Helmet.renderStatic();
 
-    const { js, styles, publicPath, cssHash } = await flushChunks(clientStats, {
+    const { js, styles, cssHash } = await flushChunks(clientStats, {
       moduleIds,
       before: ['bootstrap', 'vendor'],
       after: ['main'],
@@ -92,6 +100,10 @@ export default ({ clientStats, outputPath }) => {
             </head>
             <body ${helmet.bodyAttributes.toString()}>
               <div id="app"><div>${markup}</div></div>
+              <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" nonce=${nonce}></script>
+              <script nonce=${nonce}>
+                WebFont.load({ google: { families: ['Roboto:300,600','Chivo:400,600'] } });
+              </script>
               <script nonce=${nonce} type="text/javascript" src="/assets/boldrDLLs.js"></script>
               ${js}
               <script type="text/javascript" nonce=${nonce}>
@@ -115,6 +127,10 @@ export default ({ clientStats, outputPath }) => {
             </head>
             <body>
               <div id="app">${markup}</div>
+              <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" nonce=${nonce}></script>
+              <script nonce=${nonce}>
+                WebFont.load({ google: { families: ['Roboto:300,600','Chivo:400,600'] } });
+              </script>
               ${js}
               <script type="text/javascript" nonce=${nonce}>
                 window.__APOLLO_STATE__=${serialize(preloadedState, {

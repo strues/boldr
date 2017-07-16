@@ -60,7 +60,7 @@ export default {
     description: 'Edit an existing media file',
     args: {
       id: {
-        type: new GraphQLNonNull(GraphQLUUID),
+        type: new GraphQLNonNull(GraphQLID),
         description: 'The media ID',
       },
       input: {
@@ -82,7 +82,7 @@ export default {
     description: 'Remove a media file from the server',
     args: {
       id: {
-        type: new GraphQLNonNull(GraphQLUUID),
+        type: new GraphQLNonNull(GraphQLID),
         description: 'The media ID',
       },
     },

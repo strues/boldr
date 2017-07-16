@@ -1,30 +1,24 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
 import cn from 'classnames';
 import Avatar from '@boldr/ui/Avatar';
 import Toggler from '@boldr/ui/Toggler';
 
 import { StyleClasses } from '../../../../theme/styleClasses';
-import { mediaQuery } from '../../../../theme/theme';
 import TopbarPlainLink from './TopbarPlainLink';
 import TopbarSearch from './TopbarSearch';
-import TopbarLink from './TopbarLink';
 
 const BASE_ELEMENT = StyleClasses.TOPBAR;
 
 class Topbar extends Component {
   static propTypes = {
     className: PropTypes.string,
-    logo: PropTypes.node,
     url: PropTypes.string.isRequired,
     link: PropTypes.oneOfType([PropTypes.func, PropTypes.instanceOf(React.Component)]),
     links: PropTypes.arrayOf(PropTypes.object),
     search: PropTypes.bool.isRequired,
     sidebarToggleable: PropTypes.bool,
     onMenuClick: PropTypes.func,
-    onSearch: PropTypes.func,
-    onSearchTyping: PropTypes.func,
     avatarUrl: PropTypes.string,
     username: PropTypes.string,
   };
@@ -82,7 +76,7 @@ class Topbar extends Component {
      * Toggle the search input
      *
      */
-  _toggleSearch = e => {
+  _toggleSearch = () => {
     this.setState({
       searching: !this.state.searching,
     });
@@ -109,7 +103,7 @@ class Topbar extends Component {
      * @return {array} - An array of components
      */
   get _links() {
-    const { links, link: Link, search, url, sidebarToggleable } = this.props;
+    const { links, link: Link, search, url } = this.props;
 
     return links.map((link, index) => {
       const active = this._isActive(link, url);
@@ -131,7 +125,6 @@ class Topbar extends Component {
   }
   render() {
     const { className, link: Link } = this.props;
-    const { searching } = this.state;
     const classes = cn(
       BASE_ELEMENT,
       {

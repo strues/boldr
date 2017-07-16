@@ -4,7 +4,7 @@ import getReducers from '../state/reducers';
 
 const inBrowser = typeof window === 'object';
 
-export default function configureStore(apolloClient, preloadedState, history) {
+export default function configureStore(apolloClient, preloadedState) {
   const middleware = [apolloClient.middleware(), thunkMiddleware];
 
   const enhancers = [applyMiddleware(...middleware)];

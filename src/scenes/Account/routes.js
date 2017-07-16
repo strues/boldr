@@ -1,6 +1,4 @@
 // @flow
-import React from 'react';
-
 import ForgotPassword from './ForgotPassword';
 import ResetPassword from './ResetPassword';
 import Verify from './Verify';

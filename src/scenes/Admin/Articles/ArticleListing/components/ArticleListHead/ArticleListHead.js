@@ -6,7 +6,7 @@ class ArticleListHead extends Component {
   render() {
     return (
       <div>
-        <Headline kind="h2">ArticleListHead</Headline>
+        <Headline kind="h3">All Articles</Headline>
       </div>
     );
   }

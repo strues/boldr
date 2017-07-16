@@ -16,7 +16,7 @@ const PageType = new GraphQLObjectType({
   description: 'Page of the website',
   fields: () => ({
     id: {
-      type: GraphQLUUID,
+      type: GraphQLID,
       description: "The page's id (uuid)",
     },
     title: {

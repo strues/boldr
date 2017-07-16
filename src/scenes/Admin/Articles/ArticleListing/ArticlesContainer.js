@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { gql, graphql } from 'react-apollo';
+import { graphql } from 'react-apollo';
 import Loader from '@boldr/ui/Loader';
 // internal
 import { setArticle } from '../../state/dashboard/actions';

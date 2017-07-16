@@ -10,15 +10,15 @@ export default {
     description: 'A query for a listing of all media',
     args: {
       offset: {
-        type: new GraphQLNonNull(GraphQLInt),
+        type: GraphQLInt,
         description: 'The number of media to offset',
       },
       limit: {
-        type: new GraphQLNonNull(GraphQLInt),
+        type: GraphQLInt,
         description: 'The maximum number of media to return at a time.',
       },
     },
-    async resolve(_, { limit, offset }, context) {
+    async resolve(_, { limit, offset }, ctx) {
       const media = await Media.query().returning('*');
       if (media) {
         return media;
@@ -31,12 +31,12 @@ export default {
     description: 'A query for a returning a single media by its id',
     args: {
       id: {
-        type: new GraphQLNonNull(GraphQLUUID),
+        type: new GraphQLNonNull(GraphQLID),
         description: 'The id of the requested media',
       },
     },
-    async resolve(_, { id }, context) {
-      const media = await Media.getMediaById(id);
+    async resolve(_, { id }, ctx) {
+      const media = await ctx.media.load(id);
       if (media) {
         return media;
       }

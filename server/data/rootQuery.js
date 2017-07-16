@@ -1,6 +1,5 @@
 import { GraphQLObjectType } from 'graphql';
 import article from './article/articleQuery';
-import attachment from './attachment/attachmentQuery';
 import media from './media/mediaQuery';
 import menu from './menu/menuQuery';
 import page from './page/pageQuery';
@@ -12,7 +11,6 @@ import user from './user/userQuery';
 const rootFields = Object.assign(
   {},
   article,
-  attachment,
   media,
   menu,
   page,

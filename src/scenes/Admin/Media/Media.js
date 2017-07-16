@@ -2,21 +2,17 @@
 /* eslint-disable react/prefer-stateless-function */
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import filter from 'lodash/filter';
-import Link from 'react-router-dom/Link';
 import { graphql } from 'react-apollo';
 import styled from 'styled-components';
 import ImageDisplay from '@boldr/ui/ImageDisplay';
 import { Col, Row } from '@boldr/ui/Layout';
 import Headline from '@boldr/ui/Headline';
-import FontIcon from '@boldr/ui/FontIcon';
 import DELETE_MEDIA from './gql/deleteMedia.graphql';
 
 type Props = {
   media: Array<Object>,
   deleteMedia: () => void,
   imageUpdateClick: () => void,
-  siteName: string,
 };
 const MediaList = styled.ul`
   flex-flow: row wrap;

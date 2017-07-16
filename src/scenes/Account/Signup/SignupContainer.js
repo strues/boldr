@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { doSignup } from '../state/actions';
 import Signup from './Signup';
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
+const mapDispatchToProps = dispatch => ({
   onSubmit: formInput => {
     dispatch(doSignup(formInput));
   },

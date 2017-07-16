@@ -18,11 +18,11 @@ export const SocialType = new GraphQLObjectType({
   name: 'Social',
   fields: () => ({
     id: {
-      type: GraphQLUUID,
-      description: 'The id',
+      type: GraphQLID,
+      description: 'The id for the users social media',
     },
     userId: {
-      type: GraphQLUUID,
+      type: GraphQLID,
       description: 'The unique identifier for the user for the identity.',
     },
     facebookUrl: {
@@ -73,7 +73,7 @@ export const ResetTokenType = new GraphQLObjectType({
       description: 'True if the token has been used before.',
     },
     userId: {
-      type: GraphQLUUID,
+      type: GraphQLID,
       description: 'The IP address of the blocked user',
     },
     createdAt: {
@@ -108,7 +108,7 @@ export const VerificationTokenType = new GraphQLObjectType({
       description: 'True if the token has been used before.',
     },
     userId: {
-      type: GraphQLUUID,
+      type: GraphQLID,
       description: 'The IP address of the blocked user',
     },
     createdAt: {
@@ -127,7 +127,7 @@ const UserType = new GraphQLObjectType({
   description: 'The user or account',
   fields: () => ({
     id: {
-      type: GraphQLUUID,
+      type: GraphQLID,
       description: 'The users id (uuid)',
     },
     deletedAt: {
@@ -241,7 +241,7 @@ export const EditUserInput = new GraphQLInputObjectType({
   name: 'EditUserInput',
   fields: () => ({
     email: {
-      type: new GraphQLNonNull(GraphQLEmail),
+      type: GraphQLEmail,
       description: 'The email address of the account to login to.',
     },
     location: {

@@ -21,36 +21,12 @@ import {
 } from './components';
 
 type Props = {
-  flattenedRoutes: Array<{
-    path: string,
-    component: ReactElement<*>,
-    exact: boolean,
-  }>,
-  children: any,
-  dashboard: ?Object,
   me: Object,
   location: Object,
   match: Object,
   ui: Object,
-  route: Object,
-  hideHeader: Function,
-  copyright: string,
   dispatch: Function,
-  router: Object,
 };
-
-const SideArea = styled.div`
-  background-color: green;
-  display: flex;
-  flex-basis: 275px;
-
-  flex-shrink: 0;
-
-  padding: 1.2em;
-  @media screen and (min-width: 600px) {
-    width: 180px;
-  }
-`;
 
 const TbArea = styled.div`
   width: 100%;

@@ -13,7 +13,7 @@ import tagRoutes from './tag/tag.routes';
 import tokenRoutes from './token/token.routes';
 import userRoutes from './user/user.routes';
 
-const API_PREFIX = config.api.prefix;
+const API_PREFIX = config.server.prefix;
 
 export default app => {
   app.get(`${API_PREFIX}/health-check`, (req, res) => {

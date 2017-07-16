@@ -135,7 +135,7 @@ module.exports.up = async db => {
     table.index('createdAt');
   });
 
-  await db.schema.createTable('upload', table => {
+  await db.schema.createTable('file', table => {
     // pk
     table
       .uuid('id')
@@ -146,18 +146,19 @@ module.exports.up = async db => {
     table.string('type', 32).notNullable();
     table.string('url', 125).notNullable();
     table.string('path', 255).notNullable();
+    table.integer('size');
     table.string('safeName', 128).notNullable();
     table.string('thumbName', 128);
-    table.integer('size');
     table.string('fileDescription').nullable();
-    table.uuid('userId').unsigned().notNullable();
+    table.uuid('ownerId').unsigned().notNullable();
 
     table.timestamp('createdAt').defaultTo(db.fn.now());
-    table.timestamp('updatedAt').defaultTo(db.fn.now());
+    table.timestamp('updatedAt').nullable().defaultTo(null);
+    table.timestamp('deletedAt').nullable().defaultTo(null);
 
     // fk | uuid
     table
-      .foreign('userId')
+      .foreign('ownerId')
       .references('id')
       .inTable('user')
       .onDelete('cascade')
@@ -165,6 +166,7 @@ module.exports.up = async db => {
 
     table.index('name');
     table.index('url');
+    table.index('path');
   });
 
   await db.schema.createTable('setting', table => {
@@ -175,7 +177,6 @@ module.exports.up = async db => {
     table.string('description', 255).notNullable();
     table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
     table.timestamp('updatedAt').nullable().defaultTo(null);
-    table.timestamp('deletedAt').nullable().defaultTo(null);
 
     table.index('key');
     table.index('value');
@@ -281,7 +282,7 @@ module.exports.down = async db => {
   await db.schema.dropTableIfExists('user');
   await db.schema.dropTableIfExists('tag');
   await db.schema.dropTableIfExists('article');
-  await db.schema.dropTableIfExists('upload');
+  await db.schema.dropTableIfExists('file');
   await db.schema.dropTableIfExists('setting');
   await db.schema.dropTableIfExists('menu');
   await db.schema.dropTableIfExists('menu_detail');

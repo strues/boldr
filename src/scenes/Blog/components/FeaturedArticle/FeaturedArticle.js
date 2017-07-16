@@ -3,12 +3,10 @@ import React from 'react';
 import Link from 'react-router-dom/Link';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { Row, Col } from '@@components/Layout';
+import Button from '@boldr/ui/Button';
+import Row from '@boldr/ui/Layout/Row';
 import Paragraph from '@@components/Paragraph';
 import { mediaQuery } from '../../../../theme/theme';
-import Button from '@boldr/ui/Button';
-import { selectArticle } from '../../state/articles/actions';
-import TagBlock from '../TagBlock';
 
 type Props = {
   id?: string,
@@ -18,16 +16,12 @@ type Props = {
   image?: string,
   excerpt?: string,
   createdAt: string,
-  updatedAt?: string,
   status: ?string,
   author: string,
-  seo?: Object,
   tags: Array<Tag>,
   attachments: ?Object,
   meta: ?Object,
   userId: ?string,
-  dispatch: Function,
-  listTags: Object,
 };
 const Wrapper = styled.section`
   display: flex;
@@ -78,23 +72,6 @@ export const FeaturedArticle = (props: Props) => {
     width: 100%;
     ${mediaQuery.small`flex-direction: row; width: 70%`};
   `;
-  // Explicitly define post rather than passing additional
-  // unnecessary props like listTags
-  const article = {
-    id: props.id,
-    author: props.author,
-    attachments: props.attachments,
-    content: props.content,
-    createdAt: props.createdAt,
-    excerpt: props.excerpt,
-    image: props.image,
-    meta: props.meta,
-    slug: props.slug,
-    status: props.status,
-    tags: props.tags,
-    title: props.title,
-    userId: props.userId,
-  };
 
   return (
     <div className="boldrui-feat-post">

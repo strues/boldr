@@ -1,7 +1,6 @@
 // @flow
 import React, { Component } from 'react';
 import Helmet from 'react-helmet';
-import styled from 'styled-components';
 import classnames from 'classnames';
 import HeroArticle from '@@components/Hero/HeroArticle';
 import Loader from '@@components/Loader';
@@ -15,12 +14,7 @@ export type Props = {
   loading: boolean,
   className: ?string,
   data: Object,
-  articleBySlug: Object,
   sidebarClassName: ?string,
-  match: Object,
-  fetchArticleIfNeeded: (slug: string) => void,
-  dispatch: Function,
-  params: Object,
 };
 
 class Article extends Component {

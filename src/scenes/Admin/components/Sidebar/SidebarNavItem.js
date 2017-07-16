@@ -2,31 +2,24 @@
 /* eslint-disable  jsx-a11y/no-static-element-interactions */
 import React from 'react';
 import classnames from 'classnames';
-import NavLink from 'react-router-dom/NavLink';
 import Icon from '@boldr/ui/Icons/Icon';
 
-import { StyleClasses, BOLDR_NS } from '../../../../theme/styleClasses';
+import { StyleClasses } from '../../../../theme/styleClasses';
 import Anchor from '../../../../components/Anchor';
-import type { SidebarLink, SidebarLinks } from './Sidebar';
-import { Chevron, FaIcon } from './SidebarUtils';
+import { Chevron } from './SidebarUtils';
 
 const PARENT_ELEMENT = StyleClasses.SIDEBAR_NAV;
 const BASE_ELEMENT = StyleClasses.SIDEBAR_NAV_ITEM;
 
-export type SidebarNavItemProps = {
+export type Props = {
   label: string,
-  id: string | number,
-  onItemClick?: () => void,
   onExpandCollapse?: () => void,
-  level: number,
-  link: string,
   icon: string,
   active: boolean,
   expanded: boolean,
-  items: SidebarLinks,
 };
 
-const SidebarNavTitle = (props: SidebarNavItemProps) => {
+const SidebarNavTitle = (props: Props) => {
   return (
     <div className={classnames(`${BASE_ELEMENT}-title`)} onClick={props.onExpandCollapse}>
       {/* if theres an icon we're going to render it */}

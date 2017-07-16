@@ -13,7 +13,7 @@ export default {
       },
     },
     async resolve(_, args, context) {
-      const payload = await Tag.query().saveAndFetch(args.input);
+      const payload = await Tag.query().insert(args.input).returning('*');
       return payload;
     },
   },

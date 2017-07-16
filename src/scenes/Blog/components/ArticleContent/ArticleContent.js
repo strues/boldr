@@ -1,14 +1,13 @@
 /* @flow */
 import React from 'react';
 import classnames from 'classnames';
-import { Divider, Paper, Col, Heading, Icon } from '@boldr/ui';
+import Divider from '@boldr/ui/Divider';
+import Paper from '@boldr/ui/Paper';
 import { StyleClasses } from '../../../../theme/styleClasses';
 import ArticleDate from '../ArticleDate';
 
 export type Props = {
-  title?: string,
   content: string,
-  image?: string,
   createdAt: Date,
   className?: string,
 };

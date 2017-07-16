@@ -1,15 +1,12 @@
 /* @flow */
 import React from 'react';
-import Link from 'react-router-dom/Link';
 import { connect } from 'react-redux';
 import { format } from 'date-fns';
 import classnames from 'classnames';
-import { Card, CardTitle, CardText, CardActions, Media, MediaOverlay } from '@boldr/ui';
-import Col from '@boldr/ui/Layout/Col';
-import Row from '@boldr/ui/Layout/Row';
+import { Card, CardTitle, CardText, CardActions, Media } from '@boldr/ui';
 import Button from '@boldr/ui/Button';
 import { StyleClasses } from '../../../../theme/styleClasses';
-import { selectArticle } from '../../state/articles/actions';
+import { selectArticle } from '../../state/actions';
 
 import TagBlock from '../TagBlock';
 

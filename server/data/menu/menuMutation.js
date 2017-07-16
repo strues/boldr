@@ -18,7 +18,7 @@ export default {
     description: 'Edit menu details',
     args: {
       id: {
-        type: new GraphQLNonNull(GraphQLUUID),
+        type: new GraphQLNonNull(GraphQLID),
         description: 'The detail ID',
       },
       input: {

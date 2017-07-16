@@ -8,7 +8,7 @@ export default {
     description: 'creating a new tag',
     args: {
       id: {
-        type: GraphQLInt,
+        type: new GraphQLNonNull(GraphQLID),
       },
       input: {
         type: new GraphQLNonNull(SettingInput),
@@ -16,7 +16,7 @@ export default {
     },
     async resolve(_, args, context) {
       // await Article.query().patchAndFetchById(args.id, {
-      const payload = await Setting.query().saveAndFetch(args.input);
+      const payload = await Setting.query().patchAndFetch(args.input);
       return payload;
     },
   },

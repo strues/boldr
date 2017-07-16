@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Link from 'react-router-dom/Link';
 
 type Props = {
-  isPrimaryColor: string,
+  isPrimaryColor?: boolean,
   logoImg: string,
   logoLink: string,
 };
@@ -13,10 +13,6 @@ const LogoElement = styled.div`
   width: 100%;
   position: relative;
   margin: 0 auto;
-`;
-const InfoElement = styled.div`
-  padding-left: 6px;
-  padding-top: 6px;
 `;
 const Header = styled.div`
   display: block;

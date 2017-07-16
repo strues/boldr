@@ -4,7 +4,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
-import WebFontLoader from 'webfontloader';
 import { ApolloProvider } from 'react-apollo';
 import { checkAuth } from '../../scenes/Account/state/actions';
 import { getToken } from '../authentication/token';
@@ -13,13 +12,6 @@ import RouterConnection from '../RouterConnection';
 import apolloClient from '../createApolloClient';
 import ReactHotLoader from '../util/ReactHotLoader';
 import App from '../App';
-
-// Async font loading
-WebFontLoader.load({
-  google: {
-    families: ['Roboto:300,600', 'Chivo:400,600'],
-  },
-});
 
 const MOUNT_POINT = document.getElementById('app');
 // Load the JWT if it exists.

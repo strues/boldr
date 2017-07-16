@@ -1,9 +1,6 @@
 /* @flow */
 import React, { Component } from 'react';
 import withRouter from 'react-router-dom/withRouter';
-import classnames from 'classnames';
-
-import { StyleClasses } from '../../../../theme/styleClasses';
 
 import SidebarWrapper from './SidebarWrapper';
 import SidebarHeader from './SidebarHeader';
@@ -43,7 +40,6 @@ export type Props = {
   sidebarDark: boolean,
 };
 
-const BASE_ELEMENT = StyleClasses.SIDEBAR;
 class Sidebar extends Component {
   static defaultProps = {
     isPrimaryColor: true,
@@ -57,8 +53,6 @@ class Sidebar extends Component {
   props: Props;
 
   render() {
-    const classes = classnames(BASE_ELEMENT, this.props.className);
-
     return (
       <SidebarWrapper {...this.props}>
         <SidebarHeader

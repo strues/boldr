@@ -1,0 +1,16 @@
+query getArticlesForTag($name: String!) {
+  getArticlesForTag(name: $name, offset: 0, limit: 20) {
+    id
+    title
+    content
+    slug
+    image
+    excerpt
+    createdAt
+    userId
+    tags {
+      id
+      name
+    }
+  }
+}

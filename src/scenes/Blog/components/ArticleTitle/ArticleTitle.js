@@ -1,8 +1,8 @@
 /* @flow */
 import React from 'react';
-import { Headline } from '@boldr/ui';
 import styled from 'styled-components';
 import cx from 'classnames';
+import Headline from '../../../../components/Headline';
 import { StyleClasses } from '../../../../theme/styleClasses';
 
 const TitleWrapper = styled.div`

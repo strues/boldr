@@ -1,4 +1,4 @@
-import { compose, gql, graphql } from 'react-apollo';
+import { compose, graphql } from 'react-apollo';
 import MEDIA_BY_ID_QUERY from '../gql/mediaById.graphql';
 import EDIT_MEDIA_MUTATION from '../gql/editMedia.graphql';
 import MediaManager from './MediaManager';

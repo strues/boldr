@@ -79,6 +79,5 @@ module.exports = {
     'serialize-javascript',
     'styled-components',
     'uuid',
-    'webfontloader',
   ],
 };

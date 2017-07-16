@@ -6,16 +6,14 @@ import { graphql } from 'react-apollo';
 import Loader from '@boldr/ui/Loader';
 // internal
 import { showModal, hideModal } from '../../../state/boldr/ui/actions';
-import { fetchMembersIfNeeded, memberSelected, updateMember } from '../state';
+import { memberSelected, updateMember } from '../state';
 import Members from './Members';
 import MEMBERS_QUERY from './users.graphql';
 
 export type Props = {
   data: Data,
-  hideModal: () => void,
   currentMember: User,
   dispatch: Function,
-  showModal: () => void,
   ui: Object,
 };
 type Data = {

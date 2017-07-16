@@ -6,12 +6,11 @@ import app from './app';
 import { db, initializeDb, disconnect } from './services/db';
 import logger from './services/logger';
 import { destroyRedis } from './services/redis';
+import { SERVER_PORT } from './utils/port';
 
 const debug = _debug('boldr:server');
-const processPort = parseInt(process.env.BOLDR_PORT, 10);
 const host = process.env.BOLDR_HOST || '0.0.0.0';
 // Launch Node.js server
-const port = processPort || 3000;
 const server = http.createServer(app);
 
 initializeDb()
@@ -25,7 +24,7 @@ initializeDb()
       logger.error(`⚠️  ${err}`);
       throw err;
     });
-    return server.listen(port);
+    return server.listen(SERVER_PORT);
   })
   .catch(err => {
     logger.error(err);
