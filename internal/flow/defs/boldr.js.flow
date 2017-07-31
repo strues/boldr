@@ -9,6 +9,29 @@ declare type ReactChild = ReactNode | boolean | void | null;
 
 declare type ReactChildren = ReactChild | Array<ReactChildren>;
 
+declare type FluxStandardAction = {
+  type: string,
+  payload?: any,
+  meta?: any,
+  error?: boolean,
+};
+
+declare type Reducer = (state: ?Object, action: FluxStandardAction) => Object;
+
+declare type Params = { [string]: string | number };
+
+declare type LocationShape = {
+  pathname?: string,
+  search?: string,
+  hash?: string,
+  state?: any,
+};
+declare type MatchPathOptions = {
+  path: string,
+  exact?: boolean,
+  strict?: boolean,
+};
+
 declare type User = {
   id: string,
   email: string,

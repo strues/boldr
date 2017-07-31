@@ -3,7 +3,6 @@ import { replacePath } from '../../../core/RouterConnection';
 import { API_PREFIX, setToken, removeToken } from '../../../core';
 import * as notif from '../../../core/constants';
 import { sendNotification, showNotification } from '../../../state/notifications/notifications';
-import { setUserLoggedIn } from '../../../state/users/actions';
 import LOGIN_MUTATION from '../gql/login.mutation.graphql';
 import SIGNUP_MUTATION from '../gql/signup.mutation.graphql';
 import apolloClient from '../../../core/createApolloClient';
@@ -207,3 +206,143 @@ export const checkAuth = (token: string) => {
       });
   };
 };
+
+/**
+  * FORGOT PASSWORD ACTIONS
+  * -------------------------
+  * @exports forgotPassword
+  *****************************************************************/
+
+export function forgotPassword(email) {
+  return dispatch => {
+    dispatch({
+      type: t.FORGOT_PASSWORD_REQUEST,
+    });
+    return fetch(`${API_PREFIX}/tokens/forgot-password`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ email }),
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(res => {
+        if (res.status !== 202) {
+          const err = JSON.stringify(res.data.message.message);
+          dispatch({
+            type: t.FORGOT_PASSWORD_FAILURE,
+            error: err,
+          });
+          return dispatch(sendNotification(notif.MSG_FORGOT_PW_ERROR));
+        }
+        dispatch({
+          type: t.FORGOT_PASSWORD_SUCCESS,
+        });
+        dispatch(replacePath('/'));
+        return dispatch(sendNotification(notif.MSG_FORGOT_PW_ERROR));
+      })
+      .catch(err =>
+        dispatch({
+          type: t.FORGOT_PASSWORD_FAILURE,
+          error: err,
+        }),
+      );
+  };
+}
+
+/**
+  * RESET PASSWORD ACTIONS
+  * -------------------------
+  * @exports resetPassword
+  *****************************************************************/
+
+export function resetPassword(password, token) {
+  return dispatch => {
+    dispatch({
+      type: t.RESET_PASSWORD_REQUEST,
+    });
+    return fetch(`${API_PREFIX}/tokens/reset-password/${token}`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        password,
+        token,
+      }),
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(res => {
+        if (res.status !== 204) {
+          return dispatch({
+            type: t.RESET_PASSWORD_FAILURE,
+            error: res.message,
+          });
+        }
+        dispatch({
+          type: t.RESET_PASSWORD_SUCCESS,
+        });
+        dispatch(replacePath('/login'));
+        return dispatch(sendNotification(notif.MSG_RESET_PW_SUCCESS));
+      })
+      .catch(err =>
+        dispatch({
+          type: t.RESET_PASSWORD_FAILURE,
+          error: err,
+        }),
+      );
+  };
+}
+
+export function setUserLoggedIn(loginUser) {
+  return {
+    type: t.SET_USER_LOGGED_IN,
+    user: loginUser.user,
+  };
+}
+
+/**
+  * VERIFY ACCOUNT ACTIONS
+  * -------------------------
+  * @exports verifyAccount
+  *****************************************************************/
+
+export function verifyAccount(token) {
+  return dispatch => {
+    dispatch({
+      type: t.VERIFY_ACCOUNT_REQUEST,
+    });
+    return fetch(`${API_PREFIX}/auth/verify`, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json, text/plain, */*',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        token,
+      }),
+    })
+      .then(response => {
+        return response.json();
+      })
+      .then(res => {
+        dispatch(replacePath('/login'));
+        dispatch({
+          type: t.VERIFY_ACCOUNT_SUCCESS,
+        });
+        return dispatch(sendNotification(notif.MSG_VERIFY_USER_SUCCESS));
+      })
+      .catch(err =>
+        dispatch({
+          type: t.VERIFY_ACCOUNT_FAILURE,
+          error: err,
+        }),
+      );
+  };
+}

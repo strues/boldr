@@ -35,6 +35,8 @@
 [libs]
 flow-typed/npm/
 internal/flow/defs/
+./node_modules/react-apollo/lib/index.js.flow
+./node_modules/apollo-client/lib/index.js.flow
 
 [options]
 emoji=true

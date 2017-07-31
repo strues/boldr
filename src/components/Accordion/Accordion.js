@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 type Props = {
   accordion: boolean,
   children: ReactChildren,
-  className: string,
+  className?: string,
   onChange: () => void,
 };
 type State = {

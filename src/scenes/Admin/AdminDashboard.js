@@ -20,8 +20,8 @@ import {
   DashboardMain,
 } from './components';
 
-type Props = {
-  me: Object,
+export type Props = {
+  currentUser: Object,
   location: Object,
   match: Object,
   ui: Object,
@@ -53,7 +53,7 @@ export class AdminDashboard extends Component {
   };
 
   render() {
-    const { me, ui, location: { pathname } } = this.props;
+    const { currentUser, ui, location: { pathname } } = this.props;
 
     return (
       <DashboardWrapper>
@@ -74,8 +74,8 @@ export class AdminDashboard extends Component {
             <Topbar
               url={this.props.match.path}
               onMenuClick={this.handleHideSidebar}
-              avatarUrl={me.avatarUrl}
-              username={me.username}
+              avatarUrl={currentUser.avatarUrl}
+              username={currentUser.username}
               link={TopbarLink}
               links={[{ title: 'Home', url: '/' }, { title: 'Dashboard', url: '/admin' }]}
             />
@@ -96,7 +96,7 @@ function mapStateToProps(state) {
   return {
     dashboard: state.admin.dashboard,
     boldr: state.boldr,
-    me: state.users.me,
+    currentUser: state.auth.info,
     router: state.router,
     ui: state.boldr.ui,
   };

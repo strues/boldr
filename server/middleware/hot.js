@@ -9,8 +9,8 @@ const wpServerMiddleware = require('./wpServer');
 
 const router = express.Router();
 
-async function setupHotDev() {
-  await buildWebpackDlls();
+function setupHotDev() {
+  // await buildWebpackDlls();
   const clientConfig = createClientConfig();
   const serverConfig = createServerConfig();
   const publicPath = clientConfig.output.publicPath;

@@ -16,7 +16,7 @@ const CircularDependencyPlugin = require('circular-dependency-plugin');
 const YarnAddWebpackPlugin = require('yarn-add-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const loaderUtils = require('loader-utils');
-
+const WriteFilePlugin = require('write-file-webpack-plugin');
 const config = require('../config');
 const happyPackPlugin = require('./plugins/happyPackPlugin');
 const WebpackDigestHash = require('./plugins/ChunkHash');
@@ -169,9 +169,7 @@ module.exports = function createClientConfig(options) {
         'hoist-non-react-statics': _PROD
           ? path.resolve(appRoot.get(), './node_modules/hoist-non-react-statics/package.json')
           : null,
-        'apollo-client': _PROD
-          ? path.resolve(appRoot.get(), './node_modules/apollo-client/package.json')
-          : null,
+        'apollo-client': path.resolve(appRoot.get(), './node_modules/apollo-client/package.json'),
         immutable: _PROD
           ? path.resolve(appRoot.get(), './node_modules/immutable/package.json')
           : null,
@@ -243,6 +241,7 @@ module.exports = function createClientConfig(options) {
       ],
     },
     plugins: [
+      new WriteFilePlugin(),
       new webpack.LoaderOptionsPlugin({
         minimize: _PROD,
         debug: _DEV,
@@ -265,16 +264,17 @@ module.exports = function createClientConfig(options) {
       new VerboseProgress({ prefix: 'Client' }),
 
       // Automatically assign quite useful and matching chunk names based on file names.
-      new ChunkNames({ debug: process.env.LOG_CHUNKNAMES === '1' }),
+      // new ChunkNames({ debug: process.env.LOG_CHUNKNAMES === '1' }),
+        // _DEV ? new webpack.NamedModulesPlugin() : null,
       new SriPlugin({
         hashFuncNames: ['sha256', 'sha512'],
         enabled: _PROD,
       }),
-      _DEV
-        ? new YarnAddWebpackPlugin({
-            peerDependencies: true,
-          })
-        : null,
+      // _DEV
+      //   ? new YarnAddWebpackPlugin({
+      //       peerDependencies: true,
+      //     })
+      //   : null,
       _PROD
         ? new HtmlWebpackPlugin({
             inject: true,
@@ -340,19 +340,24 @@ module.exports = function createClientConfig(options) {
         filename: _DEV ? '[name].js' : '[name]-[chunkhash].js',
         minChunks: Infinity,
       }),
+      new webpack.optimize.CommonsChunkPlugin({
+        name: "vendor",
 
+        // With more entries, this ensures that no other module goes into the vendor chunk
+        minChunks: Infinity
+      }),
       // Hot reloading
       _DEV ? new webpack.HotModuleReplacementPlugin() : null,
 
       // Dll reference speeds up development by grouping all of your vendor dependencies
       // in a DLL file. This is not compiled again, unless package.json contents
       // have changed.
-      _DEV
-        ? new webpack.DllReferencePlugin({
-            context: config.rootDir,
-            manifest: require(path.resolve(config.assetsDir, 'boldrDLLs.json')),
-          })
-        : null,
+      // _DEV
+      //   ? new webpack.DllReferencePlugin({
+      //       context: config.rootDir,
+      //       manifest: require(path.resolve(config.assetsDir, 'boldrDLLs.json')),
+      //     })
+      //   : null,
 
       // Supress errors to console
       _DEV ? new webpack.NoEmitOnErrorsPlugin() : null,

@@ -1,5 +1,4 @@
 import bodyParser from 'body-parser';
-import methodOverride from 'method-override';
 import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import cors from 'cors';
@@ -9,7 +8,7 @@ import config from '../config';
 
 function nonceMiddleware(req, res, next) {
   res.locals.nonce = uuid.v4(); // eslint-disable-line no-param-reassign
-  next();
+  return next();
 }
 
 export default app => {
@@ -27,10 +26,6 @@ export default app => {
   if (process.env.NODE_ENV === 'development') {
     app.use(morgan('dev'));
   }
-  app.use((req, res, next) => {
-    res.set('Request-Id', uuid.v4());
-    next();
-  });
   app.set('json spaces', 2);
   app.use(cookieParser(config.token.secret));
   app.use(bodyParser.json({ type: 'application/json' }));
@@ -41,21 +36,5 @@ export default app => {
       req.body = { query: req.body };
     }
     next();
-  });
-  app.use(
-    methodOverride((req, res) => {
-      if (req.body && typeof req.body === 'object' && '_method' in req.body) {
-        // look in urlencoded POST bodies and delete it
-        const method = req.body._method;
-        delete req.body._method;
-        return method;
-      }
-    }),
-  );
-  app.use((err, req, res, next) => {
-    if (err && (!next || res.headersSent)) {
-      return;
-    }
-    res.sendStatus(500);
   });
 };

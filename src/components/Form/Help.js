@@ -2,8 +2,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { getColorModifiers, removeColorProps, createWrappedComponent } from '../../core/util/boldrui';
-import { getDomSafeProps } from '../../core/util/helpers';
+import { getColorModifiers, removeColorProps, createWrappedComponent } from '../UiHelpers/boldrui';
+import { getDomSafeProps } from '../UiHelpers/helpers';
 import { StyleClasses } from '../../theme/styleClasses';
 
 const BASE_ELEMENT = StyleClasses.FORM_HELP;

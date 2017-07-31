@@ -6,8 +6,8 @@ import {
   getActiveModifiers,
   removeActiveModifiers,
   createWrappedComponent,
-} from '../../core/util/boldrui';
-import { getDomSafeProps } from '../../core/util/helpers';
+} from '../UiHelpers/boldrui';
+import { getDomSafeProps } from '../UiHelpers/helpers';
 
 export type Props = {
   tag?: string,

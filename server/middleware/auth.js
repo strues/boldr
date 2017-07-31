@@ -47,7 +47,7 @@ export default app => {
       }
     };
     if (!req.isAuthenticated()) {
-      next();
+      return next();
     } else {
       const payload = req.isAuthenticated();
 
@@ -55,7 +55,7 @@ export default app => {
       req.session.user = user;
       req.user = user;
       req.user.role = user.roles[0].name;
-      next();
+      return next();
     }
   });
   app.use(rbac());

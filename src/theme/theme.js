@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import { css, ThemeProvider } from 'styled-components';
+import { css } from 'styled-components';
 
 const SIZES = {
   large: 75,

@@ -1,15 +1,13 @@
-import express from 'express';
-
 import config from '../config';
-import articleRoutes from './article/article.routes';
-import attachmentRoutes from './attachment/attachment.routes';
+// import articleRoutes from './article/article.routes';
+// import attachmentRoutes from './attachment/attachment.routes';
 import authRoutes from './auth/auth.routes';
-import mediaRoutes from './media/media.routes';
-import menuDetailRoutes from './menu/detail/menuDetail.routes';
-import menuRoutes from './menu/menu.routes';
-import roleRoutes from './role/role.routes';
-import settingRoutes from './setting/setting.routes';
-import tagRoutes from './tag/tag.routes';
+// import mediaRoutes from './media/media.routes';
+// import menuDetailRoutes from './menu/detail/menuDetail.routes';
+// import menuRoutes from './menu/menu.routes';
+// import roleRoutes from './role/role.routes';
+// import settingRoutes from './setting/setting.routes';
+// import tagRoutes from './tag/tag.routes';
 import tokenRoutes from './token/token.routes';
 import userRoutes from './user/user.routes';
 
@@ -27,16 +25,7 @@ export default app => {
       memoryUsage: process.memoryUsage(),
     });
   });
-
-  app.use(`${API_PREFIX}/articles`, articleRoutes);
-  app.use(`${API_PREFIX}/attachments`, attachmentRoutes);
   app.use(`${API_PREFIX}/auth`, authRoutes);
-  app.use(`${API_PREFIX}/media`, mediaRoutes);
-  app.use(`${API_PREFIX}/menu-details`, menuDetailRoutes);
-  app.use(`${API_PREFIX}/menus`, menuRoutes);
-  app.use(`${API_PREFIX}/roles`, roleRoutes);
-  app.use(`${API_PREFIX}/settings`, settingRoutes);
-  app.use(`${API_PREFIX}/tags`, tagRoutes);
   app.use(`${API_PREFIX}/tokens`, tokenRoutes);
   app.use(`${API_PREFIX}/users`, userRoutes);
 };

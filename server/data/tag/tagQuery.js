@@ -8,15 +8,15 @@ export default {
     description: 'A query for a listing of all tags',
     args: {
       offset: {
-        type: GraphQLInt,
+        type: new GraphQLNonNull(GraphQLInt),
         description: 'The number of tags to offset',
       },
       limit: {
         description: 'The maximum number of tags to return at a time.',
-        type: GraphQLInt,
+        type: new GraphQLNonNull(GraphQLInt),
       },
     },
-    async resolve({ limit, offset }) {
+    async resolve(_, { limit, offset }) {
       const tags = await Tag.query().offset(offset).limit(limit).skipUndefined();
       if (tags) {
         return tags;

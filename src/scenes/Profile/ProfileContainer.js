@@ -10,7 +10,6 @@ import Profile from './Profile';
 type Props = {
   currentUser: User,
   data: Data,
-  match: Object,
 };
 
 type Data = {

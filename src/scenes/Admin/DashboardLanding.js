@@ -72,6 +72,6 @@ class DashboardLanding extends Component {
   }
 }
 
-const mapStateToProps = state => ({ currentUser: state.users.me });
+const mapStateToProps = state => ({ currentUser: state.auth.info });
 
 export default connect(mapStateToProps)(DashboardLanding);

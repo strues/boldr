@@ -13,7 +13,7 @@ import apolloClient from '../createApolloClient';
 import ReactHotLoader from '../util/ReactHotLoader';
 import App from '../App';
 
-const MOUNT_POINT = document.getElementById('app');
+const MOUNT_POINT: HTMLElement = document.getElementById('app');
 // Load the JWT if it exists.
 // Get token will return null if it does not exist
 const token = getToken();

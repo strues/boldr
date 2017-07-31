@@ -8,9 +8,9 @@ import {
   isLeft,
   isRight,
   createWrappedComponent,
-} from '../../core/util/boldrui';
+} from '../UiHelpers/boldrui';
 
-import { is, isOption, getDomSafeProps } from '../../core/util/helpers';
+import { is, isOption, getDomSafeProps } from '../UiHelpers/helpers';
 import { StyleClasses } from '../../theme/styleClasses';
 
 const BASE_ELEMENT = StyleClasses.FORM_CONTROL;

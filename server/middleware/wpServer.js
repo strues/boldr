@@ -142,7 +142,7 @@ function wpServerMiddleware(multiCompiler, options) {
       return next(error);
     }
     if (isCompiling) {
-      return res.send(compilingResponse);
+      return res.send(compilingResponse).end();
     }
     serverRenderer(req, res, next);
   };

@@ -1,8 +1,8 @@
 // @flow
 import React from 'react';
 import classNames from 'classnames';
-import { getSizeModifiers, removeSizeProps, createWrappedComponent } from '../../core/util/boldrui';
-import { getDomSafeProps, isOption } from '../../core/util/helpers';
+import { getSizeModifiers, removeSizeProps, createWrappedComponent } from '../UiHelpers/boldrui';
+import { getDomSafeProps, isOption } from '../UiHelpers/helpers';
 
 export type Props = {
   tag?: string,

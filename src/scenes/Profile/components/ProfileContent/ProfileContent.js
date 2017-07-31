@@ -4,11 +4,9 @@ import React from 'react';
 import Link from 'react-router-dom/Link';
 import styled from 'styled-components';
 import { Grid, Col, Row } from '@boldr/ui/Layout';
-import Paper from '@boldr/ui/Paper';
 import Icon from '@boldr/ui/Icons/Icon';
 // internal
 import Button from '@boldr/ui/Button';
-import FontIcon from '@boldr/ui/FontIcon';
 import Headline from '@boldr/ui/Headline';
 import Social from '@boldr/ui/Social';
 

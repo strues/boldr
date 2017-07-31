@@ -8,7 +8,7 @@ import Role from './Role';
 import Attachment from './Attachment';
 import ResetToken from './ResetToken';
 import VerificationToken from './VerificationToken';
-import Article from './Article';
+// import Article from './Article';
 import Media from './Media';
 import Social from './Social';
 
@@ -122,7 +122,7 @@ class User extends BaseModel {
       },
       articles: {
         relation: BaseModel.HasManyRelation,
-        modelClass: Article,
+        modelClass: `${__dirname}/Article`,
         join: {
           from: 'user.id',
           to: 'article.userId',

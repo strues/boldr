@@ -1,4 +1,3 @@
-import path from 'path';
 import mkdirp from 'mkdirp';
 import formidable from 'formidable';
 import objectPath from 'object-path';
@@ -52,7 +51,7 @@ export default function apolloUpload(options) {
     processRequest(request, options)
       .then(body => {
         request.body = body;
-        return next();
+        next();
       })
       .catch(err => console.log(err));
   };

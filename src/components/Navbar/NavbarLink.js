@@ -5,8 +5,8 @@ import {
   getActiveModifiers,
   removeActiveModifiers,
   createWrappedComponent,
-} from '../../core/util/boldrui';
-import { getDomSafeProps, combineModifiers } from '../../core/util/helpers';
+} from '../UiHelpers/boldrui';
+import { getDomSafeProps, combineModifiers } from '../UiHelpers/helpers';
 import { StyleClasses } from '../../theme/styleClasses';
 
 export type Props = {

@@ -5,7 +5,7 @@ import Paper from '@boldr/ui/Paper';
 import Headline from '@boldr/ui/Headline';
 import { Col, Row, Grid } from '@@components/Layout';
 import ProfileForm from '../ProfileForm';
-import { editProfile } from '@@state/users/actions';
+// import { editProfile } from '@@state/users/actions';
 
 type Props = {
   dispatch: () => void,
@@ -32,7 +32,7 @@ class EditProfile extends PureComponent {
         github: { url: values.github },
       },
     };
-    this.props.dispatch(editProfile(userData));
+    console.log(userData);
   };
   props: Props;
   render() {

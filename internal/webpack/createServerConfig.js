@@ -9,6 +9,7 @@ const appRoot = require('boldr-utils/lib/node/appRoot');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const YarnAddWebpackPlugin = require('yarn-add-webpack-plugin');
+const WriteFilePlugin = require('write-file-webpack-plugin');
 const loaderUtils = require('loader-utils');
 const config = require('../config');
 const ChunkNames = require('./plugins/ChunkNames');
@@ -26,9 +27,6 @@ const EXCLUDES = [/node_modules/, config.assetsDir, config.serverCompiledDir];
 const CACHE_HASH_TYPE = 'sha256';
 const CACHE_DIGEST_TYPE = 'base62';
 const CACHE_DIGEST_LENGTH = 4;
-const ASSET_FILES = /\.(eot|woff|woff2|ttf|otf|svg|png|jpg|jpeg|jp2|jpx|jxr|gif|webp|mp4|mp3|ogg|pdf|html|ico)$/;
-const JS_FILES = /\.(js|mjs|jsx)$/;
-const STYLE_FILES = /\.(css|scss)$/;
 
 const cssLoaderOptions = {
   modules: false,
@@ -118,7 +116,7 @@ module.exports = function createServerConfig(options) {
     performance: false,
     resolve: {
       extensions: ['.js', '.json', '.jsx', '.css', '.scss'],
-      modules: ['node_modules', path.resolve(appRoot.get(), './node_modules')],
+      modules: ['node_modules', path.resolve(CWD, './node_modules')],
       mainFields: ['module', 'jsnext:main', 'main'],
       alias: filterEmpty({
         '@@scenes': path.resolve(config.srcDir, 'scenes'),
@@ -129,16 +127,14 @@ module.exports = function createServerConfig(options) {
         '@@core': path.resolve(config.srcDir, 'core'),
         '@@theme': path.resolve(config.srcDir, 'theme'),
         'styled-components': _PROD
-          ? path.resolve(appRoot.get(), './node_modules/styled-components/package.json')
+          ? path.resolve(CWD, './node_modules/styled-components/package.json')
           : null,
         'hoist-non-react-statics': _PROD
-          ? path.resolve(appRoot.get(), './node_modules/hoist-non-react-statics/package.json')
+          ? path.resolve(CWD, './node_modules/hoist-non-react-statics/package.json')
           : null,
-        'apollo-client': _PROD
-          ? path.resolve(appRoot.get(), './node_modules/apollo-client/package.json')
-          : null,
+        'apollo-client': path.resolve(CWD, './node_modules/apollo-client/package.json'),
         immutable: _PROD
-          ? path.resolve(appRoot.get(), './node_modules/immutable/package.json')
+          ? path.resolve(CWD, './node_modules/immutable/package.json')
           : null,
       }),
     },
@@ -151,8 +147,7 @@ module.exports = function createServerConfig(options) {
         // js
         {
           test: /\.js$/,
-          include: config.srcDir,
-          // exclude: EXCLUDES,
+          exclude: EXCLUDES,
           use: [
             cacheLoader,
             {
@@ -171,7 +166,7 @@ module.exports = function createServerConfig(options) {
                       useBuiltins: true,
                       modules: false,
                       targets: {
-                        uglify: !_DEV,
+                        uglify: false,
                         node: 8,
                       },
                       exclude: ['transform-regenerator', 'transform-async-to-generator'],
@@ -230,6 +225,7 @@ module.exports = function createServerConfig(options) {
       ],
     },
     plugins: [
+      new WriteFilePlugin(),
       new webpack.LoaderOptionsPlugin({
         minimize: false,
         debug: !_DEV,
@@ -248,16 +244,12 @@ module.exports = function createServerConfig(options) {
         __SERVER__: JSON.stringify(false),
         __CLIENT__: JSON.stringify(true),
       }),
-      _DEV
-        ? new YarnAddWebpackPlugin({
-            peerDependencies: true,
-          })
-        : null,
       // Custom progress plugin
       new VerboseProgress({ prefix: 'Server' }),
 
       // Automatically assign quite useful and matching chunk names based on file names.
-      new ChunkNames({ debug: process.env.LOG_CHUNKNAMES === '1' }),
+      // new ChunkNames({ debug: process.env.LOG_CHUNKNAMES === '1' }),
+      _DEV ? new webpack.NamedModulesPlugin() : null,
       _DEV ? new CaseSensitivePathsPlugin() : null,
       _DEV
         ? new CircularDependencyPlugin({

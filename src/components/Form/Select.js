@@ -10,8 +10,8 @@ import {
   removeSizeProps,
   removeLoadingProps,
   createWrappedComponent,
-} from '../../core/util/boldrui';
-import { combineModifiers, getDomSafeProps } from '../../core/util/helpers';
+} from '../UiHelpers/boldrui';
+import { combineModifiers, getDomSafeProps } from '../UiHelpers/helpers';
 import { StyleClasses } from '../../theme/styleClasses';
 
 const BASE_ELEMENT = StyleClasses.SELECT;

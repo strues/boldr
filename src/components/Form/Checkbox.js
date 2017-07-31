@@ -2,7 +2,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { createWrappedComponent } from '../../core/util/boldrui';
+import { createWrappedComponent } from '../UiHelpers/boldrui';
 import { StyleClasses } from '../../theme/styleClasses';
 
 const BASE_ELEMENT = StyleClasses.CHECKBOX;

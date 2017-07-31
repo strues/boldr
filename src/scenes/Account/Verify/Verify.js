@@ -6,8 +6,7 @@ import Helmet from 'react-helmet';
 import Button from '@boldr/ui/Button';
 // internal
 import FormCard from '../../../components/Form/FormCard/FormCard';
-
-import { verifyAccount } from '../../../state/users/actions';
+import { verifyAccount } from '../state/actions';
 
 export type Props = {
   dispatch: () => void,

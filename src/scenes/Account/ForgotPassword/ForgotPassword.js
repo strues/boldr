@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 
 import FormCard from '../../../components/Form/FormCard';
-import { forgotPassword } from '../../../state/users/actions';
+import { forgotPassword } from '../state/actions';
 import ForgotPasswordForm from './ForgotPasswordForm';
 
 type Props = {

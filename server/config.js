@@ -40,6 +40,16 @@ export const config = convict({
     default: false,
     env: 'BOLDR_DEBUG',
   },
+  name: {
+    doc: 'The applicaton name',
+    format: String,
+    default: 'Boldr',
+  },
+  baseUrl: {
+    doc: 'The base URL of the application',
+    format: 'url',
+    default: 'localhost',
+  },
   siteUrl: {
     format: String,
     default: 'http://localhost:3000',
@@ -68,6 +78,12 @@ export const config = convict({
       default: '/api/v1',
       env: 'API_PREFIX',
       doc: 'The prefix for api routes and then the versioning',
+    },
+    graphqlEndpoint: {
+      format: String,
+      default: 'http://localhost:3000/api/v1/graphql',
+      env: 'GRAPHQL_ENDPOINT',
+      doc: 'The full URL to the GraphQL endpoint',
     },
   },
   logging: {
@@ -153,7 +169,7 @@ const env = config.get('env');
 config.set('isProd', config.get('env') === 'production');
 config.set('isDev', config.get('env') === 'development');
 // Load environment dependent configuration
-const configPath = path.resolve(appRoot.get(), `./config/${env}.json`);
+const configPath = path.resolve(appRoot.get(), `./config/config.${env}.json`);
 const localConfig = fs.existsSync(configPath) ? require(configPath) : {};
 
 config.load(localConfig);

@@ -2,8 +2,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { getSizeModifiers, removeSizeProps, createWrappedComponent } from '../../core/util/boldrui';
-import { getDomSafeProps } from '../../core/util/helpers';
+import { getSizeModifiers, removeSizeProps, createWrappedComponent } from '../UiHelpers/boldrui';
+import { getDomSafeProps } from '../UiHelpers/helpers';
 import { StyleClasses } from '../../theme/styleClasses';
 
 const BASE_ELEMENT = StyleClasses.FORM_LABEL;

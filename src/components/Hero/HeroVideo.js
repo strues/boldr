@@ -1,7 +1,7 @@
 // @flow
 import React from 'react';
 import classNames from 'classnames';
-import { createWrappedComponent } from '../../core/util/boldrui';
+import { createWrappedComponent } from '../UiHelpers/boldrui';
 
 export type Props = {
   tag?: string,

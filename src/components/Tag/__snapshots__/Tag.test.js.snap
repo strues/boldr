@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Tag /> matches the snapshot 1`] = `
+<span
+  className="boldrui-tag"
+  id="a"
+  title=""
+>
+  <span
+    className="boldrui-typo-4"
+  >
+    abc
+  </span>
+  <a
+    className="boldrui-tag__remove--btn"
+    onClick={[Function]}
+    onKeyPress={[Function]}
+  />
+</span>
+`;

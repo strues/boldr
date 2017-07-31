@@ -2,8 +2,8 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { createWrappedComponent } from '../../core/util/boldrui';
-import { combineModifiers, getDomSafeProps } from '../../core/util/helpers';
+import { createWrappedComponent } from '../UiHelpers/boldrui';
+import { combineModifiers, getDomSafeProps } from '../UiHelpers/helpers';
 import { StyleClasses } from '../../theme/styleClasses';
 
 const BASE_ELEMENT = StyleClasses.RADIO;

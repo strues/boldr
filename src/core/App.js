@@ -6,6 +6,7 @@ import Route from 'react-router-dom/Route';
 import Redirect from 'react-router-dom/Redirect';
 import Switch from 'react-router-dom/Switch';
 import Loader from '@boldr/ui/Loader';
+
 // internal
 import '../styles/main.scss';
 // Start routes
@@ -52,9 +53,11 @@ const App = (props: Props) => {
   }
   return (
     <div className="boldr">
-      <Helmet>
+      <Helmet
+        titleTemplate="%s - Powered by Boldr"
+        defaultTitle="Boldr: Modern Content Management Framework"
+      >
         <html lang="en" />
-        <title>Boldr</title>
         <meta name="application-name" content="Boldr" />
         <meta name="description" content="A modern, bold take on a cms" />
         <meta charSet="utf-8" />

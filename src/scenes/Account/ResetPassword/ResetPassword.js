@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import FormCard from '../../../components/Form/FormCard';
-import { resetPassword } from '../../../state/users/actions';
+import { resetPassword } from '../state/actions';
 import ResetPasswordForm from './ResetPasswordForm';
 
 export type Props = {
