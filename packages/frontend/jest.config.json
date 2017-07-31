@@ -1,0 +1,38 @@
+{
+  "timers": "fake",
+  "moduleNameMapper": {
+    "\\.(css|scss)$": "identity-obj-proxy",
+    ".*\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "./internal/jest/fileMock.js"
+  },
+  "collectCoverage": true,
+  "coverageDirectory": "./coverage",
+  "coveragePathIgnorePatterns": [
+    "./(internal|.boldr|docs|bin|.idea|public|build)/",
+    "/flow-typed/",
+    "/__fixtures__/",
+    "/node_modules/"
+  ],
+  "transform": {
+    "^.+\\.jsx?$": "./internal/jest/transform.js",
+    "\\.(gql|graphql)$": "jest-transform-graphql"
+  },
+  "testRegex": ".*.test\\.js",
+  "setupTestFrameworkScriptFile": "./internal/jest/setup.js",
+  "snapshotSerializers": [
+    "./node_modules/enzyme-to-json/serializer"
+  ],
+  "testPathIgnorePatterns": [
+    "./(internal|build|.boldr|docs|bin|.idea|public)/",
+    "__snapshots__",
+    "/styles/"
+  ],
+  "transformIgnorePatterns": [
+    "/node_modules/",
+    "/.boldr/",
+    "/build/",
+    "/styles/"
+  ],
+  "coverageReporters": [
+    "json"
+  ]
+}

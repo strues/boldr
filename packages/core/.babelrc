@@ -1,0 +1,8 @@
+
+{
+  "presets": [
+    [ "boldr/node", { "target": "current", "verbose": true, "regen": false,
+      "rtHelpers": false,
+      "polyfill": false, "useBuiltIns": true, "minimize": true }]
+  ]
+}

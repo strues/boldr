@@ -1,0 +1,20 @@
+/// @group headline
+.#{$boldr-ns}h {
+  font-weight: $headline-font-weight;
+  font-family: $headline-font-family;
+  text-rendering: optimizeLegibility;
+}
+
+.#{$boldr-ns}h-light {
+  color: #fff;
+}
+
+.#{$boldr-ns}heading--1 {
+  font-size: 3.5em;
+}
+
+.#{$boldr-ns}heading__3 {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-weight: 200;
+}

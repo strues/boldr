@@ -1,6 +1,0 @@
-mutation editMedia($id: UUID!, $input: EditMediaInput!) {
-  editMedia(id: $id, input: $input) {
-    name
-    fileDescription
-  }
-}

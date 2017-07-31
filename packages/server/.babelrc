@@ -1,0 +1,13 @@
+{
+  "presets": [
+    [ "env", { "targets": { "node": 8 }, "exclude": ["transform-regenerator", "transform-async-to-generator"] }]
+  ],
+  "plugins": ["syntax-flow", "transform-class-properties",
+[
+    "babel-plugin-transform-object-rest-spread",
+    {
+      "useBuiltIns": true,
+    },
+  ], "fast-async"]
+
+}

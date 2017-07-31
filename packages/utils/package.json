@@ -1,0 +1,64 @@
+{
+  "name": "@boldr/utils",
+  "version": "0.1.0-rc.1",
+  "description": "Helpers designed for use with Boldr and fullstack react apps",
+  "bugs": {
+    "url": "https://github.com/strues/boldr/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strues/boldr.git"
+  },
+  "keywords": [
+    "boldr",
+    "react",
+    "webpack",
+    "dev",
+    "helpers"
+  ],
+  "main": "lib/index.js",
+  "files": [
+    "lib/*"
+  ],
+  "author": {
+    "name": "Steven Truesdell",
+    "email": "steven@strues.io",
+    "url": "strues.io"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/strues/boldr#readme",
+  "scripts": {
+    "build": "npm run clean && babel src --out-dir lib",
+    "clean": "rimraf lib",
+    "publish": "npm publish --access=public",
+    "format": "prettier --single-quote=true --jsx-bracket-same-line=false --trailing-comma=all --write \"src/**/*.js\"",
+    "test": "jest"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/coverage/",
+      "/src/",
+      "/lib/"
+    ]
+  },
+  "dependencies": {
+    "chalk": "^2.0.1",
+    "lodash.invokemap": "^4.6.0",
+    "lodash.reduce": "^4.6.0",
+    "ramda": "^0.24.1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-eslint": "^7.2.3",
+    "babel-jest": "^20.0.3",
+    "babel-plugin-transform-object-rest-spread": "^6.23.0",
+    "babel-preset-env": "^1.6.0",
+    "eslint": "^4.3.0",
+    "eslint-config-boldr": "^0.12.4",
+    "jest": "^20.0.4",
+    "prettier": "^1.5.3",
+    "rimraf": "^2.6.1"
+  }
+}

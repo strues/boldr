@@ -1,0 +1,24 @@
+.#{$boldr-ns}article-sidebar {
+  @media (min-width: $bp-medium) {
+    padding-left: 50px;
+  }
+  height: 100%;
+  padding-left: 0;
+  // author card
+
+  .#{$boldr-ns}article-sidebar__author {
+    @include md-shadow(2);
+    display: block;
+    width: 100%;
+    padding: 1em;
+    background-color: $white;
+    margin-bottom: 50px;
+  }
+  // tags card
+
+  .#{$boldr-ns}article-sidebar__tags {
+    @include md-shadow(2);
+    padding: 1rem;
+    background-color: #fff;
+  }
+}

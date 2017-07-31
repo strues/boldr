@@ -1,8 +1,7 @@
 
 <p align="center"><img src="/docs/assets/boldr-text-logo.png" width="200"></p>
 
-
-[![Build Status](https://drone.boldr.io/api/badges/strues/boldr/status.svg)](https://drone.boldr.io/strues/boldr) [![Build Status](https://travis-ci.org/strues/boldr.svg?branch=master)](https://travis-ci.org/strues/boldr) [![Code Climate](https://codeclimate.com/github/strues/boldr/badges/gpa.svg)](https://codeclimate.com/github/strues/boldr)   [![codecov](https://codecov.io/gh/strues/boldr/branch/master/graph/badge.svg)](https://codecov.io/gh/strues/boldr)  [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)  
+[![Code Climate](https://codeclimate.com/github/strues/boldr/badges/gpa.svg)](https://codeclimate.com/github/strues/boldr)   [![codecov](https://codecov.io/gh/strues/boldr/branch/master/graph/badge.svg)](https://codecov.io/gh/strues/boldr)  [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)  
 
 
 -------    
@@ -53,6 +52,17 @@ Come visit with us
 - [Docker](https://github.com/docker/docker)
 - [Webpack](https://github.com/webpack/webpack)
 
+## Packages
+| Package      | Documentation |
+|:-------------|:---------------------------------------------|
+| [Auth](/packages/auth) | [Auth Docs](/docs/pkgs/auth.md)    |
+| [CLI](/packages/cli) | [CLI Docs](/docs/pkgs/cli.md)    |
+| [Core](/packages/core) | [Core Docs](/docs/pkgs/core.md)    |
+| [Frontend](/packages/frontend) |   |
+| [Server](/packages/server) |    |
+| [Tools](/packages/tools) | [Tool Docs](/docs/pkgs/tools.md)    |
+| [Utils](/packages/utils) |  |
+
 ## Getting Started
 
 **Development Disclaimer:** At the moment, Boldr is in active development. Meaning there might be the occasional breaking changes, and architectural adjustments.
@@ -60,7 +70,7 @@ Come visit with us
 That said, I'm confident the majority of large breaking changes is behind us.
 
 **Step 1**
-First you must somehow get the files to your machine.
+First get the files to your machine.
 
 **Using git:**  
 
@@ -70,11 +80,15 @@ First you must somehow get the files to your machine.
   yarn
 ```  
 
+This will install **all** of the packages using lerna.
+
+The main packages to concern yourself with are located in `packages/frontend` and `packages/server`. The frontend contains the React application and the server is the Express GraphQL and database server. **Eventually**, the frontend and server will be published to NPM and work from a single entry.    
+
 ## Usage
 
 1. Install the files: `yarn install`   
-2. Copy the environment sample: `cp .env_example .env`   
-3. Checkout `server/config.js` and modify any settings.   
+2. Copy the frontend environment sample: `cd packages/frontend && cp .env_example .env`   
+3. Checkout `packages/server/src/config.js` and modify any settings for your environment.   
 4. Setup services    
 
 Boldr requires a Postgres database and a Redis service. Using the docker-compose.yml file included in the repo is the quickest way.
@@ -86,9 +100,9 @@ Ensure the database is setup with the proper tables and seed data.
 
 ### Development
 
-Run the CMS using `npm run dev`
+Run the frontend using `yr dev` from within `packages/frontend`. In another terminal window, start the server using `yr dev` from within `packages/server`.
 
-After Boldr has started visit <http://localhost:3000>. If you're using the API, an admin account is already created and you may login using these credentials:
+After Boldr has started visit <http://localhost:3000>. A admin account is already created and you may login using these credentials:
 
 > Email - admin@boldr.io
 > Password - password
@@ -121,10 +135,6 @@ Looking for an open source project to contribute to? All types of contributions 
 
 
 ## Screenshots  
-|         |            |   |
-| ------------- |:-------------:| -----:|
-![createPost][createPostImg] | ![uploadMedia][uploadMediaImg]  | ![single][blogSingle]
-
 
 
 
@@ -133,7 +143,3 @@ Looking for an open source project to contribute to? All types of contributions 
 
 [coverage-link]: https://codeclimate.com/github/strues/boldr/coverage
 [coverage-img]: https://codeclimate.com/github/strues/boldr/badges/coverage.svg
-
-[createPostImg]: /docs/assets/create-post.png
-[uploadMediaImg]: /docs/assets/upload-media.png
-[blogSingle]: /docs/assets/create-post.png

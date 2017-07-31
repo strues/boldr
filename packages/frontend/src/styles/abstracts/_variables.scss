@@ -1,0 +1,741 @@
+/// 1. Typography
+/// 2. Global
+/// 3. Transitions
+/// 4. Theme
+/// 5. Button
+/// 6. Navbar
+/// 7. Paper
+/// 8. Tooltip
+/// 9. Avatar
+/// 10. Block
+/// 11. Breadcrumb
+/// 12. Divider
+/// 13. Select
+/// 14. Tags
+/// 15. Modal/Dialog
+/// 16. Dashboard Sidebar
+/// 17. Dashboard Topbar
+
+/// Namespace
+$boldr-ns: "boldrui-" !default;
+
+$tablet: 769px !default;
+
+// 960px container + 40px
+$desktop: 1000px !default;
+
+// 1152px container + 40
+$widescreen: 1192px !default;
+
+// 1344px container + 40
+$fullhd: 1384px !default;
+
+/// ==========================================================
+///
+/// 1. Typography
+///
+/// ==========================================================
+
+/// @group typography
+/// @type String
+$font-name: "Roboto" !default;
+/// @group typography
+/// @type String
+$headline-font-name: "Chivo" !default;
+/// @group typography
+/// @type String
+$font-family-base: $font-name, "Helvetica Neue", arial, helvetica, sans-serif !default;
+/// @group typography
+/// @type String
+$font-family-serif: georgia, "Times New Roman", serif;
+$family-sans-serif: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
+  "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial",
+  sans-serif !default;
+
+/// @group typography
+/// @type String
+$font-family-monospace: "Lucida Console", monaco, monospace;
+/// @group typography
+/// @type String
+$headline-font-family: $headline-font-name, "Helvetica Neue", arial, helvetica, sans-serif !default;
+/// @group typography
+/// @type Number
+$font-size-base: 16px !default;
+/// @group typography
+/// @type Number
+$font-size-large: 2rem !default;
+/// @group typography
+/// @type Number
+$font-size-small: 0.9rem !default;
+/// @group typography
+/// @type Number
+$font-icon-size: 24px;
+/// @group typography
+/// @type Number
+$font-size-xsmall: 0.7rem !default;
+/// @group typography
+/// @type Number
+$line-height-base: 1.5 !default;
+/// @group typography
+/// @type Number
+$font-weight-base: 300 !default;
+/// @group typography
+/// @type Number
+$font-weight-thin: 200 !default;
+/// @group typography
+/// @type Number
+$font-weight-bold: 600 !default;
+/// @group typography
+/// @type Number
+$headline-font-weight: $font-weight-bold !default;
+/// @group typography
+/// @type String
+$headline-font-case: none !default;
+
+$render-mode: optimizeLegibility !default;
+
+$size-1: 3rem !default;
+$size-2: 2.5rem !default;
+$size-3: 2rem !default;
+$size-4: 1.5rem !default;
+$size-5: 1.25rem !default;
+$size-6: 1rem !default;
+$size-7: 0.75rem !default;
+
+$weight-light: 300 !default;
+$weight-normal: 400 !default;
+$weight-semibold: 500 !default;
+$weight-bold: 700 !default;
+
+// General colors
+$background: $white-ter !default;
+
+$border: $grey-lighter !default;
+$border-hover: $grey-light !default;
+
+// Text colors
+$text: $grey-dark !default;
+$text-invert: findColorInvert($text) !default;
+$text-light: $grey !default;
+$text-strong: $grey-darker !default;
+
+// Code colors
+$code: $red !default;
+$code-background: $background !default;
+
+$pre: $text !default;
+$pre-background: $background !default;
+
+// Typography
+$family-primary: $font-family-base !default;
+$family-code: $font-family-monospace !default;
+
+$base-vertical-unit: 6px;
+$base-line-multi: 4;
+$base-font-size: 16px;
+$ms-ratio: 1.414;
+$paragraph-indent: false;
+$paragraph-justify: true;
+$load-typesetted: true;
+$global-init: true;
+
+// Creates a handy variable for the 1em
+$base-em-font-size: 1em;
+
+// Generates modular scale values in Ems. [Note]If you need more size up and/or down
+// then add more sizes.
+// [1] One step down in the modular scale in EMs
+// [2] One step up in the modular scale in EMs
+$ms-down1: $base-em-font-size / $ms-ratio; // [1]
+$ms-down2: $ms-down1 / $ms-ratio;
+$ms-down3: $ms-down2 / $ms-ratio;
+$ms-down4: $ms-down3 / $ms-ratio;
+$ms-up1: $base-em-font-size * $ms-ratio; // [2]
+$ms-up2: $ms-up1 * $ms-ratio;
+$ms-up3: $ms-up2 * $ms-ratio;
+$ms-up4: $ms-up3 * $ms-ratio;
+$ms-up5: $ms-up4 * $ms-ratio;
+$ms-up6: $ms-up5 * $ms-ratio;
+$ms-up7: $ms-up6 * $ms-ratio;
+$ms-up8: $ms-up7 * $ms-ratio;
+$ms-up9: $ms-up8 * $ms-ratio;
+$ms-up10: $ms-up9 * $ms-ratio;
+
+// Warning text for when an integer is not used in rhythm functions
+$not-integer-txt: " value breaks vertical rhythm. Use an integer (whole number) for $lines.";
+
+/// ==========================================================
+///
+/// 2. Global
+///
+/// ==========================================================
+
+/// @group global
+$grid-columns: 12 !default;
+/// @group global
+$grid-gutter: 2rem !default;
+/// @group global
+$grid-breakpoints: (xs: false, sm: 48em, md: 64em, lg: 80em) !default;
+// Desktop large: 1600px
+$bp-monster: 100em !default;
+/// @group global
+/// // Desktop: 1280px
+$bp-large: 80em;
+/// @group global
+/// 1024px
+$bp-medium: 62em;
+/// @group global
+$bp-small: 48em;
+/// @group global
+$grid-containers: (xs: false, sm: 46rem, md: 61rem, lg: 71rem) !default;
+/// @group global
+$border-radius: 0.25rem !default;
+/// @group global
+$border-color: rgba(0, 0, 0, 0.1) !default;
+/// @group global
+$border-width: 1px !default;
+/// The default padding used for most components.
+/// @type Number
+/// @group global
+$base-padding: 1em !default;
+/// @group global
+$spacer: 1rem !default;
+/// @group global
+$spacer-x: $spacer !default;
+/// @group global
+$spacer-y: $spacer !default;
+/// @group global
+$spacers: (
+    q: (x: ($spacer-x * 0.25), y: ($spacer-y * 0.25)),
+    h: (x: ($spacer-x * 0.5), y: ($spacer-y * 0.5)),
+    0: (x: 0, y: 0),
+    1: (x: $spacer-x, y: $spacer-y),
+    2: (x: ($spacer-x * 1.5), y: ($spacer-y * 1.5)),
+    3: (x: ($spacer-x * 3), y: ($spacer-y * 3))
+  )
+  !default;
+
+$size-small: $size-7 !default;
+$size-normal: $size-6 !default;
+$size-medium: $size-5 !default;
+$size-large: $size-4 !default;
+$sizes: $size-1 $size-2 $size-3 $size-4 $size-5 $size-6 !default;
+
+/// small border radius
+/// @type Number
+/// @group global
+$radius-small: 2px !default;
+/// default border radius
+/// @type Number
+/// @group global
+$radius: 3px !default;
+/// large border radius
+/// @type Number
+/// @group global
+$radius-large: 5px !default;
+
+/// ==========================================================
+///
+/// 3. Transitions
+///
+/// ==========================================================
+
+/// @group transitions
+$speed: 86ms !default;
+/// @group transitions
+$easing: ease-out !default;
+/// The default transition time to use on most animations/transitions.
+/// @type Number
+/// @group transitions
+$transition-length: 0.25s !default;
+/// @type Number
+/// @group transitions
+$layout-transition-speed: $transition-length;
+
+/// ==========================================================
+///
+/// 4. Theme
+///
+/// ==========================================================
+
+/// The primary color to use throughout the app. This should be a color
+/// with a `-500` suffix.
+/// @type Color
+/// @group theme
+$primary-color: $iris-blue !default;
+
+/// @type Color
+/// @group theme
+$md-primary-color: $primary-color;
+/// @group theme
+$icon-color: rgba(0, 0, 0, 0.54);
+/// @group theme
+$font-icon-disabled-color: rgba(0, 0, 0, 0.24);
+/// @group theme
+$secondary-color: $turtle;
+/// @group theme
+$teritary-color: $navy;
+/// @type Color
+/// @group theme
+$accent-color: $secondary-color !default;
+
+/// Boolean if the application is to be themed with the light theme.
+/// @type Boolean
+/// @group theme
+$boldrui-light-theme: true !default;
+/// @group theme
+$shadow-color: rgba(0, 0, 0, 0.2) !default;
+$body-background: $cloud !default;
+/// @group theme
+$link-color: $primary-color !default;
+/// @group theme
+$link-hover-color: $carmine-pink;
+$link: $primary-color !default;
+$link-invert: $accent-color !default;
+$link-visited: $purple !default;
+$link-hover: $grey-darker !default;
+$link-hover-border: $grey-light !default;
+$link-focus: $grey-darker !default;
+$link-focus-border: $primary-color !default;
+$link-active: $grey-darker !default;
+$link-active-border: $grey-dark !default;
+/// @group theme
+$error-color: $carmine-pink !default;
+/// @group theme
+$warning-color: $golden !default;
+/// @group theme
+$text-color: $black-transparent !default;
+/// @group theme
+$text-color-light: #afbbca;
+/// @group theme
+$text-color-disabled: #577083;
+/// @group theme
+$headline-font-color: $navy !default;
+
+/// ==========================================================
+///
+/// 5. Button
+///
+/// ==========================================================
+
+/// @group typography
+/// @type Number
+$btn-font-weight: $font-weight-base !default;
+/// @group btn
+$btn-line-height: 1.25 !default;
+/// @group btn
+$input-btn-border-width: $border-width !default;
+/// @group btn
+$btn-border-radius: $border-radius !default;
+/// @group btn
+$btn-padding-x: 1rem !default;
+/// @group btn
+$btn-padding-y: 0.5rem !default;
+/// @group btn
+$btn-white: #fff;
+/// @group btn
+$btn-gray: #bbb;
+/// @group btn
+$btn-light-gray: #e5e5e5;
+/// @group btn
+$btn-primary: $primary-color;
+/// @group btn
+$btn-primary-hover: darken($primary-color, 5%);
+/// @group btn
+$btn-primary-active: darken($primary-color, 5%);
+/// @group btn
+$btn-secondary: $secondary-color;
+/// @group btn
+$btn-secondary-hover: darken($secondary-color, 5%);
+/// @group btn
+$btn-secondary-active: darken($secondary-color, 5%);
+/// @group btn
+$btn-danger: #f44;
+/// @group btn
+$btn-danger-hover: #f66;
+/// @group btn
+$btn-danger-active: #e33;
+
+$icon-btn-height: 36px;
+$icon-btn-close-height: 18px;
+$icon-btn-sm-height: 30px;
+$icon-btn-lg-height: 42px;
+$icon-btn-lg-close-height: 24px;
+
+/// ==========================================================
+///
+/// 6. Navbar
+///
+/// ==========================================================
+$background: $white-ter !default;
+
+$border: $grey-lighter !default;
+$border-hover: $grey-light !default;
+
+/// @group navbar
+$navbar-background: $white !default;
+/// @group navbar
+$navbar-height: 4.25rem !default;
+/// @group navbar
+$navbar-item: $text-color !default;
+/// @group navbar
+$navbar-item-hover: $black !default;
+/// @group navbar
+$navbar-item-hover-background: $background !default;
+/// @group navbar
+$navbar-item-active: $black !default;
+/// @group navbar
+$navbar-item-active-background: transparent !default;
+/// @group navbar
+$navbar-dropdown-background: $white !default;
+/// @group navbar
+$navbar-dropdown-border: $border !default;
+/// @group navbar
+$navbar-dropdown-offset: -4px !default;
+/// @group navbar
+$navbar-dropdown-arrow: $link !default;
+/// @group navbar
+$navbar-dropdown-radius: $radius-large !default;
+/// @group navbar
+$navbar-dropdown-z: 20 !default;
+/// @group navbar
+$navbar-dropdown-item-hover: $black !default;
+/// @group navbar
+$navbar-dropdown-item-hover-background: $background !default;
+/// @group navbar
+$navbar-dropdown-item-active: $primary-color !default;
+/// @group navbar
+$navbar-dropdown-item-active-background: $background !default;
+/// @group navbar
+$navbar-divider-background: $border !default;
+
+/// ==========================================================
+///
+/// 7. Paper
+///
+/// ==========================================================
+
+/// @group paper
+$paper-dark-bg: $big-stone;
+/// @group paper
+$paper-light-bg: $white;
+/// The defualt transition time for the paper to raise from 0 to 3
+/// @type Number
+/// @group paper
+$paper-transition-time: $transition-length * 2 !default;
+
+/// ==========================================================
+///
+/// 8. Tooltip
+///
+/// ==========================================================
+
+/// @group tooltip
+$tooltip-z-index: 2000;
+/// @group tooltip
+$tooltip-font-size: 14px;
+/// @group tooltip
+$tooltip-line-height: 1.29;
+/// @group tooltip
+$tooltip-padding: 18px;
+/// @group tooltip
+$tooltip-border-radius: 8px;
+/// @group tooltip
+$tooltip-shadow-color: rgba(0, 0, 0, 0.2);
+/// @group tooltip
+$tooltip-shadow-color-arrow: rgba(0, 0, 0, 0.1);
+/// @group tooltip
+$tooltip-shadow: 0 0 11px 0 $tooltip-shadow-color;
+
+/// ==========================================================
+///
+/// 9. Avatar
+///
+/// ==========================================================
+
+/// @group avatar
+/// The default size for an avatar
+/// @type Number
+$avatar-size: 40px !default;
+
+/// ==========================================================
+///
+/// 10. Block
+///
+/// ==========================================================
+
+/// @group block
+/// The default block background color
+/// @type Color
+$block-bg: $white;
+/// The dark block background color
+/// @type Color
+/// @group block
+$block-bg-dark: $outer-space;
+
+/// ==========================================================
+///
+/// 11. Breadcrumb
+///
+/// ==========================================================
+
+/// @group breadcrumb
+$breadcrumb-padding-y: 0.75rem !default;
+/// @group breadcrumb
+$breadcrumb-padding-x: 1rem !default;
+/// @group breadcrumb
+$breadcrumb-item-padding: 0.5rem !default;
+/// @group breadcrumb
+$breadcrumb-bg: $cloud !default;
+/// @group breadcrumb
+$breadcrumb-divider-color: $gray-light !default;
+/// @group breadcrumb
+$breadcrumb-active-color: $gray-light !default;
+/// @group breadcrumb
+$breadcrumb-divider: "/" !default;
+/// @group breadcrumb
+$breadcrumb-borders: (bottom: (size: 1px, style: solid, color: $border-color));
+
+/// ==========================================================
+///
+/// 12. Divider
+///
+
+/// @group divider
+/// Boolean if the base classes for divider borders should be included.
+/// @type Boolean
+$divider-inc-borders: true !default;
+/// The height for a Divider
+/// @type Number
+/// @group divider
+$divider-height: 1px !default;
+/// @group divider
+$divider-color: $big-stone;
+/// @group divider
+$divider-border-color: $divider-color;
+
+/// ==========================================================
+///
+/// 13. Select
+///
+/// ==========================================================
+
+/// @group select
+$select-c-border: #bbb;
+/// @group select
+$select-c-light-border: #ddd;
+/// @group select
+$select-c-white: #fff;
+/// @group select
+$select-c-blue: #38f;
+/// @group select
+$select-c-light-gray: #999;
+/// @group select
+$select-c-bg-gray: #f8f8f8;
+/// @group select
+$select-c-light-blue: #bdf;
+/// @group select
+$select-c-half-black: rgba(0, 0, 0, 0.2);
+
+/// ==========================================================
+///
+/// 14. Tags
+///
+/// ==========================================================
+
+/// @group tag
+$tag-bg: #f3f3f3;
+/// @group tag
+$tag-font-size: 12px;
+/// @group tag
+$light-gray: #d9d8dd;
+/// @group tag
+$dark-gray: #626166;
+/// @group tag
+$tag-base-height: 26px !default;
+/// @group tag
+$tag-base-font-size: 12px !default;
+/// @group tag
+$tag-base-border-radius: 12px !default;
+/// @group tag
+$tag-base-font-color: $dark-gray !default;
+/// @group tag
+$tag-base-margin: 5px !default;
+/// @group tag
+$tag-base-font-family: "Helvetica Neue", helvetica, arial, sans-serif !default;
+
+/// @group tag
+$tag-background-color: $light-gray !default;
+/// @group tag
+$tag-background-hover-color: darken($light-gray, 6%) !default;
+/// @group tag
+$tag-remove-color: $black !default;
+/// @group tag
+$tag-remove-font-size: $tag-base-font-size !default;
+/// @group tag
+$tag-remove-hover-color: lighten($tag-remove-color, 40%) !default;
+/// @group tag
+$tag-intro-animation: slide-left 0.8s cubic-bezier(0.19, 1, 0.22, 1) !default;
+
+/// @group tag
+$tag-input-bg-color: $white !default;
+/// @group tag
+$tag-input-border: 1px solid $light-gray !default;
+/// @group tag
+$tag-input-placeholder-color: rgba($dark-gray, 0.5) !default;
+/// @group tag
+$tag-input-border-focus-color: darken($light-gray, 15%) !default;
+
+/// ==========================================================
+///
+/// 15. Modal/Dialog
+///
+/// ==========================================================
+
+/// @group dialog
+$modal-ease-out-quint: cubic-bezier(0.23, 1, 0.32, 1);
+/// @group dialog
+$modal-ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+/// @group dialog
+$modal-transition-deceleration: cubic-bezier(0, 0, 0.2, 1);
+
+/// ==========================================================
+///
+/// 16. Dashboard Sidebar
+///
+/// ==========================================================
+
+/// @group dashboard
+/// @type Number
+$sidebar-width: 200px !default;
+/// @group dashboard
+/// @type Number
+$sidebar-padding: 0 !default;
+/// @group dashboard
+/// @type Number
+$sidebar-top-space: 1rem !default;
+/// @group dashboard
+/// @type Number
+$sidebar-compact-width: 50px;
+/// @group dashboard
+/// @type Number
+$sidebar-compact-height: $sidebar-compact-width;
+/// @group dashboard
+/// @type Color
+$sidebar-color: #fff;
+/// @group dashboard
+$sidebar-nav-bg: $midnight;
+/// @group dashboard
+$sidebar-nav-expanded-bg: $madison;
+/// @group dashboard
+$sidebar-borders: none;
+/// @group dashboard
+$mobile-sidebar-width: 220px;
+/// @group dashboard
+$sidebar-nav-title-padding-y: 0.75rem;
+/// @group dashboard
+$sidebar-nav-title-padding-x: 1rem;
+/// @group dashboard
+$sidebar-nav-title-color: $snow;
+/// @group dashboard
+$sidebar-nav-link-padding-y: 0.75rem;
+/// @group dashboard
+$sidebar-nav-link-padding-x: 1rem;
+/// @group dashboard
+$sidebar-nav-link-color: #f1f1f1;
+/// @group dashboard
+$sidebar-nav-link-bg: transparent;
+/// @group dashboard
+$sidebar-nav-link-borders: 0;
+/// @group dashboard
+$sidebar-nav-link-hover-color: $snow;
+/// @group dashboard
+$sidebar-nav-link-hover-bg: $primary-color !default;
+/// @group dashboard
+$sidebar-nav-link-hover-icon-color: $snow !important;
+/// @group dashboard
+$sidebar-nav-link-hover-borders: 0;
+/// @group dashboard
+$sidebar-nav-link-active-color: $snow;
+/// @group dashboard
+$sidebar-nav-link-active-bg: $madison;
+$sidebar-nav-active-link-color: $water;
+$sidebar-nav-active-bg: $cello;
+/// @group dashboard
+$sidebar-nav-link-active-icon-color: $primary-color;
+/// @group dashboard
+$sidebar-nav-link-active-borders: 0;
+/// @group dashboard
+$sidebar-nav-dropdown-color: #f1f1f1;
+/// @group dashboard
+$sidebar-nav-dropdown-bg: rgba(0, 0, 0, 0.2);
+/// @group dashboard
+$sidebar-nav-dropdown-borders: 0;
+
+/// ==========================================================
+///
+/// 17. Dashboard Topbar
+///
+/// ==========================================================
+
+/// @group topbar
+/// @type Color
+$topbar-bg: $white;
+/// @group topbar
+$topbar-bottom-margin: 25px;
+/// @group topbar
+$topbar-link-color: $text-color;
+/// @group topbar
+$topbar-search-input-color: $text-color;
+/// @group topbar
+$topbar-link-active: $iris-blue;
+/// @group topbar
+$topbar-link-hover: $iris-blue;
+/// @group topbar
+$topbar-font-size: 0.75rem;
+/// @group topbar
+$topbar-font-weight: 600;
+/// @group topbar
+$topbar-font-family: $font-family-base;
+/// @group topbar
+$topbar-link-transform: uppercase;
+/// @group topbar
+$topbar-border: (bottom: (size: 1px, style: solid, color: $border-color));
+/// @group topbar
+$topbar-z-index: 1000;
+
+/// notifications
+// Media queries breakpoints
+$screen-sm-min: 768px;
+$screen-md-min: 992px;
+$screen-xs-max: ($screen-sm-min - 1);
+
+$window-padding: 20px;
+
+// Notification variables
+$notification-max-width: 360px;
+$notification-button-width: 90px;
+$notification-close-button: "\f00d";
+
+$notification-success-bg: #fff;
+$notification-success-border: #4dc657;
+$notification-success-icon: "\f058";
+
+$notification-default-bg: #fff;
+$notification-default-border: #fff;
+
+$notification-info-bg: #fff;
+$notification-info-border: #349ef3;
+$notification-info-icon: "\f05a";
+
+$notification-warning-bg: #fff;
+$notification-warning-border: #f5aa0a;
+$notification-warning-icon: "\f071";
+
+$notification-error-bg: #fff;
+$notification-error-border: #f5311d;
+$notification-error-icon: "\f057";
+
+$notification-loading-bg: #fff;
+$notification-loading-border: #349ef3;
+$notification-loading-icon: "\f110";

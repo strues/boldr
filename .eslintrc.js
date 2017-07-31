@@ -1,29 +1,19 @@
 module.exports = {
-  extends: ['boldr', 'boldr/react', 'boldr/flowtype', 'boldr/promise', 'boldr/import'],
-  plugins: ['graphql'],
+  extends: ['boldr', 'boldr/react', 'boldr/flowtype', 'boldr/import', 'boldr/promise'],
   globals: {
-    __CLIENT__: true,
+    window: true,
+    document: true,
+    __dirname: true,
+    __DEV__: true,
+    process: true,
+    jest: true,
+    describe: true,
+    test: true,
+    it: true,
+    expect: true,
+    beforeEach: true
   },
   rules: {
-    'jsx-a11y/href-no-hash': 0,
-    'graphql/template-strings': [
-      'error',
-      {
-        // Import default settings for your GraphQL client. Supported values:
-        // 'apollo', 'relay', 'lokka', 'literal'
-        env: 'apollo',
-
-        // Import your schema JSON here
-        schemaJson: require('./internal/graphqlSchema.json'),
-
-        // OR provide absolute path to your schema JSON
-        // schemaJsonFilepath: path.resolve(__dirname, './schema.json'),
-
-        // OR provide the schema in the Schema Language format
-        // schemaString: printSchema(schema),
-
-        // tagName is gql by default
-      },
-    ],
-  },
-};
+    'getter-return': 0
+  }
+}

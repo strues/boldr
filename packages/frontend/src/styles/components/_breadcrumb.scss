@@ -1,0 +1,28 @@
+/// @group breadcrumb
+.#{$boldr-ns}breadcrumb {
+  @include clearfix();
+  list-style: none;
+  padding: $breadcrumb-padding-y $breadcrumb-padding-x;
+  background-color: $breadcrumb-bg;
+  margin-bottom: 1rem;
+}
+
+.#{$boldr-ns}breadcrumb__item {
+  float: left;
+
+  + .#{$boldr-ns}breadcrumb__item::before {
+    content: "#{$breadcrumb-divider}";
+    display: inline-block;
+    padding-right: $breadcrumb-item-padding;
+    padding-left: $breadcrumb-item-padding;
+    color: $breadcrumb-divider-color;
+  }
+
+  + .#{$boldr-ns}breadcrumb__item:hover::before {
+    text-decoration: underline;
+  }
+
+  &.active {
+    color: $breadcrumb-active-color;
+  }
+}

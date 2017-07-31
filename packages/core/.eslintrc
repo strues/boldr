@@ -1,0 +1,11 @@
+{
+  "root": true,
+  "extends": ["boldr", "boldr/react", "boldr/import", "boldr/flowtype", "boldr/promise"],
+  "globals" : {
+    "__DEV__"      : false,
+    "__PROD__"     : false,
+    "__DEBUG__"    : false,
+    "__COVERAGE__" : false,
+    "__BASENAME__" : false
+  }
+}

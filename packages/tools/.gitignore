@@ -1,0 +1,4 @@
+lib
+bin
+*.log
+node_modules

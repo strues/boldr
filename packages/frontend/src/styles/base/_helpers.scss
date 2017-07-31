@@ -1,0 +1,220 @@
+////
+/// @group helpers
+////
+
+/// A placeholder for displaying an element inline
+%boldrui-inline-block {
+  display: inline-block;
+  vertical-align: bottom;
+}
+
+/// A simple placeholder for setting the width to 100%.
+%boldrui-full-width {
+  width: 100%;
+}
+
+/// A simple placeholder for centering an item.
+%boldrui-block-centered {
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.boldrui-cf {
+  @include clearfix();
+}
+
+.boldrui-inline-block {
+  @extend %boldrui-inline-block;
+}
+
+.boldrui-full-width {
+  @extend %boldrui-full-width;
+}
+
+.boldrui-block-centered {
+  @extend %boldrui-block-centered;
+}
+
+.boldrui-pad-top {
+  padding-top: 1em;
+}
+
+.touch-ripple {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  transform: rotate(0deg);
+
+  .ripple {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.16;
+    background: #ccc;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: opacity 1s ease-out, transform 0.5s ease-out;
+    pointer-events: none;
+  }
+}
+
+$displays: "block" "flex" "inline" "inline-block" "inline-flex";
+
+@each $display in $displays {
+  .is-#{$display} {
+    display: #{$display};
+  }
+
+  .is-#{$display}-mobile {
+    @include mobile() {
+      display: #{$display} !important;
+    }
+  }
+
+  .is-#{$display}-tablet {
+    @include tablet() {
+      display: #{$display} !important;
+    }
+  }
+
+  .is-#{$display}-tablet-only {
+    @include tablet-only() {
+      display: #{$display} !important;
+    }
+  }
+
+  .is-#{$display}-touch {
+    @include touch() {
+      display: #{$display} !important;
+    }
+  }
+
+  .is-#{$display}-desktop {
+    @include desktop() {
+      display: #{$display} !important;
+    }
+  }
+
+  .is-#{$display}-desktop-only {
+    @include desktop-only() {
+      display: #{$display} !important;
+    }
+  }
+
+  .is-#{$display}-widescreen {
+    @include widescreen() {
+      display: #{$display} !important;
+    }
+  }
+}
+
+.is-clearfix {
+  @include clearfix();
+}
+
+.is-pulled-left {
+  float: left !important;
+}
+
+.is-pulled-right {
+  float: right !important;
+}
+
+.is-clipped {
+  overflow: hidden !important;
+}
+
+.is-overlay {
+  @include overlay();
+}
+
+.has-text-centered {
+  text-align: center !important;
+}
+
+.has-text-left {
+  text-align: left !important;
+}
+
+.has-text-right {
+  text-align: right !important;
+}
+
+@each $name, $pair in $colors {
+  $color: nth($pair, 1);
+
+  .has-text-#{$name} {
+    color: $color;
+  }
+
+  a.has-text-#{$name} {
+    &:hover,
+    &:focus {
+      color: darken($color, 10%);
+    }
+  }
+}
+
+.is-hidden {
+  display: none !important;
+}
+
+.is-hidden-mobile {
+  @include mobile() {
+    display: none !important;
+  }
+}
+
+.is-hidden-tablet {
+  @include tablet() {
+    display: none !important;
+  }
+}
+
+.is-hidden-tablet-only {
+  @include tablet-only() {
+    display: none !important;
+  }
+}
+
+.is-hidden-touch {
+  @include touch() {
+    display: none !important;
+  }
+}
+
+.is-hidden-desktop {
+  @include desktop() {
+    display: none !important;
+  }
+}
+
+.is-hidden-desktop-only {
+  @include desktop-only() {
+    display: none !important;
+  }
+}
+
+.is-hidden-widescreen {
+  @include widescreen() {
+    display: none !important;
+  }
+}
+
+.is-marginless {
+  margin: 0 !important;
+}
+
+.is-paddingless {
+  padding: 0 !important;
+}
+
+.is-unselectable {
+  @include unselectable();
+}

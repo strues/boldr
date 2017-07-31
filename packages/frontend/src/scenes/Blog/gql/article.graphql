@@ -1,0 +1,32 @@
+query getArticleBySlug($slug: String!) {
+  getArticleBySlug(slug: $slug) {
+    id
+    title
+    content
+    slug
+    image
+    createdAt
+    userId
+    tags {
+      id
+      name
+      __typename
+    }
+    __typename
+    author {
+      username
+      avatarUrl
+      bio
+      __typename
+      socialMedia {
+        facebookUrl
+        githubUrl
+        twitterUrl
+        linkedinUrl
+        googleUrl
+        stackoverflowUrl
+        __typename
+      }
+    }
+  }
+}

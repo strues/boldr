@@ -1,0 +1,152 @@
+////
+/// @group tooltip
+////
+.#{$boldr-ns}tooltip__root {
+  position: absolute;
+  z-index: $tooltip-z-index;
+}
+
+.#{$boldr-ns}tooltip {
+  position: relative;
+  display: inline-block;
+  padding: $tooltip-padding;
+  color: $text-color;
+  background: $white;
+  border-radius: $tooltip-border-radius;
+  box-shadow: $tooltip-shadow;
+  font-size: $tooltip-font-size;
+  -webkit-font-smoothing: antialiased;
+  line-height: $tooltip-line-height;
+  word-wrap: break-word;
+
+  &.light {
+    color: $text-color;
+    background: $white;
+  }
+
+  &.dark {
+    color: $text-color-light;
+    background: $big-stone;
+  }
+
+  &.error {
+    color: $error-color;
+    background: $white;
+  }
+
+  &.normal {
+    font-size: 14px;
+    line-height: 18px;
+    text-align: center;
+  }
+
+  &.large {
+    font-size: 16px;
+    line-height: 24px;
+    text-align: center;
+  }
+}
+
+.#{$boldr-ns}tooltip__arrow {
+  $arrow-size: 10px;
+  position: absolute;
+  width: $arrow-size;
+  height: $arrow-size;
+  background: inherit;
+  transform: rotateZ(45deg);
+
+  &.bottom,
+  &.top {
+    left: 50%;
+    margin-left: -$arrow-size / 2;
+  }
+
+  &.bottom {
+    bottom: -4px;
+    box-shadow: 3px 3px 6px $tooltip-shadow-color-arrow;
+  }
+
+  &.top {
+    top: -4px;
+    box-shadow: -3px -3px 6px $tooltip-shadow-color-arrow;
+  }
+
+  &.left,
+  &.right {
+    top: 50%;
+    margin-top: -5px;
+  }
+
+  &.right {
+    right: -5px;
+    box-shadow: 3px -3px 6px $tooltip-shadow-color-arrow;
+  }
+
+  &.left {
+    left: -5px;
+    box-shadow: -3px 3px 6px $tooltip-shadow-color-arrow;
+  }
+}
+
+.#{$boldr-ns}tooltip__fadeIn {
+  animation: fadeIn 0.3s cubic-bezier(0.23, 1, 0.32, 1) both;
+}
+
+.bounce-on-top,
+.bounce-on-bottom {
+  animation: bounceVertically 1s ease infinite;
+}
+
+.bounce-on-left,
+.bounce-on-right {
+  animation: bounceHorizontally 1s ease infinite;
+}
+
+.bounce-on-top,
+.bounce-on-bottom,
+.bounce-on-left,
+.bounce-on-right {
+  &:hover {
+    animation-play-state: paused;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0.85;
+    transform: scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes bounceVertically {
+  0% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes bounceHorizontally {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(-10px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}

@@ -1,9 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`Container should match the snapshot 1`] = `
-<div
-  className="boldrui-container is-flex"
->
-  My Container
-</div>
-`;

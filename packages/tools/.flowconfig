@@ -1,0 +1,14 @@
+[ignore]
+
+[include]
+
+[libs]
+./flow-typed/npm
+./flow-typed/defs
+
+[options]
+
+[lints]
+
+[version]
+0.51.1

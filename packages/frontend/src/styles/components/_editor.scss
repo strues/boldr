@@ -1,0 +1,969 @@
+.boldrui-editor__root {
+  width: 65%;
+  margin: 0 auto;
+}
+
+.editor--content {
+  padding: 0.2rem;
+  border: 1px solid #ccc;
+  margin: 0 auto;
+}
+
+.editor--content > div {
+  min-height: 100px;
+}
+
+.editor--toolbar {
+  background-color: #0275d8;
+}
+
+.boldrui-editor-main {
+  box-sizing: border-box;
+  overflow: auto;
+  height: 100%;
+}
+
+.boldrui-editor-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 6px 5px 0;
+  background: $white;
+  border: 1px solid $snow;
+  border-radius: 2px;
+  margin-bottom: 5px;
+  font-size: 15px;
+  user-select: none;
+}
+
+.public-DraftStyleDefault-block {
+  margin: 1em 0;
+}
+
+.boldrui-editor-wrapper {
+  box-sizing: content-box;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.boldrui-editor__block-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.boldrui-editor__block-dropdown {
+  width: 110px;
+}
+
+/// Color Picker
+.boldrui-editor__colorpicker-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.boldrui-editor__colorpicker-modal {
+  @include md-shadow(2);
+  position: absolute;
+  top: 35px;
+  left: 5px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  width: 175px;
+  height: 175px;
+  padding: 15px;
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 2px;
+}
+
+.boldrui-editor__colorpicker-modal-header {
+  display: flex;
+  padding-bottom: 5px;
+}
+
+.boldrui-editor__colorpicker-modal-style-label {
+  width: 50%;
+  padding: 0 10px 5px;
+  font-size: 15px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.boldrui-editor__colorpicker-modal-style-label-active {
+  border-bottom: 2px solid #0a66b7;
+}
+
+.boldrui-editor__colorpicker-modal-options {
+  display: flex;
+  overflow: scroll;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%;
+  margin: 5px auto;
+}
+
+.boldrui-editor__colorpicker-cube {
+  width: 22px;
+  height: 22px;
+}
+
+.boldrui-editor__colorpicker-option {
+  width: 22px;
+  min-width: 22px;
+  height: 22px;
+  min-height: 20px;
+  padding: 0;
+  border: none;
+  margin: 3px;
+
+  &:hover {
+    @include md-shadow(3);
+  }
+
+  &:active {
+    @include md-shadow(3);
+  }
+}
+
+.boldrui-editor__colorpicker-option-active {
+  box-shadow: 0 0 2px 2px #bfbdbd;
+}
+
+/// Embed
+.boldrui-editor__embedded-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.boldrui-editor__embedded-modal {
+  @include md-shadow(2);
+  position: absolute;
+  top: 35px;
+  left: 5px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 235px;
+  height: 180px;
+  padding: 15px;
+  background: white;
+  border: 1px solid #f1f1f1;
+  border-radius: 2px;
+}
+
+.boldrui-editor__embedded-modal-header {
+  display: flex;
+  font-size: 15px;
+}
+
+.boldrui-editor__embedded-modal-header-option {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  cursor: pointer;
+}
+
+.boldrui-editor__embedded-modal-header-label {
+  width: 95px;
+  background: #6eb8d4;
+  border: 1px solid #f1f1f1;
+  border-bottom: 2px solid #0a66b7;
+  margin-top: 5px;
+}
+
+.boldrui-editor__embedded-modal-link-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.boldrui-editor__embedded-modal-link-input {
+  width: 95%;
+  height: 35px;
+  padding: 0 5px;
+  border: 1px solid #f1f1f1;
+  border-radius: 2px;
+  margin: 10px 0;
+  font-size: 15px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.boldrui-editor__embedded-modal-btn-section {
+  display: flex;
+  justify-content: center;
+}
+
+.boldrui-editor__embedded-modal-btn {
+  width: 75px;
+  height: 30px;
+  background: $white;
+  border: 1px solid #f1f1f1;
+  border-radius: 2px;
+  margin: 0 3px;
+  text-transform: capitalize;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 1px 1px 0px #bfbdbd;
+  }
+
+  &:active {
+    box-shadow: 1px 1px 0px #bfbdbd inset;
+  }
+
+  &:focus {
+    outline: none !important;
+  }
+
+  &:disabled {
+    background: #ece9e9;
+  }
+}
+
+.boldrui-editor__embedded-modal-size {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 8px 0;
+}
+
+.boldrui-editor__embedded-modal-size-input {
+  width: 45%;
+  height: 20px;
+  border: 1px solid #f1f1f1;
+  border-radius: 2px;
+  font-size: 12px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+/// Emoji
+
+.boldrui-editor__emoji-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.boldrui-editor__emoji-modal {
+  @include md-shadow(2);
+  position: absolute;
+  top: 35px;
+  left: 5px;
+  z-index: 100;
+  display: flex;
+  overflow: auto;
+  flex-wrap: wrap;
+  width: 235px;
+  height: 180px;
+  padding: 15px;
+  background: white;
+  border: 1px solid #f1f1f1;
+  border-radius: 2px;
+}
+
+.boldrui-editor__emoji-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  margin: 2.5px;
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/// Font
+
+.boldrui-editor__fontfamily-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.boldrui-editor__fontfamily-dropdown {
+  width: 115px;
+}
+
+.boldrui-editor__fontfamily-placeholder {
+  overflow: hidden;
+  max-width: 90px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.boldrui-editor__fontfamily-optionwrapper {
+  width: 140px;
+}
+
+.boldrui-editor__fontsize-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.boldrui-editor__fontsize-dropdown {
+  min-width: 40px;
+}
+
+.boldrui-editor__fontsize-option {
+  display: flex;
+  justify-content: center;
+}
+
+/// history
+
+.boldrui-editor__history-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.boldrui-editor__history-dropdownoption {
+  display: flex;
+  justify-content: center;
+  height: 40px;
+}
+
+.boldrui-editor__history-dropdown {
+  width: 50px;
+}
+
+/// Image
+
+.boldrui-editor__image-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.boldrui-editor__image-modal {
+  @include md-shadow(2);
+  position: absolute;
+  top: 35px;
+  left: 5px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  width: 235px;
+  height: 200px;
+  padding: 15px;
+  background: $white;
+  border: 1px solid #f1f1f1;
+  border-radius: 2px;
+}
+
+.boldrui-editor__image-modal-header {
+  display: flex;
+  margin: 10px 0;
+  font-size: 15px;
+}
+
+.boldrui-editor__image-modal-header-option {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  cursor: pointer;
+}
+
+.boldrui-editor__image-modal-header-label {
+  width: 80px;
+  background: #f1f1f1;
+  border: 1px solid #f1f1f1;
+  margin-top: 5px;
+}
+
+.boldrui-editor__image-modal-header-label-highlighted {
+  background: #6eb8d4;
+  border-bottom: 2px solid #0a66b7;
+}
+
+.boldrui-editor__image-modal-upload-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 65px;
+  color: gray;
+  background-color: #f1f1f1;
+  border: none;
+  margin: 10px 0;
+  outline: 2px dashed gray;
+  outline-offset: -10px;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.boldrui-editor__image-modal-upload-option-highlighted {
+  outline: 2px dashed #0a66b7;
+}
+
+.boldrui-editor__image-modal-upload-option-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  cursor: pointer;
+
+  span {
+    padding: 0 20px;
+  }
+}
+
+.boldrui-editor__image-modal-upload-option-input {
+  position: absolute;
+  z-index: -1;
+  overflow: hidden;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+}
+
+.boldrui-editor__image-modal-url-section {
+  display: block;
+}
+
+.boldrui-editor__image-modal-url-input {
+  width: 95%;
+  height: 35px;
+  padding: 0 5px;
+  border: 1px solid #f1f1f1;
+  border-radius: 2px;
+  margin: 30px 0 20px;
+  font-size: 15px;
+}
+
+.boldrui-editor__image-modal-btn-section {
+  margin: 10px auto 0;
+}
+
+.boldrui-editor__image-modal-url-input:focus {
+  outline: none;
+}
+
+.boldrui-editor__image-modal-btn {
+  width: 75px;
+  height: 30px;
+  background: white;
+  border: 1px solid #f1f1f1;
+  border-radius: 2px;
+  margin: 0 5px;
+  text-transform: capitalize;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 1px 1px 0px #bfbdbd;
+  }
+
+  &:active {
+    box-shadow: 1px 1px 0px #bfbdbd inset;
+  }
+
+  &:focus {
+    outline: none !important;
+  }
+
+  &:disabled {
+    background: #ece9e9;
+  }
+}
+
+.boldrui-editor__image-modal-spinner {
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.5;
+}
+
+/// Inline
+
+.boldrui-editor__inline-wrapper {
+  display: flex;
+  margin-bottom: 6px;
+}
+
+.boldrui-editor__inline-dropdown {
+  width: 50px;
+}
+
+.boldrui-editor__inline-dropdownoption {
+  display: flex;
+  justify-content: center;
+  height: 40px;
+}
+
+/// Link
+
+.boldrui-editor__link-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.boldrui-editor__link-dropdown {
+  width: 50px;
+}
+
+.boldrui-editor__link-dropdownOption {
+  display: flex;
+  justify-content: center;
+  height: 40px;
+}
+
+.boldrui-editor__link-dropdownPlaceholder {
+  margin-left: 8px;
+}
+
+.boldrui-editor__link-modal {
+  @include md-shadow(2);
+  position: absolute;
+  top: 35px;
+  left: 5px;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  width: 235px;
+  height: 205px;
+  padding: 15px;
+  background: white;
+  border: 1px solid #f1f1f1;
+  border-radius: 2px;
+}
+
+.boldrui-editor__link-modal-label {
+  font-size: 15px;
+}
+
+.boldrui-editor__link-modal-input {
+  height: 25px;
+  padding: 0 5px;
+  border: 1px solid #f1f1f1;
+  border-radius: 2px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.boldrui-editor__link-modal-buttonsection {
+  margin: 0 auto;
+}
+
+.boldrui-editor__link-modal-target-option {
+  margin-bottom: 20px;
+
+  > span {
+    margin-left: 5px;
+  }
+}
+
+.boldrui-editor__link-modal-btn {
+  width: 75px;
+  height: 30px;
+  background: white;
+  border: 1px solid #f1f1f1;
+  border-radius: 2px;
+  margin-left: 10px;
+  text-transform: capitalize;
+  cursor: pointer;
+
+  &:hover {
+    box-shadow: 1px 1px 0px #bfbdbd;
+  }
+
+  &:active {
+    box-shadow: 1px 1px 0px #bfbdbd inset;
+  }
+
+  &:focus {
+    outline: none !important;
+  }
+
+  &:disabled {
+    background: #ece9e9;
+  }
+}
+
+.boldrui-editor__link-dropdownoption {
+  display: flex;
+  justify-content: center;
+  height: 40px;
+}
+
+.boldrui-editor__history-dropdown {
+  width: 50px;
+}
+
+/// List
+
+.boldrui-editor__list-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.boldrui-editor__list-dropdown {
+  z-index: 90;
+  width: 50px;
+}
+
+.boldrui-editor__list-dropdownOption {
+  display: flex;
+  justify-content: center;
+  height: 40px;
+}
+
+/// remove
+
+.boldrui-editor__remove-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+/// textalign
+
+.boldrui-editor__text-align-wrapper {
+  display: flex;
+  align-items: center;
+  margin-bottom: 6px;
+}
+
+.boldrui-editor__text-align-dropdown {
+  z-index: 90;
+  width: 50px;
+}
+
+.boldrui-editor__text-align-dropdownOption {
+  display: flex;
+  justify-content: center;
+  height: 40px;
+}
+
+.boldrui-editor__right-aligned-block {
+  text-align: right;
+}
+
+.boldrui-editor__left-aligned-block {
+  text-align: left;
+}
+
+.boldrui-editor__center-aligned-block {
+  text-align: center;
+}
+
+.boldrui-editor__justify-aligned-block {
+  text-align: justify;
+}
+
+.boldrui-editor__right-aligned-block > div,
+.boldrui-editor__left-aligned-block > div,
+.boldrui-editor__center-aligned-block > div,
+.boldrui-editor__justify-aligned-block > div {
+  display: inline;
+}
+
+/// dropdown
+
+.boldrui-editor__dropdown-wrapper {
+  height: 30px;
+  background: $white;
+  border: 1px solid $border-color;
+  border-radius: 2px;
+  margin: 0 3px;
+  text-transform: capitalize;
+  cursor: pointer;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    background-color: #fff;
+    box-shadow: 1px 1px 0px #bfbdbd;
+  }
+
+  &:active {
+    box-shadow: 1px 1px 0px #bfbdbd inset;
+  }
+}
+
+.boldrui-editor__dropdown-carettoopen {
+  position: absolute;
+  top: 35%;
+  right: 10%;
+  width: 0;
+  height: 0;
+  border-top: 6px solid black;
+  border-right: 5px solid transparent;
+  border-left: 5px solid transparent;
+}
+
+.boldrui-editor__dropdown-carettoclose {
+  position: absolute;
+  top: 35%;
+  right: 10%;
+  width: 0;
+  height: 0;
+  border-right: 5px solid transparent;
+  border-bottom: 6px solid black;
+  border-left: 5px solid transparent;
+}
+
+.boldrui-editor__dropdown-selectedtext {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 5px;
+}
+
+.boldrui-editor__dropdown-optionwrapper {
+  position: relative;
+  z-index: 100;
+  overflow-y: scroll;
+  width: 98%;
+  max-height: 250px;
+  padding: 0;
+  background: white;
+  border: 1px solid #f1f1f1;
+  border-radius: 2px;
+  margin: 0;
+
+  &:hover {
+    background-color: #fff;
+    box-shadow: 1px 1px 0px #bfbdbd;
+  }
+}
+
+.boldrui-editor__dropdown-option-default {
+  display: flex;
+  align-items: center;
+  min-height: 25px;
+  padding: 0 5px;
+}
+
+.boldrui-editor__dropdown-option-highlighted {
+  background: #f1f1f1;
+}
+
+.boldrui-editor__dropdown-option-active {
+  background: #f5f5f5;
+}
+
+.boldrui-editor__dropdown-option-disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/// opt
+
+.boldrui-editor__option-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 25px;
+  height: 20px;
+  padding: 3px;
+  background-color: transparent;
+  border: 1px solid $border-color;
+  border-radius: 2px;
+  margin: 0 4px;
+  text-transform: capitalize;
+  cursor: pointer;
+
+  &:hover {
+    @include md-shadow(2);
+  }
+
+  &:active {
+    @include md-shadow(2);
+  }
+}
+
+.boldrui-editor__option-active {
+  @include md-shadow(3);
+}
+
+.boldrui-editor__option-disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+/// spinner
+
+.boldrui-editor__spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  > div {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background-color: #333;
+    border-radius: 100%;
+    -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+    animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  }
+
+  .spinner-bounce1 {
+    -webkit-animation-delay: -0.32s;
+    animation-delay: -0.32s;
+  }
+
+  .spinner-bounce2 {
+    -webkit-animation-delay: -0.16s;
+    animation-delay: -0.16s;
+  }
+}
+
+@-webkit-keyframes sk-bouncedelay {
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+  }
+
+  40% {
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes sk-bouncedelay {
+  0%,
+  80%,
+  100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  }
+
+  40% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+
+/// decorators
+
+.boldrui-editor__link-decorator-wrapper {
+  position: relative;
+}
+
+.boldrui-editor__link-decorator-icon {
+  position: absolute;
+  top: 0;
+  left: 40%;
+  background-color: white;
+  cursor: pointer;
+}
+
+.boldrui-editor__hashtag-link,
+.boldrui-editor__mention-link {
+  padding: 1px 2px;
+  color: #1236ff;
+  background-color: #f0fbff;
+  border-radius: 2px;
+  text-decoration: none;
+}
+
+.boldrui-editor__suggestion-wrapper {
+  position: relative;
+}
+
+.boldrui-editor__suggestion-dropdown {
+  position: absolute;
+  z-index: 100;
+  display: flex;
+  overflow: auto;
+  flex-direction: column;
+  min-width: 100px;
+  max-height: 150px;
+  background: white;
+  border: 1px solid #f1f1f1;
+}
+
+.boldrui-editor__suggestion-option {
+  padding: 7px 5px;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.boldrui-editor__suggestion-option-active {
+  background-color: #f1f1f1;
+}
+
+/// image
+
+.boldrui-editor__image-alignment-options-popup {
+  position: absolute;
+  z-index: 100;
+  display: flex;
+  width: 105px;
+  padding: 5px 2px;
+  background: white;
+  border: 1px solid #f1f1f1;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.boldrui-editor__image-alignment-option-left {
+  justify-content: flex-start;
+}
+
+.boldrui-editor__image-alignment-option {
+  width: 15px;
+  min-width: 15px;
+  height: 15px;
+}
+
+.boldrui-editor__image-alignment,
+.boldrui-editor__image-imagewrapper {
+  position: relative;
+}
+
+.boldrui-editor__image-center {
+  display: flex;
+  justify-content: center;
+}
+
+.boldrui-editor__image-left {
+  display: flex;
+}
+
+.boldrui-editor__image-right {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.boldrui-editor__image-alignment-options-popup-right {
+  right: 0;
+}

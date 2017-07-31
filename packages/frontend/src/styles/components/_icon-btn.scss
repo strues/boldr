@@ -1,0 +1,102 @@
+.#{$boldr-ns}iconbtn-suffix {
+  padding: 0 0 0 10px;
+}
+
+.#{$boldr-ns}iconbtn-prefix {
+  padding: 0 10px 0 0;
+}
+
+.#{$boldr-ns}iconbtn {
+  box-sizing: border-box;
+  height: $icon-btn-height;
+  padding: 0 23px;
+  background-color: transparent;
+  border: 0;
+  border-radius: $icon-btn-height / 2;
+  outline: none;
+  -webkit-font-smoothing: antialiased;
+  text-align: center;
+  transition: background-color 100ms linear, border-color 100ms linear, color 100ms linear;
+  cursor: pointer;
+
+  &.transparent {
+    padding: 0 24px;
+  }
+
+  &.close-standard,
+  &.close-dark,
+  &.close-transparent {
+    width: $icon-btn-close-height;
+    height: $icon-btn-close-height;
+    padding: 0;
+    border-radius: $icon-btn-close-height / 2;
+  }
+
+  &.icon-greybackground,
+  &.icon-standard,
+  &.icon-standardsecondary,
+  &.icon-white,
+  &.icon-whitesecondary {
+    width: $icon-btn-height;
+    height: $icon-btn-height;
+    padding: 0;
+    border-radius: $icon-btn-height / 2;
+  }
+}
+
+.button > .inner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.button > .inner,
+.button > div,
+.button > .inner > div {
+  color: inherit;
+  font-size: inherit;
+  font-family: inherit;
+  line-height: inherit;
+}
+
+.heightsmall {
+  height: $icon-btn-sm-height;
+  padding: 0 17px;
+  border-radius: $icon-btn-sm-height / 2;
+
+  &.transparent {
+    padding: 0 18px;
+  }
+
+  &.icon-greybackground,
+  &.icon-standard,
+  &.icon-standardsecondary,
+  &.icon-white,
+  &.icon-whitesecondary {
+    width: $icon-btn-sm-height;
+    height: $icon-btn-sm-height;
+    padding: 0;
+    border-radius: $icon-btn-sm-height / 2;
+  }
+}
+
+.heightlarge {
+  height: $icon-btn-lg-height;
+  padding: 0 29px;
+  border-radius: $icon-btn-lg-height / 2;
+
+  &.transparent {
+    padding: 0 30px;
+  }
+
+  &.close-standard,
+  &.close-dark,
+  &.close-transparent {
+    width: $icon-btn-lg-close-height;
+    height: $icon-btn-lg-close-height;
+    padding: 0;
+    border-radius: $icon-btn-lg-close-height / 2;
+  }
+}
