@@ -5,10 +5,9 @@ import {
   GraphQLNonNull,
   GraphQLList,
   GraphQLID,
-  GraphQLInt,
   GraphQLInputObjectType,
 } from 'graphql';
-import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON } from '../scalars';
+import { GraphQLEmail, GraphQLURL, GraphQLDateTime } from '../scalars';
 import User from '../../models/User';
 import ArticleType from '../article/articleType';
 import MediaType from '../media/mediaType';
@@ -22,32 +21,32 @@ export const SocialType = new GraphQLObjectType({
       description: 'The id for the users social media',
     },
     userId: {
-      type: GraphQLID,
+      type: new GraphQLNonNull(GraphQLID),
       description: 'The unique identifier for the user for the identity.',
     },
     facebookUrl: {
       type: GraphQLURL,
-      description: 'The facebook profile url for the user.',
+      description: 'The Facebook profile url for the user.',
     },
     twitterUrl: {
       type: GraphQLURL,
-      description: 'The facebook profile url for the user.',
+      description: 'The Twitter profile url for the user.',
     },
     googleUrl: {
       type: GraphQLURL,
-      description: 'The facebook profile url for the user.',
+      description: 'The Google profile url for the user.',
     },
     githubUrl: {
       type: GraphQLURL,
-      description: 'The facebook profile url for the user.',
+      description: 'The GitHub profile url for the user.',
     },
     linkedinUrl: {
       type: GraphQLURL,
-      description: 'The facebook profile url for the user.',
+      description: 'The LinkedIn profile url for the user.',
     },
     stackoverflowUrl: {
       type: GraphQLURL,
-      description: 'The facebook profile url for the user.',
+      description: 'The Stackoverflow profile url for the user.',
     },
   }),
 });
@@ -127,7 +126,7 @@ const UserType = new GraphQLObjectType({
   description: 'The user or account',
   fields: () => ({
     id: {
-      type: GraphQLID,
+      type: new GraphQLNonNull(GraphQLID),
       description: 'The users id (uuid)',
     },
     deletedAt: {
@@ -193,6 +192,7 @@ const UserType = new GraphQLObjectType({
     roles: {
       type: new GraphQLList(RoleType),
       description: 'Roles the user belongs to.',
+      // eslint-disable-next-line
       resolve(user, args, ctx) {
         return User.query().findById(user.id).then(result => result.$relatedQuery('roles'));
       },
@@ -200,6 +200,7 @@ const UserType = new GraphQLObjectType({
     socialMedia: {
       type: SocialType,
       description: 'Social media profiles of the user.',
+      // eslint-disable-next-line
       resolve(user, args, ctx) {
         return User.query().findById(user.id).then(result => result.$relatedQuery('socialMedia'));
       },
@@ -207,6 +208,7 @@ const UserType = new GraphQLObjectType({
     articles: {
       type: new GraphQLList(ArticleType),
       description: 'Articles the user has written',
+      // eslint-disable-next-line
       resolve(user, args, ctx) {
         return User.query().findById(user.id).then(result => result.$relatedQuery('articles'));
       },
@@ -214,13 +216,15 @@ const UserType = new GraphQLObjectType({
     uploads: {
       type: new GraphQLList(MediaType),
       description: 'Articles the user has written',
+      // eslint-disable-next-line
       resolve(user, args, ctx) {
         return User.query().findById(user.id).then(result => result.$relatedQuery('uploads'));
       },
     },
     verificationToken: {
       type: VerificationTokenType,
-      description: 'Articles the user has written',
+      description: 'Account verification token belonging to the user.',
+      // eslint-disable-next-line
       resolve(user, args, ctx) {
         return User.query()
           .findById(user.id)
@@ -229,7 +233,8 @@ const UserType = new GraphQLObjectType({
     },
     resetToken: {
       type: ResetTokenType,
-      description: 'Articles the user has written',
+      description: 'Password reset token belonging to the user.',
+      // eslint-disable-next-line
       resolve(user, args, ctx) {
         return User.query().findById(user.id).then(result => result.$relatedQuery('resetToken'));
       },

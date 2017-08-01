@@ -1,7 +1,4 @@
-import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt, GraphQLString } from 'graphql';
-import jsonResult from 'boldr-utils/lib/gql/jsonResult';
-import { GraphQLUUID } from '../scalars';
-import logger from '../../services/logger';
+import { GraphQLList, GraphQLInt, GraphQLString } from 'graphql';
 import Article from '../../models/Article';
 import ArticleType from './articleType';
 
@@ -20,6 +17,7 @@ export default {
         description: 'The maximum number of articles to return at a time.',
       },
     },
+    // eslint-disable-next-line
     resolve(_, { offset, limit }) {
       // const articles = Article.getArticles(offset, limit).then(jsonResult);
       return Article.getArticles(offset, limit);
@@ -33,6 +31,7 @@ export default {
       offset: { type: GraphQLInt },
       limit: { type: GraphQLInt },
     },
+    // eslint-disable-next-line
     resolve(_, { name, offset, limit }) {
       return Article.getArticlesByTag(name, offset, limit);
     },
@@ -44,6 +43,7 @@ export default {
     args: {
       slug: { type: GraphQLString },
     },
+    // eslint-disable-next-line
     resolve(_, { slug }) {
       // const article = await Article.getArticleBySlug(slug);
 

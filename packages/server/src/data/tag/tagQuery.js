@@ -1,4 +1,4 @@
-import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt } from 'graphql';
+import { GraphQLList, GraphQLNonNull, GraphQLInt } from 'graphql';
 import Tag from '../../models/Tag';
 import TagType from './tagType';
 
@@ -18,10 +18,10 @@ export default {
     },
     async resolve(_, { limit, offset }) {
       const tags = await Tag.query().offset(offset).limit(limit).skipUndefined();
-      if (tags) {
-        return tags;
+      if (!tags) {
+        console.log('error');
       }
-      console.log('error');
+      return tags;
     },
   },
 };

@@ -28,8 +28,6 @@ class DashboardLanding extends Component {
     return (
       <div>
         <ContentPromo isCentered>
-          {/* @TODO: Add to user's database table a one time install column then never show this
-          again unless prompted. istead use something else */}
           <Headline kind="h1">
             Welcome {this.props.currentUser.firstName}
           </Headline>

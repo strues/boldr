@@ -19,7 +19,7 @@ import SETTINGS_QUERY from './getSettings.graphql';
 
 export const hasAccessToken = () => {
   const token = getToken();
-  return !!token;
+  return token;
 };
 
 export type ProtectedProps = {

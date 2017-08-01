@@ -1,6 +1,4 @@
 import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt } from 'graphql';
-import jsonResult from 'boldr-utils/lib/gql/jsonResult';
-import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON } from '../scalars';
 import Media from '../../models/Media';
 import MediaType from './mediaType';
 
@@ -20,10 +18,10 @@ export default {
     },
     async resolve(_, { limit, offset }, ctx) {
       const media = await Media.query().returning('*');
-      if (media) {
-        return media;
+      if (!media) {
+        console.log('error');
       }
-      console.log('error');
+      return media;
     },
   },
   getMediaById: {
@@ -35,12 +33,12 @@ export default {
         description: 'The id of the requested media',
       },
     },
-    async resolve(_, { id }, ctx) {
-      const media = await ctx.media.load(id);
-      if (media) {
-        return media;
+    async resolve(_, { id }, context) {
+      const media = await Media.getMediaById(id);
+      if (!media) {
+        console.log('error');
       }
-      console.log('error');
+      return media;
     },
   },
 };

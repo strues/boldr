@@ -1,22 +1,19 @@
 import {
-  GraphQLBoolean,
   GraphQLString,
   GraphQLObjectType,
   GraphQLNonNull,
-  GraphQLList,
   GraphQLID,
   GraphQLInt,
   GraphQLInputObjectType,
-  GraphQLEnumType,
 } from 'graphql';
-import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON } from '../scalars';
+import { GraphQLDateTime } from '../scalars';
 
 const MediaType = new GraphQLObjectType({
   name: 'Media',
   description: 'Uploaded images, videos or audio',
   fields: () => ({
     id: {
-      type: GraphQLID,
+      type: new GraphQLNonNull(GraphQLID),
       description: 'The identifying uuid.',
     },
     name: {
@@ -24,7 +21,7 @@ const MediaType = new GraphQLObjectType({
       description: 'The name of the file',
     },
     safeName: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
       description: 'identifier which cannot be changed',
     },
     thumbName: {
@@ -37,7 +34,7 @@ const MediaType = new GraphQLObjectType({
     },
     type: {
       type: GraphQLString,
-      description: 'The mimetype of the upload',
+      description: 'The mime-type of the upload',
     },
     size: {
       type: GraphQLInt,
@@ -45,7 +42,7 @@ const MediaType = new GraphQLObjectType({
     },
     path: {
       type: GraphQLString,
-      dsescription: 'The local path where the file is stored',
+      description: 'The local path where the file is stored',
     },
     url: {
       type: GraphQLString,

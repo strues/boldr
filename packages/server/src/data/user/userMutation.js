@@ -1,17 +1,10 @@
-import { GraphQLID, GraphQLInt, GraphQLString, GraphQLNonNull } from 'graphql';
+import { GraphQLID, GraphQLNonNull } from 'graphql';
 import uuid from 'uuid';
-import jwt from 'jsonwebtoken';
-import { mailer, signToken, generateHash, comparePassword } from '../../services';
+import { mailer, signToken } from '../../services';
 import { welcomeEmail } from '../../services/mailer/templates';
 import User from '../../models/User';
-import VerificationToken from '../../models/VerificationToken';
-import { GraphQLUUID } from '../scalars';
-import {
-  UserLoginInput,
-  UserLoginResponse,
-  UserSignupInput,
-  AuthError,
-} from './auth/userAuthTypes';
+// import VerificationToken from '../../models/VerificationToken';
+import { UserLoginInput, UserLoginResponse, UserSignupInput } from './auth/userAuthTypes';
 
 import UserType, { EditUserInput } from './userType';
 
@@ -29,7 +22,7 @@ export default {
         .where({ email: args.input.email })
         .eager('[roles,socialMedia]')
         .first();
-
+      // eslint-disable-next-line
       const validAuth = await user.authenticate(args.input.password);
       // remove the password from the response.
       user.stripPassword();
@@ -74,7 +67,7 @@ export default {
       // send the welcome email
       mailer(newUser, mailBody, mailSubject);
       // create a relationship between the user and the token
-      const verificationEmail = await newUser.$relatedQuery('verificationToken').insert({
+      await newUser.$relatedQuery('verificationToken').insert({
         ip: context.req.ip,
         token: verifToken,
         userId: newUser.id,
@@ -95,6 +88,7 @@ export default {
         description: 'The required fields for editing a user.',
       },
     },
+    // eslint-disable-next-line
     async resolve(_, args, context) {
       const updatedUser = await User.query().patchAndFetchById(args.id, {
         firstName: args.input.firstName,

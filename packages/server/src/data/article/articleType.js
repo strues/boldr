@@ -19,7 +19,7 @@ const ArticleType = new GraphQLObjectType({
   description: 'A blog post or article',
   fields: () => ({
     id: {
-      type: GraphQLID,
+      type: new GraphQLNonNull(GraphQLID),
       description: 'The identifier for the article',
     },
     title: {

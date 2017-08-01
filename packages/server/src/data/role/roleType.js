@@ -1,14 +1,5 @@
-import {
-  GraphQLBoolean,
-  GraphQLString,
-  GraphQLObjectType,
-  GraphQLNonNull,
-  GraphQLList,
-  GraphQLID,
-  GraphQLInt,
-  GraphQLInputObjectType,
-} from 'graphql';
-import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON } from '../scalars';
+import { GraphQLString, GraphQLObjectType, GraphQLNonNull, GraphQLList, GraphQLID } from 'graphql';
+import { GraphQLURL, GraphQLUUID } from '../scalars';
 import UserType from '../user/userType';
 
 const RoleType = new GraphQLObjectType({

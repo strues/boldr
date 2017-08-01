@@ -1,5 +1,5 @@
 /* eslint-disable prefer-destructuring, no-underscore-dangle, new-cap */
-import 'isomorphic-fetch';
+// import 'isomorphic-fetch';
 import React from 'react';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
 import { getToken } from '@boldr/auth';

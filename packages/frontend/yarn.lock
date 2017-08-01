@@ -2158,9 +2158,9 @@ create-react-class@^15.5.1, create-react-class@^15.5.3, create-react-class@^15.6
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
 
-cross-env@^5.0.1:
-  version "5.0.1"
-  resolved "https://npm.strues.io/cross-env/-/cross-env-5.0.1.tgz#ff4e72ea43b47da2486b43a7f2043b2609e44913"
+cross-env@^5.0.2:
+  version "5.0.2"
+  resolved "https://registry.npmjs.org/cross-env/-/cross-env-5.0.2.tgz#d39fd2fa28c1b5cfb91e7058d1efe8b4fcb01334"
   dependencies:
     cross-spawn "^5.1.0"
     is-windows "^1.0.0"
@@ -6424,6 +6424,22 @@ rc@^1.0.1, rc@^1.1.6, rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-apollo@^1.4.10:
+  version "1.4.10"
+  resolved "https://registry.npmjs.org/react-apollo/-/react-apollo-1.4.10.tgz#a3c77b120402245ea9d3a518118237c2a314a3a1"
+  dependencies:
+    apollo-client "^1.4.0"
+    graphql-anywhere "^3.0.0"
+    graphql-tag "^2.0.0"
+    hoist-non-react-statics "^2.2.0"
+    invariant "^2.2.1"
+    lodash.flatten "^4.2.0"
+    lodash.isequal "^4.1.1"
+    lodash.isobject "^3.0.2"
+    lodash.pick "^4.4.0"
+    object-assign "^4.0.1"
+    prop-types "^15.5.8"
+
 react-apollo@^1.4.8:
   version "1.4.8"
   resolved "https://npm.strues.io/react-apollo/-/react-apollo-1.4.8.tgz#b510f207b08ce4bd1e3adbd46a3ede68e3af27e7"
@@ -7938,9 +7954,9 @@ webpack-dev-middleware@^1.12.0:
     range-parser "^1.0.3"
     time-stamp "^2.0.0"
 
-webpack-flush-chunks@^1.1.16:
+webpack-flush-chunks@^1.1.17:
   version "1.1.17"
-  resolved "https://npm.strues.io/webpack-flush-chunks/-/webpack-flush-chunks-1.1.17.tgz#f49f84a26c0e59739e9b90bf24186cd30b12cddc"
+  resolved "https://registry.npmjs.org/webpack-flush-chunks/-/webpack-flush-chunks-1.1.17.tgz#f49f84a26c0e59739e9b90bf24186cd30b12cddc"
 
 webpack-hot-middleware@^2.18.2:
   version "2.18.2"

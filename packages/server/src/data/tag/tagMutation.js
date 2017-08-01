@@ -1,5 +1,4 @@
-import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt, GraphQLString } from 'graphql';
-import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON } from '../scalars';
+import { GraphQLNonNull, GraphQLID } from 'graphql';
 import Tag from '../../models/Tag';
 import TagType, { TagInput } from './tagType';
 
@@ -12,7 +11,7 @@ export default {
         type: new GraphQLNonNull(TagInput),
       },
     },
-    async resolve(_, args, context) {
+    async resolve(_, args) {
       const payload = await Tag.query().insert(args.input).returning('*');
       return payload;
     },
@@ -22,7 +21,7 @@ export default {
     description: 'Edit an existing tag',
     args: {
       id: {
-        type: new GraphQLNonNull(GraphQLUUID),
+        type: new GraphQLNonNull(GraphQLID),
         description: 'The tag ID',
       },
       input: {
@@ -30,13 +29,27 @@ export default {
         description: 'The fields (name, description) for editing a tag.',
       },
     },
-    async resolve(_, args, context) {
+    async resolve(_, args) {
       debug(args);
       const updatedTag = await Tag.query().patchAndFetchById(args.id, {
         name: args.input.name,
         description: args.input.description,
       });
       return updatedTag;
+    },
+  },
+  deleteTag: {
+    type: TagType,
+    description: 'Remove a tag from the database',
+    args: {
+      id: {
+        type: new GraphQLNonNull(GraphQLID),
+        description: 'The tag ID',
+      },
+    },
+    async resolve(_, args) {
+      const removedTag = await Tag.query().deleteById(args.id);
+      return removedTag;
     },
   },
 };

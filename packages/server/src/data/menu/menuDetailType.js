@@ -3,27 +3,18 @@ import {
   GraphQLString,
   GraphQLObjectType,
   GraphQLNonNull,
-  GraphQLList,
   GraphQLID,
   GraphQLInt,
   GraphQLInputObjectType,
 } from 'graphql';
-import {
-  GraphQLEmail,
-  GraphQLURL,
-  GraphQLLimitedString,
-  GraphQLPassword,
-  GraphQLDateTime,
-  GraphQLUUID,
-  GraphQLJSON,
-} from '../scalars';
+import { GraphQLJSON } from '../scalars';
 
 const MenuDetailType = new GraphQLObjectType({
   name: 'MenuDetail',
   description: 'links and other menu content',
   fields: () => ({
     id: {
-      type: GraphQLID,
+      type: new GraphQLNonNull(GraphQLID),
       description: 'The id (uuid)',
     },
     title: {

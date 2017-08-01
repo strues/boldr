@@ -7,6 +7,7 @@ import { graphql } from 'react-apollo';
 import Loader from '@boldr/ui/Loader';
 // internal
 import { showHeader } from '@boldr/core';
+import { Footer, Container } from '@boldr/ui/Layout';
 import ProfileContainer from '../../scenes/Profile';
 import LoginContainer from '../../scenes/Account/Login';
 import SignupContainer from '../../scenes/Account/Signup';
@@ -39,6 +40,7 @@ const ContentWrapper = styled.section`
   height: 100%;
   min-height: 100%;
   padding-top: 70px;
+  padding-bottom: 70px;
 `;
 
 export class Page extends Component {
@@ -75,6 +77,9 @@ export class Page extends Component {
             <Route path="/" exact component={Home} />
           </Switch>
         </ContentWrapper>
+        <Footer id="footer">
+          <Container>Footer</Container>
+        </Footer>
       </Wrapper>
     );
   }
