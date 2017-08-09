@@ -35,7 +35,7 @@ export default ({ clientStats, outputPath }) =>
     const initialState = {};
     const apolloClient = createApolloClient({
       initialState,
-      apolloUri: 'http://localhost:2121/api/v1/graphql',
+      apolloUri: process.env.GRAPHQL_ENDPOINT,
     });
     const env = process.env.NODE_ENV === 'development' ? 'development' : 'production';
     const reduxStore = createBoldrStore(appReducer, initialState, apolloClient, env);

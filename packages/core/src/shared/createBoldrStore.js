@@ -92,13 +92,13 @@ export function getMiddlewares(middleware) {
  */
 export default function createBoldrStore(appReducer, preloadedState, apolloClient, env) {
   const reducer = getReducer(appReducer, apolloClient);
-  if (typeof enhancer === 'function') {
-    enhancers.push(enhancer);
-  }
+
   const middleware = [];
   const middles = getMiddlewares(middleware);
   const enhancers = [applyMiddleware(apolloClient.middleware(), ...middles)];
-
+  if (typeof enhancer === 'function') {
+    enhancers.push(enhancer);
+  }
   if (env === 'development' && typeof window !== 'undefined') {
     if (window.devToolsExtension) {
       enhancers.push(window.devToolsExtension());

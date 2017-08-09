@@ -19,7 +19,7 @@ const token = getToken();
 export const apolloClient = createApolloClient({
   batchRequests: true,
   initialState: preloadedState,
-  apolloUri: 'http://localhost:2121/api/v1/graphql',
+  apolloUri: process.env.GRAPHQL_ENDPOINT,
   headers: {
     authorization: `Bearer ${token}`,
   },

@@ -44,7 +44,7 @@ acorn-object-spread@^1.0.0:
   dependencies:
     acorn "^3.1.0"
 
-acorn@>=2.5.2, acorn@^5.0.1:
+acorn@>=2.5.2, acorn@^5.1.1:
   version "5.1.1"
   resolved "https://npm.strues.io/acorn/-/acorn-5.1.1.tgz#53fe161111f912ab999ee887a90a0bc52822fd75"
 
@@ -960,11 +960,11 @@ babel-plugin-transform-react-jsx@^6.24.1:
     babel-plugin-syntax-jsx "^6.8.0"
     babel-runtime "^6.22.0"
 
-babel-plugin-transform-react-remove-prop-types@^0.4.6:
-  version "0.4.6"
-  resolved "https://npm.strues.io/babel-plugin-transform-react-remove-prop-types/-/babel-plugin-transform-react-remove-prop-types-0.4.6.tgz#c3d20ff4e97fb08fa63e86a97b2daab6ad365a19"
+babel-plugin-transform-react-remove-prop-types@^0.4.8:
+  version "0.4.8"
+  resolved "https://registry.npmjs.org/babel-plugin-transform-react-remove-prop-types/-/babel-plugin-transform-react-remove-prop-types-0.4.8.tgz#0aff04bc1d6564ec49cf23bcffb99c11881958db"
   dependencies:
-    babel-traverse "^6.24.1"
+    babel-traverse "^6.25.0"
 
 babel-plugin-transform-regenerator@^6.22.0:
   version "6.24.1"
@@ -1009,9 +1009,9 @@ babel-plugin-transform-undefined-to-void@^6.8.2:
   version "6.8.2"
   resolved "https://npm.strues.io/babel-plugin-transform-undefined-to-void/-/babel-plugin-transform-undefined-to-void-6.8.2.tgz#fe2b1d294eb05e87524eb93724dea6e2c3d66fa1"
 
-babel-plugin-universal-import@^1.2.1, babel-plugin-universal-import@^1.2.2:
-  version "1.2.3"
-  resolved "https://npm.strues.io/babel-plugin-universal-import/-/babel-plugin-universal-import-1.2.3.tgz#ab608739d88189e4b3865e3b333204e96391e340"
+babel-plugin-universal-import@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.npmjs.org/babel-plugin-universal-import/-/babel-plugin-universal-import-1.2.5.tgz#1c2576dfb80250e735db1770515f7264fdcac9d3"
 
 babel-polyfill@^6.23.0:
   version "6.23.0"
@@ -1049,9 +1049,9 @@ babel-preset-babili@^0.1.4:
     babel-plugin-transform-undefined-to-void "^6.8.2"
     lodash.isplainobject "^4.0.6"
 
-babel-preset-boldr@^0.10.1:
-  version "0.10.1"
-  resolved "https://npm.strues.io/babel-preset-boldr/-/babel-preset-boldr-0.10.1.tgz#6c2f29fca8fee525c020164592a6438941651614"
+babel-preset-boldr@^0.10.2:
+  version "0.10.2"
+  resolved "https://registry.npmjs.org/babel-preset-boldr/-/babel-preset-boldr-0.10.2.tgz#387161b07ffb5224dc010934c0aafb09c54d3c97"
   dependencies:
     babel-plugin-dynamic-import-node "^1.0.2"
     babel-plugin-lodash "^3.2.11"
@@ -1068,18 +1068,18 @@ babel-preset-boldr@^0.10.1:
     babel-plugin-transform-react-jsx "^6.24.1"
     babel-plugin-transform-react-jsx-self "^6.22.0"
     babel-plugin-transform-react-jsx-source "^6.22.0"
-    babel-plugin-transform-react-remove-prop-types "^0.4.6"
+    babel-plugin-transform-react-remove-prop-types "^0.4.8"
     babel-plugin-transform-runtime "^6.23.0"
-    babel-plugin-universal-import "^1.2.1"
+    babel-plugin-universal-import "^1.2.5"
     babel-preset-babili "^0.1.4"
     babel-preset-env "^1.6.0"
     babel-preset-react "^6.24.1"
     fast-async "^6.3.0"
     nodent-runtime "^3.0.4"
 
-babel-preset-edge@^1.0.2:
-  version "1.0.3"
-  resolved "https://npm.strues.io/babel-preset-edge/-/babel-preset-edge-1.0.3.tgz#f827e45f220391d5797d895697ac9d137450f163"
+babel-preset-edge@^1.1.2:
+  version "1.1.3"
+  resolved "https://registry.npmjs.org/babel-preset-edge/-/babel-preset-edge-1.1.3.tgz#48f4c9a335ad4c361cf542ddf3d43c82bb20c5de"
   dependencies:
     app-root-dir "^1.0.2"
     babel-cli "^6.24.1"
@@ -1098,15 +1098,15 @@ babel-preset-edge@^1.0.2:
     babel-plugin-transform-object-rest-spread "^6.23.0"
     babel-plugin-transform-react-constant-elements "^6.23.0"
     babel-plugin-transform-react-inline-elements "^6.22.0"
-    babel-plugin-transform-react-remove-prop-types "^0.4.6"
+    babel-plugin-transform-react-remove-prop-types "^0.4.8"
     babel-plugin-transform-runtime "^6.23.0"
-    babel-plugin-universal-import "^1.2.2"
+    babel-plugin-universal-import "^1.2.5"
     babel-preset-babili "^0.1.4"
     babel-preset-env "^1.6.0"
     babel-preset-flow "^6.23.0"
     babel-preset-react "^6.24.1"
     babel-runtime "^6.25.0"
-    browserslist "^2.2.2"
+    browserslist "^2.3.0"
     nodent-runtime "^3.0.4"
 
 babel-preset-env@^1.6.0:
@@ -1274,12 +1274,19 @@ browser-resolve@^1.11.0, browser-resolve@^1.11.2:
   dependencies:
     resolve "1.1.7"
 
-browserslist@^2.1.2, browserslist@^2.2.2:
+browserslist@^2.1.2:
   version "2.2.2"
   resolved "https://npm.strues.io/browserslist/-/browserslist-2.2.2.tgz#e9b4618b8a01c193f9786beea09f6fd10dbe31c3"
   dependencies:
     caniuse-lite "^1.0.30000704"
     electron-to-chromium "^1.3.16"
+
+browserslist@^2.3.0:
+  version "2.3.1"
+  resolved "https://registry.npmjs.org/browserslist/-/browserslist-2.3.1.tgz#39500a2090330b2a090120ea6c7fc78b6e091c5e"
+  dependencies:
+    caniuse-lite "^1.0.30000712"
+    electron-to-chromium "^1.3.17"
 
 bser@1.0.2:
   version "1.0.2"
@@ -1345,6 +1352,10 @@ camelcase@^3.0.0:
 caniuse-lite@^1.0.30000704:
   version "1.0.30000708"
   resolved "https://npm.strues.io/caniuse-lite/-/caniuse-lite-1.0.30000708.tgz#71dbf388c57f379b1bb66c89a890edc04c2509b6"
+
+caniuse-lite@^1.0.30000712:
+  version "1.0.30000713"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30000713.tgz#33957ecb4a2154a5d40a60d13d8bf1cfa0881a8a"
 
 caseless@~0.12.0:
   version "0.12.0"
@@ -1492,7 +1503,7 @@ core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://npm.strues.io/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
-create-react-class@^15.5.3, create-react-class@^15.6.0:
+create-react-class@^15.6.0:
   version "15.6.0"
   resolved "https://npm.strues.io/create-react-class/-/create-react-class-15.6.0.tgz#ab448497c26566e1e29413e883207d57cfe7bed4"
   dependencies:
@@ -1637,6 +1648,10 @@ electron-to-chromium@^1.3.16:
   version "1.3.16"
   resolved "https://npm.strues.io/electron-to-chromium/-/electron-to-chromium-1.3.16.tgz#d0e026735754770901ae301a21664cba45d92f7d"
 
+electron-to-chromium@^1.3.17:
+  version "1.3.17"
+  resolved "https://registry.npmjs.org/electron-to-chromium/-/electron-to-chromium-1.3.17.tgz#41c13457cc7166c5c15e767ae61d86a8cacdee5d"
+
 emoji-regex@^6.1.0:
   version "6.5.1"
   resolved "https://npm.strues.io/emoji-regex/-/emoji-regex-6.5.1.tgz#9baea929b155565c11ea41c6626eaa65cef992c2"
@@ -1695,9 +1710,9 @@ escodegen@^1.6.1:
   optionalDependencies:
     source-map "~0.2.0"
 
-eslint-config-boldr@0.12.4:
-  version "0.12.4"
-  resolved "https://npm.strues.io/eslint-config-boldr/-/eslint-config-boldr-0.12.4.tgz#56aad9ec7aa108c6ca7a25d54279df683dd26e15"
+eslint-config-boldr@0.12.5:
+  version "0.12.5"
+  resolved "https://registry.npmjs.org/eslint-config-boldr/-/eslint-config-boldr-0.12.5.tgz#63db4c6d692fc702e8149053ea8ae0b78baff9d3"
   dependencies:
     babel-eslint "^7.2.3"
     eslint-plugin-babel "^4.1.2"
@@ -1785,9 +1800,9 @@ eslint-scope@^3.7.1:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint@^4.3.0:
-  version "4.3.0"
-  resolved "https://npm.strues.io/eslint/-/eslint-4.3.0.tgz#fcd7c96376bbf34c85ee67ed0012a299642b108f"
+eslint@^4.4.1:
+  version "4.4.1"
+  resolved "https://registry.npmjs.org/eslint/-/eslint-4.4.1.tgz#99cd7eafcffca2ff99a5c8f5f2a474d6364b4bd3"
   dependencies:
     ajv "^5.2.0"
     babel-code-frame "^6.22.0"
@@ -1797,7 +1812,7 @@ eslint@^4.3.0:
     debug "^2.6.8"
     doctrine "^2.0.0"
     eslint-scope "^3.7.1"
-    espree "^3.4.3"
+    espree "^3.5.0"
     esquery "^1.0.0"
     estraverse "^4.2.0"
     esutils "^2.0.2"
@@ -1809,7 +1824,7 @@ eslint@^4.3.0:
     imurmurhash "^0.1.4"
     inquirer "^3.0.6"
     is-resolvable "^1.0.0"
-    js-yaml "^3.8.4"
+    js-yaml "^3.9.1"
     json-stable-stringify "^1.0.1"
     levn "^0.3.0"
     lodash "^4.17.4"
@@ -1826,11 +1841,11 @@ eslint@^4.3.0:
     table "^4.0.1"
     text-table "~0.2.0"
 
-espree@^3.4.3:
-  version "3.4.3"
-  resolved "https://npm.strues.io/espree/-/espree-3.4.3.tgz#2910b5ccd49ce893c2ffffaab4fd8b3a31b82374"
+espree@^3.5.0:
+  version "3.5.0"
+  resolved "https://registry.npmjs.org/espree/-/espree-3.5.0.tgz#98358625bdd055861ea27e2867ea729faf463d8d"
   dependencies:
-    acorn "^5.0.1"
+    acorn "^5.1.1"
     acorn-jsx "^3.0.0"
 
 esprima@^2.7.1:
@@ -2054,9 +2069,9 @@ form-data@~2.1.1:
     combined-stream "^1.0.5"
     mime-types "^2.1.12"
 
-fs-extra@^4.0.0:
+fs-extra@^4.0.1:
   version "4.0.1"
-  resolved "https://npm.strues.io/fs-extra/-/fs-extra-4.0.1.tgz#7fc0c6c8957f983f57f306a24e5b9ddd8d0dd880"
+  resolved "https://registry.npmjs.org/fs-extra/-/fs-extra-4.0.1.tgz#7fc0c6c8957f983f57f306a24e5b9ddd8d0dd880"
   dependencies:
     graceful-fs "^4.1.2"
     jsonfile "^3.0.0"
@@ -2264,13 +2279,17 @@ hoek@2.x.x:
   version "2.16.3"
   resolved "https://npm.strues.io/hoek/-/hoek-2.16.3.tgz#20bb7403d3cea398e91dc4710a8ff1b8274a25ed"
 
-hoist-non-react-statics@^1.0.3, hoist-non-react-statics@^1.2.0:
+hoist-non-react-statics@^1.2.0:
   version "1.2.0"
   resolved "https://npm.strues.io/hoist-non-react-statics/-/hoist-non-react-statics-1.2.0.tgz#aa448cf0986d55cc40773b17174b7dd066cb7cfb"
 
 hoist-non-react-statics@^2.2.0:
   version "2.2.1"
   resolved "https://npm.strues.io/hoist-non-react-statics/-/hoist-non-react-statics-2.2.1.tgz#a7e41c760121d0abfc7a2339b331d29a26389e52"
+
+hoist-non-react-statics@^2.2.1:
+  version "2.2.2"
+  resolved "https://registry.npmjs.org/hoist-non-react-statics/-/hoist-non-react-statics-2.2.2.tgz#c0eca5a7d5a28c5ada3107eb763b01da6bfa81fb"
 
 home-or-tmp@^2.0.0:
   version "2.0.0"
@@ -2824,7 +2843,7 @@ js-tokens@^3.0.0:
   version "3.0.2"
   resolved "https://npm.strues.io/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
 
-js-yaml@^3.7.0, js-yaml@^3.8.4:
+js-yaml@^3.7.0, js-yaml@^3.8.4, js-yaml@^3.9.1:
   version "3.9.1"
   resolved "https://npm.strues.io/js-yaml/-/js-yaml-3.9.1.tgz#08775cebdfdd359209f0d2acd383c8f86a6904a0"
   dependencies:
@@ -3473,23 +3492,21 @@ postcss-scss@^1.0.2:
   dependencies:
     postcss "^6.0.3"
 
-postcss-smart-asset@^0.2.1:
-  version "0.2.1"
-  resolved "https://npm.strues.io/postcss-smart-asset/-/postcss-smart-asset-0.2.1.tgz#b799de26c5d266d52738cc3b71ece2d796313e38"
+postcss-smart-asset@^0.2.3:
+  version "0.2.3"
+  resolved "https://registry.npmjs.org/postcss-smart-asset/-/postcss-smart-asset-0.2.3.tgz#5a673f23a63724583b34c45cf5d3a6e8589cbcbb"
   dependencies:
-    babel-preset-edge "^1.0.2"
     mime "^1.3.6"
     minimatch "^3.0.4"
     mkdirp "^0.5.1"
-    postcss "^6.0.8"
-    prepublish "^1.1.2"
+    postcss "6.x"
     xxhashjs "^0.2.1"
 
 postcss-value-parser@^3.2.3:
   version "3.3.0"
   resolved "https://npm.strues.io/postcss-value-parser/-/postcss-value-parser-3.3.0.tgz#87f38f9f18f774a4ab4c8a232f5c5ce8872a9d15"
 
-postcss@^6.0.0, postcss@^6.0.1, postcss@^6.0.3, postcss@^6.0.6, postcss@^6.0.8:
+postcss@6.x, postcss@^6.0.0, postcss@^6.0.1, postcss@^6.0.3, postcss@^6.0.6, postcss@^6.0.8:
   version "6.0.8"
   resolved "https://npm.strues.io/postcss/-/postcss-6.0.8.tgz#89067a9ce8b11f8a84cbc5117efc30419a0857b3"
   dependencies:
@@ -3501,28 +3518,28 @@ prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://npm.strues.io/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
 
-prepublish@^1.1.2, prepublish@^1.1.3:
-  version "1.1.3"
-  resolved "https://npm.strues.io/prepublish/-/prepublish-1.1.3.tgz#2307c4cef4bfcbafc530c3418f9e963731793c89"
+prepublish@^1.2.7:
+  version "1.2.7"
+  resolved "https://registry.npmjs.org/prepublish/-/prepublish-1.2.7.tgz#9d26b2fda1ae516b6bca76f30e3ede6406243c95"
   dependencies:
     app-root-dir "^1.0.2"
     async "^2.5.0"
-    babel-preset-edge "^1.0.2"
+    babel-preset-edge "^1.1.2"
     babel-runtime "^6.25.0"
     chalk "^2.0.1"
     file-exists "^4.0.0"
-    fs-extra "^4.0.0"
+    fs-extra "^4.0.1"
     loader-utils "^1.1.0"
     lodash "^4.17.4"
     meow "^3.7.0"
     rollup "^0.45.2"
     rollup-plugin-babel "^2.7.1"
     rollup-plugin-buble "^0.15.0"
-    rollup-plugin-commonjs "^8.0.2"
+    rollup-plugin-commonjs "^8.1.0"
     rollup-plugin-executable "^1.0.0"
     rollup-plugin-json "^2.3.0"
     rollup-plugin-node-resolve "^3.0.0"
-    rollup-plugin-rebase "^0.7.5"
+    rollup-plugin-rebase "^0.7.6"
     rollup-plugin-replace "^1.1.1"
     rollup-plugin-yaml "^1.1.0"
 
@@ -3598,9 +3615,9 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-apollo@^1.4.8:
-  version "1.4.8"
-  resolved "https://npm.strues.io/react-apollo/-/react-apollo-1.4.8.tgz#b510f207b08ce4bd1e3adbd46a3ede68e3af27e7"
+react-apollo@^1.4.11:
+  version "1.4.11"
+  resolved "https://registry.npmjs.org/react-apollo/-/react-apollo-1.4.11.tgz#afa0605ce8d52cf8b04bca416d709ff44ce212fc"
   dependencies:
     apollo-client "^1.4.0"
     graphql-anywhere "^3.0.0"
@@ -3632,12 +3649,11 @@ react-helmet@^5.1.3:
     prop-types "^15.5.4"
     react-side-effect "^1.1.0"
 
-react-redux@^5.0.5:
-  version "5.0.5"
-  resolved "https://npm.strues.io/react-redux/-/react-redux-5.0.5.tgz#f8e8c7b239422576e52d6b7db06439469be9846a"
+react-redux@^5.0.6:
+  version "5.0.6"
+  resolved "https://registry.npmjs.org/react-redux/-/react-redux-5.0.6.tgz#23ed3a4f986359d68b5212eaaa681e60d6574946"
   dependencies:
-    create-react-class "^15.5.3"
-    hoist-non-react-statics "^1.0.3"
+    hoist-non-react-statics "^2.2.1"
     invariant "^2.0.0"
     lodash "^4.2.0"
     lodash-es "^4.2.0"
@@ -3921,9 +3937,9 @@ rollup-plugin-buble@^0.15.0:
     buble "^0.15.0"
     rollup-pluginutils "^1.5.0"
 
-rollup-plugin-commonjs@^8.0.2:
-  version "8.0.2"
-  resolved "https://npm.strues.io/rollup-plugin-commonjs/-/rollup-plugin-commonjs-8.0.2.tgz#98b1589bfe32a6c0f67790b60c0b499972afed89"
+rollup-plugin-commonjs@^8.1.0:
+  version "8.1.0"
+  resolved "https://registry.npmjs.org/rollup-plugin-commonjs/-/rollup-plugin-commonjs-8.1.0.tgz#8ac9a87e6ea4c0d136e3e0e25ef41058957622b0"
   dependencies:
     acorn "^4.0.1"
     estree-walker "^0.3.0"
@@ -3952,19 +3968,18 @@ rollup-plugin-node-resolve@^3.0.0:
     is-module "^1.0.0"
     resolve "^1.1.6"
 
-rollup-plugin-rebase@^0.7.5:
-  version "0.7.5"
-  resolved "https://npm.strues.io/rollup-plugin-rebase/-/rollup-plugin-rebase-0.7.5.tgz#2a7e93c115ec6ad0c80dc89bc283177dffee9dd2"
+rollup-plugin-rebase@^0.7.6:
+  version "0.7.6"
+  resolved "https://registry.npmjs.org/rollup-plugin-rebase/-/rollup-plugin-rebase-0.7.6.tgz#7cce0cf7a5957821ada9f77fab0bdca00740d841"
   dependencies:
-    babel-runtime "^6.25.0"
     denodeify "^1.2.1"
-    fs-extra "^4.0.0"
+    fs-extra "^4.0.1"
     loader-utils "^1.1.0"
     postcss "^6.0.8"
     postcss-import "^10.0.0"
     postcss-sass "^0.2.0"
     postcss-scss "^1.0.2"
-    postcss-smart-asset "^0.2.1"
+    postcss-smart-asset "^0.2.3"
     rollup-pluginutils "^2.0.1"
     sugarss "^1.0.0"
 

@@ -24,12 +24,13 @@ export default function createApolloClient(config = {}) {
     ssrForceFetchDelay = 100,
   } = config;
 
-  const hasApollo = apolloUri != null;
+  const hasApollo = apolloUri !== null;
   const ssrMode = !process.browser;
   let client;
   if (hasApollo) {
     const opts = {
       dataIdFromObject: result => {
+        // eslint-disable-next-line no-underscore-dangle
         if (result.id && result.__typename) {
           // eslint-disable-line no-underscore-dangle
           return result.__typename + result.id; // eslint-disable-line no-underscore-dangle
