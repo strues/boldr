@@ -1,6 +1,6 @@
 {
   "name": "@boldr/core",
-  "version": "0.1.0-alpha.3",
+  "version": "0.1.0-alpha.6",
   "description": "universal react content management framework",
   "homepage": "https://github.com/strues/boldr",
   "bugs": {
@@ -32,48 +32,29 @@
     "prepare": "rimraf lib && NODE_ENV=production prepublish",
     "test": "jest"
   },
-  "jest": {
-    "transform": {
-      "^.+\\.jsx?$": "./internal/jestTransform.js"
-    },
-    "testRegex": ".*.test\\.js",
-    "collectCoverage": true,
-    "coverageDirectory": "./coverage",
-    "coveragePathIgnorePatterns": [
-      "./(internal|lib)/",
-      "/flow-typed/",
-      "/__fixtures__/",
-      "/node_modules/"
-    ],
-    "transformIgnorePatterns": [
-      "/node_modules/",
-      "/.boldr/",
-      "/lib/",
-      "/styles/"
-    ]
-  },
   "dependencies": {
+    "babel-code-frame": "^6.22.0",
+    "chalk": "^2.1.0",
     "invariant": "^2.2.2",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
     "node-fetch": "^1.7.2",
     "react": "^15.6.1",
-    "react-apollo": "^1.4.11",
+    "react-apollo": "^1.4.12",
     "react-dom": "^15.6.1",
     "react-helmet": "^5.1.3",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
     "redux-thunk": "^2.2.0",
     "serialize-javascript": "^1.4.0",
+    "source-map-support": "^0.4.15",
     "uuid": "^3.1.0"
   },
   "devDependencies": {
-    "babel-jest": "^20.0.3",
     "babel-preset-boldr": "^0.10.2",
     "eslint": "^4.4.1",
-    "eslint-config-boldr": "0.12.5",
+    "eslint-config-boldr": "0.12.6",
     "fast-async": "^6.3.0",
-    "jest": "^20.0.4",
     "prepublish": "^1.2.7",
     "prettier": "^1.5.3",
     "react-router-dom": "^4.1.2",

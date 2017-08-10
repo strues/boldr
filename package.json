@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "description": "Boldr CMF platform for Universal React Applications.",
   "private": true,
-  "main": "index.js",
   "scripts": {
-    "clean": "lerna clean --yes && node ./scripts/clean.js",
-    "bootstrap": "lerna bootstrap",
-    "prettier": "node ./scripts/prettier.js write",
-    "postinstall": "npm run clean && npm run bootstrap",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "bootstrap": "./node_modules/.bin/lerna bootstrap",
+    "clean": "lerna clean --yes && node ./internal/scripts/clean.js",
+    "cm": "git-cz",
+    "coverage": "codecov",
+    "postinstall": "yarn run clean && yarn run bootstrap",
+    "precommit": "lint-staged --verbose",
+    "prettier": "node ./internal/scripts/prettier.js write",
+    "test": "NODE_ENV=test jest --config ./jest.config.js --projects ./ && node ./internal/scripts/mapCoverage.js"
   },
   "keywords": [
     "react",
@@ -31,14 +33,53 @@
     "url": "https://github.com/strues/boldr/issues"
   },
   "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-core": "^6.25.0",
+    "babel-jest": "^20.0.3",
+    "babel-preset-boldr": "^0.10.2",
+    "bluebird": "^3.5.0",
     "chalk": "^2.1.0",
+    "codecov": "^2.3.0",
+    "commitizen": "^2.9.6",
+    "cross-env": "^5.0.5",
+    "cz-conventional-changelog": "^2.0.0",
+    "cz-emoji": "^0.2.0",
+    "enzyme": "^2.9.1",
+    "enzyme-to-json": "^1.5.1",
     "eslint": "^4.4.1",
-    "eslint-config-boldr": "0.12.5",
+    "eslint-config-boldr": "0.12.6",
     "flow-bin": "^0.52.0",
+    "fs-extra": "^4.0.1",
     "glob": "^7.1.2",
+    "graphql": "^0.10.5",
+    "graphql-tag": "^2.4.2",
+    "husky": "^0.14.3",
+    "identity-obj-proxy": "^3.0.0",
+    "istanbul-api": "^1.1.11",
+    "istanbul-lib-coverage": "^1.1.1",
+    "jest": "^20.0.4",
+    "jest-enzyme": "^3.7.0",
+    "jest-transform-graphql": "^2.1.0",
     "lerna": "^2.0.0",
+    "lint-staged": "^4.0.3",
     "prettier": "^1.5.3",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "react-test-renderer": "^15.6.1",
     "semver": "^5.4.1",
-    "shelljs": "^0.7.8"
+    "shelljs": "^0.7.8",
+    "sinon": "^3.2.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-emoji"
+    },
+    "cz-emoji": {}
+  },
+  "lint-staged": {
+    "*.js": [
+      "npm run prettier",
+      "git add"
+    ]
   }
 }

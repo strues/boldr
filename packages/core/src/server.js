@@ -11,4 +11,6 @@ if (!global.fetch) {
   global.Request = realFetch.Request;
 }
 
-export * from './shared';
+export * from './common';
+
+export * from './util/debug';

@@ -1,6 +1,6 @@
 {
   "name": "@boldr/cli",
-  "version": "0.2.0-alpha.4",
+  "version": "0.2.0-alpha.6",
   "description": "Command line tools for Boldr apps",
   "main": "bin/boldr.js",
   "bin": {
@@ -35,12 +35,12 @@
     "babel-cli": "^6.24.1",
     "babel-preset-env": "^1.6.0",
     "eslint": "^4.4.1",
-    "eslint-config-boldr": "0.12.5",
+    "eslint-config-boldr": "0.12.6",
     "fast-async": "^6.3.0",
     "prettier": "^1.5.3"
   },
   "dependencies": {
-    "@boldr/tools": "0.1.0-alpha.4",
+    "@boldr/tools": "0.1.0-alpha.7",
     "@boldr/utils": "^0.1.0-rc.1",
     "caporal": "^0.7.0",
     "update-notifier": "^2.2.0"

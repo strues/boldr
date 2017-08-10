@@ -31,17 +31,7 @@
     "build": "npm run clean && babel src --out-dir lib",
     "clean": "rimraf lib",
     "publish": "npm publish --access=public",
-    "format": "prettier --single-quote=true --jsx-bracket-same-line=false --trailing-comma=all --write \"src/**/*.js\"",
-    "test": "jest"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/coverage/",
-      "/src/",
-      "/lib/"
-    ]
+    "format": "prettier --single-quote=true --jsx-bracket-same-line=false --trailing-comma=all --write \"src/**/*.js\""
   },
   "dependencies": {
     "chalk": "^2.1.0",
@@ -52,12 +42,10 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-eslint": "^7.2.3",
-    "babel-jest": "^20.0.3",
     "babel-plugin-transform-object-rest-spread": "^6.23.0",
     "babel-preset-env": "^1.6.0",
     "eslint": "^4.4.1",
-    "eslint-config-boldr": "^0.12.5",
-    "jest": "^20.0.4",
+    "eslint-config-boldr": "0.12.6",
     "prettier": "^1.5.3",
     "rimraf": "^2.6.1"
   }

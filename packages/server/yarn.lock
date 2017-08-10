@@ -2,15 +2,6 @@
 # yarn lockfile v1
 
 
-"@boldr/utils@^0.1.0-rc.1":
-  version "0.1.0-rc.1"
-  resolved "https://registry.npmjs.org/@boldr/utils/-/utils-0.1.0-rc.1.tgz#5f60ec1c903209631e69696a5b5ab37f84fbd07b"
-  dependencies:
-    chalk "^2.0.1"
-    lodash.invokemap "^4.6.0"
-    lodash.reduce "^4.6.0"
-    ramda "^0.24.1"
-
 "@types/graphql@^0.9.0":
   version "0.9.4"
   resolved "https://npm.strues.io/@types%2fgraphql/-/graphql-0.9.4.tgz#cdeb6bcbef9b6c584374b81aa7f48ecf3da404fa"
@@ -99,24 +90,24 @@ ap@~0.2.0:
 
 apollo-server-core@^1.1.0:
   version "1.1.0"
-  resolved "https://registry.npmjs.org/apollo-server-core/-/apollo-server-core-1.1.0.tgz#74c3bf4394e14eae7ab60b1d999a3c5b8aa94e9a"
+  resolved "https://npm.strues.io/apollo-server-core/-/apollo-server-core-1.1.0.tgz#74c3bf4394e14eae7ab60b1d999a3c5b8aa94e9a"
   dependencies:
     apollo-tracing "^0.0.7"
 
 apollo-server-express@^1.1.0:
   version "1.1.0"
-  resolved "https://registry.npmjs.org/apollo-server-express/-/apollo-server-express-1.1.0.tgz#48d5027b41698c386e415cf182924c2a79da0497"
+  resolved "https://npm.strues.io/apollo-server-express/-/apollo-server-express-1.1.0.tgz#48d5027b41698c386e415cf182924c2a79da0497"
   dependencies:
     apollo-server-core "^1.1.0"
     apollo-server-module-graphiql "^1.1.0"
 
 apollo-server-module-graphiql@^1.1.0:
   version "1.1.0"
-  resolved "https://registry.npmjs.org/apollo-server-module-graphiql/-/apollo-server-module-graphiql-1.1.0.tgz#f10333e50659d61dc48e2ed6afac6f313b1f418b"
+  resolved "https://npm.strues.io/apollo-server-module-graphiql/-/apollo-server-module-graphiql-1.1.0.tgz#f10333e50659d61dc48e2ed6afac6f313b1f418b"
 
 apollo-tracing@^0.0.7:
   version "0.0.7"
-  resolved "https://registry.npmjs.org/apollo-tracing/-/apollo-tracing-0.0.7.tgz#78466cfefdb52a0802a57b488d26a1a67a25909f"
+  resolved "https://npm.strues.io/apollo-tracing/-/apollo-tracing-0.0.7.tgz#78466cfefdb52a0802a57b488d26a1a67a25909f"
   dependencies:
     graphql-tools "^1.1.0"
 
@@ -853,11 +844,11 @@ braces@^1.8.2:
     repeat-element "^1.1.2"
 
 browserslist@^2.1.2:
-  version "2.2.2"
-  resolved "https://npm.strues.io/browserslist/-/browserslist-2.2.2.tgz#e9b4618b8a01c193f9786beea09f6fd10dbe31c3"
+  version "2.3.1"
+  resolved "https://npm.strues.io/browserslist/-/browserslist-2.3.1.tgz#39500a2090330b2a090120ea6c7fc78b6e091c5e"
   dependencies:
-    caniuse-lite "^1.0.30000704"
-    electron-to-chromium "^1.3.16"
+    caniuse-lite "^1.0.30000712"
+    electron-to-chromium "^1.3.17"
 
 buffer-equal-constant-time@1.0.1:
   version "1.0.1"
@@ -893,9 +884,9 @@ camelize@1.0.0:
   version "1.0.0"
   resolved "https://npm.strues.io/camelize/-/camelize-1.0.0.tgz#164a5483e630fa4321e5af07020e531831b2609b"
 
-caniuse-lite@^1.0.30000704:
-  version "1.0.30000708"
-  resolved "https://npm.strues.io/caniuse-lite/-/caniuse-lite-1.0.30000708.tgz#71dbf388c57f379b1bb66c89a890edc04c2509b6"
+caniuse-lite@^1.0.30000712:
+  version "1.0.30000713"
+  resolved "https://npm.strues.io/caniuse-lite/-/caniuse-lite-1.0.30000713.tgz#33957ecb4a2154a5d40a60d13d8bf1cfa0881a8a"
 
 caseless@~0.12.0:
   version "0.12.0"
@@ -911,9 +902,9 @@ chalk@^1.0.0, chalk@^1.1.0, chalk@^1.1.1, chalk@^1.1.3:
     strip-ansi "^3.0.0"
     supports-color "^2.0.0"
 
-chalk@^2.0.0, chalk@^2.0.1:
-  version "2.0.1"
-  resolved "https://npm.strues.io/chalk/-/chalk-2.0.1.tgz#dbec49436d2ae15f536114e76d14656cdbc0f44d"
+chalk@^2.0.0:
+  version "2.1.0"
+  resolved "https://npm.strues.io/chalk/-/chalk-2.1.0.tgz#ac5becf14fa21b99c6c92ca7a7d7cfd5b17e743e"
   dependencies:
     ansi-styles "^3.1.0"
     escape-string-regexp "^1.0.5"
@@ -1067,10 +1058,10 @@ cookie@0.3.1:
   resolved "https://npm.strues.io/cookie/-/cookie-0.3.1.tgz#e7e0a1f9ef43b4c8ba925c5c5a96e806d16873bb"
 
 core-js@^2.4.0:
-  version "2.4.1"
-  resolved "https://npm.strues.io/core-js/-/core-js-2.4.1.tgz#4de911e667b0eae9124e34254b53aea6fc618d3e"
+  version "2.5.0"
+  resolved "https://npm.strues.io/core-js/-/core-js-2.5.0.tgz#569c050918be6486b3837552028ae0466b717086"
 
-core-util-is@~1.0.0:
+core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://npm.strues.io/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
 
@@ -1143,7 +1134,7 @@ debug@2.6.8, debug@^2.1.1, debug@^2.1.3, debug@^2.2.0, debug@^2.6.8:
 
 debug@^3.0.0:
   version "3.0.0"
-  resolved "https://registry.npmjs.org/debug/-/debug-3.0.0.tgz#1d2feae53349047b08b264ec41906ba17a8516e4"
+  resolved "https://npm.strues.io/debug/-/debug-3.0.0.tgz#1d2feae53349047b08b264ec41906ba17a8516e4"
   dependencies:
     ms "2.0.0"
 
@@ -1196,7 +1187,7 @@ depd@1.1.1, depd@~1.1.0, depd@~1.1.1:
 
 deprecated-decorator@^0.1.6:
   version "0.1.6"
-  resolved "https://registry.npmjs.org/deprecated-decorator/-/deprecated-decorator-0.1.6.tgz#00966317b7a12fe92f3cc831f7583af329b86c37"
+  resolved "https://npm.strues.io/deprecated-decorator/-/deprecated-decorator-0.1.6.tgz#00966317b7a12fe92f3cc831f7583af329b86c37"
 
 destroy@~1.0.4:
   version "1.0.4"
@@ -1265,9 +1256,9 @@ ee-first@1.1.1:
   version "1.1.1"
   resolved "https://npm.strues.io/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
 
-electron-to-chromium@^1.3.16:
-  version "1.3.16"
-  resolved "https://npm.strues.io/electron-to-chromium/-/electron-to-chromium-1.3.16.tgz#d0e026735754770901ae301a21664cba45d92f7d"
+electron-to-chromium@^1.3.17:
+  version "1.3.18"
+  resolved "https://npm.strues.io/electron-to-chromium/-/electron-to-chromium-1.3.18.tgz#3dcc99da3e6b665f6abbc71c28ad51a2cd731a9c"
 
 emoji-regex@^6.1.0:
   version "6.5.1"
@@ -1284,13 +1275,14 @@ error-ex@^1.2.0:
     is-arrayish "^0.2.1"
 
 es-abstract@^1.7.0:
-  version "1.7.0"
-  resolved "https://npm.strues.io/es-abstract/-/es-abstract-1.7.0.tgz#dfade774e01bfcd97f96180298c449c8623fb94c"
+  version "1.8.0"
+  resolved "https://npm.strues.io/es-abstract/-/es-abstract-1.8.0.tgz#3b00385e85729932beffa9163bbea1234e932914"
   dependencies:
     es-to-primitive "^1.1.1"
     function-bind "^1.1.0"
+    has "^1.0.1"
     is-callable "^1.1.3"
-    is-regex "^1.0.3"
+    is-regex "^1.0.4"
 
 es-to-primitive@^1.1.1:
   version "1.1.1"
@@ -1312,9 +1304,9 @@ escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "https://npm.strues.io/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
 
-eslint-config-boldr@0.12.5:
-  version "0.12.5"
-  resolved "https://registry.npmjs.org/eslint-config-boldr/-/eslint-config-boldr-0.12.5.tgz#63db4c6d692fc702e8149053ea8ae0b78baff9d3"
+eslint-config-boldr@0.12.6:
+  version "0.12.6"
+  resolved "https://npm.strues.io/eslint-config-boldr/-/eslint-config-boldr-0.12.6.tgz#4da8fefa737691b409df03da8611bd5a66fa1dcb"
   dependencies:
     babel-eslint "^7.2.3"
     eslint-plugin-babel "^4.1.2"
@@ -1323,7 +1315,7 @@ eslint-config-boldr@0.12.5:
     eslint-plugin-jsx-a11y "^6.0.2"
     eslint-plugin-prettier "^2.1.2"
     eslint-plugin-promise "^3.5.0"
-    eslint-plugin-react "^7.1.0"
+    eslint-plugin-react "^7.2.0"
 
 eslint-import-resolver-node@^0.3.1:
   version "0.3.1"
@@ -1387,13 +1379,13 @@ eslint-plugin-promise@^3.5.0:
   version "3.5.0"
   resolved "https://npm.strues.io/eslint-plugin-promise/-/eslint-plugin-promise-3.5.0.tgz#78fbb6ffe047201627569e85a6c5373af2a68fca"
 
-eslint-plugin-react@^7.1.0:
-  version "7.1.0"
-  resolved "https://npm.strues.io/eslint-plugin-react/-/eslint-plugin-react-7.1.0.tgz#27770acf39f5fd49cd0af4083ce58104eb390d4c"
+eslint-plugin-react@^7.2.0:
+  version "7.2.0"
+  resolved "https://npm.strues.io/eslint-plugin-react/-/eslint-plugin-react-7.2.0.tgz#25c77a4ec307e3eebb248ea3350960e372ab6406"
   dependencies:
     doctrine "^2.0.0"
     has "^1.0.1"
-    jsx-ast-utils "^1.4.1"
+    jsx-ast-utils "^2.0.0"
 
 eslint-scope@^3.7.1:
   version "3.7.1"
@@ -1404,7 +1396,7 @@ eslint-scope@^3.7.1:
 
 eslint@^4.4.1:
   version "4.4.1"
-  resolved "https://registry.npmjs.org/eslint/-/eslint-4.4.1.tgz#99cd7eafcffca2ff99a5c8f5f2a474d6364b4bd3"
+  resolved "https://npm.strues.io/eslint/-/eslint-4.4.1.tgz#99cd7eafcffca2ff99a5c8f5f2a474d6364b4bd3"
   dependencies:
     ajv "^5.2.0"
     babel-code-frame "^6.22.0"
@@ -1445,7 +1437,7 @@ eslint@^4.4.1:
 
 espree@^3.5.0:
   version "3.5.0"
-  resolved "https://registry.npmjs.org/espree/-/espree-3.5.0.tgz#98358625bdd055861ea27e2867ea729faf463d8d"
+  resolved "https://npm.strues.io/espree/-/espree-3.5.0.tgz#98358625bdd055861ea27e2867ea729faf463d8d"
   dependencies:
     acorn "^5.1.1"
     acorn-jsx "^3.0.0"
@@ -1511,7 +1503,7 @@ expect-ct@0.1.0:
 
 express-session@^1.15.5:
   version "1.15.5"
-  resolved "https://registry.npmjs.org/express-session/-/express-session-1.15.5.tgz#f49a18227263b316f6f8544da5fee25a540259ec"
+  resolved "https://npm.strues.io/express-session/-/express-session-1.15.5.tgz#f49a18227263b316f6f8544da5fee25a540259ec"
   dependencies:
     cookie "0.3.1"
     cookie-signature "1.0.6"
@@ -1525,7 +1517,7 @@ express-session@^1.15.5:
 
 express@^4.15.4:
   version "4.15.4"
-  resolved "https://registry.npmjs.org/express/-/express-4.15.4.tgz#032e2253489cf8fce02666beca3d11ed7a2daed1"
+  resolved "https://npm.strues.io/express/-/express-4.15.4.tgz#032e2253489cf8fce02666beca3d11ed7a2daed1"
   dependencies:
     accepts "~1.3.3"
     array-flatten "1.1.1"
@@ -1574,9 +1566,9 @@ extglob@^0.3.1:
   dependencies:
     is-extglob "^1.0.0"
 
-extsprintf@1.0.2:
-  version "1.0.2"
-  resolved "https://npm.strues.io/extsprintf/-/extsprintf-1.0.2.tgz#e1080e0658e300b06294990cc70e1502235fd550"
+extsprintf@1.3.0, extsprintf@^1.2.0:
+  version "1.3.0"
+  resolved "https://npm.strues.io/extsprintf/-/extsprintf-1.3.0.tgz#96918440e3041a7a414f8c52e3c574eb3c3e1e05"
 
 eyes@0.1.x:
   version "0.1.8"
@@ -1646,7 +1638,7 @@ finalhandler@1.0.3:
 
 finalhandler@~1.0.4:
   version "1.0.4"
-  resolved "https://registry.npmjs.org/finalhandler/-/finalhandler-1.0.4.tgz#18574f2e7c4b98b8ae3b230c21f201f31bdb3fb7"
+  resolved "https://npm.strues.io/finalhandler/-/finalhandler-1.0.4.tgz#18574f2e7c4b98b8ae3b230c21f201f31bdb3fb7"
   dependencies:
     debug "2.6.8"
     encodeurl "~1.0.1"
@@ -1697,7 +1689,7 @@ flexbuffer@0.0.6:
 
 flow-bin@^0.52.0:
   version "0.52.0"
-  resolved "https://registry.npmjs.org/flow-bin/-/flow-bin-0.52.0.tgz#b6d9abe8bcd1ee5c62df386451a4e2553cadc3a3"
+  resolved "https://npm.strues.io/flow-bin/-/flow-bin-0.52.0.tgz#b6d9abe8bcd1ee5c62df386451a4e2553cadc3a3"
 
 for-each@^0.3.2:
   version "0.3.2"
@@ -1890,13 +1882,13 @@ graceful-fs@^4.1.2, graceful-fs@^4.1.4, graceful-fs@^4.1.6:
 
 graphql-server-express@^1.1.0:
   version "1.1.0"
-  resolved "https://registry.npmjs.org/graphql-server-express/-/graphql-server-express-1.1.0.tgz#28f3ccb51fcac552e47df5f010f05853269f03cb"
+  resolved "https://npm.strues.io/graphql-server-express/-/graphql-server-express-1.1.0.tgz#28f3ccb51fcac552e47df5f010f05853269f03cb"
   dependencies:
     apollo-server-express "^1.1.0"
 
 graphql-tools@^1.1.0:
   version "1.1.0"
-  resolved "https://registry.npmjs.org/graphql-tools/-/graphql-tools-1.1.0.tgz#8d86ea6997b0dea3089b62dc655e47146a663ebb"
+  resolved "https://npm.strues.io/graphql-tools/-/graphql-tools-1.1.0.tgz#8d86ea6997b0dea3089b62dc655e47146a663ebb"
   dependencies:
     deprecated-decorator "^0.1.6"
     lodash "^4.3.0"
@@ -2018,18 +2010,9 @@ hsts@2.1.0:
   version "2.1.0"
   resolved "https://npm.strues.io/hsts/-/hsts-2.1.0.tgz#cbd6c918a2385fee1dd5680bfb2b3a194c0121cc"
 
-http-errors@~1.6.1:
-  version "1.6.1"
-  resolved "https://npm.strues.io/http-errors/-/http-errors-1.6.1.tgz#5f8b8ed98aca545656bf572997387f904a722257"
-  dependencies:
-    depd "1.1.0"
-    inherits "2.0.3"
-    setprototypeof "1.0.3"
-    statuses ">= 1.3.1 < 2"
-
-http-errors@~1.6.2:
+http-errors@~1.6.1, http-errors@~1.6.2:
   version "1.6.2"
-  resolved "https://registry.npmjs.org/http-errors/-/http-errors-1.6.2.tgz#0a002cc85707192a7e7946ceedc11155f60ec736"
+  resolved "https://npm.strues.io/http-errors/-/http-errors-1.6.2.tgz#0a002cc85707192a7e7946ceedc11155f60ec736"
   dependencies:
     depd "1.1.1"
     inherits "2.0.3"
@@ -2241,7 +2224,7 @@ is-promise@^2.1.0:
   version "2.1.0"
   resolved "https://npm.strues.io/is-promise/-/is-promise-2.1.0.tgz#79a2a9ece7f096e80f36d2b2f3bc16c1ff4bf3fa"
 
-is-regex@^1.0.3:
+is-regex@^1.0.4:
   version "1.0.4"
   resolved "https://npm.strues.io/is-regex/-/is-regex-1.0.4.tgz#5517489b547091b0930e095654ced25ee97e9491"
   dependencies:
@@ -2339,7 +2322,7 @@ js-tokens@^3.0.0:
 
 js-yaml@^3.9.1:
   version "3.9.1"
-  resolved "https://registry.npmjs.org/js-yaml/-/js-yaml-3.9.1.tgz#08775cebdfdd359209f0d2acd383c8f86a6904a0"
+  resolved "https://npm.strues.io/js-yaml/-/js-yaml-3.9.1.tgz#08775cebdfdd359209f0d2acd383c8f86a6904a0"
   dependencies:
     argparse "^1.0.7"
     esprima "^4.0.0"
@@ -2349,8 +2332,8 @@ jsbn@~0.1.0:
   resolved "https://npm.strues.io/jsbn/-/jsbn-0.1.1.tgz#a5e654c2e5a2deb5f201d96cefbca80c0ef2f513"
 
 jschardet@^1.4.2:
-  version "1.5.0"
-  resolved "https://npm.strues.io/jschardet/-/jschardet-1.5.0.tgz#a61f310306a5a71188e1b1acd08add3cfbb08b1e"
+  version "1.5.1"
+  resolved "https://npm.strues.io/jschardet/-/jschardet-1.5.1.tgz#c519f629f86b3a5bedba58a88d311309eec097f9"
 
 jsesc@^1.3.0:
   version "1.3.0"
@@ -2394,7 +2377,7 @@ jsonify@~0.0.0:
 
 jsonwebtoken@^7.4.2:
   version "7.4.2"
-  resolved "https://registry.npmjs.org/jsonwebtoken/-/jsonwebtoken-7.4.2.tgz#571b903c07e875c0fc59203d1ac78667d80e09cd"
+  resolved "https://npm.strues.io/jsonwebtoken/-/jsonwebtoken-7.4.2.tgz#571b903c07e875c0fc59203d1ac78667d80e09cd"
   dependencies:
     joi "^6.10.1"
     jws "^3.1.4"
@@ -2403,17 +2386,23 @@ jsonwebtoken@^7.4.2:
     xtend "^4.0.1"
 
 jsprim@^1.2.2:
-  version "1.4.0"
-  resolved "https://npm.strues.io/jsprim/-/jsprim-1.4.0.tgz#a3b87e40298d8c380552d8cc7628a0bb95a22918"
+  version "1.4.1"
+  resolved "https://npm.strues.io/jsprim/-/jsprim-1.4.1.tgz#313e66bc1e5cc06e438bc1b7499c2e5c56acb6a2"
   dependencies:
     assert-plus "1.0.0"
-    extsprintf "1.0.2"
+    extsprintf "1.3.0"
     json-schema "0.2.3"
-    verror "1.3.6"
+    verror "1.10.0"
 
-jsx-ast-utils@^1.4.0, jsx-ast-utils@^1.4.1:
+jsx-ast-utils@^1.4.0:
   version "1.4.1"
   resolved "https://npm.strues.io/jsx-ast-utils/-/jsx-ast-utils-1.4.1.tgz#3867213e8dd79bf1e8f2300c0cfc1efb182c0df1"
+
+jsx-ast-utils@^2.0.0:
+  version "2.0.0"
+  resolved "https://npm.strues.io/jsx-ast-utils/-/jsx-ast-utils-2.0.0.tgz#ec06a3d60cf307e5e119dac7bad81e89f096f0f8"
+  dependencies:
+    array-includes "^3.0.3"
 
 jwa@^1.1.4:
   version "1.1.5"
@@ -2763,7 +2752,7 @@ object.omit@^2.0.0:
 
 objection@^0.8.6:
   version "0.8.6"
-  resolved "https://registry.npmjs.org/objection/-/objection-0.8.6.tgz#8bed4c82d8a90dbb016ae2aa5fa9308bec75bf02"
+  resolved "https://npm.strues.io/objection/-/objection-0.8.6.tgz#8bed4c82d8a90dbb016ae2aa5fa9308bec75bf02"
   dependencies:
     ajv "^5.1.1"
     bluebird "^3.5.0"
@@ -2925,8 +2914,8 @@ pg-connection-string@0.1.3, pg-connection-string@^0.1.3:
   resolved "https://npm.strues.io/pg-connection-string/-/pg-connection-string-0.1.3.tgz#da1847b20940e42ee1492beaf65d49d91b245df7"
 
 pg-pool@2.*:
-  version "2.0.1"
-  resolved "https://npm.strues.io/pg-pool/-/pg-pool-2.0.1.tgz#8b12541df271b57f7020c50a3f5566471f82c77e"
+  version "2.0.3"
+  resolved "https://npm.strues.io/pg-pool/-/pg-pool-2.0.3.tgz#c022032c8949f312a4f91fb6409ce04076be3257"
 
 pg-types@1.*:
   version "1.12.0"
@@ -2940,7 +2929,7 @@ pg-types@1.*:
 
 pg@^7.1.0:
   version "7.1.0"
-  resolved "https://registry.npmjs.org/pg/-/pg-7.1.0.tgz#9da3f09d3983521521c1d8369b6d9a1306cfe9fe"
+  resolved "https://npm.strues.io/pg/-/pg-7.1.0.tgz#9da3f09d3983521521c1d8369b6d9a1306cfe9fe"
   dependencies:
     buffer-writer "1.0.1"
     packet-reader "0.3.1"
@@ -2991,8 +2980,8 @@ pluralize@^4.0.0:
   resolved "https://npm.strues.io/pluralize/-/pluralize-4.0.0.tgz#59b708c1c0190a2f692f1c7618c446b052fd1762"
 
 pngjs@^3.0.0:
-  version "3.2.0"
-  resolved "https://npm.strues.io/pngjs/-/pngjs-3.2.0.tgz#fc9fcea1a8a375da54a51148019d5abd41dbabde"
+  version "3.3.0"
+  resolved "https://npm.strues.io/pngjs/-/pngjs-3.3.0.tgz#1f5730c189c94933b81beda2ab2f8e2855263a8f"
 
 postgres-array@~1.0.0:
   version "1.0.2"
@@ -3042,7 +3031,7 @@ progress@^2.0.0:
 
 proxy-addr@~1.1.5:
   version "1.1.5"
-  resolved "https://registry.npmjs.org/proxy-addr/-/proxy-addr-1.1.5.tgz#71c0ee3b102de3f202f3b64f608d173fcba1a918"
+  resolved "https://npm.strues.io/proxy-addr/-/proxy-addr-1.1.5.tgz#71c0ee3b102de3f202f3b64f608d173fcba1a918"
   dependencies:
     forwarded "~0.1.0"
     ipaddr.js "1.4.0"
@@ -3061,7 +3050,7 @@ qs@6.4.0, qs@~6.4.0:
 
 qs@6.5.0:
   version "6.5.0"
-  resolved "https://registry.npmjs.org/qs/-/qs-6.5.0.tgz#8d04954d364def3efc55b5a0793e1e2c8b1e6e49"
+  resolved "https://npm.strues.io/qs/-/qs-6.5.0.tgz#8d04954d364def3efc55b5a0793e1e2c8b1e6e49"
 
 ramda@^0.24.1:
   version "0.24.1"
@@ -3164,17 +3153,17 @@ redis-commands@^1.2.0:
   version "1.3.1"
   resolved "https://npm.strues.io/redis-commands/-/redis-commands-1.3.1.tgz#81d826f45fa9c8b2011f4cd7a0fe597d241d442b"
 
-redis-parser@^2.4.0, redis-parser@^2.5.0:
+redis-parser@^2.4.0, redis-parser@^2.6.0:
   version "2.6.0"
   resolved "https://npm.strues.io/redis-parser/-/redis-parser-2.6.0.tgz#52ed09dacac108f1a631c07e9b69941e7a19504b"
 
 redis@^2.1.0:
-  version "2.7.1"
-  resolved "https://npm.strues.io/redis/-/redis-2.7.1.tgz#7d56f7875b98b20410b71539f1d878ed58ebf46a"
+  version "2.8.0"
+  resolved "https://npm.strues.io/redis/-/redis-2.8.0.tgz#202288e3f58c49f6079d97af7a10e1303ae14b02"
   dependencies:
     double-ended-queue "^2.1.0-0"
     redis-commands "^1.2.0"
-    redis-parser "^2.5.0"
+    redis-parser "^2.6.0"
 
 referrer-policy@1.1.0:
   version "1.1.0"
@@ -3337,7 +3326,7 @@ semver@4.3.2:
 
 send@0.15.4:
   version "0.15.4"
-  resolved "https://registry.npmjs.org/send/-/send-0.15.4.tgz#985faa3e284b0273c793364a35c6737bd93905b9"
+  resolved "https://npm.strues.io/send/-/send-0.15.4.tgz#985faa3e284b0273c793364a35c6737bd93905b9"
   dependencies:
     debug "2.6.8"
     depd "~1.1.1"
@@ -3355,7 +3344,7 @@ send@0.15.4:
 
 serve-static@1.12.4:
   version "1.12.4"
-  resolved "https://registry.npmjs.org/serve-static/-/serve-static-1.12.4.tgz#9b6aa98eeb7253c4eedc4c1f6fdbca609901a961"
+  resolved "https://npm.strues.io/serve-static/-/serve-static-1.12.4.tgz#9b6aa98eeb7253c4eedc4c1f6fdbca609901a961"
   dependencies:
     encodeurl "~1.0.1"
     escape-html "~1.0.3"
@@ -3431,8 +3420,8 @@ spdx-license-ids@^1.0.2:
   resolved "https://npm.strues.io/spdx-license-ids/-/spdx-license-ids-1.2.2.tgz#c9df7a3424594ade6bd11900d596696dc06bac57"
 
 split@^1.0.0:
-  version "1.0.0"
-  resolved "https://npm.strues.io/split/-/split-1.0.0.tgz#c4395ce683abcd254bc28fe1dabb6e5c27dcffae"
+  version "1.0.1"
+  resolved "https://npm.strues.io/split/-/split-1.0.1.tgz#605bd9be303aa59fb35f9229fbea0ddec9ea07d9"
   dependencies:
     through "2"
 
@@ -3647,8 +3636,8 @@ uid-number@^0.0.6:
   resolved "https://npm.strues.io/uid-number/-/uid-number-0.0.6.tgz#0ea10e8035e8eb5b8e4449f06da1c730663baa81"
 
 uid-safe@~2.1.4:
-  version "2.1.4"
-  resolved "https://npm.strues.io/uid-safe/-/uid-safe-2.1.4.tgz#3ad6f38368c6d4c8c75ec17623fb79aa1d071d81"
+  version "2.1.5"
+  resolved "https://npm.strues.io/uid-safe/-/uid-safe-2.1.5.tgz#2b3d5c7240e8fc2e58f8aa269e5ee49c0857bd3a"
   dependencies:
     random-bytes "~1.0.0"
 
@@ -3710,15 +3699,17 @@ vary@^1, vary@~1.1.1:
   version "1.1.1"
   resolved "https://npm.strues.io/vary/-/vary-1.1.1.tgz#67535ebb694c1d52257457984665323f587e8d37"
 
-verror@1.3.6:
-  version "1.3.6"
-  resolved "https://npm.strues.io/verror/-/verror-1.3.6.tgz#cff5df12946d297d2baaefaa2689e25be01c005c"
+verror@1.10.0:
+  version "1.10.0"
+  resolved "https://npm.strues.io/verror/-/verror-1.10.0.tgz#3a105ca17053af55d6e270c1f8288682e18da400"
   dependencies:
-    extsprintf "1.0.2"
+    assert-plus "^1.0.0"
+    core-util-is "1.0.2"
+    extsprintf "^1.2.0"
 
 which@^1.2.12, which@^1.2.9:
-  version "1.2.14"
-  resolved "https://npm.strues.io/which/-/which-1.2.14.tgz#9a87c4378f03e827cecaf1acdf56c736c01c14e5"
+  version "1.3.0"
+  resolved "https://npm.strues.io/which/-/which-1.3.0.tgz#ff04bdfc010ee547d780bec38e1ac1c2777d253a"
   dependencies:
     isexe "^2.0.0"
 

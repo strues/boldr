@@ -1,15 +1,22 @@
 import createApolloClient from './createApolloClient';
 
+const config = {
+  initialState: {},
+  batchRequests: false,
+  trustNetwork: true,
+  queryDeduplication: true,
+  apolloUri: '/api/v1/graphql',
+  connectToDevTools: true,
+  ssrForceFetchDelay: 100,
+};
 test('Create Apollo Client - No Data', () => {
-  expect(createApolloClient()).toBeDefined();
+  expect(createApolloClient(config)).toBeDefined();
 });
 
 test('Create Apollo Client - With Initial Data', () => {
-  expect(createApolloClient({ initialData: {} })).toBeDefined();
+  expect(createApolloClient(config)).toBeDefined();
 });
 
 test('Create Apollo Client - With Initial Data and URL', () => {
-  expect(
-    createApolloClient({ initialData: { boldr: { apolloUri: 'http://my.apollo.uri' } } }),
-  ).toBeDefined();
+  expect(createApolloClient(config)).toBeDefined();
 });

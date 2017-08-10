@@ -25,7 +25,7 @@ class Home extends React.Component {
         <Grid>
           <Row>
             <Col xs={12} md={4}>
-              <Headline type="h2">Placeholder 1</Headline>
+              <Headline type="h2">Placeholder 12</Headline>
               <Paragraph>
                 This proposal introduces an Observable type to the ECMAScript standard library. The
                 Observable type can be used to model push-based data sources such as DOM events,

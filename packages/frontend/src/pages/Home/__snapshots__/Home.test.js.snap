@@ -27,7 +27,7 @@ exports[`<Home /> renders snapshot 1`] = `
         <Headline
           type="h2"
         >
-          Placeholder 1
+          Placeholder 12
         </Headline>
         <Paragraph
           isLead={false}

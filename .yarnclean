@@ -34,7 +34,8 @@ Gruntfile.js
 .flowconfig
 .documentup.json
 .yarn-metadata.json
-
+!istanbul-reports/lib/html/assets
+!istanbul/lib/assets
 !.svgo.yml
 
 # misc

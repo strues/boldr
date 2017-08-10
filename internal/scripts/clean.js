@@ -1,5 +1,5 @@
 /* eslint-disable import/no-dynamic-require,global-require, no-console */
-const fs = require('fs');
+const fs = require('fs-extra');
 const path = require('path');
 
 // Ensure top-level is installed
@@ -17,6 +17,7 @@ const logTask = msg => console.log(`👍  ${msg}`);
 
 const cleanPackages = at => {
   const result = shell.rm('-rf', `${at}/node_modules`);
+  shell.rm('-rf', `${at}/yarn.lock`);
   if (result.code !== 0) {
     console.log(`Unable to clean node_modules in ${at}`);
   }

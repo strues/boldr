@@ -39,7 +39,7 @@ const AppComponent = PassedApp =>
 
 renderBoldrApp(AppComponent(<App />), apolloClient, reduxStore);
 
-if (process.env.NODE_ENV === 'development') {
+if (process.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept('./components/App/App.js', () => {
     const NextApp = require('./components/App/App.js').default;
 

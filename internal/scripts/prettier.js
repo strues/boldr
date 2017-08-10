@@ -12,7 +12,7 @@ const prettier = isWindows ? 'prettier.cmd' : 'prettier';
 const prettierCmd = path.resolve(
   __dirname,
   // prettier-ignore
-  `../node_modules/.bin/${prettier}`,
+  `../../node_modules/.bin/${prettier}`,
 );
 const defaultOptions = {
   'single-quote': true,
@@ -23,7 +23,7 @@ const defaultOptions = {
 };
 const config = {
   default: {
-    patterns: ['scripts/*.js', 'packages/**/src/**/*.js', 'packages/**/internal/*.js'],
+    patterns: ['internal/**/*.js', 'packages/**/src/**/*.js', 'packages/**/internal/*.js'],
     ignore: ['**/node_modules/**'],
   },
 };

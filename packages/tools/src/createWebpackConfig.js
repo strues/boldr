@@ -93,16 +93,13 @@ const HTML_TEMPLATE = path.resolve(ROOT, process.env.HTML_TEMPLATE);
 const nodeModules = path.resolve(ROOT, 'node_modules');
 const serverExternals = fs
   .readdirSync(nodeModules)
-  .filter(
-    x =>
-      !/\.bin|react-universal-component|boldr-core|require-universal-module|webpack-flush-chunks/.test(
-        x,
-      ),
-  )
+  .filter(x => !/\.bin|react-universal-component|webpack-flush-chunks/.test(x))
   .reduce((externals, request) => {
     externals[request] = `commonjs ${request}`;
     return externals;
   }, {});
+
+serverExternals['react-dom/server'] = 'commonjs react-dom/server';
 
 export default function createWebpackConfig(
   options: ConfigurationOptions = {},
@@ -207,7 +204,6 @@ export default function createWebpackConfig(
       `${require.resolve(
         'webpack-hot-middleware/client',
       )}?path=/__webpack_hmr&timeout=20000&reload=false&quiet=false&noInfo=false`,
-      require.resolve('whatwg-fetch'),
       CLIENT_ENTRY,
     ];
     if (!_IS_DEV_) {

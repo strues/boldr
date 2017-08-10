@@ -5,3 +5,7 @@ node_modules
 packages/**/lib/*
 packages/**/build/*
 packages/babel-preset-boldr
+packages/frontend/.env
+
+.boldr/cache
+coverage
