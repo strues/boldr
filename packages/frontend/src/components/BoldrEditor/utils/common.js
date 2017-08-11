@@ -16,7 +16,7 @@ export function forEach(obj: Object, callback: Function) {
     }
   }
 }
-
+export const getFirstIcon = config => config[config.options[0]].icon;
 export function hasProperty(obj: Object, property: string) {
   let result = false;
   if (obj) {
@@ -31,6 +31,16 @@ export function hasProperty(obj: Object, property: string) {
   return result;
 }
 
+export function size(object: Object): any {
+  if (object) {
+    let count = 0;
+    forEach(object, () => {
+      count += 1;
+    });
+    return count;
+  }
+  return undefined;
+}
 /**
  * The function returns true if the string passed to it has no content.
  * @param  {string}  str the string being checked for emptiness
@@ -74,14 +84,6 @@ export function filter(obj: Object, keys: Array<string>) {
 export function stopPropagation(event: Event) {
   event.stopPropagation();
 }
-
-/**
- * This function is used when displaying options in drop-down.
- * Icon for first available options is used in drop-down placeholder.
- * @param  {Object} config the config object
- * @return {string}        the icon
- */
-export const getFirstIcon = (config: Object) => config[config.options[0]].icon;
 
 /**
  * The function is used to recursively merge toolbar options. It assumes all the options

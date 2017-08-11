@@ -2,12 +2,21 @@
 
 import React from 'react';
 import classNames from 'classnames';
-import { Bold, Italic, Underline, Strikethrough, Subscript, Superscript, Code } from '@boldr/icons';
+import { Bold, Italic, Underline, Strikethrough, Code } from '@boldr/icons';
 import Option from '../../Option';
 
+interface CurrentState {
+  bold: boolean,
+  italic: boolean,
+  underline: boolean,
+  strikethrough: boolean,
+  superscript: boolean,
+  subscript: boolean,
+  CODE: boolean,
+}
 export type Props = {
   onChange?: Function,
-  currentState?: Object,
+  currentState: CurrentState,
 };
 
 const InlineLayout = (props: Props) => {
@@ -44,22 +53,7 @@ const InlineLayout = (props: Props) => {
       >
         <Strikethrough color="#222" />
       </Option>
-      <Option
-        value="superscript"
-        onClick={onChange}
-        active={currentState.superscript === true}
-        title="Superscript"
-      >
-        <Superscript color="#222" />
-      </Option>
-      <Option
-        value="subscript"
-        onClick={onChange}
-        active={currentState.subscript === true}
-        title="Subscript"
-      >
-        <Subscript color="#222" />
-      </Option>
+
       <Option value="code" onClick={onChange} active={currentState.CODE} title="Code">
         <Code color="#222" />
       </Option>

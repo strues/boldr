@@ -1,4 +1,5 @@
 module.exports = [
+  'core-js',
   'react',
   'react-dom',
   'react-router-dom',
@@ -15,10 +16,10 @@ module.exports = [
   'apollo-client',
   'draft-js',
   'draft-convert',
-  'draftjs-utils',
   'react-tagsinput',
   'react-dropzone',
   'react-motion',
   'react-transition-group',
   'redux-form',
+  'immutable',
 ];

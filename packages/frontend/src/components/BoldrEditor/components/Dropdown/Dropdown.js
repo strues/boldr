@@ -1,37 +1,35 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
 import { stopPropagation } from '../../utils/common';
 
+export type Props = {
+  children: ReactChildren,
+  onChange: ?Function,
+  className: ?string,
+  expanded: ?boolean,
+  doExpand: ?Function,
+  doCollapse: ?Function,
+  onExpandEvent: ?Function,
+  optionWrapperClassName: ?string,
+  ariaLabel: ?string,
+  title: ?string,
+};
 export default class Dropdown extends Component {
-  static propTypes = {
-    children: PropTypes.any,
-    onChange: PropTypes.func,
-    className: PropTypes.string,
-    expanded: PropTypes.bool,
-    doExpand: PropTypes.func,
-    doCollapse: PropTypes.func,
-    onExpandEvent: PropTypes.func,
-    optionWrapperClassName: PropTypes.string,
-    ariaLabel: PropTypes.string,
-    title: PropTypes.string,
-  };
-
   state: Object = {
     highlighted: -1,
   };
 
-  componentWillReceiveProps(props) {
+  componentWillReceiveProps(props: Props) {
     if (this.props.expanded && !props.expanded) {
       this.setState({
         highlighted: -1,
       });
     }
   }
-
+  props: Props;
   onChange: Function = (value: any): void => {
     const { onChange } = this.props;
     if (onChange) {

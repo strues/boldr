@@ -1,0 +1,197 @@
+/* @flow */
+import React from 'react';
+
+declare type ReactElement = React.Element<any>;
+
+declare type ReactNode = string | number | ReactElement | Array<ReactElement>;
+
+declare type ReactChild = ReactNode | boolean | void | null;
+
+declare type ReactChildren = ReactChild | Array<ReactChildren>;
+
+declare type FluxStandardAction = {
+  type: string,
+  payload?: any,
+  meta?: any,
+  error?: boolean,
+};
+
+declare type Reducer = (state: ?Object, action: FluxStandardAction) => Object;
+
+declare type Params = { [string]: string | number };
+
+declare type LocationShape = {
+  pathname?: string,
+  search?: string,
+  hash?: string,
+  state?: any,
+};
+declare type MatchPathOptions = {
+  path: string,
+  exact?: boolean,
+  strict?: boolean,
+};
+
+declare type User = {
+  id: string,
+  email: string,
+  firstName: string,
+  lastName: string,
+  username: string,
+  avatarUrl: ?string,
+  location: ?string,
+  bio: ?string,
+  website: ?string,
+  profile_image: ?string,
+  birthday: ?string,
+  social: ?UserSocial,
+  verified: boolean,
+};
+
+declare type Article = {
+  id: string,
+  image: ?string,
+  title: string,
+  slug: string,
+  content: string,
+  rawContent: Object,
+  excerpt: ?string,
+  createdAt: string,
+  updatedAt: ?string,
+  published: ?boolean,
+  featured: ?boolean,
+  author: ?User,
+  tags: ?Array<Tag>,
+  attachments: ?Object,
+  meta: ?Object,
+  userId: ?string,
+};
+
+declare type Tag = {
+  id: string,
+  name: string,
+  description: ?string,
+};
+
+declare type Facebook = {
+  url: string,
+};
+
+declare type Google = {
+  url: string,
+};
+
+declare type Twitter = {
+  url: string,
+};
+
+declare type Github = {
+  url: string,
+};
+
+declare type LinkedIn = {
+  url: string,
+};
+
+declare type UserSocial = {
+  google: ?Google,
+  facebook: ?Facebook,
+  twitter: ?Twitter,
+  github: ?Github,
+  linkedin: ?LinkedIn,
+};
+
+declare type Stats = {
+  posts: number,
+  users: number,
+  tags: number,
+};
+
+declare type Setting = {
+  id: number,
+  key: string,
+  value: string,
+  description: string,
+};
+declare type UI = {
+  drawer: boolean,
+  isMobile: boolean,
+  layout: string,
+  loaded: boolean,
+  modal: boolean,
+  navbar: boolean,
+};
+
+declare type Menu = {
+  id: number,
+  uuid: string,
+  name: string,
+  safeName: string,
+  attributes: ?Object,
+  restricted: ?boolean,
+  details: Array<MenuDetails>,
+};
+
+declare type MenuDetails = {
+  id: string,
+  title: string,
+  safeName: string,
+  cssClassname: string,
+  hasDropdown: boolean,
+  order: Number,
+  href: string,
+  mobileHref: ?string,
+  icon: string,
+  children: Array<Object>,
+};
+
+declare type NormalizrPayload = {
+  entities: Object,
+  result: Array<string>,
+};
+declare type MediaType = {
+  id: number,
+  uuid: string,
+  mediaType: string,
+  createdAt: string,
+  updatedAt: ?string,
+};
+declare type MediaFile = {
+  id: string,
+  fileName: string,
+  safeName: string,
+  thumbName: string,
+  fileDescription: ?string,
+  mediaType: number,
+  mimetype: string,
+  url: string,
+  path: string,
+  userId: string,
+  createdAt: string,
+  updatedAt: string,
+  type: MediaType,
+  owner: string,
+};
+
+declare interface userSignupFormInput {
+  email: string,
+  firstName: string,
+  lastName: string,
+  password: string,
+  username: string,
+}
+
+declare interface userLoginFormInput {
+  email: string,
+  password: string,
+}
+
+declare type AuthToken = {
+  issuer: string,
+  subject: string,
+  algorithms: Array<string>,
+  iat: ?number,
+  expiresIn: string | number,
+  email: string,
+  role: string,
+};

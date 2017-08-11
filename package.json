@@ -74,7 +74,18 @@
     "commitizen": {
       "path": "./node_modules/cz-emoji"
     },
-    "cz-emoji": {}
+    "cz-emoji": {
+      "scopes": [
+        "auth",
+        "cli",
+        "core",
+        "frontend",
+        "server",
+        "tools",
+        "utils",
+        "ci"
+      ]
+    }
   },
   "lint-staged": {
     "*.js": [

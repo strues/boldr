@@ -1,6 +1,6 @@
 {
   "name": "@boldr/cli",
-  "version": "0.2.0-alpha.6",
+  "version": "0.2.0-alpha.7",
   "description": "Command line tools for Boldr apps",
   "main": "bin/boldr.js",
   "bin": {
@@ -40,7 +40,7 @@
     "prettier": "^1.5.3"
   },
   "dependencies": {
-    "@boldr/tools": "0.1.0-alpha.7",
+    "@boldr/tools": "0.1.0-alpha.8",
     "@boldr/utils": "^0.1.0-rc.1",
     "caporal": "^0.7.0",
     "update-notifier": "^2.2.0"

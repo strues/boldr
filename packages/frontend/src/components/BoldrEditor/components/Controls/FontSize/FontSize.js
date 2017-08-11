@@ -1,7 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { toggleCustomInlineStyle, getSelectionCustomInlineStyle } from 'draftjs-utils';
+import { toggleCustomInlineStyle, getSelectionCustomInlineStyle } from '../../../utils';
 
 import FontSizeLayout from './FontSizeLayout';
 

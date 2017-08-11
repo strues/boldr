@@ -12,9 +12,9 @@ export type Props = {
   doExpand?: Function,
   doCollapse?: Function,
   onExpandEvent?: Function,
-  config?: Object,
-  onChange?: Function,
-  currentState?: Object,
+  config: Object,
+  onChange: Function,
+  currentState: Object,
 };
 class LinkLayout extends Component {
   state: Object = {

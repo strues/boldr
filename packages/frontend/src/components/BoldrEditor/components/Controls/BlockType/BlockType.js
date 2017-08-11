@@ -1,9 +1,8 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { getSelectedBlocksType } from 'draftjs-utils';
 import { RichUtils } from 'draft-js';
-
+import { getSelectedBlocksType } from '../../../utils';
 import BlockTypeLayout from './BlockTypeLayout';
 
 export type Props = {
@@ -90,7 +89,7 @@ class BlockType extends Component {
   render(): Object {
     const { config } = this.props;
     const { undoDisabled, redoDisabled, expanded, currentBlockType } = this.state;
-    const BlockTypeComponent = config.component || BlockTypeLayout;
+    const BlockTypeComponent = BlockTypeLayout;
     const blockType = this.blocksTypes.find(bt => bt.style === currentBlockType);
     return (
       <BlockTypeComponent

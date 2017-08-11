@@ -1,5 +1,3 @@
-/* @flow */
-
 import React from 'react';
 import { spy } from 'sinon';
 import { shallow, mount } from 'enzyme';

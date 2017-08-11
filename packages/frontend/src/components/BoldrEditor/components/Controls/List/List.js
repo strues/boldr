@@ -1,31 +1,28 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import { RichUtils } from 'draft-js';
-import { changeDepth, getSelectedBlocksType } from 'draftjs-utils';
+import { RichUtils, EditorState } from 'draft-js';
+import { changeDepth, getSelectedBlocksType } from '../../../utils';
 
 import ListLayout from './ListLayout';
 
 export type Props = {
   onChange: Function,
-  editorState: Object,
-  modalHandler?: Object,
+  editorState: EditorState,
   config?: Object,
 };
 export default class List extends Component {
   state: Object = {
-    expanded: false,
     currentBlockType: 'unstyled',
   };
 
   componentWillMount(): void {
-    const { editorState, modalHandler } = this.props;
+    const { editorState } = this.props;
     if (editorState) {
       this.setState({
         currentBlockType: getSelectedBlocksType(editorState),
       });
     }
-    modalHandler.registerCallBack(this.expandCollapse);
   }
 
   componentWillReceiveProps(properties: Object): void {
@@ -36,33 +33,7 @@ export default class List extends Component {
     }
   }
 
-  componentWillUnmount(): void {
-    const { modalHandler } = this.props;
-    modalHandler.deregisterCallBack(this.expandCollapse);
-  }
   props: Props;
-  expandCollapse: Function = (): void => {
-    this.setState({
-      expanded: this.signalExpanded,
-    });
-    this.signalExpanded = false;
-  };
-
-  onExpandEvent: Function = (): void => {
-    this.signalExpanded = !this.state.expanded;
-  };
-
-  doExpand: Function = (): void => {
-    this.setState({
-      expanded: true,
-    });
-  };
-
-  doCollapse: Function = (): void => {
-    this.setState({
-      expanded: false,
-    });
-  };
 
   onChange: Function = (value: string): void => {
     if (value === 'unordered') {
@@ -76,7 +47,7 @@ export default class List extends Component {
     }
   };
 
-  toggleBlockType: Function = (blockType: String): void => {
+  toggleBlockType: Function = (blockType: string): void => {
     const { onChange, editorState } = this.props;
     const newState = RichUtils.toggleBlockType(editorState, blockType);
     if (newState) {
@@ -93,26 +64,15 @@ export default class List extends Component {
   };
 
   render(): Object {
-    const { config, translations } = this.props;
-    const { expanded, currentBlockType } = this.state;
-    const ListComponent = config.component || ListLayout;
+    const { config } = this.props;
+    const { currentBlockType } = this.state;
+    const ListComponent = ListLayout;
     let listType;
     if (currentBlockType === 'unordered-list-item') {
       listType = 'unordered';
     } else if (currentBlockType === 'ordered-list-item') {
       listType = 'ordered';
     }
-    return (
-      <ListComponent
-        config={config}
-        translations={translations}
-        currentState={{ listType }}
-        expanded={expanded}
-        onExpandEvent={this.onExpandEvent}
-        doExpand={this.doExpand}
-        doCollapse={this.doCollapse}
-        onChange={this.onChange}
-      />
-    );
+    return <ListComponent config={config} currentState={{ listType }} onChange={this.onChange} />;
   }
 }

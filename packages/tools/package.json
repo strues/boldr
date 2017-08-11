@@ -1,6 +1,6 @@
 {
   "name": "@boldr/tools",
-  "version": "0.1.0-alpha.7",
+  "version": "0.1.0-alpha.8",
   "description": "Webpack build tools and basic CLI for dev and building universal react applications",
   "bin": {
     "btools": "bin/btools"
@@ -64,6 +64,7 @@
     "postcss-loader": "^2.0.6",
     "pretty-error": "^2.1.1",
     "react-dev-utils": "^3.1.0",
+    "react-hot-loader": "next",
     "sass-loader": "^6.0.6",
     "source-map-support": "^0.4.15",
     "uglify-es": "^3.0.27",

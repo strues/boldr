@@ -8,7 +8,7 @@ export type Props = {
   children: ?ReactChildren,
   value: ?string,
   className: ?string,
-  activeClassName: ?string,
+  activeClassName: string,
   active: ?boolean,
   disabled: ?boolean,
   title: ?string,

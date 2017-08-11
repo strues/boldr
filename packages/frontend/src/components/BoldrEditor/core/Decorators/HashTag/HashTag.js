@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { Entity } from 'draft-js';
+
 import classNames from 'classnames';
 
 class Hashtag {

@@ -2,9 +2,8 @@
 
 import React, { Component } from 'react';
 import { EditorState, Modifier } from 'draft-js';
-import { getSelectionCustomInlineStyle } from 'draftjs-utils';
+import { getSelectionCustomInlineStyle, forEach } from '../../../utils';
 
-import { forEach } from '../../../utils/common';
 import RemoveLayout from './RemoveLayout';
 
 export type Props = {

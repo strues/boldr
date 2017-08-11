@@ -7,12 +7,12 @@ import Option from '../../Option';
 import { Dropdown, DropdownOption } from '../../Dropdown';
 
 export type Props = {
-  expanded: ?boolean,
+  expanded: boolean,
   onExpandEvent: ?Function,
   doExpand: ?Function,
   doCollapse: ?Function,
   onChange: ?Function,
-  config: ?Object,
+  config: Object,
   currentState: ?Object,
 };
 

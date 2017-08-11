@@ -11,9 +11,10 @@ module.exports = {
     test: true,
     it: true,
     expect: true,
-    beforeEach: true
+    beforeEach: true,
   },
   rules: {
-    'getter-return': 0
-  }
-}
+    'getter-return': 0,
+    'react/boolean-prop-naming':0
+  },
+};

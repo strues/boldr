@@ -201,6 +201,7 @@ export default function createWebpackConfig(
   const getClientEntry = () => {
     // For development
     let entry = [
+      require.resolve('react-hot-loader/patch'),
       `${require.resolve(
         'webpack-hot-middleware/client',
       )}?path=/__webpack_hmr&timeout=20000&reload=false&quiet=false&noInfo=false`,
@@ -366,6 +367,9 @@ export default function createWebpackConfig(
               cacheDirectory: _IS_DEV_,
               compact: _IS_PROD_,
               presets: [_IS_CLIENT_ ? clientPreset : serverPreset],
+              plugins: [
+                _IS_CLIENT_ && _IS_DEV_ ? require.resolve('react-hot-loader/babel') : null,
+              ].filter(Boolean),
             },
           },
         ],

@@ -1,10 +1,11 @@
 export default {
   options: [
     'inline',
+    'list',
     'blockType',
     'fontSize',
     'fontFamily',
-    'list',
+
     'textAlign',
     'colorPicker',
     'link',
@@ -25,8 +26,8 @@ export default {
       'underline',
       'strikethrough',
       'monospace',
-      'superscript',
-      'subscript',
+      // 'superscript',
+      // 'subscript',
     ],
     bold: { className: undefined, title: 'Bold' },
     italic: { className: undefined, title: 'Italic' },
@@ -36,11 +37,23 @@ export default {
       title: 'Strikethrough',
     },
     monospace: { className: undefined, title: 'Monospace' },
-    superscript: {
-      className: undefined,
-      title: 'Superscript',
-    },
-    subscript: { className: undefined, title: 'Subscript' },
+    // superscript: {
+    //   className: undefined,
+    //   title: 'Superscript',
+    // },
+    // subscript: { className: undefined, title: 'Subscript' },
+  },
+  list: {
+    inDropdown: false,
+    className: undefined,
+    component: undefined,
+    dropdownClassName: undefined,
+    options: ['unordered', 'ordered', 'indent', 'outdent'],
+    unordered: { className: undefined, title: 'Unordered' },
+    ordered: { className: undefined, title: 'Ordered' },
+    indent: { className: undefined, title: 'Indent' },
+    outdent: { className: undefined, title: 'Outdent' },
+    title: 'List',
   },
   blockType: {
     inDropdown: true,
@@ -64,18 +77,7 @@ export default {
     dropdownClassName: undefined,
     title: 'Font Family',
   },
-  list: {
-    inDropdown: false,
-    className: undefined,
-    component: undefined,
-    dropdownClassName: undefined,
-    options: ['unordered', 'ordered', 'indent', 'outdent'],
-    unordered: { className: undefined, title: 'Unordered' },
-    ordered: { className: undefined, title: 'Ordered' },
-    indent: { className: undefined, title: 'Indent' },
-    outdent: { className: undefined, title: 'Outdent' },
-    title: 'List',
-  },
+
   textAlign: {
     inDropdown: false,
     className: undefined,

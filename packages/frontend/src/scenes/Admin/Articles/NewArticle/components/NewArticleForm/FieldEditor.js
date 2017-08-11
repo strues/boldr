@@ -34,15 +34,15 @@ export default class FieldEditor extends Component {
         editorStyle={editorStyle}
         onEditorStateChange={this.onChange}
         editorState={editorState}
-        toolbarClassName="playground-toolbar"
-        wrapperClassName="playground-wrapper"
-        editorClassName="playground-editor"
+        toolbarClassName="boldrui-editor__toolbar"
+        wrapperClassName="boldrui-editor__wrapper"
+        editorClassName="boldrui-editor"
         toolbar={{
           history: { inDropdown: true },
           inline: { inDropdown: false },
           list: { inDropdown: true },
           link: { showOpenOptionOnHover: true },
-          textAlign: { inDropdown: true },
+          textAlign: { inDropdown: false },
         }}
       />
     );

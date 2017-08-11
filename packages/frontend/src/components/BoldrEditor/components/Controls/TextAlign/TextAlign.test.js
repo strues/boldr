@@ -49,8 +49,8 @@ describe('<TextAlign />', () => {
         modalHandler={new ModalHandler()}
       />,
     );
-    expect(control.children().length).toEqual(1);
-    expect(control.childAt(0).children().length).toEqual(2);
+    expect(control.children().length).toEqual(4);
+    expect(control.childAt(0).children().length).toEqual(1);
   });
 
   it('should execute onChange when any of first any child elements is clicked', () => {

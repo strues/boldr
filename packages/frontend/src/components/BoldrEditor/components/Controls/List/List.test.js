@@ -29,7 +29,7 @@ describe('<List />', () => {
     ).toBe(true);
   });
 
-  it('should have 4 child elements by default', () => {
+  it('should have 2 child elements by default', () => {
     const control = mount(
       <List
         onChange={() => {}}
@@ -38,7 +38,7 @@ describe('<List />', () => {
         modalHandler={new ModalHandler()}
       />,
     );
-    expect(control.children().length).toEqual(4);
+    expect(control.children().length).toEqual(2);
   });
 
   it('should have 1 child elements if inDropdown is true', () => {
@@ -50,7 +50,7 @@ describe('<List />', () => {
         modalHandler={new ModalHandler()}
       />,
     );
-    expect(control.children().length).toEqual(4);
+    expect(control.children().length).toEqual(2);
     expect(control.childAt(0).children().length).toEqual(1);
   });
 
@@ -66,11 +66,5 @@ describe('<List />', () => {
     );
     control.childAt(0).simulate('click');
     expect(onChange.calledOnce).toBeTruthy();
-    control.childAt(1).simulate('click');
-    expect(onChange.callCount, 2).toBeTruthy();
-    control.childAt(2).simulate('click');
-    expect(onChange.callCount, 3).toBeTruthy();
-    control.childAt(3).simulate('click');
-    expect(onChange.callCount, 4).toBeTruthy();
   });
 });

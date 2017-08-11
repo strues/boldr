@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { getSelectedBlocksMetadata, setBlockData } from 'draftjs-utils';
+import { getSelectedBlocksMetadata, setBlockData } from '../../../utils';
 
 import TextAlignLayout from './TextAlignLayout';
 
@@ -23,7 +23,7 @@ export default class TextAlign extends Component {
     modalHandler.registerCallBack(this.expandCollapse);
   }
 
-  componentWillReceiveProps(properties) {
+  componentWillReceiveProps(properties: Object) {
     if (properties.editorState !== this.props.editorState) {
       this.setState({
         currentTextAlignment: getSelectedBlocksMetadata(properties.editorState).get('text-align'),
@@ -72,7 +72,7 @@ export default class TextAlign extends Component {
   render(): Object {
     const { config } = this.props;
     const { expanded, currentTextAlignment } = this.state;
-    const TextAlignmentComponent = config.component || TextAlignLayout;
+    const TextAlignmentComponent = TextAlignLayout;
     return (
       <TextAlignmentComponent
         config={config}

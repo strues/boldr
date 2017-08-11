@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { toggleCustomInlineStyle, getSelectionCustomInlineStyle } from 'draftjs-utils';
+import { toggleCustomInlineStyle, getSelectionCustomInlineStyle } from '../../../utils';
 
 import ColorPickerLayout from './ColorPickerLayout';
 

@@ -217,6 +217,10 @@ arrify@^1.0.0:
   version "1.0.1"
   resolved "https://npm.strues.io/arrify/-/arrify-1.0.1.tgz#898508da2226f380df904728456849c1501a4b0d"
 
+asap@~2.0.3:
+  version "2.0.6"
+  resolved "https://npm.strues.io/asap/-/asap-2.0.6.tgz#e50347611d7e690943208bbdafebcbc2fb866d46"
+
 asn1.js@^4.0.0:
   version "4.9.1"
   resolved "https://npm.strues.io/asn1.js/-/asn1.js-4.9.1.tgz#48ba240b45a9280e94748990ba597d216617fd40"
@@ -1241,7 +1245,7 @@ babel-runtime@^6.18.0, babel-runtime@^6.2.0, babel-runtime@^6.20.0, babel-runtim
     core-js "^2.4.0"
     regenerator-runtime "^0.10.0"
 
-babel-template@^6.16.0, babel-template@^6.24.1, babel-template@^6.25.0, babel-template@^6.3.0:
+babel-template@^6.16.0, babel-template@^6.24.1, babel-template@^6.25.0, babel-template@^6.3.0, babel-template@^6.7.0:
   version "6.25.0"
   resolved "https://npm.strues.io/babel-template/-/babel-template-6.25.0.tgz#665241166b7c2aa4c619d71e192969552b10c071"
   dependencies:
@@ -1784,6 +1788,10 @@ copy-concurrently@^1.0.0:
     rimraf "^2.5.4"
     run-queue "^1.0.0"
 
+core-js@^1.0.0:
+  version "1.2.7"
+  resolved "https://npm.strues.io/core-js/-/core-js-1.2.7.tgz#652294c14651db28fa93bd2d5ff2983a4f08c636"
+
 core-js@^2.4.0:
   version "2.5.0"
   resolved "https://npm.strues.io/core-js/-/core-js-2.5.0.tgz#569c050918be6486b3837552028ae0466b717086"
@@ -2240,6 +2248,12 @@ error-ex@^1.2.0:
   dependencies:
     is-arrayish "^0.2.1"
 
+error-stack-parser@^1.3.6:
+  version "1.3.6"
+  resolved "https://npm.strues.io/error-stack-parser/-/error-stack-parser-1.3.6.tgz#e0e73b93e417138d1cd7c0b746b1a4a14854c292"
+  dependencies:
+    stackframe "^0.3.1"
+
 es-abstract@^1.7.0:
   version "1.8.0"
   resolved "https://npm.strues.io/es-abstract/-/es-abstract-1.8.0.tgz#3b00385e85729932beffa9163bbea1234e932914"
@@ -2654,6 +2668,18 @@ faye-websocket@~0.11.0:
   dependencies:
     websocket-driver ">=0.5.1"
 
+fbjs@^0.8.9:
+  version "0.8.14"
+  resolved "https://npm.strues.io/fbjs/-/fbjs-0.8.14.tgz#d1dbe2be254c35a91e09f31f9cd50a40b2a0ed1c"
+  dependencies:
+    core-js "^1.0.0"
+    isomorphic-fetch "^2.1.1"
+    loose-envify "^1.0.0"
+    object-assign "^4.1.0"
+    promise "^7.1.1"
+    setimmediate "^1.0.5"
+    ua-parser-js "^0.7.9"
+
 figures@^2.0.0:
   version "2.0.0"
   resolved "https://npm.strues.io/figures/-/figures-2.0.0.tgz#3ab1a2d2a62c8bfb431a0c94cb797a2fce27c962"
@@ -2953,7 +2979,7 @@ global-prefix@^1.0.1:
     is-windows "^1.0.1"
     which "^1.2.14"
 
-global@^4.3.2:
+global@^4.3.0, global@^4.3.2:
   version "4.3.2"
   resolved "https://npm.strues.io/global/-/global-4.3.2.tgz#e76989268a6c74c38908b1305b10fc0e394e9d0f"
   dependencies:
@@ -3476,6 +3502,13 @@ isobject@^3.0.1:
   version "3.0.1"
   resolved "https://npm.strues.io/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
 
+isomorphic-fetch@^2.1.1:
+  version "2.2.1"
+  resolved "https://npm.strues.io/isomorphic-fetch/-/isomorphic-fetch-2.2.1.tgz#611ae1acf14f5e81f729507472819fe9733558a9"
+  dependencies:
+    node-fetch "^1.0.1"
+    whatwg-fetch ">=0.10.0"
+
 isstream@~0.1.2:
   version "0.1.2"
   resolved "https://npm.strues.io/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
@@ -3715,7 +3748,7 @@ lodash.uniq@^4.5.0:
   version "4.5.0"
   resolved "https://npm.strues.io/lodash.uniq/-/lodash.uniq-4.5.0.tgz#d0225373aeb652adc1bc82e4945339a842754773"
 
-lodash@^4.0.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0, lodash@^4.5.1, lodash@~4.17.4:
+lodash@^4.0.0, lodash@^4.14.0, lodash@^4.15.0, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.2.0, lodash@^4.3.0, lodash@^4.5.1, lodash@^4.6.1, lodash@~4.17.4:
   version "4.17.4"
   resolved "https://npm.strues.io/lodash/-/lodash-4.17.4.tgz#78203a4d1c328ae1d86dca6460e369b57f4055ae"
 
@@ -3729,7 +3762,7 @@ longest@^1.0.1:
   version "1.0.1"
   resolved "https://npm.strues.io/longest/-/longest-1.0.1.tgz#30a0b2da38f73770e8294a0d22e6625ed77d0097"
 
-loose-envify@^1.0.0:
+loose-envify@^1.0.0, loose-envify@^1.3.1:
   version "1.3.1"
   resolved "https://npm.strues.io/loose-envify/-/loose-envify-1.3.1.tgz#d1a8ad33fa9ce0e713d65fdd0ac8b748d478c848"
   dependencies:
@@ -3997,7 +4030,7 @@ no-case@^2.2.0:
   dependencies:
     lower-case "^1.1.1"
 
-node-fetch@^1.7.2:
+node-fetch@^1.0.1, node-fetch@^1.7.2:
   version "1.7.2"
   resolved "https://npm.strues.io/node-fetch/-/node-fetch-1.7.2.tgz#c54e9aac57e432875233525f3c891c4159ffefd7"
   dependencies:
@@ -4841,6 +4874,19 @@ promise-inflight@^1.0.1:
   version "1.0.1"
   resolved "https://npm.strues.io/promise-inflight/-/promise-inflight-1.0.1.tgz#98472870bf228132fcbdd868129bad12c3c029e3"
 
+promise@^7.1.1:
+  version "7.3.1"
+  resolved "https://npm.strues.io/promise/-/promise-7.3.1.tgz#064b72602b18f90f29192b8b1bc418ffd1ebd3bf"
+  dependencies:
+    asap "~2.0.3"
+
+prop-types@^15.5.4:
+  version "15.5.10"
+  resolved "https://npm.strues.io/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
+  dependencies:
+    fbjs "^0.8.9"
+    loose-envify "^1.3.1"
+
 proxy-addr@~1.1.5:
   version "1.1.5"
   resolved "https://npm.strues.io/proxy-addr/-/proxy-addr-1.1.5.tgz#71c0ee3b102de3f202f3b64f608d173fcba1a918"
@@ -4950,9 +4996,13 @@ rc@^1.1.7:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
+react-deep-force-update@^2.0.1:
+  version "2.1.0"
+  resolved "https://npm.strues.io/react-deep-force-update/-/react-deep-force-update-2.1.0.tgz#1c5f36ea96bcbf411605ec063f36c568ea4df86c"
+
 react-dev-utils@^3.1.0:
-  version "3.1.0"
-  resolved "https://npm.strues.io/react-dev-utils/-/react-dev-utils-3.1.0.tgz#445c61e9eb0628532b33b02249d9763546d1acce"
+  version "3.1.1"
+  resolved "https://npm.strues.io/react-dev-utils/-/react-dev-utils-3.1.1.tgz#09ae7209a81384248db56547e718e65bd3b20eb5"
   dependencies:
     address "1.0.2"
     anser "1.4.1"
@@ -4973,6 +5023,23 @@ react-dev-utils@^3.1.0:
     sockjs-client "1.1.4"
     strip-ansi "3.0.1"
     text-table "0.2.0"
+
+react-hot-loader@next:
+  version "3.0.0-beta.7"
+  resolved "https://npm.strues.io/react-hot-loader/-/react-hot-loader-3.0.0-beta.7.tgz#d5847b8165d731c4d5b30d86d5d4716227a0fa83"
+  dependencies:
+    babel-template "^6.7.0"
+    global "^4.3.0"
+    react-deep-force-update "^2.0.1"
+    react-proxy "^3.0.0-alpha.0"
+    redbox-react "^1.3.6"
+    source-map "^0.4.4"
+
+react-proxy@^3.0.0-alpha.0:
+  version "3.0.0-alpha.1"
+  resolved "https://npm.strues.io/react-proxy/-/react-proxy-3.0.0-alpha.1.tgz#4400426bcfa80caa6724c7755695315209fa4b07"
+  dependencies:
+    lodash "^4.6.1"
 
 read-cache@^1.0.0:
   version "1.0.0"
@@ -5045,6 +5112,15 @@ recursive-readdir@2.2.1:
   resolved "https://npm.strues.io/recursive-readdir/-/recursive-readdir-2.2.1.tgz#90ef231d0778c5ce093c9a48d74e5c5422d13a99"
   dependencies:
     minimatch "3.0.3"
+
+redbox-react@^1.3.6:
+  version "1.5.0"
+  resolved "https://npm.strues.io/redbox-react/-/redbox-react-1.5.0.tgz#04dab11557d26651bf3562a67c22ace56c5d3967"
+  dependencies:
+    error-stack-parser "^1.3.6"
+    object-assign "^4.0.1"
+    prop-types "^15.5.4"
+    sourcemapped-stacktrace "^1.1.6"
 
 redent@^1.0.0:
   version "1.0.0"
@@ -5490,7 +5566,7 @@ set-immediate-shim@^1.0.1:
   version "1.0.1"
   resolved "https://npm.strues.io/set-immediate-shim/-/set-immediate-shim-1.0.1.tgz#4b2b1b27eb808a9f8dcc481a58e5e56f599f3f61"
 
-setimmediate@^1.0.4:
+setimmediate@^1.0.4, setimmediate@^1.0.5:
   version "1.0.5"
   resolved "https://npm.strues.io/setimmediate/-/setimmediate-1.0.5.tgz#290cbb232e306942d7d7ea9b83732ab7856f8285"
 
@@ -5581,15 +5657,21 @@ source-map-support@^0.4.0, source-map-support@^0.4.15, source-map-support@^0.4.2
   dependencies:
     source-map "^0.5.6"
 
-source-map@0.5.x, source-map@^0.5.0, source-map@^0.5.3, source-map@^0.5.6, source-map@~0.5.1, source-map@~0.5.3:
+source-map@0.5.6, source-map@0.5.x, source-map@^0.5.0, source-map@^0.5.3, source-map@^0.5.6, source-map@~0.5.1, source-map@~0.5.3:
   version "0.5.6"
   resolved "https://npm.strues.io/source-map/-/source-map-0.5.6.tgz#75ce38f52bf0733c5a7f0c118d81334a2bb5f412"
 
-source-map@^0.4.2, source-map@~0.4.1:
+source-map@^0.4.2, source-map@^0.4.4, source-map@~0.4.1:
   version "0.4.4"
   resolved "https://npm.strues.io/source-map/-/source-map-0.4.4.tgz#eba4f5da9c0dc999de68032d8b4f76173652036b"
   dependencies:
     amdefine ">=0.0.4"
+
+sourcemapped-stacktrace@^1.1.6:
+  version "1.1.7"
+  resolved "https://npm.strues.io/sourcemapped-stacktrace/-/sourcemapped-stacktrace-1.1.7.tgz#17e05374ff78b71a9d89ad3975a49f22725ba935"
+  dependencies:
+    source-map "0.5.6"
 
 spdx-correct@~1.0.0:
   version "1.0.2"
@@ -5628,6 +5710,10 @@ ssri@^4.1.6:
   resolved "https://npm.strues.io/ssri/-/ssri-4.1.6.tgz#0cb49b6ac84457e7bdd466cb730c3cb623e9a25b"
   dependencies:
     safe-buffer "^5.1.0"
+
+stackframe@^0.3.1:
+  version "0.3.1"
+  resolved "https://npm.strues.io/stackframe/-/stackframe-0.3.1.tgz#33aa84f1177a5548c8935533cbfeb3420975f5a4"
 
 "statuses@>= 1.3.1 < 2", statuses@~1.3.1:
   version "1.3.1"
@@ -5914,6 +6000,10 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://npm.strues.io/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
 
+ua-parser-js@^0.7.9:
+  version "0.7.14"
+  resolved "https://npm.strues.io/ua-parser-js/-/ua-parser-js-0.7.14.tgz#110d53fa4c3f326c121292bbeac904d2e03387ca"
+
 uglify-es@^3.0.24, uglify-es@^3.0.27:
   version "3.0.27"
   resolved "https://npm.strues.io/uglify-es/-/uglify-es-3.0.27.tgz#391790388f369196be23a49caeb0d5c424fa774e"
@@ -6192,7 +6282,7 @@ websocket-extensions@>=0.1.1:
   version "0.1.1"
   resolved "https://npm.strues.io/websocket-extensions/-/websocket-extensions-0.1.1.tgz#76899499c184b6ef754377c2dbb0cd6cb55d29e7"
 
-whatwg-fetch@^2.0.3:
+whatwg-fetch@>=0.10.0, whatwg-fetch@^2.0.3:
   version "2.0.3"
   resolved "https://npm.strues.io/whatwg-fetch/-/whatwg-fetch-2.0.3.tgz#9c84ec2dcf68187ff00bc64e1274b442176e1c84"
 

@@ -10,19 +10,21 @@ import {
   convertFromRaw,
   CompositeDecorator,
 } from 'draft-js';
+
+import classNames from 'classnames';
+import type { ContentBlock } from 'draft-js';
+import { ModalHandler, FocusHandler, KeyDownHandler, SuggestionHandler } from '../../eventHandlers';
 import {
   changeDepth,
   handleNewLine,
   getCustomStyleMap,
   extractInlineStyle,
   getSelectedBlocksType,
-} from 'draftjs-utils';
-import classNames from 'classnames';
-
-import { ModalHandler, FocusHandler, KeyDownHandler, SuggestionHandler } from '../../eventHandlers';
-
-import blockStyleFn from '../../utils/blockStyleFn';
-import { hasProperty, filter, mergeRecursive } from '../../utils/common';
+  blockStyleFn,
+  hasProperty,
+  filter,
+  mergeRecursive,
+} from '../../utils';
 
 import * as Controls from '../../components/Controls';
 
@@ -34,17 +36,19 @@ import getBlockRenderFunc from '../../Renderer';
 import defaultToolbar from '../../config/defaultToolbar';
 import { EDITOR_PROPS } from './constants';
 
+export type ChangeHandler = (value: any) => any;
+
 export type Props = {
-  onChange: ?Function,
+  onChange: ?ChangeHandler,
   onEditorStateChange: ?Function,
   onContentStateChange: ?Function,
   defaultContentState: ?Object,
   contentState: ?Object,
-  editorState: ?Object,
+  editorState: Object,
   defaultEditorState: ?Object,
-  toolbarOnFocus?: boolean,
+  toolbarOnFocus: boolean,
   spellCheck?: boolean,
-  toolbar: ?Object,
+  toolbar: Object,
   toolbarCustomButtons: ?Array<any>,
   toolbarClassName?: string,
   toolbarHidden?: boolean,
@@ -66,13 +70,20 @@ export type Props = {
   customBlockRenderFunc: ?Function,
   customDecorators: ?Array<any>,
 };
+export type State = {
+  editorState: Object,
+  editorFocused: boolean,
+  toolbar: Object,
+};
+
+type BlockRendererFunc = (block: ContentBlock) => ?string;
 
 export default class BoldrEditor extends Component {
   static defaultProps = {
     toolbarOnFocus: false,
     toolbarHidden: false,
     stripPastedStyles: false,
-    wrapperId: shortid.generate(),
+    wrapperId: `boldrui-editor__wrapper${shortid.generate()}`,
     customDecorators: [],
   };
 
@@ -81,11 +92,11 @@ export default class BoldrEditor extends Component {
     const toolbar = mergeRecursive(defaultToolbar, props.toolbar);
     this.state = {
       // eslint-disable-next-line
-      editorState: undefined,
+      editorState: {},
       editorFocused: false,
       toolbar,
     };
-    this.wrapperId = `boldrui-editor__wrapper${props.wrapperId}`;
+
     this.modalHandler = new ModalHandler();
     this.focusHandler = new FocusHandler();
     this.blockRendererFn = getBlockRenderFunc(
@@ -101,6 +112,8 @@ export default class BoldrEditor extends Component {
     this.customStyleMap = getCustomStyleMap();
   }
 
+  state: State;
+
   componentWillMount(): void {
     this.compositeDecorator = this.getCompositeDecorator();
     const editorState = this.createEditorState(this.compositeDecorator);
@@ -111,7 +124,7 @@ export default class BoldrEditor extends Component {
   }
 
   componentDidMount(): void {
-    this.modalHandler.init(this.wrapperId);
+    this.modalHandler.init(this.props.wrapperId);
   }
 
   componentWillReceiveProps(props) {
@@ -155,6 +168,7 @@ export default class BoldrEditor extends Component {
   }
 
   props: Props;
+  blockRendererFn: BlockRendererFunc;
 
   onEditorBlur: Function = (): void => {
     this.setState({
@@ -176,7 +190,7 @@ export default class BoldrEditor extends Component {
     this.focusHandler.onEditorMouseDown();
   };
 
-  onTab: Function = (event): boolean => {
+  onTab: Function = (event: Event): void => {
     const { onTab } = this.props;
     if (!onTab || !onTab(event)) {
       const editorState = changeDepth(this.state.editorState, event.shiftKey ? -1 : 1, 4);
@@ -187,7 +201,7 @@ export default class BoldrEditor extends Component {
     }
   };
 
-  onUpDownArrow: Function = (event): boolean => {
+  onUpDownArrow: Function = (event: Event): void => {
     if (SuggestionHandler.isOpen()) {
       event.preventDefault();
     }
@@ -394,7 +408,7 @@ export default class BoldrEditor extends Component {
 
     return (
       <div
-        id={this.wrapperId}
+        id={this.props.wrapperId}
         className={classNames('boldrui-editor-wrapper', wrapperClassName)}
         style={wrapperStyle}
         onClick={this.modalHandler.handleEditorClick}

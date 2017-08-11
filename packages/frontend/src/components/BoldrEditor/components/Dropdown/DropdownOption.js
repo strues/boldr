@@ -14,9 +14,9 @@ export type Props = {
   active: ?boolean,
   highlighted: ?boolean,
   className: ?string,
-  activeClassName: ?string,
-  disabledClassName: ?string,
-  highlightedClassName: ?string,
+  activeClassName: string,
+  disabledClassName: string,
+  highlightedClassName: string,
   title: ?string,
 };
 

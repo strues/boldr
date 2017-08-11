@@ -23,6 +23,7 @@ module.exports = {
     'getter-return': 0,
     'react/default-props-match-prop-types': 0,
     'prefer-destructuring': 0,
-    'no-undefined': 0
+    'no-undefined': 0,
+    "react/boolean-prop-naming": 0
   },
 };

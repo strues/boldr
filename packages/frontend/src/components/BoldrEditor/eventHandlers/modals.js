@@ -1,11 +1,11 @@
-/* @flow */
+/* @flow weak */
 export default class ModalHandler {
   callBacks = [];
   suggestionCallback = undefined;
-  editorFlag = false;
-  suggestionFlag = false;
+  editorFlag: boolean = false;
+  suggestionFlag: boolean = false;
 
-  closeAllModals = (event: Object) => {
+  closeAllModals = (event: Event) => {
     this.callBacks.forEach(callBack => {
       callBack(event);
     });
@@ -48,15 +48,15 @@ export default class ModalHandler {
     this.closeAllModals(event);
   };
 
-  registerCallBack = (callBack): void => {
+  registerCallBack = (callBack: Function): void => {
     this.callBacks.push(callBack);
   };
 
-  deregisterCallBack = (callBack): void => {
+  deregisterCallBack = (callBack: Function): void => {
     this.callBacks = this.callBacks.filter(cb => cb !== callBack);
   };
 
-  setSuggestionCallback = (callBack): void => {
+  setSuggestionCallback = (callBack: Function): void => {
     this.suggestionCallback = callBack;
   };
 

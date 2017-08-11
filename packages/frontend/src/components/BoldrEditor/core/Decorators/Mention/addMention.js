@@ -1,6 +1,6 @@
 /* @flow */
 import { EditorState, Modifier } from 'draft-js';
-import { getSelectedBlock } from 'draftjs-utils';
+import { getSelectedBlock } from '../../../utils';
 
 export default function addMention(
   editorState: EditorState,

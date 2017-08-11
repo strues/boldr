@@ -695,7 +695,7 @@
 .boldrui-editor__dropdown-wrapper {
   height: 30px;
   background: $white;
-  border: 1px solid $border-color;
+  border: none;
   border-radius: 2px;
   margin: 0 3px;
   text-transform: capitalize;
@@ -785,6 +785,7 @@
 
 /// opt
 
+
 .boldrui-editor__option-wrapper {
   display: flex;
   justify-content: center;
@@ -793,29 +794,30 @@
   height: 20px;
   padding: 3px;
   background-color: transparent;
-  border: 1px solid $border-color;
+  border: none;
   border-radius: 2px;
   margin: 0 4px;
   text-transform: capitalize;
   cursor: pointer;
 
   &:hover {
-    @include md-shadow(2);
+    @include md-shadow(1);
   }
 
   &:active {
-    @include md-shadow(2);
+    @include md-shadow(1);
   }
 }
 
 .boldrui-editor__option-active {
-  @include md-shadow(3);
+  @include md-shadow(2);
 }
 
 .boldrui-editor__option-disabled {
   opacity: 0.3;
   cursor: default;
 }
+
 
 /// spinner
 

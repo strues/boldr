@@ -8,11 +8,11 @@ export default {
     });
   },
 
-  registerCallBack: (callBack): void => {
+  registerCallBack: (callBack: Function): void => {
     callBacks.push(callBack);
   },
 
-  deregisterCallBack: (callBack): void => {
+  deregisterCallBack: (callBack: Function): void => {
     callBacks = callBacks.filter(cb => cb !== callBack);
   },
 };

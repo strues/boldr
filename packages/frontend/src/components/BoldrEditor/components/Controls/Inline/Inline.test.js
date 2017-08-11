@@ -38,10 +38,10 @@ describe('<Inline />', () => {
         modalHandler={new ModalHandler()}
       />,
     );
-    expect(control.children().length).toEqual(7);
+    expect(control.children().length).toEqual(5);
   });
 
-  it('should have 7 child elements if inDropdown is true', () => {
+  it('should have 5 child elements if inDropdown is true', () => {
     const control = mount(
       <Inline
         onChange={() => {}}
@@ -50,7 +50,7 @@ describe('<Inline />', () => {
         modalHandler={new ModalHandler()}
       />,
     );
-    expect(control.children().length).toEqual(7);
+    expect(control.children().length).toEqual(5);
     expect(control.childAt(0).children().length).toEqual(1);
   });
 

@@ -1,18 +1,16 @@
 /* eslint-disable prefer-destructuring, no-underscore-dangle, new-cap */
 import React from 'react';
+import { render, unmountComponentAtNode } from 'react-dom';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
+import { AppContainer } from 'react-hot-loader';
 import { getToken } from '@boldr/auth';
-import {
-  renderBoldrApp,
-  createApolloClient,
-  createBoldrStore,
-  RouterConnection,
-} from '@boldr/core';
+import { createApolloClient, createBoldrStore, RouterConnection, wrapBoldrApp } from '@boldr/core';
 import { checkAuth } from './scenes/Account/state/actions';
 
 import App from './components/App';
 import appReducer from './reducers';
 
+const DOM_NODE = document.getElementById('app');
 const preloadedState = window.__APOLLO_STATE__;
 const token = getToken();
 export const apolloClient = createApolloClient({
@@ -31,18 +29,37 @@ if (token) {
   reduxStore.dispatch(checkAuth(token));
 }
 const AppComponent = PassedApp =>
-  <BrowserRouter>
-    <RouterConnection>
-      {PassedApp}
-    </RouterConnection>
-  </BrowserRouter>;
+  <AppContainer>
+    <BrowserRouter>
+      <RouterConnection>
+        {PassedApp}
+      </RouterConnection>
+    </BrowserRouter>
+  </AppContainer>;
 
-renderBoldrApp(AppComponent(<App />), apolloClient, reduxStore);
+const renderApp = () => {
+  render(wrapBoldrApp(AppComponent(<App />), apolloClient, reduxStore), DOM_NODE);
+};
 
-if (process.env.NODE_ENV === 'development' && module.hot) {
-  module.hot.accept('./components/App/App.js', () => {
-    const NextApp = require('./components/App/App.js').default;
+// Enable hot reload by react-hot-loader
+if (module.hot) {
+  const reRenderApp = () => {
+    try {
+      renderApp();
+    } catch (error) {
+      const RedBox = require('redbox-react').default;
 
-    renderBoldrApp(AppComponent(<NextApp />), apolloClient, reduxStore);
+      render(<RedBox error={error} />, DOM_NODE);
+    }
+  };
+
+  module.hot.accept('./components/App', () => {
+    setImmediate(() => {
+      // Preventing the hot reloading error from react-router
+      unmountComponentAtNode(DOM_NODE);
+      reRenderApp();
+    });
   });
 }
+
+renderApp();
