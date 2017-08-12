@@ -2,7 +2,6 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Link from 'react-router-dom/Link';
-// $FlowIssue
 import styled from 'styled-components';
 
 import Button from '@boldr/ui/Button';

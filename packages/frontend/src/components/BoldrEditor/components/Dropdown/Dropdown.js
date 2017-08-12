@@ -11,13 +11,16 @@ export type Props = {
   className: ?string,
   expanded: boolean,
   doExpand: ?Function,
+  title: string,
   doCollapse: ?Function,
   onExpandEvent: ?Function,
   optionWrapperClassName: ?string,
-  ariaLabel: string,
-  title: string,
 };
 export default class Dropdown extends Component {
+  static defaultProps = {
+    title: '',
+  };
+
   state: Object = {
     highlighted: -1,
   };
@@ -54,24 +57,20 @@ export default class Dropdown extends Component {
   };
 
   render() {
-    const {
-      expanded,
-      children,
-      className,
-      optionWrapperClassName,
-      ariaLabel,
-      onExpandEvent,
-      title,
-    } = this.props;
+    const { expanded, children, className, optionWrapperClassName, onExpandEvent } = this.props;
     const { highlighted } = this.state;
     const options = children.slice(1, children.length);
     return (
       <div
         className={classNames('boldredit-dropdown__wrapper', className)}
         aria-expanded={expanded}
-        aria-label={ariaLabel || 'boldredit-dropdown'}
+        aria-label="boldredit-dropdown-control"
       >
-        <a className="boldredit-dropdown__selectedtext" onClick={onExpandEvent} title={title}>
+        <a
+          className="boldredit-dropdown__selectedtext"
+          onClick={onExpandEvent}
+          title={this.props.title}
+        >
           {children[0]}
           <div
             className={classNames({

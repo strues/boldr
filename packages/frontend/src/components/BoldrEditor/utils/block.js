@@ -1,5 +1,5 @@
 /* @flow */
-
+// $FlowIssue
 import { EditorState, RichUtils, Modifier, ContentBlock } from 'draft-js';
 import { OrderedMap, List, Map } from 'immutable';
 

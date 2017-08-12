@@ -1,11 +1,12 @@
 /* @flow */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+// $FlowIssue
 import { EditorState } from 'draft-js';
 import classNames from 'classnames';
 import Option from '../../components/Option';
 
-const getImageRender = config =>
+const getImageRender = (config: Object) =>
   class Image extends Component {
     static propTypes: Object = {
       block: PropTypes.object,
@@ -45,7 +46,7 @@ const getImageRender = config =>
       });
     };
 
-    renderAlignmentOptions(alignment): Object {
+    renderAlignmentOptions(alignment: string): Object {
       return (
         <div
           className={classNames('boldredit-image-alignment-options-popup', {

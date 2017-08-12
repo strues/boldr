@@ -13,7 +13,7 @@ export type Props = {
   doCollapse: ?Function,
   onChange: ?Function,
   config: Object,
-  currentState: ?Object,
+  currentState: Object,
 };
 
 class BlockTypeLayout extends Component {
@@ -62,7 +62,7 @@ class BlockTypeLayout extends Component {
     },
   ];
 
-  renderFlat(blocks: Array<Object>): void {
+  renderFlat(blocks: Array<Object>): ReactElement {
     const { config: { className }, onChange, currentState: { blockType } } = this.props;
     return (
       <div className={classNames('boldredit-block__wrapper', className)}>
@@ -80,7 +80,7 @@ class BlockTypeLayout extends Component {
     );
   }
 
-  renderInDropdown(blocks: Array<Object>): void {
+  renderInDropdown(blocks: Array<Object>): ReactElement {
     const {
       config: { className, dropdownClassName, title },
       currentState: { blockType },

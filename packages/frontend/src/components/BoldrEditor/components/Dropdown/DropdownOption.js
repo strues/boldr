@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow weak */
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -21,6 +21,10 @@ export type Props = {
 };
 
 export default class DropdownOption extends Component {
+  static defaultProps = {
+    highlighted: false,
+    highlightedClassName: 'boldredit-highlight',
+  };
   props: Props;
 
   onClick: Function = (event): void => {

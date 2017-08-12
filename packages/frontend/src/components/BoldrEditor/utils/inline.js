@@ -1,5 +1,5 @@
 /* @flow */
-
+// $FlowIssue
 import { Entity, Modifier, RichUtils, EditorState, ContentBlock } from 'draft-js';
 import { getSelectedBlocksList, getSelectedBlock } from './block';
 

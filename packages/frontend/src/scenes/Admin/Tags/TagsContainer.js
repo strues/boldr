@@ -1,19 +1,18 @@
 /* @flow */
 import React from 'react';
-// $FlowIssue
 import { graphql } from 'react-apollo';
-// $FlowIssue
 import Loader from '@boldr/ui/Loader';
 import Tags from './Tags';
 import TAGS_QUERY from './gql/tags.graphql';
 
-type Props = {
-  data: Data,
-};
 interface Data {
   getTags: Array<Tag>,
   loading: boolean,
 }
+
+type Props = {
+  data: Data,
+};
 
 const TagsContainer = (props: Props) => {
   const { loading, getTags } = props.data;
@@ -22,8 +21,9 @@ const TagsContainer = (props: Props) => {
   }
   return <Tags tags={getTags} />;
 };
-
+// $FlowIssue
 export default graphql(TAGS_QUERY, {
+  // $FlowIssue
   options: () => ({
     variables: {
       offset: 0,

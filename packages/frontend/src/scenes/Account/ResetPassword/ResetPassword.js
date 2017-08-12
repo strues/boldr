@@ -12,16 +12,11 @@ export type Props = {
 };
 
 class ResetPassword extends Component {
-  constructor(props: Props) {
-    super(props);
-
-    (this: any).handleReset = this.handleReset.bind(this);
-  }
   props: Props;
 
-  handleReset(values: Object): void {
+  handleReset = (values: Object): void => {
     this.props.dispatch(resetPassword(values.password, this.props.match.params.token));
-  }
+  };
 
   render() {
     return (

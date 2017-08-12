@@ -1,4 +1,3 @@
-/* @flow */
 import { replacePath, sendNotification, showNotification } from '@boldr/core';
 import { setToken, removeToken } from '@boldr/auth';
 import * as notif from '../../../core/constants';
@@ -97,8 +96,8 @@ export function logout() {
   * @exports checkAuth
   *****************************************************************/
 
-export const checkAuth = (token: string) => {
-  return (dispatch: Function) => {
+export const checkAuth = token => {
+  return dispatch => {
     dispatch({ type: t.CHECK_AUTH_REQUEST });
     return fetch(`${process.env.API_URL}${process.env.API_PREFIX}/auth/check`, {
       headers: {

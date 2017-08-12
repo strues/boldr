@@ -6,7 +6,7 @@ import Icon from '@boldr/ui/Icons/Icon';
 import Option from '../../Option';
 
 export type Props = {
-  config?: Object,
+  config: Object,
   onChange: Function,
 };
 const RemoveLayout = ({ config, onChange }: Props) => {

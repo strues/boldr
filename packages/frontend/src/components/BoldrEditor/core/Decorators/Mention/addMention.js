@@ -1,4 +1,5 @@
 /* @flow */
+// $FlowIssue
 import { EditorState, Modifier } from 'draft-js';
 import { getSelectedBlock } from '../../../utils';
 

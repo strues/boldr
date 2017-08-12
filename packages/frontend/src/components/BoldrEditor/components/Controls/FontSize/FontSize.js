@@ -8,8 +8,8 @@ import FontSizeLayout from './FontSizeLayout';
 export type Props = {
   onChange: Function,
   editorState: Object,
-  modalHandler?: Object,
-  config?: Object,
+  modalHandler: Object,
+  config: Object,
 };
 
 export default class FontSize extends Component {
@@ -48,13 +48,13 @@ export default class FontSize extends Component {
   }
 
   componentWillUnmount(): void {
-    const { modalHandler } = this.props;
-    modalHandler.deregisterCallBack(this.expandCollapse);
+    this.props.modalHandler.deregisterCallBack(this.expandCollapse);
   }
   props: Props;
 
   setFontSize = defaultFontSize => {
     this.setState({
+      // eslint-disable-next-line
       defaultFontSize,
     });
   };

@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { format } from 'date-fns';
 import Avatar from '@boldr/ui/Avatar';

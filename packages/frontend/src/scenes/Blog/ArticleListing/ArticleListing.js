@@ -4,12 +4,13 @@ import styled from 'styled-components';
 import { Grid, Row, Col } from '@boldr/ui/Layout';
 import { FeaturedArticle, ArticleCard } from '../components';
 
+type Data = {
+  articles: Array<Article>,
+};
+
 export type Props = {
   renderWhenReady: () => any,
   data: Data,
-};
-type Data = {
-  articles: Array<Article>,
 };
 
 const CardSpacer = styled.div`margin-bottom: 50px;`;

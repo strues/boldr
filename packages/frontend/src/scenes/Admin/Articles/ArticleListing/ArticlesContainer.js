@@ -42,8 +42,9 @@ export class ArticlesContainer extends Component {
     }
   }
 }
-
+// $FlowIssue
 const ArticlesContainerWithData = graphql(ARTICLES_QUERY, {
+  // $FlowIssue
   options: () => ({
     variables: {
       offset: 0,

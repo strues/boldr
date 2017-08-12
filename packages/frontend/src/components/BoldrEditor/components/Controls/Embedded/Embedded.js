@@ -1,6 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
+// $FlowIssue
 import { AtomicBlockUtils } from 'draft-js';
 
 import EmbeddedLayout from './EmbeddedLayout';
@@ -8,7 +9,7 @@ import EmbeddedLayout from './EmbeddedLayout';
 export type Props = {
   onChange: Function,
   editorState: Object,
-  modalHandler?: Object,
+  modalHandler: Object,
   config?: Object,
 };
 
@@ -18,13 +19,11 @@ class Embedded extends Component {
   };
 
   componentWillMount(): void {
-    const { modalHandler } = this.props;
-    modalHandler.registerCallBack(this.expandCollapse);
+    this.props.modalHandler.registerCallBack(this.expandCollapse);
   }
 
   componentWillUnmount(): void {
-    const { modalHandler } = this.props;
-    modalHandler.deregisterCallBack(this.expandCollapse);
+    this.props.modalHandler.deregisterCallBack(this.expandCollapse);
   }
   props: Props;
   onExpandEvent: Function = (): void => {
@@ -77,7 +76,7 @@ class Embedded extends Component {
   render(): Object {
     const { config } = this.props;
     const { expanded } = this.state;
-    const EmbeddedComponent = config.component || EmbeddedLayout;
+    const EmbeddedComponent = EmbeddedLayout;
     return (
       <EmbeddedComponent
         config={config}

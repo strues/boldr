@@ -24,7 +24,7 @@ class LinkLayout extends Component {
     linkTargetOption: this.props.config.defaultTargetOption,
   };
 
-  componentWillReceiveProps(props) {
+  componentWillReceiveProps(props: Props) {
     if (this.props.expanded && !props.expanded) {
       this.setState({
         showModal: false,

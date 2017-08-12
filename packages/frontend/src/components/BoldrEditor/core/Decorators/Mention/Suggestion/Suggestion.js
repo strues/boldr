@@ -1,4 +1,5 @@
 /* @flow */
+/* eslint-disable react/no-array-index-key, react/jsx-no-bind */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
@@ -6,7 +7,7 @@ import addMention from '../addMention';
 import { KeyDownHandler, SuggestionHandler } from '../../../../eventHandlers';
 
 class Suggestion {
-  constructor(config) {
+  constructor(config: Object) {
     const {
       separator,
       trigger,
@@ -19,6 +20,7 @@ class Suggestion {
       optionClassName,
       modalHandler,
     } = config;
+    // $FlowIssue
     this.config = {
       separator,
       trigger,
@@ -87,7 +89,6 @@ class Suggestion {
 }
 
 function getSuggestionComponent() {
-  const { config } = this;
   return class SuggestionComponent extends Component {
     static propTypes = {
       children: PropTypes.array,
@@ -100,8 +101,11 @@ function getSuggestionComponent() {
     };
 
     componentDidMount() {
-      const editorRect = config.getWrapperRef().getBoundingClientRect();
+      // $FlowIssue
+      const editorRect = this.config.getWrapperRef().getBoundingClientRect();
+      // $FlowIssue
       const suggestionRect = this.suggestion.getBoundingClientRect();
+      // $FlowIssue
       const dropdownRect = this.dropdown.getBoundingClientRect();
       let left, right, bottom;
       if (editorRect.width < suggestionRect.left - editorRect.left + dropdownRect.width) {
@@ -112,13 +116,12 @@ function getSuggestionComponent() {
       if (editorRect.bottom < dropdownRect.bottom) {
         bottom = 0;
       }
-      this.setState({
-        // eslint-disable-line react/no-did-mount-set-state
-        style: { left, right, bottom },
-      });
+      // eslint-disable-next-line react/no-did-mount-set-state
+      this.setState({ style: { left, right, bottom } });
       KeyDownHandler.registerCallBack(this.onEditorKeyDown);
       SuggestionHandler.open();
-      config.modalHandler.setSuggestionCallback(this.closeSuggestionDropdown);
+      // $FlowIssue
+      this.config.modalHandler.setSuggestionCallback(this.closeSuggestionDropdown);
       this.filterSuggestions(this.props);
     }
 
@@ -134,7 +137,8 @@ function getSuggestionComponent() {
     componentWillUnmount() {
       KeyDownHandler.deregisterCallBack(this.onEditorKeyDown);
       SuggestionHandler.close();
-      config.modalHandler.removeSuggestionCallback();
+      // $FlowIssue
+      this.config.modalHandler.removeSuggestionCallback();
     }
 
     onEditorKeyDown = event => {
@@ -219,12 +223,13 @@ function getSuggestionComponent() {
     render() {
       const { children } = this.props;
       const { activeOption, showSuggestions } = this.state;
-      const { dropdownClassName, optionClassName } = config;
+      // $FlowIssue
+      const { dropdownClassName, optionClassName } = this.config;
       return (
         <span
           className="boldredit-suggestion-wrapper"
           ref={this.setSuggestionReference}
-          onClick={config.modalHandler.onSuggestionClick}
+          onClick={(this: any).config.modalHandler.onSuggestionClick}
           aria-haspopup="true"
           aria-label="boldredit-suggestion-popup"
         >
@@ -243,8 +248,8 @@ function getSuggestionComponent() {
                   key={index}
                   spellCheck={false}
                   onClick={this.addMention}
-                  onMouseEnter={this.onOptionMouseEnter.bind(this, index)}
-                  onMouseLeave={this.onOptionMouseLeave}
+                  onMouseEnter={(this: any).onOptionMouseEnter.bind(this, index)}
+                  onMouseLeave={(this: any).onOptionMouseLeave}
                   className={classNames('boldredit-suggestion-option', optionClassName, {
                     'boldredit-suggestion-option-active': index === activeOption,
                   })}

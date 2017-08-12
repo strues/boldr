@@ -1,6 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
+// $FlowIssue
 import { RichUtils, EditorState, Modifier } from 'draft-js';
 import { getSelectionText, getEntityRange, getSelectionEntity } from '../../../utils';
 
@@ -9,25 +10,23 @@ import LinkLayout from './LinkLayout';
 export type Props = {
   onChange: Function,
   editorState: Object,
-  modalHandler?: Object,
-  config?: Object,
+  modalHandler: Object,
+  config: Object,
 };
 
 class Link extends Component {
   state: Object = {
     expanded: false,
-    link: undefined,
-    selectionText: undefined,
   };
 
   componentWillMount(): void {
-    const { editorState, modalHandler } = this.props;
+    const { editorState } = this.props;
     if (editorState) {
       this.setState({
         currentEntity: getSelectionEntity(editorState),
       });
     }
-    modalHandler.registerCallBack(this.expandCollapse);
+    this.props.modalHandler.registerCallBack(this.expandCollapse);
   }
 
   componentWillReceiveProps(properties: Object): void {
@@ -172,8 +171,3 @@ class Link extends Component {
 }
 
 export default Link;
-
-// todo refct
-// 1. better action names here
-// 2. align update signatue
-// 3. align current value signature

@@ -43,7 +43,6 @@ class Preferences extends Component {
   };
   //
   // onDrop(files: Array<Object>) {
-  //   // $FlowIssue
   //   this.setState({
   //     file: files[0],
   //     showDropzone: false,

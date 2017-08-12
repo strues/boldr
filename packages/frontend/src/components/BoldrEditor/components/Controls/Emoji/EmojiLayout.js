@@ -3,16 +3,15 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import Icon from '@boldr/ui/Icons/Icon';
+import shortid from 'shortid';
 import { stopPropagation } from '../../../utils/common';
 import Option from '../../Option';
 
 export type Props = {
   onChange: Function,
-  editorState: Object,
-  modalHandler?: Object,
   expanded?: boolean,
   onExpandEvent?: Function,
-  config?: Object,
+  config: Object,
 };
 
 class EmojiLayout extends Component {
@@ -23,14 +22,18 @@ class EmojiLayout extends Component {
   };
 
   renderEmojiModal(): Object {
-    const { config: { popupClassName, emojis } } = this.props;
     return (
       <div
-        className={classNames('boldredit-emoji-modal', popupClassName)}
+        className={classNames('boldredit-emoji-modal', this.props.config.popupClassName)}
         onClick={stopPropagation}
       >
-        {emojis.map((emoji, index) =>
-          <span key={index} className="boldredit-emoji-icon" alt="" onClick={this.onChange}>
+        {this.props.config.emojis.map(emoji =>
+          <span
+            key={shortid.generate()}
+            className="boldredit-emoji-icon"
+            alt=""
+            onClick={this.onChange}
+          >
             {emoji}
           </span>,
         )}
@@ -39,17 +42,17 @@ class EmojiLayout extends Component {
   }
 
   render(): Object {
-    const { config: { icon, className, title }, expanded, onExpandEvent } = this.props;
+    const { expanded, onExpandEvent } = this.props;
     return (
       <div
         className="boldredit-emoji-wrapper"
         aria-haspopup="true"
         aria-label="boldredit-emoji-control"
         aria-expanded={expanded}
-        title={title}
+        title={this.props.config.title}
       >
         <Option
-          className={classNames(className)}
+          className={classNames(this.props.config.className)}
           value="unordered-list-item"
           onClick={onExpandEvent}
         >

@@ -9,7 +9,9 @@ import ARTICLES_QUERY from '../gql/articles.graphql';
 import ArticleListing from './ArticleListing';
 
 export default compose(
+  // $FlowIssue
   graphql(ARTICLES_QUERY, {
+    // $FlowIssue
     options: () => ({
       variables: {
         offset: 0,

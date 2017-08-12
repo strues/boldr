@@ -1,6 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
 import Icon from '@boldr/ui/Icons/Icon';
+// $FlowIssue
 import type { ContentBlock, ContentState } from 'draft-js';
 import { ENTITY_TYPE } from '../../../utils/constants';
 
@@ -73,7 +74,7 @@ function getLinkComponent(config) {
   };
 }
 
-export default config => {
+export default (config: Object) => {
   return {
     strategy: findLinkEntities,
     component: getLinkComponent(config),

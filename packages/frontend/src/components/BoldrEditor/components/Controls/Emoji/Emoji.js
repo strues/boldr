@@ -1,6 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
+// $FlowIssue
 import { Modifier, EditorState } from 'draft-js';
 
 import EmojiLayout from './EmojiLayout';
@@ -8,8 +9,8 @@ import EmojiLayout from './EmojiLayout';
 export type Props = {
   onChange: Function,
   editorState: Object,
-  modalHandler?: Object,
-  config?: Object,
+  modalHandler: Object,
+  config: Object,
 };
 
 export default class Emoji extends Component {
@@ -18,13 +19,11 @@ export default class Emoji extends Component {
   };
 
   componentWillMount(): void {
-    const { modalHandler } = this.props;
-    modalHandler.registerCallBack(this.expandCollapse);
+    this.props.modalHandler.registerCallBack(this.expandCollapse);
   }
 
   componentWillUnmount(): void {
-    const { modalHandler } = this.props;
-    modalHandler.deregisterCallBack(this.expandCollapse);
+    this.props.modalHandler.deregisterCallBack(this.expandCollapse);
   }
   props: Props;
   expandCollapse: Function = (): void => {
@@ -74,7 +73,6 @@ export default class Emoji extends Component {
         onExpandEvent={this.onExpandEvent}
         doExpand={this.doExpand}
         doCollapse={this.doCollapse}
-        onCollpase={this.closeModal}
       />
     );
   }

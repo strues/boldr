@@ -3,6 +3,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import Icon from '@boldr/ui/Icons/Icon';
+import shortid from 'shortid';
 import { stopPropagation } from '../../../utils/common';
 import Option from '../../Option';
 
@@ -10,7 +11,7 @@ type Props = {
   expanded: ?boolean,
   onExpandEvent: ?Function,
   onChange: ?Function,
-  config: ?Object,
+  config: Object,
   currentState: ?Object,
 };
 
@@ -19,7 +20,7 @@ class ColorPickerLayout extends Component {
     currentStyle: 'color',
   };
 
-  componentWillReceiveProps(props) {
+  componentWillReceiveProps(props: Props) {
     if (!this.props.expanded && props.expanded) {
       this.setState({
         currentStyle: 'color',
@@ -73,10 +74,10 @@ class ColorPickerLayout extends Component {
           </span>
         </span>
         <span className="boldredit-colorpicker__modal-options">
-          {colors.map((color, index) =>
+          {colors.map(color =>
             <Option
               value={color}
-              key={index}
+              key={shortid.generate()}
               className="boldredit-colorpicker__option"
               activeClassName="boldredit-colorpicker__option--active"
               active={currentSelectedColor === color}
@@ -91,16 +92,16 @@ class ColorPickerLayout extends Component {
   };
 
   render(): Object {
-    const { config: { icon, className, title }, expanded, onExpandEvent } = this.props;
+    const { expanded, onExpandEvent } = this.props;
     return (
       <div
         className="boldredit-colorpicker__wrapper"
         aria-haspopup="true"
         aria-expanded={expanded}
         aria-label="rdw-color-picker"
-        title={title}
+        title={this.props.config.title}
       >
-        <Option onClick={onExpandEvent} className={classNames(className)}>
+        <Option onClick={onExpandEvent} className={classNames(this.props.config.className)}>
           <Icon kind="color" color="#222" />
         </Option>
         {expanded ? this.renderModal() : undefined}

@@ -1,6 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
+// $FlowIssue
 import { RichUtils, EditorState } from 'draft-js';
 import { changeDepth, getSelectedBlocksType } from '../../../utils';
 
@@ -9,7 +10,7 @@ import ListLayout from './ListLayout';
 export type Props = {
   onChange: Function,
   editorState: EditorState,
-  config?: Object,
+  config: Object,
 };
 export default class List extends Component {
   state: Object = {

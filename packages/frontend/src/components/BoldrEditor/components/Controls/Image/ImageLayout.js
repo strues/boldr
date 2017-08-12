@@ -2,17 +2,15 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-// $FlowIssue
 import Icon from '@boldr/ui/Icons/Icon';
 import Option from '../../Option';
 import Spinner from '../../Spinner';
 
 export type Props = {
   expanded?: boolean,
-  doExpand?: Function,
   doCollapse?: Function,
   onExpandEvent?: Function,
-  config?: Object,
+  config: Object,
   onChange?: Function,
 };
 
@@ -262,7 +260,7 @@ class ImageLayout extends Component {
   }
 
   render(): Object {
-    const { config: { icon, className, title }, expanded, onExpandEvent } = this.props;
+    const { config: { className, title }, expanded, onExpandEvent } = this.props;
     return (
       <div
         className="boldredit-image-wrapper"

@@ -8,8 +8,8 @@ import ImageLayout from './ImageLayout';
 export type Props = {
   onChange: Function,
   editorState: Object,
-  modalHandler?: Object,
-  config?: Object,
+  modalHandler: Object,
+  config: Object,
 };
 class Image extends Component {
   state: Object = {
@@ -17,15 +17,11 @@ class Image extends Component {
   };
 
   componentWillMount(): void {
-    const { modalHandler } = this.props;
-    // $FlowIssue
-    modalHandler.registerCallBack(this.expandCollapse);
+    this.props.modalHandler.registerCallBack(this.expandCollapse);
   }
 
   componentWillUnmount(): void {
-    const { modalHandler } = this.props;
-    // $FlowIssue
-    modalHandler.deregisterCallBack(this.expandCollapse);
+    this.props.modalHandler.deregisterCallBack(this.expandCollapse);
   }
   props: Props;
   expandCollapse: Function = (): void => {

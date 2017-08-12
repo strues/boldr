@@ -12,6 +12,7 @@ import {
 } from 'draft-js';
 
 import classNames from 'classnames';
+// $FlowIssue
 import type { ContentBlock } from 'draft-js';
 import { ModalHandler, FocusHandler, KeyDownHandler, SuggestionHandler } from '../../eventHandlers';
 import {
@@ -96,8 +97,9 @@ export default class BoldrEditor extends Component {
       editorFocused: false,
       toolbar,
     };
-
+    // $FlowIssue
     this.modalHandler = new ModalHandler();
+    // $FlowIssue
     this.focusHandler = new FocusHandler();
     this.blockRendererFn = getBlockRenderFunc(
       {
@@ -108,22 +110,24 @@ export default class BoldrEditor extends Component {
       },
       props.customBlockRenderFunc,
     );
+    // $FlowIssue
     this.editorProps = this.filterEditorProps(props);
+    // $FlowIssue
     this.customStyleMap = getCustomStyleMap();
   }
 
   state: State;
 
   componentWillMount(): void {
+    // $FlowIssue
     this.compositeDecorator = this.getCompositeDecorator();
     const editorState = this.createEditorState(this.compositeDecorator);
     extractInlineStyle(editorState);
-    this.setState({
-      editorState,
-    });
+    this.setState({ editorState });
   }
 
   componentDidMount(): void {
+    // $FlowIssue
     this.modalHandler.init(this.props.wrapperId);
   }
 
@@ -137,9 +141,11 @@ export default class BoldrEditor extends Component {
     if (hasProperty(props, 'editorState') && this.props.editorState !== props.editorState) {
       if (props.editorState) {
         newState.editorState = EditorState.set(props.editorState, {
+          // $FlowIssue
           decorator: this.compositeDecorator,
         });
       } else {
+        // $FlowIssue
         newState.editorState = EditorState.createEmpty(this.compositeDecorator);
       }
     } else if (
@@ -152,6 +158,7 @@ export default class BoldrEditor extends Component {
           newState.editorState = newEditorState;
         }
       } else {
+        // $FlowIssue
         newState.editorState = EditorState.createEmpty(this.compositeDecorator);
       }
     }
@@ -162,8 +169,11 @@ export default class BoldrEditor extends Component {
     ) {
       extractInlineStyle(newState.editorState);
     }
+
     this.setState(newState);
+    // $FlowIssue
     this.editorProps = this.filterEditorProps(props);
+    // $FlowIssue
     this.customStyleMap = getCustomStyleMap();
   }
 
@@ -401,6 +411,7 @@ export default class BoldrEditor extends Component {
     } = this.props;
 
     const controlProps = {
+      // $FlowIssue
       modalHandler: this.modalHandler,
       editorState,
       onChange: this.onChange,
@@ -411,11 +422,12 @@ export default class BoldrEditor extends Component {
         id={this.props.wrapperId}
         className={classNames('boldredit-wrapper', wrapperClassName)}
         style={wrapperStyle}
-        onClick={this.modalHandler.handleEditorClick}
+        onClick={(this: any).modalHandler.handleEditorClick}
         onBlur={this.handleWrapperBlur}
         aria-label="boldredit-wrapper"
       >
         {!toolbarHidden &&
+          // $FlowIssue
           (editorFocused || this.focusHandler.isInputFocused() || !toolbarOnFocus) &&
           <div
             className={classNames('boldredit-toolbar', toolbarClassName)}
@@ -463,7 +475,7 @@ export default class BoldrEditor extends Component {
             handleKeyCommand={this.handleKeyCommand}
             ariaLabel={ariaLabel || 'boldrui-editor'}
             placeholder={this.props.placeholder}
-            {...this.editorProps}
+            {...(this: any).editorProps}
           />
         </div>
       </div>

@@ -16,7 +16,7 @@ export function forEach(obj: Object, callback: Function) {
     }
   }
 }
-export const getFirstIcon = config => config[config.options[0]].icon;
+export const getFirstIcon = (config: Object) => config[config.options[0]].icon;
 export function hasProperty(obj: Object, property: string) {
   let result = false;
   if (obj) {

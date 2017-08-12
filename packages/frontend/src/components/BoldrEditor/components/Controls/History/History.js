@@ -1,6 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
+// $FlowIssue
 import { EditorState } from 'draft-js';
 
 import HistoryLayout from './HistoryLayout';
@@ -8,8 +9,8 @@ import HistoryLayout from './HistoryLayout';
 export type Props = {
   onChange: Function,
   editorState: Object,
-  modalHandler?: Object,
-  config?: Object,
+  modalHandler: Object,
+  config: Object,
 };
 
 export default class History extends Component {
@@ -40,8 +41,7 @@ export default class History extends Component {
   }
 
   componentWillUnmount(): void {
-    const { modalHandler } = this.props;
-    modalHandler.deregisterCallBack(this.expandCollapse);
+    this.props.modalHandler.deregisterCallBack(this.expandCollapse);
   }
   props: Props;
   expandCollapse: Function = (): void => {
@@ -78,7 +78,7 @@ export default class History extends Component {
   render(): Object {
     const { config } = this.props;
     const { undoDisabled, redoDisabled, expanded } = this.state;
-    const HistoryComponent = config.component || HistoryLayout;
+    const HistoryComponent = HistoryLayout;
     return (
       <HistoryComponent
         config={config}

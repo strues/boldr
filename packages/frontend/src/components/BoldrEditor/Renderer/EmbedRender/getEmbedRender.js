@@ -2,8 +2,8 @@
 import React from 'react';
 
 export type Props = {
-  block?: Object,
-  contentState?: Object,
+  block: Object,
+  contentState: Object,
 };
 
 const getEmbedRender = ({ block, contentState }: Props) => {

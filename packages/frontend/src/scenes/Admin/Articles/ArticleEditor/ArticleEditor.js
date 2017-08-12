@@ -1,19 +1,23 @@
 /* @flow */
+/* eslint-disable no-unused-vars */
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
-import { connect } from 'react-redux';
 import { convertToHTML } from 'draft-convert';
-import Loader from '@boldr/ui/Loader';
-
+import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import EDIT_ARTICLE_MUTATION from '../gql/editArticle.mutation.graphql';
 import EditArticleForm from './components/EditArticleForm';
 
-type Props = {
-  getArticleBySlug: Article,
-  editArticle: Function,
-};
+interface Data {
+  getArticleBySlug: Array<Article>,
+  loading: boolean,
+}
 
+type Props = {
+  editArticle: Function,
+  currentArticle: Article,
+};
+// eslint-disable-next-line
 const mapStateToProps = state => {
   return {
     currentArticle: state.admin.dashboard.article,
@@ -31,7 +35,6 @@ class ArticleEditor extends PureComponent {
   };
 
   render() {
-    const { getArticleBySlug, loading } = this.props.data;
     const { currentArticle } = this.props;
 
     const setPostValues = {
@@ -54,7 +57,7 @@ class ArticleEditor extends PureComponent {
     );
   }
 }
-
+// $FlowIssue
 export default graphql(EDIT_ARTICLE_MUTATION, {
   props: ({ mutate }) => ({
     editArticle: (articleId, values) =>

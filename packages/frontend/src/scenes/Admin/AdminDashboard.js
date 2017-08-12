@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Switch from 'react-router-dom/Switch';
-// $FlowIssue
 import styled from 'styled-components';
 import Route from 'react-router-dom/Route';
 

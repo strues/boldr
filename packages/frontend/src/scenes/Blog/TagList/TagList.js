@@ -6,15 +6,15 @@ import { Grid, Col, Row } from '@boldr/ui/Layout';
 import Loader from '@boldr/ui/Loader';
 import ArticleCard from '../components/ArticleCard';
 
-type Props = {
-  data: Data,
-  match: Object,
-};
-
 interface Data {
   getArticlesForTag: Array<Article>,
   loading: boolean,
 }
+
+type Props = {
+  data: Data,
+  match: Object,
+};
 
 const TagList = (props: Props) => {
   const { data: { loading, getArticlesForTag }, match: { params } } = props;

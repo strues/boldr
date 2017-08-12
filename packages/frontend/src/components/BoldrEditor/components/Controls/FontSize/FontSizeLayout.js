@@ -6,7 +6,7 @@ import shortid from 'shortid';
 import { Dropdown, DropdownOption } from '../../Dropdown';
 
 export type Props = {
-  expanded: ?boolean,
+  expanded: boolean,
   onExpandEvent: ?Function,
   doExpand: ?Function,
   doCollapse: ?Function,

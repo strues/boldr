@@ -11,7 +11,7 @@ export type Props = {
   onExpandEvent: ?Function,
   doCollapse: ?Function,
   onChange: ?Function,
-  config: ?Object,
+  config: Object,
 };
 
 class EmbeddedLayout extends Component {
@@ -21,7 +21,7 @@ class EmbeddedLayout extends Component {
     width: this.props.config.defaultSize.width,
   };
 
-  componentWillReceiveProps(props) {
+  componentWillReceiveProps(props: Props) {
     if (this.props.expanded && !props.expanded) {
       const { height, width } = this.props.config.defaultSize;
       this.setState({
@@ -38,7 +38,7 @@ class EmbeddedLayout extends Component {
     });
   };
 
-  onChange: Function = (event: Object): void => {
+  onChange: Function = (): void => {
     const { onChange } = this.props;
     const { embeddedLink, height, width } = this.state;
     onChange(embeddedLink, height, width);
@@ -46,10 +46,10 @@ class EmbeddedLayout extends Component {
 
   rendeEmbeddedLinkModal(): Object {
     const { embeddedLink, height, width } = this.state;
-    const { config: { popupClassName }, doCollapse } = this.props;
+    const { doCollapse } = this.props;
     return (
       <div
-        className={classNames('boldredit-embedded-modal', popupClassName)}
+        className={classNames('boldredit-embedded-modal', this.props.config.popupClassName)}
         onClick={stopPropagation}
       >
         <div className="boldredit-embedded-modal-header">
@@ -103,7 +103,7 @@ class EmbeddedLayout extends Component {
   }
 
   render(): Object {
-    const { config: { icon, className, title }, expanded, onExpandEvent } = this.props;
+    const { expanded, onExpandEvent } = this.props;
     return (
       <div
         className="boldredit-embedded-wrapper"
@@ -112,10 +112,10 @@ class EmbeddedLayout extends Component {
         aria-label="boldredit-embedded-control"
       >
         <Option
-          className={classNames(className)}
+          className={classNames(this.props.config.className)}
           value="unordered-list-item"
           onClick={onExpandEvent}
-          title={title}
+          title={this.props.config.title}
         >
           <Link2 color="#222" />
         </Option>

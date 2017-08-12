@@ -11,8 +11,6 @@ import AddTag from './components/AddTag';
 
 type Props = {
   tags: Array<Tag>,
-  currentTag: Object,
-  dispatch: Function,
 };
 
 type State = {

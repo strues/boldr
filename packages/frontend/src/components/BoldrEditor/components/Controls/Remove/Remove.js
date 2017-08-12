@@ -1,6 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
+// $FlowIssue
 import { EditorState, Modifier } from 'draft-js';
 import { getSelectionCustomInlineStyle, forEach } from '../../../utils';
 
@@ -9,8 +10,8 @@ import RemoveLayout from './RemoveLayout';
 export type Props = {
   onChange: Function,
   editorState: Object,
-  modalHandler?: Object,
-  config?: Object,
+  modalHandler: Object,
+  config: Object,
 };
 
 export default class Remove extends Component {
@@ -19,13 +20,11 @@ export default class Remove extends Component {
   };
 
   componentWillMount(): void {
-    const { modalHandler } = this.props;
-    modalHandler.registerCallBack(this.expandCollapse);
+    this.props.modalHandler.registerCallBack(this.expandCollapse);
   }
 
   componentWillUnmount(): void {
-    const { modalHandler } = this.props;
-    modalHandler.deregisterCallBack(this.expandCollapse);
+    this.props.modalHandler.deregisterCallBack(this.expandCollapse);
   }
   props: Props;
   removeAllInlineStyles: Function = (editorState: EditorState): void => {
