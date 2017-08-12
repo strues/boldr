@@ -38,6 +38,7 @@ const Container = styled.section`
   display: flex;
   flex-direction: row;
 `;
+
 class Articles extends Component {
   props: Props;
 

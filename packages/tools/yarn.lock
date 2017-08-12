@@ -1057,7 +1057,7 @@ babel-plugin-universal-import@^1.1.15, babel-plugin-universal-import@^1.2.5:
 
 babel-polyfill@^6.23.0:
   version "6.23.0"
-  resolved "https://npm.strues.io/babel-polyfill/-/babel-polyfill-6.23.0.tgz#8364ca62df8eafb830499f699177466c3b03499d"
+  resolved "https://registry.npmjs.org/babel-polyfill/-/babel-polyfill-6.23.0.tgz#8364ca62df8eafb830499f699177466c3b03499d"
   dependencies:
     babel-runtime "^6.22.0"
     core-js "^2.4.0"
@@ -4149,9 +4149,13 @@ nodent-compiler@>=3.1.0:
     acorn-es7-plugin ">=1.1.6"
     source-map "^0.5.6"
 
-nodent-runtime@>=3.0.4, nodent-runtime@^3.0.4:
+nodent-runtime@>=3.0.4:
   version "3.0.4"
   resolved "https://npm.strues.io/nodent-runtime/-/nodent-runtime-3.0.4.tgz#a801ecb7bb0f6c39a69b24cc2fa370cfa8b492da"
+
+nodent-runtime@^3.0.4:
+  version "3.0.4"
+  resolved "https://registry.npmjs.org/nodent-runtime/-/nodent-runtime-3.0.4.tgz#a801ecb7bb0f6c39a69b24cc2fa370cfa8b492da"
 
 nodent@>=2.6.12:
   version "3.1.0"

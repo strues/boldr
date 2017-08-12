@@ -20,46 +20,22 @@ import HappyPackPlugin from './plugins/happyPackPlugin';
 import ProgressPlugin from './plugins/ProgressPlugin';
 import WebpackDigestHash from './plugins/ChunkHash';
 
+import {
+  REQUIRED_ENV_VARS,
+  CACHE_HASH_TYPE,
+  CACHE_DIGEST_TYPE,
+  CACHE_DIGEST_LENGTH,
+  JS_FILES,
+  STYLE_FILES,
+  ASSET_FILES,
+  UGLIFY_OPTIONS,
+} from './constants';
+
 dotenv.config();
 
 function resolveOwn(relativePath) {
   return path.resolve(__dirname, '..', relativePath);
 }
-const CACHE_HASH_TYPE = 'sha256';
-const CACHE_DIGEST_TYPE = 'base62';
-const CACHE_DIGEST_LENGTH = 4;
-
-const JS_FILES = /\.(js|mjs|jsx)$/;
-const STYLE_FILES = /\.(css|scss|pcss)$/;
-const ASSET_FILES = /\.(eot|woff|woff2|ttf|otf|svg|png|jpg|jpeg|jp2|jpx|jxr|gif|webp|mp4|mp3|ogg|pdf|html|ico)$/;
-const UGLIFY_OPTIONS = {
-  compress: {
-    unsafe_math: true,
-    unsafe_proto: true,
-    // good for chrome performance
-    keep_infinity: true,
-    // try hard to use less code
-    passes: 2,
-  },
-  output: {
-    // fix for problematic code like emoticons
-    ascii_only: true,
-    // more readable output
-    semicolons: false,
-    comments: false,
-  },
-};
-
-const REQUIRED_ENV_VARS = [
-  'SERVER_OUTPUT',
-  'CLIENT_OUTPUT',
-  'PUBLIC_PATH',
-  'API_PREFIX',
-  'API_URL',
-  'GRAPHQL_ENDPOINT',
-  'HTML_TEMPLATE',
-  'DEV_PORT',
-];
 
 const envParameters = Object.keys(process.env);
 const missingParameters = REQUIRED_ENV_VARS.filter(key => !envParameters.includes(key));
@@ -82,6 +58,7 @@ const ROOT = appRoot.get();
 const SERVER_ENTRY = path.resolve(ROOT, 'src/serverEntry.js');
 const CLIENT_ENTRY = path.resolve(ROOT, 'src/clientEntry.js');
 const CLIENT_VENDOR = path.resolve(ROOT, 'src/vendor.js');
+const PROJECT_SRC = path.resolve(ROOT, 'src');
 // $FlowIssue
 const SERVER_OUTPUT = path.resolve(ROOT, process.env.SERVER_OUTPUT);
 // $FlowIssue
@@ -125,8 +102,11 @@ export default function createWebpackConfig(
     {
       useBuiltins: true,
       modules: false,
-      faSpecMode: true,
-      nodentRt: false,
+      faSpecMode: false,
+      looseMode: true,
+      specMode: false,
+      nodentRt: true,
+      polyfill: true,
       exclude: ['transform-regenerator', 'transform-async-to-generator'],
       targets: {
         uglify: !_IS_DEV_,
@@ -139,11 +119,14 @@ export default function createWebpackConfig(
     {
       useBuiltins: true,
       modules: false,
-      faSpecMode: true,
-      nodentRt: false,
+      faSpecMode: false,
+      looseMode: true,
+      specMode: false,
+      nodentRt: true,
+      polyfill: true,
       exclude: ['transform-regenerator', 'transform-async-to-generator'],
       targets: {
-        node: 'current',
+        node: '8',
       },
     },
   ];
@@ -207,6 +190,8 @@ export default function createWebpackConfig(
   const getClientEntry = () => {
     // For development
     let entry = [
+      'babel-polyfill',
+      'nodent-runtime',
       require.resolve('react-hot-loader/patch'),
       `${require.resolve(
         'webpack-hot-middleware/client',
@@ -226,6 +211,7 @@ export default function createWebpackConfig(
     const entry = [require.resolve('node-fetch'), SERVER_ENTRY];
     return entry;
   };
+  console.log('ho  🍺');
   // $FlowIssue
   return {
     name,
@@ -280,10 +266,23 @@ export default function createWebpackConfig(
     module: {
       strictExportPresence: true,
       rules: [
+        { parser: { requireEnsure: false } },
         // References to images, fonts, movies, music, etc.
         {
           test: ASSET_FILES,
           loader: require.resolve('file-loader'),
+          exclude: [
+            /\.html$/,
+            /\.(js|jsx)$/,
+            /\.(ts|tsx)$/,
+            /\.(re)$/,
+            /\.(s?css|sass)$/,
+            /\.json$/,
+            /\.bmp$/,
+            /\.gif$/,
+            /\.jpe?g$/,
+            /\.png$/,
+          ],
           options: {
             name: _IS_PROD_ ? 'file-[hash:base62:8].[ext]' : '[name].[ext]',
             emitFile: _IS_CLIENT_,
@@ -297,11 +296,13 @@ export default function createWebpackConfig(
         // GraphQL
         {
           test: /\.(graphql|gql)$/,
+          include: PROJECT_SRC,
           loader: require.resolve('graphql-tag/loader'),
         },
         // JS
         {
           test: JS_FILES,
+          include: PROJECT_SRC,
           exclude: /node_modules/,
           use: [
             cacheLoader,
@@ -313,6 +314,7 @@ export default function createWebpackConfig(
         // Sass
         {
           test: STYLE_FILES,
+          include: PROJECT_SRC,
           use: _IS_CLIENT_
             ? ExtractCssChunks.extract({
                 use: [
