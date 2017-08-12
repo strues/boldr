@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow weak */
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -11,8 +11,8 @@ export type Props = {
   doExpand: ?Function,
   doCollapse: ?Function,
   onChange: ?Function,
-  config: ?Object,
-  currentState: ?Object,
+  config: Object,
+  currentState: Object,
 };
 
 class FontFamilyLayout extends Component {
@@ -25,11 +25,14 @@ class FontFamilyLayout extends Component {
     if (editorElm && editorElm.length > 0) {
       const styles = window.getComputedStyle(editorElm[0]);
       const defaultFontFamily = styles.getPropertyValue('font-family');
-      this.setState({
-        defaultFontFamily,
-      });
+      this.setDefaultFam(defaultFontFamily);
     }
   }
+  setDefaultFam = defaultFont => {
+    this.setState({
+      defaultFontFamily: defaultFont,
+    });
+  };
   props: Props;
   render() {
     const { defaultFontFamily } = this.state;
@@ -49,21 +52,19 @@ class FontFamilyLayout extends Component {
         options.some(opt => opt.toLowerCase() === defaultFontFamily.toLowerCase()) &&
         defaultFontFamily);
     return (
-      <div className="boldrui-editor__fontfamily-wrapper" aria-label="rdw-font-family-control">
+      <div className="boldredit-fontfam__wrapper" aria-label="boldredit-fontfamily-control">
         <Dropdown
-          className={classNames('boldrui-editor__fontfamily-dropdown', className)}
-          optionWrapperClassName={classNames(
-            'boldrui-editor__fontfamily-optionwrapper',
-            dropdownClassName,
-          )}
+          className={classNames('boldredit-fontfam__dropdown', className)}
+          optionWrapperClassName={classNames('boldredit-fontfam__optionwrapper', dropdownClassName)}
           onChange={onChange}
           expanded={expanded}
           doExpand={doExpand}
+          ariaLabel="boldredit-dropdown-control"
           doCollapse={doCollapse}
           onExpandEvent={onExpandEvent}
           title={title}
         >
-          <span className="boldrui-editor__fontfamily-placeholder">
+          <span className="boldredit-fontfam__placeholder">
             {currentFontFamily || 'Font Family'}
           </span>
           {options.map(family =>

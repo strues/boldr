@@ -2,18 +2,16 @@
 import http from 'http';
 import _debug from 'debug';
 import app from './app';
-import { db, initializeDb, disconnect } from './services/db';
+import { initializeDb, disconnect } from './services/db';
 import logger from './services/logger';
 import { destroyRedis } from './services/redis';
 import { SERVER_PORT } from './utils/port';
 
 const debug = _debug('boldr:server');
-const host = process.env.BOLDR_HOST || '0.0.0.0';
 // Launch Node.js server
 const server = http.createServer(app);
 
-Promise = require('bluebird');
-global.Promise = Promise;
+global.Promise = require('bluebird');
 
 initializeDb()
   .then(() => {

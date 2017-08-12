@@ -33,8 +33,8 @@ export default class ListLayout extends Component {
     const { unordered, ordered, className } = config;
     return (
       <div
-        className={classNames('boldrui-editor__list-wrapper', className)}
-        aria-label="boldrui-editor__list-control"
+        className={classNames('boldredit-list__wrapper', className)}
+        aria-label="boldredit-list__control"
       >
         <Option
           value="unordered"

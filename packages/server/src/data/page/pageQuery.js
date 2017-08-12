@@ -1,19 +1,18 @@
-import { GraphQLList, GraphQLString, GraphQLNonNull, GraphQLOGraphQLID } from 'graphql';
-import jsonResult from 'boldr-utils/lib/gql/jsonResult';
-import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON } from '../scalars';
+import { GraphQLList, GraphQLString } from 'graphql';
 import Page from '../../models/Page';
+import { errorObj } from '../../errors';
 import PageType from './pageType';
 
 export default {
   pages: {
     type: new GraphQLList(PageType),
     description: 'A query for a listing of all pages',
-    async resolve(_, args, context) {
+    async resolve() {
       const pages = await Page.query();
       if (pages) {
         return pages;
       }
-      console.log('error');
+      throw errorObj({ _error: 'Unable to find any pages.' });
     },
   },
   singlePage: {
@@ -22,12 +21,12 @@ export default {
     args: {
       slug: { type: GraphQLString },
     },
-    async resolve(_, { slug }, context) {
+    async resolve(_, { slug }) {
       const page = await Page.query().where({ slug }).first();
       if (page) {
         return page;
       }
-      console.log('error');
+      throw errorObj({ _error: 'Unable to find a page by that slug.' });
     },
   },
 };

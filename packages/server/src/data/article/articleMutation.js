@@ -1,9 +1,7 @@
-import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt, GraphQLString } from 'graphql';
+import { GraphQLNonNull, GraphQLID } from 'graphql';
 import _debug from 'debug';
-import { GraphQLUUID } from '../scalars';
 import slugIt from '../../utils/slugIt';
 import Tag from '../../models/Tag';
-import User from '../../models/User';
 import Article from '../../models/Article';
 import Media from '../../models/Media';
 import ArticleTag from '../../models/join/ArticleTag';
@@ -74,7 +72,7 @@ export default {
         description: 'The required fields for creating an article.',
       },
     },
-    async resolve(_, args, context) {
+    async resolve(_, args) {
       debug(args);
       const updatedArticle = await Article.query().patchAndFetchById(args.id, {
         title: args.input.title,
@@ -100,7 +98,7 @@ export default {
         description: 'The article ID',
       },
     },
-    async resolve(_, args, context) {
+    async resolve(_, args) {
       const removedArticle = await Article.query().deleteById(args.id);
       return removedArticle;
     },

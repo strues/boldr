@@ -23,7 +23,7 @@ export {
   getSelectionInlineStyle,
   getSelectionCustomInlineStyle,
 } from './inline';
-export { hasProperty, filter, mergeRecursive, forEach } from './common';
+export { hasProperty, filter, mergeRecursive, forEach, stopPropagation } from './common';
 export { default as blockStyleFn } from './blockStyleFn';
 export { default as handleNewLine } from './keyEvent';
 

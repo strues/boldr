@@ -1,6 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
+// $FlowIssue
 import { AtomicBlockUtils } from 'draft-js';
 import ImageLayout from './ImageLayout';
 
@@ -17,11 +18,13 @@ class Image extends Component {
 
   componentWillMount(): void {
     const { modalHandler } = this.props;
+    // $FlowIssue
     modalHandler.registerCallBack(this.expandCollapse);
   }
 
   componentWillUnmount(): void {
     const { modalHandler } = this.props;
+    // $FlowIssue
     modalHandler.deregisterCallBack(this.expandCollapse);
   }
   props: Props;
@@ -66,7 +69,7 @@ class Image extends Component {
   render(): Object {
     const { config } = this.props;
     const { expanded } = this.state;
-    const ImageComponent = config.component || ImageLayout;
+    const ImageComponent = ImageLayout;
     return (
       <ImageComponent
         config={config}

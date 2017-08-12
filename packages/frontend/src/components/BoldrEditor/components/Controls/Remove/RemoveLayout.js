@@ -12,7 +12,7 @@ export type Props = {
 const RemoveLayout = ({ config, onChange }: Props) => {
   const { icon, className, title } = config;
   return (
-    <div className="boldrui-editor__remove-wrapper" aria-label="boldrui-editor__remove-control">
+    <div className="boldredit-remove__wrapper" aria-label="boldredit-remove__control">
       <Option className={classNames(className)} onClick={onChange} title={title}>
         <Icon kind="eraser" color="#222" />
       </Option>

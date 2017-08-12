@@ -10,8 +10,6 @@ import {
 
 import { GraphQLCustomScalarType } from './types';
 
-import { Factory } from './factory';
-
 export {
   GraphQLCustomScalarType,
   GraphQLEmail,

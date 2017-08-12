@@ -16,7 +16,7 @@ const installPackage = at => {
 };
 
 const packages = fs.readdirSync('packages').reduce((pkgs, pkg) => {
-  let packagePath = path.join(process.cwd(), 'packages', pkg);
+  const packagePath = path.join(process.cwd(), 'packages', pkg);
   const packageJSON = path.join(packagePath, 'package.json');
   try {
     if (fs.statSync(packagePath).isDirectory() && fs.statSync(packageJSON).isFile()) {

@@ -1,6 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
+// $FlowIssue
 import { RichUtils, EditorState, Modifier } from 'draft-js';
 import { getSelectionInlineStyle, forEach } from '../../../utils';
 import InlineLayout from './InlineLayout';

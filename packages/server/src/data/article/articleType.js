@@ -5,10 +5,9 @@ import {
   GraphQLNonNull,
   GraphQLList,
   GraphQLID,
-  GraphQLInt,
   GraphQLInputObjectType,
 } from 'graphql';
-import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON } from '../scalars';
+import { GraphQLURL, GraphQLDateTime, GraphQLJSON } from '../scalars';
 import { UserType } from '../user';
 import Article from '../../models/Article';
 import MediaType from '../media/mediaType';
@@ -73,6 +72,7 @@ const ArticleType = new GraphQLObjectType({
     tags: {
       type: new GraphQLList(TagType),
       description: 'Tags relating articles together',
+      // eslint-disable-next-line
       resolve(_, args, ctx) {
         return Article.query().findById(_.id).then(result => result.$relatedQuery('tags'));
       },

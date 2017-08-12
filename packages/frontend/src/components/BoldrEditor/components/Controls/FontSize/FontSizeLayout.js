@@ -1,4 +1,4 @@
-/* @flow */
+/* @flow weak */
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
@@ -11,8 +11,8 @@ export type Props = {
   doExpand: ?Function,
   doCollapse: ?Function,
   onChange: ?Function,
-  config: ?Object,
-  currentState: ?Object,
+  config: Object,
+  currentState: Object,
 };
 
 export default class FontSizeLayout extends Component {
@@ -52,9 +52,9 @@ export default class FontSizeLayout extends Component {
     currentFontSize =
       currentFontSize || (options && options.indexOf(defaultFontSize) >= 0 && defaultFontSize);
     return (
-      <div className="boldrui-editor__fontsize-wrapper" aria-label="rdw-font-size-control">
+      <div className="boldredit-fontsize__wrapper" aria-label="boldredit-fontsize-control">
         <Dropdown
-          className={classNames('boldrui-editor__fontsize-dropdown', className)}
+          className={classNames('boldredit-fontsize__dropdown', className)}
           optionWrapperClassName={classNames(dropdownClassName)}
           onChange={onChange}
           expanded={expanded}
@@ -70,7 +70,7 @@ export default class FontSizeLayout extends Component {
             : <img src={icon} alt="" />}
           {options.map(size =>
             <DropdownOption
-              className="boldrui-editor__fontsize-option"
+              className="boldredit-fontsize__option"
               active={currentFontSize === size}
               value={size}
               key={shortid.generate()}

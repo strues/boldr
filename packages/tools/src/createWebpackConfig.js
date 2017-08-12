@@ -1,5 +1,5 @@
 /* eslint-disable camelcase, eqeqeq, prefer-destructuring, max-lines, max-statements */
-// @flow
+// @flow weak
 import path from 'path';
 import fs from 'fs-extra';
 import webpack from 'webpack';
@@ -82,12 +82,15 @@ const ROOT = appRoot.get();
 const SERVER_ENTRY = path.resolve(ROOT, 'src/serverEntry.js');
 const CLIENT_ENTRY = path.resolve(ROOT, 'src/clientEntry.js');
 const CLIENT_VENDOR = path.resolve(ROOT, 'src/vendor.js');
+// $FlowIssue
 const SERVER_OUTPUT = path.resolve(ROOT, process.env.SERVER_OUTPUT);
+// $FlowIssue
 const CLIENT_OUTPUT = path.resolve(ROOT, process.env.CLIENT_OUTPUT);
 const PUBLIC_PATH = process.env.PUBLIC_PATH;
 const GRAPHQL_ENDPOINT = process.env.GRAPHQL_ENDPOINT;
 const API_URL = process.env.API_URL;
 const API_PREFIX = process.env.API_PREFIX;
+// $FlowIssue
 const HTML_TEMPLATE = path.resolve(ROOT, process.env.HTML_TEMPLATE);
 
 const nodeModules = path.resolve(ROOT, 'node_modules');
@@ -154,10 +157,12 @@ export default function createWebpackConfig(
   const PREFIX = config.target.toUpperCase();
   const CACHE_LOADER_DIRECTORY = path.resolve(
     ROOT,
+    // $FlowIssue
     `node_modules/.cache/loader-${CACHE_HASH}-${config.target}-${config.env}`,
   );
   const UFLIFY_CACHE_DIRECTORY = path.resolve(
     ROOT,
+    // $FlowIssue
     `node_modules/.cache/uglify-${CACHE_HASH}-${config.target}-${config.env}`,
   );
 
@@ -167,6 +172,7 @@ export default function createWebpackConfig(
   const devtool = _IS_DEV_ ? 'cheap-module-source-map' : 'source-map';
 
   logger.info(`${PREFIX} Configuration:`);
+  // $FlowIssue
   logger.info(`→ Environment: ${config.env}`);
   logger.info(`→ Build Target: ${target}`);
   logger.info(`→ Babel Environment: ${BABEL_ENV}`);
@@ -220,7 +226,7 @@ export default function createWebpackConfig(
     const entry = [require.resolve('node-fetch'), SERVER_ENTRY];
     return entry;
   };
-
+  // $FlowIssue
   return {
     name,
     target,

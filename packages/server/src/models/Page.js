@@ -1,4 +1,4 @@
-import BaseModel, { mergeSchemas } from './BaseModel';
+import BaseModel from './BaseModel';
 
 class Page extends BaseModel {
   static tableName = 'page';

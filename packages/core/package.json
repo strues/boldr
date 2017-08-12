@@ -1,6 +1,6 @@
 {
   "name": "@boldr/core",
-  "version": "0.1.0-alpha.6",
+  "version": "0.1.0-alpha.7",
   "description": "universal react content management framework",
   "homepage": "https://github.com/strues/boldr",
   "bugs": {
@@ -29,7 +29,7 @@
   "scripts": {
     "clean": "rimraf lib && rimraf es",
     "format": "prettier --single-quote=true --jsx-bracket-same-line=false --trailing-comma=all --print-width=100 --write \"src/**/*.js\"",
-    "prepare": "rimraf lib && NODE_ENV=production prepublish",
+    "prepare": "rimraf lib && NODE_ENV=production prepublish --target-unstable",
     "test": "jest"
   },
   "dependencies": {

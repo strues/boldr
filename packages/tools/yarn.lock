@@ -2,6 +2,15 @@
 # yarn lockfile v1
 
 
+"@boldr/utils@^0.1.0-rc.1":
+  version "0.1.0-rc.1"
+  resolved "https://registry.npmjs.org/@boldr/utils/-/utils-0.1.0-rc.1.tgz#5f60ec1c903209631e69696a5b5ab37f84fbd07b"
+  dependencies:
+    chalk "^2.0.1"
+    lodash.invokemap "^4.6.0"
+    lodash.reduce "^4.6.0"
+    ramda "^0.24.1"
+
 abbrev@1:
   version "1.1.0"
   resolved "https://npm.strues.io/abbrev/-/abbrev-1.1.0.tgz#d0554c2256636e2f56e7c2e5ad183f859428d81f"
@@ -1564,7 +1573,7 @@ chalk@1.1.3, chalk@^1.0.0, chalk@^1.1.0, chalk@^1.1.1, chalk@^1.1.3:
 
 chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0:
   version "2.1.0"
-  resolved "https://npm.strues.io/chalk/-/chalk-2.1.0.tgz#ac5becf14fa21b99c6c92ca7a7d7cfd5b17e743e"
+  resolved "https://registry.npmjs.org/chalk/-/chalk-2.1.0.tgz#ac5becf14fa21b99c6c92ca7a7d7cfd5b17e743e"
   dependencies:
     ansi-styles "^3.1.0"
     escape-string-regexp "^1.0.5"
@@ -3720,6 +3729,10 @@ lodash.cond@^4.3.0:
   version "4.5.2"
   resolved "https://npm.strues.io/lodash.cond/-/lodash.cond-4.5.2.tgz#f471a1da486be60f6ab955d17115523dd1d255d5"
 
+lodash.invokemap@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.npmjs.org/lodash.invokemap/-/lodash.invokemap-4.6.0.tgz#1748cda5d8b0ef8369c4eb3ec54c21feba1f2d62"
+
 lodash.isplainobject@^4.0.6:
   version "4.0.6"
   resolved "https://npm.strues.io/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
@@ -3735,6 +3748,10 @@ lodash.merge@^4.6.0:
 lodash.mergewith@^4.6.0:
   version "4.6.0"
   resolved "https://npm.strues.io/lodash.mergewith/-/lodash.mergewith-4.6.0.tgz#150cf0a16791f5903b8891eab154609274bdea55"
+
+lodash.reduce@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.npmjs.org/lodash.reduce/-/lodash.reduce-4.6.0.tgz#f1ab6b839299ad48f784abbf476596f03b914d3b"
 
 lodash.some@^4.6.0:
   version "4.6.0"
@@ -4969,6 +4986,10 @@ querystringify@0.0.x:
 querystringify@~1.0.0:
   version "1.0.0"
   resolved "https://npm.strues.io/querystringify/-/querystringify-1.0.0.tgz#6286242112c5b712fa654e526652bf6a13ff05cb"
+
+ramda@^0.24.1:
+  version "0.24.1"
+  resolved "https://registry.npmjs.org/ramda/-/ramda-0.24.1.tgz#c3b7755197f35b8dc3502228262c4c91ddb6b857"
 
 randomatic@^1.1.3:
   version "1.1.7"

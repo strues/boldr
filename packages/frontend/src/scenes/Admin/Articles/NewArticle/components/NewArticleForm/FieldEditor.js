@@ -34,8 +34,8 @@ export default class FieldEditor extends Component {
         editorStyle={editorStyle}
         onEditorStateChange={this.onChange}
         editorState={editorState}
-        toolbarClassName="boldrui-editor__toolbar"
-        wrapperClassName="boldrui-editor__wrapper"
+        toolbarClassName="boldredit-toolbar"
+        wrapperClassName="boldredit-wrapper"
         editorClassName="boldrui-editor"
         toolbar={{
           history: { inDropdown: true },

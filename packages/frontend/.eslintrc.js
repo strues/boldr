@@ -1,9 +1,9 @@
 module.exports = {
   parser: 'babel-eslint',
   parserOptions: {
-   sourceType: "module",
-   codeFrame: true
- },
+    sourceType: 'module',
+    codeFrame: true,
+  },
   extends: ['boldr', 'boldr/react', 'boldr/flowtype', 'boldr/import'],
   globals: {
     window: true,
@@ -24,6 +24,8 @@ module.exports = {
     'react/default-props-match-prop-types': 0,
     'prefer-destructuring': 0,
     'no-undefined': 0,
-    "react/boolean-prop-naming": 0
+    'react/no-typos': 0,
+    'valid-jsdoc': 0,
+    'react/boolean-prop-naming': 0,
   },
 };

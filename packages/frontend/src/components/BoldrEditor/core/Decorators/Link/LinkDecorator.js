@@ -12,7 +12,7 @@ export type Props = {
 
 function findLinkEntities(
   contentBlock: ContentBlock,
-  callback: EntityRangeCallback,
+  callback: Function,
   contentState: ?ContentState,
 ) {
   contentBlock.findEntityRanges(character => {
@@ -28,11 +28,10 @@ function findLinkEntities(
 function getLinkComponent(config) {
   const { showOpenOptionOnHover } = config;
   return class Link extends Component {
-    props: Props;
     state: Object = {
       showPopOver: false,
     };
-
+    props: Props;
     openLink: Function = () => {
       const { entityKey, contentState } = this.props;
       const { url } = contentState.getEntity(entityKey).getData();
@@ -53,7 +52,7 @@ function getLinkComponent(config) {
       const { showPopOver } = this.state;
       return (
         <span
-          className="boldrui-editor__link-decorator-wrapper"
+          className="boldredit-link__dec--wrapper"
           onMouseEnter={this.toggleShowPopOver}
           onMouseLeave={this.toggleShowPopOver}
         >
@@ -65,7 +64,7 @@ function getLinkComponent(config) {
                 kind="external-link"
                 onClick={this.openLink}
                 color="#222"
-                className="boldrui-editor__link-decorator-icon"
+                className="boldredit-link__dec--icon"
               />
             : undefined}
         </span>

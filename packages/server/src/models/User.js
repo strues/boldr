@@ -1,19 +1,10 @@
-/* eslint-disable id-match */ /* eslint-disable no-unused-vars */
+/* eslint-disable id-match, no-prototype-builtins */
 import Promise from 'bluebird';
 import Bcrypt from 'bcryptjs';
-import _debug from 'debug';
 // Related Models
 import BaseModel, { mergeSchemas } from './BaseModel';
-import Role from './Role';
-import File from './File';
-import ResetToken from './ResetToken';
-import VerificationToken from './VerificationToken';
-// import Article from './Article';
-import Media from './Media';
-import Social from './Social';
 
 const bcrypt = Promise.promisifyAll(Bcrypt);
-const debug = _debug('boldr:server:models:user');
 
 /**
  * User model representing an account and identity of a person.
@@ -110,7 +101,7 @@ class User extends BaseModel {
     return {
       roles: {
         relation: BaseModel.ManyToManyRelation,
-        modelClass: Role,
+        modelClass: `${__dirname}/Role`,
         join: {
           from: 'user.id',
           through: {
@@ -138,7 +129,7 @@ class User extends BaseModel {
       },
       uploads: {
         relation: BaseModel.HasManyRelation,
-        modelClass: Media,
+        modelClass: `${__dirname}/Media`,
         join: {
           from: 'user.id',
           to: 'media.userId',
@@ -146,7 +137,7 @@ class User extends BaseModel {
       },
       verificationToken: {
         relation: BaseModel.HasOneRelation,
-        modelClass: VerificationToken,
+        modelClass: `${__dirname}/VerificationToken`,
         join: {
           from: 'user.id',
           to: 'verification_token.userId',
@@ -154,7 +145,7 @@ class User extends BaseModel {
       },
       resetToken: {
         relation: BaseModel.HasOneRelation,
-        modelClass: ResetToken,
+        modelClass: `${__dirname}/ResetToken`,
         join: {
           from: 'user.id',
           to: 'reset_token.userId',
@@ -162,7 +153,7 @@ class User extends BaseModel {
       },
       socialMedia: {
         relation: BaseModel.HasOneRelation,
-        modelClass: Social,
+        modelClass: `${__dirname}/Social`,
         join: {
           from: 'user.id',
           to: 'user_social_media.userId',

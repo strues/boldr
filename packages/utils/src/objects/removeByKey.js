@@ -1,5 +1,3 @@
-const reduce = require('lodash.reduce');
-
 module.exports = function removeByKey(myObj, deleteKey) {
   return (
     Object.keys(myObj)

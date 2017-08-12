@@ -1,6 +1,4 @@
 import BaseModel, { mergeSchemas } from './BaseModel';
-// Related Model
-import Article from './Article';
 
 class Tag extends BaseModel {
   static tableName = 'tag';
@@ -34,7 +32,7 @@ class Tag extends BaseModel {
     return {
       articles: {
         relation: BaseModel.ManyToManyRelation,
-        modelClass: Article,
+        modelClass: `${__dirname}/Article`,
         join: {
           from: 'tag.id',
           through: {

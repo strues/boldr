@@ -1,9 +1,8 @@
 import DataLoader from 'dataloader';
-import logger from './services/logger';
 import { db } from './services/db';
 
 // Appends type information to an object, e.g. { id: 1 } => { __type: 'User', id: 1 };
-function assignType(obj, typ) {
+function assignType(obj) {
   obj.__type = type;
   return obj;
 }
@@ -14,15 +13,6 @@ function mapTo(keys, keyFn, type, rows) {
   }
   const group = new Map(keys.map(key => [key, null]));
   rows.forEach(row => group.set(keyFn(row), assignType(row, type)));
-  return Array.from(group.values());
-}
-
-function mapToMany(keys, keyFn, type, rows) {
-  if (!rows) {
-    return mapToMany.bind(null, keys, keyFn, type);
-  }
-  const group = new Map(keys.map(key => [key, []]));
-  rows.forEach(row => group.get(keyFn(row)).push(assignType(row, type)));
   return Array.from(group.values());
 }
 
@@ -59,20 +49,5 @@ export default {
         .select('*')
         .then(mapTo(keys, x => x.id, 'MenuDetail')),
     ),
-    // commentsByStory: new DataLoader(keys =>
-    //   db
-    //     .table('comments')
-    //     .whereIn('story_id', keys)
-    //     .select('*')
-    //     .then(mapToMany(keys, x => x.story_id, 'Comment')),
-    // ),
-    //
-    // commentsByParent: new DataLoader(keys =>
-    //   db
-    //     .table('comments')
-    //     .whereIn('parent_id', keys)
-    //     .select('*')
-    //     .then(mapToMany(keys, x => x.story_id, 'Comment')),
-    // ),
   }),
 };

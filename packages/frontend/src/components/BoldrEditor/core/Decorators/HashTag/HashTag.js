@@ -20,7 +20,7 @@ class Hashtag {
         const { children } = this.props;
         const { text } = children[0].props;
         return (
-          <a href={text} className={classNames('boldrui-editor__hashtag-link', className)}>
+          <a href={text} className={classNames('boldredit-hashtag-link', className)}>
             {children}
           </a>
         );

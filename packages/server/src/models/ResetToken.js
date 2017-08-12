@@ -1,4 +1,4 @@
-import BaseModel, { mergeSchemas } from './BaseModel';
+import BaseModel from './BaseModel';
 import User from './User';
 
 class ResetToken extends BaseModel {

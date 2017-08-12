@@ -14,7 +14,7 @@ export default {
         type: new GraphQLNonNull(SettingInput),
       },
     },
-    async resolve(_, { id, input }, context) {
+    async resolve(_, { id, input }) {
       const payload = await Setting.query().findById(id).patchAndFetch(input);
       return payload;
     },

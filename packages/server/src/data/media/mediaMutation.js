@@ -1,5 +1,5 @@
 import path from 'path';
-import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt, GraphQLString } from 'graphql';
+import { GraphQLNonNull, GraphQLID } from 'graphql';
 import _debug from 'debug';
 import fs from 'fs-extra';
 import Jimp from 'jimp';
@@ -32,12 +32,13 @@ export default {
         if (err) {
           return debug('error', err);
         }
-        image
+        return image
           .resize(320, 240)
           .write(path.join(UPLOAD_DIR, 'media', thumbnailSaveName), (err, info) => {
             if (err) {
               logger.error(err);
             }
+            debug(info);
           });
       });
       const newMedia = await Media.query().insert({
@@ -65,7 +66,7 @@ export default {
         description: 'The required fields for editing a media file.',
       },
     },
-    async resolve(_, args, context) {
+    async resolve(_, args) {
       debug(args);
       const updatedMedia = await Media.query().patchAndFetchById(args.id, {
         name: args.input.name,
@@ -83,7 +84,7 @@ export default {
         description: 'The media ID',
       },
     },
-    async resolve(_, args, context) {
+    async resolve(_, args) {
       const removedMedia = await Media.query().deleteById(args.id);
       return removedMedia;
     },

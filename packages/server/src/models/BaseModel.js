@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 import { Model } from 'objection';
 
 export function mergeSchemas(...schemas) {

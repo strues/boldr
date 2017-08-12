@@ -1,16 +1,8 @@
 import { GraphQLList, GraphQLNonNull, GraphQLID } from 'graphql';
-import jsonResult from 'boldr-utils/lib/gql/jsonResult';
-import {
-  GraphQLEmail,
-  GraphQLURL,
-  GraphQLLimitedString,
-  GraphQLPassword,
-  GraphQLDateTime,
-  GraphQLUUID,
-} from '../scalars';
+
 import { db } from '../../services/db';
 import Menu from '../../models/Menu';
-import MenuDetail from '../../models/MenuDetail';
+import { errorObj } from '../../errors';
 import MenuType from './menuType';
 import MenuDetailType from './menuDetailType';
 
@@ -19,23 +11,23 @@ export default {
     type: MenuType,
     description: 'A query for a specific menu',
     args: {
-      id: { type: GraphQLID },
+      id: { type: new GraphQLNonNull(GraphQLID) },
     },
-    async resolve(_, { id }, context) {
+    async resolve(_, { id }) {
       const menu = await Menu.query().findById(id);
       if (menu) {
         return menu;
       }
-      console.log('error');
+      throw errorObj({ _error: 'Unable to locate menu' });
     },
   },
   details: {
     type: new GraphQLList(MenuDetailType),
     description: 'A query returning all links',
-    async resolve(_, args, context) {
+    async resolve() {
       const details = await db.table('menu_detail').select('*');
       if (!details) {
-        return console.log('err');
+        throw errorObj({ _error: 'Unable to find any links' });
       }
       return details;
     },

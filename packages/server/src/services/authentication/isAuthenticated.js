@@ -1,5 +1,4 @@
-// import { Unauthorized } from '../../core/errors/clientError';
-
+/* eslint-disable consistent-return */
 /**
  * Attaches the user object to the request if authenticated
  * Otherwise returns 403

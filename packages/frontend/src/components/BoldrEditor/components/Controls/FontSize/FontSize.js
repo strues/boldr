@@ -93,7 +93,7 @@ export default class FontSize extends Component {
   render(): Object {
     const { config } = this.props;
     const { expanded, currentFontSize } = this.state;
-    const FontSizeComponent = config.component || FontSizeLayout;
+    const FontSizeComponent = FontSizeLayout;
     const fontSize = currentFontSize && Number(currentFontSize.substring(9));
     return (
       <FontSizeComponent

@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Switch from 'react-router-dom/Switch';
+// $FlowIssue
 import styled from 'styled-components';
 import Route from 'react-router-dom/Route';
 
@@ -27,6 +28,8 @@ export type Props = {
   dispatch: Function,
 };
 
+export type FlattenedRoutes = Array<Object>;
+
 const TbArea = styled.div`
   width: 100%;
   height: 70px;
@@ -43,6 +46,7 @@ export class AdminDashboard extends Component {
     this.props.dispatch(hideHeader());
   }
   props: Props;
+  flattenedRoutes: FlattenedRoutes;
   handleHideSidebar = () => {
     this.props.dispatch(showHideSidebar());
   };

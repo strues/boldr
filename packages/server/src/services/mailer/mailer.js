@@ -1,7 +1,7 @@
 import { createTransport } from 'nodemailer';
 import config from '../../config';
 
-const debug = require('debug')('boldr:mailer');
+const debug = require('debug')('boldr:server:mailer');
 
 const TRANSPORT_OPTS = {
   host: config.mail.host,
@@ -36,6 +36,10 @@ export default (async function mailer(user, mailBody, mailSubject) {
   try {
     const info = await transporter.sendMail(mailOptions);
     debug(`Message sent: ${info.response}`);
+    if (!info) {
+      throw new Error('Incorrect mailing parameters');
+    }
+    return info;
   } catch (error) {
     return debug(error);
   }

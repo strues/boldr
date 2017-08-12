@@ -1,3 +1,4 @@
+/* eslint-disable func-names */
 const curry = binaryFn => {
   return function(firstArg) {
     return function(secondArg) {

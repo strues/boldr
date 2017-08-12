@@ -26,9 +26,9 @@ export default class Option extends Component {
     const { children, className, activeClassName, active, disabled, title } = this.props;
     return (
       <div
-        className={classNames('boldrui-editor__option-wrapper', className, {
-          [`boldrui-editor__option-active ${activeClassName}`]: active,
-          'boldrui-editor__option-disabled': disabled,
+        className={classNames('boldredit-option__wrapper', className, {
+          [`boldredit-option--active ${activeClassName}`]: active,
+          'boldredit-option--disabled': disabled,
         })}
         onClick={this.onClick}
         aria-selected={active}

@@ -1,6 +1,6 @@
 {
   "name": "@boldr/tools",
-  "version": "0.1.0-alpha.8",
+  "version": "0.1.0-alpha.9",
   "description": "Webpack build tools and basic CLI for dev and building universal react applications",
   "bin": {
     "btools": "bin/btools"

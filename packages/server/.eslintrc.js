@@ -3,6 +3,7 @@ module.exports = {
   // plugins: ['graphql'],
   rules: {
     'jsx-a11y/href-no-hash': 0,
+    'valid-jsdoc': 0
     // 'graphql/template-strings': [
     //   'error',
     //   {

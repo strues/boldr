@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 export default function(slug, replacement) {
   return (
     slug

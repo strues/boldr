@@ -1,3 +1,4 @@
+/* eslint-disable new-cap, no-param-reassign, consistent-return */
 import mkdirp from 'mkdirp';
 import formidable from 'formidable';
 import objectPath from 'object-path';
@@ -51,6 +52,7 @@ export default function apolloUpload(options) {
     processRequest(request, options)
       .then(body => {
         request.body = body;
+        // eslint-disable-next-line
         return next();
       })
       .catch(err => console.log(err));

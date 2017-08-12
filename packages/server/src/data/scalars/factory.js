@@ -1,18 +1,18 @@
-import { GraphQLString, GraphQLScalarType } from 'graphql';
+/* eslint-disable func-names, func-style */
 import { GraphQLError } from 'graphql/error';
 import { Kind } from 'graphql/language';
 import { GraphQLCustomScalarType } from './types';
 
 export class Factory {
   getRegexScalar(options) {
-    const error = options.error || 'Query error: ' + options.name;
+    const error = options.error || `Query error: ${options.name}`;
 
     const parser = function(ast) {
       if (ast.kind !== Kind.STRING) {
-        throw new GraphQLError('Query error: Can only parse strings got a: ' + ast.kind, [ast]);
+        throw new GraphQLError(`Query error: Can only parse strings got a: ${ast.kind}`, [ast]);
       }
 
-      let re = options.regex;
+      const re = options.regex;
       if (!re.test(ast.value)) {
         throw new GraphQLError(error, [ast]);
       }

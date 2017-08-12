@@ -25,6 +25,7 @@ export default class FontFamily extends Component {
         currentFontFamily: getSelectionCustomInlineStyle(editorState, ['FONTFAMILY']).FONTFAMILY,
       });
     }
+    // $FlowIssue
     modalHandler.registerCallBack(this.expandCollapse);
   }
 
@@ -39,6 +40,7 @@ export default class FontFamily extends Component {
 
   componentWillUnmount(): void {
     const { modalHandler } = this.props;
+    // $FlowIssue
     modalHandler.deregisterCallBack(this.expandCollapse);
   }
   props: Props;
@@ -76,7 +78,7 @@ export default class FontFamily extends Component {
   render(): Object {
     const { config } = this.props;
     const { expanded, currentFontFamily } = this.state;
-    const FontFamilyComponent = config.component || FontFamilyLayout;
+    const FontFamilyComponent = FontFamilyLayout;
     const fontFamily = currentFontFamily && currentFontFamily.substring(11);
     return (
       <FontFamilyComponent

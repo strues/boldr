@@ -1,6 +1,7 @@
 /* @flow */
 
 import React, { Component } from 'react';
+// $FlowIssue
 import { RichUtils } from 'draft-js';
 import { getSelectedBlocksType } from '../../../utils';
 import BlockTypeLayout from './BlockTypeLayout';
@@ -25,6 +26,7 @@ class BlockType extends Component {
         currentBlockType: getSelectedBlocksType(editorState),
       });
     }
+    // $FlowIssue
     modalHandler.registerCallBack(this.expandCollapse);
   }
 
@@ -38,6 +40,7 @@ class BlockType extends Component {
 
   componentWillUnmount(): void {
     const { modalHandler } = this.props;
+    // $FlowIssue
     modalHandler.deregisterCallBack(this.expandCollapse);
   }
 
@@ -88,7 +91,7 @@ class BlockType extends Component {
 
   render(): Object {
     const { config } = this.props;
-    const { undoDisabled, redoDisabled, expanded, currentBlockType } = this.state;
+    const { expanded, currentBlockType } = this.state;
     const BlockTypeComponent = BlockTypeLayout;
     const blockType = this.blocksTypes.find(bt => bt.style === currentBlockType);
     return (

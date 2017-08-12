@@ -65,7 +65,7 @@ class BlockTypeLayout extends Component {
   renderFlat(blocks: Array<Object>): void {
     const { config: { className }, onChange, currentState: { blockType } } = this.props;
     return (
-      <div className={classNames('boldrui-editor__inline-wrapper', className)}>
+      <div className={classNames('boldredit-block__wrapper', className)}>
         {blocks.map(block =>
           <Option
             key={block.id}
@@ -93,9 +93,9 @@ class BlockTypeLayout extends Component {
     const currentBlockData = this.blocksTypes.filter(blk => blk.label === blockType);
     const currentLabel = currentBlockData && currentBlockData[0] && currentBlockData[0].displayName;
     return (
-      <div className="boldrui-editor__block-wrapper" aria-label="boldrui-editor__block-control">
+      <div className="boldredit-block__wrapper" aria-label="boldredit-block__control">
         <Dropdown
-          className={classNames('boldrui-editor__block-dropdown', className)}
+          className={classNames('boldredit-block__dropdown', className)}
           optionWrapperClassName={classNames(dropdownClassName)}
           onChange={onChange}
           expanded={expanded}

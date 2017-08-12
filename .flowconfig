@@ -1,5 +1,6 @@
 [ignore]
-
+.*/node_modules/eslint-plugin-jsx-a11y/.*
+.*/node_modules/babel-plugin-transform-react-remove-prop-types/.*
 <PROJECT_ROOT>/node_modules/fbjs.*
 <PROJECT_ROOT>/node_modules/flow-remove-types/.*
 <PROJECT_ROOT>/node_modules/flow-coverage-report/.*
@@ -8,14 +9,13 @@
 <PROJECT_ROOT>/node_modules/\.cache/.*
 <PROJECT_ROOT>/node_modules/enzyme-matchers/.*
 <PROJECT_ROOT>/node_modules/jest-enzyme/.*
-<PROJECT_ROOT>/node_modules/eslint-plugin-jsx-a11y/.*
-<PROJECT_ROOT>/packages/auth/node_modules/eslint-plugin-jsx-a11y/.*
-<PROJECT_ROOT>/packages/auth/node_modules/babel-plugin-transform-react-remove-prop-types/.*
-<PROJECT_ROOT>/packages/cli/node_modules/eslint-plugin-jsx-a11y/.*
 <PROJECT_ROOT>/packages/core/node_modules/apollo-client/.*
-<PROJECT_ROOT>/packages/core/node_modules/babel-plugin-transform-react-remove-prop-types/.*
-<PROJECT_ROOT>/packages/core/node_modules/eslint-plugin-jsx-a11y/.*
-<PROJECT_ROOT>/packages/frontend/node_modules/@boldr/ui/.*
+<PROJECT_ROOT>/packages/core/node_modules/react-apollo/.*
+
+<PROJECT_ROOT>/packages/frontend/node_modules/react-universal-component/.*
+<PROJECT_ROOT>/packages/frontend/node_modules/redux-form/.*
+
+
 .*/db/.*
 .*/docs/.*
 .*/build/.*
@@ -23,7 +23,7 @@
 .*/.idea/.*
 .*/.vscode/.*
 .*/coverage/.*
-.*/lib/.*
+
 .*\.test\.js
 
 [include]
@@ -32,6 +32,7 @@
 [libs]
 flow-typed/npm/
 <PROJECT_ROOT>/packages/frontend/flow-typed/npm/
+<PROJECT_ROOT>/packages/tools/flow-typed/npm/
 internal/flow/defs/
 
 [options]

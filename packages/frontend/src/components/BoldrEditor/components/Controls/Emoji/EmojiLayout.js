@@ -26,11 +26,11 @@ class EmojiLayout extends Component {
     const { config: { popupClassName, emojis } } = this.props;
     return (
       <div
-        className={classNames('boldrui-editor__emoji-modal', popupClassName)}
+        className={classNames('boldredit-emoji-modal', popupClassName)}
         onClick={stopPropagation}
       >
         {emojis.map((emoji, index) =>
-          <span key={index} className="boldrui-editor__emoji-icon" alt="" onClick={this.onChange}>
+          <span key={index} className="boldredit-emoji-icon" alt="" onClick={this.onChange}>
             {emoji}
           </span>,
         )}
@@ -42,9 +42,9 @@ class EmojiLayout extends Component {
     const { config: { icon, className, title }, expanded, onExpandEvent } = this.props;
     return (
       <div
-        className="boldrui-editor__emoji-wrapper"
+        className="boldredit-emoji-wrapper"
         aria-haspopup="true"
-        aria-label="boldrui-editor__emoji-control"
+        aria-label="boldredit-emoji-control"
         aria-expanded={expanded}
         title={title}
       >

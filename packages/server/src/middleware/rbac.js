@@ -2,12 +2,13 @@ import { Router } from 'express';
 import User from '../models/User';
 
 const debug = require('debug')('boldr:api:middleware:rbac');
+
 /**
  * This middleware checks to see if the given user/token combination
  * has the provided role.
  *
- * @param {string} role
- * @returns {function}
+ * @param {string} role the role to check
+ * @returns {function} middleware function
  */
 export function checkPermissions({ role = null }) {
   return (req, res, next) => {
@@ -23,8 +24,8 @@ export function checkPermissions({ role = null }) {
 /**
  * This checks to make sure that the user has a given role.
  *
- * @param {string} role
- * @returns {function}
+ * @param {string} role the role to check
+ * @returns {function} middleware function
  */
 export function checkRole(role = null) {
   return async (req, res, next) => {
@@ -41,9 +42,9 @@ export function checkRole(role = null) {
 /**
  * This checks to see if the user has the given role.
  *
- * @param {object} user
- * @param {string} role
- * @returns {boolean}
+ * @param {object} user the user object
+ * @param {string} role the role
+ * @returns {boolean}  whether or not the user has the role
  */
 function hasRole(user = null, role = null) {
   return user && role && user.hasRole(role);

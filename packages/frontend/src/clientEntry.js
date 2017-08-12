@@ -2,7 +2,6 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
-import { AppContainer } from 'react-hot-loader';
 import { getToken } from '@boldr/auth';
 import { createApolloClient, createBoldrStore, RouterConnection, wrapBoldrApp } from '@boldr/core';
 import { checkAuth } from './scenes/Account/state/actions';
@@ -29,37 +28,52 @@ if (token) {
   reduxStore.dispatch(checkAuth(token));
 }
 const AppComponent = PassedApp =>
-  <AppContainer>
-    <BrowserRouter>
-      <RouterConnection>
-        {PassedApp}
-      </RouterConnection>
-    </BrowserRouter>
-  </AppContainer>;
+  <BrowserRouter>
+    <RouterConnection>
+      {PassedApp}
+    </RouterConnection>
+  </BrowserRouter>;
 
-const renderApp = () => {
-  render(wrapBoldrApp(AppComponent(<App />), apolloClient, reduxStore), DOM_NODE);
-};
+if (process.env.NODE_ENV !== 'production') {
+  // eslint-disable-next-line import/no-extraneous-dependencies
+  const { AppContainer } = require('react-hot-loader');
 
-// Enable hot reload by react-hot-loader
-if (module.hot) {
-  const reRenderApp = () => {
-    try {
-      renderApp();
-    } catch (error) {
-      const RedBox = require('redbox-react').default;
+  let Application = App;
 
-      render(<RedBox error={error} />, DOM_NODE);
-    }
-  };
-
-  module.hot.accept('./components/App', () => {
-    setImmediate(() => {
-      // Preventing the hot reloading error from react-router
-      unmountComponentAtNode(DOM_NODE);
-      reRenderApp();
+  if (module && module.hot) {
+    module.hot.accept('./components/App', () => {
+      Application = require('./components/App').default;
+      setImmediate(() => {
+        // Preventing the hot reloading error from react-router
+        unmountComponentAtNode(DOM_NODE);
+        render(
+          wrapBoldrApp(
+            AppComponent(
+              <AppContainer>
+                <Application />
+              </AppContainer>,
+            ),
+            apolloClient,
+            reduxStore,
+          ),
+          DOM_NODE,
+        );
+      });
     });
-  });
+  } else {
+    render(
+      wrapBoldrApp(
+        AppComponent(
+          <AppContainer>
+            <App />
+          </AppContainer>,
+        ),
+        apolloClient,
+        reduxStore,
+      ),
+      DOM_NODE,
+    );
+  }
 }
 
-renderApp();
+render(wrapBoldrApp(AppComponent(<App />), apolloClient, reduxStore), DOM_NODE);

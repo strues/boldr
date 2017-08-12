@@ -31,11 +31,11 @@
     "prepare": "rimraf lib && NODE_ENV=production prepublish"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-preset-boldr": "^0.10.2",
-    "eslint": "^4.4.1",
+    "babel-cli": "6.24.1",
+    "babel-preset-boldr": "0.10.2",
+    "eslint": "4.4.1",
     "eslint-config-boldr": "0.12.6",
-    "prepublish": "^1.2.7",
-    "prettier": "^1.5.3"
+    "prepublish": "1.2.7",
+    "prettier": "1.5.3"
   }
 }

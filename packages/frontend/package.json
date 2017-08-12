@@ -26,10 +26,10 @@
   "dependencies": {
     "@boldr/auth": "^0.1.0-alpha.1",
     "@boldr/cli": "0.2.0-alpha.7",
-    "@boldr/core": "^0.1.0-alpha.5",
+    "@boldr/core": "^0.1.0-alpha.7",
     "@boldr/icons": "0.1.0-alpha.1",
     "@boldr/tools": "0.1.0-alpha.8",
-    "@boldr/ui": "^0.1.0-rc.5",
+    "@boldr/ui": "0.1.0-rc.6",
     "@boldr/utils": "^0.1.0-rc.1",
     "apollo-client": "^1.9.1",
     "draft-convert": "^1.4.8",

@@ -1,13 +1,4 @@
-import {
-  GraphQLBoolean,
-  GraphQLString,
-  GraphQLObjectType,
-  GraphQLNonNull,
-  GraphQLList,
-  GraphQLID,
-  GraphQLInt,
-  GraphQLInputObjectType,
-} from 'graphql';
+import { GraphQLString, GraphQLObjectType, GraphQLNonNull, GraphQLID, GraphQLInt } from 'graphql';
 
 const FileType = new GraphQLObjectType({
   name: 'File',

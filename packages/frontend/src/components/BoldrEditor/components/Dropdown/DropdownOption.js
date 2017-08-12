@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 
 export type Props = {
-  children: ?ReactChildren,
+  children: ReactChildren,
   value: ?any,
   onClick: ?Function,
   onSelect: ?Function,
@@ -58,13 +58,16 @@ export default class DropdownOption extends Component {
       highlightedClassName,
       title,
     } = this.props;
+
+    const classes: () => ClassNamesFn = classNames('boldredit-dropdown__option--default', {
+      [`boldredit-dropdown__option--active ${activeClassName}`]: active,
+      [`boldredit-dropdown__option--highlighted ${highlightedClassName}`]: highlighted,
+      [`boldredit-dropdown__option--disabled ${disabledClassName}`]: disabled,
+      className,
+    });
     return (
       <li
-        className={classNames('boldrui-editor__dropdown-option-default', className, {
-          [`boldrui-editor__dropdown-option-active ${activeClassName}`]: active,
-          [`boldrui-editor__dropdown-option-highlighted ${highlightedClassName}`]: highlighted,
-          [`boldrui-editor__dropdown-option-disabled ${disabledClassName}`]: disabled,
-        })}
+        className={classes}
         onMouseEnter={this.setHighlighted}
         onMouseLeave={this.resetHighlighted}
         onClick={this.onClick}

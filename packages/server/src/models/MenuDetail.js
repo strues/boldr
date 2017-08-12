@@ -1,6 +1,4 @@
 import BaseModel, { mergeSchemas } from './BaseModel';
-// Related Model
-import Menu from './Menu';
 
 class MenuDetail extends BaseModel {
   static tableName = 'menu_detail';
@@ -34,7 +32,7 @@ class MenuDetail extends BaseModel {
     return {
       menu: {
         relation: BaseModel.ManyToManyRelation,
-        modelClass: Menu,
+        modelClass: `${__dirname}/Menu`,
         join: {
           from: 'menu_detail.id',
           through: {

@@ -1,6 +1,4 @@
-import BaseModel, { mergeSchemas } from './BaseModel';
-import User from './User';
-import Article from './Article';
+import BaseModel from './BaseModel';
 
 class Media extends BaseModel {
   static tableName = 'media';
@@ -10,7 +8,7 @@ class Media extends BaseModel {
     return {
       uploader: {
         relation: BaseModel.BelongsToOneRelation,
-        modelClass: User,
+        modelClass: `${__dirname}/User`,
         join: {
           from: 'media.userId',
           to: 'user.id',
@@ -18,7 +16,7 @@ class Media extends BaseModel {
       },
       articles: {
         relation: BaseModel.ManyToManyRelation,
-        modelClass: Article,
+        modelClass: `${__dirname}/Article`,
         join: {
           from: 'media.id',
           through: {

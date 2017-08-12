@@ -94,26 +94,26 @@ class LinkLayout extends Component {
     const { linkTitle, linkTarget, linkTargetOption } = this.state;
     return (
       <div
-        className={classNames('boldrui-editor__link-modal', popupClassName)}
+        className={classNames('boldredit-link__modal', popupClassName)}
         onClick={stopPropagation}
       >
-        <span className="boldrui-editor__link-modal-label">Link Title</span>
+        <span className="boldredit-link__modal-label">Link Title</span>
         <input
-          className="boldrui-editor__link-modal-input"
+          className="boldredit-link__modal-input"
           onChange={this.updateValue}
           onBlur={this.updateValue}
           name="linkTitle"
           value={linkTitle}
         />
-        <span className="boldrui-editor__link-modal-label">Link Target</span>
+        <span className="boldredit-link__modal-label">Link Target</span>
         <input
-          className="boldrui-editor__link-modal-input"
+          className="boldredit-link__modal-input"
           onChange={this.updateValue}
           onBlur={this.updateValue}
           name="linkTarget"
           value={linkTarget}
         />
-        <span className="boldrui-editor__link-modal-target-option">
+        <span className="boldredit-link__modal-target-option">
           <input
             type="checkbox"
             defaultChecked={linkTargetOption === '_blank'}
@@ -122,15 +122,15 @@ class LinkLayout extends Component {
           />
           <span>Open link in new window</span>
         </span>
-        <span className="boldrui-editor__link-modal-buttonsection">
+        <span className="boldredit-link__modal-buttonsection">
           <button
-            className="boldrui-editor__link-modal-btn"
+            className="boldredit-link__modal-btn"
             onClick={this.addLink}
             disabled={!linkTarget || !linkTitle}
           >
             Add
           </button>
-          <button className="boldrui-editor__link-modal-btn" onClick={doCollapse}>
+          <button className="boldredit-link__modal-btn" onClick={doCollapse}>
             Cancel
           </button>
         </span>
@@ -143,8 +143,8 @@ class LinkLayout extends Component {
     const { showModal } = this.state;
     return (
       <div
-        className={classNames('boldrui-editor__link-wrapper', className)}
-        aria-label="boldrui-editor__link-control"
+        className={classNames('boldredit-link__wrapper', className)}
+        aria-label="boldredit-link__control"
       >
         {options.indexOf('link') >= 0 &&
           <Option
@@ -186,14 +186,14 @@ class LinkLayout extends Component {
     const { showModal } = this.state;
     return (
       <div
-        className="boldrui-editor__link-wrapper"
+        className="boldredit-link__wrapper"
         aria-haspopup="true"
-        aria-label="boldrui-editor__link-control"
+        aria-label="boldredit-link__control"
         aria-expanded={expanded}
         title={title}
       >
         <Dropdown
-          className={classNames('boldrui-editor__link-dropdown', className)}
+          className={classNames('boldredit-link__dropdown', className)}
           optionWrapperClassName={classNames(dropdownClassName)}
           onChange={onChange}
           expanded={expanded && !showModal}
@@ -205,7 +205,7 @@ class LinkLayout extends Component {
           {options.indexOf('link') >= 0 &&
             <DropdownOption
               onClick={this.forceExpandAndShowModal}
-              className={classNames('boldrui-editor__link-dropdownoption', link.className)}
+              className={classNames('boldredit-link__dropdownoption', link.className)}
               title={link.title}
             >
               <Icon kind="link" color="#222" />
@@ -214,7 +214,7 @@ class LinkLayout extends Component {
             <DropdownOption
               onClick={this.removeLink}
               disabled={!currentState.link}
-              className={classNames('boldrui-editor__link-dropdownoption', unlink.className)}
+              className={classNames('boldredit-link__dropdownoption', unlink.className)}
               title={unlink.title}
             >
               <Icon kind="unlink" color="#222" />

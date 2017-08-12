@@ -1,10 +1,12 @@
 /* @flow */
 import React from 'react';
 import Helmet from 'react-helmet';
+// $FlowIssue
 import { graphql } from 'react-apollo';
 import Route from 'react-router-dom/Route';
 import Redirect from 'react-router-dom/Redirect';
 import Switch from 'react-router-dom/Switch';
+// $FlowIssue
 import Loader from '@boldr/ui/Loader';
 import { getToken } from '@boldr/auth';
 // internal

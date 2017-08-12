@@ -1,4 +1,5 @@
 /* @flow */
+/* eslint-disable react/no-unused-prop-types */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -26,9 +27,11 @@ export class NotificationContainer extends Component {
   componentDidMount() {
     this.setClientHeight();
     setTimeout(() => {
+      // $FlowIssue
       this.props.hideNotification(this.props.uid);
     }, this.props.dismissAfter);
     setTimeout(() => {
+      // $FlowIssue
       this.props.removeNotification(this.props.uid);
     }, this.props.dismissAfter + this.props.animationDuration);
   }
@@ -44,6 +47,7 @@ export class NotificationContainer extends Component {
     return (
       <div
         ref={notification => {
+          // $FlowIssue
           this.notification = notification;
         }}
       >

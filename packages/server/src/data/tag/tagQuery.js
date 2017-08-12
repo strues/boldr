@@ -1,5 +1,6 @@
 import { GraphQLList, GraphQLNonNull, GraphQLInt } from 'graphql';
 import Tag from '../../models/Tag';
+import { errorObj } from '../../errors';
 import TagType from './tagType';
 
 export default {
@@ -19,7 +20,7 @@ export default {
     async resolve(_, { limit, offset }) {
       const tags = await Tag.query().offset(offset).limit(limit).skipUndefined();
       if (!tags) {
-        console.log('error');
+        throw errorObj({ _error: 'Unable to find any tags.' });
       }
       return tags;
     },

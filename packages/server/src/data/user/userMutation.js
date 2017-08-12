@@ -3,7 +3,7 @@ import uuid from 'uuid';
 import { mailer, signToken } from '../../services';
 import { welcomeEmail } from '../../services/mailer/templates';
 import User from '../../models/User';
-// import VerificationToken from '../../models/VerificationToken';
+
 import { UserLoginInput, UserLoginResponse, UserSignupInput } from './auth/userAuthTypes';
 
 import UserType, { EditUserInput } from './userType';

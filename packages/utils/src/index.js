@@ -1,6 +1,5 @@
 const mergeDeep = require('./objects/mergeDeep');
 const removeByKey = require('./objects/removeByKey');
-const getField = require('./objects/getField');
 const filterEmpty = require('./objects/filterEmpty');
 const ifElse = require('./logic/ifElse');
 const requiredParam = require('./logic/requiredParam');
@@ -34,7 +33,7 @@ module.exports = {
   removeByKey,
   sort,
   uniq,
-  getField,
+  validateId,
   filterEmpty,
   merge,
 };

@@ -1,7 +1,7 @@
 const reduce = (array, fn, initialValue) => {
   let accumlator;
 
-  if (initialValue != undefined) {
+  if (initialValue !== undefined) {
     accumlator = initialValue;
   } else {
     accumlator = array[0];

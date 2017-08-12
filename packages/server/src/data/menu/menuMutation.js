@@ -1,13 +1,5 @@
-import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt, GraphQLString } from 'graphql';
-import {
-  GraphQLEmail,
-  GraphQLURL,
-  GraphQLLimitedString,
-  GraphQLPassword,
-  GraphQLDateTime,
-  GraphQLUUID,
-  GraphQLJSON,
-} from '../scalars';
+import { GraphQLNonNull, GraphQLID } from 'graphql';
+
 import MenuDetail from '../../models/MenuDetail';
 import slugIt from '../../utils/slugIt';
 import MenuDetailType, { EditDetailInput } from './menuDetailType';
@@ -26,7 +18,7 @@ export default {
         description: 'The required fields for editing a detail.',
       },
     },
-    async resolve(_, args, context) {
+    async resolve(_, args) {
       debug(args);
       const updatedDetail = await MenuDetail.query().patchAndFetchById(args.id, {
         title: args.input.title,

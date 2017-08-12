@@ -1,5 +1,4 @@
 {
-  "root": true,
   "extends": ["boldr", "boldr/react", "boldr/import", "boldr/flowtype", "boldr/promise"],
   "globals" : {
     "__DEV__"      : false,
@@ -7,5 +6,9 @@
     "__DEBUG__"    : false,
     "__COVERAGE__" : false,
     "__BASENAME__" : false
-  }
+  },
+  "rules": {
+    "react/boolean-prop-naming": 0,
+        "valid-jsdoc": 0
+    }
 }

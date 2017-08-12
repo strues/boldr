@@ -1,5 +1,5 @@
 import BaseModel, { mergeSchemas } from './BaseModel';
-import User from './User';
+
 /**
  * Social used for user's social media profiles. Belongs to User
  * @class Social
@@ -68,7 +68,7 @@ class Social extends BaseModel {
     return {
       user: {
         relation: BaseModel.BelongsToOneRelation,
-        modelClass: User,
+        modelClass: `${__dirname}/User`,
         join: {
           from: 'user_social_media.userId',
           to: 'user.id',

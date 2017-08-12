@@ -1,11 +1,8 @@
 import { GraphQLList, GraphQLNonNull, GraphQLInt, GraphQLString, GraphQLID } from 'graphql';
-import _debug from 'debug';
-import { GraphQLUUID } from '../scalars';
 import User from '../../models/User';
 import { db } from '../../services/db';
+import { errorObj } from '../../errors';
 import UserType from './userType';
-
-const debug = _debug('boldr:server:userQuery');
 
 export default {
   getUsers: {
@@ -21,13 +18,12 @@ export default {
         description: 'The maximum number of users to return at a time.',
       },
     },
-    async resolve(_, { limit, offset }, context) {
-      debug(context);
+    async resolve() {
       const users = await db.table('user').select('*');
       if (users) {
         return users;
       }
-      console.log('error');
+      throw errorObj({ _error: 'Unable to find any users.' });
     },
   },
   getUserByUserId: {
@@ -40,12 +36,11 @@ export default {
       },
     },
     async resolve(_, { userId }, context) {
-      // const user = await User.query().findById(userId);
       const user = await context.users.load(userId);
       if (user) {
         return user;
       }
-      console.log('error');
+      throw errorObj({ _error: 'Unable to find a user with that id.' });
     },
   },
   getUserByUsername: {
@@ -57,19 +52,18 @@ export default {
         description: 'The username for the desired user',
       },
     },
-    async resolve(_, { username }, context) {
+    async resolve(_, { username }) {
       const user = await User.getUserByUsername(username);
       if (user) {
         return user;
       }
-      console.log('error');
+      throw errorObj({ _error: 'Unable to find a user with that username.' });
     },
   },
   getCurrentUser: {
     type: UserType,
     description: 'Given an auth token, return the user and auth token',
     async resolve(_, args, context) {
-      // const userId = requireAuth(authToken);
       const user = await User.query().findById(context.user.id);
       if (!user) {
         console.log('error');

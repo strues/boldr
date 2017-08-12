@@ -1,14 +1,4 @@
-import {
-  GraphQLBoolean,
-  GraphQLString,
-  GraphQLObjectType,
-  GraphQLNonNull,
-  GraphQLList,
-  GraphQLID,
-  GraphQLInt,
-  GraphQLInputObjectType,
-} from 'graphql';
-import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON } from '../scalars';
+import { GraphQLString, GraphQLObjectType, GraphQLList, GraphQLID } from 'graphql';
 
 const PermissionType = new GraphQLObjectType({
   name: 'Permission',

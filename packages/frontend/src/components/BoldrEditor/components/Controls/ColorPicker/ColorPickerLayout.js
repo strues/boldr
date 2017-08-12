@@ -51,41 +51,38 @@ class ColorPickerLayout extends Component {
     const currentSelectedColor = currentStyle === 'color' ? color : bgColor;
     return (
       <div
-        className={classNames('boldrui-editor__colorpicker-modal', popupClassName)}
+        className={classNames('boldredit-colorpicker__modal', popupClassName)}
         onClick={stopPropagation}
       >
-        <span className="boldrui-editor__colorpicker-modal-header">
+        <span className="boldredit-colorpicker__modal-header">
           <span
-            className={classNames('boldrui-editor__colorpicker-modal-style-label', {
-              'boldrui-editor__colorpicker-modal-style-label-active': currentStyle === 'color',
+            className={classNames('boldredit-colorpicker__modal-style-label', {
+              'boldredit-colorpicker__modal-style-label-active': currentStyle === 'color',
             })}
             onClick={this.setCurrentStyleColor}
           >
             Text
           </span>
           <span
-            className={classNames('boldrui-editor__colorpicker-modal-style-label', {
-              'boldrui-editor__colorpicker-modal-style-label-active': currentStyle === 'bgcolor',
+            className={classNames('boldredit-colorpicker__modal-style-label', {
+              'boldredit-colorpicker__modal-style-label-active': currentStyle === 'bgcolor',
             })}
             onClick={this.setCurrentStyleBgcolor}
           >
             Background
           </span>
         </span>
-        <span className="boldrui-editor__colorpicker-modal-options">
+        <span className="boldredit-colorpicker__modal-options">
           {colors.map((color, index) =>
             <Option
               value={color}
               key={index}
-              className="boldrui-editor__colorpicker-option"
-              activeClassName="boldrui-editor__colorpicker-option-active"
+              className="boldredit-colorpicker__option"
+              activeClassName="boldredit-colorpicker__option--active"
               active={currentSelectedColor === color}
               onClick={this.onChange}
             >
-              <span
-                style={{ backgroundColor: color }}
-                className="boldrui-editor__colorpicker-cube"
-              />
+              <span style={{ backgroundColor: color }} className="boldredit-colorpicker__cube" />
             </Option>,
           )}
         </span>
@@ -97,7 +94,7 @@ class ColorPickerLayout extends Component {
     const { config: { icon, className, title }, expanded, onExpandEvent } = this.props;
     return (
       <div
-        className="boldrui-editor__colorpicker-wrapper"
+        className="boldredit-colorpicker__wrapper"
         aria-haspopup="true"
         aria-expanded={expanded}
         aria-label="rdw-color-picker"

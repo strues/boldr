@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import { RichUtils, EditorState, Modifier } from 'draft-js';
-import { getSelectionText, getEntityRange, getSelectionEntity } from 'draftjs-utils';
+import { getSelectionText, getEntityRange, getSelectionEntity } from '../../../utils';
 
 import LinkLayout from './LinkLayout';
 

@@ -1,5 +1,6 @@
 import { GraphQLList, GraphQLInt, GraphQLString } from 'graphql';
 import Article from '../../models/Article';
+import { errorObj } from '../../errors';
 import ArticleType from './articleType';
 
 export default {
@@ -18,9 +19,12 @@ export default {
       },
     },
     // eslint-disable-next-line
-    resolve(_, { offset, limit }) {
-      // const articles = Article.getArticles(offset, limit).then(jsonResult);
-      return Article.getArticles(offset, limit);
+    async resolve(_, { offset, limit }, context) {
+      const articles = await Article.getArticles(offset, limit);
+      if (articles) {
+        return articles;
+      }
+      throw errorObj({ _error: 'Unable to locate any articles' });
     },
   },
   getArticlesForTag: {
@@ -32,8 +36,12 @@ export default {
       limit: { type: GraphQLInt },
     },
     // eslint-disable-next-line
-    resolve(_, { name, offset, limit }) {
-      return Article.getArticlesByTag(name, offset, limit);
+    async resolve(_, { name, offset, limit }, context) {
+      const article = await Article.getArticlesByTag(name, offset, limit);
+      if (article) {
+        return article;
+      }
+      throw errorObj({ _error: 'Unable to locate an articles matching the tag' });
     },
   },
 
@@ -44,10 +52,12 @@ export default {
       slug: { type: GraphQLString },
     },
     // eslint-disable-next-line
-    resolve(_, { slug }) {
-      // const article = await Article.getArticleBySlug(slug);
-
-      return Article.getArticleBySlug(slug);
+    async resolve(_, { slug }, context) {
+      const article = await Article.getArticleBySlug(slug);
+      if (article) {
+        return article;
+      }
+      throw errorObj({ _error: 'Unable to locate an articles matching the slug' });
     },
   },
 };

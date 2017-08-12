@@ -2,9 +2,8 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import { getAllBlocks } from 'draftjs-utils';
 import { convertFromHTML, AtomicBlockUtils, ContentState, EditorState } from 'draft-js';
-
+import { getAllBlocks } from '../../utils';
 import getImageRender from './getImageRender';
 
 describe('ImageRenderer', () => {

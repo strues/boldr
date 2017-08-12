@@ -25,8 +25,8 @@ export default class HistoryLayout extends Component {
     } = this.props;
     return (
       <div
-        className={classNames('boldrui-editor__history-wrapper', className)}
-        aria-label="boldrui-editor__history-control"
+        className={classNames('boldredit-history-wrapper', className)}
+        aria-label="boldredit-history-control"
       >
         <Option
           value="undo"

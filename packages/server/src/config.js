@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs';
-import appRoot from 'boldr-utils/lib/node/appRoot';
+import appRoot from '@boldr/utils/lib/node/appRoot';
 import convict from 'convict';
 
 /**
@@ -73,6 +73,11 @@ export const config = convict({
       format: Boolean,
       default: true,
       doc: 'Enable graphiql for development',
+    },
+    optics: {
+      format: Boolean,
+      default: true,
+      doc: 'Use OpticsAgent service',
     },
   },
   logging: {

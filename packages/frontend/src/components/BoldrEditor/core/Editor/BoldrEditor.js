@@ -83,7 +83,7 @@ export default class BoldrEditor extends Component {
     toolbarOnFocus: false,
     toolbarHidden: false,
     stripPastedStyles: false,
-    wrapperId: `boldrui-editor__wrapper${shortid.generate()}`,
+    wrapperId: `boldredit-wrapper${shortid.generate()}`,
     customDecorators: [],
   };
 
@@ -409,19 +409,19 @@ export default class BoldrEditor extends Component {
     return (
       <div
         id={this.props.wrapperId}
-        className={classNames('boldrui-editor-wrapper', wrapperClassName)}
+        className={classNames('boldredit-wrapper', wrapperClassName)}
         style={wrapperStyle}
         onClick={this.modalHandler.handleEditorClick}
         onBlur={this.handleWrapperBlur}
-        aria-label="boldrui-editor-wrapper"
+        aria-label="boldredit-wrapper"
       >
         {!toolbarHidden &&
           (editorFocused || this.focusHandler.isInputFocused() || !toolbarOnFocus) &&
           <div
-            className={classNames('boldrui-editor-toolbar', toolbarClassName)}
+            className={classNames('boldredit-toolbar', toolbarClassName)}
             style={toolbarStyle}
             onMouseDown={this.preventDefault}
-            aria-label="boldrui-editor-toolbar"
+            aria-label="boldredit-toolbar"
             aria-hidden={(!editorFocused && toolbarOnFocus).toString()}
             onFocus={this.handleToolbarFocus}
           >
@@ -440,7 +440,7 @@ export default class BoldrEditor extends Component {
           </div>}
         <div
           ref={this.setWrapperReference}
-          className={classNames('boldrui-editor-main', editorClassName)}
+          className={classNames('boldredit-editor', editorClassName)}
           style={editorStyle}
           onClick={this.focusEditor}
           onFocus={this.handleEditorFocus}

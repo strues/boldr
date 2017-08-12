@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 const logger = console;
 
 const print = (level, text) => {

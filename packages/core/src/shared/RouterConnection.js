@@ -32,6 +32,7 @@ export function routerReducer(state = initialState, action) {
 /**
  * [setPath description]
  * @param {[type]} path [description]
+ * @returns {Function}  the new path
  */
 export function setPath(path) {
   return {
@@ -43,6 +44,7 @@ export function setPath(path) {
 /**
  * [replacePath description]
  * @param {[type]} path [description]
+ * @returns {Function}  the new path
  */
 export function replacePath(path) {
   return {

@@ -2,7 +2,7 @@ import isString from 'lodash/isString';
 import isPlainObject from 'lodash/isPlainObject';
 import { SubmissionError } from 'redux-form';
 
-export const responseHasErrors = response => !!response.graphQLErrors;
+export const responseHasErrors = response => Boolean(response.graphQLErrors);
 
 const flattenErrorObject = (data, accum, key) => {
   if (isPlainObject(data)) {

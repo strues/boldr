@@ -1,15 +1,5 @@
-import {
-  GraphQLBoolean,
-  GraphQLString,
-  GraphQLObjectType,
-  GraphQLNonNull,
-  GraphQLList,
-  GraphQLID,
-  GraphQLInt,
-  GraphQLInputObjectType,
-} from 'graphql';
-import { GraphQLEmail, GraphQLURL, GraphQLDateTime, GraphQLUUID, GraphQLJSON } from '../scalars';
-import UserType from '../user/userType';
+import { GraphQLString, GraphQLObjectType, GraphQLNonNull, GraphQLID } from 'graphql';
+import { GraphQLJSON } from '../scalars';
 
 const PageType = new GraphQLObjectType({
   name: 'Page',

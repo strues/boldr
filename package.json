@@ -4,20 +4,17 @@
   "description": "Boldr CMF platform for Universal React Applications.",
   "private": true,
   "scripts": {
-    "bootstrap": "./node_modules/.bin/lerna bootstrap",
+    "bootstrap": "./node_modules/.bin/lerna bootstrap --npm-client=yarn --concurrency=1",
     "clean": "lerna clean --yes && node ./internal/scripts/clean.js",
     "cm": "git-cz",
     "coverage": "codecov",
+    "lint": "eslint . --fix",
     "postinstall": "yarn run clean && yarn run bootstrap",
     "precommit": "lint-staged --verbose",
     "prettier": "node ./internal/scripts/prettier.js write",
     "test": "NODE_ENV=test jest --config ./jest.config.js --projects ./ && node ./internal/scripts/mapCoverage.js"
   },
-  "keywords": [
-    "react",
-    "boldr",
-    "universal"
-  ],
+  "keywords": ["react", "boldr", "universal"],
   "author": {
     "name": "Steven Truesdell",
     "email": "steven@strues.io",
@@ -75,22 +72,10 @@
       "path": "./node_modules/cz-emoji"
     },
     "cz-emoji": {
-      "scopes": [
-        "auth",
-        "cli",
-        "core",
-        "frontend",
-        "server",
-        "tools",
-        "utils",
-        "ci"
-      ]
+      "scopes": ["auth", "cli", "core", "frontend", "server", "tools", "utils", "ci"]
     }
   },
   "lint-staged": {
-    "*.js": [
-      "npm run prettier",
-      "git add"
-    ]
+    "*.js": ["npm run prettier", "git add"]
   }
 }

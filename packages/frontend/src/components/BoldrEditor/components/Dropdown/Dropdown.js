@@ -3,19 +3,19 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 
-import { stopPropagation } from '../../utils/common';
+import { stopPropagation } from '../../utils';
 
 export type Props = {
-  children: ReactChildren,
+  children: Array<ReactChildren>,
   onChange: ?Function,
   className: ?string,
-  expanded: ?boolean,
+  expanded: boolean,
   doExpand: ?Function,
   doCollapse: ?Function,
   onExpandEvent: ?Function,
   optionWrapperClassName: ?string,
-  ariaLabel: ?string,
-  title: ?string,
+  ariaLabel: string,
+  title: string,
 };
 export default class Dropdown extends Component {
   state: Object = {
@@ -67,25 +67,22 @@ export default class Dropdown extends Component {
     const options = children.slice(1, children.length);
     return (
       <div
-        className={classNames('boldrui-editor__dropdown-wrapper', className)}
+        className={classNames('boldredit-dropdown__wrapper', className)}
         aria-expanded={expanded}
-        aria-label={ariaLabel || 'boldrui-editor__dropdown'}
+        aria-label={ariaLabel || 'boldredit-dropdown'}
       >
-        <a className="boldrui-editor__dropdown-selectedtext" onClick={onExpandEvent} title={title}>
+        <a className="boldredit-dropdown__selectedtext" onClick={onExpandEvent} title={title}>
           {children[0]}
           <div
             className={classNames({
-              'boldrui-editor__dropdown-carettoclose': expanded,
-              'boldrui-editor__dropdown-carettoopen': !expanded,
+              'boldredit-dropdown__carettoclose': expanded,
+              'boldredit-dropdown__carettoopen': !expanded,
             })}
           />
         </a>
         {expanded
           ? <ul
-              className={classNames(
-                'boldrui-editor__dropdown-optionwrapper',
-                optionWrapperClassName,
-              )}
+              className={classNames('boldredit-dropdown__optionwrapper', optionWrapperClassName)}
               onClick={stopPropagation}
             >
               {React.Children.map(options, (option, index) => {

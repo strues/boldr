@@ -1,5 +1,4 @@
-import BaseModel, { mergeSchemas } from './BaseModel';
-import User from './User';
+import BaseModel from './BaseModel';
 /**
  * VerificationToken used for account verification. Belongs to User
  * @class VerificationToken
@@ -22,7 +21,7 @@ class VerificationToken extends BaseModel {
     return {
       user: {
         relation: BaseModel.BelongsToOneRelation,
-        modelClass: User,
+        modelClass: `${__dirname}/User`,
         join: {
           from: 'verification_token.userId',
           to: 'user.id',

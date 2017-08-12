@@ -1,4 +1,4 @@
-import BaseModel, { mergeSchemas } from './BaseModel';
+import BaseModel from './BaseModel';
 // Related Models
 
 class File extends BaseModel {

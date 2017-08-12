@@ -49,31 +49,31 @@ class EmbeddedLayout extends Component {
     const { config: { popupClassName }, doCollapse } = this.props;
     return (
       <div
-        className={classNames('boldrui-editor__embedded-modal', popupClassName)}
+        className={classNames('boldredit-embedded-modal', popupClassName)}
         onClick={stopPropagation}
       >
-        <div className="boldrui-editor__embedded-modal-header">
-          <span className="boldrui-editor__embedded-modal-header-option">
+        <div className="boldredit-embedded-modal-header">
+          <span className="boldredit-embedded-modal-header-option">
             Embedded Link
-            <span className="boldrui-editor__embedded-modal-header-label" />
+            <span className="boldredit-embedded-modal-header-label" />
           </span>
         </div>
-        <div className="boldrui-editor__embedded-modal-link-section">
+        <div className="boldredit-embedded-modal-link-section">
           <input
-            className="boldrui-editor__embedded-modal-link-input"
+            className="boldredit-embedded-modal-link-input"
             placeholder="Enter link"
             onChange={this.updateValue}
             onBlur={this.updateValue}
             value={embeddedLink}
             name="embeddedLink"
           />
-          <div className="boldrui-editor__embedded-modal-size">
+          <div className="boldredit-embedded-modal-size">
             <input
               onChange={this.updateValue}
               onBlur={this.updateValue}
               value={height}
               name="height"
-              className="boldrui-editor__embedded-modal-size-input"
+              className="boldredit-embedded-modal-size-input"
               placeholder="Height"
             />
             <input
@@ -81,20 +81,20 @@ class EmbeddedLayout extends Component {
               onBlur={this.updateValue}
               value={width}
               name="width"
-              className="boldrui-editor__embedded-modal-size-input"
+              className="boldredit-embedded-modal-size-input"
               placeholder="Width"
             />
           </div>
         </div>
-        <span className="boldrui-editor__embedded-modal-btn-section">
+        <span className="boldredit-embedded-modal-btn-section">
           <button
-            className="boldrui-editor__embedded-modal-btn"
+            className="boldredit-embedded-modal-btn"
             onClick={this.onChange}
             disabled={!embeddedLink || !height || !width}
           >
             Add
           </button>
-          <button className="boldrui-editor__embedded-modal-btn" onClick={doCollapse}>
+          <button className="boldredit-embedded-modal-btn" onClick={doCollapse}>
             Cancel
           </button>
         </span>
@@ -106,10 +106,10 @@ class EmbeddedLayout extends Component {
     const { config: { icon, className, title }, expanded, onExpandEvent } = this.props;
     return (
       <div
-        className="boldrui-editor__embedded-wrapper"
+        className="boldredit-embedded-wrapper"
         aria-haspopup="true"
         aria-expanded={expanded}
-        aria-label="boldrui-editor__embedded-control"
+        aria-label="boldredit-embedded-control"
       >
         <Option
           className={classNames(className)}

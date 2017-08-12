@@ -1,8 +1,6 @@
 import User from '../../models/User';
 import VerificationToken from '../../models/VerificationToken';
 
-const debug = require('debug')('boldr:auth-ctrl');
-
 export async function verifyUserRegister(req, res, next) {
   try {
     const token = req.body.token;
@@ -27,16 +25,12 @@ export async function verifyUserRegister(req, res, next) {
     return next(new Error(err));
   }
 }
-export async function checkAuthentication(req, res, next) {
-  try {
-    const validUser = await User.query().findById(req.user.id).eager('[roles,socialMedia]');
+export async function checkAuthentication(req, res) {
+  const validUser = await User.query().findById(req.user.id).eager('[roles,socialMedia]');
 
-    if (!validUser) {
-      return res.status(401).json('Unauthorized: Please login again.');
-    }
-    validUser.stripPassword();
-    return res.status(200).send(validUser);
-  } catch (error) {
-    return next(new Error(error));
+  if (!validUser) {
+    return res.status(401).json('Unauthorized: Please login again.');
   }
+  validUser.stripPassword();
+  return res.status(200).send(validUser);
 }

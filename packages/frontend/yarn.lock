@@ -15,9 +15,9 @@
     caporal "^0.7.0"
     update-notifier "^2.2.0"
 
-"@boldr/core@^0.1.0-alpha.5":
-  version "0.1.0-alpha.6"
-  resolved "https://registry.npmjs.org/@boldr/core/-/core-0.1.0-alpha.6.tgz#2ceff9dfa89fb44f38362e8f9baba5880fa6bb76"
+"@boldr/core@^0.1.0-alpha.7":
+  version "0.1.0-alpha.7"
+  resolved "https://registry.npmjs.org/@boldr/core/-/core-0.1.0-alpha.7.tgz#f3d4c9b0732df3759efa8860f43b6cca798833a2"
   dependencies:
     babel-code-frame "^6.22.0"
     chalk "^2.1.0"
@@ -88,17 +88,17 @@
     whatwg-fetch "^2.0.3"
     write-file-webpack-plugin "^4.1.0"
 
-"@boldr/ui@^0.1.0-rc.5":
-  version "0.1.0-rc.5"
-  resolved "https://registry.npmjs.org/@boldr/ui/-/ui-0.1.0-rc.5.tgz#4e94503d40512ebdc8f6bffa92619e2731073bf8"
+"@boldr/ui@0.1.0-rc.6":
+  version "0.1.0-rc.6"
+  resolved "https://registry.npmjs.org/@boldr/ui/-/ui-0.1.0-rc.6.tgz#732a146a6f57f1fbd9e6a6048241c07d00e1ff08"
   dependencies:
     classnames "^2.2.5"
     lodash "^4.17.4"
     object-assign "^4.1.1"
-    react-modal "^2.2.2"
+    react-modal "^2.2.3"
     react-motion "^0.5.0"
     react-visibility-sensor "^3.10.1"
-    styled-components "^2.1.1"
+    styled-components "^2.1.2"
     uuid "^3.1.0"
 
 "@boldr/utils@^0.1.0-rc.1":
@@ -2367,10 +2367,6 @@ draft-js@^0.10.1:
     fbjs "^0.8.7"
     immutable "~3.7.4"
     object-assign "^4.1.0"
-
-draftjs-utils@^0.8.4:
-  version "0.8.4"
-  resolved "https://npm.strues.io/draftjs-utils/-/draftjs-utils-0.8.4.tgz#b8d6500d71a7b33fcc690c67afa8f3f8c12ff503"
 
 duplexer3@^0.1.4:
   version "0.1.4"
@@ -5567,9 +5563,9 @@ react-hot-loader@next:
     redbox-react "^1.3.6"
     source-map "^0.4.4"
 
-react-modal@^2.2.2:
+react-modal@^2.2.3:
   version "2.2.3"
-  resolved "https://npm.strues.io/react-modal/-/react-modal-2.2.3.tgz#e22882961bbc5729a706b515dc20556fa0aa6ac8"
+  resolved "https://registry.npmjs.org/react-modal/-/react-modal-2.2.3.tgz#e22882961bbc5729a706b515dc20556fa0aa6ac8"
   dependencies:
     exenv "^1.2.0"
     prop-types "^15.5.10"
@@ -6430,7 +6426,7 @@ style-loader@^0.18.2:
     loader-utils "^1.0.2"
     schema-utils "^0.3.0"
 
-styled-components@^2.1.1, styled-components@^2.1.2:
+styled-components@^2.1.2:
   version "2.1.2"
   resolved "https://npm.strues.io/styled-components/-/styled-components-2.1.2.tgz#bb419978e1287c5d0d88fa9106b2dd75f66a324c"
   dependencies:

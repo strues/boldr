@@ -1,5 +1,6 @@
 module.exports = {
   extends: ['boldr', 'boldr/react', 'boldr/flowtype', 'boldr/import', 'boldr/promise'],
+  root: true,
   globals: {
     window: true,
     document: true,
@@ -15,6 +16,8 @@ module.exports = {
   },
   rules: {
     'getter-return': 0,
-    'react/boolean-prop-naming':0
+    'react/boolean-prop-naming':0,
+    'react/no-typos': 0,
+    'valid-jsdoc': 0
   },
 };

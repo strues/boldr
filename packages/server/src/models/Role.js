@@ -1,7 +1,4 @@
 import BaseModel, { mergeSchemas } from './BaseModel';
-// Related Model
-import User from './User';
-// import UserRole from './join/UserRole';
 
 class Role extends BaseModel {
   static tableName = 'role';
@@ -39,7 +36,7 @@ class Role extends BaseModel {
     return {
       users: {
         relation: BaseModel.ManyToManyRelation,
-        modelClass: User,
+        modelClass: `${__dirname}/User`,
         join: {
           from: 'role.id',
           through: {

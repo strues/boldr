@@ -222,18 +222,18 @@ function getSuggestionComponent() {
       const { dropdownClassName, optionClassName } = config;
       return (
         <span
-          className="boldrui-editor__suggestion-wrapper"
+          className="boldredit-suggestion-wrapper"
           ref={this.setSuggestionReference}
           onClick={config.modalHandler.onSuggestionClick}
           aria-haspopup="true"
-          aria-label="boldrui-editor__suggestion-popup"
+          aria-label="boldredit-suggestion-popup"
         >
           <span>
             {children}
           </span>
           {showSuggestions &&
             <span
-              className={classNames('boldrui-editor__suggestion-dropdown', dropdownClassName)}
+              className={classNames('boldredit-suggestion-dropdown', dropdownClassName)}
               contentEditable="false"
               style={this.state.style}
               ref={this.setDropdownReference}
@@ -245,8 +245,8 @@ function getSuggestionComponent() {
                   onClick={this.addMention}
                   onMouseEnter={this.onOptionMouseEnter.bind(this, index)}
                   onMouseLeave={this.onOptionMouseLeave}
-                  className={classNames('boldrui-editor__suggestion-option', optionClassName, {
-                    'boldrui-editor__suggestion-option-active': index === activeOption,
+                  className={classNames('boldredit-suggestion-option', optionClassName, {
+                    'boldredit-suggestion-option-active': index === activeOption,
                   })}
                 >
                   {suggestion.text}

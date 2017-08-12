@@ -1,3 +1,6 @@
 {
-  "extends": ["boldr"]
+  "extends": ["boldr"],
+  "rules": {
+    "valid-jsdoc": 0
+    }
 }

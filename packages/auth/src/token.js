@@ -62,7 +62,8 @@ export const getToken = (asJSON = false) => {
   /* istanbul ignore next */
   return token;
 };
-
+/* istanbul ignore next */
 export function removeToken() {
+  /* istanbul ignore next */
   Storage.remove('bjwt');
 }

@@ -1,7 +1,8 @@
 /* @flow */
 import React from 'react';
+// $FlowIssue
 import { graphql } from 'react-apollo';
-// internal
+// $FlowIssue
 import Loader from '@boldr/ui/Loader';
 import Tags from './Tags';
 import TAGS_QUERY from './gql/tags.graphql';

@@ -1,5 +1,6 @@
 /* @flow */
 import React from 'react';
+// $FlowIssue
 import styled from 'styled-components';
 
 const NotificationWrap = styled.div`
@@ -25,7 +26,7 @@ const NotificationText = styled.div`margin-right: 12px;`;
 
 export type Props = {
   hideNotification: Function,
-  options?: Object,
+  options: Object,
 };
 // Your custom notification component
 const Notif = ({ options, hideNotification }: Props) => {
@@ -35,6 +36,7 @@ const Notif = ({ options, hideNotification }: Props) => {
       <NotificationInner>
         <NotificationText>
           {text}
+          {type}
         </NotificationText>
         <button onClick={hideNotification}>Click to close</button>
       </NotificationInner>

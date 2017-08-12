@@ -1,7 +1,4 @@
-import BaseModel, { mergeSchemas } from './BaseModel';
-
-// Related Model
-import MenuDetail from './MenuDetail';
+import BaseModel from './BaseModel';
 
 class Menu extends BaseModel {
   static tableName = 'menu';
@@ -10,7 +7,7 @@ class Menu extends BaseModel {
     return {
       details: {
         relation: BaseModel.ManyToManyRelation,
-        modelClass: MenuDetail,
+        modelClass: `${__dirname}/MenuDetail`,
         join: {
           from: 'menu.id',
           through: {

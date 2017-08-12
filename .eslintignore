@@ -4,9 +4,13 @@ coverage
 node_modules
 **/flow-typed/**
 **/build/**
-packages/**/build
-packages/**/lib
-packages/**/node_modules
+packages/**/*.test.js
+packages/cli/bin/boldr.js
+packages/**/build/**
+packages/**/lib/**
+packages/**/node_modules/**
+packages/**/flow-typed/**
+
 docs/
 
 *.bundle.js

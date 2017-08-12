@@ -1,5 +1,6 @@
-import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt } from 'graphql';
+import { GraphQLList, GraphQLNonNull, GraphQLInt } from 'graphql';
 import File from '../../models/File';
+import { errorObj } from '../../errors';
 import FileType from './fileType';
 
 export default {
@@ -16,12 +17,12 @@ export default {
         description: 'The maximum number of attachments to return at a time.',
       },
     },
-    async resolve(_, { limit, offset }, context) {
+    async resolve(_, { limit, offset }) {
       const file = await File.query().limit(limit).offset(offset);
       if (file) {
         return file;
       }
-      console.log('error');
+      throw errorObj({ _error: 'Unable to locate file' });
     },
   },
 };

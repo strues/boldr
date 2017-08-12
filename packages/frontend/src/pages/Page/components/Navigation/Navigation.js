@@ -36,7 +36,7 @@ export type Props = {
   onLogout: Function,
 };
 export const isActive = (location: Object, url: string) => {
-  return !!location.pathname.includes(url);
+  return Boolean(location.pathname.includes(url));
 };
 class Navigation extends Component {
   state = { isActive: false, isDropdownOpen: false };
@@ -72,7 +72,7 @@ class Navigation extends Component {
               )}
             </NavbarStart>
             <NavbarEnd>
-              {!!auth.token &&
+              {Boolean(auth.token) &&
                 currentUser.roleId === 3 &&
                 <NavbarItem>
                   <NavLink to="/admin">

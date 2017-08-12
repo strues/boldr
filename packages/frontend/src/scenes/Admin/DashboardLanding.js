@@ -1,9 +1,13 @@
 /* @flow */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+// $FlowIssue
 import Headline from '@boldr/ui/Headline';
+// $FlowIssue
 import Icon from '@boldr/ui/Icons/Icon';
+// $FlowIssue
 import ContentPromo from '@boldr/ui/ContentPromo';
+// $FlowIssue
 import Tabs from '@boldr/ui/Tabs';
 
 export type Props = {

@@ -1,5 +1,6 @@
 import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt } from 'graphql';
 import Media from '../../models/Media';
+import { errorObj } from '../../errors';
 import MediaType from './mediaType';
 
 export default {
@@ -16,10 +17,10 @@ export default {
         description: 'The maximum number of media to return at a time.',
       },
     },
-    async resolve(_, { limit, offset }, ctx) {
+    async resolve() {
       const media = await Media.query().returning('*');
       if (!media) {
-        console.log('error');
+        throw errorObj({ _error: 'Unable to locate media' });
       }
       return media;
     },
@@ -33,10 +34,10 @@ export default {
         description: 'The id of the requested media',
       },
     },
-    async resolve(_, { id }, context) {
+    async resolve(_, { id }) {
       const media = await Media.getMediaById(id);
       if (!media) {
-        console.log('error');
+        throw errorObj({ _error: 'Unable to locate a file with that id' });
       }
       return media;
     },

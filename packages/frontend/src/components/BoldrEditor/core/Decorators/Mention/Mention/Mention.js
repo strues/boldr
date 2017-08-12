@@ -19,7 +19,7 @@ class Mention {
         const { entityKey, children, contentState } = this.props;
         const { url, value } = contentState.getEntity(entityKey).getData();
         return (
-          <a href={url || value} className={classNames('boldrui-editor__mention-link', className)}>
+          <a href={url || value} className={classNames('boldredit-mention-link', className)}>
             {children}
           </a>
         );

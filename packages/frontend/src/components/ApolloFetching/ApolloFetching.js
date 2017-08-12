@@ -3,19 +3,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import hoistStatics from 'hoist-non-react-statics';
 
-// import View from '../View';
 import { formatGeneralAPIErrors } from '../../core/reduxFormErrors';
 
 const getDisplayName = WrappedComponent =>
+  // $FlowIssue
   WrappedComponent.displayName || WrappedComponent.name || 'Component';
 const IS_LOADING_NETWORK_STATUS = 1;
 
 const withApolloFetchingContainer = (
-  PlaceholderComponent: ReactComponent<*>,
+  PlaceholderComponent: ReactElement<*>,
   { fullPage }: { fullPage?: boolean } = {},
-) => (WrappedComponent: ReactComponent<*>) => {
+) => (WrappedComponent: ReactElement<*>) => {
   class WithApolloFetchingContainer extends React.Component {
-    static WrappedComponent: ReactComponent<*>;
+    static WrappedComponent: ReactElement<*>;
     static propTypes = {
       data: PropTypes.shape({
         networkStatus: PropTypes.number,
@@ -39,7 +39,7 @@ const withApolloFetchingContainer = (
     };
 
     renderWhenReady = fn => {
-      const { content, key } = this.getRenderedContent(fn);
+      const { content } = this.getRenderedContent(fn);
       return (
         <div>
           {content}
@@ -49,14 +49,17 @@ const withApolloFetchingContainer = (
 
     render() {
       if (fullPage) {
+        // $FlowIssue
         return this.renderWhenReady(() => <WrappedComponent {...this.props} />);
       }
+      // $FlowIssue
       return <WrappedComponent {...this.props} renderWhenReady={this.renderWhenReady} />;
     }
   }
   WithApolloFetchingContainer.displayName = `WithApolloFetchingContainer(${getDisplayName(
     WrappedComponent,
   )})`;
+  // $FlowIssue
   WithApolloFetchingContainer.WrappedComponent = WrappedComponent;
 
   return hoistStatics(WithApolloFetchingContainer, WrappedComponent);

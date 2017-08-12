@@ -40,7 +40,7 @@ function wrapAsyncHandler(fn, withErrorParam = true) {
     return callAndCatchPromiseError(fn, ...toArray(arguments));
   };
 }
-
+// eslint-disable-next-line
 function callAndCatchPromiseError(fn, ...args) {
   const next = args[args.length - 1];
   let p = null;
@@ -50,6 +50,7 @@ function callAndCatchPromiseError(fn, ...args) {
     return next(err);
   }
   if (p && p.then && p.catch) {
+    // eslint-disable-next-line
     p.catch(err => next(err));
   }
 }

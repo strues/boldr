@@ -23,8 +23,8 @@ export default class TextAlignLayout extends Component {
     } = this.props;
     return (
       <div
-        className={classNames('boldrui-editor__text-align-wrapper', className)}
-        aria-label="boldrui-editor-textalign-control"
+        className={classNames('boldredit-textalign__wrapper', className)}
+        aria-label="boldredit-textalign-control"
       >
         <Option
           value="left"

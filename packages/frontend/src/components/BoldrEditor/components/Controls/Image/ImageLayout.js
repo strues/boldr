@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
+// $FlowIssue
 import Icon from '@boldr/ui/Icons/Icon';
 import Option from '../../Option';
 import Spinner from '../../Spinner';
@@ -13,14 +14,13 @@ export type Props = {
   onExpandEvent?: Function,
   config?: Object,
   onChange?: Function,
-  currentState?: Object,
 };
 
 class ImageLayout extends Component {
   state: Object = {
     imgSrc: '',
     dragEnter: false,
-    uploadHighlighted: this.props.config.uploadEnabled && !!this.props.config.uploadCallback,
+    uploadHighlighted: this.props.config.uploadEnabled && Boolean(this.props.config.uploadCallback),
     showImageLoading: false,
     height: this.props.config.defaultSize.height,
     width: this.props.config.defaultSize.width,
@@ -32,7 +32,8 @@ class ImageLayout extends Component {
       this.setState({
         imgSrc: '',
         dragEnter: false,
-        uploadHighlighted: this.props.config.uploadEnabled && !!this.props.config.uploadCallback,
+        uploadHighlighted:
+          this.props.config.uploadEnabled && Boolean(this.props.config.uploadCallback),
         showImageLoading: false,
         height: this.props.config.defaultSize.height,
         width: this.props.config.defaultSize.width,
@@ -43,7 +44,7 @@ class ImageLayout extends Component {
       props.config.uploadEnabled !== this.props.config.uploadEnabled
     ) {
       this.setState({
-        uploadHighlighted: props.config.uploadEnabled && !!props.config.uploadCallback,
+        uploadHighlighted: props.config.uploadEnabled && Boolean(props.config.uploadCallback),
       });
     }
   }
@@ -160,32 +161,29 @@ class ImageLayout extends Component {
     } = this.props;
     return (
       <div
-        className={classNames('boldrui-editor__image-modal', popupClassName)}
+        className={classNames('boldredit-image-modal', popupClassName)}
         onClick={this.stopPropagation}
       >
-        <div className="boldrui-editor__image-modal-header">
+        <div className="boldredit-image-modal-header">
           {uploadEnabled &&
             uploadCallback &&
             <span
               onClick={this.showImageUploadOption}
-              className="boldrui-editor__image-modal-header-option"
+              className="boldredit-image-modal-header-option"
             >
               Upload
               <span
-                className={classNames('boldrui-editor__image-modal-header-label', {
-                  'boldrui-editor__image-modal-header-label-highlighted': uploadHighlighted,
+                className={classNames('boldredit-image-modal-header-label', {
+                  'boldredit-image-modal-header-label-highlighted': uploadHighlighted,
                 })}
               />
             </span>}
           {urlEnabled &&
-            <span
-              onClick={this.showImageURLOption}
-              className="boldrui-editor__image-modal-header-option"
-            >
+            <span onClick={this.showImageURLOption} className="boldredit-image-modal-header-option">
               Upload URL
               <span
-                className={classNames('boldrui-editor__image-modal-header-label', {
-                  'boldrui-editor__image-modal-header-label-highlighted': !uploadHighlighted,
+                className={classNames('boldredit-image-modal-header-label', {
+                  'boldredit-image-modal-header-label-highlighted': !uploadHighlighted,
                 })}
               />
             </span>}
@@ -196,11 +194,11 @@ class ImageLayout extends Component {
                 onDragEnter={this.onDragEnter}
                 onDragOver={this.stopPropagation}
                 onDrop={this.onImageDrop}
-                className={classNames('boldrui-editor__image-modal-upload-option', {
-                  'boldrui-editor__image-modal-upload-option-highlighted': dragEnter,
+                className={classNames('boldredit-image-modal-upload-option', {
+                  'boldredit-image-modal-upload-option-highlighted': dragEnter,
                 })}
               >
-                <label htmlFor="file" className="boldrui-editor__image-modal-upload-option-label">
+                <label htmlFor="file" className="boldredit-image-modal-upload-option-label">
                   Drop the file or click to upload
                 </label>
               </div>
@@ -209,12 +207,12 @@ class ImageLayout extends Component {
                 id="file"
                 accept={inputAccept}
                 onChange={this.selectImage}
-                className="boldrui-editor__image-modal-upload-option-input"
+                className="boldredit-image-modal-upload-option-input"
               />
             </div>
-          : <div className="boldrui-editor__image-modal-url-section">
+          : <div className="boldredit-image-modal-url-section">
               <input
-                className="boldrui-editor__image-modal-url-input"
+                className="boldredit-image-modal-url-input"
                 placeholder="Enter url"
                 name="imgSrc"
                 onChange={this.updateValue}
@@ -222,14 +220,14 @@ class ImageLayout extends Component {
                 value={imgSrc}
               />
             </div>}
-        <div className="boldrui-editor__embedded-modal-size">
+        <div className="boldredit-embedded-modal-size">
           ↕&nbsp;
           <input
             onChange={this.updateValue}
             onBlur={this.updateValue}
             value={height}
             name="height"
-            className="boldrui-editor__embedded-modal-size-input"
+            className="boldredit-embedded-modal-size-input"
             placeholder="Height"
           />
           &nbsp;↔&nbsp;
@@ -238,24 +236,24 @@ class ImageLayout extends Component {
             onBlur={this.updateValue}
             value={width}
             name="width"
-            className="boldrui-editor__embedded-modal-size-input"
+            className="boldredit-embedded-modal-size-input"
             placeholder="Width"
           />
         </div>
-        <span className="boldrui-editor__image-modal-btn-section">
+        <span className="boldredit-image-modal-btn-section">
           <button
-            className="boldrui-editor__image-modal-btn"
+            className="boldredit-image-modal-btn"
             onClick={this.addImageFromState}
             disabled={!imgSrc || !height || !width}
           >
             Add
           </button>
-          <button className="boldrui-editor__image-modal-btn" onClick={doCollapse}>
+          <button className="boldredit-image-modal-btn" onClick={doCollapse}>
             Cancel
           </button>
         </span>
         {showImageLoading
-          ? <div className="boldrui-editor__image-modal-spinner">
+          ? <div className="boldredit-image-modal-spinner">
               <Spinner />
             </div>
           : undefined}
@@ -267,10 +265,10 @@ class ImageLayout extends Component {
     const { config: { icon, className, title }, expanded, onExpandEvent } = this.props;
     return (
       <div
-        className="boldrui-editor__image-wrapper"
+        className="boldredit-image-wrapper"
         aria-haspopup="true"
         aria-expanded={expanded}
-        aria-label="boldrui-editor__image-control"
+        aria-label="boldredit-image-control"
       >
         <Option
           className={classNames(className)}

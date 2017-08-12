@@ -25,6 +25,20 @@ const NavigationContainer = universal(() => import('./Navigation/NavigationConta
   resolve: () => require.resolveWeak('./Navigation/NavigationContainer'),
 });
 
+declare type ChildRoute = {
+  breadcrumb: string,
+  exact: ?boolean,
+  path: string,
+  component: ReactElement,
+  routes: ?Array<Route>,
+};
+declare type Route = {
+  exact: ?boolean,
+  path: string,
+  component: ReactElement,
+  routes: ?Array<ChildRoute>,
+};
+
 export default [
   {
     exact: true,

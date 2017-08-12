@@ -1,3 +1,5 @@
+/* eslint-disable func-names, prefer-rest-params */
+
 const curryN = fn => {
   if (typeof fn !== 'function') {
     throw Error('No function provided');

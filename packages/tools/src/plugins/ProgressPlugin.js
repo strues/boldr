@@ -16,6 +16,7 @@ export default class ProgressPlugin {
   }
 
   apply(compiler) {
+    // eslint-disable-next-line
     let doneModules = 0;
     let spinner = null;
     let lastModule = null;
@@ -31,7 +32,7 @@ export default class ProgressPlugin {
         spinner.succeed(`${prefix}Done!`);
       }
     }
-
+    // eslint-disable-next-line
     function moduleDone(module) {
       doneModules += 1;
 

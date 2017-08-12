@@ -3,6 +3,7 @@ import os from 'os';
 import HappyPack from 'happypack';
 
 export default function HappyPackPlugin({ name, loaders }) {
+  // eslint-disable-next-line
   const compilerThreadPool = HappyPack.ThreadPool({
     size: os.cpus().length,
   });

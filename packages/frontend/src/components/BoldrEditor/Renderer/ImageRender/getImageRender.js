@@ -48,25 +48,25 @@ const getImageRender = config =>
     renderAlignmentOptions(alignment): Object {
       return (
         <div
-          className={classNames('boldrui-editor__image-alignment-options-popup', {
-            'boldrui-editor__image-alignment-options-popup-right': alignment === 'right',
+          className={classNames('boldredit-image-alignment-options-popup', {
+            'boldredit-image-alignment-options-popup-right': alignment === 'right',
           })}
         >
           <Option
             onClick={this.setEntityAlignmentLeft}
-            className="boldrui-editor__image-alignment-option"
+            className="boldredit-image-alignment-option"
           >
             L
           </Option>
           <Option
             onClick={this.setEntityAlignmentCenter}
-            className="boldrui-editor__image-alignment-option"
+            className="boldredit-image-alignment-option"
           >
             C
           </Option>
           <Option
             onClick={this.setEntityAlignmentRight}
-            className="boldrui-editor__image-alignment-option"
+            className="boldredit-image-alignment-option"
           >
             R
           </Option>
@@ -85,13 +85,13 @@ const getImageRender = config =>
         <span
           onMouseEnter={this.toggleHovered}
           onMouseLeave={this.toggleHovered}
-          className={classNames('boldrui-editor__image-alignment', {
-            'boldrui-editor__image-left': alignment === 'left',
-            'boldrui-editor__image-right': alignment === 'right',
-            'boldrui-editor__image-center': !alignment || alignment === 'none',
+          className={classNames('boldredit-image-alignment', {
+            'boldredit-image-left': alignment === 'left',
+            'boldredit-image-right': alignment === 'right',
+            'boldredit-image-center': !alignment || alignment === 'none',
           })}
         >
-          <span className="boldrui-editor__image-imagewrapper">
+          <span className="boldredit-image-imagewrapper">
             <img
               src={src}
               alt={alt}

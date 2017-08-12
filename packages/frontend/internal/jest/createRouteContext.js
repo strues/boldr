@@ -3,15 +3,19 @@ const randomKey = keyLength => {
   return Math.random().toString(36).substr(2, keyLength);
 };
 
-const createDefaultMatch = () => ({ path: '/',
+const createDefaultMatch = () => ({
+  path: '/',
   url: '/',
   isExact: true,
-  params: {} });
+  params: {},
+});
 
-const createDefaultLocation = () => ({ pathname: '/',
+const createDefaultLocation = () => ({
+  pathname: '/',
   search: '',
   hash: '',
-  key: randomKey(6) });
+  key: randomKey(6),
+});
 
 const createDefaultHistory = location => ({
   action: 'POP',
@@ -44,12 +48,7 @@ const createDefaultHistory = location => ({
 });
 
 const createRouterContext = (options = {}) => {
-  const {
-    history: userHistory,
-    location: userLocation,
-    match: userMatch,
-    staticContext,
-  } = options;
+  const { history: userHistory, location: userLocation, match: userMatch, staticContext } = options;
 
   const match = {
     ...createDefaultMatch(),

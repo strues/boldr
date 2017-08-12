@@ -1,14 +1,19 @@
+import path from 'path';
+import appRoot from '@boldr/utils/lib/node/appRoot';
 import express from 'express';
+import { initializeDb, disconnect } from './services/db';
+import logger from './services/logger';
+import { destroyRedis } from './services/redis';
+import routes from './routes';
 
-import addSecurityMiddleware from './middleware/addSecurityMiddleware';
-import addCoreMiddleware from './middleware/addCoreMiddleware';
-import addErrorMiddleware from './middleware/addErrorMiddleware';
-import addFallbackHandler from './middleware/addFallbackHandler';
-
-const defaultLocale = {
-  default: 'en-US',
-  supported: ['en-US'],
-};
+import {
+  initAuth,
+  initGraphql,
+  initSecurity,
+  initCore,
+  initErrorHandler,
+  addFallbackHandler,
+} from './middleware';
 
 const defaultStatic = {
   public: '/static/',
@@ -16,50 +21,77 @@ const defaultStatic = {
 };
 
 export default function createBoldrServer({
-  localeConfig = defaultLocale,
   staticConfig = defaultStatic,
   afterSecurity = [],
   beforeFallback = [],
   enableCSP = false,
-  enableNonce = false,
+  enableNonce = true,
 }) {
   // Create our express based server.
-  const server = express();
+  const app = express();
 
-  addErrorMiddleware(server);
-  addSecurityMiddleware(server, { enableCSP, enableNonce });
+  initializeDb()
+    .then(() => logger.info('Database connected successfully'))
+    .catch(err => logger.error(err));
+
+  initErrorHandler(app);
+  initSecurity(app, { enableCSP, enableNonce });
 
   // Allow for some early additions for middleware
   if (afterSecurity.length > 0) {
     afterSecurity.forEach(middleware => {
       if (middleware instanceof Array) {
-        server.use(...middleware);
+        app.use(...middleware);
       } else {
-        server.use(middleware);
+        app.use(middleware);
       }
     });
   }
 
-  addCoreMiddleware(server, { locale: localeConfig });
+  initCore(app);
+  // Session middleware, authentication check, rbac
+  initAuth(app);
 
+  // @todo: left as standard REST routes
+  // /auth/check, /auth/verify, /token/reset-password, /token/forgot-password
+  routes(app);
+  // graphql middleware
+  initGraphql(app);
   // Configure static serving of our webpack bundled client files.
   if (staticConfig) {
-    server.use(staticConfig.public, express.static(staticConfig.path));
+    app.use(staticConfig.public, express.static(staticConfig.path));
   }
+  // Configure static serving of our "public" root http path static files.
+  // Note: these will be served off the root (i.e. '/') of our application.
+  app.use('/uploads', express.static(path.resolve(appRoot.get(), './public/uploads')));
 
   // Allow for some late additions for middleware
   if (beforeFallback.length > 0) {
     beforeFallback.forEach(middleware => {
       if (middleware instanceof Array) {
-        server.use(...middleware);
+        app.use(...middleware);
       } else {
-        server.use(middleware);
+        app.use(middleware);
       }
     });
   }
 
   // For all things which did not went well.
-  addFallbackHandler(server);
+  addFallbackHandler(app);
 
-  return server;
+  process.on('SIGINT', () => {
+    logger.info('shutting down!');
+    disconnect();
+    destroyRedis();
+    app.close();
+    process.exit();
+  });
+
+  process.on('uncaughtException', error => {
+    logger.error(`uncaughtException: ${error.message}`);
+    logger.error(error.stack);
+    process.exit(1);
+  });
+
+  return app;
 }

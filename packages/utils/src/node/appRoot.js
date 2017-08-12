@@ -1,4 +1,4 @@
-/* eslint-disable no-multi-assign, prefer-template */
+/* eslint-disable no-multi-assign, prefer-template, func-names, no-unused-vars */
 const GLOBAL_KEY = 'appRoot';
 let _rootDir;
 

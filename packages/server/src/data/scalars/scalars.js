@@ -1,3 +1,4 @@
+/* eslint-disable func-names, no-useless-escape, func-style */
 import { GraphQLError } from 'graphql/error';
 import { Kind } from 'graphql/language';
 import { Factory } from './factory';
@@ -33,7 +34,7 @@ export const GraphQLUUID = factory.getRegexScalar({
 
 const stringValidator = function(ast) {
   if (ast.kind !== Kind.STRING) {
-    throw new GraphQLError('Query error: Can only parse strings got a: ' + ast.kind, [ast]);
+    throw new GraphQLError(`Query error: Can only parse strings got a: ${ast.kind}`, [ast]);
   }
 };
 
@@ -48,7 +49,7 @@ const lengthValidator = function(ast, min, max) {
 };
 
 const alphabetValidator = function(ast, alphabet) {
-  for (var char of ast.value) {
+  for (const char of ast.value) {
     if (alphabet.indexOf(char) < 0) {
       throw new GraphQLError('Query error: Invalid character found', [ast]);
     }
@@ -81,21 +82,28 @@ const complexityValidator = function(ast, options) {
   }
 };
 
-var limitedStringCounter = 0;
+let limitedStringCounter = 0;
 export class GraphQLLimitedString extends GraphQLCustomScalarType {
   constructor(min = 1, max, alphabet) {
     const suffix = limitedStringCounter++ > 0 ? limitedStringCounter : '';
-    const name = 'LimitedString' + suffix;
-    var description = 'A limited string.';
-    if (max) description += ' Has to be between ' + min + ' and ' + max + ' characters long.';
-    else description += ' Has to be at least ' + min + ' characters long.';
-    if (alphabet) description += ' May only contain the following characters: ' + alphabet;
+    const name = `LimitedString${suffix}`;
+    let description = 'A limited string.';
+    if (max) {
+      description += ` Has to be between ${min} and ${max} characters long.`;
+    } else {
+      description += ` Has to be at least ${min} characters long.`;
+    }
+    if (alphabet) {
+      description += ` May only contain the following characters: ${alphabet}`;
+    }
 
     const validator = function(ast) {
       stringValidator(ast);
       lengthValidator(ast, min, max);
 
-      if (alphabet) alphabetValidator(ast, alphabet);
+      if (alphabet) {
+        alphabetValidator(ast, alphabet);
+      }
 
       return ast.value;
     };
@@ -104,27 +112,42 @@ export class GraphQLLimitedString extends GraphQLCustomScalarType {
   }
 }
 
-var passwordCounter = 0;
+let passwordCounter = 0;
 export class GraphQLPassword extends GraphQLCustomScalarType {
   constructor(min = 1, max, alphabet, complexity) {
     const suffix = passwordCounter++ > 0 ? passwordCounter : '';
-    const name = 'Password' + suffix;
-    var description = 'A password string.';
-    if (max) description += ' Has to be between ' + min + ' and ' + max + ' characters long.';
-    else description += ' Has to be at least ' + min + ' characters long.';
-    if (alphabet) description += ' May only contain the following characters: ' + alphabet;
+    const name = `Password${suffix}`;
+    let description = 'A password string.';
+    if (max) {
+      description += ` Has to be between ${min} and ${max} characters long.`;
+    } else {
+      description += ` Has to be at least ${min} characters long.`;
+    }
+    if (alphabet) {
+      description += ` May only contain the following characters: ${alphabet}`;
+    }
     if (complexity) {
-      if (complexity.alphaNumeric) description += ' Has to be alpha numeric.';
-      if (complexity.mixedCase) description += ' Has to be mixed case.';
-      if (complexity.specialChars) description += ' Has to contain special characters.';
+      if (complexity.alphaNumeric) {
+        description += ' Has to be alpha numeric.';
+      }
+      if (complexity.mixedCase) {
+        description += ' Has to be mixed case.';
+      }
+      if (complexity.specialChars) {
+        description += ' Has to contain special characters.';
+      }
     }
 
     const validator = function(ast) {
       stringValidator(ast);
       lengthValidator(ast, min, max);
 
-      if (alphabet) alphabetValidator(ast, alphabet);
-      if (complexity) complexityValidator(ast, complexity);
+      if (alphabet) {
+        alphabetValidator(ast, alphabet);
+      }
+      if (complexity) {
+        complexityValidator(ast, complexity);
+      }
 
       return ast.value;
     };

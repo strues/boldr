@@ -1,3 +1,7 @@
+/**
+ * @jest-environment node
+ */
+
 import { generateHash } from './hashing';
 
 it('generateVerifyCode() - should generate a random token', () => {
