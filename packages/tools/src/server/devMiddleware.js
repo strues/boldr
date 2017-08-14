@@ -15,7 +15,7 @@ const ROOT = appRoot.get();
 const CLIENT_OUTPUT = resolve(ROOT, process.env.CLIENT_OUTPUT);
 const PUBLIC_PATH = process.env.PUBLIC_PATH;
 
-export function devMiddleware(server) {
+export default function devMiddleware(server) {
   const clientConfig = createWebpackConfig({
     target: 'client',
     env: 'development',

@@ -6,11 +6,11 @@
   version "0.1.0-alpha.1"
   resolved "https://registry.npmjs.org/@boldr/auth/-/auth-0.1.0-alpha.1.tgz#8f530e05e5e98b5c99a090398b3a60b76141e3a5"
 
-"@boldr/cli@0.2.0-alpha.7":
-  version "0.2.0-alpha.7"
-  resolved "https://registry.npmjs.org/@boldr/cli/-/cli-0.2.0-alpha.7.tgz#33e725c5ef8c33adc3d7d07b0314ab0a26d9c9cb"
+"@boldr/cli@0.2.0-alpha.8":
+  version "0.2.0-alpha.8"
+  resolved "https://registry.npmjs.org/@boldr/cli/-/cli-0.2.0-alpha.8.tgz#0c90dc197436c0fefb4c4cd834f882c6dcae3a3c"
   dependencies:
-    "@boldr/tools" "0.1.0-alpha.8"
+    "@boldr/tools" "0.1.0-beta.1"
     "@boldr/utils" "^0.1.0-rc.1"
     caporal "^0.7.0"
     update-notifier "^2.2.0"
@@ -40,14 +40,15 @@
   version "0.1.0-alpha.1"
   resolved "https://registry.npmjs.org/@boldr/icons/-/icons-0.1.0-alpha.1.tgz#29124fac5da9147e716360656fd3141f7fb01fe7"
 
-"@boldr/tools@0.1.0-alpha.8":
-  version "0.1.0-alpha.8"
-  resolved "https://registry.npmjs.org/@boldr/tools/-/tools-0.1.0-alpha.8.tgz#5bd3aad236ac55b1c6877105bcb90b7b6bdee0d8"
+"@boldr/tools@0.1.0-beta.1":
+  version "0.1.0-beta.1"
+  resolved "https://registry.npmjs.org/@boldr/tools/-/tools-0.1.0-beta.1.tgz#6557c8d29834fc807310c2fd899a0e793c27f422"
   dependencies:
     "@boldr/utils" "^0.1.0-rc.1"
     autoprefixer "^7.1.2"
     babel-loader "^7.1.1"
     babel-preset-boldr "0.10.2"
+    better-sass-loader "^0.1.0-beta.1"
     bluebird "^3.5.0"
     cache-loader "^1.0.3"
     case-sensitive-paths-webpack-plugin "^2.1.1"
@@ -66,26 +67,22 @@
     loader-utils "^1.1.0"
     lodash.merge "^4.6.0"
     md5 "^2.2.1"
-    node-fetch "^1.7.2"
-    node-noop "^1.0.0"
     node-sass "^4.5.3"
     ora "^1.3.0"
     postcss-loader "^2.0.6"
     pretty-error "^2.1.1"
-    react-dev-utils "^3.1.0"
+    react-dev-utils "^3.1.1"
     react-hot-loader next
-    sass-loader "^6.0.6"
     source-map-support "^0.4.15"
     uglify-es "^3.0.27"
     uglifyjs-webpack-plugin "1.0.0-beta.2"
     url-loader "^0.5.9"
     uuid "^3.1.0"
-    webpack "^3.5.3"
+    webpack "^3.5.4"
     webpack-dev-middleware "^1.12.0"
     webpack-hot-middleware "^2.18.2"
     webpack-hot-server-middleware "^0.1.0"
     webpack-subresource-integrity "^1.0.1"
-    whatwg-fetch "^2.0.3"
     write-file-webpack-plugin "^4.1.0"
 
 "@boldr/ui@0.1.0-rc.6":
@@ -401,7 +398,7 @@ async@1.5.0:
   version "1.5.0"
   resolved "https://registry.npmjs.org/async/-/async-1.5.0.tgz#2796642723573859565633fc6274444bee2f8ce3"
 
-async@^2.1.2, async@^2.1.5, async@^2.3.0, async@^2.5.0:
+async@^2.1.2, async@^2.3.0, async@^2.5.0:
   version "2.5.0"
   resolved "https://registry.npmjs.org/async/-/async-2.5.0.tgz#843190fd6b7357a0b9e1c956edddd5ec8462b54d"
   dependencies:
@@ -1347,6 +1344,16 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
+better-sass-loader@^0.1.0-beta.1:
+  version "0.1.0-beta.1"
+  resolved "https://registry.npmjs.org/better-sass-loader/-/better-sass-loader-0.1.0-beta.1.tgz#76624747a9c453fcd11fbd7c9580bb0edc89add3"
+  dependencies:
+    async "^2.5.0"
+    cli-source-preview "^1.1.0"
+    co "^4.6.0"
+    fs-extra "^4.0.1"
+    loader-utils "^1.1.0"
+
 big.js@^3.1.3:
   version "3.1.3"
   resolved "https://registry.npmjs.org/big.js/-/big.js-3.1.3.tgz#4cada2193652eb3ca9ec8e55c9015669c9806978"
@@ -1731,6 +1738,12 @@ cli-cursor@^2.1.0:
   dependencies:
     restore-cursor "^2.0.0"
 
+cli-source-preview@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/cli-source-preview/-/cli-source-preview-1.1.0.tgz#05303ab1279a9093ead1a3837b3ee231f3006544"
+  dependencies:
+    chalk "^1.1.3"
+
 cli-spinners@^1.0.0:
   version "1.0.0"
   resolved "https://registry.npmjs.org/cli-spinners/-/cli-spinners-1.0.0.tgz#ef987ed3d48391ac3dab9180b406a742180d6e6a"
@@ -1763,15 +1776,6 @@ cliui@^3.2.0:
     string-width "^1.0.1"
     strip-ansi "^3.0.1"
     wrap-ansi "^2.0.0"
-
-clone-deep@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.npmjs.org/clone-deep/-/clone-deep-0.3.0.tgz#348c61ae9cdbe0edfe053d91ff4cc521d790ede8"
-  dependencies:
-    for-own "^1.0.0"
-    is-plain-object "^2.0.1"
-    kind-of "^3.2.2"
-    shallow-clone "^0.1.2"
 
 clone@^1.0.2:
   version "1.0.2"
@@ -3036,10 +3040,6 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.1"
     readable-stream "^2.0.4"
 
-for-in@^0.1.3:
-  version "0.1.8"
-  resolved "https://registry.npmjs.org/for-in/-/for-in-0.1.8.tgz#d8773908e31256109952b1fdb9b3fa867d2775e1"
-
 for-in@^1.0.1:
   version "1.0.2"
   resolved "https://npm.strues.io/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
@@ -3047,12 +3047,6 @@ for-in@^1.0.1:
 for-own@^0.1.4:
   version "0.1.5"
   resolved "https://npm.strues.io/for-own/-/for-own-0.1.5.tgz#5265c681a4f294dabbf17c9509b6763aa84510ce"
-  dependencies:
-    for-in "^1.0.1"
-
-for-own@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/for-own/-/for-own-1.0.0.tgz#c63332f415cedc4b04dbfe70cf836494c53cb44b"
   dependencies:
     for-in "^1.0.1"
 
@@ -3656,7 +3650,7 @@ is-binary-path@^1.0.0:
   dependencies:
     binary-extensions "^1.0.0"
 
-is-buffer@^1.0.2, is-buffer@^1.1.5, is-buffer@~1.1.1:
+is-buffer@^1.1.5, is-buffer@~1.1.1:
   version "1.1.5"
   resolved "https://npm.strues.io/is-buffer/-/is-buffer-1.1.5.tgz#1f3b26ef613b214b88cbca23cc6c01d87961eecc"
 
@@ -3980,13 +3974,7 @@ just-extend@^1.1.22:
   version "1.1.22"
   resolved "https://npm.strues.io/just-extend/-/just-extend-1.1.22.tgz#3330af756cab6a542700c64b2e4e4aa062d52fff"
 
-kind-of@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.npmjs.org/kind-of/-/kind-of-2.0.1.tgz#018ec7a4ce7e3a86cb9141be519d24c8faa981b5"
-  dependencies:
-    is-buffer "^1.0.2"
-
-kind-of@^3.0.2, kind-of@^3.2.2:
+kind-of@^3.0.2:
   version "3.2.2"
   resolved "https://npm.strues.io/kind-of/-/kind-of-3.2.2.tgz#31ea21a734bab9bbb0f32466d893aea51e4a3c64"
   dependencies:
@@ -4003,10 +3991,6 @@ latest-version@^3.0.0:
   resolved "https://registry.npmjs.org/latest-version/-/latest-version-3.1.0.tgz#a205383fea322b33b5ae3b18abee0dc2f356ee15"
   dependencies:
     package-json "^4.0.0"
-
-lazy-cache@^0.2.3:
-  version "0.2.7"
-  resolved "https://registry.npmjs.org/lazy-cache/-/lazy-cache-0.2.7.tgz#7feddf2dcb6edb77d11ef1d117ab5ffdf0ab1b65"
 
 lazy-cache@^1.0.3:
   version "1.0.4"
@@ -4048,7 +4032,7 @@ loader-runner@^2.3.0:
   version "2.3.0"
   resolved "https://registry.npmjs.org/loader-runner/-/loader-runner-2.3.0.tgz#f482aea82d543e07921700d5a46ef26fdac6b8a2"
 
-loader-utils@1.1.0, loader-utils@^1.0.1, loader-utils@^1.0.2, loader-utils@^1.1.0:
+loader-utils@1.1.0, loader-utils@^1.0.2, loader-utils@^1.1.0:
   version "1.1.0"
   resolved "https://registry.npmjs.org/loader-utils/-/loader-utils-1.1.0.tgz#c98aef488bcceda2ffb5e2de646d6a754429f5cd"
   dependencies:
@@ -4191,10 +4175,6 @@ lodash.reject@^4.4.0:
 lodash.some@^4.4.0, lodash.some@^4.6.0:
   version "4.6.0"
   resolved "https://npm.strues.io/lodash.some/-/lodash.some-4.6.0.tgz#1bb9f314ef6b8baded13b549169b2a945eb68e4d"
-
-lodash.tail@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.npmjs.org/lodash.tail/-/lodash.tail-4.1.1.tgz#d2333a36d9e7717c8ad2f7cacafec7c32b444664"
 
 lodash.uniq@^4.5.0:
   version "4.5.0"
@@ -4422,13 +4402,6 @@ mississippi@^1.3.0:
     stream-each "^1.1.0"
     through2 "^2.0.0"
 
-mixin-object@^2.0.1:
-  version "2.0.1"
-  resolved "https://registry.npmjs.org/mixin-object/-/mixin-object-2.0.1.tgz#4fb949441dab182540f1fe035ba60e1947a5e57e"
-  dependencies:
-    for-in "^0.1.3"
-    is-extendable "^0.1.1"
-
 "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@~0.5.1:
   version "0.5.1"
   resolved "https://npm.strues.io/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
@@ -4551,10 +4524,6 @@ node-libs-browser@^2.0.0:
     url "^0.11.0"
     util "^0.10.3"
     vm-browserify "0.0.4"
-
-node-noop@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.npmjs.org/node-noop/-/node-noop-1.0.0.tgz#47a3e7d80cffaa6458364bd22ed85cab3307be79"
 
 node-pre-gyp@^0.6.36:
   version "0.6.36"
@@ -4984,10 +4953,6 @@ performance-now@^2.1.0:
 pify@^2.0.0, pify@^2.3.0:
   version "2.3.0"
   resolved "https://npm.strues.io/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
-
-pify@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.npmjs.org/pify/-/pify-3.0.0.tgz#e5a4acd2c101fdf3d9a4d07f0dbc4db49dd28176"
 
 pinkie-promise@^2.0.0:
   version "2.0.1"
@@ -5499,7 +5464,7 @@ react-deep-force-update@^2.0.1:
   version "2.1.0"
   resolved "https://npm.strues.io/react-deep-force-update/-/react-deep-force-update-2.1.0.tgz#1c5f36ea96bcbf411605ec063f36c568ea4df86c"
 
-react-dev-utils@^3.1.0:
+react-dev-utils@^3.1.1:
   version "3.1.1"
   resolved "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-3.1.1.tgz#09ae7209a81384248db56547e718e65bd3b20eb5"
   dependencies:
@@ -5652,9 +5617,9 @@ react-transition-group@^2.2.0:
     prop-types "^15.5.8"
     warning "^3.0.0"
 
-react-universal-component@2.3.2:
-  version "2.3.2"
-  resolved "https://npm.strues.io/react-universal-component/-/react-universal-component-2.3.2.tgz#9ddb24e75aec61ad266197962cdb34de338f1353"
+react-universal-component@2.3.4:
+  version "2.3.4"
+  resolved "https://registry.npmjs.org/react-universal-component/-/react-universal-component-2.3.4.tgz#f610c5d786e6f7469112c7542a66051a2092fe00"
   dependencies:
     hoist-non-react-statics "^2.2.1"
 
@@ -6042,16 +6007,6 @@ sass-graph@^2.1.1:
     scss-tokenizer "^0.2.3"
     yargs "^7.0.0"
 
-sass-loader@^6.0.6:
-  version "6.0.6"
-  resolved "https://registry.npmjs.org/sass-loader/-/sass-loader-6.0.6.tgz#e9d5e6c1f155faa32a4b26d7a9b7107c225e40f9"
-  dependencies:
-    async "^2.1.5"
-    clone-deep "^0.3.0"
-    loader-utils "^1.0.1"
-    lodash.tail "^4.1.1"
-    pify "^3.0.0"
-
 sax@~1.2.1:
   version "1.2.4"
   resolved "https://registry.npmjs.org/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
@@ -6139,15 +6094,6 @@ sha.js@^2.4.0, sha.js@^2.4.8:
   resolved "https://registry.npmjs.org/sha.js/-/sha.js-2.4.8.tgz#37068c2c476b6baf402d14a49c67f597921f634f"
   dependencies:
     inherits "^2.0.1"
-
-shallow-clone@^0.1.2:
-  version "0.1.2"
-  resolved "https://registry.npmjs.org/shallow-clone/-/shallow-clone-0.1.2.tgz#5909e874ba77106d73ac414cfec1ffca87d97060"
-  dependencies:
-    is-extendable "^0.1.1"
-    kind-of "^2.0.1"
-    lazy-cache "^0.2.3"
-    mixin-object "^2.0.1"
 
 shallowequal@^1.0.1:
   version "1.0.2"
@@ -6892,9 +6838,9 @@ webpack-dev-middleware@^1.12.0:
     range-parser "^1.0.3"
     time-stamp "^2.0.0"
 
-webpack-flush-chunks@^1.1.18:
-  version "1.1.18"
-  resolved "https://npm.strues.io/webpack-flush-chunks/-/webpack-flush-chunks-1.1.18.tgz#30b2ea8dbc932080bbe37ce859becc1bb8079a9a"
+webpack-flush-chunks@^1.1.20:
+  version "1.1.20"
+  resolved "https://registry.npmjs.org/webpack-flush-chunks/-/webpack-flush-chunks-1.1.20.tgz#bd324bc0b0a273a044c3c4ff97770582fbae0547"
 
 webpack-hot-middleware@^2.18.2:
   version "2.18.2"
@@ -6926,9 +6872,9 @@ webpack-subresource-integrity@^1.0.1:
   dependencies:
     webpack-core "^0.6.8"
 
-webpack@^3.5.3:
-  version "3.5.3"
-  resolved "https://registry.npmjs.org/webpack/-/webpack-3.5.3.tgz#e68653963bda146e212832c04a4d8041d2b4b8c8"
+webpack@^3.5.4:
+  version "3.5.4"
+  resolved "https://registry.npmjs.org/webpack/-/webpack-3.5.4.tgz#5583eb263ed27b78b5bd17bfdfb0eb1b1cd1bf81"
   dependencies:
     acorn "^5.0.0"
     acorn-dynamic-import "^2.0.0"
@@ -6963,7 +6909,7 @@ websocket-extensions@>=0.1.1:
   version "0.1.1"
   resolved "https://registry.npmjs.org/websocket-extensions/-/websocket-extensions-0.1.1.tgz#76899499c184b6ef754377c2dbb0cd6cb55d29e7"
 
-whatwg-fetch@>=0.10.0, whatwg-fetch@^2.0.0, whatwg-fetch@^2.0.3:
+whatwg-fetch@>=0.10.0, whatwg-fetch@^2.0.0:
   version "2.0.3"
   resolved "https://npm.strues.io/whatwg-fetch/-/whatwg-fetch-2.0.3.tgz#9c84ec2dcf68187ff00bc64e1274b442176e1c84"
 

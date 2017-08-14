@@ -1,7 +1,7 @@
 import logger from '@boldr/utils/lib/logger';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 import createExpress from '../server/createExpress';
-import { devMiddleware } from '../server/devMiddleware';
+import devMiddleware from '../server/devMiddleware';
 import buildWebpackDlls from '../plugins/buildWebpackDlls';
 
 const DEV_PORT = process.env.DEV_PORT;

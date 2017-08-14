@@ -272,7 +272,7 @@ async@1.5.0:
   version "1.5.0"
   resolved "https://npm.strues.io/async/-/async-1.5.0.tgz#2796642723573859565633fc6274444bee2f8ce3"
 
-async@^2.1.2, async@^2.1.5, async@^2.3.0, async@^2.5.0:
+async@^2.1.2, async@^2.3.0, async@^2.5.0:
   version "2.5.0"
   resolved "https://npm.strues.io/async/-/async-2.5.0.tgz#843190fd6b7357a0b9e1c956edddd5ec8462b54d"
   dependencies:
@@ -642,7 +642,7 @@ babel-plugin-minify-type-constructors@^0.1.2:
   dependencies:
     babel-helper-is-void-0 "^0.1.1"
 
-babel-plugin-module-resolver@3.0.0-beta.4, babel-plugin-module-resolver@^3.0.0-beta.4:
+babel-plugin-module-resolver@^3.0.0-beta.4:
   version "3.0.0-beta.4"
   resolved "https://npm.strues.io/babel-plugin-module-resolver/-/babel-plugin-module-resolver-3.0.0-beta.4.tgz#3b93b524afb74913807f703e0527dff8986f38e5"
   dependencies:
@@ -1002,7 +1002,7 @@ babel-plugin-transform-react-jsx@^6.24.1:
     babel-plugin-syntax-jsx "^6.8.0"
     babel-runtime "^6.22.0"
 
-babel-plugin-transform-react-remove-prop-types@^0.4.6, babel-plugin-transform-react-remove-prop-types@^0.4.8:
+babel-plugin-transform-react-remove-prop-types@^0.4.8:
   version "0.4.8"
   resolved "https://npm.strues.io/babel-plugin-transform-react-remove-prop-types/-/babel-plugin-transform-react-remove-prop-types-0.4.8.tgz#0aff04bc1d6564ec49cf23bcffb99c11881958db"
   dependencies:
@@ -1051,7 +1051,7 @@ babel-plugin-transform-undefined-to-void@^6.8.2:
   version "6.8.2"
   resolved "https://npm.strues.io/babel-plugin-transform-undefined-to-void/-/babel-plugin-transform-undefined-to-void-6.8.2.tgz#fe2b1d294eb05e87524eb93724dea6e2c3d66fa1"
 
-babel-plugin-universal-import@^1.1.15, babel-plugin-universal-import@^1.2.5:
+babel-plugin-universal-import@^1.2.5:
   version "1.2.5"
   resolved "https://npm.strues.io/babel-plugin-universal-import/-/babel-plugin-universal-import-1.2.5.tgz#1c2576dfb80250e735db1770515f7264fdcac9d3"
 
@@ -1116,38 +1116,6 @@ babel-preset-boldr@0.10.2:
     babel-preset-babili "^0.1.4"
     babel-preset-env "^1.6.0"
     babel-preset-react "^6.24.1"
-    fast-async "^6.3.0"
-    nodent-runtime "^3.0.4"
-
-babel-preset-boldr@0.11.0:
-  version "0.11.0"
-  resolved "https://npm.strues.io/babel-preset-boldr/-/babel-preset-boldr-0.11.0.tgz#0a651bb8a8267cd13591bb0781ae6716647b2502"
-  dependencies:
-    app-root-dir "^1.0.2"
-    babel-plugin-dynamic-import-node "^1.0.2"
-    babel-plugin-dynamic-import-webpack "^1.0.1"
-    babel-plugin-lodash "^3.2.11"
-    babel-plugin-module-resolver "3.0.0-beta.4"
-    babel-plugin-styled-components "^1.1.7"
-    babel-plugin-syntax-dynamic-import "^6.18.0"
-    babel-plugin-syntax-flow "^6.18.0"
-    babel-plugin-syntax-jsx "^6.18.0"
-    babel-plugin-transform-class-properties "^6.24.1"
-    babel-plugin-transform-decorators-legacy "^1.3.4"
-    babel-plugin-transform-export-extensions "^6.22.0"
-    babel-plugin-transform-flow-strip-types "^6.22.0"
-    babel-plugin-transform-object-rest-spread "6.23.0"
-    babel-plugin-transform-react-constant-elements "^6.23.0"
-    babel-plugin-transform-react-inline-elements "^6.22.0"
-    babel-plugin-transform-react-jsx "^6.24.1"
-    babel-plugin-transform-react-jsx-self "^6.22.0"
-    babel-plugin-transform-react-jsx-source "^6.22.0"
-    babel-plugin-transform-react-remove-prop-types "^0.4.6"
-    babel-plugin-transform-runtime "^6.23.0"
-    babel-plugin-universal-import "^1.1.15"
-    babel-preset-babili "^0.1.4"
-    babel-preset-env "^1.6.0"
-    browserslist "^2.2.2"
     fast-async "^6.3.0"
     nodent-runtime "^3.0.4"
 
@@ -1247,7 +1215,7 @@ babel-register@^6.24.1:
     mkdirp "^0.5.1"
     source-map-support "^0.4.2"
 
-babel-runtime@^6.18.0, babel-runtime@^6.2.0, babel-runtime@^6.20.0, babel-runtime@^6.22.0, babel-runtime@^6.23.0, babel-runtime@^6.25.0:
+babel-runtime@^6.18.0, babel-runtime@^6.2.0, babel-runtime@^6.20.0, babel-runtime@^6.22.0, babel-runtime@^6.25.0:
   version "6.25.0"
   resolved "https://npm.strues.io/babel-runtime/-/babel-runtime-6.25.0.tgz#33b98eaa5d482bb01a8d1aa6b437ad2b01aec41c"
   dependencies:
@@ -1287,7 +1255,7 @@ babel-types@^6.19.0, babel-types@^6.23.0, babel-types@^6.24.1, babel-types@^6.25
     lodash "^4.2.0"
     to-fast-properties "^1.0.1"
 
-babylon@^6.15.0, babylon@^6.17.0, babylon@^6.17.2:
+babylon@^6.17.0, babylon@^6.17.2:
   version "6.17.4"
   resolved "https://npm.strues.io/babylon/-/babylon-6.17.4.tgz#3e8b7402b88d22c3423e137a1577883b15ff869a"
 
@@ -1308,6 +1276,16 @@ bcrypt-pbkdf@^1.0.0:
   resolved "https://npm.strues.io/bcrypt-pbkdf/-/bcrypt-pbkdf-1.0.1.tgz#63bc5dcb61331b92bc05fd528953c33462a06f8d"
   dependencies:
     tweetnacl "^0.14.3"
+
+better-sass-loader@^0.1.0-beta.1:
+  version "0.1.0-beta.1"
+  resolved "https://registry.npmjs.org/better-sass-loader/-/better-sass-loader-0.1.0-beta.1.tgz#76624747a9c453fcd11fbd7c9580bb0edc89add3"
+  dependencies:
+    async "^2.5.0"
+    cli-source-preview "^1.1.0"
+    co "^4.6.0"
+    fs-extra "^4.0.1"
+    loader-utils "^1.1.0"
 
 big.js@^3.1.3:
   version "3.1.3"
@@ -1424,7 +1402,7 @@ browserslist@^1.3.6, browserslist@^1.5.2, browserslist@^1.7.6:
     caniuse-db "^1.0.30000639"
     electron-to-chromium "^1.2.7"
 
-browserslist@^2.1.2, browserslist@^2.1.5, browserslist@^2.2.2, browserslist@^2.3.0:
+browserslist@^2.1.2, browserslist@^2.1.5, browserslist@^2.3.0:
   version "2.3.1"
   resolved "https://npm.strues.io/browserslist/-/browserslist-2.3.1.tgz#39500a2090330b2a090120ea6c7fc78b6e091c5e"
   dependencies:
@@ -1635,6 +1613,12 @@ cli-cursor@^2.1.0:
   dependencies:
     restore-cursor "^2.0.0"
 
+cli-source-preview@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/cli-source-preview/-/cli-source-preview-1.1.0.tgz#05303ab1279a9093ead1a3837b3ee231f3006544"
+  dependencies:
+    chalk "^1.1.3"
+
 cli-spinners@^1.0.0:
   version "1.0.0"
   resolved "https://npm.strues.io/cli-spinners/-/cli-spinners-1.0.0.tgz#ef987ed3d48391ac3dab9180b406a742180d6e6a"
@@ -1658,15 +1642,6 @@ cliui@^3.2.0:
     string-width "^1.0.1"
     strip-ansi "^3.0.1"
     wrap-ansi "^2.0.0"
-
-clone-deep@^0.3.0:
-  version "0.3.0"
-  resolved "https://npm.strues.io/clone-deep/-/clone-deep-0.3.0.tgz#348c61ae9cdbe0edfe053d91ff4cc521d790ede8"
-  dependencies:
-    for-own "^1.0.0"
-    is-plain-object "^2.0.1"
-    kind-of "^3.2.2"
-    shallow-clone "^0.1.2"
 
 clone@^1.0.2:
   version "1.0.2"
@@ -2440,9 +2415,9 @@ eslint-scope@^3.7.1:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint@^4.4.1:
+eslint@4.4.1:
   version "4.4.1"
-  resolved "https://npm.strues.io/eslint/-/eslint-4.4.1.tgz#99cd7eafcffca2ff99a5c8f5f2a474d6364b4bd3"
+  resolved "https://registry.npmjs.org/eslint/-/eslint-4.4.1.tgz#99cd7eafcffca2ff99a5c8f5f2a474d6364b4bd3"
   dependencies:
     ajv "^5.2.0"
     babel-code-frame "^6.22.0"
@@ -2783,16 +2758,9 @@ flatten@^1.0.2:
   version "1.0.2"
   resolved "https://npm.strues.io/flatten/-/flatten-1.0.2.tgz#dae46a9d78fbe25292258cc1e780a41d95c03782"
 
-flow-bin@^0.52.0:
+flow-bin@0.52.0:
   version "0.52.0"
-  resolved "https://npm.strues.io/flow-bin/-/flow-bin-0.52.0.tgz#b6d9abe8bcd1ee5c62df386451a4e2553cadc3a3"
-
-flow-remove-types@^1.1.0:
-  version "1.2.1"
-  resolved "https://npm.strues.io/flow-remove-types/-/flow-remove-types-1.2.1.tgz#58e261bf8b842bd234c86cafb982a1213aff0edb"
-  dependencies:
-    babylon "^6.15.0"
-    vlq "^0.2.1"
+  resolved "https://registry.npmjs.org/flow-bin/-/flow-bin-0.52.0.tgz#b6d9abe8bcd1ee5c62df386451a4e2553cadc3a3"
 
 flush-write-stream@^1.0.0:
   version "1.0.2"
@@ -2801,10 +2769,6 @@ flush-write-stream@^1.0.0:
     inherits "^2.0.1"
     readable-stream "^2.0.4"
 
-for-in@^0.1.3:
-  version "0.1.8"
-  resolved "https://npm.strues.io/for-in/-/for-in-0.1.8.tgz#d8773908e31256109952b1fdb9b3fa867d2775e1"
-
 for-in@^1.0.1:
   version "1.0.2"
   resolved "https://npm.strues.io/for-in/-/for-in-1.0.2.tgz#81068d295a8142ec0ac726c6e2200c30fb6d5e80"
@@ -2812,12 +2776,6 @@ for-in@^1.0.1:
 for-own@^0.1.4:
   version "0.1.5"
   resolved "https://npm.strues.io/for-own/-/for-own-0.1.5.tgz#5265c681a4f294dabbf17c9509b6763aa84510ce"
-  dependencies:
-    for-in "^1.0.1"
-
-for-own@^1.0.0:
-  version "1.0.0"
-  resolved "https://npm.strues.io/for-own/-/for-own-1.0.0.tgz#c63332f415cedc4b04dbfe70cf836494c53cb44b"
   dependencies:
     for-in "^1.0.1"
 
@@ -2852,7 +2810,7 @@ from2@^2.1.0:
     inherits "^2.0.1"
     readable-stream "^2.0.0"
 
-fs-extra@^4.0.0, fs-extra@^4.0.1:
+fs-extra@^4.0.1:
   version "4.0.1"
   resolved "https://npm.strues.io/fs-extra/-/fs-extra-4.0.1.tgz#7fc0c6c8957f983f57f306a24e5b9ddd8d0dd880"
   dependencies:
@@ -3327,7 +3285,7 @@ is-binary-path@^1.0.0:
   dependencies:
     binary-extensions "^1.0.0"
 
-is-buffer@^1.0.2, is-buffer@^1.1.5, is-buffer@~1.1.1:
+is-buffer@^1.1.5, is-buffer@~1.1.1:
   version "1.1.5"
   resolved "https://npm.strues.io/is-buffer/-/is-buffer-1.1.5.tgz#1f3b26ef613b214b88cbca23cc6c01d87961eecc"
 
@@ -3425,12 +3383,6 @@ is-plain-obj@^1.0.0:
   version "1.1.0"
   resolved "https://npm.strues.io/is-plain-obj/-/is-plain-obj-1.1.0.tgz#71a50c8429dfca773c92a390a4a03b39fcd51d3e"
 
-is-plain-object@^2.0.1:
-  version "2.0.4"
-  resolved "https://npm.strues.io/is-plain-object/-/is-plain-object-2.0.4.tgz#2c163b3fafb1b606d9d17928f05c2a1c38e07677"
-  dependencies:
-    isobject "^3.0.1"
-
 is-posix-bracket@^0.1.0:
   version "0.1.1"
   resolved "https://npm.strues.io/is-posix-bracket/-/is-posix-bracket-0.1.1.tgz#3334dc79774368e92f016e6fbc0a88f5cd6e6bc4"
@@ -3506,10 +3458,6 @@ isobject@^2.0.0:
   resolved "https://npm.strues.io/isobject/-/isobject-2.1.0.tgz#f065561096a3f1da2ef46272f815c840d87e0c89"
   dependencies:
     isarray "1.0.0"
-
-isobject@^3.0.1:
-  version "3.0.1"
-  resolved "https://npm.strues.io/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
 
 isomorphic-fetch@^2.1.1:
   version "2.2.1"
@@ -3627,13 +3575,7 @@ jsx-ast-utils@^2.0.0:
   dependencies:
     array-includes "^3.0.3"
 
-kind-of@^2.0.1:
-  version "2.0.1"
-  resolved "https://npm.strues.io/kind-of/-/kind-of-2.0.1.tgz#018ec7a4ce7e3a86cb9141be519d24c8faa981b5"
-  dependencies:
-    is-buffer "^1.0.2"
-
-kind-of@^3.0.2, kind-of@^3.2.2:
+kind-of@^3.0.2:
   version "3.2.2"
   resolved "https://npm.strues.io/kind-of/-/kind-of-3.2.2.tgz#31ea21a734bab9bbb0f32466d893aea51e4a3c64"
   dependencies:
@@ -3644,10 +3586,6 @@ kind-of@^4.0.0:
   resolved "https://npm.strues.io/kind-of/-/kind-of-4.0.0.tgz#20813df3d712928b207378691a45066fae72dd57"
   dependencies:
     is-buffer "^1.1.5"
-
-lazy-cache@^0.2.3:
-  version "0.2.7"
-  resolved "https://npm.strues.io/lazy-cache/-/lazy-cache-0.2.7.tgz#7feddf2dcb6edb77d11ef1d117ab5ffdf0ab1b65"
 
 lazy-cache@^1.0.3:
   version "1.0.4"
@@ -3689,7 +3627,7 @@ loader-runner@^2.3.0:
   version "2.3.0"
   resolved "https://npm.strues.io/loader-runner/-/loader-runner-2.3.0.tgz#f482aea82d543e07921700d5a46ef26fdac6b8a2"
 
-loader-utils@1.1.0, loader-utils@^1.0.1, loader-utils@^1.0.2, loader-utils@^1.1.0:
+loader-utils@1.1.0, loader-utils@^1.0.2, loader-utils@^1.1.0:
   version "1.1.0"
   resolved "https://npm.strues.io/loader-utils/-/loader-utils-1.1.0.tgz#c98aef488bcceda2ffb5e2de646d6a754429f5cd"
   dependencies:
@@ -3756,10 +3694,6 @@ lodash.reduce@^4.6.0:
 lodash.some@^4.6.0:
   version "4.6.0"
   resolved "https://npm.strues.io/lodash.some/-/lodash.some-4.6.0.tgz#1bb9f314ef6b8baded13b549169b2a945eb68e4d"
-
-lodash.tail@^4.1.1:
-  version "4.1.1"
-  resolved "https://npm.strues.io/lodash.tail/-/lodash.tail-4.1.1.tgz#d2333a36d9e7717c8ad2f7cacafec7c32b444664"
 
 lodash.uniq@^4.5.0:
   version "4.5.0"
@@ -3987,13 +3921,6 @@ mississippi@^1.3.0:
     stream-each "^1.1.0"
     through2 "^2.0.0"
 
-mixin-object@^2.0.1:
-  version "2.0.1"
-  resolved "https://npm.strues.io/mixin-object/-/mixin-object-2.0.1.tgz#4fb949441dab182540f1fe035ba60e1947a5e57e"
-  dependencies:
-    for-in "^0.1.3"
-    is-extendable "^0.1.1"
-
 "mkdirp@>=0.5 0", mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.0, mkdirp@~0.5.1:
   version "0.5.1"
   resolved "https://npm.strues.io/mkdirp/-/mkdirp-0.5.1.tgz#30057438eac6cf7f8c4767f38648d6697d75c903"
@@ -4047,7 +3974,7 @@ no-case@^2.2.0:
   dependencies:
     lower-case "^1.1.1"
 
-node-fetch@^1.0.1, node-fetch@^1.7.2:
+node-fetch@^1.0.1:
   version "1.7.2"
   resolved "https://npm.strues.io/node-fetch/-/node-fetch-1.7.2.tgz#c54e9aac57e432875233525f3c891c4159ffefd7"
   dependencies:
@@ -4100,10 +4027,6 @@ node-libs-browser@^2.0.0:
     util "^0.10.3"
     vm-browserify "0.0.4"
 
-node-noop@^1.0.0:
-  version "1.0.0"
-  resolved "https://npm.strues.io/node-noop/-/node-noop-1.0.0.tgz#47a3e7d80cffaa6458364bd22ed85cab3307be79"
-
 node-pre-gyp@^0.6.36:
   version "0.6.36"
   resolved "https://npm.strues.io/node-pre-gyp/-/node-pre-gyp-0.6.36.tgz#db604112cb74e0d477554e9b505b17abddfab786"
@@ -4149,11 +4072,7 @@ nodent-compiler@>=3.1.0:
     acorn-es7-plugin ">=1.1.6"
     source-map "^0.5.6"
 
-nodent-runtime@>=3.0.4:
-  version "3.0.4"
-  resolved "https://npm.strues.io/nodent-runtime/-/nodent-runtime-3.0.4.tgz#a801ecb7bb0f6c39a69b24cc2fa370cfa8b492da"
-
-nodent-runtime@^3.0.4:
+nodent-runtime@>=3.0.4, nodent-runtime@^3.0.4:
   version "3.0.4"
   resolved "https://registry.npmjs.org/nodent-runtime/-/nodent-runtime-3.0.4.tgz#a801ecb7bb0f6c39a69b24cc2fa370cfa8b492da"
 
@@ -4475,10 +4394,6 @@ performance-now@^0.2.0:
 pify@^2.0.0, pify@^2.3.0:
   version "2.3.0"
   resolved "https://npm.strues.io/pify/-/pify-2.3.0.tgz#ed141a6ac043a849ea588498e7dca8b15330e90c"
-
-pify@^3.0.0:
-  version "3.0.0"
-  resolved "https://npm.strues.io/pify/-/pify-3.0.0.tgz#e5a4acd2c101fdf3d9a4d07f0dbc4db49dd28176"
 
 pinkie-promise@^2.0.0:
   version "2.0.1"
@@ -4831,9 +4746,9 @@ prepend-http@^1.0.0:
   version "1.0.4"
   resolved "https://npm.strues.io/prepend-http/-/prepend-http-1.0.4.tgz#d4f4562b0ce3696e41ac52d0e002e57a635dc6dc"
 
-prepublish@^1.2.7:
+prepublish@1.2.7:
   version "1.2.7"
-  resolved "https://npm.strues.io/prepublish/-/prepublish-1.2.7.tgz#9d26b2fda1ae516b6bca76f30e3ede6406243c95"
+  resolved "https://registry.npmjs.org/prepublish/-/prepublish-1.2.7.tgz#9d26b2fda1ae516b6bca76f30e3ede6406243c95"
   dependencies:
     app-root-dir "^1.0.2"
     async "^2.5.0"
@@ -4860,9 +4775,9 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://npm.strues.io/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
-prettier@^1.5.3:
+prettier@1.5.3:
   version "1.5.3"
-  resolved "https://npm.strues.io/prettier/-/prettier-1.5.3.tgz#59dadc683345ec6b88f88b94ed4ae7e1da394bfe"
+  resolved "https://registry.npmjs.org/prettier/-/prettier-1.5.3.tgz#59dadc683345ec6b88f88b94ed4ae7e1da394bfe"
 
 pretty-error@^2.0.2, pretty-error@^2.1.1:
   version "2.1.1"
@@ -5025,9 +4940,9 @@ react-deep-force-update@^2.0.1:
   version "2.1.0"
   resolved "https://npm.strues.io/react-deep-force-update/-/react-deep-force-update-2.1.0.tgz#1c5f36ea96bcbf411605ec063f36c568ea4df86c"
 
-react-dev-utils@^3.1.0:
+react-dev-utils@^3.1.1:
   version "3.1.1"
-  resolved "https://npm.strues.io/react-dev-utils/-/react-dev-utils-3.1.1.tgz#09ae7209a81384248db56547e718e65bd3b20eb5"
+  resolved "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-3.1.1.tgz#09ae7209a81384248db56547e718e65bd3b20eb5"
   dependencies:
     address "1.0.2"
     anser "1.4.1"
@@ -5350,32 +5265,6 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^2.0.0"
     inherits "^2.0.1"
 
-rollr@^0.1.0:
-  version "0.1.0"
-  resolved "https://npm.strues.io/rollr/-/rollr-0.1.0.tgz#4547a80fe37119b076f38aa65bd067dd22972041"
-  dependencies:
-    app-root-dir "^1.0.2"
-    async "^2.5.0"
-    babel-preset-boldr "0.11.0"
-    babel-runtime "^6.23.0"
-    chalk "^2.0.1"
-    file-exists "^4.0.0"
-    fs-extra "^4.0.0"
-    loader-utils "^1.1.0"
-    lodash "^4.17.4"
-    meow "^3.7.0"
-    rollup "^0.45.2"
-    rollup-plugin-babel "^2.7.1"
-    rollup-plugin-buble "^0.15.0"
-    rollup-plugin-commonjs "^8.0.2"
-    rollup-plugin-executable "^1.0.0"
-    rollup-plugin-flow "^1.1.1"
-    rollup-plugin-json "^2.3.0"
-    rollup-plugin-node-resolve "^3.0.0"
-    rollup-plugin-rebase "^0.7.2"
-    rollup-plugin-replace "^1.1.1"
-    rollup-plugin-yaml "^1.1.0"
-
 rollup-plugin-babel@^2.7.1:
   version "2.7.1"
   resolved "https://npm.strues.io/rollup-plugin-babel/-/rollup-plugin-babel-2.7.1.tgz#16528197b0f938a1536f44683c7a93d573182f57"
@@ -5392,7 +5281,7 @@ rollup-plugin-buble@^0.15.0:
     buble "^0.15.0"
     rollup-pluginutils "^1.5.0"
 
-rollup-plugin-commonjs@^8.0.2, rollup-plugin-commonjs@^8.1.0:
+rollup-plugin-commonjs@^8.1.0:
   version "8.1.0"
   resolved "https://npm.strues.io/rollup-plugin-commonjs/-/rollup-plugin-commonjs-8.1.0.tgz#8ac9a87e6ea4c0d136e3e0e25ef41058957622b0"
   dependencies:
@@ -5407,13 +5296,6 @@ rollup-plugin-executable@^1.0.0:
   resolved "https://npm.strues.io/rollup-plugin-executable/-/rollup-plugin-executable-1.0.0.tgz#50f434a664de3c88d44d34ae7d3db57c6e7310c5"
   dependencies:
     babel-runtime "^6.20.0"
-
-rollup-plugin-flow@^1.1.1:
-  version "1.1.1"
-  resolved "https://npm.strues.io/rollup-plugin-flow/-/rollup-plugin-flow-1.1.1.tgz#6ce568f1dd559666b77ab76b4bae251407528db6"
-  dependencies:
-    flow-remove-types "^1.1.0"
-    rollup-pluginutils "^1.5.1"
 
 rollup-plugin-json@^2.0.1, rollup-plugin-json@^2.3.0:
   version "2.3.0"
@@ -5430,7 +5312,7 @@ rollup-plugin-node-resolve@^3.0.0:
     is-module "^1.0.0"
     resolve "^1.1.6"
 
-rollup-plugin-rebase@^0.7.2, rollup-plugin-rebase@^0.7.6:
+rollup-plugin-rebase@^0.7.6:
   version "0.7.6"
   resolved "https://npm.strues.io/rollup-plugin-rebase/-/rollup-plugin-rebase-0.7.6.tgz#7cce0cf7a5957821ada9f77fab0bdca00740d841"
   dependencies:
@@ -5517,16 +5399,6 @@ sass-graph@^2.1.1:
     scss-tokenizer "^0.2.3"
     yargs "^7.0.0"
 
-sass-loader@^6.0.6:
-  version "6.0.6"
-  resolved "https://npm.strues.io/sass-loader/-/sass-loader-6.0.6.tgz#e9d5e6c1f155faa32a4b26d7a9b7107c225e40f9"
-  dependencies:
-    async "^2.1.5"
-    clone-deep "^0.3.0"
-    loader-utils "^1.0.1"
-    lodash.tail "^4.1.1"
-    pify "^3.0.0"
-
 sax@~1.2.1:
   version "1.2.4"
   resolved "https://npm.strues.io/sax/-/sax-1.2.4.tgz#2816234e2378bddc4e5354fab5caa895df7100d9"
@@ -5604,15 +5476,6 @@ sha.js@^2.4.0, sha.js@^2.4.8:
   resolved "https://npm.strues.io/sha.js/-/sha.js-2.4.8.tgz#37068c2c476b6baf402d14a49c67f597921f634f"
   dependencies:
     inherits "^2.0.1"
-
-shallow-clone@^0.1.2:
-  version "0.1.2"
-  resolved "https://npm.strues.io/shallow-clone/-/shallow-clone-0.1.2.tgz#5909e874ba77106d73ac414cfec1ffca87d97060"
-  dependencies:
-    is-extendable "^0.1.1"
-    kind-of "^2.0.1"
-    lazy-cache "^0.2.3"
-    mixin-object "^2.0.1"
 
 shebang-command@^1.2.0:
   version "1.2.0"
@@ -6270,9 +6133,9 @@ webpack-subresource-integrity@^1.0.1:
   dependencies:
     webpack-core "^0.6.8"
 
-webpack@^3.5.3:
-  version "3.5.3"
-  resolved "https://npm.strues.io/webpack/-/webpack-3.5.3.tgz#e68653963bda146e212832c04a4d8041d2b4b8c8"
+webpack@^3.5.4:
+  version "3.5.4"
+  resolved "https://registry.npmjs.org/webpack/-/webpack-3.5.4.tgz#5583eb263ed27b78b5bd17bfdfb0eb1b1cd1bf81"
   dependencies:
     acorn "^5.0.0"
     acorn-dynamic-import "^2.0.0"
@@ -6307,7 +6170,7 @@ websocket-extensions@>=0.1.1:
   version "0.1.1"
   resolved "https://npm.strues.io/websocket-extensions/-/websocket-extensions-0.1.1.tgz#76899499c184b6ef754377c2dbb0cd6cb55d29e7"
 
-whatwg-fetch@>=0.10.0, whatwg-fetch@^2.0.3:
+whatwg-fetch@>=0.10.0:
   version "2.0.3"
   resolved "https://npm.strues.io/whatwg-fetch/-/whatwg-fetch-2.0.3.tgz#9c84ec2dcf68187ff00bc64e1274b442176e1c84"
 

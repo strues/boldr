@@ -102,16 +102,13 @@ export default function createWebpackConfig(
     {
       useBuiltins: true,
       modules: false,
-      faSpecMode: false,
+      faSpecMode: true,
       looseMode: true,
       specMode: false,
-      nodentRt: true,
-      polyfill: true,
+      nodentRt: false,
+      polyfill: false,
       exclude: ['transform-regenerator', 'transform-async-to-generator'],
-      targets: {
-        uglify: !_IS_DEV_,
-        browsers: ['> .5% in US', 'last 1 versions'],
-      },
+      targets: { uglify: !_IS_DEV_, browsers: ['> .5% in US', 'last 1 versions'] },
     },
   ];
   const serverPreset = [
@@ -119,11 +116,11 @@ export default function createWebpackConfig(
     {
       useBuiltins: true,
       modules: false,
-      faSpecMode: false,
+      faSpecMode: true,
       looseMode: true,
       specMode: false,
-      nodentRt: true,
-      polyfill: true,
+      nodentRt: false,
+      polyfill: false,
       exclude: ['transform-regenerator', 'transform-async-to-generator'],
       targets: {
         node: '8',
@@ -154,12 +151,12 @@ export default function createWebpackConfig(
 
   const devtool = _IS_DEV_ ? 'cheap-module-source-map' : 'source-map';
 
-  logger.info(`${PREFIX} Configuration:`);
+  logger.start(`${PREFIX} Configuration:`);
   // $FlowIssue
-  logger.info(`→ Environment: ${config.env}`);
-  logger.info(`→ Build Target: ${target}`);
-  logger.info(`→ Babel Environment: ${BABEL_ENV}`);
-  logger.log(`→ Source Maps: ${devtool}`);
+  logger.task(`Current Env: ${config.env}`);
+  logger.task(`Build Target: ${target}`);
+  logger.task(`Babel Env: ${BABEL_ENV}`);
+  logger.task(`Source Maps: ${devtool}`);
 
   const cacheLoader = config.useCacheLoader
     ? {
@@ -185,13 +182,11 @@ export default function createWebpackConfig(
     },
   };
   const sassLoaderRule = {
-    loader: require.resolve('sass-loader'),
+    loader: require.resolve('better-sass-loader'),
   };
   const getClientEntry = () => {
     // For development
     let entry = [
-      'babel-polyfill',
-      'nodent-runtime',
       require.resolve('react-hot-loader/patch'),
       `${require.resolve(
         'webpack-hot-middleware/client',
@@ -208,10 +203,10 @@ export default function createWebpackConfig(
     return entry;
   };
   const getServerEntry = () => {
-    const entry = [require.resolve('node-fetch'), SERVER_ENTRY];
+    const entry = [SERVER_ENTRY];
     return entry;
   };
-  console.log('ho  🍺');
+
   // $FlowIssue
   return {
     name,
@@ -231,7 +226,6 @@ export default function createWebpackConfig(
           hints: 'warning',
         },
     entry: _IS_SERVER_ ? getServerEntry() : getClientEntry(),
-
     output: {
       libraryTarget: _IS_SERVER_ ? 'commonjs2' : 'var',
       filename: _IS_DEV_ || _IS_SERVER_ ? '[name].js' : '[name]-[chunkhash].js',
@@ -244,7 +238,6 @@ export default function createWebpackConfig(
         ? info => path.resolve(info.absoluteResourcePath)
         : info => path.resolve(ROOT, info.absoluteResourcePath),
     },
-
     resolve: {
       extensions: ['.js', '.json', '.jsx'],
       mainFields: [
@@ -303,7 +296,6 @@ export default function createWebpackConfig(
         {
           test: JS_FILES,
           include: PROJECT_SRC,
-          exclude: /node_modules/,
           use: [
             cacheLoader,
             {
@@ -397,11 +389,9 @@ export default function createWebpackConfig(
             log: true,
           })
         : null,
-      new webpack.NormalModuleReplacementPlugin(/\/iconv-loader$/, 'node-noop'),
       // Let the server side renderer know about our client side assets
       // https://github.com/FormidableLabs/webpack-stats-plugin
       _IS_PROD_ && _IS_CLIENT_ ? new StatsPlugin('stats.json') : null,
-
       // Classic UglifyJS for compressing ES5 compatible code.
       // https://github.com/webpack-contrib/uglifyjs-webpack-plugin
       config.minifier === 'uglify' && _IS_PROD_ && _IS_CLIENT_
@@ -415,7 +405,6 @@ export default function createWebpackConfig(
       // "Use HashedModuleIdsPlugin to generate IDs that preserves over builds."
       // Via: https://github.com/webpack/webpack.js.org/issues/652#issuecomment-273324529
       _IS_PROD_ ? new webpack.HashedModuleIdsPlugin() : null,
-
       // I would recommend using NamedModulesPlugin during development (better output).
       // Via: https://github.com/webpack/webpack.js.org/issues/652#issuecomment-273023082
       _IS_DEV_ ? new webpack.NamedModulesPlugin() : null,
@@ -426,27 +415,23 @@ export default function createWebpackConfig(
             template: HTML_TEMPLATE,
           })
         : null,
-
       _IS_CLIENT_
         ? new ExtractCssChunks({
             filename: _IS_DEV_ ? '[name].css' : '[name]-[contenthash:base62:8].css',
           })
         : null,
-
       _IS_SERVER_ ? new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }) : null,
       _IS_PROD_ && _IS_CLIENT_ ? new WebpackDigestHash() : null,
       // Extract Webpack bootstrap code with knowledge about chunks into separate cachable package.
       _IS_CLIENT_
         ? new webpack.optimize.CommonsChunkPlugin({
-            names: ['bootstrap'],
-
+            names: ['bootstrap', 'vendor'],
             //   // needed to put webpack bootstrap code before chunks
             filename: _IS_PROD_ ? '[name]-[chunkhash].js' : '[name].js',
             minChunks: Infinity,
           })
         : null,
       _IS_PROD_ ? new webpack.optimize.ModuleConcatenationPlugin() : null,
-
       _IS_CLIENT_ && _IS_DEV_ ? new webpack.HotModuleReplacementPlugin() : null,
       _IS_DEV_ ? new webpack.NoEmitOnErrorsPlugin() : null,
       _IS_DEV_ && _IS_CLIENT_

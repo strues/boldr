@@ -16,7 +16,7 @@ const PORT = process.env.PORT;
 /* eslint-disable import/no-commonjs */
 /* eslint-disable security/detect-non-literal-require */
 
-export function startRenderServer() {
+export default function startRenderServer() {
   const server = createExpress({});
 
   const clientStats = require(`${CLIENT_OUTPUT}/stats.json`);

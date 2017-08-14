@@ -12,6 +12,7 @@ import appReducer from './reducers';
 const DOM_NODE = document.getElementById('app');
 const preloadedState = window.__APOLLO_STATE__;
 const token = getToken();
+
 export const apolloClient = createApolloClient({
   batchRequests: true,
   initialState: preloadedState,
@@ -22,7 +23,11 @@ export const apolloClient = createApolloClient({
 });
 
 const env = process.env.NODE_ENV === 'development' ? 'development' : 'production';
+// Create the redux store by passing the "main" reducer, preloadedState, the Apollo Client
+// and env. Passing either 'development' or 'production' (env) includes/excludes
+// reduxDevTools, etc
 const reduxStore = createBoldrStore(appReducer, preloadedState, apolloClient, env);
+
 if (token) {
   // Update application state. User has token and is probably authenticated
   reduxStore.dispatch(checkAuth(token));
