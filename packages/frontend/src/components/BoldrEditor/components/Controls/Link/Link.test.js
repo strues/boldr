@@ -4,7 +4,6 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { EditorState, convertFromHTML, ContentState } from 'draft-js';
 import defaultToolbar from '../../../config/defaultToolbar';
-import ModalHandler from '../../../eventHandlers/modals';
 import Link from './Link';
 
 describe('<Link />', () => {
@@ -14,14 +13,7 @@ describe('<Link />', () => {
 
   it('should have a div when rendered', () => {
     expect(
-      mount(
-        <Link
-          onChange={() => {}}
-          editorState={editorState}
-          config={defaultToolbar.link}
-          modalHandler={new ModalHandler()}
-        />,
-      )
+      mount(<Link onChange={() => {}} editorState={editorState} config={defaultToolbar.link} />)
         .html()
         .startsWith('<div'),
     ).toBe(true);
@@ -29,24 +21,14 @@ describe('<Link />', () => {
 
   it('should have 2 child elements by default', () => {
     const control = mount(
-      <Link
-        onChange={() => {}}
-        editorState={editorState}
-        config={defaultToolbar.link}
-        modalHandler={new ModalHandler()}
-      />,
+      <Link onChange={() => {}} editorState={editorState} config={defaultToolbar.link} />,
     );
     expect(control.children().length).toEqual(2);
   });
 
   it('should have no value for state variable link default', () => {
     const control = mount(
-      <Link
-        onChange={() => {}}
-        editorState={editorState}
-        config={defaultToolbar.link}
-        modalHandler={new ModalHandler()}
-      />,
+      <Link onChange={() => {}} editorState={editorState} config={defaultToolbar.link} />,
     );
     const linkControl = control.find('Link');
     expect(linkControl.node.state.expanded).toBeFalsy();

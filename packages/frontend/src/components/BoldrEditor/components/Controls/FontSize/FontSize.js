@@ -25,7 +25,6 @@ export default class FontSize extends Component {
         currentFontSize: getSelectionCustomInlineStyle(editorState, ['FONTSIZE']).FONTSIZE,
       });
     }
-    modalHandler.registerCallBack(this.expandCollapse);
   }
 
   componentDidMount(): void {
@@ -47,9 +46,6 @@ export default class FontSize extends Component {
     }
   }
 
-  componentWillUnmount(): void {
-    this.props.modalHandler.deregisterCallBack(this.expandCollapse);
-  }
   props: Props;
 
   setFontSize = defaultFontSize => {

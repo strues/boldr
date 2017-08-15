@@ -17,14 +17,14 @@ class Embedded extends Component {
   state: Object = {
     expanded: false,
   };
-
-  componentWillMount(): void {
-    this.props.modalHandler.registerCallBack(this.expandCollapse);
-  }
-
-  componentWillUnmount(): void {
-    this.props.modalHandler.deregisterCallBack(this.expandCollapse);
-  }
+  //
+  // componentWillMount(): void {
+  //   this.props.modalHandler.registerCallBack(this.expandCollapse);
+  // }
+  //
+  // componentWillUnmount(): void {
+  //   this.props.modalHandler.deregisterCallBack(this.expandCollapse);
+  // }
   props: Props;
   onExpandEvent: Function = (): void => {
     this.signalExpanded = !this.state.expanded;

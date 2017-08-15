@@ -14,9 +14,6 @@ export type Props = {
   active: ?boolean,
   highlighted: ?boolean,
   className: ?string,
-  activeClassName: string,
-  disabledClassName: string,
-  highlightedClassName: string,
   title: ?string,
 };
 
@@ -51,22 +48,12 @@ export default class DropdownOption extends Component {
   };
 
   render(): Object {
-    const {
-      children,
-      active,
-      disabled,
-      highlighted,
-      className,
-      activeClassName,
-      disabledClassName,
-      highlightedClassName,
-      title,
-    } = this.props;
+    const { children, active, disabled, highlighted, className, title } = this.props;
 
     const classes: () => ClassNamesFn = classNames('boldredit-dropdown__option--default', {
-      [`boldredit-dropdown__option--active ${activeClassName}`]: active,
-      [`boldredit-dropdown__option--highlighted ${highlightedClassName}`]: highlighted,
-      [`boldredit-dropdown__option--disabled ${disabledClassName}`]: disabled,
+      'boldredit-dropdown__option--active': active,
+      'boldredit-dropdown__option--highlighted': highlighted,
+      'boldredit-dropdown__option--disabled': disabled,
       className,
     });
     return (

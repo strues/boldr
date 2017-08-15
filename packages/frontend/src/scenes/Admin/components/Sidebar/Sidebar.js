@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-prop-types */
 /* @flow */
 import React, { Component } from 'react';
 import withRouter from 'react-router-dom/withRouter';
@@ -6,26 +7,25 @@ import SidebarWrapper from './SidebarWrapper';
 import SidebarHeader from './SidebarHeader';
 import SidebarNav from './SidebarNav';
 
-export type SidebarLink = {
+interface SidebarLink {
   icon: string,
   id: number,
   label: boolean,
   link: string,
   items: ?SidebarLinks,
-};
+}
 
 export type SidebarLinks = Array<SidebarLink>;
 
 export type Props = {
   navClassName: ?string,
   items: SidebarLinks,
-  location: Object,
-  isPrimaryColor: ?boolean,
-  activeItem: ?string,
+  activeItem: string,
   // sidebar is hidden or visible? default visible
-  visible: boolean,
+  isVisible: boolean,
   // expand or collapse menu item?
-  expanded: boolean,
+  isExpanded: boolean,
+  isSmall: boolean,
   onExpandCollapse: () => void,
   // url for the logo image
   logoImg: string,
@@ -39,9 +39,6 @@ class Sidebar extends Component {
     sidebarDark: true,
     logoImg: 'https://boldr.io/assets/boldr-logo-white.png',
   };
-  state = {
-    activate: null,
-  };
 
   props: Props;
 
@@ -49,17 +46,16 @@ class Sidebar extends Component {
     return (
       <SidebarWrapper {...this.props}>
         <SidebarHeader
-          isPrimaryColor={this.props.isPrimaryColor}
-          logoImg={this.props.logoImg}
+          logoSrc={this.props.logoImg}
           logoLink={this.props.logoLink}
+          isSmall={this.props.isSmall}
         />
         <SidebarNav
           items={this.props.items}
-          isPrimaryColor={this.props.isPrimaryColor}
           activeItem={this.props.activeItem}
+          isSmall={this.props.isSmall}
           navClassName={this.props.navClassName}
-          location={this.props.location}
-          expanded={this.props.expanded}
+          isExpanded={this.props.isExpanded}
           onExpandCollapse={this.props.onExpandCollapse}
         />
       </SidebarWrapper>

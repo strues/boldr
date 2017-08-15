@@ -110,10 +110,10 @@ export const checkAuth = token => {
         return response.json();
       })
       .then(res => {
-        const user = res;
+        // const user = res;
         return dispatch({
           type: t.CHECK_AUTH_SUCCESS,
-          user,
+          user: res,
           token,
         });
       })

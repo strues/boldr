@@ -18,13 +18,13 @@ export default class Emoji extends Component {
     expanded: false,
   };
 
-  componentWillMount(): void {
-    this.props.modalHandler.registerCallBack(this.expandCollapse);
-  }
-
-  componentWillUnmount(): void {
-    this.props.modalHandler.deregisterCallBack(this.expandCollapse);
-  }
+  // componentWillMount(): void {
+  //   this.props.modalHandler.registerCallBack(this.expandCollapse);
+  // }
+  //
+  // componentWillUnmount(): void {
+  //   this.props.modalHandler.deregisterCallBack(this.expandCollapse);
+  // }
   props: Props;
   expandCollapse: Function = (): void => {
     this.setState({

@@ -5,7 +5,6 @@ import { EditorState, convertFromHTML, ContentState } from 'draft-js';
 import { spy } from 'sinon';
 import { shallow, mount } from 'enzyme';
 import defaultToolbar from '../../../config/defaultToolbar';
-import ModalHandler from '../../../eventHandlers/modals';
 
 import Inline from './Inline';
 
@@ -16,14 +15,7 @@ describe('<Inline />', () => {
 
   it('should have a div when rendered', () => {
     expect(
-      mount(
-        <Inline
-          onChange={() => {}}
-          editorState={editorState}
-          config={defaultToolbar.inline}
-          modalHandler={new ModalHandler()}
-        />,
-      )
+      mount(<Inline onChange={() => {}} editorState={editorState} config={defaultToolbar.inline} />)
         .html()
         .startsWith('<div'),
     ).toBe(true);
@@ -31,12 +23,7 @@ describe('<Inline />', () => {
 
   it('should have 5 child elements by default', () => {
     const control = mount(
-      <Inline
-        onChange={() => {}}
-        editorState={editorState}
-        config={defaultToolbar.inline}
-        modalHandler={new ModalHandler()}
-      />,
+      <Inline onChange={() => {}} editorState={editorState} config={defaultToolbar.inline} />,
     );
     expect(control.children().length).toEqual(5);
   });
@@ -47,7 +34,6 @@ describe('<Inline />', () => {
         onChange={() => {}}
         editorState={editorState}
         config={{ ...defaultToolbar.inline, inDropdown: true }}
-        modalHandler={new ModalHandler()}
       />,
     );
     expect(control.children().length).toEqual(5);
@@ -57,12 +43,7 @@ describe('<Inline />', () => {
   it('should execute onChange when child elements are clicked', () => {
     const onChange = spy();
     const control = mount(
-      <Inline
-        onChange={onChange}
-        editorState={editorState}
-        config={defaultToolbar.inline}
-        modalHandler={new ModalHandler()}
-      />,
+      <Inline onChange={onChange} editorState={editorState} config={defaultToolbar.inline} />,
     );
     control.childAt(0).simulate('click');
     expect(onChange.calledOnce).toBeTruthy();
@@ -78,12 +59,7 @@ describe('<Inline />', () => {
 
   it('should have false value for all rich styles in state by default', () => {
     const control = shallow(
-      <Inline
-        onChange={() => {}}
-        editorState={editorState}
-        config={defaultToolbar.inline}
-        modalHandler={new ModalHandler()}
-      />,
+      <Inline onChange={() => {}} editorState={editorState} config={defaultToolbar.inline} />,
     );
     expect(control.state().currentStyles.BOLD).toBeFalsy();
     expect(control.state().currentStyles.ITALIC).toBeFalsy();

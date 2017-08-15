@@ -5,7 +5,6 @@ import { mount } from 'enzyme';
 import { EditorState, convertFromHTML, ContentState } from 'draft-js';
 import { Dropdown } from '../../Dropdown';
 import defaultToolbar from '../../../config/defaultToolbar';
-import ModalHandler from '../../../eventHandlers/modals';
 import FontSizeControl from './FontSize';
 
 describe('<FontSize />', () => {
@@ -20,7 +19,6 @@ describe('<FontSize />', () => {
           onChange={() => {}}
           editorState={editorState}
           config={defaultToolbar.fontSize}
-          modalHandler={new ModalHandler()}
         />,
       )
         .html()
@@ -34,7 +32,6 @@ describe('<FontSize />', () => {
         onChange={() => {}}
         editorState={editorState}
         config={defaultToolbar.fontSize}
-        modalHandler={new ModalHandler()}
       />,
     );
     expect(control.childAt(0).props().children.length, 2).toBeTruthy();

@@ -1,7 +1,6 @@
 /* @flow weak*/
 /* eslint-disable max-lines, flowtype/no-types-missing-file-annotation, react/no-array-index-key */
 import React, { Component } from 'react';
-import shortid from 'shortid';
 import {
   Editor,
   EditorState,
@@ -10,13 +9,12 @@ import {
   convertFromRaw,
   CompositeDecorator,
 } from 'draft-js';
-
-import classNames from 'classnames';
+import uniqueId from 'lodash/uniqueId';
+import cN from 'classnames';
 // $FlowIssue
 import type { ContentBlock } from 'draft-js';
-import { ModalHandler, FocusHandler, KeyDownHandler, SuggestionHandler } from '../../eventHandlers';
+import { FocusHandler, KeyDownHandler, SuggestionHandler } from '../eventHandlers';
 import {
-  changeDepth,
   handleNewLine,
   getCustomStyleMap,
   extractInlineStyle,
@@ -29,13 +27,11 @@ import {
 
 import * as Controls from '../../components/Controls';
 
-import getLinkDecorator from '../Decorators/Link';
-import getMentionDecorators from '../Decorators/Mention';
-import getHashtagDecorator from '../Decorators/HashTag';
+import { getLinkDecorator, getHashtagDecorator } from '../decorators';
 
-import getBlockRenderFunc from '../../Renderer';
+import getBlockRenderFunc from '../blockRender';
 import defaultToolbar from '../../config/defaultToolbar';
-import { EDITOR_PROPS } from './constants';
+import { EDITOR_PROPS, ENTITY_TYPE, BLOCK_TYPE, INLINE_STYLE } from '../constants';
 
 export type ChangeHandler = (value: any) => any;
 
@@ -84,7 +80,7 @@ export default class BoldrEditor extends Component {
     toolbarOnFocus: false,
     toolbarHidden: false,
     stripPastedStyles: false,
-    wrapperId: `boldredit-wrapper${shortid.generate()}`,
+    wrapperId: `boldredit-wrapper-${uniqueId()}`,
     customDecorators: [],
   };
 
@@ -97,8 +93,7 @@ export default class BoldrEditor extends Component {
       editorFocused: false,
       toolbar,
     };
-    // $FlowIssue
-    this.modalHandler = new ModalHandler();
+
     // $FlowIssue
     this.focusHandler = new FocusHandler();
     this.blockRendererFn = getBlockRenderFunc(
@@ -106,7 +101,7 @@ export default class BoldrEditor extends Component {
         isReadOnly: this.isReadOnly,
         isImageAlignmentEnabled: this.isImageAlignmentEnabled,
         getEditorState: this.getEditorState,
-        onChange: this.onChange,
+        onChange: this.handleChange,
       },
       props.customBlockRenderFunc,
     );
@@ -124,11 +119,6 @@ export default class BoldrEditor extends Component {
     const editorState = this.createEditorState(this.compositeDecorator);
     extractInlineStyle(editorState);
     this.setState({ editorState });
-  }
-
-  componentDidMount(): void {
-    // $FlowIssue
-    this.modalHandler.init(this.props.wrapperId);
   }
 
   componentWillReceiveProps(props) {
@@ -200,20 +190,15 @@ export default class BoldrEditor extends Component {
     this.focusHandler.onEditorMouseDown();
   };
 
-  onTab: Function = (event: Event): void => {
-    const { onTab } = this.props;
-    if (!onTab || !onTab(event)) {
-      const editorState = changeDepth(this.state.editorState, event.shiftKey ? -1 : 1, 4);
-      if (editorState && editorState !== this.state.editorState) {
-        this.onChange(editorState);
-        event.preventDefault();
-      }
-    }
-  };
-
-  onUpDownArrow: Function = (event: Event): void => {
-    if (SuggestionHandler.isOpen()) {
-      event.preventDefault();
+  /**
+   * Allow Return => Tab to indent a list.
+   * @type {Function}
+   */
+  handleTab: Function = (event: Event): void => {
+    const { editorState } = this.state;
+    const newEditorState = RichUtils.onTab(event, editorState, 2);
+    if (newEditorState !== editorState) {
+      this.handleChange(newEditorState);
     }
   };
 
@@ -231,7 +216,7 @@ export default class BoldrEditor extends Component {
     }
   };
 
-  onChange: Function = (editorState: Object): void => {
+  handleChange: Function = (editorState: Object): void => {
     const { readOnly, onEditorStateChange } = this.props;
     if (
       !readOnly &&
@@ -265,7 +250,7 @@ export default class BoldrEditor extends Component {
     this.wrapper = ref;
   };
 
-  setEditorReference: Function = (ref: Object): void => {
+  setEditorRef: Function = (ref: Object): void => {
     this.editor = ref;
   };
 
@@ -276,18 +261,7 @@ export default class BoldrEditor extends Component {
         showOpenOptionOnHover: this.state.toolbar.link.showOpenOptionOnHover,
       }),
     ];
-    if (this.props.mention) {
-      decorators.push(
-        ...getMentionDecorators({
-          ...this.props.mention,
-          onChange: this.onChange,
-          getEditorState: this.getEditorState,
-          getSuggestions: this.getSuggestions,
-          getWrapperRef: this.getWrapperRef,
-          modalHandler: this.modalHandler,
-        }),
-      );
-    }
+
     if (this.props.hashtag) {
       decorators.push(getHashtagDecorator(this.props.hashtag));
     }
@@ -298,12 +272,15 @@ export default class BoldrEditor extends Component {
 
   getEditorState = () => this.state.editorState;
 
-  getSuggestions = () => this.props.mention && this.props.mention.suggestions;
-
   isReadOnly = () => this.props.readOnly;
 
   isImageAlignmentEnabled = () => this.state.toolbar.image.alignmentEnabled;
 
+  /**
+   * Initializes the editorState
+   * @param  {[type]} compositeDecorator [description]
+   * @return {[type]}                    [description]
+   */
   createEditorState = compositeDecorator => {
     let editorState;
     if (hasProperty(this.props, 'editorState')) {
@@ -353,17 +330,42 @@ export default class BoldrEditor extends Component {
   focusEditor: Function = (): void => {
     setTimeout(() => {
       this.editor.focus();
-    });
+    }, 100);
   };
 
   handleKeyCommand: Function = (command: Object): boolean => {
     const { editorState } = this.state;
-    const newState = RichUtils.handleKeyCommand(editorState, command);
-    if (newState) {
-      this.onChange(newState);
-      return true;
+    const isKnownCommand = (commands, comm) =>
+      Object.keys(commands).find(key => commands[key] === comm);
+    let newState;
+    let ret = false;
+
+    if (isKnownCommand(ENTITY_TYPE, command)) {
+      ret = true;
+      this.onRequestDialog(command);
+    } else if (isKnownCommand(BLOCK_TYPE, command)) {
+      ret = true;
+      this.toggleBlockType(command);
+    } else if (isKnownCommand(INLINE_STYLE, command)) {
+      ret = true;
+      this.toggleInlineStyle(command);
+    } else {
+      newState = RichUtils.handleKeyCommand(editorState, command);
+
+      if (newState) {
+        ret = true;
+        this.handleChange(newState);
+      }
     }
-    return false;
+
+    return ret;
+  };
+  /*
+  The function documented in `draft-js` to be used to toggle inline styles of selection (mainly
+  for some key combinations handled by default inside draft-js).
+  */
+  _toggleInlineStyle = inlineStyle => {
+    this.handleChange(RichUtils.toggleInlineStyle(this.props.editorState, inlineStyle));
   };
 
   handleReturn: Function = (event: Object): boolean => {
@@ -372,7 +374,7 @@ export default class BoldrEditor extends Component {
     }
     const editorState = handleNewLine(this.state.editorState, event);
     if (editorState) {
-      this.onChange(editorState);
+      this.handleChange(editorState);
       return true;
     }
     return false;
@@ -411,18 +413,15 @@ export default class BoldrEditor extends Component {
     } = this.props;
 
     const controlProps = {
-      // $FlowIssue
-      modalHandler: this.modalHandler,
       editorState,
-      onChange: this.onChange,
+      onChange: this.handleChange,
     };
 
     return (
       <div
         id={this.props.wrapperId}
-        className={classNames('boldredit-wrapper', wrapperClassName)}
+        className={cN('boldredit-wrapper', wrapperClassName)}
         style={wrapperStyle}
-        onClick={(this: any).modalHandler.handleEditorClick}
         onBlur={this.handleWrapperBlur}
         aria-label="boldredit-wrapper"
       >
@@ -430,31 +429,26 @@ export default class BoldrEditor extends Component {
           // $FlowIssue
           (editorFocused || this.focusHandler.isInputFocused() || !toolbarOnFocus) &&
           <div
-            className={classNames('boldredit-toolbar', toolbarClassName)}
+            className={cN('boldredit-toolbar', toolbarClassName)}
             style={toolbarStyle}
             onMouseDown={this.preventDefault}
             aria-label="boldredit-toolbar"
             aria-hidden={(!editorFocused && toolbarOnFocus).toString()}
             onFocus={this.handleToolbarFocus}
           >
-            {toolbar.options.map(opt => {
+            {toolbar.options.map((opt, index) => {
               const Control = Controls[opt];
               const config = toolbar[opt];
               if (opt === 'image' && uploadCallback) {
                 config.uploadCallback = uploadCallback;
               }
-              return <Control key={shortid.generate()} {...controlProps} config={config} />;
+              return <Control key={index} {...controlProps} config={config} />;
             })}
-            {toolbarCustomButtons &&
-              toolbarCustomButtons.map(button =>
-                React.cloneElement(button, { key: shortid.generate(), ...controlProps }),
-              )}
           </div>}
         <div
           ref={this.setWrapperReference}
-          className={classNames('boldredit-editor', editorClassName)}
+          className={cN('boldredit-editor', editorClassName)}
           style={editorStyle}
-          onClick={this.focusEditor}
           onFocus={this.handleEditorFocus}
           onBlur={this.onEditorBlur}
           onKeyDown={KeyDownHandler.onKeyDown}
@@ -462,12 +456,10 @@ export default class BoldrEditor extends Component {
         >
           <Editor
             spellCheck={this.props.spellCheck}
-            ref={this.setEditorReference}
-            onTab={this.onTab}
-            onUpArrow={this.onUpDownArrow}
-            onDownArrow={this.onUpDownArrow}
+            ref={this.setEditorRef}
+            onTab={this.handleTab}
             editorState={editorState}
-            onChange={this.onChange}
+            onChange={this.handleChange}
             blockStyleFn={blockStyleFn}
             customStyleMap={getCustomStyleMap()}
             handleReturn={this.handleReturn}

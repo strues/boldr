@@ -10,11 +10,11 @@ export function changeLayout(layout) {
   };
 }
 
-export const showHideSidebar = () => ({ type: t.TOGGLE_SIDEBAR });
+export const toggleSidebar = () => ({ type: t.TOGGLE_SIDEBAR });
 export const hideHeader = () => ({ type: t.HIDE_HEADER });
 export const showHeader = () => ({ type: t.SHOW_HEADER });
 
-export const expandCollapseSideMenu = () => ({ type: t.TOGGLE_SB_MENU });
+export const toggleCollapse = () => ({ type: t.TOGGLE_COLLAPSE });
 export const showModal = () => ({ type: t.MODAL_OPEN });
 export const hideModal = () => ({ type: t.MODAL_CLOSED });
 
@@ -26,10 +26,10 @@ export function setMobileDevice(enabled = true) {
 }
 
 const uiActions = {
-  showHideSidebar,
+  toggleSidebar,
   hideHeader,
   showHeader,
-  expandCollapseSideMenu,
+  toggleCollapse,
   showModal,
   hideModal,
 };

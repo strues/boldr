@@ -49,7 +49,9 @@ a.#{$boldr-ns}navbar__item,
   flex-shrink: 0;
 
   img {
-    max-height: 1.75rem;
+    max-height: 3.75rem;
+    align-items: center;
+    vertical-align: middle;
   }
 
   &.has-dropdown {

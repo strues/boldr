@@ -5,7 +5,7 @@ import { spy } from 'sinon';
 import { mount } from 'enzyme';
 import { EditorState, convertFromHTML, ContentState } from 'draft-js';
 import defaultToolbar from '../../../config/defaultToolbar';
-import ModalHandler from '../../../eventHandlers/modals';
+import ModalHandler from '../../../core/eventHandlers/modals';
 import TextAlign from './TextAlign';
 
 describe('<TextAlign />', () => {

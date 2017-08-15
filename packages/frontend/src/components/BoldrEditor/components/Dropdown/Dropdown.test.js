@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import ModalHandler from '../../eventHandlers/modals';
+import ModalHandler from '../../core/eventHandlers/modals';
 import Dropdown from './Dropdown';
 import DropdownOption from './DropdownOption';
 

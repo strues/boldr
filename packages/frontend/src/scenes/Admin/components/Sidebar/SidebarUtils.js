@@ -1,7 +1,6 @@
 /* eslint-disable no-param-reassign */
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import Icon from '@boldr/ui/Icons/Icon';
 
 export const Chevron = props => {
@@ -19,16 +18,6 @@ Chevron.defaultProps = {
   expanded: false,
 };
 
-export const FaIcon = props => <i className={classNames('fa', props.className)} />;
-
-FaIcon.propTypes = {
-  className: PropTypes.string,
-};
-
-FaIcon.defaultProps = {
-  className: '',
-};
-
 export const createItemTree = (input, level = 0) =>
   input.map(
     item =>
@@ -37,8 +26,8 @@ export const createItemTree = (input, level = 0) =>
       // ---- New Article
       item.items
         ? {
-            expanded: false,
-            active: false,
+            isExpanded: false,
+            isActive: false,
             level,
             ...item,
             // create the sub menu
@@ -46,8 +35,8 @@ export const createItemTree = (input, level = 0) =>
           }
         : {
             // here we dont have child items
-            expanded: false,
-            active: false,
+            isExpanded: false,
+            isActive: false,
             level,
             ...item,
           },
@@ -59,12 +48,12 @@ export const collapseTree = items =>
       item.items
         ? {
             ...item,
-            expanded: false,
+            isExpanded: false,
             items: collapseTree(item.items),
           }
         : {
             ...item,
-            expanded: false,
+            isExpanded: false,
           },
   );
 
@@ -74,21 +63,21 @@ export const deactivateTree = items =>
       item.items
         ? {
             ...item,
-            active: false,
+            isActive: false,
             items: deactivateTree(item.items),
           }
         : {
             ...item,
-            active: false,
+            isActive: false,
           },
   );
 
 const expandParent = parentItem => () => {
-  parentItem.expanded = true;
+  parentItem.isExpanded = true;
 };
 
 const activateParent = parentItem => () => {
-  parentItem.active = true;
+  parentItem.isActive = true;
 };
 
 const switchItem = (activate, items, id, link = null, switchParentFn = null) =>
@@ -98,10 +87,10 @@ const switchItem = (activate, items, id, link = null, switchParentFn = null) =>
     if ((id && newItem.id === id) || (!id && newItem.link && newItem.link === link)) {
       // This item is to be toggled or activated
       if (!activate) {
-        newItem.expanded = !newItem.expanded;
+        newItem.isExpanded = !newItem.isExpanded;
       }
       if (activate) {
-        newItem.active = true;
+        newItem.isActive = true;
       }
 
       // Collapse / deactivate all children, if it has any (e.g. "clean-up")
@@ -120,22 +109,22 @@ const switchItem = (activate, items, id, link = null, switchParentFn = null) =>
     } else {
       // Not this item, so collapse / deactivate it and process its children if it has any
       if (!activate) {
-        newItem.expanded = false;
+        newItem.isExpanded = false;
       }
       if (activate) {
-        newItem.active = false;
+        newItem.isActive = false;
       }
       if (newItem.items) {
-        newItem.items = activate
+        newItem.items = isActive
           ? switchItem(true, newItem.items, id, link, activateParent(newItem))
           : switchItem(false, newItem.items, id, link, expandParent(newItem));
       }
 
       // If the child was the targeted item, it expanded / activate the parent -> Pass up along the tree
-      if (!activate && newItem.expanded && switchParentFn) {
+      if (!isActive && newItem.isExpanded && switchParentFn) {
         switchParentFn();
       }
-      if (activate && newItem.active && switchParentFn) {
+      if (isActive && newItem.isActive && switchParentFn) {
         switchParentFn();
       }
     }

@@ -1,3 +1,3 @@
 /* @flow */
 
-export { default } from './core';
+export { default } from './core/Editor';

@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import addMention from '../addMention';
-import { KeyDownHandler, SuggestionHandler } from '../../../../eventHandlers';
+import { KeyDownHandler, SuggestionHandler } from '../../../eventHandlers';
 
 class Suggestion {
   constructor(config: Object) {

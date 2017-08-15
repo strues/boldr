@@ -5,42 +5,42 @@
   height: 100%;
   min-height: 100%;
   background-color: $sidebar-nav-bg;
+}
+.#{$boldr-ns}sidebar-header-logo {
+  display: inline-block;
+  height: 40px;
+  margin-top: 6px;
+  vertical-align: middle;
+  background-size: cover;
 
-  .#{$boldr-ns}sidebar-header-logo {
-    display: inline-block;
-    width: 43px;
-    height: 43px;
-    margin: 0 18.5px;
-    background-size: cover;
-    border-radius: 3px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, .7);
-  }
-
-  .#{$boldr-ns}sidebar-nav-item {
-    cursor: pointer;
-
-    .#{$boldr-ns}sidebar-nav-item-children {
-      overflow: hidden;
-      max-height: 9999px;
-      transition: max-height 1s ease-in-out;
-    }
-
-    &.collapsed {
-      .#{$boldr-ns}sidebar-nav-item-children {
-        max-height: 0;
-        transition: max-height 0.3s cubic-bezier(0, 1, 0, 1) -0.15s;
-      }
-    }
-
-    &.active {
-      .#{$boldr-ns}sidebar-nav-item-children {
-        max-height: 9999px;
-        transition: none;
-      }
-    }
+  &.is-small {
+    margin-top: 0;
   }
 }
 
+.#{$boldr-ns}sidebar-nav-item {
+  cursor: pointer;
+
+  .#{$boldr-ns}sidebar-nav-item-children {
+    overflow: hidden;
+    max-height: 9999px;
+    transition: max-height 1s ease-in-out;
+  }
+
+  &.collapsed {
+    .#{$boldr-ns}sidebar-nav-item-children {
+      max-height: 0;
+      transition: max-height 0.3s cubic-bezier(0, 1, 0, 1) -0.15s;
+    }
+  }
+
+  &.active {
+    .#{$boldr-ns}sidebar-nav-item-children {
+      max-height: 9999px;
+      transition: none;
+    }
+  }
+}
 .#{$boldr-ns}sidebar-nav.boldr-theme {
   background-color: $sidebar-nav-bg;
   height: 100vh;
@@ -110,7 +110,12 @@
       padding: 0.4375rem 0.625rem 0.4375rem 3.125rem;
     }
   }
-
+  .#{$boldr-ns}sidebar-nav-item.level-1.is-small {
+    .#{$boldr-ns}sidebar-nav-item-title,
+    .#{$boldr-ns}sidebar-nav-item-link {
+      padding: 0.4375rem 0.625rem 0.4375rem 1.525rem;
+    }
+  }
   .#{$boldr-ns}sidebar-nav-item.level-2 {
     .#{$boldr-ns}sidebar-nav-item-title,
     .#{$boldr-ns}sidebar-nav-item-link {
@@ -124,6 +129,10 @@
     right: 1.25rem;
     display: inline-block;
     font-size: 0.5625rem;
+
+    &.is-small {
+      right: 0.25rem!important;
+    }
   }
 
   .#{$boldr-ns}sidebar-nav-icon {

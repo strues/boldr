@@ -4,7 +4,6 @@ import React from 'react';
 import { EditorState, convertFromHTML, ContentState } from 'draft-js';
 import { mount } from 'enzyme';
 import defaultToolbar from '../../../config/defaultToolbar';
-import ModalHandler from '../../../eventHandlers/modals';
 import ColorPicker from './ColorPicker';
 
 describe('<ColorPicker />', () => {
@@ -19,7 +18,6 @@ describe('<ColorPicker />', () => {
           onChange={() => {}}
           editorState={editorState}
           config={defaultToolbar.colorPicker}
-          modalHandler={new ModalHandler()}
         />,
       )
         .html()
@@ -33,7 +31,6 @@ describe('<ColorPicker />', () => {
         onChange={() => {}}
         editorState={editorState}
         config={defaultToolbar.colorPicker}
-        modalHandler={new ModalHandler()}
       />,
     );
     const colorPicker = control.find('ColorPicker');
@@ -49,7 +46,6 @@ describe('<ColorPicker />', () => {
         onChange={() => {}}
         editorState={editorState}
         config={defaultToolbar.colorPicker}
-        modalHandler={new ModalHandler()}
       />,
     );
     const colorPicker = control.find('ColorPicker');

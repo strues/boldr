@@ -2,12 +2,10 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-// import { AlignLeft, AlignCenter, AlignRight, AlignJustify } from '@boldr/icons';
-import Icon from '@boldr/ui/Icons/Icon';
+import { AlignLeft, AlignCenter, AlignRight, AlignJustify } from '@boldr/icons';
 import Option from '../../Option';
 
 export type Props = {
-  config: Object,
   onChange?: Function,
   currentState: Object,
 };
@@ -16,60 +14,49 @@ export default class TextAlignLayout extends Component {
   props: Props;
 
   renderTextAlign(): Object {
-    const {
-      config: { left, center, right, justify, className },
-      onChange,
-      currentState: { textAlignment },
-    } = this.props;
+    const { onChange, currentState: { textAlignment } } = this.props;
     return (
       <div
-        className={classNames('boldredit-textalign__wrapper', className)}
+        className={classNames('boldredit-textalign__wrapper')}
         aria-label="boldredit-textalign-control"
       >
         <Option
           value="left"
-          className={classNames(left.className)}
           active={textAlignment === 'left'}
           onClick={onChange}
-          title={left.title}
+          title="Align Left"
         >
-          <Icon kind="align-left" color="#222" size="1em" />
+          <AlignLeft color="#222" />
         </Option>
         <Option
           value="center"
-          className={classNames(center.className)}
           active={textAlignment === 'center'}
           onClick={onChange}
-          title={center.title}
+          title="Align Center"
         >
-          <Icon kind="align-center" color="#222" size="1em" />
+          <AlignCenter color="#222" />
         </Option>
         <Option
           value="right"
-          className={classNames(right.className)}
           active={textAlignment === 'right'}
           onClick={onChange}
-          title={right.title}
+          title="Align Right"
         >
-          <Icon kind="align-right" color="#222" size="1em" />
+          <AlignRight color="#222" />
         </Option>
         <Option
           value="justify"
-          className={classNames(justify.className)}
           active={textAlignment === 'justify'}
           onClick={onChange}
-          title={justify.title}
+          title="Justify"
         >
-          <Icon kind="justify" color="#222" size="1em" />
+          <AlignJustify color="#222" />
         </Option>
       </div>
     );
   }
 
   render(): Object {
-    // if (inDropdown) {
-    //   return this.renderInDropDown();
-    // }
     return this.renderTextAlign();
   }
 }

@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import Icon from '@boldr/ui/Icons/Icon';
+import { Smile } from '@boldr/icons';
 import shortid from 'shortid';
 import { stopPropagation } from '../../../utils/common';
 import Option from '../../Option';
@@ -56,7 +56,7 @@ class EmojiLayout extends Component {
           value="unordered-list-item"
           onClick={onExpandEvent}
         >
-          <Icon kind="emoji" color="#222" />
+          <Smile color="#222" />
         </Option>
         {expanded ? this.renderEmojiModal() : undefined}
       </div>

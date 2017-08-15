@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import Icon from '@boldr/ui/Icons/Icon';
 // $FlowIssue
 import type { ContentBlock, ContentState } from 'draft-js';
-import { ENTITY_TYPE } from '../../../utils/constants';
+import { ENTITY_TYPE } from '../../constants';
 
 export type Props = {
   children?: ReactChildren,

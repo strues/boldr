@@ -193,7 +193,7 @@ axobject-query@^0.1.0:
   dependencies:
     ast-types-flow "0.0.7"
 
-babel-cli@^6.24.1:
+babel-cli@6.24.1, babel-cli@^6.24.1:
   version "6.24.1"
   resolved "https://npm.strues.io/babel-cli/-/babel-cli-6.24.1.tgz#207cd705bba61489b2ea41b5312341cf6aca2283"
   dependencies:
@@ -958,7 +958,7 @@ babel-preset-babili@^0.1.4:
     babel-plugin-transform-undefined-to-void "^6.8.2"
     lodash.isplainobject "^4.0.6"
 
-babel-preset-boldr@^0.10.2:
+babel-preset-boldr@0.10.2:
   version "0.10.2"
   resolved "https://npm.strues.io/babel-preset-boldr/-/babel-preset-boldr-0.10.2.tgz#387161b07ffb5224dc010934c0aafb09c54d3c97"
   dependencies:
@@ -1178,11 +1178,11 @@ browser-resolve@^1.11.0:
     resolve "1.1.7"
 
 browserslist@^2.1.2, browserslist@^2.3.0:
-  version "2.3.1"
-  resolved "https://npm.strues.io/browserslist/-/browserslist-2.3.1.tgz#39500a2090330b2a090120ea6c7fc78b6e091c5e"
+  version "2.3.2"
+  resolved "https://npm.strues.io/browserslist/-/browserslist-2.3.2.tgz#343ff101cce799d5eaf0b742e17d0d21efc2d379"
   dependencies:
-    caniuse-lite "^1.0.30000712"
-    electron-to-chromium "^1.3.17"
+    caniuse-lite "^1.0.30000715"
+    electron-to-chromium "^1.3.18"
 
 buble@^0.15.0:
   version "0.15.2"
@@ -1221,9 +1221,9 @@ camelcase@^2.0.0:
   version "2.1.1"
   resolved "https://npm.strues.io/camelcase/-/camelcase-2.1.1.tgz#7c1d16d679a1bbe59ca02cacecfb011e201f5a1f"
 
-caniuse-lite@^1.0.30000712:
-  version "1.0.30000713"
-  resolved "https://npm.strues.io/caniuse-lite/-/caniuse-lite-1.0.30000713.tgz#33957ecb4a2154a5d40a60d13d8bf1cfa0881a8a"
+caniuse-lite@^1.0.30000715:
+  version "1.0.30000715"
+  resolved "https://npm.strues.io/caniuse-lite/-/caniuse-lite-1.0.30000715.tgz#c327f5e6d907ebcec62cde598c3bf0dd793fb9a0"
 
 caseless@~0.12.0:
   version "0.12.0"
@@ -1239,7 +1239,7 @@ chalk@^1.1.0, chalk@^1.1.1, chalk@^1.1.3:
     strip-ansi "^3.0.0"
     supports-color "^2.0.0"
 
-chalk@^2.0.0, chalk@^2.0.1:
+chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0:
   version "2.1.0"
   resolved "https://npm.strues.io/chalk/-/chalk-2.1.0.tgz#ac5becf14fa21b99c6c92ca7a7d7cfd5b17e743e"
   dependencies:
@@ -1445,7 +1445,7 @@ ecc-jsbn@~0.1.1:
   dependencies:
     jsbn "~0.1.0"
 
-electron-to-chromium@^1.3.17:
+electron-to-chromium@^1.3.18:
   version "1.3.18"
   resolved "https://npm.strues.io/electron-to-chromium/-/electron-to-chromium-1.3.18.tgz#3dcc99da3e6b665f6abbc71c28ad51a2cd731a9c"
 
@@ -1575,7 +1575,7 @@ eslint-scope@^3.7.1:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint@^4.4.1:
+eslint@4.4.1:
   version "4.4.1"
   resolved "https://npm.strues.io/eslint/-/eslint-4.4.1.tgz#99cd7eafcffca2ff99a5c8f5f2a474d6364b4bd3"
   dependencies:
@@ -2745,18 +2745,18 @@ postcss-value-parser@^3.2.3:
   resolved "https://npm.strues.io/postcss-value-parser/-/postcss-value-parser-3.3.0.tgz#87f38f9f18f774a4ab4c8a232f5c5ce8872a9d15"
 
 postcss@6.x, postcss@^6.0.0, postcss@^6.0.1, postcss@^6.0.3, postcss@^6.0.6, postcss@^6.0.8:
-  version "6.0.8"
-  resolved "https://npm.strues.io/postcss/-/postcss-6.0.8.tgz#89067a9ce8b11f8a84cbc5117efc30419a0857b3"
+  version "6.0.9"
+  resolved "https://npm.strues.io/postcss/-/postcss-6.0.9.tgz#54819766784a51c65b1ec4d54c2f93765438c35a"
   dependencies:
-    chalk "^2.0.1"
+    chalk "^2.1.0"
     source-map "^0.5.6"
-    supports-color "^4.2.0"
+    supports-color "^4.2.1"
 
 prelude-ls@~1.1.2:
   version "1.1.2"
   resolved "https://npm.strues.io/prelude-ls/-/prelude-ls-1.1.2.tgz#21932a549f5e52ffd9a827f570e04be62a97da54"
 
-prepublish@^1.2.7:
+prepublish@1.2.7:
   version "1.2.7"
   resolved "https://npm.strues.io/prepublish/-/prepublish-1.2.7.tgz#9d26b2fda1ae516b6bca76f30e3ede6406243c95"
   dependencies:
@@ -2785,7 +2785,7 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://npm.strues.io/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
-prettier@^1.5.3:
+prettier@1.5.3:
   version "1.5.3"
   resolved "https://npm.strues.io/prettier/-/prettier-1.5.3.tgz#59dadc683345ec6b88f88b94ed4ae7e1da394bfe"
 
@@ -3289,7 +3289,7 @@ supports-color@^2.0.0:
   version "2.0.0"
   resolved "https://npm.strues.io/supports-color/-/supports-color-2.0.0.tgz#535d045ce6b6363fa40117084629995e9df324c7"
 
-supports-color@^4.0.0, supports-color@^4.2.0:
+supports-color@^4.0.0, supports-color@^4.2.1:
   version "4.2.1"
   resolved "https://npm.strues.io/supports-color/-/supports-color-4.2.1.tgz#65a4bb2631e90e02420dba5554c375a4754bb836"
   dependencies:

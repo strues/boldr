@@ -28,7 +28,7 @@ export default class History extends Component {
         redoDisabled: editorState.getRedoStack().size === 0,
       });
     }
-    modalHandler.registerCallBack(this.expandCollapse);
+    // modalHandler.registerCallBack(this.expandCollapse);
   }
 
   componentWillReceiveProps(properties: Object): void {
@@ -40,9 +40,6 @@ export default class History extends Component {
     }
   }
 
-  componentWillUnmount(): void {
-    this.props.modalHandler.deregisterCallBack(this.expandCollapse);
-  }
   props: Props;
   expandCollapse: Function = (): void => {
     this.setState({

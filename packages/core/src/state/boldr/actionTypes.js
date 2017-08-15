@@ -8,7 +8,7 @@ export const MODAL_CLOSED = '@boldr/ui/MODAL_CLOSED';
 export const SHOW_HEADER = '@boldr/ui/SHOW_HEADER';
 export const HIDE_HEADER = '@boldr/ui/HIDE_HEADER';
 export const SET_MOBILE_DEVICE = '@boldr/ui/SET_MOBILE_DEVICE';
-export const TOGGLE_SB_MENU = '@boldr/ui/TOGGLE_SB_MENU';
+export const TOGGLE_COLLAPSE = '@boldr/ui/TOGGLE_COLLAPSE';
 export const TOGGLE_SIDEBAR = '@boldr/ui/TOGGLE_SIDEBAR';
 
 /**

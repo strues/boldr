@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 type Props = {
   children: ReactChildren,
+  isSmall: boolean,
 };
 
 const SidebarWrapper = (props: Props) => {
@@ -12,10 +13,10 @@ const SidebarWrapper = (props: Props) => {
     flex-direction: column;
     box-shadow: 1px 0 2px rgba(0, 0, 0, .15);
     flex-direction: column;
-    flex-basis: 200px;
+    flex-basis: ${props => (props.isSmall ? '80px' : '200px')};
     white-space: nowrap;
     background: #202b39;
-    width: 200px;
+    width: ${props => (props.isSmall ? '80px' : '200px')};
     flex-shrink: 0;
     position: relative;
     left: 0;

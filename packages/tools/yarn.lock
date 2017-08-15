@@ -2,15 +2,6 @@
 # yarn lockfile v1
 
 
-"@boldr/utils@^0.1.0-rc.1":
-  version "0.1.0-rc.1"
-  resolved "https://registry.npmjs.org/@boldr/utils/-/utils-0.1.0-rc.1.tgz#5f60ec1c903209631e69696a5b5ab37f84fbd07b"
-  dependencies:
-    chalk "^2.0.1"
-    lodash.invokemap "^4.6.0"
-    lodash.reduce "^4.6.0"
-    ramda "^0.24.1"
-
 abbrev@1:
   version "1.1.0"
   resolved "https://npm.strues.io/abbrev/-/abbrev-1.1.0.tgz#d0554c2256636e2f56e7c2e5ad183f859428d81f"
@@ -1057,7 +1048,7 @@ babel-plugin-universal-import@^1.2.5:
 
 babel-polyfill@^6.23.0:
   version "6.23.0"
-  resolved "https://registry.npmjs.org/babel-polyfill/-/babel-polyfill-6.23.0.tgz#8364ca62df8eafb830499f699177466c3b03499d"
+  resolved "https://npm.strues.io/babel-polyfill/-/babel-polyfill-6.23.0.tgz#8364ca62df8eafb830499f699177466c3b03499d"
   dependencies:
     babel-runtime "^6.22.0"
     core-js "^2.4.0"
@@ -1279,7 +1270,7 @@ bcrypt-pbkdf@^1.0.0:
 
 better-sass-loader@^0.1.0-beta.1:
   version "0.1.0-beta.1"
-  resolved "https://registry.npmjs.org/better-sass-loader/-/better-sass-loader-0.1.0-beta.1.tgz#76624747a9c453fcd11fbd7c9580bb0edc89add3"
+  resolved "https://npm.strues.io/better-sass-loader/-/better-sass-loader-0.1.0-beta.1.tgz#76624747a9c453fcd11fbd7c9580bb0edc89add3"
   dependencies:
     async "^2.5.0"
     cli-source-preview "^1.1.0"
@@ -1403,11 +1394,11 @@ browserslist@^1.3.6, browserslist@^1.5.2, browserslist@^1.7.6:
     electron-to-chromium "^1.2.7"
 
 browserslist@^2.1.2, browserslist@^2.1.5, browserslist@^2.3.0:
-  version "2.3.1"
-  resolved "https://npm.strues.io/browserslist/-/browserslist-2.3.1.tgz#39500a2090330b2a090120ea6c7fc78b6e091c5e"
+  version "2.3.2"
+  resolved "https://npm.strues.io/browserslist/-/browserslist-2.3.2.tgz#343ff101cce799d5eaf0b742e17d0d21efc2d379"
   dependencies:
-    caniuse-lite "^1.0.30000712"
-    electron-to-chromium "^1.3.17"
+    caniuse-lite "^1.0.30000715"
+    electron-to-chromium "^1.3.18"
 
 buble@^0.15.0:
   version "0.15.2"
@@ -1517,12 +1508,12 @@ caniuse-api@^1.5.2:
     lodash.uniq "^4.5.0"
 
 caniuse-db@^1.0.30000529, caniuse-db@^1.0.30000634, caniuse-db@^1.0.30000639:
-  version "1.0.30000713"
-  resolved "https://npm.strues.io/caniuse-db/-/caniuse-db-1.0.30000713.tgz#ea01761840b5f148faf94ec5f34d0aa1d321966f"
+  version "1.0.30000715"
+  resolved "https://npm.strues.io/caniuse-db/-/caniuse-db-1.0.30000715.tgz#0b9b5c795950dfbaf301a8806bafe87f126da8ca"
 
-caniuse-lite@^1.0.30000697, caniuse-lite@^1.0.30000712:
-  version "1.0.30000713"
-  resolved "https://npm.strues.io/caniuse-lite/-/caniuse-lite-1.0.30000713.tgz#33957ecb4a2154a5d40a60d13d8bf1cfa0881a8a"
+caniuse-lite@^1.0.30000697, caniuse-lite@^1.0.30000715:
+  version "1.0.30000715"
+  resolved "https://npm.strues.io/caniuse-lite/-/caniuse-lite-1.0.30000715.tgz#c327f5e6d907ebcec62cde598c3bf0dd793fb9a0"
 
 case-sensitive-paths-webpack-plugin@^2.1.1:
   version "2.1.1"
@@ -1551,7 +1542,7 @@ chalk@1.1.3, chalk@^1.0.0, chalk@^1.1.0, chalk@^1.1.1, chalk@^1.1.3:
 
 chalk@^2.0.0, chalk@^2.0.1, chalk@^2.1.0:
   version "2.1.0"
-  resolved "https://registry.npmjs.org/chalk/-/chalk-2.1.0.tgz#ac5becf14fa21b99c6c92ca7a7d7cfd5b17e743e"
+  resolved "https://npm.strues.io/chalk/-/chalk-2.1.0.tgz#ac5becf14fa21b99c6c92ca7a7d7cfd5b17e743e"
   dependencies:
     ansi-styles "^3.1.0"
     escape-string-regexp "^1.0.5"
@@ -1615,7 +1606,7 @@ cli-cursor@^2.1.0:
 
 cli-source-preview@^1.1.0:
   version "1.1.0"
-  resolved "https://registry.npmjs.org/cli-source-preview/-/cli-source-preview-1.1.0.tgz#05303ab1279a9093ead1a3837b3ee231f3006544"
+  resolved "https://npm.strues.io/cli-source-preview/-/cli-source-preview-1.1.0.tgz#05303ab1279a9093ead1a3837b3ee231f3006544"
   dependencies:
     chalk "^1.1.3"
 
@@ -2167,7 +2158,7 @@ ee-first@1.1.1:
   version "1.1.1"
   resolved "https://npm.strues.io/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"
 
-electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.17:
+electron-to-chromium@^1.2.7, electron-to-chromium@^1.3.18:
   version "1.3.18"
   resolved "https://npm.strues.io/electron-to-chromium/-/electron-to-chromium-1.3.18.tgz#3dcc99da3e6b665f6abbc71c28ad51a2cd731a9c"
 
@@ -2257,8 +2248,8 @@ es-to-primitive@^1.1.1:
     is-symbol "^1.0.1"
 
 es5-ext@^0.10.14, es5-ext@^0.10.9, es5-ext@~0.10.14:
-  version "0.10.26"
-  resolved "https://npm.strues.io/es5-ext/-/es5-ext-0.10.26.tgz#51b2128a531b70c4f6764093a73cbebb82186372"
+  version "0.10.27"
+  resolved "https://npm.strues.io/es5-ext/-/es5-ext-0.10.27.tgz#bf926b058c62b1cb5de1a887930673b6aa6d9a66"
   dependencies:
     es6-iterator "2"
     es6-symbol "~3.1"
@@ -2417,7 +2408,7 @@ eslint-scope@^3.7.1:
 
 eslint@4.4.1:
   version "4.4.1"
-  resolved "https://registry.npmjs.org/eslint/-/eslint-4.4.1.tgz#99cd7eafcffca2ff99a5c8f5f2a474d6364b4bd3"
+  resolved "https://npm.strues.io/eslint/-/eslint-4.4.1.tgz#99cd7eafcffca2ff99a5c8f5f2a474d6364b4bd3"
   dependencies:
     ajv "^5.2.0"
     babel-code-frame "^6.22.0"
@@ -2760,7 +2751,7 @@ flatten@^1.0.2:
 
 flow-bin@0.52.0:
   version "0.52.0"
-  resolved "https://registry.npmjs.org/flow-bin/-/flow-bin-0.52.0.tgz#b6d9abe8bcd1ee5c62df386451a4e2553cadc3a3"
+  resolved "https://npm.strues.io/flow-bin/-/flow-bin-0.52.0.tgz#b6d9abe8bcd1ee5c62df386451a4e2553cadc3a3"
 
 flush-write-stream@^1.0.0:
   version "1.0.2"
@@ -3667,10 +3658,6 @@ lodash.cond@^4.3.0:
   version "4.5.2"
   resolved "https://npm.strues.io/lodash.cond/-/lodash.cond-4.5.2.tgz#f471a1da486be60f6ab955d17115523dd1d255d5"
 
-lodash.invokemap@^4.6.0:
-  version "4.6.0"
-  resolved "https://registry.npmjs.org/lodash.invokemap/-/lodash.invokemap-4.6.0.tgz#1748cda5d8b0ef8369c4eb3ec54c21feba1f2d62"
-
 lodash.isplainobject@^4.0.6:
   version "4.0.6"
   resolved "https://npm.strues.io/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
@@ -3686,10 +3673,6 @@ lodash.merge@^4.6.0:
 lodash.mergewith@^4.6.0:
   version "4.6.0"
   resolved "https://npm.strues.io/lodash.mergewith/-/lodash.mergewith-4.6.0.tgz#150cf0a16791f5903b8891eab154609274bdea55"
-
-lodash.reduce@^4.6.0:
-  version "4.6.0"
-  resolved "https://registry.npmjs.org/lodash.reduce/-/lodash.reduce-4.6.0.tgz#f1ab6b839299ad48f784abbf476596f03b914d3b"
 
 lodash.some@^4.6.0:
   version "4.6.0"
@@ -4074,7 +4057,7 @@ nodent-compiler@>=3.1.0:
 
 nodent-runtime@>=3.0.4, nodent-runtime@^3.0.4:
   version "3.0.4"
-  resolved "https://registry.npmjs.org/nodent-runtime/-/nodent-runtime-3.0.4.tgz#a801ecb7bb0f6c39a69b24cc2fa370cfa8b492da"
+  resolved "https://npm.strues.io/nodent-runtime/-/nodent-runtime-3.0.4.tgz#a801ecb7bb0f6c39a69b24cc2fa370cfa8b492da"
 
 nodent@>=2.6.12:
   version "3.1.0"
@@ -4722,12 +4705,12 @@ postcss-zindex@^2.0.1:
     uniqs "^2.0.0"
 
 postcss@6.x, postcss@^6.0.0, postcss@^6.0.1, postcss@^6.0.2, postcss@^6.0.3, postcss@^6.0.6, postcss@^6.0.8:
-  version "6.0.8"
-  resolved "https://npm.strues.io/postcss/-/postcss-6.0.8.tgz#89067a9ce8b11f8a84cbc5117efc30419a0857b3"
+  version "6.0.9"
+  resolved "https://npm.strues.io/postcss/-/postcss-6.0.9.tgz#54819766784a51c65b1ec4d54c2f93765438c35a"
   dependencies:
-    chalk "^2.0.1"
+    chalk "^2.1.0"
     source-map "^0.5.6"
-    supports-color "^4.2.0"
+    supports-color "^4.2.1"
 
 postcss@^5.0.10, postcss@^5.0.11, postcss@^5.0.12, postcss@^5.0.13, postcss@^5.0.14, postcss@^5.0.16, postcss@^5.0.2, postcss@^5.0.4, postcss@^5.0.5, postcss@^5.0.6, postcss@^5.0.8, postcss@^5.2.16:
   version "5.2.17"
@@ -4748,7 +4731,7 @@ prepend-http@^1.0.0:
 
 prepublish@1.2.7:
   version "1.2.7"
-  resolved "https://registry.npmjs.org/prepublish/-/prepublish-1.2.7.tgz#9d26b2fda1ae516b6bca76f30e3ede6406243c95"
+  resolved "https://npm.strues.io/prepublish/-/prepublish-1.2.7.tgz#9d26b2fda1ae516b6bca76f30e3ede6406243c95"
   dependencies:
     app-root-dir "^1.0.2"
     async "^2.5.0"
@@ -4777,7 +4760,7 @@ preserve@^0.2.0:
 
 prettier@1.5.3:
   version "1.5.3"
-  resolved "https://registry.npmjs.org/prettier/-/prettier-1.5.3.tgz#59dadc683345ec6b88f88b94ed4ae7e1da394bfe"
+  resolved "https://npm.strues.io/prettier/-/prettier-1.5.3.tgz#59dadc683345ec6b88f88b94ed4ae7e1da394bfe"
 
 pretty-error@^2.0.2, pretty-error@^2.1.1:
   version "2.1.1"
@@ -4906,10 +4889,6 @@ querystringify@~1.0.0:
   version "1.0.0"
   resolved "https://npm.strues.io/querystringify/-/querystringify-1.0.0.tgz#6286242112c5b712fa654e526652bf6a13ff05cb"
 
-ramda@^0.24.1:
-  version "0.24.1"
-  resolved "https://registry.npmjs.org/ramda/-/ramda-0.24.1.tgz#c3b7755197f35b8dc3502228262c4c91ddb6b857"
-
 randomatic@^1.1.3:
   version "1.1.7"
   resolved "https://npm.strues.io/randomatic/-/randomatic-1.1.7.tgz#c7abe9cc8b87c0baa876b19fde83fd464797e38c"
@@ -4942,7 +4921,7 @@ react-deep-force-update@^2.0.1:
 
 react-dev-utils@^3.1.1:
   version "3.1.1"
-  resolved "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-3.1.1.tgz#09ae7209a81384248db56547e718e65bd3b20eb5"
+  resolved "https://npm.strues.io/react-dev-utils/-/react-dev-utils-3.1.1.tgz#09ae7209a81384248db56547e718e65bd3b20eb5"
   dependencies:
     address "1.0.2"
     anser "1.4.1"
@@ -5737,7 +5716,7 @@ supports-color@^3.2.3:
   dependencies:
     has-flag "^1.0.0"
 
-supports-color@^4.0.0, supports-color@^4.2.0, supports-color@^4.2.1:
+supports-color@^4.0.0, supports-color@^4.2.1:
   version "4.2.1"
   resolved "https://npm.strues.io/supports-color/-/supports-color-4.2.1.tgz#65a4bb2631e90e02420dba5554c375a4754bb836"
   dependencies:
@@ -6135,7 +6114,7 @@ webpack-subresource-integrity@^1.0.1:
 
 webpack@^3.5.4:
   version "3.5.4"
-  resolved "https://registry.npmjs.org/webpack/-/webpack-3.5.4.tgz#5583eb263ed27b78b5bd17bfdfb0eb1b1cd1bf81"
+  resolved "https://npm.strues.io/webpack/-/webpack-3.5.4.tgz#5583eb263ed27b78b5bd17bfdfb0eb1b1cd1bf81"
   dependencies:
     acorn "^5.0.0"
     acorn-dynamic-import "^2.0.0"

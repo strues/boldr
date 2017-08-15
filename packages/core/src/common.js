@@ -10,8 +10,8 @@ export {
   showModal,
   hideModal,
   setMobileDevice,
-  showHideSidebar,
-  expandCollapseSideMenu,
+  toggleSidebar,
+  toggleCollapse,
   hideHeader,
   showHeader,
 } from './state/boldr/ui/actions';

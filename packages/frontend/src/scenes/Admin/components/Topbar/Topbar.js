@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import cn from 'classnames';
 import Avatar from '@boldr/ui/Avatar';
 import NavbarBurger from '@boldr/ui/Navbar/NavbarBurger';
-
+import { Bars } from '@boldr/icons';
 import { StyleClasses } from '@boldr/ui';
 import TopbarPlainLink from './TopbarPlainLink';
 import TopbarSearch from './TopbarSearch';
@@ -135,7 +135,7 @@ class Topbar extends Component {
     return (
       <header className={classes}>
         <div className={`${BASE_ELEMENT}__inner`}>
-          <NavbarBurger onClick={this.props.onMenuClick} />
+          <Bars onClick={this.props.onMenuClick} color="#222" size="24" />
           <nav className={`${BASE_ELEMENT}__links`}>
             {this._links}
           </nav>

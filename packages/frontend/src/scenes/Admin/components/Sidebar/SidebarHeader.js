@@ -1,11 +1,12 @@
 /* @flow */
 import React from 'react';
 import styled from 'styled-components';
+import cN from 'classnames';
 import Link from 'react-router-dom/Link';
 
 type Props = {
-  isPrimaryColor?: boolean,
-  logoImg: string,
+  logoSrc: string,
+  isSmall: boolean,
   logoLink: string,
 };
 const LogoElement = styled.div`
@@ -29,14 +30,8 @@ const SidebarHeader = (props: Props) => {
       <LogoElement>
         <Link to={props.logoLink}>
           <img
-            src={props.logoImg}
-            className="boldrui-sidebar-header-logo"
-            style={{
-              height: '40px',
-              display: 'inline-block',
-              verticalAlign: 'middle',
-              marginTop: '6px',
-            }}
+            src={props.logoSrc}
+            className={cN('boldrui-sidebar-header-logo', { 'is-small': props.isSmall })}
           />
         </Link>
       </LogoElement>
@@ -45,8 +40,7 @@ const SidebarHeader = (props: Props) => {
 };
 
 SidebarHeader.defaultProps = {
-  logoImg: 'https://boldr.io/assets/boldr-white-logo.png',
-  isPrimaryColor: true,
+  logoSrc: 'https://boldr.io/assets/boldr-white-logo.png',
 };
 
 export default SidebarHeader;

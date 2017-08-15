@@ -1,5 +1,5 @@
-import getEmbedRender from './EmbedRender';
-import getImageRender from './ImageRender';
+import getEmbedRender from './getEmbedRender';
+import getImageRender from './getImageRender';
 
 const getBlockRenderFunc = (config, customBlockRenderer) => block => {
   if (typeof customBlockRenderer === 'function') {

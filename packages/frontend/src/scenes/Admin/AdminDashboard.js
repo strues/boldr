@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import Route from 'react-router-dom/Route';
 
 // internal
-import { flattenRoutes, hideHeader, showHideSidebar, expandCollapseSideMenu } from '@boldr/core';
+import { flattenRoutes, hideHeader, toggleSidebar, toggleCollapse } from '@boldr/core';
 import sidebarLinks from './sidebarLinks';
 import routes from './routes';
 import {
@@ -46,12 +46,12 @@ export class AdminDashboard extends Component {
   }
   props: Props;
   flattenedRoutes: FlattenedRoutes;
-  handleHideSidebar = () => {
-    this.props.dispatch(showHideSidebar());
+  handleToggleSidebar = () => {
+    this.props.dispatch(toggleSidebar());
   };
 
   handleExpandCollapse = () => {
-    this.props.dispatch(expandCollapseSideMenu());
+    this.props.dispatch(toggleCollapse());
   };
 
   render() {
@@ -59,23 +59,20 @@ export class AdminDashboard extends Component {
 
     return (
       <DashboardWrapper>
-        {ui.visible &&
-          <Sidebar
-            items={sidebarLinks}
-            activeItem={pathname}
-            location={this.props.location}
-            visible={ui.visible}
-            expanded={ui.expanded}
-            onExpandCollapse={this.handleExpandCollapse}
-            logoImg="https://boldr.io/assets/boldr-logo-white.png"
-            logoLink="/"
-            isPrimaryColor
-          />}
+        <Sidebar
+          items={sidebarLinks}
+          activeItem={pathname}
+          isExpanded={ui.isExpanded}
+          onExpandCollapse={this.handleExpandCollapse}
+          logoImg="https://boldr.io/assets/boldr-logo-white.png"
+          logoLink="/"
+          isSmall={ui.isSmall}
+        />
         <DashboardMain>
           <TbArea>
             <Topbar
               url={this.props.match.path}
-              onMenuClick={this.handleHideSidebar}
+              onMenuClick={this.handleToggleSidebar}
               avatarUrl={currentUser.avatarUrl}
               username={currentUser.username}
               link={TopbarLink}

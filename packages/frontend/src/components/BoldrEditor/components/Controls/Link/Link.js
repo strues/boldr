@@ -26,7 +26,7 @@ class Link extends Component {
         currentEntity: getSelectionEntity(editorState),
       });
     }
-    this.props.modalHandler.registerCallBack(this.expandCollapse);
+    // this.props.modalHandler.registerCallBack(this.expandCollapse);
   }
 
   componentWillReceiveProps(properties: Object): void {
@@ -35,11 +35,6 @@ class Link extends Component {
       newState.currentEntity = getSelectionEntity(properties.editorState);
     }
     this.setState(newState);
-  }
-
-  componentWillUnmount(): void {
-    const { modalHandler } = this.props;
-    modalHandler.deregisterCallBack(this.expandCollapse);
   }
 
   onExpandEvent: Function = (): void => {
@@ -152,9 +147,8 @@ class Link extends Component {
     const { config } = this.props;
     const { expanded } = this.state;
     const { link, selectionText } = this.getCurrentValues();
-    const LinkComponent = config.component || LinkLayout;
     return (
-      <LinkComponent
+      <LinkLayout
         config={config}
         expanded={expanded}
         onExpandEvent={this.onExpandEvent}

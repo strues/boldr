@@ -81,4 +81,15 @@ if (process.env.NODE_ENV !== 'production') {
   }
 }
 
+// if (process.env.NODE_ENV !== 'production') {
+//     let createClass = React.createClass;
+//     Object.defineProperty(React, 'createClass', {
+//       set: (nextCreateClass) => {
+//         createClass = nextCreateClass;
+//       }
+//     });
+//     console.log('wrapping with whyDidYouUpdate');
+//     const { whyDidYouUpdate } = require('why-did-you-update');
+//     whyDidYouUpdate(React);
+// }
 render(wrapBoldrApp(AppComponent(<App />), apolloClient, reduxStore), DOM_NODE);

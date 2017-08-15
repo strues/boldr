@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 // $FlowIssue
 import { EditorState } from 'draft-js';
 import classNames from 'classnames';
-import Option from '../../components/Option';
+import Option from '../../../components/Option';
 
 const getImageRender = (config: Object) =>
   class Image extends Component {

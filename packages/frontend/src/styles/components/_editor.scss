@@ -12,7 +12,11 @@
 .editor--content > div {
   min-height: 100px;
 }
-
+.boldredit-dropdown__wrapper {
+  a {
+    color: $text-color;
+  }
+}
 .editor--toolbar {
   background-color: #0275d8;
 }
@@ -25,6 +29,7 @@
 
 .boldredit-toolbar {
   display: flex;
+  flex: 1 1 auto;
   flex-wrap: wrap;
   justify-content: flex-start;
   padding: 6px 5px 0;
@@ -42,6 +47,10 @@
 
 .boldredit-wrapper {
   box-sizing: content-box;
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  position: relative;
 
   &:focus {
     outline: none;
@@ -51,17 +60,20 @@
 .boldredit-block__wrapper {
   display: flex;
   align-items: center;
+  flex: 1 1 auto;
   margin-bottom: 6px;
 }
 
 .boldredit-block__dropdown {
   width: 110px;
+  flex: 1 1 auto;
 }
 
 /// Color Picker
 .boldredit-colorpicker__wrapper {
   position: relative;
   display: flex;
+  flex: 1 1 auto;
   align-items: center;
   margin-bottom: 6px;
 }
@@ -138,6 +150,7 @@
 /// Embed
 .boldredit-embedded-wrapper {
   position: relative;
+  flex: 1 1 auto;
   display: flex;
   align-items: center;
   margin-bottom: 6px;
@@ -502,6 +515,7 @@
 
 .boldredit-inline__wrapper {
   display: flex;
+  flex: 1 1 auto;
   margin-bottom: 6px;
 }
 
@@ -519,6 +533,7 @@
 
 .boldredit-link__wrapper {
   position: relative;
+  flex: 1 1 auto;
   display: flex;
   align-items: center;
   margin-bottom: 6px;
@@ -624,6 +639,7 @@
 
 .boldredit-list__wrapper {
   display: flex;
+  flex: 1 1 auto;
   align-items: center;
   margin-bottom: 6px;
 }
@@ -643,6 +659,7 @@
 
 .boldredit-remove__wrapper {
   position: relative;
+  flex: 1 1 auto;
   display: flex;
   align-items: center;
   margin-bottom: 6px;
@@ -652,6 +669,7 @@
 
 .boldredit-textalign__wrapper {
   display: flex;
+  flex: 1 1 auto;
   align-items: center;
   margin-bottom: 6px;
 }
@@ -694,6 +712,7 @@
 
 .boldredit-dropdown__wrapper {
   height: 30px;
+  flex: 1 1 auto;
   background: $white;
   border: none;
   border-radius: 2px;
@@ -748,6 +767,7 @@
 .boldredit-dropdown__optionwrapper {
   position: relative;
   z-index: 100;
+  flex: 1 1 auto;
   overflow-y: scroll;
   width: 98%;
   max-height: 250px;
@@ -787,29 +807,31 @@
 
 .boldredit-option__wrapper {
   display: flex;
-  justify-content: center;
+  flex: 1 1 auto;
+  justify-content: space-around;
   align-items: center;
-  min-width: 25px;
-  height: 20px;
+  min-width: 30px;
   padding: 3px;
   background-color: transparent;
   border: none;
-  border-radius: 2px;
-  margin: 0 4px;
+  // border-radius: 2px;
   text-transform: capitalize;
   cursor: pointer;
-
+  //
   &:hover {
-    @include md-shadow(1);
+        box-shadow: none;
   }
 
   &:active {
-    @include md-shadow(1);
+  box-shadow: none;
   }
 }
 
 .boldredit-option--active {
-  @include md-shadow(2);
+  box-shadow: none;
+  svg {
+    color: $primary-color !important;
+  }
 }
 
 .boldredit-option--disabled {
@@ -877,6 +899,7 @@
 
 .boldredit-link__dec--wrapper {
   position: relative;
+  flex: 1 1 auto;
 }
 
 .boldredit-link__dec--icon {
@@ -898,6 +921,7 @@
 
 .boldredit-suggestion-wrapper {
   position: relative;
+  flex: 1 1 auto;
 }
 
 .boldredit-suggestion-dropdown {
@@ -948,6 +972,7 @@
 .boldredit-image-alignment,
 .boldredit-image-imagewrapper {
   position: relative;
+  flex: 1 1 auto;
 }
 
 .boldredit-image-center {

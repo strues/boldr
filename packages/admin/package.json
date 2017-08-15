@@ -1,0 +1,35 @@
+{
+  "name": "@boldr/admin",
+  "version": "0.1.0-alpha.1",
+  "description": "Boldr admin area.",
+  "keywords": [
+    "boldr"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Steven Truesdell",
+    "email": "steven@strues.io",
+    "url": "strues.io"
+  },
+  "homepage": "https://github.com/strues/boldr#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strues/boldr.git"
+  },
+  "bugs": {
+    "url": "https://github.com/strues/boldr/issues"
+  },
+  "scripts": {
+    "clean": "rimraf lib",
+    "format": "prettier --single-quote=true --jsx-bracket-same-line=false --trailing-comma=all --print-width=100 --write \"src/**/*.js\"",
+    "prepare": "rimraf lib && NODE_ENV=production prepublish"
+  },
+  "devDependencies": {
+    "babel-cli": "6.24.1",
+    "babel-preset-boldr": "0.10.2",
+    "eslint": "4.4.1",
+    "eslint-config-boldr": "0.12.6",
+    "prepublish": "1.2.7",
+    "prettier": "1.5.3"
+  }
+}

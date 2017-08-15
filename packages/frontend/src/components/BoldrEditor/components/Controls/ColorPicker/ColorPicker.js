@@ -10,7 +10,7 @@ class ColorPicker extends Component {
   static propTypes = {
     onChange: PropTypes.func.isRequired,
     editorState: PropTypes.object.isRequired,
-    modalHandler: PropTypes.object,
+    // modalHandler: PropTypes.object,
     config: PropTypes.object,
   };
 
@@ -21,14 +21,13 @@ class ColorPicker extends Component {
   };
 
   componentWillMount(): void {
-    const { editorState, modalHandler } = this.props;
+    const { editorState } = this.props;
     if (editorState) {
       this.setState({
         currentColor: getSelectionCustomInlineStyle(editorState, ['COLOR']).COLOR,
         currentBgColor: getSelectionCustomInlineStyle(editorState, ['BGCOLOR']).BGCOLOR,
       });
     }
-    modalHandler.registerCallBack(this.expandCollapse);
   }
 
   componentWillReceiveProps(properties: Object): void {
@@ -43,12 +42,6 @@ class ColorPicker extends Component {
     }
     this.setState(newState);
   }
-
-  componentWillUnmount(): void {
-    const { modalHandler } = this.props;
-    modalHandler.deregisterCallBack(this.expandCollapse);
-  }
-
   expandCollapse: Function = (): void => {
     this.setState({
       expanded: this.signalExpanded,

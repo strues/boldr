@@ -9,10 +9,9 @@ describe('UI Reducer', () => {
     expect(uiReducer(undefined, {})).toEqual({
       layout: 'grid',
       modal: false,
-      expanded: true,
-      visible: true,
+      isExpanded: true,
+      isSmall: false,
       isMobile: false,
-      showSidebar: true,
       showHeader: true,
     });
   });
@@ -20,17 +19,17 @@ describe('UI Reducer', () => {
     const initialState = {
       layout: 'grid',
       modal: false,
-      expanded: false,
+      isExpanded: false,
       isMobile: false,
-      showSidebar: true,
+      isSmall: false,
       showHeader: true,
     };
     const stateAfter = {
       layout: 'grid',
       modal: true,
-      expanded: false,
+      isExpanded: false,
       isMobile: false,
-      showSidebar: true,
+      isSmall: false,
       showHeader: true,
     };
     expect(
@@ -43,17 +42,17 @@ describe('UI Reducer', () => {
     const initialState = {
       layout: 'grid',
       modal: true,
-      expanded: false,
+      isExpanded: false,
       isMobile: false,
-      showSidebar: true,
+      isSmall: false,
       showHeader: true,
     };
     const stateAfter = {
       layout: 'grid',
       modal: false,
-      expanded: false,
+      isExpanded: false,
       isMobile: false,
-      showSidebar: true,
+      isSmall: false,
       showHeader: true,
     };
     expect(
@@ -70,18 +69,18 @@ describe('UI Reducer', () => {
     const state = {
       layout: 'grid',
       modal: false,
-      expanded: false,
+      isExpanded: false,
       isMobile: false,
-      showSidebar: true,
+      isSmall: false,
       showHeader: true,
     };
 
     expect(uiReducer(state, action)).toEqual({
       layout: 'list',
       modal: false,
-      expanded: false,
+      isExpanded: false,
       isMobile: false,
-      showSidebar: true,
+      isSmall: false,
       showHeader: true,
     });
   });
@@ -94,9 +93,9 @@ test('changeLayout', () => {
       loaded: false,
       layout: 'grid',
       modal: false,
-      expanded: false,
+      isExpanded: false,
       isMobile: false,
-      showSidebar: true,
+      isSmall: false,
       showHeader: true,
     },
   });
@@ -115,9 +114,9 @@ test('openModal', () => {
       loaded: false,
       layout: 'grid',
       modal: false,
-      expanded: false,
+      isExpanded: false,
       isMobile: false,
-      showSidebar: true,
+      isSmall: false,
       showHeader: true,
     },
   });
@@ -134,9 +133,9 @@ test('closeModal', () => {
     ui: {
       layout: 'grid',
       modal: true,
-      expanded: false,
+      isExpanded: false,
       isMobile: false,
-      showSidebar: true,
+      isSmall: false,
       showHeader: true,
     },
   });

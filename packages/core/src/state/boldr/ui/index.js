@@ -7,6 +7,6 @@ export {
   showModal,
   hideModal,
   setMobileDevice,
-  showHideSidebar,
-  expandCollapseSideMenu,
+  toggleSidebar,
+  toggleCollapse,
 } from './actions';

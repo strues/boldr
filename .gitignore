@@ -9,3 +9,4 @@ packages/frontend/.env
 
 .boldr/cache
 coverage
+packages/editor

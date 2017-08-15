@@ -16,14 +16,8 @@ class Image extends Component {
     expanded: false,
   };
 
-  componentWillMount(): void {
-    this.props.modalHandler.registerCallBack(this.expandCollapse);
-  }
-
-  componentWillUnmount(): void {
-    this.props.modalHandler.deregisterCallBack(this.expandCollapse);
-  }
   props: Props;
+
   expandCollapse: Function = (): void => {
     this.setState({
       expanded: this.signalExpanded,
@@ -31,17 +25,17 @@ class Image extends Component {
     this.signalExpanded = false;
   };
 
-  onExpandEvent: Function = (): void => {
+  handleExpandEvent: Function = (): void => {
     this.signalExpanded = !this.state.expanded;
   };
 
-  doExpand: Function = (): void => {
+  handleExpand: Function = (): void => {
     this.setState({
       expanded: true,
     });
   };
 
-  doCollapse: Function = (): void => {
+  handleCollapse: Function = (): void => {
     this.setState({
       expanded: false,
     });
@@ -71,9 +65,9 @@ class Image extends Component {
         config={config}
         onChange={this.addImage}
         expanded={expanded}
-        onExpandEvent={this.onExpandEvent}
-        doExpand={this.doExpand}
-        doCollpase={this.doCollpase}
+        onExpandEvent={this.handleExpandEvent}
+        doExpand={this.handleExpand}
+        doCollpase={this.handleCollapse}
       />
     );
   }

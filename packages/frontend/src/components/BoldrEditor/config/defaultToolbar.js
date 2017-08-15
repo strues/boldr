@@ -5,7 +5,6 @@ export default {
     'blockType',
     'fontSize',
     'fontFamily',
-
     'textAlign',
     'colorPicker',
     'link',
@@ -15,34 +14,7 @@ export default {
     'remove',
     'history',
   ],
-  inline: {
-    inDropdown: false,
-    className: undefined,
-    component: undefined,
-    dropdownClassName: undefined,
-    options: [
-      'bold',
-      'italic',
-      'underline',
-      'strikethrough',
-      'monospace',
-      // 'superscript',
-      // 'subscript',
-    ],
-    bold: { className: undefined, title: 'Bold' },
-    italic: { className: undefined, title: 'Italic' },
-    underline: { className: undefined, title: 'Underline' },
-    strikethrough: {
-      className: undefined,
-      title: 'Strikethrough',
-    },
-    monospace: { className: undefined, title: 'Monospace' },
-    // superscript: {
-    //   className: undefined,
-    //   title: 'Superscript',
-    // },
-    // subscript: { className: undefined, title: 'Subscript' },
-  },
+
   list: {
     inDropdown: false,
     className: undefined,
@@ -78,18 +50,6 @@ export default {
     title: 'Font Family',
   },
 
-  textAlign: {
-    inDropdown: false,
-    className: undefined,
-    component: undefined,
-    dropdownClassName: undefined,
-    options: ['left', 'center', 'right', 'justify'],
-    left: { className: 'boldredit-textalign__left', title: 'Align-Left' },
-    center: { className: 'boldredit-textalign__center', title: 'Align-Center' },
-    right: { className: 'boldredit-textalign__right', title: 'Align-Right' },
-    justify: { className: 'boldredit-textalign__justify', title: 'Justify' },
-    title: 'Text Align',
-  },
   colorPicker: {
     className: undefined,
     component: undefined,

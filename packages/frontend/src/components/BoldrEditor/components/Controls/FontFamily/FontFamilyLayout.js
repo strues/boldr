@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import shortid from 'shortid';
+import uniqueId from 'lodash/uniqueId';
 import { Dropdown, DropdownOption } from '../../Dropdown';
 
 export type Props = {
@@ -68,11 +68,7 @@ class FontFamilyLayout extends Component {
             {currentFontFamily || 'Font Family'}
           </span>
           {options.map(family =>
-            <DropdownOption
-              active={currentFontFamily === family}
-              value={family}
-              key={shortid.generate()}
-            >
+            <DropdownOption active={currentFontFamily === family} value={family} key={uniqueId()}>
               {family}
             </DropdownOption>,
           )}

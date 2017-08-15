@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import Icon from '@boldr/ui/Icons/Icon';
+import { Image } from '@boldr/icons';
 import Option from '../../Option';
 import Spinner from '../../Spinner';
 
@@ -274,7 +274,7 @@ class ImageLayout extends Component {
           onClick={onExpandEvent}
           title={title}
         >
-          <Icon kind="image" color="#222" />
+          <Image color="#222" />
         </Option>
         {expanded ? this.renderAddImageModal() : undefined}
       </div>

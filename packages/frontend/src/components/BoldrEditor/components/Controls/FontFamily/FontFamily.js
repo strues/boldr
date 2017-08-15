@@ -8,7 +8,6 @@ import FontFamilyLayout from './FontFamilyLayout';
 export type Props = {
   onChange: Function,
   editorState: Object,
-  modalHandler?: Object,
   config?: Object,
 };
 
@@ -19,14 +18,12 @@ export default class FontFamily extends Component {
   };
 
   componentWillMount(): void {
-    const { editorState, modalHandler } = this.props;
+    const { editorState } = this.props;
     if (editorState) {
       this.setState({
         currentFontFamily: getSelectionCustomInlineStyle(editorState, ['FONTFAMILY']).FONTFAMILY,
       });
     }
-    // $FlowIssue
-    modalHandler.registerCallBack(this.expandCollapse);
   }
 
   componentWillReceiveProps(properties: Object): void {
@@ -38,11 +35,6 @@ export default class FontFamily extends Component {
     }
   }
 
-  componentWillUnmount(): void {
-    const { modalHandler } = this.props;
-    // $FlowIssue
-    modalHandler.deregisterCallBack(this.expandCollapse);
-  }
   props: Props;
   expandCollapse: Function = (): void => {
     this.setState({
@@ -78,10 +70,10 @@ export default class FontFamily extends Component {
   render(): Object {
     const { config } = this.props;
     const { expanded, currentFontFamily } = this.state;
-    const FontFamilyComponent = FontFamilyLayout;
+
     const fontFamily = currentFontFamily && currentFontFamily.substring(11);
     return (
-      <FontFamilyComponent
+      <FontFamilyLayout
         config={config}
         currentState={{ fontFamily }}
         onChange={this.toggleFontFamily}

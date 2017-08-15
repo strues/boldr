@@ -1,6 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
+// $FlowIssue
 import EditorState from 'draft-js/lib/EditorState';
 import Button from '@boldr/ui/Button';
 import { Col, Row } from '@boldr/ui/Layout';

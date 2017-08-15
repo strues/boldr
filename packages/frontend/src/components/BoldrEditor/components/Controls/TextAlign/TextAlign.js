@@ -1,27 +1,18 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { getSelectedBlocksMetadata, setBlockData } from '../../../utils';
 
 import TextAlignLayout from './TextAlignLayout';
 
+type Props = {
+  editorState: Object,
+  onChange: Function,
+};
 export default class TextAlign extends Component {
-  static propTypes = {
-    editorState: PropTypes.object.isRequired,
-    onChange: PropTypes.func.isRequired,
-    modalHandler: PropTypes.object,
-    config: PropTypes.object,
-  };
-
   state = {
     currentTextAlignment: undefined,
   };
-
-  componentWillMount(): void {
-    const { modalHandler } = this.props;
-    modalHandler.registerCallBack(this.expandCollapse);
-  }
 
   componentWillReceiveProps(properties: Object) {
     if (properties.editorState !== this.props.editorState) {
@@ -30,12 +21,7 @@ export default class TextAlign extends Component {
       });
     }
   }
-
-  componentWillUnmount(): void {
-    const { modalHandler } = this.props;
-    modalHandler.deregisterCallBack(this.expandCollapse);
-  }
-
+  props: Props;
   expandCollapse: Function = (): void => {
     this.setState({
       expanded: this.signalExpanded,
@@ -70,12 +56,9 @@ export default class TextAlign extends Component {
   };
 
   render(): Object {
-    const { config } = this.props;
     const { expanded, currentTextAlignment } = this.state;
-    const TextAlignmentComponent = TextAlignLayout;
     return (
-      <TextAlignmentComponent
-        config={config}
+      <TextAlignLayout
         expanded={expanded}
         onExpandEvent={this.onExpandEvent}
         doExpand={this.doExpand}

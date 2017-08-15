@@ -1,21 +1,30 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import classNames from 'classnames';
+import cN from 'classnames';
 
 export type Props = {
   onClick: Function,
   children: ?ReactChildren,
   value: ?string,
-  className: ?string,
-  activeClassName: string,
   active: ?boolean,
   disabled: ?boolean,
   title: ?string,
 };
+
 export default class Option extends Component {
+  static defaultProps = {
+    disabled: false,
+  };
+  // shouldComponentUpdate(nextProps: Props) {
+  //   if (this.props.value !== nextProps.value) {
+  //     return true;
+  //   } else {
+  //     return false;
+  //   }
+  // }
   props: Props;
-  onClick: Function = () => {
+  handleClick: Function = () => {
     const { disabled, onClick, value } = this.props;
     if (!disabled) {
       onClick(value);
@@ -23,17 +32,13 @@ export default class Option extends Component {
   };
 
   render() {
-    const { children, className, activeClassName, active, disabled, title } = this.props;
+    const { children, active, disabled, title } = this.props;
+    const classes = cN('boldredit-option__wrapper', {
+      'boldredit-option--active': active,
+      'boldredit-option--disabled': disabled,
+    });
     return (
-      <div
-        className={classNames('boldredit-option__wrapper', className, {
-          [`boldredit-option--active ${activeClassName}`]: active,
-          'boldredit-option--disabled': disabled,
-        })}
-        onClick={this.onClick}
-        aria-selected={active}
-        title={title}
-      >
+      <div className={classes} onClick={this.handleClick} aria-selected={active} title={title}>
         {children}
       </div>
     );

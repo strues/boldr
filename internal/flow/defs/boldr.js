@@ -16,6 +16,13 @@ declare type FluxStandardAction = {
   error?: boolean,
 };
 
+declare type Location = {
+  hash: ?string,
+  key: string,
+  pathname: string,
+  search: ?string,
+};
+
 declare type Reducer = (state: ?Object, action: FluxStandardAction) => Object;
 
 declare type Params = { [string]: string | number };

@@ -1,4 +1,6 @@
+/* eslint-disable react/no-unused-state */
 /* @flow */
+
 import React, { Component } from 'react';
 import classnames from 'classnames';
 import { StyleClasses } from '@boldr/ui';
@@ -11,26 +13,26 @@ const BASE_ELEMENT = StyleClasses.SIDEBAR_NAV;
 export type Props = {
   navClassName: ?string,
   items: SidebarLinks,
-  activeItem: ?string,
-  location: Object,
-  expanded: boolean,
+  activeItem: string,
+  isExpanded: boolean,
+  isSmall: boolean,
   onExpandCollapse: () => void,
 };
 
-class SidebarNav extends Component {
-  state = {
-    items: [],
-    activeItemLink: null,
-  };
+interface State {
+  items: SidebarLinks,
+  activeItemLink: string,
+}
 
-  // Create Item tree with additional properties
-  componentWillMount() {
-    const items = this.props.items ? createItemTree(this.props.items) : [];
-    this.setState({
-      items,
-      activeItemLink: this.props.location,
-    });
+class SidebarNav extends Component {
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      items: props.items ? createItemTree(props.items) : [],
+      activeItemLink: props.activeItem,
+    };
   }
+  state: State;
 
   componentWillReceiveProps(newProps: Object) {
     if (newProps && newProps.activeItem) {
@@ -64,11 +66,11 @@ class SidebarNav extends Component {
       <SidebarNavItem
         key={item.id}
         level={0}
-        expanded={this.props.expanded}
-        onExpandCollapse={this.props.onExpandCollapse}
+        isExpanded={this.props.isExpanded}
+        onExpandCollapse={this.toggleItem}
         activeItem={this.props.activeItem}
+        isSmall={this.props.isSmall}
         onItemClick={this.onItemClick}
-        location={this.props.location}
         {...item}
       />,
     );

@@ -1,8 +1,7 @@
-# pipeline:
-#   build:
-#     image: node:8
-#     commands:
-#       - yarn install --pure-lockfile
-#       - yarn run test:ci -- -u
-#       - yarn add codecov
-#       - ./node_modules/.bin/codecov -t a3dc697a-382d-4d84-a07b-1f5682c3d70a -f coverage/coverage-final.json
+pipeline:
+  build:
+    image: node:8.3.0
+    commands:
+      - yarn install --pure-lockfile
+      - yarn run test -- -u
+      - ./node_modules/.bin/codecov -t a3dc697a-382d-4d84-a07b-1f5682c3d70a -f coverage/coverage-final.json

@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { Link2 } from '@boldr/icons';
+import { Embedded } from '@boldr/icons';
 import { stopPropagation } from '../../../utils/common';
 import Option from '../../Option';
 
@@ -117,7 +117,7 @@ class EmbeddedLayout extends Component {
           onClick={onExpandEvent}
           title={this.props.config.title}
         >
-          <Link2 color="#222" />
+          <Embedded color="#222" />
         </Option>
         {expanded ? this.rendeEmbeddedLinkModal() : undefined}
       </div>

@@ -5,7 +5,6 @@ import { mount } from 'enzyme';
 import { EditorState, convertFromHTML, ContentState } from 'draft-js';
 
 import defaultToolbar from '../../../config/defaultToolbar';
-import ModalHandler from '../../../eventHandlers/modals';
 
 import BlockType from './BlockType';
 
@@ -21,24 +20,11 @@ describe('BlockType test suite', () => {
           onChange={() => {}}
           editorState={editorState}
           config={{ ...defaultToolbar.blockType, inDropdown: false }}
-          modalHandler={new ModalHandler()}
         />,
       )
         .html()
         .startsWith('<div'),
     ).toBe(true);
-  });
-
-  it('should have a dropdown child component defined', () => {
-    const block = mount(
-      <BlockType
-        onChange={() => {}}
-        editorState={editorState}
-        config={defaultToolbar.blockType}
-        modalHandler={new ModalHandler()}
-      />,
-    );
-    expect(block.find('Dropdown').length).toEqual(1);
   });
 
   it('should have 8 child elements when inDropdown is false', () => {
@@ -47,9 +33,8 @@ describe('BlockType test suite', () => {
         onChange={() => {}}
         editorState={editorState}
         config={{ ...defaultToolbar.blockType, inDropdown: false }}
-        modalHandler={new ModalHandler()}
       />,
     );
-    expect(block.find('Option').length).toEqual(8);
+    expect(block.find('Option').length).toEqual(5);
   });
 });

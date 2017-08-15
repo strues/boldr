@@ -26,10 +26,10 @@
   "dependencies": {
     "@boldr/auth": "^0.1.0-alpha.1",
     "@boldr/cli": "0.2.0-alpha.8",
-    "@boldr/core": "^0.1.0-alpha.7",
-    "@boldr/icons": "0.1.0-alpha.2",
+    "@boldr/core": "0.1.0-beta.1-1",
+    "@boldr/icons": "0.1.0-beta.1-1",
     "@boldr/tools": "0.1.0-beta.1",
-    "@boldr/ui": "0.1.0-rc.6",
+    "@boldr/ui": "0.1.0-rc.8",
     "@boldr/utils": "^0.1.0-rc.1",
     "apollo-client": "^1.9.1",
     "draft-convert": "^1.4.8",
@@ -48,14 +48,15 @@
     "react-router-dom": "^4.1.2",
     "react-tagsinput": "^3.17.0",
     "react-transition-group": "^2.2.0",
-    "react-universal-component": "2.3.5",
+    "react-universal-component": "2.4.0",
+    "reactackle": "^0.0.3-beta.1",
     "redux": "^3.7.2",
     "redux-form": "^7.0.3",
     "redux-thunk": "^2.2.0",
     "serialize-javascript": "^1.4.0",
     "shortid": "^2.2.8",
     "styled-components": "^2.1.2",
-    "webpack-flush-chunks": "^1.1.20"
+    "webpack-flush-chunks": "^1.1.22"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",
@@ -75,6 +76,7 @@
     "redbox-react": "^1.5.0",
     "redux-mock-store": "^1.2.3",
     "rimraf": "^2.6.1",
-    "sinon": "^3.2.0"
+    "sinon": "^3.2.0",
+    "why-did-you-update": "^0.0.8"
   }
 }

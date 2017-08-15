@@ -4,8 +4,8 @@ import {
   hideModal,
   setMobileDevice,
   changeLayout,
-  showHideSidebar,
-  expandCollapseSideMenu,
+  toggleSidebar,
+  toggleCollapse,
   hideHeader,
   showHeader,
 } from './actions';
@@ -34,13 +34,13 @@ describe('UI Actions', () => {
 
     expect(setMobileDevice()).toEqual(expectedResult);
   });
-  test('showHideSidebar -- should return the correct type', () => {
+  test('toggleSidebar -- should return the correct type', () => {
     const expectedResult = {
       type: t.TOGGLE_SIDEBAR,
       payload: undefined,
     };
 
-    expect(showHideSidebar()).toEqual(expectedResult);
+    expect(toggleSidebar()).toEqual(expectedResult);
   });
   test('showHeader -- should return the correct type', () => {
     const expectedResult = {
@@ -58,13 +58,13 @@ describe('UI Actions', () => {
 
     expect(hideHeader()).toEqual(expectedResult);
   });
-  test('expandCollapseSideMenu -- should return the correct type', () => {
+  test('toggleCollapse -- should return the correct type', () => {
     const expectedResult = {
-      type: t.TOGGLE_SB_MENU,
+      type: t.TOGGLE_COLLAPSE,
       payload: undefined,
     };
 
-    expect(expandCollapseSideMenu()).toEqual(expectedResult);
+    expect(toggleCollapse()).toEqual(expectedResult);
   });
   test('changeLayout -- should return the correct type', () => {
     const expectedResult = {

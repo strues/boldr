@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-
+import { Select } from '@boldr/ui';
 import { stopPropagation } from '../../utils';
 
 export type Props = {
@@ -16,6 +16,7 @@ export type Props = {
   onExpandEvent: ?Function,
   optionWrapperClassName: ?string,
 };
+
 export default class Dropdown extends Component {
   static defaultProps = {
     title: '',
@@ -32,13 +33,17 @@ export default class Dropdown extends Component {
       });
     }
   }
-  props: Props;
-  onChange: Function = (value: any): void => {
-    const { onChange } = this.props;
-    if (onChange) {
-      onChange(value);
+  shouldComponentUpdate(nextProps: Object) {
+    if (this.props.expanded !== nextProps.expanded) {
+      return true;
+    } else {
+      return false;
     }
-    this.toggleExpansion();
+  }
+  props: Props;
+  handleChange: Function = (event: Event): void => {
+    const value: string = event.target.value;
+    this.props.onChange(value);
   };
 
   setHighlighted: Function = (highlighted: number): void => {
@@ -80,22 +85,19 @@ export default class Dropdown extends Component {
           />
         </a>
         {expanded
-          ? <ul
-              className={classNames('boldredit-dropdown__optionwrapper', optionWrapperClassName)}
-              onClick={stopPropagation}
-            >
+          ? <Select>
               {React.Children.map(options, (option, index) => {
                 const temp =
                   option &&
                   React.cloneElement(option, {
-                    onSelect: this.onChange,
+                    onSelect: this.handleChange,
                     highlighted: highlighted === index,
                     setHighlighted: this.setHighlighted,
                     index,
                   });
                 return temp;
               })}
-            </ul>
+            </Select>
           : null}
       </div>
     );

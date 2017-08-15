@@ -19,13 +19,6 @@ export default class Remove extends Component {
     expanded: false,
   };
 
-  componentWillMount(): void {
-    this.props.modalHandler.registerCallBack(this.expandCollapse);
-  }
-
-  componentWillUnmount(): void {
-    this.props.modalHandler.deregisterCallBack(this.expandCollapse);
-  }
   props: Props;
   removeAllInlineStyles: Function = (editorState: EditorState): void => {
     let contentState = editorState.getCurrentContent();

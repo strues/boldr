@@ -2,14 +2,12 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import Icon from '@boldr/ui/Icons/Icon';
-import { stopPropagation, getFirstIcon } from '../../../utils/common';
+import { Link, Unlink } from '@boldr/icons';
+import Modal from '@boldr/ui/Modal';
 import Option from '../../Option';
-import { Dropdown, DropdownOption } from '../../Dropdown';
 
 export type Props = {
   expanded?: boolean,
-  doExpand?: Function,
   doCollapse?: Function,
   onExpandEvent?: Function,
   config: Object,
@@ -77,26 +75,11 @@ class LinkLayout extends Component {
     });
   };
 
-  forceExpandAndShowModal: Function = (): void => {
-    const { doExpand, currentState: { link, selectionText } } = this.props;
-    const { linkTargetOption } = this.state;
-    doExpand();
-    this.setState({
-      showModal: true,
-      linkTarget: link && link.target,
-      linkTargetOption: (link && link.targetOption) || linkTargetOption,
-      linkTitle: (link && link.title) || selectionText,
-    });
-  };
-
   renderAddLinkModal() {
-    const { config: { popupClassName }, doCollapse } = this.props;
-    const { linkTitle, linkTarget, linkTargetOption } = this.state;
+    const { doCollapse } = this.props;
+    const { linkTitle, linkTarget, linkTargetOption, showModal } = this.state;
     return (
-      <div
-        className={classNames('boldredit-link__modal', popupClassName)}
-        onClick={stopPropagation}
-      >
+      <Modal title="Add Link" isVisible={showModal} onClose={this.hideModal} closeable>
         <span className="boldredit-link__modal-label">Link Title</span>
         <input
           className="boldredit-link__modal-input"
@@ -134,12 +117,12 @@ class LinkLayout extends Component {
             Cancel
           </button>
         </span>
-      </div>
+      </Modal>
     );
   }
 
-  renderInFlatList(): Object {
-    const { config: { options, link, unlink, className }, currentState, expanded } = this.props;
+  renderLink(): Object {
+    const { config: { options, link, unlink, className }, currentState } = this.props;
     const { showModal } = this.state;
     return (
       <div
@@ -155,7 +138,7 @@ class LinkLayout extends Component {
             aria-expanded={showModal}
             title={link.title}
           >
-            <Icon kind="link" color="#222" />
+            <Link color="#222" size="1em" />
           </Option>}
         {options.indexOf('unlink') >= 0 &&
           <Option
@@ -165,72 +148,15 @@ class LinkLayout extends Component {
             onClick={this.removeLink}
             title={unlink.title}
           >
-            <Icon kind="unlink" color="#222" />
+            <Unlink color="#222" size="1em" />
           </Option>}
-        {expanded && showModal ? this.renderAddLinkModal() : null}
-      </div>
-    );
-  }
-
-  renderInDropDown(): Object {
-    const {
-      expanded,
-      onExpandEvent,
-      doCollapse,
-      doExpand,
-      onChange,
-      config,
-      currentState,
-    } = this.props;
-    const { options, link, unlink, className, dropdownClassName, title } = config;
-    const { showModal } = this.state;
-    return (
-      <div
-        className="boldredit-link__wrapper"
-        aria-haspopup="true"
-        aria-label="boldredit-link__control"
-        aria-expanded={expanded}
-        title={title}
-      >
-        <Dropdown
-          className={classNames('boldredit-link__dropdown', className)}
-          optionWrapperClassName={classNames(dropdownClassName)}
-          onChange={onChange}
-          expanded={expanded && !showModal}
-          doExpand={doExpand}
-          doCollapse={doCollapse}
-          onExpandEvent={onExpandEvent}
-        >
-          <img src={getFirstIcon(config)} alt="" />
-          {options.indexOf('link') >= 0 &&
-            <DropdownOption
-              onClick={this.forceExpandAndShowModal}
-              className={classNames('boldredit-link__dropdownoption', link.className)}
-              title={link.title}
-            >
-              <Icon kind="link" color="#222" />
-            </DropdownOption>}
-          {options.indexOf('unlink') >= 0 &&
-            <DropdownOption
-              onClick={this.removeLink}
-              disabled={!currentState.link}
-              className={classNames('boldredit-link__dropdownoption', unlink.className)}
-              title={unlink.title}
-            >
-              <Icon kind="unlink" color="#222" />
-            </DropdownOption>}
-        </Dropdown>
-        {expanded && showModal ? this.renderAddLinkModal() : undefined}
+        {showModal ? this.renderAddLinkModal() : null}
       </div>
     );
   }
 
   render(): Object {
-    const { config: { inDropdown } } = this.props;
-    if (inDropdown) {
-      return this.renderInDropDown();
-    }
-    return this.renderInFlatList();
+    return this.renderLink();
   }
 }
 

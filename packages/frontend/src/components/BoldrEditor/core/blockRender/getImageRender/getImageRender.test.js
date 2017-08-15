@@ -3,7 +3,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { convertFromHTML, AtomicBlockUtils, ContentState, EditorState } from 'draft-js';
-import { getAllBlocks } from '../../utils';
+import { getAllBlocks } from '../../../utils';
 import getImageRender from './getImageRender';
 
 describe('ImageRenderer', () => {

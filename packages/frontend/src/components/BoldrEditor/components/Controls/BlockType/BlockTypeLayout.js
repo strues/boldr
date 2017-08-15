@@ -2,15 +2,10 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-
+import { Paragraph, Heading1, Heading2, Heading3, QuoteLeft } from '@boldr/icons';
 import Option from '../../Option';
-import { Dropdown, DropdownOption } from '../../Dropdown';
 
 export type Props = {
-  expanded: boolean,
-  onExpandEvent: ?Function,
-  doExpand: ?Function,
-  doCollapse: ?Function,
   onChange: ?Function,
   config: Object,
   currentState: Object,
@@ -19,50 +14,35 @@ export type Props = {
 class BlockTypeLayout extends Component {
   props: Props;
 
-  blocksTypes: Array<Object> = [
+  blockTypes: Array<Object> = [
     {
       label: 'Normal',
       id: 1,
-      displayName: 'Normal',
+      icon: <Paragraph color="#222" />,
     },
     {
       label: 'H1',
       id: 2,
-      displayName: 'H1',
+      icon: <Heading1 color="#222" />,
     },
     {
       label: 'H2',
       id: 3,
-      displayName: 'H2',
+      icon: <Heading2 color="#222" />,
     },
     {
       label: 'H3',
       id: 4,
-      displayName: 'H3',
-    },
-    {
-      label: 'H4',
-      id: 5,
-      displayName: 'H4',
-    },
-    {
-      label: 'H5',
-      id: 6,
-      displayName: 'H5',
-    },
-    {
-      label: 'H6',
-      id: 7,
-      displayName: 'H6',
+      icon: <Heading3 color="#222" />,
     },
     {
       label: 'Blockquote',
-      id: 8,
-      displayName: 'Blockquote',
+      id: 5,
+      icon: <QuoteLeft color="#222" />,
     },
   ];
 
-  renderFlat(blocks: Array<Object>): ReactElement {
+  renderButtons(blocks: Array<Object>): ReactElement {
     const { config: { className }, onChange, currentState: { blockType } } = this.props;
     return (
       <div className={classNames('boldredit-block__wrapper', className)}>
@@ -73,55 +53,17 @@ class BlockTypeLayout extends Component {
             active={blockType === block.label}
             onClick={onChange}
           >
-            {block.displayName}
+            {block.icon}
           </Option>,
         )}
       </div>
     );
   }
 
-  renderInDropdown(blocks: Array<Object>): ReactElement {
-    const {
-      config: { className, dropdownClassName, title },
-      currentState: { blockType },
-      expanded,
-      doExpand,
-      onExpandEvent,
-      doCollapse,
-      onChange,
-    } = this.props;
-    const currentBlockData = this.blocksTypes.filter(blk => blk.label === blockType);
-    const currentLabel = currentBlockData && currentBlockData[0] && currentBlockData[0].displayName;
-    return (
-      <div className="boldredit-block__wrapper" aria-label="boldredit-block__control">
-        <Dropdown
-          className={classNames('boldredit-block__dropdown', className)}
-          optionWrapperClassName={classNames(dropdownClassName)}
-          onChange={onChange}
-          expanded={expanded}
-          doExpand={doExpand}
-          doCollapse={doCollapse}
-          onExpandEvent={onExpandEvent}
-          title={title}
-        >
-          <span>
-            {currentLabel}
-          </span>
-          {blocks.map(block =>
-            <DropdownOption active={blockType === block.label} value={block.label} key={block.id}>
-              {block.displayName}
-            </DropdownOption>,
-          )}
-        </Dropdown>
-      </div>
-    );
-  }
-
   render(): void {
     const { config } = this.props;
-    const { inDropdown } = config;
-    const blocks = this.blocksTypes.filter(({ label }) => config.options.includes(label));
-    return inDropdown ? this.renderInDropdown(blocks) : this.renderFlat(blocks);
+    const blocks = this.blockTypes.filter(({ label }) => config.options.includes(label));
+    return this.renderButtons(blocks);
   }
 }
 

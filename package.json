@@ -1,15 +1,14 @@
 {
   "name": "boldr",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "description": "Boldr CMF platform for Universal React Applications.",
-  "private": true,
   "scripts": {
     "bootstrap": "./node_modules/.bin/lerna bootstrap --npm-client=yarn --concurrency=1",
     "clean": "lerna clean --yes && node ./internal/scripts/clean.js",
     "cm": "git-cz",
     "coverage": "codecov",
     "lint": "eslint . --fix",
-    "postinstall": "yarn run clean && yarn run bootstrap",
+    "postinstall": "npm run clean && npm run bootstrap",
     "precommit": "lint-staged --verbose",
     "prettier": "node ./internal/scripts/prettier.js write",
     "test": "NODE_ENV=test jest --config ./jest.config.js --projects ./ && node ./internal/scripts/mapCoverage.js"

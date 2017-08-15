@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import Icon from '@boldr/ui/Icons/Icon';
+import { PaintBrush } from '@boldr/icons';
 import shortid from 'shortid';
 import { stopPropagation } from '../../../utils/common';
 import Option from '../../Option';
@@ -102,7 +102,7 @@ class ColorPickerLayout extends Component {
         title={this.props.config.title}
       >
         <Option onClick={onExpandEvent} className={classNames(this.props.config.className)}>
-          <Icon kind="color" color="#222" />
+          <PaintBrush color="#222" />
         </Option>
         {expanded ? this.renderModal() : undefined}
       </div>

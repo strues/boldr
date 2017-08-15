@@ -4,7 +4,6 @@ import React from 'react';
 import { EditorState, convertFromHTML, ContentState } from 'draft-js';
 import { mount } from 'enzyme';
 import defaultToolbar from '../../../config/defaultToolbar';
-import ModalHandler from '../../../eventHandlers/modals';
 import History from './History';
 
 describe('<History />', () => {
@@ -15,12 +14,7 @@ describe('<History />', () => {
   it('should have a div when rendered', () => {
     expect(
       mount(
-        <History
-          onChange={() => {}}
-          editorState={editorState}
-          config={defaultToolbar.history}
-          modalHandler={new ModalHandler()}
-        />,
+        <History onChange={() => {}} editorState={editorState} config={defaultToolbar.history} />,
       )
         .html()
         .startsWith('<div'),
@@ -29,12 +23,7 @@ describe('<History />', () => {
 
   it('should have 2 child elements', () => {
     const control = mount(
-      <History
-        onChange={() => {}}
-        editorState={editorState}
-        config={defaultToolbar.history}
-        modalHandler={new ModalHandler()}
-      />,
+      <History onChange={() => {}} editorState={editorState} config={defaultToolbar.history} />,
     );
     expect(control.children().length).toEqual(2);
   });

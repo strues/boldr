@@ -96,7 +96,6 @@ export default function createWebpackConfig(
   const _IS_DEV_ = config.env === 'development';
   const _IS_PROD_ = config.env === 'production';
 
-  const BABEL_ENV = `boldr-${config.env}-${config.target}`;
   const clientPreset = [
     require.resolve('babel-preset-boldr/browser'),
     {
@@ -155,7 +154,6 @@ export default function createWebpackConfig(
   // $FlowIssue
   logger.task(`Current Env: ${config.env}`);
   logger.task(`Build Target: ${target}`);
-  logger.task(`Babel Env: ${BABEL_ENV}`);
   logger.task(`Source Maps: ${devtool}`);
 
   const cacheLoader = config.useCacheLoader
@@ -177,8 +175,9 @@ export default function createWebpackConfig(
 
   const postCSSLoaderRule = {
     loader: require.resolve('postcss-loader'),
-    query: {
-      sourceMap: false,
+    options: {
+      // https://webpack.js.org/guides/migrating/#complex-options
+      ident: 'postcss',
     },
   };
   const sassLoaderRule = {
@@ -363,7 +362,6 @@ export default function createWebpackConfig(
             path: require.resolve('babel-loader'),
             query: {
               babelrc: false,
-              forceEnv: BABEL_ENV,
               cacheDirectory: _IS_DEV_,
               compact: _IS_PROD_,
               presets: [_IS_CLIENT_ ? clientPreset : serverPreset],

@@ -6,7 +6,6 @@ import { spy } from 'sinon';
 import { mount } from 'enzyme';
 
 import defaultToolbar from '../../../config/defaultToolbar';
-import ModalHandler from '../../../eventHandlers/modals';
 import List from './List';
 
 describe('<List />', () => {
@@ -16,14 +15,7 @@ describe('<List />', () => {
 
   it('should have a div when rendered', () => {
     expect(
-      mount(
-        <List
-          onChange={() => {}}
-          editorState={editorState}
-          config={defaultToolbar.list}
-          modalHandler={new ModalHandler()}
-        />,
-      )
+      mount(<List onChange={() => {}} editorState={editorState} config={defaultToolbar.list} />)
         .html()
         .startsWith('<div'),
     ).toBe(true);
@@ -31,12 +23,7 @@ describe('<List />', () => {
 
   it('should have 2 child elements by default', () => {
     const control = mount(
-      <List
-        onChange={() => {}}
-        editorState={editorState}
-        config={defaultToolbar.list}
-        modalHandler={new ModalHandler()}
-      />,
+      <List onChange={() => {}} editorState={editorState} config={defaultToolbar.list} />,
     );
     expect(control.children().length).toEqual(2);
   });
@@ -47,7 +34,6 @@ describe('<List />', () => {
         onChange={() => {}}
         editorState={editorState}
         config={{ ...defaultToolbar.list, inDropdown: true }}
-        modalHandler={new ModalHandler()}
       />,
     );
     expect(control.children().length).toEqual(2);
@@ -57,12 +43,7 @@ describe('<List />', () => {
   it('should execute onChange when any of first any child elements is clicked', () => {
     const onChange = spy();
     const control = mount(
-      <List
-        onChange={onChange}
-        editorState={editorState}
-        config={defaultToolbar.list}
-        modalHandler={new ModalHandler()}
-      />,
+      <List onChange={onChange} editorState={editorState} config={defaultToolbar.list} />,
     );
     control.childAt(0).simulate('click');
     expect(onChange.calledOnce).toBeTruthy();

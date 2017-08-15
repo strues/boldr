@@ -6,13 +6,13 @@ import * as t from '../actionTypes';
 
 function toggleExpandCollapse(state) {
   const newState = Object.assign({}, state);
-  newState.expanded = !newState.expanded;
+  newState.isExpanded = !newState.isExpanded;
   return newState;
 }
 
 function toggleSidebar(state) {
   const newState = Object.assign({}, state);
-  newState.visible = !newState.visible;
+  newState.isSmall = !newState.isSmall;
   return newState;
 }
 
@@ -25,16 +25,15 @@ export const LAYOUTS = {
 const INITIAL_STATE = {
   layout: LAYOUTS.GRID,
   modal: false,
-  expanded: true,
+  isExpanded: true,
   isMobile: false,
-  visible: true,
-  showSidebar: true,
+  isSmall: false,
   showHeader: true,
 };
 
 export default function uiReducer(state = INITIAL_STATE, action) {
   switch (action.type) {
-    case t.TOGGLE_SB_MENU:
+    case t.TOGGLE_COLLAPSE:
       return toggleExpandCollapse(state);
     case t.TOGGLE_SIDEBAR:
       return toggleSidebar(state);
