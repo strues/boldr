@@ -9,7 +9,6 @@ import EmbeddedLayout from './EmbeddedLayout';
 export type Props = {
   onChange: Function,
   editorState: Object,
-  modalHandler: Object,
   config?: Object,
 };
 
@@ -17,14 +16,7 @@ class Embedded extends Component {
   state: Object = {
     expanded: false,
   };
-  //
-  // componentWillMount(): void {
-  //   this.props.modalHandler.registerCallBack(this.expandCollapse);
-  // }
-  //
-  // componentWillUnmount(): void {
-  //   this.props.modalHandler.deregisterCallBack(this.expandCollapse);
-  // }
+
   props: Props;
   onExpandEvent: Function = (): void => {
     this.signalExpanded = !this.state.expanded;

@@ -8,7 +8,6 @@ import ImageLayout from './ImageLayout';
 export type Props = {
   onChange: Function,
   editorState: Object,
-  modalHandler: Object,
   config: Object,
 };
 class Image extends Component {

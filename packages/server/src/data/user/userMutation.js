@@ -27,7 +27,7 @@ export default {
       // remove the password from the response.
       user.stripPassword();
       // sign the token
-      const token = signToken(user);
+      const token = await signToken(user);
       context.req.user = user;
       const payload = {
         token,

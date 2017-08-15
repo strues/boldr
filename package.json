@@ -1,11 +1,12 @@
 {
   "name": "boldr",
   "version": "0.0.0",
+  "private": true,
   "description": "Boldr CMF platform for Universal React Applications.",
   "scripts": {
-    "bootstrap": "./node_modules/.bin/lerna bootstrap --npm-client=yarn --concurrency=1",
+    "bootstrap": "./node_modules/.bin/lerna bootstrap",
     "clean": "lerna clean --yes && node ./internal/scripts/clean.js",
-    "cm": "git-cz",
+    "commit": "git-cz",
     "coverage": "codecov",
     "lint": "eslint . --fix",
     "postinstall": "npm run clean && npm run bootstrap",
@@ -13,7 +14,11 @@
     "prettier": "node ./internal/scripts/prettier.js write",
     "test": "NODE_ENV=test jest --config ./jest.config.js --projects ./ && node ./internal/scripts/mapCoverage.js"
   },
-  "keywords": ["react", "boldr", "universal"],
+  "keywords": [
+    "react",
+    "boldr",
+    "universal"
+  ],
   "author": {
     "name": "Steven Truesdell",
     "email": "steven@strues.io",
@@ -31,8 +36,10 @@
   "devDependencies": {
     "babel-cli": "^6.24.1",
     "babel-core": "^6.25.0",
+    "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
-    "babel-preset-boldr": "^0.10.2",
+    "babel-preset-boldr": "0.10.3",
+    "babel-preset-env": "^1.6.0",
     "bluebird": "^3.5.0",
     "chalk": "^2.1.0",
     "codecov": "^2.3.0",
@@ -71,10 +78,22 @@
       "path": "./node_modules/cz-emoji"
     },
     "cz-emoji": {
-      "scopes": ["auth", "cli", "core", "frontend", "server", "tools", "utils", "ci"]
+      "scopes": [
+        "auth",
+        "cli",
+        "core",
+        "frontend",
+        "server",
+        "tools",
+        "utils",
+        "ci"
+      ]
     }
   },
   "lint-staged": {
-    "*.js": ["npm run prettier", "git add"]
+    "*.js": [
+      "npm run prettier",
+      "git add"
+    ]
   }
 }

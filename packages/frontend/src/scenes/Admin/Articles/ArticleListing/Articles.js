@@ -1,17 +1,10 @@
+/* eslint-disable react/prefer-stateless-function */
 /* @flow */
 import React, { Component } from 'react';
-import Link from 'react-router-dom/Link';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Helmet from 'react-helmet';
-import { format } from 'date-fns';
 
-// internal
-import Paper from '@boldr/ui/Paper';
-import Icon from '@boldr/ui/Icons/Icon';
-import Avatar from '@boldr/ui/Avatar';
-import Headline from '@boldr/ui/Headline';
-import Loader from '@boldr/ui/Loader';
 import { LevelLeft, Level, LevelItem, LevelRight } from '@boldr/ui/Level';
 import ArticleList from './components/ArticleList';
 import ArticlePreview from './components/ArticlePreview';
@@ -28,6 +21,9 @@ const SideB = styled.div`
   flex-basis: 360px;
   flex-direction: column;
   flex-shrink: 0;
+  min-height: 100%;
+
+  padding: 0 0.5em;
 `;
 
 const Listing = styled.div`

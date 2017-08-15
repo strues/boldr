@@ -1,15 +1,18 @@
 /* @flow */
-import React, { Component } from 'react';
+import React from 'react';
 import Headline from '@boldr/ui/Headline';
+import styled from 'styled-components';
 
-class ArticleListHead extends Component {
-  render() {
-    return (
-      <div>
-        <Headline kind="h3">All Articles</Headline>
-      </div>
-    );
-  }
-}
+const ListHeader = styled.div`
+  padding-left: 20px;
+  padding-bottom: 1em;
+`;
+const ArticleListHead = () => {
+  return (
+    <ListHeader>
+      <Headline type="h4">All Articles</Headline>
+    </ListHeader>
+  );
+};
 
 export default ArticleListHead;

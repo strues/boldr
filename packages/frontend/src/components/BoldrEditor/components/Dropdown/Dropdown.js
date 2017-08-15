@@ -2,17 +2,19 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { Select } from '@boldr/ui';
-import { stopPropagation } from '../../utils';
 
+import styled from 'styled-components';
+
+const Holder = styled.div`
+  z-index: 190;
+  background: #fff;
+  border: 1px solid #eaeaea;
+`;
 export type Props = {
   children: Array<ReactChildren>,
   onChange: ?Function,
   className: ?string,
-  expanded: boolean,
-  doExpand: ?Function,
   title: string,
-  doCollapse: ?Function,
   onExpandEvent: ?Function,
   optionWrapperClassName: ?string,
 };
@@ -23,23 +25,10 @@ export default class Dropdown extends Component {
   };
 
   state: Object = {
+    expanded: false,
     highlighted: -1,
   };
 
-  componentWillReceiveProps(props: Props) {
-    if (this.props.expanded && !props.expanded) {
-      this.setState({
-        highlighted: -1,
-      });
-    }
-  }
-  shouldComponentUpdate(nextProps: Object) {
-    if (this.props.expanded !== nextProps.expanded) {
-      return true;
-    } else {
-      return false;
-    }
-  }
   props: Props;
   handleChange: Function = (event: Event): void => {
     const value: string = event.target.value;
@@ -51,19 +40,29 @@ export default class Dropdown extends Component {
       highlighted,
     });
   };
-
+  expandMenu = () => {
+    this.setState({
+      expanded: true,
+    });
+  };
+  collapseMenu = () => {
+    this.setState({
+      expanded: false,
+    });
+  };
   toggleExpansion: Function = (): void => {
-    const { doExpand, doCollapse, expanded } = this.props;
-    if (expanded) {
-      doCollapse();
+    // const { doExpand, doCollapse, expanded } = this.props;
+    if (this.state.expanded) {
+      this.collapseMenu();
     } else {
-      doExpand();
+      this.expandMenu();
     }
   };
 
   render() {
-    const { expanded, children, className, optionWrapperClassName, onExpandEvent } = this.props;
+    const { children, className } = this.props;
     const { highlighted } = this.state;
+    const { expanded } = this.state;
     const options = children.slice(1, children.length);
     return (
       <div
@@ -73,7 +72,7 @@ export default class Dropdown extends Component {
       >
         <a
           className="boldredit-dropdown__selectedtext"
-          onClick={onExpandEvent}
+          onClick={this.toggleExpansion}
           title={this.props.title}
         >
           {children[0]}
@@ -84,20 +83,20 @@ export default class Dropdown extends Component {
             })}
           />
         </a>
-        {expanded
-          ? <Select>
+        {this.state.expanded
+          ? <Holder>
               {React.Children.map(options, (option, index) => {
                 const temp =
                   option &&
                   React.cloneElement(option, {
-                    onSelect: this.handleChange,
+                    onSelect: this.props.onChange,
                     highlighted: highlighted === index,
                     setHighlighted: this.setHighlighted,
                     index,
                   });
                 return temp;
               })}
-            </Select>
+            </Holder>
           : null}
       </div>
     );

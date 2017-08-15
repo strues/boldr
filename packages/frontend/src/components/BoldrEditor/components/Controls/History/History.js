@@ -9,7 +9,6 @@ import HistoryLayout from './HistoryLayout';
 export type Props = {
   onChange: Function,
   editorState: Object,
-  modalHandler: Object,
   config: Object,
 };
 
@@ -21,7 +20,7 @@ export default class History extends Component {
   };
 
   componentWillMount(): void {
-    const { editorState, modalHandler } = this.props;
+    const { editorState } = this.props;
     if (editorState) {
       this.setState({
         undoDisabled: editorState.getUndoStack().size === 0,

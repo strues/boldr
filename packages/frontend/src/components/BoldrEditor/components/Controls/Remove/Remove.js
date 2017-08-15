@@ -10,7 +10,6 @@ import RemoveLayout from './RemoveLayout';
 export type Props = {
   onChange: Function,
   editorState: Object,
-  modalHandler: Object,
   config: Object,
 };
 

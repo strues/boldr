@@ -1,7 +1,15 @@
 {
   "lerna": "2.0.0",
+  "version": "independent",
+  "npmClient": "yarn",
   "packages": [
-    "packages/*"
+    "packages/auth",
+    "packages/cli",
+    "packages/core",
+    "packages/frontend",
+    "packages/server",
+    "packages/tools",
+    "packages/utils"
   ],
-  "version": "independent"
+  "registry": "https://registry.npmjs.org/"
 }

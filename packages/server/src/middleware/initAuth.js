@@ -10,8 +10,6 @@ import User from '../models/User';
 import { config } from '../config';
 import rbac from './rbac';
 
-const ONE_WEEK = 7 * 24 * 60 * 60 * 1000;
-
 const env = process.env.NODE_ENV || 'development';
 const sessionOptions = {
   secret: config.get('token.secret'),
@@ -23,7 +21,7 @@ const sessionOptions = {
   unset: 'destroy',
   cookie: {
     secure: false,
-    maxAge: ONE_WEEK,
+    maxAge: config.get('token.expiration'),
   },
   store: new (connectRedis(session))({ client: mainRedisClient }),
 };
@@ -53,7 +51,7 @@ export default function initAuth(app) {
       }
     };
     if (!req.isAuthenticated()) {
-      next();
+      return next();
     } else {
       const payload = req.isAuthenticated();
 
@@ -61,7 +59,7 @@ export default function initAuth(app) {
       req.session.user = user;
       req.user = user;
       req.user.role = user.roles[0].name;
-      next();
+      return next();
     }
   });
   app.use(rbac());

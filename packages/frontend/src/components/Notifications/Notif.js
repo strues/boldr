@@ -1,6 +1,5 @@
 /* @flow */
 import React from 'react';
-// $FlowIssue
 import styled from 'styled-components';
 
 const NotificationWrap = styled.div`

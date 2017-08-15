@@ -3,12 +3,27 @@ import React, { Component } from 'react';
 import Link from 'react-router-dom/Link';
 import Paper from '@boldr/ui/Paper';
 import { Row, Col } from '@boldr/ui/Layout';
-import Icon from '@boldr/ui/Icons/Icon';
+import Edit from '@boldr/icons/Edit';
+import styled from 'styled-components';
 
 export type Props = {
   article: Article,
 };
 
+const Toolbar = styled.div`
+  width: 100%;
+  height: 60px;
+  color: #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  vertical-align: middle;
+  padding: 1em;
+  background-color: #243140;
+`;
+const ArticlePreviewTitle = styled.div`justify-content: flex-start;`;
+const ArticlePreviewEdit = styled.div`justify-content: flex-end;`;
 class ArticlePreview extends Component {
   props: Props;
 
@@ -24,27 +39,27 @@ class ArticlePreview extends Component {
     const { article } = this.props;
     return (
       <div>
-        <Row>
-          <Col xs={12} sm={9}>
+        <Toolbar>
+          <ArticlePreviewTitle>
             {article.title}
-          </Col>
-          <Col xs={12} sm={3}>
+          </ArticlePreviewTitle>
+          <ArticlePreviewEdit>
             <Link to={`/admin/articles/${article.slug}`}>
-              <Icon kind="edit" color="#222" />
-              {''}Edit
+              <Edit color="rgb(0, 188, 212)" />
             </Link>
-          </Col>
-        </Row>
-        <div className="boldr-post__content" dangerouslySetInnerHTML={this.createMarkup()} />
+          </ArticlePreviewEdit>
+        </Toolbar>
+        <Paper zDepth={2}>
+          <div className="boldr-post__content" dangerouslySetInnerHTML={this.createMarkup()} />
+        </Paper>
       </div>
     );
   };
   render() {
     return (
-      <Paper zDepth={2}>
-        Post Preview
+      <div>
         {!this.props.article ? this.noArticleDisplayed() : this.displayArticle()}
-      </Paper>
+      </div>
     );
   }
 }

@@ -10,7 +10,6 @@ import LinkLayout from './LinkLayout';
 export type Props = {
   onChange: Function,
   editorState: Object,
-  modalHandler: Object,
   config: Object,
 };
 

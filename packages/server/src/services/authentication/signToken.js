@@ -1,17 +1,24 @@
-import jwt from 'jsonwebtoken';
-import { config } from '../../config';
+const uuid = require('uuid');
+const jwt = require('jsonwebtoken');
+const { config } = require('../../config');
 
-function signToken(user) {
+module.exports = function signToken(user) {
   const roleinfo = user.roles[0].name;
   const payload = {
     issuer: 'boldr',
     subject: user.id,
-    algorithms: ['HS256'],
+    jti: uuid.v4(),
     expiresIn: '7 days',
     email: user.email,
     role: roleinfo,
   };
-  return jwt.sign(payload, config.get('token.secret'));
-}
+  return new Promise((resolve, reject) => {
+    jwt.sign(payload, config.get('token.secret'), (err, token) => {
+      if (err) {
+        return reject(err);
+      }
 
-export default signToken;
+      return resolve(token);
+    });
+  });
+};

@@ -98,8 +98,9 @@ export default function initSecurity(app, { enableNonce = true, enableCSP = fals
   app.use(helmet.xssFilter());
 
   // Frameguard mitigates clickjacking attacks by setting the X-Frame-Options header.
+  // We disable this for embedding
   // @see https://helmetjs.github.io/docs/frameguard/
-  app.use(helmet.frameguard('deny'));
+  app.use(helmet.frameguard('false'));
 
   // Sets the X-Download-Options to prevent Internet Explorer from executing
   // downloads in your site’s context.

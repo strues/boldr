@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { shallow, mount } from 'enzyme';
-import ModalHandler from '../../core/eventHandlers/modals';
 import Dropdown from './Dropdown';
 import DropdownOption from './DropdownOption';
 
@@ -10,7 +9,7 @@ describe('<Dropdown />', () => {
   it('should have a div when rendered', () => {
     expect(
       shallow(
-        <Dropdown modalHandler={new ModalHandler()}>
+        <Dropdown>
           <span>abcd</span>
           <DropdownOption>1234</DropdownOption>
         </Dropdown>,

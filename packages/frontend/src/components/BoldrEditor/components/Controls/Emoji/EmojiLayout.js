@@ -2,47 +2,52 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { Smile } from '@boldr/icons';
-import shortid from 'shortid';
-import { stopPropagation } from '../../../utils/common';
+import Smile from '@boldr/icons/Smile';
+import uniqueId from 'lodash/uniqueId';
+import Modal from '@boldr/ui/Modal';
 import Option from '../../Option';
 
 export type Props = {
   onChange: Function,
   expanded?: boolean,
-  onExpandEvent?: Function,
   config: Object,
 };
 
 class EmojiLayout extends Component {
+  state = {
+    showModal: false,
+  };
   props: Props;
   onChange: Function = (event: Object): void => {
     const { onChange } = this.props;
     onChange(event.target.innerHTML);
   };
-
+  openModal: Function = (): void => {
+    this.setState({
+      showModal: true,
+    });
+  };
+  hideModal: Function = (): void => {
+    this.setState({
+      showModal: false,
+    });
+  };
   renderEmojiModal(): Object {
     return (
-      <div
-        className={classNames('boldredit-emoji-modal', this.props.config.popupClassName)}
-        onClick={stopPropagation}
-      >
-        {this.props.config.emojis.map(emoji =>
-          <span
-            key={shortid.generate()}
-            className="boldredit-emoji-icon"
-            alt=""
-            onClick={this.onChange}
-          >
-            {emoji}
-          </span>,
-        )}
-      </div>
+      <Modal title="Add Emoji" isVisible={this.state.showModal} onClose={this.hideModal} closeable>
+        <div className={classNames('boldredit-emoji-modal')}>
+          {this.props.config.emojis.map(emoji =>
+            <span key={uniqueId()} className="boldredit-emoji-icon" alt="" onClick={this.onChange}>
+              {emoji}
+            </span>,
+          )}
+        </div>
+      </Modal>
     );
   }
 
   render(): Object {
-    const { expanded, onExpandEvent } = this.props;
+    const { expanded } = this.props;
     return (
       <div
         className="boldredit-emoji-wrapper"
@@ -54,11 +59,11 @@ class EmojiLayout extends Component {
         <Option
           className={classNames(this.props.config.className)}
           value="unordered-list-item"
-          onClick={onExpandEvent}
+          onClick={this.openModal}
         >
           <Smile color="#222" />
         </Option>
-        {expanded ? this.renderEmojiModal() : undefined}
+        {this.renderEmojiModal()}
       </div>
     );
   }

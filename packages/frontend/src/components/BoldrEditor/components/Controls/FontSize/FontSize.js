@@ -8,7 +8,6 @@ import FontSizeLayout from './FontSizeLayout';
 export type Props = {
   onChange: Function,
   editorState: Object,
-  modalHandler: Object,
   config: Object,
 };
 
@@ -19,7 +18,7 @@ export default class FontSize extends Component {
   };
 
   componentWillMount(): void {
-    const { editorState, modalHandler } = this.props;
+    const { editorState } = this.props;
     if (editorState) {
       this.setState({
         currentFontSize: getSelectionCustomInlineStyle(editorState, ['FONTSIZE']).FONTSIZE,

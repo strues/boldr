@@ -7,6 +7,7 @@ module.exports = {
       './internal/jest/fileMock.js',
     '\\.(css|scss)$': 'identity-obj-proxy',
   },
+  modulePathIgnorePatterns: ['packages/.*/build', 'packages/.*/lib'],
   roots: [
     '<rootDir>/packages/auth',
     '<rootDir>/packages/core',
@@ -49,6 +50,9 @@ module.exports = {
     '!packages/tools/**',
     '!packages/server/**',
     '!packages/cli/**',
+    '!**/__mocks__/**',
+    '!**/__fixtures__/**',
+    '!**/__tests__/**',
   ],
   coveragePathIgnorePatterns: [
     '/(internal|.boldr|docs|bin|.idea|public|build)/',

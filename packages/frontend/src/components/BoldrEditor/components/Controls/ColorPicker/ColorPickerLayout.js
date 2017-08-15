@@ -2,14 +2,13 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { PaintBrush } from '@boldr/icons';
-import shortid from 'shortid';
-import { stopPropagation } from '../../../utils/common';
+import Modal from '@boldr/ui/Modal';
+import PaintBrush from '@boldr/icons/PaintBrush';
+import uniqueId from 'lodash/uniqueId';
 import Option from '../../Option';
 
 type Props = {
   expanded: ?boolean,
-  onExpandEvent: ?Function,
   onChange: ?Function,
   config: Object,
   currentState: ?Object,
@@ -17,6 +16,7 @@ type Props = {
 
 class ColorPickerLayout extends Component {
   state: Object = {
+    showModal: false,
     currentStyle: 'color',
   };
 
@@ -39,7 +39,16 @@ class ColorPickerLayout extends Component {
       currentStyle: 'color',
     });
   };
-
+  openModal: Function = (): void => {
+    this.setState({
+      showModal: true,
+    });
+  };
+  hideModal: Function = (): void => {
+    this.setState({
+      showModal: false,
+    });
+  };
   onChange: Function = (color: string): void => {
     const { onChange } = this.props;
     const { currentStyle } = this.state;
@@ -47,13 +56,15 @@ class ColorPickerLayout extends Component {
   };
 
   renderModal: Function = (): Object => {
-    const { config: { popupClassName, colors }, currentState: { color, bgColor } } = this.props;
+    const { config: { colors }, currentState: { color, bgColor } } = this.props;
     const { currentStyle } = this.state;
     const currentSelectedColor = currentStyle === 'color' ? color : bgColor;
     return (
-      <div
-        className={classNames('boldredit-colorpicker__modal', popupClassName)}
-        onClick={stopPropagation}
+      <Modal
+        title="Color Picker"
+        isVisible={this.state.showModal}
+        onClose={this.hideModal}
+        closeable
       >
         <span className="boldredit-colorpicker__modal-header">
           <span
@@ -62,7 +73,7 @@ class ColorPickerLayout extends Component {
             })}
             onClick={this.setCurrentStyleColor}
           >
-            Text
+            Text Color
           </span>
           <span
             className={classNames('boldredit-colorpicker__modal-style-label', {
@@ -70,14 +81,14 @@ class ColorPickerLayout extends Component {
             })}
             onClick={this.setCurrentStyleBgcolor}
           >
-            Background
+            Background Color
           </span>
         </span>
         <span className="boldredit-colorpicker__modal-options">
           {colors.map(color =>
             <Option
               value={color}
-              key={shortid.generate()}
+              key={uniqueId()}
               className="boldredit-colorpicker__option"
               activeClassName="boldredit-colorpicker__option--active"
               active={currentSelectedColor === color}
@@ -87,24 +98,24 @@ class ColorPickerLayout extends Component {
             </Option>,
           )}
         </span>
-      </div>
+      </Modal>
     );
   };
 
   render(): Object {
-    const { expanded, onExpandEvent } = this.props;
+    const { expanded } = this.props;
     return (
       <div
         className="boldredit-colorpicker__wrapper"
         aria-haspopup="true"
         aria-expanded={expanded}
-        aria-label="rdw-color-picker"
+        aria-label="boldredit-color-picker"
         title={this.props.config.title}
       >
-        <Option onClick={onExpandEvent} className={classNames(this.props.config.className)}>
+        <Option onClick={this.openModal} className={classNames(this.props.config.className)}>
           <PaintBrush color="#222" />
         </Option>
-        {expanded ? this.renderModal() : undefined}
+        {this.renderModal()}
       </div>
     );
   }

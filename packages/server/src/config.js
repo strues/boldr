@@ -111,6 +111,12 @@ export const config = convict({
     },
   },
   token: {
+    expiration: {
+      format: Number,
+      default: 604800000,
+      env: 'TOKEN_EXPIRATION',
+      doc: 'Expiration time for JWT. Default is 1 week.',
+    },
     secret: {
       format: String,
       default: 'b0ldrk3kwi11s15',

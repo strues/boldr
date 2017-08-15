@@ -2,7 +2,8 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import { Link, Unlink } from '@boldr/icons';
+import Link from '@boldr/icons/Link';
+import Unlink from '@boldr/icons/Unlink';
 import Modal from '@boldr/ui/Modal';
 import Option from '../../Option';
 
@@ -75,48 +76,55 @@ class LinkLayout extends Component {
     });
   };
 
+  /*
+    @todo:
+    prevent user from opening link modal w/out a linkTitle or placeholder
+    to avoid controlled/uncontrolled
+   */
   renderAddLinkModal() {
     const { doCollapse } = this.props;
     const { linkTitle, linkTarget, linkTargetOption, showModal } = this.state;
     return (
       <Modal title="Add Link" isVisible={showModal} onClose={this.hideModal} closeable>
-        <span className="boldredit-link__modal-label">Link Title</span>
-        <input
-          className="boldredit-link__modal-input"
-          onChange={this.updateValue}
-          onBlur={this.updateValue}
-          name="linkTitle"
-          value={linkTitle}
-        />
-        <span className="boldredit-link__modal-label">Link Target</span>
-        <input
-          className="boldredit-link__modal-input"
-          onChange={this.updateValue}
-          onBlur={this.updateValue}
-          name="linkTarget"
-          value={linkTarget}
-        />
-        <span className="boldredit-link__modal-target-option">
+        <div className="boldredit-link__modal">
+          <span className="boldredit-link__modal-label">Link Title</span>
           <input
-            type="checkbox"
-            defaultChecked={linkTargetOption === '_blank'}
-            value="_blank"
-            onChange={this.updateTarget}
+            className="boldredit-link__modal-input"
+            onChange={this.updateValue}
+            onBlur={this.updateValue}
+            name="linkTitle"
+            value={linkTitle}
           />
-          <span>Open link in new window</span>
-        </span>
-        <span className="boldredit-link__modal-buttonsection">
-          <button
-            className="boldredit-link__modal-btn"
-            onClick={this.addLink}
-            disabled={!linkTarget || !linkTitle}
-          >
-            Add
-          </button>
-          <button className="boldredit-link__modal-btn" onClick={doCollapse}>
-            Cancel
-          </button>
-        </span>
+          <span className="boldredit-link__modal-label">Link Target</span>
+          <input
+            className="boldredit-link__modal-input"
+            onChange={this.updateValue}
+            onBlur={this.updateValue}
+            name="linkTarget"
+            value={linkTarget}
+          />
+          <span className="boldredit-link__modal-target-option">
+            <input
+              type="checkbox"
+              defaultChecked={linkTargetOption === '_blank'}
+              value="_blank"
+              onChange={this.updateTarget}
+            />
+            <span>Open link in new window</span>
+          </span>
+          <span className="boldredit-link__modal-buttonsection">
+            <button
+              className="boldredit-link__modal-btn"
+              onClick={this.addLink}
+              disabled={!linkTarget || !linkTitle}
+            >
+              Add
+            </button>
+            <button className="boldredit-link__modal-btn" onClick={doCollapse}>
+              Cancel
+            </button>
+          </span>
+        </div>
       </Modal>
     );
   }

@@ -1,2 +1,4 @@
-export { default as isAuthenticated } from './isAuthenticated';
-export { default as signToken } from './signToken';
+module.exports = {
+  isAuthenticated: require('./isAuthenticated'),
+  signToken: require('./signToken'),
+};

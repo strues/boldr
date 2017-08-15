@@ -39,18 +39,4 @@ describe('<ColorPicker />', () => {
     expect(state.currentColor).toBeUndefined();
     expect(state.currentBgColor).toBeUndefined();
   });
-
-  it('should set variable signalExpanded to true when first child is clicked', () => {
-    const control = mount(
-      <ColorPicker
-        onChange={() => {}}
-        editorState={editorState}
-        config={defaultToolbar.colorPicker}
-      />,
-    );
-    const colorPicker = control.find('ColorPicker');
-    expect(colorPicker.node.signalExpanded).toBeFalsy();
-    control.find('Option').simulate('click');
-    expect(colorPicker.node.signalExpanded).toBeTruthy();
-  });
 });

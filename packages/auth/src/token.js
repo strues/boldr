@@ -1,4 +1,3 @@
-// import config from '../../../../config';
 import Storage from './storage';
 
 export const parseJWT = token => {
@@ -21,7 +20,8 @@ export const parseJWT = token => {
     const header = JSON.parse(atob(headerRaw));
     const payload = JSON.parse(atob(payloadRaw));
     const signature = atob(signatureRaw);
-    const expiredToken = isTokenExpired(payload.exp);
+    const issuedAt = payload.iat;
+    const expiredToken = checkTokenExpiration(issuedAt);
     // If the token is expired, remove it.
     // this forces the user to login again.
     if (expiredToken === true) {
@@ -43,9 +43,9 @@ export const parseJWT = token => {
   }
 };
 
-function isTokenExpired(exp) {
+function checkTokenExpiration(iat) {
   const date = new Date(0);
-  const expirationDate = date.setUTCSeconds(exp);
+  const expirationDate = date.setUTCSeconds(iat);
 
   return expirationDate < new Date();
 }

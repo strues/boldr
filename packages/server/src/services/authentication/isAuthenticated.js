@@ -4,12 +4,11 @@
  * Otherwise returns 403
  * @returns {Function} - express middleware
  */
-function isAuthenticated(req, res, next) {
+module.exports = function isAuthenticated(req, res, next) {
   // $FlowIssue
   if (req.isAuthenticated()) {
     next();
   } else {
-    return next(new Error());
+    return next(new Error('Request is not authenticated.'));
   }
-}
-export default isAuthenticated;
+};

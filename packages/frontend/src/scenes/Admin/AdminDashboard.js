@@ -29,11 +29,7 @@ export type Props = {
 
 export type FlattenedRoutes = Array<Object>;
 
-const TbArea = styled.div`
-  width: 100%;
-  height: 70px;
-  margin-bottom: 10px;
-`;
+const TbArea = styled.div`width: 100%;`;
 
 export class AdminDashboard extends Component {
   constructor(props: Props) {
