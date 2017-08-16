@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import classnames from 'classnames';
 import Link from 'react-router-dom/Link';
-import { Avatar, Headline, Social } from '@boldr/ui';
+import { Avatar, Headline } from '@boldr/ui';
 import { StyleClasses } from '../../../../theme/styleClasses';
 
 const BASE_ELEMENT = StyleClasses.ARTICLE_SIDEBAR_AUTHOR;
@@ -48,18 +48,6 @@ const Author = (props: Props) => {
       <BioBlock>
         {author.bio}
       </BioBlock>
-      <Social
-        facebook
-        fburl={author.socialMedia.facebookUrl}
-        twitter
-        turl={author.socialMedia.twitterUrl}
-        google
-        gurl={author.socialMedia.googleUrl}
-        github
-        ghurl={author.socialMedia.githubUrl}
-        linkedin
-        lurl={author.socialMedia.linkedinUrl}
-      />
     </div>
   );
 };

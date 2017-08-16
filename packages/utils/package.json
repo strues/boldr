@@ -1,6 +1,6 @@
 {
   "name": "@boldr/utils",
-  "version": "0.1.0-rc.1",
+  "version": "0.1.0-rc.2",
   "description": "Helpers designed for use with Boldr and fullstack react apps",
   "bugs": {
     "url": "https://github.com/strues/boldr/issues"
@@ -38,6 +38,9 @@
     "lodash.invokemap": "^4.6.0",
     "lodash.reduce": "^4.6.0",
     "ramda": "^0.24.1"
+  },
+  "peerDependencies": {
+    "debug": "^3.0.0"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",

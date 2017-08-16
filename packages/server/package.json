@@ -4,7 +4,7 @@
   "description": "Server for Boldr",
   "main": "index.js",
   "scripts": {
-    "dev": "babel-watch src/index.js",
+    "dev": "NODE_ENV=development DEBUG=boldr:server babel-watch src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -79,7 +79,7 @@
     "eslint": "^4.4.1",
     "eslint-config-boldr": "0.12.6",
     "fast-async": "^6.3.0",
-    "flow-bin": "^0.52.0",
+    "flow-bin": "^0.53.0",
     "prettier": "^1.5.3"
   }
 }

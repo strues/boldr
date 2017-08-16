@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import Modal from '@boldr/ui/Modal';
+import Dialog from '@boldr/ui/Dialog';
 import PaintBrush from '@boldr/icons/PaintBrush';
 import uniqueId from 'lodash/uniqueId';
 import Option from '../../Option';
@@ -60,7 +60,7 @@ class ColorPickerLayout extends Component {
     const { currentStyle } = this.state;
     const currentSelectedColor = currentStyle === 'color' ? color : bgColor;
     return (
-      <Modal
+      <Dialog
         title="Color Picker"
         isVisible={this.state.showModal}
         onClose={this.hideModal}
@@ -98,7 +98,7 @@ class ColorPickerLayout extends Component {
             </Option>,
           )}
         </span>
-      </Modal>
+      </Dialog>
     );
   };
 

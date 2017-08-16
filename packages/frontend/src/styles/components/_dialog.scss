@@ -1,70 +1,134 @@
 /// @group dialog
-///
-.opacity-enter {
-  opacity: 0;
-
-  &.opacity-enter-active {
-    opacity: 1;
-    transition-property: opacity;
-    transition-duration: 1000ms;
-    transition-timing-function: $modal-transition-deceleration;
-  }
-}
-
-.#{$boldr-ns}modal {
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
-
-  div {
-    box-sizing: border-box;
-  }
-}
-
-.#{$boldr-ns}modal__content {
-  .#{$boldr-ns}paper {
-    padding: 1em;
-  }
-}
-
-.#{$boldr-ns}modal__portal {
-  .ReactModal__Content.#{$boldr-ns}modal__content {
-    opacity: 1;
-    background-color: #fff;
-    transform: scale(0.93);
-
-    &--after-open {
-      opacity: 1;
-      transform: scale(1);
-      transition: opacity 0.35s $modal-ease-out-quint, transform 0.35s $modal-ease-out-quint;
-    }
-
-    &--before-close {
-      opacity: 0;
-      transform: scale(0.9);
-      transition: opacity 0.3s $modal-ease-out-quint, transform 0.14s $modal-ease-out-quint;
-      pointer-events: none;
-    }
-  }
-
-  .ReactModal__Overlay.#{$boldr-ns}modal__overlay {
-    opacity: 1;
-    background: rgba(30, 30, 30, 0);
-
-    &--after-open {
-      background: rgba(30, 30, 30, 0.6);
-      transition: background 0.2s $modal-ease-out-quint;
-    }
-
-    &--before-close {
-      background: rgba(30, 30, 30, 0);
-      transition: background 0.15s $modal-ease-out-quad;
-      pointer-events: none;
-    }
-  }
-}
 
 .#{$boldr-ns}modal__portal-non-scrollable {
   .#{$boldr-ns}modal__overlay {
     overflow: hidden;
   }
+}
+
+$normalcolor: #333;
+$graycolor: #999;
+$whitecolor: #fff;
+$darkgraycolor: #666;
+$bordercolor: #e8e8e8;
+$maskbgcolor: #373737;
+$rgbamaskbgcolor: rgba(0, 0, 0, 0.6);
+
+/*
+  WARNING: Do NOT use transform: translate(-50%, -50%) to center dialog, it makes content blurry.
+
+  With GPU rendering elements we are translating must be even numbers.
+  The bad news is that we cannot control the size of dialogs.
+
+  http://stackoverflow.com/questions/6411361/webkit-based-blurry-distorted-text-post-animation-via-translate3d
+
+  Here we're using inline-blocks to center the dialog.
+
+  https://css-tricks.com/centering-in-the-unknown/
+*/
+
+.#{$boldr-ns}dialog-r-wrap {
+  position: fixed;
+  overflow: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  -webkit-overflow-scrolling: touch;
+  outline: 0;
+  text-align: center;
+  font-size: 0;
+  white-space: nowrap;
+
+  &::before {
+    content: '';
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle; /* required */
+  }
+}
+
+.#{$boldr-ns}dialog-r {
+  position: relative;
+  display: inline-block;
+  vertical-align: middle; /* required */
+  text-align: initial;
+  background-color: $whitecolor;
+  border-radius: 4px;
+  padding: 20px;
+  box-sizing: border-box;
+  font-size: 14px;
+  z-index: 1041;
+  white-space: normal;
+}
+
+.#{$boldr-ns}dialog-r-title {
+  padding-bottom: 10px;
+  border-bottom: 1px solid $bordercolor;
+  margin: 0;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+}
+
+.#{$boldr-ns}dialog-r-title-text {
+  font-size: 14px;
+  line-height: 1;
+  font-weight: bold;
+  color: $normalcolor;
+}
+
+.#{$boldr-ns}dialog-r-close {
+  position: absolute;
+  display: inline-block;
+  top: 4px;
+  right: 10px;
+  color: $graycolor;
+  font-size: 20px;
+  line-height: 20px;
+  text-align: right;
+  vertical-align: middle;
+  cursor: pointer;
+  border: none;
+  background-color: $whitecolor;
+  outline: none;
+  user-select: none;
+  padding: 0 6px;
+  margin: 0;
+
+  &:link,
+  &:active,
+  &:focus {
+    color: $graycolor;
+  }
+
+  &.#{$boldr-ns}dialog-r-has-title {
+    top: 14px;
+    right: 12px;
+  }
+}
+
+.#{$boldr-ns}dialog-r-body {
+  color: $darkgraycolor;
+
+  &.with-success-icon,
+  &.with-warning-icon {
+    padding-left: 30px;
+  }
+}
+
+.#{$boldr-ns}dialog-r-footer {
+  text-align: right;
+  margin-top: 30px;
+}
+
+.#{$boldr-ns}dialog-r-backdrop {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  background-color: $rgbamaskbgcolor;
+  height: 100%;
+  z-index: 1050;
 }

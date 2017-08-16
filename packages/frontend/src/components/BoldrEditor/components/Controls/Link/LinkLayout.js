@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import Link from '@boldr/icons/Link';
 import Unlink from '@boldr/icons/Unlink';
-import Modal from '@boldr/ui/Modal';
+import Dialog from '@boldr/ui/Dialog';
 import Option from '../../Option';
 
 export type Props = {
@@ -85,7 +85,7 @@ class LinkLayout extends Component {
     const { doCollapse } = this.props;
     const { linkTitle, linkTarget, linkTargetOption, showModal } = this.state;
     return (
-      <Modal title="Add Link" isVisible={showModal} onClose={this.hideModal} closeable>
+      <Dialog title="Add Link" isVisible={showModal} onClose={this.hideModal}>
         <div className="boldredit-link__modal">
           <span className="boldredit-link__modal-label">Link Title</span>
           <input
@@ -125,7 +125,7 @@ class LinkLayout extends Component {
             </button>
           </span>
         </div>
-      </Modal>
+      </Dialog>
     );
   }
 

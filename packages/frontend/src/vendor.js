@@ -1,5 +1,5 @@
 module.exports = [
-  'core-js',
+  'lodash',
   'react',
   'react-dom',
   'react-router-dom',
@@ -18,7 +18,6 @@ module.exports = [
   'draft-convert',
   'react-tagsinput',
   'react-dropzone',
-  'react-motion',
   'react-transition-group',
   'redux-form',
   'immutable',

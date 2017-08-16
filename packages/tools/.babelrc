@@ -1,5 +1,5 @@
 {
   "presets": [
-    "boldr/node"
+    ["boldr", { "target": "current"}]
   ]
 }

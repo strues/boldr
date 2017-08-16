@@ -8,7 +8,6 @@ import Icon from '@boldr/ui/Icons/Icon';
 // internal
 import Button from '@boldr/ui/Button';
 import Headline from '@boldr/ui/Headline';
-import Social from '@boldr/ui/Social';
 
 import ProfileDetail from '../ProfileDetail';
 
@@ -79,18 +78,6 @@ const ProfileContent = (props: Props) => {
                 detail={profile.bio}
               />
             </DetailList>
-            <Social
-              facebook
-              fburl={profile.socialMedia.facebookUrl}
-              twitter
-              turl={profile.socialMedia.twitterUrl}
-              google
-              gurl={profile.socialMedia.googleUrl}
-              github
-              ghurl={profile.socialMedia.githubUrl}
-              linkedin
-              lurl={profile.socialMedia.linkedinUrl}
-            />
           </Col>
         </Row>
       </Grid>

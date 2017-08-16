@@ -97,7 +97,7 @@ export default function createWebpackConfig(
   const _IS_PROD_ = config.env === 'production';
 
   const clientPreset = [
-    require.resolve('babel-preset-boldr/browser'),
+    require.resolve('babel-preset-boldr'),
     {
       useBuiltins: true,
       modules: false,
@@ -106,12 +106,13 @@ export default function createWebpackConfig(
       specMode: false,
       nodentRt: false,
       polyfill: false,
-      exclude: ['transform-regenerator', 'transform-async-to-generator'],
-      targets: { uglify: !_IS_DEV_, browsers: ['> .5% in US', 'last 1 versions'] },
+      target: 'modern',
+      styled: true,
+      imports: 'webpack',
     },
   ];
   const serverPreset = [
-    require.resolve('babel-preset-boldr/node'),
+    require.resolve('babel-preset-boldr'),
     {
       useBuiltins: true,
       modules: false,
@@ -120,10 +121,9 @@ export default function createWebpackConfig(
       specMode: false,
       nodentRt: false,
       polyfill: false,
-      exclude: ['transform-regenerator', 'transform-async-to-generator'],
-      targets: {
-        node: '8',
-      },
+      target: 'current',
+      styled: true,
+      imports: 'webpack',
     },
   ];
   const PROJECT_CONFIG = require(path.resolve(ROOT, 'package.json'));
@@ -423,7 +423,7 @@ export default function createWebpackConfig(
       // Extract Webpack bootstrap code with knowledge about chunks into separate cachable package.
       _IS_CLIENT_
         ? new webpack.optimize.CommonsChunkPlugin({
-            names: ['bootstrap', 'vendor'],
+            names: ['bootstrap'],
             //   // needed to put webpack bootstrap code before chunks
             filename: _IS_PROD_ ? '[name]-[chunkhash].js' : '[name].js',
             minChunks: Infinity,

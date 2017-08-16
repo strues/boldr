@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 import classNames from 'classnames';
 import Smile from '@boldr/icons/Smile';
 import uniqueId from 'lodash/uniqueId';
-import Modal from '@boldr/ui/Modal';
+import Dialog from '@boldr/ui/Dialog';
 import Option from '../../Option';
 
 export type Props = {
@@ -34,7 +34,7 @@ class EmojiLayout extends Component {
   };
   renderEmojiModal(): Object {
     return (
-      <Modal title="Add Emoji" isVisible={this.state.showModal} onClose={this.hideModal} closeable>
+      <Dialog title="Add Emoji" isVisible={this.state.showModal} onClose={this.hideModal}>
         <div className={classNames('boldredit-emoji-modal')}>
           {this.props.config.emojis.map(emoji =>
             <span key={uniqueId()} className="boldredit-emoji-icon" alt="" onClick={this.onChange}>
@@ -42,7 +42,7 @@ class EmojiLayout extends Component {
             </span>,
           )}
         </div>
-      </Modal>
+      </Dialog>
     );
   }
 

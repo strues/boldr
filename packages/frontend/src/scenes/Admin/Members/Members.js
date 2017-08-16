@@ -2,7 +2,7 @@
 /* eslint-disable react/prefer-stateless-function */
 import React from 'react';
 import Helmet from 'react-helmet';
-import Modal from '@boldr/ui/Modal';
+import Dialog from '@boldr/ui/Dialog';
 
 import { MembersList, EditMemberForm } from './components';
 
@@ -20,9 +20,9 @@ const Members = (props: Props) => {
     <div>
       <Helmet title="Admin: Members" />
       <MembersList toggleUser={props.toggleUser} users={props.users} />
-      <Modal title="Edit User" visible={props.visible} onClose={props.close} closeable>
+      <Dialog title="Edit User" visible={props.visible} onClose={props.close}>
         <EditMemberForm onSubmit={props.handleSubmit} initialValues={props.initialValues} />
-      </Modal>
+      </Dialog>
     </div>
   );
 };
