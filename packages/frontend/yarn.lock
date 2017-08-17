@@ -6,9 +6,9 @@
   version "0.1.0-beta.3"
   resolved "https://registry.npmjs.org/@boldr/icons/-/icons-0.1.0-beta.3.tgz#463a74b93a05aac41a4b86a5c9d0dce3f71565d0"
 
-"@boldr/ui@0.1.0-rc.10-1":
-  version "0.1.0-rc.10-1"
-  resolved "https://registry.npmjs.org/@boldr/ui/-/ui-0.1.0-rc.10-1.tgz#db5ce8b223ef8dfa6169446a922f8cc7280c0fda"
+"@boldr/ui@0.1.0-rc.11":
+  version "0.1.0-rc.11"
+  resolved "https://registry.npmjs.org/@boldr/ui/-/ui-0.1.0-rc.11.tgz#5beb009653b0d6fc0c33ba97e7ec91946ce320d9"
   dependencies:
     babel-runtime "^6.26.0"
     classnames "^2.2.5"
@@ -16,6 +16,13 @@
     react-custom-scrollbars "^4.1.2"
     react-motion "^0.5.0"
     react-visibility-sensor "^3.10.1"
+
+"@boldr/utils@^0.1.0-rc.4":
+  version "0.1.0-rc.4"
+  resolved "https://registry.npmjs.org/@boldr/utils/-/utils-0.1.0-rc.4.tgz#ca7d60782665b17de236e64cc3c8db7266bb4683"
+  dependencies:
+    lodash.invokemap "^4.6.0"
+    lodash.reduce "^4.6.0"
 
 "@types/graphql@0.10.2":
   version "0.10.2"
@@ -2686,6 +2693,10 @@ lodash.foreach@^4.3.0:
   version "4.5.0"
   resolved "https://registry.npmjs.org/lodash.foreach/-/lodash.foreach-4.5.0.tgz#1a6a35eace401280c7f06dddec35165ab27e3e53"
 
+lodash.invokemap@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.npmjs.org/lodash.invokemap/-/lodash.invokemap-4.6.0.tgz#1748cda5d8b0ef8369c4eb3ec54c21feba1f2d62"
+
 lodash.isnil@^4.0.0:
   version "4.0.0"
   resolved "https://registry.npmjs.org/lodash.isnil/-/lodash.isnil-4.0.0.tgz#49e28cd559013458c814c5479d3c663a21bfaa6c"
@@ -2714,7 +2725,7 @@ lodash.range@^3.2.0:
   version "3.2.0"
   resolved "https://registry.npmjs.org/lodash.range/-/lodash.range-3.2.0.tgz#f461e588f66683f7eadeade513e38a69a565a15d"
 
-lodash.reduce@^4.4.0:
+lodash.reduce@^4.4.0, lodash.reduce@^4.6.0:
   version "4.6.0"
   resolved "https://registry.npmjs.org/lodash.reduce/-/lodash.reduce-4.6.0.tgz#f1ab6b839299ad48f784abbf476596f03b914d3b"
 

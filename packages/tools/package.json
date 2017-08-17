@@ -35,7 +35,7 @@
     "format": "prettier --single-quote=true --print-width=100 --jsx-bracket-same-line=false --trailing-comma=all --write \"src/**/*.js\""
   },
   "dependencies": {
-    "@boldr/utils": "^0.1.0-rc.1",
+    "@boldr/utils": "^0.1.0-rc.4",
     "autoprefixer": "^7.1.2",
     "babel-loader": "^7.1.1",
     "babel-minify-webpack-plugin": "^0.0.0",

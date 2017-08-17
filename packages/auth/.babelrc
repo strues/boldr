@@ -1,6 +1,6 @@
 
 {
   "presets": [
-    [ "boldr/node", { "target": "current", "verbose": false, "universal": false, "styled": false }]
+    [ "boldr", { "target": "current", "verbose": false, "styled": false }]
   ]
 }

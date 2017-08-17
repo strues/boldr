@@ -12,7 +12,7 @@ import '../../styles/main.scss';
 // Start routes
 import Page from '../../pages/Page/Page';
 import Error404 from '../../pages/Error404';
-import AdminDashboard from '../../scenes/Admin/AdminDashboard';
+import AdminDashboard from '../../scenes/Admin';
 import boldrNotificationsFactory, { Notif } from '../Notifications';
 
 import SETTINGS_QUERY from './getSettings.graphql';

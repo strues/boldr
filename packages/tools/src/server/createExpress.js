@@ -19,13 +19,13 @@ export default function createExpress({ customMiddleware = null }) {
   // Attach a unique "nonce" to every response. This allows use to declare
   // inline scripts as being safe for execution against our content security policy.
   // @see https://helmetjs.github.io/docs/csp/
-  server.use((request, response, next) => {
-    response.locals.nonce = uuid(); // eslint-disable-line no-param-reassign
+  server.use((req, res, next) => {
+    res.locals.nonce = uuid(); // eslint-disable-line no-param-reassign
     next();
   });
 
   // and use it for our app's error handler:
-  server.use((error, request, response, next) => {
+  server.use((error, req, res, next) => {
     // eslint-disable-line max-params
     console.log(pretty.render(error));
     next();

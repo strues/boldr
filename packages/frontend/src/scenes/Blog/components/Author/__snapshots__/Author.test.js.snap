@@ -48,17 +48,5 @@ exports[`<Author /> renders snapshot 1`] = `
   <Author__BioBlock>
     bio bio
   </Author__BioBlock>
-  <Social
-    facebook={true}
-    fburl="http://facebook.com"
-    ghurl="http://facebook.com"
-    github={true}
-    google={true}
-    gurl="http://facebook.com"
-    linkedin={true}
-    lurl="http://facebook.com"
-    turl="http://facebook.com"
-    twitter={true}
-  />
 </div>
 `;

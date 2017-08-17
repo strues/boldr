@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@boldr/utils@^0.1.0-rc.4":
+  version "0.1.0-rc.4"
+  resolved "https://registry.npmjs.org/@boldr/utils/-/utils-0.1.0-rc.4.tgz#ca7d60782665b17de236e64cc3c8db7266bb4683"
+  dependencies:
+    lodash.invokemap "^4.6.0"
+    lodash.reduce "^4.6.0"
+
 abbrev@1:
   version "1.1.0"
   resolved "https://registry.npmjs.org/abbrev/-/abbrev-1.1.0.tgz#d0554c2256636e2f56e7c2e5ad183f859428d81f"
@@ -3677,6 +3684,10 @@ lodash.cond@^4.3.0:
   version "4.5.2"
   resolved "https://registry.npmjs.org/lodash.cond/-/lodash.cond-4.5.2.tgz#f471a1da486be60f6ab955d17115523dd1d255d5"
 
+lodash.invokemap@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.npmjs.org/lodash.invokemap/-/lodash.invokemap-4.6.0.tgz#1748cda5d8b0ef8369c4eb3ec54c21feba1f2d62"
+
 lodash.isplainobject@^4.0.6:
   version "4.0.6"
   resolved "https://registry.npmjs.org/lodash.isplainobject/-/lodash.isplainobject-4.0.6.tgz#7c526a52d89b45c45cc690b88163be0497f550cb"
@@ -3692,6 +3703,10 @@ lodash.merge@^4.6.0:
 lodash.mergewith@^4.6.0:
   version "4.6.0"
   resolved "https://registry.npmjs.org/lodash.mergewith/-/lodash.mergewith-4.6.0.tgz#150cf0a16791f5903b8891eab154609274bdea55"
+
+lodash.reduce@^4.6.0:
+  version "4.6.0"
+  resolved "https://registry.npmjs.org/lodash.reduce/-/lodash.reduce-4.6.0.tgz#f1ab6b839299ad48f784abbf476596f03b914d3b"
 
 lodash.some@^4.6.0:
   version "4.6.0"
@@ -5358,8 +5373,8 @@ rollup-pluginutils@^2.0.1:
     micromatch "^2.3.11"
 
 rollup@^0.47.4:
-  version "0.47.5"
-  resolved "https://registry.npmjs.org/rollup/-/rollup-0.47.5.tgz#445b24000c47b51b6f66cbbb9ff553ee0a379739"
+  version "0.47.6"
+  resolved "https://registry.npmjs.org/rollup/-/rollup-0.47.6.tgz#83b90a1890dd3321a3f8d0b2bd216e88483f33de"
 
 run-async@^2.2.0:
   version "2.3.0"

@@ -3,14 +3,11 @@ const babelJest = require('babel-jest');
 module.exports = babelJest.createTransformer({
   presets: [
     [
-      'babel-preset-boldr/node',
+      'babel-preset-boldr',
       {
-        targets: {
-          node: 'current',
-        },
+        target: 'modern',
         modules: 'commonjs',
         styled: true,
-        universal: true,
       },
     ],
   ],

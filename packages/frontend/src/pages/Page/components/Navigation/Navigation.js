@@ -42,7 +42,9 @@ class Navigation extends Component {
   state = { isActive: false, isDropdownOpen: false };
 
   onClickNav = () => {
-    this.setState(state => ({ isActive: !state.isActive }));
+    if (this.refs.nav) {
+      this.setState(state => ({ isActive: !state.isActive }));
+    }
   };
 
   onClickDropdown = () => {
@@ -55,7 +57,7 @@ class Navigation extends Component {
   render() {
     const { menu: { details }, settings, currentUser, onLogout, location, auth } = this.props;
     return (
-      <Navbar>
+      <Navbar ref={node => (this.nav = node)}>
         <Container>
           <NavbarBrand>
             <NavbarItem>

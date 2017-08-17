@@ -2,6 +2,7 @@
 
 import program from 'caporal';
 import updateNotifier from 'update-notifier';
+import pSeries from 'p-series';
 import {
   cleanClient,
   cleanServer,
@@ -14,7 +15,9 @@ import {
 import pkg from '../package.json';
 
 updateNotifier({ pkg }).notify();
-
+process.on('unhandledRejection', err => {
+  throw err;
+});
 const VERSION = pkg.version;
 program.STRING = value => (typeof value === 'string' ? value : null);
 
@@ -23,11 +26,18 @@ program
   .version(VERSION)
   .description('A command line scaffolding tool and helper for Boldr.');
 
-program.command('develop', 'Start development server').alias('dev').action(async () => {
+program.command('develop', 'Start development server').alias('dev').action(() => {
   try {
-    Promise.all([await cleanClient(), await cleanServer(), await startDevServer()]).catch(err =>
-      console.log(err),
-    );
+    const tasks = [() => cleanClient(), () => cleanServer(), () => startDevServer()];
+
+    pSeries(tasks)
+      .then(result => {
+        console.log(result);
+      })
+      .catch(err => console.log(err));
+    // Promise.all([await cleanClient(), await cleanServer(), await startDevServer()]).catch(err =>
+    //   console.log(err),
+    // );
   } catch (error) {
     console.log(error);
     process.exit(1);

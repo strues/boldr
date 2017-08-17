@@ -1,3 +1,5 @@
 {
-  "presets": ["boldr/node"]
+  "presets": [["boldr", {
+    "target": "modern"
+    }]]
 }

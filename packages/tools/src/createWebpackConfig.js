@@ -89,7 +89,7 @@ export default function createWebpackConfig(
   if (config.env === null) {
     config.env = 'development';
   }
-  const platform = config.target === 'node' ? 'server' : 'browser';
+
   const _IS_SERVER_ = config.target === 'server';
   const _IS_CLIENT_ = config.target === 'client';
 
@@ -239,17 +239,9 @@ export default function createWebpackConfig(
     },
     resolve: {
       extensions: ['.js', '.json', '.jsx'],
-      mainFields: [
-        `esnext:${platform}`,
-        `jsnext:${platform}`,
-        platform,
-        'esnext',
-        'jsnext',
-        'esnext:main',
-        'jsnext:main',
-        'module',
-        'main',
-      ],
+      mainFields: _IS_CLIENT_
+        ? ['web', 'browser', 'style', 'module', 'jsnext:main', 'main']
+        : ['module', 'jsnext:main', 'main'],
       modules: ['node_modules', path.resolve(ROOT, './node_modules')],
     },
     resolveLoader: {

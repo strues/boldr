@@ -3372,8 +3372,8 @@ rollup-pluginutils@^2.0.1:
     micromatch "^2.3.11"
 
 rollup@^0.47.4:
-  version "0.47.5"
-  resolved "https://registry.npmjs.org/rollup/-/rollup-0.47.5.tgz#445b24000c47b51b6f66cbbb9ff553ee0a379739"
+  version "0.47.6"
+  resolved "https://registry.npmjs.org/rollup/-/rollup-0.47.6.tgz#83b90a1890dd3321a3f8d0b2bd216e88483f33de"
 
 run-async@^2.2.0:
   version "2.3.0"

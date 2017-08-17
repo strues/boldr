@@ -7,9 +7,10 @@ import buildWebpackDlls from '../plugins/buildWebpackDlls';
 const DEV_PORT = process.env.DEV_PORT;
 
 export async function startDevServer() {
+  await buildWebpackDlls();
   logger.start('Creating development server...');
   const server = createExpress({});
-  await buildWebpackDlls();
+
   const multiCompiler = devMiddleware(server);
 
   let serverIsStarted = false;

@@ -9,7 +9,8 @@
     "packages/frontend",
     "packages/server",
     "packages/tools",
-    "packages/utils"
+    "packages/utils",
+    "packages/ui"
   ],
   "registry": "https://registry.npmjs.org/"
 }

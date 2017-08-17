@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@boldr/utils@^0.1.0-rc.1":
+  version "0.1.0-rc.4"
+  resolved "https://registry.npmjs.org/@boldr/utils/-/utils-0.1.0-rc.4.tgz#ca7d60782665b17de236e64cc3c8db7266bb4683"
+  dependencies:
+    lodash.invokemap "^4.6.0"
+    lodash.reduce "^4.6.0"
+
 "@types/graphql@^0.9.0", "@types/graphql@^0.9.1":
   version "0.9.4"
   resolved "https://registry.npmjs.org/@types/graphql/-/graphql-0.9.4.tgz#cdeb6bcbef9b6c584374b81aa7f48ecf3da404fa"

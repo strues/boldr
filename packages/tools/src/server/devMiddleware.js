@@ -36,7 +36,7 @@ export default function devMiddleware(server) {
 
       // display no info to console (only warnings and errors)
       noInfo: false,
-      quiet: true,
+      quiet: false,
       // prevent loading before bundle is done
       serverSideRender: true,
     }),

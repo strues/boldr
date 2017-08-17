@@ -41,8 +41,9 @@
   },
   "dependencies": {
     "@boldr/tools": "0.1.0-beta.2",
-    "@boldr/utils": "^0.1.0-rc.1",
+    "@boldr/utils": "^0.1.0-rc.4",
     "caporal": "^0.7.0",
+    "p-series": "^1.0.0",
     "update-notifier": "^2.2.0"
   }
 }
