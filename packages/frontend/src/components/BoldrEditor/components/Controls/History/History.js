@@ -1,7 +1,6 @@
 /* @flow */
 
 import * as React from 'react';
-// $FlowIssue
 import { EditorState } from 'draft-js';
 
 import HistoryLayout from './HistoryLayout';
@@ -33,7 +32,6 @@ export default class History extends React.Component<Props, State> {
         redoDisabled: editorState.getRedoStack().size === 0,
       });
     }
-    // modalHandler.registerCallback(this.expandCollapse);
   }
 
   componentWillReceiveProps(properties: Object): void {

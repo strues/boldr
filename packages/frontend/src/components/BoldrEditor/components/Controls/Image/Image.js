@@ -1,7 +1,6 @@
 /* @flow */
 
 import * as React from 'react';
-// $FlowIssue
 import { AtomicBlockUtils } from 'draft-js';
 
 import ImageLayout from './ImageLayout';

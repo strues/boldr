@@ -2,7 +2,7 @@
 /* @flow */
 
 import * as React from 'react';
-import cN from 'classnames';
+import { OptionWrapper } from './Option.styled';
 
 export type Props = {
   onClick: Function,
@@ -10,13 +10,16 @@ export type Props = {
   value?: string,
   active?: boolean,
   className?: string,
+  isDark: boolean,
   disabled?: boolean,
   title?: string,
 };
 
-export default class Option extends React.Component<Props, *> {
+export default class Option extends React.PureComponent<Props, *> {
+  static displayName = 'Option';
   static defaultProps = {
     disabled: false,
+    isDark: false,
   };
 
   props: Props;
@@ -29,19 +32,19 @@ export default class Option extends React.Component<Props, *> {
   };
 
   render() {
-    const { children, className, active, disabled, title } = this.props;
+    const { children, className, active, disabled, title, isDark } = this.props;
     return (
-      <div
-        className={cN('be-option__wrapper', className, {
-          'be-option--active': active,
-          'be-option--disabled': disabled,
-        })}
+      <OptionWrapper
+        className={className}
         onClick={this.onClick}
+        isDark={isDark}
         aria-selected={active}
+        active={active}
+        disabled={disabled}
         title={title}
       >
         {children}
-      </div>
+      </OptionWrapper>
     );
   }
 }

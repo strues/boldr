@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-import * as React from 'react';
 import styled from 'styled-components';
 
 export const DropdownWrapper = styled.div`
@@ -8,6 +6,7 @@ export const DropdownWrapper = styled.div`
   border: 1px solid #e5e5e5;
   border-radius: 2px;
   margin: 0 3px;
+  width: ${props => (props.isSkinny ? '60px' : '120px')};
   text-transform: capitalize;
   cursor: pointer;
   a {

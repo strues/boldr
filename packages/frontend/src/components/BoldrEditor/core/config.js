@@ -100,7 +100,7 @@ export type EmojiConfig = {
   className?: string,
   modalClassName?: string,
   title?: string,
-  emojis?: Array<string>,
+  emojis: Array<string>,
 };
 export type ToolbarConfig = {
   options: Array<ToolbarOption>,

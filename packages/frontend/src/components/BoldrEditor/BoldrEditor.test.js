@@ -12,9 +12,4 @@ describe('<BoldrEditor />', () => {
     expect(editor.state().editorState).toBeDefined();
     expect(editor.state().editorFocused).toBeDefined();
   });
-
-  it('should have toolbarHidden as false by default', () => {
-    const editor = shallow(<BoldrEditor />);
-    expect(editor.find('.be-toolbar')).toHaveLength(1);
-  });
 });

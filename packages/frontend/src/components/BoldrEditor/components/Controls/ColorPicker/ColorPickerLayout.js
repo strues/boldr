@@ -6,6 +6,14 @@ import classNames from 'classnames';
 import PaintBrush from '@boldr/icons/PaintBrush';
 import { stopPropagation } from '../../../utils/common';
 import Option from '../../Option';
+import type { ColorPickerConfig } from '../../../core/config';
+import {
+  ColorWrapper,
+  ColorModal,
+  ColorHeader,
+  ColorModalLabel,
+  ColorOptions,
+} from './ColorPicker.styled';
 
 type ColorCurrent = {
   color: string,
@@ -14,7 +22,7 @@ type ColorCurrent = {
 type Props = {
   expanded?: boolean,
   onChange?: Function,
-  config: Object,
+  config: ColorPickerConfig,
   onExpandEvent: Function,
   currentState: ColorCurrent,
 };
@@ -61,51 +69,39 @@ class ColorPickerLayout extends React.Component<Props, State> {
     const { currentStyle } = this.state;
     const currentSelectedColor = currentStyle === 'color' ? color : bgColor;
     return (
-      <div
-        className={classNames('be-colorpicker__modal', modalClassName)}
-        onClick={stopPropagation}
-      >
-        <span className="be-colorpicker__modal-header">
-          <span
-            className={classNames('be-colorpicker__modal-style-label', {
-              'be-colorpicker__modal-style-label--active': currentStyle === 'color',
-            })}
-            onClick={this.setCurrentStyleColor}
-          >
+      <ColorModal className={modalClassName} onClick={stopPropagation}>
+        <ColorHeader>
+          <ColorModalLabel active={currentStyle === 'color'} onClick={this.setCurrentStyleColor}>
             Text
-          </span>
-          <span
-            className={classNames('be-colorpicker__modal-style-label', {
-              'be-colorpicker__modal-style-label--active': currentStyle === 'bgcolor',
-            })}
+          </ColorModalLabel>
+          <ColorModalLabel
+            active={currentStyle === 'bgcolor'}
             onClick={this.setCurrentStyleBgcolor}
           >
             Background
-          </span>
-        </span>
-        <span className="be-colorpicker__modal-options">
+          </ColorModalLabel>
+        </ColorHeader>
+        <ColorOptions>
           {colors.map((color, index) =>
             <Option
               value={color}
               key={index}
-              className="be-colorpicker__option"
-              activeClassName="be-colorpicker__option--active"
               active={currentSelectedColor === color}
               onClick={this.onChange}
+              isDark
             >
               <span style={{ backgroundColor: color }} className="be-colorpicker__cube" />
             </Option>,
           )}
-        </span>
-      </div>
+        </ColorOptions>
+      </ColorModal>
     );
   };
 
   render(): React.Node {
     const { expanded, onExpandEvent } = this.props;
     return (
-      <div
-        className="be-colorpicker__wrapper"
+      <ColorWrapper
         aria-haspopup="true"
         aria-expanded={expanded}
         aria-label="be-color-picker"
@@ -115,7 +111,7 @@ class ColorPickerLayout extends React.Component<Props, State> {
           <PaintBrush color="#222" onClick={onExpandEvent} />
         </Option>
         {expanded ? this.renderModal() : undefined}
-      </div>
+      </ColorWrapper>
     );
   }
 }

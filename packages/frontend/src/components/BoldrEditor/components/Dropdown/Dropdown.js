@@ -1,7 +1,6 @@
 /* eslint-disable react/no-array-index-key, react/no-unused-prop-types, no-inline-comments */
 // @flow
 import * as React from 'react';
-import classNames from 'classnames';
 import { stopPropagation } from '../../utils/common';
 
 import {
@@ -21,6 +20,7 @@ export type Props = {
   doExpand: Function,
   doCollapse: Function,
   onExpandEvent: Function,
+  isSkinny: boolean,
   ariaLabel?: string,
   optionWrapperClassName?: string,
 };
@@ -30,6 +30,10 @@ type State = {
 };
 
 export default class Dropdown extends React.Component<Props, State> {
+  static defaultProps = {
+    isSkinny: false,
+  };
+
   state: State = {
     highlighted: -1,
   };
@@ -82,6 +86,7 @@ export default class Dropdown extends React.Component<Props, State> {
     const options: Array<React.Node> = children.slice(1, children.length);
     return (
       <DropdownWrapper
+        isSkinny={this.props.isSkinny}
         className={className}
         aria-expanded={expanded}
         aria-label={ariaLabel || 'be-dropdown'}

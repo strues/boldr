@@ -1,3 +1,4 @@
+/* eslint-disable no-continue */
 /* @flow */
 
 import * as React from 'react';
@@ -5,6 +6,22 @@ import classNames from 'classnames';
 import Image from '@boldr/icons/Image';
 import Option from '../../Option';
 import Spinner from '../../Spinner';
+import { ControlWrapper } from '../Controls.styled';
+import {
+  ImageModal,
+  ImageHeader,
+  ImageOption,
+  ImageLabel,
+  UploadOpt,
+  UploadInput,
+  UploadUrlInput,
+  UrlSection,
+  UploadLabel,
+  SizeSection,
+  SizeInput,
+  ImageBtn,
+  ImageBtnSection,
+} from './Image.styled';
 
 export type Props = {
   expanded?: boolean,
@@ -175,117 +192,84 @@ class ImageLayout extends React.Component<Props, State> {
     }
   };
 
-  renderAddImageModal(): Object {
+  renderAddImageModal(): React.Node {
     const { imgSrc, uploadHighlighted, showImageLoading, dragEnter, height, width } = this.state;
     const {
       config: { modalClassName, uploadCallback, uploadEnabled, urlEnabled, inputAccept },
-      doCollapse,
     } = this.props;
     return (
-      <div className={classNames('be-image__modal', modalClassName)} onClick={this.stopPropagation}>
-        <div className="be-image__modal-header">
+      <ImageModal className={modalClassName} onClick={this.stopPropagation}>
+        <ImageHeader>
           {uploadEnabled &&
             uploadCallback &&
-            <span onClick={this.showImageUploadOption} className="be-image__modal-header-option">
+            <ImageOption onClick={this.showImageUploadOption}>
               Upload
-              <span
-                className={classNames('be-image__modal-header-label', {
-                  'be-image__modal-header-label--highlighted': uploadHighlighted,
-                })}
-              />
-            </span>}
+              <ImageLabel highlighted={uploadHighlighted} />
+            </ImageOption>}
           {urlEnabled &&
-            <span onClick={this.showImageURLOption} className="be-image__modal-header-option">
+            <ImageOption onClick={this.showImageURLOption}>
               Upload URL
-              <span
-                className={classNames('be-image__modal-header-label', {
-                  'be-image__modal-header-label--highlighted': !uploadHighlighted,
-                })}
-              />
-            </span>}
-        </div>
+              <ImageLabel highlighted={!uploadHighlighted} />
+            </ImageOption>}
+        </ImageHeader>
         {uploadHighlighted
           ? <div onClick={this.fileUploadClick}>
-              <div
+              <UploadOpt
                 onDragEnter={this.onDragEnter}
                 onDragOver={this.stopPropagation}
                 onDrop={this.onImageDrop}
-                className={classNames('be-image__modal-upload-option', {
-                  'be-image__modal-upload-option--highlighted': dragEnter,
-                })}
+                highlighted={dragEnter}
               >
-                <label htmlFor="file" className="be-image__modal-upload-option-label">
-                  Drop the file or click to upload
-                </label>
-              </div>
-              <input
-                type="file"
-                id="file"
-                accept={inputAccept}
-                onChange={this.selectImage}
-                className="be-image__modal-upload-option-input"
-              />
+                <UploadLabel htmlFor="file">Drop the file or click to upload</UploadLabel>
+              </UploadOpt>
+              <UploadInput type="file" id="file" accept={inputAccept} onChange={this.selectImage} />
             </div>
-          : <div className="be-image__modal-url-section">
-              <input
-                className="be-image__modal-url-input"
+          : <UrlSection>
+              <UploadUrlInput
                 placeholder="Enter url"
                 name="imgSrc"
                 onChange={this.updateValue}
                 onBlur={this.updateValue}
                 value={imgSrc}
               />
-            </div>}
-        <div className="be-embedded__modal-size">
+            </UrlSection>}
+        <SizeSection>
           ↕&nbsp;
-          <input
+          <SizeInput
             onChange={this.updateValue}
             onBlur={this.updateValue}
             value={height}
             name="height"
-            className="be-embedded__modal-size-input"
             placeholder="Height"
           />
           &nbsp;↔&nbsp;
-          <input
+          <SizeInput
             onChange={this.updateValue}
             onBlur={this.updateValue}
             value={width}
             name="width"
-            className="be-embedded__modal-size-input"
             placeholder="Width"
           />
-        </div>
-        <span className="be-image__modal-btn-section">
-          <button
-            className="be-image__modal-btn"
-            onClick={this.addImageFromState}
-            disabled={!imgSrc || !height || !width}
-          >
+        </SizeSection>
+        <ImageBtnSection>
+          <ImageBtn onClick={this.addImageFromState} disabled={!imgSrc || !height || !width}>
             Add
-          </button>
-          <button className="be-image__modal-btn" onClick={this.props.doCollapse}>
-            Cancel
-          </button>
-        </span>
+          </ImageBtn>
+          <ImageBtn onClick={this.props.doCollapse}>Cancel</ImageBtn>
+        </ImageBtnSection>
         {showImageLoading
           ? <div className="be-image__modal-spinner">
               <Spinner />
             </div>
           : undefined}
-      </div>
+      </ImageModal>
     );
   }
 
   render(): React.Node {
     const { config: { className, title }, expanded } = this.props;
     return (
-      <div
-        className="be-image__wrapper"
-        aria-haspopup="true"
-        aria-expanded={expanded}
-        aria-label="be-image__control"
-      >
+      <ControlWrapper aria-haspopup="true" aria-expanded={expanded} aria-label="be-image__control">
         <Option
           className={classNames(className)}
           value="unordered-list-item"
@@ -295,7 +279,7 @@ class ImageLayout extends React.Component<Props, State> {
           <Image color="#222" />
         </Option>
         {expanded ? this.renderAddImageModal() : undefined}
-      </div>
+      </ControlWrapper>
     );
   }
 }

@@ -1,22 +1,30 @@
 /* @flow */
 
 import React from 'react';
-import classNames from 'classnames';
+import styled from 'styled-components';
 import Eraser from '@boldr/icons/Eraser';
 import Option from '../../Option';
 
-export type Props = {
+type Props = {
   config: Object,
   onChange: Function,
 };
+
+const RemoveBtn = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+`;
+
 const RemoveLayout = ({ config, onChange }: Props) => {
   const { className, title } = config;
   return (
-    <div className="be-remove__wrapper" aria-label="be-remove__control">
-      <Option className={classNames(className)} onClick={onChange} title={title}>
+    <RemoveBtn aria-label="be-remove__control">
+      <Option className={className} onClick={onChange} title={title}>
         <Eraser color="#222" />
       </Option>
-    </div>
+    </RemoveBtn>
   );
 };
 

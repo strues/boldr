@@ -4,6 +4,7 @@
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { Dropdown, DropdownOption } from '../../Dropdown';
+import { ControlWrapper } from '../Controls.styled';
 
 type CurrentFontState = {
   fontSize: number,
@@ -60,16 +61,16 @@ export default class FontSizeLayout extends Component<Props, State> {
       currentFontSize || (options && options.indexOf(defaultFontSize) >= 0 && defaultFontSize);
 
     return (
-      <div className="be-fontsize__wrapper" aria-label="be-fontsize-control">
+      <ControlWrapper aria-label="be-fontsize-control">
         {/* // $FlowIssue */}
         <Dropdown
-          className={classNames('be-fontsize__dropdown')}
           optionWrapperClassName={classNames(dropdownClassName)}
           onChange={onChange}
           expanded={expanded}
           doExpand={doExpand}
           doCollapse={doCollapse}
           onExpandEvent={onExpandEvent}
+          isSkinny
           title={title}
         >
           {currentFontSize
@@ -90,7 +91,7 @@ export default class FontSizeLayout extends Component<Props, State> {
             </DropdownOption>,
           )}
         </Dropdown>
-      </div>
+      </ControlWrapper>
     );
   }
 }

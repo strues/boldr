@@ -5,6 +5,19 @@ import classNames from 'classnames';
 import Video from '@boldr/icons/Video';
 import { stopPropagation } from '../../../utils/common';
 import Option from '../../Option';
+import { ControlWrapper } from '../Controls.styled';
+import {
+  EmbeddedModal,
+  EmbeddedHeaderOpt,
+  EmbeddedHeader,
+  EmbeddedHeaderLabel,
+  EmbeddedLinkSection,
+  EmbeddedSize,
+  EmbeddedInput,
+  EmbeddedSizeInput,
+  EmbeddedBtn,
+  EmbeddedBtnSection,
+} from './Embedded.styled';
 
 export type Props = {
   expanded: boolean,
@@ -53,62 +66,52 @@ class EmbeddedLayout extends React.Component<Props, State> {
     const { embeddedLink, height, width } = this.state;
     const { config: { modalClassName }, doCollapse } = this.props;
     return (
-      <div className={classNames('be-embedded__modal', modalClassName)} onClick={stopPropagation}>
-        <div className="be-embedded__modal-header">
-          <span className="be-embedded__modal-header-option">
+      <EmbeddedModal className={modalClassName} onClick={stopPropagation}>
+        <EmbeddedHeader>
+          <EmbeddedHeaderOpt>
             Embedded Link
-            <span className="be-embedded__modal-header-label" />
-          </span>
-        </div>
-        <div className="be-embedded__modal-link-section">
-          <input
-            className="be-embedded__modal-link-input"
+            <EmbeddedHeaderLabel />
+          </EmbeddedHeaderOpt>
+        </EmbeddedHeader>
+        <EmbeddedLinkSection>
+          <EmbeddedInput
             placeholder="Enter link"
             onChange={this.updateValue}
             onBlur={this.updateValue}
             value={embeddedLink}
             name="embeddedLink"
           />
-          <div className="be-embedded__modal-size">
-            <input
+          <EmbeddedSize>
+            <EmbeddedSizeInput
               onChange={this.updateValue}
               onBlur={this.updateValue}
               value={height}
               name="height"
-              className="be-embedded__modal-size-input"
               placeholder="Height"
             />
-            <input
+            <EmbeddedSizeInput
               onChange={this.updateValue}
               onBlur={this.updateValue}
               value={width}
               name="width"
-              className="be-embedded__modal-size-input"
               placeholder="Width"
             />
-          </div>
-        </div>
-        <span className="be-embedded__modal-btn-section">
-          <button
-            className="be-embedded__modal-btn"
-            onClick={this.onChange}
-            disabled={!embeddedLink || !height || !width}
-          >
+          </EmbeddedSize>
+        </EmbeddedLinkSection>
+        <EmbeddedBtnSection>
+          <EmbeddedBtn onClick={this.onChange} disabled={!embeddedLink || !height || !width}>
             Add
-          </button>
-          <button className="be-embedded__modal-btn" onClick={doCollapse}>
-            Cancel
-          </button>
-        </span>
-      </div>
+          </EmbeddedBtn>
+          <EmbeddedBtn onClick={doCollapse}>Cancel</EmbeddedBtn>
+        </EmbeddedBtnSection>
+      </EmbeddedModal>
     );
   }
 
   render(): Object {
     const { config: { className, title }, expanded, onExpandEvent } = this.props;
     return (
-      <div
-        className="be-embedded__wrapper"
+      <ControlWrapper
         aria-haspopup="true"
         aria-expanded={expanded}
         aria-label="be-embedded__control"
@@ -122,7 +125,7 @@ class EmbeddedLayout extends React.Component<Props, State> {
           <Video color="#222" />
         </Option>
         {expanded ? this.rendeEmbeddedLinkModal() : undefined}
-      </div>
+      </ControlWrapper>
     );
   }
 }

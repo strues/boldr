@@ -3,6 +3,7 @@ import * as React from 'react';
 import classNames from 'classnames';
 import { ListUl, ListOl } from '@boldr/icons';
 import Option from '../../Option';
+import { ControlWrapper } from '../Controls.styled';
 
 export type Props = {
   config: Object,
@@ -10,7 +11,8 @@ export type Props = {
   currentState: Object,
 };
 
-export default class ListLayout extends React.Component<Props, *> {
+export default class ListLayout extends React.PureComponent<Props, *> {
+  static displayName = 'ListLayout';
   props: Props;
 
   toggleBlockType: Function = (blockType: string): void => {
@@ -32,7 +34,7 @@ export default class ListLayout extends React.Component<Props, *> {
     const { config, currentState: { listType } } = this.props;
     const { unordered, ordered, className } = config;
     return (
-      <div className={classNames('be-list__wrapper', className)} aria-label="be-list__control">
+      <ControlWrapper className={className} aria-label="be-list__control">
         <Option
           value="unordered"
           onClick={this.toggleBlockType}
@@ -51,7 +53,7 @@ export default class ListLayout extends React.Component<Props, *> {
         >
           <ListOl color="#222" />
         </Option>
-      </div>
+      </ControlWrapper>
     );
   }
 

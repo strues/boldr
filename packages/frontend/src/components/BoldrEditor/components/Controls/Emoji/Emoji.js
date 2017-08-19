@@ -1,7 +1,6 @@
 /* @flow */
 
 import React, { Component } from 'react';
-// $FlowIssue
 import { Modifier, EditorState } from 'draft-js';
 
 import EmojiLayout from './EmojiLayout';

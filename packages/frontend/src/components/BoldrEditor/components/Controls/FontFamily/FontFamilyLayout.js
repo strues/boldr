@@ -1,8 +1,11 @@
-/* @flow weak */
+/* eslint-disable react/no-array-index-key */
+/* @flow */
 
 import * as React from 'react';
-import classNames from 'classnames';
+import styled from 'styled-components';
 import { Dropdown, DropdownOption } from '../../Dropdown';
+import { ControlWrapper } from '../Controls.styled';
+import type { FontFamilyConfig } from '../../../core/config';
 
 export type Props = {
   expanded: boolean,
@@ -10,14 +13,20 @@ export type Props = {
   doExpand?: Function,
   doCollapse?: Function,
   onChange?: Function,
-  config: Object,
-  currentState: Object,
+  config: FontFamilyConfig,
+  currentState: any,
 };
 
 type State = {
   defaultFontFamily: string,
 };
 
+const FamilyPlaceholder = styled.span`
+  overflow: hidden;
+  max-width: 90px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
 class FontFamilyLayout extends React.Component<Props, State> {
   state = {
     defaultFontFamily: undefined,
@@ -40,7 +49,7 @@ class FontFamilyLayout extends React.Component<Props, State> {
   render() {
     const { defaultFontFamily } = this.state;
     const {
-      config: { className, dropdownClassName, options, title },
+      config: { options, title },
       onChange,
       expanded,
       doCollapse,
@@ -55,10 +64,8 @@ class FontFamilyLayout extends React.Component<Props, State> {
         options.some(opt => opt.toLowerCase() === defaultFontFamily.toLowerCase()) &&
         defaultFontFamily);
     return (
-      <div className="be-fontfamily__wrapper" aria-label="be-fontfamily-control">
+      <ControlWrapper aria-label="be-fontfamily-control">
         <Dropdown
-          className={classNames('be-fontfamily__dropdown', className)}
-          optionWrapperClassName={classNames('be-fontfam__optionwrapper', dropdownClassName)}
           onChange={onChange}
           expanded={expanded}
           doExpand={doExpand}
@@ -67,16 +74,16 @@ class FontFamilyLayout extends React.Component<Props, State> {
           onExpandEvent={onExpandEvent}
           title={title}
         >
-          <span className="be-fontfamily__placeholder">
+          <FamilyPlaceholder>
             {currentFontFamily || 'Font Family'}
-          </span>
+          </FamilyPlaceholder>
           {options.map((family, index) =>
             <DropdownOption active={currentFontFamily === family} value={family} key={index}>
               {family}
             </DropdownOption>,
           )}
         </Dropdown>
-      </div>
+      </ControlWrapper>
     );
   }
 }

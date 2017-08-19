@@ -2,11 +2,20 @@
 /* @flow */
 
 import * as React from 'react';
-import classNames from 'classnames';
+import cN from 'classnames';
 import Link from '@boldr/icons/Link';
 import Unlink from '@boldr/icons/Unlink';
 import Option from '../../Option';
 import { stopPropagation } from '../../../utils/common';
+import {
+  LinkModalBtn,
+  LinkModal,
+  LinkWrapper,
+  LinkInput,
+  LinkLabel,
+  LinkModalBtnSection,
+  LinkModalOption,
+} from './Link.styled';
 
 export type Props = {
   expanded?: boolean,
@@ -107,24 +116,22 @@ class LinkLayout extends React.Component<Props, State> {
     const { doCollapse, config: { modalClassName } } = this.props;
     const { linkTitle, linkTarget, linkTargetOption } = this.state;
     return (
-      <div className={classNames('be-link__modal', modalClassName)} onClick={stopPropagation}>
-        <span className="be-link__modal-label">Link Title</span>
-        <input
-          className="be-link__modal-input"
+      <LinkModal className={modalClassName} onClick={stopPropagation}>
+        <LinkLabel>Link Title</LinkLabel>
+        <LinkInput
           onChange={this.updateValue}
           onBlur={this.updateValue}
           name="linkTitle"
           value={linkTitle}
         />
-        <span className="be-link__modal-label">Link Target</span>
-        <input
-          className="be-link__modal-input"
+        <LinkLabel>Link Target</LinkLabel>
+        <LinkInput
           onChange={this.updateValue}
           onBlur={this.updateValue}
           name="linkTarget"
           value={linkTarget}
         />
-        <span className="be-link__modal-target-option">
+        <LinkModalOption>
           <input
             type="checkbox"
             defaultChecked={linkTargetOption === '_blank'}
@@ -132,32 +139,26 @@ class LinkLayout extends React.Component<Props, State> {
             onChange={this.updateTarget}
           />
           <span>Open link in new window</span>
-        </span>
-        <span className="be-link__modal-button-section">
-          <button
-            className="be-link__modal-btn"
-            onClick={this.addLink}
-            disabled={!linkTarget || !linkTitle}
-          >
+        </LinkModalOption>
+        <LinkModalBtnSection>
+          <LinkModalBtn onClick={this.addLink} disabled={!linkTarget || !linkTitle}>
             Add
-          </button>
-          <button className="be-link__modal-btn" onClick={doCollapse}>
-            Cancel
-          </button>
-        </span>
-      </div>
+          </LinkModalBtn>
+          <LinkModalBtn onClick={doCollapse}>Cancel</LinkModalBtn>
+        </LinkModalBtnSection>
+      </LinkModal>
     );
   }
 
-  renderLink(): React.Node {
+  render(): React.Node {
     const { config: { options, link, unlink, className }, expanded, currentState } = this.props;
     const { showModal } = this.state;
     return (
-      <div className={classNames('be-link__wrapper', className)} aria-label="be-link__control">
+      <LinkWrapper className={className} aria-label="be-link__control">
         {options.indexOf('link') >= 0 &&
           <Option
             value="unordered-list-item"
-            className={classNames(link.className)}
+            className={cN(link.className)}
             onClick={this.signalExpandShowModal}
             aria-haspopup="true"
             aria-expanded={showModal}
@@ -169,19 +170,15 @@ class LinkLayout extends React.Component<Props, State> {
           <Option
             disabled={!currentState.link}
             value="ordered-list-item"
-            className={classNames(unlink.className)}
+            className={cN(unlink.className)}
             onClick={this.removeLink}
             title={unlink.title}
           >
             <Unlink color="#222" size="1em" />
           </Option>}
         {expanded && showModal ? this.renderAddLinkModal() : undefined}
-      </div>
+      </LinkWrapper>
     );
-  }
-
-  render(): React.Node {
-    return this.renderLink();
   }
 }
 

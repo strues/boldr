@@ -1,14 +1,46 @@
 {
-	"dependencies": {
-		"babel-cli": "^6.24.1",
+  "name": "@boldr/utils",
+  "version": "0.1.0-rc.5",
+  "description": "Utility functions designed for use in Boldr projects. But applicable to most.",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "keywords": [
+    "build",
+    "tools",
+    "webpack"
+  ],
+  "author": {
+    "name": "Steven Truesdell",
+    "email": "steven@strues.io",
+    "url": "strues.io"
+  },
+  "homepage": "https://github.com/strues/boldr#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strues/boldr.git"
+  },
+  "bugs": {
+    "url": "https://github.com/strues/boldr/issues"
+  },
+  "scripts": {
+    "build": "rimraf lib && NODE_ENV=production babel src --ignore *.test.js --out-dir lib",
+    "format": "prettier --single-quote=true --print-width=100 --jsx-bracket-same-line=false --trailing-comma=all --write \"src/**/*.js\""
+  },
+  "dependencies": {
+    "lodash.invokemap": "^4.6.0",
+    "lodash.reduce": "^4.6.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
 		"babel-eslint": "^7.2.3",
 		"babel-plugin-transform-object-rest-spread": "^6.23.0",
 		"babel-preset-env": "^1.6.0",
-		"eslint": "^4.4.1",
-		"eslint-config-boldr": "0.12.6",
-		"lodash.invokemap": "^4.6.0",
-		"lodash.reduce": "^4.6.0",
+		"eslint": "^4.5.0",
+		"eslint-config-boldr": "0.12.7",
 		"prettier": "^1.5.3",
 		"rimraf": "^2.6.1"
-	}
+  }
 }

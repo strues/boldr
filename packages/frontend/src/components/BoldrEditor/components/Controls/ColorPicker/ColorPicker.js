@@ -5,13 +5,13 @@ import * as React from 'react';
 // $FlowIssue
 import type { EditorState } from 'draft-js';
 import { toggleCustomInlineStyle, getSelectionCustomInlineStyle } from '../../../utils';
-
+import type { ColorPickerConfig } from '../../../core/config';
 import ColorPickerLayout from './ColorPickerLayout';
 
 type Props = {
   onChange: Function,
   editorState: EditorState,
-  config?: Object,
+  config: ColorPickerConfig,
   modalHandler: Object,
 };
 type State = {

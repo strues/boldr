@@ -2,10 +2,10 @@
 /* @flow */
 
 import * as React from 'react';
-import classNames from 'classnames';
 import { Paragraph, Heading1, Heading2, Heading3, QuoteLeft, Embedded } from '@boldr/icons';
 import Option from '../../Option';
 import type { ToolbarBlockTypes } from './BlockType';
+import { BlockWrapper } from './Block.styled';
 
 type CurrentBlock = {
   blockType: string,
@@ -19,7 +19,7 @@ export type Props = {
   doCollapse: Function,
 };
 
-class BlockTypeLayout extends React.Component<Props, *> {
+class BlockTypeLayout extends React.PureComponent<Props, *> {
   props: Props;
 
   blockTypes: ToolbarBlockTypes = [
@@ -54,7 +54,7 @@ class BlockTypeLayout extends React.Component<Props, *> {
   renderButtons(blocks: ToolbarBlockTypes): React.Node {
     const { onChange, currentState: { blockType } } = this.props;
     return (
-      <div className={classNames('be-block__wrapper')}>
+      <BlockWrapper>
         {blocks.map(block =>
           <Option
             key={block.id}
@@ -65,7 +65,7 @@ class BlockTypeLayout extends React.Component<Props, *> {
             {block.icon}
           </Option>,
         )}
-      </div>
+      </BlockWrapper>
     );
   }
 

@@ -1,10 +1,11 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
 import Undo from '@boldr/icons/Undo';
 import Redo from '@boldr/icons/Redo';
 import Option from '../../Option';
+import { ControlWrapper } from '../Controls.styled';
 
 export type Props = {
   onChange?: Function,
@@ -12,23 +13,20 @@ export type Props = {
   currentState: Object,
 };
 
-export default class HistoryLayout extends Component<Props, *> {
+export default class HistoryLayout extends React.PureComponent<Props, *> {
   props: Props;
   onChange = obj => {
     const { onChange } = this.props;
     onChange(obj);
   };
 
-  renderHistoryIcons(): Object {
+  render(): React.Node {
     const {
       config: { undo, redo, className },
       currentState: { undoDisabled, redoDisabled },
     } = this.props;
     return (
-      <div
-        className={classNames('be-history__wrapper', className)}
-        aria-label="be-history__control"
-      >
+      <ControlWrapper className={className} aria-label="be-history__control">
         <Option
           value="undo"
           onClick={this.onChange}
@@ -47,11 +45,7 @@ export default class HistoryLayout extends Component<Props, *> {
         >
           <Redo color="#222" />
         </Option>
-      </div>
+      </ControlWrapper>
     );
-  }
-
-  render(): Object {
-    return this.renderHistoryIcons();
   }
 }

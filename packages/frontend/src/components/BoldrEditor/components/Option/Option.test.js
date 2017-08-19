@@ -1,17 +1,17 @@
 import React from 'react';
 import { spy } from 'sinon';
+import { shallowToJson } from 'enzyme-to-json';
 import { shallow, mount } from 'enzyme';
 import Option from './Option';
 
 describe('<Option />', () => {
   it('should render in a div', () => {
-    expect(
-      shallow(
-        <Option value="f" onClick={() => {}}>
-          <span>abcd</span>
-        </Option>,
-      ).node.type,
-    ).toEqual('div');
+    const wrapper = shallow(
+      <Option value="f" onClick={() => {}}>
+        <span>abcd</span>
+      </Option>,
+    );
+    expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
 
   it('should have child element passed after mount', () => {

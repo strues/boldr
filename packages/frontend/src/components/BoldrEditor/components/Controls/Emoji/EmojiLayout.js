@@ -1,26 +1,23 @@
+/* eslint-disable react/no-array-index-key */
 /* @flow */
 
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import * as React from 'react';
 import classNames from 'classnames';
 import Smile from '@boldr/icons/Smile';
 import { stopPropagation } from '../../../utils/common';
+import type { EmojiConfig } from '../../../core/config';
 import Option from '../../Option';
+import { ControlWrapper } from '../Controls.styled';
+import { EmojiModal, EmojiIcon } from './Emoji.styled';
 
 export type Props = {
   onChange: Function,
   expanded?: boolean,
-  config: Object,
+  onExpandEvent: Function,
+  config: EmojiConfig,
 };
 
-class EmojiLayout extends Component {
-  static propTypes: Object = {
-    expanded: PropTypes.bool,
-    onExpandEvent: PropTypes.func,
-    onChange: PropTypes.func,
-    config: PropTypes.object,
-  };
-
+class EmojiLayout extends React.Component<Props, *> {
   onChange: Function = (event: Object): void => {
     const { onChange } = this.props;
     onChange(event.target.innerHTML);
@@ -29,21 +26,20 @@ class EmojiLayout extends Component {
   renderEmojiModal(): Object {
     const { config: { modalClassName, emojis } } = this.props;
     return (
-      <div className={classNames('be-emoji__modal', modalClassName)} onClick={stopPropagation}>
+      <EmojiModal className={modalClassName} onClick={stopPropagation}>
         {emojis.map((emoji, index) =>
-          <span key={index} className="be-emoji__icon" alt="" onClick={this.onChange}>
+          <EmojiIcon key={index} alt="emoji" onClick={this.onChange}>
             {emoji}
-          </span>,
+          </EmojiIcon>,
         )}
-      </div>
+      </EmojiModal>
     );
   }
 
   render(): Object {
-    const { config: { icon, className, title }, expanded, onExpandEvent } = this.props;
+    const { config: { className, title }, expanded, onExpandEvent } = this.props;
     return (
-      <div
-        className="be-emoji__wrapper"
+      <ControlWrapper
         aria-haspopup="true"
         aria-label="be-emoji__control"
         aria-expanded={expanded}
@@ -57,7 +53,7 @@ class EmojiLayout extends Component {
           <Smile color="#222" />
         </Option>
         {expanded ? this.renderEmojiModal() : undefined}
-      </div>
+      </ControlWrapper>
     );
   }
 }
