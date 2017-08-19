@@ -4,8 +4,7 @@ import React, { Component } from 'react';
 import convertToRaw from 'draft-js/lib/convertFromDraftStateToRaw';
 // $FlowIssue
 import EditorState from 'draft-js/lib/EditorState';
-// import Editor from '../../../../../../components/BoldrEditor';
-import BoldrText from '../../../../../../components/BoldrText';
+import Editor from '../../../../../../components/BoldrEditor';
 
 const editorStyle = {
   minHeight: 200,
@@ -17,36 +16,34 @@ type Props = {
   placeholder: string,
 };
 export default class FieldEditor extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { htmlContent: '' };
-  }
-  handleHTMLChange = htmlContent => {
-    console.log(htmlContent);
-    this.setState({ htmlContent });
+  state = { editorState: EditorState.createEmpty() };
+  onChange = (editorState: Object) => {
+    const { input } = this.props;
+    input.onChange(convertToRaw(editorState.getCurrentContent()));
+    this.setState({ editorState });
   };
 
-  handleRawChange = raw => {
-    console.log(raw);
-  };
   props: Props;
 
   render() {
     const { input } = this.props;
     const { editorState } = this.state;
     return (
-      <BoldrText
+      <Editor
         {...input}
-        height={600}
-        ref={instance => (this.editor = instance)}
-        initialContent={this.state.htmlContent}
-        language="en"
-        media={{
-          video: true,
-          audio: true,
+        editorStyle={editorStyle}
+        onEditorStateChange={this.onChange}
+        editorState={editorState}
+        toolbarClassName="boldredit-toolbar"
+        wrapperClassName="boldredit-wrapper"
+        editorClassName="boldrui-editor"
+        toolbar={{
+          history: { inDropdown: true },
+          inline: { inDropdown: false },
+          list: { inDropdown: true },
+          link: { showOpenOptionOnHover: true },
+          textAlign: { inDropdown: false },
         }}
-        onRawChange={this.handleRawChange}
-        onHtmlChange={this.handleHTMLChange}
       />
     );
   }

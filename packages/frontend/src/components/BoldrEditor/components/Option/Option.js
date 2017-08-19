@@ -1,30 +1,27 @@
+/* eslint-disable react/no-unused-prop-types */
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import cN from 'classnames';
 
 export type Props = {
   onClick: Function,
-  children: ?ReactChildren,
+  children: React.ChildrenArray<React.Node>,
   value: ?string,
   active: ?boolean,
+  className: ?string,
   disabled: ?boolean,
   title: ?string,
 };
 
-export default class Option extends Component {
+export default class Option extends React.Component<Props, *> {
   static defaultProps = {
     disabled: false,
   };
-  // shouldComponentUpdate(nextProps: Props) {
-  //   if (this.props.value !== nextProps.value) {
-  //     return true;
-  //   } else {
-  //     return false;
-  //   }
-  // }
+
   props: Props;
-  handleClick: Function = () => {
+
+  onClick: Function = () => {
     const { disabled, onClick, value } = this.props;
     if (!disabled) {
       onClick(value);
@@ -32,13 +29,17 @@ export default class Option extends Component {
   };
 
   render() {
-    const { children, active, disabled, title } = this.props;
-    const classes = cN('boldredit-option__wrapper', {
-      'boldredit-option--active': active,
-      'boldredit-option--disabled': disabled,
-    });
+    const { children, className, active, disabled, title } = this.props;
     return (
-      <div className={classes} onClick={this.handleClick} aria-selected={active} title={title}>
+      <div
+        className={cN('boldr-editor-option__wrapper', className, {
+          'boldr-editor-option--active': active,
+          'boldr-editor-option--disabled': disabled,
+        })}
+        onClick={this.onClick}
+        aria-selected={active}
+        title={title}
+      >
         {children}
       </div>
     );

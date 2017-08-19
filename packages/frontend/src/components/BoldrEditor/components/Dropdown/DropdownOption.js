@@ -1,10 +1,11 @@
-/* @flow weak */
+/* eslint-disable react/no-unused-prop-types */
+/* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
 
 export type Props = {
-  children: ReactChildren,
+  children: React.ChildrenArray<React.Node>,
   value: ?any,
   onClick: ?Function,
   onSelect: ?Function,
@@ -14,14 +15,13 @@ export type Props = {
   active: ?boolean,
   highlighted: ?boolean,
   className: ?string,
+  activeClassName: ?string,
+  disabledClassName: ?string,
+  highlightedClassName: ?string,
   title: ?string,
 };
 
-export default class DropdownOption extends Component {
-  static defaultProps = {
-    highlighted: false,
-    highlightedClassName: 'boldredit-highlight',
-  };
+export default class DropdownOption extends React.Component<Props, *> {
   props: Props;
 
   onClick: Function = (event): void => {
@@ -48,17 +48,24 @@ export default class DropdownOption extends Component {
   };
 
   render(): Object {
-    const { children, active, disabled, highlighted, className, title } = this.props;
-
-    const classes: () => ClassNamesFn = classNames('boldredit-dropdown__option--default', {
-      'boldredit-dropdown__option--active': active,
-      'boldredit-dropdown__option--highlighted': highlighted,
-      'boldredit-dropdown__option--disabled': disabled,
+    const {
+      children,
+      active,
+      disabled,
+      highlighted,
       className,
-    });
+      activeClassName,
+      disabledClassName,
+      highlightedClassName,
+      title,
+    } = this.props;
     return (
       <li
-        className={classes}
+        className={classNames('boldr-editor-dropdown__option--default', className, {
+          [`boldr-editor-dropdown__option--active ${activeClassName}`]: active,
+          [`boldr-editor-dropdown__option--highlighted ${highlightedClassName}`]: highlighted,
+          [`boldr-editor-dropdown__option--disabled ${disabledClassName}`]: disabled,
+        })}
         onMouseEnter={this.setHighlighted}
         onMouseLeave={this.resetHighlighted}
         onClick={this.onClick}

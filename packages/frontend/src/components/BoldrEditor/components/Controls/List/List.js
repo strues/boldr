@@ -12,8 +12,13 @@ export type Props = {
   editorState: EditorState,
   config: Object,
 };
-export default class List extends Component {
-  state: Object = {
+
+type State = {
+  currentBlockType: string,
+};
+
+export default class List extends Component<Props, State> {
+  state: State = {
     currentBlockType: 'unstyled',
   };
 

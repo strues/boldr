@@ -11,6 +11,7 @@ export {
   clearEditorContent,
   setBlockData,
   getSelectedBlocksMetadata,
+  blockRenderMap,
 } from './block';
 
 export {

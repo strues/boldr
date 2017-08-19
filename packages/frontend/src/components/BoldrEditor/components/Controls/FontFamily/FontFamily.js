@@ -1,29 +1,36 @@
+/* eslint-disable react/no-unused-prop-types */
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import { toggleCustomInlineStyle, getSelectionCustomInlineStyle } from '../../../utils';
 
 import FontFamilyLayout from './FontFamilyLayout';
 
 export type Props = {
   onChange: Function,
+  modalHandler: Object,
   editorState: Object,
   config?: Object,
 };
 
-export default class FontFamily extends Component {
-  state: Object = {
+type State = {
+  expanded: boolean,
+  currentFontFamily: string,
+};
+
+export default class FontFamily extends React.Component<Props, State> {
+  state: State = {
     expanded: undefined,
     currentFontFamily: undefined,
   };
-
   componentWillMount(): void {
-    const { editorState } = this.props;
+    const { editorState, modalHandler } = this.props;
     if (editorState) {
       this.setState({
         currentFontFamily: getSelectionCustomInlineStyle(editorState, ['FONTFAMILY']).FONTFAMILY,
       });
     }
+    modalHandler.registerCallback(this.expandCollapse);
   }
 
   componentWillReceiveProps(properties: Object): void {
@@ -35,7 +42,13 @@ export default class FontFamily extends Component {
     }
   }
 
+  componentWillUnmount(): void {
+    const { modalHandler } = this.props;
+    modalHandler.deregisterCallback(this.expandCollapse);
+  }
+
   props: Props;
+
   expandCollapse: Function = (): void => {
     this.setState({
       expanded: this.signalExpanded,
@@ -67,7 +80,7 @@ export default class FontFamily extends Component {
     }
   };
 
-  render(): Object {
+  render(): React.Node {
     const { config } = this.props;
     const { expanded, currentFontFamily } = this.state;
 

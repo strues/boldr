@@ -2,7 +2,8 @@
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import Icon from '@boldr/ui/Icons/Icon';
+import Undo from '@boldr/icons/Undo';
+import Redo from '@boldr/icons/Redo';
 import Option from '../../Option';
 
 export type Props = {
@@ -11,7 +12,7 @@ export type Props = {
   currentState: Object,
 };
 
-export default class HistoryLayout extends Component {
+export default class HistoryLayout extends Component<Props, *> {
   props: Props;
   onChange = obj => {
     const { onChange } = this.props;
@@ -25,8 +26,8 @@ export default class HistoryLayout extends Component {
     } = this.props;
     return (
       <div
-        className={classNames('boldredit-history-wrapper', className)}
-        aria-label="boldredit-history-control"
+        className={classNames('boldr-editor-history__wrapper', className)}
+        aria-label="boldr-editor-history__control"
       >
         <Option
           value="undo"
@@ -35,7 +36,7 @@ export default class HistoryLayout extends Component {
           disabled={undoDisabled}
           title={undo.title}
         >
-          <Icon kind="undo" color="#222" />
+          <Undo color="#222" />
         </Option>
         <Option
           value="redo"
@@ -44,7 +45,7 @@ export default class HistoryLayout extends Component {
           disabled={redoDisabled}
           title={redo.title}
         >
-          <Icon kind="redo" color="#222" />
+          <Redo color="#222" />
         </Option>
       </div>
     );

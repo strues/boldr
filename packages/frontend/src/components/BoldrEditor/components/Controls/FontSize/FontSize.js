@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import { toggleCustomInlineStyle, getSelectionCustomInlineStyle } from '../../../utils';
 
 import FontSizeLayout from './FontSizeLayout';
@@ -8,22 +8,27 @@ import FontSizeLayout from './FontSizeLayout';
 export type Props = {
   onChange: Function,
   editorState: Object,
+  modalHandler: Object,
   config: Object,
 };
-
-export default class FontSize extends Component {
-  state: Object = {
+type State = {
+  expanded: boolean,
+  currentFontSize: string,
+};
+export default class FontSize extends React.Component<Props, State> {
+  state = {
     expanded: undefined,
     currentFontSize: undefined,
   };
 
   componentWillMount(): void {
-    const { editorState } = this.props;
+    const { editorState, modalHandler } = this.props;
     if (editorState) {
       this.setState({
         currentFontSize: getSelectionCustomInlineStyle(editorState, ['FONTSIZE']).FONTSIZE,
       });
     }
+    modalHandler.registerCallback(this.expandCollapse);
   }
 
   componentDidMount(): void {
@@ -44,7 +49,10 @@ export default class FontSize extends Component {
       });
     }
   }
-
+  componentWillUnmount(): void {
+    const { modalHandler } = this.props;
+    modalHandler.deregisterCallback(this.expandCollapse);
+  }
   props: Props;
 
   setFontSize = defaultFontSize => {
@@ -88,10 +96,10 @@ export default class FontSize extends Component {
   render(): Object {
     const { config } = this.props;
     const { expanded, currentFontSize } = this.state;
-    const FontSizeComponent = FontSizeLayout;
+
     const fontSize = currentFontSize && Number(currentFontSize.substring(9));
     return (
-      <FontSizeComponent
+      <FontSizeLayout
         config={config}
         currentState={{ fontSize }}
         onChange={this.toggleFontSize}

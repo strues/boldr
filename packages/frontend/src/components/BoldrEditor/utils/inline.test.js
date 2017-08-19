@@ -106,7 +106,7 @@ describe('Inline: custom styles test suite', () => {
   it('should initializa customStyleMap with colors, bg-colors, fontsizes and fontFamilies', () => {
     expect.assertions(2);
     expect(getCustomStyleMap instanceof Function).toBeTruthy();
-    expect(size(getCustomStyleMap())).toEqual(2);
+    expect(size(getCustomStyleMap())).toEqual(3);
   });
 });
 

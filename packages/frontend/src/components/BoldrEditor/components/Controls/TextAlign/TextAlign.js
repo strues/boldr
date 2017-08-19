@@ -1,19 +1,28 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
+import type { EditorState } from 'draft-js';
 import { getSelectedBlocksMetadata, setBlockData } from '../../../utils';
 
 import TextAlignLayout from './TextAlignLayout';
 
 type Props = {
-  editorState: Object,
+  editorState: EditorState,
+  modalHandler: Object,
+  config: Object,
   onChange: Function,
 };
-export default class TextAlign extends Component {
+
+type State = {
+  expanded: boolean,
+  currentTextAlignment: string,
+};
+
+export default class TextAlign extends React.Component<Props, State> {
   state = {
     currentTextAlignment: undefined,
   };
-
+  state: State;
   componentWillReceiveProps(properties: Object) {
     if (properties.editorState !== this.props.editorState) {
       this.setState({

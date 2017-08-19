@@ -1,8 +1,8 @@
-/* @flow weak */
+/* eslint-disable react/no-array-index-key */
+/* @flow */
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
-import shortid from 'shortid';
 import { Dropdown, DropdownOption } from '../../Dropdown';
 
 export type Props = {
@@ -14,9 +14,12 @@ export type Props = {
   config: Object,
   currentState: Object,
 };
+type State = {
+  defaultFontSize: string,
+};
 
-export default class FontSizeLayout extends Component {
-  state: Object = {
+export default class FontSizeLayout extends Component<Props, State> {
+  state: State = {
     defaultFontSize: undefined,
   };
 
@@ -52,9 +55,9 @@ export default class FontSizeLayout extends Component {
     currentFontSize =
       currentFontSize || (options && options.indexOf(defaultFontSize) >= 0 && defaultFontSize);
     return (
-      <div className="boldredit-fontsize__wrapper" aria-label="boldredit-fontsize-control">
+      <div className="boldr-editor-fontsize__wrapper" aria-label="boldr-editor-fontsize-control">
         <Dropdown
-          className={classNames('boldredit-fontsize__dropdown', className)}
+          className={classNames('boldr-editor-fontsize__dropdown', className)}
           optionWrapperClassName={classNames(dropdownClassName)}
           onChange={onChange}
           expanded={expanded}
@@ -68,12 +71,12 @@ export default class FontSizeLayout extends Component {
                 {currentFontSize}
               </span>
             : <img src={icon} alt="" />}
-          {options.map(size =>
+          {options.map((size, index) =>
             <DropdownOption
-              className="boldredit-fontsize__option"
+              className="boldr-editor-fontsize__option"
               active={currentFontSize === size}
               value={size}
-              key={shortid.generate()}
+              key={index}
             >
               {size}
             </DropdownOption>,

@@ -1,17 +1,18 @@
-/* @flow weak */
+// @flow
+
 export default class ModalHandler {
-  callBacks = [];
+  callbacks: Array<*> = [];
   suggestionCallback = undefined;
   editorFlag: boolean = false;
   suggestionFlag: boolean = false;
 
-  closeAllModals = (event: Event) => {
-    this.callBacks.forEach(callBack => {
-      callBack(event);
+  closeAllModals = (event: SyntheticEvent<>) => {
+    this.callbacks.forEach(callback => {
+      callback(event);
     });
   };
 
-  init = (wrapperId: string) => {
+  init = (wrapperId: number) => {
     const wrapper = document.getElementById(wrapperId); // eslint-disable-line no-undef
     wrapper.addEventListener('click', () => {
       this.editorFlag = true;
@@ -27,7 +28,7 @@ export default class ModalHandler {
         this.editorFlag = false;
       }
     });
-    document.addEventListener('keydown', event => {
+    document.addEventListener('keydown', (event: SyntheticEvent<>) => {
       // eslint-disable-line no-undef
       if (event.key === 'Escape') {
         this.closeAllModals();
@@ -35,7 +36,7 @@ export default class ModalHandler {
     });
   };
 
-  handleEditorClick = () => {
+  onEditorClick = () => {
     this.closeModals();
     if (!this.suggestionFlag && this.suggestionCallback) {
       this.suggestionCallback();
@@ -44,20 +45,20 @@ export default class ModalHandler {
     }
   };
 
-  closeModals = (event: Object): void => {
+  closeModals = (event: SyntheticEvent<>): void => {
     this.closeAllModals(event);
   };
 
-  registerCallBack = (callBack: Function): void => {
-    this.callBacks.push(callBack);
+  registerCallback = (callback): void => {
+    this.callbacks.push(callback);
   };
 
-  deregisterCallBack = (callBack: Function): void => {
-    this.callBacks = this.callBacks.filter(cb => cb !== callBack);
+  deregisterCallback = (callback): void => {
+    this.callbacks = this.callbacks.filter(cb => cb !== callback);
   };
 
-  setSuggestionCallback = (callBack: Function): void => {
-    this.suggestionCallback = callBack;
+  setSuggestionCallback = (callback): void => {
+    this.suggestionCallback = callback;
   };
 
   removeSuggestionCallback = (): void => {

@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 // $FlowIssue
 import { RichUtils, EditorState, Modifier } from 'draft-js';
 import { getSelectionInlineStyle, forEach } from '../../../utils';
@@ -10,8 +10,12 @@ export type Props = {
   onChange: Function,
   editorState: EditorState,
 };
-export default class Inline extends Component {
-  state: Object = {
+type State = {
+  currentStyles: Object,
+};
+
+export default class Inline extends React.Component<Props, State> {
+  state: State = {
     currentStyles: {},
   };
 

@@ -1,6 +1,12 @@
 /* @flow */
-// $FlowIssue
-import { EditorState, RichUtils, Modifier, ContentBlock } from 'draft-js';
+import {
+  EditorState,
+  RichUtils,
+  Modifier,
+  ContentBlock,
+  DefaultDraftBlockRenderMap,
+  // $FlowIssue
+} from 'draft-js';
 import { OrderedMap, List, Map } from 'immutable';
 
 /**
@@ -213,3 +219,10 @@ export function getSelectedBlocksMetadata(editorState: EditorState): Map<*, *> {
   }
   return metaData;
 }
+const newBlockRenderMap = Map({
+  code: {
+    element: 'pre',
+  },
+});
+
+export const blockRenderMap = DefaultDraftBlockRenderMap.merge(newBlockRenderMap);

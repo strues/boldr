@@ -1,21 +1,26 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
-import { Embedded } from '@boldr/icons';
+import Video from '@boldr/icons/Video';
 import { stopPropagation } from '../../../utils/common';
 import Option from '../../Option';
 
 export type Props = {
-  expanded: ?boolean,
-  onExpandEvent: ?Function,
-  doCollapse: ?Function,
-  onChange: ?Function,
+  expanded: boolean,
+  onExpandEvent: Function,
+  doCollapse: Function,
+  onChange: Function,
   config: Object,
 };
+type State = {
+  embeddedLink: string,
+  height: number,
+  width: number,
+};
 
-class EmbeddedLayout extends Component {
-  state: Object = {
+class EmbeddedLayout extends React.Component<Props, State> {
+  state: State = {
     embeddedLink: '',
     height: this.props.config.defaultSize.height,
     width: this.props.config.defaultSize.width,
@@ -32,7 +37,7 @@ class EmbeddedLayout extends Component {
     }
   }
   props: Props;
-  updateValue: Function = (event: Object): void => {
+  updateValue: Function = (event: SyntheticEvent<>): void => {
     this.setState({
       [`${event.target.name}`]: event.target.value,
     });
@@ -46,34 +51,34 @@ class EmbeddedLayout extends Component {
 
   rendeEmbeddedLinkModal(): Object {
     const { embeddedLink, height, width } = this.state;
-    const { doCollapse } = this.props;
+    const { config: { popupClassName }, doCollapse } = this.props;
     return (
       <div
-        className={classNames('boldredit-embedded-modal', this.props.config.popupClassName)}
+        className={classNames('boldr-editor-embedded__modal', popupClassName)}
         onClick={stopPropagation}
       >
-        <div className="boldredit-embedded-modal-header">
-          <span className="boldredit-embedded-modal-header-option">
+        <div className="boldr-editor-embedded__modal-header">
+          <span className="boldr-editor-embedded__modal-header-option">
             Embedded Link
-            <span className="boldredit-embedded-modal-header-label" />
+            <span className="boldr-editor-embedded__modal-header-label" />
           </span>
         </div>
-        <div className="boldredit-embedded-modal-link-section">
+        <div className="boldr-editor-embedded__modal-link-section">
           <input
-            className="boldredit-embedded-modal-link-input"
+            className="boldr-editor-embedded__modal-link-input"
             placeholder="Enter link"
             onChange={this.updateValue}
             onBlur={this.updateValue}
             value={embeddedLink}
             name="embeddedLink"
           />
-          <div className="boldredit-embedded-modal-size">
+          <div className="boldr-editor-embedded__modal-size">
             <input
               onChange={this.updateValue}
               onBlur={this.updateValue}
               value={height}
               name="height"
-              className="boldredit-embedded-modal-size-input"
+              className="boldr-editor-embedded__modal-size-input"
               placeholder="Height"
             />
             <input
@@ -81,20 +86,20 @@ class EmbeddedLayout extends Component {
               onBlur={this.updateValue}
               value={width}
               name="width"
-              className="boldredit-embedded-modal-size-input"
+              className="boldr-editor-embedded__modal-size-input"
               placeholder="Width"
             />
           </div>
         </div>
-        <span className="boldredit-embedded-modal-btn-section">
+        <span className="boldr-editor-embedded__modal-btn-section">
           <button
-            className="boldredit-embedded-modal-btn"
+            className="boldr-editor-embedded__modal-btn"
             onClick={this.onChange}
             disabled={!embeddedLink || !height || !width}
           >
             Add
           </button>
-          <button className="boldredit-embedded-modal-btn" onClick={doCollapse}>
+          <button className="boldr-editor-embedded__modal-btn" onClick={doCollapse}>
             Cancel
           </button>
         </span>
@@ -103,21 +108,21 @@ class EmbeddedLayout extends Component {
   }
 
   render(): Object {
-    const { expanded, onExpandEvent } = this.props;
+    const { config: { className, title }, expanded, onExpandEvent } = this.props;
     return (
       <div
-        className="boldredit-embedded-wrapper"
+        className="boldr-editor-embedded__wrapper"
         aria-haspopup="true"
         aria-expanded={expanded}
-        aria-label="boldredit-embedded-control"
+        aria-label="boldr-editor-embedded__control"
       >
         <Option
-          className={classNames(this.props.config.className)}
+          className={classNames(className)}
           value="unordered-list-item"
           onClick={onExpandEvent}
-          title={this.props.config.title}
+          title={title}
         >
-          <Embedded color="#222" />
+          <Video color="#222" />
         </Option>
         {expanded ? this.rendeEmbeddedLinkModal() : undefined}
       </div>

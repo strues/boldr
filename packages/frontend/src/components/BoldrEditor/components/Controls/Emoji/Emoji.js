@@ -8,16 +8,30 @@ import EmojiLayout from './EmojiLayout';
 
 export type Props = {
   onChange: Function,
-  editorState: Object,
-  config: Object,
+  modalHandler: Object,
+  editorState: EditorState,
+  config: ?Object,
+};
+type State = {
+  expanded: boolean,
 };
 
-export default class Emoji extends Component {
-  state: Object = {
+export default class Emoji extends Component<Props, State> {
+  state: State = {
     expanded: false,
   };
 
+  componentWillMount(): void {
+    const { modalHandler } = this.props;
+    modalHandler.registerCallback(this.expandCollapse);
+  }
+
+  componentWillUnmount(): void {
+    const { modalHandler } = this.props;
+    modalHandler.deregisterCallback(this.expandCollapse);
+  }
   props: Props;
+
   expandCollapse: Function = (): void => {
     this.setState({
       expanded: this.signalExpanded,
@@ -56,9 +70,9 @@ export default class Emoji extends Component {
   render(): Object {
     const { config } = this.props;
     const { expanded } = this.state;
-    const EmojiComponent = config.component || EmojiLayout;
+
     return (
-      <EmojiComponent
+      <EmojiLayout
         config={config}
         onChange={this.addEmoji}
         expanded={expanded}

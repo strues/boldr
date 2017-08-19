@@ -1,3 +1,3 @@
 /* @flow */
 
-export { default } from './core/Editor';
+export { default } from './BoldrEditor';

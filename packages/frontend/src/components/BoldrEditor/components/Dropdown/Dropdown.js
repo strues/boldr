@@ -1,38 +1,47 @@
-/* @flow */
-
-import React, { Component } from 'react';
+// @flow
+import * as React from 'react';
 import classNames from 'classnames';
 
-import styled from 'styled-components';
+import { stopPropagation } from '../../utils/common';
 
-const Holder = styled.div`
-  z-index: 190;
-  background: #fff;
-  border: 1px solid #eaeaea;
-`;
 export type Props = {
-  children: Array<ReactChildren>,
+  children: React.ChildrenArray<React.Node>,
   onChange: ?Function,
   className: ?string,
   title: string,
-  onExpandEvent: ?Function,
+  expanded: ?boolean,
+  doExpand: Function,
+  doCollapse: Function,
+  onExpandEvent: Function,
+  ariaLabel: ?string,
   optionWrapperClassName: ?string,
 };
 
-export default class Dropdown extends Component {
-  static defaultProps = {
-    title: '',
-  };
+type State = {
+  highlighted: number,
+};
 
-  state: Object = {
-    expanded: false,
+export default class Dropdown extends React.Component<Props, State> {
+  state: State = {
     highlighted: -1,
   };
 
+  componentWillReceiveProps(props: Props) {
+    if (this.props.expanded && !props.expanded) {
+      this.setState({
+        highlighted: -1,
+      });
+    }
+  }
+
   props: Props;
-  handleChange: Function = (event: Event): void => {
-    const value: string = event.target.value;
-    this.props.onChange(value);
+
+  onChange: Function = (value: any): void => {
+    const { onChange } = this.props;
+    if (onChange) {
+      onChange(value);
+    }
+    this.toggleExpansion();
   };
 
   setHighlighted: Function = (highlighted: number): void => {
@@ -40,64 +49,64 @@ export default class Dropdown extends Component {
       highlighted,
     });
   };
-  expandMenu = () => {
-    this.setState({
-      expanded: true,
-    });
-  };
-  collapseMenu = () => {
-    this.setState({
-      expanded: false,
-    });
-  };
+
   toggleExpansion: Function = (): void => {
-    // const { doExpand, doCollapse, expanded } = this.props;
-    if (this.state.expanded) {
-      this.collapseMenu();
+    const { doExpand, doCollapse, expanded } = this.props;
+    if (expanded) {
+      doCollapse();
     } else {
-      this.expandMenu();
+      doExpand();
     }
   };
 
   render() {
-    const { children, className } = this.props;
+    const {
+      expanded,
+      children,
+      className,
+      optionWrapperClassName,
+      ariaLabel,
+      onExpandEvent,
+      title,
+    } = this.props;
     const { highlighted } = this.state;
-    const { expanded } = this.state;
     const options = children.slice(1, children.length);
     return (
       <div
-        className={classNames('boldredit-dropdown__wrapper', className)}
+        className={classNames('boldr-editor-dropdown__wrapper', className)}
         aria-expanded={expanded}
-        aria-label="boldredit-dropdown-control"
+        aria-label={ariaLabel || 'boldr-editor-dropdown'}
       >
-        <a
-          className="boldredit-dropdown__selectedtext"
-          onClick={this.toggleExpansion}
-          title={this.props.title}
-        >
+        <a className="boldr-editor-dropdown__selected-text" onClick={onExpandEvent} title={title}>
           {children[0]}
           <div
             className={classNames({
-              'boldredit-dropdown__carettoclose': expanded,
-              'boldredit-dropdown__carettoopen': !expanded,
+              'boldr-editor-dropdown__caret--close': expanded,
+              'boldr-editor-dropdown__caret--open': !expanded,
             })}
           />
         </a>
-        {this.state.expanded
-          ? <Holder>
+        {expanded
+          ? <ul
+              className={classNames(
+                'boldr-editor-dropdown__option-wrapper',
+                optionWrapperClassName,
+              )}
+              onClick={stopPropagation}
+            >
               {React.Children.map(options, (option, index) => {
                 const temp =
                   option &&
                   React.cloneElement(option, {
-                    onSelect: this.props.onChange,
+                    onSelect: this.onChange,
                     highlighted: highlighted === index,
                     setHighlighted: this.setHighlighted,
                     index,
                   });
                 return temp;
               })}
-            </Holder>
-          : null}
+            </ul>
+          : undefined}
       </div>
     );
   }

@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 // $FlowIssue
 import { AtomicBlockUtils } from 'draft-js';
 
@@ -9,15 +9,30 @@ import EmbeddedLayout from './EmbeddedLayout';
 export type Props = {
   onChange: Function,
   editorState: Object,
-  config?: Object,
+  modalHandler: Object,
+  config: Object,
+};
+type State = {
+  expanded: boolean,
 };
 
-class Embedded extends Component {
-  state: Object = {
+class Embedded extends React.Component<Props, State> {
+  state: State = {
     expanded: false,
   };
 
+  componentWillMount(): void {
+    const { modalHandler } = this.props;
+    modalHandler.registerCallback(this.expandCollapse);
+  }
+
+  componentWillUnmount(): void {
+    const { modalHandler } = this.props;
+    modalHandler.deregisterCallback(this.expandCollapse);
+  }
+
   props: Props;
+
   onExpandEvent: Function = (): void => {
     this.signalExpanded = !this.state.expanded;
   };
@@ -68,9 +83,8 @@ class Embedded extends Component {
   render(): Object {
     const { config } = this.props;
     const { expanded } = this.state;
-    const EmbeddedComponent = EmbeddedLayout;
     return (
-      <EmbeddedComponent
+      <EmbeddedLayout
         config={config}
         onChange={this.addEmbeddedLink}
         expanded={expanded}

@@ -1,17 +1,22 @@
+/* eslint-disable react/no-unused-prop-types */
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
-import { Paragraph, Heading1, Heading2, Heading3, QuoteLeft } from '@boldr/icons';
+import { Paragraph, Heading1, Heading2, Heading3, QuoteLeft, Embedded } from '@boldr/icons';
 import Option from '../../Option';
 
 export type Props = {
   onChange: ?Function,
   config: Object,
   currentState: Object,
+  expanded: boolean,
+  onExpandEvent: Function,
+  doExpand: Function,
+  doCollapse: Function,
 };
 
-class BlockTypeLayout extends Component {
+class BlockTypeLayout extends React.Component<Props, *> {
   props: Props;
 
   blockTypes: Array<Object> = [
@@ -40,12 +45,13 @@ class BlockTypeLayout extends Component {
       id: 5,
       icon: <QuoteLeft color="#222" />,
     },
+    { label: 'Code', id: 6, icon: <Embedded color="#222" /> },
   ];
 
-  renderButtons(blocks: Array<Object>): ReactElement {
+  renderButtons(blocks: Array<React.Node>): ReactElement {
     const { config: { className }, onChange, currentState: { blockType } } = this.props;
     return (
-      <div className={classNames('boldredit-block__wrapper', className)}>
+      <div className={classNames('boldr-editor-block__wrapper', className)}>
         {blocks.map(block =>
           <Option
             key={block.id}
@@ -61,9 +67,7 @@ class BlockTypeLayout extends Component {
   }
 
   render(): void {
-    const { config } = this.props;
-    const blocks = this.blockTypes.filter(({ label }) => config.options.includes(label));
-    return this.renderButtons(blocks);
+    return this.renderButtons(this.blockTypes);
   }
 }
 

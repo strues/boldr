@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
 import { AlignLeft, AlignCenter, AlignRight, AlignJustify } from '@boldr/icons';
 import Option from '../../Option';
@@ -10,15 +10,15 @@ export type Props = {
   currentState: Object,
 };
 
-export default class TextAlignLayout extends Component {
+export default class TextAlignLayout extends React.Component<Props, *> {
   props: Props;
 
   renderTextAlign(): Object {
     const { onChange, currentState: { textAlignment } } = this.props;
     return (
       <div
-        className={classNames('boldredit-textalign__wrapper')}
-        aria-label="boldredit-textalign-control"
+        className={classNames('boldr-editor-textalign__wrapper')}
+        aria-label="boldr-editor-textalign-control"
       >
         <Option
           value="left"

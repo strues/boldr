@@ -167,6 +167,13 @@ export const customInlineStylesMap = {
     bottom: -8,
     display: 'inline-flex',
   },
+  CODE: {
+    fontFamily: 'monospace',
+    wordWrap: 'break-word',
+    background: '#f1f1f1',
+    borderRadius: 3,
+    padding: '1px 3px',
+  },
 };
 
 /**
@@ -195,6 +202,7 @@ export const getCustomStyleMap = () => {
     ...customInlineStylesMap.fontFamily,
     SUPERSCRIPT: customInlineStylesMap.SUPERSCRIPT,
     SUBSCRIPT: customInlineStylesMap.SUBSCRIPT,
+    CODE: customInlineStylesMap.CODE,
   };
 };
 

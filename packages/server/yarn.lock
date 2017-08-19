@@ -2,7 +2,7 @@
 # yarn lockfile v1
 
 
-"@boldr/utils@^0.1.0-rc.1":
+"@boldr/utils@^0.1.0-rc.4":
   version "0.1.0-rc.4"
   resolved "https://registry.npmjs.org/@boldr/utils/-/utils-0.1.0-rc.4.tgz#ca7d60782665b17de236e64cc3c8db7266bb4683"
   dependencies:
@@ -222,7 +222,7 @@ axobject-query@^0.1.0:
   dependencies:
     ast-types-flow "0.0.7"
 
-babel-cli@^6.24.1:
+babel-cli@^6.26.0:
   version "6.26.0"
   resolved "https://registry.npmjs.org/babel-cli/-/babel-cli-6.26.0.tgz#502ab54874d7db88ad00b887a06383ce03d002f1"
   dependencies:
@@ -251,7 +251,7 @@ babel-code-frame@^6.22.0, babel-code-frame@^6.26.0:
     esutils "^2.0.2"
     js-tokens "^3.0.2"
 
-babel-core@^6.25.0, babel-core@^6.26.0:
+babel-core@^6.26.0:
   version "6.26.0"
   resolved "https://registry.npmjs.org/babel-core/-/babel-core-6.26.0.tgz#af32f78b31a6fcef119c87b0fd8d9753f03a0bb8"
   dependencies:
@@ -634,7 +634,7 @@ babel-plugin-transform-flow-strip-types@^6.22.0:
     babel-plugin-syntax-flow "^6.18.0"
     babel-runtime "^6.22.0"
 
-babel-plugin-transform-object-rest-spread@^6.23.0:
+babel-plugin-transform-object-rest-spread@^6.26.0:
   version "6.26.0"
   resolved "https://registry.npmjs.org/babel-plugin-transform-object-rest-spread/-/babel-plugin-transform-object-rest-spread-6.26.0.tgz#0f36692d50fef6b7e2d4b3ac1478137a963b7b06"
   dependencies:
@@ -1773,9 +1773,9 @@ flexbuffer@0.0.6:
   version "0.0.6"
   resolved "https://registry.npmjs.org/flexbuffer/-/flexbuffer-0.0.6.tgz#039fdf23f8823e440c38f3277e6fef1174215b30"
 
-flow-bin@^0.53.0:
-  version "0.53.0"
-  resolved "https://registry.npmjs.org/flow-bin/-/flow-bin-0.53.0.tgz#f7830e609ca02b12db4127114213cccc7c0771b9"
+flow-bin@^0.53.1:
+  version "0.53.1"
+  resolved "https://registry.npmjs.org/flow-bin/-/flow-bin-0.53.1.tgz#9b22b63a23c99763ae533ebbab07f88c88c97d84"
 
 for-each@^0.3.2:
   version "0.3.2"
@@ -2500,9 +2500,9 @@ jsonify@~0.0.0:
   version "0.0.0"
   resolved "https://registry.npmjs.org/jsonify/-/jsonify-0.0.0.tgz#2c74b6ee41d93ca51b7b5aaee8f503631d252a73"
 
-jsonwebtoken@^7.4.2:
-  version "7.4.2"
-  resolved "https://registry.npmjs.org/jsonwebtoken/-/jsonwebtoken-7.4.2.tgz#571b903c07e875c0fc59203d1ac78667d80e09cd"
+jsonwebtoken@^7.4.3:
+  version "7.4.3"
+  resolved "https://registry.npmjs.org/jsonwebtoken/-/jsonwebtoken-7.4.3.tgz#77f5021de058b605a1783fa1283e99812e645638"
   dependencies:
     joi "^6.10.1"
     jws "^3.1.4"

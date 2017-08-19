@@ -1,17 +1,17 @@
-// @flow
+/* @flow */
 export default class FocusHandler {
   inputFocused: boolean = false;
   editorMouseDown: boolean = false;
 
   onEditorMouseDown = (): boolean => {
-    (this: any).editorFocused = true;
+    this.editorFocused = true;
   };
 
   onInputMouseDown = (): boolean => {
-    (this: any).inputFocused = true;
+    this.inputFocused = true;
   };
 
-  isEditorBlur = (event: Event): boolean => {
+  isEditorBlur = (event: SyntheticEvent<>): void => {
     if (event.target.tagName === 'INPUT' && !this.editorFocused) {
       this.inputFocused = false;
       return true;
@@ -22,7 +22,7 @@ export default class FocusHandler {
     return false;
   };
 
-  isEditorFocused = (): boolean => {
+  isEditorFocused = (): void => {
     if (!this.inputFocused) {
       return true;
     }
@@ -30,7 +30,7 @@ export default class FocusHandler {
     return false;
   };
 
-  isToolbarFocused = (): boolean => {
+  isToolbarFocused = (): void => {
     if (!this.editorFocused) {
       return true;
     }
@@ -38,5 +38,5 @@ export default class FocusHandler {
     return false;
   };
 
-  isInputFocused = (): boolean => this.inputFocused;
+  isInputFocused = (): void => this.inputFocused;
 }

@@ -1,19 +1,35 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 // $FlowIssue
 import { AtomicBlockUtils } from 'draft-js';
+
 import ImageLayout from './ImageLayout';
 
 export type Props = {
   onChange: Function,
   editorState: Object,
   config: Object,
+  modalHandler: Object,
 };
-class Image extends Component {
-  state: Object = {
+type State = {
+  expanded: boolean,
+};
+
+class ImageControl extends React.Component<Props, State> {
+  state: State = {
     expanded: false,
   };
+
+  componentWillMount(): void {
+    const { modalHandler } = this.props;
+    modalHandler.registerCallback(this.expandCollapse);
+  }
+
+  componentWillUnmount(): void {
+    const { modalHandler } = this.props;
+    modalHandler.deregisterCallback(this.expandCollapse);
+  }
 
   props: Props;
 
@@ -24,28 +40,24 @@ class Image extends Component {
     this.signalExpanded = false;
   };
 
-  handleExpandEvent: Function = (): void => {
+  onExpandEvent: Function = (): void => {
     this.signalExpanded = !this.state.expanded;
   };
 
-  handleExpand: Function = (): void => {
+  doExpand: Function = (): void => {
     this.setState({
       expanded: true,
     });
   };
 
-  handleCollapse: Function = (): void => {
+  doCollapse: Function = (): void => {
     this.setState({
       expanded: false,
     });
   };
 
-  addImage: Function = (src: string, height: string, width: string, alt: string): void => {
-    const { editorState, onChange, config } = this.props;
-    const entityData = { src, height, width };
-    if (config.alt.present) {
-      entityData.alt = alt;
-    }
+  addImage: Function = (src: string, height: string, width: string): void => {
+    const { editorState, onChange } = this.props;
     const entityKey = editorState
       .getCurrentContent()
       .createEntity('IMAGE', 'MUTABLE', { src, height, width })
@@ -58,18 +70,17 @@ class Image extends Component {
   render(): Object {
     const { config } = this.props;
     const { expanded } = this.state;
-    const ImageComponent = ImageLayout;
     return (
-      <ImageComponent
+      <ImageLayout
         config={config}
         onChange={this.addImage}
         expanded={expanded}
-        onExpandEvent={this.handleExpandEvent}
-        doExpand={this.handleExpand}
-        doCollpase={this.handleCollapse}
+        onExpandEvent={this.onExpandEvent}
+        doExpand={this.doExpand}
+        doCollpase={this.doCollpase}
       />
     );
   }
 }
 
-export default Image;
+export default ImageControl;

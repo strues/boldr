@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 // $FlowIssue
 import { EditorState } from 'draft-js';
 
@@ -12,8 +12,14 @@ export type Props = {
   config: Object,
 };
 
-export default class History extends Component {
-  state: Object = {
+type State = {
+  expanded: boolean,
+  undoDisabled: boolean,
+  redoDisabled: boolean,
+};
+
+export default class History extends React.Component<Props, State> {
+  state: State = {
     expanded: false,
     undoDisabled: false,
     redoDisabled: false,
@@ -27,7 +33,7 @@ export default class History extends Component {
         redoDisabled: editorState.getRedoStack().size === 0,
       });
     }
-    // modalHandler.registerCallBack(this.expandCollapse);
+    // modalHandler.registerCallback(this.expandCollapse);
   }
 
   componentWillReceiveProps(properties: Object): void {

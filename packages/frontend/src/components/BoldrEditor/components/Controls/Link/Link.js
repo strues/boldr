@@ -1,6 +1,7 @@
+/* eslint-disable react/no-unused-prop-types */
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 // $FlowIssue
 import { RichUtils, EditorState, Modifier } from 'draft-js';
 import { getSelectionText, getEntityRange, getSelectionEntity } from '../../../utils';
@@ -9,23 +10,31 @@ import LinkLayout from './LinkLayout';
 
 export type Props = {
   onChange: Function,
-  editorState: Object,
+  editorState: EditorState,
   config: Object,
+  modalHandler: Object,
 };
 
-class Link extends Component {
-  state: Object = {
+type State = {
+  expanded: boolean,
+  link: any,
+  selectionText: string,
+  currentEntity: Object,
+};
+
+class Link extends React.Component<Props, State> {
+  state = {
     expanded: false,
   };
 
   componentWillMount(): void {
-    const { editorState } = this.props;
+    const { editorState, modalHandler } = this.props;
     if (editorState) {
       this.setState({
         currentEntity: getSelectionEntity(editorState),
       });
     }
-    // this.props.modalHandler.registerCallBack(this.expandCollapse);
+    modalHandler.registerCallback(this.expandCollapse);
   }
 
   componentWillReceiveProps(properties: Object): void {
@@ -34,6 +43,11 @@ class Link extends Component {
       newState.currentEntity = getSelectionEntity(properties.editorState);
     }
     this.setState(newState);
+  }
+
+  componentWillUnmount(): void {
+    const { modalHandler } = this.props;
+    modalHandler.deregisterCallback(this.expandCollapse);
   }
 
   onExpandEvent: Function = (): void => {

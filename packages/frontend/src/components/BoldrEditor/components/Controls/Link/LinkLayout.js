@@ -1,22 +1,32 @@
+/* eslint-disable react/no-unused-prop-types */
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
 import Link from '@boldr/icons/Link';
 import Unlink from '@boldr/icons/Unlink';
-import Dialog from '@boldr/ui/Dialog';
 import Option from '../../Option';
+import { stopPropagation } from '../../../utils/common';
 
 export type Props = {
   expanded?: boolean,
   doCollapse?: Function,
+  doExpand: Function,
   onExpandEvent?: Function,
   config: Object,
   onChange: Function,
   currentState: Object,
 };
-class LinkLayout extends Component {
-  state: Object = {
+
+type State = {
+  showModal: boolean,
+  linkTarget: string,
+  linkTitle: string,
+  linkTargetOption: string,
+};
+
+class LinkLayout extends React.Component<Props, State> {
+  state = {
     showModal: false,
     linkTarget: '',
     linkTitle: '',
@@ -33,6 +43,7 @@ class LinkLayout extends Component {
       });
     }
   }
+
   props: Props;
 
   removeLink: Function = (): void => {
@@ -76,66 +87,78 @@ class LinkLayout extends Component {
     });
   };
 
+  forceExpandAndShowModal: Function = (): void => {
+    const { doExpand, currentState: { link, selectionText } } = this.props;
+    const { linkTargetOption } = this.state;
+    doExpand();
+    this.setState({
+      showModal: true,
+      linkTarget: link && link.target,
+      linkTargetOption: (link && link.targetOption) || linkTargetOption,
+      linkTitle: (link && link.title) || selectionText,
+    });
+  };
   /*
     @todo:
     prevent user from opening link modal w/out a linkTitle or placeholder
     to avoid controlled/uncontrolled
    */
   renderAddLinkModal() {
-    const { doCollapse } = this.props;
-    const { linkTitle, linkTarget, linkTargetOption, showModal } = this.state;
+    const { doCollapse, config: { popupClassName } } = this.props;
+    const { linkTitle, linkTarget, linkTargetOption } = this.state;
     return (
-      <Dialog title="Add Link" isVisible={showModal} onClose={this.hideModal}>
-        <div className="boldredit-link__modal">
-          <span className="boldredit-link__modal-label">Link Title</span>
+      <div
+        className={classNames('boldr-editor-link__modal', popupClassName)}
+        onClick={stopPropagation}
+      >
+        <span className="boldr-editor-link__modal-label">Link Title</span>
+        <input
+          className="boldr-editor-link__modal-input"
+          onChange={this.updateValue}
+          onBlur={this.updateValue}
+          name="linkTitle"
+          value={linkTitle}
+        />
+        <span className="boldr-editor-link__modal-label">Link Target</span>
+        <input
+          className="boldr-editor-link__modal-input"
+          onChange={this.updateValue}
+          onBlur={this.updateValue}
+          name="linkTarget"
+          value={linkTarget}
+        />
+        <span className="boldr-editor-link__modal-target-option">
           <input
-            className="boldredit-link__modal-input"
-            onChange={this.updateValue}
-            onBlur={this.updateValue}
-            name="linkTitle"
-            value={linkTitle}
+            type="checkbox"
+            defaultChecked={linkTargetOption === '_blank'}
+            value="_blank"
+            onChange={this.updateTarget}
           />
-          <span className="boldredit-link__modal-label">Link Target</span>
-          <input
-            className="boldredit-link__modal-input"
-            onChange={this.updateValue}
-            onBlur={this.updateValue}
-            name="linkTarget"
-            value={linkTarget}
-          />
-          <span className="boldredit-link__modal-target-option">
-            <input
-              type="checkbox"
-              defaultChecked={linkTargetOption === '_blank'}
-              value="_blank"
-              onChange={this.updateTarget}
-            />
-            <span>Open link in new window</span>
-          </span>
-          <span className="boldredit-link__modal-buttonsection">
-            <button
-              className="boldredit-link__modal-btn"
-              onClick={this.addLink}
-              disabled={!linkTarget || !linkTitle}
-            >
-              Add
-            </button>
-            <button className="boldredit-link__modal-btn" onClick={doCollapse}>
-              Cancel
-            </button>
-          </span>
-        </div>
-      </Dialog>
+          <span>Open link in new window</span>
+        </span>
+        <span className="boldr-editor-link__modal-button-section">
+          <button
+            className="boldr-editor-link__modal-btn"
+            onClick={this.addLink}
+            disabled={!linkTarget || !linkTitle}
+          >
+            Add
+          </button>
+          <button className="boldr-editor-link__modal-btn" onClick={doCollapse}>
+            Cancel
+          </button>
+        </span>
+      </div>
     );
   }
 
   renderLink(): Object {
-    const { config: { options, link, unlink, className }, currentState } = this.props;
+    const { config: { options, link, unlink, className }, expanded, currentState } = this.props;
     const { showModal } = this.state;
     return (
       <div
-        className={classNames('boldredit-link__wrapper', className)}
-        aria-label="boldredit-link__control"
+        className={classNames('boldr-editor-link__wrapper', className)}
+        aria-label="boldr-editor-link__control"
       >
         {options.indexOf('link') >= 0 &&
           <Option
@@ -158,7 +181,7 @@ class LinkLayout extends Component {
           >
             <Unlink color="#222" size="1em" />
           </Option>}
-        {showModal ? this.renderAddLinkModal() : null}
+        {expanded && showModal ? this.renderAddLinkModal() : undefined}
       </div>
     );
   }

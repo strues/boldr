@@ -1,22 +1,26 @@
+/* eslint-disable react/no-unused-prop-types */
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
-import Dialog from '@boldr/ui/Dialog';
 import PaintBrush from '@boldr/icons/PaintBrush';
-import uniqueId from 'lodash/uniqueId';
+import { stopPropagation } from '../../../utils/common';
 import Option from '../../Option';
 
 type Props = {
   expanded: ?boolean,
   onChange: ?Function,
   config: Object,
+  onExpandEvent: Function,
   currentState: ?Object,
 };
 
-class ColorPickerLayout extends Component {
-  state: Object = {
-    showModal: false,
+type State = {
+  currentStyle: string,
+};
+
+class ColorPickerLayout extends React.Component<Props, State> {
+  state = {
     currentStyle: 'color',
   };
 
@@ -27,7 +31,9 @@ class ColorPickerLayout extends Component {
       });
     }
   }
+
   props: Props;
+
   setCurrentStyleBgcolor: Function = (): void => {
     this.setState({
       currentStyle: 'bgcolor',
@@ -39,16 +45,7 @@ class ColorPickerLayout extends Component {
       currentStyle: 'color',
     });
   };
-  openModal: Function = (): void => {
-    this.setState({
-      showModal: true,
-    });
-  };
-  hideModal: Function = (): void => {
-    this.setState({
-      showModal: false,
-    });
-  };
+
   onChange: Function = (color: string): void => {
     const { onChange } = this.props;
     const { currentStyle } = this.state;
@@ -56,66 +53,64 @@ class ColorPickerLayout extends Component {
   };
 
   renderModal: Function = (): Object => {
-    const { config: { colors }, currentState: { color, bgColor } } = this.props;
+    const { config: { popupClassName, colors }, currentState: { color, bgColor } } = this.props;
     const { currentStyle } = this.state;
     const currentSelectedColor = currentStyle === 'color' ? color : bgColor;
     return (
-      <Dialog
-        title="Color Picker"
-        isVisible={this.state.showModal}
-        onClose={this.hideModal}
-        closeable
+      <div
+        className={classNames('boldr-editor-colorpicker__modal', popupClassName)}
+        onClick={stopPropagation}
       >
-        <span className="boldredit-colorpicker__modal-header">
+        <span className="boldr-editor-colorpicker__modal-header">
           <span
-            className={classNames('boldredit-colorpicker__modal-style-label', {
-              'boldredit-colorpicker__modal-style-label-active': currentStyle === 'color',
+            className={classNames('boldr-editor-colorpicker__modal-style-label', {
+              'boldr-editor-colorpicker__modal-style-label--active': currentStyle === 'color',
             })}
             onClick={this.setCurrentStyleColor}
           >
-            Text Color
+            Text
           </span>
           <span
-            className={classNames('boldredit-colorpicker__modal-style-label', {
-              'boldredit-colorpicker__modal-style-label-active': currentStyle === 'bgcolor',
+            className={classNames('boldr-editor-colorpicker__modal-style-label', {
+              'boldr-editor-colorpicker__modal-style-label--active': currentStyle === 'bgcolor',
             })}
             onClick={this.setCurrentStyleBgcolor}
           >
-            Background Color
+            Background
           </span>
         </span>
-        <span className="boldredit-colorpicker__modal-options">
-          {colors.map(color =>
+        <span className="boldr-editor-colorpicker__modal-options">
+          {colors.map((color, index) =>
             <Option
               value={color}
-              key={uniqueId()}
-              className="boldredit-colorpicker__option"
-              activeClassName="boldredit-colorpicker__option--active"
+              key={index}
+              className="boldr-editor-colorpicker__option"
+              activeClassName="boldr-editor-colorpicker__option--active"
               active={currentSelectedColor === color}
               onClick={this.onChange}
             >
-              <span style={{ backgroundColor: color }} className="boldredit-colorpicker__cube" />
+              <span style={{ backgroundColor: color }} className="boldr-editor-colorpicker__cube" />
             </Option>,
           )}
         </span>
-      </Dialog>
+      </div>
     );
   };
 
   render(): Object {
-    const { expanded } = this.props;
+    const { expanded, onExpandEvent } = this.props;
     return (
       <div
-        className="boldredit-colorpicker__wrapper"
+        className="boldr-editor-colorpicker__wrapper"
         aria-haspopup="true"
         aria-expanded={expanded}
-        aria-label="boldredit-color-picker"
+        aria-label="boldr-editor-color-picker"
         title={this.props.config.title}
       >
-        <Option onClick={this.openModal} className={classNames(this.props.config.className)}>
-          <PaintBrush color="#222" />
+        <Option onClick={onExpandEvent} className={classNames(this.props.config.className)}>
+          <PaintBrush color="#222" onClick={onExpandEvent} />
         </Option>
-        {this.renderModal()}
+        {expanded ? this.renderModal() : undefined}
       </div>
     );
   }

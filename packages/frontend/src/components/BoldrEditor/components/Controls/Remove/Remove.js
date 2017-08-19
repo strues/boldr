@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 // $FlowIssue
 import { EditorState, Modifier } from 'draft-js';
 import { getSelectionCustomInlineStyle, forEach } from '../../../utils';
@@ -13,12 +13,17 @@ export type Props = {
   config: Object,
 };
 
-export default class Remove extends Component {
-  state = {
+type State = {
+  expanded: boolean,
+};
+
+export default class Remove extends React.Component<Props, State> {
+  state: State = {
     expanded: false,
   };
 
   props: Props;
+
   removeAllInlineStyles: Function = (editorState: EditorState): void => {
     let contentState = editorState.getCurrentContent();
     [
@@ -75,7 +80,7 @@ export default class Remove extends Component {
     });
   };
 
-  render(): Object {
+  render(): React.Node {
     const { config } = this.props;
     const { expanded } = this.state;
     const RemoveComponent = config.component || RemoveLayout;

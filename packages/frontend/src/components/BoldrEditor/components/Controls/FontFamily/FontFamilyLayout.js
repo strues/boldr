@@ -1,8 +1,7 @@
 /* @flow weak */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
-import uniqueId from 'lodash/uniqueId';
 import { Dropdown, DropdownOption } from '../../Dropdown';
 
 export type Props = {
@@ -15,8 +14,12 @@ export type Props = {
   currentState: Object,
 };
 
-class FontFamilyLayout extends Component {
-  state: Object = {
+type State = {
+  defaultFontFamily: string,
+};
+
+class FontFamilyLayout extends React.Component<Props, State> {
+  state = {
     defaultFontFamily: undefined,
   };
 
@@ -52,23 +55,29 @@ class FontFamilyLayout extends Component {
         options.some(opt => opt.toLowerCase() === defaultFontFamily.toLowerCase()) &&
         defaultFontFamily);
     return (
-      <div className="boldredit-fontfam__wrapper" aria-label="boldredit-fontfamily-control">
+      <div
+        className="boldr-editor-fontfamily__wrapper"
+        aria-label="boldr-editor-fontfamily-control"
+      >
         <Dropdown
-          className={classNames('boldredit-fontfam__dropdown', className)}
-          optionWrapperClassName={classNames('boldredit-fontfam__optionwrapper', dropdownClassName)}
+          className={classNames('boldr-editor-fontfamily__dropdown', className)}
+          optionWrapperClassName={classNames(
+            'boldr-editor-fontfam__optionwrapper',
+            dropdownClassName,
+          )}
           onChange={onChange}
           expanded={expanded}
           doExpand={doExpand}
-          ariaLabel="boldredit-dropdown-control"
+          ariaLabel="boldr-editor-dropdown-control"
           doCollapse={doCollapse}
           onExpandEvent={onExpandEvent}
           title={title}
         >
-          <span className="boldredit-fontfam__placeholder">
+          <span className="boldr-editor-fontfamily__placeholder">
             {currentFontFamily || 'Font Family'}
           </span>
-          {options.map(family =>
-            <DropdownOption active={currentFontFamily === family} value={family} key={uniqueId()}>
+          {options.map((family, index) =>
+            <DropdownOption active={currentFontFamily === family} value={family} key={index}>
               {family}
             </DropdownOption>,
           )}

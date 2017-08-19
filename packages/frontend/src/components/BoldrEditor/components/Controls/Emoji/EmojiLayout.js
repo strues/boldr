@@ -1,10 +1,10 @@
 /* @flow */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import Smile from '@boldr/icons/Smile';
-import uniqueId from 'lodash/uniqueId';
-import Dialog from '@boldr/ui/Dialog';
+import { stopPropagation } from '../../../utils/common';
 import Option from '../../Option';
 
 export type Props = {
@@ -14,56 +14,52 @@ export type Props = {
 };
 
 class EmojiLayout extends Component {
-  state = {
-    showModal: false,
+  static propTypes: Object = {
+    expanded: PropTypes.bool,
+    onExpandEvent: PropTypes.func,
+    onChange: PropTypes.func,
+    config: PropTypes.object,
   };
-  props: Props;
+
   onChange: Function = (event: Object): void => {
     const { onChange } = this.props;
     onChange(event.target.innerHTML);
   };
-  openModal: Function = (): void => {
-    this.setState({
-      showModal: true,
-    });
-  };
-  hideModal: Function = (): void => {
-    this.setState({
-      showModal: false,
-    });
-  };
+
   renderEmojiModal(): Object {
+    const { config: { popupClassName, emojis } } = this.props;
     return (
-      <Dialog title="Add Emoji" isVisible={this.state.showModal} onClose={this.hideModal}>
-        <div className={classNames('boldredit-emoji-modal')}>
-          {this.props.config.emojis.map(emoji =>
-            <span key={uniqueId()} className="boldredit-emoji-icon" alt="" onClick={this.onChange}>
-              {emoji}
-            </span>,
-          )}
-        </div>
-      </Dialog>
+      <div
+        className={classNames('boldr-editor-emoji__modal', popupClassName)}
+        onClick={stopPropagation}
+      >
+        {emojis.map((emoji, index) =>
+          <span key={index} className="boldr-editor-emoji__icon" alt="" onClick={this.onChange}>
+            {emoji}
+          </span>,
+        )}
+      </div>
     );
   }
 
   render(): Object {
-    const { expanded } = this.props;
+    const { config: { icon, className, title }, expanded, onExpandEvent } = this.props;
     return (
       <div
-        className="boldredit-emoji-wrapper"
+        className="boldr-editor-emoji__wrapper"
         aria-haspopup="true"
-        aria-label="boldredit-emoji-control"
+        aria-label="boldr-editor-emoji__control"
         aria-expanded={expanded}
-        title={this.props.config.title}
+        title={title}
       >
         <Option
-          className={classNames(this.props.config.className)}
+          className={classNames(className)}
           value="unordered-list-item"
-          onClick={this.openModal}
+          onClick={onExpandEvent}
         >
           <Smile color="#222" />
         </Option>
-        {this.renderEmojiModal()}
+        {expanded ? this.renderEmojiModal() : undefined}
       </div>
     );
   }

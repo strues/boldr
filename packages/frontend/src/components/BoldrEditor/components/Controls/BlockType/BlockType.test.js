@@ -3,7 +3,7 @@
 import React from 'react';
 import { mount } from 'enzyme';
 import { EditorState, convertFromHTML, ContentState } from 'draft-js';
-
+import ModalHandler from '../../../core/eventHandlers/modals';
 import defaultToolbar from '../../../config/defaultToolbar';
 
 import BlockType from './BlockType';
@@ -20,6 +20,7 @@ describe('BlockType test suite', () => {
           onChange={() => {}}
           editorState={editorState}
           config={{ ...defaultToolbar.blockType, inDropdown: false }}
+          modalHandler={new ModalHandler()}
         />,
       )
         .html()
@@ -33,8 +34,9 @@ describe('BlockType test suite', () => {
         onChange={() => {}}
         editorState={editorState}
         config={{ ...defaultToolbar.blockType, inDropdown: false }}
+        modalHandler={new ModalHandler()}
       />,
     );
-    expect(block.find('Option').length).toEqual(5);
+    expect(block.find('Option').length).toEqual(6);
   });
 });

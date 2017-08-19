@@ -6,6 +6,7 @@ import { EditorState, convertFromHTML, ContentState } from 'draft-js';
 
 import { Dropdown } from '../../Dropdown';
 import defaultToolbar from '../../../config/defaultToolbar';
+import ModalHandler from '../../../core/eventHandlers/modals';
 import FontFamily from './FontFamily';
 
 describe('<FontFamily />', () => {
@@ -20,6 +21,7 @@ describe('<FontFamily />', () => {
           onChange={() => {}}
           editorState={editorState}
           config={defaultToolbar.fontFamily}
+          modalHandler={new ModalHandler()}
         />,
       )
         .html()
@@ -33,6 +35,7 @@ describe('<FontFamily />', () => {
         onChange={() => {}}
         editorState={editorState}
         config={defaultToolbar.fontFamily}
+        modalHandler={new ModalHandler()}
       />,
     );
     expect(control.childAt(0).props().children.length, 2).toBeTruthy();

@@ -3,6 +3,7 @@
 import React from 'react';
 import { EditorState, convertFromHTML, ContentState } from 'draft-js';
 import { mount } from 'enzyme';
+import ModalHandler from '../../../core/eventHandlers/modals';
 import defaultToolbar from '../../../config/defaultToolbar';
 import Image from './Image';
 
@@ -13,7 +14,14 @@ describe('ImageControl test suite', () => {
 
   it('should have a div when rendered', () => {
     expect(
-      mount(<Image onChange={() => {}} editorState={editorState} config={defaultToolbar.image} />)
+      mount(
+        <Image
+          onChange={() => {}}
+          editorState={editorState}
+          config={defaultToolbar.image}
+          modalHandler={new ModalHandler()}
+        />,
+      )
         .html()
         .startsWith('<div'),
     ).toBe(true);
@@ -21,18 +29,13 @@ describe('ImageControl test suite', () => {
 
   it('should have 1 child element by default', () => {
     const control = mount(
-      <Image onChange={() => {}} editorState={editorState} config={defaultToolbar.image} />,
+      <Image
+        onChange={() => {}}
+        editorState={editorState}
+        config={defaultToolbar.image}
+        modalHandler={new ModalHandler()}
+      />,
     );
     expect(control.children().length).toEqual(1);
-  });
-
-  it('should set signalExpanded to true when option is clicked', () => {
-    const control = mount(
-      <Image onChange={() => {}} editorState={editorState} config={defaultToolbar.image} />,
-    );
-    const imageControl = control.find('Image');
-    expect(imageControl.node.signalExpanded).toBeFalsy();
-    control.find('Option').simulate('click');
-    expect(imageControl.node.signalExpanded).toBeTruthy();
   });
 });

@@ -4,3 +4,4 @@ buildClient
 buildServer
 .vscode
 coverage
+packages/frontend/BoldrText/

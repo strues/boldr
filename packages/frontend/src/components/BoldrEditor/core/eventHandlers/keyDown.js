@@ -1,18 +1,17 @@
-/* @flow */
-let callBacks = [];
+let callbacks = [];
 
 export default {
-  onKeyDown: (event: Object) => {
-    callBacks.forEach(callBack => {
-      callBack(event);
+  onKeyDown: event => {
+    callbacks.forEach(callback => {
+      callback(event);
     });
   },
 
-  registerCallBack: (callBack: Function): void => {
-    callBacks.push(callBack);
+  registerCallback: callback => {
+    callbacks.push(callback);
   },
 
-  deregisterCallBack: (callBack: Function): void => {
-    callBacks = callBacks.filter(cb => cb !== callBack);
+  deregisterCallback: callback => {
+    callbacks = callbacks.filter(cb => cb !== callback);
   },
 };
