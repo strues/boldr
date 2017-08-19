@@ -7,8 +7,8 @@ import { StyleClasses } from '../../../../../theme/styleClasses';
 
 const BASE_ELEMENT = StyleClasses.DASHBOARD_FOOTER;
 type Props = {
-  className: ?string,
-  copyright: ?string,
+  className?: string,
+  copyright?: string,
 };
 
 const DashboardFooter = (props: Props) => {

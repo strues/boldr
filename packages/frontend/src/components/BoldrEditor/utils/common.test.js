@@ -1,7 +1,7 @@
 import { spy } from 'sinon';
 import { forEach, size } from './common';
 
-describe('forEach test suite', () => {
+describe('common -- forEach', () => {
   const obj = {
     1: 1,
     2: 2,
@@ -22,7 +22,7 @@ describe('forEach test suite', () => {
   });
 });
 
-describe('size test suite', () => {
+describe('common -- size', () => {
   it('should return undefined if both operands are undefined', () => {
     expect.assertions(1);
     expect(size()).toBeUndefined();

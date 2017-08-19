@@ -6,10 +6,10 @@ import { Dropdown, DropdownOption } from '../../Dropdown';
 
 export type Props = {
   expanded: boolean,
-  onExpandEvent: ?Function,
-  doExpand: ?Function,
-  doCollapse: ?Function,
-  onChange: ?Function,
+  onExpandEvent?: Function,
+  doExpand?: Function,
+  doCollapse?: Function,
+  onChange?: Function,
   config: Object,
   currentState: Object,
 };
@@ -55,25 +55,19 @@ class FontFamilyLayout extends React.Component<Props, State> {
         options.some(opt => opt.toLowerCase() === defaultFontFamily.toLowerCase()) &&
         defaultFontFamily);
     return (
-      <div
-        className="boldr-editor-fontfamily__wrapper"
-        aria-label="boldr-editor-fontfamily-control"
-      >
+      <div className="be-fontfamily__wrapper" aria-label="be-fontfamily-control">
         <Dropdown
-          className={classNames('boldr-editor-fontfamily__dropdown', className)}
-          optionWrapperClassName={classNames(
-            'boldr-editor-fontfam__optionwrapper',
-            dropdownClassName,
-          )}
+          className={classNames('be-fontfamily__dropdown', className)}
+          optionWrapperClassName={classNames('be-fontfam__optionwrapper', dropdownClassName)}
           onChange={onChange}
           expanded={expanded}
           doExpand={doExpand}
-          ariaLabel="boldr-editor-dropdown-control"
+          ariaLabel="be-dropdown-control"
           doCollapse={doCollapse}
           onExpandEvent={onExpandEvent}
           title={title}
         >
-          <span className="boldr-editor-fontfamily__placeholder">
+          <span className="be-fontfamily__placeholder">
             {currentFontFamily || 'Font Family'}
           </span>
           {options.map((family, index) =>

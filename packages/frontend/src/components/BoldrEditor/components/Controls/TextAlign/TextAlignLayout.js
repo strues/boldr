@@ -1,5 +1,5 @@
+/* eslint-disable react/no-array-index-key, react/no-unused-prop-types, no-inline-comments */
 /* @flow */
-
 import * as React from 'react';
 import classNames from 'classnames';
 import { AlignLeft, AlignCenter, AlignRight, AlignJustify } from '@boldr/icons';
@@ -16,10 +16,7 @@ export default class TextAlignLayout extends React.Component<Props, *> {
   renderTextAlign(): Object {
     const { onChange, currentState: { textAlignment } } = this.props;
     return (
-      <div
-        className={classNames('boldr-editor-textalign__wrapper')}
-        aria-label="boldr-editor-textalign-control"
-      >
+      <div className={classNames('be-textalign__wrapper')} aria-label="be-textalign-control">
         <Option
           value="left"
           active={textAlignment === 'left'}

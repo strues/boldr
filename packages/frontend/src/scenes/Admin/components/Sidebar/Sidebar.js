@@ -12,13 +12,13 @@ interface SidebarLink {
   id: number,
   label: boolean,
   link: string,
-  items: ?SidebarLinks,
+  items?: SidebarLinks,
 }
 
 export type SidebarLinks = Array<SidebarLink>;
 
 export type Props = {
-  navClassName: ?string,
+  navClassName?: string,
   items: SidebarLinks,
   activeItem: string,
   // sidebar is hidden or visible? default visible

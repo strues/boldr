@@ -2,24 +2,29 @@
 /* @flow */
 
 import * as React from 'react';
-import classNames from 'classnames';
+import styled from 'styled-components';
 
 export type Props = {
   children: React.ChildrenArray<React.Node>,
-  value: ?any,
-  onClick: ?Function,
-  onSelect: ?Function,
-  setHighlighted: ?Function,
-  index: ?number,
-  disabled: ?boolean,
-  active: ?boolean,
-  highlighted: ?boolean,
-  className: ?string,
-  activeClassName: ?string,
-  disabledClassName: ?string,
-  highlightedClassName: ?string,
-  title: ?string,
+  value?: any,
+  onClick?: Function,
+  onSelect?: Function,
+  setHighlighted?: Function,
+  index?: number,
+  disabled?: boolean,
+  active?: boolean,
+  highlighted?: boolean,
+  className?: string,
+  title?: string,
 };
+
+const DropdownOpt = styled.li`
+  display: flex;
+  align-items: center;
+  min-height: 25px;
+  padding: 0 5px;
+  background: ${props => (props.highlighted ? '#f1f1f1' : '#fff')};
+`;
 
 export default class DropdownOption extends React.Component<Props, *> {
   props: Props;
@@ -47,33 +52,20 @@ export default class DropdownOption extends React.Component<Props, *> {
     setHighlighted(-1);
   };
 
-  render(): Object {
-    const {
-      children,
-      active,
-      disabled,
-      highlighted,
-      className,
-      activeClassName,
-      disabledClassName,
-      highlightedClassName,
-      title,
-    } = this.props;
+  render(): React.Node {
+    const { children, active, highlighted, title } = this.props;
     return (
-      <li
-        className={classNames('boldr-editor-dropdown__option--default', className, {
-          [`boldr-editor-dropdown__option--active ${activeClassName}`]: active,
-          [`boldr-editor-dropdown__option--highlighted ${highlightedClassName}`]: highlighted,
-          [`boldr-editor-dropdown__option--disabled ${disabledClassName}`]: disabled,
-        })}
+      <DropdownOpt
         onMouseEnter={this.setHighlighted}
         onMouseLeave={this.resetHighlighted}
         onClick={this.onClick}
         aria-selected={active}
+        active={active}
+        highlighted={highlighted}
         title={title}
       >
         {children}
-      </li>
+      </DropdownOpt>
     );
   }
 }

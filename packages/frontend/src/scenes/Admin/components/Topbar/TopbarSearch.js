@@ -16,7 +16,7 @@ class TopbarSearch extends PureComponent {
   static defaultProps = {
     placeholder: 'Search this site...',
   };
-  componentDidUpdate(prevProps: Object, prevState: ?Object) {
+  componentDidUpdate(prevProps: Object, prevState?: Object) {
     if (!prevProps.active && this.props.active) {
       (this: any)._input.focus();
     }

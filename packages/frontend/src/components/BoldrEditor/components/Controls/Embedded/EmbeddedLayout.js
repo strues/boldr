@@ -51,34 +51,31 @@ class EmbeddedLayout extends React.Component<Props, State> {
 
   rendeEmbeddedLinkModal(): Object {
     const { embeddedLink, height, width } = this.state;
-    const { config: { popupClassName }, doCollapse } = this.props;
+    const { config: { modalClassName }, doCollapse } = this.props;
     return (
-      <div
-        className={classNames('boldr-editor-embedded__modal', popupClassName)}
-        onClick={stopPropagation}
-      >
-        <div className="boldr-editor-embedded__modal-header">
-          <span className="boldr-editor-embedded__modal-header-option">
+      <div className={classNames('be-embedded__modal', modalClassName)} onClick={stopPropagation}>
+        <div className="be-embedded__modal-header">
+          <span className="be-embedded__modal-header-option">
             Embedded Link
-            <span className="boldr-editor-embedded__modal-header-label" />
+            <span className="be-embedded__modal-header-label" />
           </span>
         </div>
-        <div className="boldr-editor-embedded__modal-link-section">
+        <div className="be-embedded__modal-link-section">
           <input
-            className="boldr-editor-embedded__modal-link-input"
+            className="be-embedded__modal-link-input"
             placeholder="Enter link"
             onChange={this.updateValue}
             onBlur={this.updateValue}
             value={embeddedLink}
             name="embeddedLink"
           />
-          <div className="boldr-editor-embedded__modal-size">
+          <div className="be-embedded__modal-size">
             <input
               onChange={this.updateValue}
               onBlur={this.updateValue}
               value={height}
               name="height"
-              className="boldr-editor-embedded__modal-size-input"
+              className="be-embedded__modal-size-input"
               placeholder="Height"
             />
             <input
@@ -86,20 +83,20 @@ class EmbeddedLayout extends React.Component<Props, State> {
               onBlur={this.updateValue}
               value={width}
               name="width"
-              className="boldr-editor-embedded__modal-size-input"
+              className="be-embedded__modal-size-input"
               placeholder="Width"
             />
           </div>
         </div>
-        <span className="boldr-editor-embedded__modal-btn-section">
+        <span className="be-embedded__modal-btn-section">
           <button
-            className="boldr-editor-embedded__modal-btn"
+            className="be-embedded__modal-btn"
             onClick={this.onChange}
             disabled={!embeddedLink || !height || !width}
           >
             Add
           </button>
-          <button className="boldr-editor-embedded__modal-btn" onClick={doCollapse}>
+          <button className="be-embedded__modal-btn" onClick={doCollapse}>
             Cancel
           </button>
         </span>
@@ -111,10 +108,10 @@ class EmbeddedLayout extends React.Component<Props, State> {
     const { config: { className, title }, expanded, onExpandEvent } = this.props;
     return (
       <div
-        className="boldr-editor-embedded__wrapper"
+        className="be-embedded__wrapper"
         aria-haspopup="true"
         aria-expanded={expanded}
-        aria-label="boldr-editor-embedded__control"
+        aria-label="be-embedded__control"
       >
         <Option
           className={classNames(className)}

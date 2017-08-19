@@ -14,7 +14,7 @@ import TAGS_QUERY from '../../gql/tags.graphql';
 export type Props = {
   addTagMutation: Function,
   handleSubmit?: Function,
-  reset: ?Function,
+  reset?: Function,
   submitting?: boolean,
   fields?: Object,
   pristine?: boolean,

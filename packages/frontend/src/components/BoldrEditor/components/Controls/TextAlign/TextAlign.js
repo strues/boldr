@@ -8,13 +8,10 @@ import TextAlignLayout from './TextAlignLayout';
 
 type Props = {
   editorState: EditorState,
-  modalHandler: Object,
-  config: Object,
   onChange: Function,
 };
 
 type State = {
-  expanded: boolean,
   currentTextAlignment: string,
 };
 
@@ -31,28 +28,6 @@ export default class TextAlign extends React.Component<Props, State> {
     }
   }
   props: Props;
-  expandCollapse: Function = (): void => {
-    this.setState({
-      expanded: this.signalExpanded,
-    });
-    this.signalExpanded = false;
-  };
-
-  onExpandEvent: Function = (): void => {
-    this.signalExpanded = !this.state.expanded;
-  };
-
-  doExpand: Function = (): void => {
-    this.setState({
-      expanded: true,
-    });
-  };
-
-  doCollapse: Function = (): void => {
-    this.setState({
-      expanded: false,
-    });
-  };
 
   addBlockAlignmentData: Function = (value: string) => {
     const { editorState, onChange } = this.props;
@@ -64,14 +39,10 @@ export default class TextAlign extends React.Component<Props, State> {
     }
   };
 
-  render(): Object {
-    const { expanded, currentTextAlignment } = this.state;
+  render(): React.Node {
+    const { currentTextAlignment } = this.state;
     return (
       <TextAlignLayout
-        expanded={expanded}
-        onExpandEvent={this.onExpandEvent}
-        doExpand={this.doExpand}
-        doCollapse={this.doCollapse}
         currentState={{ textAlignment: currentTextAlignment }}
         onChange={this.addBlockAlignmentData}
       />

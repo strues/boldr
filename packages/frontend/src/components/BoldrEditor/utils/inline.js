@@ -1,5 +1,5 @@
 /* @flow */
-// $FlowIssue
+
 import { Entity, Modifier, RichUtils, EditorState, ContentBlock } from 'draft-js';
 import { getSelectedBlocksList, getSelectedBlock } from './block';
 
@@ -147,6 +147,27 @@ export function getEntityRange(editorState: EditorState, entityKey: string): any
   return entityRange;
 }
 
+export type SuperscriptStyle = {
+  fontSize?: number,
+  position?: 'relative' | 'absolute' | 'inline' | 'inherit' | 'initial',
+  top?: number,
+  display?: 'inline-flex' | 'inline-block' | 'flex' | 'block' | 'inherit' | 'initial',
+};
+export type SubscriptStyle = {
+  fontSize?: number,
+  position?: 'relative' | 'absolute' | 'inline' | 'inherit' | 'initial',
+  top?: number,
+  display?: 'inline-flex' | 'inline-block' | 'flex' | 'block' | 'inherit' | 'initial',
+};
+export type CodeStyle = {
+  fontFamily?: string,
+  wordWrap?: string,
+  background?: string,
+  borderRadius?: number,
+  padding?: string,
+};
+
+export type CustomStyleMap = { [style: string]: { [key: string]: any } };
 /**
 * Collection of all custom inline styles.
 */

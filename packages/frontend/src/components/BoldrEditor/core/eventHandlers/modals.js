@@ -12,7 +12,7 @@ export default class ModalHandler {
     });
   };
 
-  init = (wrapperId: number) => {
+  init = (wrapperId: string) => {
     const wrapper = document.getElementById(wrapperId); // eslint-disable-line no-undef
     wrapper.addEventListener('click', () => {
       this.editorFlag = true;

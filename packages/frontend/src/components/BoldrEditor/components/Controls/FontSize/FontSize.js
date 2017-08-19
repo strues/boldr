@@ -1,13 +1,14 @@
 /* @flow */
 
 import * as React from 'react';
+import type { EditorState } from 'draft-js';
 import { toggleCustomInlineStyle, getSelectionCustomInlineStyle } from '../../../utils';
 
 import FontSizeLayout from './FontSizeLayout';
 
 export type Props = {
   onChange: Function,
-  editorState: Object,
+  editorState: EditorState,
   modalHandler: Object,
   config: Object,
 };
@@ -93,7 +94,7 @@ export default class FontSize extends React.Component<Props, State> {
     }
   };
 
-  render(): Object {
+  render(): React.Node {
     const { config } = this.props;
     const { expanded, currentFontSize } = this.state;
 

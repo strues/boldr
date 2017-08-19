@@ -104,30 +104,27 @@ class LinkLayout extends React.Component<Props, State> {
     to avoid controlled/uncontrolled
    */
   renderAddLinkModal() {
-    const { doCollapse, config: { popupClassName } } = this.props;
+    const { doCollapse, config: { modalClassName } } = this.props;
     const { linkTitle, linkTarget, linkTargetOption } = this.state;
     return (
-      <div
-        className={classNames('boldr-editor-link__modal', popupClassName)}
-        onClick={stopPropagation}
-      >
-        <span className="boldr-editor-link__modal-label">Link Title</span>
+      <div className={classNames('be-link__modal', modalClassName)} onClick={stopPropagation}>
+        <span className="be-link__modal-label">Link Title</span>
         <input
-          className="boldr-editor-link__modal-input"
+          className="be-link__modal-input"
           onChange={this.updateValue}
           onBlur={this.updateValue}
           name="linkTitle"
           value={linkTitle}
         />
-        <span className="boldr-editor-link__modal-label">Link Target</span>
+        <span className="be-link__modal-label">Link Target</span>
         <input
-          className="boldr-editor-link__modal-input"
+          className="be-link__modal-input"
           onChange={this.updateValue}
           onBlur={this.updateValue}
           name="linkTarget"
           value={linkTarget}
         />
-        <span className="boldr-editor-link__modal-target-option">
+        <span className="be-link__modal-target-option">
           <input
             type="checkbox"
             defaultChecked={linkTargetOption === '_blank'}
@@ -136,15 +133,15 @@ class LinkLayout extends React.Component<Props, State> {
           />
           <span>Open link in new window</span>
         </span>
-        <span className="boldr-editor-link__modal-button-section">
+        <span className="be-link__modal-button-section">
           <button
-            className="boldr-editor-link__modal-btn"
+            className="be-link__modal-btn"
             onClick={this.addLink}
             disabled={!linkTarget || !linkTitle}
           >
             Add
           </button>
-          <button className="boldr-editor-link__modal-btn" onClick={doCollapse}>
+          <button className="be-link__modal-btn" onClick={doCollapse}>
             Cancel
           </button>
         </span>
@@ -152,14 +149,11 @@ class LinkLayout extends React.Component<Props, State> {
     );
   }
 
-  renderLink(): Object {
+  renderLink(): React.Node {
     const { config: { options, link, unlink, className }, expanded, currentState } = this.props;
     const { showModal } = this.state;
     return (
-      <div
-        className={classNames('boldr-editor-link__wrapper', className)}
-        aria-label="boldr-editor-link__control"
-      >
+      <div className={classNames('be-link__wrapper', className)} aria-label="be-link__control">
         {options.indexOf('link') >= 0 &&
           <Option
             value="unordered-list-item"
@@ -186,7 +180,7 @@ class LinkLayout extends React.Component<Props, State> {
     );
   }
 
-  render(): Object {
+  render(): React.Node {
     return this.renderLink();
   }
 }

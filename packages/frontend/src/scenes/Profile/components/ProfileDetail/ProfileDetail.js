@@ -11,7 +11,7 @@ const DetailLabel = styled.div`
 `;
 
 type Props = {
-  className: ?string,
+  className?: string,
   label: ReactElement,
   detail: string,
 };

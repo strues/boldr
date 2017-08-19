@@ -11,7 +11,7 @@ import type { SidebarLinks } from './Sidebar';
 const BASE_ELEMENT = StyleClasses.SIDEBAR_NAV;
 
 export type Props = {
-  navClassName: ?string,
+  navClassName?: string,
   items: SidebarLinks,
   activeItem: string,
   isExpanded: boolean,

@@ -5,11 +5,14 @@ import * as React from 'react';
 import classNames from 'classnames';
 import { Paragraph, Heading1, Heading2, Heading3, QuoteLeft, Embedded } from '@boldr/icons';
 import Option from '../../Option';
+import type { ToolbarBlockTypes } from './BlockType';
 
+type CurrentBlock = {
+  blockType: string,
+};
 export type Props = {
-  onChange: ?Function,
-  config: Object,
-  currentState: Object,
+  onChange?: Function,
+  currentState: CurrentBlock,
   expanded: boolean,
   onExpandEvent: Function,
   doExpand: Function,
@@ -19,7 +22,7 @@ export type Props = {
 class BlockTypeLayout extends React.Component<Props, *> {
   props: Props;
 
-  blockTypes: Array<Object> = [
+  blockTypes: ToolbarBlockTypes = [
     {
       label: 'Normal',
       id: 1,
@@ -48,10 +51,10 @@ class BlockTypeLayout extends React.Component<Props, *> {
     { label: 'Code', id: 6, icon: <Embedded color="#222" /> },
   ];
 
-  renderButtons(blocks: Array<React.Node>): ReactElement {
-    const { config: { className }, onChange, currentState: { blockType } } = this.props;
+  renderButtons(blocks: ToolbarBlockTypes): React.Node {
+    const { onChange, currentState: { blockType } } = this.props;
     return (
-      <div className={classNames('boldr-editor-block__wrapper', className)}>
+      <div className={classNames('be-block__wrapper')}>
         {blocks.map(block =>
           <Option
             key={block.id}
@@ -66,7 +69,7 @@ class BlockTypeLayout extends React.Component<Props, *> {
     );
   }
 
-  render(): void {
+  render(): React.Node {
     return this.renderButtons(this.blockTypes);
   }
 }

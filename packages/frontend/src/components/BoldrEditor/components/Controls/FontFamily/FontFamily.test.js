@@ -5,7 +5,7 @@ import { mount } from 'enzyme';
 import { EditorState, convertFromHTML, ContentState } from 'draft-js';
 
 import { Dropdown } from '../../Dropdown';
-import defaultToolbar from '../../../config/defaultToolbar';
+import defaultToolbar from '../../../core/config';
 import ModalHandler from '../../../core/eventHandlers/modals';
 import FontFamily from './FontFamily';
 

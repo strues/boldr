@@ -10,7 +10,7 @@ type Props = {
   handleSubmit?: Function,
   reset?: Function,
   submitting?: boolean,
-  fields: ?Array<Object>,
+  fields?: Array<Object>,
   pristine?: boolean,
   input: Object,
   hasDropdownValue: boolean,

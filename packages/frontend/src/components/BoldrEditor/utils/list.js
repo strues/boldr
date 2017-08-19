@@ -1,5 +1,4 @@
 /* @flow */
-// $FlowIssue
 import { ContentState, EditorState, ContentBlock } from 'draft-js';
 import { getSelectedBlocksMap } from './block';
 

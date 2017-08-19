@@ -8,10 +8,10 @@ import {
   convertToRaw,
   convertFromRaw,
   CompositeDecorator,
-  // $FlowIssue
 } from 'draft-js';
+import type { DraftDecoratorType } from 'draft-js';
+import styled from 'styled-components';
 import classNames from 'classnames';
-
 import {
   ModalHandler,
   FocusHandler,
@@ -29,70 +29,40 @@ import {
   filter,
   mergeRecursive,
 } from './utils';
-
+import type { CustomStyleMap } from './utils/inline';
 import * as Controls from './components/Controls';
 
 import { getLinkDecorator, getMentionDecorators, getHashtagDecorator } from './core/decorators';
 import getBlockRenderFunc from './core/blockRender';
-import defaultToolbar from './config/defaultToolbar';
+import defaultToolbar from './core/config';
+import type { ToolbarConfig } from './core/config';
+import type { BoldrEditorType } from './BoldrEditorType';
 
-export type ChangeHandler = (value: any) => any;
-
-export type Props = {
-  onChange?: Function,
-  onEditorStateChange?: Function,
-  onContentStateChange?: Function,
-  // initialContentState is deprecated
-  initialContentState?: Object,
-  defaultContentState?: Object,
-  contentState?: Object,
-  editorState?: Object,
-  defaultEditorState?: Object,
-  toolbarOnFocus?: boolean,
-  spellCheck?: boolean,
-  stripPastedStyles?: boolean,
-  toolbar?: Object,
-  toolbarCustomButtons?: Array<any>,
-  toolbarClassName?: string,
-  toolbarHidden?: boolean,
-  locale?: string,
-  localization?: Object,
-  editorClassName?: string,
-  wrapperClassName?: string,
-  toolbarStyle?: Object,
-  editorStyle?: Object,
-  wrapperStyle?: Object,
-  uploadCallback?: Function,
-  onFocus?: Function,
-  onBlur?: Function,
-  onTab?: Function,
-  mention?: Object,
-  hashtag?: Object,
-  textAlignment?: string,
-  readOnly?: boolean,
-  tabIndex?: number,
-  placeholder?: string,
-  ariaLabel?: string,
-  ariaOwneeID?: string,
-  ariaActiveDescendantID?: string,
-  ariaAutoComplete?: string,
-  ariaDescribedBy?: string,
-  ariaExpanded?: string,
-  ariaHasPopup?: string,
-  customBlockRenderFunc?: Function,
-  wrapperId?: number,
-  customDecorators?: Array<any>,
-};
+const EditorToolbar = styled.div`
+  display: inline-flex;
+  flex-shrink: 1;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  flex-direction: row;
+  padding: 6px 5px 0;
+  background: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 2px;
+  margin-bottom: 5px;
+  font-size: 15px;
+  user-select: none;
+  visibility: ${props => (props.toolbarShow ? 'visible' : 'hidden')};
+`;
 
 export type State = {
   editorState: Object,
   // is the editor focused
   editorFocused: boolean,
   // the toolbar config object
-  toolbar: Object,
+  toolbar: ToolbarConfig,
 };
 
-export default class BoldrEditor extends React.Component<Props, State> {
+export default class BoldrEditor extends React.Component<BoldrEditorType, State> {
   static defaultProps = {
     toolbarOnFocus: false,
     toolbarHidden: false,
@@ -100,15 +70,17 @@ export default class BoldrEditor extends React.Component<Props, State> {
     customDecorators: [],
   };
 
-  constructor(props: Props) {
+  constructor(props: BoldrEditorType) {
     super(props);
     const toolbar = mergeRecursive(defaultToolbar, props.toolbar);
+    // $FlowIssue
     this.state = {
       editorState: undefined,
       editorFocused: false,
       toolbar,
     };
-    this.wrapperId = `boldr-editor__wrapper-${Math.floor(Math.random() * 10000)}`;
+    const wrapperId = props.wrapperId ? props.wrapperId : Math.floor(Math.random() * 10000);
+    this.wrapperId = `boldr-editor__wrapper-${wrapperId}`;
     this.modalHandler = new ModalHandler();
     this.focusHandler = new FocusHandler();
     this.blockRendererFn = getBlockRenderFunc(
@@ -124,6 +96,8 @@ export default class BoldrEditor extends React.Component<Props, State> {
     this.customStyleMap = getCustomStyleMap();
   }
 
+  state: State;
+
   componentWillMount(): void {
     this.compositeDecorator = this.getCompositeDecorator();
     const editorState = this.createEditorState(this.compositeDecorator);
@@ -137,7 +111,7 @@ export default class BoldrEditor extends React.Component<Props, State> {
     this.modalHandler.init(this.wrapperId);
   }
 
-  componentWillReceiveProps(props) {
+  componentWillReceiveProps(props: BoldrEditorType) {
     const newState = {};
     if (this.props.toolbar !== props.toolbar) {
       const toolbar = mergeRecursive(defaultToolbar, props.toolbar);
@@ -176,7 +150,14 @@ export default class BoldrEditor extends React.Component<Props, State> {
     this.customStyleMap = getCustomStyleMap();
   }
 
-  props: Props;
+  wrapperId: string;
+  modalHandler: ModalHandler;
+  focusHandler: FocusHandler;
+  blockRendererFn: Function;
+  customStyleMap: CustomStyleMap;
+  compositeDecorator: DraftDecoratorType;
+  editorProps: Object;
+  props: BoldrEditorType;
 
   onEditorBlur: Function = (): void => {
     this.setState({
@@ -416,11 +397,9 @@ export default class BoldrEditor extends React.Component<Props, State> {
     const {
       toolbarCustomButtons,
       toolbarOnFocus,
-      toolbarClassName,
       toolbarHidden,
       editorClassName,
       wrapperClassName,
-      toolbarStyle,
       editorStyle,
       wrapperStyle,
       uploadCallback,
@@ -437,24 +416,25 @@ export default class BoldrEditor extends React.Component<Props, State> {
     return (
       <div
         id={this.wrapperId}
-        className={classNames('boldr-editor-wrapper', wrapperClassName)}
+        className={classNames('be-wrapper', wrapperClassName)}
         style={wrapperStyle}
         onClick={this.modalHandler.onEditorClick}
         onBlur={this.onWrapperBlur}
-        aria-label="boldr-editor-wrapper"
+        aria-label="be-wrapper"
       >
-        <div
-          className={classNames('boldr-editor-toolbar', toolbarClassName)}
-          style={{ visibility: toolbarShow ? 'visible' : 'hidden', ...toolbarStyle }}
-          onMouseDown={this.preventDefault}
-          aria-label="boldr-editor-toolbar"
+        <EditorToolbar
+          toolbarShow={toolbarShow}
+          // $FlowIssue
           aria-hidden={(!editorFocused && toolbarOnFocus).toString()}
           onFocus={this.onToolbarFocus}
+          onMouseDown={this.preventDefault}
+          aria-label="be-toolbar"
         >
           {toolbar.options.map((opt, index) => {
             const Control = Controls[opt];
             const config = toolbar[opt];
             if (opt === 'image' && uploadCallback) {
+              // $FlowIssue
               config.uploadCallback = uploadCallback;
             }
             return <Control key={index} {...controlProps} config={config} />;
@@ -463,10 +443,10 @@ export default class BoldrEditor extends React.Component<Props, State> {
             toolbarCustomButtons.map((button, index) =>
               React.cloneElement(button, { key: index, ...controlProps }),
             )}
-        </div>
+        </EditorToolbar>
         <div
           ref={this.setWrapperReference}
-          className={classNames('boldr-editor-main', editorClassName)}
+          className={classNames('be-main', editorClassName)}
           style={editorStyle}
           onClick={this.focusEditor}
           onFocus={this.onEditorFocus}

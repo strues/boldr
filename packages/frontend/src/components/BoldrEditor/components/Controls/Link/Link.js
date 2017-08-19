@@ -2,7 +2,6 @@
 /* @flow */
 
 import * as React from 'react';
-// $FlowIssue
 import { RichUtils, EditorState, Modifier } from 'draft-js';
 import { getSelectionText, getEntityRange, getSelectionEntity } from '../../../utils';
 
@@ -156,7 +155,7 @@ class Link extends React.Component<Props, State> {
     this.doCollapse();
   };
   props: Props;
-  render(): Object {
+  render(): React.Node {
     const { config } = this.props;
     const { expanded } = this.state;
     const { link, selectionText } = this.getCurrentValues();

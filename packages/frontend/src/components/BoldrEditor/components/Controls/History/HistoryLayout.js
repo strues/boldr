@@ -7,7 +7,7 @@ import Redo from '@boldr/icons/Redo';
 import Option from '../../Option';
 
 export type Props = {
-  onChange: ?Function,
+  onChange?: Function,
   config: Object,
   currentState: Object,
 };
@@ -26,8 +26,8 @@ export default class HistoryLayout extends Component<Props, *> {
     } = this.props;
     return (
       <div
-        className={classNames('boldr-editor-history__wrapper', className)}
-        aria-label="boldr-editor-history__control"
+        className={classNames('be-history__wrapper', className)}
+        aria-label="be-history__control"
       >
         <Option
           value="undo"

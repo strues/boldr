@@ -20,7 +20,7 @@ import {
 import NavItem from './NavItem';
 
 export type Props = {
-  me: ?User,
+  me?: User,
   isMobile: boolean,
   auth: Object,
   showHeader: () => void,
@@ -31,8 +31,8 @@ export type Props = {
   menu: Object,
   settings?: Array<Setting>,
   currentUser: User,
-  logoImg: ?string,
-  breakpoint: ?number,
+  logoImg?: string,
+  breakpoint?: number,
   onLogout: Function,
 };
 export const isActive = (location: Object, url: string) => {

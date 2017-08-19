@@ -1,5 +1,4 @@
 /* @flow */
-// $FlowIssue
 import { EditorState, RichUtils } from 'draft-js';
 import {
   insertNewUnstyledBlock,

@@ -3,7 +3,7 @@
 import React from 'react';
 import { EditorState, convertFromHTML, ContentState } from 'draft-js';
 import { mount } from 'enzyme';
-import defaultToolbar from '../../../config/defaultToolbar';
+import defaultToolbar from '../../../core/config';
 import ModalHandler from '../../../core/eventHandlers/modals';
 import ColorPicker from './ColorPicker';
 

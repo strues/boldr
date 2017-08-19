@@ -1,7 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
-// $FlowIssue
+import * as React from 'react';
 import { RichUtils, EditorState } from 'draft-js';
 import { changeDepth, getSelectedBlocksType } from '../../../utils';
 
@@ -17,7 +16,7 @@ type State = {
   currentBlockType: string,
 };
 
-export default class List extends Component<Props, State> {
+export default class List extends React.Component<Props, State> {
   state: State = {
     currentBlockType: 'unstyled',
   };
@@ -69,7 +68,7 @@ export default class List extends Component<Props, State> {
     }
   };
 
-  render(): Object {
+  render(): React.Node {
     const { config } = this.props;
     const { currentBlockType } = this.state;
     const ListComponent = ListLayout;

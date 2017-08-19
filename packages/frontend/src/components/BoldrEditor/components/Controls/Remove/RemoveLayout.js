@@ -12,7 +12,7 @@ export type Props = {
 const RemoveLayout = ({ config, onChange }: Props) => {
   const { className, title } = config;
   return (
-    <div className="boldr-editor-remove__wrapper" aria-label="boldr-editor-remove__control">
+    <div className="be-remove__wrapper" aria-label="be-remove__control">
       <Option className={classNames(className)} onClick={onChange} title={title}>
         <Eraser color="#222" />
       </Option>

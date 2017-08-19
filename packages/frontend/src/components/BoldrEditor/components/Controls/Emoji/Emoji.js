@@ -10,7 +10,7 @@ export type Props = {
   onChange: Function,
   modalHandler: Object,
   editorState: EditorState,
-  config: ?Object,
+  config?: Object,
 };
 type State = {
   expanded: boolean,

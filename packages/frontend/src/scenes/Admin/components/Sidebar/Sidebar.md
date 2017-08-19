@@ -9,22 +9,22 @@ type SidebarLink = {
   iconType: string,
   key: number,
   id: number,
-  exact: ?boolean,
+  exact?: boolean,
   link: string,
-  links: ?SidebarLinks
+  links?: SidebarLinks
 };
 
 type SidebarLinks = Array<SidebarLink>;
 
 type Props = {
-  className: ?string,
+  className?: string,
   links: SidebarLinks,
   onChange: () => void,
   handleExpandClick: () => void,
-  logoClassName: ?string,
+  logoClassName?: string,
   match: Object,
-  iconColor: ?string,
-  logo: ?any,
+  iconColor?: string,
+  logo?: any,
   expanded: boolean,
 };
 ```

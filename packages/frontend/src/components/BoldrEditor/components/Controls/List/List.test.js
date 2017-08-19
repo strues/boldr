@@ -5,7 +5,7 @@ import { EditorState, convertFromHTML, ContentState } from 'draft-js';
 import { spy } from 'sinon';
 import { mount } from 'enzyme';
 import ModalHandler from '../../../core/eventHandlers/modals';
-import defaultToolbar from '../../../config/defaultToolbar';
+import defaultToolbar from '../../../core/config';
 import List from './List';
 
 describe('<List />', () => {

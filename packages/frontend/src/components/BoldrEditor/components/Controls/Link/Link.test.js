@@ -4,7 +4,7 @@ import React from 'react';
 import { mount } from 'enzyme';
 import { EditorState, convertFromHTML, ContentState } from 'draft-js';
 import ModalHandler from '../../../core/eventHandlers/modals';
-import defaultToolbar from '../../../config/defaultToolbar';
+import defaultToolbar from '../../../core/config';
 import Link from './Link';
 
 describe('<Link />', () => {

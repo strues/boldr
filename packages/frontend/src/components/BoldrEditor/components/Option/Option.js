@@ -7,11 +7,11 @@ import cN from 'classnames';
 export type Props = {
   onClick: Function,
   children: React.ChildrenArray<React.Node>,
-  value: ?string,
-  active: ?boolean,
-  className: ?string,
-  disabled: ?boolean,
-  title: ?string,
+  value?: string,
+  active?: boolean,
+  className?: string,
+  disabled?: boolean,
+  title?: string,
 };
 
 export default class Option extends React.Component<Props, *> {
@@ -32,9 +32,9 @@ export default class Option extends React.Component<Props, *> {
     const { children, className, active, disabled, title } = this.props;
     return (
       <div
-        className={cN('boldr-editor-option__wrapper', className, {
-          'boldr-editor-option--active': active,
-          'boldr-editor-option--disabled': disabled,
+        className={cN('be-option__wrapper', className, {
+          'be-option--active': active,
+          'be-option--disabled': disabled,
         })}
         onClick={this.onClick}
         aria-selected={active}

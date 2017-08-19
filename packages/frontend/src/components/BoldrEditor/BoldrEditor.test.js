@@ -15,6 +15,6 @@ describe('<BoldrEditor />', () => {
 
   it('should have toolbarHidden as false by default', () => {
     const editor = shallow(<BoldrEditor />);
-    expect(editor.find('.boldr-editor-toolbar')).toHaveLength(1);
+    expect(editor.find('.be-toolbar')).toHaveLength(1);
   });
 });

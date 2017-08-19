@@ -9,7 +9,7 @@ import { StyleClasses } from '../../../../theme/styleClasses';
 const BASE_ELEMENT = StyleClasses.TAG_BLOCK;
 
 type Props = {
-  className: ?string,
+  className?: string,
   tags: Array<Tag>,
 };
 

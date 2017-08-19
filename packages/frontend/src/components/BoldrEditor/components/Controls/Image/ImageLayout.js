@@ -178,37 +178,28 @@ class ImageLayout extends React.Component<Props, State> {
   renderAddImageModal(): Object {
     const { imgSrc, uploadHighlighted, showImageLoading, dragEnter, height, width } = this.state;
     const {
-      config: { popupClassName, uploadCallback, uploadEnabled, urlEnabled, inputAccept },
+      config: { modalClassName, uploadCallback, uploadEnabled, urlEnabled, inputAccept },
       doCollapse,
     } = this.props;
     return (
-      <div
-        className={classNames('boldr-editor-image__modal', popupClassName)}
-        onClick={this.stopPropagation}
-      >
-        <div className="boldr-editor-image__modal-header">
+      <div className={classNames('be-image__modal', modalClassName)} onClick={this.stopPropagation}>
+        <div className="be-image__modal-header">
           {uploadEnabled &&
             uploadCallback &&
-            <span
-              onClick={this.showImageUploadOption}
-              className="boldr-editor-image__modal-header-option"
-            >
+            <span onClick={this.showImageUploadOption} className="be-image__modal-header-option">
               Upload
               <span
-                className={classNames('boldr-editor-image__modal-header-label', {
-                  'boldr-editor-image__modal-header-label--highlighted': uploadHighlighted,
+                className={classNames('be-image__modal-header-label', {
+                  'be-image__modal-header-label--highlighted': uploadHighlighted,
                 })}
               />
             </span>}
           {urlEnabled &&
-            <span
-              onClick={this.showImageURLOption}
-              className="boldr-editor-image__modal-header-option"
-            >
+            <span onClick={this.showImageURLOption} className="be-image__modal-header-option">
               Upload URL
               <span
-                className={classNames('boldr-editor-image__modal-header-label', {
-                  'boldr-editor-image__modal-header-label--highlighted': !uploadHighlighted,
+                className={classNames('be-image__modal-header-label', {
+                  'be-image__modal-header-label--highlighted': !uploadHighlighted,
                 })}
               />
             </span>}
@@ -219,11 +210,11 @@ class ImageLayout extends React.Component<Props, State> {
                 onDragEnter={this.onDragEnter}
                 onDragOver={this.stopPropagation}
                 onDrop={this.onImageDrop}
-                className={classNames('boldr-editor-image__modal-upload-option', {
-                  'boldr-editor-image__modal-upload-option--highlighted': dragEnter,
+                className={classNames('be-image__modal-upload-option', {
+                  'be-image__modal-upload-option--highlighted': dragEnter,
                 })}
               >
-                <label htmlFor="file" className="boldr-editor-image__modal-upload-option-label">
+                <label htmlFor="file" className="be-image__modal-upload-option-label">
                   Drop the file or click to upload
                 </label>
               </div>
@@ -232,12 +223,12 @@ class ImageLayout extends React.Component<Props, State> {
                 id="file"
                 accept={inputAccept}
                 onChange={this.selectImage}
-                className="boldr-editor-image__modal-upload-option-input"
+                className="be-image__modal-upload-option-input"
               />
             </div>
-          : <div className="boldr-editor-image__modal-url-section">
+          : <div className="be-image__modal-url-section">
               <input
-                className="boldr-editor-image__modal-url-input"
+                className="be-image__modal-url-input"
                 placeholder="Enter url"
                 name="imgSrc"
                 onChange={this.updateValue}
@@ -245,14 +236,14 @@ class ImageLayout extends React.Component<Props, State> {
                 value={imgSrc}
               />
             </div>}
-        <div className="boldr-editor-embedded__modal-size">
+        <div className="be-embedded__modal-size">
           ↕&nbsp;
           <input
             onChange={this.updateValue}
             onBlur={this.updateValue}
             value={height}
             name="height"
-            className="boldr-editor-embedded__modal-size-input"
+            className="be-embedded__modal-size-input"
             placeholder="Height"
           />
           &nbsp;↔&nbsp;
@@ -261,24 +252,24 @@ class ImageLayout extends React.Component<Props, State> {
             onBlur={this.updateValue}
             value={width}
             name="width"
-            className="boldr-editor-embedded__modal-size-input"
+            className="be-embedded__modal-size-input"
             placeholder="Width"
           />
         </div>
-        <span className="boldr-editor-image__modal-btn-section">
+        <span className="be-image__modal-btn-section">
           <button
-            className="boldr-editor-image__modal-btn"
+            className="be-image__modal-btn"
             onClick={this.addImageFromState}
             disabled={!imgSrc || !height || !width}
           >
             Add
           </button>
-          <button className="boldr-editor-image__modal-btn" onClick={this.props.doCollapse}>
+          <button className="be-image__modal-btn" onClick={this.props.doCollapse}>
             Cancel
           </button>
         </span>
         {showImageLoading
-          ? <div className="boldr-editor-image__modal-spinner">
+          ? <div className="be-image__modal-spinner">
               <Spinner />
             </div>
           : undefined}
@@ -290,10 +281,10 @@ class ImageLayout extends React.Component<Props, State> {
     const { config: { className, title }, expanded } = this.props;
     return (
       <div
-        className="boldr-editor-image__wrapper"
+        className="be-image__wrapper"
         aria-haspopup="true"
         aria-expanded={expanded}
-        aria-label="boldr-editor-image__control"
+        aria-label="be-image__control"
       >
         <Option
           className={classNames(className)}

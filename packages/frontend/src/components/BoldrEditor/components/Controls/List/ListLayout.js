@@ -1,6 +1,5 @@
 /* @flow */
-
-import React, { Component } from 'react';
+import * as React from 'react';
 import classNames from 'classnames';
 import { ListUl, ListOl } from '@boldr/icons';
 import Option from '../../Option';
@@ -11,8 +10,9 @@ export type Props = {
   currentState: Object,
 };
 
-export default class ListLayout extends Component {
+export default class ListLayout extends React.Component<Props, *> {
   props: Props;
+
   toggleBlockType: Function = (blockType: string): void => {
     const { onChange } = this.props;
     onChange(blockType);
@@ -28,14 +28,11 @@ export default class ListLayout extends Component {
     onChange('outdent');
   };
 
-  renderListElements(): Object {
+  renderListElements(): React.Node {
     const { config, currentState: { listType } } = this.props;
     const { unordered, ordered, className } = config;
     return (
-      <div
-        className={classNames('boldr-editor-list__wrapper', className)}
-        aria-label="boldr-editor-list__control"
-      >
+      <div className={classNames('be-list__wrapper', className)} aria-label="be-list__control">
         <Option
           value="unordered"
           onClick={this.toggleBlockType}
@@ -58,7 +55,7 @@ export default class ListLayout extends Component {
     );
   }
 
-  render(): Object {
+  render(): React.Node {
     return this.renderListElements();
   }
 }

@@ -4,7 +4,7 @@ import React from 'react';
 import { spy } from 'sinon';
 import { mount } from 'enzyme';
 import { EditorState, convertFromHTML, ContentState } from 'draft-js';
-import defaultToolbar from '../../../config/defaultToolbar';
+import defaultToolbar from '../../../core/config';
 import ModalHandler from '../../../core/eventHandlers/modals';
 import TextAlign from './TextAlign';
 

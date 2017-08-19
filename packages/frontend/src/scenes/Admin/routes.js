@@ -27,16 +27,16 @@ const NavigationContainer = universal(() => import('./Navigation/NavigationConta
 
 declare type ChildRoute = {
   breadcrumb: string,
-  exact: ?boolean,
+  exact?: boolean,
   path: string,
   component: ReactElement,
-  routes: ?Array<Route>,
+  routes?: Array<Route>,
 };
 declare type Route = {
-  exact: ?boolean,
+  exact?: boolean,
   path: string,
   component: ReactElement,
-  routes: ?Array<ChildRoute>,
+  routes?: Array<ChildRoute>,
 };
 
 export default [

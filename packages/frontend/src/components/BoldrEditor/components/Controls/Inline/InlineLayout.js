@@ -22,10 +22,7 @@ export type Props = {
 const InlineLayout = (props: Props) => {
   const { currentState, onChange } = props;
   return (
-    <div
-      className={classNames('boldr-editor-inline__wrapper')}
-      aria-label="boldr-editor-inline__control"
-    >
+    <div className={classNames('be-inline__wrapper')} aria-label="be-inline__control">
       <Option value="bold" onClick={onChange} active={currentState.bold === true} title="bold">
         <Bold color="#222" />
       </Option>

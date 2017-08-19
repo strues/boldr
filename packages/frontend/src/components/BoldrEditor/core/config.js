@@ -5,28 +5,127 @@ export type StyleConfig = {
   style: string,
   className?: string,
 };
+export type ToolbarOption =
+  | 'inline'
+  | 'blockType'
+  | 'fontSize'
+  | 'fontFamily'
+  | 'list'
+  | 'textAlign'
+  | 'colorPicker'
+  | 'link'
+  | 'embedded'
+  | 'emoji'
+  | 'image'
+  | 'remove'
+  | 'history';
+export type ToolbarOptionsList = Array<ToolbarOption>;
 
-export type StyleConfigList = Array<StyleConfig>;
+export type ConfigItemOption = {
+  className?: string,
+  title: string,
+};
 
-export const BLOCK_TYPE_DROPDOWN: StyleConfigList = [
-  { label: 'Normal', style: 'unstyled' },
-  { label: 'H1', style: 'header-one' },
-  { label: 'H2', style: 'header-two' },
-  { label: 'H3', style: 'header-three' },
-  { label: 'H4', style: 'header-four' },
-  { label: 'H5', style: 'header-five' },
-  { label: 'H6', style: 'header-six' },
-  { label: 'Blockquote', style: 'blockquote' },
-  { label: 'Code', style: 'code' },
-];
+export type FontSizeConfig = {
+  options: Array<number>,
+  className?: string,
+  dropdownClassName?: string,
+  title: string,
+};
+export type FontFamilyConfig = {
+  options: Array<string>,
+  className?: string,
+  dropdownClassName?: string,
+  title: string,
+};
+export type ListConfig = {
+  className?: string,
+  unordered: ConfigItemOption,
+  ordered: ConfigItemOption,
+  indent: ConfigItemOption,
+  outdent: ConfigItemOption,
+  title: string,
+};
+export type LinkVariations = 'link' | 'unlink';
+export type LinkConfig = {
+  className?: string,
+  modalClassName?: string,
+  dropdownClassName?: string,
+  showOpenOptionOnHover: boolean,
+  defaultTargetOption: '_self' | 'blank',
+  options: Array<LinkVariations>,
+  link: ConfigItemOption,
+  unlink: ConfigItemOption,
+};
+
+export type DefaultSize = {
+  height: 'auto' | number,
+  width: 'auto' | number,
+};
+
+export type EmbeddedConfig = {
+  className?: string,
+  modalClassName?: string,
+  defaultSize: DefaultSize,
+  title: string,
+};
+export type ImageConfig = {
+  className?: string,
+  modalClassName?: string,
+  urlEnabled?: boolean,
+  uploadEnabled?: boolean,
+  alignmentEnabled?: boolean,
+  uploadCallback?: Function,
+  inputAccept?: string,
+  defaultSize?: DefaultSize,
+  title?: string,
+};
+export type RemoveConfig = {
+  className?: string,
+  title?: string,
+};
+export type HistoryConfig = {
+  className?: string,
+  title?: string,
+  undo: ConfigItemOption,
+  redo: ConfigItemOption,
+};
+export type ColorPickerConfig = {
+  className?: string,
+  modalClassName?: string,
+  title?: string,
+  colors?: Array<string>,
+};
+export type EmojiConfig = {
+  className?: string,
+  modalClassName?: string,
+  title?: string,
+  emojis?: Array<string>,
+};
+export type ToolbarConfig = {
+  options: Array<ToolbarOption>,
+  inline?: Object,
+  blockType?: Object,
+  textAlign?: Object,
+  fontSize: FontSizeConfig,
+  fontFamily: FontFamilyConfig,
+  list: ListConfig,
+  link: LinkConfig,
+  embedded: EmbeddedConfig,
+  image: ImageConfig,
+  remove: RemoveConfig,
+  history: HistoryConfig,
+  colorPicker: ColorPickerConfig,
+  emoji: EmojiConfig,
+};
 
 export default {
   options: [
     'inline',
-    'list',
     'blockType',
     'fontSize',
     'fontFamily',
+    'list',
     'textAlign',
     'colorPicker',
     'link',
@@ -36,67 +135,81 @@ export default {
     'remove',
     'history',
   ],
-  inline: {
-    inDropdown: false,
-    className: undefined,
-    component: undefined,
-    dropdownClassName: undefined,
-    options: [
-      'bold',
-      'italic',
-      'underline',
-      'strikethrough',
-      'monospace',
-      'superscript',
-      'subscript',
-    ],
-    bold: { className: undefined, title: undefined },
-    italic: { className: undefined, title: undefined },
-    underline: { className: undefined, title: undefined },
-    strikethrough: { className: undefined, title: undefined },
-    monospace: { className: undefined, title: undefined },
-    superscript: { className: undefined, title: undefined },
-    subscript: { className: undefined, title: undefined },
-  },
-  list: {
-    inDropdown: false,
-    className: undefined,
-    component: undefined,
-    dropdownClassName: undefined,
-    options: ['unordered', 'ordered', 'indent', 'outdent'],
-    unordered: { className: undefined, title: 'Unordered' },
-    ordered: { className: undefined, title: 'Ordered' },
-    indent: { className: undefined, title: 'Indent' },
-    outdent: { className: undefined, title: 'Outdent' },
-    title: 'List',
-  },
-  blockType: {
-    inDropdown: true,
-    options: ['Normal', 'H1', 'H2', 'H3', 'H4', 'H5', 'H6', 'Blockquote', 'Code'],
-    className: undefined,
-    component: undefined,
-    dropdownClassName: undefined,
-    title: 'Block Type',
-  },
+  inline: {},
+  textAlign: {},
+  blockType: {},
   fontSize: {
     options: [12, 14, 16, 18, 24, 30, 36, 48, 60, 72, 96],
     className: undefined,
-    component: undefined,
     dropdownClassName: undefined,
     title: 'Font Size',
   },
   fontFamily: {
     options: ['Roboto', 'Arial', 'Georgia', 'Impact', 'Tahoma', 'Times New Roman', 'Verdana'],
     className: undefined,
-    component: undefined,
     dropdownClassName: undefined,
     title: 'Font Family',
   },
-
+  list: {
+    className: undefined,
+    unordered: { className: undefined, title: 'Unordered' },
+    ordered: { className: undefined, title: 'Ordered' },
+    indent: { className: undefined, title: 'Indent' },
+    outdent: { className: undefined, title: 'Outdent' },
+    title: 'List',
+  },
+  link: {
+    className: undefined,
+    modalClassName: undefined,
+    dropdownClassName: undefined,
+    showOpenOptionOnHover: true,
+    defaultTargetOption: '_self',
+    options: ['link', 'unlink'],
+    link: { className: undefined, title: 'Link' },
+    unlink: { className: undefined, title: 'Unlink' },
+  },
+  embedded: {
+    className: undefined,
+    modalClassName: undefined,
+    defaultSize: {
+      height: 'auto',
+      width: 'auto',
+    },
+    title: 'Embedded',
+  },
+  image: {
+    className: undefined,
+    modalClassName: undefined,
+    urlEnabled: true,
+    uploadEnabled: true,
+    alignmentEnabled: true,
+    uploadCallback: undefined,
+    inputAccept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg',
+    defaultSize: {
+      height: 'auto',
+      width: 'auto',
+    },
+    title: 'Image',
+  },
+  remove: {
+    className: undefined,
+    title: 'Remove',
+  },
+  history: {
+    className: undefined,
+    undo: {
+      className: undefined,
+      title: 'Undo',
+    },
+    redo: {
+      className: undefined,
+      title: 'Redo',
+    },
+    title: 'History',
+  },
   colorPicker: {
     className: undefined,
-    component: undefined,
-    popupClassName: undefined,
+    modalClassName: undefined,
     colors: [
       'rgb(97,189,109)',
       'rgb(26,188,156)',
@@ -128,22 +241,9 @@ export default {
     ],
     title: 'Color Picker',
   },
-  link: {
-    inDropdown: false,
-    className: undefined,
-    component: undefined,
-    popupClassName: undefined,
-    dropdownClassName: undefined,
-    showOpenOptionOnHover: true,
-    defaultTargetOption: '_self',
-    options: ['link', 'unlink'],
-    link: { className: undefined, title: 'Link' },
-    unlink: { className: undefined, title: 'Unlink' },
-  },
   emoji: {
     className: undefined,
-    component: undefined,
-    popupClassName: undefined,
+    modalClassName: undefined,
     emojis: [
       '😀',
       '😁',
@@ -277,51 +377,5 @@ export default {
       '💯',
     ],
     title: 'Emoji',
-  },
-  embedded: {
-    className: undefined,
-    component: undefined,
-    popupClassName: undefined,
-    defaultSize: {
-      height: 'auto',
-      width: 'auto',
-    },
-    title: 'Embedded',
-  },
-  image: {
-    className: undefined,
-    component: undefined,
-    popupClassName: undefined,
-    urlEnabled: true,
-    uploadEnabled: true,
-    alignmentEnabled: true,
-    uploadCallback: undefined,
-    inputAccept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg',
-    defaultSize: {
-      height: 'auto',
-      width: 'auto',
-    },
-    title: 'Image',
-  },
-  remove: {
-    className: undefined,
-    component: undefined,
-    title: 'Remove',
-  },
-  history: {
-    inDropdown: false,
-    className: undefined,
-    component: undefined,
-    dropdownClassName: undefined,
-    options: ['undo', 'redo'],
-    undo: {
-      className: undefined,
-      title: 'Undo',
-    },
-    redo: {
-      className: undefined,
-      title: 'Redo',
-    },
-    title: 'History',
   },
 };

@@ -12,15 +12,15 @@ const BASE_ELEMENT = StyleClasses.SIDEBAR_NAV_ITEM;
 
 export type Props = {
   isExpanded: boolean,
-  link: ?string,
+  link?: string,
   isSmall: boolean,
   isActive: boolean,
   level: string,
   items: Array<Object>,
-  onItemClick: ?Function,
-  onExpandCollapse: ?Function,
-  icon: ?string,
-  label: ?string,
+  onItemClick?: Function,
+  onExpandCollapse?: Function,
+  icon?: string,
+  label?: string,
 };
 
 const SidebarNavLink = (props: Props) => {
@@ -44,15 +44,15 @@ const SidebarNavLink = (props: Props) => {
 };
 type SidebarNavItemProps = {
   isExpanded: boolean,
-  link: ?string,
+  link?: string,
   isActive: boolean,
   isSmall: boolean,
   level: string,
   items: Array<Object>,
-  onItemClick: ?Function,
-  onExpandCollapse: ?Function,
-  icon: ?string,
-  label: ?string,
+  onItemClick?: Function,
+  onExpandCollapse?: Function,
+  icon?: string,
+  label?: string,
 };
 const SidebarNavSubNav = (props: Props) => {
   return (

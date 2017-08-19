@@ -16,12 +16,12 @@ type Props = {
   image?: string,
   excerpt?: string,
   createdAt: string,
-  status: ?string,
+  status?: string,
   author: string,
   tags: Array<Tag>,
-  attachments: ?Object,
-  meta: ?Object,
-  userId: ?string,
+  attachments?: Object,
+  meta?: Object,
+  userId?: string,
 };
 const Wrapper = styled.section`
   display: flex;

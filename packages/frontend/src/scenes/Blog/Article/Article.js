@@ -12,9 +12,9 @@ const BASE_ELEMENT = StyleClasses.ARTICLE_SINGLE;
 
 export type Props = {
   loading: boolean,
-  className: ?string,
+  className?: string,
   data: Object,
-  sidebarClassName: ?string,
+  sidebarClassName?: string,
 };
 
 class Article extends Component {

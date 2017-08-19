@@ -3,7 +3,7 @@
 export default function blockStyleFn(block: Object): string {
   const blockAlignment = block.getData() && block.getData().get('text-align');
   if (blockAlignment) {
-    return `boldredit-${blockAlignment}-aligned-block`;
+    return `be-${blockAlignment}-aligned-block`;
   }
   return '';
 }

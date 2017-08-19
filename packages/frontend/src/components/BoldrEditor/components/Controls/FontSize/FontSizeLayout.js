@@ -1,18 +1,22 @@
-/* eslint-disable react/no-array-index-key */
+/* eslint-disable react/no-array-index-key, react/no-unused-prop-types, no-inline-comments */
 /* @flow */
 
 import React, { Component } from 'react';
 import classNames from 'classnames';
 import { Dropdown, DropdownOption } from '../../Dropdown';
 
+type CurrentFontState = {
+  fontSize: number,
+};
+
 export type Props = {
   expanded: boolean,
-  onExpandEvent: ?Function,
-  doExpand: ?Function,
-  doCollapse: ?Function,
-  onChange: ?Function,
+  onExpandEvent?: Function,
+  doExpand?: Function,
+  doCollapse?: Function,
+  onChange?: Function,
   config: Object,
-  currentState: Object,
+  currentState: CurrentFontState,
 };
 type State = {
   defaultFontSize: string,
@@ -42,7 +46,7 @@ export default class FontSizeLayout extends Component<Props, State> {
   props: Props;
   render() {
     const {
-      config: { icon, className, dropdownClassName, options, title },
+      config: { icon, dropdownClassName, options, title },
       onChange,
       expanded,
       doCollapse,
@@ -54,10 +58,12 @@ export default class FontSizeLayout extends Component<Props, State> {
     defaultFontSize = Number(defaultFontSize);
     currentFontSize =
       currentFontSize || (options && options.indexOf(defaultFontSize) >= 0 && defaultFontSize);
+
     return (
-      <div className="boldr-editor-fontsize__wrapper" aria-label="boldr-editor-fontsize-control">
+      <div className="be-fontsize__wrapper" aria-label="be-fontsize-control">
+        {/* // $FlowIssue */}
         <Dropdown
-          className={classNames('boldr-editor-fontsize__dropdown', className)}
+          className={classNames('be-fontsize__dropdown')}
           optionWrapperClassName={classNames(dropdownClassName)}
           onChange={onChange}
           expanded={expanded}
@@ -73,9 +79,11 @@ export default class FontSizeLayout extends Component<Props, State> {
             : <img src={icon} alt="" />}
           {options.map((size, index) =>
             <DropdownOption
-              className="boldr-editor-fontsize__option"
+              className="be-fontsize__option"
               active={currentFontSize === size}
               value={size}
+              disabled={false}
+              highlighted={false}
               key={index}
             >
               {size}

@@ -22,7 +22,7 @@ import MENU_QUERY from './gql/getMenu.graphql';
 
 export type Props = {
   location: Object,
-  me: ?User,
+  me?: User,
   auth: Object,
   showHeader: () => void,
   logout: Function,

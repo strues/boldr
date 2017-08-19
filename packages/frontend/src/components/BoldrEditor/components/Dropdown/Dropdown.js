@@ -1,20 +1,28 @@
+/* eslint-disable react/no-array-index-key, react/no-unused-prop-types, no-inline-comments */
 // @flow
 import * as React from 'react';
 import classNames from 'classnames';
-
 import { stopPropagation } from '../../utils/common';
+
+import {
+  DropdownWrapper,
+  DropdownSelectedText,
+  CaretClosed,
+  CaretOpen,
+  DropdownOptionWrapper,
+} from './Dropdown.styled';
 
 export type Props = {
   children: React.ChildrenArray<React.Node>,
-  onChange: ?Function,
-  className: ?string,
+  onChange?: Function,
+  className?: string,
   title: string,
-  expanded: ?boolean,
+  expanded?: boolean,
   doExpand: Function,
   doCollapse: Function,
   onExpandEvent: Function,
-  ariaLabel: ?string,
-  optionWrapperClassName: ?string,
+  ariaLabel?: string,
+  optionWrapperClassName?: string,
 };
 
 type State = {
@@ -70,33 +78,25 @@ export default class Dropdown extends React.Component<Props, State> {
       title,
     } = this.props;
     const { highlighted } = this.state;
-    const options = children.slice(1, children.length);
+    // $FlowIssue
+    const options: Array<React.Node> = children.slice(1, children.length);
     return (
-      <div
-        className={classNames('boldr-editor-dropdown__wrapper', className)}
+      <DropdownWrapper
+        className={className}
         aria-expanded={expanded}
-        aria-label={ariaLabel || 'boldr-editor-dropdown'}
+        aria-label={ariaLabel || 'be-dropdown'}
       >
-        <a className="boldr-editor-dropdown__selected-text" onClick={onExpandEvent} title={title}>
+        <DropdownSelectedText onClick={onExpandEvent} title={title}>
+          {/* // $FlowIssue */}
           {children[0]}
-          <div
-            className={classNames({
-              'boldr-editor-dropdown__caret--close': expanded,
-              'boldr-editor-dropdown__caret--open': !expanded,
-            })}
-          />
-        </a>
+          {expanded ? <CaretClosed /> : <CaretOpen />}
+        </DropdownSelectedText>
         {expanded
-          ? <ul
-              className={classNames(
-                'boldr-editor-dropdown__option-wrapper',
-                optionWrapperClassName,
-              )}
-              onClick={stopPropagation}
-            >
+          ? <DropdownOptionWrapper className={optionWrapperClassName} onClick={stopPropagation}>
               {React.Children.map(options, (option, index) => {
                 const temp =
                   option &&
+                  // $FlowIssue
                   React.cloneElement(option, {
                     onSelect: this.onChange,
                     highlighted: highlighted === index,
@@ -105,9 +105,9 @@ export default class Dropdown extends React.Component<Props, State> {
                   });
                 return temp;
               })}
-            </ul>
+            </DropdownOptionWrapper>
           : undefined}
-      </div>
+      </DropdownWrapper>
     );
   }
 }

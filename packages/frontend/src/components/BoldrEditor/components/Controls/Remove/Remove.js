@@ -1,7 +1,6 @@
 /* @flow */
 
 import * as React from 'react';
-// $FlowIssue
 import { EditorState, Modifier } from 'draft-js';
 import { getSelectionCustomInlineStyle, forEach } from '../../../utils';
 
@@ -83,9 +82,8 @@ export default class Remove extends React.Component<Props, State> {
   render(): React.Node {
     const { config } = this.props;
     const { expanded } = this.state;
-    const RemoveComponent = config.component || RemoveLayout;
     return (
-      <RemoveComponent
+      <RemoveLayout
         config={config}
         expanded={expanded}
         onExpandEvent={this.onExpandEvent}

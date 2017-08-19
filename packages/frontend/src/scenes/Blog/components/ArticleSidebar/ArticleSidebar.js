@@ -7,9 +7,9 @@ import Author from '../Author';
 import SidebarTags from '../SidebarTags';
 
 export type Props = {
-  className: ?string,
-  authorClassName: ?string,
-  tagsClassName: ?string,
+  className?: string,
+  authorClassName?: string,
+  tagsClassName?: string,
   tags: Array<Tag>,
   author: Object,
 };

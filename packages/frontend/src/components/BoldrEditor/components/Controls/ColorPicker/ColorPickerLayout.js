@@ -1,4 +1,4 @@
-/* eslint-disable react/no-unused-prop-types */
+/* eslint-disable react/no-unused-prop-types, react/no-array-index-key */
 /* @flow */
 
 import * as React from 'react';
@@ -7,12 +7,16 @@ import PaintBrush from '@boldr/icons/PaintBrush';
 import { stopPropagation } from '../../../utils/common';
 import Option from '../../Option';
 
+type ColorCurrent = {
+  color: string,
+  bgColor: string,
+};
 type Props = {
-  expanded: ?boolean,
-  onChange: ?Function,
+  expanded?: boolean,
+  onChange?: Function,
   config: Object,
   onExpandEvent: Function,
-  currentState: ?Object,
+  currentState: ColorCurrent,
 };
 
 type State = {
@@ -52,44 +56,44 @@ class ColorPickerLayout extends React.Component<Props, State> {
     onChange(currentStyle, color);
   };
 
-  renderModal: Function = (): Object => {
-    const { config: { popupClassName, colors }, currentState: { color, bgColor } } = this.props;
+  renderModal: Function = (): React.Node => {
+    const { config: { modalClassName, colors }, currentState: { color, bgColor } } = this.props;
     const { currentStyle } = this.state;
     const currentSelectedColor = currentStyle === 'color' ? color : bgColor;
     return (
       <div
-        className={classNames('boldr-editor-colorpicker__modal', popupClassName)}
+        className={classNames('be-colorpicker__modal', modalClassName)}
         onClick={stopPropagation}
       >
-        <span className="boldr-editor-colorpicker__modal-header">
+        <span className="be-colorpicker__modal-header">
           <span
-            className={classNames('boldr-editor-colorpicker__modal-style-label', {
-              'boldr-editor-colorpicker__modal-style-label--active': currentStyle === 'color',
+            className={classNames('be-colorpicker__modal-style-label', {
+              'be-colorpicker__modal-style-label--active': currentStyle === 'color',
             })}
             onClick={this.setCurrentStyleColor}
           >
             Text
           </span>
           <span
-            className={classNames('boldr-editor-colorpicker__modal-style-label', {
-              'boldr-editor-colorpicker__modal-style-label--active': currentStyle === 'bgcolor',
+            className={classNames('be-colorpicker__modal-style-label', {
+              'be-colorpicker__modal-style-label--active': currentStyle === 'bgcolor',
             })}
             onClick={this.setCurrentStyleBgcolor}
           >
             Background
           </span>
         </span>
-        <span className="boldr-editor-colorpicker__modal-options">
+        <span className="be-colorpicker__modal-options">
           {colors.map((color, index) =>
             <Option
               value={color}
               key={index}
-              className="boldr-editor-colorpicker__option"
-              activeClassName="boldr-editor-colorpicker__option--active"
+              className="be-colorpicker__option"
+              activeClassName="be-colorpicker__option--active"
               active={currentSelectedColor === color}
               onClick={this.onChange}
             >
-              <span style={{ backgroundColor: color }} className="boldr-editor-colorpicker__cube" />
+              <span style={{ backgroundColor: color }} className="be-colorpicker__cube" />
             </Option>,
           )}
         </span>
@@ -97,14 +101,14 @@ class ColorPickerLayout extends React.Component<Props, State> {
     );
   };
 
-  render(): Object {
+  render(): React.Node {
     const { expanded, onExpandEvent } = this.props;
     return (
       <div
-        className="boldr-editor-colorpicker__wrapper"
+        className="be-colorpicker__wrapper"
         aria-haspopup="true"
         aria-expanded={expanded}
-        aria-label="boldr-editor-color-picker"
+        aria-label="be-color-picker"
         title={this.props.config.title}
       >
         <Option onClick={onExpandEvent} className={classNames(this.props.config.className)}>

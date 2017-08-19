@@ -16,6 +16,15 @@ export type Props = {
   config?: Object,
 };
 
+export type ToolbarBlockType = {
+  label: 'Normal' | 'H1' | 'H2' | 'H3' | 'Blockquote' | 'Code',
+  id: number,
+  icon?: React.ElementType,
+  style?: 'unstyled' | 'header-one' | 'header-two' | 'header-three' | 'blockquote' | 'code',
+};
+
+export type ToolbarBlockTypes = Array<ToolbarBlockType>;
+
 type State = {
   expanded: boolean,
   currentBlockType: string,
@@ -50,14 +59,11 @@ class BlockType extends React.Component<Props, State> {
     modalHandler.deregisterCallback(this.expandCollapse);
   }
   props: Props;
-  blocksTypes: Array<Object> = [
+  blocksTypes: ToolbarBlockTypes = [
     { label: 'Normal', style: 'unstyled' },
     { label: 'H1', style: 'header-one' },
     { label: 'H2', style: 'header-two' },
     { label: 'H3', style: 'header-three' },
-    { label: 'H4', style: 'header-four' },
-    { label: 'H5', style: 'header-five' },
-    { label: 'H6', style: 'header-six' },
     { label: 'Blockquote', style: 'blockquote' },
     { label: 'Code', style: 'code' },
   ];
@@ -100,8 +106,10 @@ class BlockType extends React.Component<Props, State> {
 
     const blockType = this.blocksTypes.find(bt => bt.style === currentBlockType);
     return (
+      // $FlowIssue
       <BlockTypeLayout
         config={config}
+        // $FlowIssue
         currentState={{ blockType: blockType && blockType.label }}
         onChange={this.toggleBlockType}
         expanded={expanded}

@@ -1,3 +1,4 @@
+/* eslint-disable new-cap */
 /* @flow */
 import {
   EditorState,
@@ -5,7 +6,6 @@ import {
   Modifier,
   ContentBlock,
   DefaultDraftBlockRenderMap,
-  // $FlowIssue
 } from 'draft-js';
 import { OrderedMap, List, Map } from 'immutable';
 
