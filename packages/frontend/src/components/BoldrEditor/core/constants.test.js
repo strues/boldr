@@ -1,5 +1,5 @@
 import {
-  BLOCK_TYPE,
+  BLOCK_TYPES,
   ENTITY_TYPE,
   INLINE_STYLE,
   BR_TYPE,
@@ -13,7 +13,7 @@ import {
 
 describe('Constants', () => {
   test('BLOCK_TYPE -- exists', () => {
-    expect(BLOCK_TYPE).toBeDefined();
+    expect(BLOCK_TYPES).toBeDefined();
   });
   test('ENTITY_TYPE -- exists', () => {
     expect(ENTITY_TYPE).toBeDefined();

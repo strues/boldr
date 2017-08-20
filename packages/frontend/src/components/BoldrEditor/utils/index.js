@@ -28,4 +28,4 @@ export { hasProperty, filter, mergeRecursive, forEach, stopPropagation } from '.
 export { default as blockStyleFn } from './blockStyleFn';
 export { default as handleNewLine } from './keyEvent';
 
-export { isListBlock, changeDepth } from './list';
+export { isListBlock, changeListDepth } from './list';

@@ -1,6 +1,6 @@
 import { EditorState, convertFromHTML, ContentState } from 'draft-js';
 import { getSelectedBlock } from './block';
-import { isListBlock, changeDepth } from './list';
+import { isListBlock, changeListDepth } from './list';
 
 describe('isListBlock test suite', () => {
   it('should return true for ordered lists', () => {
@@ -33,13 +33,13 @@ describe('isListBlock test suite', () => {
   });
 });
 
-describe('changeDepth test suite', () => {
+describe('changeListDepth test suite', () => {
   it('should not change depth if block is not a list', () => {
     expect.assertions(1);
     const { contentBlocks } = convertFromHTML('<h1>aaaaaaaaaa</h1>');
     const contentState = ContentState.createFromBlockArray(contentBlocks);
     let editorState = EditorState.createWithContent(contentState);
-    editorState = changeDepth(editorState, 1, 4);
+    editorState = changeListDepth(editorState, 1, 4);
     expect(getSelectedBlock(editorState).getDepth()).toEqual(0);
   });
 
@@ -53,7 +53,7 @@ describe('changeDepth test suite', () => {
       focusKey: contentBlocks[1].get('key'),
     });
     editorState = EditorState.acceptSelection(editorState, updatedSelection);
-    editorState = changeDepth(editorState, 1, 4);
+    editorState = changeListDepth(editorState, 1, 4);
     expect(getSelectedBlock(editorState).getDepth()).toEqual(0);
     expect(contentBlocks[0].getDepth()).toEqual(0);
   });
@@ -70,7 +70,7 @@ describe('changeDepth test suite', () => {
       focusKey: contentBlocks[2].get('key'),
     });
     editorState = EditorState.acceptSelection(editorState, updatedSelection);
-    editorState = changeDepth(editorState, 1, 4);
+    editorState = changeListDepth(editorState, 1, 4);
     expect(getSelectedBlock(editorState).getDepth()).toEqual(1);
     expect(contentBlocks[0].getDepth()).toEqual(0);
   });

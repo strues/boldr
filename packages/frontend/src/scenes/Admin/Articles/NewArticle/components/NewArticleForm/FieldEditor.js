@@ -34,6 +34,8 @@ export default class FieldEditor extends Component {
         editorStyle={editorStyle}
         onEditorStateChange={this.onChange}
         editorState={editorState}
+        contentFormat="html"
+        importContent="<p>Hey</p>"
         toolbarClassName="boldredit-toolbar"
         wrapperClassName="boldredit-wrapper"
         editorClassName="boldrui-editor"

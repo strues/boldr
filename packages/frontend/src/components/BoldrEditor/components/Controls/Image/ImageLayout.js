@@ -7,6 +7,7 @@ import Image from '@boldr/icons/Image';
 import Option from '../../Option';
 import Spinner from '../../Spinner';
 import { ControlWrapper } from '../Controls.styled';
+import type { ImageConfig } from '../../../core/config';
 import {
   ImageModal,
   ImageHeader,
@@ -27,7 +28,7 @@ export type Props = {
   expanded?: boolean,
   doCollapse: Function,
   onExpandEvent?: Function,
-  config: Object,
+  config: ImageConfig,
   onChange?: Function,
 };
 
@@ -36,8 +37,8 @@ type State = {
   dragEnter: boolean,
   uploadHighlighted: boolean,
   showImageLoading: boolean,
-  height: number,
-  width: number,
+  height: 'auto' | number,
+  width: 'auto' | number,
   alt: string,
 };
 
@@ -49,15 +50,15 @@ class ImageLayout extends React.Component<Props, State> {
     showImageLoading: false,
     height: this.props.config.defaultSize.height,
     width: this.props.config.defaultSize.width,
-    alt: '',
   };
 
-  componentWillReceiveProps(props: Object): void {
+  componentWillReceiveProps(props: Props): void {
     if (this.props.expanded && !props.expanded) {
       this.setState({
         imgSrc: '',
         dragEnter: false,
-        uploadHighlighted: this.props.config.uploadEnabled && !!this.props.config.uploadCallback,
+        uploadHighlighted:
+          this.props.config.uploadEnabled && Boolean(this.props.config.uploadCallback),
         showImageLoading: false,
         height: this.props.config.defaultSize.height,
         width: this.props.config.defaultSize.width,
@@ -67,7 +68,7 @@ class ImageLayout extends React.Component<Props, State> {
       props.config.uploadEnabled !== this.props.config.uploadEnabled
     ) {
       this.setState({
-        uploadHighlighted: props.config.uploadEnabled && !!props.config.uploadCallback,
+        uploadHighlighted: props.config.uploadEnabled && Boolean(props.config.uploadCallback),
       });
     }
   }

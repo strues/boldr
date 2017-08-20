@@ -5,7 +5,7 @@ import {
   removeSelectedBlocksStyle,
   addLineBreakRemovingSelection,
 } from './block';
-import { isListBlock, changeDepth } from './list';
+import { isListBlock, changeListDepth } from './list';
 
 /**
 * Function will handle followind keyPress scenarios when Shift key is not pressed.
@@ -28,7 +28,7 @@ function handleHardNewlineEvent(editorState: EditorState): EditorState {
         return removeSelectedBlocksStyle(editorState);
       }
       if (depth > 0) {
-        return changeDepth(editorState, -1, depth);
+        return changeListDepth(editorState, -1, depth);
       }
     }
   }
@@ -39,10 +39,12 @@ function handleHardNewlineEvent(editorState: EditorState): EditorState {
 * Function to check is event was soft-newline
 * taken from : https://github.com/facebook/draft-js/blob/master/src/component/utils/isSoftNewlineEvent.js
 */
-function isSoftNewlineEvent(e): boolean {
+function isSoftNewlineEvent(event: Object): boolean {
   return (
-    e.which === 13 &&
-    (e.getModifierState('Shift') || e.getModifierState('Alt') || e.getModifierState('Control'))
+    event.which === 13 &&
+    (event.getModifierState('Shift') ||
+      event.getModifierState('Alt') ||
+      event.getModifierState('Control'))
   );
 }
 
@@ -58,7 +60,10 @@ function isSoftNewlineEvent(e): boolean {
 * 4. Enter, Selection Collapsed ->
 *      if current block not of type list, a new unstyled block will be inserted.
 */
-export default function handleNewLine(editorState: EditorState, event: Object): EditorState {
+export default function handleNewLine(
+  editorState: EditorState,
+  event: SyntheticEvent<>,
+): EditorState {
   if (isSoftNewlineEvent(event)) {
     const selection = editorState.getSelection();
     if (selection.isCollapsed()) {

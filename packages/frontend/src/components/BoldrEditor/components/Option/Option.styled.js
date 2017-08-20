@@ -10,11 +10,11 @@ export const OptionWrapper = styled.div`
   height: 20px;
   padding: 3px;
   background-color: transparent;
-  border: ${props => (props.isDark ? '1px solid #243140' : '1px solid #fafafa')};
+  border: ${props => (props.isDark ? '1px solid #243140' : '1px solid #f1f1f1')};
   border-radius: 2px;
   margin: 0 4px;
   text-transform: capitalize;
-  cursor: pointer;
+
   svg {
     color: ${props => (props.active ? '#00bcd4!important' : 'inherit')};
   }

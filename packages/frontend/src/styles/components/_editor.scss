@@ -1,14 +1,23 @@
-
 .be-main {
   box-sizing: border-box;
   overflow: auto;
   height: 100%;
 }
 
+.be-wrapper {
+  box-sizing: content-box;
+}
+
 .public-DraftStyleDefault-block {
   margin: 1em 0;
 }
 
+.DraftEditor-root {
+  position: relative;
+  border: 1px solid #f1f1f1;
+  padding: 5px;
+  min-height: 400px;
+}
 
 .be-colorpicker__cube {
   width: 22px;
@@ -103,16 +112,11 @@
   }
 }
 
-/// decorators
-
-.be-link-decorator-wrapper {
-  position: relative;
-}
-
 .be-link-decorator-icon {
-  position: absolute;
+  position: relative;
   top: 0;
-  left: 40%;
+  left: 1em;
+  z-index: 200;
   background-color: white;
   cursor: pointer;
 }

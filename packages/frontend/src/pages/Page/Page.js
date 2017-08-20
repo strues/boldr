@@ -18,6 +18,7 @@ import Home from '../Home';
 import About from '../About';
 import Navigation from './components/Navigation';
 // graphql
+
 import MENU_QUERY from './gql/getMenu.graphql';
 
 export type Props = {

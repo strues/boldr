@@ -122,9 +122,11 @@ export function getSelectionText(editorState: EditorState): string {
 export function addLineBreakRemovingSelection(editorState: EditorState): EditorState {
   const content = editorState.getCurrentContent();
   const selection = editorState.getSelection();
+
   let newContent = Modifier.removeRange(content, selection, 'forward');
   const fragment = newContent.getSelectionAfter();
   const block = newContent.getBlockForKey(fragment.getStartKey());
+
   newContent = Modifier.insertText(
     newContent,
     fragment,
@@ -220,6 +222,27 @@ export function getSelectedBlocksMetadata(editorState: EditorState): Map<*, *> {
   return metaData;
 }
 const newBlockRenderMap = Map({
+  image: {
+    element: 'figure',
+  },
+  video: {
+    element: 'figure',
+  },
+  embed: {
+    element: 'div',
+  },
+  unstyled: {
+    wrapper: null,
+    element: 'div',
+  },
+  paragraph: {
+    wrapper: null,
+    element: 'div',
+  },
+  placeholder: {
+    wrapper: null,
+    element: 'div',
+  },
   code: {
     element: 'pre',
   },

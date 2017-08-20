@@ -39,7 +39,7 @@ function changeBlocksDepth(
 
 // Function will check various conditions for changing depth and will accordingly
 // either call function changeBlocksDepth or just return the call.
-export function changeDepth(
+export function changeListDepth(
   editorState: EditorState,
   adjustment: number,
   maxDepth: number,

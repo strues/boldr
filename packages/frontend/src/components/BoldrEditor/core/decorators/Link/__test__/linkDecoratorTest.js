@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { Entity } from 'draft-js';
-import { expect, assert } from 'chai';
 import { shallow, mount } from 'enzyme';
 import getLinkDecorator from '..';
 import { convertFromHTML, AtomicBlockUtils, ContentState, EditorState } from 'draft-js';

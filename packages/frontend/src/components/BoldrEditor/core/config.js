@@ -77,7 +77,7 @@ export type ImageConfig = {
   alignmentEnabled?: boolean,
   uploadCallback?: Function,
   inputAccept?: string,
-  defaultSize?: DefaultSize,
+  defaultSize: DefaultSize,
   title?: string,
 };
 export type RemoveConfig = {

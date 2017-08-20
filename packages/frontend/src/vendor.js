@@ -21,4 +21,5 @@ module.exports = [
   'react-transition-group',
   'redux-form',
   'immutable',
+  'polished',
 ];

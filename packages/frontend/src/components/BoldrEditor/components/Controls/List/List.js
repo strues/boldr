@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { RichUtils, EditorState } from 'draft-js';
-import { changeDepth, getSelectedBlocksType } from '../../../utils';
+import { changeListDepth, getSelectedBlocksType } from '../../../utils';
 
 import ListLayout from './ListLayout';
 
@@ -62,7 +62,7 @@ export default class List extends React.Component<Props, State> {
 
   adjustDepth: Function = (adjustment): void => {
     const { onChange, editorState } = this.props;
-    const newState = changeDepth(editorState, adjustment, 4);
+    const newState = changeListDepth(editorState, adjustment, 4);
     if (newState) {
       onChange(newState);
     }

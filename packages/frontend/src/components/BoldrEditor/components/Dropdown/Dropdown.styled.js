@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const DropdownWrapper = styled.div`
   height: 30px;
   background: #fff;
-  border: 1px solid #e5e5e5;
+  border: 1px solid #f1f1f1;
   border-radius: 2px;
   margin: 0 3px;
   width: ${props => (props.isSkinny ? '60px' : '120px')};
@@ -12,31 +12,19 @@ export const DropdownWrapper = styled.div`
   a {
     color: rgba(0, 0, 0, 0.87);
   }
-
-  &:focus {
-    outline: none;
-  }
-
-  &:hover {
-    background-color: #fff;
-    box-shadow: 1px 1px 0px #bfbdbd;
-  }
-
-  &:active {
-    box-shadow: 1px 1px 0px #bfbdbd inset;
-  }
 `;
 export const DropdownOptionWrapper = styled.ul`
   position: relative;
   z-index: 100;
-  overflow-y: scroll;
-  width: 98%;
+  width: 99%;
   max-height: 250px;
   padding: 0;
   background: #fff;
   border: 1px solid #f1f1f1;
   border-radius: 2px;
   margin: 0;
+  cursor: pointer;
+  transition: background 0.3s ease;
 `;
 export const DropdownSelectedText = styled.a`
   position: relative;
@@ -65,4 +53,12 @@ export const CaretClosed = styled.div`
   border-right: 5px solid transparent;
   border-bottom: 6px solid black;
   border-left: 5px solid transparent;
+`;
+
+export const DropdownOpt = styled.li`
+  display: flex;
+  align-items: center;
+  min-height: 25px;
+  padding: 0 5px;
+  background: ${props => (props.highlighted ? '#f1f1f1' : '#fff')};
 `;

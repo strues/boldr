@@ -2,7 +2,7 @@
 /* @flow */
 
 import * as React from 'react';
-import styled from 'styled-components';
+import { DropdownOpt } from './Dropdown.styled';
 
 export type Props = {
   children: React.ChildrenArray<React.Node>,
@@ -18,18 +18,10 @@ export type Props = {
   title?: string,
 };
 
-const DropdownOpt = styled.li`
-  display: flex;
-  align-items: center;
-  min-height: 25px;
-  padding: 0 5px;
-  background: ${props => (props.highlighted ? '#f1f1f1' : '#fff')};
-`;
-
-export default class DropdownOption extends React.Component<Props, *> {
+export default class DropdownOption extends React.PureComponent<Props, *> {
   props: Props;
 
-  onClick: Function = (event): void => {
+  onClick: Function = (event: SyntheticEvent<>): void => {
     const { onSelect, onClick, value, disabled } = this.props;
     if (!disabled) {
       if (onSelect) {
@@ -59,6 +51,7 @@ export default class DropdownOption extends React.Component<Props, *> {
         onMouseEnter={this.setHighlighted}
         onMouseLeave={this.resetHighlighted}
         onClick={this.onClick}
+        onKeyDown={this.onClick}
         aria-selected={active}
         active={active}
         highlighted={highlighted}

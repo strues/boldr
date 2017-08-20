@@ -1,18 +1,10 @@
 // Thanks :) https://github.com/draft-js-utils/draft-js-utils/blob/master/src/Constants.js.
-export const BLOCK_TYPE = {
-  UNSTYLED: 'unstyled',
-  HEADER_ONE: 'header-one',
-  HEADER_TWO: 'header-two',
-  HEADER_THREE: 'header-three',
-  HEADER_FOUR: 'header-four',
-  HEADER_FIVE: 'header-five',
-  HEADER_SIX: 'header-six',
-  UNORDERED_LIST_ITEM: 'unordered-list-item',
-  ORDERED_LIST_ITEM: 'ordered-list-item',
-  BLOCKQUOTE: 'blockquote',
-  PULLQUOTE: 'pullquote',
-  CODE: 'code-block',
-  ATOMIC: 'atomic',
+export const BLOCK_TYPES = {
+  'header-one': 'h1',
+  'header-two': 'h2',
+  'header-three': 'h3',
+  unstyled: 'p',
+  blockquote: 'blockquote',
 };
 
 export const ENTITY_TYPE = {

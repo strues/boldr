@@ -6,10 +6,12 @@ import Route from 'react-router-dom/Route';
 import Redirect from 'react-router-dom/Redirect';
 import Switch from 'react-router-dom/Switch';
 import Loader from '@boldr/ui/Loader';
+
 import { getToken } from '@boldr/auth';
 // internal
 import '../../styles/main.scss';
 // Start routes
+
 import Page from '../../pages/Page/Page';
 import Error404 from '../../pages/Error404';
 import AdminDashboard from '../../scenes/Admin';

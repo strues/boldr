@@ -1,4 +1,4 @@
-/* eslint-disable max-lines, flowtype/no-types-missing-file-annotation, react/no-array-index-key */
+/* eslint-disable max-lines, react/no-array-index-key */
 /* @flow */
 import * as React from 'react';
 import {
@@ -12,6 +12,7 @@ import {
 import type { DraftDecoratorType } from 'draft-js';
 import styled from 'styled-components';
 import classNames from 'classnames';
+
 import {
   ModalHandler,
   FocusHandler,
@@ -23,18 +24,20 @@ import {
   getCustomStyleMap,
   extractInlineStyle,
   getSelectedBlocksType,
+  changeListDepth,
   blockRenderMap,
   blockStyleFn,
   hasProperty,
   filter,
   mergeRecursive,
 } from './utils';
+import moveSelectionToEnd from './utils/moveSelectionToEnd';
 import type { CustomStyleMap } from './utils/inline';
 import * as Controls from './components/Controls';
 
 import { getLinkDecorator, getMentionDecorators, getHashtagDecorator } from './core/decorators';
 import getBlockRenderFunc from './core/blockRender';
-import defaultToolbar from './core/config';
+import configDefaults from './core/config';
 import type { ToolbarConfig } from './core/config';
 import type { BoldrEditorType } from './BoldrEditorType';
 
@@ -51,11 +54,11 @@ const EditorToolbar = styled.div`
   margin-bottom: 5px;
   font-size: 15px;
   user-select: none;
-  visibility: ${props => (props.toolbarShow ? 'visible' : 'hidden')};
+  visibility: ${props => (props.isVisible ? 'visible' : 'hidden')};
 `;
 
 export type State = {
-  editorState: Object,
+  editorState: EditorState,
   // is the editor focused
   editorFocused: boolean,
   // the toolbar config object
@@ -63,6 +66,11 @@ export type State = {
 };
 
 export default class BoldrEditor extends React.Component<BoldrEditorType, State> {
+  /**
+   * Default properties
+   * @property {Object} defaultProps Default properties.
+   * @static
+   */
   static defaultProps = {
     toolbarOnFocus: false,
     toolbarHidden: false,
@@ -72,8 +80,7 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
 
   constructor(props: BoldrEditorType) {
     super(props);
-    const toolbar = mergeRecursive(defaultToolbar, props.toolbar);
-    // $FlowIssue
+    const toolbar = mergeRecursive(configDefaults, props.toolbar);
     this.state = {
       editorState: undefined,
       editorFocused: false,
@@ -113,28 +120,19 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
 
   componentWillReceiveProps(props: BoldrEditorType) {
     const newState = {};
+    // if toolbar changes, merge changes into the default settings
     if (this.props.toolbar !== props.toolbar) {
-      const toolbar = mergeRecursive(defaultToolbar, props.toolbar);
+      const toolbar = mergeRecursive(configDefaults, props.toolbar);
       newState.toolbar = toolbar;
     }
+    // if editorState is passed, we arent empty. load the provided state
     if (hasProperty(props, 'editorState') && this.props.editorState !== props.editorState) {
       if (props.editorState) {
         newState.editorState = EditorState.set(props.editorState, {
           decorator: this.compositeDecorator,
         });
       } else {
-        newState.editorState = EditorState.createEmpty(this.compositeDecorator);
-      }
-    } else if (
-      hasProperty(props, 'contentState') &&
-      this.props.contentState !== props.contentState
-    ) {
-      if (props.contentState) {
-        const newEditorState = this.changeEditorState(props.contentState);
-        if (newEditorState) {
-          newState.editorState = newEditorState;
-        }
-      } else {
+        // create the empty state
         newState.editorState = EditorState.createEmpty(this.compositeDecorator);
       }
     }
@@ -145,6 +143,7 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
     ) {
       extractInlineStyle(newState.editorState);
     }
+
     this.setState(newState);
     this.editorProps = this.filterEditorProps(props);
     this.customStyleMap = getCustomStyleMap();
@@ -159,58 +158,13 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
   editorProps: Object;
   props: BoldrEditorType;
 
-  onEditorBlur: Function = (): void => {
-    this.setState({
-      editorFocused: false,
-    });
-  };
-
-  onEditorFocus: Function = (event): void => {
-    const { onFocus } = this.props;
-    this.setState({
-      editorFocused: true,
-    });
-    if (onFocus && this.focusHandler.isEditorFocused()) {
-      onFocus(event);
-    }
-  };
-
-  onEditorMouseDown: Function = (): void => {
-    this.focusHandler.onEditorMouseDown();
-  };
-
-  onTab: Function = (event): boolean => {
-    const { onTab } = this.props;
-    if (!onTab || !onTab(event)) {
-      const editorState = changeDepth(this.state.editorState, event.shiftKey ? -1 : 1, 4);
-      if (editorState && editorState !== this.state.editorState) {
-        this.onChange(editorState);
-        event.preventDefault();
-      }
-    }
-  };
-
-  onUpDownArrow: Function = (event): boolean => {
-    if (SuggestionHandler.isOpen()) {
-      event.preventDefault();
-    }
-  };
-
-  onToolbarFocus: Function = (event): void => {
-    const { onFocus } = this.props;
-    if (onFocus && this.focusHandler.isToolbarFocused()) {
-      onFocus(event);
-    }
-  };
-
-  onWrapperBlur: Function = (event: Object) => {
-    const { onBlur } = this.props;
-    if (onBlur && this.focusHandler.isEditorBlur(event)) {
-      onBlur(event);
-    }
-  };
-
-  onChange: Function = (editorState: Object): void => {
+  /**
+   * On change method.
+   * @function onChange
+   * @param {EditorState} editorState New editor state.
+   * @returns {undefined}
+   */
+  onChange: Function = (editorState: EditorState): void => {
     const { readOnly, onEditorStateChange } = this.props;
     if (
       !readOnly &&
@@ -226,7 +180,13 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
       }
     }
   };
-
+  /**
+   * runs after the onChange method, converting editorState to
+   * raw Immutable Map.
+   * @function onChange
+   * @param {EditorState} editorState New editor state.
+   * @returns {undefined}
+   */
   afterChange: Function = (editorState): void => {
     setTimeout(() => {
       const { onChange, onContentStateChange } = this.props;
@@ -239,11 +199,11 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
     });
   };
 
-  setWrapperReference: Function = (ref: Object): void => {
+  setWrapperRef: Function = (ref: Object): void => {
     this.wrapper = ref;
   };
 
-  setEditorReference: Function = (ref: Object): void => {
+  setEditorRef: Function = (ref: Object): void => {
     this.editor = ref;
   };
 
@@ -284,32 +244,13 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
 
   createEditorState = compositeDecorator => {
     let editorState;
-    if (hasProperty(this.props, 'editorState')) {
-      if (this.props.editorState) {
-        editorState = EditorState.set(this.props.editorState, {
-          decorator: compositeDecorator,
-        });
-      }
-    } else if (hasProperty(this.props, 'defaultEditorState')) {
-      if (this.props.defaultEditorState) {
-        editorState = EditorState.set(this.props.defaultEditorState, {
-          decorator: compositeDecorator,
-        });
-      }
-    } else if (hasProperty(this.props, 'contentState')) {
-      if (this.props.contentState) {
-        const contentState = convertFromRaw(this.props.contentState);
-        editorState = EditorState.createWithContent(contentState, compositeDecorator);
-        editorState = EditorState.moveSelectionToEnd(editorState);
-      }
-    } else if (hasProperty(this.props, 'defaultContentState')) {
-      let contentState = this.props.defaultContentState;
-      if (contentState) {
-        contentState = convertFromRaw(contentState);
-        editorState = EditorState.createWithContent(contentState, compositeDecorator);
-        editorState = EditorState.moveSelectionToEnd(editorState);
-      }
+
+    if (this.props.editorState) {
+      editorState = EditorState.set(this.props.editorState, {
+        decorator: compositeDecorator,
+      });
     }
+
     if (!editorState) {
       editorState = EditorState.createEmpty(compositeDecorator);
     }
@@ -352,7 +293,7 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
     const newContentState = convertFromRaw(contentState);
     let { editorState } = this.state;
     editorState = EditorState.push(editorState, newContentState, 'insert-characters');
-    editorState = EditorState.moveSelectionToEnd(editorState);
+    editorState = moveSelectionToEnd(editorState);
     return editorState;
   };
 
@@ -360,6 +301,57 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
     setTimeout(() => {
       this.editor.focus();
     });
+  };
+
+  onEditorBlur: Function = (): void => {
+    this.setState({
+      editorFocused: false,
+    });
+  };
+
+  onEditorFocus: Function = (event: SyntheticEvent<>): void => {
+    const { onFocus } = this.props;
+    this.setState({
+      editorFocused: true,
+    });
+    if (onFocus && this.focusHandler.isEditorFocused()) {
+      onFocus(event);
+    }
+  };
+
+  onEditorMouseDown: Function = (): void => {
+    this.focusHandler.onEditorMouseDown();
+  };
+
+  onTab: Function = (event: SyntheticEvent<>): void => {
+    const { onTab } = this.props;
+    if (!onTab || !onTab(event)) {
+      const editorState = changeListDepth(this.state.editorState, event.shiftKey ? -1 : 1, 4);
+      if (editorState && editorState !== this.state.editorState) {
+        this.onChange(editorState);
+        event.preventDefault();
+      }
+    }
+  };
+
+  onUpDownArrow: Function = (event: SyntheticEvent<>): boolean => {
+    if (SuggestionHandler.isOpen()) {
+      event.preventDefault();
+    }
+  };
+
+  onToolbarFocus: Function = (event: SyntheticEvent<>): void => {
+    const { onFocus } = this.props;
+    if (onFocus && this.focusHandler.isToolbarFocused()) {
+      onFocus(event);
+    }
+  };
+
+  onWrapperBlur: Function = (event: SyntheticEvent<>) => {
+    const { onBlur } = this.props;
+    if (onBlur && this.focusHandler.isEditorBlur(event)) {
+      onBlur(event);
+    }
   };
 
   handleKeyCommand: Function = (command: Object): boolean => {
@@ -372,7 +364,7 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
     return false;
   };
 
-  handleReturn: Function = (event: Object): boolean => {
+  handleReturn: Function = (event: SyntheticEvent<>): boolean => {
     if (SuggestionHandler.isOpen()) {
       return true;
     }
@@ -384,7 +376,7 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
     return false;
   };
 
-  preventDefault: Function = (event: Object) => {
+  preventDefault: Function = (event: SyntheticEvent<>) => {
     if (event.target.tagName === 'INPUT') {
       this.focusHandler.onInputMouseDown();
     } else {
@@ -411,8 +403,10 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
       editorState,
       onChange: this.onChange,
     };
-    const toolbarShow =
+
+    const toolbarIsVisible =
       !toolbarHidden && (editorFocused || this.focusHandler.isInputFocused() || !toolbarOnFocus);
+
     return (
       <div
         id={this.wrapperId}
@@ -423,7 +417,7 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
         aria-label="be-wrapper"
       >
         <EditorToolbar
-          toolbarShow={toolbarShow}
+          isVisible={toolbarIsVisible}
           // $FlowIssue
           aria-hidden={(!editorFocused && toolbarOnFocus).toString()}
           onFocus={this.onToolbarFocus}
@@ -445,7 +439,7 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
             )}
         </EditorToolbar>
         <div
-          ref={this.setWrapperReference}
+          ref={this.setWrapperRef}
           className={classNames('be-main', editorClassName)}
           style={editorStyle}
           onClick={this.focusEditor}
@@ -455,8 +449,9 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
           onMouseDown={this.onEditorMouseDown}
         >
           <Editor
-            ref={this.setEditorReference}
+            ref={this.setEditorRef}
             onTab={this.onTab}
+            spellcheck={this.props.spellcheck}
             onUpArrow={this.onUpDownArrow}
             onDownArrow={this.onUpDownArrow}
             editorState={editorState}

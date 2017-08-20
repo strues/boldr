@@ -1,27 +1,44 @@
+/* eslint-disable  react/no-array-index-key */
 /* @flow */
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Icon from '@boldr/ui/Icons/Icon';
+import * as React from 'react';
+import type { ContentBlock, ContentState } from 'draft-js';
+import ExternalLink from '@boldr/icons/ExternalLink';
+import type { LinkConfig } from '../../config';
+import { LinkDecoratorWrap } from './Link.styled';
 
-function findLinkEntities(contentBlock, callback, contentState) {
+type Props = {
+  children: React.ChildrenArray<React.Node>,
+  entityKey: string,
+  contentState: ContentState,
+};
+type State = {
+  showPopOver: boolean,
+};
+
+type EntityRangeCallback = (start: number, end: number) => void;
+
+function findLinkEntities(
+  contentBlock: ContentBlock,
+  callback: EntityRangeCallback,
+  contentState: ?ContentState,
+) {
   contentBlock.findEntityRanges(character => {
     const entityKey = character.getEntity();
-    return entityKey !== null && contentState.getEntity(entityKey).getType() === 'LINK';
+    if (entityKey !== null) {
+      const entity = contentState ? contentState.getEntity(entityKey) : null;
+      return entity !== null && entity.getType() === 'LINK';
+    }
+    return false;
   }, callback);
 }
 
 function getLinkComponent(config) {
   const { showOpenOptionOnHover } = config;
-  return class Link extends Component {
-    static propTypes = {
-      entityKey: PropTypes.string.isRequired,
-      children: PropTypes.array,
-      contentState: PropTypes.object,
-    };
-
-    state: Object = {
+  return class Link extends React.Component<Props, State> {
+    state: State = {
       showPopOver: false,
     };
+    props: Props;
 
     openLink: Function = () => {
       const { entityKey, contentState } = this.props;
@@ -42,8 +59,7 @@ function getLinkComponent(config) {
       const { url, targetOption } = contentState.getEntity(entityKey).getData();
       const { showPopOver } = this.state;
       return (
-        <span
-          className="boldr-editor__link-decorator-wrapper"
+        <LinkDecoratorWrap
           onMouseEnter={this.toggleShowPopOver}
           onMouseLeave={this.toggleShowPopOver}
         >
@@ -51,20 +67,19 @@ function getLinkComponent(config) {
             {children}
           </a>
           {showPopOver && showOpenOptionOnHover
-            ? <Icon
-                kind="external-link"
+            ? <ExternalLink
                 onClick={this.openLink}
                 color="#222"
-                className="boldr-editor__link-decorator-icon"
+                className="be-link-decorator-icon"
               />
             : undefined}
-        </span>
+        </LinkDecoratorWrap>
       );
     }
   };
 }
 
-export default config => {
+export default (config: LinkConfig) => {
   return {
     strategy: findLinkEntities,
     component: getLinkComponent(config),

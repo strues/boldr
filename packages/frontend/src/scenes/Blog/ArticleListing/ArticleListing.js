@@ -1,7 +1,7 @@
 /* @flow */
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Grid, Row, Col } from '@boldr/ui/Layout';
+import { Grid, Row, Col } from '../../../components/Layout';
 import { FeaturedArticle, ArticleCard } from '../components';
 
 type Data = {
