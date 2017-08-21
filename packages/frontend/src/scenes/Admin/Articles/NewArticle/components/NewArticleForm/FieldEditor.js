@@ -1,9 +1,10 @@
 /* @flow */
 import React, { Component } from 'react';
-// $FlowIssue
 import convertToRaw from 'draft-js/lib/convertFromDraftStateToRaw';
-// $FlowIssue
+import { graphql } from 'react-apollo';
 import EditorState from 'draft-js/lib/EditorState';
+
+import UPLOAD_MEDIA_MUTATION from '../../../../Media/gql/uploadMedia.graphql';
 import Editor from '../../../../../../components/BoldrEditor';
 
 const editorStyle = {
@@ -14,13 +15,29 @@ const editorStyle = {
 type Props = {
   input: Object,
   placeholder: string,
+  mutate: Function,
 };
-export default class FieldEditor extends Component {
+
+class FieldEditor extends Component {
   state = { editorState: EditorState.createEmpty() };
   onChange = (editorState: Object) => {
     const { input } = this.props;
     input.onChange(convertToRaw(editorState.getCurrentContent()));
     this.setState({ editorState });
+  };
+  handleUpload = file => {
+    return new Promise((resolve, reject) => {
+      this.props
+        .mutate({
+          variables: {
+            file,
+          },
+        })
+        .then(data => {
+          return resolve(data);
+        })
+        .catch(err => reject(err));
+    });
   };
 
   props: Props;
@@ -40,6 +57,7 @@ export default class FieldEditor extends Component {
         wrapperClassName="boldredit-wrapper"
         editorClassName="boldrui-editor"
         toolbar={{
+          image: { uploadCallback: this.handleUpload },
           history: { inDropdown: true },
           inline: { inDropdown: false },
           list: { inDropdown: true },
@@ -50,3 +68,5 @@ export default class FieldEditor extends Component {
     );
   }
 }
+
+export default graphql(UPLOAD_MEDIA_MUTATION)(FieldEditor);

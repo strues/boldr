@@ -74,6 +74,7 @@ export type ImageConfig = {
   modalClassName?: string,
   urlEnabled?: boolean,
   uploadEnabled?: boolean,
+  filePath: string,
   alignmentEnabled?: boolean,
   uploadCallback?: Function,
   inputAccept?: string,
@@ -184,6 +185,7 @@ export default {
     uploadEnabled: true,
     alignmentEnabled: true,
     uploadCallback: undefined,
+    filePath: 'http://localhost:2121/uploads/media',
     inputAccept: 'image/gif,image/jpeg,image/jpg,image/png,image/svg',
     defaultSize: {
       height: 'auto',

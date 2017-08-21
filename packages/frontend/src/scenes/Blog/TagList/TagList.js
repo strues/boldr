@@ -2,26 +2,23 @@
 
 import React from 'react';
 import Helmet from 'react-helmet';
-import { Grid, Col, Row } from '@boldr/ui/Layout';
+
 import Loader from '@boldr/ui/Loader';
+import { Grid, Col, Row } from '../../../components/Layout';
 import ArticleCard from '../components/ArticleCard';
 
-interface Data {
-  getArticlesForTag: Array<Article>,
-  loading: boolean,
-}
-
 type Props = {
-  data: Data,
+  isLoading: boolean,
+  articles: Array<Article>,
   match: Object,
 };
 
 const TagList = (props: Props) => {
-  const { data: { loading, getArticlesForTag }, match: { params } } = props;
-  if (loading) {
+  const { isLoading, articles, match: { params } } = props;
+  if (isLoading) {
     return <Loader />;
   }
-  if (!getArticlesForTag) {
+  if (!articles) {
     return <h1>No matching posts</h1>;
   }
   return (
@@ -29,7 +26,7 @@ const TagList = (props: Props) => {
       <Helmet title={`Posts tagged ${params.name}`} />
       <Grid>
         <Row>
-          {getArticlesForTag.map(article =>
+          {articles.map(article =>
             <Col key={article.id} xs={12} sm={4}>
               <ArticleCard listTags={article.tags} article={article} />
             </Col>,

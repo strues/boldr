@@ -1,31 +1,22 @@
 /* @flow */
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { Grid, Row, Col } from '../../../components/Layout';
 import { FeaturedArticle, ArticleCard } from '../components';
 
-type Data = {
+type Props = {
   articles: Array<Article>,
-};
-
-export type Props = {
-  renderWhenReady: () => any,
-  data: Data,
+  isLoading: boolean,
+  error?: Object,
 };
 
 const CardSpacer = styled.div`margin-bottom: 50px;`;
 
-class ArticleListing extends Component {
-  static defaultProps = {
-    data: {
-      articles: [],
-    },
-  };
-
+class ArticleListing extends PureComponent<Props, *> {
   props: Props;
 
   renderArticles = () => {
-    const { articles } = this.props.data;
+    const { articles } = this.props;
     const allArticles = articles.filter(p => p.published) && articles.filter(p => !p.featured);
     return allArticles.map(article =>
       <Col key={article.id} xs={12} md={4}>
@@ -37,7 +28,7 @@ class ArticleListing extends Component {
   };
 
   renderFeature = () => {
-    const { articles } = this.props.data;
+    const { articles } = this.props;
     const featuredArticles = articles.filter(p => p.featured);
     return featuredArticles.map(article => <FeaturedArticle key={article.id} {...article} />);
   };
@@ -51,10 +42,14 @@ class ArticleListing extends Component {
     </div>;
 
   render() {
-    const { renderWhenReady } = this.props;
     return (
       <Grid>
-        {renderWhenReady(this.renderBody)}
+        <div className="boldrui-pad-top">
+          {this.renderFeature()}
+          <Row>
+            {this.renderArticles()}
+          </Row>
+        </div>
       </Grid>
     );
   }

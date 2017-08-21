@@ -2,15 +2,16 @@
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
-import { ThemeProvider } from 'styled-components';
+
 import { getToken } from '@boldr/auth';
 import { createApolloClient, createBoldrStore, RouterConnection, wrapBoldrApp } from '@boldr/core';
 import { checkAuth } from './scenes/Account/state/actions';
-import { GRID_SETTINGS } from './components/Layout/constants';
-
 import App from './components/App';
 import appReducer from './reducers';
+import ThemeProvider from './theme/ThemeProvider';
+import { injectResetStyle } from './theme/resetStyle';
 
+injectResetStyle();
 const DOM_NODE = document.getElementById('app');
 const preloadedState = window.__APOLLO_STATE__;
 const token = getToken();
@@ -37,7 +38,7 @@ if (token) {
 const AppComponent = PassedApp =>
   <BrowserRouter>
     <RouterConnection>
-      <ThemeProvider theme={{ boldrgrid: GRID_SETTINGS }}>
+      <ThemeProvider>
         {PassedApp}
       </ThemeProvider>
     </RouterConnection>

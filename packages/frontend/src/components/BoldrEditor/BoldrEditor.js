@@ -7,9 +7,13 @@ import {
   RichUtils,
   convertToRaw,
   convertFromRaw,
+  genKey,
+  SelectionState,
+  ContentBlock,
   CompositeDecorator,
 } from 'draft-js';
 import type { DraftDecoratorType } from 'draft-js';
+import { OrderedSet, List } from 'immutable';
 import styled from 'styled-components';
 import classNames from 'classnames';
 
@@ -199,14 +203,6 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
     });
   };
 
-  setWrapperRef: Function = (ref: Object): void => {
-    this.wrapper = ref;
-  };
-
-  setEditorRef: Function = (ref: Object): void => {
-    this.editor = ref;
-  };
-
   getCompositeDecorator = (): void => {
     const decorators = [
       ...this.props.customDecorators,
@@ -232,7 +228,7 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
     return new CompositeDecorator(decorators);
   };
 
-  getWrapperRef = () => this.wrapper;
+  getWrapperRef = () => this.refs.wrapper;
 
   getEditorState = () => this.state.editorState;
 
@@ -439,7 +435,9 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
             )}
         </EditorToolbar>
         <div
-          ref={this.setWrapperRef}
+          ref={el => {
+            this.wrapper = el;
+          }}
           className={classNames('be-main', editorClassName)}
           style={editorStyle}
           onClick={this.focusEditor}
@@ -449,7 +447,9 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
           onMouseDown={this.onEditorMouseDown}
         >
           <Editor
-            ref={this.setEditorRef}
+            ref={el => {
+              this.editor = el;
+            }}
             onTab={this.onTab}
             spellcheck={this.props.spellcheck}
             onUpArrow={this.onUpDownArrow}

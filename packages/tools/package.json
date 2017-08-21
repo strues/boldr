@@ -65,6 +65,7 @@
     "pretty-error": "^2.1.1",
     "react-dev-utils": "^3.1.1",
     "react-hot-loader": "next",
+     "source-map-loader": "^0.2.1",
     "source-map-support": "^0.4.16",
     "uglify-es": "^3.0.28",
     "uglifyjs-webpack-plugin": "1.0.0-beta.2",

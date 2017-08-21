@@ -22,9 +22,7 @@ var _package2 = _interopRequireDefault(_package);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 (0, _updateNotifier2.default)({ pkg: _package2.default }).notify();
-process.on('unhandledRejection', err => {
-  throw err;
-});
+
 const VERSION = _package2.default.version;
 _caporal2.default
 // default command
@@ -36,12 +34,7 @@ _caporal2.default.command('develop', 'Start development server').alias('dev').ac
   try {
     const tasks = [() => (0, _tools.cleanClient)(), () => (0, _tools.cleanServer)(), () => (0, _tools.startDevServer)()];
 
-    (0, _pSeries2.default)(tasks).then(result => {
-      console.log(result);
-    }).catch(err => console.log(err));
-    // Promise.all([await cleanClient(), await cleanServer(), await startDevServer()]).catch(err =>
-    //   console.log(err),
-    // );
+    (0, _pSeries2.default)(tasks).then(result => console.log(result)).catch(err => console.log(err));
   } catch (error) {
     console.log(error);
     process.exit(1);

@@ -3,7 +3,7 @@ import React from 'react';
 import Link from 'react-router-dom/Link';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { Grid, Col, Row } from '@boldr/ui/Layout';
+import { Grid, Row, Col } from '../../../components/Layout';
 import Paragraph from '@boldr/ui/Paragraph';
 // internal
 import SignupForm from './SignupForm';
@@ -28,7 +28,7 @@ const Signup = (props: { onSubmit: () => void }) => {
       <Grid>
         <Row>
           <Col xs={12}>
-            <Row xsCenter>
+            <Row center="xs">
               <Col xs={12} sm={8}>
                 <Spacer />
                 <SignupForm onSubmit={submitSignup} />

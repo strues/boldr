@@ -17,7 +17,6 @@ module.exports = [
   'draft-js',
   'draft-convert',
   'react-tagsinput',
-  'react-dropzone',
   'react-transition-group',
   'redux-form',
   'immutable',

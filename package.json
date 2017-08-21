@@ -9,7 +9,7 @@
     "commit": "git-cz",
     "coverage": "codecov",
     "lint": "eslint . --fix",
-    "postinstall": "npm run clean && npm run bootstrap",
+    "postinstall": "npm run bootstrap",
     "precommit": "lint-staged --verbose",
     "prettier": "node ./internal/scripts/prettier.js write",
     "test": "NODE_ENV=test jest --config ./jest.config.js -u --projects ./ && node ./internal/scripts/mapCoverage.js"

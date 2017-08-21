@@ -1,4 +1,4 @@
-/* eslint-disable new-cap, no-param-reassign, consistent-return */
+/* eslint-disable new-cap, no-param-reassign, consistent-return, promise/catch-or-return, promise/always-return */
 import mkdirp from 'mkdirp';
 import formidable from 'formidable';
 import objectPath from 'object-path';
@@ -18,7 +18,7 @@ export function processRequest(request, { uploadDir } = {}) {
   return new Promise((resolve, reject) => {
     form.parse(request, (error, { operations }, files) => {
       if (error) {
-        reject(new Error(error));
+        return reject(new Error(error));
       }
 
       // Decode the GraphQL operation(s). This is an array
@@ -33,12 +33,12 @@ export function processRequest(request, { uploadDir } = {}) {
         const operationsPath = objectPath(operations);
         Object.keys(files).forEach(variablesPath => {
           const { name, type, size, path } = files[variablesPath];
-          operationsPath.set(variablesPath, { name, type, size, path });
+          return operationsPath.set(variablesPath, { name, type, size, path });
         });
       }
 
       // Provide fields for replacement request body
-      resolve(operations);
+      return resolve(operations);
     });
   });
 }
@@ -49,12 +49,10 @@ export default function apolloUpload(options) {
     if (!request.is('multipart/form-data')) {
       return next();
     }
-    processRequest(request, options)
-      .then(body => {
-        request.body = body;
-        // eslint-disable-next-line
-        return next();
-      })
-      .catch(err => console.log(err));
+    processRequest(request, options).then(body => {
+      request.body = body;
+      // eslint-disable-next-line
+      next();
+    });
   };
 }

@@ -1,3 +1,4 @@
+/* eslint-disable prefer-template */
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import isInteger from 'lodash/isInteger';
@@ -25,7 +26,7 @@ const Col = styled.div`
     flex-direction: column-reverse;
   `} ${p =>
       Object.keys(p)
-        .filter(k => ~BREAKPOINT_NAMES.indexOf(k))
+        .filter(k => BREAKPOINT_NAMES.indexOf(k) !== -1)
         .sort((k1, k2) => BREAKPOINT_NAMES.indexOf(k1) - BREAKPOINT_NAMES.indexOf(k2))
         .map(
           k =>
@@ -44,7 +45,7 @@ const Col = styled.div`
         `
                 : 'display: none;'}`,
         )} ${p =>
-      Object.keys(p).filter(k => ~offsetProps.indexOf(k)).map(
+      Object.keys(p).filter(k => offsetProps.indexOf(k) !== -1).map(
         k => config(p).media[k.replace(/Offset$/, '')]`
         margin-left: ${100 / config(p).gridSize * p[k]}%;
       `,

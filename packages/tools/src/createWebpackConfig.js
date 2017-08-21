@@ -71,6 +71,7 @@ const API_PREFIX = process.env.API_PREFIX;
 const HTML_TEMPLATE = path.resolve(ROOT, process.env.HTML_TEMPLATE);
 
 const nodeModules = path.resolve(ROOT, 'node_modules');
+const SRC_DIR = path.resolve(ROOT, 'src');
 const serverExternals = fs
   .readdirSync(nodeModules)
   .filter(x => !/\.bin|react-universal-component|webpack-flush-chunks/.test(x))
@@ -109,6 +110,7 @@ export default function createWebpackConfig(
       target: 'modern',
       styled: true,
       imports: 'webpack',
+      srcDir: SRC_DIR,
     },
   ];
   const serverPreset = [
@@ -124,6 +126,7 @@ export default function createWebpackConfig(
       target: 'current',
       styled: true,
       imports: 'webpack',
+      srcDir: SRC_DIR,
     },
   ];
   const PROJECT_CONFIG = require(path.resolve(ROOT, 'package.json'));
@@ -239,10 +242,11 @@ export default function createWebpackConfig(
     },
     resolve: {
       extensions: ['.js', '.json', '.jsx'],
-      mainFields: _IS_CLIENT_
-        ? ['web', 'browser', 'style', 'module', 'jsnext:main', 'main']
-        : ['module', 'jsnext:main', 'main'],
+      descriptionFiles: ['package.json'],
       modules: ['node_modules', path.resolve(ROOT, './node_modules')],
+      alias: {
+        'babel-runtime': path.dirname(require.resolve('babel-runtime/package.json')),
+      },
     },
     resolveLoader: {
       modules: [resolveOwn('node_modules'), path.resolve(ROOT, './node_modules')],
@@ -251,6 +255,15 @@ export default function createWebpackConfig(
       strictExportPresence: true,
       rules: [
         { parser: { requireEnsure: false } },
+        {
+          test: JS_FILES,
+          loader: require.resolve('source-map-loader'),
+          enforce: 'pre',
+          options: {
+            quiet: true,
+          },
+          exclude: [/apollo-/, /react-apollo/],
+        },
         // References to images, fonts, movies, music, etc.
         {
           test: ASSET_FILES,

@@ -1,5 +1,5 @@
 // @flow
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import classnames from 'classnames';
 import HeroArticle from '@boldr/ui/Hero/HeroArticle';
@@ -14,25 +14,28 @@ export type Props = {
   loading: boolean,
   className?: string,
   data: Object,
+  isLoading: boolean,
+  error?: Object,
+  article: Object,
   sidebarClassName?: string,
 };
 
-class Article extends Component {
+class Article extends PureComponent<Props, *> {
   props: Props;
 
   displaySingleArticle = () => {
-    const { data: { getArticleBySlug }, className } = this.props;
+    const { article, className } = this.props;
     const classes = classnames(BASE_ELEMENT, className);
     return (
       <div className={classes}>
-        <Helmet title={getArticleBySlug.title} />
-        <HeroArticle bgImg={getArticleBySlug.image}>
-          <ArticleTitle title={getArticleBySlug.title} />
+        <Helmet title={article.title} />
+        <HeroArticle bgImg={article.image}>
+          <ArticleTitle title={article.title} />
         </HeroArticle>
         <Grid>
           <Row>
             <Col xs={12} md={8} lg={9}>
-              <ArticleContent {...getArticleBySlug} />
+              <ArticleContent {...article} />
             </Col>
             {this.renderArticleSidebar()}
           </Row>
@@ -42,13 +45,13 @@ class Article extends Component {
   };
 
   renderArticleSidebar = () => {
-    const { getArticleBySlug } = this.props.data;
+    const { article } = this.props;
 
     return (
       <Col xs={12} md={4} lg={3}>
         <ArticleSidebar
-          author={getArticleBySlug.author}
-          tags={getArticleBySlug.tags}
+          author={article.author}
+          tags={article.tags}
           className={this.props.sidebarClassName}
         />
       </Col>
@@ -56,7 +59,7 @@ class Article extends Component {
   };
 
   render() {
-    if (this.props.data.loading && !this.props.data.getArticleBySlug) {
+    if (this.props.isLoading && !this.props.article) {
       return <Loader />;
     } else {
       return (

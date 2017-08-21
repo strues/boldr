@@ -15,9 +15,7 @@ import {
 import pkg from '../package.json';
 
 updateNotifier({ pkg }).notify();
-process.on('unhandledRejection', err => {
-  throw err;
-});
+
 const VERSION = pkg.version;
 program.STRING = value => (typeof value === 'string' ? value : null);
 
@@ -32,12 +30,9 @@ program.command('develop', 'Start development server').alias('dev').action(() =>
 
     pSeries(tasks)
       .then(result => {
-        console.log(result);
+        return console.log(result);
       })
       .catch(err => console.log(err));
-    // Promise.all([await cleanClient(), await cleanServer(), await startDevServer()]).catch(err =>
-    //   console.log(err),
-    // );
   } catch (error) {
     console.log(error);
     process.exit(1);

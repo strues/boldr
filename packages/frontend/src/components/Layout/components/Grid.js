@@ -7,11 +7,11 @@ const Grid = styled.div`
   margin-right: auto;
   margin-left: auto;
 
-  ${p =>
-    p.fluid &&
+  ${props =>
+    props.fluid &&
     css`
-    padding-right: ${p => config(p).outerMargin + 'rem'};
-    padding-left: ${p => config(p).outerMargin + 'rem'};
+    padding-right: ${props => `${config(props).outerMargin}rem`};
+    padding-left: ${props => `${config(props).outerMargin}rem`};
   `} ${p =>
       !p.fluid &&
       css`

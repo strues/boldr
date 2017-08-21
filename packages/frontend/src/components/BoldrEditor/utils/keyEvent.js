@@ -1,5 +1,7 @@
+/* eslint-disable complexity */
 /* @flow */
-import { EditorState, RichUtils } from 'draft-js';
+import { genKey, ContentBlock, EditorState, RichUtils } from 'draft-js';
+import { List } from 'immutable';
 import {
   insertNewUnstyledBlock,
   removeSelectedBlocksStyle,
@@ -7,12 +9,99 @@ import {
 } from './block';
 import { isListBlock, changeListDepth } from './list';
 
+const defaults = {
+  breakoutBlockType: 'unstyled',
+  breakoutBlocks: [
+    'header-one',
+    'header-two',
+    'header-three',
+    'header-four',
+    'header-five',
+    'header-six',
+  ],
+  doubleBreakoutBlocks: ['blockquote', 'unordered-list-item', 'ordered-list-item', 'code-block'],
+};
 /**
 * Function will handle followind keyPress scenarios when Shift key is not pressed.
 */
 function handleHardNewlineEvent(editorState: EditorState): EditorState {
   const selection = editorState.getSelection();
+  const breakoutBlockType = defaults.breakoutBlockType;
+  const breakoutBlocks = defaults.breakoutBlocks;
+  const doubleBreakoutBlocks = defaults.doubleBreakoutBlocks;
+  const currentBlockType = RichUtils.getCurrentBlockType(editorState);
+  const isSingleBreakoutBlock = breakoutBlocks.indexOf(currentBlockType) > -1;
+  const isDoubleBreakoutBlock = doubleBreakoutBlocks.indexOf(currentBlockType) > -1;
   if (selection.isCollapsed()) {
+    if (isSingleBreakoutBlock || isDoubleBreakoutBlock) {
+      console.log(isSingleBreakoutBlock || isDoubleBreakoutBlock);
+      const contentState = editorState.getCurrentContent();
+      const currentBlock = contentState.getBlockForKey(selection.getEndKey());
+      const endOffset = selection.getEndOffset();
+      const atEndOfBlock = endOffset === currentBlock.getLength();
+      const atStartOfBlock = endOffset === 0;
+      if (
+        (atEndOfBlock && isSingleBreakoutBlock) ||
+        (atStartOfBlock && isSingleBreakoutBlock) ||
+        (atStartOfBlock && !currentBlock.getLength())
+      ) {
+        const emptyBlockKey = genKey();
+        const emptyBlock = new ContentBlock({
+          key: emptyBlockKey,
+          text: '',
+          type: breakoutBlockType,
+          characterList: List(),
+          depth: 0,
+        });
+        const blockMap = contentState.getBlockMap();
+        // Split the blocks
+        const blocksBefore = blockMap.toSeq().takeUntil(function(v) {
+          return v === currentBlock;
+        });
+
+        const blocksAfter = blockMap
+          .toSeq()
+          .skipUntil(function(v) {
+            return v === currentBlock;
+          })
+          .rest();
+
+        let augmentedBlocks;
+        let focusKey;
+        // Choose which order to apply the augmented blocks in depending
+        // on whether we’re at the start or the end
+        if (atEndOfBlock) {
+          if (isDoubleBreakoutBlock) {
+            // Discard Current as it was blank
+            augmentedBlocks = [[emptyBlockKey, emptyBlock]];
+          } else {
+            // Current first, empty block afterwards
+            augmentedBlocks = [[currentBlock.getKey(), currentBlock], [emptyBlockKey, emptyBlock]];
+          }
+          focusKey = emptyBlockKey;
+        } else {
+          // Empty first, current block afterwards
+          augmentedBlocks = [[emptyBlockKey, emptyBlock], [currentBlock.getKey(), currentBlock]];
+          focusKey = currentBlock.getKey();
+        }
+        // Join back together with the current + new block
+        const newBlocks = blocksBefore.concat(augmentedBlocks, blocksAfter).toOrderedMap();
+        const newContentState = contentState.merge({
+          blockMap: newBlocks,
+          selectionBefore: selection,
+          selectionAfter: selection.merge({
+            anchorKey: focusKey,
+            anchorOffset: 0,
+            focusKey: focusKey,
+            focusOffset: 0,
+            isBackward: false,
+          }),
+        });
+        // Set the state
+        setEditorState(EditorState.push(editorState, newContentState, 'split-block'));
+        return 'handled';
+      }
+    }
     const contentState = editorState.getCurrentContent();
     const blockKey = selection.getStartKey();
     const block = contentState.getBlockForKey(blockKey);

@@ -2,7 +2,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { Grid, Col, Row } from '@boldr/ui/Layout';
+import { Grid, Row, Col } from '../../../components/Layout';
 import LoginForm from './LoginForm';
 
 type Props = {
@@ -20,7 +20,7 @@ const Login = (props: Props) => {
       <Grid>
         <Row>
           <Col xs={12}>
-            <Row xsCenter>
+            <Row center="xs">
               <Col xs={6}>
                 <Spacer />
                 <LoginForm onSubmit={submitLogin} />

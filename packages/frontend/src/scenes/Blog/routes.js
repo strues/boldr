@@ -1,23 +1,23 @@
 // @flow
-import ArticleListingContainer from './ArticleListing/ArticleListingContainer';
-import ArticleContainer from './Article/ArticleContainer';
-import TagListContainer from './TagList/TagListContainer';
+import ArticleListing from './ArticleListing';
+import Article from './Article';
+import TagList from './TagList';
 
 export default [
   {
     exact: true,
     path: '/blog',
-    component: ArticleListingContainer,
+    component: ArticleListing,
     routes: [
       {
         path: '/blog/:slug',
         exact: true,
-        component: ArticleContainer,
+        component: Article,
       },
       {
         exact: true,
         path: '/blog/tags/:name',
-        component: TagListContainer,
+        component: TagList,
       },
     ],
   },

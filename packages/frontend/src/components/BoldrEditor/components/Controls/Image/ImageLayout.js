@@ -147,7 +147,7 @@ class ImageLayout extends React.Component<Props, State> {
     }
   };
 
-  onDragEnter: Function = (event: Object): void => {
+  onDragEnter: Function = (event: SyntheticEvent<>): void => {
     this.stopPropagation(event);
     this.setState({
       dragEnter: true,
@@ -162,14 +162,14 @@ class ImageLayout extends React.Component<Props, State> {
 
   uploadImage: Function = (file: Object): void => {
     this.toggleShowImageLoading();
-    const { uploadCallback } = this.props.config;
+    const { uploadCallback, filePath } = this.props.config;
     uploadCallback(file)
       .then(({ data }) => {
         this.setState({
           showImageLoading: false,
           dragEnter: false,
         });
-        this.addImageFromSrcLink(data.link);
+        return this.addImageFromSrcLink(`${filePath}/${data.uploadMedia.name}`);
       })
       .catch(() => {
         this.setState({

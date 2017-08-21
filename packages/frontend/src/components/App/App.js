@@ -6,12 +6,11 @@ import Route from 'react-router-dom/Route';
 import Redirect from 'react-router-dom/Redirect';
 import Switch from 'react-router-dom/Switch';
 import Loader from '@boldr/ui/Loader';
-
 import { getToken } from '@boldr/auth';
 // internal
 import '../../styles/main.scss';
 // Start routes
-
+import View from '../Layout/components/View';
 import Page from '../../pages/Page/Page';
 import Error404 from '../../pages/Error404';
 import AdminDashboard from '../../scenes/Admin';
@@ -75,12 +74,14 @@ const App = (props: Props) => {
         <meta name="msapplication-TileColor" content="#2b2b2b" />
         <meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png" />
       </Helmet>
-      <Switch>
-        <ProtectedRoute path="/admin" component={AdminDashboard} />
-        <Route path="/" component={Page} />
-        <Route component={Error404} />
-      </Switch>
-      <NotificationContainer />
+      <View>
+        <Switch>
+          <ProtectedRoute path="/admin" component={AdminDashboard} />
+          <Route path="/" component={Page} />
+          <Route component={Error404} />
+        </Switch>
+        <NotificationContainer />
+      </View>
     </div>
   );
 };
