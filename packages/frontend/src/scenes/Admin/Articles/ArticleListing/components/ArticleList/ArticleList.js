@@ -25,6 +25,7 @@ class ArticleList extends Component {
               key={article.id}
               article={article}
               handleClick={this.props.handleClick}
+              onDeleteClick={this.props.onDeleteClick}
             />,
           )}
         </List>

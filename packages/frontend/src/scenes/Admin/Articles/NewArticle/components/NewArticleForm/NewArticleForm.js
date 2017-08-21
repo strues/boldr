@@ -1,8 +1,6 @@
 /* @flow */
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-// $FlowIssue
-import EditorState from 'draft-js/lib/EditorState';
 import Button from '@boldr/ui/Button';
 import { Col, Row } from '@boldr/ui/Layout';
 import Paper from '@boldr/ui/Paper';
@@ -10,8 +8,6 @@ import Headline from '@boldr/ui/Headline';
 import Block from '@boldr/ui/Block';
 import Form, { Label, FormGroup, FormField, TextFormField, RadioFormField } from '@boldr/ui/Form';
 import { isRequired } from '../../../../../../core/util/validations';
-
-import { setMedia } from '../../../../state/media/actions';
 import RenderTags from '../RenderTags';
 import FieldEditor from './FieldEditor';
 import { Inner, Toolbar, NewPost, DarkSegment, HelpTxt } from './NewPostStyled';
@@ -31,13 +27,9 @@ export type Props = {
 class NewArticleForm extends Component {
   state = {
     files: [],
-    editorState: EditorState.createEmpty(),
   };
 
   props: Props;
-  handleSetMedia = data => {
-    this.props.dispatch(setMedia(data));
-  };
   render() {
     const { handleSubmit } = this.props;
     return (
@@ -64,7 +56,7 @@ class NewArticleForm extends Component {
                     <Field
                       component={FieldEditor}
                       label="Content"
-                      name="content"
+                      name="rawContent"
                       tabIndex={-2}
                       validate={[isRequired]}
                     />
@@ -96,6 +88,16 @@ class NewArticleForm extends Component {
                     placeholder="Short excerpt about the article"
                     tabIndex={-3}
                     validate={[isRequired]}
+                  />
+                </FormGroup>
+                <FormGroup>
+                  <Field
+                    id="featureimg"
+                    name="image"
+                    type="text"
+                    placeholder="URL for your image"
+                    component={TextFormField}
+                    label="Feature Image"
                   />
                 </FormGroup>
                 <Block>

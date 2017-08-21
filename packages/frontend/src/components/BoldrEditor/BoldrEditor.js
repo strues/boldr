@@ -17,6 +17,8 @@ import { OrderedSet, List } from 'immutable';
 import styled from 'styled-components';
 import classNames from 'classnames';
 
+import { convertToHTML, convertFromHTML } from 'draft-convert';
+import { getToHTMLConfig, getFromHTMLConfig } from './core/convert';
 import {
   ModalHandler,
   FocusHandler,
@@ -85,6 +87,7 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
   constructor(props: BoldrEditorType) {
     super(props);
     const toolbar = mergeRecursive(configDefaults, props.toolbar);
+
     this.state = {
       editorState: undefined,
       editorFocused: false,
@@ -112,7 +115,7 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
   componentWillMount(): void {
     this.compositeDecorator = this.getCompositeDecorator();
     const editorState = this.createEditorState(this.compositeDecorator);
-    extractInlineStyle(editorState);
+
     this.setState({
       editorState,
     });
@@ -130,22 +133,18 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
       newState.toolbar = toolbar;
     }
     // if editorState is passed, we arent empty. load the provided state
-    if (hasProperty(props, 'editorState') && this.props.editorState !== props.editorState) {
-      if (props.editorState) {
-        newState.editorState = EditorState.set(props.editorState, {
+    if (
+      hasProperty(props, 'initialContent') &&
+      this.props.initialContent !== props.initialContent
+    ) {
+      if (props.initialContent) {
+        newState.editorState = EditorState.set(props.initialContent, {
           decorator: this.compositeDecorator,
         });
       } else {
         // create the empty state
         newState.editorState = EditorState.createEmpty(this.compositeDecorator);
       }
-    }
-    if (
-      newState.editorState &&
-      (this.props.editorState && this.props.editorState.getCurrentContent().getBlockMap().size) !==
-        (newState.editorState && newState.editorState.getCurrentContent().getBlockMap().size)
-    ) {
-      extractInlineStyle(newState.editorState);
     }
 
     this.setState(newState);
@@ -162,45 +161,54 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
   editorProps: Object;
   props: BoldrEditorType;
 
+  createEditorState = compositeDecorator => {
+    let editorState, convertedContent;
+    let { initialContent, contentFormat } = this.props;
+
+    contentFormat = contentFormat || 'raw';
+    initialContent = initialContent || '';
+
+    if (!initialContent) {
+      editorState = EditorState.createEmpty(compositeDecorator);
+    } else {
+      if (contentFormat === 'html') {
+        convertedContent = convertFromHTML(getFromHTMLConfig())(initialContent);
+      } else if (contentFormat === 'raw') {
+        convertedContent = convertFromRaw(initialContent);
+      }
+
+      editorState = EditorState.createWithContent(convertedContent, compositeDecorator);
+    }
+
+    return editorState;
+  };
   /**
    * On change method.
    * @function onChange
    * @param {EditorState} editorState New editor state.
    * @returns {undefined}
    */
-  onChange: Function = (editorState: EditorState): void => {
-    const { readOnly, onEditorStateChange } = this.props;
+  onChange = (editorState: EditorState) => {
+    const { readOnly, onChange, onRawChange, onHtmlChange } = this.props;
     if (
       !readOnly &&
       !(getSelectedBlocksType(editorState) === 'atomic' && editorState.getSelection().isCollapsed)
     ) {
-      if (onEditorStateChange) {
-        onEditorStateChange(editorState);
-      }
-      if (!hasProperty(this.props, 'editorState')) {
-        this.setState({ editorState }, this.afterChange(editorState));
-      } else {
-        this.afterChange(editorState);
-      }
+      this.setState({ editorState }, () => {
+        clearTimeout(this.syncTimer);
+        this.syncTimer = setTimeout(() => {
+          if (onChange) {
+            onChange(this.getContent());
+          }
+          if (onHtmlChange) {
+            onHtmlChange(this.getHtmlContent());
+          }
+          if (onRawChange) {
+            onRawChange(this.getRawContent());
+          }
+        }, 100);
+      });
     }
-  };
-  /**
-   * runs after the onChange method, converting editorState to
-   * raw Immutable Map.
-   * @function onChange
-   * @param {EditorState} editorState New editor state.
-   * @returns {undefined}
-   */
-  afterChange: Function = (editorState): void => {
-    setTimeout(() => {
-      const { onChange, onContentStateChange } = this.props;
-      if (onChange) {
-        onChange(convertToRaw(editorState.getCurrentContent()));
-      }
-      if (onContentStateChange) {
-        onContentStateChange(convertToRaw(editorState.getCurrentContent()));
-      }
-    });
   };
 
   getCompositeDecorator = (): void => {
@@ -228,29 +236,41 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
     return new CompositeDecorator(decorators);
   };
 
-  getWrapperRef = () => this.refs.wrapper;
+  getHtmlContent() {
+    return this.getContent('html');
+  }
 
-  getEditorState = () => this.state.editorState;
+  getRawContent() {
+    return this.getContent('raw');
+  }
 
-  getSuggestions = () => this.props.mention && this.props.mention.suggestions;
+  getContent(format: string) {
+    const toolbar = mergeRecursive(configDefaults, this.props.toolbar);
+    format = format || this.props.contentFormat || 'raw';
+    const contentState = this.getContentState();
 
-  isReadOnly = () => this.props.readOnly;
+    const colors = toolbar.colorPicker.colors;
+    const fontSizes = toolbar.fontSize.options;
+    const fontFamilies = toolbar.fontFamily.options;
 
-  isImageAlignmentEnabled = () => this.state.toolbar.image.alignmentEnabled;
+    return format === 'html'
+      ? convertToHTML(
+          getToHTMLConfig({
+            contentState,
+            colors,
+            fontSizes,
+            fontFamilies,
+          }),
+        )(contentState)
+      : convertToRaw(contentState);
+  }
 
-  createEditorState = compositeDecorator => {
-    let editorState;
+  getContentState() {
+    return this.getEditorState().getCurrentContent();
+  }
 
-    if (this.props.editorState) {
-      editorState = EditorState.set(this.props.editorState, {
-        decorator: compositeDecorator,
-      });
-    }
-
-    if (!editorState) {
-      editorState = EditorState.createEmpty(compositeDecorator);
-    }
-    return editorState;
+  getEditorState = () => {
+    return this.state.editorState;
   };
 
   filterEditorProps = props => {
@@ -262,6 +282,7 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
       'defaultContentState',
       'contentState',
       'editorState',
+      'initialContent',
       'defaultEditorState',
       'toolbarOnFocus',
       'toolbar',
@@ -285,13 +306,13 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
     ]);
   };
 
-  changeEditorState = contentState => {
-    const newContentState = convertFromRaw(contentState);
-    let { editorState } = this.state;
-    editorState = EditorState.push(editorState, newContentState, 'insert-characters');
-    editorState = moveSelectionToEnd(editorState);
-    return editorState;
-  };
+  getWrapperRef = () => this.refs.wrapper;
+
+  getSuggestions = () => this.props.mention && this.props.mention.suggestions;
+
+  isReadOnly = () => this.props.readOnly;
+
+  isImageAlignmentEnabled = () => this.state.toolbar.image.alignmentEnabled;
 
   focusEditor: Function = (): void => {
     setTimeout(() => {

@@ -20,7 +20,7 @@ export type BoldrEditorType = {
   toolbarHidden?: boolean,
   locale?: string,
   contentFormat?: string,
-  importContent?: any,
+  initialContent?: any,
   localization?: Object,
   editorClassName?: string,
   wrapperClassName?: string,

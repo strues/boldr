@@ -64,7 +64,11 @@ class Articles extends Component {
               </LevelItem>
             </LevelRight>
           </Level>
-          <ArticleList articles={this.props.articles} handleClick={this.props.handleClick} />
+          <ArticleList
+            articles={this.props.articles}
+            handleClick={this.props.handleClick}
+            onDeleteClick={this.props.handleDeleteClick}
+          />
         </SideB>
         <Listing>
           <ArticlePreview article={this.props.article} />

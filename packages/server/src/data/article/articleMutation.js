@@ -1,4 +1,4 @@
-import { GraphQLNonNull, GraphQLID } from 'graphql';
+import { GraphQLNonNull, GraphQLID, GraphQLBoolean } from 'graphql';
 import _debug from 'debug';
 import slugIt from '../../utils/slugIt';
 import Tag from '../../models/Tag';
@@ -26,17 +26,15 @@ export default {
         excerpt: args.input.excerpt,
         content: args.input.content,
         rawContent: args.input.rawContent,
-        featureImage: args.input.featureImage,
+        image: args.input.image,
         backgroundImage: args.input.backgroundImage,
         meta: args.input.meta,
         attachments: args.input.attachments,
         published: args.input.published,
         userId: context.user.id,
       });
-
       args.input.tags.map(async tag => {
-        console.log(tag);
-        const existingTag = await Tag.query().where('name', tag).first().skipUndefined();
+        const existingTag = await Tag.query().where('name', tag).first();
         if (existingTag) {
           await ArticleTag.query().insert({
             tagId: existingTag.id,
@@ -46,16 +44,16 @@ export default {
           await newArticle.$relatedQuery('tags').insert({ name: tag }).skipUndefined();
         }
       });
-      const relatedFeatureImg = await Media.query()
-        .where('url', args.input.featureImage)
-        .first()
-        .skipUndefined();
-      await ArticleMedia.query()
-        .insert({
-          mediaId: relatedFeatureImg.id,
-          articleId: createArticle.id,
-        })
-        .skipUndefined();
+      // const relatedFeatureImg = await Media.query()
+      //   .where('url', args.input.image)
+      //   .skipUndefined()
+      //   .first();
+      // await ArticleMedia.query()
+      //   .insert({
+      //     mediaId: relatedFeatureImg.id,
+      //     articleId: createArticle.id,
+      //   })
+      //   .skipUndefined();
       return newArticle;
     },
   },
@@ -80,7 +78,7 @@ export default {
         excerpt: args.input.excerpt,
         content: args.input.content,
         rawContent: args.input.rawContent,
-        featureImage: args.input.featureImage,
+        image: args.input.image,
         backgroundImage: args.input.backgroundImage,
         meta: args.input.meta,
         attachments: args.input.attachments,
@@ -99,8 +97,9 @@ export default {
       },
     },
     async resolve(_, args) {
-      const removedArticle = await Article.query().deleteById(args.id);
-      return removedArticle;
+      await Article.query().deleteById(args.id);
+      const deletedId = args.id;
+      return deletedId;
     },
   },
 };

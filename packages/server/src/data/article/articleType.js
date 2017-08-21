@@ -22,11 +22,11 @@ const ArticleType = new GraphQLObjectType({
       description: 'The identifier for the article',
     },
     title: {
-      type: GraphQLString,
+      type: new GraphQLNonNull(GraphQLString),
       description: 'The title of the article',
     },
     slug: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
       description: 'The slug / normalized article title.',
     },
     content: {
@@ -96,11 +96,11 @@ export const CreateArticleInput = new GraphQLInputObjectType({
       description: 'The title of the article',
     },
     slug: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
       description: 'The slug / normalized article title.',
     },
     content: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
       description: 'html content of the article',
     },
     rawContent: {
@@ -108,18 +108,18 @@ export const CreateArticleInput = new GraphQLInputObjectType({
       description: 'Raw JSON of the article',
     },
     excerpt: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
       description: 'Short description of the article',
     },
     featured: {
-      type: new GraphQLNonNull(GraphQLBoolean),
+      type: GraphQLBoolean,
       description: 'True if the article is featured',
     },
     published: {
       type: new GraphQLNonNull(GraphQLBoolean),
       description: 'True if the article is published',
     },
-    featureImage: {
+    image: {
       type: GraphQLString,
       description: 'url of the article feature image',
     },
@@ -128,11 +128,12 @@ export const CreateArticleInput = new GraphQLInputObjectType({
       description: 'url of the article background image',
     },
     tags: {
-      type: GraphQLString,
+      type: new GraphQLList(GraphQLString),
       description: 'Tags relating articles together',
     },
   }),
 });
+
 export const EditArticleInput = new GraphQLInputObjectType({
   name: 'EditArticleInput',
   fields: () => ({
@@ -145,7 +146,7 @@ export const EditArticleInput = new GraphQLInputObjectType({
       description: 'The slug / normalized article title.',
     },
     content: {
-      type: new GraphQLNonNull(GraphQLString),
+      type: GraphQLString,
       description: 'html content of the article',
     },
     rawContent: {
@@ -157,14 +158,14 @@ export const EditArticleInput = new GraphQLInputObjectType({
       description: 'Short description of the article',
     },
     featured: {
-      type: new GraphQLNonNull(GraphQLBoolean),
+      type: GraphQLBoolean,
       description: 'True if the article is featured',
     },
     published: {
       type: new GraphQLNonNull(GraphQLBoolean),
       description: 'True if the article is published',
     },
-    featureImage: {
+    image: {
       type: GraphQLURL,
       description: 'url of the article feature image',
     },

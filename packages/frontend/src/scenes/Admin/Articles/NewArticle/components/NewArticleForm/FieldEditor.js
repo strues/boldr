@@ -1,15 +1,10 @@
 /* @flow */
 import React, { Component } from 'react';
-import convertToRaw from 'draft-js/lib/convertFromDraftStateToRaw';
-import { graphql } from 'react-apollo';
 
+import { graphql } from 'react-apollo';
+import hasWindow from '@boldr/utils/lib/dom/hasWindow';
 import UPLOAD_MEDIA_MUTATION from '../../../../Media/gql/uploadMedia.graphql';
 import Editor from '../../../../../../components/BoldrEditor';
-
-const editorStyle = {
-  minHeight: 200,
-  height: '100%',
-};
 
 type Props = {
   input: Object,
@@ -18,12 +13,19 @@ type Props = {
 };
 
 class FieldEditor extends Component<Props, *> {
-  state = { editorState: '' };
+  state = { editorState: undefined, htmlContent: undefined };
 
-  onChange = (editorState: Object) => {
-    const { input } = this.props;
-    input.onChange(convertToRaw(editorState.getCurrentContent()));
-    this.setState({ editorState });
+  handleHTMLChange = htmlContent => {
+    console.log(htmlContent);
+    this.setState({ htmlContent });
+    if (hasWindow) {
+      window.localStorage.setItem('htmlContent', htmlContent);
+    }
+  };
+
+  handleRawChange = raw => {
+    this.setState({ raw });
+    console.log(raw);
   };
   handleUpload = file => {
     return new Promise((resolve, reject) => {
@@ -44,23 +46,22 @@ class FieldEditor extends Component<Props, *> {
 
   render() {
     const { input } = this.props;
-    const { editorState } = this.state;
     return (
       <Editor
         {...input}
-        editorStyle={editorStyle}
-        onEditorStateChange={this.onChange}
-        editorState={editorState}
         toolbarClassName="boldredit-toolbar"
         wrapperClassName="boldredit-wrapper"
         editorClassName="boldrui-editor"
+        // initialContent="<p>hey</p>"
+        contentFormat="raw"
+        onRawChange={this.handleRawChange}
+        onHtmlChange={this.handleHTMLChange}
         toolbar={{
-          image: { uploadCallback: this.handleUpload },
-          history: { inDropdown: true },
-          inline: { inDropdown: false },
-          list: { inDropdown: true },
+          image: {
+            uploadCallback: this.handleUpload,
+            fileUrl: 'http://localhost:2121/uploads/media',
+          },
           link: { showOpenOptionOnHover: true },
-          textAlign: { inDropdown: false },
         }}
       />
     );

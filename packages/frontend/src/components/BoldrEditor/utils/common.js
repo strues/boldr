@@ -41,6 +41,7 @@ export function size(object: Object): any {
   }
   return undefined;
 }
+
 /**
  * The function returns true if the string passed to it has no content.
  * @param  {string}  str the string being checked for emptiness

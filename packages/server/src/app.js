@@ -22,7 +22,7 @@ initCore(app);
 // Session middleware, authentication check, rbac
 initAuth(app);
 
-// @TODO: left as standard REST routes
+// @todo: left as standard REST routes
 // /auth/check, /auth/verify, /token/reset-password, /token/forgot-password
 routes(app);
 // graphql middleware

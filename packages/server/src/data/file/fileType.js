@@ -1,4 +1,11 @@
-import { GraphQLString, GraphQLObjectType, GraphQLNonNull, GraphQLID, GraphQLInt } from 'graphql';
+import {
+  GraphQLString,
+  GraphQLObjectType,
+  GraphQLNonNull,
+  GraphQLID,
+  GraphQLInt,
+  GraphQLInputObjectType,
+} from 'graphql';
 
 const FileType = new GraphQLObjectType({
   name: 'File',
@@ -7,6 +14,28 @@ const FileType = new GraphQLObjectType({
       type: GraphQLID,
       description: 'The identifying uuid.',
     },
+    name: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'The file name',
+    },
+    type: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'The type of file.',
+    },
+    size: {
+      type: new GraphQLNonNull(GraphQLInt),
+      description: 'The size of the file',
+    },
+    path: {
+      type: new GraphQLNonNull(GraphQLString),
+      description: 'The path to the file.',
+    },
+  }),
+});
+
+export const Upload = new GraphQLInputObjectType({
+  name: 'Upload',
+  fields: () => ({
     name: {
       type: new GraphQLNonNull(GraphQLString),
       description: 'The file name',

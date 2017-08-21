@@ -9,19 +9,11 @@ import NewArticle from './NewArticle';
 // $FlowIssue
 const withMutation = graphql(CREATE_ARTICLE_MUTATION, {
   props: ({ mutate }) => ({
-    createArticle: values =>
+    createArticle: payload =>
       mutate({
         variables: {
           input: {
-            title: values.title,
-            slug: values.title,
-            content: convertToHTML(values.content),
-            rawContent: values.rawContent,
-            featured: values.featured,
-            published: values.published,
-            excerpt: values.excerpt,
-            featureImage: values.featureImage,
-            tags: values.tags,
+            ...payload,
           },
         },
       }),
@@ -35,7 +27,18 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onSubmit: values => {
-    ownProps.createArticle(values);
+    const payload = {
+      title: values.title,
+      slug: values.title,
+      content: values.content,
+      rawContent: values.rawContent,
+      featured: false,
+      published: values.published,
+      excerpt: values.excerpt,
+      image: values.image,
+      tags: values.tags,
+    };
+    ownProps.createArticle(payload);
   },
 });
 

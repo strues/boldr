@@ -7,6 +7,6 @@ mutation createArticle($input: CreateArticleInput!) {
     featured
     published
     excerpt
-    featureImage
+    image
   }
 }

@@ -2,10 +2,12 @@
 import React from 'react';
 import styled from 'styled-components';
 import { format } from 'date-fns';
+import { graphql } from 'react-apollo';
 import Avatar from '@boldr/ui/Avatar';
 import Icon from '@boldr/ui/Icons/Icon';
 import Paragraph from '@boldr/ui/Paragraph';
 import { Menu, MenuItem } from '@boldr/ui/Menu';
+import DELETE_ARTICLE_MUTATION from '../../../gql/deleteArticle.mutation.graphql';
 
 export type Props = {
   handleClick: Function,
@@ -39,6 +41,7 @@ const ListContent = styled.div`height: 50px;`;
 
 const ArticleListItem = (props: Props) => {
   const { article, handleClick } = props;
+  const clickDelete = () => props.deleteArticle(article.id);
   return (
     <ListItem onClick={() => handleClick(article)}>
       <ListHead>
@@ -47,7 +50,7 @@ const ArticleListItem = (props: Props) => {
         <Menu>
           <MenuItem
             icon={<Icon kind="trash" color="#222" />}
-            onClick={function noRefCheck() {}}
+            onClick={() => props.deleteArticle(article.id)}
             text="Delete"
           />
           <MenuItem
@@ -74,4 +77,20 @@ const ArticleListItem = (props: Props) => {
   );
 };
 
-export default ArticleListItem;
+export default graphql(DELETE_ARTICLE_MUTATION, {
+  props: ({ mutate }) => ({
+    deleteArticle(id) {
+      return () =>
+        mutate({
+          variables: { id },
+          optimisticResponse: {
+            __typename: 'Mutation',
+            deleteArticle: {
+              id,
+              __typename: 'Article',
+            },
+          },
+        });
+    },
+  }),
+})(ArticleListItem);
