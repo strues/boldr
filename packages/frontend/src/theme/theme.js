@@ -1,7 +1,12 @@
+/* eslint-disable new-cap */
+import Color from 'color';
+
 import { css } from 'styled-components';
 import { em } from 'polished';
 import { GRID_SETTINGS } from '../components/Layout/constants';
+import createPalette from './createPalette';
 
+const palette = createPalette();
 const SIZES = {
   large: 75,
   medium: 62,
@@ -46,8 +51,28 @@ export const mediaQuery = Object.keys(SIZES).reduce((accumulator, label) => {
 
 export default {
   boldrgrid: GRID_SETTINGS,
-  colors: {
-    blue: '#00bcd4',
+  palette: {
+    primary1: Color('#0094c6').hsl().string(),
+    primary2: Color('#3178B7').hsl().string(),
+    primary3: Color('#1B252F').hsl().string(),
+    primary4: Color('#243140').hsl().string(),
+    primary5: Color('#2D3E50').hsl().string(),
+    primary6: Color('#4F6A92').hsl().string(),
+    primaryAccent: Color('#00bcd4').hsl().string(),
+    success: Color('#61e786').hsl().string(),
+    danger: Color('#ef476f').hsl().string(),
+    warning: Color('#fffd82').hsl().string(),
+    info: Color('#6320EE').hsl().string(),
+    neutral1: Color('#ECF0F0').hsl().string(),
+    neutral2: Color('#F7F7F9').hsl().string(),
+    neutral3: Color('#DEE0E3').hsl().string(),
+    neutral4: Color('#9198A0').hsl().string(),
+    gunmetal: Color('#202b39').hsl().string(),
+    nearBlack: Color('#030507').hsl().string(),
+  },
+  fontColor: {
+    light: Color('#F7F7F9').hsl().string(),
+    dark: Color('#030507').hsl().string(),
   },
   fontFamily: { ...fontFamily },
 

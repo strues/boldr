@@ -65,7 +65,7 @@ class AddTag extends Component {
               </Button>
             </Control>
             <Control>
-              <Button onClick={reset} style={style} kind="secondary">
+              <Button onClick={reset} style={style} kind="primary" outline>
                 Reset
               </Button>
             </Control>

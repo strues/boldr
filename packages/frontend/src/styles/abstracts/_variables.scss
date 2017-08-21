@@ -624,9 +624,11 @@ $sidebar-compact-height: $sidebar-compact-width;
 /// @type Color
 $sidebar-color: #fff;
 /// @group dashboard
-$sidebar-nav-bg: $midnight;
+// $sidebar-nav-bg: $midnight;
+$sidebar-nav-bg: #243140;
 /// @group dashboard
-$sidebar-nav-expanded-bg: $madison;
+// $sidebar-nav-expanded-bg: $madison;
+$sidebar-nav-expanded-bg: #2d3e50;
 /// @group dashboard
 $sidebar-borders: none;
 /// @group dashboard
@@ -658,8 +660,8 @@ $sidebar-nav-link-hover-borders: 0;
 /// @group dashboard
 $sidebar-nav-link-active-color: $snow;
 /// @group dashboard
-$sidebar-nav-link-active-bg: $madison;
-$sidebar-nav-active-link-color: $water;
+$sidebar-nav-link-active-bg: #364b60;
+$sidebar-nav-active-link-color: #ECF0F0;
 $sidebar-nav-active-bg: $cello;
 /// @group dashboard
 $sidebar-nav-link-active-icon-color: $primary-color;

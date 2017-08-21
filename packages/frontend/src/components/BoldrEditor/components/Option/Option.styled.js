@@ -10,17 +10,18 @@ export const OptionWrapper = styled.div`
   height: 20px;
   padding: 3px;
   background-color: transparent;
-  border: ${props => (props.isDark ? '1px solid #243140' : '1px solid #f1f1f1')};
+  border: ${props =>
+    props.isDark ? '1px solid #243140' : `1px solid ${props.theme.palette.neutral2}`};
   border-radius: 2px;
   margin: 0 4px;
   text-transform: capitalize;
 
   svg {
-    color: ${props => (props.active ? '#00bcd4!important' : 'inherit')};
+    color: ${props => (props.active ? `${props.theme.palette.primary1}!important;` : 'inherit')};
   }
   &:hover {
     svg {
-      color: #00bcd4 !important;
+      color: ${props => props.theme.palette.primary1} !important;
     }
     opacity: ${props => (props.disabled ? 0.3 : 'inherit')};
     cursor: ${props => (props.disabled ? 'default' : 'inherit')};

@@ -45,6 +45,7 @@
   background-color: $sidebar-nav-bg;
   height: 100vh;
   min-height: 100%;
+
   .active.#{$boldr-ns}sidebar-nav-item-link {
     @include transition(color, 200ms);
     color: $sidebar-nav-active-link-color;
@@ -73,7 +74,7 @@
     }
 
     &:hover {
-      @include transition(color, 200ms);
+      @include transition(color, 700ms);
       color: #00bcd4;
       // background-color: $color-navbar-background-hover;
     }

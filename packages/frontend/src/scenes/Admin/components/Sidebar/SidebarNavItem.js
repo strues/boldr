@@ -3,7 +3,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import Icon from '@boldr/ui/Icons/Icon';
-
+import styled from 'styled-components';
 import { StyleClasses, Anchor } from '@boldr/ui';
 import { Chevron } from './SidebarUtils';
 

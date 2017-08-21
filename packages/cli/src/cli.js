@@ -1,8 +1,5 @@
-#!/usr/bin/env node
-
 import program from 'caporal';
 import updateNotifier from 'update-notifier';
-import pSeries from 'p-series';
 import {
   cleanClient,
   cleanServer,
@@ -25,14 +22,16 @@ program
   .description('A command line scaffolding tool and helper for Boldr.');
 
 program.command('develop', 'Start development server').alias('dev').action(() => {
+  async function clean() {
+    await cleanClient();
+    await cleanServer();
+  }
+  async function dev() {
+    await clean();
+    await startDevServer();
+  }
   try {
-    const tasks = [() => cleanClient(), () => cleanServer(), () => startDevServer()];
-
-    pSeries(tasks)
-      .then(result => {
-        return console.log(result);
-      })
-      .catch(err => console.log(err));
+    dev();
   } catch (error) {
     console.log(error);
     process.exit(1);

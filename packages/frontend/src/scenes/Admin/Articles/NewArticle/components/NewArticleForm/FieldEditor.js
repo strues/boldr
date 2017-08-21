@@ -2,7 +2,6 @@
 import React, { Component } from 'react';
 import convertToRaw from 'draft-js/lib/convertFromDraftStateToRaw';
 import { graphql } from 'react-apollo';
-import EditorState from 'draft-js/lib/EditorState';
 
 import UPLOAD_MEDIA_MUTATION from '../../../../Media/gql/uploadMedia.graphql';
 import Editor from '../../../../../../components/BoldrEditor';
@@ -18,8 +17,9 @@ type Props = {
   mutate: Function,
 };
 
-class FieldEditor extends Component {
-  state = { editorState: EditorState.createEmpty() };
+class FieldEditor extends Component<Props, *> {
+  state = { editorState: '' };
+
   onChange = (editorState: Object) => {
     const { input } = this.props;
     input.onChange(convertToRaw(editorState.getCurrentContent()));
@@ -51,8 +51,6 @@ class FieldEditor extends Component {
         editorStyle={editorStyle}
         onEditorStateChange={this.onChange}
         editorState={editorState}
-        contentFormat="html"
-        importContent="<p>Hey</p>"
         toolbarClassName="boldredit-toolbar"
         wrapperClassName="boldredit-wrapper"
         editorClassName="boldrui-editor"

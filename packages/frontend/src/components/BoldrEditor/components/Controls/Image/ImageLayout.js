@@ -162,14 +162,15 @@ class ImageLayout extends React.Component<Props, State> {
 
   uploadImage: Function = (file: Object): void => {
     this.toggleShowImageLoading();
-    const { uploadCallback, filePath } = this.props.config;
+    const { uploadCallback, fileUrl } = this.props.config;
     uploadCallback(file)
       .then(({ data }) => {
         this.setState({
           showImageLoading: false,
           dragEnter: false,
         });
-        return this.addImageFromSrcLink(`${filePath}/${data.uploadMedia.name}`);
+        // @note: data.uploadMedia is the GraphQL mutation.
+        return this.addImageFromSrcLink(`${fileUrl}/${data.uploadMedia.name}`);
       })
       .catch(() => {
         this.setState({

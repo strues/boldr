@@ -39,7 +39,7 @@
     "autoprefixer": "^7.1.2",
     "babel-loader": "^7.1.2",
     "babel-minify-webpack-plugin": "^0.2.0",
-    "babel-preset-boldr": "0.11.0-beta.2",
+    "babel-preset-boldr": "0.11.0-beta.3",
     "better-sass-loader": "^0.1.0-beta.1",
     "bluebird": "^3.5.0",
     "cache-loader": "^1.0.3",

@@ -7,6 +7,7 @@ import { StyleClasses } from '@boldr/ui';
 import SidebarNavItem from './SidebarNavItem';
 import { createItemTree, toggleExpandedItemWithId, activateItemWithLink } from './SidebarUtils';
 import type { SidebarLinks } from './Sidebar';
+import { SidebarStyled, SidebarNavItemLink } from './Sidebar.styled';
 
 const BASE_ELEMENT = StyleClasses.SIDEBAR_NAV;
 
@@ -81,9 +82,9 @@ class SidebarNav extends Component {
       'boldr-theme': !navClassName,
     });
     return (
-      <div className={classes}>
+      <SidebarStyled className={classes}>
         {this.renderItems()}
-      </div>
+      </SidebarStyled>
     );
   }
 }

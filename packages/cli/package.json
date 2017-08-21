@@ -7,7 +7,8 @@
     "boldr": "./bin/boldr.js"
   },
   "files": [
-    "bin"
+    "bin",
+    "lib"
   ],
   "keywords": [
     "cli",
@@ -28,7 +29,7 @@
     "url": "https://github.com/strues/boldr/issues"
   },
   "scripts": {
-    "build": "rm -rf ./bin && NODE_ENV=production babel src/cli.js --source-maps -o boldr.js && mkdir bin && mv boldr.js boldr.js.map bin/ ",
+    "build": "rm -rf ./lib && NODE_ENV=production babel src --source-maps --out-dir lib",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
