@@ -1,8 +1,9 @@
 /* @flow */
 /* eslint-disable react/prefer-stateless-function */
-import React, { Component } from 'react';
+import * as React from 'react';
 import Helmet from 'react-helmet';
-import { graphql } from 'react-apollo';
+import { graphql, gql } from 'react-apollo';
+import update from 'immutability-helper';
 import styled from 'styled-components';
 import ImageDisplay from '@boldr/ui/ImageDisplay';
 import { Col, Row } from '@boldr/ui/Layout';
@@ -37,7 +38,7 @@ const MediaSidePanel = styled.div`
   padding: 1rem;
 `;
 
-class Media extends Component {
+class Media extends React.Component<Props, *> {
   handleClick = m => {
     this.props.imageUpdateClick(m);
   };
@@ -82,9 +83,29 @@ export default graphql(DELETE_MEDIA, {
             __typename: 'Mutation',
             deleteMedia: {
               id,
+              message: `Deleted media ${id}`,
               __typename: 'Media',
             },
           },
+          refetchQueries: [
+            {
+              query: gql`
+                query getMedia($offset: Int!, $limit: Int!) {
+                  getMedia(offset: $offset, limit: $limit) {
+                    id
+                    thumbName
+                    name
+                    url
+                    fileDescription
+                  }
+                }
+              `,
+              variables: {
+                offset: 0,
+                limit: 20,
+              },
+            },
+          ],
         });
     },
   }),

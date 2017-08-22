@@ -3,7 +3,7 @@ import uuid from 'uuid';
 import { mailer, signToken } from '../../services';
 import { welcomeEmail } from '../../services/mailer/templates';
 import User from '../../models/User';
-
+import { errorObj } from '../../errors';
 import { UserLoginInput, UserLoginResponse, UserSignupInput } from './auth/userAuthTypes';
 
 import UserType, { EditUserInput } from './userType';
@@ -22,18 +22,24 @@ export default {
         .where({ email: args.input.email })
         .eager('[roles,socialMedia]')
         .first();
+      if (!user) {
+        throw errorObj({ _error: 'Unable to find any users.' });
+      }
       // eslint-disable-next-line
       const validAuth = await user.authenticate(args.input.password);
-      // remove the password from the response.
-      user.stripPassword();
-      // sign the token
-      const token = await signToken(user);
-      context.req.user = user;
-      const payload = {
-        token,
-        user,
-      };
-      return payload;
+      if (validAuth) {
+        // remove the password from the response.
+        user.stripPassword();
+        // sign the token
+        const token = await signToken(user);
+        context.req.user = user;
+        const payload = {
+          token,
+          user,
+        };
+        return payload;
+      }
+      throw new Error('Unable to find any users.');
     },
   },
   signupUser: {

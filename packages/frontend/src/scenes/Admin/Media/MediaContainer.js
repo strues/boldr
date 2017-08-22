@@ -1,6 +1,6 @@
 /* @flow */
-/* eslint-disable react/prefer-stateless-function */
-import React, { Component } from 'react';
+/* eslint-disable react/prefer-stateless-function, no-unused-vars */
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import { bindActionCreators } from 'redux';
@@ -19,7 +19,7 @@ type Data = {
   loading: boolean,
 };
 
-export class MediaContainer extends Component {
+export class MediaContainer extends React.Component<Props, *> {
   props: Props;
 
   imageUpdateClick = (m: Media) => {
@@ -38,7 +38,7 @@ function mapDispatchToProps(dispatch) {
 }
 
 const MediaContainerWithData = graphql(MEDIA_QUERY, {
-  options: () => ({
+  options: props => ({
     variables: {
       offset: 0,
       limit: 20,

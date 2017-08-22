@@ -8,14 +8,14 @@ import { createApolloClient, createBoldrStore, RouterConnection, wrapBoldrApp } 
 import { checkAuth } from './scenes/Account/state/actions';
 import App from './components/App';
 import appReducer from './reducers';
-import ThemeProvider from './theme/ThemeProvider';
 import { injectResetStyle } from './theme/resetStyle';
+import ThemeProvider from './theme/ThemeProvider';
 
-injectResetStyle();
+// injectResetStyle();
 const DOM_NODE = document.getElementById('app');
 const preloadedState = window.__APOLLO_STATE__;
 const token = getToken();
-
+injectResetStyle();
 export const apolloClient = createApolloClient({
   batchRequests: true,
   initialState: preloadedState,

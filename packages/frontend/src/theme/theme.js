@@ -3,10 +3,6 @@ import Color from 'color';
 
 import { css } from 'styled-components';
 import { em } from 'polished';
-import { GRID_SETTINGS } from '../components/Layout/constants';
-import createPalette from './createPalette';
-
-const palette = createPalette();
 const SIZES = {
   large: 75,
   medium: 62,
@@ -50,7 +46,6 @@ export const mediaQuery = Object.keys(SIZES).reduce((accumulator, label) => {
 }, {});
 
 export default {
-  boldrgrid: GRID_SETTINGS,
   palette: {
     primary1: Color('#0094c6').hsl().string(),
     primary2: Color('#3178B7').hsl().string(),

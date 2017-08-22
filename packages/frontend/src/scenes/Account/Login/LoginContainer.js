@@ -1,5 +1,7 @@
+/* eslint-disable promise/always-return, consistent-return */
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
+import { showNotification } from '@boldr/core';
 import LOGIN_USER_MUTATION from '../gql/login.mutation.graphql';
 import { doLogin, loginUserError } from '../state/actions';
 import Login from './Login';
@@ -23,13 +25,18 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     ownProps
       .loginUser(formInput)
       .then(res => {
-        if (!res.data.loginUser.token) {
-          return console.error(res.data.loginUser.errors);
+        if (res.data.loginUser.token) {
+          return dispatch(doLogin(res.data.loginUser));
         }
-        return dispatch(doLogin(res.data.loginUser));
       })
       .catch(err => {
         loginUserError(err);
+        return dispatch(
+          showNotification({
+            type: 'error',
+            text: 'There was a problem with your login details',
+          }),
+        );
       });
   },
 });

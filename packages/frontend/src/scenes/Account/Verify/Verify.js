@@ -1,6 +1,6 @@
 /* @flow */
 
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import Button from '@boldr/ui/Button';
@@ -13,7 +13,7 @@ export type Props = {
   match: Object,
 };
 
-class Verify extends Component {
+class Verify extends React.PureComponent<Props, *> {
   props: Props;
 
   handleVerify = (event: Event): void => {

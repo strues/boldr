@@ -19,11 +19,14 @@ export type Props = {
   slideFromSide?: string,
   options: Object,
 };
-
-export class NotificationContainer extends Component {
+type State = {
+  height: number,
+};
+export class NotificationContainer extends Component<Props, State> {
   state = {
     height: 0,
   };
+  state: State;
   componentDidMount() {
     this.setClientHeight();
     setTimeout(() => {

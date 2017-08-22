@@ -5,7 +5,6 @@ import { getDuration } from './helpers/utils';
 
 const Notification = styled.div`
   position: relative;
-  background-color: #eaeaea;
   padding: 1.25rem 2.5rem 1.25rem 1.5rem;
   border-radius: 3px;
   z-index: ${props => (props.isVisible ? 999999 : -1)};

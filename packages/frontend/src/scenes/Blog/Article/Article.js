@@ -4,7 +4,7 @@ import Helmet from 'react-helmet';
 import classnames from 'classnames';
 import HeroArticle from '@boldr/ui/Hero/HeroArticle';
 import Loader from '@boldr/ui/Loader';
-import { Grid, Row, Col } from '../../../components/Layout';
+import { Grid, Row, Col } from '@boldr/ui/Layout';
 import { ArticleSidebar, ArticleContent, ArticleTitle } from '../components';
 import { StyleClasses } from '../../../theme/styleClasses';
 

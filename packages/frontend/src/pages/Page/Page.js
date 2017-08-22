@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component } from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
@@ -44,7 +44,7 @@ const ContentWrapper = styled.section`
   padding-bottom: 70px;
 `;
 
-export class Page extends Component {
+export class Page extends React.Component<Props, *> {
   componentDidMount() {
     this.props.showHeader();
   }

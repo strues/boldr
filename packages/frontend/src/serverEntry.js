@@ -16,15 +16,9 @@ import appReducer from './reducers';
  * Express middleware to render HTML
  * @param  {object}     clientStats Webpack stats output
  * @param {String}      outputPath  the compiled bundle's path
- * @return {function}   middleware function  the server rendering middleware it allows you to require the
- *                                           production version of this as an express middleware.
+ * @return {function}   middleware function  the server rendering middleware it allows you to require the production version of this as an express middleware.
  */
 export default ({ clientStats, outputPath }) =>
-  /*
-     * @param
-     * @param
-     * @return  undefined
-     */
   /**
    * Sends the page to be rendered to the browser
    * @param  {[Object]}   req Express request object

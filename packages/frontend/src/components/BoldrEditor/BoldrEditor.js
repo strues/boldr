@@ -1,4 +1,4 @@
-/* eslint-disable max-lines, react/no-array-index-key */
+/* eslint-disable max-lines, react/no-array-index-key, no-param-reassign */
 /* @flow */
 import * as React from 'react';
 import {
@@ -7,13 +7,9 @@ import {
   RichUtils,
   convertToRaw,
   convertFromRaw,
-  genKey,
-  SelectionState,
-  ContentBlock,
   CompositeDecorator,
 } from 'draft-js';
 import type { DraftDecoratorType } from 'draft-js';
-import { OrderedSet, List } from 'immutable';
 import styled from 'styled-components';
 import classNames from 'classnames';
 
@@ -28,7 +24,6 @@ import {
 import {
   handleNewLine,
   getCustomStyleMap,
-  extractInlineStyle,
   getSelectedBlocksType,
   changeListDepth,
   blockRenderMap,
@@ -37,7 +32,7 @@ import {
   filter,
   mergeRecursive,
 } from './utils';
-import moveSelectionToEnd from './utils/moveSelectionToEnd';
+
 import type { CustomStyleMap } from './utils/inline';
 import * as Controls from './components/Controls';
 
@@ -457,7 +452,7 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
         </EditorToolbar>
         <div
           ref={el => {
-            this.wrapper = el;
+            (this: any).wrapper = el;
           }}
           className={classNames('be-main', editorClassName)}
           style={editorStyle}
@@ -469,7 +464,7 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
         >
           <Editor
             ref={el => {
-              this.editor = el;
+              (this: any).editor = el;
             }}
             onTab={this.onTab}
             spellcheck={this.props.spellcheck}

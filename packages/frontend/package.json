@@ -35,6 +35,7 @@
     "draft-convert": "^1.4.9",
     "draft-js": "^0.10.1",
     "immutable": "^3.8.1",
+    "immutability-helper": "2.3.1",
     "lodash": "^4.17.4",
     "polished": "1.4.1",
     "react": "^15.6.1",

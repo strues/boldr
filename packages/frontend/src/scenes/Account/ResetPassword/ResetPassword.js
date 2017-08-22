@@ -11,10 +11,14 @@ export type Props = {
   match: Object,
 };
 
-class ResetPassword extends Component {
+type ResetPasswordInput = {
+  password: string,
+};
+
+class ResetPassword extends Component<Props, *> {
   props: Props;
 
-  handleReset = (values: Object): void => {
+  handleReset = (values: ResetPasswordInput): void => {
     this.props.dispatch(resetPassword(values.password, this.props.match.params.token));
   };
 

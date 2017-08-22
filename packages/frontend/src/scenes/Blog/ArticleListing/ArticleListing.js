@@ -1,7 +1,7 @@
 /* @flow */
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import { Grid, Row, Col } from '../../../components/Layout';
+import { Grid, Row, Col } from '@boldr/ui/Layout';
 import { FeaturedArticle, ArticleCard } from '../components';
 
 type Props = {
@@ -32,14 +32,6 @@ class ArticleListing extends PureComponent<Props, *> {
     const featuredArticles = articles.filter(p => p.featured);
     return featuredArticles.map(article => <FeaturedArticle key={article.id} {...article} />);
   };
-
-  renderBody = () =>
-    <div className="boldrui-pad-top">
-      {this.renderFeature()}
-      <Row>
-        {this.renderArticles()}
-      </Row>
-    </div>;
 
   render() {
     return (

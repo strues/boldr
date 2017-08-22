@@ -6,6 +6,7 @@ import SIGNUP_USER_MUTATION from '../gql/signup.mutation.graphql';
 import { doSignup, signupUserError } from '../state/actions';
 import Signup from './Signup';
 
+// $FlowIssue
 const withMutation = graphql(SIGNUP_USER_MUTATION, {
   props: ({ mutate }) => ({
     signupUser: formInput =>
@@ -38,5 +39,5 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       });
   },
 });
-
+// $FlowIssue
 export default withMutation(connect(null, mapDispatchToProps)(Signup));

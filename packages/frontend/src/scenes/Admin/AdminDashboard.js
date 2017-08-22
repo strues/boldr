@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import Switch from 'react-router-dom/Switch';
 import styled from 'styled-components';
@@ -31,7 +31,7 @@ export type FlattenedRoutes = Array<Object>;
 
 const TbArea = styled.div`width: 100%;`;
 
-export class AdminDashboard extends Component {
+export class AdminDashboard extends React.Component<Props, *> {
   constructor(props: Props) {
     super(props);
     (this: any).flattenedRoutes = flattenRoutes(routes);

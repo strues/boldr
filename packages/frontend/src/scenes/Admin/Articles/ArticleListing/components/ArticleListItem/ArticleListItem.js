@@ -39,43 +39,45 @@ const ListHead = styled.div`
 `;
 const ListContent = styled.div`height: 50px;`;
 
-const ArticleListItem = (props: Props) => {
-  const { article, handleClick } = props;
-  const clickDelete = () => props.deleteArticle(article.id);
-  return (
-    <ListItem onClick={() => handleClick(article)}>
-      <ListHead>
-        <Avatar src={article.image} />
-        {article.title}
-        <Menu>
-          <MenuItem
-            icon={<Icon kind="trash" color="#222" />}
-            onClick={() => props.deleteArticle(article.id)}
-            text="Delete"
-          />
-          <MenuItem
-            icon={<Icon kind="edit" color="#222" />}
-            onClick={function noRefCheck() {}}
-            text="Edit"
-          />
-        </Menu>
-      </ListHead>
-      <ListContent>
-        <Paragraph>
-          {article.excerpt}
-        </Paragraph>
-      </ListContent>
-      <Footer>
-        <span>
-          {article.published === true ? 'Published' : 'Draft'}
-        </span>
-        <span>
-          {format(article.createdAt, 'MM/DD/YY')}
-        </span>
-      </Footer>
-    </ListItem>
-  );
-};
+class ArticleListItem extends React.Component {
+  render() {
+    const { article, handleClick, deleteArticle } = this.props;
+
+    return (
+      <ListItem onClick={() => handleClick(article)}>
+        <ListHead>
+          <Avatar src={article.image} />
+          {article.title}
+          <Menu>
+            <MenuItem
+              icon={<Icon kind="trash" color="#222" />}
+              onClick={this.props.deleteArticle(article.id)}
+              text="Delete"
+            />
+            <MenuItem
+              icon={<Icon kind="edit" color="#222" />}
+              onClick={function noRefCheck() {}}
+              text="Edit"
+            />
+          </Menu>
+        </ListHead>
+        <ListContent>
+          <Paragraph>
+            {article.excerpt}
+          </Paragraph>
+        </ListContent>
+        <Footer>
+          <span>
+            {article.published === true ? 'Published' : 'Draft'}
+          </span>
+          <span>
+            {format(article.createdAt, 'MM/DD/YY')}
+          </span>
+        </Footer>
+      </ListItem>
+    );
+  }
+}
 
 export default graphql(DELETE_ARTICLE_MUTATION, {
   props: ({ mutate }) => ({
@@ -87,6 +89,7 @@ export default graphql(DELETE_ARTICLE_MUTATION, {
             __typename: 'Mutation',
             deleteArticle: {
               id,
+              message: `Deleted article ${id}`,
               __typename: 'Article',
             },
           },

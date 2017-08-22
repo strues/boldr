@@ -13,8 +13,8 @@ export type Props = {
   submitting?: boolean,
   pristine?: boolean,
 };
-const ResetPasswordForm = (props: Props) => {
-  const { handleSubmit, pristine, submitting } = props;
+
+export const ResetPasswordForm = ({ handleSubmit, pristine, submitting }: Props) => {
   return (
     <Form onSubmit={handleSubmit} className="boldrui-form boldrui-form--reset">
       <Field

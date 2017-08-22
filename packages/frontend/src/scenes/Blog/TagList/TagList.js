@@ -4,7 +4,7 @@ import React from 'react';
 import Helmet from 'react-helmet';
 
 import Loader from '@boldr/ui/Loader';
-import { Grid, Col, Row } from '../../../components/Layout';
+import { Grid, Row, Col } from '@boldr/ui/Layout';
 import ArticleCard from '../components/ArticleCard';
 
 type Props = {
