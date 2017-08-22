@@ -1,7 +1,7 @@
 import { GraphQLList, GraphQLString } from 'graphql';
 import Page from '../../models/Page';
 import { errorObj } from '../../errors';
-import PageType from './pageType';
+import PageType from '../../schema/type/page';
 
 export default {
   pages: {

@@ -1,7 +1,7 @@
 import { GraphQLList, GraphQLNonNull, GraphQLInt } from 'graphql';
 import File from '../../models/File';
 import { errorObj } from '../../errors';
-import FileType from './fileType';
+import FileType from '../../schema/type/file';
 
 export default {
   files: {

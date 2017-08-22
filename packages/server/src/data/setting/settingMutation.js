@@ -1,6 +1,7 @@
 import { GraphQLNonNull, GraphQLID } from 'graphql';
 import Setting from '../../models/Setting';
-import SettingType, { SettingInput } from './settingType';
+import SettingInput from '../../schema/input/setting';
+import SettingType from '../../schema/type/setting';
 
 export default {
   editSetting: {

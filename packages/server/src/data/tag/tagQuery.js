@@ -1,7 +1,7 @@
 import { GraphQLList, GraphQLNonNull, GraphQLInt } from 'graphql';
 import Tag from '../../models/Tag';
 import { errorObj } from '../../errors';
-import TagType from './tagType';
+import TagType from '../../schema/type/tag';
 
 export default {
   getTags: {

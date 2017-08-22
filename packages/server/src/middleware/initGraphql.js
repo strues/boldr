@@ -6,8 +6,8 @@ import OpticsAgent from 'optics-agent';
 
 import { printSchema } from 'graphql';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
-import DataLoaders from '../DataLoaders';
-import RootSchema from '../data/rootSchema';
+import loaders from '../data/loaders';
+import RootSchema from '../schema/rootSchema';
 import { config } from '../config';
 import apolloUpload from './apolloUpload';
 
@@ -28,7 +28,7 @@ const graphqlHandler = graphqlExpress(req => {
       req,
       user: req.user ? req.user : null,
       opticsContext,
-      ...DataLoaders.create(),
+      ...loaders.create(),
     },
     debug: config.get('isDebug'),
     pretty: process.env.NODE_ENV !== 'production',

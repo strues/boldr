@@ -1,7 +1,7 @@
 import { GraphQLList, GraphQLInt, GraphQLString } from 'graphql';
+import ArticleType from '../../schema/type/article';
 import Article from '../../models/Article';
 import { errorObj } from '../../errors';
-import ArticleType from './articleType';
 
 export default {
   articles: {

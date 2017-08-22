@@ -2,7 +2,8 @@ import { GraphQLNonNull, GraphQLID } from 'graphql';
 
 import MenuDetail from '../../models/MenuDetail';
 import slugIt from '../../utils/slugIt';
-import MenuDetailType, { EditDetailInput } from './menuDetailType';
+import EditDetailInput from '../../schema/input/editMenuDetail';
+import MenuDetailType from '../../schema/type/menuDetail';
 
 export default {
   editDetails: {

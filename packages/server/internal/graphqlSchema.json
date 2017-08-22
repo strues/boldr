@@ -16,19 +16,15 @@
           "fields": [
             {
               "name": "articles",
-              "description": "A paginated query for all the articles.",
+              "description": "Returns all articles from the database..",
               "args": [
                 {
                   "name": "offset",
                   "description": "The number of articles to offset",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "Int",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -36,13 +32,9 @@
                   "name": "limit",
                   "description": "The maximum number of articles to return at a time.",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "Int",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
                   },
                   "defaultValue": null
                 }
@@ -130,7 +122,7 @@
               "deprecationReason": null
             },
             {
-              "name": "getAttachments",
+              "name": "files",
               "description": "A query for a listing of all attachments",
               "args": [
                 {
@@ -167,7 +159,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "Attachment",
+                  "name": "File",
                   "ofType": null
                 }
               },
@@ -182,13 +174,9 @@
                   "name": "offset",
                   "description": "The number of media to offset",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "Int",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -196,13 +184,9 @@
                   "name": "limit",
                   "description": "The maximum number of media to return at a time.",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "Int",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
                   },
                   "defaultValue": null
                 }
@@ -231,7 +215,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "SCALAR",
-                      "name": "UUID",
+                      "name": "ID",
                       "ofType": null
                     }
                   },
@@ -254,9 +238,13 @@
                   "name": "id",
                   "description": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "ID",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "ID",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 }
@@ -409,13 +397,9 @@
                   "name": "offset",
                   "description": "The number of users to offset",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "Int",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
                   },
                   "defaultValue": null
                 },
@@ -423,13 +407,9 @@
                   "name": "limit",
                   "description": "The maximum number of users to return at a time.",
                   "type": {
-                    "kind": "NON_NULL",
-                    "name": null,
-                    "ofType": {
-                      "kind": "SCALAR",
-                      "name": "Int",
-                      "ofType": null
-                    }
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
                   },
                   "defaultValue": null
                 }
@@ -458,7 +438,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "SCALAR",
-                      "name": "UUID",
+                      "name": "ID",
                       "ofType": null
                     }
                   },
@@ -535,12 +515,16 @@
           "fields": [
             {
               "name": "id",
-              "description": "The identifier for the article",
+              "description": "Unique identifier for the object.",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "UUID",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -550,18 +534,6 @@
               "description": "The title of the article",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "slug",
-              "description": "The slug / normalized article title.",
-              "args": [],
-              "type": {
                 "kind": "NON_NULL",
                 "name": null,
                 "ofType": {
@@ -569,6 +541,18 @@
                   "name": "String",
                   "ofType": null
                 }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "slug",
+              "description": "An alphanumeric identifier for the object unique to its type.",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -651,15 +635,15 @@
               "args": [],
               "type": {
                 "kind": "SCALAR",
-                "name": "UUID",
+                "name": "ID",
                 "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
-              "name": "createdAt",
-              "description": "The timestamp when the article was created",
+              "name": "deletedAt",
+              "description": "The timestamp when the object was deleted",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -671,7 +655,7 @@
             },
             {
               "name": "updatedAt",
-              "description": "The timestamp when the article was last updated",
+              "description": "The timestamp when the object was last updated",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -682,8 +666,8 @@
               "deprecationReason": null
             },
             {
-              "name": "deletedAt",
-              "description": "The timestamp when the article was deleted",
+              "name": "createdAt",
+              "description": "The timestamp when the object was created",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -745,8 +729,8 @@
         },
         {
           "kind": "SCALAR",
-          "name": "UUID",
-          "description": "The UUID scalar type represents a UUID.",
+          "name": "ID",
+          "description": "The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `\"4\"`) or integer (such as `4`) input value will be accepted as an ID.",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
@@ -800,28 +784,28 @@
           "fields": [
             {
               "name": "id",
-              "description": "The tag id (uuid)",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "UUID",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "name",
-              "description": "The name of the tag",
+              "description": "Unique identifier for the object.",
               "args": [],
               "type": {
                 "kind": "NON_NULL",
                 "name": null,
                 "ofType": {
                   "kind": "SCALAR",
-                  "name": "String",
+                  "name": "ID",
                   "ofType": null
                 }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "name",
+              "description": "A name for the object.",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -840,7 +824,7 @@
             },
             {
               "name": "articles",
-              "description": "Articles related to the tag.",
+              "description": "Articles related to the tag",
               "args": [],
               "type": {
                 "kind": "LIST",
@@ -850,6 +834,42 @@
                   "name": "Article",
                   "ofType": null
                 }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deletedAt",
+              "description": "The timestamp when the object was deleted",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updatedAt",
+              "description": "The timestamp when the object was last updated",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createdAt",
+              "description": "The timestamp when the object was created",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -867,19 +887,23 @@
           "fields": [
             {
               "name": "id",
-              "description": "The identifying uuid.",
+              "description": "Unique identifier for the object.",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "UUID",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
               "name": "name",
-              "description": "The name of the file",
+              "description": "A name for the object.",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -891,16 +915,12 @@
             },
             {
               "name": "safeName",
-              "description": "identifier which cannot be changed",
+              "description": "A normalized copy of the object name.",
               "args": [],
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -931,7 +951,7 @@
             },
             {
               "name": "type",
-              "description": "The mimetype of the upload",
+              "description": "The mime-type of the upload",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -955,7 +975,7 @@
             },
             {
               "name": "path",
-              "description": null,
+              "description": "The local path where the file is stored",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -983,15 +1003,15 @@
               "args": [],
               "type": {
                 "kind": "SCALAR",
-                "name": "UUID",
+                "name": "ID",
                 "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
-              "name": "createdAt",
-              "description": "The timestamp when the article was created",
+              "name": "updatedAt",
+              "description": "The timestamp when the object was last updated",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -1002,8 +1022,8 @@
               "deprecationReason": null
             },
             {
-              "name": "updatedAt",
-              "description": "The timestamp when the article was last updated",
+              "name": "createdAt",
+              "description": "The timestamp when the object was created",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -1026,19 +1046,23 @@
           "fields": [
             {
               "name": "id",
-              "description": "The users id (uuid)",
+              "description": "Unique identifier for the object.",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "UUID",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
               "name": "deletedAt",
-              "description": "The timestamp when the user was deleted",
+              "description": "The timestamp when the object was deleted",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -1050,7 +1074,7 @@
             },
             {
               "name": "updatedAt",
-              "description": "The timestamp when the user was last updated",
+              "description": "The timestamp when the object was last updated",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -1062,7 +1086,7 @@
             },
             {
               "name": "createdAt",
-              "description": "The timestamp when the user was created",
+              "description": "The timestamp when the object was created",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -1265,22 +1289,6 @@
               "deprecationReason": null
             },
             {
-              "name": "files",
-              "description": "Articles the user has written",
-              "args": [],
-              "type": {
-                "kind": "LIST",
-                "name": null,
-                "ofType": {
-                  "kind": "OBJECT",
-                  "name": "Attachment",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
               "name": "uploads",
               "description": "Articles the user has written",
               "args": [],
@@ -1298,7 +1306,7 @@
             },
             {
               "name": "verificationToken",
-              "description": "Articles the user has written",
+              "description": "Account verification token belonging to the user.",
               "args": [],
               "type": {
                 "kind": "OBJECT",
@@ -1310,7 +1318,7 @@
             },
             {
               "name": "resetToken",
-              "description": "Articles the user has written",
+              "description": "Password reset token belonging to the user.",
               "args": [],
               "type": {
                 "kind": "OBJECT",
@@ -1353,19 +1361,23 @@
           "fields": [
             {
               "name": "id",
-              "description": "The role id",
+              "description": "Unique identifier for the object.",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
               "name": "uuid",
-              "description": "The role uuid",
+              "description": "A UUID (Universal Unique Identifier) is a 128-bit number used to uniquely identify some object or entity.",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -1377,16 +1389,12 @@
             },
             {
               "name": "name",
-              "description": "The name of the role",
+              "description": "A name for the object.",
               "args": [],
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -1430,6 +1438,42 @@
               },
               "isDeprecated": false,
               "deprecationReason": null
+            },
+            {
+              "name": "deletedAt",
+              "description": "The timestamp when the object was deleted",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updatedAt",
+              "description": "The timestamp when the object was last updated",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createdAt",
+              "description": "The timestamp when the object was created",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             }
           ],
           "inputFields": null,
@@ -1439,8 +1483,8 @@
         },
         {
           "kind": "SCALAR",
-          "name": "ID",
-          "description": "The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `\"4\"`) or integer (such as `4`) input value will be accepted as an ID.",
+          "name": "UUID",
+          "description": "The UUID scalar type represents a UUID.",
           "fields": null,
           "inputFields": null,
           "interfaces": null,
@@ -1454,12 +1498,16 @@
           "fields": [
             {
               "name": "id",
-              "description": "The id",
+              "description": "Unique identifier for the object.",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "UUID",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -1469,16 +1517,20 @@
               "description": "The unique identifier for the user for the identity.",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "UUID",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
               "name": "facebookUrl",
-              "description": "The facebook profile url for the user.",
+              "description": "The Facebook profile url for the user.",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -1490,7 +1542,7 @@
             },
             {
               "name": "twitterUrl",
-              "description": "The facebook profile url for the user.",
+              "description": "The Twitter profile url for the user.",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -1502,7 +1554,7 @@
             },
             {
               "name": "googleUrl",
-              "description": "The facebook profile url for the user.",
+              "description": "The Google profile url for the user.",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -1514,7 +1566,7 @@
             },
             {
               "name": "githubUrl",
-              "description": "The facebook profile url for the user.",
+              "description": "The GitHub profile url for the user.",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -1526,7 +1578,7 @@
             },
             {
               "name": "linkedinUrl",
-              "description": "The facebook profile url for the user.",
+              "description": "The LinkedIn profile url for the user.",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -1538,146 +1590,11 @@
             },
             {
               "name": "stackoverflowUrl",
-              "description": "The facebook profile url for the user.",
+              "description": "The Stackoverflow profile url for the user.",
               "args": [],
               "type": {
                 "kind": "SCALAR",
                 "name": "URL",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            }
-          ],
-          "inputFields": null,
-          "interfaces": [],
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
-          "kind": "OBJECT",
-          "name": "Attachment",
-          "description": "Attachments are files uploaded by users",
-          "fields": [
-            {
-              "name": "id",
-              "description": "The identifying uuid.",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "UUID",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "fileName",
-              "description": "The name of the file",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "safeName",
-              "description": "identifier which cannot be changed",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "fileType",
-              "description": "mimetype",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "description",
-              "description": "The role description",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "path",
-              "description": null,
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "url",
-              "description": "The relative url to access the file",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "userId",
-              "description": "The id of the user the file belongs to.",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "UUID",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "createdAt",
-              "description": "The timestamp when the article was created",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "DateTime",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "updatedAt",
-              "description": "The timestamp when the article was last updated",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "DateTime",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -1696,12 +1613,16 @@
           "fields": [
             {
               "name": "id",
-              "description": "The identifier (usually email) of blocked user",
+              "description": "Unique identifier for the object.",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -1748,15 +1669,15 @@
               "args": [],
               "type": {
                 "kind": "SCALAR",
-                "name": "UUID",
+                "name": "ID",
                 "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
-              "name": "createdAt",
-              "description": "The timestamp when the article was created",
+              "name": "updatedAt",
+              "description": "The timestamp when the object was last updated",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -1767,8 +1688,8 @@
               "deprecationReason": null
             },
             {
-              "name": "updatedAt",
-              "description": "The timestamp when the article was last updated",
+              "name": "createdAt",
+              "description": "The timestamp when the object was created",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -1791,12 +1712,16 @@
           "fields": [
             {
               "name": "id",
-              "description": "The identifier (usually email) of blocked user",
+              "description": "Unique identifier for the object.",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -1843,7 +1768,19 @@
               "args": [],
               "type": {
                 "kind": "SCALAR",
-                "name": "UUID",
+                "name": "ID",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updatedAt",
+              "description": "The timestamp when the object was last updated",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
                 "ofType": null
               },
               "isDeprecated": false,
@@ -1851,7 +1788,106 @@
             },
             {
               "name": "createdAt",
-              "description": "The timestamp when the article was created",
+              "description": "The timestamp when the object was created",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            }
+          ],
+          "inputFields": null,
+          "interfaces": [],
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "OBJECT",
+          "name": "File",
+          "description": null,
+          "fields": [
+            {
+              "name": "id",
+              "description": "Unique identifier for the object.",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "name",
+              "description": "A name for the object.",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "type",
+              "description": "The type of file.",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "size",
+              "description": "The size of the file",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "path",
+              "description": "The path to the file.",
+              "args": [],
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deletedAt",
+              "description": "The timestamp when the object was deleted",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -1863,7 +1899,19 @@
             },
             {
               "name": "updatedAt",
-              "description": "The timestamp when the article was last updated",
+              "description": "The timestamp when the object was last updated",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createdAt",
+              "description": "The timestamp when the object was created",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -1886,19 +1934,23 @@
           "fields": [
             {
               "name": "id",
-              "description": "The id",
+              "description": "Unique identifier for the object.",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
               "name": "uuid",
-              "description": "The uuid",
+              "description": "A UUID (Universal Unique Identifier) is a 128-bit number used to uniquely identify some object or entity.",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -1910,16 +1962,12 @@
             },
             {
               "name": "name",
-              "description": "The name of the menu",
+              "description": "A name for the object.",
               "args": [],
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -1963,6 +2011,30 @@
               },
               "isDeprecated": false,
               "deprecationReason": null
+            },
+            {
+              "name": "updatedAt",
+              "description": "The timestamp when the object was last updated",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createdAt",
+              "description": "The timestamp when the object was created",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             }
           ],
           "inputFields": null,
@@ -1977,12 +2049,16 @@
           "fields": [
             {
               "name": "id",
-              "description": "The id (uuid)",
+              "description": "Unique identifier for the object.",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "UUID",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -2001,7 +2077,7 @@
             },
             {
               "name": "safeName",
-              "description": "Lowercase, normalized, name",
+              "description": "A normalized copy of the object name.",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -2094,6 +2170,42 @@
               },
               "isDeprecated": false,
               "deprecationReason": null
+            },
+            {
+              "name": "deletedAt",
+              "description": "The timestamp when the object was deleted",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updatedAt",
+              "description": "The timestamp when the object was last updated",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createdAt",
+              "description": "The timestamp when the object was created",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             }
           ],
           "inputFields": null,
@@ -2108,12 +2220,16 @@
           "fields": [
             {
               "name": "id",
-              "description": "The page's id (uuid)",
+              "description": "Unique identifier for the object.",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "UUID",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -2136,16 +2252,12 @@
             },
             {
               "name": "slug",
-              "description": "Normalized version of the page title",
+              "description": "An alphanumeric identifier for the object unique to its type.",
               "args": [],
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -2197,6 +2309,42 @@
               },
               "isDeprecated": false,
               "deprecationReason": null
+            },
+            {
+              "name": "deletedAt",
+              "description": "The timestamp when the object was deleted",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "updatedAt",
+              "description": "The timestamp when the object was last updated",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "createdAt",
+              "description": "The timestamp when the object was created",
+              "args": [],
+              "type": {
+                "kind": "SCALAR",
+                "name": "DateTime",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
             }
           ],
           "inputFields": null,
@@ -2211,12 +2359,16 @@
           "fields": [
             {
               "name": "id",
-              "description": "The identifier for the setting",
+              "description": "Unique identifier for the object.",
               "args": [],
               "type": {
-                "kind": "SCALAR",
-                "name": "ID",
-                "ofType": null
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "ID",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -2319,7 +2471,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "SCALAR",
-                      "name": "UUID",
+                      "name": "ID",
                       "ofType": null
                     }
                   },
@@ -2360,7 +2512,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "SCALAR",
-                      "name": "UUID",
+                      "name": "ID",
                       "ofType": null
                     }
                   },
@@ -2371,6 +2523,64 @@
                 "kind": "OBJECT",
                 "name": "Article",
                 "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "singleUpload",
+              "description": "Upload a new media file and store in the database.",
+              "args": [
+                {
+                  "name": "file",
+                  "description": "The file to upload",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "Upload",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "File",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "multipleUpload",
+              "description": "Upload a new media file and store in the database.",
+              "args": [
+                {
+                  "name": "files",
+                  "description": "The file to upload",
+                  "type": {
+                    "kind": "LIST",
+                    "name": null,
+                    "ofType": {
+                      "kind": "INPUT_OBJECT",
+                      "name": "Upload",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "File",
+                  "ofType": null
+                }
               },
               "isDeprecated": false,
               "deprecationReason": null
@@ -2414,7 +2624,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "SCALAR",
-                      "name": "UUID",
+                      "name": "ID",
                       "ofType": null
                     }
                   },
@@ -2455,7 +2665,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "SCALAR",
-                      "name": "UUID",
+                      "name": "ID",
                       "ofType": null
                     }
                   },
@@ -2482,7 +2692,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "SCALAR",
-                      "name": "UUID",
+                      "name": "ID",
                       "ofType": null
                     }
                   },
@@ -2519,9 +2729,13 @@
                   "name": "id",
                   "description": null,
                   "type": {
-                    "kind": "SCALAR",
-                    "name": "Int",
-                    "ofType": null
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "ID",
+                      "ofType": null
+                    }
                   },
                   "defaultValue": null
                 },
@@ -2587,7 +2801,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "SCALAR",
-                      "name": "UUID",
+                      "name": "ID",
                       "ofType": null
                     }
                   },
@@ -2602,6 +2816,33 @@
                     "ofType": {
                       "kind": "INPUT_OBJECT",
                       "name": "TagInput",
+                      "ofType": null
+                    }
+                  },
+                  "defaultValue": null
+                }
+              ],
+              "type": {
+                "kind": "OBJECT",
+                "name": "Tag",
+                "ofType": null
+              },
+              "isDeprecated": false,
+              "deprecationReason": null
+            },
+            {
+              "name": "deleteTag",
+              "description": "Remove a tag from the database",
+              "args": [
+                {
+                  "name": "id",
+                  "description": "The tag ID",
+                  "type": {
+                    "kind": "NON_NULL",
+                    "name": null,
+                    "ofType": {
+                      "kind": "SCALAR",
+                      "name": "ID",
                       "ofType": null
                     }
                   },
@@ -2682,7 +2923,7 @@
                     "name": null,
                     "ofType": {
                       "kind": "SCALAR",
-                      "name": "UUID",
+                      "name": "ID",
                       "ofType": null
                     }
                   },
@@ -2741,13 +2982,9 @@
               "name": "slug",
               "description": "The slug / normalized article title.",
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
               },
               "defaultValue": null
             },
@@ -2755,13 +2992,9 @@
               "name": "content",
               "description": "html content of the article",
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
               },
               "defaultValue": null
             },
@@ -2779,13 +3012,9 @@
               "name": "excerpt",
               "description": "Short description of the article",
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
               },
               "defaultValue": null
             },
@@ -2793,13 +3022,9 @@
               "name": "featured",
               "description": "True if the article is featured",
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Boolean",
-                  "ofType": null
-                }
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
               },
               "defaultValue": null
             },
@@ -2818,7 +3043,7 @@
               "defaultValue": null
             },
             {
-              "name": "featureImage",
+              "name": "image",
               "description": "url of the article feature image",
               "type": {
                 "kind": "SCALAR",
@@ -2841,9 +3066,13 @@
               "name": "tags",
               "description": "Tags relating articles together",
               "type": {
-                "kind": "SCALAR",
-                "name": "String",
-                "ofType": null
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               },
               "defaultValue": null
             }
@@ -2890,13 +3119,9 @@
               "name": "content",
               "description": "html content of the article",
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
               },
               "defaultValue": null
             },
@@ -2928,13 +3153,9 @@
               "name": "featured",
               "description": "True if the article is featured",
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Boolean",
-                  "ofType": null
-                }
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
               },
               "defaultValue": null
             },
@@ -2953,7 +3174,7 @@
               "defaultValue": null
             },
             {
-              "name": "featureImage",
+              "name": "image",
               "description": "url of the article feature image",
               "type": {
                 "kind": "SCALAR",
@@ -2969,6 +3190,73 @@
                 "kind": "SCALAR",
                 "name": "URL",
                 "ofType": null
+              },
+              "defaultValue": null
+            }
+          ],
+          "interfaces": null,
+          "enumValues": null,
+          "possibleTypes": null
+        },
+        {
+          "kind": "INPUT_OBJECT",
+          "name": "Upload",
+          "description": null,
+          "fields": null,
+          "inputFields": [
+            {
+              "name": "name",
+              "description": "The file name",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "type",
+              "description": "The type of file.",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "size",
+              "description": "The size of the file",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "Int",
+                  "ofType": null
+                }
+              },
+              "defaultValue": null
+            },
+            {
+              "name": "path",
+              "description": "The path to the file.",
+              "type": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "SCALAR",
+                  "name": "String",
+                  "ofType": null
+                }
               },
               "defaultValue": null
             }
@@ -3045,93 +3333,6 @@
           "possibleTypes": null
         },
         {
-          "kind": "OBJECT",
-          "name": "File",
-          "description": null,
-          "fields": [
-            {
-              "name": "id",
-              "description": "The identifying uuid.",
-              "args": [],
-              "type": {
-                "kind": "SCALAR",
-                "name": "UUID",
-                "ofType": null
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "name",
-              "description": "The file name",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "type",
-              "description": "The type of file.",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "size",
-              "description": "The size of the file",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Int",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            },
-            {
-              "name": "path",
-              "description": "The path to the file.",
-              "args": [],
-              "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "String",
-                  "ofType": null
-                }
-              },
-              "isDeprecated": false,
-              "deprecationReason": null
-            }
-          ],
-          "inputFields": null,
-          "interfaces": [],
-          "enumValues": null,
-          "possibleTypes": null
-        },
-        {
           "kind": "INPUT_OBJECT",
           "name": "EditMediaInput",
           "description": null,
@@ -3177,7 +3378,7 @@
               "description": "The id",
               "type": {
                 "kind": "SCALAR",
-                "name": "UUID",
+                "name": "ID",
                 "ofType": null
               },
               "defaultValue": null
@@ -3440,7 +3641,7 @@
                 "name": null,
                 "ofType": {
                   "kind": "OBJECT",
-                  "name": "AuthError",
+                  "name": "Error",
                   "ofType": null
                 }
               },
@@ -3455,24 +3656,24 @@
         },
         {
           "kind": "OBJECT",
-          "name": "AuthError",
+          "name": "Error",
           "description": null,
           "fields": [
             {
-              "name": "key",
-              "description": "The error key.",
+              "name": "code",
+              "description": "HTTP status code",
               "args": [],
               "type": {
                 "kind": "SCALAR",
-                "name": "String",
+                "name": "Int",
                 "ofType": null
               },
               "isDeprecated": false,
               "deprecationReason": null
             },
             {
-              "name": "value",
-              "description": "The error message.",
+              "name": "message",
+              "description": "The error message",
               "args": [],
               "type": {
                 "kind": "SCALAR",
@@ -3579,13 +3780,9 @@
               "name": "email",
               "description": "The email address of the account to login to.",
               "type": {
-                "kind": "NON_NULL",
-                "name": null,
-                "ofType": {
-                  "kind": "SCALAR",
-                  "name": "Email",
-                  "ofType": null
-                }
+                "kind": "SCALAR",
+                "name": "Email",
+                "ofType": null
               },
               "defaultValue": null
             },

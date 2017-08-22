@@ -1,7 +1,7 @@
 import { GraphQLList, GraphQLNonNull, GraphQLID, GraphQLInt } from 'graphql';
 import Media from '../../models/Media';
 import { errorObj } from '../../errors';
-import MediaType from './mediaType';
+import MediaType from '../../schema/type/media';
 
 export default {
   getMedia: {

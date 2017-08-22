@@ -6,7 +6,10 @@
   "scripts": {
     "build": "rm -rf lib && NODE_ENV=production babel src --out-dir lib",
     "dev": "NODE_ENV=development DEBUG=boldr:server:* babel-watch src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "migrate": "DATABASE_URL=postgres://postgres:password@localhost:5432/boldr node --harmony internal/scripts/db.js migrate",
+    "migration": "DATABASE_URL=postgres://postgres:password@localhost:5432/boldr node --harmony internal/scripts/db.js migration",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "update": "babel-node internal/scripts/updateSchema.js"
   },
   "keywords": [
     "graphql",

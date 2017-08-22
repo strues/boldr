@@ -1,7 +1,7 @@
 import { GraphQLList } from 'graphql';
 import Setting from '../../models/Setting';
 import { errorObj } from '../../errors';
-import SettingType from './settingType';
+import SettingType from '../../schema/type/setting';
 
 export default {
   settings: {

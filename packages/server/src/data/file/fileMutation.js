@@ -6,7 +6,8 @@ import Jimp from 'jimp';
 import shortId from 'shortid';
 import appRoot from 'boldr-utils/lib/node/appRoot';
 import File from '../../models/File';
-import FileType, { Upload } from './fileType';
+import Upload from '../../schema/input/upload';
+import FileType from '../../schema/type/file';
 
 const debug = _debug('boldr:server:articleMutation');
 const UPLOAD_DIR = path.resolve(appRoot.get(), './public/uploads');

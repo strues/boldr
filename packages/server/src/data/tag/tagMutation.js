@@ -1,6 +1,7 @@
 import { GraphQLNonNull, GraphQLID } from 'graphql';
 import Tag from '../../models/Tag';
-import TagType, { TagInput } from './tagType';
+import TagType from '../../schema/type/tag';
+import TagInput from '../../schema/input/tag';
 
 export default {
   addTag: {

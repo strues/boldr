@@ -1,12 +1,13 @@
-import { GraphQLID, GraphQLNonNull } from 'graphql';
+import { GraphQLID, GraphQLNonNull, GraphQLError } from 'graphql';
 import uuid from 'uuid';
 import { mailer, signToken } from '../../services';
 import { welcomeEmail } from '../../services/mailer/templates';
 import User from '../../models/User';
 import { errorObj } from '../../errors';
-import { UserLoginInput, UserLoginResponse, UserSignupInput } from './auth/userAuthTypes';
-
-import UserType, { EditUserInput } from './userType';
+import { UserLoginResponse } from '../../schema/type/auth';
+import { UserLoginInput, UserSignupInput } from '../../schema/input/auth';
+import EditUserInput from '../../schema/input/editUser';
+import UserType from '../../schema/type/user';
 
 export default {
   loginUser: {
@@ -22,24 +23,19 @@ export default {
         .where({ email: args.input.email })
         .eager('[roles,socialMedia]')
         .first();
-      if (!user) {
-        throw errorObj({ _error: 'Unable to find any users.' });
+      if (!user || !await user.authenticate(args.input.password)) {
+        throw new GraphQLError('Incorrect email and/or password.');
       }
-      // eslint-disable-next-line
-      const validAuth = await user.authenticate(args.input.password);
-      if (validAuth) {
-        // remove the password from the response.
-        user.stripPassword();
-        // sign the token
-        const token = await signToken(user);
-        context.req.user = user;
-        const payload = {
-          token,
-          user,
-        };
-        return payload;
-      }
-      throw new Error('Unable to find any users.');
+      // remove the password from the response.
+      user.stripPassword();
+      // sign the token
+      const token = await signToken(user);
+      context.req.user = user;
+      const payload = {
+        token,
+        user,
+      };
+      return payload;
     },
   },
   signupUser: {

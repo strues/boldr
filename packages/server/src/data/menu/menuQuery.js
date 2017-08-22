@@ -3,8 +3,8 @@ import { GraphQLList, GraphQLNonNull, GraphQLID } from 'graphql';
 import { db } from '../../services/db';
 import Menu from '../../models/Menu';
 import { errorObj } from '../../errors';
-import MenuType from './menuType';
-import MenuDetailType from './menuDetailType';
+import MenuType from '../../schema/type/menu';
+import MenuDetailType from '../../schema/type/menuDetail';
 
 export default {
   getMenuById: {

@@ -42,6 +42,18 @@ class Tag extends BaseModel {
           to: 'article.id',
         },
       },
+      entities: {
+        relation: BaseModel.ManyToManyRelation,
+        modelClass: `${__dirname}/Entity`,
+        join: {
+          from: 'tag.id',
+          through: {
+            from: 'entity_tag.tagId',
+            to: 'entity_tag.entityId',
+          },
+          to: 'entity.id',
+        },
+      },
     };
   }
 

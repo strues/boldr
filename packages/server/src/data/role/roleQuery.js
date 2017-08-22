@@ -1,7 +1,7 @@
 import { GraphQLList } from 'graphql';
 import { errorObj } from '../../errors';
 import Role from '../../models/Role';
-import RoleType from './roleType';
+import RoleType from '../../schema/type/role';
 
 export default {
   getRoles: {

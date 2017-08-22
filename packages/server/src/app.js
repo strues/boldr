@@ -2,6 +2,7 @@
 import { resolve as pathResolve } from 'path';
 import express from 'express';
 import appRoot from '@boldr/utils/lib/node/appRoot';
+
 import {
   initAuth,
   initGraphql,
@@ -16,6 +17,7 @@ import {
 import routes from './routes';
 
 const app = express();
+
 initErrorHandler(app);
 initSecurity(app, { enableNonce: true, enableCSP: false });
 // Base Express middleware - body-parser, method-override, cors

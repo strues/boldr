@@ -2,7 +2,7 @@ import { GraphQLList, GraphQLNonNull, GraphQLInt, GraphQLString, GraphQLID } fro
 import User from '../../models/User';
 import { db } from '../../services/db';
 import { errorObj } from '../../errors';
-import UserType from './userType';
+import UserType from '../../schema/type/user';
 
 export default {
   getUsers: {

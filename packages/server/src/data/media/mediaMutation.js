@@ -5,9 +5,11 @@ import fs from 'fs-extra';
 import Jimp from 'jimp';
 import shortId from 'shortid';
 import appRoot from 'boldr-utils/lib/node/appRoot';
-import FileType from '../file/fileType';
 import Media from '../../models/Media';
-import MediaType, { UploadMediaInput, EditMediaInput } from './mediaType';
+import EditMediaInput from '../../schema/input/editMedia';
+import UploadMediaInput from '../../schema/input/uploadMedia';
+import MediaType from '../../schema/type/media';
+import FileType from '../../schema/type/file';
 
 const debug = _debug('boldr:server:articleMutation');
 const UPLOAD_DIR = path.resolve(appRoot.get(), './public/uploads');
