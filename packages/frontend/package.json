@@ -68,6 +68,7 @@
     "eslint-config-boldr": "0.12.7",
     "express": "^4.15.4",
     "flow-bin": "^0.53.1",
+    "jest-styled-components": "4.4.1",
     "prettier": "^1.5.3",
     "react-hot-loader": "next",
     "react-test-renderer": "^15.6.1",

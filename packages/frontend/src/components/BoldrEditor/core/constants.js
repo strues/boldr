@@ -45,18 +45,18 @@ export const KEY_CODES = {
 };
 
 export const KEYBOARD_SHORTCUTS = {};
-KEYBOARD_SHORTCUTS[BLOCK_TYPE.UNSTYLED] = { other: 'ctrl + alt + 0', macOS: '⌘ + option + 0' };
-KEYBOARD_SHORTCUTS[BLOCK_TYPE.HEADER_ONE] = { other: 'ctrl + alt + 1', macOS: '⌘ + option + 1' };
-KEYBOARD_SHORTCUTS[BLOCK_TYPE.HEADER_TWO] = { other: 'ctrl + alt + 2', macOS: '⌘ + option + 2' };
-KEYBOARD_SHORTCUTS[BLOCK_TYPE.HEADER_THREE] = { other: 'ctrl + alt + 3', macOS: '⌘ + option + 3' };
-KEYBOARD_SHORTCUTS[BLOCK_TYPE.HEADER_FOUR] = { other: 'ctrl + alt + 4', macOS: '⌘ + option + 4' };
-KEYBOARD_SHORTCUTS[BLOCK_TYPE.HEADER_FIVE] = { other: 'ctrl + alt + 5', macOS: '⌘ + option + 5' };
-KEYBOARD_SHORTCUTS[BLOCK_TYPE.HEADER_SIX] = { other: 'ctrl + alt + 6', macOS: '⌘ + option + 6' };
-KEYBOARD_SHORTCUTS[BLOCK_TYPE.UNORDERED_LIST_ITEM] = {
+KEYBOARD_SHORTCUTS[BLOCK_TYPES.UNSTYLED] = { other: 'ctrl + alt + 0', macOS: '⌘ + option + 0' };
+KEYBOARD_SHORTCUTS[BLOCK_TYPES.HEADER_ONE] = { other: 'ctrl + alt + 1', macOS: '⌘ + option + 1' };
+KEYBOARD_SHORTCUTS[BLOCK_TYPES.HEADER_TWO] = { other: 'ctrl + alt + 2', macOS: '⌘ + option + 2' };
+KEYBOARD_SHORTCUTS[BLOCK_TYPES.HEADER_THREE] = { other: 'ctrl + alt + 3', macOS: '⌘ + option + 3' };
+KEYBOARD_SHORTCUTS[BLOCK_TYPES.HEADER_FOUR] = { other: 'ctrl + alt + 4', macOS: '⌘ + option + 4' };
+KEYBOARD_SHORTCUTS[BLOCK_TYPES.HEADER_FIVE] = { other: 'ctrl + alt + 5', macOS: '⌘ + option + 5' };
+KEYBOARD_SHORTCUTS[BLOCK_TYPES.HEADER_SIX] = { other: 'ctrl + alt + 6', macOS: '⌘ + option + 6' };
+KEYBOARD_SHORTCUTS[BLOCK_TYPES.UNORDERED_LIST_ITEM] = {
   other: 'ctrl + shift + 8',
   macOS: '⌘ + shift + 8',
 };
-KEYBOARD_SHORTCUTS[BLOCK_TYPE.ORDERED_LIST_ITEM] = {
+KEYBOARD_SHORTCUTS[BLOCK_TYPES.ORDERED_LIST_ITEM] = {
   other: 'ctrl + shift + 7',
   macOS: '⌘ + shift + 7',
 };
@@ -106,7 +106,7 @@ export const EDITOR_PROPS = [
 ];
 
 export default {
-  BLOCK_TYPE,
+  BLOCK_TYPES,
   ENTITY_TYPE,
   INLINE_STYLE,
 };

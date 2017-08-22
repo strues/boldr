@@ -3,6 +3,7 @@
 import React from 'react';
 import { EditorState, convertFromHTML, ContentState } from 'draft-js';
 import { spy } from 'sinon';
+import 'jest-styled-components';
 import { shallow, mount } from 'enzyme';
 import ModalHandler from '../../../core/eventHandlers/modals';
 import defaultToolbar from '../../../core/config';

@@ -1,6 +1,7 @@
 import React from 'react';
 import { spy } from 'sinon';
 import { shallowToJson } from 'enzyme-to-json';
+import 'jest-styled-components';
 import { shallow, mount } from 'enzyme';
 import Option from './Option';
 

@@ -3,6 +3,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
+import 'jest-styled-components';
 import Dropdown from './Dropdown';
 import DropdownOption from './DropdownOption';
 

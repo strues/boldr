@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { mount } from 'enzyme';
+import 'jest-styled-components';
 import { EditorState, convertFromHTML, ContentState } from 'draft-js';
 
 import { Dropdown } from '../../Dropdown';

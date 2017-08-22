@@ -27,3 +27,12 @@ export const OptionWrapper = styled.div`
     cursor: ${props => (props.disabled ? 'default' : 'inherit')};
   }
 `;
+
+OptionWrapper.defaultProps = {
+  theme: {
+    palette: {
+      primary1: '#0094c6',
+      neutral2: '#F7F7F9',
+    },
+  },
+};

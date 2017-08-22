@@ -5,6 +5,14 @@ exports[`<Option /> should render in a div 1`] = `
   disabled={false}
   isDark={false}
   onClick={[Function]}
+  theme={
+    Object {
+      "palette": Object {
+        "neutral2": "#F7F7F9",
+        "primary1": "#0094c6",
+      },
+    }
+  }
 >
   <span>
     abcd

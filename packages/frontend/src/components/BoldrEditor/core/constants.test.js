@@ -12,7 +12,7 @@ import {
 } from './constants';
 
 describe('Constants', () => {
-  test('BLOCK_TYPE -- exists', () => {
+  test('BLOCK_TYPES -- exists', () => {
     expect(BLOCK_TYPES).toBeDefined();
   });
   test('ENTITY_TYPE -- exists', () => {

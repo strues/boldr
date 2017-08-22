@@ -4,6 +4,7 @@ import React from 'react';
 import { EditorState, convertFromHTML, ContentState } from 'draft-js';
 import { spy } from 'sinon';
 import { mount } from 'enzyme';
+import 'jest-styled-components';
 import ModalHandler from '../../../core/eventHandlers/modals';
 import defaultToolbar from '../../../core/config';
 import List from './List';
