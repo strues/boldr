@@ -7,7 +7,7 @@ module.exports = babelJest.createTransformer({
       {
         target: 'modern',
         modules: 'commonjs',
-        styled: true,
+        styled: false,
       },
     ],
   ],

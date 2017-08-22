@@ -26,21 +26,17 @@
     "url": "https://github.com/strues/boldr/issues"
   },
   "scripts": {
-    "build": "rimraf lib && NODE_ENV=production babel src --ignore *.test.js --out-dir lib",
-    "format": "prettier --single-quote=true --print-width=100 --jsx-bracket-same-line=false --trailing-comma=all --write \"src/**/*.js\""
+    "build": "rimraf lib && NODE_ENV=production babel src --ignore *.test.js --out-dir lib"
   },
   "dependencies": {
     "lodash.invokemap": "^4.6.0",
     "lodash.reduce": "^4.6.0"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-		"babel-eslint": "^7.2.3",
-		"babel-plugin-transform-object-rest-spread": "^6.23.0",
-		"babel-preset-env": "^1.6.0",
-		"eslint": "^4.5.0",
-		"eslint-config-boldr": "0.12.7",
-		"prettier": "^1.5.3",
-		"rimraf": "^2.6.1"
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^7.2.3",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "rimraf": "^2.6.1"
   }
 }

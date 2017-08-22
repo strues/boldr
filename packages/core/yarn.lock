@@ -1548,9 +1548,9 @@ escape-string-regexp@^1.0.2, escape-string-regexp@^1.0.5:
   version "1.0.5"
   resolved "https://registry.npmjs.org/escape-string-regexp/-/escape-string-regexp-1.0.5.tgz#1b61c0562190a8dff6ae3bb2cf0200ca130b86d4"
 
-eslint-config-boldr@0.12.7:
-  version "0.12.7"
-  resolved "https://registry.npmjs.org/eslint-config-boldr/-/eslint-config-boldr-0.12.7.tgz#41902b811a5d0a9d07d1d1f296e3828566e59bab"
+eslint-config-boldr@0.12.8:
+  version "0.12.8"
+  resolved "https://registry.npmjs.org/eslint-config-boldr/-/eslint-config-boldr-0.12.8.tgz#ac6bc1d6a13e27feeff235201836a02b5d24f742"
   dependencies:
     babel-eslint "^7.2.3"
     eslint-plugin-babel "^4.1.2"
@@ -1559,7 +1559,7 @@ eslint-config-boldr@0.12.7:
     eslint-plugin-jsx-a11y "^6.0.2"
     eslint-plugin-prettier "^2.2.0"
     eslint-plugin-promise "^3.5.0"
-    eslint-plugin-react "^7.2.1"
+    eslint-plugin-react "^7.3.0"
 
 eslint-import-resolver-node@^0.3.1:
   version "0.3.1"
@@ -1623,13 +1623,14 @@ eslint-plugin-promise@^3.5.0:
   version "3.5.0"
   resolved "https://registry.npmjs.org/eslint-plugin-promise/-/eslint-plugin-promise-3.5.0.tgz#78fbb6ffe047201627569e85a6c5373af2a68fca"
 
-eslint-plugin-react@^7.2.1:
-  version "7.2.1"
-  resolved "https://registry.npmjs.org/eslint-plugin-react/-/eslint-plugin-react-7.2.1.tgz#c2673526ed6571b08c69c5f453d03f5f13e8ddbe"
+eslint-plugin-react@^7.3.0:
+  version "7.3.0"
+  resolved "https://registry.npmjs.org/eslint-plugin-react/-/eslint-plugin-react-7.3.0.tgz#ca9368da36f733fbdc05718ae4e91f778f38e344"
   dependencies:
     doctrine "^2.0.0"
     has "^1.0.1"
     jsx-ast-utils "^2.0.0"
+    prop-types "^15.5.10"
 
 eslint-scope@^3.7.1:
   version "3.7.1"
@@ -1638,7 +1639,7 @@ eslint-scope@^3.7.1:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint@^4.5.0:
+eslint@4.5.0:
   version "4.5.0"
   resolved "https://registry.npmjs.org/eslint/-/eslint-4.5.0.tgz#bb75d3b8bde97fb5e13efcd539744677feb019c3"
   dependencies:
@@ -2937,7 +2938,7 @@ preserve@^0.2.0:
   version "0.2.0"
   resolved "https://registry.npmjs.org/preserve/-/preserve-0.2.0.tgz#815ed1f6ebc65926f865b310c0713bcb3315ce4b"
 
-prettier@^1.5.3:
+prettier@1.5.3:
   version "1.5.3"
   resolved "https://registry.npmjs.org/prettier/-/prettier-1.5.3.tgz#59dadc683345ec6b88f88b94ed4ae7e1da394bfe"
 

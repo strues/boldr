@@ -77,10 +77,9 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-watch": "^2.0.7",
-    "eslint": "^4.5.0",
-    "eslint-config-boldr": "0.12.7",
+    "eslint": "4.5.0",
+    "eslint-config-boldr": "0.12.8",
     "fast-async": "^6.3.0",
-    "flow-bin": "^0.53.1",
-    "prettier": "^1.5.3"
+    "prettier": "1.5.3"
   }
 }

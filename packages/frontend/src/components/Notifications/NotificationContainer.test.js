@@ -44,7 +44,13 @@ describe('<NotificationContainer />', () => {
 
   it('maps dispatch to props', () => {
     expect(mountedComponent.find('NotificationContainer').props()).toMatchObject({
-      hideNotification: expect.any(Function),
+      animatedMargin: 'bottom',
+      animationDuration: 400,
+      animationEasing: 'ease',
+      dismissAfter: 1000,
+      isVisible: true,
+      options: undefined,
+      uid: 1,
     });
   });
 
