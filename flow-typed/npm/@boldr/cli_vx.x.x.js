@@ -1,4 +1,4 @@
-// flow-typed signature: f06493b95f6cc9319bcc08c31436b16d
+// flow-typed signature: e9a4c9d770a9c162f38d9075b3624dc2
 // flow-typed version: <<STUB>>/@boldr/cli_v0.2.0-beta.1/flow_v0.53.1
 
 /**
@@ -26,6 +26,14 @@ declare module '@boldr/cli/bin/boldr' {
   declare module.exports: any;
 }
 
+declare module '@boldr/cli/lib/cli' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/cli/lib/util/runner' {
+  declare module.exports: any;
+}
+
 declare module '@boldr/cli/src/cli' {
   declare module.exports: any;
 }
@@ -33,6 +41,12 @@ declare module '@boldr/cli/src/cli' {
 // Filename aliases
 declare module '@boldr/cli/bin/boldr.js' {
   declare module.exports: $Exports<'@boldr/cli/bin/boldr'>;
+}
+declare module '@boldr/cli/lib/cli.js' {
+  declare module.exports: $Exports<'@boldr/cli/lib/cli'>;
+}
+declare module '@boldr/cli/lib/util/runner.js' {
+  declare module.exports: $Exports<'@boldr/cli/lib/util/runner'>;
 }
 declare module '@boldr/cli/src/cli.js' {
   declare module.exports: $Exports<'@boldr/cli/src/cli'>;

@@ -1,4 +1,5 @@
 import React from 'react';
+import 'jest-styled-components';
 import { shallow, mount } from 'enzyme';
 import Container from './Container';
 

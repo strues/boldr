@@ -1,5 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
+import 'jest-styled-components';
 import configureStore from 'redux-mock-store';
 import { mount } from 'enzyme';
 

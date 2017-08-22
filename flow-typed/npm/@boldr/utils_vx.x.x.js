@@ -1,4 +1,4 @@
-// flow-typed signature: 1cd2f5ef016bf9d828a5979f0ac98a60
+// flow-typed signature: a245eb81eaaf1bda024e85973414e17b
 // flow-typed version: <<STUB>>/@boldr/utils_v^0.1.0-rc.4/flow_v0.53.1
 
 /**
@@ -22,6 +22,34 @@ declare module '@boldr/utils' {
  * require those files directly. Feel free to delete any files that aren't
  * needed.
  */
+declare module '@boldr/utils/__tests__/arrays/addIdToArray.test' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/__tests__/arrays/flatten.test' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/__tests__/arrays/merge.test' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/__tests__/arrays/removeIdFromArray.test' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/__tests__/arrays/removeNil.test' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/__tests__/arrays/uniqueArray.test' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/__tests__/toTitle.test' {
+  declare module.exports: any;
+}
+
 declare module '@boldr/utils/lib/arrays/addIdToArray' {
   declare module.exports: any;
 }
@@ -158,7 +186,188 @@ declare module '@boldr/utils/lib/strings/toTitle' {
   declare module.exports: any;
 }
 
+declare module '@boldr/utils/src/arrays/addIdToArray' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/arrays/concatAll' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/arrays/flatten' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/arrays/merge' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/arrays/reduce' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/arrays/removeIdFromArray' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/arrays/removeKeyFromNestedArray' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/arrays/removeNil' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/arrays/uniqueArray' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/dom/hasDocument' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/dom/hasDocument.test' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/dom/hasWindow' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/dom/hasWindow.test' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/dom/inDOM' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/dom/inDOM.test' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/dom/isWindow' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/dom/isWindow.test' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/dom/ownerDocument' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/dom/ownerDocument.test' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/gql/firstResult' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/gql/jsonResult' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/index' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/logger' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/logic/curry' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/logic/curryN' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/logic/ifElse' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/logic/isPromise' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/logic/isPromise.test' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/logic/requiredParam' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/logic/sort' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/logic/tap' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/logic/uniq' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/logic/validateId' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/node/appRoot' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/node/getDefault' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/node/logDeep' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/objects/filterEmpty' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/objects/mergeDeep' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/objects/removeByKey' {
+  declare module.exports: any;
+}
+
+declare module '@boldr/utils/src/strings/toTitle' {
+  declare module.exports: any;
+}
+
 // Filename aliases
+declare module '@boldr/utils/__tests__/arrays/addIdToArray.test.js' {
+  declare module.exports: $Exports<'@boldr/utils/__tests__/arrays/addIdToArray.test'>;
+}
+declare module '@boldr/utils/__tests__/arrays/flatten.test.js' {
+  declare module.exports: $Exports<'@boldr/utils/__tests__/arrays/flatten.test'>;
+}
+declare module '@boldr/utils/__tests__/arrays/merge.test.js' {
+  declare module.exports: $Exports<'@boldr/utils/__tests__/arrays/merge.test'>;
+}
+declare module '@boldr/utils/__tests__/arrays/removeIdFromArray.test.js' {
+  declare module.exports: $Exports<'@boldr/utils/__tests__/arrays/removeIdFromArray.test'>;
+}
+declare module '@boldr/utils/__tests__/arrays/removeNil.test.js' {
+  declare module.exports: $Exports<'@boldr/utils/__tests__/arrays/removeNil.test'>;
+}
+declare module '@boldr/utils/__tests__/arrays/uniqueArray.test.js' {
+  declare module.exports: $Exports<'@boldr/utils/__tests__/arrays/uniqueArray.test'>;
+}
+declare module '@boldr/utils/__tests__/toTitle.test.js' {
+  declare module.exports: $Exports<'@boldr/utils/__tests__/toTitle.test'>;
+}
 declare module '@boldr/utils/lib/arrays/addIdToArray.js' {
   declare module.exports: $Exports<'@boldr/utils/lib/arrays/addIdToArray'>;
 }
@@ -260,4 +469,124 @@ declare module '@boldr/utils/lib/objects/removeByKey.js' {
 }
 declare module '@boldr/utils/lib/strings/toTitle.js' {
   declare module.exports: $Exports<'@boldr/utils/lib/strings/toTitle'>;
+}
+declare module '@boldr/utils/src/arrays/addIdToArray.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/arrays/addIdToArray'>;
+}
+declare module '@boldr/utils/src/arrays/concatAll.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/arrays/concatAll'>;
+}
+declare module '@boldr/utils/src/arrays/flatten.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/arrays/flatten'>;
+}
+declare module '@boldr/utils/src/arrays/merge.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/arrays/merge'>;
+}
+declare module '@boldr/utils/src/arrays/reduce.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/arrays/reduce'>;
+}
+declare module '@boldr/utils/src/arrays/removeIdFromArray.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/arrays/removeIdFromArray'>;
+}
+declare module '@boldr/utils/src/arrays/removeKeyFromNestedArray.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/arrays/removeKeyFromNestedArray'>;
+}
+declare module '@boldr/utils/src/arrays/removeNil.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/arrays/removeNil'>;
+}
+declare module '@boldr/utils/src/arrays/uniqueArray.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/arrays/uniqueArray'>;
+}
+declare module '@boldr/utils/src/dom/hasDocument.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/dom/hasDocument'>;
+}
+declare module '@boldr/utils/src/dom/hasDocument.test.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/dom/hasDocument.test'>;
+}
+declare module '@boldr/utils/src/dom/hasWindow.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/dom/hasWindow'>;
+}
+declare module '@boldr/utils/src/dom/hasWindow.test.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/dom/hasWindow.test'>;
+}
+declare module '@boldr/utils/src/dom/inDOM.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/dom/inDOM'>;
+}
+declare module '@boldr/utils/src/dom/inDOM.test.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/dom/inDOM.test'>;
+}
+declare module '@boldr/utils/src/dom/isWindow.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/dom/isWindow'>;
+}
+declare module '@boldr/utils/src/dom/isWindow.test.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/dom/isWindow.test'>;
+}
+declare module '@boldr/utils/src/dom/ownerDocument.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/dom/ownerDocument'>;
+}
+declare module '@boldr/utils/src/dom/ownerDocument.test.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/dom/ownerDocument.test'>;
+}
+declare module '@boldr/utils/src/gql/firstResult.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/gql/firstResult'>;
+}
+declare module '@boldr/utils/src/gql/jsonResult.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/gql/jsonResult'>;
+}
+declare module '@boldr/utils/src/index.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/index'>;
+}
+declare module '@boldr/utils/src/logger.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/logger'>;
+}
+declare module '@boldr/utils/src/logic/curry.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/logic/curry'>;
+}
+declare module '@boldr/utils/src/logic/curryN.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/logic/curryN'>;
+}
+declare module '@boldr/utils/src/logic/ifElse.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/logic/ifElse'>;
+}
+declare module '@boldr/utils/src/logic/isPromise.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/logic/isPromise'>;
+}
+declare module '@boldr/utils/src/logic/isPromise.test.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/logic/isPromise.test'>;
+}
+declare module '@boldr/utils/src/logic/requiredParam.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/logic/requiredParam'>;
+}
+declare module '@boldr/utils/src/logic/sort.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/logic/sort'>;
+}
+declare module '@boldr/utils/src/logic/tap.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/logic/tap'>;
+}
+declare module '@boldr/utils/src/logic/uniq.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/logic/uniq'>;
+}
+declare module '@boldr/utils/src/logic/validateId.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/logic/validateId'>;
+}
+declare module '@boldr/utils/src/node/appRoot.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/node/appRoot'>;
+}
+declare module '@boldr/utils/src/node/getDefault.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/node/getDefault'>;
+}
+declare module '@boldr/utils/src/node/logDeep.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/node/logDeep'>;
+}
+declare module '@boldr/utils/src/objects/filterEmpty.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/objects/filterEmpty'>;
+}
+declare module '@boldr/utils/src/objects/mergeDeep.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/objects/mergeDeep'>;
+}
+declare module '@boldr/utils/src/objects/removeByKey.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/objects/removeByKey'>;
+}
+declare module '@boldr/utils/src/strings/toTitle.js' {
+  declare module.exports: $Exports<'@boldr/utils/src/strings/toTitle'>;
 }
