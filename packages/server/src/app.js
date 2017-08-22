@@ -8,6 +8,7 @@ import {
   initSecurity,
   initCore,
   initErrorHandler,
+  queryLogger,
   addFallbackHandler,
 } from './middleware';
 
@@ -25,6 +26,7 @@ initAuth(app);
 // @todo: left as standard REST routes
 // /auth/check, /auth/verify, /token/reset-password, /token/forgot-password
 routes(app);
+app.use(queryLogger());
 // graphql middleware
 initGraphql(app);
 // Configure static serving of our "public" root http path static files.
