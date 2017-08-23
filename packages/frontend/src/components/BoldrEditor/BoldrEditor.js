@@ -15,12 +15,7 @@ import classNames from 'classnames';
 
 import { convertToHTML, convertFromHTML } from 'draft-convert';
 import { getToHTMLConfig, getFromHTMLConfig } from './core/convert';
-import {
-  ModalHandler,
-  FocusHandler,
-  KeyDownHandler,
-  SuggestionHandler,
-} from './core/eventHandlers';
+import { ModalHandler, FocusHandler, KeyDownHandler } from './core/eventHandlers';
 import {
   handleNewLine,
   getCustomStyleMap,
@@ -35,7 +30,7 @@ import {
 import type { CustomStyleMap } from './utils/inline';
 import * as Controls from './components/Controls';
 
-import { getLinkDecorator, getMentionDecorators, getHashtagDecorator } from './core/decorators';
+import getLinkDecorator from './core/decorators/Link';
 import getBlockRenderFunc from './core/blockRender';
 import configDefaults from './core/config';
 import type { ToolbarConfig } from './core/config';
@@ -198,21 +193,6 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
         showOpenOptionOnHover: this.state.toolbar.link.showOpenOptionOnHover,
       }),
     ];
-    if (this.props.mention) {
-      decorators.push(
-        ...getMentionDecorators({
-          ...this.props.mention,
-          onChange: this.onChange,
-          getEditorState: this.getEditorState,
-          getSuggestions: this.getSuggestions,
-          getWrapperRef: this.getWrapperRef,
-          modalHandler: this.modalHandler,
-        }),
-      );
-    }
-    if (this.props.hashtag) {
-      decorators.push(getHashtagDecorator(this.props.hashtag));
-    }
     return new CompositeDecorator(decorators);
   };
 
@@ -278,7 +258,7 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
       'onFocus',
       'onBlur',
       'onTab',
-      'mention',
+
       'hashtag',
       'ariaLabel',
       'customBlockRenderFunc',
@@ -287,8 +267,6 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
   };
 
   getWrapperRef = () => this.refs.wrapper;
-
-  getSuggestions = () => this.props.mention && this.props.mention.suggestions;
 
   isReadOnly = () => this.props.readOnly;
 
@@ -331,12 +309,6 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
     }
   };
 
-  onUpDownArrow: Function = (event: SyntheticEvent<>): boolean => {
-    if (SuggestionHandler.isOpen()) {
-      event.preventDefault();
-    }
-  };
-
   onToolbarFocus: Function = (event: SyntheticEvent<>): void => {
     const { onFocus } = this.props;
     if (onFocus && this.focusHandler.isToolbarFocused()) {
@@ -362,9 +334,6 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
   };
 
   handleReturn: Function = (event: SyntheticEvent<>): boolean => {
-    if (SuggestionHandler.isOpen()) {
-      return true;
-    }
     const editorState = handleNewLine(this.state.editorState, event);
     if (editorState) {
       this.onChange(editorState);
@@ -453,8 +422,6 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
             }}
             onTab={this.onTab}
             spellcheck={this.props.spellcheck}
-            onUpArrow={this.onUpDownArrow}
-            onDownArrow={this.onUpDownArrow}
             editorState={editorState}
             onChange={this.onChange}
             blockStyleFn={blockStyleFn}
