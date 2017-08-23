@@ -11,7 +11,7 @@ pipeline:
     volumes:
       - /tmp/cache:/cache
 
-  test:
+  build:
     image: node:8.4.0
     commands:
       - yarn install
