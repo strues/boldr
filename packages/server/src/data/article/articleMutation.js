@@ -1,5 +1,6 @@
 import { GraphQLNonNull, GraphQLID } from 'graphql';
 import _debug from 'debug';
+
 import slugIt from '../../utils/slugIt';
 import Tag from '../../models/Tag';
 import Article from '../../models/Article';

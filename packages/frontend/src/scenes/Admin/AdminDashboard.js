@@ -32,6 +32,12 @@ export type FlattenedRoutes = Array<Object>;
 const TbArea = styled.div`width: 100%;`;
 
 export class AdminDashboard extends React.Component<Props, *> {
+  static defaultProps = {
+    currentUser: {
+      avatarUrl: '',
+      firstName: 'User',
+    },
+  };
   constructor(props: Props) {
     super(props);
     (this: any).flattenedRoutes = flattenRoutes(routes);

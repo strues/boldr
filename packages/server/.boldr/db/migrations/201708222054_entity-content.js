@@ -46,26 +46,7 @@ module.exports.up = async db => {
     table.index('createdAt');
   });
 
-  await db.schema.createTable('entity_content_type', table => {
-    table.increments('id').primary();
-    table.uuid('ctId').unsigned().notNullable();
-    table.uuid('entityId').unsigned().notNullable();
-    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
-    table.unique(['ctId', 'entityId']);
-    table
-      .foreign('ctId')
-      .references('id')
-      .inTable('content_type')
-      .onDelete('cascade')
-      .onUpdate('cascade');
-    table
-      .foreign('entityId')
-      .references('id')
-      .inTable('entity')
-      .onDelete('cascade')
-      .onUpdate('cascade');
-  });
+
 
   await db.schema.createTable('entity_tag', table => {
     table.increments('id').primary();
@@ -92,7 +73,6 @@ module.exports.up = async db => {
 module.exports.down = async db => {
   await db.schema.dropTableIfExists('content_type');
   await db.schema.dropTableIfExists('entity');
-  await db.schema.dropTableIfExists('entity_content_type');
   await db.schema.dropTableIfExists('entity_tag');
 };
 

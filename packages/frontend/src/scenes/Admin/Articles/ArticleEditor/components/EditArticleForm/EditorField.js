@@ -1,9 +1,6 @@
 /* @flow */
 import React, { Component } from 'react';
-// $FlowIssue
-import { convertFromHTML } from 'draft-convert';
-// $FlowIssue
-import { convertToRaw, EditorState } from 'draft-js';
+import hasWindow from '@boldr/utils/lib/dom/hasWindow';
 import Editor from '../../../../../../components/BoldrEditor';
 
 export type Props = {
@@ -17,22 +14,21 @@ type State = {
   editorState: EditorState,
 };
 export default class EditorField extends Component {
-  constructor(props: Props) {
-    super(props);
-    let editorState = EditorState.createEmpty();
-    if (props.input.value) {
-      editorState = EditorState.createWithContent(convertFromHTML(props.input.value));
-    }
-    this.state = {
-      editorState,
-    };
-  }
-  state: State;
+  state: State = { editorState: undefined, htmlContent: undefined };
+
   props: Props;
-  onChange = (editorState: Object) => {
-    const { input } = this.props;
-    input.onChange(convertToRaw(editorState.getCurrentContent()));
-    this.setState({ editorState });
+
+  handleHTMLChange = htmlContent => {
+    console.log(htmlContent);
+    this.setState({ htmlContent });
+    if (hasWindow) {
+      window.localStorage.setItem('htmlContent', htmlContent);
+    }
+  };
+
+  handleRawChange = raw => {
+    this.setState({ editorState: raw });
+    console.log(raw);
   };
   render() {
     const { input, placeholder } = this.props;
@@ -41,8 +37,10 @@ export default class EditorField extends Component {
       <Editor
         {...input}
         editorStyle={editorStyle}
-        onEditorStateChange={this.onChange}
-        editorState={editorState}
+        contentFormat="raw"
+        onRawChange={this.handleRawChange}
+        onHtmlChange={this.handleHTMLChange}
+        initialContent={input.value}
         toolbarClassName="playground-toolbar"
         wrapperClassName="playground-wrapper"
         editorClassName="playground-editor"

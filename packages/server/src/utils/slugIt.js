@@ -1,4 +1,5 @@
 /* eslint-disable no-param-reassign */
+
 export default function(slug, replacement) {
   return (
     slug
@@ -15,5 +16,6 @@ export default function(slug, replacement) {
       .replace(/[-\s]+/g, replacement || '-')
       // remove trailing separator
       .replace('#{replacement}$', '')
+      .toLowerCase()
   );
 }

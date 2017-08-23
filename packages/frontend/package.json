@@ -49,6 +49,7 @@
     "react-tagsinput": "^3.17.0",
     "react-transition-group": "^2.2.0",
     "react-universal-component": "2.5.0",
+    "recompose": "0.25.0",
     "redux": "^3.7.2",
     "redux-form": "^7.0.3",
     "redux-thunk": "^2.2.0",

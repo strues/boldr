@@ -127,20 +127,6 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
       const toolbar = mergeRecursive(configDefaults, props.toolbar);
       newState.toolbar = toolbar;
     }
-    // if editorState is passed, we arent empty. load the provided state
-    if (
-      hasProperty(props, 'initialContent') &&
-      this.props.initialContent !== props.initialContent
-    ) {
-      if (props.initialContent) {
-        newState.editorState = EditorState.set(props.initialContent, {
-          decorator: this.compositeDecorator,
-        });
-      } else {
-        // create the empty state
-        newState.editorState = EditorState.createEmpty(this.compositeDecorator);
-      }
-    }
 
     this.setState(newState);
     this.editorProps = this.filterEditorProps(props);

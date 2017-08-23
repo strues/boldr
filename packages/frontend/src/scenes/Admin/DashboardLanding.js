@@ -14,6 +14,11 @@ export type Props = {
 const TabPanel = Tabs.TabPanel;
 // @TODO: ditch component state for redux
 class DashboardLanding extends Component {
+  static defaultProps = {
+    currentUser: {
+      firstName: 'User',
+    },
+  };
   state = {
     activeId: '1',
   };

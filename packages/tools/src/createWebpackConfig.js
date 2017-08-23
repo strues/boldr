@@ -234,6 +234,7 @@ export default function createWebpackConfig(
       chunkFilename: _IS_DEV_ || _IS_SERVER_ ? '[name].js' : '[name]-[chunkhash].js',
       path: _IS_SERVER_ ? SERVER_OUTPUT : CLIENT_OUTPUT,
       publicPath: PUBLIC_PATH,
+      pathinfo: _IS_DEV_,
       // Enable cross-origin loading without credentials - Useful for loading files from CDN
       crossOriginLoading: 'anonymous',
       devtoolModuleFilenameTemplate: _IS_DEV_

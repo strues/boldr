@@ -31,7 +31,9 @@ export type Props = {
 };
 
 const Wrapper = styled.div`
-  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
   height: 100%;
   box-sizing: border-box;
 `;

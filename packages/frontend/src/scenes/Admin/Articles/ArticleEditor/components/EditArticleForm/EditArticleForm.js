@@ -61,7 +61,7 @@ const EditArticleForm = (props: Props) => {
             </FormGroup>
           </Wrapper>
           <Wrapper>
-            <Field name="content" component={EditorField} />
+            <Field name="rawContent" component={EditorField} />
           </Wrapper>
           <Wrapper>
             <FormGroup>

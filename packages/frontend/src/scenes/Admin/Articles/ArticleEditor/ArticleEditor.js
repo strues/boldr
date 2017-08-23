@@ -2,7 +2,7 @@
 /* eslint-disable no-unused-vars */
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
-import { convertToHTML } from 'draft-convert';
+import hasWindow from '@boldr/utils/lib/dom/hasWindow';
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import EDIT_ARTICLE_MUTATION from '../gql/editArticle.mutation.graphql';
@@ -30,6 +30,7 @@ class ArticleEditor extends PureComponent {
 
   handleSubmit = (values: Object) => {
     const articleId: string = this.props.currentArticle.id;
+    values.content = hasWindow ? window.localStorage.getItem('htmlContent') : '';
 
     this.props.editArticle(articleId, values);
   };
@@ -67,7 +68,7 @@ export default graphql(EDIT_ARTICLE_MUTATION, {
           input: {
             title: values.title,
             slug: values.title,
-            content: convertToHTML(values.content),
+            content: values.content,
             rawContent: values.rawContent,
             featured: false,
             published: values.published,

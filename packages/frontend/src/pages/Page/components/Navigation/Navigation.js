@@ -1,5 +1,6 @@
-/* @flow */
-import React, { Component } from 'react';
+/* eslint-disable no-return-assign, react/no-unused-state */
+// @flow
+import * as React from 'react';
 import Icon from '@boldr/ui/Icons/Icon';
 import Link from 'react-router-dom/Link';
 import NavLink from 'react-router-dom/NavLink';
@@ -8,11 +9,8 @@ import {
   Navbar,
   NavbarBrand,
   NavbarBurger,
-  NavbarDivider,
-  NavbarDropdown,
   NavbarEnd,
   NavbarItem,
-  NavbarLink,
   NavbarMenu,
   NavbarStart,
 } from '@boldr/ui/Navbar';
@@ -35,11 +33,18 @@ export type Props = {
   breakpoint?: number,
   onLogout: Function,
 };
-export const isActive = (location: Object, url: string) => {
+
+type State = {
+  isActive: boolean,
+  isDropdownOpen: boolean,
+};
+
+export const checkActiveLoc = (location: Object, url: string) => {
   return Boolean(location.pathname.includes(url));
 };
-class Navigation extends Component {
-  state = { isActive: false, isDropdownOpen: false };
+
+class Navigation extends React.Component<Props, State> {
+  state: State = { isActive: false, isDropdownOpen: false };
 
   onClickNav = () => {
     if (this.refs.nav) {
@@ -55,8 +60,10 @@ class Navigation extends Component {
   };
   props: Props;
   render() {
-    const { menu: { details }, settings, currentUser, onLogout, location, auth } = this.props;
+    const { menu: { details }, settings, currentUser, location, auth } = this.props;
+    const { isActive } = this.state;
     return (
+      // $FlowIssue
       <Navbar ref={node => (this.nav = node)}>
         <Container>
           <NavbarBrand>
@@ -65,17 +72,21 @@ class Navigation extends Component {
                 <img src="https://boldr.io/assets/boldr-blue-logo.png" />
               </Link>
             </NavbarItem>
-            <NavbarBurger isActive={this.state.isActive} onClick={this.onClickNav} />
+            <NavbarBurger isActive={isActive} onClick={this.onClickNav} />
           </NavbarBrand>
-          <NavbarMenu isActive={this.state.isActive} onClick={this.onClickNav}>
+          <NavbarMenu isActive={isActive} onClick={this.onClickNav}>
             <NavbarStart>
               {details.map(detail =>
-                <NavItem key={detail.id} isActive={isActive(location, detail.href)} {...detail} />,
+                <NavItem
+                  key={detail.id}
+                  isActive={checkActiveLoc(location, detail.href)}
+                  {...detail}
+                />,
               )}
             </NavbarStart>
             <NavbarEnd>
-              {Boolean(auth.token) &&
-                currentUser.roleId === 3 &&
+              {auth.token &&
+                parseInt(currentUser.roleId, 10) === 3 &&
                 <NavbarItem>
                   <NavLink to="/admin">
                     <Icon kind="dashboard" />

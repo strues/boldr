@@ -14,7 +14,7 @@ export type Props = {
   cssClassname?: string,
 };
 
-const NavItem = ({ isActive, href, children, title, safeName, icon, hasDropdown }: Props) => {
+const NavItem = ({ isActive, href, children, title, hasDropdown }: Props) => {
   if (!hasDropdown) {
     return (
       <NavbarItem isActive={isActive} href={href} title={title}>

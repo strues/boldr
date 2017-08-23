@@ -32,5 +32,10 @@ const SidebarWrapper = (props: Props) => {
 SidebarWrapper.defaultProps = {
   sidebarDark: true,
   fullWidth: true,
+  theme: {
+    palette: {
+      primary4: '#243140',
+    },
+  },
 };
 export default SidebarWrapper;

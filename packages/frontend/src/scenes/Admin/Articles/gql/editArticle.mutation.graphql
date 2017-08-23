@@ -1,4 +1,4 @@
-mutation editArticle($id: UUID!, $input: EditArticleInput!) {
+mutation editArticle($id: ID!, $input: EditArticleInput!) {
   editArticle(id: $id, input: $input) {
     title
     slug

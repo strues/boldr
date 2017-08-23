@@ -1609,9 +1609,9 @@ cipher-base@^1.0.0, cipher-base@^1.0.1, cipher-base@^1.0.3:
     inherits "^2.0.1"
     safe-buffer "^5.0.1"
 
-circular-dependency-plugin@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.npmjs.org/circular-dependency-plugin/-/circular-dependency-plugin-4.0.0.tgz#d7d7552f43d6ee2abc64b0877c35bc68bb656c3f"
+circular-dependency-plugin@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.npmjs.org/circular-dependency-plugin/-/circular-dependency-plugin-4.1.0.tgz#723885ec537f44c26f551d87ae23b41a41fc2d96"
 
 circular-json@^0.3.1:
   version "0.3.3"

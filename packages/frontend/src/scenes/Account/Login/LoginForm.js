@@ -31,13 +31,14 @@ const FormBottomListItem = styled.li`padding-left: 0;`;
 const LoginForm = (props: Props) => {
   const { handleSubmit, submitting, pristine } = props;
   return (
-    <Form onSubmit={handleSubmit} className="boldrui-form boldrui-form--login">
+    <Form onSubmit={handleSubmit}>
       <Field
         id="email"
         name="email"
         type="email"
         component={TextFormField}
         label="Email Address"
+        autoComplete="email"
         placeholder="admin@boldr.io"
         validate={[validations.isEmail, validations.isRequired]}
       />
