@@ -30,7 +30,7 @@ import {
 import type { CustomStyleMap } from './utils/inline';
 import * as Controls from './components/Controls';
 
-import getLinkDecorator from './core/decorators/Link';
+import getLinkDecorator from './core/decorators/Link/Link';
 import getBlockRenderFunc from './core/blockRender';
 import configDefaults from './core/config';
 import type { ToolbarConfig } from './core/config';
