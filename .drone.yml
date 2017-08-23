@@ -15,7 +15,11 @@ pipeline:
     image: node:8.4.0
     commands:
       - yarn install
-      - yarn run test -- -u
+      - yarn run lerna exec --scope @boldr/auth -- yarn run build
+      - yarn run lerna exec --scope @boldr/utils -- yarn run build
+      - yarn run lerna exec --scope @boldr/core -- yarn run prepare
+      - yarn run lerna exec --scope @boldr/tools -- yarn run build
+      - yarn run test
       - ./node_modules/.bin/codecov -t a3dc697a-382d-4d84-a07b-1f5682c3d70a -f coverage/coverage-final.json
 
   rebuild-cache:

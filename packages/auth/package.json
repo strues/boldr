@@ -2,11 +2,14 @@
   "name": "@boldr/auth",
   "version": "0.1.0-alpha.3",
   "description": "JWT and localStorage mock for Boldr frontend.",
-  "main": "lib/boldr-auth.cjs.js",
-  "module": "lib/boldr-auth.esm.js",
-  "jsnext:main": "lib/boldr-auth.esm.js",
+  "main": "dist/index.js",
+  "browser": "dist/index.js",
+  "browser:es2015": "lib/index.js",
+  "module": "lib/index.js",
+  "jsnext:main": "lib/index.js",
   "files": [
-    "lib/*.js"
+    "lib/*.js",
+    "dist/*.js"
   ],
   "keywords": [
     "jwt"
@@ -26,7 +29,10 @@
     "url": "https://github.com/strues/boldr/issues"
   },
   "scripts": {
-    "clean": "rimraf lib",
+    "build": "npm run clean && npm run build:cjs && npm run build:es",
+    "build:cjs": "NODE_ENV=cjs babel src --out-dir dist --ignore *.test.js",
+    "build:es": "NODE_ENV=es babel src --out-dir lib --ignore *.test.js",
+    "clean": "rimraf lib && rimraf dist",
     "format": "prettier --single-quote=true --jsx-bracket-same-line=false --trailing-comma=all --print-width=100 --write \"src/**/*.js\"",
     "prepare": "rimraf lib && NODE_ENV=production prepublish"
   },
