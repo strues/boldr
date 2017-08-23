@@ -3,14 +3,12 @@
   "version": "independent",
   "npmClient": "yarn",
   "packages": [
-    "packages/auth",
     "packages/cli",
     "packages/core",
     "packages/frontend",
     "packages/server",
     "packages/tools",
-    "packages/utils",
-    "packages/ui"
+    "packages/utils"
   ],
   "registry": "https://registry.npmjs.org/"
 }

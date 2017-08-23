@@ -1,5 +1,10 @@
-import { replacePath, sendNotification, showNotification } from '@boldr/core';
-import { setToken, removeToken } from '@boldr/auth';
+import {
+  setToken,
+  removeToken,
+  replacePath,
+  sendNotification,
+  showNotification,
+} from '@boldr/core';
 import * as notif from '../../../core/constants';
 
 import * as t from './actionTypes';

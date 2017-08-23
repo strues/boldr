@@ -5,7 +5,7 @@
 import jwt from 'jsonwebtoken';
 import session from 'express-session';
 import connectRedis from 'connect-redis';
-import { mainRedisClient } from '../services/redis';
+import { redisClient } from '../services/redis';
 import User from '../models/User';
 import { config } from '../config';
 import rbac from './rbac';
@@ -23,7 +23,7 @@ const sessionOptions = {
     secure: false,
     maxAge: config.get('token.expiration'),
   },
-  store: new (connectRedis(session))({ client: mainRedisClient }),
+  store: new (connectRedis(session))({ client: redisClient }),
 };
 if (env === 'production') {
   // Enable the secure cookie when we are in production mode.

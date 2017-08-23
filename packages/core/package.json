@@ -1,6 +1,6 @@
 {
   "name": "@boldr/core",
-  "version": "0.1.0-beta.1-1",
+  "version": "0.1.0-beta.2",
   "description": "universal react content management framework",
   "homepage": "https://github.com/strues/boldr",
   "bugs": {
@@ -12,12 +12,12 @@
     "email": "steven@strues.io",
     "url": "strues.io"
   },
-  "main": "lib/boldr-core.node.es5.cjs.js",
-  "module": "lib/boldr-core.node.es5.esm.js",
-  "browser": "lib/boldr-core.browser.es5.esm.js",
-  "main:es2015": "lib/boldr-core.node.es2015.cjs.js",
-  "module:es2015": "lib/boldr-core.node.es2015.esm.js",
-  "browser:es2015": "lib/boldr-core.browser.es2015.esm.js",
+  "main": "lib/boldr-core.node.cjs.js",
+  "module": "lib/boldr-core.node.esm.js",
+  "jsnext:main": "lib/boldr-core.browser.esm.js",
+  "main:es2015": "lib/boldr-core.node.cjs.js",
+  "module:es2015": "lib/boldr-core.node.esm.js",
+  "browser:es2015": "lib/boldr-core.browser.esm.js",
   "files": [
     "index.js",
     "lib"

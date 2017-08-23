@@ -7,7 +7,6 @@ module.exports = [
   'react-redux',
   'redux-thunk',
   'react-apollo',
-  '@boldr/auth',
   '@boldr/icons',
   '@boldr/core',
   'react-helmet',

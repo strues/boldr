@@ -3,8 +3,13 @@ import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import BrowserRouter from 'react-router-dom/BrowserRouter';
 
-import { getToken } from '@boldr/auth';
-import { createApolloClient, createBoldrStore, RouterConnection, wrapBoldrApp } from '@boldr/core';
+import {
+  getToken,
+  createApolloClient,
+  createBoldrStore,
+  RouterConnection,
+  wrapBoldrApp,
+} from '@boldr/core';
 import { checkAuth } from './scenes/Account/state/actions';
 import App from './components/App';
 import appReducer from './reducers';

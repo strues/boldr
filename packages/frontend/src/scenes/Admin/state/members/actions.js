@@ -1,6 +1,5 @@
-import { sendNotification } from '@boldr/core';
+import { getToken, sendNotification } from '@boldr/core';
 
-import { getToken } from '@boldr/auth';
 import { API_PREFIX } from '../../../../core';
 import * as notif from '../../../../core/constants';
 

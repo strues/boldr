@@ -2,7 +2,7 @@
 import * as React from 'react';
 import Route from 'react-router-dom/Route';
 import Redirect from 'react-router-dom/Redirect';
-import { getToken } from '@boldr/auth';
+import { getToken } from '@boldr/core';
 
 export const hasAccessToken = () => {
   const token = getToken();

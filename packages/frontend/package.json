@@ -26,8 +26,7 @@
     "test": "NODE_ENV=test jest --config jest.config.json"
   },
   "dependencies": {
-    "@boldr/auth": "0.1.0-alpha.3",
-    "@boldr/core": "0.1.0-beta.1-1",
+    "@boldr/core": "0.1.0-beta.2",
     "@boldr/icons": "0.1.0-beta.3",
     "@boldr/tools": "0.1.0-beta.2",
     "@boldr/ui": "0.1.0-rc.11",
