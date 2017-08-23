@@ -3,7 +3,9 @@
 import React from 'react';
 import { Entity } from 'draft-js';
 import { shallow, mount } from 'enzyme';
-import getLinkDecorator from '..';
+import 'jest-styled-components';
+import getLinkDecorator from '../Link';
+import { LinkDecoratorWrap } from './Link.styled';
 import { convertFromHTML, AtomicBlockUtils, ContentState, EditorState } from 'draft-js';
 
 describe('LinkDecorator test suite', () => {
@@ -22,17 +24,7 @@ describe('LinkDecorator test suite', () => {
           Link
         </Link>,
       ).node.type,
-    ).to.equal('span');
-  });
-
-  it('should have state initialized correctly', () => {
-    const Link = LinkDecorator.component;
-    const control = shallow(
-      <Link entityKey={entityKey} contentState={contentState}>
-        Link
-      </Link>,
-    );
-    assert.isNotTrue(control.state().showPopOver);
+    ).toEqual(LinkDecoratorWrap);
   });
 
   it('should have 1 child element by default', () => {
@@ -42,7 +34,7 @@ describe('LinkDecorator test suite', () => {
         Link
       </Link>,
     );
-    expect(control.children().length).to.equal(1);
+    expect(control.children().length).toEqual(1);
   });
 
   it('should have 2 child element when showPopOver is true', () => {
@@ -53,6 +45,6 @@ describe('LinkDecorator test suite', () => {
       </Link>,
     );
     control.setState({ showPopOver: true });
-    expect(control.children().length).to.equal(2);
+    expect(control.children().length).toEqual(2);
   });
 });

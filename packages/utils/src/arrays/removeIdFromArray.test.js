@@ -1,4 +1,4 @@
-import removeIdFromArray from '../../src/arrays/removeIdFromArray';
+import removeIdFromArray from './removeIdFromArray';
 
 test('removeIdFromArray removes an id from the array of ids', () => {
   const ids = ['ab123', 'cbd321', 'def324'];

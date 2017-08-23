@@ -1,4 +1,4 @@
-import merge from '../../src/arrays/merge';
+import merge from './merge';
 
 const LEFT = {
   debug: true,

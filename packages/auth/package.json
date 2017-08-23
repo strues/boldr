@@ -2,12 +2,11 @@
   "name": "@boldr/auth",
   "version": "0.1.0-alpha.3",
   "description": "JWT and localStorage mock for Boldr frontend.",
-  "main": "lib/boldr-auth.node.commonjs.js",
-  "module": "lib/boldr-auth.node.esmodules.js",
-  "browser": "lib/boldr-auth.browser.es5.esm.js",
-  "browser:es2015": "lib/boldr-auth.browser.es2015.esm.js",
+  "main": "lib/boldr-auth.cjs.js",
+  "module": "lib/boldr-auth.esm.js",
+  "jsnext:main": "lib/boldr-auth.esm.js",
   "files": [
-    "lib"
+    "lib/*.js"
   ],
   "keywords": [
     "jwt"

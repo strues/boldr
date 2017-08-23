@@ -1,4 +1,4 @@
-import removeNil from '../../src/arrays/removeNil';
+import removeNil from './removeNil';
 
 function ifElse(condition) {
   // TODO: Allow the then/or to accept a function for lazy value resolving.
