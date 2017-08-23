@@ -6,8 +6,9 @@ module.exports = {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       './internal/jest/fileMock.js',
     '\\.(css|scss)$': 'identity-obj-proxy',
+    '^@boldr/auth$': 'packages/auth',
   },
-  modulePathIgnorePatterns: ['packages/.*/build', 'packages/.*/lib'],
+  modulePathIgnorePatterns: ['packages/.*/build'],
   roots: [
     '<rootDir>/packages/auth',
     '<rootDir>/packages/core',

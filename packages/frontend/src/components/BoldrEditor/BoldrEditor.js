@@ -28,7 +28,6 @@ import {
   changeListDepth,
   blockRenderMap,
   blockStyleFn,
-  hasProperty,
   filter,
   mergeRecursive,
 } from './utils';
