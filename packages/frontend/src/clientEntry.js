@@ -16,13 +16,14 @@ import appReducer from './reducers';
 import { injectResetStyle } from './theme/resetStyle';
 import ThemeProvider from './theme/ThemeProvider';
 
-// injectResetStyle();
+injectResetStyle();
+
 const DOM_NODE = document.getElementById('app');
 const preloadedState = window.__APOLLO_STATE__;
 const token = getToken();
-injectResetStyle();
+
 export const apolloClient = createApolloClient({
-  batchRequests: true,
+  batchRequests: false,
   initialState: preloadedState,
   apolloUri: process.env.GRAPHQL_ENDPOINT,
   headers: {

@@ -69,7 +69,7 @@ export default ({ clientStats, outputPath }) =>
               <div id="app"><div>${app}</div></div>
               <script type="text/javascript" src="/static/boldrDLLs.js"></script>
               ${js}
-                ${cssHash}
+              ${cssHash}
               <script type="text/javascript">
                 window.__APOLLO_STATE__=${serialize(preloadedState, {
                   json: true,

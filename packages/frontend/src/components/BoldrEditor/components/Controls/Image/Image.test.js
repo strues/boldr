@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from 'react';
+import * as React from 'react';
 import { EditorState, convertFromHTML, ContentState } from 'draft-js';
 import { mount } from 'enzyme';
 import 'jest-styled-components';

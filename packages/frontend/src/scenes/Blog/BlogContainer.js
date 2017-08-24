@@ -1,6 +1,6 @@
 /* @flow */
 
-import React from 'react';
+import * as React from 'react';
 import Route from 'react-router-dom/Route';
 import { flattenRoutes } from '@boldr/core';
 import ArticleListing from './ArticleListing';

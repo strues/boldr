@@ -1,5 +1,5 @@
 /* @flow */
-import React from 'react';
+import * as React from 'react';
 import Link from 'react-router-dom/Link';
 import classnames from 'classnames';
 import { Col, Row } from '@boldr/ui/Layout';

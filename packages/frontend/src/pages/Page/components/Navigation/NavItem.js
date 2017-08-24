@@ -1,5 +1,5 @@
 /* @flow */
-import React from 'react';
+import * as React from 'react';
 import { NavbarDropdown, NavbarItem, NavbarLink } from '@boldr/ui/Navbar';
 
 export type Props = {
