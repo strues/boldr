@@ -13,7 +13,7 @@ export type Props = {
   component: Object,
   location: Object,
 };
-// $FlowIssue
+
 const ProtectedRoute = ({ component: Component, ...rest }: Props) =>
   <Route
     {...rest}

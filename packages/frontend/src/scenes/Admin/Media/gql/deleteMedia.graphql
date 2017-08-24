@@ -1,6 +1,4 @@
 
 mutation deleteMedia($id: ID!) {
-    deleteMedia(id: $id) {
-        message
-    }
+    deleteMedia(id: $id)
 }

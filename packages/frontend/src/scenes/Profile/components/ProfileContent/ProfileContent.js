@@ -46,8 +46,6 @@ const ProfileContent = (props: Props) => {
     <div className="boldr-profile__content">
       <Grid>
         <Row>
-          {props.me ? editButtons : null}
-
           <Col xs={12} md={6}>
             <img
               src={profile.avatarUrl}

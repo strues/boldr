@@ -8,7 +8,7 @@ import Loader from '@boldr/ui/Loader';
 // internal
 import { showHeader } from '@boldr/core';
 import { Footer, Container } from '@boldr/ui/Layout';
-import ProfileContainer from '../../scenes/Profile';
+import Profile from '../../scenes/Profile';
 import LoginContainer from '../../scenes/Account/Login';
 import SignupContainer from '../../scenes/Account/Signup';
 import AccountContainer from '../../scenes/Account';
@@ -17,6 +17,7 @@ import { logout } from '../../scenes/Account/state/actions';
 import Home from '../Home';
 import About from '../About';
 import Navigation from './components/Navigation';
+import View from '../../components/View';
 // graphql
 
 import MENU_QUERY from './gql/getMenu.graphql';
@@ -29,14 +30,6 @@ export type Props = {
   logout: Function,
   data: Object,
 };
-
-const Wrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-  height: 100%;
-  box-sizing: border-box;
-`;
 
 const ContentWrapper = styled.section`
   width: 100%;
@@ -58,7 +51,7 @@ export class Page extends React.Component<Props, *> {
   render() {
     const { data: { loading, getMenuById }, showHeader, auth, me, location } = this.props;
     return (
-      <Wrapper>
+      <View>
         {loading
           ? <Loader />
           : <Navigation
@@ -74,7 +67,7 @@ export class Page extends React.Component<Props, *> {
             <Route path="/login" component={LoginContainer} />
             <Route path="/signup" component={SignupContainer} />
             <Route path="/account" component={AccountContainer} />
-            <Route path="/profiles/:username" component={ProfileContainer} />
+            <Route path="/profiles/:username" component={Profile} />
             <Route path="/blog" component={BlogContainer} />
             <Route path="/about" exact component={About} />
             <Route path="/" exact component={Home} />
@@ -83,7 +76,7 @@ export class Page extends React.Component<Props, *> {
         <Footer id="footer">
           <Container>Footer</Container>
         </Footer>
-      </Wrapper>
+      </View>
     );
   }
 }

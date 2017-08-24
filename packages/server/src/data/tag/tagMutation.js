@@ -48,9 +48,8 @@ export default {
         description: 'The tag ID',
       },
     },
-    async resolve(_, args) {
-      const removedTag = await Tag.query().deleteById(args.id);
-      return removedTag;
+    resolve(_, args) {
+      return Tag.query().deleteById(args.id);
     },
   },
 };

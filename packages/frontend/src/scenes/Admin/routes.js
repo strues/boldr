@@ -8,7 +8,7 @@ import MediaManagerContainer from './Media/MediaManager/MediaManagerContainer';
 import UploadMedia from './Media/UploadMedia';
 import ArticleEditor from './Articles/ArticleEditor';
 import NewArticleContainer from './Articles/NewArticle/NewArticleContainer';
-// import NavigationContainer from './Navigation/NavigationContainer';
+import Content from './Content';
 import Members from './Members';
 import Settings from './Settings';
 import TagsContainer from './Tags/TagsContainer';
@@ -44,6 +44,12 @@ export default [
     exact: true,
     path: '/admin',
     component: DashboardLanding,
+    routes: [],
+  },
+  {
+    exact: true,
+    path: '/admin/content',
+    component: Content,
     routes: [],
   },
   {

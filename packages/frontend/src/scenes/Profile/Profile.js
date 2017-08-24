@@ -1,21 +1,30 @@
 /* @flow */
 import React from 'react';
 import classnames from 'classnames';
+import Loader from '@boldr/ui/Loader';
+import Helmet from 'react-helmet';
 import { StyleClasses } from '@boldr/ui';
 import ProfileContent from './components/ProfileContent';
+import View from '../../components/View';
 
 type Props = {
   profile: Object,
-  me: boolean,
+  isLoading?: boolean,
 };
 const BASE_ELEMENT = StyleClasses.PROFILE;
-const Profile = ({ profile, me }: Props) => {
-  const classes = classnames(BASE_ELEMENT);
 
+const Profile = ({ profile, isLoading }: Props) => {
+  const classes = classnames(BASE_ELEMENT);
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
-    <div className={classes}>
-      <ProfileContent me={me} profile={profile} />
-    </div>
+    <View>
+      <Helmet title={`${profile.username}'s Profile`} />
+      <div className={classes}>
+        <ProfileContent profile={profile} />
+      </div>
+    </View>
   );
 };
 

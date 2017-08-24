@@ -9,6 +9,7 @@ import Headline from '@boldr/ui/Headline';
 import Icon from '@boldr/ui/Icons';
 import GET_MEDIA_QUERY from '../gql/getMedia.graphql';
 import UPLOAD_MEDIA_MUTATION from '../gql/uploadMedia.graphql';
+import Dropzone from './components/Dropzone';
 
 const MediaTitleArea = styled.div`
   padding-top: 50px;
@@ -22,24 +23,30 @@ export type Props = {
 };
 
 class UploadMedia extends Component<Props, *> {
-  handleChange = ({ target }) => {
-    if (target.validity.valid) {
-      this.props.mutate({
-        variables: {
-          file: target.files[0],
-        },
-        refetchQueries: [
-          {
-            query: GET_MEDIA_QUERY,
-            variables: {
-              offset: 0,
-              limit: 20,
-            },
+  handleUpload = file => {
+    return new Promise((resolve, reject) => {
+      this.props
+        .mutate({
+          variables: {
+            file,
           },
-        ],
-      });
-    }
+          refetchQueries: [
+            {
+              query: GET_MEDIA_QUERY,
+              variables: {
+                offset: 0,
+                limit: 20,
+              },
+            },
+          ],
+        })
+        .then(data => {
+          return resolve(data);
+        })
+        .catch(err => reject(err));
+    });
   };
+
   props: Props;
   render() {
     return (
@@ -55,7 +62,10 @@ class UploadMedia extends Component<Props, *> {
                 </Headline>
               </MediaTitleArea>
               <MediaInputArea>
-                <input type="file" required onChange={this.handleChange} />
+                <Dropzone
+                  uploadCallback={this.handleUpload}
+                  fileUrl="http://localhost:2121/uploads/media"
+                />
               </MediaInputArea>
             </Paper>
           </Col>

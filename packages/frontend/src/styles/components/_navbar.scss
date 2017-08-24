@@ -9,6 +9,7 @@
   width: 100%;
   min-height: $navbar-height;
   background-color: $navbar-background;
+  box-shadow: 0 1px 0px rgba(0,0,0,0.075);
 }
 
 .#{$boldr-ns}navbar__brand {

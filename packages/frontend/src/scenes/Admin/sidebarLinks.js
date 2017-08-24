@@ -19,6 +19,12 @@ const sidebarLinks = [
     ],
   },
   {
+    label: 'Content',
+    icon: 'tag',
+    id: 2,
+    link: '/admin/content',
+  },
+  {
     label: 'Tags',
     icon: 'tag',
     id: 13,

@@ -17,44 +17,9 @@ type Data = {
   loading: boolean,
 };
 
-type State = {
-  me: boolean,
-};
 export class ProfileContainer extends Component {
-  static defaultProps = {
-    currentUser: {
-      email: '',
-    },
-    data: {
-      getUserByUsername: {
-        email: '',
-      },
-    },
-  };
-  constructor() {
-    super();
-
-    this.state = {
-      me: false,
-    };
-    (this: any).setMe = this.setMe.bind(this);
-  }
-  state: State;
-
-  componentDidMount() {
-    this.setMe();
-  }
-
   props: Props;
 
-  setMe() {
-    const userEmail = this.props.currentUser.email || null;
-    const profEmail = this.props.data.loading ? '' : this.props.data.getUserByUsername.email;
-    const isMe = userEmail === profEmail;
-    this.setState({
-      me: isMe,
-    });
-  }
   render() {
     const { loading, getUserByUsername } = this.props.data;
 
@@ -64,7 +29,7 @@ export class ProfileContainer extends Component {
     return (
       <div>
         <Helmet title={`${getUserByUsername.username}'s Profile`} />
-        <Profile profile={getUserByUsername} me={this.state.me} />
+        <Profile profile={getUserByUsername} />
       </div>
     );
   }

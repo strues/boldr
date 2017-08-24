@@ -1,5 +1,5 @@
 import path from 'path';
-import { GraphQLNonNull, GraphQLID } from 'graphql';
+import { GraphQLNonNull, GraphQLID, GraphQLBoolean } from 'graphql';
 import _debug from 'debug';
 import fs from 'fs-extra';
 import Jimp from 'jimp';
@@ -78,7 +78,7 @@ export default {
     },
   },
   deleteMedia: {
-    type: MediaType,
+    type: GraphQLBoolean,
     description: 'Remove a media file from the server',
     args: {
       id: {
@@ -86,9 +86,8 @@ export default {
         description: 'The media ID',
       },
     },
-    async resolve(_, args) {
-      const removedMedia = await Media.query().deleteById(args.id);
-      return removedMedia;
+    resolve(_, args) {
+      return Media.query().deleteById(args.id);
     },
   },
 };

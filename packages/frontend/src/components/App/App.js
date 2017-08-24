@@ -12,6 +12,7 @@ import Error404 from '../../pages/Error404';
 import AdminDashboard from '../../scenes/Admin';
 import boldrNotificationsFactory, { Notif } from '../Notifications';
 import ProtectedRoute from '../ProtectedRoute';
+import View from '../View';
 
 const NotificationContainer = boldrNotificationsFactory(Notif);
 
@@ -38,6 +39,7 @@ const App = () => {
         <meta name="msapplication-TileColor" content="#2b2b2b" />
         <meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png" />
       </Helmet>
+
       <Switch>
         <ProtectedRoute path="/admin" component={AdminDashboard} />
         <Route path="/" component={Page} />

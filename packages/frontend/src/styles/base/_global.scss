@@ -24,7 +24,9 @@ html {
 }
 
 body {
-  background-color: $body-background;
+  background: #ECE9E6;
+  background: -webkit-linear-gradient(to right, #f0f3f6, #ECE9E6);
+  background: linear-gradient(to right, #f0f3f6, #ECE9E6);
   font-weight: $font-weight-base;
   font-size: $font-size-base;
   font-family: $font-family-base;

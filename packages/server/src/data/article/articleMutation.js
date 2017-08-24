@@ -99,10 +99,8 @@ export default {
         description: 'The article ID',
       },
     },
-    async resolve(_, args) {
-      await Article.query().deleteById(args.id);
-      const deletedId = args.id;
-      return deletedId;
+    resolve(_, args) {
+      return Article.query().deleteById(args.id);
     },
   },
 };

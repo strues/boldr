@@ -1,5 +1,3 @@
 mutation deleteTag($id: ID!) {
-    deleteTag(id: $id) {
-        id
-    }
+    deleteTag(id: $id)
 }
