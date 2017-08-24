@@ -1,6 +1,6 @@
 {
   "presets": [
-    [ "env", { "targets": { "node": 8 }, "exclude": ["transform-regenerator", "transform-async-to-generator"] }]
+    [ "env", { "modules": "commonjs", "targets": { "node": 8 }, "exclude": ["transform-regenerator", "transform-async-to-generator"] }]
   ],
   "plugins": ["syntax-flow", "transform-class-properties",
 [

@@ -12,5 +12,3 @@ if (!global.fetch) {
 }
 
 export * from './common';
-
-export * from './util/debug';

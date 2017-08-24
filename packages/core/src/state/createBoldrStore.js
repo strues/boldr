@@ -100,11 +100,23 @@ export default function createBoldrStore(appReducer, preloadedState, apolloClien
   if (typeof enhancer === 'function') {
     enhancers.push(enhancer);
   }
-  if (env === 'development' && typeof window !== 'undefined') {
-    if (window.devToolsExtension) {
-      enhancers.push(window.devToolsExtension());
-    }
-  }
-  const store = createStore(reducer, preloadedState, compose(...enhancers));
+  const composeEnhancers =
+    typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+      ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+          actionsBlacklist: [
+            '@@redux-form/CHANGE',
+            '@@redux-form/BLUR',
+            '@@redux-form/FOCUS',
+            '@@redux-form/UNREGISTER_FIELD',
+            '@@redux-form/REGISTER_FIELD',
+          ],
+        })
+      : compose;
+  // if (env === 'development' && typeof window !== 'undefined') {
+  //   if (window.devToolsExtension) {
+  //     enhancers.push(window.devToolsExtension());
+  //   }
+  // }
+  const store = createStore(reducer, preloadedState, composeEnhancers(...enhancers));
   return store;
 }

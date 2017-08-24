@@ -2,7 +2,10 @@
   "name": "boldr-server",
   "version": "0.0.1-alpha.1",
   "description": "Server for Boldr",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "files": [
+    "lib/*"
+  ],
   "scripts": {
     "build": "rm -rf lib && NODE_ENV=production babel src --out-dir lib",
     "dev": "NODE_ENV=development DEBUG=boldr:server:* babel-watch src/index.js",

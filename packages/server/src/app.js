@@ -13,21 +13,20 @@ import {
   addFallbackHandler,
 } from './middleware';
 
-// import { config } from './config';
 import routes from './routes';
 
 const app = express();
 
 initErrorHandler(app);
+// cors, hpp, helmet
 initSecurity(app, { enableNonce: true, enableCSP: false });
-// Base Express middleware - body-parser, method-override, cors
+// Base Express middleware - body-parser, method-override
 initCore(app);
 // Session middleware, authentication check, rbac
 initAuth(app);
-
-// @todo: left as standard REST routes
 // /auth/check, /auth/verify, /token/reset-password, /token/forgot-password
 routes(app);
+// log graphql queries to debug
 app.use(queryLogger());
 // graphql middleware
 initGraphql(app);

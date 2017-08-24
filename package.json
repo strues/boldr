@@ -4,7 +4,7 @@
   "private": true,
   "description": "Boldr CMF platform for Universal React Applications.",
   "scripts": {
-    "bootstrap": "./node_modules/.bin/lerna bootstrap --concurrency 1",
+    "bootstrap": "./node_modules/.bin/lerna bootstrap --concurrency 4",
     "clean": "lerna clean --yes",
     "commit": "git-cz",
     "coverage": "codecov",
@@ -38,7 +38,7 @@
     "babel-core": "^6.26.0",
     "babel-eslint": "^7.2.3",
     "babel-jest": "^20.0.3",
-    "babel-preset-boldr": "0.11.0-beta.3",
+    "babel-preset-boldr": "0.11.0-beta.4",
     "babel-preset-env": "^1.6.0",
     "bluebird": "^3.5.0",
     "chalk": "^2.1.0",

@@ -1,6 +1,7 @@
 /* eslint-disable no-console, no-shadow */
 import http from 'http';
 import _debug from 'debug';
+
 import app from './app';
 import { initializeDb, disconnect } from './services/db';
 import logger from './services/logger';
@@ -11,32 +12,24 @@ const debug = _debug('boldr:server');
 // Launch Node.js server
 const server = http.createServer(app);
 
-global.Promise = require('bluebird');
+initializeDb();
 
-initializeDb()
-  .then(() => {
-    logger.info('Database connected successfully');
-    server.on('listening', () => {
-      const address = server.address();
-      logger.info('Boldr running on port %s', address.port);
-    });
-    server.on('error', err => {
-      logger.error(`⚠️  ${err}`);
-      throw err;
-    });
-    return server.listen(SERVER_PORT);
-  })
-  .catch(err => {
-    logger.error(err);
-    process.exit(1);
-  });
+server.listen(SERVER_PORT);
+server.on('listening', () => {
+  const address = server.address();
+  logger.info('Boldr running on port %s', address.port);
+});
+server.on('error', err => {
+  logger.error(`⚠️  ${err}`);
+  throw err;
+});
 
 process.on('SIGINT', () => {
   logger.info('shutting down!');
   disconnect();
   destroyRedis();
   server.close();
-  process.exit();
+  process.exit(0);
 });
 
 process.on('uncaughtException', error => {
@@ -45,3 +38,5 @@ process.on('uncaughtException', error => {
   debug(error.stack);
   process.exit(1);
 });
+
+export default server;

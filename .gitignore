@@ -2,10 +2,15 @@
 node_modules
 .DS_Store
 
-packages/**/lib/*
-packages/**/build/*
-packages/babel-preset-boldr
+packages/cli/lib
+packages/core/lib
+packages/frontend/build
 packages/frontend/.env
+packages/server/lib
+packages/server/.env
+packages/server/.idea
+packages/tools/lib
+packages/utils/lib
 
 .boldr/cache
 coverage
