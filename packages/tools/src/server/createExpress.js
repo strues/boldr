@@ -1,6 +1,6 @@
 import { resolve as resolvePath } from 'path';
 import express from 'express';
-import uuid from 'uuid';
+import uuid from 'uuid/v4';
 import PrettyError from 'pretty-error';
 import appRoot from '@boldr/utils/lib/node/appRoot';
 

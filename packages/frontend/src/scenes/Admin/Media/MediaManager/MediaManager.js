@@ -24,7 +24,7 @@ const MediaContent = styled.div`
 `;
 const MediaFormCard = styled.div`margin-bottom: 2rem;`;
 
-class MediaManager extends Component {
+class MediaManager extends React.Component<Props, *> {
   handleSubmit = (values: Object) => {
     const mediaId = this.props.data.getMediaById.id;
 

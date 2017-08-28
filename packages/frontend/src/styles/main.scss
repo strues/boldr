@@ -1,15 +1,2 @@
 @charset "utf-8";
-@import "vendor/all";
-@import "abstracts/all";
-@import "base/all";
-@import "components/all";
-
-
-.boldrui-form__radio {
-  margin-left: 5px;
-  margin-right: 5px;
-}
-
-.boldrui-hero {
-  background-color: inherit;
-}
+@import '~@boldr/ui/styles/boldrui.scss';

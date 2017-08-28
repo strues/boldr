@@ -1,19 +1,21 @@
 /* @flow */
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import Headline from '@boldr/ui/Headline';
 import Icon from '@boldr/ui/Icons/Icon';
 import ContentPromo from '@boldr/ui/ContentPromo';
+
 import Tabs from '@boldr/ui/Tabs';
 
+import type { CurrentUser } from '../../types/boldr';
+
 export type Props = {
-  currentUser: User,
+  currentUser: CurrentUser,
 };
 
-// eslint-disable-next-line
-const TabPanel = Tabs.TabPanel;
-// @TODO: ditch component state for redux
-class DashboardLanding extends Component {
+const { TabPane } = Tabs;
+
+class DashboardLanding extends React.Component<Props, *> {
   static defaultProps = {
     currentUser: {
       firstName: 'User',
@@ -23,10 +25,8 @@ class DashboardLanding extends Component {
     activeId: '1',
   };
 
-  onTabChange = id => {
-    this.setState({
-      activeId: id,
-    });
+  onTabChange = key => {
+    console.log(key);
   };
   props: Props;
   render() {
@@ -37,38 +37,16 @@ class DashboardLanding extends Component {
             Welcome {this.props.currentUser.firstName}
           </Headline>
         </ContentPromo>
-        <Tabs type="slider" activeId={this.state.activeId} onTabChange={this.onTabChange}>
-          <TabPanel tab={<span>Tab1</span>} id="1">
-            <div className="feed-grid">
-              <div className="card-half wide">
-                <div className="card-img">
-                  <span className="label">as</span>
-                  <img alt="img" src="http://i.magaimg.net/img/yym.png" />
-                </div>
-                <div className="card-text">This is some text</div>
-                <ul className="card-tools">
-                  <li className="tools-item">
-                    <Icon kind="package" color="#222" />
-                  </li>
-                  <li className="tools-item">
-                    <Icon kind="account-card" color="#222" />
-                  </li>
-                </ul>
-              </div>
-              <div className="card">
-                <div className="card-img">
-                  <img alt="img" src="http://i.magaimg.net/img/yyn.png" />
-                </div>
-                <div className="info-center">This background is pink...</div>
-              </div>
-            </div>
-          </TabPanel>
-          <TabPanel tab="2" id="2">
-            <div>asdfasdf</div>
-          </TabPanel>
-          <TabPanel tab="3" id="3">
-            <div>asdfasdf</div>
-          </TabPanel>
+        <Tabs defaultActiveKey="1" onChange={this.onTabChange}>
+          <TabPane tab="Tab 1" key="1">
+            Content of Tab Pane 1
+          </TabPane>
+          <TabPane tab="Tab 2" key="2">
+            Content of Tab Pane 2
+          </TabPane>
+          <TabPane tab="Tab 3" key="3">
+            Content of Tab Pane 3
+          </TabPane>
         </Tabs>
       </div>
     );

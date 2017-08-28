@@ -12,6 +12,7 @@ import {
   AccordionItemTitle,
   AccordionItemBody,
 } from '@boldr/ui/Accordion';
+import type { Setting } from '../../../types/boldr';
 // import { HeaderPanel, SettingsPanel } from 'boldr-ui';
 import SettingsAside from './components/SettingsAside';
 import General from './components/General';

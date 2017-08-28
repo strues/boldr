@@ -49,7 +49,7 @@ export class Page extends React.Component<Props, *> {
 
   props: Props;
   render() {
-    const { data: { loading, getMenuById }, showHeader, auth, me, location } = this.props;
+    const { data: { loading, getMenuById }, auth, currentUser, location } = this.props;
     return (
       <View>
         {loading
@@ -57,9 +57,8 @@ export class Page extends React.Component<Props, *> {
           : <Navigation
               location={location}
               onLogout={this.handleLogoutClick}
-              visible={showHeader}
               auth={auth}
-              currentUser={me}
+              currentUser={currentUser}
               menu={getMenuById}
             />}
         <ContentWrapper>
@@ -83,9 +82,8 @@ export class Page extends React.Component<Props, *> {
 
 const mapStateToProps = state => {
   return {
-    showHeader: state.boldr.ui.showHeader,
     auth: state.auth,
-    me: state.auth.info,
+    currentUser: state.auth.info,
   };
 };
 

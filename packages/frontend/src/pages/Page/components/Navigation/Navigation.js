@@ -1,11 +1,13 @@
-/* eslint-disable no-return-assign, react/no-unused-state */
+/* eslint-disable no-return-assign, react/no-unused-state, no-implicit-coercion */
 // @flow
 import * as React from 'react';
-import Icon from '@boldr/ui/Icons/Icon';
+
 import Link from 'react-router-dom/Link';
 import NavLink from 'react-router-dom/NavLink';
-import Container from '@boldr/ui/Layout/Container';
+
 import {
+  Icon,
+  Container,
   Navbar,
   NavbarBrand,
   NavbarBurger,
@@ -13,7 +15,7 @@ import {
   NavbarItem,
   NavbarMenu,
   NavbarStart,
-} from '@boldr/ui/Navbar';
+} from '@boldr/ui';
 // internal
 import NavItem from './NavItem';
 
@@ -40,16 +42,14 @@ type State = {
 };
 
 export const checkActiveLoc = (location: Object, url: string) => {
-  return Boolean(location.pathname.includes(url));
+  return !!location.pathname.includes(url);
 };
 
 class Navigation extends React.Component<Props, State> {
   state: State = { isActive: false, isDropdownOpen: false };
 
   onClickNav = () => {
-    if (this.refs.nav) {
-      this.setState(state => ({ isActive: !state.isActive }));
-    }
+    this.setState(state => ({ isActive: !state.isActive }));
   };
 
   onClickDropdown = () => {
@@ -63,8 +63,11 @@ class Navigation extends React.Component<Props, State> {
     const { menu: { details }, settings, currentUser, location, auth } = this.props;
     const { isActive } = this.state;
     return (
-      // $FlowIssue
-      <Navbar ref={node => (this.nav = node)}>
+      <Navbar
+        ref={el => {
+          (this: any).navbar = el;
+        }}
+      >
         <Container>
           <NavbarBrand>
             <NavbarItem>

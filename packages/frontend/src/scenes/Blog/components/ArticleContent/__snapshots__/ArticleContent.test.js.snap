@@ -4,8 +4,8 @@ exports[`<ArticleContent /> renders snapshot 1`] = `
 <article>
   <Paper
     component="div"
-    noPadding={false}
-    rounded={false}
+    isPadded={false}
+    isRounded={false}
     zDepth={2}
   >
     <ArticleDate />

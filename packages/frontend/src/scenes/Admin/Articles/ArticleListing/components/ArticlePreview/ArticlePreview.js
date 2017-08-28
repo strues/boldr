@@ -1,13 +1,15 @@
 /* @flow */
-import React, { Component } from 'react';
+import * as React from 'react';
 import Link from 'react-router-dom/Link';
 import Paper from '@boldr/ui/Paper';
 import { Row, Col } from '@boldr/ui/Layout';
 import Edit from '@boldr/icons/Edit';
 import styled from 'styled-components';
 
+import type { ArticleType } from '../../../../../../types/boldr';
+
 export type Props = {
-  article: Article,
+  article: ArticleType,
 };
 
 const Toolbar = styled.div`
@@ -24,7 +26,7 @@ const Toolbar = styled.div`
 `;
 const ArticlePreviewTitle = styled.div`justify-content: flex-start;`;
 const ArticlePreviewEdit = styled.div`justify-content: flex-end;`;
-class ArticlePreview extends Component {
+class ArticlePreview extends React.Component<Props, *> {
   props: Props;
 
   createMarkup = () => {
@@ -49,7 +51,7 @@ class ArticlePreview extends Component {
             </Link>
           </ArticlePreviewEdit>
         </Toolbar>
-        <Paper zDepth={2}>
+        <Paper zDepth={2} isPadded={true}>
           <div className="boldr-post__content" dangerouslySetInnerHTML={this.createMarkup()} />
         </Paper>
       </div>

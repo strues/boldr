@@ -33,10 +33,9 @@ export default function devMiddleware(server) {
     webpackDevMiddleware(multiCompiler, {
       // required
       publicPath: PUBLIC_PATH,
-
       // display no info to console (only warnings and errors)
-      noInfo: false,
-      quiet: false,
+      noInfo: true,
+      quiet: true,
       // prevent loading before bundle is done
       serverSideRender: true,
     }),

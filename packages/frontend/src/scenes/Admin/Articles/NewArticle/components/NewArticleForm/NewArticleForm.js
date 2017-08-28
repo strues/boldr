@@ -1,6 +1,8 @@
+/* eslint-disable react/prefer-stateless-function */
 /* @flow */
-import React, { Component } from 'react';
+import * as React from 'react';
 import { Field, reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
 import Button from '@boldr/ui/Button';
 import { Col, Row } from '@boldr/ui/Layout';
 import Paper from '@boldr/ui/Paper';
@@ -9,6 +11,8 @@ import Block from '@boldr/ui/Block';
 import Form, { Label, FormGroup, FormField, TextFormField, RadioFormField } from '@boldr/ui/Form';
 import { isRequired } from '../../../../../../core/util/validations';
 import RenderTags from '../RenderTags';
+import type { RouterLocation } from '../../../../../../types/boldr';
+import { selectArticleFormValues } from '../../../../state/selectors/articleSelectors';
 import FieldEditor from './FieldEditor';
 import { Inner, Toolbar, NewPost, DarkSegment, HelpTxt } from './NewPostStyled';
 // import UploadArticleImage from './UploadArticleImage';
@@ -19,21 +23,29 @@ export type Props = {
   submitting?: boolean,
   fields?: Object,
   dispatch: Function,
+  location: RouterLocation,
   pristine?: boolean,
   input?: Object,
   label?: string,
 };
 
-class NewArticleForm extends Component {
-  state = {
-    files: [],
-  };
-
+class NewArticleForm extends React.Component<Props, *> {
   props: Props;
   render() {
-    const { handleSubmit } = this.props;
+    const { handleSubmit, location } = this.props;
+    let isEditForm;
+    if (location && location.pathname.includes('edit')) {
+      isEditForm = true;
+    } else {
+      isEditForm = false;
+    }
     return (
       <div>
+        <div className="heading">
+          <h2>
+            {isEditForm ? 'Edit article' : 'Create article'}
+          </h2>
+        </div>
         <Headline type="h1">Create a new post</Headline>
         <NewPost>
           <Form onSubmit={handleSubmit}>
@@ -136,6 +148,13 @@ class NewArticleForm extends Component {
   }
 }
 
-export default reduxForm({
-  form: 'newArticleForm',
+const mapStateToProps = state => ({
+  formValues: selectArticleFormValues(state),
+});
+
+let initStateForm = reduxForm({
+  form: 'articleForm',
+  enableReinitialize: true,
 })(NewArticleForm);
+
+export default connect(mapStateToProps)(initStateForm);

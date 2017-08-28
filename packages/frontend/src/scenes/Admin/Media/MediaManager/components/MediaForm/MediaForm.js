@@ -40,7 +40,7 @@ const MediaForm = (props: Props) => {
         <Button htmlType="submit" kind="primary" style={style} disabled={submitting || pristine}>
           Save
         </Button>
-        <Button onClick={reset} style={style} kind="secondary">
+        <Button onClick={reset} style={style} outline>
           Reset
         </Button>
       </FormBottom>

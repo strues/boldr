@@ -1,9 +1,8 @@
 /* eslint-disable */
-import React from 'react';
+import * as React from 'react';
 import universal from 'react-universal-component';
 import Icon from '@boldr/ui/Icons/Icon';
 
-// Admin
 import MediaManagerContainer from './Media/MediaManager/MediaManagerContainer';
 import UploadMedia from './Media/UploadMedia';
 import ArticleEditor from './Articles/ArticleEditor';
@@ -14,30 +13,14 @@ import Settings from './Settings';
 import TagsContainer from './Tags/TagsContainer';
 import TaggedPost from './Tags/components/TaggedPost/TaggedPost';
 import DashboardLanding from './DashboardLanding';
+import Articles from './Articles/ArticleListing';
 
-const ArticlesContainer = universal(() => import('./Articles/ArticleListing/ArticlesContainer'), {
-  resolve: () => require.resolveWeak('./Articles/ArticleListing/ArticlesContainer'),
-});
 const MediaContainer = universal(() => import('./Media/MediaContainer'), {
   resolve: () => require.resolveWeak('./Media/MediaContainer'),
 });
 const NavigationContainer = universal(() => import('./Navigation/NavigationContainer'), {
   resolve: () => require.resolveWeak('./Navigation/NavigationContainer'),
 });
-
-declare type ChildRoute = {
-  breadcrumb: string,
-  exact?: boolean,
-  path: string,
-  component: ReactElement,
-  routes?: Array<Route>,
-};
-declare type Route = {
-  exact?: boolean,
-  path: string,
-  component: ReactElement,
-  routes?: Array<ChildRoute>,
-};
 
 export default [
   {
@@ -56,7 +39,7 @@ export default [
     path: '/admin/articles',
     breadcrumb: <Icon kind="posts" />,
     exact: true,
-    component: ArticlesContainer,
+    component: Articles,
     routes: [
       {
         breadcrumb: 'New Article',

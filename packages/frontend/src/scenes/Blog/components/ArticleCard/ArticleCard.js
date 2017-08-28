@@ -5,13 +5,15 @@ import { format } from 'date-fns';
 import classnames from 'classnames';
 import { Button, Card, CardTitle, CardText, CardActions, Media, StyleClasses } from '@boldr/ui';
 import { selectArticle } from '../../state/actions';
+import type { ArticleType } from '../../../../types/boldr';
 
 import TagBlock from '../TagBlock';
 
 const BASE_ELEMENT = StyleClasses.ARTICLE_CARD;
+
 type Props = {
-  className: string,
-  article: Article,
+  className?: string,
+  article: ArticleType,
   dispatch: () => void,
 };
 

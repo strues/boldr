@@ -1,37 +1,54 @@
 /* @flow */
 import * as React from 'react';
+import NavLink from 'react-router-dom/NavLink';
 import { NavbarDropdown, NavbarItem, NavbarLink } from '@boldr/ui/Navbar';
+import type { MenuDetailChildren } from '../../../../types/boldr';
 
 export type Props = {
   isActive?: boolean,
   href?: string,
-  icon?: string,
   title?: string,
-  safeName?: string,
-  location: Object,
   hasDropdown: boolean,
-  children: Array<Object>,
-  cssClassname?: string,
+  children: MenuDetailChildren,
 };
 
 const NavItem = ({ isActive, href, children, title, hasDropdown }: Props) => {
   if (!hasDropdown) {
     return (
-      <NavbarItem isActive={isActive} href={href} title={title}>
-        {title}
-      </NavbarItem>
+      <NavbarItem
+        isActive={isActive}
+        render={() =>
+          <NavLink className="boldrui-navbar__item" activeClassName="is-active" to={href}>
+            {title}
+          </NavLink>}
+      />
     );
   } else {
     return (
       <NavbarItem hasDropdown isHoverable>
-        <NavbarLink isActive={isActive} href={href} className="boldrui-navbar__item">
-          {title}
-        </NavbarLink>
+        <NavbarLink
+          isActive={isActive}
+          className="boldrui-navbar__item"
+          render={() =>
+            <NavLink className="boldrui-navbar__link" to={href}>
+              {title}
+            </NavLink>}
+        />
         <NavbarDropdown>
           {children.items.map(item =>
-            <NavbarItem key={item.id} href={item.href} title={item.safeName}>
-              {item.safeName}
-            </NavbarItem>,
+            <NavbarItem
+              key={item.id}
+              isActive={isActive}
+              title={item.safeName}
+              render={() =>
+                <NavLink
+                  className="boldrui-navbar__item"
+                  activeClassName="is-active"
+                  to={item.href}
+                >
+                  {item.safeName}
+                </NavLink>}
+            />,
           )}
         </NavbarDropdown>
       </NavbarItem>

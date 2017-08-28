@@ -1,6 +1,4 @@
 import universal from 'react-universal-component';
 
-const AdminDashboard = universal(props => import('./AdminDashboard'), {
-  minDelay: 1000,
-});
+const AdminDashboard = universal(() => import('./AdminDashboard'));
 export default AdminDashboard;

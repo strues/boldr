@@ -3,9 +3,10 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import { Grid, Row, Col } from '@boldr/ui/Layout';
 import { FeaturedArticle, ArticleCard } from '../components';
+import type { ArticleType } from '../../../types/boldr';
 
 type Props = {
-  articles: Array<Article>,
+  articles: ArticleType,
   isLoading: boolean,
   error?: Object,
 };

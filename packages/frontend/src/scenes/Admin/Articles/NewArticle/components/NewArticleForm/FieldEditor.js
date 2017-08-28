@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unused-state */
 /* @flow */
 import React, { Component } from 'react';
 
@@ -12,11 +13,14 @@ type Props = {
   mutate: Function,
 };
 
-class FieldEditor extends Component<Props, *> {
-  state = { editorState: undefined, htmlContent: undefined };
+type State = {
+  raw: Object,
+  htmlContent: string,
+};
+class FieldEditor extends Component<Props, State> {
+  state: State = { raw: undefined, htmlContent: undefined };
 
   handleHTMLChange = htmlContent => {
-    console.log(htmlContent);
     this.setState({ htmlContent });
     if (hasWindow) {
       window.localStorage.setItem('htmlContent', htmlContent);
@@ -25,7 +29,6 @@ class FieldEditor extends Component<Props, *> {
 
   handleRawChange = raw => {
     this.setState({ raw });
-    console.log(raw);
   };
   handleUpload = file => {
     return new Promise((resolve, reject) => {
@@ -52,7 +55,6 @@ class FieldEditor extends Component<Props, *> {
         toolbarClassName="boldredit-toolbar"
         wrapperClassName="boldredit-wrapper"
         editorClassName="boldrui-editor"
-        // initialContent="<p>hey</p>"
         contentFormat="raw"
         onRawChange={this.handleRawChange}
         onHtmlChange={this.handleHTMLChange}
@@ -67,5 +69,5 @@ class FieldEditor extends Component<Props, *> {
     );
   }
 }
-
+// $FlowIssue
 export default graphql(UPLOAD_MEDIA_MUTATION)(FieldEditor);

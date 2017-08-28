@@ -6,9 +6,15 @@ import { graphql } from 'react-apollo';
 import Loader from '@boldr/ui/Loader';
 // internal
 import { showModal, hideModal } from '@boldr/core';
+import type { User } from '../../../types/boldr';
 import { memberSelected, updateMember } from '../state';
 import Members from './Members';
 import MEMBERS_QUERY from './users.graphql';
+
+type Data = {
+  getUsers: Array<User>,
+  loading: boolean,
+};
 
 export type Props = {
   data: Data,
@@ -16,10 +22,7 @@ export type Props = {
   dispatch: Function,
   ui: Object,
 };
-type Data = {
-  getUsers: Array<User>,
-  loading: boolean,
-};
+
 export class MembersContainer extends Component {
   static defaultProps: {
     profile: {},

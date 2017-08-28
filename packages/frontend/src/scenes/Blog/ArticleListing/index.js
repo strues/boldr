@@ -3,13 +3,14 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import universal from 'react-universal-component';
 import ARTICLES_QUERY from '../gql/articles.graphql';
+import type { ArticleType } from '../../../types/boldr';
 
 const UniversalArticleListing = universal(import('./ArticleListing'));
 
 type Props = {
   loading: boolean,
   error?: Object,
-  articles: Array<Article>,
+  articles: ArticleType,
 };
 
 const ArticleListing = ({ loading, error, articles }: Props) =>

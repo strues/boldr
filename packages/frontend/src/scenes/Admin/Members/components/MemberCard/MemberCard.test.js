@@ -1,6 +1,7 @@
 import React from 'react';
 import { shallow, mount } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
+import 'jest-styled-components';
 import MemberCard from './MemberCard';
 
 const userData = {

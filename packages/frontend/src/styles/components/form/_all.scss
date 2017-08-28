@@ -244,6 +244,7 @@ $input-radius: $radius !default;
 .#{$boldr-ns}form__label {
   color: $input;
   display: block;
+  text-align: left;
   font-size: $size-normal;
   font-weight: $weight-bold;
 

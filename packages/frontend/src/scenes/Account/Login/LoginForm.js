@@ -39,7 +39,7 @@ const LoginForm = (props: Props) => {
         component={TextFormField}
         label="Email Address"
         autoComplete="email"
-        placeholder="admin@boldr.io"
+        placeholder="example@email.com"
         validate={[validations.isEmail, validations.isRequired]}
       />
       <Field

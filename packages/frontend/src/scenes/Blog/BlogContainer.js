@@ -1,8 +1,9 @@
-/* @flow */
+// @flow
 
 import * as React from 'react';
 import Route from 'react-router-dom/Route';
 import { flattenRoutes } from '@boldr/core';
+import type { NavRoute, FlattenedRoutes } from '../../types/boldr';
 import ArticleListing from './ArticleListing';
 import Article from './Article';
 import TagList from './TagList';
@@ -11,7 +12,7 @@ type Props = {
   path: string,
 };
 
-const routes = [
+const routes: Array<NavRoute> = [
   {
     exact: true,
     path: '/blog',
@@ -32,7 +33,7 @@ const routes = [
 ];
 // eslint-disable-next-line
 const BlogContainer = (props: Props) => {
-  const flattenedRoutes: Array<any> = flattenRoutes(routes);
+  const flattenedRoutes: FlattenedRoutes = flattenRoutes(routes);
   return (
     <div>
       {flattenedRoutes.map(props => <Route key={props.path} {...props} />)}

@@ -2,7 +2,6 @@
 // import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
-import { convertToHTML } from 'draft-convert';
 
 import CREATE_ARTICLE_MUTATION from '../gql/createArticle.mutation.graphql';
 import NewArticle from './NewArticle';

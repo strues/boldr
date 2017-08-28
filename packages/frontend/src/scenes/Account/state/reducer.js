@@ -1,3 +1,6 @@
+/* eslint-disable complexity */
+// @flow
+import type { AuthState } from '../../../types/state';
 import * as t from './actionTypes';
 
 /**
@@ -16,7 +19,7 @@ const INITIAL_STATE = {
  * @param  {Object} state       The initial state
  * @param  {Object} action      The action object
  */
-function authReducer(state = INITIAL_STATE, action = {}) {
+function authReducer(state: AuthState = INITIAL_STATE, action = {}) {
   switch (action.type) {
     case t.LOGIN_FAILURE:
     case t.SIGNUP_USER_FAILURE:
@@ -68,12 +71,20 @@ function authReducer(state = INITIAL_STATE, action = {}) {
       };
     case t.LOGOUT:
       return {
-        ...state,
         loading: false,
+        error: null,
         isAuthenticated: false,
         token: '',
+        info: {
+          firstName: '',
+          lastName: '',
+          email: '',
+          username: '',
+          avatarUrl: '',
+          role: '',
+          roleId: null,
+        },
       };
-
     case t.SIGNUP_USER_SUCCESS:
       return {
         ...state,

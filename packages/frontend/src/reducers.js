@@ -1,3 +1,4 @@
+// @flow
 import { reducer as formReducer } from 'redux-form';
 import blogReducer from './scenes/Blog/state/reducer';
 import adminReducer from './scenes/Admin/state/reducer';

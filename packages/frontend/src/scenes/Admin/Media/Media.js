@@ -5,9 +5,7 @@ import Helmet from 'react-helmet';
 import { graphql, gql } from 'react-apollo';
 import update from 'immutability-helper';
 import styled from 'styled-components';
-import ImageDisplay from '@boldr/ui/ImageDisplay';
-import { Col, Row } from '@boldr/ui/Layout';
-import Headline from '@boldr/ui/Headline';
+import { ImageDisplay, Col, Row, Headline } from '@boldr/ui';
 import DELETE_MEDIA from './gql/deleteMedia.graphql';
 
 type Props = {

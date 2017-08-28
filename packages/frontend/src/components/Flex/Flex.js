@@ -5,7 +5,7 @@ import styled from 'styled-components';
 type GlobalCssValues = 'initial' | 'inherit' | 'unset';
 
 type WrapValue = 'nowrap' | 'wrap' | 'wrap-reverse' | GlobalCssValues;
-
+type ShrinkValue = 0 | 1 | GlobalCssValues;
 type JustifyValue =
   | 'center'
   | 'start'
@@ -49,6 +49,7 @@ export type Props = {
   reverse?: boolean,
   justify?: JustifyValue,
   align?: AlignValue,
+  shrink?: ShrinkValue,
   wrap?: WrapValue,
   className?: string,
 };
@@ -57,7 +58,8 @@ const FlexBox = styled.div`
   display: flex;
   ${({ auto }) => (auto ? 'flex: 1 1 auto;' : '')} ${({ justify }) =>
       justify ? `justify-content: ${justify};` : ''} ${({ align }) =>
-      align ? `align-items: ${align};` : ''} ${({ wrap }) =>
+      align ? `align-items: ${align};` : ''} ${({ shrink }) =>
+      shrink ? `flex-shrink: ${shrink};` : ''} ${({ wrap }) =>
       wrap ? `flex-wrap: ${wrap};` : ''} flex-direction: ${({ column, reverse }) => {
       const postFix = reverse ? '-reverse' : '';
       return column ? `column${postFix}` : `row${postFix}`;

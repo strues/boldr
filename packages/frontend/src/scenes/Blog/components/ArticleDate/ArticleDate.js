@@ -2,8 +2,7 @@
 import React from 'react';
 import { format } from 'date-fns';
 import classnames from 'classnames';
-import { StyleClasses } from '@boldr/ui';
-import Icon from '@boldr/ui/Icons/Icon';
+import { Icon, StyleClasses } from '@boldr/ui';
 
 export type Props = {
   created: Date,

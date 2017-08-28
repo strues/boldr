@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import { graphql } from 'react-apollo';
-import Loader from '@boldr/ui/Loader';
+import { Loader } from '@boldr/ui';
 import Tags from './Tags';
 import TAGS_QUERY from './gql/tags.graphql';
 

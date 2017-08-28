@@ -5,7 +5,7 @@ import devMiddleware from '../server/devMiddleware';
 import buildWebpackDlls from '../plugins/buildWebpackDlls';
 
 const DEV_PORT = process.env.DEV_PORT;
-
+const PORT = parseInt(DEV_PORT, 10);
 export async function startDevServer() {
   await buildWebpackDlls();
   logger.start('Creating development server...');
@@ -42,8 +42,8 @@ export async function startDevServer() {
     if (!stats.hasErrors() && !serverIsStarted) {
       serverIsStarted = true;
 
-      server.listen(DEV_PORT, () => {
-        logger.end(`Dev rendering server running on port: ${DEV_PORT}`);
+      server.listen(PORT, () => {
+        logger.end(`Dev rendering server running on port: ${PORT}`);
       });
     }
   });

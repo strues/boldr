@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import React from 'react';
 import PropTypes from 'prop-types';
-import Icon from '@boldr/ui/Icons/Icon';
+import { Icon } from '@boldr/ui';
 
 export const Chevron = props => {
   const iconKind = props.expanded ? 'chevron-down' : 'chevron-left';

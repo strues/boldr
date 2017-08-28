@@ -1,4 +1,4 @@
-import { GraphQLNonNull, GraphQLID } from 'graphql';
+import { GraphQLNonNull, GraphQLID, GraphQLBoolean } from 'graphql';
 import _debug from 'debug';
 
 import slugIt from '../../utils/slugIt';
@@ -91,7 +91,7 @@ export default {
     },
   },
   deleteArticle: {
-    type: ArticleType,
+    type: GraphQLBoolean,
     description: 'Remove an article from the database',
     args: {
       id: {

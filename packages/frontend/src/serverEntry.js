@@ -61,9 +61,10 @@ export default ({ clientStats, outputPath }) =>
               ${helmet.title.toString()}
               ${helmet.meta.toString()}
               ${helmet.link.toString()}
-              ${styleTags}
+
               ${styles}
               ${helmet.style.toString()}
+              ${styleTags}
             </head>
             <body ${helmet.bodyAttributes.toString()}>
               <div id="app"><div>${app}</div></div>

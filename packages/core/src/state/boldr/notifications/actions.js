@@ -1,7 +1,7 @@
 /**
  * @module boldr-core/state/notifications/actions
  */
-import uuid from 'uuid';
+import uniqueId from 'lodash/uniqueId';
 import * as t from '../actionTypes';
 
 export function showNotification(options = {}) {
@@ -36,7 +36,7 @@ export function sendNotification(notification) {
     type: t.SEND_NOTIFICATION,
     notification: {
       ...notification,
-      id: uuid.v4(),
+      id: uniqueId(),
     },
   };
 }

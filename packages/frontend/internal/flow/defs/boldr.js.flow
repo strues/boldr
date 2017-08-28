@@ -1,13 +1,4 @@
 /* @flow */
-import React from 'react';
-
-declare type ReactElement = React.Element<any>;
-
-declare type ReactNode = string | number | ReactElement | Array<ReactElement>;
-
-declare type ReactChild = ReactNode | boolean | void | null;
-
-declare type ReactChildren = ReactChild | Array<ReactChildren>;
 
 declare type FluxStandardAction = {
   type: string,
@@ -20,178 +11,424 @@ declare type Reducer = (state: ?Object, action: FluxStandardAction) => Object;
 
 declare type Params = { [string]: string | number };
 
-declare type LocationShape = {
+declare type RouterLocation = {
   pathname?: string,
   search?: string,
   hash?: string,
   state?: any,
 };
-declare type MatchPathOptions = {
+declare type MatchPath = {
   path: string,
   exact?: boolean,
   strict?: boolean,
 };
 
-declare type User = {
-  id: string,
-  email: string,
-  firstName: string,
-  lastName: string,
-  username: string,
-  avatarUrl: ?string,
-  location: ?string,
-  bio: ?string,
-  website: ?string,
-  profile_image: ?string,
-  birthday: ?string,
-  social: ?UserSocial,
-  verified: boolean,
-};
-
-declare type Article = {
-  id: string,
-  image: ?string,
-  title: string,
-  slug: string,
-  content: string,
-  rawContent: Object,
-  excerpt: ?string,
-  createdAt: string,
-  updatedAt: ?string,
-  published: ?boolean,
-  featured: ?boolean,
-  author: ?User,
-  tags: ?Array<Tag>,
-  attachments: ?Object,
-  meta: ?Object,
-  userId: ?string,
-};
-
-declare type Tag = {
-  id: string,
-  name: string,
-  description: ?string,
-};
-
-declare type Facebook = {
-  url: string,
-};
-
-declare type Google = {
-  url: string,
-};
-
-declare type Twitter = {
-  url: string,
-};
-
-declare type Github = {
-  url: string,
-};
-
-declare type LinkedIn = {
-  url: string,
-};
-
-declare type UserSocial = {
-  google: ?Google,
-  facebook: ?Facebook,
-  twitter: ?Twitter,
-  github: ?Github,
-  linkedin: ?LinkedIn,
-};
-
-declare type Stats = {
-  posts: number,
-  users: number,
-  tags: number,
-};
-
-declare type Setting = {
-  id: number,
-  key: string,
-  value: string,
-  description: string,
-};
-declare type UI = {
-  drawer: boolean,
-  isMobile: boolean,
-  layout: string,
-  loaded: boolean,
-  modal: boolean,
-  navbar: boolean,
-};
-
-declare type Menu = {
-  id: number,
-  uuid: string,
-  name: string,
-  safeName: string,
-  attributes: ?Object,
-  restricted: ?boolean,
-  details: Array<MenuDetails>,
-};
-
-declare type MenuDetails = {
-  id: string,
-  title: string,
-  safeName: string,
-  cssClassname: string,
-  hasDropdown: boolean,
-  order: Number,
-  href: string,
-  mobileHref: ?string,
-  icon: string,
-  children: Array<Object>,
-};
-
-declare type NormalizrPayload = {
-  entities: Object,
-  result: Array<string>,
-};
-declare type MediaType = {
-  id: number,
-  uuid: string,
-  mediaType: string,
-  createdAt: string,
-  updatedAt: ?string,
-};
-declare type MediaFile = {
-  id: string,
-  fileName: string,
-  safeName: string,
-  thumbName: string,
-  fileDescription: ?string,
-  mediaType: number,
-  mimetype: string,
-  url: string,
-  path: string,
-  userId: string,
-  createdAt: string,
-  updatedAt: string,
-  type: MediaType,
-  owner: string,
-};
-
-declare interface userSignupFormInput {
-  email: string,
-  firstName: string,
-  lastName: string,
-  password: string,
-  username: string,
-}
-
-declare interface userLoginFormInput {
-  email: string,
-  password: string,
-}
-
 declare type AuthToken = {
   issuer: string,
   subject: string,
-  algorithms: Array<string>,
-  iat: ?number,
+  jti: string,
+  iat: number,
   expiresIn: string | number,
   email: string,
   role: string,
 };
+
+
+declare interface RawContent {
+  blocks: Array<Object>,
+  entityMap: Object,
+};
+
+declare type Article = {
+  // Unique identifier for the object.
+  id: string,
+
+  // The title of the article
+  title: string,
+
+  // An alphanumeric identifier for the object unique to its type.
+  slug: string,
+
+  // html content of the article
+  content: string,
+
+  // Raw JSON of the article
+  rawContent: RawContent,
+
+  // Short description of the article
+  excerpt?: string,
+
+  // True if the article is featured
+  featured?: boolean,
+
+  // True if the article is published
+  published: boolean,
+
+  // url of the article feature image
+  image: string,
+
+  userId?: string,
+
+  // The timestamp when the object was deleted
+  deletedAt?: string,
+
+  // The timestamp when the object was last updated
+  updatedAt?: string,
+
+  // The timestamp when the object was created
+  createdAt?: string,
+
+  // Tags relating articles together
+  tags: Array<Tag>,
+
+  // Media uploaded with the article
+  media?: Array<Media>,
+
+  // Users belonging to a role.
+  author: User,
+};
+
+declare type Media = {
+  // Unique identifier for the object.
+  id: string,
+
+  // A name for the object.
+  name: string,
+
+  // A normalized copy of the object name.
+  safeName: string,
+
+  // thumbnail filename
+  thumbName: string,
+
+  // The description of the upload
+  fileDescription?: string,
+
+  // The mime-type of the upload
+  type: string,
+
+  // The size of the upload
+  size: number,
+
+  // The local path where the file is stored
+  path: string,
+
+  // The relative url to access the file
+  url: string,
+
+  // The id of the user the file belongs to.
+  userId: string,
+
+  // The timestamp when the object was last updated
+  updatedAt?: string,
+
+  // The timestamp when the object was created
+  createdAt?: string,
+};
+
+declare type Tag = {
+  // Unique identifier for the object.
+  id: string,
+
+  // A name for the object.
+  name: string,
+
+  // A description of the tag
+  description?: string,
+
+  // Articles related to the tag
+  articles?: Array<Article>,
+
+  // The timestamp when the object was deleted
+  deletedAt?: string,
+
+  // The timestamp when the object was last updated
+  updatedAt?: string,
+
+  // The timestamp when the object was created
+  createdAt?: string,
+};
+
+declare type User = {
+  // Unique identifier for the object.
+  id: string,
+
+  // The timestamp when the object was deleted
+  deletedAt?: string,
+
+  // The timestamp when the object was last updated
+  updatedAt?: string,
+
+  // The timestamp when the object was created
+  createdAt: string,
+
+  // The user email
+  email: string,
+
+  // The username of the user
+  username: string,
+
+  // true if email is verified, false otherwise
+  verified: boolean,
+
+  // The website of the user
+  website?: string,
+
+  // The first name of the user
+  firstName: string,
+
+  // The last name associated with the user
+  lastName?: string,
+
+  // Information about the user
+  bio?: string,
+
+  // url of user's avatar picture
+  avatarUrl?: string,
+
+  // Url for the user's profile background image
+  profileImage?: string,
+
+  // Location the user lives
+  location?: string,
+
+  // Language the user prefers
+  language?: string,
+
+  // When the user was born
+  birthday?: string,
+
+  // Roles the user belongs to.
+  roles: Array<Role>,
+
+  // Social media profiles of the user.
+  socialMedia?: Social,
+
+  // Articles the user has written
+  articles?: Array<Article>,
+
+  // Articles the user has written
+  uploads?: Array<Media>,
+
+  // Account verification token belonging to the user.
+  verificationToken?: VerificationToken,
+
+  // Password reset token belonging to the user.
+  resetToken?: ResetToken,
+};
+
+declare type Social = {
+  // Unique identifier for the object.
+  id: string,
+
+  // The unique identifier for the user for the identity.
+  userId?: string,
+
+  // The Facebook profile url for the user.
+  facebookUrl?: string,
+
+  // The Twitter profile url for the user.
+  twitterUrl?: string,
+
+  // The Google profile url for the user.
+  googleUrl?: string,
+
+  // The GitHub profile url for the user.
+  githubUrl?: string,
+
+  // The LinkedIn profile url for the user.
+  linkedinUrl?: string,
+
+  // The Stackoverflow profile url for the user.
+  stackoverflowUrl?: string,
+};
+
+declare type VerificationToken = {
+  // Unique identifier for the object.
+  id: string,
+
+  // The ip address of the person performing the reset
+  ip?: string,
+
+  // The reset token
+  token: string,
+
+  // True if the token has been used before.
+  used: boolean,
+
+  // The id of the user the token belongs to
+  userId: string,
+
+  // The timestamp when the object was last updated
+  updatedAt?: string,
+
+  // The timestamp when the object was created
+  createdAt?: string,
+};
+
+declare type Setting = {
+  // Unique identifier for the object.
+  id: string,
+
+  // The setting option
+  key: string,
+
+  // The value of the setting
+  value: string,
+
+  // A non-normalized key
+  label: string,
+
+  // The description for what the setting does.
+  description: string,
+};
+
+declare type ResetToken = {
+  // Unique identifier for the object.
+  id: string,
+
+  // The ip address of the person performing the reset
+  ip: string,
+
+  // The reset token
+  token: string,
+
+  // True if the token has been used before.
+  used: boolean,
+
+  // The user id owning the token
+  userId: string,
+
+  // The timestamp when the object was last updated
+  updatedAt?: string,
+
+  // The timestamp when the object was created
+  createdAt?: string,
+};
+
+declare type Role = {
+  // Unique identifier for the object.
+  id: string,
+
+  // A UUID (Universal Unique Identifier) is a 128-bit number used to uniquely identify some object or entity.
+  uuid: string,
+
+  // A name for the object.
+  name: string,
+
+  // An image for role identification
+  image?: string,
+
+  // The role description
+  description: string,
+
+  // Users belonging to a role.
+  users?: Array<User>,
+
+  // The timestamp when the object was deleted
+  deletedAt?: string,
+
+  // The timestamp when the object was last updated
+  updatedAt?: string,
+
+  // The timestamp when the object was created
+  createdAt?: string,
+};
+
+// Navigation for the site
+declare type Menu = {
+  // Unique identifier for the object.
+  id: string,
+
+  // A UUID (Universal Unique Identifier) is a 128-bit number used to uniquely identify some object or entity.
+  uuid: string,
+
+  // A name for the object.
+  name: string,
+
+  // Custom css classname for the link
+  attributes?: string,
+
+  // True if the menu should be hidden from unauth
+  restricted: boolean,
+
+  // Links
+  details: Array<MenuDetail>,
+
+  // The timestamp when the object was last updated
+  updatedAt?: string,
+
+  // The timestamp when the object was created
+  createdAt?: string,
+};
+
+// links and other menu content
+declare type MenuDetail = {
+  // Unique identifier for the object.
+  id: string,
+
+  // The title text for the menu link
+  title: string,
+
+  // A normalized copy of the object name.
+  safeName: string,
+
+  // Custom css classname for the link
+  cssClassname?: string,
+
+  // True if the item has a dropdown
+  hasDropdown: boolean,
+
+  // The display order
+  order: number,
+
+  // Mobile only link
+  mobileHref?: string,
+
+  // The link
+  href: string,
+
+  // Icon kind
+  icon?: string,
+
+  // Children are dropdown links
+  children: Object,
+
+  // The timestamp when the object was deleted
+  deletedAt?: string,
+
+  // The timestamp when the object was last updated
+  updatedAt?: string,
+
+  // The timestamp when the object was created
+  createdAt?: string,
+};
+
+declare type CurrentUser = {
+  // Unique identifier for the object.
+  id: string,
+  // The user email
+  email: string,
+  // The username of the user
+  username: string,
+  // The website of the user
+  website?: string,
+  // The first name of the user
+  firstName: string,
+  // The last name associated with the user
+  lastName: string,
+  // Information about the user
+  bio?: string,
+  // url of user's avatar picture
+  avatarUrl: string,
+  // Url for the user's profile background image
+  profileImage?: string,
+  // Location the user lives
+  location?: string,
+  // Roles the user belongs to.
+  roles: string,
+  roleId: number,
+  // Social media profiles of the user.
+  socialMedia: Social,
+
+}

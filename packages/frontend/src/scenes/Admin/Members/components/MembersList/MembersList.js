@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import styled from 'styled-components';
-// internal
+import type { User } from '../../../../../types/boldr';
 import MemberCard from '../MemberCard';
 
 const MemList = styled.ul`
@@ -9,7 +9,7 @@ const MemList = styled.ul`
   padding-left: 0;
 `;
 
-const MembersList = (props: { users: Array<Object>, toggleUser: Function }) => {
+const MembersList = (props: { users: Array<User>, toggleUser: User => User }) => {
   function handleToggle(user) {
     // const userId = user.id;
     props.toggleUser(user);

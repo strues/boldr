@@ -26,6 +26,7 @@ module.exports = {
     'no-undefined': 0,
     'react/no-typos': 0,
     'valid-jsdoc': 0,
+    'no-implicit-coercion': 0,
     'react/boolean-prop-naming': 0,
   },
 };

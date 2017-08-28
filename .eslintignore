@@ -6,10 +6,10 @@ node_modules
 **/build/**
 packages/**/*.test.js
 packages/cli/bin/boldr.js
-packages/**/build/**
-packages/**/lib/**
-packages/**/node_modules/**
-packages/**/flow-typed/**
+packages/*/build/**
+packages/*/lib/**
+packages/*/node_modules/**
+packages/*/flow-typed/**
 
 docs/
 

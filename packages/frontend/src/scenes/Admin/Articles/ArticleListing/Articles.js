@@ -1,48 +1,36 @@
 /* eslint-disable react/prefer-stateless-function */
 /* @flow */
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
+import type { Connector } from 'react-redux';
 import styled from 'styled-components';
 import Helmet from 'react-helmet';
-
-import { LevelLeft, Level, LevelItem, LevelRight } from '@boldr/ui/Level';
+import { Col, Row, LevelLeft, Level, LevelItem, LevelRight } from '@boldr/ui';
+import type { AdminState, Dispatch, Reducer } from '../../../../types/state';
+import type { ArticleType } from '../../../../types/boldr';
+import { setArticle } from '../../state/dashboard/actions';
 import ArticleList from './components/ArticleList';
 import ArticlePreview from './components/ArticlePreview';
 
 export type Props = {
-  articles: Array<Article>,
-  article: Article,
+  articles: ArticleType,
+  article: ArticleType,
   handleDeleteClick: Function,
   handleClick: Function,
+  dispatch: () => mixed,
 };
 
-const SideB = styled.div`
-  display: flex;
-  flex-basis: 360px;
-  flex-direction: column;
-  flex-shrink: 0;
-  min-height: 100%;
-
-  padding: 0 0.5em;
-`;
-
-const Listing = styled.div`
-  flex-direction: column;
-  padding: 0 2em;
-`;
-const Container = styled.section`
-  display: flex;
-  flex-direction: row;
-`;
-
-class Articles extends Component {
+class Articles extends React.Component<Props, *> {
   props: Props;
+  handleClick = article => {
+    this.props.setArticle(article);
+  };
 
   render() {
     return (
-      <Container>
+      <Row>
         <Helmet title="Admin: Post List" />
-        <SideB>
+        <Col xs={12} md={4}>
           <Level>
             <LevelLeft>
               <LevelItem>
@@ -66,14 +54,14 @@ class Articles extends Component {
           </Level>
           <ArticleList
             articles={this.props.articles}
-            handleClick={this.props.handleClick}
+            handleClick={this.handleClick}
             onDeleteClick={this.props.handleDeleteClick}
           />
-        </SideB>
-        <Listing>
+        </Col>
+        <Col xs={12} md={8}>
           <ArticlePreview article={this.props.article} />
-        </Listing>
-      </Container>
+        </Col>
+      </Row>
     );
   }
 }
@@ -82,4 +70,9 @@ const mapStateToProps = state => {
     article: state.admin.dashboard.article,
   };
 };
-export default connect(mapStateToProps)(Articles);
+
+const connector: Connector<{}, Props> = connect(mapStateToProps, (dispatch: Dispatch) => ({
+  setArticle: article => dispatch(setArticle(article)),
+}));
+
+export default connector(Articles);

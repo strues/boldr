@@ -11,15 +11,11 @@ mutation loginUser($input: UserLoginInput!) {
       roles {
         id
         name
-        __typename
       }
-      __typename
     }
     errors {
       code
       message
-      __typename
     }
-    __typename
   }
 }

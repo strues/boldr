@@ -3,13 +3,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 // internal
-import Headline from '@boldr/ui/Headline';
 import {
+  Headline,
   Accordion,
   AccordionItem,
   AccordionItemTitle,
   AccordionItemBody,
-} from '@boldr/ui/Accordion';
+} from '@boldr/ui';
 // import SiteDescription from './SiteDescription';
 // import SiteName from './SiteName';
 // import Logo from './Logo';

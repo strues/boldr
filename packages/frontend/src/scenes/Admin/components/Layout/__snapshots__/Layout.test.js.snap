@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Layout renders snapshot 1`] = `
+<boldruiComponent(Hero)
+  className="boldrui-admin-layout"
+  isColor="info"
+  isFullHeight={true}
+>
+  <boldruiComponent(HeroHeader)>
+    <Navigation />
+  </boldruiComponent(HeroHeader)>
+  <boldruiComponent(HeroBody)>
+    <DashboardMain__DashboardMain>
+      Layout
+    </DashboardMain__DashboardMain>
+  </boldruiComponent(HeroBody)>
+  <boldruiComponent(HeroFooter)>
+    <DashboardFooter />
+  </boldruiComponent(HeroFooter)>
+</boldruiComponent(Hero)>
+`;
