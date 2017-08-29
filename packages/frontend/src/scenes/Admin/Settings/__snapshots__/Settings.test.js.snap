@@ -6,7 +6,7 @@ exports[`<Settings /> renders snapshot 1`] = `
     encodeSpecialCharacters={true}
     title="Admin: Settings"
   />
-  <Settings__Content>
+  <styled.div>
     <SettingsAside />
     <SettingForm
       id={1}
@@ -43,6 +43,6 @@ exports[`<Settings /> renders snapshot 1`] = `
       label="Site URL"
       value="abcd"
     />
-  </Settings__Content>
+  </styled.div>
 </div>
 `;
