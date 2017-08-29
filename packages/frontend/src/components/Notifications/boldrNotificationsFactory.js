@@ -45,8 +45,7 @@ export default function boldrContainerFactory(WrappedNotification) {
           stackNextOn={this.props.stackNextOn}
           animationDuration={this.props.animationDuration}
           animationEasing={this.props.animationEasing}
-          slideFromSide={this.props.slideFromSide}
-        >
+          slideFromSide={this.props.slideFromSide}>
           {this.props.notifications.map(notification =>
             <NotificationContainer
               animatedMargin={this.props.position[0] === 'auto' ? 'bottom' : 'top'}
@@ -55,8 +54,7 @@ export default function boldrContainerFactory(WrappedNotification) {
               animationDuration={this.props.animationDuration}
               animationEasing={this.props.animationEasing}
               slideFromSide={this.props.slideFromSide}
-              dismissAfter={this.props.dismissAfter}
-            >
+              dismissAfter={this.props.dismissAfter}>
               <WrappedNotification
                 hideNotification={() => {
                   this.handleHiding(notification.uid);

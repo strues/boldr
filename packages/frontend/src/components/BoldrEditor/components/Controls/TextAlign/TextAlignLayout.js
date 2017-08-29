@@ -21,24 +21,21 @@ const TextAlignLayout = (props: Props) => {
         value="center"
         active={textAlignment === 'center'}
         onClick={onChange}
-        title="Align Center"
-      >
+        title="Align Center">
         <AlignCenter color="#222" />
       </Option>
       <Option
         value="right"
         active={textAlignment === 'right'}
         onClick={onChange}
-        title="Align Right"
-      >
+        title="Align Right">
         <AlignRight color="#222" />
       </Option>
       <Option
         value="justify"
         active={textAlignment === 'justify'}
         onClick={onChange}
-        title="Justify"
-      >
+        title="Justify">
         <AlignJustify color="#222" />
       </Option>
     </ControlWrapper>

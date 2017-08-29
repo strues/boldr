@@ -380,16 +380,14 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
         style={wrapperStyle}
         onClick={this.modalHandler.onEditorClick}
         onBlur={this.onWrapperBlur}
-        aria-label="be-wrapper"
-      >
+        aria-label="be-wrapper">
         <EditorToolbar
           isVisible={toolbarIsVisible}
           // $FlowIssue
           aria-hidden={(!editorFocused && toolbarOnFocus).toString()}
           onFocus={this.onToolbarFocus}
           onMouseDown={this.preventDefault}
-          aria-label="be-toolbar"
-        >
+          aria-label="be-toolbar">
           {toolbar.options.map((opt, index) => {
             const Control = Controls[opt];
             const config = toolbar[opt];
@@ -414,8 +412,7 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
           onFocus={this.onEditorFocus}
           onBlur={this.onEditorBlur}
           onKeyDown={KeyDownHandler.onKeyDown}
-          onMouseDown={this.onEditorMouseDown}
-        >
+          onMouseDown={this.onEditorMouseDown}>
           <Editor
             ref={el => {
               (this: any).editor = el;

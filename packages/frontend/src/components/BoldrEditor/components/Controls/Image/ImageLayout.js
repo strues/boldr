@@ -220,8 +220,7 @@ class ImageLayout extends React.Component<Props, State> {
                 onDragEnter={this.onDragEnter}
                 onDragOver={this.stopPropagation}
                 onDrop={this.onImageDrop}
-                highlighted={dragEnter}
-              >
+                highlighted={dragEnter}>
                 <UploadLabel htmlFor="file">Drop the file or click to upload</UploadLabel>
               </UploadOpt>
               <UploadInput type="file" id="file" accept={inputAccept} onChange={this.selectImage} />
@@ -276,8 +275,7 @@ class ImageLayout extends React.Component<Props, State> {
           className={classNames(className)}
           value="unordered-list-item"
           onClick={this.props.onExpandEvent}
-          title={title}
-        >
+          title={title}>
           <Image color="#222" />
         </Option>
         {expanded ? this.renderAddImageModal() : undefined}

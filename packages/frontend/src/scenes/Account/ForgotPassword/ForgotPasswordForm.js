@@ -31,8 +31,7 @@ const ForgotPasswordForm = (props: Props) => {
         kind="primary"
         disabled={submitting || pristine}
         outline
-        block
-      >
+        block>
         Send Reset Link
       </Button>
     </Form>

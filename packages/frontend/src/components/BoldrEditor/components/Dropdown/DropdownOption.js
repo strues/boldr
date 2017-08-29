@@ -55,8 +55,7 @@ export default class DropdownOption extends React.PureComponent<Props, *> {
         aria-selected={active}
         active={active}
         highlighted={highlighted}
-        title={title}
-      >
+        title={title}>
         {children}
       </DropdownOpt>
     );

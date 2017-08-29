@@ -54,8 +54,7 @@ const getImageRender = (config: Object) =>
         <div
           className={classNames('be-image__alignment-options-popup', {
             'be-image__alignment-options-popup-right': alignment === 'right',
-          })}
-        >
+          })}>
           <Option onClick={this.setEntityAlignmentLeft} className="be-image__alignment-option">
             L
           </Option>
@@ -84,8 +83,7 @@ const getImageRender = (config: Object) =>
             'be-image--left': alignment === 'left',
             'be-image--right': alignment === 'right',
             'be-image--center': !alignment || alignment === 'none',
-          })}
-        >
+          })}>
           <span className="be-image__imagewrapper">
             <img
               src={src}

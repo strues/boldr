@@ -41,8 +41,7 @@ export default class Option extends React.PureComponent<Props, *> {
         aria-selected={active}
         active={active}
         disabled={disabled}
-        title={title}
-      >
+        title={title}>
         {children}
       </OptionWrapper>
     );

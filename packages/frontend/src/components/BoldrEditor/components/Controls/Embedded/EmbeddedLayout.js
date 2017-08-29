@@ -114,14 +114,12 @@ class EmbeddedLayout extends React.Component<Props, State> {
       <ControlWrapper
         aria-haspopup="true"
         aria-expanded={expanded}
-        aria-label="be-embedded__control"
-      >
+        aria-label="be-embedded__control">
         <Option
           className={classNames(className)}
           value="unordered-list-item"
           onClick={onExpandEvent}
-          title={title}
-        >
+          title={title}>
           <Video color="#222" />
         </Option>
         {expanded ? this.rendeEmbeddedLinkModal() : undefined}

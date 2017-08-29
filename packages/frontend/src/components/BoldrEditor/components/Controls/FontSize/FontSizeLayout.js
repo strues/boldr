@@ -71,8 +71,7 @@ export default class FontSizeLayout extends Component<Props, State> {
           doCollapse={doCollapse}
           onExpandEvent={onExpandEvent}
           isSkinny
-          title={title}
-        >
+          title={title}>
           {currentFontSize
             ? <span>
                 {currentFontSize}
@@ -85,8 +84,7 @@ export default class FontSizeLayout extends Component<Props, State> {
               value={size}
               disabled={false}
               highlighted={false}
-              key={index}
-            >
+              key={index}>
               {size}
             </DropdownOption>,
           )}

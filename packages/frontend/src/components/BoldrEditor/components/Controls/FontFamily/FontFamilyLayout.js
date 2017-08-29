@@ -72,8 +72,7 @@ class FontFamilyLayout extends React.Component<Props, State> {
           ariaLabel="be-dropdown-control"
           doCollapse={doCollapse}
           onExpandEvent={onExpandEvent}
-          title={title}
-        >
+          title={title}>
           <FamilyPlaceholder>
             {currentFontFamily || 'Font Family'}
           </FamilyPlaceholder>

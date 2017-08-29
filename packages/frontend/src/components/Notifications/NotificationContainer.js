@@ -52,16 +52,14 @@ export class NotificationContainer extends Component<Props, State> {
         ref={notification => {
           // $FlowIssue
           this.notification = notification;
-        }}
-      >
+        }}>
         <Notification
           animatedMargin={this.props.animatedMargin}
           notificationHeight={this.state.height}
           isVisible={this.props.isVisible}
           slideFromSide={this.props.slideFromSide}
           animationEasing={this.props.animationEasing}
-          animationDuration={this.props.animationDuration}
-        >
+          animationDuration={this.props.animationDuration}>
           {this.props.children}
         </Notification>
       </div>

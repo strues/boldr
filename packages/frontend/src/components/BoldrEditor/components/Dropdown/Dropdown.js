@@ -89,8 +89,7 @@ export default class Dropdown extends React.Component<Props, State> {
         isSkinny={this.props.isSkinny}
         className={className}
         aria-expanded={expanded}
-        aria-label={ariaLabel || 'be-dropdown'}
-      >
+        aria-label={ariaLabel || 'be-dropdown'}>
         <DropdownSelectedText onClick={onExpandEvent} title={title}>
           {/* // $FlowIssue */}
           {children[0]}

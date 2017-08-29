@@ -44,8 +44,7 @@ const NavItem = ({ isActive, href, children, title, hasDropdown }: Props) => {
                 <NavLink
                   className="boldrui-navbar__item"
                   activeClassName="is-active"
-                  to={item.href}
-                >
+                  to={item.href}>
                   {item.safeName}
                 </NavLink>}
             />,

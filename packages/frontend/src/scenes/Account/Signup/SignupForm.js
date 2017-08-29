@@ -89,8 +89,7 @@ const SignupForm = (props: Props) => {
         htmlType="submit"
         kind="primary"
         disabled={submitting || pristine}
-        block
-      >
+        block>
         Create Account
       </Button>
     </Form>

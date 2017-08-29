@@ -21,8 +21,7 @@ const App = () => {
     <div className="boldr">
       <Helmet
         titleTemplate="%s - Powered by Boldr"
-        defaultTitle="Boldr: Modern Content Management Framework"
-      >
+        defaultTitle="Boldr: Modern Content Management Framework">
         <html lang="en" />
         <meta name="application-name" content="Boldr" />
         <meta name="description" content="A modern, bold take on a cms" />
