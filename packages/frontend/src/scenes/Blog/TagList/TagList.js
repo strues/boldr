@@ -5,12 +5,13 @@ import Helmet from 'react-helmet';
 
 import Loader from '@boldr/ui/Loader';
 import { Grid, Row, Col } from '@boldr/ui/Layout';
+import type { ArticlesType, MatchParams } from '../../../types/boldr';
 import ArticleCard from '../components/ArticleCard';
 
 type Props = {
   isLoading: boolean,
-  articles: Array<Article>,
-  match: Object,
+  articles: ArticlesType,
+  match: MatchParams,
 };
 
 const TagList = (props: Props) => {

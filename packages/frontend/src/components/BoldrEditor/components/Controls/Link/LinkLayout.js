@@ -162,8 +162,7 @@ class LinkLayout extends React.Component<Props, State> {
             onClick={this.signalExpandShowModal}
             aria-haspopup="true"
             aria-expanded={showModal}
-            title={link.title}
-          >
+            title={link.title}>
             <Link color="#222" size="1em" />
           </Option>}
         {options.indexOf('unlink') >= 0 &&
@@ -172,9 +171,8 @@ class LinkLayout extends React.Component<Props, State> {
             value="ordered-list-item"
             className={cN(unlink.className)}
             onClick={this.removeLink}
-            title={unlink.title}
-          >
-            <Unlink color="#222" size="1em" />
+            title={unlink.title}>
+            <Unlink fill="#222" size="1em" />
           </Option>}
         {expanded && showModal ? this.renderAddLinkModal() : undefined}
       </LinkWrapper>

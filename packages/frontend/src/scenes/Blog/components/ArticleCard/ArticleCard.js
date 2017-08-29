@@ -1,11 +1,10 @@
 /* @flow */
 import React from 'react';
-import { connect } from 'react-redux';
 import { format } from 'date-fns';
+import Link from 'react-router-dom/Link';
 import classnames from 'classnames';
 import { Button, Card, CardTitle, CardText, CardActions, Media, StyleClasses } from '@boldr/ui';
-import { selectArticle } from '../../state/actions';
-import type { ArticleType } from '../../../../types/boldr';
+import type { Article } from '../../../../types/boldr';
 
 import TagBlock from '../TagBlock';
 
@@ -13,18 +12,12 @@ const BASE_ELEMENT = StyleClasses.ARTICLE_CARD;
 
 type Props = {
   className?: string,
-  article: ArticleType,
-  dispatch: () => void,
+  article: Article,
 };
 
-export const ArticleCard = (props: Props) => {
+const ArticleCard = (props: Props) => {
   const formattedDate = format(props.article.createdAt, 'MM/DD/YYYY');
   const classes = classnames(BASE_ELEMENT, props.className);
-
-  function transitionPost() {
-    const { article } = props;
-    props.dispatch(selectArticle(article));
-  }
   const { title, image, slug, tags, excerpt } = props.article;
   return (
     <div className={classes}>
@@ -34,9 +27,11 @@ export const ArticleCard = (props: Props) => {
         </Media>
         <CardTitle title={title} subtitle={formattedDate} />
         <CardActions expander>
-          <Button kind="primary" onClick={transitionPost} href={`/blog/${slug}`} outline>
-            Read More
-          </Button>
+          <Link to={`/blog/${slug}`}>
+            <Button kind="primary" outline>
+              Read More
+            </Button>
+          </Link>
         </CardActions>
         <CardText expandable>
           {excerpt}
@@ -47,4 +42,4 @@ export const ArticleCard = (props: Props) => {
   );
 };
 
-export default connect(state => state, null, null, { pure: true })(ArticleCard);
+export default ArticleCard;

@@ -21,7 +21,7 @@ const ArticleContent = (props: Props) => {
   }
   return (
     <article>
-      <Paper zDepth={2}>
+      <Paper zDepth={2} isPadded>
         <ArticleDate created={props.createdAt} />
         <Divider />
         <div className={classes} dangerouslySetInnerHTML={createMarkup()} />

@@ -2,22 +2,26 @@
 /* eslint-disable react/prefer-stateless-function */
 import * as React from 'react';
 import Helmet from 'react-helmet';
-import { graphql, gql } from 'react-apollo';
-import update from 'immutability-helper';
+import { graphql, gql, compose } from 'react-apollo';
+import { bindActionCreators } from 'redux';
+import { replacePath } from '@boldr/core';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { ImageDisplay, Col, Row, Headline } from '@boldr/ui';
+import type { MediasType, MediaType } from '../../../types/boldr';
+
 import DELETE_MEDIA from './gql/deleteMedia.graphql';
 
 type Props = {
-  media: Array<Object>,
-  deleteMedia: () => void,
+  media: MediasType,
+  deleteMedia: string => void,
   imageUpdateClick: () => void,
 };
 const MediaList = styled.ul`
   flex-flow: row wrap;
   list-style-type: none;
   display: flex;
-  padding: .3rem;
+  padding: 0.3rem;
 `;
 const MediaItem = styled.li`
   align-items: stretch;
@@ -26,22 +30,14 @@ const MediaItem = styled.li`
   counter-increment: item;
   display: flex;
   justify-content: center;
-  padding: .5rem .7rem;
-`;
-
-const MediaSidePanel = styled.div`
-  background-color: #00b4d0;
-  width: 100%;
-  height: 100%;
-  padding: 1rem;
+  padding: 0.5rem 0.7rem;
 `;
 
 class Media extends React.Component<Props, *> {
-  handleClick = m => {
-    this.props.imageUpdateClick(m);
+  imageUpdateClick = (m: MediaType) => {
+    this.props.navigate(`/admin/media/${m.id}`);
   };
-  props: Props;
-  render() {
+  render(): React.Node {
     const { media, deleteMedia } = this.props;
     return (
       <div>
@@ -56,9 +52,10 @@ class Media extends React.Component<Props, *> {
                     <ImageDisplay
                       onRemoveImage={deleteMedia(m.id)}
                       onUpdateImage={() => {
-                        this.handleClick(m);
+                        this.imageUpdateClick(m);
                       }}
-                      imageSrc={`http://localhost:2121/uploads/media/${m.thumbName}`}
+                      // $FlowIssue
+                      imageSrc={`${process.env.API_URL}/uploads/media/${m.thumbName}`}
                     />
                   </MediaItem>,
                 )}
@@ -71,40 +68,50 @@ class Media extends React.Component<Props, *> {
   }
 }
 
-export default graphql(DELETE_MEDIA, {
-  props: ({ mutate }) => ({
-    deleteMedia(id) {
-      return () =>
-        mutate({
-          variables: { id },
-          optimisticResponse: {
-            __typename: 'Mutation',
-            deleteMedia: {
-              id,
-              message: `Deleted media ${id}`,
-              __typename: 'Media',
-            },
-          },
-          refetchQueries: [
-            {
-              query: gql`
-                query getMedia($offset: Int!, $limit: Int!) {
-                  getMedia(offset: $offset, limit: $limit) {
-                    id
-                    thumbName
-                    name
-                    url
-                    fileDescription
-                  }
-                }
-              `,
-              variables: {
-                offset: 0,
-                limit: 20,
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ navigate: url => dispatch(replacePath(url)) }, dispatch);
+}
+
+export default compose(
+  // $FlowIssue
+  graphql(DELETE_MEDIA, {
+    props: ({ mutate }) => ({
+      deleteMedia(id) {
+        return () =>
+          mutate({
+            variables: { id },
+            optimisticResponse: {
+              __typename: 'Mutation',
+              deleteMedia: {
+                id,
+                message: `Deleted media ${id}`,
+                __typename: 'Media',
               },
             },
-          ],
-        });
-    },
+            // $FlowIssue
+            refetchQueries: [
+              {
+                query: gql`
+                  query getMedia($offset: Int!, $limit: Int!) {
+                    getMedia(offset: $offset, limit: $limit) {
+                      id
+                      thumbName
+                      name
+                      url
+                      fileDescription
+                    }
+                  }
+                `,
+                variables: {
+                  offset: 0,
+                  limit: 20,
+                },
+              },
+            ],
+          });
+      },
+    }),
   }),
-})(Media);
+  // $FlowIssue
+  connect(null, mapDispatchToProps),
+)(Media);

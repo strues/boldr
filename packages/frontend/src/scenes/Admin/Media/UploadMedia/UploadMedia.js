@@ -6,7 +6,7 @@ import Helmet from 'react-helmet';
 import { Row, Col } from '@boldr/ui/Layout';
 import Paper from '@boldr/ui/Paper';
 import Headline from '@boldr/ui/Headline';
-import Icon from '@boldr/ui/Icons';
+import Upload from '@boldr/icons/Upload';
 import GET_MEDIA_QUERY from '../gql/getMedia.graphql';
 import UPLOAD_MEDIA_MUTATION from '../gql/uploadMedia.graphql';
 import Dropzone from './components/Dropzone';
@@ -57,8 +57,7 @@ class UploadMedia extends Component<Props, *> {
             <Paper zDepth={1}>
               <MediaTitleArea>
                 <Headline type="h2">
-                  <Icon kind="folder-upload" color="rgba(0, 188, 212, 1.00)" size="36" /> Upload
-                  from your computer
+                  <Upload stroke="rgba(0, 188, 212, 1.00)" size="36" /> Upload from your computer
                 </Headline>
               </MediaTitleArea>
               <MediaInputArea>
@@ -74,5 +73,5 @@ class UploadMedia extends Component<Props, *> {
     );
   }
 }
-
+// $FlowIssue
 export default graphql(UPLOAD_MEDIA_MUTATION)(UploadMedia);

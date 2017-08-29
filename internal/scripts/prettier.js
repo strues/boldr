@@ -16,10 +16,10 @@ const prettierCmd = path.resolve(
 );
 const defaultOptions = {
   'single-quote': true,
-
   'trailing-comma': 'all',
   'print-width': 100,
-  'jsx-bracket-same-line': false,
+  'bracket-spacing': true,
+  'jsx-bracket-same-line': true,
 };
 const config = {
   default: {

@@ -2,8 +2,8 @@
 import * as React from 'react';
 import universal from 'react-universal-component';
 import Icon from '@boldr/ui/Icons/Icon';
-
-import MediaManagerContainer from './Media/MediaManager/MediaManagerContainer';
+import Media from './Media';
+import MediaManager from './Media/MediaManager';
 import UploadMedia from './Media/UploadMedia';
 import ArticleEditor from './Articles/ArticleEditor';
 import NewArticleContainer from './Articles/NewArticle/NewArticleContainer';
@@ -14,13 +14,7 @@ import TagsContainer from './Tags/TagsContainer';
 import TaggedPost from './Tags/components/TaggedPost/TaggedPost';
 import DashboardLanding from './DashboardLanding';
 import Articles from './Articles/ArticleListing';
-
-const MediaContainer = universal(() => import('./Media/MediaContainer'), {
-  resolve: () => require.resolveWeak('./Media/MediaContainer'),
-});
-const NavigationContainer = universal(() => import('./Navigation/NavigationContainer'), {
-  resolve: () => require.resolveWeak('./Navigation/NavigationContainer'),
-});
+import NavigationContainer from './Navigation/NavigationContainer';
 
 export default [
   {
@@ -96,7 +90,7 @@ export default [
     exact: true,
     path: '/admin/media',
     breadcrumb: <Icon kind="folder-upload" />,
-    component: MediaContainer,
+    component: Media,
     routes: [
       {
         exact: true,
@@ -109,7 +103,7 @@ export default [
         exact: true,
         breadcrumb: 'Manage',
         path: '/admin/media/:id',
-        component: MediaManagerContainer,
+        component: MediaManager,
         routes: [],
       },
     ],

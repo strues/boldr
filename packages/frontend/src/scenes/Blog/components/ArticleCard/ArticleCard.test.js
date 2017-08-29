@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import { shallowToJson } from 'enzyme-to-json';
-import { ArticleCard } from './ArticleCard';
+import ArticleCard from './ArticleCard';
 
 const ArticleData = {
   featureImage: 'http://boldr.io/images/logo.png',

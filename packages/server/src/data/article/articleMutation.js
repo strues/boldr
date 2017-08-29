@@ -4,7 +4,6 @@ import _debug from 'debug';
 import slugIt from '../../utils/slugIt';
 import Tag from '../../models/Tag';
 import Article from '../../models/Article';
-// import Media from '../../models/Media';
 import ArticleTag from '../../models/join/ArticleTag';
 
 import ArticleType from '../../schema/type/article';

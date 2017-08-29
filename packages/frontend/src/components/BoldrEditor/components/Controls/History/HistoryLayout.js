@@ -32,18 +32,16 @@ export default class HistoryLayout extends React.PureComponent<Props, *> {
           onClick={this.onChange}
           className={classNames(undo.className)}
           disabled={undoDisabled}
-          title={undo.title}
-        >
-          <Undo color="#222" />
+          title={undo.title}>
+          <Undo fill="#222" />
         </Option>
         <Option
           value="redo"
           onClick={this.onChange}
           className={classNames(redo.className)}
           disabled={redoDisabled}
-          title={redo.title}
-        >
-          <Redo color="#222" />
+          title={redo.title}>
+          <Redo fill="#222" />
         </Option>
       </ControlWrapper>
     );

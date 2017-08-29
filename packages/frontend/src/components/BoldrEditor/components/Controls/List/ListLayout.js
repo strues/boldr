@@ -1,7 +1,7 @@
 /* @flow */
 import * as React from 'react';
 import classNames from 'classnames';
-import { ListUl, ListOl } from '@boldr/icons';
+import { List, ListOl } from '@boldr/icons';
 import Option from '../../Option';
 import { ControlWrapper } from '../Controls.styled';
 
@@ -40,18 +40,16 @@ export default class ListLayout extends React.PureComponent<Props, *> {
           onClick={this.toggleBlockType}
           className={classNames(unordered.className)}
           active={listType === 'unordered'}
-          title={unordered.title}
-        >
-          <ListUl color="#222" />
+          title={unordered.title}>
+          <List color="#222" />
         </Option>
         <Option
           value="ordered"
           onClick={this.toggleBlockType}
           className={classNames(ordered.className)}
           active={listType === 'ordered'}
-          title={ordered.title}
-        >
-          <ListOl color="#222" />
+          title={ordered.title}>
+          <ListOl fill="#222" />
         </Option>
       </ControlWrapper>
     );

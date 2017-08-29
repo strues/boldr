@@ -15,37 +15,28 @@ import type { RouterLocation } from '../../../../../../types/boldr';
 import { selectArticleFormValues } from '../../../../state/selectors/articleSelectors';
 import FieldEditor from './FieldEditor';
 import { Inner, Toolbar, NewPost, DarkSegment, HelpTxt } from './NewPostStyled';
-// import UploadArticleImage from './UploadArticleImage';
 
 export type Props = {
-  handleSubmit?: Function,
-  reset?: Function,
-  submitting?: boolean,
-  fields?: Object,
-  dispatch: Function,
+  handleSubmit: Function,
+  reset: () => void,
+  submitting: boolean,
   location: RouterLocation,
-  pristine?: boolean,
-  input?: Object,
-  label?: string,
+  pristine: boolean,
 };
 
 class NewArticleForm extends React.Component<Props, *> {
   props: Props;
   render() {
-    const { handleSubmit, location } = this.props;
-    let isEditForm;
-    if (location && location.pathname.includes('edit')) {
-      isEditForm = true;
-    } else {
-      isEditForm = false;
-    }
+    const { handleSubmit, location, reset, pristine, submitting } = this.props;
+    // let isEditForm;
+
+    // if (location && location.pathname.includes('edit')) {
+    //   isEditForm = true;
+    // } else {
+    //   isEditForm = false;
+    // }
     return (
       <div>
-        <div className="heading">
-          <h2>
-            {isEditForm ? 'Edit article' : 'Create article'}
-          </h2>
-        </div>
         <Headline type="h1">Create a new post</Headline>
         <NewPost>
           <Form onSubmit={handleSubmit}>
@@ -135,8 +126,11 @@ class NewArticleForm extends React.Component<Props, *> {
                     </FormField>
                   </FormGroup>
 
-                  <Button htmlType="submit" kind="primary">
+                  <Button htmlType="submit" disabled={submitting} kind="primary">
                     Save Post
+                  </Button>
+                  <Button onClick={reset} kind="primary" disabled={submitting || pristine} outline>
+                    Reset
                   </Button>
                 </Block>
               </Col>

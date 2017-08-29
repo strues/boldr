@@ -3,21 +3,19 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import type { Connector } from 'react-redux';
-import styled from 'styled-components';
 import Helmet from 'react-helmet';
 import { Col, Row, LevelLeft, Level, LevelItem, LevelRight } from '@boldr/ui';
-import type { AdminState, Dispatch, Reducer } from '../../../../types/state';
-import type { ArticleType } from '../../../../types/boldr';
+import type { Dispatch } from '../../../../types/state';
+import type { ArticleType, ArticlesType } from '../../../../types/boldr';
 import { setArticle } from '../../state/dashboard/actions';
 import ArticleList from './components/ArticleList';
 import ArticlePreview from './components/ArticlePreview';
 
 export type Props = {
-  articles: ArticleType,
+  articles: ArticlesType,
   article: ArticleType,
   handleDeleteClick: Function,
-  handleClick: Function,
-  dispatch: () => mixed,
+  setArticle: ArticleType => ArticleType,
 };
 
 class Articles extends React.Component<Props, *> {
@@ -70,7 +68,7 @@ const mapStateToProps = state => {
     article: state.admin.dashboard.article,
   };
 };
-
+// $FlowIssue
 const connector: Connector<{}, Props> = connect(mapStateToProps, (dispatch: Dispatch) => ({
   setArticle: article => dispatch(setArticle(article)),
 }));

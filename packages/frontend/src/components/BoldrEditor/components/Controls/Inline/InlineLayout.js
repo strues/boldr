@@ -32,29 +32,26 @@ const InlineLayout = (props: Props) => {
         value="italic"
         onClick={onChange}
         active={currentState.italic === true}
-        title="Italic"
-      >
+        title="Italic">
         <Italic color="#222" />
       </Option>
       <Option
         value="underline"
         onClick={onChange}
         active={currentState.underline === true}
-        title="Underline"
-      >
+        title="Underline">
         <Underline color="#222" />
       </Option>
       <Option
         value="strikethrough"
         onClick={onChange}
         active={currentState.strikethrough === true}
-        title="Strikethrough"
-      >
-        <Strikethrough color="#222" />
+        title="Strikethrough">
+        <Strikethrough fill="#222" />
       </Option>
 
       <Option value="code" onClick={onChange} active={currentState.CODE} title="Code">
-        <Code color="#222" />
+        <Code fill="#222" />
       </Option>
     </InlineWrapper>
   );

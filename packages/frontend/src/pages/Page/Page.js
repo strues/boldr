@@ -13,18 +13,20 @@ import LoginContainer from '../../scenes/Account/Login';
 import SignupContainer from '../../scenes/Account/Signup';
 import AccountContainer from '../../scenes/Account';
 import BlogContainer from '../../scenes/Blog';
+import View from '../../components/View';
 import { logout } from '../../scenes/Account/state/actions';
 import Home from '../Home';
 import About from '../About';
+import type { CurrentUser, RouterLocation } from '../../types/boldr';
 import Navigation from './components/Navigation';
-import View from '../../components/View';
+
 // graphql
 
 import MENU_QUERY from './gql/getMenu.graphql';
 
 export type Props = {
-  location: Object,
-  me?: User,
+  location: RouterLocation,
+  currentUser?: CurrentUser,
   auth: Object,
   showHeader: () => void,
   logout: Function,
@@ -35,7 +37,7 @@ const ContentWrapper = styled.section`
   width: 100%;
   height: 100%;
   min-height: 100%;
-  padding-top: 70px;
+  padding-top: 52px;
   padding-bottom: 70px;
 `;
 
@@ -47,8 +49,7 @@ export class Page extends React.Component<Props, *> {
     this.props.logout();
   };
 
-  props: Props;
-  render() {
+  render(): React.Node {
     const { data: { loading, getMenuById }, auth, currentUser, location } = this.props;
     return (
       <View>
@@ -86,13 +87,14 @@ const mapStateToProps = state => {
     currentUser: state.auth.info,
   };
 };
-
+// $FlowIssue
 const PageComponentWithData = graphql(MENU_QUERY, {
+  // $FlowIssue
   options: () => ({
     variables: {
       id: 1,
     },
   }),
 })(Page);
-
+// $FlowIssue
 export default connect(mapStateToProps, { showHeader, logout })(PageComponentWithData);

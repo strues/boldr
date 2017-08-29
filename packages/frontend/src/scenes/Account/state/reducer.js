@@ -19,6 +19,7 @@ const INITIAL_STATE = {
  * @param  {Object} state       The initial state
  * @param  {Object} action      The action object
  */
+// $FlowIssue
 function authReducer(state: AuthState = INITIAL_STATE, action = {}) {
   switch (action.type) {
     case t.LOGIN_FAILURE:

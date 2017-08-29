@@ -19,7 +19,7 @@ export const UGLIFY_OPTIONS = {
     // fix for problematic code like emoticons
     ascii_only: true,
     // more readable output
-    semicolons: false,
+    semicolons: true,
     comments: false,
   },
 };

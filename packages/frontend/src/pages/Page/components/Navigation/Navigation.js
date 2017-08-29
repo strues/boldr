@@ -66,13 +66,12 @@ class Navigation extends React.Component<Props, State> {
       <Navbar
         ref={el => {
           (this: any).navbar = el;
-        }}
-      >
+        }}>
         <Container>
           <NavbarBrand>
             <NavbarItem>
               <Link to="/">
-                <img src="https://boldr.io/assets/boldr-blue-logo.png" />
+                <img src="https://boldr.io/assets/boldr-logo.png" />
               </Link>
             </NavbarItem>
             <NavbarBurger isActive={isActive} onClick={this.onClickNav} />

@@ -8,7 +8,6 @@ import ExtractCssChunks from 'extract-css-chunks-webpack-plugin';
 
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import SriPlugin from 'webpack-subresource-integrity';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 import UglifyPlugin from 'uglifyjs-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 import { getHashDigest } from 'loader-utils';
@@ -67,8 +66,6 @@ const PUBLIC_PATH = process.env.PUBLIC_PATH;
 const GRAPHQL_ENDPOINT = process.env.GRAPHQL_ENDPOINT;
 const API_URL = process.env.API_URL;
 const API_PREFIX = process.env.API_PREFIX;
-// $FlowIssue
-const HTML_TEMPLATE = path.resolve(ROOT, process.env.HTML_TEMPLATE);
 
 const nodeModules = path.resolve(ROOT, 'node_modules');
 const SRC_DIR = path.resolve(ROOT, 'src');
@@ -109,7 +106,7 @@ export default function createWebpackConfig(
       polyfill: false,
       target: 'modern',
       styled: true,
-      styledProcess: true,
+      styledProcess: false,
       imports: 'webpack',
       srcDir: SRC_DIR,
     },
@@ -126,7 +123,7 @@ export default function createWebpackConfig(
       polyfill: false,
       target: '8.4',
       styled: true,
-      styledProcess: true,
+      styledProcess: false,
       imports: 'webpack',
       srcDir: SRC_DIR,
     },
@@ -341,13 +338,11 @@ export default function createWebpackConfig(
     plugins: [
       new webpack.DefinePlugin({
         __SERVER__: JSON.stringify(_IS_SERVER_),
-        'process.env': {
-          NODE_ENV: JSON.stringify(options.env),
-          TARGET: JSON.stringify(target),
-          GRAPHQL_ENDPOINT: JSON.stringify(GRAPHQL_ENDPOINT),
-          API_URL: JSON.stringify(API_URL),
-          API_PREFIX: JSON.stringify(API_PREFIX),
-        },
+        'process.env.NODE_ENV': JSON.stringify(options.env),
+        'process.env.TARGET': JSON.stringify(target),
+        'process.env.GRAPHQL_ENDPOINT': JSON.stringify(GRAPHQL_ENDPOINT),
+        'process.env.API_URL': JSON.stringify(API_URL),
+        'process.env.API_PREFIX': JSON.stringify(API_PREFIX),
       }),
       // Subresource Integrity (SRI) is a security feature that enables browsers to verify that
       // files they fetch (for example, from a CDN) are delivered without unexpected manipulation.
@@ -414,13 +409,7 @@ export default function createWebpackConfig(
       // I would recommend using NamedModulesPlugin during development (better output).
       // Via: https://github.com/webpack/webpack.js.org/issues/652#issuecomment-273023082
       _IS_DEV_ ? new webpack.NamedModulesPlugin() : null,
-      // Generating static HTML page for simple static deployment
-      // https://github.com/jantimon/html-webpack-plugin
-      _IS_PROD_ && _IS_CLIENT_
-        ? new HtmlWebpackPlugin({
-            template: HTML_TEMPLATE,
-          })
-        : null,
+
       _IS_CLIENT_
         ? new ExtractCssChunks({
             filename: _IS_DEV_ ? '[name].css' : '[name]-[contenthash:base62:8].css',

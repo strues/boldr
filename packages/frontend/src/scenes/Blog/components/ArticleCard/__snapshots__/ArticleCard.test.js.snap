@@ -33,22 +33,25 @@ exports[`<ArticleCard /> renders snapshot 1`] = `
     <CardActions
       expander={true}
     >
-      <Button
-        block={false}
-        bordered={true}
-        className=""
-        disabled={false}
-        href="/blog/test-post"
-        htmlType="button"
-        kind="primary"
-        loading={false}
-        onClick={[Function]}
-        outline={true}
-        prefix="boldrui"
-        size="medium"
+      <Link
+        replace={false}
+        to="/blog/test-post"
       >
-        Read More
-      </Button>
+        <Button
+          block={false}
+          bordered={true}
+          className=""
+          disabled={false}
+          htmlType="button"
+          kind="primary"
+          loading={false}
+          outline={true}
+          prefix="boldrui"
+          size="medium"
+        >
+          Read More
+        </Button>
+      </Link>
     </CardActions>
     <CardText
       component="section"

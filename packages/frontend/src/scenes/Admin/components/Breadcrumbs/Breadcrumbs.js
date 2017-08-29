@@ -3,8 +3,10 @@ import React from 'react';
 import matchPath from 'react-router-dom/matchPath';
 // internal
 import Breadcrumb from '@boldr/ui/Breadcrumb';
-import LinkContainer from '@boldr/ui/LinkContainer';
+
 import View from '@boldr/ui/View';
+import type { RouterLocation } from '../../../../types/boldr';
+import LinkContainer from '../../../../components/LinkContainer';
 import rootRoutes from '../../routes';
 
 const generatePathname = (path, params) => {
@@ -29,15 +31,14 @@ const generateBreadcrumbs = (acc, topRoutes, location) => {
   return acc;
 };
 
-const Breadcrumbs = ({ location }: { location: Location }) => {
+const Breadcrumbs = ({ location }: { location: RouterLocation }) => {
   const crumbs = generateBreadcrumbs([], rootRoutes, location);
   return (
     <View
       style={{
         display: crumbs.length < 2 ? 'none' : 'inherit',
         visibility: crumbs.length < 2 ? 'hidden' : 'inherit',
-      }}
-    >
+      }}>
       <Breadcrumb>
         {crumbs.map(({ breadcrumb, pathname }, index) =>
           <LinkContainer to={pathname} key={pathname}>

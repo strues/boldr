@@ -1,5 +1,4 @@
 /* @flow */
-// import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 
@@ -40,5 +39,5 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     ownProps.createArticle(payload);
   },
 });
-
+// $FlowIssue
 export default withMutation(connect(mapStateToProps, mapDispatchToProps)(NewArticle));

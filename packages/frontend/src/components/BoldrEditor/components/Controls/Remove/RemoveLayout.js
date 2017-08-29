@@ -22,7 +22,7 @@ const RemoveLayout = ({ config, onChange }: Props) => {
   return (
     <RemoveBtn aria-label="be-remove__control">
       <Option className={className} onClick={onChange} title={title}>
-        <Eraser color="#222" />
+        <Eraser fill="#222" />
       </Option>
     </RemoveBtn>
   );

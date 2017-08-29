@@ -8,7 +8,41 @@ exports[`<Settings /> renders snapshot 1`] = `
   />
   <Settings__Content>
     <SettingsAside />
-    <Connect(General) />
+    <SettingForm
+      id={1}
+      label="Site Name"
+      value="Boldr"
+    />
+    <SettingForm
+      id={3}
+      label="Site Logo"
+      value="https://boldr.io/boldr.png"
+    />
+    <SettingForm
+      id={4}
+      label="Site Description"
+      value="A modern CMS"
+    />
+    <SettingForm
+      id={5}
+      label="Favicon"
+      value="https://boldr.io/favicon.ico"
+    />
+    <SettingForm
+      id={6}
+      label="Google Analytics ID"
+      value="UA-323432"
+    />
+    <SettingForm
+      id={7}
+      label="Allow Registration"
+      value="true"
+    />
+    <SettingForm
+      id={2}
+      label="Site URL"
+      value="abcd"
+    />
   </Settings__Content>
 </div>
 `;

@@ -13,9 +13,7 @@ type Props = {
 };
 
 const Article = ({ loading, error, getArticleBySlug }: Props) =>
-  <div>
-    <UniversalArticle isLoading={loading} error={error} article={getArticleBySlug} />
-  </div>;
+  <UniversalArticle isLoading={loading} error={error} article={getArticleBySlug} />;
 
 // $FlowIssue
 export default graphql(GET_ARTICLE_QUERY, {

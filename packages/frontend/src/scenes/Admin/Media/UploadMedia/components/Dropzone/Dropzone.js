@@ -10,7 +10,6 @@ type Props = {
   inputAccept: string,
 };
 type State = {
-  imgSrc: string,
   dragEnter: boolean,
   uploadHighlighted: boolean,
   showImageLoading: boolean,
@@ -22,7 +21,6 @@ class Dropzone extends React.Component<Props, State> {
   };
 
   state: State = {
-    imgSrc: '',
     dragEnter: false,
     showImageLoading: false,
   };
@@ -40,24 +38,6 @@ class Dropzone extends React.Component<Props, State> {
     this.setState({
       showImageLoading,
     });
-  };
-
-  showImageURLOption: Function = (): void => {
-    this.setState({
-      uploadHighlighted: false,
-    });
-  };
-
-  showImageUploadOption: Function = (): void => {
-    this.setState({
-      uploadHighlighted: true,
-    });
-  };
-
-  addImageFromState: Function = (): void => {
-    const { imgSrc, height, width } = this.state;
-    const { onChange } = this.props;
-    onChange(imgSrc, height, width);
   };
 
   addImageFromSrcLink: Function = (imgSrc: string): void => {
@@ -84,16 +64,7 @@ class Dropzone extends React.Component<Props, State> {
     }
 
     for (let i = 0; i < data.length; i += 1) {
-      if (data[i].kind === 'string' && data[i].type.match('^text/plain')) {
-        // This item is the target node
-        continue;
-      } else if (data[i].kind === 'string' && data[i].type.match('^text/html')) {
-        // Drag data item is HTML
-        continue;
-      } else if (data[i].kind === 'string' && data[i].type.match('^text/uri-list')) {
-        // Drag data item is URI
-        continue;
-      } else if ((!dataIsItems || data[i].kind === 'file') && data[i].type.match('^image/')) {
+      if ((!dataIsItems || data[i].kind === 'file') && data[i].type.match('^image/')) {
         // Drag data item is an image file
         const file = dataIsItems ? data[i].getAsFile() : data[i];
         this.uploadImage(file);
@@ -150,7 +121,7 @@ class Dropzone extends React.Component<Props, State> {
 
   render() {
     const { inputAccept } = this.props;
-    const { imgSrc, showImageLoading, dragEnter } = this.state;
+    const { showImageLoading, dragEnter } = this.state;
     return (
       <div onClick={this.fileUploadClick}>
         {showImageLoading ? <Loader /> : null}
@@ -158,8 +129,7 @@ class Dropzone extends React.Component<Props, State> {
           onDragEnter={this.onDragEnter}
           onDragOver={this.stopPropagation}
           onDrop={this.onImageDrop}
-          highlighted={dragEnter}
-        >
+          highlighted={dragEnter}>
           <UploadLabel htmlFor="file">Drop the file or click to upload</UploadLabel>
         </UploadOpt>
         <UploadInput type="file" id="file" accept={inputAccept} onChange={this.selectImage} />

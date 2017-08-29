@@ -1,21 +1,21 @@
 /* @flow */
-import React, { Component } from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
+import { graphql } from 'react-apollo';
 import { Col, Row } from '@boldr/ui/Layout';
 import ResponsiveImage from '@boldr/ui/ResponsiveImage';
 import Block from '@boldr/ui/Block';
 import Headline from '@boldr/ui/Headline';
 import Loader from '@boldr/ui/Loader';
+import type { MediaType } from '../../../../types/boldr';
+import EDIT_MEDIA_MUTATION from '../gql/editMedia.graphql';
 // form
 import MediaForm from './components/MediaForm';
 
 type Props = {
-  data: Data,
+  media: MediaType,
+  isLoading: boolean,
   editMediaFile: Function,
-};
-type Data = {
-  getMediaById: MediaFile,
-  loading: boolean,
 };
 
 const MediaContent = styled.div`
@@ -26,15 +26,15 @@ const MediaFormCard = styled.div`margin-bottom: 2rem;`;
 
 class MediaManager extends React.Component<Props, *> {
   handleSubmit = (values: Object) => {
-    const mediaId = this.props.data.getMediaById.id;
+    const mediaId = this.props.media.id;
 
     this.props.editMediaFile(mediaId, values);
   };
   props: Props;
   render() {
-    const { getMediaById, loading } = this.props.data;
+    const { media, isLoading } = this.props;
 
-    if (loading) {
+    if (isLoading) {
       return <Loader />;
     }
     return (
@@ -45,10 +45,11 @@ class MediaManager extends React.Component<Props, *> {
               <Col xs={6}>
                 <MediaContent>
                   <ResponsiveImage
-                    src={getMediaById.url}
+                    // $FlowIssue
+                    src={`${process.env.API_URL}/${media.url}`}
                     width={640}
                     height={420}
-                    alt={getMediaById.name}
+                    alt={media.name}
                   />
                 </MediaContent>
               </Col>
@@ -62,7 +63,7 @@ class MediaManager extends React.Component<Props, *> {
                 <MediaFormCard>
                   <Block>
                     <Headline type="h2">Edit media attributes</Headline>
-                    <MediaForm initialValues={getMediaById} onSubmit={this.handleSubmit} />
+                    <MediaForm initialValues={media} onSubmit={this.handleSubmit} />
                   </Block>
                 </MediaFormCard>
               </Col>
@@ -73,5 +74,19 @@ class MediaManager extends React.Component<Props, *> {
     );
   }
 }
-
-export default MediaManager;
+// $FlowIssue
+export default graphql(EDIT_MEDIA_MUTATION, {
+  props: ({ mutate }) => ({
+    editMediaFile: (mediaId, values) =>
+      mutate({
+        variables: {
+          id: mediaId,
+          input: {
+            name: values.name,
+            fileDescription: values.fileDescription,
+          },
+        },
+      }),
+  }),
+  // $FlowIssue
+})(MediaManager);

@@ -3,6 +3,7 @@ import * as React from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import { Grid, Row, Col } from '@boldr/ui/Layout';
+import type { User } from '../../../types/boldr';
 import LoginForm from './LoginForm';
 
 type LoginFormInput = {

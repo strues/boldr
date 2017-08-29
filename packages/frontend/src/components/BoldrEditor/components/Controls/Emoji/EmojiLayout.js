@@ -43,14 +43,12 @@ class EmojiLayout extends React.Component<Props, *> {
         aria-haspopup="true"
         aria-label="be-emoji__control"
         aria-expanded={expanded}
-        title={title}
-      >
+        title={title}>
         <Option
           className={classNames(className)}
           value="unordered-list-item"
-          onClick={onExpandEvent}
-        >
-          <Smile color="#222" />
+          onClick={onExpandEvent}>
+          <Smile fill="#222" />
         </Option>
         {expanded ? this.renderEmojiModal() : undefined}
       </ControlWrapper>

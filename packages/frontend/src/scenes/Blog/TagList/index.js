@@ -3,25 +3,19 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import universal from 'react-universal-component';
 import ARTICLES_FOR_TAG from '../gql/articlesForTag.graphql';
+import type { ArticlesType, MatchParams } from '../../../types/boldr';
 
 const UniversalTagList = universal(import('./TagList'));
 
 type Props = {
   loading: boolean,
   error?: Object,
-  getArticlesForTag: Array<Object>,
-  match: Object,
+  getArticlesForTag: ArticlesType,
+  match: MatchParams,
 };
 
 const TagList = ({ loading, error, match, getArticlesForTag }: Props) =>
-  <div>
-    <UniversalTagList
-      isLoading={loading}
-      error={error}
-      match={match}
-      articles={getArticlesForTag}
-    />
-  </div>;
+  <UniversalTagList isLoading={loading} error={error} match={match} articles={getArticlesForTag} />;
 
 // $FlowIssue
 export default graphql(ARTICLES_FOR_TAG, {

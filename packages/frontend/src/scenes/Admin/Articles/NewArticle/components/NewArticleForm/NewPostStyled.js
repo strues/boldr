@@ -10,17 +10,27 @@ const NewPost = styled.section`
 const Toolbar = styled.div`
   width: 100%;
   height: 50px;
-  background-color: #66bb6a;
+  background-color: ${props => props.theme.palette.primary2};
   color: #fff;
   line-height: 24px;
   vertical-align: middle;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 300;
   padding-left: 1rem;
+  font-family: ${props => props.theme.headings.fontFamily};
   display: flex;
   align-items: center;
 `;
-
+Toolbar.defaultProps = {
+  theme: {
+    palette: {
+      primary2: '#0094c6',
+    },
+    headings: {
+      fontFamily: 'Chivo',
+    },
+  },
+};
 const DarkSegment = styled.div`
   margin-bottom: 1.5rem;
   padding: 1rem;

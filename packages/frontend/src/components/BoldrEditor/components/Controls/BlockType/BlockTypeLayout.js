@@ -26,29 +26,29 @@ class BlockTypeLayout extends React.PureComponent<Props, *> {
     {
       label: 'Normal',
       id: 1,
-      icon: <Paragraph color="#222" />,
+      icon: <Paragraph fill="#222" />,
     },
     {
       label: 'H1',
       id: 2,
-      icon: <Heading1 color="#222" />,
+      icon: <Heading1 fill="#222" />,
     },
     {
       label: 'H2',
       id: 3,
-      icon: <Heading2 color="#222" />,
+      icon: <Heading2 fill="#222" />,
     },
     {
       label: 'H3',
       id: 4,
-      icon: <Heading3 color="#222" />,
+      icon: <Heading3 fill="#222" />,
     },
     {
       label: 'Blockquote',
       id: 5,
-      icon: <QuoteLeft color="#222" />,
+      icon: <QuoteLeft fill="#222" />,
     },
-    { label: 'Code', id: 6, icon: <Embedded color="#222" /> },
+    { label: 'Code', id: 6, icon: <Embedded fill="#222" /> },
   ];
 
   renderButtons(blocks: ToolbarBlockTypes): React.Node {
@@ -60,8 +60,7 @@ class BlockTypeLayout extends React.PureComponent<Props, *> {
             key={block.id}
             value={block.label}
             active={blockType === block.label}
-            onClick={onChange}
-          >
+            onClick={onChange}>
             {block.icon}
           </Option>,
         )}

@@ -10,21 +10,7 @@ import {
   LOGOUT,
 } from './actionTypes';
 import authReducer from './reducer';
-/*
-id: '',
-email: '',
-firstName: '',
-lastName: '',
-username: '',
-location: '',
-avatarUrl: '',
-profileImage: '',
-socialMedia: {},
-website: '',
-bio: '',
-role: '',
-roleId: '',
- */
+
 describe('Auth Reducer', () => {
   it('Should return the initial state', () => {
     expect(authReducer(undefined, {})).toEqual({

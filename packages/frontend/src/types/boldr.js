@@ -104,8 +104,8 @@ export type Article = {
   // Users belonging to a role.
   author: User,
 };
-
-export type ArticleType = Article | Array<Article>;
+export type ArticlesType = Array<Article>;
+export type ArticleType = Article;
 
 export type Media = {
   // Unique identifier for the object.
@@ -145,6 +145,9 @@ export type Media = {
   createdAt?: string,
 };
 
+export type MediaType = Media;
+export type MediasType = Array<Media>;
+
 export type Tag = {
   // Unique identifier for the object.
   id: string,
@@ -167,6 +170,9 @@ export type Tag = {
   // The timestamp when the object was created
   createdAt?: string,
 };
+
+export type TagsType = Array<Tag>;
+export type TagType = Tag;
 
 export type User = {
   // Unique identifier for the object.
@@ -236,6 +242,9 @@ export type User = {
   resetToken?: ResetToken,
 };
 
+export type UserType = User;
+export type UsersType = Array<User>;
+
 export type Social = {
   // Unique identifier for the object.
   id: string,
@@ -301,7 +310,8 @@ export type Setting = {
   // The description for what the setting does.
   description: string,
 };
-
+export type SettingType = Setting;
+export type SettingsType = Array<Setting>;
 export type ResetToken = {
   // Unique identifier for the object.
   id: string,

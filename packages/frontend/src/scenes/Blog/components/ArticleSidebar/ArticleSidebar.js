@@ -2,7 +2,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import { StyleClasses } from '@boldr/ui';
-
+import type { TagsType } from '../../../../types/boldr';
 import Author from '../Author';
 import SidebarTags from '../SidebarTags';
 
@@ -10,7 +10,7 @@ export type Props = {
   className?: string,
   authorClassName?: string,
   tagsClassName?: string,
-  tags: Array<Tag>,
+  tags: TagsType,
   author: Object,
 };
 

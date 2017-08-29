@@ -2,16 +2,19 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import { format } from 'date-fns';
+import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import Avatar from '@boldr/ui/Avatar';
 import Icon from '@boldr/ui/Icons/Icon';
-import Paragraph from '@boldr/ui/Paragraph';
+import { replacePath } from '@boldr/core';
+
 import { Menu, MenuItem } from '@boldr/ui/Menu';
 import type { ArticleType } from '../../../../../../types/boldr';
 import DELETE_ARTICLE_MUTATION from '../../../gql/deleteArticle.mutation.graphql';
 
 export type Props = {
   onArticleClick: ArticleType => mixed,
+  deleteArticle: () => void,
   article: ArticleType,
 };
 
@@ -35,11 +38,14 @@ const ListHead = styled.div`
   justify-content: space-between;
   height: 40px;
 `;
-const ListContent = styled.div`height: 50px;`;
 
+@connect()
 class ArticleListItem extends React.Component<Props, *> {
   handleArticleClick = () => {
     this.props.onArticleClick(this.props.article);
+  };
+  handleEditClick = () => {
+    this.props.dispatch(replacePath(`/admin/articles/${this.props.article.slug}`));
   };
   render() {
     const { article, deleteArticle } = this.props;
@@ -52,12 +58,12 @@ class ArticleListItem extends React.Component<Props, *> {
           <Menu isSize="normal">
             <MenuItem
               icon={<Icon kind="trash" color="#222" />}
-              onClick={this.props.deleteArticle(article.id)}
+              onClick={deleteArticle(article.id)}
               text="Delete"
             />
             <MenuItem
               icon={<Icon kind="edit" color="#222" />}
-              onClick={function noRefCheck() {}}
+              onClick={this.handleEditClick}
               text="Edit"
             />
           </Menu>
@@ -74,7 +80,7 @@ class ArticleListItem extends React.Component<Props, *> {
     );
   }
 }
-
+// $FlowIssue
 export default graphql(DELETE_ARTICLE_MUTATION, {
   props: ({ mutate }) => ({
     deleteArticle(id) {

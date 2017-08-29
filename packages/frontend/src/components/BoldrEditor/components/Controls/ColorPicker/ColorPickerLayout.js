@@ -3,7 +3,7 @@
 
 import * as React from 'react';
 import classNames from 'classnames';
-import PaintBrush from '@boldr/icons/PaintBrush';
+import Droplet from '@boldr/icons/Droplet';
 import { stopPropagation } from '../../../utils/common';
 import Option from '../../Option';
 import type { ColorPickerConfig } from '../../../core/config';
@@ -76,8 +76,7 @@ class ColorPickerLayout extends React.Component<Props, State> {
           </ColorModalLabel>
           <ColorModalLabel
             active={currentStyle === 'bgcolor'}
-            onClick={this.setCurrentStyleBgcolor}
-          >
+            onClick={this.setCurrentStyleBgcolor}>
             Background
           </ColorModalLabel>
         </ColorHeader>
@@ -88,8 +87,7 @@ class ColorPickerLayout extends React.Component<Props, State> {
               key={index}
               active={currentSelectedColor === color}
               onClick={this.onChange}
-              isDark
-            >
+              isDark>
               <span style={{ backgroundColor: color }} className="be-colorpicker__cube" />
             </Option>,
           )}
@@ -105,10 +103,9 @@ class ColorPickerLayout extends React.Component<Props, State> {
         aria-haspopup="true"
         aria-expanded={expanded}
         aria-label="be-color-picker"
-        title={this.props.config.title}
-      >
+        title={this.props.config.title}>
         <Option onClick={onExpandEvent} className={classNames(this.props.config.className)}>
-          <PaintBrush color="#222" onClick={onExpandEvent} />
+          <Droplet color="#222" onClick={onExpandEvent} />
         </Option>
         {expanded ? this.renderModal() : undefined}
       </ColorWrapper>

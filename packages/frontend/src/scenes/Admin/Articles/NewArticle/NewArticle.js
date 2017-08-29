@@ -2,7 +2,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import hasWindow from '@boldr/utils/lib/dom/hasWindow';
-import type { ArticleType } from '../../../../types/boldr';
+import type { Article } from '../../../../types/boldr';
 import NewArticleForm from './components/NewArticleForm';
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 };
 
 const NewArticle = (props: Props) => {
-  const handleOnSubmit = (values: ArticleType) => {
+  const handleOnSubmit = (values: Article) => {
     values.content = hasWindow ? window.localStorage.getItem('htmlContent') : '';
     props.onSubmit(values);
   };

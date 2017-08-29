@@ -3,7 +3,7 @@ import React from 'react';
 import { graphql } from 'react-apollo';
 import universal from 'react-universal-component';
 
-import type { ListOfArticles } from '../../../../types/boldr';
+import type { ArticlesType } from '../../../../types/boldr';
 import ARTICLES_QUERY from '../gql/articles.graphql';
 
 const UniversalArticles = universal(import('./Articles'));
@@ -11,14 +11,11 @@ const UniversalArticles = universal(import('./Articles'));
 type Props = {
   loading: boolean,
   error?: Object,
-  articles: ListOfArticles,
+  articles: ArticlesType,
 };
 
 const ArticleListing = ({ loading, error, articles }: Props) =>
-  <div>
-    <UniversalArticles isLoading={loading} error={error} articles={articles} />
-  </div>;
-
+  <UniversalArticles isLoading={loading} error={error} articles={articles} />;
 // $FlowIssue
 export default graphql(ARTICLES_QUERY, {
   // $FlowIssue

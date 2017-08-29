@@ -61,8 +61,7 @@ function getLinkComponent(config) {
       return (
         <LinkDecoratorWrap
           onMouseEnter={this.toggleShowPopOver}
-          onMouseLeave={this.toggleShowPopOver}
-        >
+          onMouseLeave={this.toggleShowPopOver}>
           <a href={url} target={targetOption}>
             {children}
           </a>

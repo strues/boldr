@@ -2,7 +2,6 @@
 import * as React from 'react';
 import Link from 'react-router-dom/Link';
 import Paper from '@boldr/ui/Paper';
-import { Row, Col } from '@boldr/ui/Layout';
 import Edit from '@boldr/icons/Edit';
 import styled from 'styled-components';
 
@@ -51,7 +50,7 @@ class ArticlePreview extends React.Component<Props, *> {
             </Link>
           </ArticlePreviewEdit>
         </Toolbar>
-        <Paper zDepth={2} isPadded={true}>
+        <Paper zDepth={2} isPadded>
           <div className="boldr-post__content" dangerouslySetInnerHTML={this.createMarkup()} />
         </Paper>
       </div>

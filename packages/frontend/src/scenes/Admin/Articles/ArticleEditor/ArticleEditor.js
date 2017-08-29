@@ -1,21 +1,17 @@
 /* @flow */
 /* eslint-disable no-unused-vars */
-import React, { PureComponent } from 'react';
+import * as React from 'react';
 import Helmet from 'react-helmet';
 import hasWindow from '@boldr/utils/lib/dom/hasWindow';
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
+import type { ArticleType } from '../../../../types/boldr';
 import EDIT_ARTICLE_MUTATION from '../gql/editArticle.mutation.graphql';
 import EditArticleForm from './components/EditArticleForm';
 
-interface Data {
-  getArticleBySlug: Array<Article>,
-  loading: boolean,
-}
-
 type Props = {
   editArticle: Function,
-  currentArticle: Article,
+  currentArticle: ArticleType,
 };
 // eslint-disable-next-line
 const mapStateToProps = state => {
@@ -25,7 +21,7 @@ const mapStateToProps = state => {
 };
 
 @connect(mapStateToProps)
-class ArticleEditor extends PureComponent {
+class ArticleEditor extends React.Component<Props, *> {
   props: Props;
 
   handleSubmit = (values: Object) => {
@@ -35,7 +31,7 @@ class ArticleEditor extends PureComponent {
     this.props.editArticle(articleId, values);
   };
 
-  render() {
+  render(): React.Node {
     const { currentArticle } = this.props;
 
     const setPostValues = {
@@ -44,9 +40,7 @@ class ArticleEditor extends PureComponent {
       content: currentArticle.content,
       rawContent: currentArticle.rawContent,
       image: currentArticle.image,
-      attachments: currentArticle.attachments,
       excerpt: currentArticle.excerpt,
-      meta: currentArticle.meta,
       published: currentArticle.published,
       author: currentArticle.author,
     };
@@ -78,4 +72,5 @@ export default graphql(EDIT_ARTICLE_MUTATION, {
         },
       }),
   }),
+  // $FlowIssue
 })(ArticleEditor);
