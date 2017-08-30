@@ -65,13 +65,11 @@ function getLinkComponent(config) {
           <a href={url} target={targetOption}>
             {children}
           </a>
-          {showPopOver && showOpenOptionOnHover
-            ? <ExternalLink
-                onClick={this.openLink}
-                color="#222"
-                className="be-link-decorator-icon"
-              />
-            : undefined}
+          {showPopOver && showOpenOptionOnHover ? (
+            <ExternalLink onClick={this.openLink} color="#222" className="be-link-decorator-icon" />
+          ) : (
+            undefined
+          )}
         </LinkDecoratorWrap>
       );
     }

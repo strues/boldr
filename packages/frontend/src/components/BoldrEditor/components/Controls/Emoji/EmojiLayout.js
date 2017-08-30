@@ -27,11 +27,11 @@ class EmojiLayout extends React.Component<Props, *> {
     const { config: { modalClassName, emojis } } = this.props;
     return (
       <EmojiModal className={modalClassName} onClick={stopPropagation}>
-        {emojis.map((emoji, index) =>
+        {emojis.map((emoji, index) => (
           <EmojiIcon key={index} alt="emoji" onClick={this.onChange}>
             {emoji}
-          </EmojiIcon>,
-        )}
+          </EmojiIcon>
+        ))}
       </EmojiModal>
     );
   }

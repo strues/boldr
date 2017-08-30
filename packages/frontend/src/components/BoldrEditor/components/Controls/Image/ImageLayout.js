@@ -203,37 +203,41 @@ class ImageLayout extends React.Component<Props, State> {
       <ImageModal className={modalClassName} onClick={this.stopPropagation}>
         <ImageHeader>
           {uploadEnabled &&
-            uploadCallback &&
+          uploadCallback && (
             <ImageOption onClick={this.showImageUploadOption}>
               Upload
               <ImageLabel highlighted={uploadHighlighted} />
-            </ImageOption>}
-          {urlEnabled &&
+            </ImageOption>
+          )}
+          {urlEnabled && (
             <ImageOption onClick={this.showImageURLOption}>
               Upload URL
               <ImageLabel highlighted={!uploadHighlighted} />
-            </ImageOption>}
+            </ImageOption>
+          )}
         </ImageHeader>
-        {uploadHighlighted
-          ? <div onClick={this.fileUploadClick}>
-              <UploadOpt
-                onDragEnter={this.onDragEnter}
-                onDragOver={this.stopPropagation}
-                onDrop={this.onImageDrop}
-                highlighted={dragEnter}>
-                <UploadLabel htmlFor="file">Drop the file or click to upload</UploadLabel>
-              </UploadOpt>
-              <UploadInput type="file" id="file" accept={inputAccept} onChange={this.selectImage} />
-            </div>
-          : <UrlSection>
-              <UploadUrlInput
-                placeholder="Enter url"
-                name="imgSrc"
-                onChange={this.updateValue}
-                onBlur={this.updateValue}
-                value={imgSrc}
-              />
-            </UrlSection>}
+        {uploadHighlighted ? (
+          <div onClick={this.fileUploadClick}>
+            <UploadOpt
+              onDragEnter={this.onDragEnter}
+              onDragOver={this.stopPropagation}
+              onDrop={this.onImageDrop}
+              highlighted={dragEnter}>
+              <UploadLabel htmlFor="file">Drop the file or click to upload</UploadLabel>
+            </UploadOpt>
+            <UploadInput type="file" id="file" accept={inputAccept} onChange={this.selectImage} />
+          </div>
+        ) : (
+          <UrlSection>
+            <UploadUrlInput
+              placeholder="Enter url"
+              name="imgSrc"
+              onChange={this.updateValue}
+              onBlur={this.updateValue}
+              value={imgSrc}
+            />
+          </UrlSection>
+        )}
         <SizeSection>
           ↕&nbsp;
           <SizeInput
@@ -258,11 +262,13 @@ class ImageLayout extends React.Component<Props, State> {
           </ImageBtn>
           <ImageBtn onClick={this.props.doCollapse}>Cancel</ImageBtn>
         </ImageBtnSection>
-        {showImageLoading
-          ? <div className="be-image__modal-spinner">
-              <Spinner />
-            </div>
-          : undefined}
+        {showImageLoading ? (
+          <div className="be-image__modal-spinner">
+            <Spinner />
+          </div>
+        ) : (
+          undefined
+        )}
       </ImageModal>
     );
   }

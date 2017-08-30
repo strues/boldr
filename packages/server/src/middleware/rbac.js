@@ -29,7 +29,9 @@ export function checkPermissions({ role = null }) {
  */
 export function checkRole(role = null) {
   return async (req, res, next) => {
-    const userInfo = await User.query().findById(req.user.id).eager('[roles]');
+    const userInfo = await User.query()
+      .findById(req.user.id)
+      .eager('[roles]');
     const userRole = userInfo.roles[0].id;
     debug(userRole);
     if (!userRole === role) {

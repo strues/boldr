@@ -15,8 +15,9 @@ type Props = {
   getMediaById: MediaType,
 };
 
-const MediaManager = ({ loading, error, getMediaById }: Props) =>
-  <UniversalMediaManager isLoading={loading} error={error} media={getMediaById} />;
+const MediaManager = ({ loading, error, getMediaById }: Props) => (
+  <UniversalMediaManager isLoading={loading} error={error} media={getMediaById} />
+);
 
 // $FlowIssue
 export default graphql(MEDIA_BY_ID_QUERY, {

@@ -9,7 +9,9 @@ export async function verifyUserRegister(req, res, next) {
       return next(new BadRequest('Invalid account verification code'));
     }
 
-    const userToken = await VerificationToken.query().where({ token: req.body.token }).first();
+    const userToken = await VerificationToken.query()
+      .where({ token: req.body.token })
+      .first();
 
     if (userToken.used === true) {
       return res.status(401).json('This token has already been used.');
@@ -18,7 +20,9 @@ export async function verifyUserRegister(req, res, next) {
       verified: true,
     });
 
-    VerificationToken.query().where({ token: req.body.token }).update({ used: true });
+    VerificationToken.query()
+      .where({ token: req.body.token })
+      .update({ used: true });
 
     return res.status(201).send(user);
   } catch (err) {
@@ -26,7 +30,9 @@ export async function verifyUserRegister(req, res, next) {
   }
 }
 export async function checkAuthentication(req, res) {
-  const validUser = await User.query().findById(req.user.id).eager('[roles,socialMedia]');
+  const validUser = await User.query()
+    .findById(req.user.id)
+    .eager('[roles,socialMedia]');
 
   if (!validUser) {
     return res.status(401).json('Unauthorized: Please login again.');

@@ -27,11 +27,11 @@ const TagList = (props: Props) => {
       <Helmet title={`Posts tagged ${params.name}`} />
       <Grid>
         <Row>
-          {articles.map(article =>
+          {articles.map(article => (
             <Col key={article.id} xs={12} sm={4}>
               <ArticleCard listTags={article.tags} article={article} />
-            </Col>,
-          )}
+            </Col>
+          ))}
         </Row>
       </Grid>
     </div>

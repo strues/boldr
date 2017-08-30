@@ -95,22 +95,24 @@ export default class Dropdown extends React.Component<Props, State> {
           {children[0]}
           {expanded ? <CaretClosed /> : <CaretOpen />}
         </DropdownSelectedText>
-        {expanded
-          ? <DropdownOptionWrapper className={optionWrapperClassName} onClick={stopPropagation}>
-              {React.Children.map(options, (option, index) => {
-                const temp =
-                  option &&
-                  // $FlowIssue
-                  React.cloneElement(option, {
-                    onSelect: this.onChange,
-                    highlighted: highlighted === index,
-                    setHighlighted: this.setHighlighted,
-                    index,
-                  });
-                return temp;
-              })}
-            </DropdownOptionWrapper>
-          : undefined}
+        {expanded ? (
+          <DropdownOptionWrapper className={optionWrapperClassName} onClick={stopPropagation}>
+            {React.Children.map(options, (option, index) => {
+              const temp =
+                option &&
+                // $FlowIssue
+                React.cloneElement(option, {
+                  onSelect: this.onChange,
+                  highlighted: highlighted === index,
+                  setHighlighted: this.setHighlighted,
+                  index,
+                });
+              return temp;
+            })}
+          </DropdownOptionWrapper>
+        ) : (
+          undefined
+        )}
       </DropdownWrapper>
     );
   }

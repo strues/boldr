@@ -58,7 +58,9 @@ class Tag extends BaseModel {
   }
 
   static getTags(offset, limit) {
-    return Tag.query().offset(offset).limit(limit);
+    return Tag.query()
+      .offset(offset)
+      .limit(limit);
   }
 }
 

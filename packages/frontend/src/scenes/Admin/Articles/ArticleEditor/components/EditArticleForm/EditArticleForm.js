@@ -13,8 +13,8 @@ const Wrapper = styled.section`
   width: 100%;
   margin-top: 10px;
   margin-bottom: 10px;
-  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12),
-    0 2px 4px -1px rgba(0, 0, 0, .4);
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
+    0 2px 4px -1px rgba(0, 0, 0, 0.4);
   background-color: #fff;
 `;
 
@@ -35,9 +35,7 @@ const EditArticleForm = (props: Props) => {
   return (
     <Row>
       <Col xs>
-        <Headline type="h3">
-          Editing {props.initialValues.title}
-        </Headline>
+        <Headline type="h3">Editing {props.initialValues.title}</Headline>
         <form onSubmit={handleSubmit}>
           <Wrapper>
             <FormGroup>

@@ -28,16 +28,8 @@ class TaggedPost extends Component {
 
     return (
       <div>
-        <div>
-          {`Posts tagged ${this.props.match.params.name}`}
-        </div>
-        <ul>
-          {getArticlesForTag.map(post =>
-            <li key={post.id}>
-              {post.title}
-            </li>,
-          )}
-        </ul>
+        <div>{`Posts tagged ${this.props.match.params.name}`}</div>
+        <ul>{getArticlesForTag.map(post => <li key={post.id}>{post.title}</li>)}</ul>
       </div>
     );
   }

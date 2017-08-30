@@ -1,5 +1,6 @@
 /* @flow */
-import * as React from 'react';
+import React from 'react';
+import type { Node } from 'react';
 import { connect } from 'react-redux';
 import Switch from 'react-router-dom/Switch';
 import Route from 'react-router-dom/Route';
@@ -30,10 +31,9 @@ export class AdminDashboard extends React.Component<Props, *> {
     (this: any).flattenedRoutes = flattenRoutes(routes);
   }
 
-  props: Props;
   flattenedRoutes: FlattenedRoutes;
 
-  render(): React.Node {
+  render(): Node {
     return (
       <Layout location={this.props.location}>
         <Switch>{this.flattenedRoutes.map(props => <Route key={props.path} {...props} />)}</Switch>

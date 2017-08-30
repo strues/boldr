@@ -1,5 +1,6 @@
 /* @flow */
-import * as React from 'react';
+import React from 'react';
+import type { Node } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
@@ -46,7 +47,7 @@ export class Page extends React.Component<Props, *> {
     this.props.logout();
   };
 
-  render(): React.Node {
+  render(): Node {
     const { data: { loading, getMenuById }, token, currentUser, location } = this.props;
     return (
       <View>

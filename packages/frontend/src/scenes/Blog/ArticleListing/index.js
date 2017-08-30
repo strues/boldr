@@ -13,10 +13,11 @@ type Props = {
   articles: ArticleType,
 };
 
-const ArticleListing = ({ loading, error, articles }: Props) =>
+const ArticleListing = ({ loading, error, articles }: Props) => (
   <div>
     <UniversalArticleListing isLoading={loading} error={error} articles={articles} />
-  </div>;
+  </div>
+);
 
 // $FlowIssue
 export default graphql(ARTICLES_QUERY, {

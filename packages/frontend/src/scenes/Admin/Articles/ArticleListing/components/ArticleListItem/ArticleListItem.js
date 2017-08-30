@@ -69,12 +69,8 @@ class ArticleListItem extends React.Component<Props, *> {
           </Menu>
         </ListHead>
         <Footer>
-          <span>
-            {article.published === true ? 'Published' : 'Draft'}
-          </span>
-          <span>
-            {format(article.createdAt, 'MM/DD/YY')}
-          </span>
+          <span>{article.published === true ? 'Published' : 'Draft'}</span>
+          <span>{format(article.createdAt, 'MM/DD/YY')}</span>
         </Footer>
       </ListItem>
     );

@@ -1,5 +1,5 @@
 /* @flow */
-import * as React from 'react';
+import React from 'react';
 import NavLink from 'react-router-dom/NavLink';
 import { NavbarDropdown, NavbarItem, NavbarLink } from '@boldr/ui/Navbar';
 import type { MenuDetailChildren } from '../../../../types/boldr';
@@ -17,10 +17,11 @@ const NavItem = ({ isActive, href, children, title, hasDropdown }: Props) => {
     return (
       <NavbarItem
         isActive={isActive}
-        render={() =>
+        render={() => (
           <NavLink className="boldrui-navbar__item" activeClassName="is-active" to={href}>
             {title}
-          </NavLink>}
+          </NavLink>
+        )}
       />
     );
   } else {
@@ -29,26 +30,28 @@ const NavItem = ({ isActive, href, children, title, hasDropdown }: Props) => {
         <NavbarLink
           isActive={isActive}
           className="boldrui-navbar__item"
-          render={() =>
+          render={() => (
             <NavLink className="boldrui-navbar__link" to={href}>
               {title}
-            </NavLink>}
+            </NavLink>
+          )}
         />
         <NavbarDropdown>
-          {children.items.map(item =>
+          {children.items.map(item => (
             <NavbarItem
               key={item.id}
               isActive={isActive}
               title={item.safeName}
-              render={() =>
+              render={() => (
                 <NavLink
                   className="boldrui-navbar__item"
                   activeClassName="is-active"
                   to={item.href}>
                   {item.safeName}
-                </NavLink>}
-            />,
-          )}
+                </NavLink>
+              )}
+            />
+          ))}
         </NavbarDropdown>
       </NavbarItem>
     );

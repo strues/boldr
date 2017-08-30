@@ -51,7 +51,12 @@ describe('handleNewLine: SHIFT + Enter KeyPress test suite', () => {
     editorState = EditorState.acceptSelection(editorState, updatedSelection);
     editorState = handleNewLine(editorState, event);
     expect(getAllBlocks(editorState).size).toEqual(1);
-    expect(editorState.getCurrentContent().getPlainText().indexOf('\n') > 0).toBeTruthy();
+    expect(
+      editorState
+        .getCurrentContent()
+        .getPlainText()
+        .indexOf('\n') > 0,
+    ).toBeTruthy();
   });
 
   it('should remove selected text', () => {
@@ -66,7 +71,16 @@ describe('handleNewLine: SHIFT + Enter KeyPress test suite', () => {
     });
     editorState = EditorState.acceptSelection(editorState, updatedSelection);
     editorState = handleNewLine(editorState, event);
-    expect(getAllBlocks(editorState).get(0).getLength()).toEqual(5);
-    expect(editorState.getCurrentContent().getPlainText().indexOf('\n') > 0).toBeTruthy();
+    expect(
+      getAllBlocks(editorState)
+        .get(0)
+        .getLength(),
+    ).toEqual(5);
+    expect(
+      editorState
+        .getCurrentContent()
+        .getPlainText()
+        .indexOf('\n') > 0,
+    ).toBeTruthy();
   });
 });

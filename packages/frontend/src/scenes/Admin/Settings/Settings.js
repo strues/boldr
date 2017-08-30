@@ -39,14 +39,14 @@ class Settings extends PureComponent {
         <Helmet title="Admin: Settings" />
         <Content>
           <SettingsAside />
-          {settings.map(setting =>
+          {settings.map(setting => (
             <SettingForm
               id={setting.id}
               label={setting.label}
               value={setting.value}
               key={setting.key}
-            />,
-          )}
+            />
+          ))}
         </Content>
       </div>
     );

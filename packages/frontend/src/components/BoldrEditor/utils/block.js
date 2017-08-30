@@ -55,7 +55,10 @@ export function getSelectedBlock(editorState: EditorState): ContentBlock {
  */
 export function getAllBlocks(editorState: EditorState): List<any> {
   if (editorState) {
-    return editorState.getCurrentContent().getBlockMap().toList();
+    return editorState
+      .getCurrentContent()
+      .getBlockMap()
+      .toList();
   }
   return new List();
 }
@@ -106,7 +109,10 @@ export function getSelectionText(editorState: EditorState): string {
     for (let i = 0; i < selectedBlocks.size; i += 1) {
       const blockStart = i === 0 ? start : 0;
       const blockEnd = i === selectedBlocks.size - 1 ? end : selectedBlocks.get(i).getText().length;
-      selectedText += selectedBlocks.get(i).getText().slice(blockStart, blockEnd);
+      selectedText += selectedBlocks
+        .get(i)
+        .getText()
+        .slice(blockStart, blockEnd);
     }
   }
   return selectedText;
@@ -157,7 +163,10 @@ export function insertNewUnstyledBlock(editorState: EditorState): EditorState {
  * @return {EditorState}             updated editorState without styles
  */
 export function clearEditorContent(editorState: EditorState): EditorState {
-  const blocks = editorState.getCurrentContent().getBlockMap().toList();
+  const blocks = editorState
+    .getCurrentContent()
+    .getBlockMap()
+    .toList();
   const updatedSelection = editorState.getSelection().merge({
     anchorKey: blocks.first().get('key'),
     anchorOffset: 0,

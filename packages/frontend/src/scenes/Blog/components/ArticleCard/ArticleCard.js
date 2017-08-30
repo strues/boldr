@@ -33,9 +33,7 @@ const ArticleCard = (props: Props) => {
             </Button>
           </Link>
         </CardActions>
-        <CardText expandable>
-          {excerpt}
-        </CardText>
+        <CardText expandable>{excerpt}</CardText>
         <TagBlock tags={tags} />
       </Card>
     </div>

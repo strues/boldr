@@ -155,7 +155,7 @@ class LinkLayout extends React.Component<Props, State> {
     const { showModal } = this.state;
     return (
       <LinkWrapper className={className} aria-label="be-link__control">
-        {options.indexOf('link') >= 0 &&
+        {options.indexOf('link') >= 0 && (
           <Option
             value="unordered-list-item"
             className={cN(link.className)}
@@ -164,8 +164,9 @@ class LinkLayout extends React.Component<Props, State> {
             aria-expanded={showModal}
             title={link.title}>
             <Link color="#222" size="1em" />
-          </Option>}
-        {options.indexOf('unlink') >= 0 &&
+          </Option>
+        )}
+        {options.indexOf('unlink') >= 0 && (
           <Option
             disabled={!currentState.link}
             value="ordered-list-item"
@@ -173,7 +174,8 @@ class LinkLayout extends React.Component<Props, State> {
             onClick={this.removeLink}
             title={unlink.title}>
             <Unlink fill="#222" size="1em" />
-          </Option>}
+          </Option>
+        )}
         {expanded && showModal ? this.renderAddLinkModal() : undefined}
       </LinkWrapper>
     );

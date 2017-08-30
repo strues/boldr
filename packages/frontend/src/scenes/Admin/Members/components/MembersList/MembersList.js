@@ -17,7 +17,7 @@ const MembersList = (props: { users: Array<User>, toggleUser: User => User }) =>
   return (
     <div className="boldrui-members-list">
       <MemList>
-        {props.users.map(user =>
+        {props.users.map(user => (
           <MemberCard
             id={user.id}
             avatarUrl={user.avatarUrl}
@@ -29,8 +29,8 @@ const MembersList = (props: { users: Array<User>, toggleUser: User => User }) =>
             username={user.username}
             handleToggle={handleToggle}
             user={user}
-          />,
-        )}
+          />
+        ))}
       </MemList>
     </div>
   );

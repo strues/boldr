@@ -40,36 +40,28 @@ const print = (level, text) => {
       depth: 15,
     });
   }
-};
-// Printing any statements
+}; // Printing any statements
 const log = text => {
   logger.log(text);
-};
-// Starting a process
+}; // Starting a process
 const start = text => {
   print('start', text);
-};
-// Ending a process
+}; // Ending a process
 const end = text => {
   print('end', text);
-};
-// Tasks within a process
+}; // Tasks within a process
 const task = text => {
   print('task', text);
-};
-// Info about a process task
+}; // Info about a process task
 const info = text => {
   print('info', text);
-};
-// takes optional data // Verbose output
+}; // takes optional data // Verbose output
 const debug = (text, data) => {
   print('debug', text, data);
-};
-// Warn output
+}; // Warn output
 const warn = (text, data) => {
   print('warn', text, data);
-};
-// takes an optional error // Error output
+}; // takes an optional error // Error output
 const error = (text, err) => {
   print('error', text, err);
 };

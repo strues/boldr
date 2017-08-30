@@ -20,11 +20,12 @@ const defaultOptions = {
   'print-width': 100,
   'bracket-spacing': true,
   'jsx-bracket-same-line': true,
+  parser: 'babylon',
 };
 const config = {
   default: {
     patterns: ['internal/**/*.js', 'packages/**/src/**/*.js', 'packages/**/internal/*.js'],
-    ignore: ['**/node_modules/**'],
+    ignore: ['**/node_modules/**', 'packages/**/lib/**', '**/flow-typed/**', '**/build/**'],
   },
 };
 

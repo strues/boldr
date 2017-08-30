@@ -28,14 +28,14 @@ class ArticleList extends React.PureComponent<Props, *> {
       <div>
         <ArticleListHead />
         <List>
-          {this.props.articles.map(article =>
+          {this.props.articles.map(article => (
             <ArticleListItem
               key={article.id}
               article={article}
               onArticleClick={this.props.handleClick}
               onDeleteClick={this.props.onDeleteClick}
-            />,
-          )}
+            />
+          ))}
         </List>
       </div>
     );

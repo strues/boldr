@@ -163,7 +163,10 @@ class User extends BaseModel {
   }
 
   static getUserByUsername(username) {
-    return User.query().where({ username }).eager('[roles,socialMedia]').then(x => x[0]);
+    return User.query()
+      .where({ username })
+      .eager('[roles,socialMedia]')
+      .then(x => x[0]);
   }
 
   static getUsers() {
@@ -171,11 +174,16 @@ class User extends BaseModel {
   }
 
   static getUserById(id) {
-    return User.query().findById(id).eager('[roles,socialMedia]');
+    return User.query()
+      .findById(id)
+      .eager('[roles,socialMedia]');
   }
 
   static getUserByEmail(email) {
-    return User.query().where({ email }).eager('[roles,socialMedia]').then(x => x[0]);
+    return User.query()
+      .where({ email })
+      .eager('[roles,socialMedia]')
+      .then(x => x[0]);
   }
 
   fullName() {

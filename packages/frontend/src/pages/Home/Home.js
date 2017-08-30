@@ -19,12 +19,12 @@ function Home() {
     <div>
       <Helmet title="Home" />
       <HomeHero>
-        <Headline type="h1">Meet Boldr.</Headline>
+        <Headline type="h1" text="Meet Boldr." />
       </HomeHero>
       <Grid>
         <Row>
           <Col xs={12} md={4}>
-            <Headline type="h2">Placeholder 12</Headline>
+            <Headline type="h2" text="Placeholder 1" />
             <Paragraph>
               This proposal introduces an Observable type to the ECMAScript standard library. The
               Observable type can be used to model push-based data sources such as DOM events, timer
@@ -32,7 +32,7 @@ function Home() {
             </Paragraph>
           </Col>
           <Col xs={12} md={4}>
-            <Headline type="h2">Placeholder 2</Headline>
+            <Headline type="h2" text="Placeholder 2" />
             <Paragraph>
               The iterator interface (introduced in ECMAScript 2015) is a sequential data access
               protocol which enables the development of generic and composable data consumers and
@@ -42,7 +42,7 @@ function Home() {
             </Paragraph>
           </Col>
           <Col xs={12} md={4}>
-            <Headline type="h2">Placeholder 3</Headline>
+            <Headline type="h2" text="Placeholder 3" />
             <Paragraph>
               In ECMAScript, a realm consists of a global object and an associated set of primordial
               objects -- mutable objects like Array.prototype that must exist before any code runs.

@@ -19,7 +19,7 @@ export const ColorModal = styled.div`
   padding: 15px;
   background-color: ${props => props.theme.palette.primary3};
   border-radius: 3px;
-  box-shadow: 2px 10px 30px rgba(#000, .3);
+  box-shadow: 2px 10px 30px rgba(#000, 0.3);
 `;
 ColorModal.defaultProps = {
   theme: {

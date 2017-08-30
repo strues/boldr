@@ -169,7 +169,11 @@ describe('addLineBreakRemovingSelection test suite', () => {
     });
     editorState = EditorState.acceptSelection(editorState, updatedSelection);
     editorState = addLineBreakRemovingSelection(editorState);
-    expect(getAllBlocks(editorState).get(1).get('text')).toEqual('tes\nng2');
+    expect(
+      getAllBlocks(editorState)
+        .get(1)
+        .get('text'),
+    ).toEqual('tes\nng2');
   });
 });
 

@@ -81,7 +81,7 @@ class ColorPickerLayout extends React.Component<Props, State> {
           </ColorModalLabel>
         </ColorHeader>
         <ColorOptions>
-          {colors.map((color, index) =>
+          {colors.map((color, index) => (
             <Option
               value={color}
               key={index}
@@ -89,8 +89,8 @@ class ColorPickerLayout extends React.Component<Props, State> {
               onClick={this.onChange}
               isDark>
               <span style={{ backgroundColor: color }} className="be-colorpicker__cube" />
-            </Option>,
-          )}
+            </Option>
+          ))}
         </ColorOptions>
       </ColorModal>
     );

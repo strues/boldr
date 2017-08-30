@@ -47,7 +47,7 @@ class Media extends React.Component<Props, *> {
             <Headline type="h2">Media Gallery</Headline>
             <Row>
               <MediaList>
-                {media.map(m =>
+                {media.map(m => (
                   <MediaItem key={m.id}>
                     <ImageDisplay
                       onRemoveImage={deleteMedia(m.id)}
@@ -57,8 +57,8 @@ class Media extends React.Component<Props, *> {
                       // $FlowIssue
                       imageSrc={`${process.env.API_URL}/uploads/media/${m.thumbName}`}
                     />
-                  </MediaItem>,
-                )}
+                  </MediaItem>
+                ))}
               </MediaList>
             </Row>
           </Col>

@@ -16,7 +16,9 @@ export default {
       },
     },
     async resolve(_, { id, input }) {
-      const payload = await Setting.query().findById(id).patchAndFetch(input);
+      const payload = await Setting.query()
+        .findById(id)
+        .patchAndFetch(input);
       return payload;
     },
   },

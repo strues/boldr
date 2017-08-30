@@ -12,8 +12,9 @@ type Props = {
   getUserByUsername: User,
 };
 
-const Profile = ({ loading, error, getUserByUsername }: Props) =>
-  <UniversalProfile isLoading={loading} error={error} profile={getUserByUsername} />;
+const Profile = ({ loading, error, getUserByUsername }: Props) => (
+  <UniversalProfile isLoading={loading} error={error} profile={getUserByUsername} />
+);
 
 // $FlowIssue
 export default graphql(PROFILE_QUERY, {

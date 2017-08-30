@@ -59,7 +59,9 @@ const ArticleType = new GraphQLObjectType({
       description: 'Tags relating articles together',
       // eslint-disable-next-line
       resolve(_, args, ctx) {
-        return Article.query().findById(_.id).then(result => result.$relatedQuery('tags'));
+        return Article.query()
+          .findById(_.id)
+          .then(result => result.$relatedQuery('tags'));
       },
     },
     media: {

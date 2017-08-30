@@ -77,7 +77,9 @@ const UserType = new GraphQLObjectType({
       description: 'Roles the user belongs to.',
       // eslint-disable-next-line
       resolve(user, args, ctx) {
-        return User.query().findById(user.id).then(result => result.$relatedQuery('roles'));
+        return User.query()
+          .findById(user.id)
+          .then(result => result.$relatedQuery('roles'));
       },
     },
     socialMedia: {
@@ -85,7 +87,9 @@ const UserType = new GraphQLObjectType({
       description: 'Social media profiles of the user.',
       // eslint-disable-next-line
       resolve(user, args, ctx) {
-        return User.query().findById(user.id).then(result => result.$relatedQuery('socialMedia'));
+        return User.query()
+          .findById(user.id)
+          .then(result => result.$relatedQuery('socialMedia'));
       },
     },
     articles: {
@@ -93,7 +97,9 @@ const UserType = new GraphQLObjectType({
       description: 'Articles the user has written',
       // eslint-disable-next-line
       resolve(user, args, ctx) {
-        return User.query().findById(user.id).then(result => result.$relatedQuery('articles'));
+        return User.query()
+          .findById(user.id)
+          .then(result => result.$relatedQuery('articles'));
       },
     },
     uploads: {
@@ -101,7 +107,9 @@ const UserType = new GraphQLObjectType({
       description: 'Articles the user has written',
       // eslint-disable-next-line
       resolve(user, args, ctx) {
-        return User.query().findById(user.id).then(result => result.$relatedQuery('uploads'));
+        return User.query()
+          .findById(user.id)
+          .then(result => result.$relatedQuery('uploads'));
       },
     },
     verificationToken: {
@@ -119,7 +127,9 @@ const UserType = new GraphQLObjectType({
       description: 'Password reset token belonging to the user.',
       // eslint-disable-next-line
       resolve(user, args, ctx) {
-        return User.query().findById(user.id).then(result => result.$relatedQuery('resetToken'));
+        return User.query()
+          .findById(user.id)
+          .then(result => result.$relatedQuery('resetToken'));
       },
     },
   }),

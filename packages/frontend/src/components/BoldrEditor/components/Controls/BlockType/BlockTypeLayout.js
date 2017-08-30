@@ -55,15 +55,15 @@ class BlockTypeLayout extends React.PureComponent<Props, *> {
     const { onChange, currentState: { blockType } } = this.props;
     return (
       <BlockWrapper>
-        {blocks.map(block =>
+        {blocks.map(block => (
           <Option
             key={block.id}
             value={block.label}
             active={blockType === block.label}
             onClick={onChange}>
             {block.icon}
-          </Option>,
-        )}
+          </Option>
+        ))}
       </BlockWrapper>
     );
   }

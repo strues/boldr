@@ -27,14 +27,14 @@ const DetailsList = styled.ul`
 
 const DetailsListItem = styled.li`padding-left: 0;`;
 
-const renderMenuDetails = ({ fields }: Props) =>
+const renderMenuDetails = ({ fields }: Props) => (
   <DetailsList>
     <DetailsListItem>
       <Button kind="secondary" onClick={() => fields.push({})}>
         Add Menu Detail
       </Button>
     </DetailsListItem>
-    {fields.map((items, index) =>
+    {fields.map((items, index) => (
       <DetailsListItem key={index}>
         <IconButton style={{ float: 'right' }} onClick={() => fields.remove(index)}>
           <FontIcon>close</FontIcon>
@@ -42,9 +42,10 @@ const renderMenuDetails = ({ fields }: Props) =>
         <Field id="name" name={`${items}.name`} type="text" component={InputField} label="Name" />
         <Field id="href" name={`${items}.href`} type="text" component={InputField} label="URL" />
         <Field id="icon" name={`${items}.icon`} type="text" component={InputField} label="Icon" />
-      </DetailsListItem>,
-    )}
-  </DetailsList>;
+      </DetailsListItem>
+    ))}
+  </DetailsList>
+);
 let NavigationForm = (props: Props) => {
   // eslint-disable-line
   const { handleSubmit, reset, hasDropdownValue } = props;
@@ -83,11 +84,12 @@ let NavigationForm = (props: Props) => {
         />{' '}
         Dropdown Menu
       </label>
-      {hasDropdownValue === 'true' &&
+      {hasDropdownValue === 'true' && (
         <div>
           <Field id="nav-key" name="key" component={InputField} type="text" label="Key" />
           <FieldArray id="nav-items" name="items" component={renderMenuDetails} />
-        </div>}
+        </div>
+      )}
 
       <div className="form__footer">
         <Button htmlType="submit" style={style} kind="primary">

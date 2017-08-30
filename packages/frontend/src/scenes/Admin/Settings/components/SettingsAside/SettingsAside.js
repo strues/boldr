@@ -29,7 +29,7 @@ const SettingsTitle = styled.div`
 const Label = styled.span`
   font-weight: 600;
   font-size: 1.5em;
-  padding-left: .7em;
+  padding-left: 0.7em;
   line-height: 40px;
 `;
 const SidebarHeader = styled.div`

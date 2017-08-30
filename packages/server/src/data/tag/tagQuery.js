@@ -18,7 +18,10 @@ export default {
       },
     },
     async resolve(_, { limit, offset }) {
-      const tags = await Tag.query().offset(offset).limit(limit).skipUndefined();
+      const tags = await Tag.query()
+        .offset(offset)
+        .limit(limit)
+        .skipUndefined();
       if (!tags) {
         throw errorObj({ _error: 'Unable to find any tags.' });
       }

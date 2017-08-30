@@ -8,7 +8,7 @@ function About() {
   return (
     <div>
       <Helmet title="About" />
-      <Headline type="h1">About</Headline>
+      <Headline type="h1" text="About" />
     </div>
   );
 }

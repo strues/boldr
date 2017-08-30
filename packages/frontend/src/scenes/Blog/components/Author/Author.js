@@ -30,24 +30,16 @@ export type Props = {
 const Author = (props: Props) => {
   const { author } = props;
   const classes = classnames(BASE_ELEMENT, props.className);
-  const authorName = (
-    <Link to={`/profiles/${author.username}`}>
-      {author.username}
-    </Link>
-  );
+  const authorName = <Link to={`/profiles/${author.username}`}>{author.username}</Link>;
   return (
     <div className={classes}>
       <AvatarName>
         <Avatar src={author.avatarUrl} role="presentation" />
       </AvatarName>
       <AvatarName>
-        <Headline type="h3">
-          {authorName}
-        </Headline>
+        <Headline type="h3">{authorName}</Headline>
       </AvatarName>
-      <BioBlock>
-        {author.bio}
-      </BioBlock>
+      <BioBlock>{author.bio}</BioBlock>
     </div>
   );
 };

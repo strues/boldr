@@ -1,9 +1,9 @@
 /* @flow */
-import * as React from 'react';
+import React from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import { Grid, Row, Col } from '@boldr/ui/Layout';
-import type { User } from '../../../types/boldr';
+import type { UserType } from '../../../types/boldr';
 import LoginForm from './LoginForm';
 
 type LoginFormInput = {
@@ -12,7 +12,7 @@ type LoginFormInput = {
 };
 type LoginResponse = {
   token: string,
-  user: User,
+  user: UserType,
 };
 
 type Props = {

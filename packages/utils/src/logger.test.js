@@ -13,15 +13,12 @@ describe('the logger', () => {
     { method: 'end', expectedPrefix: '\n👌  ' },
     { method: 'info', expectedPrefix: '⚡  ' },
   ];
-
   const acceptsTwoArgs = [
     { method: 'warn', expectedPrefix: '⚠️  ' },
     { method: 'error', expectedPrefix: '\n💩  ' },
     { method: 'debug', expectedPrefix: '🐞  ' },
   ];
-
   const createsNewLine = ['start', 'end', 'error'];
-
   [...acceptsOneArg, ...acceptsTwoArgs].forEach(({ method, expectedPrefix }) => {
     it(`logger.${method}: basic usage`, () => {
       const nLogCalls = createsNewLine.includes(method) ? 2 : 1;
@@ -31,7 +28,6 @@ describe('the logger', () => {
       expect(global.console.dir.mock.calls.length).toBe(0);
     });
   });
-
   acceptsOneArg.forEach(({ method, expectedPrefix }) => {
     it(`logger.${method}: can only take one arg`, () => {
       const nLogCalls = createsNewLine.includes(method) ? 2 : 1;

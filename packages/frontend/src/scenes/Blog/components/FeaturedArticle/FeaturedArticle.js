@@ -29,8 +29,8 @@ const Wrapper = styled.section`
   justify-content: space-around;
   width: 100%;
   margin-bottom: 40px;
-  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, .14), 0 1px 10px 0 rgba(0, 0, 0, .12),
-    0 2px 4px -1px rgba(0, 0, 0, .4);
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
+    0 2px 4px -1px rgba(0, 0, 0, 0.4);
   background-color: #fff;
   position: relative;
   ${mediaQuery.small`height: 350px; flex-direction: row;`};
@@ -51,10 +51,10 @@ const PostTitle = styled.h2`
   font-size: 3.2rem;
   margin-top: 200px !important;
   font-weight: 200;
-  letter-spacing: .2em;
+  letter-spacing: 0.2em;
   color: #fff;
-  background: rgba(27, 27, 37, .65);
-  padding: .08em 1rem;
+  background: rgba(27, 27, 37, 0.65);
+  padding: 0.08em 1rem;
   width: 100%;
   box-decoration-break: clone;
 `;
@@ -77,14 +77,10 @@ export const FeaturedArticle = (props: Props) => {
     <div className="boldrui-feat-post">
       <Wrapper>
         <ImgWrapper>
-          <PostTitle>
-            {props.title}
-          </PostTitle>
+          <PostTitle>{props.title}</PostTitle>
         </ImgWrapper>
         <Content>
-          <Paragraph>
-            {props.excerpt}
-          </Paragraph>
+          <Paragraph>{props.excerpt}</Paragraph>
           <Row xsCenter>
             <Link to={`/blog/${props.slug}`}>
               <Button kind="primary" outline>

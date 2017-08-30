@@ -31,9 +31,7 @@ class SettingForm extends React.Component<Props, State> {
     return (
       <Form>
         <FormField>
-          <Label>
-            {this.props.label}
-          </Label>
+          <Label>{this.props.label}</Label>
           <Control>
             <Input
               type="text"

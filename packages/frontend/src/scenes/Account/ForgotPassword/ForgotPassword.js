@@ -11,9 +11,7 @@ type Props = {
   dispatch: Function,
 };
 
-class ForgotPassword extends PureComponent<Props, *> {
-  props: Props;
-
+class ForgotPassword extends PureComponent<Props, void> {
   handleSubmit = values => {
     const { email } = values;
     this.props.dispatch(forgotPassword(email));

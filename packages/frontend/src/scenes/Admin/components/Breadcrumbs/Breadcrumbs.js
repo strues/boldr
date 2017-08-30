@@ -40,13 +40,11 @@ const Breadcrumbs = ({ location }: { location: RouterLocation }) => {
         visibility: crumbs.length < 2 ? 'hidden' : 'inherit',
       }}>
       <Breadcrumb>
-        {crumbs.map(({ breadcrumb, pathname }, index) =>
+        {crumbs.map(({ breadcrumb, pathname }, index) => (
           <LinkContainer to={pathname} key={pathname}>
-            <Breadcrumb.Item active={crumbs.length - 1 === index}>
-              {breadcrumb}
-            </Breadcrumb.Item>
-          </LinkContainer>,
-        )}
+            <Breadcrumb.Item active={crumbs.length - 1 === index}>{breadcrumb}</Breadcrumb.Item>
+          </LinkContainer>
+        ))}
       </Breadcrumb>
     </View>
   );

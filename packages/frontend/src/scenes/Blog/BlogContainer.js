@@ -1,6 +1,6 @@
 // @flow
 
-import * as React from 'react';
+import React from 'react';
 import Route from 'react-router-dom/Route';
 import { flattenRoutes } from '@boldr/core';
 import type { NavRoute, FlattenedRoutes } from '../../types/boldr';
@@ -34,11 +34,7 @@ const routes: Array<NavRoute> = [
 // eslint-disable-next-line
 const BlogContainer = (props: Props) => {
   const flattenedRoutes: FlattenedRoutes = flattenRoutes(routes);
-  return (
-    <div>
-      {flattenedRoutes.map(props => <Route key={props.path} {...props} />)}
-    </div>
-  );
+  return <div>{flattenedRoutes.map(props => <Route key={props.path} {...props} />)}</div>;
 };
 
 export default BlogContainer;

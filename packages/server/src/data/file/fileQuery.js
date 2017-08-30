@@ -18,7 +18,9 @@ export default {
       },
     },
     async resolve(_, { limit, offset }) {
-      const file = await File.query().limit(limit).offset(offset);
+      const file = await File.query()
+        .limit(limit)
+        .offset(offset);
       if (file) {
         return file;
       }

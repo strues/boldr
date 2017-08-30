@@ -26,7 +26,9 @@ export default {
       },
     },
     async resolve(root, { id }) {
-      const contentType = await ContentT.query().findById(id).eager('[entities]');
+      const contentType = await ContentT.query()
+        .findById(id)
+        .eager('[entities]');
       if (!contentType) {
         throw errorObj({ _error: 'Unable to find a contentType.' });
       }

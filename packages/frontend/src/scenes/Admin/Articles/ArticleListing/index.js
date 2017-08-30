@@ -14,8 +14,9 @@ type Props = {
   articles: ArticlesType,
 };
 
-const ArticleListing = ({ loading, error, articles }: Props) =>
-  <UniversalArticles isLoading={loading} error={error} articles={articles} />;
+const ArticleListing = ({ loading, error, articles }: Props) => (
+  <UniversalArticles isLoading={loading} error={error} articles={articles} />
+);
 // $FlowIssue
 export default graphql(ARTICLES_QUERY, {
   // $FlowIssue

@@ -17,7 +17,9 @@ class File extends BaseModel {
     };
   }
   static listFiles(offset, limit) {
-    return File.query().offset(offset).limit(limit);
+    return File.query()
+      .offset(offset)
+      .limit(limit);
   }
 }
 

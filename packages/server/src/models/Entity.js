@@ -30,7 +30,9 @@ class Entity extends BaseModel {
   }
 
   static getEntities(offset, limit) {
-    return Entity.query().offset(offset).limit(limit);
+    return Entity.query()
+      .offset(offset)
+      .limit(limit);
   }
 }
 

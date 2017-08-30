@@ -72,12 +72,8 @@ export default class FontSizeLayout extends Component<Props, State> {
           onExpandEvent={onExpandEvent}
           isSkinny
           title={title}>
-          {currentFontSize
-            ? <span>
-                {currentFontSize}
-              </span>
-            : <img src={icon} alt="" />}
-          {options.map((size, index) =>
+          {currentFontSize ? <span>{currentFontSize}</span> : <img src={icon} alt="" />}
+          {options.map((size, index) => (
             <DropdownOption
               className="be-fontsize__option"
               active={currentFontSize === size}
@@ -86,8 +82,8 @@ export default class FontSizeLayout extends Component<Props, State> {
               highlighted={false}
               key={index}>
               {size}
-            </DropdownOption>,
-          )}
+            </DropdownOption>
+          ))}
         </Dropdown>
       </ControlWrapper>
     );

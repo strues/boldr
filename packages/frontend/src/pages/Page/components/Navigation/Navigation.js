@@ -1,7 +1,7 @@
 /* eslint-disable no-return-assign, react/no-unused-state, no-implicit-coercion */
 // @flow
-import * as React from 'react';
-
+import React from 'react';
+import type { Node } from 'react';
 import Link from 'react-router-dom/Link';
 import NavLink from 'react-router-dom/NavLink';
 
@@ -58,7 +58,7 @@ class Navigation extends React.Component<Props, State> {
     this.props.onLogout();
   };
   props: Props;
-  render() {
+  render(): Node {
     const { menu: { details }, settings, currentUser, location, token } = this.props;
     const { isActive } = this.state;
     return (

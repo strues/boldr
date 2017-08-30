@@ -18,7 +18,9 @@ class ContentT extends BaseModel {
   }
 
   static getGontentTypes(offset, limit) {
-    return ContentT.query().offset(offset).limit(limit);
+    return ContentT.query()
+      .offset(offset)
+      .limit(limit);
   }
 }
 

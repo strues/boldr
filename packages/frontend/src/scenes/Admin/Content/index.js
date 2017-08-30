@@ -12,8 +12,9 @@ type Props = {
 
 const UniversalContent = universal(import('./Content'));
 
-const Content = ({ loading, error, contentTypes }: Props) =>
-  <UniversalContent isLoading={loading} error={error} contentTypes={contentTypes} />;
+const Content = ({ loading, error, contentTypes }: Props) => (
+  <UniversalContent isLoading={loading} error={error} contentTypes={contentTypes} />
+);
 
 // $FlowIssue
 export default graphql(CONTENT_TYPES_QUERY, {

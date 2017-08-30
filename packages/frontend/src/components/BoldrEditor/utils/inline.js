@@ -28,7 +28,10 @@ export function getSelectionInlineStyle(editorState: EditorState): Object {
   const currentSelection = editorState.getSelection();
   if (currentSelection.isCollapsed) {
     const inlineStyles = {};
-    const styleList = editorState.getCurrentInlineStyle().toList().toJS();
+    const styleList = editorState
+      .getCurrentInlineStyle()
+      .toList()
+      .toJS();
     if (styleList) {
       [
         'BOLD',

@@ -1,6 +1,6 @@
 /* @flow */
 
-import * as React from 'react';
+import React from 'react';
 import Route from 'react-router-dom/Route';
 import { flattenRoutes } from '@boldr/core';
 import type { FlattenedRoutes } from '../../types/boldr';
@@ -12,11 +12,7 @@ type Props = {
 // eslint-disable-next-line
 const AccountContainer = (props: Props) => {
   const flattenedRoutes: FlattenedRoutes = flattenRoutes(routes);
-  return (
-    <div>
-      {flattenedRoutes.map(props => <Route key={props.path} {...props} />)}
-    </div>
-  );
+  return <div>{flattenedRoutes.map(props => <Route key={props.path} {...props} />)}</div>;
 };
 
 export default AccountContainer;

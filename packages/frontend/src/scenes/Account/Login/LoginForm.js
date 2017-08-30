@@ -1,5 +1,5 @@
 /* @flow */
-import * as React from 'react';
+import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Link from 'react-router-dom/Link';
 import styled from 'styled-components';

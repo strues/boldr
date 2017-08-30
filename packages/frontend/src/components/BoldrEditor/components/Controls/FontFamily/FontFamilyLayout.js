@@ -73,14 +73,12 @@ class FontFamilyLayout extends React.Component<Props, State> {
           doCollapse={doCollapse}
           onExpandEvent={onExpandEvent}
           title={title}>
-          <FamilyPlaceholder>
-            {currentFontFamily || 'Font Family'}
-          </FamilyPlaceholder>
-          {options.map((family, index) =>
+          <FamilyPlaceholder>{currentFontFamily || 'Font Family'}</FamilyPlaceholder>
+          {options.map((family, index) => (
             <DropdownOption active={currentFontFamily === family} value={family} key={index}>
               {family}
-            </DropdownOption>,
-          )}
+            </DropdownOption>
+          ))}
         </Dropdown>
       </ControlWrapper>
     );

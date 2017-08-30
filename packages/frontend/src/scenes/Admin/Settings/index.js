@@ -14,8 +14,9 @@ type Props = {
   settings: Array<Object>,
 };
 
-const Settings = ({ loading, error, settings }: Props) =>
-  <UniversalSettings isLoading={loading} error={error} settings={settings} />;
+const Settings = ({ loading, error, settings }: Props) => (
+  <UniversalSettings isLoading={loading} error={error} settings={settings} />
+);
 // $FlowIssue
 export default graphql(SETTINGS_QUERY, {
   // $FlowIssue

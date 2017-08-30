@@ -224,11 +224,20 @@ export default function createWebpackConfig(
     context: ROOT,
     bail: !_IS_DEV_,
     externals: _IS_SERVER_ ? serverExternals : undefined,
-    node: {
-      console: true,
-      __filename: true,
-      __dirname: true,
-    },
+    node: _IS_CLIENT_
+      ? {
+          console: true,
+          __filename: true,
+          __dirname: true,
+        }
+      : {
+          Buffer: false,
+          __dirname: false,
+          __filename: false,
+          console: false,
+          global: true,
+          process: false,
+        },
     performance: _IS_DEV_
       ? false
       : {

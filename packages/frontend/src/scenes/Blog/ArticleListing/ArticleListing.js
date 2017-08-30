@@ -19,13 +19,13 @@ class ArticleListing extends PureComponent<Props, *> {
   renderArticles = () => {
     const { articles } = this.props;
     const allArticles = articles.filter(p => p.published) && articles.filter(p => !p.featured);
-    return allArticles.map(article =>
+    return allArticles.map(article => (
       <Col key={article.id} xs={12} md={4}>
         <CardSpacer>
           <ArticleCard article={article} tags={article.tags} />
         </CardSpacer>
-      </Col>,
-    );
+      </Col>
+    ));
   };
 
   renderFeature = () => {
@@ -39,9 +39,7 @@ class ArticleListing extends PureComponent<Props, *> {
       <Grid fluid={false}>
         <div className="boldrui-pad-top">
           {this.renderFeature()}
-          <Row>
-            {this.renderArticles()}
-          </Row>
+          <Row>{this.renderArticles()}</Row>
         </div>
       </Grid>
     );

@@ -14,8 +14,9 @@ type Props = {
   match: MatchParams,
 };
 
-const TagList = ({ loading, error, match, getArticlesForTag }: Props) =>
-  <UniversalTagList isLoading={loading} error={error} match={match} articles={getArticlesForTag} />;
+const TagList = ({ loading, error, match, getArticlesForTag }: Props) => (
+  <UniversalTagList isLoading={loading} error={error} match={match} articles={getArticlesForTag} />
+);
 
 // $FlowIssue
 export default graphql(ARTICLES_FOR_TAG, {

@@ -6,12 +6,7 @@ import Container from './Container';
 const position = ['20px', '30px', 'auto', 'auto'];
 const stackNextOn = 'top';
 const children = <p>test</p>;
-const renderComponent = (props = {}) =>
-  shallow(
-    <Container {...props}>
-      {children}
-    </Container>,
-  );
+const renderComponent = (props = {}) => shallow(<Container {...props}>{children}</Container>);
 const mountComponent = (props = {}) => mount(<Container {...props} />);
 
 describe('<Container />', () => {

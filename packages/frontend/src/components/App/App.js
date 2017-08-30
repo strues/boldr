@@ -1,5 +1,5 @@
 /* @flow */
-import * as React from 'react';
+import React from 'react';
 import Helmet from 'react-helmet';
 import Route from 'react-router-dom/Route';
 import Switch from 'react-router-dom/Switch';

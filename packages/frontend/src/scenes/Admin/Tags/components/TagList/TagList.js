@@ -53,32 +53,26 @@ const TagList = (props: Props) => {
   }
   return (
     <List>
-      {props.tags.map(tag =>
+      {props.tags.map(tag => (
         <Link key={tag.id} to={`/admin/tags/${tag.name}`}>
           <ListItem>
             <InnerList>
               <InnerListItem>
-                <TagName>
-                  {tag.name}
-                </TagName>
+                <TagName>{tag.name}</TagName>
               </InnerListItem>
               <InnerListItem>
-                <TagDesc>
-                  {tag.description}
-                </TagDesc>
+                <TagDesc>{tag.description}</TagDesc>
               </InnerListItem>
               <InnerListItem>
-                <TagDesc>
-                  {tag.articles.length}
-                </TagDesc>
+                <TagDesc>{tag.articles.length}</TagDesc>
               </InnerListItem>
               <InnerListItem>
                 <Icon kind="trash" color="#222" size="24" onClick={() => handleClickDelete(tag)} />
               </InnerListItem>
             </InnerList>
           </ListItem>
-        </Link>,
-      )}
+        </Link>
+      ))}
     </List>
   );
 };

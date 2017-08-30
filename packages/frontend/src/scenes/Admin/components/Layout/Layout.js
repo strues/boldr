@@ -18,9 +18,7 @@ function Layout(props: Props) {
         <Navigation location={props.location} />
       </HeroHeader>
       <HeroBody>
-        <DashboardMain>
-          {props.children}
-        </DashboardMain>
+        <DashboardMain>{props.children}</DashboardMain>
       </HeroBody>
       <HeroFooter>
         <DashboardFooter />

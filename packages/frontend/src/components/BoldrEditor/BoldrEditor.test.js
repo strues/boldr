@@ -5,7 +5,11 @@ import BoldrEditor from './BoldrEditor';
 
 describe('<BoldrEditor />', () => {
   it('should be wrapped in a div', () => {
-    expect(shallow(<BoldrEditor />).html().startsWith('<div')).toBe(true);
+    expect(
+      shallow(<BoldrEditor />)
+        .html()
+        .startsWith('<div'),
+    ).toBe(true);
   });
 
   it('editorState should be found in the component state', () => {

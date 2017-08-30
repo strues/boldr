@@ -19,14 +19,18 @@ const TagType = new GraphQLObjectType({
       type: new GraphQLList(ArticleType),
       description: 'Articles related to the tag',
       resolve(_) {
-        return Tag.query().findById(_.id).then(result => result.$relatedQuery('articles'));
+        return Tag.query()
+          .findById(_.id)
+          .then(result => result.$relatedQuery('articles'));
       },
     },
     entities: {
       type: new GraphQLList(EntityType),
       description: 'Entities related to the tag',
       resolve(_) {
-        return Tag.query().findById(_.id).then(result => result.$relatedQuery('entities'));
+        return Tag.query()
+          .findById(_.id)
+          .then(result => result.$relatedQuery('entities'));
       },
     },
     ...dateCUD,

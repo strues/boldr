@@ -36,14 +36,19 @@ export default {
         userId: context.user.id,
       });
       args.input.tags.map(async tag => {
-        const existingTag = await Tag.query().where('name', tag).first();
+        const existingTag = await Tag.query()
+          .where('name', tag)
+          .first();
         if (existingTag) {
           await ArticleTag.query().insert({
             tagId: existingTag.id,
             articleId: newArticle.id,
           });
         } else {
-          await newArticle.$relatedQuery('tags').insert({ name: tag }).skipUndefined();
+          await newArticle
+            .$relatedQuery('tags')
+            .insert({ name: tag })
+            .skipUndefined();
         }
       });
       // const relatedFeatureImg = await Media.query()

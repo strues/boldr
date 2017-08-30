@@ -14,7 +14,7 @@ export const EmbeddedModal = styled.div`
   color: #f1f1f1;
   background-color: #243140;
   border-radius: 3px;
-  box-shadow: 2px 10px 30px rgba(#000, .3);
+  box-shadow: 2px 10px 30px rgba(#000, 0.3);
 `;
 
 export const EmbeddedHeader = styled.span`

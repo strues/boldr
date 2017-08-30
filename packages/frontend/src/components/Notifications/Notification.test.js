@@ -11,19 +11,9 @@ const testProps = {
   animationEasing: 'ease',
 };
 const children = <p>test</p>;
-const renderComponent = (props = {}) =>
-  shallow(
-    <Notification {...props}>
-      {children}
-    </Notification>,
-  );
+const renderComponent = (props = {}) => shallow(<Notification {...props}>{children}</Notification>);
 
-const mountComponent = (props = {}) =>
-  mount(
-    <Notification {...props}>
-      {children}
-    </Notification>,
-  );
+const mountComponent = (props = {}) => mount(<Notification {...props}>{children}</Notification>);
 
 describe('<Notification />', () => {
   it('should render <div> tag', () => {

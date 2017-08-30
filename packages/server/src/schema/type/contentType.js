@@ -23,7 +23,9 @@ const ContentType = new GraphQLObjectType({
       type: new GraphQLList(EntityType),
       description: 'Articles related to the tag',
       resolve(_) {
-        return ContentT.query().findById(_.id).then(result => result.$relatedQuery('entities'));
+        return ContentT.query()
+          .findById(_.id)
+          .then(result => result.$relatedQuery('entities'));
       },
     },
     ...dateCUD,

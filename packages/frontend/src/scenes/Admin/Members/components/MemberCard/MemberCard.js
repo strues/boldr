@@ -55,18 +55,12 @@ const MemberCard = (props: Props) => {
           <UserInfoListItem>
             <Avatar src={avatarUrl} role="presentation" />
           </UserInfoListItem>
-          <UserInfoListItem>
-            {username}
-          </UserInfoListItem>
-          <UserInfoListItem>
-            {roleName}
-          </UserInfoListItem>
+          <UserInfoListItem>{username}</UserInfoListItem>
+          <UserInfoListItem>{roleName}</UserInfoListItem>
           <UserInfoListItem>
             {firstName} {lastName}
           </UserInfoListItem>
-          <UserInfoListItem>
-            {email}
-          </UserInfoListItem>
+          <UserInfoListItem>{email}</UserInfoListItem>
         </UserInfoList>
       </LeftSide>
       <RightSide>

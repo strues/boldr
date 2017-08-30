@@ -21,7 +21,10 @@ export default {
     },
     // eslint-disable-next-line
     async resolve(_, { offset, limit }, context) {
-      const entities = await Entity.query().offset(offset).limit(limit).skipUndefined();
+      const entities = await Entity.query()
+        .offset(offset)
+        .limit(limit)
+        .skipUndefined();
       if (entities) {
         return entities;
       }

@@ -13,7 +13,9 @@ export default {
       },
     },
     async resolve(_, args) {
-      const payload = await Tag.query().insert(args.input).returning('*');
+      const payload = await Tag.query()
+        .insert(args.input)
+        .returning('*');
       return payload;
     },
   },

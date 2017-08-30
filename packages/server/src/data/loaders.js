@@ -19,28 +19,60 @@ function mapTo(ids, keyFn, type, rows) {
 export default {
   create: () => ({
     users: new DataLoader(ids =>
-      db.table('user').whereIn('id', ids).select('*').then(mapTo(ids, x => x.id, 'User')),
+      db
+        .table('user')
+        .whereIn('id', ids)
+        .select('*')
+        .then(mapTo(ids, x => x.id, 'User')),
     ),
     roles: new DataLoader(ids =>
-      db.table('roles').whereIn('id', ids).select('*').then(mapTo(ids, x => x.id, 'Role')),
+      db
+        .table('roles')
+        .whereIn('id', ids)
+        .select('*')
+        .then(mapTo(ids, x => x.id, 'Role')),
     ),
     articles: new DataLoader(ids =>
-      db.table('articles').whereIn('id', ids).select('*').then(mapTo(ids, x => x.id, 'Article')),
+      db
+        .table('articles')
+        .whereIn('id', ids)
+        .select('*')
+        .then(mapTo(ids, x => x.id, 'Article')),
     ),
     tags: new DataLoader(ids =>
-      db.table('tags').whereIn('id', ids).select('*').then(mapTo(ids, x => x.id, 'Tag')),
+      db
+        .table('tags')
+        .whereIn('id', ids)
+        .select('*')
+        .then(mapTo(ids, x => x.id, 'Tag')),
     ),
     media: new DataLoader(ids =>
-      db.table('media').whereIn('id', ids).select('*').then(mapTo(ids, x => x.id, 'Media')),
+      db
+        .table('media')
+        .whereIn('id', ids)
+        .select('*')
+        .then(mapTo(ids, x => x.id, 'Media')),
     ),
     settings: new DataLoader(ids =>
-      db.table('setting').whereIn('id', ids).select('*').then(mapTo(ids, x => x.id, 'Setting')),
+      db
+        .table('setting')
+        .whereIn('id', ids)
+        .select('*')
+        .then(mapTo(ids, x => x.id, 'Setting')),
     ),
     pages: new DataLoader(ids =>
-      db.table('page').whereIn('id', ids).select('*').then(mapTo(ids, x => x.id, 'Page')),
+      db
+        .table('page')
+        .whereIn('id', ids)
+        .select('*')
+        .then(mapTo(ids, x => x.id, 'Page')),
     ),
     menus: new DataLoader(ids =>
-      db.table('menu').whereIn('id', ids).select('*').then(mapTo(ids, x => x.id, 'Menu')),
+      db
+        .table('menu')
+        .whereIn('id', ids)
+        .select('*')
+        .then(mapTo(ids, x => x.id, 'Menu')),
     ),
     details: new DataLoader(ids =>
       db

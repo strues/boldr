@@ -15,8 +15,9 @@ type Props = {
   getMedia: MediasType,
 };
 
-const Media = ({ loading, error, getMedia }: Props) =>
-  <UniversalMedia isLoading={loading} error={error} media={getMedia} />;
+const Media = ({ loading, error, getMedia }: Props) => (
+  <UniversalMedia isLoading={loading} error={error} media={getMedia} />
+);
 
 // $FlowIssue
 export default graphql(MEDIA_QUERY, {

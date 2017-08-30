@@ -56,13 +56,17 @@ const EntityType = new GraphQLObjectType({
       description: 'Tags relating articles together',
       // eslint-disable-next-line
       resolve(_, args, ctx) {
-        return Entity.query().findById(_.id).then(result => result.$relatedQuery('tags'));
+        return Entity.query()
+          .findById(_.id)
+          .then(result => result.$relatedQuery('tags'));
       },
     },
     contentType: {
       type: ContentType,
       resolve(_, args, ctx) {
-        return Entity.query().findById(_.id).then(result => result.$relatedQuery('contentType'));
+        return Entity.query()
+          .findById(_.id)
+          .then(result => result.$relatedQuery('contentType'));
       },
     },
 
