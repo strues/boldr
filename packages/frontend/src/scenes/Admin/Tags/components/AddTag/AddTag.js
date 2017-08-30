@@ -40,7 +40,7 @@ class AddTag extends React.Component<Props, *> {
     const { handleSubmit, reset, submitting, pristine } = this.props;
     return (
       <TagFormPanel>
-        <Headline type="h3">Add a New Tag</Headline>
+        <Headline type="h3" text="Add a New Tag" />
         <Form className="boldr-form__addtag" onSubmit={handleSubmit(this.addTagMutation)}>
           <Field id="tag-name" name="name" component={TextFormField} type="text" label="Name" />
           <Field

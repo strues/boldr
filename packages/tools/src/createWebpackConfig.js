@@ -5,7 +5,7 @@ import fs from 'fs-extra';
 import webpack from 'webpack';
 import WriteFilePlugin from 'write-file-webpack-plugin';
 import ExtractCssChunks from 'extract-css-chunks-webpack-plugin';
-
+import getConfig from '@boldr/config';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import SriPlugin from 'webpack-subresource-integrity';
 import UglifyPlugin from 'uglifyjs-webpack-plugin';
@@ -32,6 +32,8 @@ import {
   UGLIFY_OPTIONS,
 } from './constants';
 
+const config = getConfig();
+console.log(config);
 dotenv.config();
 
 function resolveOwn(relativePath) {
@@ -58,15 +60,14 @@ const defaults = {
 };
 
 const ROOT = appRoot.get();
-const SERVER_ENTRY = path.resolve(ROOT, 'src/serverEntry.js');
-const CLIENT_ENTRY = path.resolve(ROOT, 'src/clientEntry.js');
-const CLIENT_VENDOR = path.resolve(ROOT, 'src/vendor.js');
+const SERVER_ENTRY = path.resolve(ROOT, config.paths.entry.server);
+const CLIENT_ENTRY = path.resolve(ROOT, config.paths.entry.client);
+const CLIENT_VENDOR = path.resolve(ROOT, config.paths.vendor);
 const PROJECT_SRC = path.resolve(ROOT, 'src');
-// $FlowIssue
-const SERVER_OUTPUT = path.resolve(ROOT, process.env.SERVER_OUTPUT);
-// $FlowIssue
-const CLIENT_OUTPUT = path.resolve(ROOT, process.env.CLIENT_OUTPUT);
-const PUBLIC_PATH = process.env.PUBLIC_PATH;
+const SERVER_OUTPUT = path.resolve(ROOT, config.paths.output.server);
+const CLIENT_OUTPUT = path.resolve(ROOT, config.paths.output.client);
+const PUBLIC_PATH = config.paths.publicPath;
+
 const GRAPHQL_ENDPOINT = process.env.GRAPHQL_ENDPOINT;
 const API_URL = process.env.API_URL;
 const API_PREFIX = process.env.API_PREFIX;

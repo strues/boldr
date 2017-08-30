@@ -8,7 +8,7 @@
   ],
   "scripts": {
     "build": "rm -rf lib && NODE_ENV=production babel src --out-dir lib",
-    "dev": "NODE_ENV=development DEBUG=boldr:server:* babel-watch src/index.js",
+    "dev": "NODE_ENV=development DEBUG=boldr:* babel-watch src/index.js",
     "migrate": "DATABASE_URL=postgres://postgres:password@localhost:5432/boldr node --harmony internal/scripts/db.js migrate",
     "migration": "DATABASE_URL=postgres://postgres:password@localhost:5432/boldr node --harmony internal/scripts/db.js migration",
     "seed": "DATABASE_URL=postgres://postgres:password@localhost:5432/boldr node --harmony internal/scripts/db.js seed",
@@ -37,6 +37,7 @@
     "url": "https://github.com/strues/boldr/issues"
   },
   "dependencies": {
+    "@boldr/config": "^0.1.0-alpha.1",
     "@boldr/utils": "^0.1.0-rc.5",
     "bcryptjs": "^2.4.3",
     "bluebird": "^3.5.0",
@@ -87,7 +88,7 @@
     "babel-preset-env": "^1.6.0",
     "babel-watch": "^2.0.7",
     "eslint": "4.5.0",
-    "eslint-config-boldr": "0.12.9",
+    "eslint-config-boldr": "0.12.10",
     "fast-async": "^6.3.0",
     "prettier": "^1.6.1"
   }

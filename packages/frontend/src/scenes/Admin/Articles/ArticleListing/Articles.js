@@ -1,6 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 /* @flow */
-import * as React from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import type { Connector } from 'react-redux';
 import Helmet from 'react-helmet';
@@ -19,7 +19,6 @@ export type Props = {
 };
 
 class Articles extends React.Component<Props, *> {
-  props: Props;
   handleClick = article => {
     this.props.setArticle(article);
   };

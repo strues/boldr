@@ -1,6 +1,5 @@
 export { default as wrapBoldrApp } from './shared/wrapBoldrApp';
-export { setPath, replacePath } from './shared/RouterConnection';
-export { default as RouterConnection } from './shared/RouterConnection';
+
 export { getToken, parseJWT, setToken, removeToken } from './shared/token';
 export { default as createApolloClient } from './apollo/createApolloClient';
 export { default as flattenRoutes } from './util/flattenRoutes';

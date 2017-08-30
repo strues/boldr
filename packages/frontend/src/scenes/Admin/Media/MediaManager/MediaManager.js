@@ -62,7 +62,7 @@ class MediaManager extends React.Component<Props, *> {
               <Col xs={8}>
                 <MediaFormCard>
                   <Block>
-                    <Headline type="h2">Edit media attributes</Headline>
+                    <Headline type="h2" text="Edit media attributes" />
                     <MediaForm initialValues={media} onSubmit={this.handleSubmit} />
                   </Block>
                 </MediaFormCard>

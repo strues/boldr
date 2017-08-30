@@ -1,15 +1,10 @@
 /* eslint-disable prefer-destructuring, no-underscore-dangle, new-cap */
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
-import BrowserRouter from 'react-router-dom/BrowserRouter';
+import { getToken, createApolloClient, createBoldrStore, wrapBoldrApp } from '@boldr/core';
+import { ConnectedRouter } from 'react-router-redux';
 
-import {
-  getToken,
-  createApolloClient,
-  createBoldrStore,
-  RouterConnection,
-  wrapBoldrApp,
-} from '@boldr/core';
+import createHistory from 'history/createBrowserHistory';
 import { checkAuth } from './scenes/Account/state/actions';
 import App from './components/App';
 import appReducer from './reducers';
@@ -30,22 +25,20 @@ export const apolloClient = createApolloClient({
     authorization: `Bearer ${token}`,
   },
 });
-
+const history = createHistory();
 // Create the redux store by passing the "main" reducer, preloadedState, the Apollo Client
 // and env. Passing either 'development' or 'production' (env) includes/excludes
 // reduxDevTools, etc
-const reduxStore = createBoldrStore(appReducer, preloadedState, apolloClient);
+const reduxStore = createBoldrStore(history, appReducer, preloadedState, apolloClient);
 
 if (token) {
   // Update application state. User has token and is probably authenticated
   reduxStore.dispatch(checkAuth(token));
 }
 const AppComponent = PassedApp => (
-  <BrowserRouter>
-    <RouterConnection>
-      <ThemeProvider>{PassedApp}</ThemeProvider>
-    </RouterConnection>
-  </BrowserRouter>
+  <ConnectedRouter history={history}>
+    <ThemeProvider>{PassedApp}</ThemeProvider>
+  </ConnectedRouter>
 );
 
 if (process.env.NODE_ENV !== 'production') {

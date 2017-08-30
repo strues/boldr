@@ -4,7 +4,7 @@ import * as React from 'react';
 import Helmet from 'react-helmet';
 import { graphql, gql, compose } from 'react-apollo';
 import { bindActionCreators } from 'redux';
-import { replacePath } from '@boldr/core';
+import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { ImageDisplay, Col, Row, Headline } from '@boldr/ui';
@@ -44,7 +44,7 @@ class Media extends React.Component<Props, *> {
         <Helmet title="Media" />
         <Row>
           <Col xs={12}>
-            <Headline type="h2">Media Gallery</Headline>
+            <Headline type="h2" text="Media Gallery" />
             <Row>
               <MediaList>
                 {media.map(m => (
@@ -69,7 +69,7 @@ class Media extends React.Component<Props, *> {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ navigate: url => dispatch(replacePath(url)) }, dispatch);
+  return bindActionCreators({ navigate: url => dispatch(push(url)) }, dispatch);
 }
 
 export default compose(

@@ -4,6 +4,7 @@
   "npmClient": "npm",
   "packages": [
     "packages/cli",
+    "packages/config",
     "packages/core",
     "packages/frontend",
     "packages/server",

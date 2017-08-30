@@ -18,7 +18,10 @@
   "main:es2015": "lib/boldr-core.node.cjs.js",
   "module:es2015": "lib/boldr-core.node.esm.js",
   "browser:es2015": "lib/boldr-core.browser.esm.js",
-  "files": ["index.js", "lib"],
+  "files": [
+    "index.js",
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/strues/boldr.git"
@@ -26,8 +29,7 @@
   "scripts": {
     "build": "rimraf lib && NODE_ENV=production prepublish --target-unstable",
     "clean": "rimraf lib && rimraf es",
-    "format":
-      "prettier --single-quote=true --jsx-bracket-same-line=false --trailing-comma=all --print-width=100 --write \"src/**/*.js\"",
+    "format": "prettier --single-quote=true --jsx-bracket-same-line=false --trailing-comma=all --print-width=100 --write \"src/**/*.js\"",
     "prepare": "rimraf lib && NODE_ENV=production prepublish --target-unstable",
     "test": "jest"
   },
@@ -36,15 +38,15 @@
     "invariant": "^2.2.2",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.17.4",
-    "redux-thunk": "^2.2.0",
     "node-fetch": "^1.7.2",
     "prop-types": "^15.5.10",
-    "redux-immutable-state-invariant": "^2.0.0"
+    "redux-immutable-state-invariant": "^2.0.0",
+    "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
     "babel-preset-boldr": "0.11.0",
     "eslint": "4.5.0",
-    "eslint-config-boldr": "0.12.9",
+    "eslint-config-boldr": "0.12.10",
     "fast-async": "^6.3.0",
     "prepublish": "^1.4.1",
     "prettier": "1.6.1",
@@ -52,6 +54,7 @@
     "redux-mock-store": "^1.2.3",
     "react": "^15.6.1",
     "react-apollo": "^1.4.15",
+    "react-router-redux": "^5.0.0-alpha.6",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
@@ -62,6 +65,7 @@
     "react-apollo": "^1.4.15",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
+    "react-router-redux": "^5.0.0-alpha.6",
     "redux": "^3.7.2",
     "react-universal-component": "2.5.1"
   }

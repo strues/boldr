@@ -37,6 +37,7 @@ module.exports = {
     '!packages/core/src/client.js',
     '!packages/core/src/common.js',
     '!packages/core/src/server.js',
+    '!packages/config',
     '!packages/frontend/src/clientEntry.js',
     '!packages/frontend/src/serverEntry.js',
     '!packages/frontend/src/vendor.js',

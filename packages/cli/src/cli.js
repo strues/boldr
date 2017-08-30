@@ -6,11 +6,13 @@ import {
   startRenderServer,
   buildClient,
   buildServer,
-  startDevServer,
 } from '@boldr/tools';
 
 import pkg from '../package.json';
-import { createLogger, printHeader } from './util/logger';
+import clean from './commands/clean';
+import dev from './commands/dev';
+import migrate from './commands/migrate';
+import migration from './commands/migration';
 
 updateNotifier({ pkg }).notify();
 
@@ -20,34 +22,15 @@ program.STRING = value => (typeof value === 'string' ? value : null);
 program
   // default command
   .version(VERSION)
-  .logger(createLogger())
   .description('A command line scaffolding tool and helper for Boldr.');
 
-program
-  .command('develop', 'Start development server')
-  .alias('dev')
-  .action((args, options, logger) => {
-    try {
-      printHeader(logger);
-      startDevServer();
-    } catch (error) {
-      console.log(error);
-      process.exit(1);
-    }
-  });
-program.command('clean', 'Clean compiled files').action(async (args, options, logger) => {
-  try {
-    printHeader(logger);
-    await cleanClient();
-    await cleanServer();
-  } catch (error) {
-    console.log(error);
-    process.exit(1);
-  }
-});
+dev.register(program);
+clean.register(program);
+migration.register(program);
+migrate.register(program);
 program
   .command('build', 'Build the client and server bundles for production')
-  .action((args, options, logger) => {
+  .action((args, options) => {
     async function clean() {
       await cleanClient();
       await cleanServer();
@@ -58,7 +41,6 @@ program
       await buildServer();
     }
     try {
-      printHeader(logger);
       build();
     } catch (error) {
       console.log(error);

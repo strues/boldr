@@ -67,9 +67,8 @@ class NewArticleForm extends React.Component<Props, *> {
               </Col>
               <Col xs={12} md={4}>
                 <DarkSegment>
-                  <Headline type="h4" lightText>
-                    Tags
-                  </Headline>
+                  <Headline type="h4" text="Tags" isLight />
+
                   <HelpTxt>*Enter or Tab to save a tag</HelpTxt>
                   <Field
                     name="tags"

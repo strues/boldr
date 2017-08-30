@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
 
 type InnerHTML = {
   __html: string,
@@ -9,7 +9,7 @@ type Props = {
   dangerouslySetInnerHTML: InnerHTML,
 };
 
-class DynamicContent extends React.Component<Props, *> {
+class DynamicContent extends React.PureComponent<Props, void> {
   render() {
     return (
       <div

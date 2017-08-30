@@ -19,7 +19,7 @@ function Home() {
     <div>
       <Helmet title="Home" />
       <HomeHero>
-        <Headline type="h1" text="Meet Boldr." />
+        <Headline type="h1" text="Meet Boldr." isLight />
       </HomeHero>
       <Grid>
         <Row>

@@ -33,7 +33,7 @@ class DashboardLanding extends React.Component<Props, *> {
     return (
       <div>
         <ContentPromo isCentered>
-          <Headline kind="h1">Welcome {this.props.currentUser.firstName}</Headline>
+          <Headline kind="h1" text={`Welcome ${this.props.currentUser.firstName}`} />
         </ContentPromo>
         <Tabs defaultActiveKey="1" onChange={this.onTabChange}>
           <TabPane tab="Tab 1" key="1">

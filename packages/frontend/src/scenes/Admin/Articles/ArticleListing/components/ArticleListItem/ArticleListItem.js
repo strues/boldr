@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import Avatar from '@boldr/ui/Avatar';
 import Icon from '@boldr/ui/Icons/Icon';
-import { replacePath } from '@boldr/core';
+import { push } from 'react-router-redux';
 
 import { Menu, MenuItem } from '@boldr/ui/Menu';
 import type { ArticleType } from '../../../../../../types/boldr';
@@ -45,7 +45,7 @@ class ArticleListItem extends React.Component<Props, *> {
     this.props.onArticleClick(this.props.article);
   };
   handleEditClick = () => {
-    this.props.dispatch(replacePath(`/admin/articles/${this.props.article.slug}`));
+    this.props.dispatch(push(`/admin/articles/${this.props.article.slug}`));
   };
   render() {
     const { article, deleteArticle } = this.props;

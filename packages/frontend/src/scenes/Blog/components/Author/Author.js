@@ -3,7 +3,8 @@ import React from 'react';
 import styled from 'styled-components';
 import classnames from 'classnames';
 import Link from 'react-router-dom/Link';
-import { Avatar, Headline } from '@boldr/ui';
+import Avatar from '@boldr/ui/Avatar';
+import Headline from '@boldr/ui/Headline';
 import { StyleClasses } from '../../../../theme/styleClasses';
 
 const BASE_ELEMENT = StyleClasses.ARTICLE_SIDEBAR_AUTHOR;
@@ -30,14 +31,16 @@ export type Props = {
 const Author = (props: Props) => {
   const { author } = props;
   const classes = classnames(BASE_ELEMENT, props.className);
-  const authorName = <Link to={`/profiles/${author.username}`}>{author.username}</Link>;
+
   return (
     <div className={classes}>
       <AvatarName>
         <Avatar src={author.avatarUrl} role="presentation" />
       </AvatarName>
       <AvatarName>
-        <Headline type="h3">{authorName}</Headline>
+        <Link to={`/profiles/${author.username}`}>
+          <Headline type="h3" text={author.username} />
+        </Link>
       </AvatarName>
       <BioBlock>{author.bio}</BioBlock>
     </div>

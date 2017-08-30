@@ -18,9 +18,7 @@ const ArticleTitle = (props: { title: string }) => {
   const classes = cx(BASE_ELEMENT);
   return (
     <TitleWrapper>
-      <Headline type="h1" className={classes} lightText>
-        {props.title}
-      </Headline>
+      <Headline type="h1" className={classes} isLight text={props.title} />
     </TitleWrapper>
   );
 };

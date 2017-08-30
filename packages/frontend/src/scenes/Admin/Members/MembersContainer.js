@@ -22,8 +22,10 @@ export type Props = {
   dispatch: Function,
   ui: Object,
 };
-
-export class MembersContainer extends Component {
+type State = {
+  userId: string,
+};
+export class MembersContainer extends Component<Props, State> {
   static defaultProps: {
     profile: {},
     fetchMembersIfNeeded: () => {},
@@ -35,7 +37,7 @@ export class MembersContainer extends Component {
     (this: any).closeModal = this.closeModal.bind(this);
     (this: any).openModal = this.openModal.bind(this);
   }
-  state: Object = { userId: '' };
+  state: State = { userId: '' };
 
   props: Props;
 

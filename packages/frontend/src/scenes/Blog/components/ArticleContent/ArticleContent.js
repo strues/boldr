@@ -2,6 +2,7 @@
 import React from 'react';
 import classnames from 'classnames';
 import { StyleClasses, Paper, Divider } from '@boldr/ui';
+import DynamicContent from '../../../../components/DynamicContent';
 import ArticleDate from '../ArticleDate';
 
 export type Props = {
@@ -24,7 +25,7 @@ const ArticleContent = (props: Props) => {
       <Paper zDepth={2} isPadded>
         <ArticleDate created={props.createdAt} />
         <Divider />
-        <div className={classes} dangerouslySetInnerHTML={createMarkup()} />
+        <DynamicContent className={classes} dangerouslySetInnerHTML={createMarkup()} />
       </Paper>
     </article>
   );

@@ -1,10 +1,5 @@
-import {
-  setToken,
-  removeToken,
-  replacePath,
-  sendNotification,
-  showNotification,
-} from '@boldr/core';
+import { setToken, removeToken, sendNotification, showNotification } from '@boldr/core';
+import { push } from 'react-router-redux';
 import * as notif from '../../../core/constants';
 
 import * as t from './actionTypes';
@@ -34,7 +29,7 @@ export function doSignup(signupUser) {
         type: 'success',
       }),
     );
-    return dispatch(replacePath('/'));
+    return dispatch(push('/'));
   };
 }
 
@@ -54,7 +49,7 @@ export function doLogin(loginUser) {
         type: 'success',
       }),
     );
-    return dispatch(replacePath('/'));
+    return dispatch(push('/'));
   };
 }
 
@@ -167,7 +162,7 @@ export function forgotPassword(email) {
         dispatch({
           type: t.FORGOT_PASSWORD_SUCCESS,
         });
-        dispatch(replacePath('/'));
+        dispatch(push('/'));
         return dispatch(sendNotification(notif.MSG_FORGOT_PW_ERROR));
       })
       .catch(err =>
@@ -214,7 +209,7 @@ export function resetPassword(password, token) {
         dispatch({
           type: t.RESET_PASSWORD_SUCCESS,
         });
-        dispatch(replacePath('/login'));
+        dispatch(push('/login'));
         return dispatch(sendNotification(notif.MSG_RESET_PW_SUCCESS));
       })
       .catch(err =>
@@ -258,7 +253,7 @@ export function verifyAccount(token) {
         return response.json();
       })
       .then(() => {
-        dispatch(replacePath('/login'));
+        dispatch(push('/login'));
         dispatch({
           type: t.VERIFY_ACCOUNT_SUCCESS,
         });

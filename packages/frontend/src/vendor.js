@@ -15,6 +15,8 @@ module.exports = [
   'react-motion',
   'react-redux',
   'react-router-dom',
+  'react-router-redux',
+  'history',
   'react-tagsinput',
   'react-transition-group',
   'react',

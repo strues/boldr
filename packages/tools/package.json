@@ -31,6 +31,7 @@
       "prettier --single-quote=true --print-width=100 --jsx-bracket-same-line=false --trailing-comma=all --write \"src/**/*.js\""
   },
   "dependencies": {
+    "@boldr/config": "^0.1.0-alpha.1",
     "@boldr/utils": "^0.1.0-rc.5",
     "autoprefixer": "^7.1.3",
     "babel-loader": "^7.1.2",
@@ -75,7 +76,7 @@
   },
   "devDependencies": {
     "eslint": "4.5.0",
-    "eslint-config-boldr": "0.12.9",
+    "eslint-config-boldr": "0.12.10",
     "prepublish": "^1.4.1",
     "prettier": "^1.6.1",
     "rimraf": "^2.6.1"

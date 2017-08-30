@@ -3,8 +3,8 @@
  */
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
+import { routerMiddleware, routerReducer } from 'react-router-redux';
 import invariant from 'invariant';
-import { routerReducer } from '../shared/RouterConnection';
 import boldrReducer from './boldr/reducer';
 
 const preReducers = [];
@@ -60,7 +60,7 @@ export function getReducer(appReducer, apolloClient) {
       reducerObject = { app: appReducer };
     }
   } else {
-    invariant(true, 'Are you sure you want to bootstrap an app without reducers ?');
+    invariant(false, 'Must provde an appReducer');
   }
   if (!reducerObject.boldr) {
     reducerObject.boldr = boldrReducer;
@@ -103,10 +103,11 @@ export function getMiddlewares(middleware) {
  * @param  {String}     env               The build environment
  * @return {Object}                       The created store
  */
-export default function createBoldrStore(appReducer, preloadedState, apolloClient) {
+export default function createBoldrStore(history, appReducer, preloadedState, apolloClient) {
   const reducer = getReducer(appReducer, apolloClient);
 
   const middleware = [
+    routerMiddleware(history),
     // Redux middleware that spits an error on you when you try to mutate
     // your state either inside a dispatch or between dispatches.
     // https://github.com/leoasis/redux-immutable-state-invariant

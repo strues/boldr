@@ -33,6 +33,7 @@ export type Props = {
   logoImg?: string,
   breakpoint?: number,
   onLogout: Function,
+  token?: string,
 };
 
 type State = {
@@ -90,7 +91,7 @@ class Navigation extends React.Component<Props, State> {
               parseInt(currentUser.roleId, 10) === 3 && (
                 <NavbarItem>
                   <NavLink to="/admin">
-                    <Icon kind="dashboard" />
+                    <Icon kind="dashboard" color="#afbbca" />
                   </NavLink>
                 </NavbarItem>
               )}
@@ -102,13 +103,13 @@ class Navigation extends React.Component<Props, State> {
               {token && (
                 <NavbarItem>
                   <NavLink to={`/profiles/${currentUser.username}`}>
-                    <Icon kind="account-card" />
+                    <Icon kind="account-card" color="#afbbca" />
                   </NavLink>
                 </NavbarItem>
               )}
               {token && (
                 <NavbarItem>
-                  <Icon kind="logout" onClick={this.onLogoutClick} />
+                  <Icon kind="logout" onClick={this.onLogoutClick} color="#afbbca" />
                 </NavbarItem>
               )}
               {!token && (

@@ -3,6 +3,7 @@ import StaticRouter from 'react-router-dom/StaticRouter';
 import { renderToStringWithData } from 'react-apollo';
 import { flushChunkNames } from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
+import createHistory from 'history/createMemoryHistory';
 import serialize from 'serialize-javascript';
 import { ServerStyleSheet } from 'styled-components';
 import Helmet from 'react-helmet';
@@ -31,8 +32,8 @@ export default ({ clientStats, outputPath }) =>
       initialState,
       apolloUri: process.env.GRAPHQL_ENDPOINT,
     });
-
-    const reduxStore = createBoldrStore(appReducer, initialState, apolloClient);
+    const history = createHistory();
+    const reduxStore = createBoldrStore(history, appReducer, initialState, apolloClient);
     const routerContext = {};
     const sheet = new ServerStyleSheet();
     const appComponent = (

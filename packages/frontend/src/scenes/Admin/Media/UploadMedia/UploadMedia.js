@@ -16,6 +16,10 @@ import Dropzone from './components/Dropzone';
 const MediaTitleArea = styled.div`
   padding-top: 50px;
   margin-bottom: 35px;
+  display: inline-flex;
+  svg {
+    margin-right: 5px;
+  }
 `;
 
 const MediaInputArea = styled.div`padding-bottom: 50px;`;
@@ -66,9 +70,8 @@ class UploadMedia extends Component<Props, *> {
           <Col xs={6}>
             <Paper zDepth={1}>
               <MediaTitleArea>
-                <Headline type="h2">
-                  <Upload stroke="rgba(0, 188, 212, 1.00)" size="36" /> Upload from your computer
-                </Headline>
+                <Upload stroke="rgba(0, 188, 212, 1.00)" size="36" />
+                <Headline type="h2" text="Upload from your computer" />
               </MediaTitleArea>
               <MediaInputArea>
                 <Dropzone
