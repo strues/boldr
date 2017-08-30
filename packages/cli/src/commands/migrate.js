@@ -13,7 +13,7 @@ async function task(args, options) {
   fs.ensureDirSync('.boldr/db/migrations');
   const knexConfig = {
     client: 'pg',
-    connection: config.server.db.url,
+    connection: options.url || config.server.db.url,
     migrations: {
       tableName: 'migrations',
       directory: path.resolve(rootDir, '.boldr/db/migrations'),
@@ -29,8 +29,8 @@ async function task(args, options) {
 
 function register(program) {
   program
-    .command('migrate', 'Remove files or directories.')
-    .help('By default, cache, assets dir and the compiled server are removed.')
+    .command('migrate', 'Run Knex database migration.')
+    .help('Database connection url is set in the config file or passed with -u.')
     .option('-u, --url [url]', 'Postgres connection string url.')
     .action(task);
 }

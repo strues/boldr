@@ -22,7 +22,7 @@ program.STRING = value => (typeof value === 'string' ? value : null);
 program
   // default command
   .version(VERSION)
-  .description('A command line scaffolding tool and helper for Boldr.');
+  .description('Command line tools for interacting with Boldr.');
 
 dev.register(program);
 clean.register(program);

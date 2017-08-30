@@ -43,9 +43,8 @@ function task(args, options) {
 
 function register(program) {
   program
-    .command('clean', 'Remove files or directories.')
-    .help('By default, cache, assets dir and the compiled server are removed.')
-    .option('-d, --directory [dir]', 'Path to the directory or file to remove.')
+    .command('clean', 'Remove directories.')
+    .help('Specify a type to clean.')
     .argument('<type>', 'Directories to clean', ['client', 'server', 'cache', 'all'])
     .action(task);
 }
