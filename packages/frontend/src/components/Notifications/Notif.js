@@ -14,12 +14,29 @@ const NotificationWrap = styled.div`
   font-family: ${props => props.theme.fontFamily.header};
   font-weight: 400;
   background-color: ${props =>
-    props.type === 'error' ? `${props.theme.palette.danger}` : `${props.theme.palette.success}`};
+    props.type === 'error'
+      ? `${props.theme.palette.danger}`
+      : `${props.theme.palette.primaryAccent}`};
   color: ${props => props.theme.fontColor.dark};
   border-radius: 4px;
   box-shadow: 0 0 1px 1px rgba(10, 10, 11, 0.125);
   margin-bottom: 2px;
 `;
+
+NotificationWrap.defaultProps = {
+  theme: {
+    fontFamily: {
+      header: 'Chivo',
+    },
+    palette: {
+      danger: '#ef476f',
+      primaryAccent: '#00bcd4',
+    },
+    fontColor: {
+      dark: '#030507',
+    },
+  },
+};
 const NotificationInner = styled.div`
   flex: 1 0 auto;
   position: relative;
@@ -45,9 +62,7 @@ const Notif = ({ options, hideNotification }: Props) => {
   return (
     <NotificationWrap type={type}>
       <NotificationInner>
-        <NotificationText>
-          {text}
-        </NotificationText>
+        <NotificationText>{text}</NotificationText>
         <NotifIcon>
           <Times onClick={hideNotification} color="#222" />
         </NotifIcon>

@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import { graphql } from 'react-apollo';
+import { connect } from 'react-redux';
+import { showNotification } from '@boldr/core';
 import Helmet from 'react-helmet';
 import { Row, Col } from '@boldr/ui/Layout';
 import Paper from '@boldr/ui/Paper';
@@ -19,9 +21,11 @@ const MediaTitleArea = styled.div`
 const MediaInputArea = styled.div`padding-bottom: 50px;`;
 
 export type Props = {
+  dispatch: () => mixed,
   mutate: () => void,
 };
 
+@connect()
 class UploadMedia extends Component<Props, *> {
   handleUpload = file => {
     return new Promise((resolve, reject) => {
@@ -41,6 +45,12 @@ class UploadMedia extends Component<Props, *> {
           ],
         })
         .then(data => {
+          this.props.dispatch(
+            showNotification({
+              type: 'success',
+              text: 'File upload complete.',
+            }),
+          );
           return resolve(data);
         })
         .catch(err => reject(err));

@@ -5,9 +5,7 @@ export const convertToCssPosition = position => {
   return position.map((value, index) => `${COORDINATES[index]}: ${value};`);
 };
 
-export const getPosition = css`
-  ${props => convertToCssPosition(props.position)}
-`;
+export const getPosition = css`${props => convertToCssPosition(props.position)};`;
 
 export const convertToCssDuration = miliseconds => `${(miliseconds / 1000).toString()}s`;
 

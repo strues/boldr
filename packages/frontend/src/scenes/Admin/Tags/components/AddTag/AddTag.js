@@ -1,5 +1,5 @@
 /* @flow */
-import React, { Component } from 'react';
+import * as React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { graphql, compose } from 'react-apollo';
 import styled from 'styled-components';
@@ -13,10 +13,9 @@ import TAGS_QUERY from '../../gql/tags.graphql';
 
 export type Props = {
   addTagMutation: Function,
-  handleSubmit?: Function,
+  handleSubmit: Function,
   reset?: Function,
   submitting?: boolean,
-  fields?: Object,
   pristine?: boolean,
 };
 
@@ -29,14 +28,7 @@ const TagFormPanel = styled.div`
   margin: 0 auto;
 `;
 
-const SubTitle = styled.h3`
-  font-size: 1.4em;
-  font-weight: 300;
-  font-family: Chivo;
-  margin: 0;
-`;
-
-class AddTag extends Component {
+class AddTag extends React.Component<Props, *> {
   addTagMutation = values => {
     const { addTagMutation } = this.props;
 
@@ -45,7 +37,7 @@ class AddTag extends Component {
   props: Props;
   render() {
     // eslint-disable-line
-    const { handleSubmit, reset } = this.props;
+    const { handleSubmit, reset, submitting, pristine } = this.props;
     return (
       <TagFormPanel>
         <Headline type="h3">Add a New Tag</Headline>
@@ -60,12 +52,17 @@ class AddTag extends Component {
           />
           <FormField isGrouped>
             <Control>
-              <Button htmlType="submit" kind="primary" style={style}>
+              <Button htmlType="submit" kind="primary" style={style} disabled={submitting}>
                 Save
               </Button>
             </Control>
             <Control>
-              <Button onClick={reset} style={style} kind="primary" outline>
+              <Button
+                onClick={reset}
+                style={style}
+                kind="primary"
+                disabled={submitting || pristine}
+                outline>
                 Reset
               </Button>
             </Control>
@@ -77,11 +74,13 @@ class AddTag extends Component {
 }
 
 export default compose(
+  // $FlowIssue
   graphql(ADD_TAG_MUTATION, {
     props: ({ mutate }) => ({
       addTagMutation: values =>
         mutate({
           variables: { input: values },
+          // $FlowIssue
           refetchQueries: [
             {
               query: TAGS_QUERY,

@@ -7,6 +7,8 @@ import OpticsAgent from 'optics-agent';
 import { printSchema } from 'graphql';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import loaders from '../data/loaders';
+import ValidationError from '../errors/validationError';
+import formatError from '../errors/formatError';
 import RootSchema from '../schema/rootSchema';
 import { config } from '../config';
 import apolloUpload from './apolloUpload';
@@ -26,18 +28,14 @@ const graphqlHandler = graphqlExpress(req => {
     schema: RootSchema,
     context: {
       req,
+      ValidationError,
       user: req.user ? req.user : null,
       opticsContext,
       ...loaders.create(),
     },
     debug: config.get('isDebug'),
     pretty: process.env.NODE_ENV !== 'production',
-    formatError: error => ({
-      message: error.message,
-      state: error.originalError && error.originalError.state,
-      locations: error.locations,
-      path: error.path,
-    }),
+    formatError,
   };
 });
 const gqlMiddleware = [

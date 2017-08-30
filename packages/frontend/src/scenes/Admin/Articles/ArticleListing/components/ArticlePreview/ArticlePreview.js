@@ -4,7 +4,7 @@ import Link from 'react-router-dom/Link';
 import Paper from '@boldr/ui/Paper';
 import Edit from '@boldr/icons/Edit';
 import styled from 'styled-components';
-
+import DynamicContent from '../../../../../../components/DynamicContent';
 import type { ArticleType } from '../../../../../../types/boldr';
 
 export type Props = {
@@ -21,8 +21,15 @@ const Toolbar = styled.div`
   align-items: center;
   vertical-align: middle;
   padding: 1em;
-  background-color: #243140;
+  background-color: ${props => props.theme.palette.primary2};
 `;
+Toolbar.defaultProps = {
+  theme: {
+    palette: {
+      primary2: '#3178B7',
+    },
+  },
+};
 const ArticlePreviewTitle = styled.div`justify-content: flex-start;`;
 const ArticlePreviewEdit = styled.div`justify-content: flex-end;`;
 class ArticlePreview extends React.Component<Props, *> {
@@ -41,27 +48,24 @@ class ArticlePreview extends React.Component<Props, *> {
     return (
       <div>
         <Toolbar>
-          <ArticlePreviewTitle>
-            {article.title}
-          </ArticlePreviewTitle>
+          <ArticlePreviewTitle>{article.title}</ArticlePreviewTitle>
           <ArticlePreviewEdit>
             <Link to={`/admin/articles/${article.slug}`}>
-              <Edit color="rgb(0, 188, 212)" />
+              <Edit stroke="rgb(0, 188, 212)" />
             </Link>
           </ArticlePreviewEdit>
         </Toolbar>
         <Paper zDepth={2} isPadded>
-          <div className="boldr-post__content" dangerouslySetInnerHTML={this.createMarkup()} />
+          <DynamicContent
+            className="boldr-post__content"
+            dangerouslySetInnerHTML={this.createMarkup()}
+          />
         </Paper>
       </div>
     );
   };
   render() {
-    return (
-      <div>
-        {!this.props.article ? this.noArticleDisplayed() : this.displayArticle()}
-      </div>
-    );
+    return <div>{!this.props.article ? this.noArticleDisplayed() : this.displayArticle()}</div>;
   }
 }
 

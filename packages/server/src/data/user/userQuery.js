@@ -60,6 +60,16 @@ export default {
       throw errorObj({ _error: 'Unable to find a user with that username.' });
     },
   },
+  me: {
+    type: UserType,
+    description: 'Given an auth token, return the user and auth token',
+    resolve(_, args, { user, ValidationError }) {
+      if (!user) {
+        throw new ValidationError('Unauthorized');
+      }
+      return user;
+    },
+  },
   getCurrentUser: {
     type: UserType,
     description: 'Given an auth token, return the user and auth token',

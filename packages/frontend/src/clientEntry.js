@@ -31,24 +31,22 @@ export const apolloClient = createApolloClient({
   },
 });
 
-const env = process.env.NODE_ENV === 'development' ? 'development' : 'production';
 // Create the redux store by passing the "main" reducer, preloadedState, the Apollo Client
 // and env. Passing either 'development' or 'production' (env) includes/excludes
 // reduxDevTools, etc
-const reduxStore = createBoldrStore(appReducer, preloadedState, apolloClient, env);
+const reduxStore = createBoldrStore(appReducer, preloadedState, apolloClient);
 
 if (token) {
   // Update application state. User has token and is probably authenticated
   reduxStore.dispatch(checkAuth(token));
 }
-const AppComponent = PassedApp =>
+const AppComponent = PassedApp => (
   <BrowserRouter>
     <RouterConnection>
-      <ThemeProvider>
-        {PassedApp}
-      </ThemeProvider>
+      <ThemeProvider>{PassedApp}</ThemeProvider>
     </RouterConnection>
-  </BrowserRouter>;
+  </BrowserRouter>
+);
 
 if (process.env.NODE_ENV !== 'production') {
   // eslint-disable-next-line import/no-extraneous-dependencies
@@ -76,19 +74,6 @@ if (process.env.NODE_ENV !== 'production') {
         );
       });
     });
-  } else {
-    render(
-      wrapBoldrApp(
-        AppComponent(
-          <AppContainer>
-            <App />
-          </AppContainer>,
-        ),
-        apolloClient,
-        reduxStore,
-      ),
-      DOM_NODE,
-    );
   }
 }
 

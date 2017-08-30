@@ -40,6 +40,7 @@ module.exports = {
     '!packages/frontend/src/clientEntry.js',
     '!packages/frontend/src/serverEntry.js',
     '!packages/frontend/src/vendor.js',
+    '!packages/frontend/src/theme/*.js',
     '!packages/**/src/**/*.styled.js',
     '!packages/**/index.js',
   ],

@@ -12,3 +12,4 @@ if (!global.fetch) {
 }
 
 export * from './common';
+export * from './server/loadImport';

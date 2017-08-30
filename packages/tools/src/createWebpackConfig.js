@@ -19,6 +19,8 @@ import HappyPackPlugin from './plugins/happyPackPlugin';
 import ProgressPlugin from './plugins/ProgressPlugin';
 import WebpackDigestHash from './plugins/ChunkHash';
 
+import rootModuleRelativePath from './util/rootModuleRelativePath';
+
 import {
   REQUIRED_ENV_VARS,
   CACHE_HASH_TYPE,
@@ -35,6 +37,8 @@ dotenv.config();
 function resolveOwn(relativePath) {
   return path.resolve(__dirname, '..', relativePath);
 }
+
+const relativeResolve = rootModuleRelativePath(require);
 
 const envParameters = Object.keys(process.env);
 const missingParameters = REQUIRED_ENV_VARS.filter(key => !envParameters.includes(key));
@@ -106,8 +110,7 @@ export default function createWebpackConfig(
       polyfill: false,
       target: 'modern',
       styled: true,
-      styledProcess: false,
-      imports: 'webpack',
+      // imports: 'webpack',
       srcDir: SRC_DIR,
     },
   ];
@@ -121,10 +124,9 @@ export default function createWebpackConfig(
       specMode: false,
       nodentRt: false,
       polyfill: false,
-      target: '8.4',
+      target: 'current',
       styled: true,
-      styledProcess: false,
-      imports: 'webpack',
+      // imports: 'webpack',
       srcDir: SRC_DIR,
     },
   ];
@@ -174,7 +176,13 @@ export default function createWebpackConfig(
     minimize: false,
     sourceMap: false,
   };
-
+  const cssLoaderOptions2 = {
+    modules: true,
+    localIdentName: '[local]-[hash:base62:8]',
+    import: 2,
+    minimize: false,
+    sourceMap: false,
+  };
   const postCSSLoaderRule = {
     loader: require.resolve('postcss-loader'),
     options: {
@@ -243,9 +251,12 @@ export default function createWebpackConfig(
     resolve: {
       extensions: ['.js', '.json', '.jsx'],
       descriptionFiles: ['package.json'],
-      modules: ['node_modules', path.resolve(ROOT, './node_modules')],
+      modules: ['node_modules', path.resolve(ROOT, './src'), path.resolve(ROOT, './node_modules')],
+      mainFields: _IS_CLIENT_
+        ? ['jsnext:main', 'module', 'browser', 'main']
+        : ['jsnext:main', 'module', 'main'],
       alias: {
-        'babel-runtime': path.dirname(require.resolve('babel-runtime/package.json')),
+        'babel-runtime': relativeResolve('babel-runtime/package.json'),
       },
     },
     resolveLoader: {
@@ -333,6 +344,31 @@ export default function createWebpackConfig(
                 sassLoaderRule,
               ].filter(Boolean),
         },
+        {
+          test: /\.(m.scss|m.css)$/,
+          include: PROJECT_SRC,
+          use: _IS_CLIENT_
+            ? ExtractCssChunks.extract({
+                use: [
+                  cacheLoader,
+                  {
+                    loader: require.resolve('css-loader'),
+                    options: cssLoaderOptions2,
+                  },
+                  postCSSLoaderRule,
+                  sassLoaderRule,
+                ].filter(Boolean),
+              })
+            : [
+                cacheLoader,
+                {
+                  loader: require.resolve('css-loader/locals'),
+                  options: cssLoaderOptions2,
+                },
+                postCSSLoaderRule,
+                sassLoaderRule,
+              ].filter(Boolean),
+        },
       ].filter(Boolean),
     },
     plugins: [
@@ -375,6 +411,7 @@ export default function createWebpackConfig(
           },
         ],
       }),
+
       // Improve OS compatibility
       // https://github.com/Urthen/case-sensitive-paths-webpack-plugin
       new CaseSensitivePathsPlugin(),
@@ -387,7 +424,10 @@ export default function createWebpackConfig(
         : null,
       _IS_DEV_
         ? new WriteFilePlugin({
+            exitOnErrors: false,
             log: true,
+            // required not to cache removed files
+            useHashIndex: false,
           })
         : null,
       // Let the server side renderer know about our client side assets

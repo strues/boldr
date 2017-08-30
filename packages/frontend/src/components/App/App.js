@@ -12,7 +12,6 @@ import Error404 from '../../pages/Error404';
 import AdminDashboard from '../../scenes/Admin';
 import boldrNotificationsFactory, { Notif } from '../Notifications';
 import ProtectedRoute from '../ProtectedRoute';
-import View from '../View';
 
 const NotificationContainer = boldrNotificationsFactory(Notif);
 

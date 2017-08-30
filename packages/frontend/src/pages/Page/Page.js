@@ -4,9 +4,9 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { Route, Switch } from 'react-router-dom';
 import { graphql } from 'react-apollo';
+import { createStructuredSelector } from 'reselect';
 import Loader from '@boldr/ui/Loader';
 // internal
-import { showHeader } from '@boldr/core';
 import { Footer, Container } from '@boldr/ui/Layout';
 import Profile from '../../scenes/Profile';
 import LoginContainer from '../../scenes/Account/Login';
@@ -15,6 +15,7 @@ import AccountContainer from '../../scenes/Account';
 import BlogContainer from '../../scenes/Blog';
 import View from '../../components/View';
 import { logout } from '../../scenes/Account/state/actions';
+import { selectCurrentUser, selectToken } from '../../scenes/Account/state/selectors';
 import Home from '../Home';
 import About from '../About';
 import type { CurrentUser, RouterLocation } from '../../types/boldr';
@@ -27,8 +28,7 @@ import MENU_QUERY from './gql/getMenu.graphql';
 export type Props = {
   location: RouterLocation,
   currentUser?: CurrentUser,
-  auth: Object,
-  showHeader: () => void,
+  token?: string,
   logout: Function,
   data: Object,
 };
@@ -42,26 +42,25 @@ const ContentWrapper = styled.section`
 `;
 
 export class Page extends React.Component<Props, *> {
-  componentDidMount() {
-    this.props.showHeader();
-  }
   handleLogoutClick = () => {
     this.props.logout();
   };
 
   render(): React.Node {
-    const { data: { loading, getMenuById }, auth, currentUser, location } = this.props;
+    const { data: { loading, getMenuById }, token, currentUser, location } = this.props;
     return (
       <View>
-        {loading
-          ? <Loader />
-          : <Navigation
-              location={location}
-              onLogout={this.handleLogoutClick}
-              auth={auth}
-              currentUser={currentUser}
-              menu={getMenuById}
-            />}
+        {loading ? (
+          <Loader />
+        ) : (
+          <Navigation
+            location={location}
+            onLogout={this.handleLogoutClick}
+            token={token}
+            currentUser={currentUser}
+            menu={getMenuById}
+          />
+        )}
         <ContentWrapper>
           <Switch>
             <Route path="/login" component={LoginContainer} />
@@ -81,20 +80,20 @@ export class Page extends React.Component<Props, *> {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    auth: state.auth,
-    currentUser: state.auth.info,
-  };
-};
+const mapStateToProps = createStructuredSelector({
+  token: selectToken(),
+  currentUser: selectCurrentUser(),
+});
 // $FlowIssue
 const PageComponentWithData = graphql(MENU_QUERY, {
   // $FlowIssue
   options: () => ({
+    fetchPolicy: 'cache-first',
     variables: {
       id: 1,
     },
   }),
+  // $FlowIssue
 })(Page);
 // $FlowIssue
-export default connect(mapStateToProps, { showHeader, logout })(PageComponentWithData);
+export default connect(mapStateToProps, { logout })(PageComponentWithData);

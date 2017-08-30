@@ -11,7 +11,7 @@ export const defaultProps = {
   stackNextOn: 'top',
   animationDuration: 400,
   animationEasing: 'ease',
-  dismissAfter: 160000,
+  dismissAfter: 1000,
 };
 
 export default function boldrContainerFactory(WrappedNotification) {
@@ -46,7 +46,7 @@ export default function boldrContainerFactory(WrappedNotification) {
           animationDuration={this.props.animationDuration}
           animationEasing={this.props.animationEasing}
           slideFromSide={this.props.slideFromSide}>
-          {this.props.notifications.map(notification =>
+          {this.props.notifications.map(notification => (
             <NotificationContainer
               animatedMargin={this.props.position[0] === 'auto' ? 'bottom' : 'top'}
               key={notification.uid}
@@ -61,8 +61,8 @@ export default function boldrContainerFactory(WrappedNotification) {
                 }}
                 options={notification.options}
               />
-            </NotificationContainer>,
-          )}
+            </NotificationContainer>
+          ))}
         </Container>
       );
     }

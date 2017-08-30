@@ -69,33 +69,70 @@ export const mediaQuery = Object.keys(SIZES).reduce((accumulator, label) => {
   // use em in breakpoints to work properly cross-browser and support users
   // changing their browsers font-size: https://zellwk.com/blog/media-query-units/
   const emSize = SIZES[label] / 16;
-  accumulator[label] = (...args) => css`
-    @media (min-width: ${emSize}em) {
-      ${css(...args)}
-    }
-  `;
+  accumulator[label] = (...args) => css`@media (min-width: ${emSize}em) {${css(...args)};}`;
   return accumulator;
 }, {});
 
-const primaryColor = Color('#0094c6').hsl().string();
-const primaryColor2 = Color('#3178B7').hsl().string();
-const primaryColor3 = Color('#1B252F').hsl().string();
-const primaryColor4 = Color('#243140').hsl().string();
-const primaryColor5 = Color('#2D3E50').hsl().string();
-const primaryColor6 = Color('#4F6A92').hsl().string();
-const primaryAccent = Color('#00bcd4').hsl().string();
-const successColor = Color('#61e786').hsl().string();
-const dangerColor = Color('#ef476f').hsl().string();
-const warningColor = Color('#fffd82').hsl().string();
-const infoColor = Color('#6320EE').hsl().string();
-const neutralColor1 = Color('#ECF0F0').hsl().string();
-const neutralColor2 = Color('#F7F7F9').hsl().string();
-const neutralColor3 = Color('#DEE0E3').hsl().string();
-const neutralColor4 = Color('#9198A0').hsl().string();
-const gunmetalColor = Color('#202b39').hsl().string();
-const nearBlackColor = Color('#030507').hsl().string();
-const lightFontColor = Color('#F7F7F9').hsl().string();
-const darkFontColor = Color('#030507').hsl().string();
+const primaryColor = Color('#0094c6')
+  .hsl()
+  .string();
+const primaryColor2 = Color('#3178B7')
+  .hsl()
+  .string();
+const primaryColor3 = Color('#1B252F')
+  .hsl()
+  .string();
+const primaryColor4 = Color('#243140')
+  .hsl()
+  .string();
+const primaryColor5 = Color('#2D3E50')
+  .hsl()
+  .string();
+const primaryColor6 = Color('#4F6A92')
+  .hsl()
+  .string();
+const primaryAccent = Color('#00bcd4')
+  .hsl()
+  .string();
+const successColor = Color('#61e786')
+  .hsl()
+  .string();
+const midnight = Color('#233040')
+  .hsl()
+  .string();
+const dangerColor = Color('#ef476f')
+  .hsl()
+  .string();
+const warningColor = Color('#fffd82')
+  .hsl()
+  .string();
+const infoColor = Color('#6320EE')
+  .hsl()
+  .string();
+const neutralColor1 = Color('#ECF0F0')
+  .hsl()
+  .string();
+const neutralColor2 = Color('#F7F7F9')
+  .hsl()
+  .string();
+const neutralColor3 = Color('#DEE0E3')
+  .hsl()
+  .string();
+const neutralColor4 = Color('#9198A0')
+  .hsl()
+  .string();
+const gunmetalColor = Color('#202b39')
+  .hsl()
+  .string();
+const nearBlackColor = Color('#030507')
+  .hsl()
+  .string();
+const lightFontColor = Color('#F7F7F9')
+  .hsl()
+  .string();
+const darkFontColor = Color('#030507')
+  .hsl()
+  .string();
 
 const theme = {
   palette: {
@@ -110,6 +147,7 @@ const theme = {
     danger: dangerColor,
     warning: warningColor,
     info: infoColor,
+    midnight,
     neutral1: neutralColor1,
     neutral2: neutralColor2,
     neutral3: neutralColor3,
@@ -136,7 +174,9 @@ const theme = {
     },
   },
   fontFamily: { ...fontFamily },
-
+  bg: {
+    dark: midnight,
+  },
   fontWeight: { ...fontWeight },
 
   fontSize: { ...fontSize },

@@ -16,21 +16,20 @@ import {
   NavbarMenu,
   NavbarStart,
 } from '@boldr/ui';
-// internal
+import type { CurrentUser, SettingsType, RouterLocation } from '../../../../types/boldr';
 import NavItem from './NavItem';
 
 export type Props = {
-  me?: User,
   isMobile: boolean,
   auth: Object,
   showHeader: () => void,
   loading: boolean,
   logout: Function,
   data?: Object,
-  location: Object,
+  location: RouterLocation,
   menu: Object,
-  settings?: Array<Setting>,
-  currentUser: User,
+  settings?: SettingsType,
+  currentUser: CurrentUser,
   logoImg?: string,
   breakpoint?: number,
   onLogout: Function,
@@ -60,7 +59,7 @@ class Navigation extends React.Component<Props, State> {
   };
   props: Props;
   render() {
-    const { menu: { details }, settings, currentUser, location, auth } = this.props;
+    const { menu: { details }, settings, currentUser, location, token } = this.props;
     const { isActive } = this.state;
     return (
       <Navbar
@@ -78,40 +77,45 @@ class Navigation extends React.Component<Props, State> {
           </NavbarBrand>
           <NavbarMenu isActive={isActive} onClick={this.onClickNav}>
             <NavbarStart>
-              {details.map(detail =>
+              {details.map(detail => (
                 <NavItem
                   key={detail.id}
                   isActive={checkActiveLoc(location, detail.href)}
                   {...detail}
-                />,
-              )}
+                />
+              ))}
             </NavbarStart>
             <NavbarEnd>
-              {auth.token &&
-                parseInt(currentUser.roleId, 10) === 3 &&
+              {token &&
+              parseInt(currentUser.roleId, 10) === 3 && (
                 <NavbarItem>
                   <NavLink to="/admin">
                     <Icon kind="dashboard" />
                   </NavLink>
-                </NavbarItem>}
-              {!auth.token &&
+                </NavbarItem>
+              )}
+              {!token && (
                 <NavbarItem>
                   <NavLink to="/login">Login</NavLink>
-                </NavbarItem>}
-              {auth.token &&
+                </NavbarItem>
+              )}
+              {token && (
                 <NavbarItem>
                   <NavLink to={`/profiles/${currentUser.username}`}>
                     <Icon kind="account-card" />
                   </NavLink>
-                </NavbarItem>}
-              {auth.token &&
+                </NavbarItem>
+              )}
+              {token && (
                 <NavbarItem>
                   <Icon kind="logout" onClick={this.onLogoutClick} />
-                </NavbarItem>}
-              {!auth.token &&
+                </NavbarItem>
+              )}
+              {!token && (
                 <NavbarItem href="/signup" title="Signup">
                   Signup
-                </NavbarItem>}
+                </NavbarItem>
+              )}
             </NavbarEnd>
           </NavbarMenu>
         </Container>

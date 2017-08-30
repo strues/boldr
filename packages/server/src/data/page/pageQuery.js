@@ -22,7 +22,9 @@ export default {
       slug: { type: GraphQLString },
     },
     async resolve(_, { slug }) {
-      const page = await Page.query().where({ slug }).first();
+      const page = await Page.query()
+        .where({ slug })
+        .first();
       if (page) {
         return page;
       }

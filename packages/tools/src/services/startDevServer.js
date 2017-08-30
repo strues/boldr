@@ -2,10 +2,11 @@ import logger from '@boldr/utils/lib/logger';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 import createExpress from '../server/createExpress';
 import devMiddleware from '../server/devMiddleware';
-import buildWebpackDlls from '../plugins/buildWebpackDlls';
+import buildWebpackDlls from './buildWebpackDlls';
 
 const DEV_PORT = process.env.DEV_PORT;
 const PORT = parseInt(DEV_PORT, 10);
+
 export async function startDevServer() {
   await buildWebpackDlls();
   logger.start('Creating development server...');

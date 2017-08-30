@@ -1,23 +1,23 @@
 /* @flow */
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 // internal
 import Paper from '@boldr/ui/Paper';
 import { Row, Col } from '@boldr/ui/Layout';
-
+import type { TagsType } from '../../../types/boldr';
 import TagList from './components/TagList';
 import AddTag from './components/AddTag';
 
 type Props = {
-  tags: Array<Tag>,
+  tags: TagsType,
 };
 
 type State = {
   add: boolean,
 };
 
-class Tags extends Component {
+class Tags extends React.Component<Props, State> {
   static defaultProps = {
     tags: [],
   };

@@ -24,14 +24,6 @@ server.on('error', err => {
   throw err;
 });
 
-process.on('SIGINT', () => {
-  logger.info('shutting down!');
-  disconnect();
-  destroyRedis();
-  server.close();
-  process.exit(0);
-});
-
 process.on('uncaughtException', error => {
   logger.error(`uncaughtException: ${error.message}`);
   logger.error(error.stack);
@@ -39,4 +31,33 @@ process.on('uncaughtException', error => {
   process.exit(1);
 });
 
+process.on('unhandledRejection', (reason, promise) => {
+  // eslint-disable-next-line no-console
+  logger.error('unhandledRejection', 'reason', reason);
+  // eslint-disable-next-line no-console
+  logger.error('unhandledRejection', 'promise', promise);
+});
+
+const gracefulShutdown = () => {
+  logger.info('Received kill signal, shutting down gracefully.');
+  server.close(() => {
+    disconnect();
+    destroyRedis();
+
+    logger.info('Closed out remaining connections.');
+    process.exit();
+  });
+
+  // if after
+  setTimeout(() => {
+    logger.error('Could not close connections in time, forcefully shutting down');
+    process.exit();
+  }, 10 * 1000);
+};
+
+// listen for TERM signal .e.g. kill
+process.on('SIGTERM', gracefulShutdown);
+
+// listen for INT signal e.g. Ctrl-C
+process.on('SIGINT', gracefulShutdown);
 export default server;

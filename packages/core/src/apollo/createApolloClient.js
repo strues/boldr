@@ -40,8 +40,6 @@ export default function createApolloClient(config = {}) {
         return null;
       },
       credentials: trustNetwork ? 'include' : 'same-origin',
-      // transfer request headers to networkInterface so that they're accessible to proxy server
-      // Addresses this issue: https://github.com/matthew-andrews/isomorphic-fetch/issues/83
       headers,
     };
     if (!ssrMode) {

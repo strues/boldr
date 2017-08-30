@@ -5,8 +5,15 @@ import Switch from 'react-router-dom/Switch';
 import Route from 'react-router-dom/Route';
 
 import { flattenRoutes } from '@boldr/core';
+import { selectCurrentUser } from '../Account/state/selectors';
 import type { FlattenedRoutes, CurrentUser, RouterLocation, MatchPath } from '../../types/boldr';
 import routes from './routes';
+import {
+  selectBoldr,
+  selectUi,
+  selectDashboard,
+  selectRouter,
+} from './state/selectors/adminSelectors';
 import Layout from './components/Layout';
 
 export type Props = {
@@ -26,12 +33,10 @@ export class AdminDashboard extends React.Component<Props, *> {
   props: Props;
   flattenedRoutes: FlattenedRoutes;
 
-  render() {
+  render(): React.Node {
     return (
       <Layout location={this.props.location}>
-        <Switch>
-          {this.flattenedRoutes.map(props => <Route key={props.path} {...props} />)}
-        </Switch>
+        <Switch>{this.flattenedRoutes.map(props => <Route key={props.path} {...props} />)}</Switch>
       </Layout>
     );
   }
@@ -39,11 +44,11 @@ export class AdminDashboard extends React.Component<Props, *> {
 
 function mapStateToProps(state) {
   return {
-    dashboard: state.admin.dashboard,
-    boldr: state.boldr,
-    currentUser: state.auth.info,
-    router: state.router,
-    ui: state.boldr.ui,
+    dashboard: selectDashboard(state),
+    boldr: selectBoldr(state),
+    currentUser: selectCurrentUser(state),
+    router: selectRouter(state),
+    ui: selectUi(state),
   };
 }
 

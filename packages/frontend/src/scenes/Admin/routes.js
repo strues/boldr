@@ -10,7 +10,7 @@ import NewArticleContainer from './Articles/NewArticle/NewArticleContainer';
 import Content from './Content';
 import Members from './Members';
 import Settings from './Settings';
-import TagsContainer from './Tags/TagsContainer';
+import Tags from './Tags';
 import TaggedPost from './Tags/components/TaggedPost/TaggedPost';
 import DashboardLanding from './DashboardLanding';
 import Articles from './Articles/ArticleListing';
@@ -54,7 +54,7 @@ export default [
     exact: true,
     breadcrumb: <Icon kind="tags" />,
     path: '/admin/tags',
-    component: TagsContainer,
+    component: Tags,
     routes: [
       {
         exact: true,

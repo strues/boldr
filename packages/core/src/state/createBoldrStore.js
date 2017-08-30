@@ -11,6 +11,18 @@ const preReducers = [];
 
 const middlewares = [thunk];
 
+/**
+ * Placeholder for a non active middleware in Redux.
+ *
+ * @param store {Object} Store object to work with.
+ */
+export function emptyMiddleware(store) {
+  return next => {
+    return action => {
+      return next(action);
+    };
+  };
+}
 export function addPreReducer(reducers) {
   if (typeof reducers === 'function') {
     preReducers.push(reducers);
@@ -91,15 +103,26 @@ export function getMiddlewares(middleware) {
  * @param  {String}     env               The build environment
  * @return {Object}                       The created store
  */
-export default function createBoldrStore(appReducer, preloadedState, apolloClient, env) {
+export default function createBoldrStore(appReducer, preloadedState, apolloClient) {
   const reducer = getReducer(appReducer, apolloClient);
 
-  const middleware = [];
+  const middleware = [
+    // Redux middleware that spits an error on you when you try to mutate
+    // your state either inside a dispatch or between dispatches.
+    // https://github.com/leoasis/redux-immutable-state-invariant
+    process.env.NODE_ENV === 'development'
+      ? require('redux-immutable-state-invariant').default()
+      : emptyMiddleware,
+  ];
+
   const middles = getMiddlewares(middleware);
+
   const enhancers = [applyMiddleware(apolloClient.middleware(), ...middles)];
+
   if (typeof enhancer === 'function') {
     enhancers.push(enhancer);
   }
+
   const composeEnhancers =
     typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
       ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({

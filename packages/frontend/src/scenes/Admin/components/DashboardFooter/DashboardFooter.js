@@ -2,8 +2,7 @@
 import * as React from 'react';
 import Link from 'react-router-dom/Link';
 import classnames from 'classnames';
-import { Col, Row } from '@boldr/ui';
-import { StyleClasses } from '../../../../theme/styleClasses';
+import { Col, Row, StyleClasses } from '@boldr/ui';
 
 const BASE_ELEMENT = StyleClasses.DASHBOARD_FOOTER;
 type Props = {
@@ -17,9 +16,7 @@ const DashboardFooter = (props: Props) => {
     <footer className={classes}>
       <Row>
         <Col sm={8} md={9}>
-          <span className={`${BASE_ELEMENT}-copyright`}>
-            {props.copyright}
-          </span>
+          <span className={`${BASE_ELEMENT}-copyright`}>{props.copyright}</span>
         </Col>
         <Col sm={4} md={3}>
           <span className={`${BASE_ELEMENT}-powered`}>

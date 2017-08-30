@@ -75,25 +75,42 @@ class Article extends BaseModel {
     };
   }
   static getOnlyArticles(offset, limit) {
-    return Article.query().offset(offset).limit(limit);
+    return Article.query()
+      .offset(offset)
+      .limit(limit);
   }
   static getArticles(offset, limit) {
-    return Article.query().offset(offset).limit(limit).eager('[author,tags,media]');
+    return Article.query()
+      .offset(offset)
+      .limit(limit)
+      .orderBy('createdAt', 'desc')
+      .skipUndefined()
+      .allowEager('[author,tags,media]');
   }
   static getArticlesByTag(name, offset, limit) {
-    return Tag.query().where({ name }).then(([tag]) => {
-      return tag.$relatedQuery('articles').offset(offset).limit(limit);
-    });
+    return Tag.query()
+      .where({ name })
+      .then(([tag]) => {
+        return tag
+          .$relatedQuery('articles')
+          .offset(offset)
+          .limit(limit);
+      });
   }
   static getArticlesByUserId(userId) {
     return Article.query().where({ userId });
   }
   static getArticleById(id) {
-    return Article.query().where({ id }).then(x => x[0]);
+    return Article.query()
+      .where({ id })
+      .then(x => x[0]);
   }
 
   static getArticleBySlug(slug) {
-    return Article.query().where({ slug }).eager('[tags,author,media]').then(x => x[0]);
+    return Article.query()
+      .where({ slug })
+      .eager('[tags,author,media]')
+      .then(x => x[0]);
   }
 }
 

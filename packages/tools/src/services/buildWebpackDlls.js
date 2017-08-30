@@ -31,6 +31,7 @@ export default function buildWebpackDlls() {
 
   function webpackInstance() {
     return {
+      target: 'web',
       // We only use this for development, so lets always include source maps.
       devtool: 'inline-source-map',
       entry: {
@@ -40,6 +41,13 @@ export default function buildWebpackDlls() {
         path: CLIENT_OUTPUT,
         filename: 'boldrDLLs.js',
         library: 'boldrDLLs',
+      },
+      resolve: {
+        modules: [
+          'node_modules',
+          path.resolve(ROOT, './src'),
+          path.resolve(ROOT, './node_modules'),
+        ],
       },
       plugins: [
         new webpack.DllPlugin({
@@ -77,7 +85,9 @@ export default function buildWebpackDlls() {
     if (!fs.existsSync(vendorDLLHashFilePath)) {
       // builddll
       logger.task('Generating a new Vendor DLL.');
-      buildVendorDLL().then(resolve).catch(reject);
+      buildVendorDLL()
+        .then(resolve)
+        .catch(reject);
     } else {
       // first check if the md5 hashes match
       const dependenciesHash = fs.readFileSync(vendorDLLHashFilePath, 'utf8');
@@ -86,7 +96,9 @@ export default function buildWebpackDlls() {
       if (dependenciesChanged) {
         logger.info('New vendor dependencies detected.');
         logger.task('Regenerating the vendor dll...');
-        buildVendorDLL().then(resolve).catch(reject);
+        buildVendorDLL()
+          .then(resolve)
+          .catch(reject);
       } else {
         logger.end('Dependencies did not change. Using existing vendor dll.');
         resolve();

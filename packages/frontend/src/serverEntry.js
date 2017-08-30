@@ -31,8 +31,8 @@ export default ({ clientStats, outputPath }) =>
       initialState,
       apolloUri: process.env.GRAPHQL_ENDPOINT,
     });
-    const env = process.env.NODE_ENV === 'development' ? 'development' : 'production';
-    const reduxStore = createBoldrStore(appReducer, initialState, apolloClient, env);
+
+    const reduxStore = createBoldrStore(appReducer, initialState, apolloClient);
     const routerContext = {};
     const sheet = new ServerStyleSheet();
     const appComponent = (
@@ -43,17 +43,26 @@ export default ({ clientStats, outputPath }) =>
 
     const markup = wrapBoldrApp(appComponent, apolloClient, reduxStore);
     const app = await renderToStringWithData(sheet.collectStyles(markup));
+
     if (routerContext.url) {
       res.status(301).setHeader('Location', routerContext.url);
       res.redirect(routerContext.url);
       return;
     }
-    const chunkNames = flushChunkNames();
-    const { js, styles, cssHash } = flushChunks(clientStats, { chunkNames, outputPath });
-    const preloadedState = reduxStore.getState();
-    preloadedState.apollo = apolloClient.getInitialState();
+
+    const { js, styles, cssHash } = flushChunks(clientStats, {
+      chunkNames: flushChunkNames(),
+      outputPath,
+    });
+
+    const preloadedState = {
+      ...reduxStore.getState(),
+      apollo: apolloClient.getInitialState(),
+    };
+
     const styleTags = sheet.getStyleTags();
     const helmet = Helmet.renderStatic();
+    const dlls = '<script type="text/javascript" src="/static/boldrDLLs.js"></script>';
     res.send(`
         <!doctype html>
           <html ${helmet.htmlAttributes.toString()}>
@@ -68,7 +77,7 @@ export default ({ clientStats, outputPath }) =>
             </head>
             <body ${helmet.bodyAttributes.toString()}>
               <div id="app"><div>${app}</div></div>
-              <script type="text/javascript" src="/static/boldrDLLs.js"></script>
+              ${process.env.NODE_ENV === 'development' ? dlls : null}
               ${js}
               ${cssHash}
               <script type="text/javascript">

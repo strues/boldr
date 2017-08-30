@@ -2,6 +2,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import hasWindow from '@boldr/utils/lib/dom/hasWindow';
+import { Grid } from '@boldr/ui/Layout';
 import type { Article } from '../../../../types/boldr';
 import NewArticleForm from './components/NewArticleForm';
 
@@ -16,10 +17,10 @@ const NewArticle = (props: Props) => {
   };
 
   return (
-    <div>
+    <Grid>
       <Helmet title="Admin: New Post" />
       <NewArticleForm onSubmit={handleOnSubmit} />
-    </div>
+    </Grid>
   );
 };
 

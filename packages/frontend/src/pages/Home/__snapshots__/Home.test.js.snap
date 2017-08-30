@@ -6,13 +6,13 @@ exports[`<Home /> renders snapshot 1`] = `
     encodeSpecialCharacters={true}
     title="Home"
   />
-  <Home__HomeHero>
+  <styled.div>
     <Headline
       type="h1"
     >
       Meet Boldr.
     </Headline>
-  </Home__HomeHero>
+  </styled.div>
   <Grid
     componentClass="div"
     fluid={false}

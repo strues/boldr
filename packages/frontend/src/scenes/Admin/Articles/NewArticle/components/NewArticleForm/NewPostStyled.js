@@ -6,6 +6,8 @@ const NewPost = styled.section`
   width: 100%;
   margin-top: 30px;
   padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
 `;
 const Toolbar = styled.div`
   width: 100%;
@@ -34,11 +36,22 @@ Toolbar.defaultProps = {
 const DarkSegment = styled.div`
   margin-bottom: 1.5rem;
   padding: 1rem;
-  background: #2e363d;
+  background: ${props => props.theme.bg.dark};
+  color: ${props => props.theme.fontColor.light};
   border-radius: 3px;
   box-shadow: 0 1px 1.5px 0 rgba(0, 0, 0, 0.12), 0 1px 1px 0 rgba(0, 0, 0, 0.24);
 `;
 
+DarkSegment.defaultProps = {
+  theme: {
+    bg: {
+      dark: '#233040',
+    },
+    fontColor: {
+      light: '#F7F7F9',
+    },
+  },
+};
 const HelpTxt = styled.p`
   font-size: 14px;
   letter-spacing: 0.8;

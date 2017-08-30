@@ -41,11 +41,11 @@ export default function initAuth(app) {
   app.use(session(sessionOptions));
 
   app.use(async (req, res, next) => {
-    req.isAuthenticated = () => {
+    req.isAuthenticated = async () => {
       const token = fromHeaderOrQuerystring(req);
       try {
-        return jwt.verify(token, config.get('token.secret'));
-        // eslint-disable-next-line
+        await jwt.verify(token, config.get('token.secret'));
+        return true;
       } catch (err) {
         return false;
       }
@@ -55,7 +55,10 @@ export default function initAuth(app) {
     } else {
       const payload = req.isAuthenticated();
 
-      const user = await User.query().findById(payload.subject).eager('roles').skipUndefined();
+      const user = await User.query()
+        .findById(payload.subject)
+        .eager('roles')
+        .skipUndefined();
       req.session.user = user;
       req.user = user;
       req.user.role = user.roles[0].name;

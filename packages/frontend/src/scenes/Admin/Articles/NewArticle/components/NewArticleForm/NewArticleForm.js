@@ -8,7 +8,14 @@ import { Col, Row } from '@boldr/ui/Layout';
 import Paper from '@boldr/ui/Paper';
 import Headline from '@boldr/ui/Headline';
 import Block from '@boldr/ui/Block';
-import Form, { Label, FormGroup, FormField, TextFormField, RadioFormField } from '@boldr/ui/Form';
+import Form, {
+  Label,
+  FormGroup,
+  FormField,
+  TextFormField,
+  TextAreaFormField,
+  RadioFormField,
+} from '@boldr/ui/Form';
 import { isRequired } from '../../../../../../core/util/validations';
 import RenderTags from '../RenderTags';
 import type { RouterLocation } from '../../../../../../types/boldr';
@@ -28,22 +35,15 @@ class NewArticleForm extends React.Component<Props, *> {
   props: Props;
   render() {
     const { handleSubmit, location, reset, pristine, submitting } = this.props;
-    // let isEditForm;
 
-    // if (location && location.pathname.includes('edit')) {
-    //   isEditForm = true;
-    // } else {
-    //   isEditForm = false;
-    // }
     return (
       <div>
-        <Headline type="h1">Create a new post</Headline>
         <NewPost>
           <Form onSubmit={handleSubmit}>
             <Row>
               <Col xs={12} md={8}>
                 <Paper zDepth={1}>
-                  <Toolbar>Content</Toolbar>
+                  <Toolbar>New Article</Toolbar>
                   <Inner>
                     <Field
                       id="post-title"
@@ -51,14 +51,13 @@ class NewArticleForm extends React.Component<Props, *> {
                       type="text"
                       placeholder="A title for the post"
                       component={TextFormField}
-                      label="Post title"
+                      label="Title"
                       tabIndex={0}
                       validate={[isRequired]}
                     />
-                    <Label label="Post content body" />
+                    <Label>Content</Label>
                     <Field
                       component={FieldEditor}
-                      label="Content"
                       name="rawContent"
                       tabIndex={-2}
                       validate={[isRequired]}
@@ -68,10 +67,10 @@ class NewArticleForm extends React.Component<Props, *> {
               </Col>
               <Col xs={12} md={4}>
                 <DarkSegment>
-                  <Headline lightText type="h3">
-                    Content Tags
+                  <Headline type="h4" lightText>
+                    Tags
                   </Headline>
-                  <HelpTxt>*Hit enter to save a tag</HelpTxt>
+                  <HelpTxt>*Enter or Tab to save a tag</HelpTxt>
                   <Field
                     name="tags"
                     type="checkbox"
@@ -87,8 +86,8 @@ class NewArticleForm extends React.Component<Props, *> {
                     id="post-excerpt"
                     type="text"
                     label="Excerpt"
-                    component={TextFormField}
-                    placeholder="Short excerpt about the article"
+                    component={TextAreaFormField}
+                    placeholder="Short description or summary."
                     tabIndex={-3}
                     validate={[isRequired]}
                   />
@@ -98,7 +97,7 @@ class NewArticleForm extends React.Component<Props, *> {
                     id="featureimg"
                     name="image"
                     type="text"
-                    placeholder="URL for your image"
+                    placeholder="https://boldr.io/image.png"
                     component={TextFormField}
                     label="Feature Image"
                   />
@@ -106,7 +105,7 @@ class NewArticleForm extends React.Component<Props, *> {
                 <Block>
                   <FormGroup>
                     <FormField isGrouped>
-                      <Label>Article status:</Label>
+                      <Label>Status:</Label>
                       <Field
                         name="published"
                         type="radio"

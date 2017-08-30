@@ -35,16 +35,17 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.0",
-    "eslint": "4.5.0",
-    "eslint-config-boldr": "0.12.8",
+    "eslint": "^4.5.0",
+    "eslint-config-boldr": "^0.12.8",
     "fast-async": "^6.3.0",
-    "prettier": "1.5.3"
+    "prettier": "^1.6.1"
   },
   "dependencies": {
-    "@boldr/tools": "0.1.0-beta.2",
+    "@boldr/tools": "^0.1.0-beta.2",
     "@boldr/utils": "^0.1.0-rc.5",
     "caporal": "^0.7.0",
-    "p-series": "^1.0.0",
-    "update-notifier": "^2.2.0"
+    "chalk": "^2.1.0",
+    "update-notifier": "^2.2.0",
+    "winston": "^2.3.1"
   }
 }

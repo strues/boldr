@@ -1,6 +1,6 @@
 /* @flow */
 /* eslint-disable react/no-unused-prop-types */
-import React, { Component } from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { hideNotification, removeNotification } from '@boldr/core';
@@ -8,7 +8,7 @@ import Notification from './Notification';
 
 export type Props = {
   uid: string,
-  children: ReactChildren,
+  children: Array<React.Node>,
   hideNotification?: Function,
   removeNotification?: Function,
   animatedMargin?: string,
@@ -22,7 +22,7 @@ export type Props = {
 type State = {
   height: number,
 };
-export class NotificationContainer extends Component<Props, State> {
+export class NotificationContainer extends React.Component<Props, State> {
   state = {
     height: 0,
   };
