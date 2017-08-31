@@ -1,7 +1,7 @@
 /* @flow */
 import * as React from 'react';
 import styled from 'styled-components';
-import { format } from 'date-fns';
+import format from 'date-fns/format';
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import Avatar from '@boldr/ui/Avatar';

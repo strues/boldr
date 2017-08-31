@@ -2,7 +2,9 @@ import cookieParser from 'cookie-parser';
 import morgan from 'morgan';
 import uuid from 'uuid';
 import bodyParser from 'body-parser';
-import { config } from '../config';
+import getConfig from '@boldr/config';
+
+const config = getConfig();
 
 export default function initCore(app) {
   if (process.env.NODE_ENV === 'development') {
@@ -16,7 +18,7 @@ export default function initCore(app) {
   app.disable('etag');
   app.set('json spaces', 2);
   // Parse cookies via standard express tooling
-  app.use(cookieParser(config.get('token.secret')));
+  app.use(cookieParser(config.server.token.secret));
   // Parse application/json
   app.use(bodyParser.json({ type: 'application/json' }));
   // parse application/x-www-form-urlencoded

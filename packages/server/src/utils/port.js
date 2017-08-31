@@ -1,9 +1,11 @@
-import { config } from '../config';
-
-export const DEFAULT_PORT = 3000;
-export const SERVER_PORT = normalizePort(config.get('server.port') || DEFAULT_PORT);
-
-export function normalizePort(val) {
+/**
+ * normalizes the port forr the server to listen on.
+ *
+ * @export
+ * @param {any} val the port value
+ * @returns  the port (int) or false
+ */
+export default function normalizePort(val) {
   const port = parseInt(val, 10);
 
   if (isNaN(port)) {

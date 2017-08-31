@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import { format } from 'date-fns';
+import format from 'date-fns/format';
 import classnames from 'classnames';
 import { Icon, StyleClasses } from '@boldr/ui';
 

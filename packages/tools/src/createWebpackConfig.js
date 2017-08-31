@@ -5,7 +5,9 @@ import fs from 'fs-extra';
 import webpack from 'webpack';
 import WriteFilePlugin from 'write-file-webpack-plugin';
 import ExtractCssChunks from 'extract-css-chunks-webpack-plugin';
+import WatchMissingNodeModulesPlugin from 'react-dev-utils/WatchMissingNodeModulesPlugin';
 import getConfig from '@boldr/config';
+import BundleAnalyzerPlugin from 'webpack-bundle-analyzer';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import SriPlugin from 'webpack-subresource-integrity';
 import UglifyPlugin from 'uglifyjs-webpack-plugin';
@@ -33,7 +35,7 @@ import {
 } from './constants';
 
 const config = getConfig();
-console.log(config);
+
 dotenv.config();
 
 function resolveOwn(relativePath) {
@@ -110,6 +112,7 @@ export default function createWebpackConfig(
       nodentRt: false,
       polyfill: false,
       target: 'modern',
+      imports: 'webpack',
       styled: true,
       // imports: 'webpack',
       srcDir: SRC_DIR,
@@ -124,6 +127,7 @@ export default function createWebpackConfig(
       looseMode: true,
       specMode: false,
       nodentRt: false,
+      imports: 'webpack',
       polyfill: false,
       target: 'current',
       styled: true,
@@ -258,15 +262,37 @@ export default function createWebpackConfig(
         ? info => path.resolve(info.absoluteResourcePath)
         : info => path.resolve(ROOT, info.absoluteResourcePath),
     },
+
     resolve: {
       extensions: ['.js', '.json', '.jsx'],
       descriptionFiles: ['package.json'],
       modules: ['node_modules', path.resolve(ROOT, './src'), path.resolve(ROOT, './node_modules')],
       mainFields: _IS_CLIENT_
-        ? ['jsnext:main', 'module', 'browser', 'main']
-        : ['jsnext:main', 'module', 'main'],
+        ? [
+            'esnext:browser',
+            'jsnext:browser',
+            'browser',
+            'esnext',
+            'jsnext',
+            'esnext:main',
+            'jsnext:main',
+            'module',
+            'main',
+          ]
+        : [
+            'esnext:server',
+            'jsnext:server',
+            'server',
+            'esnext',
+            'jsnext',
+            'esnext:main',
+            'jsnext:main',
+            'module',
+            'main',
+          ],
       alias: {
         'babel-runtime': relativeResolve('babel-runtime/package.json'),
+        immutable: path.resolve(ROOT, './node_modules/immutable/package.json'),
       },
     },
     resolveLoader: {
@@ -283,7 +309,7 @@ export default function createWebpackConfig(
           options: {
             quiet: true,
           },
-          exclude: [/apollo-/, /react-apollo/],
+          exclude: [/apollo-/, /zen-observable-ts/, /react-apollo/, /intl-/],
         },
         // References to images, fonts, movies, music, etc.
         {
@@ -421,7 +447,7 @@ export default function createWebpackConfig(
           },
         ],
       }),
-
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
       // Improve OS compatibility
       // https://github.com/Urthen/case-sensitive-paths-webpack-plugin
       new CaseSensitivePathsPlugin(),
@@ -477,6 +503,7 @@ export default function createWebpackConfig(
           })
         : null,
       _IS_PROD_ ? new webpack.optimize.ModuleConcatenationPlugin() : null,
+      _IS_DEV_ ? new WatchMissingNodeModulesPlugin(path.resolve(ROOT, './node_modules')) : null,
       _IS_CLIENT_ && _IS_DEV_ ? new webpack.HotModuleReplacementPlugin() : null,
       _IS_DEV_ ? new webpack.NoEmitOnErrorsPlugin() : null,
       _IS_DEV_ && _IS_CLIENT_
@@ -488,6 +515,26 @@ export default function createWebpackConfig(
       new ProgressPlugin({
         prefix: PREFIX,
       }),
+      _IS_CLIENT_ && _IS_PROD_
+        ? new BundleAnalyzerPlugin.BundleAnalyzerPlugin({
+            analyzerMode: 'static',
+            defaultSizes: 'gzip',
+            logLevel: 'silent',
+            openAnalyzer: false,
+            reportFilename: 'report.html',
+          })
+        : null,
+
+      // Analyse bundle in production
+      _IS_SERVER_ && _IS_PROD_
+        ? new BundleAnalyzerPlugin.BundleAnalyzerPlugin({
+            analyzerMode: 'static',
+            defaultSizes: 'parsed',
+            logLevel: 'silent',
+            openAnalyzer: false,
+            reportFilename: 'report.html',
+          })
+        : null,
     ].filter(Boolean),
   };
 }

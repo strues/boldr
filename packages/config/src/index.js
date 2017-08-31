@@ -1,5 +1,6 @@
 import path from 'path';
 import fs from 'fs-extra';
+
 import appRoot from '@boldr/utils/lib/node/appRoot';
 import loadConfig from './lib/loadConfig';
 

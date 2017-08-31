@@ -1,14 +1,16 @@
 import winston from 'winston';
-import { format } from 'date-fns';
+import format from 'date-fns/format';
+import getConfig from '@boldr/config';
+
+const config = getConfig();
 
 const isProd = process.env.NODE_ENV === 'production';
-const LOG_LEVEL = process.env.LOG_LEVEL || 'debug';
 
 winston.emitErrs = true;
 
 const logTransports = [
   new winston.transports.Console({
-    level: LOG_LEVEL,
+    level: config.server.logging.level,
     handleExceptions: true,
     json: isProd,
     timestamp: () => format(Date.now(), 'YYYY-MM-DD THH:mm:ss'),

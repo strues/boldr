@@ -5,14 +5,16 @@
 import jwt from 'jsonwebtoken';
 import session from 'express-session';
 import connectRedis from 'connect-redis';
+import getConfig from '@boldr/config';
 import { redisClient } from '../services/redis';
 import User from '../models/User';
-import { config } from '../config';
 import rbac from './rbac';
+
+const config = getConfig();
 
 const env = process.env.NODE_ENV || 'development';
 const sessionOptions = {
-  secret: config.get('token.secret'),
+  secret: config.server.token.secret,
   name: 'boldr:sid',
   httpOnly: true,
   rolling: true,
@@ -21,7 +23,7 @@ const sessionOptions = {
   unset: 'destroy',
   cookie: {
     secure: false,
-    maxAge: config.get('token.expiration'),
+    maxAge: config.server.token.expiration,
   },
   store: new (connectRedis(session))({ client: redisClient }),
 };
@@ -37,6 +39,7 @@ function fromHeaderOrQuerystring(req) {
   }
   return null;
 }
+
 export default function initAuth(app) {
   app.use(session(sessionOptions));
 
@@ -44,7 +47,7 @@ export default function initAuth(app) {
     req.isAuthenticated = async () => {
       const token = fromHeaderOrQuerystring(req);
       try {
-        await jwt.verify(token, config.get('token.secret'));
+        await jwt.verify(token, config.server.token.secret);
         return true;
       } catch (err) {
         return false;

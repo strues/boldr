@@ -1,10 +1,12 @@
 import knex from 'knex';
 import { Model } from 'objection';
-import { config } from '../../config';
+import getConfig from '@boldr/config';
+
+const config = getConfig();
 
 const knexOpts = {
   client: 'pg',
-  connection: config.get('db.url'),
+  connection: config.server.db.url,
   searchPath: 'knex,public',
   pool: {
     min: 2,
@@ -17,11 +19,7 @@ const knexOpts = {
 };
 
 const db = knex(knexOpts);
-
-function initializeDb() {
-  Model.knex(db);
-  return db.raw('select 1+1 as result');
-}
+Model.knex(db);
 
 async function disconnect(db) {
   if (!db) {
@@ -33,6 +31,7 @@ async function disconnect(db) {
     throw new Error(err);
   }
 }
+
 export default db;
 
-export { disconnect, initializeDb };
+export { disconnect };

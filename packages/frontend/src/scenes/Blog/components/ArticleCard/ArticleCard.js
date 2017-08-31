@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import { format } from 'date-fns';
+import format from 'date-fns/format';
 import Link from 'react-router-dom/Link';
 import classnames from 'classnames';
 import { Button, Card, CardTitle, CardText, CardActions, Media, StyleClasses } from '@boldr/ui';

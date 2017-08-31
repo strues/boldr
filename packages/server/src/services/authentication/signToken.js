@@ -1,8 +1,10 @@
-const uuid = require('uuid');
-const jwt = require('jsonwebtoken');
-const { config } = require('../../config');
+import uuid from 'uuid';
+import jwt from 'jsonwebtoken';
+import getConfig from '@boldr/config';
 
-module.exports = function signToken(user) {
+const config = getConfig();
+
+export default function signToken(user) {
   const roleinfo = user.roles[0].name;
   const payload = {
     issuer: 'boldr',
@@ -13,7 +15,7 @@ module.exports = function signToken(user) {
     role: roleinfo,
   };
   return new Promise((resolve, reject) => {
-    jwt.sign(payload, config.get('token.secret'), (err, token) => {
+    jwt.sign(payload, config.server.token.secret, (err, token) => {
       if (err) {
         return reject(err);
       }
@@ -21,4 +23,4 @@ module.exports = function signToken(user) {
       return resolve(token);
     });
   });
-};
+}

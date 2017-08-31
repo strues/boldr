@@ -1,21 +1,19 @@
 /* eslint-disable no-console, no-shadow */
 import http from 'http';
-import _debug from 'debug';
 import getConfig from '@boldr/config';
 import app from './app';
-import { initializeDb, disconnect } from './services/db';
+import { disconnect } from './services/db';
 import logger from './services/logger';
 import { destroyRedis } from './services/redis';
-import { SERVER_PORT } from './utils/port';
+import normalizePort from './utils/port';
+
 const config = getConfig();
-console.log(config);
-const debug = _debug('boldr:server');
+
+const port = normalizePort(config.server.port);
 // Launch Node.js server
 const server = http.createServer(app);
 
-initializeDb();
-
-server.listen(SERVER_PORT);
+server.listen(port);
 server.on('listening', () => {
   const address = server.address();
   logger.info('Boldr running on port %s', address.port);
@@ -25,40 +23,35 @@ server.on('error', err => {
   throw err;
 });
 
-process.on('uncaughtException', error => {
-  logger.error(`uncaughtException: ${error.message}`);
-  logger.error(error.stack);
-  debug(error.stack);
-  process.exit(1);
-});
-
-process.on('unhandledRejection', (reason, promise) => {
-  // eslint-disable-next-line no-console
-  logger.error('unhandledRejection', 'reason', reason);
-  // eslint-disable-next-line no-console
-  logger.error('unhandledRejection', 'promise', promise);
-});
-
-const gracefulShutdown = () => {
-  logger.info('Received kill signal, shutting down gracefully.');
-  server.close(() => {
-    disconnect();
-    destroyRedis();
-
-    logger.info('Closed out remaining connections.');
+function gracefulExit(options, err) {
+  if (options.cleanup) {
+    const actions = [server.close, disconnect, destroyRedis];
+    actions.forEach((close, i) => {
+      try {
+        close(() => {
+          if (i === actions.length - 1) {
+            process.exit();
+          }
+        });
+        // eslint-disable-next-line
+      } catch (err) {
+        if (i === actions.length - 1) {
+          process.exit();
+        }
+      }
+    });
+  }
+  if (err) {
+    logger.error(err.stack);
+  }
+  if (options.exit) {
     process.exit();
-  });
+  }
+}
 
-  // if after
-  setTimeout(() => {
-    logger.error('Could not close connections in time, forcefully shutting down');
-    process.exit();
-  }, 10 * 1000);
-};
+process.on('exit', gracefulExit.bind(null, { cleanup: true }));
+process.on('SIGINT', gracefulExit.bind(null, { exit: true }));
+process.on('SIGTERM', gracefulExit.bind(null, { exit: true }));
+process.on('uncaughtException', gracefulExit.bind(null, { exit: true }));
 
-// listen for TERM signal .e.g. kill
-process.on('SIGTERM', gracefulShutdown);
-
-// listen for INT signal e.g. Ctrl-C
-process.on('SIGINT', gracefulShutdown);
 export default server;

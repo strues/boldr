@@ -28,7 +28,7 @@
     "build": "npm run clean && prepublish",
     "clean": "rimraf lib",
     "format":
-      "prettier --single-quote=true --print-width=100 --jsx-bracket-same-line=false --trailing-comma=all --write \"src/**/*.js\""
+      "prettier --single-quote=true --print-width=100 --jsx-bracket-same-line=true --trailing-comma=all --write \"src/**/*.js\""
   },
   "dependencies": {
     "@boldr/config": "^0.1.0-alpha.1",
@@ -39,6 +39,7 @@
     "babel-preset-boldr": "0.11.0",
     "better-sass-loader": "^0.1.0-beta.1",
     "bluebird": "^3.5.0",
+
     "cache-loader": "^1.0.3",
     "case-sensitive-paths-webpack-plugin": "^2.1.1",
     "chalk": "^2.1.0",
@@ -63,11 +64,13 @@
     "react-hot-loader": "next",
     "source-map-loader": "^0.2.1",
     "source-map-support": "^0.4.16",
+
     "uglify-es": "^3.0.28",
     "uglifyjs-webpack-plugin": "1.0.0-beta.2",
     "url-loader": "^0.5.9",
     "uuid": "^3.1.0",
     "webpack": "^3.5.5",
+    "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-middleware": "^1.12.0",
     "webpack-hot-middleware": "^2.18.2",
     "webpack-hot-server-middleware": "^0.1.0",
@@ -76,7 +79,7 @@
   },
   "devDependencies": {
     "eslint": "4.5.0",
-    "eslint-config-boldr": "0.12.10",
+    "eslint-config-boldr": "^0.12.11",
     "prepublish": "^1.4.1",
     "prettier": "^1.6.1",
     "rimraf": "^2.6.1"

@@ -1,9 +1,11 @@
 import Redis from 'ioredis';
+import getConfig from '@boldr/config';
 import logger from '../logger';
-import { config } from '../../config';
 
-const redisClient = new Redis(config.get('redis.url'));
-const pubSubClient = new Redis(config.get('redis.url'));
+const config = getConfig();
+
+const redisClient = new Redis(config.server.redis.url);
+const pubSubClient = new Redis(config.server.redis.url);
 
 function destroyRedis() {
   redisClient.disconnect();
@@ -11,7 +13,7 @@ function destroyRedis() {
 }
 
 redisClient.on('connect', () => {
-  logger.info(`Redis connected on ${config.get('redis.url')}`);
+  logger.info(`Redis connected on ${config.server.redis.url}`);
 });
 
 redisClient.on('error', err => {
