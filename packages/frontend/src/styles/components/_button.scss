@@ -45,7 +45,7 @@
     text-decoration: none;
   }
 
-  &.#{$boldr-ns}btn__loading {
+  &.#{$boldr-ns}btn--loading {
     &:hover,
     &:active {
       background: $btn-white;
@@ -98,7 +98,7 @@
     border-color: $btn-primary-active;
   }
 
-  &.#{$boldr-ns}btn__loading {
+  &.#{$boldr-ns}btn--loading {
     &:hover,
     &:active {
       background: $btn-primary;
@@ -133,7 +133,7 @@
     border-color: $btn-primary-active;
   }
 
-  &.#{$boldr-ns}btn__loading {
+  &.#{$boldr-ns}btn--loading {
     &:hover,
     &:active {
       background: $btn-white;
@@ -169,7 +169,7 @@
     border-color: $btn-danger-active;
   }
 
-  &.#{$boldr-ns}btn__loading {
+  &.#{$boldr-ns}btn--loading {
     &:hover,
     &:active {
       background: $btn-danger;
@@ -182,7 +182,7 @@
   }
 }
 
-.#{$boldr-ns}btn__danger-outline {
+.#{$boldr-ns}btn__danger--outline {
   color: $btn-danger;
   background: $btn-white;
   border-color: $btn-danger;
@@ -204,7 +204,7 @@
     border-color: $btn-danger-active;
   }
 
-  &.#{$boldr-ns}btn__loading {
+  &.#{$boldr-ns}btn--loading {
     &:hover,
     &:active {
       background: $btn-white;
@@ -240,7 +240,7 @@
     border-color: $btn-secondary-active;
   }
 
-  &.#{$boldr-ns}btn__loading {
+  &.#{$boldr-ns}btn--loading {
     &:hover,
     &:active {
       background: $btn-secondary;
@@ -253,7 +253,7 @@
   }
 }
 
-.#{$boldr-ns}btn__secondary-outline {
+.#{$boldr-ns}btn__secondary--outline {
   color: $btn-secondary;
   background: $btn-white;
   border-color: $btn-secondary;
@@ -275,7 +275,7 @@
     border-color: $btn-secondary-active;
   }
 
-  &.#{$boldr-ns}btn__loading {
+  &.#{$boldr-ns}btn--loading {
     &:hover,
     &:active {
       background: $btn-white;
@@ -288,8 +288,8 @@
   }
 }
 
-.#{$boldr-ns}btn__disabled,
-.#{$boldr-ns}btn__disabled[disabled] {
+.#{$boldr-ns}btn--disabled,
+.#{$boldr-ns}btn--disabled[disabled] {
   color: $btn-gray;
   background: #f8f8f8;
   border-color: $btn-light-gray;
@@ -314,7 +314,7 @@
   }
 }
 
-.#{$boldr-ns}btn__loading {
+.#{$boldr-ns}btn--loading {
   position: relative;
   color: transparent;
   cursor: not-allowed;
@@ -359,7 +359,7 @@
   }
 }
 
-.#{$boldr-ns}btn__border-transparent {
+.#{$boldr-ns}btn--transparent {
   border-color: transparent;
 
   &:hover {

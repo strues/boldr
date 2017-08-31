@@ -3,15 +3,16 @@
 exports[`<Home /> renders snapshot 1`] = `
 <div>
   <HelmetWrapper
+    defer={true}
     encodeSpecialCharacters={true}
     title="Home"
   />
   <styled.div>
-    <Headline
+    <Heading
+      isLight={true}
+      text="Meet Boldr."
       type="h1"
-    >
-      Meet Boldr.
-    </Headline>
+    />
   </styled.div>
   <Grid
     componentClass="div"
@@ -25,75 +26,48 @@ exports[`<Home /> renders snapshot 1`] = `
         md={4}
         xs={12}
       >
-        <Headline
+        <Heading
+          text="Placeholder 1"
           type="h2"
-        >
-          Placeholder 12
-        </Headline>
-        <styled.p
+        />
+        <Paragraph
           isLead={false}
           isLight={false}
-          theme={
-            Object {
-              "fontColor": Object {
-                "dark": "#030507",
-                "light": "#F7F7F9",
-              },
-            }
-          }
         >
           This proposal introduces an Observable type to the ECMAScript standard library. The Observable type can be used to model push-based data sources such as DOM events, timer intervals, and sockets.
-        </styled.p>
+        </Paragraph>
       </Col>
       <Col
         componentClass="div"
         md={4}
         xs={12}
       >
-        <Headline
+        <Heading
+          text="Placeholder 2"
           type="h2"
-        >
-          Placeholder 2
-        </Headline>
-        <styled.p
+        />
+        <Paragraph
           isLead={false}
           isLight={false}
-          theme={
-            Object {
-              "fontColor": Object {
-                "dark": "#030507",
-                "light": "#F7F7F9",
-              },
-            }
-          }
         >
           The iterator interface (introduced in ECMAScript 2015) is a sequential data access protocol which enables the development of generic and composable data consumers and transformers. Their primary interface is a next() method which returns a value, done tuple, where done is a boolean indicating whether the end of the iterator has been reached, and value is the yielded value in the sequence.
-        </styled.p>
+        </Paragraph>
       </Col>
       <Col
         componentClass="div"
         md={4}
         xs={12}
       >
-        <Headline
+        <Heading
+          text="Placeholder 3"
           type="h2"
-        >
-          Placeholder 3
-        </Headline>
-        <styled.p
+        />
+        <Paragraph
           isLead={false}
           isLight={false}
-          theme={
-            Object {
-              "fontColor": Object {
-                "dark": "#030507",
-                "light": "#F7F7F9",
-              },
-            }
-          }
         >
           In ECMAScript, a realm consists of a global object and an associated set of primordial objects -- mutable objects like Array.prototype that must exist before any code runs. Objects within a realm implicitly share these primordials and can therefore easily disrupt each other by primordial poisoning -- modifying these objects to behave badly. This disruption may happen accidentally or maliciously. Today, in the browser, realms can be created via same origin iframes.
-        </styled.p>
+        </Paragraph>
       </Col>
     </Row>
   </Grid>

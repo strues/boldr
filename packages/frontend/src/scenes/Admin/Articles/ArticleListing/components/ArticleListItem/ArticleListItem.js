@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import Avatar from '@boldr/ui/Avatar';
 import Icon from '@boldr/ui/Icons/Icon';
+
 import { push } from 'react-router-redux';
 
 import { Menu, MenuItem } from '@boldr/ui/Menu';
@@ -47,8 +48,11 @@ class ArticleListItem extends React.Component<Props, *> {
   handleEditClick = () => {
     this.props.dispatch(push(`/admin/articles/${this.props.article.slug}`));
   };
+  handleDeleteClick = () => {
+    this.props.deleteArticle(article.id);
+  };
   render() {
-    const { article, deleteArticle } = this.props;
+    const { article } = this.props;
 
     return (
       <ListItem onClick={this.handleArticleClick}>
@@ -58,7 +62,7 @@ class ArticleListItem extends React.Component<Props, *> {
           <Menu isSize="normal">
             <MenuItem
               icon={<Icon kind="trash" color="#222" />}
-              onClick={deleteArticle(article.id)}
+              onClick={this.handleDeleteClick}
               text="Delete"
             />
             <MenuItem

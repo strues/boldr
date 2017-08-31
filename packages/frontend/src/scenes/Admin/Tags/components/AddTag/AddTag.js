@@ -5,7 +5,7 @@ import { graphql, compose } from 'react-apollo';
 import styled from 'styled-components';
 // internal
 import Button from '@boldr/ui/Button';
-import Headline from '@boldr/ui/Headline';
+import Heading from '@boldr/ui/Heading';
 import { Control, FormField, Form, TextFormField } from '@boldr/ui/Form';
 import { formatReduxFormErrors } from '../../../../../core/reduxFormErrors';
 import ADD_TAG_MUTATION from '../../gql/addTag.mutation.graphql';
@@ -40,7 +40,7 @@ class AddTag extends React.Component<Props, *> {
     const { handleSubmit, reset, submitting, pristine } = this.props;
     return (
       <TagFormPanel>
-        <Headline type="h3" text="Add a New Tag" />
+        <Heading type="h3" text="Add a New Tag" />
         <Form className="boldr-form__addtag" onSubmit={handleSubmit(this.addTagMutation)}>
           <Field id="tag-name" name="name" component={TextFormField} type="text" label="Name" />
           <Field

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DropdownOption /> should render as an li 1`] = `
-<Dropdown.styled__DropdownOpt
+<styled.li
   onClick={[Function]}
   onKeyDown={[Function]}
   onMouseEnter={[Function]}
@@ -10,5 +10,5 @@ exports[`<DropdownOption /> should render as an li 1`] = `
   <div>
     abcd
   </div>
-</Dropdown.styled__DropdownOpt>
+</styled.li>
 `;

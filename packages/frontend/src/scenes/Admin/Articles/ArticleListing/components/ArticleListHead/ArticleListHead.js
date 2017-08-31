@@ -1,6 +1,6 @@
 /* @flow */
 import React from 'react';
-import { Headline } from '@boldr/ui';
+import { Heading } from '@boldr/ui';
 import styled from 'styled-components';
 
 const ListHeader = styled.div`
@@ -10,7 +10,7 @@ const ListHeader = styled.div`
 const ArticleListHead = () => {
   return (
     <ListHeader>
-      <Headline type="h4">All Articles</Headline>
+      <Heading type="h4">All Articles</Heading>
     </ListHeader>
   );
 };

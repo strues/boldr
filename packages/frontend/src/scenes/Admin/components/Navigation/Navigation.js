@@ -63,7 +63,11 @@ export class Navigation extends React.Component<Props, *> {
           <NavbarBrand>
             <NavbarItem>
               <Link to="/">
-                <img src="https://boldr.io/assets/boldr-logo.png" />
+                <img
+                  className="boldr-logo-img"
+                  alt="logo image"
+                  src="https://boldr.io/assets/boldr-logo-light.png"
+                />
               </Link>
             </NavbarItem>
             <NavbarBurger isActive={isActive} onClick={this.onClickNav} />

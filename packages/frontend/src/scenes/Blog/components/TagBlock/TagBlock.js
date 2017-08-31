@@ -4,7 +4,7 @@ import classnames from 'classnames';
 import Link from 'react-router-dom/Link';
 import Tag from '@boldr/ui/Tag';
 import Icon from '@boldr/ui/Icons/Icon';
-import { StyleClasses } from '../../../../theme/styleClasses';
+import { StyleClasses } from '@boldr/ui/theme/styleClasses';
 
 const BASE_ELEMENT = StyleClasses.TAG_BLOCK;
 

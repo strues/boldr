@@ -1,11 +1,11 @@
 @import 'overrides';
 @import '~@boldr/ui/styles/boldrui.scss';
 
-.boldrui-card__title {
+.boldr-card__title {
   padding: 1em;
 }
 
-.boldrui-dash-footer {
+.boldr-dash-footer {
   background-color: #233040;
   color: #9b9b9a;
   font-size: 18px;
@@ -14,6 +14,21 @@
   line-height: 1.5;
   word-spacing: 0;
 }
-.boldrui-navbar__dropdown {
+.boldr-navbar__dropdown {
   border-top: 1px solid #243140;
+}
+
+.boldr-logo-img {
+  height: 40px;
+}
+
+.boldr-footer {
+  color: #616b77;
+  padding: 3rem 1.5rem 6rem;
+  background: #233040 none repeat scroll 0 0;
+
+  &::before {
+    display: table;
+    content: "";
+  }
 }

@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react';
 import styled from 'styled-components';
 import Icon from '@boldr/ui/Icons/Icon';
 // internal
-import Headline from '@boldr/ui/Headline';
+import Heading from '@boldr/ui/Heading';
 import Paragraph from '@boldr/ui/Paragraph';
 import Divider from '@boldr/ui/Divider';
 
@@ -42,7 +42,7 @@ class SettingsAside extends PureComponent {
     return (
       <Wrapper>
         <SidebarHeader>
-          <Headline type="h3">Settings</Headline>
+          <Heading type="h3">Settings</Heading>
           <Paragraph isLead>Modify how Boldr interacts with your website.</Paragraph>
         </SidebarHeader>
         <Divider />

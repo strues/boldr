@@ -3,40 +3,40 @@
 ////
 
 /// A placeholder for displaying an element inline
-%boldrui-inline-block {
+%boldr-inline-block {
   display: inline-block;
   vertical-align: bottom;
 }
 
 /// A simple placeholder for setting the width to 100%.
-%boldrui-full-width {
+%boldr-full-width {
   width: 100%;
 }
 
 /// A simple placeholder for centering an item.
-%boldrui-block-centered {
+%boldr-block-centered {
   display: block;
   margin-right: auto;
   margin-left: auto;
 }
 
-.boldrui-cf {
+.boldr-cf {
   @include clearfix();
 }
 
-.boldrui-inline-block {
-  @extend %boldrui-inline-block;
+.boldr-inline-block {
+  @extend %boldr-inline-block;
 }
 
-.boldrui-full-width {
-  @extend %boldrui-full-width;
+.boldr-full-width {
+  @extend %boldr-full-width;
 }
 
-.boldrui-block-centered {
-  @extend %boldrui-block-centered;
+.boldr-block-centered {
+  @extend %boldr-block-centered;
 }
 
-.boldrui-pad-top {
+.boldr-pad-top {
   padding-top: 1em;
 }
 

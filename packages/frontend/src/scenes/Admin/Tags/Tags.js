@@ -13,30 +13,17 @@ type Props = {
   tags: TagsType,
 };
 
-type State = {
-  add: boolean,
-};
-
-class Tags extends React.Component<Props, State> {
+class Tags extends React.Component<Props, *> {
   static defaultProps = {
     tags: [],
   };
-  state = {
-    add: false,
-  };
-
-  state: State;
 
   props: Props;
 
   handleTagSubmit = values => {
     console.log(values);
   };
-  handleAddTagClick = () => {
-    this.setState({
-      add: true,
-    });
-  };
+
   handleDeleteTagClick = id => {
     console.log(id);
   };

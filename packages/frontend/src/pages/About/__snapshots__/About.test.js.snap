@@ -3,13 +3,13 @@
 exports[`<About /> renders snapshot 1`] = `
 <div>
   <HelmetWrapper
+    defer={true}
     encodeSpecialCharacters={true}
     title="About"
   />
-  <Headline
+  <Heading
+    text="About"
     type="h1"
-  >
-    About
-  </Headline>
+  />
 </div>
 `;

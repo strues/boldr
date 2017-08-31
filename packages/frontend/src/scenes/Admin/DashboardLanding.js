@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import { connect } from 'react-redux';
-import Headline from '@boldr/ui/Headline';
+import Heading from '@boldr/ui/Heading';
 import ContentPromo from '@boldr/ui/ContentPromo';
 
 import Tabs from '@boldr/ui/Tabs';
@@ -32,7 +32,7 @@ class DashboardLanding extends React.Component<Props, *> {
     return (
       <div>
         <ContentPromo isCentered>
-          <Headline kind="h1" text={`Welcome ${this.props.currentUser.firstName}`} />
+          <Heading kind="h1" text={`Welcome ${this.props.currentUser.firstName}`} />
         </ContentPromo>
         <Tabs defaultActiveKey="1" onChange={this.onTabChange}>
           <TabPane tab="Tab 1" key="1">

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Option /> should render in a div 1`] = `
-<Option.styled__OptionWrapper
+<styled.div
   disabled={false}
   isDark={false}
   onClick={[Function]}
@@ -17,5 +17,5 @@ exports[`<Option /> should render in a div 1`] = `
   <span>
     abcd
   </span>
-</Option.styled__OptionWrapper>
+</styled.div>
 `;

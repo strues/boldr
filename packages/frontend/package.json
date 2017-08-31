@@ -31,7 +31,7 @@
     "@boldr/config": "^0.1.0-alpha.1",
     "@boldr/icons": "0.1.0-rc.2",
     "@boldr/tools": "0.1.0-beta.2",
-    "@boldr/ui": "0.1.4",
+    "@boldr/ui": "0.1.5",
     "@boldr/utils": "^0.1.0-rc.5",
     "color": "2.0.0",
     "draft-convert": "^1.4.9",

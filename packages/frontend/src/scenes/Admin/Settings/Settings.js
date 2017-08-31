@@ -3,7 +3,7 @@ import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import { Grid, Col, Row } from '@boldr/ui/Layout';
-import Headline from '@boldr/ui/Headline';
+import Heading from '@boldr/ui/Heading';
 import Paper from '@boldr/ui/Paper';
 
 import {

@@ -1,8 +1,8 @@
 /* @flow */
 import React from 'react';
 import classnames from 'classnames';
-import Headline from '@boldr/ui/Headline';
-import { StyleClasses } from '../../../../theme/styleClasses';
+import Heading from '@boldr/ui/Heading';
+import { StyleClasses } from '@boldr/ui/theme/styleClasses';
 import TagBlock from '../TagBlock';
 
 type Props = {
@@ -16,7 +16,7 @@ const SidebarTags = (props: Props) => {
   const classes = classnames(BASE_ELEMENT, props.className);
   return (
     <div className={classes}>
-      <Headline type="h3">Related Tags</Headline>
+      <Heading type="h3">Related Tags</Heading>
       <TagBlock tags={props.tags} />
     </div>
   );

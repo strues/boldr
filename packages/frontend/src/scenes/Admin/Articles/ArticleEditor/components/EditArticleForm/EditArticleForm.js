@@ -4,7 +4,7 @@ import { Field, reduxForm } from 'redux-form';
 import styled from 'styled-components';
 import Button from '@boldr/ui/Button';
 import { Col, Row } from '@boldr/ui/Layout';
-import Headline from '@boldr/ui/Headline';
+import Heading from '@boldr/ui/Heading';
 import { FormGroup, Label, FormField, TextFormField, RadioFormField } from '@boldr/ui/Form';
 import EditorField from './EditorField';
 
@@ -35,7 +35,7 @@ const EditArticleForm = (props: Props) => {
   return (
     <Row>
       <Col xs>
-        <Headline type="h3">Editing {props.initialValues.title}</Headline>
+        <Heading type="h3">Editing {props.initialValues.title}</Heading>
         <form onSubmit={handleSubmit}>
           <Wrapper>
             <FormGroup>

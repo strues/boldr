@@ -7,7 +7,7 @@ import { Grid, Col, Row } from '@boldr/ui/Layout';
 import Icon from '@boldr/ui/Icons/Icon';
 // internal
 import Button from '@boldr/ui/Button';
-import Headline from '@boldr/ui/Headline';
+import Heading from '@boldr/ui/Heading';
 
 import ProfileDetail from '../ProfileDetail';
 
@@ -54,9 +54,9 @@ const ProfileContent = (props: Props) => {
             />
           </Col>
           <Col xs={12} md={6}>
-            <Headline type="h1">
+            <Heading type="h1">
               {profile.firstName} {profile.lastName}'s Profile
-            </Headline>
+            </Heading>
 
             <DetailList>
               <ProfileDetail

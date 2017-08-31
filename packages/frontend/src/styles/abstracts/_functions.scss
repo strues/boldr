@@ -79,26 +79,6 @@
   @return strip-units(($target / $context)) + 0em;
 }
 
-/// Returns an EM value that is a multiple of our defined base vertical unit. For
-/// example 3 becomes 1.125em
-@function em-rhythm($lines: $base-vertical-unit, $font-size: $base-em-font-size, $silent: false) {
-  @if is-int($lines) == false and $silent == false {
-    @warn #{$lines} + $not-integer-txt;
-  }
-
-  @return (strip-units($lines) * strip-units($base-vertical-unit)) / (strip-units($font-size) * strip-units($base-font-size)) + 0em;
-}
-
-/// Returns a unitless number that is a multiple of our defined base vertical unit.
-/// For example 3 becomes 1.125
-@function unitless-rhythm($lines: $base-line-multi, $font-size: $base-em-font-size, $silent: false) {
-  @if is-int($lines) == false and $silent == false {
-    @warn #{$lines} + $not-integer-txt;
-  }
-
-  @return ($lines * strip-units($base-vertical-unit)) / (strip-units($font-size) * strip-units($base-font-size));
-}
-
 @function powerNumber($number, $exp) {
   $value: 1;
   @if $exp > 0 {
@@ -124,7 +104,6 @@
       $value: ($value + 0.055) / 1.055;
       $value: powerNumber($value, 2);
     }
-    $adjusted: 0;
     $value: $value / 255;
     $color-rgb: map-merge($color-rgb,  ($name: $value));
   }

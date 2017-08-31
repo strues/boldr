@@ -10,8 +10,8 @@ exports[`<ArticleContent /> renders snapshot 1`] = `
   >
     <ArticleDate />
     <Divider />
-    <div
-      className="boldrui-article__content"
+    <DynamicContent
+      className="boldr-article__content"
       dangerouslySetInnerHTML={
         Object {
           "__html": undefined,

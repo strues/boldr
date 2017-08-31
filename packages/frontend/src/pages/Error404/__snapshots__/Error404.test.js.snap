@@ -5,14 +5,14 @@ exports[`<Error404 /> renders snapshot 1`] = `
   className="error_wrapper"
 >
   <HelmetWrapper
+    defer={true}
     encodeSpecialCharacters={true}
     title="404! You might be lost..."
   />
-  <Headline
+  <Heading
+    text="404!"
     type="h1"
-  >
-    404!
-  </Headline>
+  />
   <p>
     SORRY PAGE NOT FOUND
   </p>

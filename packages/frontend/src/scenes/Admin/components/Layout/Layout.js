@@ -13,7 +13,7 @@ export type Props = {
 
 function Layout(props: Props) {
   return (
-    <Hero isColor="info" className="boldrui-admin-layout" isFullHeight>
+    <Hero isColor="info" className="boldr-admin-layout" isFullHeight>
       <HeroHeader>
         <Navigation location={props.location} />
       </HeroHeader>

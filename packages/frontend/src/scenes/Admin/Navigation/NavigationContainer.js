@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { gql, graphql } from 'react-apollo';
 import { bindActionCreators } from 'redux';
-import Headline from '@boldr/ui/Headline';
+import Heading from '@boldr/ui/Heading';
 import ContentPromo from '@boldr/ui/ContentPromo';
 // import { updateMenuDetails, addMenuDetail } from '../../../state/boldr/menu/actions';
 // import Navigation from './Navigation';
@@ -19,7 +19,7 @@ class NavigationContainer extends Component {
     return (
       <div>
         <ContentPromo isCentered>
-          <Headline kind="h1">Navigation</Headline>
+          <Heading kind="h1">Navigation</Heading>
         </ContentPromo>
       </div>
     );

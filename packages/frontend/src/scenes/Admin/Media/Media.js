@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { ImageDisplay, Col, Row, Headline } from '@boldr/ui';
+import { ImageDisplay, Col, Row, Heading } from '@boldr/ui';
 import type { MediasType, MediaType } from '../../../types/boldr';
 
 import DELETE_MEDIA from './gql/deleteMedia.graphql';
@@ -44,7 +44,7 @@ class Media extends React.Component<Props, *> {
         <Helmet title="Media" />
         <Row>
           <Col xs={12}>
-            <Headline type="h2" text="Media Gallery" />
+            <Heading type="h2" text="Media Gallery" />
             <Row>
               <MediaList>
                 {media.map(m => (
@@ -69,7 +69,9 @@ class Media extends React.Component<Props, *> {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ navigate: url => dispatch(push(url)) }, dispatch);
+  return {
+    navigate: url => dispatch(push(url)),
+  };
 }
 
 export default compose(

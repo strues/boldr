@@ -3,7 +3,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import Button from '@boldr/ui/Button';
-import Headline from '@boldr/ui/Headline';
+import Heading from '@boldr/ui/Heading';
 import Form, { TextFormField, FormField, Control } from '@boldr/ui/Form';
 
 type Props = {
@@ -22,7 +22,7 @@ let ProfileForm = (props: Props) => {
       <Field id="loc" name="location" component={TextFormField} type="text" label="Location" />
       <Field id="web" name="website" component={TextFormField} type="text" label="Website" />
       <Field id="bio" name="bio" component={TextFormField} type="text" label="Bio" />
-      <Headline type="h4">Social</Headline>
+      <Heading type="h4">Social</Heading>
       <Field id="fb" name="facebook" component={TextFormField} type="text" label="Facebook" />
       <Field id="tw" name="twitter" component={TextFormField} type="text" label="Twitter" />
       <Field id="goog" name="google" component={TextFormField} type="text" label="Google" />

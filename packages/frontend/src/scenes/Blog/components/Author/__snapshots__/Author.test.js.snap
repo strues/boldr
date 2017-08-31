@@ -2,9 +2,9 @@
 
 exports[`<Author /> renders snapshot 1`] = `
 <div
-  className="boldrui-article-sidebar__author"
+  className="boldr-article-sidebar__author"
 >
-  <Author__AvatarName>
+  <styled.div>
     <Avatar
       role="presentation"
       src="abcd"
@@ -32,21 +32,20 @@ exports[`<Author /> renders snapshot 1`] = `
         ]
       }
     />
-  </Author__AvatarName>
-  <Author__AvatarName>
-    <Headline
-      type="h3"
+  </styled.div>
+  <styled.div>
+    <Link
+      replace={false}
+      to="/profiles/hey"
     >
-      <Link
-        replace={false}
-        to="/profiles/hey"
-      >
-        hey
-      </Link>
-    </Headline>
-  </Author__AvatarName>
-  <Author__BioBlock>
+      <Heading
+        text="hey"
+        type="h3"
+      />
+    </Link>
+  </styled.div>
+  <styled.div>
     bio bio
-  </Author__BioBlock>
+  </styled.div>
 </div>
 `;

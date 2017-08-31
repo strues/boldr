@@ -2,7 +2,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Paper from '@boldr/ui/Paper';
-import Headline from '@boldr/ui/Headline';
+import Heading from '@boldr/ui/Heading';
 import { Col, Row, Grid } from '@boldr/ui/Layout';
 import ProfileForm from '../ProfileForm';
 // import { editProfile } from '@@state/users/actions';
@@ -38,7 +38,7 @@ class EditProfile extends PureComponent {
   render() {
     return (
       <Paper zDepth={2}>
-        <Headline type="h2">Edit your public profile</Headline>
+        <Heading type="h2">Edit your public profile</Heading>
         <ProfileForm onSubmit={this.handleFormSubmit} />
       </Paper>
     );

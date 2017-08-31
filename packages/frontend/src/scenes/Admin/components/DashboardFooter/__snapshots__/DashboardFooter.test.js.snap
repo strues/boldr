@@ -2,7 +2,7 @@
 
 exports[`<DashboardFooter /> renders snapshot 1`] = `
 <footer
-  className="boldrui-dash-footer"
+  className="boldr-dash-footer"
 >
   <Row
     componentClass="div"
@@ -13,7 +13,7 @@ exports[`<DashboardFooter /> renders snapshot 1`] = `
       sm={8}
     >
       <span
-        className="boldrui-dash-footer-copyright"
+        className="boldr-dash-footer-copyright"
       >
         widget
       </span>
@@ -24,7 +24,7 @@ exports[`<DashboardFooter /> renders snapshot 1`] = `
       sm={4}
     >
       <span
-        className="boldrui-dash-footer-powered"
+        className="boldr-dash-footer-powered"
       >
         Powered by 
         <a

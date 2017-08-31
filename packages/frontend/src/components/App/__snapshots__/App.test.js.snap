@@ -6,6 +6,7 @@ exports[`App 1`] = `
 >
   <HelmetWrapper
     defaultTitle="Boldr: Modern Content Management Framework"
+    defer={true}
     encodeSpecialCharacters={true}
     titleTemplate="%s - Powered by Boldr"
   >
@@ -39,6 +40,10 @@ exports[`App 1`] = `
       href="/favicons/favicon.ico"
       rel="icon"
       sizes="16x16 32x32"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Chivo:300,700|Roboto:400,700"
+      rel="stylesheet"
     />
     <link
       href="/favicons/apple-touch-icon-144x144.png"

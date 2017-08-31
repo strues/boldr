@@ -74,7 +74,7 @@ export const FeaturedArticle = (props: Props) => {
   `;
 
   return (
-    <div className="boldrui-feat-post">
+    <div className="boldr-feat-post">
       <Wrapper>
         <ImgWrapper>
           <PostTitle>{props.title}</PostTitle>

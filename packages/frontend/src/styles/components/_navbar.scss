@@ -9,7 +9,7 @@
   width: 100%;
   min-height: $navbar-height;
   background-color: $navbar-background;
-  box-shadow: 0 1px 0px rgba(0,0,0,0.075);
+  box-shadow: 0 1px 0px rgba(0,0,0,0.5);
 }
 
 .#{$boldr-ns}navbar__brand {
@@ -34,6 +34,15 @@
   padding: 0.5rem 1rem;
   color: $navbar-item;
   line-height: 1.5;
+  font-weight: 400;
+
+  a {
+    color: $navbar-item;
+    &:hover,
+    &.is-active {
+      color: $navbar-item-hover;
+    }
+  }
 }
 
 a.#{$boldr-ns}navbar__item,
@@ -119,6 +128,7 @@ a.#{$boldr-ns}navbar__item,
     height: $navbar-height;
 
     &.is-transparent {
+      background-color: transparent;
       a.#{$boldr-ns}navbar__item,
       .#{$boldr-ns}navbar__link {
         &:hover,

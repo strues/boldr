@@ -3,7 +3,10 @@ import * as React from 'react';
 import Link from 'react-router-dom/Link';
 import Paper from '@boldr/ui/Paper';
 import Edit from '@boldr/icons/Edit';
+import Dialog from '@boldr/ui/Dialog';
 import styled from 'styled-components';
+import IconButton from '@boldr/ui/IconButton';
+import Maximize from '@boldr/icons/Maximize';
 import DynamicContent from '../../../../../../components/DynamicContent';
 import type { ArticleType } from '../../../../../../types/boldr';
 
@@ -43,6 +46,12 @@ class ArticlePreview extends React.Component<Props, *> {
   noArticleDisplayed = () => {
     return <div>Click an article to preview.</div>;
   };
+  onClickClose = () => {
+    this.props.onCloseExpand();
+  };
+  handleClickExpand = () => {
+    this.props.onClickExpand();
+  };
   displayArticle = () => {
     const { article } = this.props;
     return (
@@ -50,8 +59,11 @@ class ArticlePreview extends React.Component<Props, *> {
         <Toolbar>
           <ArticlePreviewTitle>{article.title}</ArticlePreviewTitle>
           <ArticlePreviewEdit>
+            <IconButton onClick={this.handleClickExpand}>
+              <Maximize stroke="#fff" size="24px" color="#fff" fill="#fff" />
+            </IconButton>
             <Link to={`/admin/articles/${article.slug}`}>
-              <Edit stroke="rgb(0, 188, 212)" />
+              <Edit stroke="#fff" size="24px" />
             </Link>
           </ArticlePreviewEdit>
         </Toolbar>
@@ -61,6 +73,12 @@ class ArticlePreview extends React.Component<Props, *> {
             dangerouslySetInnerHTML={this.createMarkup()}
           />
         </Paper>
+        <Dialog title="Edit User" visible={this.props.isVisible} onClose={this.onClickClose}>
+          <DynamicContent
+            className="boldr-post__content"
+            dangerouslySetInnerHTML={this.createMarkup()}
+          />
+        </Dialog>
       </div>
     );
   };

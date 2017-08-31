@@ -2,7 +2,7 @@
 
 exports[`<ArticleCard /> renders snapshot 1`] = `
 <div
-  className="boldrui-article-card"
+  className="boldr-article-card"
 >
   <Card
     animate={true}
@@ -46,7 +46,7 @@ exports[`<ArticleCard /> renders snapshot 1`] = `
           kind="primary"
           loading={false}
           outline={true}
-          prefix="boldrui"
+          prefix="boldr"
           size="medium"
         >
           Read More

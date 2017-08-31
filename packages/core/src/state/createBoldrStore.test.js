@@ -1,5 +1,4 @@
-import ApolloClient from 'apollo-client';
-
+import createApolloClient from '../apollo/createApolloClient';
 import createBoldrStore, { getMiddlewares } from './createBoldrStore';
 
 describe('createBoldrStore', () => {
@@ -7,23 +6,24 @@ describe('createBoldrStore', () => {
     expect(typeof createBoldrStore).toBe('function');
   });
   it('should initialize the store', () => {
-    const env = 'test';
     const initialState = {};
-    const apolloClient = new ApolloClient();
-    function reducer() {
-      return {
-        apollo: apolloClient.reducer(),
-      };
-    }
-    const s = createBoldrStore(reducer, initialState, apolloClient, env);
+    const apolloClient = createApolloClient({
+      initialState: {},
+      batchRequests: false,
+      trustNetwork: true,
+      queryDeduplication: true,
+      apolloUri: '/api/v1/graphql',
+      connectToDevTools: true,
+      ssrForceFetchDelay: 100,
+    });
+
+    const appReducer = { app: {} };
+    const history = {};
+    const s = createBoldrStore(history, appReducer, initialState, apolloClient);
     expect(typeof s.dispatch).toBe('function');
     expect(typeof s.subscribe).toBe('function');
     expect(typeof s.getState).toBe('function');
     expect(typeof s.replaceReducer).toBe('function');
-    const state = s.getState();
-    expect(typeof state.router).toBe('object');
-    expect(typeof state.boldr.settings).toBe('object');
-    expect(typeof state.app).toBe('object');
   });
 });
 

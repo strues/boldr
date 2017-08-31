@@ -30,6 +30,10 @@ const App = () => {
         <meta name="theme-color" content="#2b2b2b" />
         <link rel="icon" sizes="16x16 32x32" href="/favicons/favicon.ico" />
         <link
+          href="https://fonts.googleapis.com/css?family=Chivo:300,700|Roboto:400,700"
+          rel="stylesheet"
+        />
+        <link
           rel="apple-touch-icon-precomposed"
           sizes="144x144"
           href="/favicons/apple-touch-icon-144x144.png"

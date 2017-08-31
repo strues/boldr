@@ -97,11 +97,6 @@
       color: $color-invert;
       background-color: $color;
 
-      a:not(.button),
-      strong {
-        color: inherit;
-      }
-
       .title {
         color: $color-invert;
       }

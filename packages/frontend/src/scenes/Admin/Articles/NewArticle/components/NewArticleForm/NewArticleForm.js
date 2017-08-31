@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import Button from '@boldr/ui/Button';
 import { Col, Row } from '@boldr/ui/Layout';
 import Paper from '@boldr/ui/Paper';
-import Headline from '@boldr/ui/Headline';
+import Heading from '@boldr/ui/Heading';
 import Block from '@boldr/ui/Block';
 import Form, {
   Label,
@@ -67,7 +67,7 @@ class NewArticleForm extends React.Component<Props, *> {
               </Col>
               <Col xs={12} md={4}>
                 <DarkSegment>
-                  <Headline type="h4" text="Tags" isLight />
+                  <Heading type="h4" text="Tags" isLight />
 
                   <HelpTxt>*Enter or Tab to save a tag</HelpTxt>
                   <Field

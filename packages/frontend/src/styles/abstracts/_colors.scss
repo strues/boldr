@@ -16,6 +16,7 @@ $grayish: #a1a1a1;
 $iris-blue: #00bcd4;
 /// @type Color
 $iris-blue-alt: #00b4d0;
+$nice-blue: hsl(195, 100%, 39%);
 /// @type Color
 $water: #03a9f4;
 /// @type Color
@@ -35,21 +36,38 @@ $big-stone: #333c44;
 /// @type Color
 $gunmetal: #2d343c;
 /// @type Color
-$turtle: #8bc34a;
+$turtle: hsl(150, 100%, 39%);
 /// @type Color
 $lavender: #7e57c2;
 /// @type Color
 $golden: #ffca28;
 /// @type Color
-$carmine-pink: #f44336;
-/// @type Color
-$black-base: rgba(0, 0, 0, 1);
+$carmine-pink: hsl(330, 100%, 39%);
 /// @type Color
 $black-transparent: rgba(0, 0, 0, 0.87);
 // Colors
 $black: hsl(0, 0%, 4%) !default;
-$black-bis: hsl(0, 0%, 7%) !default;
-$black-ter: hsl(0, 0%, 14%) !default;
+// Neutral Colors
+$neutral-1: #ECF0F0 !default;
+$neutral-2: #F7F7F9 !default;
+$neutral-3: #DEE0E3 !default;
+$neutral-4: #9198A0 !default;
+
+/// @type Color
+$primary-1: #3C97D3 !default;
+/// @type Color
+/// @group theme
+$primary-2: #3178B7 !default;
+/// @type Color
+$primary-3: #1B252F !default;
+/// @type Color
+$primary-4: $midnight !default;
+/// @type Color
+$primary-4_5: #233040 !default;
+/// @type Color
+$primary-5: #2D3E50 !default;
+/// @type Color
+$primary-6: #4F6A92 !default;
 
 $grey-darker: hsl(0, 0%, 21%) !default;
 $grey-dark: hsl(0, 0%, 29%) !default;
@@ -58,18 +76,17 @@ $grey-light: hsl(0, 0%, 71%) !default;
 $grey-lighter: hsl(0, 0%, 86%) !default;
 
 $white-ter: hsl(0, 0%, 96%) !default;
-$white-bis: hsl(0, 0%, 98%) !default;
 $white: hsl(0, 0%, 100%) !default;
 
 $orange: hsl(14, 100%, 53%) !default;
 $yellow: hsl(48, 100%, 67%) !default;
-$green: hsl(141, 71%, 48%) !default;
+$green: hsl(150, 100%, 39%) !default;
 $turquoise: hsl(171, 100%, 41%) !default;
-$blue: hsl(217, 71%, 53%) !default;
+$blue: hsl(195, 100%, 39%) !default;
 $purple: hsl(271, 100%, 71%) !default;
 $red: hsl(348, 100%, 61%) !default;
 
-$primary: $turquoise !default;
+$primary: $blue !default;
 
 $info: $blue !default;
 $success: $green !default;
@@ -87,7 +104,7 @@ $blue-invert: findColorInvert($blue) !default;
 $purple-invert: findColorInvert($purple) !default;
 $red-invert: findColorInvert($red) !default;
 
-$primary-invert: $turquoise-invert !default;
+$primary-invert: $blue-invert !default;
 $info-invert: $blue-invert !default;
 $success-invert: $green-invert !default;
 $warning-invert: $yellow-invert !default;

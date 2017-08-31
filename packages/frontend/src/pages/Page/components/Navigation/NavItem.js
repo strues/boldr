@@ -18,7 +18,7 @@ const NavItem = ({ isActive, href, children, title, hasDropdown }: Props) => {
       <NavbarItem
         isActive={isActive}
         render={() => (
-          <NavLink className="boldrui-navbar__item" activeClassName="is-active" to={href}>
+          <NavLink className="boldr-navbar__item" activeClassName="is-active" to={href}>
             {title}
           </NavLink>
         )}
@@ -29,9 +29,9 @@ const NavItem = ({ isActive, href, children, title, hasDropdown }: Props) => {
       <NavbarItem hasDropdown isHoverable>
         <NavbarLink
           isActive={isActive}
-          className="boldrui-navbar__item"
+          className="boldr-navbar__item"
           render={() => (
-            <NavLink className="boldrui-navbar__link" to={href}>
+            <NavLink className="boldr-navbar__link" to={href}>
               {title}
             </NavLink>
           )}
@@ -43,10 +43,7 @@ const NavItem = ({ isActive, href, children, title, hasDropdown }: Props) => {
               isActive={isActive}
               title={item.safeName}
               render={() => (
-                <NavLink
-                  className="boldrui-navbar__item"
-                  activeClassName="is-active"
-                  to={item.href}>
+                <NavLink className="boldr-navbar__item" activeClassName="is-active" to={item.href}>
                   {item.safeName}
                 </NavLink>
               )}

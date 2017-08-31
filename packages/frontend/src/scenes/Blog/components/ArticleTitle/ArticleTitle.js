@@ -2,8 +2,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import cx from 'classnames';
-import Headline from '@boldr/ui/Headline';
-import { StyleClasses } from '../../../../theme/styleClasses';
+import Heading from '@boldr/ui/Heading';
+import { StyleClasses } from '@boldr/ui/theme/styleClasses';
 
 const TitleWrapper = styled.div`
   text-transform: uppercase;
@@ -18,7 +18,7 @@ const ArticleTitle = (props: { title: string }) => {
   const classes = cx(BASE_ELEMENT);
   return (
     <TitleWrapper>
-      <Headline type="h1" className={classes} isLight text={props.title} />
+      <Heading type="h1" className={classes} text={props.title} isLight />
     </TitleWrapper>
   );
 };

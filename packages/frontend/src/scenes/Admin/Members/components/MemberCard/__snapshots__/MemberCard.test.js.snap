@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<MemberCard /> should render the user props 1`] = `
-<MemberCard__MemListItem>
-  <MemberCard__LeftSide>
-    <MemberCard__UserInfoList>
-      <MemberCard__UserInfoListItem>
+<styled.li>
+  <styled.div>
+    <styled.ul>
+      <styled.li>
         <Avatar
           role="presentation"
           src="http://img.com/img.png"
@@ -32,22 +32,22 @@ exports[`<MemberCard /> should render the user props 1`] = `
             ]
           }
         />
-      </MemberCard__UserInfoListItem>
-      <MemberCard__UserInfoListItem>
+      </styled.li>
+      <styled.li>
         joe
-      </MemberCard__UserInfoListItem>
-      <MemberCard__UserInfoListItem>
+      </styled.li>
+      <styled.li>
         admin
-      </MemberCard__UserInfoListItem>
-      <MemberCard__UserInfoListItem>
+      </styled.li>
+      <styled.li>
          
-      </MemberCard__UserInfoListItem>
-      <MemberCard__UserInfoListItem>
+      </styled.li>
+      <styled.li>
         test@test.com
-      </MemberCard__UserInfoListItem>
-    </MemberCard__UserInfoList>
-  </MemberCard__LeftSide>
-  <MemberCard__RightSide>
+      </styled.li>
+    </styled.ul>
+  </styled.div>
+  <styled.div>
     <Button
       block={false}
       bordered={true}
@@ -58,11 +58,11 @@ exports[`<MemberCard /> should render the user props 1`] = `
       loading={false}
       onClick={[Function]}
       outline={false}
-      prefix="boldrui"
+      prefix="boldr"
       size="medium"
     >
       Edit
     </Button>
-  </MemberCard__RightSide>
-</MemberCard__MemListItem>
+  </styled.div>
+</styled.li>
 `;

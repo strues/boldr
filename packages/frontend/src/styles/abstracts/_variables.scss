@@ -13,11 +13,9 @@
 /// 13. Select
 /// 14. Tags
 /// 15. Modal/Dialog
-/// 16. Dashboard Sidebar
-/// 17. Dashboard Topbar
 
 /// Namespace
-$boldr-ns: "boldrui-" !default;
+$boldr-ns: "boldr-" !default;
 
 $tablet: 769px !default;
 
@@ -41,23 +39,17 @@ $fullhd: 1384px !default;
 $font-name: "Roboto" !default;
 /// @group typography
 /// @type String
-$headline-font-name: "Chivo" !default;
+$heading-font-name: "Chivo" !default;
 /// @group typography
 /// @type String
 $font-family-base: $font-name, "Helvetica Neue", arial, helvetica, sans-serif !default;
-/// @group typography
-/// @type String
-$font-family-serif: georgia, "Times New Roman", serif;
-$family-sans-serif: BlinkMacSystemFont, -apple-system, "Segoe UI", "Roboto", "Oxygen", "Ubuntu",
-  "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", "Helvetica", "Arial",
-  sans-serif !default;
-
+$font-family-serif: 'Helvetica Neue' !default;
 /// @group typography
 /// @type String
 $font-family-monospace: "Lucida Console", monaco, monospace;
 /// @group typography
 /// @type String
-$headline-font-family: $headline-font-name, "Helvetica Neue", arial, helvetica, sans-serif !default;
+$heading-font-family: $heading-font-name, "Helvetica Neue", arial, helvetica, sans-serif !default;
 /// @group typography
 /// @type Number
 $font-size-base: 16px !default;
@@ -87,12 +79,12 @@ $font-weight-thin: 200 !default;
 $font-weight-bold: 600 !default;
 /// @group typography
 /// @type Number
-$headline-font-weight: $font-weight-bold !default;
+$heading-font-weight: 700 !default;
 /// @group typography
 /// @type String
-$headline-font-case: none !default;
+$heading-font-case: none !default;
 
-$render-mode: optimizeLegibility !default;
+$heading-line-height: 1.1 !default;
 
 $size-1: 3rem !default;
 $size-2: 2.5rem !default;
@@ -114,16 +106,25 @@ $border: $grey-lighter !default;
 $border-hover: $grey-light !default;
 
 // Text colors
-$text: $grey-dark !default;
-$text-invert: findColorInvert($text) !default;
-$text-light: $grey !default;
-$text-strong: $grey-darker !default;
+// $text-color: $black-transparent !default;
+/// @group theme
+$text-color-light: #afbbca;
+/// @group theme
+$text-color-disabled: #577083;
 
+$text-color: $grey-darker !default;
+/// @group theme
+$heading-font-color: $text-color !default;
+$text-invert: findColorInvert($text-color) !default;
+$text-light: $neutral-2 !default;
+$text-strong: $grey-darker !default;
+$heading-font-color-light: $text-light !default;
 // Code colors
 $code: $red !default;
 $code-background: $background !default;
 
-$pre: $text !default;
+$pre: $text-color !default;
+$text: $text-color;
 $pre-background: $background !default;
 
 // Typography
@@ -133,36 +134,10 @@ $family-code: $font-family-monospace !default;
 $base-vertical-unit: 6px;
 $base-line-multi: 4;
 $base-font-size: 16px;
-$ms-ratio: 1.414;
-$paragraph-indent: false;
-$paragraph-justify: true;
-$load-typesetted: true;
-$global-init: true;
+
 
 // Creates a handy variable for the 1em
 $base-em-font-size: 1em;
-
-// Generates modular scale values in Ems. [Note]If you need more size up and/or down
-// then add more sizes.
-// [1] One step down in the modular scale in EMs
-// [2] One step up in the modular scale in EMs
-$ms-down1: $base-em-font-size / $ms-ratio; // [1]
-$ms-down2: $ms-down1 / $ms-ratio;
-$ms-down3: $ms-down2 / $ms-ratio;
-$ms-down4: $ms-down3 / $ms-ratio;
-$ms-up1: $base-em-font-size * $ms-ratio; // [2]
-$ms-up2: $ms-up1 * $ms-ratio;
-$ms-up3: $ms-up2 * $ms-ratio;
-$ms-up4: $ms-up3 * $ms-ratio;
-$ms-up5: $ms-up4 * $ms-ratio;
-$ms-up6: $ms-up5 * $ms-ratio;
-$ms-up7: $ms-up6 * $ms-ratio;
-$ms-up8: $ms-up7 * $ms-ratio;
-$ms-up9: $ms-up8 * $ms-ratio;
-$ms-up10: $ms-up9 * $ms-ratio;
-
-// Warning text for when an integer is not used in rhythm functions
-$not-integer-txt: " value breaks vertical rhythm. Use an integer (whole number) for $lines.";
 
 /// ==========================================================
 ///
@@ -176,8 +151,7 @@ $grid-columns: 12 !default;
 $grid-gutter: 2rem !default;
 /// @group global
 $grid-breakpoints: (xs: false, sm: 48em, md: 64em, lg: 80em) !default;
-// Desktop large: 1600px
-$bp-monster: 100em !default;
+
 /// @group global
 /// // Desktop: 1280px
 $bp-large: 80em;
@@ -194,10 +168,7 @@ $border-radius: 0.25rem !default;
 $border-color: rgba(0, 0, 0, 0.1) !default;
 /// @group global
 $border-width: 1px !default;
-/// The default padding used for most components.
-/// @type Number
-/// @group global
-$base-padding: 1em !default;
+
 /// @group global
 $spacer: 1rem !default;
 /// @group global
@@ -262,11 +233,8 @@ $layout-transition-speed: $transition-length;
 /// with a `-500` suffix.
 /// @type Color
 /// @group theme
-$primary-color: $iris-blue !default;
+$primary-color: $nice-blue !default;
 
-/// @type Color
-/// @group theme
-$md-primary-color: $primary-color;
 /// @group theme
 $icon-color: rgba(0, 0, 0, 0.54);
 /// @group theme
@@ -279,13 +247,8 @@ $teritary-color: $navy;
 /// @group theme
 $accent-color: $secondary-color !default;
 
-/// Boolean if the application is to be themed with the light theme.
-/// @type Boolean
-/// @group theme
-$boldrui-light-theme: true !default;
 /// @group theme
 $shadow-color: rgba(0, 0, 0, 0.2) !default;
-$body-background: $cloud !default;
 /// @group theme
 $link-color: $primary-color !default;
 /// @group theme
@@ -303,14 +266,7 @@ $link-active-border: $grey-dark !default;
 $error-color: $carmine-pink !default;
 /// @group theme
 $warning-color: $golden !default;
-/// @group theme
-$text-color: $black-transparent !default;
-/// @group theme
-$text-color-light: #afbbca;
-/// @group theme
-$text-color-disabled: #577083;
-/// @group theme
-$headline-font-color: $navy !default;
+
 
 /// ==========================================================
 ///
@@ -350,11 +306,11 @@ $btn-secondary-hover: darken($secondary-color, 5%);
 /// @group btn
 $btn-secondary-active: darken($secondary-color, 5%);
 /// @group btn
-$btn-danger: #f44;
+$btn-danger: $red;
 /// @group btn
-$btn-danger-hover: #f66;
+$btn-danger-hover:  darken($red, 5%);
 /// @group btn
-$btn-danger-active: #e33;
+$btn-danger-active: darken($red, 5%);
 
 $icon-btn-height: 36px;
 $icon-btn-close-height: 18px;
@@ -367,31 +323,31 @@ $icon-btn-lg-close-height: 24px;
 /// 6. Navbar
 ///
 /// ==========================================================
-$background: $white-ter !default;
+$background: $midnight !default;
 
-$border: $grey-lighter !default;
-$border-hover: $grey-light !default;
+$border: $primary-4 !default;
+$border-hover: $primary-5 !default;
 
 /// @group navbar
-$navbar-background: $white !default;
+$navbar-background: $midnight !default;
 /// @group navbar
 $navbar-height: 3.25rem !default;
 /// @group navbar
-$navbar-item: $text-color !default;
+$navbar-item: $text-color-light !default;
 /// @group navbar
-$navbar-item-hover: $black !default;
+$navbar-item-hover: $carmine-pink !default;
 /// @group navbar
-$navbar-item-hover-background: $background !default;
+$navbar-item-hover-background: $primary-5 !default;
 /// @group navbar
-$navbar-item-active: $black !default;
+$navbar-item-active: $neutral-2 !default;
 /// @group navbar
-$navbar-item-active-background: transparent !default;
+$navbar-item-active-background: $primary-5 !default;
 /// @group navbar
-$navbar-dropdown-background: $white !default;
+$navbar-dropdown-background: $primary-5 !default;
 /// @group navbar
 $navbar-dropdown-border: $border !default;
 /// @group navbar
-$navbar-dropdown-offset: -4px !default;
+$navbar-dropdown-offset: -1px !default;
 /// @group navbar
 $navbar-dropdown-arrow: $link !default;
 /// @group navbar
@@ -399,15 +355,15 @@ $navbar-dropdown-radius: $radius-large !default;
 /// @group navbar
 $navbar-dropdown-z: 20 !default;
 /// @group navbar
-$navbar-dropdown-item-hover: $black !default;
+$navbar-dropdown-item-hover: $neutral-2 !default;
 /// @group navbar
-$navbar-dropdown-item-hover-background: $background !default;
+$navbar-dropdown-item-hover-background: $primary-4 !default;
 /// @group navbar
-$navbar-dropdown-item-active: $primary-color !default;
+$navbar-dropdown-item-active: $neutral-2 !default;
 /// @group navbar
-$navbar-dropdown-item-active-background: $background !default;
+$navbar-dropdown-item-active-background: $primary-4 !default;
 /// @group navbar
-$navbar-divider-background: $border !default;
+$navbar-divider-background: $primary-6 !default;
 
 /// ==========================================================
 ///
@@ -493,8 +449,6 @@ $breadcrumb-divider-color: $gray-light !default;
 $breadcrumb-active-color: $gray-light !default;
 /// @group breadcrumb
 $breadcrumb-divider: "/" !default;
-/// @group breadcrumb
-$breadcrumb-borders: (bottom: (size: 1px, style: solid, color: $border-color));
 
 /// ==========================================================
 ///
@@ -537,6 +491,7 @@ $select-c-light-blue: #bdf;
 /// @group select
 $select-c-half-black: rgba(0, 0, 0, 0.2);
 
+$select-error-border-color: #f44;
 /// ==========================================================
 ///
 /// 14. Tags
@@ -599,117 +554,10 @@ $modal-ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 /// @group dialog
 $modal-transition-deceleration: cubic-bezier(0, 0, 0.2, 1);
 
-/// ==========================================================
-///
-/// 16. Dashboard Sidebar
-///
-/// ==========================================================
-
-/// @group dashboard
-/// @type Number
-$sidebar-width: 200px !default;
-/// @group dashboard
-/// @type Number
-$sidebar-padding: 0 !default;
-/// @group dashboard
-/// @type Number
-$sidebar-top-space: 1rem !default;
-/// @group dashboard
-/// @type Number
-$sidebar-compact-width: 50px;
-/// @group dashboard
-/// @type Number
-$sidebar-compact-height: $sidebar-compact-width;
-/// @group dashboard
-/// @type Color
-$sidebar-color: #fff;
-/// @group dashboard
-// $sidebar-nav-bg: $midnight;
-$sidebar-nav-bg: #243140;
-/// @group dashboard
-// $sidebar-nav-expanded-bg: $madison;
-$sidebar-nav-expanded-bg: #2d3e50;
-/// @group dashboard
-$sidebar-borders: none;
-/// @group dashboard
-$mobile-sidebar-width: 220px;
-/// @group dashboard
-$sidebar-nav-title-padding-y: 0.75rem;
-/// @group dashboard
-$sidebar-nav-title-padding-x: 1rem;
-/// @group dashboard
-$sidebar-nav-title-color: $snow;
-/// @group dashboard
-$sidebar-nav-link-padding-y: 0.75rem;
-/// @group dashboard
-$sidebar-nav-link-padding-x: 1rem;
-/// @group dashboard
-$sidebar-nav-link-color: #f1f1f1;
-/// @group dashboard
-$sidebar-nav-link-bg: transparent;
-/// @group dashboard
-$sidebar-nav-link-borders: 0;
-/// @group dashboard
-$sidebar-nav-link-hover-color: $snow;
-/// @group dashboard
-$sidebar-nav-link-hover-bg: $primary-color !default;
-/// @group dashboard
-$sidebar-nav-link-hover-icon-color: $snow !important;
-/// @group dashboard
-$sidebar-nav-link-hover-borders: 0;
-/// @group dashboard
-$sidebar-nav-link-active-color: $snow;
-/// @group dashboard
-$sidebar-nav-link-active-bg: #364b60;
-$sidebar-nav-active-link-color: #ECF0F0;
-$sidebar-nav-active-bg: $cello;
-/// @group dashboard
-$sidebar-nav-link-active-icon-color: $primary-color;
-/// @group dashboard
-$sidebar-nav-link-active-borders: 0;
-/// @group dashboard
-$sidebar-nav-dropdown-color: #f1f1f1;
-/// @group dashboard
-$sidebar-nav-dropdown-bg: rgba(0, 0, 0, 0.2);
-/// @group dashboard
-$sidebar-nav-dropdown-borders: 0;
-
-/// ==========================================================
-///
-/// 17. Dashboard Topbar
-///
-/// ==========================================================
-
-/// @group topbar
-/// @type Color
-$topbar-bg: $white;
-/// @group topbar
-$topbar-bottom-margin: 25px;
-/// @group topbar
-$topbar-link-color: $text-color;
-/// @group topbar
-$topbar-search-input-color: $text-color;
-/// @group topbar
-$topbar-link-active: $iris-blue;
-/// @group topbar
-$topbar-link-hover: $iris-blue;
-/// @group topbar
-$topbar-font-size: 0.75rem;
-/// @group topbar
-$topbar-font-weight: 600;
-/// @group topbar
-$topbar-font-family: $font-family-base;
-/// @group topbar
-$topbar-link-transform: uppercase;
-/// @group topbar
-$topbar-border: (bottom: (size: 1px, style: solid, color: $border-color));
-/// @group topbar
-$topbar-z-index: 1000;
 
 /// notifications
 // Media queries breakpoints
 $screen-sm-min: 768px;
-$screen-md-min: 992px;
 $screen-xs-max: ($screen-sm-min - 1);
 
 $window-padding: 20px;
@@ -719,8 +567,8 @@ $notification-max-width: 360px;
 $notification-button-width: 90px;
 $notification-close-button: "\f00d";
 
-$notification-success-bg: #fff;
-$notification-success-border: #4dc657;
+$notification-success-bg: $turtle;
+$notification-success-border: darken($turtle, 5%);
 $notification-success-icon: "\f058";
 
 $notification-default-bg: #fff;

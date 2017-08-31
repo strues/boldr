@@ -37,7 +37,7 @@ class ArticleListing extends PureComponent<Props, *> {
   render() {
     return (
       <Grid fluid={false}>
-        <div className="boldrui-pad-top">
+        <div className="boldr-pad-top">
           {this.renderFeature()}
           <Row>{this.renderArticles()}</Row>
         </div>
