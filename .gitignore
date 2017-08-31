@@ -4,17 +4,16 @@ node_modules
 
 packages/cli/lib
 packages/core/lib
+packages/config/lib
 packages/frontend/build
 packages/frontend/.env
 packages/server/lib
-packages/config/lib
 packages/server/.env
 packages/server/.idea
 packages/tools/lib
 packages/utils/lib
 
 .boldr/cache
+
 coverage
-packages/editor
-packages/admin
-packages/ui
+
