@@ -41,7 +41,7 @@ class ArticleEditor extends React.Component<Props, *> {
       rawContent: currentArticle.rawContent,
       image: currentArticle.image,
       excerpt: currentArticle.excerpt,
-      published: currentArticle.published,
+      published: currentArticle.published === true ? 'published' : 'draft',
       author: currentArticle.author,
     };
     return (

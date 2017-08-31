@@ -70,8 +70,15 @@ export class Navigation extends React.Component<Props, *> {
           </NavbarBrand>
           <NavbarMenu isActive={isActive} onClick={this.onClickNav}>
             <NavbarStart>
-              <NavbarItem isActive={isActive} href="/" title="home">
-                Home
+              <NavbarItem>
+                <NavbarLink
+                  isActive={isActive}
+                  render={() => (
+                    <NavLink title="home" to="/">
+                      Home
+                    </NavLink>
+                  )}
+                />
               </NavbarItem>
               <NavbarItem isActive={isActive} href="/admin" title="Dashboard">
                 <NavbarLink

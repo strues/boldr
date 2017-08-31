@@ -1,6 +1,7 @@
 *.log
 node_modules
 .DS_Store
+.idea
 
 packages/cli/lib
 packages/core/lib

@@ -2,7 +2,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Headline from '@boldr/ui/Headline';
-import Icon from '@boldr/ui/Icons/Icon';
 import ContentPromo from '@boldr/ui/ContentPromo';
 
 import Tabs from '@boldr/ui/Tabs';

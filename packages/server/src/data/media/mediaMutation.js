@@ -4,7 +4,7 @@ import _debug from 'debug';
 import fs from 'fs-extra';
 import Jimp from 'jimp';
 import shortId from 'shortid';
-import appRoot from 'boldr-utils/lib/node/appRoot';
+import appRoot from '@boldr/utils/lib/node/appRoot';
 import Media from '../../models/Media';
 import EditMediaInput from '../../schema/input/editMedia';
 import UploadMediaInput from '../../schema/input/uploadMedia';

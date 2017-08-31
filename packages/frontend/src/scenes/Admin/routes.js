@@ -1,5 +1,5 @@
 /* eslint-disable */
-import * as React from 'react';
+import React from 'react';
 import universal from 'react-universal-component';
 import Icon from '@boldr/ui/Icons/Icon';
 import Media from './Media';

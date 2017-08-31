@@ -292,7 +292,6 @@ export default function createWebpackConfig(
           ],
       alias: {
         'babel-runtime': relativeResolve('babel-runtime/package.json'),
-        immutable: path.resolve(ROOT, './node_modules/immutable/package.json'),
       },
     },
     resolveLoader: {

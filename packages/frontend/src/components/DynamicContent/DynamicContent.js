@@ -9,15 +9,10 @@ type Props = {
   dangerouslySetInnerHTML: InnerHTML,
 };
 
-class DynamicContent extends React.PureComponent<Props, void> {
-  render() {
-    return (
-      <div
-        className={this.props.className}
-        dangerouslySetInnerHTML={this.props.dangerouslySetInnerHTML}
-      />
-    );
-  }
-}
+const DynamicContent = (props: Props) => {
+  return (
+    <div className={props.className} dangerouslySetInnerHTML={props.dangerouslySetInnerHTML} />
+  );
+};
 
 export default DynamicContent;
