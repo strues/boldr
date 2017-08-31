@@ -5,7 +5,7 @@ import app from './app';
 import { disconnect } from './services/db';
 import logger from './services/logger';
 import { destroyRedis } from './services/redis';
-import normalizePort from './utils/port';
+import normalizePort from './utils/normalizePort';
 
 const config = getConfig();
 

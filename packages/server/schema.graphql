@@ -54,6 +54,43 @@ type Article {
   author: User
 }
 
+# Variations of status for content
+enum CONTENT_STATUS {
+  PUBLISHED
+  ARCHIVED
+  DRAFT
+}
+
+# A tag relates content together
+type ContentType {
+  # Unique identifier for the object.
+  id: ID!
+
+  # A name for the object.
+  name: String
+
+  # An alphanumeric identifier for the object unique to its type.
+  slug: String
+
+  # An icon to use for the content type
+  icon: String
+
+  # A description of the tag
+  description: String
+
+  # Articles related to the tag
+  entities: [Article]
+
+  # The timestamp when the object was deleted
+  deletedAt: DateTime
+
+  # The timestamp when the object was last updated
+  updatedAt: DateTime
+
+  # The timestamp when the object was created
+  createdAt: DateTime
+}
+
 input CreateArticleInput {
   # The title of the article
   title: String!
@@ -84,6 +121,20 @@ input CreateArticleInput {
 
   # Tags relating articles together
   tags: [String]
+}
+
+input CreateContentTypeInput {
+  # A name for the object.
+  name: String
+
+  # An alphanumeric identifier for the object unique to its type.
+  slug: String
+
+  # An icon to use for the content type
+  icon: String
+
+  # A description of the tag
+  description: String
 }
 
 # The DateTime scalar type represents date time strings complying to ISO-8601.
@@ -180,6 +231,56 @@ input EditUserInput {
 
 # The Email scalar type represents E-Mail addresses compliant to RFC 822.
 scalar Email
+
+# A content item
+type Entity {
+  # Unique identifier for the object.
+  id: ID!
+
+  # The title of the entity
+  title: String!
+
+  # An alphanumeric identifier for the object unique to its type.
+  slug: String
+
+  # html content of the entity
+  content: String
+
+  # Raw JSON of the entity
+  rawContent: JSON
+
+  # Short description of the entity
+  excerpt: String
+  meta: JSON
+
+  # The publish status of content
+  status: CONTENT_STATUS
+
+  # url of the entity main image
+  image: String
+
+  # The id of the creator
+  userId: ID
+
+  # The content type id
+  ctId: ID
+
+  # The timestamp when the object was deleted
+  deletedAt: DateTime
+
+  # The timestamp when the object was last updated
+  updatedAt: DateTime
+
+  # The timestamp when the object was created
+  createdAt: DateTime
+
+  # Tags relating articles together
+  tags: [Tag]
+  contentType: ContentType
+
+  # User who created the entity.
+  author: User
+}
 
 type Error {
   # HTTP status code
@@ -375,6 +476,24 @@ type Query {
   # Return a specific article using its slug
   getArticleBySlug(slug: String): Article
 
+  # A query for a listing of all content types
+  contentTypes: [ContentType]
+
+  # A query for a single content type
+  contentType(
+    # The id of the requested content type
+    id: ID!
+  ): ContentType
+
+  # Returns all content entities from the database..
+  entities(
+    # The number of entities to offset
+    offset: Int
+
+    # The maximum number of entities to return at a time.
+    limit: Int
+  ): [Entity]
+
   # A query for a listing of all attachments
   files(
     # The number of attachments to offset
@@ -446,6 +565,9 @@ type Query {
     # The username for the desired user
     username: String!
   ): User
+
+  # Given an auth token, return the user and auth token
+  me: User
 
   # Given an auth token, return the user and auth token
   getCurrentUser: User
@@ -522,7 +644,10 @@ type RootMutation {
   deleteArticle(
     # The article ID
     id: ID!
-  ): Article
+  ): Boolean
+
+  # Adds a new content type to the database.
+  createContentType(input: CreateContentTypeInput!): ContentType
 
   # Upload a new media file and store in the database.
   singleUpload(
@@ -555,7 +680,7 @@ type RootMutation {
   deleteMedia(
     # The media ID
     id: ID!
-  ): Media
+  ): Boolean
 
   # Edit menu details
   editDetails(
@@ -674,6 +799,9 @@ type Tag {
 
   # Articles related to the tag
   articles: [Article]
+
+  # Entities related to the tag
+  entities: [Entity]
 
   # The timestamp when the object was deleted
   deletedAt: DateTime

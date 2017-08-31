@@ -9,9 +9,10 @@ import RootSchema from '../../src/data/rootSchema';
   if (result.errors) {
     console.error('ERROR introspecting schema: ', JSON.stringify(result.errors, null, 2));
   } else {
-    fs.writeFileSync(path.join(__dirname, '../schema.json'), JSON.stringify(result, null, 2));
+    fs.writeFileSync(path.join(__dirname, '../../schema.json'), JSON.stringify(result, null, 2));
   }
 })();
 
 // Save user readable type system shorthand of schema
-fs.writeFileSync(path.join(__dirname, '../schema.graphql'), printSchema(RootSchema));
+fs.writeFileSync(path.join(__dirname, '../../schema.graphql'), printSchema(RootSchema));
+process.exit(0);
