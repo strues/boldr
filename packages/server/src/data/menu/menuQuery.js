@@ -13,8 +13,8 @@ export default {
     args: {
       id: { type: new GraphQLNonNull(GraphQLID) },
     },
-    async resolve(_, { id }) {
-      const menu = await Menu.query().findById(id);
+    async resolve(_, { id }, context) {
+      const menu = await context.menus.load(id);
       if (menu) {
         return menu;
       }

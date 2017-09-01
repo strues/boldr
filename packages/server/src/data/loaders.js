@@ -1,5 +1,7 @@
 import DataLoader from 'dataloader';
 import { db } from '../services/db';
+import Menu from '../models/Menu';
+import MenuDetail from '../models/MenuDetail';
 
 // Appends type information to an object, e.g. { id: 1 } => { __type: 'User', id: 1 };
 function assignType(obj) {
@@ -67,19 +69,7 @@ export default {
         .select('*')
         .then(mapTo(ids, x => x.id, 'Page')),
     ),
-    menus: new DataLoader(ids =>
-      db
-        .table('menu')
-        .whereIn('id', ids)
-        .select('*')
-        .then(mapTo(ids, x => x.id, 'Menu')),
-    ),
-    details: new DataLoader(ids =>
-      db
-        .table('menu_detail')
-        .whereIn('id', ids)
-        .select('*')
-        .then(mapTo(ids, x => x.id, 'MenuDetail')),
-    ),
+    menus: new DataLoader(ids => Promise.all(ids.map(id => Menu.getById(id)))),
+    details: new DataLoader(ids => ids.map(id => MenuDetail.query().findById(id))),
   }),
 };

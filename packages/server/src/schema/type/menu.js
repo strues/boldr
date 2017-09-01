@@ -23,9 +23,9 @@ const MenuType = new GraphQLObjectType({
     details: {
       type: new GraphQLList(MenuDetailType),
       description: 'Links',
-      resolve(_) {
+      resolve(root) {
         return Menu.query()
-          .findById(_.id)
+          .findById(root.id)
           .then(result => result.$relatedQuery('details'))
           .then(jsonResult);
       },

@@ -273,6 +273,7 @@ function seed(knex, Promise) {
         // prettier-ignore
       ])
     )
+
     .then(() =>
       Promise.all([
         knex('menu_detail').insert({
