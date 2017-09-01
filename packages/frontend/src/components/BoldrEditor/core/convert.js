@@ -89,7 +89,8 @@ const styleToHTML = ({ fontFamilies }) => style => {
   } else if (style.indexOf('fontsize-') === 0) {
     return <span style={{ fontSize: `${style.split('-')[1]}px` }} />;
   } else if (style.indexOf('fontfamily-') === 0) {
-    const fontFamily = fontFamilies.find(item => item.name.toLowerCase() === style.split('-')[1]);
+    // @note: was item => item.name.toLowerCase()
+    const fontFamily = fontFamilies.find(item => item.toLowerCase() === style.split('-')[1]);
     return <span style={{ fontFamily: fontFamily.family }} />;
   }
 };

@@ -9,6 +9,9 @@ function truncate(knex, Promise, tables) {
 
 const tables = [
   'page',
+  'category',
+  'route',
+  'content_type',
   '"user"',
   'article',
   'role',
@@ -43,6 +46,32 @@ function seed(knex, Promise) {
       // prettier-ignore
     ])
   )
+  .then(() =>
+  Promise.all([
+    knex('category').insert({
+      id: '5b446ed5-46dc-4b03-b84b-715d8d5cac11',
+      name: 'Web Development',
+      slug: 'web-development',
+      description: 'Related to making things for the internet.',
+      icon: 'code'
+    }),
+    knex('category').insert({
+      id: 'f3898f47-62fa-4b8e-895d-d29e7d5278cf',
+      name: 'Music',
+      slug: 'music',
+      description: 'Music news, thoughts, reviews and more.',
+      icon: 'music'
+    }),
+    knex('category').insert({
+      id: 'f9614827-99c0-4686-8ab1-605588122616',
+      name: 'Thoughts and Ramblings',
+      slug: 'thoughts-and-ramblings',
+      description: 'Anything and everything',
+      icon: 'cloud'
+    }),
+    // prettier-ignore
+  ])
+)
     .then(() =>
       Promise.all([
         knex('role').insert({
@@ -169,6 +198,7 @@ function seed(knex, Promise) {
           featured: true,
           excerpt: 'This is the first of a to-be-determined series about building Boldr, a custom CMS and my experiences. I’ll be covering topics like build processes, developer experience, authentication, and all the headaches that come with security.Building a content management system (CMS) is hard.',
           image: 'http://i.magaimg.net/img/18en.png',
+          heroImage: 'http://i.magaimg.net/img/18en.png',
           meta: {},
           rawContent: {
             "entityMap":{},"blocks":[{"key":"64vtl","text":"This is the first of a to-be-determined series about building Boldr, a custom CMS and my experiences. I’ll be covering topics like build processes, developer experience, authentication, and all the headaches that come with security.Building a content management system (CMS) is hard. ","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":278,"length":6,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"aiim1","text":"I’m not referring to building anything nearly as feature packed as WordPress or even its slimmed down Node.js cousin, Ghost. When I say building a CMS, I’m speaking about crud functionality, authentication, authorization, and user interaction. Many developers will tell you not to even try; that it is not worth the headache.","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":242,"length":83,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"339vf","text":" I guess I somewhat of a masochist because I’m certainly enjoying it.About two or three years ago, I was moving into the “not quite advanced, but awkwardly more than intermediate” skill level of node development. I learn best by doing. In order to break down whatever barrier was between me and the next level thinking, I so desired, I thought it would be an excellent learning experience to build a basic CMS for my World of Warcraft guild. I accomplished everything I had hoped with this project.Fast-forward to the present.","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":298,"length":20,"style":"ITALIC"}],"entityRanges":[],"data":{}},{"key":"5vgli","text":"The company I previously worked for, spent a lot of time doing custom builds for client’s using Umbraco (a .NET CMS), as the core of the project. Whenever I assisted on a project that used Umbraco, I hated it. My hatred stemmed from all of the hoops you are required to jump through in order to get most standard frontend build tools to work correctly on a Windows environment. One day, a co-worker jokingly said to me, “why don’t you just build us a node based CMS?”. A few days later, I started doing just that.…","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]
@@ -177,6 +207,7 @@ function seed(knex, Promise) {
           content: `<p>This is the first of a to-be-determined series about building Boldr, a custom CMS and my experiences. I’ll be covering topics like build processes, developer experience, authentication, and all the headaches that come with security.Building a content management system (CMS) is <strong>hard. </strong></p><p>I’m not referring to building anything nearly as feature packed as WordPress or even its slimmed down Node.js cousin, Ghost. When I say building a CMS, I’m speaking about crud functionality, authentication, authorization, and user interaction<strong>. Many developers will tell you not to even try; that it is not worth the headache.</strong></p><p> I guess I somewhat of a masochist because I’m certainly enjoying it.About two or three years ago, I was moving into the “not quite advanced, but awkwardly more than intermediate” skill level of node development. I learn best by doing. In order to break down whatever barrier was between me and the<em> next level thinking</em>, I so desired, I thought it would be an excellent learning experience to build a basic CMS for my World of Warcraft guild. I accomplished everything I had hoped with this project.Fast-forward to the present.</p><p>The company I previously worked for, spent a lot of time doing custom builds for client’s using Umbraco (a .NET CMS), as the core of the project. Whenever I assisted on a project that used Umbraco, I hated it. My hatred stemmed from all of the hoops you are required to jump through in order to get most standard frontend build tools to work correctly on a Windows environment. One day, a co-worker jokingly said to me, “why don’t you just build us a node based CMS?”. A few days later, I started doing just that.…</p>`,
           published: true,
           userId: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
+          categoryId: '5b446ed5-46dc-4b03-b84b-715d8d5cac11'
         }),
         knex('article').insert({
           id: 'cb61bbae-c91e-4014-b665-3485734b88fb',
@@ -185,6 +216,7 @@ function seed(knex, Promise) {
           featured: false,
           excerpt: 'This is the first of a to-be-determined series about building Boldr, a custom CMS and my experiences. I’ll be covering topics like build processes, developer experience, authentication, and all the headaches that come with security.Building a content management system (CMS) is hard.',
           image: 'https://cdn-images-1.medium.com/max/800/1*tnh7IIZ1PrNQ-PzOMijBTQ.png',
+          heroImage: 'https://cdn-images-1.medium.com/max/800/1*tnh7IIZ1PrNQ-PzOMijBTQ.png',
           meta: {},
           rawContent: {
             "entityMap":{},"blocks":[{"key":"39eg7","text":"Getting Started.","type":"header-two","depth":0,"inlineStyleRanges":[{"offset":0,"length":16,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"fbjrk","text":"JavaScript is the most popular programming language in the world. It’s ubiquitous with the web we know. The rise in popularity of Node.js and a desire to make experiences across multiple platforms as seamless as possible has led to the emergence of this concept of universal JavaScript applications.Sometimes referred to as Isomorphic, Universal JavaScript applications, deliver the capability of rendering JavaScript on the server before it gets sent to the user’s browser. The benefits of rendering on the server are huge for many reasons; like search engine optimization (SEO), faster loading times, and fallbacks for when a user might have JavaScript disabled.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"dh8q4","text":"Unfortunately the barrier of entry for setting up a universal JavaScript application is quite high. There are a decent amount of starter projects on GitHub that are great to look at and analyze, but not much can be found explaining the why or the how things need to be done.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]
@@ -192,6 +224,7 @@ function seed(knex, Promise) {
           content: `<p>This is the first of a to-be-determined series about building Boldr, a custom CMS and my experiences. I’ll be covering topics like build processes, developer experience, authentication, and all the headaches that come with security.Building a content management system (CMS) is <strong>hard. </strong></p><p>I’m not referring to building anything nearly as feature packed as WordPress or even its slimmed down Node.js cousin, Ghost. When I say building a CMS, I’m speaking about crud functionality, authentication, authorization, and user interaction<strong>. Many developers will tell you not to even try; that it is not worth the headache.</strong></p><p> I guess I somewhat of a masochist because I’m certainly enjoying it.About two or three years ago, I was moving into the “not quite advanced, but awkwardly more than intermediate” skill level of node development. I learn best by doing. In order to break down whatever barrier was between me and the<em> next level thinking</em>, I so desired, I thought it would be an excellent learning experience to build a basic CMS for my World of Warcraft guild. I accomplished everything I had hoped with this project.Fast-forward to the present.</p><p>The company I previously worked for, spent a lot of time doing custom builds for client’s using Umbraco (a .NET CMS), as the core of the project. Whenever I assisted on a project that used Umbraco, I hated it. My hatred stemmed from all of the hoops you are required to jump through in order to get most standard frontend build tools to work correctly on a Windows environment. One day, a co-worker jokingly said to me, “why don’t you just build us a node based CMS?”. A few days later, I started doing just that.…</p>`,
           published: false,
           userId: 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f',
+          categoryId: 'f3898f47-62fa-4b8e-895d-d29e7d5278cf'
         }),
         knex('article').insert({
           id: 'ab33a0ca-b349-4cf8-947f-94f415149492',
@@ -200,6 +233,7 @@ function seed(knex, Promise) {
           featured: false,
           excerpt: 'Hiding Implementation Details With Flow’s New Opaque Type Aliases Feature',
           image: 'https://cdn-images-1.medium.com/max/2000/1*DQJCnm07c_MxpsFYarwwEg.jpeg',
+          heroImage: 'https://cdn-images-1.medium.com/max/2000/1*DQJCnm07c_MxpsFYarwwEg.jpeg',
           meta: {},
           rawContent: {
             "entityMap":{"0":{"type":"LINK","mutability":"MUTABLE","data":{"href":"https://github.com/babel/babel/pull/5990","rel":"nofollow noopener","target":"_blank","url":"https://github.com/babel/babel/pull/5990"}},"1":{"type":"LINK","mutability":"MUTABLE","data":{"href":"https://flow.org/en/docs/types/opaque-types/","rel":"nofollow noopener","target":"_blank","url":"https://flow.org/en/docs/types/opaque-types/"}}},"blocks":[{"key":"5ctuu","text":"Hiding Implementation Details With Flow’s New Opaque Type Aliases Feature","type":"header-one","depth":0,"inlineStyleRanges":[{"offset":0,"length":73,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"9887i","text":"Do you ever wish that you could hide your implementation details away from your users?Well, now all of your dreams have finally come true! Flow 0.51.0 added support for opaque type aliases, with babel support coming in the next week or so. Opaque type aliases are type aliases that hide their underlying type. You can only see an opaque type’s underlying type in the file which declares the opaque type. They’re already documented here, so we’ll spend the rest of this blog post showing just how powerful opaque type aliases can be.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[{"offset":195,"length":14,"key":0},{"offset":431,"length":4,"key":1}],"data":{}},{"key":"12bhl","text":"Maintaining Invariants with Opaque Types","type":"header-three","depth":0,"inlineStyleRanges":[{"offset":0,"length":40,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"ct6ko","text":"Opaque type aliases are really useful for maintaining invariants in your code. Whenever you find yourself wanting to express “things of type T where X is true,” you might want to consider using an opaque type alias.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"d53nf","text":"","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"a5fs","text":"As a simple example, lets consider a type for non-negative numbers:","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"5s25s","text":"NonNeg.js:","type":"blockquote","depth":0,"inlineStyleRanges":[{"offset":0,"length":10,"style":"ITALIC"}],"entityRanges":[],"data":{}},{"key":"7aehc","text":"// @flow","type":"blockquote","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"f0io4","text":"opaque type NonNeg = number;","type":"blockquote","depth":0,"inlineStyleRanges":[{"offset":0,"length":6,"style":"BOLD"},{"offset":7,"length":4,"style":"BOLD"}],"entityRanges":[],"data":{}}]
@@ -207,6 +241,7 @@ function seed(knex, Promise) {
           content: `<h1><strong>Hiding Implementation Details With Flow’s New Opaque Type Aliases Feature</strong></h1><p>Do you ever wish that you could hide your implementation details away from your users?Well, now all of your dreams have finally come true! Flow 0.51.0 added support for opaque type aliases, with <a href="https://github.com/babel/babel/pull/5990" target="_blank">babel support </a>coming in the next week or so. Opaque type aliases are type aliases that hide their underlying type. You can only see an opaque type’s underlying type in the file which declares the opaque type. They’re already documented <a href="https://flow.org/en/docs/types/opaque-types/" target="_blank">here</a>, so we’ll spend the rest of this blog post showing just how powerful opaque type aliases can be.</p><h3><strong>Maintaining Invariants with Opaque Types</strong></h3><p>Opaque type aliases are really useful for maintaining invariants in your code. Whenever you find yourself wanting to express “things of type T where X is true,” you might want to consider using an opaque type alias.</p><p></p><p>As a simple example, lets consider a type for non-negative numbers:</p><blockquote><em>NonNeg.js:</em></blockquote><blockquote>// @flow</blockquote><blockquote><strong>opaque</strong> <strong>type</strong> NonNeg = number;</blockquote>`,
           published: true,
           userId: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
+          categoryId: 'f9614827-99c0-4686-8ab1-605588122616'
         }),
         // prettier-ignore
       ])
@@ -314,7 +349,18 @@ function seed(knex, Promise) {
         // prettier-ignore
       ])
     )
-
+    .then(() =>
+    Promise.all([
+      knex('content_type').insert({
+        id: '29dd6b62-3e73-407b-9324-9c959f9bdbd2',
+        name: 'Project',
+        slug: 'project',
+        description: 'a project description',
+        icon: 'briefcase'
+      }),
+      // prettier-ignore
+    ])
+  )
     .then(() =>
       Promise.all([
         knex('setting').insert({

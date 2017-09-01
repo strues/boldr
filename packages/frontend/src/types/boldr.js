@@ -19,7 +19,7 @@ export type FluxStandardAction = {
 };
 export type FlattenedRoutes = Array<NavRoute>;
 export type Reducer = (state: ?Object, action: FluxStandardAction) => Object;
-
+export type UUID = string;
 export type Params = { [string]: string | number };
 
 export type RouterLocation = {
@@ -59,31 +59,25 @@ export interface RawContent {
 export type Article = {
   // Unique identifier for the object.
   id: string,
-
   // The title of the article
   title: string,
-
   // An alphanumeric identifier for the object unique to its type.
   slug: string,
-
   // html content of the article
   content: string,
-
   // Raw JSON of the article
   rawContent: RawContent,
-
   // Short description of the article
   excerpt?: string,
-
   // True if the article is featured
   featured?: boolean,
-
   // True if the article is published
   published: boolean,
-
   // url of the article feature image
   image: string,
-
+  // url of the article hero image
+  heroImage?: string,
+  categoryId?: string,
   userId?: string,
 
   // The timestamp when the object was deleted
@@ -107,6 +101,40 @@ export type Article = {
 export type ArticlesType = Array<Article>;
 export type ArticleType = Article;
 
+// A category groups content together
+export type Category = {
+  // Unique identifier for the object.
+  id: string,
+
+  // A name for the object.
+  name: string,
+  // An alphanumeric identifier for the object unique to its type.
+  slug: string,
+
+  // An icon to use for the category
+  icon?: string,
+
+  // A description of the category
+  description?: string,
+
+  // Entities belonging to the category
+  entities?: EntitiesType,
+
+  // Articles belonging to the category
+  articles?: ArticlesType,
+
+  // The timestamp when the object was deleted
+  deletedAt?: string,
+
+  // The timestamp when the object was last updated
+  updatedAt?: string,
+
+  // The timestamp when the object was created
+  createdAt?: string,
+};
+
+export type CategoryType = Category;
+export type CategoriesType = Array<Category>;
 export type Media = {
   // Unique identifier for the object.
   id: string,
@@ -147,6 +175,95 @@ export type Media = {
 
 export type MediaType = Media;
 export type MediasType = Array<Media>;
+export type Entity = {
+  // Unique identifier for the object.
+  id: UUID,
+
+  // The title of the entity
+  title: string,
+
+  // An alphanumeric identifier for the object unique to its type.
+  slug: string,
+
+  // html content of the entity
+  content: string,
+
+  // Raw JSON of the entity
+  rawContent: RawContent,
+
+  // Short description of the entity
+  excerpt?: string,
+  meta?: Object,
+
+  // The publish status of content
+  status: Status,
+
+  // url of the entity main image
+  image?: string,
+
+  // The id of the creator
+  userId?: UUID,
+
+  // The content type id
+  ctId?: UUID,
+
+  // The category id
+  categoryId?: UUID,
+
+  // The timestamp when the object was deleted
+  deletedAt?: string,
+
+  // The timestamp when the object was last updated
+  updatedAt?: string,
+
+  // The timestamp when the object was created
+  createdAt?: string,
+
+  // Tags relating articles together
+  tags?: TagsType,
+  contentType?: ContentType,
+  category?: CategoryType,
+
+  // User who created the entity.
+  author?: UserType,
+};
+export type EntityType = Entity;
+export type EntitiesType = Array<EntityType>;
+// Variations of status for content
+export type Status = 'published' | 'archived' | 'draft';
+
+// A tag relates content together
+export type ContentType = {
+  // Unique identifier for the object.
+  id: UUID,
+
+  // A name for the object.
+  name: string,
+
+  // An alphanumeric identifier for the object unique to its type.
+  slug: string,
+
+  // An icon to use for the content type
+  icon?: string,
+
+  // A description of the tag
+  description?: string,
+
+  // entities related to the content type
+  entities?: EntitiesType,
+
+  // The timestamp when the object was deleted
+  deletedAt?: string,
+
+  // The timestamp when the object was last updated
+  updatedAt?: string,
+
+  // The timestamp when the object was created
+  createdAt?: string,
+};
+
+export type ContentTypeType = ContentType;
+export type ContentTypes = Array<ContentType>;
 
 export type Tag = {
   // Unique identifier for the object.
@@ -186,7 +303,8 @@ export type User = {
 
   // The timestamp when the object was created
   createdAt?: string,
-
+  // Date the user last logged in
+  lastLoging?: string,
   // The user email
   email: string,
 

@@ -4,7 +4,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import type { Connector } from 'react-redux';
 import Helmet from 'react-helmet';
-import { showModal, hideModal } from '@boldr/core';
+import { toggleModal } from '@boldr/core';
 import { Col, Row, LevelLeft, Level, LevelItem, LevelRight } from '@boldr/ui';
 import type { Dispatch } from '../../../../types/state';
 import type { ArticleType, ArticlesType } from '../../../../types/boldr';
@@ -24,13 +24,13 @@ class Articles extends React.Component<Props, *> {
     this.props.setArticle(article);
   };
   handleClickExpand = () => {
-    this.props.showModal();
+    this.props.toggleModal();
   };
   closeModal = () => {
-    this.props.hideModal();
+    this.props.toggleModal();
   };
   openModal = () => {
-    this.props.showModal();
+    this.props.toggleModal();
   };
   render() {
     return (
@@ -67,7 +67,7 @@ class Articles extends React.Component<Props, *> {
         <Col xs={12} md={8}>
           <ArticlePreview
             article={this.props.article}
-            isVisible={this.props.ui.modal}
+            isVisible={this.props.ui.isModalVisible}
             onCloseExpand={this.closeModal}
             onClickExpand={this.handleClickExpand}
           />
@@ -85,8 +85,7 @@ const mapStateToProps = state => {
 // $FlowIssue
 const connector: Connector<{}, Props> = connect(mapStateToProps, (dispatch: Dispatch) => ({
   setArticle: article => dispatch(setArticle(article)),
-  showModal: () => dispatch(showModal()),
-  hideModal: () => dispatch(hideModal()),
+  toggleModal: () => dispatch(toggleModal()),
 }));
 
 export default connector(Articles);

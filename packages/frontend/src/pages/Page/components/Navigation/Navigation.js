@@ -22,7 +22,6 @@ import NavItem from './NavItem';
 export type Props = {
   isMobile: boolean,
   auth: Object,
-  showHeader: () => void,
   loading: boolean,
   logout: Function,
   data?: Object,

@@ -8,9 +8,16 @@ query GetArticlesQuery($offset: Int!, $limit: Int!) {
     published
     createdAt
     excerpt
+    categoryId
     tags {
       id
       name
+    }
+    category {
+      id
+      name
+      slug
+      icon
     }
   }
 }

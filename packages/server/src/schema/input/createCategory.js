@@ -1,20 +1,20 @@
 import { GraphQLString, GraphQLInputObjectType } from 'graphql';
 import { name, slug } from '../field/identifier';
 
-const CreateContentTypeInput = new GraphQLInputObjectType({
-  name: 'CreateContentTypeInput',
+const CreateCategoryInput = new GraphQLInputObjectType({
+  name: 'CreateCategoryInput',
   fields: () => ({
     ...name,
     ...slug,
     icon: {
       type: GraphQLString,
-      description: 'An icon to use for the content type',
+      description: 'An icon to use for the category',
     },
     description: {
       type: GraphQLString,
-      description: 'A description of the content type',
+      description: 'A description of the category',
     },
   }),
 });
 
-export default CreateContentTypeInput;
+export default CreateCategoryInput;

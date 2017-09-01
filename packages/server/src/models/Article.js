@@ -60,6 +60,14 @@ class Article extends BaseModel {
           to: 'tag.id',
         },
       },
+      category: {
+        relation: BaseModel.BelongsToOneRelation,
+        modelClass: `${__dirname}/Category`,
+        join: {
+          from: 'article.categoryId',
+          to: 'category.id',
+        },
+      },
       media: {
         relation: BaseModel.ManyToManyRelation,
         modelClass: `${__dirname}/Media`,
@@ -85,7 +93,7 @@ class Article extends BaseModel {
       .limit(limit)
       .orderBy('createdAt', 'desc')
       .skipUndefined()
-      .allowEager('[author,tags,media]');
+      .allowEager('[author,tags,media,category]');
   }
   static getArticlesByTag(name, offset, limit) {
     return Tag.query()

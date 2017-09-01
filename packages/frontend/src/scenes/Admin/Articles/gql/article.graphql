@@ -11,6 +11,13 @@ query getArticleBySlug($slug: String!) {
     createdAt
     excerpt
     userId
+    categoryId
+    category {
+      id
+      name
+      slug
+      icon
+    }
     tags {
       id
       name

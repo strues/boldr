@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { graphql } from 'react-apollo';
 import { connect } from 'react-redux';
-import { showNotification } from '@boldr/core';
+import { sendNotification } from '@boldr/core';
 import Helmet from 'react-helmet';
 import { Row, Col } from '@boldr/ui/Layout';
 import Paper from '@boldr/ui/Paper';
@@ -50,7 +50,7 @@ class UploadMedia extends Component<Props, *> {
         })
         .then(data => {
           this.props.dispatch(
-            showNotification({
+            sendNotification({
               type: 'success',
               text: 'File upload complete.',
             }),

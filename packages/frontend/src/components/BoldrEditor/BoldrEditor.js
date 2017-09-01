@@ -11,7 +11,7 @@ import {
 } from 'draft-js';
 import type { DraftDecoratorType } from 'draft-js';
 import styled from 'styled-components';
-import classNames from 'classnames';
+import cn from 'classnames';
 
 import { convertToHTML, convertFromHTML } from 'draft-convert';
 import { getToHTMLConfig, getFromHTMLConfig } from './core/convert';
@@ -376,7 +376,7 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
     return (
       <div
         id={this.wrapperId}
-        className={classNames('be-wrapper', wrapperClassName)}
+        className={cn('be-wrapper', wrapperClassName)}
         style={wrapperStyle}
         onClick={this.modalHandler.onEditorClick}
         onBlur={this.onWrapperBlur}
@@ -402,11 +402,12 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
               React.cloneElement(button, { key: index, ...controlProps }),
             )}
         </EditorToolbar>
+
         <div
           ref={el => {
             (this: any).wrapper = el;
           }}
-          className={classNames('be-main', editorClassName)}
+          className={cn('be-main', editorClassName)}
           style={editorStyle}
           onClick={this.focusEditor}
           onFocus={this.onEditorFocus}

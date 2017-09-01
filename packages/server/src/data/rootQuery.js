@@ -1,5 +1,6 @@
 import { GraphQLObjectType } from 'graphql';
 import article from './article/articleQuery';
+import category from './category/categoryQuery';
 import contentType from './contentType/contentTypeQuery';
 import entity from './entity/entityQuery';
 import file from './file/fileQuery';
@@ -14,6 +15,7 @@ import user from './user/userQuery';
 const rootFields = Object.assign(
   {},
   article,
+  category,
   contentType,
   entity,
   file,

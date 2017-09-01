@@ -1,11 +1,14 @@
 /* eslint-disable no-console, no-shadow */
 import http from 'http';
+import Bluebird from 'bluebird';
 import getConfig from '@boldr/config';
 import app from './app';
 import { disconnect } from './services/db';
 import logger from './services/logger';
 import { destroyRedis } from './services/redis';
 import normalizePort from './utils/normalizePort';
+
+global.Promise = Bluebird;
 
 const config = getConfig();
 

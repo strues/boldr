@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import Loader from '@boldr/ui/Loader';
 // internal
-import { showModal, hideModal } from '@boldr/core';
+import { toggleModal } from '@boldr/core';
 import type { User } from '../../../types/boldr';
 import { memberSelected, updateMember } from '../state';
 import Members from './Members';
@@ -42,16 +42,16 @@ export class MembersContainer extends Component<Props, State> {
   props: Props;
 
   closeModal() {
-    this.props.dispatch(hideModal());
+    this.props.dispatch(toggleModal());
   }
   openModal() {
-    this.props.dispatch(showModal());
+    this.props.dispatch(toggleModal());
   }
 
   toggleUser(user: Object) {
     const { dispatch } = this.props;
     dispatch(memberSelected(user));
-    dispatch(showModal());
+    dispatch(toggleModal());
   }
 
   handleSubmit(values: Object) {
@@ -75,7 +75,7 @@ export class MembersContainer extends Component<Props, State> {
       <Members
         toggleUser={this.toggleUser}
         users={getUsers}
-        visible={ui.modal}
+        visible={ui.isModalVisible}
         close={this.closeModal}
         handleSubmit={this.handleSubmit}
         initialValues={currentMember}

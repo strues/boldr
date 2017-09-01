@@ -72,6 +72,10 @@ const UserType = new GraphQLObjectType({
       type: GraphQLDateTime,
       description: 'When the user was born',
     },
+    lastLogin: {
+      type: GraphQLDateTime,
+      description: 'When the user last logged in.',
+    },
     roles: {
       type: new GraphQLList(RoleType),
       description: 'Roles the user belongs to.',

@@ -18,6 +18,20 @@ module.exports.up = async db => {
     table.index('name');
     table.index('uuid');
   });
+  await db.schema.createTable('category', table => {
+    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
+    table.string('name', 140).unique().notNullable();
+    table.string('slug', 140).unique().notNullable();
+    table.string('icon', 140).nullable();
+    table.text('description').nullable();
+
+    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updatedAt').nullable().defaultTo(null);
+    table.timestamp('deletedAt').nullable().defaultTo(null);
+    table.index('slug');
+    table.index('name');
+    table.index('createdAt');
+  });
   await db.schema.createTable('user', table => {
     // pk
     table
@@ -41,7 +55,7 @@ module.exports.up = async db => {
     table.string('website', 100).nullable();
     table.string('language', 10).notNullable().defaultTo('en_US');
     table.boolean('verified').defaultTo(false);
-
+    table.timestamp('lastLogin').nullable().defaultTo(null);
     table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
     table.timestamp('updatedAt').nullable().defaultTo(null);
     table.timestamp('deletedAt').nullable().defaultTo(null);
@@ -112,12 +126,14 @@ module.exports.up = async db => {
     table.string('title', 140).unique().notNullable();
     table.string('slug', 140).unique().notNullable();
     table.string('image', 255).nullable();
+    table.string('heroImage', 255).nullable();
     table.json('meta').nullable();
     table.boolean('featured').defaultTo(false);
     table.json('rawContent');
     table.text('content').notNullable();
     table.text('excerpt').notNullable();
     table.uuid('userId').unsigned().notNullable();
+    table.uuid('categoryId').unsigned().notNullable();
     table.boolean('published').defaultTo(true);
     table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
     table.timestamp('updatedAt').nullable().defaultTo(null);
@@ -127,6 +143,13 @@ module.exports.up = async db => {
       .foreign('userId')
       .references('id')
       .inTable('user')
+      .onDelete('cascade')
+      .onUpdate('cascade');
+
+    table
+      .foreign('categoryId')
+      .references('id')
+      .inTable('category')
       .onDelete('cascade')
       .onUpdate('cascade');
 
@@ -279,6 +302,7 @@ module.exports.up = async db => {
 
 module.exports.down = async db => {
   await db.schema.dropTableIfExists('role');
+  await db.schema.dropTableIfExists('category');
   await db.schema.dropTableIfExists('user');
   await db.schema.dropTableIfExists('tag');
   await db.schema.dropTableIfExists('article');

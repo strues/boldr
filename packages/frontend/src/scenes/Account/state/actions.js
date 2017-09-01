@@ -1,4 +1,4 @@
-import { setToken, removeToken, sendNotification, showNotification } from '@boldr/core';
+import { setToken, removeToken, sendNotification } from '@boldr/core';
 import { push } from 'react-router-redux';
 import * as notif from '../../../core/constants';
 
@@ -24,7 +24,7 @@ export function doSignup(signupUser) {
   return dispatch => {
     dispatch(signupUserSuccess(signupUser));
     dispatch(
-      showNotification({
+      sendNotification({
         text: 'Account created!',
         type: 'success',
       }),
@@ -44,7 +44,7 @@ export function doLogin(loginUser) {
     dispatch(loginUserSuccess(loginUser));
     dispatch(setUserLoggedIn(loginUser));
     dispatch(
-      showNotification({
+      sendNotification({
         text: 'Welcome back!',
         type: 'success',
       }),
@@ -86,7 +86,7 @@ export function logout() {
     dispatch({
       type: t.LOGOUT,
     });
-    dispatch(showNotification({ type: 'success', text: 'Logged out.' }));
+    dispatch(sendNotification({ type: 'success', text: 'Logged out.' }));
   };
 }
 

@@ -1,7 +1,7 @@
 /* eslint-disable promise/always-return, consistent-return */
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
-import { showNotification } from '@boldr/core';
+import { sendNotification } from '@boldr/core';
 import LOGIN_USER_MUTATION from '../gql/login.mutation.graphql';
 import { doLogin, loginUserError } from '../state/actions';
 import Login from './Login';
@@ -32,7 +32,7 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
       .catch(err => {
         loginUserError(err);
         return dispatch(
-          showNotification({
+          sendNotification({
             type: 'error',
             text: 'There was a problem with your login details',
           }),

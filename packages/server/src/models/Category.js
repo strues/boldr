@@ -1,7 +1,7 @@
 import BaseModel, { mergeSchemas } from './BaseModel';
 
-class ContentT extends BaseModel {
-  static tableName = 'content_type';
+class Category extends BaseModel {
+  static tableName = 'category';
   static addTimestamps = true;
 
   static jsonSchema = mergeSchemas(BaseModel.jsonSchema, {
@@ -31,25 +31,26 @@ class ContentT extends BaseModel {
       },
     },
   });
-
   static get relationMappings() {
     return {
+      articles: {
+        relation: BaseModel.HasManyRelation,
+        modelClass: `${__dirname}/Article`,
+        join: {
+          from: 'category.id',
+          to: 'article.categoryId',
+        },
+      },
       entities: {
         relation: BaseModel.HasManyRelation,
         modelClass: `${__dirname}/Entity`,
         join: {
-          from: 'content_type.id',
-          to: 'entity.ctId',
+          from: 'category.id',
+          to: 'entity.categoryId',
         },
       },
     };
   }
-
-  static getGontentTypes(offset, limit) {
-    return ContentT.query()
-      .offset(offset)
-      .limit(limit);
-  }
 }
 
-export default ContentT;
+export default Category;

@@ -23,9 +23,11 @@ export default {
         .where({ email: args.input.email })
         .eager('[roles,socialMedia]')
         .first();
+
       if (!user || !await user.authenticate(args.input.password)) {
         throw new GraphQLError('Incorrect email and/or password.');
       }
+
       // remove the password from the response.
       user.stripPassword();
       // sign the token

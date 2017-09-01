@@ -1,5 +1,5 @@
 /**
- * @module boldr-core/state/createBoldrStore
+ * @module @boldr/core/state/createBoldrStore
  */
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';

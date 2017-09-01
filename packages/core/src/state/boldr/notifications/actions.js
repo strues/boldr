@@ -1,58 +1,33 @@
+// @flow
 /**
  * @module boldr-core/state/notifications/actions
  */
-import uniqueId from 'lodash/uniqueId';
 import * as t from '../actionTypes';
+import type { NotificationPayload } from '../../../types';
 
-export function showNotification(options = {}) {
+export function sendNotification(options: NotificationPayload = {}) {
   return {
-    type: t.SHOW_NOTIFICATION,
+    type: t.SEND_NOTIFICATION,
     options,
   };
 }
 
-export function hideNotification(uid) {
+export function hideNotification(uid: string) {
   return {
     type: t.HIDE_NOTIFICATION,
     uid,
   };
 }
 
-export function removeNotification(uid) {
+export function removeNotification(uid: string) {
   return {
     type: t.REMOVE_NOTIFICATION,
     uid,
   };
 }
 
-export function hideAllNotifications() {
+export function clearNotifications() {
   return {
-    type: t.HIDE_ALL_NOTIFICATIONS,
+    type: t.CLEAR_NOTIFICATIONS,
   };
 }
-
-export function sendNotification(notification) {
-  return {
-    type: t.SEND_NOTIFICATION,
-    notification: {
-      ...notification,
-      id: uniqueId(),
-    },
-  };
-}
-
-/**
- * Dismiss a notification
- * @param {string}  id  the uuid of the notification to dismiss
- * @returns {Function} cleared notifs
- */
-export const dismissNotification = id => {
-  return {
-    type: t.DISMISS_NOTIFICATION,
-    id,
-  };
-};
-
-export const clearNotification = () => {
-  return { type: t.CLEAR_NOTIFICATION };
-};

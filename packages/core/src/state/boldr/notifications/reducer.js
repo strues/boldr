@@ -1,15 +1,20 @@
+// @flow
 /**
- * @module boldr-core/state/notifications/reducer
+ * @module @boldr/core/state/boldr/notifications/reducer
  */
+import uniqueId from 'lodash/uniqueId';
 import * as t from '../actionTypes';
+import type { NotificationsState, Action } from '../../../types';
+
+type State = NotificationsState;
 
 export const initialState = [];
 
-export default function notificationsReducer(state = initialState, action) {
+export default function notificationsReducer(state: State = initialState, action: Action) {
   switch (action.type) {
-    case t.SHOW_NOTIFICATION:
+    case t.SEND_NOTIFICATION:
       return state.concat({
-        uid: action.options.uid || Date.now(),
+        uid: action.options.uid || uniqueId(),
         isVisible: true,
         options: action.options,
       });
@@ -25,7 +30,7 @@ export default function notificationsReducer(state = initialState, action) {
       });
     case t.REMOVE_NOTIFICATION:
       return state.filter(notification => notification.uid !== action.uid);
-    case t.HIDE_ALL_NOTIFICATIONS:
+    case t.CLEAR_NOTIFICATIONS:
       return state.map(notification => ({
         ...notification,
         isVisible: false,

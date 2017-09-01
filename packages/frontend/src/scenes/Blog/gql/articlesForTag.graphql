@@ -8,6 +8,12 @@ query getArticlesForTag($name: String!) {
     excerpt
     createdAt
     userId
+    category {
+      id
+      name
+      slug
+      icon
+    }
     tags {
       id
       name

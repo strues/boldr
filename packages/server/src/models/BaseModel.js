@@ -49,9 +49,18 @@ export default class BaseModel extends Model {
       id: {
         type: ['integer', 'string'],
       },
-      createdAt: { type: 'date' },
-      updatedAt: { type: 'date' },
-      deletedAt: { type: 'date' },
+      createdAt: {
+        type: 'string',
+        format: 'date-time',
+      },
+      updatedAt: {
+        type: 'string',
+        format: 'date-time',
+      },
+      deletedAt: {
+        type: 'string',
+        format: 'date-time',
+      },
     },
   };
 

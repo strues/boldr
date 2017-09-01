@@ -63,8 +63,11 @@ export default {
   me: {
     type: UserType,
     description: 'Given an auth token, return the user and auth token',
-    resolve(_, args, { user, ValidationError }) {
+    resolve(_, args, { user, ValidationError, req }) {
       if (!user) {
+        throw new ValidationError('Unauthorized');
+      }
+      if (user.id !== req.session.user.id) {
         throw new ValidationError('Unauthorized');
       }
       return user;

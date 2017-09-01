@@ -7,6 +7,7 @@ import Entity from '../../models/Entity';
 import CONTENT_STATUS from '../enum/contentStatus';
 import UserType from './user';
 import TagType from './tag';
+import CategoryType from './category';
 import ContentType from './contentType';
 
 const EntityType = new GraphQLObjectType({
@@ -50,6 +51,10 @@ const EntityType = new GraphQLObjectType({
       type: GraphQLID,
       description: 'The content type id',
     },
+    categoryId: {
+      type: GraphQLID,
+      description: 'The category id',
+    },
     ...dateCUD,
     tags: {
       type: new GraphQLList(TagType),
@@ -69,7 +74,14 @@ const EntityType = new GraphQLObjectType({
           .then(result => result.$relatedQuery('contentType'));
       },
     },
-
+    category: {
+      type: CategoryType,
+      resolve(_, args, ctx) {
+        return Entity.query()
+          .findById(_.id)
+          .then(result => result.$relatedQuery('category'));
+      },
+    },
     author: {
       type: UserType,
       description: 'User who created the entity.',

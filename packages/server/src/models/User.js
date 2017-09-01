@@ -201,6 +201,7 @@ class User extends BaseModel {
    * @returns {*}
    */
   authenticate(plainText) {
+    this.lastLogin = new Date().toISOString();
     return bcrypt.compareAsync(plainText, this.password);
   }
 

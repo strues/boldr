@@ -1,4 +1,10 @@
-import { GraphQLBoolean, GraphQLString, GraphQLNonNull, GraphQLInputObjectType } from 'graphql';
+import {
+  GraphQLBoolean,
+  GraphQLString,
+  GraphQLID,
+  GraphQLNonNull,
+  GraphQLInputObjectType,
+} from 'graphql';
 import { GraphQLURL, GraphQLJSON } from '../scalars';
 
 const EditArticleInput = new GraphQLInputObjectType({
@@ -36,9 +42,13 @@ const EditArticleInput = new GraphQLInputObjectType({
       type: GraphQLURL,
       description: 'url of the article feature image',
     },
-    backgroundImage: {
+    heroImage: {
       type: GraphQLURL,
-      description: 'url of the article background image',
+      description: 'url of the article hero image',
+    },
+    categoryId: {
+      type: GraphQLID,
+      description: 'Id of the category',
     },
   }),
 });

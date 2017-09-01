@@ -7,12 +7,11 @@ describe('Boldr Reducer', () => {
         apolloUri: '/api/v1/graphql',
       },
       ui: {
-        isExpanded: true,
-        isMobile: false,
         layout: 'grid',
-        showHeader: true,
-        isSmall: false,
-        modal: false,
+        isExpanded: false,
+        isMobile: false,
+        isDrawerOpen: false,
+        isModalVisible: false,
       },
       notifications: [],
     });

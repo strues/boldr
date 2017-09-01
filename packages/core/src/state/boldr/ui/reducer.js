@@ -1,72 +1,58 @@
+// @flow
 /**
- * @module boldr-core/state/ui/reducer
+ * @module @boldr/core/state/boldr/ui/reducer
  */
 
 import * as t from '../actionTypes';
+import type { UiState, Action } from '../../../types';
 
-function toggleExpandCollapse(state) {
+type State = UiState;
+
+function toggleExpandCollapse(state: UiState) {
   const newState = Object.assign({}, state);
   newState.isExpanded = !newState.isExpanded;
   return newState;
 }
 
-function toggleSidebar(state) {
+function toggleDrawer(state: UiState) {
   const newState = Object.assign({}, state);
-  newState.isSmall = !newState.isSmall;
+  newState.isDrawerOpen = !newState.isDrawerOpen;
   return newState;
 }
 
-export const LAYOUTS = {
-  GALLERY: 'gallery',
-  GRID: 'grid',
-  LIST: 'list',
-};
+function toggleModal(state: UiState) {
+  const newState = Object.assign({}, state);
+  newState.isModalVisible = !newState.isModalVisible;
+  return newState;
+}
 
 const INITIAL_STATE = {
-  layout: LAYOUTS.GRID,
-  modal: false,
-  isExpanded: true,
+  layout: 'grid',
+  isExpanded: false,
   isMobile: false,
-  isSmall: false,
-  showHeader: true,
+  isDrawerOpen: false,
+  isModalVisible: false,
 };
 
-export default function uiReducer(state = INITIAL_STATE, action) {
+export default function uiReducer(state: State = INITIAL_STATE, action: Action) {
   switch (action.type) {
     case t.TOGGLE_COLLAPSE:
       return toggleExpandCollapse(state);
-    case t.TOGGLE_SIDEBAR:
-      return toggleSidebar(state);
-
-    case t.SHOW_HEADER:
-      return {
-        ...state,
-        showHeader: true,
-      };
-    case t.HIDE_HEADER:
-      return {
-        ...state,
-        showHeader: false,
-      };
+    case t.TOGGLE_DRAWER:
+      return toggleDrawer(state);
+    case t.TOGGLE_MODAL:
+      return toggleModal(state);
     case t.CHANGE_LAYOUT:
       return {
         ...state,
-        layout: action.payload,
-      };
-    case t.MODAL_OPEN:
-      return {
-        ...state,
-        modal: true,
-      };
-    case t.MODAL_CLOSED:
-      return {
-        ...state,
-        modal: false,
+        // $FlowIssue
+        layout: action.layout,
       };
     case t.SET_MOBILE_DEVICE:
       return {
         ...state,
-        isMobile: action.payload,
+        // $FlowIssue
+        isMobile: action.enabled,
       };
 
     default:

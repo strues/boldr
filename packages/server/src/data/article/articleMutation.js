@@ -29,11 +29,12 @@ export default {
         content: args.input.content,
         rawContent: args.input.rawContent,
         image: args.input.image,
-        backgroundImage: args.input.backgroundImage,
+        heroImage: args.input.heroImage,
         meta: args.input.meta,
         attachments: args.input.attachments,
         published: args.input.published,
         userId: context.user.id,
+        categoryId: args.input.categoryId,
       });
       args.input.tags.map(async tag => {
         const existingTag = await Tag.query()
@@ -86,10 +87,10 @@ export default {
         content: args.input.content,
         rawContent: args.input.rawContent,
         image: args.input.image,
-        backgroundImage: args.input.backgroundImage,
+        heroImage: args.input.heroImage,
         meta: args.input.meta,
-        attachments: args.input.attachments,
         published: args.input.published,
+        categoryId: args.input.categoryId,
       });
       return updatedArticle;
     },

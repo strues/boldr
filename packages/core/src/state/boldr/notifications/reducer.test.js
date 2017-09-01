@@ -1,14 +1,14 @@
 import {
-  SHOW_NOTIFICATION,
+  SEND_NOTIFICATION,
   HIDE_NOTIFICATION,
   REMOVE_NOTIFICATION,
-  HIDE_ALL_NOTIFICATIONS,
+  CLEAR_NOTIFICATIONS,
 } from '../actionTypes';
 import notificationsReducer, { initialState } from './reducer';
 import {
-  showNotification,
+  sendNotification,
   hideNotification,
-  hideAllNotifications,
+  clearNotifications,
   removeNotification,
 } from './actions';
 
@@ -18,10 +18,10 @@ describe('notifications reducer', () => {
     expect(notificationsReducer(undefined, {})).toEqual(initialState);
   });
 
-  it('should handle showNotification properly', () => {
+  it('should handle sendNotification properly', () => {
     const options = { uid };
     const expected = [...initialState, { uid, options, isVisible: true }];
-    expect(notificationsReducer(initialState, showNotification(options))).toEqual(expected);
+    expect(notificationsReducer(initialState, sendNotification(options))).toEqual(expected);
   });
 
   it('should handle hideNotification properly', () => {
@@ -30,10 +30,10 @@ describe('notifications reducer', () => {
     expect(notificationsReducer(testState, hideNotification(uid))).toEqual(expected);
   });
 
-  it('should handle hideAllNotifications properly', () => {
+  it('should handle clearNotifications properly', () => {
     const testState = [{ uid: 1, isVisible: true }, { uid: 2, isVisible: true }];
     const expectedState = [{ uid: 1, isVisible: false }, { uid: 2, isVisible: false }];
-    expect(notificationsReducer(testState, hideAllNotifications())).toEqual(expectedState);
+    expect(notificationsReducer(testState, clearNotifications())).toEqual(expectedState);
   });
 
   it('should handle removeNotification properly', () => {
@@ -46,11 +46,11 @@ describe('notifications reducer', () => {
 
 describe('notifications actions', () => {
   const uid = 'testUid';
-  describe('showNotification', () => {
+  describe('sendNotification', () => {
     it('should return correct type and passed options object', () => {
       const options = {};
-      const expected = { type: SHOW_NOTIFICATION, options };
-      expect(showNotification(options)).toEqual(expected);
+      const expected = { type: SEND_NOTIFICATION, options };
+      expect(sendNotification(options)).toEqual(expected);
     });
   });
 
@@ -61,10 +61,10 @@ describe('notifications actions', () => {
     });
   });
 
-  describe('hideAllNotifications', () => {
+  describe('clearNotifications', () => {
     it('should return correct type', () => {
-      const expected = { type: HIDE_ALL_NOTIFICATIONS };
-      expect(hideAllNotifications()).toEqual(expected);
+      const expected = { type: CLEAR_NOTIFICATIONS };
+      expect(clearNotifications()).toEqual(expected);
     });
   });
 

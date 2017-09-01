@@ -24,6 +24,7 @@ module.exports.up = async db => {
     table.enu('status', ['published', 'archived', 'draft']).notNullable();
     table.uuid('ctId').unsigned().notNullable();
     table.uuid('userId').unsigned();
+    table.uuid('categoryId').unsigned();
     table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
     table.timestamp('updatedAt').nullable().defaultTo(null);
     table.timestamp('deletedAt').nullable().defaultTo(null);
@@ -38,6 +39,12 @@ module.exports.up = async db => {
       .foreign('userId')
       .references('id')
       .inTable('user')
+      .onDelete('cascade')
+      .onUpdate('cascade');
+      table
+      .foreign('categoryId')
+      .references('id')
+      .inTable('category')
       .onDelete('cascade')
       .onUpdate('cascade');
 

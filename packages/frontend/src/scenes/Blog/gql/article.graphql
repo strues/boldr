@@ -7,17 +7,21 @@ query getArticleBySlug($slug: String!) {
     image
     createdAt
     userId
+    categoryId
     tags {
       id
       name
-      __typename
     }
-    __typename
+    category {
+      id
+      name
+      slug
+      icon
+    }
     author {
       username
       avatarUrl
       bio
-      __typename
       socialMedia {
         facebookUrl
         githubUrl
@@ -25,7 +29,6 @@ query getArticleBySlug($slug: String!) {
         linkedinUrl
         googleUrl
         stackoverflowUrl
-        __typename
       }
     }
   }

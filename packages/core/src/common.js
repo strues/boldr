@@ -7,21 +7,15 @@ export { default as validations } from './util/validations';
 export { default as createBoldrStore } from './state/createBoldrStore';
 export {
   changeLayout,
-  showModal,
-  hideModal,
+  toggleModal,
   setMobileDevice,
-  toggleSidebar,
+  toggleDrawer,
   toggleCollapse,
-  hideHeader,
-  showHeader,
 } from './state/boldr/ui/actions';
 
 export {
-  showNotification,
   hideNotification,
   removeNotification,
-  hideAllNotifications,
   sendNotification,
-  dismissNotification,
-  clearNotification,
+  clearNotifications,
 } from './state/boldr/notifications/actions';

@@ -1,6 +1,7 @@
 import {
   GraphQLBoolean,
   GraphQLString,
+  GraphQLID,
   GraphQLNonNull,
   GraphQLList,
   GraphQLInputObjectType,
@@ -42,13 +43,17 @@ const CreateArticleInput = new GraphQLInputObjectType({
       type: GraphQLString,
       description: 'url of the article feature image',
     },
-    backgroundImage: {
+    heroImage: {
       type: GraphQLString,
       description: 'url of the article background image',
     },
     tags: {
       type: new GraphQLList(GraphQLString),
       description: 'Tags relating articles together',
+    },
+    categoryId: {
+      type: GraphQLID,
+      description: 'Id of the category',
     },
   }),
 });

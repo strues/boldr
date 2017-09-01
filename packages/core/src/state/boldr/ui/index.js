@@ -4,9 +4,8 @@
 export { default as uiReducer } from './reducer';
 export {
   changeLayout,
-  showModal,
-  hideModal,
+  toggleModal,
+  toggleDrawer,
   setMobileDevice,
-  toggleSidebar,
   toggleCollapse,
 } from './actions';
