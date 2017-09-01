@@ -1,5 +1,5 @@
 {
-  "name": "boldr-server",
+  "name": "@boldr/server",
   "version": "0.0.1-alpha.1",
   "description": "Server for Boldr",
   "main": "lib/index.js",
@@ -9,6 +9,7 @@
   "scripts": {
     "build": "rm -rf lib && NODE_ENV=production babel src --out-dir lib",
     "dev": "NODE_ENV=development DEBUG=boldr:* babel-watch src/index.js",
+    "dev:root": "NODE_ENV=development DEBUG=boldr:* babel-node src/index.js",
     "migrate": "DATABASE_URL=postgres://postgres:password@localhost:5432/boldr node --harmony internal/scripts/db.js migrate",
     "migration": "DATABASE_URL=postgres://postgres:password@localhost:5432/boldr node --harmony internal/scripts/db.js migration",
     "seed": "DATABASE_URL=postgres://postgres:password@localhost:5432/boldr node --harmony internal/scripts/db.js seed",
@@ -63,11 +64,11 @@
     "jimp": "^0.2.28",
     "jsonwebtoken": "^7.4.3",
     "knex": "^0.13.0",
-    "lodash": "4.17.4",
+    "lodash": "^4.17.4",
     "mkdirp": "^0.5.1",
     "morgan": "^1.8.2",
     "nodemailer": "^4.1.0",
-    "numeral": "^1.5.3",
+    "numeral": "^2.0.6",
     "object-path": "^0.11.4",
     "objection": "^0.8.8",
     "pg": "^7.2.0",
@@ -86,9 +87,9 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "babel-watch": "^2.0.7",
-    "eslint": "4.5.0",
+    "eslint": "^4.5.0",
     "eslint-config-boldr": "^0.12.11",
     "fast-async": "^6.3.0",
-    "prettier": "^1.6.1"
+    "prettier": "1.6.1"
   }
 }

@@ -49,10 +49,11 @@ class ArticleListItem extends React.Component<Props, *> {
     this.props.dispatch(push(`/admin/articles/${this.props.article.slug}`));
   };
   handleDeleteClick = () => {
-    this.props.deleteArticle(article.id);
+    const { id } = this.props.article;
+    this.props.deleteArticle(id);
   };
   render() {
-    const { article } = this.props;
+    const { article, deleteArticle } = this.props;
 
     return (
       <ListItem onClick={this.handleArticleClick}>
@@ -62,7 +63,7 @@ class ArticleListItem extends React.Component<Props, *> {
           <Menu isSize="normal">
             <MenuItem
               icon={<Icon kind="trash" color="#222" />}
-              onClick={this.handleDeleteClick}
+              onClick={deleteArticle(article.id)}
               text="Delete"
             />
             <MenuItem
@@ -91,8 +92,6 @@ export default graphql(DELETE_ARTICLE_MUTATION, {
             __typename: 'Mutation',
             deleteArticle: {
               id,
-              message: `Deleted article ${id}`,
-              __typename: 'Article',
             },
           },
         });

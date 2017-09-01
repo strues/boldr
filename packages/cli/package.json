@@ -36,7 +36,7 @@
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "eslint": "^4.5.0",
-    "eslint-config-boldr": "^0.12.9",
+    "eslint-config-boldr": "^0.12.11",
     "fast-async": "^6.3.0"
   },
   "dependencies": {

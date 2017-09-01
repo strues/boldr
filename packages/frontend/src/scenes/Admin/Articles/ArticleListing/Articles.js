@@ -2,12 +2,14 @@
 /* @flow */
 import React from 'react';
 import { connect } from 'react-redux';
-import type { Connector } from 'react-redux';
+
 import Helmet from 'react-helmet';
 import { toggleModal } from '@boldr/core';
 import { Col, Row, LevelLeft, Level, LevelItem, LevelRight } from '@boldr/ui';
+import type { Connector } from 'react-redux';
 import type { Dispatch } from '../../../../types/state';
 import type { ArticleType, ArticlesType } from '../../../../types/boldr';
+import { makeSelectModal } from '../../state/selectors/adminSelectors';
 import { setArticle } from '../../state/dashboard/actions';
 import ArticleList from './components/ArticleList';
 import ArticlePreview from './components/ArticlePreview';
@@ -33,6 +35,7 @@ class Articles extends React.Component<Props, *> {
     this.props.toggleModal();
   };
   render() {
+    const { isModalVisible } = this.props;
     return (
       <Row>
         <Helmet title="Admin: Post List" />
@@ -67,7 +70,7 @@ class Articles extends React.Component<Props, *> {
         <Col xs={12} md={8}>
           <ArticlePreview
             article={this.props.article}
-            isVisible={this.props.ui.isModalVisible}
+            isVisible={isModalVisible}
             onCloseExpand={this.closeModal}
             onClickExpand={this.handleClickExpand}
           />
@@ -77,8 +80,9 @@ class Articles extends React.Component<Props, *> {
   }
 }
 const mapStateToProps = state => {
+  const modalSelector = makeSelectModal();
   return {
-    ui: state.boldr.ui,
+    isModalVisible: modalSelector(state),
     article: state.admin.dashboard.article,
   };
 };

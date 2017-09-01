@@ -1,5 +1,16 @@
 {
-  "presets": [["boldr", {
-    "target": "modern"
-    }]]
+  "presets": [
+    [
+      "boldr",
+      {
+        "target": "modern"
+      }
+    ]
+  ],
+  "plugins": [
+    ["module-resolver", {
+      "root": ["./src"]
+
+    }]
+  ]
 }

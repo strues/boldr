@@ -6,55 +6,46 @@ import { graphql } from 'react-apollo';
 import Loader from '@boldr/ui/Loader';
 // internal
 import { toggleModal } from '@boldr/core';
-import type { User } from '../../../types/boldr';
+import { makeSelectModal, makeSelectCurrentMember } from '../state/selectors/adminSelectors';
+import type { UserType, UsersType } from '../../../types/boldr';
 import { memberSelected, updateMember } from '../state';
 import Members from './Members';
 import MEMBERS_QUERY from './users.graphql';
 
 type Data = {
-  getUsers: Array<User>,
+  getUsers: UsersType,
   loading: boolean,
 };
 
 export type Props = {
   data: Data,
-  currentMember: User,
+  currentMember: UserType,
   dispatch: Function,
-  ui: Object,
+  isModalVisible: boolean,
 };
-type State = {
-  userId: string,
-};
-export class MembersContainer extends Component<Props, State> {
+
+export class MembersContainer extends Component<Props, *> {
   static defaultProps: {
     profile: {},
     fetchMembersIfNeeded: () => {},
   };
-  constructor(props: Props) {
-    super(props);
-    (this: any).toggleUser = this.toggleUser.bind(this);
-    (this: any).handleSubmit = this.handleSubmit.bind(this);
-    (this: any).closeModal = this.closeModal.bind(this);
-    (this: any).openModal = this.openModal.bind(this);
-  }
-  state: State = { userId: '' };
 
   props: Props;
 
-  closeModal() {
+  closeModal = () => {
     this.props.dispatch(toggleModal());
-  }
-  openModal() {
+  };
+  openModal = () => {
     this.props.dispatch(toggleModal());
-  }
+  };
 
-  toggleUser(user: Object) {
+  toggleUser = (user: UserType) => {
     const { dispatch } = this.props;
     dispatch(memberSelected(user));
     dispatch(toggleModal());
-  }
+  };
 
-  handleSubmit(values: Object) {
+  handleSubmit = (values: Object) => {
     const userData = {
       username: values.username,
       firstName: values.firstName,
@@ -64,10 +55,10 @@ export class MembersContainer extends Component<Props, State> {
     };
 
     this.props.dispatch(updateMember(userData));
-  }
+  };
   render() {
     const { loading, getUsers } = this.props.data;
-    const { ui, currentMember } = this.props;
+    const { isModalVisible, currentMember } = this.props;
     if (loading) {
       return <Loader />;
     }
@@ -75,7 +66,7 @@ export class MembersContainer extends Component<Props, State> {
       <Members
         toggleUser={this.toggleUser}
         users={getUsers}
-        visible={ui.isModalVisible}
+        visible={isModalVisible}
         close={this.closeModal}
         handleSubmit={this.handleSubmit}
         initialValues={currentMember}
@@ -85,9 +76,11 @@ export class MembersContainer extends Component<Props, State> {
 }
 
 const mapStateToProps = state => {
+  const modalSelector = makeSelectModal();
+  const currentMemSelect = makeSelectCurrentMember();
   return {
-    ui: state.boldr.ui,
-    currentMember: state.admin.members.currentMember,
+    isModalVisible: modalSelector(state),
+    currentMember: currentMemSelect(state),
   };
 };
 

@@ -1,7 +1,11 @@
 import { GraphQLList, GraphQLID, GraphQLNonNull } from 'graphql';
 import ContentT from '../../models/ContentType';
 import { errorObj } from '../../errors';
+import Category from '../../models/Category';
+import Article from '../../models/Article';
+import Tag from '../../models/Tag';
 import ContentType from '../../schema/type/contentType';
+import AllContentType from '../../schema/type/allContent';
 
 export default {
   contentTypes: {
@@ -34,6 +38,17 @@ export default {
       }
 
       return contentType;
+    },
+  },
+  allContent: {
+    type: AllContentType,
+    async resolve(root) {
+      const allContent = {
+        articles: await Article.query(),
+        tags: await Tag.query(),
+        categories: await Category.query(),
+      };
+      return allContent;
     },
   },
 };

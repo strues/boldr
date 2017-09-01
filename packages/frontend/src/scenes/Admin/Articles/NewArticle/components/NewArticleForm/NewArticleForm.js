@@ -15,10 +15,11 @@ import Form, {
   TextFormField,
   TextAreaFormField,
   RadioFormField,
+  SelectFormField,
 } from '@boldr/ui/Form';
 import { isRequired } from '../../../../../../core/util/validations';
 import RenderTags from '../RenderTags';
-import type { RouterLocation } from '../../../../../../types/boldr';
+import type { RouterLocation, CategoriesType } from '../../../../../../types/boldr';
 import { selectArticleFormValues } from '../../../../state/selectors/articleSelectors';
 import FieldEditor from './FieldEditor';
 import { Inner, Toolbar, NewPost, DarkSegment, HelpTxt } from './NewPostStyled';
@@ -29,13 +30,19 @@ export type Props = {
   submitting: boolean,
   location: RouterLocation,
   pristine: boolean,
+  categories: CategoriesType,
 };
 
 class NewArticleForm extends React.Component<Props, *> {
   props: Props;
   render() {
-    const { handleSubmit, location, reset, pristine, submitting } = this.props;
-
+    const { handleSubmit, location, categories, reset, pristine, submitting } = this.props;
+    const catOpts = categories.map(category => {
+      return {
+        value: category.id,
+        text: category.name,
+      };
+    });
     return (
       <div>
         <NewPost>
@@ -78,7 +85,14 @@ class NewArticleForm extends React.Component<Props, *> {
                     validate={[isRequired]}
                   />
                 </DarkSegment>
-
+                <Field
+                  id="category"
+                  name="categoryId"
+                  type="select"
+                  component={SelectFormField}
+                  label="Category"
+                  options={catOpts}
+                />
                 <FormGroup>
                   <Field
                     name="excerpt"

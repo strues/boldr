@@ -1,0 +1,7 @@
+{
+  "verbose": true,
+  "watch": [
+   "packages/server/src"
+  ],
+  "exec": "node_modules/.bin/babel-node --inspect ./packages/server/src/index.js"
+}

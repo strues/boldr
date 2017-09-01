@@ -14,12 +14,14 @@ const HomeHero = styled.div`
   width: 100%;
 `;
 
+const HomeText = 'Meet Boldr.';
+
 function Home() {
   return (
     <div>
       <Helmet title="Home" />
       <HomeHero>
-        <Heading type="h1" text="Meet Boldr." isLight />
+        <Heading type="h1" text={HomeText} isLight />
       </HomeHero>
       <Grid>
         <Row>

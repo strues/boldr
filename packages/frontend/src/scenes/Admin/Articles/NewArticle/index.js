@@ -1,1 +1,1 @@
-export { default } from './NewPostContainer';
+export { default } from './NewArticleContainer';

@@ -47,7 +47,7 @@ export const checkActiveLoc = (location: Object, url: string) => {
 class Navigation extends React.Component<Props, State> {
   state: State = { isActive: false, isDropdownOpen: false };
 
-  onClickNav = () => {
+  handleClickNav = () => {
     this.setState(state => ({ isActive: !state.isActive }));
   };
 
@@ -77,9 +77,9 @@ class Navigation extends React.Component<Props, State> {
                 />
               </Link>
             </NavbarItem>
-            <NavbarBurger isActive={isActive} onClick={this.onClickNav} />
+            <NavbarBurger isActive={isActive} onClick={this.handleClickNav} />
           </NavbarBrand>
-          <NavbarMenu isActive={isActive} onClick={this.onClickNav}>
+          <NavbarMenu isActive={isActive} onClick={this.handleClickNav}>
             <NavbarStart>
               {details.map(detail => (
                 <NavItem
