@@ -35,6 +35,7 @@ export default compose(
       }
     }
   `),
+  // $FlowIssue
   graphql(CREATE_ARTICLE_MUTATION, {
     props: ({ mutate }) => ({
       createArticle: payload =>
@@ -47,5 +48,6 @@ export default compose(
         }),
     }),
   }),
+  // $FlowIssue
   connect(null, mapDispatchToProps),
 )(NewArticle);

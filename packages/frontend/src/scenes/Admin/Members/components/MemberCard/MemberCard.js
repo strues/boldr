@@ -3,6 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Button from '@boldr/ui/Button';
 import Avatar from '@boldr/ui/Avatar';
+import type { UserType } from '../../../../../types/boldr';
 
 const MemListItem = styled.li`
   width: 100%;
@@ -35,13 +36,12 @@ const LeftSide = styled.div`
 `;
 
 type Props = {
-  user: Object,
-  handleToggle: () => void,
+  user: UserType,
+  handleToggle: UserType => void,
   username: string,
   lastName: string,
   firstName: string,
   roleName: string,
-  id: string,
   email: string,
   avatarUrl: string,
 };

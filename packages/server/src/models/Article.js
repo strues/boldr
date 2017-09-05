@@ -28,9 +28,6 @@ class Article extends BaseModel {
       backgroundImage: { type: 'string' },
       featured: { type: 'boolean' },
       userId: { type: 'string' },
-      createdAt: { type: 'date-time' },
-      updatedAt: { type: 'date-time' },
-      deletedAt: { type: 'date-time' },
     },
   });
 

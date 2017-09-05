@@ -83,13 +83,16 @@ const mapStateToProps = state => {
     currentMember: currentMemSelect(state),
   };
 };
-
+// $FlowIssue
 const MembersContainerWithData = graphql(MEMBERS_QUERY, {
-  options: props => ({
+  // $FlowIssue
+  options: () => ({
     variables: {
       offset: 0,
       limit: 20,
     },
   }),
+  // $FlowIssue
 })(MembersContainer);
+// $FlowIssue
 export default connect(mapStateToProps)(MembersContainerWithData);

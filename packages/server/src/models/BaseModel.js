@@ -47,7 +47,7 @@ export default class BaseModel extends Model {
     required: [],
     properties: {
       id: {
-        type: ['integer', 'string'],
+        type: ['number', 'string'],
       },
       createdAt: {
         type: 'string',

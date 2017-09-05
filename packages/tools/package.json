@@ -64,10 +64,10 @@
     "ora": "^1.3.0",
     "postcss-loader": "^2.0.6",
     "pretty-error": "^2.1.1",
-    "react-dev-utils": "^4.0.0",
+    "react-dev-utils": "^4.0.1",
     "react-hot-loader": "next",
     "source-map-loader": "^0.2.1",
-    "source-map-support": "^0.4.16",
+    "source-map-support": "^0.4.17",
     "uglify-es": "^3.0.28",
     "uglifyjs-webpack-plugin": "1.0.0-beta.2",
     "url-loader": "^0.5.9",
@@ -81,8 +81,8 @@
     "write-file-webpack-plugin": "^4.1.0"
   },
   "devDependencies": {
-    "eslint": "^4.5.0",
-    "eslint-config-boldr": "^0.12.11",
+    "eslint": "^4.6.1",
+    "eslint-config-boldr": "^0.12.12",
     "prepublish": "^1.4.1",
     "prettier": "1.6.1",
     "rimraf": "^2.6.1"

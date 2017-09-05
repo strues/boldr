@@ -24,8 +24,6 @@ class MenuDetail extends BaseModel {
       href: { type: 'string' },
       icon: { type: 'string' },
       children: { type: 'json' },
-      createdAt: { type: 'date-time' },
-      updatedAt: { type: 'date-time' },
     },
   });
   static get relationMappings() {

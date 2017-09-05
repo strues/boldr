@@ -3,11 +3,10 @@
 import * as React from 'react';
 import Helmet from 'react-helmet';
 import { graphql, gql, compose } from 'react-apollo';
-import { bindActionCreators } from 'redux';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { ImageDisplay, Col, Row, Heading } from '@boldr/ui';
+import { ImageDisplay, Col, Row, Heading, ContentPromo, Section } from '@boldr/ui';
 import type { MediasType, MediaType } from '../../../types/boldr';
 
 import DELETE_MEDIA from './gql/deleteMedia.graphql';
@@ -37,30 +36,46 @@ class Media extends React.Component<Props, *> {
   imageUpdateClick = (m: MediaType) => {
     this.props.navigate(`/admin/media/${m.id}`);
   };
-  render(): React.Node {
+
+  renderItems = () => {
     const { media, deleteMedia } = this.props;
+    return (
+      <MediaList>
+        {media.map(m => (
+          <MediaItem key={m.id}>
+            <ImageDisplay
+              onRemoveImage={deleteMedia(m.id)}
+              onUpdateImage={() => {
+                this.imageUpdateClick(m);
+              }}
+              // $FlowIssue
+              imageSrc={`${process.env.API_URL}/uploads/media/${m.thumbName}`}
+            />
+          </MediaItem>
+        ))}
+      </MediaList>
+    );
+  };
+
+  renderEmpty = () => {
+    return (
+      <ContentPromo isCentered>
+        <Heading type="h2" text="Upload an image or video to get started." />
+      </ContentPromo>
+    );
+  };
+  render(): React.Node {
+    const { media } = this.props;
+
     return (
       <div>
         <Helmet title="Media" />
         <Row>
           <Col xs={12}>
-            <Heading type="h2" text="Media Gallery" />
-            <Row>
-              <MediaList>
-                {media.map(m => (
-                  <MediaItem key={m.id}>
-                    <ImageDisplay
-                      onRemoveImage={deleteMedia(m.id)}
-                      onUpdateImage={() => {
-                        this.imageUpdateClick(m);
-                      }}
-                      // $FlowIssue
-                      imageSrc={`${process.env.API_URL}/uploads/media/${m.thumbName}`}
-                    />
-                  </MediaItem>
-                ))}
-              </MediaList>
-            </Row>
+            <Section>
+              <Heading type="h2" text="Media Gallery" />
+            </Section>
+            <Row>{!media.length ? this.renderEmpty() : this.renderItems()}</Row>
           </Col>
         </Row>
       </div>

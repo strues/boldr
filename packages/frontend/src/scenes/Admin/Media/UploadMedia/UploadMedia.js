@@ -76,7 +76,8 @@ class UploadMedia extends Component<Props, *> {
               <MediaInputArea>
                 <Dropzone
                   uploadCallback={this.handleUpload}
-                  fileUrl="http://localhost:2121/uploads/media"
+                  // $FlowIssue
+                  fileUrl={`${process.env.API_URL}/uploads/media`}
                 />
               </MediaInputArea>
             </Paper>

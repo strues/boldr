@@ -53,9 +53,6 @@ class User extends BaseModel {
       language: { type: 'string' },
       verified: { type: 'boolean' },
       birthday: { type: 'date' },
-      createdAt: { type: 'date-time' },
-      updatedAt: { type: 'date-time' },
-      deletedAt: { type: 'date-time' },
     },
   });
 

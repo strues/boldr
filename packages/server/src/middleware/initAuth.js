@@ -19,7 +19,7 @@ const sessionOptions = {
   httpOnly: true,
   rolling: true,
   saveUninitialized: true,
-  resave: true,
+  resave: false,
   unset: 'destroy',
   cookie: {
     secure: false,

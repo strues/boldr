@@ -17,6 +17,7 @@ import ArticlePreview from './components/ArticlePreview';
 export type Props = {
   articles: ArticlesType,
   article: ArticleType,
+  isModalVisible: boolean,
   handleDeleteClick: Function,
   setArticle: ArticleType => ArticleType,
 };

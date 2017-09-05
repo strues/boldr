@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import Helmet from 'react-helmet';
-import hasWindow from '@boldr/utils/lib/dom/hasWindow';
+import Loader from '@boldr/ui/Loader';
 import { Grid } from '@boldr/ui/Layout';
 import type { ArticleType } from '../../../../types/boldr';
 import NewArticleForm from './components/NewArticleForm';
@@ -16,12 +16,16 @@ const NewArticle = (props: Props) => {
     props.onSubmit(values);
   };
 
-  return (
-    <Grid>
-      <Helmet title="Admin: New Post" />
-      <NewArticleForm onSubmit={handleOnSubmit} categories={props.data.categories} />
-    </Grid>
-  );
+  if (props.data.loading) {
+    return <Loader />;
+  } else {
+    return (
+      <Grid>
+        <Helmet title="Admin: New Post" />
+        <NewArticleForm onSubmit={handleOnSubmit} categories={props.data.categories} />
+      </Grid>
+    );
+  }
 };
 
 export default NewArticle;
