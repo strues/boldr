@@ -18,6 +18,7 @@ pipeline:
       - ./node_modules/.bin/lerna exec --scope @boldr/utils -- npm run build
       - ./node_modules/.bin/lerna exec --scope @boldr/core -- npm run prepare
       - ./node_modules/.bin/lerna exec --scope @boldr/tools -- npm run build
+      - ./node_modules/.bin/lerna exec --scope @boldr/config -- npm run build
       - yarn run test
       - ./node_modules/.bin/codecov -t a3dc697a-382d-4d84-a07b-1f5682c3d70a -f coverage/coverage-final.json
 

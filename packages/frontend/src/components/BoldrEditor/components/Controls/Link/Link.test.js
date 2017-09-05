@@ -51,6 +51,6 @@ describe('<Link />', () => {
     );
     const linkControl = control.find('Link');
     expect(linkControl.node.state.expanded).toBeFalsy();
-    expect(linkControl.node.state.link, undefined).toBeUndefined();
+    expect(linkControl.node.state.link).toBeUndefined();
   });
 });

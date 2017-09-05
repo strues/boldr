@@ -67,10 +67,10 @@ describe('<TextAlign />', () => {
     control.childAt(0).simulate('click');
     expect(onChange.calledOnce).toBeTruthy();
     control.childAt(1).simulate('click');
-    expect(onChange.callCount, 2).toBeTruthy();
+    expect(onChange.callCount).toEqual(2);
     control.childAt(2).simulate('click');
-    expect(onChange.callCount, 3).toBeTruthy();
+    expect(onChange.callCount).toEqual(3);
     control.childAt(3).simulate('click');
-    expect(onChange.callCount, 4).toBeTruthy();
+    expect(onChange.callCount).toEqual(4);
   });
 });

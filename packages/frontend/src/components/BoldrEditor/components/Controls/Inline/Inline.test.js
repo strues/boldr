@@ -68,13 +68,13 @@ describe('<Inline />', () => {
     control.childAt(0).simulate('click');
     expect(onChange.calledOnce).toBeTruthy();
     control.childAt(1).simulate('click');
-    expect(onChange.callCount, 2).toBeTruthy();
+    expect(onChange.callCount).toBe(2);
     control.childAt(2).simulate('click');
-    expect(onChange.callCount, 3).toBeTruthy();
+    expect(onChange.callCount).toBe(3);
     control.childAt(3).simulate('click');
-    expect(onChange.callCount, 4).toBeTruthy();
+    expect(onChange.callCount).toBe(4);
     control.childAt(4).simulate('click');
-    expect(onChange.callCount, 5).toBeTruthy();
+    expect(onChange.callCount).toBe(5);
   });
 
   it('should have false value for all rich styles in state by default', () => {

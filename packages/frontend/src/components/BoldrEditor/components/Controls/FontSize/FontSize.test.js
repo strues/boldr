@@ -38,8 +38,8 @@ describe('<FontSize />', () => {
         modalHandler={new ModalHandler()}
       />,
     );
-    expect(control.childAt(0).props().children.length, 2).toBeTruthy();
+    expect(control.childAt(0).props().children.length).toBe(2);
     expect(control.childAt(0).props().onChange).toBeDefined();
-    expect(control.childAt(0).type(), Dropdown).toBeTruthy();
+    expect(control.childAt(0).type()).toBe(Dropdown);
   });
 });
