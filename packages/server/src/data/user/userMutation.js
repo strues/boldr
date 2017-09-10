@@ -3,7 +3,6 @@ import uuid from 'uuid';
 import { mailer, signToken } from '../../services';
 import { welcomeEmail } from '../../services/mailer/templates';
 import User from '../../models/User';
-import { errorObj } from '../../errors';
 import { UserLoginResponse } from '../../schema/type/auth';
 import { UserLoginInput, UserSignupInput } from '../../schema/input/auth';
 import EditUserInput from '../../schema/input/editUser';
@@ -12,19 +11,19 @@ import UserType from '../../schema/type/user';
 export default {
   loginUser: {
     type: UserLoginResponse,
-    description: 'for troubleshooting by admins, create a JWT for a given userId',
+    description: 'Authenticates a user. Returns the user and a signed JWT.',
     args: {
       input: {
         type: new GraphQLNonNull(UserLoginInput),
       },
     },
-    async resolve(_, args, context) {
+    async resolve(root, { input }, context) {
       const user = await User.query()
-        .where({ email: args.input.email })
+        .where({ email: input.email })
         .eager('[roles,socialMedia]')
         .first();
 
-      if (!user || !await user.authenticate(args.input.password)) {
+      if (!user || !await user.authenticate(input.password)) {
         throw new GraphQLError('Incorrect email and/or password.');
       }
 
@@ -33,32 +32,31 @@ export default {
       // sign the token
       const token = await signToken(user);
       context.req.user = user;
-      const payload = {
+
+      return {
         token,
         user,
       };
-      return payload;
     },
   },
   signupUser: {
     type: UserType,
-    description: 'A user registering for an account.',
+    description: 'Register for a new account.',
     args: {
       input: {
         type: new GraphQLNonNull(UserSignupInput),
       },
     },
-    async resolve(_, args, context) {
-      console.log(args);
+    async resolve(root, { input }, context) {
       const checkUser = await User.query()
-        .where({ email: args.input.email })
+        .where({ email: input.email })
         .first();
 
       if (checkUser) {
         return new Error('The user exists');
       }
 
-      const newUser = await User.query().insert(args.input);
+      const newUser = await User.query().insert(input);
       await newUser.$relatedQuery('roles').relate({ id: 1 });
 
       if (!newUser) {
@@ -87,7 +85,7 @@ export default {
     args: {
       id: {
         type: new GraphQLNonNull(GraphQLID),
-        description: 'The user ID',
+        description: 'The user id',
       },
       input: {
         type: new GraphQLNonNull(EditUserInput),

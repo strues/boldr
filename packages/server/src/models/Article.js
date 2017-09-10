@@ -24,10 +24,15 @@ class Article extends BaseModel {
       },
       rawContent: { type: 'json' },
       published: { type: 'boolean' },
-      featureImage: { type: 'string' },
-      backgroundImage: { type: 'string' },
+      image: { type: 'string' },
+      heroImage: { type: 'string' },
       featured: { type: 'boolean' },
-      userId: { type: 'string' },
+      userId: {
+        type: 'string',
+        minLength: 36,
+        maxLength: 36,
+        pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
+      },
     },
   });
 
@@ -53,6 +58,7 @@ class Article extends BaseModel {
           through: {
             from: 'article_tag.articleId',
             to: 'article_tag.tagId',
+            modelClass: `${__dirname}/join/ArticleTag`,
           },
           to: 'tag.id',
         },

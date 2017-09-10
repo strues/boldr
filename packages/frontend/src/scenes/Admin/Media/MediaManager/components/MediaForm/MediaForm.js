@@ -7,9 +7,6 @@ import { Field, reduxForm } from 'redux-form';
 import Button from '@boldr/ui/Button';
 import { Form, TextFormField } from '@boldr/ui/Form';
 
-const style = {
-  margin: 12,
-};
 type Props = {
   handleSubmit?: Function,
   reset?: Function,
@@ -37,10 +34,10 @@ const MediaForm = (props: Props) => {
         component={TextFormField}
       />
       <FormBottom>
-        <Button htmlType="submit" kind="primary" style={style} disabled={submitting || pristine}>
+        <Button htmlType="submit" kind="primary" disabled={submitting || pristine}>
           Save
         </Button>
-        <Button onClick={reset} style={style} outline>
+        <Button onClick={reset} outline>
           Reset
         </Button>
       </FormBottom>

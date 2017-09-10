@@ -1,0 +1,39 @@
+# Role or permission group for users
+type Role {
+  # Unique identifier for the object.
+  id: ID!
+
+  # A UUID (Universal Unique Identifier) is a 128-bit number used to uniquely identify some object or entity.
+  uuid: UUID
+
+  # A name for the object.
+  name: String
+
+  # An image for role identification
+  image: URL
+
+  # The role description
+  description: String
+
+  # Users belonging to a role.
+  users: [User]
+
+  # The timestamp when the object was deleted
+  deletedAt: DateTime
+
+  # The timestamp when the object was last updated
+  updatedAt: DateTime
+
+  # The timestamp when the object was created
+  createdAt: DateTime
+}
+
+
+
+extend type Query {
+  roles: [Role]
+  role(id: ID!): Role
+}
+
+extend type Mutation {
+}

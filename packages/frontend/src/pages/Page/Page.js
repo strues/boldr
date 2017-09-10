@@ -70,7 +70,7 @@ const mapStateToProps = createStructuredSelector({
 const PageComponentWithData = graphql(MENU_QUERY, {
   // $FlowIssue
   options: () => ({
-    fetchPolicy: 'cache-first',
+    fetchPolicy: 'cache-and-network',
     variables: {
       id: 1,
     },

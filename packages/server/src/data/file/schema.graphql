@@ -1,0 +1,54 @@
+type File {
+  # Unique identifier for the object.
+  id: ID!
+
+  # A name for the object.
+  name: String
+
+  # The type of file.
+  type: String!
+
+  # The size of the file
+  size: Int!
+
+  # The path to the file.
+  path: String!
+
+  # The timestamp when the object was deleted
+  deletedAt: DateTime
+
+  # The timestamp when the object was last updated
+  updatedAt: DateTime
+
+  # The timestamp when the object was created
+  createdAt: DateTime
+}
+
+
+
+input Upload {
+  # The file name
+  name: String!
+
+  # The type of file.
+  type: String!
+
+  # The size of the file
+  size: Int!
+
+  # The path to the file.
+  path: String!
+}
+
+
+extend type Query {
+  files: [File]
+  file(id: ID!): File
+}
+
+extend type Mutation {
+  # Login to account
+  singleUpload(input: Upload!): File
+  # Signup for an account
+  multipleUpload(input: Upload!): [File]
+}

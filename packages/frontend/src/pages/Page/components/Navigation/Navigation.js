@@ -4,7 +4,6 @@ import React from 'react';
 import type { Node } from 'react';
 import Link from 'react-router-dom/Link';
 import NavLink from 'react-router-dom/NavLink';
-
 import {
   Icon,
   Container,
@@ -12,25 +11,19 @@ import {
   NavbarBrand,
   NavbarBurger,
   NavbarEnd,
+  NavbarDropdown,
+  NavbarLink,
   NavbarItem,
   NavbarMenu,
   NavbarStart,
 } from '@boldr/ui';
 import type { CurrentUser, SettingsType, RouterLocation } from '../../../../types/boldr';
-import NavItem from './NavItem';
 
 export type Props = {
-  isMobile: boolean,
-  auth: Object,
-  loading: boolean,
-  logout: Function,
-  data?: Object,
   location: RouterLocation,
   menu: Object,
   settings?: SettingsType,
   currentUser: CurrentUser,
-  logoImg?: string,
-  breakpoint?: number,
   onLogout: Function,
   token?: string,
 };
@@ -59,8 +52,9 @@ class Navigation extends React.Component<Props, State> {
   };
   props: Props;
   render(): Node {
-    const { menu: { details }, settings, currentUser, location, token } = this.props;
+    const { menu: { details }, currentUser, location, token } = this.props;
     const { isActive } = this.state;
+    const dropdownItems = details.filter(detail => detail.parentId !== null);
     return (
       <Navbar
         ref={el => {
@@ -81,13 +75,58 @@ class Navigation extends React.Component<Props, State> {
           </NavbarBrand>
           <NavbarMenu isActive={isActive} onClick={this.handleClickNav}>
             <NavbarStart>
-              {details.map(detail => (
-                <NavItem
-                  key={detail.id}
-                  isActive={checkActiveLoc(location, detail.href)}
-                  {...detail}
-                />
-              ))}
+              {details.map(detail => {
+                if (!detail.hasDropdown && !detail.isDropdown) {
+                  return (
+                    <NavbarItem
+                      key={detail.id}
+                      isActive={checkActiveLoc(location, detail.href)}
+                      render={() => (
+                        <NavLink
+                          className="boldr-navbar__item"
+                          activeClassName="is-active"
+                          to={detail.href}>
+                          {detail.title}
+                        </NavLink>
+                      )}
+                    />
+                  );
+                } else if (detail.hasDropdown) {
+                  return (
+                    <NavbarItem key={detail.id} hasDropdown isHoverable>
+                      <NavbarLink
+                        isActive={checkActiveLoc(location, detail.href)}
+                        className="boldr-navbar__item"
+                        key={detail.id}
+                        render={() => (
+                          <NavLink className="boldr-navbar__link" to={detail.href}>
+                            {detail.title}
+                          </NavLink>
+                        )}
+                      />
+                      <NavbarDropdown>
+                        {dropdownItems.map(d => {
+                          return (
+                            <NavbarItem
+                              key={d.id}
+                              isActive={checkActiveLoc(location, d.href)}
+                              title={d.safeName}
+                              render={() => (
+                                <NavLink
+                                  className="boldr-navbar__item"
+                                  activeClassName="is-active"
+                                  to={d.href}>
+                                  {d.safeName}
+                                </NavLink>
+                              )}
+                            />
+                          );
+                        })}
+                      </NavbarDropdown>
+                    </NavbarItem>
+                  );
+                }
+              })}
             </NavbarStart>
             <NavbarEnd>
               {token &&

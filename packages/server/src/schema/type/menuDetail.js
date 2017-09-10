@@ -2,10 +2,12 @@ import {
   GraphQLBoolean,
   GraphQLString,
   GraphQLObjectType,
-  GraphQLNonNull,
+  GraphQLList,
+  GraphQLID,
   GraphQLInt,
 } from 'graphql';
 import { GraphQLJSON } from '../scalars';
+import MenuDetail from '../../models/MenuDetail';
 import { globalIdField, safeName } from '../field/identifier';
 import { dateCUD } from '../field/date';
 
@@ -27,6 +29,10 @@ const MenuDetailType = new GraphQLObjectType({
       type: GraphQLBoolean,
       description: 'True if the item has a dropdown',
     },
+    isDropdown: {
+      type: GraphQLBoolean,
+      description: 'True if the item has is a dropdown item',
+    },
     order: {
       type: GraphQLInt,
       description: 'The display order',
@@ -35,6 +41,14 @@ const MenuDetailType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'Mobile only link',
     },
+    menuId: {
+      type: GraphQLID,
+      description: 'The id of the menu the detail belongs to.',
+    },
+    parentId: {
+      type: GraphQLID,
+      description: 'The id of the menu the detail belongs to.',
+    },
     href: {
       type: GraphQLString,
       description: 'The link',
@@ -42,10 +56,6 @@ const MenuDetailType = new GraphQLObjectType({
     icon: {
       type: GraphQLString,
       description: 'Icon kind',
-    },
-    children: {
-      type: GraphQLJSON,
-      description: 'Children are dropdown links',
     },
     ...dateCUD,
   }),

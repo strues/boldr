@@ -1,0 +1,155 @@
+
+# Article
+type Article {
+  # Unique identifier for the object.
+  id: ID!
+  # The title of the article
+  title: String!
+  # An alphanumeric identifier for the object unique to its type.
+  slug: String
+  # html content of the article
+  content: String
+  # Raw JSON of the article
+  rawContent: JSON
+  # Short description of the article
+  excerpt: String
+  # True if the article is featured
+  featured: Boolean
+  # True if the article is published
+  published: Boolean
+  # url of the article feature image
+  image: String
+  # url of the article hero image
+  heroImage: String
+  # True if the article is published
+  userId: ID
+  # The category id
+  categoryId: ID
+  # The timestamp when the object was deleted
+  deletedAt: DateTime
+  # The timestamp when the object was last updated
+  updatedAt: DateTime
+  # The timestamp when the object was created
+  createdAt: DateTime
+  # Tags relating articles together
+  tags: [Tag]
+  # Media uploaded with the article
+  media: [Media]
+  # Users belonging to a role.
+  author: User
+  # Category the article belongs to.
+  category: Category
+}
+
+
+# Comment
+type Comment {
+  id: Int!
+  content: String!
+}
+
+# Edges for ArticlesQuery
+type ArticleEdges {
+  node: Article
+  cursor: Int
+}
+
+# PageInfo for ArticlesQuery
+type ArticlePageInfo {
+  endCursor: Int
+  hasNextPage: Boolean
+}
+
+# Articles relay-style pagination query
+type ArticlesQuery {
+  totalCount: Int
+  edges: [ArticleEdges]
+  pageInfo: ArticlePageInfo
+}
+
+extend type Query {
+  # Articles pagination query
+  articlesQuery(limit: Int, after: Int): ArticlesQuery
+  # Articles pagination query
+  articles(limit: Int, offset: Int): [Article]
+  # Post
+  article(id: ID!): Article
+}
+
+extend type Mutation {
+  # Create a new article
+  createArticle(input: CreateArticleInput!): Article
+  # Delete an article
+  deleteArticle(id: ID!): Boolean
+  # Edit an article
+  editArticle(input: EditArticleInput!): Article
+}
+
+# Input for creating an article
+input CreateArticleInput {
+  # The title of the article
+  title: String!
+
+  # The slug / normalized article title.
+  slug: String
+
+  # html content of the article
+  content: String
+
+  # Raw JSON of the article
+  rawContent: JSON
+
+  # Short description of the article
+  excerpt: String
+
+  # True if the article is featured
+  featured: Boolean
+
+  # True if the article is published
+  published: Boolean!
+
+  # url of the article feature image
+  image: String
+
+  # url of the article background image
+  heroImage: String
+
+  # Tags relating articles together
+  tags: [String]
+
+  # Id of the category
+  categoryId: ID
+}
+
+# Input for editing an article
+input EditArticleInput {
+  # The title of the article
+  title: String!
+
+  # The slug / normalized article title.
+  slug: String!
+
+  # html content of the article
+  content: String
+
+  # Raw JSON of the article
+  rawContent: JSON
+
+  # Short description of the article
+  excerpt: String!
+
+  # True if the article is featured
+  featured: Boolean
+
+  # True if the article is published
+  published: Boolean!
+
+  # url of the article feature image
+  image: URL
+
+  # url of the article hero image
+  heroImage: URL
+
+  # Id of the category
+  categoryId: ID
+}

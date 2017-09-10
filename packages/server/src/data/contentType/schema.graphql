@@ -1,0 +1,55 @@
+
+# A tag relates content together
+type ContentType {
+  # Unique identifier for the object.
+  id: ID!
+
+  # A name for the object.
+  name: String
+
+  # An alphanumeric identifier for the object unique to its type.
+  slug: String
+
+  # An icon to use for the content type
+  icon: String
+
+  # A description of the tag
+  description: String
+
+  # Articles related to the tag
+  entities: [Article]
+
+  # The timestamp when the object was deleted
+  deletedAt: DateTime
+
+  # The timestamp when the object was last updated
+  updatedAt: DateTime
+
+  # The timestamp when the object was created
+  createdAt: DateTime
+}
+
+input CreateContentTypeInput {
+  # A name for the object.
+  name: String
+
+  # An alphanumeric identifier for the object unique to its type.
+  slug: String
+
+  # An icon to use for the content type
+  icon: String
+
+  # A description of the content type
+  description: String
+}
+
+
+extend type Query {
+  contentTypes: [ContentType]
+  contentType(id: ID!): ContentType
+}
+
+extend type Mutation {
+  # Add a new content type
+  createContentType(input: CreateContentTypeInput!): ContentType
+}

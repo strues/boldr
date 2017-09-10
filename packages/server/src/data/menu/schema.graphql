@@ -1,0 +1,112 @@
+
+# Navigation for the site
+type Menu {
+  # Unique identifier for the object.
+  id: ID!
+
+  # A UUID (Universal Unique Identifier) is a 128-bit number used to uniquely identify some object or entity.
+  uuid: UUID
+
+  # A name for the object.
+  name: String
+
+  # Custom css classname for the link
+  attributes: String
+
+  # True if the menu should be hidden from unauth
+  restricted: Boolean
+
+  # Links
+  details: [MenuDetail]
+
+  # The timestamp when the object was last updated
+  updatedAt: DateTime
+
+  # The timestamp when the object was created
+  createdAt: DateTime
+}
+
+# links and other menu content
+type MenuDetail {
+  # Unique identifier for the object.
+  id: ID!
+
+  # The title text for the menu link
+  title: String
+
+  # A normalized copy of the object name.
+  safeName: String
+
+  # Custom css classname for the link
+  cssClassname: String
+
+  # True if the item has a dropdown
+  hasDropdown: Boolean
+
+  # The display order
+  order: Int
+
+  # Mobile only link
+  mobileHref: String
+
+  # The link
+  href: String
+
+  # Icon kind
+  icon: String
+
+  # Children are dropdown links
+  children: JSON
+
+  # The timestamp when the object was deleted
+  deletedAt: DateTime
+
+  # The timestamp when the object was last updated
+  updatedAt: DateTime
+
+  # The timestamp when the object was created
+  createdAt: DateTime
+}
+
+
+input EditDetailInput {
+  # The id
+  id: ID
+
+  # The title text for the menu link
+  title: String
+
+  # Lowercase, normalized, name
+  safeName: String
+
+  # Custom css classname for the link
+  cssClassname: String
+
+  # True if the item has a dropdown
+  hasDropdown: Boolean
+
+  # The display order
+  order: Int
+
+  # Mobile only link
+  mobileHref: String
+
+  # The link
+  href: String
+
+  # Icon kind
+  icon: String
+
+  # Children are dropdown links
+  children: JSON
+}
+
+extend type Query {
+    getMenuById(id: ID!): Menu
+    details: [MenuDetail]
+}
+
+extend type Mutation {
+  # Edit menu detail
+  editDetails(input: EditDetailInput!): MenuDetail
+}

@@ -104,6 +104,7 @@ class User extends BaseModel {
           through: {
             from: 'user_role.userId',
             to: 'user_role.roleId',
+            modelClass: `${__dirname}/join/UserRole`,
           },
           to: 'role.id',
         },
@@ -186,6 +187,7 @@ class User extends BaseModel {
   fullName() {
     return `${this.firstName} ${this.lastName}`;
   }
+
   stripPassword() {
     delete this['password']; // eslint-disable-line
     return this;
@@ -197,11 +199,15 @@ class User extends BaseModel {
    * @param plainText
    * @returns {*}
    */
-  authenticate(plainText) {
+  async authenticate(plainText) {
     this.lastLogin = new Date().toISOString();
-    return bcrypt.compareAsync(plainText, this.password);
+    const passwordMatch = await bcrypt.compare(plainText, this.password);
+    return passwordMatch;
   }
 
+  async hashPassword() {
+    this.password = await bcrypt.hash(this.password, 10);
+  }
   /**
    * Checks to see if this user has the provided role or not.
    *

@@ -99,9 +99,9 @@ type Category {
 
 # Variations of status for content
 enum CONTENT_STATUS {
-  PUBLISHED
-  ARCHIVED
-  DRAFT
+  published
+  archived
+  draft
 }
 
 # A tag relates content together

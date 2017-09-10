@@ -1,0 +1,38 @@
+
+# Page of the website
+type Page {
+  # Unique identifier for the object.
+  id: ID!
+
+  # The title of the page
+  title: String!
+
+  # An alphanumeric identifier for the object unique to its type.
+  slug: String
+
+  # A URL to access the page
+  url: String
+
+  # Page meta data
+  meta: JSON
+
+  # Page content blocks
+  blocks: JSON
+
+  # Page html markup
+  markup: String
+
+  # The timestamp when the object was deleted
+  deletedAt: DateTime
+
+  # The timestamp when the object was last updated
+  updatedAt: DateTime
+
+  # The timestamp when the object was created
+  createdAt: DateTime
+}
+
+extend type Query {
+    pages: [Page]
+    page(id: ID!): Page
+}

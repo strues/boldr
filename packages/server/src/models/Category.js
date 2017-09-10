@@ -9,6 +9,9 @@ class Category extends BaseModel {
     properties: {
       id: {
         type: 'string',
+        minLength: 36,
+        maxLength: 36,
+        pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
       },
       name: {
         type: 'string',
@@ -23,7 +26,7 @@ class Category extends BaseModel {
       },
       description: {
         type: 'string',
-        maxLength: 255,
+        minLength: 3,
       },
       icon: {
         type: 'string',

@@ -22,20 +22,23 @@ class Entity extends BaseModel {
       },
       rawContent: { type: 'json' },
       status: { type: { enum: ['published', 'archived', 'draft'] } },
-      userId: { type: 'string' },
-      categoryId: { type: 'string' },
-      ctId: { type: 'string' },
-      createdAt: {
+      userId: {
         type: 'string',
-        format: 'date-time',
+        minLength: 36,
+        maxLength: 36,
+        pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
       },
-      updatedAt: {
+      categoryId: {
         type: 'string',
-        format: 'date-time',
+        minLength: 36,
+        maxLength: 36,
+        pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
       },
-      deletedAt: {
+      ctId: {
         type: 'string',
-        format: 'date-time',
+        minLength: 36,
+        maxLength: 36,
+        pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
       },
     },
   });

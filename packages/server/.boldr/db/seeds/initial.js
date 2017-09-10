@@ -179,12 +179,10 @@ function seed(knex, Promise) {
         knex('tag').insert({
           id: 'b1c0d816-e8c0-4a0d-a63a-5215f02b423e',
           name: 'javascript',
-          description: 'Something something JS',
         }),
         knex('tag').insert({
           id: '517e9975-9dd8-44fc-80cf-cb907964a06b',
           name: 'stuff',
-          description: 'Stuff about stuff.',
         }),
         // prettier-ignore
       ])
@@ -286,6 +284,7 @@ function seed(knex, Promise) {
           mobileHref: '/about',
           href: '/about',
           icon: 'info',
+          menuId: 1,
           children: {
             key: 'about-menu',
             items: [
@@ -315,6 +314,7 @@ function seed(knex, Promise) {
           order: 2,
           mobileHref: '/blog',
           href: '/blog',
+          menuId: 1,
           icon: 'info',
         }),
         // prettier-ignore
@@ -322,6 +322,34 @@ function seed(knex, Promise) {
     )
     .then(() =>
       Promise.all([
+        knex('menu_detail').insert({
+          id: 'b82deb8b-6303-407a-ba6d-23e9a314b18c',
+          title: 'Technologies',
+          safeName: 'technologies',
+          cssClassname: 'blog-link',
+          hasDropdown: false,
+          isDropdown: true,
+          order: 1,
+          mobileHref: '/about/technologies',
+          href: '/about/technologies',
+          parentId: 'c0b0ea44-8d9d-4081-9655-871399b970fe',
+          menuId: 1,
+          icon: 'info',
+        }),
+        knex('menu_detail').insert({
+          id: '5fe0bd37-440a-47d8-aab4-6bda56ce731f',
+          title: 'Setup',
+          safeName: 'setup',
+          cssClassname: 'blog-link',
+          hasDropdown: false,
+          isDropdown: true,
+          order: 2,
+          mobileHref: '/about/setup',
+          href: '/about/setup',
+          parentId: 'c0b0ea44-8d9d-4081-9655-871399b970fe',
+          menuId: 1,
+          icon: 'info',
+        }),
         knex('menu_menu_detail').insert({
           menuId: 1,
           menuDetailId: 'c0b0ea44-8d9d-4081-9655-871399b970fe',

@@ -38,6 +38,7 @@ class Tag extends BaseModel {
           through: {
             from: 'article_tag.tagId',
             to: 'article_tag.articleId',
+            modelClass: `${__dirname}/join/ArticleTag`,
           },
           to: 'article.id',
         },
@@ -50,6 +51,7 @@ class Tag extends BaseModel {
           through: {
             from: 'entity_tag.tagId',
             to: 'entity_tag.entityId',
+            modelClass: `${__dirname}/join/EntityTag`,
           },
           to: 'entity.id',
         },

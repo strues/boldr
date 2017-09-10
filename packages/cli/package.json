@@ -35,8 +35,8 @@
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-preset-env": "^1.6.0",
-    "eslint": "^4.5.0",
-    "eslint-config-boldr": "^0.12.11",
+    "eslint": "^4.6.1",
+    "eslint-config-boldr": "^0.12.12",
     "fast-async": "^6.3.0"
   },
   "dependencies": {
@@ -46,7 +46,7 @@
     "caporal": "^0.7.0",
     "update-notifier": "^2.2.0",
     "knex": "^0.13.0",
-    "pg": "^7.2.0",
+    "pg": "^7.3.0",
     "prettier": "^1.6.1",
     "rimraf": "^2.6.1"
   }

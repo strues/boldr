@@ -9,10 +9,12 @@ query getMenuById($id: ID!) {
       cssClassname
       icon
       hasDropdown
+      isDropdown
       order
       mobileHref
       href
-      children
+      menuId
+      parentId
     }
   }
 }

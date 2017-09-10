@@ -42,11 +42,23 @@ class Role extends BaseModel {
           through: {
             from: 'user_role.roleId',
             to: 'user_role.userId',
+            modelClass: `${__dirname}/join/UserRole`,
           },
           to: 'user.id',
         },
       },
     };
+  }
+
+  static getUsersForRole(id) {
+    return Role.query()
+      .findById(id)
+      .eager('[users]')
+      .returning('*');
+  }
+
+  getUsersForRole() {
+    return this.constructor.getUsersForRole(this.id);
   }
 }
 
