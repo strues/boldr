@@ -7,6 +7,7 @@ import NewArticle from './NewArticle';
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onSubmit: values => {
+    console.log(values);
     const payload = {
       title: values.title,
       slug: values.title,

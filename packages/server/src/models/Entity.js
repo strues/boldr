@@ -1,11 +1,14 @@
-import BaseModel, { mergeSchemas } from './BaseModel';
+import BaseModel from './BaseModel';
 
 class Entity extends BaseModel {
   static tableName = 'entity';
   static addTimestamps = true;
 
-  static jsonSchema = mergeSchemas(BaseModel.jsonSchema, {
-    required: ['title', 'slug', 'content', 'status', 'authorId'],
+  static jsonSchema = {
+    type: 'object',
+    required: ['title', 'slug', 'status', 'contentTypeId'],
+    uniqueProperties: ['title', 'slug'],
+    additionalProperties: false,
     properties: {
       id: {
         type: 'string',
@@ -13,10 +16,10 @@ class Entity extends BaseModel {
         maxLength: 36,
         pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', // eslint-disable-line
       },
-      title: { type: 'string' },
-      slug: { type: 'string' },
+      title: { type: 'string', maxLength: 140 },
+      slug: { type: 'string', maxLength: 140 },
       excerpt: { type: 'string' },
-      image: { type: 'string' },
+      image: { type: 'string', maxLength: 255 },
       meta: { type: 'json' },
       content: {
         type: 'string',
@@ -41,8 +44,20 @@ class Entity extends BaseModel {
         maxLength: 36,
         pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
       },
+      createdAt: {
+        type: 'string',
+        format: 'date-time',
+      },
+      updatedAt: {
+        type: ['string', 'null'],
+        format: 'date-time',
+      },
+      deletedAt: {
+        type: ['string', 'null'],
+        format: 'date-time',
+      },
     },
-  });
+  };
 
   static relationMappings = {
     author: {

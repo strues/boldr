@@ -1,11 +1,14 @@
-import BaseModel, { mergeSchemas } from './BaseModel';
+import BaseModel from './BaseModel';
 
 class MenuDetail extends BaseModel {
   static tableName = 'menu_detail';
   static addTimestamps = true;
 
-  static jsonSchema = mergeSchemas(BaseModel.jsonSchema, {
-    required: ['safeName', 'name', 'hasDropdown', 'href', 'icon'],
+  static jsonSchema = {
+    type: 'object',
+    required: ['safeName', 'name', 'hasDropdown', 'isDropdown', 'menuId', 'href', 'icon'],
+    uniqueProperties: ['safeName'],
+    additionalProperties: false,
     properties: {
       id: {
         type: 'string',
@@ -13,11 +16,17 @@ class MenuDetail extends BaseModel {
         maxLength: 36,
         pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', // eslint-disable-line
       },
-      safeName: { type: 'string' },
-      name: { type: 'string' },
-      cssClassname: { type: 'string' },
-      hasDropdown: { type: 'boolean' },
-      isDropdown: { type: 'boolean' },
+      name: {
+        type: 'string',
+        maxLength: 50,
+      },
+      safeName: {
+        type: 'string',
+        maxLength: 50,
+      },
+      cssClassname: { type: 'string', maxLength: 32 },
+      hasDropdown: { type: 'boolean', default: false },
+      isDropdown: { type: 'boolean', default: false },
       order: { type: 'number' },
       menuId: { type: 'number' },
       parentId: {
@@ -28,8 +37,20 @@ class MenuDetail extends BaseModel {
       },
       href: { type: 'string' },
       icon: { type: 'string' },
+      createdAt: {
+        type: 'string',
+        format: 'date-time',
+      },
+      updatedAt: {
+        type: ['string', 'null'],
+        format: 'date-time',
+      },
+      deletedAt: {
+        type: ['string', 'null'],
+        format: 'date-time',
+      },
     },
-  });
+  };
 
   static relationMappings = {
     menu: {

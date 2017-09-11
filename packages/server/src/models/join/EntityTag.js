@@ -13,10 +13,32 @@ class EntityTag extends BaseModel {
 
   static addTimestamps = false;
 
-  static get idColumn() {
-    return ['entity_id', 'tag_id'];
-  }
-
+  static idColumn = ['entity_id', 'tag_id'];
+  static jsonSchema = {
+    type: 'object',
+    additionalProperties: false,
+    required: ['entityId', 'tagId'],
+    properties: {
+      id: {
+        type: 'string',
+        minLength: 36,
+        maxLength: 36,
+        pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
+      },
+      entityId: {
+        type: 'string',
+        minLength: 36,
+        maxLength: 36,
+        pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
+      },
+      tagId: {
+        type: 'string',
+        minLength: 36,
+        maxLength: 36,
+        pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
+      },
+    },
+  };
   static relationMapping = {
     tag: {
       relation: BaseModel.BelongsToOneRelation,

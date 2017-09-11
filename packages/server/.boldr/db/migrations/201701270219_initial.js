@@ -158,7 +158,7 @@ module.exports.up = async db => {
     table.string('url', 125).notNullable();
     table.string('path', 255).notNullable();
     table.integer('size');
-    table.string('safe_name', 128).notNullable();
+    table.string('safe_name', 128).unique().notNullable();
     table.string('thumb_name', 128);
     table.string('file_description').nullable();
     table.uuid('owner_id').notNullable();

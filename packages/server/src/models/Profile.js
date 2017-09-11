@@ -1,12 +1,15 @@
 /* eslint-disable id-match, no-prototype-builtins */
 // Related Models
-import BaseModel, { mergeSchemas } from './BaseModel';
+import BaseModel from './BaseModel';
 
 class Profile extends BaseModel {
   static tableName = 'profile';
 
-  static jsonSchema = mergeSchemas(BaseModel.jsonSchema, {
-    required: ['firstName', 'accountId', 'lastName', 'username'],
+  static jsonSchema = {
+    type: 'object',
+    additionalProperties: false,
+    required: ['firstName', 'accountId', 'lastName', 'username', 'sex'],
+    uniqueProperties: ['username', 'accountId'],
     properties: {
       id: {
         type: 'string',
@@ -26,12 +29,25 @@ class Profile extends BaseModel {
       bio: { type: 'string' },
       location: { type: 'string' },
       website: { type: 'string' },
+      sex: { type: { enum: ['male', 'female', 'unknown'] } },
       avatarUrl: { type: 'string' },
       profileImage: { type: 'string' },
       language: { type: 'string' },
       birthday: { type: 'date' },
+      createdAt: {
+        type: 'string',
+        format: 'date-time',
+      },
+      updatedAt: {
+        type: ['string', 'null'],
+        format: 'date-time',
+      },
+      deletedAt: {
+        type: ['string', 'null'],
+        format: 'date-time',
+      },
     },
-  });
+  };
 
   static addTimestamps = true;
   /**

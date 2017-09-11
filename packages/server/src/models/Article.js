@@ -1,4 +1,4 @@
-import BaseModel, { mergeSchemas } from './BaseModel';
+import BaseModel from './BaseModel';
 // Related Models
 import Tag from './Tag';
 
@@ -7,8 +7,11 @@ class Article extends BaseModel {
   // static softDelete = true;
   static addTimestamps = true;
 
-  static jsonSchema = mergeSchemas(BaseModel.jsonSchema, {
-    required: ['title', 'slug', 'content', 'published', 'accountId'],
+  static jsonSchema = {
+    type: 'object',
+    uniqueProperties: ['slug', 'title'],
+    additionalProperties: ['attachments'],
+    required: ['title', 'slug', 'content', 'published', 'authorId', 'categoryId'],
     properties: {
       id: {
         type: 'string',
@@ -16,30 +19,71 @@ class Article extends BaseModel {
         maxLength: 36,
         pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', // eslint-disable-line
       },
-      title: { type: 'string' },
-      slug: { type: 'string' },
-      excerpt: { type: 'string' },
+      title: {
+        type: 'string',
+        maxLength: 140,
+      },
+      slug: {
+        type: 'string',
+        maxLength: 140,
+      },
+      excerpt: {
+        type: 'string',
+      },
       content: {
         type: 'string',
       },
       rawContent: { type: 'json' },
-      published: { type: 'boolean' },
-      status: { type: { enum: ['published', 'archived', 'draft'] } },
-      image: { type: 'string' },
-      heroImage: { type: 'string' },
-      featured: { type: 'boolean' },
+      meta: { type: 'json' },
+      published: {
+        type: 'boolean',
+        default: false,
+      },
+      status: {
+        type: {
+          enum: ['published', 'archived', 'draft'],
+        },
+      },
+      image: {
+        type: 'string',
+        maxLength: 255,
+      },
+      heroImage: {
+        type: 'string',
+        maxLength: 255,
+      },
+      featured: {
+        type: 'boolean',
+        default: false,
+      },
       authorId: {
         type: 'string',
         minLength: 36,
         maxLength: 36,
         pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
       },
+      categoryId: {
+        type: 'string',
+        minLength: 36,
+        maxLength: 36,
+        pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
+      },
+      createdAt: {
+        type: 'string',
+        format: 'date-time',
+      },
+      updatedAt: {
+        type: ['string', 'null'],
+        format: 'date-time',
+      },
+      deletedAt: {
+        type: ['string', 'null'],
+        format: 'date-time',
+      },
     },
-  });
+  };
 
-  static get idColumn() {
-    return 'id';
-  }
+  static idColumn = 'id';
 
   static relationMappings = {
     author: {

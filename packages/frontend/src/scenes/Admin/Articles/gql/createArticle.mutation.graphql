@@ -9,5 +9,6 @@ mutation createArticle($input: CreateArticleInput!) {
     status
     excerpt
     image
+    categoryId
   }
 }

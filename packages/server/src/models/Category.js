@@ -1,11 +1,14 @@
-import BaseModel, { mergeSchemas } from './BaseModel';
+import BaseModel from './BaseModel';
 
 class Category extends BaseModel {
   static tableName = 'category';
   static addTimestamps = true;
 
-  static jsonSchema = mergeSchemas(BaseModel.jsonSchema, {
+  static jsonSchema = {
+    type: 'object',
     required: ['name', 'slug'],
+    uniqueProperties: ['slug'],
+    additionalProperties: false,
     properties: {
       id: {
         type: 'string',
@@ -32,8 +35,20 @@ class Category extends BaseModel {
         type: 'string',
         maxLength: 255,
       },
+      createdAt: {
+        type: 'string',
+        format: 'date-time',
+      },
+      updatedAt: {
+        type: ['string', 'null'],
+        format: 'date-time',
+      },
+      deletedAt: {
+        type: ['string', 'null'],
+        format: 'date-time',
+      },
     },
-  });
+  };
   static relationMappings = {
     articles: {
       relation: BaseModel.HasManyRelation,

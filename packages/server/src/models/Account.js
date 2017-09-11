@@ -2,15 +2,25 @@
 import Promise from 'bluebird';
 import Bcrypt from 'bcryptjs';
 // Related Models
-import BaseModel, { mergeSchemas } from './BaseModel';
+import BaseModel from './BaseModel';
 
 const bcrypt = Promise.promisifyAll(Bcrypt);
 
 class Account extends BaseModel {
   static tableName = 'account';
 
-  static jsonSchema = mergeSchemas(BaseModel.jsonSchema, {
+  static addTimestamps = true;
+  /**
+     * An array of attribute names that will be excluded from being returned.
+     *
+     * @type {array}
+     */
+  static hidden = [];
+
+  static jsonSchema = {
+    type: 'object',
     required: ['email', 'password'],
+    uniqueProperties: ['email'],
     properties: {
       id: {
         type: 'string',
@@ -20,10 +30,18 @@ class Account extends BaseModel {
       },
       email: {
         type: 'string',
+        format: 'email',
       },
-      password: { type: 'string' },
-      ip: { type: 'string' },
-      resetToken: { type: 'string' },
+      password: {
+        type: 'string',
+        maxLength: 255,
+      },
+      ip: {
+        type: 'string',
+      },
+      resetToken: {
+        type: 'string',
+      },
       resetTokenExp: {
         type: 'timestamp',
       },
@@ -31,17 +49,29 @@ class Account extends BaseModel {
       verificationTokenExp: {
         type: 'timestamp',
       },
-      verified: { type: 'boolean' },
+      verified: {
+        type: 'boolean',
+        default: false,
+      },
+      lastLogin: {
+        type: ['string', 'null'],
+        format: 'date-time',
+      },
+      createdAt: {
+        type: 'string',
+        format: 'date-time',
+      },
+      updatedAt: {
+        type: ['string', 'null'],
+        format: 'date-time',
+      },
+      deletedAt: {
+        type: ['string', 'null'],
+        format: 'date-time',
+      },
     },
-  });
+  };
 
-  static addTimestamps = true;
-  /**
-   * An array of attribute names that will be excluded from being returned.
-   *
-   * @type {array}
-   */
-  static hidden = [];
   /**
    * Before updating make sure we hash the password if provided.
    *

@@ -7,7 +7,7 @@ module.exports.up = async db => {
       .string('name', 128)
       .notNullable()
       .unique();
-    table.string('safe_name', 128).notNullable();
+    table.string('safe_name', 128).unique().notNullable();
     table.string('thumb_name', 128);
     table.integer('size');
     table.string('file_description').nullable();

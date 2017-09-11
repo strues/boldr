@@ -1,4 +1,4 @@
-import BaseModel, { mergeSchemas } from '../BaseModel';
+import BaseModel from '../BaseModel';
 import Role from '../Role';
 import Account from '../Account';
 /**
@@ -14,10 +14,11 @@ class AccountRole extends BaseModel {
   static tableName = 'account_role';
   static addTimestamps = false;
 
-  static get idColumn() {
-    return ['account_id', 'role_id'];
-  }
-  static jsonSchema = mergeSchemas(BaseModel.jsonSchema, {
+  static idColumn = ['account_id', 'role_id'];
+
+  static jsonSchema = {
+    type: 'object',
+    additionalProperties: false,
     required: ['accountId', 'roleId'],
     properties: {
       id: {
@@ -36,7 +37,7 @@ class AccountRole extends BaseModel {
         pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
       },
     },
-  });
+  };
   static relationMappings = {
     role: {
       relation: BaseModel.BelongsToOneRelation,

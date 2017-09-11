@@ -1,10 +1,10 @@
-import BaseModel, { mergeSchemas } from './BaseModel';
+import BaseModel from './BaseModel';
 
 /**
  * Social used for user's social media profiles. Belongs to User
  * @class Social
  * @extends BaseModel
- * @property {Integer}  id
+ * @property {String}  id
  * @property {String} facebookUrl
  * @property {String} twitterUrl
  * @property {String} googleUrl
@@ -17,8 +17,11 @@ class Social extends BaseModel {
   static tableName = 'profile_social_media';
   static addTimestamps = false;
 
-  static jsonSchema = mergeSchemas(BaseModel.jsonSchema, {
+  static jsonSchema = {
+    type: 'object',
     required: ['id', 'profileId'],
+    uniqueProperties: ['profileId'],
+    additionalProperties: false,
     properties: {
       id: {
         type: 'string',
@@ -63,7 +66,7 @@ class Social extends BaseModel {
         maxLength: 255,
       },
     },
-  });
+  };
 
   static relationMappings = {
     profile: {

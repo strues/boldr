@@ -14,6 +14,7 @@ module.exports = babelJest.createTransformer({
         target: '8.4',
         modules: 'commonjs',
         imports: 'rollup-nodejs',
+        sourceMap: false,
         styled: false,
       },
     ],

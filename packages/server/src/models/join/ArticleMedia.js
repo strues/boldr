@@ -13,30 +13,50 @@ class ArticleMedia extends BaseModel {
 
   static addTimestamps = false;
 
-  static get idColumn() {
-    return ['article_id', 'media_id'];
-  }
-
-  static get relationMappings() {
-    return {
-      media: {
-        relation: BaseModel.BelongsToOneRelation,
-        modelClass: Media,
-        join: {
-          from: 'article_media.media_id',
-          to: 'media.id',
-        },
+  static idColumn = ['article_id', 'media_id'];
+  static jsonSchema = {
+    type: 'object',
+    additionalProperties: false,
+    required: ['articleId', 'mediaId'],
+    properties: {
+      id: {
+        type: 'string',
+        minLength: 36,
+        maxLength: 36,
+        pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
       },
-      article: {
-        relation: BaseModel.BelongsToOneRelation,
-        modelClass: Article,
-        join: {
-          from: 'article_media.article_id',
-          to: 'article.id',
-        },
+      articleId: {
+        type: 'string',
+        minLength: 36,
+        maxLength: 36,
+        pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
       },
-    };
-  }
+      mediaId: {
+        type: 'string',
+        minLength: 36,
+        maxLength: 36,
+        pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
+      },
+    },
+  };
+  static relationMappings = {
+    media: {
+      relation: BaseModel.BelongsToOneRelation,
+      modelClass: Media,
+      join: {
+        from: 'article_media.media_id',
+        to: 'media.id',
+      },
+    },
+    article: {
+      relation: BaseModel.BelongsToOneRelation,
+      modelClass: Article,
+      join: {
+        from: 'article_media.article_id',
+        to: 'article.id',
+      },
+    },
+  };
 }
 
 export default ArticleMedia;

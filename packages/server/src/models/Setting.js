@@ -1,8 +1,11 @@
-import BaseModel, { mergeSchemas } from './BaseModel';
+import BaseModel from './BaseModel';
 
 class Setting extends BaseModel {
   static tableName = 'setting';
-  static jsonSchema = mergeSchemas(BaseModel.jsonSchema, {
+  static addTimestamps = false;
+  static jsonSchema = {
+    type: 'object',
+    additionalProperties: false,
     required: ['key', 'value', 'label', 'description'],
     properties: {
       id: {
@@ -29,8 +32,7 @@ class Setting extends BaseModel {
         maxLength: 255,
       },
     },
-  });
-  static addTimestamps = false;
+  };
 }
 
 export default Setting;

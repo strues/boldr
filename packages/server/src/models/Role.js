@@ -1,20 +1,17 @@
-import BaseModel, { mergeSchemas } from './BaseModel';
+import BaseModel from './BaseModel';
 
 class Role extends BaseModel {
   static tableName = 'role';
   static addTimestamps = true;
-  static hidden = ['password'];
-  static jsonSchema = mergeSchemas(BaseModel.jsonSchema, {
+
+  static jsonSchema = {
+    type: 'object',
     required: ['name'],
+    uniqueProperties: ['name'],
+    additionalProperties: false,
     properties: {
       id: {
         type: 'number',
-      },
-      uuid: {
-        type: 'string',
-        minLength: 36,
-        maxLength: 36,
-        pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
       },
       name: {
         type: 'string',
@@ -22,7 +19,7 @@ class Role extends BaseModel {
         maxLength: 64,
         pattern: '^[A-Za-z0-9-_]+$',
       },
-      image: {
+      icon: {
         type: 'string',
         maxLength: 255,
       },
@@ -30,8 +27,20 @@ class Role extends BaseModel {
         type: 'string',
         maxLength: 255,
       },
+      createdAt: {
+        type: 'string',
+        format: 'date-time',
+      },
+      updatedAt: {
+        type: ['string', 'null'],
+        format: 'date-time',
+      },
+      deletedAt: {
+        type: ['string', 'null'],
+        format: 'date-time',
+      },
     },
-  });
+  };
   static relationMappings = {
     accounts: {
       relation: BaseModel.ManyToManyRelation,

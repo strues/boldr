@@ -1,11 +1,15 @@
-import BaseModel, { mergeSchemas } from './BaseModel';
+import slugIt from '../utils/slugIt';
+import BaseModel from './BaseModel';
 
 class Tag extends BaseModel {
   static tableName = 'tag';
   static addTimestamps = true;
 
-  static jsonSchema = mergeSchemas(BaseModel.jsonSchema, {
+  static jsonSchema = {
+    type: 'object',
     required: ['name'],
+    uniqueProperties: ['name'],
+    additionalProperties: false,
     properties: {
       id: {
         type: 'string',
@@ -16,14 +20,28 @@ class Tag extends BaseModel {
       name: {
         type: 'string',
         minLength: 3,
-        maxLength: 64,
+        maxLength: 32,
         pattern: '^[A-Za-z0-9-_]+$',
       },
       safeName: {
         type: 'string',
+        minLength: 3,
+        maxLength: 32,
+      },
+      createdAt: {
+        type: 'string',
+        format: 'date-time',
+      },
+      updatedAt: {
+        type: ['string', 'null'],
+        format: 'date-time',
+      },
+      deletedAt: {
+        type: ['string', 'null'],
+        format: 'date-time',
       },
     },
-  });
+  };
 
   static relationMappings = {
     articles: {
@@ -53,7 +71,25 @@ class Tag extends BaseModel {
       },
     },
   };
+  $beforeUpdate(queryContext) {
+    super.$beforeUpdate(queryContext);
 
+    if (this.hasOwnProperty('name')) {
+      this.safeName = slugIt(this.name);
+    }
+  }
+  /**
+   * Before inserting make sure we hash the password if provided.
+   *
+   * @param {object} queryContext
+   */
+  $beforeInsert(queryContext) {
+    super.$beforeInsert(queryContext);
+
+    if (this.hasOwnProperty('name')) {
+      this.safeName = slugIt(this.name);
+    }
+  }
   static getTags(offset, limit) {
     return Tag.query()
       .offset(offset)
