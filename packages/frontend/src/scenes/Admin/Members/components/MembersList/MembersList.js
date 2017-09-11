@@ -20,13 +20,13 @@ const MembersList = (props: { users: Array<User>, toggleUser: User => User }) =>
         {props.users.map(user => (
           <MemberCard
             id={user.id}
-            avatarUrl={user.avatarUrl}
+            avatarUrl={user.profile.avatarUrl}
             email={user.email}
             roleName={user.roles[0].name}
             key={user.id}
-            firstName={user.firstName}
-            lastName={user.lastName}
-            username={user.username}
+            firstName={user.profile.firstName}
+            lastName={user.profile.lastName}
+            username={user.profile.username}
             handleToggle={handleToggle}
             user={user}
           />

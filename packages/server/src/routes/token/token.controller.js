@@ -1,8 +1,9 @@
 /* eslint-disable no-unused-vars */
 import uuid from 'uuid';
+import addDays from 'date-fns/add_days';
 import { mailer, generateHash } from '../../services';
 import { passwordModifiedEmail, forgotPasswordEmail } from '../../services/mailer/templates';
-import User from '../../models/User';
+import Account from '../../models/Account';
 import VerificationToken from '../../models/VerificationToken';
 import ResetToken from '../../models/ResetToken';
 /**
@@ -13,21 +14,23 @@ import ResetToken from '../../models/ResetToken';
  * @returns {*}
  */
 export async function forgottenPassword(req, res, next) {
-  const user = await User.query()
+  const account = await Account.query()
     .where({ email: req.body.email })
     .first();
+  if (!account) {
+    throw new Error('unable to find account');
+  }
   const mailSubject = '[Boldr] Password Reset';
   const resetPasswordToken = uuid.v4();
-
-  await user.$relatedQuery('resetToken').insert({
+  await Account.query().patchAndFetchById(account.id, {
     ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
-    token: resetPasswordToken,
-    userId: user.id,
+    resetToken: resetPasswordToken,
+    resetTokenExp: addDays(new Date(), 1),
   });
 
   const mailBody = forgotPasswordEmail(resetPasswordToken);
 
-  mailer(user, mailBody, mailSubject);
+  mailer(account, mailBody, mailSubject);
   return res.status(202).json({
     message: 'Sending email with reset link',
   });
@@ -42,20 +45,19 @@ export async function forgottenPassword(req, res, next) {
  */
 export async function resetPassword(req, res, next) {
   try {
-    const userResetToken = await ResetToken.query()
-      .where({ token: req.body.token })
+    const account = await Account.query()
+      .where({ resetToken: req.body.token })
       .first();
 
-    if (!userResetToken) {
+    if (!account) {
       return res.status(404).json({ error: 'Unable to locate an user with the provided token.' });
     }
     const mailSubject = '[Boldr] Password Changed';
 
-    const user = await User.query().findById(userResetToken.userId);
-
-    User.query().patchAndFetchById(user.id, {
+    const user = await Account.query().patchAndFetchById(account.id, {
       password: req.body.password,
     });
+
     const mailBody = passwordModifiedEmail(user);
     await mailer(user, mailBody, mailSubject);
     return res.status(204).send('Sent');

@@ -1,13 +1,5 @@
-import {
-  GraphQLBoolean,
-  GraphQLString,
-  GraphQLObjectType,
-  GraphQLList,
-  GraphQLID,
-  GraphQLInt,
-} from 'graphql';
-import { GraphQLJSON } from '../scalars';
-import MenuDetail from '../../models/MenuDetail';
+import { GraphQLBoolean, GraphQLString, GraphQLObjectType, GraphQLID, GraphQLInt } from 'graphql';
+
 import { globalIdField, safeName } from '../field/identifier';
 import { dateCUD } from '../field/date';
 

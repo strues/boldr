@@ -3,6 +3,68 @@ schema {
   mutation: RootMutation
 }
 
+# An account belonging to a user.
+type Account {
+  # Unique identifier for the object.
+  id: ID!
+
+  # Email address belonging to the account
+  email: Email!
+
+  # true if email is verified, false otherwise
+  verified: Boolean
+
+  # The ip address of the person performing the reset
+  ip: String
+
+  # The reset token
+  resetToken: String
+
+  # When the token expires.
+  resetTokenExp: DateTime
+
+  # The account verification token
+  verificationToken: String
+
+  # When the verification expires.
+  verificationTokenExp: DateTime
+
+  # When the account was last logged in to.
+  lastLogin: DateTime
+
+  # The timestamp when the object was deleted
+  deletedAt: DateTime
+
+  # The timestamp when the object was last updated
+  updatedAt: DateTime
+
+  # The timestamp when the object was created
+  createdAt: DateTime
+
+  # Roles the account belongs to.
+  roles: [Role]
+
+  # Profile belonging to the account.
+  profile: Profile
+
+  # Articles the user has written
+  articles: [Article]
+
+  # Articles the user has written
+  uploads: [Media]
+}
+
+type AccountLoginResponse {
+  # The JSONWebToken for the user.
+  token: String
+
+  # The user who logged in.
+  account: Account
+
+  # Any auth related errors.
+  errors: [Error]
+}
+
 # A tag relates content together
 type AllContent {
   articles: [Article]
@@ -18,7 +80,6 @@ type Article {
 
   # The title of the article
   title: String!
-  cached: Int
 
   # An alphanumeric identifier for the object unique to its type.
   slug: String
@@ -68,11 +129,19 @@ type Article {
   # Media uploaded with the article
   media: [Media]
 
-  # Users belonging to a role.
-  author: User
+  # The account of the person who wrote the article.
+  author: Account
 
   # Category the article belongs to.
   category: Category
+}
+
+input AuthInput {
+  # The email address for the account to create or login to.
+  email: Email!
+
+  # The password belonging to the account.
+  password: String!
 }
 
 # A category groups content together
@@ -211,6 +280,14 @@ input CreateContentTypeInput {
   description: String
 }
 
+input CreateTagInput {
+  # The name of the tag
+  name: String!
+
+  # Automatically slugified version of the name
+  safeName: String
+}
+
 # The DateTime scalar type represents date time strings complying to ISO-8601.
 scalar DateTime
 
@@ -286,24 +363,38 @@ input EditMediaInput {
   fileDescription: String
 }
 
-input EditUserInput {
-  # The email address of the account to login to.
-  email: Email
-
-  # Where the user is from.
-  location: String
-
-  # Information about the user.
-  bio: String
-
+input EditProfileInput {
   # The username for the new user
   username: String
 
-  # The first name of the user.
+  # The website of the user
+  website: URL
+
+  # The first name of the user
   firstName: String
 
-  # The last name of the user.
+  # The last name associated with the user
   lastName: String
+
+  # Information about the user
+  bio: String
+
+  # url of user's avatar picture
+  avatarUrl: URL
+
+  # Url for the user's profile background image
+  profileImage: URL
+
+  # Location the user lives
+  location: String
+}
+
+input EditTagInput {
+  # The name of the tag
+  name: String!
+
+  # Automatically slugified version of the name
+  safeName: String
 }
 
 # The Email scalar type represents E-Mail addresses compliant to RFC 822.
@@ -360,7 +451,7 @@ type Entity {
   category: Category
 
   # User who created the entity.
-  author: User
+  author: Account
 }
 
 type Error {
@@ -544,7 +635,79 @@ type Page {
   createdAt: DateTime
 }
 
+# The profile belonging to an account.
+type Profile {
+  # Unique identifier for the object.
+  id: ID!
+
+  # The timestamp when the object was deleted
+  deletedAt: DateTime
+
+  # The timestamp when the object was last updated
+  updatedAt: DateTime
+
+  # The timestamp when the object was created
+  createdAt: DateTime
+
+  # The id of the account the profile belongs to.
+  accountId: ID
+
+  # The username of the user
+  username: String
+
+  # The website of the user
+  website: URL
+
+  # The first name of the user
+  firstName: String
+
+  # The last name associated with the user
+  lastName: String
+
+  # Information about the user
+  bio: String
+
+  # url of user's avatar picture
+  avatarUrl: URL
+
+  # Url for the user's profile background image
+  profileImage: URL
+
+  # Location the user lives
+  location: String
+
+  # Language the user prefers
+  language: String
+
+  # When the user was born
+  birthday: DateTime
+
+  # Social media profiles of the user.
+  socialMedia: Social
+}
+
 type Query {
+  # A query for a listing of all accounts
+  accounts(
+    # The number of accounts to offset
+    offset: Int
+
+    # The maximum number of accounts to return at a time.
+    limit: Int
+  ): [Account]
+
+  # Find an account by the id, username or email
+  account(
+    # The user ID for the desired account
+    id: ID
+
+    # An email address to query for the account
+    email: Email
+  ): Account
+
+  # Given an auth token, return the user and auth token
+  me: Account
+
   # Returns all articles from the database..
   articles(
     # The number of articles to offset
@@ -624,6 +787,18 @@ type Query {
   # A query for a single page
   singlePage(slug: String): Page
 
+  # A query for admin to find a user by their id
+  profile(
+    # The id of the profile to query
+    id: ID
+
+    # The id of the account the profile belongs to.
+    accountId: ID
+
+    # The username of the profile to find
+    username: String
+  ): Profile
+
   # A query for a listing of all roles
   getRoles: [Role]
 
@@ -638,57 +813,6 @@ type Query {
     # The maximum number of tags to return at a time.
     limit: Int!
   ): [Tag]
-
-  # A query for a listing of all users
-  getUsers(
-    # The number of users to offset
-    offset: Int
-
-    # The maximum number of users to return at a time.
-    limit: Int
-  ): [User]
-
-  # A query for admin to find a user by their id
-  getUserByUserId(
-    # The user ID for the desired user
-    userId: ID!
-  ): User
-
-  # A query to retrieve a user by their username
-  getUserByUsername(
-    # The username for the desired user
-    username: String!
-  ): User
-
-  # Given an auth token, return the user and auth token
-  me: User
-
-  # Given an auth token, return the user and auth token
-  getCurrentUser: User
-}
-
-# Reset password token.
-type ResetToken {
-  # Unique identifier for the object.
-  id: ID!
-
-  # The ip address of the person performing the reset
-  ip: String
-
-  # The reset token
-  token: String
-
-  # True if the token has been used before.
-  used: Boolean
-
-  # The IP address of the blocked user
-  userId: ID
-
-  # The timestamp when the object was last updated
-  updatedAt: DateTime
-
-  # The timestamp when the object was created
-  createdAt: DateTime
 }
 
 # Role or permission group for users
@@ -708,8 +832,8 @@ type Role {
   # The role description
   description: String
 
-  # Users belonging to a role.
-  users: [User]
+  # Accounts belonging to a role.
+  users: [Account]
 
   # The timestamp when the object was deleted
   deletedAt: DateTime
@@ -722,6 +846,12 @@ type Role {
 }
 
 type RootMutation {
+  # Authenticates a user and returns a signed JWT.
+  loginAccount(input: AuthInput!): AccountLoginResponse
+
+  # Register a new account.
+  signupAccount(input: AuthInput!): Account
+
   # Adds a new article to the database.
   createArticle(input: CreateArticleInput!): Article
 
@@ -788,11 +918,20 @@ type RootMutation {
     input: EditDetailInput!
   ): MenuDetail
 
+  # Edit an existing user
+  editProfile(
+    # The profile id
+    id: ID!
+
+    # Fields available for editing a profile.
+    input: EditProfileInput!
+  ): Profile
+
   # creating a new tag
   editSetting(id: ID!, input: SettingInput!): Setting
 
   # creating a new tag
-  addTag(input: TagInput!): Tag
+  addTag(input: CreateTagInput!): Tag
 
   # Edit an existing tag
   editTag(
@@ -800,29 +939,14 @@ type RootMutation {
     id: ID!
 
     # The fields (name, description) for editing a tag.
-    input: TagInput!
+    input: EditTagInput!
   ): Tag
 
   # Remove a tag from the database
   deleteTag(
     # The tag ID
     id: ID!
-  ): Tag
-
-  # Authenticates a user. Returns the user and a signed JWT.
-  loginUser(input: UserLoginInput!): UserLoginResponse
-
-  # Register for a new account.
-  signupUser(input: UserSignupInput!): User
-
-  # Edit an existing user
-  editUser(
-    # The user id
-    id: ID!
-
-    # The required fields for editing a user.
-    input: EditUserInput!
-  ): User
+  ): Boolean
 }
 
 # Editable site settings
@@ -861,8 +985,8 @@ type Social {
   # Unique identifier for the object.
   id: ID!
 
-  # The unique identifier for the user for the identity.
-  userId: ID!
+  # The id of the profile the social media accounts belong to.
+  profileId: ID!
 
   # The Facebook profile url for the user.
   facebookUrl: URL
@@ -907,11 +1031,6 @@ type Tag {
   entities: [Entity]
 }
 
-input TagInput {
-  # The name of the tag
-  name: String!
-}
-
 input Upload {
   # The file name
   name: String!
@@ -943,137 +1062,5 @@ input UploadMediaInput {
 # The URL scalar type represents URL addresses.
 scalar URL
 
-# The user or account
-type User {
-  # Unique identifier for the object.
-  id: ID!
-
-  # The timestamp when the object was deleted
-  deletedAt: DateTime
-
-  # The timestamp when the object was last updated
-  updatedAt: DateTime
-
-  # The timestamp when the object was created
-  createdAt: DateTime
-
-  # The user email
-  email: Email!
-
-  # The username of the user
-  username: String
-
-  # true if email is verified, false otherwise
-  verified: Boolean
-
-  # The website of the user
-  website: URL
-
-  # The first name of the user
-  firstName: String
-
-  # The last name associated with the user
-  lastName: String
-
-  # Information about the user
-  bio: String
-
-  # url of user's avatar picture
-  avatarUrl: URL
-
-  # Url for the user's profile background image
-  profileImage: URL
-
-  # Location the user lives
-  location: String
-
-  # Language the user prefers
-  language: String
-
-  # When the user was born
-  birthday: DateTime
-
-  # When the user last logged in.
-  lastLogin: DateTime
-
-  # Roles the user belongs to.
-  roles: [Role]
-
-  # Social media profiles of the user.
-  socialMedia: Social
-
-  # Articles the user has written
-  articles: [Article]
-
-  # Articles the user has written
-  uploads: [Media]
-
-  # Account verification token belonging to the user.
-  verificationToken: VerificationToken
-
-  # Password reset token belonging to the user.
-  resetToken: ResetToken
-}
-
-input UserLoginInput {
-  # The email address of the account to login to.
-  email: Email!
-
-  # The password belonging to the account.
-  password: String!
-}
-
-type UserLoginResponse {
-  # The JSONWebToken for the user.
-  token: String
-
-  # The user who logged in.
-  user: User
-
-  # Any auth related errors.
-  errors: [Error]
-}
-
-input UserSignupInput {
-  # The email address of the account to login to.
-  email: Email!
-
-  # The password belonging to the account.
-  password: String!
-
-  # The username for the new user
-  username: String!
-
-  # The first name of the user.
-  firstName: String!
-
-  # The last name of the user.
-  lastName: String!
-}
-
 # The UUID scalar type represents a UUID.
 scalar UUID
-
-# Account verification token for a user
-type VerificationToken {
-  # Unique identifier for the object.
-  id: ID!
-
-  # The ip address of the person performing the reset
-  ip: String
-
-  # The reset token
-  token: String
-
-  # True if the token has been used before.
-  used: Boolean
-
-  # The IP address of the blocked user
-  userId: ID
-
-  # The timestamp when the object was last updated
-  updatedAt: DateTime
-
-  # The timestamp when the object was created
-  createdAt: DateTime
-}

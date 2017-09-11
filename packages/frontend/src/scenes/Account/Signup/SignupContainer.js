@@ -15,9 +15,6 @@ const withMutation = graphql(SIGNUP_USER_MUTATION, {
           input: {
             email: formInput.email,
             password: formInput.password,
-            firstName: formInput.firstName,
-            lastName: formInput.lastName,
-            username: formInput.username,
           },
         },
       }),

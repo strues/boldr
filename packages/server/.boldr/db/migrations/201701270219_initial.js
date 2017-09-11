@@ -17,7 +17,7 @@ module.exports.up = async db => {
   });
 
   await db.schema.createTable('category', table => {
-    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
+    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
     table.string('name', 140).unique().notNullable();
     table.string('slug', 140).unique().notNullable();
     table.string('icon', 140).nullable();
@@ -31,17 +31,33 @@ module.exports.up = async db => {
     table.index('name');
     table.index('createdAt');
   });
-
-  await db.schema.createTable('user', table => {
+  await db.schema.createTable('account', table => {
     // pk
-    table
-      .uuid('id')
-      .notNullable()
-      .defaultTo(db.raw('uuid_generate_v4()'))
-      .primary();
+    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
 
     table.string('email', 100).unique().notNullable();
     table.string('password', 255).notNullable();
+    table.boolean('verified').defaultTo(false);
+    table.string('ip', 32);
+    table.string('resetToken', 255);
+    table.dateTime('resetTokenExp');
+    table.string('verificationToken', 255);
+    table.dateTime('verificationTokenExp');
+    table.timestamp('lastLogin').nullable().defaultTo(null);
+
+    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updatedAt').nullable().defaultTo(null);
+    table.timestamp('deletedAt').nullable().defaultTo(null);
+
+    // indexes
+    table.index('verified');
+    table.index('email');
+  });
+
+  await db.schema.createTable('profile', table => {
+    // pk
+    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
+
     table.string('firstName', 64).notNullable();
     table.string('lastName', 96).notNullable();
     table.string('username', 64).unique().notNullable();
@@ -54,65 +70,28 @@ module.exports.up = async db => {
     table.date('birthday', 8).nullable();
     table.string('website', 255).nullable();
     table.string('language', 5).notNullable().defaultTo('en_US');
-    table.boolean('verified').defaultTo(false);
 
-    table.timestamp('lastLogin').nullable().defaultTo(null);
+    table.uuid('accountId').unsigned();
 
     table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
     table.timestamp('updatedAt').nullable().defaultTo(null);
     table.timestamp('deletedAt').nullable().defaultTo(null);
-
+    // fk
+    table
+      .foreign('accountId')
+      .references('id')
+      .inTable('account')
+      .onDelete('cascade')
+      .onUpdate('cascade');
     // indexes
     table.index('username');
-    table.index('verified');
-    table.index('email');
-  });
-
-  await db.schema.createTable('verification_token', table => {
-    // pk
-    table.increments('id').unsigned().primary();
-    table.string('ip', 32);
-    table.string('token');
-    table.boolean('used').defaultTo(false);
-    table.uuid('userId').unsigned();
-    table.timestamp('createdAt').defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
-    // fk
-    table
-      .foreign('userId')
-      .references('id')
-      .inTable('user')
-      .onDelete('cascade')
-      .onUpdate('cascade');
-    // indexes
-    table.index('token');
-  });
-
-  await db.schema.createTable('reset_token', table => {
-    // pk
-    table.increments('id').unsigned().primary();
-    table.string('ip', 32);
-    table.string('token', 255);
-    table.dateTime('expiration');
-    table.boolean('used').defaultTo(false);
-
-    table.uuid('userId').unsigned();
-    table.timestamp('createdAt').defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
-    // fk
-    table
-      .foreign('userId')
-      .references('id')
-      .inTable('user')
-      .onDelete('cascade')
-      .onUpdate('cascade');
-    // indexes
-    table.index('token');
+    table.index('accountId');
   });
 
   await db.schema.createTable('tag', table => {
-    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
+    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
     table.string('name', 32).notNullable().unique();
+    table.string('safeName', 32).notNullable().unique();
 
     table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
     table.timestamp('updatedAt').nullable().defaultTo(null);
@@ -123,12 +102,7 @@ module.exports.up = async db => {
 
   await db.schema.createTable('article', table => {
     // pk | uuid
-    table
-      .uuid('id')
-      .notNullable()
-      .defaultTo(db.raw('uuid_generate_v4()'))
-      .primary();
-
+    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
     table.string('title', 140).unique().notNullable();
     table.string('slug', 140).unique().notNullable();
     table.string('image', 255).nullable();
@@ -153,7 +127,7 @@ module.exports.up = async db => {
     table
       .foreign('authorId')
       .references('id')
-      .inTable('user')
+      .inTable('account')
       .onDelete('cascade')
       .onUpdate('cascade');
 
@@ -174,11 +148,7 @@ module.exports.up = async db => {
 
   await db.schema.createTable('file', table => {
     // pk
-    table
-      .uuid('id')
-      .notNullable()
-      .defaultTo(db.raw('uuid_generate_v4()'))
-      .primary();
+    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
     table.string('name', 128).notNullable().unique();
     table.string('type', 32).notNullable();
     table.string('url', 125).notNullable();
@@ -196,7 +166,7 @@ module.exports.up = async db => {
     table
       .foreign('ownerId')
       .references('id')
-      .inTable('user')
+      .inTable('account')
       .onDelete('cascade')
       .onUpdate('cascade');
 
@@ -221,7 +191,7 @@ module.exports.up = async db => {
 
   await db.schema.createTable('menu', table => {
     table.increments('id').unsigned().primary();
-    table.uuid('uuid').notNullable().defaultTo(db.raw('uuid_generate_v4()'));
+    table.uuid('uuid').notNullable().defaultTo(db.raw('uuid_generate_v1mc()'));
     table.string('name', 64).notNullable();
     table.string('safeName', 64).notNullable();
     table.boolean('restricted').default(false);
@@ -237,7 +207,7 @@ module.exports.up = async db => {
 
   await db.schema.createTable('menu_detail', table => {
     // pk
-    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
+    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
 
     table.string('safeName', 50).unique().notNullable();
     table.string('title', 50).notNullable();
@@ -294,18 +264,18 @@ module.exports.up = async db => {
       .onUpdate('cascade');
   });
 
-  await db.schema.createTable('user_role', table => {
+  await db.schema.createTable('account_role', table => {
     // pk
     table.increments('id').primary();
     // fk
-    table.uuid('userId').unsigned().notNullable();
+    table.uuid('accountId').notNullable();
     table.integer('roleId').unsigned().notNullable();
-    table.unique(['userId', 'roleId']);
+    table.unique(['accountId', 'roleId']);
 
     table
-      .foreign('userId')
+      .foreign('accountId')
       .references('id')
-      .inTable('user')
+      .inTable('account')
       .onDelete('cascade')
       .onUpdate('cascade');
     table
@@ -320,17 +290,16 @@ module.exports.up = async db => {
 module.exports.down = async db => {
   await db.schema.dropTableIfExists('role');
   await db.schema.dropTableIfExists('category');
-  await db.schema.dropTableIfExists('user');
+  await db.schema.dropTableIfExists('account');
+  await db.schema.dropTableIfExists('profile');
   await db.schema.dropTableIfExists('tag');
   await db.schema.dropTableIfExists('article');
   await db.schema.dropTableIfExists('file');
   await db.schema.dropTableIfExists('setting');
   await db.schema.dropTableIfExists('menu');
   await db.schema.dropTableIfExists('menu_detail');
-  await db.schema.dropTableIfExists('verification_token');
-  await db.schema.dropTableIfExists('reset_token');
   await db.schema.dropTableIfExists('article_tag');
-  await db.schema.dropTableIfExists('user_role');
+  await db.schema.dropTableIfExists('account_role');
 };
 
 module.exports.configuration = { transaction: true };

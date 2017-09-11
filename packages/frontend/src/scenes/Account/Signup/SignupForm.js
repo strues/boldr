@@ -42,48 +42,6 @@ const SignupForm = (props: Props) => {
           />
         </Col>
       </Row>
-      <Row>
-        <Col sm={6}>
-          <Field
-            id="first-name"
-            name="firstName"
-            type="text"
-            component={TextFormField}
-            label="First name"
-            placeholder="Steven"
-            validate={[isRequired]}
-          />
-        </Col>
-        <Col sm={6}>
-          <Field
-            id="last-name"
-            name="lastName"
-            type="text"
-            component={TextFormField}
-            label="Last name"
-            placeholder="Smith"
-            validate={[isRequired]}
-          />
-        </Col>
-      </Row>
-      <Row>
-        <Col sm={12}>
-          <Row>
-            <Col sm={6} smOffset={3}>
-              <Field
-                id="username"
-                name="username"
-                type="text"
-                component={TextFormField}
-                placeholder="AwesomeUserName"
-                label="Username"
-                validate={[isRequired]}
-              />
-            </Col>
-          </Row>
-        </Col>
-      </Row>
-
       <Button
         style={{ marginTop: '25px' }}
         htmlType="submit"

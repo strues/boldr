@@ -13,7 +13,7 @@ import Members from './Members';
 import MEMBERS_QUERY from './users.graphql';
 
 type Data = {
-  getUsers: UsersType,
+  accounts: UsersType,
   loading: boolean,
 };
 
@@ -57,7 +57,7 @@ export class MembersContainer extends Component<Props, *> {
     this.props.dispatch(updateMember(userData));
   };
   render() {
-    const { loading, getUsers } = this.props.data;
+    const { loading, accounts } = this.props.data;
     const { isModalVisible, currentMember } = this.props;
     if (loading) {
       return <Loader />;
@@ -65,7 +65,7 @@ export class MembersContainer extends Component<Props, *> {
     return (
       <Members
         toggleUser={this.toggleUser}
-        users={getUsers}
+        users={accounts}
         visible={isModalVisible}
         close={this.closeModal}
         handleSubmit={this.handleSubmit}

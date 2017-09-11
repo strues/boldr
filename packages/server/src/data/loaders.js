@@ -39,6 +39,20 @@ export default {
         .select('*')
         .then(mapTo(ids, x => x.id, 'User')),
     ),
+    accounts: new DataLoader(ids =>
+      db
+        .table('account')
+        .whereIn('id', ids)
+        .select('*')
+        .then(mapTo(ids, x => x.id, 'Account')),
+    ),
+    profiles: new DataLoader(ids =>
+      db
+        .table('profile')
+        .whereIn('id', ids)
+        .select('*')
+        .then(mapTo(ids, x => x.id, 'Profile')),
+    ),
     roles: new DataLoader(ids =>
       db
         .table('roles')

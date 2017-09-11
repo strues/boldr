@@ -1,20 +1,20 @@
 import BaseModel, { mergeSchemas } from '../BaseModel';
 import Role from '../Role';
-import User from '../User';
+import Account from '../Account';
 /**
- * This is the join table connecting users to roles.
+ * This is the join table connecting accounts to roles.
  *
  * Users can only have one of the same role.
  *
  * @see ../Role
- * @see ../User
+ * @see ../Account
  * @extends ../BaseModel
  */
-class UserRole extends BaseModel {
-  static tableName = 'user_role';
+class AccountRole extends BaseModel {
+  static tableName = 'account_role';
   static addTimestamps = true;
   static jsonSchema = mergeSchemas(BaseModel.jsonSchema, {
-    required: ['userId', 'roleId'],
+    required: ['accountId', 'roleId'],
     properties: {
       id: {
         type: 'string',
@@ -28,7 +28,7 @@ class UserRole extends BaseModel {
         maxLength: 36,
         pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
       },
-      userId: {
+      accountId: {
         type: 'string',
         minLength: 36,
         maxLength: 36,
@@ -41,19 +41,19 @@ class UserRole extends BaseModel {
       relation: BaseModel.BelongsToOneRelation,
       modelClass: Role,
       join: {
-        from: 'user_role.roleId',
+        from: 'account_role.roleId',
         to: 'role.id',
       },
     },
-    user: {
+    account: {
       relation: BaseModel.BelongsToOneRelation,
-      modelClass: User,
+      modelClass: Account,
       join: {
-        from: 'user_role.userId',
-        to: 'user.id',
+        from: 'account_role.accountId',
+        to: 'account.id',
       },
     },
   };
 }
 
-export default UserRole;
+export default AccountRole;

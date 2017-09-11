@@ -1,11 +1,7 @@
 module.exports.up = async (db) => {
   await db.schema.createTable('page', table => {
     // pk
-    table
-      .uuid('id')
-      .notNullable()
-      .defaultTo(db.raw('uuid_generate_v4()'))
-      .primary();
+    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
     table.string('title', 255).unique().notNullable();
     table.string('slug', 255).notNullable();
     table.string('url', 255).nullable();

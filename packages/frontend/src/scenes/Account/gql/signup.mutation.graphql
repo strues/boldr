@@ -1,8 +1,6 @@
-mutation signupUser($input: UserSignupInput!) {
-  signupUser(input: $input) {
-    username
-    firstName
-    lastName
+mutation signupAccount($input: AuthInput!) {
+  signupAccount(input: $input) {
+
     email
   }
 }

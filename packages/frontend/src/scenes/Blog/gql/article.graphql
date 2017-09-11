@@ -18,16 +18,19 @@ query getArticleBySlug($slug: String!) {
       icon
     }
     author {
-      username
-      avatarUrl
-      bio
-      socialMedia {
-        facebookUrl
-        githubUrl
-        twitterUrl
-        linkedinUrl
-        googleUrl
-        stackoverflowUrl
+      email
+      profile {
+        username
+        avatarUrl
+        bio
+        socialMedia {
+          facebookUrl
+          githubUrl
+          twitterUrl
+          linkedinUrl
+          googleUrl
+          stackoverflowUrl
+        }
       }
     }
   }

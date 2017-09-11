@@ -182,9 +182,12 @@ const ArticleCard = (props: Props) => {
           </Excerpt>
         </ContentLink>
         <Footer>
-          <AuthorLink to={`/profiles/${props.author.username}`}>
-            <AuthorImage src={props.author.avatarUrl} alt={props.author.firstName} />
-            <Author>{props.author.firstName}</Author>
+          <AuthorLink to={`/profiles/${props.author.profile.username}`}>
+            <AuthorImage
+              src={props.author.profile.avatarUrl}
+              alt={props.author.profile.firstName}
+            />
+            <Author>{props.author.profile.firstName}</Author>
           </AuthorLink>
           <TagBlock tags={props.tags} />
         </Footer>

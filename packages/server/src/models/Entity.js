@@ -5,7 +5,7 @@ class Entity extends BaseModel {
   static addTimestamps = true;
 
   static jsonSchema = mergeSchemas(BaseModel.jsonSchema, {
-    required: ['title', 'slug', 'content', 'status', 'userId'],
+    required: ['title', 'slug', 'content', 'status', 'authorId'],
     properties: {
       id: {
         type: 'string',
@@ -23,7 +23,7 @@ class Entity extends BaseModel {
       },
       rawContent: { type: 'json' },
       status: { type: { enum: ['published', 'archived', 'draft'] } },
-      userId: {
+      authorId: {
         type: 'string',
         minLength: 36,
         maxLength: 36,
@@ -35,7 +35,7 @@ class Entity extends BaseModel {
         maxLength: 36,
         pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
       },
-      ctId: {
+      contentTypeId: {
         type: 'string',
         minLength: 36,
         maxLength: 36,
@@ -45,6 +45,14 @@ class Entity extends BaseModel {
   });
 
   static relationMappings = {
+    author: {
+      relation: BaseModel.BelongsToOneRelation,
+      modelClass: `${__dirname}/Account`,
+      join: {
+        from: 'article.authorId',
+        to: 'account.id',
+      },
+    },
     contentType: {
       relation: BaseModel.BelongsToOneRelation,
       modelClass: `${__dirname}/ContentType`,

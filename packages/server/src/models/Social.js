@@ -14,11 +14,11 @@ import BaseModel, { mergeSchemas } from './BaseModel';
  * @property {String}   userId
  */
 class Social extends BaseModel {
-  static tableName = 'user_social_media';
+  static tableName = 'profile_social_media';
   static addTimestamps = false;
 
   static jsonSchema = mergeSchemas(BaseModel.jsonSchema, {
-    required: ['id', 'userId'],
+    required: ['id', 'profileId'],
     properties: {
       id: {
         type: 'string',
@@ -26,7 +26,7 @@ class Social extends BaseModel {
         maxLength: 36,
         pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
       },
-      userId: {
+      profileId: {
         type: 'string',
         minLength: 36,
         maxLength: 36,
@@ -66,12 +66,12 @@ class Social extends BaseModel {
   });
 
   static relationMappings = {
-    user: {
+    profile: {
       relation: BaseModel.BelongsToOneRelation,
-      modelClass: `${__dirname}/User`,
+      modelClass: `${__dirname}/Profile`,
       join: {
-        from: 'user_social_media.userId',
-        to: 'user.id',
+        from: 'profile_social_media.profileId',
+        to: 'profile.id',
       },
     },
   };

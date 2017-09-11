@@ -7,7 +7,7 @@ import session from 'express-session';
 import connectRedis from 'connect-redis';
 import getConfig from '@boldr/config';
 import { redisClient } from '../services/redis';
-import User from '../models/User';
+import Account from '../models/Account';
 import rbac from './rbac';
 
 const config = getConfig();
@@ -58,13 +58,13 @@ export default function initAuth(app) {
     } else {
       const payload = req.isAuthenticated();
 
-      const user = await User.query()
+      const account = await Account.query()
         .findById(payload.subject)
-        .eager('roles')
+        .eager('[roles,profile]')
         .skipUndefined();
-      req.session.user = user;
-      req.user = user;
-      req.user.role = user.roles[0].name;
+      req.session.user = account;
+      req.user = account;
+      req.user.role = account.roles[0].name;
       return next();
     }
   });

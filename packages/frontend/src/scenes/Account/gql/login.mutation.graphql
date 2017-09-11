@@ -1,13 +1,15 @@
-mutation loginUser($input: UserLoginInput!) {
-  loginUser(input: $input) {
+mutation loginAccount($input: AuthInput!) {
+  loginAccount(input: $input) {
     token
-    user {
+    account {
       id
-      username
-      firstName
-      lastName
       email
-      avatarUrl
+      profile {
+        firstName
+        lastName
+        username
+        avatarUrl
+      }
       roles {
         id
         name

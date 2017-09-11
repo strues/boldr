@@ -8,7 +8,7 @@ class Article extends BaseModel {
   static addTimestamps = true;
 
   static jsonSchema = mergeSchemas(BaseModel.jsonSchema, {
-    required: ['title', 'slug', 'content', 'published', 'userId'],
+    required: ['title', 'slug', 'content', 'published', 'accountId'],
     properties: {
       id: {
         type: 'string',
@@ -24,10 +24,11 @@ class Article extends BaseModel {
       },
       rawContent: { type: 'json' },
       published: { type: 'boolean' },
+      status: { type: { enum: ['published', 'archived', 'draft'] } },
       image: { type: 'string' },
       heroImage: { type: 'string' },
       featured: { type: 'boolean' },
-      userId: {
+      authorId: {
         type: 'string',
         minLength: 36,
         maxLength: 36,
@@ -43,10 +44,10 @@ class Article extends BaseModel {
   static relationMappings = {
     author: {
       relation: BaseModel.BelongsToOneRelation,
-      modelClass: `${__dirname}/User`,
+      modelClass: `${__dirname}/Account`,
       join: {
         from: 'article.authorId',
-        to: 'user.id',
+        to: 'account.id',
       },
     },
     tags: {

@@ -9,10 +9,9 @@ import {
 import { GraphQLJSON } from '../scalars';
 import { globalIdField, slug } from '../field/identifier';
 import { dateCUD } from '../field/date';
-import cached from '../field/cached';
 import CONTENT_STATUS from '../enum/contentStatus';
 import Article from '../../models/Article';
-import UserType from './user';
+import AccountType from './account';
 import MediaType from './media';
 import TagType from './tag';
 import CategoryType from './category';
@@ -26,7 +25,6 @@ const ArticleType = new GraphQLObjectType({
       type: new GraphQLNonNull(GraphQLString),
       description: 'The title of the article',
     },
-    cached,
     ...slug,
     content: {
       type: GraphQLString,
@@ -89,8 +87,8 @@ const ArticleType = new GraphQLObjectType({
       },
     },
     author: {
-      type: UserType,
-      description: 'Users belonging to a role.',
+      type: AccountType,
+      description: 'The account of the person who wrote the article.',
       resolve(root, args, ctx) {
         return Article.query()
           .findById(root.id)

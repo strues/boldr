@@ -2,8 +2,8 @@ const uuid = require('uuid');
 /* eslint-disable */
 function truncate(knex, Promise, tables) {
   return Promise.each(tables, table =>
-  // prettier-ignore
-    knex.raw(`TRUNCATE TABLE ${table} RESTART IDENTITY CASCADE`)
+    // prettier-ignore
+    knex.raw(`TRUNCATE TABLE ${table} RESTART IDENTITY CASCADE`),
   );
 }
 
@@ -12,11 +12,12 @@ const tables = [
   'category',
   'route',
   'content_type',
-  '"user"',
+  'account',
+  'profile',
   'article',
   'role',
   'tag',
-  'user_role',
+  'account_role',
   'article_tag',
   'menu',
   'menu_detail',
@@ -25,52 +26,52 @@ const tables = [
 
 function seed(knex, Promise) {
   return truncate(knex, Promise, tables)
-  .then(() =>
-    Promise.all([
-      knex('page').insert({
-        title: 'Home',
-        slug: 'home',
-        url: '/',
-      }),
-      knex('page').insert({
-        title: 'About',
-        slug: 'about',
-        url: '/about',
-      }),
-      knex('page').insert({
+    .then(() =>
+      Promise.all([
+        knex('page').insert({
+          title: 'Home',
+          slug: 'home',
+          url: '/',
+        }),
+        knex('page').insert({
+          title: 'About',
+          slug: 'about',
+          url: '/about',
+        }),
+        knex('page').insert({
         title: 'Portfolio',
         slug: 'portfolio',
         url: '/portfolio',
       }),
-      // prettier-ignore
-    ])
-  )
-  .then(() =>
-  Promise.all([
-    knex('category').insert({
-      id: '5b446ed5-46dc-4b03-b84b-715d8d5cac11',
-      name: 'Web Development',
-      slug: 'web-development',
-      description: 'Related to making things for the internet.',
-      icon: 'code'
-    }),
-    knex('category').insert({
-      id: 'f3898f47-62fa-4b8e-895d-d29e7d5278cf',
-      name: 'Music',
-      slug: 'music',
-      description: 'Music news, thoughts, reviews and more.',
-      icon: 'music'
-    }),
-    knex('category').insert({
+        // prettier-ignore
+      ]),
+    )
+    .then(() =>
+      Promise.all([
+        knex('category').insert({
+          id: '5b446ed5-46dc-4b03-b84b-715d8d5cac11',
+          name: 'Web Development',
+          slug: 'web-development',
+          description: 'Related to making things for the internet.',
+          icon: 'code',
+        }),
+        knex('category').insert({
+          id: 'f3898f47-62fa-4b8e-895d-d29e7d5278cf',
+          name: 'Music',
+          slug: 'music',
+          description: 'Music news, thoughts, reviews and more.',
+          icon: 'music',
+        }),
+        knex('category').insert({
       id: 'f9614827-99c0-4686-8ab1-605588122616',
       name: 'Thoughts and Ramblings',
       slug: 'thoughts-and-ramblings',
       description: 'Anything and everything',
       icon: 'cloud'
     }),
-    // prettier-ignore
-  ])
-)
+        // prettier-ignore
+      ]),
+    )
     .then(() =>
       Promise.all([
         knex('role').insert({
@@ -86,14 +87,54 @@ function seed(knex, Promise) {
           description: 'Complete control over the CMS',
         }),
         // prettier-ignore
-      ])
+      ]),
     )
     .then(() =>
       Promise.all([
-        knex('user').insert({
-          id: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
+        knex('account').insert({
+          id: '90d4924a-96a2-11e7-abc4-cec278b6b50a',
           email: 'admin@boldr.io',
           password: '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka',
+          verified: true,
+          ip: '127.0.0.1',
+          resetToken: null,
+          resetTokenExp: null,
+          verificationToken: null,
+          verificationTokenExp: null,
+          lastLogin: null,
+        }),
+        knex('account').insert({
+          id: '90d49682-96a2-11e7-abc4-cec278b6b50a',
+          email: 'user@boldr.io',
+          password: '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka',
+          verified: true,
+          ip: '127.0.0.1',
+          resetToken: null,
+          resetTokenExp: null,
+          verificationToken: null,
+          verificationTokenExp: null,
+          lastLogin: null,
+        }),
+        knex('account').insert({
+          id: '90d49b28-96a2-11e7-abc4-cec278b6b50a',
+          email: 'demo@boldr.io',
+          password: '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka',
+          verified: true,
+          ip: '127.0.0.1',
+          resetToken: null,
+          resetTokenExp: null,
+          verificationToken: null,
+          verificationTokenExp: null,
+          lastLogin: null,
+      }),
+        // prettier-ignore
+      ]),
+    )
+    .then(() =>
+      Promise.all([
+        knex('profile').insert({
+          id: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
+          accountId: '90d4924a-96a2-11e7-abc4-cec278b6b50a',
           firstName: 'Joe',
           lastName: 'Gray',
           username: 'Joey',
@@ -104,12 +145,10 @@ function seed(knex, Promise) {
           profileImage: 'https://boldr.io/images/unknown-avatar.png',
           birthday: '01/01/1988',
           language: 'en_US',
-          verified: true,
         }),
-        knex('user').insert({
+        knex('profile').insert({
           id: 'f4d869a6-1a75-469b-a9cc-965c552929e4',
-          email: 'user@boldr.io',
-          password: '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka',
+          accountId: '90d49682-96a2-11e7-abc4-cec278b6b50a',
           firstName: 'Jessica',
           lastName: 'Smith',
           username: 'Jess',
@@ -120,12 +159,10 @@ function seed(knex, Promise) {
           profileImage: 'https://boldr.io/images/unknown-avatar.png',
           birthday: '01/01/1988',
           language: 'en_US',
-          verified: true,
         }),
-        knex('user').insert({
+        knex('profile').insert({
           id: 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f',
-          email: 'demo@boldr.io',
-          password: '$2a$10$F3/Xx3hWEpTdaP4fE/dIhOb.FtxRiYMuc80nQFPkSrsBH4L6B5.Ka',
+          accountId: '90d49b28-96a2-11e7-abc4-cec278b6b50a',
           firstName: 'Sam',
           lastName: 'Hunt',
           username: 'Samus',
@@ -136,55 +173,56 @@ function seed(knex, Promise) {
           profileImage: 'https://boldr.io/images/unknown-avatar.png',
           birthday: '01/01/1988',
           language: 'en_US',
-          verified: true,
         }),
         // prettier-ignore
-      ])
+      ]),
     )
     .then(() =>
       Promise.all([
-        knex('user_social_media').insert({
-          userId: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
-          facebookUrl: 'https://facebook.com',
-          twitterUrl: 'https://twitter.com',
-          githubUrl: 'https://github.com',
+        knex('profile_social_media').insert({
+          profileId: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
+          facebookUrl: 'https://www.facebook.com',
+          twitterUrl: 'https://www.twitter.com',
+          githubUrl: 'https://www.github.com',
           linkedinUrl: 'https://linkedin.com',
-          googleUrl: 'https://google.com',
-          stackoverflowUrl: 'https://stackoverflow.com',
+          googleUrl: 'https://www.google.com',
+          stackoverflowUrl: 'https://www.stackoverflow.com',
         }),
-        knex('user_social_media').insert({
-          userId: 'f4d869a6-1a75-469b-a9cc-965c552929e4',
-          facebookUrl: 'https://facebook.com',
-          twitterUrl: 'https://twitter.com',
-          githubUrl: 'https://github.com',
+        knex('profile_social_media').insert({
+          profileId: 'f4d869a6-1a75-469b-a9cc-965c552929e4',
+          facebookUrl: 'https://www.facebook.com',
+          twitterUrl: 'https://www.twitter.com',
+          githubUrl: 'https://www.github.com',
           linkedinUrl: 'https://linkedin.com',
-          googleUrl: 'https://google.com',
-          stackoverflowUrl: 'https://stackoverflow.com',
+          googleUrl: 'https://www.google.com',
+          stackoverflowUrl: 'https://www.stackoverflow.com',
         }),
-        knex('user_social_media').insert({
-          userId: 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f',
-          facebookUrl: 'https://facebook.com',
-          twitterUrl: 'https://twitter.com',
-          githubUrl: 'https://github.com',
+        knex('profile_social_media').insert({
+          profileId: 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f',
+          facebookUrl: 'https://www.facebook.com',
+          twitterUrl: 'https://www.twitter.com',
+          githubUrl: 'https://www.github.com',
           linkedinUrl: 'https://linkedin.com',
-          googleUrl: 'https://google.com',
-          stackoverflowUrl: 'https://stackoverflow.com',
+          googleUrl: 'https://www.google.com',
+          stackoverflowUrl: 'https://www.stackoverflow.com',
         }),
         // prettier-ignore
-      ])
+      ]),
     )
     .then(() =>
       Promise.all([
         knex('tag').insert({
           id: 'b1c0d816-e8c0-4a0d-a63a-5215f02b423e',
-          name: 'javascript',
+          name: 'JavaScript',
+          safeName: 'javascript',
         }),
         knex('tag').insert({
           id: '517e9975-9dd8-44fc-80cf-cb907964a06b',
-          name: 'stuff',
+          name: 'Stuff',
+          safeName: 'stuff',
         }),
         // prettier-ignore
-      ])
+      ]),
     )
     .then(() =>
       Promise.all([
@@ -193,37 +231,112 @@ function seed(knex, Promise) {
           title: 'Building From Scratch',
           slug: 'building-from-scratch',
           featured: true,
-          excerpt: 'This is the first of a to-be-determined series about building Boldr, a custom CMS and my experiences. I’ll be covering topics like build processes, developer experience, authentication, and all the headaches that come with security.Building a content management system (CMS) is hard.',
+          excerpt:
+            'This is the first of a to-be-determined series about building Boldr, a custom CMS and my experiences. I’ll be covering topics like build processes, developer experience, authentication, and all the headaches that come with security.Building a content management system (CMS) is hard.',
           image: 'http://i.magaimg.net/img/18en.png',
           heroImage: 'http://i.magaimg.net/img/18en.png',
           meta: {},
           status: 'published',
           rawContent: {
-            "entityMap":{},"blocks":[{"key":"64vtl","text":"This is the first of a to-be-determined series about building Boldr, a custom CMS and my experiences. I’ll be covering topics like build processes, developer experience, authentication, and all the headaches that come with security.Building a content management system (CMS) is hard. ","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":278,"length":6,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"aiim1","text":"I’m not referring to building anything nearly as feature packed as WordPress or even its slimmed down Node.js cousin, Ghost. When I say building a CMS, I’m speaking about crud functionality, authentication, authorization, and user interaction. Many developers will tell you not to even try; that it is not worth the headache.","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":242,"length":83,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"339vf","text":" I guess I somewhat of a masochist because I’m certainly enjoying it.About two or three years ago, I was moving into the “not quite advanced, but awkwardly more than intermediate” skill level of node development. I learn best by doing. In order to break down whatever barrier was between me and the next level thinking, I so desired, I thought it would be an excellent learning experience to build a basic CMS for my World of Warcraft guild. I accomplished everything I had hoped with this project.Fast-forward to the present.","type":"unstyled","depth":0,"inlineStyleRanges":[{"offset":298,"length":20,"style":"ITALIC"}],"entityRanges":[],"data":{}},{"key":"5vgli","text":"The company I previously worked for, spent a lot of time doing custom builds for client’s using Umbraco (a .NET CMS), as the core of the project. Whenever I assisted on a project that used Umbraco, I hated it. My hatred stemmed from all of the hoops you are required to jump through in order to get most standard frontend build tools to work correctly on a Windows environment. One day, a co-worker jokingly said to me, “why don’t you just build us a node based CMS?”. A few days later, I started doing just that.…","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]
+            entityMap: {},
+            blocks: [
+              {
+                key: '64vtl',
+                text:
+                  'This is the first of a to-be-determined series about building Boldr, a custom CMS and my experiences. I’ll be covering topics like build processes, developer experience, authentication, and all the headaches that come with security.Building a content management system (CMS) is hard. ',
+                type: 'unstyled',
+                depth: 0,
+                inlineStyleRanges: [{ offset: 278, length: 6, style: 'BOLD' }],
+                entityRanges: [],
+                data: {},
+              },
+              {
+                key: 'aiim1',
+                text:
+                  'I’m not referring to building anything nearly as feature packed as WordPress or even its slimmed down Node.js cousin, Ghost. When I say building a CMS, I’m speaking about crud functionality, authentication, authorization, and user interaction. Many developers will tell you not to even try; that it is not worth the headache.',
+                type: 'unstyled',
+                depth: 0,
+                inlineStyleRanges: [{ offset: 242, length: 83, style: 'BOLD' }],
+                entityRanges: [],
+                data: {},
+              },
+              {
+                key: '339vf',
+                text:
+                  ' I guess I somewhat of a masochist because I’m certainly enjoying it.About two or three years ago, I was moving into the “not quite advanced, but awkwardly more than intermediate” skill level of node development. I learn best by doing. In order to break down whatever barrier was between me and the next level thinking, I so desired, I thought it would be an excellent learning experience to build a basic CMS for my World of Warcraft guild. I accomplished everything I had hoped with this project.Fast-forward to the present.',
+                type: 'unstyled',
+                depth: 0,
+                inlineStyleRanges: [{ offset: 298, length: 20, style: 'ITALIC' }],
+                entityRanges: [],
+                data: {},
+              },
+              {
+                key: '5vgli',
+                text:
+                  'The company I previously worked for, spent a lot of time doing custom builds for client’s using Umbraco (a .NET CMS), as the core of the project. Whenever I assisted on a project that used Umbraco, I hated it. My hatred stemmed from all of the hoops you are required to jump through in order to get most standard frontend build tools to work correctly on a Windows environment. One day, a co-worker jokingly said to me, “why don’t you just build us a node based CMS?”. A few days later, I started doing just that.…',
+                type: 'unstyled',
+                depth: 0,
+                inlineStyleRanges: [],
+                entityRanges: [],
+                data: {},
+              },
+            ],
           },
 
           content: `<p>This is the first of a to-be-determined series about building Boldr, a custom CMS and my experiences. I’ll be covering topics like build processes, developer experience, authentication, and all the headaches that come with security.Building a content management system (CMS) is <strong>hard. </strong></p><p>I’m not referring to building anything nearly as feature packed as WordPress or even its slimmed down Node.js cousin, Ghost. When I say building a CMS, I’m speaking about crud functionality, authentication, authorization, and user interaction<strong>. Many developers will tell you not to even try; that it is not worth the headache.</strong></p><p> I guess I somewhat of a masochist because I’m certainly enjoying it.About two or three years ago, I was moving into the “not quite advanced, but awkwardly more than intermediate” skill level of node development. I learn best by doing. In order to break down whatever barrier was between me and the<em> next level thinking</em>, I so desired, I thought it would be an excellent learning experience to build a basic CMS for my World of Warcraft guild. I accomplished everything I had hoped with this project.Fast-forward to the present.</p><p>The company I previously worked for, spent a lot of time doing custom builds for client’s using Umbraco (a .NET CMS), as the core of the project. Whenever I assisted on a project that used Umbraco, I hated it. My hatred stemmed from all of the hoops you are required to jump through in order to get most standard frontend build tools to work correctly on a Windows environment. One day, a co-worker jokingly said to me, “why don’t you just build us a node based CMS?”. A few days later, I started doing just that.…</p>`,
           published: true,
-          authorId: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
-          categoryId: '5b446ed5-46dc-4b03-b84b-715d8d5cac11'
+          authorId: '90d4924a-96a2-11e7-abc4-cec278b6b50a',
+          categoryId: '5b446ed5-46dc-4b03-b84b-715d8d5cac11',
         }),
         knex('article').insert({
           id: 'cb61bbae-c91e-4014-b665-3485734b88fb',
           title: 'Setup a Universal React Application',
           slug: 'setup-a-universal-react-application',
           featured: false,
-          excerpt: 'This is the first of a to-be-determined series about building Boldr, a custom CMS and my experiences. I’ll be covering topics like build processes, developer experience, authentication, and all the headaches that come with security.Building a content management system (CMS) is hard.',
+          excerpt:
+            'This is the first of a to-be-determined series about building Boldr, a custom CMS and my experiences. I’ll be covering topics like build processes, developer experience, authentication, and all the headaches that come with security.Building a content management system (CMS) is hard.',
           image: 'https://cdn-images-1.medium.com/max/800/1*tnh7IIZ1PrNQ-PzOMijBTQ.png',
           heroImage: 'https://cdn-images-1.medium.com/max/800/1*tnh7IIZ1PrNQ-PzOMijBTQ.png',
           meta: {},
           status: 'draft',
           rawContent: {
-            "entityMap":{},"blocks":[{"key":"39eg7","text":"Getting Started.","type":"header-two","depth":0,"inlineStyleRanges":[{"offset":0,"length":16,"style":"BOLD"}],"entityRanges":[],"data":{}},{"key":"fbjrk","text":"JavaScript is the most popular programming language in the world. It’s ubiquitous with the web we know. The rise in popularity of Node.js and a desire to make experiences across multiple platforms as seamless as possible has led to the emergence of this concept of universal JavaScript applications.Sometimes referred to as Isomorphic, Universal JavaScript applications, deliver the capability of rendering JavaScript on the server before it gets sent to the user’s browser. The benefits of rendering on the server are huge for many reasons; like search engine optimization (SEO), faster loading times, and fallbacks for when a user might have JavaScript disabled.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}},{"key":"dh8q4","text":"Unfortunately the barrier of entry for setting up a universal JavaScript application is quite high. There are a decent amount of starter projects on GitHub that are great to look at and analyze, but not much can be found explaining the why or the how things need to be done.","type":"unstyled","depth":0,"inlineStyleRanges":[],"entityRanges":[],"data":{}}]
-        },
+            entityMap: {},
+            blocks: [
+              {
+                key: '39eg7',
+                text: 'Getting Started.',
+                type: 'header-two',
+                depth: 0,
+                inlineStyleRanges: [{ offset: 0, length: 16, style: 'BOLD' }],
+                entityRanges: [],
+                data: {},
+              },
+              {
+                key: 'fbjrk',
+                text:
+                  'JavaScript is the most popular programming language in the world. It’s ubiquitous with the web we know. The rise in popularity of Node.js and a desire to make experiences across multiple platforms as seamless as possible has led to the emergence of this concept of universal JavaScript applications.Sometimes referred to as Isomorphic, Universal JavaScript applications, deliver the capability of rendering JavaScript on the server before it gets sent to the user’s browser. The benefits of rendering on the server are huge for many reasons; like search engine optimization (SEO), faster loading times, and fallbacks for when a user might have JavaScript disabled.',
+                type: 'unstyled',
+                depth: 0,
+                inlineStyleRanges: [],
+                entityRanges: [],
+                data: {},
+              },
+              {
+                key: 'dh8q4',
+                text:
+                  'Unfortunately the barrier of entry for setting up a universal JavaScript application is quite high. There are a decent amount of starter projects on GitHub that are great to look at and analyze, but not much can be found explaining the why or the how things need to be done.',
+                type: 'unstyled',
+                depth: 0,
+                inlineStyleRanges: [],
+                entityRanges: [],
+                data: {},
+              },
+            ],
+          },
           content: `<p>This is the first of a to-be-determined series about building Boldr, a custom CMS and my experiences. I’ll be covering topics like build processes, developer experience, authentication, and all the headaches that come with security.Building a content management system (CMS) is <strong>hard. </strong></p><p>I’m not referring to building anything nearly as feature packed as WordPress or even its slimmed down Node.js cousin, Ghost. When I say building a CMS, I’m speaking about crud functionality, authentication, authorization, and user interaction<strong>. Many developers will tell you not to even try; that it is not worth the headache.</strong></p><p> I guess I somewhat of a masochist because I’m certainly enjoying it.About two or three years ago, I was moving into the “not quite advanced, but awkwardly more than intermediate” skill level of node development. I learn best by doing. In order to break down whatever barrier was between me and the<em> next level thinking</em>, I so desired, I thought it would be an excellent learning experience to build a basic CMS for my World of Warcraft guild. I accomplished everything I had hoped with this project.Fast-forward to the present.</p><p>The company I previously worked for, spent a lot of time doing custom builds for client’s using Umbraco (a .NET CMS), as the core of the project. Whenever I assisted on a project that used Umbraco, I hated it. My hatred stemmed from all of the hoops you are required to jump through in order to get most standard frontend build tools to work correctly on a Windows environment. One day, a co-worker jokingly said to me, “why don’t you just build us a node based CMS?”. A few days later, I started doing just that.…</p>`,
           published: false,
-          authorId: 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f',
-          categoryId: 'f3898f47-62fa-4b8e-895d-d29e7d5278cf'
+          authorId: '90d4924a-96a2-11e7-abc4-cec278b6b50a',
+          categoryId: 'f3898f47-62fa-4b8e-895d-d29e7d5278cf',
         }),
         knex('article').insert({
           id: 'ab33a0ca-b349-4cf8-947f-94f415149492',
@@ -240,11 +353,11 @@ function seed(knex, Promise) {
           },
           content: `<h1><strong>Hiding Implementation Details With Flow’s New Opaque Type Aliases Feature</strong></h1><p>Do you ever wish that you could hide your implementation details away from your users?Well, now all of your dreams have finally come true! Flow 0.51.0 added support for opaque type aliases, with <a href="https://github.com/babel/babel/pull/5990" target="_blank">babel support </a>coming in the next week or so. Opaque type aliases are type aliases that hide their underlying type. You can only see an opaque type’s underlying type in the file which declares the opaque type. They’re already documented <a href="https://flow.org/en/docs/types/opaque-types/" target="_blank">here</a>, so we’ll spend the rest of this blog post showing just how powerful opaque type aliases can be.</p><h3><strong>Maintaining Invariants with Opaque Types</strong></h3><p>Opaque type aliases are really useful for maintaining invariants in your code. Whenever you find yourself wanting to express “things of type T where X is true,” you might want to consider using an opaque type alias.</p><p></p><p>As a simple example, lets consider a type for non-negative numbers:</p><blockquote><em>NonNeg.js:</em></blockquote><blockquote>// @flow</blockquote><blockquote><strong>opaque</strong> <strong>type</strong> NonNeg = number;</blockquote>`,
           published: true,
-          authorId: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
+          authorId: '90d49682-96a2-11e7-abc4-cec278b6b50a',
           categoryId: 'f9614827-99c0-4686-8ab1-605588122616'
         }),
         // prettier-ignore
-      ])
+      ]),
     )
     .then(() =>
       Promise.all([
@@ -261,7 +374,7 @@ function seed(knex, Promise) {
           tagId: 'b1c0d816-e8c0-4a0d-a63a-5215f02b423e',
         }),
         // prettier-ignore
-      ])
+      ]),
     )
     .then(() =>
       Promise.all([
@@ -271,9 +384,8 @@ function seed(knex, Promise) {
           restricted: false,
         }),
         // prettier-ignore
-      ])
+      ]),
     )
-
     .then(() =>
       Promise.all([
         knex('menu_detail').insert({
@@ -301,7 +413,7 @@ function seed(knex, Promise) {
           icon: 'info',
         }),
         // prettier-ignore
-      ])
+      ]),
     )
     .then(() =>
       Promise.all([
@@ -332,28 +444,28 @@ function seed(knex, Promise) {
           icon: 'info',
         }),
         // prettier-ignore
-      ])
+      ]),
     )
     .then(() =>
       Promise.all([
-        knex('user_role').insert({
-          userId: '1b062e26-df71-48ce-b363-4ae9b966e7a0',
+        knex('account_role').insert({
+          accountId: '90d4924a-96a2-11e7-abc4-cec278b6b50a',
           roleId: 3,
         }),
-        knex('user_role').insert({
-          userId: 'f11d3ebf-4ae6-4578-ba65-0c8f48b7f41f',
+        knex('account_role').insert({
+          accountId: '90d49682-96a2-11e7-abc4-cec278b6b50a',
           roleId: 2,
         }),
-        knex('user_role').insert({
-          userId: 'f4d869a6-1a75-469b-a9cc-965c552929e4',
+        knex('account_role').insert({
+          accountId: '90d49b28-96a2-11e7-abc4-cec278b6b50a',
           roleId: 1,
         }),
         // prettier-ignore
-      ])
+      ]),
     )
     .then(() =>
-    Promise.all([
-      knex('content_type').insert({
+      Promise.all([
+        knex('content_type').insert({
         id: '29dd6b62-3e73-407b-9324-9c959f9bdbd2',
         name: 'Project',
         slug: 'project',
@@ -361,9 +473,9 @@ function seed(knex, Promise) {
         restricted: false,
         icon: 'briefcase'
       }),
-      // prettier-ignore
-    ])
-  )
+        // prettier-ignore
+      ]),
+    )
     .then(() =>
       Promise.all([
         knex('setting').insert({
@@ -409,7 +521,7 @@ function seed(knex, Promise) {
           description: "Toggle allowing user's to register for accounts.",
         }),
         // prettier-ignore
-      ])
+      ]),
     );
 }
 

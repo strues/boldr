@@ -1,7 +1,9 @@
-import { GraphQLNonNull, GraphQLID } from 'graphql';
+import { GraphQLNonNull, GraphQLID, GraphQLBoolean } from 'graphql';
+import slugIt from '../../utils/slugIt';
 import Tag from '../../models/Tag';
 import TagType from '../../schema/type/tag';
-import TagInput from '../../schema/input/tag';
+import EditTagInput from '../../schema/input/editTag';
+import CreateTagInput from '../../schema/input/createTag';
 
 export default {
   addTag: {
@@ -9,12 +11,15 @@ export default {
     description: 'creating a new tag',
     args: {
       input: {
-        type: new GraphQLNonNull(TagInput),
+        type: new GraphQLNonNull(CreateTagInput),
       },
     },
     async resolve(_, args) {
       const payload = await Tag.query()
-        .insert(args.input)
+        .insert({
+          name: args.input,
+          safeName: slugIt(args.input),
+        })
         .returning('*');
       return payload;
     },
@@ -28,7 +33,7 @@ export default {
         description: 'The tag ID',
       },
       input: {
-        type: new GraphQLNonNull(TagInput),
+        type: new GraphQLNonNull(EditTagInput),
         description: 'The fields (name, description) for editing a tag.',
       },
     },
@@ -36,12 +41,13 @@ export default {
       debug(args);
       const updatedTag = await Tag.query().patchAndFetchById(args.id, {
         name: args.input.name,
+        safeName: slugIt(args.input.name),
       });
       return updatedTag;
     },
   },
   deleteTag: {
-    type: TagType,
+    type: GraphQLBoolean,
     description: 'Remove a tag from the database',
     args: {
       id: {

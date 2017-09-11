@@ -1,5 +1,4 @@
-import User from '../../models/User';
-import VerificationToken from '../../models/VerificationToken';
+import Account from '../../models/Account';
 
 export async function verifyUserRegister(req, res, next) {
   try {
@@ -9,20 +8,16 @@ export async function verifyUserRegister(req, res, next) {
       return next(new BadRequest('Invalid account verification code'));
     }
 
-    const userToken = await VerificationToken.query()
-      .where({ token: req.body.token })
+    const account = await Account.query()
+      .where({ verificationToken: req.body.token })
       .first();
-
-    if (userToken.used === true) {
-      return res.status(401).json('This token has already been used.');
+    if (!account) {
+      return next(new BadRequest('Invalid account verification code'));
     }
-    const user = await User.query().patchAndFetchById(userToken.userId, {
+    const user = await Account.query().patchAndFetchById(account.id, {
       verified: true,
+      verificationToken: null,
     });
-
-    VerificationToken.query()
-      .where({ token: req.body.token })
-      .update({ used: true });
 
     return res.status(201).send(user);
   } catch (err) {
@@ -30,9 +25,9 @@ export async function verifyUserRegister(req, res, next) {
   }
 }
 export async function checkAuthentication(req, res) {
-  const validUser = await User.query()
-    .findById(req.user.id)
-    .eager('[roles,socialMedia]');
+  const validUser = await Account.query()
+    .findById(req.session.user.id)
+    .eager('[roles,profile]');
 
   if (!validUser) {
     return res.status(401).json('Unauthorized: Please login again.');

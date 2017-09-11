@@ -8,10 +8,10 @@ class File extends BaseModel {
   static relationMappings = {
     owner: {
       relation: BaseModel.BelongsToOneRelation,
-      modelClass: `${__dirname}/User`,
+      modelClass: `${__dirname}/Account`,
       join: {
         from: 'file.ownerId',
-        to: 'user.id',
+        to: 'account.id',
       },
     },
   };

@@ -1,8 +1,8 @@
-import { GraphQLList, GraphQLInt, GraphQLString } from 'graphql';
+import { GraphQLList, GraphQLInt } from 'graphql';
 import EntityType from '../../schema/type/entity';
-import ContentType from '../../schema/type/contentType';
+
 import Entity from '../../models/Entity';
-import ContentT from '../../models/ContentType';
+
 import { errorObj } from '../../errors';
 
 export default {

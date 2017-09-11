@@ -2,7 +2,7 @@ import { GraphQLString, GraphQLObjectType, GraphQLList } from 'graphql';
 import { GraphQLURL } from '../scalars';
 import { globalIdField, uuid, name } from '../field/identifier';
 import { dateCUD } from '../field/date';
-import UserType from './user';
+import AccountType from './account';
 
 const RoleType = new GraphQLObjectType({
   name: 'Role',
@@ -21,8 +21,8 @@ const RoleType = new GraphQLObjectType({
     },
 
     users: {
-      type: new GraphQLList(UserType),
-      description: 'Users belonging to a role.',
+      type: new GraphQLList(AccountType),
+      description: 'Accounts belonging to a role.',
     },
     ...dateCUD,
   }),

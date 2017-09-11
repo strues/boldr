@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import User from '../models/User';
+import Account from '../models/Account';
 
-const debug = require('debug')('boldr:api:middleware:rbac');
+const debug = require('debug')('boldr:server:middleware:rbac');
 
 /**
  * This middleware checks to see if the given user/token combination
@@ -12,8 +12,7 @@ const debug = require('debug')('boldr:api:middleware:rbac');
  */
 export function checkPermissions({ role = null }) {
   return (req, res, next) => {
-    debug(req);
-    const { user } = req;
+    const { user } = req.session;
 
     if (role && !hasRole(user, role)) {
       return next(new Error(`User doesn't have required role. '${role}' role is needed.`));
@@ -29,8 +28,8 @@ export function checkPermissions({ role = null }) {
  */
 export function checkRole(role = null) {
   return async (req, res, next) => {
-    const userInfo = await User.query()
-      .findById(req.user.id)
+    const userInfo = await Account.query()
+      .findById(req.session.user.id)
       .eager('[roles]');
     const userRole = userInfo.roles[0].id;
     debug(userRole);

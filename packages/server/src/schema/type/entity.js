@@ -5,7 +5,7 @@ import { dateCUD } from '../field/date';
 
 import Entity from '../../models/Entity';
 import CONTENT_STATUS from '../enum/contentStatus';
-import UserType from './user';
+import AccountType from './account';
 import TagType from './tag';
 import CategoryType from './category';
 import ContentType from './contentType';
@@ -83,7 +83,7 @@ const EntityType = new GraphQLObjectType({
       },
     },
     author: {
-      type: UserType,
+      type: AccountType,
       description: 'User who created the entity.',
     },
   }),

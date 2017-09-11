@@ -35,14 +35,14 @@ const Author = (props: Props) => {
   return (
     <div className={classes}>
       <AvatarName>
-        <Avatar src={author.avatarUrl} role="presentation" />
+        <Avatar src={author.profile.avatarUrl} role="presentation" />
       </AvatarName>
       <AvatarName>
-        <Link to={`/profiles/${author.username}`}>
-          <Heading type="h3" text={author.username} />
+        <Link to={`/profiles/${author.profile.username}`}>
+          <Heading type="h3" text={author.profile.username} />
         </Link>
       </AvatarName>
-      <BioBlock>{author.bio}</BioBlock>
+      <BioBlock>{author.profile.bio}</BioBlock>
     </div>
   );
 };

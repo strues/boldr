@@ -1,9 +1,7 @@
-import { GraphQLBoolean, GraphQLString, GraphQLObjectType, GraphQLList, GraphQLID } from 'graphql';
-import jsonResult from '@boldr/utils/lib/gql/jsonResult';
+import { GraphQLBoolean, GraphQLObjectType, GraphQLList } from 'graphql';
 import { globalIdField, uuid, name, safeName } from '../field/identifier';
 import { dateCU } from '../field/date';
-import Menu from '../../models/Menu';
-import MenuDetail from '../../models/MenuDetail';
+
 import MenuDetailType from './menuDetail';
 
 const MenuType = new GraphQLObjectType({
@@ -18,21 +16,7 @@ const MenuType = new GraphQLObjectType({
       type: GraphQLBoolean,
       description: 'True if the menu should be hidden from unauth',
     },
-    // dropdown: {
-    //   type: new GraphQLList(MenuDetailType),
-    //   description: 'Links',
-    //   async resolve(root, args, context) {
-    //     const details = await context.details
-    //       .load(root.id).filter(detail => detail.parentId !== null);
-    //     const dropdownItems = details.filter(detail => detail.parentId !== null);
-    //     const dd = details.filter(detail => detail.id === dropdownItems[0].parentId);
-    //     const dropdown = {
-    //       ...dd,
-    //       ...dropdownItems,
-    //     };
-    //     return details;
-    //   },
-    // },
+
     details: {
       type: new GraphQLList(MenuDetailType),
       description: 'Links',

@@ -1,7 +1,7 @@
 module.exports.up = async db => {
   await db.schema.createTable('content_type', table => {
     // pk
-    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
+    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
     table.string('name', 140).unique().notNullable();
     table.string('slug', 140).unique().notNullable();
     table.string('icon', 140).nullable();
@@ -18,7 +18,7 @@ module.exports.up = async db => {
 
   await db.schema.createTable('entity', table => {
     // pk
-    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
+    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
 
     table.string('title', 140).unique().notNullable();
     table.string('slug', 140).unique().notNullable();
@@ -49,7 +49,7 @@ module.exports.up = async db => {
     table
       .foreign('authorId')
       .references('id')
-      .inTable('user')
+      .inTable('account')
       .onDelete('cascade')
       .onUpdate('cascade');
       table

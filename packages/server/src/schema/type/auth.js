@@ -1,16 +1,16 @@
 import { GraphQLString, GraphQLObjectType, GraphQLList } from 'graphql';
 import ErrorType from './error';
-import UserType from './user';
+import AccountType from './account';
 
-export const UserLoginResponse = new GraphQLObjectType({
-  name: 'UserLoginResponse',
+export const AccountLoginResponse = new GraphQLObjectType({
+  name: 'AccountLoginResponse',
   fields: () => ({
     token: {
       type: GraphQLString,
       description: 'The JSONWebToken for the user.',
     },
-    user: {
-      type: UserType,
+    account: {
+      type: AccountType,
       description: 'The user who logged in.',
     },
     errors: {

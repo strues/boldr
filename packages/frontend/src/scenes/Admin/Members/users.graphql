@@ -1,26 +1,21 @@
-query getUsers($offset: Int!, $limit: Int!) {
-    getUsers(offset:$offset, limit:$limit) {
-      id,
-      email,
-      username,
-      firstName,
-      lastName,
-      avatarUrl,
-      profileImage,
-      bio,
-      location,
-      website,
+query accounts($offset: Int!, $limit: Int!) {
+    accounts(offset:$offset, limit:$limit) {
+      id
+      email
+      verified
       roles {
-        name,
+        name
         id
-      },
-      socialMedia {
-        facebookUrl,
-        githubUrl,
-        twitterUrl,
-        linkedinUrl,
-        googleUrl,
-        stackoverflowUrl
+      }
+      profile {
+         username
+        firstName
+        lastName
+        avatarUrl
+        profileImage
+        bio
+        location
+        website
       }
     }
 }

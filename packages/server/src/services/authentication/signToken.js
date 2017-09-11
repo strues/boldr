@@ -4,14 +4,14 @@ import getConfig from '@boldr/config';
 
 const config = getConfig();
 
-export default function signToken(user) {
-  const roleinfo = user.roles[0].name;
+export default function signToken(account) {
+  const roleinfo = account.roles[0].name;
   const payload = {
     issuer: 'boldr',
-    subject: user.id,
+    subject: account.id,
     jti: uuid.v4(),
     expiresIn: '7 days',
-    email: user.email,
+    email: account.email,
     role: roleinfo,
   };
   return new Promise((resolve, reject) => {

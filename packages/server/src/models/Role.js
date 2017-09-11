@@ -33,30 +33,30 @@ class Role extends BaseModel {
     },
   });
   static relationMappings = {
-    users: {
+    accounts: {
       relation: BaseModel.ManyToManyRelation,
-      modelClass: `${__dirname}/User`,
+      modelClass: `${__dirname}/Account`,
       join: {
         from: 'role.id',
         through: {
-          from: 'user_role.roleId',
-          to: 'user_role.userId',
-          modelClass: `${__dirname}/join/UserRole`,
+          from: 'account_role.roleId',
+          to: 'account_role.accountId',
+          modelClass: `${__dirname}/join/AccountRole`,
         },
-        to: 'user.id',
+        to: 'account.id',
       },
     },
   };
 
-  static getUsersForRole(id) {
+  static getAccountsForRole(id) {
     return Role.query()
       .findById(id)
-      .eager('[users]')
+      .eager('[accounts]')
       .returning('*');
   }
 
-  getUsersForRole() {
-    return this.constructor.getUsersForRole(this.id);
+  getAccountsForRole() {
+    return this.constructor.getAccountsForRole(this.id);
   }
 }
 

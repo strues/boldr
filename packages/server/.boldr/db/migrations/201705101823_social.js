@@ -1,13 +1,9 @@
 module.exports.up = async (db) => {
-  await db.schema.createTable('user_social_media', table => {
+  await db.schema.createTable('profile_social_media', table => {
     // pk
-    table
-      .uuid('id')
-      .notNullable()
-      .defaultTo(db.raw('uuid_generate_v4()'))
-      .primary();
+    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
 
-    table.uuid('userId').notNullable();
+    table.uuid('profileId').notNullable();
     table.string('facebookUrl', 255).nullable();
     table.string('twitterUrl', 255).nullable();
     table.string('githubUrl', 255).nullable();
@@ -17,19 +13,19 @@ module.exports.up = async (db) => {
 
      // fk | uuid
     table
-      .foreign('userId')
+      .foreign('profileId')
       .references('id')
-      .inTable('user')
+      .inTable('profile')
       .onDelete('cascade')
       .onUpdate('cascade');
     // indexes
-    table.index('userId');
+    table.index('profileId');
   });
 
 };
 
 module.exports.down = async (db) => {
-  await db.schema.dropTableIfExists('user_social_media');
+  await db.schema.dropTableIfExists('profile_social_media');
 };
 
 module.exports.configuration = { transaction: true };

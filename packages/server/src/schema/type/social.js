@@ -1,15 +1,14 @@
 import { GraphQLID, GraphQLObjectType, GraphQLNonNull } from 'graphql';
 import { GraphQLURL } from '../scalars';
 import { globalIdField } from '../field/identifier';
-import { dateCUD } from '../field/date';
 
 const SocialType = new GraphQLObjectType({
   name: 'Social',
   fields: () => ({
     id: globalIdField(),
-    userId: {
+    profileId: {
       type: new GraphQLNonNull(GraphQLID),
-      description: 'The unique identifier for the user for the identity.',
+      description: 'The id of the profile the social media accounts belong to.',
     },
     facebookUrl: {
       type: GraphQLURL,

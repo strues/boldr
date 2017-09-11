@@ -1,25 +1,27 @@
 import { GraphQLObjectType } from 'graphql';
+import account from './account/accountMutation';
 import article from './article/articleMutation';
 import category from './category/categoryMutation';
 import contentType from './contentType/contentTypeMutation';
 import file from './file/fileMutation';
 import media from './media/mediaMutation';
 import menu from './menu/menuMutation';
+import profile from './profile/profileMutation';
 import setting from './setting/settingMutation';
 import tag from './tag/tagMutation';
-import user from './user/userMutation';
 
 const rootFields = Object.assign(
   {},
+  account,
   article,
   category,
   contentType,
   file,
   media,
   menu,
+  profile,
   setting,
   tag,
-  user,
 );
 
 const RootMutationType = new GraphQLObjectType({

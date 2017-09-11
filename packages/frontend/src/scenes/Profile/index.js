@@ -9,11 +9,11 @@ const UniversalProfile = universal(import('./Profile'));
 type Props = {
   loading: boolean,
   error?: Object,
-  getUserByUsername: User,
+  profile: User,
 };
 
-const Profile = ({ loading, error, getUserByUsername }: Props) => (
-  <UniversalProfile isLoading={loading} error={error} profile={getUserByUsername} />
+const Profile = ({ loading, error, profile }: Props) => (
+  <UniversalProfile isLoading={loading} error={error} profile={profile} />
 );
 
 // $FlowIssue
@@ -23,9 +23,9 @@ export default graphql(PROFILE_QUERY, {
       username: props.match.params.username,
     },
   }),
-  props: ({ data: { loading, error, getUserByUsername } }) => ({
+  props: ({ data: { loading, error, profile } }) => ({
     loading,
     error,
-    getUserByUsername,
+    profile,
   }),
 })(Profile);

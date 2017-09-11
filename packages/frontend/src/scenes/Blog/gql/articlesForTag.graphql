@@ -7,12 +7,14 @@ query getArticlesForTag($name: String!) {
     image
     excerpt
     createdAt
-
     author {
-      firstName
-      lastName
-      username
-      avatarUrl
+      email
+      profile {
+        firstName
+        lastName
+        username
+        avatarUrl
+      }
     }
     category {
       id

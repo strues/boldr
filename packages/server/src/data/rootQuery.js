@@ -1,4 +1,5 @@
 import { GraphQLObjectType } from 'graphql';
+import account from './account/accountQuery';
 import article from './article/articleQuery';
 import category from './category/categoryQuery';
 import contentType from './contentType/contentTypeQuery';
@@ -7,13 +8,14 @@ import file from './file/fileQuery';
 import media from './media/mediaQuery';
 import menu from './menu/menuQuery';
 import page from './page/pageQuery';
+import profile from './profile/profileQuery';
 import role from './role/roleQuery';
 import settings from './setting/settingQuery';
 import tag from './tag/tagQuery';
-import user from './user/userQuery';
 
 const rootFields = Object.assign(
   {},
+  account,
   article,
   category,
   contentType,
@@ -22,10 +24,10 @@ const rootFields = Object.assign(
   media,
   menu,
   page,
+  profile,
   role,
   settings,
   tag,
-  user,
 );
 
 const RootQueryType = new GraphQLObjectType({

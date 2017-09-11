@@ -25,7 +25,7 @@ const graphqlHandler = graphqlExpress(req => {
     context: {
       req,
       ValidationError,
-      user: req.user ? req.user : null,
+      user: req.session.user ? req.session.user : null,
       ...loaders.create(),
     },
     debug: process.env.NODE_ENV !== 'production',

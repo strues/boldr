@@ -7,10 +7,10 @@ class Media extends BaseModel {
   static relationMappings = {
     uploader: {
       relation: BaseModel.BelongsToOneRelation,
-      modelClass: `${__dirname}/User`,
+      modelClass: `${__dirname}/Account`,
       join: {
         from: 'media.ownerId',
-        to: 'user.id',
+        to: 'account.id',
       },
     },
     articles: {

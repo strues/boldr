@@ -1,7 +1,6 @@
-query getUserByUsername($username: String!) {
-  getUserByUsername(username: $username) {
+query profile($username: String!) {
+  profile(username: $username) {
     id
-    email
     username
     firstName
     lastName
@@ -10,9 +9,7 @@ query getUserByUsername($username: String!) {
     bio
     location
     website
-    roles {
-      name
-    }
+
     socialMedia {
       facebookUrl
       githubUrl

@@ -1,11 +1,7 @@
 module.exports.up = async db => {
   await db.schema.createTable('media', table => {
     // pk
-    table
-      .uuid('id')
-      .notNullable()
-      .defaultTo(db.raw('uuid_generate_v4()'))
-      .primary();
+    table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
 
     table
       .string('name', 128)
@@ -22,7 +18,7 @@ module.exports.up = async db => {
     table
       .foreign('ownerId')
       .references('id')
-      .inTable('user')
+      .inTable('account')
       .onDelete('cascade')
       .onUpdate('cascade');
 

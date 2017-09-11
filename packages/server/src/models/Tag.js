@@ -8,9 +8,6 @@ class Tag extends BaseModel {
     required: ['name'],
     properties: {
       id: {
-        type: 'number',
-      },
-      uuid: {
         type: 'string',
         minLength: 36,
         maxLength: 36,
@@ -21,6 +18,9 @@ class Tag extends BaseModel {
         minLength: 3,
         maxLength: 64,
         pattern: '^[A-Za-z0-9-_]+$',
+      },
+      safeName: {
+        type: 'string',
       },
     },
   });

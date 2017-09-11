@@ -1,4 +1,4 @@
-mutation addTag($input: TagInput!) {
+mutation addTag($input: CreateTagInput!) {
   addTag(input: $input) {
     name
   }

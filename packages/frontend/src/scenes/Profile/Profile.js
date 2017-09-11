@@ -4,8 +4,9 @@ import classnames from 'classnames';
 import Loader from '@boldr/ui/Loader';
 import Helmet from 'react-helmet';
 import { StyleClasses } from '@boldr/ui';
-import ProfileContent from './components/ProfileContent';
+
 import View from '../../components/View';
+import ProfileContent from './components/ProfileContent';
 
 type Props = {
   profile: Object,
