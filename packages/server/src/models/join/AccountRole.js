@@ -12,7 +12,11 @@ import Account from '../Account';
  */
 class AccountRole extends BaseModel {
   static tableName = 'account_role';
-  static addTimestamps = true;
+  static addTimestamps = false;
+
+  static get idColumn() {
+    return ['account_id', 'role_id'];
+  }
   static jsonSchema = mergeSchemas(BaseModel.jsonSchema, {
     required: ['accountId', 'roleId'],
     properties: {
@@ -23,10 +27,7 @@ class AccountRole extends BaseModel {
         pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
       },
       roleId: {
-        type: 'string',
-        minLength: 36,
-        maxLength: 36,
-        pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$',
+        type: 'number',
       },
       accountId: {
         type: 'string',
@@ -41,7 +42,7 @@ class AccountRole extends BaseModel {
       relation: BaseModel.BelongsToOneRelation,
       modelClass: Role,
       join: {
-        from: 'account_role.roleId',
+        from: 'account_role.role_id',
         to: 'role.id',
       },
     },
@@ -49,7 +50,7 @@ class AccountRole extends BaseModel {
       relation: BaseModel.BelongsToOneRelation,
       modelClass: Account,
       join: {
-        from: 'account_role.accountId',
+        from: 'account_role.account_id',
         to: 'account.id',
       },
     },

@@ -33,7 +33,8 @@ export default {
         return profile;
       } else if (accountId) {
         profile = await Profile.query()
-          .where({ accountId })
+          // eslint-disable-next-line camelcase
+          .where({ account_id: accountId })
           .first();
         return profile;
       }

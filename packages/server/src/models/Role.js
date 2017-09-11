@@ -39,8 +39,8 @@ class Role extends BaseModel {
       join: {
         from: 'role.id',
         through: {
-          from: 'account_role.roleId',
-          to: 'account_role.accountId',
+          from: 'account_role.role_id',
+          to: 'account_role.account_id',
           modelClass: `${__dirname}/join/AccountRole`,
         },
         to: 'account.id',

@@ -1,4 +1,4 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars, camelcase */
 import uuid from 'uuid';
 import addDays from 'date-fns/add_days';
 import { mailer, generateHash } from '../../services';
@@ -23,8 +23,8 @@ export async function forgottenPassword(req, res, next) {
   const resetPasswordToken = uuid.v4();
   await Account.query().patchAndFetchById(account.id, {
     ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
-    resetToken: resetPasswordToken,
-    resetTokenExp: addDays(new Date(), 1),
+    reset_token: resetPasswordToken,
+    reset_token_exp: addDays(new Date(), 1),
   });
 
   const mailBody = forgotPasswordEmail(resetPasswordToken);
@@ -45,7 +45,7 @@ export async function forgottenPassword(req, res, next) {
 export async function resetPassword(req, res, next) {
   try {
     const account = await Account.query()
-      .where({ resetToken: req.body.token })
+      .where({ reset_token: req.body.token })
       .first();
 
     if (!account) {

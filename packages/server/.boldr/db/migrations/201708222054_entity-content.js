@@ -8,12 +8,12 @@ module.exports.up = async db => {
     table.text('description').nullable();
     table.boolean('restricted').default(false);
     // timestamp
-    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
-    table.timestamp('deletedAt').nullable().defaultTo(null);
+    table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updated_at').nullable().defaultTo(null);
+    table.timestamp('deleted_at').nullable().defaultTo(null);
     // indexes
     table.index('slug');
-    table.index('createdAt');
+    table.index('created_at');
   });
 
   await db.schema.createTable('entity', table => {
@@ -24,36 +24,36 @@ module.exports.up = async db => {
     table.string('slug', 140).unique().notNullable();
     table.string('image', 255).nullable();
     table.json('meta').nullable();
-    table.json('rawContent').nullable();
+    table.json('raw_content').nullable();
     table.text('content').nullable();
     table.text('excerpt').nullable();
     table.enu('status', ['published', 'archived', 'draft']).notNullable();
 
     // fks
-    table.uuid('contentTypeId').notNullable();
-    table.uuid('authorId');
-    table.uuid('categoryId');
+    table.uuid('content_type_id').notNullable();
+    table.uuid('author_id');
+    table.uuid('category_id');
 
     // timestamp
-    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
-    table.timestamp('deletedAt').nullable().defaultTo(null);
+    table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updated_at').nullable().defaultTo(null);
+    table.timestamp('deleted_at').nullable().defaultTo(null);
 
     // fk | uuid
     table
-      .foreign('contentTypeId')
+      .foreign('content_type_id')
       .references('id')
       .inTable('content_type')
       .onDelete('cascade')
       .onUpdate('cascade');
     table
-      .foreign('authorId')
+      .foreign('author_id')
       .references('id')
       .inTable('account')
       .onDelete('cascade')
       .onUpdate('cascade');
       table
-      .foreign('categoryId')
+      .foreign('category_id')
       .references('id')
       .inTable('category')
       .onDelete('cascade')
@@ -62,10 +62,10 @@ module.exports.up = async db => {
     // indexes
     table.index('slug');
     table.index('status');
-    table.index('createdAt');
-    table.index('categoryId');
-    table.index('authorId')
-    table.index('contentTypeId')
+    table.index('created_at');
+    table.index('category_id');
+    table.index('author_id')
+    table.index('content_type_id')
   });
 
 
@@ -74,18 +74,18 @@ module.exports.up = async db => {
     // pk
     table.increments('id').primary();
     // fk
-    table.uuid('tagId').notNullable();
-    table.uuid('entityId').notNullable();
-    table.unique(['tagId', 'entityId']);
+    table.uuid('tag_id').notNullable();
+    table.uuid('entity_id').notNullable();
+    table.unique(['tag_id', 'entity_id']);
 
     table
-      .foreign('tagId')
+      .foreign('tag_id')
       .references('id')
       .inTable('tag')
       .onDelete('cascade')
       .onUpdate('cascade');
     table
-      .foreign('entityId')
+      .foreign('entity_id')
       .references('id')
       .inTable('entity')
       .onDelete('cascade')

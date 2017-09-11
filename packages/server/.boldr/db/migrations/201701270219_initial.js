@@ -9,9 +9,9 @@ module.exports.up = async db => {
     table.string('icon', 140).nullable();
     table.text('description').nullable();
 
-    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
-    table.timestamp('deletedAt').nullable().defaultTo(null);
+    table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updated_at').nullable().defaultTo(null);
+    table.timestamp('deleted_at').nullable().defaultTo(null);
     // indexes
     table.index('name');
   });
@@ -23,13 +23,13 @@ module.exports.up = async db => {
     table.string('icon', 140).nullable();
     table.text('description').nullable();
 
-    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
-    table.timestamp('deletedAt').nullable().defaultTo(null);
+    table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updated_at').nullable().defaultTo(null);
+    table.timestamp('deleted_at').nullable().defaultTo(null);
 
     table.index('slug');
     table.index('name');
-    table.index('createdAt');
+    table.index('created_at');
   });
   await db.schema.createTable('account', table => {
     // pk
@@ -39,15 +39,15 @@ module.exports.up = async db => {
     table.string('password', 255).notNullable();
     table.boolean('verified').defaultTo(false);
     table.string('ip', 32);
-    table.string('resetToken', 255);
-    table.dateTime('resetTokenExp');
-    table.string('verificationToken', 255);
-    table.dateTime('verificationTokenExp');
-    table.timestamp('lastLogin').nullable().defaultTo(null);
+    table.string('reset_token', 255);
+    table.dateTime('reset_token_exp');
+    table.string('verification_token', 255);
+    table.dateTime('verification_token_exp');
+    table.timestamp('last_login').nullable().defaultTo(null);
 
-    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
-    table.timestamp('deletedAt').nullable().defaultTo(null);
+    table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updated_at').nullable().defaultTo(null);
+    table.timestamp('deleted_at').nullable().defaultTo(null);
 
     // indexes
     table.index('verified');
@@ -58,44 +58,48 @@ module.exports.up = async db => {
     // pk
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
 
-    table.string('firstName', 64).notNullable();
-    table.string('lastName', 96).notNullable();
+    table.string('first_name', 64).notNullable();
+    table.string('last_name', 128).notNullable();
     table.string('username', 64).unique().notNullable();
     table
-      .string('avatarUrl', 255)
+      .string('avatar_url', 255)
       .defaultTo('https://boldr.io/images/unknown-avatar.png');
-    table.string('profileImage', 255).nullable();
+    table.string('profile_image', 255).nullable();
     table.string('location', 100).nullable();
     table.text('bio').nullable();
     table.date('birthday', 8).nullable();
+    table
+    .enu('sex', ['male', 'female', 'unknown'])
+    .defaultTo('unknown')
+    .notNullable();
     table.string('website', 255).nullable();
     table.string('language', 5).notNullable().defaultTo('en_US');
 
-    table.uuid('accountId').unsigned();
+    table.uuid('account_id').unsigned();
 
-    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
-    table.timestamp('deletedAt').nullable().defaultTo(null);
+    table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updated_at').nullable().defaultTo(null);
+    table.timestamp('deleted_at').nullable().defaultTo(null);
     // fk
     table
-      .foreign('accountId')
+      .foreign('account_id')
       .references('id')
       .inTable('account')
       .onDelete('cascade')
       .onUpdate('cascade');
     // indexes
     table.index('username');
-    table.index('accountId');
+    table.index('account_id');
   });
 
   await db.schema.createTable('tag', table => {
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
     table.string('name', 32).notNullable().unique();
-    table.string('safeName', 32).notNullable().unique();
+    table.string('safe_name', 32).notNullable().unique();
 
-    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
-    table.timestamp('deletedAt').nullable().defaultTo(null);
+    table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updated_at').nullable().defaultTo(null);
+    table.timestamp('deleted_at').nullable().defaultTo(null);
 
     table.index('name');
   });
@@ -106,10 +110,10 @@ module.exports.up = async db => {
     table.string('title', 140).unique().notNullable();
     table.string('slug', 140).unique().notNullable();
     table.string('image', 255).nullable();
-    table.string('heroImage', 255).nullable();
+    table.string('hero_image', 255).nullable();
     table.json('meta').nullable();
 
-    table.json('rawContent').notNullable().comment('Raw immutable JSON content block');
+    table.json('raw_content').notNullable().comment('Raw immutable JSON content block');
     table.text('content').notNullable().comment('Content is the rawContent converted to HTML');
     table.text('excerpt').notNullable();
 
@@ -117,22 +121,22 @@ module.exports.up = async db => {
     table.boolean('published').defaultTo(true);
     table.enu('status', ['published', 'archived', 'draft']);
 
-    table.uuid('authorId').unsigned().notNullable();
-    table.uuid('categoryId').unsigned().notNullable();
+    table.uuid('author_id').unsigned().notNullable();
+    table.uuid('category_id').unsigned().notNullable();
 
-    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
-    table.timestamp('deletedAt').nullable().defaultTo(null);
+    table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updated_at').nullable().defaultTo(null);
+    table.timestamp('deleted_at').nullable().defaultTo(null);
     // fk | uuid
     table
-      .foreign('authorId')
+      .foreign('author_id')
       .references('id')
       .inTable('account')
       .onDelete('cascade')
       .onUpdate('cascade');
 
     table
-      .foreign('categoryId')
+      .foreign('category_id')
       .references('id')
       .inTable('category')
       .onDelete('cascade')
@@ -140,9 +144,9 @@ module.exports.up = async db => {
 
     table.index('slug');
     table.index('published');
-    table.index('authorId');
-    table.index('categoryId');
-    table.index('createdAt');
+    table.index('author_id');
+    table.index('category_id');
+    table.index('created_at');
     table.index('status');
   });
 
@@ -154,17 +158,17 @@ module.exports.up = async db => {
     table.string('url', 125).notNullable();
     table.string('path', 255).notNullable();
     table.integer('size');
-    table.string('safeName', 128).notNullable();
-    table.string('thumbName', 128);
-    table.string('fileDescription').nullable();
-    table.uuid('ownerId').notNullable();
+    table.string('safe_name', 128).notNullable();
+    table.string('thumb_name', 128);
+    table.string('file_description').nullable();
+    table.uuid('owner_id').notNullable();
 
-    table.timestamp('createdAt').defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
+    table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updated_at').nullable().defaultTo(null);
 
     // fk | uuid
     table
-      .foreign('ownerId')
+      .foreign('owner_id')
       .references('id')
       .inTable('account')
       .onDelete('cascade')
@@ -181,9 +185,9 @@ module.exports.up = async db => {
     table.string('label', 100).notNullable();
     table.string('value', 255).notNullable();
     table.string('description', 255).notNullable();
-    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
-    table.timestamp('deletedAt').nullable().defaultTo(null);
+    table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updated_at').nullable().defaultTo(null);
+    table.timestamp('deleted_at').nullable().defaultTo(null);
 
     table.index('key');
     table.index('value');
@@ -193,13 +197,13 @@ module.exports.up = async db => {
     table.increments('id').unsigned().primary();
     table.uuid('uuid').notNullable().defaultTo(db.raw('uuid_generate_v1mc()'));
     table.string('name', 64).notNullable();
-    table.string('safeName', 64).notNullable();
+    table.string('safe_name', 64).notNullable();
     table.boolean('restricted').default(false);
 
     // timestamp
-    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
-    table.timestamp('deletedAt').nullable().defaultTo(null);
+    table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updated_at').nullable().defaultTo(null);
+    table.timestamp('deleted_at').nullable().defaultTo(null);
 
     // indexes
     table.index('uuid');
@@ -209,26 +213,26 @@ module.exports.up = async db => {
     // pk
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
 
-    table.string('safeName', 50).unique().notNullable();
+    table.string('safe_name', 50).unique().notNullable();
     table.string('title', 50).notNullable();
-    table.boolean('hasDropdown').default(false).comment('hasDropdown is true if the item has dropdownItems.');
-    table.boolean('isDropdown').default(false).comment('isDropdown is true if the item in question has a parentId.');
-    table.string('cssClassname', 32).nullable();
+    table.boolean('has_dropdown').default(false).comment('hasDropdown is true if the item has dropdownItems.');
+    table.boolean('is_dropdown').default(false).comment('isDropdown is true if the item in question has a parentId.');
+    table.string('css_classname', 32).nullable();
     table.integer('order');
     table.string('href').notNullable();
     table.string('icon').nullable();
 
     // fk
-    table.uuid('parentId').nullable();
-    table.integer('menuId').unsigned().references('id').inTable('menu').notNullable();
+    table.uuid('parent_id').nullable();
+    table.integer('menu_id').unsigned().references('id').inTable('menu').notNullable();
 
     // timestamp
-    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
-    table.timestamp('deletedAt').nullable().defaultTo(null);
+    table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updated_at').nullable().defaultTo(null);
+    table.timestamp('deleted_at').nullable().defaultTo(null);
 
     table
-    .foreign('parentId')
+    .foreign('parent_id')
     .references('id')
     .inTable('menu_detail')
     .onDelete('cascade')
@@ -236,28 +240,28 @@ module.exports.up = async db => {
 
     // indexs
     table.index('title');
-    table.index('safeName');
+    table.index('safe_name');
     table.index('href');
-    table.index('parentId');
-    table.index('menuId');
+    table.index('parent_id');
+    table.index('menu_id');
   });
 
   await db.schema.createTable('article_tag', table => {
     // pk
     table.increments('id').primary();
     // fk
-    table.uuid('articleId').notNullable();
-    table.uuid('tagId').notNullable();
-    table.unique(['articleId', 'tagId']);
+    table.uuid('article_id').notNullable();
+    table.uuid('tag_id').notNullable();
+    table.unique(['article_id', 'tag_id']);
 
     table
-      .foreign('articleId')
+      .foreign('article_id')
       .references('id')
       .inTable('article')
       .onDelete('cascade')
       .onUpdate('cascade');
     table
-      .foreign('tagId')
+      .foreign('tag_id')
       .references('id')
       .inTable('tag')
       .onDelete('cascade')
@@ -268,18 +272,18 @@ module.exports.up = async db => {
     // pk
     table.increments('id').primary();
     // fk
-    table.uuid('accountId').notNullable();
-    table.integer('roleId').unsigned().notNullable();
-    table.unique(['accountId', 'roleId']);
+    table.uuid('account_id').notNullable();
+    table.integer('role_id').unsigned().notNullable();
+    table.unique(['account_id', 'role_id']);
 
     table
-      .foreign('accountId')
+      .foreign('account_id')
       .references('id')
       .inTable('account')
       .onDelete('cascade')
       .onUpdate('cascade');
     table
-      .foreign('roleId')
+      .foreign('role_id')
       .references('id')
       .inTable('role')
       .onDelete('cascade')

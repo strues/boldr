@@ -10,7 +10,7 @@ class Menu extends BaseModel {
       modelClass: `${__dirname}/MenuDetail`,
       join: {
         from: 'menu.id',
-        to: 'menu_detail.menuId',
+        to: 'menu_detail.menu_id',
       },
     },
   };

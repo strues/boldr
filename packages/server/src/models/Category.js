@@ -40,7 +40,7 @@ class Category extends BaseModel {
       modelClass: `${__dirname}/Article`,
       join: {
         from: 'category.id',
-        to: 'article.categoryId',
+        to: 'article.category_id',
       },
     },
     entities: {
@@ -48,7 +48,7 @@ class Category extends BaseModel {
       modelClass: `${__dirname}/Entity`,
       join: {
         from: 'category.id',
-        to: 'entity.categoryId',
+        to: 'entity.category_id',
       },
     },
   };

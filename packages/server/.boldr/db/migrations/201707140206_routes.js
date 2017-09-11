@@ -5,13 +5,13 @@ module.exports.up = async (db) => {
 
     table.string('name', 50).unique().notNullable();
     table.string('slug', 50).unique().notNullable();
-    table.string('uriParts', 255).notNullable();
-    table.string('uriPattern', 255).notNullable();
+    table.string('uri_parts', 255).notNullable();
+    table.string('uri_pattern', 255).notNullable();
     table.string('template').nullable();
 
     // indexes
     table.index('name');
-    table.index('uriParts');
+    table.index('uri_parts');
   });
 };
 

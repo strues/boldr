@@ -10,7 +10,7 @@ class File extends BaseModel {
       relation: BaseModel.BelongsToOneRelation,
       modelClass: `${__dirname}/Account`,
       join: {
-        from: 'file.ownerId',
+        from: 'file.owner_id',
         to: 'account.id',
       },
     },

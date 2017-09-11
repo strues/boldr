@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import Account from '../../models/Account';
 
 export async function verifyUserRegister(req, res, next) {
@@ -9,14 +10,15 @@ export async function verifyUserRegister(req, res, next) {
     }
 
     const account = await Account.query()
-      .where({ verificationToken: req.body.token })
+      .where({ verification_token: req.body.token })
       .first();
     if (!account) {
       return next(new BadRequest('Invalid account verification code'));
     }
     const user = await Account.query().patchAndFetchById(account.id, {
       verified: true,
-      verificationToken: null,
+      verification_token: null,
+      verification_token_exp: null,
     });
 
     return res.status(201).send(user);

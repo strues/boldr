@@ -11,32 +11,30 @@ import Entity from '../Entity';
 class EntityTag extends BaseModel {
   static tableName = 'entity_tag';
 
-  static addTimestamps = true;
+  static addTimestamps = false;
 
   static get idColumn() {
-    return ['entityId', 'tagId'];
+    return ['entity_id', 'tag_id'];
   }
 
-  static get relationMappings() {
-    return {
-      tag: {
-        relation: BaseModel.BelongsToOneRelation,
-        modelClass: Tag,
-        join: {
-          from: 'entity_tag.tagId',
-          to: 'tag.id',
-        },
+  static relationMapping = {
+    tag: {
+      relation: BaseModel.BelongsToOneRelation,
+      modelClass: Tag,
+      join: {
+        from: 'entity_tag.tag_id',
+        to: 'tag.id',
       },
-      entity: {
-        relation: BaseModel.BelongsToOneRelation,
-        modelClass: Entity,
-        join: {
-          from: 'entity_tag.entityId',
-          to: 'entity.id',
-        },
+    },
+    entity: {
+      relation: BaseModel.BelongsToOneRelation,
+      modelClass: Entity,
+      join: {
+        from: 'entity_tag.entity_id',
+        to: 'entity.id',
       },
-    };
-  }
+    },
+  };
 }
 
 export default EntityTag;

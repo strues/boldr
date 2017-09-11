@@ -49,7 +49,7 @@ class Entity extends BaseModel {
       relation: BaseModel.BelongsToOneRelation,
       modelClass: `${__dirname}/Account`,
       join: {
-        from: 'article.authorId',
+        from: 'article.author_id',
         to: 'account.id',
       },
     },
@@ -57,7 +57,7 @@ class Entity extends BaseModel {
       relation: BaseModel.BelongsToOneRelation,
       modelClass: `${__dirname}/ContentType`,
       join: {
-        from: 'entity.ctId',
+        from: 'entity.content_type_id',
         to: 'content_type.id',
       },
     },
@@ -65,7 +65,7 @@ class Entity extends BaseModel {
       relation: BaseModel.BelongsToOneRelation,
       modelClass: `${__dirname}/Category`,
       join: {
-        from: 'entity.categoryId',
+        from: 'entity.category_id',
         to: 'category.id',
       },
     },
@@ -75,8 +75,8 @@ class Entity extends BaseModel {
       join: {
         from: 'entity.id',
         through: {
-          from: 'entity_tag.entityId',
-          to: 'entity_tag.tagId',
+          from: 'entity_tag.entity_id',
+          to: 'entity_tag.tag_id',
         },
         to: 'tag.id',
       },

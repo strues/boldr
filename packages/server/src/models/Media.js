@@ -9,7 +9,7 @@ class Media extends BaseModel {
       relation: BaseModel.BelongsToOneRelation,
       modelClass: `${__dirname}/Account`,
       join: {
-        from: 'media.ownerId',
+        from: 'media.owner_id',
         to: 'account.id',
       },
     },
@@ -19,8 +19,8 @@ class Media extends BaseModel {
       join: {
         from: 'media.id',
         through: {
-          from: 'article_media.mediaId',
-          to: 'article_media.articleId',
+          from: 'article_media.media_id',
+          to: 'article_media.article_id',
         },
         to: 'article.id',
       },

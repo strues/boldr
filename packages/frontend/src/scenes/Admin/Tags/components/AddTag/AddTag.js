@@ -43,13 +43,6 @@ class AddTag extends React.Component<Props, *> {
         <Heading type="h3" text="Add a New Tag" />
         <Form className="boldr-form__addtag" onSubmit={handleSubmit(this.addTagMutation)}>
           <Field id="tag-name" name="name" component={TextFormField} type="text" label="Name" />
-          <Field
-            id="tag-description"
-            name="description"
-            component={TextFormField}
-            type="text"
-            label="Description"
-          />
           <FormField isGrouped>
             <Control>
               <Button htmlType="submit" kind="primary" style={style} disabled={submitting}>

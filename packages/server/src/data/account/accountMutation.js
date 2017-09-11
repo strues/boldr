@@ -1,5 +1,6 @@
 import { GraphQLID, GraphQLNonNull, GraphQLError } from 'graphql';
 import uuid from 'uuid';
+import addDays from 'date-fns/add_days';
 import { mailer, signToken } from '../../services';
 import { welcomeEmail } from '../../services/mailer/templates';
 import Account from '../../models/Account';
@@ -28,6 +29,7 @@ export default {
 
       // remove the password from the response.
       account.stripPassword();
+      await account.$query().patch({ lastLogin: new Date().toISOString() });
       // sign the token
       const token = await signToken(account);
       context.req.user = account;
@@ -55,27 +57,28 @@ export default {
         return new Error('The account already exists');
       }
 
-      const newAccount = await Account.query().insert(input);
+      const newAccount = await Account.query().insert({
+        email: input.email,
+        password: input.password,
+        verificationToken: uuid.v4(),
+        verificationTokenExp: addDays(new Date(), 1),
+        ip: context.req.headers['x-forwarded-for'] || context.req.connection.remoteAddress,
+      });
       await newAccount.$relatedQuery('roles').relate({ id: 1 });
 
       if (!newAccount) {
         return new Error('Signup failed');
       }
       // generate user verification token to send in the email.
-      const verifToken = uuid.v4();
+      const verifToken = newAccount.verificationToken;
       // get the mail template
       const mailBody = welcomeEmail(verifToken);
       // subject
       const mailSubject = 'Boldr User Verification';
       // send the welcome email
       mailer(newAccount, mailBody, mailSubject);
-      // create a relationship between the user and the token
-      await newUser.$relatedQuery('verificationToken').insert({
-        ip: context.req.ip,
-        token: verifToken,
-        userId: newUser.id,
-      });
-      return newUser;
+
+      return newAccount;
     },
   },
 };

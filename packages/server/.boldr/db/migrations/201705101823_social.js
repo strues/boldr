@@ -3,23 +3,23 @@ module.exports.up = async (db) => {
     // pk
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v1mc()')).primary();
 
-    table.uuid('profileId').notNullable();
-    table.string('facebookUrl', 255).nullable();
-    table.string('twitterUrl', 255).nullable();
-    table.string('githubUrl', 255).nullable();
-    table.string('linkedinUrl', 255).nullable();
-    table.string('googleUrl', 255).nullable();
-    table.string('stackoverflowUrl', 255).nullable();
+    table.uuid('profile_id').notNullable();
+    table.string('facebook_url', 255).nullable();
+    table.string('twitter_url', 255).nullable();
+    table.string('github_url', 255).nullable();
+    table.string('linkedin_url', 255).nullable();
+    table.string('google_url', 255).nullable();
+    table.string('stackoverflow_url', 255).nullable();
 
      // fk | uuid
     table
-      .foreign('profileId')
+      .foreign('profile_id')
       .references('id')
       .inTable('profile')
       .onDelete('cascade')
       .onUpdate('cascade');
     // indexes
-    table.index('profileId');
+    table.index('profile_id');
   });
 
 };

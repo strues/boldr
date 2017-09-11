@@ -11,10 +11,10 @@ import Article from '../Article';
 class ArticleMedia extends BaseModel {
   static tableName = 'article_media';
 
-  static addTimestamps = true;
+  static addTimestamps = false;
 
   static get idColumn() {
-    return ['articleId', 'mediaId'];
+    return ['article_id', 'media_id'];
   }
 
   static get relationMappings() {
@@ -23,7 +23,7 @@ class ArticleMedia extends BaseModel {
         relation: BaseModel.BelongsToOneRelation,
         modelClass: Media,
         join: {
-          from: 'article_media.mediaId',
+          from: 'article_media.media_id',
           to: 'media.id',
         },
       },
@@ -31,7 +31,7 @@ class ArticleMedia extends BaseModel {
         relation: BaseModel.BelongsToOneRelation,
         modelClass: Article,
         join: {
-          from: 'article_media.articleId',
+          from: 'article_media.article_id',
           to: 'article.id',
         },
       },

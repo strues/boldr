@@ -59,17 +59,18 @@ export class MembersContainer extends Component<Props, *> {
   render() {
     const { loading, accounts } = this.props.data;
     const { isModalVisible, currentMember } = this.props;
-    const initialFormValues = {
-      email: currentMember.email,
-      firstName: currentMember.profile.firstName,
-      lastName: currentMember.profile.lastName,
-      role: currentMember.roles[0].id,
-      username: currentMember.profile.username,
-      avatarUrl: currentMember.profile.avatarUrl,
-    };
+
     if (loading) {
       return <Loader />;
     }
+    const initialFormValues = {
+      email: currentMember.email,
+      firstName: currentMember.profile ? currentMember.profile.firstName : '',
+      lastName: currentMember.profile ? currentMember.profile.lastName : '',
+      role: currentMember.roles ? currentMember.roles[0].id : '',
+      username: currentMember.profile ? currentMember.profile.username : '',
+      avatarUrl: currentMember.profile ? currentMember.profile.avatarUrl : '',
+    };
     return (
       <Members
         toggleUser={this.toggleUser}

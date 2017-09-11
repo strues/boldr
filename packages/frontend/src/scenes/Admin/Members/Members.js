@@ -3,7 +3,7 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import Dialog from '@boldr/ui/Dialog';
-import type { User } from '../../../types/boldr';
+import type { AccountsType } from '../../../types/boldr';
 
 import { MembersList, EditMemberForm } from './components';
 
@@ -11,7 +11,7 @@ type Props = {
   visible: boolean,
   close: Function,
   initialValues: Object,
-  accounts: Array<User>,
+  accounts: AccountsType,
   toggleUser: Function,
   handleSubmit: Function,
 };

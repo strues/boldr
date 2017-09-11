@@ -10,21 +10,27 @@ export function assignType(obj, type) {
 }
 
 export function mapTo(keys, keyFn, type, rows) {
-  if (!rows) return mapTo.bind(null, keys, keyFn, type);
+  if (!rows) {
+    return mapTo.bind(null, keys, keyFn, type);
+  }
   const group = new Map(keys.map(key => [key, null]));
   rows.forEach(row => group.set(keyFn(row), assignType(row, type)));
   return Array.from(group.values());
 }
 
 export function mapToMany(keys, keyFn, type, rows) {
-  if (!rows) return mapToMany.bind(null, keys, keyFn, type);
+  if (!rows) {
+    return mapToMany.bind(null, keys, keyFn, type);
+  }
   const group = new Map(keys.map(key => [key, []]));
   rows.forEach(row => group.get(keyFn(row)).push(assignType(row, type)));
   return Array.from(group.values());
 }
 
 export function mapToValues(keys, keyFn, valueFn, rows) {
-  if (!rows) return mapToValues.bind(null, keys, keyFn, valueFn);
+  if (!rows) {
+    return mapToValues.bind(null, keys, keyFn, valueFn);
+  }
   const group = new Map(keys.map(key => [key, null]));
   rows.forEach(row => group.set(keyFn(row), valueFn(row)));
   return Array.from(group.values());
@@ -97,11 +103,7 @@ export default {
     ),
     menus: new DataLoader(ids => Promise.all(ids.map(id => Menu.getById(id)))),
     details: new DataLoader(ids =>
-      db
-        .table('menu_detail')
-        .whereIn('menuId', ids)
-        .select()
-        .then(mapToMany(ids, x => x.menuId, 'MenuDetail')),
+      Promise.all(ids.map(id => MenuDetail.query().whereIn('menu_id', id))),
     ),
   }),
 };

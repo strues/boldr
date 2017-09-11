@@ -9,9 +9,9 @@ module.exports.up = async (db) => {
     table.jsonb('blocks').nullable();
     table.text('markup').nullable();
 
-    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
-    table.timestamp('deletedAt').nullable().defaultTo(null);
+    table.timestamp('created_at').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updated_at').nullable().defaultTo(null);
+    table.timestamp('deleted_at').nullable().defaultTo(null);
 
     // indexes
     table.index('slug');

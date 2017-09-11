@@ -7,47 +7,47 @@ module.exports.up = async db => {
       .string('name', 128)
       .notNullable()
       .unique();
-    table.string('safeName', 128).notNullable();
-    table.string('thumbName', 128);
+    table.string('safe_name', 128).notNullable();
+    table.string('thumb_name', 128);
     table.integer('size');
-    table.string('fileDescription').nullable();
+    table.string('file_description').nullable();
     table.string('type').notNullable();
     table.string('url').notNullable();
     table.string('path').notNullable();
-    table.uuid('ownerId').notNullable();
+    table.uuid('owner_id').notNullable();
     table
-      .foreign('ownerId')
+      .foreign('owner_id')
       .references('id')
       .inTable('account')
       .onDelete('cascade')
       .onUpdate('cascade');
 
     // timestamps
-    table.timestamp('createdAt').defaultTo(db.fn.now());
-    table.timestamp('updatedAt').defaultTo(db.fn.now());
+    table.timestamp('created_at').defaultTo(db.fn.now());
+    table.timestamp('updated_at').defaultTo(null);
 
     table.index('name');
-    table.index('ownerId');
+    table.index('owner_id');
     table.index('url');
   });
 
   await db.schema.createTable('article_media', table => {
     table
-      .uuid('articleId')
+      .uuid('article_id')
       .notNullable()
       .references('id')
       .inTable('article')
       .onDelete('cascade')
       .onUpdate('cascade');
     table
-      .uuid('mediaId')
+      .uuid('media_id')
       .notNullable()
       .references('id')
       .inTable('media')
       .onDelete('cascade')
       .onUpdate('cascade');
 
-    table.primary(['articleId', 'mediaId']);
+    table.primary(['article_id', 'media_id']);
   });
 };
 

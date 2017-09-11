@@ -14,7 +14,7 @@ class ArticleTag extends BaseModel {
   static addTimestamps = true;
 
   static get idColumn() {
-    return ['articleId', 'tagId'];
+    return ['article_id', 'tag_id'];
   }
 
   static get relationMappings() {
@@ -23,7 +23,7 @@ class ArticleTag extends BaseModel {
         relation: BaseModel.BelongsToOneRelation,
         modelClass: Tag,
         join: {
-          from: 'article_tag.tagId',
+          from: 'article_tag.tag_id',
           to: 'tag.id',
         },
       },
@@ -31,7 +31,7 @@ class ArticleTag extends BaseModel {
         relation: BaseModel.BelongsToOneRelation,
         modelClass: Article,
         join: {
-          from: 'article_tag.articleId',
+          from: 'article_tag.article_id',
           to: 'article.id',
         },
       },

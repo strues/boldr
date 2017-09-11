@@ -17,8 +17,8 @@ export default {
     async resolve(obj, args) {
       const payload = await Tag.query()
         .insert({
-          name: args.input,
-          safeName: slugIt(args.input),
+          name: args.input.name,
+          safeName: slugIt(args.input.name),
         })
         .returning('*');
       return payload;

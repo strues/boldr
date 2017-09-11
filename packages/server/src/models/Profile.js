@@ -61,7 +61,7 @@ class Profile extends BaseModel {
       relation: BaseModel.BelongsToOneRelation,
       modelClass: `${__dirname}/Account`,
       join: {
-        from: 'profile.accountId',
+        from: 'profile.account_id',
         to: 'account.id',
       },
     },
@@ -70,7 +70,7 @@ class Profile extends BaseModel {
       modelClass: `${__dirname}/Social`,
       join: {
         from: 'profile.id',
-        to: 'profile_social_media.profileId',
+        to: 'profile_social_media.profile_id',
       },
     },
   };

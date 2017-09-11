@@ -46,7 +46,7 @@ class Article extends BaseModel {
       relation: BaseModel.BelongsToOneRelation,
       modelClass: `${__dirname}/Account`,
       join: {
-        from: 'article.authorId',
+        from: 'article.author_id',
         to: 'account.id',
       },
     },
@@ -56,8 +56,8 @@ class Article extends BaseModel {
       join: {
         from: 'article.id',
         through: {
-          from: 'article_tag.articleId',
-          to: 'article_tag.tagId',
+          from: 'article_tag.article_id',
+          to: 'article_tag.tag_id',
           modelClass: `${__dirname}/join/ArticleTag`,
         },
         to: 'tag.id',
@@ -67,7 +67,7 @@ class Article extends BaseModel {
       relation: BaseModel.BelongsToOneRelation,
       modelClass: `${__dirname}/Category`,
       join: {
-        from: 'article.categoryId',
+        from: 'article.category_id',
         to: 'category.id',
       },
     },
@@ -77,8 +77,8 @@ class Article extends BaseModel {
       join: {
         from: 'article.id',
         through: {
-          from: 'article_media.articleId',
-          to: 'article_media.mediaId',
+          from: 'article_media.article_id',
+          to: 'article_media.media_id',
         },
         to: 'media.id',
       },
@@ -93,7 +93,7 @@ class Article extends BaseModel {
     return Article.query()
       .offset(offset)
       .limit(limit)
-      .orderBy('createdAt', 'desc')
+      .orderBy('created_at', 'desc')
       .skipUndefined()
       .allowEager('[author,tags,media,category]');
   }

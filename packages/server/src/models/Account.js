@@ -25,13 +25,11 @@ class Account extends BaseModel {
       ip: { type: 'string' },
       resetToken: { type: 'string' },
       resetTokenExp: {
-        type: 'string',
-        format: 'date-time',
+        type: 'timestamp',
       },
       verificationToken: { type: 'string' },
       verificationTokenExp: {
-        type: 'string',
-        format: 'date-time',
+        type: 'timestamp',
       },
       verified: { type: 'boolean' },
     },
@@ -77,8 +75,8 @@ class Account extends BaseModel {
       join: {
         from: 'account.id',
         through: {
-          from: 'account_role.accountId',
-          to: 'account_role.roleId',
+          from: 'account_role.account_id',
+          to: 'account_role.role_id',
           modelClass: `${__dirname}/join/AccountRole`,
         },
         to: 'role.id',
@@ -89,7 +87,7 @@ class Account extends BaseModel {
       modelClass: `${__dirname}/Article`,
       join: {
         from: 'account.id',
-        to: 'article.authorId',
+        to: 'article.author_id',
       },
     },
     files: {
@@ -97,7 +95,7 @@ class Account extends BaseModel {
       modelClass: `${__dirname}/File`,
       join: {
         from: 'account.id',
-        to: 'file.ownerId',
+        to: 'file.owner_id',
       },
     },
     uploads: {
@@ -105,7 +103,7 @@ class Account extends BaseModel {
       modelClass: `${__dirname}/Media`,
       join: {
         from: 'account.id',
-        to: 'media.ownerId',
+        to: 'media.owner_id',
       },
     },
     profile: {
@@ -113,7 +111,7 @@ class Account extends BaseModel {
       modelClass: `${__dirname}/Profile`,
       join: {
         from: 'account.id',
-        to: 'profile.accountId',
+        to: 'profile.account_id',
       },
     },
   };
@@ -147,7 +145,6 @@ class Account extends BaseModel {
    * @returns {*}
    */
   async authenticate(plainText) {
-    this.lastLogin = new Date().toISOString();
     const passwordMatch = await bcrypt.compare(plainText, this.password);
     return passwordMatch;
   }

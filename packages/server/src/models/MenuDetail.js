@@ -36,7 +36,7 @@ class MenuDetail extends BaseModel {
       relation: BaseModel.BelongsToOneRelation,
       modelClass: `${__dirname}/Menu`,
       join: {
-        from: 'menu_detail.menuId',
+        from: 'menu_detail.menu_id',
         to: 'menu.id',
       },
     },
@@ -45,14 +45,14 @@ class MenuDetail extends BaseModel {
       modelClass: `${__dirname}/MenuDetail`,
       join: {
         from: 'menu_detail.id',
-        to: 'menu_detail.parentId',
+        to: 'menu_detail.parent_id',
       },
     },
     dropdown: {
       relation: BaseModel.BelongsToOneRelation,
       modelClass: `${__dirname}/MenuDetail`,
       join: {
-        from: 'menu_detail.parentId',
+        from: 'menu_detail.parent_id',
         to: 'menu_detail.id',
       },
     },

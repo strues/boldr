@@ -41,7 +41,7 @@ class ContentT extends BaseModel {
       modelClass: `${__dirname}/Entity`,
       join: {
         from: 'content_type.id',
-        to: 'entity.ctId',
+        to: 'entity.content_type_id',
       },
     },
   };
