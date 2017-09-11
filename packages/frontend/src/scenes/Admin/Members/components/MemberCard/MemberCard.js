@@ -36,7 +36,7 @@ const LeftSide = styled.div`
 `;
 
 type Props = {
-  user: UserType,
+  account: UserType,
   handleToggle: UserType => void,
   username: string,
   lastName: string,
@@ -47,7 +47,16 @@ type Props = {
 };
 
 const MemberCard = (props: Props) => {
-  const { user, handleToggle, username, roleName, avatarUrl, lastName, firstName, email } = props;
+  const {
+    account,
+    handleToggle,
+    username,
+    roleName,
+    avatarUrl,
+    lastName,
+    firstName,
+    email,
+  } = props;
   return (
     <MemListItem>
       <LeftSide>
@@ -64,7 +73,7 @@ const MemberCard = (props: Props) => {
         </UserInfoList>
       </LeftSide>
       <RightSide>
-        <Button onClick={() => handleToggle(user)} kind="primary">
+        <Button onClick={() => handleToggle(account)} kind="primary">
           Edit
         </Button>
       </RightSide>

@@ -39,14 +39,14 @@ export class MembersContainer extends Component<Props, *> {
     this.props.dispatch(toggleModal());
   };
 
-  toggleUser = (user: UserType) => {
+  toggleUser = (account: UserType) => {
     const { dispatch } = this.props;
-    dispatch(memberSelected(user));
+    dispatch(memberSelected(account));
     dispatch(toggleModal());
   };
 
   handleSubmit = (values: Object) => {
-    const userData = {
+    const accData = {
       username: values.username,
       firstName: values.firstName,
       lastName: values.lastName,
@@ -54,22 +54,30 @@ export class MembersContainer extends Component<Props, *> {
       id: this.props.currentMember.id,
     };
 
-    this.props.dispatch(updateMember(userData));
+    this.props.dispatch(updateMember(accData));
   };
   render() {
     const { loading, accounts } = this.props.data;
     const { isModalVisible, currentMember } = this.props;
+    const initialFormValues = {
+      email: currentMember.email,
+      firstName: currentMember.profile.firstName,
+      lastName: currentMember.profile.lastName,
+      role: currentMember.roles[0].id,
+      username: currentMember.profile.username,
+      avatarUrl: currentMember.profile.avatarUrl,
+    };
     if (loading) {
       return <Loader />;
     }
     return (
       <Members
         toggleUser={this.toggleUser}
-        users={accounts}
+        accounts={accounts}
         visible={isModalVisible}
         close={this.closeModal}
         handleSubmit={this.handleSubmit}
-        initialValues={currentMember}
+        initialValues={initialFormValues}
       />
     );
   }

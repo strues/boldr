@@ -3,20 +3,11 @@ import React from 'react';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import { Grid, Row, Col } from '@boldr/ui/Layout';
-import type { UserType } from '../../../types/boldr';
+import type { AuthInput, AccountLoginResponse } from '../../../types/boldr';
 import LoginForm from './LoginForm';
 
-type LoginFormInput = {
-  email: string,
-  password: string,
-};
-type LoginResponse = {
-  token: string,
-  user: UserType,
-};
-
 type Props = {
-  onSubmit: LoginFormInput => LoginResponse,
+  onSubmit: AuthInput => AccountLoginResponse,
 };
 const Spacer = styled.div`margin-top: 100px;`;
 

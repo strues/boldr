@@ -1,7 +1,16 @@
+
+################################################################################
+## Schema
+################################################################################
+
 schema {
-  query: Query
+  query: RootQuery
   mutation: RootMutation
 }
+
+################################################################################
+## Custom Scalars
+################################################################################
 
 # The URL scalar type represents URL addresses.
 scalar URL
@@ -24,6 +33,10 @@ enum CONTENT_STATUS {
   ARCHIVED
   DRAFT
 }
+
+################################################################################
+## Account
+################################################################################
 
 # An account belonging to a user.
 type Account {
@@ -70,6 +83,164 @@ type AccountLoginResponse {
   errors: [Error]
 }
 
+input AuthInput {
+  # The email address for the account to create or login to.
+  email: Email!
+  # The password belonging to the account.
+  password: String!
+}
+
+
+################################################################################
+## Profile
+################################################################################
+
+
+# The profile belonging to an account displays information such as username or a bio.
+type Profile {
+  # Unique identifier for the object.
+  id: ID!
+  # The id of the account the profile belongs to.
+  accountId: ID
+  # The username of the user
+  username: String
+  # The website of the user
+  website: URL
+  # The first name of the user
+  firstName: String
+  # The last name associated with the user
+  lastName: String
+  # Information about the user
+  bio: String
+  # The url for an avatar
+  avatarUrl: URL
+  # A url for an image to use as a profile background.
+  profileImage: URL
+  # Where the user lives
+  location: String
+  # Language the user prefers
+  language: String
+  # When the user was born
+  birthday: DateTime
+  # The timestamp when the object was deleted
+  deletedAt: DateTime
+  # The timestamp when the object was last updated
+  updatedAt: DateTime
+  # The timestamp when the object was created
+  createdAt: DateTime
+  # Social media profiles.
+  socialMedia: Social
+}
+
+input EditProfileInput {
+  # The username for the new user
+  username: String
+  # The website of the user
+  website: URL
+  # The first name of the user
+  firstName: String
+  # The last name associated with the user
+  lastName: String
+  # Information about the user
+  bio: String
+  # url of user's avatar picture
+  avatarUrl: URL
+  # Url for the user's profile background image
+  profileImage: URL
+  # Location the user lives
+  location: String
+}
+################################################################################
+## Role
+################################################################################
+
+# Restrict access to content or areas of your site using a role.
+type Role {
+  # Unique identifier for the object.
+  id: ID!
+  # A UUID (Universal Unique Identifier) is a 128-bit number used to uniquely identify some object or entity.
+  uuid: UUID
+  # A name for the object.
+  name: String
+  # An image for role identification
+  image: URL
+  # The role description
+  description: String
+  # Accounts belonging to a role.
+  accounts: [Account]
+  # The timestamp when the object was deleted
+  deletedAt: DateTime
+  # The timestamp when the object was last updated
+  updatedAt: DateTime
+  # The timestamp when the object was created
+  createdAt: DateTime
+}
+
+################################################################################
+## Social
+################################################################################
+
+# Social media portion of a profile for an account.
+type Social {
+  # Unique identifier for the object.
+  id: ID!
+  # The id of the profile the social media accounts belong to.
+  profileId: ID!
+  # Facebook profile url.
+  facebookUrl: URL
+  # Twitter profile url.
+  twitterUrl: URL
+  # Google plus profile url.
+  googleUrl: URL
+  # GitHub profile url.
+  githubUrl: URL
+  # LinkedIn profile url.
+  linkedinUrl: URL
+  # Stackoverflow profile url.
+  stackoverflowUrl: URL
+}
+
+
+################################################################################
+## Tag
+################################################################################
+
+# A tag relates content together
+type Tag {
+  # Unique identifier for the object.
+  id: ID!
+  # A name for the object.
+  name: String
+  # A normalized copy of the object name.
+  safeName: String
+  # The timestamp when the object was deleted
+  deletedAt: DateTime
+  # The timestamp when the object was last updated
+  updatedAt: DateTime
+  # The timestamp when the object was created
+  createdAt: DateTime
+  # Articles related to the tag
+  articles: [Article]
+  # Entities related to the tag
+  entities: [Entity]
+}
+
+input EditTagInput {
+  # The name of the tag
+  name: String!
+  # Automatically slugified version of the name
+  safeName: String
+}
+
+
+input CreateTagInput {
+  # The name of the tag
+  name: String!
+  # Automatically slugified version of the name
+  safeName: String
+}
+
+
 # A query for delivering the maximum amount of content
 type AllContent {
   articles: [Article]
@@ -77,6 +248,11 @@ type AllContent {
   entities: Entity
   categories: Category
 }
+
+
+################################################################################
+## Article
+################################################################################
 
 # A blog post or article
 type Article {
@@ -122,6 +298,63 @@ type Article {
   category: Category
 }
 
+input CreateArticleInput {
+  # The title of the article
+  title: String!
+  # The slug / normalized article title.
+  slug: String
+  # html content of the article
+  content: String
+  # Raw JSON of the article
+  rawContent: JSON
+  # Short description of the article
+  excerpt: String
+  # True if the article is featured
+  featured: Boolean
+  # True if the article is published
+  published: Boolean!
+  # The publishing status of content
+  status: CONTENT_STATUS
+  # url of the article feature image
+  image: String
+  # url of the article background image
+  heroImage: String
+  # Tags relating articles together
+  tags: [String]
+  # Id of the category
+  categoryId: ID
+}
+
+input EditArticleInput {
+  # The title of the article
+  title: String!
+  # The slug / normalized article title.
+  slug: String!
+  # html content of the article
+  content: String
+  # Raw JSON of the article
+  rawContent: JSON
+  # Short description of the article
+  excerpt: String!
+  # True if the article is featured
+  featured: Boolean
+  # True if the article is published
+  published: Boolean!
+  # The publishing status of content
+  status: CONTENT_STATUS
+  # url of the article feature image
+  image: URL
+  # url of the article hero image
+  heroImage: URL
+  # Id of the category
+  categoryId: ID
+}
+
+
+################################################################################
+## Category
+################################################################################
+
 # A category groups content together
 type Category {
   # Unique identifier for the object.
@@ -145,6 +378,22 @@ type Category {
   # Articles belonging to the category
   articles: [Article]
 }
+
+input CreateCategoryInput {
+  # A name for the object.
+  name: String
+  # An alphanumeric identifier for the object unique to its type.
+  slug: String
+  # An icon to use for the category
+  icon: String
+  # A description of the category
+  description: String
+}
+
+
+################################################################################
+## Entity
+################################################################################
 
 # A content item
 type Entity {
@@ -192,6 +441,10 @@ type Error {
   message: String
 }
 
+################################################################################
+## File
+################################################################################
+
 type File {
   # Unique identifier for the object.
   id: ID!
@@ -210,6 +463,21 @@ type File {
   # The timestamp when the object was created
   createdAt: DateTime
 }
+
+input Upload {
+  # The file name
+  name: String!
+  # The type of file.
+  type: String!
+  # The size of the file
+  size: Int!
+  # The path to the file.
+  path: String!
+}
+
+################################################################################
+## Media
+################################################################################
 
 # Uploaded images, videos or audio
 type Media {
@@ -238,6 +506,27 @@ type Media {
   # The timestamp when the object was created
   createdAt: DateTime
 }
+
+input UploadMediaInput {
+  # The file name
+  name: String!
+  # The type of file.
+  type: String!
+  # The size of the file
+  size: Int!
+  # The path to the file.
+  path: String!
+}
+
+input EditMediaInput {
+  # The file name
+  name: String!
+  # A description of the file
+  fileDescription: String
+}
+################################################################################
+## Menu / Navigation
+################################################################################
 
 # Navigation for the site
 type Menu {
@@ -290,6 +579,31 @@ type MenuDetail {
   # The timestamp when the object was created
   createdAt: DateTime
 }
+input EditDetailInput {
+  # The id
+  id: ID
+  # The title text for the menu link
+  title: String
+  # Lowercase, normalized, name
+  safeName: String
+  # Custom css classname for the link
+  cssClassname: String
+  # True if the item has a dropdown
+  hasDropdown: Boolean
+  # True if the item is a dropdown menu item
+  isDropdown: Boolean
+  # The display order
+  order: Int
+  # The link
+  href: String
+  # Icon kind
+  icon: String
+}
+
+
+################################################################################
+## Page
+################################################################################
 
 # Page of the website
 type Page {
@@ -315,63 +629,9 @@ type Page {
   createdAt: DateTime
 }
 
-# The profile belonging to an account displays information such as username or a bio.
-type Profile {
-  # Unique identifier for the object.
-  id: ID!
-  # The id of the account the profile belongs to.
-  accountId: ID
-  # The username of the user
-  username: String
-  # The website of the user
-  website: URL
-  # The first name of the user
-  firstName: String
-  # The last name associated with the user
-  lastName: String
-  # Information about the user
-  bio: String
-  # The url for an avatar
-  avatarUrl: URL
-  # A url for an image to use as a profile background.
-  profileImage: URL
-  # Where the user lives
-  location: String
-  # Language the user prefers
-  language: String
-  # When the user was born
-  birthday: DateTime
-  # The timestamp when the object was deleted
-  deletedAt: DateTime
-  # The timestamp when the object was last updated
-  updatedAt: DateTime
-  # The timestamp when the object was created
-  createdAt: DateTime
-  # Social media profiles.
-  socialMedia: Social
-}
-
-# Restrict access to content or areas of your site using a role.
-type Role {
-  # Unique identifier for the object.
-  id: ID!
-  # A UUID (Universal Unique Identifier) is a 128-bit number used to uniquely identify some object or entity.
-  uuid: UUID
-  # A name for the object.
-  name: String
-  # An image for role identification
-  image: URL
-  # The role description
-  description: String
-  # Accounts belonging to a role.
-  accounts: [Account]
-  # The timestamp when the object was deleted
-  deletedAt: DateTime
-  # The timestamp when the object was last updated
-  updatedAt: DateTime
-  # The timestamp when the object was created
-  createdAt: DateTime
-}
+################################################################################
+## Setting
+################################################################################
 
 # Editable site settings
 type Setting {
@@ -387,45 +647,20 @@ type Setting {
   description: String
 }
 
-# Social media portion of a profile for an account.
-type Social {
-  # Unique identifier for the object.
-  id: ID!
-  # The id of the profile the social media accounts belong to.
-  profileId: ID!
-  # Facebook profile url.
-  facebookUrl: URL
-  # Twitter profile url.
-  twitterUrl: URL
-  # Google plus profile url.
-  googleUrl: URL
-  # GitHub profile url.
-  githubUrl: URL
-  # LinkedIn profile url.
-  linkedinUrl: URL
-  # Stackoverflow profile url.
-  stackoverflowUrl: URL
+input SettingInput {
+  # The setting option
+  key: String
+  # The value of the setting
+  value: String
+  # A non-normalized key
+  label: String
+  # The description for what the setting does.
+  description: String
 }
 
-# A tag relates content together
-type Tag {
-  # Unique identifier for the object.
-  id: ID!
-  # A name for the object.
-  name: String
-  # A normalized copy of the object name.
-  safeName: String
-  # The timestamp when the object was deleted
-  deletedAt: DateTime
-  # The timestamp when the object was last updated
-  updatedAt: DateTime
-  # The timestamp when the object was created
-  createdAt: DateTime
-  # Articles related to the tag
-  articles: [Article]
-  # Entities related to the tag
-  entities: [Entity]
-}
+################################################################################
+## Content Type
+################################################################################
 
 # Defines a class of entities.
 type ContentType {
@@ -449,84 +684,6 @@ type ContentType {
   createdAt: DateTime
 }
 
-input Upload {
-  # The file name
-  name: String!
-  # The type of file.
-  type: String!
-  # The size of the file
-  size: Int!
-  # The path to the file.
-  path: String!
-}
-
-input UploadMediaInput {
-  # The file name
-  name: String!
-  # The type of file.
-  type: String!
-  # The size of the file
-  size: Int!
-  # The path to the file.
-  path: String!
-}
-
-input SettingInput {
-  # The setting option
-  key: String
-  # The value of the setting
-  value: String
-  # A non-normalized key
-  label: String
-  # The description for what the setting does.
-  description: String
-}
-
-input AuthInput {
-  # The email address for the account to create or login to.
-  email: Email!
-  # The password belonging to the account.
-  password: String!
-}
-
-input CreateArticleInput {
-  # The title of the article
-  title: String!
-  # The slug / normalized article title.
-  slug: String
-  # html content of the article
-  content: String
-  # Raw JSON of the article
-  rawContent: JSON
-  # Short description of the article
-  excerpt: String
-  # True if the article is featured
-  featured: Boolean
-  # True if the article is published
-  published: Boolean!
-  # The publishing status of content
-  status: CONTENT_STATUS
-  # url of the article feature image
-  image: String
-  # url of the article background image
-  heroImage: String
-  # Tags relating articles together
-  tags: [String]
-  # Id of the category
-  categoryId: ID
-}
-
-input CreateCategoryInput {
-  # A name for the object.
-  name: String
-  # An alphanumeric identifier for the object unique to its type.
-  slug: String
-  # An icon to use for the category
-  icon: String
-  # A description of the category
-  description: String
-}
-
 input CreateContentTypeInput {
   # A name for the object.
   name: String
@@ -538,93 +695,8 @@ input CreateContentTypeInput {
   description: String
 }
 
-input CreateTagInput {
-  # The name of the tag
-  name: String!
-  # Automatically slugified version of the name
-  safeName: String
-}
 
-input EditArticleInput {
-  # The title of the article
-  title: String!
-  # The slug / normalized article title.
-  slug: String!
-  # html content of the article
-  content: String
-  # Raw JSON of the article
-  rawContent: JSON
-  # Short description of the article
-  excerpt: String!
-  # True if the article is featured
-  featured: Boolean
-  # True if the article is published
-  published: Boolean!
-  # The publishing status of content
-  status: CONTENT_STATUS
-  # url of the article feature image
-  image: URL
-  # url of the article hero image
-  heroImage: URL
-  # Id of the category
-  categoryId: ID
-}
-
-input EditDetailInput {
-  # The id
-  id: ID
-  # The title text for the menu link
-  title: String
-  # Lowercase, normalized, name
-  safeName: String
-  # Custom css classname for the link
-  cssClassname: String
-  # True if the item has a dropdown
-  hasDropdown: Boolean
-  # True if the item is a dropdown menu item
-  isDropdown: Boolean
-  # The display order
-  order: Int
-  # The link
-  href: String
-  # Icon kind
-  icon: String
-}
-
-input EditMediaInput {
-  # The file name
-  name: String!
-  # A description of the file
-  fileDescription: String
-}
-
-input EditProfileInput {
-  # The username for the new user
-  username: String
-  # The website of the user
-  website: URL
-  # The first name of the user
-  firstName: String
-  # The last name associated with the user
-  lastName: String
-  # Information about the user
-  bio: String
-  # url of user's avatar picture
-  avatarUrl: URL
-  # Url for the user's profile background image
-  profileImage: URL
-  # Location the user lives
-  location: String
-}
-
-input EditTagInput {
-  # The name of the tag
-  name: String!
-  # Automatically slugified version of the name
-  safeName: String
-}
-
-type Query {
+type RootQuery {
   # A query for a listing of all accounts
   accounts(
     # The number of accounts to offset

@@ -165,6 +165,7 @@ type Props = {
   author: Object,
   tags: TagsType,
 };
+
 const ArticleCard = (props: Props) => {
   const formattedDate = format(props.createdAt, 'MM/DD/YYYY');
   return (

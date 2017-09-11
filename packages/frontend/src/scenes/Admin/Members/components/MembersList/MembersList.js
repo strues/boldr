@@ -1,7 +1,7 @@
 /* @flow */
 import React from 'react';
 import styled from 'styled-components';
-import type { User } from '../../../../../types/boldr';
+import type { AccountsType, AccountType } from '../../../../../types/boldr';
 import MemberCard from '../MemberCard';
 
 const MemList = styled.ul`
@@ -9,26 +9,26 @@ const MemList = styled.ul`
   padding-left: 0;
 `;
 
-const MembersList = (props: { users: Array<User>, toggleUser: User => User }) => {
-  function handleToggle(user) {
+const MembersList = (props: { accounts: AccountsType, toggleUser: AccountType => AccountType }) => {
+  function handleToggle(account) {
     // const userId = user.id;
-    props.toggleUser(user);
+    props.toggleUser(account);
   }
   return (
-    <div className="boldrui-members-list">
+    <div className="boldr-members-list">
       <MemList>
-        {props.users.map(user => (
+        {props.accounts.map(account => (
           <MemberCard
-            id={user.id}
-            avatarUrl={user.profile.avatarUrl}
-            email={user.email}
-            roleName={user.roles[0].name}
-            key={user.id}
-            firstName={user.profile.firstName}
-            lastName={user.profile.lastName}
-            username={user.profile.username}
+            id={account.id}
+            avatarUrl={account.profile.avatarUrl}
+            email={account.email}
+            roleName={account.roles[0].name}
+            key={account.id}
+            firstName={account.profile.firstName}
+            lastName={account.profile.lastName}
+            username={account.profile.username}
             handleToggle={handleToggle}
-            user={user}
+            account={account}
           />
         ))}
       </MemList>

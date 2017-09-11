@@ -7,7 +7,7 @@ exports[`<Author /> renders snapshot 1`] = `
   <styled.div>
     <Avatar
       role="presentation"
-      src="abcd"
+      src="https://boldr.io/logo.png"
       suffixes={
         Array [
           "red",
@@ -36,10 +36,10 @@ exports[`<Author /> renders snapshot 1`] = `
   <styled.div>
     <Link
       replace={false}
-      to="/profiles/hey"
+      to="/profiles/User"
     >
       <Heading
-        text="hey"
+        text="User"
         type="h3"
       />
     </Link>

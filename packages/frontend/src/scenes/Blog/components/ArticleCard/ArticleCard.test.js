@@ -5,25 +5,34 @@ import { shallowToJson } from 'enzyme-to-json';
 import ArticleCard from './ArticleCard';
 
 const ArticleData = {
-  image: 'http://boldr.io/images/logo.png',
-  title: 'Test Post',
-  excerpt: 'An excerpt',
-  slug: 'test-post',
-  tags: [{ name: 'abc', id: 1 }],
+  id: 'c265ed52-b9c4-42e8-9b46-7bc409bfec48',
+  featured: true,
+  slug: 'this-test-slug',
+  title: 'This Test Slug',
+  image: 'https://boldr.io/logo.png',
+  createdAt: '2017-09-11 04:33:36.524+00',
+  excerpt: 'Abcdc',
+  rawContent: {},
+  tags: [{ id: 'c265ed52-b9c4-42e8-9b46-7bc409bfec33', name: 'Tag' }],
   author: {
-    username: 'joe',
-    firstName: 'Joe',
-    avatarUrl: 'http://boldr.io/images/logo.png',
+    id: 'c265ed52-b9c4-42e8-9b46-7bc409bfec89',
+    email: 'admin@boldr.io',
+    profile: {
+      username: 'User',
+      firstName: 'Jobe',
+      lastName: 'John',
+      avatarUrl: 'https://boldr.io/logo.png',
+    },
   },
 };
 
 describe('<ArticleCard />', () => {
   it('accepts props and renders them.', () => {
     const wrapper = shallow(<ArticleCard {...ArticleData} />);
-    expect(wrapper.instance().props.image).toBe('http://boldr.io/images/logo.png');
-    expect(wrapper.instance().props.title).toBe('Test Post');
-    expect(wrapper.instance().props.excerpt).toBe('An excerpt');
-    expect(wrapper.instance().props.slug).toBe('test-post');
+    expect(wrapper.instance().props.image).toBe('https://boldr.io/logo.png');
+    expect(wrapper.instance().props.title).toBe('This Test Slug');
+    expect(wrapper.instance().props.excerpt).toBe('Abcdc');
+    expect(wrapper.instance().props.slug).toBe('this-test-slug');
   });
   it('renders snapshot', () => {
     const wrapper = shallow(<ArticleCard {...ArticleData} />);

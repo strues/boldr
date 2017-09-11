@@ -8,7 +8,7 @@ import Login from './Login';
 
 const withMutation = graphql(LOGIN_USER_MUTATION, {
   props: ({ mutate }) => ({
-    loginUser: formInput =>
+    loginAccount: formInput =>
       mutate({
         variables: {
           input: {
@@ -23,20 +23,21 @@ const withMutation = graphql(LOGIN_USER_MUTATION, {
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onSubmit: formInput => {
     ownProps
-      .loginUser(formInput)
+      .loginAccount(formInput)
       .then(res => {
-        if (res.data.loginUser.token) {
-          return dispatch(doLogin(res.data.loginUser));
+        if (res.data.loginAccount.errors !== null) {
+          loginUserError(err);
+          return dispatch(
+            sendNotification({
+              type: 'error',
+              text: 'There was a problem with your login details',
+            }),
+          );
         }
+        return dispatch(doLogin(res.data.loginAccount));
       })
       .catch(err => {
         loginUserError(err);
-        return dispatch(
-          sendNotification({
-            type: 'error',
-            text: 'There was a problem with your login details',
-          }),
-        );
       });
   },
 });

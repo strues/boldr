@@ -6,7 +6,7 @@ import MembersList from './MembersList';
 
 describe('<MembersList />', () => {
   it('should render with the proper heading', () => {
-    const renderedComponent = shallow(<MembersList users={[]} />);
-    expect(renderedComponent.find('.boldrui-members-list')).toHaveClassName('boldrui-members-list');
+    const renderedComponent = shallow(<MembersList accounts={[]} />);
+    expect(renderedComponent.find('.boldr-members-list')).toHaveClassName('boldr-members-list');
   });
 });

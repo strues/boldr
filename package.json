@@ -12,6 +12,7 @@
     "postinstall": "npm run bootstrap",
     "dev": "NODE_ENV=development DEBUG=boldr:* nodemon",
     "precommit": "lint-staged --verbose",
+    "prepush": "npm test -- -u",
     "prettier": "node ./internal/scripts/prettier.js write",
     "test": "jest --config ./jest.config.js"
   },

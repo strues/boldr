@@ -1,5 +1,5 @@
 /* @flow */
-import * as React from 'react';
+import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 // internal
 import Row from '@boldr/ui/Layout/Row';

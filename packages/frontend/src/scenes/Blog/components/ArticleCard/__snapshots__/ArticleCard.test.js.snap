@@ -1,47 +1,49 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ArticleCard /> renders snapshot 1`] = `
-<styled.article>
+<styled.article
+  featuring={true}
+>
   <Styled(Link)
-    to="/blog/test-post"
+    to="/blog/this-test-slug"
   >
     <styled.div
-      image="http://boldr.io/images/logo.png"
+      image="https://boldr.io/logo.png"
     />
   </Styled(Link)>
   <styled.div>
     <Styled(Link)
-      to="/blog/test-post"
+      to="/blog/this-test-slug"
     >
       <styled.header>
         <styled.h2>
-          Test Post
+          This Test Slug
         </styled.h2>
       </styled.header>
       <styled.section>
         <p>
-          An excerpt
+          Abcdc
         </p>
       </styled.section>
     </Styled(Link)>
     <styled.footer>
       <Styled(Link)
-        to="/profiles/joe"
+        to="/profiles/User"
       >
         <styled.img
-          alt="Joe"
-          src="http://boldr.io/images/logo.png"
+          alt="Jobe"
+          src="https://boldr.io/logo.png"
         />
         <styled.span>
-          Joe
+          Jobe
         </styled.span>
       </Styled(Link)>
       <TagBlock
         tags={
           Array [
             Object {
-              "id": 1,
-              "name": "abc",
+              "id": "c265ed52-b9c4-42e8-9b46-7bc409bfec33",
+              "name": "Tag",
             },
           ]
         }

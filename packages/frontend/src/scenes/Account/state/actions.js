@@ -38,11 +38,11 @@ export function doSignup(signupUser) {
  * thunk action sending data to login a user
  * @param  {String} token the JWT returned on a successful login
  */
-export function doLogin(loginUser) {
+export function doLogin(loginAccount) {
   return dispatch => {
-    setToken(loginUser.token);
-    dispatch(loginUserSuccess(loginUser));
-    dispatch(setUserLoggedIn(loginUser));
+    setToken(loginAccount.token);
+    dispatch(loginUserSuccess(loginAccount));
+    dispatch(setUserLoggedIn(loginAccount));
     dispatch(
       sendNotification({
         text: 'Welcome back!',
@@ -53,18 +53,18 @@ export function doLogin(loginUser) {
   };
 }
 
-export function loginUserSuccess(loginUser) {
+export function loginUserSuccess(loginAccount) {
   return {
     type: t.LOGIN_SUCCESS,
-    token: loginUser.token,
+    token: loginAccount.token,
     info: {
-      firstName: loginUser.user.firstName,
-      lastName: loginUser.user.lastName,
-      email: loginUser.user.email,
-      username: loginUser.user.username,
-      avatarUrl: loginUser.user.avatarUrl,
-      role: loginUser.user.roles[0].name,
-      roleId: loginUser.user.roles[0].id,
+      firstName: loginAccount.account.profile.firstName,
+      lastName: loginAccount.account.profile.lastName,
+      email: loginAccount.account.email,
+      username: loginAccount.account.profile.username,
+      avatarUrl: loginAccount.account.profile.avatarUrl,
+      role: loginAccount.account.roles[0].name,
+      roleId: loginAccount.account.roles[0].id,
     },
   };
 }
@@ -110,10 +110,9 @@ export const checkAuth = token => {
         return response.json();
       })
       .then(res => {
-        // const user = res;
         return dispatch({
           type: t.CHECK_AUTH_SUCCESS,
-          user: res,
+          account: res,
           token,
         });
       })
@@ -221,10 +220,10 @@ export function resetPassword(password, token) {
   };
 }
 
-export function setUserLoggedIn(loginUser) {
+export function setUserLoggedIn(loginAccount) {
   return {
     type: t.SET_USER_LOGGED_IN,
-    user: loginUser.user,
+    user: loginAccount.account,
   };
 }
 

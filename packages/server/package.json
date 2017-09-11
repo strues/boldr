@@ -91,7 +91,6 @@
     "eslint": "^4.6.1",
     "eslint-config-boldr": "^0.12.12",
     "fast-async": "^6.3.0",
-    "performance-now": "^2.1.0",
     "prettier": "1.6.1"
   }
 }

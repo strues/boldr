@@ -55,16 +55,14 @@ class Content extends React.Component<Props, State> {
           </List>
         </LeftCol>
         <MidCol shrink={0}>
-          <List>
+          {/* <List>
             {this.props.contentTypes.map(contentType => (
               <ListItem key={contentType.id}>{contentType.name}</ListItem>
             ))}
           </List>
-          <List>{this.props.tags.map(tag => <ListItem key={tag.id}>{tag.name}</ListItem>)}</List>
+          <List>{this.props.tags.map(tag => <ListItem key={tag.id}>{tag.name}</ListItem>)}</List> */}
         </MidCol>
-        <Flex>
-          <CreateContainer />
-        </Flex>
+        <Flex>{/* <CreateContainer /> */}</Flex>
       </Flex>
     );
   }

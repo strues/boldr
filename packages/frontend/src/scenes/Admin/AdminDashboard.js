@@ -43,10 +43,11 @@ export class AdminDashboard extends React.Component<Props, *> {
 }
 
 function mapStateToProps(state) {
+  const selectCu = selectCurrentUser();
   return {
     dashboard: selectDashboard(state),
     boldr: selectBoldr(state),
-    currentUser: selectCurrentUser(state),
+    currentUser: selectCu(state),
     router: selectRouter(state),
     ui: selectUi(state),
   };

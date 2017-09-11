@@ -56,9 +56,85 @@ export interface RawContent {
   entityMap: Object,
 }
 
-export type Article = {
+type Account = {
   // Unique identifier for the object.
-  id: string,
+  id: UUID,
+  // Email address belonging to the account
+  email: string,
+  // true if email is verified, false otherwise
+  verified: boolean,
+  // The ip address of the person performing the reset
+  ip?: string,
+  // The reset token
+  resetToken?: string,
+  // When the token expires.
+  resetTokenExp?: string,
+  // The account verification token
+  verificationToken?: string,
+  // When the verification expires.
+  verificationTokenExp?: string,
+  // When the account was last logged in to.
+  lastLogin?: string,
+  // The timestamp when the object was deleted
+  deletedAt?: string,
+  // The timestamp when the object was last updated
+  updatedAt?: string,
+  // The timestamp when the object was created
+  createdAt?: string,
+  // Roles the account belongs to.
+  roles: RolesType,
+  // Profile belonging to the account.
+  profile: ProfileType,
+  // Articles the user has written
+  articles?: ArticlesType,
+  // Articles the user has written
+  uploads?: MediasType,
+};
+
+export type AccountType = Account;
+export type AccountsType = Array<Account>;
+
+type Profile = {
+  // Unique identifier for the object.
+  id: UUID,
+  // The id of the account the profile belongs to.
+  accountId: UUID,
+  // The username of the user
+  username: string,
+  // The website of the user
+  website?: string,
+  // The first name of the user
+  firstName: string,
+  // The last name associated with the user
+  lastName: string,
+  // Information about the user
+  bio?: string,
+  // The url for an avatar
+  avatarUrl: string,
+  // A url for an image to use as a profile background.
+  profileImage?: string,
+  // Where the user lives
+  location?: string,
+  // Language the user prefers
+  language?: string,
+  // When the user was born
+  birthday?: string,
+  // The timestamp when the object was deleted
+  deletedAt?: string,
+  // The timestamp when the object was last updated
+  updatedAt?: string,
+  // The timestamp when the object was created
+  createdAt?: string,
+  // Social media profiles.
+  socialMedia?: Social,
+};
+
+export type ProfileType = Profile;
+export type ProfilesType = Array<Profile>;
+
+type Article = {
+  // Unique identifier for the object.
+  id: UUID,
   // The title of the article
   title: string,
   // An alphanumeric identifier for the object unique to its type.
@@ -73,12 +149,14 @@ export type Article = {
   featured?: boolean,
   // True if the article is published
   published: boolean,
+  // The publishing status of content
+  status: Status,
   // url of the article feature image
   image: string,
   // url of the article hero image
   heroImage?: string,
   categoryId?: string,
-  userId?: string,
+  authorId?: string,
 
   // The timestamp when the object was deleted
   deletedAt?: string,
@@ -90,21 +168,22 @@ export type Article = {
   createdAt?: string,
 
   // Tags relating articles together
-  tags: Array<Tag>,
+  tags?: TagsType,
 
   // Media uploaded with the article
-  media?: Array<Media>,
+  media?: MediasType,
 
   // Users belonging to a role.
-  author: User,
+  author?: AccountType,
 };
+
 export type ArticlesType = Array<Article>;
 export type ArticleType = Article;
 
 // A category groups content together
-export type Category = {
+type Category = {
   // Unique identifier for the object.
-  id: string,
+  id: UUID,
 
   // A name for the object.
   name: string,
@@ -135,7 +214,8 @@ export type Category = {
 
 export type CategoryType = Category;
 export type CategoriesType = Array<Category>;
-export type Media = {
+
+type Media = {
   // Unique identifier for the object.
   id: string,
 
@@ -164,7 +244,7 @@ export type Media = {
   url: string,
 
   // The id of the user the file belongs to.
-  userId: string,
+  ownerId: string,
 
   // The timestamp when the object was last updated
   updatedAt?: string,
@@ -175,7 +255,8 @@ export type Media = {
 
 export type MediaType = Media;
 export type MediasType = Array<Media>;
-export type Entity = {
+
+type Entity = {
   // Unique identifier for the object.
   id: UUID,
 
@@ -202,7 +283,7 @@ export type Entity = {
   image?: string,
 
   // The id of the creator
-  userId?: UUID,
+  authorId?: UUID,
 
   // The content type id
   ctId?: UUID,
@@ -225,15 +306,16 @@ export type Entity = {
   category?: CategoryType,
 
   // User who created the entity.
-  author?: UserType,
+  author?: AccountType,
 };
+
 export type EntityType = Entity;
 export type EntitiesType = Array<EntityType>;
 // Variations of status for content
 export type Status = 'published' | 'archived' | 'draft';
 
 // A tag relates content together
-export type ContentType = {
+type ContentType = {
   // Unique identifier for the object.
   id: UUID,
 
@@ -265,19 +347,19 @@ export type ContentType = {
 export type ContentTypeType = ContentType;
 export type ContentTypes = Array<ContentType>;
 
-export type Tag = {
+type Tag = {
   // Unique identifier for the object.
-  id: string,
+  id: UUID,
 
   // A name for the object.
   name: string,
 
   // A description of the tag
-  description?: string,
+  safeName?: string,
 
   // Articles related to the tag
-  articles?: ArticleType,
-
+  articles?: ArticlesType,
+  entities?: EntitiesType,
   // The timestamp when the object was deleted
   deletedAt?: string,
 
@@ -291,84 +373,12 @@ export type Tag = {
 export type TagsType = Array<Tag>;
 export type TagType = Tag;
 
-export type User = {
+type Social = {
   // Unique identifier for the object.
-  id: string,
+  id: UUID,
 
-  // The timestamp when the object was deleted
-  deletedAt?: string,
-
-  // The timestamp when the object was last updated
-  updatedAt?: string,
-
-  // The timestamp when the object was created
-  createdAt?: string,
-  // Date the user last logged in
-  lastLoging?: string,
-  // The user email
-  email: string,
-
-  // The username of the user
-  username: string,
-
-  // true if email is verified, false otherwise
-  verified: boolean,
-
-  // The website of the user
-  website?: string,
-
-  // The first name of the user
-  firstName: string,
-
-  // The last name associated with the user
-  lastName?: string,
-
-  // Information about the user
-  bio?: string,
-
-  // url of user's avatar picture
-  avatarUrl?: string,
-
-  // Url for the user's profile background image
-  profileImage?: string,
-
-  // Location the user lives
-  location?: string,
-
-  // Language the user prefers
-  language?: string,
-
-  // When the user was born
-  birthday?: string,
-
-  // Roles the user belongs to.
-  roles: Array<Role>,
-
-  // Social media profiles of the user.
-  socialMedia?: Social,
-
-  // Articles the user has written
-  articles?: ArticleType,
-
-  // Articles the user has written
-  uploads?: Array<Media>,
-
-  // Account verification token belonging to the user.
-  verificationToken?: VerificationToken,
-
-  // Password reset token belonging to the user.
-  resetToken?: ResetToken,
-};
-
-export type UserType = User;
-export type UsersType = Array<User>;
-
-export type Social = {
-  // Unique identifier for the object.
-  id: string,
-
-  // The unique identifier for the user for the identity.
-  userId?: string,
+  // The id of the profile the social media accounts belong to.
+  profileId?: UUID,
 
   // The Facebook profile url for the user.
   facebookUrl?: string,
@@ -389,30 +399,7 @@ export type Social = {
   stackoverflowUrl?: string,
 };
 
-export type VerificationToken = {
-  // Unique identifier for the object.
-  id: string,
-
-  // The ip address of the person performing the reset
-  ip?: string,
-
-  // The reset token
-  token: string,
-
-  // True if the token has been used before.
-  used: boolean,
-
-  // The id of the user the token belongs to
-  userId: string,
-
-  // The timestamp when the object was last updated
-  updatedAt?: string,
-
-  // The timestamp when the object was created
-  createdAt?: string,
-};
-
-export type Setting = {
+type Setting = {
   // Unique identifier for the object.
   id: string,
 
@@ -428,34 +415,13 @@ export type Setting = {
   // The description for what the setting does.
   description: string,
 };
+
 export type SettingType = Setting;
 export type SettingsType = Array<Setting>;
-export type ResetToken = {
+
+type Role = {
   // Unique identifier for the object.
-  id: string,
-
-  // The ip address of the person performing the reset
-  ip: string,
-
-  // The reset token
-  token: string,
-
-  // True if the token has been used before.
-  used: boolean,
-
-  // The user id owning the token
-  userId: string,
-
-  // The timestamp when the object was last updated
-  updatedAt?: string,
-
-  // The timestamp when the object was created
-  createdAt?: string,
-};
-
-export type Role = {
-  // Unique identifier for the object.
-  id: string,
+  id: number,
 
   // A UUID (Universal Unique Identifier) is a 128-bit number used to uniquely identify some object or entity.
   uuid: string,
@@ -470,7 +436,7 @@ export type Role = {
   description: string,
 
   // Users belonging to a role.
-  users?: Array<User>,
+  accounts?: AccountsType,
 
   // The timestamp when the object was deleted
   deletedAt?: string,
@@ -482,19 +448,19 @@ export type Role = {
   createdAt?: string,
 };
 
+export type RoleType = Role;
+export type RolesType = Array<Role>;
+
 // Navigation for the site
-export type Menu = {
+type Menu = {
   // Unique identifier for the object.
-  id: string,
+  id: number,
 
   // A UUID (Universal Unique Identifier) is a 128-bit number used to uniquely identify some object or entity.
-  uuid: string,
+  uuid?: string,
 
   // A name for the object.
   name: string,
-
-  // Custom css classname for the link
-  attributes?: string,
 
   // True if the menu should be hidden from unauth
   restricted: boolean,
@@ -508,19 +474,12 @@ export type Menu = {
   // The timestamp when the object was created
   createdAt?: string,
 };
-export type DetailChild = {
-  href: string,
-  icon?: string,
-  id: string,
-  safeName: string,
-  title: string,
-};
-export type MenuDetailChildren = {
-  items: Array<DetailChild>,
-  key: string,
-};
+
+export type MenuType = Menu;
+export type MenusType = Array<Menu>;
+
 // links and other menu content
-export type MenuDetail = {
+type MenuDetail = {
   // Unique identifier for the object.
   id: string,
 
@@ -535,21 +494,16 @@ export type MenuDetail = {
 
   // True if the item has a dropdown
   hasDropdown: boolean,
-
+  isDropdown: boolean,
   // The display order
   order: number,
-
-  // Mobile only link
-  mobileHref?: string,
-
+  menuId: number,
+  parentId?: UUID,
   // The link
   href: string,
 
   // Icon kind
   icon?: string,
-
-  // Children are dropdown links
-  children: MenuDetailChildren,
 
   // The timestamp when the object was deleted
   deletedAt?: string,
@@ -561,9 +515,12 @@ export type MenuDetail = {
   createdAt?: string,
 };
 
+export type MenuDetailType = MenuDetail;
+export type MenuDetailsType = Array<MenuDetail>;
+
 export type CurrentUser = {
   // Unique identifier for the object.
-  id: string,
+  id: UUID,
   // The user email
   email: string,
   // The username of the user
@@ -588,3 +545,28 @@ export type CurrentUser = {
   // Social media profiles of the user.
   socialMedia: Social,
 };
+export type AccountLoginResponse = {
+  // The JSONWebToken for the user.
+  token: string,
+  // The user who logged in.
+  account: AccountType,
+  // Any auth related errors.
+  errors?: ErrorsType,
+};
+
+export type AuthInput = {
+  // The email address for the account to create or login to.
+  email: string,
+  // The password belonging to the account.
+  password: string,
+};
+
+type Error = {
+  // HTTP status code
+  code?: number,
+  // The error message
+  message?: string,
+};
+
+export type ErrorType = Error;
+export type ErrorsType = Array<Error>;
