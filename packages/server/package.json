@@ -91,6 +91,7 @@
     "eslint": "^4.6.1",
     "eslint-config-boldr": "^0.12.12",
     "fast-async": "^6.3.0",
+    "mockdate": "^2.0.2",
     "prettier": "1.6.1"
   }
 }
