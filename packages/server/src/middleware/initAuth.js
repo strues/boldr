@@ -13,6 +13,7 @@ import rbac from './rbac';
 const config = getConfig();
 
 const env = process.env.NODE_ENV || 'development';
+// Configure Express Session options
 const sessionOptions = {
   secret: config.server.token.secret,
   name: 'boldr:sid',
@@ -31,6 +32,12 @@ if (env === 'production') {
   // Enable the secure cookie when we are in production mode.
   sessionOptions.cookie.secure = true;
 }
+
+/**
+ * Extracts a JWT from a request header or query string
+ * @param  {Object} req the request object
+ * @return {string}     the token
+ */
 function fromHeaderOrQuerystring(req) {
   if (req.headers.authorization && req.headers.authorization.split(' ')[0] === 'Bearer') {
     return req.headers.authorization.split(' ')[1];

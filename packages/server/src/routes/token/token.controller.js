@@ -4,8 +4,7 @@ import addDays from 'date-fns/add_days';
 import { mailer, generateHash } from '../../services';
 import { passwordModifiedEmail, forgotPasswordEmail } from '../../services/mailer/templates';
 import Account from '../../models/Account';
-import VerificationToken from '../../models/VerificationToken';
-import ResetToken from '../../models/ResetToken';
+
 /**
  * forgottenPassword takes an email address, generates a reset token, updates the user in the database, then sends
  * an email with the token to reset the user password.

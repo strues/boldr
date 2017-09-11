@@ -4,7 +4,7 @@ import Role from '../../models/Role';
 import RoleType from '../../schema/type/role';
 
 export default {
-  getRoles: {
+  roles: {
     type: new GraphQLList(RoleType),
     description: 'A query for a listing of all roles',
     async resolve() {

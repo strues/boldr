@@ -20,8 +20,8 @@ const MenuType = new GraphQLObjectType({
     details: {
       type: new GraphQLList(MenuDetailType),
       description: 'Links',
-      async resolve(root, args, context) {
-        const details = await context.details.load(root.id);
+      async resolve(obj, args, context) {
+        const details = await context.details.load(obj.id);
         return details;
       },
     },

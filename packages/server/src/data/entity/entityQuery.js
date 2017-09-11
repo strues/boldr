@@ -20,7 +20,7 @@ export default {
       },
     },
     // eslint-disable-next-line
-    async resolve(_, { offset, limit }, context) {
+    async resolve(obj, { offset, limit }, context) {
       const entities = await Entity.query()
         .offset(offset)
         .limit(limit)

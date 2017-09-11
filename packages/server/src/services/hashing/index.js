@@ -1,1 +1,1 @@
-export { generateHash, comparePassword } from './hashing';
+export { generateHash } from './hashing';

@@ -24,7 +24,7 @@ export default {
         description: 'The file to upload',
       },
     },
-    async resolve(_, args, context) {
+    async resolve(obj, args, context) {
       const id = shortId.generate();
       const actualFileName = id + path.extname(args.file.name);
 
@@ -68,7 +68,7 @@ export default {
         description: 'The required fields for editing a media file.',
       },
     },
-    async resolve(_, args) {
+    async resolve(obj, args) {
       debug(args);
       const updatedMedia = await Media.query().patchAndFetchById(args.id, {
         name: args.input.name,
@@ -86,7 +86,7 @@ export default {
         description: 'The media ID',
       },
     },
-    resolve(_, args) {
+    resolve(obj, args) {
       return Media.query().deleteById(args.id);
     },
   },

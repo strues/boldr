@@ -4,6 +4,7 @@ import { globalIdField } from '../field/identifier';
 
 const SocialType = new GraphQLObjectType({
   name: 'Social',
+  description: 'Social media portion of a profile for an account. ',
   fields: () => ({
     id: globalIdField(),
     profileId: {
@@ -12,27 +13,27 @@ const SocialType = new GraphQLObjectType({
     },
     facebookUrl: {
       type: GraphQLURL,
-      description: 'The Facebook profile url for the user.',
+      description: 'Facebook profile url.',
     },
     twitterUrl: {
       type: GraphQLURL,
-      description: 'The Twitter profile url for the user.',
+      description: 'Twitter profile url.',
     },
     googleUrl: {
       type: GraphQLURL,
-      description: 'The Google profile url for the user.',
+      description: 'Google plus profile url.',
     },
     githubUrl: {
       type: GraphQLURL,
-      description: 'The GitHub profile url for the user.',
+      description: 'GitHub profile url.',
     },
     linkedinUrl: {
       type: GraphQLURL,
-      description: 'The LinkedIn profile url for the user.',
+      description: 'LinkedIn profile url.',
     },
     stackoverflowUrl: {
       type: GraphQLURL,
-      description: 'The Stackoverflow profile url for the user.',
+      description: 'Stackoverflow profile url.',
     },
   }),
 });

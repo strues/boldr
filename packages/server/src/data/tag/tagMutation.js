@@ -14,7 +14,7 @@ export default {
         type: new GraphQLNonNull(CreateTagInput),
       },
     },
-    async resolve(_, args) {
+    async resolve(obj, args) {
       const payload = await Tag.query()
         .insert({
           name: args.input,
@@ -37,7 +37,7 @@ export default {
         description: 'The fields (name, description) for editing a tag.',
       },
     },
-    async resolve(_, args) {
+    async resolve(obj, args) {
       debug(args);
       const updatedTag = await Tag.query().patchAndFetchById(args.id, {
         name: args.input.name,
@@ -55,7 +55,7 @@ export default {
         description: 'The tag ID',
       },
     },
-    resolve(_, args) {
+    resolve(obj, args) {
       return Tag.query().deleteById(args.id);
     },
   },

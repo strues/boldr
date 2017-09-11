@@ -19,7 +19,7 @@ export default {
         description: 'The required fields for editing a detail.',
       },
     },
-    async resolve(_, args) {
+    async resolve(obj, args) {
       debug(args);
       const updatedDetail = await MenuDetail.query().patchAndFetchById(args.id, {
         title: args.input.title,

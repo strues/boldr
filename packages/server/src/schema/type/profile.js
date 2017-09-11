@@ -1,12 +1,5 @@
-import {
-  GraphQLBoolean,
-  GraphQLString,
-  GraphQLObjectType,
-  GraphQLNonNull,
-  GraphQLList,
-  GraphQLID,
-} from 'graphql';
-import { GraphQLEmail, GraphQLURL, GraphQLDateTime } from '../scalars';
+import { GraphQLString, GraphQLObjectType, GraphQLID } from 'graphql';
+import { GraphQLURL, GraphQLDateTime } from '../scalars';
 import { dateCUD } from '../field/date';
 import { globalIdField } from '../field/identifier';
 import Profile from '../../models/Profile';
@@ -14,10 +7,10 @@ import SocialType from './social';
 
 const ProfileType = new GraphQLObjectType({
   name: 'Profile',
-  description: 'The profile belonging to an account.',
+  description:
+    'The profile belonging to an account displays information such as username or a bio.',
   fields: () => ({
     id: globalIdField(),
-    ...dateCUD,
     accountId: {
       type: GraphQLID,
       description: 'The id of the account the profile belongs to.',
@@ -26,7 +19,6 @@ const ProfileType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'The username of the user',
     },
-
     website: {
       type: GraphQLURL,
       description: 'The website of the user',
@@ -45,15 +37,15 @@ const ProfileType = new GraphQLObjectType({
     },
     avatarUrl: {
       type: GraphQLURL,
-      description: "url of user's avatar picture",
+      description: 'The url for an avatar',
     },
     profileImage: {
       type: GraphQLURL,
-      description: "Url for the user's profile background image",
+      description: 'A url for an image to use as a profile background.',
     },
     location: {
       type: GraphQLString,
-      description: 'Location the user lives',
+      description: 'Where the user lives',
     },
     language: {
       type: GraphQLString,
@@ -63,13 +55,15 @@ const ProfileType = new GraphQLObjectType({
       type: GraphQLDateTime,
       description: 'When the user was born',
     },
+    ...dateCUD,
+
     socialMedia: {
       type: SocialType,
-      description: 'Social media profiles of the user.',
+      description: 'Social media profiles.',
       // eslint-disable-next-line
-      resolve(root, args, ctx) {
+      resolve(obj, args, ctx) {
         return Profile.query()
-          .findById(root.id)
+          .findById(obj.id)
           .then(result => result.$relatedQuery('socialMedia'));
       },
     },

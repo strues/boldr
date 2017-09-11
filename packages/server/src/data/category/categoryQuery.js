@@ -25,7 +25,7 @@ export default {
         description: 'The id of the requested category',
       },
     },
-    async resolve(root, { id }) {
+    async resolve(obj, { id }) {
       const category = await Category.query()
         .findById(id)
         .eager('[entities,articles]');

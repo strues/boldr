@@ -13,11 +13,3 @@ export function generateHash() {
   const STRING = Array.from(new Array(5), randomString).join();
   return bcrypt.hashSync(STRING, SALT);
 }
-
-export const comparePassword = (currentPassword, candidatePassword, callback) =>
-  bcrypt.compare(candidatePassword, currentPassword, (err, isMatch) => {
-    if (err) {
-      return callback(err);
-    }
-    return callback(null, isMatch);
-  });

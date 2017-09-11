@@ -19,7 +19,7 @@ export default {
       },
     },
     // eslint-disable-next-line
-    async resolve(_, { offset, limit }, context) {
+    async resolve(obj, { offset, limit }, context) {
       const articles = await Article.getArticles(offset, limit);
       if (articles) {
         return articles;
@@ -36,7 +36,7 @@ export default {
       limit: { type: GraphQLInt },
     },
     // eslint-disable-next-line
-    async resolve(_, { name, offset, limit }, context) {
+    async resolve(obj, { name, offset, limit }, context) {
       const article = await Article.getArticlesByTag(name, offset, limit);
       if (article) {
         return article;
@@ -52,7 +52,7 @@ export default {
       slug: { type: GraphQLString },
     },
     // eslint-disable-next-line
-    async resolve(_, { slug }, context) {
+    async resolve(obj, { slug }, context) {
       const article = await Article.getArticleBySlug(slug);
       if (article) {
         return article;

@@ -16,7 +16,7 @@ export default {
         type: new GraphQLNonNull(AuthInput),
       },
     },
-    async resolve(root, { input }, context) {
+    async resolve(obj, { input }, context) {
       const account = await Account.query()
         .where({ email: input.email })
         .eager('[roles,profile]')
@@ -46,7 +46,7 @@ export default {
         type: new GraphQLNonNull(AuthInput),
       },
     },
-    async resolve(root, { input }, context) {
+    async resolve(obj, { input }, context) {
       const checkUser = await Account.query()
         .where({ email: input.email })
         .first();

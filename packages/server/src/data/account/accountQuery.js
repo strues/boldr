@@ -1,4 +1,4 @@
-import { GraphQLList, GraphQLNonNull, GraphQLInt, GraphQLString, GraphQLID } from 'graphql';
+import { GraphQLList, GraphQLInt, GraphQLID } from 'graphql';
 import Account from '../../models/Account';
 import { db } from '../../services/db';
 import { errorObj } from '../../errors';
@@ -40,7 +40,7 @@ export default {
         description: 'An email address to query for the account',
       },
     },
-    async resolve(root, { id, email }, context) {
+    async resolve(obj, { id, email }, context) {
       let acc;
       if (id) {
         acc = await context.accounts.load(id);
@@ -58,7 +58,7 @@ export default {
   me: {
     type: AccountType,
     description: 'Given an auth token, return the user and auth token',
-    resolve(_, args, { user, ValidationError, req }) {
+    resolve(obj, args, { user, ValidationError, req }) {
       if (!user) {
         throw new ValidationError('Unauthorized');
       }

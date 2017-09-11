@@ -21,7 +21,7 @@ export default {
         description: 'The username of the profile to find',
       },
     },
-    async resolve(_, { id, accountId, username }, context) {
+    async resolve(obj, { id, accountId, username }, context) {
       let profile;
       if (id) {
         profile = await context.profiles.load(id);

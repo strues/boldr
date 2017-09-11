@@ -21,7 +21,7 @@ export default {
     args: {
       slug: { type: GraphQLString },
     },
-    async resolve(_, { slug }) {
+    async resolve(obj, { slug }) {
       const page = await Page.query()
         .where({ slug })
         .first();

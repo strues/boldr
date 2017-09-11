@@ -71,36 +71,36 @@ const ArticleType = new GraphQLObjectType({
       type: new GraphQLList(TagType),
       description: 'Tags relating articles together',
       // eslint-disable-next-line
-      resolve(root, args, ctx) {
+      resolve(obj, args, ctx) {
         return Article.query()
-          .findById(root.id)
+          .findById(obj.id)
           .then(result => result.$relatedQuery('tags'));
       },
     },
     media: {
       type: new GraphQLList(MediaType),
       description: 'Media uploaded with the article',
-      resolve(root, args, ctx) {
+      resolve(obj, args, ctx) {
         return Article.query()
-          .findById(root.id)
+          .findById(obj.id)
           .then(result => result.$relatedQuery('media'));
       },
     },
     author: {
       type: AccountType,
       description: 'The account of the person who wrote the article.',
-      resolve(root, args, ctx) {
+      resolve(obj, args, ctx) {
         return Article.query()
-          .findById(root.id)
+          .findById(obj.id)
           .then(result => result.$relatedQuery('author'));
       },
     },
     category: {
       type: CategoryType,
       description: 'Category the article belongs to.',
-      resolve(root, args, ctx) {
+      resolve(obj, args, ctx) {
         return Article.query()
-          .findById(root.id)
+          .findById(obj.id)
           .then(result => result.$relatedQuery('category'));
       },
     },

@@ -58,9 +58,9 @@ const AccountType = new GraphQLObjectType({
       type: new GraphQLList(RoleType),
       description: 'Roles the account belongs to.',
       // eslint-disable-next-line
-      resolve(root, args, ctx) {
+      resolve(obj, args, ctx) {
         return Account.query()
-          .findById(root.id)
+          .findById(obj.id)
           .then(result => result.$relatedQuery('roles'));
       },
     },
@@ -68,9 +68,9 @@ const AccountType = new GraphQLObjectType({
       type: ProfileType,
       description: 'Profile belonging to the account.',
       // eslint-disable-next-line
-      resolve(root, args, ctx) {
+      resolve(obj, args, ctx) {
         return Account.query()
-          .findById(root.id)
+          .findById(obj.id)
           .then(result => result.$relatedQuery('profile'));
       },
     },
@@ -78,9 +78,9 @@ const AccountType = new GraphQLObjectType({
       type: new GraphQLList(ArticleType),
       description: 'Articles the user has written',
       // eslint-disable-next-line
-      resolve(root, args, ctx) {
+      resolve(obj, args, ctx) {
         return Account.query()
-          .findById(root.id)
+          .findById(obj.id)
           .then(result => result.$relatedQuery('articles'));
       },
     },
@@ -88,9 +88,9 @@ const AccountType = new GraphQLObjectType({
       type: new GraphQLList(MediaType),
       description: 'Articles the user has written',
       // eslint-disable-next-line
-      resolve(root, args, ctx) {
+      resolve(obj, args, ctx) {
         return Account.query()
-          .findById(root.id)
+          .findById(obj.id)
           .then(result => result.$relatedQuery('uploads'));
       },
     },

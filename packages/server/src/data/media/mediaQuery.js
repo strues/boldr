@@ -34,7 +34,7 @@ export default {
         description: 'The id of the requested media',
       },
     },
-    async resolve(_, { id }) {
+    async resolve(obj, { id }) {
       const media = await Media.getMediaById(id);
       if (!media) {
         throw errorObj({ _error: 'Unable to locate a file with that id' });

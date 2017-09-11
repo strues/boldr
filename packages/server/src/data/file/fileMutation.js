@@ -1,5 +1,5 @@
 import path from 'path';
-import { GraphQLNonNull, GraphQLID, GraphQLList } from 'graphql';
+import { GraphQLNonNull, GraphQLList } from 'graphql';
 import _debug from 'debug';
 import fs from 'fs-extra';
 import Jimp from 'jimp';
@@ -22,7 +22,7 @@ export default {
         description: 'The file to upload',
       },
     },
-    async resolve(_, args, context) {
+    async resolve(obj, args, context) {
       const id = shortId.generate();
       const actualFileName = id + path.extname(args.file.name);
 
@@ -62,7 +62,7 @@ export default {
         description: 'The file to upload',
       },
     },
-    async resolve(_, args, context) {
+    async resolve(obj, args, context) {
       const id = shortId.generate();
       const actualFileName = id + path.extname(args.file.name);
 

@@ -17,7 +17,7 @@ export default {
         type: new GraphQLNonNull(GraphQLInt),
       },
     },
-    async resolve(_, { limit, offset }) {
+    async resolve(obj, { limit, offset }) {
       const tags = await Tag.query()
         .offset(offset)
         .limit(limit)

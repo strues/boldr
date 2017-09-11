@@ -65,7 +65,7 @@ type AccountLoginResponse {
   errors: [Error]
 }
 
-# A tag relates content together
+# A query for delivering the maximum amount of content
 type AllContent {
   articles: [Article]
   tags: Tag
@@ -184,7 +184,7 @@ enum CONTENT_STATUS {
   DRAFT
 }
 
-# A tag relates content together
+# Defines a class of entities.
 type ContentType {
   # Unique identifier for the object.
   id: ID!
@@ -198,10 +198,10 @@ type ContentType {
   # An icon to use for the content type
   icon: String
 
-  # A description of the tag
+  # Information regarding what the content type does.
   description: String
 
-  # Articles related to the tag
+  # Entities are instances of content types. For example ContentType of Portfolio would have Projects as entities.
   entities: [Article]
 
   # The timestamp when the object was deleted
@@ -635,19 +635,10 @@ type Page {
   createdAt: DateTime
 }
 
-# The profile belonging to an account.
+# The profile belonging to an account displays information such as username or a bio.
 type Profile {
   # Unique identifier for the object.
   id: ID!
-
-  # The timestamp when the object was deleted
-  deletedAt: DateTime
-
-  # The timestamp when the object was last updated
-  updatedAt: DateTime
-
-  # The timestamp when the object was created
-  createdAt: DateTime
 
   # The id of the account the profile belongs to.
   accountId: ID
@@ -667,13 +658,13 @@ type Profile {
   # Information about the user
   bio: String
 
-  # url of user's avatar picture
+  # The url for an avatar
   avatarUrl: URL
 
-  # Url for the user's profile background image
+  # A url for an image to use as a profile background.
   profileImage: URL
 
-  # Location the user lives
+  # Where the user lives
   location: String
 
   # Language the user prefers
@@ -682,7 +673,16 @@ type Profile {
   # When the user was born
   birthday: DateTime
 
-  # Social media profiles of the user.
+  # The timestamp when the object was deleted
+  deletedAt: DateTime
+
+  # The timestamp when the object was last updated
+  updatedAt: DateTime
+
+  # The timestamp when the object was created
+  createdAt: DateTime
+
+  # Social media profiles.
   socialMedia: Social
 }
 
@@ -800,7 +800,7 @@ type Query {
   ): Profile
 
   # A query for a listing of all roles
-  getRoles: [Role]
+  roles: [Role]
 
   # A query for a listing of all settings
   settings: [Setting]
@@ -815,7 +815,7 @@ type Query {
   ): [Tag]
 }
 
-# Role or permission group for users
+# Restrict access to content or areas of your site using a role.
 type Role {
   # Unique identifier for the object.
   id: ID!
@@ -833,7 +833,7 @@ type Role {
   description: String
 
   # Accounts belonging to a role.
-  users: [Account]
+  accounts: [Account]
 
   # The timestamp when the object was deleted
   deletedAt: DateTime
@@ -927,7 +927,7 @@ type RootMutation {
     input: EditProfileInput!
   ): Profile
 
-  # creating a new tag
+  # Modify the value of the site setting
   editSetting(id: ID!, input: SettingInput!): Setting
 
   # creating a new tag
@@ -954,16 +954,16 @@ type Setting {
   # Unique identifier for the object.
   id: ID!
 
-  # The setting option
+  # The option or setting identifier
   key: String
 
   # The value of the setting
   value: String
 
-  # A non-normalized key
-  label: URL
+  # A non-normalized key.
+  label: String
 
-  # The description for what the setting does.
+  # Explaination of what the setting does.
   description: String
 }
 
@@ -981,6 +981,7 @@ input SettingInput {
   description: String
 }
 
+# Social media portion of a profile for an account. 
 type Social {
   # Unique identifier for the object.
   id: ID!
@@ -988,22 +989,22 @@ type Social {
   # The id of the profile the social media accounts belong to.
   profileId: ID!
 
-  # The Facebook profile url for the user.
+  # Facebook profile url.
   facebookUrl: URL
 
-  # The Twitter profile url for the user.
+  # Twitter profile url.
   twitterUrl: URL
 
-  # The Google profile url for the user.
+  # Google plus profile url.
   googleUrl: URL
 
-  # The GitHub profile url for the user.
+  # GitHub profile url.
   githubUrl: URL
 
-  # The LinkedIn profile url for the user.
+  # LinkedIn profile url.
   linkedinUrl: URL
 
-  # The Stackoverflow profile url for the user.
+  # Stackoverflow profile url.
   stackoverflowUrl: URL
 }
 
@@ -1014,6 +1015,9 @@ type Tag {
 
   # A name for the object.
   name: String
+
+  # A normalized copy of the object name.
+  safeName: String
 
   # The timestamp when the object was deleted
   deletedAt: DateTime

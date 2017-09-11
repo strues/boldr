@@ -60,7 +60,7 @@ const EntityType = new GraphQLObjectType({
       type: new GraphQLList(TagType),
       description: 'Tags relating articles together',
       // eslint-disable-next-line
-      resolve(_, args, ctx) {
+      resolve(obj, args, ctx) {
         return Entity.query()
           .findById(_.id)
           .then(result => result.$relatedQuery('tags'));
@@ -68,7 +68,7 @@ const EntityType = new GraphQLObjectType({
     },
     contentType: {
       type: ContentType,
-      resolve(_, args, ctx) {
+      resolve(obj, args, ctx) {
         return Entity.query()
           .findById(_.id)
           .then(result => result.$relatedQuery('contentType'));
@@ -76,7 +76,7 @@ const EntityType = new GraphQLObjectType({
     },
     category: {
       type: CategoryType,
-      resolve(_, args, ctx) {
+      resolve(obj, args, ctx) {
         return Entity.query()
           .findById(_.id)
           .then(result => result.$relatedQuery('category'));

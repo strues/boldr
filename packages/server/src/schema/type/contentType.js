@@ -6,7 +6,7 @@ import EntityType from './article';
 
 const ContentType = new GraphQLObjectType({
   name: 'ContentType',
-  description: 'A tag relates content together',
+  description: 'Defines a class of entities.',
   fields: () => ({
     id: globalIdField(),
     ...name,
@@ -17,14 +17,15 @@ const ContentType = new GraphQLObjectType({
     },
     description: {
       type: GraphQLString,
-      description: 'A description of the tag',
+      description: 'Information regarding what the content type does.',
     },
     entities: {
       type: new GraphQLList(EntityType),
-      description: 'Articles related to the tag',
-      resolve(_) {
+      description:
+        'Entities are instances of content types. For example ContentType of Portfolio would have Projects as entities.',
+      resolve(obj) {
         return ContentT.query()
-          .findById(_.id)
+          .findById(obj.id)
           .then(result => result.$relatedQuery('entities'));
       },
     },

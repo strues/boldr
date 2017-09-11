@@ -1,5 +1,4 @@
 import { GraphQLString, GraphQLObjectType } from 'graphql';
-import { GraphQLURL } from '../scalars';
 import { globalIdField } from '../field/identifier';
 
 const SettingType = new GraphQLObjectType({
@@ -9,19 +8,19 @@ const SettingType = new GraphQLObjectType({
     id: globalIdField(),
     key: {
       type: GraphQLString,
-      description: 'The setting option',
+      description: 'The option or setting identifier',
     },
     value: {
       type: GraphQLString,
       description: 'The value of the setting',
     },
     label: {
-      type: GraphQLURL,
-      description: 'A non-normalized key',
+      type: GraphQLString,
+      description: 'A non-normalized key.',
     },
     description: {
       type: GraphQLString,
-      description: 'The description for what the setting does.',
+      description: 'Explaination of what the setting does.',
     },
   }),
 });

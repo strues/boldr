@@ -6,7 +6,7 @@ import SettingType from '../../schema/type/setting';
 export default {
   editSetting: {
     type: SettingType,
-    description: 'creating a new tag',
+    description: 'Modify the value of the site setting',
     args: {
       id: {
         type: new GraphQLNonNull(GraphQLID),
@@ -15,7 +15,7 @@ export default {
         type: new GraphQLNonNull(SettingInput),
       },
     },
-    async resolve(_, { id, input }) {
+    async resolve(obj, { id, input }) {
       const payload = await Setting.query()
         .findById(id)
         .patchAndFetch(input);

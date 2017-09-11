@@ -29,7 +29,7 @@ export default {
         description: 'The id of the requested content type',
       },
     },
-    async resolve(root, { id }) {
+    async resolve(obj, { id }) {
       const contentType = await ContentT.query()
         .findById(id)
         .eager('[entities]');
@@ -42,7 +42,7 @@ export default {
   },
   allContent: {
     type: AllContentType,
-    async resolve(root) {
+    async resolve(obj) {
       const allContent = {
         articles: await Article.query(),
         tags: await Tag.query(),

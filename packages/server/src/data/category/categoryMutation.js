@@ -13,7 +13,7 @@ export default {
         type: new GraphQLNonNull(CreateCategoryInput),
       },
     },
-    async resolve(_, args) {
+    async resolve(obj, args) {
       try {
         const newCategory = await Category.query().insert({
           name: args.input.name,

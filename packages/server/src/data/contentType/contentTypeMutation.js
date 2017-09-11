@@ -1,6 +1,5 @@
-import { GraphQLList, GraphQLID, GraphQLNonNull } from 'graphql';
+import { GraphQLNonNull } from 'graphql';
 import ContentT from '../../models/ContentType';
-import { errorObj } from '../../errors';
 import slugIt from '../../utils/slugIt';
 import ContentType from '../../schema/type/contentType';
 import CreateContentTypeInput from '../../schema/input/createContentType';
@@ -14,7 +13,7 @@ export default {
         type: new GraphQLNonNull(CreateContentTypeInput),
       },
     },
-    async resolve(_, args) {
+    async resolve(obj, args) {
       const newContentType = await ContentT.query().insert({
         name: args.input.name,
         slug: slugIt(args.input.slug),

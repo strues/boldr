@@ -21,7 +21,7 @@ export default {
         type: new GraphQLNonNull(CreateArticleInput),
       },
     },
-    async resolve(_, args, context) {
+    async resolve(obj, args, context) {
       const newArticle = await Article.query().insert({
         title: args.input.title,
         slug: slugIt(args.input.title),
@@ -79,7 +79,7 @@ export default {
         description: 'The required fields for creating an article.',
       },
     },
-    async resolve(_, args) {
+    async resolve(obj, args) {
       debug(args);
       const updatedArticle = await Article.query().patchAndFetchById(args.id, {
         title: args.input.title,
@@ -106,7 +106,7 @@ export default {
         description: 'The article ID',
       },
     },
-    resolve(_, args) {
+    resolve(obj, args) {
       return Article.query().deleteById(args.id);
     },
   },

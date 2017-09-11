@@ -17,7 +17,7 @@ export default {
         description: 'The maximum number of attachments to return at a time.',
       },
     },
-    async resolve(_, { limit, offset }) {
+    async resolve(obj, { limit, offset }) {
       const file = await File.query()
         .limit(limit)
         .offset(offset);

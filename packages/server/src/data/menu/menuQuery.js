@@ -1,7 +1,4 @@
 import { GraphQLList, GraphQLNonNull, GraphQLID } from 'graphql';
-
-import { db } from '../../services/db';
-import Menu from '../../models/Menu';
 import MenuDetail from '../../models/MenuDetail';
 import { errorObj } from '../../errors';
 import MenuType from '../../schema/type/menu';
@@ -14,7 +11,7 @@ export default {
     args: {
       id: { type: new GraphQLNonNull(GraphQLID) },
     },
-    async resolve(_, { id }, context) {
+    async resolve(obj, { id }, context) {
       const menu = await context.menus.load(id);
       if (menu) {
         return menu;

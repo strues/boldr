@@ -6,7 +6,7 @@ import AccountType from './account';
 
 const RoleType = new GraphQLObjectType({
   name: 'Role',
-  description: 'Role or permission group for users',
+  description: 'Restrict access to content or areas of your site using a role.',
   fields: () => ({
     id: globalIdField(),
     ...uuid,
@@ -19,8 +19,7 @@ const RoleType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'The role description',
     },
-
-    users: {
+    accounts: {
       type: new GraphQLList(AccountType),
       description: 'Accounts belonging to a role.',
     },

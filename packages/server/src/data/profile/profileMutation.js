@@ -18,7 +18,7 @@ export default {
       },
     },
     // eslint-disable-next-line
-    async resolve(_, args, context) {
+    async resolve(obj, args, context) {
       const updatedUser = await Profile.query().patchAndFetchById(args.id, {
         firstName: args.input.firstName,
         lastName: args.input.lastName,

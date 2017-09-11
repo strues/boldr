@@ -1,6 +1,4 @@
-import { GraphQLString, GraphQLObjectType, GraphQLList } from 'graphql';
-import { globalIdField, name, slug } from '../field/identifier';
-import { dateCUD } from '../field/date';
+import { GraphQLObjectType, GraphQLList } from 'graphql';
 import ArticleType from './article';
 import CategoryType from './category';
 import TagType from './tag';
@@ -8,7 +6,7 @@ import EntityType from './entity';
 
 const AllContentType = new GraphQLObjectType({
   name: 'AllContent',
-  description: 'A tag relates content together',
+  description: 'A query for delivering the maximum amount of content',
   fields: () => ({
     articles: {
       type: new GraphQLList(ArticleType),

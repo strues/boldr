@@ -25,18 +25,18 @@ const CategoryType = new GraphQLObjectType({
     entities: {
       type: new GraphQLList(EntityType),
       description: 'Entities belonging to the category',
-      resolve(root) {
+      resolve(obj) {
         return Category.query()
-          .findById(root.id)
+          .findById(obj.id)
           .then(result => result.$relatedQuery('entities'));
       },
     },
     articles: {
       type: new GraphQLList(ArticleType),
       description: 'Articles belonging to the category',
-      resolve(root) {
+      resolve(obj) {
         return Category.query()
-          .findById(root.id)
+          .findById(obj.id)
           .then(result => result.$relatedQuery('articles'));
       },
     },
