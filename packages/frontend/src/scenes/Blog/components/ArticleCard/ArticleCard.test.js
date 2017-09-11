@@ -18,11 +18,6 @@ const ArticleData = {
 };
 
 describe('<ArticleCard />', () => {
-  it('renders <ArticleCard /> without breaking', () => {
-    const wrapper = shallow(<ArticleCard {...ArticleData} />);
-    expect(wrapper.find('div').length).toBe(1);
-  });
-
   it('accepts props and renders them.', () => {
     const wrapper = shallow(<ArticleCard {...ArticleData} />);
     expect(wrapper.instance().props.image).toBe('http://boldr.io/images/logo.png');

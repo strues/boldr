@@ -1,74 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ArticleCard /> renders snapshot 1`] = `
-<div
-  className="boldr-article-card"
->
-  <Card
-    animate={true}
-    className="md-block-centered"
-    expanderIconChildren="keyboard_arrow_down"
-    expanderIconClassName="material-icons"
-    expanderTooltipPosition="left"
-    style={
-      Object {
-        "maxWidth": 600,
-      }
-    }
+<styled.article>
+  <Styled(Link)
+    to="/blog/test-post"
   >
-    <Media
-      aspectRatio="16-9"
-      component="section"
-      forceAspect={true}
-    >
-      <img
-        alt="Test Post feature image"
-        role="presentation"
-      />
-    </Media>
-    <CardTitle
-      subtitle="Invalid Date"
-      title="Test Post"
+    <styled.div
+      image="http://boldr.io/images/logo.png"
     />
-    <CardActions
-      expander={true}
+  </Styled(Link)>
+  <styled.div>
+    <Styled(Link)
+      to="/blog/test-post"
     >
-      <Link
-        replace={false}
-        to="/blog/test-post"
+      <styled.header>
+        <styled.h2>
+          Test Post
+        </styled.h2>
+      </styled.header>
+      <styled.section>
+        <p>
+          An excerpt
+        </p>
+      </styled.section>
+    </Styled(Link)>
+    <styled.footer>
+      <Styled(Link)
+        to="/profiles/joe"
       >
-        <Button
-          block={false}
-          bordered={true}
-          className=""
-          disabled={false}
-          htmlType="button"
-          kind="primary"
-          loading={false}
-          outline={true}
-          prefix="boldr"
-          size="medium"
-        >
-          Read More
-        </Button>
-      </Link>
-    </CardActions>
-    <CardText
-      component="section"
-      expandable={true}
-    >
-      An excerpt
-    </CardText>
-    <TagBlock
-      tags={
-        Array [
-          Object {
-            "id": 1,
-            "name": "abc",
-          },
-        ]
-      }
-    />
-  </Card>
-</div>
+        <styled.img
+          alt="Joe"
+          src="http://boldr.io/images/logo.png"
+        />
+        <styled.span>
+          Joe
+        </styled.span>
+      </Styled(Link)>
+      <TagBlock
+        tags={
+          Array [
+            Object {
+              "id": 1,
+              "name": "abc",
+            },
+          ]
+        }
+      />
+    </styled.footer>
+  </styled.div>
+</styled.article>
 `;

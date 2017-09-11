@@ -68,9 +68,13 @@ exports[`App 1`] = `
       component={[Function]}
       path="/"
     />
-    <Route
-      component={[Function]}
-    />
+    <StatusRoute
+      code={404}
+    >
+      <Route
+        component={[Function]}
+      />
+    </StatusRoute>
   </Switch>
   <Connect(Notifications) />
 </div>
