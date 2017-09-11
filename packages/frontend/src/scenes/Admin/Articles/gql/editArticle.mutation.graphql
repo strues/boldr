@@ -5,6 +5,7 @@ mutation editArticle($id: ID!, $input: EditArticleInput!) {
     content
     rawContent
     featured
+    status
     published
     excerpt
     image

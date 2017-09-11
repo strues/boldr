@@ -12,6 +12,7 @@ import Error404 from '../../pages/Error404';
 import AdminDashboard from '../../scenes/Admin';
 import boldrNotificationsFactory, { Notif } from '../Notifications';
 import ProtectedRoute from '../ProtectedRoute';
+import StatusRoute from '../StatusRoute';
 
 const NotificationContainer = boldrNotificationsFactory(Notif);
 
@@ -45,7 +46,9 @@ const App = () => {
       <Switch>
         <ProtectedRoute path="/admin" component={AdminDashboard} />
         <Route path="/" component={Page} />
-        <Route component={Error404} />
+        <StatusRoute code={404}>
+          <Route component={Error404} />
+        </StatusRoute>
       </Switch>
       <NotificationContainer />
     </div>

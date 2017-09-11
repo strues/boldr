@@ -5,6 +5,7 @@ module.exports = [
   'color',
   'draft-convert',
   'draft-js',
+  'humps',
   'immutability-helper',
   'immutable',
   'lodash',

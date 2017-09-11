@@ -128,25 +128,30 @@ module.exports.up = async db => {
       .notNullable()
       .defaultTo(db.raw('uuid_generate_v4()'))
       .primary();
+
     table.string('title', 140).unique().notNullable();
     table.string('slug', 140).unique().notNullable();
     table.string('image', 255).nullable();
     table.string('heroImage', 255).nullable();
     table.json('meta').nullable();
-    table.boolean('featured').defaultTo(false);
-    table.json('rawContent');
-    table.text('content').notNullable();
+
+    table.json('rawContent').notNullable().comment('Raw immutable JSON content block');
+    table.text('content').notNullable().comment('Content is the rawContent converted to HTML');
     table.text('excerpt').notNullable();
-    table.uuid('userId').unsigned().notNullable();
-    table.uuid('categoryId').unsigned().notNullable();
+
+    table.boolean('featured').defaultTo(false);
     table.boolean('published').defaultTo(true);
+    table.enu('status', ['published', 'archived', 'draft']);
+
+    table.uuid('authorId').unsigned().notNullable();
+    table.uuid('categoryId').unsigned().notNullable();
 
     table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
     table.timestamp('updatedAt').nullable().defaultTo(null);
     table.timestamp('deletedAt').nullable().defaultTo(null);
     // fk | uuid
     table
-      .foreign('userId')
+      .foreign('authorId')
       .references('id')
       .inTable('user')
       .onDelete('cascade')
@@ -161,7 +166,10 @@ module.exports.up = async db => {
 
     table.index('slug');
     table.index('published');
+    table.index('authorId');
+    table.index('categoryId');
     table.index('createdAt');
+    table.index('status');
   });
 
   await db.schema.createTable('file', table => {
@@ -179,11 +187,10 @@ module.exports.up = async db => {
     table.string('safeName', 128).notNullable();
     table.string('thumbName', 128);
     table.string('fileDescription').nullable();
-    table.uuid('ownerId').unsigned().notNullable();
+    table.uuid('ownerId').notNullable();
 
     table.timestamp('createdAt').defaultTo(db.fn.now());
     table.timestamp('updatedAt').nullable().defaultTo(null);
-    table.timestamp('deletedAt').nullable().defaultTo(null);
 
     // fk | uuid
     table
@@ -206,6 +213,7 @@ module.exports.up = async db => {
     table.string('description', 255).notNullable();
     table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
     table.timestamp('updatedAt').nullable().defaultTo(null);
+    table.timestamp('deletedAt').nullable().defaultTo(null);
 
     table.index('key');
     table.index('value');
@@ -213,57 +221,65 @@ module.exports.up = async db => {
 
   await db.schema.createTable('menu', table => {
     table.increments('id').unsigned().primary();
-    // uuid
     table.uuid('uuid').notNullable().defaultTo(db.raw('uuid_generate_v4()'));
-    table.string('name').notNullable();
-    table.json('attributes').nullable();
+    table.string('name', 64).notNullable();
+    table.string('safeName', 64).notNullable();
     table.boolean('restricted').default(false);
+
+    // timestamp
     table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
     table.timestamp('updatedAt').nullable().defaultTo(null);
+    table.timestamp('deletedAt').nullable().defaultTo(null);
 
+    // indexes
     table.index('uuid');
   });
 
   await db.schema.createTable('menu_detail', table => {
+    // pk
     table.uuid('id').notNullable().defaultTo(db.raw('uuid_generate_v4()')).primary();
-    table.string('safeName', 50).notNullable();
+
+    table.string('safeName', 50).unique().notNullable();
     table.string('title', 50).notNullable();
-    table.boolean('hasDropdown').default(false);
-    table.boolean('isDropdown').default(false);
-    table.string('cssClassname', 255).nullable();
+    table.boolean('hasDropdown').default(false).comment('hasDropdown is true if the item has dropdownItems.');
+    table.boolean('isDropdown').default(false).comment('isDropdown is true if the item in question has a parentId.');
+    table.string('cssClassname', 32).nullable();
     table.integer('order');
-    table.string('mobileHref', 255).nullable().comment(
-      'Mobile href is applicable in cases where the item is a dropdown' +
-        // prettier-ignore
-        'trigger on desktop. Without a mobile href, it will only be text.' // eslint-disable-line
-    );
     table.string('href').notNullable();
     table.string('icon').nullable();
-    table.jsonb('children');
+
+    // fk
     table.uuid('parentId').nullable();
+    table.integer('menuId').unsigned().references('id').inTable('menu').notNullable();
+
+    // timestamp
+    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
+    table.timestamp('updatedAt').nullable().defaultTo(null);
+    table.timestamp('deletedAt').nullable().defaultTo(null);
+
     table
     .foreign('parentId')
     .references('id')
     .inTable('menu_detail')
     .onDelete('cascade')
     .onUpdate('cascade');
-    table.integer('menuId').unsigned().references('id').inTable('menu').notNullable();
-    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
-    table.timestamp('deletedAt').nullable().defaultTo(null);
 
+    // indexs
     table.index('title');
     table.index('safeName');
     table.index('href');
+    table.index('parentId');
+    table.index('menuId');
   });
 
   await db.schema.createTable('article_tag', table => {
+    // pk
     table.increments('id').primary();
-    table.uuid('articleId').unsigned().notNullable();
-    table.uuid('tagId').unsigned().notNullable();
-    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
+    // fk
+    table.uuid('articleId').notNullable();
+    table.uuid('tagId').notNullable();
     table.unique(['articleId', 'tagId']);
+
     table
       .foreign('articleId')
       .references('id')
@@ -279,12 +295,13 @@ module.exports.up = async db => {
   });
 
   await db.schema.createTable('user_role', table => {
+    // pk
     table.increments('id').primary();
+    // fk
     table.uuid('userId').unsigned().notNullable();
     table.integer('roleId').unsigned().notNullable();
-    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
     table.unique(['userId', 'roleId']);
+
     table
       .foreign('userId')
       .references('id')
@@ -297,20 +314,6 @@ module.exports.up = async db => {
       .inTable('role')
       .onDelete('cascade')
       .onUpdate('cascade');
-  });
-
-  await db.schema.createTable('menu_menu_detail', table => {
-    table.integer('menuId').notNullable().references('id').inTable('menu');
-    table
-      .uuid('menuDetailId')
-      .notNullable()
-      .references('id')
-      .inTable('menu_detail');
-
-    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
-
-    table.primary(['menuId', 'menuDetailId']);
   });
 };
 
@@ -328,7 +331,6 @@ module.exports.down = async db => {
   await db.schema.dropTableIfExists('reset_token');
   await db.schema.dropTableIfExists('article_tag');
   await db.schema.dropTableIfExists('user_role');
-  await db.schema.dropTableIfExists('menu_menu_detail');
 };
 
 module.exports.configuration = { transaction: true };

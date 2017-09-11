@@ -6,12 +6,9 @@ query getMenuById($id: ID!) {
       id
       safeName
       title
-      cssClassname
-      icon
       hasDropdown
       isDropdown
       order
-      mobileHref
       href
       menuId
       parentId

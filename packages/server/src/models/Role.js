@@ -32,23 +32,21 @@ class Role extends BaseModel {
       },
     },
   });
-  static get relationMappings() {
-    return {
-      users: {
-        relation: BaseModel.ManyToManyRelation,
-        modelClass: `${__dirname}/User`,
-        join: {
-          from: 'role.id',
-          through: {
-            from: 'user_role.roleId',
-            to: 'user_role.userId',
-            modelClass: `${__dirname}/join/UserRole`,
-          },
-          to: 'user.id',
+  static relationMappings = {
+    users: {
+      relation: BaseModel.ManyToManyRelation,
+      modelClass: `${__dirname}/User`,
+      join: {
+        from: 'role.id',
+        through: {
+          from: 'user_role.roleId',
+          to: 'user_role.userId',
+          modelClass: `${__dirname}/join/UserRole`,
         },
+        to: 'user.id',
       },
-    };
-  }
+    },
+  };
 
   static getUsersForRole(id) {
     return Role.query()

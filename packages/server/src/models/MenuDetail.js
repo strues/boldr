@@ -2,14 +2,12 @@ import BaseModel, { mergeSchemas } from './BaseModel';
 
 class MenuDetail extends BaseModel {
   static tableName = 'menu_detail';
-  static addTimestamps = false;
+  static addTimestamps = true;
+
   static jsonSchema = mergeSchemas(BaseModel.jsonSchema, {
     required: ['safeName', 'name', 'hasDropdown', 'href', 'icon'],
     properties: {
       id: {
-        type: 'number',
-      },
-      uuid: {
         type: 'string',
         minLength: 36,
         maxLength: 36,
@@ -28,10 +26,8 @@ class MenuDetail extends BaseModel {
         maxLength: 36,
         pattern: '^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$', // eslint-disable-line
       },
-      mobileHref: { type: 'string' },
       href: { type: 'string' },
       icon: { type: 'string' },
-      children: { type: 'json' },
     },
   });
 

@@ -1,5 +1,6 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
+import type { Node } from 'react';
 import Route from 'react-router-dom/Route';
 import Redirect from 'react-router-dom/Redirect';
 import { connect } from 'react-redux';
@@ -11,13 +12,13 @@ export const hasAccessToken = () => {
 };
 
 export type Props = {
-  component: React.Node,
+  component: Node,
   authInfo: Object,
   location: Object,
 };
 
 const ProtectedRoute = ({ component: ComposedComponent, ...rest }: Props) => {
-  class Authentication extends React.Component {
+  class Authentication extends React.Component<Props, *> {
     handleRender = props => {
       if (!this.props.authInfo) {
         return (

@@ -3,6 +3,7 @@ import BaseModel, { mergeSchemas } from './BaseModel';
 class Entity extends BaseModel {
   static tableName = 'entity';
   static addTimestamps = true;
+
   static jsonSchema = mergeSchemas(BaseModel.jsonSchema, {
     required: ['title', 'slug', 'content', 'status', 'userId'],
     properties: {
@@ -43,38 +44,36 @@ class Entity extends BaseModel {
     },
   });
 
-  static get relationMappings() {
-    return {
-      contentType: {
-        relation: BaseModel.BelongsToOneRelation,
-        modelClass: `${__dirname}/ContentType`,
-        join: {
-          from: 'entity.ctId',
-          to: 'content_type.id',
-        },
+  static relationMappings = {
+    contentType: {
+      relation: BaseModel.BelongsToOneRelation,
+      modelClass: `${__dirname}/ContentType`,
+      join: {
+        from: 'entity.ctId',
+        to: 'content_type.id',
       },
-      category: {
-        relation: BaseModel.BelongsToOneRelation,
-        modelClass: `${__dirname}/Category`,
-        join: {
-          from: 'entity.categoryId',
-          to: 'category.id',
-        },
+    },
+    category: {
+      relation: BaseModel.BelongsToOneRelation,
+      modelClass: `${__dirname}/Category`,
+      join: {
+        from: 'entity.categoryId',
+        to: 'category.id',
       },
-      tags: {
-        relation: BaseModel.ManyToManyRelation,
-        modelClass: `${__dirname}/Tag`,
-        join: {
-          from: 'entity.id',
-          through: {
-            from: 'entity_tag.entityId',
-            to: 'entity_tag.tagId',
-          },
-          to: 'tag.id',
+    },
+    tags: {
+      relation: BaseModel.ManyToManyRelation,
+      modelClass: `${__dirname}/Tag`,
+      join: {
+        from: 'entity.id',
+        through: {
+          from: 'entity_tag.entityId',
+          to: 'entity_tag.tagId',
         },
+        to: 'tag.id',
       },
-    };
-  }
+    },
+  };
 
   static getEntities(offset, limit) {
     return Entity.query()

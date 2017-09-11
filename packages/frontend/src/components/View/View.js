@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 const View = styled.div`
-  margin: 0 auto;
-  height: 100%;
-  width: 100%;
-  min-height: 100vh;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: stretch;
+  position: relative;
 `;
 export default View;

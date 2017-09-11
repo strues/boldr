@@ -5,10 +5,11 @@ query tags($name: String, $offset: Int, $limit: Int) {
     slug
     image
     featured
+    status
     published
     createdAt
     excerpt
-    userId
+    authorId
     tags {
       id
       name

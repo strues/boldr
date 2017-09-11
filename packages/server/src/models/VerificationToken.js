@@ -17,18 +17,16 @@ class VerificationToken extends BaseModel {
   }
   static addTimestamps = true;
 
-  static get relationMappings() {
-    return {
-      user: {
-        relation: BaseModel.BelongsToOneRelation,
-        modelClass: `${__dirname}/User`,
-        join: {
-          from: 'verification_token.userId',
-          to: 'user.id',
-        },
+  static relationMappings = {
+    user: {
+      relation: BaseModel.BelongsToOneRelation,
+      modelClass: `${__dirname}/User`,
+      join: {
+        from: 'verification_token.userId',
+        to: 'user.id',
       },
-    };
-  }
+    },
+  };
 }
 
 export default VerificationToken;

@@ -8,9 +8,10 @@ query GetArticlesQuery($offset: Int!, $limit: Int!) {
     content
     rawContent
     published
+    status
     createdAt
     excerpt
-    userId
+    authorId
     categoryId
     category {
       id

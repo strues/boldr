@@ -25,12 +25,11 @@ export default {
         title: args.input.title,
         safeName: slugIt(args.input.title),
         href: args.input.href,
-        mobileHref: args.input.mobileHref,
         cssClassname: args.input.cssClassname,
         hasDropdown: JSON.parse(args.input.hasDropdown),
+        isDropdown: JSON.parse(args.input.isDropdown),
         icon: args.input.icon,
         order: args.input.order,
-        children: args.input.children,
       });
       return updatedDetail;
     },

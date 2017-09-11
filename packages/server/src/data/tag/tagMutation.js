@@ -36,7 +36,6 @@ export default {
       debug(args);
       const updatedTag = await Tag.query().patchAndFetchById(args.id, {
         name: args.input.name,
-        description: args.input.description,
       });
       return updatedTag;
     },

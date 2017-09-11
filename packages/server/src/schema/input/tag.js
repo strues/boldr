@@ -7,10 +7,6 @@ const TagInput = new GraphQLInputObjectType({
       type: new GraphQLNonNull(GraphQLString),
       description: 'The name of the tag',
     },
-    description: {
-      type: GraphQLString,
-      description: 'A description of the tag.',
-    },
   }),
 });
 

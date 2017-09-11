@@ -11,10 +11,8 @@ const TagType = new GraphQLObjectType({
   fields: () => ({
     id: globalIdField(),
     ...name,
-    description: {
-      type: GraphQLString,
-      description: 'A description of the tag',
-    },
+    ...dateCUD,
+
     articles: {
       type: new GraphQLList(ArticleType),
       description: 'Articles related to the tag',
@@ -33,7 +31,6 @@ const TagType = new GraphQLObjectType({
           .then(result => result.$relatedQuery('entities'));
       },
     },
-    ...dateCUD,
   }),
 });
 

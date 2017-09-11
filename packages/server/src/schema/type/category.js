@@ -20,6 +20,8 @@ const CategoryType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'A description of the category',
     },
+    ...dateCUD,
+
     entities: {
       type: new GraphQLList(EntityType),
       description: 'Entities belonging to the category',
@@ -38,7 +40,6 @@ const CategoryType = new GraphQLObjectType({
           .then(result => result.$relatedQuery('articles'));
       },
     },
-    ...dateCUD,
   }),
 });
 

@@ -6,7 +6,11 @@ module.exports.up = async db => {
       .notNullable()
       .defaultTo(db.raw('uuid_generate_v4()'))
       .primary();
-    table.string('name', 128).notNullable().unique();
+
+    table
+      .string('name', 128)
+      .notNullable()
+      .unique();
     table.string('safeName', 128).notNullable();
     table.string('thumbName', 128);
     table.integer('size');
@@ -14,14 +18,23 @@ module.exports.up = async db => {
     table.string('type').notNullable();
     table.string('url').notNullable();
     table.string('path').notNullable();
-    table.uuid('userId').unsigned().references('id').inTable('user');
+    table.uuid('ownerId').notNullable();
+    table
+      .foreign('ownerId')
+      .references('id')
+      .inTable('user')
+      .onDelete('cascade')
+      .onUpdate('cascade');
 
+    // timestamps
     table.timestamp('createdAt').defaultTo(db.fn.now());
     table.timestamp('updatedAt').defaultTo(db.fn.now());
 
     table.index('name');
+    table.index('ownerId');
     table.index('url');
   });
+
   await db.schema.createTable('article_media', table => {
     table
       .uuid('articleId')
@@ -37,8 +50,7 @@ module.exports.up = async db => {
       .inTable('media')
       .onDelete('cascade')
       .onUpdate('cascade');
-          table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
+
     table.primary(['articleId', 'mediaId']);
   });
 };

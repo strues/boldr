@@ -1,47 +1,44 @@
 /* @flow */
 import React, { PureComponent } from 'react';
 import styled from 'styled-components';
-import { Grid, Row, Col } from '@boldr/ui/Layout';
-import { FeaturedArticle, ArticleCard } from '../components';
-import type { ArticleType } from '../../../types/boldr';
+import { Section } from '@boldr/ui/Layout';
+import Heading from '@boldr/ui/Heading';
+import Loader from '@boldr/ui/Loader';
+import { ArticleCard } from '../components';
+import type { ArticlesType } from '../../../types/boldr';
 
 type Props = {
-  articles: ArticleType,
+  articles: ArticlesType,
   isLoading: boolean,
   error?: Object,
 };
 
-const CardSpacer = styled.div`margin-bottom: 50px;`;
-
+const Container = styled.div`
+  flex: 1;
+  max-width: 1034px;
+  width: 100%;
+  margin: 30px auto 100px;
+  display: flex;
+  flex-wrap: wrap;
+`;
 class ArticleListing extends PureComponent<Props, *> {
   props: Props;
 
   renderArticles = () => {
     const { articles } = this.props;
-    const allArticles = articles.filter(p => p.published) && articles.filter(p => !p.featured);
-    return allArticles.map(article => (
-      <Col key={article.id} xs={12} md={4}>
-        <CardSpacer>
-          <ArticleCard article={article} tags={article.tags} />
-        </CardSpacer>
-      </Col>
-    ));
-  };
-
-  renderFeature = () => {
-    const { articles } = this.props;
-    const featuredArticles = articles.filter(p => p.featured);
-    return featuredArticles.map(article => <FeaturedArticle key={article.id} {...article} />);
+    return articles.map(article => <ArticleCard key={article.id} {...article} />);
   };
 
   render() {
+    const { isLoading } = this.props;
+
     return (
-      <Grid fluid={false}>
-        <div className="boldr-pad-top">
-          {this.renderFeature()}
-          <Row>{this.renderArticles()}</Row>
-        </div>
-      </Grid>
+      <div>
+        <Section>
+          <Heading type="h2" text="Blog" />
+        </Section>
+        <Container>{isLoading ? <Loader /> : this.renderArticles()}</Container>
+      </div>
     );
   }
 }

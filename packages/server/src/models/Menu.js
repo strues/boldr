@@ -2,7 +2,7 @@ import BaseModel from './BaseModel';
 
 class Menu extends BaseModel {
   static tableName = 'menu';
-  static addTimestamps = false;
+  static addTimestamps = true;
 
   static relationMappings = {
     details: {

@@ -40,51 +40,49 @@ class Article extends BaseModel {
     return 'id';
   }
 
-  static get relationMappings() {
-    return {
-      author: {
-        relation: BaseModel.BelongsToOneRelation,
-        modelClass: `${__dirname}/User`,
-        join: {
-          from: 'article.userId',
-          to: 'user.id',
-        },
+  static relationMappings = {
+    author: {
+      relation: BaseModel.BelongsToOneRelation,
+      modelClass: `${__dirname}/User`,
+      join: {
+        from: 'article.authorId',
+        to: 'user.id',
       },
-      tags: {
-        relation: BaseModel.ManyToManyRelation,
-        modelClass: `${__dirname}/Tag`,
-        join: {
-          from: 'article.id',
-          through: {
-            from: 'article_tag.articleId',
-            to: 'article_tag.tagId',
-            modelClass: `${__dirname}/join/ArticleTag`,
-          },
-          to: 'tag.id',
+    },
+    tags: {
+      relation: BaseModel.ManyToManyRelation,
+      modelClass: `${__dirname}/Tag`,
+      join: {
+        from: 'article.id',
+        through: {
+          from: 'article_tag.articleId',
+          to: 'article_tag.tagId',
+          modelClass: `${__dirname}/join/ArticleTag`,
         },
+        to: 'tag.id',
       },
-      category: {
-        relation: BaseModel.BelongsToOneRelation,
-        modelClass: `${__dirname}/Category`,
-        join: {
-          from: 'article.categoryId',
-          to: 'category.id',
+    },
+    category: {
+      relation: BaseModel.BelongsToOneRelation,
+      modelClass: `${__dirname}/Category`,
+      join: {
+        from: 'article.categoryId',
+        to: 'category.id',
+      },
+    },
+    media: {
+      relation: BaseModel.ManyToManyRelation,
+      modelClass: `${__dirname}/Media`,
+      join: {
+        from: 'article.id',
+        through: {
+          from: 'article_media.articleId',
+          to: 'article_media.mediaId',
         },
+        to: 'media.id',
       },
-      media: {
-        relation: BaseModel.ManyToManyRelation,
-        modelClass: `${__dirname}/Media`,
-        join: {
-          from: 'article.id',
-          through: {
-            from: 'article_media.articleId',
-            to: 'article_media.mediaId',
-          },
-          to: 'media.id',
-        },
-      },
-    };
-  }
+    },
+  };
   static getOnlyArticles(offset, limit) {
     return Article.query()
       .offset(offset)

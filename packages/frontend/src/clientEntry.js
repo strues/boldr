@@ -14,7 +14,11 @@ import ThemeProvider from './theme/ThemeProvider';
 injectResetStyle();
 
 const DOM_NODE = document.getElementById('app');
-const preloadedState = window.__APOLLO_STATE__;
+let preloadedState = {};
+
+if (window.__APOLLO_STATE__) {
+  preloadedState = window.__APOLLO_STATE__;
+}
 const token = getToken();
 
 export const apolloClient = createApolloClient({
@@ -48,6 +52,10 @@ if (process.env.NODE_ENV !== 'production') {
   let Application = App;
 
   if (module && module.hot) {
+    module.hot.dispose(() => {
+      // Force Apollo to fetch the latest data from the server
+      delete window.__APOLLO_STATE__;
+    });
     module.hot.accept('./components/App', () => {
       Application = require('./components/App').default;
       setImmediate(() => {

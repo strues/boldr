@@ -30,15 +30,8 @@ export default function createApolloClient(config = {}) {
   if (hasApollo) {
     const opts = {
       /* istanbul ignore next */
-      dataIdFromObject: result => {
-        /* istanbul ignore next */
-        if (result.id && result.__typename) {
-          /* istanbul ignore next */
-          return result.__typename + result.id;
-        }
-        /* istanbul ignore next */
-        return null;
-      },
+      dataIdFromObject: ({ __typename, id, slug, safeName }) =>
+        `${__typename}:${slug || id || safeName}`,
       credentials: trustNetwork ? 'include' : 'same-origin',
       headers,
     };

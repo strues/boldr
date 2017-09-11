@@ -20,7 +20,7 @@ import StatsPlugin from './plugins/StatsPlugin';
 import HappyPackPlugin from './plugins/happyPackPlugin';
 import ProgressPlugin from './plugins/ProgressPlugin';
 import WebpackDigestHash from './plugins/ChunkHash';
-
+import getNodeExternals from './util/getNodeExternals';
 import rootModuleRelativePath from './util/rootModuleRelativePath';
 
 import {
@@ -73,18 +73,9 @@ const PUBLIC_PATH = config.paths.publicPath;
 const GRAPHQL_ENDPOINT = process.env.GRAPHQL_ENDPOINT;
 const API_URL = process.env.API_URL;
 const API_PREFIX = process.env.API_PREFIX;
+const useLightNodeBundle = false;
 
-const nodeModules = path.resolve(ROOT, 'node_modules');
 const SRC_DIR = path.resolve(ROOT, 'src');
-const serverExternals = fs
-  .readdirSync(nodeModules)
-  .filter(x => !/\.bin|react-universal-component|webpack-flush-chunks/.test(x))
-  .reduce((externals, request) => {
-    externals[request] = `commonjs ${request}`;
-    return externals;
-  }, {});
-
-serverExternals['react-dom/server'] = 'commonjs react-dom/server';
 
 export default function createWebpackConfig(
   options: ConfigurationOptions = {},
@@ -181,13 +172,7 @@ export default function createWebpackConfig(
     minimize: false,
     sourceMap: false,
   };
-  const cssLoaderOptions2 = {
-    modules: true,
-    localIdentName: '[local]-[hash:base62:8]',
-    import: 2,
-    minimize: false,
-    sourceMap: false,
-  };
+
   const postCSSLoaderRule = {
     loader: require.resolve('postcss-loader'),
     options: {
@@ -198,19 +183,18 @@ export default function createWebpackConfig(
   const sassLoaderRule = {
     loader: require.resolve('better-sass-loader'),
   };
+
+  const HMR_MIDDLEWARE = `${require.resolve(
+    'webpack-hot-middleware/client',
+  )}?path=/__webpack_hmr&timeout=20000&reload=true&quiet=false&noInfo=true&overlay=false`;
+
   const getClientEntry = () => {
     // For development
-    let entry = [
-      require.resolve('react-hot-loader/patch'),
-      `${require.resolve(
-        'webpack-hot-middleware/client',
-      )}?path=/__webpack_hmr&timeout=20000&reload=false&quiet=false&noInfo=false`,
-      CLIENT_ENTRY,
-    ];
+    let entry = [require.resolve('react-hot-loader/patch'), HMR_MIDDLEWARE, CLIENT_ENTRY];
     if (!_IS_DEV_) {
       entry = {
-        main: CLIENT_ENTRY,
         vendor: CLIENT_VENDOR,
+        main: CLIENT_ENTRY,
       };
     }
 
@@ -228,7 +212,7 @@ export default function createWebpackConfig(
     devtool,
     context: ROOT,
     bail: !_IS_DEV_,
-    externals: _IS_SERVER_ ? serverExternals : undefined,
+    externals: _IS_SERVER_ ? getNodeExternals(useLightNodeBundle) : undefined,
     node: _IS_CLIENT_
       ? {
           console: true,
@@ -379,31 +363,6 @@ export default function createWebpackConfig(
                 sassLoaderRule,
               ].filter(Boolean),
         },
-        {
-          test: /\.(m.scss|m.css)$/,
-          include: PROJECT_SRC,
-          use: _IS_CLIENT_
-            ? ExtractCssChunks.extract({
-                use: [
-                  cacheLoader,
-                  {
-                    loader: require.resolve('css-loader'),
-                    options: cssLoaderOptions2,
-                  },
-                  postCSSLoaderRule,
-                  sassLoaderRule,
-                ].filter(Boolean),
-              })
-            : [
-                cacheLoader,
-                {
-                  loader: require.resolve('css-loader/locals'),
-                  options: cssLoaderOptions2,
-                },
-                postCSSLoaderRule,
-                sassLoaderRule,
-              ].filter(Boolean),
-        },
       ].filter(Boolean),
     },
     plugins: [
@@ -501,10 +460,14 @@ export default function createWebpackConfig(
             minChunks: Infinity,
           })
         : null,
+
       _IS_PROD_ ? new webpack.optimize.ModuleConcatenationPlugin() : null,
+
       _IS_DEV_ ? new WatchMissingNodeModulesPlugin(path.resolve(ROOT, './node_modules')) : null,
+
       _IS_CLIENT_ && _IS_DEV_ ? new webpack.HotModuleReplacementPlugin() : null,
       _IS_DEV_ ? new webpack.NoEmitOnErrorsPlugin() : null,
+
       _IS_DEV_ && _IS_CLIENT_
         ? new webpack.DllReferencePlugin({
             context: ROOT,

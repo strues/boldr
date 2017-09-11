@@ -8,9 +8,10 @@ query getArticleBySlug($slug: String!) {
     content
     rawContent
     published
+    status
     createdAt
     excerpt
-    userId
+    authorId
     categoryId
     category {
       id

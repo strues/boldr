@@ -12,6 +12,7 @@ module.exports.up = async (db) => {
     table.jsonb('meta').nullable();
     table.jsonb('blocks').nullable();
     table.text('markup').nullable();
+
     table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
     table.timestamp('updatedAt').nullable().defaultTo(null);
     table.timestamp('deletedAt').nullable().defaultTo(null);

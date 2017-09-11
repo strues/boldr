@@ -94,71 +94,69 @@ class User extends BaseModel {
     }
     this.email = this.email.trim();
   }
-  static get relationMappings() {
-    return {
-      roles: {
-        relation: BaseModel.ManyToManyRelation,
-        modelClass: `${__dirname}/Role`,
-        join: {
-          from: 'user.id',
-          through: {
-            from: 'user_role.userId',
-            to: 'user_role.roleId',
-            modelClass: `${__dirname}/join/UserRole`,
-          },
-          to: 'role.id',
+  static relationMappings = {
+    roles: {
+      relation: BaseModel.ManyToManyRelation,
+      modelClass: `${__dirname}/Role`,
+      join: {
+        from: 'user.id',
+        through: {
+          from: 'user_role.userId',
+          to: 'user_role.roleId',
+          modelClass: `${__dirname}/join/UserRole`,
         },
+        to: 'role.id',
       },
-      articles: {
-        relation: BaseModel.HasManyRelation,
-        modelClass: `${__dirname}/Article`,
-        join: {
-          from: 'user.id',
-          to: 'article.userId',
-        },
+    },
+    articles: {
+      relation: BaseModel.HasManyRelation,
+      modelClass: `${__dirname}/Article`,
+      join: {
+        from: 'user.id',
+        to: 'article.authorId',
       },
-      files: {
-        relation: BaseModel.HasManyRelation,
-        modelClass: `${__dirname}/File`,
-        join: {
-          from: 'user.id',
-          to: 'file.ownerId',
-        },
+    },
+    files: {
+      relation: BaseModel.HasManyRelation,
+      modelClass: `${__dirname}/File`,
+      join: {
+        from: 'user.id',
+        to: 'file.ownerId',
       },
-      uploads: {
-        relation: BaseModel.HasManyRelation,
-        modelClass: `${__dirname}/Media`,
-        join: {
-          from: 'user.id',
-          to: 'media.userId',
-        },
+    },
+    uploads: {
+      relation: BaseModel.HasManyRelation,
+      modelClass: `${__dirname}/Media`,
+      join: {
+        from: 'user.id',
+        to: 'media.ownerId',
       },
-      verificationToken: {
-        relation: BaseModel.HasOneRelation,
-        modelClass: `${__dirname}/VerificationToken`,
-        join: {
-          from: 'user.id',
-          to: 'verification_token.userId',
-        },
+    },
+    verificationToken: {
+      relation: BaseModel.HasOneRelation,
+      modelClass: `${__dirname}/VerificationToken`,
+      join: {
+        from: 'user.id',
+        to: 'verification_token.userId',
       },
-      resetToken: {
-        relation: BaseModel.HasOneRelation,
-        modelClass: `${__dirname}/ResetToken`,
-        join: {
-          from: 'user.id',
-          to: 'reset_token.userId',
-        },
+    },
+    resetToken: {
+      relation: BaseModel.HasOneRelation,
+      modelClass: `${__dirname}/ResetToken`,
+      join: {
+        from: 'user.id',
+        to: 'reset_token.userId',
       },
-      socialMedia: {
-        relation: BaseModel.HasOneRelation,
-        modelClass: `${__dirname}/Social`,
-        join: {
-          from: 'user.id',
-          to: 'user_social_media.userId',
-        },
+    },
+    socialMedia: {
+      relation: BaseModel.HasOneRelation,
+      modelClass: `${__dirname}/Social`,
+      join: {
+        from: 'user.id',
+        to: 'user_social_media.userId',
       },
-    };
-  }
+    },
+  };
 
   static getUserByUsername(username) {
     return User.query()

@@ -15,6 +15,8 @@ import BaseModel, { mergeSchemas } from './BaseModel';
  */
 class Social extends BaseModel {
   static tableName = 'user_social_media';
+  static addTimestamps = false;
+
   static jsonSchema = mergeSchemas(BaseModel.jsonSchema, {
     required: ['id', 'userId'],
     properties: {
@@ -62,20 +64,17 @@ class Social extends BaseModel {
       },
     },
   });
-  static addTimestamps = false;
 
-  static get relationMappings() {
-    return {
-      user: {
-        relation: BaseModel.BelongsToOneRelation,
-        modelClass: `${__dirname}/User`,
-        join: {
-          from: 'user_social_media.userId',
-          to: 'user.id',
-        },
+  static relationMappings = {
+    user: {
+      relation: BaseModel.BelongsToOneRelation,
+      modelClass: `${__dirname}/User`,
+      join: {
+        from: 'user_social_media.userId',
+        to: 'user.id',
       },
-    };
-  }
+    },
+  };
 }
 
 export default Social;

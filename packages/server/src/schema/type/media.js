@@ -34,7 +34,7 @@ const MediaType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'The relative url to access the file',
     },
-    userId: {
+    ownerId: {
       type: GraphQLID,
       description: 'The id of the user the file belongs to.',
     },

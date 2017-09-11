@@ -34,26 +34,24 @@ class Category extends BaseModel {
       },
     },
   });
-  static get relationMappings() {
-    return {
-      articles: {
-        relation: BaseModel.HasManyRelation,
-        modelClass: `${__dirname}/Article`,
-        join: {
-          from: 'category.id',
-          to: 'article.categoryId',
-        },
+  static relationMappings = {
+    articles: {
+      relation: BaseModel.HasManyRelation,
+      modelClass: `${__dirname}/Article`,
+      join: {
+        from: 'category.id',
+        to: 'article.categoryId',
       },
-      entities: {
-        relation: BaseModel.HasManyRelation,
-        modelClass: `${__dirname}/Entity`,
-        join: {
-          from: 'category.id',
-          to: 'entity.categoryId',
-        },
+    },
+    entities: {
+      relation: BaseModel.HasManyRelation,
+      modelClass: `${__dirname}/Entity`,
+      join: {
+        from: 'category.id',
+        to: 'entity.categoryId',
       },
-    };
-  }
+    },
+  };
 }
 
 export default Category;

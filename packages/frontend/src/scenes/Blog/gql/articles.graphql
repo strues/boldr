@@ -9,6 +9,12 @@ query GetArticlesQuery($offset: Int!, $limit: Int!) {
     createdAt
     excerpt
     categoryId
+    author {
+      firstName
+      lastName
+      username
+      avatarUrl
+    }
     tags {
       id
       name

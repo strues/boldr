@@ -6,6 +6,7 @@ import {
   GraphQLInputObjectType,
 } from 'graphql';
 import { GraphQLURL, GraphQLJSON } from '../scalars';
+import CONTENT_STATUS from '../enum/contentStatus';
 
 const EditArticleInput = new GraphQLInputObjectType({
   name: 'EditArticleInput',
@@ -37,6 +38,10 @@ const EditArticleInput = new GraphQLInputObjectType({
     published: {
       type: new GraphQLNonNull(GraphQLBoolean),
       description: 'True if the article is published',
+    },
+    status: {
+      type: CONTENT_STATUS,
+      description: 'The publishing status of content',
     },
     image: {
       type: GraphQLURL,

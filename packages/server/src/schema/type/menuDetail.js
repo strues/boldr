@@ -37,10 +37,6 @@ const MenuDetailType = new GraphQLObjectType({
       type: GraphQLInt,
       description: 'The display order',
     },
-    mobileHref: {
-      type: GraphQLString,
-      description: 'Mobile only link',
-    },
     menuId: {
       type: GraphQLID,
       description: 'The id of the menu the detail belongs to.',

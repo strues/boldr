@@ -60,9 +60,7 @@ const TagList = (props: Props) => {
               <InnerListItem>
                 <TagName>{tag.name}</TagName>
               </InnerListItem>
-              <InnerListItem>
-                <TagDesc>{tag.description}</TagDesc>
-              </InnerListItem>
+
               <InnerListItem>
                 <TagDesc>{tag.articles.length}</TagDesc>
               </InnerListItem>

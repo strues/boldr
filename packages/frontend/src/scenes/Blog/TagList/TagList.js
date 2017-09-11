@@ -2,9 +2,10 @@
 
 import React from 'react';
 import Helmet from 'react-helmet';
-
+import styled from 'styled-components';
+import { Section } from '@boldr/ui/Layout';
+import Heading from '@boldr/ui/Heading';
 import Loader from '@boldr/ui/Loader';
-import { Grid, Row, Col } from '@boldr/ui/Layout';
 import type { ArticlesType, MatchParams } from '../../../types/boldr';
 import ArticleCard from '../components/ArticleCard';
 
@@ -14,6 +15,14 @@ type Props = {
   match: MatchParams,
 };
 
+const Container = styled.div`
+  flex: 1;
+  max-width: 1034px;
+  width: 100%;
+  margin: 30px auto 100px;
+  display: flex;
+  flex-wrap: wrap;
+`;
 const TagList = (props: Props) => {
   const { isLoading, articles, match: { params } } = props;
   if (isLoading) {
@@ -25,15 +34,16 @@ const TagList = (props: Props) => {
   return (
     <div>
       <Helmet title={`Posts tagged ${params.name}`} />
-      <Grid>
-        <Row>
-          {articles.map(article => (
-            <Col key={article.id} xs={12} sm={4}>
-              <ArticleCard listTags={article.tags} article={article} />
-            </Col>
-          ))}
-        </Row>
-      </Grid>
+      <Section>
+        <Heading type="h2" text={params.name} />
+      </Section>
+      <Container>
+        {articles ? (
+          articles.map(article => <ArticleCard key={article.id} featured={false} {...article} />)
+        ) : (
+          <Loader />
+        )}
+      </Container>
     </div>
   );
 };

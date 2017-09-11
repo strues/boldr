@@ -43,11 +43,11 @@ const EntityType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'url of the entity main image',
     },
-    userId: {
+    authorId: {
       type: GraphQLID,
       description: 'The id of the creator',
     },
-    ctId: {
+    contentTypeId: {
       type: GraphQLID,
       description: 'The content type id',
     },

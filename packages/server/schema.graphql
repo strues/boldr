@@ -3,6 +3,14 @@ schema {
   mutation: RootMutation
 }
 
+# A tag relates content together
+type AllContent {
+  articles: [Article]
+  tags: Tag
+  entities: Entity
+  categories: Category
+}
+
 # A blog post or article
 type Article {
   # Unique identifier for the object.
@@ -30,6 +38,9 @@ type Article {
   # True if the article is published
   published: Boolean
 
+  # The publishing status of content
+  status: CONTENT_STATUS
+
   # url of the article feature image
   image: String
 
@@ -37,7 +48,7 @@ type Article {
   heroImage: String
 
   # True if the article is published
-  userId: ID
+  authorId: ID
 
   # The category id
   categoryId: ID
@@ -81,12 +92,6 @@ type Category {
   # A description of the category
   description: String
 
-  # Entities belonging to the category
-  entities: [Entity]
-
-  # Articles belonging to the category
-  articles: [Article]
-
   # The timestamp when the object was deleted
   deletedAt: DateTime
 
@@ -95,13 +100,19 @@ type Category {
 
   # The timestamp when the object was created
   createdAt: DateTime
+
+  # Entities belonging to the category
+  entities: [Entity]
+
+  # Articles belonging to the category
+  articles: [Article]
 }
 
 # Variations of status for content
 enum CONTENT_STATUS {
-  published
-  archived
-  draft
+  PUBLISHED
+  ARCHIVED
+  DRAFT
 }
 
 # A tag relates content together
@@ -155,6 +166,9 @@ input CreateArticleInput {
 
   # True if the article is published
   published: Boolean!
+
+  # The publishing status of content
+  status: CONTENT_STATUS
 
   # url of the article feature image
   image: String
@@ -222,6 +236,9 @@ input EditArticleInput {
   # True if the article is published
   published: Boolean!
 
+  # The publishing status of content
+  status: CONTENT_STATUS
+
   # url of the article feature image
   image: URL
 
@@ -248,20 +265,17 @@ input EditDetailInput {
   # True if the item has a dropdown
   hasDropdown: Boolean
 
+  # True if the item is a dropdown menu item
+  isDropdown: Boolean
+
   # The display order
   order: Int
-
-  # Mobile only link
-  mobileHref: String
 
   # The link
   href: String
 
   # Icon kind
   icon: String
-
-  # Children are dropdown links
-  children: JSON
 }
 
 input EditMediaInput {
@@ -323,10 +337,10 @@ type Entity {
   image: String
 
   # The id of the creator
-  userId: ID
+  authorId: ID
 
   # The content type id
-  ctId: ID
+  contentTypeId: ID
 
   # The category id
   categoryId: ID
@@ -416,7 +430,7 @@ type Media {
   url: String
 
   # The id of the user the file belongs to.
-  userId: ID
+  ownerId: ID
 
   # The timestamp when the object was last updated
   updatedAt: DateTime
@@ -436,8 +450,8 @@ type Menu {
   # A name for the object.
   name: String
 
-  # Custom css classname for the link
-  attributes: String
+  # A normalized copy of the object name.
+  safeName: String
 
   # True if the menu should be hidden from unauth
   restricted: Boolean
@@ -469,20 +483,23 @@ type MenuDetail {
   # True if the item has a dropdown
   hasDropdown: Boolean
 
+  # True if the item has is a dropdown item
+  isDropdown: Boolean
+
   # The display order
   order: Int
 
-  # Mobile only link
-  mobileHref: String
+  # The id of the menu the detail belongs to.
+  menuId: ID
+
+  # The id of the menu the detail belongs to.
+  parentId: ID
 
   # The link
   href: String
 
   # Icon kind
   icon: String
-
-  # Children are dropdown links
-  children: JSON
 
   # The timestamp when the object was deleted
   deletedAt: DateTime
@@ -560,6 +577,7 @@ type Query {
     # The id of the requested content type
     id: ID!
   ): ContentType
+  allContent: AllContent
 
   # Returns all content entities from the database..
   entities(
@@ -791,15 +809,15 @@ type RootMutation {
     id: ID!
   ): Tag
 
-  # for troubleshooting by admins, create a JWT for a given userId
+  # Authenticates a user. Returns the user and a signed JWT.
   loginUser(input: UserLoginInput!): UserLoginResponse
 
-  # A user registering for an account.
+  # Register for a new account.
   signupUser(input: UserSignupInput!): User
 
   # Edit an existing user
   editUser(
-    # The user ID
+    # The user id
     id: ID!
 
     # The required fields for editing a user.
@@ -873,15 +891,6 @@ type Tag {
   # A name for the object.
   name: String
 
-  # A description of the tag
-  description: String
-
-  # Articles related to the tag
-  articles: [Article]
-
-  # Entities related to the tag
-  entities: [Entity]
-
   # The timestamp when the object was deleted
   deletedAt: DateTime
 
@@ -890,14 +899,17 @@ type Tag {
 
   # The timestamp when the object was created
   createdAt: DateTime
+
+  # Articles related to the tag
+  articles: [Article]
+
+  # Entities related to the tag
+  entities: [Entity]
 }
 
 input TagInput {
   # The name of the tag
   name: String!
-
-  # A description of the tag.
-  description: String
 }
 
 input Upload {

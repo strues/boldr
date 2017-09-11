@@ -5,7 +5,6 @@ import {
   GraphQLInt,
   GraphQLInputObjectType,
 } from 'graphql';
-import { GraphQLJSON } from '../scalars';
 
 const EditDetailInput = new GraphQLInputObjectType({
   name: 'EditDetailInput',
@@ -30,13 +29,13 @@ const EditDetailInput = new GraphQLInputObjectType({
       type: GraphQLBoolean,
       description: 'True if the item has a dropdown',
     },
+    isDropdown: {
+      type: GraphQLBoolean,
+      description: 'True if the item is a dropdown menu item',
+    },
     order: {
       type: GraphQLInt,
       description: 'The display order',
-    },
-    mobileHref: {
-      type: GraphQLString,
-      description: 'Mobile only link',
     },
     href: {
       type: GraphQLString,
@@ -45,10 +44,6 @@ const EditDetailInput = new GraphQLInputObjectType({
     icon: {
       type: GraphQLString,
       description: 'Icon kind',
-    },
-    children: {
-      type: GraphQLJSON,
-      description: 'Children are dropdown links',
     },
   }),
 });

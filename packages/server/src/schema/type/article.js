@@ -10,6 +10,7 @@ import { GraphQLJSON } from '../scalars';
 import { globalIdField, slug } from '../field/identifier';
 import { dateCUD } from '../field/date';
 import cached from '../field/cached';
+import CONTENT_STATUS from '../enum/contentStatus';
 import Article from '../../models/Article';
 import UserType from './user';
 import MediaType from './media';
@@ -47,6 +48,10 @@ const ArticleType = new GraphQLObjectType({
       type: GraphQLBoolean,
       description: 'True if the article is published',
     },
+    status: {
+      type: CONTENT_STATUS,
+      description: 'The publishing status of content',
+    },
     image: {
       type: GraphQLString,
       description: 'url of the article feature image',
@@ -55,7 +60,7 @@ const ArticleType = new GraphQLObjectType({
       type: GraphQLString,
       description: 'url of the article hero image',
     },
-    userId: {
+    authorId: {
       type: GraphQLID,
       description: 'True if the article is published',
     },

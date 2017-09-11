@@ -50,7 +50,7 @@ export default {
         type: args.file.type,
         url: `/uploads/media/${actualFileName}`,
         path: `${UPLOAD_DIR}/media/${actualFileName}`,
-        userId: context.user.id,
+        ownerId: context.user.id,
       });
       return newMedia;
     },

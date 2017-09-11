@@ -35,18 +35,16 @@ class ContentT extends BaseModel {
     },
   });
 
-  static get relationMappings() {
-    return {
-      entities: {
-        relation: BaseModel.HasManyRelation,
-        modelClass: `${__dirname}/Entity`,
-        join: {
-          from: 'content_type.id',
-          to: 'entity.ctId',
-        },
+  static relationMappings = {
+    entities: {
+      relation: BaseModel.HasManyRelation,
+      modelClass: `${__dirname}/Entity`,
+      join: {
+        from: 'content_type.id',
+        to: 'entity.ctId',
       },
-    };
-  }
+    },
+  };
 
   static getGontentTypes(offset, limit) {
     return ContentT.query()

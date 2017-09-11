@@ -36,6 +36,7 @@
     "draft-convert": "^1.4.9",
     "draft-js": "^0.10.1",
     "history": "^4.7.2",
+    "humps": "^2.0.1",
     "immutable": "^3.8.1",
     "immutability-helper": "2.3.1",
     "lodash": "^4.17.4",

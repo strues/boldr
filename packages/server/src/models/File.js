@@ -4,18 +4,17 @@ import BaseModel from './BaseModel';
 class File extends BaseModel {
   static tableName = 'file';
   static addTimestamps = true;
-  static get relationMappings() {
-    return {
-      owner: {
-        relation: BaseModel.BelongsToOneRelation,
-        modelClass: `${__dirname}/User`,
-        join: {
-          from: 'file.ownerId',
-          to: 'user.id',
-        },
+
+  static relationMappings = {
+    owner: {
+      relation: BaseModel.BelongsToOneRelation,
+      modelClass: `${__dirname}/User`,
+      join: {
+        from: 'file.ownerId',
+        to: 'user.id',
       },
-    };
-  }
+    },
+  };
   static listFiles(offset, limit) {
     return File.query()
       .offset(offset)

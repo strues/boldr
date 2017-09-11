@@ -6,7 +6,6 @@ query getArticleBySlug($slug: String!) {
     slug
     image
     createdAt
-    userId
     categoryId
     tags {
       id

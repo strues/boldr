@@ -6,15 +6,15 @@ module.exports.up = async (db) => {
       .notNullable()
       .defaultTo(db.raw('uuid_generate_v4()'))
       .primary();
-    table.uuid('userId').unsigned().notNullable();
+
+    table.uuid('userId').notNullable();
     table.string('facebookUrl', 255).nullable();
     table.string('twitterUrl', 255).nullable();
     table.string('githubUrl', 255).nullable();
     table.string('linkedinUrl', 255).nullable();
     table.string('googleUrl', 255).nullable();
     table.string('stackoverflowUrl', 255).nullable();
-    table.timestamp('createdAt').notNullable().defaultTo(db.fn.now());
-    table.timestamp('updatedAt').nullable().defaultTo(null);
+
      // fk | uuid
     table
       .foreign('userId')
