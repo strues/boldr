@@ -21,7 +21,7 @@ module.exports = [
   'react-tagsinput',
   'react-transition-group',
   'react',
-  'recompose',
+  'recompact',
   'reselect',
   'redux-form',
   'redux-thunk',

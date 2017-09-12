@@ -1,5 +1,5 @@
 /* @flow */
-import type { ArticleType, Tag } from '../../../types/boldr';
+import type { ArticleType, TagType } from '../../../types/boldr';
 import * as t from './actionTypes';
 
 export function togglePostLayoutView() {
@@ -13,7 +13,7 @@ export function selectArticle(article: ArticleType) {
   };
 }
 
-export function selectTag(tag: Tag) {
+export function selectTag(tag: TagType) {
   return {
     type: t.SELECT_TAG,
     tag,

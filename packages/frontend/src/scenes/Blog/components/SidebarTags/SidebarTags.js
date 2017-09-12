@@ -3,11 +3,12 @@ import React from 'react';
 import classnames from 'classnames';
 import Heading from '@boldr/ui/Heading';
 import { StyleClasses } from '@boldr/ui/theme/styleClasses';
+import type { TagsType } from '../../../../types/boldr';
 import TagBlock from '../TagBlock';
 
 type Props = {
   className: string,
-  tags: Array<Tag>,
+  tags: TagsType,
 };
 // boldrui-article-sidebar__tags
 const BASE_ELEMENT = StyleClasses.ARTICLE_SIDEBAR_TAGS;

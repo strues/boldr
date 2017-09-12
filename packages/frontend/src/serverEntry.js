@@ -78,9 +78,13 @@ export default ({ clientStats, outputPath }) =>
             </head>
             <body ${helmet.bodyAttributes.toString()}>
               <div id="app"><div>${app}</div></div>
+              <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
               ${process.env.NODE_ENV === 'development' ? dlls : null}
               ${js}
               ${cssHash}
+              <script type="text/javascript">
+              WebFont.load({ google: { families: ['Roboto:300,400,700','Chivo:300,700'] } });
+            </script>
               <script type="text/javascript">
                 window.__APOLLO_STATE__=${serialize(preloadedState, {
                   json: true,

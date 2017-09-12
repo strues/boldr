@@ -52,7 +52,7 @@ export class Page extends React.Component<Props, *> {
               <Route path="/login" component={LoginContainer} />
               <Route path="/signup" component={SignupContainer} />
               <Route path="/account" component={AccountContainer} />
-              <Route path="/profiles/:username" component={Profile} />
+              <Route path="/profiles/:username" exact component={Profile} />
               <Route path="/blog" component={BlogContainer} />
               <Route path="/about" exact component={About} />
               <Route path="/" exact component={Home} />

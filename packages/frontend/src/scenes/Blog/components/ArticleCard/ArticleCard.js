@@ -177,6 +177,7 @@ const ArticleCard = (props: Props) => {
         <ContentLink to={`/blog/${props.slug}`}>
           <ArticleHeader>
             <Title>{props.title}</Title>
+            {formattedDate}
           </ArticleHeader>
           <Excerpt>
             <p>{props.excerpt}</p>

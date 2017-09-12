@@ -2,6 +2,8 @@
 import React, { PureComponent } from 'react';
 import Helmet from 'react-helmet';
 import classnames from 'classnames';
+import styled from 'styled-components';
+import Link from 'react-router-dom/Link';
 import HeroArticle from '@boldr/ui/Hero/HeroArticle';
 import Loader from '@boldr/ui/Loader';
 import { Grid, Row, Col } from '@boldr/ui/Layout';
@@ -20,6 +22,40 @@ export type Props = {
   sidebarClassName?: string,
 };
 
+const ArticleFooter = styled.footer`@media (min-width: 700px) {padding: 70px 100px 0;}`;
+
+const AuthorCardLink = styled(Link)`
+  display: flex;
+  align-items: center;
+`;
+
+const AuthorImage = styled.img`
+  width: 100px;
+  height: 100px;
+  margin-right: 15px;
+  border-radius: 50%;
+`;
+
+const AuthorCardContent = styled.section``;
+
+const AuthorName = styled.h4`
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 600;
+  margin: 0 0 5px;
+`;
+
+const AuthorBio = styled.p`
+  margin: 0;
+  color: #738a94;
+  font-size: 13px;
+  line-height: 18px;
+  font-weight: 300;
+  @media (min-width: 700px) {
+    font-size: 18px;
+    line-height: 22px;
+  }
+`;
 class Article extends PureComponent<Props, *> {
   props: Props;
 
@@ -36,6 +72,15 @@ class Article extends PureComponent<Props, *> {
           <Row>
             <Col xs={12} md={8} lg={9}>
               <ArticleContent {...article} />
+              <ArticleFooter>
+                <AuthorCardLink to={`/profiles/${article.author.profile.username}`}>
+                  <AuthorImage src={article.author.profile.avatarUrl} />
+                  <AuthorCardContent>
+                    <AuthorName>{article.author.profile.username}</AuthorName>
+                    <AuthorBio>{article.author.profile.bio}</AuthorBio>
+                  </AuthorCardContent>
+                </AuthorCardLink>
+              </ArticleFooter>
             </Col>
             {this.renderArticleSidebar()}
           </Row>
