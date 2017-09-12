@@ -1,6 +1,6 @@
 import BaseModel from './BaseModel';
 
-class ContentT extends BaseModel {
+class ContentType extends BaseModel {
   static tableName = 'content_type';
   static addTimestamps = true;
 
@@ -62,10 +62,10 @@ class ContentT extends BaseModel {
   };
 
   static getGontentTypes(offset, limit) {
-    return ContentT.query()
+    return ContentType.query()
       .offset(offset)
       .limit(limit);
   }
 }
 
-export default ContentT;
+export default ContentType;

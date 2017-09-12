@@ -6,11 +6,12 @@ import appRoot from '@boldr/utils/lib/node/appRoot';
 import { printSchema } from 'graphql';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import getConfig from '@boldr/config';
-import loaders from '../data/loaders';
+// import loaders from '../graphql/loaders';
+import dataloaders from '../graphql/loaders/index';
+import models from '../models';
 import ValidationError from '../errors/validationError';
 import formatError from '../errors/formatError';
-import RootSchema from '../schema/rootSchema';
-
+import schema from '../graphql/schema';
 import apolloUpload from './apolloUpload';
 
 const graphqlHandler = graphqlExpress(req => {
@@ -21,12 +22,13 @@ const graphqlHandler = graphqlExpress(req => {
     throw new Error('Query too large.');
   }
   return {
-    schema: RootSchema,
+    schema,
     context: {
       req,
       ValidationError,
+      models,
       user: req.session.user ? req.session.user : null,
-      ...loaders.create(),
+      loaders: dataloaders(),
     },
     debug: process.env.NODE_ENV !== 'production',
     pretty: process.env.NODE_ENV !== 'production',

@@ -46,7 +46,7 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.0",
     "eslint": "^4.6.1",
-    "eslint-config-boldr": "^0.12.12",
+    "eslint-config-boldr": "^0.12.13",
     "prettier": "1.6.1",
     "prepublish": "^1.4.2",
     "rimraf": "^2.6.1"

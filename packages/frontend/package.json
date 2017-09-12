@@ -40,6 +40,7 @@
     "immutability-helper": "2.3.1",
     "lodash": "^4.17.4",
     "polished": "1.7.0",
+    "ramda": "0.24.1",
     "react": "^15.6.1",
     "react-apollo": "^1.4.15",
     "react-dom": "^15.6.1",
@@ -64,15 +65,12 @@
     "@boldr/cli": "0.2.0-beta.1",
     "autoprefixer": "^7.1.4",
     "babel-cli": "^6.26.0",
-    "babel-eslint": "^7.2.3",
+    "babel-eslint": "^8.0.0",
     "babel-preset-boldr": "0.11.0",
     "babel-plugin-module-resolver": "^3.0.0-beta.5",
-    "babel-watch": "^2.0.7",
     "cross-env": "^5.0.5",
-    "enzyme": "^2.9.1",
-    "enzyme-to-json": "^1.5.1",
     "eslint": "^4.6.1",
-    "eslint-config-boldr": "^0.12.12",
+    "eslint-config-boldr": "^0.12.13",
     "express": "^4.15.4",
     "flow-bin": "^0.54.1",
     "jest-styled-components": "4.6.0",
@@ -80,8 +78,6 @@
     "react-hot-loader": "next",
     "react-test-renderer": "^15.6.1",
     "redbox-react": "^1.5.0",
-    "redux-mock-store": "^1.2.3",
-    "rimraf": "^2.6.1",
-    "sinon": "^3.2.1"
+    "rimraf": "^2.6.1"
   }
 }

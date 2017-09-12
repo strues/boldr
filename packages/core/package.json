@@ -46,7 +46,7 @@
   "devDependencies": {
     "babel-preset-boldr": "0.11.0",
     "eslint": "^4.6.1",
-    "eslint-config-boldr": "^0.12.12",
+    "eslint-config-boldr": "^0.12.13",
     "fast-async": "^6.3.0",
     "prepublish": "^1.4.2",
     "prettier": "1.6.1",

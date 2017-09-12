@@ -8,6 +8,7 @@ import createHistory from 'history/createBrowserHistory';
 import { checkAuth } from './scenes/Account/state/actions';
 import App from './components/App';
 import appReducer from './reducers';
+import theme from './theme/theme';
 import { injectResetStyle } from './theme/resetStyle';
 import ThemeProvider from './theme/ThemeProvider';
 
@@ -41,7 +42,7 @@ if (token) {
 }
 const AppComponent = PassedApp => (
   <ConnectedRouter history={history}>
-    <ThemeProvider>{PassedApp}</ThemeProvider>
+    <ThemeProvider theme={theme}>{PassedApp}</ThemeProvider>
   </ConnectedRouter>
 );
 

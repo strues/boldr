@@ -1,12 +1,12 @@
 /* eslint-disable new-cap, no-param-reassign, consistent-return, promise/catch-or-return, promise/always-return */
-import mkdirp from 'mkdirp';
+import fs from 'fs-extra';
 import formidable from 'formidable';
 import objectPath from 'object-path';
 
 export function processRequest(request, { uploadDir } = {}) {
   // Ensure provided upload directory exists
   if (uploadDir) {
-    mkdirp.sync(uploadDir);
+    fs.ensureDirSync(uploadDir);
   }
 
   const form = formidable.IncomingForm({

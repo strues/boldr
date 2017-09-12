@@ -82,7 +82,7 @@
   },
   "devDependencies": {
     "eslint": "^4.6.1",
-    "eslint-config-boldr": "^0.12.12",
+    "eslint-config-boldr": "^0.12.13",
     "prepublish": "^1.4.2",
     "prettier": "1.6.1",
     "rimraf": "^2.6.1"

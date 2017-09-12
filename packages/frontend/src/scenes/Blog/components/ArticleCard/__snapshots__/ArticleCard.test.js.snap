@@ -19,6 +19,7 @@ exports[`<ArticleCard /> renders snapshot 1`] = `
         <styled.h2>
           This Test Slug
         </styled.h2>
+        09/10/2017
       </styled.header>
       <styled.section>
         <p>

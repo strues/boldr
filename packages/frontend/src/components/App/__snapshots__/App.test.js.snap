@@ -42,10 +42,6 @@ exports[`App 1`] = `
       sizes="16x16 32x32"
     />
     <link
-      href="https://fonts.googleapis.com/css?family=Chivo:300,700|Roboto:400,700"
-      rel="stylesheet"
-    />
-    <link
       href="/favicons/apple-touch-icon-144x144.png"
       rel="apple-touch-icon-precomposed"
       sizes="144x144"
@@ -68,13 +64,9 @@ exports[`App 1`] = `
       component={[Function]}
       path="/"
     />
-    <StatusRoute
-      code={404}
-    >
-      <Route
-        component={[Function]}
-      />
-    </StatusRoute>
+    <Route
+      component={[Function]}
+    />
   </Switch>
   <Connect(Notifications) />
 </div>

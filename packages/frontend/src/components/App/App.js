@@ -16,7 +16,7 @@ import StatusRoute from '../StatusRoute';
 
 const NotificationContainer = boldrNotificationsFactory(Notif);
 
-const App = () => {
+function App() {
   return (
     <div className="boldr">
       <Helmet
@@ -48,6 +48,6 @@ const App = () => {
       <NotificationContainer />
     </div>
   );
-};
+}
 
 export default App;

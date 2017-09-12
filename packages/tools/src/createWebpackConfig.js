@@ -1,7 +1,6 @@
 /* eslint-disable camelcase, eqeqeq, prefer-destructuring, max-lines, max-statements */
 // @flow weak
 import path from 'path';
-import fs from 'fs-extra';
 import webpack from 'webpack';
 import WriteFilePlugin from 'write-file-webpack-plugin';
 import ExtractCssChunks from 'extract-css-chunks-webpack-plugin';
@@ -284,7 +283,6 @@ export default function createWebpackConfig(
     module: {
       strictExportPresence: true,
       rules: [
-        { parser: { requireEnsure: false } },
         {
           test: JS_FILES,
           loader: require.resolve('source-map-loader'),
@@ -367,6 +365,7 @@ export default function createWebpackConfig(
     },
     plugins: [
       new webpack.DefinePlugin({
+        __DEV__: JSON.stringify(_IS_DEV_),
         __SERVER__: JSON.stringify(_IS_SERVER_),
         'process.env.NODE_ENV': JSON.stringify(options.env),
         'process.env.TARGET': JSON.stringify(target),

@@ -2,6 +2,37 @@
 import Color from 'color';
 
 import { css } from 'styled-components';
+import { reduce, compose } from 'ramda';
+
+/**
+ * Screen size breakpoints (for styled-components).
+ */
+const breakpoints = {
+  xs: 360,
+  sm: 600,
+  md: 960,
+  lg: 1280,
+  xl: 1920,
+};
+
+/**
+ * A helper to do media queries in styled-components.
+ */
+const media = compose(
+  reduce(
+    (acc, label) => ({
+      ...acc,
+      [label]: (...args) =>
+        css`
+          @media (min-width: ${breakpoints[label] / 16}em) {
+            ${css(...args)};
+          }
+        `,
+    }),
+    {},
+  ),
+  Object.keys,
+)(breakpoints);
 
 const SIZES = {
   large: 75,
@@ -135,6 +166,8 @@ const darkFontColor = Color('#030507')
   .string();
 
 const theme = {
+  ...breakpoints,
+  media,
   palette: {
     primary1: primaryColor,
     primary2: primaryColor2,
