@@ -52,16 +52,16 @@ const getImageRender = (config: Object) =>
     renderAlignmentOptions(alignment: string): Object {
       return (
         <div
-          className={classNames('be-image__alignment-options-popup', {
-            'be-image__alignment-options-popup-right': alignment === 'right',
+          className={classNames('be-align', {
+            'be-align--right': alignment === 'right',
           })}>
-          <Option onClick={this.setEntityAlignmentLeft} className="be-image__alignment-option">
+          <Option onClick={this.setEntityAlignmentLeft} className="be-align__opt">
             L
           </Option>
-          <Option onClick={this.setEntityAlignmentCenter} className="be-image__alignment-option">
+          <Option onClick={this.setEntityAlignmentCenter} className="be-align__opt">
             C
           </Option>
-          <Option onClick={this.setEntityAlignmentRight} className="be-image__alignment-option">
+          <Option onClick={this.setEntityAlignmentRight} className="be-align__opt">
             R
           </Option>
         </div>
@@ -79,12 +79,12 @@ const getImageRender = (config: Object) =>
         <span
           onMouseEnter={this.toggleHovered}
           onMouseLeave={this.toggleHovered}
-          className={classNames('be-image__alignment', {
+          className={classNames('be-align__image', {
             'be-image--left': alignment === 'left',
             'be-image--right': alignment === 'right',
             'be-image--center': !alignment || alignment === 'none',
           })}>
-          <span className="be-image__imagewrapper">
+          <span className="be-image__wrapper">
             <img
               src={src}
               alt={alt}

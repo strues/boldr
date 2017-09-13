@@ -3,9 +3,7 @@
 import React from 'react';
 import { Entity } from 'draft-js';
 import { shallow, mount } from 'enzyme';
-import 'jest-styled-components';
 import getLinkDecorator from './Link';
-import { LinkDecoratorWrap } from './Link.styled';
 import { convertFromHTML, AtomicBlockUtils, ContentState, EditorState } from 'draft-js';
 
 describe('LinkDecorator test suite', () => {
@@ -24,7 +22,7 @@ describe('LinkDecorator test suite', () => {
           Link
         </Link>,
       ).node.type,
-    ).toEqual(LinkDecoratorWrap);
+    ).toEqual('div');
   });
 
   it('should have 1 child element by default', () => {

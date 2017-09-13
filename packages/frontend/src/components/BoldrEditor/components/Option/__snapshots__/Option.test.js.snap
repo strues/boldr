@@ -1,21 +1,13 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Option /> should render in a div 1`] = `
-<styled.div
+<div
+  className="be-opt"
   disabled={false}
-  isDark={false}
   onClick={[Function]}
-  theme={
-    Object {
-      "palette": Object {
-        "neutral2": "#F7F7F9",
-        "primary1": "#0094c6",
-      },
-    }
-  }
 >
   <span>
     abcd
   </span>
-</styled.div>
+</div>
 `;

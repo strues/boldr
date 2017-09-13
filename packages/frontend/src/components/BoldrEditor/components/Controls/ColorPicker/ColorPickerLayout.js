@@ -1,19 +1,13 @@
 /* eslint-disable react/no-unused-prop-types, react/no-array-index-key */
 /* @flow */
 
-import * as React from 'react';
-import classNames from 'classnames';
+import React from 'react';
+import type { Node } from 'react';
+import cn from 'classnames';
 import Droplet from '@boldr/icons/Droplet';
 import { stopPropagation } from '../../../utils/common';
 import Option from '../../Option';
 import type { ColorPickerConfig } from '../../../core/config';
-import {
-  ColorWrapper,
-  ColorModal,
-  ColorHeader,
-  ColorModalLabel,
-  ColorOptions,
-} from './ColorPicker.styled';
 
 type ColorCurrent = {
   color: string,
@@ -69,18 +63,24 @@ class ColorPickerLayout extends React.Component<Props, State> {
     const { currentStyle } = this.state;
     const currentSelectedColor = currentStyle === 'color' ? color : bgColor;
     return (
-      <ColorModal className={modalClassName} onClick={stopPropagation}>
-        <ColorHeader>
-          <ColorModalLabel active={currentStyle === 'color'} onClick={this.setCurrentStyleColor}>
+      <div className={cn('be-modal', modalClassName)} onClick={stopPropagation}>
+        <div className={cn('be-modal__top')}>
+          <span
+            className={cn('be-color__modal-label', {
+              'is-active': currentStyle === 'color',
+            })}
+            onClick={this.setCurrentStyleColor}>
             Text
-          </ColorModalLabel>
-          <ColorModalLabel
-            active={currentStyle === 'bgcolor'}
+          </span>
+          <span
+            className={cn('be-color__modal-label', {
+              'is-active': currentStyle === 'bgcolor',
+            })}
             onClick={this.setCurrentStyleBgcolor}>
             Background
-          </ColorModalLabel>
-        </ColorHeader>
-        <ColorOptions>
+          </span>
+        </div>
+        <span className={cn('be-color__modal-opts')}>
           {colors.map((color, index) => (
             <Option
               value={color}
@@ -88,27 +88,28 @@ class ColorPickerLayout extends React.Component<Props, State> {
               active={currentSelectedColor === color}
               onClick={this.onChange}
               isDark>
-              <span style={{ backgroundColor: color }} className="be-colorpicker__cube" />
+              <span style={{ backgroundColor: color }} className="be-color__cube" />
             </Option>
           ))}
-        </ColorOptions>
-      </ColorModal>
+        </span>
+      </div>
     );
   };
 
-  render(): React.Node {
+  render(): Node {
     const { expanded, onExpandEvent } = this.props;
     return (
-      <ColorWrapper
+      <div
+        className={cn('be-ctrl__group')}
         aria-haspopup="true"
         aria-expanded={expanded}
         aria-label="be-color-picker"
         title={this.props.config.title}>
-        <Option onClick={onExpandEvent} className={classNames(this.props.config.className)}>
+        <Option onClick={onExpandEvent} className={cn(this.props.config.className)}>
           <Droplet color="#222" onClick={onExpandEvent} />
         </Option>
         {expanded ? this.renderModal() : undefined}
-      </ColorWrapper>
+      </div>
     );
   }
 }

@@ -1,6 +1,7 @@
 /* @flow */
 
-import * as React from 'react';
+import React from 'react';
+import type { Node } from 'react';
 import { EditorState, Modifier } from 'draft-js';
 import { getSelectionCustomInlineStyle, forEach } from '../../../utils';
 
@@ -79,7 +80,7 @@ export default class Remove extends React.Component<Props, State> {
     });
   };
 
-  render(): React.Node {
+  render(): Node {
     const { config } = this.props;
     const { expanded } = this.state;
     return (

@@ -1,11 +1,10 @@
 /* @flow */
 
 import * as React from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import Undo from '@boldr/icons/Undo';
 import Redo from '@boldr/icons/Redo';
 import Option from '../../Option';
-import { ControlWrapper } from '../Controls.styled';
 
 export type Props = {
   onChange?: Function,
@@ -26,11 +25,11 @@ export default class HistoryLayout extends React.PureComponent<Props, *> {
       currentState: { undoDisabled, redoDisabled },
     } = this.props;
     return (
-      <ControlWrapper className={className} aria-label="be-history__control">
+      <div className={cn('be-ctrl__group', className)} aria-label="be-history-control">
         <Option
           value="undo"
           onClick={this.onChange}
-          className={classNames(undo.className)}
+          className={cn(undo.className)}
           disabled={undoDisabled}
           title={undo.title}>
           <Undo fill="#222" />
@@ -38,12 +37,12 @@ export default class HistoryLayout extends React.PureComponent<Props, *> {
         <Option
           value="redo"
           onClick={this.onChange}
-          className={classNames(redo.className)}
+          className={cn(redo.className)}
           disabled={redoDisabled}
           title={redo.title}>
           <Redo fill="#222" />
         </Option>
-      </ControlWrapper>
+      </div>
     );
   }
 }

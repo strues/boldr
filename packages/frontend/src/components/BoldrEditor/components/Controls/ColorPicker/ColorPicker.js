@@ -1,7 +1,8 @@
 /* eslint-disable react/no-unused-prop-types */
 /* @flow */
 
-import * as React from 'react';
+import React from 'react';
+import type { Node } from 'react';
 // $FlowIssue
 import type { EditorState } from 'draft-js';
 import { toggleCustomInlineStyle, getSelectionCustomInlineStyle } from '../../../utils';
@@ -93,7 +94,7 @@ class ColorPicker extends React.Component<Props, State> {
     this.doCollapse();
   };
 
-  render(): React.Node {
+  render(): Node {
     const { config } = this.props;
     const { currentColor, currentBgColor, expanded } = this.state;
 

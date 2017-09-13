@@ -1,11 +1,12 @@
 /* eslint-disable react/no-unused-prop-types */
 /* @flow */
 
-import * as React from 'react';
-import { DropdownOpt } from './Dropdown.styled';
+import React from 'react';
+import type { Node } from 'react';
+import cn from 'classnames';
 
 export type Props = {
-  children: React.ChildrenArray<React.Node>,
+  children: Node,
   value?: any,
   onClick?: Function,
   onSelect?: Function,
@@ -44,20 +45,23 @@ export default class DropdownOption extends React.PureComponent<Props, *> {
     setHighlighted(-1);
   };
 
-  render(): React.Node {
-    const { children, active, highlighted, title } = this.props;
+  render(): Node {
+    const { children, active, highlighted, title, disabled } = this.props;
     return (
-      <DropdownOpt
+      <li
+        className={cn('be-dd__opt--default', {
+          'be-dd__opt--active': active,
+          'be-dd__opt--highlight': highlighted,
+          'be-dd__opt--disabled': disabled,
+        })}
         onMouseEnter={this.setHighlighted}
         onMouseLeave={this.resetHighlighted}
         onClick={this.onClick}
         onKeyDown={this.onClick}
         aria-selected={active}
-        active={active}
-        highlighted={highlighted}
         title={title}>
         {children}
-      </DropdownOpt>
+      </li>
     );
   }
 }

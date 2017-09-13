@@ -1,6 +1,7 @@
 /* @flow */
 
-import * as React from 'react';
+import React from 'react';
+import type { Node } from 'react';
 import { RichUtils, EditorState } from 'draft-js';
 import { changeListDepth, getSelectedBlocksType } from '../../../utils';
 
@@ -68,16 +69,15 @@ export default class List extends React.Component<Props, State> {
     }
   };
 
-  render(): React.Node {
+  render(): Node {
     const { config } = this.props;
     const { currentBlockType } = this.state;
-    const ListComponent = ListLayout;
     let listType;
     if (currentBlockType === 'unordered-list-item') {
       listType = 'unordered';
     } else if (currentBlockType === 'ordered-list-item') {
       listType = 'ordered';
     }
-    return <ListComponent config={config} currentState={{ listType }} onChange={this.onChange} />;
+    return <ListLayout config={config} currentState={{ listType }} onChange={this.onChange} />;
   }
 }

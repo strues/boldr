@@ -1,6 +1,7 @@
 /* @flow */
 
-import * as React from 'react';
+import React from 'react';
+import type { Node } from 'react';
 import { AtomicBlockUtils } from 'draft-js';
 
 import EmbeddedLayout from './EmbeddedLayout';
@@ -79,7 +80,7 @@ class Embedded extends React.Component<Props, State> {
     this.doCollapse();
   };
 
-  render(): Object {
+  render(): Node {
     const { config } = this.props;
     const { expanded } = this.state;
     return (

@@ -1,18 +1,12 @@
 /* eslint-disable react/no-array-index-key, react/no-unused-prop-types, no-inline-comments */
 // @flow
-import * as React from 'react';
+import React from 'react';
+import type { Node } from 'react';
+import cn from 'classnames';
 import { stopPropagation } from '../../utils/common';
 
-import {
-  DropdownWrapper,
-  DropdownSelectedText,
-  CaretClosed,
-  CaretOpen,
-  DropdownOptionWrapper,
-} from './Dropdown.styled';
-
 export type Props = {
-  children: React.ChildrenArray<React.Node>,
+  children: Node,
   onChange?: Function,
   className?: string,
   title: string,
@@ -83,20 +77,30 @@ export default class Dropdown extends React.Component<Props, State> {
     } = this.props;
     const { highlighted } = this.state;
     // $FlowIssue
-    const options: Array<React.Node> = children.slice(1, children.length);
+    const options: Array<Node> = children.slice(1, children.length);
     return (
-      <DropdownWrapper
-        isSkinny={this.props.isSkinny}
-        className={className}
+      <div
+        className={cn(
+          'be-dd__wrap',
+          {
+            'is-skinny': this.props.isSkinny,
+          },
+          className,
+        )}
         aria-expanded={expanded}
         aria-label={ariaLabel || 'be-dropdown'}>
-        <DropdownSelectedText onClick={onExpandEvent} title={title}>
+        <a className={cn('be-dd__selected-txt')} onClick={onExpandEvent} title={title}>
           {/* // $FlowIssue */}
           {children[0]}
-          {expanded ? <CaretClosed /> : <CaretOpen />}
-        </DropdownSelectedText>
+          <div
+            className={cn({
+              'be-caret--closed': expanded,
+              'be-caret--open': !expanded,
+            })}
+          />
+        </a>
         {expanded ? (
-          <DropdownOptionWrapper className={optionWrapperClassName} onClick={stopPropagation}>
+          <ul className={cn('be-dd__opt-wrap', optionWrapperClassName)} onClick={stopPropagation}>
             {React.Children.map(options, (option, index) => {
               const temp =
                 option &&
@@ -109,11 +113,11 @@ export default class Dropdown extends React.Component<Props, State> {
                 });
               return temp;
             })}
-          </DropdownOptionWrapper>
+          </ul>
         ) : (
           undefined
         )}
-      </DropdownWrapper>
+      </div>
     );
   }
 }

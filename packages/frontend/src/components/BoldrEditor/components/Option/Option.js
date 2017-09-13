@@ -1,12 +1,13 @@
 /* eslint-disable react/no-unused-prop-types */
 /* @flow */
 
-import * as React from 'react';
-import { OptionWrapper } from './Option.styled';
+import React from 'react';
+import type { Node } from 'react';
+import cn from 'classnames';
 
 export type Props = {
   onClick: Function,
-  children: React.ChildrenArray<React.Node>,
+  children: Array<Node>,
   value?: string,
   active?: boolean,
   className?: string,
@@ -31,19 +32,21 @@ export default class Option extends React.PureComponent<Props, *> {
     }
   };
 
-  render() {
+  render(): Node {
     const { children, className, active, disabled, title, isDark } = this.props;
     return (
-      <OptionWrapper
-        className={className}
+      <div
+        className={cn('be-opt', className, {
+          'be-opt--active': active,
+          'be-opt--disabled': disabled,
+          'be-opt--dark': isDark,
+        })}
         onClick={this.onClick}
-        isDark={isDark}
         aria-selected={active}
-        active={active}
         disabled={disabled}
         title={title}>
         {children}
-      </OptionWrapper>
+      </div>
     );
   }
 }

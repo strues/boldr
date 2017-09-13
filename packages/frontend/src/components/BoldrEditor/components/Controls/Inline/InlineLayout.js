@@ -2,9 +2,9 @@
 /* @flow */
 
 import React from 'react';
+import cn from 'classnames';
 import { Bold, Italic, Underline, Strikethrough, Code } from '@boldr/icons';
 import Option from '../../Option';
-import { InlineWrapper } from './Inline.styled';
 
 type CurrentState = {
   bold?: boolean,
@@ -24,7 +24,7 @@ export type Props = {
 const InlineLayout = (props: Props) => {
   const { currentState, onChange } = props;
   return (
-    <InlineWrapper aria-label="be-inline__control">
+    <div className={cn('be-ctrl__group')} aria-label="be-inline-control">
       <Option value="bold" onClick={onChange} active={currentState.bold === true} title="bold">
         <Bold color="#222" />
       </Option>
@@ -53,7 +53,7 @@ const InlineLayout = (props: Props) => {
       <Option value="code" onClick={onChange} active={currentState.CODE} title="Code">
         <Code fill="#222" />
       </Option>
-    </InlineWrapper>
+    </div>
   );
 };
 

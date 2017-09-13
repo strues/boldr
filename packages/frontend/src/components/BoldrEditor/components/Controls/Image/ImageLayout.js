@@ -1,32 +1,17 @@
 /* eslint-disable no-continue */
 /* @flow */
 
-import * as React from 'react';
-import classNames from 'classnames';
+import React from 'react';
+import type { Node } from 'react';
+import cn from 'classnames';
 import Image from '@boldr/icons/Image';
 import Option from '../../Option';
 import Spinner from '../../Spinner';
-import { ControlWrapper } from '../Controls.styled';
 import type { ImageConfig } from '../../../core/config';
-import {
-  ImageModal,
-  ImageHeader,
-  ImageOption,
-  ImageLabel,
-  UploadOpt,
-  UploadInput,
-  UploadUrlInput,
-  UrlSection,
-  UploadLabel,
-  SizeSection,
-  SizeInput,
-  ImageBtn,
-  ImageBtnSection,
-} from './Image.styled';
 
 export type Props = {
   expanded?: boolean,
-  doCollapse: Function,
+  doCollapse?: Function,
   onExpandEvent?: Function,
   config: ImageConfig,
   onChange?: Function,
@@ -194,98 +179,128 @@ class ImageLayout extends React.Component<Props, State> {
     }
   };
 
-  renderAddImageModal(): React.Node {
+  renderAddImageModal(): Node {
     const { imgSrc, uploadHighlighted, showImageLoading, dragEnter, height, width } = this.state;
     const {
       config: { modalClassName, uploadCallback, uploadEnabled, urlEnabled, inputAccept },
     } = this.props;
     return (
-      <ImageModal className={modalClassName} onClick={this.stopPropagation}>
-        <ImageHeader>
+      <div className={cn('be-modal', modalClassName)} onClick={this.stopPropagation}>
+        <div className={cn('be-modal__top')}>
           {uploadEnabled &&
           uploadCallback && (
-            <ImageOption onClick={this.showImageUploadOption}>
+            <span className={cn('be-modal__opt')} onClick={this.showImageUploadOption}>
               Upload
-              <ImageLabel highlighted={uploadHighlighted} />
-            </ImageOption>
+              <span
+                className={cn('be-modal__label', {
+                  'is-hlight': uploadHighlighted,
+                })}
+              />
+            </span>
           )}
           {urlEnabled && (
-            <ImageOption onClick={this.showImageURLOption}>
+            <span className={cn('be-modal__opt')} onClick={this.showImageURLOption}>
               Upload URL
-              <ImageLabel highlighted={!uploadHighlighted} />
-            </ImageOption>
+              <span
+                className={cn('be-modal__label', {
+                  'is-hlight': !uploadHighlighted,
+                })}
+              />
+            </span>
           )}
-        </ImageHeader>
+        </div>
         {uploadHighlighted ? (
           <div onClick={this.fileUploadClick}>
-            <UploadOpt
+            <div
+              className={cn('be-modal__upload', {
+                'is-hlight': dragEnter,
+              })}
               onDragEnter={this.onDragEnter}
               onDragOver={this.stopPropagation}
-              onDrop={this.onImageDrop}
-              highlighted={dragEnter}>
-              <UploadLabel htmlFor="file">Drop the file or click to upload</UploadLabel>
-            </UploadOpt>
-            <UploadInput type="file" id="file" accept={inputAccept} onChange={this.selectImage} />
+              onDrop={this.onImageDrop}>
+              <label className={cn('be-modal__upload-label')} htmlFor="file">
+                Drop the file or click to upload
+              </label>
+            </div>
+            <input
+              className={cn('be-modal__upload-input')}
+              type="file"
+              id="file"
+              accept={inputAccept}
+              onChange={this.selectImage}
+            />
           </div>
         ) : (
-          <UrlSection>
-            <UploadUrlInput
+          <div className={cn('be-modal__top')}>
+            <input
+              className={cn('be-modal__upload-url-input')}
               placeholder="Enter url"
               name="imgSrc"
               onChange={this.updateValue}
               onBlur={this.updateValue}
               value={imgSrc}
             />
-          </UrlSection>
+          </div>
         )}
-        <SizeSection>
-          ↕&nbsp;
-          <SizeInput
+        <div className={cn('be-modal__sizes')}>
+          {' ↕ '}
+          <input
+            className={cn('be-modal__input be-modal__input--sm')}
             onChange={this.updateValue}
             onBlur={this.updateValue}
             value={height}
             name="height"
             placeholder="Height"
           />
-          &nbsp;↔&nbsp;
-          <SizeInput
+          {' ↔ '}
+          <input
+            className={cn('be-modal__input be-modal__input--sm')}
             onChange={this.updateValue}
             onBlur={this.updateValue}
             value={width}
             name="width"
             placeholder="Width"
           />
-        </SizeSection>
-        <ImageBtnSection>
-          <ImageBtn onClick={this.addImageFromState} disabled={!imgSrc || !height || !width}>
+        </div>
+        <div className={cn('be-modal__btns')}>
+          <button
+            className={cn('be-modal__btn')}
+            onClick={this.addImageFromState}
+            disabled={!imgSrc || !height || !width}>
             Add
-          </ImageBtn>
-          <ImageBtn onClick={this.props.doCollapse}>Cancel</ImageBtn>
-        </ImageBtnSection>
+          </button>
+          <button className={cn('be-modal__btn')} onClick={this.props.doCollapse}>
+            Cancel
+          </button>
+        </div>
         {showImageLoading ? (
-          <div className="be-image__modal-spinner">
+          <div className="be-modal__spinner">
             <Spinner />
           </div>
         ) : (
           undefined
         )}
-      </ImageModal>
+      </div>
     );
   }
 
-  render(): React.Node {
+  render(): Node {
     const { config: { className, title }, expanded } = this.props;
     return (
-      <ControlWrapper aria-haspopup="true" aria-expanded={expanded} aria-label="be-image__control">
+      <div
+        className={cn('be-ctrl__group')}
+        aria-haspopup="true"
+        aria-expanded={expanded}
+        aria-label="be-image__control">
         <Option
-          className={classNames(className)}
+          className={cn(className)}
           value="unordered-list-item"
           onClick={this.props.onExpandEvent}
           title={title}>
           <Image color="#222" />
         </Option>
         {expanded ? this.renderAddImageModal() : undefined}
-      </ControlWrapper>
+      </div>
     );
   }
 }

@@ -1,9 +1,9 @@
 /* eslint-disable react/no-array-index-key, react/no-unused-prop-types, no-inline-comments */
 /* @flow */
 import * as React from 'react';
+import cn from 'classnames';
 import { AlignLeft, AlignCenter, AlignRight, AlignJustify } from '@boldr/icons';
 import Option from '../../Option';
-import { ControlWrapper } from '../Controls.styled';
 
 export type Props = {
   onChange?: Function,
@@ -13,7 +13,7 @@ export type Props = {
 const TextAlignLayout = (props: Props) => {
   const { onChange, currentState: { textAlignment } } = props;
   return (
-    <ControlWrapper aria-label="be-textalign-control">
+    <div className={cn('be-ctrl__group')} aria-label="be-textalign-control">
       <Option value="left" active={textAlignment === 'left'} onClick={onChange} title="Align Left">
         <AlignLeft color="#222" />
       </Option>
@@ -38,7 +38,7 @@ const TextAlignLayout = (props: Props) => {
         title="Justify">
         <AlignJustify color="#222" />
       </Option>
-    </ControlWrapper>
+    </div>
   );
 };
 export default TextAlignLayout;

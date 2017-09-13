@@ -1,13 +1,13 @@
 /* eslint-disable  react/no-array-index-key */
 /* @flow */
-import * as React from 'react';
+import React from 'react';
+import type { Node } from 'react';
 import type { ContentBlock, ContentState } from 'draft-js';
 import ExternalLink from '@boldr/icons/ExternalLink';
 import type { LinkConfig } from '../../config';
-import { LinkDecoratorWrap } from './Link.styled';
 
 type Props = {
-  children: React.ChildrenArray<React.Node>,
+  children: Node,
   entityKey: string,
   contentState: ContentState,
 };
@@ -54,23 +54,28 @@ function getLinkComponent(config) {
       });
     };
 
-    render() {
+    render(): Node {
       const { children, entityKey, contentState } = this.props;
       const { url, targetOption } = contentState.getEntity(entityKey).getData();
       const { showPopOver } = this.state;
       return (
-        <LinkDecoratorWrap
+        <div
+          className="be-decorator__link-wrap"
           onMouseEnter={this.toggleShowPopOver}
           onMouseLeave={this.toggleShowPopOver}>
           <a href={url} target={targetOption}>
             {children}
           </a>
           {showPopOver && showOpenOptionOnHover ? (
-            <ExternalLink onClick={this.openLink} color="#222" className="be-link-decorator-icon" />
+            <ExternalLink
+              onClick={this.openLink}
+              color="#222"
+              className="be-decorator__link-icon"
+            />
           ) : (
             undefined
           )}
-        </LinkDecoratorWrap>
+        </div>
       );
     }
   };

@@ -1,11 +1,12 @@
 /* eslint-disable react/no-unused-prop-types */
 /* @flow */
 
-import * as React from 'react';
+import React from 'react';
+import type { Node } from 'react';
+import cn from 'classnames';
 import { Paragraph, Heading1, Heading2, Heading3, QuoteLeft, Embedded } from '@boldr/icons';
 import Option from '../../Option';
 import type { ToolbarBlockTypes } from './BlockType';
-import { BlockWrapper } from './Block.styled';
 
 type CurrentBlock = {
   blockType: string,
@@ -51,10 +52,10 @@ class BlockTypeLayout extends React.PureComponent<Props, *> {
     { label: 'Code', id: 6, icon: <Embedded fill="#222" /> },
   ];
 
-  renderButtons(blocks: ToolbarBlockTypes): React.Node {
+  renderButtons(blocks: ToolbarBlockTypes): Node {
     const { onChange, currentState: { blockType } } = this.props;
     return (
-      <BlockWrapper>
+      <div className={cn('be-ctrl__group')}>
         {blocks.map(block => (
           <Option
             key={block.id}
@@ -64,11 +65,11 @@ class BlockTypeLayout extends React.PureComponent<Props, *> {
             {block.icon}
           </Option>
         ))}
-      </BlockWrapper>
+      </div>
     );
   }
 
-  render(): React.Node {
+  render(): Node {
     return this.renderButtons(this.blockTypes);
   }
 }

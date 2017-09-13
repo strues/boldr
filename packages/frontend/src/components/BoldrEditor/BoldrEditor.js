@@ -1,6 +1,7 @@
 /* eslint-disable max-lines, react/no-array-index-key, no-param-reassign */
 /* @flow */
-import * as React from 'react';
+import React from 'react';
+import type { Node } from 'react';
 import {
   Editor,
   EditorState,
@@ -10,7 +11,6 @@ import {
   CompositeDecorator,
 } from 'draft-js';
 import type { DraftDecoratorType } from 'draft-js';
-import styled from 'styled-components';
 import cn from 'classnames';
 
 import { convertToHTML, convertFromHTML } from 'draft-convert';
@@ -29,28 +29,12 @@ import {
 
 import type { CustomStyleMap } from './utils/inline';
 import * as Controls from './components/Controls';
-
+import handlePastedText from './utils/handlePaste';
 import getLinkDecorator from './core/decorators/Link/Link';
 import getBlockRenderFunc from './core/blockRender';
 import configDefaults from './core/config';
 import type { ToolbarConfig } from './core/config';
 import type { BoldrEditorType } from './BoldrEditorType';
-
-const EditorToolbar = styled.div`
-  display: inline-flex;
-  flex-shrink: 1;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  flex-direction: row;
-  padding: 6px 5px 0;
-  background: #fff;
-  border: 1px solid #eaeaea;
-  border-radius: 2px;
-  margin-bottom: 5px;
-  font-size: 15px;
-  user-select: none;
-  visibility: ${props => (props.isVisible ? 'visible' : 'hidden')};
-`;
 
 export type State = {
   editorState: EditorState,
@@ -83,7 +67,7 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
       toolbar,
     };
     const wrapperId = props.wrapperId ? props.wrapperId : Math.floor(Math.random() * 10000);
-    this.wrapperId = `boldr-editor__wrapper-${wrapperId}`;
+    this.wrapperId = `be-wrapper-${wrapperId}`;
     this.modalHandler = new ModalHandler();
     this.focusHandler = new FocusHandler();
     this.blockRendererFn = getBlockRenderFunc(
@@ -283,7 +267,10 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
       editorFocused: false,
     });
   };
-
+  handlePastedText = (text, html) => {
+    const { editorState } = this.state;
+    return handlePastedText(text, html, editorState, this.onChange);
+  };
   onEditorFocus: Function = (event: SyntheticEvent<>): void => {
     const { onFocus } = this.props;
     this.setState({
@@ -350,7 +337,7 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
     }
   };
 
-  render() {
+  render(): Node {
     const { editorState, editorFocused, toolbar } = this.state;
     const {
       toolbarCustomButtons,
@@ -381,8 +368,10 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
         onClick={this.modalHandler.onEditorClick}
         onBlur={this.onWrapperBlur}
         aria-label="be-wrapper">
-        <EditorToolbar
-          isVisible={toolbarIsVisible}
+        <div
+          className={cn('be-toolbar', {
+            'be-editor--hidden': !toolbarIsVisible,
+          })}
           // $FlowIssue
           aria-hidden={(!editorFocused && toolbarOnFocus).toString()}
           onFocus={this.onToolbarFocus}
@@ -401,7 +390,7 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
             toolbarCustomButtons.map((button, index) =>
               React.cloneElement(button, { key: index, ...controlProps }),
             )}
-        </EditorToolbar>
+        </div>
 
         <div
           ref={el => {
@@ -424,6 +413,7 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
             onChange={this.onChange}
             blockStyleFn={blockStyleFn}
             customStyleMap={getCustomStyleMap()}
+            handlePastedText={this.handlePastedText}
             handleReturn={this.handleReturn}
             blockRendererFn={this.blockRendererFn}
             handleKeyCommand={this.handleKeyCommand}

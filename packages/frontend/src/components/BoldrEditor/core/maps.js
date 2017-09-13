@@ -54,4 +54,5 @@ export const blocks = {
   'header-six': 'h6',
   unstyled: 'p',
   blockquote: 'blockquote',
+  code: 'em',
 };

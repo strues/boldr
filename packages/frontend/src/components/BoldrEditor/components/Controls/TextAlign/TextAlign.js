@@ -1,6 +1,7 @@
 /* @flow */
 
-import * as React from 'react';
+import React from 'react';
+import type { Node } from 'react';
 import type { EditorState } from 'draft-js';
 import { getSelectedBlocksMetadata, setBlockData } from '../../../utils';
 
@@ -20,7 +21,7 @@ export default class TextAlign extends React.Component<Props, State> {
     currentTextAlignment: undefined,
   };
   state: State;
-  componentWillReceiveProps(properties: Object) {
+  componentWillReceiveProps(properties: any) {
     if (properties.editorState !== this.props.editorState) {
       this.setState({
         currentTextAlignment: getSelectedBlocksMetadata(properties.editorState).get('text-align'),
@@ -39,7 +40,7 @@ export default class TextAlign extends React.Component<Props, State> {
     }
   };
 
-  render(): React.Node {
+  render(): Node {
     const { currentTextAlignment } = this.state;
     return (
       <TextAlignLayout

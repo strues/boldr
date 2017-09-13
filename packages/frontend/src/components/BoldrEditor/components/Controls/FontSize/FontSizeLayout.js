@@ -2,9 +2,8 @@
 /* @flow */
 
 import React, { Component } from 'react';
-import classNames from 'classnames';
+import cn from 'classnames';
 import { Dropdown, DropdownOption } from '../../Dropdown';
-import { ControlWrapper } from '../Controls.styled';
 
 type CurrentFontState = {
   fontSize: number,
@@ -61,10 +60,10 @@ export default class FontSizeLayout extends Component<Props, State> {
       currentFontSize || (options && options.indexOf(defaultFontSize) >= 0 && defaultFontSize);
 
     return (
-      <ControlWrapper aria-label="be-fontsize-control">
+      <div className={cn('be-ctrl__group')} aria-label="be-fontsize-control">
         {/* // $FlowIssue */}
         <Dropdown
-          optionWrapperClassName={classNames(dropdownClassName)}
+          optionWrapperClassName={cn(dropdownClassName)}
           onChange={onChange}
           expanded={expanded}
           doExpand={doExpand}
@@ -75,7 +74,7 @@ export default class FontSizeLayout extends Component<Props, State> {
           {currentFontSize ? <span>{currentFontSize}</span> : <img src={icon} alt="" />}
           {options.map((size, index) => (
             <DropdownOption
-              className="be-fontsize__option"
+              className="be-fontsize__opt"
               active={currentFontSize === size}
               value={size}
               disabled={false}
@@ -85,7 +84,7 @@ export default class FontSizeLayout extends Component<Props, State> {
             </DropdownOption>
           ))}
         </Dropdown>
-      </ControlWrapper>
+      </div>
     );
   }
 }

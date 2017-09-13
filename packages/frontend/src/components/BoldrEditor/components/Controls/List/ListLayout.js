@@ -1,9 +1,9 @@
 /* @flow */
-import * as React from 'react';
-import classNames from 'classnames';
+import React from 'react';
+import type { Node } from 'react';
+import cn from 'classnames';
 import { List, ListOl } from '@boldr/icons';
 import Option from '../../Option';
-import { ControlWrapper } from '../Controls.styled';
 
 export type Props = {
   config: Object,
@@ -30,15 +30,15 @@ export default class ListLayout extends React.PureComponent<Props, *> {
     onChange('outdent');
   };
 
-  renderListElements(): React.Node {
+  renderListElements() {
     const { config, currentState: { listType } } = this.props;
     const { unordered, ordered, className } = config;
     return (
-      <ControlWrapper className={className} aria-label="be-list__control">
+      <div className={cn('be-ctrl__group', className)} aria-label="be-list-control">
         <Option
           value="unordered"
           onClick={this.toggleBlockType}
-          className={classNames(unordered.className)}
+          className={cn(unordered.className)}
           active={listType === 'unordered'}
           title={unordered.title}>
           <List color="#222" />
@@ -46,16 +46,16 @@ export default class ListLayout extends React.PureComponent<Props, *> {
         <Option
           value="ordered"
           onClick={this.toggleBlockType}
-          className={classNames(ordered.className)}
+          className={cn(ordered.className)}
           active={listType === 'ordered'}
           title={ordered.title}>
           <ListOl fill="#222" />
         </Option>
-      </ControlWrapper>
+      </div>
     );
   }
 
-  render(): React.Node {
+  render(): Node {
     return this.renderListElements();
   }
 }

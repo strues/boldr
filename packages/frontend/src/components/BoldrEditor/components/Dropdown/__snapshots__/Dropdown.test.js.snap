@@ -1,15 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<Dropdown /> should have a div when rendered 1`] = `
-<styled.div
+<div
   aria-label="be-dropdown"
-  isSkinny={false}
+  className="be-dd__wrap"
 >
-  <styled.a>
+  <a
+    className="be-dd__selected-txt"
+  >
     <span>
       abcd
     </span>
-    <styled.div />
-  </styled.a>
-</styled.div>
+    <div
+      className="be-caret--open"
+    />
+  </a>
+</div>
 `;

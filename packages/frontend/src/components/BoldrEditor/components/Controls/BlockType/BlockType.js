@@ -1,7 +1,8 @@
 /* eslint-disable react/no-unused-prop-types */
 /* @flow */
 
-import * as React from 'react';
+import React from 'react';
+import type { Node } from 'react';
 import { RichUtils } from 'draft-js';
 // $FlowIssue
 import type { EditorState } from 'draft-js';
@@ -19,7 +20,7 @@ export type Props = {
 export type ToolbarBlockType = {
   label: 'Normal' | 'H1' | 'H2' | 'H3' | 'Blockquote' | 'Code',
   id: number,
-  icon?: React.ElementType,
+  icon?: Node,
   style?: 'unstyled' | 'header-one' | 'header-two' | 'header-three' | 'blockquote' | 'code',
 };
 
@@ -100,7 +101,7 @@ class BlockType extends React.Component<Props, State> {
     }
   };
 
-  render(): React.Node {
+  render(): Node {
     const { config } = this.props;
     const { currentBlockType, expanded } = this.state;
 

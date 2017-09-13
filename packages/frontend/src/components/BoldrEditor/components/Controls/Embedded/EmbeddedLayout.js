@@ -1,23 +1,11 @@
 /* @flow */
 
-import * as React from 'react';
-import classNames from 'classnames';
+import React from 'react';
+import type { Node } from 'react';
+import cn from 'classnames';
 import Video from '@boldr/icons/Video';
 import { stopPropagation } from '../../../utils/common';
 import Option from '../../Option';
-import { ControlWrapper } from '../Controls.styled';
-import {
-  EmbeddedModal,
-  EmbeddedHeaderOpt,
-  EmbeddedHeader,
-  EmbeddedHeaderLabel,
-  EmbeddedLinkSection,
-  EmbeddedSize,
-  EmbeddedInput,
-  EmbeddedSizeInput,
-  EmbeddedBtn,
-  EmbeddedBtnSection,
-} from './Embedded.styled';
 
 export type Props = {
   expanded: boolean,
@@ -62,68 +50,77 @@ class EmbeddedLayout extends React.Component<Props, State> {
     onChange(embeddedLink, height, width);
   };
 
-  rendeEmbeddedLinkModal(): Object {
+  rendeEmbeddedLinkModal(): Node {
     const { embeddedLink, height, width } = this.state;
     const { config: { modalClassName }, doCollapse } = this.props;
     return (
-      <EmbeddedModal className={modalClassName} onClick={stopPropagation}>
-        <EmbeddedHeader>
-          <EmbeddedHeaderOpt>
+      <div className={cn('be-modal', modalClassName)} onClick={stopPropagation}>
+        <div className={cn('be-modal__top')}>
+          <span className={cn('be-modal__opt')}>
             Embedded Link
-            <EmbeddedHeaderLabel />
-          </EmbeddedHeaderOpt>
-        </EmbeddedHeader>
-        <EmbeddedLinkSection>
-          <EmbeddedInput
+            <span className={cn('be-modal__label')} />
+          </span>
+        </div>
+        <div className={cn('be-embedded__modal-link-section')}>
+          <input
+            className={cn('be-modal__input')}
             placeholder="Enter link"
             onChange={this.updateValue}
             onBlur={this.updateValue}
             value={embeddedLink}
             name="embeddedLink"
           />
-          <EmbeddedSize>
-            <EmbeddedSizeInput
+          <div className={cn('be-modal__sizes')}>
+            <input
+              className={cn('be-modal__input be-modal__input--sm')}
               onChange={this.updateValue}
               onBlur={this.updateValue}
               value={height}
               name="height"
               placeholder="Height"
             />
-            <EmbeddedSizeInput
+            <input
+              className={cn('be-modal__input be-modal__input--sm')}
               onChange={this.updateValue}
               onBlur={this.updateValue}
               value={width}
               name="width"
               placeholder="Width"
             />
-          </EmbeddedSize>
-        </EmbeddedLinkSection>
-        <EmbeddedBtnSection>
-          <EmbeddedBtn onClick={this.onChange} disabled={!embeddedLink || !height || !width}>
+          </div>
+        </div>
+        <div className={cn('be-modal__btns')}>
+          <button
+            className={cn('be-modal__btn')}
+            onClick={this.onChange}
+            disabled={!embeddedLink || !height || !width}>
             Add
-          </EmbeddedBtn>
-          <EmbeddedBtn onClick={doCollapse}>Cancel</EmbeddedBtn>
-        </EmbeddedBtnSection>
-      </EmbeddedModal>
+          </button>
+          <button className={cn('be-modal__btn')} onClick={doCollapse}>
+            Cancel
+          </button>
+        </div>
+      </div>
     );
   }
 
-  render(): Object {
+  render(): Node {
     const { config: { className, title }, expanded, onExpandEvent } = this.props;
     return (
-      <ControlWrapper
+      <div
+        className={cn('be-ctrl__group')}
         aria-haspopup="true"
         aria-expanded={expanded}
         aria-label="be-embedded__control">
         <Option
-          className={classNames(className)}
+          className={cn(className)}
           value="unordered-list-item"
           onClick={onExpandEvent}
           title={title}>
           <Video color="#222" />
         </Option>
         {expanded ? this.rendeEmbeddedLinkModal() : undefined}
-      </ControlWrapper>
+      </div>
     );
   }
 }
