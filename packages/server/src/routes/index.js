@@ -1,11 +1,12 @@
-import getConfig from '@boldr/config';
+import { config } from '@boldr/config';
+import pubsub from '../middleware/pubsub';
 import authRoutes from './auth/auth.routes';
 import tokenRoutes from './token/token.routes';
 
-const config = getConfig();
-
 export default app => {
-  const API_PREFIX = config.server.prefix;
+  const API_PREFIX = config.get('server.prefix');
+  app.use(API_PREFIX, pubsub);
+
   app.get(`${API_PREFIX}/health-check`, (req, res) => {
     res.status(200);
     res.set('Cache-Control', 'no-cache, no-store, must-revalidate');

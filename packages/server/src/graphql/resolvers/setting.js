@@ -3,6 +3,8 @@ import _debug from 'debug';
 import { errorObj } from '../../errors';
 import slugIt from '../../utils/slugIt';
 
+const debug = _debug('boldr:server:graphql:resolvers:setting');
+
 const settingResolvers = {
   Query: {
     settings: async (obj, args, ctx) => {

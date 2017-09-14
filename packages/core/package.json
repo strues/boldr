@@ -14,10 +14,10 @@
   },
   "main": "lib/boldr-core.node.cjs.js",
   "module": "lib/boldr-core.node.esm.js",
-  "jsnext:main": "lib/boldr-core.browser.esm.js",
-  "main:es2015": "lib/boldr-core.node.cjs.js",
-  "module:es2015": "lib/boldr-core.node.esm.js",
-  "browser:es2015": "lib/boldr-core.browser.esm.js",
+  "browser": "lib/boldr-core.browser.esm.js",
+  "main:modern": "lib/boldr-core.node.cjs.js",
+  "module:modern": "lib/boldr-core.node.esm.js",
+  "browser:modern": "lib/boldr-core.browser.esm.js",
   "files": [
     "index.js",
     "lib"
@@ -34,31 +34,34 @@
     "test": "jest"
   },
   "dependencies": {
-    "apollo-client": "^1.9.2",
+    "chalk": "^2.1.0",
+    "history": "^4.7.2",
     "invariant": "^2.2.2",
-    "isomorphic-fetch": "^2.2.1",
-    "lodash": "^4.17.4",
-    "node-fetch": "^1.7.3",
+    "isomorphic-unfetch": "^2.0.0",
+    "nanoid": "^0.2.0",
+    "lodash.flatmapdeep": "^4.10.0",
     "prop-types": "^15.5.10",
     "redux-immutable-state-invariant": "^2.0.0",
-    "redux-thunk": "^2.2.0"
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
+    "source-map-support": "^0.4.18"
   },
   "devDependencies": {
-    "babel-preset-boldr": "0.11.0",
+    "babel-preset-boldr": "0.11.1",
     "eslint": "^4.6.1",
     "eslint-config-boldr": "^0.12.13",
     "fast-async": "^6.3.0",
     "prepublish": "^1.4.2",
-    "prettier": "1.6.1",
+    "prettier": "^1.7.0",
     "react-router-dom": "^4.2.2",
-    "redux-mock-store": "^1.2.3",
+    "redux-mock-store": "^1.3.0",
     "react": "^15.6.1",
     "react-apollo": "^1.4.15",
     "react-router-redux": "^5.0.0-alpha.6",
     "react-dom": "^15.6.1",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
-    "rimraf": "^2.6.1"
+    "rimraf": "^2.6.2"
   },
   "peerDependencies": {
     "react": "^15.6.1",
@@ -67,6 +70,6 @@
     "react-redux": "^5.0.6",
     "react-router-redux": "^5.0.0-alpha.6",
     "redux": "^3.7.2",
-    "react-universal-component": "2.5.1"
+    "react-universal-component": "^2.5.4"
   }
 }

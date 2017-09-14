@@ -1,8 +1,12 @@
 /* eslint-disable no-unused-vars */
 import _debug from 'debug';
-
+import { withFilter } from 'graphql-subscriptions';
 import { errorObj } from '../../errors';
 import slugIt from '../../utils/slugIt';
+
+const ARTICLE_UPDATED_TOPIC = 'post_updated';
+
+const debug = _debug('boldr:server:graphql:resolvers:article');
 
 const articleResolvers = {
   Article: {
@@ -128,6 +132,10 @@ const articleResolvers = {
       return ctx.models.Article.query().deleteById(args.id);
     },
   },
+  Subscription: {
+    articleUpdated(article) {
+      return article;
+    },
+  },
 };
-
 export default articleResolvers;

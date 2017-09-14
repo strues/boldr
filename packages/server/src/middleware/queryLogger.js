@@ -1,7 +1,7 @@
 import bodyParser from 'body-parser';
 import _debug from 'debug';
 
-const debug = _debug('boldr:server:gql');
+const debug = _debug('boldr:server:graphql');
 
 /* eslint-disable no-console */
 

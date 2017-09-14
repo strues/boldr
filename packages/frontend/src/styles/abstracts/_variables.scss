@@ -15,7 +15,7 @@
 /// 15. Modal/Dialog
 
 /// Namespace
-$boldr-ns: "boldr-" !default;
+$boldr-ns: 'boldr-' !default;
 
 $tablet: 769px !default;
 
@@ -36,20 +36,20 @@ $fullhd: 1384px !default;
 
 /// @group typography
 /// @type String
-$font-name: "Roboto" !default;
+$font-name: 'Roboto' !default;
 /// @group typography
 /// @type String
-$heading-font-name: "Chivo" !default;
+$heading-font-name: 'Chivo' !default;
 /// @group typography
 /// @type String
-$font-family-base: $font-name, "Helvetica Neue", arial, helvetica, sans-serif !default;
+$font-family-base: $font-name, 'Helvetica Neue', arial, helvetica, sans-serif !default;
 $font-family-serif: 'Helvetica Neue' !default;
 /// @group typography
 /// @type String
-$font-family-monospace: "Lucida Console", monaco, monospace;
+$font-family-monospace: 'Lucida Console', monaco, monospace;
 /// @group typography
 /// @type String
-$heading-font-family: $heading-font-name, "Helvetica Neue", arial, helvetica, sans-serif !default;
+$heading-font-family: $heading-font-name, 'Helvetica Neue', arial, helvetica, sans-serif !default;
 /// @group typography
 /// @type Number
 $font-size-base: 16px !default;
@@ -134,7 +134,6 @@ $family-code: $font-family-monospace !default;
 $base-vertical-unit: 6px;
 $base-line-multi: 4;
 $base-font-size: 16px;
-
 
 // Creates a handy variable for the 1em
 $base-em-font-size: 1em;
@@ -267,7 +266,6 @@ $error-color: $carmine-pink !default;
 /// @group theme
 $warning-color: $golden !default;
 
-
 /// ==========================================================
 ///
 /// 5. Button
@@ -308,7 +306,7 @@ $btn-secondary-active: darken($secondary-color, 5%);
 /// @group btn
 $btn-danger: $red;
 /// @group btn
-$btn-danger-hover:  darken($red, 5%);
+$btn-danger-hover: darken($red, 5%);
 /// @group btn
 $btn-danger-active: darken($red, 5%);
 
@@ -448,7 +446,7 @@ $breadcrumb-divider-color: $gray-light !default;
 /// @group breadcrumb
 $breadcrumb-active-color: $gray-light !default;
 /// @group breadcrumb
-$breadcrumb-divider: "/" !default;
+$breadcrumb-divider: '/' !default;
 
 /// ==========================================================
 ///
@@ -517,7 +515,7 @@ $tag-base-font-color: $dark-gray !default;
 /// @group tag
 $tag-base-margin: 5px !default;
 /// @group tag
-$tag-base-font-family: "Helvetica Neue", helvetica, arial, sans-serif !default;
+$tag-base-font-family: 'Helvetica Neue', helvetica, arial, sans-serif !default;
 
 /// @group tag
 $tag-background-color: $light-gray !default;
@@ -554,7 +552,6 @@ $modal-ease-out-quad: cubic-bezier(0.25, 0.46, 0.45, 0.94);
 /// @group dialog
 $modal-transition-deceleration: cubic-bezier(0, 0, 0.2, 1);
 
-
 /// notifications
 // Media queries breakpoints
 $screen-sm-min: 768px;
@@ -565,27 +562,27 @@ $window-padding: 20px;
 // Notification variables
 $notification-max-width: 360px;
 $notification-button-width: 90px;
-$notification-close-button: "\f00d";
+$notification-close-button: '\f00d';
 
 $notification-success-bg: $turtle;
 $notification-success-border: darken($turtle, 5%);
-$notification-success-icon: "\f058";
+$notification-success-icon: '\f058';
 
 $notification-default-bg: #fff;
 $notification-default-border: #fff;
 
 $notification-info-bg: #fff;
 $notification-info-border: #349ef3;
-$notification-info-icon: "\f05a";
+$notification-info-icon: '\f05a';
 
 $notification-warning-bg: #fff;
 $notification-warning-border: #f5aa0a;
-$notification-warning-icon: "\f071";
+$notification-warning-icon: '\f071';
 
 $notification-error-bg: #fff;
 $notification-error-border: #f5311d;
-$notification-error-icon: "\f057";
+$notification-error-icon: '\f057';
 
 $notification-loading-bg: #fff;
 $notification-loading-border: #349ef3;
-$notification-loading-icon: "\f110";
+$notification-loading-icon: '\f110';

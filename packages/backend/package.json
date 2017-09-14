@@ -1,0 +1,61 @@
+{
+  "name": "@boldr/backend",
+  "description": "Boldr Backend is a centralized Express-based HTTP server with sophisticated built-in security.",
+  "version": "0.1.0-alpha.1",
+  "homepage": "https://github.com/strues/boldr",
+  "bugs": {
+    "url": "https://github.com/strues/boldr/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Steven Truesdell",
+    "email": "steven@strues.io",
+    "url": "strues.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strues/boldr.git"
+  },
+  "main": "lib/index.es5.cjs.js",
+  "module": "lib/index.es5.esm.js",
+  "main:es2015": "lib/index.es2015.cjs.js",
+  "module:es2015": "lib/index.es2015.esm.js",
+  "main:modern": "lib/index.modern.cjs.js",
+  "module:modern": "lib/index.modern.esm.js",
+  "pre-commit": "lint-staged",
+  "lint-staged": {
+    "*.js": "eslint"
+  },
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "rimraf lib && prepublish",
+    "test": "npm run build && jest",
+    "release": "git push && release-it --github.release --npm.publish --non-interactive",
+    "release:minor": "git push && release-it --github.release --npm.publish --non-interactive --increment minor",
+    "release:major": "git push && release-it --github.release --npm.publish --non-interactive --increment major"
+  },
+  "engines": {
+    "node": ">=6.0.0",
+    "yarn": ">=0.21.3",
+    "npm": ">=4.0.0"
+  },
+  "dependencies": {
+    "@boldr/config": "^0.1.0-alpha.1",
+    "@boldr/utils": "^0.1.0-rc.5",
+    "body-parser": "^1.18.1",
+    "chalk": "^2.1.0",
+    "cookie-parser": "^1.4.3",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.4",
+    "hpp": "^0.2.2",
+    "pretty-error": "^2.1.1",
+    "uuid": "^3.1.0"
+  },
+  "devDependencies": {
+    "babel-preset-boldr": "0.11.1",
+    "prepublish": "^1.4.2",
+    "rimraf": "^2.6.2",
+    "jest-cli": "^21.1.0",
+    "prettier": "^1.7.0"
+  }
+}

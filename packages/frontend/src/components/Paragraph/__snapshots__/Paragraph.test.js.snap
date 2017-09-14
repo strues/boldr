@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Paragraph /> should match the snapshot 1`] = `
+<p
+  className="boldr-p"
+>
+  My contents
+</p>
+`;

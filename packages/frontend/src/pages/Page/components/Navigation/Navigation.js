@@ -16,7 +16,7 @@ import {
   NavbarItem,
   NavbarMenu,
   NavbarStart,
-} from '@boldr/ui';
+} from '../../../../components';
 import type { CurrentUser, SettingsType, RouterLocation } from '../../../../types/boldr';
 
 export type Props = {
@@ -130,13 +130,13 @@ class Navigation extends React.Component<Props, State> {
             </NavbarStart>
             <NavbarEnd>
               {token &&
-              parseInt(currentUser.roleId, 10) === 3 && (
-                <NavbarItem>
-                  <NavLink to="/admin">
-                    <Icon kind="dashboard" color="#afbbca" />
-                  </NavLink>
-                </NavbarItem>
-              )}
+                parseInt(currentUser.roleId, 10) === 3 && (
+                  <NavbarItem>
+                    <NavLink to="/admin">
+                      <Icon kind="dashboard" color="#afbbca" />
+                    </NavLink>
+                  </NavbarItem>
+                )}
               {!token && (
                 <NavbarItem>
                   <NavLink to="/login">Login</NavLink>

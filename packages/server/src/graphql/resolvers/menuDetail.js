@@ -2,6 +2,8 @@
 import _debug from 'debug';
 import { errorObj } from '../../errors';
 
+const debug = _debug('boldr:server:graphql:resolvers:menuDetail');
+
 const menuDetailResolvers = {
   Query: {
     details: async (obj, args, context) => {
@@ -16,7 +18,6 @@ const menuDetailResolvers = {
   },
   Mutation: {
     editDetails: async (obj, args, context) => {
-      debug(args);
       const updatedDetail = await MenuDetail.query().patchAndFetchById(args.id, {
         title: args.input.title,
         safeName: slugIt(args.input.title),

@@ -1,37 +1,78 @@
 import Redis from 'ioredis';
-import getConfig from '@boldr/config';
+import { config } from '@boldr/config';
+import _debug from 'debug';
 import logger from '../logger';
 
-const config = getConfig();
+const debug = _debug('boldr:server:services:redis');
 
-const redisClient = new Redis(config.server.redis.url);
-const pubSubClient = new Redis(config.server.redis.url);
+const attachMonitors = client => {
+  debug('redis client init');
 
-function destroyRedis() {
-  redisClient.disconnect();
-  pubSubClient.disconnect();
-}
+  client.on('connect', () => debug('redis client connected'));
+  client.on('ready', () => debug('redis client ready'));
+  client.on('reconnecting', () => debug('redis client connection lost, attempting to reconnect'));
+  client.on('close', () => debug('redis client closed the connection'));
+  client.on('end', () => debug('redis client ended'));
 
-redisClient.on('connect', () => {
-  logger.info(`Redis connected on ${config.server.redis.url}`);
-});
+  // Error events.
+  client.on('error', err => {
+    if (err) {
+      console.error('Error connecting to redis:', err);
+    }
+  });
+};
 
-redisClient.on('error', err => {
-  logger.error(`Error while connecting to Redis!!! ${err}`);
-  process.exit(1);
-});
+const connectionOptions = {
+  // eslint-disable-next-line
+  retry_strategy: function(options) {
+    if (options.error && options.error.code !== 'ECONNREFUSED') {
+      debug('retry strategy: none, an error occured');
 
-redisClient.on('close', () => {
-  logger.warn('Redis connection has been closed.');
-  process.exit(1);
-});
+      // End reconnecting on a specific error and flush all commands with a individual error
+      return options.error;
+    }
+    if (options.total_retry_time > '1 min') {
+      debug('retry strategy: none, exhausted retry time');
 
-redisClient.on('reconnecting', () => {
-  logger.info('Redis is attempting to re-connect');
-});
+      // End reconnecting after a specific timeout and flush all commands with a individual error
+      return new Error('Retry time exhausted');
+    }
 
-redisClient.on('+node', data => {
-  logger.info(data, 'node is connected');
-});
+    if (options.attempt > 100) {
+      debug('retry strategy: none, exhausted retry attempts');
 
-export { redisClient, pubSubClient, destroyRedis };
+      // End reconnecting with built in error
+      return undefined;
+    }
+
+    // reconnect after
+    const delay = Math.max(options.attempt * '500 ms', '1 sec');
+
+    debug(`retry strategy: try to reconnect ${delay} ms from now`);
+
+    return delay;
+  },
+};
+
+export const createClient = () => {
+  const client = new Redis(config.get('redis.url'), connectionOptions);
+
+  // Attach the monitors that will print debug messages to the console.
+  attachMonitors(client);
+
+  return client;
+};
+
+export const createClientFactory = () => {
+  let client = null;
+
+  return () => {
+    if (client !== null) {
+      return client;
+    }
+
+    client = createClient();
+
+    return client;
+  };
+};

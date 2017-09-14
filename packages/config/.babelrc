@@ -5,12 +5,10 @@
       {
         "modules": "commonjs",
         "targets": {
-          "browsers": "last 2 versions",
           "node": "current"
         },
         "useBuiltIns": "true"
       }
     ]
-  ],
-  "plugins": ["transform-object-rest-spread"]
+  ]
 }

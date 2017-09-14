@@ -1,11 +1,6 @@
 import { resolve } from 'path';
 import appRoot from '@boldr/utils/lib/node/appRoot';
-import dotenv from 'dotenv';
-
-import createExpress from '../server/createExpress';
-
-// Initialize environment configuration
-dotenv.config();
+import { createBackend } from '@boldr/backend';
 
 const ROOT = appRoot.get();
 const SERVER_OUTPUT = resolve(ROOT, process.env.SERVER_OUTPUT);
@@ -16,11 +11,25 @@ const PORT = process.env.PORT;
 /* eslint-disable import/no-commonjs */
 /* eslint-disable security/detect-non-literal-require */
 
-export default function startRenderServer() {
-  const server = createExpress({});
-
+export default function startRenderServer(buildConfig = {}) {
   const clientStats = require(`${CLIENT_OUTPUT}/stats.json`);
   const serverRender = require(`${SERVER_OUTPUT}/main.js`).default;
+
+  const server = createBackend({
+    staticConfig: {
+      public: '/static/',
+      path: CLIENT_OUTPUT,
+    },
+    localeConfig: buildConfig.locale,
+    afterSecurity: [],
+    beforeFallback: [
+      serverRender({
+        clientStats,
+      }),
+    ],
+    enableCSP: false,
+    enableNonce: false,
+  });
 
   server.use(serverRender({ clientStats }));
 

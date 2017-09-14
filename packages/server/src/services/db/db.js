@@ -1,13 +1,11 @@
 import knex from 'knex';
 import { Model } from 'objection';
 
-import getConfig from '@boldr/config';
-
-const config = getConfig();
+import { config } from '@boldr/config';
 
 const knexOpts = {
   client: 'pg',
-  connection: config.server.db.url,
+  connection: config.get('db.url'),
   searchPath: 'knex,public',
   pool: {
     min: 2,

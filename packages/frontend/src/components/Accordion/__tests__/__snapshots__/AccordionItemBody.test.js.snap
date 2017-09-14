@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccordionItemBody renders correctly with different className 1`] = `
+<div
+  aria-hidden={true}
+  className="testCSSClass boldr-accordion__body--hidden"
+  id={undefined}
+  role={undefined}
+>
+  <div>
+    Fake body
+  </div>
+</div>
+`;
+
+exports[`AccordionItemBody renders correctly with expanded 1`] = `
+<div
+  aria-hidden={false}
+  className="boldr-accordion__body"
+  id={undefined}
+  role={undefined}
+>
+  <div>
+    Fake body
+  </div>
+</div>
+`;
+
+exports[`AccordionItemBody renders correctly with min params 1`] = `
+<div
+  aria-hidden={true}
+  className="boldr-accordion__body boldr-accordion__body--hidden"
+  id={undefined}
+  role={undefined}
+>
+  <div>
+    Fake body
+  </div>
+</div>
+`;
+
+exports[`AccordionItemBody renders correctly with prefixClass 1`] = `
+<div
+  aria-hidden={true}
+  className="boldr-accordion__body testCSSClass--hidden"
+  id={undefined}
+  role={undefined}
+>
+  <div>
+    Fake body
+  </div>
+</div>
+`;

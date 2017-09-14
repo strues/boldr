@@ -93,11 +93,9 @@ const getImageRender = (config: Object) =>
                 width,
               }}
             />
-            {!isReadOnly() && hovered && isImageAlignmentEnabled() ? (
-              this.renderAlignmentOptions(alignment)
-            ) : (
-              undefined
-            )}
+            {!isReadOnly() && hovered && isImageAlignmentEnabled()
+              ? this.renderAlignmentOptions(alignment)
+              : undefined}
           </span>
         </span>
       );

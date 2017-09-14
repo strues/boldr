@@ -1,8 +1,6 @@
 import uuid from 'uuid';
 import jwt from 'jsonwebtoken';
-import getConfig from '@boldr/config';
-
-const config = getConfig();
+import { config } from '@boldr/config';
 
 export default function signToken(account) {
   const roleinfo = account.roles[0].name;
@@ -15,7 +13,7 @@ export default function signToken(account) {
     role: roleinfo,
   };
   return new Promise((resolve, reject) => {
-    jwt.sign(payload, config.server.token.secret, (err, token) => {
+    jwt.sign(payload, config.get('token.secret'), (err, token) => {
       if (err) {
         return reject(err);
       }

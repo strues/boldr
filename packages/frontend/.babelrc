@@ -3,14 +3,15 @@
     [
       "boldr",
       {
-        "target": "modern"
+        "target": "modern",
+        "modules": "commonjs",
+        "useBuiltins": true,
+        "faSpecMode": true,
+        "looseMode": true,
+        "specMode": false,
+        "nodentRt": false,
+        "polyfill": false
       }
     ]
-  ],
-  "plugins": [
-    ["module-resolver", {
-      "root": ["./src"]
-
-    }]
   ]
 }

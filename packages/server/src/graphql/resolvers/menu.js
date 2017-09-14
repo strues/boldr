@@ -2,6 +2,8 @@
 import _debug from 'debug';
 import { errorObj } from '../../errors';
 
+const debug = _debug('boldr:server:graphql:resolvers:menu');
+
 const menuResolvers = {
   Menu: {
     details: async (obj, args, context) => {

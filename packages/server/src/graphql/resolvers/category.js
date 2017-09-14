@@ -3,6 +3,8 @@ import _debug from 'debug';
 import { errorObj } from '../../errors';
 import slugIt from '../../utils/slugIt';
 
+const debug = _debug('boldr:server:graphql:resolvers:category');
+
 const categoryResolvers = {
   Category: {
     entities: async (obj, args, { models: { Category } }) => {

@@ -1,18 +1,26 @@
-import PrettyError from 'pretty-error';
-
-const pretty = new PrettyError();
-
-// this will skip events.js and http.js and similar core node files
-pretty.skipNodeFiles();
-
-// this will skip all the trace lines about express` core and sub-modules
-pretty.skipPackage('express');
-
 export default function initErrorHandler(app) {
-  // and use it for our app's error handler:
-  app.use((error, request, response, next) => {
-    // eslint-disable-line max-params
-    console.log(pretty.render(error));
-    next();
+  // technically we should never see this during production
+  // React takes over
+  // eslint-disable-next-line no-unused-vars
+  app.use((req, res, next) => {
+    // eslint-disable-line no-unused-vars,max-len
+    res.status(404).send('Sorry, the requested resource is nowhere to be found.');
+  });
+  // eslint-disable-next-line no-unused-vars
+  app.use((error, req, res, next) => {
+    error.stack = error.stack || '';
+    const errorDetails = {
+      message: error.message,
+      status: error.status,
+      stackHighlighted: error.stack.replace(/[a-z_-\d]+.js:\d+:\d+/gi, '<mark>$&</mark>'),
+    };
+    res.status(error.status || 500);
+    res.format({
+      // Based on the `Accept` http header
+      'text/html': () => {
+        res.render('error', errorDetails);
+      },
+      'application/json': () => res.json(errorDetails),
+    });
   });
 }

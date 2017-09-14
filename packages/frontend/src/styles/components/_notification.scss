@@ -59,15 +59,15 @@
 }
 
 // include all needed keyframes
-@include notification-keyframes("top");
+@include notification-keyframes('top');
 
-@include notification-keyframes("bottom");
+@include notification-keyframes('bottom');
 
-@include notification-keyframes("left");
+@include notification-keyframes('left');
 
-@include notification-keyframes("right");
+@include notification-keyframes('right');
 
-@include notification-keyframes("top", 0);
+@include notification-keyframes('top', 0);
 
 // rotating animation for loading status
 @keyframes rotating {
@@ -87,7 +87,7 @@
 // NotificationSystem component
 .notifications-system {
   font-size: 14px;
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   line-height: 1.428571429;
 }
 
@@ -164,53 +164,53 @@
 
   // animations depending of the notification position
   &--t {
-    @include notification-animation("top");
+    @include notification-animation('top');
     top: 20px;
     left: 20px;
     width: calc(100% - 40px);
   }
 
   &--tc {
-    @include notification-animation("top");
+    @include notification-animation('top');
     top: 20px;
     left: 50%;
     transform: translateX(-50%);
   }
 
   &--tr {
-    @include notification-animation("right");
+    @include notification-animation('right');
     top: 20px;
     right: 20px;
   }
 
   &--tl {
-    @include notification-animation("left");
+    @include notification-animation('left');
     top: 20px;
     left: 20px;
   }
 
   &--b {
-    @include notification-animation("bottom");
+    @include notification-animation('bottom');
     bottom: 0;
     left: 20px;
     width: calc(100% - 40px);
   }
 
   &--bc {
-    @include notification-animation("bottom");
+    @include notification-animation('bottom');
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
   }
 
   &--br {
-    @include notification-animation("right");
+    @include notification-animation('right');
     right: 20px;
     bottom: 0;
   }
 
   &--bl {
-    @include notification-animation("left");
+    @include notification-animation('left');
     bottom: 0;
     left: 20px;
   }
@@ -220,7 +220,7 @@
 @media (max-width: #{$screen-xs-max}) {
   .notifications-container {
     &--t {
-      @include notification-animation("top", 0);
+      @include notification-animation('top', 0);
       top: 0;
       left: 0;
       width: 100%;
@@ -360,7 +360,7 @@
   }
   // color variants
   &--default {
-    @include notification-variant($notification-default-bg, $notification-default-border, "");
+    @include notification-variant($notification-default-bg, $notification-default-border, '');
   }
 
   &--success {

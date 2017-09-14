@@ -38,7 +38,6 @@ module.exports.up = async db => {
     table.string('email', 100).unique().notNullable();
     table.string('password', 255).notNullable();
     table.boolean('verified').defaultTo(false);
-    table.string('ip', 32);
     table.string('reset_token', 255);
     table.dateTime('reset_token_exp');
     table.string('verification_token', 255);

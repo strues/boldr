@@ -1,1 +1,1 @@
-export { destroyRedis, redisClient, pubSubClient } from './redis';
+export { createClient, createClientFactory } from './redis';

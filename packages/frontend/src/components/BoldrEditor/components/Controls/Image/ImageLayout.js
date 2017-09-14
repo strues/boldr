@@ -188,16 +188,16 @@ class ImageLayout extends React.Component<Props, State> {
       <div className={cn('be-modal', modalClassName)} onClick={this.stopPropagation}>
         <div className={cn('be-modal__top')}>
           {uploadEnabled &&
-          uploadCallback && (
-            <span className={cn('be-modal__opt')} onClick={this.showImageUploadOption}>
-              Upload
-              <span
-                className={cn('be-modal__label', {
-                  'is-hlight': uploadHighlighted,
-                })}
-              />
-            </span>
-          )}
+            uploadCallback && (
+              <span className={cn('be-modal__opt')} onClick={this.showImageUploadOption}>
+                Upload
+                <span
+                  className={cn('be-modal__label', {
+                    'is-hlight': uploadHighlighted,
+                  })}
+                />
+              </span>
+            )}
           {urlEnabled && (
             <span className={cn('be-modal__opt')} onClick={this.showImageURLOption}>
               Upload URL

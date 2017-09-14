@@ -77,15 +77,15 @@
 
 @each $breakpoint, $breakpoint-size in $grid-breakpoints {
   @include breakpoint($breakpoint, $breakpoint-size) {
-    $col-selectors: (".grid__col--#{$breakpoint}");
+    $col-selectors: ('.grid__col--#{$breakpoint}');
 
     @for $col from 1 through $grid-columns {
-      $col-selector: unquote(".grid__col--#{$breakpoint}-#{$col}");
+      $col-selector: unquote('.grid__col--#{$breakpoint}-#{$col}');
       $col-selectors: append($col-selectors, $col-selector, comma);
     }
 
     @for $col from 1 through $grid-columns {
-      $col-offset-selector: unquote(".grid__col--#{$breakpoint}-offset-#{$col}");
+      $col-offset-selector: unquote('.grid__col--#{$breakpoint}-offset-#{$col}');
       $col-selectors: append($col-selectors, $col-offset-selector, comma);
     }
 

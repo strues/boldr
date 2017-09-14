@@ -570,3 +570,9 @@ type Error = {
 
 export type ErrorType = Error;
 export type ErrorsType = Array<Error>;
+
+export type ContentRoot = {
+  tags: TagsType,
+  categories: CategoriesType,
+  contentTypes: ContentTypes,
+};

@@ -3,12 +3,12 @@ import path from 'path';
 import _debug from 'debug';
 import fs from 'fs-extra';
 import Jimp from 'jimp';
-import shortId from 'shortid';
+import nanoid from 'nanoid';
 import appRoot from '@boldr/utils/lib/node/appRoot';
 
 import { errorObj } from '../../errors';
 
-const debug = _debug('boldr:server:gql:resolvers:media');
+const debug = _debug('boldr:server:graphql:resolvers:media');
 const UPLOAD_DIR = path.resolve(appRoot.get(), './public/uploads');
 
 const mediaResolvers = {
@@ -30,7 +30,7 @@ const mediaResolvers = {
   },
   Mutation: {
     uploadMedia: async (obj, args, ctx) => {
-      const id = shortId.generate();
+      const id = nanoid();
       const actualFileName = id + path.extname(args.file.name);
 
       fs.moveSync(args.file.path, `${UPLOAD_DIR}/media/${actualFileName}`);

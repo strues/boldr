@@ -37,7 +37,8 @@
     "babel-preset-env": "^1.6.0",
     "eslint": "^4.6.1",
     "eslint-config-boldr": "^0.12.13",
-    "fast-async": "^6.3.0"
+    "fast-async": "^6.3.0",
+    "fs-extra": "^4.0.2"
   },
   "dependencies": {
     "@boldr/config": "^0.1.0-alpha.1",
@@ -47,7 +48,7 @@
     "update-notifier": "^2.2.0",
     "knex": "^0.13.0",
     "pg": "^7.3.0",
-    "prettier": "^1.6.1",
-    "rimraf": "^2.6.1"
+    "prettier": "^1.7.0",
+    "rimraf": "^2.6.2"
   }
 }

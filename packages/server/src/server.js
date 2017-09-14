@@ -1,18 +1,17 @@
 /* eslint-disable no-console, no-shadow */
 import http from 'http';
 import Bluebird from 'bluebird';
-import getConfig from '@boldr/config';
+import { config } from '@boldr/config';
+
 import app from './app';
 import { disconnect } from './services/db';
 import logger from './services/logger';
-import { destroyRedis } from './services/redis';
+// import { destroyRedis } from './services/redis';
 import normalizePort from './utils/normalizePort';
 
 global.Promise = Bluebird;
 
-const config = getConfig();
-
-const port = normalizePort(config.server.port);
+const port = normalizePort(config.get('server.port'));
 // Launch Node.js server
 const server = http.createServer(app);
 
@@ -28,7 +27,7 @@ server.on('error', err => {
 
 function gracefulExit(options, err) {
   if (options.cleanup) {
-    const actions = [server.close, disconnect, destroyRedis];
+    const actions = [server.close, disconnect];
     actions.forEach((close, i) => {
       try {
         close(() => {

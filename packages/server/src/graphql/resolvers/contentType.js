@@ -2,6 +2,8 @@
 import _debug from 'debug';
 import { errorObj } from '../../errors';
 
+const debug = _debug('boldr:server:graphql:resolvers:contentType');
+
 const contentTypeResolvers = {
   ContentType: {
     entities: async (obj, args, { models: { ContentType } }) => {

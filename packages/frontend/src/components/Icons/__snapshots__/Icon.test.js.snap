@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders snapshot 1`] = `
+<BaseIcon
+  color="#222"
+  kind="menu"
+  size={24}
+  viewBox="0 0 48 48"
+>
+  <path
+    d="M6 36h36v-4H6v4zm0-10h36v-4H6v4zm0-14v4h36v-4H6z"
+  />
+</BaseIcon>
+`;

@@ -1,24 +1,20 @@
 // @flow
 import * as React from 'react';
 import styled from 'styled-components';
+import { Input, Label, Menu } from 'semantic-ui-react';
 import Flex from '../../../components/Flex';
-import type { ContentTypes } from '../../../types/boldr';
+import type { ContentRoot } from '../../../types/boldr';
 import CreateContainer from './ContentType/CreateContainer';
 
 type Props = {
-  contentTypes: ContentTypes,
+  content: ContentRoot,
 };
 type State = {
-  tags: boolean,
-  categories: boolean,
-  content: boolean,
+  activeItem: string,
 };
 // eslint-disable-next-line
 
-const LeftCol = styled(Flex)`
-  width: 230px;
-  background-color: #20bf55;
-`;
+const LeftCol = styled(Flex)`width: 230px;`;
 const List = styled.ul`
   list-style-type: none;
   padding-left: 0;
@@ -27,42 +23,59 @@ const ListItem = styled.li`
   padding-top: 5px;
   padding-bottom: 5px;
 `;
-const MidCol = styled(Flex)`
-  width: 230px;
-  background-color: #378fe5;
-`;
 
 class Content extends React.Component<Props, State> {
-  constructor() {
-    super();
+  state: State = {
+    activeItem: 'categories',
+  };
 
-    this.state = {
-      tags: false,
-      categories: false,
-      content: false,
-    };
-  }
-  state: State;
+  handleItemClick = (e, { name }) => this.setState({ activeItem: name });
+
   props: Props;
   render() {
+    const { content: { tags, categories, contentTypes } } = this.props;
+    const { activeItem } = this.state;
     return (
       <Flex justify="flex-start" align="stretch">
         <LeftCol shrink={0}>
-          <List>
-            <ListItem>Tags</ListItem>
-            <ListItem>Categories</ListItem>
-            <ListItem>Content Types</ListItem>
-          </List>
+          <Menu vertical>
+            <Menu.Item
+              name="categories"
+              active={activeItem === 'categories'}
+              onClick={this.handleItemClick}>
+              <Label color="teal">1</Label>
+              Categories
+            </Menu.Item>
+
+            <Menu.Item
+              name="contentTypes"
+              active={activeItem === 'contentTypes'}
+              onClick={this.handleItemClick}>
+              <Label>51</Label>
+              Content Types
+            </Menu.Item>
+
+            <Menu.Item name="tags" active={activeItem === 'tags'} onClick={this.handleItemClick}>
+              <Label>1</Label>
+              Tags
+            </Menu.Item>
+          </Menu>
         </LeftCol>
-        <MidCol shrink={0}>
-          {/* <List>
-            {this.props.contentTypes.map(contentType => (
-              <ListItem key={contentType.id}>{contentType.name}</ListItem>
-            ))}
+        <Flex>
+          <List>
+            {activeItem === 'contentTypes' &&
+              contentTypes.map(contentType => (
+                <ListItem key={contentType.id}>{contentType.name}</ListItem>
+              ))}
           </List>
-          <List>{this.props.tags.map(tag => <ListItem key={tag.id}>{tag.name}</ListItem>)}</List> */}
-        </MidCol>
-        <Flex>{/* <CreateContainer /> */}</Flex>
+          <List>
+            {activeItem === 'tags' && tags.map(tag => <ListItem key={tag.id}>{tag.name}</ListItem>)}
+          </List>
+          <List>
+            {activeItem === 'categories' &&
+              categories.map(category => <ListItem key={category.id}>{category.name}</ListItem>)}
+          </List>
+        </Flex>
       </Flex>
     );
   }

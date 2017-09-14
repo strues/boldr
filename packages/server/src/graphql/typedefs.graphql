@@ -6,6 +6,7 @@
 schema {
   query: Query
   mutation: Mutation
+  subscription: Subscription
 }
 
 ################################################################################
@@ -247,6 +248,12 @@ type AllContent {
   tags: Tag
   entities: Entity
   categories: Category
+}
+
+type ContentRoot {
+  tags: [Tag]
+  categories: [Category]
+  contentTypes: [ContentType]
 }
 
 
@@ -696,6 +703,16 @@ input CreateContentTypeInput {
 }
 
 
+
+################################################################################
+## Subscriptions
+################################################################################
+
+type Subscription {
+  articleUpdated(id: ID!): Article
+}
+
+
 type Query {
   # A query for a listing of all accounts
   accounts(
@@ -738,6 +755,7 @@ type Query {
     # The id of the requested content type
     id: ID!
   ): ContentType
+  contentRoot: ContentRoot
   allContent: AllContent
   # Returns all content entities from the database..
   entities(

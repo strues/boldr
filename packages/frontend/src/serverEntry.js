@@ -3,12 +3,11 @@ import StaticRouter from 'react-router-dom/StaticRouter';
 import { renderToStringWithData } from 'react-apollo';
 import { flushChunkNames } from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
-import createHistory from 'history/createMemoryHistory';
 import serialize from 'serialize-javascript';
 import { ServerStyleSheet } from 'styled-components';
 import Helmet from 'react-helmet';
 
-import { wrapBoldrApp, createApolloClient, createBoldrStore } from '@boldr/core';
+import { wrapBoldrApp, createApolloClient, createBoldrStore, createHistory } from '@boldr/core';
 import App from './components/App/App.js';
 
 import appReducer from './reducers';
@@ -85,6 +84,7 @@ export default ({ clientStats, outputPath }) =>
               <script type="text/javascript">
               WebFont.load({ google: { families: ['Roboto:300,400,700','Chivo:300,700'] } });
             </script>
+
               <script type="text/javascript">
                 window.__APOLLO_STATE__=${serialize(preloadedState, {
                   json: true,

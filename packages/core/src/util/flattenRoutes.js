@@ -1,8 +1,8 @@
 /**
- * @module boldr-core/shared/flattenRoutes
+ * @module @boldr/core/util/flattenRoutes
  */
 
-import flatMapDeep from 'lodash/flatMapDeep';
+import flatMapDeep from 'lodash.flatmapdeep';
 
 /**
  * Takes a collection of nested routes and returns a flattened object

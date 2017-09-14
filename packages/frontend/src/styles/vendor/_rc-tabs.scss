@@ -1,4 +1,3 @@
-
 .rc-tabs {
   box-sizing: border-box;
   position: relative;
@@ -13,7 +12,7 @@
   white-space: nowrap;
   outline: none;
   zoom: 1;
-  transition: padding .45s;
+  transition: padding 0.45s;
 }
 .rc-tabs-ink-bar {
   z-index: 1;
@@ -22,19 +21,20 @@
   margin-top: -3px;
   background-color: #108ee9;
   -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;
+  transform-origin: 0 0;
 }
 .rc-tabs-ink-bar-animated {
   transition: -webkit-transform 0.3s cubic-bezier(0.35, 0, 0.25, 1);
   transition: transform 0.3s cubic-bezier(0.35, 0, 0.25, 1);
-  transition: transform 0.3s cubic-bezier(0.35, 0, 0.25, 1), -webkit-transform 0.3s cubic-bezier(0.35, 0, 0.25, 1);
+  transition: transform 0.3s cubic-bezier(0.35, 0, 0.25, 1),
+    -webkit-transform 0.3s cubic-bezier(0.35, 0, 0.25, 1);
 }
 .rc-tabs-tab-prev,
 .rc-tabs-tab-next {
   -webkit-user-select: none;
-     -moz-user-select: none;
-      -ms-user-select: none;
-          user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   z-index: 1;
   line-height: 36px;
   cursor: pointer;
@@ -77,17 +77,18 @@
   list-style: none;
   display: inline-block;
   -webkit-transform-origin: 0 0;
-          transform-origin: 0 0;
+  transform-origin: 0 0;
 }
 .rc-tabs-nav-animated {
   transition: -webkit-transform 0.5s cubic-bezier(0.35, 0, 0.25, 1);
   transition: transform 0.5s cubic-bezier(0.35, 0, 0.25, 1);
-  transition: transform 0.5s cubic-bezier(0.35, 0, 0.25, 1), -webkit-transform 0.5s cubic-bezier(0.35, 0, 0.25, 1);
+  transition: transform 0.5s cubic-bezier(0.35, 0, 0.25, 1),
+    -webkit-transform 0.5s cubic-bezier(0.35, 0, 0.25, 1);
 }
 .rc-tabs-nav:before,
 .rc-tabs-nav:after {
   display: table;
-  content: " ";
+  content: ' ';
 }
 .rc-tabs-nav:after {
   clear: both;
@@ -109,7 +110,7 @@
   color: #108ee9;
   cursor: default;
   -webkit-transform: translateZ(0);
-          transform: translateZ(0);
+  transform: translateZ(0);
 }
 .rc-tabs-tab-disabled {
   cursor: default;
@@ -125,9 +126,14 @@
   overflow: auto;
 }
 .rc-tabs-content-animated {
-  transition: margin-left 0.3s cubic-bezier(0.35, 0, 0.25, 1), margin-top 0.3s cubic-bezier(0.35, 0, 0.25, 1), -webkit-transform 0.3s cubic-bezier(0.35, 0, 0.25, 1);
-  transition: transform 0.3s cubic-bezier(0.35, 0, 0.25, 1), margin-left 0.3s cubic-bezier(0.35, 0, 0.25, 1), margin-top 0.3s cubic-bezier(0.35, 0, 0.25, 1);
-  transition: transform 0.3s cubic-bezier(0.35, 0, 0.25, 1), margin-left 0.3s cubic-bezier(0.35, 0, 0.25, 1), margin-top 0.3s cubic-bezier(0.35, 0, 0.25, 1), -webkit-transform 0.3s cubic-bezier(0.35, 0, 0.25, 1);
+  transition: margin-left 0.3s cubic-bezier(0.35, 0, 0.25, 1),
+    margin-top 0.3s cubic-bezier(0.35, 0, 0.25, 1),
+    -webkit-transform 0.3s cubic-bezier(0.35, 0, 0.25, 1);
+  transition: transform 0.3s cubic-bezier(0.35, 0, 0.25, 1),
+    margin-left 0.3s cubic-bezier(0.35, 0, 0.25, 1), margin-top 0.3s cubic-bezier(0.35, 0, 0.25, 1);
+  transition: transform 0.3s cubic-bezier(0.35, 0, 0.25, 1),
+    margin-left 0.3s cubic-bezier(0.35, 0, 0.25, 1), margin-top 0.3s cubic-bezier(0.35, 0, 0.25, 1),
+    -webkit-transform 0.3s cubic-bezier(0.35, 0, 0.25, 1);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -135,11 +141,11 @@
 }
 .rc-tabs-content-animated .rc-tabs-tabpane {
   -ms-flex-negative: 0;
-      flex-shrink: 0;
+  flex-shrink: 0;
 }
 .no-flexbox .rc-tabs-content {
   -webkit-transform: none !important;
-          transform: none !important;
+  transform: none !important;
   overflow: auto;
 }
 .no-csstransitions .rc-tabs-tabpane-inactive,
@@ -170,8 +176,8 @@
 .rc-tabs-left .rc-tabs-content-animated {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 .rc-tabs-left .rc-tabs-content-animated .rc-tabs-tabpane {
   height: 100%;
@@ -188,12 +194,12 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   height: 100%;
 }
 .rc-tabs-left .rc-tabs-nav-swipe .rc-tabs-nav .rc-tabs-tab {
@@ -201,10 +207,10 @@
   display: -ms-flexbox;
   display: flex;
   -ms-flex-negative: 0;
-      flex-shrink: 0;
+  flex-shrink: 0;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 .rc-tabs-left .rc-tabs-tab-prev,
 .rc-tabs-left .rc-tabs-tab-next {
@@ -215,7 +221,7 @@
   display: block;
   text-align: center;
   opacity: 0;
-  transition: width .3s, height .3s, opacity .3s;
+  transition: width 0.3s, height 0.3s, opacity 0.3s;
 }
 .rc-tabs-top .rc-tabs-tab-arrow-show {
   opacity: 1;
@@ -227,22 +233,22 @@
 }
 .rc-tabs-left .rc-tabs-tab-next-icon {
   -webkit-transform: rotate(90deg);
-          transform: rotate(90deg);
+  transform: rotate(90deg);
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
 }
 .rc-tabs-left .rc-tabs-tab-next-icon:before {
-  content: ">";
+  content: '>';
 }
 .rc-tabs-left .rc-tabs-tab-prev {
   top: 2px;
 }
 .rc-tabs-left .rc-tabs-tab-prev-icon {
   -webkit-transform: rotate(270deg);
-          transform: rotate(270deg);
+  transform: rotate(270deg);
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 .rc-tabs-left .rc-tabs-tab-prev-icon:before {
-  content: ">";
+  content: '>';
 }
 .rc-tabs-left .rc-tabs-ink-bar {
   width: 2px;
@@ -282,12 +288,12 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   height: 100%;
 }
 .rc-tabs-right .rc-tabs-nav-swipe .rc-tabs-nav .rc-tabs-tab {
@@ -295,10 +301,10 @@
   display: -ms-flexbox;
   display: flex;
   -ms-flex-negative: 0;
-      flex-shrink: 0;
+  flex-shrink: 0;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 .rc-tabs-right .rc-tabs-tab-prev,
 .rc-tabs-right .rc-tabs-tab-next {
@@ -309,7 +315,7 @@
   text-align: center;
   line-height: 32px;
   opacity: 0;
-  transition: width .3s, height .3s, opacity .3s;
+  transition: width 0.3s, height 0.3s, opacity 0.3s;
 }
 .rc-tabs-top .rc-tabs-tab-arrow-show {
   opacity: 1;
@@ -321,28 +327,28 @@
 }
 .rc-tabs-right .rc-tabs-tab-next-icon {
   -webkit-transform: rotate(90deg);
-          transform: rotate(90deg);
+  transform: rotate(90deg);
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
 }
 .rc-tabs-right .rc-tabs-tab-next-icon:before {
-  content: ">";
+  content: '>';
 }
 .rc-tabs-right .rc-tabs-tab-prev {
   top: 2px;
 }
 .rc-tabs-right .rc-tabs-tab-prev-icon {
   -webkit-transform: rotate(270deg);
-          transform: rotate(270deg);
+  transform: rotate(270deg);
   filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
 }
 .rc-tabs-right .rc-tabs-tab-prev-icon:before {
-  content: ">";
+  content: '>';
 }
 .rc-tabs-right .rc-tabs-content-animated {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 .rc-tabs-right .rc-tabs-content-animated .rc-tabs-tabpane {
   height: 100%;
@@ -380,8 +386,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   width: 100%;
 }
 .rc-tabs-bottom .rc-tabs-nav-swipe .rc-tabs-nav .rc-tabs-tab {
@@ -389,12 +395,12 @@
   display: -ms-flexbox;
   display: flex;
   -ms-flex-negative: 0;
-      flex-shrink: 0;
+  flex-shrink: 0;
   margin-right: 0;
   padding: 8px 0;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 .rc-tabs-bottom .rc-tabs-nav-wrap {
   width: 100%;
@@ -402,8 +408,8 @@
 .rc-tabs-bottom .rc-tabs-content-animated {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 .rc-tabs-bottom .rc-tabs-content-animated .rc-tabs-tabpane {
   width: 100%;
@@ -412,13 +418,13 @@
   right: 2px;
 }
 .rc-tabs-bottom .rc-tabs-tab-next-icon:before {
-  content: ">";
+  content: '>';
 }
 .rc-tabs-bottom .rc-tabs-tab-prev {
   left: 0;
 }
 .rc-tabs-bottom .rc-tabs-tab-prev-icon:before {
-  content: "<";
+  content: '<';
 }
 .rc-tabs-bottom .rc-tabs-tab-prev,
 .rc-tabs-bottom .rc-tabs-tab-next {
@@ -468,8 +474,8 @@
   display: -ms-flexbox;
   display: flex;
   -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+  -ms-flex: 1;
+  flex: 1;
   width: 100%;
 }
 .rc-tabs-top .rc-tabs-nav-swipe .rc-tabs-nav .rc-tabs-tab {
@@ -477,12 +483,12 @@
   display: -ms-flexbox;
   display: flex;
   -ms-flex-negative: 0;
-      flex-shrink: 0;
+  flex-shrink: 0;
   margin-right: 0;
   padding: 8px 0;
   -webkit-box-pack: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  -ms-flex-pack: center;
+  justify-content: center;
 }
 .rc-tabs-top .rc-tabs-nav-wrap {
   width: 100%;
@@ -490,8 +496,8 @@
 .rc-tabs-top .rc-tabs-content-animated {
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
-      -ms-flex-direction: row;
-          flex-direction: row;
+  -ms-flex-direction: row;
+  flex-direction: row;
 }
 .rc-tabs-top .rc-tabs-content-animated .rc-tabs-tabpane {
   width: 100%;
@@ -500,13 +506,13 @@
   right: 2px;
 }
 .rc-tabs-top .rc-tabs-tab-next-icon:before {
-  content: ">";
+  content: '>';
 }
 .rc-tabs-top .rc-tabs-tab-prev {
   left: 0;
 }
 .rc-tabs-top .rc-tabs-tab-prev-icon:before {
-  content: "<";
+  content: '<';
 }
 .rc-tabs-top .rc-tabs-tab-prev,
 .rc-tabs-top .rc-tabs-tab-next {
@@ -516,7 +522,7 @@
   top: 0;
   text-align: center;
   opacity: 0;
-  transition: width .3s, height .3s, opacity .3s;
+  transition: width 0.3s, height 0.3s, opacity 0.3s;
 }
 .rc-tabs-top .rc-tabs-tab-arrow-show {
   opacity: 1;

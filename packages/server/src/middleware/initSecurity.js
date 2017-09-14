@@ -15,10 +15,11 @@ export default function initSecurity(app, { enableNonce = true, enableCSP = fals
       next();
     });
   }
+  app.set('trust proxy', true);
 
   // Don't expose any software information to hackers.
   app.disable('x-powered-by');
-  app.set('trust proxy', 'loopback');
+
   // enable CORS - Cross Origin Resource Sharing
   // allow for sending credentials (auth token) in the headers.
   app.use(

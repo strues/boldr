@@ -1,58 +1,26 @@
 // @flow
 import * as React from 'react';
-import { graphql, compose, gql } from 'react-apollo';
+import { graphql, compose } from 'react-apollo';
 import universal from 'react-universal-component';
-import TAGS_QUERY from '../Tags/gql/tags.graphql';
-import CONTENT_TYPES_QUERY from './gql/contentTypes.graphql';
+import CONTENT_ROOT_QUERY from './gql/contentRoot.graphql';
 
 type Props = {
   loading: boolean,
   error?: Object,
-  contentTypes: Array<Object>,
+  contentRoot: Object,
 };
 
 const UniversalContent = universal(import('./Content'));
 
-const Content = ({ loading, error, contentTypes, getTags, categories }: Props) => (
-  <UniversalContent
-    isLoading={loading}
-    error={error}
-    contentTypes={contentTypes}
-    tags={getTags}
-    categories={categories}
-  />
+const Content = ({ loading, error, contentRoot }: Props) => (
+  <UniversalContent isLoading={loading} error={error} content={contentRoot} />
 );
 
 // $FlowIssue
-export default compose(
-  graphql(CONTENT_TYPES_QUERY, {
-    props: ({ data: { loading, error, contentTypes } }) => ({
-      loading,
-      error,
-      contentTypes,
-    }),
+export default graphql(CONTENT_ROOT_QUERY, {
+  props: ({ data: { loading, error, contentRoot } }) => ({
+    loading,
+    error,
+    contentRoot,
   }),
-  graphql(TAGS_QUERY, {
-    // $FlowIssue
-    options: () => ({
-      variables: {
-        offset: 0,
-        limit: 20,
-      },
-    }),
-    props: ({ data: { loading, error, getTags } }) => ({
-      loading,
-      error,
-      getTags,
-    }),
-  }),
-  graphql(gql`
-    {
-      categories {
-        id
-        name
-        slug
-      }
-    }
-  `),
-)(Content);
+})(Content);

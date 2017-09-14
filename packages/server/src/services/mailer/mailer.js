@@ -1,17 +1,15 @@
 import { createTransport } from 'nodemailer';
-import getConfig from '@boldr/config';
-
-const config = getConfig();
+import { config } from '@boldr/config';
 
 const debug = require('debug')('boldr:server:mailer');
 
 const TRANSPORT_OPTS = {
-  host: config.server.mail.host,
-  port: config.server.mail.port,
-  secure: config.server.mail.ssl,
+  host: config.get('mail.host'),
+  port: config.get('mail.port'),
+  secure: config.get('mail.ssl'),
   auth: {
-    user: config.server.mail.user,
-    pass: config.server.mail.password,
+    user: config.get('mail.user'),
+    pass: config.get('mail.password'),
   },
 };
 
@@ -28,7 +26,7 @@ export const transporter = createTransport(TRANSPORT_OPTS);
 export default (async function mailer(user, mailBody, mailSubject) {
   const mailOptions = {
     to: user.email,
-    from: config.server.mail.from,
+    from: config.get('mail.from'),
     subject: mailSubject,
     html: mailBody,
   };

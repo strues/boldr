@@ -2,6 +2,8 @@
 import _debug from 'debug';
 import { errorObj } from '../../errors';
 
+const debug = _debug('boldr:server:graphql:resolvers:role');
+
 const roleResolvers = {
   Role: {
     accounts: async (obj, args, ctx, info) => {

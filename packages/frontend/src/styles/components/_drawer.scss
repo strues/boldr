@@ -30,7 +30,7 @@ body {
     animation: slideInDrawer 200ms ease-out forwards;
     backface-visibility: hidden;
     background-color: #fff;
-    box-shadow: -12px 0 19px 0 rgba(0, 0, 0, .22);
+    box-shadow: -12px 0 19px 0 rgba(0, 0, 0, 0.22);
     height: 100%;
     max-width: 768px;
     overflow-x: hidden;
@@ -109,13 +109,13 @@ body {
     margin: -8px 8px 0 11px;
   }
   .drawer-container-is-scrolled .drawer-header {
-    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, .20);
+    box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2);
   }
   .drawer-dimmer {
     animation: fadeInDimmer 150ms ease-out forwards;
     animation-delay: 150ms;
     backface-visibility: hidden;
-    background-color: rgba(255, 255, 255, .3);
+    background-color: rgba(255, 255, 255, 0.3);
     height: 100%;
     left: 0;
     opacity: 0;

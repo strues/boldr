@@ -5,7 +5,6 @@ import webpack from 'webpack';
 import WriteFilePlugin from 'write-file-webpack-plugin';
 import ExtractCssChunks from 'extract-css-chunks-webpack-plugin';
 import WatchMissingNodeModulesPlugin from 'react-dev-utils/WatchMissingNodeModulesPlugin';
-import getConfig from '@boldr/config';
 import BundleAnalyzerPlugin from 'webpack-bundle-analyzer';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import SriPlugin from 'webpack-subresource-integrity';
@@ -15,10 +14,7 @@ import { getHashDigest } from 'loader-utils';
 import appRoot from '@boldr/utils/lib/node/appRoot';
 import logger from '@boldr/utils/lib/logger';
 import dotenv from 'dotenv';
-import StatsPlugin from './plugins/StatsPlugin';
-import HappyPackPlugin from './plugins/happyPackPlugin';
-import ProgressPlugin from './plugins/ProgressPlugin';
-import WebpackDigestHash from './plugins/ChunkHash';
+import { StatsPlugin, happyPackPlugin, ProgressPlugin, WebpackDigestHash } from './plugins';
 import getNodeExternals from './util/getNodeExternals';
 import rootModuleRelativePath from './util/rootModuleRelativePath';
 
@@ -32,8 +28,6 @@ import {
   ASSET_FILES,
   UGLIFY_OPTIONS,
 } from './constants';
-
-const config = getConfig();
 
 dotenv.config();
 
@@ -61,13 +55,13 @@ const defaults = {
 };
 
 const ROOT = appRoot.get();
-const SERVER_ENTRY = path.resolve(ROOT, config.paths.entry.server);
-const CLIENT_ENTRY = path.resolve(ROOT, config.paths.entry.client);
-const CLIENT_VENDOR = path.resolve(ROOT, config.paths.vendor);
+const SERVER_ENTRY = path.resolve(ROOT, 'src/serverEntry.js');
+const CLIENT_ENTRY = path.resolve(ROOT, 'src/clientEntry.js');
+const CLIENT_VENDOR = path.resolve(ROOT, 'src/vendor.js');
 const PROJECT_SRC = path.resolve(ROOT, 'src');
-const SERVER_OUTPUT = path.resolve(ROOT, config.paths.output.server);
-const CLIENT_OUTPUT = path.resolve(ROOT, config.paths.output.client);
-const PUBLIC_PATH = config.paths.publicPath;
+const SERVER_OUTPUT = path.resolve(ROOT, 'build/server');
+const CLIENT_OUTPUT = path.resolve(ROOT, 'build/client');
+const PUBLIC_PATH = '/static/';
 
 const GRAPHQL_ENDPOINT = process.env.GRAPHQL_ENDPOINT;
 const API_URL = process.env.API_URL;
@@ -90,6 +84,7 @@ export default function createWebpackConfig(
 
   const _IS_DEV_ = config.env === 'development';
   const _IS_PROD_ = config.env === 'production';
+  const webpackTarget = _IS_SERVER_ ? 'node' : 'web';
 
   const clientPreset = [
     require.resolve('babel-preset-boldr'),
@@ -104,6 +99,7 @@ export default function createWebpackConfig(
       target: 'modern',
       imports: 'webpack',
       styled: true,
+      enableIntl: false,
       // imports: 'webpack',
       srcDir: SRC_DIR,
     },
@@ -121,6 +117,7 @@ export default function createWebpackConfig(
       polyfill: false,
       target: 'current',
       styled: true,
+      enableIntl: false,
       // imports: 'webpack',
       srcDir: SRC_DIR,
     },
@@ -151,9 +148,9 @@ export default function createWebpackConfig(
 
   logger.start(`${PREFIX} Configuration:`);
   // $FlowIssue
-  logger.task(`Current Env: ${config.env}`);
-  logger.task(`Build Target: ${target}`);
-  logger.task(`Source Maps: ${devtool}`);
+  logger.info(`Current Env: ${config.env}`);
+  logger.info(`Build Target: ${target}`);
+  logger.info(`Source Maps: ${devtool}`);
 
   const cacheLoader = config.useCacheLoader
     ? {
@@ -169,7 +166,7 @@ export default function createWebpackConfig(
     localIdentName: '[local]-[hash:base62:8]',
     import: 2,
     minimize: false,
-    sourceMap: false,
+    sourceMap: true,
   };
 
   const postCSSLoaderRule = {
@@ -177,10 +174,16 @@ export default function createWebpackConfig(
     options: {
       // https://webpack.js.org/guides/migrating/#complex-options
       ident: 'postcss',
+      sourceMap: true,
     },
   };
   const sassLoaderRule = {
-    loader: require.resolve('better-sass-loader'),
+    loader: require.resolve('sass-loader'),
+    options: {
+      sourceMap: true,
+      includePaths: [SRC_DIR],
+      minimize: false,
+    },
   };
 
   const HMR_MIDDLEWARE = `${require.resolve(
@@ -252,8 +255,9 @@ export default function createWebpackConfig(
       modules: ['node_modules', path.resolve(ROOT, './src'), path.resolve(ROOT, './node_modules')],
       mainFields: _IS_CLIENT_
         ? [
-            'esnext:browser',
-            'jsnext:browser',
+            'browser:modern',
+            'browser:esnext',
+            'web:modern',
             'browser',
             'esnext',
             'jsnext',
@@ -262,17 +266,7 @@ export default function createWebpackConfig(
             'module',
             'main',
           ]
-        : [
-            'esnext:server',
-            'jsnext:server',
-            'server',
-            'esnext',
-            'jsnext',
-            'esnext:main',
-            'jsnext:main',
-            'module',
-            'main',
-          ],
+        : ['esnext:main', 'module:modern', 'main:modern', 'jsnext:main', 'module', 'main'],
       alias: {
         'babel-runtime': relativeResolve('babel-runtime/package.json'),
       },
@@ -364,14 +358,16 @@ export default function createWebpackConfig(
       ].filter(Boolean),
     },
     plugins: [
+      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
       new webpack.DefinePlugin({
         __DEV__: JSON.stringify(_IS_DEV_),
         __SERVER__: JSON.stringify(_IS_SERVER_),
         'process.env.NODE_ENV': JSON.stringify(options.env),
-        'process.env.TARGET': JSON.stringify(target),
+        'process.env.TARGET': JSON.stringify(webpackTarget),
         'process.env.GRAPHQL_ENDPOINT': JSON.stringify(GRAPHQL_ENDPOINT),
         'process.env.API_URL': JSON.stringify(API_URL),
         'process.env.API_PREFIX': JSON.stringify(API_PREFIX),
+        'process.env.BUILD_TARGET': JSON.stringify(webpackTarget),
       }),
       // Subresource Integrity (SRI) is a security feature that enables browsers to verify that
       // files they fetch (for example, from a CDN) are delivered without unexpected manipulation.
@@ -387,7 +383,7 @@ export default function createWebpackConfig(
         context: ROOT,
       }),
       // eslint-disable-next-line
-      HappyPackPlugin({
+      happyPackPlugin({
         name: 'hp-js',
         loaders: [
           {
@@ -404,7 +400,7 @@ export default function createWebpackConfig(
           },
         ],
       }),
-      new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+      // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
       // Improve OS compatibility
       // https://github.com/Urthen/case-sensitive-paths-webpack-plugin
       new CaseSensitivePathsPlugin(),

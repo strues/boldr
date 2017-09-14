@@ -1,10 +1,14 @@
 /* eslint-disable prefer-destructuring, no-underscore-dangle, new-cap */
 import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
-import { getToken, createApolloClient, createBoldrStore, wrapBoldrApp } from '@boldr/core';
+import {
+  getToken,
+  createApolloClient,
+  createBoldrStore,
+  wrapBoldrApp,
+  createHistory,
+} from '@boldr/core';
 import { ConnectedRouter } from 'react-router-redux';
-
-import createHistory from 'history/createBrowserHistory';
 import { checkAuth } from './scenes/Account/state/actions';
 import App from './components/App';
 import appReducer from './reducers';
@@ -27,7 +31,7 @@ export const apolloClient = createApolloClient({
   initialState: preloadedState,
   apolloUri: process.env.GRAPHQL_ENDPOINT,
   headers: {
-    authorization: `Bearer ${token}`,
+    Authorization: `Bearer ${token}`,
   },
 });
 const history = createHistory();

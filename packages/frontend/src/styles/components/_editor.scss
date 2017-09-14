@@ -1,26 +1,12 @@
 $editor-ns: 'be-';
 $editor-toolbar-bg: #fff;
 $editor-toolbar-border: $neutral-3;
-.public-DraftEditorPlaceholder-root {
-  top: 15px;
-  left: 15px;
-  font-size: 16px;
-  pointer-events: none;
-}
-.DraftEditor-editorContainer {
-  box-sizing: border-box;
-  border: none;
-}
-.DraftEditor-root,
-.public-DraftEditor-content {
-  height: 100%;
-}
-.public-DraftStyleDefault-block {
-  margin: 1em 0;
-}
+
 .public-DraftEditor-content {
   box-sizing: border-box;
   padding: 15px;
+  line-height: 1.5;
+  font-size: 1em;
   pre {
     max-width: 100%;
     max-height: 100%;
@@ -233,21 +219,25 @@ $editor-toolbar-border: $neutral-3;
   font-size: 15px;
 }
 
+// This is the actual "label" per say
 .#{$editor-ns}modal__opt {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 50%;
+  font-family: 'Chivo';
+  font-weight: 300;
   cursor: pointer;
 }
 
+// This is essentially only the underline
 .#{$editor-ns}modal__label {
   width: 95px;
   background: inherit;
   border-bottom: 1px solid #f1f1f1;
   margin-top: 5px;
   margin-bottom: 5px;
+
   &.is-hlight {
     border-bottom: 2px solid #0a66b7;
   }
@@ -476,7 +466,6 @@ $editor-toolbar-border: $neutral-3;
   }
 }
 
-
 .#{$editor-ns}remove__wrapper {
   position: relative;
   display: flex;
@@ -497,7 +486,7 @@ $editor-toolbar-border: $neutral-3;
 }
 
 .#{$editor-ns}justify-aligned-block {
-  text-align: justify;
+  text-align: justify !important;
 }
 
 .#{$editor-ns}right-aligned-block > div,
@@ -506,7 +495,6 @@ $editor-toolbar-border: $neutral-3;
 .#{$editor-ns}justify-aligned-block > div {
   display: inline;
 }
-
 
 .#{$editor-ns}decorator__link-wrap {
   position: relative;

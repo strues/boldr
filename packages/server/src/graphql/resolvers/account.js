@@ -1,9 +1,12 @@
 /* eslint-disable no-unused-vars */
 import uuid from 'uuid';
+import _debug from 'debug';
 import addDays from 'date-fns/add_days';
 import { errorObj } from '../../errors';
 import { mailer, signToken } from '../../services';
 import { welcomeEmail } from '../../services/mailer/templates';
+
+const debug = _debug('boldr:server:graphql:resolvers:account');
 
 const accountResolvers = {
   Account: {
@@ -94,7 +97,6 @@ const accountResolvers = {
         password: input.password,
         verificationToken: uuid.v4(),
         verificationTokenExp: addDays(new Date(), 1),
-        ip: ctx.req.headers['x-forwarded-for'] || ctx.req.connection.remoteAddress,
       });
       await newAccount.$relatedQuery('roles').relate({ id: 1 });
 
@@ -128,7 +130,6 @@ const accountResolvers = {
       await account.$query().patch({ lastLogin: new Date().toISOString() });
       // sign the token
       const token = await signToken(account);
-      ctx.req.user = account;
 
       return {
         token,

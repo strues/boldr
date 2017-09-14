@@ -24,9 +24,9 @@ html {
 }
 
 body {
-  background: #ECE9E6;
-  background: -webkit-linear-gradient(to right, #f0f3f6, #ECE9E6);
-  background: linear-gradient(to right, #f0f3f6, #ECE9E6);
+  background: #ece9e6;
+  background: -webkit-linear-gradient(to right, #f0f3f6, #ece9e6);
+  background: linear-gradient(to right, #f0f3f6, #ece9e6);
   font-weight: $font-weight-base;
   font-size: $font-size-base;
   font-family: $font-family-base;
@@ -100,7 +100,8 @@ h1,
 h2,
 h3,
 h4,
-h5 {
+h5,
+h6 {
   color: $text-color;
   font-weight: $heading-font-weight;
   font-family: $heading-font-family;

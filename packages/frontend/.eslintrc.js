@@ -5,6 +5,7 @@ module.exports = {
     codeFrame: true,
   },
   extends: ['boldr', 'boldr/react', 'boldr/flowtype', 'boldr/import'],
+
   globals: {
     window: true,
     document: true,

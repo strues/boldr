@@ -2,22 +2,19 @@
 import { resolve as pathResolve } from 'path';
 import express from 'express';
 import appRoot from '@boldr/utils/lib/node/appRoot';
-
 import {
   initAuth,
   initGraphql,
   initSecurity,
   initCore,
-  initErrorHandler,
   queryLogger,
-  addFallbackHandler,
+  initErrorHandler,
 } from './middleware';
 
 import routes from './routes';
 
 const app = express();
-
-initErrorHandler(app);
+// initErrorHandler(app);
 // cors, hpp, helmet
 initSecurity(app, { enableNonce: true, enableCSP: false });
 // Base Express middleware - body-parser, method-override
@@ -34,10 +31,10 @@ initGraphql(app);
 // Note: these will be served off the root (i.e. '/') of our application.
 app.use('/uploads', express.static(pathResolve(appRoot.get(), './public/uploads')));
 
-// Setup the public directory so that we can serve static assets.
+// Everything in public/ is served as the root directory.
 app.use(express.static(pathResolve(appRoot.get(), './public')));
 
-// For all things which did not went well.
-addFallbackHandler(app);
+// if we end up here, something isnt right...
+initErrorHandler(app);
 
 export default app;

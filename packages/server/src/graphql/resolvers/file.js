@@ -3,12 +3,12 @@ import path from 'path';
 import _debug from 'debug';
 import fs from 'fs-extra';
 import Jimp from 'jimp';
-import shortId from 'shortid';
+import nanoid from 'nanoid';
 import appRoot from '@boldr/utils/lib/node/appRoot';
 
 import { errorObj } from '../../errors';
 
-const debug = _debug('boldr:server:gql:resolvers:file');
+const debug = _debug('boldr:server:graphql:resolvers:file');
 const UPLOAD_DIR = path.resolve(appRoot.get(), './public/uploads');
 
 const fileResolvers = {
@@ -25,7 +25,7 @@ const fileResolvers = {
   },
   Mutation: {
     singleUpload: async (obj, args, ctx) => {
-      const id = shortId.generate();
+      const id = nanoid();
       const actualFileName = id + path.extname(args.file.name);
 
       fs.moveSync(args.file.path, `${UPLOAD_DIR}/files/${actualFileName}`);
@@ -55,7 +55,7 @@ const fileResolvers = {
       return newFile;
     },
     multipleUpload: async (obj, args, ctx) => {
-      const id = shortId.generate();
+      const id = nanoid();
       const actualFileName = id + path.extname(args.file.name);
 
       fs.moveSync(args.file.path, `${UPLOAD_DIR}/files/${actualFileName}`);

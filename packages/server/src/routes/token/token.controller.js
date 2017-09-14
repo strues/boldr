@@ -22,7 +22,6 @@ export async function forgottenPassword(req, res, next) {
   const mailSubject = '[Boldr] Password Reset';
   const resetPasswordToken = uuid.v4();
   await Account.query().patchAndFetchById(account.id, {
-    ip: req.headers['x-forwarded-for'] || req.connection.remoteAddress,
     reset_token: resetPasswordToken,
     reset_token_exp: addDays(new Date(), 1),
   });

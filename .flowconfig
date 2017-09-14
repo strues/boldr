@@ -41,6 +41,7 @@ internal/flow/defs/
 emoji=true
 module.system=node
 module.system.node.resolve_dirname=node_modules
+module.system.node.resolve_dirname=packages/frontend/src
 
 esproposal.class_static_fields=enable
 esproposal.class_instance_fields=ignore

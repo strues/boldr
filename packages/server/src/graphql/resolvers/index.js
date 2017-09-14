@@ -5,6 +5,7 @@ import accountResolvers from './account';
 import articleResolvers from './article';
 import categoryResolvers from './category';
 import contentTypeResolvers from './contentType';
+import contentResolvers from './content';
 import entityResolvers from './entity';
 import fileResolvers from './file';
 import menuDetailResolvers from './menuDetail';
@@ -29,6 +30,7 @@ const resolvers = [
   accountResolvers,
   articleResolvers,
   categoryResolvers,
+  contentResolvers,
   contentTypeResolvers,
   entityResolvers,
   fileResolvers,
