@@ -122,6 +122,7 @@ export default function createWebpackConfig(
       srcDir: SRC_DIR,
     },
   ];
+
   const PROJECT_CONFIG = require(path.resolve(ROOT, 'package.json'));
   const CACHE_HASH = getHashDigest(
     JSON.stringify(PROJECT_CONFIG),
