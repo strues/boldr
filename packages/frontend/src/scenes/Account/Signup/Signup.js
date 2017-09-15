@@ -3,8 +3,8 @@ import React from 'react';
 import Link from 'react-router-dom/Link';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { Grid, Row, Col } from '@boldr/ui/Layout';
-import Paragraph from '@boldr/ui/Paragraph';
+import { Grid, Row, Col } from '../../../components/Layout';
+import Paragraph from '../../../components/Paragraph';
 // internal
 import SignupForm from './SignupForm';
 

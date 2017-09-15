@@ -43,7 +43,7 @@ class Content extends React.Component<Props, State> {
               name="categories"
               active={activeItem === 'categories'}
               onClick={this.handleItemClick}>
-              <Label color="teal">1</Label>
+              <Label color="blue">1</Label>
               Categories
             </Menu.Item>
 

@@ -2,12 +2,9 @@
 
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import Button from '@boldr/ui/Button';
-import Form, { TextFormField } from '@boldr/ui/Form';
+import Button from '../../../components/Button';
+import Form, { TextFormField } from '../../../components/Form';
 
-const style = {
-  margin: 12,
-};
 export type Props = {
   handleSubmit: Function,
   submitting?: boolean,
@@ -25,13 +22,7 @@ const ForgotPasswordForm = (props: Props) => {
         label="Email Address"
         component={TextFormField}
       />
-      <Button
-        htmlType="submit"
-        style={style}
-        kind="primary"
-        disabled={submitting || pristine}
-        outline
-        block>
+      <Button htmlType="submit" kind="primary" disabled={submitting || pristine} block>
         Send Reset Link
       </Button>
     </Form>

@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Run",
+        "type": "node",
+        "request": "attach",
+        "port": 9229,
+        "protocol": "inspector",
+        "localRoot": "${workspaceRoot}"
+      },
+      {
+        "name": "GraphqlServer",
+        "type": "node",
+        "request": "attach",
+        "port": 9229,
+        "protocol": "inspector",
+        "sourceMaps": true,
+        "localRoot": "${workspaceRoot}/packages/server",
+        "restart": true
+      }
+    ]
+  }

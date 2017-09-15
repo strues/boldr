@@ -1,24 +1,10 @@
 /* eslint-disable promise/always-return, consistent-return */
 import { connect } from 'react-redux';
-import { graphql } from 'react-apollo';
+import { compose, graphql } from 'react-apollo';
 import { sendNotification } from '@boldr/core';
 import LOGIN_USER_MUTATION from '../gql/login.mutation.graphql';
 import { doLogin, loginUserError } from '../state/actions';
 import Login from './Login';
-
-const withMutation = graphql(LOGIN_USER_MUTATION, {
-  props: ({ mutate }) => ({
-    loginAccount: formInput =>
-      mutate({
-        variables: {
-          input: {
-            email: formInput.email,
-            password: formInput.password,
-          },
-        },
-      }),
-  }),
-});
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
   onSubmit: formInput => {
@@ -42,4 +28,19 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
   },
 });
 
-export default withMutation(connect(null, mapDispatchToProps)(Login));
+export default compose(
+  graphql(LOGIN_USER_MUTATION, {
+    props: ({ mutate }) => ({
+      loginAccount: formInput =>
+        mutate({
+          variables: {
+            input: {
+              email: formInput.email,
+              password: formInput.password,
+            },
+          },
+        }),
+    }),
+  }),
+  connect(null, mapDispatchToProps),
+)(Login);

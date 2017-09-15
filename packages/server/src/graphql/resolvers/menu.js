@@ -12,8 +12,8 @@ const menuResolvers = {
     },
   },
   Query: {
-    getMenuById: async (obj, { id }, context) => {
-      const menu = await context.loaders.menus.load(id);
+    getMenuById: async (obj, { id }, ctx) => {
+      const menu = await ctx.models.Menu.query().findById(id);
       if (menu) {
         return menu;
       }

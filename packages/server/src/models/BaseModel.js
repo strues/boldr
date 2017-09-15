@@ -1,32 +1,19 @@
-/* eslint-disable no-prototype-builtins */
+/* eslint-disable no-prototype-builtins, complexity */
 import { Model, ValidationError } from 'objection';
+import _debug from 'debug';
+
+import isString from 'lodash/isString';
 import camelCase from 'lodash/camelCase';
 import mapKeys from 'lodash/mapKeys';
 import snakeCase from 'lodash/snakeCase';
 import memoize from 'lodash/memoize';
+import BaseQueryBuilder from './queryBuilder';
 
 const toCamelCase = memoize(camelCase);
 const toSnakeCase = memoize(snakeCase);
+const debug = _debug('boldr:server:models:base');
 
-export function mergeSchemas(...schemas) {
-  return schemas.reduce(
-    (mergedSchema, schema) => ({
-      ...mergedSchema,
-      ...schema,
-      required: [...mergedSchema.required, ...schema.required],
-      properties: {
-        ...mergedSchema.properties,
-        ...schema.properties,
-      },
-    }),
-    {
-      required: [],
-      properties: {},
-    },
-  );
-}
-
-export default class BaseModel extends Model {
+class BaseModel extends Model {
   /**
   * If we should update the createdAt attribute when inserted and the
   * updatedAt attribute when updated.
@@ -52,6 +39,22 @@ export default class BaseModel extends Model {
   static modelPaths = [__dirname];
   // http://vincit.github.io/objection.js/#defaulteageralgorithm
   static defaultEagerAlgorithm = Model.JoinEagerAlgorithm;
+
+  static get softDeleteColumn() {
+    if (isString(this.softDelete)) {
+      return this.softDelete;
+    }
+
+    return 'deleted_at';
+  }
+
+  static where(...args) {
+    return this.query().where(...args);
+  }
+
+  static find(...args) {
+    return this.query().find(...args);
+  }
 
   /**
    * Ran before inserting into the database.
@@ -232,6 +235,10 @@ export default class BaseModel extends Model {
     );
   }
 
+  $beforeDelete(opt, queryContext) {
+    super.$beforeDelete(queryContext);
+  }
+
   $formatDatabaseJson(json) {
     // eslint-disable-next-line prefer-const
     let fmtJson = super.$formatDatabaseJson.call(this, json);
@@ -265,27 +272,32 @@ export default class BaseModel extends Model {
   }
 
   // Uses http://json-schema.org/latest/json-schema-validation.html
-  static jsonSchema = {
-    type: 'object',
-    required: [],
-    properties: {
-      id: {
-        type: ['number', 'string'],
-      },
-      createdAt: {
-        type: 'string',
-        format: 'date-time',
-      },
-      updatedAt: {
-        type: 'string',
-        format: 'date-time',
-      },
-      deletedAt: {
-        type: 'string',
-        format: 'date-time',
-      },
-    },
-  };
+  static getJsonSchema() {
+    // Memoize the jsonSchema but only for this class. The hasOwnProperty check
+    // will fail for subclasses and the value gets recreated.
+    // eslint-disable-next-line
+    if (!this.hasOwnProperty('$$jsonSchema')) {
+      // this.jsonSchema is often a getter that returns a new object each time. We need
+      // memoize it to make sure we get the same instance each time.
+      const jsonSchema = this.jsonSchema;
+
+      if (jsonSchema && jsonSchema.properties) {
+        const columns = this.systemColumns || [];
+        columns.forEach(column => {
+          jsonSchema.properties[column] = { type: ['datetime', 'string', 'int', 'null'] };
+        });
+      }
+
+      Object.defineProperty(this, '$$jsonSchema', {
+        enumerable: false,
+        writable: true,
+        configurable: true,
+        value: jsonSchema,
+      });
+    }
+
+    return this.$$jsonSchema;
+  }
 
   async reload() {
     const model = await this.$query();
@@ -293,3 +305,7 @@ export default class BaseModel extends Model {
     return this;
   }
 }
+
+BaseModel.QueryBuilder = BaseQueryBuilder;
+BaseModel.RelatedQueryBuilder = BaseQueryBuilder;
+export default BaseModel;

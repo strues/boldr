@@ -3,7 +3,8 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 
-import FormCard from '@boldr/ui/Form/FormCard';
+import Card, { CardText, CardTitle } from '../../../components/Card';
+import Flex from '../../../components/Flex';
 import { forgotPassword } from '../state/actions';
 import ForgotPasswordForm from './ForgotPasswordForm';
 
@@ -20,14 +21,14 @@ class ForgotPassword extends PureComponent<Props, void> {
     return (
       <div>
         <Helmet title="Forgot Password" />
-        <div className="forgotpw-wrapper">
-          <FormCard
-            title="Forgot Password"
-            skinny
-            lightText
-            form={<ForgotPasswordForm onSubmit={this.handleSubmit} />}
-          />
-        </div>
+        <Flex justify="center" align="center">
+          <Card>
+            <CardTitle title="Forgot Password" />
+            <CardText>
+              <ForgotPasswordForm onSubmit={this.handleSubmit} />
+            </CardText>
+          </Card>
+        </Flex>
       </div>
     );
   }

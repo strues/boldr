@@ -13,10 +13,9 @@ import { checkAuth } from './scenes/Account/state/actions';
 import App from './components/App';
 import appReducer from './reducers';
 import theme from './theme/theme';
-import { injectResetStyle } from './theme/resetStyle';
 import ThemeProvider from './theme/ThemeProvider';
 
-injectResetStyle();
+// injectResetStyle();
 
 const DOM_NODE = document.getElementById('app');
 let preloadedState = {};

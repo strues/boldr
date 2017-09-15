@@ -1,7 +1,8 @@
 module.exports.up = async db => {
   await db.raw('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
   await db.raw('CREATE EXTENSION IF NOT EXISTS "hstore"');
-
+  await db.raw('CREATE EXTENSION IF NOT EXISTS "pg_trgm"');
+  await db.raw('CREATE EXTENSION IF NOT EXISTS "btree_gin"');
   await db.schema.createTable('role', table => {
     // pk
     table.increments('id').unsigned().primary();

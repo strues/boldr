@@ -19,6 +19,9 @@ function fromHeaderOrQuerystring(req) {
 export default async (req, res, next) => {
   req.isAuthenticated = async () => {
     const token = fromHeaderOrQuerystring(req);
+    if (!token) {
+      return false;
+    }
     try {
       await jwt.verify(token, config.get('token.secret'));
       return true;
@@ -26,11 +29,8 @@ export default async (req, res, next) => {
       return false;
     }
   };
-  if (!req.isAuthenticated()) {
-    return next();
-  } else {
+  if (req.isAuthenticated()) {
     const payload = req.isAuthenticated();
-
     const account = await Account.query()
       .findById(payload.subject)
       .eager('[roles,profile]')
@@ -39,6 +39,8 @@ export default async (req, res, next) => {
     req.user = account;
     req.user.role = account.roles[0].name;
 
+    return next();
+  } else {
     return next();
   }
 };

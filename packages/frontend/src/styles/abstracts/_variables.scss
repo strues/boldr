@@ -251,7 +251,7 @@ $shadow-color: rgba(0, 0, 0, 0.2) !default;
 /// @group theme
 $link-color: $primary-color !default;
 /// @group theme
-$link-hover-color: $carmine-pink;
+$link-hover-color: darken($link-color, 5%) !default;
 $link: $primary-color !default;
 $link-invert: $accent-color !default;
 $link-visited: $purple !default;
@@ -586,3 +586,9 @@ $notification-error-icon: '\f057';
 $notification-loading-bg: #fff;
 $notification-loading-border: #349ef3;
 $notification-loading-icon: '\f110';
+
+$menu-bg: #fff !default;
+$menu-vertical-bg: #fff !default;
+$menu-border-color: rgba(34, 36, 38, 0.15) !default;
+$menu-dropdown-bg: #fff;
+$menu-dropdown-item-color: $text-color;

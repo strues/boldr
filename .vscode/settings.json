@@ -1,0 +1,11 @@
+{
+  "flow.useNPMPackagedFlow": true,
+  "javascript.format.enable": false,
+  "javascript.validate.enable": false,
+  "search.exclude": {
+    "**/build": true,
+    "**/lib": true,
+    "**/node_modules": true,
+    "**/flow-typed": true
+  }
+}

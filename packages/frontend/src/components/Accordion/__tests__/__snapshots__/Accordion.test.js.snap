@@ -34,7 +34,7 @@ exports[`Accordion handleClick function accordion false 1`] = `
   </AccordionItem>
   <AccordionItem
     isAccordion={false}
-    isExpanded={false}
+    isExpanded={true}
     onClick={[Function]}
   >
     Fake Child
@@ -69,14 +69,14 @@ exports[`Accordion handleClick function accordion false 3`] = `
 >
   <AccordionItem
     isAccordion={false}
-    isExpanded={false}
+    isExpanded={true}
     onClick={[Function]}
   >
     Fake Child
   </AccordionItem>
   <AccordionItem
     isAccordion={false}
-    isExpanded={false}
+    isExpanded={true}
     onClick={[Function]}
   >
     Fake Child
@@ -97,7 +97,7 @@ exports[`Accordion handleClick function accordion true 1`] = `
   </AccordionItem>
   <AccordionItem
     isAccordion={true}
-    isExpanded={false}
+    isExpanded={true}
     onClick={[Function]}
   >
     Fake Child

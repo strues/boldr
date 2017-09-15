@@ -2,10 +2,10 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 // internal
-import Row from '@boldr/ui/Layout/Row';
-import Col from '@boldr/ui/Layout/Col';
-import Button from '@boldr/ui/Button';
-import Form, { TextFormField } from '@boldr/ui/Form';
+import Row from '../../../components/Layout/Row';
+import Col from '../../../components/Layout/Col';
+import Button from '../../../components/Button';
+import Form, { TextFormField } from '../../../components/Form';
 import { isRequired, isEmail } from '../../../core/util/validations';
 
 type Props = {
