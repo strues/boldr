@@ -2,6 +2,7 @@
 import { resolve as pathResolve } from 'path';
 import express from 'express';
 import appRoot from '@boldr/utils/lib/node/appRoot';
+
 import {
   initAuth,
   initGraphql,

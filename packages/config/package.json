@@ -1,6 +1,6 @@
 {
   "name": "@boldr/config",
-  "version": "0.1.0-alpha.1",
+  "version": "0.1.0",
   "description": "universal react content management framework",
   "homepage": "https://github.com/strues/boldr",
   "bugs": {
@@ -12,39 +12,21 @@
     "email": "steven@strues.io",
     "url": "strues.io"
   },
-  "main": "lib/config.js",
-  "browser": "lib/configBrowser.js",
+  "main": "./config.js",
   "files": [
-    "lib"
+    "config.js"
   ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/strues/boldr.git"
   },
-  "scripts": {
-    "build": "npm run clean && prepublish",
-    "build2": "rimraf lib && NODE_ENV=production babel --no-babelrc ./src/configBrowser.js --out-file configBrowser.js --presets env",
-    "build3": "NODE_ENV=production babel ./src/config.js --out-file config.js",
-    "clean": "rimraf lib"
-  },
+  "scripts": {},
   "dependencies": {
     "app-root-dir": "^1.0.2",
-    "convict": "^4.0.0",
     "debug": "^3.0.1",
-    "dotenv": "^4.0.0",
-    "fs-extra": "^4.0.2",
     "lodash.get": "^4.4.2",
     "lodash.has": "^4.5.2",
     "lodash.merge": "^4.6.0"
   },
-  "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
-    "eslint": "^4.7.1",
-    "eslint-config-boldr": "^0.13.0",
-    "prettier": "^1.7.0",
-    "prepublish": "^1.4.2",
-    "rimraf": "^2.6.2"
-  }
+  "devDependencies": {}
 }

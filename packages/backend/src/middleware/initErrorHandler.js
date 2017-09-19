@@ -1,13 +1,13 @@
-export default function initErrorHandler(server) {
+export default function initErrorHandler(app) {
   // technically we should never see this during production
   // React takes over
   // eslint-disable-next-line no-unused-vars
-  server.use((req, res, next) => {
+  app.use((req, res, next) => {
     // eslint-disable-line no-unused-vars,max-len
     res.status(404).send('Sorry, the requested resource is nowhere to be found.');
   });
   // eslint-disable-next-line no-unused-vars
-  server.use((error, req, res, next) => {
+  app.use((error, req, res, next) => {
     error.stack = error.stack || '';
     const errorDetails = {
       message: error.message,

@@ -32,35 +32,54 @@ You can adjust configuration directory with `CFG_DIR` environment variable.
 
 ```javascript
 module.exports = {
- 
-  objectProperty: {
-    // Sample comment
-    path: __dirname + '/files',
-    anotherProperty: {
-      size: 10, // MB
-    },
-  },
- 
-  cache: {
-    expiration: 300, // 5 min
-  },
- 
+  websiteUrl: 'http://localhost:3000',
   server: {
-    port: 12345,
-    host: 'localhost',
-    version: '1.2.3',
+    port: 2121,
+    protocol: 'http',
+    host: '0.0.0.0',
+    prefix: '/api/v1',
+    uploadDir: 'public/uploads/tmp'
   },
- 
-  boolProperty: true,
-  stringProperty: 'lol',
-  
-  serverPort: '$[server.port]', // this will inline to number `12345`
-  serverHost: '$[server.host]', // this will inline to string `localhost`
- 
-  // this will inline the host and port, resulting in `ServiceName('localhost', 12345)`
-  serviceDefinition: 'ServiceName($[server.host], $[server.port])',
- 
-};
+  logging: {
+    level: 'debug',
+    file: false,
+  },
+  token: {
+    secret: 'b0ldrk3kwi11s15',
+    expiration: 604800000,
+  },
+  mail: {
+    host: 'smtp.example.com',
+    user: 'user@user.com',
+    password: 'password',
+    port: 465,
+    ssl: true,
+    from: 'hello@boldr.io',
+  },
+  db: {
+    url: 'postgres://postgres:password@localhost:5432/boldr',
+  },
+  redis: {
+    url: 'redis://127.0.0.1:6379/0',
+  },
+  paths: {
+    publicPath: '/static/',
+    entry: {
+      server: 'src/serverEntry.js',
+      client: 'src/clientEntry.js',
+    },
+    output: {
+      server: 'build/server',
+      client: 'build/client',
+    },
+    vendor: 'src/vendor.js',
+  },
+  vendor: [],
+  tools: {
+    profile: false,
+  },
+}
+
 ```
 
 `/.boldr/config/default.json`

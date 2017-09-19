@@ -2,10 +2,10 @@ import fs from 'fs';
 import path from 'path';
 import { graphql } from 'graphql';
 import { introspectionQuery, printSchema } from 'graphql/utilities';
-import RootSchema from '../../src/data/rootSchema';
+import schema from '../../src/graphql/schema';
 // Save JSON of full schema introspection for Babel Relay Plugin to use
 (async () => {
-  const result = await graphql(RootSchema, introspectionQuery);
+  const result = await graphql(schema, introspectionQuery);
   if (result.errors) {
     console.error('ERROR introspecting schema: ', JSON.stringify(result.errors, null, 2));
   } else {
@@ -14,5 +14,5 @@ import RootSchema from '../../src/data/rootSchema';
 })();
 
 // Save user readable type system shorthand of schema
-fs.writeFileSync(path.join(__dirname, '../../schema.graphql'), printSchema(RootSchema));
+fs.writeFileSync(path.join(__dirname, '../../schema.graphql'), printSchema(schema));
 process.exit(0);

@@ -1,6 +1,6 @@
 import winston from 'winston';
 import format from 'date-fns/format';
-import { config } from '@boldr/config';
+import config from '@boldr/config';
 
 const isProd = process.env.NODE_ENV === 'production';
 

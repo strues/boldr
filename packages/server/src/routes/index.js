@@ -1,4 +1,4 @@
-import { config } from '@boldr/config';
+import config from '@boldr/config';
 import pubsub from '../middleware/pubsub';
 import authRoutes from './auth/auth.routes';
 import tokenRoutes from './token/token.routes';

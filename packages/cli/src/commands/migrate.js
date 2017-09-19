@@ -1,7 +1,7 @@
 import path from 'path';
 import knex from 'knex';
 import fs from 'fs-extra';
-import { config } from '@boldr/config';
+import config from '@boldr/config';
 import logger from '@boldr/utils/lib/logger';
 import appRoot from '@boldr/utils/lib/node/appRoot';
 

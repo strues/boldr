@@ -1,7 +1,7 @@
 import knex from 'knex';
 import { Model } from 'objection';
 
-import { config } from '@boldr/config';
+import config from '@boldr/config';
 
 const knexOpts = {
   client: 'pg',

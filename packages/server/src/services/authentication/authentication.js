@@ -1,5 +1,5 @@
 import jwt from 'jsonwebtoken';
-import { config } from '@boldr/config';
+import config from '@boldr/config';
 import Account from '../../models/Account';
 
 /**

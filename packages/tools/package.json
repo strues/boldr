@@ -37,7 +37,7 @@
   },
   "dependencies": {
     "@boldr/backend": "^0.1.0-alpha.1",
-    "@boldr/config": "^0.1.0-alpha.1",
+    "@boldr/config": "^0.1.0",
     "@boldr/utils": "^0.1.0-rc.5",
     "autoprefixer": "^7.1.4",
     "babel-loader": "^7.1.2",

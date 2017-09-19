@@ -1,4 +1,2 @@
-import { loadEnv } from '@boldr/config';
-
-loadEnv();
+require('dotenv').config();
 require('./server');

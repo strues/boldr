@@ -4,7 +4,7 @@
  */
 import session from 'express-session';
 import connectRedis from 'connect-redis';
-import { config } from '@boldr/config';
+import config from '@boldr/config';
 import { createClient } from '../services/redis';
 import authentication from '../services/authentication/authentication';
 import rbac from './rbac';
@@ -21,7 +21,7 @@ const sessionOptions = {
   unset: 'destroy',
   cookie: {
     secure: false,
-    maxAge: 604800000,
+    maxAge: config.get('token.expiration'),
   },
   store: new (connectRedis(session))({ client: createClient() }),
 };

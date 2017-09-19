@@ -1,13 +1,22 @@
-/* eslint-disable no-param-reassign, no-return-assign */
+/* eslint-disable no-param-reassign, no-return-assign, prefer-template */
 const path = require('path');
 const fs = require('fs');
 const appRootDir = require('app-root-dir');
 const _get = require('lodash.get');
 const _has = require('lodash.has');
 const _merge = require('lodash.merge');
+const debug = require('debug')('boldr:config');
 
-const CONFIG_DIR = process.env.CFG_DIR || path.resolve(appRootDir.get(), '.boldr/config');
+const ROOT = appRootDir.get();
+const CONFIG_DIR = process.env.CFG_DIR || path.resolve(ROOT, '.boldr/config');
 const CONFIG = {};
+
+const requireFn =
+  // eslint-disable-next-line camelcase
+  typeof __non_webpack_require__ !== 'undefined'
+    ? // eslint-disable-next-line no-undef, camelcase
+      __non_webpack_require__
+    : require;
 
 /**
  * Simple config helper, loads configuration in this order:
@@ -55,7 +64,7 @@ class Config {
       }
 
       if (fs.existsSync(options)) {
-        options = require(options);
+        options = requireFn(options);
       } else if (optional) {
         options = {};
       } else {
@@ -79,7 +88,7 @@ class Config {
    */
   _buildConfig(configDir, environment) {
     // load default config file
-    this.addOptions(`${configDir}/default`, true);
+    this.addOptions(configDir + '/default', true);
 
     // load additional config files
     if (fs.existsSync(configDir)) {
@@ -89,6 +98,7 @@ class Config {
         return isConfigFile && !isIgnored;
       };
       const files = fs.readdirSync(configDir).filter(filter);
+      debug('reading config files', files);
       files.forEach(file => this.addOptions(`${configDir}/${file}`));
     }
 

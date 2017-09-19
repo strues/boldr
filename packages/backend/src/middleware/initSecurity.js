@@ -1,25 +1,24 @@
-// import helmet from 'helmet';
-import parameterProtection from 'hpp';
+import helmet from 'helmet';
+import hpp from 'hpp';
 import uuid from 'uuid';
+import cors from 'cors';
 
-export default function initSecurity(server, { enableNonce = true }) {
-  if (enableNonce) {
-    /* eslint-disable max-params */
-
-    // Attach a unique "nonce" to every response. This allows use to declare
-    // inline scripts as being safe for execution against our content security policy.
-    // @see https://helmetjs.github.io/docs/csp/
-    server.use((request, response, next) => {
-      response.locals.nonce = uuid();
-      next();
-    });
-  }
+export default function initSecurity(app) {
+  app.set('trust proxy', true);
 
   // Don't expose any software information to hackers.
-  server.disable('x-powered-by');
+  app.disable('x-powered-by');
 
+  // enable CORS - Cross Origin Resource Sharing
+  // allow for sending credentials (auth token) in the headers.
+  app.use(
+    cors({
+      origin: true,
+      credentials: true,
+    }),
+  );
   // Prevent HTTP Parameter pollution.
-  server.use(parameterProtection());
+  app.use(hpp());
 
   // Content Security Policy (CSP)
   //
@@ -80,26 +79,27 @@ export default function initSecurity(server, { enableNonce = true }) {
   //   : null;
 
   // if (enableCSP) {
-  //   server.use(helmet.contentSecurityPolicy(cspConfig));
+  //   app.use(helmet.contentSecurityPolicy(cspConfig));
   // }
 
   // // The xssFilter middleware sets the X-XSS-Protection header to prevent
   // // reflected XSS attacks.
   // // @see https://helmetjs.github.io/docs/xss-filter/
-  // server.use(helmet.xssFilter());
+  app.use(helmet.xssFilter());
 
   // // Frameguard mitigates clickjacking attacks by setting the X-Frame-Options header.
+  // // We disable this for embedding
   // // @see https://helmetjs.github.io/docs/frameguard/
-  // server.use(helmet.frameguard('deny'));
+  app.use(helmet.frameguard('false'));
 
   // // Sets the X-Download-Options to prevent Internet Explorer from executing
   // // downloads in your site’s context.
   // // @see https://helmetjs.github.io/docs/ienoopen/
-  // server.use(helmet.ieNoOpen());
+  app.use(helmet.ieNoOpen());
 
   // // Don’t Sniff Mimetype middleware, noSniff, helps prevent browsers from trying
   // // to guess (“sniff”) the MIME type, which can have security implications. It
   // // does this by setting the X-Content-Type-Options header to nosniff.
   // // @see https://helmetjs.github.io/docs/dont-sniff-mimetype/
-  // server.use(helmet.noSniff());
+  app.use(helmet.noSniff());
 }

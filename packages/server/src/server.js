@@ -1,7 +1,7 @@
 /* eslint-disable no-console, no-shadow */
 import http from 'http';
 import Bluebird from 'bluebird';
-import { config } from '@boldr/config';
+import config from '@boldr/config';
 
 import app from './app';
 import { disconnect } from './services/db';

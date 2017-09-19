@@ -1,6 +1,6 @@
 import uuid from 'uuid';
 import jwt from 'jsonwebtoken';
-import { config } from '@boldr/config';
+import config from '@boldr/config';
 
 export default function signToken(account) {
   const roleinfo = account.roles[0].name;

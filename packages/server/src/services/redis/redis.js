@@ -1,5 +1,5 @@
 import Redis from 'ioredis';
-import { config } from '@boldr/config';
+import config from '@boldr/config';
 import _debug from 'debug';
 import logger from '../logger';
 

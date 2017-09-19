@@ -4,7 +4,7 @@ import path from 'path';
 import bodyParser from 'body-parser';
 import appRoot from '@boldr/utils/lib/node/appRoot';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
-import { config } from '@boldr/config';
+import config from '@boldr/config';
 import { createGraphOptions } from '../graphql/index';
 import apolloUpload from './apolloUpload';
 
@@ -37,7 +37,7 @@ export default function initGraphql(app) {
     `${config.get('server.prefix')}/graphql`,
     ...gqlMiddleware,
     apolloUpload({
-      uploadDir: path.resolve(appRoot.get(), './public/uploads/tmp'),
+      uploadDir: path.resolve(appRoot.get(), config.get('server.uploadDir')),
     }),
     graphqlHandler,
   );
