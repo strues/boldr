@@ -8,6 +8,8 @@ describe('UI Reducer', () => {
   it('Should return the initial state', () => {
     expect(uiReducer(undefined, {})).toEqual({
       layout: 'grid',
+      background: 'light',
+      theme: 'boldr',
       isExpanded: false,
       isMobile: false,
       isDrawerOpen: false,
@@ -17,6 +19,8 @@ describe('UI Reducer', () => {
   it('should open the modal', () => {
     const initialState = {
       layout: 'grid',
+      background: 'light',
+      theme: 'boldr',
       isExpanded: false,
       isMobile: false,
       isDrawerOpen: false,
@@ -24,6 +28,8 @@ describe('UI Reducer', () => {
     };
     const stateAfter = {
       layout: 'grid',
+      background: 'light',
+      theme: 'boldr',
       isExpanded: false,
       isMobile: false,
       isDrawerOpen: false,
@@ -38,6 +44,8 @@ describe('UI Reducer', () => {
   it('should close the modal', () => {
     const initialState = {
       layout: 'grid',
+      background: 'light',
+      theme: 'boldr',
       isExpanded: false,
       isMobile: false,
       isDrawerOpen: false,
@@ -45,6 +53,8 @@ describe('UI Reducer', () => {
     };
     const stateAfter = {
       layout: 'grid',
+      background: 'light',
+      theme: 'boldr',
       isExpanded: false,
       isMobile: false,
       isDrawerOpen: false,
@@ -63,6 +73,8 @@ describe('UI Reducer', () => {
     };
     const state = {
       layout: 'grid',
+      background: 'light',
+      theme: 'boldr',
       isExpanded: false,
       isMobile: false,
       isDrawerOpen: false,
@@ -71,6 +83,8 @@ describe('UI Reducer', () => {
 
     expect(uiReducer(state, action)).toEqual({
       layout: 'list',
+      background: 'light',
+      theme: 'boldr',
       isExpanded: false,
       isMobile: false,
       isDrawerOpen: false,
@@ -80,6 +94,8 @@ describe('UI Reducer', () => {
   it('should open the drawer', () => {
     const initialState = {
       layout: 'grid',
+      background: 'light',
+      theme: 'boldr',
       isExpanded: false,
       isMobile: false,
       isDrawerOpen: false,
@@ -87,6 +103,8 @@ describe('UI Reducer', () => {
     };
     const stateAfter = {
       layout: 'grid',
+      background: 'light',
+      theme: 'boldr',
       isExpanded: false,
       isMobile: false,
       isDrawerOpen: true,
@@ -101,6 +119,8 @@ describe('UI Reducer', () => {
   it('should close the drawer', () => {
     const initialState = {
       layout: 'grid',
+      background: 'light',
+      theme: 'boldr',
       isExpanded: false,
       isMobile: false,
       isDrawerOpen: true,
@@ -108,6 +128,8 @@ describe('UI Reducer', () => {
     };
     const stateAfter = {
       layout: 'grid',
+      background: 'light',
+      theme: 'boldr',
       isExpanded: false,
       isMobile: false,
       isDrawerOpen: false,
@@ -122,6 +144,8 @@ describe('UI Reducer', () => {
   it('should expand the element', () => {
     const initialState = {
       layout: 'grid',
+      background: 'light',
+      theme: 'boldr',
       isExpanded: false,
       isMobile: false,
       isDrawerOpen: false,
@@ -129,6 +153,8 @@ describe('UI Reducer', () => {
     };
     const stateAfter = {
       layout: 'grid',
+      background: 'light',
+      theme: 'boldr',
       isExpanded: true,
       isMobile: false,
       isDrawerOpen: false,
@@ -143,6 +169,8 @@ describe('UI Reducer', () => {
   it('should collapse', () => {
     const initialState = {
       layout: 'grid',
+      background: 'light',
+      theme: 'boldr',
       isExpanded: true,
       isMobile: false,
       isDrawerOpen: false,
@@ -150,6 +178,8 @@ describe('UI Reducer', () => {
     };
     const stateAfter = {
       layout: 'grid',
+      background: 'light',
+      theme: 'boldr',
       isExpanded: false,
       isMobile: false,
       isDrawerOpen: false,
@@ -168,6 +198,8 @@ test('changeLayout', () => {
   const store = mockStore({
     ui: {
       layout: 'grid',
+      background: 'light',
+      theme: 'boldr',
       isExpanded: false,
       isMobile: false,
       isDrawerOpen: false,
@@ -187,6 +219,8 @@ test('openModal', () => {
   const store = mockStore({
     ui: {
       layout: 'grid',
+      background: 'light',
+      theme: 'boldr',
       isExpanded: false,
       isMobile: false,
       isDrawerOpen: false,
@@ -205,6 +239,8 @@ test('closeModal', () => {
   const store = mockStore({
     ui: {
       layout: 'grid',
+      background: 'light',
+      theme: 'boldr',
       isExpanded: false,
       isMobile: false,
       isDrawerOpen: false,

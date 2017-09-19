@@ -9,6 +9,8 @@ describe('Boldr Reducer', () => {
       },
       ui: {
         layout: 'grid',
+        background: 'light',
+        theme: 'boldr',
         isExpanded: false,
         isMobile: false,
         isDrawerOpen: false,

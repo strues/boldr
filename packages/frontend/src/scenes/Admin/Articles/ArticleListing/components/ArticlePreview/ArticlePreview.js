@@ -24,7 +24,7 @@ const Toolbar = styled.div`
   align-items: center;
   vertical-align: middle;
   padding: 1em;
-  background-color: ${props => props.theme.palette.primary2};
+  background-color: #3178b7;
 `;
 Toolbar.defaultProps = {
   theme: {

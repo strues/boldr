@@ -566,7 +566,7 @@ $mq-em-base: 16px !default;
     display: block;
     width: 15px;
     height: 1px;
-    background-color: $text;
+    background-color: #fff;
     margin-left: -7px;
     transition: none $speed $easing;
     transition-property: background, left, opacity, transform;
@@ -585,7 +585,7 @@ $mq-em-base: 16px !default;
   }
 
   &:hover {
-    background-color: $background;
+    background-color: $primary-1;
   }
 
   // Modifers

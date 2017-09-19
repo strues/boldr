@@ -2,9 +2,9 @@
 import React from 'react';
 import matchPath from 'react-router-dom/matchPath';
 // internal
-import Breadcrumb from '@boldr/ui/Breadcrumb';
+import Breadcrumb from '../../../../components/Breadcrumb';
 
-import View from '@boldr/ui/View';
+import View from '../../../../components/View';
 import type { RouterLocation } from '../../../../types/boldr';
 import LinkContainer from '../../../../components/LinkContainer';
 import rootRoutes from '../../routes';

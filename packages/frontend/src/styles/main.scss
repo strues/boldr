@@ -1,10 +1,4 @@
-@charset "utf-8";
-
-@import 'abstracts/all';
-@import 'vendor/all';
-@import 'overrides';
-@import 'base/all';
-@import 'components/all';
+@import '~@boldr/ui/styles/boldrui.scss';
 
 .boldr-card__title {
   padding: 1em;

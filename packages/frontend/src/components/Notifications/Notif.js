@@ -11,13 +11,10 @@ const NotificationWrap = styled.div`
   max-height: 400px;
   min-width: 425px;
   padding: 0.5rem;
-  font-family: ${props => props.theme.fontFamily.header};
+  font-family: 'Chivo';
   font-weight: 400;
-  background-color: ${props =>
-    props.type === 'error'
-      ? `${props.theme.palette.danger}`
-      : `${props.theme.palette.primaryAccent}`};
-  color: ${props => props.theme.fontColor.dark};
+  background-color: ${props => (props.type === 'error' ? '#ef476f' : '#00bcd4')};
+  color: #030507
   border-radius: 4px;
   box-shadow: 0 0 1px 1px rgba(10, 10, 11, 0.125);
   margin-bottom: 2px;

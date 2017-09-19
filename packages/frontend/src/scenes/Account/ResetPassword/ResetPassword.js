@@ -2,7 +2,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import FormCard from '@boldr/ui/Form/FormCard';
+
+import Card, { CardText, CardTitle } from '@boldr/ui/Card';
+import Flex from '@boldr/ui/Flex';
 import { resetPassword } from '../state/actions';
 import ResetPasswordForm from './ResetPasswordForm';
 
@@ -26,12 +28,14 @@ class ResetPassword extends Component<Props, *> {
     return (
       <div className="resetpw-wrapper">
         <Helmet title="Reset Password" />
-        <FormCard
-          title="Reset Password"
-          skinny
-          lightText
-          form={<ResetPasswordForm onSubmit={this.handleReset} />}
-        />
+        <Flex justify="center" align="center">
+          <Card>
+            <CardTitle title="Reset Password" />
+            <CardText>
+              <ResetPasswordForm onSubmit={this.handleReset} />
+            </CardText>
+          </Card>
+        </Flex>
       </div>
     );
   }

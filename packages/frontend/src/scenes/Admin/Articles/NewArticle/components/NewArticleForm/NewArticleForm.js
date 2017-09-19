@@ -7,7 +7,6 @@ import Button from '@boldr/ui/Button';
 import { Col, Row } from '@boldr/ui/Layout';
 import Paper from '@boldr/ui/Paper';
 import Heading from '@boldr/ui/Heading';
-import Block from '@boldr/ui/Block';
 import Form, {
   Label,
   FormGroup,
@@ -115,36 +114,34 @@ class NewArticleForm extends React.Component<Props, *> {
                     label="Feature Image"
                   />
                 </FormGroup>
-                <Block>
-                  <FormGroup>
-                    <FormField isGrouped>
-                      <Label>Status:</Label>
-                      <Field
-                        name="published"
-                        type="radio"
-                        value="draft"
-                        component={RadioFormField}
-                        validate={[isRequired]}
-                        label="Draft"
-                      />
-                      <Field
-                        name="published"
-                        type="radio"
-                        value="published"
-                        component={RadioFormField}
-                        validate={[isRequired]}
-                        label="Published"
-                      />
-                    </FormField>
-                  </FormGroup>
+                <FormGroup>
+                  <FormField isGrouped>
+                    <Label>Status:</Label>
+                    <Field
+                      name="published"
+                      type="radio"
+                      value="draft"
+                      component={RadioFormField}
+                      validate={[isRequired]}
+                      label="Draft"
+                    />
+                    <Field
+                      name="published"
+                      type="radio"
+                      value="published"
+                      component={RadioFormField}
+                      validate={[isRequired]}
+                      label="Published"
+                    />
+                  </FormField>
+                </FormGroup>
 
-                  <Button htmlType="submit" disabled={submitting} kind="primary">
-                    Save Post
-                  </Button>
-                  <Button onClick={reset} kind="primary" disabled={submitting || pristine} outline>
-                    Reset
-                  </Button>
-                </Block>
+                <Button htmlType="submit" disabled={submitting} kind="primary">
+                  Save Post
+                </Button>
+                <Button onClick={reset} kind="primary" disabled={submitting || pristine} outline>
+                  Reset
+                </Button>
               </Col>
             </Row>
           </Form>

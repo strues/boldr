@@ -16,7 +16,7 @@ import {
   NavbarItem,
   NavbarMenu,
   NavbarStart,
-} from '../../../../components';
+} from '@boldr/ui';
 import type { CurrentUser, SettingsType, RouterLocation } from '../../../../types/boldr';
 
 export type Props = {

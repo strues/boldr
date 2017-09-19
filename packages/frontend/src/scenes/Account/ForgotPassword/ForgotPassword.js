@@ -3,8 +3,8 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 
-import Card, { CardText, CardTitle } from '../../../components/Card';
-import Flex from '../../../components/Flex';
+import Card, { CardText, CardTitle } from '@boldr/ui/Card';
+import Flex from '@boldr/ui/Flex';
 import { forgotPassword } from '../state/actions';
 import ForgotPasswordForm from './ForgotPasswordForm';
 

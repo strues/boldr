@@ -17,7 +17,7 @@ const attachMonitors = client => {
   // Error events.
   client.on('error', err => {
     if (err) {
-      console.error('Error connecting to redis:', err);
+      logger.error('Error connecting to redis:', err);
     }
   });
 };

@@ -1,8 +1,9 @@
 /* @flow */
 import * as React from 'react';
 import Link from 'react-router-dom/Link';
-import classnames from 'classnames';
-import { Col, Row, StyleClasses } from '@boldr/ui';
+import { Col, Row } from '@boldr/ui/Layout';
+import cn from 'classnames';
+import { StyleClasses } from '../../../../theme/styleClasses';
 
 const BASE_ELEMENT = StyleClasses.DASHBOARD_FOOTER;
 type Props = {
@@ -11,7 +12,7 @@ type Props = {
 };
 
 const DashboardFooter = (props: Props) => {
-  const classes = classnames(BASE_ELEMENT, props.className);
+  const classes = cn(BASE_ELEMENT, props.className);
   return (
     <footer className={classes}>
       <Row>

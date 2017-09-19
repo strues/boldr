@@ -22,7 +22,7 @@ const ArticleContent = (props: Props) => {
   }
   return (
     <article>
-      <Paper zDepth={2} isPadded>
+      <Paper zDepth={2}>
         <ArticleDate created={props.createdAt} />
         <Divider />
         <DynamicContent className={classes} dangerouslySetInnerHTML={createMarkup()} />

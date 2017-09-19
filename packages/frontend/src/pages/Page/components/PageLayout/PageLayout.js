@@ -5,16 +5,7 @@ import { Footer, Container } from '@boldr/ui/Layout';
 import styled from 'styled-components';
 import View from '@boldr/ui/View';
 import Navigation from '../Navigation';
-import type { CurrentUser, RouterLocation, Menu } from '../../../../types/boldr';
-//
-// const StyledMain = styled.main`
-//   margin: auto;
-//   padding: 4.5rem 0 6rem;
-//   width: 90%;
-//   ${props => props.theme.media.md`
-//     width: 80%;
-//   `};
-// `;
+import type { CurrentUser, RouterLocation, MenuType } from '../../../../types/boldr';
 
 const ContentWrapper = styled.main`
   width: 100%;
@@ -28,7 +19,7 @@ type Props = {
   currentUser: CurrentUser,
   location: RouterLocation,
   onClickLogout: () => void,
-  menu: Menu,
+  menu: MenuType,
   children: Array<Node>,
   token: string,
 };

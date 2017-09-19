@@ -38,7 +38,7 @@
     "history": "^4.7.2",
     "invariant": "^2.2.2",
     "isomorphic-unfetch": "^2.0.0",
-    "nanoid": "^0.2.0",
+    "nanoid": "^0.2.1",
     "lodash.flatmapdeep": "^4.10.0",
     "prop-types": "^15.5.10",
     "redux-immutable-state-invariant": "^2.0.0",
@@ -48,7 +48,7 @@
   },
   "devDependencies": {
     "babel-preset-boldr": "0.11.1",
-    "eslint": "^4.6.1",
+    "eslint": "^4.7.0",
     "eslint-config-boldr": "^0.12.13",
     "fast-async": "^6.3.0",
     "prepublish": "^1.4.2",

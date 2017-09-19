@@ -47,8 +47,6 @@ type Account {
   email: Email!
   # true if email is verified, false otherwise
   verified: Boolean
-  # The ip address of the person performing the reset
-  ip: String
   # The reset token
   resetToken: String
   # When the token expires.

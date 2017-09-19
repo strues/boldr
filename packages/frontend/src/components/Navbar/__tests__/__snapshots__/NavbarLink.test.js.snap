@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`NavbarLink should match the snapshot 1`] = `
-<a
-  className="boldr-navbar__link is-active"
-/>
-`;

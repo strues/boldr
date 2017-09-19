@@ -166,7 +166,7 @@ export default function createWebpackConfig(
     modules: false,
     localIdentName: '[local]-[hash:base62:8]',
     import: 2,
-    minimize: false,
+    minimize: !_IS_DEV_,
     sourceMap: true,
   };
 
@@ -182,8 +182,7 @@ export default function createWebpackConfig(
     loader: require.resolve('sass-loader'),
     options: {
       sourceMap: true,
-      includePaths: [SRC_DIR],
-      minimize: false,
+      minimize: !_IS_DEV_,
     },
   };
 

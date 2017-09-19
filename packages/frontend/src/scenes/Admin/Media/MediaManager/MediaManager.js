@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { graphql } from 'react-apollo';
 import { Col, Row } from '@boldr/ui/Layout';
 import ResponsiveImage from '@boldr/ui/ResponsiveImage';
-import Block from '@boldr/ui/Block';
+import Flex from '@boldr/ui/Flex';
 import Heading from '@boldr/ui/Heading';
 import Loader from '@boldr/ui/Loader';
 import type { MediaType } from '../../../../types/boldr';
@@ -61,10 +61,10 @@ class MediaManager extends React.Component<Props, *> {
             <Row xsCenter>
               <Col xs={8}>
                 <MediaFormCard>
-                  <Block>
+                  <Flex>
                     <Heading type="h2" text="Edit media attributes" />
                     <MediaForm initialValues={media} onSubmit={this.handleSubmit} />
-                  </Block>
+                  </Flex>
                 </MediaFormCard>
               </Col>
             </Row>

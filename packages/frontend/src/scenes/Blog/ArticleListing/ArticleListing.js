@@ -5,7 +5,7 @@ import { Section } from '@boldr/ui/Layout';
 import Heading from '@boldr/ui/Heading';
 import Loader from '@boldr/ui/Loader';
 import { ArticleCard } from '../components';
-import type { ArticlesType } from 'types/boldr';
+import type { ArticlesType } from '../../../types/boldr';
 
 type Props = {
   articles: ArticlesType,

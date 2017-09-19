@@ -5,11 +5,18 @@ export function getNonce(state) {
   return state.boldr.settings.nonce;
 }
 
-const initial = {
+const INITIAL_STATE = {
   apolloUri: process.env.GRAPHQL_ENDPOINT || '/api/v1/graphql',
   nonce: '',
 };
-// eslint-disable-next-line
-export default function settingsReducer(state = initial, action) {
-  return state;
+
+export default function settingsReducer(state = INITIAL_STATE, action) {
+  switch (action.type) {
+    // case 'SET_CONFIG':
+    // return Object.assign({}, state, {
+    //   ...action.config,
+    // });
+    default:
+      return state;
+  }
 }

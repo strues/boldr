@@ -1,6 +1,5 @@
 /* @flow */
 import * as React from 'react';
-import styled from 'styled-components';
 import NavLink from 'react-router-dom/NavLink';
 import Link from 'react-router-dom/Link';
 
@@ -13,7 +12,6 @@ import {
   NavbarItem,
   NavbarMenu,
   NavbarStart,
-  NavbarDropdown,
   NavbarLink,
 } from '@boldr/ui';
 
@@ -29,8 +27,6 @@ type State = {
   isDropdownOpen: boolean,
   isActive: boolean,
 };
-
-const TbArea = styled.div`width: 100%;`;
 
 // @todo: handle import like other universal pages
 export const checkActiveLoc = (location: Object, url: string) => {

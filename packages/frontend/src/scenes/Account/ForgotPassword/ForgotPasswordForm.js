@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
-import Button from '../../../components/Button';
-import Form, { TextFormField } from '../../../components/Form';
+import Button from '@boldr/ui/Button';
+import Form, { TextFormField } from '@boldr/ui/Form';
 
 export type Props = {
   handleSubmit: Function,

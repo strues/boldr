@@ -3,8 +3,8 @@ import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import Link from 'react-router-dom/Link';
 import styled from 'styled-components';
-import Button from '../../../components/Button';
-import Form, { TextFormField } from '../../../components/Form';
+import Button from '@boldr/ui/Button';
+import Form, { TextFormField } from '@boldr/ui/Form';
 import validations from '../../../core/util/validations';
 
 type Props = {

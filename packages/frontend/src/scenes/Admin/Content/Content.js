@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 import styled from 'styled-components';
-import { Input, Label, Menu } from 'semantic-ui-react';
-import Flex from '../../../components/Flex';
+
+import Flex from '@boldr/ui/Flex';
 import type { ContentRoot } from '../../../types/boldr';
 import CreateContainer from './ContentType/CreateContainer';
 
@@ -37,30 +37,7 @@ class Content extends React.Component<Props, State> {
     const { activeItem } = this.state;
     return (
       <Flex justify="flex-start" align="stretch">
-        <LeftCol shrink={0}>
-          <Menu vertical>
-            <Menu.Item
-              name="categories"
-              active={activeItem === 'categories'}
-              onClick={this.handleItemClick}>
-              <Label color="blue">1</Label>
-              Categories
-            </Menu.Item>
-
-            <Menu.Item
-              name="contentTypes"
-              active={activeItem === 'contentTypes'}
-              onClick={this.handleItemClick}>
-              <Label>51</Label>
-              Content Types
-            </Menu.Item>
-
-            <Menu.Item name="tags" active={activeItem === 'tags'} onClick={this.handleItemClick}>
-              <Label>1</Label>
-              Tags
-            </Menu.Item>
-          </Menu>
-        </LeftCol>
+        <LeftCol shrink={0} />
         <Flex>
           <List>
             {activeItem === 'contentTypes' &&

@@ -3,7 +3,6 @@
 import path from 'path';
 import bodyParser from 'body-parser';
 import appRoot from '@boldr/utils/lib/node/appRoot';
-import { printSchema } from 'graphql';
 import { graphqlExpress, graphiqlExpress } from 'graphql-server-express';
 import { config } from '@boldr/config';
 import { createGraphOptions } from '../graphql/index';
@@ -23,10 +22,6 @@ const gqlMiddleware = [
 ];
 
 export default function initGraphql(app) {
-  app.get(`${config.get('server.prefix')}/graphql/schema`, (req, res) => {
-    res.type('text/plain').send(printSchema(RootSchema));
-  });
-
   // Enable GraphiQL in the config file. Only accessible
   // during development mode by default.
   if (process.env.NODE_ENV === 'development') {

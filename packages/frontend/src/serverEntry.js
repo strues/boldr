@@ -7,9 +7,8 @@ import serialize from 'serialize-javascript';
 import { ServerStyleSheet } from 'styled-components';
 import Helmet from 'react-helmet';
 
-import { wrapBoldrApp, createApolloClient, createBoldrStore, createHistory } from '@boldr/core';
+import { wrapBoldrApp, createHistory, createApolloClient, createBoldrStore } from '@boldr/core';
 import App from './components/App/App.js';
-
 import appReducer from './reducers';
 
 /**

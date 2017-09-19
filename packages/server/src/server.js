@@ -16,6 +16,7 @@ const port = normalizePort(config.get('server.port'));
 const server = http.createServer(app);
 
 server.listen(port);
+
 server.on('listening', () => {
   const address = server.address();
   logger.info('Boldr running on port %s', address.port);

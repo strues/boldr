@@ -28,6 +28,8 @@ function toggleModal(state: UiState) {
 
 const INITIAL_STATE = {
   layout: 'grid',
+  background: 'light',
+  theme: 'boldr',
   isExpanded: false,
   isMobile: false,
   isDrawerOpen: false,

@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import Button from '@boldr/ui/Button';
 // internal
-import FormCard from '@boldr/ui/Form/FormCard/FormCard';
+
+import Card, { CardText, CardTitle } from '@boldr/ui/Card';
+import Flex from '@boldr/ui/Flex';
 import { verifyAccount } from '../state/actions';
 
 export type Props = {
@@ -25,16 +27,16 @@ class Verify extends React.PureComponent<Props, *> {
     return (
       <div className="verify-wrapper">
         <Helmet title="Verify Account" />
-        <FormCard
-          title="Account verification"
-          skinny
-          lightText
-          form={
-            <Button onClick={this.handleVerify} kind="primary" block>
-              Verify
-            </Button>
-          }
-        />
+        <Flex justify="center" align="center">
+          <Card>
+            <CardTitle title="Account Verification" />
+            <CardText>
+              <Button onClick={this.handleVerify} kind="primary" block>
+                Verify
+              </Button>
+            </CardText>
+          </Card>
+        </Flex>
       </div>
     );
   }

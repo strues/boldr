@@ -1,11 +1,29 @@
+import path from 'path';
+import fs from 'fs-extra';
 import merge from 'lodash.merge';
+
 import defaultConfig from './defaultConfig';
 
-export default function loadConfig(configPath) {
-  const configModulePath = configPath;
-  // first clean up require cache so we always load fresh config
-  delete require.cache[configModulePath];
+const requireFn =
+  // eslint-disable-next-line camelcase
+  typeof __non_webpack_require__ !== 'undefined'
+    ? // eslint-disable-next-line no-undef, camelcase
+      __non_webpack_require__
+    : require;
+
+export default function loadConfig(configFile) {
+  const boldrConfigFile = configFile;
+  const fileCache = new Map();
+
+  if (fileCache.has(boldrConfigFile)) {
+    return fileCache.get(boldrConfigFile);
+  }
+
   // then require the fresh config
-  const config = require(configModulePath); // eslint-disable-line global-require
-  return merge(defaultConfig, config);
+  if (!fs.existsSync(boldrConfigFile)) {
+    throw new Error(`Unable to read ${boldrConfigFile}`);
+  }
+  const userConfig = requireFn(boldrConfigFile); // eslint-disable-line global-require
+  fileCache.set(boldrConfigFile, userConfig);
+  return merge(defaultConfig, userConfig);
 }

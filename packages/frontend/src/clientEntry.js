@@ -15,8 +15,6 @@ import appReducer from './reducers';
 import theme from './theme/theme';
 import ThemeProvider from './theme/ThemeProvider';
 
-// injectResetStyle();
-
 const DOM_NODE = document.getElementById('app');
 let preloadedState = {};
 
@@ -25,7 +23,7 @@ if (window.__APOLLO_STATE__) {
 }
 const token = getToken();
 
-export const apolloClient = createApolloClient({
+const apolloClient = createApolloClient({
   batchRequests: false,
   initialState: preloadedState,
   apolloUri: process.env.GRAPHQL_ENDPOINT,
@@ -33,6 +31,7 @@ export const apolloClient = createApolloClient({
     Authorization: `Bearer ${token}`,
   },
 });
+
 const history = createHistory();
 // Create the redux store by passing the "main" reducer, preloadedState, the Apollo Client
 // and env. Passing either 'development' or 'production' (env) includes/excludes
