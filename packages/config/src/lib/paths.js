@@ -1,6 +1,5 @@
 /* eslint-disable object-shorthand */
 import path from 'path';
-import fs from 'fs-extra';
 import { get as getAppRoot } from 'app-root-dir';
 
 /**

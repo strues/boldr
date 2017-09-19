@@ -1,6 +1,6 @@
 {
   "name": "@boldr/backend",
-  "description": "Boldr Backend is a centralized Express-based HTTP server with sophisticated built-in security.",
+  "description": "Boldr Server is a centralized Express-based HTTP server with sophisticated built-in security.",
   "version": "0.1.0-alpha.1",
   "homepage": "https://github.com/strues/boldr",
   "bugs": {
@@ -45,10 +45,15 @@
     "body-parser": "^1.18.1",
     "chalk": "^2.1.0",
     "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "debug": "^3.0.1",
     "dotenv": "^4.0.0",
     "express": "^4.15.4",
+    "formidable": "^1.1.1",
+    "fs-extra": "^4.0.2",
+    "helmet": "^3.8.1",
     "hpp": "^0.2.2",
-    "pretty-error": "^2.1.1",
+    "object-path": "^0.11.4",
     "uuid": "^3.1.0"
   },
   "devDependencies": {

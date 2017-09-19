@@ -2,8 +2,7 @@ import express from 'express';
 
 // import initSecurity from './middleware/initSecurity';
 import initCore from './middleware/initCore';
-import initError from './middleware/initError';
-import fallbackHandler from './fallbackHandler';
+import initErrorHandler from './middleware/initErrorHandler';
 
 const defaultStatic = {
   public: '/static/',
@@ -18,7 +17,6 @@ export default function createBackend({
   // Create our express based server.
   const server = express();
 
-  initError(server);
   // initSecurity(server, { enableCSP, enableNonce });
 
   // Allow for some early additions for middleware
@@ -50,8 +48,8 @@ export default function createBackend({
     });
   }
 
-  // For all things which did not went well.
-  fallbackHandler(server);
+  // if we end up here, something isnt right...
+  initErrorHandler(server);
 
   return server;
 }

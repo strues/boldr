@@ -1,21 +1,14 @@
 /* eslint-disable no-param-reassign, no-return-assign */
-import path from 'path';
-import fs from 'fs';
-import { get as getAppRoot } from 'app-root-dir';
-import get from 'lodash.get';
-import has from 'lodash.has';
-import merge from 'lodash.merge';
-import { resolveFromRoot } from './lib/paths';
+const path = require('path');
+const fs = require('fs');
+const appRootDir = require('app-root-dir');
+const _get = require('lodash.get');
+const _has = require('lodash.has');
+const _merge = require('lodash.merge');
 
-const CONFIG_DIR = process.env.CFG_DIR || resolveFromRoot('config');
+const CONFIG_DIR = process.env.CFG_DIR || path.resolve(appRootDir.get(), '.boldr/config');
 const CONFIG = {};
 
-const requireFn =
-  // eslint-disable-next-line camelcase
-  typeof __non_webpack_require__ !== 'undefined'
-    ? // eslint-disable-next-line no-undef, camelcase
-      __non_webpack_require__
-    : require;
 /**
  * Simple config helper, loads configuration in this order:
  *  - /.boldr/config/default.js
@@ -36,7 +29,7 @@ class Config {
    * @return {*}
    */
   get(key, defaultValue = undefined) {
-    return get(CONFIG, key, defaultValue);
+    return _get(CONFIG, key, defaultValue);
   }
 
   /**
@@ -44,7 +37,7 @@ class Config {
    * @return {Boolean}
    */
   has(key) {
-    return has(CONFIG, key);
+    return _has(CONFIG, key);
   }
 
   /**
@@ -62,7 +55,7 @@ class Config {
       }
 
       if (fs.existsSync(options)) {
-        options = requireFn(options);
+        options = require(options);
       } else if (optional) {
         options = {};
       } else {
@@ -70,7 +63,7 @@ class Config {
       }
     }
 
-    merge(CONFIG, options);
+    _merge(CONFIG, options);
   }
   /**
    * @return {String}
@@ -112,7 +105,7 @@ class Config {
     this._propagateReferences(CONFIG);
 
     // support `config.foo.bar` syntax (instead of `config.get('foo.bar')`)
-    merge(this, CONFIG);
+    _merge(this, CONFIG);
   }
 
   /**
@@ -161,4 +154,4 @@ class Config {
   }
 }
 
-export default new Config();
+module.exports = new Config();
