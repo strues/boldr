@@ -6,16 +6,16 @@ exports[`Layout renders snapshot 1`] = `
   isColor="info"
   isFullHeight={true}
 >
-  <boldruiComponent(HeroHeader)>
+  <HeroHeader>
     <Navigation />
-  </boldruiComponent(HeroHeader)>
-  <boldruiComponent(HeroBody)>
+  </HeroHeader>
+  <HeroBody>
     <styled.div>
       Layout
     </styled.div>
-  </boldruiComponent(HeroBody)>
-  <boldruiComponent(HeroFooter)>
+  </HeroBody>
+  <HeroFooter>
     <DashboardFooter />
-  </boldruiComponent(HeroFooter)>
+  </HeroFooter>
 </boldruiComponent(Hero)>
 `;
