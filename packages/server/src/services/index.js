@@ -1,5 +1,4 @@
-export { generateHash, comparePassword } from './hashing';
-export { default as mailer } from './mailer';
+export { default as mailer, transporter } from './mailer/mailer';
 export { signToken, isAuthenticated } from './authentication';
 export { db, disconnect } from './db';
 export { createClient, createClientFactory } from './redis';

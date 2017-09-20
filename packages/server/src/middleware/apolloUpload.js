@@ -2,8 +2,11 @@
 import fs from 'fs-extra';
 import formidable from 'formidable';
 import objectPath from 'object-path';
+import _debug from 'debug';
 
-export function processRequest(request, { uploadDir } = {}) {
+const debug = _debug('boldr:server:middleware:apolloUp');
+
+export function processRequest(req, { uploadDir } = {}) {
   // Ensure provided upload directory exists
   if (uploadDir) {
     fs.ensureDirSync(uploadDir);
@@ -16,11 +19,11 @@ export function processRequest(request, { uploadDir } = {}) {
 
   // Parse the multipart form request
   return new Promise((resolve, reject) => {
-    form.parse(request, (error, { operations }, files) => {
+    form.parse(req, (error, { operations }, files) => {
       if (error) {
         return reject(new Error(error));
       }
-
+      debug('parsing form data');
       // Decode the GraphQL operation(s). This is an array
       // if batching is enabled.
       operations = JSON.parse(operations);
@@ -44,13 +47,13 @@ export function processRequest(request, { uploadDir } = {}) {
 }
 
 export default function apolloUpload(options) {
-  return (request, response, next) => {
+  return (req, res, next) => {
     // Skip if there are no uploads
-    if (!request.is('multipart/form-data')) {
+    if (!req.is('multipart/form-data')) {
       return next();
     }
-    processRequest(request, options).then(body => {
-      request.body = body;
+    processRequest(req, options).then(body => {
+      req.body = body;
       // eslint-disable-next-line
       next();
     });

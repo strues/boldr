@@ -1,6 +1,6 @@
 {
   "name": "@boldr/utils",
-  "version": "0.1.0-rc.5",
+  "version": "0.1.0",
   "description": "Utility functions designed for use in Boldr projects. But applicable to most.",
   "main": "lib/index.js",
   "files": [

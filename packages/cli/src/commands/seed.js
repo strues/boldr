@@ -6,13 +6,12 @@ import logger from '@boldr/utils/lib/logger';
 import appRoot from '@boldr/utils/lib/node/appRoot';
 
 async function task(args, options) {
-  logger.task('Cleaning up');
-
+  logger.task('Seeding database');
   const rootDir = appRoot.get();
   fs.ensureDirSync('.boldr/db/migrations');
   const knexConfig = {
     client: 'pg',
-    connection: config.get('db.url'),
+    connection: options.dburl || config.get('db.url'),
     migrations: {
       tableName: 'migrations',
       directory: path.resolve(rootDir, '.boldr/db/migrations'),
@@ -30,6 +29,7 @@ function register(program) {
   program
     .command('seed', 'Remove files or directories.')
     .help('By default, cache, assets dir and the compiled server are removed.')
+    .option('-u,  --url <dburl>', 'Database connection url')
     .action(task);
 }
 

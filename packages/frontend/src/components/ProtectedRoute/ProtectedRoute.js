@@ -1,10 +1,9 @@
 // @flow
 import React from 'react';
-import type { Node } from 'react';
 import Route from 'react-router-dom/Route';
 import Redirect from 'react-router-dom/Redirect';
-import { connect } from 'react-redux';
 import { getToken } from '@boldr/core';
+import type { RouterLocation } from '../../types/boldr';
 
 export const hasAccessToken = () => {
   const token = getToken();
@@ -12,41 +11,26 @@ export const hasAccessToken = () => {
 };
 
 export type Props = {
-  component: Node,
-  authInfo: Object,
-  location: Object,
+  component: Object,
+  isAuthenticated: boolean,
+  location: RouterLocation,
 };
 
-const ProtectedRoute = ({ component: ComposedComponent, ...rest }: Props) => {
-  class Authentication extends React.Component<Props, *> {
-    handleRender = props => {
-      if (!this.props.authInfo) {
-        return (
-          <Redirect
-            to={{
-              pathname: '/login',
-              state: {
-                from: props.location,
-                message: 'You need to sign in',
-              },
-            }}
-          />
-        );
-      } else {
-        return <ComposedComponent {...props} />;
-      }
-    };
+const ProtectedRoute = ({ component: Component, isAuthenticated, ...rest }: Props) => (
+  <Route
+    {...rest}
+    render={props =>
+      isAuthenticated ? (
+        <Component {...props} />
+      ) : (
+        <Redirect
+          to={{
+            pathname: '/login',
+            state: { from: props.location },
+          }}
+        />
+      )}
+  />
+);
 
-    render() {
-      return <Route {...rest} render={this.handleRender} />;
-    }
-  }
-
-  function mapStateToProps(state) {
-    return { authInfo: state.auth.info };
-  }
-
-  const AuthenticationContainer = connect(mapStateToProps)(Authentication);
-  return <AuthenticationContainer />;
-};
 export default ProtectedRoute;

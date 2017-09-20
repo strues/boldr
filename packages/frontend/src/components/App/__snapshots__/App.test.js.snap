@@ -55,19 +55,17 @@ exports[`App 1`] = `
       name="msapplication-TileImage"
     />
   </HelmetWrapper>
-  <Switch>
-    <ProtectedRoute
+  <withRouter(ContainerSwitcherRoute)>
+    <withRouter(Connect(ProtectedRoute))
       component={[Function]}
+      exact={true}
       path="/admin"
     />
     <Route
       component={[Function]}
       path="/"
     />
-    <Route
-      component={[Function]}
-    />
-  </Switch>
+  </withRouter(ContainerSwitcherRoute)>
   <Connect(Notifications) />
 </div>
 `;

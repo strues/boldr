@@ -1,7 +1,7 @@
 {
   "lerna": "2.2.0",
   "version": "independent",
-  "npmClient": "npm",
+  "independent": true,
   "packages": [
     "packages/backend",
     "packages/cli",

@@ -6,58 +6,72 @@ import styled from 'styled-components';
 // internal
 import Heading from '@boldr/ui/Heading';
 import Paragraph from '@boldr/ui/Paragraph';
-import { Grid, Row, Col } from '@boldr/ui/Layout';
+import Loader from '@boldr/ui/Loader';
+import { ArticleCard } from '../../scenes/Blog/components';
+import type { ArticlesType } from '../../types/boldr';
 
 const HomeHero = styled.div`
-  background-color: #243140;
-  height: 450px;
-  width: 100%;
+  position: relative;
+  background-color: #261d16;
+  background-image: url("${props => props.bgsrc}");
+  background-size: cover;
+  height: 400px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 10px;
+  color: white;
+  h1,
+  p {
+    z-index: 2;
+  }
 `;
 
 const HomeText = 'Meet Boldr.';
+const Container = styled.div`
+  flex: 1;
+  max-width: 1034px;
+  width: 100%;
+  margin: 30px auto 100px;
+  display: flex;
+  flex-wrap: wrap;
+`;
+const CoverShadow = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background-image: linear-gradient(0, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.6));
+  z-index: 0;
+`;
+type Props = {
+  articles: ArticlesType,
+  isLoading: boolean,
+  error?: Object,
+};
 
-function Home() {
-  return (
-    <div>
-      <Helmet title="Home" />
-      <HomeHero>
-        <Heading type="h1" text={HomeText} isLight />
-      </HomeHero>
-      <Grid>
-        <Row>
-          <Col xs={12} md={4}>
-            <Heading type="h2" text="Placeholder 1" />
-            <Paragraph>
-              This proposal introduces an Observable type to the ECMAScript standard library. The
-              Observable type can be used to model push-based data sources such as DOM events, timer
-              intervals, and sockets.
-            </Paragraph>
-          </Col>
-          <Col xs={12} md={4}>
-            <Heading type="h2" text="Placeholder 2" />
-            <Paragraph>
-              The iterator interface (introduced in ECMAScript 2015) is a sequential data access
-              protocol which enables the development of generic and composable data consumers and
-              transformers. Their primary interface is a next() method which returns a value, done
-              tuple, where done is a boolean indicating whether the end of the iterator has been
-              reached, and value is the yielded value in the sequence.
-            </Paragraph>
-          </Col>
-          <Col xs={12} md={4}>
-            <Heading type="h2" text="Placeholder 3" />
-            <Paragraph>
-              In ECMAScript, a realm consists of a global object and an associated set of primordial
-              objects -- mutable objects like Array.prototype that must exist before any code runs.
-              Objects within a realm implicitly share these primordials and can therefore easily
-              disrupt each other by primordial poisoning -- modifying these objects to behave badly.
-              This disruption may happen accidentally or maliciously. Today, in the browser, realms
-              can be created via same origin iframes.
-            </Paragraph>
-          </Col>
-        </Row>
-      </Grid>
-    </div>
-  );
+class Home extends React.Component<Props, *> {
+  renderArticles = () => {
+    const { articles } = this.props;
+    return articles.map(article => <ArticleCard key={article.id} {...article} />);
+  };
+  render() {
+    const { isLoading } = this.props;
+    return (
+      <div>
+        <Helmet title="Home" />
+        <HomeHero bgsrc="http://i.magaimg.net/img/1f5w.jpg">
+          <CoverShadow />
+          <Heading type="h1" text={HomeText} isLight />
+        </HomeHero>
+        <Container>{isLoading ? <Loader /> : this.renderArticles()}</Container>
+      </div>
+    );
+  }
 }
 
 export default Home;

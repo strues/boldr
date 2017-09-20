@@ -3,12 +3,22 @@ import hpp from 'hpp';
 import uuid from 'uuid';
 import cors from 'cors';
 
-export default function initSecurity(app) {
+export default function initSecurity(app, { enableNonce = false, enableCSP = false }) {
   app.set('trust proxy', true);
 
   // Don't expose any software information to hackers.
   app.disable('x-powered-by');
+  if (enableNonce) {
+    /* eslint-disable max-params */
 
+    // Attach a unique "nonce" to every response. This allows use to declare
+    // inline scripts as being safe for execution against our content security policy.
+    // @see https://helmetjs.github.io/docs/csp/
+    server.use((request, response, next) => {
+      response.locals.nonce = uuid.v4();
+      next();
+    });
+  }
   // enable CORS - Cross Origin Resource Sharing
   // allow for sending credentials (auth token) in the headers.
   app.use(
@@ -40,47 +50,47 @@ export default function initSecurity(app) {
   // The CSP configuration is an optional item for helmet, however you should
   // not remove it without making a serious consideration that you do not require
   // the added security.
-  // const cspConfig = enableCSP
-  //   ? {
-  //       directives: {
-  //         defaultSrc: ["'self'"],
+  const cspConfig = enableCSP
+    ? {
+        directives: {
+          defaultSrc: ["'self'"],
 
-  //         scriptSrc: [
-  //           // Allow scripts hosted from our application.
-  //           "'self'",
+          scriptSrc: [
+            //           // Allow scripts hosted from our application.
+            "'self'",
 
-  //           // Note: We will execution of any inline scripts that have the following
-  //           // nonce identifier attached to them.
-  //           // This is useful for guarding your application whilst allowing an inline
-  //           // script to do data store rehydration (redux/mobx/apollo) for example.
-  //           // @see https://helmetjs.github.io/docs/csp/
-  //           (request, response) => `'nonce-${response.locals.nonce}'`,
+            //           // Note: We will execution of any inline scripts that have the following
+            //           // nonce identifier attached to them.
+            //           // This is useful for guarding your application whilst allowing an inline
+            //           // script to do data store rehydration (redux/mobx/apollo) for example.
+            //           // @see https://helmetjs.github.io/docs/csp/
+            (request, response) => `'nonce-${response.locals.nonce}'`,
 
-  //           // Required for eval-source-maps (devtool in webpack)
-  //           process.env.NODE_ENV === 'development' ? "'unsafe-eval'" : '',
-  //         ].filter(value => value !== ''),
+            //           // Required for eval-source-maps (devtool in webpack)
+            process.env.NODE_ENV === 'development' ? "'unsafe-eval'" : '',
+          ].filter(value => value !== ''),
 
-  //         styleSrc: ["'self'", "'unsafe-inline'", 'blob:'],
-  //         imgSrc: ["'self'", 'data:'],
-  //         fontSrc: ["'self'", 'data:'],
+          styleSrc: ["'self'", "'unsafe-inline'", 'blob:'],
+          imgSrc: ["'self'", 'data:'],
+          fontSrc: ["'self'", 'data:'],
 
-  //         // Note: Setting this to stricter than * breaks the service worker. :(
-  //         // I can't figure out how to get around this, so if you know of a safer
-  //         // implementation that is kinder to service workers please let me know.
-  //         // ["'self'", 'ws:'],
-  //         connectSrc: ['*'],
+          //         // Note: Setting this to stricter than * breaks the service worker. :(
+          //         // I can't figure out how to get around this, so if you know of a safer
+          //         // implementation that is kinder to service workers please let me know.
+          //         // ["'self'", 'ws:'],
+          connectSrc: ['*'],
 
-  //         // objectSrc: [ "'none'" ],
-  //         // mediaSrc: [ "'none'" ],
+          //         // objectSrc: [ "'none'" ],
+          //         // mediaSrc: [ "'none'" ],
 
-  //         childSrc: ["'self'"],
-  //       },
-  //     }
-  //   : null;
+          childSrc: ["'self'"],
+        },
+      }
+    : null;
 
-  // if (enableCSP) {
-  //   app.use(helmet.contentSecurityPolicy(cspConfig));
-  // }
+  if (enableCSP) {
+    app.use(helmet.contentSecurityPolicy(cspConfig));
+  }
 
   // // The xssFilter middleware sets the X-XSS-Protection header to prevent
   // // reflected XSS attacks.

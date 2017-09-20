@@ -8,16 +8,23 @@ const defaultStatic = {
   public: '/static/',
   path: 'build/client',
 };
+const defaultLocale = {
+  default: 'en-US',
+  supported: ['en-US'],
+};
 
 export default function createBackend({
   staticConfig = defaultStatic,
+  localeConfig = defaultLocale,
   afterSecurity = [],
-  beforeFallback = [],
+  preErrorHandler = [],
+  enableCSP = false,
+  enableNonce = false,
 }) {
   // Create app instance of express
   const app = express();
 
-  initSecurity(app);
+  initSecurity(app, { enableCSP, enableNonce });
 
   // Allow for some early additions for middleware
   if (afterSecurity.length > 0) {
@@ -30,15 +37,15 @@ export default function createBackend({
     });
   }
 
-  initCore(app);
+  initCore(app, { locale: localeConfig });
   // Configure static serving of our webpack bundled client files.
   if (staticConfig) {
     app.use(staticConfig.public, express.static(staticConfig.path));
   }
 
   // Allow for some late additions for middleware
-  if (beforeFallback.length > 0) {
-    beforeFallback.forEach(middleware => {
+  if (preErrorHandler.length > 0) {
+    preErrorHandler.forEach(middleware => {
       if (middleware instanceof Array) {
         app.use(...middleware);
       } else {

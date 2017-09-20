@@ -3,7 +3,7 @@ import fs from 'fs-extra';
 import formidable from 'formidable';
 import objectPath from 'object-path';
 
-export function processRequest(request, { uploadDir } = {}) {
+export function processRequest(req, { uploadDir } = {}) {
   // Ensure provided upload directory exists
   if (uploadDir) {
     fs.ensureDirSync(uploadDir);
@@ -16,7 +16,7 @@ export function processRequest(request, { uploadDir } = {}) {
 
   // Parse the multipart form request
   return new Promise((resolve, reject) => {
-    form.parse(request, (error, { operations }, files) => {
+    form.parse(req, (error, { operations }, files) => {
       if (error) {
         return reject(new Error(error));
       }
@@ -44,12 +44,12 @@ export function processRequest(request, { uploadDir } = {}) {
 }
 
 export default function apolloUpload(options) {
-  return (request, response, next) => {
+  return (req, response, next) => {
     // Skip if there are no uploads
     if (!request.is('multipart/form-data')) {
       return next();
     }
-    processRequest(request, options).then(body => {
+    processRequest(req, options).then(body => {
       request.body = body;
       // eslint-disable-next-line
       next();

@@ -2,7 +2,7 @@
 import { resolve as pathResolve } from 'path';
 import express from 'express';
 import appRoot from '@boldr/utils/lib/node/appRoot';
-
+import config from '@boldr/config';
 import {
   initAuth,
   initGraphql,
@@ -17,7 +17,10 @@ import routes from './routes';
 const app = express();
 // initErrorHandler(app);
 // cors, hpp, helmet
-initSecurity(app, { enableNonce: true, enableCSP: false });
+initSecurity(app, {
+  enableNonce: config.get('server.enableNonce'),
+  enableCSP: config.get('server.enableCSP'),
+});
 // Base Express middleware - body-parser, method-override
 initCore(app);
 // Session middleware, authentication check, rbac

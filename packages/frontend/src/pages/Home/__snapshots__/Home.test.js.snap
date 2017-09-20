@@ -7,69 +7,27 @@ exports[`<Home /> renders snapshot 1`] = `
     encodeSpecialCharacters={true}
     title="Home"
   />
-  <styled.div>
+  <styled.div
+    bgsrc="http://i.magaimg.net/img/1f5w.jpg"
+  >
+    <styled.div />
     <Heading
       isLight={true}
       text="Meet Boldr."
       type="h1"
     />
   </styled.div>
-  <Grid
-    componentClass="div"
-    fluid={false}
-  >
-    <Row
-      componentClass="div"
-    >
-      <Col
-        componentClass="div"
-        md={4}
-        xs={12}
-      >
-        <Heading
-          text="Placeholder 1"
-          type="h2"
-        />
-        <Paragraph
-          isLead={false}
-          isLight={false}
-        >
-          This proposal introduces an Observable type to the ECMAScript standard library. The Observable type can be used to model push-based data sources such as DOM events, timer intervals, and sockets.
-        </Paragraph>
-      </Col>
-      <Col
-        componentClass="div"
-        md={4}
-        xs={12}
-      >
-        <Heading
-          text="Placeholder 2"
-          type="h2"
-        />
-        <Paragraph
-          isLead={false}
-          isLight={false}
-        >
-          The iterator interface (introduced in ECMAScript 2015) is a sequential data access protocol which enables the development of generic and composable data consumers and transformers. Their primary interface is a next() method which returns a value, done tuple, where done is a boolean indicating whether the end of the iterator has been reached, and value is the yielded value in the sequence.
-        </Paragraph>
-      </Col>
-      <Col
-        componentClass="div"
-        md={4}
-        xs={12}
-      >
-        <Heading
-          text="Placeholder 3"
-          type="h2"
-        />
-        <Paragraph
-          isLead={false}
-          isLight={false}
-        >
-          In ECMAScript, a realm consists of a global object and an associated set of primordial objects -- mutable objects like Array.prototype that must exist before any code runs. Objects within a realm implicitly share these primordials and can therefore easily disrupt each other by primordial poisoning -- modifying these objects to behave badly. This disruption may happen accidentally or maliciously. Today, in the browser, realms can be created via same origin iframes.
-        </Paragraph>
-      </Col>
-    </Row>
-  </Grid>
+  <styled.div>
+    <ArticleCard
+      id={1}
+      key="1"
+      title="test"
+    />
+    <ArticleCard
+      id={2}
+      key="2"
+      title="Testing"
+    />
+  </styled.div>
 </div>
 `;

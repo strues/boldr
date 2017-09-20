@@ -1,1 +1,0 @@
-# Boldr Project Example

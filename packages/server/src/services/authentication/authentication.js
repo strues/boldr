@@ -1,7 +1,9 @@
 import jwt from 'jsonwebtoken';
+import _debug from 'debug';
 import config from '@boldr/config';
 import Account from '../../models/Account';
 
+const debug = _debug('boldr:server:service:authentication');
 /**
  * Extracts a JWT from a request header or query string
  * @param  {Object} req the request object
@@ -17,24 +19,23 @@ function fromHeaderOrQuerystring(req) {
 }
 
 export default async (req, res, next) => {
-  req.isAuthenticated = async () => {
+  req.isAuthenticated = () => {
     const token = fromHeaderOrQuerystring(req);
-    if (!token) {
-      return false;
-    }
     try {
-      await jwt.verify(token, config.get('token.secret'));
-      return true;
+      return jwt.verify(token, config.get('token.secret'));
+      // eslint-disable-next-line no-unused-vars
     } catch (err) {
       return false;
     }
   };
   if (req.isAuthenticated()) {
+    debug('req.isAuthenticated');
     const payload = req.isAuthenticated();
     const account = await Account.query()
       .findById(payload.subject)
       .eager('[roles,profile]')
       .skipUndefined();
+
     req.session.user = account;
     req.user = account;
     req.user.role = account.roles[0].name;

@@ -94,7 +94,8 @@ const articleResolvers = {
         categoryId: args.input.categoryId,
       });
       args.input.tags.map(async tag => {
-        const existingTag = await Tag.query()
+        const existingTag = await ctx.models.Tag
+          .query()
           .where('name', tag)
           .first();
         if (existingTag) {

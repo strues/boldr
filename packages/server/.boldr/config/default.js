@@ -5,7 +5,10 @@ module.exports = {
     protocol: 'http',
     host: '0.0.0.0',
     prefix: '/api/v1',
-    uploadDir: 'public/uploads/tmp'
+    uploadDir: 'public/uploads/tmp',
+    enableNonce: false,
+    enableCSP: false,
+
   },
   logging: {
     level: 'debug',

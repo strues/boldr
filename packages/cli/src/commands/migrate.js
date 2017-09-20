@@ -6,13 +6,12 @@ import logger from '@boldr/utils/lib/logger';
 import appRoot from '@boldr/utils/lib/node/appRoot';
 
 async function task(args, options) {
-  logger.task('Cleaning up');
-
+  logger.task('Creating a new migration');
   const rootDir = appRoot.get();
   fs.ensureDirSync('.boldr/db/migrations');
   const knexConfig = {
     client: 'pg',
-    connection: options.url || config.get('db.url'),
+    connection: options.dburl || config.get('db.url'),
     migrations: {
       tableName: 'migrations',
       directory: path.resolve(rootDir, '.boldr/db/migrations'),
@@ -30,7 +29,7 @@ function register(program) {
   program
     .command('migrate', 'Run Knex database migration.')
     .help('Database connection url is set in the config file or passed with -u.')
-    .option('-u, --url [url]', 'Postgres connection string url.')
+    .option('-u, --url <dburl>', 'Postgres connection string url.')
     .action(task);
 }
 

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars, camelcase */
 import uuid from 'uuid';
 import addDays from 'date-fns/add_days';
-import { mailer, generateHash } from '../../services';
+import { mailer } from '../../services';
 import { passwordModifiedEmail, forgotPasswordEmail } from '../../services/mailer/templates';
 import Account from '../../models/Account';
 

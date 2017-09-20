@@ -44,14 +44,8 @@ const Problematic = new Set([
   // "intl" is included in one block with complete data. No reason for bundle everything here.
   'intl',
 
-  // "react-intl" for the same reason as "intl" - contains a ton of locale data
-  'react-intl',
-
   // "mime-db" database for working with mime types. Naturally pretty large stuff.
   'mime-db',
-
-  // "helmet" uses some look with require which are not solvable with webpack
-  'helmet',
 
   // "express" also uses some dynamic requires
   'express',

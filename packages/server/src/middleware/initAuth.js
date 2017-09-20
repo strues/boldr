@@ -25,6 +25,7 @@ const sessionOptions = {
   },
   store: new (connectRedis(session))({ client: createClient() }),
 };
+
 if (env === 'production') {
   // Enable the secure cookie when we are in production mode.
   sessionOptions.cookie.secure = true;

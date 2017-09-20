@@ -22,6 +22,8 @@ query getArticleBySlug($slug: String!) {
       profile {
         username
         avatarUrl
+        firstName
+        lastName
         bio
         socialMedia {
           facebookUrl

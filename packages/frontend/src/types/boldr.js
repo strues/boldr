@@ -23,7 +23,7 @@ export type UUID = string;
 export type Params = { [string]: string | number };
 
 export type RouterLocation = {
-  pathname?: string,
+  pathname: string,
   search?: string,
   hash?: string,
   state?: any,

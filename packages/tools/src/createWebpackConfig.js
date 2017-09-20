@@ -469,9 +469,11 @@ export default function createWebpackConfig(
             manifest: require(path.resolve(CLIENT_OUTPUT, 'boldrDLLs.json')),
           })
         : null,
-      new ProgressPlugin({
-        prefix: PREFIX,
-      }),
+      process.stdout.isTTY
+        ? new ProgressPlugin({
+            prefix: PREFIX,
+          })
+        : null,
       _IS_CLIENT_ && _IS_PROD_
         ? new BundleAnalyzerPlugin.BundleAnalyzerPlugin({
             analyzerMode: 'static',

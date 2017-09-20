@@ -43,7 +43,7 @@
   "dependencies": {
     "@boldr/config": "^0.1.0",
     "@boldr/tools": "^0.1.0-beta.2",
-    "@boldr/utils": "^0.1.0-rc.5",
+    "@boldr/utils": "^0.1.0",
     "caporal": "^0.7.0",
     "update-notifier": "^2.2.0",
     "knex": "^0.13.0",

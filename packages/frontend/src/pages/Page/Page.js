@@ -1,26 +1,21 @@
+/* eslint-disable import/max-dependencies */
 /* @flow */
 import React from 'react';
 import type { Node } from 'react';
 import { connect } from 'react-redux';
-import { Route, Switch } from 'react-router-dom';
 import { graphql } from 'react-apollo';
 import { createStructuredSelector } from 'reselect';
 import Loader from '@boldr/ui/Loader';
-// internal
-import Profile from '../../scenes/Profile';
-import LoginContainer from '../../scenes/Account/Login';
-import SignupContainer from '../../scenes/Account/Signup';
-import AccountContainer from '../../scenes/Account';
-import BlogContainer from '../../scenes/Blog';
+
 import { logout } from '../../scenes/Account/state/actions';
+
 import { selectCurrentUser, selectToken } from '../../scenes/Account/state/selectors';
-import Home from '../Home';
-import About from '../About';
 import type { CurrentUser, RouterLocation } from '../../types/boldr';
 import PageLayout from './components/PageLayout';
 // graphql
 
 import MENU_QUERY from './gql/getMenu.graphql';
+import Routes from './Routes';
 
 export type Props = {
   location: RouterLocation,
@@ -41,24 +36,14 @@ export class Page extends React.Component<Props, *> {
       return <Loader />;
     } else {
       return (
-        <div>
-          <PageLayout
-            location={location}
-            onClickLogout={this.handleLogoutClick}
-            token={token}
-            currentUser={currentUser}
-            menu={getMenuById}>
-            <Switch>
-              <Route path="/login" component={LoginContainer} />
-              <Route path="/signup" component={SignupContainer} />
-              <Route path="/account" component={AccountContainer} />
-              <Route path="/profiles/:username" exact component={Profile} />
-              <Route path="/blog" component={BlogContainer} />
-              <Route path="/about" exact component={About} />
-              <Route path="/" exact component={Home} />
-            </Switch>
-          </PageLayout>
-        </div>
+        <PageLayout
+          location={location}
+          onClickLogout={this.handleLogoutClick}
+          token={token}
+          currentUser={currentUser}
+          menu={getMenuById}>
+          <Routes />
+        </PageLayout>
       );
     }
   }

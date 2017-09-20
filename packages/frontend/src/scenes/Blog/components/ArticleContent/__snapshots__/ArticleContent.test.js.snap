@@ -8,7 +8,14 @@ exports[`<ArticleContent /> renders snapshot 1`] = `
     noPadding={false}
     zDepth={2}
   >
-    <ArticleDate />
+    <Component
+      align="center"
+      justify="space-between"
+    >
+      <ArticleDate />
+       
+      <TagBlock />
+    </Component>
     <Divider />
     <DynamicContent
       className="boldr-article__content"

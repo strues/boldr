@@ -1,21 +1,42 @@
+/* eslint-disable no-unused-vars */
 /* @flow */
 import React from 'react';
+import type { Node } from 'react';
+import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import Route from 'react-router-dom/Route';
-import Switch from 'react-router-dom/Switch';
-
+import withRouter from 'react-router-dom/withRouter';
+import { makeSelectIsAuthenticated } from '../../scenes/Account/state/selectors';
+import AdminLanding from '../../scenes/Admin/DashboardLanding';
 // internal
 import '../../styles/main.scss';
 // Start routes
 import Page from '../../pages/Page/Page';
-import Error404 from '../../pages/Error404';
 import AdminDashboard from '../../scenes/Admin';
+import type { RouterLocation } from '../../types/boldr';
 import boldrNotificationsFactory, { Notif } from '../Notifications';
 import ProtectedRoute from '../ProtectedRoute';
 
+type SwitcherProps = {
+  children: Node,
+  location: RouterLocation,
+};
+const ContainerSwitcherRoute = ({ children, location, ...rest }: SwitcherProps) => {
+  return location.pathname.includes('/admin') ? (
+    <AdminDashboard>{children}</AdminDashboard>
+  ) : (
+    <div>{children}</div>
+  );
+};
+const isAuthSelector = makeSelectIsAuthenticated();
+const AdminRoute = withRouter(
+  connect(state => ({ isAuthenticated: isAuthSelector(state) }))(ProtectedRoute),
+);
+const ContainerSwitcher = withRouter(ContainerSwitcherRoute);
 const NotificationContainer = boldrNotificationsFactory(Notif);
 
-function App() {
+type Props = {};
+function App(props: Props) {
   return (
     <div className="boldr">
       <Helmet
@@ -39,11 +60,10 @@ function App() {
         <meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png" />
       </Helmet>
 
-      <Switch>
-        <ProtectedRoute path="/admin" component={AdminDashboard} />
+      <ContainerSwitcher>
+        <AdminRoute exact path="/admin" component={AdminLanding} />
         <Route path="/" component={Page} />
-        <Route component={Error404} />
-      </Switch>
+      </ContainerSwitcher>
       <NotificationContainer />
     </div>
   );

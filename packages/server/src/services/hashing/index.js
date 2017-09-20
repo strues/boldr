@@ -1,1 +1,0 @@
-export { generateHash } from './hashing';

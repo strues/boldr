@@ -1,14 +1,18 @@
 /* @flow */
 import React from 'react';
 import classnames from 'classnames';
-import { StyleClasses, Paper, Divider } from '@boldr/ui';
+import { StyleClasses, Paper, Divider, Heading } from '@boldr/ui';
+import Flex from '../../../../components/Flex';
+import type { TagsType } from '../../../../types/boldr';
 import DynamicContent from '../../../../components/DynamicContent';
 import ArticleDate from '../ArticleDate';
+import TagBlock from '../TagBlock';
 
 export type Props = {
   content: string,
   createdAt: Date,
   className?: string,
+  tags: TagsType,
 };
 
 const BASE_ELEMENT = StyleClasses.ARTICLE_CONTENT;
@@ -23,7 +27,10 @@ const ArticleContent = (props: Props) => {
   return (
     <article>
       <Paper zDepth={2}>
-        <ArticleDate created={props.createdAt} />
+        <Flex align="center" justify="space-between">
+          <ArticleDate created={props.createdAt} /> <TagBlock tags={props.tags} />
+        </Flex>
+
         <Divider />
         <DynamicContent className={classes} dangerouslySetInnerHTML={createMarkup()} />
       </Paper>

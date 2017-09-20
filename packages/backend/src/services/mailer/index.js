@@ -1,1 +1,1 @@
-export { default } from './mailer';
+export { default as mailer, transporter } from './mailer';

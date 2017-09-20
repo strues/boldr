@@ -6,12 +6,12 @@ import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackHotServerMiddleware from 'webpack-hot-server-middleware';
-import { createBackend } from '@boldr/backend';
+import { createBackend, normalizePort } from '@boldr/backend';
 import createWebpackConfig from '../createWebpackConfig';
 import buildWebpackDlls from './buildWebpackDlls';
 
 const DEV_PORT = process.env.DEV_PORT;
-const PORT = parseInt(DEV_PORT, 10);
+const PORT = normalizePort(DEV_PORT);
 
 const ROOT = appRoot.get();
 const CLIENT_OUTPUT = resolve(ROOT, process.env.CLIENT_OUTPUT);
@@ -62,7 +62,7 @@ export async function startDevServer() {
     },
     localeConfig: locale,
     afterSecurity: [],
-    beforeFallback: [devMiddleware, hotMiddleware, hotServerMiddleware],
+    preErrorHandler: [devMiddleware, hotMiddleware, hotServerMiddleware],
   });
 
   let serverIsStarted = false;
