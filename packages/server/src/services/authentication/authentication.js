@@ -29,8 +29,8 @@ export default async (req, res, next) => {
     }
   };
   if (req.isAuthenticated()) {
-    debug('req.isAuthenticated');
     const payload = req.isAuthenticated();
+    debug('req.isAuthenticated()', payload);
     const account = await Account.query()
       .findById(payload.subject)
       .eager('[roles,profile]')

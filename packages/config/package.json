@@ -27,6 +27,5 @@
     "lodash.get": "^4.4.2",
     "lodash.has": "^4.5.2",
     "lodash.merge": "^4.6.0"
-  },
-  "devDependencies": {}
+  }
 }

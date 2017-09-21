@@ -3,17 +3,18 @@ import fs from 'fs-extra';
 import webpack from 'webpack';
 import md5 from 'md5';
 import Promise from 'bluebird';
+import config from '@boldr/config';
 import logger from '@boldr/utils/lib/logger';
 
 export default function buildWebpackDlls() {
   logger.start('Building Webpack vendor DLLs');
   const pkg = JSON.parse(fs.readFileSync(`${process.cwd()}/package.json`, 'utf8'));
   const ROOT = process.cwd();
-  const vendors = path.resolve(ROOT, process.env.CLIENT_VENDOR);
-  const dllConfig = require(vendors);
-  const CLIENT_OUTPUT = path.resolve(ROOT, process.env.CLIENT_OUTPUT);
+  const vendors = config.get('tools.vendor');
 
-  const devDLLDependencies = dllConfig.sort();
+  const CLIENT_OUTPUT = path.resolve(ROOT, config.get('tools.paths.output.client'));
+
+  const devDLLDependencies = vendors.sort();
 
   // We calculate a hash of the package.json's dependencies, which we can use
   // to determine if dependencies have changed since the last time we built

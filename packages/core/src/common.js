@@ -21,3 +21,5 @@ export {
 } from './shared/state/boldr/notifications/actions';
 
 export { default as createHistory } from './shared/history';
+
+export { boldrReducer } from './shared/state/boldr';

@@ -31,6 +31,7 @@ const ContainerSwitcherRoute = ({ children, location, ...rest }: SwitcherProps) 
 };
 const isAuthSelector = makeSelectIsAuthenticated();
 const AdminRoute = withRouter(
+  // $FlowIssue
   connect(state => ({ isAuthenticated: isAuthSelector(state) }))(ProtectedRoute),
 );
 const ContainerSwitcher = withRouter(ContainerSwitcherRoute);

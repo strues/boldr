@@ -28,12 +28,12 @@
     "test": "NODE_ENV=test jest --config jest.config.json"
   },
   "dependencies": {
-    "@boldr/core": "0.1.0-beta.2",
+    "@boldr/core": "0.1.0-beta.3",
     "@boldr/config": "^0.1.0",
     "@boldr/icons": "0.1.0-rc.2",
-    "@boldr/tools": "^0.1.0-beta.2",
+    "@boldr/tools": "^0.1.0-beta.3",
     "@boldr/ui": "0.1.7",
-    "@boldr/utils": "^0.1.0",
+    "@boldr/utils": "0.1.0",
     "date-fns": "^1.28.5",
     "draft-convert": "^2.0.0",
     "draft-js": "^0.10.2",
@@ -60,7 +60,7 @@
     "webpack-flush-chunks": "^1.1.23"
   },
   "devDependencies": {
-    "@boldr/cli": "0.2.0-beta.1",
+    "@boldr/cli": "0.2.0-beta.2",
     "autoprefixer": "^7.1.4",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.0",

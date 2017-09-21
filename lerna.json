@@ -2,6 +2,7 @@
   "lerna": "2.2.0",
   "version": "independent",
   "independent": true,
+  "npmClient": "yarn",
   "packages": [
     "packages/backend",
     "packages/cli",

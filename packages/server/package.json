@@ -40,7 +40,7 @@
   "dependencies": {
     "@boldr/backend": "^0.1.0-alpha.1",
     "@boldr/config": "^0.1.0",
-    "@boldr/utils": "^0.1.0",
+    "@boldr/utils": "0.1.0",
     "bcryptjs": "^2.4.3",
     "bluebird": "^3.5.0",
     "body-parser": "^1.18.1",
@@ -89,8 +89,6 @@
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.0",
-    "eslint": "^4.7.1",
-    "eslint-config-boldr": "^0.13.0",
     "fast-async": "^6.3.0",
     "mockdate": "^2.0.2",
     "nodemon": "^1.12.1",

@@ -1,6 +1,7 @@
-/* eslint-disable camelcase, eqeqeq, prefer-destructuring, max-lines, max-statements */
+/* eslint-disable camelcase, eqeqeq, prefer-destructuring, max-lines, max-statements, complexity*/
 // @flow weak
 import path from 'path';
+import fs from 'fs';
 import webpack from 'webpack';
 import WriteFilePlugin from 'write-file-webpack-plugin';
 import ExtractCssChunks from 'extract-css-chunks-webpack-plugin';
@@ -13,9 +14,10 @@ import CircularDependencyPlugin from 'circular-dependency-plugin';
 import { getHashDigest } from 'loader-utils';
 import appRoot from '@boldr/utils/lib/node/appRoot';
 import logger from '@boldr/utils/lib/logger';
+import config from '@boldr/config';
 import dotenv from 'dotenv';
 import { StatsPlugin, happyPackPlugin, ProgressPlugin, WebpackDigestHash } from './plugins';
-import getNodeExternals from './util/getNodeExternals';
+
 import rootModuleRelativePath from './util/rootModuleRelativePath';
 
 import {
@@ -55,18 +57,17 @@ const defaults = {
 };
 
 const ROOT = appRoot.get();
-const SERVER_ENTRY = path.resolve(ROOT, 'src/serverEntry.js');
-const CLIENT_ENTRY = path.resolve(ROOT, 'src/clientEntry.js');
-const CLIENT_VENDOR = path.resolve(ROOT, 'src/vendor.js');
+const SERVER_ENTRY = path.resolve(ROOT, config.get('tools.paths.entry.server'));
+const CLIENT_ENTRY = path.resolve(ROOT, config.get('tools.paths.entry.client'));
+const CLIENT_VENDOR = path.resolve(ROOT, config.get('tools.paths.vendor'));
 const PROJECT_SRC = path.resolve(ROOT, 'src');
-const SERVER_OUTPUT = path.resolve(ROOT, 'build/server');
-const CLIENT_OUTPUT = path.resolve(ROOT, 'build/client');
-const PUBLIC_PATH = '/static/';
+const SERVER_OUTPUT = path.resolve(ROOT, config.get('tools.paths.output.server'));
+const CLIENT_OUTPUT = path.resolve(ROOT, config.get('tools.paths.output.client'));
+const PUBLIC_PATH = config.get('tools.paths.publicPath');
 
 const GRAPHQL_ENDPOINT = process.env.GRAPHQL_ENDPOINT;
 const API_URL = process.env.API_URL;
 const API_PREFIX = process.env.API_PREFIX;
-const useLightNodeBundle = false;
 
 const SRC_DIR = path.resolve(ROOT, 'src');
 
@@ -190,6 +191,15 @@ export default function createWebpackConfig(
     'webpack-hot-middleware/client',
   )}?path=/__webpack_hmr&timeout=20000&reload=true&quiet=false&noInfo=true&overlay=false`;
 
+  const externals = fs
+    .readdirSync(path.resolve(ROOT, 'node_modules'))
+    .filter(x => !/\.bin|react-universal-component|webpack-flush-chunks/.test(x))
+    .reduce((externals, mod) => {
+      externals[mod] = `commonjs ${mod}`;
+      return externals;
+    }, {});
+
+  externals['react-dom/server'] = 'commonjs react-dom/server';
   const getClientEntry = () => {
     // For development
     let entry = [require.resolve('react-hot-loader/patch'), HMR_MIDDLEWARE, CLIENT_ENTRY];
@@ -203,7 +213,7 @@ export default function createWebpackConfig(
     return entry;
   };
   const getServerEntry = () => {
-    const entry = [SERVER_ENTRY];
+    const entry = { server: [SERVER_ENTRY] };
     return entry;
   };
 
@@ -214,7 +224,7 @@ export default function createWebpackConfig(
     devtool,
     context: ROOT,
     bail: !_IS_DEV_,
-    externals: _IS_SERVER_ ? getNodeExternals(useLightNodeBundle) : undefined,
+    externals: _IS_SERVER_ ? externals : undefined,
     node: _IS_CLIENT_
       ? {
           console: true,
@@ -449,7 +459,7 @@ export default function createWebpackConfig(
       // Extract Webpack bootstrap code with knowledge about chunks into separate cachable package.
       _IS_CLIENT_
         ? new webpack.optimize.CommonsChunkPlugin({
-            names: ['bootstrap'],
+            names: _IS_DEV_ ? ['bootstrap'] : ['vendor', 'bootstrap'],
             //   // needed to put webpack bootstrap code before chunks
             filename: _IS_PROD_ ? '[name]-[chunkhash].js' : '[name].js',
             minChunks: Infinity,

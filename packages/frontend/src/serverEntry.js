@@ -1,3 +1,4 @@
+import path from 'path';
 import React from 'react';
 import StaticRouter from 'react-router-dom/StaticRouter';
 import { renderToStringWithData } from 'react-apollo';
@@ -48,11 +49,17 @@ export default ({ clientStats, outputPath }) =>
       res.redirect(routerContext.url);
       return;
     }
+    console.log('[BOLDR] Flushing chunks...');
+    const chunkNames = flushChunkNames();
 
+    console.log('[BOLDR] Rendered Chunk Names:', chunkNames.join(', '));
     const { js, styles, cssHash } = flushChunks(clientStats, {
-      chunkNames: flushChunkNames(),
-      outputPath,
+      chunkNames,
+      outputPath: outputPath,
     });
+
+    console.log(`[BOLDR] Flushed Script Tags:\n${js.toString()}\n`);
+    console.log(`[BOLDR] Flushed CSS Tags:\n${styles.toString()}\n`);
 
     const preloadedState = {
       ...reduxStore.getState(),

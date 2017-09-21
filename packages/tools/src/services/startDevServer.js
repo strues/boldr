@@ -49,6 +49,7 @@ export async function startDevServer() {
 
   // keeps serverRender updated with arg: { clientStats, outputPath }
   const hotServerMiddleware = webpackHotServerMiddleware(multiCompiler, {
+    chunkName: 'server',
     serverRendererOptions: {
       outputPath: CLIENT_OUTPUT,
     },

@@ -1,14 +1,10 @@
 {
   "name": "@boldr/tools",
-  "version": "0.1.0-beta.2",
+  "version": "0.1.0-beta.3",
   "description": "Webpack build tools and basic CLI for dev and building universal react applications",
-  "bin": {
-    "btools": "bin/btools"
-  },
   "main": "lib/btools.commonjs.js",
   "module": "lib/btools.esmodules.js",
   "files": [
-    "bin",
     "lib"
   ],
   "keywords": [
@@ -38,7 +34,7 @@
   "dependencies": {
     "@boldr/backend": "^0.1.0-alpha.1",
     "@boldr/config": "^0.1.0",
-    "@boldr/utils": "^0.1.0",
+    "@boldr/utils": "0.1.0",
     "autoprefixer": "^7.1.4",
     "babel-loader": "^7.1.2",
     "babel-minify-webpack-plugin": "^0.2.0",
@@ -47,7 +43,7 @@
     "cache-loader": "^1.0.3",
     "case-sensitive-paths-webpack-plugin": "^2.1.1",
     "chalk": "^2.1.0",
-    "circular-dependency-plugin": "^4.2.0",
+    "circular-dependency-plugin": "^4.2.1",
     "css-loader": "^0.28.7",
     "dotenv": "^4.0.0",
     "extract-css-chunks-webpack-plugin": "^2.0.17",
@@ -81,8 +77,6 @@
     "write-file-webpack-plugin": "^4.1.0"
   },
   "devDependencies": {
-    "eslint": "^4.7.1",
-    "eslint-config-boldr": "^0.13.0",
     "prepublish": "^1.4.2",
     "prettier": "^1.7.0",
     "rimraf": "^2.6.2"

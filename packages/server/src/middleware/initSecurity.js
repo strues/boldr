@@ -2,8 +2,19 @@ import helmet from 'helmet';
 import hpp from 'hpp';
 import uuid from 'uuid';
 import cors from 'cors';
+import ms from 'ms';
 
-export default function initSecurity(app, { enableNonce = true, enableCSP = false }) {
+/**
+ * Initialize security middleware
+ *
+ * @export
+ * @param {any} app
+ * @param {any} { enableNonce = true, enableCSP = false, hstsMA = '90 days' }
+ */
+export default function initSecurity(
+  app,
+  { enableNonce = true, enableCSP = false, hstsMA = '90 days' },
+) {
   if (enableNonce) {
     /* eslint-disable max-params */
 
@@ -107,7 +118,27 @@ export default function initSecurity(app, { enableNonce = true, enableCSP = fals
   // downloads in your site’s context.
   // @see https://helmetjs.github.io/docs/ienoopen/
   app.use(helmet.ieNoOpen());
-
+  // Strict-Transport-Security: https://github.com/helmetjs/hsts
+  app.use(
+    helmet.hsts({
+      maxAge: ms(hstsMA) / 1000,
+      includeSubdomains: true,
+      preload: true,
+    }),
+  );
+  // Public-Key-Pins: https://github.com/helmetjs/hpkp
+  app.use(
+    helmet.hpkp({
+      maxAge: ms(hstsMA) / 1000,
+      sha256s: [
+        'ENbaVbZki8BGBCq0jIUE8SJqvBnWf6CL8hkf4GYsg0A=',
+        'E+nXO/0USWdc+uY6Q9iK9lfS99qFMgwk30N4vRV2XHI=',
+      ],
+      includeSubdomains: true,
+      reportUri: 'https://report-uri.io/report/expresssecuritytest',
+      reportOnly: false,
+    }),
+  );
   // Don’t Sniff Mimetype middleware, noSniff, helps prevent browsers from trying
   // to guess (“sniff”) the MIME type, which can have security implications. It
   // does this by setting the X-Content-Type-Options header to nosniff.

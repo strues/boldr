@@ -25,13 +25,4 @@ export const UGLIFY_OPTIONS = {
   },
 };
 
-export const REQUIRED_ENV_VARS = [
-  'SERVER_OUTPUT',
-  'CLIENT_OUTPUT',
-  'PUBLIC_PATH',
-  'API_PREFIX',
-  'API_URL',
-  'GRAPHQL_ENDPOINT',
-  'HTML_TEMPLATE',
-  'DEV_PORT',
-];
+export const REQUIRED_ENV_VARS = ['API_PREFIX', 'API_URL', 'GRAPHQL_ENDPOINT', 'DEV_PORT'];

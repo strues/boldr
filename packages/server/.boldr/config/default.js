@@ -8,8 +8,8 @@ module.exports = {
     uploadDir: 'public/uploads/tmp',
     enableNonce: false,
     enableCSP: false,
-
   },
+
   logging: {
     level: 'debug',
     file: false,
@@ -48,4 +48,17 @@ module.exports = {
   tools: {
     profile: false,
   },
-}
+  security: {
+    hpkp: {
+      maxAge: '90 days',
+      reportUri: 'https://report-uri.io/report/expresssecuritytest',
+      sha256s: [
+        'ENbaVbZki8BGBCq0jIUE8SJqvBnWf6CL8hkf4GYsg0A=',
+        'E+nXO/0USWdc+uY6Q9iK9lfS99qFMgwk30N4vRV2XHI=',
+      ],
+    },
+    hsts: {
+      maxAge: '90 days',
+    },
+  },
+};

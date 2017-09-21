@@ -14,12 +14,12 @@ pipeline:
   build:
     image: node:8.5.0
     commands:
-      - npm install
-      - ./node_modules/.bin/lerna exec --scope @boldr/utils -- npm run build
-      - ./node_modules/.bin/lerna exec --scope @boldr/core -- npm run build
-      - ./node_modules/.bin/lerna exec --scope @boldr/tools -- npm run build
-      - ./node_modules/.bin/lerna exec --scope @boldr/backend -- npm run build
-      - npm run test
+      - yarn
+      - ./node_modules/.bin/lerna exec --scope @boldr/utils --yarn run build
+      - ./node_modules/.bin/lerna exec --scope @boldr/core -- yarn run build
+      - ./node_modules/.bin/lerna exec --scope @boldr/tools -- yarn run build
+      - ./node_modules/.bin/lerna exec --scope @boldr/backend -- yarn run build
+      - yarn run test
       - ./node_modules/.bin/codecov -t a3dc697a-382d-4d84-a07b-1f5682c3d70a -f coverage/coverage-final.json
 
   rebuild-cache:

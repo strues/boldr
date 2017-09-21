@@ -12,3 +12,5 @@ if (!global.fetch) {
 }
 
 export * from './common';
+export { default as renderHtml } from './server/renderHtml';
+export { default as ssrHandler } from './server/ssrHandler';

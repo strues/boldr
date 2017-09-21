@@ -1,7 +1,10 @@
+import path from 'path';
 import cookieParser from 'cookie-parser';
 import nanoid from 'nanoid';
+import appRoot from '@boldr/utils/lib/node/appRoot';
 import bodyParser from 'body-parser';
 import localeMiddleware from 'express-locale';
+import favicon from 'serve-favicon';
 import config from '@boldr/config';
 
 export default function initCore(app, { locale }) {
@@ -14,6 +17,7 @@ export default function initCore(app, { locale }) {
   app.disable('etag');
   // send json back w/ 2 spaces
   app.set('json spaces', 2);
+  app.use(favicon(path.resolve(appRoot.get(), './public/favicon.ico')));
   app.use(
     localeMiddleware({
       priority: ['query', 'cookie', 'accept-language', 'default'],
