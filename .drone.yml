@@ -15,10 +15,10 @@ pipeline:
     image: node:8.5.0
     commands:
       - yarn
-      - ./node_modules/.bin/lerna exec --scope @boldr/utils --yarn run build
-      - ./node_modules/.bin/lerna exec --scope @boldr/core -- yarn run build
-      - ./node_modules/.bin/lerna exec --scope @boldr/tools -- yarn run build
-      - ./node_modules/.bin/lerna exec --scope @boldr/backend -- yarn run build
+      - ./node_modules/.bin/lerna run --scope @boldr/utils -- build
+      - ./node_modules/.bin/lerna run --scope @boldr/core -- build
+      - ./node_modules/.bin/lerna run --scope @boldr/tools -- build
+      - ./node_modules/.bin/lerna run --scope @boldr/backend -- build
       - yarn run test
       - ./node_modules/.bin/codecov -t a3dc697a-382d-4d84-a07b-1f5682c3d70a -f coverage/coverage-final.json
 
