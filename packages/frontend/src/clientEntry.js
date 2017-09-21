@@ -45,7 +45,6 @@ const apolloClient = createApolloClient({
     Authorization: `Bearer ${token}`,
   },
 });
-
 const history = createHistory();
 // Create the redux store by passing the "main" reducer, preloadedState, the Apollo Client
 // and env. Passing either 'development' or 'production' (env) includes/excludes
