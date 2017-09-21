@@ -12,8 +12,6 @@ import { ConnectedRouter } from 'react-router-redux';
 import { checkAuth } from './scenes/Account/state/actions';
 import App from './components/App';
 import appReducer from './reducers';
-import theme from './theme/theme';
-import ThemeProvider from './theme/ThemeProvider';
 
 const DOM_NODE = document.getElementById('app');
 let preloadedState = {};
@@ -23,8 +21,24 @@ if (window.__APOLLO_STATE__) {
 }
 const token = getToken();
 
+/**
+ * createApolloClient configures an instance of ApolloClient for use in the app.
+ * It accepts a config object.
+ * The values are documented below...
+ *
+ * type config = {
+ *    headers: Object,
+ *    initialState: Object,
+ *    batchRequests: boolean, // false
+ *    trustNetwork: boolean, // true
+ *    queryDeduplication: boolean, // true
+ *    apolloUri: string
+ *    connectToDevTools: boolean // true
+ *    ssrForceFetchDelay: number // 100
+ * }
+ */
 const apolloClient = createApolloClient({
-  batchRequests: false,
+  batchRequests: true,
   initialState: preloadedState,
   apolloUri: process.env.GRAPHQL_ENDPOINT,
   headers: {
@@ -42,11 +56,7 @@ if (token) {
   // Update application state. User has token and is probably authenticated
   reduxStore.dispatch(checkAuth(token));
 }
-const AppComponent = PassedApp => (
-  <ConnectedRouter history={history}>
-    <ThemeProvider theme={theme}>{PassedApp}</ThemeProvider>
-  </ConnectedRouter>
-);
+const AppComponent = PassedApp => <ConnectedRouter history={history}>{PassedApp}</ConnectedRouter>;
 
 if (process.env.NODE_ENV !== 'production') {
   // eslint-disable-next-line import/no-extraneous-dependencies

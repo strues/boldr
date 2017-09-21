@@ -77,7 +77,7 @@ export default ({ clientStats, outputPath }) =>
             <body ${helmet.bodyAttributes.toString()}>
               <div id="app"><div>${app}</div></div>
               <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
-              ${process.env.NODE_ENV === 'development' ? dlls : null}
+              ${process.env.NODE_ENV === 'development' ? dlls : ''}
               ${js}
               ${cssHash}
               <script type="text/javascript">

@@ -1,3 +1,4 @@
+// @flow
 /* eslint-disable no-unused-vars, eqeqeq */
 
 /**
@@ -7,12 +8,22 @@ import { ApolloClient } from 'react-apollo';
 import { createNetworkInterface } from './networkInterface';
 import { createBatchingNetworkInterface } from './batchNetworkInterface';
 
+export type ApolloClientConfig = {
+  headers?: Object,
+  initialState?: Object,
+  batchRequests?: boolean,
+  trustNetwork?: boolean,
+  queryDeduplication?: boolean,
+  apolloUri?: string,
+  connectToDevTools?: boolean,
+  ssrForceFetchDelay?: number,
+};
 /**
  * Bootstrap an ApolloClient
  * @param  {Object} [config={}] configuration values for the ApolloClient
  * @return {function}           function to create the client.
  */
-export default function createApolloClient(config = {}) {
+export default function createApolloClient(config: ApolloClientConfig = {}) {
   const {
     headers,
     initialState = {},
@@ -25,6 +36,7 @@ export default function createApolloClient(config = {}) {
   } = config;
 
   const hasApollo = apolloUri !== null;
+  // $FlowIssue
   const ssrMode = !process.browser;
   let client;
   if (hasApollo) {
@@ -36,9 +48,9 @@ export default function createApolloClient(config = {}) {
       headers,
     };
     if (!ssrMode) {
-      /* istanbul ignore next */
+      /* $FlowIssue istanbul ignore next */
       opts.ssrForceFetchDelay = 100;
-      /* istanbul ignore next */
+      /* $FlowIssue istanbul ignore next */
       opts.connectToDevTools = true;
     }
 

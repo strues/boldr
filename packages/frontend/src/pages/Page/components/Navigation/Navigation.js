@@ -17,11 +17,11 @@ import {
   NavbarMenu,
   NavbarStart,
 } from '@boldr/ui';
-import type { CurrentUser, SettingsType, RouterLocation } from '../../../../types/boldr';
+import type { CurrentUser, SettingsType, RouterLocation, MenuType } from '../../../../types/boldr';
 
 export type Props = {
   location: RouterLocation,
-  menu: Object,
+  menu: MenuType,
   settings?: SettingsType,
   currentUser: CurrentUser,
   onLogout: Function,
@@ -33,7 +33,7 @@ type State = {
   isDropdownOpen: boolean,
 };
 
-export const checkActiveLoc = (location: Object, url: string) => {
+export const checkActiveLoc = (location: RouterLocation, url: string) => {
   return !!location.pathname.includes(url);
 };
 

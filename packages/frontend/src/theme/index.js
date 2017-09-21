@@ -1,4 +1,4 @@
-import theme, { mediaQuery } from './theme';
+import { mediaQuery } from './theme';
 import { StyleClasses, BOLDR_NS } from './styleClasses';
 
-export { theme, mediaQuery, StyleClasses, BOLDR_NS };
+export { mediaQuery, StyleClasses, BOLDR_NS };

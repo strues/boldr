@@ -54,7 +54,7 @@ type Props = {
   error?: Object,
 };
 
-class Home extends React.Component<Props, *> {
+class Home extends React.PureComponent<Props, *> {
   renderArticles = () => {
     const { articles } = this.props;
     return articles.map(article => <ArticleCard key={article.id} {...article} />);

@@ -1,10 +1,10 @@
 /* @flow */
-import React, { PureComponent } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 
 import Card, { CardText, CardTitle } from '@boldr/ui/Card';
-import Flex from '@boldr/ui/Flex';
+import Flex from '../../../components/Flex';
 import { forgotPassword } from '../state/actions';
 import ForgotPasswordForm from './ForgotPasswordForm';
 
@@ -12,7 +12,7 @@ type Props = {
   dispatch: Function,
 };
 
-class ForgotPassword extends PureComponent<Props, void> {
+class ForgotPassword extends React.Component<Props, *> {
   handleSubmit = values => {
     const { email } = values;
     this.props.dispatch(forgotPassword(email));
