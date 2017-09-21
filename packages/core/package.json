@@ -27,7 +27,7 @@
     "url": "git+https://github.com/strues/boldr.git"
   },
   "scripts": {
-    "build": "rimraf lib && NODE_ENV=production prepublish --target-unstable",
+    "build": "rimraf lib && NODE_ENV=production prepublish",
     "clean": "rimraf lib && rimraf es",
     "format": "prettier --single-quote=true --jsx-bracket-same-line=false --trailing-comma=all --print-width=100 --write \"src/**/*.js\"",
     "prepare": "rimraf lib && NODE_ENV=production prepublish --target-unstable",
@@ -46,7 +46,7 @@
     "redux-thunk": "^2.2.0"
   },
   "devDependencies": {
-    "babel-preset-boldr": "0.11.1",
+    "babel-preset-boldr": "0.11.2",
     "eslint": "^4.7.1",
     "eslint-config-boldr": "^0.13.0",
     "fast-async": "^6.3.0",

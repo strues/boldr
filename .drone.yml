@@ -16,7 +16,7 @@ pipeline:
     commands:
       - npm install
       - ./node_modules/.bin/lerna exec --scope @boldr/utils -- npm run build
-      - ./node_modules/.bin/lerna exec --scope @boldr/core -- npm run prepare
+      - ./node_modules/.bin/lerna exec --scope @boldr/core -- npm run build
       - ./node_modules/.bin/lerna exec --scope @boldr/tools -- npm run build
       - ./node_modules/.bin/lerna exec --scope @boldr/backend -- npm run build
       - npm run test

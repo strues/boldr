@@ -26,8 +26,9 @@
     "url": "https://github.com/strues/boldr/issues"
   },
   "scripts": {
-    "build": "npm run clean && NODE_ENV=production babel src --ignore *.test.js --out-dir lib",
-    "clean": "rimraf lib"
+    "build": "npm run clean && npm run compile",
+    "clean": "rimraf lib",
+    "compile": "NODE_ENV=production babel src --ignore *.test.js --out-dir lib"
   },
   "dependencies": {
     "lodash.invokemap": "^4.6.0",

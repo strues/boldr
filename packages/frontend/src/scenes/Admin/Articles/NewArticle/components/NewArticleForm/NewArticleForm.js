@@ -17,9 +17,9 @@ import Form, {
   SelectFormField,
 } from '@boldr/ui/Form';
 import { isRequired } from '../../../../../../core/util/validations';
-import RenderTags from '../RenderTags';
 import type { RouterLocation, CategoriesType } from '../../../../../../types/boldr';
 import { selectArticleFormValues } from '../../../../state/selectors/articleSelectors';
+import RenderTags from '../RenderTags';
 import FieldEditor from './FieldEditor';
 import { Inner, Toolbar, NewPost, DarkSegment, HelpTxt } from './NewPostStyled';
 
@@ -42,6 +42,7 @@ class NewArticleForm extends React.Component<Props, *> {
         text: category.name,
       };
     });
+    const opts = [{ value: '', text: 'Select a Category' }, ...catOpts];
     return (
       <div>
         <NewPost>
@@ -90,7 +91,7 @@ class NewArticleForm extends React.Component<Props, *> {
                   type="select"
                   component={SelectFormField}
                   label="Category"
-                  options={catOpts}
+                  options={opts}
                 />
                 <FormGroup>
                   <Field
@@ -155,7 +156,7 @@ const mapStateToProps = state => ({
   formValues: selectArticleFormValues(state),
 });
 
-let initStateForm = reduxForm({
+const initStateForm = reduxForm({
   form: 'articleForm',
   enableReinitialize: true,
 })(NewArticleForm);

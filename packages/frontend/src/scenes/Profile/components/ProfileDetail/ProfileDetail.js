@@ -1,9 +1,9 @@
 /* @flow */
 import React from 'react';
 import styled from 'styled-components';
-import classnames from 'classnames';
+import cn from 'classnames';
 // internal
-import { StyleClasses } from '@boldr/ui';
+import { StyleClasses } from '@boldr/ui/theme/styleClasses';
 
 const DetailLabel = styled.div`
   font-size: 1.4em;
@@ -12,12 +12,12 @@ const DetailLabel = styled.div`
 
 type Props = {
   className?: string,
-  label: ReactElement,
+  label: string,
   detail: string,
 };
 const BASE_ELEMENT = StyleClasses.PROFILE_DETAIL;
 const ProfileDetail = (props: Props) => {
-  const classes = classnames(BASE_ELEMENT, props.className);
+  const classes = cn(BASE_ELEMENT, props.className);
   return (
     <li className={classes}>
       <DetailLabel>{props.label}</DetailLabel> <span>{props.detail}</span>

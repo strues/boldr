@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { graphql } from 'react-apollo';
 import universal from 'react-universal-component';
+import type { ProfileType } from '../../types/boldr';
 import PROFILE_QUERY from './gql/userProfile.graphql';
 
 const UniversalProfile = universal(import('./Profile'));
@@ -9,7 +10,7 @@ const UniversalProfile = universal(import('./Profile'));
 type Props = {
   loading: boolean,
   error?: Object,
-  profile: User,
+  profile: ProfileType,
 };
 
 const Profile = ({ loading, error, profile }: Props) => (

@@ -1,5 +1,5 @@
 /* @flow */
-import * as React from 'react';
+import React from 'react';
 import NavLink from 'react-router-dom/NavLink';
 import Link from 'react-router-dom/Link';
 
@@ -14,13 +14,13 @@ import {
   NavbarStart,
   NavbarLink,
 } from '@boldr/ui';
+import type { Node } from 'react';
+import type { RouterLocation } from '../../../../types/boldr';
 
 export type Props = {
-  currentUser: Object,
-  location: Object,
+  location: RouterLocation,
   match: Object,
   ui: Object,
-  dispatch: Function,
 };
 
 type State = {

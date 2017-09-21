@@ -1,14 +1,16 @@
 /* @flow */
-import * as React from 'react';
+import React from 'react';
+import type { Node } from 'react';
 import { Hero, HeroHeader, HeroBody, HeroFooter } from '@boldr/ui/Hero';
 // internal
+import type { RouterLocation } from '../../../../types/boldr';
 import Navigation from '../Navigation';
 import DashboardMain from '../DashboardMain';
 import DashboardFooter from '../DashboardFooter';
 
 export type Props = {
-  children: React.ChildrenArray<number>,
-  location: Object,
+  children: Node,
+  location: RouterLocation,
 };
 
 function Layout(props: Props) {

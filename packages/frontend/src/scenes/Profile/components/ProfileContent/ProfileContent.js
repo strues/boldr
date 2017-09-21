@@ -8,7 +8,7 @@ import Icon from '@boldr/ui/Icons/Icon';
 // internal
 import Button from '@boldr/ui/Button';
 import Heading from '@boldr/ui/Heading';
-
+import type { ProfileType } from '../../../../types/boldr';
 import ProfileDetail from '../ProfileDetail';
 
 const DetailList = styled.ul`
@@ -17,7 +17,7 @@ const DetailList = styled.ul`
   flex-direction: column;
   list-style-type: none;
 `;
-const ImgWrapper = styled.div`width: 100%;`;
+
 const EditWrapper = styled.div`
   width: 100%;
   display: block;
@@ -25,16 +25,12 @@ const EditWrapper = styled.div`
   margin-bottom: 30px;
 `;
 type Props = {
-  profile: Object,
-  toggleDrawer: Function,
-  handleAvatarImgClick: Function,
-  handleProfileImgClick: Function,
-  me: boolean,
+  profile: ProfileType,
 };
 
 const ProfileContent = (props: Props) => {
   const { profile } = props;
-
+  // eslint-disable-next-line no-unused-vars
   const editButtons = (
     <EditWrapper>
       <Link to="/account/preferences">

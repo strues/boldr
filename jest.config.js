@@ -7,7 +7,8 @@ module.exports = {
   moduleNameMapper: {
     '\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$':
       './internal/jest/fileMock.js',
-    '^@components(.*)$': 'packages/frontend/src/components$1',
+    '^~components(.*)$': '<rootDir>/packages/frontend/src/components$1',
+    '^~types(.*)$': '<rootDir>/packages/frontend/src/types$1',
     '\\.(css|scss)$': 'identity-obj-proxy',
   },
 

@@ -42,7 +42,7 @@
     "autoprefixer": "^7.1.4",
     "babel-loader": "^7.1.2",
     "babel-minify-webpack-plugin": "^0.2.0",
-    "babel-preset-boldr": "0.11.1",
+    "babel-preset-boldr": "0.11.2",
     "bluebird": "^3.5.0",
     "cache-loader": "^1.0.3",
     "case-sensitive-paths-webpack-plugin": "^2.1.1",

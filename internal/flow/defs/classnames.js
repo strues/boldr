@@ -15,4 +15,3 @@ declare interface ClassDictionary {
 declare type ClassArray = {} & Array<ClassValue>;
 declare type ClassNamesFn = (...classes: ClassValue[]) => string;
 declare var classNames: ClassNamesFn;
-declare module.exports: typeof classNames;

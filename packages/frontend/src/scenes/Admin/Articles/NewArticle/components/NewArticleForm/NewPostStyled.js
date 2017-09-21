@@ -23,16 +23,7 @@ const Toolbar = styled.div`
   display: flex;
   align-items: center;
 `;
-Toolbar.defaultProps = {
-  theme: {
-    palette: {
-      primary2: '#0094c6',
-    },
-    headings: {
-      fontFamily: 'Chivo',
-    },
-  },
-};
+
 const DarkSegment = styled.div`
   margin-bottom: 1.5rem;
   padding: 1rem;

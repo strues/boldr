@@ -5,19 +5,19 @@
 
 .*/node_modules/bcryptjs/src/.*
 .*/node_modules/react-universal-component/dist/.*
-.*/node_modules/protobufjs-no-cli/src/.*
-.*/node_modules/@boldr/ui/.*\.js\.flow
 .*/node_modules/node_modules/fbjs.*
-<PROJECT_ROOT>/node_modules/flow-remove-types/.*
-<PROJECT_ROOT>/node_modules/flow-coverage-report/.*
-.*/node_modules/node_modules/babel.*
-<PROJECT_ROOT>/node_modules/y18n/test/.*
 .*/node_modules/node_modules/\.cache/.*
-<PROJECT_ROOT>/node_modules/enzyme-matchers/.*
-<PROJECT_ROOT>/node_modules/jest-enzyme/.*
-<PROJECT_ROOT>/packages/core/node_modules/apollo-client/.*
-<PROJECT_ROOT>/packages/core/node_modules/react-apollo/.*
+.*/node_modules/enzyme-matchers/\.*
+.*/node_modules/jest-enzyme/\.*
+.*/node_modules/graphql/\.*
+.*/node_modules/graphql-tag/\.*
 
+.*/node_modules/draft-js/\.*
+.*/node_modules/styled-components/\.*
+.*/node_modules/immutable/\.*
+.*/node_modules/react-apollo/\.*
+
+.*/node_modules/@boldr/ui/\.*
 .*/db/.*
 .*/docs/.*
 .*/build/.*
@@ -25,7 +25,7 @@
 .*/.idea/.*
 .*/.vscode/.*
 .*/coverage/.*
-
+<PROJECT_ROOT>/packages/frontend/flow-typed/npm/styled-components/.*
 .*\.test\.js
 
 [include]
@@ -54,9 +54,9 @@ munge_underscores=false
 # This is so that we can import static files in our webpack supported components
 # and not have flow throw a hissy fit.
 module.name_mapper='^\(.*\)\.\(css\|eot\|graphql\|gif\|ico\|jpg\|jpeg\|less\|otf\|mp3\|mp4\|ogg\|png\|sass\|scss\|sss\|svg\|swf\|ttf\|webp\|woff\|woff2\)$' -> '<PROJECT_ROOT>/internal/flow/stubs/WebpackAsset.js.flow'
-
+module.name_mapper='^~types\/\(.*\)$' -> '<PROJECT_ROOT>/packages/frontend/src/types/\1'
 suppress_comment=\\(.\\|\n\\)*\\$FlowIssue
 suppress_comment= \\(.\\|\n\\)*\\$FlowIgnore
 
 [version]
-0.54.1
+0.55.0

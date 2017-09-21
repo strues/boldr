@@ -21,6 +21,7 @@ type SwitcherProps = {
   children: Node,
   location: RouterLocation,
 };
+
 const ContainerSwitcherRoute = ({ children, location, ...rest }: SwitcherProps) => {
   return location.pathname.includes('/admin') ? (
     <AdminDashboard>{children}</AdminDashboard>
@@ -59,7 +60,6 @@ function App(props: Props) {
         <meta name="msapplication-TileColor" content="#2b2b2b" />
         <meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png" />
       </Helmet>
-
       <ContainerSwitcher>
         <AdminRoute exact path="/admin" component={AdminLanding} />
         <Route path="/" component={Page} />

@@ -174,7 +174,7 @@ type Article = {
   media?: MediasType,
 
   // Users belonging to a role.
-  author?: AccountType,
+  author: AccountType,
 };
 
 export type ArticlesType = Array<Article>;

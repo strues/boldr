@@ -69,7 +69,7 @@ type $npm$styledComponents$ThemeProviderProps = {
   theme: $npm$styledComponents$Theme | ((outerTheme: $npm$styledComponents$Theme) => void)
 };
 
-class Npm$StyledComponents$ThemeProvider extends React$Component {
+class Npm$StyledComponents$ThemeProvider extends React$Component<*,*> {
   props: $npm$styledComponents$ThemeProviderProps;
 }
 
@@ -77,7 +77,7 @@ type $npm$styledComponents$StyleSheetManagerProps = {
   sheet: mixed
 }
 
-class Npm$StyledComponents$StyleSheetManager extends React$Component {
+class Npm$StyledComponents$StyleSheetManager extends React$Component<*,*> {
   props: $npm$styledComponents$StyleSheetManagerProps;
 }
 

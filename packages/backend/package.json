@@ -70,7 +70,7 @@
     "uuid": "^3.1.0"
   },
   "devDependencies": {
-    "babel-preset-boldr": "0.11.1",
+    "babel-preset-boldr": "0.11.2",
     "prepublish": "^1.4.2",
     "rimraf": "^2.6.2",
     "jest-cli": "^21.1.0",

@@ -2,7 +2,7 @@ module.exports = [
   '@boldr/core',
   '@boldr/icons',
   '@boldr/ui',
-  'backstage-modal',
+
   'draft-convert',
   'draft-js',
   'immutable',
