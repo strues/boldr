@@ -55,8 +55,8 @@ Come visit with us
 ## Packages
 | Package      | Documentation |
 |:-------------|:---------------------------------------------|
-| [Auth](/packages/auth) | [Auth Docs](/docs/pkgs/auth.md)    |
 | [CLI](/packages/cli) | [CLI Docs](/docs/pkgs/cli.md)    |
+| [Config](/packages/config) | [Config Docs](/docs/pkgs/config.md)    |
 | [Core](/packages/core) | [Core Docs](/docs/pkgs/core.md)    |
 | [Frontend](/packages/frontend) |   |
 | [Server](/packages/server) |    |
@@ -88,7 +88,7 @@ The main packages to concern yourself with are located in `packages/frontend` an
 
 1. Install the files: `yarn install`   
 2. Copy the frontend environment sample: `cd packages/frontend && cp .env_example .env`   
-3. Checkout `packages/server/src/config.js` and modify any settings for your environment.   
+3. Checkout `packages/frontend/.boldr/config/default.js` and modify any settings for your environment.   
 4. Setup services    
 
 Boldr requires a Postgres database and a Redis service. Using the docker-compose.yml file included in the repo is the quickest way.
