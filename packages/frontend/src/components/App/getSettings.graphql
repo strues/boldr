@@ -1,0 +1,9 @@
+query settings {
+  settings {
+    id
+    key
+    value
+    label
+    description
+  }
+}

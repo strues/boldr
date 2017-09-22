@@ -1,0 +1,9 @@
+query getMediaById($id: ID!) {
+    getMediaById(id: $id) {
+      id
+      name
+      thumbName
+      fileDescription
+      url
+    }
+}

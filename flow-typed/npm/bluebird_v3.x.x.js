@@ -1,5 +1,5 @@
-// flow-typed signature: 6c612a127b8ec7cdde8303321911a677
-// flow-typed version: 7c16d522f9/bluebird_v3.x.x/flow_>=v0.33.x
+// flow-typed signature: 1f745c5c4f9bcfe1ee1a8e33c9f49de4
+// flow-typed version: ae20041ead/bluebird_v3.x.x/flow_>=v0.47.x
 
 type Bluebird$RangeError = Error;
 type Bluebird$CancellationErrors = Error;
@@ -54,13 +54,24 @@ declare class Bluebird$Promise<+R> extends Promise<R>{
   static Defer: Class<Bluebird$Defer>;
   static PromiseInspection: Class<Bluebird$PromiseInspection<*>>;
 
-  static all<T, Elem: $Promisable<T>>(Promises: $Promisable<Iterable<Elem>>): Bluebird$Promise<Array<T>>;
-  static props(input: $Promisable<Object | Map<*,*>>): Bluebird$Promise<*>;
-  static any<T, Elem: $Promisable<T>>(Promises: Array<Elem>): Bluebird$Promise<T>;
-  static race<T, Elem: $Promisable<T>>(Promises: Array<Elem>): Bluebird$Promise<T>;
+  static all<T, Elem: $Promisable<T>>(
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>
+  ): Bluebird$Promise<Array<T>>;
+  static props(
+    input: Object | Map<*,*> | $Promisable<Object | Map<*,*>>
+  ): Bluebird$Promise<*>;
+  static any<T, Elem: $Promisable<T>>(
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>
+  ): Bluebird$Promise<T>;
+  static race<T, Elem: $Promisable<T>>(
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>
+  ): Bluebird$Promise<T>;
   static reject<T>(error?: any): Bluebird$Promise<T>;
   static resolve<T>(object?: $Promisable<T>): Bluebird$Promise<T>;
-  static some<T, Elem: $Promisable<T>>(Promises: Array<Elem>, count: number): Bluebird$Promise<Array<T>>;
+  static some<T, Elem: $Promisable<T>>(
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>,
+    count: number
+  ): Bluebird$Promise<Array<T>>;
   static join<T, A>(
     value1: $Promisable<A>,
     handler: (a: A) => $Promisable<T>
@@ -77,26 +88,26 @@ declare class Bluebird$Promise<+R> extends Promise<R>{
     handler: (a: A, b: B, c: C) => $Promisable<T>
   ): Bluebird$Promise<T>;
   static map<T, U, Elem: $Promisable<T>>(
-    Promises: Array<Elem>,
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>,
     mapper: (item: T, index: number, arrayLength: number) => $Promisable<U>,
     options?: Bluebird$ConcurrencyOption
   ): Bluebird$Promise<Array<U>>;
   static mapSeries<T, U, Elem: $Promisable<T>>(
-    Promises: Array<Elem>,
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>,
     mapper: (item: T, index: number, arrayLength: number) => $Promisable<U>
   ): Bluebird$Promise<Array<U>>;
   static reduce<T, U, Elem: $Promisable<T>>(
-    Promises: Array<Elem>,
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>,
     reducer: (total: U, current: T, index: number, arrayLength: number) => $Promisable<U>,
     initialValue?: $Promisable<U>
   ): Bluebird$Promise<U>;
   static filter<T, Elem: $Promisable<T>>(
-    Promises: Array<Elem>,
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>,
     filterer: (item: T, index: number, arrayLength: number) => $Promisable<bool>,
     option?: Bluebird$ConcurrencyOption
   ): Bluebird$Promise<Array<T>>;
   static each<T, Elem: $Promisable<T>>(
-    Promises: Array<Elem>,
+    Promises: Iterable<Elem> | $Promisable<Iterable<Elem>>,
     iterator: (item: T, index: number, arrayLength: number) => $Promisable<mixed>,
   ): Bluebird$Promise<Array<T>>;
   static try<T>(fn: () => $Promisable<T>, args: ?Array<any>, ctx: ?any): Bluebird$Promise<T>;
@@ -134,8 +145,16 @@ declare class Bluebird$Promise<+R> extends Promise<R>{
     reject: (error?: any) => void
   ) => mixed): void;
   then<U>(onFulfill?: (value: R) => $Promisable<U>, onReject?: (error: any) => $Promisable<U>): Bluebird$Promise<U>;
-  catch<U>(onReject?: (error: any) => ?$Promisable<U>): Bluebird$Promise<U>;
-  caught<U>(onReject?: (error: any) => ?$Promisable<U>): Bluebird$Promise<U>;
+
+  catch<U, ErrorT: Error>(err: Class<ErrorT>, onReject: (error: ErrorT) => $Promisable<U>): Bluebird$Promise<U>;
+  catch<U, ErrorT: Error>(err1: Class<ErrorT>, err2: Class<ErrorT>, onReject: (error: ErrorT) => $Promisable<U>): Bluebird$Promise<U>;
+  catch<U, ErrorT: Error>(err1: Class<ErrorT>, err2: Class<ErrorT>, err3: Class<ErrorT>, onReject: (error: ErrorT) => $Promisable<U>): Bluebird$Promise<U>;
+  catch<U>(onReject?: (error: any) => $Promisable<U>): Bluebird$Promise<U>;
+  caught<U, ErrorT: Error>(err: Class<ErrorT>, onReject: (error: Error) => $Promisable<U>): Bluebird$Promise<U>;
+  caught<U, ErrorT: Error>(err1: Class<ErrorT>, err2: Class<ErrorT>, onReject: (error: ErrorT) => $Promisable<U>): Bluebird$Promise<U>;
+  caught<U, ErrorT: Error>(err1: Class<ErrorT>, err2: Class<ErrorT>, err3: Class<ErrorT>, onReject: (error: ErrorT) => $Promisable<U>): Bluebird$Promise<U>;
+  caught<U>(onReject: (error: any) => $Promisable<U>): Bluebird$Promise<U>;
+
   error<U>(onReject?: (error: any) => ?$Promisable<U>): Bluebird$Promise<U>;
   done<U>(onFulfill?: (value: R) => mixed, onReject?: (error: any) => mixed): void;
   finally<T>(onDone?: (value: R) => mixed): Bluebird$Promise<T>;

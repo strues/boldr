@@ -1,8 +1,31 @@
+workspace:
+  base: /ci
+  path: boldr
+
 pipeline:
+  restore-cache:
+    image: drillster/drone-volume-cache
+    restore: true
+    mount:
+      - ./node_modules
+    volumes:
+      - /tmp/cache:/cache
+
   build:
-    image: node:8
+    image: node:8.5.0
     commands:
-      - yarn install --pure-lockfile
-      - yarn test:ci
-      - yarn add codecov
+      - yarn install
+      - ./node_modules/.bin/lerna run --scope @boldr/utils -- build
+      - ./node_modules/.bin/lerna run --scope @boldr/core -- build
+      - ./node_modules/.bin/lerna run --scope @boldr/tools -- build
+      - ./node_modules/.bin/lerna run --scope @boldr/backend -- build
+      - yarn run test
       - ./node_modules/.bin/codecov -t a3dc697a-382d-4d84-a07b-1f5682c3d70a -f coverage/coverage-final.json
+
+  rebuild-cache:
+    image: drillster/drone-volume-cache
+    rebuild: true
+    mount:
+      - ./node_modules
+    volumes:
+      - /tmp/cache:/cache

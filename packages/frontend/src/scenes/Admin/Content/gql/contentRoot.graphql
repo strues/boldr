@@ -1,0 +1,20 @@
+query contentRoot {
+  contentRoot {
+    contentTypes {
+      name
+      icon
+      id
+      description
+    }
+    tags {
+      id
+      name
+    }
+    categories {
+      name
+      id
+      icon
+      description
+    }
+  }
+}

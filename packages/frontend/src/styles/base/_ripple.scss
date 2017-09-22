@@ -1,0 +1,23 @@
+.touch-ripple {
+  position: absolute;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+  transform: rotate(0deg);
+
+  .ripple {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.16;
+    background: #ccc;
+    border-radius: 50%;
+    transform: scale(0);
+    transition: opacity 1s ease-out, transform 0.5s ease-out;
+    pointer-events: none;
+  }
+}

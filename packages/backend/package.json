@@ -1,0 +1,76 @@
+{
+  "name": "@boldr/backend",
+  "description": "Boldr Server is a centralized Express-based HTTP server with sophisticated built-in security.",
+  "version": "0.1.0-alpha.1",
+  "homepage": "https://github.com/strues/boldr",
+  "bugs": {
+    "url": "https://github.com/strues/boldr/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Steven Truesdell",
+    "email": "steven@strues.io",
+    "url": "strues.io"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strues/boldr.git"
+  },
+  "main": "lib/index.es5.cjs.js",
+  "module": "lib/index.es5.esm.js",
+  "main:es2015": "lib/index.es2015.cjs.js",
+  "module:es2015": "lib/index.es2015.esm.js",
+  "main:modern": "lib/index.modern.cjs.js",
+  "module:modern": "lib/index.modern.esm.js",
+  "pre-commit": "lint-staged",
+  "lint-staged": {
+    "*.js": "eslint"
+  },
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "rimraf lib && prepublish",
+    "test": "npm run build && jest",
+    "release": "git push && release-it --github.release --npm.publish --non-interactive",
+    "release:minor": "git push && release-it --github.release --npm.publish --non-interactive --increment minor",
+    "release:major": "git push && release-it --github.release --npm.publish --non-interactive --increment major"
+  },
+  "engines": {
+    "node": ">=6.0.0",
+    "yarn": ">=0.21.3",
+    "npm": ">=4.0.0"
+  },
+  "dependencies": {
+    "@boldr/config": "^0.1.1",
+    "@boldr/utils": "0.1.1",
+    "bcryptjs": "^2.4.3",
+    "bluebird": "^3.5.0",
+    "body-parser": "^1.18.1",
+    "connect-redis": "^3.3.0",
+    "cookie-parser": "^1.4.3",
+    "cors": "^2.8.4",
+    "date-fns": "^1.28.5",
+    "debug": "^3.0.1",
+    "dotenv": "^4.0.0",
+    "express": "^4.15.4",
+    "express-locale": "1.0.2",
+    "express-session": "^1.15.5",
+    "formidable": "^1.1.1",
+    "fs-extra": "^4.0.2",
+    "helmet": "^3.8.1",
+    "hpp": "^0.2.2",
+    "ioredis": "^3.1.4",
+    "ms": "^2.0.0",
+    "nanoid": "^0.2.1",
+    "nodemailer": "^4.1.0",
+    "object-path": "^0.11.4",
+    "serve-favicon": "^2.4.4",
+    "uuid": "^3.1.0"
+  },
+  "devDependencies": {
+    "babel-preset-boldr": "0.11.2",
+    "prepublish": "^1.4.2",
+    "rimraf": "^2.6.2",
+    "jest-cli": "^21.1.0",
+    "prettier": "^1.7.0"
+  }
+}

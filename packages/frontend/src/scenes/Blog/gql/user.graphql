@@ -1,0 +1,15 @@
+query getUserByUserId($userId: ID!) {
+  getUserByUserId(userId: $userId) {
+    username
+    avatarUrl
+    bio
+    socialMedia {
+      facebookUrl
+      githubUrl
+      twitterUrl
+      linkedinUrl
+      googleUrl
+      stackoverflowUrl
+    }
+  }
+}

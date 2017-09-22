@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ArticleTitle /> renders snapshot 1`] = `
+<styled.div>
+  <Heading
+    className="boldr-article__title"
+    isLight={true}
+    type="h1"
+  />
+</styled.div>
+`;

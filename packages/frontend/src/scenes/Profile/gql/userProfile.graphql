@@ -1,0 +1,22 @@
+query profile($username: String!) {
+  profile(username: $username) {
+    id
+    username
+    firstName
+    lastName
+    avatarUrl
+    profileImage
+    bio
+    location
+    website
+
+    socialMedia {
+      facebookUrl
+      githubUrl
+      twitterUrl
+      linkedinUrl
+      googleUrl
+      stackoverflowUrl
+    }
+  }
+}

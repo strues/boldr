@@ -1,0 +1,13 @@
+mutation editArticle($id: ID!, $input: EditArticleInput!) {
+  editArticle(id: $id, input: $input) {
+    title
+    slug
+    content
+    rawContent
+    featured
+    status
+    published
+    excerpt
+    image
+  }
+}

@@ -1,4 +1,0 @@
-# Label
-
-    <Label label="Hello" />
-

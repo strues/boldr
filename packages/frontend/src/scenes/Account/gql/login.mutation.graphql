@@ -1,0 +1,23 @@
+mutation loginAccount($input: AuthInput!) {
+  loginAccount(input: $input) {
+    token
+    account {
+      id
+      email
+      profile {
+        firstName
+        lastName
+        username
+        avatarUrl
+      }
+      roles {
+        id
+        name
+      }
+    }
+    errors {
+      code
+      message
+    }
+  }
+}

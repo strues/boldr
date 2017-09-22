@@ -1,0 +1,71 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App 1`] = `
+<div
+  className="boldr"
+>
+  <HelmetWrapper
+    defaultTitle="Boldr: Modern Content Management Framework"
+    defer={true}
+    encodeSpecialCharacters={true}
+    titleTemplate="%s - Powered by Boldr"
+  >
+    <html
+      lang="en"
+    />
+    <meta
+      content="Boldr"
+      name="application-name"
+    />
+    <meta
+      content="A modern, bold take on a cms"
+      name="description"
+    />
+    <meta
+      charSet="utf-8"
+    />
+    <meta
+      content="IE=edge"
+      httpEquiv="X-UA-Compatible"
+    />
+    <meta
+      content="width=device-width, initial-scale=1"
+      name="viewport"
+    />
+    <meta
+      content="#2b2b2b"
+      name="theme-color"
+    />
+    <link
+      href="/favicons/favicon.ico"
+      rel="icon"
+      sizes="16x16 32x32"
+    />
+    <link
+      href="/favicons/apple-touch-icon-144x144.png"
+      rel="apple-touch-icon-precomposed"
+      sizes="144x144"
+    />
+    <meta
+      content="#2b2b2b"
+      name="msapplication-TileColor"
+    />
+    <meta
+      content="/favicons/mstile-144x144.png"
+      name="msapplication-TileImage"
+    />
+  </HelmetWrapper>
+  <withRouter(ContainerSwitcherRoute)>
+    <withRouter(Connect(ProtectedRoute))
+      component={[Function]}
+      exact={true}
+      path="/admin"
+    />
+    <Route
+      component={[Function]}
+      path="/"
+    />
+  </withRouter(ContainerSwitcherRoute)>
+  <Connect(Notifications) />
+</div>
+`;

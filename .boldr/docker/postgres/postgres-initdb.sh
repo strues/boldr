@@ -1,7 +1,7 @@
 #!/bin/sh -e
 
 psql --variable=ON_ERROR_STOP=1 --username "$POSTGRES_USER" <<-EOSQL
-  CREATE DATABASE "dev";
+  CREATE DATABASE "boldr_dev";
   CREATE DATABASE "boldr";
   CREATE DATABASE "boldr_test";
 EOSQL

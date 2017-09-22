@@ -1,0 +1,14 @@
+query GetDetailsQuery {
+  details {
+    id
+    safeName
+    title
+    cssClassname
+    icon
+    hasDropdown
+    order
+    mobileHref
+    href
+    children
+  }
+}

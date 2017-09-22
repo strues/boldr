@@ -1,0 +1,21 @@
+query accounts($offset: Int!, $limit: Int!) {
+    accounts(offset:$offset, limit:$limit) {
+      id
+      email
+      verified
+      roles {
+        name
+        id
+      }
+      profile {
+         username
+        firstName
+        lastName
+        avatarUrl
+        profileImage
+        bio
+        location
+        website
+      }
+    }
+}

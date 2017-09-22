@@ -1,0 +1,54 @@
+{
+  "name": "@boldr/cli",
+  "version": "0.2.0-beta.2",
+  "description": "Command line tools for Boldr apps",
+  "main": "bin/boldr.js",
+  "bin": {
+    "boldr": "./bin/boldr.js"
+  },
+  "files": [
+    "bin",
+    "lib"
+  ],
+  "keywords": [
+    "cli",
+    "boldr"
+  ],
+  "license": "MIT",
+  "author": {
+    "name": "Steven Truesdell",
+    "email": "steven@strues.io",
+    "url": "strues.io"
+  },
+  "homepage": "https://github.com/strues/boldr#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strues/boldr.git"
+  },
+  "bugs": {
+    "url": "https://github.com/strues/boldr/issues"
+  },
+  "scripts": {
+    "build": "rm -rf ./lib && NODE_ENV=production babel src --source-maps --out-dir lib",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "eslint": "^4.7.1",
+    "eslint-config-boldr": "^0.13.0",
+    "fast-async": "^6.3.0",
+    "fs-extra": "^4.0.2"
+  },
+  "dependencies": {
+    "@boldr/config": "^0.1.1",
+    "@boldr/tools": "^0.1.0-beta.4",
+    "@boldr/utils": "0.1.1",
+    "caporal": "^0.7.0",
+    "update-notifier": "^2.2.0",
+    "knex": "^0.13.0",
+    "pg": "^7.3.0",
+    "prettier": "^1.7.0",
+    "rimraf": "^2.6.2"
+  }
+}

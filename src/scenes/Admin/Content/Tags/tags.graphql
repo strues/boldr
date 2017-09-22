@@ -1,7 +1,0 @@
-query getTags($offset: Int!, $limit: Int!) {
-  getTags(offset: $offset, limit: $limit) {
-    id
-    name
-    description
-  }
-}

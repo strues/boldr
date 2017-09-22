@@ -1,0 +1,31 @@
+{
+  "name": "@boldr/config",
+  "version": "0.1.1",
+  "description": "universal react content management framework",
+  "homepage": "https://github.com/strues/boldr",
+  "bugs": {
+    "url": "https://github.com/strues/boldr/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Steven Truesdell",
+    "email": "steven@strues.io",
+    "url": "strues.io"
+  },
+  "main": "./config.js",
+  "files": [
+    "config.js"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strues/boldr.git"
+  },
+  "scripts": {},
+  "dependencies": {
+    "app-root-dir": "^1.0.2",
+    "debug": "^3.0.1",
+    "lodash.get": "^4.4.2",
+    "lodash.has": "^4.5.2",
+    "lodash.merge": "^4.6.0"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "verbose": true,
+  "delay": "1500",
+  "watch": [
+   "./src"
+  ],
+  "exec": "node_modules/.bin/babel-node ./src/index.js"
+}

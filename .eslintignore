@@ -3,8 +3,14 @@ build
 coverage
 node_modules
 **/flow-typed/**
-**/example/**
-**/demo/**
+**/build/**
+packages/**/*.test.js
+packages/cli/bin/boldr.js
+packages/*/build/**
+packages/*/lib/**
+packages/*/node_modules/**
+packages/*/flow-typed/**
+
 docs/
 
 *.bundle.js

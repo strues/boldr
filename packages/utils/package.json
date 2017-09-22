@@ -1,0 +1,40 @@
+{
+  "name": "@boldr/utils",
+  "version": "0.1.1",
+  "description": "Utility functions designed for use in Boldr projects. But applicable to most.",
+  "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
+  "keywords": [
+    "build",
+    "tools",
+    "webpack"
+  ],
+  "author": {
+    "name": "Steven Truesdell",
+    "email": "steven@strues.io",
+    "url": "strues.io"
+  },
+  "homepage": "https://github.com/strues/boldr#readme",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/strues/boldr.git"
+  },
+  "bugs": {
+    "url": "https://github.com/strues/boldr/issues"
+  },
+  "scripts": {
+    "build": "npm run clean && npm run compile",
+    "clean": "rimraf lib",
+    "compile": "NODE_ENV=production babel src --ignore *.test.js --out-dir lib"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-eslint": "^8.0.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "rimraf": "^2.6.2"
+  }
+}

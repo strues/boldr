@@ -1,3 +1,4 @@
+const uuid = require('uuid');
 /* eslint-disable */
 function truncate(knex, Promise, tables) {
   return Promise.each(tables, table =>
@@ -147,11 +148,13 @@ function seed(knex, Promise) {
     .then(() =>
       Promise.all([
         knex('tag').insert({
+          id: 'b1c0d816-e8c0-4a0d-a63a-5215f02b423e',
           name: 'javascript',
           description: 'Something something JS',
         }),
         knex('tag').insert({
-          name: 'apple',
+          id: '517e9975-9dd8-44fc-80cf-cb907964a06b',
+          name: 'stuff',
           description: 'Stuff about stuff.',
         }),
         // prettier-ignore
@@ -164,11 +167,8 @@ function seed(knex, Promise) {
           title: 'Just Another Post',
           slug: 'just-another-post',
           featured: true,
-          excerpt: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' +
-            'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when' +
-            'an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-          featureImage: 'https://boldr.io/image1.jpg',
-          featureImage: 'https://boldr.io/image1.jpg',
+          excerpt: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+          image: 'https://boldr.io/image1.jpg',
           meta: {},
           content: `<h1>Lorem ipsum dolor sit amet.</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien in est aliquam lacinia. Donec fringilla odio nulla, sagittis egestas dolor bibendum ut. Proin eget massa mattis, dictum enim vitae, facilisis eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum imperdiet varius ante. Maecenas sit amet luctus sapien, quis aliquet purus. Cras malesuada quam a dui pretium fermentum. Quisque tempor interdum quam, eu lacinia turpis interdum id. Curabitur non mauris lobortis, mattis nulla id, viverra nisi. Phasellus eget porttitor lorem. Quisque facilisis nec arcu eu fringilla. Vivamus elit ipsum, viverra eu maximus a, venenatis nec nibh.Suspendisse iaculis auctor fermentum. Sed suscipit ante nisl, nec iaculis magna consequat vel. Quisque viverra est a justo egestas, euismod egestas metus hendrerit.</p>
@@ -185,11 +185,8 @@ function seed(knex, Promise) {
           title: 'Nother One',
           slug: 'nother-one',
           featured: false,
-          excerpt: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' +
-            'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when' +
-            'an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-          featureImage: 'https://boldr.io/image3.jpg',
-          featureImage: 'https://boldr.io/image3.jpg',
+          excerpt: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+          image: 'https://boldr.io/image3.jpg',
           meta: {},
           content: `<h1>Lorem ipsum dolor sit amet.</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien in est aliquam lacinia. Donec fringilla odio nulla, sagittis egestas dolor bibendum ut. Proin eget massa mattis, dictum enim vitae, facilisis eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum imperdiet varius ante. Maecenas sit amet luctus sapien, quis aliquet purus. Cras malesuada quam a dui pretium fermentum. Quisque tempor interdum quam, eu lacinia turpis interdum id. Curabitur non mauris lobortis, mattis nulla id, viverra nisi. Phasellus eget porttitor lorem. Quisque facilisis nec arcu eu fringilla. Vivamus elit ipsum, viverra eu maximus a, venenatis nec nibh.Suspendisse iaculis auctor fermentum. Sed suscipit ante nisl, nec iaculis magna consequat vel. Quisque viverra est a justo egestas, euismod egestas metus hendrerit.</p>
@@ -206,11 +203,8 @@ function seed(knex, Promise) {
           title: 'Random Post Title',
           slug: 'random-post-title',
           featured: false,
-          excerpt: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.' +
-            'Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when' +
-            'an unknown printer took a galley of type and scrambled it to make a type specimen book.',
-          featureImage: 'https://boldr.io/image2.jpg',
-          featureImage: 'https://boldr.io/image2.jpg',
+          excerpt: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.',
+          image: 'https://boldr.io/image2.jpg',
           meta: {},
           content: `<h1>Lorem ipsum dolor sit amet.</h1>
 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec quis sapien in est aliquam lacinia. Donec fringilla odio nulla, sagittis egestas dolor bibendum ut. Proin eget massa mattis, dictum enim vitae, facilisis eros. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum imperdiet varius ante. Maecenas sit amet luctus sapien, quis aliquet purus. Cras malesuada quam a dui pretium fermentum. Quisque tempor interdum quam, eu lacinia turpis interdum id. Curabitur non mauris lobortis, mattis nulla id, viverra nisi. Phasellus eget porttitor lorem. Quisque facilisis nec arcu eu fringilla. Vivamus elit ipsum, viverra eu maximus a, venenatis nec nibh.Suspendisse iaculis auctor fermentum. Sed suscipit ante nisl, nec iaculis magna consequat vel. Quisque viverra est a justo egestas, euismod egestas metus hendrerit.</p>
@@ -229,15 +223,15 @@ function seed(knex, Promise) {
       Promise.all([
         knex('article_tag').insert({
           articleId: '5c9ed236-79f0-4ff7-93bd-2815f06c74b4',
-          tagId: 2,
+          tagId: 'b1c0d816-e8c0-4a0d-a63a-5215f02b423e',
         }),
         knex('article_tag').insert({
           articleId: 'cb61bbae-c91e-4014-b665-3485734b88fb',
-          tagId: 1,
+          tagId: '517e9975-9dd8-44fc-80cf-cb907964a06b',
         }),
         knex('article_tag').insert({
           articleId: 'ab33a0ca-b349-4cf8-947f-94f415149492',
-          tagId: 2,
+          tagId: 'b1c0d816-e8c0-4a0d-a63a-5215f02b423e',
         }),
         // prettier-ignore
       ])
@@ -246,7 +240,6 @@ function seed(knex, Promise) {
       Promise.all([
         knex('menu').insert({
           name: 'Main',
-          safeName: 'main',
           restricted: false,
           attributes: {},
         }),
@@ -256,8 +249,9 @@ function seed(knex, Promise) {
     .then(() =>
       Promise.all([
         knex('menu_detail').insert({
-          name: 'About',
-          safeName: 'about',
+          id: 'c0b0ea44-8d9d-4081-9655-871399b970fe',
+          title: 'About',
+          safeName: 'About',
           cssClassname: 'about-link',
           hasDropdown: true,
           order: 1,
@@ -268,14 +262,16 @@ function seed(knex, Promise) {
             key: 'about-menu',
             items: [
               {
-                name: 'Tech',
-                id: 'tech',
+                title: 'Tech',
+                safeName: 'Tech',
+                id: uuid.v4(),
                 href: '/about/tech',
                 icon: 'change_history',
               },
               {
-                name: 'Setup',
-                id: 'setup',
+                title: 'Setup',
+                safeName: 'Setup',
+                id:  uuid.v4(),
                 href: '/about/setup',
                 icon: 'phonelink_setup',
               },
@@ -283,8 +279,9 @@ function seed(knex, Promise) {
           },
         }),
         knex('menu_detail').insert({
-          name: 'Blog',
-          safeName: 'blog',
+          id: '79b3e678-c6d8-4824-bb50-f71a7d45be87',
+          title: 'Blog',
+          safeName: 'Blog',
           cssClassname: 'blog-link',
           hasDropdown: false,
           order: 2,
@@ -299,11 +296,11 @@ function seed(knex, Promise) {
       Promise.all([
         knex('menu_menu_detail').insert({
           menuId: 1,
-          menuDetailId: 1,
+          menuDetailId: 'c0b0ea44-8d9d-4081-9655-871399b970fe',
         }),
         knex('menu_menu_detail').insert({
           menuId: 1,
-          menuDetailId: 2,
+          menuDetailId: '79b3e678-c6d8-4824-bb50-f71a7d45be87',
         }),
         // prettier-ignore
       ])

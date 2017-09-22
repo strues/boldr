@@ -1,0 +1,12 @@
+{
+  "presets": [["env", {
+    "targets": { "node": 8 },
+    "modules": "commonjs",
+    "useBuiltIns": true,
+    "exclude": ["transform-regenerator", "transform-async-to-generator"]
+    }]
+],
+  "plugins": [["fast-async", {
+    "spec": true
+    }]]
+}

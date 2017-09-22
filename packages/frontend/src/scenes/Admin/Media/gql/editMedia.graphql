@@ -1,0 +1,6 @@
+mutation editMedia($id: ID!, $input: EditMediaInput!) {
+  editMedia(id: $id, input: $input) {
+    name
+    fileDescription
+  }
+}

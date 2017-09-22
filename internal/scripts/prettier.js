@@ -1,6 +1,5 @@
 /* eslint-disable */
 
-const chalk = require('chalk');
 const glob = require('glob');
 const path = require('path');
 const execFileSync = require('child_process').execFileSync;
@@ -12,19 +11,20 @@ const prettier = isWindows ? 'prettier.cmd' : 'prettier';
 const prettierCmd = path.resolve(
   __dirname,
   // prettier-ignore
-  `../../node_modules/.bin/${prettier}`
+  `../../node_modules/.bin/${prettier}`,
 );
 const defaultOptions = {
   'single-quote': true,
-
   'trailing-comma': 'all',
   'print-width': 100,
-  'jsx-bracket-same-line': false,
+  'bracket-spacing': true,
+  'jsx-bracket-same-line': true,
+  parser: 'babylon',
 };
 const config = {
   default: {
-    patterns: ['src/**/*.js', '__tests__/**/*.js', '__mocks__/**/*.js'],
-    ignore: ['**/node_modules/**'],
+    patterns: ['internal/**/*.js', 'packages/**/src/**/*.js', 'packages/**/internal/*.js'],
+    ignore: ['**/node_modules/**', 'packages/**/lib/**', '**/flow-typed/**', '**/build/**'],
   },
 };
 
@@ -39,13 +39,11 @@ Object.keys(config).forEach(key => {
   const options = config[key].options;
   const ignore = config[key].ignore;
 
-  const globPattern = patterns.length > 1
-    ? `{${patterns.join(',')}}`
-    : `${patterns.join(',')}`;
+  const globPattern = patterns.length > 1 ? `{${patterns.join(',')}}` : `${patterns.join(',')}`;
   const files = glob.sync(globPattern, { ignore });
 
   const args = Object.keys(defaultOptions).map(
-    k => `--${k}=${(options && options[k]) || defaultOptions[k]}`
+    k => `--${k}=${(options && options[k]) || defaultOptions[k]}`,
   );
   args.push(`--${shouldWrite ? 'write' : 'l'}`);
 
