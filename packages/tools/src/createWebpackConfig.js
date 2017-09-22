@@ -9,7 +9,7 @@ import WatchMissingNodeModulesPlugin from 'react-dev-utils/WatchMissingNodeModul
 import BundleAnalyzerPlugin from 'webpack-bundle-analyzer';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import SriPlugin from 'webpack-subresource-integrity';
-import UglifyPlugin from 'uglifyjs-webpack-plugin';
+import BabelMinify from 'babel-minify-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 import { getHashDigest } from 'loader-utils';
 import appRoot from '@boldr/utils/lib/node/appRoot';
@@ -28,7 +28,6 @@ import {
   JS_FILES,
   STYLE_FILES,
   ASSET_FILES,
-  UGLIFY_OPTIONS,
 } from './constants';
 
 dotenv.config();
@@ -53,7 +52,6 @@ const defaults = {
   env: process.env.NODE_ENV,
   verbose: false,
   useSourceMaps: true,
-  minifier: 'uglify',
 };
 
 const ROOT = appRoot.get();
@@ -124,9 +122,9 @@ export default function createWebpackConfig(
     },
   ];
 
-  const PROJECT_CONFIG = require(path.resolve(ROOT, 'package.json'));
+  const PKG_JSON = require(path.resolve(ROOT, 'package.json'));
   const CACHE_HASH = getHashDigest(
-    JSON.stringify(PROJECT_CONFIG),
+    JSON.stringify(PKG_JSON),
     CACHE_HASH_TYPE,
     CACHE_DIGEST_TYPE,
     CACHE_DIGEST_LENGTH,
@@ -137,16 +135,11 @@ export default function createWebpackConfig(
     // $FlowIssue
     `node_modules/.cache/loader-${CACHE_HASH}-${config.target}-${config.env}`,
   );
-  const UFLIFY_CACHE_DIRECTORY = path.resolve(
-    ROOT,
-    // $FlowIssue
-    `node_modules/.cache/uglify-${CACHE_HASH}-${config.target}-${config.env}`,
-  );
 
   const name = _IS_CLIENT_ ? 'client' : 'server';
   const target = _IS_CLIENT_ ? 'web' : 'node';
 
-  const devtool = _IS_DEV_ ? 'cheap-module-source-map' : 'source-map';
+  const devtool = _IS_DEV_ ? 'cheap-module-eval-source-map' : 'source-map';
 
   logger.start(`${PREFIX} Configuration:`);
   // $FlowIssue
@@ -200,6 +193,7 @@ export default function createWebpackConfig(
     }, {});
 
   externals['react-dom/server'] = 'commonjs react-dom/server';
+
   const getClientEntry = () => {
     // For development
     let entry = [require.resolve('react-hot-loader/patch'), HMR_MIDDLEWARE, CLIENT_ENTRY];
@@ -410,10 +404,11 @@ export default function createWebpackConfig(
           },
         ],
       }),
-      // new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
+
       // Improve OS compatibility
       // https://github.com/Urthen/case-sensitive-paths-webpack-plugin
       new CaseSensitivePathsPlugin(),
+
       _IS_DEV_
         ? new CircularDependencyPlugin({
             exclude: /a\.js|node_modules/,
@@ -421,6 +416,7 @@ export default function createWebpackConfig(
             failOnError: false,
           })
         : null,
+
       _IS_DEV_
         ? new WriteFilePlugin({
             exitOnErrors: false,
@@ -429,33 +425,15 @@ export default function createWebpackConfig(
             useHashIndex: false,
           })
         : null,
-      // Let the server side renderer know about our client side assets
-      // https://github.com/FormidableLabs/webpack-stats-plugin
-      _IS_PROD_ && _IS_CLIENT_ ? new StatsPlugin('stats.json') : null,
-      // Classic UglifyJS for compressing ES5 compatible code.
-      // https://github.com/webpack-contrib/uglifyjs-webpack-plugin
-      config.minifier === 'uglify' && _IS_PROD_ && _IS_CLIENT_
-        ? new UglifyPlugin({
-            uglifyOptions: UGLIFY_OPTIONS,
-            parallel: {
-              cache: UFLIFY_CACHE_DIRECTORY,
-            },
-          })
-        : null,
-      // "Use HashedModuleIdsPlugin to generate IDs that preserves over builds."
-      // Via: https://github.com/webpack/webpack.js.org/issues/652#issuecomment-273324529
-      _IS_PROD_ ? new webpack.HashedModuleIdsPlugin() : null,
-      // I would recommend using NamedModulesPlugin during development (better output).
-      // Via: https://github.com/webpack/webpack.js.org/issues/652#issuecomment-273023082
-      _IS_DEV_ ? new webpack.NamedModulesPlugin() : null,
 
       _IS_CLIENT_
         ? new ExtractCssChunks({
             filename: _IS_DEV_ ? '[name].css' : '[name]-[contenthash:base62:8].css',
           })
         : null,
+
       _IS_SERVER_ ? new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }) : null,
-      _IS_PROD_ && _IS_CLIENT_ ? new WebpackDigestHash() : null,
+
       // Extract Webpack bootstrap code with knowledge about chunks into separate cachable package.
       _IS_CLIENT_
         ? new webpack.optimize.CommonsChunkPlugin({
@@ -466,11 +444,38 @@ export default function createWebpackConfig(
           })
         : null,
 
+      _IS_PROD_ && _IS_CLIENT_ ? new WebpackDigestHash() : null,
+
       _IS_PROD_ ? new webpack.optimize.ModuleConcatenationPlugin() : null,
+      // Let the server side renderer know about our client side assets
+      // https://github.com/FormidableLabs/webpack-stats-plugin
+      _IS_PROD_ && _IS_CLIENT_ ? new StatsPlugin('stats.json') : null,
+      // Classic UglifyJS for compressing ES5 compatible code.
+      // https://github.com/webpack-contrib/uglifyjs-webpack-plugin
+      _IS_PROD_ && _IS_CLIENT_ ? new BabelMinify({}, { comments: false }) : null,
+      _IS_PROD_ && _IS_SERVER_
+        ? new BabelMinify(
+            {
+              booleans: false,
+              deadcode: true,
+              flipComparisons: false,
+              mangle: false,
+              mergeVars: false,
+            },
+            { comments: false },
+          )
+        : null,
+      // "Use HashedModuleIdsPlugin to generate IDs that preserves over builds."
+      // Via: https://github.com/webpack/webpack.js.org/issues/652#issuecomment-273324529
+      _IS_PROD_ ? new webpack.HashedModuleIdsPlugin() : null,
+      // I would recommend using NamedModulesPlugin during development (better output).
+      // Via: https://github.com/webpack/webpack.js.org/issues/652#issuecomment-273023082
+      _IS_DEV_ ? new webpack.NamedModulesPlugin() : null,
 
       _IS_DEV_ ? new WatchMissingNodeModulesPlugin(path.resolve(ROOT, './node_modules')) : null,
 
       _IS_CLIENT_ && _IS_DEV_ ? new webpack.HotModuleReplacementPlugin() : null,
+
       _IS_DEV_ ? new webpack.NoEmitOnErrorsPlugin() : null,
 
       _IS_DEV_ && _IS_CLIENT_
@@ -479,11 +484,13 @@ export default function createWebpackConfig(
             manifest: require(path.resolve(CLIENT_OUTPUT, 'boldrDLLs.json')),
           })
         : null,
+
       process.stdout.isTTY
         ? new ProgressPlugin({
             prefix: PREFIX,
           })
         : null,
+
       _IS_CLIENT_ && _IS_PROD_
         ? new BundleAnalyzerPlugin.BundleAnalyzerPlugin({
             analyzerMode: 'static',

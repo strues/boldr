@@ -14,11 +14,8 @@ import App from './components/App';
 import appReducer from './reducers';
 
 const DOM_NODE = document.getElementById('app');
-let preloadedState = {};
+const preloadedState = window.__APOLLO_STATE__;
 
-if (window.__APOLLO_STATE__) {
-  preloadedState = window.__APOLLO_STATE__;
-}
 const token = getToken();
 
 /**
@@ -32,7 +29,7 @@ const token = getToken();
  *    batchRequests: boolean, // false
  *    trustNetwork: boolean, // true
  *    queryDeduplication: boolean, // true
- *    apolloUri: string
+ *    uri: string
  *    connectToDevTools: boolean // true
  *    ssrForceFetchDelay: number // 100
  * }
@@ -40,12 +37,14 @@ const token = getToken();
 const apolloClient = createApolloClient({
   batchRequests: true,
   initialState: preloadedState,
-  apolloUri: process.env.GRAPHQL_ENDPOINT,
+  uri: process.env.GRAPHQL_ENDPOINT,
   headers: {
     Authorization: `Bearer ${token}`,
   },
 });
+
 const history = createHistory();
+
 // Create the redux store by passing the "main" reducer, preloadedState, the Apollo Client
 // and env. Passing either 'development' or 'production' (env) includes/excludes
 // reduxDevTools, etc
@@ -56,6 +55,8 @@ if (token) {
   reduxStore.dispatch(checkAuth(token));
 }
 const AppComponent = PassedApp => <ConnectedRouter history={history}>{PassedApp}</ConnectedRouter>;
+
+render(wrapBoldrApp(AppComponent(<App />), apolloClient, reduxStore), DOM_NODE);
 
 if (process.env.NODE_ENV !== 'production') {
   // eslint-disable-next-line import/no-extraneous-dependencies
@@ -89,5 +90,3 @@ if (process.env.NODE_ENV !== 'production') {
     });
   }
 }
-
-render(wrapBoldrApp(AppComponent(<App />), apolloClient, reduxStore), DOM_NODE);

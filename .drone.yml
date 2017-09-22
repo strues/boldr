@@ -14,7 +14,7 @@ pipeline:
   build:
     image: node:8.5.0
     commands:
-      - yarn
+      - yarn install
       - ./node_modules/.bin/lerna run --scope @boldr/utils -- build
       - ./node_modules/.bin/lerna run --scope @boldr/core -- build
       - ./node_modules/.bin/lerna run --scope @boldr/tools -- build

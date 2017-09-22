@@ -1,4 +1,3 @@
-import path from 'path';
 import React from 'react';
 import StaticRouter from 'react-router-dom/StaticRouter';
 import { renderToStringWithData } from 'react-apollo';
@@ -26,22 +25,29 @@ export default ({ clientStats, outputPath }) =>
    * @return {htmlAttributes}     the page :)
    */
   async (req, res) => {
-    const initialState = {};
     const apolloClient = createApolloClient({
-      initialState,
-      apolloUri: process.env.GRAPHQL_ENDPOINT,
+      batchRequests: true,
+      uri: process.env.GRAPHQL_ENDPOINT,
     });
-    const history = createHistory();
+
+    // create the memoryHistory and push our current request's path into it.
+    const history = createHistory({ initialEntries: [req.path] });
+    const initialState = {};
+    // Create the Redux store, populate the redux middleware w/ the apollo middleware
     const reduxStore = createBoldrStore(history, appReducer, initialState, apolloClient);
+
     const routerContext = {};
+
     const sheet = new ServerStyleSheet();
     const appComponent = (
       <StaticRouter location={req.url} context={routerContext}>
         <App />
       </StaticRouter>
     );
-
+    // Wrap the router and application component in the ApolloProvider
     const markup = wrapBoldrApp(appComponent, apolloClient, reduxStore);
+    // Traverse the component tree looking for queries and styled-component data
+    // then transform it all into a string
     const app = await renderToStringWithData(sheet.collectStyles(markup));
 
     if (routerContext.url) {

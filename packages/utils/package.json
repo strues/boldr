@@ -1,6 +1,6 @@
 {
   "name": "@boldr/utils",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Utility functions designed for use in Boldr projects. But applicable to most.",
   "main": "lib/index.js",
   "files": [
@@ -30,10 +30,7 @@
     "clean": "rimraf lib",
     "compile": "NODE_ENV=production babel src --ignore *.test.js --out-dir lib"
   },
-  "dependencies": {
-    "lodash.invokemap": "^4.6.0",
-    "lodash.reduce": "^4.6.0"
-  },
+  "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.0",

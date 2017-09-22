@@ -5,7 +5,7 @@ const config = {
   batchRequests: false,
   trustNetwork: true,
   queryDeduplication: true,
-  apolloUri: '/api/v1/graphql',
+  uri: '/api/v1/graphql',
   connectToDevTools: true,
   ssrForceFetchDelay: 100,
 };

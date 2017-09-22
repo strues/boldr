@@ -14,7 +14,7 @@ export type ApolloClientConfig = {
   batchRequests?: boolean,
   trustNetwork?: boolean,
   queryDeduplication?: boolean,
-  apolloUri?: string,
+  uri?: string,
   connectToDevTools?: boolean,
   ssrForceFetchDelay?: number,
 };
@@ -30,12 +30,12 @@ export default function createApolloClient(config: ApolloClientConfig = {}) {
     batchRequests = false,
     trustNetwork = true,
     queryDeduplication = true,
-    apolloUri,
+    uri,
     connectToDevTools = true,
     ssrForceFetchDelay = 100,
   } = config;
 
-  const hasApollo = apolloUri !== null;
+  const hasApollo = uri !== null;
   // $FlowIssue
   const ssrMode = !process.browser;
   let client;
@@ -59,13 +59,13 @@ export default function createApolloClient(config: ApolloClientConfig = {}) {
     if (batchRequests) {
       /* istanbul ignore next */
       networkInterface = createBatchingNetworkInterface({
-        uri: apolloUri,
+        uri,
         batchInterval: 10,
         opts,
       });
     } else {
       networkInterface = createNetworkInterface({
-        uri: apolloUri,
+        uri,
         opts,
       });
     }

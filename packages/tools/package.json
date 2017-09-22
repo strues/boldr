@@ -1,6 +1,6 @@
 {
   "name": "@boldr/tools",
-  "version": "0.1.0-beta.3",
+  "version": "0.1.0-beta.4",
   "description": "Webpack build tools and basic CLI for dev and building universal react applications",
   "main": "lib/btools.commonjs.js",
   "module": "lib/btools.esmodules.js",
@@ -34,7 +34,7 @@
   "dependencies": {
     "@boldr/backend": "^0.1.0-alpha.1",
     "@boldr/config": "^0.1.0",
-    "@boldr/utils": "0.1.0",
+    "@boldr/utils": "0.1.1",
     "autoprefixer": "^7.1.4",
     "babel-loader": "^7.1.2",
     "babel-minify-webpack-plugin": "^0.2.0",
@@ -64,8 +64,6 @@
     "sass-loader": "^6.0.6",
     "source-map-loader": "^0.2.1",
     "source-map-support": "^0.4.18",
-    "uglify-es": "^3.1.1",
-    "uglifyjs-webpack-plugin": "1.0.0-beta.2",
     "url-loader": "^0.5.9",
     "uuid": "^3.1.0",
     "webpack": "^3.6.0",
