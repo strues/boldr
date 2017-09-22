@@ -30,7 +30,6 @@
     "clean": "rimraf lib",
     "compile": "NODE_ENV=production babel src --ignore *.test.js --out-dir lib"
   },
-  "dependencies": {},
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.0",

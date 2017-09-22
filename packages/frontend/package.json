@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@boldr/core": "0.1.0-beta.3",
-    "@boldr/config": "^0.1.0",
+    "@boldr/config": "^0.1.1",
     "@boldr/icons": "0.1.0-rc.2",
     "@boldr/tools": "^0.1.0-beta.4",
     "@boldr/ui": "0.1.7",
@@ -61,7 +61,6 @@
   },
   "devDependencies": {
     "@boldr/cli": "0.2.0-beta.2",
-    "autoprefixer": "^7.1.4",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^8.0.0",
     "babel-preset-boldr": "0.11.2",

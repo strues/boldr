@@ -1,6 +1,6 @@
 {
   "name": "@boldr/config",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "universal react content management framework",
   "homepage": "https://github.com/strues/boldr",
   "bugs": {

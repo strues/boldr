@@ -1,11 +1,12 @@
 import { resolve } from 'path';
 import appRoot from '@boldr/utils/lib/node/appRoot';
 import { createBackend } from '@boldr/backend';
+import config from '@boldr/config';
 
 const ROOT = appRoot.get();
-const SERVER_OUTPUT = resolve(ROOT, process.env.SERVER_OUTPUT);
-const CLIENT_OUTPUT = resolve(ROOT, process.env.CLIENT_OUTPUT);
-const PORT = process.env.PORT;
+const SERVER_OUTPUT = resolve(ROOT, config.tools.paths.output.server);
+const CLIENT_OUTPUT = resolve(ROOT, config.tools.paths.output.client);
+const PORT = parseInt(process.env.PORT, 10);
 
 /* eslint-disable no-console */
 /* eslint-disable import/no-commonjs */
@@ -13,7 +14,7 @@ const PORT = process.env.PORT;
 
 export default function startRenderServer(buildConfig = {}) {
   const clientStats = require(`${CLIENT_OUTPUT}/stats.json`);
-  const serverRender = require(`${SERVER_OUTPUT}/main.js`).default;
+  const serverRender = require(`${SERVER_OUTPUT}/server.js`).default;
 
   const server = createBackend({
     staticConfig: {

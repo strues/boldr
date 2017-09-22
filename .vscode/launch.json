@@ -18,6 +18,17 @@
         "sourceMaps": true,
         "localRoot": "${workspaceRoot}/packages/server",
         "restart": true
+      },
+      {
+        "name": "FauxProd",
+        "type": "node",
+        "request": "attach",
+        "port": 9229,
+        "protocol": "inspector",
+        "sourceMaps": true,
+
+        "localRoot": "${workspaceRoot}/packages/frontend",
+        "restart": true
       }
     ]
   }

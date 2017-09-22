@@ -2,6 +2,7 @@ import webpack from 'webpack';
 import { remove } from 'fs-extra';
 import { promisify } from 'bluebird';
 import logger from '@boldr/utils/lib/logger';
+import config from '@boldr/config';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 
 import createWebpackConfig from '../createWebpackConfig';
@@ -9,14 +10,14 @@ import createWebpackConfig from '../createWebpackConfig';
 const removePromise = promisify(remove);
 
 export function buildClient() {
-  const config = createWebpackConfig({
+  const clientConfig = createWebpackConfig({
     target: 'client',
     env: 'production',
   });
 
   return new Promise((resolve, reject) => {
     /* eslint-disable no-console */
-    webpack(config, (fatalError, stats) => {
+    webpack(clientConfig, (fatalError, stats) => {
       if (fatalError) {
         const fatalMsg = `Fatal error during compiling client: ${fatalError}`;
         logger.error(fatalMsg);
@@ -45,14 +46,14 @@ export function buildClient() {
 }
 
 export function buildServer() {
-  const config = createWebpackConfig({
+  const serverConfig = createWebpackConfig({
     target: 'server',
     env: 'production',
   });
 
   return new Promise((resolve, reject) => {
     /* eslint-disable no-console */
-    webpack(config, (fatalError, stats) => {
+    webpack(serverConfig, (fatalError, stats) => {
       if (fatalError) {
         const fatalMsg = `Fatal error during compiling server: ${fatalError}`;
         logger.error(fatalMsg);
@@ -81,9 +82,9 @@ export function buildServer() {
 }
 
 export function cleanServer() {
-  return removePromise('./build/server');
+  return removePromise(config.tools.paths.output.server);
 }
 
 export function cleanClient() {
-  return removePromise('./build/client');
+  return removePromise(config.tools.paths.output.client);
 }

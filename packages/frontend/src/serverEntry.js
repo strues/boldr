@@ -58,14 +58,16 @@ export default ({ clientStats, outputPath }) =>
     console.log('[BOLDR] Flushing chunks...');
     const chunkNames = flushChunkNames();
 
-    console.log('[BOLDR] Rendered Chunk Names:', chunkNames.join(', '));
+    // console.log('[BOLDR] Rendered Chunk Names:', chunkNames.join(', '));
     const { js, styles, cssHash } = flushChunks(clientStats, {
-      chunkNames,
-      outputPath: outputPath,
+      chunkNames: flushChunkNames(),
+      before: ['bootstrap', 'vendor'],
+      after: ['main'],
+      outputPath,
     });
 
-    console.log(`[BOLDR] Flushed Script Tags:\n${js.toString()}\n`);
-    console.log(`[BOLDR] Flushed CSS Tags:\n${styles.toString()}\n`);
+    // console.log(`[BOLDR] Flushed Script Tags:\n${js.toString()}\n`);
+    // console.log(`[BOLDR] Flushed CSS Tags:\n${styles.toString()}\n`);
 
     const preloadedState = {
       ...reduxStore.getState(),

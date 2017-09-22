@@ -1,4 +1,4 @@
-/* eslint-disable camelcase, eqeqeq, prefer-destructuring, max-lines, max-statements, complexity*/
+/* eslint-disable camelcase, eqeqeq, prefer-destructuring, max-lines, max-statements, complexity, import/max-dependencies*/
 // @flow weak
 import path from 'path';
 import fs from 'fs';
@@ -9,6 +9,7 @@ import WatchMissingNodeModulesPlugin from 'react-dev-utils/WatchMissingNodeModul
 import BundleAnalyzerPlugin from 'webpack-bundle-analyzer';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import SriPlugin from 'webpack-subresource-integrity';
+import autoprefixer from 'autoprefixer';
 import BabelMinify from 'babel-minify-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 import { getHashDigest } from 'loader-utils';
@@ -26,7 +27,6 @@ import {
   CACHE_DIGEST_TYPE,
   CACHE_DIGEST_LENGTH,
   JS_FILES,
-  STYLE_FILES,
   ASSET_FILES,
 } from './constants';
 
@@ -72,17 +72,17 @@ const SRC_DIR = path.resolve(ROOT, 'src');
 export default function createWebpackConfig(
   options: ConfigurationOptions = {},
 ): Promise<Configuration> {
-  const config = { ...defaults, ...options };
+  const settings = { ...defaults, ...options };
   // process.env.NODE_ENV is typically set but still could be undefined. Fix that.
-  if (config.env === null) {
-    config.env = 'development';
+  if (settings.env === null) {
+    settings.env = 'development';
   }
 
-  const _IS_SERVER_ = config.target === 'server';
-  const _IS_CLIENT_ = config.target === 'client';
+  const _IS_SERVER_ = settings.target === 'server';
+  const _IS_CLIENT_ = settings.target === 'client';
 
-  const _IS_DEV_ = config.env === 'development';
-  const _IS_PROD_ = config.env === 'production';
+  const _IS_DEV_ = settings.env === 'development';
+  const _IS_PROD_ = settings.env === 'production';
   const webpackTarget = _IS_SERVER_ ? 'node' : 'web';
 
   const clientPreset = [
@@ -129,25 +129,25 @@ export default function createWebpackConfig(
     CACHE_DIGEST_TYPE,
     CACHE_DIGEST_LENGTH,
   );
-  const PREFIX = config.target.toUpperCase();
+  const PREFIX = settings.target.toUpperCase();
   const CACHE_LOADER_DIRECTORY = path.resolve(
     ROOT,
     // $FlowIssue
-    `node_modules/.cache/loader-${CACHE_HASH}-${config.target}-${config.env}`,
+    `node_modules/.cache/loader-${CACHE_HASH}-${settings.target}-${settings.env}`,
   );
 
   const name = _IS_CLIENT_ ? 'client' : 'server';
-  const target = _IS_CLIENT_ ? 'web' : 'node';
+  const target = _IS_CLIENT_ ? 'web' : 'async-node';
 
   const devtool = _IS_DEV_ ? 'cheap-module-eval-source-map' : 'source-map';
 
   logger.start(`${PREFIX} Configuration:`);
   // $FlowIssue
-  logger.info(`Current Env: ${config.env}`);
+  logger.info(`Current Env: ${settings.env}`);
   logger.info(`Build Target: ${target}`);
   logger.info(`Source Maps: ${devtool}`);
 
-  const cacheLoader = config.useCacheLoader
+  const cacheLoader = settings.useCacheLoader
     ? {
         loader: require.resolve('cache-loader'),
         options: {
@@ -157,25 +157,41 @@ export default function createWebpackConfig(
     : null;
 
   const cssLoaderOptions = {
+    modules: true,
+    localIdentName: '[name]__[local]--[hash:base64:5]',
+    import: 1,
+    minimize: !_IS_DEV_,
+    sourceMap: true,
+  };
+  const cssLoaderSassOptions = {
     modules: false,
-    localIdentName: '[local]-[hash:base62:8]',
+    localIdentName: '[name]__[local]--[hash:base64:5]',
     import: 2,
     minimize: !_IS_DEV_,
     sourceMap: true,
   };
-
   const postCSSLoaderRule = {
     loader: require.resolve('postcss-loader'),
     options: {
       // https://webpack.js.org/guides/migrating/#complex-options
       ident: 'postcss',
       sourceMap: true,
+      plugins: () => [
+        require('postcss-flexbugs-fixes'),
+        autoprefixer({
+          browsers: ['>1%', 'last 4 versions', 'Firefox ESR', 'not ie < 10'],
+          flexbox: 'no-2009',
+        }),
+        require('postcss-import'),
+        require('postcss-pxtorem'),
+        require('postcss-nested'),
+      ],
     },
   };
   const sassLoaderRule = {
     loader: require.resolve('sass-loader'),
     options: {
-      sourceMap: true,
+      sourceMap: false,
       minimize: !_IS_DEV_,
     },
   };
@@ -248,15 +264,13 @@ export default function createWebpackConfig(
       pathinfo: _IS_DEV_,
       // Enable cross-origin loading without credentials - Useful for loading files from CDN
       crossOriginLoading: 'anonymous',
-      devtoolModuleFilenameTemplate: _IS_DEV_
-        ? info => path.resolve(info.absoluteResourcePath)
-        : info => path.resolve(ROOT, info.absoluteResourcePath),
+      devtoolModuleFilenameTemplate: info => path.resolve(info.absoluteResourcePath),
     },
 
     resolve: {
-      extensions: ['.js', '.json', '.jsx'],
+      extensions: ['.js', '.json', '.jsx', '.css', '.scss'],
       descriptionFiles: ['package.json'],
-      modules: ['node_modules', path.resolve(ROOT, './src'), path.resolve(ROOT, './node_modules')],
+      modules: [path.resolve(ROOT, './src'), path.resolve(ROOT, './node_modules'), 'node_modules'],
       mainFields: _IS_CLIENT_
         ? [
             'browser:modern',
@@ -273,12 +287,14 @@ export default function createWebpackConfig(
         : ['esnext:main', 'module:modern', 'main:modern', 'jsnext:main', 'module', 'main'],
       alias: {
         'babel-runtime': relativeResolve('babel-runtime/package.json'),
+        immutable: path.resolve(ROOT, './node_modules/immutable/dist/immutable.js'),
       },
     },
     resolveLoader: {
       modules: [resolveOwn('node_modules'), path.resolve(ROOT, './node_modules')],
     },
     module: {
+      // throws an error if an export is missing rather than a warning by default
       strictExportPresence: true,
       rules: [
         {
@@ -335,8 +351,7 @@ export default function createWebpackConfig(
         },
         // Sass
         {
-          test: STYLE_FILES,
-          include: PROJECT_SRC,
+          test: /\.css$/,
           use: _IS_CLIENT_
             ? ExtractCssChunks.extract({
                 use: [
@@ -354,6 +369,30 @@ export default function createWebpackConfig(
                 {
                   loader: require.resolve('css-loader/locals'),
                   options: cssLoaderOptions,
+                },
+                postCSSLoaderRule,
+              ].filter(Boolean),
+        },
+        {
+          test: /\.scss$/,
+          include: PROJECT_SRC,
+          use: _IS_CLIENT_
+            ? ExtractCssChunks.extract({
+                use: [
+                  cacheLoader,
+                  {
+                    loader: require.resolve('css-loader'),
+                    options: cssLoaderSassOptions,
+                  },
+                  postCSSLoaderRule,
+                  sassLoaderRule,
+                ].filter(Boolean),
+              })
+            : [
+                cacheLoader,
+                {
+                  loader: require.resolve('css-loader/locals'),
+                  options: cssLoaderSassOptions,
                 },
                 postCSSLoaderRule,
                 sassLoaderRule,
@@ -426,11 +465,7 @@ export default function createWebpackConfig(
           })
         : null,
 
-      _IS_CLIENT_
-        ? new ExtractCssChunks({
-            filename: _IS_DEV_ ? '[name].css' : '[name]-[contenthash:base62:8].css',
-          })
-        : null,
+      _IS_CLIENT_ ? new ExtractCssChunks() : null,
 
       _IS_SERVER_ ? new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }) : null,
 
@@ -446,12 +481,6 @@ export default function createWebpackConfig(
 
       _IS_PROD_ && _IS_CLIENT_ ? new WebpackDigestHash() : null,
 
-      _IS_PROD_ ? new webpack.optimize.ModuleConcatenationPlugin() : null,
-      // Let the server side renderer know about our client side assets
-      // https://github.com/FormidableLabs/webpack-stats-plugin
-      _IS_PROD_ && _IS_CLIENT_ ? new StatsPlugin('stats.json') : null,
-      // Classic UglifyJS for compressing ES5 compatible code.
-      // https://github.com/webpack-contrib/uglifyjs-webpack-plugin
       _IS_PROD_ && _IS_CLIENT_ ? new BabelMinify({}, { comments: false }) : null,
       _IS_PROD_ && _IS_SERVER_
         ? new BabelMinify(
@@ -465,17 +494,23 @@ export default function createWebpackConfig(
             { comments: false },
           )
         : null,
+      _IS_PROD_ ? new webpack.optimize.ModuleConcatenationPlugin() : null,
+      // Let the server side renderer know about our client side assets
+      // https://github.com/FormidableLabs/webpack-stats-plugin
+      _IS_PROD_ && _IS_CLIENT_ ? new StatsPlugin('stats.json') : null,
+
       // "Use HashedModuleIdsPlugin to generate IDs that preserves over builds."
-      // Via: https://github.com/webpack/webpack.js.org/issues/652#issuecomment-273324529
-      _IS_PROD_ ? new webpack.HashedModuleIdsPlugin() : null,
+      // @see: https://github.com/webpack/webpack.js.org/issues/652#issuecomment-273324529
+      _IS_PROD_ && _IS_CLIENT_ ? new webpack.HashedModuleIdsPlugin() : null,
       // I would recommend using NamedModulesPlugin during development (better output).
-      // Via: https://github.com/webpack/webpack.js.org/issues/652#issuecomment-273023082
+      // @see: https://github.com/webpack/webpack.js.org/issues/652#issuecomment-273023082
       _IS_DEV_ ? new webpack.NamedModulesPlugin() : null,
 
       _IS_DEV_ ? new WatchMissingNodeModulesPlugin(path.resolve(ROOT, './node_modules')) : null,
-
+      // @see: https://webpack.js.org/plugins/hot-module-replacement-plugin/
       _IS_CLIENT_ && _IS_DEV_ ? new webpack.HotModuleReplacementPlugin() : null,
-
+      // skip the emitting phase whenever there are errors while compiling
+      // @see: https://webpack.js.org/plugins/no-emit-on-errors-plugin/
       _IS_DEV_ ? new webpack.NoEmitOnErrorsPlugin() : null,
 
       _IS_DEV_ && _IS_CLIENT_

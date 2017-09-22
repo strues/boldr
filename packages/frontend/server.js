@@ -1,11 +1,12 @@
 const express = require('express');
 
 const app = express();
-app.use('/static/', express.static('./build/client'));
 
-const webpackStats = require('./build/client/stats.json');
-const serverRender = require('./build/server/main.js').default;
+const clientStats = require('./build/client/stats.json');
+const serverRender = require('./build/server/server.js').default;
 
-app.use(serverRender({ webpackStats }));
+app.use('/static/', express.static('build/client'));
+
+app.use(serverRender({ clientStats }));
 
 app.listen(3000);

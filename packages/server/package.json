@@ -39,8 +39,8 @@
   },
   "dependencies": {
     "@boldr/backend": "^0.1.0-alpha.1",
-    "@boldr/config": "^0.1.0",
-    "@boldr/utils": "0.1.0",
+    "@boldr/config": "^0.1.1",
+    "@boldr/utils": "0.1.1",
     "bcryptjs": "^2.4.3",
     "bluebird": "^3.5.0",
     "body-parser": "^1.18.1",
