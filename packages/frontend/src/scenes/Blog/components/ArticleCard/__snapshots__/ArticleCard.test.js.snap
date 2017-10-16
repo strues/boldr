@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<ArticleCard /> renders snapshot 1`] = `
+exports[`<ArticleCard /> matches the snapshot 1`] = `
 <styled.article
   featuring={true}
   key="c265ed52-b9c4-42e8-9b46-7bc409bfec48"

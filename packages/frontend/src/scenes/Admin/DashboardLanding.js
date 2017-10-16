@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Heading from '@boldr/ui/Heading';
 import ContentPromo from '@boldr/ui/ContentPromo';
 
-import Tabs from '@boldr/ui/Tabs';
+// import Tabs from '@boldr/ui/Tabs';
 
 import type { CurrentUser } from '../../types/boldr';
 
@@ -12,7 +12,7 @@ export type Props = {
   currentUser: CurrentUser,
 };
 
-const { TabPane } = Tabs;
+// const { TabPane } = Tabs;
 
 class DashboardLanding extends React.Component<Props, *> {
   static defaultProps = {
@@ -34,7 +34,17 @@ class DashboardLanding extends React.Component<Props, *> {
         <ContentPromo isCentered>
           <Heading kind="h1" text={`Welcome ${this.props.currentUser.firstName}`} />
         </ContentPromo>
-        <Tabs defaultActiveKey="1" onChange={this.onTabChange}>
+      </div>
+    );
+  }
+}
+
+const mapStateToProps = state => ({ currentUser: state.auth.info });
+
+export default connect(mapStateToProps)(DashboardLanding);
+
+/*
+  <Tabs defaultActiveKey="1" onChange={this.onTabChange}>
           <TabPane tab="Tab 1" key="1">
             Content of Tab Pane 1
           </TabPane>
@@ -45,11 +55,4 @@ class DashboardLanding extends React.Component<Props, *> {
             Content of Tab Pane 3
           </TabPane>
         </Tabs>
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = state => ({ currentUser: state.auth.info });
-
-export default connect(mapStateToProps)(DashboardLanding);
+        */

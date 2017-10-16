@@ -51,10 +51,7 @@ export class Navigation extends React.Component<Props, *> {
     // const { currentUser } = this.props;
 
     return (
-      <Navbar
-        ref={el => {
-          (this: any).navbar = el;
-        }}>
+      <Navbar>
         <Container>
           <NavbarBrand>
             <NavbarItem>

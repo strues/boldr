@@ -111,6 +111,10 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
     this.customStyleMap = getCustomStyleMap();
   }
 
+  componentWillUnmount() {
+    clearTimeout(this.syncTimer);
+  }
+
   wrapperId: string;
   modalHandler: ModalHandler;
   focusHandler: FocusHandler;
@@ -140,6 +144,14 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
     }
 
     return editorState;
+  };
+
+  setWrapperReference: Function = (ref: Object): void => {
+    this.wrapper = ref;
+  };
+
+  setEditorReference: Function = (ref: Object): void => {
+    this.editor = ref;
   };
   /**
    * On change method.
@@ -362,6 +374,7 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
 
     return (
       <div
+        ref={this.setWrapperReference}
         id={this.wrapperId}
         className={cn('be-wrapper', wrapperClassName)}
         style={wrapperStyle}
@@ -393,9 +406,6 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
         </div>
 
         <div
-          ref={el => {
-            (this: any).wrapper = el;
-          }}
           className={cn('be-main', editorClassName)}
           style={editorStyle}
           onClick={this.focusEditor}
@@ -404,9 +414,7 @@ export default class BoldrEditor extends React.Component<BoldrEditorType, State>
           onKeyDown={KeyDownHandler.onKeyDown}
           onMouseDown={this.onEditorMouseDown}>
           <Editor
-            ref={el => {
-              (this: any).editor = el;
-            }}
+            ref={this.setEditorReference}
             onTab={this.onTab}
             spellcheck={this.props.spellcheck}
             editorState={editorState}

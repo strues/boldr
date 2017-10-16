@@ -33,33 +33,34 @@ type State = {
   isDropdownOpen: boolean,
 };
 
-export const checkActiveLoc = (location: RouterLocation, url: string) => {
-  return !!location.pathname.includes(url);
-};
-
 class Navigation extends React.Component<Props, State> {
-  state: State = { isActive: false, isDropdownOpen: false };
+  constructor() {
+    super();
 
-  handleClickNav = () => {
-    this.setState(state => ({ isActive: !state.isActive }));
-  };
+    this.state = { isActive: false, isDropdownOpen: false };
+    this.handleClickNav = this.handleClickNav.bind(this);
+    this.onLogoutClick = this.onLogoutClick.bind(this);
+    this.onClickDropdown = this.onClickDropdown.bind(this);
+  }
 
-  onClickDropdown = () => {
-    this.setState(state => ({ isDropdownOpen: !state.isDropdownOpen }));
-  };
-  onLogoutClick = () => {
+  handleClickNav() {
+    this.setState({ isActive: !this.state.isActive });
+  }
+
+  onClickDropdown() {
+    this.setState({ isDropdownOpen: !this.state.isDropdownOpen });
+  }
+  onLogoutClick() {
     this.props.onLogout();
-  };
+  }
+
   props: Props;
   render(): Node {
     const { menu: { details }, currentUser, location, token } = this.props;
     const { isActive } = this.state;
     const dropdownItems = details.filter(detail => detail.parentId !== null);
     return (
-      <Navbar
-        ref={el => {
-          (this: any).navbar = el;
-        }}>
+      <Navbar>
         <Container>
           <NavbarBrand>
             <NavbarItem>
@@ -80,7 +81,6 @@ class Navigation extends React.Component<Props, State> {
                   return (
                     <NavbarItem
                       key={detail.id}
-                      isActive={checkActiveLoc(location, detail.href)}
                       render={() => (
                         <NavLink
                           className="boldr-navbar__item"
@@ -95,7 +95,6 @@ class Navigation extends React.Component<Props, State> {
                   return (
                     <NavbarItem key={detail.id} hasDropdown isHoverable>
                       <NavbarLink
-                        isActive={checkActiveLoc(location, detail.href)}
                         className="boldr-navbar__item"
                         key={detail.id}
                         render={() => (
@@ -109,7 +108,6 @@ class Navigation extends React.Component<Props, State> {
                           return (
                             <NavbarItem
                               key={d.id}
-                              isActive={checkActiveLoc(location, d.href)}
                               title={d.safeName}
                               render={() => (
                                 <NavLink

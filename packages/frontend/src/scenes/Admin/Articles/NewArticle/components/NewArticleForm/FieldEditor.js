@@ -18,7 +18,10 @@ type State = {
   htmlContent: string,
 };
 class FieldEditor extends Component<Props, State> {
-  state: State = { raw: undefined, htmlContent: undefined };
+  constructor(props: Props) {
+    super(props);
+    this.state = { raw: undefined, htmlContent: undefined };
+  }
 
   handleHTMLChange = htmlContent => {
     this.setState({ htmlContent });

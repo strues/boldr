@@ -1,6 +1,6 @@
 /* eslint-disable react/prefer-stateless-function */
 /* @flow */
-import * as React from 'react';
+import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import Button from '@boldr/ui/Button';

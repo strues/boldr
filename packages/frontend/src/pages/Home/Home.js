@@ -5,8 +5,8 @@ import Helmet from 'react-helmet';
 import styled from 'styled-components';
 // internal
 import Heading from '@boldr/ui/Heading';
-import Paragraph from '@boldr/ui/Paragraph';
 import Loader from '@boldr/ui/Loader';
+import Page from '../Page';
 import { ArticleCard } from '../../scenes/Blog/components';
 import type { ArticlesType } from '../../types/boldr';
 
@@ -31,6 +31,7 @@ const HomeHero = styled.div`
 `;
 
 const HomeText = 'Meet Boldr.';
+
 const Container = styled.div`
   flex: 1;
   max-width: 1034px;
@@ -59,17 +60,18 @@ class Home extends React.PureComponent<Props, *> {
     const { articles } = this.props;
     return articles.map(article => <ArticleCard key={article.id} {...article} />);
   };
+
   render() {
     const { isLoading } = this.props;
     return (
-      <div>
+      <Page>
         <Helmet title="Home" />
         <HomeHero bgsrc="http://i.magaimg.net/img/1f5w.jpg">
           <CoverShadow />
           <Heading type="h1" text={HomeText} isLight />
         </HomeHero>
         <Container>{isLoading ? <Loader /> : this.renderArticles()}</Container>
-      </div>
+      </Page>
     );
   }
 }

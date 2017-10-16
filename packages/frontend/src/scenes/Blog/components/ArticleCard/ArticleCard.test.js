@@ -34,7 +34,7 @@ describe('<ArticleCard />', () => {
     expect(wrapper.instance().props.excerpt).toBe('Abcdc');
     expect(wrapper.instance().props.slug).toBe('this-test-slug');
   });
-  it('renders snapshot', () => {
+  it('matches the snapshot', () => {
     const wrapper = shallow(<ArticleCard {...ArticleData} />);
     expect(shallowToJson(wrapper)).toMatchSnapshot();
   });

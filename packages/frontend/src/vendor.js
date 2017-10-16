@@ -15,6 +15,8 @@ import 'react-router';
 import 'react-router-dom';
 import 'react-router-redux';
 import 'react-tagsinput';
+import 'reactstrap';
+import 'react-popper';
 import 'react-transition-group';
 import 'react';
 import 'recompact';

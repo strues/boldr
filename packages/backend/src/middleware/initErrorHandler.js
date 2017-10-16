@@ -15,12 +15,6 @@ export default function initErrorHandler(app) {
       stackHighlighted: error.stack.replace(/[a-z_-\d]+.js:\d+:\d+/gi, '<mark>$&</mark>'),
     };
     res.status(error.status || 500);
-    res.format({
-      // Based on the `Accept` http header
-      'text/html': () => {
-        res.render('error', errorDetails);
-      },
-      'application/json': () => res.json(errorDetails),
-    });
+    res.json(errorDetails);
   });
 }

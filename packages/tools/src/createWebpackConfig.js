@@ -10,6 +10,7 @@ import BundleAnalyzerPlugin from 'webpack-bundle-analyzer';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import SriPlugin from 'webpack-subresource-integrity';
 import autoprefixer from 'autoprefixer';
+import AutoDllPlugin from 'autodll-webpack-plugin';
 import BabelMinify from 'babel-minify-webpack-plugin';
 import CircularDependencyPlugin from 'circular-dependency-plugin';
 import { getHashDigest } from 'loader-utils';
@@ -98,6 +99,7 @@ export default function createWebpackConfig(
       target: 'modern',
       imports: 'webpack',
       styled: true,
+      verbose: false,
       enableIntl: false,
       // imports: 'webpack',
       srcDir: SRC_DIR,
@@ -137,7 +139,7 @@ export default function createWebpackConfig(
   );
 
   const name = _IS_CLIENT_ ? 'client' : 'server';
-  const target = _IS_CLIENT_ ? 'web' : 'async-node';
+  const target = _IS_CLIENT_ ? 'web' : 'node';
 
   const devtool = _IS_DEV_ ? 'cheap-module-eval-source-map' : 'source-map';
 
@@ -215,7 +217,6 @@ export default function createWebpackConfig(
     let entry = [require.resolve('react-hot-loader/patch'), HMR_MIDDLEWARE, CLIENT_ENTRY];
     if (!_IS_DEV_) {
       entry = {
-        vendor: CLIENT_VENDOR,
         main: CLIENT_ENTRY,
       };
     }
@@ -237,17 +238,22 @@ export default function createWebpackConfig(
     externals: _IS_SERVER_ ? externals : undefined,
     node: _IS_CLIENT_
       ? {
-          console: true,
+          dgram: 'empty',
+          fs: 'empty',
+          net: 'empty',
+          tls: 'empty',
+          // eslint-disable-next-line
+        child_process: 'empty',
           __filename: true,
           __dirname: true,
         }
       : {
-          Buffer: false,
-          __dirname: false,
-          __filename: false,
           console: false,
-          global: true,
+          global: false,
           process: false,
+          Buffer: false,
+          __filename: false,
+          __dirname: false,
         },
     performance: _IS_DEV_
       ? false
@@ -405,6 +411,8 @@ export default function createWebpackConfig(
       new webpack.DefinePlugin({
         __DEV__: JSON.stringify(_IS_DEV_),
         __SERVER__: JSON.stringify(_IS_SERVER_),
+        __PUB_PATH__: JSON.stringify(PUBLIC_PATH),
+        __CLIENT__: _IS_CLIENT_,
         'process.env.NODE_ENV': JSON.stringify(options.env),
         'process.env.TARGET': JSON.stringify(webpackTarget),
         'process.env.GRAPHQL_ENDPOINT': JSON.stringify(GRAPHQL_ENDPOINT),
@@ -513,13 +521,24 @@ export default function createWebpackConfig(
       // @see: https://webpack.js.org/plugins/no-emit-on-errors-plugin/
       _IS_DEV_ ? new webpack.NoEmitOnErrorsPlugin() : null,
 
+      // _IS_DEV_ && _IS_CLIENT_
+      //   ? new webpack.DllReferencePlugin({
+      //       context: ROOT,
+      //       manifest: require(path.resolve(CLIENT_OUTPUT, 'boldrDLLs.json')),
+      //     })
+      //   : null,
+      // Dll reference speeds up development by grouping all of your vendor dependencies
+      // in a DLL file. This is not compiled again, unless package.json contents
+      // have changed.
       _IS_DEV_ && _IS_CLIENT_
-        ? new webpack.DllReferencePlugin({
+        ? new AutoDllPlugin({
             context: ROOT,
-            manifest: require(path.resolve(CLIENT_OUTPUT, 'boldrDLLs.json')),
+            filename: 'boldrDLLs.js',
+            entry: {
+              vendor: config.tools.vendor,
+            },
           })
         : null,
-
       process.stdout.isTTY
         ? new ProgressPlugin({
             prefix: PREFIX,

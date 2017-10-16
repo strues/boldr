@@ -20,7 +20,7 @@ type Props = {
   location: RouterLocation,
   onClickLogout: () => void,
   menu: MenuType,
-  children: Array<Node>,
+  children: Node,
   token: string,
 };
 

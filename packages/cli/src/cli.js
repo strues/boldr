@@ -10,6 +10,7 @@ import {
 
 import pkg from '../package.json';
 import clean from './commands/clean';
+import init from './commands/init';
 import dev from './commands/dev';
 import migrate from './commands/migrate';
 import migration from './commands/migration';
@@ -26,6 +27,7 @@ program
 
 dev.register(program);
 clean.register(program);
+init.register(program);
 migration.register(program);
 migrate.register(program);
 program

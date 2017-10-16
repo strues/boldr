@@ -21,7 +21,7 @@ const Members = (props: Props) => {
     <div>
       <Helmet title="Admin: Members" />
       <MembersList toggleUser={props.toggleUser} accounts={props.accounts} />
-      <Dialog title="Edit User" visible={props.visible} onClose={props.close}>
+      <Dialog title="Edit User" isVisible={props.visible} onClose={props.close}>
         <EditMemberForm onSubmit={props.handleSubmit} initialValues={props.initialValues} />
       </Dialog>
     </div>

@@ -1,6 +1,6 @@
 {
   "presets": [["env", {
-    "targets": { "node": 8 },
+    "targets": { "node": "8.5" },
     "modules": "commonjs",
     "useBuiltIns": true,
     "exclude": ["transform-regenerator", "transform-async-to-generator"]
@@ -8,5 +8,7 @@
 ],
   "plugins": [["fast-async", {
     "spec": true
-    }]]
+    }],
+    "transform-object-rest-spread"
+  ]
 }

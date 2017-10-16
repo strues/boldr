@@ -15,12 +15,12 @@ import PageLayout from './components/PageLayout';
 // graphql
 
 import MENU_QUERY from './gql/getMenu.graphql';
-import Routes from './Routes';
 
 export type Props = {
   location: RouterLocation,
   currentUser?: CurrentUser,
   token?: string,
+  children: Node,
   logout: Function,
   data: Object,
 };
@@ -42,7 +42,7 @@ export class Page extends React.Component<Props, *> {
           token={token}
           currentUser={currentUser}
           menu={getMenuById}>
-          <Routes />
+          {this.props.children}
         </PageLayout>
       );
     }

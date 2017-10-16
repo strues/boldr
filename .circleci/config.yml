@@ -39,5 +39,5 @@ jobs:
       - run: ./node_modules/.bin/lerna run --scope @boldr/core -- build
       - run: ./node_modules/.bin/lerna run --scope @boldr/tools -- build
       - run: ./node_modules/.bin/lerna run --scope @boldr/backend -- build
-      - run: yarn test
+      - run: yarn test -- --ci
       - run: ./node_modules/.bin/codecov -t a3dc697a-382d-4d84-a07b-1f5682c3d70a -f coverage/coverage-final.json

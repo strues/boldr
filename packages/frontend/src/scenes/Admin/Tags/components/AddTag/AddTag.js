@@ -1,5 +1,5 @@
 /* @flow */
-import * as React from 'react';
+import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { graphql, compose } from 'react-apollo';
 import styled from 'styled-components';

@@ -1,6 +1,6 @@
 import { startDevServer } from '@boldr/tools';
 
-function task(args, options) {
+function task() {
   try {
     startDevServer();
   } catch (error) {

@@ -1,15 +1,15 @@
 import React from 'react';
-import StaticRouter from 'react-router-dom/StaticRouter';
+
+import ReactDOMServer from 'react-dom/server';
 import { renderToStringWithData } from 'react-apollo';
 import { flushChunkNames } from 'react-universal-component/server';
 import flushChunks from 'webpack-flush-chunks';
-import serialize from 'serialize-javascript';
 import { ServerStyleSheet } from 'styled-components';
-import Helmet from 'react-helmet';
 
-import { wrapBoldrApp, createHistory, createApolloClient, createBoldrStore } from '@boldr/core';
+import { serverRender, createHistory, createApolloClient, createBoldrStore } from '@boldr/core';
 import App from './components/App/App.js';
 import appReducer from './reducers';
+import Html from './components/Html';
 
 /**
  * Express middleware to render HTML
@@ -24,7 +24,8 @@ export default ({ clientStats, outputPath }) =>
    * @param  {Object}     res Express response object
    * @return {htmlAttributes}     the page :)
    */
-  async (req, res) => {
+  // eslint-disable-next-line no-unused-vars
+  async (req, res, next) => {
     const apolloClient = createApolloClient({
       batchRequests: true,
       uri: process.env.GRAPHQL_ENDPOINT,
@@ -39,72 +40,67 @@ export default ({ clientStats, outputPath }) =>
     const routerContext = {};
 
     const sheet = new ServerStyleSheet();
-    const appComponent = (
-      <StaticRouter location={req.url} context={routerContext}>
-        <App />
-      </StaticRouter>
+
+    const location = req.url;
+    // appComponent takes the apolloClient, the reduxStore, location (req.url), the routerContext and
+    // the <App /> component.
+    // It populates the ApolloProvider, StaticRouter and places the application component
+    const appComponent = serverRender(
+      { apolloClient, reduxStore, location, routerContext },
+      <App />,
     );
-    // Wrap the router and application component in the ApolloProvider
-    const markup = wrapBoldrApp(appComponent, apolloClient, reduxStore);
-    // Traverse the component tree looking for queries and styled-component data
-    // then transform it all into a string
-    const app = await renderToStringWithData(sheet.collectStyles(markup));
-
-    if (routerContext.url) {
-      res.status(301).setHeader('Location', routerContext.url);
-      res.redirect(routerContext.url);
-      return;
+    let markup = '';
+    try {
+      // render the applicaation to a string, collecting what's necessary to populate apollo's data and let styled-components
+      // create stylesheet elements
+      markup = await renderToStringWithData(sheet.collectStyles(appComponent));
+    } catch (err) {
+      console.error('Unable to render server side React:', err);
     }
-    console.log('[BOLDR] Flushing chunks...');
-    const chunkNames = flushChunkNames();
 
-    // console.log('[BOLDR] Rendered Chunk Names:', chunkNames.join(', '));
-    const { js, styles, cssHash } = flushChunks(clientStats, {
-      chunkNames: flushChunkNames(),
+    const chunkNames = flushChunkNames();
+    console.log('[BOLDR] Flushing chunks...', chunkNames);
+
+    const { scripts, stylesheets, cssHashRaw } = flushChunks(clientStats, {
+      chunkNames: chunkNames,
       before: ['bootstrap', 'vendor'],
       after: ['main'],
       outputPath,
     });
 
-    // console.log(`[BOLDR] Flushed Script Tags:\n${js.toString()}\n`);
-    // console.log(`[BOLDR] Flushed CSS Tags:\n${styles.toString()}\n`);
-
-    const preloadedState = {
+    const finalState = {
       ...reduxStore.getState(),
       apollo: apolloClient.getInitialState(),
     };
+    const html = ReactDOMServer.renderToNodeStream(
+      <Html
+        styles={stylesheets}
+        cssHash={cssHashRaw}
+        js={scripts}
+        styleTags={sheet.getStyleElement()}
+        component={markup}
+        state={finalState}
+      />,
+    );
 
-    const styleTags = sheet.getStyleTags();
-    const helmet = Helmet.renderStatic();
-    const dlls = '<script type="text/javascript" src="/static/boldrDLLs.js"></script>';
-    res.send(`
-        <!doctype html>
-          <html ${helmet.htmlAttributes.toString()}>
-            <head>
-              ${helmet.title.toString()}
-              ${helmet.meta.toString()}
-              ${helmet.link.toString()}
-
-              ${styles}
-              ${helmet.style.toString()}
-              ${styleTags}
-            </head>
-            <body ${helmet.bodyAttributes.toString()}>
-              <div id="app"><div>${app}</div></div>
-              <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script>
-              ${process.env.NODE_ENV === 'development' ? dlls : <span />}
-              ${js}
-              ${cssHash}
-              <script type="text/javascript">
-              WebFont.load({ google: { families: ['Roboto:300,400,700','Chivo:300,700'] } });
-            </script>
-
-              <script type="text/javascript">
-                window.__APOLLO_STATE__=${serialize(preloadedState, {
-                  json: true,
-                })}
-              </script>
-
-            </body>
-          </html>`);
+    switch (routerContext.status) {
+      case 301:
+      case 302:
+        res.status(routerContext.status);
+        res.location(routerContext.url);
+        res.end();
+        break;
+      case 404:
+        res.status(routerContext.status);
+        res.type('html');
+        res.write('<!doctype html>');
+        html.pipe(res);
+        break;
+      default:
+        res.status(200);
+        res.type('html');
+        res.setHeader('Cache-Control', 'no-cache');
+        res.write('<!doctype html>');
+        html.pipe(res);
+    }
   };
