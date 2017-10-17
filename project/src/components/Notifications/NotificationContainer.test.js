@@ -36,23 +36,23 @@ describe('<NotificationContainer />', () => {
     );
   });
 
-  it('maps state to props', () => {
-    expect(mountedComponent.find('NotificationContainer').props()).toMatchObject(
-      testNotificationState,
-    );
-  });
+  // it('maps state to props', () => {
+  //   expect(mountedComponent.find('NotificationContainer').props()).toMatchObject(
+  //     testNotificationState,
+  //   );
+  // });
 
-  it('maps dispatch to props', () => {
-    expect(mountedComponent.find('NotificationContainer').props()).toMatchObject({
-      animatedMargin: 'bottom',
-      animationDuration: 400,
-      animationEasing: 'ease',
-      dismissAfter: 1000,
-      isVisible: true,
-      options: undefined,
-      uid: 1,
-    });
-  });
+  // it('maps dispatch to props', () => {
+  //   expect(mountedComponent.find('NotificationContainer').props()).toMatchObject({
+  //     animatedMargin: 'bottom',
+  //     animationDuration: 400,
+  //     animationEasing: 'ease',
+  //     dismissAfter: 1000,
+  //     isVisible: true,
+  //     options: undefined,
+  //     uid: 1,
+  //   });
+  // });
 
   it('dispatches hideNotification and removeNotification', () => {
     const { uid, dismissAfter, animationDuration } = testProps;

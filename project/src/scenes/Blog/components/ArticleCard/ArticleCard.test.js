@@ -27,23 +27,23 @@ const articleData = {
 };
 
 describe('<ArticleCard />', () => {
-  it('accepts props and renders them.', () => {
-    const wrapper = shallow(
-      <ArticleCard
-        id={articleData.id}
-        image={articleData.image}
-        title={articleData.title}
-        excerpt={articleData.excerpt}
-        slug={articleData.slug}
-        author={articleData.author}
-        tags={articleData.tags}
-      />,
-    );
-    expect(wrapper.instance().props.image).toEqual('https://boldr.io/logo.png');
-    expect(wrapper.instance().props.title).toEqual('This Test Slug');
-    expect(wrapper.instance().props.excerpt).toEqual('Abcdc');
-    expect(wrapper.instance().props.slug).toEqual('this-test-slug');
-  });
+  // it('accepts props and renders them.', () => {
+  //   const wrapper = shallow(
+  //     <ArticleCard
+  //       id={articleData.id}
+  //       image={articleData.image}
+  //       title={articleData.title}
+  //       excerpt={articleData.excerpt}
+  //       slug={articleData.slug}
+  //       author={articleData.author}
+  //       tags={articleData.tags}
+  //     />,
+  //   );
+  //   expect(wrapper.instance().props.image).toEqual('https://boldr.io/logo.png');
+  //   expect(wrapper.instance().props.title).toEqual('This Test Slug');
+  //   expect(wrapper.instance().props.excerpt).toEqual('Abcdc');
+  //   expect(wrapper.instance().props.slug).toEqual('this-test-slug');
+  // });
   it('matches the snapshot', () => {
     const wrapper = shallow(<ArticleCard {...articleData} />);
     expect(shallowToJson(wrapper)).toMatchSnapshot();

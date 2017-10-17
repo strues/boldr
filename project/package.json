@@ -29,8 +29,7 @@
     "storybook": "NODE_ENV=story start-storybook -p 6006",
     "precommit": "lint-staged --verbose",
     "prettier": "node ./internal/scripts/prettier.js write",
-    "test": "echo \"No tests... skipping\" && exit 0",
-    "tesst": "NODE_ENV=test jest --config jest.config.json",
+    "test": "NODE_ENV=test jest --config jest.config.js",
     "update": "babel-node internal/scripts/updateSchema.js"
   },
   "dependencies": {
@@ -125,6 +124,7 @@
     "flow-bin": "^0.57.3",
     "identity-obj-proxy": "3.0.0",
     "jest-enzyme": "4.0.1",
+    "jest-transform-graphql":"2.1.0",
     "jest-styled-components": "4.7.0",
     "jest": "21.2.1",
     "mockdate": "^2.0.2",

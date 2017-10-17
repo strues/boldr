@@ -6,8 +6,4 @@ const exec = (cmd, env) =>
     env: Object.assign({}, process.env, env),
   });
 
-if (process.env.CI) {
-  exec('lerna bootstrap --stream');
-} else {
-  exec('lerna bootstrap --stream');
-}
+exec('lerna bootstrap --stream');

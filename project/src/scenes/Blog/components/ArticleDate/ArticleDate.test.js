@@ -9,8 +9,8 @@ describe('<ArticleDate />', () => {
     expect(wrapper.find('div').length).toBe(1);
   });
 
-  it('accepts props and renders them.', () => {
+  it('matches the snapshot.', () => {
     const wrapper = shallow(<ArticleDate created="2017-01-27T02:52:52.687Z" />);
-    expect(wrapper.instance().props.created).toBe('2017-01-27T02:52:52.687Z');
+    expect(shallowToJson(wrapper)).toMatchSnapshot();
   });
 });
