@@ -12,14 +12,15 @@ pipeline:
       - /tmp/cache:/cache
 
   build:
-    image: node:8.5.0
+    image: node:8.7
     commands:
-      - yarn install
+      - yarn install --pure-lockfile
       - ./node_modules/.bin/lerna run --scope @boldr/utils -- build
       - ./node_modules/.bin/lerna run --scope @boldr/core -- build
       - ./node_modules/.bin/lerna run --scope @boldr/tools -- build
       - ./node_modules/.bin/lerna run --scope @boldr/backend -- build
       - yarn run test -- --ci
+      - yarn gencoverage
       - ./node_modules/.bin/codecov -t a3dc697a-382d-4d84-a07b-1f5682c3d70a -f coverage/coverage-final.json
 
   rebuild-cache:

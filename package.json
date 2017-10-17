@@ -11,10 +11,8 @@
     "coverage": "codecov",
     "lint": "eslint . --fix",
     "postinstall": "npm run bootstrap",
-    "dev": "NODE_ENV=development DEBUG=boldr:* nodemon",
     "precommit": "lint-staged --verbose",
-    "jest": "NODE_ENV=development ./node_modules/.bin/jest --config ./jest.config.js",
-    "prepush": "npm test -- -u",
+    "prepush": "yarn test",
     "prettier": "node ./internal/scripts/prettier.js write",
     "test": "lerna run test"
   },
