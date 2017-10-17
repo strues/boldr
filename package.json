@@ -14,7 +14,8 @@
     "precommit": "lint-staged --verbose",
     "prepush": "yarn test",
     "prettier": "node ./internal/scripts/prettier.js write",
-    "test": "lerna run test"
+    "test": "lerna run test",
+    "test:ci": "lerna run test -- -ci"
   },
   "keywords": [
     "react",

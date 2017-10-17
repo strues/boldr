@@ -19,7 +19,7 @@ pipeline:
       - ./node_modules/.bin/lerna run --scope @boldr/core -- build
       - ./node_modules/.bin/lerna run --scope @boldr/tools -- build
       - ./node_modules/.bin/lerna run --scope @boldr/backend -- build
-      - yarn run test -- --ci
+      - yarn run test:ci
       - yarn gencoverage
       - ./node_modules/.bin/codecov -t a3dc697a-382d-4d84-a07b-1f5682c3d70a -f coverage/coverage-final.json
 
