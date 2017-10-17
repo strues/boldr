@@ -1,14 +1,21 @@
 {
-  "presets": [["env", {
-    "targets": { "node": "8.5" },
-    "modules": "commonjs",
-    "useBuiltIns": true,
-    "exclude": ["transform-regenerator", "transform-async-to-generator"]
-    }]
-],
-  "plugins": [["fast-async", {
-    "spec": true
-    }],
+  "presets": [
+    [
+      "env",
+      {
+        "targets": { "node": "7" },
+        "modules": "commonjs",
+        "exclude": ["transform-regenerator", "transform-async-to-generator"]
+      }
+    ]
+  ],
+  "plugins": [
+    [
+      "fast-async",
+      {
+        "spec": true
+      }
+    ],
     "transform-object-rest-spread"
   ]
 }

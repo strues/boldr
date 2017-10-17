@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import removeIdFromArray from './removeIdFromArray';
 
 test('removeIdFromArray removes an id from the array of ids', () => {

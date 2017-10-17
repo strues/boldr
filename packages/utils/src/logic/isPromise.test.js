@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import isPromise from './isPromise';
 
 describe('isPromise', () => {

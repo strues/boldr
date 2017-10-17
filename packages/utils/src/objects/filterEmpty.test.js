@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import filterEmpty from './filterEmpty';
 
 describe('filterEmpty', () => {

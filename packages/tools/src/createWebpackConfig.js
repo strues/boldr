@@ -5,10 +5,9 @@ import fs from 'fs';
 import webpack from 'webpack';
 import WriteFilePlugin from 'write-file-webpack-plugin';
 import ExtractCssChunks from 'extract-css-chunks-webpack-plugin';
-import WatchMissingNodeModulesPlugin from 'react-dev-utils/WatchMissingNodeModulesPlugin';
 import BundleAnalyzerPlugin from 'webpack-bundle-analyzer';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
-import SriPlugin from 'webpack-subresource-integrity';
+
 import autoprefixer from 'autoprefixer';
 import AutoDllPlugin from 'autodll-webpack-plugin';
 import BabelMinify from 'babel-minify-webpack-plugin';
@@ -58,7 +57,6 @@ const defaults = {
 const ROOT = appRoot.get();
 const SERVER_ENTRY = path.resolve(ROOT, config.get('tools.paths.entry.server'));
 const CLIENT_ENTRY = path.resolve(ROOT, config.get('tools.paths.entry.client'));
-const CLIENT_VENDOR = path.resolve(ROOT, config.get('tools.paths.vendor'));
 const PROJECT_SRC = path.resolve(ROOT, 'src');
 const SERVER_OUTPUT = path.resolve(ROOT, config.get('tools.paths.output.server'));
 const CLIENT_OUTPUT = path.resolve(ROOT, config.get('tools.paths.output.client'));
@@ -163,14 +161,14 @@ export default function createWebpackConfig(
     localIdentName: '[name]__[local]--[hash:base64:5]',
     import: 1,
     minimize: !_IS_DEV_,
-    sourceMap: true,
+    sourceMap: !_IS_DEV_,
   };
   const cssLoaderSassOptions = {
     modules: false,
     localIdentName: '[name]__[local]--[hash:base64:5]',
     import: 2,
     minimize: !_IS_DEV_,
-    sourceMap: true,
+    sourceMap: !_IS_DEV_,
   };
   const postCSSLoaderRule = {
     loader: require.resolve('postcss-loader'),
@@ -214,7 +212,7 @@ export default function createWebpackConfig(
 
   const getClientEntry = () => {
     // For development
-    let entry = [require.resolve('react-hot-loader/patch'), HMR_MIDDLEWARE, CLIENT_ENTRY];
+    let entry = [HMR_MIDDLEWARE, CLIENT_ENTRY];
     if (!_IS_DEV_) {
       entry = {
         main: CLIENT_ENTRY,
@@ -243,7 +241,7 @@ export default function createWebpackConfig(
           net: 'empty',
           tls: 'empty',
           // eslint-disable-next-line
-        child_process: 'empty',
+          child_process: 'empty',
           __filename: true,
           __dirname: true,
         }
@@ -278,18 +276,7 @@ export default function createWebpackConfig(
       descriptionFiles: ['package.json'],
       modules: [path.resolve(ROOT, './src'), path.resolve(ROOT, './node_modules'), 'node_modules'],
       mainFields: _IS_CLIENT_
-        ? [
-            'browser:modern',
-            'browser:esnext',
-            'web:modern',
-            'browser',
-            'esnext',
-            'jsnext',
-            'esnext:main',
-            'jsnext:main',
-            'module',
-            'main',
-          ]
+        ? ['browser:modern', 'browser:esnext', 'web:modern', 'browser', 'module', 'main']
         : ['esnext:main', 'module:modern', 'main:modern', 'jsnext:main', 'module', 'main'],
       alias: {
         'babel-runtime': relativeResolve('babel-runtime/package.json'),
@@ -420,14 +407,7 @@ export default function createWebpackConfig(
         'process.env.API_PREFIX': JSON.stringify(API_PREFIX),
         'process.env.BUILD_TARGET': JSON.stringify(webpackTarget),
       }),
-      // Subresource Integrity (SRI) is a security feature that enables browsers to verify that
-      // files they fetch (for example, from a CDN) are delivered without unexpected manipulation.
-      // https://www.npmjs.com/package/webpack-subresource-integrity
-      // Browser-Support: http://caniuse.com/#feat=subresource-integrity
-      new SriPlugin({
-        hashFuncNames: ['sha256', 'sha512'],
-        enabled: _IS_PROD_ && _IS_CLIENT_,
-      }),
+
       new webpack.LoaderOptionsPlugin({
         minimize: _IS_PROD_,
         debug: !_IS_PROD_,
@@ -444,9 +424,6 @@ export default function createWebpackConfig(
               cacheDirectory: _IS_DEV_,
               compact: _IS_PROD_,
               presets: [_IS_CLIENT_ ? clientPreset : serverPreset],
-              plugins: [
-                _IS_CLIENT_ && _IS_DEV_ ? require.resolve('react-hot-loader/babel') : null,
-              ].filter(Boolean),
             },
           },
         ],
@@ -476,13 +453,26 @@ export default function createWebpackConfig(
       _IS_CLIENT_ ? new ExtractCssChunks() : null,
 
       _IS_SERVER_ ? new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }) : null,
+      _IS_PROD_ ? new webpack.optimize.ModuleConcatenationPlugin() : null,
 
+      // "Use HashedModuleIdsPlugin to generate IDs that preserves over builds."
+      // @see: https://github.com/webpack/webpack.js.org/issues/652#issuecomment-273324529
+      _IS_PROD_ && _IS_CLIENT_ ? new webpack.HashedModuleIdsPlugin() : null,
       // Extract Webpack bootstrap code with knowledge about chunks into separate cachable package.
+      // explicit-webpack-runtime-chunk
+      _IS_CLIENT_ && _IS_PROD_
+        ? new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            minChunks: module => /node_modules/.test(module.resource),
+          })
+        : null,
+      // Extract Webpack bootstrap code with knowledge about chunks into separate cachable package.
+      // explicit-webpack-runtime-chunk
       _IS_CLIENT_
         ? new webpack.optimize.CommonsChunkPlugin({
-            names: _IS_DEV_ ? ['bootstrap'] : ['vendor', 'bootstrap'],
+            names: 'bootstrap',
             //   // needed to put webpack bootstrap code before chunks
-            filename: _IS_PROD_ ? '[name]-[chunkhash].js' : '[name].js',
+            filename: _IS_DEV_ ? '[name].js' : '[name]-[chunkhash].js',
             minChunks: Infinity,
           })
         : null,
@@ -502,31 +492,19 @@ export default function createWebpackConfig(
             { comments: false },
           )
         : null,
-      _IS_PROD_ ? new webpack.optimize.ModuleConcatenationPlugin() : null,
+
       // Let the server side renderer know about our client side assets
       // https://github.com/FormidableLabs/webpack-stats-plugin
       _IS_PROD_ && _IS_CLIENT_ ? new StatsPlugin('stats.json') : null,
-
-      // "Use HashedModuleIdsPlugin to generate IDs that preserves over builds."
-      // @see: https://github.com/webpack/webpack.js.org/issues/652#issuecomment-273324529
-      _IS_PROD_ && _IS_CLIENT_ ? new webpack.HashedModuleIdsPlugin() : null,
       // I would recommend using NamedModulesPlugin during development (better output).
       // @see: https://github.com/webpack/webpack.js.org/issues/652#issuecomment-273023082
       _IS_DEV_ ? new webpack.NamedModulesPlugin() : null,
-
-      _IS_DEV_ ? new WatchMissingNodeModulesPlugin(path.resolve(ROOT, './node_modules')) : null,
       // @see: https://webpack.js.org/plugins/hot-module-replacement-plugin/
       _IS_CLIENT_ && _IS_DEV_ ? new webpack.HotModuleReplacementPlugin() : null,
       // skip the emitting phase whenever there are errors while compiling
       // @see: https://webpack.js.org/plugins/no-emit-on-errors-plugin/
       _IS_DEV_ ? new webpack.NoEmitOnErrorsPlugin() : null,
 
-      // _IS_DEV_ && _IS_CLIENT_
-      //   ? new webpack.DllReferencePlugin({
-      //       context: ROOT,
-      //       manifest: require(path.resolve(CLIENT_OUTPUT, 'boldrDLLs.json')),
-      //     })
-      //   : null,
       // Dll reference speeds up development by grouping all of your vendor dependencies
       // in a DLL file. This is not compiled again, unless package.json contents
       // have changed.

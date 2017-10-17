@@ -6,6 +6,7 @@ internal
 config
 framework
 lib
+coverage
 server
 assets-manifest.json
 coverage

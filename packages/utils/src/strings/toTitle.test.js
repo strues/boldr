@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import toTitle from './toTitle';
 
 test('toTitle should title case a string', () => {

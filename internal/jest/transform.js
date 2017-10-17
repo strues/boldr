@@ -5,17 +5,7 @@ module.exports = babelJest.createTransformer({
     [
       'babel-preset-boldr',
       {
-        useBuiltins: true,
-        faSpecMode: true,
-        looseMode: true,
-        specMode: false,
-        nodentRt: false,
-        polyfill: false,
-        target: '8.4',
-        modules: 'commonjs',
-        imports: 'rollup-nodejs',
-        sourceMap: false,
-        styled: false,
+        env: 'development',
       },
     ],
   ],

@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import curry from './curry';
 
 describe('curry', () => {

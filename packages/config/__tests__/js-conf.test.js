@@ -1,6 +1,8 @@
-'use strict';
+/**
+ * @jest-environment node
+ */
 
-process.env.CFG_DIR = __dirname + '/js-conf';
+process.env.CFG_DIR = __dirname + '/__fixtures__/js-conf';
 
 describe('@boldr/config [js conf]', () => {
   it('has `get` method', () => {

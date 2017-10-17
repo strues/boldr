@@ -25,7 +25,7 @@
 .*/.idea/.*
 .*/.vscode/.*
 .*/coverage/.*
-<PROJECT_ROOT>/packages/frontend/flow-typed/npm/styled-components/.*
+<PROJECT_ROOT>/project/flow-typed/npm/styled-components/.*
 .*\.test\.js
 
 [include]
@@ -33,7 +33,7 @@
 
 [libs]
 flow-typed/npm/
-<PROJECT_ROOT>/packages/frontend/flow-typed/npm/
+<PROJECT_ROOT>/project/flow-typed/npm/
 <PROJECT_ROOT>/packages/tools/flow-typed/npm/
 internal/flow/defs/
 
@@ -41,7 +41,7 @@ internal/flow/defs/
 emoji=true
 module.system=node
 module.system.node.resolve_dirname=node_modules
-module.system.node.resolve_dirname=packages/frontend/src
+module.system.node.resolve_dirname=project/src
 
 esproposal.class_static_fields=enable
 esproposal.class_instance_fields=ignore
@@ -54,9 +54,9 @@ munge_underscores=false
 # This is so that we can import static files in our webpack supported components
 # and not have flow throw a hissy fit.
 module.name_mapper='^\(.*\)\.\(css\|eot\|graphql\|gif\|ico\|jpg\|jpeg\|less\|otf\|mp3\|mp4\|ogg\|png\|sass\|scss\|sss\|svg\|swf\|ttf\|webp\|woff\|woff2\)$' -> '<PROJECT_ROOT>/internal/flow/stubs/WebpackAsset.js.flow'
-module.name_mapper='^~types\/\(.*\)$' -> '<PROJECT_ROOT>/packages/frontend/src/types/\1'
+module.name_mapper='^~types\/\(.*\)$' -> '<PROJECT_ROOT>/project/src/types/\1'
 suppress_comment=\\(.\\|\n\\)*\\$FlowIssue
 suppress_comment= \\(.\\|\n\\)*\\$FlowIgnore
 
 [version]
-0.57.2
+0.57.3

@@ -8,6 +8,7 @@
   },
   "files": [
     "bin",
+    "static",
     "lib"
   ],
   "keywords": [
@@ -29,21 +30,19 @@
     "url": "https://github.com/strues/boldr/issues"
   },
   "scripts": {
-    "build": "rm -rf ./lib && NODE_ENV=production babel src --source-maps --out-dir lib",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rm -rf ./lib && NODE_ENV=production babel src --out-dir lib",
+    "test": "echo \"No tests... skipping\" && exit 0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
-    "eslint": "^4.8.0",
+    "babel-preset-env": "^1.6.1",
     "babel-plugin-transform-object-rest-spread": "6.26.0",
-    "eslint-config-boldr": "^0.13.2",
     "fast-async": "^6.3.0"
   },
   "dependencies": {
     "@boldr/config": "^0.1.2",
-    "@boldr/tools": "^0.1.0-beta.4",
-    "@boldr/utils": "0.1.1",
+    "@boldr/tools": "^0.1.0-beta.5",
+    "@boldr/utils": "0.1.2",
     "caporal": "^0.7.0",
     "pify": "3.0.0",
     "fs-extra": "^4.0.2",
@@ -52,7 +51,6 @@
     "pg": "^7.3.0",
     "jsonfile": "4.0.0",
     "execa": "0.8.0",
-    "prettier": "^1.7.4",
     "rimraf": "^2.6.2"
   }
 }

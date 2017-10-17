@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import logger from './logger';
 
 describe('the logger', () => {

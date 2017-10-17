@@ -8,7 +8,6 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackHotServerMiddleware from 'webpack-hot-server-middleware';
 import { createBackend } from '@boldr/backend';
 import createWebpackConfig from '../createWebpackConfig';
-import buildWebpackDlls from './buildWebpackDlls';
 
 const DEV_PORT = process.env.DEV_PORT;
 const PORT = parseInt(DEV_PORT, 10);
@@ -21,7 +20,7 @@ const locale = {
   supported: ['en-US', 'es-ES'],
 };
 
-export async function startDevServer() {
+export function startDevServer() {
   // await buildWebpackDlls();
   const clientConfig = createWebpackConfig({
     target: 'client',

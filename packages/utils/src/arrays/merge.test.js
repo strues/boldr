@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import merge from './merge';
 
 const LEFT = {

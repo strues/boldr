@@ -1,7 +1,0 @@
-{
-"extends": ["boldr", "boldr/import"],
-"rules": {
-  "getter-return": 0,
-  "prefer-destructuring": 0
-  }
-}

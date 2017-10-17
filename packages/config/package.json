@@ -20,12 +20,30 @@
     "type": "git",
     "url": "git+https://github.com/strues/boldr.git"
   },
-  "scripts": {},
+  "scripts": {
+    "test": "jest"
+  },
   "dependencies": {
     "app-root-dir": "^1.0.2",
     "debug": "^3.1.0",
     "lodash.get": "^4.4.2",
     "lodash.has": "^4.5.2",
     "lodash.merge": "^4.6.0"
+  },
+  "devDependencies": {
+    "jest": "21.2.1"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/lib/",
+      "__fixtures__"
+    ],
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "/lib/",
+      "__fixtures__"
+    ]
   }
 }
