@@ -3,14 +3,14 @@ import React from 'react';
 import classnames from 'classnames';
 import Link from 'react-router-dom/Link';
 import Tag from '@boldr/ui/Tag';
-import Icon from '@boldr/ui/Icons/Icon';
+import TagIcon from '@boldr/ui/Icons/TagIcon';
 import { StyleClasses } from '@boldr/ui/theme/styleClasses';
 
 const BASE_ELEMENT = StyleClasses.TAG_BLOCK;
 
 type Props = {
   className?: string,
-  tags: Array<Tag>,
+  tags: $ReadOnlyArray<Tag>,
 };
 
 const TagBlock = (props: Props) => {
@@ -24,7 +24,7 @@ const TagBlock = (props: Props) => {
       {props.tags.map(tag => {
         return (
           <Link key={tag.id} to={`/blog/tags/${tag.name}`}>
-            <Tag id={tag.id} removable={false} thumb={<Icon kind="tag" color="#222" size="14" />}>
+            <Tag id={tag.id} removable={false} thumb={<TagIcon fill="#222" size={14} />}>
               {tag.name}
             </Tag>
           </Link>

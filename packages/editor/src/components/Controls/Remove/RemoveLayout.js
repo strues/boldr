@@ -2,7 +2,7 @@
 
 import React from 'react';
 import cn from 'classnames';
-import Eraser from '@boldr/icons/Eraser';
+import { Eraser } from '../../Icons';
 import Option from '../../Option';
 
 type Props = {
@@ -15,7 +15,7 @@ const RemoveLayout = ({ config, onChange }: Props) => {
   return (
     <span className={cn('be-ctrl__group')} aria-label="be-remove__control">
       <Option className={className} onClick={onChange} title={title}>
-        <Eraser fill="#222" />
+        <Eraser size={20} fill="#222" />
       </Option>
     </span>
   );

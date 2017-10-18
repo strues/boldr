@@ -4,7 +4,7 @@
 import React from 'react';
 import type { Node } from 'react';
 import cn from 'classnames';
-import Smile from '@boldr/icons/Smile';
+import { Smile } from '../../Icons';
 import { stopPropagation } from '../../../utils/common';
 import type { EmojiConfig } from '../../../core/config';
 import Option from '../../Option';
@@ -45,7 +45,7 @@ class EmojiLayout extends React.Component<Props, *> {
         aria-expanded={expanded}
         title={title}>
         <Option className={cn(className)} value="unordered-list-item" onClick={onExpandEvent}>
-          <Smile fill="#222" />
+          <Smile size={20} fill="#222" />
         </Option>
         {expanded ? this.renderEmojiModal() : undefined}
       </div>

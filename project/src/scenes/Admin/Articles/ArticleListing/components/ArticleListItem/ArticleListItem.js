@@ -5,7 +5,7 @@ import format from 'date-fns/format';
 import { connect } from 'react-redux';
 import { graphql } from 'react-apollo';
 import Avatar from '@boldr/ui/Avatar';
-import Icon from '@boldr/ui/Icons/Icon';
+import { Edit, Trash } from '@boldr/ui/Icons';
 
 import { push } from 'react-router-redux';
 
@@ -45,13 +45,16 @@ class ArticleListItem extends React.Component<Props, *> {
   handleArticleClick = () => {
     this.props.onArticleClick(this.props.article);
   };
+
   handleEditClick = () => {
     this.props.dispatch(push(`/admin/articles/${this.props.article.slug}`));
   };
+
   handleDeleteClick = () => {
     const { id } = this.props.article;
     this.props.deleteArticle(id);
   };
+
   render() {
     const { article, deleteArticle } = this.props;
 
@@ -62,12 +65,12 @@ class ArticleListItem extends React.Component<Props, *> {
           {article.title}
           <Menu isSize="normal">
             <MenuItem
-              icon={<Icon kind="trash" color="#222" />}
+              icon={<Trash size={20} fill="#222" />}
               onClick={deleteArticle(article.id)}
               text="Delete"
             />
             <MenuItem
-              icon={<Icon kind="edit" color="#222" />}
+              icon={<Edit size={20} fill="#222" />}
               onClick={this.handleEditClick}
               text="Edit"
             />

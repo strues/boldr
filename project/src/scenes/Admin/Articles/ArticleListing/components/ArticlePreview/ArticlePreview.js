@@ -2,11 +2,11 @@
 import * as React from 'react';
 import Link from 'react-router-dom/Link';
 import Paper from '@boldr/ui/Paper';
-import Edit from '@boldr/icons/Edit';
+import Edit from '@boldr/ui/Icons/Edit';
 import Dialog from '@boldr/ui/Dialog';
 import styled from 'styled-components';
 import IconButton from '@boldr/ui/IconButton';
-import Maximize from '@boldr/icons/Maximize';
+import WindowMaximize from '@boldr/ui/Icons/WindowMaximize';
 import DynamicContent from '../../../../../../components/DynamicContent';
 import type { ArticleType } from '../../../../../../types/boldr';
 
@@ -33,8 +33,12 @@ Toolbar.defaultProps = {
     },
   },
 };
-const ArticlePreviewTitle = styled.div`justify-content: flex-start;`;
-const ArticlePreviewEdit = styled.div`justify-content: flex-end;`;
+const ArticlePreviewTitle = styled.div`
+  justify-content: flex-start;
+`;
+const ArticlePreviewEdit = styled.div`
+  justify-content: flex-end;
+`;
 class ArticlePreview extends React.Component<Props, *> {
   props: Props;
 
@@ -43,15 +47,19 @@ class ArticlePreview extends React.Component<Props, *> {
       __html: this.props.article.content,
     };
   };
+
   noArticleDisplayed = () => {
     return <div>Click an article to preview.</div>;
   };
+
   onClickClose = () => {
     this.props.onCloseExpand();
   };
+
   handleClickExpand = () => {
     this.props.onClickExpand();
   };
+
   displayArticle = () => {
     const { article } = this.props;
     return (
@@ -60,10 +68,10 @@ class ArticlePreview extends React.Component<Props, *> {
           <ArticlePreviewTitle>{article.title}</ArticlePreviewTitle>
           <ArticlePreviewEdit>
             <IconButton onClick={this.handleClickExpand}>
-              <Maximize stroke="#fff" size="24px" color="#fff" fill="#fff" />
+              <WindowMaximize fill="#fff" size={24} />
             </IconButton>
             <Link to={`/admin/articles/${article.slug}`}>
-              <Edit stroke="#fff" size="24px" />
+              <Edit fill="#fff" size={24} />
             </Link>
           </ArticlePreviewEdit>
         </Toolbar>
@@ -82,6 +90,7 @@ class ArticlePreview extends React.Component<Props, *> {
       </div>
     );
   };
+
   render() {
     return <div>{!this.props.article ? this.noArticleDisplayed() : this.displayArticle()}</div>;
   }

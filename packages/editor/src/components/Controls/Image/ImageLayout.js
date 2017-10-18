@@ -4,7 +4,7 @@
 import React from 'react';
 import type { Node } from 'react';
 import cn from 'classnames';
-import Image from '@boldr/icons/Image';
+import { Image } from '../../Icons';
 import Option from '../../Option';
 import Spinner from '../../Spinner';
 import type { ImageConfig } from '../../../core/config';
@@ -297,7 +297,7 @@ class ImageLayout extends React.Component<Props, State> {
           value="unordered-list-item"
           onClick={this.props.onExpandEvent}
           title={title}>
-          <Image color="#222" />
+          <Image size={20} fill="#222" />
         </Option>
         {expanded ? this.renderAddImageModal() : undefined}
       </div>

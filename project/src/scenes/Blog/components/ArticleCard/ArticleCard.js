@@ -2,7 +2,7 @@
 import React from 'react';
 import format from 'date-fns/format';
 import styled from 'styled-components';
-import Link from 'react-router-dom/Link';
+import { Link } from '@boldr/core';
 import type { TagsType } from '../../../../types/boldr';
 import TagBlock from '../TagBlock';
 

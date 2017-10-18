@@ -34,12 +34,15 @@ class FontFamilyLayout extends React.Component<Props, State> {
       this.setDefaultFam(defaultFontFamily);
     }
   }
+
   setDefaultFam = defaultFont => {
     this.setState({
       defaultFontFamily: defaultFont,
     });
   };
+
   props: Props;
+
   render(): Node {
     const { defaultFontFamily } = this.state;
     const {

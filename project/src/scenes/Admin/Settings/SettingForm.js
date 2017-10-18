@@ -1,5 +1,5 @@
 // @flow
-import * as React from 'react';
+import React from 'react';
 import Form, { FormField, Control, Input, Label } from '@boldr/ui/Form';
 
 type Props = {
@@ -12,7 +12,9 @@ type State = {
 
 class SettingForm extends React.Component<Props, State> {
   state = { value: this.props.value };
+
   props: Props;
+
   handleChange = event => {
     this.setState({ value: event.target.value });
   };

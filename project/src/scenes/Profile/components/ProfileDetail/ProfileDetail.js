@@ -3,7 +3,7 @@ import React from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 // internal
-import { StyleClasses } from '@boldr/ui/theme/styleClasses';
+import { StyleClasses } from '../../../../theme/styleClasses';
 
 const DetailLabel = styled.div`
   font-size: 1.4em;

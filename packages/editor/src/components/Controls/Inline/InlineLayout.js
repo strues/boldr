@@ -3,7 +3,7 @@
 
 import React from 'react';
 import cn from 'classnames';
-import { Bold, Italic, Underline, Strikethrough, Code } from '@boldr/icons';
+import { Bold, Italic, Underline, Strikethrough, Code } from '../../Icons';
 import Option from '../../Option';
 
 type CurrentState = {
@@ -26,35 +26,37 @@ const InlineLayout = (props: Props) => {
   return (
     <div className={cn('be-ctrl__group')} aria-label="be-inline-control">
       <Option value="bold" onClick={onChange} active={currentState.bold === true} title="bold">
-        <Bold color="#222" />
+        <Bold size={20} fill="#222" />
       </Option>
       <Option
         value="italic"
         onClick={onChange}
         active={currentState.italic === true}
         title="Italic">
-        <Italic color="#222" />
+        <Italic size={20} fill="#222" />
       </Option>
       <Option
         value="underline"
         onClick={onChange}
         active={currentState.underline === true}
         title="Underline">
-        <Underline color="#222" />
+        <Underline size={20} fill="#222" />
       </Option>
       <Option
         value="strikethrough"
         onClick={onChange}
         active={currentState.strikethrough === true}
         title="Strikethrough">
-        <Strikethrough fill="#222" />
-      </Option>
-
-      <Option value="code" onClick={onChange} active={currentState.CODE} title="Code">
-        <Code fill="#222" />
+        <Strikethrough size={20} fill="#222" />
       </Option>
     </div>
   );
 };
 
 export default InlineLayout;
+
+/*
+
+      <Option value="code" onClick={onChange} active={currentState.CODE} title="Code">
+        <Code size={20} fill="#222" />
+      </Option>*/

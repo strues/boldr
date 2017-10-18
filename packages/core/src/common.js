@@ -1,3 +1,5 @@
+export { Route, withRouter, Switch, Redirect, Link, NavLink } from 'react-router-dom';
+
 export { default as wrapBoldrApp } from './shared/wrapBoldrApp';
 
 export { getToken, parseJWT, setToken, removeToken } from './shared/token';

@@ -3,7 +3,7 @@
 import React from 'react';
 import type { Node } from 'react';
 import type { ContentBlock, ContentState } from 'draft-js';
-import ExternalLink from '@boldr/icons/ExternalLink';
+import { ExternalLink } from '../../../components/Icons';
 import type { LinkConfig } from '../../config';
 
 type Props = {
@@ -38,6 +38,7 @@ function getLinkComponent(config) {
     state: State = {
       showPopOver: false,
     };
+
     props: Props;
 
     openLink: Function = () => {
@@ -69,7 +70,8 @@ function getLinkComponent(config) {
           {showPopOver && showOpenOptionOnHover ? (
             <ExternalLink
               onClick={this.openLink}
-              color="#222"
+              fill="#222"
+              size={20}
               className="be-decorator__link-icon"
             />
           ) : (

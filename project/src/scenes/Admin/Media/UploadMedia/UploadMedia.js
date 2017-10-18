@@ -8,7 +8,7 @@ import Helmet from 'react-helmet';
 import { Row, Col } from '@boldr/ui/Layout';
 import Paper from '@boldr/ui/Paper';
 import Heading from '@boldr/ui/Heading';
-import Upload from '@boldr/icons/Upload';
+import Upload from '@boldr/ui/Icons/Upload';
 import GET_MEDIA_QUERY from '../gql/getMedia.graphql';
 import UPLOAD_MEDIA_MUTATION from '../gql/uploadMedia.graphql';
 import Dropzone from './components/Dropzone';
@@ -22,7 +22,9 @@ const MediaTitleArea = styled.div`
   }
 `;
 
-const MediaInputArea = styled.div`padding-bottom: 50px;`;
+const MediaInputArea = styled.div`
+  padding-bottom: 50px;
+`;
 
 export type Props = {
   dispatch: () => mixed,
@@ -62,6 +64,7 @@ class UploadMedia extends Component<Props, *> {
   };
 
   props: Props;
+
   render() {
     return (
       <div>
@@ -70,7 +73,7 @@ class UploadMedia extends Component<Props, *> {
           <Col xs={6}>
             <Paper zDepth={1}>
               <MediaTitleArea>
-                <Upload stroke="rgba(0, 188, 212, 1.00)" size="36" />
+                <Upload fill="rgba(0, 188, 212, 1.00)" size={36} />
                 <Heading type="h2" text="Upload from your computer" />
               </MediaTitleArea>
               <MediaInputArea>

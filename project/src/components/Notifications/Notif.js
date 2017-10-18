@@ -2,7 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { Button } from '@boldr/ui';
-import Times from '@boldr/icons/Times';
+import Times from '@boldr/ui/Icons/Times';
 
 const NotificationWrap = styled.div`
   position: relative;
@@ -61,7 +61,7 @@ const Notif = ({ options, hideNotification }: Props) => {
       <NotificationInner>
         <NotificationText>{text}</NotificationText>
         <NotifIcon>
-          <Times onClick={hideNotification} color="#222" />
+          <Times onClick={hideNotification} fill="#222" size={20} />
         </NotifIcon>
       </NotificationInner>
     </NotificationWrap>

@@ -28,10 +28,10 @@ module.exports = {
     from: 'hello@boldr.io',
   },
   db: {
-    url: 'postgres://postgres:password@localhost:5432/boldr',
+    url: 'postgres://boldr:password@localhost:5432/boldr',
   },
   redis: {
-    url: 'redis://127.0.0.1:6379/0',
+    url: 'redis://127.0.0.1:6379/1',
   },
   tools: {
     profile: false,

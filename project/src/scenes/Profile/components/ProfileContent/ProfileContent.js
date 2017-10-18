@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'react-router-dom/Link';
 import styled from 'styled-components';
 import { Grid, Col, Row } from '@boldr/ui/Layout';
-import Icon from '@boldr/ui/Icons/Icon';
+import { Bolt, At, MapPin, AddressCard } from '@boldr/ui/Icons';
 // internal
 import Button from '@boldr/ui/Button';
 import Heading from '@boldr/ui/Heading';
@@ -55,22 +55,10 @@ const ProfileContent = (props: Props) => {
             </Heading>
 
             <DetailList>
-              <ProfileDetail
-                label={<Icon kind="zap" color="#222" size="24" />}
-                detail={profile.email}
-              />
-              <ProfileDetail
-                label={<Icon kind="globe" color="#222" size="24" />}
-                detail={profile.website}
-              />
-              <ProfileDetail
-                label={<Icon kind="navigation" color="#222" size="24" />}
-                detail={profile.location}
-              />
-              <ProfileDetail
-                label={<Icon kind="account-card" color="#222" size="24" />}
-                detail={profile.bio}
-              />
+              <ProfileDetail label={<Bolt fill="#222" size={24} />} detail={profile.email} />
+              <ProfileDetail label={<At fill="#222" size={24} />} detail={profile.website} />
+              <ProfileDetail label={<MapPin fill="#222" size={24} />} detail={profile.location} />
+              <ProfileDetail label={<AddressCard fill="#222" size={24} />} detail={profile.bio} />
             </DetailList>
           </Col>
         </Row>

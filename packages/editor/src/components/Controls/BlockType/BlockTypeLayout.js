@@ -4,7 +4,7 @@
 import React from 'react';
 import type { Node } from 'react';
 import cn from 'classnames';
-import { Paragraph, Heading1, Heading2, Heading3, QuoteLeft, Embedded } from '@boldr/icons';
+import { Paragraph, H1, H2, H3, QuoteLeft, Code } from '../../Icons';
 import Option from '../../Option';
 import type { ToolbarBlockTypes } from './BlockType';
 
@@ -27,29 +27,29 @@ class BlockTypeLayout extends React.PureComponent<Props, *> {
     {
       label: 'Normal',
       id: 1,
-      icon: <Paragraph fill="#222" />,
+      icon: <Paragraph size={20} fill="#222" />,
     },
     {
       label: 'H1',
       id: 2,
-      icon: <Heading1 fill="#222" />,
+      icon: <H1 size={20} fill="#222" />,
     },
     {
       label: 'H2',
       id: 3,
-      icon: <Heading2 fill="#222" />,
+      icon: <H2 size={20} fill="#222" />,
     },
     {
       label: 'H3',
       id: 4,
-      icon: <Heading3 fill="#222" />,
+      icon: <H3 size={20} fill="#222" />,
     },
     {
       label: 'Blockquote',
       id: 5,
-      icon: <QuoteLeft fill="#222" />,
+      icon: <QuoteLeft size={20} fill="#222" />,
     },
-    { label: 'Code', id: 6, icon: <Embedded fill="#222" /> },
+    { label: 'Code', id: 6, icon: <Code size={20} fill="#222" /> },
   ];
 
   renderButtons(blocks: ToolbarBlockTypes): Node {

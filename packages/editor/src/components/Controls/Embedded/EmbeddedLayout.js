@@ -3,7 +3,7 @@
 import React from 'react';
 import type { Node } from 'react';
 import cn from 'classnames';
-import Video from '@boldr/icons/Video';
+import { Video } from '../../Icons';
 import { stopPropagation } from '../../../utils/common';
 import Option from '../../Option';
 
@@ -37,7 +37,9 @@ class EmbeddedLayout extends React.Component<Props, State> {
       });
     }
   }
+
   props: Props;
+
   updateValue: Function = (event: SyntheticEvent<>): void => {
     this.setState({
       [`${event.target.name}`]: event.target.value,
@@ -117,7 +119,7 @@ class EmbeddedLayout extends React.Component<Props, State> {
           value="unordered-list-item"
           onClick={onExpandEvent}
           title={title}>
-          <Video color="#222" />
+          <Video size={20} fill="#222" />
         </Option>
         {expanded ? this.rendeEmbeddedLinkModal() : undefined}
       </div>

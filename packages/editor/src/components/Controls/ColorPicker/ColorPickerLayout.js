@@ -4,7 +4,7 @@
 import React from 'react';
 import type { Node } from 'react';
 import cn from 'classnames';
-import Droplet from '@boldr/icons/Droplet';
+import { EyeDropper } from '../../Icons';
 import { stopPropagation } from '../../../utils/common';
 import Option from '../../Option';
 import type { ColorPickerConfig } from '../../../core/config';
@@ -106,7 +106,7 @@ class ColorPickerLayout extends React.Component<Props, State> {
         aria-label="be-color-picker"
         title={this.props.config.title}>
         <Option onClick={onExpandEvent} className={cn(this.props.config.className)}>
-          <Droplet color="#222" onClick={onExpandEvent} />
+          <EyeDropper fill="#222" size={20} onClick={onExpandEvent} />
         </Option>
         {expanded ? this.renderModal() : undefined}
       </div>

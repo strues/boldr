@@ -2,8 +2,7 @@
 
 import * as React from 'react';
 import cn from 'classnames';
-import Undo from '@boldr/icons/Undo';
-import Redo from '@boldr/icons/Redo';
+import { Undo, Redo } from '../../Icons';
 import Option from '../../Option';
 
 export type Props = {
@@ -14,6 +13,7 @@ export type Props = {
 
 export default class HistoryLayout extends React.PureComponent<Props, *> {
   props: Props;
+
   onChange = obj => {
     const { onChange } = this.props;
     onChange(obj);
@@ -32,7 +32,7 @@ export default class HistoryLayout extends React.PureComponent<Props, *> {
           className={cn(undo.className)}
           disabled={undoDisabled}
           title={undo.title}>
-          <Undo fill="#222" />
+          <Undo size={20} fill="#222" />
         </Option>
         <Option
           value="redo"
@@ -40,7 +40,7 @@ export default class HistoryLayout extends React.PureComponent<Props, *> {
           className={cn(redo.className)}
           disabled={redoDisabled}
           title={redo.title}>
-          <Redo fill="#222" />
+          <Redo size={20} fill="#222" />
         </Option>
       </div>
     );

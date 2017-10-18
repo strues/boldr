@@ -5,7 +5,7 @@ import type { Node } from 'react';
 import Link from 'react-router-dom/Link';
 import NavLink from 'react-router-dom/NavLink';
 import {
-  Icon,
+  Cog,
   Container,
   Navbar,
   NavbarBrand,
@@ -15,6 +15,8 @@ import {
   NavbarLink,
   NavbarItem,
   NavbarMenu,
+  AddressCard,
+  SignOut,
   NavbarStart,
 } from '@boldr/ui';
 import type { CurrentUser, SettingsType, RouterLocation, MenuType } from '../../../../types/boldr';
@@ -50,11 +52,13 @@ class Navigation extends React.Component<Props, State> {
   onClickDropdown() {
     this.setState({ isDropdownOpen: !this.state.isDropdownOpen });
   }
+
   onLogoutClick() {
     this.props.onLogout();
   }
 
   props: Props;
+
   render(): Node {
     const { menu: { details }, currentUser, location, token } = this.props;
     const { isActive } = this.state;
@@ -131,7 +135,7 @@ class Navigation extends React.Component<Props, State> {
                 parseInt(currentUser.roleId, 10) === 3 && (
                   <NavbarItem>
                     <NavLink to="/admin">
-                      <Icon kind="dashboard" color="#afbbca" />
+                      <Cog size={20} fill="#afbbca" />
                     </NavLink>
                   </NavbarItem>
                 )}
@@ -143,18 +147,18 @@ class Navigation extends React.Component<Props, State> {
               {token && (
                 <NavbarItem>
                   <NavLink to={`/profiles/${currentUser.username}`}>
-                    <Icon kind="account-card" color="#afbbca" />
+                    <AddressCard size={20} fill="#afbbca" />
                   </NavLink>
                 </NavbarItem>
               )}
               {token && (
                 <NavbarItem>
-                  <Icon kind="logout" onClick={this.onLogoutClick} color="#afbbca" />
+                  <SignOut onClick={this.onLogoutClick} size={20} fill="#afbbca" />
                 </NavbarItem>
               )}
               {!token && (
                 <NavbarItem href="/signup" title="Signup">
-                  Signup
+                  <NavLink to="/signup">Signup</NavLink>
                 </NavbarItem>
               )}
             </NavbarEnd>

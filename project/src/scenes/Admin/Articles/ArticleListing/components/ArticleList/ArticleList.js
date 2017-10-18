@@ -23,6 +23,7 @@ const List = styled.ul`
 
 class ArticleList extends React.PureComponent<Props, *> {
   props: Props;
+
   render() {
     return (
       <div>

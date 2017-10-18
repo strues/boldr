@@ -2,11 +2,11 @@
 
 import React from 'react';
 import Link from 'react-router-dom/Link';
-import Icon from '@boldr/ui/Icons/Icon';
+import Trash from '@boldr/ui/Icons/Trash';
 import styled from 'styled-components';
 
 type Props = {
-  tags: Array<Tag>,
+  tags: $ReadOnlyArray<Tag>,
   handleTagClick: Function,
   handleDeleteTagClick: Function,
 };
@@ -35,7 +35,9 @@ const InnerList = styled.ul`
   padding: 0 2em;
   border-radius: 5px;
 `;
-const InnerListItem = styled.li`padding-left: 0;`;
+const InnerListItem = styled.li`
+  padding-left: 0;
+`;
 const TagName = styled.span`
   font-weight: 600;
   font-size: 1.2em;
@@ -65,7 +67,7 @@ const TagList = (props: Props) => {
                 <TagDesc>{tag.articles.length}</TagDesc>
               </InnerListItem>
               <InnerListItem>
-                <Icon kind="trash" color="#222" size="24" onClick={() => handleClickDelete(tag)} />
+                <Trash fill="#222" size={24} onClick={() => handleClickDelete(tag)} />
               </InnerListItem>
             </InnerList>
           </ListItem>

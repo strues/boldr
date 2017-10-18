@@ -1,12 +1,10 @@
-/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars, import/max-dependencies */
 /* @flow */
 import React from 'react';
 import type { Node } from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-import Route from 'react-router-dom/Route';
-import withRouter from 'react-router-dom/withRouter';
-import Switch from 'react-router-dom/Switch';
+import { Route, withRouter, Switch } from 'react-router-dom';
 import Profile from '../../scenes/Profile';
 import LoginContainer from '../../scenes/Account/Login';
 import SignupContainer from '../../scenes/Account/Signup';
@@ -17,8 +15,16 @@ import StatusRoute from '../../components/StatusRoute';
 import Error404 from '../../pages/Error404';
 import Home from '../../pages/Home';
 import About from '../../pages/About';
-import { articleRoute } from '../../routePaths';
-// import '@boldr/ui/boldrui.css';
+import {
+  articleRoute,
+  tagRoute,
+  aboutRoute,
+  loginRoute,
+  signupRoute,
+  homeRoute,
+  profileRoute,
+  adminRoute,
+} from '../../routePaths';
 import { makeSelectIsAuthenticated } from '../../scenes/Account/state/selectors';
 import AdminLanding from '../../scenes/Admin/DashboardLanding';
 // internal
@@ -35,6 +41,7 @@ type SwitcherProps = {
   location: RouterLocation,
 };
 
+// $FlowIssue
 const ContainerSwitcherRoute = ({ children, location, ...rest }: SwitcherProps) => {
   return location.pathname.includes('/admin') ? (
     <AdminDashboard>{children}</AdminDashboard>
@@ -50,8 +57,10 @@ const AdminRoute = withRouter(
 const ContainerSwitcher = withRouter(ContainerSwitcherRoute);
 const NotificationContainer = boldrNotificationsFactory(Notif);
 
-type Props = {};
-const App = ({ location }) => (
+type Props = {
+  location: RouterLocation,
+};
+const App = ({ location }: Props) => (
   <div className="boldr">
     <Helmet
       titleTemplate="%s - Powered by Boldr"
@@ -75,16 +84,16 @@ const App = ({ location }) => (
     </Helmet>
     <ContainerSwitcher>
       <Switch>
-        <AdminRoute exact path="/admin" component={AdminLanding} />
-        <Route path="/login" component={LoginContainer} />
-        <Route path="/signup" component={SignupContainer} />
+        <AdminRoute exact path={adminRoute()} component={AdminLanding} />
+        <Route path={loginRoute()} component={LoginContainer} />
+        <Route path={signupRoute()} component={SignupContainer} />
         <Route path="/account" component={AccountContainer} />
-        <Route path="/profiles/:username" exact component={Profile} />
+        <Route path={profileRoute(':username')} exact component={Profile} />
 
-        <Route path="/about" exact component={About} />
-        <Route path="/blog/tags/:name" exact component={TagList} />
+        <Route path={aboutRoute()} exact component={About} />
+        <Route path={tagRoute(':name')} exact component={TagList} />
         <Route path={articleRoute(':slug')} exact component={Article} />
-        <Route path="/" exact component={Home} />
+        <Route path={homeRoute()} exact component={Home} />
         <StatusRoute code={404}>
           <Route component={Error404} />
         </StatusRoute>

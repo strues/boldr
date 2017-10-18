@@ -3,7 +3,7 @@ import React from 'react';
 import classnames from 'classnames';
 import Helmet from 'react-helmet';
 import Loader from '@boldr/ui/Loader';
-import { StyleClasses } from '@boldr/ui/theme/styleClasses';
+import { StyleClasses } from '../../theme/styleClasses';
 import type { ProfileType } from '../../types/boldr';
 import ProfileContent from './components/ProfileContent';
 

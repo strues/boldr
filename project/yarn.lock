@@ -2,15 +2,10 @@
 # yarn lockfile v1
 
 
-"@boldr/icons@0.1.0-rc.2":
-  version "0.1.0-rc.2"
-  resolved "https://registry.yarnpkg.com/@boldr/icons/-/icons-0.1.0-rc.2.tgz#8a4e36bdee7a3063ccceb4da75d28be7005b656b"
-
-"@boldr/ui@0.1.8-alpha.2":
-  version "0.1.8-alpha.2"
-  resolved "https://registry.yarnpkg.com/@boldr/ui/-/ui-0.1.8-alpha.2.tgz#18208c0734fd53e9a87efcf116f6241134ef08ef"
+"@boldr/ui@0.1.8-alpha.4":
+  version "0.1.8-alpha.4"
+  resolved "https://registry.yarnpkg.com/@boldr/ui/-/ui-0.1.8-alpha.4.tgz#cdb56fde0615bd2dc5077d1e2385dae846975242"
   dependencies:
-    "@boldr/icons" "0.1.0-rc.2"
     classnames "^2.2.5"
     lodash.assign "^4.2.0"
     lodash.capitalize "^4.2.1"
@@ -29,7 +24,6 @@
     lodash.uniqueid "^4.0.1"
     prop-types "^15.6.0"
     prop-types-extra "^1.0.1"
-    raf "^3.4.0"
     rc-tabs "^9.1.4"
     react-motion "^0.5.2"
     react-visibility-sensor "^3.11.0"
@@ -1569,7 +1563,7 @@ ci-info@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ci-info/-/ci-info-1.1.1.tgz#47b44df118c48d2597b56d342e7e25791060171a"
 
-classnames@2.x, classnames@^2.2.3, classnames@^2.2.5:
+classnames@2.x, classnames@^2.2.5:
   version "2.2.5"
   resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
 
@@ -3114,12 +3108,6 @@ is-extendable@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/is-extendable/-/is-extendable-0.1.1.tgz#62b110e289a471418e3ec36a617d472e301dfc89"
 
-is-extendable@^1.0.0:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/is-extendable/-/is-extendable-1.0.1.tgz#a7470f9e426733d81bd81e1155264e3a3507cab4"
-  dependencies:
-    is-plain-object "^2.0.4"
-
 is-extglob@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/is-extglob/-/is-extglob-1.0.0.tgz#ac468177c4943405a092fc8f29760c6ffc6206c0"
@@ -3183,7 +3171,7 @@ is-path-inside@^1.0.0:
   dependencies:
     path-is-inside "^1.0.1"
 
-is-plain-object@^2.0.1, is-plain-object@^2.0.4:
+is-plain-object@^2.0.1:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/is-plain-object/-/is-plain-object-2.0.4.tgz#2c163b3fafb1b606d9d17928f05c2a1c38e07677"
   dependencies:
@@ -4073,10 +4061,6 @@ lodash.throttle@^4.1.1:
   version "4.1.1"
   resolved "https://registry.yarnpkg.com/lodash.throttle/-/lodash.throttle-4.1.1.tgz#c23e91b710242ac70c37f1e1cda9274cc39bf2f4"
 
-lodash.tonumber@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/lodash.tonumber/-/lodash.tonumber-4.0.3.tgz#0b96b31b35672793eb7f5a63ee791f1b9e9025d9"
-
 lodash.trim@^4.5.1:
   version "4.5.1"
   resolved "https://registry.yarnpkg.com/lodash.trim/-/lodash.trim-4.5.1.tgz#36425e7ee90be4aa5e27bcebb85b7d11ea47aa57"
@@ -4474,18 +4458,6 @@ object.omit@^2.0.0:
     for-own "^0.1.4"
     is-extendable "^0.1.1"
 
-object.omit@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/object.omit/-/object.omit-3.0.0.tgz#0e3edc2fce2ba54df5577ff529f6d97bd8a522af"
-  dependencies:
-    is-extendable "^1.0.0"
-
-object.pick@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/object.pick/-/object.pick-1.3.0.tgz#87a10ac4c1694bd2e1cbf53591a66141fb5dd747"
-  dependencies:
-    isobject "^3.0.1"
-
 object.values@^1.0.4:
   version "1.0.4"
   resolved "https://registry.yarnpkg.com/object.values/-/object.values-1.0.4.tgz#e524da09b4f66ff05df457546ec72ac99f13069a"
@@ -4792,10 +4764,6 @@ pngjs@^3.0.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/pngjs/-/pngjs-3.3.0.tgz#1f5730c189c94933b81beda2ab2f8e2855263a8f"
 
-popper.js@^1.12.5:
-  version "1.12.5"
-  resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.12.5.tgz#229e4dea01629e1f1a1e26991ffade5024220fa6"
-
 postcss-value-parser@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/postcss-value-parser/-/postcss-value-parser-3.3.0.tgz#87f38f9f18f774a4ab4c8a232f5c5ce8872a9d15"
@@ -4913,7 +4881,7 @@ qs@~6.4.0:
   version "6.4.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.4.0.tgz#13e26d28ad6b0ffaa91312cd3bf708ed351e7233"
 
-raf@3.4.0, raf@^3.1.0, raf@^3.3.2, raf@^3.4.0:
+raf@3.4.0, raf@^3.1.0, raf@^3.3.2:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/raf/-/raf-3.4.0.tgz#a28876881b4bc2ca9117d4138163ddb80f781575"
   dependencies:
@@ -5036,13 +5004,6 @@ react-motion@^0.5.2:
     prop-types "^15.5.8"
     raf "^3.1.0"
 
-react-popper@0.7.3, react-popper@^0.7.2:
-  version "0.7.3"
-  resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.7.3.tgz#fa2809a80fbe7ec516e9bac01d81bc47a8b5cd3b"
-  dependencies:
-    popper.js "^1.12.5"
-    prop-types "^15.5.10"
-
 react-redux@^5.0.6:
   version "5.0.6"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.0.6.tgz#23ed3a4f986359d68b5212eaaa681e60d6574946"
@@ -5103,7 +5064,7 @@ react-test-renderer@^16.0.0, react-test-renderer@^16.0.0-0:
     fbjs "^0.8.16"
     object-assign "^4.1.1"
 
-react-transition-group@^2.2.0, react-transition-group@^2.2.1:
+react-transition-group@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.2.1.tgz#e9fb677b79e6455fd391b03823afe84849df4a10"
   dependencies:
@@ -5136,18 +5097,6 @@ react@^16.0.0:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
-
-reactstrap@5.0.0-alpha.3:
-  version "5.0.0-alpha.3"
-  resolved "https://registry.yarnpkg.com/reactstrap/-/reactstrap-5.0.0-alpha.3.tgz#d2b46821efdf8c0511d59c1020fa4cfda174afc9"
-  dependencies:
-    classnames "^2.2.3"
-    lodash.isfunction "^3.0.8"
-    lodash.isobject "^3.0.2"
-    lodash.tonumber "^4.0.3"
-    prop-types "^15.5.8"
-    react-popper "^0.7.2"
-    react-transition-group "^2.2.0"
 
 read-chunk@^1.0.1:
   version "1.0.1"
@@ -5228,17 +5177,6 @@ rechoir@^0.6.2:
   dependencies:
     resolve "^1.1.6"
 
-recompact@^3.2.0:
-  version "3.2.0"
-  resolved "https://registry.yarnpkg.com/recompact/-/recompact-3.2.0.tgz#137a2b36be27d46a6c92619d94e4da5f119a338a"
-  dependencies:
-    fbjs "^0.8.16"
-    hoist-non-react-statics "^2.3.1"
-    object.omit "^3.0.0"
-    object.pick "^1.3.0"
-    symbol-observable "^1.0.4"
-    warning "^3.0.0"
-
 redbox-react@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/redbox-react/-/redbox-react-1.5.0.tgz#04dab11557d26651bf3562a67c22ace56c5d3967"
@@ -5281,10 +5219,6 @@ redux-form@^7.1.1:
 redux-mock-store@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/redux-mock-store/-/redux-mock-store-1.3.0.tgz#6edfef0d2332f20576381069d6d889a6d0a4451c"
-
-redux-thunk@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.2.0.tgz#e615a16e16b47a19a515766133d1e3e99b7852e5"
 
 redux@^3.4.0, redux@^3.7.2:
   version "3.7.2"

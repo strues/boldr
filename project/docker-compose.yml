@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:10-alpine
+    container_name: postgres
+    restart: unless-stopped
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"
+    tmpfs:
+      - /tmp
+      - /var/run/postgresql
+    environment:
+      - POSTGRES_USER=boldr
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - db:/var/lib/postgresql/data
+      - ${PWD}/.boldr/db/postgres-initdb.sh:/docker-entrypoint-initdb.d/initdb.sh
+  redis:
+    image: redis:4.0.2-alpine
+    read_only: true
+    container_name: redis
+    restart: unless-stopped
+    expose:
+      - "6379"
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis:/data
+    user: redis
+
+volumes:
+  db:
+    external:
+      name: postgres_data
+  redis:
+    external:
+      name: redis_data

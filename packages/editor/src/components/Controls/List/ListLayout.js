@@ -2,7 +2,7 @@
 import React from 'react';
 import type { Node } from 'react';
 import cn from 'classnames';
-import { List, ListOl } from '@boldr/icons';
+import { ListUl, ListOl } from '../../Icons';
 import Option from '../../Option';
 
 export type Props = {
@@ -13,6 +13,7 @@ export type Props = {
 
 export default class ListLayout extends React.PureComponent<Props, *> {
   static displayName = 'ListLayout';
+
   props: Props;
 
   toggleBlockType: Function = (blockType: string): void => {
@@ -41,7 +42,7 @@ export default class ListLayout extends React.PureComponent<Props, *> {
           className={cn(unordered.className)}
           active={listType === 'unordered'}
           title={unordered.title}>
-          <List color="#222" />
+          <ListUl size={20} fill="#222" />
         </Option>
         <Option
           value="ordered"
@@ -49,7 +50,7 @@ export default class ListLayout extends React.PureComponent<Props, *> {
           className={cn(ordered.className)}
           active={listType === 'ordered'}
           title={ordered.title}>
-          <ListOl fill="#222" />
+          <ListOl size={20} fill="#222" />
         </Option>
       </div>
     );

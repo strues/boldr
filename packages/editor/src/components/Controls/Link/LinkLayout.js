@@ -4,8 +4,8 @@
 import React from 'react';
 import type { Node } from 'react';
 import cn from 'classnames';
-import Link from '@boldr/icons/Link';
-import Unlink from '@boldr/icons/Unlink';
+
+import { Link, Unlink } from '../../Icons';
 import Option from '../../Option';
 import { stopPropagation } from '../../../utils/common';
 
@@ -99,6 +99,7 @@ class LinkLayout extends React.Component<Props, State> {
       linkTitle: (link && link.title) || selectionText,
     });
   };
+
   /*
     @todo:
     prevent user from opening link modal w/out a linkTitle or placeholder
@@ -162,7 +163,7 @@ class LinkLayout extends React.Component<Props, State> {
             aria-haspopup="true"
             aria-expanded={showModal}
             title={link.title}>
-            <Link color="#222" size="1em" />
+            <Link fill="#222" size={20} />
           </Option>
         )}
         {options.indexOf('unlink') >= 0 && (
@@ -172,7 +173,7 @@ class LinkLayout extends React.Component<Props, State> {
             className={cn(unlink.className)}
             onClick={this.removeLink}
             title={unlink.title}>
-            <Unlink fill="#222" size="1em" />
+            <Unlink fill="#222" size={20} />
           </Option>
         )}
         {expanded && showModal ? this.renderAddLinkModal() : undefined}
