@@ -24,8 +24,10 @@ initCore(app);
 initAuth(app);
 // /auth/check, /auth/verify, /token/reset-password, /token/forgot-password
 routes(app);
-// log graphql queries to debug
-app.use(queryLogger());
+if (config.get('graphql.queryLogger')) {
+  // log graphql queries to debug
+  app.use(queryLogger());
+}
 // graphql middleware
 initGraphql(app);
 

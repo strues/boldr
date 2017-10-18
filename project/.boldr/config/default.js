@@ -7,6 +7,10 @@ module.exports = {
     prefix: '/api/v1',
     uploadDir: 'public/uploads/tmp'
   },
+  graphql: {
+    graphiql: true,
+    queryLogger: false,
+  },
   logging: {
     level: 'debug',
     file: false,
