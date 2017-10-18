@@ -4,10 +4,10 @@ exports[`<ArticleDate /> matches the snapshot. 1`] = `
 <div
   className="boldr-article__date"
 >
-  <Icon
-    color="#222"
-    kind="calendar"
-    size={24}
+  <Calendar
+    fill="#222"
+    name="Calendar"
+    size={20}
   />
    
   01/26/2017

@@ -20,11 +20,11 @@ exports[`<TagList /> component <TagList />, renders the tag list with props 1`] 
           </TagList__TagDesc>
         </TagList__InnerListItem>
         <TagList__InnerListItem>
-          <Icon
-            color="#222"
-            kind="trash"
+          <Trash
+            fill="#222"
+            name="Trash"
             onClick={[Function]}
-            size="24"
+            size={24}
           />
         </TagList__InnerListItem>
       </TagList__InnerList>
@@ -48,11 +48,11 @@ exports[`<TagList /> component <TagList />, renders the tag list with props 1`] 
           </TagList__TagDesc>
         </TagList__InnerListItem>
         <TagList__InnerListItem>
-          <Icon
-            color="#222"
-            kind="trash"
+          <Trash
+            fill="#222"
+            name="Trash"
             onClick={[Function]}
-            size="24"
+            size={24}
           />
         </TagList__InnerListItem>
       </TagList__InnerList>
@@ -76,11 +76,11 @@ exports[`<TagList /> component <TagList />, renders the tag list with props 1`] 
           </TagList__TagDesc>
         </TagList__InnerListItem>
         <TagList__InnerListItem>
-          <Icon
-            color="#222"
-            kind="trash"
+          <Trash
+            fill="#222"
+            name="Trash"
             onClick={[Function]}
-            size="24"
+            size={24}
           />
         </TagList__InnerListItem>
       </TagList__InnerList>
