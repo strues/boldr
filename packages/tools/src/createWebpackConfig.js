@@ -62,8 +62,10 @@ const SERVER_OUTPUT = path.resolve(ROOT, config.get('tools.paths.output.server')
 const CLIENT_OUTPUT = path.resolve(ROOT, config.get('tools.paths.output.client'));
 const PUBLIC_PATH = config.get('tools.paths.publicPath');
 
+const DEV_GRAPHQL_ENDPOINT = process.env.DEV_GRAPHQL_ENDPOINT;
 const GRAPHQL_ENDPOINT = process.env.GRAPHQL_ENDPOINT;
 const API_URL = process.env.API_URL;
+const DEV_API_URL = process.env.DEV_API_URL;
 const API_PREFIX = process.env.API_PREFIX;
 
 const SRC_DIR = path.resolve(ROOT, 'src');
@@ -402,8 +404,10 @@ export default function createWebpackConfig(
         __CLIENT__: _IS_CLIENT_,
         'process.env.NODE_ENV': JSON.stringify(options.env),
         'process.env.TARGET': JSON.stringify(webpackTarget),
-        'process.env.GRAPHQL_ENDPOINT': JSON.stringify(GRAPHQL_ENDPOINT),
-        'process.env.API_URL': JSON.stringify(API_URL),
+        'process.env.GRAPHQL_ENDPOINT': _IS_DEV_
+          ? JSON.stringify(DEV_GRAPHQL_ENDPOINT)
+          : JSON.stringify(GRAPHQL_ENDPOINT),
+        'process.env.API_URL': _IS_DEV_ ? JSON.stringify(DEV_API_URL) : JSON.stringify(API_URL),
         'process.env.API_PREFIX': JSON.stringify(API_PREFIX),
         'process.env.BUILD_TARGET': JSON.stringify(webpackTarget),
       }),

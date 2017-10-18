@@ -67,9 +67,7 @@ Come visit with us
 
 ## Getting Started
 
-**Development Disclaimer:** At the moment, Boldr is in active development. Meaning there might be the occasional breaking changes, and architectural adjustments.
-
-That said, I'm confident the majority of large breaking changes is behind us.
+**Development Disclaimer:** At the moment, Boldr is in active development. Meaning there might be the occasional breaking change or architectural adjustments. 
 
 **Step 1**
 First get the files to your machine.
@@ -84,27 +82,34 @@ First get the files to your machine.
 
 This will install **all** of the packages using lerna.
 
-The main packages to concern yourself with are located in `packages/frontend` and `packages/server`. The frontend contains the React application and the server is the Express GraphQL and database server. **Eventually**, the frontend and server will be published to NPM and work from a single entry.    
+The main application is located in `project`.   
+The frontend and the react server entrypoint are located in `project/src`.    
+The actual server resides in `project/server`.
+    
+
+
 
 ## Usage
-
-1. Install the files: `yarn install`   
-2. Copy the frontend environment sample: `cd packages/frontend && cp .env_example .env`   
-3. Checkout `packages/frontend/.boldr/config/default.js` and modify any settings for your environment.   
-4. Setup services    
+ 
+1. Copy the environment sample: `cd project && cp .env_example .env`.   
+2. Checkout `project/.boldr/config/default.js` for different server configuration options. [Config Docs](/docs/pkgs/config.md)  
+3. Setup Postgres and Redis    
 
 Boldr requires a Postgres database and a Redis service. Using the docker-compose.yml file included in the repo is the quickest way.
 
-`docker-compose up --build -d` starts the necessary services (postgres and redis).
-
-Ensure the database is setup with the proper tables and seed data.
+`docker-compose up --build -d` starts Postgres on port 5432 and Redis on port 6379.
 
 
-### Development
+If you are not using the docker-compose setup, make sure to modify the `.env` file accordingly. 
 
-Run the frontend using `yr dev` from within `packages/frontend`. In another terminal window, start the server using `yr dev` from within `packages/server`.
+4. Run the database migrations and seed it `yarn migrate && yarn seed`.     
 
-After Boldr has started visit <http://localhost:3000>. A admin account is already created and you may login using these credentials:
+5. Start the client dev with `yarn dev`, then in a second terminal `yarn dev:server`.
+
+
+After Boldr has started visit <http://localhost:3000>. 
+
+A admin account is already created and you may login using these credentials:
 
 > Email - admin@boldr.io
 > Password - password
@@ -116,8 +121,7 @@ See the [production docs](docs/production.md)
 
 
 ## Demo
-
-Visit [https://staging.boldr.io](https://staging.boldr.io) and explore the current demo deployment
+Up again soon..
 
 > Email - admin@boldr.io<br>
 > Password - password

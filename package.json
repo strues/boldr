@@ -10,7 +10,7 @@
     "gencoverage": "node ./internal/scripts/mapCoverage.js",
     "coverage": "codecov",
     "lint": "eslint . --fix",
-    "postinstall": "npm run bootstrap",
+    "postinstall": "yarn run bootstrap",
     "precommit": "lint-staged --verbose",
     "prepush": "yarn test",
     "prettier": "node ./internal/scripts/prettier.js write",

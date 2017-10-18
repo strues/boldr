@@ -27,7 +27,7 @@ export default ({ clientStats, outputPath }) =>
   // eslint-disable-next-line no-unused-vars
   async (req, res, next) => {
     const apolloClient = createApolloClient({
-      batchRequests: true,
+      batchRequests: false,
       uri: process.env.GRAPHQL_ENDPOINT,
     });
 

@@ -4,3 +4,4 @@ umd
 /*.js
 !rollup.config.js
 lib
+coverage

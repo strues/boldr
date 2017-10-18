@@ -16,7 +16,7 @@
         "port": 9229,
         "protocol": "inspector",
         "sourceMaps": true,
-        "localRoot": "${workspaceRoot}/packages/server",
+        "localRoot": "${workspaceRoot}/project",
         "restart": true
       },
       {
@@ -27,7 +27,7 @@
         "protocol": "inspector",
         "sourceMaps": true,
 
-        "localRoot": "${workspaceRoot}/packages/frontend",
+        "localRoot": "${workspaceRoot}/project",
         "restart": true
       }
     ]

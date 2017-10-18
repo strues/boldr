@@ -14,11 +14,7 @@ module.exports = {
     expect: true,
     beforeEach: true,
   },
-  settings: {
-    'import/resolver': {
-      'babel-module': {},
-    },
-  },
+
   rules: {
     'getter-return': 0,
     'react/boolean-prop-naming': 0,

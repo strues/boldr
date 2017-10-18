@@ -35,7 +35,7 @@ const clientStats = require('../build/client/stats.json');
   // eslint-disable-next-line
 const serverRender = require('../build/server/server.js').default;
   // eslint-disable-next-line
-app.use('/static/', express.static('../build/client'));
+app.use('/static', express.static(path.resolve(appRoot.get(), './build/client')));
 
   app.use(serverRender({ clientStats }));
 }

@@ -1,6 +1,6 @@
 {
   "name": "@boldr/tools",
-  "version": "0.1.0-beta.5",
+  "version": "0.1.0-beta.6",
   "description": "Webpack build tools and basic CLI for dev and building universal react applications",
   "main": "lib/index.js",
   "module": "lib/index.es.js",
@@ -51,6 +51,7 @@
     "extract-css-chunks-webpack-plugin": "^2.0.17",
     "file-loader": "^1.1.5",
     "fs-extra": "^4.0.2",
+    "graphql": "^0.11.7",
     "graphql-tag": "^2.5.0",
     "happypack": "4.0.0",
     "isomorphic-unfetch": "^2.0.0",
@@ -76,9 +77,7 @@
     "webpack-hot-server-middleware": "^0.1.0",
     "write-file-webpack-plugin": "^4.2.0"
   },
-  "peerDependencies": {
-    "graphql": "^0.11.7"
-  },
+
   "devDependencies": {
     "prepublish": "^1.5.0",
     "prettier": "^1.7.4",

@@ -1,7 +1,6 @@
 /* eslint-disable prefer-destructuring, no-underscore-dangle, new-cap */
 import React from 'react';
 
-import { polyfill as rafPolyfill } from 'raf';
 import { render, getToken, createApolloClient, createBoldrStore, createHistory } from '@boldr/core';
 
 import { checkAuth } from './scenes/Account/state/actions';
@@ -13,7 +12,7 @@ const DOM_NODE = document.getElementById('app');
 const preloadedState = window.__APOLLO_STATE__;
 
 const token = getToken();
-rafPolyfill();
+
 /**
  * createApolloClient configures an instance of ApolloClient for use in the app.
  * It accepts a config object.
@@ -31,8 +30,11 @@ rafPolyfill();
  * }
  */
 const apolloClient = createApolloClient({
-  batchRequests: true,
+  batchRequests: false,
   initialState: preloadedState,
+  // for local development this is http://localhost:2121/api/v1/graphql
+  // for prod env use the relative url if your app and api are served from
+  // the same server (/api/v1/graphql)
   uri: process.env.GRAPHQL_ENDPOINT,
   headers: {
     Authorization: `Bearer ${token}`,
