@@ -115,6 +115,8 @@ A admin account is already created and you may login using these credentials:
 > Password - password
 
 
+The GraphQL server runs on port 2121 by default.
+
 ### Production
 
 See the [production docs](docs/production.md)
