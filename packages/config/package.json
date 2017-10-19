@@ -21,7 +21,8 @@
     "url": "git+https://github.com/strues/boldr.git"
   },
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "test:ci": "jest --ci --no-cache"
   },
   "dependencies": {
     "app-root-dir": "^1.0.2",

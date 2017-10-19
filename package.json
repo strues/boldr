@@ -15,7 +15,7 @@
     "prepush": "lerna run test -- -u",
     "prettier": "node ./internal/scripts/prettier.js write",
     "test": "lerna run test -- -u",
-    "test:ci": "lerna run test -- --ci"
+    "test:ci": "lerna run test:ci"
   },
   "keywords": [
     "react",

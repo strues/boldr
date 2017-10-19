@@ -31,6 +31,7 @@
     "build": "BOLDR_DEBUG=1 npm run clean && prepublish",
     "clean": "rimraf lib",
     "test": "echo \"No tests... skipping\" && exit 0",
+    "test:ci": "echo \"No tests... skipping\" && exit 0",
     "format": "prettier --single-quote=true --print-width=100 --jsx-bracket-same-line=true --trailing-comma=all --write \"src/**/*.js\""
   },
   "dependencies": {

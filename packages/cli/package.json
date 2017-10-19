@@ -31,7 +31,8 @@
   },
   "scripts": {
     "build": "rm -rf ./lib && NODE_ENV=production babel src --out-dir lib",
-    "test": "echo \"No tests... skipping\" && exit 0"
+    "test": "echo \"No tests... skipping\" && exit 0",
+    "test:ci": "echo \"No tests... skipping\" && exit 0"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

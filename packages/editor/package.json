@@ -33,6 +33,7 @@
     "clean": "git clean -fdX .",
     "lint": "eslint src",
     "test": "jest",
+    "test:ci": "jest --ci --no-cache",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
