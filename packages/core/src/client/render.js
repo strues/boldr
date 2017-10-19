@@ -20,7 +20,6 @@ export default function render(
 
   // Use named function get a proper displayName
   Root = function Root() {
-    console.log('[BOLDR]: rendering client');
     return (
       <ApolloProvider client={apolloClient} store={reduxStore}>
         <ConnectedRouter history={history}>{component}</ConnectedRouter>

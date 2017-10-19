@@ -12,6 +12,7 @@ coverage
 project/build
 project/node_modules
 project/.env
+project/lib
 packages/server
 packages/*/coverage
 packages/editor/umd

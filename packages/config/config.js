@@ -75,6 +75,7 @@ class Config {
 
     _merge(CONFIG, options);
   }
+
   /**
    * @return {String}
    */

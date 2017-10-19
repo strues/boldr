@@ -1,6 +1,5 @@
 /* eslint-disable prefer-destructuring, no-underscore-dangle, new-cap */
 import React from 'react';
-
 import { render, getToken, createApolloClient, createBoldrStore, createHistory } from '@boldr/core';
 
 import { checkAuth } from './scenes/Account/state/actions';

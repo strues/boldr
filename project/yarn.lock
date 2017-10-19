@@ -2,10 +2,11 @@
 # yarn lockfile v1
 
 
-"@boldr/ui@0.1.8-alpha.4":
-  version "0.1.8-alpha.4"
-  resolved "https://registry.yarnpkg.com/@boldr/ui/-/ui-0.1.8-alpha.4.tgz#cdb56fde0615bd2dc5077d1e2385dae846975242"
+"@boldr/ui@0.1.8-alpha.6":
+  version "0.1.8-alpha.6"
+  resolved "https://registry.yarnpkg.com/@boldr/ui/-/ui-0.1.8-alpha.6.tgz#8c665ad61870592cf45fb1749f6052e13873ff4a"
   dependencies:
+    babel-runtime "^6.26.0"
     classnames "^2.2.5"
     lodash.assign "^4.2.0"
     lodash.capitalize "^4.2.1"
@@ -2826,7 +2827,7 @@ hide-powered-by@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/hide-powered-by/-/hide-powered-by-1.0.0.tgz#4a85ad65881f62857fc70af7174a1184dccce32b"
 
-history@^4.5.1, history@^4.7.2:
+history@^4.7.2:
   version "4.7.2"
   resolved "https://registry.yarnpkg.com/history/-/history-4.7.2.tgz#22b5c7f31633c5b8021c7f4a8a954ac139ee8d5b"
   dependencies:
@@ -3509,9 +3510,9 @@ jest-snapshot@^21.2.1:
     natural-compare "^1.4.0"
     pretty-format "^21.2.1"
 
-jest-styled-components@4.7.0:
-  version "4.7.0"
-  resolved "https://registry.yarnpkg.com/jest-styled-components/-/jest-styled-components-4.7.0.tgz#8965fa0bed02f9c040052315c955da02ebdcb01f"
+jest-styled-components@4.7.1:
+  version "4.7.1"
+  resolved "https://registry.yarnpkg.com/jest-styled-components/-/jest-styled-components-4.7.1.tgz#589cd3caafcfca359055590d889f073003277531"
   dependencies:
     css "^2.2.1"
 
@@ -4988,15 +4989,15 @@ react-router-dom@^4.2.2:
     react-router "^4.2.0"
     warning "^3.0.0"
 
-react-router-redux@^5.0.0-alpha.6:
-  version "5.0.0-alpha.6"
-  resolved "https://registry.yarnpkg.com/react-router-redux/-/react-router-redux-5.0.0-alpha.6.tgz#7418663c2ecd3c51be856fcf28f3d1deecc1a576"
+react-router-redux@^5.0.0-alpha.8:
+  version "5.0.0-alpha.8"
+  resolved "https://registry.yarnpkg.com/react-router-redux/-/react-router-redux-5.0.0-alpha.8.tgz#5242c705730b2ac862aff7a8e90f870d0cf45e12"
   dependencies:
-    history "^4.5.1"
-    prop-types "^15.5.4"
-    react-router "^4.1.1"
+    history "^4.7.2"
+    prop-types "^15.6.0"
+    react-router "^4.2.0"
 
-react-router@^4.1.1, react-router@^4.2.0:
+react-router@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-4.2.0.tgz#61f7b3e3770daeb24062dae3eedef1b054155986"
   dependencies:

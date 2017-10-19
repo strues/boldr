@@ -56,7 +56,7 @@
   },
   "devDependencies": {
     "babel-preset-boldr": "0.11.2",
-    "prepublish": "^1.5.0",
+    "prepublish": "^1.5.1",
     "rimraf": "^2.6.2",
     "jest-cli": "^21.2.1",
     "prettier": "^1.7.4"
