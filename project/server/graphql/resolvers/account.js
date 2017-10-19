@@ -16,28 +16,29 @@ const accountResolvers = {
       const roles = await Account.query()
         .findById(obj.id)
         .then(result => result.$relatedQuery('roles'));
-      if (roles) {
-        return roles;
+
+      if (!roles) {
+        throw errorObj({ _error: 'Unable to find any roles related to the account.' });
       }
-      throw errorObj({ _error: 'Unable to find any users.' });
+      return roles;
     },
     profile: async (obj, args, { models: { Account } }, info) => {
       const profile = await Account.query()
         .findById(obj.id)
         .then(result => result.$relatedQuery('profile'));
-      if (profile) {
-        return profile;
+      if (!profile) {
+        throw errorObj({ _error: 'Unable to find a profile related to the account.' });
       }
-      throw errorObj({ _error: 'Unable to find any users.' });
+      return profile;
     },
     articles: async (obj, args, { models: { Account } }) => {
       const articles = await Account.query()
         .findById(obj.id)
         .then(result => result.$relatedQuery('articles'));
-      if (articles) {
-        return articles;
+      if (!articles) {
+        throw errorObj({ _error: 'Unable to find any articles related to the account.' });
       }
-      throw errorObj({ _error: 'Unable to find any users.' });
+      return articles;
     },
     uploads: async (obj, args, { models: { Account } }) => {
       const uploads = await Account.query()
@@ -45,18 +46,18 @@ const accountResolvers = {
         .then(result => result.$relatedQuery('uploads'));
 
       if (uploads) {
-        return uploads;
+        throw errorObj({ _error: 'Unable to find any uploads.' });
       }
-      throw errorObj({ _error: 'Unable to find any users.' });
+      return uploads;
     },
   },
   Query: {
     accounts: async (obj, args, { models: { Account } }) => {
       const accounts = await Account.query();
-      if (accounts) {
-        return accounts;
+      if (!accounts) {
+        throw errorObj({ _error: 'Unable to find any accounts.' });
       }
-      throw errorObj({ _error: 'Unable to find any users.' });
+      return accounts;
     },
     account: async (obj, { id, email }, ctx) => {
       let acc;
@@ -64,14 +65,14 @@ const accountResolvers = {
         acc = await ctx.models.Account.query().findById(id);
         return acc;
       }
-      if (email) {
-        acc = await ctx.models.Account
-          .query()
-          .where('account.email', '=', email)
-          .first();
-        return acc;
+      if (!email) {
+        throw errorObj({ _error: 'Unable to find a user with that id.' });
       }
-      throw errorObj({ _error: 'Unable to find a user with that id.' });
+      acc = await ctx.models.Account
+        .query()
+        .where('account.email', '=', email)
+        .first();
+      return acc;
     },
     me: (obj, args, { user, ValidationError, req }) => {
       if (!user) {
@@ -84,14 +85,14 @@ const accountResolvers = {
     },
   },
   Mutation: {
-    signupAccount: async (obj, { input }, ctx) => {
+    signupAccount: async (obj, { input }, { ValidationError }) => {
       const checkUser = await ctx.models.Account
         .query()
         .where({ email: input.email })
         .first();
 
       if (checkUser) {
-        return new Error('The account already exists');
+        return new ValidationError('The account already exists');
       }
 
       const newAccount = await ctx.models.Account.query().insert({
@@ -103,7 +104,7 @@ const accountResolvers = {
       await newAccount.$relatedQuery('roles').relate({ id: 1 });
 
       if (!newAccount) {
-        return new Error('Signup failed');
+        throw errorObj({ _error: 'Signup failed' });
       }
       // generate user verification token to send in the email.
       const verifToken = newAccount.verificationToken;
