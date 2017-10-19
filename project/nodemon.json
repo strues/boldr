@@ -4,5 +4,5 @@
   "watch": [
    "./server"
   ],
-  "exec": "node_modules/.bin/babel-node ./server/index.js"
+  "exec": "node_modules/.bin/babel-node --inspect ./server/index.js"
 }

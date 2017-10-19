@@ -7,6 +7,10 @@ module.exports = {
     prefix: '/api/v1',
     uploadDir: 'public/uploads/tmp'
   },
+  graphql: {
+    graphiql: true,
+    queryLogger: false,
+  },
   logging: {
     level: 'debug',
     file: false,
@@ -14,6 +18,14 @@ module.exports = {
   token: {
     secret: 'b0ldrk3kwi11s15',
     expiration: 604800000,
+  },
+  session: {
+    name: 'boldr:sid',
+    httpOnly: true,
+    rolling: true,
+    saveUninitialized: true,
+    resave: false,
+    unset: 'destroy',
   },
   mail: {
     host: 'smtp.example.com',
@@ -24,10 +36,10 @@ module.exports = {
     from: 'hello@boldr.io',
   },
   db: {
-    url: 'postgres://postgres:password@localhost:5432/boldr',
+    url: 'postgres://boldr:password@localhost:5432/boldr',
   },
   redis: {
-    url: 'redis://127.0.0.1:6379/0',
+    url: 'redis://127.0.0.1:6379/1',
   },
   tools: {
     profile: false,
@@ -41,14 +53,11 @@ module.exports = {
         server: 'build/server',
         client: 'build/client',
       },
-      vendor: 'src/vendor.js',
     },
     vendor: [
-      '@boldr/icons',
       '@boldr/ui',
-      'draft-convert',
-      'draft-js',
       'immutable',
+
       'lodash',
       'react-apollo',
       'react-dom',

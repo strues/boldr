@@ -11,7 +11,7 @@
 .*/node_modules/jest-enzyme/\.*
 .*/node_modules/graphql/\.*
 .*/node_modules/graphql-tag/\.*
-
+.*/node_modules/@boldr/core/\.*
 .*/node_modules/draft-js/\.*
 .*/node_modules/styled-components/\.*
 .*/node_modules/immutable/\.*

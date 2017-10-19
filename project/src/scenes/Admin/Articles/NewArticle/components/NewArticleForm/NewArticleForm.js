@@ -16,7 +16,7 @@ import Form, {
   RadioFormField,
   SelectFormField,
 } from '@boldr/ui/Form';
-import { isRequired } from '../../../../../../core/util/validations';
+import { validations } from '@boldr/core';
 import type { RouterLocation, CategoriesType } from '../../../../../../types/boldr';
 import { selectArticleFormValues } from '../../../../state/selectors/articleSelectors';
 import RenderTags from '../RenderTags';
@@ -34,6 +34,7 @@ export type Props = {
 
 class NewArticleForm extends React.Component<Props, *> {
   props: Props;
+
   render() {
     const { handleSubmit, location, categories, reset, pristine, submitting } = this.props;
     const catOpts = categories.map(category => {
@@ -60,14 +61,14 @@ class NewArticleForm extends React.Component<Props, *> {
                       component={TextFormField}
                       label="Title"
                       tabIndex={0}
-                      validate={[isRequired]}
+                      validate={[validations.isRequired]}
                     />
                     <Label>Content</Label>
                     <Field
                       component={FieldEditor}
                       name="rawContent"
                       tabIndex={-2}
-                      validate={[isRequired]}
+                      validate={[validations.isRequired]}
                     />
                   </Inner>
                 </Paper>
@@ -82,7 +83,7 @@ class NewArticleForm extends React.Component<Props, *> {
                     type="checkbox"
                     component={RenderTags}
                     label="Tags"
-                    validate={[isRequired]}
+                    validate={[validations.isRequired]}
                   />
                 </DarkSegment>
                 <Field
@@ -102,7 +103,7 @@ class NewArticleForm extends React.Component<Props, *> {
                     component={TextAreaFormField}
                     placeholder="Short description or summary."
                     tabIndex={-3}
-                    validate={[isRequired]}
+                    validate={[validations.isRequired]}
                   />
                 </FormGroup>
                 <FormGroup>
@@ -123,7 +124,7 @@ class NewArticleForm extends React.Component<Props, *> {
                       type="radio"
                       value="draft"
                       component={RadioFormField}
-                      validate={[isRequired]}
+                      validate={[validations.isRequired]}
                       label="Draft"
                     />
                     <Field
@@ -131,7 +132,7 @@ class NewArticleForm extends React.Component<Props, *> {
                       type="radio"
                       value="published"
                       component={RadioFormField}
-                      validate={[isRequired]}
+                      validate={[validations.isRequired]}
                       label="Published"
                     />
                   </FormField>

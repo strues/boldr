@@ -10,6 +10,7 @@ class Account extends BaseModel {
   static tableName = 'account';
 
   static addTimestamps = true;
+
   /**
      * An array of attribute names that will be excluded from being returned.
      *
@@ -84,6 +85,7 @@ class Account extends BaseModel {
       this.password = bcrypt.hashAsync(this.password, 10);
     }
   }
+
   /**
    * Before inserting make sure we hash the password if provided.
    *

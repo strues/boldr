@@ -4,6 +4,7 @@ import Tag from './Tag';
 
 class Article extends BaseModel {
   static tableName = 'article';
+
   // static softDelete = true;
   static addTimestamps = true;
 
@@ -128,11 +129,13 @@ class Article extends BaseModel {
       },
     },
   };
+
   static getOnlyArticles(offset, limit) {
     return Article.query()
       .offset(offset)
       .limit(limit);
   }
+
   static getArticles(offset, limit) {
     return Article.query()
       .offset(offset)
@@ -141,6 +144,7 @@ class Article extends BaseModel {
       .skipUndefined()
       .allowEager('[author,tags,media,category]');
   }
+
   static getArticlesByTag(name, offset, limit) {
     return Tag.query()
       .where({ name })
@@ -151,9 +155,11 @@ class Article extends BaseModel {
           .limit(limit);
       });
   }
+
   static getArticlesByUserId(userId) {
     return Article.query().where({ userId });
   }
+
   static getArticleById(id) {
     return Article.query()
       .where({ id })

@@ -2,6 +2,7 @@ import BaseModel from './BaseModel';
 
 class ContentType extends BaseModel {
   static tableName = 'content_type';
+
   static addTimestamps = true;
 
   static jsonSchema = {

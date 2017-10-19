@@ -50,6 +50,7 @@ class Profile extends BaseModel {
   };
 
   static addTimestamps = true;
+
   /**
    * An array of attribute names that will be excluded from being returned.
    *

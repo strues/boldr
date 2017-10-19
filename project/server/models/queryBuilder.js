@@ -1,7 +1,7 @@
 import { QueryBuilder } from 'objection';
-import _debug from 'debug';
+// import _debug from 'debug';
 
-const debug = _debug('boldr:server:models:querybuilder');
+// const debug = _debug('boldr:server:models:querybuilder');
 
 class BaseQueryBuilder extends QueryBuilder {
   constructor(modelClass) {

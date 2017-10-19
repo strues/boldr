@@ -2,6 +2,7 @@ import BaseModel from './BaseModel';
 
 class Entity extends BaseModel {
   static tableName = 'entity';
+
   static addTimestamps = true;
 
   static jsonSchema = {

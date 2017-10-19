@@ -14,6 +14,7 @@ class ArticleMedia extends BaseModel {
   static addTimestamps = false;
 
   static idColumn = ['article_id', 'media_id'];
+
   static jsonSchema = {
     type: 'object',
     additionalProperties: false,
@@ -39,6 +40,7 @@ class ArticleMedia extends BaseModel {
       },
     },
   };
+
   static relationMappings = {
     media: {
       relation: BaseModel.BelongsToOneRelation,

@@ -6,7 +6,7 @@ import Row from '@boldr/ui/Layout/Row';
 import Col from '@boldr/ui/Layout/Col';
 import Button from '@boldr/ui/Button';
 import Form, { TextFormField } from '@boldr/ui/Form';
-import { isRequired, isEmail } from '../../../core/util/validations';
+import { validations } from '@boldr/core';
 
 type Props = {
   handleSubmit: Function,
@@ -27,7 +27,7 @@ const SignupForm = (props: Props) => {
             component={TextFormField}
             label="Email address"
             placeholder="admin@boldr.io"
-            validate={[isRequired, isEmail]}
+            validate={[validations.isRequired, validations.isEmail]}
           />
         </Col>
         <Col sm={6}>
@@ -38,7 +38,7 @@ const SignupForm = (props: Props) => {
             component={TextFormField}
             label="Password"
             placeholder="*****"
-            validate={[isRequired]}
+            validate={[validations.isRequired]}
           />
         </Col>
       </Row>

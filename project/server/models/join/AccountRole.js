@@ -12,6 +12,7 @@ import Account from '../Account';
  */
 class AccountRole extends BaseModel {
   static tableName = 'account_role';
+
   static addTimestamps = false;
 
   static idColumn = ['account_id', 'role_id'];
@@ -38,6 +39,7 @@ class AccountRole extends BaseModel {
       },
     },
   };
+
   static relationMappings = {
     role: {
       relation: BaseModel.BelongsToOneRelation,

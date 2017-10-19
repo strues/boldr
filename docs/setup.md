@@ -1,12 +1,5 @@
-# Boldr
+# Installation and Setup
 
-The main application is located in `project`.   
-The frontend and the react server entrypoint are located in `project/src`.    
-The actual server resides in `project/server`.
-    
-
-## Installation and Setup
- 
 **Step 1**    
 First get the files to your machine.
 

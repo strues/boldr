@@ -12,9 +12,8 @@ export default function initErrorHandler(app) {
     const errorDetails = {
       message: error.message,
       status: error.status,
-      stackHighlighted: error.stack.replace(/[a-z_-\d]+.js:\d+:\d+/gi, '<mark>$&</mark>'),
+      stack: error.stack,
     };
-    res.status(error.status || 500);
-    res.json(errorDetails);
+    res.status(error.status || 500).json(errorDetails);
   });
 }

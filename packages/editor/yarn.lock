@@ -2,10 +2,6 @@
 # yarn lockfile v1
 
 
-"@boldr/icons@0.1.0-rc.2":
-  version "0.1.0-rc.2"
-  resolved "https://registry.yarnpkg.com/@boldr/icons/-/icons-0.1.0-rc.2.tgz#8a4e36bdee7a3063ccceb4da75d28be7005b656b"
-
 "@hypnosphi/fuse.js@^3.0.9":
   version "3.0.9"
   resolved "https://registry.yarnpkg.com/@hypnosphi/fuse.js/-/fuse.js-3.0.9.tgz#ea99f6121b4a8f065b4c71f85595db2714498807"

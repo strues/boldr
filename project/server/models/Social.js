@@ -15,6 +15,7 @@ import BaseModel from './BaseModel';
  */
 class Social extends BaseModel {
   static tableName = 'profile_social_media';
+
   static addTimestamps = false;
 
   static jsonSchema = {

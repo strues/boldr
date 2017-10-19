@@ -1,9 +1,11 @@
 /* eslint-disable no-unused-vars */
 import uuid from 'uuid';
 import _debug from 'debug';
+import { GraphQLError } from 'graphql';
 import addDays from 'date-fns/add_days';
 import { errorObj } from '../../errors';
 import { mailer, signToken } from '../../services';
+import { validatePassword } from '../../services/authentication/authService';
 import { welcomeEmail } from '../../services/mailer/templates';
 
 const debug = _debug('boldr:server:graphql:resolvers:account');
@@ -121,13 +123,23 @@ const accountResolvers = {
         .eager('[roles,profile]')
         .first();
 
-      if (!account || !await account.authenticate(input.password)) {
+      if (!account) {
+        throw new GraphQLError('Incorrect email and/or password.');
+      }
+
+      const validAccount = await account.authenticate(input.password);
+
+      if (!validAccount) {
         throw new GraphQLError('Incorrect email and/or password.');
       }
 
       // remove the password from the response.
       account.stripPassword();
-      await account.$query().patch({ lastLogin: new Date().toISOString() });
+      try {
+        await account.$query().patch({ lastLogin: new Date().toISOString() });
+      } catch (err) {
+        throw new GraphQLError('Unable to update last login');
+      }
       // sign the token
       const token = await signToken(account);
 

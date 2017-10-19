@@ -3,6 +3,7 @@ import BaseModel from './BaseModel';
 
 class Tag extends BaseModel {
   static tableName = 'tag';
+
   static addTimestamps = true;
 
   static jsonSchema = {
@@ -71,6 +72,7 @@ class Tag extends BaseModel {
       },
     },
   };
+
   $beforeUpdate(queryContext) {
     super.$beforeUpdate(queryContext);
 
@@ -78,6 +80,7 @@ class Tag extends BaseModel {
       this.safeName = slugIt(this.name);
     }
   }
+
   /**
    * Before inserting make sure we hash the password if provided.
    *
@@ -90,6 +93,7 @@ class Tag extends BaseModel {
       this.safeName = slugIt(this.name);
     }
   }
+
   static getTags(offset, limit) {
     return Tag.query()
       .offset(offset)

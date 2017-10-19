@@ -1,6 +1,5 @@
 import { getToken, sendNotification } from '@boldr/core';
 
-import { API_PREFIX } from '../../../../core';
 import * as notif from '../../../../core/constants';
 
 import * as t from '../actionTypes';
@@ -22,7 +21,7 @@ export function updateMember(userData) {
   const token = getToken();
   return dispatch => {
     dispatch(beginUpdateMember());
-    return fetch(`${API_PREFIX}/users/admin/${userData.id}`, {
+    return fetch(`${process.env.API_PREFIX}/users/admin/${userData.id}`, {
       method: 'PUT',
       headers: {
         Accept: 'application/json, text/plain, */*',

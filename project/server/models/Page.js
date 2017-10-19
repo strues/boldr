@@ -2,6 +2,7 @@ import BaseModel from './BaseModel';
 
 class Page extends BaseModel {
   static tableName = 'page';
+
   static addTimestamps = true;
   // static get relationMappings() {
   //   return {

@@ -2,6 +2,7 @@ import BaseModel from './BaseModel';
 
 class Role extends BaseModel {
   static tableName = 'role';
+
   static addTimestamps = true;
 
   static jsonSchema = {
@@ -41,6 +42,7 @@ class Role extends BaseModel {
       },
     },
   };
+
   static relationMappings = {
     accounts: {
       relation: BaseModel.ManyToManyRelation,

@@ -6,13 +6,12 @@ import config from '@boldr/config';
 import app from './app';
 import { disconnect } from './services/db';
 import logger from './services/logger';
-// import { destroyRedis } from './services/redis';
 import normalizePort from './utils/normalizePort';
 
 global.Promise = Bluebird;
 Promise.config({
   // Enable warnings
-  warnings: true,
+  warnings: false,
   // Enable long stack traces
   longStackTraces: true,
   // Enable cancellation

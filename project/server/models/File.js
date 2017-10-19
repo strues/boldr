@@ -3,7 +3,9 @@ import BaseModel from './BaseModel';
 
 class File extends BaseModel {
   static tableName = 'file';
+
   static addTimestamps = true;
+
   static jsonSchema = {
     type: 'object',
     required: ['name', 'safeName', 'path', 'url', 'type'],
@@ -67,6 +69,7 @@ class File extends BaseModel {
       },
     },
   };
+
   static relationMappings = {
     owner: {
       relation: BaseModel.BelongsToOneRelation,
@@ -77,6 +80,7 @@ class File extends BaseModel {
       },
     },
   };
+
   static listFiles(offset, limit) {
     return File.query()
       .offset(offset)

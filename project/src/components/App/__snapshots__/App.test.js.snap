@@ -55,59 +55,7 @@ exports[`App 1`] = `
       name="msapplication-TileImage"
     />
   </HelmetWrapper>
-  <withRouter(ContainerSwitcherRoute)>
-    <Switch>
-      <withRouter(Connect(ProtectedRoute))
-        component={[Function]}
-        exact={true}
-        path="/admin"
-      />
-      <Route
-        component={[Function]}
-        path="/login"
-      />
-      <Route
-        component={[Function]}
-        path="/signup"
-      />
-      <Route
-        component={[Function]}
-        path="/account"
-      />
-      <Route
-        component={[Function]}
-        exact={true}
-        path="/profiles/:username"
-      />
-      <Route
-        component={[Function]}
-        exact={true}
-        path="/about"
-      />
-      <Route
-        component={[Function]}
-        exact={true}
-        path="/blog/tags/:name"
-      />
-      <Route
-        component={[Function]}
-        exact={true}
-        path="/blog/:slug"
-      />
-      <Route
-        component={[Function]}
-        exact={true}
-        path="/"
-      />
-      <StatusRoute
-        code={404}
-      >
-        <Route
-          component={[Function]}
-        />
-      </StatusRoute>
-    </Switch>
-  </withRouter(ContainerSwitcherRoute)>
+  <Root />
   <Connect(Notifications) />
 </div>
 `;

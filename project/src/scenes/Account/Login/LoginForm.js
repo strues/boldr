@@ -5,7 +5,7 @@ import Link from 'react-router-dom/Link';
 import styled from 'styled-components';
 import Button from '@boldr/ui/Button';
 import Form, { TextFormField } from '@boldr/ui/Form';
-import validations from '../../../core/util/validations';
+import { validations } from '@boldr/core';
 
 type Props = {
   handleSubmit: Function,
@@ -26,7 +26,9 @@ const FormBottomList = styled.ul`
   padding-left: 0;
 `;
 
-const FormBottomListItem = styled.li`padding-left: 0;`;
+const FormBottomListItem = styled.li`
+  padding-left: 0;
+`;
 const LoginForm = (props: Props) => {
   const { handleSubmit, submitting, pristine } = props;
   return (

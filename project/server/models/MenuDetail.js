@@ -2,6 +2,7 @@ import BaseModel from './BaseModel';
 
 class MenuDetail extends BaseModel {
   static tableName = 'menu_detail';
+
   static addTimestamps = true;
 
   static jsonSchema = {

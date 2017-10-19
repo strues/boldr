@@ -8,6 +8,7 @@ import {
   initGraphql,
   initSecurity,
   initCore,
+  initSession,
   queryLogger,
   initErrorHandler,
 } from './middleware';
@@ -15,29 +16,32 @@ import {
 import routes from './routes';
 
 const app = express();
-// initErrorHandler(app);
 // cors, hpp, helmet
 initSecurity(app);
 // Base Express middleware - body-parser, method-override
 initCore(app);
+// Express session
+initSession(app);
 // Session middleware, authentication check, rbac
 initAuth(app);
 // /auth/check, /auth/verify, /token/reset-password, /token/forgot-password
 routes(app);
+// graphql middleware
+initGraphql(app);
+
 if (config.get('graphql.queryLogger')) {
   // log graphql queries to debug
   app.use(queryLogger());
 }
-// graphql middleware
-initGraphql(app);
-
+// This serves the SSR middleware (the bundled server entry point), which
+// in turn serves the application.
 if (process.env.NODE_ENV === 'production') {
   // eslint-disable-next-line
-const clientStats = require('../build/client/stats.json');
+const clientStats = require('../static/stats.json');
   // eslint-disable-next-line
-const serverRender = require('../build/server/server.js').default;
+const serverRender = require('../ssr.js').default;
   // eslint-disable-next-line
-app.use('/static', express.static(path.resolve(appRoot.get(), './build/client')));
+app.use('/static', express.static(path.resolve(appRoot.get(), './build/static')));
 
   app.use(serverRender({ clientStats }));
 }

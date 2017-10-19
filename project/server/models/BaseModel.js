@@ -1,6 +1,5 @@
 /* eslint-disable no-prototype-builtins, complexity */
 import { Model, ValidationError } from 'objection';
-import _debug from 'debug';
 
 import isString from 'lodash/isString';
 import camelCase from 'lodash/camelCase';
@@ -11,7 +10,6 @@ import BaseQueryBuilder from './queryBuilder';
 
 const toCamelCase = memoize(camelCase);
 const toSnakeCase = memoize(snakeCase);
-const debug = _debug('boldr:server:models:base');
 
 class BaseModel extends Model {
   /**
@@ -21,6 +19,7 @@ class BaseModel extends Model {
   * @type {boolean}
   */
   static addTimestamps = true;
+
   /**
   * An object of attribute names with function values to transform
   * attributes on the model if they exist.
@@ -35,8 +34,10 @@ class BaseModel extends Model {
   * @type {array}
   */
   static hidden = [];
+
   // Centralize the models.
   static modelPaths = [__dirname];
+
   // http://vincit.github.io/objection.js/#defaulteageralgorithm
   static defaultEagerAlgorithm = Model.JoinEagerAlgorithm;
 

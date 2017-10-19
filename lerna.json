@@ -10,7 +10,6 @@
     "packages/config",
     "packages/core",
     "packages/tools",
-    "packages/server",
     "packages/utils",
     "project"
   ],

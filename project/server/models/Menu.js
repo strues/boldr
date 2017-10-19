@@ -2,7 +2,9 @@ import BaseModel from './BaseModel';
 
 class Menu extends BaseModel {
   static tableName = 'menu';
+
   static addTimestamps = true;
+
   static jsonSchema = {
     type: 'object',
     required: ['safeName', 'name', 'restricted'],
@@ -42,6 +44,7 @@ class Menu extends BaseModel {
       },
     },
   };
+
   static relationMappings = {
     details: {
       relation: BaseModel.HasManyRelation,
@@ -56,6 +59,7 @@ class Menu extends BaseModel {
   static getMenus() {
     return Menu.query();
   }
+
   static getById(id) {
     return Menu.query()
       .findById(id)

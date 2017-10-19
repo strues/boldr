@@ -1,6 +1,6 @@
 import path from 'path';
 import knex from 'knex';
-import fs from 'fs-extra';
+
 import config from '@boldr/config';
 import logger from '@boldr/utils/lib/logger';
 import appRoot from '@boldr/utils/lib/node/appRoot';
@@ -8,7 +8,6 @@ import appRoot from '@boldr/utils/lib/node/appRoot';
 async function task(args, options) {
   logger.task('Seeding database');
   const rootDir = appRoot.get();
-  fs.ensureDirSync('.boldr/db/migrations');
   const knexConfig = {
     client: 'pg',
     connection: options.dburl || config.get('db.url'),
@@ -20,9 +19,15 @@ async function task(args, options) {
       directory: path.resolve(rootDir, '.boldr/db/seeds'),
     },
   };
-
   const db = knex(knexConfig);
-  await db.seed.run(knexConfig);
+  try {
+    await db.seed.run(knexConfig);
+    logger.info('Database populated.');
+    process.exit(0);
+  } catch (err) {
+    logger.error(err);
+    process.exit(1);
+  }
 }
 
 function register(program) {

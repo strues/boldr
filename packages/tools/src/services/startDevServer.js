@@ -1,27 +1,34 @@
 import { resolve } from 'path';
 import appRoot from '@boldr/utils/lib/node/appRoot';
 import logger from '@boldr/utils/lib/logger';
+import { createBackend } from '@boldr/backend';
+import config from '@boldr/config';
+import errorOverlayMiddleware from 'react-dev-utils/errorOverlayMiddleware';
 import formatWebpackMessages from 'react-dev-utils/formatWebpackMessages';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackHotServerMiddleware from 'webpack-hot-server-middleware';
-import { createBackend } from '@boldr/backend';
+
 import createWebpackConfig from '../createWebpackConfig';
 
 const DEV_PORT = process.env.DEV_PORT;
+const PUBLIC_PATH = process.env.PUBLIC_PATH;
 const PORT = parseInt(DEV_PORT, 10);
 
 const ROOT = appRoot.get();
-const CLIENT_OUTPUT = resolve(ROOT, process.env.CLIENT_OUTPUT);
-const PUBLIC_PATH = process.env.PUBLIC_PATH;
+const CLIENT_OUTPUT = resolve(ROOT, config.get('tools.paths.output.client'));
+
 const locale = {
   default: 'en-US',
   supported: ['en-US', 'es-ES'],
 };
 
+process.on('unhandledRejection', err => {
+  throw err;
+});
+
 export function startDevServer() {
-  // await buildWebpackDlls();
   const clientConfig = createWebpackConfig({
     target: 'client',
     env: 'development',
@@ -31,14 +38,13 @@ export function startDevServer() {
     target: 'server',
     env: 'development',
   });
-
   const multiCompiler = webpack([clientConfig, serverConfig]);
   const clientCompiler = multiCompiler.compilers[0];
   const devMiddleware = webpackDevMiddleware(multiCompiler, {
     // required
     publicPath: PUBLIC_PATH,
     // display no info to console (only warnings and errors)
-    noInfo: true,
+    noInfo: false,
     quiet: true,
     // prevent loading before bundle is done
     serverSideRender: true,
@@ -48,13 +54,12 @@ export function startDevServer() {
 
   // keeps serverRender updated with arg: { clientStats, outputPath }
   const hotServerMiddleware = webpackHotServerMiddleware(multiCompiler, {
-    chunkName: 'server',
+    chunkName: 'ssr',
     serverRendererOptions: {
       outputPath: CLIENT_OUTPUT,
     },
   });
 
-  logger.start('Creating development server...');
   const server = createBackend({
     staticConfig: {
       public: PUBLIC_PATH,
@@ -62,7 +67,7 @@ export function startDevServer() {
     },
     localeConfig: locale,
     afterSecurity: [],
-    preErrorHandler: [devMiddleware, hotMiddleware, hotServerMiddleware],
+    preErrorHandler: [devMiddleware, hotMiddleware, hotServerMiddleware, errorOverlayMiddleware],
   });
 
   let serverIsStarted = false;

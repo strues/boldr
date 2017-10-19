@@ -2,6 +2,7 @@ import BaseModel from './BaseModel';
 
 class Category extends BaseModel {
   static tableName = 'category';
+
   static addTimestamps = true;
 
   static jsonSchema = {
@@ -49,6 +50,7 @@ class Category extends BaseModel {
       },
     },
   };
+
   static relationMappings = {
     articles: {
       relation: BaseModel.HasManyRelation,

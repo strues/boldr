@@ -7,7 +7,7 @@ import WriteFilePlugin from 'write-file-webpack-plugin';
 import ExtractCssChunks from 'extract-css-chunks-webpack-plugin';
 import BundleAnalyzerPlugin from 'webpack-bundle-analyzer';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
-
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 import autoprefixer from 'autoprefixer';
 import AutoDllPlugin from 'autodll-webpack-plugin';
 import BabelMinify from 'babel-minify-webpack-plugin';
@@ -50,14 +50,12 @@ if (missingParameters.length > 0) {
 const defaults = {
   target: 'client',
   env: process.env.NODE_ENV,
-  verbose: false,
-  useSourceMaps: true,
 };
 
 const ROOT = appRoot.get();
 const SERVER_ENTRY = path.resolve(ROOT, config.get('tools.paths.entry.server'));
 const CLIENT_ENTRY = path.resolve(ROOT, config.get('tools.paths.entry.client'));
-const PROJECT_SRC = path.resolve(ROOT, 'src');
+const SRC_DIR = path.resolve(ROOT, 'src');
 const SERVER_OUTPUT = path.resolve(ROOT, config.get('tools.paths.output.server'));
 const CLIENT_OUTPUT = path.resolve(ROOT, config.get('tools.paths.output.client'));
 const PUBLIC_PATH = config.get('tools.paths.publicPath');
@@ -66,9 +64,7 @@ const DEV_GRAPHQL_ENDPOINT = process.env.DEV_GRAPHQL_ENDPOINT;
 const GRAPHQL_ENDPOINT = process.env.GRAPHQL_ENDPOINT;
 const API_URL = process.env.API_URL;
 const DEV_API_URL = process.env.DEV_API_URL;
-const API_PREFIX = process.env.API_PREFIX;
-
-const SRC_DIR = path.resolve(ROOT, 'src');
+const API_BUNDLE_TYPE = process.env.API_BUNDLE_TYPE;
 
 export default function createWebpackConfig(
   options: ConfigurationOptions = {},
@@ -99,9 +95,8 @@ export default function createWebpackConfig(
       target: 'modern',
       imports: 'webpack',
       styled: true,
-      verbose: false,
       enableIntl: false,
-      // imports: 'webpack',
+      verbose: false,
       srcDir: SRC_DIR,
     },
   ];
@@ -119,7 +114,6 @@ export default function createWebpackConfig(
       target: 'current',
       styled: true,
       enableIntl: false,
-      // imports: 'webpack',
       srcDir: SRC_DIR,
     },
   ];
@@ -131,53 +125,51 @@ export default function createWebpackConfig(
     CACHE_DIGEST_TYPE,
     CACHE_DIGEST_LENGTH,
   );
-  const PREFIX = settings.target.toUpperCase();
-  const CACHE_LOADER_DIRECTORY = path.resolve(
-    ROOT,
-    // $FlowIssue
-    `node_modules/.cache/loader-${CACHE_HASH}-${settings.target}-${settings.env}`,
-  );
 
   const name = _IS_CLIENT_ ? 'client' : 'server';
   const target = _IS_CLIENT_ ? 'web' : 'node';
 
   const devtool = _IS_DEV_ ? 'cheap-module-eval-source-map' : 'source-map';
+  const BUNDLE_TYPE = settings.target.toUpperCase();
 
-  logger.start(`${PREFIX} Configuration:`);
+  logger.start(`${BUNDLE_TYPE} Configuration:`);
   // $FlowIssue
   logger.info(`Current Env: ${settings.env}`);
   logger.info(`Build Target: ${target}`);
   logger.info(`Source Maps: ${devtool}`);
 
-  const cacheLoader = settings.useCacheLoader
-    ? {
-        loader: require.resolve('cache-loader'),
-        options: {
-          cacheDirectory: CACHE_LOADER_DIRECTORY,
-        },
-      }
-    : null;
+  const CACHE_LOADER_DIRECTORY = path.resolve(
+    ROOT,
+    // $FlowIssue
+    `node_modules/.cache/loader-${CACHE_HASH}-${settings.target}-${settings.env}`,
+  );
+  const cacheLoaderRule = {
+    loader: require.resolve('cache-loader'),
+    options: {
+      cacheDirectory: CACHE_LOADER_DIRECTORY,
+    },
+  };
 
   const cssLoaderOptions = {
     modules: true,
     localIdentName: '[name]__[local]--[hash:base64:5]',
     import: 1,
     minimize: !_IS_DEV_,
-    sourceMap: !_IS_DEV_,
+    sourceMap: _IS_DEV_,
   };
   const cssLoaderSassOptions = {
     modules: false,
     localIdentName: '[name]__[local]--[hash:base64:5]',
     import: 2,
     minimize: !_IS_DEV_,
-    sourceMap: !_IS_DEV_,
+    sourceMap: _IS_DEV_,
   };
   const postCSSLoaderRule = {
     loader: require.resolve('postcss-loader'),
     options: {
       // https://webpack.js.org/guides/migrating/#complex-options
       ident: 'postcss',
-      sourceMap: true,
+      sourceMap: _IS_DEV_,
       plugins: () => [
         require('postcss-flexbugs-fixes'),
         autoprefixer({
@@ -224,7 +216,7 @@ export default function createWebpackConfig(
     return entry;
   };
   const getServerEntry = () => {
-    const entry = { server: [SERVER_ENTRY] };
+    const entry = { ssr: [SERVER_ENTRY] };
     return entry;
   };
 
@@ -292,15 +284,6 @@ export default function createWebpackConfig(
       // throws an error if an export is missing rather than a warning by default
       strictExportPresence: true,
       rules: [
-        {
-          test: JS_FILES,
-          loader: require.resolve('source-map-loader'),
-          enforce: 'pre',
-          options: {
-            quiet: true,
-          },
-          exclude: [/apollo-/, /zen-observable-ts/, /react-apollo/, /intl-/],
-        },
         // References to images, fonts, movies, music, etc.
         {
           test: ASSET_FILES,
@@ -330,15 +313,15 @@ export default function createWebpackConfig(
         // GraphQL
         {
           test: /\.(graphql|gql)$/,
-          include: PROJECT_SRC,
+          include: SRC_DIR,
           loader: require.resolve('graphql-tag/loader'),
         },
         // JS
         {
           test: JS_FILES,
-          include: PROJECT_SRC,
+          include: SRC_DIR,
           use: [
-            cacheLoader,
+            cacheLoaderRule,
             {
               loader: `happypack/loader?id=hp-js`,
             },
@@ -350,7 +333,7 @@ export default function createWebpackConfig(
           use: _IS_CLIENT_
             ? ExtractCssChunks.extract({
                 use: [
-                  cacheLoader,
+                  cacheLoaderRule,
                   {
                     loader: require.resolve('css-loader'),
                     options: cssLoaderOptions,
@@ -360,7 +343,7 @@ export default function createWebpackConfig(
                 ].filter(Boolean),
               })
             : [
-                cacheLoader,
+                cacheLoaderRule,
                 {
                   loader: require.resolve('css-loader/locals'),
                   options: cssLoaderOptions,
@@ -370,11 +353,11 @@ export default function createWebpackConfig(
         },
         {
           test: /\.scss$/,
-          include: PROJECT_SRC,
+          include: SRC_DIR,
           use: _IS_CLIENT_
             ? ExtractCssChunks.extract({
                 use: [
-                  cacheLoader,
+                  cacheLoaderRule,
                   {
                     loader: require.resolve('css-loader'),
                     options: cssLoaderSassOptions,
@@ -384,7 +367,7 @@ export default function createWebpackConfig(
                 ].filter(Boolean),
               })
             : [
-                cacheLoader,
+                cacheLoaderRule,
                 {
                   loader: require.resolve('css-loader/locals'),
                   options: cssLoaderSassOptions,
@@ -408,7 +391,7 @@ export default function createWebpackConfig(
           ? JSON.stringify(DEV_GRAPHQL_ENDPOINT)
           : JSON.stringify(GRAPHQL_ENDPOINT),
         'process.env.API_URL': _IS_DEV_ ? JSON.stringify(DEV_API_URL) : JSON.stringify(API_URL),
-        'process.env.API_PREFIX': JSON.stringify(API_PREFIX),
+        'process.env.API_BUNDLE_TYPE': JSON.stringify(API_BUNDLE_TYPE),
         'process.env.BUILD_TARGET': JSON.stringify(webpackTarget),
       }),
 
@@ -508,7 +491,18 @@ export default function createWebpackConfig(
       // skip the emitting phase whenever there are errors while compiling
       // @see: https://webpack.js.org/plugins/no-emit-on-errors-plugin/
       _IS_DEV_ ? new webpack.NoEmitOnErrorsPlugin() : null,
-
+      _IS_PROD_ && _IS_CLIENT_
+        ? new CopyWebpackPlugin([
+            { from: '.env', to: path.resolve(ROOT, 'build') },
+            { from: 'package.json', to: path.resolve(ROOT, 'build') },
+            { from: '.boldr', to: path.resolve(ROOT, 'build/.boldr') },
+            { from: 'public', to: path.resolve(ROOT, 'build/public') },
+            { from: 'Dockerfile', to: path.resolve(ROOT, 'build') },
+            { from: 'docker-compose.yml', to: path.resolve(ROOT, 'build') },
+            { from: 'Dockerfile', to: path.resolve(ROOT, 'build') },
+            { from: 'README.md', to: path.resolve(ROOT, 'build') },
+          ])
+        : null,
       // Dll reference speeds up development by grouping all of your vendor dependencies
       // in a DLL file. This is not compiled again, unless package.json contents
       // have changed.
@@ -517,13 +511,14 @@ export default function createWebpackConfig(
             context: ROOT,
             filename: 'boldrDLLs.js',
             entry: {
-              vendor: config.tools.vendor,
+              vendor: config.get('tools.vendor'),
             },
           })
         : null,
+
       process.stdout.isTTY
         ? new ProgressPlugin({
-            prefix: PREFIX,
+            prefix: BUNDLE_TYPE,
           })
         : null,
 

@@ -2,7 +2,9 @@ import BaseModel from './BaseModel';
 
 class Setting extends BaseModel {
   static tableName = 'setting';
+
   static addTimestamps = false;
+
   static jsonSchema = {
     type: 'object',
     additionalProperties: false,

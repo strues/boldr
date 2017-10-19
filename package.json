@@ -12,10 +12,10 @@
     "lint": "eslint . --fix",
     "postinstall": "yarn run bootstrap",
     "precommit": "lint-staged --verbose",
-    "prepush": "yarn test",
+    "prepush": "lerna run test -- -u",
     "prettier": "node ./internal/scripts/prettier.js write",
-    "test": "lerna run test",
-    "test:ci": "lerna run test -- -ci"
+    "test": "lerna run test -- -u",
+    "test:ci": "lerna run test -- --ci"
   },
   "keywords": [
     "react",

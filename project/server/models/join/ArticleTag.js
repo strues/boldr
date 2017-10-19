@@ -14,6 +14,7 @@ class ArticleTag extends BaseModel {
   static addTimestamps = false;
 
   static idColumn = ['article_id', 'tag_id'];
+
   static jsonSchema = {
     type: 'object',
     additionalProperties: false,
@@ -39,6 +40,7 @@ class ArticleTag extends BaseModel {
       },
     },
   };
+
   static relationMappings = {
     tag: {
       relation: BaseModel.BelongsToOneRelation,

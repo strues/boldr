@@ -2,6 +2,7 @@ import BaseModel from './BaseModel';
 
 class Media extends BaseModel {
   static tableName = 'media';
+
   static addTimestamps = true;
 
   static jsonSchema = {
@@ -65,6 +66,7 @@ class Media extends BaseModel {
       },
     },
   };
+
   static relationMappings = {
     uploader: {
       relation: BaseModel.BelongsToOneRelation,
@@ -87,11 +89,13 @@ class Media extends BaseModel {
       },
     },
   };
+
   static listMedia(offset, limit) {
     return Media.query()
       .offset(offset)
       .limit(limit);
   }
+
   static getMediaById(id) {
     return Media.query().findById(id);
   }
