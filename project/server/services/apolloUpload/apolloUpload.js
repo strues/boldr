@@ -1,4 +1,5 @@
 /* eslint-disable new-cap, no-param-reassign, consistent-return, promise/catch-or-return, promise/always-return */
+// Ref https://github.com/jaydenseric/apollo-upload-server
 import fs from 'fs-extra';
 import formidable from 'formidable';
 import objectPath from 'object-path';
