@@ -1,0 +1,130 @@
+.#{$boldr-ns}image-display__container {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 204.7px;
+  height: 144px;
+  background-color: #eaf7ff;
+  border-radius: 8px;
+
+  // This fixes animation bug when border radius doesn't affect on animation
+  backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  transition: background 0.2s linear;
+  cursor: pointer;
+
+  &.has-logo {
+    .add-logo {
+      display: none;
+    }
+  }
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+
+    .#{$boldr-ns}image-display__btns {
+      opacity: 1;
+    }
+
+    .#{$boldr-ns}image-display__image {
+      transform: scale(1.1);
+    }
+
+    .#{$boldr-ns}image-display__bg {
+      background-color: rgba(32, 69, 94, 0.8);
+    }
+  }
+}
+
+.dashed-border {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  height: 85%;
+  border: dashed 1px rgba(78, 183, 245, 0.5);
+  border-radius: 3px;
+}
+
+.#{$boldr-ns}image-display__image {
+  height: 100%;
+  transform: scale(1);
+  transition: transform 0.2s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+}
+
+.plus-icon {
+  position: absolute;
+  width: 47px;
+  height: 47px;
+  color: rgb(78, 183, 245);
+}
+
+.add-logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.#{$boldr-ns}image-display__layout {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.#{$boldr-ns}image-display__logo--container {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+}
+
+.#{$boldr-ns}image-display__bg {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(32, 69, 94, 0);
+  border-radius: 6px;
+  transition: all 0.1s linear;
+  cursor: auto;
+}
+
+.#{$boldr-ns}image-display__btns {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  height: 38%;
+  opacity: 0;
+  color: white;
+  transition: opacity 0.1s linear;
+}
+
+.#{$boldr-ns}image-display__btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0);
+  border-radius: 20px;
+  transition: background 0.1s linear;
+  cursor: pointer;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.3);
+  }
+
+  &:first-child {
+    margin-right: 20px;
+  }
+}

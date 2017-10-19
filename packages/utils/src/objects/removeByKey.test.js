@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import removeByKey from './removeByKey';
 
 describe('removeByKey', () => {

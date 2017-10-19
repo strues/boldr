@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import flatten from './flatten';
 
 test('flatten condenses a nested array', () => {

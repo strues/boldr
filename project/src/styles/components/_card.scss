@@ -1,0 +1,26 @@
+////
+/// @group card
+////
+.#{$boldr-ns}card__title {
+  padding: 1em;
+}
+
+.#{$boldr-ns}card-text {
+  padding: 1em;
+}
+
+.#{$boldr-ns}card__footer {
+  padding: 1em;
+  display: flex;
+  justify-content: space-between;
+}
+
+h3.#{$boldr-ns}card-title--title {
+  margin-top: -10px;
+}
+
+.#{$boldr-ns}card__footer--inline {
+  svg {
+    margin-left: 220px;
+  }
+}

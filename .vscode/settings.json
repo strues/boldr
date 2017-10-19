@@ -7,5 +7,13 @@
     "**/lib": true,
     "**/node_modules": true,
     "**/flow-typed": true
+  },
+  "files.exclude": {
+    "**/.git": true,
+    "**/.svn": true,
+    "**/.hg": true,
+    "**/CVS": true,
+    "**/.DS_Store": true,
+    "**/*.js.map": true
   }
 }

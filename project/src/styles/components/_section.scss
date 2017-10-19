@@ -1,0 +1,17 @@
+.#{$boldr-ns}section {
+  @include desktop() {
+    &.is-medium {
+      padding: 9rem 1.5rem;
+    }
+
+    &.is-large {
+      padding: 18rem 1.5rem;
+    }
+  }
+  padding: 3rem 1.5rem;
+  background-color: $white;
+}
+.#{$boldr-ns}footer {
+  padding: 3rem 1.5rem 6rem;
+  background-color: $background;
+}

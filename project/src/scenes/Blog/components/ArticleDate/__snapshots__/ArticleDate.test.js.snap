@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ArticleDate /> matches the snapshot. 1`] = `
+<div
+  className="boldr-article__date"
+>
+  <Calendar
+    fill="#222"
+    name="Calendar"
+    size={20}
+  />
+   
+  01/26/2017
+</div>
+`;

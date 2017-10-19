@@ -1,11 +1,10 @@
 import path from 'path';
-import cookieParser from 'cookie-parser';
 import nanoid from 'nanoid';
 import appRoot from '@boldr/utils/lib/node/appRoot';
 import bodyParser from 'body-parser';
 import localeMiddleware from 'express-locale';
 import favicon from 'serve-favicon';
-import config from '@boldr/config';
+// import config from '@boldr/config';
 
 export default function initCore(app, { locale }) {
   // give each request a unique id
@@ -26,7 +25,7 @@ export default function initCore(app, { locale }) {
     }),
   );
   // Parse cookies
-  app.use(cookieParser(config.get('token.secret')));
+  // app.use(cookieParser(config.get('token.secret')));
   // Parse application/json
   app.use(bodyParser.json({ type: 'application/json' }));
   // parse application/x-www-form-urlencoded

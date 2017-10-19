@@ -29,7 +29,8 @@
   "scripts": {
     "prepare": "npm run build",
     "build": "rimraf lib && prepublish",
-    "test": "npm run build && jest",
+    "test": "echo \"No tests... skipping\" && exit 0",
+    "test:ci": "echo \"No tests... skipping\" && exit 0",
     "release": "git push && release-it --github.release --npm.publish --non-interactive",
     "release:minor": "git push && release-it --github.release --npm.publish --non-interactive --increment minor",
     "release:major": "git push && release-it --github.release --npm.publish --non-interactive --increment major"
@@ -40,37 +41,25 @@
     "npm": ">=4.0.0"
   },
   "dependencies": {
-    "@boldr/config": "^0.1.1",
-    "@boldr/utils": "0.1.1",
-    "bcryptjs": "^2.4.3",
-    "bluebird": "^3.5.0",
-    "body-parser": "^1.18.1",
-    "connect-redis": "^3.3.0",
-    "cookie-parser": "^1.4.3",
-    "cors": "^2.8.4",
-    "date-fns": "^1.28.5",
-    "debug": "^3.0.1",
+    "@boldr/config": "^0.1.2",
+    "@boldr/utils": "0.1.2",
+    "body-parser": "^1.18.2",
+    "cors": "2.8.4",
+    "debug": "^3.1.0",
     "dotenv": "^4.0.0",
-    "express": "^4.15.4",
-    "express-locale": "1.0.2",
-    "express-session": "^1.15.5",
-    "formidable": "^1.1.1",
-    "fs-extra": "^4.0.2",
-    "helmet": "^3.8.1",
+    "express": "^4.16.2",
+    "express-locale": "1.0.4",
+    "helmet": "^3.9.0",
     "hpp": "^0.2.2",
-    "ioredis": "^3.1.4",
-    "ms": "^2.0.0",
-    "nanoid": "^0.2.1",
-    "nodemailer": "^4.1.0",
-    "object-path": "^0.11.4",
-    "serve-favicon": "^2.4.4",
+    "nanoid": "^0.2.2",
+    "serve-favicon": "^2.4.5",
     "uuid": "^3.1.0"
   },
   "devDependencies": {
     "babel-preset-boldr": "0.11.2",
-    "prepublish": "^1.4.2",
+    "prepublish": "^1.5.1",
     "rimraf": "^2.6.2",
-    "jest-cli": "^21.1.0",
-    "prettier": "^1.7.0"
+    "jest-cli": "^21.2.1",
+    "prettier": "^1.7.4"
   }
 }

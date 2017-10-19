@@ -8,7 +8,7 @@ const _merge = require('lodash.merge');
 const debug = require('debug')('boldr:config');
 
 const ROOT = appRootDir.get();
-const CFG_DIR_ENV = process.env.CFG_DIR;
+
 const CONFIG_DIR = process.env.CFG_DIR || path.resolve(ROOT, '.boldr/config');
 const CONFIG = {};
 
@@ -75,6 +75,7 @@ class Config {
 
     _merge(CONFIG, options);
   }
+
   /**
    * @return {String}
    */

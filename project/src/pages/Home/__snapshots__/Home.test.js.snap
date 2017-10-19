@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Home /> renders snapshot 1`] = `
+<Connect(Apollo(ReactComponent))>
+  <HelmetWrapper
+    defer={true}
+    encodeSpecialCharacters={true}
+    title="Home"
+  />
+  <Home__HomeHero
+    bgsrc="http://i.magaimg.net/img/1f5w.jpg"
+  >
+    <Home__CoverShadow />
+    <Heading
+      isLight={true}
+      text="Meet Boldr."
+      type="h1"
+    />
+  </Home__HomeHero>
+  <Home__Container>
+    <ArticleCard
+      id={1}
+      key="1"
+      title="test"
+    />
+    <ArticleCard
+      id={2}
+      key="2"
+      title="Testing"
+    />
+  </Home__Container>
+</Connect(Apollo(ReactComponent))>
+`;

@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import removeNil from './removeNil';
 
 function ifElse(condition) {

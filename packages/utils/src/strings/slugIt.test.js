@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import slugIt from './slugIt';
 
 describe('slugit', () => {

@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import addIdToArray from './addIdToArray';
 
 test('it should add an to the end of the array.', () => {

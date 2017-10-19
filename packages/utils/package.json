@@ -1,6 +1,6 @@
 {
   "name": "@boldr/utils",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Utility functions designed for use in Boldr projects. But applicable to most.",
   "main": "lib/index.js",
   "files": [
@@ -26,15 +26,32 @@
     "url": "https://github.com/strues/boldr/issues"
   },
   "scripts": {
-    "build": "npm run clean && npm run compile",
+    "build": "npm run compile",
     "clean": "rimraf lib",
-    "compile": "NODE_ENV=production babel src --ignore *.test.js --out-dir lib"
+    "compile": "NODE_ENV=production babel src --ignore *.test.js --out-dir lib",
+    "prebuild": "npm run clean",
+    "test": "jest",
+    "test:ci": "NODE_ENV=test jest --ci --no-cache"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
-    "babel-eslint": "^8.0.0",
-    "babel-plugin-transform-object-rest-spread": "^6.26.0",
-    "babel-preset-env": "^1.6.0",
-    "rimraf": "^2.6.2"
+    "babel-core": "^6.26.0",
+    "babel-jest": "21.2.0",
+    "babel-eslint": "^8.0.1",
+    "babel-plugin-transform-object-rest-spread": "6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "rimraf": "^2.6.2",
+    "jest": "21.2.1"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "<rootDir>/lib/"
+    ],
+    "collectCoverage": true,
+    "coveragePathIgnorePatterns": [
+      "/node_modules/",
+      "<rootDir>/lib/"
+    ]
   }
 }

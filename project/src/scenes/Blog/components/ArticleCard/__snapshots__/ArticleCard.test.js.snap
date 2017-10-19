@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ArticleCard /> matches the snapshot 1`] = `
+<ArticleCard__Article
+  featuring={true}
+  key="c265ed52-b9c4-42e8-9b46-7bc409bfec48"
+>
+  <ArticleCard__ImageLink
+    to="/blog/this-test-slug"
+  >
+    <ArticleCard__Image
+      image="https://boldr.io/logo.png"
+    />
+  </ArticleCard__ImageLink>
+  <ArticleCard__Content>
+    <ArticleCard__ContentLink
+      to="/blog/this-test-slug"
+    >
+      <ArticleCard__ArticleHeader>
+        <ArticleCard__Title>
+          This Test Slug
+        </ArticleCard__Title>
+        09/10/2017
+      </ArticleCard__ArticleHeader>
+      <ArticleCard__Excerpt>
+        <p>
+          Abcdc
+        </p>
+      </ArticleCard__Excerpt>
+    </ArticleCard__ContentLink>
+    <ArticleCard__Footer>
+      <ArticleCard__AuthorLink
+        to="/profiles/User"
+      >
+        <ArticleCard__AuthorImage
+          alt="Jobe"
+          src="https://boldr.io/logo.png"
+        />
+        <ArticleCard__Author>
+          Jobe
+        </ArticleCard__Author>
+      </ArticleCard__AuthorLink>
+      <TagBlock
+        tags={
+          Array [
+            Object {
+              "id": "c265ed52-b9c4-42e8-9b46-7bc409bfec33",
+              "name": "Tag",
+            },
+          ]
+        }
+      />
+    </ArticleCard__Footer>
+  </ArticleCard__Content>
+</ArticleCard__Article>
+`;

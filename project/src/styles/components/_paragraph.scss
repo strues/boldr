@@ -1,0 +1,17 @@
+/// Paragraph
+/// @group paragraph
+.#{$boldr-ns}p {
+  margin: 0 0 1.5rem;
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+}
+
+.#{$boldr-ns}p--lead {
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+  line-height: 2;
+}
+
+.#{$boldr-ns}p--light {
+  color: $text-color-light;
+}

@@ -1,0 +1,68 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<MemberCard /> should render the user props 1`] = `
+<MemberCard__MemListItem>
+  <MemberCard__LeftSide>
+    <MemberCard__UserInfoList>
+      <MemberCard__UserInfoListItem>
+        <Avatar
+          role="presentation"
+          src="http://img.com/img.png"
+          suffixes={
+            Array [
+              "red",
+              "pink",
+              "purple",
+              "deep-purple",
+              "indigo",
+              "blue",
+              "light-blue",
+              "cyan",
+              "teal",
+              "green",
+              "light-green",
+              "lime",
+              "yellow",
+              "amber",
+              "orange",
+              "deep-orange",
+              "brown",
+              "grey",
+              "blue-grey",
+            ]
+          }
+        />
+      </MemberCard__UserInfoListItem>
+      <MemberCard__UserInfoListItem>
+        joe
+      </MemberCard__UserInfoListItem>
+      <MemberCard__UserInfoListItem>
+        admin
+      </MemberCard__UserInfoListItem>
+      <MemberCard__UserInfoListItem>
+         
+      </MemberCard__UserInfoListItem>
+      <MemberCard__UserInfoListItem>
+        test@test.com
+      </MemberCard__UserInfoListItem>
+    </MemberCard__UserInfoList>
+  </MemberCard__LeftSide>
+  <MemberCard__RightSide>
+    <Button
+      block={false}
+      bordered={true}
+      className=""
+      disabled={false}
+      htmlType="button"
+      kind="primary"
+      loading={false}
+      onClick={[Function]}
+      outline={false}
+      prefix="boldr"
+      size="medium"
+    >
+      Edit
+    </Button>
+  </MemberCard__RightSide>
+</MemberCard__MemListItem>
+`;

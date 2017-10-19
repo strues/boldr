@@ -1,0 +1,41 @@
+.#{$boldr-ns}article-card {
+  margin-bottom: 50px;
+
+  a.readmore-link {
+    float: right;
+    margin-top: 15px;
+    margin-right: 15px;
+  }
+}
+
+.#{$boldr-ns}article__image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  transform: translate3d(0, -5px, 0);
+  transition: opacity 0.35s, transform 0.35s;
+
+  &:hover {
+    opacity: 0.7;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.#{$boldr-ns}article__date {
+  padding-bottom: 15px;
+}
+
+.#{$boldr-ns}article__title {
+  padding: 0.08em 1rem;
+  color: $white;
+  background: rgba($mirage, 0.65);
+  font-weight: 300;
+  font-size: 5rem;
+  letter-spacing: 0.2em;
+  box-decoration-break: clone;
+}
+
+.#{$boldr-ns}article__content {
+  padding-top: 25px;
+  line-height: 1.5;
+}

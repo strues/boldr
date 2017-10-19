@@ -1,6 +1,8 @@
 
 <p align="center"><img src="/docs/assets/boldr-text-logo.png" width="200"></p>
 
+[![CircleCI](https://circleci.com/gh/strues/boldr.svg?style=svg)](https://circleci.com/gh/strues/boldr)
+[![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lernajs.io/)
 [![Code Climate](https://codeclimate.com/github/strues/boldr/badges/gpa.svg)](https://codeclimate.com/github/strues/boldr)   [![codecov](https://codecov.io/gh/strues/boldr/branch/master/graph/badge.svg)](https://codecov.io/gh/strues/boldr)  [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/) [![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg)](https://github.com/prettier/prettier)  
 
 
@@ -65,9 +67,7 @@ Come visit with us
 
 ## Getting Started
 
-**Development Disclaimer:** At the moment, Boldr is in active development. Meaning there might be the occasional breaking changes, and architectural adjustments.
-
-That said, I'm confident the majority of large breaking changes is behind us.
+**Development Disclaimer:** At the moment, Boldr is in active development. Meaning there might be the occasional breaking change or architectural adjustments. 
 
 **Step 1**
 First get the files to your machine.
@@ -82,31 +82,16 @@ First get the files to your machine.
 
 This will install **all** of the packages using lerna.
 
-The main packages to concern yourself with are located in `packages/frontend` and `packages/server`. The frontend contains the React application and the server is the Express GraphQL and database server. **Eventually**, the frontend and server will be published to NPM and work from a single entry.    
-
-## Usage
-
-1. Install the files: `yarn install`   
-2. Copy the frontend environment sample: `cd packages/frontend && cp .env_example .env`   
-3. Checkout `packages/frontend/.boldr/config/default.js` and modify any settings for your environment.   
-4. Setup services    
-
-Boldr requires a Postgres database and a Redis service. Using the docker-compose.yml file included in the repo is the quickest way.
-
-`docker-compose up --build -d` starts the necessary services (postgres and redis).
-
-Ensure the database is setup with the proper tables and seed data.
+The main application is located in `project`.   
+The frontend and the react server entrypoint are located in `project/src`.    
+The actual server resides in `project/server`.
+    
 
 
-### Development
 
-Run the frontend using `yr dev` from within `packages/frontend`. In another terminal window, start the server using `yr dev` from within `packages/server`.
-
-After Boldr has started visit <http://localhost:3000>. A admin account is already created and you may login using these credentials:
-
-> Email - admin@boldr.io
-> Password - password
-
+## Installation and Setup
+ 
+See the [setup docs](docs/setup.md)     
 
 ### Production
 
@@ -114,8 +99,7 @@ See the [production docs](docs/production.md)
 
 
 ## Demo
-
-Visit [https://staging.boldr.io](https://staging.boldr.io) and explore the current demo deployment
+Up again soon..
 
 > Email - admin@boldr.io<br>
 > Password - password

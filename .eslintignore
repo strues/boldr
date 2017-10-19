@@ -1,15 +1,19 @@
 dist
 build
-coverage
+
 node_modules
 **/flow-typed/**
 **/build/**
+**/coverage/**
 packages/**/*.test.js
 packages/cli/bin/boldr.js
 packages/*/build/**
 packages/*/lib/**
 packages/*/node_modules/**
 packages/*/flow-typed/**
+project/node_modules/
+project/lib
+project/build
 
 docs/
 

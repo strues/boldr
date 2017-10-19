@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import hasDocument from './hasDocument';
 
 test('hasDocument should exist', () => {

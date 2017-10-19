@@ -1,4 +1,6 @@
-'use strict';
+/**
+ * @jest-environment node
+ */
 
 process.env.CFG_DIR = '';
 

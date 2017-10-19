@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ArticleFooter /> renders snapshot 1`] = `
+<ArticleFooter__AFooter>
+  <ArticleFooter__AuthorCardLink>
+    <ArticleFooter__AuthorImage
+      src="https://boldr.io/images/logo.png"
+    />
+    <ArticleFooter__AuthorCardContent>
+      <ArticleFooter__AuthorName>
+        <Link
+          replace={false}
+          to="/profiles/TestUser"
+        >
+          Steven
+           
+          Smith
+        </Link>
+      </ArticleFooter__AuthorName>
+      <ArticleFooter__AuthorBio>
+        This is a bio
+      </ArticleFooter__AuthorBio>
+    </ArticleFooter__AuthorCardContent>
+  </ArticleFooter__AuthorCardLink>
+</ArticleFooter__AFooter>
+`;

@@ -4,23 +4,25 @@
 import { combineReducers, createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import { routerMiddleware, routerReducer } from 'react-router-redux';
+
 import invariant from 'invariant';
 import boldrReducer from './boldr/reducer';
 
 const preReducers = [];
-
 const composeEnhancers =
-  typeof window === 'object' && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
-        actionsBlacklist: [
-          '@@redux-form/CHANGE',
-          '@@redux-form/BLUR',
-          '@@redux-form/FOCUS',
-          '@@redux-form/UNREGISTER_FIELD',
-          '@@redux-form/REGISTER_FIELD',
-        ],
-      })
-    : compose;
+  (process.env.TARGET === 'web' &&
+    process.env.NODE_ENV === 'development' &&
+    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({
+      actionsBlacklist: [
+        '@@redux-form/CHANGE',
+        '@@redux-form/BLUR',
+        '@@redux-form/FOCUS',
+        '@@redux-form/UNREGISTER_FIELD',
+        '@@redux-form/REGISTER_FIELD',
+      ],
+    })) ||
+  compose;
+
 /**
  * Placeholder for a non active middleware in Redux.
  *
@@ -111,9 +113,10 @@ export default function createBoldrStore(history, appReducer, preloadedState, ap
   const reducer = getReducer(appReducer, apolloClient);
 
   const middleware = [
+    routerMiddleware(history),
     thunk,
     apolloClient.middleware(),
-    routerMiddleware(history),
+
     // Redux middleware that spits an error on you when you try to mutate
     // your state either inside a dispatch or between dispatches.
     // https://github.com/leoasis/redux-immutable-state-invariant

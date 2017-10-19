@@ -1,0 +1,8 @@
+mutation createContentType($input: CreateContentTypeInput!) {
+  createContentType(input: $input) {
+    name
+    slug
+    description
+    icon
+  }
+}

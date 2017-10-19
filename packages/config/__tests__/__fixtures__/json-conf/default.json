@@ -1,0 +1,12 @@
+{
+  "key1": "value1",
+  "key2": 123,
+  "key3": false,
+  "key4": true,
+  "key5": {
+    "subKey1": 1,
+    "subKey2": "2",
+    "subKey3": "true",
+    "subKey4": true
+  }
+}

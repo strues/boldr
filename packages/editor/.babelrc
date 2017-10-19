@@ -1,0 +1,19 @@
+
+{
+  "presets": [ "./tools/babel-preset" ]
+}
+
+/*
+{
+ "presets": [
+   ["env", {
+     "modules": false
+   }],
+   "stage-1",
+   "react"
+ ],
+ "plugins": [
+   "transform-flow-strip-types"
+ ]
+}
+*/

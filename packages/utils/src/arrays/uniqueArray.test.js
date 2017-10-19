@@ -1,3 +1,6 @@
+/**
+ * @jest-environment node
+ */
 import uniqueArray from './uniqueArray';
 
 test('uniqueArray combines two arrays without duplication', () => {

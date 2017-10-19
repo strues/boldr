@@ -11,6 +11,5 @@ if (!global.fetch) {
   global.Request = realFetch.Request;
 }
 
+export { default as serverRender } from './server/serverRender';
 export * from './common';
-export { default as renderHtml } from './server/renderHtml';
-export { default as ssrHandler } from './server/ssrHandler';
