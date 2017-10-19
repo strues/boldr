@@ -26,15 +26,19 @@ class Articles extends React.Component<Props, *> {
   handleClick = article => {
     this.props.setArticle(article);
   };
+
   handleClickExpand = () => {
     this.props.toggleModal();
   };
+
   closeModal = () => {
     this.props.toggleModal();
   };
+
   openModal = () => {
     this.props.toggleModal();
   };
+
   render() {
     const { isModalVisible } = this.props;
     return (

@@ -17,7 +17,7 @@ import Form, {
   SelectFormField,
 } from '@boldr/ui/Form';
 import { validations } from '@boldr/core';
-import type { RouterLocation, CategoriesType } from '../../../../../../types/boldr';
+import type { CategoriesType } from '../../../../../../types/boldr';
 import { selectArticleFormValues } from '../../../../state/selectors/articleSelectors';
 import RenderTags from '../RenderTags';
 import FieldEditor from './FieldEditor';
@@ -27,7 +27,6 @@ export type Props = {
   handleSubmit: Function,
   reset: () => void,
   submitting: boolean,
-  location: RouterLocation,
   pristine: boolean,
   categories: CategoriesType,
 };
@@ -36,7 +35,7 @@ class NewArticleForm extends React.Component<Props, *> {
   props: Props;
 
   render() {
-    const { handleSubmit, location, categories, reset, pristine, submitting } = this.props;
+    const { handleSubmit, categories, reset, pristine, submitting } = this.props;
     const catOpts = categories.map(category => {
       return {
         value: category.id,
@@ -161,5 +160,5 @@ const initStateForm = reduxForm({
   form: 'articleForm',
   enableReinitialize: true,
 })(NewArticleForm);
-
+// $FlowIssue
 export default connect(mapStateToProps)(initStateForm);

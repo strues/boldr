@@ -11,7 +11,11 @@ export type Props = {
   username: string,
 };
 
-const AFooter = styled.footer`@media (min-width: 700px) {padding: 70px 100px 0;}`;
+const AFooter = styled.footer`
+  @media (min-width: 700px) {
+    padding: 70px 100px 0;
+  }
+`;
 
 const AuthorCardLink = styled.div`
   display: flex;

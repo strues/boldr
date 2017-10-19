@@ -17,7 +17,7 @@ type State = {
   me: boolean,
   showDropzone: boolean,
   profImg: boolean,
-  files: Array<Object>,
+  files: $ReadOnlyArray<Object>,
 };
 class Preferences extends Component {
   constructor() {
@@ -33,14 +33,17 @@ class Preferences extends Component {
   }
 
   state: State;
+
   props: Props;
 
   uploadProfileImg = payload => {
     this.props.uploadProfileImage(payload);
   };
+
   uploadAvatarImg = payload => {
     this.props.uploadAvatarImage(payload);
   };
+
   //
   // onDrop(files: Array<Object>) {
   //   this.setState({
@@ -59,6 +62,7 @@ class Preferences extends Component {
       showDropzone: true,
     });
   };
+
   handleProfileImgClick = () => {
     this.setState({
       profImg: true,

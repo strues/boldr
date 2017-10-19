@@ -20,7 +20,9 @@ const SettingsList = styled.ul`
   list-style-type: none;
   padding-right: 40px;
 `;
-const SettingsListItem = styled.li`list-style-type: none;`;
+const SettingsListItem = styled.li`
+  list-style-type: none;
+`;
 const SettingsTitle = styled.div`
   display: inline-flex;
   justify-content: center;

@@ -152,14 +152,14 @@ export default function createWebpackConfig(
 
   const cssLoaderOptions = {
     modules: true,
-    localIdentName: '[name]__[local]--[hash:base64:5]',
+    localIdentName: _IS_DEV_ ? '[name]__[local]--[hash:base64:5]' : '[hash:base64:5]',
     import: 1,
     minimize: !_IS_DEV_,
     sourceMap: _IS_DEV_,
   };
   const cssLoaderSassOptions = {
     modules: false,
-    localIdentName: '[name]__[local]--[hash:base64:5]',
+    localIdentName: _IS_DEV_ ? '[name]__[local]--[hash:base64:5]' : '[hash:base64:5]',
     import: 2,
     minimize: !_IS_DEV_,
     sourceMap: _IS_DEV_,
@@ -334,6 +334,7 @@ export default function createWebpackConfig(
             ? ExtractCssChunks.extract({
                 use: [
                   cacheLoaderRule,
+                  require.resolve('css-modules-flow-types-loader'),
                   {
                     loader: require.resolve('css-loader'),
                     options: cssLoaderOptions,

@@ -47,7 +47,9 @@ const NotifIcon = styled.div`
   right: 5px;
 `;
 
-const NotificationText = styled.div`margin-right: 12px;`;
+const NotificationText = styled.div`
+  margin-right: 12px;
+`;
 
 export type Props = {
   hideNotification: Function,

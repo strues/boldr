@@ -34,7 +34,9 @@ class EditProfile extends PureComponent {
     };
     console.log(userData);
   };
+
   props: Props;
+
   render() {
     return (
       <Paper zDepth={2}>

@@ -22,7 +22,9 @@ const MediaContent = styled.div`
   padding-top: 3rem;
   margin-bottom: 4rem;
 `;
-const MediaFormCard = styled.div`margin-bottom: 2rem;`;
+const MediaFormCard = styled.div`
+  margin-bottom: 2rem;
+`;
 
 class MediaManager extends React.Component<Props, *> {
   handleSubmit = (values: Object) => {
@@ -30,7 +32,9 @@ class MediaManager extends React.Component<Props, *> {
 
     this.props.editMediaFile(mediaId, values);
   };
+
   props: Props;
+
   render() {
     const { media, isLoading } = this.props;
 

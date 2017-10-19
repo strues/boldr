@@ -3,25 +3,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Heading from '@boldr/ui/Heading';
 import ContentPromo from '@boldr/ui/ContentPromo';
-
-// import Tabs from '@boldr/ui/Tabs';
-
 import type { CurrentUser } from '../../types/boldr';
 
 export type Props = {
   currentUser: CurrentUser,
 };
 
-// const { TabPane } = Tabs;
-
 class DashboardLanding extends React.Component<Props, *> {
   static defaultProps = {
     currentUser: {
       firstName: 'User',
     },
-  };
-  state = {
-    activeId: '1',
   };
 
   onTabChange = key => {
@@ -40,19 +32,5 @@ class DashboardLanding extends React.Component<Props, *> {
 }
 
 const mapStateToProps = state => ({ currentUser: state.auth.info });
-
+// $FlowIssue
 export default connect(mapStateToProps)(DashboardLanding);
-
-/*
-  <Tabs defaultActiveKey="1" onChange={this.onTabChange}>
-          <TabPane tab="Tab 1" key="1">
-            Content of Tab Pane 1
-          </TabPane>
-          <TabPane tab="Tab 2" key="2">
-            Content of Tab Pane 2
-          </TabPane>
-          <TabPane tab="Tab 3" key="3">
-            Content of Tab Pane 3
-          </TabPane>
-        </Tabs>
-        */

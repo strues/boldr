@@ -8,7 +8,7 @@ import Paragraph from '@boldr/ui/Paragraph';
 // internal
 import SignupForm from './SignupForm';
 
-const Spacer = styled.div`margin-top: 100px;`;
+import styles from './style.css';
 
 export type SignupInput = {
   username: string,
@@ -38,9 +38,10 @@ const Signup = (props: { onSubmit: SignupInput => void }) => {
           <Col xs={12}>
             <Row xsCenter>
               <Col xs={12} sm={8}>
-                <Spacer />
-                <SignupForm onSubmit={submitSignup} />
-                {formBottom}
+                <div className={styles.formSpacer}>
+                  <SignupForm onSubmit={submitSignup} />
+                  {formBottom}
+                </div>
               </Col>
             </Row>
           </Col>

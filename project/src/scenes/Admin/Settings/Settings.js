@@ -18,7 +18,7 @@ import SettingsAside from './components/SettingsAside';
 import SettingForm from './SettingForm';
 
 type Props = {
-  settings: Array<Setting>,
+  settings: $ReadOnlyArray<Setting>,
 };
 
 const Content = styled.div`

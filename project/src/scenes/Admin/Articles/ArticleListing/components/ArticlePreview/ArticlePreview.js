@@ -12,6 +12,9 @@ import type { ArticleType } from '../../../../../../types/boldr';
 
 export type Props = {
   article: ArticleType,
+  isVisible: boolean,
+  onClickExpand: Function,
+  onCloseExpand: Function,
 };
 
 const Toolbar = styled.div`
@@ -81,7 +84,7 @@ class ArticlePreview extends React.Component<Props, *> {
             dangerouslySetInnerHTML={this.createMarkup()}
           />
         </Paper>
-        <Dialog title="Edit User" visible={this.props.isVisible} onClose={this.onClickClose}>
+        <Dialog title="Edit User" isVisible={this.props.isVisible} onClose={this.onClickClose}>
           <DynamicContent
             className="boldr-post__content"
             dangerouslySetInnerHTML={this.createMarkup()}

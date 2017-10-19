@@ -25,7 +25,9 @@ const DetailsList = styled.ul`
   padding-left: 0;
 `;
 
-const DetailsListItem = styled.li`padding-left: 0;`;
+const DetailsListItem = styled.li`
+  padding-left: 0;
+`;
 
 const renderMenuDetails = ({ fields }: Props) => (
   <DetailsList>

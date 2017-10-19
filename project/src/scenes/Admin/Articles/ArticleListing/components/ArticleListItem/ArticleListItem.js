@@ -16,6 +16,7 @@ import DELETE_ARTICLE_MUTATION from '../../../gql/deleteArticle.mutation.graphql
 export type Props = {
   onArticleClick: ArticleType => mixed,
   deleteArticle: () => void,
+  dispatch: Function,
   article: ArticleType,
 };
 

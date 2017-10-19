@@ -14,7 +14,9 @@ type State = {
 };
 // eslint-disable-next-line
 
-const LeftCol = styled(Flex)`width: 230px;`;
+const LeftCol = styled(Flex)`
+  width: 230px;
+`;
 const List = styled.ul`
   list-style-type: none;
   padding-left: 0;
@@ -32,6 +34,7 @@ class Content extends React.Component<Props, State> {
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
   props: Props;
+
   render() {
     const { content: { tags, categories, contentTypes } } = this.props;
     const { activeItem } = this.state;

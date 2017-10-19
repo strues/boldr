@@ -7,19 +7,19 @@ import Loader from '@boldr/ui/Loader';
 // internal
 import { toggleModal } from '@boldr/core';
 import { makeSelectModal, makeSelectCurrentMember } from '../state/selectors/adminSelectors';
-import type { UserType, UsersType } from '../../../types/boldr';
+import type { AccountType, AccountsType } from '../../../types/boldr';
 import { memberSelected, updateMember } from '../state';
 import Members from './Members';
 import MEMBERS_QUERY from './users.graphql';
 
 type Data = {
-  accounts: UsersType,
+  accounts: AccountsType,
   loading: boolean,
 };
 
 export type Props = {
   data: Data,
-  currentMember: UserType,
+  currentMember: AccountType,
   dispatch: Function,
   isModalVisible: boolean,
 };
@@ -35,6 +35,7 @@ export class MembersContainer extends Component<Props, *> {
   closeModal = () => {
     this.props.dispatch(toggleModal());
   };
+
   openModal = () => {
     this.props.dispatch(toggleModal());
   };
@@ -56,6 +57,7 @@ export class MembersContainer extends Component<Props, *> {
 
     this.props.dispatch(updateMember(accData));
   };
+
   render() {
     const { loading, accounts } = this.props.data;
     const { isModalVisible, currentMember } = this.props;

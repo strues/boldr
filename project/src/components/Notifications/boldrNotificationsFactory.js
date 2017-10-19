@@ -32,12 +32,14 @@ export default function boldrContainerFactory(WrappedNotification) {
       super(props);
       this.handleHiding = this.handleHiding.bind(this);
     }
+
     handleHiding(uid) {
       this.props.hideNotification(uid);
       setTimeout(() => {
         this.props.removeNotification(uid);
       }, this.props.animationDuration);
     }
+
     render() {
       return (
         <Container

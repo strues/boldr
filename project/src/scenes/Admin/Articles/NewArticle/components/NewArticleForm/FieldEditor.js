@@ -5,7 +5,6 @@ import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
 import hasWindow from '@boldr/utils/lib/dom/hasWindow';
 import UPLOAD_MEDIA_MUTATION from '../../../../Media/gql/uploadMedia.graphql';
-// import Editor from '../../../../../../components/BoldrEditor';
 import BoldrEditor from '@boldr/editor';
 
 type Props = {
@@ -15,8 +14,8 @@ type Props = {
 };
 
 type State = {
-  raw: Object,
-  htmlContent: string,
+  raw: ?Object,
+  htmlContent: ?string,
 };
 class FieldEditor extends Component<Props, State> {
   constructor(props: Props) {

@@ -22,8 +22,8 @@ const mapDispatchToProps = (dispatch, ownProps) => ({
     ownProps.createArticle(payload);
   },
 });
-// $FlowIssue
 
+// $FlowIssue
 export default compose(
   withApollo,
   graphql(gql`

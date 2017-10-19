@@ -10,7 +10,7 @@
 declare type ClassValue = string | number | ClassDictionary | ClassArray | void | null;
 
 declare interface ClassDictionary {
-  [id: string]: boolean | void | null,
+  [id: string]: boolean | void | null;
 }
 declare type ClassArray = {} & Array<ClassValue>;
 declare type ClassNamesFn = (...classes: ClassValue[]) => string;

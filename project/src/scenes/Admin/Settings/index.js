@@ -11,7 +11,7 @@ const UniversalSettings = universal(import('./Settings'));
 type Props = {
   loading: boolean,
   error?: Object,
-  settings: Array<Object>,
+  settings: $ReadOnlyArray<Object>,
 };
 
 const Settings = ({ loading, error, settings }: Props) => (

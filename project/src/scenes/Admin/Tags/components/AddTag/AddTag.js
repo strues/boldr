@@ -34,7 +34,9 @@ class AddTag extends React.Component<Props, *> {
 
     return addTagMutation(values).catch(formatReduxFormErrors);
   };
+
   props: Props;
+
   render() {
     // eslint-disable-line
     const { handleSubmit, reset, submitting, pristine } = this.props;

@@ -48,6 +48,7 @@
     "case-sensitive-paths-webpack-plugin": "^2.1.1",
     "circular-dependency-plugin": "^4.2.1",
     "copy-webpack-plugin": "4.1.1",
+    "css-modules-flow-types-loader": "1.1.0",
     "css-loader": "^0.28.7",
     "dotenv": "^4.0.0",
     "extract-css-chunks-webpack-plugin": "^2.0.17",

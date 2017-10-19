@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 
-const Inner = styled.div`padding: 2rem;`;
+const Inner = styled.div`
+  padding: 2rem;
+`;
 
 const NewPost = styled.section`
   width: 100%;

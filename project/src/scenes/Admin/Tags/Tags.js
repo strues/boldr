@@ -27,6 +27,7 @@ class Tags extends React.Component<Props, *> {
   handleDeleteTagClick = id => {
     console.log(id);
   };
+
   render() {
     const { tags } = this.props;
 

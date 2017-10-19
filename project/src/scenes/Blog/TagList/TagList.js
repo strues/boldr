@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { Section } from '@boldr/ui/Layout';
 import Heading from '@boldr/ui/Heading';
 import Loader from '@boldr/ui/Loader';
+import Page from '../../../pages/Page';
 import type { ArticlesType, MatchParams } from '../../../types/boldr';
 import ArticleCard from '../components/ArticleCard';
 
@@ -32,7 +33,7 @@ const TagList = (props: Props) => {
     return <h1>No matching posts</h1>;
   }
   return (
-    <div>
+    <Page>
       <Helmet title={`Posts tagged ${params.name}`} />
       <Section>
         <Heading type="h2" text={params.name} />
@@ -44,7 +45,7 @@ const TagList = (props: Props) => {
           <Loader />
         )}
       </Container>
-    </div>
+    </Page>
   );
 };
 

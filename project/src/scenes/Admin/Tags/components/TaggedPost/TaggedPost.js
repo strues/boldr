@@ -17,6 +17,7 @@ type Props = {
 
 class TaggedPost extends Component {
   props: Props;
+
   render() {
     const { getArticlesForTag, loading } = this.props.data;
     if (loading) {

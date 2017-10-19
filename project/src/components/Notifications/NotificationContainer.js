@@ -8,7 +8,7 @@ import Notification from './Notification';
 
 export type Props = {
   uid: string,
-  children: Array<React.Node>,
+  children: $ReadOnlyArray<React.Node>,
   hideNotification?: Function,
   removeNotification?: Function,
   animatedMargin?: string,
@@ -26,7 +26,9 @@ export class NotificationContainer extends React.Component<Props, State> {
   state = {
     height: 0,
   };
+
   state: State;
+
   componentDidMount() {
     this.setClientHeight();
     setTimeout(() => {
@@ -38,6 +40,7 @@ export class NotificationContainer extends React.Component<Props, State> {
       this.props.removeNotification(this.props.uid);
     }, this.props.dismissAfter + this.props.animationDuration);
   }
+
   setClientHeight = () => {
     this.setState({
       height: this.notification.clientHeight,

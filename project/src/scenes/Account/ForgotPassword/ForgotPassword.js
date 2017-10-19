@@ -2,11 +2,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
-
-import Card, { CardText, CardTitle } from '@boldr/ui/Card';
-import Flex from '../../../components/Flex';
+import { Grid, Row, Col } from '@boldr/ui/Layout';
+import Paragraph from '@boldr/ui/Paragraph';
 import { forgotPassword } from '../state/actions';
 import ForgotPasswordForm from './ForgotPasswordForm';
+
+import styles from './style.css';
 
 type Props = {
   dispatch: Function,
@@ -17,18 +18,25 @@ class ForgotPassword extends React.Component<Props, *> {
     const { email } = values;
     this.props.dispatch(forgotPassword(email));
   };
+
   render() {
     return (
-      <div>
+      <div className="forgotpw-wrapper">
         <Helmet title="Forgot Password" />
-        <Flex justify="center" align="center">
-          <Card>
-            <CardTitle title="Forgot Password" />
-            <CardText>
-              <ForgotPasswordForm onSubmit={this.handleSubmit} />
-            </CardText>
-          </Card>
-        </Flex>
+        <Grid>
+          <Row>
+            <Col xs={12}>
+              <Row xsCenter>
+                <Col xs={6}>
+                  <div className={styles.formSpacer}>
+                    <Paragraph>Enter your email to reset your password</Paragraph>
+                    <ForgotPasswordForm onSubmit={this.handleSubmit} />
+                  </div>
+                </Col>
+              </Row>
+            </Col>
+          </Row>
+        </Grid>
       </div>
     );
   }

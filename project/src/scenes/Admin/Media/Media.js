@@ -1,7 +1,8 @@
 /* @flow */
-/* eslint-disable react/prefer-stateless-function */
+/* eslint-disable react/prefer-stateless-function, react/no-unused-prop-types */
 import * as React from 'react';
 import Helmet from 'react-helmet';
+// $FlowIssue
 import { graphql, gql, compose } from 'react-apollo';
 import { push } from 'react-router-redux';
 import { connect } from 'react-redux';
@@ -13,7 +14,8 @@ import DELETE_MEDIA from './gql/deleteMedia.graphql';
 
 type Props = {
   media: MediasType,
-  deleteMedia: string => void,
+  deleteMedia: string => boolean,
+  navigate: () => void,
   imageUpdateClick: () => void,
 };
 const MediaList = styled.ul`
@@ -64,6 +66,7 @@ class Media extends React.Component<Props, *> {
       </ContentPromo>
     );
   };
+
   render(): React.Node {
     const { media } = this.props;
 
