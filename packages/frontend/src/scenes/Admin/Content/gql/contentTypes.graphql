@@ -1,9 +1,0 @@
-query contentTypes {
-  contentTypes {
-    id
-    name
-    slug
-    icon
-    description
-  }
-}

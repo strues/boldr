@@ -1,7 +1,0 @@
-node_modules
-*.log
-buildClient
-buildServer
-.vscode
-coverage
-packages/frontend/BoldrText/

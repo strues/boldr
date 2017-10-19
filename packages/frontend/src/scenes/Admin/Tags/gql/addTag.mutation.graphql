@@ -1,5 +1,0 @@
-mutation addTag($input: CreateTagInput!) {
-  addTag(input: $input) {
-    name
-  }
-}

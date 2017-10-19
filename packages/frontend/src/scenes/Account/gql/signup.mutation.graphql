@@ -1,6 +1,0 @@
-mutation signupAccount($input: AuthInput!) {
-  signupAccount(input: $input) {
-
-    email
-  }
-}
