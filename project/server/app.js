@@ -41,7 +41,10 @@ const clientStats = require('../static/stats.json');
   // eslint-disable-next-line
 const serverRender = require('../ssr.js').default;
   // eslint-disable-next-line
-app.use('/static', express.static(path.resolve(appRoot.get(), './build/static')));
+app.use('/static', express.static(path.resolve(appRoot.get(), './build/static'), {
+      maxage: 31536000000,
+    }),
+  );
 
   app.use(serverRender({ clientStats }));
 }

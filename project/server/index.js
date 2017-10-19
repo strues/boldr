@@ -4,7 +4,7 @@ import Bluebird from 'bluebird';
 import config from '@boldr/config';
 
 import app from './app';
-import { disconnect } from './services/db';
+import { dbConnect, dbDisconnect } from './services/db';
 import logger from './services/logger';
 import normalizePort from './utils/normalizePort';
 
@@ -25,7 +25,7 @@ const port = normalizePort(config.get('server.port'));
 const server = http.createServer(app);
 
 server.listen(port);
-
+dbConnect();
 server.on('listening', () => {
   const address = server.address();
   logger.info('Boldr running on port %s', address.port);
@@ -37,7 +37,7 @@ server.on('error', err => {
 
 function gracefulExit(options, err) {
   if (options.cleanup) {
-    const actions = [server.close, disconnect];
+    const actions = [server.close, dbDisconnect];
     actions.forEach((close, i) => {
       try {
         close(() => {

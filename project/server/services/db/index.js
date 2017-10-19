@@ -1,1 +1,1 @@
-export { default as db, disconnect } from './db';
+export { dbConnect, dbDisconnect } from './db';

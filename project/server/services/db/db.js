@@ -1,36 +1,48 @@
-import knex from 'knex';
+/* eslint-disable new-cap, require-await, no-param-reassign */
+import Knex from 'knex';
 import { Model } from 'objection';
 
 import config from '@boldr/config';
 
-const knexOpts = {
-  client: 'pg',
-  connection: config.get('db.url'),
-  searchPath: 'knex,public',
-  pool: {
-    min: 2,
-    max: 10,
-  },
-  migrations: {
-    tableName: 'migrations',
-  },
-  debug: process.env.DATABASE_DEBUG === 'true',
-};
+let knex;
 
-const db = knex(knexOpts);
-Model.knex(db);
+function dbConnect() {
+  if (!knex) {
+    knex = Knex({
+      client: 'pg',
+      connection: config.get('db.url'),
+      searchPath: 'knex,public',
+      pool: {
+        min: 2,
+        max: 10,
+      },
+      migrations: {
+        tableName: 'migrations',
+      },
+      debug: process.env.DATABASE_DEBUG === 'true',
+    });
+    Model.knex(knex);
+  }
 
-async function disconnect(db) {
-  if (!db) {
-    return;
-  }
-  try {
-    await db.destroy();
-  } catch (err) {
-    throw new Error(err);
-  }
+  return knex;
 }
 
-export default db;
+async function dbDisconnect(knex) {
+  return new Promise((resolve, reject) => {
+    if (!knex) {
+      resolve();
+      return;
+    }
 
-export { disconnect };
+    knex.destroy(error => {
+      if (error) {
+        reject(error);
+      } else {
+        knex = null;
+        resolve();
+      }
+    });
+  });
+}
+
+export { dbConnect, dbDisconnect };
