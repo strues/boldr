@@ -1,4 +1,6 @@
 
+> **This project is archived and no longer maintained.** For modern React CMS/blogging solutions, consider [Payload CMS](https://payloadcms.com/), [Strapi](https://strapi.io/), or [Keystatic](https://keystatic.com/). The source code remains available for reference.
+
 <p align="center"><img src="/docs/assets/boldr-text-logo.png" width="200"></p>
 
 [![CircleCI](https://circleci.com/gh/strues/boldr.svg?style=svg)](https://circleci.com/gh/strues/boldr)
